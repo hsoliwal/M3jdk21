@@ -39,8 +39,8 @@ jobs:
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java)" = '45f608496420cd2f555c0f69b26f572667be6690'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '714d89c8fcb3e63e9f721af2acd5664f40bb8c30'
           test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankIndexSelfTest.java)" = 'b2de41ebb3ee281e18c7062c5580bc25bcbad6f0'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3RankBatchIntoContract.java)" = 'e4e15d78dfa68cff935c3e26ccee7f954800be24'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3RankBatchIntoTest.java)" = 'e430a06d3a056971c6aee6701326ce3cabbc8c20'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3RankBatchIntoContract.java)" = '284248c40cc245ff83091efc3e2ecbf69238a6ca'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3RankBatchIntoTest.java)" = '334ab85c78894232f5d8f86d3d36993a8c6970f8'
       - name: Strict Java21 compile and original JNI headers
         shell: bash
         run: |

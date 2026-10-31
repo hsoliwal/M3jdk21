@@ -27,9 +27,9 @@ jobs:
         shell: bash
         run: |
           printf '%s  %s\n' \
-            '5b05afa28e4a8ed2d6090b1ac8ff5f1c89a334bb3b93c94ae8038669e72c5fbb' 'm3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java' \
-            '346b1b23baf27fdb9e5fcfd0609bf1897c7bdaa8fe4b17cb22732b0602b6babd' 'm3/collections/src/test/java/jdk/m3/collections/M3TreeWindowShiftContract.java' \
-            'c90296c22e121e0d7934bb74ccc30121438cbe47dd498a1f7ae489e6dcb0b679' 'm3/collections/src/test/java/jdk/m3/collections/M3TreeWindowShiftTest.java' | sha256sum -c -
+            '8632721e214a20e82376fa68dd4e4b882719c57297c650e07d1c9daad08f4dc3' 'm3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java' \
+            'f6ff05e9f1a3f8fee11e723cd9ba4a03dc076cb6890be240343263c58164c75c' 'm3/collections/src/test/java/jdk/m3/collections/M3TreeWindowShiftContract.java' \
+            '2ca29d8e4ccd40749c20ca82e7dcc9ad24f972105f8465e1f8cf0cddcaf22749' 'm3/collections/src/test/java/jdk/m3/collections/M3TreeWindowShiftTest.java' | sha256sum -c -
       - name: Compile actual M3 owner and existing primitive index map
         shell: bash
         run: |

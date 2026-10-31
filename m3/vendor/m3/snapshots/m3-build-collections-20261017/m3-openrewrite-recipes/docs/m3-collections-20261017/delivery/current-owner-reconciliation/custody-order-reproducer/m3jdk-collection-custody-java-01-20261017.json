@@ -2,7 +2,7 @@
   "schema": 1,
   "kind": "ACTUAL_CANONICAL_SDK_EXECUTION",
   "crate": "m3jdk-collection-custody-java-01-20261017",
-  "manifestSha256": "ad15cd4447ebd9e2c53b1d9e30230e1017d7f7f909fe67b88f00d28f5f920e53",
+  "manifestSha256": "0c1fc2d4d092c6207697c80510a7f307c10d9cf1027a14308607f8b4f8e031db",
   "exit": 1,
   "seconds": 6.143,
   "command": [
@@ -23,5 +23,5 @@
   "output": "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/custody-generated/m3jdk-collection-custody-java-01-20261017",
   "engineModified": false,
   "proofModified": false,
-  "reportSha256": "b1b3cb5262a1da4f2716da954d760f3727fb4ea692363999ca1a91288567f7b0"
+  "reportSha256": "9eaf7e0d7186e39baff09c5f840d3d11d6eb774ab7a05714772c658b73619175"
 }

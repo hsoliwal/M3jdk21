@@ -11,10 +11,10 @@ from pathlib import Path
 from prepare_packet import CANONICAL, NAMED, SOURCE, TASK, safe
 
 ENGINES = {
-    'M3HashPinnedJavaSnapshotRecipe.java': '083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63',
-    'M3HashPinnedTextSnapshotRecipe.java': '5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc',
+    'M3HashPinnedJavaSnapshotRecipe.java': '92cc90c46a1ca672a016a89c0d65e6909e090264ba1aa76a85b7fa333470e38b',
+    'M3HashPinnedTextSnapshotRecipe.java': '613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853',
     'M3EditScope.java': '962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab',
-    'M3ScopeInference.java': '9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579',
+    'M3ScopeInference.java': 'd2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0',
 }
 
 

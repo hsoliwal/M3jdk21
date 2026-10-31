@@ -68,22 +68,22 @@
       "path": "work/m3jdk21-current/successor-e04/current-context/CONTEXT_REFERENCES.json",
       "snapshot": "work/m3jdk21-current/successor-e04/derivation-static-review/inputs/CONTEXT_REFERENCES.json",
       "bytes": 470167,
-      "sha256": "fbc460874aeb04a688ad0ed9b47ad8e3f3b37f88af09d0f32ecfeedc2827fbed",
-      "git_blob_sha1": "5f4cca8343c48f3c8d3d113222b12c3da4018fb3"
+      "sha256": "ab9828692a1ca02adfabf22ff679e47e1e62a9d755b97f4071c42d5225698bc5",
+      "git_blob_sha1": "244ccde33cb6ff34bdd33eeec78eb4f88cf70dff"
     },
     {
       "path": "work/publication-current/source-recovery-publish/verify_publication.py",
       "snapshot": "work/m3jdk21-current/successor-e04/derivation-static-review/inputs/source_verify_publication.py",
       "bytes": 9623,
-      "sha256": "8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639",
-      "git_blob_sha1": "a4e9bdad2fc2394f84a4593460c7eeab5e94f4e3"
+      "sha256": "a5e9c2228304ea359b5459df150c618fcc3566b88217cdc262c893c31398baa7",
+      "git_blob_sha1": "b00b976d6d69196bc0726774bada944afb1659f1"
     },
     {
       "path": "work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before00-name-mapping.json.txt",
       "snapshot": "work/m3jdk21-current/successor-e04/derivation-static-review/inputs/before00-name-mapping.json.txt",
       "bytes": 236215,
-      "sha256": "e4ae516fea9822a4bfe26669e9749e167f52bb30049d520339ee42f3779bc0b3",
-      "git_blob_sha1": "d10174dd61016069b9d5b73b7fd581a025855bcc"
+      "sha256": "61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8",
+      "git_blob_sha1": "3a1e902a8284773f0f182d6bd43bf4e27b4e63c0"
     },
     {
       "path": "work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before01-jcc-source-handoff.md.txt",
@@ -96,8 +96,8 @@
       "path": "work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before02-source-destination-bindings.json.txt",
       "snapshot": "work/m3jdk21-current/successor-e04/derivation-static-review/inputs/before02-source-destination-bindings.json.txt",
       "bytes": 92103,
-      "sha256": "049c7c1987c05a15f4152fcb8f261a65245d72a25688d5a530a4afa5405cd3ef",
-      "git_blob_sha1": "b6283a33b9348f4ac6da3adaf5a35edb34a5a0c1"
+      "sha256": "a80ffed31f45465774fd03ba90858c301327d6b472acf89652d01bf96b981707",
+      "git_blob_sha1": "4a4ae8ea4cc7cf0b801eeef78ca54a805f9d9953"
     },
     {
       "path": "work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before03-root-coverage-obligations.tsv.txt",
@@ -110,8 +110,8 @@
       "path": "work/m3jdk21-current/successor-e04/overlay/m3/migration/test/test_jcc_source_recovery_handoff_packet.py",
       "snapshot": "work/m3jdk21-current/successor-e04/derivation-static-review/inputs/test_jcc_source_recovery_handoff_packet.py",
       "bytes": 17089,
-      "sha256": "90dc23b1a8db4ec3347048c7f85e688a76893633955e877eab723bdd87d58d19",
-      "git_blob_sha1": "e25e8cff096a7d7785b2d61cdbcea64022bc8b9b"
+      "sha256": "b2194b2721b207eb65b0043352599e112018108cc4eb525e30082582410b1195",
+      "git_blob_sha1": "94cf0fd6b2e79126bf629feb223cefdc1405eeed"
     },
     {
       "path": "work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccSourceRecoveryHandoffTest.java",

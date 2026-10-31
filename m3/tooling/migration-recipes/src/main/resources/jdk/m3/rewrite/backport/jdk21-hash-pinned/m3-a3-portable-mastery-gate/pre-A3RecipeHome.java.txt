@@ -27,7 +27,7 @@ final class A3RecipeHome {
     static final String EXPORT_MANIFEST_GIT_BLOB =
             "42976645dab8b578ead93fc1a2be0a9f007b3dcd";
     static final String CONVERGENCE_SOURCE_GIT_BLOB =
-            "b11aff3ace8e77684cfa8cc13fbbb445a05c8a09";
+            "7dc6cea0a969a1bd094e324c47a1bb724b5ff1dc";
 
     private A3RecipeHome() {
     }

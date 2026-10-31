@@ -205,10 +205,10 @@
     },
     "raw_fixture_custody_input": {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/CUSTODY_INPUT.json",
-      "sha256": "22b58a9e97fd6bb4ebebc6a89dc13e368107c10429bff59191914a5e639c81df"
+      "sha256": "2b2f294b13298da20e8d8cbe85581e89265fbe8d1c355a384dba308e4a8f9710"
     },
-    "verification_script_sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa",
-    "reviewed_raw_custody_helper_sha256": "45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be",
+    "verification_script_sha256": "6b8ce688a81b46c20e567bd719104bac6a4cf8578a42904dbe494bca2305e443",
+    "reviewed_raw_custody_helper_sha256": "203f44729f860620949ec9e6aa7c5f2c7d766de2e406548ceb6797797bfdcc33",
     "qualification": "Publication custody only; source execution and receiving acceptance require their separately scoped receipts.",
     "scope": "Verified source publication custody; six mandatory direct body comparisons, separately recorded additional designated-owner reads, and exactly two explicit invalid-UTF-8 Git-identity obligations. This is not universal remote raw-byte or remote SHA256 readback."
   },
@@ -527,8 +527,8 @@
   "inputs": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/verification-v3/inputs.json",
     "bytes": 417473,
-    "sha256": "6367c7d343ece1f1547e4db7873180f4dfae6dda83212edadf0564e0a93bc341",
-    "git_blob_sha1": "b4510e1b8441ca0c89d78879662f2d96ef4bad34",
+    "sha256": "d5dee9d440dec5528f96a0168adcb6b6adaefefdc939e764a379fdd3049ef6c2",
+    "git_blob_sha1": "3f371c3d3d5d01f72b088068626a4a758be1f19a",
     "mode": "0o644"
   },
   "all_fixed_inputs_unchanged": true,
@@ -544,8 +544,8 @@
   "java_xml": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/verification-v3/JccSourceRecoveryHandoffTest.xml",
     "bytes": 16374,
-    "sha256": "09d606a9675a7aa17a64945e499c8f8062bd75a42cce2ed53851309aa3efd001",
-    "git_blob_sha1": "d000e3ba32f607f5e06f41c038d335a044b414f6",
+    "sha256": "3f1f895d21c58e9d4b100b8e2cffef28126ad7b1b61c65521e622ffa0a896752",
+    "git_blob_sha1": "fb538666500a39aecebe24b77862b1fbd51a9e53",
     "mode": "0o644"
   },
   "python_tests": 6,

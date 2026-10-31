@@ -54,9 +54,9 @@ final class M3KeyedOrderRingRecipeTest {
             "/META-INF/rewrite/m3-keyed-ordered-ring-20261019.yml";
     private static final String NAME = "jdk.internal.m3.KeyedOrderRing20261019";
     private static final String BEFORE_SHA =
-            "efaf6160476817518ce6921c336c5b0d7232be7772a312185c503dee5bceb1bd";
+            "3c36bb031264386cfa666e7ed8400b6c71fceb4905ddfbb136708c94e3cf8087";
     private static final String AFTER_SHA =
-            "2687afa8040de89110888f0e17a876e6d37ff40230f80cba6d5024bb83f9fe9c";
+            "2c05e660b4fe12b1be77d417376700aa5bbc941280b559bac3b3b12ad092364d";
     private static final String UNRELATED = "untouched.txt";
 
     private static String resource(String path) throws Exception {

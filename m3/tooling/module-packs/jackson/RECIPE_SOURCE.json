@@ -25,7 +25,7 @@
     },
     {
       "class": "jdk.m3.rewrite.jmod.M3ModuleDescriptorRecipe",
-      "source_blob": "302a06c5a79ecb6fd26c988dcf1fb9147e9198e1"
+      "source_blob": "9882f9773cc299ef80477fbf4de080ba763ab781"
     }
   ],
   "execution_contract": "Execute actual OpenRewrite SDK results, verify every postimage and a complete second pass before writing, atomically replace only declared targets, read back exact bytes, retain external SHA-256 receipt.",

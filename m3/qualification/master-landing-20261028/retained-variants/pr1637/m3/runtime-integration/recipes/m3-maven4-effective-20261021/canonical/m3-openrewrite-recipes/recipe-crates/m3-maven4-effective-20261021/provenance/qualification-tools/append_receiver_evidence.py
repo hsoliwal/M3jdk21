@@ -38,7 +38,7 @@ def copy(source, relative):
 
 
 proof = ROOT / 'maven-work/qualified-receiver-001/PROOF.json'
-assert sha(proof.read_bytes()) == '9b1e3a81d5c37fc36bef68b4ae95554a76ccaf55a0f9464346b920a3fc09e107'
+assert sha(proof.read_bytes()) == '5d6ef5cfb4b94a0dde33489b3048252a5cfbd9e328ce468a8aef711aa7c9fc16'
 assert json.loads(proof.read_bytes())['status'] == 'PASS'
 for source_folder, destination_folder in (
     ('integration-work/maven4-receiver-001', 'proof/receiving-application-001'),

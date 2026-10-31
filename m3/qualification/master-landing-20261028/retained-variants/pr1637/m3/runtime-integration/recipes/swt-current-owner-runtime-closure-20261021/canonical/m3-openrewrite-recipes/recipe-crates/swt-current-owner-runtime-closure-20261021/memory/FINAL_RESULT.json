@@ -4,9 +4,9 @@
   "profile": "swt-current-owner-runtime-closure-20261021/1.0",
   "event_count": 3,
   "events": [
-    "a67a979a5c8b70422ebb3ae1de5b1ba13e4569de0d68740f4ab570f929b9d0af",
-    "c8b07c26085cc710f66c25bb22c82d601814643e2bf4e391410c015967f73a5d",
-    "cdbed0ea1d2dbe333043c8ea9328f27a0354ccb620f2d531a4e96989e12e1d3b"
+    "fc48dd49814293e527151d91c809e20db4c97a5ff18752431004f330f4262e5e",
+    "b4d03492e4f6853d6bae972e74d96b91b2251691a11fcdae32841e691e49b793",
+    "3eda9073af922583f714d5cf4ae7d9f01f91debf5ac51b91ccf32cdbe2f57098"
   ],
   "conformance_checks": 129,
   "control_cases": 32,
@@ -23,27 +23,27 @@
   },
   "index": {
     "path": "memory/INDEX.json",
-    "sha256": "867d6dfe8087aae442408653795221bcece9afbb2383ba65eddb6fd54d4f2fc4"
+    "sha256": "770179b9f08a2c410a46bb3f9dfd77d97ebe7b459ba4db0a63069dc1dc50fd2d"
   },
   "helper_lineage": {
     "path": "memory/HELPER_LINEAGE.json",
-    "sha256": "f249b0a6bb57663b5109869e01a6c30be20ee0416cc3031839fa48e1e067c320"
+    "sha256": "66a2424c85ec34eeda9226bc827e64ac0f79e9c6d5efaf9b7c0ca598ba237ca3"
   },
   "profile_conformance": {
     "path": "proof/memory-conformance-001/RESULT.json",
-    "sha256": "4cecba20e8faa6c807eb6682afd6c73de0e1c8fab30363a39a750866fd6b0a84"
+    "sha256": "f0bc06066dc862757dba754f14eeb5901afecd8439b79e4854490a6dab61ecad"
   },
   "event_integrity": {
     "path": "proof/memory-integrity-001/RESULT.json",
-    "sha256": "ddff5489e50878ce79b90f1371d81213b1f3ba3a6623ced44e2f5c5df327e33c"
+    "sha256": "3953e5c5365c6e09739caa008251bf4a9f345a843f3827ec234ca565a003c59e"
   },
   "new_canonical_recipe_sdk": {
     "path": "proof/sdk-001-offline/RESULT.json",
-    "sha256": "a950522f8342e90af73568ae052eca44f776d377a57e4a392477ec5ea95a5098"
+    "sha256": "94112bdac83b7756c78d4ea92c24b0eb4cc948e7bd73622b7d96cd0fa4df2774"
   },
   "actual_emitted_receiver": {
     "path": "proof/receiver-runtime-001/RESULT.json",
-    "sha256": "54a0a9db3849ee73273e61b344009eea3bf4acacba4bc45b6c2ad8170398f285"
+    "sha256": "679ac1b3f0a18abead0c716b82a876db225f02d77afc01bcb8a3cae75f7932ec"
   },
   "qualified_sdk_source_inputs_unchanged": true,
   "scope": "Independent closed-profile conformance and immutable evidence integrity. Runtime proof remains the actual owning receipts; no product or hosted admission is granted."

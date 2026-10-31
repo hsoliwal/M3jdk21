@@ -6,24 +6,24 @@
   "sourcePath": "m3-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017/sdk",
   "receiverCorePath": "m3/migration/original-provider-20261017/sdk",
   "moduleGitTree": "c93b25915d57178bec19458ba9ddc34383d92639",
-  "pinsSha256": "bfca248cec552a541faf7c69fe20fc1833736931af1638049b70c6d7a7616c46",
-  "workflowSha256": "7e8b57c875190675ccf2312c4041b8e1d151b87d27b3d9542627066b5fab3af4",
-  "workflowGitBlob": "8702ae33a2cee6760b2c19dc2be1818e6c3cae42",
+  "pinsSha256": "19a645adca080c0916cd8ecede49d3149ff91820121882a66e54da95ae6ccc6c",
+  "workflowSha256": "93462020aae8a4eef154cf7dbadac827a7f5e6365d5643d841752e328b045e21",
+  "workflowGitBlob": "91b9a857bce3f811774e5767ebd44f61c734fc5d",
   "receiverBase": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-  "originalCanonicalPreimageGitBlob": "4f5911d625090913d85f9cf41b1ead1694dffade",
-  "canonicalRecipePostimageGitBlob": "853607c6fef4b08ba2a3fd6df35121ac0594db30",
+  "originalCanonicalPreimageGitBlob": "80eaeba7e4e1d35cd9904a8a5c18e060abdd93f0",
+  "canonicalRecipePostimageGitBlob": "8aa47ded8feb40e87bcbaf3d32c1918d9b8a549d",
   "runtimeApplied": false,
   "phaseAdvanced": false,
   "previousQualifiedBinding": {
     "sourceCommit": "525e0c3704f8c4b4d9eef54799d1b4c947e37b5f",
     "moduleGitTree": "638520715ffb00255639cb1e6667494bab729b53",
     "pinsSha256": "75f37d1093f5fd3d657de32bcab672f725f6391b4c59910aece1c2ff238951d7",
-    "workflowGitBlob": "f04b6bfc76e5a671968a478f44cf13268c04e5e9",
+    "workflowGitBlob": "edad663b2e4a51e22a5e25954df237192e5b8d08",
     "receiverQualifiedHead": "924b88d8979ac5f904c88e7c33d7cec2e2917e3e",
     "run": 39099435918
   },
   "frozenPre": {
-    "manifestSha256": "11d69c05d4e4dd0ef27c8a2195827c62b5dd48a49bef34943f4c6a11fbc4899c",
+    "manifestSha256": "1fd2558fdd93e7f1860a225dacfc7118452bd88498d9d272946110c0260a4341",
     "files": 55,
     "bytes": 795620
   },
@@ -33,22 +33,22 @@
   "dataOutputs": [
     {
       "path": "m3/docs/name-mapping.json",
-      "gitBlob": "853607c6fef4b08ba2a3fd6df35121ac0594db30",
-      "sha256": "216e2de854195c9f8363f2113e166955d5df22b6cea1d7d48721b18c2d28edf8",
+      "gitBlob": "8aa47ded8feb40e87bcbaf3d32c1918d9b8a549d",
+      "sha256": "0f6e4df5566f02b3e073e49f79f75214900f1a30f495456d9c2895234edc452e",
       "bytes": 441047,
       "kind": "CHANGE"
     },
     {
       "path": "m3/migration/provider/python312-linux-x86_64/bootstrap.py",
-      "gitBlob": "fd943dae946249b57d45343eba59c4a62c3ac6c5",
-      "sha256": "ad5c7df9cf9178ff656a369bbae82c20e2914f1005e187467be0000226cda243",
+      "gitBlob": "4b1eda1280eac2f75e438b5ca6c6045ae3ed163d",
+      "sha256": "6fb543d2c8ddc4fe622c84f167dd09913f4e99647e56a42495154764d1d4fad3",
       "bytes": 42501,
       "kind": "ADD"
     },
     {
       "path": "m3/migration/provider/python312-linux-x86_64/previous-name-mapping.json",
-      "gitBlob": "a44460f982940623cf6ba1ca625caeeaa889f633",
-      "sha256": "fa9832d48ec7dc0334fcb3a02e1b665612ca3a9f3dfe13cd104ff3f2c42871ac",
+      "gitBlob": "8b15bc9a615b990e126598a4aeb4af133dab7492",
+      "sha256": "d63273d13d34e95590d2f8511ae191a817144a2d671db68add35ef95b5103995",
       "bytes": 399438,
       "kind": "ADD"
     },
@@ -61,8 +61,8 @@
     },
     {
       "path": "m3/migration/provider/python312-linux-x86_64/wheels.lock.json",
-      "gitBlob": "3291ec0a80c15b311dc44b15b078f5d1f103df4b",
-      "sha256": "7ecf3b8050b9cceb75304fa3bbe6721a5b4844cb5ca520827ed19f5c21cfbfe9",
+      "gitBlob": "8beef6016b527ba2f25dbc3f2f88000815273170",
+      "sha256": "f0c3430a94f4a086438a5e88e5e2937619484a87f14b6d9f6a6834b6848b11fb",
       "bytes": 10099,
       "kind": "ADD"
     }

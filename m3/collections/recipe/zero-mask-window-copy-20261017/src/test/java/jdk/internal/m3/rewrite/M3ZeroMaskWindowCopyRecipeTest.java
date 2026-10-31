@@ -71,12 +71,12 @@ final class M3ZeroMaskWindowCopyRecipeTest {
                 manifest("/jdk/internal/m3/rewrite/hash-pinned-java/native-zero-mask-window-java/",
                     "m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java",
                     "86eb2c9a436aac6f6e5b99f5c275636ca272d849dd08aa07f8796271167c63a1",
-                    "6b6fe32c60db7fb0e31e17e6cce0df727c856f17adff9eba32d5efd141498872",
+                    "c81601d08eb3d7442d4fe952a9ba580da17bd3dbe74fb581daa04ebf2f575996",
                     "M3IndexMaskCompactorSelfTest.java.before"),
                 manifest("/jdk/internal/m3/rewrite/hash-pinned-text/native-zero-mask-window-c/",
                     "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
                     "59b1bb47f2df09f1455e4ce2160becbeefd6da877ecddca4ad245a286d14fa48",
-                    "cb8e8c66e07cc4651e95a0c28ad834d2c9de48df34dc90c6d7da68443f1da531",
+                    "a549b92b38eaa337c0e95f32c46607cace9ae46d8240d37bd58a3a48e296990d",
                     "m3_index_mask_compactor.c.before"));
     }
     private static String path(SourceFile file) {

@@ -13,7 +13,7 @@
   "sources": [
     {
       "target_template": "java/jdk/m3/file/M3ByteFile.java.txt",
-      "sha256": "5802d8a6d2e141d398bff309f5b4dc3fa1714be202ab0c84ca0bb5e2e2e1a20b",
+      "sha256": "752d7c4ae9c0ca06ae168a4ec5354ed7131fa7340437357b2537a161cc9fd90e",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexByteFile.java"
@@ -29,7 +29,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3ByteFileStreamIndexer.java.txt",
-      "sha256": "d08fa7ac79648c2194a00a30002d2d3c0d7301b27964b6816e3d21b575b703e4",
+      "sha256": "7007027f818b5ac5f9a32a123d302ad5334750da7b377bcefd437d63c95300c1",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexByteFileStreamIndexer.java"
@@ -45,7 +45,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3CharacterFlags.java.txt",
-      "sha256": "97d4876e230328215484788a6335dcbf1677b8bd4ef8958f553722e305b12af3",
+      "sha256": "ed837d1316be3c745c25d75db1dfd04751a1bbea4ab96ad065a6bf76ecfb8d98",
       "scope": "FULL_SOURCE",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/IndexCharacterFlags.java"
@@ -61,7 +61,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3ChildProgressMonitor.java.txt",
-      "sha256": "23b0ffdc4fcde86e6c39d02e3a1cc916310432881b32cb181b3a3d8912cf45c6",
+      "sha256": "8644473a6de41e1fbaf7808284b950f97a4d36f15096aae232f9df9b25eba25a",
       "scope": "FULL_JSON_DEPENDENCY_BODY",
       "source_paths": [
         "m3-job/src/main/java/jdk/internal/m3/job/ChildProgressMonitor.java"
@@ -80,7 +80,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3File.java.txt",
-      "sha256": "dbda0676b4bcaec25b86321094086958c8c055ce38ed60a890b3fcd1a0cca5db",
+      "sha256": "0d863315748fb6439fa397599bb0e866c21422d4fd1d6f5a642cf705838fcc51",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFile.java"
@@ -96,7 +96,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileAttributeOrder.java.txt",
-      "sha256": "6873496979babdaa3bf21f0a49a458088c13f71e61b95c1e5fcdf976d7b5069b",
+      "sha256": "f854b959f30b111bb90e113e775e122d16bfdd2af448ba09601b1cba5c411575",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileAttributeOrder.java"
@@ -112,7 +112,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileAttributes.java.txt",
-      "sha256": "ac6016c43ace8760a36d213be2329661ef19e1fb4dbab2b27eacdb975f57214a",
+      "sha256": "3f896abcf21b24955ba277d33b95d1fcd5871650af5c7dc88dcb517912a73a0c",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileAttributes.java"
@@ -128,7 +128,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileBuilder.java.txt",
-      "sha256": "ef7146cac4d4bceb7f586f363ac77b32d1ea113520e35197898b597966082366",
+      "sha256": "a55bc2975194322f9eb92709f108e599b40720bfa357c609cde1f3c640c2cc9b",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileBuilder.java"
@@ -144,7 +144,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileByteFacts.java.txt",
-      "sha256": "3d74c4e871861382eaaa5c111e12af944e0358935d62057a1b3e0b2256e05108",
+      "sha256": "e944b52a51e54d04e2996d746375a106344da6298c4d4ccf85a9afca7bb9d2d6",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileByteFacts.java"
@@ -160,7 +160,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileByteFactsSnapshot.java.txt",
-      "sha256": "6e3704889b9efbd4eefb4f64f47c7c22d5df61945c2707ac008571585e13dbf2",
+      "sha256": "0f768c3c940a712d6af2ab1f9992f4484de1eb46a512cbe394bf151c61dedae3",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileByteFactsSnapshot.java"
@@ -176,7 +176,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileCharsetEncoding.java.txt",
-      "sha256": "78b4657bb2e0852e34ef4c126bf6024c30510769bff67c3fe13151bde620e6f5",
+      "sha256": "2bac593ff00c98e9fc00cfbedde68465dd408058abec11545a9b821316a5a6fc",
       "scope": "BOUNDED_ENCODING_STATE_WITH_OUTPUT_SINK",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexStringCharsetEncoding.java"
@@ -192,7 +192,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileCoordinates.java.txt",
-      "sha256": "ce2f5f2f11b2ccd431a89a872131e5c4a8c8f7d60fefbdc4b29a4116288184af",
+      "sha256": "9e847ab9966c190d4d785831e0fe520d6b033f27278b2065a4f7c0af2832cf0d",
       "scope": "EXACT_FILE_COORDINATE_ALGORITHM_AND_RESOLVER_CAPABILITY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/IndexCoordinateFingerprint.java"
@@ -208,7 +208,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileDictionary.java.txt",
-      "sha256": "2c4d8af76163520fce7d3086017837fe9aac957439ccedce15c6bff85821396c",
+      "sha256": "4a26af70820150ac06c447fc28dbb44ed87ec4512f145a80c0117c4355176ac7",
       "scope": "NEW_METADATA_RESOLVER_OVER_CANONICAL_JAVA_STRING_REFERENCES",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/IndexResolver.java"
@@ -224,7 +224,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileEventReader.java.txt",
-      "sha256": "de6dedc02ed5e10dea6f182ad9c8d093064200249e1f449ff7e90c5b131dceb0",
+      "sha256": "62d398b40c53579c0b3d5d47d4b1eb415d85777d39372ea95ad38d596fac85e7",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileEventReader.java"
@@ -240,7 +240,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileEventSnapshotCollector.java.txt",
-      "sha256": "8f392c8c9415adbb42de2f2721ff9212cacf911bbc8170fbe40c2a72d6214c17",
+      "sha256": "dfaf03909a2859c6bca12ac552b4b85fe4ecda5ff3480480006ef4f541125780",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileEventSnapshotCollector.java"
@@ -256,7 +256,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileEventWriter.java.txt",
-      "sha256": "33001a32c9298631c9fe316be131d9c51702067c53246ca51386f296392ded67",
+      "sha256": "8eb139c864ff9787e26f857f9e79625612992333eb25eb6bc4a83737e3e20082",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileEventWriter.java"
@@ -272,7 +272,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileFrequencyIndex.java.txt",
-      "sha256": "777e5316502c25d46cb2267cfdcb8e770cb5ae8e32c0f595691983767b3677ae",
+      "sha256": "463bbf65bf3fa449b00bc98d76735254da07997ec19adff4b18c0fdff06dbb4b",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileFrequencyIndex.java"
@@ -288,7 +288,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileHash.java.txt",
-      "sha256": "ebe4b1f3d045ef8ce7243a2ce1342ad09638ab026260dfd0cd3f22ebd8eb36e7",
+      "sha256": "82bc7019aaab824a2b2d28a8d7d164e1f607766de6d9bf3a771621639109cf12",
       "scope": "EXACT_HASH_TEXT_AND_MIX_METHODS_REQUIRED_BY_FILE_IMAGES",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/IndexStringHash.java"
@@ -304,7 +304,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileId.java.txt",
-      "sha256": "d4ed91e4a590583f75749c1d8c6db2764e3f77991f936880210d5e119515e553",
+      "sha256": "69e0f13c4e0e1949950b51027e283da08f3037a3d830c1ea459e307b52120355",
       "scope": "FULL_SOURCE",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/IndexId.java"
@@ -320,7 +320,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileImage.java.txt",
-      "sha256": "cf38a7b795d0f006a382ee8e6344b6ce80b656c1f1760a6fa484337a1f51c350",
+      "sha256": "88bf4132679777ffc1c200cd7cd8473863d4db82ae084f350754b35668c8675c",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileImage.java"
@@ -336,7 +336,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileKindIndex.java.txt",
-      "sha256": "7651e0d8e57540b06971e58785e4e551c88b84e619f96b6ec246fbdbefb4fa28",
+      "sha256": "5f9929d8bdeba2dca3eb7d7fb811e578a2e91a3b27ea96c7dc04c1a708110499",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileKindIndex.java"
@@ -352,7 +352,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileLexicon.java.txt",
-      "sha256": "90f594ad46ba757152041afaa76146b84b6ceba26444ca48cd4df642a702cbfe",
+      "sha256": "1c007e7d23c23a8d2e95ad1fa0a47067b7dab25f195832ef8f43944ac38a01ff",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileLexicon.java"
@@ -368,7 +368,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileLexiconSnapshot.java.txt",
-      "sha256": "c449cf3b762653121164d2608db878a9484581f8874d7d48c6a01aa05c3b1baa",
+      "sha256": "26a1c02f6ba2c5d7c458bb1dcebd4c6cd2384cbb7c1dd0a7f5a353d208068dcf",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileLexiconSnapshot.java"
@@ -384,7 +384,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileMultiPattern.java.txt",
-      "sha256": "96ec474d6201650e0c9e03a13ddcaa552cb03bf336f2427eed0830a1780edd56",
+      "sha256": "8297cbdb56cf5d4ff54f20ca53e3cc19b010fcef5d169caaf6c4b00615323aa6",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileMultiPattern.java"
@@ -400,7 +400,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileNative.java.txt",
-      "sha256": "75f39895c56665508e3895e34873cda3bcde98339161574be790322f9e2152fd",
+      "sha256": "ced05dc13eec3cd70bcfb1432ad3cbcd5163d797a67f8e307b67f350a1177656",
       "scope": "EXACT_MAPPED_FILE_KMP_API_AND_FALLBACK_WITH_TARGET_LIBRARY_LOADER",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/nativebridge/IndexStringNative.java"
@@ -416,7 +416,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FilePattern.java.txt",
-      "sha256": "97e492d33184406af9e7d6c5f00800c94d919cebd85247219275731bb932686b",
+      "sha256": "5423c6979dc2c732cbd10613259bfad0cc5dd1463df524bead73f674e784bfcd",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFilePattern.java"
@@ -432,7 +432,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FilePrimitiveSnapshot.java.txt",
-      "sha256": "ea9a2e4903c054cde989a04a1e665918a5aff343c5147a58f84d2e8c020e57a9",
+      "sha256": "d32cafe1dc28100c44e3419894ae5efa04b94a55ade45d8bbb03cee6c4c43eeb",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFilePrimitiveSnapshot.java"
@@ -448,7 +448,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileProjection.java.txt",
-      "sha256": "3a352ce013d1870e05c9243bfc1803bbd8cda032fe2800874349f768a59b6227",
+      "sha256": "20241bfe1c982448eaf9f0ac2da005d5aa9b01b2d53200f28ca1340dd573bed3",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileProjection.java"
@@ -464,7 +464,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileProjectionSnapshot.java.txt",
-      "sha256": "b7095dfe70862a1687df6dbed44cf94e6af612402b000195fd4ebf5eca23cffc",
+      "sha256": "06e3f24d01b09112d566437afa2d1e3a3c7807ecf513a47b57a0b49dbd2f62b5",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileProjectionSnapshot.java"
@@ -480,7 +480,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileRangeFingerprint.java.txt",
-      "sha256": "77413007f75e1e7d5926d5b6a616acabd33441970dfc078888baed5c3d700924",
+      "sha256": "3561ace3b982fe572e171cce69ed5b971028d7609e408d60a638c09d29d526d9",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileRangeFingerprint.java"
@@ -496,7 +496,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileResolver.java.txt",
-      "sha256": "dccf95442e334a581f87a5c25aeb6d8fba025d404900d4eca828090eae18be2a",
+      "sha256": "ce81a5ad235a918b4268a8b95a18d23acee0d489a937ac46df328453d2221a99",
       "scope": "FILE_REQUIRED_RESOLVER_INTERFACE_WITH_IMMUTABLE_GENERATION_CAPABILITY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/IndexResolver.java"
@@ -512,7 +512,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileRollingIndex.java.txt",
-      "sha256": "06baaaa7e3d9780ad05fb0360891db4836abe2081ad8a90ff854ab2809bc1762",
+      "sha256": "983adee847a76dbc2b78c5c539f24e440e077b37a588e79ad9e03eddbdd776d5",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileRollingIndex.java"
@@ -528,7 +528,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileSnapshot.java.txt",
-      "sha256": "d9063ce6e1830c7d4c6af880d96953bd95892a454f51afbebdee15f8f5da50e0",
+      "sha256": "5cc24deaef1d672297b601d0e922eee31443cd5af78ee26b92d382064b97b10d",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileSnapshot.java"
@@ -544,7 +544,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileSnapshotCodec.java.txt",
-      "sha256": "f49015eff03910c7ff53902e34bc85086ee72f7d2c69e0f26d7c17ab05cccbd2",
+      "sha256": "928414efc0fd0b1d05b82825d3e83af121970cd52b79e1f6d6711157263b019f",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileSnapshotCodec.java"
@@ -560,7 +560,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileSourceFacts.java.txt",
-      "sha256": "e17b3a07e931bb36d17549e7b462fff877df531d44456e08760216674daa1668",
+      "sha256": "b63fc866812ebeb6e6f4c3361d7f0a7e0e2e4b371fd020752aa475f9eab03fca",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileSourceFacts.java"
@@ -576,7 +576,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileSourceFactsImage.java.txt",
-      "sha256": "5a7c08ac201d4f8ba6a931fd50151f3e6bd9258e0288ae03acd832394ad0c19b",
+      "sha256": "327f1083ba438c5539d4c0eddea69b7a5fd4b94e86d6f92ebbff2e5254be9605",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileSourceFactsImage.java"
@@ -592,7 +592,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileSourceFactsKey.java.txt",
-      "sha256": "30833dade63e4c340dbc5d4bf485d0fe769aaa24591c101c72c85d05157097f6",
+      "sha256": "9238051113b7e2a2e1f16fdc0e8671f5c8f72112bf2f13ba1801124f6d5235fc",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileSourceFactsKey.java"
@@ -608,7 +608,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileSourceFactsSnapshot.java.txt",
-      "sha256": "0dd3f268b91cc85621affa71796b99699a83d4953207acb7880a7577f0704b1b",
+      "sha256": "5d874021fbcf614cf75b35e8940a5751626cc988ff2ddd2efc6f5cf22695f9f9",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileSourceFactsSnapshot.java"
@@ -624,7 +624,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileSourceFactsStore.java.txt",
-      "sha256": "c9c74e942b2ea9bd22dd82b51010ba3a1279120737862387613d0592fe1ce898",
+      "sha256": "c6f96a8a61934de5c0dbb55c6bfc06ccea36e00b61bfec653a7cae12ffaa26df",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileSourceFactsStore.java"
@@ -640,7 +640,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileSpan.java.txt",
-      "sha256": "6b3754cad78cdaf584822a0c49cb08b31edddf5b8da62ce0c4c6ee4e1985798e",
+      "sha256": "78d6214e0c7430c637000a9c525078bf15d8bb6648f47ee7c8741c82c65fcada",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileSpan.java"
@@ -656,7 +656,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileSpanSnapshot.java.txt",
-      "sha256": "9139ed2f528fa5531a2635edb6e786b124e1801828e0cfc0475cb954ec1526b5",
+      "sha256": "843052642aae207465bbe12fb73fc56e00965520b2b256125c280354212c39bb",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileSpanSnapshot.java"
@@ -672,7 +672,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileStreamEvents.java.txt",
-      "sha256": "7bbd948c17209a739d7a5077cafcad1eecc0cfc9e13b5d60b3a184f2360704ab",
+      "sha256": "f21f7779a9d7f6fba4f09b15902cf9b71eedd88d81ab4f67b23a0cac31be67da",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileStreamEvents.java"
@@ -688,7 +688,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileStreamIndexer.java.txt",
-      "sha256": "364f0598976b6634d0a4994c8fd243425c3d16599b1362b91b0dbe0446360e79",
+      "sha256": "7a1462b014802b41166c0192120d02932b49d318fcb4eb41a6f8a43d50184e96",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileStreamIndexer.java"
@@ -704,7 +704,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileText.java.txt",
-      "sha256": "49d4baaa759bd9b27eabd47cc0fa999c57146e97c60db931ba52bad4e8f4216d",
+      "sha256": "7325184efd4ec4cb22fc05eae09494f8c6d7366f855f1f04df45274331b44c6b",
       "scope": "FILE_REQUIRED_IMMUTABLE_ID_DESCRIPTOR_USING_JAVA_STRING_PAYLOAD_OWNERS",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexString.java"
@@ -720,7 +720,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileTextBuilder.java.txt",
-      "sha256": "7c44526d83dbe53c557859438578a6d41fadc24308c0661d76625f9a5f276659",
+      "sha256": "0dd8165d67e6f6c4fbfea37dfac83d824a462a6be43af13155180e5be268650f",
       "scope": "FULL_SOURCE",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexStringBuilder.java"
@@ -736,7 +736,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileTextPool.java.txt",
-      "sha256": "b46c6dbb235b1e4cf01f5545684ec2d94e65d5aebf6b7838d5539d7ab265fc30",
+      "sha256": "9529a61c17b08a982034c09ccadfcea7e081b19b98f1f2c95c2a2582ccce3ede",
       "scope": "FULL_SOURCE",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexStringPool.java"
@@ -752,7 +752,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileTextRef.java.txt",
-      "sha256": "2b1ca23d5f46c82b7f4488f971efe42d6706ce4ee44fe44f301e37ddfea73cbe",
+      "sha256": "80928680e2d99355ec75573a5d705ddc08b4dbe1554e32b5b45c349186e9a3a1",
       "scope": "FULL_SOURCE",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexStringRef.java"
@@ -768,7 +768,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileTextTokenizer.java.txt",
-      "sha256": "460fbfe4398a070349656b83c1f368aa51365e9699c99174788bcafe261bd90f",
+      "sha256": "50d762f23cb2e8c7d13d86aa84558f156b8163886ce8e531fb45bb4dd9bba8df",
       "scope": "EXACT_CHARSEQUENCE_PARTITION_REQUIRED_BY_BUILDER_PRIVATE_DEPENDENCY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/IndexTokenizer.java"
@@ -784,7 +784,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileTokenKind.java.txt",
-      "sha256": "bf561ee119ffd3397a5d3bd91fad8fae40085413516cc27e457f31df53f36443",
+      "sha256": "6c763c5158552a9e452f842e124083acaa4adb48772235dd9a8b3592d892d3db",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileTokenKind.java"
@@ -800,7 +800,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileTokenRange.java.txt",
-      "sha256": "62374896dfd50b702acb0abbcfba1a2ef69d171d85a4938001af88bbf40607f2",
+      "sha256": "e0adf58623a68dddac4501a60defd341f9efe4baed7e6306893b0029d4f43bf1",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileTokenRange.java"
@@ -816,7 +816,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileTokenRangeSha256.java.txt",
-      "sha256": "58369250a00e5c1b9e34d1d2817de351e9a3a6ce499827685320ee8ac358fa02",
+      "sha256": "1790022ed80651fbfba5c442530701ac661728ec120aeb9375f97aa5a74b86d6",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileTokenRangeSha256.java"
@@ -832,7 +832,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileTokenStore.java.txt",
-      "sha256": "ce3759fcd0439318a29b250c3a281839d4cbd4202e1f38981227408ed02cfa74",
+      "sha256": "102bd1bad1e258b667c2293cc7258a1e96a204487f0a9e31bfe3cdcb02cdf80f",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileTokenStore.java"
@@ -848,7 +848,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileTokenizer.java.txt",
-      "sha256": "f028a11bf59a3d47c09be71f4fec7c0b408652b3f97d339583b0d76df1d6b69d",
+      "sha256": "c0b74c19570634b42a305bfba8f7c50eb67478774b15bd468a36f132bb992436",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileTokenizer.java"
@@ -864,7 +864,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileUniverseEventReader.java.txt",
-      "sha256": "f0d4c372fe31ee6efc4bd02a52f5d11720a64f5154092fb5f3ea109fd10d3ae2",
+      "sha256": "2039a8a69562026e9d01dd4fafac0e35182b6407ba9f100d386554a503051328",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileUniverseEventReader.java"
@@ -880,7 +880,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileUniverseEventWriter.java.txt",
-      "sha256": "8da2f7dd9b01fd4eb12629fca0b162c7066cc9cbce5e3c02922231ebc520affc",
+      "sha256": "e88ba932a5267634adaa6e7359032f0b0ba06131d450674ad21b1fb9fbed8bc9",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileUniverseEventWriter.java"
@@ -896,7 +896,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileUniversePlan.java.txt",
-      "sha256": "83cd132c58dfa7f2f137e9f119aee2a4f9b04b29c119ea64d884fa8089cafb84",
+      "sha256": "1eb6dafce1e299693905194aa05382678015859e04649001fe4d49f265b1a1b0",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileUniversePlan.java"
@@ -912,7 +912,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileUniverseSnapshot.java.txt",
-      "sha256": "994993e2060fdc2f1b877ad3671d461c66f28bf06417535fb35f314c32839215",
+      "sha256": "4aeaeaaf363ce6b375a7f3b201ce90ec9af8d646383ac0bc19f6d79fe4582b6d",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileUniverseSnapshot.java"
@@ -928,7 +928,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileUniverseSnapshotImage.java.txt",
-      "sha256": "ff73466f54d0981a4cab9f2fd90d24636ea96fc4d633f650351b2cbe7ea1ec8d",
+      "sha256": "370305a9d8bd9add13697826a40b3d5b106b09bf9236040025cca9aeaac96ab3",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileUniverseSnapshotImage.java"
@@ -944,7 +944,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileUniverseTokenIndex.java.txt",
-      "sha256": "e626f28040f9d36d1beb3d6d66329ee0efac2923b37d30d8993c852716fde58f",
+      "sha256": "ff2bb59437c7861228edb0665caee7ab16a97960af5559280b2a2abb4d804d33",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileUniverseTokenIndex.java"
@@ -960,7 +960,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileUniverseTokenIndexImage.java.txt",
-      "sha256": "1fbabc11a8a832678a9332756494aa17c7098f57791b24d4add9d621b83561aa",
+      "sha256": "5425f6bab626650da0b30073c45ff4e17637881c73f36dc0ec0e3aab43edf37d",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileUniverseTokenIndexImage.java"
@@ -976,7 +976,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileUniverseTokenRangeSha256.java.txt",
-      "sha256": "ce007cb21172bb0ad20799e1a7e9572ae7508f81e982b44cc3a926b6d2180d56",
+      "sha256": "f51a4f2d5596ef8a638d9e611fbf9e239e04fcb9b2685b6c792483c09eaf2abd",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileUniverseTokenRangeSha256.java"
@@ -992,7 +992,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3FileUniverseTokenSpan.java.txt",
-      "sha256": "0654c95138e0246cbdd617e967ec6b7d54b32f41a3fdd6b09003dc1c60780125",
+      "sha256": "044ffb8af2746ea56144eb567a40a2afdc6acefeb7f2e42e59c72e3f631ccaa1",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileUniverseTokenSpan.java"
@@ -1008,7 +1008,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3Hash256.java.txt",
-      "sha256": "14191c32a0e7fe5bda27c00f61fe20e0186366ef3b94f89959245f3f5c34c0ab",
+      "sha256": "0bedf8acee3965f1c79f8468e01322daa4b4213e73fded3ee71ebace62d57e9b",
       "scope": "FULL_SOURCE",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MatHash256.java"
@@ -1024,7 +1024,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3JniLibraryLoader.java.txt",
-      "sha256": "613def6113f8101dc31d7b956e73b05b7bbe63b903eadcd385dedeb7e7da9536",
+      "sha256": "41bbf9b57768873e4eb513ebb94b396234cc66f69b7f20382306e73ddafd0591",
       "scope": "FULL_JSON_DEPENDENCY_BODY",
       "source_paths": [
         "m3-native-interop/src/main/java/jdk/internal/m3/nativeinterop/JniLibraryLoader.java"
@@ -1035,15 +1035,15 @@
       "source_references": [
         {
           "path": "m3-native-interop/src/main/java/jdk/internal/m3/nativeinterop/JniLibraryLoader.java",
-          "git_blob_sha1": "da5d6391af12d53a71c5f1e0f3736fa125659b64",
-          "sha256": "fa22dcfcc2b442c72ee3dd97e5d97dd5c9ad19ee4eac422641336b7477c63699",
+          "git_blob_sha1": "aaa7649fa9c99c214fd8864ee3cd34c95ebfd7d9",
+          "sha256": "bccce46eb05a7b040dcb7412ee3a425b4b270214bdd654c0787dbab8dfd02048",
           "directory_pin_verified": true
         }
       ]
     },
     {
       "target_template": "java/jdk/m3/file/M3JsonStructuralNative.java.txt",
-      "sha256": "5510d99a7068b87db686775a401a2f9f95f1abc980392c9fc695d9c1985adf6a",
+      "sha256": "51781e41816f19087e2c843493287dffc3dfa3b836b9148ac2124c4441242ad2",
       "scope": "FULL_JSON_DEPENDENCY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/nativebridge/MIndexJsonStructuralNative.java"
@@ -1064,7 +1064,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3LongLookup.java.txt",
-      "sha256": "c17a20e2d06d2a3e977933cc6573111c897b5aecfb1988ef708873f598a47a02",
+      "sha256": "160cf73a01cfe127a35fe316275fd6b0f6d84f676f4e996cf1ca0cfe44f1a0c2",
       "scope": "FULL_SOURCE",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/IndexFrozenLongLookup.java"
@@ -1080,7 +1080,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3NativeLibrarySpec.java.txt",
-      "sha256": "9eef35d68d5d79745d7f60f10120f09205699833e0f9fa967e5c9b5fc13e6744",
+      "sha256": "e504ae5fb6e89ebe62b8574c64809f65bd28853f79175a728aa048e1bb8305dc",
       "scope": "FULL_JSON_DEPENDENCY_BODY",
       "source_paths": [
         "m3-native-interop/src/main/java/jdk/internal/m3/nativeinterop/NativeLibrarySpec.java"
@@ -1091,15 +1091,15 @@
       "source_references": [
         {
           "path": "m3-native-interop/src/main/java/jdk/internal/m3/nativeinterop/NativeLibrarySpec.java",
-          "git_blob_sha1": "39b9f04e46411de9bf7b8063608241efb2819aca",
-          "sha256": "fd9bc8f19f629e6131dcb55f264eed524fa17e69bdda31d723b4addfddb8a4f5",
+          "git_blob_sha1": "475d90d7df3932fb622fc387d0518df1b6f3c2a1",
+          "sha256": "9680242313d4e2f2a0f14d31879d7c6da0af2ef4a11b7a8f256e6b0eb4d44cda",
           "directory_pin_verified": true
         }
       ]
     },
     {
       "target_template": "java/jdk/m3/file/M3PageableTree.java.txt",
-      "sha256": "17ae996cffab497f44b9aeb0262a7c5e1e8236420e35c51a0696b5918c75a9ad",
+      "sha256": "28109a5c2a66b60ac386f63257775188d4aaaf7d20e23d59d5f82d50de25d697",
       "scope": "FULL_JSON_DEPENDENCY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexPageableTree.java"
@@ -1118,7 +1118,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3PageableTreeCursor.java.txt",
-      "sha256": "60960320a4e37f31f95dadf1d63c5badad4851243e34b8995c214c39c64320f3",
+      "sha256": "0b271d6408977767eb452800d48b3ee2befbb7c13293430a1c2e9d5ec9d56e9e",
       "scope": "FULL_JSON_DEPENDENCY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexPageableTreeCursor.java"
@@ -1137,7 +1137,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3Progress.java.txt",
-      "sha256": "28818ae132655e930f5347f6aa53433e57d5f57836358e1e9a5370289dea73c6",
+      "sha256": "df3ed4363eeefa360f096a435ee176e012e609ddd5f97c5341877f8670225107",
       "scope": "FULL_JSON_DEPENDENCY_BODY",
       "source_paths": [
         "m3-common/src/main/java/jdk/internal/m3/common/progress/ProgressMonitor.java"
@@ -1156,7 +1156,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3ProgressCalculations.java.txt",
-      "sha256": "6df6d1b10eb0c2c9465357155518093bd322a2cd4c1b667d61403a6a599ca354",
+      "sha256": "857e0fb91f379d8b3c87ed200366d39f0245ebe3561a33a6b075d7eb6b75eae0",
       "scope": "FULL_JSON_DEPENDENCY_BODY",
       "source_paths": [
         "m3-job/src/main/java/jdk/internal/m3/job/utils/ProgressCalculationUtils.java"
@@ -1176,7 +1176,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3ProgressChild.java.txt",
-      "sha256": "28d62e89796e60805e9e46f8dfa7ea5bb038e99579296f586a164567e09bf9ec",
+      "sha256": "eb7f6c33aa27b3b78cb84202ce85091007a11ddee060c2c86421bae66344592b",
       "scope": "FULL_JSON_DEPENDENCY_BODY",
       "source_paths": [
         "m3-common/src/main/java/jdk/internal/m3/common/progress/ChildProgressMonitor.java"
@@ -1195,7 +1195,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3ProgressMonitor.java.txt",
-      "sha256": "9dec6ae3ca9968785d3f8e47a209abe3e09fa5e62798243bfe0fc9708e2087a2",
+      "sha256": "99fe3be2cc0dace64f3894e210bcd7925cd21f1d3c3ba557acf62418e8b0f80e",
       "scope": "FULL_JSON_DEPENDENCY_BODY",
       "source_paths": [
         "m3-job/src/main/java/jdk/internal/m3/job/IProgressMonitor.java"
@@ -1214,7 +1214,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3ProgressSnapshot.java.txt",
-      "sha256": "5deca622172f899f1f6484b3bdc831747227d8c80590ef42422158f2722d7710",
+      "sha256": "339328177722be4d0651e8cdd8797e59b9f724b45ddf123fc5dfca80e3fff52a",
       "scope": "FULL_JSON_DEPENDENCY_BODY",
       "source_paths": [
         "m3-job/src/main/java/jdk/internal/m3/job/ProgressSnapshot.java"
@@ -1233,7 +1233,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3ProgressState.java.txt",
-      "sha256": "d529b5f4834a1ac3b0afc7ff0bf4ddd4f39999c9da42049c24c845e4c2d852cb",
+      "sha256": "40efa824518b005df5ceacab22eb48cb1679a9720d486a58218cb5b36872094c",
       "scope": "FULL_JSON_DEPENDENCY_BODY",
       "source_paths": [
         "m3-common/src/main/java/jdk/internal/m3/common/progress/ProgressState.java"
@@ -1252,7 +1252,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3TextFacts.java.txt",
-      "sha256": "b159bfeba6db1c6132537bd60c1c4918d652a3094a076b3edd37ac434bcf6147",
+      "sha256": "6d62bd1ed4e85bf88eecd53e6660745245679a82267c0808fb65fd52305c8c68",
       "scope": "FULL_CONTENT_ONLY_FACTS_EXCLUDING_UNRELATED_RESOLVER_CAPABILITY_ADAPTERS",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexTextPrecomputedFacts.java"
@@ -1268,7 +1268,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/M3TextMetrics.java.txt",
-      "sha256": "1b1507dad30f90e6c6ba4822388e57cda52e42e86ce31d7727b94c4d3eb0f81e",
+      "sha256": "ba0e842efb56e539858530f0c193c67b4fac4910e38fb113fc226eea5674c6f6",
       "scope": "FULL_SOURCE_WITH_TARGET_NATIVE_LOAD_AND_OPT_IN_PROPERTY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/IndexTextMetrics.java"
@@ -1284,7 +1284,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/MappedM3File.java.txt",
-      "sha256": "c3b6d79eb17b38a7f22d5a0e1a2451323115f8c396c2d6a96bddd55d4bf0ac6c",
+      "sha256": "2f4770d5cf620aff9d44a4388d095a46a243a0d6e5732c0635aaf080663740d4",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MappedMIndexFile.java"
@@ -1300,7 +1300,7 @@
     },
     {
       "target_template": "java/jdk/m3/file/json/M3JsonStructuralIndex.java.txt",
-      "sha256": "387060daf4fe5efb1593563abfb910a6b48e75562a188c210fa012bf8d266cc5",
+      "sha256": "9fd94bd64be451213feea126d6f99eb896944f3546e9d3482199731e53736617",
       "scope": "COMPLETE_FILE_FAMILY_BODY",
       "source_paths": [
         "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/json/MIndexJsonStructuralIndex.java"
@@ -1316,16 +1316,16 @@
     },
     {
       "target_template": "java/module-info.java.txt",
-      "sha256": "666eab9e594255f227064ae1ddaf26b572ed5456e2c4f59dcd9294c3bf5d7690",
+      "sha256": "cf3d448d326b9839497768f71619139c4f420b984d901cf835d52027ffce4880",
       "scope": "NEW_OPTIONAL_JMOD_DESCRIPTOR",
       "source_paths": [],
       "source_references": []
     }
   ],
   "native_sources": {
-    "native/m3_file_jni.c.txt": "07f00a28d052687edbe90165f0090da8cf1ba1011e7f93364c588b2b9322479a",
-    "native/m3_json_signal_jni.c.txt": "5e15872f9ab3c7c7d2ea41e9a67b6fe9c5cfd1dda6387adc3ab6e372d6409697",
-    "native/m3_text_metrics_jni.c.txt": "00e4d58f4af904f9f5087929d66ba417f787a1c505579b3a90efbdd4361d70ce"
+    "native/m3_file_jni.c.txt": "e5895b5b8156b4c36592293882d82aaee26c9df8bf62403671b698a91b169b58",
+    "native/m3_json_signal_jni.c.txt": "2bb92d854108e2ebf5e54f6e126037b9538d532e7d08a969b5757f9d10eb1b4f",
+    "native/m3_text_metrics_jni.c.txt": "bf4ed4601838862c979051eb997a694b59584b3e8ee9b640eb82ab94de3e44fc"
   },
   "module_boundary": "java.lang.String remains public payload owner; M3FileText and all file-specific structures retain references/IDs/coordinates/facts only outside explicit export/encoding boundaries.",
   "production_state": "These are verified candidate templates. Root-owned real OpenRewrite materialization, replay and JMOD generation remain separate gates."

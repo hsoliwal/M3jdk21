@@ -1,17 +1,17 @@
 [
   {
     "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PREFLIGHT.json",
-    "git_blob": "0365b81ad1f8b3cef95993f23a84488c87f1c2ab",
+    "git_blob": "332ce8dce58b52fb537cb083099dcf66e2c8a597",
     "decoded_bytes": 0,
     "expected_bytes": 4201003,
-    "file": "calls/restore_0365b81ad1f8b3cef95993f23a84488c87f1c2ab.json"
+    "file": "calls/restore_332ce8dce58b52fb537cb083099dcf66e2c8a597.json"
   },
   {
     "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/PUBLICATION_CUSTODY.json",
-    "git_blob": "0f084555dbbea3ba4c9302386ced30e1e1503dda",
+    "git_blob": "067f5f2b6b53343f68f3bf197069e05ae5b9fe3f",
     "decoded_bytes": 0,
     "expected_bytes": 1099619,
-    "file": "calls/restore_0f084555dbbea3ba4c9302386ced30e1e1503dda.json"
+    "file": "calls/restore_067f5f2b6b53343f68f3bf197069e05ae5b9fe3f.json"
   },
   {
     "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_READBACK.json",
@@ -22,10 +22,10 @@
   },
   {
     "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/BASE_TREE_MODEL.json",
-    "git_blob": "6ee3c1bfd76dc5c0abdba031f163a3d38294f5e9",
+    "git_blob": "06235641c8ca32ba686fd83bdc30f4c0f488fac7",
     "decoded_bytes": 0,
     "expected_bytes": 1372743,
-    "file": "calls/restore_6ee3c1bfd76dc5c0abdba031f163a3d38294f5e9.json"
+    "file": "calls/restore_06235641c8ca32ba686fd83bdc30f4c0f488fac7.json"
   },
   {
     "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-manifest/FINAL_MANIFEST.json",

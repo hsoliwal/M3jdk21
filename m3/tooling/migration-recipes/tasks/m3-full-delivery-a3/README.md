@@ -15,7 +15,7 @@ Owned text crate:
 `synexia-full-delivery-a3-doc`
 
 The Java preimage is exact: the existing `SynexiaImporter.java` SHA-256 is
-`2d0021a50369b23d92a20ecd5333b8683b4f515f13a8d612f941e56b56884bb0`.
+`f8ded8a6971d3852b8621a9abc27090ccca6c78fadc9cdc282c340f19f678ff8`.
 The planner, CLI and planner test are ABSENT-before targets.
 
 The task adds no OpenJDK product source and grants no promotion authority.

@@ -17,9 +17,9 @@ J=m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java
 C=m3/collections/src/main/native/collections/m3_index_path_masks.c
 T=m3/collections/src/test/java/jdk/m3/collections/M3PathMaskChunkProof.java
 (cd "$ROOT"; printf '%s  %s\n' \
-  6703eef75122fd9c18dba196249f2b4420030ee712f73f6929a9a32ba07a3b5a "$J" \
-  3b2aa04fa4d6b228482e661e26b0198145e4ec74d17afc1e563f9bf5391d4011 "$C" \
-  b0c964e8c7650e0f7dacaaa8838db0f3db801cbbef6a45c1003bc403d6c7d3bb "$T" | sha256sum -c -)
+  0c446d0a2b78f5df90e21dd63cf32a146f6287945ce533c2aa2f4a9aa4ebf457 "$J" \
+  0367c0683c10b8d403bd62a03e5a29f3a84a083d4f79b40e2110cbfbe301cc83 "$C" \
+  2d455173d7336a63f5857ce03b35e30581266365c059946921ec563162b535b8 "$T" | sha256sum -c -)
 mkdir -p "$OUT/classes" "$OUT/headers" "$OUT/native" "$OUT/missing"
 "$JAVAC" --release 21 -encoding UTF-8 -Xlint:all -Werror -h "$OUT/headers" \
   -d "$OUT/classes" "$ROOT/$J" "$ROOT/$T"

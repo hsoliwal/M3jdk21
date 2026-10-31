@@ -18,9 +18,9 @@ WORKFLOW = ".github/workflows/m3-merged-atom-preservation-20261022.yml"
 HISTORICAL = "m3/docs/m3-m3jdk21-eclipse-recipe-handoff-20261022.tsv"
 SUCCESSOR = "m3/docs/m3-m3jdk21-eclipse-source-superset-20261025.tsv"
 LOCKS = "m3/file/src/main/java/jdk/m3/file/M3ResourceLocks.java"
-HISTORICAL_SHA = "d6ad65fcb48f9a80b71acda82baa4cfcfce9438c87eae207d346e71ce2c74bba"
+HISTORICAL_SHA = "6fe9a6a24325da41df44c2c06e6d828ec0823420a43b92015fd26c1819d45ac8"
 OLD_SHA = "18d05ae54945d4129c46d62e26551cbc4fd200b31c185e020b9ee6240fdc9599"
-NEW_SHA = "eb0bf36625effaffa147be1f650590dfa08627a5f6f52d105b8fbb201d6b5718"
+NEW_SHA = "bc671502c1500b60562240c1de2aa44776bf89a90ea32ab220ea646ed8491a6b"
 
 
 def embedded_program() -> str:

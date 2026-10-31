@@ -4,7 +4,7 @@
   "canonical_commit": "f5c6fc673b0c7dfa684f0b0c1e3f0c15bb57b14d",
   "recipe": "jdk.internal.m3.rewrite.M3IntegratedCollections20261021Recipe",
   "manifest_sha256": "ed0798ddef0c7d052cafb776a42098086d69d67466c47b97f8bb6c46fe46dae2",
-  "sdk_receipt_sha256": "d75fca594a063fbceed1bf38c0db91d04315dd6a793823f7938f4dd71921b26b",
+  "sdk_receipt_sha256": "00ce190f061aa1b89fab2c1d7df6dba1010ed9c182dc5a34851b9449a9453b5b",
   "files": [
     {
       "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
@@ -37,8 +37,8 @@
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3ArrayifiedIndexOps.java",
       "action": "MODIFY",
       "before_sha256": "42b3d760c9dfcf30eba72da193159e0ac6bd7ee06a3de292b132f49bd955ea77",
-      "after_sha256": "32c98a947abe7622767f15a2bdbf04b124953d6660c09e013457391f50b731c0",
-      "git_blob": "51eb75c877ecf4781bf0eaa90b0e970fe171fa6a",
+      "after_sha256": "417e9915c2b63945ede9a1f8d2deba9296be638fcddac9fe76b5c33ca35104f4",
+      "git_blob": "c32d222a996506c2dfa55bf32c27fda14d7d708d",
       "bytes": 8706,
       "source": "sdk-image-v3/files/m3/collections/src/main/java/jdk/m3/collections/M3ArrayifiedIndexOps.java"
     },
@@ -91,8 +91,8 @@
       "path": "m3/collections/src/test/java/jdk/m3/collections/M3ArrayifiedIndexContract.java",
       "action": "ADD",
       "before_sha256": null,
-      "after_sha256": "b9f5b9f559a09189fe39e3bebec0380e8e1c487d5cf7ba7a59707c7992a2a133",
-      "git_blob": "b6343fdc9ae572ae73163029adcd47d3ebce8aa9",
+      "after_sha256": "e34baf55390d673448920cd62e52e53cc4c6a45bf519fb9127bca850183a057d",
+      "git_blob": "2ac53eff5696660e58159f47e848383922f22086",
       "bytes": 12894,
       "source": "sdk-image-v3/files/m3/collections/src/test/java/jdk/m3/collections/M3ArrayifiedIndexContract.java"
     },
@@ -100,8 +100,8 @@
       "path": "m3/collections/src/test/java/jdk/m3/collections/M3ArrayifiedIndexContractTest.java",
       "action": "ADD",
       "before_sha256": null,
-      "after_sha256": "6d5d09c8b73c74bb0988c1059016628b20a9f399e125b7ba141248638d6d7d81",
-      "git_blob": "9f3dd83b0dc45230abf815c11f6853c3146cd643",
+      "after_sha256": "37bcafb98cda6d234182ec8e3f30fa3f20dc9fcd4ae8362713c1d4b40ee75d9f",
+      "git_blob": "a937dc0c70e45aa994f21ba7e4c9233de04030e0",
       "bytes": 381,
       "source": "sdk-image-v3/files/m3/collections/src/test/java/jdk/m3/collections/M3ArrayifiedIndexContractTest.java"
     },
@@ -109,8 +109,8 @@
       "path": "m3/collections/src/test/java/jdk/m3/collections/M3ArrayifiedIndexResourceProbe.java",
       "action": "ADD",
       "before_sha256": null,
-      "after_sha256": "20f00638d0d7c48e44f722b6908950549e37741353e450d0c05ef7a42ceb7c88",
-      "git_blob": "4134bcd8c54f93a487f705fdbad831ea8af50f89",
+      "after_sha256": "fbd6738db90d9395dc51ccba5299d37a15be103031b5d7ee314ea90f4df146ee",
+      "git_blob": "ae4c57150b0321eb37a201bc798b2ed3396fb83e",
       "bytes": 3540,
       "source": "sdk-image-v3/files/m3/collections/src/test/java/jdk/m3/collections/M3ArrayifiedIndexResourceProbe.java"
     }
@@ -122,7 +122,7 @@
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongBitmapFilteredSnapshot.java",
-      "sha256": "5e6340e15741b1e34c830ec69ab0f74eac1522a0b23a47238cf69ceb51fb206d"
+      "sha256": "0a9391c208f3abe7e99f8b4d7a5730b597688b4d23a4b735128247a0b78b1c01"
     },
     {
       "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java",
@@ -138,19 +138,19 @@
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java",
-      "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+      "sha256": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed"
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongCollection.java",
-      "sha256": "ea0c1aa0957f7bafd5cf2892cbe483c98d5772192f81cc3c467d53ab5c1c7531"
+      "sha256": "10a4309fb0be8401f2d32a33a777f339b9bd3118f698d5e74eaaf89c087f42f1"
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIterator.java",
-      "sha256": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201"
+      "sha256": "524ddc82c953ec7e205687fe8b6a1be9c343d41e1a70d221c1d20cba31843402"
     },
     {
       "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
-      "sha256": "8107ba8ba5f9d7519563eba9d20e76932dd077b2359f056b05ccd0a2d7d62e18"
+      "sha256": "9ed1244ef90a72845d580b8919c670760434a81cf6dfc48f3aecbc8483726c02"
     },
     {
       "path": "m3/native/include/m3_jni_core.h",

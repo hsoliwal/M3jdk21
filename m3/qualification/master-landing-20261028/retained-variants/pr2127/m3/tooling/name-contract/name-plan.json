@@ -1,7 +1,7 @@
 {
   "schema": "M3JDK21_NAME_CONTRACT_PLAN_V1",
   "authority": "m3/docs/name-mapping.json",
-  "authority_blob": "6d624946e43bd38ffc2d4554187f8615628eba3a",
+  "authority_blob": "24f512bb991e2d7254af3680b0e37cdde552883b",
   "operations": [
     {
       "mapping_id": "m3.counterpart.MIndexClass",

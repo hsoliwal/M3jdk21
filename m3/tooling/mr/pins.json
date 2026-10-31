@@ -6,8 +6,8 @@
   "donor_sources": [
     {
       "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexRegexAutomaton.java",
-      "git_blob_sha1": "28a5c10f1b0c859694da2c2ee880667f54ddf717",
-      "sha256": "c4cd9feb7645ccd1ef7fc66d165e33ee74fb9fbf6002d80518c228df47290b46"
+      "git_blob_sha1": "9116b56d55c7fd7ca63cf97f9bbc3eb369e50b7d",
+      "sha256": "904390520e960d5df8402e6ba72f752052169f089593a741e6878b8d480e7227"
     },
     {
       "path": "m3-openrewrite-recipes/recipes/rxm/proof/RXM_SUMMARY.tsv",

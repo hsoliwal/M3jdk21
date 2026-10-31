@@ -6,9 +6,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 FILES = {
     ROOT / "src/main/java/jdk/m3/collections/M3CountedBag.java":
-        "2334edd988b5512c9ef6b7092a8ab5ac99e36df09629661ae3779f7090c5bc54",
+        "ffd6a7340fd60377443252fc52954d740bc758edea4d0778877531cf63976bad",
     ROOT / "src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java":
-        "477135e13481942fef3b95b96a08d39c9c86dd92a649959c6d035b19b5784031",
+        "e8b8c5e455d4b46bb85b5c4ee6c8234643ca6e10f8314a468f455a80067a7f7d",
     ROOT / "src/main/native/collections/m3_index_mask_compactor.c":
         "8610e9fcedcc8eb698acbf3161bca8ea7d16194e61c66915f9e25fe47aae27f7",
 }

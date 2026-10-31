@@ -3,15 +3,15 @@
   "admissionCommit": "ab8633cc645487bc69bcd6919f328a0e1b5e40a9",
   "sourceOnly": true,
   "providers": {
-    "openrewriteAdapter": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-    "manifestKernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+    "openrewriteAdapter": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+    "manifestKernel": "78d5fb68f13872164973a8918cc7886c5f548bca"
   },
   "files": [
     {
       "path": "FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "97446958ac069384435bc40f9ae46364ba205d31",
+      "gitBlob": "c080d9ce7d468762b2a2cdd1bc9ff389549f646a",
       "bytes": 1493,
-      "sha256": "9e3b617c17ef54d2a249c8fcd69e557583a9dff21bddccdbb827003d6b1c568e"
+      "sha256": "98d883713c949a04a2ca45f0d84bd89ba89c17a531c7a44717df9ddc739fb030"
     },
     {
       "path": "README.md",
@@ -21,33 +21,33 @@
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
-      "gitBlob": "0b57cea44151abad7c11d22479b1817bcce6fd6e",
+      "gitBlob": "ce6a35d31db0acdedf761fe5aa3cc9b219e053af",
       "bytes": 2254,
-      "sha256": "dbe233c1a879d82c7a1c008c85c2dc6aa02653f1fefff33cecfbf384e365dfb3"
+      "sha256": "cfab1d2bf88335228f8cc84b4fd4fea65875b142f73f68cec42afd3f53ced616"
     },
     {
       "path": "pinned-engine/jdk/internal/m3/rewrite/M3BackportContractCurrentOwnerInverseRecipe.java",
-      "gitBlob": "702a2160b4478193cc2ee9ff228c10f6ebe3787a",
+      "gitBlob": "42939bbbed8a51c25cd4f5674aa1a35ab7dfc1b1",
       "bytes": 862,
-      "sha256": "962c94e1fb41a76c1cbd1c2fa564dd96f15bd89b1ed768383a7d8e68b346517b"
+      "sha256": "2ccb27edffd7db83445ac4fdf7e33bf425d8a54efe98d989c05f62ac9aeaae9f"
     },
     {
       "path": "pinned-engine/jdk/internal/m3/rewrite/M3BackportContractCurrentOwnerRecipe.java",
-      "gitBlob": "0739a5c4027b896eeebb98a20f7ad0f58d26f16a",
+      "gitBlob": "dd37367579363e685fa020861bcd7ec9e905bb46",
       "bytes": 855,
-      "sha256": "5975fb63709acee43caf510f245f3aaf9675c8d6a1b887780bd4b237d28c5ec4"
+      "sha256": "0c2ab7f743667bbaaca8c16efa55e9ccd7f3c8ca1c9a2cec9cdd88ac49c5ac46"
     },
     {
       "path": "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
-      "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "gitBlob": "78d5fb68f13872164973a8918cc7886c5f548bca",
       "bytes": 10964,
-      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e"
     },
     {
       "path": "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
-      "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "gitBlob": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
       "bytes": 5187,
-      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
+      "sha256": "300a520ec9d273922d1edbdf5442e5faf825c47e8e3df7febf4baa2f39945401"
     },
     {
       "path": "pom.xml",
@@ -57,9 +57,9 @@
     },
     {
       "path": "src/main/resources/META-INF/rewrite/backport-contract-current-owner-20261019.yml",
-      "gitBlob": "5f3ad6e2aacd9fdb7a216cdd582ef12db204cde9",
+      "gitBlob": "0a3078ac37fc3ed3e43060c807ef51e3a486d767",
       "bytes": 804,
-      "sha256": "33f39511c2f9a7cd5b76eb38ea50cc7c656886d5472088435107f98ea86baca8"
+      "sha256": "2bcf37aeb72a94b69812ebf688d424fe5a7e6fee8088719904daca8b3f823cc6"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/backport-contract-current-owner-20261019/forward/before/m3/backports/BACKPORT_EXECUTION_WAVES.md",
@@ -267,15 +267,15 @@
     },
     {
       "path": "src/test/java/jdk/internal/m3/rewrite/M3BackportContractCurrentOwnerRecipeTest.java",
-      "gitBlob": "ab67ffb13b80749990754e2771c7891f5f7a2d65",
+      "gitBlob": "ec369dba4fd3c0a842fb80bd802e6745fee7524e",
       "bytes": 16186,
-      "sha256": "ef1646275d74ed5c2254d07a2bc12ed3e2473d2946bc54bee60d253f31decccc"
+      "sha256": "e84ab824ac6b145a5285c455453b599b1de855bdce2b8effd3569872f5917eb5"
     },
     {
       "path": "verify.py",
-      "gitBlob": "c1b7cd322cbd715017704896fae1cd91749c8970",
+      "gitBlob": "8ad669b3954a0958820f6962de2e55f6b1988bc2",
       "bytes": 25355,
-      "sha256": "e38ea432598fa1d0da3489395f7a55d6d03325cb71bd5eb9459d7fe913fb813c"
+      "sha256": "94ee135f48914c7dd962ffafe3e146d3ac292add0ca322f5e8c7eb52847de9d4"
     }
   ]
 }

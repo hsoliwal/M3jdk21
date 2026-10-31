@@ -25,11 +25,11 @@
     },
     {
       "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImporter.java",
-      "sha256": "df34e659a8acd1dd926ad0e28aa33903231128b73f74658b1b296aca455e0b9a"
+      "sha256": "3f2993ed0da9dca3efaa1317386556b165cb61db0c8d8469dde1931bfc3a2127"
     },
     {
       "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportManifest.java",
-      "sha256": "d497f52ebe91e6b97efb3708ff579356f05b65f1641a975c2b18215707ce3d98"
+      "sha256": "56c56adede1ceba3abc8cc1591d945f624f08d95084442a0f7968446c012b125"
     },
     {
       "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlan.java",
@@ -37,7 +37,7 @@
     },
     {
       "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlanCli.java",
-      "sha256": "6dc4b9bc900484a41b7327d9fd353e9e0e618360d71b4c3873583ce66d0e306c"
+      "sha256": "f2de5997c6ce5c3a0b79bcb0fff8c18cdb0d6d33159fecd5d4aa3b3430301af0"
     },
     {
       "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\test\\java\\com\\m3\\synexia\\importer\\SynexiaCanonicalFamilyPolicyTest.java",
@@ -45,7 +45,7 @@
     },
     {
       "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\test\\java\\com\\m3\\synexia\\importer\\SynexiaImporterTest.java",
-      "sha256": "22442dc8d8fce2b032c6da1261a53bbdbc945afdbcfdf97d940c1da5f4c18ae0"
+      "sha256": "8f9b21d5efc7f7407d8f0dafe24c67d7c5f337310ce2ec5b47d54a4fb130071b"
     },
     {
       "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\test\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlanTest.java",
@@ -53,7 +53,7 @@
     },
     {
       "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\test\\java\\com\\m3\\synexia\\importer\\SynexiaSeedSnapshotTest.java",
-      "sha256": "1338decb0d923201a5c9677c27c67f28bc5927ff7f2544d0beaf80108b2b7637"
+      "sha256": "92a37e6eb123b0c2018e055db41f2e85ebf07a008d5c72fe4a2b3c23c8275f1d"
     }
   ],
   "sourceAfter": [
@@ -67,11 +67,11 @@
     },
     {
       "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImporter.java",
-      "sha256": "df34e659a8acd1dd926ad0e28aa33903231128b73f74658b1b296aca455e0b9a"
+      "sha256": "3f2993ed0da9dca3efaa1317386556b165cb61db0c8d8469dde1931bfc3a2127"
     },
     {
       "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportManifest.java",
-      "sha256": "d497f52ebe91e6b97efb3708ff579356f05b65f1641a975c2b18215707ce3d98"
+      "sha256": "56c56adede1ceba3abc8cc1591d945f624f08d95084442a0f7968446c012b125"
     },
     {
       "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlan.java",
@@ -79,7 +79,7 @@
     },
     {
       "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlanCli.java",
-      "sha256": "6dc4b9bc900484a41b7327d9fd353e9e0e618360d71b4c3873583ce66d0e306c"
+      "sha256": "f2de5997c6ce5c3a0b79bcb0fff8c18cdb0d6d33159fecd5d4aa3b3430301af0"
     },
     {
       "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\test\\java\\com\\m3\\synexia\\importer\\SynexiaCanonicalFamilyPolicyTest.java",
@@ -87,7 +87,7 @@
     },
     {
       "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\test\\java\\com\\m3\\synexia\\importer\\SynexiaImporterTest.java",
-      "sha256": "22442dc8d8fce2b032c6da1261a53bbdbc945afdbcfdf97d940c1da5f4c18ae0"
+      "sha256": "8f9b21d5efc7f7407d8f0dafe24c67d7c5f337310ce2ec5b47d54a4fb130071b"
     },
     {
       "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\test\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlanTest.java",
@@ -95,7 +95,7 @@
     },
     {
       "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\test\\java\\com\\m3\\synexia\\importer\\SynexiaSeedSnapshotTest.java",
-      "sha256": "1338decb0d923201a5c9677c27c67f28bc5927ff7f2544d0beaf80108b2b7637"
+      "sha256": "92a37e6eb123b0c2018e055db41f2e85ebf07a008d5c72fe4a2b3c23c8275f1d"
     }
   ],
   "sourceBytesUnchangedDuringExecution": true,

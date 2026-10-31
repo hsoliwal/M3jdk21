@@ -33,9 +33,9 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
-          test "$(git hash-object m3/collections/src/main/native/collections/m3_span_index_jni.c)" = 'ebfc70cb030aa62a0197caf6dcb4990a37820e45'
+          test "$(git hash-object m3/collections/src/main/native/collections/m3_span_index_jni.c)" = '915aef08738b72c605187cf8100c5cd92a21740d'
           test "$(git hash-object m3/collections/src/test/native/m3_span_page_cursor_contract.c)" = '3025ce6129fbba4e4b97291cb82cd61e9a655c64'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3SpanIndexSelfTest.java)" = '521a80c189cb12722d2836d7d413a2e398ff72c5'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3SpanIndexSelfTest.java)" = 'da14a54e519d3d8c41db586d8a489d14b5454b0e'
       - name: Compile and run real production C page helper and oracle under UBSan
         shell: bash
         run: |

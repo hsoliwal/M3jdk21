@@ -48,7 +48,7 @@ public final class M3ArrayStorageOracle implements AutoCloseable {
 
 	private static final Map<String, String> SOURCE_HASHES = Map.of(
 			"jdk.m3.collections.spring.CompositeIterator",
-			"0c80731fd927bcaf3b6f3969974b577c1e02492d8639984a598c3f307663ab5e");
+			"d2a7208fe21b34f6f735e1e644aa5e52df248cfa9cb38c40e79e15cea56ff0f2");
 
 	private final URLClassLoader loader;
 

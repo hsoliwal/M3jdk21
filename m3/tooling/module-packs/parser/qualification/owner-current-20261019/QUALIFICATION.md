@@ -41,7 +41,7 @@ The integrated image passes six compiler suites: shared frontend (70 checks), so
 
 All four reviewed production sources and their Java tests are byte-identical to this integration's source seals. The final build.py has a later postimage, qualified by the current ordered chain. The current pack also adds the upstream ingress/index owners and fixtures absent from the earlier integrated parser pack. These evidence roles are kept separate; the old integrated artifact is not labeled as the entire final current pack.
 
-The integrated receipt SHA-256 is `6755b629e5a77e4218978820e5a2d0e9e2c266ea68c4a46ae543c3fc8f0fe605`. Its linked `lib/modules` SHA-256 is `d852163d8569ccfe6887615d0be84b6803cb5f463fc4f2f9e0638daf5a62d84d`.
+The integrated receipt SHA-256 is `d66e536cf262cca7787116a7015d1ece8e735c5e0874d329e907442f4bb87c5c`. Its linked `lib/modules` SHA-256 is `d852163d8569ccfe6887615d0be84b6803cb5f463fc4f2f9e0638daf5a62d84d`.
 
 ## Measured tradeoffs
 

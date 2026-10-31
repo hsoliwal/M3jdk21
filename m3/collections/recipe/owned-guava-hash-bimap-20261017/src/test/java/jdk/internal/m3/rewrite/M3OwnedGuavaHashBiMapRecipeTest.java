@@ -47,9 +47,9 @@ final class M3OwnedGuavaHashBiMapRecipeTest {
     private static final String DENSE="m3/collections/implementations/guava/src/test/java/jdk/m3/collections/guava/InverseForcePutDenseOrderDiscriminator.java";
     private static final String COMMON="m3/collections/implementations/guava/src/test/java/jdk/m3/collections/guava/M3HashBiMapCommonSelfTest.java";
     private static final List<String> FROZEN_HASHES=List.of(
-            "e5aca4438e0687af0aa6737a96acc60c50955722e50971a272bee9a98e443987",
-            "66b8bdc1cb45b9994c615abc2c0a32dfd6a774f4b5eb78d20df4b82abbb35461",
-            "bf5c83eb152ce2c2f3f8dc6bcda071d7b93a011189efe152c349786dbdaa443e");
+            "f1cbb5dd4384c192f5f4066df1d15547a7edc3bc145a446ee3140faa129949b0",
+            "1b39dff7fb36a899b1862a5eb2246e7e53b5ba92666362c3a1b4b1500cdd8123",
+            "44c19fbdb7485c0251a76eaae6070fb3292eb5f9aff6cadefae113fd11ff0285");
     private static final List<Integer> FROZEN_BYTES=List.of(52125,12285,54933);
     private static final String UNRELATED="unrelated.txt";
     private static final String UNTOUCHED="preserve exactly\n";

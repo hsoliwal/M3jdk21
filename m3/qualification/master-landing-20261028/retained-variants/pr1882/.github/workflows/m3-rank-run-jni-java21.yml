@@ -38,8 +38,8 @@ jobs:
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java)" = '3617962b12e314cc60670171c923b4bbca78da48'
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java)" = '6a8cf91eb78b6e77fb53b73d55cea0a214a33dd7'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = 'fab1b17dc529b81a401dd1d3d77fcb8035dc33c7'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRunStatisticsContract.java)" = 'c2b46e696d6a55b03632651d4d43d4f05e398bb2'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRunStatisticsTest.java)" = '7d1083709ae5a7107003752157c002295908b53a'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRunStatisticsContract.java)" = 'fcca9bc86c908767057c3baa740aad5a2c762063'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRunStatisticsTest.java)" = '09b24e2f4c8c763c4d475f62c8d95205190ff2a9'
       - name: Compile actual original rank source and source-owned executable differential
         shell: bash
         run: |

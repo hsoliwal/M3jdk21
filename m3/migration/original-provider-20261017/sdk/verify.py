@@ -11,7 +11,7 @@ CRATE = "m3-original-mapping-provider-20261017"
 RESOURCE = "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/" + CRATE + "/"
 SUITE = "jdk.m3.rewrite.backport.M3OriginalCliProviderRecipeTest"
 BASELINE_MANIFEST = RESOURCE + "baseline-pre.tsv"
-BASELINE_MANIFEST_SHA = "11d69c05d4e4dd0ef27c8a2195827c62b5dd48a49bef34943f4c6a11fbc4899c"
+BASELINE_MANIFEST_SHA = "1fd2558fdd93e7f1860a225dacfc7118452bd88498d9d272946110c0260a4341"
 BASELINE_FILES, BASELINE_BYTES = 55, 795620
 METHODS = ["allMutableStatesBothOrdersAndFixedPoint","exactRecipeResultsDeliveredToDeclaredOutput","everyUnknownTargetRefusesAfterItsPositiveBaseline","everyDuplicateTargetRefusesAfterItsPositiveBaseline","everyRequiredTargetMissingRefusesAfterItsPositiveBaseline","everyNonPlainTextTargetRefusesAfterItsPositiveBaseline","everyChangedAfterScanTargetRefusesAfterItsPositiveBaseline","sealedManifestPathSafetyAndConvergedIdentity","deliveryPrechecksForeignContentsAndAllSymlinkComponents","currentMappingReconciliationPreservesNewFieldsAndReviewedMigration","frozenPreBaselineRemainsIndependentOfInstalledPost"]
 def digest(data):
@@ -53,7 +53,7 @@ def workflow_contexts(data):
         if "runner." in line and len(line)-len(line.lstrip(" "))<10:
             raise ValueError("runner context outside the supported step scope")
 def validate_packet(pins, files):
-    if pins.get("schema")!="M3_ORIGINAL_MAPPING_PROVIDER_SDK_V1" or pins.get("snapshotProviderGitBlob")!="4a38e39d0755462d40c2b22548b87abde938ea0b":
+    if pins.get("schema")!="M3_ORIGINAL_MAPPING_PROVIDER_SDK_V1" or pins.get("snapshotProviderGitBlob")!="73779dee8c80a0913b88fff17637ed3f44b33ea3":
         raise ValueError("SDK authority drift")
     rows=pins.get("files",[])
     names=[r["path"] for r in rows]
@@ -88,7 +88,7 @@ def validate_packet(pins, files):
     if sum(r["before"]=="ABSENT" for r in manifest)!=4 or sum(r["before"] not in ("ABSENT",r["after"]) for r in manifest)!=2:
         raise ValueError("expected four additions and two exact changes")
     workflow=next(row for row in manifest if row["path"]==".github/workflows/m3-original-mapping-provider-qualification.yml")
-    if workflow["before"]!="faf6a553557508404de8b644ae7ff17ffaf45c74d5b0cb6f3df86c583a0b2bc0":
+    if workflow["before"]!="426f85c348a3bbff2ac767980e1cba3a205f624d3f2ca5b85cdcb52dc68b8751":
         raise ValueError("workflow must change from its exact qualified preimage")
     workflow_contexts(files[RESOURCE+workflow["resource"]])
     frozen_pre(files)

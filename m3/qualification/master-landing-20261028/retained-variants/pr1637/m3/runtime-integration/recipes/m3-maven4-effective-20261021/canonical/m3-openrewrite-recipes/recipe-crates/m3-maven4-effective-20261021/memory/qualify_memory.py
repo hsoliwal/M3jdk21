@@ -33,7 +33,7 @@ def artifact(relative):
     return {'path': relative, 'sha256': sha(path)}
 
 
-assert sha(CRATE / 'SOURCE_SEALS.json') == 'fb401eeb0467c16ffa4d95d8de2a6c539775f096db81a7a7ac4fc717ad6e74b9'
+assert sha(CRATE / 'SOURCE_SEALS.json') == 'a076d8c7c82542897aef843b640cc88e762bbf088128c4ca34c262db4c4dba27'
 passed = json.loads((CRATE / 'proof/sdk-002-offline/RESULT.json').read_text())
 failed = json.loads((CRATE / 'proof/sdk-001-offline/RESULT.json').read_text())
 assert passed['status'] == 'PASS' and failed['status'] == 'FAIL'

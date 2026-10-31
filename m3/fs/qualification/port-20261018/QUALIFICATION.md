@@ -120,7 +120,7 @@ the generated receiver, the main commands are:
 mvn -B -ntp -f m3/fs/pom.xml install
 mvn -B -ntp -f m3/eclipse/filesystem/pom.xml \
   -Dm3.fs.native.path="$PWD/m3/fs/target/native/libm3fs.so" clean verify
-python3 m3/compatibility/check_synexia_full_borrow_receiver.py
+python3 m3/compatibility/check_m3_full_borrow_receiver.py
 ```
 
 The module [README](../../README.md), Eclipse

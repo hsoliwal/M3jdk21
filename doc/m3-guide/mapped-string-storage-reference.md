@@ -13,7 +13,7 @@ These owners are internal implementation surfaces, not a newly exported JDK API,
 
 The [current runtime guide](../../m3/runtime-integration/README.md), [bootstrap ownership reference](bootstrap-string-ownership.md), [JNI ingress/acquire/release guide](../../m3/docs/mindex-jni-string-ingress.md) and [native build matrix](../../m3/docs/native-build.md) retain their responsibilities. The older [backing design](../mindex-string-backing.md) labels its first-stage narrative as historical; its statement that ordinary `String` is unchanged must not be applied to the later integrated runtime.
 
-The [porting invariant](../../m3/docs/m3jdk21-porting-invariant.md), [naming map](../../m3/docs/name-mapping.json), [full-family pin](../../m3/compatibility/synexia-full-family-pin.tsv), [current receiver plan](../../m3/synexia-import/current-full-borrow/README.md) and [borrowing policy](../../SYNEXIA_APACHE_BORROWING_POLICY.md) remain authoritative. Receiving order is String → arrays → collections → AST/compiler → remaining families. This page neither advances that order nor imports private donor bodies. Public target source, per-file OpenJDK/third-party rights and existing provenance remain unchanged.
+The [porting invariant](../../m3/docs/m3jdk21-porting-invariant.md), [naming map](../../m3/docs/name-mapping.json), [full-family pin](../../m3/compatibility/m3-full-family-pin.tsv), [current receiver plan](../../m3/m3-import/current-full-borrow/README.md) and [borrowing policy](../../M3_APACHE_BORROWING_POLICY.md) remain authoritative. Receiving order is String → arrays → collections → AST/compiler → remaining families. This page neither advances that order nor imports private donor bodies. Public target source, per-file OpenJDK/third-party rights and existing provenance remain unchanged.
 
 ### Four different kinds of coordinate
 
@@ -299,7 +299,7 @@ The original 24-file P03 package inventory remains unchanged. This increment dee
 [jni-critical]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/src/hotspot/share/prims/jni.cpp#L2767-L2883
 [test-backing]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/test/jdk/java/lang/String/M3MappedStringBackingTest.java
 [test-lane]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/test/jdk/jdk/internal/mindex/M3Lane28Test.java
-[test-cb]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/test/jdk/jdk/internal/mindex/cb/com/m3/cb/CBProbe.java
+[test-cb]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/CBProbe.java
 [test-native]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/runtime-integration/tests/MappedNativeProbe.java
 [run-focused]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/runtime-integration/run-focused.sh
 [two-process]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/runtime-integration/two-process.py

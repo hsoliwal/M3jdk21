@@ -14,7 +14,7 @@ under its original immutable attempt directory.
 
 | Receiving owner | Change | Preserved contract |
 | --- | --- | --- |
-| `m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java` | Declare the existing implicit `public Builder()` explicitly. | All nine public class descriptors and the complete Builder executable disassembly are identical. The seven field initializers remain in the same constructor order. Debug line-table identity is not claimed. |
+| `m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java` | Declare the existing implicit `public Builder()` explicitly. | All nine public class descriptors and the complete Builder executable disassembly are identical. The seven field initializers remain in the same constructor order. Debug line-table identity is not claimed. |
 | `m3/tooling/module-packs/nlp-search/current-source-lock.json` | Update the GVAS and Builder-owner hashes; add explicit entries for the already received BigString and RopeTextIndex sources. | All other metadata, source roots, schema and guards remain unchanged. The closed manifest has 145 entries, including the exact 27-file text module closure. |
 
 The initial source-lock refusal was correct: its stored GVAS hash was stale and

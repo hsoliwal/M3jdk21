@@ -31,9 +31,9 @@ OLD_METHODS = {
     "test_manifest_superseded_hashes_are_current_exact_sources",
     "test_missing_or_drifted_replacement_owner_refuses_without_recreating_history",
 }
-ENGINES = {"M3GpuToolJoinRecipe": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-           "M3GpuToolJoinManifest": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
-           "M3CharcopyCurrentSuccessorRecipe": "b50c9e1950ae73d8ddaa4b50c7e167c36869ab8a"}
+ENGINES = {"M3GpuToolJoinRecipe": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+           "M3GpuToolJoinManifest": "78d5fb68f13872164973a8918cc7886c5f548bca",
+           "M3CharcopyCurrentSuccessorRecipe": "ae0a423270f2654a5ea5e8c2c8140c291091298e"}
 FALSE_GATES = ("originalPrivateTyped3bdeeQualified", "targetJavaCompiled", "matchedJdkQualified",
                "jniQualified", "runtimeBehaviorQualified", "performanceRetentionQualified",
                "runtimeApplied", "phaseAdvanced", "allCiGreen")

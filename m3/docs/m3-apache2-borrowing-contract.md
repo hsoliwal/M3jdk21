@@ -25,7 +25,7 @@ The borrowing rule is consumer-only for reusable M3 code.
   improvement before the dependent M3JDK21 promotion is considered complete.
 
 The machine-readable target policy is
-`m3/compatibility/synexia-recipe-home-policy.tsv`. The canonical source-side map is
+`m3/compatibility/m3-recipe-home-policy.tsv`. The canonical source-side map is
 `.m3/m3jdk21-synexia-borrowing.tsv` in `hsoliwal/com.synexia`.
 
 ## Frozen migration residue
@@ -35,7 +35,7 @@ their current M3JDK21 source bytes are frozen as migration residue.
 
 The machine-readable seal is:
 
-`m3/compatibility/synexia-canonical-residue-gitblobs.tsv`
+`m3/compatibility/m3-canonical-residue-gitblobs.tsv`
 
 It records the exact Git blob SHA-1 for every current reusable residue implementation under:
 
@@ -91,7 +91,7 @@ provenance rules; the receiver never claims that an Apache-2.0 label relicenses 
 ## Canonical Apache handoff manifest pin
 
 The current source-side custody contract is pinned by
-`m3/compatibility/synexia-apache-handoff-pin.tsv`. It binds the exact Synexia repository, PR,
+`m3/compatibility/m3-apache-handoff-pin.tsv`. It binds the exact Synexia repository, PR,
 commit, `.m3/apache-handoff.tsv` SHA-256, Apache-2.0 identity and copyright notice.
 
 The pinned Synexia custody PR is merged, but its canonical DAG proof is still pending, so the target pin is deliberately
@@ -125,5 +125,5 @@ The candidate explicitly binds:
 - generic data structures/precompute/JNI mechanics -> Synexia canonical owners;
 - java.lang.String/HotSpot/JIT/GC/CDS/JVMTI/JNI product integration -> M3JDK21 target owners.
 
-See `m3/compatibility/SYNEXIA_M3INDEX_RECEIVER.md` and
-`m3/compatibility/synexia-m3index-ownership-pin.tsv`.
+See `m3/compatibility/M3_M3INDEX_RECEIVER.md` and
+`m3/compatibility/m3-m3index-ownership-pin.tsv`.

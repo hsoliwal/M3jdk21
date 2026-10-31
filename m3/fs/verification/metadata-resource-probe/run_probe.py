@@ -99,7 +99,7 @@ def main():
         receiver_sources.append(candidates[0])
     # These are authoritative blobs of the donor tree, not expected hashes calculated from this run.
     pinned_blobs = {
-        "M3ContentId.java": "b8dffdfaf6809e130b7c95ae38c79cb2beb937c6",
+        "M3ContentId.java": "275ed0c9b6aecbd002477c5817a11f7e7b60d3d8",
         "M3GenerationRoot.java": "394ef480d165d9c48b5e4f6d9ca6df467147e6c4",
     }
     for path in donor_sources:

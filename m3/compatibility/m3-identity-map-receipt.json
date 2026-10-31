@@ -38,21 +38,21 @@
   "publicJdkReplacement": false,
   "targets": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectIdentityMap.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ObjectIdentityMap.java",
       "before": "ABSENT",
-      "after": "0e6e12dd48b62b8606de078e25a0b3a75b6d741d11bf9b5927d730d2f0110bd3",
+      "after": "5a842b880227b9bb63bf38554fc6114000558ac9c4483086d4cd43010f26ffd0",
       "resource": "00-M3ObjectIdentityMap.java.txt"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectIdentitySet.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ObjectIdentitySet.java",
       "before": "ABSENT",
-      "after": "6d6b6f58113a44438c721cd645efa45ac6c0f63842b164ebb33a94dce4066e3d",
+      "after": "b9859f4acdf3e138c1029123a3f971b04c43d98a6be28dddd2f879ff481c39e3",
       "resource": "01-M3ObjectIdentitySet.java.txt"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3ObjectIdentityTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3ObjectIdentityTest.java",
       "before": "ABSENT",
-      "after": "9d7a4f6d385ef013f868f5a1984f28e73537952eacc81f5854611ecaafc98746",
+      "after": "a7292bad766442e69c19e8dba0e20c5e232ea8bd961bcdd2ebb2789194188844",
       "resource": "02-M3ObjectIdentityTest.java.txt"
     }
   ],

@@ -35,8 +35,8 @@ jobs:
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java)" = '99872c10902c15cbbf143dd158a6bcf6736465e1'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = 'e7ed7e9a3a9eb71e1970d8b4f023147afb8e7543'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankWindowIntersectionContract.java)" = 'd5e611897131123061c5e40886be1cb672c58f0a'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankWindowIntersectionTest.java)" = 'c147f3f3c2376407bd95fe138c5eb7f2d07b1458'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankWindowIntersectionContract.java)" = '22754302e4dccd581a6a55b5718482d92dbe3362'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankWindowIntersectionTest.java)" = 'a3ceef59e5bbd72ca791dcba128381095c2d9286'
       - name: Compile existing Java rank owner plus independent LeetCode oracle
         shell: bash
         run: |

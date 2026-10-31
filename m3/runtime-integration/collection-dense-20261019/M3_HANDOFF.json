@@ -65,8 +65,8 @@
     {
       "path": "m3/tooling/collection-dense-20261019/m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/CATALOGUE.tsv",
       "source_path": "m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/CATALOGUE.tsv",
-      "source_git_blob": "20f76d46d83d3d69af145e0cace76388a140056e",
-      "sha256": "e51a3ec3a72ca0ccfa2dfed2820dd1d1c0b837612c75d1b03bb17bc4c6110839",
+      "source_git_blob": "57c306227c832aa60816c5fdf8c8fdbc8e2b2bbf",
+      "sha256": "c25dc73437861cddd22b776dd7f4a6c129c4b1f3e3dcaaa703a2171e150da7ca",
       "role": "PINNED_NONCANONICAL_AUTHORING_MIRROR"
     },
     {
@@ -107,8 +107,8 @@
     {
       "path": "m3/tooling/collection-dense-20261019/m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/SOURCE_PINS.json",
       "source_path": "m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/SOURCE_PINS.json",
-      "source_git_blob": "612c7ecdfc5cdde3ea6cc34c962762a90d2cb833",
-      "sha256": "14b25757dbc0e8956a0e5be7b06d40bbbd285466377041edb8b8a200c0b29e1e",
+      "source_git_blob": "807b79dde8ddb321d7edb702fc1eefa1faa229b9",
+      "sha256": "9503b9390f6e33341952662525c44cccaeb5a1ea8c15762cb07e9627499300cc",
       "role": "PINNED_NONCANONICAL_AUTHORING_MIRROR"
     },
     {
@@ -128,8 +128,8 @@
     {
       "path": "m3/tooling/collection-dense-20261019/m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/evidence/INITIAL_INVENTORY.json",
       "source_path": "m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/evidence/INITIAL_INVENTORY.json",
-      "source_git_blob": "e1059f29436a4d4adf57a55807c0b650fcaf4934",
-      "sha256": "4ee9fd632a05499a4a1803010159af7b52aca4404d26b52c93efe1fc3333acdb",
+      "source_git_blob": "94b6b1b17ccbce1c58eecdfd974762accadf739a",
+      "sha256": "51cf4e678d634953b6a178856d1a5b4b9a5370608b6cd8effa1b6e004495899e",
       "role": "PINNED_NONCANONICAL_AUTHORING_MIRROR"
     },
     {
@@ -3362,8 +3362,8 @@
     {
       "path": "m3/tooling/collection-dense-20261019/m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/pom.xml",
       "source_path": "m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/pom.xml",
-      "source_git_blob": "315fe3e95ef2df44c3a181d41aee104d438f3789",
-      "sha256": "bb49bee5b984bd861be332eef30b3665328d6eb61ea3a6554b8acfeb3096f047",
+      "source_git_blob": "faf228a24914b01fa2139e275f31f8c2ff7afe38",
+      "sha256": "442beac92137cd919ccd6e7827840b4624ab0e4141d1e1ab426885dac06ffdbd",
       "role": "PINNED_NONCANONICAL_AUTHORING_MIRROR"
     },
     {
@@ -3411,8 +3411,8 @@
     {
       "path": "m3/tooling/collection-dense-20261019/m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/proof/inputs/m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
       "source_path": "m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/proof/inputs/m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
-      "source_git_blob": "ca048a00bad895ea79495f54cdd5a39b2751adac",
-      "sha256": "f123ae356ffdd5df1523205dc5f1f48e6daf461b8a6f908a9870e348e80f5e7f",
+      "source_git_blob": "ac6127ea73ed1b2f9e02413e8316a10494c5c006",
+      "sha256": "5bf447216af55a51b73c275182af891c1ded5c2b427fa6856139731078d2ef8c",
       "role": "PINNED_NONCANONICAL_AUTHORING_MIRROR"
     },
     {
@@ -3495,15 +3495,15 @@
     {
       "path": "m3/tooling/collection-dense-20261019/m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/proof/qualify.py",
       "source_path": "m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/proof/qualify.py",
-      "source_git_blob": "d411ab646272aabbd51a2a9f78cc7a3e0c9417e7",
-      "sha256": "7856c856470e0810e26bfb7e649b75a339c5560a1cf2b42be56522908107c32e",
+      "source_git_blob": "9c63cc4f92bcf2bbefdf529eb7383e8cd19baebe",
+      "sha256": "3c39ee8c4590e4da22be6540aef4fccbf6fe4453e24fda50c65949399a473dcb",
       "role": "PINNED_NONCANONICAL_AUTHORING_MIRROR"
     },
     {
       "path": "m3/tooling/collection-dense-20261019/m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/resources/META-INF/rewrite/m3jdk-collection-dense-20261019.yml",
       "source_path": "m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/resources/META-INF/rewrite/m3jdk-collection-dense-20261019.yml",
-      "source_git_blob": "80717ee628af035520466edbef522fec83d5ad78",
-      "sha256": "ff00728b1b3c1fd1242080cdca7f5814b0ea326af61d3299421d7b41e937f2c8",
+      "source_git_blob": "e7a9806fcbe3b271a1a4ce7883c2d027631c2716",
+      "sha256": "fe3a7dc213209b609c479ab3c4a260573ed314d7f5adb26093821114219b44c4",
       "role": "PINNED_NONCANONICAL_AUTHORING_MIRROR"
     },
     {
@@ -3572,8 +3572,8 @@
     {
       "path": "m3/tooling/collection-dense-20261019/m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/src/test/java/jdk/internal/m3/rewrite/M3CollectionDenseRecipeTest.java",
       "source_path": "m3-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/src/test/java/jdk/internal/m3/rewrite/M3CollectionDenseRecipeTest.java",
-      "source_git_blob": "6631a70a26357c650ecd7741b2c1bd982cc5e13f",
-      "sha256": "1c1f0c8b361f482fc3eaa0e2e8faba7e4f7b00471b4dcf355de17df4b7d14028",
+      "source_git_blob": "777787563e59f201786a4349efff7e4c705ed90b",
+      "sha256": "cc22790ec36212d485d3d6b5370868614bcf3a5d7afb1505858b307c1883aa78",
       "role": "PINNED_NONCANONICAL_AUTHORING_MIRROR"
     },
     {

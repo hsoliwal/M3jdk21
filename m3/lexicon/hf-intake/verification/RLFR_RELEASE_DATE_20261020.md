@@ -11,7 +11,7 @@ https://lexical-systems.atilf.fr/en/downloads/
 The resource remains REFERENCE_ONLY. No corpus is ingested or relicensed.
 
 ## Exact source receipt
-- Path: `m3/lexicon/hf-intake/src/test/resources/com/m3/lexicon/hf/language-resource-discovery.tsv`
+- Path: `m3/lexicon/hf-intake/src/test/resources/jdk/m3/lexicon/hf/language-resource-discovery.tsv`
 - Input Git blob: `ed22aa162eb90e038b9be9b4e30624b704d31a91`
 - Corrected Git blob: `4d20312d8e1c0f3e8eb0e514b1921ee46ef9ff90`
 - Only RL-fr column 4 changes, by inserting `(last updated 7 March 2025)`.

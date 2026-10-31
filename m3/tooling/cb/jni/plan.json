@@ -35,7 +35,7 @@
   "guards": [
     {
       "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+      "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795"
     }
   ],
   "plan_sha256": "10c638657847095c095a99fc5f2ca7737633e681167d338a8c556a8a5d542978"

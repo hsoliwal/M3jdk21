@@ -7,7 +7,7 @@ not treated as one checkout at one revision.
 
 - repository: `hsoliwal/com.synexia`
 - revision: `62aea466cf2f2bb4668f38aad9343d59525965b5`
-- manifest: `m3/synexia-import/synexia-seed-export.tsv`
+- manifest: `m3/m3-import/m3-seed-export.tsv`
 - manifest root: `ca570e874586c327f98e3982bf9e62a404e87e266b3195df69be06a0b5111ef6`
 
 This snapshot contains the established convergence/JNI/OpenRewrite seed rows and remains immutable.
@@ -20,9 +20,9 @@ This snapshot contains the established convergence/JNI/OpenRewrite seed rows and
 - export manifest:
   `synexia-openrewrite-recipes/src/main/resources/META-INF/m3/jdk-a3-recipe-export.tsv`
 - export manifest Git blob:
-  `8a3e3d6e802e95dbcc7b0bf83a347887b02d6717`
+  `2c51473e7adb6fa50fb0031ac6314a050b90feec`
 - target provenance:
-  `m3/synexia-import/intakes/jdk-a3-public-export-20261007/SOURCE_PROVENANCE.tsv`
+  `m3/m3-import/intakes/jdk-a3-public-export-20261007/SOURCE_PROVENANCE.tsv`
 
 The eight manifest-listed Java sources are mirrored byte-identically below the corresponding
 `m3/vendor/synexia/synexia-openrewrite-recipes/` paths. The target-local module
@@ -65,8 +65,8 @@ OpenJDK source outside `m3/` remains under its existing license regime.
 
 - repository: `hsoliwal/com.synexia`
 - revision: `857c4cc0ddeb73e5ea5269a1d0ef2d30057dcfa8`
-- provenance: `m3/synexia-import/intakes/jni-array-address-receiver-20261007/SOURCE_PROVENANCE.tsv`
-- M3 owner map: `m3/synexia-import/intakes/jni-array-address-receiver-20261007/TARGET_MAP.tsv`
+- provenance: `m3/m3-import/intakes/jni-array-address-receiver-20261007/SOURCE_PROVENANCE.tsv`
+- M3 owner map: `m3/m3-import/intakes/jni-array-address-receiver-20261007/TARGET_MAP.tsv`
 
 The selected `synexia-indexstring` files are exact Apache-2.0 custody below the mirrored source
 paths. This is not a complete compilable module or JDK runtime dependency. The original module
@@ -76,4 +76,4 @@ recorded in the intake map; OpenJDK `java.base` files are not relicensed.
 
 ### Third-party JNI ownership license
 
-The mirrored `shared_arrays.cpp` references the external `jni/ownership.hpp` wrapper. This intake does not copy that header. It preserves the exact upstream ISC license from `mapbox/jni.hpp@57ca9ed4bbeb22ed8d20a55063dcaa217ba47f42` at `m3/vendor/synexia/third-party/mapbox-jni-ownership/LICENSE.txt`; the pinned provenance is in the JNI intake manifest. This native source slice remains custody-only and is not standalone-buildable.
+The mirrored `shared_arrays.cpp` references the external `jni/ownership.hpp` wrapper. This intake does not copy that header. It preserves the exact upstream ISC license from `mapbox/jni.hpp@57ca9ed4bbeb22ed8d20a55063dcaa217ba47f42` at `m3/vendor/m3/third-party/mapbox-jni-ownership/LICENSE.txt`; the pinned provenance is in the JNI intake manifest. This native source slice remains custody-only and is not standalone-buildable.

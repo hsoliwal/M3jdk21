@@ -9,8 +9,8 @@
       "recipe": "jdk.internal.m3.M3FilteredWrapperDescendingCursor20261017",
       "displayName": "Remove private descending iterator view construction",
       "target": "m3-common/src/main/java/jdk/internal/m3/common/collections/M3FilteredViews.java",
-      "beforeSha256": "104ad823cd27f55489bee788c4c3716de81c8f51e06ae81c8f3619b7cf65b062",
-      "afterSha256": "81d1dcfe12664dbfa674388e1b52b1914f69e6caeadfc8d25ac566241ee7be0d",
+      "beforeSha256": "e96f70593c52c21f43e3b46dfe60481b41fcc190302508cfbbd23df2fd044a5f",
+      "afterSha256": "fd382040d092d249374d729b843c61a5e0431f0c6b8ca757d626ebde5c2855b6",
       "manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/filtered-wrapper-descending-cursor-20261017/manifest.tsv",
       "template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/filtered-wrapper-descending-cursor-20261017/template-00.txt"
     },
@@ -20,8 +20,8 @@
       "recipe": "jdk.internal.m3.M3FilteredWrapperEmptyMap20261017",
       "displayName": "Remove private entry export wrappers from emptiness checks",
       "target": "m3-common/src/main/java/jdk/internal/m3/common/collections/M3FilteredViews.java",
-      "beforeSha256": "81d1dcfe12664dbfa674388e1b52b1914f69e6caeadfc8d25ac566241ee7be0d",
-      "afterSha256": "48bcb4d3dd3d7ebcfda5ba502e1ae59322254009b622b229d96a8ea349426f68",
+      "beforeSha256": "fd382040d092d249374d729b843c61a5e0431f0c6b8ca757d626ebde5c2855b6",
+      "afterSha256": "ba12bcdd6a5ec1129d4babc8aa7766382ad6a04dc79f210214b427842e9dcefc",
       "manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/filtered-wrapper-empty-map-20261017/manifest.tsv",
       "template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/filtered-wrapper-empty-map-20261017/template-00.txt"
     }
@@ -33,8 +33,8 @@
     "crate": "filtered-wrapper-private-construction-20261017",
     "recipe": "jdk.internal.m3.M3FilteredWrapperPrivateConstruction20261017",
     "target": "m3-common/src/main/java/jdk/internal/m3/common/collections/M3FilteredViews.java",
-    "beforeSha256": "104ad823cd27f55489bee788c4c3716de81c8f51e06ae81c8f3619b7cf65b062",
-    "afterSha256": "48bcb4d3dd3d7ebcfda5ba502e1ae59322254009b622b229d96a8ea349426f68",
+    "beforeSha256": "e96f70593c52c21f43e3b46dfe60481b41fcc190302508cfbbd23df2fd044a5f",
+    "afterSha256": "ba12bcdd6a5ec1129d4babc8aa7766382ad6a04dc79f210214b427842e9dcefc",
     "manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/filtered-wrapper-private-construction-20261017/manifest.tsv",
     "template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/filtered-wrapper-private-construction-20261017/template-00.txt"
   },

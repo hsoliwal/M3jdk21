@@ -6,12 +6,12 @@
   "candidate_qualification_status": "PASSED_25_SOURCE_BOUND_RECORDS",
   "source_id": "FINAL28_R2",
   "source_review": "FINAL_FILE_REVIEW.tsv",
-  "source_review_sha256": "9745087d4ac73028910466c254bd9c5fae04c4b450a218739918b65e91bb6864",
+  "source_review_sha256": "e50ff6d246f9cc4fe4516662f8dc15982a0f27a7a8e991b8540cf7258c88da54",
   "candidate_execution_source_id": "CANDIDATE25_07BA",
   "candidate_gates": "candidate-proof/GATES.json",
-  "candidate_gates_sha256": "30baab47ad3269c6655bbc3d553cb839a6f095635389b02157559f1d02c54c19",
+  "candidate_gates_sha256": "e325ed8dd3f51c87d17e539080316560e7339d6474e84252080050de80027d07",
   "candidate_inputs": "candidate-proof/SOURCE_INPUTS.json",
-  "candidate_inputs_sha256": "bac74f9e7b829ab41fb6e1d5ccc8b1e35643a38fa182e78aa999b5d6b1a10c0b",
+  "candidate_inputs_sha256": "396c4e10e7b0d840791f35c073aa85670c3168d695e925970e30d6b5e9560089",
   "candidate_gate_count": 25,
   "candidate_compile_inputs": 141,
   "scope": {
@@ -25,12 +25,12 @@
   "actual_sdk_qualification": {
     "status": "PASS_ACTUAL_SDK_AND_RECEIVERS",
     "receipt": "runtime-proof/SDK_ACCEPTANCE.json",
-    "sha256": "4b47b37a307d7d2dd3a9358fd7d568a9743a72c8e6810e3a4d22dc1c0e6c681a"
+    "sha256": "b32ef751ff53f8e6951eb49c1165729ef5819e9f5cb3c84102f7fa7e2e6179a7"
   },
   "receiver_java_jni": {
     "status": "PASS_SCOPED_2F_ACTUAL_RECEIVER",
     "receipt": "FINAL_RECEIVING_STATUS.json",
-    "sha256": "3bcf08ededda5484713d8a48089d20353a605085fb3da308e4774b12f0163c2e"
+    "sha256": "34b0066e6370b079abc54fb8b83f65c7a5a299728d16ca1fb963287dac00a266"
   },
   "canonical_immutable_pin": {
     "status": "EXTERNALLY_BOUND_AT_PUBLICATION",

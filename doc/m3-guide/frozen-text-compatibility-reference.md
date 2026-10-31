@@ -324,21 +324,21 @@ measurement establishes a memory/performance improvement. Package Javadoc is
 absent at this physical root, and broader consumer/custody, API compatibility,
 canonical String integration and target qualification are separate work.
 
-[bytes]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/synexia-reference/src/com/synexia/indexstring/FrozenBytes.java
-[chars]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/synexia-reference/src/com/synexia/indexstring/FrozenChars.java
-[shim]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/synexia-reference/src/com/synexia/indexstring/MIndexAddressedView.java
-[mapped-test]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/synexia-reference/src/com/synexia/indexstring/SynexiaMappedStorageTest.java
-[contract-test]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/SynexiaContractTest.java
-[harness]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/check-synexia.py
+[bytes]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/m3-reference/src/jdk/internal/m3/indexstring/FrozenBytes.java
+[chars]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/m3-reference/src/jdk/internal/m3/indexstring/FrozenChars.java
+[shim]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/m3-reference/src/jdk/internal/m3/indexstring/MIndexAddressedView.java
+[mapped-test]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/m3-reference/src/jdk/internal/m3/indexstring/M3MappedStorageTest.java
+[contract-test]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/M3ContractTest.java
+[harness]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/check-m3.py
 [build]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/build.sh
 [workflow]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/.github/workflows/m3-foundation.yml
-[provenance]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/synexia-reference/PROVENANCE.md
-[notice]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/synexia-reference/NOTICE.md
-[license]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/synexia-reference/LICENSE-2.0.txt
-[port-bytes]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java
-[port-chars]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java
+[provenance]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/m3-reference/PROVENANCE.md
+[notice]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/m3-reference/NOTICE.md
+[license]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/m3-reference/LICENSE-2.0.txt
+[port-bytes]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/indexstring/src/main/java/jdk/internal/m3/indexstring/FrozenBytes.java
+[port-chars]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/ports/indexstring/src/main/java/jdk/internal/m3/indexstring/FrozenChars.java
 [policy]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/docs/m3jdk21-porting-invariant.md
 [mapping]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/docs/name-mapping.json
-[family-pin]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/synexia-full-family-pin.tsv
-[catalogue]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/docs/synexia-full-family-catalogue.json
-[receiver]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/synexia-import/current-full-borrow/README.md
+[family-pin]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/compatibility/m3-full-family-pin.tsv
+[catalogue]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/docs/m3-full-family-catalogue.json
+[receiver]: https://github.com/hsoliwal/M3jdk21/blob/c842fab8cf5b799257e3c9ea07f8baddde80db09/m3/m3-import/current-full-borrow/README.md

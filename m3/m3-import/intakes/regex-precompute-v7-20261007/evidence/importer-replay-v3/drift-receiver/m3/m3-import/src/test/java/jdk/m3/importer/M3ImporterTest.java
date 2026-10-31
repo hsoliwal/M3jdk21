@@ -30,7 +30,7 @@ final class SynexiaImporterTest {
         String sourcePath =
                 "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java";
         String targetPath =
-                "m3/vendor/synexia/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java";
+                "m3/vendor/m3/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java";
         byte[] bytes =
                 ("// SPDX-License-Identifier: Apache-2.0\n"
                                 + "package com.synexia.rewrite; enum M3EditScope { FILE }\n")

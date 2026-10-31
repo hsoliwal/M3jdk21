@@ -3,8 +3,8 @@
 This qualification receives the canonical Synexia recipe
 `m3-circular-fifo-index-wrap-20261018` into M3JDK21.
 
-- preimage SHA-256: `5ae11bbc515e745783cbf7d1050e95e2e40c7cd0f61044f8ef0a684a418f3663`
-- postimage SHA-256: `3d337f1123ce5c8f977a395a37e515198a72fce967953d59e8a9a379463d8186`
+- preimage SHA-256: `71c4a3a325a99526f67228f6f34429b6f21b27d0bbfa8a5a3e5799442e8e9514`
+- postimage SHA-256: `210697cba0058ec6c3ae9f53439f633773f11757c7b68369082e77a533f44650`
 - Synexia recipe PR: `hsoliwal/com.synexia#12234`
 - recipe head: `90dc3f9fd1f57748a0606e8a25e01e29aaba10fa`
 

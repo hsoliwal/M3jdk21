@@ -31,7 +31,7 @@ jobs:
         run: |
           printf '%s  %s\n' \
             '99a90eca92fea1e45604e29c0f1c1295e9e4e3c05dc3bbb3b27c48890f007575' 'm3/file/src/main/java/jdk/m3/file/M3ResourceLocks.java' \
-            'a20c5e004fd23a83f05e02bc895c62f11ec8db02d86f1c0dae5448a4b911d292' 'm3/file/src/test/java/jdk/m3/file/M3ResourceLocksContract.java' | sha256sum -c -
+            '8b253a7ae19ebd58c56a2921717b71902ee77ca339985af40ed8cc663bb1dce7' 'm3/file/src/test/java/jdk/m3/file/M3ResourceLocksContract.java' | sha256sum -c -
       - name: Compile exact source with warnings as errors and execute tests
         shell: bash
         run: |

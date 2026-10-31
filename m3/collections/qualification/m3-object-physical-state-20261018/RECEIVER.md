@@ -14,7 +14,7 @@ Per-file pass:
 4. Patternize required/excluded full-int mask selection with two existing backends;
 5. Comment the lifecycle/immutability/refusal boundaries.
 
-The exact source preimage is SHA-256 `ed19c7b34e23f61ea5bfa808550a1189ccc07900b7022f3572d78c23c5929f0c`.
+The exact source preimage is SHA-256 `67116969a93d0da9beffafdb36a8310247a206a96d7cb58ffbce3c053e1ad4f1`.
 Postimage SHA-256 `db9e91e59fab8ef1166ee42d2936db0e23a6b59b34165273bfcac5b73382fa7a`.
 New self-test and JUnit adapter are manifest-bound; no alternate payload owner or new JNI ABI.
 

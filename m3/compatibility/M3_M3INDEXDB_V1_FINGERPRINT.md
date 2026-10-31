@@ -15,13 +15,13 @@ Canonical compatibility owner:
 `com.synexia.mindex.db.M3IndexDbFingerprintV1`
 
 Canonical source Git blob:
-`a51449e205016cfc01fb0ccbdb70e0038539b276`
+`64318cf995164aee065e07dc6315b60630e377f5`
 
 Historical M3JDK21 owner:
 `com.m3.indexdb.M3IndexDbSemanticFingerprint`
 
 Historical source Git blob:
-`df44495f5e5b48ea1bf4a863df9ca188bd787948`
+`428658eb8565f77f8e450a98e24e90a3837a2215`
 
 ## Compatibility rule
 

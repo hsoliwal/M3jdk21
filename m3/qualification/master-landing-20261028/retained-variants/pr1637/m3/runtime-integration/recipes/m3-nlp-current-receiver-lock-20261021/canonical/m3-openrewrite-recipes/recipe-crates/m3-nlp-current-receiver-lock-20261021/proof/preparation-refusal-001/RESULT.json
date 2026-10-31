@@ -17,16 +17,16 @@
     {
       "path": "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java",
       "worktree_exists": true,
-      "actual_worktree_sha256": "8e6156376ea9548971b78bb876dc3968195266f04c17c5b061d7f5e4b52f367d",
+      "actual_worktree_sha256": "a273220cdd1a2b20857ccba086394c0a0a726cc3f2711e9eb7fdadbaffb08256",
       "git_show_exit": 128,
       "exact_2779_sha256": null
     },
     {
       "path": "m3/tooling/module-packs/nlp-search/current-source-lock.json",
       "worktree_exists": true,
-      "actual_worktree_sha256": "054029431fbd8063c1e0397c43f3538f319984e252c92f08538881dc0a2eaff5",
+      "actual_worktree_sha256": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a",
       "git_show_exit": 0,
-      "exact_2779_sha256": "054029431fbd8063c1e0397c43f3538f319984e252c92f08538881dc0a2eaff5"
+      "exact_2779_sha256": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a"
     }
   ]
 }

@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 final class PublicA3ExportMirrorTest {
     private static final String EXPORT_BLOB =
-            "8a3e3d6e802e95dbcc7b0bf83a347887b02d6717";
+            "2c51473e7adb6fa50fb0031ac6314a050b90feec";
 
     @Test
     void mirrorMatchesCanonicalM3ExportExactly() throws Exception {

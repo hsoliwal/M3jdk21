@@ -17,7 +17,7 @@
     "-Dm3.output=/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/publication-forward-generated/m3jdk-collection-publication-owner-java-20261017",
     "verify"
   ],
-  "manifestSha256": "8bfa4e4bcf5249687a75f0e0169858fddd963f321f695ce17c8339af7b28e7d4",
+  "manifestSha256": "a29b2a7a533726d6e123f9a266488fbf96751e42f7bad0cd182ca56640190a60",
   "logSha256": "6d10925d80fec9fdfc6f5281b8d0713e5c5c75c5cc353d2bb2aeabc66521985b",
   "proofModified": false,
   "engineModified": false,

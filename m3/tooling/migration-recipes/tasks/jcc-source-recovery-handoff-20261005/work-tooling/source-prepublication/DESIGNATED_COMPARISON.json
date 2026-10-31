@@ -246,20 +246,20 @@
   "source_receipt": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/DESIGNATED_SOURCE_OUTPUTS.json",
     "bytes": 15261,
-    "sha256": "296d5b9eb4f41b51a85d44bb4f05c76e8c5b6453fb55881691b9823055062510",
-    "git_blob_sha1": "59e4ba6f35c37c1a00da2678ed88b9f034d885e1"
+    "sha256": "dab78ed3ffa2cab8dad0feb532f493130570b8da35146a78e961b75cd11dd555",
+    "git_blob_sha1": "36e48a6a4e5b4e2592ad7d3fa90fd3800f6f5185"
   },
   "aggregate": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/RECOVERY_RESULT.json",
     "bytes": 456423,
-    "sha256": "086f4ef835a0939b212bcb7595e75513ecbd46ce6bbf764a8d1f5aca1e418954",
-    "git_blob_sha1": "9c14f0c7eef7ed15b9148947ee729836dc2aefe1"
+    "sha256": "823ef3c5f172b34d7c973f5e50424b8f7ab770687f8e2d80e2ecb2bde8dc1b77",
+    "git_blob_sha1": "b930bffab5a0e9c9e9ad2b5f65804c236b199e51"
   },
   "canonical_context": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/current-context/CONTEXT_REFERENCES.json",
     "bytes": 470167,
-    "sha256": "fbc460874aeb04a688ad0ed9b47ad8e3f3b37f88af09d0f32ecfeedc2827fbed",
-    "git_blob_sha1": "5f4cca8343c48f3c8d3d113222b12c3da4018fb3"
+    "sha256": "ab9828692a1ca02adfabf22ff679e47e1e62a9d755b97f4071c42d5225698bc5",
+    "git_blob_sha1": "244ccde33cb6ff34bdd33eeec78eb4f88cf70dff"
   },
   "qualification": "Read-only identity and existing record-allocation check; no source execution or future publication proof."
 }

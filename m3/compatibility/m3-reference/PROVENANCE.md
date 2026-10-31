@@ -7,8 +7,8 @@ applicable attribution in `NOTICE.md` accompany them.
 
 | Upstream path | Git blob SHA-1 |
 |---|---|
-| `synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java` | `75264c85b4da2cd7d9193d8e245364efb53aa936` |
-| `synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java` | `0e249745d0e96a1d9a8754a075f33cdf42e8fc0b` |
+| `synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java` | `791fffa3f9938e5266663c1cb256cc4d00f8c0f5` |
+| `synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java` | `22656cfaa3ccf0c6b214f214c92324d7f3ea55be` |
 | `LICENSE` | `29f81d812f3e768fa89638d1f72920dbfd1413a8` |
 | `NOTICE` (applicable attribution source) | `97bb5d49f8bd3bc573c19afe4ea2392a3d02704e` |
 

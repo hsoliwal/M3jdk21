@@ -18,7 +18,7 @@
       "evidence": {
         "serial_receiving": {
           "path": "runtime-proof/latest-runtime-20261018/m3-api-doclint-20261018/SERIAL_RECEIVING.json",
-          "sha256": "b9e48ea7169e0542b40b81077e6c9cdb9aa3170df162893d54922726915f149c",
+          "sha256": "8fdd9a5f06ea2975469aef724e9137b197467368d9c11fcf61bac8801000d11a",
           "original_locator": "/workspace/scratch/f8287c652798/combine/receiving/m3-api-doclint-20261018.json"
         },
         "receiver_cases": {
@@ -28,7 +28,7 @@
         },
         "sdk_report": {
           "path": "runtime-proof/latest-runtime-20261018/m3-api-doclint-20261018/SDK_REPORT.xml.txt",
-          "sha256": "515412afb70954d282e0056cbc117e0def6f0c9b5bc048302e8d4060c71283a2",
+          "sha256": "638795c46dcd39ff8f19bd8cafdac45e23c19422fd7b983e024f0533d58cbf4a",
           "original_locator": "/dev/shm/m3-doclint-f8287/proof/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
         },
         "source_targets": {
@@ -38,7 +38,7 @@
         },
         "sdk_qualification": {
           "path": "runtime-proof/latest-runtime-20261018/m3-api-doclint-20261018/SDK_QUALIFICATION.json",
-          "sha256": "7dd1976b6195562235d1bfff53a0b606800eebdd53e6b5e32dfbf448a1a9f492",
+          "sha256": "5a87a6f50057373fb02d185185ef2cfb0f883b5b229e9c80e620bc991501e7d2",
           "original_locator": "/dev/shm/m3-doclint-f8287/proof/SDK_QUALIFICATION.json"
         }
       },
@@ -165,7 +165,7 @@
       "evidence": {
         "serial_receiving": {
           "path": "runtime-proof/latest-runtime-20261018/m3-progress-scope-lint-20261018/SERIAL_RECEIVING.json",
-          "sha256": "75e63253d6d18056e87385797ea54c73ed95c0e7fba6daf59322c76a23500363",
+          "sha256": "6e99c7706a8c0ead9545e48c640ef849505f71813aed9eaacc34f5e778874fb5",
           "original_locator": "/workspace/scratch/f8287c652798/combine/receiving/m3-progress-scope-lint-20261018.json"
         },
         "receiver_cases": {
@@ -175,7 +175,7 @@
         },
         "sdk_report": {
           "path": "runtime-proof/latest-runtime-20261018/m3-progress-scope-lint-20261018/SDK_REPORT.xml.txt",
-          "sha256": "efeeab634d22e9179ace331bb688d96b7ec1f13a26851c0fc58630405eaf5202",
+          "sha256": "e31c4545eb1e52cdd1b964450e0c86a5c7933e458db3e7c989558447e6698c6c",
           "original_locator": "/dev/shm/m3-progress-scope-lint-f8287/proof/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
         },
         "source_targets": {
@@ -185,7 +185,7 @@
         },
         "sdk_qualification": {
           "path": "runtime-proof/latest-runtime-20261018/m3-progress-scope-lint-20261018/SDK_QUALIFICATION.json",
-          "sha256": "0fdc63e19c00d7db7f2f91b9c4879a27f597cd59d1e3487a7403cf0a738dfb4f",
+          "sha256": "3f9b3754b35a0988c5ac71981ed84249da66cc8747d331ee196c3c888f619d5d",
           "original_locator": "/dev/shm/m3-progress-scope-lint-f8287/proof/SDK_QUALIFICATION.json"
         }
       },
@@ -240,22 +240,22 @@
       "evidence": {
         "serial_receiving": {
           "path": "runtime-proof/latest-runtime-20261018/m3-tq-custody-v2-20261018/SERIAL_RECEIVING.json",
-          "sha256": "b19226ae900a2e2e2cc775d9d816459dd56435769c9a5a6efa897546416686e8",
+          "sha256": "660a94c09998c897213b29e845a7b4a61037621ed3647faf60f852f4857b6775",
           "original_locator": "/workspace/scratch/f8287c652798/combine/receiving/m3-tq-custody-v2-20261018.json"
         },
         "receiver_cases": {
           "path": "runtime-proof/latest-runtime-20261018/m3-tq-custody-v2-20261018/RECEIVER_RECEIPT.json",
-          "sha256": "c93f94bddb3559f80992228aee15e884e17b47ddc3924fd55adbdfe307b6b5c8",
+          "sha256": "9a4203f7c45b916afd260707476f9e3ee4e1bfb1f23f285daba424f94b0ac7f1",
           "original_locator": "/dev/shm/m3-tq-successor-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-tq-custody-v2-20261018/receiver-proof/evidence/RECEIVER_RECEIPT.json"
         },
         "sdk_report": {
           "path": "runtime-proof/latest-runtime-20261018/m3-tq-custody-v2-20261018/SDK_REPORT.xml.txt",
-          "sha256": "a6f261b4653890875a420011516190ae062326f91b52ed2fcd5d8fbd60a0b670",
+          "sha256": "21e0ae8e1eb265be1e18d8dd4af4bc6d69d0609496eaa23bc1e9d6593edcad5a",
           "original_locator": "/dev/shm/m3-tq-successor-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-tq-custody-v2-20261018/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
         },
         "source_targets": {
           "path": "runtime-proof/latest-runtime-20261018/m3-tq-custody-v2-20261018/TARGETS.tsv",
-          "sha256": "f6aa70a7899d48b48edc3117d74d5c7b22a3d3b7166d023eb6eca8d73b3c6675",
+          "sha256": "7581cac24453a215378c06431fdc9cdadaa7e685d81d4220a953fe97814b1728",
           "original_locator": "/dev/shm/m3-tq-successor-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-tq-custody-v2-20261018/TARGETS.tsv"
         },
         "sdk_log": {
@@ -270,25 +270,25 @@
           "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
           "source_git_blob": "0372f06b467f44fd9472a4bd573b43f8a86a45ef",
           "before_sha256": "c8b14018f99a859d2ab9258a27f53643b7aaf74e2073380a1c8dbf6cee60e37e",
-          "after_sha256": "651ffe3803188a9bf6aba81bf9fb50ef2027b8cafe816017542ee4d4f5d9c2f8",
+          "after_sha256": "65630d3adf07f8f18f2bdd14854931ac2feb3b98ade1e3fa1c1a81d48a78f686",
           "mode": "0644",
           "license": "Apache-2.0"
         },
         {
           "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
           "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
-          "source_git_blob": "762bd2fee3d4f22a4bd8551fcff6d7db3c393eb2",
-          "before_sha256": "806d6393832ec0d6b355fba3a01bf847441c36aca2642347d08bb94d4921d8e8",
-          "after_sha256": "1779dde108352325ca972cbc8325718b17c131f5883229c25e635ea4aac19880",
+          "source_git_blob": "4d95f179869dc598d2a7eef03d6f47d5dcf6f861",
+          "before_sha256": "297a828deef7f0f536495d38c0bd1844625ecab275c27b06c61acd34bb9b0db1",
+          "after_sha256": "dc7bf333136c3837d1d4073ea006a15ff2c7aa4bc42feea3fc9df9bab50b6bfc",
           "mode": "0644",
           "license": "Apache-2.0"
         },
         {
           "path": "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/20-TQTest.java.txt",
           "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
-          "source_git_blob": "0e5cf27d3d268f485d4befe27d26da4df381b477",
-          "before_sha256": "7ce7e90af7f0011c133ef71f2b75b01f17b02a102d3b2b70bd01856092467c8c",
-          "after_sha256": "bbd76de79fdfdfd016880ada18abdb372f8d160bc4ae0f21ccb203e381652e44",
+          "source_git_blob": "2553d4f0159ae9865d21792e37b52133da53b1f9",
+          "before_sha256": "b0a18b68ce65168b1223b2458dbe2834c5b78229189647afcefd75fe2426cfc1",
+          "after_sha256": "97390cfb2a42ea13f8d2825af872babed0de3350946fcceee053b53cefc10c9d",
           "mode": "0644",
           "license": "Apache-2.0"
         },
@@ -297,7 +297,7 @@
           "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
           "source_git_blob": "6593116f55789124d4d72fd07626e507b714004c",
           "before_sha256": "b3b984e1bcb74194b524850064cbce01805eff41595e50aae3947f78e5373772",
-          "after_sha256": "6aeb3e02fca5dd93a2b515d92fdd52b722499509f904a80b861bfeaab4ed297c",
+          "after_sha256": "b37e519df1deb54f236a562bfae9c26d04a5dc408d97e1fdd0799c9d003f0122",
           "mode": "0644",
           "license": "Apache-2.0"
         },
@@ -315,7 +315,7 @@
           "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
           "source_git_blob": "ABSENT",
           "before_sha256": "ABSENT",
-          "after_sha256": "1779dde108352325ca972cbc8325718b17c131f5883229c25e635ea4aac19880",
+          "after_sha256": "dc7bf333136c3837d1d4073ea006a15ff2c7aa4bc42feea3fc9df9bab50b6bfc",
           "mode": "0644",
           "license": "Apache-2.0"
         },
@@ -333,7 +333,7 @@
           "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
           "source_git_blob": "ABSENT",
           "before_sha256": "ABSENT",
-          "after_sha256": "eeb42263820a0f26e3658b2093c9f6e6598be901da84c77f12109b1ecabe2905",
+          "after_sha256": "da3ba0c29c131c7dabd5816a3f7b48ab4fbb7fbdb7892324ca8088c256dde975",
           "mode": "0644",
           "license": "Apache-2.0"
         },
@@ -342,7 +342,7 @@
           "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
           "source_git_blob": "ABSENT",
           "before_sha256": "ABSENT",
-          "after_sha256": "806d6393832ec0d6b355fba3a01bf847441c36aca2642347d08bb94d4921d8e8",
+          "after_sha256": "297a828deef7f0f536495d38c0bd1844625ecab275c27b06c61acd34bb9b0db1",
           "mode": "0644",
           "license": "Apache-2.0"
         },
@@ -358,9 +358,9 @@
         {
           "path": "m3/tooling/tq/plan.json",
           "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
-          "source_git_blob": "762bd2fee3d4f22a4bd8551fcff6d7db3c393eb2",
-          "before_sha256": "806d6393832ec0d6b355fba3a01bf847441c36aca2642347d08bb94d4921d8e8",
-          "after_sha256": "1779dde108352325ca972cbc8325718b17c131f5883229c25e635ea4aac19880",
+          "source_git_blob": "4d95f179869dc598d2a7eef03d6f47d5dcf6f861",
+          "before_sha256": "297a828deef7f0f536495d38c0bd1844625ecab275c27b06c61acd34bb9b0db1",
+          "after_sha256": "dc7bf333136c3837d1d4073ea006a15ff2c7aa4bc42feea3fc9df9bab50b6bfc",
           "mode": "0644",
           "license": "Apache-2.0"
         },
@@ -385,9 +385,9 @@
         {
           "path": "m3/tooling/tq/src/test/java/jdk/m3/tq/TQTest.java",
           "source_revision": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
-          "source_git_blob": "0e5cf27d3d268f485d4befe27d26da4df381b477",
-          "before_sha256": "7ce7e90af7f0011c133ef71f2b75b01f17b02a102d3b2b70bd01856092467c8c",
-          "after_sha256": "bbd76de79fdfdfd016880ada18abdb372f8d160bc4ae0f21ccb203e381652e44",
+          "source_git_blob": "2553d4f0159ae9865d21792e37b52133da53b1f9",
+          "before_sha256": "b0a18b68ce65168b1223b2458dbe2834c5b78229189647afcefd75fe2426cfc1",
+          "after_sha256": "97390cfb2a42ea13f8d2825af872babed0de3350946fcceee053b53cefc10c9d",
           "mode": "0644",
           "license": "Apache-2.0"
         }
@@ -405,7 +405,7 @@
       "evidence": {
         "serial_receiving": {
           "path": "runtime-proof/latest-runtime-20261018/m3-native-feature-guard-20261018/SERIAL_RECEIVING.json",
-          "sha256": "51002025d395e032fa24ae7d4da686e32fc307a8010d072481b858c857a230ce",
+          "sha256": "a7d1cbf42b3292035caa26b2009fc6b90b41d5b713019d9bd7eeac922c08a87d",
           "original_locator": "/workspace/scratch/f8287c652798/combine/receiving/m3-native-feature-guard-20261018.json"
         },
         "receiver_cases": {
@@ -415,7 +415,7 @@
         },
         "sdk_report": {
           "path": "runtime-proof/latest-runtime-20261018/m3-native-feature-guard-20261018/SDK_REPORT.xml.txt",
-          "sha256": "42a272a2d3dcf00eed8c12ee70af8f34577fee31e209223157b4239f659ce3bf",
+          "sha256": "bd204beceadb1f79b0a8a6c6e8290c9de5ea4d87042598a8068bddc97e7bf6bb",
           "original_locator": "/dev/shm/m3-native-feature-guard-f8287/publication-proof/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
         },
         "source_targets": {
@@ -425,7 +425,7 @@
         },
         "sdk_qualification": {
           "path": "runtime-proof/latest-runtime-20261018/m3-native-feature-guard-20261018/SDK_QUALIFICATION.json",
-          "sha256": "75163203cf2dd17aa232ddee64b3d542d1f889ef75d32c622945bbddcdc4d0a4",
+          "sha256": "ff07d1804bdfdb14b347ed4e49e646ea964b14ef35e136b82851522eb5c1d69d",
           "original_locator": "/dev/shm/m3-native-feature-guard-f8287/publication-proof/SDK_QUALIFICATION.json"
         }
       },
@@ -453,7 +453,7 @@
       "evidence": {
         "serial_receiving": {
           "path": "runtime-proof/latest-runtime-20261018/m3-object-vtable-20261018/SERIAL_RECEIVING.json",
-          "sha256": "a2e394c7d13468d51c402771b7bf3c41f7302c04f5989cb9a0b5d270c088c969",
+          "sha256": "ec884ee94aec0455cba304eeefa4cc7fc0e12c6b1e4eca1c7c41001849c68bce",
           "original_locator": "/workspace/scratch/f8287c652798/combine/receiving/m3-object-vtable-20261018.json"
         },
         "receiver_cases": {
@@ -463,7 +463,7 @@
         },
         "sdk_report": {
           "path": "runtime-proof/latest-runtime-20261018/m3-object-vtable-20261018/SDK_REPORT.xml.txt",
-          "sha256": "03484c1179fb857a544b14117c6d054e3f5f665e420ac92de3866c2d104f2270",
+          "sha256": "79f698879156d40a0f1ef78ace6837dfc9d823437d48c50a05e096bf8df01edc",
           "original_locator": "/dev/shm/m3-object-vtable-f8287/proof/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
         },
         "source_targets": {
@@ -473,7 +473,7 @@
         },
         "sdk_qualification": {
           "path": "runtime-proof/latest-runtime-20261018/m3-object-vtable-20261018/SDK_QUALIFICATION.json",
-          "sha256": "abc1db8c7bf466d92b20b31de7fff9728c7c2f2773f2c535b68e49e3210549fd",
+          "sha256": "3c5a8aa447fb77d28b72cf50f26498df9e745c94ffc648aa3d2e4f7feca2c8f3",
           "original_locator": "/dev/shm/m3-object-vtable-f8287/proof/SDK_QUALIFICATION.json"
         }
       },
@@ -498,7 +498,7 @@
       "errors": 0,
       "skipped": 0,
       "report": "runtime-proof/latest-runtime-20261018/m3-tq-custody-v2-20261018/tq-normal-REPORT.xml.txt",
-      "report_sha256": "fc6360e39e2964909af7ed92a9e7a65e4fd4de3afa8d203abc007cf783b8d905",
+      "report_sha256": "46b66c9f84b23e9b4f3facb1e709c3e290dbd706ef606d599afdc5fd4b5834f5",
       "original_archive_sha256": "b9852dc6a97e8d7254e82f2ad48fb5d1047c8167bf8200e03cdd2e1505b8eb06",
       "original_member": "target/surefire-reports/TEST-jdk.m3.tq.TQTest.xml"
     },
@@ -509,7 +509,7 @@
       "errors": 0,
       "skipped": 0,
       "report": "runtime-proof/latest-runtime-20261018/m3-tq-custody-v2-20261018/tq-sync-REPORT.xml.txt",
-      "report_sha256": "5018bfd97311922e990d429a6aa7e5da69e37929be69ee26abc9666116b5b4ed",
+      "report_sha256": "c69b1c8c6d4b98a5392e5cf4b72cc7b56d9252def73c0c94ef4c6a3753adf532",
       "original_archive_sha256": "bc48aa993ab36b323713be0417d7153fb1b086c78ad40c6458f483dbffbe61f9",
       "original_member": "target/surefire-reports/TEST-jdk.m3.tq.TQSyncTest.xml"
     },
@@ -520,14 +520,14 @@
       "errors": 0,
       "skipped": 0,
       "report": "runtime-proof/latest-runtime-20261018/m3-tq-custody-v2-20261018/tq-ubsan-REPORT.xml.txt",
-      "report_sha256": "afa8804ea93bd6c34c4b6096722c7a1d8a553df6126c8f4f7ed3f6fc00e75135",
+      "report_sha256": "8bbdde84c13a996eec4946929707cd0e7910808f0977f5325ec9285d68d89d58",
       "original_archive_sha256": "3863ef240f34a4482cd1dd6055cc626d50f45284418092e52df14c4d7d368558",
       "original_member": "target/surefire-reports/TEST-jdk.m3.tq.TQTest.xml"
     }
   ],
   "tq_replay": {
     "path": "runtime-proof/latest-runtime-20261018/m3-tq-custody-v2-20261018/CUSTODY_REPLAY.json",
-    "sha256": "d0a88cf84b340215b79fc073260950c8c8025f1b76666cf5ca28ac8e0787ca7f",
+    "sha256": "f0565d6d5c18415bf1a687f5ffd9f8f594ac571149d6894c6a36f6595b6c2f75",
     "original_locator": "/dev/shm/m3-tq-successor-f8287/CUSTODY_REPLAY.json"
   },
   "compiler_and_image_evidence": {
@@ -700,7 +700,7 @@
       "isolated_receiver_cases": 9,
       "sdk_report": {
         "path": "runtime-proof/latest-runtime-20261018/m3-object-vtable-20261018/SDK_REPORT.xml.txt",
-        "sha256": "03484c1179fb857a544b14117c6d054e3f5f665e420ac92de3866c2d104f2270",
+        "sha256": "79f698879156d40a0f1ef78ace6837dfc9d823437d48c50a05e096bf8df01edc",
         "original_locator": "/dev/shm/m3-object-vtable-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-object-vtable-20261018/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
       },
       "receiver_receipt": {

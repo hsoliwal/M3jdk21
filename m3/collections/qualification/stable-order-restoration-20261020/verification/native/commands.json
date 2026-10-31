@@ -79,7 +79,7 @@
     "exit": 1,
     "name": "proof-javac",
     "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/proof-javac.stderr.log",
-    "stderr_sha256": "654e8254328c5e1e3e3ecf0e880bc7dfeefe2dad04305072d70ce7bcceda225b",
+    "stderr_sha256": "da07db6ae29c11398831b2d43b3a627945a107ff5f4a1079604f40d215e5786e",
     "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/native/proof-javac.stdout.log",
     "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   }

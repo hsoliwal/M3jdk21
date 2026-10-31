@@ -316,8 +316,8 @@
   "inputs": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/inputs.json",
     "bytes": 95340,
-    "sha256": "da48340c83e26dd478078dc5195e000b99666f54663361c1773827acdbd46416",
-    "git_blob_sha1": "7814104de55ea9742edd79e2addfdc16df8c0c17",
+    "sha256": "a01b793f861a6f82777f604a17455ad0b11c9045d3df4a3af989dc83da04f551",
+    "git_blob_sha1": "3dd80992570ff8c02221284ad14a98de86d61e55",
     "mode": "0o644"
   },
   "all_fixed_inputs_unchanged": true,
@@ -333,8 +333,8 @@
   "java_xml": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/JccSourceFinalHandoffTest.xml",
     "bytes": 16129,
-    "sha256": "e33dd229900b9614a77e9187b9ac04e024f2250c73c74a625dfe53fba093be85",
-    "git_blob_sha1": "bb99298fd2c7a1819682f73b0d0ed8d93715de09",
+    "sha256": "053445773c096542fd44835c50ee8e1d5e594c94bbe06e221b00b31e8d169c40",
+    "git_blob_sha1": "109a64a3c8c93cc21094b3d955f7d2529f346ec4",
     "mode": "0o644"
   },
   "python_tests": 6,

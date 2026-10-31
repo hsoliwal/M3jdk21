@@ -15,10 +15,10 @@ The receiving base is M3JDK21 PR #1603, commit
 | File | Before SHA-256 | After SHA-256 |
 | --- | --- | --- |
 | `m3/collections/src/main/native/collections/m3_index_mask_compactor.c` | `fb907640aa9615ce28c61bb802da39e6cb16030b9f95aad266aa6c68531b4074` | `58f403c3b2677ecb8c7c36d9e04233760c1477f4d770f431efddc5318edf9ad2` |
-| `m3/collections/src/test/java/com/m3/collections/M3MaskPositionAtomsTest.java` | `ABSENT` | `53d22b261f4376f41e735dc5121d3d8f97ee08f4eafdf99e3f615d0330b22548` |
+| `m3/collections/src/test/java/jdk/m3/collections/M3MaskPositionAtomsTest.java` | `ABSENT` | `719cf8ac4ac83625d3ca91ccf6af826019d65d80dd4d3020f4865b9fc7bde5bf` |
 
 The unchanged Java owner is `com.m3.collections.M3IndexMaskCompactor`, Git blob
-`b81b069fb4815f0c78b17119390d7b204f6179d1`. The zero-mask branches fill stable
+`945375ce32080537da2b6544d59f537ee8271644`. The zero-mask branches fill stable
 positions from the existing chunk offset. The required/excluded branch prepares
 one tested mask behind the existing overlap refusal. Public Java APIs, all nine
 JNI exports, validation, exception/allocation order and the JNI Region schedule

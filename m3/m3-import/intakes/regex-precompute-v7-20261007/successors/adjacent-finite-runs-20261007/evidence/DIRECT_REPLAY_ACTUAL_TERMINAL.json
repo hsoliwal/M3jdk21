@@ -192,7 +192,7 @@
     {
       "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/target/receiving-snapshot/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
       "bytes": 141730,
-      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+      "sha256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7"
     },
     {
       "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/target/receiving-snapshot/synexia-indexstring/src/test/java/com/synexia/indexstring/MIndexRegexTrigramQueryTest.java",

@@ -60,26 +60,26 @@
     "outputs": [
       {
         "bytes": 6812,
-        "git_blob_sha1": "db75804258c024d7fc097100ca1358667ede1f84",
+        "git_blob_sha1": "71c3936fee674c0b524423cec97ea6977229c17a",
         "path": "m3/collections/src/test/java/com/m3/collections/M3CollectionSdkCatalogProjectionTest.java",
         "preimage_sha256": "ABSENT",
-        "sha256": "9d4465a76a51479dd17dd1220b4f4faafb174d716cee985849ce912435d6c2f5",
+        "sha256": "f95414170c178f0c5c63f1fcc38eb4e7c94c8ef2fff98cbfa900ec135c138b2b",
         "template": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-sdk-catalogue-fix-20261025/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-sdk-catalogue-fix-20261025/0002-M3CollectionSdkCatalogProjectionTest.java.txt"
       },
       {
         "bytes": 5059,
         "git_blob_sha1": "7296171491e66958a272f5ef433cb94301ef69a9",
-        "path": "m3/collections/src/test/java/com/m3/collections/M3CollectionSdkCatalogSelfTest.java",
-        "preimage_sha256": "b28c7bea13e62b546cfc77b518126b1cbae52a3449bc264230ace523a10e3dc1",
+        "path": "m3/collections/src/test/java/jdk/m3/collections/M3CollectionSdkCatalogSelfTest.java",
+        "preimage_sha256": "c9687c706997e4204fb0df632e53425261f0a74ff1bb07690bbef53ab03fc83f",
         "sha256": "0c26c6b8c1e0aba3bc4e26abea9f69adec29534d0aaf0f5edb2af619442bd666",
         "template": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-sdk-catalogue-fix-20261025/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-sdk-catalogue-fix-20261025/0003-M3CollectionSdkCatalogSelfTest.java.txt"
       },
       {
         "bytes": 15187,
-        "git_blob_sha1": "b0e683fb6d9cefc590b6ac2cef1c92367691e769",
+        "git_blob_sha1": "1b7956f4c995816ef443c7a0598577fa7b150012",
         "path": "m3/collections/pom.xml",
-        "preimage_sha256": "ae20366179d89d453c1a165b8df2e02b1e52f2fbab1bf7d06aae8e7c842c734e",
-        "sha256": "6af806eb33c22b7f2a0ff5baf15b10b7ad0e8f797a0151284082b7a79ee425f8",
+        "preimage_sha256": "dea465738668775a53feafbec31cc08213be4173601a491ac89a199d91952d5c",
+        "sha256": "62a2e9a0e34f890745d365086fe1df6e8e9d07caecf6eccb556ae062b4cf769a",
         "template": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-sdk-catalogue-fix-20261025/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-sdk-catalogue-fix-20261025/0001-pom.xml.txt"
       }
     ],
@@ -96,16 +96,16 @@
     "binding": {
       "authority_sha256": {
         "m3/collections/qualification/m3-sdk-families-20261017/FAMILY_CATALOG.tsv": "406d9809dab857a62b571423a51c3240a7969f682a4a37c577590d6d79f344f9",
-        "m3/collections/src/main/java/com/m3/collections/M3CollectionSdkCatalog.java": "53d845fb4289c5d856d8eccc86235cdea0d5d3182c62d5956140c4d3d9e46b48",
-        "m3/collections/src/main/java/com/m3/collections/M3CollectionSdkNames.java": "0e8d7bf9235d4075552c104d650290534b3b814014bcdb664de89fbc804fdaee",
-        "m3/collections/src/main/resources/com/m3/collections/M3_SDK_FAMILY_CATALOG.tsv": "e986838120c2558a145c6b16942475c8f5ff885b166526d635ef9c10360d8313"
+        "m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdkCatalog.java": "ebbe8b81c2bc93d7b9c8c191b309c543728214b638be97fa89e9de6d826aef83",
+        "m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdkNames.java": "25ea3681868ca94fe746405a9054ebfa28fa6808708bcbab06a7d94241f58877",
+        "m3/collections/src/main/resources/jdk/m3/collections/M3_SDK_FAMILY_CATALOG.tsv": "e986838120c2558a145c6b16942475c8f5ff885b166526d635ef9c10360d8313"
       },
       "module_source_commit": "a92f8042cbcbb095a9e1e9f6cfead552ead0fba9",
       "module_source_tree": "c34dfa6cb766af341b32b7ee99e96ef35dfac09e",
       "postimage_sha256": {
-        "m3/collections/pom.xml": "6af806eb33c22b7f2a0ff5baf15b10b7ad0e8f797a0151284082b7a79ee425f8",
-        "m3/collections/src/test/java/com/m3/collections/M3CollectionSdkCatalogProjectionTest.java": "9d4465a76a51479dd17dd1220b4f4faafb174d716cee985849ce912435d6c2f5",
-        "m3/collections/src/test/java/com/m3/collections/M3CollectionSdkCatalogSelfTest.java": "0c26c6b8c1e0aba3bc4e26abea9f69adec29534d0aaf0f5edb2af619442bd666"
+        "m3/collections/pom.xml": "62a2e9a0e34f890745d365086fe1df6e8e9d07caecf6eccb556ae062b4cf769a",
+        "m3/collections/src/test/java/com/m3/collections/M3CollectionSdkCatalogProjectionTest.java": "f95414170c178f0c5c63f1fcc38eb4e7c94c8ef2fff98cbfa900ec135c138b2b",
+        "m3/collections/src/test/java/jdk/m3/collections/M3CollectionSdkCatalogSelfTest.java": "0c26c6b8c1e0aba3bc4e26abea9f69adec29534d0aaf0f5edb2af619442bd666"
       },
       "sdk_image_manifest_sha256": "dabe08d30222f9cece1bea93fe004732df5477a80ccc2e719e68568d3d4971ce",
       "sdk_source_commit": "059eb941577154868cd44029ba4ec018f25abdfb"
@@ -195,15 +195,15 @@
   "source_authority": [
     {
       "commit": "c2abf0ba6077c12b30e702e4d3e52c665238b10f",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionSdkCatalog.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdkCatalog.java",
       "repo": "hsoliwal/M3JDK21",
-      "sha256": "53d845fb4289c5d856d8eccc86235cdea0d5d3182c62d5956140c4d3d9e46b48"
+      "sha256": "ebbe8b81c2bc93d7b9c8c191b309c543728214b638be97fa89e9de6d826aef83"
     },
     {
       "commit": "c2abf0ba6077c12b30e702e4d3e52c665238b10f",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionSdkNames.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdkNames.java",
       "repo": "hsoliwal/M3JDK21",
-      "sha256": "0e8d7bf9235d4075552c104d650290534b3b814014bcdb664de89fbc804fdaee"
+      "sha256": "25ea3681868ca94fe746405a9054ebfa28fa6808708bcbab06a7d94241f58877"
     },
     {
       "commit": "c2abf0ba6077c12b30e702e4d3e52c665238b10f",
@@ -213,7 +213,7 @@
     },
     {
       "commit": "c2abf0ba6077c12b30e702e4d3e52c665238b10f",
-      "path": "m3/collections/src/main/resources/com/m3/collections/M3_SDK_FAMILY_CATALOG.tsv",
+      "path": "m3/collections/src/main/resources/jdk/m3/collections/M3_SDK_FAMILY_CATALOG.tsv",
       "repo": "hsoliwal/M3JDK21",
       "sha256": "e986838120c2558a145c6b16942475c8f5ff885b166526d635ef9c10360d8313"
     }

@@ -94,7 +94,7 @@ def main():
     old = AUDIT / "current-map-validation-v03"
     require(not (HERE / "fixture").exists(), "fixture already exists")
     old_packet = (old / "PACKET.json").read_bytes()
-    require(sha(old_packet) == "6e2ab166b48662dbf216c9791597d7779163236a0dc2e4ce76c2963bb022882c", "V03 frozen packet drift")
+    require(sha(old_packet) == "6f3e2993d6d29e51c46099f0e0ad6d4c775a435466b4be8cfd6ef6918e927224", "V03 frozen packet drift")
     old_sealed = {row["path"]: row for row in json.loads(old_packet)["files"]}
     captures = [ROOT / "publication" / ("M3_LATEST_" + name + ".json") for name in ["COMMIT", "ROOT", "M3"]]
     old_captures = [old / "root-evidence" / ("M3_FINAL_CURRENT_" + name + ".json") for name in ["COMMIT", "ROOT", "M3"]]

@@ -53,11 +53,11 @@ final class M3ArrayStorageCommons450RecipeTest {
     private static final int TESTS=7;
     /** The 4.5.0 receipt (receiving/commons-collections-4.5.0-20261018) afterSHA256 of the five bodies, manifest order. */
     private static final List<String> RECEIVED=List.of(
-            "a207ca1729e2f9e45b4987e19ffa20cbfc3518d5329922020524d53db986ff7e",
-            "624429a4181639b0748a9982412c80896ad0ebea17327f6e905d49127977623d",
-            "f7936dd925b1488840671e3e22ee2635d8bc1fdf6f27a66956cfb93bcd59e75b",
-            "271e67c91fd2fbd93cca5fa890d9b88ef6f30745791a187381d3ce859722e057",
-            "e7fabce72003bf25dce273539959baf0ca3ac63a4d9ed4b90cf1d8a864e9403b");
+            "6d79ee74b7d17fca422f3b3c7eda99ad0236c49c75afc416dcb07d9ce956f53c",
+            "a4ff2e871654e2da438b9dadd84bffccc8636d597db9f99cd6558a64bf697a51",
+            "77e8c550a8e53c08ceaaaab58b27fb97adc9a854db2a710a47eaf416684368be",
+            "7cdd20571ca41d6c6f1d01f929c7223313b87fbb29030017c84400ff3f7debf8",
+            "cd875ce591d9fe39ea39ee72cafef8064a66cde0fe9eaad32403accb7e1e216a");
     private record Row(String path,String before,String after,String text) {
         boolean added() { return "ABSENT".equals(before); }
     }

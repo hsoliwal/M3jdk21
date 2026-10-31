@@ -29,8 +29,8 @@ jobs:
           set -euo pipefail
           SRC=m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java
           PROOF=m3/collections/src/test/java/jdk/m3/collections/M3ParentHandleClosureProof.java
-          echo '5b05afa28e4a8ed2d6090b1ac8ff5f1c89a334bb3b93c94ae8038669e72c5fbb  '"$SRC" | sha256sum -c -
-          echo '2d891a6bd14007f003dc34b53dd548bcae55341839c26db400fca5e7c3da29b0  '"$PROOF" | sha256sum -c -
+          echo '8632721e214a20e82376fa68dd4e4b882719c57297c650e07d1c9daad08f4dc3  '"$SRC" | sha256sum -c -
+          echo '08609e56a488a76f8f4ec35ff70d73941ed3cdb3445d39b631fdecb625ed71bf  '"$PROOF" | sha256sum -c -
           mkdir -p "$RUNNER_TEMP/m3-tree-parent/src/jdk/m3/collections"
           git show '9dd1df62f3d5406760427cb5e840a36c9e7a59ea:'"$SRC" > "$RUNNER_TEMP/m3-tree-parent/src/jdk/m3/collections/M3TreeWindowPlan.java"
           echo 'be77b8dd08c7a498355bc8793932039a00a0f523e206e47f116b7a6b10635082  '"$RUNNER_TEMP/m3-tree-parent/src/jdk/m3/collections/M3TreeWindowPlan.java" | sha256sum -c -

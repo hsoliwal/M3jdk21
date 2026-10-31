@@ -462,7 +462,7 @@
     {
       "source": "jdk.internal.m3.indexstring.shared.SharedArrayNative.compare / hash32 / metrics / copyTo; SharedSegments.preparedBuffers",
       "source_commit": "857c4cc0ddeb73e5ea5269a1d0ef2d30057dcfa8",
-      "source_blob_sha1": "SharedArrayNative.java:62c2e6e089b6a203b22d5aae4e15a834876f08d1;SharedSegments.java:2912e2afbc13a981ed6f6ef704b8b17047481fea;shared_arrays.cpp:8b85031cfbe1d64f43c93a1453f8670cc65dbafe;shared_string_compare.cpp:c0bf741d48304dceb73fddd0352ab510d1f2265f",
+      "source_blob_sha1": "SharedArrayNative.java:396dfbc0c6866e49c7f60df2a88418ef58e22431;SharedSegments.java:48aab5883a38394d8d3fc564761e2444e54d24c9;shared_arrays.cpp:182520825505422c2d7b5570cb3b2bb556b0f222;shared_string_compare.cpp:c3fc9b5f58ca4bee925f17578fd499ae886c75c0",
       "target": "java.lang.String.compareTo(String) -> java.lang.M3String / M3StringOwner / M3StringAtom.address; JNI projections -> M3String.getChars/getBytes and nativeCharShadow/nativeByteShadow",
       "status": "Apache source custody pinned; target direct-address fast path not implemented",
       "source_role": "shared-segment JNI compare, hash, metric and caller-owned range-copy kernels over direct ByteBuffer owners",
@@ -802,7 +802,7 @@
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3ObjectIndexSnapshot.java",
       "target_module": "m3/collections",
       "target_owner": "M3ObjectIndexSnapshot and existing M3IndexPathMasks; no second payload or native ABI",
-      "source_preimage_sha256": "ed19c7b34e23f61ea5bfa808550a1189ccc07900b7022f3572d78c23c5929f0c",
+      "source_preimage_sha256": "67116969a93d0da9beffafdb36a8310247a206a96d7cb58ffbce3c053e1ad4f1",
       "target_postimage_sha256": "db9e91e59fab8ef1166ee42d2936db0e23a6b59b34165273bfcac5b73382fa7a",
       "recipe": "jdk.internal.m3.rewrite.M3Jdk21ObjectPhysicalSlotProjection",
       "recipe_path": "m3-openrewrite-recipes/recipe-crates/m3-object-physical-slot-projection-20261018",
@@ -1032,8 +1032,8 @@
               "int longestProperBorderLength()",
               "long metadataPayloadBytes()"
             ],
-            "sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
-            "git_blob_sha1": "65f259e23d818b9b35052feff37198f5ddf567b4",
+            "sha256": "5f936a3c6e69ca487eff6a0665ada01546750d9d87ce85ee50a337a4236233d0",
+            "git_blob_sha1": "317108234d7692410517731b325f7d28de99354e",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/m3/migration-pass1-prefix-evidence-20261002"
@@ -1143,8 +1143,8 @@
             "path": "m3/core/src/jdk/m3/text/M3StringPiece.java",
             "symbol": "jdk.m3.text.M3StringPiece",
             "signatures": [],
-            "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
-            "git_blob_sha1": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+            "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755",
+            "git_blob_sha1": "62506fb9b3cff0e6f24e856648528db58c45b92b",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
@@ -1156,8 +1156,8 @@
             "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
             "symbol": "jdk.m3.text.JoinedM3StringPiece",
             "signatures": [],
-            "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
-            "git_blob_sha1": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
+            "sha256": "1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7",
+            "git_blob_sha1": "5022e9811ce9391671c794446c7772569cfd369f",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
@@ -1169,8 +1169,8 @@
             "path": "m3/core/src/jdk/m3/text/LocalM3Arena.java",
             "symbol": "jdk.m3.text.LocalM3Arena",
             "signatures": [],
-            "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
-            "git_blob_sha1": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
+            "sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4",
+            "git_blob_sha1": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
@@ -1182,8 +1182,8 @@
             "path": "m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
             "symbol": "jdk.m3.text.LocalM3StringPiece",
             "signatures": [],
-            "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
-            "git_blob_sha1": "6b745c9472144ad6de01de4d06a533974e558fb1",
+            "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad",
+            "git_blob_sha1": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
@@ -1195,8 +1195,8 @@
             "path": "m3/core/src/jdk/m3/text/StorageIdentity.java",
             "symbol": "jdk.m3.text.StorageIdentity",
             "signatures": [],
-            "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
-            "git_blob_sha1": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
+            "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354",
+            "git_blob_sha1": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
@@ -1275,7 +1275,7 @@
             "symbol": "jdk.internal.m3.indexstring.FrozenChars",
             "signatures": [],
             "sha256": null,
-            "git_blob_sha1": "a8f016a1764aea6e970bc60e38f345804e82a84e",
+            "git_blob_sha1": "e7cecf3e32eca949dcf6616455caab6c62fd909d",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -2982,8 +2982,8 @@
               "static <T> MIndexVersionTable<T> prepare(List<MIndexString>, Scheme<T>, int, MIndexProgressMonitor)",
               "int[] between(MIndexString, boolean, MIndexString, boolean)"
             ],
-            "sha256": "a6cf406b99ce4064e23de1d9eddeb583b6b0f31f6ae74a06c8f98f8f8b330542",
-            "git_blob_sha1": "1675e6d7e35e3371bce2ba9b53716a00b6fd67da",
+            "sha256": "6f2ba0e4dcf2cd131e4907519b0ba91dabd41d68c5253a16834d9bb37ac160c2",
+            "git_blob_sha1": "e30893f329e957658fb6d408a6d361ce7df6c0d5",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -3103,8 +3103,8 @@
             "signatures": [
               "MIndexLibraryRelease(MIndexString origin, MIndexString group, MIndexString artifact, MIndexString rawVersion, MIndexString extension, MIndexString classifier, MIndexString contentSha256)"
             ],
-            "sha256": "fb34b0ca5dd91bcc45df89521e934af07139a3630c09b012b19876a0e54be422",
-            "git_blob_sha1": "9df260247ec226392832a01fcb99f6bc56b151c6",
+            "sha256": "b2ac4a895d541380c37f6300e1d4b04d5827db486517159b46744e64ff5acbd9",
+            "git_blob_sha1": "e1ca92f9b8e1134a799903f52b525613bbf25a5f",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -3222,8 +3222,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.vm.MIndexVmSession"
             ],
-            "sha256": "bdeb857abaa302a40c4f542c23c4629eb0091f04d56d60545d6ca51325ff92a4",
-            "git_blob_sha1": "d2fb810dccd53b5ecccde9063a348199f78e0672",
+            "sha256": "867a9ce0fb71162b38a68bd1e3d12b724bd61b15b844197a3b81f32cb4cc18cf",
+            "git_blob_sha1": "74f0fa06fc5ddb3417efdac3a8282e5f2488f07e",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -3343,8 +3343,8 @@
               "signatures": [
                 "jdk.internal.m3.mindex.vm.MIndexVmSession"
               ],
-              "sha256": "bdeb857abaa302a40c4f542c23c4629eb0091f04d56d60545d6ca51325ff92a4",
-              "git_blob_sha1": "d2fb810dccd53b5ecccde9063a348199f78e0672",
+              "sha256": "867a9ce0fb71162b38a68bd1e3d12b724bd61b15b844197a3b81f32cb4cc18cf",
+              "git_blob_sha1": "74f0fa06fc5ddb3417efdac3a8282e5f2488f07e",
               "fingerprint": null,
               "revision_role": "pinned",
               "tracking_ref": "refs/heads/develop"
@@ -3387,8 +3387,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.vm.MIndexVmPrecomputeKey"
             ],
-            "sha256": "406f451222b1f6e950c28439316fdbcd6e9cfb9463658e1deec85cfe41197f1a",
-            "git_blob_sha1": "fc9aef1cce8e43ca81fd922ca6ea406417b1334b",
+            "sha256": "424e07da19c2218db8a705776ed2884146637d4325921a06c670afe3c96129e7",
+            "git_blob_sha1": "d7eec9579f614ff521683475df3eb5b825159066",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -3508,8 +3508,8 @@
               "signatures": [
                 "jdk.internal.m3.mindex.vm.MIndexVmPrecomputeKey"
               ],
-              "sha256": "406f451222b1f6e950c28439316fdbcd6e9cfb9463658e1deec85cfe41197f1a",
-              "git_blob_sha1": "fc9aef1cce8e43ca81fd922ca6ea406417b1334b",
+              "sha256": "424e07da19c2218db8a705776ed2884146637d4325921a06c670afe3c96129e7",
+              "git_blob_sha1": "d7eec9579f614ff521683475df3eb5b825159066",
               "fingerprint": null,
               "revision_role": "pinned",
               "tracking_ref": "refs/heads/develop"
@@ -3552,8 +3552,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexClass"
             ],
-            "sha256": "bd4e1312397b2d0b836f69aa32be6f7846cce69d30abc814936d0a88af06ea7c",
-            "git_blob_sha1": "488bfc02c9830b333f45c631a9fa933cec56ea91",
+            "sha256": "6a5e0a7a89a39b8b19d919fee8c781441a7b285e627d2ea723b20cb7e3c0376b",
+            "git_blob_sha1": "754a52297ff8c9ce34ffe7c765f8d7c684e693e4",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -3674,7 +3674,7 @@
                 "jdk.internal.m3.mindex.classindex.MIndexClass"
               ],
               "sha256": null,
-              "git_blob_sha1": "488bfc02c9830b333f45c631a9fa933cec56ea91",
+              "git_blob_sha1": "754a52297ff8c9ce34ffe7c765f8d7c684e693e4",
               "fingerprint": null,
               "revision_role": "pinned",
               "tracking_ref": "refs/heads/develop"
@@ -3717,8 +3717,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexClassIndex"
             ],
-            "sha256": "047eb00e579a0bed899419373e19514f0e06876efec39b9cfa2bca2d391196aa",
-            "git_blob_sha1": "35632a8688201f2a6849b52e325daa27ae3a7bfe",
+            "sha256": "f169228bd954975a1254204a39e99187e68a99ca09f4f472dcb500349324d987",
+            "git_blob_sha1": "eead494947962c5099c6decfbcf546163249164d",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -3733,8 +3733,8 @@
               "lowerBound(int[],int,int,int)",
               "upperBound(int[],int,int,int)"
             ],
-            "sha256": "993c38054e42c14efe27b52fa0b1e4d322aa17a2f8bdf7e8a460d4adbabe9e35",
-            "git_blob_sha1": "44975a54d368ecaf774683ab5d64bd14bb070209",
+            "sha256": "9e9c2eb9edfed393379793e634573ea33a87e2220cbfd7f761325fc326a087d7",
+            "git_blob_sha1": "0e40bec4b02bde697eba68b9817cc46c566987e2",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -3855,7 +3855,7 @@
                 "jdk.internal.m3.mindex.classindex.MIndexClassIndex"
               ],
               "sha256": null,
-              "git_blob_sha1": "35632a8688201f2a6849b52e325daa27ae3a7bfe",
+              "git_blob_sha1": "eead494947962c5099c6decfbcf546163249164d",
               "fingerprint": null,
               "revision_role": "pinned",
               "tracking_ref": "refs/heads/develop"
@@ -4118,8 +4118,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexClassBoundary"
             ],
-            "sha256": "ea78f4d9e5870f6951dba8a124019aa96396261aac041c8ad8c247a6ddc35c3a",
-            "git_blob_sha1": "9166e2168afc6a78fe8bdb7e570defc178c7c35e",
+            "sha256": "016db454989437ba213e2af47d0273f70243a2d0bede85f8e79ab8c6772a5150",
+            "git_blob_sha1": "e414f8c8b247ea38473d368eadbde3f98702e682",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -4251,8 +4251,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexJvmDescriptor"
             ],
-            "sha256": "0e0ddfc53acaeb28137319fd20ee5005f9d7231949ebd3106193c287f13be9b8",
-            "git_blob_sha1": "d0eb96ae49c0456c8d31f1e714882b525b4c9a97",
+            "sha256": "3fb76c976a34e1808f42d35cc194ba490316fab8e9d4176c071180aefb362341",
+            "git_blob_sha1": "2e8995bd7b5995e908cf8e4f6c80c86244013f6d",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -4331,7 +4331,7 @@
           "id": "jdk.m3.rewrite.backport.Descriptor",
           "version": "snapshot@39702564163c017f9dc0350a305b032b06274857",
           "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
-          "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
+          "sha256": "8006b173253ea7502efe7f7a77738b65f9df9e2871d4d6c29ff4fb8fb058c8c6",
           "preconditions": [
             "Use the retained M3Jdk21HashPinnedSnapshotRecipe and exact jdk22-descriptor manifest.",
             "The owner must match df17c48e54de060060e4393e5c2f3e8e2f068bad38a69576a82709cc6d4cbdb9 or 1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67; the test is ABSENT or exact postimage.",
@@ -4428,8 +4428,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexMember"
             ],
-            "sha256": "4230b2df028a54d833284d373c044b58c4ffde0da1f15b394372d9cbff6e97da",
-            "git_blob_sha1": "70cd228801272d8e5fcb68bce280d2cb842e5ae8",
+            "sha256": "3acea5d4193a33fd6552e883f862243a23757d74855c51a450fa22ada1c0e350",
+            "git_blob_sha1": "ee7b754cd62c9bfccdea84f28c8f036917eb1126",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -4561,8 +4561,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexMemberKind"
             ],
-            "sha256": "76c8a68d9f1bafa36df848da02c1b00c4d738e7ff09c63d6761d6c8f892e20cb",
-            "git_blob_sha1": "9ba32db4528c74535a68c656b891d08924b75dc0",
+            "sha256": "196619a117a3783ad02487a3b05d8f22066a3b1667cabbd3cb17d63bba9dd4dc",
+            "git_blob_sha1": "f68a9ce030ace43d20c626c3c6f6bf8c54a0ece0",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -4694,8 +4694,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexMemberFlags"
             ],
-            "sha256": "febb6a32912e4149ca5521b149c86554f37d978382242589603aa9265139dfb9",
-            "git_blob_sha1": "9a84c2a18fecd4b67a0c503527347e2d4f75d2c8",
+            "sha256": "680cf4bd7fb80ee6a760ed0f15220c060e37a1c51cac60821fda6a363ef69154",
+            "git_blob_sha1": "34d8b046955d327ef3917da907a71a2fb20743a8",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -4827,8 +4827,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexClassFlags"
             ],
-            "sha256": "bc3fcc4bc3f582e6565c1c8509038217e7a7360dbb0e290c66b03090c0f6961e",
-            "git_blob_sha1": "d8131ebce1c01a014a9320e2ec771673f2d06b5c",
+            "sha256": "08f2e889d5e35db1a18600db4a9abbd8b6cae0ba67978363d7b1f675c4f38853",
+            "git_blob_sha1": "33d406046f18d71c255e3ef130edb7a464260782",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -4960,8 +4960,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexField"
             ],
-            "sha256": "ae3d0439814c26aa0a012984aa6d4debef70bd31590b403f9643634c231cd8b4",
-            "git_blob_sha1": "bc93b18d5ee4867a841ac036ffb35dcd1e72c3f4",
+            "sha256": "56d18634a23f188db2da23a790412ce393b3223689c2977899b79143043b4e51",
+            "git_blob_sha1": "4a41ee9ccca3a1e33514e45f38aa8dff85d7162d",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -5093,8 +5093,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexMethod"
             ],
-            "sha256": "b11190cdc801a2ce46078fa04d364d9362402c3aef4ff16aebac05a56898aaaa",
-            "git_blob_sha1": "41268ab2541b70fef70767557228bf568d9a01b7",
+            "sha256": "47acb7331e94c07ae48662e9b4a0d6e7d5189ea698e7a189c89a31bc306cb85a",
+            "git_blob_sha1": "b9bba7c3ada958ff1c2f6227459a78532dcdfd7f",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -5226,8 +5226,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexConstructor"
             ],
-            "sha256": "3b2b432ebb29f5f08e30b8f9194a2675f052a238f5f16432ac9e3d26e9d489c2",
-            "git_blob_sha1": "24be84434f65bffed5a5f0c609cbe596ae2b4985",
+            "sha256": "0f7d1f2c804978e9188dc63d9cfe9127654ad8ebfcaf3995761d77a50a862d61",
+            "git_blob_sha1": "5df90a368346a5cd4875119cfbff0d973598effa",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -5359,8 +5359,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexRecordComponent"
             ],
-            "sha256": "b63a7f5a59d3badd7340e00021f2eaa410645d0f4a5d25a5a570797897969457",
-            "git_blob_sha1": "56d5b4adead17be7fef8e4b750f13fdf75d98a31",
+            "sha256": "b340b86517b838f43eed7087477b8f8bed47e19e23b826308e2a81181e49dce5",
+            "git_blob_sha1": "17af04a726daa4fcda4aa6bf0abbd6e3a177ba9e",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -5707,8 +5707,8 @@
               "package-private static boolean eligible(J.MethodDeclaration)",
               "package-private static boolean atomized(J.MethodDeclaration)"
             ],
-            "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb",
-            "git_blob_sha1": "0041adab5913304874f5063fc2b982ff3cc1e065",
+            "sha256": "d2f8d2285d8b9b90b30f0906e2373efab8a25d9c84f0eefc252ed7acf2e20719",
+            "git_blob_sha1": "44935f75d9736744fbe0653774e324b140eea0be",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
@@ -5804,7 +5804,7 @@
           "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-merge-recovery-20261006-mapping-v04",
           "version": "0.1.0-SNAPSHOT",
           "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-          "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+          "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
           "preconditions": [
             "Four exact reviewed current mapping preimages at 09075810b55229662329a158923287e8a7118f86.",
             "Preserve all 55 ordered IDs, 53 non-JCC records, all 34 current top-level mapping objects, precompute ownership and 20 existing gates.",
@@ -6214,8 +6214,8 @@
                 "package-private static boolean eligible(J.MethodDeclaration)",
                 "package-private static boolean atomized(J.MethodDeclaration)"
               ],
-              "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb",
-              "git_blob_sha1": "0041adab5913304874f5063fc2b982ff3cc1e065",
+              "sha256": "d2f8d2285d8b9b90b30f0906e2373efab8a25d9c84f0eefc252ed7acf2e20719",
+              "git_blob_sha1": "44935f75d9736744fbe0653774e324b140eea0be",
               "fingerprint": null,
               "revision_role": "pinned",
               "tracking_ref": "refs/heads/master"
@@ -6428,7 +6428,7 @@
           "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-merge-recovery-20261006-mapping-v04",
           "version": "0.1.0-SNAPSHOT",
           "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-          "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+          "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
           "preconditions": [
             "Four exact reviewed current mapping preimages at 09075810b55229662329a158923287e8a7118f86.",
             "Preserve all 55 ordered IDs, 53 non-JCC records, all 34 current top-level mapping objects, precompute ownership and 20 existing gates.",
@@ -6665,8 +6665,8 @@
               "boolean testPrecomputed(Facts)",
               "Facts Facts.concat(Facts,int)"
             ],
-            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
-            "git_blob_sha1": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea",
+            "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e",
+            "git_blob_sha1": "4e1d24af8d3054a27ae3b6f2d8eebd6486225118",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -6838,8 +6838,8 @@
             "signatures": [
               "jdk.internal.m3.common.collections.SegmentedAddress28"
             ],
-            "sha256": "5844dea8e82d79d4beedaa2254956a3a2bb1db20ee39fc38a6d6df59e39a3c37",
-            "git_blob_sha1": "4d7629fac2a5fc13e2008570d8b62caacdd800bc",
+            "sha256": "92d4ae1d60e6ce6aab79ef1b91e6de4c076e02bc0a0603a6b2fb22ca21c1d881",
+            "git_blob_sha1": "6b931aefdb4afaf8765a7228dcad5bc9e436c9f8",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -6977,8 +6977,8 @@
             "signatures": [
               "jdk.internal.m3.common.collections.SegmentedIntLane28"
             ],
-            "sha256": "175f3e0beb5b9e1aca7196491d19a54a95ed2218253951677e898615ba3ed8ac",
-            "git_blob_sha1": "5e71da1dd3fdc1640dc1771c952796a6c229281b",
+            "sha256": "a9be9f532e5c3606fda0ff30599227301133ca70e9d1fcb1f1e2182ef72f5488",
+            "git_blob_sha1": "2a42412b95a5ee07c4e716fe37c530b254fedec1",
             "fingerprint": null,
             "revision_role": "pinned"
           },
@@ -6991,8 +6991,8 @@
             "signatures": [
               "jdk.internal.m3.common.collections.SegmentedIntLane28"
             ],
-            "sha256": "bbba8cc495480bbde1d8e60ecb6b5c5ba3b8bf0583477622e3d547e5ba546ac0",
-            "git_blob_sha1": "993fe654bfcb4039a6a2fa11513751e7eb2c9729",
+            "sha256": "b2698128170550f44582cc9bafd0b1ba07c2bde3f06fed50829b3ef654ce6d9c",
+            "git_blob_sha1": "1613a57aa543cacb6f53f5a1c3bc0a10cf4a4cee",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -7132,8 +7132,8 @@
             "signatures": [
               "jdk.internal.m3.common.collections.SegmentedLongLane28"
             ],
-            "sha256": "237289bdec5fe8d6f142dfffab22a72eebc499ea1b54f0a350bbe09c0e801394",
-            "git_blob_sha1": "6105671f09f5a5e27147430b474719daab2b1e29",
+            "sha256": "7fdce7c2cfe529251c69cdf186d4cabc8333c46692df78cbabdae56aa2a023e2",
+            "git_blob_sha1": "f7b3a7f0f4f4b896ad8325a96e90331881e69259",
             "fingerprint": null,
             "revision_role": "pinned"
           },
@@ -7146,8 +7146,8 @@
             "signatures": [
               "jdk.internal.m3.common.collections.SegmentedLongLane28"
             ],
-            "sha256": "4b6c03da1a13274ce736039359538ff3ffc1ff1586714dba95e769574907ab8e",
-            "git_blob_sha1": "0ca5ca4cbd17589c2b2c33cbda4433ad6319049c",
+            "sha256": "c43673c769bc23dc592dba3a1da9fc2aebc804640dde102f7c749e71f59b415c",
+            "git_blob_sha1": "8f31549c019e33e0200f27c84aea154cbfc2f647",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -7287,8 +7287,8 @@
             "signatures": [
               "jdk.internal.m3.common.collections.SegmentedBitLane28"
             ],
-            "sha256": "fe535b8a1f3b22fa1a63455c9078d7b911c72a87a3255714f66e3639d11000af",
-            "git_blob_sha1": "8932039f353507225f31dfce7c146f5165ccfc54",
+            "sha256": "147021a606f135a4b6b0f347ce90354ee15aef12c229ec5c02a30935216a1e70",
+            "git_blob_sha1": "9bb7173afa861c05b62a557db63e3a6692ddfe4c",
             "fingerprint": null,
             "revision_role": "pinned"
           },
@@ -7301,8 +7301,8 @@
             "signatures": [
               "Java_jdk_internal_m3_common_collections_SegmentedBitLane28_cardinality0"
             ],
-            "sha256": "da2266d8ec93478f4fbeb6a5403e14ce8dcd6a6795c43a5d4230b2a97ef8eb0e",
-            "git_blob_sha1": "1ee8509cdd05a7edcfc732b3c5947dd78b30ce3a",
+            "sha256": "5a4ba31368df4b8c3f8e71275b4db583fcba0be37e5b39d07de8112db44319d5",
+            "git_blob_sha1": "20549bee772f30ffabdc406bb6ab52c7435d2b01",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -7468,8 +7468,8 @@
             "signatures": [
               "jdk.internal.m3.common.collections.PackedBitAtoms"
             ],
-            "sha256": "a8ac10ba4fd2d1fbc0f8f0a4a199e9ca1c28618a4bc17ad1702bc5598b1cfa29",
-            "git_blob_sha1": "9858def13146479794370dd56387d34edfaa95ef",
+            "sha256": "20bce3cf025430fea0351bdc4478b204d808cde04432437e689c2eddb55e0305",
+            "git_blob_sha1": "c463d9857d917263e88933a4d07902840c3f302e",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -7610,8 +7610,8 @@
               "boolean testPrecomputed(Facts)",
               "Facts Facts.concat(Facts,int)"
             ],
-            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
-            "git_blob_sha1": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea",
+            "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e",
+            "git_blob_sha1": "4e1d24af8d3054a27ae3b6f2d8eebd6486225118",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -7836,8 +7836,8 @@
             "signatures": [
               "MIndexRegexAutomaton"
             ],
-            "sha256": "c4cd9feb7645ccd1ef7fc66d165e33ee74fb9fbf6002d80518c228df47290b46",
-            "git_blob_sha1": "28a5c10f1b0c859694da2c2ee880667f54ddf717",
+            "sha256": "904390520e960d5df8402e6ba72f752052169f089593a741e6878b8d480e7227",
+            "git_blob_sha1": "9116b56d55c7fd7ca63cf97f9bbc3eb369e50b7d",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -7928,8 +7928,8 @@
               "boolean testPrecomputed(Facts)",
               "Facts Facts.concat(Facts,int)"
             ],
-            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
-            "git_blob_sha1": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea",
+            "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e",
+            "git_blob_sha1": "4e1d24af8d3054a27ae3b6f2d8eebd6486225118",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -8187,8 +8187,8 @@
               "native long[] composeNative(long[],long[])",
               "native long[] repeatNative(long[],long)"
             ],
-            "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa",
-            "git_blob_sha1": "ea904c0962fb976f43b45575f06f46ad198e29a2",
+            "sha256": "ae1de4b652b474c594d5fa6e8ec2d43aae720d166e885497217688c9fabae49d",
+            "git_blob_sha1": "30359b57b7b553e78355d3672119c685051ec1da",
             "fingerprint": null,
             "revision_role": "pinned"
           },
@@ -8753,8 +8753,8 @@
               "public boolean offer(E)",
               "public int size()"
             ],
-            "sha256": "8afe356324bdaa51953933f2213b573175b64e2921df4c0df7c4a16161274840",
-            "git_blob_sha1": "12eb65d7d4f01624ed34dae6bcad59c14657c46c",
+            "sha256": "12e10948c33dedf38961027f23c01a3a912889d2585dfe8181f35ecb43426dfb",
+            "git_blob_sha1": "8d8d1df4ba7dfbc0c7ec0a7784c73de6056bd9b5",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -8774,8 +8774,8 @@
               "public boolean offer(E)",
               "public int size()"
             ],
-            "sha256": "8afe356324bdaa51953933f2213b573175b64e2921df4c0df7c4a16161274840",
-            "git_blob_sha1": "12eb65d7d4f01624ed34dae6bcad59c14657c46c",
+            "sha256": "12e10948c33dedf38961027f23c01a3a912889d2585dfe8181f35ecb43426dfb",
+            "git_blob_sha1": "8d8d1df4ba7dfbc0c7ec0a7784c73de6056bd9b5",
             "fingerprint": null,
             "revision_role": "pinned"
           },
@@ -9190,8 +9190,8 @@
               "M3IndexedListSnapshot<E> filtered(Predicate<? super E>)",
               "M3IndexedListSnapshot<E> filteredSorted(Predicate<? super E>,Comparator<? super E>)"
             ],
-            "sha256": "d0d258bb05d7102955295f5382e8a737cc2ffd93d578864f83f6025ea9150f1d",
-            "git_blob_sha1": "b2647b144d6cffa785d3b9b0b591de67ebbb602c",
+            "sha256": "314dd966e152fbc869a3cdcdec194f9e724d9fb81abb5d59dcfb966ff9f15413",
+            "git_blob_sha1": "9f3e7c26acec590a796c5897cfe0fa7c47a25b89",
             "fingerprint": null,
             "revision_role": "pinned"
           },
@@ -9205,8 +9205,8 @@
               "M3IndexedListSnapshot<E> filtered(Predicate<? super E>)",
               "M3IndexedListSnapshot<E> filteredSorted(Predicate<? super E>,Comparator<? super E>)"
             ],
-            "sha256": "9dd26cecb3405d304d2661c1b2e5569d73184e1cd9777843ab4c40158e701a18",
-            "git_blob_sha1": "e69da823d4db909bbd99fb94cb6002d5bff5025f",
+            "sha256": "f6e0259fb927dfa1db9cfb8fac20ba7f2bbbefae18d3ba8c2c492ebf7bee619d",
+            "git_blob_sha1": "99eae8861c57876f7b69587458bd9e342c7c4750",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -9222,8 +9222,8 @@
               "M3IndexedListSnapshot<E> filtered(Predicate<? super E>)",
               "M3IndexedListSnapshot<E> filteredSorted(Predicate<? super E>,Comparator<? super E>)"
             ],
-            "sha256": "d0d258bb05d7102955295f5382e8a737cc2ffd93d578864f83f6025ea9150f1d",
-            "git_blob_sha1": "b2647b144d6cffa785d3b9b0b591de67ebbb602c",
+            "sha256": "314dd966e152fbc869a3cdcdec194f9e724d9fb81abb5d59dcfb966ff9f15413",
+            "git_blob_sha1": "9f3e7c26acec590a796c5897cfe0fa7c47a25b89",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -9348,8 +9348,8 @@
             "signatures": [
               "void shiftSiblings(int,int,int)"
             ],
-            "sha256": "888b22b7615d170fff078bdc06780de07a7dfdef2025406b7f4134429db37503",
-            "git_blob_sha1": "bb41516a28fc653c9b2f42d26b991cfeaaf34999",
+            "sha256": "a1a7e24982504e08ded4c156a3d54606ebb1c5f29cdc3cd195a0a5852a475fa1",
+            "git_blob_sha1": "076f655b96a09be7cbf3ef38d47fe8d2a2d0d2c5",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -9364,8 +9364,8 @@
             "signatures": [
               "void shiftSiblings(int,int,int)"
             ],
-            "sha256": "888b22b7615d170fff078bdc06780de07a7dfdef2025406b7f4134429db37503",
-            "git_blob_sha1": "bb41516a28fc653c9b2f42d26b991cfeaaf34999",
+            "sha256": "a1a7e24982504e08ded4c156a3d54606ebb1c5f29cdc3cd195a0a5852a475fa1",
+            "git_blob_sha1": "076f655b96a09be7cbf3ef38d47fe8d2a2d0d2c5",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -9486,8 +9486,8 @@
               "DatabaseFileProvider()",
               "FileSystemOptions options(boolean)"
             ],
-            "sha256": "3fe0054c721ca6ed2e0668eb0b668c31d94a66c8b004926e02de1b8672370e29",
-            "git_blob_sha1": "a673ea0c4e645ac9177f4c54a1ad5eafaa8a59ba",
+            "sha256": "dc2d5ee976416e761ec06b590286e8dd59a487f8ca8787d924fb6582a4ac0694",
+            "git_blob_sha1": "5c5d0294a544bce1f169e8d60956189e7b0e745b",
             "fingerprint": null,
             "revision_role": "candidate"
           },
@@ -9500,8 +9500,8 @@
             "signatures": [
               "DatabaseFileSystem(AbstractFileName,FileObject,Path,FileSystemOptions)"
             ],
-            "sha256": "c7b9298701e15c8c0694ddda200f12a7f0b55eb0bbb6d80c5f8a43caa018b43e",
-            "git_blob_sha1": "0133155070d77095cea5d5c8dd4cb3df484467c3",
+            "sha256": "fe902639ff39a61612ccfebd67c87f16842e336b72aca32777d51298f2636a5d",
+            "git_blob_sha1": "468c3239bf551d3e5c70850c70e043d1601dfbcf",
             "fingerprint": null,
             "revision_role": "candidate"
           },
@@ -9514,8 +9514,8 @@
             "signatures": [
               "DatabaseFileObject(AbstractFileName,DatabaseFileSystem)"
             ],
-            "sha256": "8270e4e57542b037628d1f57e7890af30782488a88175641d4e9e02ca0ea7a9f",
-            "git_blob_sha1": "bf26ee7e4ed3208e63e4ada693a75867d02c9811",
+            "sha256": "6a33b1aa5821d416a2b2d9815cef541589e1e7c034d482464d39917433523cfc",
+            "git_blob_sha1": "8404fc8a29b2dc37b2d2c4037efc6cd61d78d103",
             "fingerprint": null,
             "revision_role": "candidate"
           },
@@ -9528,8 +9528,8 @@
             "signatures": [
               "DatabaseFileName(String,FileName,String,FileType)"
             ],
-            "sha256": "b623496d5986e5f3a304754ea5946f4a1ab17f0c97d0eb0048d2439f70286abc",
-            "git_blob_sha1": "8bc4506aa2edb01346b61dd2e22fa120479916c3",
+            "sha256": "4f909a319286d140637344b986d52e63b8b7203461a73a572d9b546e38bb5228",
+            "git_blob_sha1": "ccc3a63209fd2ef768d6ccebc94bf946bd35f619",
             "fingerprint": null,
             "revision_role": "candidate"
           },
@@ -9542,8 +9542,8 @@
             "signatures": [
               "FileObject resolve(Path)"
             ],
-            "sha256": "ef843e6be00b15e201f1f2fc03b8f5143d1028288f100c8db4d230b391f231a6",
-            "git_blob_sha1": "bc66dec75a86a548a8e2c0f0d3f27f6c4a61a751",
+            "sha256": "ae463a91f9ed5268a5330fac27656a8348eaf287b1e84def47da3e4c40036644",
+            "git_blob_sha1": "9aa891c23f199a1dcb80d00a0a96d32ca08e296c",
             "fingerprint": null,
             "revision_role": "candidate"
           }
@@ -9559,8 +9559,8 @@
               "DatabaseFileProvider()",
               "FileSystemOptions options(boolean)"
             ],
-            "sha256": "3fe0054c721ca6ed2e0668eb0b668c31d94a66c8b004926e02de1b8672370e29",
-            "git_blob_sha1": "a673ea0c4e645ac9177f4c54a1ad5eafaa8a59ba",
+            "sha256": "dc2d5ee976416e761ec06b590286e8dd59a487f8ca8787d924fb6582a4ac0694",
+            "git_blob_sha1": "5c5d0294a544bce1f169e8d60956189e7b0e745b",
             "fingerprint": null,
             "revision_role": "candidate",
             "visibility": "public"
@@ -9574,8 +9574,8 @@
             "signatures": [
               "DatabaseFileSystem(AbstractFileName,FileObject,Path,FileSystemOptions)"
             ],
-            "sha256": "c7b9298701e15c8c0694ddda200f12a7f0b55eb0bbb6d80c5f8a43caa018b43e",
-            "git_blob_sha1": "0133155070d77095cea5d5c8dd4cb3df484467c3",
+            "sha256": "fe902639ff39a61612ccfebd67c87f16842e336b72aca32777d51298f2636a5d",
+            "git_blob_sha1": "468c3239bf551d3e5c70850c70e043d1601dfbcf",
             "fingerprint": null,
             "revision_role": "candidate",
             "visibility": "package-private"
@@ -9589,8 +9589,8 @@
             "signatures": [
               "DatabaseFileObject(AbstractFileName,DatabaseFileSystem)"
             ],
-            "sha256": "8270e4e57542b037628d1f57e7890af30782488a88175641d4e9e02ca0ea7a9f",
-            "git_blob_sha1": "bf26ee7e4ed3208e63e4ada693a75867d02c9811",
+            "sha256": "6a33b1aa5821d416a2b2d9815cef541589e1e7c034d482464d39917433523cfc",
+            "git_blob_sha1": "8404fc8a29b2dc37b2d2c4037efc6cd61d78d103",
             "fingerprint": null,
             "revision_role": "candidate",
             "visibility": "package-private"
@@ -9604,8 +9604,8 @@
             "signatures": [
               "DatabaseFileName(String,FileName,String,FileType)"
             ],
-            "sha256": "b623496d5986e5f3a304754ea5946f4a1ab17f0c97d0eb0048d2439f70286abc",
-            "git_blob_sha1": "8bc4506aa2edb01346b61dd2e22fa120479916c3",
+            "sha256": "4f909a319286d140637344b986d52e63b8b7203461a73a572d9b546e38bb5228",
+            "git_blob_sha1": "ccc3a63209fd2ef768d6ccebc94bf946bd35f619",
             "fingerprint": null,
             "revision_role": "candidate",
             "visibility": "package-private"
@@ -9619,8 +9619,8 @@
             "signatures": [
               "FileObject resolve(Path)"
             ],
-            "sha256": "ef843e6be00b15e201f1f2fc03b8f5143d1028288f100c8db4d230b391f231a6",
-            "git_blob_sha1": "bc66dec75a86a548a8e2c0f0d3f27f6c4a61a751",
+            "sha256": "ae463a91f9ed5268a5330fac27656a8348eaf287b1e84def47da3e4c40036644",
+            "git_blob_sha1": "9aa891c23f199a1dcb80d00a0a96d32ca08e296c",
             "fingerprint": null,
             "revision_role": "candidate",
             "visibility": "package-private"
@@ -10380,7 +10380,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/chrome/ChromeBuiltInAiAdapters.java",
             "symbol": "jdk.m3.llm.chrome.ChromeBuiltInAiAdapters",
-            "sha256": "f597d910a1ec52b45f8d1b247ea54bfefb798530a08ef8d82c3a5f9cfac2fead",
+            "sha256": "50d57b3e0a5dd98f0c11280befac1e4112551dda72aa8643580ca5dc48c0a67d",
             "revision_role": "candidate"
           },
           {
@@ -10389,7 +10389,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/chrome/ChromeMlAdmissionPolicy.java",
             "symbol": "jdk.m3.llm.chrome.ChromeMlAdmissionPolicy",
-            "sha256": "1b0c2aebd1f630d4b91661244d5b304b1c3aa9abda79e62bde55da9cbb86343c",
+            "sha256": "1d493b9ae2a5ef895705e909afba2a51a80ab9cff8ad7c9b5f3a4366c86bac38",
             "revision_role": "candidate"
           },
           {
@@ -10398,7 +10398,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/chrome/ChromeMlBackend.java",
             "symbol": "jdk.m3.llm.chrome.ChromeMlBackend",
-            "sha256": "ce10cdc73ff1693c8c0f078f7687c3c74644dbfb5f27c80d873f8ca8de13e482",
+            "sha256": "de06906402eea97f1506f48731b5c9f0bccf3f71ad6619cb82cb426ffa41a448",
             "revision_role": "candidate"
           },
           {
@@ -10407,7 +10407,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/chrome/ChromeMlBoundedCapture.java",
             "symbol": "jdk.m3.llm.chrome.ChromeMlBoundedCapture",
-            "sha256": "74d4fc5dd0257a6bb20b6cae4d87903a5761f99a6458a1fa34a539bcc81172f0",
+            "sha256": "f67657aead4d734a421b98af0f60b082e083817d1cc19305c4ae0afaa7d33a0e",
             "revision_role": "candidate"
           },
           {
@@ -10416,7 +10416,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/chrome/ChromeMlContextAdvisor.java",
             "symbol": "jdk.m3.llm.chrome.ChromeMlContextAdvisor",
-            "sha256": "d811b7ac806873087d319718f39f8fe1930ca01e33f8e628621f15c6ba935eb9",
+            "sha256": "028ea7807706a37a46b3bc726856365e6a736b30ec4effcbb4da0335071da865",
             "revision_role": "candidate"
           },
           {
@@ -10425,7 +10425,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/chrome/ChromeMlContextPacket.java",
             "symbol": "jdk.m3.llm.chrome.ChromeMlContextPacket",
-            "sha256": "04eba837a90af46c4834800a2200f13eb41599ad1d7b400073212d383603abf4",
+            "sha256": "9ee819ef4a1059e4a857db14cbcc369c05e1f0ab89e736b68ce1d1a4e99b4055",
             "revision_role": "candidate"
           },
           {
@@ -10434,7 +10434,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/chrome/ChromeMlPathPolicy.java",
             "symbol": "jdk.m3.llm.chrome.ChromeMlPathPolicy",
-            "sha256": "b1d238271ca6f7db4aa4d0cd433b2059b032f3ae9ac48e5324963001a8936c14",
+            "sha256": "98d1dadd85f7fffa0c67952f40bb98952ac6e04d572e5deee34a438f6c6ace66",
             "revision_role": "candidate"
           },
           {
@@ -10443,7 +10443,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/chrome/ChromeMlProcessRunner.java",
             "symbol": "jdk.m3.llm.chrome.ChromeMlProcessRunner",
-            "sha256": "268822c0a0d663cdc8483d7d03475c44e755362457065ef61adafb7d4a3446f7",
+            "sha256": "32b573bc2147e96bf4e41b987276c81051b68c7c95929d5d12cb79dfe543386c",
             "revision_role": "candidate"
           },
           {
@@ -10452,7 +10452,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/chrome/ChromeMlProductionConfig.java",
             "symbol": "jdk.m3.llm.chrome.ChromeMlProductionConfig",
-            "sha256": "de317c12ae70948890893f12aa39e6c046961a4772ca90dbf27b6ce1db053dca",
+            "sha256": "b2a454ae451bb4a78a66e0f51aa3df842552177ccb84b5d737b05ebefb427085",
             "revision_role": "candidate"
           },
           {
@@ -10461,7 +10461,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/chrome/ChromeMlRequestException.java",
             "symbol": "jdk.m3.llm.chrome.ChromeMlRequestException",
-            "sha256": "bc398ed553d627c36535f68b142918271bb72ce1d8c5a9209187928ade6f452a",
+            "sha256": "1002d7d7690365da449c821dce3d5a9a54777786a78377c574f21b5969aaa8e8",
             "revision_role": "candidate"
           },
           {
@@ -10470,7 +10470,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/chrome/ChromeMlRunner.java",
             "symbol": "jdk.m3.llm.chrome.ChromeMlRunner",
-            "sha256": "a48c8432f973bf9329ea0932483064f3b4eec7664ee74fb6b7b7b6623fc4707d",
+            "sha256": "983a2e38a14c0a73eeb29a8cfeee26189c4f040d4505c87ce9ada8c318cd8c89",
             "revision_role": "candidate"
           },
           {
@@ -10479,7 +10479,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/chrome/ChromeMlRunnerOutputParser.java",
             "symbol": "jdk.m3.llm.chrome.ChromeMlRunnerOutputParser",
-            "sha256": "d04752f0b9767fa32fdfb8ee9107ee568bdfccd8d10c3d2caf19dc9939dad5d4",
+            "sha256": "978bab976cee68767f8d429e1a844061456e69c27692ce0ff9ce744b6053d01b",
             "revision_role": "candidate"
           },
           {
@@ -10488,7 +10488,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/chrome/ChromeMlRunnerRequest.java",
             "symbol": "jdk.m3.llm.chrome.ChromeMlRunnerRequest",
-            "sha256": "95cee947e2ca5cd12806b2116aa943d7b13a26e4540a68a2b2b361a5a9cb2802",
+            "sha256": "1ef82159bf0f681399218d111ce35fd1473b8026d1abf76f826b9d839a5f8b27",
             "revision_role": "candidate"
           },
           {
@@ -10497,7 +10497,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/chrome/ChromeMlRunnerResult.java",
             "symbol": "jdk.m3.llm.chrome.ChromeMlRunnerResult",
-            "sha256": "8c54f6af390ae27118c4a635ae05b9236c4bdd093cb844570e1ecaebdcd43985",
+            "sha256": "219ae33c3332684460a16b1162616156f8914f7c16cad47ae1127cdf136a6723",
             "revision_role": "candidate"
           },
           {
@@ -10506,7 +10506,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/chrome/ChromeMlRuntimeDoctor.java",
             "symbol": "jdk.m3.llm.chrome.ChromeMlRuntimeDoctor",
-            "sha256": "40e317e5031e99be7bd384832979090a83e92deecd728c10df23cdd00dde20e9",
+            "sha256": "2c1f375c02347cc7d8af18dc4d04a4616eb243ed39bfba665b7c722b25a13810",
             "revision_role": "candidate"
           },
           {
@@ -10515,7 +10515,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/chrome/ChromeMlRuntimeLayout.java",
             "symbol": "jdk.m3.llm.chrome.ChromeMlRuntimeLayout",
-            "sha256": "9ab0134e901179e29ae0208f6cf106acd82f0cf2213a6d2917d20313ba91b4a3",
+            "sha256": "38332bc25c87540340d733ae79bb650d400e4e0ab2bb1ca1eabe700b52881532",
             "revision_role": "candidate"
           },
           {
@@ -10524,7 +10524,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/chrome/ChromeMlRuntimeProbe.java",
             "symbol": "jdk.m3.llm.chrome.ChromeMlRuntimeProbe",
-            "sha256": "26f996c1b214506e4480922d5c1de89932b7b349bae9361ec628d73ee4a9790a",
+            "sha256": "74637987d5ba11b49d3a1ecf76c51061d922dacc856166d76b35588d8ae591a1",
             "revision_role": "candidate"
           },
           {
@@ -10533,7 +10533,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/chrome/ChromeMlTaskService.java",
             "symbol": "jdk.m3.llm.chrome.ChromeMlTaskService",
-            "sha256": "e8b3e90d735a7311cf49011573a2eb9570d547beb493009c5a7e5fdf472d20d3",
+            "sha256": "508da9bd44a8b306ae4a3892afc1a69e92d7fe1d553a875dd5c579ab674d8132",
             "revision_role": "candidate"
           },
           {
@@ -10542,7 +10542,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/chrome/aix/AiXChromeMlMultipass.java",
             "symbol": "jdk.m3.llm.chrome.aix.AiXChromeMlMultipass",
-            "sha256": "f56dbf18a6016ccba5a5a80b53bccf811913c56956fd350a3a34afb217a2d0af",
+            "sha256": "74b700f23a56f9530930f4fe72ee261183e377049675df3ba5bae515aeb351ea",
             "revision_role": "candidate"
           },
           {
@@ -10551,7 +10551,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/chrome/aix/AiXMechanicalPlan.java",
             "symbol": "jdk.m3.llm.chrome.aix.AiXMechanicalPlan",
-            "sha256": "ca0ef8c776cb01f14691e7c18ed5e4ad3c12ab6e8c484327c607f4c6a812e1b7",
+            "sha256": "04f1709a02781988c7a9ea5534dfca1ae464f6ab337d33688d5ceb5f834403b1",
             "revision_role": "candidate"
           },
           {
@@ -10560,7 +10560,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/chrome/aix/AiXSourceSnapshot.java",
             "symbol": "jdk.m3.llm.chrome.aix.AiXSourceSnapshot",
-            "sha256": "9aef3df3f1a75e10248fe01bd790438afd79c3617a23ebf6cd11daf5035a06c9",
+            "sha256": "78a4d5b4166ebebea26c74e55443c1b75923937d3e4cb8431ed20a6fee5113be",
             "revision_role": "candidate"
           },
           {
@@ -10605,7 +10605,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/extract/ExtractiveSummarizer.java",
             "symbol": "jdk.m3.llm.extract.ExtractiveSummarizer",
-            "sha256": "3eac535d5725c388d5897e7b0402af108da88d314054f9a8cf671f0088a11027",
+            "sha256": "4f5f24490ea7d18e16c09f458dd93bef4411dc59acfc915bf24e9523ac1342b8",
             "revision_role": "candidate"
           },
           {
@@ -10614,7 +10614,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/internal/CanonicalJson.java",
             "symbol": "jdk.m3.llm.internal.CanonicalJson",
-            "sha256": "a3c46cff8879ac05e71699a905e1c95520322439593c89a3a3db5961f432c76b",
+            "sha256": "0498971be6aa1b2414c7191c74502cab989d64c26bd4e77b0b3783948dcd35c0",
             "revision_role": "candidate"
           },
           {
@@ -10623,7 +10623,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/internal/LuhnSummarizer.java",
             "symbol": "jdk.m3.llm.internal.LuhnSummarizer",
-            "sha256": "53555ec96988a1f740ce7e8ced03891f24eac53691c72299fc7c1a8fa50045e0",
+            "sha256": "e1b233f1a70d82d88eac7bf13262ee22e353fe40d712f04b8406d0ced81f5a77",
             "revision_role": "candidate"
           },
           {
@@ -10632,7 +10632,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/internal/M3ContractException.java",
             "symbol": "jdk.m3.llm.internal.M3ContractException",
-            "sha256": "003cdd039da26bef1e74d7fc5082f0787f363fa7b6b0d50e3f2748fc23e28245",
+            "sha256": "cacf82020652fe4450890d259b357fd9ecd0ff16395173564a39de5683e502fb",
             "revision_role": "candidate"
           },
           {
@@ -10641,7 +10641,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/internal/PlanHash.java",
             "symbol": "jdk.m3.llm.internal.PlanHash",
-            "sha256": "c9caf84cf204b9e57e2b5829fd32061e31f87ee5755039ccf7b2317a45f4f044",
+            "sha256": "39ae69451b6307989a0d1ad9daf860b707052d6187e5e39d8665c488a4304664",
             "revision_role": "candidate"
           },
           {
@@ -10650,7 +10650,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/internal/Sha256.java",
             "symbol": "jdk.m3.llm.internal.Sha256",
-            "sha256": "b6399830a9dbb4501ac51f8d8ed164593fb781adade0c7a73382d67d0a0fc35a",
+            "sha256": "269f136ec033d1d6844d9cd87114dd0763a65602a4a142040f15025947a86c6c",
             "revision_role": "candidate"
           },
           {
@@ -10659,7 +10659,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/internal/json/ForgeJson.java",
             "symbol": "jdk.m3.llm.internal.json.ForgeJson",
-            "sha256": "f4cf51923ada3e3b05d7593d188bc2f370db6dbc5754808bef6fcad9ffaa0e7a",
+            "sha256": "334521a62d2ec17d708d51f0460c560e5a28b9b3d35afc8154833bb718f3bcc9",
             "revision_role": "candidate"
           },
           {
@@ -10668,7 +10668,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/internal/json/JsonSupport.java",
             "symbol": "jdk.m3.llm.internal.json.JsonSupport",
-            "sha256": "3e0f773cd35b1e60048b2a5a9e1e6efe3e087eda921d5a387f76d4e8d335f0ca",
+            "sha256": "ea6bde61a785e9f30775b1c55a05240a96f5a56ee5748de59b16ccb56a5b39ee",
             "revision_role": "candidate"
           },
           {
@@ -10677,7 +10677,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/internal/json/RecoveryJson.java",
             "symbol": "jdk.m3.llm.internal.json.RecoveryJson",
-            "sha256": "9bc575a72c4f47f969ee9d2303e709fa72560f47f00c05a7c3718dfaf2340585",
+            "sha256": "93a7739cc912e4f361d261f9bb3f1552ccf4b371e0601b59ba0e6a7dbc13a0e4",
             "revision_role": "candidate"
           },
           {
@@ -10686,7 +10686,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/projection/BloomHint.java",
             "symbol": "jdk.m3.llm.projection.BloomHint",
-            "sha256": "dcb21fffb2c0487a5efe314577648fce9d9663ecbc4e17780b5ab2700ac86200",
+            "sha256": "e600b49d5d13bbb6b4baee9b9c13b36d359aa4a3c9bd3fb7f7e680f6d2227282",
             "revision_role": "candidate"
           },
           {
@@ -10695,7 +10695,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/projection/Bm25Index.java",
             "symbol": "jdk.m3.llm.projection.Bm25Index",
-            "sha256": "18451cb56eff80e5bb75dbb75a0b73e289642930f8a5489cecd9ea0a17a16a17",
+            "sha256": "82771564b05889f2ff28afec515ae7b7eff23780e5444935b7b94adb1779cd5c",
             "revision_role": "candidate"
           },
           {
@@ -10704,7 +10704,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/projection/CellKey.java",
             "symbol": "jdk.m3.llm.projection.CellKey",
-            "sha256": "0e0b6b08001f8b46b7f50b1a5b69262a72b0b60d761e48f0a95d8b486dab8cc5",
+            "sha256": "ec4ac363ba32c7766b38d61fc065dbed534001a0285e7f7d9bd837a7f8e7bc7c",
             "revision_role": "candidate"
           },
           {
@@ -10713,7 +10713,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/projection/EntropyValues.java",
             "symbol": "jdk.m3.llm.projection.EntropyValues",
-            "sha256": "0d608de45fd1b2cb3d6932e6a44162ec3e68321149fe73fe9aba2a0950c4f3de",
+            "sha256": "46fcab5f4a8fbc9863240328328fa15648bc859b622cfbef9daae2fff1341adc",
             "revision_role": "candidate"
           },
           {
@@ -10722,7 +10722,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/projection/ExtractiveConsolidator.java",
             "symbol": "jdk.m3.llm.projection.ExtractiveConsolidator",
-            "sha256": "2ab98cca1a7c309bcd935a5098cead35dbbb911759870e7a9747c1508444a6e2",
+            "sha256": "b61e5929f986a8535fb7c9189dd335082c8e2e8380aefb549694861e21ce436d",
             "revision_role": "candidate"
           },
           {
@@ -10731,7 +10731,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/projection/InventorySnapshot.java",
             "symbol": "jdk.m3.llm.projection.InventorySnapshot",
-            "sha256": "499f6c0efc23d3823d920d5935df6768509a6a1cbeb749235b0c3fbefbca5bd9",
+            "sha256": "b48b30139be3a5204c8e6e6ebc1d7fd86886588c92adbc8309555704b271f404",
             "revision_role": "candidate"
           },
           {
@@ -10740,7 +10740,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/projection/SnapshotCodec.java",
             "symbol": "jdk.m3.llm.projection.SnapshotCodec",
-            "sha256": "ec413245f4a6cc99f5db3427fa53b4cdc5457791fafb0e47b30913032c036a7d",
+            "sha256": "c238a55c81030016d74beb6435cef29fe80894ef56a9b6318d551f08c21b163d",
             "revision_role": "candidate"
           },
           {
@@ -10749,7 +10749,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/projection/TextInventoryCell.java",
             "symbol": "jdk.m3.llm.projection.TextInventoryCell",
-            "sha256": "784ed0a03cc2f1d598b41e4449acab1c595e0f502575c42d71bb00bf8dda0b1e",
+            "sha256": "1134fda96e009ff46757e584719812bea5b683cd161d62a0ae1c7e4d1c8f8b60",
             "revision_role": "candidate"
           },
           {
@@ -10758,7 +10758,7 @@
             "module": "jdk.m3.llm",
             "path": "m3/llm/src/main/java/jdk/m3/llm/summary/LuhnSummary.java",
             "symbol": "jdk.m3.llm.summary.LuhnSummary",
-            "sha256": "c9386aede54570a64506fdbe2c640b96059f45953eae3ae79223c67df430c521",
+            "sha256": "27c6b51c09043dfc26b22567d88f829661374e0a2ebab195bcf8a902724b889c",
             "revision_role": "candidate"
           }
         ],

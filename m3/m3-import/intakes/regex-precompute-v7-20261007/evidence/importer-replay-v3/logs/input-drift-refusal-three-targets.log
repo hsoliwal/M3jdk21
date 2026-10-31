@@ -6,7 +6,7 @@
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO] 
 [INFO] --- exec:3.5.0:exec (default-cli) @ m3-synexia-import ---
-Exception in thread "main" java.lang.IllegalStateException: source drift: m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImporterTest.java
+Exception in thread "main" java.lang.IllegalStateException: source drift: m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java
 	at com.synexia.rewrite.M3GpuToolJoinManifest$Scan.requireNoFailure(M3GpuToolJoinManifest.java:163)
 	at com.synexia.rewrite.M3GpuToolJoinManifest$Scan.requireAdmissible(M3GpuToolJoinManifest.java:133)
 	at com.synexia.rewrite.Replay.replay(Replay.java:84)

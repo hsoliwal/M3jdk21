@@ -35,17 +35,17 @@
   },
   "sourceSuccessor": [
     {
-      "targetPath": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+      "targetPath": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexProgram.java",
       "beforeSHA256": "9999e8afe1ec44de58edd644c0ca278415fb7a379f6cdacfe9dbf7011ed77131",
-      "afterSHA256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c",
+      "afterSHA256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7",
       "sourcePath": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
       "sourceBodyAdaptationInM3": "NONE",
       "effect": "SOURCE_CUSTODY_ONLY"
     },
     {
-      "targetPath": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+      "targetPath": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexTrigramQuery.java",
       "beforeSHA256": "ABSENT",
-      "afterSHA256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
+      "afterSHA256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e",
       "sourcePath": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
       "sourceBodyAdaptationInM3": "NONE",
       "effect": "SOURCE_CUSTODY_ONLY"
@@ -63,14 +63,14 @@
     "canonicalOwnerChanged": false
   },
   "queryFrontier": {
-    "historicalFrontierPath": "m3/synexia-import/intakes/regex-precompute-v7-20261007/DEPENDENCY_FRONTIER.json",
-    "historicalFrontierSHA256": "ea74a06d85a468f14ce7df11162296229ab8d83e0fc461d45d03732a4ef97112",
+    "historicalFrontierPath": "m3/m3-import/intakes/regex-precompute-v7-20261007/DEPENDENCY_FRONTIER.json",
+    "historicalFrontierSHA256": "627fa6b15e78e2e5e3cd84ba36aa2bf4e1472bd0625488953d5a976ed634bacc",
     "exactHistoricalEdge": {
       "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
       "revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
       "bytes": 15093,
-      "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
-      "gitBlobSha1": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea",
+      "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e",
+      "gitBlobSha1": "4e1d24af8d3054a27ae3b6f2d8eebd6486225118",
       "license": "Apache-2.0",
       "imports": [
         "java.util.ArrayList",
@@ -86,7 +86,7 @@
   },
   "recipe": {
     "path": "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates",
-    "manifestSHA256": "c460929619e876fb0c96a90fbe62383157ccc872d9ef5d9947e5cd74e5937b9c",
+    "manifestSHA256": "d1b8e074f294b04376b27a41a1a9ab2b4e5a94ebc280668cb526248ef9780025",
     "targets": 2,
     "engineBodyChanges": 0,
     "engineRepository": "hsoliwal/com.synexia",
@@ -114,7 +114,7 @@
       "publicationAndCanonicalRuntimeAdmission": "OPEN"
     }
   },
-  "donorEvidence": "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DONOR_EVIDENCE_INDEX.json",
+  "donorEvidence": "m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DONOR_EVIDENCE_INDEX.json",
   "invariants": [
     "Precompute is core and P0. Receiver source custody must be retained and must not be mistaken for runtime qualification.",
     "Canonical M3StringBacking ownership, owner/generation/range coordinates and exact source/query/image/raw-UTF16 key binding remain required.",
@@ -173,8 +173,8 @@
     "originalReview": {
       "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-02/review-preparation-01/FORMAL_REVIEW.json",
       "bytes": 1278,
-      "sha256": "434db4d33c5a9c1fed5dcbb752b9ac4098a2a707603e04bb170182681146adf8",
-      "gitBlob": "5bb348b8264fef82ecb09b210adee784cc5bacbd"
+      "sha256": "10988bfe16fd16e4f12cbc42cf7ac39cd299c1bcf533bd719efbe57f75c8c0d9",
+      "gitBlob": "48548149815340bb09189cfb68b7fe89b100f7ba"
     },
     "rootResourceDispositionCorrection": {
       "path": "K:/codex-work/m3-v7-ast-publication-20261007/M3_REGEX_REVIEW01_ROOT_DISPOSITION_CUSTODY_CORRECTION_01.json",

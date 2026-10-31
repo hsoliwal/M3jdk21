@@ -20,7 +20,7 @@
     {
       "path": "JccMergeMappingRecoveryTest.java.in",
       "bytes": 49157,
-      "sha256": "3ac63041bb04d41ce17989957f6b5fb98c1125ca54da03b42b6080fbf7e51faf"
+      "sha256": "497b3c5aca7fb359e356daca6ae4fe145b413b013a51c53eda74eff948d7c82c"
     },
     {
       "path": "pom.xml",
@@ -30,22 +30,22 @@
     {
       "path": "m3-jcc-merge-mapping-recovery.yml",
       "bytes": 619,
-      "sha256": "5b15d5f15a8f1559c74a96b70ab5d68a408ab577f55b732c2f6b90c12b0c35dd"
+      "sha256": "f483325880525fe26d0d02bb0fb811268b89ed7a4b1b8680335b68754e6627f2"
     },
     {
       "path": "render_template.py",
       "bytes": 12670,
-      "sha256": "8de92641da0a3cdd6d741d6b526a459d6615527610b3c7565be718a27a4c44b0"
+      "sha256": "1943901576f4b1f3b685e3be3d0d611a1125345273980168f4454a24e780304c"
     },
     {
       "path": "README.md",
       "bytes": 6946,
-      "sha256": "264ecfc1876402eeaf28b0190306b71a3a7e3fc318b1b6e31f4f9ac5a96e9e5a"
+      "sha256": "1b42b8f5f6f2d66dae2934ffdf3a7e695f9614c95b78df0661fbfd2520c50694"
     },
     {
       "path": "compile-check-v01/receipt.json",
       "bytes": 6316,
-      "sha256": "d63ff92d1b317188e032793e98721cba69c1c00b3bc5b5c267d63da32117fd97"
+      "sha256": "9418ec07e2225e436ef119d034ec26ad051dd46d098b08acc99d604ce6f1cf8b"
     },
     {
       "path": "compile-check-v01/javac.stdout.log",
@@ -60,12 +60,12 @@
     {
       "path": "compile-check-v01/src/jdk/m3/rewrite/backport/JccMergeMappingRecoveryTest.java",
       "bytes": 49145,
-      "sha256": "a3ca105ed369e0eb0298440e47eab6e93afada986667d6605a24dfcb14eb3d7a"
+      "sha256": "dbeffc1ee33aeb70e1282a9b68bca6e809a5f25323682691ac50c43283c49545"
     },
     {
       "path": "compile-check-v02/receipt.json",
       "bytes": 6287,
-      "sha256": "7ef8ab96ead54287d9ebcb6af8137963295a977bcc248159ce35cdcc3592ea3e"
+      "sha256": "995add37079dfa6db4923030f36882876f74d74a614244e12df686181b7cc8c9"
     },
     {
       "path": "compile-check-v02/javac.stdout.log",

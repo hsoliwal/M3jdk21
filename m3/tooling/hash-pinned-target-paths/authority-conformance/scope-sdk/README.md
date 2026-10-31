@@ -13,11 +13,11 @@ Three distinct input lineages remain explicit:
 - Admitted branch canonical body d24729950508857280ea1b56d4e930f05137ec85,
  7655 bytes, is an immutable refusal fixture.
 - Actual public merge0000dd38d8b7ea7d49173c0adee02b08563954c1 used custody
- 2768fe5846c2c67c52e872a97f735a0fb4d0d69a,6528 bytes, also a refusal fixture.
+ a993ed2192188729cefeb45d6bcb5e49594e19b0,6528 bytes, also a refusal fixture.
 
 Only exact9174 input and its sealed successor are accepted by this transformation.
 The candidate8b7d2adb648d98ef8654e5ab4eb0f03560a982c8 is9179 bytes, SHA256
-e95b11ebad61c551bc25df3276fa560a613d476bcee2d865ac272bd35bdade9d.
+858e5b5e05b8e3fea57eb30128a2265d0ca3403fa98d44a35addef73c582b078.
 It validates the fixed three-character ASCII drive prefix independently of the suffix
 and adds a private OpenJDK physical-root discriminator before package coalescence. Public JavaLocation,
 Maven main/test package inference, CPULLM/Lucene/M3core layouts and the enum are

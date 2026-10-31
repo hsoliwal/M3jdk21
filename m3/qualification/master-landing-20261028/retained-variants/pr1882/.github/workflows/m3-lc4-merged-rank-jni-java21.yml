@@ -39,8 +39,8 @@ jobs:
           git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java | grep -Fx 'a82c7b93a0919cdfe92de32e636399b429f8cca1'
           git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java | grep -Fx 'b3d88e4b28aab8cbda451c87184c4540549352db'
           git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c | grep -Fx '09551a86c7f9a4ce3b0ed1a26cbbd2b89b7f6b5a'
-          git hash-object m3/collections/src/test/java/jdk/m3/collections/M3MergedSelectContract.java | grep -Fx '115fd28026985612746701105ccdbc331e059637'
-          git hash-object m3/collections/src/test/java/jdk/m3/collections/M3MergedSelectTest.java | grep -Fx 'bb59937e9e290bed20373470c2b720825f9f395c'
+          git hash-object m3/collections/src/test/java/jdk/m3/collections/M3MergedSelectContract.java | grep -Fx '0900161d9116d2bcdc5e1429e27602b758e59384'
+          git hash-object m3/collections/src/test/java/jdk/m3/collections/M3MergedSelectTest.java | grep -Fx 'c632617481cff3792e5d55156b335209386976bb'
       - name: Strict Java21 compile and original JNI header generation
         shell: bash
         run: |

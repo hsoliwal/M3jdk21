@@ -35,11 +35,11 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
-          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java)" = 'e7f9a656ae90a7e90478a80cabbe8e19419f6d5d'
-          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java)" = '1d6930704b737f38aaaca1de37570efa3cdd4de5'
-          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = 'f03722dd7836b668247ea595d953769b4ffa7e60'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankTripletSumContract.java)" = '011265b99581d3bd86be09c3112fea335439756d'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankTripletSumTest.java)" = '6f835bcaef2caf20e633754af2bc5ed3b6da2229'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java)" = '878518da1d55ea8c036a0055cfa6fd1299f9a5ca'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java)" = 'e884b52485f34a9d197cdd2d44606a74d09f40f5'
+          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = 'ab263bf672f9c045cd5ab9aea8dade21a5683fd1'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankTripletSumContract.java)" = '890cb04a6ebc3e0c694a99ae53c9fe3cc41f9bbf'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankTripletSumTest.java)" = '3586f830a42914fe5f44ef9bcf20016f3ce4b0f3'
       - name: Compile original Java owner and JNI header with strict Java21
         shell: bash
         run: |

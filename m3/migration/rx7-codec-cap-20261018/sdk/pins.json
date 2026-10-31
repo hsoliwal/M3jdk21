@@ -89,7 +89,7 @@
   },
   "files": {
     "FOSS_REUSE_DECISION.tsv": {
-      "sha256": "7532731c8ed11732374a281feb315138fb7e7cbd6c6593d36a87bf05065009d7",
+      "sha256": "4772a5542a57345e6685e881e8a726d2523e825ce7b41cf05af7c4a703568ac9",
       "bytes": 10809,
       "license": "Apache-2.0"
     },
@@ -139,22 +139,22 @@
       "license": "Apache-2.0"
     },
     "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-everymodule-hierarchy-test-20261018-inverse/M3EveryModuleRecipeFirstRecipeTest.java.txt": {
-      "sha256": "2221343fd8f8219e80305ff912a27eb8e64d7183ccc603b415dda45eb016546b",
+      "sha256": "f28b72307a9a0e10a8077f17891bd7132f9aff67b968adc6c65bb7881993c572",
       "bytes": 1734,
       "license": "Apache-2.0"
     },
     "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-everymodule-hierarchy-test-20261018-inverse/manifest.tsv": {
-      "sha256": "79a5b05ac8f43a3e24fa9a0e9c882c562bca5188ccf4e750762ff2ce69ee2714",
+      "sha256": "7920349673a9a12d987802a8f42fe780a4a9fd68fecae359de40b891fc8c82ca",
       "bytes": 276,
       "license": "Apache-2.0"
     },
     "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-everymodule-hierarchy-test-20261018/M3EveryModuleRecipeFirstRecipeTest.java.txt": {
-      "sha256": "486cad828ea18cf395bf658763db961a870ed21a513d03eef10234d2e14e3adc",
+      "sha256": "15eac627320687a5d2855944b72dd8150820a7a473974f91ed79809ed7f408e6",
       "bytes": 1855,
       "license": "Apache-2.0"
     },
     "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-everymodule-hierarchy-test-20261018/manifest.tsv": {
-      "sha256": "a36d0e7394ec465629956d46014f70396b065739a43236383a1b8e4368826f06",
+      "sha256": "3a803e2762a4bd80d665d5658b49f1b08b2d89c4d5a013a8cb8a36c7029195cd",
       "bytes": 276,
       "license": "Apache-2.0"
     },
@@ -254,7 +254,7 @@
       "license": "Apache-2.0"
     },
     "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-rx7-codec-cap-launcher-20261018-inverse/manifest.tsv": {
-      "sha256": "58f8f266d12f884a91103d5d8b743cff46ff619a8a874769db69f49d9c3d5691",
+      "sha256": "24ce213bf30c9f2e8658d3381212fbc2b01f50cd429defe27f544d4faa5ae23d",
       "bytes": 398,
       "license": "Apache-2.0"
     },
@@ -264,57 +264,57 @@
       "license": "Apache-2.0"
     },
     "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-rx7-codec-cap-launcher-20261018/launcher.sh.txt": {
-      "sha256": "63de29b3444fcd5a794ff8ba47b8cebf2d0aa14934c5fb38ed58624f0a661a00",
+      "sha256": "f75b94ddf053d3b060af8fd839559baf37a7271d7ec960242fb643cd5db2ab81",
       "bytes": 22034,
       "license": "Apache-2.0"
     },
     "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-rx7-codec-cap-launcher-20261018/manifest.tsv": {
-      "sha256": "19713b093691cf6d5b48e38f14ed3eaf5f12fd41a0a377be55f7ffccc44e97e3",
+      "sha256": "bab90bd401347f5012c129e690517def81f399995af167d0c0b7b2ac89e14990",
       "bytes": 398,
       "license": "Apache-2.0"
     },
     "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-rx7-codec-cap-launcher-20261018/workflow.yml.txt": {
-      "sha256": "b878863f71b122dcabbfef09658458a358662e8210a470b70d5cc431acc250a8",
+      "sha256": "93b04ab91d908a130204f5690292dec963f1fb4844a1ec2192eeeab1c3fe3e85",
       "bytes": 7629,
       "license": "Apache-2.0"
     },
     "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-rx7-codec-receive-20261018-inverse/launcher.sh.txt": {
-      "sha256": "63de29b3444fcd5a794ff8ba47b8cebf2d0aa14934c5fb38ed58624f0a661a00",
+      "sha256": "f75b94ddf053d3b060af8fd839559baf37a7271d7ec960242fb643cd5db2ab81",
       "bytes": 22034,
       "license": "Apache-2.0"
     },
     "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-rx7-codec-receive-20261018-inverse/manifest.tsv": {
-      "sha256": "7daa91f0560f810b807cff9f037e99bcebc7736558dd8e8adb342f336cae2b89",
+      "sha256": "c23b0ba1b1bd19dd568e44126ee628ec0f1450901734e4679459eedaab68debf",
       "bytes": 398,
       "license": "Apache-2.0"
     },
     "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-rx7-codec-receive-20261018-inverse/workflow.yml.txt": {
-      "sha256": "b878863f71b122dcabbfef09658458a358662e8210a470b70d5cc431acc250a8",
+      "sha256": "93b04ab91d908a130204f5690292dec963f1fb4844a1ec2192eeeab1c3fe3e85",
       "bytes": 7629,
       "license": "Apache-2.0"
     },
     "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-rx7-codec-receive-20261018/launcher.sh.txt": {
-      "sha256": "70d8d98bde8c579a666b051fa88009816bab232a6dd63c243321a4b2d8504473",
+      "sha256": "834fd50d01683a1ca3baddbc4124db4fa0d649104b328d171752d18c58d5575c",
       "bytes": 24352,
       "license": "Apache-2.0"
     },
     "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-rx7-codec-receive-20261018/manifest.tsv": {
-      "sha256": "a8641647a82f45d652bce0f6700991fe0cccd5bf90353ae0a6cd301470cf0c05",
+      "sha256": "b2147c5d661dee91b171b8fa4b4b90e64228926d28605fc5d85377478a35015b",
       "bytes": 398,
       "license": "Apache-2.0"
     },
     "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-rx7-codec-receive-20261018/workflow.yml.txt": {
-      "sha256": "c655b1896bc8d99c7d0986da7ad6da78db8ac7607ea4669c61d3f52f814f0a66",
+      "sha256": "9cdd70e886592c92abe4a9c8f0e16055d635cd59d2e59b9424d5f0314f767254",
       "bytes": 7800,
       "license": "Apache-2.0"
     },
     "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-string-concat-null-string-20261018-inverse/manifest.json.txt": {
-      "sha256": "12a749485fcd401d8fba311e5b8911f30e10988a63a14ebcbd11edac3fbee643",
+      "sha256": "0bb9237ae583ba0a63dfaae5742d66be0c2749c79dd51cb6d44f5cf3e8e33f57",
       "bytes": 18689,
       "license": "Existing receiving-repository provenance retained; no relicensing"
     },
     "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-string-concat-null-string-20261018-inverse/manifest.tsv": {
-      "sha256": "3c59b86a9ac14dbc6e3ad9d10585b69ada1375b914dff57297495791106de8bb",
+      "sha256": "f8fbefffaa772159724d226a16fcb782d6771a52f2dfc38f0f6151b0c1ef67e8",
       "bytes": 421,
       "license": "Apache-2.0"
     },
@@ -324,12 +324,12 @@
       "license": "GPL-2.0-only WITH Classpath-exception-2.0; original header retained"
     },
     "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-string-concat-null-string-20261018/manifest.json.txt": {
-      "sha256": "260cf8202542543db466b0fba64ae7613e10810ecaac76dac4d6fea20e096779",
+      "sha256": "e0903dbeabc2f6a52c94e621ebe2e7184b1ef634725c2479d5b76ae5d2a4101d",
       "bytes": 18795,
       "license": "Existing receiving-repository provenance retained; no relicensing"
     },
     "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-string-concat-null-string-20261018/manifest.tsv": {
-      "sha256": "77322757fb4856eebb0c8b1898914f6852f46c34c00e526d4bf5e4283e29aacb",
+      "sha256": "38d56df8bde72e4eed12757dfd11f5d66c0bf027181eab4160c0327335f21f37",
       "bytes": 421,
       "license": "Apache-2.0"
     },
@@ -344,67 +344,67 @@
       "license": "GPL-2.0-only WITH Classpath-exception-2.0"
     },
     "src/main/resources/META-INF/rewrite/m3-everymodule-hierarchy-test-20261018-inverse.yml": {
-      "sha256": "818b75f4c41190c2ed5a52574f040c102b30e80b89fcfd99d29e951aa8f07298",
+      "sha256": "7b40b82cab7386375ea87ae908445fea562d4f166ee52954f8efe7979de48e5b",
       "bytes": 498,
       "license": "Apache-2.0"
     },
     "src/main/resources/META-INF/rewrite/m3-everymodule-hierarchy-test-20261018.yml": {
-      "sha256": "d05daf64d1914f369d5f258b742a1282c531e7581cc5e5be7e82c877ecbf1637",
+      "sha256": "0dab7b1066b533d319133cad917faac535480a4eae104282872de881781c9a88",
       "bytes": 495,
       "license": "Apache-2.0"
     },
     "src/main/resources/META-INF/rewrite/m3-rx7-codec-cap-20261018-inverse.yml": {
-      "sha256": "4fa2f85f6a5409af6e9bf259cef5e4440116deb1bf95e7fac90e2fa5c6205ac8",
+      "sha256": "811817bba19c6ab81db36af304cbb730591866b3b6f3c8372edecbe3ad8fec90",
       "bytes": 438,
       "license": "Apache-2.0"
     },
     "src/main/resources/META-INF/rewrite/m3-rx7-codec-cap-20261018.yml": {
-      "sha256": "71767014353ec4b182897c7dc2a780aa5bd6013bb176d94b49ca2bfe35f69913",
+      "sha256": "b90ef44b0c33abef0108a90a67b936b346f7c82f697a58a855fc9f8bd6bac2a6",
       "bytes": 426,
       "license": "Apache-2.0"
     },
     "src/main/resources/META-INF/rewrite/m3-rx7-codec-cap-launcher-20261018-inverse.yml": {
-      "sha256": "24fada9d14b6481c82d551568639a9673a97bd66b66f561298300d38066117c7",
+      "sha256": "8dde9edea28880dee592fa93e4a9fded8406187083e681b3ad79015f43ef487f",
       "bytes": 506,
       "license": "Apache-2.0"
     },
     "src/main/resources/META-INF/rewrite/m3-rx7-codec-cap-launcher-20261018.yml": {
-      "sha256": "649bdc2aee410d090f9918c5c3a364ad10676428c84d4f9730c07bfb600f19a0",
+      "sha256": "14bbad8ec9b1616b5b2a4161383a71cdb142835cca8a5ee0f37862002813742f",
       "bytes": 600,
       "license": "Apache-2.0"
     },
     "src/main/resources/META-INF/rewrite/m3-rx7-codec-receive-20261018-inverse.yml": {
-      "sha256": "f2379cac373cd6d8decf2298fe680bdc414e8f68f4f157bcab5c746e8e25c44a",
+      "sha256": "d07d30d2c10f3ddcc5f32fab2b11e10dc95c9298a779df33b0031d3ce22fcc9e",
       "bytes": 535,
       "license": "Apache-2.0"
     },
     "src/main/resources/META-INF/rewrite/m3-rx7-codec-receive-20261018.yml": {
-      "sha256": "6debd00e69b0325917906ece59329dfb8d3d4833c439915a0300b6d37585c6aa",
+      "sha256": "ef2409d54fa525c9d387c8b6c60b22a4d7267e353f3f3a313b31418065948ec7",
       "bytes": 621,
       "license": "Apache-2.0"
     },
     "src/main/resources/META-INF/rewrite/m3-string-concat-null-string-20261018-inverse.yml": {
-      "sha256": "030502f45e958191084cc1f6ad2926a9b261173f5534b2af98d85f9a87104a27",
+      "sha256": "6e9d83dbb9eebab919b4230ef7957bde33558eb3871f8f6f08b9f26e05ad7558",
       "bytes": 646,
       "license": "Apache-2.0"
     },
     "src/main/resources/META-INF/rewrite/m3-string-concat-null-string-20261018.yml": {
-      "sha256": "b6f7acb558f63b76c021086007aeeb56bb9674f822fdbedf8a5fbe2b647e1019",
+      "sha256": "5e5622b6cf6e5a35dd54b0724e1bd20f55508e953a910151d8b0be2ff08cf64b",
       "bytes": 645,
       "license": "Apache-2.0"
     },
     "src/test/java/jdk/internal/m3/rewrite/M3RX7CodecCapRecipeTest.java": {
-      "sha256": "be7d14d334573b218681f834ddf484aed96024bee8ad3992450dcbb5f735996a",
+      "sha256": "96b8bf481d9057651254afb835c6090c3692fe79830a2352d35e8ce50b1e9b36",
       "bytes": 91145,
       "license": "Apache-2.0"
     },
     "src/test/java/jdk/internal/m3/rewrite/M3StringConcatTypedCompileQualification.java": {
       "bytes": 23268,
-      "sha256": "a3b42a480262e013ee432c7da5ef61bb31d26e1bae3d88ac83235ae9160a4a98",
+      "sha256": "9cbb551c96237dbbf33238865b378e7689df639ba7b3f44379502c02c73f5445",
       "license": "Apache-2.0"
     },
     "src/test/java/jdk/internal/m3/rewrite/M3StringConcatTypedCompiler.java": {
-      "sha256": "3dbe0c5888ff72e85593549a9cd97510ca357f1d9a01240f4ca6dc04a194cbcd",
+      "sha256": "2a6108b45f5b3991c6c32748eb1cf529df5210c20c5755bda356686fb5b21216",
       "bytes": 14570,
       "license": "Apache-2.0"
     }

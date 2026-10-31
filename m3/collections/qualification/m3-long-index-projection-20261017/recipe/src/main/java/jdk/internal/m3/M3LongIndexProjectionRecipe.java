@@ -35,10 +35,10 @@ public final class M3LongIndexProjectionRecipe {
     private static final List<Output> OUTPUTS = List.of(
         new Output("M3LongIndexProjection.java",
             "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
-            "fc4874e5db5472d8b2b79c122878c8531c536c4fe0b6d3ddfcce6b9ec6055eaf"),
+            "1c7dadcd2312d8e87bb0b33c840db9c2e19ba23f5fb45702f339ab08b9b22f1f"),
         new Output("M3LongIndexProjectionSelfTest.java",
             "m3/collections/src/test/java/jdk/m3/collections/M3LongIndexProjectionSelfTest.java",
-            "e611a47ae6362c7dc86557db99593b9242ea4cf3e94169138c4b4a45208e48cd"));
+            "deda30eea38df3369f4e2d30a4eab1e1f73d79f5be3034ab4a1147db09d448b3"));
 
     private M3LongIndexProjectionRecipe() { }
 

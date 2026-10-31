@@ -23,7 +23,7 @@
       "before": null,
       "after": {
         "resource": "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/workflow.yml.txt",
-        "sha256": "783e59db8ae27787a5cc40310f534e90ae24d60ebdc71c5feb3f30f35a85972b"
+        "sha256": "b82b840f8677d52b77bdd5be16e7eb59794612d74918e139d643e5ac29ab8c93"
       }
     },
     {
@@ -79,19 +79,19 @@
   "guards": [
     {
       "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
-      "sha256": "54fd1fa51872048d8427594691838e27912187ae539463fde51aea5c62e46831"
+      "sha256": "3bd03440ec348cad0cf5de6f3cb87a3cc00cc81b02aacf6f202f67e28976b120"
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8133bcf7e9f750c714cdd42784bdf30b60f67dd957b2831cd54cb01c9a2cfc3a"
+      "sha256": "2102795eec6a55c6e7564ada0fa439cdf0d98e4c1fc395b2d5d52e1f88890283"
     },
     {
       "path": ".m3/openrewrite-recipes/src/main/java/jdk/internal/m3/bootstrap/M3BootstrapTaskRecipe.java",
-      "sha256": "58bac6968ebd2cce6f43f338c289db14435b3ef05ed2abc13402275285b89462"
+      "sha256": "d5b73971cf4107ffe5d9d2678d5a536491cd1552a2739818013e5ba4da1c3424"
     },
     {
       "path": ".m3/openrewrite-recipes/src/main/java/jdk/internal/m3/bootstrap/M3BootstrapInventoryRecipe.java",
-      "sha256": "05ac05e7f3cb7549d26866a61dec0edf19515317c95f73db82d1c517cad88ef5"
+      "sha256": "19450c4b44091c4f37689be1fa45bb30b822cd2f962a323d0991529fc65f6a71"
     },
     {
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3StringBacking.java",

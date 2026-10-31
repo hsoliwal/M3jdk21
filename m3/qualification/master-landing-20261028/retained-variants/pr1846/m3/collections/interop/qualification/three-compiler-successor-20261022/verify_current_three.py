@@ -24,8 +24,8 @@ EXPECTED = (
     ('M3ApacheCollectionsTest.java',
      'ede37d37ca4373ac7888da6542f7447730be822829f789ed82caaaf99dc2ec53',
      '9edf50007e098846f0d677204a445b6bc52b7f0d',
-     '754ba2038ec8b65e1cd1687c775b2f05b1e01b188b34bff3fe3c97098b3a4d7d',
-     'e68a8d0e2cb37cf18afb05b10423ffb7f8b253a1', 'HISTORICAL_36'),
+     '6f4485169af0ea9adb822413de4af7402304ca1fb42af5a271ef4602c926dcfd',
+     '7efdb27015479e8e26f6570fc08f3c107b65e863', 'HISTORICAL_36'),
     ('M3FiveLibraryKeyRangesTest.java',
      'f2f8adcccfee3366007330f84a630ddfb1f093e99cdac060952dddb59dda486d',
      '9698cccbf6ca77c7e6a48eec23cee7781838b19e',
@@ -34,8 +34,8 @@ EXPECTED = (
     ('M3FiveProviderFlagSelectionTest.java',
      '511c42a8f8cf2119770931307ef4c29f35e0fdbbc1ba438e170aa151905ca76e',
      '86939063fd00e472850add045086c07521ba29c3',
-     '14e80741aade85814e34f06a5831337e82bbb3ea0b87c872ec8374c514893e39',
-     '67cfca437535a37d4d2c32e10b01d6ca236cc325', 'ADDED_40'),
+     '5fe57343f4a349776f26f3c698e3b0beb877caa35a87a7c071fdf50452e8be3d',
+     'b6de4c1231208c825ff7da8a65ecde8acefc86e7', 'ADDED_40'),
 )
 HEXSHA = re.compile(r'[0-9a-f]{64}\Z')
 HEXGIT = re.compile(r'[0-9a-f]{40}\Z')

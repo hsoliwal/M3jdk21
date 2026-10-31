@@ -6,8 +6,8 @@
     "IMMUTABLE_NUMERIC_RANGE_COPY"
   ],
   "baseline_revision": "4b24824c3aa09d802121447f8970d442a855f064",
-  "before_sha256": "8d6afc24c677adb7ba612071d34453c8a7d8b9e1a81ac27fb06bc3f62c673edd",
-  "after_sha256": "3221d674ac9947c97d50967659176aa5bdf3db6a51e7e3574daa3d0792a6d83d",
+  "before_sha256": "87b3f76e04880c80a5bbf31e2cfe66fc7567d9b96ec5139cdf31536442ba58c7",
+  "after_sha256": "a7f4c973aa2a29fd457365bad5faeb421f559b19a3a419694e86642edacf4bd4",
   "evaluation_scope": "qualified SDK output for existing separately built immutable arrays module; root receiving Java/JNI gate has separate receipts",
   "selection": "private-owned bulk copy plus one initial flat-join lookup; retain external and nested accessor fallback",
   "sdk_qualification": {
@@ -17,8 +17,8 @@
     "skipped": 0,
     "sealing_tests": 8,
     "receiver_cases": 9,
-    "sdk_inputs_sha256": "1f6796cfb9dc805b44223e02efe05596147be06052447c9f9d6d6bf7016a3365",
-    "sdk_results_sha256": "0f4c412e6b4ade2c05bb7afcec22efd626e89eebf0278762fad32c71ee593043"
+    "sdk_inputs_sha256": "04132a7313abe03064f33c3c0f3572e136cf7074406c610dac436a5d73559846",
+    "sdk_results_sha256": "d4e670b57140271fbf5f6d0cf0c372d618bfd806c19a4d282b090a885c1b278d"
   },
   "semantic_qualification": {
     "baseline_default": [

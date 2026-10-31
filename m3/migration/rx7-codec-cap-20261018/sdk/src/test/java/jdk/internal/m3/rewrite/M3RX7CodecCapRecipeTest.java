@@ -785,9 +785,9 @@ final class M3RX7CodecCapRecipeTest {
                 + " int value() { return 7; } }\n";
         String before = resource(inverse, file(target));
         String after = resource(forward, file(target));
-        assertEquals("2221343fd8f8219e80305ff912a27eb8e64d7183ccc603b415dda45eb016546b",
+        assertEquals("f28b72307a9a0e10a8077f17891bd7132f9aff67b968adc6c65bb7881993c572",
                 sha256(before));
-        assertEquals("486cad828ea18cf395bf658763db961a870ed21a513d03eef10234d2e14e3adc",
+        assertEquals("15eac627320687a5d2855944b72dd8150820a7a473974f91ed79809ed7f408e6",
                 sha256(after));
         assertManifest(forward, Map.of(target, before), Map.of(target, after));
         assertManifest(inverse, Map.of(target, after), Map.of(target, before));
@@ -953,9 +953,9 @@ final class M3RX7CodecCapRecipeTest {
         String target = hierarchyTestTarget();
         assertEquals(Set.of(target), actual.keySet(), "exact hierarchy Result allowlist");
         assertEquals(Map.of(target, expected), actual, "exact actual hierarchy Java Result");
-        assertEquals("2221343fd8f8219e80305ff912a27eb8e64d7183ccc603b415dda45eb016546b",
+        assertEquals("f28b72307a9a0e10a8077f17891bd7132f9aff67b968adc6c65bb7881993c572",
                 sha256(before));
-        assertEquals("486cad828ea18cf395bf658763db961a870ed21a513d03eef10234d2e14e3adc",
+        assertEquals("15eac627320687a5d2855944b72dd8150820a7a473974f91ed79809ed7f408e6",
                 sha256(expected));
         byte[] resultBytes = actual.get(target).getBytes(StandardCharsets.UTF_8);
         assertTrue(resultBytes.length > 0 && resultBytes.length <= 16 * 1024);
@@ -1091,9 +1091,9 @@ final class M3RX7CodecCapRecipeTest {
         assertEquals("e4624f56a93d68cd04337e39ed2cd3896867149908f287d5839ddff9b965ae95",
                 sha256(before.get(test)));
         assertEquals("053c69bd70909731e6509d06f6b29d31a24e2fb669a57f82bf22587e44e839c0", sha256(after.get(test)));
-        assertEquals("12a749485fcd401d8fba311e5b8911f30e10988a63a14ebcbd11edac3fbee643",
+        assertEquals("0bb9237ae583ba0a63dfaae5742d66be0c2749c79dd51cb6d44f5cf3e8e33f57",
                 sha256(before.get(manifest)));
-        assertEquals("260cf8202542543db466b0fba64ae7613e10810ecaac76dac4d6fea20e096779",
+        assertEquals("e0903dbeabc2f6a52c94e621ebe2e7184b1ef634725c2479d5b76ae5d2a4101d",
                 sha256(after.get(manifest)));
         assertEquals(62359, after.get(factory).getBytes(StandardCharsets.UTF_8).length);
         assertEquals(6913, after.get(test).getBytes(StandardCharsets.UTF_8).length);

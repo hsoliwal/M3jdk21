@@ -97,13 +97,13 @@
     },
     {
       "bytes": 51757,
-      "git_blob": "d663dc4c8c13968edfffe0258a1b6ccc927434fb",
+      "git_blob": "f70a391f176afe61437457d645065005940cd215",
       "historical_commit": "36609e4a8719859b46e540f85013c1126a5e3bc2",
       "historical_url": "https://github.com/hsoliwal/com.synexia/blob/36609e4a8719859b46e540f85013c1126a5e3bc2/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/donor_catalogue.json",
       "local_original": {
         "bytes": 51757,
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/secondary-overlay/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/donor_catalogue.json",
-        "sha256": "b9c144d5eb9be716fd749b6d7cda456e0d40aae6ae423c794ad2ace1a4fe1322"
+        "sha256": "669340dc10d5530eba9095d7d81a26265511732eeb27aa5a11252baad60b4754"
       },
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/donor-catalogue-recovery-20261005/payload/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/donor_catalogue.json",
       "mode": "100644",
@@ -114,7 +114,7 @@
       "receiver_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/donor_catalogue.json",
       "receiver_repository": "hsoliwal/M3jdk21",
       "role": "exact historical donor documentation; no current execution or acceptance promotion",
-      "sha256": "b9c144d5eb9be716fd749b6d7cda456e0d40aae6ae423c794ad2ace1a4fe1322",
+      "sha256": "669340dc10d5530eba9095d7d81a26265511732eeb27aa5a11252baad60b4754",
       "source_status": "ABSENT_AT_0c53"
     }
   ],

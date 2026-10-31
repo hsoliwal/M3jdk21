@@ -29,8 +29,8 @@
     ],
     [
       "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java",
-      "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
-      "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
+      "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed",
+      "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed",
       "KEEP"
     ],
     [
@@ -42,7 +42,7 @@
     [
       "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
       "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026",
-      "debfb846563ff067bbf47777e959b7547cf92a21216bcc6722dee65a0bdca1b5",
+      "36abf6f834f90e834e56c7e63e6719ec02848483b5ed56a33a48b55e36b7f837",
       "m3_index_mask_compactor.c.txt"
     ],
     [
@@ -54,7 +54,7 @@
     [
       "m3/collections/src/test/native/M3MaskSpanUnionProbe.c",
       "ABSENT",
-      "55a2ae585ef0d5360e266d0419279804859458d309f87a3ec2d252a12768f103",
+      "65a7d04d7c0d916dcd72c34be8b5ba553dd7f0a5b0857218211214ce163ea243",
       "M3MaskSpanUnionProbe.c.txt"
     ],
     [

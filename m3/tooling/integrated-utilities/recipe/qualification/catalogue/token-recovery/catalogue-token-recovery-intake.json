@@ -4,27 +4,27 @@
   "target_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
   "intake_kind": "NEW_SERIAL_PASS_FROM_DURABLE_CORE_CHECKPOINT",
   "historical_inventory2_bytes": "UNRECOVERED_NOT_RECREATED",
-  "token_manifest_sha256": "eb2065224e9fa6fe734a4086f3dd8401da8ba7e0eed910df341a5a010bf9778c",
+  "token_manifest_sha256": "490814c76664af48b8c4149b62ae7a8d8fe4d0cd1a627b9817f7b8ec0474d0bd",
   "target_files": [
     {
       "path": "m3/docs/name-mapping.json",
       "candidate_file": "/workspace/scratch/0125adabf4e6/m3jdk21-work/catalogue-token-recovery-candidates/m3/docs/name-mapping.json",
       "before_sha256": "2bb378d4e2af9c0bf62482182acdf53f1919abe16e6146195d38d9bcfc6ab9d7",
-      "after_sha256": "80094396bd12f77bf90741cd61d9b190b2fbe613ab4a07960669e9652fe9d7fc",
+      "after_sha256": "b6d6bd6cb8a203f84897610ef963e175e6be6570550732b5820e208c691e9433",
       "before_source": "CANONICAL_CORE_RECIPE_TEMPLATE_AT_4de06d536308121b64bbe714096f7cad6bc0b908"
     },
     {
       "path": "m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json",
       "candidate_file": "/workspace/scratch/0125adabf4e6/m3jdk21-work/catalogue-token-recovery-candidates/m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json",
       "before_sha256": "0271ca2761cb871091fb22c5d7989ff11822ff2deb65d67d2c58080878948ff5",
-      "after_sha256": "1e5c8b03586ff87d1ae1d81a97e667cbcc22710fc7fc3540c25bce11a5c9c159",
+      "after_sha256": "069db1662f60e22fa7a979436f3c7162dc5a0845930b8e5c79a679612b4a7a0a",
       "before_source": "CANONICAL_CORE_RECIPE_TEMPLATE_AT_4de06d536308121b64bbe714096f7cad6bc0b908"
     },
     {
       "path": "m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
       "candidate_file": "/workspace/scratch/0125adabf4e6/m3jdk21-work/catalogue-token-recovery-candidates/m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
-      "before_sha256": "f123ae356ffdd5df1523205dc5f1f48e6daf461b8a6f908a9870e348e80f5e7f",
-      "after_sha256": "2aec0ce2f08dccaf2405ba5950e5ce1378de0f44546f000b85a07c675ab0e0ae",
+      "before_sha256": "5bf447216af55a51b73c275182af891c1ded5c2b427fa6856139731078d2ef8c",
+      "after_sha256": "46f7e0aa4f9c68c1959efb96b62916f5fe9abcaca6e8b3383255ccc27a6587e6",
       "before_source": "CANONICAL_CORE_RECIPE_TEMPLATE_AT_4de06d536308121b64bbe714096f7cad6bc0b908"
     },
     {

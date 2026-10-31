@@ -1,13 +1,13 @@
 {
   "schema": "m3-jcc-ci-maven-inputs/1",
   "status": "PREPARED_NOT_EXECUTED",
-  "frozen_inputs_sha256": "9f12ce757e6267edfc72a3b84c2c155ccc77c57dbd4ab11d9ca62797a61afec9",
+  "frozen_inputs_sha256": "1d87b3c206480dc334d86de4a3693beda6013f7bb6335034af640e92386404a8",
   "workspace": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/maven-workspace",
   "copies": [
     {
       "source": "baseline/.github/workflows/m3-foundation.yml",
       "destination": ".github/workflows/m3-foundation.yml",
-      "sha256": "2a81b9ebfa5d477977dba4632a0e7c89f2ebb89606eb46491197536335d63fee",
+      "sha256": "736f90932bae21b4fb650eb8451f42999fab0a15fe7787cdc80a6375fd3866d8",
       "bytes": 2205,
       "mode": "0o644"
     },
@@ -28,147 +28,147 @@
     {
       "source": "baseline/m3/tooling/migration-recipes/pom.xml",
       "destination": "m3/tooling/migration-recipes/pom.xml",
-      "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888",
+      "sha256": "3eb73bbf38c0c591b8f714f6e9923eaa25a35b5ffc7f0512b8ec7fd3602b5531",
       "bytes": 3383,
       "mode": "0o644"
     },
     {
-      "source": "baseline/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "destination": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "source": "baseline/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "destination": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
       "bytes": 12032,
       "mode": "0o644"
     },
     {
-      "source": "baseline/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ScopeInference.java",
-      "destination": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ScopeInference.java",
+      "source": "baseline/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3ScopeInference.java",
+      "destination": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3ScopeInference.java",
       "sha256": "eca941688f9449f54c16386c581ce162df608858526d4660473e250ed3d0f267",
       "bytes": 6292,
       "mode": "0o644"
     },
     {
-      "source": "baseline/m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
-      "destination": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
-      "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599",
+      "source": "baseline/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "destination": "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37",
       "bytes": 13805,
       "mode": "0o644"
     },
     {
-      "source": "baseline/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
-      "destination": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
-      "sha256": "58d01008f3dc6e79d988e855d76ba90eb0a13d39a76e7eb4027d75442389ec94",
+      "source": "baseline/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
+      "destination": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
+      "sha256": "fa5476d63c50d830de841e53b58dd7346275ce812f16d2e200ad6a4f0d016ff8",
       "bytes": 5379,
       "mode": "0o644"
     },
     {
-      "source": "baseline/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
-      "destination": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
-      "sha256": "69882638771a411cf0866f789a7b3ef7e7e7040cde38a1c40ef4a743d37168e2",
+      "source": "baseline/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
+      "destination": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
+      "sha256": "6d6f4257d18c5e5a016a6c876bffcc8f5c202a65b8f019f2cf3ec1f26bfc84e8",
       "bytes": 4974,
       "mode": "0o644"
     },
     {
       "source": "overlay/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-ci-repair.yml",
       "destination": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-ci-repair.yml",
-      "sha256": "110477a15859322113a7bf5c7293938709f2367a659a80cd6a1a8a1aef67bdee",
+      "sha256": "0e62797f3a4a5208157d124af8339a483efdda84a287acc73ce74d6932d39b00",
       "bytes": 450,
       "mode": "0o644"
     },
     {
-      "source": "overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/after-00-m3-foundation.yml.txt",
-      "destination": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/after-00-m3-foundation.yml.txt",
-      "sha256": "76f3b96be528f33556fde14d811e3df9462f828353967237eed1a46ccc6ce91f",
+      "source": "overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/after-00-m3-foundation.yml.txt",
+      "destination": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/after-00-m3-foundation.yml.txt",
+      "sha256": "e13515b5aaab155ce98bf059c445d1b989cdf82d84487884ac31fb3a183a171f",
       "bytes": 2411,
       "mode": "0o644"
     },
     {
-      "source": "overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/after-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
-      "destination": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/after-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
-      "sha256": "f34470a701cf71b4b4abbe1fa9a5091392a930426ec84d700f13e53edd244629",
+      "source": "overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/after-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
+      "destination": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/after-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
+      "sha256": "5b3bab6188d1f33360f6d5042dac7b0c0ae599ff36c621c6c7e3f0a4debd8933",
       "bytes": 5380,
       "mode": "0o644"
     },
     {
-      "source": "overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/after-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
-      "destination": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/after-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
-      "sha256": "3f3ab065d9e87e9f6095629a56b052642ec9d0883a466430e90a4a4355edd05b",
+      "source": "overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/after-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
+      "destination": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/after-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
+      "sha256": "83d970effb393f67462e5cb269118e6a390d82f74f70eb16905fd4ba948a4416",
       "bytes": 4975,
       "mode": "0o644"
     },
     {
-      "source": "overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/before-00-m3-foundation.yml.txt",
-      "destination": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/before-00-m3-foundation.yml.txt",
-      "sha256": "2a81b9ebfa5d477977dba4632a0e7c89f2ebb89606eb46491197536335d63fee",
+      "source": "overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/before-00-m3-foundation.yml.txt",
+      "destination": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/before-00-m3-foundation.yml.txt",
+      "sha256": "736f90932bae21b4fb650eb8451f42999fab0a15fe7787cdc80a6375fd3866d8",
       "bytes": 2205,
       "mode": "0o644"
     },
     {
-      "source": "overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/before-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
-      "destination": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/before-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
-      "sha256": "58d01008f3dc6e79d988e855d76ba90eb0a13d39a76e7eb4027d75442389ec94",
+      "source": "overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/before-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
+      "destination": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/before-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
+      "sha256": "fa5476d63c50d830de841e53b58dd7346275ce812f16d2e200ad6a4f0d016ff8",
       "bytes": 5379,
       "mode": "0o644"
     },
     {
-      "source": "overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/before-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
-      "destination": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/before-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
-      "sha256": "69882638771a411cf0866f789a7b3ef7e7e7040cde38a1c40ef4a743d37168e2",
+      "source": "overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/before-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
+      "destination": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/before-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
+      "sha256": "6d6f4257d18c5e5a016a6c876bffcc8f5c202a65b8f019f2cf3ec1f26bfc84e8",
       "bytes": 4974,
       "mode": "0o644"
     },
     {
-      "source": "overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/manifest.tsv",
-      "destination": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/manifest.tsv",
-      "sha256": "180963b5f1e171d4ff07a0637cee62d80404df9faf0a3a6f1cf4c2e6ce1606c0",
+      "source": "overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/manifest.tsv",
+      "destination": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/manifest.tsv",
+      "sha256": "c7ec94377bde2ce16f75ea515c8d1547ab37c220b1cfe8d1b448eeee67dc4f04",
       "bytes": 810,
       "mode": "0o644"
     },
     {
-      "source": "overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/plan.json",
-      "destination": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/plan.json",
-      "sha256": "322f62487c3702cdbfb8d2e6c113f3a02422d532e7c01af745d09fce7ca3222f",
+      "source": "overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/plan.json",
+      "destination": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/plan.json",
+      "sha256": "13cfd4d9cf102fef32d57196c1fa4521eb17bae1c02c2fb5ed129ec566724789",
       "bytes": 2937,
       "mode": "0o644"
     },
     {
-      "source": "overlay/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccCiRepairTest.java",
-      "destination": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccCiRepairTest.java",
-      "sha256": "5eb355a57711fcd74ad8f3469227f349c2d2c3eeeab0da3b842bbe69b300ea69",
+      "source": "overlay/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccCiRepairTest.java",
+      "destination": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccCiRepairTest.java",
+      "sha256": "20ff044a614e0ade3d8d497eb432f8283b851d2b2281044c76ec0481a34890cb",
       "bytes": 14760,
       "mode": "0o644"
     },
     {
       "source": "overlay/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/CANDIDATE_DIFF.patch",
       "destination": "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/CANDIDATE_DIFF.patch",
-      "sha256": "17d3becdfaa7f2cd7af575f418b0150fbf4f7e75fd065ec67dab711242b4c477",
+      "sha256": "19c2009fb9f80ca0cc904364362fa40f2fc1a822e56f2693efb6f0864eff0861",
       "bytes": 2467,
       "mode": "0o644"
     },
     {
       "source": "overlay/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/INPUTS.json",
       "destination": "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/INPUTS.json",
-      "sha256": "83e27a12152a5851dd73ffc85d84fbdfa04037f91774ffcf543afd42dc3ac98b",
+      "sha256": "741e405cf206de3587e59e1d1be4a29587ffb65cd81afd504a524b5e70bc2732",
       "bytes": 4219,
       "mode": "0o644"
     },
     {
       "source": "overlay/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/README.md",
       "destination": "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/README.md",
-      "sha256": "5b9ea05d22b01cbc121540596af3141b7a3531160e3df252fe31b66a4643588f",
+      "sha256": "a42c627527e993266e8fdd686a2ad43b72975eca79fdd425da14b96213d99bbe",
       "bytes": 3861,
       "mode": "0o644"
     },
     {
       "source": "overlay/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/prior-ci/INPUT_SEALS.json",
       "destination": "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/prior-ci/INPUT_SEALS.json",
-      "sha256": "46a50fe180b849f665512d71688e5b793fc0622cf6a3d268062658ffb99119e1",
+      "sha256": "6b2acc2708b79a97fa201dc12e24214fe22cfe62d4843378bb469e249b08468a",
       "bytes": 4622,
       "mode": "0o644"
     },
     {
       "source": "overlay/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/prior-ci/LOG_DIAGNOSTICS.json",
       "destination": "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/prior-ci/LOG_DIAGNOSTICS.json",
-      "sha256": "c23936e14eb6428e400aa7c9786bb5928e89fddcae52e68e2a29009db69b795b",
+      "sha256": "47119c85573641f249e6dcded9d56ff3559139f9c440c36fb53403c719ad435d",
       "bytes": 9489,
       "mode": "0o644"
     },
@@ -182,7 +182,7 @@
     {
       "source": "overlay/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/prior-ci/job-111917089229.log",
       "destination": "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/prior-ci/job-111917089229.log",
-      "sha256": "4a0a4ed4f914ee70a8ae2721fd145a75630d66dc89efd63797ba37aac9eed6b2",
+      "sha256": "d16b4b485c5a7bd83ff307417107e472fbd5ed68a1603fd96d14c20562ff5668",
       "bytes": 26384,
       "mode": "0o644"
     },
@@ -196,7 +196,7 @@
     {
       "source": "overlay/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/prior-ci/job-111917090577.log",
       "destination": "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/prior-ci/job-111917090577.log",
-      "sha256": "8929c5874526e6788210222d3ba1349dd9e5afd6f38ee291940e8b361eb76f70",
+      "sha256": "4ad28563aa67998c75fb5ff070d9068fd1c208e95ca891083c6f6f02aabea99f",
       "bytes": 12522,
       "mode": "0o644"
     },

@@ -4,7 +4,7 @@
   "status": "READY_FIXED_IMPORTER_CLASS_SEALS_VERIFIED_NO_RECOMPILE",
   "manifest": {
     "path": "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\export-ast.tsv",
-    "sha256": "860eade0c05a175373e3f96a19150de03f4865efdfcf077af5d5a52d15a471b7",
+    "sha256": "df8f3b861ef48076776b977fa18340fbcd73db30af0d71e351dc4e6a35aa6fd2",
     "root": "0529e8ed872db69b37d46dbee0194b0f3c866a43d2123154984c6f9586832019",
     "rows": 44
   },
@@ -184,7 +184,7 @@
   "negativeFixtures": "Isolated K-only copies; never mutate original templates/canonical source or actual M3 worktree.",
   "scope": "Byte custody/intake/fixed point/refusals only; cold-image geometry and full runtime portability not covered",
   "newImporterOrFramework": false,
-  "priorPlanSha256": "72bd9132a220f2605e15ef220e7062abb676048d9d769443affa7276b4eb036e",
+  "priorPlanSha256": "2e296e25bc5098757e016e486e35c51c411b09161caeca661b44b469ba6a70d0",
   "receiverSourceDelta": "Existing root-qualifier one-line compiler fix; no new importer algorithm or public signature",
   "separateImporterUnitGate": "NOT_ADMITTED_HERE: previous21-test run had18passes/3fixture failures; repair owned by donor closeout lane"
 }

@@ -2224,8 +2224,8 @@
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/RECOVERY_RESULT.json",
       "bytes": 456423,
-      "sha256": "086f4ef835a0939b212bcb7595e75513ecbd46ce6bbf764a8d1f5aca1e418954",
-      "git_blob_sha1": "9c14f0c7eef7ed15b9148947ee729836dc2aefe1",
+      "sha256": "823ef3c5f172b34d7c973f5e50424b8f7ab770687f8e2d80e2ecb2bde8dc1b77",
+      "git_blob_sha1": "b930bffab5a0e9c9e9ad2b5f65804c236b199e51",
       "mode": "100644",
       "final_tree_path_chain": [
         {
@@ -2311,10 +2311,10 @@
           "entry": {
             "mode": "100644",
             "path": "RECOVERY_RESULT.json",
-            "sha": "9c14f0c7eef7ed15b9148947ee729836dc2aefe1",
+            "sha": "b930bffab5a0e9c9e9ad2b5f65804c236b199e51",
             "size": 456423,
             "type": "blob",
-            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/9c14f0c7eef7ed15b9148947ee729836dc2aefe1"
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/b930bffab5a0e9c9e9ad2b5f65804c236b199e51"
           }
         }
       ]
@@ -2324,8 +2324,8 @@
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/E4_EXECUTION_INPUT.json",
       "bytes": 12601,
-      "sha256": "a42a7069695c38edfe2a25c1f8c9e16fd0db89401976679fc6409b78eca6d852",
-      "git_blob_sha1": "428422fc77c5335a43b9c978515445f056d0d2c6",
+      "sha256": "fd465a0de344227444f723287b0dee9fe6e25284c1767737a38b1d7d8b887c93",
+      "git_blob_sha1": "89dab4bdb446bb26d06c4de26ca8d32ea5c32674",
       "mode": "100644",
       "final_tree_path_chain": [
         {
@@ -2411,10 +2411,10 @@
           "entry": {
             "mode": "100644",
             "path": "E4_EXECUTION_INPUT.json",
-            "sha": "428422fc77c5335a43b9c978515445f056d0d2c6",
+            "sha": "89dab4bdb446bb26d06c4de26ca8d32ea5c32674",
             "size": 12601,
             "type": "blob",
-            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/428422fc77c5335a43b9c978515445f056d0d2c6"
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/89dab4bdb446bb26d06c4de26ca8d32ea5c32674"
           }
         }
       ]
@@ -2524,8 +2524,8 @@
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/CURRENT_PROJECTION.json",
       "bytes": 596276,
-      "sha256": "18c5fea0f72fe21aa78df1aa6c319eb4276fc15aa481952539c221ce651e6f49",
-      "git_blob_sha1": "d20138ab763408bbbd793c1ff27778d866b29009",
+      "sha256": "8626cc0e739dac6cc3b2e77496d16e7c75025f7de99f30e1b93f42796e6c4799",
+      "git_blob_sha1": "3c187aada912a867711f1f3adcf32fe99e99f26e",
       "mode": "100644",
       "final_tree_path_chain": [
         {
@@ -2611,10 +2611,10 @@
           "entry": {
             "mode": "100644",
             "path": "CURRENT_PROJECTION.json",
-            "sha": "d20138ab763408bbbd793c1ff27778d866b29009",
+            "sha": "3c187aada912a867711f1f3adcf32fe99e99f26e",
             "size": 596276,
             "type": "blob",
-            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/d20138ab763408bbbd793c1ff27778d866b29009"
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/3c187aada912a867711f1f3adcf32fe99e99f26e"
           }
         }
       ]
@@ -2624,8 +2624,8 @@
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/DESIGNATED_SOURCE_OUTPUTS.json",
       "bytes": 15261,
-      "sha256": "296d5b9eb4f41b51a85d44bb4f05c76e8c5b6453fb55881691b9823055062510",
-      "git_blob_sha1": "59e4ba6f35c37c1a00da2678ed88b9f034d885e1",
+      "sha256": "dab78ed3ffa2cab8dad0feb532f493130570b8da35146a78e961b75cd11dd555",
+      "git_blob_sha1": "36e48a6a4e5b4e2592ad7d3fa90fd3800f6f5185",
       "mode": "100644",
       "final_tree_path_chain": [
         {
@@ -2711,10 +2711,10 @@
           "entry": {
             "mode": "100644",
             "path": "DESIGNATED_SOURCE_OUTPUTS.json",
-            "sha": "59e4ba6f35c37c1a00da2678ed88b9f034d885e1",
+            "sha": "36e48a6a4e5b4e2592ad7d3fa90fd3800f6f5185",
             "size": 15261,
             "type": "blob",
-            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/59e4ba6f35c37c1a00da2678ed88b9f034d885e1"
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/36e48a6a4e5b4e2592ad7d3fa90fd3800f6f5185"
           }
         }
       ]
@@ -8671,10 +8671,10 @@
       },
       "raw_fixture_custody_input": {
         "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/CUSTODY_INPUT.json",
-        "sha256": "22b58a9e97fd6bb4ebebc6a89dc13e368107c10429bff59191914a5e639c81df"
+        "sha256": "2b2f294b13298da20e8d8cbe85581e89265fbe8d1c355a384dba308e4a8f9710"
       },
-      "verification_script_sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa",
-      "reviewed_raw_custody_helper_sha256": "45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be",
+      "verification_script_sha256": "6b8ce688a81b46c20e567bd719104bac6a4cf8578a42904dbe494bca2305e443",
+      "reviewed_raw_custody_helper_sha256": "203f44729f860620949ec9e6aa7c5f2c7d766de2e406548ceb6797797bfdcc33",
       "qualification": "Publication custody only; source execution and receiving acceptance require their separately scoped receipts.",
       "scope": "Verified source publication custody; six mandatory direct body comparisons, separately recorded additional designated-owner reads, and exactly two explicit invalid-UTF-8 Git-identity obligations. This is not universal remote raw-byte or remote SHA256 readback."
     },
@@ -8700,8 +8700,8 @@
         "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/RECOVERY_RESULT.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 456423,
-        "sha256": "086f4ef835a0939b212bcb7595e75513ecbd46ce6bbf764a8d1f5aca1e418954",
-        "git_blob_sha1": "9c14f0c7eef7ed15b9148947ee729836dc2aefe1",
+        "sha256": "823ef3c5f172b34d7c973f5e50424b8f7ab770687f8e2d80e2ecb2bde8dc1b77",
+        "git_blob_sha1": "b930bffab5a0e9c9e9ad2b5f65804c236b199e51",
         "repo": "hsoliwal/com.synexia",
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/RECOVERY_RESULT.json"
       },
@@ -8709,8 +8709,8 @@
         "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/E4_EXECUTION_INPUT.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 12601,
-        "sha256": "a42a7069695c38edfe2a25c1f8c9e16fd0db89401976679fc6409b78eca6d852",
-        "git_blob_sha1": "428422fc77c5335a43b9c978515445f056d0d2c6",
+        "sha256": "fd465a0de344227444f723287b0dee9fe6e25284c1767737a38b1d7d8b887c93",
+        "git_blob_sha1": "89dab4bdb446bb26d06c4de26ca8d32ea5c32674",
         "repo": "hsoliwal/com.synexia",
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/E4_EXECUTION_INPUT.json"
       },
@@ -8727,8 +8727,8 @@
         "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/CURRENT_PROJECTION.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 596276,
-        "sha256": "18c5fea0f72fe21aa78df1aa6c319eb4276fc15aa481952539c221ce651e6f49",
-        "git_blob_sha1": "d20138ab763408bbbd793c1ff27778d866b29009",
+        "sha256": "8626cc0e739dac6cc3b2e77496d16e7c75025f7de99f30e1b93f42796e6c4799",
+        "git_blob_sha1": "3c187aada912a867711f1f3adcf32fe99e99f26e",
         "repo": "hsoliwal/com.synexia",
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/CURRENT_PROJECTION.json"
       },
@@ -8736,8 +8736,8 @@
         "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/DESIGNATED_SOURCE_OUTPUTS.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 15261,
-        "sha256": "296d5b9eb4f41b51a85d44bb4f05c76e8c5b6453fb55881691b9823055062510",
-        "git_blob_sha1": "59e4ba6f35c37c1a00da2678ed88b9f034d885e1",
+        "sha256": "dab78ed3ffa2cab8dad0feb532f493130570b8da35146a78e961b75cd11dd555",
+        "git_blob_sha1": "36e48a6a4e5b4e2592ad7d3fa90fd3800f6f5185",
         "repo": "hsoliwal/com.synexia",
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/DESIGNATED_SOURCE_OUTPUTS.json"
       },
@@ -9458,21 +9458,21 @@
   "publication_receipt": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/PUBLICATION_CUSTODY.json",
     "bytes": 1099619,
-    "sha256": "95f325ce57dadab60031f41514d9a9c5fa3ef6eb29a41e3c9a8c81e2dee996b8",
-    "git_blob_sha1": "0f084555dbbea3ba4c9302386ced30e1e1503dda"
+    "sha256": "bf2d3f29e903f12c201febb4c82083a32758095fdd8fbacbcf25a42e532f44fd",
+    "git_blob_sha1": "067f5f2b6b53343f68f3bf197069e05ae5b9fe3f"
   },
   "execution_review_receipt": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/E4_EXECUTION_INPUT.json",
     "bytes": 12601,
-    "sha256": "a42a7069695c38edfe2a25c1f8c9e16fd0db89401976679fc6409b78eca6d852",
-    "git_blob_sha1": "428422fc77c5335a43b9c978515445f056d0d2c6"
+    "sha256": "fd465a0de344227444f723287b0dee9fe6e25284c1767737a38b1d7d8b887c93",
+    "git_blob_sha1": "89dab4bdb446bb26d06c4de26ca8d32ea5c32674"
   },
   "tree_receipts": [
     {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/BASE_TREE_MODEL.json",
       "bytes": 1372743,
-      "sha256": "877a61dc6d9b4f4fa280faeadbd67db9ee3d56a68768fa06c917d85ab8fbaa80",
-      "git_blob_sha1": "6ee3c1bfd76dc5c0abdba031f163a3d38294f5e9",
+      "sha256": "26378280f0305c59a7529fed18de4dd938e935840260c9667fb55de4c6f6fd8a",
+      "git_blob_sha1": "06235641c8ca32ba686fd83bdc30f4c0f488fac7",
       "scope": "Retained content-addressed base tree bodies; exact objects rehashed."
     },
     {
@@ -9486,7 +9486,7 @@
   "source_current_context": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/current-context/CONTEXT_REFERENCES.json",
     "bytes": 470167,
-    "sha256": "fbc460874aeb04a688ad0ed9b47ad8e3f3b37f88af09d0f32ecfeedc2827fbed",
-    "git_blob_sha1": "5f4cca8343c48f3c8d3d113222b12c3da4018fb3"
+    "sha256": "ab9828692a1ca02adfabf22ff679e47e1e62a9d755b97f4071c42d5225698bc5",
+    "git_blob_sha1": "244ccde33cb6ff34bdd33eeec78eb4f88cf70dff"
   }
 }

@@ -9,7 +9,7 @@
   "runner": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/run_verification_v3.py",
     "bytes": 13664,
-    "sha256": "496e1877914e15f4342111c37020a2d58790038516b62872680427e585b21f50"
+    "sha256": "c779f94023b3914bca1558a35d39ab11aaedd00a18cf5b74e2a30bf1205de6b6"
   },
   "bound_input": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/FINAL_SOURCE_INPUTS_V3.json",
@@ -19,7 +19,7 @@
   "resource_admission": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/derivation-static-review/resources-v3/REVIEW.md",
     "bytes": 9241,
-    "sha256": "df198e3ccda995d5d40fe9e17aca02507b3cb6b5077314c05b3c06b3eeb2cd28"
+    "sha256": "3b0537c2f2ef14eb83f27861a66b69c624a9b1ed611ef3ffdf3874cf77b7a29d"
   },
   "exit_code": 0,
   "finished_utc": "2026-10-05T17:40:56.906333+00:00",

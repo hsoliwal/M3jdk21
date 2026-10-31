@@ -3,16 +3,16 @@
   "closedUtc": "2026-10-07T06:52:04.369324+00:00",
   "status": "P0_BOUNDED_AST_ORIGINAL_ORACLE_AND_EXACT_BYTE_IMPORT_PROOFS_COMPLETE_FULL_RECEIVING_REMAINS_OPEN",
   "priorOneTestProofSha256": "60f392a969382ea4ac94cc033dcaa6adbc06489e48bc473ba96ceac15f363302",
-  "fullOriginalOracleProofSha256": "915ad7f0dbd01aeef01fae3448baa3911fb0ac1e757e197a9306e1dae658489c",
-  "astImporterProofSha256": "9c5c2c846afce4fbb00e6f1325c13557d0965614fe5dcb50a022273529edb0ca",
+  "fullOriginalOracleProofSha256": "3eb09ce3253dd6208f437aa20b4138d53448507b3bc9752e0bf29d0a8ab7b9ac",
+  "astImporterProofSha256": "312ddda73aeadd55b23526541ddc4e7f3eb98ec1221317a5c52e20563bd73299",
   "terminalParentImporterPacketProof": {
     "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\PACKET_AND_COMPILER_PROOF.json",
-    "sha256": "ca682bf148fee99cc6c09e6b2034265e2f7e0ec84ea7c1ecaddb34bf07fb994e"
+    "sha256": "7c5dbf5cfa51e7308bd9260a27fe3b8b5874f0fe48057bf26a403598757e97c6"
   },
   "files": [
     {
       "path": "AST_CLOSEOUT_PREFLIGHT.json",
-      "sha256": "96b1ab0ef9fdfe883e9956fef8830d63ff475a364cd8ca6e1338eeaf1db357be",
+      "sha256": "6493b9e0204d337291f9f7c8208ee8bca9dfccd119813e2b97bfe9e901e29b17",
       "bytes": 1618
     },
     {
@@ -27,22 +27,22 @@
     },
     {
       "path": "AST_FULL_ORIGINAL_ORACLE_PROOF.json",
-      "sha256": "915ad7f0dbd01aeef01fae3448baa3911fb0ac1e757e197a9306e1dae658489c",
+      "sha256": "3eb09ce3253dd6208f437aa20b4138d53448507b3bc9752e0bf29d0a8ab7b9ac",
       "bytes": 3174
     },
     {
       "path": "AST_IMPORTER_COMMANDS.json",
-      "sha256": "72bd9132a220f2605e15ef220e7062abb676048d9d769443affa7276b4eb036e",
+      "sha256": "2e296e25bc5098757e016e486e35c51c411b09161caeca661b44b469ba6a70d0",
       "bytes": 9445
     },
     {
       "path": "AST_IMPORTER_COMMANDS_V2.json",
-      "sha256": "662448df1a2ce851789788cf483f0b6dd7e79cefc91e83ba26a59d461e033e53",
+      "sha256": "919e94cd9d9d0c60e1b0d7cf09f0a0c17b3a2298ab2266f0c2fa30345f603de5",
       "bytes": 10137
     },
     {
       "path": "AST_IMPORTER_QUALIFICATION_PROOF.json",
-      "sha256": "9c5c2c846afce4fbb00e6f1325c13557d0965614fe5dcb50a022273529edb0ca",
+      "sha256": "312ddda73aeadd55b23526541ddc4e7f3eb98ec1221317a5c52e20563bd73299",
       "bytes": 13093
     },
     {
@@ -57,12 +57,12 @@
     },
     {
       "path": "AST_EXPORT_PREPARATION.json",
-      "sha256": "318d4a74f6063c3685bc7404f63975a926f3cff3e5648e1aa1429a96fc2427a2",
+      "sha256": "0dd62c01d886e4274e09541fcca8f8ba94a5a57f8b8bb5468754e52e933fae11",
       "bytes": 1300
     },
     {
       "path": "export-ast.tsv",
-      "sha256": "860eade0c05a175373e3f96a19150de03f4865efdfcf077af5d5a52d15a471b7",
+      "sha256": "df8f3b861ef48076776b977fa18340fbcd73db30af0d71e351dc4e6a35aa6fd2",
       "bytes": 15240
     },
     {
@@ -72,7 +72,7 @@
     },
     {
       "path": "AST_IMPORTER_PRE_GENERATION_GATE.json",
-      "sha256": "4abf2833024ca2e483718ef9552e54c6251ab983e3ab42c5042ad01070e6e013",
+      "sha256": "a82137b35d49913a6fee6a7d735fdb26e45e951c2c13cbc402ed8adba320accd",
       "bytes": 639
     },
     {

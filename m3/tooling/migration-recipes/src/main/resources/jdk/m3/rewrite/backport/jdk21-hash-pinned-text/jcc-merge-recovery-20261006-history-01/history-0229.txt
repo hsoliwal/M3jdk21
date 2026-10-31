@@ -12,9 +12,9 @@
     },
     {
       "bytes": 1177,
-      "git_blob": "5009d7d338eaaca207129c277acc8513351939cc",
+      "git_blob": "fa4cdc735f58059920dc217be6b00819a859eeba",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/AMENDMENT.json",
-      "sha256": "e20b0de4dfa51c79e6e16d035c6c55a5d368a9641b175239cb6f41f916bd74a6"
+      "sha256": "921e421259c9bd68bd70c2412f75cffc187c2a61c725053506c4470c129e7fa3"
     },
     {
       "bytes": 2274,
@@ -30,9 +30,9 @@
     },
     {
       "bytes": 63816,
-      "git_blob": "eed55a4d5b77d6bfe61746576409ae68d46f8a84",
+      "git_blob": "2bb90dc2511c26ea6181e949b68c1d7013c9b157",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/BUILD_ROLE_MAP.json",
-      "sha256": "cabf31b005b28c18053c107936134356986f55770368cb982800900380ee8689"
+      "sha256": "13a191d4ef3e137518df6ebd1eebc9c8858370b7ffeb9af1db7d37fd0d90e3d7"
     },
     {
       "bytes": 70459,
@@ -60,9 +60,9 @@
     },
     {
       "bytes": 14727,
-      "git_blob": "e3e43e60d7ed5247cadab7e58c5515e6e7e07136",
+      "git_blob": "b8c254769db1c67a930d4946c491619a56ea8052",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/INVENTORY_REVIEW.json",
-      "sha256": "41178470be98b342b83f58c43afa4a603d72c115584956c4fdbc96ce6a45d039"
+      "sha256": "cae9bd963f45edd0c766f0f0a4cd6801d3239d888ef2175aea2cf965ca5f8ea6"
     },
     {
       "bytes": 404786,
@@ -78,9 +78,9 @@
     },
     {
       "bytes": 112397,
-      "git_blob": "665dac597b1b33414e152c9224c840e7e01127d5",
+      "git_blob": "8d43fa29a81040d3572525b3c864841a7a35643b",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/PARENT_BUILD_CONTEXT.json",
-      "sha256": "4f8fbf09070e4d45e42c7ac29c94401d70058fea04d98e44b3526a24c77912fc"
+      "sha256": "c2ba69331b7d22a467e72369ebf06cebe16e9b09f5b9c3f2900247d540773bfc"
     },
     {
       "bytes": 10579,
@@ -175,7 +175,7 @@
     {
       "bytes": 9855,
       "git_blob": "ab32020d259327edf16d9a3857c73e77b5f71c4b",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/39b9f04e46411de9bf7b8063608241efb2819aca.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/475d90d7df3932fb622fc387d0518df1b6f3c2a1.json",
       "sha256": "7415693fafcdb3f215aa898d368ddb70d308c12caa887dff2f5d1beac9aa296c"
     },
     {
@@ -420,9 +420,9 @@
     },
     {
       "bytes": 4151,
-      "git_blob": "39b9f04e46411de9bf7b8063608241efb2819aca",
+      "git_blob": "475d90d7df3932fb622fc387d0518df1b6f3c2a1",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/m3-native-interop/src/main/java/jdk/internal/m3/nativeinterop/NativeLibrarySpec.java",
-      "sha256": "fd9bc8f19f629e6131dcb55f264eed524fa17e69bdda31d723b4addfddb8a4f5"
+      "sha256": "9680242313d4e2f2a0f14d31879d7c6da0af2ef4a11b7a8f256e6b0eb4d44cda"
     },
     {
       "bytes": 16380,

@@ -23,7 +23,7 @@
       "before": null,
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/workflow.yml.txt",
-        "sha256": "4b6dd04c600a6350c5be8c4ed54ac88ae396604eed906eea0d925d2f3e8ded12"
+        "sha256": "3c2089f136ba1eda7f504a20298678e51c2f21fd4103045d5edbd4b694943137"
       }
     },
     {
@@ -78,20 +78,20 @@
   ],
   "guards": [
     {
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
-      "sha256": "0e65b26f674f68fea30151ea63a17faef2f88ca0f0679723bb3dc230fda22b72"
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
+      "sha256": "fd376487d4497fef3f3f058584cd04abb5622abcff14364600b96a53df588862"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795"
     },
     {
-      "path": ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapTaskRecipe.java",
-      "sha256": "58bac6968ebd2cce6f43f338c289db14435b3ef05ed2abc13402275285b89462"
+      "path": ".m3/openrewrite-recipes/src/main/java/jdk/internal/m3/bootstrap/M3BootstrapTaskRecipe.java",
+      "sha256": "d5b73971cf4107ffe5d9d2678d5a536491cd1552a2739818013e5ba4da1c3424"
     },
     {
-      "path": ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe.java",
-      "sha256": "05ac05e7f3cb7549d26866a61dec0edf19515317c95f73db82d1c517cad88ef5"
+      "path": ".m3/openrewrite-recipes/src/main/java/jdk/internal/m3/bootstrap/M3BootstrapInventoryRecipe.java",
+      "sha256": "19450c4b44091c4f37689be1fa45bb30b822cd2f962a323d0991529fc65f6a71"
     },
     {
       "path": "src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java",

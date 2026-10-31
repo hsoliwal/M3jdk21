@@ -5,7 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "implementations/apache-circular-fifo/src/main/java/jdk/m3/collections/apache/M3CircularFifoQueue.java"
-EXPECTED = "3d337f1123ce5c8f977a395a37e515198a72fce967953d59e8a9a379463d8186"
+EXPECTED = "210697cba0058ec6c3ae9f53439f633773f11757c7b68369082e77a533f44650"
 OLD = "final int idx = (start + index) % maxElements;"
 NEW1 = "final int remaining = maxElements - start;"
 NEW2 = "final int idx = index < remaining ? start + index : index - remaining;"

@@ -2,17 +2,17 @@
   "copied_exact": {
     "ENGINE_SOURCES.tsv": {
       "disposition": "EXACT_EXISTING_HOST_REUSE",
-      "sha256": "f6f6586f4e1239bfbe958188ad59777e03db516ab2afe07209d0a62c8ebe65fc",
+      "sha256": "ce65e56c59468b5151b3de36e76bf424e5ab82c22a22d0821f99459d0bcd3d5c",
       "source": "m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host/ENGINE_SOURCES.tsv"
     },
     "pom.xml": {
       "disposition": "EXACT_EXISTING_HOST_REUSE",
-      "sha256": "1c5154e9b138e96de4e48cb140e761194e860d6e3ff5ba062770d10652faeeea",
+      "sha256": "0a1c81dcc36ef6a77c6ba812797cde06fa8d7ffdafa73f13b6ef846b3ab2a572",
       "source": "m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host/pom.xml"
     },
     "src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java": {
       "disposition": "EXACT_EXISTING_HOST_REUSE",
-      "sha256": "321776eb9a23a67403a8022dad3e61203e688742c8c229e3ded9de2e63e6301b",
+      "sha256": "76e5159a9cb350df2b58d410ee4aaae0ad1f96ddaedb1be420163802954154d8",
       "source": "m3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host/src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java"
     }
   },

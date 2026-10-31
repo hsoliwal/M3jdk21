@@ -53,17 +53,17 @@
       "disposition": "MODIFY",
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3ArrayifiedIndexOps.java",
       "input_sha256": "42b3d760c9dfcf30eba72da193159e0ac6bd7ee06a3de292b132f49bd955ea77",
-      "expected_after_sha256": "32c98a947abe7622767f15a2bdbf04b124953d6660c09e013457391f50b731c0",
-      "emitted_sha256": "32c98a947abe7622767f15a2bdbf04b124953d6660c09e013457391f50b731c0",
+      "expected_after_sha256": "417e9915c2b63945ede9a1f8d2deba9296be638fcddac9fe76b5c33ca35104f4",
+      "emitted_sha256": "417e9915c2b63945ede9a1f8d2deba9296be638fcddac9fe76b5c33ca35104f4",
       "changed_by_sdk": "true"
     },
     {
       "ordinal": "5",
       "disposition": "KEEP",
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongBitmapFilteredSnapshot.java",
-      "input_sha256": "5e6340e15741b1e34c830ec69ab0f74eac1522a0b23a47238cf69ceb51fb206d",
-      "expected_after_sha256": "5e6340e15741b1e34c830ec69ab0f74eac1522a0b23a47238cf69ceb51fb206d",
-      "emitted_sha256": "5e6340e15741b1e34c830ec69ab0f74eac1522a0b23a47238cf69ceb51fb206d",
+      "input_sha256": "0a9391c208f3abe7e99f8b4d7a5730b597688b4d23a4b735128247a0b78b1c01",
+      "expected_after_sha256": "0a9391c208f3abe7e99f8b4d7a5730b597688b4d23a4b735128247a0b78b1c01",
+      "emitted_sha256": "0a9391c208f3abe7e99f8b4d7a5730b597688b4d23a4b735128247a0b78b1c01",
       "changed_by_sdk": "false"
     },
     {
@@ -97,36 +97,36 @@
       "ordinal": "9",
       "disposition": "KEEP",
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java",
-      "input_sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
-      "expected_after_sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
-      "emitted_sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
+      "input_sha256": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed",
+      "expected_after_sha256": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed",
+      "emitted_sha256": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed",
       "changed_by_sdk": "false"
     },
     {
       "ordinal": "10",
       "disposition": "KEEP",
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongCollection.java",
-      "input_sha256": "ea0c1aa0957f7bafd5cf2892cbe483c98d5772192f81cc3c467d53ab5c1c7531",
-      "expected_after_sha256": "ea0c1aa0957f7bafd5cf2892cbe483c98d5772192f81cc3c467d53ab5c1c7531",
-      "emitted_sha256": "ea0c1aa0957f7bafd5cf2892cbe483c98d5772192f81cc3c467d53ab5c1c7531",
+      "input_sha256": "10a4309fb0be8401f2d32a33a777f339b9bd3118f698d5e74eaaf89c087f42f1",
+      "expected_after_sha256": "10a4309fb0be8401f2d32a33a777f339b9bd3118f698d5e74eaaf89c087f42f1",
+      "emitted_sha256": "10a4309fb0be8401f2d32a33a777f339b9bd3118f698d5e74eaaf89c087f42f1",
       "changed_by_sdk": "false"
     },
     {
       "ordinal": "11",
       "disposition": "KEEP",
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIterator.java",
-      "input_sha256": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201",
-      "expected_after_sha256": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201",
-      "emitted_sha256": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201",
+      "input_sha256": "524ddc82c953ec7e205687fe8b6a1be9c343d41e1a70d221c1d20cba31843402",
+      "expected_after_sha256": "524ddc82c953ec7e205687fe8b6a1be9c343d41e1a70d221c1d20cba31843402",
+      "emitted_sha256": "524ddc82c953ec7e205687fe8b6a1be9c343d41e1a70d221c1d20cba31843402",
       "changed_by_sdk": "false"
     },
     {
       "ordinal": "12",
       "disposition": "KEEP",
       "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
-      "input_sha256": "8107ba8ba5f9d7519563eba9d20e76932dd077b2359f056b05ccd0a2d7d62e18",
-      "expected_after_sha256": "8107ba8ba5f9d7519563eba9d20e76932dd077b2359f056b05ccd0a2d7d62e18",
-      "emitted_sha256": "8107ba8ba5f9d7519563eba9d20e76932dd077b2359f056b05ccd0a2d7d62e18",
+      "input_sha256": "9ed1244ef90a72845d580b8919c670760434a81cf6dfc48f3aecbc8483726c02",
+      "expected_after_sha256": "9ed1244ef90a72845d580b8919c670760434a81cf6dfc48f3aecbc8483726c02",
+      "emitted_sha256": "9ed1244ef90a72845d580b8919c670760434a81cf6dfc48f3aecbc8483726c02",
       "changed_by_sdk": "false"
     },
     {
@@ -188,8 +188,8 @@
       "disposition": "ADD",
       "path": "m3/collections/src/test/java/jdk/m3/collections/M3ArrayifiedIndexContract.java",
       "input_sha256": "ABSENT",
-      "expected_after_sha256": "b9f5b9f559a09189fe39e3bebec0380e8e1c487d5cf7ba7a59707c7992a2a133",
-      "emitted_sha256": "b9f5b9f559a09189fe39e3bebec0380e8e1c487d5cf7ba7a59707c7992a2a133",
+      "expected_after_sha256": "e34baf55390d673448920cd62e52e53cc4c6a45bf519fb9127bca850183a057d",
+      "emitted_sha256": "e34baf55390d673448920cd62e52e53cc4c6a45bf519fb9127bca850183a057d",
       "changed_by_sdk": "true"
     },
     {
@@ -197,8 +197,8 @@
       "disposition": "ADD",
       "path": "m3/collections/src/test/java/jdk/m3/collections/M3ArrayifiedIndexContractTest.java",
       "input_sha256": "ABSENT",
-      "expected_after_sha256": "6d5d09c8b73c74bb0988c1059016628b20a9f399e125b7ba141248638d6d7d81",
-      "emitted_sha256": "6d5d09c8b73c74bb0988c1059016628b20a9f399e125b7ba141248638d6d7d81",
+      "expected_after_sha256": "37bcafb98cda6d234182ec8e3f30fa3f20dc9fcd4ae8362713c1d4b40ee75d9f",
+      "emitted_sha256": "37bcafb98cda6d234182ec8e3f30fa3f20dc9fcd4ae8362713c1d4b40ee75d9f",
       "changed_by_sdk": "true"
     },
     {
@@ -206,8 +206,8 @@
       "disposition": "ADD",
       "path": "m3/collections/src/test/java/jdk/m3/collections/M3ArrayifiedIndexResourceProbe.java",
       "input_sha256": "ABSENT",
-      "expected_after_sha256": "20f00638d0d7c48e44f722b6908950549e37741353e450d0c05ef7a42ceb7c88",
-      "emitted_sha256": "20f00638d0d7c48e44f722b6908950549e37741353e450d0c05ef7a42ceb7c88",
+      "expected_after_sha256": "fbd6738db90d9395dc51ccba5299d37a15be103031b5d7ee314ea90f4df146ee",
+      "emitted_sha256": "fbd6738db90d9395dc51ccba5299d37a15be103031b5d7ee314ea90f4df146ee",
       "changed_by_sdk": "true"
     }
   ],
@@ -275,7 +275,7 @@
   "evidence": [
     {
       "path": "qualification/recipe-v3/PASS.json",
-      "sha256": "03cdf348e958338feb78a5237fed523d25287cd2d491977084ae142f39e5cfb4",
+      "sha256": "4aa2416432cb75e967a7ac05d19d49010a54a4faf48e008751b780f2299cb1f2",
       "bytes": 1906
     },
     {
@@ -285,7 +285,7 @@
     },
     {
       "path": "qualification/SDK_FINAL_V3_COMPARISON.json",
-      "sha256": "e8a2e65ae35ce57619e2e6cc5f724ab5d7cb406bafc1576a0df65b827bf1696c",
+      "sha256": "9cf2b08180ef95e29d0d1aaccb48c4cd71f612ba002c36021dff37a392e43f3b",
       "bytes": 8063
     },
     {
@@ -310,12 +310,12 @@
     },
     {
       "path": "qualification/native-resource/ADMISSION_RECOMMENDATION.json",
-      "sha256": "b80c850409bb3193eb86eac7368ad8c23599d1d8747c82d2e16386db89de6ed4",
+      "sha256": "e3f03725b5e59587fdcde1107dfa339cb81e3e39b28a54fb85e5324c47ab7c3f",
       "bytes": 24731
     },
     {
       "path": "qualification/native-resource-v2/ADMISSION_RECOMMENDATION.json",
-      "sha256": "97c73dee7d57743d085b52f9259f2b6a4c406cfa863351e42e98604bcfa2b524",
+      "sha256": "8e7cca4df644783da2c6c588d7bcaa7635b03398d221623bf2f99bcd394b5595",
       "bytes": 42457
     },
     {
@@ -335,22 +335,22 @@
     },
     {
       "path": "sdk-image-v3/SDK_RUN.json",
-      "sha256": "2ca85c6cb2f9d4b08810ac9bee2e18734f0d2ed165cecb625dba0201dde59d1b",
+      "sha256": "baff67aad289f753cf78edca9387ad3e6cdcf8863e5e77100ba9cca631d932fb",
       "bytes": 763
     },
     {
       "path": "sdk-image-v3/SDK_RECEIPT.tsv",
-      "sha256": "d75fca594a063fbceed1bf38c0db91d04315dd6a793823f7938f4dd71921b26b",
+      "sha256": "00ce190f061aa1b89fab2c1d7df6dba1010ed9c182dc5a34851b9449a9453b5b",
       "bytes": 5742
     },
     {
       "path": "sdk-fixedpoint-image-v3/SDK_RUN.json",
-      "sha256": "4ed9e7ea451d06951d279bcaeec80406737e92bdc625b76e41f46c74cacd8607",
+      "sha256": "2c0a0bccedf3d11eb469ac8810531437e358a3617d0f1713111e529881ff3c6d",
       "bytes": 783
     },
     {
       "path": "sdk-fixedpoint-image-v3/SDK_RECEIPT.tsv",
-      "sha256": "43fe0ca79fda32cc0286ea5e0027ed172e6b5fb9967511692ec5406051329cb3",
+      "sha256": "5fc0919be5d30b420396284ae40aa44af6fd726b98740fead6da0868bc1531d6",
       "bytes": 6218
     }
   ],
@@ -371,7 +371,7 @@
     "head": "f5c6fc673b0c7dfa684f0b0c1e3f0c15bb57b14d",
     "changed_paths": 97,
     "receipt": "provenance/EXACT_COMMIT_RECEIPT.json",
-    "receipt_sha256": "2e4cec35536b0da541e9bae429ced7337d2337ba0b5ebd9fc986616677d37e91",
+    "receipt_sha256": "4cc5da0c01ccbdf004b57147f61eba2c01cd512d40f1a08b575ecbeb77a5f364",
     "reports": [
       "provenance/PROVENANCE_FILES.tsv",
       "provenance/PROVENANCE_GATE.tsv",

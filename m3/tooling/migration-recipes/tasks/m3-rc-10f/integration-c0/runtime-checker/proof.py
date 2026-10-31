@@ -19,9 +19,9 @@ SOURCE = "d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c"
 TARGET = "c0a14387009aefc7d62bd3268055d526e04f9074"
 TARGET_TREE = "491bbd80a51483d0710fc12c1bad3a037b385ba0"
 SUITE = "jdk.internal.m3.rewrite.Rf0RecipeTest"
-QUALIFICATION_SHA256 = "e10f531ba9d018c85dbf539ddb66207f3c029c1c7abc714a975febfb823164df"
+QUALIFICATION_SHA256 = "7abf378a793ce8c4c551b544e188f5e4b7090d134ab60641e69a57c1c747722a"
 MAIN = ("jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",)
-OWNER_SHA256 = "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+OWNER_SHA256 = "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795"
 BUDGETS = {"static": 180, "compile": 600, "tests": 7200, "runtime": 7200}
 EXPECTED_PROJECT = 16
 EXPECTED_EXPORTS = 9
@@ -449,7 +449,7 @@ def static_gate(proof):
                     ast.parse(before, filename=row["path"])
     require(len(expected_baseline_refusals) == 1, "one exact malformed baseline control required")
     require(parsed_python_postimages == [{"path": "m3/runtime-integration/check-m3string-invariants.py",
-            "sha256": "9407d72859629ff18b1b22796368bda50c9d4e588072aea541c36d44b8bb7dc6", "bytes": 48860}],
+            "sha256": "1913aceb03b079596c7c8aea80285aecd2849f81475b597e4ea4094609b749a9", "bytes": 48860}],
             "the exact repaired checker must parse successfully")
     print(json.dumps({"status": "STATIC_SCOPE_PASS", "mainSources": len(MAIN), "testSources": 1,
                       "testMethods": METHODS, "outputs": len(outputs),

@@ -23,9 +23,9 @@ java_home = Path('/tmp/m3-build-tools/jdk-21.0.12.1+1')
 jackson = Path('/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar')
 sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
 expected = {
-    'jdk/internal/m3/rewrite/memory/M3RecoveryMemory.java': 'e6352756fca8abcea531761b2f32eb76a9e98bf3f259950d558ccc46072a0c32',
-    'jdk/internal/m3/rewrite/memory/M3RecoveryMemoryTest.java': '4406ab706ba83c9dcd8618358477c6fd9094108c00bc62dd10735c4d181702b1',
-    'jdk/internal/m3/rewrite/sealed/SealHash.java': '17910b8b92573d6673be22b1d79d3db81c2c65fdff02251b0d4b8defd5b7373a'}
+    'jdk/internal/m3/rewrite/memory/M3RecoveryMemory.java': '88696555f28134225ecd731c5c81065dd53912361d46bfe3f79f60d877c62936',
+    'jdk/internal/m3/rewrite/memory/M3RecoveryMemoryTest.java': 'b27e96e73af86cb12cf453a0b4f27b49bdae24073aa9e435061b177d02969a78',
+    'jdk/internal/m3/rewrite/sealed/SealHash.java': '316da9bf8b642f9d8ad9e055328aec0f70ddfe0f63c4649d5dc35d062fd7a11c'}
 
 
 def put(path, value):

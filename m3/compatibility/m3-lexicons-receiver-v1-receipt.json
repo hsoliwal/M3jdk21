@@ -88,99 +88,99 @@
   "publicJdkReplacement": false,
   "targets": [
     {
-      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3AtomCursor.java",
+      "path": "m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3AtomCursor.java",
       "before": "ABSENT",
-      "after": "f9f45888c729f9a5003e5f88347fc114c180c5bfcbb6c7dc8b7be46d327cfaa4",
+      "after": "5dbc9c3be9e480021ecce088bf38d29ffed75232a1293bf099029aeab4c1d198",
       "resource": "00-M3AtomCursor.java.txt"
     },
     {
-      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3BitLanes.java",
+      "path": "m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3BitLanes.java",
       "before": "ABSENT",
-      "after": "e131d285a340f123afe5ac43a0503b3dfa60d0d6c2ca21631eec2eab114c9252",
+      "after": "ca54aecab6621681a2f503efaa0d303dbd00e7ae851afe30fd49fb484210c5be",
       "resource": "01-M3BitLanes.java.txt"
     },
     {
-      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3CsvBoundarySummary.java",
+      "path": "m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3CsvBoundarySummary.java",
       "before": "ABSENT",
-      "after": "7b6b7bc23a6145d2334a072073154de628e8154d8ef6e99bb1711938c367b9d3",
+      "after": "dc0a82c830cff3193e224e18302aed68463446dbd5b6e5c6175749d360d14686",
       "resource": "02-M3CsvBoundarySummary.java.txt"
     },
     {
-      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3Lex001Image.java",
+      "path": "m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3Lex001Image.java",
       "before": "ABSENT",
-      "after": "5223a03de311825175b242e65d2212b13012513cda9480d03973b6a053998f7d",
+      "after": "7b4dd447390f0ff4ab2afd59fa199c476e3b6a2361a3cbe06c66f2d921f9fe2d",
       "resource": "03-M3Lex001Image.java.txt"
     },
     {
-      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3LexiconFoldIds.java",
+      "path": "m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3LexiconFoldIds.java",
       "before": "ABSENT",
-      "after": "da306a48e49bfa2a150d95c3cf9933a3b52e7971ac56dc6dde94bcd58f48a2f9",
+      "after": "00426ba96c879918ba3142c2a251945ebb532834c9bf4949a4c918b9a368e356",
       "resource": "04-M3LexiconFoldIds.java.txt"
     },
     {
-      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3LexiconFormat.java",
+      "path": "m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3LexiconFormat.java",
       "before": "ABSENT",
-      "after": "188d9accceaa2244aa891d4a75b6f11e34b3bd0aa70b8e954ed7e6c936fd89f0",
+      "after": "1ba7dee473ddc54c72e459d127fb69227dd8023b5be47aee5dbb67ea71c05939",
       "resource": "05-M3LexiconFormat.java.txt"
     },
     {
-      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3LexiconFormatException.java",
+      "path": "m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3LexiconFormatException.java",
       "before": "ABSENT",
-      "after": "31131540ccf9d0b2eba4c46d2ff6600a46598ab53ba072e509d6fa5090e683ec",
+      "after": "9ee345fca3f384e2b5929438ebc818cbb98e2fda2884015bdbdde137d63db208",
       "resource": "06-M3LexiconFormatException.java.txt"
     },
     {
-      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3LexiconWordIds.java",
+      "path": "m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3LexiconWordIds.java",
       "before": "ABSENT",
-      "after": "4fee4b9c2cc65b8064bdddc45488a0cdda88978b1f8555ab0cb5f8dde487a344",
+      "after": "36244ce2a291166622c929ae3706299a3a4e2d86b00ac6056d3f387499f0c05d",
       "resource": "07-M3LexiconWordIds.java.txt"
     },
     {
-      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3PunctBoundarySummary.java",
+      "path": "m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3PunctBoundarySummary.java",
       "before": "ABSENT",
-      "after": "acd6ff6ad0ff81328e62215bb4bd231406d16ea195eea875242bfa168d71d6e4",
+      "after": "f2c2eeed71d7c060c1232e46ab79f50ad4ca8ddc177dec75c51d8ced7775c224",
       "resource": "08-M3PunctBoundarySummary.java.txt"
     },
     {
-      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3RegexWordTransferRows.java",
+      "path": "m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3RegexWordTransferRows.java",
       "before": "ABSENT",
       "after": "7e0be5e231e8e98d456b3d64e5ed54e08a398950e5bde0b1fa4e24342f727cb2",
       "resource": "09-M3RegexWordTransferRows.java.txt"
     },
     {
-      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3SeparatorKind.java",
+      "path": "m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3SeparatorKind.java",
       "before": "ABSENT",
-      "after": "2c52de8bec6851ac483e5853d42830e785b253f5ef3ba376f87815e80e036c84",
+      "after": "70a5b9c29e2d04934ebf4823adb9bbfbc24e8008861e97caaaefb189fa04e575",
       "resource": "10-M3SeparatorKind.java.txt"
     },
     {
-      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3SeparatorLexicon.java",
+      "path": "m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3SeparatorLexicon.java",
       "before": "ABSENT",
-      "after": "950c8eb731f43f3b9575de28bd0ce5c6ca62dee046612a07daf7f895410fba2c",
+      "after": "c8976a02c5484e18635765b12248dfb9f24b5da83ceb662018fbfd4f13f48943",
       "resource": "11-M3SeparatorLexicon.java.txt"
     },
     {
-      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3SharedArenaVerifier.java",
+      "path": "m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3SharedArenaVerifier.java",
       "before": "ABSENT",
-      "after": "82651f7b94190db8ca4b96bd1042381f4ad0676bf81da9a26dfd199026c0b5e1",
+      "after": "0756c73b4b994ab9b2221ea2ddf1abc668ea1129f0ed1702cf00d670be8bc601",
       "resource": "12-M3SharedArenaVerifier.java.txt"
     },
     {
-      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3WindowBoundarySummary.java",
+      "path": "m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3WindowBoundarySummary.java",
       "before": "ABSENT",
-      "after": "1eaa5a660a538923c5582d557e6bdb70310ce089e16c354881f58ca714ff93b3",
+      "after": "d54a9c561306d92e6ac756db6a31ed110b8115062c4eff27c7d5d40232525ed0",
       "resource": "13-M3WindowBoundarySummary.java.txt"
     },
     {
-      "path": "m3/lexicon/receiver/src/main/java/com/m3/lexicon/M3WordIdSequence.java",
+      "path": "m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3WordIdSequence.java",
       "before": "ABSENT",
-      "after": "1aedcd85e65c2f30d04c6701d8d3e4be5070e564e64e135da63b0a1ca05af947",
+      "after": "e507a6aa7b128be695eed3b92862d752ddb40b0b9eb345166b32817b6f8c1864",
       "resource": "14-M3WordIdSequence.java.txt"
     },
     {
-      "path": "m3/lexicon/receiver/src/test/java/com/m3/lexicon/M3LexiconReceiverProof.java",
+      "path": "m3/lexicon/receiver/src/test/java/jdk/m3/lexicon/M3LexiconReceiverProof.java",
       "before": "ABSENT",
-      "after": "1407275a973ec46556202caee2b96b1bc13be5da083ed6a1e83bd71c6fe209cc",
+      "after": "4d7cc92961a97b0557e4868dab3c5351879440d84f9eb1c94a14ef869c365ecf",
       "resource": "15-M3LexiconReceiverProof.java.txt"
     }
   ],
@@ -191,15 +191,15 @@
     },
     {
       "path": "m3/lexicon/receiver/README.md",
-      "sha256": "50b6f776d5be922afe6253eb91d5b46e3b7cecd6ac280e041f6c0ba71bde6987"
+      "sha256": "22a5e1ca1ef270984b2551144b53600041021219f95913016fbd74b6bdcdb9a8"
     },
     {
       "path": "m3/lexicon/LEXICON_RECEIVER_LEDGER.tsv",
-      "sha256": "a817383e01e3e3eb362d97e3e75bded2c764ed5474af4f2a326f3d52866975db"
+      "sha256": "e8eb55dab7d5efe85551ed3a51866cfd5eadf47840181d213216694caa0e1773"
     },
     {
-      "path": "m3/lexicon/synexia-lexicon-data-manifest-20261018.tsv",
-      "sha256": "5f83d3245c8aee8d4674210b9a6700581aa8c2b0df41f486850ff1de8552c97f"
+      "path": "m3/lexicon/m3-lexicon-data-manifest-20261018.tsv",
+      "sha256": "b68a32d44a68c2b3a84d894b24d23714af69d627231a2f90e2a95581c62fa1fc"
     },
     {
       "path": "m3/docs/m3-lexicons-separator-wordid-20261018.md",
@@ -217,7 +217,7 @@
       "logSha256": "b2aa8e748bc1eed5ae8b0e456c14c78214f6285dc0248fc0fcc42d1ea22490b2"
     }
   },
-  "dataPolicy": "DATA_OR_METADATA_EXPORT: manifest rows only (m3/lexicon/synexia-lexicon-data-manifest-20261018.tsv); no binaries",
+  "dataPolicy": "DATA_OR_METADATA_EXPORT: manifest rows only (m3/lexicon/m3-lexicon-data-manifest-20261018.tsv); no binaries",
   "notClaimed": [
     "java.base binding",
     "jtreg",

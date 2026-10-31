@@ -3,11 +3,11 @@
   "status": "PASS",
   "profile": "m3-nlp-current-receiver-lock-20261021/1.0",
   "events": [
-    "5699d2edf48fb71a6d0275140a75a55eed5f882c76b2945f16d3ee8e75f130ff",
-    "6d9e643ec5e35846f58674aecb5ef465e028cfdcbcddf87e78aac1e68a2beb52",
-    "2269577e54f1a54b5f721f4b7ffdcbac61c112d35160fdfc49a51badd7b8acfd",
-    "3280bc2b92368bfa4842c1094cd027d6956768feb97c06c092ead7407e9451e8",
-    "66c3e98e68cdc8199166554f5e1caf315cb4ea04e61dacf8598ee060398d827b"
+    "f2cc55326a8d90a370b4339bbd6a52426e39bd92ba315faf6e0c6074b422a3ec",
+    "d9c3a2911acc140b38b4e7869e5295b684bb2c52c322dc06ae96d537f0d9c3c7",
+    "d5dbdbaa2f1320732a41a209af72752788f3284ffa32ad107138ac51ccd34ccc",
+    "d004e61de57ba3eda73639dc64959975d0161bf88688531883a689cdca7ccd68",
+    "7224e243213f827edae62c1529bcc5ff6f350b991f2bf86154302786ab3d5ccf"
   ],
   "commands": [
     [
@@ -34,7 +34,7 @@
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/tooling/target/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
       "jdk.internal.m3.rewrite.memory.M3RecoveryMemory",
       "check",
-      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/events/5699d2edf48fb71a6d0275140a75a55eed5f882c76b2945f16d3ee8e75f130ff.json",
+      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/events/f2cc55326a8d90a370b4339bbd6a52426e39bd92ba315faf6e0c6074b422a3ec.json",
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021",
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/events"
     ],
@@ -62,7 +62,7 @@
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/tooling/target/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
       "jdk.internal.m3.rewrite.memory.M3RecoveryMemory",
       "check",
-      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/events/6d9e643ec5e35846f58674aecb5ef465e028cfdcbcddf87e78aac1e68a2beb52.json",
+      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/events/d9c3a2911acc140b38b4e7869e5295b684bb2c52c322dc06ae96d537f0d9c3c7.json",
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021",
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/events"
     ],
@@ -90,7 +90,7 @@
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/tooling/target/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
       "jdk.internal.m3.rewrite.memory.M3RecoveryMemory",
       "check",
-      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/events/2269577e54f1a54b5f721f4b7ffdcbac61c112d35160fdfc49a51badd7b8acfd.json",
+      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/events/d5dbdbaa2f1320732a41a209af72752788f3284ffa32ad107138ac51ccd34ccc.json",
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021",
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/events"
     ],
@@ -118,7 +118,7 @@
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/tooling/target/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
       "jdk.internal.m3.rewrite.memory.M3RecoveryMemory",
       "check",
-      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/events/3280bc2b92368bfa4842c1094cd027d6956768feb97c06c092ead7407e9451e8.json",
+      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/events/d004e61de57ba3eda73639dc64959975d0161bf88688531883a689cdca7ccd68.json",
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021",
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/events"
     ],
@@ -146,7 +146,7 @@
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/tooling/target/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
       "jdk.internal.m3.rewrite.memory.M3RecoveryMemory",
       "check",
-      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/events/66c3e98e68cdc8199166554f5e1caf315cb4ea04e61dacf8598ee060398d827b.json",
+      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/events/7224e243213f827edae62c1529bcc5ff6f350b991f2bf86154302786ab3d5ccf.json",
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021",
       "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/events"
     ]

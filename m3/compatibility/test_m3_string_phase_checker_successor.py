@@ -32,8 +32,8 @@ EXPECTED_RECEIPT_V2 = json.loads(r'''{
   "scope": "TOOLING_ONLY_NO_RUNTIME_PROMOTION",
   "predecessor": {
     "receiptPath": "m3/compatibility/m3-string-phase-checker-successor-20261013.json",
-    "receiptGitBlob": "a0373fd42a1fe2b8104e3675abc1919254950fff",
-    "receiptSha256": "78fc05a0cb9b7f26e9a6226b2406cc38801f09040dc14e445e31651f7a9385af",
+    "receiptGitBlob": "f817a92ff96ecf4658dfac811a25edb294b7d6c2",
+    "receiptSha256": "a599d62b01ef0c36855a356e8bc88fa8709b722ec8b251eabb8986d80927ef9f",
     "targetAfterGitBlob": "9a1d8576f4b8e5f96c691a3a1b25c3bd77fa5c02",
     "targetAfterSha256": "11613c443875536088a13eb932c4142f723d3d1366baf32333accc37260c8fc4"
   },
@@ -74,8 +74,8 @@ EXPECTED_RECEIPT_V3 = json.loads(r'''{
   "scope": "TOOLING_ONLY_NO_RUNTIME_PROMOTION",
   "predecessor": {
     "receiptPath": "m3/compatibility/m3-string-phase-checker-successor-20261015-v2.json",
-    "receiptGitBlob": "52cacd20c406f57027734d2e78b405c8b6176e9f",
-    "receiptSha256": "e47b404b87e9748f323cfbca53f07fcde3c3d1a5b14f221e14df6a92613cb1b2",
+    "receiptGitBlob": "68a372773b9eebe48c4dc989be270bcbaa5e9adc",
+    "receiptSha256": "96ea0d1caa75b66d3bcca9deecd8170f60eb2a05acac165f28879b101d1cab92",
     "targetAfterGitBlob": "274753ece4a5cfd11dc2e98feca50f2601540b8d",
     "targetAfterSha256": "bad0fe420fc677a977079e0aa557ff733e2858939781786bc37d0c9f38d96ff3"
   },

@@ -21,12 +21,12 @@
   },
   "path_seals": {
     "path": "PATH_SEALS.tsv",
-    "sha256": "e3209915534553b27c4c2962997758c2eae7b2c2a8b231c8652a28f4559c4504"
+    "sha256": "037d380715f6d3327e0bf836b992ea5f2a10fe3ba83fcc5821c9b25ec3944a54"
   },
   "method": "Complete nontruncated bounded Git trees, anchored in the two root trees; unchanged blob/mode or unchanged proven absence for every actual prepared payload destination. The capped 300-file compare response was not used as complete overlap evidence.",
   "integration": "Apply exact payload entries additively onto the current publication base; preserve unrelated intervening fleet files. Recheck moving heads before each integration.",
   "root_agents_blob": "9cf0dc67aeb62237fb54c49b03586f3ae39bcc79",
-  "porting_invariant_blob": "291eec22b13d01baecf2c3acef24c3749e19cc24",
+  "porting_invariant_blob": "a05cbc0a2fe41df08dd71797fb530e57765ef08b",
   "mop_memory_specification_blob": "c9386f423cd810aa77379b980ed52153d2090ffb",
   "active_qualification_phase": "STRING",
   "phase_advanced": false,

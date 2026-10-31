@@ -62,7 +62,7 @@ jobs:
               raise SystemExit('product Java source deviates from canonical Synexia recipe')
           for data, expected in [
               (source, '43d670c2278b4db3cb39e8c6d63eff56827c7ef8359e7c85aa8f72b892bba51d'),
-              (received, '6d31a53eb94af7c3cfe08ce126ce1be1f8d7da1b09150bd72a12c602d3ab3565'),
+              (received, '61ae67aeedc4a4a42f81f1beefc23ed43aa0c2288b6301fd7bfc1eea023fdf87'),
           ]:
               if hashlib.sha256(data).hexdigest() != expected:
                   raise SystemExit('source pre/postimage SHA256 invalid')

@@ -18,7 +18,7 @@ def snapshot(p,name=None):
  inputs.append({'source':str(p),'snapshot':str(q.relative_to(O)),**identity(p)})
  return load(p) if p.suffix=='.json' else raw
 spec=snapshot(B/'DERIVATION_INPUTS_V3.json');inv=snapshot(B/'source-binding-v3/SOURCE_FIELDS_AND_PROOFS.json');acct=snapshot(B/'source-binding-v3/ROOT_ACCOUNTING.json');pub=snapshot(bound(spec['publication_receipt']));model=load(bound(spec['base_tree_model']));remote_path=bound({'local_path':pub['readback_path'],'sha256':pub['readback_sha256']});remote=load(remote_path)
-assert identity(bound(spec['publication_receipt']))['sha256']=='95f325ce57dadab60031f41514d9a9c5fa3ef6eb29a41e3c9a8c81e2dee996b8'
+assert identity(bound(spec['publication_receipt']))['sha256']=='bf2d3f29e903f12c201febb4c82083a32758095fdd8fbacbcf25a42e532f44fd'
 assert (pub['status'],pub['commit'],pub['tree'],pub['parent'])==('PUBLISHED_CUSTODY_VERIFIED',SOURCE,ROOT,BE92)
 assert pub['pull_request']['url']=='https://github.com/hsoliwal/com.synexia/pull/9362' and pub['ref_update_forced'] is False
 assert remote['commit']['sha']==SOURCE and remote['commit']['tree']['sha']==ROOT and [x['sha'] for x in remote['commit']['parents']]==[BE92]

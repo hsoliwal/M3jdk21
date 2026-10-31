@@ -203,7 +203,7 @@
     {
       "path": "m3/collections/qualification/tools4j-unix-source-successor-20261019.tsv",
       "before_sha256": "ABSENT",
-      "after_sha256": "a802b36b031d2280c72e148baf93e0977a422ef1f07525f349526a2e2b31e46b",
+      "after_sha256": "2e5b2593fef1f70ccf5b8a4d8b95a604ea85025b6ab8e3f1f4b3fcc234923704",
       "after_bytes": 89744,
       "mode": "0644",
       "dataset": "tools4j-receipt-20261019",
@@ -218,7 +218,7 @@
       "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-receipt-20261019]"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
       "before_sha256": "eb3feb81c6534e617727cc2993ae01dea5675a40a18414b872dc7212edbf7f88",
       "after_sha256": "e1b179fa00f02e7a3f68c3936580a9824256ba5e01d73cc6bc0930d8bc67a758",
       "after_bytes": 32003,
@@ -235,7 +235,7 @@
       "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-views-20261019]"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectResidency.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ObjectResidency.java",
       "before_sha256": "c8ffc48d43e98223ae37e722c5841b962217fb6b98daf561cba430eb3492bdc5",
       "after_sha256": "6543c4a749a5fc570eec610ea13646fe0b207d53238e1b697bfd208b0cde2c84",
       "after_bytes": 24533,
@@ -253,8 +253,8 @@
     },
     {
       "path": "m3/collections/src/main/native/collections/m3_long_address_kernel.c",
-      "before_sha256": "49a3e45262ee764c37746c323ae0def76adfff5f27a4cace6ab7416587ca544f",
-      "after_sha256": "05bcaf4403295eb929a830c18f56c10bdc40a2cf0cb972842722d12eba633ca5",
+      "before_sha256": "ba2e8a66c23bffa52e1b9e20eb9f1e890fb41ee13891dae0ed8d48cd6069f5ba",
+      "after_sha256": "827c32cb4d8d239b0374ada56a5e54fc877f019837e74bfab1ddf6e1b9fb88d8",
       "after_bytes": 3770,
       "mode": "0644",
       "dataset": "tools4j-gather-native-20261019",
@@ -269,9 +269,9 @@
       "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-gather-native-20261019]"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java",
-      "before_sha256": "1a1cb081fe7a9489d754052586f7e9ebd6bdfd4136e809a4b776a807c3d19c32",
-      "after_sha256": "bb1e04d855273b69deb48da913c1229042044231535ef57488abc240b30f8e23",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java",
+      "before_sha256": "019d0cea980abdf193479265c42ea84dd1d50d6daf88de8a99cda5df0033ff95",
+      "after_sha256": "ba7cbef696463a5d577d66d57c73929cd2500a942aa3dadb6fecbb6a8360e253",
       "after_bytes": 8301,
       "mode": "0644",
       "dataset": "tools4j-occurrence-20261019",
@@ -286,8 +286,8 @@
       "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-occurrence-20261019]"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3LazyTreeMapSelfTest.java",
-      "before_sha256": "b61d390196173ef0d4f99a86d0569f0542f9805d639a29eff4035140f6cf10ea",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3LazyTreeMapSelfTest.java",
+      "before_sha256": "681c71b6fe4b8ddeca4f7a312727d7dc8652fdcad62ec73e570510643911de30",
       "after_sha256": "0e81883c2426a135e2416127916a660e1085b686df53ce830a43ab6b5c928329",
       "after_bytes": 18798,
       "mode": "0644",
@@ -303,9 +303,9 @@
       "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-lazy-entry-20261019]"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3LongAddressBoundedSelfTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3LongAddressBoundedSelfTest.java",
       "before_sha256": "0e590e67416010c433b82eb263ddc55f162c099eed13b7fb1606b2c868d83c5d",
-      "after_sha256": "7e1c70759b76dbcdb2800c46430d568345b63bc2d26d8ba392f4409335884dd5",
+      "after_sha256": "9eaa71100f9b941cd78b9c7d728452c1e06653037bd9e566b9ce0235e8349140",
       "after_bytes": 8617,
       "mode": "0644",
       "dataset": "tools4j-gather-test-20261019",
@@ -320,8 +320,8 @@
       "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-gather-test-20261019]"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3NoRetainedStructuralEntryTest.java",
-      "before_sha256": "338d443ef01b118377940397b447b083af9a5a73c8bd8a001005b08efd5a9666",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3NoRetainedStructuralEntryTest.java",
+      "before_sha256": "05dbc94d16aa7093ff3ac963cd4eac4cd276ead2efac8028cafe96c812683e21",
       "after_sha256": "bf524182763930713cfbf83d57348a8845ae4a001d60668a49fa3ac284047383",
       "after_bytes": 10187,
       "mode": "0644",
@@ -337,9 +337,9 @@
       "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-entry-oracle-20261019]"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3ObjectRangeMapSelfTest.java",
-      "before_sha256": "f78aff3fdd0dff9d7e8faa685a92f26ba1a41d29c1c9a07d46a1af76b46a6381",
-      "after_sha256": "dee07d00fd8cbd4c6193db4ec8583b9f4af2c8815a87175c8746f15f5f761f6b",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3ObjectRangeMapSelfTest.java",
+      "before_sha256": "cffa1740a7bb1b8cfdd5e62378af26657ced83fe1e9ad1e8ccf09267c3a601c5",
+      "after_sha256": "3935f90556c894cfe9c3e74a42901724da623052a6d550d87a9a9ae0299ded78",
       "after_bytes": 11006,
       "mode": "0644",
       "dataset": "tools4j-range-oracle-20261019",
@@ -354,9 +354,9 @@
       "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-range-oracle-20261019]"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorContract.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3RequiredExcludedMaskSelectorContract.java",
       "before_sha256": "cb7211d70e551452c1724f186bfbd88a3e459ca0ac64a96f14dfda92b996e15c",
-      "after_sha256": "4a5777ea4b5222d76feb0479ebbe616ef6ca03015b9d4f325550faa456b4fc68",
+      "after_sha256": "e99b372d26fa5b74a381862aba929600ccca20c71221444544dbf54b74508e78",
       "after_bytes": 6367,
       "mode": "0644",
       "dataset": "tools4j-mask-oracle-20261019",
@@ -371,7 +371,7 @@
       "evidence_locator": "PASS_INDEX.json datasets[dataset=tools4j-mask-oracle-20261019]"
     },
     {
-      "path": "m3/collections/synexia-donation.json",
+      "path": "m3/collections/m3-donation.json",
       "before_sha256": "50df53dec7be6b25b0f84c1635fa3abbe1391dc8a9c28c4ad0c993b0aa5ed964",
       "after_sha256": "9bc90b2578b7a82353533746e002f77dfdc0a2459c910d3e7eaf83dd5cf7924c",
       "after_bytes": 67681,
@@ -406,8 +406,8 @@
     },
     {
       "path": "m3/tooling/module-packs/collections/build.py",
-      "before_sha256": "115bbc8d7bf48b25c81228797efb36ad0463fc535a8ff5be134c61ecb38c0934",
-      "after_sha256": "0d50756bdadd8ed87892c54dbb21bbaa190b12bff110ac23e79302b0e3d39288",
+      "before_sha256": "7df7f538bdb2f759406421eaae1d60b5ad0b497c6d0c2c44d1b39ee836ca42ad",
+      "after_sha256": "8ab72f34ec5fcb08d8a90f03d0659431bb6ab3e97853d62c0b1877faa99902e0",
       "after_bytes": 11817,
       "mode": "0644",
       "dataset": "tools4j-pack-maskwindow-20261019",
@@ -488,7 +488,7 @@
     "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V1",
     "receiver_baseline": "677437be295b23f7ccf7409be287008944d0e8b0",
     "successor_receipt": "qualification/tools4j-unix-source-successor-20261019.tsv",
-    "successor_receipt_sha256": "a802b36b031d2280c72e148baf93e0977a422ef1f07525f349526a2e2b31e46b",
+    "successor_receipt_sha256": "2e5b2593fef1f70ccf5b8a4d8b95a604ea85025b6ab8e3f1f4b3fcc234923704",
     "receipt_columns": [
       "path",
       "inherited_manifest_sha256",

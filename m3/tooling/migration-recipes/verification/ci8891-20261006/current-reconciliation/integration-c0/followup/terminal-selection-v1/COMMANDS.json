@@ -2,7 +2,7 @@
   "archiveOwner": {
     "bytes": 33814,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py",
-    "sha256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574"
+    "sha256": "93a1c116c197854b0167c172581cd768d0f9098067bf0f1296607ca6ba855556"
   },
   "automaticProofRerun": false,
   "commands": [
@@ -105,17 +105,17 @@
     {
       "bytes": 13165,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/prepare_package.py",
-      "sha256": "8ccbea077946cb7cb8a01cf7473799433235b34467c9bfa4eabbf135af3ea95f"
+      "sha256": "a0f624821d69d89f6a051e0149962b823e78ebac114a7098cb1294c1353efeba"
     },
     {
       "bytes": 9154,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/finish_package.py",
-      "sha256": "88acbc1aa271f0d40b73ae35469fbbcf1f56846d912a756e4477babae724b629"
+      "sha256": "bc37eba617bf61f5d736f4482c32f65672e6feb03bbe9f7ed6c5dd7119a130ea"
     },
     {
       "bytes": 1860,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/reconstruct.py",
-      "sha256": "c6a6a9af02b79506084e1b477b3b46f60614f5370424135452ed397cca2e40f7"
+      "sha256": "817da6e061f22f216eb32e0e4eb8f8f0ca76ef9bd89b74909cb7bd958a38d176"
     },
     {
       "bytes": 13982,
@@ -142,7 +142,7 @@
   "receivingSelection": {
     "bytes": 45711,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/receiving-selection-v3/RECEIVING-SELECTION.json",
-    "sha256": "6483d4a75236aaa6f4231bd3c509c14de950a75f03537e565170138a1f0e70cb"
+    "sha256": "03c985249010fdf14d3e8425731a12183be92fa26c364f76e4ec481acb10934c"
   },
   "receivingStatus": "PRIMARY_ONLY_STOP",
   "receivingStopPreserved": true,
@@ -152,7 +152,7 @@
   "selectionReadback": {
     "bytes": 3106,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/terminal-selection-v1/SELECTION-READBACK.json",
-    "sha256": "3d82ba0ac547e19a6370f266a536277691cbb74470131a15c56d250ae1a7ccf9"
+    "sha256": "3e3996490f3984dd71209a18b86eb3e2c7f23503fb3f92955ccf78184a88d29e"
   },
   "status": "AUTHORED_NOT_EXECUTED"
 }

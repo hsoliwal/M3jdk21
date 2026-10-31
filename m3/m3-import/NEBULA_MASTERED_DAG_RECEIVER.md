@@ -5,7 +5,7 @@ Status: **evidence only; mechanical application blocked**.
 Nebula is the proving target for the portable M3 Java-21 recipe/DAG shape. M3JDK21 does not treat
 a branch, PR, recipe name, or historical test as proof. The machine receipt is:
 
-`m3/synexia-import/nebula-mastered-dag-receiver.tsv`
+`m3/m3-import/nebula-mastered-dag-receiver.tsv`
 
 The receiver is fail-closed. Mechanical application becomes admissible only when one exact receipt
 binds all of these gates to the same Nebula proof commit:

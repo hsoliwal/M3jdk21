@@ -57,8 +57,8 @@
     },
     {
       "path": "m3-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/apache-reuse-receiver-custody-v1/README.md.txt",
-      "gitBlob": "f30c9e98ac9f76168773232cfbf47899af0cf7d5",
-      "sha256": "f4597c49d231b80a8e51a46ec47379f3b39742d68983ac39551f82f993fe4ffd"
+      "gitBlob": "f2a72b2fec345da73fa5fb85bcda4989558ed5bd",
+      "sha256": "78cf843b37b7e0e6e143ec902cbb79735fbe37390253a9f823c8c7a381e1c263"
     },
     {
       "path": "m3-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/apache-reuse-receiver-custody-v1/manifest.tsv",
@@ -134,8 +134,8 @@
     {
       "path": "m3/tooling/migration-recipes/apache-reuse/README.md",
       "beforeSha256": "fbf916ee02a45f1d6f418f533e190bd85b128e2b6432b1b40072eda2c669dcb4",
-      "afterSha256": "f4597c49d231b80a8e51a46ec47379f3b39742d68983ac39551f82f993fe4ffd",
-      "gitBlob": "f30c9e98ac9f76168773232cfbf47899af0cf7d5",
+      "afterSha256": "78cf843b37b7e0e6e143ec902cbb79735fbe37390253a9f823c8c7a381e1c263",
+      "gitBlob": "f2a72b2fec345da73fa5fb85bcda4989558ed5bd",
       "origin": "Verified OpenRewrite Result.getAfter()"
     }
   ],

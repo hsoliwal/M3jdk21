@@ -32,7 +32,7 @@ jobs:
         run: |
           set -euo pipefail
           echo '843267dce03f5909c357e1caeae5a2aa82bdae3e55323e1f46e0fb0789341a17  m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java' | sha256sum -c -
-          echo '362935756c566b697c7a93072756f33b2852988622c6518ada9982381b34e578  m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsOwnerSetContract.java' | sha256sum -c -
+          echo '510db034cdd46a3091dd9710e7be89cddf539015e4148fb6afcbc424fcd181e8  m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsOwnerSetContract.java' | sha256sum -c -
           mkdir -p "$RUNNER_TEMP/filtered-list-classes"
           javac --release 21 -proc:none -Xlint:all -Werror \
             -d "$RUNNER_TEMP/filtered-list-classes" \

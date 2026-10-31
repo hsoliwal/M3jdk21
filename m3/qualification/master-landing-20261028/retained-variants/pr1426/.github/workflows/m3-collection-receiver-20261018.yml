@@ -34,9 +34,9 @@ jobs:
         run: |
           set -euo pipefail
           git merge-base --is-ancestor 0efc1719ca5766aead09f4f7c49f5067975bd946 HEAD
-          test "$(git hash-object m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe/src/main/resources/templates/M3LongBitmapFilteredSnapshot.java)" = a5fe77001be04ca123593908fb68ca008935d543
-          test "$(git hash-object m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe/src/main/resources/templates/M3LongBitmapFilteredSnapshotSelfTest.java)" = 246745524719dffdd0396166282a3382f1759bf3
-          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java)" = 317136e66200db1d8fc72d47ff9f8cf52b4566b5
+          test "$(git hash-object m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe/src/main/resources/templates/M3LongBitmapFilteredSnapshot.java)" = 0428338e245926b3884482409ebb0a5ec9d8f90e
+          test "$(git hash-object m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe/src/main/resources/templates/M3LongBitmapFilteredSnapshotSelfTest.java)" = cc7a8a5a6c6176aa0057399c52853f7a04c54cc0
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java)" = 09c10e2b4874f70ece8c1e4392a574db652945f7
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3StateMaskArrays.java)" = 06dc86a44df0e962613273011ff7d653f20d6ea9
       - name: Compile existing three Maven source installers directly with Java 21
         shell: bash

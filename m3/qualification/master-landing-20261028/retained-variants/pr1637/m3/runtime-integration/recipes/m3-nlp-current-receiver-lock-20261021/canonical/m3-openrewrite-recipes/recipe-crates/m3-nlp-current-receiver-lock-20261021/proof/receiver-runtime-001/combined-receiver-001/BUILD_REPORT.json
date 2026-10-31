@@ -381,7 +381,7 @@
   },
   "runtime_dependency_on_com_m3_repository": false,
   "schema": "M3_CURRENT_FORK_NLP_SEARCH_1",
-  "source_lock_sha256": "7f591c98c603ba8128c97747fe38fd1ccfe8adb5f2cd712b98b2697fff935acb",
+  "source_lock_sha256": "271a532810591e94f5ceaab443820fdb08f96d1288e9ba5c1ce55c09d3444c8b",
   "tests": {
     "ModelSourceProbe": "Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData\nModelSourceProbe PASS: real token/sentence model train/serialize/reload; immutable source offsets and probability parity",
     "SourceFactsProbe": "Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData\nSourceFactsProbe PASS: 2000 raw UTF-16 digest oracles; snapshot/null contracts",

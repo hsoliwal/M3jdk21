@@ -42,7 +42,7 @@ jobs:
               'm3/collections/src/test/java/jdk/m3/collections/M3LongTreeSetMaskCompactionContract.java':
                   '7f1f00afbec94d40b24c25256ac531ec754fe6bae856f2001d6f8d3944576e25',
               'm3/collections/src/test/java/jdk/m3/collections/M3LongTreeSetMaskCompactionTest.java':
-                  '78daa6148900e6645b7b824df4a50ce8ab40ca073d5679aae6e59fd0c52968ec',
+                  '6b57349afcc52a7f97165a6096d9fc3982b6cea668db032efa688b5f1d7ef136',
           }
           for p, expected in pinned.items():
               actual = hashlib.sha256(Path(p).read_bytes()).hexdigest()

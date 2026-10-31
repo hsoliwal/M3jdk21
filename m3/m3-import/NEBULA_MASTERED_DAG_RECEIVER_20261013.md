@@ -3,7 +3,7 @@
 Status: **recipe/DAG custody admitted; target runtime/native promotion remains fail-closed**.
 
 This is an additive successor to the historical
-`m3/synexia-import/nebula-mastered-dag-receiver.tsv`. The older receipt remains immutable evidence
+`m3/m3-import/nebula-mastered-dag-receiver.tsv`. The older receipt remains immutable evidence
 of the GitHub Actions startup failure around Nebula PR #104. This successor does not rewrite or
 reinterpret that historical result.
 
@@ -25,7 +25,7 @@ explicitly keeps fresh native GTK/Win32/Cocoa current-head execution pending ext
 
 M3JDK21 consumes the reusable recipe/DAG contract only through the Synexia Apache handoff:
 
-`m3/backports/SYNEXIA_NEBULA_RECIPE_DAG_HANDOFF.tsv`.
+`m3/backports/M3_NEBULA_RECIPE_DAG_HANDOFF.tsv`.
 
 This successor receiver therefore records:
 

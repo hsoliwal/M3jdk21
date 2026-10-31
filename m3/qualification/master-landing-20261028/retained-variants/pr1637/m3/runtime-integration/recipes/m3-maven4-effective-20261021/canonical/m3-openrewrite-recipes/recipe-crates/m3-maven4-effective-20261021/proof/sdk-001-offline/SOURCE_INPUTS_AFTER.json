@@ -6,7 +6,7 @@
   },
   {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/apply_receiver.py",
-    "sha256": "c26286a6e3a0d03e07533e4b8944a8a1e2858034b7c6060ae70370587901cdfb",
+    "sha256": "912c2a99dc5cfbec64beffebe8d49d8bbb77f4564aed4c1d5b66bfca962509f7",
     "bytes": 7420
   },
   {
@@ -26,7 +26,7 @@
   },
   {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/pom.xml",
-    "sha256": "377ceffb36caeb059c2d0e96fff7b6550c8b03b996e639160fc461b44da7ebf3",
+    "sha256": "6e90a398e126045ca7f8cbbc5865ccd028faa135fbc5b6d4b2814b57bbb0087c",
     "bytes": 4028
   },
   {
@@ -51,22 +51,22 @@
   },
   {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/prepare_packet.py",
-    "sha256": "48ecd1465168482fe2962670ca4e19a50e7a4395e53fe147b716f525debc66bc",
+    "sha256": "702d83b39400be766ae2728c722ea8252d46d46c5b3feca0f99a0dadb8c4326a",
     "bytes": 7004
   },
   {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/qualify.py",
-    "sha256": "521844a8a5ee3cfab206cdfdb3bd12736a3f60f1d7e61fa8ffa0b360acbf1082",
+    "sha256": "5959ac4bf5f420cec08ae709b9c513bf306715f3ca47c1dab2b2bb91399f0450",
     "bytes": 9694
   },
   {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/src/test/java/jdk/internal/m3/rewrite/M3Maven4EffectiveRecipeTest.java",
-    "sha256": "a6a53bafef02ea8f8b5547036ea9f6177861352fbe15cc8d77a85e877b1d4c5e",
+    "sha256": "e4b7dc4953427d6b61e1f6bdb90f7bf66a18d76f2b6c8037d214ff9f0980ff9f",
     "bytes": 31607
   },
   {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/verify_sources.py",
-    "sha256": "44237b6c04c3687b053a7a433f6b963ad739dedfc8e12de7f17855b3a41c2036",
+    "sha256": "c45c46bd470bb83c989b132b29e7892348dad60ca5349f10c728d459eea37713",
     "bytes": 2408
   },
   {
@@ -76,22 +76,22 @@
   },
   {
     "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
-    "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63",
+    "sha256": "92cc90c46a1ca672a016a89c0d65e6909e090264ba1aa76a85b7fa333470e38b",
     "bytes": 31505
   },
   {
     "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
-    "sha256": "5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc",
+    "sha256": "613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853",
     "bytes": 19983
   },
   {
     "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
-    "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579",
+    "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0",
     "bytes": 8268
   },
   {
     "path": "m3-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-maven4-effective-20261021.yml",
-    "sha256": "696e7d8324d15afb39a78b19ee37f942a0318d0fad4976f399ffb8fa821b4c50",
+    "sha256": "e424370a4d3cb756828773e0e3f4351a1a5ce68c2d2933ef59f528713907281a",
     "bytes": 1198
   },
   {

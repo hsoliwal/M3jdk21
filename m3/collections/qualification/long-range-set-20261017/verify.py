@@ -47,11 +47,11 @@ def verify():
 
     owners = {
         "m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java":
-            "ef0fac5c1e71f8493baab365c8af64bb22cb6171",
+            "be8838c2ad26aac24453e05a317d63016bca100b",
         "m3/collections/src/main/java/jdk/m3/collections/M3LongLongConsumer.java":
-            "b1c01d1afacc76bd338179398ab42835e16992fa",
+            "8ce5558a5d660b7f8a206dde3b59d1b30c45aab4",
         "m3/collections/src/main/native/collections/m3_index_path_masks.c":
-            "086b49293257fd17cc7fbd1ebbb98460aa677e35",
+            "69aef883c09997bae30825d7ad8757bc2358bf69",
     }
     for path, blob in owners.items():
         if git_blob(checked_data(ROOT / path)) != blob:

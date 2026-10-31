@@ -60,8 +60,8 @@
       "path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexTrigramQuery.java",
       "revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
       "bytes": 15093,
-      "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
-      "gitBlobSha1": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea",
+      "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e",
+      "gitBlobSha1": "4e1d24af8d3054a27ae3b6f2d8eebd6486225118",
       "license": "Apache-2.0",
       "imports": [
         "java.util.ArrayList",

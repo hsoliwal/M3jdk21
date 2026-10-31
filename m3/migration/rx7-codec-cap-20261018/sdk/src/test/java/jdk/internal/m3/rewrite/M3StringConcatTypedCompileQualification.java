@@ -53,8 +53,8 @@ final class M3StringConcatTypedCompileQualification {
                     "e4624f56a93d68cd04337e39ed2cd3896867149908f287d5839ddff9b965ae95",
                     6913, "053c69bd70909731e6509d06f6b29d31a24e2fb669a57f82bf22587e44e839c0"),
             MANIFEST, new Pin(18689,
-                    "12a749485fcd401d8fba311e5b8911f30e10988a63a14ebcbd11edac3fbee643",
-                    18795, "260cf8202542543db466b0fba64ae7613e10810ecaac76dac4d6fea20e096779"));
+                    "0bb9237ae583ba0a63dfaae5742d66be0c2749c79dd51cb6d44f5cf3e8e33f57",
+                    18795, "e0903dbeabc2f6a52c94e621ebe2e7184b1ef634725c2479d5b76ae5d2a4101d"));
 
     private M3StringConcatTypedCompileQualification() {}
 

@@ -1,5 +1,5 @@
---- before/m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseRuntimeActivator.java
-+++ after/m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseRuntimeActivator.java
+--- before/m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseRuntimeActivator.java
++++ after/m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseRuntimeActivator.java
 @@ -19,31 +19,76 @@
  public final class M3EclipseRuntimeActivator
          implements BundleActivator, M3EclipseRuntimeServices {

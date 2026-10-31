@@ -1,7 +1,7 @@
-diff --git a/m3/collections/src/main/java/com/m3/collections/M3LongLongTreeMap.java b/m3/collections/src/main/java/com/m3/collections/M3LongLongTreeMap.java
+diff --git a/m3/collections/src/main/java/jdk/m3/collections/M3LongLongTreeMap.java b/m3/collections/src/main/java/jdk/m3/collections/M3LongLongTreeMap.java
 index e16d757..166f84e 100644
---- a/m3/collections/src/main/java/com/m3/collections/M3LongLongTreeMap.java
-+++ b/m3/collections/src/main/java/com/m3/collections/M3LongLongTreeMap.java
+--- a/m3/collections/src/main/java/jdk/m3/collections/M3LongLongTreeMap.java
++++ b/m3/collections/src/main/java/jdk/m3/collections/M3LongLongTreeMap.java
 @@ -1,6 +1,8 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
  /*
   * Copyright 2026 Hitesh Soliwal and contributors

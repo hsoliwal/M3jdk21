@@ -1,7 +1,7 @@
 path	sha256	git_blob	mode	pr	note
 m3/compatibility/synexia-token-regex-receipt.json	51544cdb597dff297720deb766e08d129c5d814b40aaa21ab4c5c9e3558da772	39bece7f43479f5bc617180473415508c532bc9e	100644	1397	PR version, not live
-m3/docs/name-mapping.d/m3-token-regex.json	84c9655c9f32bfb9b2b28798c528b5273c5ece991b3c518e5e682d6afcd477c4	fd3b5e17e1169285de23345c3d2ebd061dbe6aa2	100644	1397	PR version, not live
-m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-token-regex.yml	be4d05e811f64dd3a8cea435b75ff8559df4fd43b3e684c0cecf99ea6f4f52fb	cffd5e9d57b5d2dea7dc82bf8ac6fb85744ef833	100644	1397	PR version, not live
+m3/docs/name-mapping.d/m3-token-regex.json	28dc525bb112c3a69ae03598c02e7607d07e3abe3cb3affcf5786d20976b4fbb	595ec5022734a0848ddf8281b31482ea06f68e9b	100644	1397	PR version, not live
+m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-token-regex.yml	b5efbaeac0ef9575c77c817d3639bb6c5e04627b0b3e913b069efa866f9f1152	41e5087c592fb276966e2959eb2c6ec3f298b613	100644	1397	PR version, not live
 m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-token-regex/00-M3NotYetReceived.java.txt	ba5802a1b93b714e42e9770b398b4b51458d17d4d8e3b033a52ba3c5418f59f2	ef4588f948eb0c88811f6df43f085121fc0fe9a9	100644	1397	PR version, not live
 m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-token-regex/01-M3TokenIndex.java.txt	606ca90bece15f486485fbc6749ed50ccdf6bcb3f18bdfd5b26784c4f4b0fb16	0b805ebbe07ef99e968dbc1b5aed7e93be809cb2	100644	1397	PR version, not live
 m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-token-regex/02-M3TokenMatcher.java.txt	6683641031307ae219d22cf5be0312bd2f6e71d63146a6902e6deff36e27bc2e	e05de40a842b79ead7e3b302658af1c6407278fc	100644	1397	PR version, not live

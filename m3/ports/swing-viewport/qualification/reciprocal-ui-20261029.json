@@ -52,14 +52,14 @@
       "dataset": "swing-tracked-20261029",
       "baseline_ref": "652ff7cfb605b088866eafb677917203af0964eb",
       "pre_sha256": "51238e60cd6bad56f28b3c4b798f565e6d7d7954f6c63c03054443aa51fae2a5",
-      "sha256": "3437e9bf318c4ca5799165e1514dc9ef5f01ac8e5f89138a2079973f3bd2edb1",
+      "sha256": "02f3b0b82ffe7a377a47b02ecd86d581f187eb9e7f908c4c954e51c1a2653d11",
       "path": "m3/ports/swing-viewport/src/main/java/jdk/m3/swing/viewport/M3ViewportBinding.java",
       "execution_steps": [
         {
           "dataset": "swing-tracked-20261029",
           "baseline_ref": "652ff7cfb605b088866eafb677917203af0964eb",
           "pre_sha256": "51238e60cd6bad56f28b3c4b798f565e6d7d7954f6c63c03054443aa51fae2a5",
-          "sha256": "3437e9bf318c4ca5799165e1514dc9ef5f01ac8e5f89138a2079973f3bd2edb1"
+          "sha256": "02f3b0b82ffe7a377a47b02ecd86d581f187eb9e7f908c4c954e51c1a2653d11"
         }
       ]
     },
@@ -67,14 +67,14 @@
       "dataset": "swingx-selection-v2-20261029",
       "baseline_ref": "652ff7cfb605b088866eafb677917203af0964eb",
       "pre_sha256": "de8be133a84c030f5559a97815069a737daa13931cb9b5a56269d346c0f80f82",
-      "sha256": "0cddd8413262c86e869069dba8f830251106441d82d575f2ff04a274b503d98b",
+      "sha256": "0c741d63c27e0ee01c827b4dcb36698b3517e14b7974c8c98da39dee1d6b9f23",
       "path": "m3/ports/swing-viewport/src/test/java/jdk/m3/swing/viewport/M3SwingXColumnProof.java",
       "execution_steps": [
         {
           "dataset": "swingx-selection-v2-20261029",
           "baseline_ref": "652ff7cfb605b088866eafb677917203af0964eb",
           "pre_sha256": "de8be133a84c030f5559a97815069a737daa13931cb9b5a56269d346c0f80f82",
-          "sha256": "0cddd8413262c86e869069dba8f830251106441d82d575f2ff04a274b503d98b"
+          "sha256": "0c741d63c27e0ee01c827b4dcb36698b3517e14b7974c8c98da39dee1d6b9f23"
         }
       ]
     },
@@ -82,14 +82,14 @@
       "dataset": "swing-tracked-20261029",
       "baseline_ref": "652ff7cfb605b088866eafb677917203af0964eb",
       "pre_sha256": "ABSENT",
-      "sha256": "30e2eef2d6206c01fef2875812e3f5590b39e814e80f9646b916207382530e74",
+      "sha256": "1c174188b53810aea018427bce4f4b937a0302b38979a1818918773c205fa484",
       "path": "m3/ports/swing-viewport/src/test/java/jdk/m3/swing/viewport/M3ViewportBindingTrackingTest.java",
       "execution_steps": [
         {
           "dataset": "swing-tracked-20261029",
           "baseline_ref": "652ff7cfb605b088866eafb677917203af0964eb",
           "pre_sha256": "ABSENT",
-          "sha256": "30e2eef2d6206c01fef2875812e3f5590b39e814e80f9646b916207382530e74"
+          "sha256": "1c174188b53810aea018427bce4f4b937a0302b38979a1818918773c205fa484"
         }
       ]
     }

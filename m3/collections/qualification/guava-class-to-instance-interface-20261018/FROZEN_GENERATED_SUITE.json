@@ -4,7 +4,7 @@
   "expected_discovered_and_run": 898,
   "features_file_sha256": "ade2db689d4118a103a372544ea4d7773b267df264f496aab8ea548e986f22ef",
   "features_frozen_before_first_JVM": true,
-  "final_report_sha256": "3bebc12fc628eca04f4eef43056627ca18ebf751b2c8037a6e6da97dfd210e17",
+  "final_report_sha256": "f3d5a88038d6889ae2194ef55fdc0b55d15cf6049e47506510b48c7f0f2dea99",
   "launcher_optional_final_argument": "898",
   "required_errors": 0,
   "required_failed": 0,

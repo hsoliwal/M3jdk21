@@ -10,7 +10,7 @@
   "originalOracle": {
     "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-put-validation-oracle-20261019\\ORIGINAL_ORACLE_SEAL.json",
     "bytes": 2632,
-    "sha256": "9670389b1e814d7f71b02608c09560e5372ced79f490cca918bb64e9e83020c1"
+    "sha256": "45b45d0b826570ff6b586ee34d5bab2c9d442817aacdcb12f9dc06255434223a"
   },
   "atom": "ordinary eager unbounded forward nonempty root put validation",
   "before": "    @Override public V put(K key, V value) {\n        tree.writable(); checked(key);\n",

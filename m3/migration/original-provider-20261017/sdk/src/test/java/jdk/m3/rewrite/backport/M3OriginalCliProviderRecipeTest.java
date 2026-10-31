@@ -481,9 +481,9 @@ final class M3OriginalCliProviderRecipeTest {
 
 
     private static final String FROZEN_PRE_MANIFEST_SHA256 =
-            "11d69c05d4e4dd0ef27c8a2195827c62b5dd48a49bef34943f4c6a11fbc4899c";
+            "1fd2558fdd93e7f1860a225dacfc7118452bd88498d9d272946110c0260a4341";
     private static final String PRE_MAP_SHA256 =
-            "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3";
+            "c23e6f63411b1d33a29f558c2a6370421a6f51ab99b6db99ac77ebc6e859812d";
 
     private static Map<String, String> frozenPreImages() {
         String manifest = resource(RES + "baseline-pre.tsv");
@@ -743,7 +743,7 @@ final class M3OriginalCliProviderRecipeTest {
         String before = beforeText(mapping);
         String after = assertReplay(state(0), false).get(name);
         assertNotNull(after, "actual recipe overlay must contain the canonical map");
-        assertEquals("4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
+        assertEquals("c23e6f63411b1d33a29f558c2a6370421a6f51ab99b6db99ac77ebc6e859812d",
                 sha(before), "exact current receiver map preimage");
 
         // These reviewed spans cover the JSON object value, excluding its property label/comma.

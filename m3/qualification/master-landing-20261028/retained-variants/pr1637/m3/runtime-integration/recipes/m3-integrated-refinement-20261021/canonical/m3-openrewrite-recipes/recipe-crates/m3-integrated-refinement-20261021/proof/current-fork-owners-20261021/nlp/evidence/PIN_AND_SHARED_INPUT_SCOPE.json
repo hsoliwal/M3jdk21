@@ -8,8 +8,8 @@
     "m3/tooling/jmod-recipes/tools/split_packages.py": "8559a357fb2e3b06af13b1b3972166493aede2d77dc3611e84555a87ab068d9a",
     "m3/tooling/jmod-recipes/tools/test_sdk_image_probe.py": "c085496c1826fd2dea67adc5681378a8c1aaf79e53cd37da65839d7d32a0ce60",
     "m3/tooling/jmod-recipes/tools/test_verify_sdk_receiver.py": "3861e52f0712f388eb7a0e9bce142347dddfe74a50afbc7b701fbee253f97e45",
-    "m3/tooling/jmod-recipes/tools/verify_cpu_jmod_packet.py": "9c58853ecce939721601e4ee0046400db9d5f70b6a22759fb2d3da8951136597",
-    "m3/tooling/jmod-recipes/tools/verify_sdk_receiver.py": "41aeec9d5b14df79ea1625488c15a6f841e61183f75c14d36941042428c643d8"
+    "m3/tooling/jmod-recipes/tools/verify_cpu_jmod_packet.py": "0cda64f9c529c7104a92454741f3d783d4e70428320b8cbff771250b220ff727",
+    "m3/tooling/jmod-recipes/tools/verify_sdk_receiver.py": "c15aa1620403910a74cc61c749af2c9ecd68e005056b1ab5143309e8ea8517ab"
   },
   "actual_product_packager_missing": [],
   "actual_product_packager_different": [],

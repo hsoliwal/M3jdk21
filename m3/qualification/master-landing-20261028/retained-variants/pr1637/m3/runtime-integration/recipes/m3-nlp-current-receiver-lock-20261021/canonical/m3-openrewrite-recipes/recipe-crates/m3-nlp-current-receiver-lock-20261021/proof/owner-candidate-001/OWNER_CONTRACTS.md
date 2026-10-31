@@ -13,9 +13,9 @@ unchanged. Canonical reusable recipe ownership is
 
 | Owner | Exact receiving source and contract | Evidence and limit |
 | --- | --- | --- |
-| `M3GvasLiteralImage` | Receiving commit `c09e67319378740dcad570d506463594dbfad3ee`, source SHA-256 `2c1a8b9cc9870fc5fdf8e6f8ca46af907c503346aaf6d783b74a6498fd3601cd`. Its bounded optional primitive hash directory refers to existing native UTF-16 rows, preserves exact spelling comparison and the binary-search fallback, and retains the existing image geometry and JNI address ownership. | The actual received source and test match canonical PR #12387 head `c28bd8e83d0b88a9dba0c0a9fdbd35a25e6ecd07` by Git blob and manifest SHA. The unchanged strict Java/C11 gate passed collision/digest/corruption refusal and three cooperating JVMs with one fixed address/inode; 17,530 checks per child. The first sandbox attempt failed when child `/proc` mappings were inaccessible; it is retained. This is finite Linux Java/JNI proof, without a whole String/HotSpot or cross-platform claim. |
-| `M3BigString` | Receiving commit `632a9eefb68798d86acd83e886fd267938638e01`, source SHA-256 `e09815cea88c44e4da89ca8979ba247cddeee6c97b496d1aa2309a48916a90de`. Immutable long-coordinate composition reuses existing immutable chunks and primitive summary/index lanes. UTF-16, summary, literal-search and bounded int-window Java regex contracts remain unchanged. | The exact receiving source/test match their canonical manifest and existing owning workflow. That workflow's literal hash/strict compilation/test steps passed 3,213 checks. Canonical PR #12347's immutable head has different templates; see the separate discrepancy below. No source or new streaming API is imported from those differing templates. |
-| `M3RopeTextIndex` | Receiving commit `b2f989a0fc77bc95a5fddfee7b378085d742fe8c`, source SHA-256 `ff2495c01b8df68a01167e29daa4ea4a6af25650e59c5cc705cc2fdc7cfa0141`. A bounded 16-way primitive directory indexes existing immutable M3StringPiece owners without copying characters. Coordinates are long UTF-16 units; Java regex remains confined to a requested int-sized window. | Source/test Git blobs match canonical PR #12344 head `d6f1b7a3b9b3eda4a29877ff65b6c2d2901dd1be` and its manifest. The original whole-module proof initially failed an unrelated exported-constructor lint warning. After the explicit constructor atom below, the unchanged original script passed 83,941 checks in each of normal JIT, interpreter, noncompact-string and C2 modes. A prior finite dependency-closure diagnostic also passed but is not substituted for that whole-module gate. |
+| `M3GvasLiteralImage` | Receiving commit `c09e67319378740dcad570d506463594dbfad3ee`, source SHA-256 `b05c40b8999993dfec75afa646ba4fac421258f0b611ab01956b878226574a3f`. Its bounded optional primitive hash directory refers to existing native UTF-16 rows, preserves exact spelling comparison and the binary-search fallback, and retains the existing image geometry and JNI address ownership. | The actual received source and test match canonical PR #12387 head `c28bd8e83d0b88a9dba0c0a9fdbd35a25e6ecd07` by Git blob and manifest SHA. The unchanged strict Java/C11 gate passed collision/digest/corruption refusal and three cooperating JVMs with one fixed address/inode; 17,530 checks per child. The first sandbox attempt failed when child `/proc` mappings were inaccessible; it is retained. This is finite Linux Java/JNI proof, without a whole String/HotSpot or cross-platform claim. |
+| `M3BigString` | Receiving commit `632a9eefb68798d86acd83e886fd267938638e01`, source SHA-256 `ec7142df904511f455e07650081db9eb6518a1fab138ea7ae44be15192cde343`. Immutable long-coordinate composition reuses existing immutable chunks and primitive summary/index lanes. UTF-16, summary, literal-search and bounded int-window Java regex contracts remain unchanged. | The exact receiving source/test match their canonical manifest and existing owning workflow. That workflow's literal hash/strict compilation/test steps passed 3,213 checks. Canonical PR #12347's immutable head has different templates; see the separate discrepancy below. No source or new streaming API is imported from those differing templates. |
+| `M3RopeTextIndex` | Receiving commit `b2f989a0fc77bc95a5fddfee7b378085d742fe8c`, source SHA-256 `d78d4f2f7d23c0a1927d86c8f059749cbb7d3a11e7d5152aae26135effb9f34a`. A bounded 16-way primitive directory indexes existing immutable M3StringPiece owners without copying characters. Coordinates are long UTF-16 units; Java regex remains confined to a requested int-sized window. | Source/test Git blobs match canonical PR #12344 head `d6f1b7a3b9b3eda4a29877ff65b6c2d2901dd1be` and its manifest. The original whole-module proof initially failed an unrelated exported-constructor lint warning. After the explicit constructor atom below, the unchanged original script passed 83,941 checks in each of normal JIT, interpreter, noncompact-string and C2 modes. A prior finite dependency-closure diagnostic also passed but is not substituted for that whole-module gate. |
 
 The first-party sources retain their Apache-2.0 headers and authorship. The
 BigString/Rope donor catalogues identify Swift Collections algorithmic ideas;
@@ -43,15 +43,15 @@ initialization instructions. The existing `M3LexiconPrecomputeTest` passes
 class-file byte identity is not claimed.
 
 The source moves from SHA-256
-`8e6156376ea9548971b78bb876dc3968195266f04c17c5b061d7f5e4b52f367d`
-to `92fd76c3f0d3c10c90ea4cb52485d2dbceda513fa3d794d22ec67fd153fd62ed`.
+`a273220cdd1a2b20857ccba086394c0a0a726cc3f2711e9eb7fdadbaffb08256`
+to `07c498aafa158278bf2fea6ee54bae7f09bf037051f1f8207511597ccef02929`.
 This first-party declaration preserves the existing source copyright/license.
 
 ## Closed manifest successor
 
 `current-source-lock.json` changes from
-`054029431fbd8063c1e0397c43f3538f319984e252c92f08538881dc0a2eaff5`
-to `7f591c98c603ba8128c97747fe38fd1ccfe8adb5f2cd712b98b2697fff935acb`.
+`c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a`
+to `271a532810591e94f5ceaab443820fdb08f96d1288e9ba5c1ce55c09d3444c8b`.
 Its only logical changes are the GVAS and constructor-owner hashes and two
 explicit entries for the already received BigString and RopeTextIndex sources.
 All other values, schema, source roots, module descriptors and guards are equal.
@@ -73,7 +73,7 @@ At immutable canonical PR #12347 head
 while its manifest records the received `e09815ce...` source. The test template
 hash is `ad5737365bcacdf839fa62ead8369e35e78efbc7f7afd55739d708f0512d358f`,
 while the manifest and receiving workflow record
-`5f47db4885a99b1ec7dc95957276d0130f2eab7cba16614907995c722fa6f9a6`.
+`6a86ba78d034b115bd3895fc2b66916a4c00a485ad01e60ff6e30bbbf410fc61`.
 The differing templates add public `codeUnits()`/`codePoints()` stream methods
 and a corresponding streaming/interoperability test. Full diffs are retained.
 No normalization or historical recipe replay success is inferred. This

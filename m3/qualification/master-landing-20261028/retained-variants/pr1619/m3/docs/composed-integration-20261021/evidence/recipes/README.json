@@ -15,7 +15,7 @@
     {
       "path": "receive-composed21_PRODUCT_RECEIVER.json",
       "raw_sha256": "1ac44584caea391c0ba2343337689bd05f40637efdc6ee3f01dc8d18534442ca",
-      "published_sha256": "885a6ece9527fae534e9ef26344317b65644020629dbb892bb0e1e4b0c96b1e3",
+      "published_sha256": "11ada3dd7e3d810c2c6d6ca45e25bb581d09440db39edd381d43115d2d03c2d6",
       "replacements": 9,
       "rule": "Replace the execution workspace prefix in argv with ${M3_WORK}; retain every argument suffix, exit code, output and source hash.",
       "canonical_source": "tasks/m3-receiving-corrections-20261021/evidence/receive-composed21/PRODUCT_RECEIVER.json"
@@ -24,7 +24,7 @@
   "files": [
     {
       "path": "E1_COMPOSITION.json",
-      "sha256": "adf54486bcf4d30413f977ac0aab0291a05dd1907a79c6c65b41abf5b137a00a"
+      "sha256": "1fe557f535b810633bcf090b660eb5897524a4ed8813d49a24a7cb20f21fa003"
     },
     {
       "path": "E1_SDK_EXECUTION.json",
@@ -32,7 +32,7 @@
     },
     {
       "path": "E2_COMPOSITION.json",
-      "sha256": "b765c27e924a755d9bc74047b5fa77be6923bc6ec0c88f7e143aa38332b70cb7"
+      "sha256": "b19986afa568f51e1e023ecb3bfac5a5a6e057a29d328887c0048355d7256237"
     },
     {
       "path": "E2_SDK_EXECUTION.json",
@@ -48,11 +48,11 @@
     },
     {
       "path": "combine-collections21_PRODUCT_RECEIVER.json",
-      "sha256": "78d55f1cf05a4d392bb765626d87fb147fe8a07c54902f831e24df392234c954"
+      "sha256": "088036c8a5f163d003a8531f86ff942e4774768b67a736ea6c65ab3564c78f5e"
     },
     {
       "path": "combine-composed21_PRODUCT_RECEIVER.json",
-      "sha256": "191bcd33e51f4492ae954af58c25475333494e7fdc7f139506dec03576e73cc9"
+      "sha256": "2cba514d6fb7aa2a53f4c61d9b25a18f67619d82060b9f3aa7d55a9617f1f8ae"
     },
     {
       "path": "combine-ownership21_PRODUCT_RECEIVER.json",
@@ -60,7 +60,7 @@
     },
     {
       "path": "combine-string21_PRODUCT_RECEIVER.json",
-      "sha256": "770c9629eb0c8cff824a074809384aa23e45e07e312e6f6a9553321c493877dc"
+      "sha256": "fe964c5ba0a1c911ff8486964173d551c992b0df63cbceb7d66a5f6123e67e0e"
     },
     {
       "path": "combine-tuple21_PRODUCT_RECEIVER.json",
@@ -68,7 +68,7 @@
     },
     {
       "path": "combine-views-final21_PRODUCT_RECEIVER.json",
-      "sha256": "700126c0cd98693ffca9dbbd3452db9dfdfce737241e4586799e7bc619db586c"
+      "sha256": "be24aa49024688b888393e34f864a6c53fe50b1c61fdf843fde693df330be449"
     },
     {
       "path": "receive-budget21_PRODUCT_RECEIVER.json",
@@ -76,11 +76,11 @@
     },
     {
       "path": "receive-composed21_PRODUCT_RECEIVER.json",
-      "sha256": "885a6ece9527fae534e9ef26344317b65644020629dbb892bb0e1e4b0c96b1e3"
+      "sha256": "11ada3dd7e3d810c2c6d6ca45e25bb581d09440db39edd381d43115d2d03c2d6"
     },
     {
       "path": "receive-concat-guard21_PRODUCT_RECEIVER.json",
-      "sha256": "f0147dfa5688e2fdc5b6f5d55cc8b9f264174636e191589ad728f5ef532f7668"
+      "sha256": "034a5e30b8d558ae327c055315f7dd50bcbd6a49d67d9c8cd3baac4f32db8dec"
     },
     {
       "path": "receive-concat21_PRODUCT_RECEIVER.json",

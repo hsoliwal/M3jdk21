@@ -2,10 +2,10 @@ Execution: 2026-10-20 / Linux / OpenJDK 21.0.12.1
 Source: exact Synexia recipe postimages, current product branch
 Compiler: javac --release 21 -proc:none -Xlint:all,-module -Werror
 Module: com.m3.file (actual module-info.java)
-Source SHA-256: b8fda14938d05bef146af0176861d1e3c3946c73e18a38fdfce4f7758b581ce4
-Test SHA-256: 4ee656c026fd40e26ec9aa73c26da77dfd07eb084c236bdadf97c7f83369cd89
-Product Java Git blob: 769e1844b0b85465e02aeebad7d57706558ef1a4
-Product test Git blob: cc8c3d017b57df3bd034696e7207658545574f44
+Source SHA-256: 312362084eee2ec62599a7f9451a2d00f719d26b95daeeacc5d833f868837937
+Test SHA-256: 128778e6381ac57c36de4e58b15352134bfa284932d7af161102d635604a3bf1
+Product Java Git blob: 8c7828e4b0e041d6dc256df03f4f2287ad297271
+Product test Git blob: 238a5eea3536658e94d138cb245846267afcd0f6
 Strict Java21 compile: PASS
 java --module-path ... -m com.m3.file/com.m3.file.M3FileDeltaLedgerContract
 M3_FILE_DELTA_PASS checks=30

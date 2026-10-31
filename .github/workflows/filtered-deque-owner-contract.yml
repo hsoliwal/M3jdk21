@@ -42,8 +42,8 @@ jobs:
           mkdir -p "$d/src/jdk/m3/collections" "$d/old" "$d/new" "$d/test"
           s=m3/collections/src/main/java/jdk/m3/collections
           t=m3/collections/src/test/java/jdk/m3/collections/M3FilteredDequeOwnerMembershipContract.java
-          printf '%s  %s\n' '0c62d57de198d3ce21524af7a0e86c14eaddc3e3b81dbec9fb8c47552cb79ccd' "$s/M3FilteredDeques.java" | sha256sum -c -
-          printf '%s  %s\n' 'e68ec0cb2098358fd6eaab63e2a476db6c3b16b0fd01df0534791de079aa6809' "$t" | sha256sum -c -
+          printf '%s  %s\n' '3fea7a0276d976beb6594096b04b2c4e74239b694af55b5c2564301357351436' "$s/M3FilteredDeques.java" | sha256sum -c -
+          printf '%s  %s\n' 'a51f3a1fdc6e485fe257406d7377bc61cc1c89c351808c54496cedec9f6174b3' "$t" | sha256sum -c -
           git show 51de1f76e8b61f2d808792affc75aa3f69ee4943:$s/M3FilteredDeques.java > "$d/src/jdk/m3/collections/M3FilteredDeques.java"
           test "$(git hash-object "$d/src/jdk/m3/collections/M3FilteredDeques.java")" = '5fcc063d77ebf16efc23a4511d6fa66c00888b61'
           printf '%s  %s\n' '5f119d62cead081d6e60c847b49c588447b131980a88b5b8a396453beb3a7382' "$d/src/jdk/m3/collections/M3FilteredDeques.java" | sha256sum -c -

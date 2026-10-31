@@ -418,7 +418,7 @@ def estate_snapshot() -> tuple[str, str]:
         "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexString.java"
     ):
         raise ValueError("MIndexString estate source-path drift")
-    if row["source_tree_or_blob"] != "1840f12a3ea64750d829f6dd2bda7916fc25d9f5":
+    if row["source_tree_or_blob"] != "0c2a25df9a937908f46f6d336831bf7b94834d98":
         raise ValueError("MIndexString estate source identity drift")
     return row["snapshot_revision"], row["license_class"]
 

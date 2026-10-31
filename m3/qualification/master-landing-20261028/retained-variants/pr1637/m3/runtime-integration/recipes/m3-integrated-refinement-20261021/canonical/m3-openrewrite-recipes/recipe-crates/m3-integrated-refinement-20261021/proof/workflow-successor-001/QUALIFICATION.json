@@ -1,8 +1,8 @@
 {
   "schema": "M3_FRAMEWORK_CLASSPATH_SUCCESSOR_QUALIFICATION_V1",
   "target_path": ".github/workflows/m3-eclipse-framework-forward-20261017.yml",
-  "before_sha256": "dbceffdfba2dbaee03e71d6d84ad3f9302620201cf86e20ff0f925dc745ff16a",
-  "after_sha256": "d808a06805622896a543c48b60aa400caa087d699db83dfe158be1487ca9980d",
+  "before_sha256": "73727306149bdfb0836857638d0e0f3527cf967bf9c0982f67a27a5d22ef1918",
+  "after_sha256": "c64fe14c50aaa5f931c39749152455b9f789e3df17944063ef0293e54cf92d09",
   "candidate_kind": "Single-file successor to the current emitted framework workflow; original resource handoff untouched",
   "changes": [
     "After resource owner verification, verify the existing unchanged core-runtime owning Maven POM",
@@ -13,11 +13,11 @@
   "yaml_parsed": true,
   "all_run_blocks_bash_syntax_checked": true,
   "failed_classpath_receipt": "/workspace/scratch/206049dfb270/jobs-work/final-review/ci-classpath-01/RESULT.json",
-  "failed_classpath_receipt_sha256": "7c1d2ca6f429f549f4fdf2ef7315861bd42fa92261624c5fa3dce2702d3861c1",
+  "failed_classpath_receipt_sha256": "b2bcc737268f67596efd363ecb428b104a3c1a464d321c34020bb28facebc97b",
   "corrected_classpath_receipt": "/workspace/scratch/206049dfb270/jobs-work/final-review/ci-classpath-plus-core-02/RESULT.json",
-  "corrected_classpath_receipt_sha256": "51d546bbdca192faa2472a2de8758b0d6bda925060b915183ff84bbba24a17fe",
+  "corrected_classpath_receipt_sha256": "9674f785acff48a25f4170026730c02b647fe8693e90066601ab386f070dacf9",
   "actual_core_runtime_qualification_receipt": "/workspace/scratch/206049dfb270/jobs-work/emitted-eclipse-owning-01/RESULT.json",
-  "actual_core_runtime_qualification_sha256": "f117fa9737bb59dcc6d138afbe5a543260ac2b04d507e7c5c6bd0b8b1b592e5a",
+  "actual_core_runtime_qualification_sha256": "e422be6d5a56b9c169a582dfd8eaa2fe6f72b2b05da722a7d584e459d67b8eb6",
   "target_worktree_edited": false,
   "hosted_actions_run": "NOT_RUN",
   "materialization": "PENDING canonical phase-049 successor recipe; candidate only"

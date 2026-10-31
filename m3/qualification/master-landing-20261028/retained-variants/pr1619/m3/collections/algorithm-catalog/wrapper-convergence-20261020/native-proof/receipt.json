@@ -11,7 +11,7 @@
   "source_rights": "EXISTING_DIRECT_COPY_REVIEW plus target-owned correction; original Apache-2.0 Java/C/test notices retained. Pinned OpenJDK and process-helper sources retain their own original notices. No automatic relicensing.",
   "original_receiver_sources": {
     "m3/docs/m3jdk21-native-mask-window-receiver-20261020.md": {
-      "sha256": "a7f9374fa067936babed951171eb439e2c8d7a24297e3c3a4e6954eb92de85e3",
+      "sha256": "0834c0e1eaf26e49ee12870ffd82861f0b10e9cfddf79a72cf6ab6e4b5e1cd43",
       "donor_pr": 1557,
       "donor_commit": "900a723619fb7021e41b6e2c48a773fd41407224"
     },
@@ -35,8 +35,8 @@
     {
       "pull_request": "https://github.com/hsoliwal/M3jdk21/pull/1538",
       "revision": "a02f0d912ff9da60a5dbc0a7832d7f4b56260fa0",
-      "git_blob_sha1": "023ef20614b3a329f48eab2853d3b3aee628aebe",
-      "source_sha256": "b0e65f0ad098432c9be23e87e16169715dc415875007a73de66eaf672d5fe9d6",
+      "git_blob_sha1": "81616a2c5712530fbd8f6dfe076c19fc54211d14",
+      "source_sha256": "a5df42d69aacfb04894c8d3b1287f0bf10265554ad811060ba97ad8b2cb879f9",
       "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c"
     },
     {
@@ -49,8 +49,8 @@
     {
       "pull_request": "https://github.com/hsoliwal/M3jdk21/pull/1574",
       "revision": "5faad5bc5683d052d0d265ca2181547117f1bd5e",
-      "git_blob_sha1": "3aaa27ad34fded18f92e85f2e6377cf439b2bef9",
-      "source_sha256": "debfb846563ff067bbf47777e959b7547cf92a21216bcc6722dee65a0bdca1b5",
+      "git_blob_sha1": "0ae9da857c53da08742636809a151f7573062890",
+      "source_sha256": "36abf6f834f90e834e56c7e63e6719ec02848483b5ed56a33a48b55e36b7f837",
       "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c"
     }
   ],

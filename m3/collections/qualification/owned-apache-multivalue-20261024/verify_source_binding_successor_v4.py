@@ -19,7 +19,7 @@ from pathlib import Path, PurePosixPath
 HERE = Path(__file__).resolve().parent
 RECEIPT_NAME = "SDK_SOURCE_BINDING_SUCCESSOR_V4.json"
 RECEIPT_BYTES = 8204
-RECEIPT_SHA256 = "3360d65da5075cee73e8c74a7aa863ce6dffa5faf0e7e8f5741526a301825646"
+RECEIPT_SHA256 = "318f400215e46ba517950a02f908dd43954ae095cc315f91aaebab175a5ad699"
 PIN_KEYS = ("bytes", "sha256", "gitBlob")
 
 def checked(path: Path) -> bytes:

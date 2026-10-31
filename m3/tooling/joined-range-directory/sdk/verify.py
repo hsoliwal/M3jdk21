@@ -21,18 +21,18 @@ CHANGE_PATHS = ["m3/core/src/jdk/m3/text/JoinedM3StringPiece.java"]
 KEEP_PATHS = ["m3/core/src/jdk/m3/text/M3StringPiece.java","m3/core/src/jdk/m3/text/LocalM3StringPiece.java","m3/core/src/jdk/m3/text/LocalM3Arena.java","m3/core/src/jdk/m3/text/StorageIdentity.java"]
 TARGET_PATHS = CHANGE_PATHS + KEEP_PATHS
 OWNER_BEFORE_GIT = {
-    "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
-    "m3/core/src/jdk/m3/text/M3StringPiece.java": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
-    "m3/core/src/jdk/m3/text/LocalM3StringPiece.java": "6b745c9472144ad6de01de4d06a533974e558fb1",
-    "m3/core/src/jdk/m3/text/LocalM3Arena.java": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
-    "m3/core/src/jdk/m3/text/StorageIdentity.java": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a"
+    "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java": "5022e9811ce9391671c794446c7772569cfd369f",
+    "m3/core/src/jdk/m3/text/M3StringPiece.java": "62506fb9b3cff0e6f24e856648528db58c45b92b",
+    "m3/core/src/jdk/m3/text/LocalM3StringPiece.java": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
+    "m3/core/src/jdk/m3/text/LocalM3Arena.java": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
+    "m3/core/src/jdk/m3/text/StorageIdentity.java": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c"
 }
 OWNER_AFTER_GIT = {
-    "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java": "3edc23c22362b08af00f7332ddc445a0274a6dd4",
-    "m3/core/src/jdk/m3/text/M3StringPiece.java": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
-    "m3/core/src/jdk/m3/text/LocalM3StringPiece.java": "6b745c9472144ad6de01de4d06a533974e558fb1",
-    "m3/core/src/jdk/m3/text/LocalM3Arena.java": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
-    "m3/core/src/jdk/m3/text/StorageIdentity.java": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a"
+    "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java": "367ea06512321bb511fd9bbb772842ce313e69dc",
+    "m3/core/src/jdk/m3/text/M3StringPiece.java": "62506fb9b3cff0e6f24e856648528db58c45b92b",
+    "m3/core/src/jdk/m3/text/LocalM3StringPiece.java": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
+    "m3/core/src/jdk/m3/text/LocalM3Arena.java": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
+    "m3/core/src/jdk/m3/text/StorageIdentity.java": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c"
 }
 DIRECTIONS = ("forward", "inverse")
 RECEIVER_OUTPUTS: dict[str, str] = {}
@@ -51,8 +51,8 @@ REQUIRED_PATHS = sorted([
       for direction in DIRECTIONS for stage in ("before", "out") for name in TARGET_PATHS],
 ])
 ORIGINAL_GIT = {
-    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java": "78d5fb68f13872164973a8918cc7886c5f548bca",
     "pom.xml": "d79867bcc09ad6329e12418e15907e54b8ab025f",
 }
 PROVIDERS = {"openrewriteAdapter": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java"],

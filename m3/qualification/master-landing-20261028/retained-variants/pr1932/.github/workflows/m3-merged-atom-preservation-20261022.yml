@@ -73,7 +73,7 @@ jobs:
                   required = (
                       "jdk.internal.m3.M3ResourceLocksCurrentOwner",
                       "7d0e50075f26400bfce311919457996468321a987d86cf0145737da9fde024c5",
-                      "eb0bf36625effaffa147be1f650590dfa08627a5f6f52d105b8fbb201d6b5718",
+                      "bc671502c1500b60562240c1de2aa44776bf89a90ea32ab220ea646ed8491a6b",
                       "M3JDK21@d2223b9da6a55a8097ea71f856bd86562b9dce83+M3JDK21#1810@2f933b34fec44456c50bd7c7d04486d7f591263e",
                       "hsoliwal/com.synexia#13255",
                   )

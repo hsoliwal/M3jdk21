@@ -31,9 +31,9 @@ public final class M3LinkedListLiveMaskRecipe {
     public static final String TARGET = "m3/collections/src/main/java/jdk/m3/collections/M3LinkedList.java";
     public static final String ORACLE =
             "m3/collections/src/test/java/jdk/m3/collections/M3LinkedListLiveMaskContract.java";
-    public static final String BEFORE = "31efffe0d25132b393178bec38906e5b977d8939a246a59115afeccb6a23e11b";
-    public static final String AFTER = "1f9a2315db0f9a695402b47a7f6f1e124ed08e186e3460f9ce9757b324bd43c0";
-    public static final String TEST = "56253c26a1f4e13c7c314642f328ea754d8135e9839606f9a71a55eecbf75919";
+    public static final String BEFORE = "d8f29642e80322b10e5f756014b0e7bdcd964aa0808d506fe18f3a7fbcb2451e";
+    public static final String AFTER = "55d9c9e273f302d0e3291bd853d3b198b44a73baeef819089432ff197ae7a3b6";
+    public static final String TEST = "1eda772b805e75c6c60a97a104bd44b6d0455027cc5c856357f88e9ed52bd2d6";
     private M3LinkedListLiveMaskRecipe() { }
     private static byte[] template(String name, String expected) throws IOException {
         try (InputStream in = M3LinkedListLiveMaskRecipe.class.getResourceAsStream(name)) {

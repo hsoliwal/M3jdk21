@@ -28,15 +28,15 @@
   "publicJdkReplacement": false,
   "targets": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3EnumLongMap.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3EnumLongMap.java",
       "before": "ABSENT",
-      "after": "8be53dd0b4ccd1e0f226d4ad7a667bd986b21e51d150bea6f8ddae072bdf4966",
+      "after": "f6b16429b822f1ac3bfd43652d7f3e09efc1028ddef8b72e12816a6ee39a823d",
       "resource": "00-M3EnumLongMap.java.txt"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3EnumLongMapTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3EnumLongMapTest.java",
       "before": "ABSENT",
-      "after": "cd93ecad156634537dbb42acf199558689ff91c113db26803cfc2cf235377531",
+      "after": "acfd8cdf24e540061617e0ab274080b170b751414b21d968e305bb60a8052196",
       "resource": "01-M3EnumLongMapTest.java.txt"
     }
   ],

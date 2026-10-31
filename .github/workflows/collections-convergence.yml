@@ -50,9 +50,9 @@ jobs:
           test "$(git hash-object src/java.base/share/classes/java/util/CollectionViews.java)" = 8840da98c37e2af8da36c63f2cacd6bdaf1cb0a8
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java)" = 45ad6df3a51e83c67dc70de7c7acd82bec2305d3
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java)" = 3c0d4b1629545d54c7519216618ce1a32990f327
-          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3FilteredDeques.java)" = 472e02d96401e04fd22637a7e412ccaed2abd0c6
-          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java)" = 2b010396590ab85a4fa38ea54d9277875371a7f2
-          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3NativeFiveLibrarySdk.java)" = ed42a45f330b9b99272349644c3796174e81404a
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3FilteredDeques.java)" = a0ead9565983e95aeae66e48712b02adaba7a7d6
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java)" = 6992c39ca0d540f5de20fe99f68fae8598b72fe6
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3NativeFiveLibrarySdk.java)" = dcba69b51a77a12f45b6ec00995ebe6e5849155f
           bash m3/collections/qualification/filtered-cursor-mask-20261021/verify.sh
       - name: Compile actual java.base array/mask and CollectionViews owners
         shell: bash

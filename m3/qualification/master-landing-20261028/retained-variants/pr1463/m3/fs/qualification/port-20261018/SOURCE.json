@@ -21,8 +21,8 @@
     "class": "jdk.internal.m3.rewrite.M3FsCapabilityPort",
     "application_owner": "jdk.internal.m3.rewrite.M3FsApply",
     "engine": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
-    "engine_git_blob": "4a38e39d0755462d40c2b22548b87abde938ea0b",
-    "engine_sha256": "8133bcf7e9f750c714cdd42784bdf30b60f67dd957b2831cd54cb01c9a2cfc3a",
+    "engine_git_blob": "73779dee8c80a0913b88fff17637ed3f44b33ea3",
+    "engine_sha256": "2102795eec6a55c6e7564ada0fa439cdf0d98e4c1fc395b2d5d52e1f88890283",
     "engine_disposition": "VERBATIM_EXISTING_ENGINE",
     "revision_binding": "Exact new recipe commit is cross-linked in the implementation draft PR; template self-hashes are intentionally not recursive."
   },

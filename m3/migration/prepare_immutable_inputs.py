@@ -21,7 +21,7 @@ import tempfile
 
 PREFIX = "m3/tooling/migration-recipes/verification/ci8891-20261006/prepared-inputs"
 ARCHIVE_OWNER = PREFIX + "/acquisition/package_evidence.py"
-ARCHIVE_SHA = "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574"
+ARCHIVE_SHA = "93a1c116c197854b0167c172581cd768d0f9098067bf0f1296607ca6ba855556"
 INSTALL_OWNER = "m3/migration/recipe.py"
 INSTALL_SHA = "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
 BUNDLE = PREFIX + "/bundle"
@@ -37,7 +37,7 @@ OUTPUTS = (
      "7e79ce168d8f3d0df8e3d7d633a1351d399f5013b4f7617824fbfa9d7efe613b"),
     ("m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/tq-verify-plan.py.txt",
      "replay/images/tq-verify-plan.py.txt", 5089,
-     "ff2c31f57aac81a7049612557a3757781927563bd2d7a7b598aa62a116e1d978"),
+     "269cd10606a9de7629ec0d1f4dccce2866644f979c06958d808e107b6c9188bb"),
 )
 LOGICAL = {"replay/plan.json": (940, PLAN_SHA),
            **{logical: (size, digest) for _, logical, size, digest in OUTPUTS}}

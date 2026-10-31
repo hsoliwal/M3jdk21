@@ -19,8 +19,8 @@
     {
       "path": "CUSTODY.json",
       "bytes": 613,
-      "sha256": "6229ca610d6442339a3012b021abb62b77c8797819c195652e3bbf08f559cc02",
-      "git_blob": "d48838490075021d5ad9c80a2c5691fbe5510f61"
+      "sha256": "d555cc9bb3df23891b55843a16a08be15a46109889be3efddb09587bd4db4929",
+      "git_blob": "28e9ab2c966a2f1827621ceeeb25fdd53a24faa1"
     },
     {
       "path": "FOSS_REUSE_DECISION.tsv",
@@ -31,20 +31,20 @@
     {
       "path": "MAVEN_INVOCATION.json",
       "bytes": 1853,
-      "sha256": "7d898de7bbbdb4131dda46870b8a09121b7a2ed14f40ea3bc471c954b3f7fe08",
-      "git_blob": "8c91f7ed2b7c7e4607d7a75dc1e50f122aa937ad"
+      "sha256": "54100f1d0d1e3c5d35b595dce7c47128b43976c29e3687651787df0f4f2ee913",
+      "git_blob": "e51ca918a14fb3e10aaec99d9d9425598fd24614"
     },
     {
       "path": "PREPARATION_VALIDATION.json",
       "bytes": 3594,
-      "sha256": "cddfb8412820a99828e884834b882425ee81bedc2cc9d221578db11d9d4cf2ab",
-      "git_blob": "abd3e1c3d1606f522b11ac2c64c6ef589325540d"
+      "sha256": "5e34698f68cc10a30b0cd2747f89ca9e5a63b1e3be981d8e9d7799014d53519e",
+      "git_blob": "6d6d9dbce715f3cd41c34330014a39fa885fc108"
     },
     {
       "path": "PROGRAMMING_REQUIREMENTS.json",
       "bytes": 214677,
-      "sha256": "3d35c3b08fd0ca56bec8304bb8f894e86ebb8af79efc768616ed43df6d05886d",
-      "git_blob": "88be62d2890cee546cfdefbebc69f123c80025e0"
+      "sha256": "eaf1fea81c3fca9f6bc54068c39cd0478c0ca2789c1c7a58ef26242039443ea4",
+      "git_blob": "cd7d85b6d87bb57f07143c121e69edd7abfd96db"
     },
     {
       "path": "PROGRAMMING_REQUIREMENTS.tsv",
@@ -61,8 +61,8 @@
     {
       "path": "RECIPE_BINDINGS.json",
       "bytes": 253199,
-      "sha256": "792302330f8c2cd33041be6d0e2354621c72f954d6c0f2e65ca780125a21f4f1",
-      "git_blob": "9f3eca18c3e5c5f95e1b7ae990858900bb25a2fa"
+      "sha256": "023bacf819b66372766505db9415618a94defbef66c6cd5fd6eb2e64fab26c8d",
+      "git_blob": "ec24c59bfabb795a44404f980c0ca6cebf3c5eaa"
     },
     {
       "path": "RECIPE_BINDINGS.tsv",
@@ -73,38 +73,38 @@
     {
       "path": "RECIPE_DAG_SHAPES.json",
       "bytes": 15346,
-      "sha256": "d867849e9233a92ad56c056100cb13b571bb80c856e640df4422b9e9d7745d31",
-      "git_blob": "61738abba8b1f1b83faac81039ad400c17421441"
+      "sha256": "a74d7d2ddf0713c109de8205e7e68e000f752610a0d3673f61de68c5e1e17ee0",
+      "git_blob": "49db9683dbb5734d51c59a90f2dbab2982840025"
     },
     {
       "path": "REGEX_CONTRACT.json",
       "bytes": 2110,
-      "sha256": "967d677392097fa042831931d57c9808b30afbf8ca818adf3078e4568e77d4a5",
-      "git_blob": "baa6f140d7b2e39176dd02f1b606a6937bc4dee4"
+      "sha256": "2a69ad8d7e10b31204829ad001abc84cc33bac5749e27b9eb498273ef69c3b07",
+      "git_blob": "debe046bbe9934fe1576e8e9cdc66b2f0747cc73"
     },
     {
       "path": "SCOPE_CONTRACT.json",
       "bytes": 2995,
-      "sha256": "81df0c956ed594f17c28e15a9f8b5aee0d563d4c4a7669b002cde6a461b5a905",
-      "git_blob": "021e554f27245f661e0396ce7d18377b6208ce7b"
+      "sha256": "039cee369474087664a998e23c2d27de042fff1c4424791a6eea08cb58a4ee38",
+      "git_blob": "fa0b3a0f831bf5a10c8dba8c7c425b70d69f5bf3"
     },
     {
       "path": "SCOPED_RECIPE_EXAMPLES.yml",
       "bytes": 2335,
-      "sha256": "68afc4d77f7f44a4988bc4339723cfb13d704540977f9de986ff75c9e13839ac",
-      "git_blob": "8a958c6ed1a5c7f2be1b3e208c4acff3412845b2"
+      "sha256": "e1f64c1fa4cbdd8db0f5451642b8ca7786049ce5e29f4022f88e0c4323807461",
+      "git_blob": "7732005364a6d2083db95c74cd79de320af3b7b9"
     },
     {
       "path": "SELECTION_EXAMPLES.json",
       "bytes": 1731,
-      "sha256": "dc478a2207615994f242d8c8ce5346c4a3ce0be1332d2c16f16cfae5cdf33a0f",
-      "git_blob": "e35f8e2cb99a9d8066b64dcb940f14fd0460b940"
+      "sha256": "91d28fca85753a0916690e4ba47ba2d60f57d7f1b9fc1bd3c17252a06c57549a",
+      "git_blob": "9da06a84bfe6459934b730a91663d08c9d6cafe5"
     },
     {
       "path": "SOURCE_PINS.json",
       "bytes": 67533,
-      "sha256": "d5e57994ab2a68826e5d0e0e1061486435cd31733645523f541db88c6a8898fe",
-      "git_blob": "e892ecc563b4b7038abbca3fe3e2e1041b9c670e"
+      "sha256": "3d63f9d3237680f00c2918ce695e21a32021272f804c180747202b4f603ecf5b",
+      "git_blob": "31a27e617045be4e51e6e1630bdda9d10c67bbf0"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -125,5 +125,5 @@
     "Exact-one promotion existing-parser boundary",
     "Parsed Java fixture/type-attribution prerequisites"
   ],
-  "preparation_validation_sha256": "cddfb8412820a99828e884834b882425ee81bedc2cc9d221578db11d9d4cf2ab"
+  "preparation_validation_sha256": "5e34698f68cc10a30b0cd2747f89ca9e5a63b1e3be981d8e9d7799014d53519e"
 }

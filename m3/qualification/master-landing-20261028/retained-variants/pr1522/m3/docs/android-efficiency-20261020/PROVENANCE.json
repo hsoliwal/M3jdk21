@@ -56,15 +56,15 @@
     "path": "m3/docs/name-mapping.json",
     "before_git_blob_sha1": "32d214357ba4f13c8e63be3737a989978b3613a2",
     "before_sha256": "7815ef0f4003f0b5a753a6439b8e7b658f4a09baf82c8b529deaef0cf92664b0",
-    "after_git_blob_sha1": "d8baac9900534e93c3337676c17f061449f42ee4",
-    "after_sha256": "4f9e82d22a7c14c1739b975ed6fb53fddc7610cd41782b078d143f9eb23454e9",
+    "after_git_blob_sha1": "99534a21f145eb790c335c33c0a2570bcf1a720c",
+    "after_sha256": "94b15389903b58c885efefc5d017ad7853fc94077764fa1ef748217365a81003",
     "after_bytes": 633358,
     "mappings": 77,
     "migration_records": 63,
     "all60_original_ids_and_statuses_preserved": true,
     "new_records_status": "implemented-unverified",
     "preservation_receipt": "evidence/metadata-preservation.json",
-    "preservation_receipt_sha256": "6208f70dbe26e00d209b7321d427324195cc288f4e46f78e835112de69b0c6b3"
+    "preservation_receipt_sha256": "cbe0faab845a1585b9c22bf396a6e67b0c1079f34ca48e70eb3fa1c355b6b398"
   },
   "sdk_materialization": {
     "path": "synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/execution/SDK_MATERIALIZATION_STAGE_2.json",
@@ -103,7 +103,7 @@
     "declared_input_count": 66,
     "command": "evidence/migration-validator-command.json",
     "receipt": "evidence/migration-validator-receipt.json",
-    "receipt_sha256": "f673ccdcd130edf066c62c362acd88e75c5cbe1307e65c4d46f5b2cf1100bfc0",
+    "receipt_sha256": "327b98b6ef51f4d0513f1a4e6793663122d69806454e183fc1fc71b15d30b675",
     "schema_unchanged": true,
     "validator_unchanged": true,
     "jsonschema": "4.26.0",

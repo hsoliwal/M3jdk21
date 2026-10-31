@@ -1,6 +1,6 @@
 {
-  "compositionOrdersSHA256": "cf01bc7b3334180ee17932ab71e18d3271f9fb766128dba2fbdc0891505eccff",
-  "compositionYamlSHA256": "0e7206684835471b8e79c6a6262483be1030dafd48f235d57754da9be61e48d2",
+  "compositionOrdersSHA256": "2947609aae41ba74914536ebf10c939d4a58c1c2e6bfa1300bb795e6fd786a36",
+  "compositionYamlSHA256": "d51cddd12c9fe18d63a8aa73897b58396187f7c167df640bcd539104b7c311cc",
   "counts": {
     "additions": 0,
     "families": 1,
@@ -17,7 +17,7 @@
       "crate": "sc0-spc",
       "id": "Spc",
       "manifestPath": "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/manifest.tsv",
-      "manifestSHA256": "6495988cb6ec9ba66659f4fd2a56fccf2735a944c2b6ed401b270eaec5db6a9e",
+      "manifestSHA256": "fda9a717c6a9b66fec43653fbdacf3931aade5e07cfde975f07afcc1e09cbe75",
       "namedRecipe": "jdk.internal.m3.Sc0Spc",
       "targets": [
         {
@@ -30,9 +30,9 @@
         },
         {
           "afterBytes": 79659,
-          "afterSHA256": "dab4ded7bc1558a151376bc3b882403f22138981377249d85114fa9186cb7657",
+          "afterSHA256": "6f5620d8b30b4abeb09dc5ecde928ccc1943a4edf1c610a36330e09ecdb96e6f",
           "beforeBytes": 79652,
-          "beforeSHA256": "0d8ad720976c1de51cf8accad95cc149a06abfe2187041fcc25d524c1f630e09",
+          "beforeSHA256": "4ee3fc8b5959dada6587607ddc68822bf555516ba5f0b973a9249640b8d26ca7",
           "operation": "REPLACE",
           "path": "m3/tooling/image-gates/current-c0.json"
         },
@@ -62,7 +62,7 @@
         }
       ],
       "yamlPath": "META-INF/rewrite/sc0-spc.yml",
-      "yamlSHA256": "11dbeb330e54fe09372b8ddf28014b67f4813ae9cdaa4509b112143d7b08e506"
+      "yamlSHA256": "c487d3b97ef0ba42e0d0e50829c45f5905e505f65be5efbc5557c75f69e9db5a"
     }
   ],
   "orders": [
@@ -81,7 +81,7 @@
       "recipe": "jdk.internal.m3.Sc0Reverse"
     }
   ],
-  "ownerSHA256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+  "ownerSHA256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
   "schema": "m3.sc0.qualification/1",
   "sourceCommit": "d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c",
   "targetCommit": "c0a14387009aefc7d62bd3268055d526e04f9074",

@@ -123,98 +123,98 @@
       "bytes": 33769
     },
     {
-      "path": "qualification/final-core-v3/source/m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedWindowRefinementContract.java",
-      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/target/classes/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedWindowRefinementContract.java",
+      "path": "qualification/final-core-v3/source/m3/collections/src/test/java/jdk/m3/collections/M3RequiredExcludedWindowRefinementContract.java",
+      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/target/classes/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/test/java/jdk/m3/collections/M3RequiredExcludedWindowRefinementContract.java",
       "sha256": "ac1016f6e2d362d425604557fbc9663275983fc48494d8410b45288dc7f816e3",
       "bytes": 16875
     },
     {
-      "path": "qualification/final-sdk-v3/source/m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedWindowRefinementContract.java",
-      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/target/classes/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedWindowRefinementContract.java",
+      "path": "qualification/final-sdk-v3/source/m3/collections/src/test/java/jdk/m3/collections/M3RequiredExcludedWindowRefinementContract.java",
+      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/target/classes/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/test/java/jdk/m3/collections/M3RequiredExcludedWindowRefinementContract.java",
       "sha256": "ac1016f6e2d362d425604557fbc9663275983fc48494d8410b45288dc7f816e3",
       "bytes": 16875
     },
     {
-      "path": "sdk-fixedpoint-image-v3/files/m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedWindowRefinementContract.java",
-      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/target/classes/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedWindowRefinementContract.java",
+      "path": "sdk-fixedpoint-image-v3/files/m3/collections/src/test/java/jdk/m3/collections/M3RequiredExcludedWindowRefinementContract.java",
+      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/target/classes/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/test/java/jdk/m3/collections/M3RequiredExcludedWindowRefinementContract.java",
       "sha256": "ac1016f6e2d362d425604557fbc9663275983fc48494d8410b45288dc7f816e3",
       "bytes": 16875
     },
     {
-      "path": "sdk-image-v3/files/m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedWindowRefinementContract.java",
-      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/target/classes/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedWindowRefinementContract.java",
+      "path": "sdk-image-v3/files/m3/collections/src/test/java/jdk/m3/collections/M3RequiredExcludedWindowRefinementContract.java",
+      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/target/classes/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/test/java/jdk/m3/collections/M3RequiredExcludedWindowRefinementContract.java",
       "sha256": "ac1016f6e2d362d425604557fbc9663275983fc48494d8410b45288dc7f816e3",
       "bytes": 16875
     },
     {
-      "path": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/target/test-classes/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
-      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "path": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/target/test-classes/before/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
       "sha256": "5620c3deda4ec196ef9f2fe9702e410df74e348913ec94d15f816356b231b61c",
       "bytes": 25164
     },
     {
-      "path": "design/publication/frozen-v1/canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
-      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "path": "design/publication/frozen-v1/canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
       "sha256": "5620c3deda4ec196ef9f2fe9702e410df74e348913ec94d15f816356b231b61c",
       "bytes": 25164
     },
     {
-      "path": "qualification/final-core-v3/source/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
-      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "path": "qualification/final-core-v3/source/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
       "sha256": "5620c3deda4ec196ef9f2fe9702e410df74e348913ec94d15f816356b231b61c",
       "bytes": 25164
     },
     {
-      "path": "qualification/final-sdk-v3/source/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
-      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "path": "qualification/final-sdk-v3/source/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
       "sha256": "5620c3deda4ec196ef9f2fe9702e410df74e348913ec94d15f816356b231b61c",
       "bytes": 25164
     },
     {
-      "path": "qualification/recipe-v2/previous-build/test-classes/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
-      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "path": "qualification/recipe-v2/previous-build/test-classes/before/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
       "sha256": "5620c3deda4ec196ef9f2fe9702e410df74e348913ec94d15f816356b231b61c",
       "bytes": 25164
     },
     {
-      "path": "qualification/recipe-v3/previous-build/test-classes/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
-      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "path": "qualification/recipe-v3/previous-build/test-classes/before/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
       "sha256": "5620c3deda4ec196ef9f2fe9702e410df74e348913ec94d15f816356b231b61c",
       "bytes": 25164
     },
     {
-      "path": "sdk-fixedpoint-image-v2/files/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
-      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "path": "sdk-fixedpoint-image-v2/files/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
       "sha256": "5620c3deda4ec196ef9f2fe9702e410df74e348913ec94d15f816356b231b61c",
       "bytes": 25164
     },
     {
-      "path": "sdk-fixedpoint-image-v3/files/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
-      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "path": "sdk-fixedpoint-image-v3/files/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
       "sha256": "5620c3deda4ec196ef9f2fe9702e410df74e348913ec94d15f816356b231b61c",
       "bytes": 25164
     },
     {
-      "path": "sdk-fixedpoint-image/files/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
-      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "path": "sdk-fixedpoint-image/files/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
       "sha256": "5620c3deda4ec196ef9f2fe9702e410df74e348913ec94d15f816356b231b61c",
       "bytes": 25164
     },
     {
-      "path": "sdk-image-v1/files/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
-      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "path": "sdk-image-v1/files/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
       "sha256": "5620c3deda4ec196ef9f2fe9702e410df74e348913ec94d15f816356b231b61c",
       "bytes": 25164
     },
     {
-      "path": "sdk-image-v2/files/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
-      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "path": "sdk-image-v2/files/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
       "sha256": "5620c3deda4ec196ef9f2fe9702e410df74e348913ec94d15f816356b231b61c",
       "bytes": 25164
     },
     {
-      "path": "sdk-image-v3/files/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
-      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "path": "sdk-image-v3/files/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+      "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/src/test/resources/before/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
       "sha256": "5620c3deda4ec196ef9f2fe9702e410df74e348913ec94d15f816356b231b61c",
       "bytes": 25164
     },
@@ -293,25 +293,25 @@
     {
       "path": "publication-v2/exact-commit-provenance-v2/repo/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/candidate-catalogue.tsv",
       "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/candidate-catalogue.tsv",
-      "sha256": "4006e28e896de0b3b1b5f7bdb5848c705c0203381f2f860c45deb8f45ed8e384",
+      "sha256": "d961af4b64d5e6ceb934ccabe233350cb3c8b40fab15cbd5e86d7df6d5a07dc7",
       "bytes": 20493
     },
     {
       "path": "publication-v2/exact-commit-provenance/repo/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/candidate-catalogue.tsv",
       "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/candidate-catalogue.tsv",
-      "sha256": "4006e28e896de0b3b1b5f7bdb5848c705c0203381f2f860c45deb8f45ed8e384",
+      "sha256": "d961af4b64d5e6ceb934ccabe233350cb3c8b40fab15cbd5e86d7df6d5a07dc7",
       "bytes": 20493
     },
     {
       "path": "publication-v2/exact-commit-provenance-v2/repo/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/source-coverage.tsv",
       "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/source-coverage.tsv",
-      "sha256": "f39f29d789ba0d940d2024169f54196f549cd1c61854bedb8b58bde7ec9c9384",
+      "sha256": "88cc41c622a3d65f12b9098c555e3ec575e887a5a217c87bf234bd227aed9fa1",
       "bytes": 162971
     },
     {
       "path": "publication-v2/exact-commit-provenance/repo/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/source-coverage.tsv",
       "source": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/source-coverage.tsv",
-      "sha256": "f39f29d789ba0d940d2024169f54196f549cd1c61854bedb8b58bde7ec9c9384",
+      "sha256": "88cc41c622a3d65f12b9098c555e3ec575e887a5a217c87bf234bd227aed9fa1",
       "bytes": 162971
     },
     {

@@ -33,7 +33,7 @@ public final class M3SpringDirect20261017Recipe {
     private record Change(Path path, byte[] pre, byte[] post) { }
     private static final List<Source> OUTPUTS = List.of(
         new Source("m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3SpringArrayMultiValueMap.java", "M3SpringArrayMultiValueMap.java.txt", "ABSENT", "8062247a92ee9dc90d313b715ba9158e47c53b3e7848508a5fdd54ddaaaecb96"),
-        new Source("m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3LibraryCollections.java", "M3LibraryCollections.java.after.txt", "76609b94a23a682d98d541b5a0421f8c0bdfce05dce6f9cb253fa2e6bf89f62b", "832bb1e12699a8b023329fb68bb60f4a75bb1bd91344344763b3500a0f8747e6"),
+        new Source("m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3LibraryCollections.java", "M3LibraryCollections.java.after.txt", "944c761360df257b8d6ef07352af204d77cec09afbed2fb21ed42738c60ed5f0", "b9e7a862d6eaf993f2c8ddb5ae865feb9fcf49e1abf0e45b17d82e0126a4f65d"),
         new Source("m3/collections/interop/sdk-family-bindings.tsv", "sdk-family-bindings.tsv.after.txt", "3eec888606c333effe39255423d1f25e2c4276716e8be357c0667e1fedb7fbd5", "56e074a4570969bec955f277e89b29e37ba8c0e661f6e529ea4c4846b8b71325"),
         new Source("m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SpringArrayContractTest.java", "M3SpringArrayContractTest.java.txt", "ABSENT", "a8b537381b64899e263eb481a95a83ae40a9b7ed8109fe401f2329c750419267"));
     private M3SpringDirect20261017Recipe() { }

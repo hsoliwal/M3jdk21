@@ -36,7 +36,7 @@ jobs:
         run: |
           set -euo pipefail
           JAVA_OWNER=m3/collections/src/main/java/jdk/m3/collections/M3LongIndexPathMasks.java
-          test "$(git hash-object "$JAVA_OWNER")" = dd918fb13360408d71fc3577ee5c7bd255205340
+          test "$(git hash-object "$JAVA_OWNER")" = 278f63e3bdc6c2e5163376e010e20c05539802ff
       - name: Build canonical source-sealed Maven generator
         shell: bash
         run: |

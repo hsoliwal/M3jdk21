@@ -6,266 +6,266 @@
     "mtimeNs": 1791355277145467800
   },
   {
-    "path": "m3/vendor/synexia/LICENSE",
+    "path": "m3/vendor/m3/LICENSE",
     "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
     "bytes": 11558,
     "mtimeNs": 1791355277144456300
   },
   {
-    "path": "m3/vendor/synexia/NOTICE",
+    "path": "m3/vendor/m3/NOTICE",
     "sha256": "31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427",
     "bytes": 14991,
     "mtimeNs": 1791355277144456300
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexAssociativity.java",
-    "sha256": "2198ef1962011cc4552579d1793a300040f62ab4d258a782077f384d2be3797a",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexAssociativity.java",
+    "sha256": "f6f8da948390497381015fc6f835c069effc07c232e8caf37150af2fe1cf5da2",
     "bytes": 209,
     "mtimeNs": 1791354323724367000
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexAST.java",
-    "sha256": "4867c08790906ad0acdaaf878ede37d9d33a5bf7e24e4faff737d584b960b003",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexAST.java",
+    "sha256": "8fb782080d19d7510511a69b36f20d091bf92fbf3fcb76ce719594fcd5fc4044",
     "bytes": 8133,
     "mtimeNs": 1791354323698447700
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTChildRole.java",
-    "sha256": "73f1e33242917c1c1e6f7b2aa9112f643bcebb9e203bd437ad89343644477cd8",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTChildRole.java",
+    "sha256": "81b50894872192859408605dfba0ce6f3b36676ac18ab583527c5e539bc5c492",
     "bytes": 253,
     "mtimeNs": 1791354323699444400
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTDiagnostic.java",
-    "sha256": "4b09e78fc3e1f5aba4fc27f8b39a100902e9a761e9c4f0b78e10245daaaf4fc4",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTDiagnostic.java",
+    "sha256": "f24f19f85a8a606921aff3fcb8cf196b0233735c2f1b1ea722ce046e5d623add",
     "bytes": 648,
     "mtimeNs": 1791354323703446300
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTDiff.java",
-    "sha256": "53cebb46529470640eb6b4fd1bd812306cc87fda8079a7f99323b1fd4e14fc8e",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTDiff.java",
+    "sha256": "665efbc60c339ebbee9e1ff5a9bd544242a87f5b07d47b0fa67eb79c8d95b372",
     "bytes": 1649,
     "mtimeNs": 1791354323704353000
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTDispatchNative.java",
-    "sha256": "fdcb748b1d5882c499a386be7e1e0e4aa4bd7e28e14876eeff0aa170bf7e0be1",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTDispatchNative.java",
+    "sha256": "7eeef91f4acb52f9696d3e4aba899ac5d23013df7251adc20000888f523c0da5",
     "bytes": 15349,
     "mtimeNs": 1791354323705440000
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTDocument.java",
-    "sha256": "32859a872cc1cb600177c140926aff63df7d8698efd928d9eab635c001fcf4a8",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTDocument.java",
+    "sha256": "0d6e1fcd466b2299c2015a71e519922b01917790b63f8c24f0e7bea789f09f7a",
     "bytes": 9220,
     "mtimeNs": 1791354323705440000
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTEditSession.java",
-    "sha256": "4ff384f7b5653cd101baa33d21f4fb458cf5efe4630201a53ecbde18fe5340a6",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTEditSession.java",
+    "sha256": "4743ad7382e50608e46f59f226429af86bfbdc829f541c6c136edeea45b18d3c",
     "bytes": 12767,
     "mtimeNs": 1791354323706363200
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTKindAutomaton.java",
-    "sha256": "d30301a6309651dfa18ab0a67690932d247ef38cc4b43a23849c4e6685e0c984",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTKindAutomaton.java",
+    "sha256": "cf4372168428e93a99591ad559ec56dafa5fbbf6fe28861947f1bf3280d09324",
     "bytes": 7459,
     "mtimeNs": 1791354877943196000
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTKindPattern.java",
-    "sha256": "2d7bb59f1fc7a7aa58b6ecc156cd577a8950b47a1d4577e6921708c2fd9f2d26",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTKindPattern.java",
+    "sha256": "fe553a74062b1f494234775e3808a96e6db7fb85826e56f0bb8d9415b550e710",
     "bytes": 3247,
     "mtimeNs": 1791354877944245500
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTLcaSparseTable.java",
-    "sha256": "feb546609e2fa96f530e19ec9975fc5b17d51db07dd5719e1b573546c8caae6c",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTLcaSparseTable.java",
+    "sha256": "cfc15017a0facd4973beb227ed3536f2d0612f77eac773fe0939c3c70d807666",
     "bytes": 12376,
     "mtimeNs": 1791354323707432900
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTOccurrenceSource.java",
-    "sha256": "d5e60f701af64869acb4369bcee173f37c82eb9a253eca00c28b99033c85b2e5",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTOccurrenceSource.java",
+    "sha256": "eb2de4f424c38229ee1b5f772682a30e17cb842e0c58a47e59a73e335c47822e",
     "bytes": 1306,
     "mtimeNs": 1791354323708405500
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTParser.java",
-    "sha256": "d250b33d84b597284a84255c3d52b1ecfb8f2338eea27377643bb651acba7b90",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTParser.java",
+    "sha256": "c8c5abb7c6499d406ed44c673e01e7d64c62e7f51567cc09aa5867384e29504a",
     "bytes": 13575,
     "mtimeNs": 1791354323709367000
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTPartialCache.java",
-    "sha256": "68a21dea8a4b30a7fcc37f0277e1841f1dc4fba229a88192342542eff8f23f43",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTPartialCache.java",
+    "sha256": "e0d77f2004919604e6dacca0830de01df55df1081974cda37190c9c57f8f109b",
     "bytes": 36255,
     "mtimeNs": 1791354323709367000
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTPool.java",
-    "sha256": "1ca4f5a6428257e6346cdb4bd4da78f76755889d236fd6d5196895efdea79eff",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTPool.java",
+    "sha256": "44c50bd015f4b92bdb9cbf29b4e0d4c9531423434c054eacd108618b5a4d8a8f",
     "bytes": 24458,
     "mtimeNs": 1791354323710387100
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTPoolPrecompute.java",
-    "sha256": "7ea7bd71c9e180571656144ff0904530a07d17c3293b8110bf734c0b36fcea7b",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTPoolPrecompute.java",
+    "sha256": "03cdf53a164072f91aad525ef7263d350197b908ed10c63c3564b11f07ffac34",
     "bytes": 27965,
     "mtimeNs": 1791354323711362300
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTPrecompute.java",
-    "sha256": "7baae702ff9c58180329df4b2c9947d3f2d6247fca37757d9656b8ec776460b7",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTPrecompute.java",
+    "sha256": "98a0e087877e8ed344a6b134a88b7294b30b0e30673b41197ef5ceb36a560808",
     "bytes": 27124,
     "mtimeNs": 1791354323712368800
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTPrecomputeCodec.java",
-    "sha256": "686f9d6e4fbf27af15cc0a5ab64cea8055a19aa8c4e92a7a66f88bd80bddb958",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTPrecomputeCodec.java",
+    "sha256": "a41be3d51949e2e9e0318cddb38f9181d1d12b556aa9c62e0d8fdb1e1d3b2905",
     "bytes": 10065,
     "mtimeNs": 1791354323713423700
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTProductionDispatch.java",
-    "sha256": "1f9308fe51809e91f8ee1426dc5ff309a7b8960933a1bcbc7e73a1688e540bfe",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTProductionDispatch.java",
+    "sha256": "b9ac323a590d97f3004a1d2a597119fd73039e90916a2f558f861b23a5d9bb2a",
     "bytes": 19376,
     "mtimeNs": 1791354323714457700
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTProductionPlans.java",
-    "sha256": "ced8f9f5d4bdfabb226f82dad65cc386566f4b347f27f1ea59921a2e7a743c91",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTProductionPlans.java",
+    "sha256": "f3b512085d3729f78a128446388f319bc3d8c0ddfede52dcc261b244ae11a811",
     "bytes": 27613,
     "mtimeNs": 1791354323715390100
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTQuery.java",
-    "sha256": "94a96d7accee6d889b7cb48e9b4b1768bba6fe5459437478897e0c5b054e7172",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTQuery.java",
+    "sha256": "23c113ddaf0bf05fe9771b5ea8a60cc57c92db916e8960ef79386c373bf40639",
     "bytes": 9016,
     "mtimeNs": 1791354323716553100
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTResidentCache.java",
-    "sha256": "469a5955cf5315d5d9362c53694070ca7d24aedcc4d61882b45263f269e69ee3",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTResidentCache.java",
+    "sha256": "6e6a5c8052e57aedaebcfbf20faa0c36b374f7d87d067165a86ca21c13140e02",
     "bytes": 13527,
     "mtimeNs": 1791354323717407100
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTReuseKey.java",
-    "sha256": "b4fbcd9c7734152f4e564337fe4ec5ff15a68e6dacde8d3eb12e5af88e527a7b",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTReuseKey.java",
+    "sha256": "e21f57eba63c4e1b156fadefac0703c9f8ef80f4581fe1097d6ac515fd801395",
     "bytes": 5691,
     "mtimeNs": 1791354323718399200
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSourceIndex.java",
-    "sha256": "d182de784b0c307ea1c81ed802d7bef0f351928d0a6ecdcb676aa582ca8f414a",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSourceIndex.java",
+    "sha256": "d0b7eeb7bc57e840f96a4b24bc7ab767aed3408bcf3f67ed900e0452fd9bcc0c",
     "bytes": 9345,
     "mtimeNs": 1791354323718399200
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecImage.java",
-    "sha256": "6fafd946cc5e724aa16accaa4edc7d7b97134a58e75754da103c2b26f50757e1",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecImage.java",
+    "sha256": "db171248f9f4c8b43fa7a4addc7fa7e61ea09cf0ce5266795c6a497a69d100d1",
     "bytes": 31206,
     "mtimeNs": 1791354323719471300
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecImageView.java",
-    "sha256": "f8d0b00fa63a3de45568e5194d577d1ee58887c1ba50e072a5cc55baf1f4c978",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecImageView.java",
+    "sha256": "e022d5e3870ce067bb62ee1fe542611fc4212d32b1e56bee1e3d758095698113",
     "bytes": 7612,
     "mtimeNs": 1791354323720362800
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecPrecompute.java",
-    "sha256": "9a0d72ea590fa65bd221232bbe075e89e069ffa4469813cbea4dc9eb8c1a5589",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecPrecompute.java",
+    "sha256": "afb1c316591eb464b0421798a8891438ef8578d6e2adf97c50fc5620bf06c640",
     "bytes": 21477,
     "mtimeNs": 1791354323721469200
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecs.java",
-    "sha256": "0b2c9fac3e7a9743efa5dd0deb5e90d54c2e3a2d8ebcb29b14384013bd21a0d0",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecs.java",
+    "sha256": "dbbfcd501be9816376b0c3d9fa3bd564f1c566c8839f1146925e2a9678768524",
     "bytes": 3772,
     "mtimeNs": 1791354323723388700
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecTreePrecompute.java",
-    "sha256": "20de972d1b22f1fb71a06d49a8fafd012008d5fdaa7b4aa93762f68806316562",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecTreePrecompute.java",
+    "sha256": "094cf0a7913fe8ff85de9e81ba80c59aaa490fa4fec7955c6775d233b1c15cd8",
     "bytes": 37941,
     "mtimeNs": 1791354323722482800
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexFlagPolicy.java",
-    "sha256": "4ec5fc80f340cefb3e53201d725c9d9e2414bf76a56aa42408f8116746e5de28",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexFlagPolicy.java",
+    "sha256": "b077528772bd843ffd26dbc4022211ea3b3d7e518ef21e17fa101fe98a717e9b",
     "bytes": 243,
     "mtimeNs": 1791354323728437200
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexJava21LanguageSpec.java",
-    "sha256": "0ca21831b3c312a2ceb0342442bd696d0b968c5fac6d72ac405006c3cc9df6d9",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexJava21LanguageSpec.java",
+    "sha256": "a7094f21078658b6eb9323eba4cee363e4c2fab8a17618b79150cf49ee9b714b",
     "bytes": 16949,
     "mtimeNs": 1791354323732473900
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexLabelPolicy.java",
-    "sha256": "581d346c63d37fb86a9e523c6a92846d46b9cd32cd0685dab9a81aa93c68ef50",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexLabelPolicy.java",
+    "sha256": "7d1a86ca9673e93b8360e78fcb73b434ef39b9c6b907cba76146e6763b887d01",
     "bytes": 483,
     "mtimeNs": 1791354323732473900
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexLanguageRule.java",
-    "sha256": "e3cf4890992375d2d1cfa3405deff06ccbe57cf64d63c9bed64d286b1c7f6cb0",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexLanguageRule.java",
+    "sha256": "9227e45be4e54a25203c255b8786807e42ce359b1034e29de8b020651e07f7f0",
     "bytes": 1343,
     "mtimeNs": 1791354323737361300
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexLanguageSpec.java",
-    "sha256": "14ab6a310cbc1671bdf523bdd8119fab6ea5854526b48aa67021ea5ce5839e35",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexLanguageSpec.java",
+    "sha256": "82b9c756ebcfe20f8fc8ef88cfeea1c173a1cc0377b772c0a4a962dc34031cbe",
     "bytes": 2833,
     "mtimeNs": 1791354323737361300
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexLanguageSpecs.java",
-    "sha256": "fa721d76f0862277edac7f371a849fd253075ab6fbd19c3833d62cfd9cdb38fa",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexLanguageSpecs.java",
+    "sha256": "b8f7ee89edc841e1b95d8ed336d372432e2b052feb81d82ad5dd19a32541360a",
     "bytes": 589,
     "mtimeNs": 1791354323739366000
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexOperatorRule.java",
-    "sha256": "26b57626bc5e1d18228aaa004d7d652208c2a82b2165d5654a615510373c5a64",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexOperatorRule.java",
+    "sha256": "7f5277d909e54a3d39ce334d0a8f5b9247f40c9f059b7a24639af987624c4bc9",
     "bytes": 1154,
     "mtimeNs": 1791354323739366000
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexSyntaxCategory.java",
-    "sha256": "9cd7885997097ff10d97d092178eee62ffda4f3eea99e52e896957fb06f1d87c",
+    "path": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexSyntaxCategory.java",
+    "sha256": "798ad8901431c013a0b73ca5a129b2b9fd982ac9595ef7e96d70fd98b9e6bb8b",
     "bytes": 418,
     "mtimeNs": 1791354323740350500
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/test/java/com/synexia/indexstring/ast/MIndexASTCodecBoundedReadProof.java",
-    "sha256": "feb671ea19431f4c8b146e521a5029c1382815cd562be1813470a902f135d7ea",
+    "path": "m3/vendor/m3/m3-indexstring/src/test/java/jdk/internal/m3/indexstring/ast/MIndexASTCodecBoundedReadProof.java",
+    "sha256": "68e364b6ca5e934bc85a5145eef94764f41052cd0e6a5dec103996189459ec06",
     "bytes": 7010,
     "mtimeNs": 1791354323746442400
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/test/java/com/synexia/indexstring/ast/MIndexASTLcaCodecTest.java",
-    "sha256": "60c7a9617c5291abf727940da0a6896724520a7a3ae11ebc600310fdfb6b7822",
+    "path": "m3/vendor/m3/m3-indexstring/src/test/java/jdk/internal/m3/indexstring/ast/MIndexASTLcaCodecTest.java",
+    "sha256": "72d28f61a547df81ccba962498f353ff0ab8cde8230302fd6dd69370da9a8deb",
     "bytes": 2559,
     "mtimeNs": 1791354323748489400
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/test/java/com/synexia/indexstring/ast/MIndexASTPartialCacheErrorTest.java",
-    "sha256": "b189e0b5849630a0ff923acdf240159ed848f77be75e4eb58df7118d288d51e3",
+    "path": "m3/vendor/m3/m3-indexstring/src/test/java/jdk/internal/m3/indexstring/ast/MIndexASTPartialCacheErrorTest.java",
+    "sha256": "466b47c9e01e289f5b9c0d20ad8fe9369241cce093d4574efcbd10ffa787e044",
     "bytes": 10727,
     "mtimeNs": 1791354323748489400
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/test/java/com/synexia/indexstring/ast/MIndexASTPartialCacheTest.java",
-    "sha256": "4a2457452fe1c651ce550b93f4a24c2dc5e8faa4c25a7604d1716dedf0507a66",
+    "path": "m3/vendor/m3/m3-indexstring/src/test/java/jdk/internal/m3/indexstring/ast/MIndexASTPartialCacheTest.java",
+    "sha256": "4562cf9d2ed2d206b0167c8b68c5a2a5eef3ca838f4d7e3bfdc54beb772cd80a",
     "bytes": 15402,
     "mtimeNs": 1791354323749460600
   },
   {
-    "path": "m3/vendor/synexia/synexia-indexstring/src/test/java/com/synexia/indexstring/ast/MIndexASTPrecomputeTest.java",
-    "sha256": "d399496e53b0a758ed5a06abca4aaac4ca0a9b8d239cc5571b65d4d8b983e4fa",
+    "path": "m3/vendor/m3/m3-indexstring/src/test/java/jdk/internal/m3/indexstring/ast/MIndexASTPrecomputeTest.java",
+    "sha256": "db3df95deb158b4893bdc307e502a63bcb604736b1c73cc4796a0f872e57bcbc",
     "bytes": 10081,
     "mtimeNs": 1791354323750570500
   }

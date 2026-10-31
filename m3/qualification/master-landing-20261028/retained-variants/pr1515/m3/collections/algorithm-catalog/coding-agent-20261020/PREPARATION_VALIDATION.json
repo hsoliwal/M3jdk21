@@ -73,8 +73,8 @@
     {
       "path": "SCOPE_CONTRACT.json",
       "bytes": 2995,
-      "sha256": "81df0c956ed594f17c28e15a9f8b5aee0d563d4c4a7669b002cde6a461b5a905",
-      "git_blob": "021e554f27245f661e0396ce7d18377b6208ce7b"
+      "sha256": "039cee369474087664a998e23c2d27de042fff1c4424791a6eea08cb58a4ee38",
+      "git_blob": "fa0b3a0f831bf5a10c8dba8c7c425b70d69f5bf3"
     },
     {
       "path": "SCOPED_RECIPE_EXAMPLES.yml",
@@ -85,8 +85,8 @@
     {
       "path": "SELECTION_EXAMPLES.json",
       "bytes": 1731,
-      "sha256": "dc478a2207615994f242d8c8ce5346c4a3ce0be1332d2c16f16cfae5cdf33a0f",
-      "git_blob": "e35f8e2cb99a9d8066b64dcb940f14fd0460b940"
+      "sha256": "91d28fca85753a0916690e4ba47ba2d60f57d7f1b9fc1bd3c17252a06c57549a",
+      "git_blob": "9da06a84bfe6459934b730a91663d08c9d6cafe5"
     },
     {
       "path": "SOURCE_PINS.json",

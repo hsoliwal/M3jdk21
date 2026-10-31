@@ -20,19 +20,19 @@
     {
       "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredSplitsMaskSpansTest.java",
       "before_sha256": "a0a750d78d9d05669f8bb4194f7780e6189005afb0e62f5927a6bccd22716b48",
-      "after_sha256": "46471955d786e65772734a9287e55c52b11b2d20ac2f9ee26003849bff5585f6",
+      "after_sha256": "258c755fae75a9103387ddbb3bd2bc5efdc9e5c8025c145eaabbf82eb955d870",
       "canonical_template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-full-java-jni-20261018/m3__collections__src__test__java__jdk__m3__collections__M3FilteredSplitsMaskSpansTest.java.txt"
     },
     {
       "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3SignalDimensionsContract.java",
-      "before_sha256": "372a5be9ccd7bba8aae5083e63aaca59805f4b8ed17aca5854f6ea387aa49190",
-      "after_sha256": "3a637ad272bd46336384df01be4e6aae8cb8b4027b441ac57ec359e9fd0c3815",
+      "before_sha256": "4d7a8a18db0ea2c548cf1a0117295cb89b9bd7e8cda56f03ef57060258ab728f",
+      "after_sha256": "0fba6ae1b92de8957cbec87f5a831e118e2460cc76058407a4b6fc0e07b48ab3",
       "canonical_template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-full-java-jni-20261018/m3__collections__src__test__java__jdk__m3__collections__M3SignalDimensionsContract.java.txt"
     },
     {
       "target_path": ".github/workflows/m3-collections.yml",
       "before_sha256": "559240531a32d95b9fd76a7b0533a58e1be86d5ff4bb0e12e6db821cde28f1d0",
-      "after_sha256": "ff90dcce42c80cc940878c8c5dcde0a14a8def69d08dbc7aadb174b9ad2bb649",
+      "after_sha256": "20bbf390cad7ed2bdb8e024298cd7b32d311b6bf7c835742ee766bb53c5d0fda",
       "canonical_template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-full-java-jni-20261018/.github__workflows__m3-collections.yml.txt"
     },
     {

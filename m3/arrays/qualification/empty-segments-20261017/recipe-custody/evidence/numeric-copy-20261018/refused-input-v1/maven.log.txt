@@ -41,7 +41,7 @@ org.opentest4j.AssertionFailedError: Java parser errors: [org.openrewrite.java.J
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 
 [ERROR] com.synexia.rewrite.M3TaskRecipeTest.qualifiedSdkResultsAreRetained -- Time elapsed: 2.845 s <<< ERROR!
-java.lang.IllegalStateException: Java template parse error: m3/arrays/src/test/java/com/m3/arrays/M3ArrayNumericCopySelfTest.java
+java.lang.IllegalStateException: Java template parse error: m3/arrays/src/test/java/jdk/m3/arrays/M3ArrayNumericCopySelfTest.java
 	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.parseChecked(M3HashPinnedJavaSnapshotRecipe.java:423)
 	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.parse(M3HashPinnedJavaSnapshotRecipe.java:290)
 	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.prepare(M3HashPinnedJavaSnapshotRecipe.java:226)
@@ -129,7 +129,7 @@ org.opentest4j.AssertionFailedError: Java parser errors: [org.openrewrite.java.J
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 
 [ERROR] com.synexia.rewrite.M3TaskRecipeTest.exactReplayFixedPointAndInputOrder -- Time elapsed: 1.867 s <<< ERROR!
-java.lang.IllegalStateException: Java template parse error: m3/arrays/src/test/java/com/m3/arrays/M3ArrayNumericCopySelfTest.java
+java.lang.IllegalStateException: Java template parse error: m3/arrays/src/test/java/jdk/m3/arrays/M3ArrayNumericCopySelfTest.java
 	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.parseChecked(M3HashPinnedJavaSnapshotRecipe.java:423)
 	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.parse(M3HashPinnedJavaSnapshotRecipe.java:290)
 	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.prepare(M3HashPinnedJavaSnapshotRecipe.java:226)
@@ -197,8 +197,8 @@ Caused by: java.lang.AssertionError
 [ERROR]   M3TaskRecipeTest.mixedPreimagesAndPostimages:193->parse:103 Java parser errors: [org.openrewrite.java.JavaParsingException: Failed symbol entering or attribution] ==> expected: <true> but was: <false>
 [ERROR]   M3TaskRecipeTest.postScanChangesRefuse:226->postScan:235->parse:103 Java parser errors: [org.openrewrite.java.JavaParsingException: Failed symbol entering or attribution] ==> expected: <true> but was: <false>
 [ERROR] Errors: 
-[ERROR]   M3TaskRecipeTest.exactReplayFixedPointAndInputOrder:143->namedDescriptorComposesTheQualifiedLanes:174 » IllegalState Java template parse error: m3/arrays/src/test/java/com/m3/arrays/M3ArrayNumericCopySelfTest.java
-[ERROR]   M3TaskRecipeTest.qualifiedSdkResultsAreRetained:245->replay:118 » IllegalState Java template parse error: m3/arrays/src/test/java/com/m3/arrays/M3ArrayNumericCopySelfTest.java
+[ERROR]   M3TaskRecipeTest.exactReplayFixedPointAndInputOrder:143->namedDescriptorComposesTheQualifiedLanes:174 » IllegalState Java template parse error: m3/arrays/src/test/java/jdk/m3/arrays/M3ArrayNumericCopySelfTest.java
+[ERROR]   M3TaskRecipeTest.qualifiedSdkResultsAreRetained:245->replay:118 » IllegalState Java template parse error: m3/arrays/src/test/java/jdk/m3/arrays/M3ArrayNumericCopySelfTest.java
 [INFO] 
 [ERROR] Tests run: 5, Failures: 3, Errors: 2, Skipped: 0
 [INFO] 

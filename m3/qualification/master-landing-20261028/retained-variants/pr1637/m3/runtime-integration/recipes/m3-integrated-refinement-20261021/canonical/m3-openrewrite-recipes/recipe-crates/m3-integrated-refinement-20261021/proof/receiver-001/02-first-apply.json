@@ -1,44 +1,44 @@
 {
   "status": "PASS",
   "mode": "APPLY",
-  "recipe_proof_sha256": "27a917992eaebcfb234007495470ee53071984f9ba6acb729c8afd4c679cf1fb",
+  "recipe_proof_sha256": "c0b6e0a3770cb668d204005dfc009bc2c456ecf8d9e94d121c6fe91a34314fbd",
   "receiver_root": "ecec0ca7aa5223c791cef3f58096c567835fcd9169d5e7f1aca7bc3dde408a80",
   "repository": "/workspace/scratch/206049dfb270/canonical-work/receiver-qualification-001/receiving",
   "files": [
     {
       "path": ".github/workflows/m3-collections.yml",
-      "before_sha256": "ff90dcce42c80cc940878c8c5dcde0a14a8def69d08dbc7aadb174b9ad2bb649",
-      "after_sha256": "8efc148837d892ccbc146da1bbc5ab34542051986da08b28d6c8695170f4740e",
+      "before_sha256": "20bbf390cad7ed2bdb8e024298cd7b32d311b6bf7c835742ee766bb53c5d0fda",
+      "after_sha256": "0848d1a673a908854bb885908d82eaadb23fa710c75ed3e6bd912516a21eb887",
       "action": "WRITE"
     },
     {
       "path": ".github/workflows/m3-eclipse-framework-forward-20261017.yml",
-      "before_sha256": "f99b655ed4ab286724723ee855fc497b7a63287ab9e8bf79adf3b2389077f77d",
-      "after_sha256": "dbceffdfba2dbaee03e71d6d84ad3f9302620201cf86e20ff0f925dc745ff16a",
+      "before_sha256": "e055566033e090e9a2114d360e3aef29369813defbcdea385f47ba444ff6f1e0",
+      "after_sha256": "73727306149bdfb0836857638d0e0f3527cf967bf9c0982f67a27a5d22ef1918",
       "action": "WRITE"
     },
     {
       "path": ".github/workflows/m3-object-progress-candidate.yml",
       "before_sha256": "1b28049139575d9587ad48f72d5dfd5f2be89dd4027f3945daaa628c6bcb80eb",
-      "after_sha256": "4a0fc4a163514ffabae67cf480f2abbc49ce38ceecbdd8685e5aad3714d60cc9",
+      "after_sha256": "56dda91dd9934451a5501035e3b4b666626ecd23550dfe33c094dc282045b91d",
       "action": "WRITE"
     },
     {
       "path": "m3/collections/algorithm-catalog/masked-sort-fusion-20261021.tsv",
       "before_sha256": "ABSENT",
-      "after_sha256": "bd3df31ad31d399fff42bbaaaf74cfd9961f84072cba993f15b9b08dafc55da3",
+      "after_sha256": "ea4470322312aff688188a2c02f628851f3c858204f0cc7801b0c5c3abf98f79",
       "action": "WRITE"
     },
     {
       "path": "m3/collections/algorithm-catalog/resource-change-20261021.tsv",
       "before_sha256": "ABSENT",
-      "after_sha256": "9b0d1f536c206f5bb9578ddb97ff012482f620c6bfd218cf5d9d958adca20eb8",
+      "after_sha256": "2172590fb288c1d8a96aad4f544f96f59ea8f25b9d491869bb2353c4cd21b836",
       "action": "WRITE"
     },
     {
       "path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
-      "before_sha256": "f6a76836d96bc6d41033ce94b0aa760fd5f68ebcb903396bb5f6eb1618d0931a",
-      "after_sha256": "2ad6ff2d74671a9888c64c94e998eaf979c9ba49cdea85fd24a841f661b84aff",
+      "before_sha256": "bd94fd32ed00274f3f1581a401742e45a94af2054f99373acfc8224f33b06ab1",
+      "after_sha256": "ff4856bf3d68c63a059b7700631543a453fc5d7552efdcfb80ac3b7e4bd4dae1",
       "action": "WRITE"
     },
     {
@@ -50,43 +50,43 @@
     {
       "path": "m3/collections/qualification/masked-sort-fusion-20261021/SOURCE_IDENTITY.json",
       "before_sha256": "ABSENT",
-      "after_sha256": "fd332ea4fc69bba91989e53ef3f4eb4a45fe74666cc206fd31c8fcd4b222271e",
+      "after_sha256": "9e3954045862b0878d729d45d39f0d8afc75d55f75b271196bbd00123a2495bc",
       "action": "WRITE"
     },
     {
       "path": "m3/collections/qualification/masked-sort-fusion-20261021/src/test/java/jdk/m3/collections/M3CollectionSurfaceProbe.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "a451daf423f7ffc382b8fb3df835bec8c9524354cf45a56751e60d67e9b75679",
+      "after_sha256": "7ed233a90b497b9d3fb508430526dfa9aee5d4b82b8976de841fd33717cab77b",
       "action": "WRITE"
     },
     {
       "path": "m3/collections/qualification/masked-sort-fusion-20261021/src/test/java/jdk/m3/collections/M3MaskedSortAllocationProbe.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "5812c70fa0d6260666441d83e5834e051f762d160ceeafaca1d84f151ab811d8",
+      "after_sha256": "0a5b583a832e88b2f078d40f01dc4542831a0203f80b985dbedf89e3a3e17e85",
       "action": "WRITE"
     },
     {
       "path": "m3/collections/qualification/masked-sort-fusion-20261021/verify.py",
       "before_sha256": "ABSENT",
-      "after_sha256": "5e0daa896d8e104df5341d5d6c9e6283ea122b293d537f9c59cb4f97bd2fd05f",
+      "after_sha256": "ccb96655df8458c0bda1c5d8b12c7b61d8dc00ea6b74b89469f7f32ad4726463",
       "action": "WRITE"
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java",
-      "before_sha256": "d13c5c5db3e07e5c66f8857f2c74e07d2ba60babb7d2529bd397e61894881fd0",
+      "before_sha256": "5dce16ffebd5d3cfdd7fdf77f509eff6784ffb7453ae76270b3ba39289df6c4a",
       "after_sha256": "a9b51ed9c0859ef27d308ea89e1b41cf3283dfd54478a36b1d89d6ab66711b0c",
       "action": "WRITE"
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
-      "before_sha256": "8419315c3058bce6add897b7ffa7c6763bbb6b85418bb35e190ba8a4d2dd70c4",
+      "before_sha256": "5308017ea910acd0f81252e88fd8e57c2c1b49d8e6f2874bab0728c110526709",
       "after_sha256": "dce9da78508449041db8907ef7bc44e9fcee1117bbe91db880e35c26933f9470",
       "action": "WRITE"
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java",
-      "before_sha256": "d6f1f6f1ffb2ad2ef43f97426f05d8e4ab202dcec5b51bcc4a3151003d2837b7",
-      "after_sha256": "0e2f79235ef54db17a09f8df597eb97d289962deec2be4a021186309346d4af4",
+      "before_sha256": "3d6d6bfb82e9030a91da386e38bdec6a9bf41c268ff15c83d7c122db983f2a28",
+      "after_sha256": "1b304f64d9c5225311112e45d0fbf792d958cfb5b0acd54034b310ac217183d5",
       "action": "WRITE"
     },
     {
@@ -104,13 +104,13 @@
     {
       "path": "m3/collections/src/test/java/jdk/m3/collections/M3MaskedSortFusionContract.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "3c75fcccb7c0392d926c3ce671ea4ad35d3e4a3d3abca7f3cf6ec2e2a4bf8c11",
+      "after_sha256": "998bc0564c810b309a3e50959eff492ba34005d136d6fa241cdddf18edba2556",
       "action": "WRITE"
     },
     {
       "path": "m3/collections/src/test/java/jdk/m3/collections/M3MaskedSortFusionTest.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "cda5d9e02c7ebe868c0d1a40ee994c478d21137f6cde6f27c53922f29cacd4a6",
+      "after_sha256": "875ae162364ad9ea588c5224543115177b0dc30d6b20cb44eb0fa20d17022647",
       "action": "WRITE"
     },
     {
@@ -128,37 +128,37 @@
     {
       "path": "m3/eclipse/core-runtime/src/main/java/jdk/m3/eclipse/runtime/M3EclipseJobScheduler.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "dc7e2cc6243291c362e135311ca2e50fb9d445db4f0c72cee5508d770526b6dd",
+      "after_sha256": "2496bdc6c9f84c59afe0631ef429c8ab5558ff946a0d0b878fa48cb85fb5f60d",
       "action": "WRITE"
     },
     {
       "path": "m3/eclipse/core-runtime/src/main/java/jdk/m3/eclipse/runtime/M3EclipseJobs.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "a9cdf65296a3841a5bdeab909fd24f6f3bbe60773f5d3070c2091a710a00b5a7",
+      "after_sha256": "0e62436dad1fc1634b2cf9da8882f1e8a4579a0b466f1a40e8a274c33da7dfec",
       "action": "WRITE"
     },
     {
       "path": "m3/eclipse/core-runtime/src/test/java/jdk/m3/eclipse/runtime/M3EclipseJobSchedulerTest.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "89ea9107defabe8f35a3ee8bc5d8559f79c6a13c90e1fa7cbbbf65f3d1c6724f",
+      "after_sha256": "a007137e532ba8c75e826e684ab16d78791eb34f54da69af3d4d70a981b7366b",
       "action": "WRITE"
     },
     {
       "path": "m3/eclipse/core-runtime/src/test/java/jdk/m3/eclipse/runtime/M3EclipseJobsCompatibilityTest.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "9897ba5f3f5cf6dae226844ccf56baed776fd552fa0ca74877a3923ee774e1b7",
+      "after_sha256": "477ff26a926afec5e678f88814bf0b389198474ce166914259da51b8be6273ab",
       "action": "WRITE"
     },
     {
       "path": "m3/eclipse/core-runtime/src/test/java/jdk/m3/eclipse/runtime/M3EclipseJobsTest.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "e12bdc3c08aec2d886a403d6f342de3ac0b35a0e063409ad43ae0c8784de19e5",
+      "after_sha256": "124bed935425c23286e8dad54048a851b3cfb031b523b140e6bb3bec8e9d27b7",
       "action": "WRITE"
     },
     {
       "path": "m3/eclipse/framework/pom.xml",
-      "before_sha256": "6dea6636a98ea1e2a12e3c7ab542a3bd16e19a015a08e8a2239f9bf87e034f91",
-      "after_sha256": "6dea6636a98ea1e2a12e3c7ab542a3bd16e19a015a08e8a2239f9bf87e034f91",
+      "before_sha256": "15002d6c3b3ab9ca8d8ecb820a260d41ce7d9f1fd04f811fa9af396808ae4f2e",
+      "after_sha256": "15002d6c3b3ab9ca8d8ecb820a260d41ce7d9f1fd04f811fa9af396808ae4f2e",
       "action": "ALREADY_APPLIED"
     },
     {
@@ -170,67 +170,67 @@
     {
       "path": "m3/eclipse/framework/qualification/resource-change-20261021/verify.py",
       "before_sha256": "ABSENT",
-      "after_sha256": "4cd4ea93da4e1e4cf5930faab3f6476227dc6552629d54500eb6a276a6adcf82",
+      "after_sha256": "5ce3e500b7ab49f944c896833d9877e465bdd84fb46d9cafeb9f8bf7bc13ece0",
       "action": "WRITE"
     },
     {
       "path": "m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseBundleSnapshot.java",
-      "before_sha256": "361cd096ce70bcea50080351f20c06cf989502eb62fe489b0a13faed93c63bea",
-      "after_sha256": "361cd096ce70bcea50080351f20c06cf989502eb62fe489b0a13faed93c63bea",
+      "before_sha256": "e5116e8dd992cda03ef61d22073378266ebf5ea618806e31ea78732adf2dde0f",
+      "after_sha256": "e5116e8dd992cda03ef61d22073378266ebf5ea618806e31ea78732adf2dde0f",
       "action": "ALREADY_APPLIED"
     },
     {
       "path": "m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseExtensionSnapshot.java",
-      "before_sha256": "4bfab762951ed0770dd95dfcb85db2fece0051d656e5bc2cf87ea95ef32d3963",
-      "after_sha256": "4bfab762951ed0770dd95dfcb85db2fece0051d656e5bc2cf87ea95ef32d3963",
+      "before_sha256": "725f07a4f2be1dfb2b9334cff3dadf098c35e56f6e76a2cdbbd84cef83995c70",
+      "after_sha256": "725f07a4f2be1dfb2b9334cff3dadf098c35e56f6e76a2cdbbd84cef83995c70",
       "action": "ALREADY_APPLIED"
     },
     {
       "path": "m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseIndexedSnapshot.java",
-      "before_sha256": "fd7527ce9d29e7fc15447421607e2cec5f4fc511248dd206874b7026b6757313",
-      "after_sha256": "fd7527ce9d29e7fc15447421607e2cec5f4fc511248dd206874b7026b6757313",
+      "before_sha256": "8ce80830b0a7fd5c33cd6c03e961c7d9b56efaec2d0e9af8392d3c23a5dfc5d7",
+      "after_sha256": "8ce80830b0a7fd5c33cd6c03e961c7d9b56efaec2d0e9af8392d3c23a5dfc5d7",
       "action": "ALREADY_APPLIED"
     },
     {
       "path": "m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseResourceDeltaSnapshot.java",
-      "before_sha256": "94fc5f6ac7d87439758e8dc6544754e0a77ebbff52d36bbb8ae18a6447aa555c",
-      "after_sha256": "6ef8f327a6ed4c7c41be81168778008af094e5b74fb04ba50d893856c9e482ff",
+      "before_sha256": "21a893d7f976e5bf2d42998335d99556edfffb266016cce15d5784ebc1c19274",
+      "after_sha256": "503e90a18d3f645b3effcb5423c265cf1abca313112b455b90240dcabefd3cef",
       "action": "WRITE"
     },
     {
       "path": "m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseRuntimeActivator.java",
-      "before_sha256": "f2ad7045a07c6905d2f540e9863851fc7ae95b04d867a11f8e4927c13f0a71c4",
-      "after_sha256": "f2ad7045a07c6905d2f540e9863851fc7ae95b04d867a11f8e4927c13f0a71c4",
+      "before_sha256": "960bf2ac8568de59c57e5dd0b6735d0f1abe821208edb74dcb97812cae8eed38",
+      "after_sha256": "960bf2ac8568de59c57e5dd0b6735d0f1abe821208edb74dcb97812cae8eed38",
       "action": "ALREADY_APPLIED"
     },
     {
       "path": "m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseRuntimeServices.java",
-      "before_sha256": "f892959825f72a922ea377052f67a436221c0aa854738149b8c3fe0f0b76baea",
-      "after_sha256": "f892959825f72a922ea377052f67a436221c0aa854738149b8c3fe0f0b76baea",
+      "before_sha256": "5c9ef7d3ea9bb6de5df5b809418c5c938949fae5eef338843f385f0d72cc199e",
+      "after_sha256": "5c9ef7d3ea9bb6de5df5b809418c5c938949fae5eef338843f385f0d72cc199e",
       "action": "ALREADY_APPLIED"
     },
     {
       "path": "m3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseDeltaIdentitySetTest.java",
-      "before_sha256": "2805f91b08f95e42f3fb9e0e6390de3174e5bf71fc761bc09210bb9ca9b6d781",
-      "after_sha256": "2805f91b08f95e42f3fb9e0e6390de3174e5bf71fc761bc09210bb9ca9b6d781",
+      "before_sha256": "44192b4116f99413f62dc5bed280d065de8bab0efffdd5441af628d43ade51da",
+      "after_sha256": "44192b4116f99413f62dc5bed280d065de8bab0efffdd5441af628d43ade51da",
       "action": "ALREADY_APPLIED"
     },
     {
       "path": "m3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseFrameworkSnapshotsTest.java",
-      "before_sha256": "cafda481d205e514d3ceb2187f2219301379b7075113e7b6e72946b012384a51",
-      "after_sha256": "cafda481d205e514d3ceb2187f2219301379b7075113e7b6e72946b012384a51",
+      "before_sha256": "2e5a91ddb11677caf49bf344f1d5ac733408803339aed8b9e7f631b48260100f",
+      "after_sha256": "2e5a91ddb11677caf49bf344f1d5ac733408803339aed8b9e7f631b48260100f",
       "action": "ALREADY_APPLIED"
     },
     {
       "path": "m3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseResourceChangeSnapshotTest.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "db172e1dd23313bd34ef0752a2d79156e06a37825498ac1d26e0f43db705c39a",
+      "after_sha256": "8759dbe391f8f20f8dab5051d08862d4ffaf30e2dd4e75b7471411ab30cf9289",
       "action": "WRITE"
     },
     {
       "path": "m3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseRuntimeActivatorTest.java",
-      "before_sha256": "e7026e6b0b56aa71aa6a0e617a29ccf8df603d3656ed6ae6966c9662d3b6167d",
-      "after_sha256": "e7026e6b0b56aa71aa6a0e617a29ccf8df603d3656ed6ae6966c9662d3b6167d",
+      "before_sha256": "37c8c48defbdda10d719c34eb17aa4ef9a43128ef15e372cb7ea69708133ec9f",
+      "after_sha256": "37c8c48defbdda10d719c34eb17aa4ef9a43128ef15e372cb7ea69708133ec9f",
       "action": "ALREADY_APPLIED"
     },
     {
@@ -265,14 +265,14 @@
     },
     {
       "path": "m3/tooling/module-packs/collections/build.py",
-      "before_sha256": "115bbc8d7bf48b25c81228797efb36ad0463fc535a8ff5be134c61ecb38c0934",
-      "after_sha256": "0c0ee4048a141da30e8fe101e613c2fa18e91f6cef81ef027ceb5eb9606ce33b",
+      "before_sha256": "7df7f538bdb2f759406421eaae1d60b5ad0b497c6d0c2c44d1b39ee836ca42ad",
+      "after_sha256": "9d234928ec6c951c66bc22bfce8c2379e8d646a3e13d43cc69fa1b6a24db9464",
       "action": "WRITE"
     },
     {
       "path": "m3/tooling/module-packs/collections/tests/test_native_abi.py",
       "before_sha256": "ABSENT",
-      "after_sha256": "ea7d21754b16f2512952f028ef849a49eea0e350cf64579b1a4cea727bf33f68",
+      "after_sha256": "90a8a865d0b44b6b241fa19eecf6bf4d46c2a21a2ab6aab5cb02ece144fa6c3b",
       "action": "WRITE"
     },
     {

@@ -25,7 +25,7 @@
     "publication_binding": "Final canonical and target publication commits are pending at this frozen evidence checkpoint. The enclosing SOURCE_RECEIPT.json supplies their later binding to these exact source seals.",
     "image_scope": "Rebuilt source image, not --patch-module runtime classes. Native test libraries are the selected JNI fixture libraries passed through jtreg -nativepath."
   },
-  "E1_packet_manifest_sha256": "0bc5395622babd5c0cff4ff2770d6359b14c3645e3a42669f5b85c09211f468d",
+  "E1_packet_manifest_sha256": "af27aa4434da6943f9ddc8e322085241af4ed4306c23b7b5736e069b69d7f76b",
   "counts": {
     "tests": 28,
     "passed": 26,
@@ -73,12 +73,12 @@
     },
     {
       "path": "SCOPE.md",
-      "sha256": "9d46d12bf3ff56cb7f48908034a5cd70f00940baff4b51d5bf9790755ff4f382",
+      "sha256": "8a447e7db52db01d206fa9528d9cc92add36aa6cece4e8f763faf036c0c39c01",
       "bytes": 3333
     },
     {
       "path": "SOURCE55_HASHES.tsv",
-      "sha256": "24e7dfcd14b1ef3ab6bc1c2a7f359abcbe424df0682c1596fbb5184342c519df",
+      "sha256": "22fcb7ee81637cd47fd5082c3394bae19347904ebfaddb96547f9702122afab1",
       "bytes": 11739
     },
     {
@@ -104,98 +104,98 @@
       "bytes": 6107
     },
     {
-      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
-      "sha256": "c8e9361f50f503ee0fb45c322cbd2e1f1701b84dd57f3948c210178b29bebfb4",
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java",
+      "sha256": "6dbd0ba6fdf580a38e1ac3f9c3237ec13a4065f1fe18dc3fa7734307c8356e9f",
       "bytes": 32116
     },
     {
-      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java",
-      "sha256": "b6aec5a921f9eaba6feb14461bf6dca7e67cee26bb84fee3ee3143f873df5121",
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/java/jdk/m3/collections/M3FilteredDeques.java",
+      "sha256": "66f4165c7099fd6452bb6faa8bf67a1af8d6edeedd6963bb5ba8773c507e6fe5",
       "bytes": 14945
     },
     {
-      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
       "sha256": "d2c8962a596c81103f543b3b4b5cd2b55233d44d00238527711b0f38c363acc5",
       "bytes": 32314
     },
     {
-      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
-      "sha256": "86e277ee069f3f077e44f5cd93b7f75cf07d357c613250d96a8e1e494969572c",
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java",
+      "sha256": "f76afab9c50eb24a8a0adf1121bde6ea95f8732f78fae5c9807eea9775de8a2b",
       "bytes": 15942
     },
     {
-      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
-      "sha256": "cb1c0ab9eccd76078ec2e4b8e30dc9fb1bde945979326c3a2466392b33d66257",
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/java/jdk/m3/collections/M3LongBitmapFilteredSnapshot.java",
+      "sha256": "7a168e391255c94fc4711e01cc388cf1f5063ce0738df43721664001207d02b9",
       "bytes": 14467
     },
     {
-      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
-      "sha256": "d6b88f4579c798b8715dbe7da1a41d33e0bd1329a2d518b23a20981f70b344a5",
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java",
+      "sha256": "55c549f99936d131c255f7118d51b3d40e2b5da2c26e2cf6e174120959e4f48e",
       "bytes": 25756
     },
     {
-      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java",
-      "sha256": "3b117a531afd39f071fda04796684084812371982295a508270e58bfb70a2430",
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/java/jdk/m3/collections/M3SignalOrder.java",
+      "sha256": "3ac89d3259b1e00faa326236cfe20acf21c7616ccaf2931f43ba09bddf2cfff3",
       "bytes": 9084
     },
     {
       "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
-      "sha256": "fedca631c2f0f0f73a27dde5e87395e95ac00fde07fc1d7006735c2ef18a579a",
+      "sha256": "b68c1fa966ad617302ffab1f2a820a23fa379854d2f07216933f19259d370c59",
       "bytes": 17258
     },
     {
       "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/native/collections/m3_signal_order_jni.c",
-      "sha256": "8dc63771408057e56610719e6d562454bece9769a5727c7614c104e659dc8a22",
+      "sha256": "58b0e89220c54ed87687b9d7140413f84654fb15ec39451e41355f6c68d50f42",
       "bytes": 3295
     },
     {
       "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/com/m3/collections/M3CatalogueRefinementContract.java",
-      "sha256": "661279db0cf532a67a0bf8ee5483cd91f79b49936add8e96fde08b1130f55174",
+      "sha256": "334c6adf2ee8c310e7a3591da93c6479593659b84287e7a709de986f3f2573f1",
       "bytes": 10685
     },
     {
       "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/com/m3/collections/M3CatalogueRefinementTest.java",
-      "sha256": "9f932bdf49aff3acf020bf36a2f5cead295a7ff6fb87fe55c9fde3c3a656cf93",
+      "sha256": "ac9ac5c9133d85a5e7802577984b08905b73945fcfbcf3f801aa4daaf1b97336",
       "bytes": 637
     },
     {
-      "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionContract.java",
-      "sha256": "558bcb65249fba80faa5ddb00d138566132c13acfd3c6e67763c78fa1acd5fd8",
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/jdk/m3/collections/M3FilteredCursorExceptionContract.java",
+      "sha256": "9c6ed2cb34bff05d1af95616d1c23b2512ad599f1c20219fa523b356e4915eb2",
       "bytes": 13570
     },
     {
-      "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionTest.java",
-      "sha256": "5ff4d5d15263310027c66eac8d595c62161fdc20623b42b4f5265a77dab4cedb",
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/jdk/m3/collections/M3FilteredCursorExceptionTest.java",
+      "sha256": "d98fb07eb403ca3e553bf57f8295d021aa3a79a396858fe1d2dc8b2a2ff97997",
       "bytes": 333
     },
     {
-      "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/com/m3/collections/M3FilteredDequeContract.java",
-      "sha256": "83115c8518a132029ea7b4f6818df74c9f628909a6dd8328c9aaf7a85cd2c7ea",
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/jdk/m3/collections/M3FilteredDequeContract.java",
+      "sha256": "0c41cf34405424203d35c448d0409531cd6ce6a6d8d69a79bb3804c855d312e3",
       "bytes": 12720
     },
     {
       "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/com/m3/collections/M3PackedSelectionAllocationProbe.java",
-      "sha256": "bbb4abeb2f9dbc512d6236173b68e8404ac5b11729640e1747aac6f002b933a7",
+      "sha256": "0c0d16da710e376f0cc363cc70a6430fb6e921f12dbb17b897f1d9812ef12e8b",
       "bytes": 1558
     },
     {
-      "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformBench.java",
-      "sha256": "8b026711262170986520d92fe782913d6a138f66bb9c795b6de748b11aa3dbe4",
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/jdk/m3/collections/M3SignalRadixUniformBench.java",
+      "sha256": "ddf5a717b6004d11d9c957b073fada18d363e2f00df7ced6508e3866f050e2d2",
       "bytes": 3279
     },
     {
-      "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformContract.java",
-      "sha256": "dd85a7c4b19364cc9b91ecf581abb33bf613435aec0873319f7082649dbdfbac",
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/jdk/m3/collections/M3SignalRadixUniformContract.java",
+      "sha256": "a7b5578a33f4edf3e48ef6a01fb156a4721b5c13a26aa0153fd689075cfbe958",
       "bytes": 8115
     },
     {
-      "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformTest.java",
-      "sha256": "482d0d75e1b926b2da7013f8f572b9559738f18e8831ab0b398dcb06825071d8",
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/jdk/m3/collections/M3SignalRadixUniformTest.java",
+      "sha256": "68bea0a443750976ea4921ee9620b279a9204a6e8096e643b0c7f0b128858ca0",
       "bytes": 311
     },
     {
       "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/native/m3_mask_compactor_empty_regions.c",
-      "sha256": "48631b556931bd113464bfabca7876615261f2a4bbb17b54be6fa2fa801e96c7",
+      "sha256": "ceb409a1eca8d65a5e6c2a7845759e0a95c1c802e493340def2f8d05d110f02a",
       "bytes": 6428
     },
     {
@@ -205,7 +205,7 @@
     },
     {
       "path": "work/candidates/composed21/qualified-post/m3/docs/abseil-convergence-20261021/FILE_PASSES.tsv",
-      "sha256": "a9d157c33f80ed12b2d2118f70235fa4e34d101aa917e760cdf700bb6b024bee",
+      "sha256": "7d3ccbf4a658aa5091a39d6b9454019ed723271df3e8145cca45734f4f5f33cf",
       "bytes": 4890
     },
     {
@@ -220,17 +220,17 @@
     },
     {
       "path": "work/candidates/composed21/qualified-post/m3/docs/abseil-convergence-20261021/SOURCE_RECEIPT.json",
-      "sha256": "ce3b0dcdb4b452f744a5dc7b37eacb98c5b47b31e3fa9716f73d1c4689b36fac",
+      "sha256": "6df69c004b0e3e21b646f4fd514a9912f3be4be7c0b29f2f04517336824b8227",
       "bytes": 32818
     },
     {
       "path": "work/candidates/composed21/qualified-post/m3/docs/name-mapping.d/eclipse-collections-20261021.json",
-      "sha256": "2201aae2f7a422829c62bbbe3f6fd4bd1545c60611a5806b2faee9cd1b0f5224",
+      "sha256": "5e84ed34b1203ec662d527e5979b204041ee455aaea868fc3493d1941ac9d220",
       "bytes": 2642
     },
     {
       "path": "work/candidates/composed21/qualified-post/m3/docs/name-mapping.json",
-      "sha256": "6e017ad8c780434a8681a6fb506d72975d064859b205164973f60ec9c20d8ad6",
+      "sha256": "cad138a3dfa2b93419e0e414ca6a08dbe39ef8f50c11699065e4315f735af4ff",
       "bytes": 456929
     },
     {
@@ -345,7 +345,7 @@
     },
     {
       "path": "work/candidates/product-metadata/post/m3/docs/composed-integration-20261021/evidence/core/PACKET_MANIFEST.json",
-      "sha256": "0bc5395622babd5c0cff4ff2770d6359b14c3645e3a42669f5b85c09211f468d",
+      "sha256": "af27aa4434da6943f9ddc8e322085241af4ed4306c23b7b5736e069b69d7f76b",
       "bytes": 32839
     },
     {
@@ -360,7 +360,7 @@
     },
     {
       "path": "work/candidates/receiving-selected/receive-concat-guard21/m3/runtime-integration/recipe/manifest.json",
-      "sha256": "416f8c17500afd1d9d2d2e3a7a85e300cf9807fbac7ead514b9c48cf0494e4e5",
+      "sha256": "44c6af1b7031d480b1d4ecd115fcecd73ab1546e317fb54c61a8110cadc0ea02",
       "bytes": 20025
     },
     {

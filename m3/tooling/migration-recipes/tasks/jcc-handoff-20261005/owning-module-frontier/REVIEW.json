@@ -41,8 +41,8 @@
   },
   "exact_bodies_acquired": 32,
   "unacquired_bodies": 573,
-  "pom_sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888",
-  "pom_git_blob_sha1": "86f223907bbb053f4792e6bf771c3c0882e1751b",
+  "pom_sha256": "3eb73bbf38c0c591b8f714f6e9923eaa25a35b5ffc7f0512b8ec7fd3602b5531",
+  "pom_git_blob_sha1": "e41cf1ce137961fc4f9eef9092acedd06425d33e",
   "declared_pinned_plugins": [
     {
       "coordinate": "org.apache.maven.plugins:maven-compiler-plugin:3.13.0",
@@ -142,5 +142,5 @@
   "candidate_fixture_receipts_satisfy_full_module_gate": false,
   "source_export_admitted": false,
   "jdk_acceptance": false,
-  "frontier_sha256": "ec0984ec8e9aba80170b396540026a61442e14840da3000ba0e3cb744b356b2e"
+  "frontier_sha256": "8854ce9b06944d91928e9ab34713959a98193cd296d7498a57d38298634057c1"
 }

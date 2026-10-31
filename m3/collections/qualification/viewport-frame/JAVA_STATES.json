@@ -16,8 +16,8 @@
     {
       "path": "m3/collections/viewport-proof/fixtures/M3NativePageDirectContract.txt",
       "pre_git_blob": "ABSENT",
-      "received_git_blob": "fc61136966adfc5c8d839854230296ede6992db6",
-      "post_sha256": "ccbdb6919a7f89bd95768b93c5f3d82b80edacbae45dbaf1ae24057cb24820e0"
+      "received_git_blob": "3b59f72d01db754775aef7d02eb6bb21f06fb0f1",
+      "post_sha256": "859cc15bb9a3b320fb2286b713ae06cb82499e37a0a585a87981bc24bacd3374"
     }
   ],
   "executed_offline_text_sdk": {

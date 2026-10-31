@@ -47,45 +47,45 @@
   "publicJdkReplacement": false,
   "targets": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IntCollection.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IntCollection.java",
       "before": "ABSENT",
-      "after": "2b489fd313a90881a5da424f4664e37842dbf244178e5a5b1c780c9639c70f81",
+      "after": "903ab4c4f469cb9651c3e99bcb76eab2fc2b74ffd38d47699820cd851a3f36dc",
       "resource": "00-M3IntCollection.java.txt"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IntHashSet.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IntHashSet.java",
       "before": "ABSENT",
-      "after": "5f28ee01edbbafd12b8ea12d69aa523585685cc8c70b3c8ccff0be1e45353429",
+      "after": "23092485545f68cdfb6d268d0698e115efbe4c1a0f1e6f007911bda645376981",
       "resource": "01-M3IntHashSet.java.txt"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IntIntConsumer.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IntIntConsumer.java",
       "before": "ABSENT",
-      "after": "d7673d25fc4bb59e6b66336b2bfc86da00415100e213b7b26aea61fb4a00f484",
+      "after": "5d0592bc63a33cce86ba075e5fbe3370d2ea0fe1c7d7c85f2db5a465be65e381",
       "resource": "02-M3IntIntConsumer.java.txt"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IntIntHashMap.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IntIntHashMap.java",
       "before": "ABSENT",
-      "after": "09bb75b166db75286aed1283e9e2f39fc6341fa0333b3ec7190bff0b0d52b899",
+      "after": "cbbcbc1862fe640b1ba7312c5ba424ff31d18d2970ffcc2f91ca499136e941d8",
       "resource": "03-M3IntIntHashMap.java.txt"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IntIterator.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IntIterator.java",
       "before": "ABSENT",
-      "after": "a7b8772e974a793eef8212281340a38cec651edc983e6cad47f725c43d022e63",
+      "after": "020154e7e6bb3dab0223359c6bc4736c034dd203598ce673094c76ce0febd4fc",
       "resource": "04-M3IntIterator.java.txt"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IntPriorityQueue.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IntPriorityQueue.java",
       "before": "ABSENT",
-      "after": "71f6dcf76eeab67a78c902efbcd3a781931c49477656f84659245c9c8fd75d59",
+      "after": "a02d894db12ed3b7141651bbb5301268a2e1219d6d10bc17c12400344b134b80",
       "resource": "05-M3IntPriorityQueue.java.txt"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3IntLanesTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3IntLanesTest.java",
       "before": "ABSENT",
-      "after": "0ddd123adba9511aac147c3fce715734ec5080395d7dd681ca89f95fb2ca0c4d",
+      "after": "58606016f39c48197b4888e57e77fb71034c84166184a8d47a3e2e2016227c89",
       "resource": "06-M3IntLanesTest.java.txt"
     }
   ],

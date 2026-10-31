@@ -27,10 +27,10 @@ final class M3StateRelationSparseC11RecipeTest {
     private static final String ROOT = "/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020/";
     private static final String DESCRIPTOR = "/META-INF/rewrite/state-relation-sparse-c11-20261020";
     private static final String NAME = "jdk.internal.m3.StateRelationSparseC11";
-    private static final String FORWARD_MANIFEST_SHA = "c5498b90a14e1ff6ded95982c50e24571660053e1fdb643a5c47c14d784e7c2f";
-    private static final String INVERSE_MANIFEST_SHA = "72957d2ff848b72d92eed4414e044caf32de6817f7c4c07f5c53b63215cd9a7c";
-    private static final String FORWARD_DESCRIPTOR_SHA = "6de3e434ac8087d89d10a56825266876ed6225f7206f643a81802949d3e5da34";
-    private static final String INVERSE_DESCRIPTOR_SHA = "285b18af40d5c6de101fdacc3b176138d0214f0a64150b71055801c53d3496df";
+    private static final String FORWARD_MANIFEST_SHA = "6d07c08af551c2eb2d74fa417f293f9871af8df8f499292fa3ff21df377064fd";
+    private static final String INVERSE_MANIFEST_SHA = "43436b08a8a5f322c1b0d1ceaee1584f24f654381466d812451e7cce6dcff6e9";
+    private static final String FORWARD_DESCRIPTOR_SHA = "9d8ab747bc4775f467d466e5043bd61127681e35359f5339cfbcdacab739b252";
+    private static final String INVERSE_DESCRIPTOR_SHA = "6b85531f3cca0aa6b532db220703b12dda283c34596b6e45ce5258f73fa3341a";
     private static final String C_OWNER = "src/java.base/share/native/libjava/M3StateRelation.c";
     private static final String C_AFTER = "4c453d51223c3223f07fb88b39e1c1b6ed9891de8157d32a63990a9a4488ece9";
     private static final String REJECTED = ROOT + "rejected/M3StateRelation.c.txt";
@@ -38,7 +38,7 @@ final class M3StateRelationSparseC11RecipeTest {
     private static final String HISTORICAL = ROOT + "historical/M3StateRelation.c.txt";
     private static final String HISTORICAL_SHA = "66d28e350f4894498b15c0041c0a43c075f12c9e3a384214e45d9868ce1950b6";
     private static final Map<String, String> BEFORE = Map.ofEntries(
-            Map.entry("src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java", "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa"),
+            Map.entry("src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java", "ae1de4b652b474c594d5fa6e8ec2d43aae720d166e885497217688c9fabae49d"),
             Map.entry("src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java", "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757"),
             Map.entry(C_OWNER, "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16"),
             Map.entry("src/java.base/share/native/libjava/m3_state_relation.h", "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885"),

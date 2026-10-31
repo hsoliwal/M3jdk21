@@ -11,7 +11,7 @@
         "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate/m3/migration/recipe.py",
         "check",
         "--plan",
-        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
         "--root",
         "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate"
       ],
@@ -30,7 +30,7 @@
         "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate/m3/migration/recipe.py",
         "rollback",
         "--plan",
-        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
         "--root",
         "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate"
       ],
@@ -49,7 +49,7 @@
         "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate/m3/migration/recipe.py",
         "check",
         "--plan",
-        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
         "--root",
         "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate"
       ],
@@ -68,7 +68,7 @@
         "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate/m3/migration/recipe.py",
         "check",
         "--plan",
-        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
         "--root",
         "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate"
       ],
@@ -87,7 +87,7 @@
         "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate/m3/migration/recipe.py",
         "apply",
         "--plan",
-        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
         "--root",
         "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate"
       ],
@@ -106,7 +106,7 @@
         "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate/m3/migration/recipe.py",
         "apply",
         "--plan",
-        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
         "--root",
         "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate"
       ],
@@ -169,7 +169,7 @@
       "stderr_sha256": "d5a618f2b592b0ae983a8652b2a383fbf0fa10944b8a8bfaf9683209c7be4aea"
     }
   ],
-  "input_receipt_sha256": "51250125710096ae370597945d8069bcd3ae00777f76612f401270787e66a364",
+  "input_receipt_sha256": "912fdd4d9f09222e530f3872e6184766232479a1c36b1a192dfd4cf4875758bd",
   "inputs_unchanged": true,
   "independent_fixture_reference_hashes_verified": true,
   "existing_records_unchanged": 43,

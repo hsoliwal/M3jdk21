@@ -9,9 +9,9 @@
   "target_base_commit": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
   "handoff_policy": "Canonical Synexia recipe templates are the editable owner. M3JDK files are admitted by exact preimage and recipe postimage hashes; regeneration and the receiver recipe-custody mirror record application evidence.",
   "canonical_receipts_sha256": {
-    "m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/FILE_PORT_MAP.json": "e3eb2199e6e6a045043534bbc9471feb1837c78c7edd0e62bd0675e64d07865d",
-    "m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/FILE_API_PARITY.json": "8295009993e55feeb7f1b8173018e5a21b1815fc409dabec04e042d30e3ca711",
-    "m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/COMPLETE_SOURCE_INVENTORY.json": "f077962ce7abe6aec7bf34e14736c1266429b18a911b147db32b73e8c904051e",
+    "m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/FILE_PORT_MAP.json": "fe2f2f7dee952638af8e4f29d4d89a2bb284754516b926f7f0049252fb5be151",
+    "m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/FILE_API_PARITY.json": "0c0b4f42ea20d7bc2ba52f82b22702ea004dff511d6b28bf7663a311e68f354a",
+    "m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/COMPLETE_SOURCE_INVENTORY.json": "2d64d5c74d9209893857c61dc4768634ffbe4458bbe88a5d14a169392a8a48a2",
     "m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/JSON_CLOSURE_PROVENANCE.json": "ec720b682f1e459763c85b93577c7897449d0558191fee8652931ea30dfd9da5",
     "m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/NATIVE_MAPPED_PROVENANCE.json": "2a4412de9bc0ae088ca4df059c7175db22484545ee2b5712e3a59bd92e078d5c",
     "m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/lucene/PROVENANCE.json": "f4e39191726c753d006b463eab50ec0b243cd7aa2c26167a143608e17d33476a",

@@ -51,7 +51,7 @@ final class M3OwnedApacheBidiMapV3RecipeTest {
     private static final String TRANSITION_NAME="jdk.internal.m3.OwnedApacheBidiMapValuesTransition20261017V3";
     private static final String BODY="m3/collections/implementations/apache/src/main/java/jdk/m3/collections/apache/M3BidiMap.java";
     private static final String ORACLE="m3/collections/implementations/apache/src/test/java/jdk/m3/collections/apache/M3BidiMapSelfTest.java";
-    private static final String V2_BODY_HASH="709a577431c923f8032c93f8a882796a8c81446e321b7cb4fbfeda55553fc3de";
+    private static final String V2_BODY_HASH="875c04a6696864fc54e582d11cd0261cc91a0af669aa64f4506929ce1114d7b9";
     private static final String UNRELATED="unrelated.txt";
     private static final String UNTOUCHED="preserve exactly\n";
     private record Target(String path,String before,String after,String text) { }

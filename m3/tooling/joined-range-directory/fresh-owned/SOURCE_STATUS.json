@@ -13,21 +13,21 @@
     "nonselfPins": 34,
     "pins": {
       "path": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/pins.json",
-      "gitBlob": "329efb21b5878910ff3db1277bae25a948d62e13",
+      "gitBlob": "e934d8aff6f42b151eb61294bd50d6acf7f68107",
       "bytes": 10316,
-      "sha256": "72274d3e0dbdaf86d8cadd8a41c696bcd7a43ba3ab729f0fb0da8c018547db9e"
+      "sha256": "569e786a33993d45780352e9d799dbc75834f7b5c33f3f4389d5a350468f5cc5"
     },
     "verifier": {
       "path": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/verify.py",
-      "gitBlob": "40c2e4a35315e953500ec3a3942bdc584db2f2b7",
+      "gitBlob": "c1687dec6070a5af3dcf1fa7ae467de60632caa9",
       "bytes": 25785,
-      "sha256": "b1cf55f585929b49f6ffeea0f4e5c93314c0e1bf3e89976c1ddc95fa070236d3"
+      "sha256": "6a35c27ec3e7ea4e1b5195fff0014a4da8a9c7bcb605ba27ccadfd54e4daf071"
     },
     "test": {
       "path": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/test/java/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryRecipeTest.java",
-      "gitBlob": "73471b80d618b4ab2b016d097459dd5cb390ef93",
+      "gitBlob": "add685ff1aefe81a12159603a8de460800620c12",
       "bytes": 22058,
-      "sha256": "a36dd62e6d2cb03614473e90e77298971bb8203eeeefcf1f11689f3d128ec61f"
+      "sha256": "b0c9eecbf6210508bad4f8843381a758d938bf2b9a4df6471b362bbfa27c93f2"
     },
     "suite": "jdk.internal.m3.rewrite.M3JoinedRangeDirectoryRecipeTest",
     "methods": [
@@ -45,23 +45,23 @@
   "cohorts": [
     {
       "name": "original-product",
-      "gitBlob": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
+      "gitBlob": "5022e9811ce9391671c794446c7772569cfd369f",
       "bytes": 2634,
-      "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
+      "sha256": "1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7",
       "source": "public32152976 actual original58-input closure"
     },
     {
       "name": "qualified-range",
-      "gitBlob": "3edc23c22362b08af00f7332ddc445a0274a6dd4",
+      "gitBlob": "367ea06512321bb511fd9bbb772842ce313e69dc",
       "bytes": 2919,
-      "sha256": "10ddd082c142420c29985a85d8b2f77507fdbcde2552b8bfc154e658f3b2a9e3",
+      "sha256": "c1c2ed959d7dff0cc2625b2008a55438a6a1313b4c58943f596e2ab7f44836a8",
       "source": "actual prior Maven emission; this new SDK before/inverse"
     },
     {
       "name": "fresh-owned",
-      "gitBlob": "4f88f794266375ad8174fa56e952c30d32689877",
+      "gitBlob": "765d43267bb22a3650b622c01cb29b550e1deb01",
       "bytes": 3377,
-      "sha256": "d69ef5cc0e4bd5d95808978b4a0d73982322230a623d897074840b58fab1993e",
+      "sha256": "c715036aa450d3e46e22bcdd0cae9d34d593b18db79953438d988a6b2be390b2",
       "source": "New source proposal; not yet Java/Maven/runtime qualified"
     }
   ],
@@ -71,15 +71,15 @@
     "compiledVariants": 4,
     "semanticCohorts": 2,
     "rejectedMutants": 2,
-    "qualifiedBeforeSha256": "10ddd082c142420c29985a85d8b2f77507fdbcde2552b8bfc154e658f3b2a9e3",
-    "afterSha256": "d69ef5cc0e4bd5d95808978b4a0d73982322230a623d897074840b58fab1993e",
+    "qualifiedBeforeSha256": "c1c2ed959d7dff0cc2625b2008a55438a6a1313b4c58943f596e2ab7f44836a8",
+    "afterSha256": "c715036aa450d3e46e22bcdd0cae9d34d593b18db79953438d988a6b2be390b2",
     "proofSummary": "JOINED_FRESH_RANGE_PASS fixtures=5 ranges=466 nested=466 freshResults=1864 invalidRanges=25 indexRefusals=3738 aliasMutations=3"
   },
   "proof": {
     "path": "m3-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk/src/test/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020/proof/M3JoinedFreshRangeProof.java.txt",
-    "gitBlob": "fa35d3170995ad74f6d7363d6e3fe85dd0b2449c",
+    "gitBlob": "b96411a4c613a9476bab4e8bcd3b94989cb67c43",
     "bytes": 14816,
-    "sha256": "8194f210675ff2da605989cf885687549a77ac6037757ac0a8fabcea307cee1f"
+    "sha256": "d36d33efd6dff29c3566be0c35727a50bb39bab61902f7466aa966314b0be2fd"
   },
   "sourceControls": {
     "checks": 43,
@@ -87,10 +87,10 @@
     "kind": "V8_BYTE_STRUCTURE_AUTHORING_ONLY"
   },
   "existingModels": {
-    "originalBuildInputsGit": "921d708e2a0f1f1c43e95989ea9e37e02e22790a",
+    "originalBuildInputsGit": "81fd3b990466a8d71cf4e7ded6841abbcf05fd8b",
     "originalEntries": 58,
-    "originalJoinedGit": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
-    "originalProofGit": "833b13b220110b6942277c2b8b8a4fd78ce9e285",
+    "originalJoinedGit": "5022e9811ce9391671c794446c7772569cfd369f",
+    "originalProofGit": "1c94cc5985fefa0b06821c179f8887626987f9c3",
     "coreClasses": 83,
     "programs": 16,
     "directories": 118,

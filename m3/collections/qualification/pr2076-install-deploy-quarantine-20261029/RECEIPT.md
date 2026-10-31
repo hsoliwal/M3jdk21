@@ -23,7 +23,7 @@ GitHub Actions file, is already identical at Git blob
 
 | Original M3JDK21 path | Before Git blob | Canonical / #2076 after Git blob |
 | --- | --- | --- |
-| `m3/collections/interop/pom.xml` | `3fc5cc0f0bee520675fea18a379c96b288c99084` | `529fa821fcb27a645795f6677270a9a44f4526e3` |
+| `m3/collections/interop/pom.xml` | `454c34b8ba93614996346cd0890caac17fadd5e8` | `127238e4d761906c87b36f2b58af22d824fa5929` |
 | `m3/collections/verification/no_external_runtime.py` | `aa7baed2aa9e4ff2aa675771def00a09ccc863f3` | `00b94bec1d828d5d716c9707844f97b6de1a6124` |
 | `m3/collections/verification/test_no_external_runtime.py` | `2886c5d68444ee34e54a3352d1400a2e4fdb21a4` | `36b0428c202078f196b322d5e5d8d80313a5dd65` |
 | `m3/collections/interop/README.md` | `2f7104f1a694e0392713a4fd62b0883ebba3d650` | `c04634bc2696fae873a63bd1dfe6eb54fc341453` |

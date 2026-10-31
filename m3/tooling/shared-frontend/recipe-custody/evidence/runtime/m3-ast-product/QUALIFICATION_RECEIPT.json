@@ -17,7 +17,7 @@
     {
       "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTParser.java",
       "candidate_root": "templates",
-      "preimage_sha256": "d250b33d84b597284a84255c3d52b1ecfb8f2338eea27377643bb651acba7b90",
+      "preimage_sha256": "c8c5abb7c6499d406ed44c673e01e7d64c62e7f51567cc09aa5867384e29504a",
       "postimage_sha256": "0a97b2f00720bf73d6b8727893c506139c9c3838a76faa35c40c608f3881fa3d",
       "bytes": 18070,
       "executed_result_path": "/workspace/scratch/13309be96b09/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/target/synexia-ast-complete/candidate/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTParser.java"

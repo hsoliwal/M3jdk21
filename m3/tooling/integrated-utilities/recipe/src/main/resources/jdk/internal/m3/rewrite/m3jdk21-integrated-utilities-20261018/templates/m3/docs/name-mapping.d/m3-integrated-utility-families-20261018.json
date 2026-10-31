@@ -2420,23 +2420,23 @@
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
-      "git_blob": "6ec7a88dafeca87760faee0c808dbd9a93ba1424",
-      "sha256": "1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369"
+      "git_blob": "f221ccb00feeda912eafd5daa8b0bb8b7766b572",
+      "sha256": "e8a722cec3cdad01ce127936936f7c9928f094658e075aa9d1d89077e6eb7199"
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java",
-      "git_blob": "e094fdde4a153eab2d1a125785bc55c68187bbd1",
-      "sha256": "b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d"
+      "git_blob": "d8a0a04dd3d9106ba641f8b657bacacc49678e3c",
+      "sha256": "f1e3e21c37cbe084ef6b9446b86293d5039cd9b2bc6c1bf86d63a86793e3b8d5"
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java",
-      "git_blob": "af9a82214a62eff0f9194d6a95179829b6f57b4e",
-      "sha256": "c1ae229f00911e0881de9cae102f2c65f0f7f9f8eb4da1abd364a816dd84ee0d"
+      "git_blob": "258452f8442df0e257db791bdc99d1a7604ba7bc",
+      "sha256": "956ae0faf7f37d4b963d0d074445484548efe73f164142f2bd0c7de0815e49d4"
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
-      "git_blob": "134fb98f8a39969c43fd75338ecb233c5fe49446",
-      "sha256": "477135e13481942fef3b95b96a08d39c9c86dd92a649959c6d035b19b5784031"
+      "git_blob": "2053896cfc74192d7561478f6aca249eae87ca66",
+      "sha256": "e8b8c5e455d4b46bb85b5c4ee6c8234643ca6e10f8314a468f455a80067a7f7d"
     },
     {
       "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
@@ -2445,8 +2445,8 @@
     },
     {
       "path": "m3/collections/algorithm-catalog/sdk-family-names-20261017.tsv",
-      "git_blob": "3bdbe421e0954db6f75b019b8c2196f74305c2d2",
-      "sha256": "e316251a7daf20a6b22db9f18e733c733386385b75f61377d8a8b0ca8be75a08"
+      "git_blob": "defa93e232815f027f9e96b47aa18d896d1b4f31",
+      "sha256": "dd2aed4d82561306a3bb901712b8c8bdbb08e103d32f192a2c9318363d16380a"
     },
     {
       "path": "src/java.base/share/classes/java/util/ReverseOrderListView.java",

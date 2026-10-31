@@ -18,15 +18,15 @@
   "files": [
     {
       "path": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/SOURCE_SEALS.json",
-      "sha256": "b2fe6b8c49dba14c90139a45a6b4609eda22d9d0183be962234fa2d1f7753252"
+      "sha256": "caf5071d6918414d5ad413a38f3e578c37d7ac23912618aa80aa7bb4a8686d0c"
     },
     {
       "path": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/PROVENANCE.json",
-      "sha256": "98969a42effdc19602de5c7022e14ce0ba674486b92ae9bb34e9d20c423cbec6"
+      "sha256": "7bbbeb14336f3c5e8e095583fc28af78089dc8f4ea1b26e3a4703f702bf58436"
     },
     {
       "path": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/NATIVE_SOURCE_SEALS.json",
-      "sha256": "12c0a2f4b7f90b0c1187bdfa85149ef2efae1e7ad4f2756f52ca70eb89af2cc5"
+      "sha256": "c1ede8d169e21c71463fdf61a6c98192c5e5496e42714cbe752b887943d4ef4f"
     },
     {
       "path": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/QUALIFICATION.md",
@@ -34,15 +34,15 @@
     },
     {
       "path": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/verify_candidates.py",
-      "sha256": "2b9f9c8fac3020afb1b9ea344b953c2d1d5bd603841cc1a8f307804879c06129"
+      "sha256": "e495fb5975f9755cf641491fc90d651b8f1dac02d77262ea7766994502c13f63"
     },
     {
       "path": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/qualify_current_module.py",
-      "sha256": "545d06e6b1a5ed4999dee6ff802ebfd892dbbcd8f7f95eb434c4090d431923e6"
+      "sha256": "ae36cdcb55d76df23f444eec8a6d56f73b9d403b091faf81f43f0853d3e7869b"
     },
     {
       "path": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/qualify_integrated_native.py",
-      "sha256": "32a25a5618dcf67a785d90838de4c1b6589a9c835d2a293e3348282d9f5e4005"
+      "sha256": "f6a11204dd3ebb8dbc395e10027dab20bd715ae3f6cc2c09eed81516909e45b2"
     },
     {
       "path": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/RESULT.json",
@@ -50,11 +50,11 @@
     },
     {
       "path": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/INPUTS.json",
-      "sha256": "571dee423d012cbc01c35d5e6a5c3cc1efadabf2a2d4048919251016b804b01d"
+      "sha256": "b12b36d80f9ec9ddf0e4b5d57fdb4f3ae2816ad0f2b632fb59e576102934806e"
     },
     {
       "path": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/COMMANDS.json",
-      "sha256": "3052bb9f08101d66f6dcdd45d38a95696ed1b1a2783643a673f3406260c03fe8"
+      "sha256": "ba9b81141a17134f65df71f1d6c76f123e1b25eb090d38efc9f60c083cdb3559"
     },
     {
       "path": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/RESOURCE_SUMMARY.json",
@@ -62,11 +62,11 @@
     },
     {
       "path": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-owning-module-1/JUNIT_SUMMARY.json",
-      "sha256": "2e68d60afa5f7112445689af9219feed52d9f9e617a7cf1939471c4fb3ce0598"
+      "sha256": "b6d82647e67737c3c2dc02ef8438768c6d8cd48d4ae3b78dbd9919bb94e9c07b"
     },
     {
       "path": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-owning-module-1/SOURCE_RECEIPT.json",
-      "sha256": "b9f1278f22adee0b850f588725705e4c93c8700d49150a6f8301021a5dd669c9"
+      "sha256": "6ba7897566b239f2ca881cad9babd3e8992adba17a93405c3f54a0aa4ebfda80"
     },
     {
       "path": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-owning-module-1/MAVEN.log",
@@ -74,19 +74,19 @@
     },
     {
       "path": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/integrated-java-native-1/RESULT.json",
-      "sha256": "ae420fe3513d22e7fd37911f539c945393379abeb4d974558d78df75f61deb2a"
+      "sha256": "aa305c16aa4dea8fc0a90f1c8a650efb4446c2f3e7d2d56cefa6825df6dde3e6"
     },
     {
       "path": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/integrated-java-native-1/SOURCE_RECEIPT.json",
-      "sha256": "a455f76b03b37a00f00046f98b43b8f1e8acd9adfff4fe827648afbd868a9f08"
+      "sha256": "933be8e6a6bb9a3181823427f49dd6d8b1a231c4db4c8e463a3e4e2ad01733e7"
     },
     {
       "path": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/integrated-java-native-1/COMMANDS.json",
-      "sha256": "1df2a45462754793b694c21a904c14c94e603a1ad7efcfa2ea6fd381352d6cc3"
+      "sha256": "583bdfa50d20888d35068ad9a3f0223a485a9e566549b8275df31efda1e6fa85"
     },
     {
       "path": "/workspace/scratch/7ea994fb52d9/proofs/sdk-collections-current-01/sdk-output/SDK_EXECUTION.tsv",
-      "sha256": "d279be75821d860fb0c2986c8ed87195054916a556b0d2fd8fb8d094b070f2ed"
+      "sha256": "403cfa65b7486065f0e0c7d124b207311d77bbb9c2aab2619473a072bd9dcd40"
     },
     {
       "path": "/workspace/scratch/7ea994fb52d9/proofs/sdk-collections-current-01.maven.log",

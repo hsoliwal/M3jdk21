@@ -36,17 +36,17 @@ public final class M3CountedSdkRecipe {
     private record Output(String template, String path, String sha256) { }
     private static final List<Output> FILES = List.of(
         new Output("M3CountedBag.java", "m3/collections/src/main/java/jdk/m3/collections/M3CountedBag.java",
-                "c04ed48de6b24bb4a86f97c4aa6187e2ce11e43b082e05ef3189c618ddf1143b"),
+                "583e6b5dce178ee02c2efdb919271c81a00ad60771abd06f7c942330fdfc60d1"),
         new Output("M3CountedBagSelfTest.java", "m3/collections/src/test/java/jdk/m3/collections/M3CountedBagSelfTest.java",
-                "2dc6452230f5b760e97076aaec10319c83b183887d05a0e4ff65172c809a5087"),
+                "44461bcb78fc6f2ba8af6d7ecfb39c5a4c325307d43bfb1926ef2b49af8e6e22"),
         new Output("M3CountedBagTest.java", "m3/collections/src/test/java/jdk/m3/collections/M3CountedBagTest.java",
-                "545b01cbf5bcfcf2eb316a4b4b0992d8b8cd53b660bf07640b723db58aa2b7b1"),
+                "96e3c656bcb894747bc1c94dcfd98cb77debd1858858733b32921e2e5ec4eca9"),
         new Output("M3GuavaMultiset.java", "m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3GuavaMultiset.java",
-                "d3e36d0d788a255afba17f3ee911f6efe80cff80d9625e1bbf17f22fd9397cd0"),
+                "75f4a003ff6a85cc6e06a5dd9da1962a0460c263210741c95b44450926cb10a8"),
         new Output("M3ApacheMultiSet.java", "m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3ApacheMultiSet.java",
-                "67efa228572f23ee2a22e874d6d328282001c2e8a29d2f90c612f977325e6189"),
+                "b13748791f45ba66fcbda8bb336bee778fe9a354de1b8e17bf90cd256ce2e861"),
         new Output("M3CountedProviderContractTest.java", "m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3CountedProviderContractTest.java",
-                "15d5524cf41305db0802cc5ce2d3c8637573d552cb2f9e12240b46ef2b773ba9"));
+                "9d33e518ee8e2722bfb4672d41bca9cd8bd362fd9787c16f50c5131ab671463b"));
 
     private M3CountedSdkRecipe() { }
     public static void main(String[] args) throws Exception {

@@ -2,7 +2,7 @@
   "status": "PASS_FINAL_RECEIVER_NATIVE_ADDENDA",
   "utc": "2026-10-21T02:47:23.415372+00:00",
   "recipeStage": "combine-views-final21",
-  "owningProofSha256": "4fbc24a40e0a78ec10deeacfddf5a42a40fe067f726fb83d7e15f0c9d9b1deaa",
+  "owningProofSha256": "a512bbaac19b6455dd369d5b56cdc5aeb7a8595003c2cffe9f038fdab9270d20",
   "runs": [
     {
       "name": "catalogue-native",
@@ -113,12 +113,12 @@
     }
   ],
   "sourceSha256": {
-    "m3/collections/src/test/java/com/m3/collections/M3CatalogueRefinementContract.java": "661279db0cf532a67a0bf8ee5483cd91f79b49936add8e96fde08b1130f55174",
-    "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformContract.java": "dd85a7c4b19364cc9b91ecf581abb33bf613435aec0873319f7082649dbdfbac",
-    "m3/collections/src/test/java/com/m3/collections/M3PackedSelectionAllocationProbe.java": "bbb4abeb2f9dbc512d6236173b68e8404ac5b11729640e1747aac6f002b933a7",
-    "m3/collections/src/test/native/m3_mask_compactor_empty_regions.c": "48631b556931bd113464bfabca7876615261f2a4bbb17b54be6fa2fa801e96c7",
-    "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "fedca631c2f0f0f73a27dde5e87395e95ac00fde07fc1d7006735c2ef18a579a",
-    "m3/collections/src/main/native/collections/m3_signal_order_jni.c": "8dc63771408057e56610719e6d562454bece9769a5727c7614c104e659dc8a22"
+    "m3/collections/src/test/java/com/m3/collections/M3CatalogueRefinementContract.java": "334c6adf2ee8c310e7a3591da93c6479593659b84287e7a709de986f3f2573f1",
+    "m3/collections/src/test/java/jdk/m3/collections/M3SignalRadixUniformContract.java": "a7b5578a33f4edf3e48ef6a01fb156a4721b5c13a26aa0153fd689075cfbe958",
+    "m3/collections/src/test/java/com/m3/collections/M3PackedSelectionAllocationProbe.java": "0c0d16da710e376f0cc363cc70a6430fb6e921f12dbb17b897f1d9812ef12e8b",
+    "m3/collections/src/test/native/m3_mask_compactor_empty_regions.c": "ceb409a1eca8d65a5e6c2a7845759e0a95c1c802e493340def2f8d05d110f02a",
+    "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "b68c1fa966ad617302ffab1f2a820a23fa379854d2f07216933f19259d370c59",
+    "m3/collections/src/main/native/collections/m3_signal_order_jni.c": "58b0e89220c54ed87687b9d7140413f84654fb15ec39451e41355f6c68d50f42"
   },
   "nativeLibraries": {
     "libm3_collections_address.so": "22d16e116c90a5f14f79dc0e54424baf088ae7e1c1eb1714910d9d8abb4bdb2c",

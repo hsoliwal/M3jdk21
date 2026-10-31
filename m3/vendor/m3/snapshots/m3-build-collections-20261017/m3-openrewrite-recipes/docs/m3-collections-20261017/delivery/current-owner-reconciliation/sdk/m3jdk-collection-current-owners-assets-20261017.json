@@ -17,7 +17,7 @@
     "-Dm3.output=/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/livebase-generated/m3jdk-collection-current-owners-assets-20261017",
     "verify"
   ],
-  "manifestSha256": "434888f96328367a33f7b76d2e3c421f3f509ceb8390157ea0b4b902dd390368",
+  "manifestSha256": "f2f4d182ece3a18a0f7aab08a31c0576d0ac033d5e0859a0f9aa798b20a89637",
   "logSha256": "adf24499961e260e7355bb9f2ba663393ed37c03b6f5d938545b7c0507a72466",
   "proofModified": false,
   "engineModified": false,

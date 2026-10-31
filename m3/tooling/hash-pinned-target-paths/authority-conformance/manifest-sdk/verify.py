@@ -85,20 +85,20 @@ REQUIRED_PATHS = [
   "verify.py"
 ]
 FROZEN_GIT = {
-  "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-  "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
-  "pinned-engine/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java": "4a38e39d0755462d40c2b22548b87abde938ea0b",
+  "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+  "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java": "78d5fb68f13872164973a8918cc7886c5f548bca",
+  "pinned-engine/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java": "73779dee8c80a0913b88fff17637ed3f44b33ea3",
   "pom.xml": "d79867bcc09ad6329e12418e15907e54b8ab025f",
-  "src/test/resources/frozen/M3ReleaseJepAuthorityRepairRecipeTest.java.txt": "dfdd797de55426f5e93d64c324ccccb0967c04de",
-  "src/test/resources/frozen/M3Jdk21HashPinnedTextSnapshotRecipeTest.java.txt": "1223036479ba04515e21b6a6087d832e6f7f9394",
-  "src/test/resources/frozen/M3ReleaseJepAuthorityRepairRecipe.java.txt": "8e40addc386c60a9430f06ebb05345a2be8a6598",
-  "support/owned_state_relation_verify.py": "0c2507d78817184e9df3c367390f2ac02bc870cc"
+  "src/test/resources/frozen/M3ReleaseJepAuthorityRepairRecipeTest.java.txt": "9f4f4288c1a0e19b0b6cd3e48c1442263a64a17a",
+  "src/test/resources/frozen/M3Jdk21HashPinnedTextSnapshotRecipeTest.java.txt": "3ba1c6924668d068c47f7608aa63dfa082b8c96a",
+  "src/test/resources/frozen/M3ReleaseJepAuthorityRepairRecipe.java.txt": "dfb78083265f32c6e9ebc57f4302f3ef6d6ce274",
+  "support/owned_state_relation_verify.py": "b3622db6ed4e40d59aa6620394592f7748b68781"
 }
-BEFORE_SHA = "cc775d76fdcf53442c69ccd83558d498a53a6f0e78893bee851660612370f789"
-AFTER_SHA = "ce113825c8e34a7379f65da06d9e203a84666d85051acc2fe1fec672d8374aa9"
-PROVIDERS = {"openrewriteAdapter": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-             "manifestKernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
-             "authenticStrictProvider": "4a38e39d0755462d40c2b22548b87abde938ea0b"}
+BEFORE_SHA = "fca288fddb97ea486df2f21d6601848dad6df016aae0bd53c291d16e8181efd3"
+AFTER_SHA = "bfec24cb63b353c5dbbc72ef14f7820f8ce315d244bff3a714a21232f6bff803"
+PROVIDERS = {"openrewriteAdapter": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+             "manifestKernel": "78d5fb68f13872164973a8918cc7886c5f548bca",
+             "authenticStrictProvider": "73779dee8c80a0913b88fff17637ed3f44b33ea3"}
 COMPILED_PROVIDERS = [
     "jdk/internal/m3/rewrite/M3GpuToolJoinRecipe",
     "jdk/internal/m3/rewrite/M3GpuToolJoinManifest",
@@ -179,7 +179,7 @@ def inputs():
 
 def owned_report_validator(files):
     path = "support/owned_state_relation_verify.py"
-    require(blob(files[path]) == "0c2507d78817184e9df3c367390f2ac02bc870cc", "owned XML validator identity")
+    require(blob(files[path]) == "b3622db6ed4e40d59aa6620394592f7748b68781", "owned XML validator identity")
     return runpy.run_path(str(regular(ROOT / path)), run_name="m3_authority_manifest_owned_xml")
 
 def validate_counters(counter, ident, head):

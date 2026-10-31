@@ -22,8 +22,8 @@ METHODS = ["bothPartialStatesRoundTripAndReachFixedPointsInBothOrders",
            "everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation",
            "exactCurrentWorkflowPinsPreserveHistoricalReceipt"]
 ENGINES = {
-    "M3GpuToolJoinRecipe": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-    "M3GpuToolJoinManifest": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+    "M3GpuToolJoinRecipe": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+    "M3GpuToolJoinManifest": "78d5fb68f13872164973a8918cc7886c5f548bca",
 }
 FORBIDDEN = ("originalPrivateModelQualified", "stringDispatchQualified", "fullNativeTargetQualified",
              "windowsQualified", "fullMatchedJdkQualified", "performanceRetentionQualified",
@@ -78,9 +78,9 @@ SOURCE_GIT = {
     "m3/backports/backport_execution_waves.py": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
     "m3/backports/BACKPORT_EXECUTION_WAVES.md": "428d775ca476b187dceb26a012401b11b975bbbb",
     "m3/compatibility/m3-wave-admission-pin-20261014.tsv": "60c11d68f482efadeadbbe6f58bfac9ec9aa0090",
-    ".github/workflows/m3-jdk21-backport-wave-admission.yml": "9ba94e55b4c8f468fb0ff5f3cd7c530caa6fdff2"
+    ".github/workflows/m3-jdk21-backport-wave-admission.yml": "60a24153dcefb57499c921a264c94402df8af16d"
 }
-AFTER_GIT = {**SOURCE_GIT, TARGET_WORKFLOW: "60ab068a3ebe7bab7c568afc405035f1fd15ffd3"}
+AFTER_GIT = {**SOURCE_GIT, TARGET_WORKFLOW: "c9017928ee7796eb70ea2c899c541ce139d7b458"}
 
 def owner_plan(original, post, actual):
     lanes = (original, post, actual)
@@ -207,7 +207,7 @@ def report():
     module = runpy.run_path(str(regular(SDK / "verify.py")), run_name="m3_wave_sdk_reuse")
     pins, pins_data = module["inputs"]()
     if module["SUITES"] != {SUITE: METHODS} or module["RECEIVER_OUTPUTS"] != {
-            TARGET_WORKFLOW: "b64ac1da918bd1b5fd5dd56adc16aeb9705a854cfd262e0793fe79428ac450d6"}:
+            TARGET_WORKFLOW: "539abe591a91c37ddc16601b0ce2bcccc4a238605f8eda72c3f8008920c9b51f"}:
         raise RuntimeError("exact three-method one-workflow recipe contract required")
     expected_custody = {row["path"]: row["sha256"] for row in record["receiverOriginalOwners"]
                         if row["path"] != TARGET_WORKFLOW}

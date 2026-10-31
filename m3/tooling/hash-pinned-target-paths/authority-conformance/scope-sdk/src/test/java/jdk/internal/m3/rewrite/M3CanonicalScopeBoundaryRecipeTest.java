@@ -31,19 +31,19 @@ final class M3CanonicalScopeBoundaryRecipeTest {
     private static final String ROOT = "/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/";
     private static final String DESCRIPTOR = "/META-INF/rewrite/canonical-scope-boundary-20261020";
     private static final String NAME = "jdk.internal.m3.CanonicalScopeBoundary";
-    private static final String FORWARD_MANIFEST_SHA = "b60d40fc62a17b7d390bd41ca845db9e4ed3f50eb1596bed1a81977f24192826";
-    private static final String INVERSE_MANIFEST_SHA = "88a922854f807a8c577ae4924cb97aebc5b9ac33a6f7498f06414f97cca548f5";
-    private static final String FORWARD_DESCRIPTOR_SHA = "4701bbfbcc380a6169505987e892cf319956d648e8e2374805b93043e080a3e3";
-    private static final String INVERSE_DESCRIPTOR_SHA = "0bf4d59620ca95f6b6192e791810d7a81f3f269a6a51f271f96412b46aa74486";
+    private static final String FORWARD_MANIFEST_SHA = "2bd1472f0de25ac41dea86806a0c7708d077ce8191aa94748103f7af60d12b68";
+    private static final String INVERSE_MANIFEST_SHA = "e27ea3c529ec2e126828bd5879cfa55f09f345a53544579ff74eb292cb683332";
+    private static final String FORWARD_DESCRIPTOR_SHA = "ad8a32d3bece1d77d5e8b4d32e75df7966fb29df75b12c5c43d2d7056df8573d";
+    private static final String INVERSE_DESCRIPTOR_SHA = "567b9ae2b88bf8e9d677b367eca0cd923507a135f179ba682fb6a47faf0bf082";
     private static final String SCOPE_OWNER = "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java";
-    private static final String C_AFTER = "e95b11ebad61c551bc25df3276fa560a613d476bcee2d865ac272bd35bdade9d";
+    private static final String C_AFTER = "858e5b5e05b8e3fea57eb30128a2265d0ca3403fa98d44a35addef73c582b078";
     private static final String HISTORICAL = ROOT + "historical/M3ScopeInference.java.txt";
-    private static final String HISTORICAL_SHA = "ff929c5e4b4ad7a579b69034479294f37a3cbaac36127b6524d02f60049c068d";
+    private static final String HISTORICAL_SHA = "ae8457cdcd062c18b657af499773a9aa870c12c68d5fe19aefebcd85da422200";
     private static final String DIVERGENT = ROOT + "divergent/M3ScopeInference.java.txt";
     private static final String DIVERGENT_SHA = "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4";
     private static final Map<String, String> BEFORE = Map.of(
             "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java", "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
-            SCOPE_OWNER, "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579");
+            SCOPE_OWNER, "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0");
     private static final Set<String> PASSED = new LinkedHashSet<>();
     private static final Map<Boolean, String> EMITTED = new HashMap<>();
     private static int successfulRuns;

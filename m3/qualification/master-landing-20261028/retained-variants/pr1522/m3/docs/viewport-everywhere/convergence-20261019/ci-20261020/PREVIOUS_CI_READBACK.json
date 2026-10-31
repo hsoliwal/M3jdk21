@@ -1161,7 +1161,7 @@
       "local_log": "full_logs.log",
       "finding": "Surefire dependency resolution fails before tests: org.junit.platform:junit-platform-launcher:jar:1.10.2-m3-source-1 is absent from Maven Central.",
       "checked_out_head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
-      "log_sha256": "07da40b240af5d40d9905bb07b195c51128f22b9ddd0eb7554d526b0f33649e8",
+      "log_sha256": "783d4c95a45ddb1675bf03205e0a4fec209db65cafd1cbd2e4dfe443c8ded4b6",
       "log_bytes": 137182
     },
     "current": {
@@ -1226,7 +1226,7 @@
       "local_log": "current_logs.log",
       "finding": "Historical source seal stops at M3IndexedListSnapshot: expected preimage blob217700023c2a6456a505b07b311290f8da8c02e2, actual qualified postimage2caf4faf78ea20ccb41de9a61b08790855b4edd4.",
       "checked_out_merge": "43be621dd4f524dffa2862de1ec4b66e12e66974",
-      "log_sha256": "58669ff99e3dde048f3302bfeca13a819bc63c56db6489b82533856b3da9da76",
+      "log_sha256": "e889043f3c35ed66162aad1fc34a0b9cc7362de4dd7e43e3e0e2022d736a3bc2",
       "log_bytes": 22620
     }
   },

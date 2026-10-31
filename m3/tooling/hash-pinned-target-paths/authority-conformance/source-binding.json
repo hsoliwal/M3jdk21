@@ -7,7 +7,7 @@
   "controlPlaneAdmission": "f6c99310cc01eaa3eacb496e12cd549836da3b4c",
   "censusAdmission": "400db8f4e351a1dd385dda734706ae518bbd1ebe",
   "rawJavaProofAdmission": "0a262d810b8d7cc9cb28ce64b715f1c0190aa051",
-  "originalQualifierGitBlob": "8e1020b02531dc76ec5f59ac4284a2278393a1f5",
+  "originalQualifierGitBlob": "3fdbd0b7382bc07c3c9ca905845dcb824b2a1ae5",
   "originalWorkflowGitBlob": "2c87b2d062d3834e7144255c2db6b5f09d45ca18",
   "artifactMembers": 46,
   "maxArtifactMembers": 64,
@@ -25,16 +25,16 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/FOSS_REUSE_DECISION.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "423e3f18ccf1a3225905ee21f2332752b2be1444",
+      "gitBlob": "d707e8ffe5158e3d31459417dc242a9e0012b235",
       "bytes": 798,
-      "sha256": "dd0e8e797cf2e7cd6353fd5f49a73c3a6a45533fa8075f4b6a083e73812496df"
+      "sha256": "194c3d438ad1412615e6314f9f0e0087f4b24fa3f0e2f6083babd0d2c6db19da"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/README.md",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/README.md",
-      "gitBlob": "78e1acac891bd3f5705f7be9448286f4d823d028",
+      "gitBlob": "966e22328a70fcc4d8d5bb1fa671223eb6094ff7",
       "bytes": 2650,
-      "sha256": "f77c4bb75025af883508c4c7ed05fc88d3bf33e79ac682df05d618d232e4ff62"
+      "sha256": "36eafc4fe29b098815a7929808c1e591399e582fa29177856e45ff744cae3c33"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/THIRD_PARTY_NOTICES.md",
@@ -46,44 +46,44 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/pinned-engine/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/pinned-engine/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "gitBlob": "4a38e39d0755462d40c2b22548b87abde938ea0b",
+      "gitBlob": "73779dee8c80a0913b88fff17637ed3f44b33ea3",
       "bytes": 12355,
-      "sha256": "8133bcf7e9f750c714cdd42784bdf30b60f67dd957b2831cd54cb01c9a2cfc3a"
+      "sha256": "2102795eec6a55c6e7564ada0fa439cdf0d98e4c1fc395b2d5d52e1f88890283"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
-      "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "gitBlob": "78d5fb68f13872164973a8918cc7886c5f548bca",
       "bytes": 10964,
-      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
-      "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "gitBlob": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
       "bytes": 5187,
-      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
+      "sha256": "300a520ec9d273922d1edbdf5442e5faf825c47e8e3df7febf4baa2f39945401"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/pinned-engine/jdk/internal/m3/rewrite/M3ReleaseJepManifestOrderInverseRecipe.java",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/pinned-engine/jdk/internal/m3/rewrite/M3ReleaseJepManifestOrderInverseRecipe.java",
-      "gitBlob": "a74f5f5b4613f993416f546984d97d3d8ba9fab6",
+      "gitBlob": "545de33134475628c894e306748b6c3791d5f579",
       "bytes": 724,
-      "sha256": "fddbd1f2b88dd616b2583fb50a3347648e0df74739b0ee928905a38f87ae354f"
+      "sha256": "31b52ad1af995dfe57c380201f6f08ffe3a7a9d2e922b0c8feead0585e1b82cf"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/pinned-engine/jdk/internal/m3/rewrite/M3ReleaseJepManifestOrderRecipe.java",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/pinned-engine/jdk/internal/m3/rewrite/M3ReleaseJepManifestOrderRecipe.java",
-      "gitBlob": "f52ca8c5d158ad9d7850e7d5d10e1b76cf6ffe7f",
+      "gitBlob": "4679c646fe19c51f435b974447e5f67ab15a2150",
       "bytes": 707,
-      "sha256": "7957d18bd3cb1415c198bb19067c48a68b15555b2682a8853baa130a2d7fa32e"
+      "sha256": "0d6fcc637ddef1afc04a5f6a5b2731d07b4e13c6f873a5f71d7515c661ffa604"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/pins.json",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/pins.json",
-      "gitBlob": "5c2f2070058594f176094f9a2d4013dbc40cee53",
+      "gitBlob": "86ff3dd2ca2db065f83607aee0b250bb7c398c53",
       "bytes": 18181,
-      "sha256": "fc683500e489f952024e6715076cc731f594a5821bc4eb26bc6e8053f3ecb528"
+      "sha256": "750dcbcbeb950aca05d620eb05924c3803b8ef6cc2924dfda4ef70f09ab65b6b"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/pom.xml",
@@ -95,30 +95,30 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/main/resources/META-INF/rewrite/release-jep-manifest-order-20261020-inverse.yml",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/src/main/resources/META-INF/rewrite/release-jep-manifest-order-20261020-inverse.yml",
-      "gitBlob": "7df6b334a4159458ff4b3a3ac747bdc256987e6c",
+      "gitBlob": "1d214d79876e78bf77d61252f4aec64dfffd5547",
       "bytes": 477,
-      "sha256": "3a67c2d9ecf76adcefc6f5d45d57a390cdc8b9567e32cf504ba5f4cebc3a710f"
+      "sha256": "9f189d2aa0e2f1cf1f0c74a63c8eebc7a346321d6a67cc8ba1ac743d1a29628e"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/main/resources/META-INF/rewrite/release-jep-manifest-order-20261020.yml",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/src/main/resources/META-INF/rewrite/release-jep-manifest-order-20261020.yml",
-      "gitBlob": "c1abcef077ff235972f4f41b77a75345d91788d1",
+      "gitBlob": "3443becc7bf6142c537f6bc5adbdf9fa5fcc196b",
       "bytes": 460,
-      "sha256": "35bacbafd8feda55871925e8753a8fb5636386dcf3bdbb908e4f66bdaa3ac708"
+      "sha256": "fe8d13d0185a922ec243c3019da04d63278a21a8c663c1fa5a2248e65e89c267"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/before/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/before/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
-      "gitBlob": "5eaf5599990711619e8f9669687c7313ea6ffb0e",
+      "gitBlob": "3ade13f02591c33ee106db4b9295c7f663d35eab",
       "bytes": 1966,
-      "sha256": "cc775d76fdcf53442c69ccd83558d498a53a6f0e78893bee851660612370f789"
+      "sha256": "fca288fddb97ea486df2f21d6601848dad6df016aae0bd53c291d16e8181efd3"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/inverse/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/inverse/manifest.tsv",
-      "gitBlob": "4086511adab4951ba4404422b62d9a69314ee481",
+      "gitBlob": "06d121b9588b95683d00238d8fe4d24f7876ec10",
       "bytes": 426,
-      "sha256": "b14e152448b19ecb25ad3563f5d467de2dd10644d0d25f7c5a32652268ba242e"
+      "sha256": "1febdb3ec08af0e53b32dd509124f52bd3f354c4bcfe9b15acc9bff503fb2762"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/inverse/manifest.tsv.license",
@@ -130,16 +130,16 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/inverse/out/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/inverse/out/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
-      "gitBlob": "5eaf5599990711619e8f9669687c7313ea6ffb0e",
+      "gitBlob": "3ade13f02591c33ee106db4b9295c7f663d35eab",
       "bytes": 1966,
-      "sha256": "cc775d76fdcf53442c69ccd83558d498a53a6f0e78893bee851660612370f789"
+      "sha256": "fca288fddb97ea486df2f21d6601848dad6df016aae0bd53c291d16e8181efd3"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/manifest.tsv",
-      "gitBlob": "668e6dd96fe2a7279b308ad93d9d13062cc5aadb",
+      "gitBlob": "74eb3a1af01a07099c9140436f824fb6878193db",
       "bytes": 426,
-      "sha256": "3ff1405843a6647c26b036dcfcc5b865820347cd089055821945413a1f74b322"
+      "sha256": "5e77250c63b6d7948cc5223040856e3fce32345c64217283e2b5b1d8d58383c2"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/manifest.tsv.license",
@@ -151,16 +151,16 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/out/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/out/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
-      "gitBlob": "bbac4e6c96ecb437d8599f2e73f3724d3dda7e26",
+      "gitBlob": "e6619802dd58542168f500b625cee6dc1485d018",
       "bytes": 1966,
-      "sha256": "ce113825c8e34a7379f65da06d9e203a84666d85051acc2fe1fec672d8374aa9"
+      "sha256": "bfec24cb63b353c5dbbc72ef14f7820f8ce315d244bff3a714a21232f6bff803"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/test/java/jdk/internal/m3/rewrite/M3ReleaseJepManifestOrderRecipeTest.java",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/src/test/java/jdk/internal/m3/rewrite/M3ReleaseJepManifestOrderRecipeTest.java",
-      "gitBlob": "c78c491b3ea5d711f2049e5efb01b6d069ea0669",
+      "gitBlob": "9f7b4f710305fb3d28cf135d0a27540b75f6611c",
       "bytes": 19734,
-      "sha256": "0fd2d6307eda02288c255a2573bf0afc696cffb3b1ce107537a654a2181cb023"
+      "sha256": "ba88d39e7162fa1e743d81515ddb8b14feb9e905df105877f7972df3937dd4b5"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-original-order/00-JEP_CATALOGUE.tsv.txt",
@@ -193,16 +193,16 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-original-order/10-JEP_RESIDUE_QUEUE.tsv.txt",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-original-order/10-JEP_RESIDUE_QUEUE.tsv.txt",
-      "gitBlob": "b80be09eef3cdc2474ac69a8013f821087a6e410",
+      "gitBlob": "ec6f9d3df12b09b70560feda0133f49610c61910",
       "bytes": 7580,
-      "sha256": "f1b09adeab65d6a20673e7c9d5ef94d601cf4dc1371e762f408c9fcae97d9c0c"
+      "sha256": "88072731bdd083821149164a9f749312a6909c77d0bbeddae535548cccdd50c7"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-original-order/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-original-order/manifest.tsv",
-      "gitBlob": "5eaf5599990711619e8f9669687c7313ea6ffb0e",
+      "gitBlob": "3ade13f02591c33ee106db4b9295c7f663d35eab",
       "bytes": 1966,
-      "sha256": "cc775d76fdcf53442c69ccd83558d498a53a6f0e78893bee851660612370f789"
+      "sha256": "fca288fddb97ea486df2f21d6601848dad6df016aae0bd53c291d16e8181efd3"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/00-JEP_CATALOGUE.tsv.txt",
@@ -277,9 +277,9 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/10-JEP_RESIDUE_QUEUE.tsv.txt",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/10-JEP_RESIDUE_QUEUE.tsv.txt",
-      "gitBlob": "b80be09eef3cdc2474ac69a8013f821087a6e410",
+      "gitBlob": "ec6f9d3df12b09b70560feda0133f49610c61910",
       "bytes": 7580,
-      "sha256": "f1b09adeab65d6a20673e7c9d5ef94d601cf4dc1371e762f408c9fcae97d9c0c"
+      "sha256": "88072731bdd083821149164a9f749312a6909c77d0bbeddae535548cccdd50c7"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/before-00-JEP_CATALOGUE.tsv.txt",
@@ -333,16 +333,16 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/before-10-JEP_RESIDUE_QUEUE.tsv.txt",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/before-10-JEP_RESIDUE_QUEUE.tsv.txt",
-      "gitBlob": "724aecf6723dc9b872aef4d46413b832206a9d2d",
+      "gitBlob": "0c60e009c384cece3ee51be9650253629d73798e",
       "bytes": 6956,
-      "sha256": "273ebf9f5fab37c4677fdc6be6a2f537f0b6db290a029130a6327c7c21645f91"
+      "sha256": "8b95bbe17da62e4e8694dae50e3c56792a1a468e38bae78d73444329b9218dc9"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
-      "gitBlob": "bbac4e6c96ecb437d8599f2e73f3724d3dda7e26",
+      "gitBlob": "e6619802dd58542168f500b625cee6dc1485d018",
       "bytes": 1966,
-      "sha256": "ce113825c8e34a7379f65da06d9e203a84666d85051acc2fe1fec672d8374aa9"
+      "sha256": "bfec24cb63b353c5dbbc72ef14f7820f8ce315d244bff3a714a21232f6bff803"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-row8-order/00-JEP_CATALOGUE.tsv.txt",
@@ -389,72 +389,72 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-row8-order/10-JEP_RESIDUE_QUEUE.tsv.txt",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-row8-order/10-JEP_RESIDUE_QUEUE.tsv.txt",
-      "gitBlob": "b80be09eef3cdc2474ac69a8013f821087a6e410",
+      "gitBlob": "ec6f9d3df12b09b70560feda0133f49610c61910",
       "bytes": 7580,
-      "sha256": "f1b09adeab65d6a20673e7c9d5ef94d601cf4dc1371e762f408c9fcae97d9c0c"
+      "sha256": "88072731bdd083821149164a9f749312a6909c77d0bbeddae535548cccdd50c7"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-row8-order/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/src/test/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-row8-order/manifest.tsv",
-      "gitBlob": "21c3b23ca798df1828b9753c6c45e580ec1aceb4",
+      "gitBlob": "995c5eeaa2c2937a2ecd253bdd5bac9063af090c",
       "bytes": 1966,
-      "sha256": "e3f120bc7d6d3c3c803f1b607236a6be013a9ff324839d89d1069bb7bc9feae6"
+      "sha256": "d999bd7b6472bf879ef22bfb36a34f67c67db3cdf115fb284167aee560241dd2"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/test/resources/frozen/M3Jdk21HashPinnedTextSnapshotRecipeTest.java.txt",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/src/test/resources/frozen/M3Jdk21HashPinnedTextSnapshotRecipeTest.java.txt",
-      "gitBlob": "1223036479ba04515e21b6a6087d832e6f7f9394",
+      "gitBlob": "3ba1c6924668d068c47f7608aa63dfa082b8c96a",
       "bytes": 3810,
-      "sha256": "94a0c919b54bdf90ca736602a3222589a20f354ad3df0f4457db234fd65483d7"
+      "sha256": "e2dc42cf574c20f1a2b31b32ec2ed766176358d682fbd09cea27c2fdb98b7b90"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/test/resources/frozen/M3ReleaseJepAuthorityRepairRecipe.java.txt",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/src/test/resources/frozen/M3ReleaseJepAuthorityRepairRecipe.java.txt",
-      "gitBlob": "8e40addc386c60a9430f06ebb05345a2be8a6598",
+      "gitBlob": "dfb78083265f32c6e9ebc57f4302f3ef6d6ce274",
       "bytes": 1133,
-      "sha256": "48d25d62c74f52b919e65ed287116df8f1a1541807ce3b22b0473712dfaaeec9"
+      "sha256": "ae7cf0f97e80fb0a5f5f1d69d08c8507f611542235faf1cfcd7ccef6217cece2"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/src/test/resources/frozen/M3ReleaseJepAuthorityRepairRecipeTest.java.txt",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/src/test/resources/frozen/M3ReleaseJepAuthorityRepairRecipeTest.java.txt",
-      "gitBlob": "dfdd797de55426f5e93d64c324ccccb0967c04de",
+      "gitBlob": "9f4f4288c1a0e19b0b6cd3e48c1442263a64a17a",
       "bytes": 8082,
-      "sha256": "7c2dff8bcad431d8c993c1533cf3a04ac7c935c10152503ba835034d3684ddc5"
+      "sha256": "57f474a72cf38131731b1fbf849656802ed40937c7f26467c2833d0e7e27cd72"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/support/owned_state_relation_verify.py",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/support/owned_state_relation_verify.py",
-      "gitBlob": "0c2507d78817184e9df3c367390f2ac02bc870cc",
+      "gitBlob": "b3622db6ed4e40d59aa6620394592f7748b68781",
       "bytes": 24947,
-      "sha256": "3239415c925da1c83c4d868f1d96893d345f388e183037fb8ee7d85df4da3136"
+      "sha256": "d6db70957a57c6ee498965b483d94e097cbba4929893cb4a0ef9bc70c07c2488"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/manifest-sdk/verify.py",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/manifest-sdk/verify.py",
-      "gitBlob": "772f7e11b3a897d9d761c9104652c0fe4ed1c096",
+      "gitBlob": "42c40495e66cc1d33718bc58c1b6b4d83906363a",
       "bytes": 20582,
-      "sha256": "686678279eede4a7e3ba57af93d4d59ff0da2ad93743ccb24046a538b3c42ba3"
+      "sha256": "f7c06780d8aacd287c5322068d881bb2cd31d41dc9c9e34613ca67329adeaf1c"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/qualify.py",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/hosted/qualify.py",
-      "gitBlob": "5976818ff3246d82f5ffccc92cd87202b989f527",
+      "gitBlob": "5db558dd49d11c966e7d7fe1b5c87b57963fac9a",
       "bytes": 19506,
-      "sha256": "a2acd89878eed54e54c176f0da9a11fb4bef7744d7c051df93fcefda4e310862"
+      "sha256": "2eced8dbaa8e7eb9a20dbebb662e0232613557b7fac8a57a45e9a7c25ef8f488"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/FOSS_REUSE_DECISION.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "dc3e1b4041fcda7bd5fcc457fbf6a51b02f4d7ee",
+      "gitBlob": "ce3e0762c4820edb29b5b08e5e0a7abcf49b24fc",
       "bytes": 898,
-      "sha256": "5520a5e9fab3c0143bc5065ce208df0d04a8e751633e5fbf61e78eb33a50d1bf"
+      "sha256": "331fd5d33a59fffbea066c0adbcc67f18f98c702230e67ab2e9459c8d7393d87"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/README.md",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/README.md",
-      "gitBlob": "e01389177318ddd06c509a05bb01b19f2ff5cec7",
+      "gitBlob": "396c1cda287d1e6e0cb5ef134c39f7d63ae546fb",
       "bytes": 4604,
-      "sha256": "cb3d9b11c9633a772ae22c788a87bb1b1a70e03865e6d9dd77b5d88706347323"
+      "sha256": "99b52c8be514fcca76f143e1c07c9e7d8a693f08a621bbe03c39d6694e7b97fc"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/THIRD_PARTY_NOTICES.md",
@@ -466,37 +466,37 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/pinned-engine/jdk/internal/m3/rewrite/M3CanonicalScopeBoundaryInverseRecipe.java",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/pinned-engine/jdk/internal/m3/rewrite/M3CanonicalScopeBoundaryInverseRecipe.java",
-      "gitBlob": "7071ddc2f287e8e450c1ce7cabeba87e5d463da5",
+      "gitBlob": "31d5c785c726f6788cea58c8acc3c3672ddcd8ef",
       "bytes": 702,
-      "sha256": "017c3a2909d330b2ce760d330aa0e456033208aff5a7ddec996faed12d90c509"
+      "sha256": "16ac75e05658f7490c5c166ac5bbd3833e5425cec63f2e7566b6fcb771985de5"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/pinned-engine/jdk/internal/m3/rewrite/M3CanonicalScopeBoundaryRecipe.java",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/pinned-engine/jdk/internal/m3/rewrite/M3CanonicalScopeBoundaryRecipe.java",
-      "gitBlob": "adcfe7ae35f171923f088df655c253b6c6379a46",
+      "gitBlob": "335e0da907c6a42304812be2bd825ccc3c33f59e",
       "bytes": 690,
-      "sha256": "61ee3731aa6e240b4e638bfd4a9816a36403683f6320754a41e3ef9f21e20b81"
+      "sha256": "79e722442669cff96f872bffc5dd236e1bd4943c283e660637012ea7231ca3f1"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
-      "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "gitBlob": "78d5fb68f13872164973a8918cc7886c5f548bca",
       "bytes": 10964,
-      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
-      "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "gitBlob": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
       "bytes": 5187,
-      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
+      "sha256": "300a520ec9d273922d1edbdf5442e5faf825c47e8e3df7febf4baa2f39945401"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/pins.json",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/pins.json",
-      "gitBlob": "7dbc1db51dfc27f7c7043894ae7266880f0c7bcb",
+      "gitBlob": "7cfd52c8d0745eb6497fe0fbc417db9825d3247d",
       "bytes": 6691,
-      "sha256": "64590a0a79f01284e5b21f04f2276733d5750d7c74b41c45a99edaf335d099cc"
+      "sha256": "92e60a367e47a9d6f54135d638528ac6512fd5b1e0fae892a0e71f783d718c52"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/pom.xml",
@@ -508,16 +508,16 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/main/resources/META-INF/rewrite/canonical-scope-boundary-20261020-inverse.yml",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/src/main/resources/META-INF/rewrite/canonical-scope-boundary-20261020-inverse.yml",
-      "gitBlob": "d95f91774a11bbc6440c77194f5185e790ba59dd",
+      "gitBlob": "c356a5847a9fbceb66beb716e4f46a73811d5cbc",
       "bytes": 430,
-      "sha256": "0bf4d59620ca95f6b6192e791810d7a81f3f269a6a51f271f96412b46aa74486"
+      "sha256": "567b9ae2b88bf8e9d677b367eca0cd923507a135f179ba682fb6a47faf0bf082"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/main/resources/META-INF/rewrite/canonical-scope-boundary-20261020.yml",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/src/main/resources/META-INF/rewrite/canonical-scope-boundary-20261020.yml",
-      "gitBlob": "8b900c17d3bdaaeb1f60d8dde3ab4c7c66571c0f",
+      "gitBlob": "451b4802fadecbf4a83b922d5bd021adbe6bf69b",
       "bytes": 418,
-      "sha256": "4701bbfbcc380a6169505987e892cf319956d648e8e2374805b93043e080a3e3"
+      "sha256": "ad8a32d3bece1d77d5e8b4d32e75df7966fb29df75b12c5c43d2d7056df8573d"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/before/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java",
@@ -529,30 +529,30 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/before/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/before/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
-      "gitBlob": "9174dd681f0d75b5086fc19904a71524a03972dc",
+      "gitBlob": "d41d6dc93ec0e176f6d215d23e3b6a316a9e4a32",
       "bytes": 8268,
-      "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579"
+      "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/inverse/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/inverse/manifest.tsv",
-      "gitBlob": "917f9b251f75f1bcba03b3c86e2a36fb26a5b749",
+      "gitBlob": "d156e1c18360bedca6188d736d1716ab6cb5554e",
       "bytes": 516,
-      "sha256": "88a922854f807a8c577ae4924cb97aebc5b9ac33a6f7498f06414f97cca548f5"
+      "sha256": "e27ea3c529ec2e126828bd5879cfa55f09f345a53544579ff74eb292cb683332"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/inverse/out/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/inverse/out/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
-      "gitBlob": "9174dd681f0d75b5086fc19904a71524a03972dc",
+      "gitBlob": "d41d6dc93ec0e176f6d215d23e3b6a316a9e4a32",
       "bytes": 8268,
-      "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579"
+      "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/manifest.tsv",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/manifest.tsv",
-      "gitBlob": "469219da5424cdbb74e6f00bfd3502b4bceb9b7b",
+      "gitBlob": "5809befb48c519ae58bfcdc68ea22889762a85f0",
       "bytes": 516,
-      "sha256": "b60d40fc62a17b7d390bd41ca845db9e4ed3f50eb1596bed1a81977f24192826"
+      "sha256": "2bd1472f0de25ac41dea86806a0c7708d077ce8191aa94748103f7af60d12b68"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/out/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java",
@@ -564,16 +564,16 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/out/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/out/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
-      "gitBlob": "8b7d2adb648d98ef8654e5ab4eb0f03560a982c8",
+      "gitBlob": "e9a997b3d7293460d8dae8471aefa4d964edeee3",
       "bytes": 9179,
-      "sha256": "e95b11ebad61c551bc25df3276fa560a613d476bcee2d865ac272bd35bdade9d"
+      "sha256": "858e5b5e05b8e3fea57eb30128a2265d0ca3403fa98d44a35addef73c582b078"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/test/java/jdk/internal/m3/rewrite/M3CanonicalScopeBoundaryRecipeTest.java",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/src/test/java/jdk/internal/m3/rewrite/M3CanonicalScopeBoundaryRecipeTest.java",
-      "gitBlob": "9a0d570c30dd9d0df17d700f7c1efafba61cc8d8",
+      "gitBlob": "7133de5281428f39905bc5f204aa62d1e3e20385",
       "bytes": 25457,
-      "sha256": "a0544889320689f8423779839d4d62f9d8b1f05b4e02602f277e8db27c9462c6"
+      "sha256": "598b3dfc9318dbf4a2788119d590fe7fd11148e9f276c16286cabe27f9b55ec0"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/test/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/divergent/M3ScopeInference.java.txt",
@@ -585,16 +585,16 @@
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/src/test/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/historical/M3ScopeInference.java.txt",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/src/test/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/historical/M3ScopeInference.java.txt",
-      "gitBlob": "2768fe5846c2c67c52e872a97f735a0fb4d0d69a",
+      "gitBlob": "a993ed2192188729cefeb45d6bcb5e49594e19b0",
       "bytes": 6528,
-      "sha256": "ff929c5e4b4ad7a579b69034479294f37a3cbaac36127b6524d02f60049c068d"
+      "sha256": "ae8457cdcd062c18b657af499773a9aa870c12c68d5fe19aefebcd85da422200"
     },
     {
       "targetPath": "m3/tooling/hash-pinned-target-paths/authority-conformance/scope-sdk/verify.py",
       "sourcePath": "m3-openrewrite-recipes/tasks/recipe-authority-conformance-20261020/scope-sdk/verify.py",
-      "gitBlob": "ded464e1f4618d19d0ac76f78ab36707fc4aca7f",
+      "gitBlob": "e6b55bf76ae197e64e54884301d67227a0b09da1",
       "bytes": 26196,
-      "sha256": "be7abdb9750e0614e17b62469c4b4e6323551fde298329c22f111bcc5b4b3647"
+      "sha256": "33812d4f96bfe649fa995cf2e1959fe0d122b751bfc313f5dfb930aeec0fb71f"
     }
   ],
   "sdkClosures": {
@@ -605,9 +605,9 @@
       "sdkFiles": 22,
       "inputPins": {
         "path": "scope-sdk/pins.json",
-        "gitBlob": "7dbc1db51dfc27f7c7043894ae7266880f0c7bcb",
+        "gitBlob": "7cfd52c8d0745eb6497fe0fbc417db9825d3247d",
         "bytes": 6691,
-        "sha256": "64590a0a79f01284e5b21f04f2276733d5750d7c74b41c45a99edaf335d099cc"
+        "sha256": "92e60a367e47a9d6f54135d638528ac6512fd5b1e0fae892a0e71f783d718c52"
       },
       "suites": {
         "jdk.internal.m3.rewrite.M3CanonicalScopeBoundaryRecipeTest": [
@@ -633,9 +633,9 @@
       "sdkFiles": 59,
       "inputPins": {
         "path": "manifest-sdk/pins.json",
-        "gitBlob": "5c2f2070058594f176094f9a2d4013dbc40cee53",
+        "gitBlob": "86ff3dd2ca2db065f83607aee0b250bb7c398c53",
         "bytes": 18181,
-        "sha256": "fc683500e489f952024e6715076cc731f594a5821bc4eb26bc6e8053f3ecb528"
+        "sha256": "750dcbcbeb950aca05d620eb05924c3803b8ef6cc2924dfda4ef70f09ab65b6b"
       },
       "suites": {
         "jdk.internal.m3.rewrite.M3ReleaseJepManifestOrderRecipeTest": [

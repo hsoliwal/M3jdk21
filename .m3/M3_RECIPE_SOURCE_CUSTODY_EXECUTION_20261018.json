@@ -70,15 +70,15 @@
   "execution_scope": "CANONICAL_MAVEN_KERNEL_CONTROL_AND_CUSTODY_BINDING",
   "packet": {
     "base_sha": "275b610f26c191cd70420172ac65b634a8a4df49",
-    "manifest_sha256": "82b9e4a820e6608b43b91db305f5cf739b31bc9f79ebb191d6554e4e425a159d",
-    "manifest_git_blob": "379042cc8a9a173a667bc4dd3cc0a5e416e51a9a",
+    "manifest_sha256": "c861a670672475ba7ae704c4e700d65e93fa07c48cb7981fb51f236701c50d2a",
+    "manifest_git_blob": "d6545a7baf59b0b6078f0de3fa4ace7d202b6fbd",
     "public_mirror": ".m3/recipe-source-custody-20261018/binding",
     "targets": [
       {
         "path": "m3/compatibility/m3-recipe-home-pin.tsv",
-        "before_sha256": "ab8e54e22ad813694a7b0299c4c5a758fbe6ef449a89d90801934b344b156e25",
+        "before_sha256": "fa40ccd547a93da26d1de01a0655fd2daa9384fc09816b363812dd8cdea3aeca",
         "after_sha256": "6675f11687f8db693b739852937e843a78a7576c1f859383e53423bc851ce07a",
-        "before_git_blob": "6af082ed18c3d55ee4ada3e94640d94a6bc09350",
+        "before_git_blob": "770a41b27bd58da5f849e3c359fe4ee077f55c13",
         "after_git_blob": "9cc1e621b00e74fa052347659b91b9e665831527",
         "mode": "100644",
         "resource": "payloads/000.txt",
@@ -87,9 +87,9 @@
       },
       {
         "path": "m3/m3-import/current-recipe-home/README.md",
-        "before_sha256": "1401189c9b07449edbd8eb971f4a2a7e08cd612e065f3a82735a95e3602a06eb",
+        "before_sha256": "6b1eab2007b7ac5d4bc5a7ae0e110bfe9f26f2eb481ff2aae1be4e43fb2406ef",
         "after_sha256": "93602454db211f13f48a9ff0b20023325c3ce7a94e4bf74a751a8d2c6b41ed32",
-        "before_git_blob": "5c5674e0d416a1db44f71fc9c5e446f5f16d6b88",
+        "before_git_blob": "fcb6403c8ab7b756f66d1cb9d20366fd60e37f21",
         "after_git_blob": "6891a83032508a8487fd23b8d65d73b7dea2591d",
         "mode": "100644",
         "resource": "payloads/001.txt",
@@ -98,9 +98,9 @@
       },
       {
         "path": "m3/docs/m3-public-fork-recipe-intake-20261017.md",
-        "before_sha256": "fb029fa9d1bc41b91867fde106a4342e8c2514d3c2dc8ebcf85466c8137ed0c1",
+        "before_sha256": "cd9eb627b516831349cf5d4d95b13b0872df2c74c0fc39a12cdd1525068e00f8",
         "after_sha256": "4dc6f12a66d719fb6b7ca23d8b19d059a611718a5ba663488949bc97da3140bf",
-        "before_git_blob": "4562232adf5c315d989b5827bb127efdaef04705",
+        "before_git_blob": "9f33db32a6419242b1fdb310599e6bff3c137e4c",
         "after_git_blob": "1582474d3519fd14ef00fe16127b78dde328625f",
         "mode": "100644",
         "resource": "payloads/002.txt",
@@ -110,9 +110,9 @@
       {
         "path": ".m3/M3_RECIPE_SOURCE_CUSTODY_20261018.json",
         "before_sha256": "ABSENT",
-        "after_sha256": "676b212166927c4d9a4db7c980d194008fe13465c6dccab9054ff352c943341e",
+        "after_sha256": "af474dd9e5f12e0870de7a6a00a57048d2efc5b1e6fb8bab36e718f12df0e4be",
         "before_git_blob": null,
-        "after_git_blob": "c4e9e8e647eec5338f60e78e5cc13354b7a866e7",
+        "after_git_blob": "4c95b1efc75db51a61bb5417444c7a0589408dfb",
         "mode": "100644",
         "resource": "payloads/003.txt",
         "bytes": 8456,
@@ -140,11 +140,11 @@
       "finished_at_utc": "2026-10-18T08:01:17.601988+00:00",
       "exit_code": 0,
       "log": ".m3/recipe-source-custody-20261018/logs/binding/plan.log",
-      "log_sha256": "dac109ade515c7be0abb0a37ca9b78740cf26e0aae1d10a89bbd25d39a6dd3b8",
+      "log_sha256": "b847386c80a6455181173ea354e90a9a7c8a51fad829532eba5e41f0fd62d371",
       "expected_changes": 4,
       "report": [
         "275b610f26c191cd70420172ac65b634a8a4df49",
-        "82b9e4a820e6608b43b91db305f5cf739b31bc9f79ebb191d6554e4e425a159d",
+        "c861a670672475ba7ae704c4e700d65e93fa07c48cb7981fb51f236701c50d2a",
         "4",
         "false"
       ]
@@ -168,11 +168,11 @@
       "finished_at_utc": "2026-10-18T08:01:22.124883+00:00",
       "exit_code": 0,
       "log": ".m3/recipe-source-custody-20261018/logs/binding/apply.log",
-      "log_sha256": "97476b9a087f5caf63d9e77f8b84918afe72abd7d8666f06b8dadaf0336a5717",
+      "log_sha256": "26e19cfada56fb3a33d579ba0efa4c073c775dbd9b0146349df9a4629890ca26",
       "expected_changes": 4,
       "report": [
         "275b610f26c191cd70420172ac65b634a8a4df49",
-        "82b9e4a820e6608b43b91db305f5cf739b31bc9f79ebb191d6554e4e425a159d",
+        "c861a670672475ba7ae704c4e700d65e93fa07c48cb7981fb51f236701c50d2a",
         "4",
         "true"
       ]
@@ -196,11 +196,11 @@
       "finished_at_utc": "2026-10-18T08:01:24.973537+00:00",
       "exit_code": 0,
       "log": ".m3/recipe-source-custody-20261018/logs/binding/check-1.log",
-      "log_sha256": "6af8477843a114fbfbe5aed92df318c8810677659c4b6243286f885eb75d5fa3",
+      "log_sha256": "f523b537e5a51b5c5c3c64cc2463b75fc3df46eb0cfebed2a86e4f3335600934",
       "expected_changes": 0,
       "report": [
         "275b610f26c191cd70420172ac65b634a8a4df49",
-        "82b9e4a820e6608b43b91db305f5cf739b31bc9f79ebb191d6554e4e425a159d",
+        "c861a670672475ba7ae704c4e700d65e93fa07c48cb7981fb51f236701c50d2a",
         "0",
         "false"
       ]
@@ -224,11 +224,11 @@
       "finished_at_utc": "2026-10-18T08:01:29.925891+00:00",
       "exit_code": 0,
       "log": ".m3/recipe-source-custody-20261018/logs/binding/check-2.log",
-      "log_sha256": "b3ddf56dd3b35752ad441d9e905eec7c5adaf37be0aa5d560f22b3b43bac125c",
+      "log_sha256": "eccc5d7f3ebff67937f1f4ab46eb6b8b1a92230f55aa3e12149c2d86bf797d44",
       "expected_changes": 0,
       "report": [
         "275b610f26c191cd70420172ac65b634a8a4df49",
-        "82b9e4a820e6608b43b91db305f5cf739b31bc9f79ebb191d6554e4e425a159d",
+        "c861a670672475ba7ae704c4e700d65e93fa07c48cb7981fb51f236701c50d2a",
         "0",
         "false"
       ]

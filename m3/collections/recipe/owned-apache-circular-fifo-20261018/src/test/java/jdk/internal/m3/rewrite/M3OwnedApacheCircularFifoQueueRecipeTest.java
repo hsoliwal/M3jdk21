@@ -32,7 +32,7 @@ final class M3OwnedApacheCircularFifoQueueRecipeTest {
     private static final String YAML="/META-INF/rewrite/m3-owned-apache-circular-fifo.yml";
     private static final String NAME="jdk.internal.m3.OwnedApacheCircularFifoQueue20261018";
     private static final String TARGET="m3/collections/implementations/apache-circular-fifo/src/main/java/jdk/m3/collections/apache/M3CircularFifoQueue.java";
-    private static final String AFTER_SHA="5ae11bbc515e745783cbf7d1050e95e2e40c7cd0f61044f8ef0a684a418f3663";
+    private static final String AFTER_SHA="71c4a3a325a99526f67228f6f34429b6f21b27d0bbfa8a5a3e5799442e8e9514";
     private static final int AFTER_BYTES=12743;
     private static final String TEMPLATE="M3CircularFifoQueue.java.txt";
     private static final String UNRELATED="unrelated.txt";

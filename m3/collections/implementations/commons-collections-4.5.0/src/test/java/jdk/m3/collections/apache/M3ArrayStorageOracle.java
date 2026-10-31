@@ -43,10 +43,10 @@ import javax.tools.ToolProvider;
 public final class M3ArrayStorageOracle implements AutoCloseable {
     private static final String PREFIX = "jdk.m3.collections.apache.";
     private static final Map<String, String> SOURCE_HASHES = Map.of(
-            "iterators.IteratorChain", "624429a4181639b0748a9982412c80896ad0ebea17327f6e905d49127977623d",
-            "iterators.UnmodifiableIterator", "de5b36024cbb3b59d504e7095e46b6756f2430b52b267ad34fffbb0a822a999f",
-            "queue.CircularFifoQueue", "e7fabce72003bf25dce273539959baf0ca3ac63a4d9ed4b90cf1d8a864e9403b",
-            "iterators.PermutationIterator", "f7936dd925b1488840671e3e22ee2635d8bc1fdf6f27a66956cfb93bcd59e75b");
+            "iterators.IteratorChain", "a4ff2e871654e2da438b9dadd84bffccc8636d597db9f99cd6558a64bf697a51",
+            "iterators.UnmodifiableIterator", "8f728b1eeaa2fa75240740f533b41724f00f1dbda79fd6aacf3541e20cd6769f",
+            "queue.CircularFifoQueue", "cd875ce591d9fe39ea39ee72cafef8064a66cde0fe9eaad32403accb7e1e216a",
+            "iterators.PermutationIterator", "77e8c550a8e53c08ceaaaab58b27fb97adc9a854db2a710a47eaf416684368be");
 
     private final URLClassLoader loader;
 

@@ -12,8 +12,8 @@ AUDIT = HERE.parents[1]
 ROOT = AUDIT.parent
 COMMIT = "09075810b55229662329a158923287e8a7118f86"
 TREE = "bba8647ea80d1cb4101394b4c0fc5a97f0b8eb52"
-MAP_SHA = "9c96a0f6f7cc0f9b9d3e91fc3a42ef8e4eab212726fccd5e63e483f1acd7dfb1"
-MAP_GIT = "466f7c14d3fbe852bf9e2d1dc3e410e8b38a9ee2"
+MAP_SHA = "12bfa8d328b74ba4de930d993c8194b8db51f3a111617690dff9f1ffebaea1c2"
+MAP_GIT = "6ba02aa22af26a2b4bb4b4890496bd300bc0a9fa"
 MAP = "m3/docs/name-mapping.json"
 
 

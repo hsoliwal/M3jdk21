@@ -34,9 +34,9 @@ separate from CPU/UI-state publication; no GPU change here.
 ### Executed author-side evidence
 - Actual original kernel Git blob: `b4895baf2cf592c35c2281ecc3e52b082d4c290b`.
 - Generated candidate Git blob: `5966bffacc730b3ef7102d615a2331a42ae4a22b`.
-- New original test Git blob: `bff901c3674649d1ad6eacfb8bd5ba1ecc76816d`.
+- New original test Git blob: `2638b251089a1a3452db032de86290298db592f0`.
 - Generated source candidate SHA-256: `5af5cb6fed85fa0803384ec4374be4b96659844bd547788be8805bbfe942635f`.
-- Contract SHA-256: `3a17cb6e0cebabdd77181bf102a558a489642cfc9945b97c6a85950162cc3a25`.
+- Contract SHA-256: `81fa9fc5750b40c9580dad9a3e92632c1e59bb738006a01647b22d91ebe8cd4e`.
 - Strict `javac --release 21 -Xlint:all -Werror` with the original
   `M3MaskViewportNative.java` declaration: PASS.
 - Java differential against incumbent full-window `project`:
@@ -64,8 +64,8 @@ editing product-generated outputs. Preserve historical failure receipts.
 ```sh
 mkdir -p /tmp/m3-page-classes
 javac --release 21 -Xlint:all -Werror -d /tmp/m3-page-classes \
-  m3/collections/src/main/java/com/m3/collections/M3MaskViewportKernel.java \
-  m3/collections/src/main/java/com/m3/collections/M3MaskViewportNative.java \
-  m3/collections/src/test/java/com/m3/collections/M3MaskViewportPageContract.java
+  m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportKernel.java \
+  m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java \
+  m3/collections/src/test/java/jdk/m3/collections/M3MaskViewportPageContract.java
 java -cp /tmp/m3-page-classes com.m3.collections.M3MaskViewportPageContract
 ```

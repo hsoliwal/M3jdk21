@@ -60,8 +60,8 @@ final class M3OwnedGuavaLinkedHashMultisetRecipeTest {
     private static final String NAME = "jdk.internal.m3.OwnedGuavaLinkedHashMultiset20261019";
     private static final String TARGET =
             "m3/collections/implementations/guava-linked-hash-multiset/src/main/java/jdk/m3/collections/guava/M3LinkedHashMultiset.java";
-    private static final String BEFORE_SHA = "8f877a2790654e2781afe9a44384ddee8553e2a04d9b3ed2e12b28ed15bbe945";
-    private static final String AFTER_SHA = "422fe89e873fb08a95b171ef900a416321a77ba84ade5822fd89fb9cc0a02d36";
+    private static final String BEFORE_SHA = "e689253745dccdfeea59b79457e3b3332747e94a3df962d21b440ba79c799eff";
+    private static final String AFTER_SHA = "fa731e07b3201ec6c1be12ac0769c897dac4847814a4a2110443c306c370417c";
     private static final int AFTER_BYTES = 25403;
     private static final String TEMPLATE = "M3LinkedHashMultiset.java.txt";
     private static final String PREIMAGE = "M3LinkedHashMultiset.scaffold.java.txt";

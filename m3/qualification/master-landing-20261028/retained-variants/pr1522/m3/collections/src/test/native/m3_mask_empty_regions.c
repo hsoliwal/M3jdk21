@@ -7,9 +7,9 @@
  * validation, including -Xcheck:jni, remains a separate gate.
  *
  * Baseline owner: m3/collections/src/main/native/collections/m3_index_mask_compactor.c
- * SHA-256: d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef
+ * SHA-256: ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73
  * First-party table pattern: src/test/native/m3_mask_window_regions.c
- * SHA-256: ac09456844268b592475d9da1e6eee6f154e741c893167cf21d675010580deab
+ * SHA-256: 0b56e30eeda0022644fd6dd9448ccc3689aa7f05e515d5a4087dc0ed02fb4ec2
  *
  * At 513 rejected states, all four row selectors must make six state-region
  * reads. The baseline makes three row-region reads; the candidate makes zero.

@@ -3,36 +3,36 @@
   "status": "PASS_EXPANDED_RECIPE_WITH_ROOT_CPU_REVIEW_SCOPE_ASSESSMENT",
   "proof": {
     "path": "PROOF.json",
-    "sha256": "a14670b53b161d6fa2b19194d52876ab670ab7a1768e7a9c6996f1f29f6e1a22"
+    "sha256": "e3b2c1da7f6a8799be41d4e3ca9cd8d5540c791aceb4319d47767d21265f4bd1"
   },
   "completeTemplates": "templates",
   "priorProofUnchanged": {
     "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\PROOF.json",
-    "sha256": "60d21ed0f15f4b91a00f5e13f9075ce4d9277e1f09dbdee0b991b2367e706bd0"
+    "sha256": "f06fcd6b439529d32c28b46b47f9e6b924fe160dd46631a73c28f60f510a38ed"
   },
   "files": [
     {
       "path": "AUTOREVIEW_SCOPE_ASSESSMENT.json",
-      "sha256": "c01defc6a1dd03a6e69d382dfc00f3359ba04b2afd59419a4b47f5a602a99cce",
+      "sha256": "b5bc5c45d96cc72fae6ea0df1f92d167f1e61131da8a08886d553479fd26cfb9",
       "bytes": 2291
     },
     {
       "path": "COMMANDS.json",
-      "sha256": "c66f13f16f5e1fa057e5a0aad64d1d4fb9cc0c91bbc2c86a88d052ef3b0faf32",
+      "sha256": "a9ee278a068c31276c8c1752666d451c1f3c0fe1f8284e32d13e9aa50b79da9c",
       "bytes": 4864
     },
     {
-      "path": "drift-receiver/m3/synexia-import/src/main/java/com/m3/synexia/importer/SynexiaImportPlan.java",
+      "path": "drift-receiver/m3/m3-import/src/main/java/jdk/m3/importer/M3ImportPlan.java",
       "sha256": "27996c430d055bdf5b5ba32c2664b3cc683731a0dd1edf51aca067d876859b82",
       "bytes": 24014
     },
     {
-      "path": "drift-receiver/m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImporterTest.java",
-      "sha256": "d6fa9ecc183eec645bbd1fcc9a8aeff0377e13c165984acd0181fc1ce7bfff75",
+      "path": "drift-receiver/m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java",
+      "sha256": "a80cbea763132ef85559e545f84408deb6767efa66d61d39304a03f94a14face",
       "bytes": 10582
     },
     {
-      "path": "drift-receiver/m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImportPlanTest.java",
+      "path": "drift-receiver/m3/m3-import/src/test/java/jdk/m3/importer/M3ImportPlanTest.java",
       "sha256": "8f0925601dd8308282727acd3a9fbcf1a654fbc0a3af48b9640a11d84755c2e0",
       "bytes": 23442
     },
@@ -48,12 +48,12 @@
     },
     {
       "path": "IMPORTER_FIX_RECIPE_V3.diff",
-      "sha256": "1631ebdeb3b6aa78782c9a8abda60595517edc2eba74d8e7ada3ddce6043b811",
+      "sha256": "d2b79e4436e41a4b364215cfe302f707152b86ba8a5556413de8a22cfbeb4d8e",
       "bytes": 2570
     },
     {
       "path": "INPUT_CUSTODY.json",
-      "sha256": "da6b040008ad14137d6f1b6a8a7f2e99e768d223b9c639d1e512aa2173ff85bc",
+      "sha256": "4709784dba435d183b7fdd9bf3a47d49c177a3975cda6c4f7dd1ae58f4a70f30",
       "bytes": 3412
     },
     {
@@ -63,27 +63,27 @@
     },
     {
       "path": "logs/apply-three-targets.log",
-      "sha256": "8f3158e04afeb6f7e65f94a33034704fcd166a0e350681c57c9db514285ef9a2",
+      "sha256": "c942b3baa5044101c919dedea5f646becb9e80790b11498de04a8cb3fed6d0f2",
       "bytes": 1526
     },
     {
       "path": "logs/fixed-point-three-targets.log",
-      "sha256": "205c176a949e79f500b626e423d7a4fd1b9d1519885702851e458b984b90f139",
+      "sha256": "4ec8fa40307e6b8479bc48a6e030d787f95a61addfc900b90e6545b994148691",
       "bytes": 891
     },
     {
       "path": "logs/input-drift-refusal-three-targets.log",
-      "sha256": "4c82e30a59668414dc938e3f1234f3432a9df0f1cffcb9e33c33895670ffd0d0",
+      "sha256": "6c961033e9a7b3112c86feec32a48bd3da46d27e3436ef64612d179042705a1e",
       "bytes": 4510
     },
     {
       "path": "logs/second-apply-three-targets.log",
-      "sha256": "ab21d23105211f1e74a45567062875c12af0ecee24ceeb24480cfa6250fb894f",
+      "sha256": "8c1c9fab4ab7a364b92e9a84243f1d5b3dbf80c278d40966c0f76e65bec32546",
       "bytes": 890
     },
     {
       "path": "PROOF.json",
-      "sha256": "a14670b53b161d6fa2b19194d52876ab670ab7a1768e7a9c6996f1f29f6e1a22",
+      "sha256": "e3b2c1da7f6a8799be41d4e3ca9cd8d5540c791aceb4319d47767d21265f4bd1",
       "bytes": 2709
     },
     {
@@ -92,17 +92,17 @@
       "bytes": 1391
     },
     {
-      "path": "receiver/m3/synexia-import/src/main/java/com/m3/synexia/importer/SynexiaImportPlan.java",
+      "path": "receiver/m3/m3-import/src/main/java/jdk/m3/importer/M3ImportPlan.java",
       "sha256": "cb8822f92db1c65c695d724013c47225d37b75ed766b2c9d197c562004b4add6",
       "bytes": 24032
     },
     {
-      "path": "receiver/m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImporterTest.java",
-      "sha256": "22442dc8d8fce2b032c6da1261a53bbdbc945afdbcfdf97d940c1da5f4c18ae0",
+      "path": "receiver/m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java",
+      "sha256": "8f9b21d5efc7f7407d8f0dafe24c67d7c5f337310ce2ec5b47d54a4fb130071b",
       "bytes": 10607
     },
     {
-      "path": "receiver/m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImportPlanTest.java",
+      "path": "receiver/m3/m3-import/src/test/java/jdk/m3/importer/M3ImportPlanTest.java",
       "sha256": "a85d673f3a98b22a3a1514f905503037391c4b7686533869c792dcf8faa73e1a",
       "bytes": 23493
     },
@@ -113,7 +113,7 @@
     },
     {
       "path": "SNAPSHOTS.json",
-      "sha256": "21a7f1db0bd5e6853dea7f6df2ec39495933aeee0b9e18525c62637c60199465",
+      "sha256": "87a6f3e3891b5efe92b3f49029b0295858bdf310ecbc7bc2591b12203e75b076",
       "bytes": 5972
     },
     {
@@ -128,7 +128,7 @@
     },
     {
       "path": "templates/m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImporterTest.java.txt",
-      "sha256": "22442dc8d8fce2b032c6da1261a53bbdbc945afdbcfdf97d940c1da5f4c18ae0",
+      "sha256": "8f9b21d5efc7f7407d8f0dafe24c67d7c5f337310ce2ec5b47d54a4fb130071b",
       "bytes": 10607
     },
     {
@@ -138,7 +138,7 @@
     },
     {
       "path": "templates/manifest.tsv",
-      "sha256": "681b23ce93303e8e78dadecd9c9c528fb46c004f328e36c776bf83d08a34ef0a",
+      "sha256": "c7ef63491696cdea7bbb8025b996dd133f0da7ad0eaf0d84e94859e6bdeaf0b1",
       "bytes": 888
     },
     {

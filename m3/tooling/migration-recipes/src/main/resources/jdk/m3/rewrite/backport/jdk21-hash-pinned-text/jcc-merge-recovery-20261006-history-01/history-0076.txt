@@ -72,15 +72,15 @@ def copy_evidence(source: Path, name: str) -> dict:
 
 def main() -> None:
     inventory_path = BASE / "source-binding-review/SOURCE_FIELDS_AND_PROOFS.json"
-    assert digest(inventory_path.read_bytes()) == "b0a1ff2a675017bc4eda2620a031bb963d038c21e10ddacb8f57b1fc51f6188a"
+    assert digest(inventory_path.read_bytes()) == "d4fa5704926ea9becfd7fea3b73928183724b5e63ed1814ac9aa0d4521e7136f"
     inventory = data(inventory_path)
     root_path = BASE / "source-binding-review/root-accounting/ROOT_ACCOUNTING.json"
-    assert digest(root_path.read_bytes()) == "cfe76d41dda4220937086d951a126bf04dec0d282ba088b6de2a6bff33b6e14d"
+    assert digest(root_path.read_bytes()) == "9d393cb0e1154049b8cf5e53ccc6e49b80e7de802a9604de056e2231b1140b25"
     root = data(root_path)
     assert inventory["source_commit"] == root["final_commit"] == SOURCE
     assert inventory["source_root_tree"] == root["final_root_tree"] == SOURCE_TREE
     publication_path = WORK / "publication-current/SOURCE_IMPLEMENTATION_PUBLICATION_VERIFIED.json"
-    assert digest(publication_path.read_bytes()) == "03ba5aa231929079fda7772dc6a798a687ba7486fa81ceacc0723407330f956a"
+    assert digest(publication_path.read_bytes()) == "c6500d09f2056e7ea1dad619cfbae3f8763e39ebdeedd4d63440540a2dd46146"
     publication = data(publication_path)
     assert publication["commit"] == SOURCE and publication["tree"] == SOURCE_TREE
     assert len(publication["tree_entries_verified"]) == 1016 and len(publication["preserved_files_verified"]) == 112

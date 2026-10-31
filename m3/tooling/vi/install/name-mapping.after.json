@@ -18,7 +18,7 @@
         "status": "implemented-tested",
         "reason": "Tested algorithm specialization over existing P0 views, not a complete canonical text-family port.",
         "sources": [{"repo": "hsoliwal/com.synexia", "commit": "73978088621dc70f5021befafa443f7e622b517e", "module": "m3-indexstring", "path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexPrefixZ.java", "symbol": "jdk.internal.m3.indexstring.MIndexPrefixZ", "signatures": ["MIndexPrefixZ analyze(MIndexString)", "MIndexPrefixZ analyze(MIndexString,IProgressMonitor)", "MIndexPrefixZ analyze(MIndexString,long,IProgressMonitor)", "int length()", "int prefixLengthAt(int)", "long similaritySum()", "int longestProperBorderLength()"], "sha256": "d2ccefe7aceb9797913fd1ec9daf5aba976bf4e86aefdbd9decc86d348d2cb56", "git_blob_sha1": "6b0f77329f8b18f44635b48a6d65fdec0b1aa25c", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/pull/7526/head"}],
-        "targets": [{"repo": "hsoliwal/M3jdk21", "commit": "3a8e21dcea32b97e869f3bdbb5817e1f9927ca4f", "module": "m3", "path": "m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java", "symbol": "jdk.m3.algorithm.M3PrefixZ", "signatures": ["M3PrefixZ analyze(M3StringPiece)", "M3PrefixZ analyze(M3StringPiece,long,BooleanSupplier)", "long requiredMetadataPayloadBytes(int)", "int length()", "int prefixLengthAt(int)", "long similaritySum()", "int longestProperBorderLength()", "long metadataPayloadBytes()"], "sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a", "git_blob_sha1": "65f259e23d818b9b35052feff37198f5ddf567b4", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/m3/migration-pass1-prefix-evidence-20261002"}],
+        "targets": [{"repo": "hsoliwal/M3jdk21", "commit": "3a8e21dcea32b97e869f3bdbb5817e1f9927ca4f", "module": "m3", "path": "m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java", "symbol": "jdk.m3.algorithm.M3PrefixZ", "signatures": ["M3PrefixZ analyze(M3StringPiece)", "M3PrefixZ analyze(M3StringPiece,long,BooleanSupplier)", "long requiredMetadataPayloadBytes(int)", "int length()", "int prefixLengthAt(int)", "long similaritySum()", "int longestProperBorderLength()", "long metadataPayloadBytes()"], "sha256": "5f936a3c6e69ca487eff6a0665ada01546750d9d87ce85ee50a337a4236233d0", "git_blob_sha1": "317108234d7692410517731b325f7d28de99354e", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/m3/migration-pass1-prefix-evidence-20261002"}],
         "owner": "jdk.m3.algorithm.M3PrefixZ facts; jdk.m3.text.M3StringPiece remains text owner",
         "identity": {"namespace": "No identity is minted; existing immutable input owner used only during analysis.", "generation": "No input retained by the result; only a private int[] and primitive scalar facts."},
         "contract": {"differences": ["MIndexString/IProgressMonitor API is not replaced. Target accepts existing sealed M3StringPiece and BooleanSupplier.", "No beginTask/worked/done callback adaptation; cancellation also polls the inner equal-prefix scan and thread interruption.", "Source metadata budget counts its ends[] lane; target delegates lookup and counts only int[n] fact payload."], "compatibility_obligations": ["Exact UTF-16 prefix lengths and long similarity sum.", "No text normalization, payload flattening, source-owner replacement or numeric-ID translation.", "A future progress-monitor compatibility adapter requires its own mapping and tests."], "public_surface": ["M3PrefixZ analyze(M3StringPiece)", "M3PrefixZ analyze(M3StringPiece,long,BooleanSupplier)", "long requiredMetadataPayloadBytes(int)", "int length()", "int prefixLengthAt(int)", "long similaritySum()", "int longestProperBorderLength()", "long metadataPayloadBytes()"]},
@@ -38,7 +38,7 @@
         "kind": "dependency-reuse",
         "status": "pending",
         "reason": "Reused unchanged in scoped tests; not promoted to canonical Synexia storage owners.",
-        "sources": [{"repo": "hsoliwal/M3jdk21", "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f", "module": "m3", "path": "m3/core/src/jdk/m3/text/M3StringPiece.java", "symbol": "jdk.m3.text.M3StringPiece", "signatures": [], "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479", "git_blob_sha1": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/master"}, {"repo": "hsoliwal/M3jdk21", "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f", "module": "m3", "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java", "symbol": "jdk.m3.text.JoinedM3StringPiece", "signatures": [], "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb", "git_blob_sha1": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/master"}, {"repo": "hsoliwal/M3jdk21", "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f", "module": "m3", "path": "m3/core/src/jdk/m3/text/LocalM3Arena.java", "symbol": "jdk.m3.text.LocalM3Arena", "signatures": [], "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d", "git_blob_sha1": "d82710cd1a49b54d92afcd74cdd903cd009766ba", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/master"}, {"repo": "hsoliwal/M3jdk21", "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f", "module": "m3", "path": "m3/core/src/jdk/m3/text/LocalM3StringPiece.java", "symbol": "jdk.m3.text.LocalM3StringPiece", "signatures": [], "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51", "git_blob_sha1": "6b745c9472144ad6de01de4d06a533974e558fb1", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/master"}, {"repo": "hsoliwal/M3jdk21", "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f", "module": "m3", "path": "m3/core/src/jdk/m3/text/StorageIdentity.java", "symbol": "jdk.m3.text.StorageIdentity", "signatures": [], "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417", "git_blob_sha1": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/master"}],
+        "sources": [{"repo": "hsoliwal/M3jdk21", "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f", "module": "m3", "path": "m3/core/src/jdk/m3/text/M3StringPiece.java", "symbol": "jdk.m3.text.M3StringPiece", "signatures": [], "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755", "git_blob_sha1": "62506fb9b3cff0e6f24e856648528db58c45b92b", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/master"}, {"repo": "hsoliwal/M3jdk21", "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f", "module": "m3", "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java", "symbol": "jdk.m3.text.JoinedM3StringPiece", "signatures": [], "sha256": "1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7", "git_blob_sha1": "5022e9811ce9391671c794446c7772569cfd369f", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/master"}, {"repo": "hsoliwal/M3jdk21", "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f", "module": "m3", "path": "m3/core/src/jdk/m3/text/LocalM3Arena.java", "symbol": "jdk.m3.text.LocalM3Arena", "signatures": [], "sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4", "git_blob_sha1": "025ce8014cba8a36a9e496bb0a56faef57cf0968", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/master"}, {"repo": "hsoliwal/M3jdk21", "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f", "module": "m3", "path": "m3/core/src/jdk/m3/text/LocalM3StringPiece.java", "symbol": "jdk.m3.text.LocalM3StringPiece", "signatures": [], "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad", "git_blob_sha1": "387ae5e0c656177f1df663fd5029d4b31ba2fa00", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/master"}, {"repo": "hsoliwal/M3jdk21", "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f", "module": "m3", "path": "m3/core/src/jdk/m3/text/StorageIdentity.java", "symbol": "jdk.m3.text.StorageIdentity", "signatures": [], "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354", "git_blob_sha1": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/master"}],
         "targets": [],
         "owner": "Existing jdk.m3.text P0 classes",
         "identity": {"namespace": "Owner-local; no ID translation.", "generation": "Retain owner generation; destination audit pending."},
@@ -59,7 +59,7 @@
         "kind": "pending",
         "status": "pending",
         "reason": "Body inspected: exact UTF-16BE mapped/heap units, mutable admission copies, arbitrary ranges; FrozenBytes dependency and port pending.",
-        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "m3-indexstring", "path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/FrozenChars.java", "symbol": "jdk.internal.m3.indexstring.FrozenChars", "signatures": [], "sha256": null, "git_blob_sha1": "a8f016a1764aea6e970bc60e38f345804e82a84e", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
+        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "m3-indexstring", "path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/FrozenChars.java", "symbol": "jdk.internal.m3.indexstring.FrozenChars", "signatures": [], "sha256": null, "git_blob_sha1": "e7cecf3e32eca949dcf6616455caab6c62fd909d", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
         "targets": [],
         "owner": "jdk.internal.m3.indexstring.FrozenChars",
         "identity": {"namespace": "Owner-local; no ID translation.", "generation": "Retain owner generation; destination audit pending."},
@@ -553,8 +553,8 @@
               "static <T> MIndexVersionTable<T> prepare(List<MIndexString>, Scheme<T>, int, MIndexProgressMonitor)",
               "int[] between(MIndexString, boolean, MIndexString, boolean)"
             ],
-            "sha256": "a6cf406b99ce4064e23de1d9eddeb583b6b0f31f6ae74a06c8f98f8f8b330542",
-            "git_blob_sha1": "1675e6d7e35e3371bce2ba9b53716a00b6fd67da",
+            "sha256": "6f2ba0e4dcf2cd131e4907519b0ba91dabd41d68c5253a16834d9bb37ac160c2",
+            "git_blob_sha1": "e30893f329e957658fb6d408a6d361ce7df6c0d5",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -674,8 +674,8 @@
             "signatures": [
               "MIndexLibraryRelease(MIndexString origin, MIndexString group, MIndexString artifact, MIndexString rawVersion, MIndexString extension, MIndexString classifier, MIndexString contentSha256)"
             ],
-            "sha256": "fb34b0ca5dd91bcc45df89521e934af07139a3630c09b012b19876a0e54be422",
-            "git_blob_sha1": "9df260247ec226392832a01fcb99f6bc56b151c6",
+            "sha256": "b2ac4a895d541380c37f6300e1d4b04d5827db486517159b46744e64ff5acbd9",
+            "git_blob_sha1": "e1ca92f9b8e1134a799903f52b525613bbf25a5f",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -793,8 +793,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.vm.MIndexVmSession"
             ],
-            "sha256": "bdeb857abaa302a40c4f542c23c4629eb0091f04d56d60545d6ca51325ff92a4",
-            "git_blob_sha1": "d2fb810dccd53b5ecccde9063a348199f78e0672",
+            "sha256": "867a9ce0fb71162b38a68bd1e3d12b724bd61b15b844197a3b81f32cb4cc18cf",
+            "git_blob_sha1": "74f0fa06fc5ddb3417efdac3a8282e5f2488f07e",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -903,8 +903,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.vm.MIndexVmPrecomputeKey"
             ],
-            "sha256": "406f451222b1f6e950c28439316fdbcd6e9cfb9463658e1deec85cfe41197f1a",
-            "git_blob_sha1": "fc9aef1cce8e43ca81fd922ca6ea406417b1334b",
+            "sha256": "424e07da19c2218db8a705776ed2884146637d4325921a06c670afe3c96129e7",
+            "git_blob_sha1": "d7eec9579f614ff521683475df3eb5b825159066",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -1014,7 +1014,7 @@
               "jdk.internal.m3.mindex.classindex.MIndexClass"
             ],
             "sha256": null,
-            "git_blob_sha1": "488bfc02c9830b333f45c631a9fa933cec56ea91",
+            "git_blob_sha1": "754a52297ff8c9ce34ffe7c765f8d7c684e693e4",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -1124,7 +1124,7 @@
               "jdk.internal.m3.mindex.classindex.MIndexClassIndex"
             ],
             "sha256": null,
-            "git_blob_sha1": "35632a8688201f2a6849b52e325daa27ae3a7bfe",
+            "git_blob_sha1": "eead494947962c5099c6decfbcf546163249164d",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"

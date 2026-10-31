@@ -23,7 +23,7 @@ NATIVE = "src/java.base/share/native/libjava/M3StateRelation.c"
 HEADER = "src/java.base/share/native/libjava/m3_state_relation.h"
 PROOF = "m3/compatibility/regex-relations-20261014/M3RelationPortProof.java"
 PINNED = {
-    OWNER: "ea904c0962fb976f43b45575f06f46ad198e29a2",
+    OWNER: "30359b57b7b553e78355d3672119c685051ec1da",
     ADAPTER: "780c7887aaa6b0892a76f4eee1dcb17086a60289",
     NATIVE: "610ca8bab47065a49b9b58814d6392a287f4fd8b",
     HEADER: "18a02e228129827da486edc5b316790af6135310",

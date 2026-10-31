@@ -80,7 +80,7 @@
     {
       "path": "work/donors-final/donor_catalogue.json",
       "sha256_before": null,
-      "sha256_after": "b9c144d5eb9be716fd749b6d7cda456e0d40aae6ae423c794ad2ace1a4fe1322",
+      "sha256_after": "669340dc10d5530eba9095d7d81a26265511732eeb27aa5a11252baad60b4754",
       "bytes_after": 51757
     },
     {

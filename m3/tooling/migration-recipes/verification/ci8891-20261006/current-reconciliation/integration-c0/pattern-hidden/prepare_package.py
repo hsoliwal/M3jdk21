@@ -5,7 +5,7 @@ from pathlib import Path
 import argparse,hashlib,json,os,stat
 HERE=Path(__file__).resolve().parent;I=HERE.parent;C=I.parents[1]
 OWNER=C/'m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py'
-OWNER_SHA='89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574'
+OWNER_SHA='93a1c116c197854b0167c172581cd768d0f9098067bf0f1296607ca6ba855556'
 def sha(b):return hashlib.sha256(b).hexdigest()
 def blob(b):return hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()
 def load(p):return json.loads(p.read_bytes())
@@ -201,7 +201,7 @@ for row in semantic_selection['files']:
 semantic_outcome={'status':'ACTUAL_SEMANTIC_TERMINAL_RETAINED','reportedSchema':semantic_body['schema'],'reportedStatus':semantic_body['status'],'terminal':semantic_binding['result'],'prerequisite':semantic_binding,'observedBooleans':semantic_observed,'receipts':semantic_body['receipts'],'evidence':semantic_body['evidence'],'rootReadback':semantic_binding['rootReadback'],'selectionManifest':semantic_selection_pin,'selectionFiles':141,'selectionDispositions':semantic_dispositions,'compiledIdentityOnlyFiles':len(compiled_identities),'bodyRequiredFiles':125,'qualificationNotInferredByPackaging':True,'consumerQualified':False}
 # Bind the exact actual /10 primary STOP, without promoting focused semantic observations.
 receiving_terminal_pin={'path': '/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed/primary-observation-v1/RESULT.json', 'sha256': '38b49d749921719b3773eeb8b10da1d0fc0461c3e483bdd7970c95797ab84ede', 'bytes': 83386}
-receiving_selection_pin={'path': '/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed-preparation/receiving-selection-v1/RECEIVING-SELECTION.json', 'sha256': '10a9e36e98f23afcd25e1e4e6fd76593a7a3cf25782d6f8f26c5de36ac4fcf23', 'bytes': 262988}
+receiving_selection_pin={'path': '/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed-preparation/receiving-selection-v1/RECEIVING-SELECTION.json', 'sha256': 'dbb5f1f23284419f47b66af82bce785d9aa722e15634c829c37ecc4bb305589c', 'bytes': 262988}
 terminal=args.receiving_result.resolve();receiving_selection_path=args.receiving_inputs.resolve()
 assert pin(terminal)==receiving_terminal_pin and pin(receiving_selection_path)==receiving_selection_pin
 terminal_body=load(terminal);receiving_selection=load(receiving_selection_path)
@@ -226,7 +226,7 @@ for row in receiving_selection['files']:
  assert path.is_file() and not path.is_symlink() and pin(path)==row
  original(path,'actual-composed-receiving-evidence',row)
 original(receiving_selection_path,'composed-receiving-selection',receiving_selection_pin)
-for row in [{'path': '/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed-preparation/root-receiving-selection-v1/COMMAND.json', 'sha256': 'ce830fd7d46e5d391afed8668f96d26fa0dbb4c9865d019c9c03e711b6532374', 'bytes': 1816}, {'path': '/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed-preparation/root-receiving-selection-v1/RESULT.json', 'sha256': 'b75f3963d269b6baa3c7ef6e516efc57adefbc6ada4fe5638227809c6112a2a6', 'bytes': 874}, {'path': '/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed-preparation/root-receiving-selection-v1/stderr.log', 'sha256': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', 'bytes': 0}, {'path': '/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed-preparation/root-receiving-selection-v1/stdout.log', 'sha256': '9ca8060e6d9bcbe70663c6aa3e2e734a51384e6f44816d164c0eb3804f486aed', 'bytes': 288}]:original(Path(row['path']),'actual-root-receiving-selection-execution',row)
+for row in [{'path': '/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed-preparation/root-receiving-selection-v1/COMMAND.json', 'sha256': '6529a5f5683fe84b9ac2898bb8d0bc604c8528087b6c3ccf75132207e937e811', 'bytes': 1816}, {'path': '/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed-preparation/root-receiving-selection-v1/RESULT.json', 'sha256': '4b2dd0045cfc1d07f1a7fb8b192f17fb0cda0f757580f892b6190ee228abe7c4', 'bytes': 874}, {'path': '/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed-preparation/root-receiving-selection-v1/stderr.log', 'sha256': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', 'bytes': 0}, {'path': '/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed-preparation/root-receiving-selection-v1/stdout.log', 'sha256': '04cdbb4e40f247e145b5efa9ff89ff86cbc9bc78c9d716bad99f2978af13fd96', 'bytes': 288}]:original(Path(row['path']),'actual-root-receiving-selection-execution',row)
 materialization=[]
 for key in ('materializationCommandReceipt','materializationReceipt'):
  row=terminal_body[key];assert row in receiving_selection['files'];materialization.append({'field':key,**row})

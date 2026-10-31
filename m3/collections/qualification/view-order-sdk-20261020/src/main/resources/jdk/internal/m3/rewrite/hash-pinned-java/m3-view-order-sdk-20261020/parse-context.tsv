@@ -1,2 +1,2 @@
-m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java	477135e13481942fef3b95b96a08d39c9c86dd92a649959c6d035b19b5784031	M3IndexMaskCompactor.java.txt
-m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java	7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d	M3LongAddressKernel.java.txt
+m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java	e8b8c5e455d4b46bb85b5c4ee6c8234643ca6e10f8314a468f455a80067a7f7d	M3IndexMaskCompactor.java.txt
+m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java	8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed	M3LongAddressKernel.java.txt

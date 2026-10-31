@@ -1,4 +1,4 @@
 path	sha256	git_blob	mode	pr	note
 m3/collections/interop/README.md	80fb6085b7e8ca8a191cec191f0fa367f8ff15d838065397af0c7941578105c5	52fee040d610e5e34af198a199b75bc13291839d	100644	2051	PR version, not live
-m3/collections/interop/pom.xml	4f069de952d2cbd17319956b6d7d6c744d4902cff3508ad68a4ba9f66efd6d75	5c69aa924060e4cd8ff1138e12b8c4b3fb5c9210	100644	2051	PR version, not live
+m3/collections/interop/pom.xml	f973c88eb69f861f8ed5b81423863d7b9dacc598f3ede9325fded478356cf375	b8a5521262f74b723fa8c42d40c11f2957b8fcd8	100644	2051	PR version, not live
 m3/collections/interop/qualification/PUBLICATION_HOLD_20261027.tsv	588875c96a2e17fd3417dc0f7dfc4c39f476c2cbbb6a521e5634fa1aceed9dd9	8184a355ae5b6f6849c76ef39fde4b1d25340687	100644	2051	PR version, not live

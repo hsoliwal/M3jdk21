@@ -12,9 +12,9 @@
   "file_passes": [
     {
       "path": "m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java",
-      "before_blob": "bf3afd670d77775290c1453bfe1a2142d9d1e644",
-      "before_sha256": "4ff415ed6cc0ece4e30bd17aa3e675c9115f4ac509d8ea93001ccd27c77c3dd7",
-      "after_sha256": "8d6afc24c677adb7ba612071d34453c8a7d8b9e1a81ac27fb06bc3f62c673edd",
+      "before_blob": "87efb25292aa0d6530e30f7e7a45f9bf58baab01",
+      "before_sha256": "58a0b57ea351c00152455f34de9eca170b5f0c571e95055b007045cec9351554",
+      "after_sha256": "87b3f76e04880c80a5bbf31e2cfe66fc7567d9b96ec5139cdf31536442ba58c7",
       "atoms": ["ByteSnapshot.segmentCount", "CharSnapshot.segmentCount", "locate(int[], int)"],
       "locked_contract": [
         "No public method, interface, descriptor field, payload owner or JNI symbol changes.",
@@ -97,7 +97,7 @@
       "disposition": "ADAPT",
       "revision": "e913ab89056657eca4009678cfe9a657c020e79b",
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongSortedSnapshot.java",
-      "blob": "2b58886676ea78db055041290683bebf8714c373",
+      "blob": "762ab5a6698031d7db45a39261a2e98a4880ac10",
       "url": "https://github.com/hsoliwal/M3jdk21/blob/e913ab89056657eca4009678cfe9a657c020e79b/m3/collections/src/main/java/jdk/m3/collections/M3LongSortedSnapshot.java",
       "license": "Apache-2.0",
       "fit": "The target already uses low + ((high-low) >>> 1) and first-greater upperBound; reuse primitive control structure locally without a new module dependency."

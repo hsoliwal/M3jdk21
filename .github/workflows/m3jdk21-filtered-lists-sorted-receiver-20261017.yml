@@ -34,12 +34,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          printf '%s  %s\n' '7a9d818d38beae4df178317f7913050b47d6442e85f1ef5d5873a0df89262101' 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java' | sha256sum -c -
-          printf '%s  %s\n' 'e5addee9657a66a731ca8acf79c0682e96a1ad4d7dbab251f5196ab706b9826a' 'm3/collections/src/test/java/jdk/m3/collections/M3FilteredListsContract.java' | sha256sum -c -
-          printf '%s  %s\n' '3310337caf4552892d3dc8a944e749b479f73c381903565f1322542e192d2b0a' 'm3/collections/src/test/java/jdk/m3/collections/M3FilteredListsEdges.java' | sha256sum -c -
-          printf '%s  %s\n' 'a43047f07d8cf421e286fa511daeb44c6487a89107900843d526ea20bcb6a539' 'm3/collections/src/test/java/jdk/m3/collections/M3FilteredListsSortedInteropTest.java' | sha256sum -c -
-          printf '%s  %s\n' '589a2f683a5465c0491104993a5647fc7f861048b9d1ed50281bd64621ad405c' 'm3/collections/src/test/java/jdk/m3/collections/M3FilteredListsTest.java' | sha256sum -c -
-          printf '%s  %s\n' '37a55f9c6c577984fafb867bf59ea1c210bf835c5cef4d08880da48c0daf7aa6' 'm3/collections/src/test/java/jdk/m3/collections/M3FilteredListsWorkProof.java' | sha256sum -c -
+          printf '%s  %s\n' '12bdc2271eee96fb0d24ec188cbcbe37d6c110bf3bb61682715f1af7d5984333' 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java' | sha256sum -c -
+          printf '%s  %s\n' '4e9fb51a3c6efabff5ec449b8ad1d8403be1e873dfa4b605143954414503b680' 'm3/collections/src/test/java/jdk/m3/collections/M3FilteredListsContract.java' | sha256sum -c -
+          printf '%s  %s\n' '487f96596d4b9b5ba70abc8df3ac8168b89cf72fb7e8d1bdaf2b1b35f3b58876' 'm3/collections/src/test/java/jdk/m3/collections/M3FilteredListsEdges.java' | sha256sum -c -
+          printf '%s  %s\n' '61a51411c54bfdd900ae8cf3541fae1585700ba9b07ac37c2d6f8fc7afb49c76' 'm3/collections/src/test/java/jdk/m3/collections/M3FilteredListsSortedInteropTest.java' | sha256sum -c -
+          printf '%s  %s\n' '48bea47817b3417246cb57b87da288129329da4236cacd3b8474a4fa8c693a36' 'm3/collections/src/test/java/jdk/m3/collections/M3FilteredListsTest.java' | sha256sum -c -
+          printf '%s  %s\n' 'a3a9b7d66ce32d7677f030e43fcde06c399a236b6deae7208cda0158a59e49db' 'm3/collections/src/test/java/jdk/m3/collections/M3FilteredListsWorkProof.java' | sha256sum -c -
           printf '%s  %s\n' 'e75547f2e579ad3c794ea4ef5839afb8b3419af978b971b9da64303c5f97fca5' 'm3/collections/JDK_FAMILY_MAP.tsv' | sha256sum -c -
           printf '%s  %s\n' '320f47e9a8381350cd641a3444119513e5fd32b961369c98338846d7735d03f4' 'm3/collections/name-mapping.json' | sha256sum -c -
           printf '%s  %s\n' 'd28c495a49aea2bb1c1a17376632a610f04da9bcd8214421dd7bb7d982dfb3c0' 'm3/collections/qualification/M3_FILTERED_LISTS_RECEIVING_20261017.md' | sha256sum -c -

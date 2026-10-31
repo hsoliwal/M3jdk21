@@ -35,8 +35,8 @@
     },
     {
       "path": "pinned-engine/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
-      "sha256": "c4bbf3136d36608c80452226f0a59a365a065023b13c34b7ef6ca0dc2ed54e5c",
-      "unchangedGitBlob": "2530c533003a8a17d0e782728d98a4dfebe13651",
+      "sha256": "0c3fba650e4fad90639f38345fcd1c37f0d9b002f2a172d329262db6ecda784b",
+      "unchangedGitBlob": "e7a3c6d89e0fad77e510fdc6d46223211493fd5a",
       "origin": {
         "repository": "hsoliwal/M3jdk21",
         "commit": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
@@ -46,8 +46,8 @@
     },
     {
       "path": "pinned-engine/jdk/internal/m3/rewrite/M3ScopeInference.java",
-      "sha256": "17228a698f917bfabb46f8c4a20b50822820516fbc6e9ad71d52587a1918e730",
-      "unchangedGitBlob": "f6fd8d4a558a6b9b0c78cf4d010e63e3b3e1a9da",
+      "sha256": "af67395b755c045b62a0d5c2ab0f538fe9118461330eb8901c4bcbd60910fae8",
+      "unchangedGitBlob": "a27177a9538c96633424b73dff48fe7f0341a51b",
       "origin": {
         "repository": "hsoliwal/M3jdk21",
         "commit": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
@@ -100,8 +100,8 @@
     },
     {
       "path": "src/main/resources/META-INF/rewrite/m3jdk21-utf8-cursor-20261014.yml",
-      "sha256": "9bf46b491f0fbd7d7a3d4c8dfdbaf84af19c30de969e21e904b1a69314d83705",
-      "unchangedGitBlob": "a1e3eb558d4c5a47208be1941d41251bf0354794",
+      "sha256": "5128e6492fe6cc815a251593a84ee374174b8354f42aecf3894a916cc4261d27",
+      "unchangedGitBlob": "689ebf3b35340fecb9fdc96f6be7a6a5229ab014",
       "origin": {
         "repository": "hsoliwal/com.synexia",
         "commit": "11c94feb18155a53cc213708c353791132edc4a7",
@@ -111,8 +111,8 @@
     },
     {
       "path": "src/test/java/jdk/internal/m3/rewrite/M3Utf8CursorRecipeTest.java",
-      "sha256": "408f5d205697cff156f4908f53c0ee074ee7c60fcb9f4aed9917fd226ab136be",
-      "unchangedGitBlob": "b735eb59bf2b7f6167674d2bf8a345679e55d49f",
+      "sha256": "04e0b803a98c5f0d0362b4b9c4c3cfaf59aa2622297939fb6ed5c6c075c0a185",
+      "unchangedGitBlob": "f05babe49ef04f36fed5f60d79162ab0afedf4f8",
       "origin": {
         "repository": "hsoliwal/com.synexia",
         "commit": "11c94feb18155a53cc213708c353791132edc4a7",
@@ -122,7 +122,7 @@
     },
     {
       "path": "verify.py",
-      "sha256": "24cc0b35ffd000ecc20b90cbf7d565dfecb6792a7baf5945f66c6f3557d48a9c"
+      "sha256": "f8343fc90c8f3ab0dbe836cbc00a92590a6fd5a6ca6e350172cb8ee4685ddb4c"
     }
   ]
 }

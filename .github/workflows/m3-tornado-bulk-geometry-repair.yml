@@ -34,7 +34,7 @@ jobs:
           target=m3/ports/tornadovm-bulk/src/test/java/jdk/m3/tornado/Rv32iBulkExecutorAdapterTest.java
           resource=m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-tornado-geometry-20261013/Rv32iBulkExecutorAdapterTest.java.txt
           cmp "$target" "$resource"
-          printf '%s  %s\n' f0323ce99ce0ad5cab8b94e04252c72970e669f2098c1d8045d7e13693c716ff "$target" | sha256sum --check
+          printf '%s  %s\n' 923a71806dbb8944bac79e323bb07b2fdd58ccdb024948de8a335a14f4e50468 "$target" | sha256sum --check
           ! grep -F 'tornado.supports(task(4, 64))' "$target"
           grep -F 'tornado.supports(task(4, 4))' "$target"
       - name: Compile and execute actual java.base task-geometry contract

@@ -45,8 +45,8 @@
     "candidate_recipe_metadata": {
       "path": "m3-tree-put-validation-20261019/TRANSFORMATION_RECIPE.json",
       "bytes": 1569,
-      "sha256": "6a4de28c20dabe827d03ac9beff123c9070a6d9eeebd614466f386a5df4167fb",
-      "git_blob": "7bf36bd051220f7f2b3561888ce16b378e83831f"
+      "sha256": "647c60cf097114fad90b161bd35bbe853c3b29d634c5ff884b6ca9ddf0fc0ede",
+      "git_blob": "502425e2c7c7f50ffc2ef651d6f630889f5a0fb3"
     },
     "fixtures": {
       "api": {
@@ -58,8 +58,8 @@
       "entry": {
         "path": "eclipse-tree-full-contract-v2-20261018/TreeMapLookupEntryProof.java",
         "bytes": 7389,
-        "sha256": "bb780f79bf22bafb48495014854fed92e9bf75227e756922451ae473bdcfddfa",
-        "git_blob": "a0f5888e747ed40aebc90bd98d80009d39bd620f"
+        "sha256": "943465d49d74a7c79be2234e6bd95705f8ba9235ed0a9c5f85e1bb14698be12a",
+        "git_blob": "0b40434826d6de0184e9adee9c7a74ed8e67db6b"
       },
       "bulk": {
         "path": "m3-tree-map-linear-bulk-load-20261018/proof/M3TreeMapSortedBulkProof.java",
@@ -83,8 +83,8 @@
     "runner": {
       "path": "guava-minmax-priority-queue/public-stage-v1/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/run.py",
       "bytes": 18203,
-      "sha256": "815464a4b2b759a3b7d5e47ca82d6ed6d09fa5eddacb0e24fcf5ee6646796679",
-      "git_blob": "d196b84e01ff375c63e52bd7a05e591797982385"
+      "sha256": "6b92f5ea93886118a809f9a2ea3c95192ed715303fbb845f5dd127b382bfa397",
+      "git_blob": "b32e7cc4a7f99ee410a6d1c60d23a6e8389ab702"
     },
     "classpaths": {
       "v5": {

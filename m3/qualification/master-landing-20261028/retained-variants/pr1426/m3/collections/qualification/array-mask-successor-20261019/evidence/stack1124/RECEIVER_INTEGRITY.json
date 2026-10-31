@@ -52,8 +52,8 @@
   ],
   "actual_sdk_results": true,
   "product_files_written": false,
-  "sdk_inputs_sha256": "9c51524a0cd78c47f3b9f1e97b7d70852530575c4371a924a5b388eda2c3b35d",
-  "sdk_results_sha256": "e7215c4480fa480c10f0a2d795b426f4f14c7598552abb6104e4662ffbcfe65b",
+  "sdk_inputs_sha256": "2f3fbe34e616a304852b58881d236dc22362f6879deed3e4c10b05b0184ab994",
+  "sdk_results_sha256": "d1e513613fcb73c4009e7cce1b80fe0f8a14aba02e1ed81577049f3a01d6fdaa",
   "logs": [
     {
       "path": "apply-exact-sdk.stderr.log",

@@ -25,9 +25,9 @@ public final class M3LongIndexPathJNIRecipe {
         "m3_long_index_path_masks_jni.c"
     };
     private static final String[] HASHES = {
-        "6170e9899132ef746a88c140cebc78cbaf511aea1c797549fab3e2238d4c5a06",
-        "2a095a08f26fa8b5c776c179af65d6d392715d3e0e8f05c7765350da117aa202",
-        "c5971bd4bb6ee01a5385cc9ae22a2d7bc2bedd2163a1e39dd24cf76ec5f5e512"
+        "d82e38a2773b65ea66a534f8ff16f9ec5e65fbcb0aff1c4db163d6c688f0df55",
+        "02a3a0c1b34a4b643f0795614db0c029addb1fd3c3f03047eada8ab47cdc9b02",
+        "95a8ee0c924b570ef19a8403ac9f5ee2d970e9d27d1df562cb87d40b5e5b2ba4"
     };
     private static final String[] TARGETS = {
         "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexPathMasksJNI.java",

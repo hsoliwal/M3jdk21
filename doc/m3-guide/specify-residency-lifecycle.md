@@ -365,10 +365,10 @@ resource disposal and actual retained-heap/native-memory costs.
 | Source | Git blob at the pinned revision |
 | --- | --- |
 | [M3ObjectResidency.java][arena] | `0281f85fe543bee202632cae5cf79b536b2a1d70` |
-| [M3Residency.java][annotation] | `34c18f45632096c3bd4f0df199fe99a1a59c2f16` |
-| [M3ObjectResidencyTest.java][test] | `0deb35e3e8b8a8e44b94b3aab03cac0085dd4c07` |
-| [M3ObjectResidencyRuntimePressureTest.java][heap-test] | `19cad07982d1a1222f52cc61fd2168e50ce1f55b` |
-| [M3ResidencyPressureProbe.java][probe] | `0b5b432b8646194f389a1494267e4e9242412a57` |
+| [M3Residency.java][annotation] | `bdc8ad0d22a3c4522532b1678f0a35c0f068ea40` |
+| [M3ObjectResidencyTest.java][test] | `488491cc9bda8afc4a95862199e3047d8f0e5d66` |
+| [M3ObjectResidencyRuntimePressureTest.java][heap-test] | `4854ba435a7dddc2901ca74217cfd4f110e8c7c7` |
+| [M3ResidencyPressureProbe.java][probe] | `e0b3d6219c24cf0cbaa9146b742f0a01820211d4` |
 | [Pressure workflow][workflow] | `e57eaacbc57ddeee0344b689f573144c66be470a` |
 
 Only the arena and annotation count as new primary-owner documentation. Nested
@@ -376,10 +376,10 @@ interfaces/records/enums/exceptions, private helpers, fields, complete tests and
 caller/build bodies were inspected to establish the bounded reference. That is
 not package, repository, target-runtime or receiving-phase completion.
 
-[arena]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/com/m3/collections/M3ObjectResidency.java
-[annotation]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/com/m3/collections/M3Residency.java
-[test]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/test/java/com/m3/collections/M3ObjectResidencyTest.java
-[heap-test]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/test/java/com/m3/collections/M3ObjectResidencyRuntimePressureTest.java
+[arena]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/jdk/m3/collections/M3ObjectResidency.java
+[annotation]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/main/java/jdk/m3/collections/M3Residency.java
+[test]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/test/java/jdk/m3/collections/M3ObjectResidencyTest.java
+[heap-test]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/collections/src/test/java/jdk/m3/collections/M3ObjectResidencyRuntimePressureTest.java
 [probe]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/tooling/object-residency/M3ResidencyPressureProbe.java
 [workflow]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/.github/workflows/m3-object-residency-pressure.yml
 [design]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/m3/docs/m3-parent-owned-object-residency.md

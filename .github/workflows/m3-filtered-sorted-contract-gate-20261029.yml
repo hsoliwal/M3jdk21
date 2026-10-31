@@ -19,7 +19,7 @@ jobs:
         shell: bash
         run: |
           actual="$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java)"
-          test "$actual" = "102fa70995471fefdd18edb6a58c6a85cf80fdb8"
+          test "$actual" = "519351f238626fbf8a48819693292345174444d4"
       - name: Compile actual owner and standalone contract
         shell: bash
         run: |

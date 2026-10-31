@@ -36,11 +36,11 @@
     {
       "path": "m3/collections/src/test/java/jdk/m3/collections/M3MaskPositionAtomsTest.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "53d22b261f4376f41e735dc5121d3d8f97ee08f4eafdf99e3f615d0330b22548",
-      "after_git_blob": "dca94be95032319e7f029c792e5ecffdc336b404"
+      "after_sha256": "719cf8ac4ac83625d3ca91ccf6af826019d65d80dd4d3020f4865b9fc7bde5bf",
+      "after_git_blob": "d7e14c6af0cc7092cda3c87d0310449324cad028"
     }
   ],
-  "unchanged_java_owner_git_blob": "b81b069fb4815f0c78b17119390d7b204f6179d1",
+  "unchanged_java_owner_git_blob": "945375ce32080537da2b6544d59f537ee8271644",
   "canonical_recipe_sdk_proof_sha256": "8b96ff9f844e6c238d2105c55af7b4c37f4628737e8232ca8115a5942dd14bd0",
   "canonical_two_file_receiver_root": "a9af2623aea50708e6506c43ffb484858d5f1740fa550466ea08307a34c733bf",
   "target_application_receipt": "m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/evidence/copier-apply.receipt.json",
@@ -64,8 +64,8 @@
   "root_mapping_reference": {
     "path": "m3/docs/name-mapping.json",
     "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
-    "git_blob": "a7008bc04536586218da76e823bf570d50cec526",
-    "sha256": "1085c259e66bff017137e0c63bb86fc0b8daf436865f6378075cf4c920035ef4",
+    "git_blob": "499cc323ade938eace0d06275467e4e77de8f106",
+    "sha256": "870bc9346fbfe43d6eb09a3ca5ed1acf831ef303ffa27c5c91ece5b03704bdd6",
     "owner_pointers": [
       "/family_name_mapping/2",
       "/family_name_mapping/3"
@@ -94,23 +94,23 @@
   "baseline_gate_receipt": "baseline-gates/results.json",
   "fresh_target_verification": {
     "path": "m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/evidence/results.json",
-    "sha256": "5190a2bc4245b9d226a5e25c71898dd5a01d420906301ffc8e7df778fe3f06d3"
+    "sha256": "d67054500545a3817a13a17b8e6fbd014f24b447deffebff4ddb37761b5d7fba"
   },
   "fresh_target_commands": {
     "path": "m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/evidence/commands.json",
-    "sha256": "39d5fe9cc00cfae6f95f3d5c944a06c11db628bec9bea46e371f5d4ef50b1315"
+    "sha256": "c5bfede1cc664f0a305875050f0faee0140a93314f4c27effe7d09c28f5065e8"
   },
   "application_receipt_binding": {
     "path": "m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/evidence/copier-apply.receipt.json",
-    "sha256": "d8fca71ffed3794cf9ebd71a505e908852877d9ab963d7a64a5024222a12b3b0"
+    "sha256": "e46808cf267e8fb2c07906048cd921fb4ff47770aa766fe118d1e359b2effa65"
   },
   "replay_receipt_binding": {
     "path": "m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/evidence/copier-replay.receipt.json",
-    "sha256": "2621bfb4966e4ac1ec6a23968672e90334112014409f35bbf215289fa6636f4c"
+    "sha256": "d7ea28db5a539621b07c139b850ca813e501f6a47aa5b7c8850ee1dfcded1ace"
   },
   "readback_receipt_binding": {
     "path": "m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/source-blobs-readback.json",
-    "sha256": "445cffdf6cfe38fd9706a606da1af7ae4ea6fa71e8dbace0577c91fda8e58e12"
+    "sha256": "ff0e4398f57b14631467f6dda26c4dd8de16d885b5ab53f0b27d29565ae2274b"
   },
   "source_postimages": [
     {
@@ -126,8 +126,8 @@
       "repository": "hsoliwal/com.synexia",
       "commit": "ad4ff6084a3b95c9e5dc993eff96efef03ea8f2c",
       "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-mask-native-atoms-runtime-20261021-native-test/M3MaskPositionAtomsTest.java.txt",
-      "sha256": "53d22b261f4376f41e735dc5121d3d8f97ee08f4eafdf99e3f615d0330b22548",
-      "git_blob": "dca94be95032319e7f029c792e5ecffdc336b404",
+      "sha256": "719cf8ac4ac83625d3ca91ccf6af826019d65d80dd4d3020f4865b9fc7bde5bf",
+      "git_blob": "d7e14c6af0cc7092cda3c87d0310449324cad028",
       "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3MaskPositionAtomsTest.java",
       "target_specific_source_adaptations": []
     }
@@ -146,7 +146,7 @@
   },
   "target_verifier": {
     "path": "m3/collections/qualification/m3-mask-native-atoms-runtime-20261021/verification/verify_target_native.py",
-    "sha256": "0e5daf1012d1ac6876846e437dca49a6f7c65519c53dcae75c5da3cd60265cef",
+    "sha256": "6b6bd9bafd1d275fcc13e62320e9788afc197d8f9e56cb7258bf93858017ad52",
     "scope": "Target-specific acceptance driver adapted from canonical emitted-output verification; no new transformation engine",
     "donor": {
       "repository": "hsoliwal/com.synexia",

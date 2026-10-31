@@ -12,9 +12,9 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/FOSS_REUSE_DECISION.tsv",
       "targetPath": "m3/tooling/regex-relations-current-owner/sdk/FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "28e788b70820b352ba3639716c192c0bede329ef",
+      "gitBlob": "f746664c8bef51a843f2119df9359ac574b9fc41",
       "bytes": 6944,
-      "sha256": "5bf13b6073ae652924b2d14674077dff969f72341e3209b9e64ca777b6124258"
+      "sha256": "71ba2d76235a28c81a31d66fe924472a6d1191ae2987bebea736799427525bab"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/THIRD_PARTY_NOTICES.md",
@@ -26,30 +26,30 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
       "targetPath": "m3/tooling/regex-relations-current-owner/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
-      "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "gitBlob": "78d5fb68f13872164973a8918cc7886c5f548bca",
       "bytes": 10964,
-      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
       "targetPath": "m3/tooling/regex-relations-current-owner/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
-      "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "gitBlob": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
       "bytes": 5187,
-      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
+      "sha256": "300a520ec9d273922d1edbdf5442e5faf825c47e8e3df7febf4baa2f39945401"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/pinned-engine/jdk/internal/m3/rewrite/M3RegexRelationsCurrentOwnerRecipe.java",
       "targetPath": "m3/tooling/regex-relations-current-owner/sdk/pinned-engine/jdk/internal/m3/rewrite/M3RegexRelationsCurrentOwnerRecipe.java",
-      "gitBlob": "c82f01cdf2c4524d86161ce3a2cdab68d5b5ad3b",
+      "gitBlob": "12558533f03ad408b570b71fa3da3489196cf41a",
       "bytes": 815,
-      "sha256": "31cf12a75e4ba6fa8a1edbbe18d91a1de255a82a40777bd83459e92b99677022"
+      "sha256": "78e0bc6f658791eaa0022ab382815934a0efc9fd73ee0e5d54fca7633a3aba5f"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/pins.json",
       "targetPath": "m3/tooling/regex-relations-current-owner/sdk/pins.json",
-      "gitBlob": "be67a8b7815abb2174f3d2457032e886b6cc3def",
+      "gitBlob": "a07b9939fa390c130536dfd74d9f974853c5b804",
       "bytes": 5525,
-      "sha256": "efda4774645ac92b7583ef569d4dc21ada3b94cb3871052e95aed2a1ba27de1e"
+      "sha256": "308b2f1d188963d936667877041d8982435b6542b6257693ab54a06bdbc0ad58"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/pom.xml",
@@ -61,9 +61,9 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/META-INF/rewrite/m3-regex-relations-current-owner-20261017.yml",
       "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/META-INF/rewrite/m3-regex-relations-current-owner-20261017.yml",
-      "gitBlob": "622cd1e9d39e7d2724855a148f2a6866ec1c6a26",
+      "gitBlob": "97e07b77e9358e03732b2dae2e3dd5f5035af668",
       "bytes": 360,
-      "sha256": "b17b32aff512f61f78123a97f301c56d325c65b7531d2b68e04d6bffbbc3723f"
+      "sha256": "968d0625c70a9c42e1652ddd3ff3ab2be912ddcaa636f764d0994268e8925fe6"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/before/M3DotStarRelations.java",
@@ -82,9 +82,9 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/before/M3StateRelation.java",
       "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/before/M3StateRelation.java",
-      "gitBlob": "ea904c0962fb976f43b45575f06f46ad198e29a2",
+      "gitBlob": "30359b57b7b553e78355d3672119c685051ec1da",
       "bytes": 2138,
-      "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa"
+      "sha256": "ae1de4b652b474c594d5fa6e8ec2d43aae720d166e885497217688c9fabae49d"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/before/M3StringHierarchicalRegexTest.java",
@@ -103,9 +103,9 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/manifest.tsv",
       "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/manifest.tsv",
-      "gitBlob": "bee28697e6267d75ee0eb7a9c26abd77fbf9a278",
+      "gitBlob": "902ce1e652f3a6ef474c3420ce5285cfbe7986b6",
       "bytes": 1103,
-      "sha256": "e105f9a78f102d42ddee319ef51b1aa78b348af6ae477b136dc60669c1eb396d"
+      "sha256": "6a815fe1045d53af91b012659f1666b01d001e86a2494cc18e4b786d4d855e01"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/out/M3DotStarRelations.java",
@@ -124,9 +124,9 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/out/M3StateRelation.java",
       "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/out/M3StateRelation.java",
-      "gitBlob": "ea904c0962fb976f43b45575f06f46ad198e29a2",
+      "gitBlob": "30359b57b7b553e78355d3672119c685051ec1da",
       "bytes": 2138,
-      "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa"
+      "sha256": "ae1de4b652b474c594d5fa6e8ec2d43aae720d166e885497217688c9fabae49d"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/out/M3StringHierarchicalRegexTest.java",
@@ -145,23 +145,23 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/src/test/java/jdk/internal/m3/rewrite/M3RegexRelationsCurrentOwnerRecipeTest.java",
       "targetPath": "m3/tooling/regex-relations-current-owner/sdk/src/test/java/jdk/internal/m3/rewrite/M3RegexRelationsCurrentOwnerRecipeTest.java",
-      "gitBlob": "ed6c37da522fa59f8f1a68c5f971a6625806af71",
+      "gitBlob": "53861074f20a1ad6e1c0ca7cb988443c1085826a",
       "bytes": 37056,
-      "sha256": "d4ce25880247e57766ad2580820507c280417fb2d87ad809b19bf986d0d6daf0"
+      "sha256": "914b5e9c1a420f8eec8265628c147649f394b4b0201d251fe522a83536f95e7b"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/sdk/verify.py",
       "targetPath": "m3/tooling/regex-relations-current-owner/sdk/verify.py",
-      "gitBlob": "649eeae6c2de75629142d7f1b42d998f1abe3fb7",
+      "gitBlob": "06ae6bcdd3e61e1c55cd8c83eb7d261dfa8e4c66",
       "bytes": 22823,
-      "sha256": "86096d1f473b15b4210353de65f5aa2f00c44bc6e3021b91562e385724caf43f"
+      "sha256": "a740df565ec4ab389b1f9ad7727e96e27d2b442febf26396fea6e79de62b4290"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/hosted/qualify.py",
       "targetPath": "m3/tooling/regex-relations-current-owner/qualify.py",
-      "gitBlob": "8c89a9473890d738247bc8e39800b371b30c5b50",
+      "gitBlob": "19638c98b28af580028a94cfa83840f997562e10",
       "bytes": 12777,
-      "sha256": "b103163bc629a2687214588592a537befe417bfe203c708fd66a4947f7ee0b3a"
+      "sha256": "c70a2297fee91ac14b3a7d5ee9f86d2eee43c14cab7f44df5f225bfbfda86e56"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-relations-current-owner-20261019/hosted/qualification.yml",

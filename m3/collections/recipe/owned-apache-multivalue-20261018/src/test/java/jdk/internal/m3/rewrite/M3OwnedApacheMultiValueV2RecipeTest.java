@@ -47,38 +47,38 @@ final class M3OwnedApacheMultiValueV2RecipeTest {
         var rows=resource(ROOT+"manifest.tsv").lines().filter(row->!row.isBlank()&&!row.startsWith("#")).toList();
         var receipts=resource(ROOT+"source-receipt.tsv").lines().filter(row->!row.isBlank()&&!row.startsWith("#")).toList();
         assertEquals(COUNT,rows.size());assertEquals(COUNT,receipts.size());
-        var hashes=List.of(            "bdd6051aecad2ff0a2c2ce7b788aeae51331e5dcef2d5c9f38270520bcdfbfc1",
-            "455e4a5cd4974be4bc9f52aef362a3fe9993802806d3b8fa6b31d2954f322ed8",
-            "b6d1c925716f44578706b5a5786f23ecab1eba652a8c6dea5f02fdf67695fcbd",
-            "b4b6e3255f848b3868e2ccc73a8033601159e2d35ffce8bf0e0ebb28413645ff",
-            "10eedc073af073a512bfd40720158d9eb5c48a52340c446cd4c21f95fe90d17f",
-            "a177d9871c8f7fefdffcce30deaf6b1222009fee8fcd7cee021436db77896e6a",
-            "53cf346e8fcef0b587d817664bee332e0fd93f0e9ecc8507a03acb4db7c5eef7",
-            "a269da7e121cf24eb581d25692da017995b3e6b4eccdea7707a99b800bf6e090",
-            "5868cd6a6786c9bb79dcb26056d3d63141b5e8fbfb9d3926ffbfc8ec5b958c76",
-            "bd12713e1a455a2aa421ba339d7188b0d1f20df6ef9dabacf160be6bc90b192f",
-            "4bcaf5fc528f36d873707385f2742ec58b68352b36271f26838f1cf939b55310",
-            "a09f89f1e870a558d2fe8c27785ba25c3151fb4e2f77ea2667d15a02e7fd743b",
-            "cc4adaf111c2dbf56c6cb74bfb69bfe73406e9b0a26e67e041067235c604bac9",
-            "850ee586a0b7632a3084c0bb1b79d9d60ef673e2176b4d437252f2cff4327da1",
-            "af72d5f7b48eff47c8e8b4c509b9b5fce5c9c78f44d6b0f9f3bfb826b0f98799",
-            "0888237d6a62e668b7f858769b9474454be28d1648667f1cbb078ffb10339b07",
-            "23098870483d7cd41437a18331a565bdf062f45428c64bfd421fe80e0c128af6",
-            "08488af8201dffab0ed06986fad120339c03d5f688ac870510995ab40ee38bd2",
-            "930ec303ac1a447af8a8915b7d8c7e62647d1894f01f5091be47bd9191e7e9ed",
-            "4b85ca639e63a53d254b5a82efa0f127303ce5449e406deb4d2620c825f8fe90",
-            "7a8db0b619100dc3f6401b711bc9e006079a9c58ea0c22cd7a154f8639de9894",
-            "16972945a5775f7f1703a22b47ca72483bc8638f9afb97204d6765028d216931",
-            "084193b77b70454d0c0bf5a7efe456816253a90b5ae94929384300d1273377b7",
-            "471da0c0cf8ce80a50c0bcbb5266ea1c1df7d0c0dc75739ea6f39caaa42dc464",
-            "091a983eab4f61e2ce1148cebb12f3cc10b3107cd6d068687f1a37b3526c1557",
-            "1df26a4061354f143fd8ec81c819427941df4886e0927e5765fff6e3743d1ca4",
-            "0f516ccc2615ee38cd9a4a74b7fba45a2a4a27e845d877a39b16cd9149e2bc53",
-            "571a775a9ef45e13e1359dd8686a143aa016e927a42c2fae17ed0d156fbf5d73",
-            "6278d11e5ecff72826de09ce1e9f7b778f0ce10403ed6ffcd3fdec2385092274",
-            "134cebe67bd4576d6ac34fbb783157dc69612572a47a4c74e63c59f3a1962eef",
-            "fefbef946c8fadf5cdce089d71de0146c36469f6546f6627957fc4374b0df0cb",
-            "ed816b8e40b3bac79951a8142d11de35ec2ca353843b9c113b7b4968f1b6b555");var lengths=List.of(8715,33602,4278,6209,3766,2255,1795,2836,3099,14604,3085,2653,2302,2281,1796,2705,1976,10170,1608,5936,2203,1844,4685,2838,2793,5709,3686,4327,5675,5335,39782,15821);
+        var hashes=List.of(            "fc9a03a963e2ae8e2b3dd116d575c3cdb976f3bba9326bede088a4cdafaa4f2a",
+            "68ea6bee03da4976eb237f08d6773b68a001bd44f3573abccc5a3aa3fbf3bc55",
+            "de9479635c91bd64b7570733a5074fd99b0e9db9a8bbf09b39c5a3ef0fe0e48a",
+            "0162d5aa74289bddf338476ff6718dbe9e87d709c090d3368d36d63ab44ab552",
+            "07d4669871f03ee4eef42048ff2b8c7ebafd354d2cbbd124156d1f3ec63658f9",
+            "9420a4449dc48c0acb6a4da1e868f3954b65f7c0690b24497a59f56b6cb02566",
+            "511609c336f077ea9c8fc372deec65f7c4e3d8e76af7802272ce5fe8d9011693",
+            "0f8f4cdc9620a44e2077106d678d2f646f03a167682e18eff83075cbbd48d51f",
+            "6e22c364227f324e209b9db2fcf72152c47bfd353a0c3a0b2856978d94307ae5",
+            "e300b7c016556a6d32ac7496db55644a97239b6118fb1f311383e686f0225069",
+            "e1b5fc1c588060ea818e3266ef12fbd5098b2c7e5145643d979489633f4974ac",
+            "fe5c83b599a9132eef9420fa9326d22af19f5ba61b9c73f455bfe4afde020f94",
+            "1beae08bdadad1f08b1622c13bc875ed1ae4edf64d8222da94401968ad72e61e",
+            "0c1be9f3076d3a68afb5089a3a48c3213a80730c0c917c9c74b5479828920f06",
+            "f425474837caeeeaf266463b1f959be1c293de25da8577c235fef0d2637157d7",
+            "a858e07e766d1a3c5b33860ad532ea6794b4071cd3daad7eca35003919657228",
+            "d9543d4d9bae571118ae75ef7cc33873ccdd631132e54764084450478faee394",
+            "3d32f5711640c7c041d338a278b7a5b75e8ede4b6783e119adddee5f8a34a457",
+            "4a09d728aa720d8d53a7067d46f05a1e9acec0b36296fa484473e68be07a1695",
+            "d44921e7c04bdb2b72e799e98ddfdda690c4e665dbc24dd01e535034099d173c",
+            "9480dc84967ab74f4aedea07aed54cfdd0716036a0b2d58b187c08f84b8a77aa",
+            "2c2434f5b72c830bfbc271518b85fa82327edceda4f74f50f528ac618d8b5672",
+            "20f4b0ba50954a1cb99816261aedfecd554c4ece927364c56c4dadf2bed73705",
+            "a05f69dffcd2eb019a26db01eb8c59bf62f810efc50f3c3083ecd39749219c46",
+            "a953b6d129fdd9f4db9000300a49a5bec9e46022a763b6b2ea42c035b0e7cf78",
+            "e21efb44ec141ec4fe0f1c3c58b9bc227ffafc41d183a9bae587c2334ec2c1d2",
+            "80ce4dbf9bd4366e0f903fe8ce616ea1ca38a0d5dee9256a1e6f2518dff38daa",
+            "5ed36b2010fe34630889a54a7d0024c9caf533195fd7e0ced6a0b241137138c1",
+            "fdbe4ed21b7dff9a31a98ddfb2ff615819c43231da65a4d3d98e70d2a0695664",
+            "608edffec1b33c9719f09eb4637e3b980d75fa2ea486f874863c16b3b048b720",
+            "c17c697e00c273f5a14b45fa1ce8352781f5ce3e4476263955ff5da4d3a2e1d4",
+            "3715acc08fed0d5f8defeaa7b27df76a36f41fce6ffe9467269eb513520f1698");var lengths=List.of(8715,33602,4278,6209,3766,2255,1795,2836,3099,14604,3085,2653,2302,2281,1796,2705,1976,10170,1608,5936,2203,1844,4685,2838,2793,5709,3686,4327,5675,5335,39782,15821);
         var targets=new ArrayList<Target>();String previous="";
         for(int i=0;i<COUNT;i++) {
             String[] cells=rows.get(i).split("\t",-1);String[] receipt=receipts.get(i).split("\t",-1);
@@ -195,7 +195,7 @@ final class M3OwnedApacheMultiValueV2RecipeTest {
         String target="m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdk.java";
         String before=resource(root+"M3CollectionSdk.java.before.txt"),after=resource(root+"M3CollectionSdk.java.txt");
         assertEquals("1fb66d3c334f4087bfcd2be7502dad25cfe6b18ae7c3a6d968cb44a4612e41e8",sha(before));
-        assertEquals("258a4940136bce3998d7c2d717a6f5512f1412fd874580f242d2185be129b85a",sha(after));
+        assertEquals("e4f05110dd6aaebcfb4f6a6d45d1ff0d8f5b50cc154f6372337d09877b62e83f",sha(after));
         String yaml="/META-INF/rewrite/m3-sdk-duplicate-sorted-factories.yml";
         var url=M3OwnedApacheMultiValueV2RecipeTest.class.getResource(yaml);assertNotNull(url);
         Recipe recipe;

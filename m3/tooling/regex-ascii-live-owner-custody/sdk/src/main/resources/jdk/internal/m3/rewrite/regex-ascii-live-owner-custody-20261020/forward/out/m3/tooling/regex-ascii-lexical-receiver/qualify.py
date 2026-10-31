@@ -24,8 +24,8 @@ METHODS = ["all8PartialStatesBothOrdersReachExactFixedPoint",
 COMPILER = "src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java"
 TEST = "test/jdk/java/util/regex/M3AutomatonDifferentialTest.java"
 ENGINES = {
-    "M3GpuToolJoinRecipe": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-    "M3GpuToolJoinManifest": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+    "M3GpuToolJoinRecipe": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+    "M3GpuToolJoinManifest": "78d5fb68f13872164973a8918cc7886c5f548bca",
 }
 FORBIDDEN = ("originalPrivateModelQualified", "jniRuntimeQualified", "fullMatchedJdkQualified",
              "performanceRetentionQualified", "productTargetApplied", "phaseAdvanced")
@@ -69,24 +69,24 @@ def write(name, value):
 
 
 SOURCE_GIT = {
-    "m3/docs/name-mapping.json": "a7008bc04536586218da76e823bf570d50cec526",
-    "src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java": "7755e02e9da1546240afb96078a86e766566ff59",
-    "src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java": "58cdad630918df11d186312b706bcea03ab52ffe",
-    "src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java": "30df0c03381ba2348899d1a842a13045466ef500",
+    "m3/docs/name-mapping.json": "499cc323ade938eace0d06275467e4e77de8f106",
+    "src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java": "cf0c5fb3046e924484d8ea174816d1de60527f34",
+    "src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java": "22ed1649047d484a57a7e8e3cec83bf954e4388e",
+    "src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java": "9d4ba83c85b740e3d1368ecd6cc572be122ae8c2",
     "src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java": "ac96ac14ced11cf51983e555b7ff7898e2b0a4e9",
-    "src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java": "3cd380eca7cc903ea7fb8f80cccae1894a851ac2",
-    "src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java": "8363e554ec77a65587a18ab468bdabd967e5f10d",
-    "test/jdk/java/util/regex/M3AutomatonDifferentialTest.java": "687dff70a6278355847a287d7dc3792867471b58"
+    "src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java": "bdeccba2317a2d0d67860723fbc89ede281f4197",
+    "src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java": "a1c8d53d923f3e128a852cf907a8b30ccc6959b9",
+    "test/jdk/java/util/regex/M3AutomatonDifferentialTest.java": "160100dbe5854b1448627a85171cbc60d7e24d85"
 }
 AFTER_GIT = {
-    "m3/docs/name-mapping.json": "b97a5f233cd993fbaf7bb3c297bf1821c6f4b8d7",
-    "src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java": "7755e02e9da1546240afb96078a86e766566ff59",
-    "src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java": "58cdad630918df11d186312b706bcea03ab52ffe",
-    "src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java": "30df0c03381ba2348899d1a842a13045466ef500",
+    "m3/docs/name-mapping.json": "acb54b5a6b22d990c129adc5443c407f69caa8eb",
+    "src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java": "cf0c5fb3046e924484d8ea174816d1de60527f34",
+    "src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java": "22ed1649047d484a57a7e8e3cec83bf954e4388e",
+    "src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java": "9d4ba83c85b740e3d1368ecd6cc572be122ae8c2",
     "src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java": "ac96ac14ced11cf51983e555b7ff7898e2b0a4e9",
-    "src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java": "e51d3910df949e63229b100bc81716bc3f2742d6",
-    "src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java": "8363e554ec77a65587a18ab468bdabd967e5f10d",
-    "test/jdk/java/util/regex/M3AutomatonDifferentialTest.java": "3d95edee3c14c0a2a142217da695e77ed69e8026"
+    "src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java": "763fa4ac6b6f7c84856318d95356199b30376b28",
+    "src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java": "a1c8d53d923f3e128a852cf907a8b30ccc6959b9",
+    "test/jdk/java/util/regex/M3AutomatonDifferentialTest.java": "d274d4ec554e48aac56a433a195cab65d43944d9"
 }
 CHANGED_PATHS = tuple(name for name in SOURCE_GIT if SOURCE_GIT[name] != AFTER_GIT[name])
 

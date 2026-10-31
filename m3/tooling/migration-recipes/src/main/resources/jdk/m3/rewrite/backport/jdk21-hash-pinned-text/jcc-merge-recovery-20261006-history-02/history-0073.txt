@@ -3,9 +3,9 @@
 @@ -29,7 +29,7 @@
      from audit_base import BASE_COMMIT, BASE_TREE, OUT, TASK, digest, exact_write, git_blob, git_tree, json_bytes, resolve
      from prepare_publication import BRANCH, PRODUCTION_UPDATES, expected_tree
-     assert digest((helpers / 'verify_publication.py').read_bytes()) == '8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639'
--    assert digest((helpers / 'raw_custody_v3.py').read_bytes()) == 'a96f1aec811774467092a09cd750d47785fd4dd5482ce792ffac93c38deb9f5b'
-+    assert digest((helpers / 'raw_custody_v3.py').read_bytes()) == '45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be'
+     assert digest((helpers / 'verify_publication.py').read_bytes()) == 'a5e9c2228304ea359b5459df150c618fcc3566b88217cdc262c893c31398baa7'
+-    assert digest((helpers / 'raw_custody_v3.py').read_bytes()) == '80f45f4a1d2e0cd49199e6885c62beff39a326aef5739e8890da5e9d991e2412'
++    assert digest((helpers / 'raw_custody_v3.py').read_bytes()) == '203f44729f860620949ec9e6aa7c5f2c7d766de2e406548ceb6797797bfdcc33'
      from raw_custody_v3 import IDENTITY_ONLY, PROTOCOL, audit, bound
  
      preflight_path = Path(sys.argv[1]).resolve(strict=True)

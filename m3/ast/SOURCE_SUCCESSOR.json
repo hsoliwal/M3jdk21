@@ -7,12 +7,12 @@
   "recipe_name": "jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017",
   "canonical_dataset": "ast-hierarchy-20261018",
   "target_dataset": "ast-hierarchy-target-20261018",
-  "previous_source_sha256": "f9d353aa68b31d4d723d584940cb87a39163958d2e7c0962e2a648c96fcf1434",
-  "source_sha256": "984d8498e19fc267d338aef1d0136966918855087f78ca8fdb2fce50b9724721",
-  "previous_target_sha256": "f3fe6810edce185dab20ca73ffb03edaf5a778eb60c41b432e0f902d574a8441",
-  "target_sha256": "068cb795d6617d77ca5297adf96419fadd97f1f40e6b0a63b36f43b222c6c36a",
-  "legacy_contract_sha256": "5086649c5e87cfa418247a175f232c273db121d56ea1afff646de0f615d932c1",
-  "custody_manifest_sha256": "9edd442da2af230f61581130bc94be1999c11e53251cc54f84fdb288dff8df9a",
+  "previous_source_sha256": "5c8143c5a5d35efb9753414b7a575799a8821aba525e7849e8e4f6289f1b9ec8",
+  "source_sha256": "f777c2777b78e5fe5ecb734576fc6833500f5041435d5ac92a4041f2eaa14295",
+  "previous_target_sha256": "79155aabbb045e4a4c6ea38359a642912d940df2b6dc68c5070f205c94e6dd43",
+  "target_sha256": "0db46e317758d03f8d295e5fd6b1afc8099ab06321e1376abb15e24d06e8ec52",
+  "legacy_contract_sha256": "3bfbcaec686210a6d6a11bc292aa86a57a20456a9c78881fe336ae1aecb6c9b8",
+  "custody_manifest_sha256": "08eadf6ab7605f35814fb426f758fe6a0c1b9b7d4979cafbd4e7603bedf6d286",
   "compatibility": "well-formed UTF-16 retains exact v1 roots; malformed identifiers use a disjoint framed extension",
   "scope": "INDEPENDENT_TARGET_MODULE; CANDIDATE_ONLY"
 }

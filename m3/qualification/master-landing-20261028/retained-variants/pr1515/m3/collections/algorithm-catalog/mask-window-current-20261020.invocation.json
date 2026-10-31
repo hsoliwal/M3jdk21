@@ -31,8 +31,8 @@
       {
         "path": "src/jdk/m3/collections/M3LongAddressKernel.java",
         "bytes": 5865,
-        "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
-        "git_blob": "9ac6c5a1e121affd28e6503d922927f6c91c3a66"
+        "sha256": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed",
+        "git_blob": "fe30e94f5e66e2f4d43365bddb58dfdbb4f25207"
       },
       {
         "path": "src/jdk/m3/collections/M3MaskWindowCurrentProof.java",
@@ -52,7 +52,7 @@
   },
   "command_manifest": {
     "path": "../evidence/mask-window-current-20261020/windows-host-20261020/PLAN.json",
-    "sha256": "ccd04ed4f435f51e431e0b846a75c0bc944af357db2a62079b0ead40d0d4f3e8",
+    "sha256": "3946577b3ba71f14e74ac5ad7924434325348f20b55939395a02921e85185fd5",
     "commands": [
       {
         "id": "compile_java",
@@ -89,8 +89,8 @@
   "observed_result": {
     "path": "../evidence/mask-window-current-20261020/windows-host-20261020/RESULT.json",
     "bytes": 5343,
-    "sha256": "c6165bc15606af09f84ea2d221c505137740323e668b5b2c650df1a74a25f080",
-    "git_blob": "ab28ce03661908d3297c95aac207955d23e01f9b",
+    "sha256": "678b94c2287a397134141198b2022e95eb95fc6d3cc00774af42c2cf0a89460e",
+    "git_blob": "688665d70b472168371c9392c9cfa4048f304537",
     "status": "PASS_EXACT_WINDOWS_JAVA_JNI_MISSING_AND_EXPORTS",
     "java_checks": 236639,
     "native_checks": 320006,

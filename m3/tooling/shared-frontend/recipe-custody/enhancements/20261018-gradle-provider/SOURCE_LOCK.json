@@ -68,7 +68,7 @@
   "dataset_inputs": [
     {
       "path": "datasets/gradle-provider-20261018/DATASET.json",
-      "sha256": "d0176925fdc9d1019c021184406908ea2f14e0fd280fdc5149d03cf77c23c051"
+      "sha256": "5dd464b21d9332d7e261ca0db9ab28e715a7d494f409e75d18db82b1ea37e3f4"
     },
     {
       "path": "datasets/gradle-provider-20261018/ENGINE_EFFECTIVE.tsv",
@@ -80,7 +80,7 @@
     },
     {
       "path": "datasets/gradle-provider-20261018/resources/META-INF/rewrite/m3-ast-build-reverse-20261017-gradle-provider-20261018.yml",
-      "sha256": "c46ae9892ac7fc71a11c1b96fc2ad780f68d08f8e7731b843bd2ef8d615b6a46"
+      "sha256": "a46cce8b8541ccc2d75b6e8c62d0b51d75bd2942d6911e52c13f3d00e15de366"
     },
     {
       "path": "datasets/gradle-provider-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-gradle-provider-20261018/0005-M3GradleASTProvider.java.txt",

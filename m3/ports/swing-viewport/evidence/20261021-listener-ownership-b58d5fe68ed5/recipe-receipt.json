@@ -21,20 +21,20 @@
   },
   "outputs": [
     {
-      "path": "m3/ports/swing-viewport/src/main/java/com/m3/swing/viewport/M3ViewportBinding.java",
-      "before_sha256": "94101f8fe12a9dc4d5856fc3aff1006fbbd5722cbca17b7cede65b3d5a669b21",
+      "path": "m3/ports/swing-viewport/src/main/java/jdk/m3/swing/viewport/M3ViewportBinding.java",
+      "before_sha256": "df717cfa7b73bbfee3c58728718c56ad50af19afd610b08ce511bd4ec36690f3",
       "after_sha256": "3f1de78a3128d0aeba6ca0c13efb40e4c90a7cf04df54e5a00f063624bcffffe",
       "mode": "100644",
       "bytes": 3012,
       "git_blob": "ed19d6f1117f92fa2ae23b39c955e54cb376c45b"
     },
     {
-      "path": "m3/ports/swing-viewport/src/test/java/com/m3/swing/viewport/M3ViewportBindingTest.java",
+      "path": "m3/ports/swing-viewport/src/test/java/jdk/m3/swing/viewport/M3ViewportBindingTest.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "74d05c09aaad9090fc79218dbdcbcd1a83dd45f5d0db7e96519fee164e7e13e5",
+      "after_sha256": "d4cba102d29de3bb1e3af5eacf0e426a53d0bf8d5a42260feab3091ff3ad5ce2",
       "mode": "100644",
       "bytes": 10168,
-      "git_blob": "552078d296b9b8cf2c9d8932c205774391c6fa6c"
+      "git_blob": "c196424b2e5ebed37294c768b3ac51bad551caca"
     }
   ],
   "artifacts": {
@@ -100,7 +100,7 @@
     },
     "guard": {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-binding-20261021/0002-M3ViewportBindingTest.java.txt",
-      "sha256": "74d05c09aaad9090fc79218dbdcbcd1a83dd45f5d0db7e96519fee164e7e13e5",
+      "sha256": "d4cba102d29de3bb1e3af5eacf0e426a53d0bf8d5a42260feab3091ff3ad5ce2",
       "bytes": 10168,
       "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-binding-20261021/0002-M3ViewportBindingTest.java.txt"
     },
@@ -139,7 +139,7 @@
     {
       "sdk_input": "crate/ENGINE_SOURCES.tsv",
       "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/ENGINE_SOURCES.tsv",
-      "sha256": "b2e990a09f2c4b7c355b48cc33a72405829fd009f76d1866153aa07225e6684e"
+      "sha256": "74242eb726eb5d1c5bbdc9fa4ee17c33b4afa1c96bfcddad5dcb1a4b1f4f58cb"
     },
     {
       "sdk_input": "crate/datasets/swing-binding-20261021/DATASET.json",
@@ -169,7 +169,7 @@
     {
       "sdk_input": "crate/datasets/swing-binding-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-binding-20261021/0002-M3ViewportBindingTest.java.txt",
       "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-binding-20261021/0002-M3ViewportBindingTest.java.txt",
-      "sha256": "74d05c09aaad9090fc79218dbdcbcd1a83dd45f5d0db7e96519fee164e7e13e5"
+      "sha256": "d4cba102d29de3bb1e3af5eacf0e426a53d0bf8d5a42260feab3091ff3ad5ce2"
     },
     {
       "sdk_input": "crate/datasets/swing-binding-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-binding-20261021/manifest.tsv",
@@ -179,7 +179,7 @@
     {
       "sdk_input": "crate/datasets/swing-binding-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-binding-20261021/pre/0001-M3ViewportBinding.java.txt",
       "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-binding-20261021/pre/0001-M3ViewportBinding.java.txt",
-      "sha256": "94101f8fe12a9dc4d5856fc3aff1006fbbd5722cbca17b7cede65b3d5a669b21"
+      "sha256": "df717cfa7b73bbfee3c58728718c56ad50af19afd610b08ce511bd4ec36690f3"
     },
     {
       "sdk_input": "crate/pom.xml",
@@ -189,17 +189,17 @@
     {
       "sdk_input": "crate/prepare.py",
       "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/prepare.py",
-      "sha256": "4a585b670e5d9defab8e7d63d6fc80508321d0b0e750a15b667cbe6ee14eefc4"
+      "sha256": "912cd376f0754469d6fd17325b15e44e8b69725c6af92d99aac5d9a20b4989f0"
     },
     {
       "sdk_input": "crate/receive.py",
       "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/receive.py",
-      "sha256": "5d9df3c2623c21c43ade4cbfcbe459026af3983e1d2b21018397dc12e775898a"
+      "sha256": "bf80f52c20549eecd0959cad9824aa078c3ca857859ee66cc3765c6bd7045246"
     },
     {
       "sdk_input": "crate/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
       "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
-      "sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43"
+      "sha256": "fa8a8e63fd445c0fbcd877315044c6e5c36f779db6e8a11797e03ab805e5903f"
     },
     {
       "sdk_input": "owner/src/main/java/com/synexia/rewrite/M3EditScope.java",
@@ -219,7 +219,7 @@
     {
       "sdk_input": "owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
       "canonical_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
-      "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579"
+      "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0"
     }
   ],
   "sdk": {
@@ -250,7 +250,7 @@
     "utc": "2026-10-21T06:50:19.748338Z",
     "trigger": "ui/lifecycle/listener-ownership",
     "lesson": "Record which direct viewport owns a listener and detach that registration on reparenting or removal. Preserve the original same-parent remove/add refresh: eliminating it changes listener dispatch order. Retain hidden deferral, showing geometry, EDT behavior and unrelated listeners; no new public disposal API is needed.",
-    "admission_implementation_sha256": "d26260c27d1ac4f4789fc130a400ebc198d85b65f75bdcaa43e670d91fb2e976"
+    "admission_implementation_sha256": "4706cfdc35a670d20b45453f44c018cd8d64be34cd878ee8b307ad3dd79ad3d8"
   },
   "limits": [
     "No full source-built M3JDK21 image, jtreg/JCK or cross-platform qualification.",

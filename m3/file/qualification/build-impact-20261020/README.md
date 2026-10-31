@@ -13,8 +13,8 @@ A single stable physical row index identifies a source, class or build-input fil
 
 ## Verified locally
 Java 21 `javac --release 21 -Xlint:all -Werror` and M3BuildImpactPlanContract **25 checks passed with an API-compatible M3FileDeltaLedger test shim**. Source/code templates have SHA-256 seals:
-- Source 711bf6befa4b91514538ba009c7405af32ee0e0bda10e79c0cfc68e660cc088c
-- Contract eb00b149e08e7fc2acf774d7a034a3b74cca7796015526026e5904ce23579ef8
+- Source e2da19e2f933a3d72dae33ce7905b6da4e24e2c21dc4bf7a37f99e2951b24cba
+- Contract 0b18ca58e66c63e91c6a661f8357fdc225ffbe58954e4d5abaabd55e2ea28544
 
 Canonical reusable OpenRewrite recipe: `hsoliwal/com.synexia#12584`, `com.synexia.rewrite.M3FileBuildImpact20261020`. It remains recipe-first and exact-source admittance. Full Maven, real ledger, custom matched JDK and integration builds are not locally executed.
 
@@ -34,4 +34,4 @@ The same canonical recipe now receives two additional Java21 atoms: `M3ReactorIm
 - Missing graph, unknown physical file owner, changed POM/plugin/build input or incomplete compiler ABI proof conservatively invalidates all reactor projects. Cyclic or invalid dependency graphs are refused instead of returning a partial build. No result is cached unless source and dependency generations agree.
 - Real compiler, annotation processor, Maven 4 Resolver, m2e/Tycho and Gradle project metadata producers are **not yet wired**. They must supply complete generation-matched models; no plugin behavior is silently skipped.
 - Verified locally: **18 additional** Java21 deterministic checks on top of 25 file-plan checks, with a test-only M3FileDeltaLedger API shim and `-Xlint:all -Werror`. CI now compiles and exercises both classes against the original M3File ledger on the exact PR head.
-- Canonical recipe has four hash-sealed `ABSENT` targets (two production and two contracts); added source SHA256 `ebb3c7f8d56d578f311a176b06df4aec5af1572f2235b9903e817a32d0e7a328`, contract SHA256 `7a16c118fc4bca14d7bd1994b166fd99f83e333d3176bfed89e0b72661075a51`.
+- Canonical recipe has four hash-sealed `ABSENT` targets (two production and two contracts); added source SHA256 `038d6a123ae6fb15244589c26cf5f1ff544f0ef4ec128752872fd94aab3fe01b`, contract SHA256 `9d6cf692e63e08fd5c269bf9d4aec9f6a204a306dc5561182bdc1a73432f0897`.

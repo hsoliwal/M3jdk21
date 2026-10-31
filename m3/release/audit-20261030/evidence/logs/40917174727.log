@@ -85,14 +85,14 @@ genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:4
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:56.3832654Z   sparse-checkout: /.gitattributes
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/.github/workflows/m3-original-mapping-provider-qualification.yml
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/migration/original-provider-20261017/
-genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/algorithms/test/PrefixZContractTest.java
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/algorithms/test/ViewInteropContractTest.java
-genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/core/src/com/m3/text/JoinedM3StringPiece.java
-genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/core/src/com/m3/text/LocalM3Arena.java
-genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/core/src/com/m3/text/LocalM3StringPiece.java
-genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/core/src/com/m3/text/M3StringPiece.java
-genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/core/src/com/m3/text/StorageIdentity.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/core/src/jdk/m3/text/LocalM3Arena.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/core/src/jdk/m3/text/LocalM3StringPiece.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/core/src/jdk/m3/text/M3StringPiece.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/core/src/jdk/m3/text/StorageIdentity.java
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/docs/name-mapping.json
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/docs/name-mapping.schema.json
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log
@@ -103,15 +103,15 @@ genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/migration/p
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/migration/recipes/prefix-z-v1.tsv
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/migration/requirements.txt
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/migration/run-tests.py
-genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/migration/src/com/m3/migration/ExactFileRecipe.java
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/migration/test/RecipeContractTest.java
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/migration/test/test_migration.py
-genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv
-genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv
-genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv
-genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv
-genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv
-genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/java/util/regex/Matcher.java
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3Address28.java
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	/src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java
@@ -341,7 +341,7 @@ genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:4
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0360810Z [36;1m        run("post-provider-frozen-pre-custody",py+[str(sdk/"verify.py"),"--report",str(build/"surefire-reports/TEST-com.m3.rewrite.backport.M3OriginalCliProviderRecipeTest.xml"),"--emitted",str(overlay),"--receiver",str(source),"--baseline-root",str(baseline),"--receipt",str(root/"recipe-after-provider.json"),"--run-id",runid])[0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0362307Z [36;1m    pre=json.loads((root/"recipe-execution.json").read_bytes())["frozenPreBaseline"][0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0362988Z [36;1m    after=json.loads((root/"recipe-after-provider.json").read_bytes())["frozenPreBaseline"][0m
-genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0364433Z [36;1m    if pre!=after or pre.get("files")!=55 or pre.get("bytes")!=795620 or pre.get("manifestSha256")!="11d69c05d4e4dd0ef27c8a2195827c62b5dd48a49bef34943f4c6a11fbc4899c" or pre.get("root")!=str(baseline) or pre.get("independentOfInstalledPost") is not True:raise RuntimeError("frozen PRE before/after provider closure drift")[0m
+genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0364433Z [36;1m    if pre!=after or pre.get("files")!=55 or pre.get("bytes")!=795620 or pre.get("manifestSha256")!="1fd2558fdd93e7f1860a225dacfc7118452bd88498d9d272946110c0260a4341" or pre.get("root")!=str(baseline) or pre.get("independentOfInstalledPost") is not True:raise RuntimeError("frozen PRE before/after provider closure drift")[0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0365852Z [36;1m    # Exact bootstrap receipt shape is checked below after provider implementation freezes.[0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0366470Z [36;1m    provider_receipt_path=root/"provider"/"provider-receipt.json"[0m
 genuine provider, recipe and unchanged original CLI	UNKNOWN STEP	2026-10-29T17:44:59.0366982Z [36;1m    provider=json.loads(provider_receipt_path.read_bytes())[0m

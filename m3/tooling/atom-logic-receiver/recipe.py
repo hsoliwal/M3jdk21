@@ -18,7 +18,7 @@ import xml.etree.ElementTree as ET
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 OWNER = Path("m3/pom.xml")
-PRE_BLOB = "693156006961717eccfc649585e724d67682b3df"
+PRE_BLOB = "19766bf32f2db46fe34ee19c6bb48e553589baaf"
 ANCHOR = "  </profiles>\n\n  <build>\n"
 PROFILE = """    <profile>
       <id>m3-atomlogic-readonly</id>

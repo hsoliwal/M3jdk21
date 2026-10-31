@@ -59,7 +59,7 @@
           "id": "EC_UNIFIED_MAP_ARRAY_HASH",
           "problem_category": "Hash maps; interleaved array storage; collision resolution; masked indexing",
           "path": "eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/mutable/UnifiedMap.java",
-          "git_blob": "8bab18c3e7a9d8c02eaa24be9f1634f708cb2541",
+          "git_blob": "5e504f52d76162877378d7f3d472c52dac4d48fd",
           "inspected_lines": {"first": 1, "last": 360},
           "url": "https://github.com/hsoliwal/eclipse-collections/blob/489c8e63b973aaf52eb87f08f5908a152a4b8f22/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/map/mutable/UnifiedMap.java",
           "mechanisms": [
@@ -78,7 +78,7 @@
           "id": "EC_FAST_LIST_DYNAMIC_ARRAY",
           "problem_category": "Dynamic arrays; contiguous range compaction; direct indexed traversal",
           "path": "eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/list/mutable/FastList.java",
-          "git_blob": "4fe22de19c2bd4bd5c51d363bed3e5d490bbf5bf",
+          "git_blob": "1c2da2b4667688b12f71616cc4f6f47230c8bede",
           "inspected_lines": {"first": 1, "last": 320},
           "url": "https://github.com/hsoliwal/eclipse-collections/blob/489c8e63b973aaf52eb87f08f5908a152a4b8f22/eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/list/mutable/FastList.java",
           "mechanisms": [

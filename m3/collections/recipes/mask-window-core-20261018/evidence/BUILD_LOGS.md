@@ -9,7 +9,7 @@ Generated from the 105-command ordered run. Empty stdout is explicitly shown; ex
 Exit: 0; expected failure: false; stdout SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
 
 ```text
-["javac", "--release", "21", "-proc:none", "-Xlint:all", "-Werror", "-d", "/mnt/data/m3sdk_20261018/publication/proof/test/lint", "/mnt/data/m3sdk_20261018/publication/proof/candidate/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java", "/mnt/data/m3sdk_20261018/publication/proof/candidate/m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java", "/mnt/data/m3sdk_20261018/publication/proof/candidate/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java", "/mnt/data/m3sdk_20261018/publication/proof/candidate/m3/collections/src/test/java/com/m3/collections/M3MaskWindowKernelSelfTest.java"]
+["javac", "--release", "21", "-proc:none", "-Xlint:all", "-Werror", "-d", "/mnt/data/m3sdk_20261018/publication/proof/test/lint", "/mnt/data/m3sdk_20261018/publication/proof/candidate/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java", "/mnt/data/m3sdk_20261018/publication/proof/candidate/m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java", "/mnt/data/m3sdk_20261018/publication/proof/candidate/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java", "/mnt/data/m3sdk_20261018/publication/proof/candidate/m3/collections/src/test/java/jdk/m3/collections/M3MaskWindowKernelSelfTest.java"]
 [stdout empty]
 ```
 
@@ -36,7 +36,7 @@ Exit: 0; expected failure: false; stdout SHA-256: `e3b0c44298fc1c149afbf4c8996fb
 Exit: 0; expected failure: false; stdout SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
 
 ```text
-["javac", "--release", "21", "-proc:none", "-h", "/mnt/data/m3sdk_20261018/publication/proof/test/headers", "-d", "/mnt/data/m3sdk_20261018/publication/proof/test/classes", "/mnt/data/m3sdk_20261018/publication/proof/candidate/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java", "/mnt/data/m3sdk_20261018/publication/proof/candidate/m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java", "/mnt/data/m3sdk_20261018/publication/proof/candidate/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java", "/mnt/data/m3sdk_20261018/publication/proof/candidate/m3/collections/src/test/java/com/m3/collections/M3MaskWindowKernelSelfTest.java"]
+["javac", "--release", "21", "-proc:none", "-h", "/mnt/data/m3sdk_20261018/publication/proof/test/headers", "-d", "/mnt/data/m3sdk_20261018/publication/proof/test/classes", "/mnt/data/m3sdk_20261018/publication/proof/candidate/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java", "/mnt/data/m3sdk_20261018/publication/proof/candidate/m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java", "/mnt/data/m3sdk_20261018/publication/proof/candidate/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java", "/mnt/data/m3sdk_20261018/publication/proof/candidate/m3/collections/src/test/java/jdk/m3/collections/M3MaskWindowKernelSelfTest.java"]
 [stdout empty]
 ```
 

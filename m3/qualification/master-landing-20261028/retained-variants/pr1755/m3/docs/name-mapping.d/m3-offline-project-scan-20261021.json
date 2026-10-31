@@ -11,8 +11,8 @@
   "source_recipe_branch": "chatgpt/m3jdk21-offline-project-pass-recipe-20261021",
   "target_stack_base": "e691f1f96f6a4ff42113f3d6ac5a2d1723fe3915",
   "donor_master_blobs": {
-    "M3BuildState": "3b933d3ba3de41b8acc0a7013049de84338069d6",
-    "M3BuildStateStore": "1c178381a5275b68cedea9973ee430a1b7793818"
+    "M3BuildState": "a659c276706fa394cf09503d876b04f7d837d0a8",
+    "M3BuildStateStore": "49d803c630532c6e919f7b21d9cadb7ff3e76f1f"
   },
   "invariants": [
     "One existing M3FileTree traversal and one input read per selected source",

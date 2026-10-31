@@ -10,9 +10,9 @@
   "canonical_engine": "M3HashPinnedJavaSnapshotRecipe",
   "product_owner": "m3/collections/src/main/java/jdk/m3/collections/M3SparseExtents.java",
   "source_before_git_blob": "650356bcdffa372328e5a79f4f596a887fe5f447",
-  "source_after_git_blob": "d35282fb564a0a9231f31781e1a699f7e571f8de",
+  "source_after_git_blob": "ea42717003948d450a606b827628964c58896a23",
   "source_before_sha256": "b64ba7c81ca35214a73d188433e04115b4d84e597492eb43596cce6041cf08d1",
-  "source_after_sha256": "98a83a0bef698e128baa0a788e122751e12584d0b8983f4df7443850123afeec",
+  "source_after_sha256": "a6809ea60f26929010e03a6bd5b0f06766cdcc38cab0bea720d82bf1fa60747f",
   "scope": "One existing private-method overflow guard; original license header, public/protected descriptors and API contracts preserved",
   "provenance": {
     "authentic_java21_parser_coordinate": "org.openrewrite:rewrite-java-21:8.17.1",
@@ -20,8 +20,8 @@
     "java_parser_pom_sha256": "9465d6d13672fc36b517e7c06ad649a081829340b53ee3872bf08349ca9310c7",
     "result_is": "J.CompilationUnit",
     "engine_source_git_blob": "98138cb6734ad86e3f77b8722fa5ff459842e841",
-    "original_test_source_git_blob": "e69993797978f800a4d1b01b55093dc8dde16514",
-    "original_receiver_git_blob": "d7f5cda465d8f473f4969d4db15d717af1391745"
+    "original_test_source_git_blob": "bd3c4ead8f188aaf3055447cb729e583ed8d6a18",
+    "original_receiver_git_blob": "274515be1975a252783a464489505f232679455f"
   },
   "bounded_local_evidence": {
     "original_maven_junit": {

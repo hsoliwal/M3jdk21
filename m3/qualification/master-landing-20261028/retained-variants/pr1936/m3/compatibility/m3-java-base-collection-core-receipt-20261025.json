@@ -26,8 +26,8 @@
       "bytes": 517587
     },
     "after": {
-      "sha256": "298f087bfd4960d0d1c8d2e72704d7e7f60f1e3ca6376105e5ac3a7fe3fefa86",
-      "git_blob_sha1": "48e68a9d1261ea5af61e99525ba1e984ec83e0c1",
+      "sha256": "bc379fe7766887e5bfd6cad78c578b22a559edbbfc68e5cd66cba2907eb4172f",
+      "git_blob_sha1": "847496d977515a750e41aa14503c7923bca2a5d8",
       "bytes": 521576
     },
     "preserved_historical_records": 65,
@@ -91,8 +91,8 @@
             },
             {
               "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/contract/fixtures/collections-seed-after.java.txt",
-              "sha256": "e2b20b7d2dc79bb821236e3c0f9459ea7db25b6d443c5047fe08118ce34f1afe",
-              "git_blob_sha1": "8a33b08f52ef2da14354499d577090b099e2c515"
+              "sha256": "9882e3b0d19da2b0bbbf09990a8a06a16fa129ad4d511d174bebc2eeb49cee03",
+              "git_blob_sha1": "ab34396cebfd71688b9ebebf04eb4e6f40cdadce"
             }
           ]
         }
@@ -175,8 +175,8 @@
             },
             {
               "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/contract/fixtures/collections-seed-after.java.txt",
-              "sha256": "e2b20b7d2dc79bb821236e3c0f9459ea7db25b6d443c5047fe08118ce34f1afe",
-              "git_blob_sha1": "8a33b08f52ef2da14354499d577090b099e2c515"
+              "sha256": "9882e3b0d19da2b0bbbf09990a8a06a16fa129ad4d511d174bebc2eeb49cee03",
+              "git_blob_sha1": "ab34396cebfd71688b9ebebf04eb4e6f40cdadce"
             }
           ]
         }

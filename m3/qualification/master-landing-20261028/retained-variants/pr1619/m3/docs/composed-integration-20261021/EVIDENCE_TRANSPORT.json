@@ -33,8 +33,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/FILE_PASSES.tsv",
-      "sha256": "f9866ffc2423bd192178d26f5c4cae408496be028c156e0dc0d3592101aaaf97",
-      "git_blob": "05332883866685c145c5789a3ddb10b03ebfccf4",
+      "sha256": "8cec081ccd4681eaeb6b67e79340cc2198abc8cbe5fba5bf6707f982bf9461f7",
+      "git_blob": "c90f8fab11f733596748d322650bda6d8859e6d2",
       "mode": "100644",
       "bytes": 52381,
       "preimage": "ABSENT"
@@ -65,16 +65,16 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/SOURCE_RECEIPT.json",
-      "sha256": "6d0ba67e4945b288735154c84434321e493f10556b63dfdc851ab2a753a339e4",
-      "git_blob": "caabebfb91a111c3be411275e8eb9e19c706b580",
+      "sha256": "ca1f36170bf914e6fb19d9782daaa39107f7a1f574aee43d9899fb5a632f8754",
+      "git_blob": "f43df3884b43bd8d259a5b240fe9f8fe6a6d1006",
       "mode": "100644",
       "bytes": 19676,
       "preimage": "ABSENT"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/EPOCHS.json",
-      "sha256": "be99aca4b7c2dd53e9e6383d0b3684190bc712bb3c3bb1fe1e618cddcde40f35",
-      "git_blob": "d6a5fc9c69adfde8c5594a78935aa7c668e19a75",
+      "sha256": "4631fe704b54911012ea452207e30213782e87c590c373e66e7e7a683913b3b1",
+      "git_blob": "2e3e18b2c0f3f1de18e05af5d06adb331ae860f8",
       "mode": "100644",
       "bytes": 10158,
       "preimage": "ABSENT"
@@ -89,16 +89,16 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/LINKED_SDK_INPUTS.json",
-      "sha256": "f2edac9b30fe19f023bb553fb3e5384101049439c0a5d4ee106cc6b6586f8fa7",
-      "git_blob": "b03a4ba47b80a19f088107f074265e5adf679298",
+      "sha256": "23b2ab3d6465fb4a313ed6343317a68a52be8c2cd2ad04142e6681484cec92ef",
+      "git_blob": "0b81c7838630356cc31d1c48efc47feacd7d798d",
       "mode": "100644",
       "bytes": 18530,
       "preimage": "ABSENT"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/LINKED_SDK_OWNERSHIP.json",
-      "sha256": "8c0b26ecc5581fb57ad605917f2efdfa21e34d067acdad20e88b499a1b285d62",
-      "git_blob": "a8a15eaf32d44284f6ad45a2bfcb853eae1ecc7c",
+      "sha256": "6c0e2e5c5d7f6d13979bf4fd03cba4ab0adda1e864185f5dad73d74ca156b30d",
+      "git_blob": "c9fba37ca3c766a59232899c0e03de0e0b27d8fd",
       "mode": "100644",
       "bytes": 23100,
       "preimage": "ABSENT"
@@ -113,8 +113,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/LINKED_SDK_RESULTS.json",
-      "sha256": "cdce7bdc3088d26eff46a8a1a4badf579fa27128ca441b533fe6a9ef12a26a29",
-      "git_blob": "dfc21fefb7a4b983064c726b2dbc1bb525a26fe1",
+      "sha256": "41d3db38db820a2e76fa64c6fb1b6ba59fee55454b5252eec16cd3f17b27ca71",
+      "git_blob": "b3a049be6f195fa6b64eda76cd24386fe9c705e3",
       "mode": "100644",
       "bytes": 7132,
       "preimage": "ABSENT"
@@ -129,40 +129,40 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/NATIVE_ADDENDA.json",
-      "sha256": "2c7e2537a3b24c80abe2285abd67e0e78b6f98ee44810e8a1ac820fe072ad8cf",
-      "git_blob": "578236ff1baab2978a94a6752cd215bd5e9caddd",
+      "sha256": "4e0bdc3ea15a6701a34691cade9467ef32eea35b3ea7935d8734e8a2c27de8bd",
+      "git_blob": "dc574e63cc9a7341dba0864c289ab2c41a13b9ad",
       "mode": "100644",
       "bytes": 5960,
       "preimage": "ABSENT"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/OWNING_PROOF.json",
-      "sha256": "4fbc24a40e0a78ec10deeacfddf5a42a40fe067f726fb83d7e15f0c9d9b1deaa",
-      "git_blob": "d19fb6411232d1d0fcef20fd36dcc4ba87e16dad",
+      "sha256": "a512bbaac19b6455dd369d5b56cdc5aeb7a8595003c2cffe9f038fdab9270d20",
+      "git_blob": "6a9072c7639d9c5c038ba73d3bf0669e1db8c047",
       "mode": "100644",
       "bytes": 88517,
       "preimage": "ABSENT"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/OWNING_RUN.json",
-      "sha256": "02d8b7ea58d109f6f3992405c4f106b61b2eedd8f28a2a08d054b603632de63b",
-      "git_blob": "57b8069c889bad5ca54b3a97aa2244ec4bd1863a",
+      "sha256": "ec9bf87ec749fd43d2775bbdb7f82a88ea00b3ca36b4ffb27bdf41155d1ffab3",
+      "git_blob": "88640b780c8bbd22586748b6adfabbb94d27f19d",
       "mode": "100644",
       "bytes": 1443,
       "preimage": "ABSENT"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/PACKET_MANIFEST.json",
-      "sha256": "5e3d6eb075e61174c3de5b72c10f63c923bafbf9c5d84a45948eb267c23db06a",
-      "git_blob": "e1e96b3323f4db37709b65e61aee8259fb33f9db",
+      "sha256": "cff8a31e9801d8f6ba4f9f944defb6df3cd05a6535c8c1a65472fb93306c7b72",
+      "git_blob": "e91fea2cd480fb5411d30e8be2f1e71863c19f6c",
       "mode": "100644",
       "bytes": 2487,
       "preimage": "ABSENT"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/RAW_EVIDENCE_SHA256.tsv",
-      "sha256": "955fb34130513aebd44937fdb0c47fd199a88e752c7a01f0835400e1032da51b",
-      "git_blob": "29d6b3a16cf3eda56035db2a5f0bd4d383fc912e",
+      "sha256": "3528987f26fab966c53a6d410335e4ad4f1d27b11054bec435cf498ec593bcbf",
+      "git_blob": "7ddec963019c0960ba57ba6cf0222d0c1bba68e3",
       "mode": "100644",
       "bytes": 16994,
       "preimage": "ABSENT"
@@ -193,8 +193,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/RESOURCE_COMPARISON.json",
-      "sha256": "ed21be5b10e5fcfeb819827269122524979f4a0f29d51683ae38d3c3640da9df",
-      "git_blob": "650aef32cce45edd868fc5bb487a1012f440d37e",
+      "sha256": "3d3b67ec120ed3045b909847e60561c975b4c27a36b86ea649dd3e49eb28f163",
+      "git_blob": "7604e152db84aeadf7d043788638150356f10c99",
       "mode": "100644",
       "bytes": 28915,
       "preimage": "ABSENT"
@@ -217,24 +217,24 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/e2/OWNERSHIP.json",
-      "sha256": "d5200cfe1fc402632429ef2c1676dfde5dfb0488e39335c442fb44fdcf22ff0b",
-      "git_blob": "af857feebe7d971d62225b0a43f55f7a76a7d5f3",
+      "sha256": "e525ffeb5c6c914efe1a7514c924cffe2d083e289c4b749860f7e9c2348e0b09",
+      "git_blob": "7ccd5c6b9e3a6edb87810c55a323632e250855cb",
       "mode": "100644",
       "bytes": 8271,
       "preimage": "ABSENT"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/e2/PACKET_MANIFEST.json",
-      "sha256": "f7234aae1e9a690ccf52a7a4d6ef5a970e186fa9c88e3d9679f24efcfe89b297",
-      "git_blob": "1aa39944fb4fe9957d843c454219491a6ebe5234",
+      "sha256": "d73d9ec92016fef768d4c18d342ad5ed33c38f42684cb7a498bd494678fac4ce",
+      "git_blob": "1bfd1b1f9d09d87d69d0f598f97fc22bc901760b",
       "mode": "100644",
       "bytes": 1227,
       "preimage": "ABSENT"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/e2/QUALIFICATION.json",
-      "sha256": "1b17bbf68f773fee45be855226524f84ae5459553fec9d344d71d72d289b9ef5",
-      "git_blob": "5d5333456e58d5708051eeac4f76229525ec1b3a",
+      "sha256": "a33f114e4782e838398e33c59fbeefe7c453ca0c4c03f8b7205f8c3f24582108",
+      "git_blob": "64577e71b8396898656ee31f423e06c9c6a67789",
       "mode": "100644",
       "bytes": 2911,
       "preimage": "ABSENT"
@@ -265,8 +265,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/e2/SOURCE_EPOCH.json",
-      "sha256": "1ad4977db028ba0dd4c5e9a74eea6d929be85ba3db3a15ae3c85224377c8288b",
-      "git_blob": "f3733ab5a717a4855a88de17ab070792a1a450c2",
+      "sha256": "347f50b81408b5b98b31c831f726bb87acd9578d2dc08e26d6ded561f839808d",
+      "git_blob": "87a0260f08a4e7f62a556742a34ce41cab130633",
       "mode": "100644",
       "bytes": 11726,
       "preimage": "ABSENT"
@@ -281,8 +281,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/core/DIAGNOSTICS.json",
-      "sha256": "ceceff7313107f8a338a46f1f715359657467a165e616dc5570743a07062ae56",
-      "git_blob": "4f8098665fbd6ebe487fcf2fcf8ddf22a046cd5d",
+      "sha256": "f946007b6ece8b83153d6d84ee1bed459526daf6cfbfde4d5b19af38ceaeb837",
+      "git_blob": "03140b7a88280c991e302e7eef4e4f23dd7d1324",
       "mode": "100644",
       "bytes": 15677,
       "preimage": "ABSENT"
@@ -329,24 +329,24 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/core/E2/PACKET_MANIFEST.json",
-      "sha256": "f39d5b1636ccd78b86dcad2b0e6a954ba0f082c6e6560ddb6e719a5aaa7a5db5",
-      "git_blob": "11096aad673d34f24245374dd417a9728b0b68d8",
+      "sha256": "8a117fa9d203a8864d282f027b1228b3640cb13cff816c042c4c4cb1c00c6d29",
+      "git_blob": "f623d2fd9a2e9d1f930b65bd87f685d36017cb87",
       "mode": "100644",
       "bytes": 25631,
       "preimage": "ABSENT"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/core/E2/SCOPE.md",
-      "sha256": "9d46d12bf3ff56cb7f48908034a5cd70f00940baff4b51d5bf9790755ff4f382",
-      "git_blob": "2d1433a7499737d414c29c82e91c130719c2448e",
+      "sha256": "8a447e7db52db01d206fa9528d9cc92add36aa6cece4e8f763faf036c0c39c01",
+      "git_blob": "8d39ff2cc6fa4cae8d99bcd0e7e41dba29c53528",
       "mode": "100644",
       "bytes": 3333,
       "preimage": "ABSENT"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/core/E2/SOURCE55_HASHES.tsv",
-      "sha256": "24e7dfcd14b1ef3ab6bc1c2a7f359abcbe424df0682c1596fbb5184342c519df",
-      "git_blob": "e016203586f10a2d6548b9bf51fd2fdd3b42833a",
+      "sha256": "22fcb7ee81637cd47fd5082c3394bae19347904ebfaddb96547f9702122afab1",
+      "git_blob": "98450de3191a8dad6e154f3008b85ec0f092b936",
       "mode": "100644",
       "bytes": 11739,
       "preimage": "ABSENT"
@@ -401,16 +401,16 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/core/PACKET_MANIFEST.json",
-      "sha256": "0bc5395622babd5c0cff4ff2770d6359b14c3645e3a42669f5b85c09211f468d",
-      "git_blob": "0fedf88b22f42a34261108e969a01f6a1f12881d",
+      "sha256": "af27aa4434da6943f9ddc8e322085241af4ed4306c23b7b5736e069b69d7f76b",
+      "git_blob": "abfb965d1399ea402c043cb685447183e253d86b",
       "mode": "100644",
       "bytes": 32839,
       "preimage": "ABSENT"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/core/RECEIVING_PROOFS.json",
-      "sha256": "a465cce54fad10b04e22c774956a6d84e98e19fe867e0471d19e20bea3bfb3c3",
-      "git_blob": "d6ddf5eacab0549978b57726ec00ff9b04daddb7",
+      "sha256": "38742ebc8e799767e3b8afd5441f844e2ac9160047576b97e714f521a247069d",
+      "git_blob": "33cc51c5a25ce9ed077b295e907aa9e3e22d97cf",
       "mode": "100644",
       "bytes": 54379,
       "preimage": "ABSENT"
@@ -441,8 +441,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/core/SOURCE_HASHES.tsv",
-      "sha256": "8a59f4e3ed4e2ee845834bc7d5c756efe9d60711e06d5e347114070362987e66",
-      "git_blob": "48d8803696e1d1e1605983c5ee93168637f86d87",
+      "sha256": "6cfd5aa85a90f360bd30c323b42e9837ea195327134b1eb221a4b0d2d4fc0700",
+      "git_blob": "730321f0843d515db681c6fa8ffa8a04d9f92c75",
       "mode": "100644",
       "bytes": 17229,
       "preimage": "ABSENT"
@@ -465,8 +465,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/guards/MANIFEST.json",
-      "sha256": "f85ef390fef6e6521a4361d400b7adfbc6c7deb1ea3c21e1198404f41936f801",
-      "git_blob": "ae06b470f280c9bca18c2bd3c4a15e1f6d2f06d0",
+      "sha256": "0566d4fc0208c34b27f16f366e351cbcc0b1a0fbdb9392d154627b14836f8867",
+      "git_blob": "9dd1ab6eb2f97acb629e461f4062722f96c30b06",
       "mode": "100644",
       "bytes": 2096,
       "preimage": "ABSENT"
@@ -489,8 +489,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/guards/candidate.json",
-      "sha256": "e55067f05b5c7b092e92ce25ecc7f26277e39e2a38295d54040fdce189d740aa",
-      "git_blob": "e76b8b517bd31e5ccd1083f0e7bd3135daecf941",
+      "sha256": "8807db2d7d59def57c7acb525ff0912e5736b6155fba3a593db7e5e9497c0ba7",
+      "git_blob": "ce3ad2c48099ff9ece206a8d17abed7bf551ea30",
       "mode": "100644",
       "bytes": 1301,
       "preimage": "ABSENT"
@@ -521,8 +521,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/recipes/E1_COMPOSITION.json",
-      "sha256": "adf54486bcf4d30413f977ac0aab0291a05dd1907a79c6c65b41abf5b137a00a",
-      "git_blob": "b4ce6ee3966fd35036fbca44cd177d8ca2076b8f",
+      "sha256": "1fe557f535b810633bcf090b660eb5897524a4ed8813d49a24a7cb20f21fa003",
+      "git_blob": "19758b8a45c0c50caeebc777be809e036334ba38",
       "mode": "100644",
       "bytes": 19472,
       "preimage": "ABSENT"
@@ -537,8 +537,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/recipes/E2_COMPOSITION.json",
-      "sha256": "b765c27e924a755d9bc74047b5fa77be6923bc6ec0c88f7e143aa38332b70cb7",
-      "git_blob": "e8537a69a6f031c265a6a5f6a1949c6fd519c0f1",
+      "sha256": "b19986afa568f51e1e023ecb3bfac5a5a6e057a29d328887c0048355d7256237",
+      "git_blob": "0aa4c3a0ec1ace26ba3a2409c0a1c8984a2d3c82",
       "mode": "100644",
       "bytes": 24000,
       "preimage": "ABSENT"
@@ -553,8 +553,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/recipes/README.json",
-      "sha256": "4fc884d83b60e1fe7e61063e2c7aff49484e2b35b6085f92c5a2bf11c9a014bd",
-      "git_blob": "4ccc5867c514c2f54d4d8f1dc162cf88daf72399",
+      "sha256": "8a950855d462de6dac953f07119256ca2a44050457454be9a9a31be2ac11df7f",
+      "git_blob": "3c82363aaf35df0a495a2fd77d21865ad262c7b6",
       "mode": "100644",
       "bytes": 3837,
       "preimage": "ABSENT"
@@ -577,16 +577,16 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-collections21_PRODUCT_RECEIVER.json",
-      "sha256": "78d55f1cf05a4d392bb765626d87fb147fe8a07c54902f831e24df392234c954",
-      "git_blob": "86f14acc2986d5d2270e8080dd820280f7fd9e0f",
+      "sha256": "088036c8a5f163d003a8531f86ff942e4774768b67a736ea6c65ab3564c78f5e",
+      "git_blob": "500eef0b335c740642e4732345c443bfb569cf85",
       "mode": "100644",
       "bytes": 2513,
       "preimage": "ABSENT"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-composed21_PRODUCT_RECEIVER.json",
-      "sha256": "191bcd33e51f4492ae954af58c25475333494e7fdc7f139506dec03576e73cc9",
-      "git_blob": "99848bf2a8159e332a37e9a95b02de468beea7ce",
+      "sha256": "2cba514d6fb7aa2a53f4c61d9b25a18f67619d82060b9f3aa7d55a9617f1f8ae",
+      "git_blob": "0fdcdb24b8eed71435483ed1a6efcc3e0151e6f8",
       "mode": "100644",
       "bytes": 7575,
       "preimage": "ABSENT"
@@ -601,8 +601,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-string21_PRODUCT_RECEIVER.json",
-      "sha256": "770c9629eb0c8cff824a074809384aa23e45e07e312e6f6a9553321c493877dc",
-      "git_blob": "dfc2e999958f4194dae0c68341dcbb37d5a68761",
+      "sha256": "fe964c5ba0a1c911ff8486964173d551c992b0df63cbceb7d66a5f6123e67e0e",
+      "git_blob": "8a0d82ec19bdd41a17df6cb388003f9ecd93f32b",
       "mode": "100644",
       "bytes": 2512,
       "preimage": "ABSENT"
@@ -617,8 +617,8 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/recipes/combine-views-final21_PRODUCT_RECEIVER.json",
-      "sha256": "700126c0cd98693ffca9dbbd3452db9dfdfce737241e4586799e7bc619db586c",
-      "git_blob": "7f15eba72d1a580f8ef02b545e4ad0c9387816a1",
+      "sha256": "be24aa49024688b888393e34f864a6c53fe50b1c61fdf843fde693df330be449",
+      "git_blob": "cc292bf932987fa598a388be768b2954688495fc",
       "mode": "100644",
       "bytes": 2479,
       "preimage": "ABSENT"
@@ -633,16 +633,16 @@
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/recipes/receive-composed21_PRODUCT_RECEIVER.json",
-      "sha256": "885a6ece9527fae534e9ef26344317b65644020629dbb892bb0e1e4b0c96b1e3",
-      "git_blob": "4e0f1eb3b1c4f734c93e0b0c1eeead6eea841fbd",
+      "sha256": "11ada3dd7e3d810c2c6d6ca45e25bb581d09440db39edd381d43115d2d03c2d6",
+      "git_blob": "1fda2bac380d1eaf13745b91fe84846aa49734ce",
       "mode": "100644",
       "bytes": 10197,
       "preimage": "ABSENT"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/recipes/receive-concat-guard21_PRODUCT_RECEIVER.json",
-      "sha256": "f0147dfa5688e2fdc5b6f5d55cc8b9f264174636e191589ad728f5ef532f7668",
-      "git_blob": "a6f89fec2ea8fe3ade4b8f77d78c2b3e28164848",
+      "sha256": "034a5e30b8d558ae327c055315f7dd50bcbd6a49d67d9c8cd3baac4f32db8dec",
+      "git_blob": "a785377b3c01bc9f44906d65d187b58b138c6bfc",
       "mode": "100644",
       "bytes": 838,
       "preimage": "ABSENT"
@@ -665,8 +665,8 @@
     },
     {
       "path": "m3/docs/name-mapping.d/composed-integration-20261021.json",
-      "sha256": "e4c09abbe122822b4e864e3ccd021b90e651e20eb6eae27b416c3509c20747f3",
-      "git_blob": "009711de906e60a41058703bed44740cd89093c6",
+      "sha256": "b9611d0131302d04ee2211f84ac88bfe81ac1ae010c12bf6c848725792152ff6",
+      "git_blob": "3484c348c6434502c26177847db0e542c02fabd0",
       "mode": "100644",
       "bytes": 8918,
       "preimage": "ABSENT"
@@ -1039,7 +1039,7 @@
       "bytes": 711,
       "sha256": "8d7bf998665451c65e8de1b1365fcc42edaa555568eac13d8f748a8458c9376b",
       "git_blob": "8f9e233f604a3fc6de031e63d7295ad6e2054700",
-      "content_utf8": "Traceback (most recent call last):\n  File \"${M3_WORK}/evidence/guards/baseline/m3/synexia-import/current-full-borrow/check_string_phase.py\", line 560, in <module>\n    raise SystemExit(main(sys.argv))\n                     ^^^^^^^^^^^^^^\n  File \"${M3_WORK}/evidence/guards/baseline/m3/synexia-import/current-full-borrow/check_string_phase.py\", line 493, in main\n    current_blobs = current_successor_blobs(rows)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"${M3_WORK}/evidence/guards/baseline/m3/synexia-import/current-full-borrow/check_string_phase.py\", line 269, in current_successor_blobs\n    raise ValueError(\"String successor chain length drift\")\nValueError: String successor chain length drift\n"
+      "content_utf8": "Traceback (most recent call last):\n  File \"${M3_WORK}/evidence/guards/baseline/m3/m3-import/current-full-borrow/check_string_phase.py\", line 560, in <module>\n    raise SystemExit(main(sys.argv))\n                     ^^^^^^^^^^^^^^\n  File \"${M3_WORK}/evidence/guards/baseline/m3/m3-import/current-full-borrow/check_string_phase.py\", line 493, in main\n    current_blobs = current_successor_blobs(rows)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"${M3_WORK}/evidence/guards/baseline/m3/m3-import/current-full-borrow/check_string_phase.py\", line 269, in current_successor_blobs\n    raise ValueError(\"String successor chain length drift\")\nValueError: String successor chain length drift\n"
     },
     {
       "logical_path": "m3/docs/composed-integration-20261021/evidence/guards/final-full-borrow.log",
@@ -1057,7 +1057,7 @@
       "bytes": 660,
       "sha256": "c2fff1d1f4d709e20d8726db27190729c43acd731b35ee54e2e8644a939ea9d9",
       "git_blob": "7abdf1c45d23687645650c1de57c443e8b4c4572",
-      "content_utf8": "Traceback (most recent call last):\n  File \"${M3_WORK}/M3jdk21/m3/synexia-import/current-full-borrow/check_string_phase.py\", line 560, in <module>\n    raise SystemExit(main(sys.argv))\n                     ^^^^^^^^^^^^^^\n  File \"${M3_WORK}/M3jdk21/m3/synexia-import/current-full-borrow/check_string_phase.py\", line 493, in main\n    current_blobs = current_successor_blobs(rows)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"${M3_WORK}/M3jdk21/m3/synexia-import/current-full-borrow/check_string_phase.py\", line 269, in current_successor_blobs\n    raise ValueError(\"String successor chain length drift\")\nValueError: String successor chain length drift\n"
+      "content_utf8": "Traceback (most recent call last):\n  File \"${M3_WORK}/M3jdk21/m3/m3-import/current-full-borrow/check_string_phase.py\", line 560, in <module>\n    raise SystemExit(main(sys.argv))\n                     ^^^^^^^^^^^^^^\n  File \"${M3_WORK}/M3jdk21/m3/m3-import/current-full-borrow/check_string_phase.py\", line 493, in main\n    current_blobs = current_successor_blobs(rows)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"${M3_WORK}/M3jdk21/m3/m3-import/current-full-borrow/check_string_phase.py\", line 269, in current_successor_blobs\n    raise ValueError(\"String successor chain length drift\")\nValueError: String successor chain length drift\n"
     },
     {
       "logical_path": "m3/docs/composed-integration-20261021/evidence/guards/receiving-concat-source-gate.log",
@@ -1072,19 +1072,19 @@
   "packet_manifests": [
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/PACKET_MANIFEST.json",
-      "sha256": "5e3d6eb075e61174c3de5b72c10f63c923bafbf9c5d84a45948eb267c23db06a"
+      "sha256": "cff8a31e9801d8f6ba4f9f944defb6df3cd05a6535c8c1a65472fb93306c7b72"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/collections/e2/PACKET_MANIFEST.json",
-      "sha256": "f7234aae1e9a690ccf52a7a4d6ef5a970e186fa9c88e3d9679f24efcfe89b297"
+      "sha256": "d73d9ec92016fef768d4c18d342ad5ed33c38f42684cb7a498bd494678fac4ce"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/core/PACKET_MANIFEST.json",
-      "sha256": "0bc5395622babd5c0cff4ff2770d6359b14c3645e3a42669f5b85c09211f468d"
+      "sha256": "af27aa4434da6943f9ddc8e322085241af4ed4306c23b7b5736e069b69d7f76b"
     },
     {
       "path": "m3/docs/composed-integration-20261021/evidence/core/E2/PACKET_MANIFEST.json",
-      "sha256": "f39d5b1636ccd78b86dcad2b0e6a954ba0f082c6e6560ddb6e719a5aaa7a5db5"
+      "sha256": "8a117fa9d203a8864d282f027b1228b3640cb13cff816c042c4c4cb1c00c6d29"
     }
   ],
   "limits": [

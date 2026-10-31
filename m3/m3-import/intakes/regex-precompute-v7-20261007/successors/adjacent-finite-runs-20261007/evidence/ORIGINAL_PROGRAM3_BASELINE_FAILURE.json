@@ -125,7 +125,7 @@
       "sha256": "67ba190d24bddc889a128a1533db1506e7b048759180d0ab7d8bc59757de90fb"
     },
     "originalProgramSHA256": "9999e8afe1ec44de58edd644c0ca278415fb7a379f6cdacfe9dbf7011ed77131",
-    "candidateProgramSHA256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c",
+    "candidateProgramSHA256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7",
     "baselineClassReceipt": {
       "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/BASELINE_PRODUCTION_CLASS_ARTIFACTS_01.json",
       "bytes": 31438,
@@ -145,7 +145,7 @@
       {
         "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/source/MIndexRegexTrigramQuery.java",
         "bytes": 15093,
-        "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f"
+        "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e"
       },
       {
         "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/source/MIndexRegexProgramImageCodec.java",
@@ -155,12 +155,12 @@
       {
         "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/source/MIndexRegexAcceleratedImage.java",
         "bytes": 3102,
-        "sha256": "c5d761d364c68ee588091c7258334afb8120125c1638c14c8151c37587360608"
+        "sha256": "ef7a5428ec39215ccaa39c9728079998230a319d6f50eca5845fa7e7a4e4a3fb"
       },
       {
         "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/source/MIndexCompactAsciiDfaImage.java",
         "bytes": 7563,
-        "sha256": "31f4fd022eba03828d5ddc9d7dec0ab3dc978b3397d305f8b7655957e6a15269"
+        "sha256": "62ee73e6c7458d38e54570a2196e12b4fe468004f379f69c1be72dcd46ab780d"
       },
       {
         "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/regression-tests/MIndexRegexProgramTest.java",

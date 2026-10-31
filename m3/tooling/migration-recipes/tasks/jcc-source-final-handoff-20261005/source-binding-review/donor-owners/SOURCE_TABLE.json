@@ -8,7 +8,7 @@
   },
   "publication_receipt": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/SOURCE_IMPLEMENTATION_PUBLICATION_VERIFIED.json",
-    "sha256": "03ba5aa231929079fda7772dc6a798a687ba7486fa81ceacc0723407330f956a",
+    "sha256": "c6500d09f2056e7ea1dad619cfbae3f8763e39ebdeedd4d63440540a2dd46146",
     "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
     "tree": "6f9b6a48f8cefa7a643f222c7aa1f621497725e7",
     "branch": "aix/jcc-canonical-integration-20261005",

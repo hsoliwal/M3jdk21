@@ -8,8 +8,8 @@
 | `M3LongRankBatchNative.java` | `fa87b9bf25dff5cb858caeee962dfb1bd12a607a` | `20446b00731fdd0b9524ac35be3860fbc0bb062b` |
 | `M3LongRankIndex.java` | `45f608496420cd2f555c0f69b26f572667be6690` | `fe87db69813f63bf60beeff702eab10cfe306f99` |
 | `m3_long_rank_batch_jni.c` | `714d89c8fcb3e63e9f721af2acd5664f40bb8c30` | `1f84f2d0221d735f2209a6da1673479382e67776` |
-| `M3RankIntervalBatchContract.java` | ABSENT | `9d96a4918aec1082b4a809708f1699a86473c001` |
-| `M3RankIntervalBatchTest.java` | ABSENT | `bdf022d93b9b2f9e71c79e64112a8005ab29a049` |
+| `M3RankIntervalBatchContract.java` | ABSENT | `9661765f59697010a2b7bffaa2fb70060346f5c2` |
+| `M3RankIntervalBatchTest.java` | ABSENT | `bf2e4182db6bda03b95c693c94ed6b9428827c1d` |
 | `.github/workflows/m3-jni-rank-interval-batch-java21.yml` | ABSENT | `ddd3961c43b255822f1de14311fd019fdb273bb8` |
 
 These are the exact Git blobs fetched and reproduced from the canonical Synexia Java/Text source templates. No original file is deleted; the C source retains its original three JNI exports (lowerBounds0, equalRanges0 and boundBatchInto0) and appends one `rangeCountInto0` operation.
@@ -29,14 +29,14 @@ The dedicated original-source Java21/C17 JNI GitHub workflow must verify all fiv
 
 Canonical Synexia source commit `81fd4b828e0179899e42f12ea7a410656bdfc91c`
 strengthens only the originally generated `M3RankIntervalBatchContract.java`
-postimage (Git blob `9d96a4918aec1082b4a809708f1699a86473c001`).
+postimage (Git blob `9661765f59697010a2b7bffaa2fb70060346f5c2`).
 A reflection-based direct JNI probe submits 513 interval pairs with the
 last interval inverted at offset 512. The C implementation must validate
 every chunk before writing any result; 520 caller-owned canaries are
 asserted unchanged. Local Java21 C17 checked-JNI probe with the same
 native entrypoint passed 22,343 assertions on both normal and `-Xint`.
 The exact updated native Actions YAML output, blob
-`19459851363120ae2005930261a448ab13ab276d`, now pins the
+`c1fe19e6be26132d9c129f11e2f808d07cc8e554`, now pins the
 stronger Java contract source. No change to runtime Java/C implementations
 was required for this test extension. Current-head full original
 source C/JNI execution and installed-JDK promotion remain HOLD.

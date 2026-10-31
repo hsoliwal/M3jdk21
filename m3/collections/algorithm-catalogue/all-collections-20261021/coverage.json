@@ -19,7 +19,7 @@
   "latest_source_refresh": {
     "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredDeques.java",
     "ref": "6ac3d5834844d444979ab1f7b8c85e68982759b7",
-    "sha256": "b6aec5a921f9eaba6feb14461bf6dca7e67cee26bb84fee3ee3143f873df5121"
+    "sha256": "66f4165c7099fd6452bb6faa8bf67a1af8d6edeedd6963bb5ba8773c507e6fe5"
   },
   "observed_on": "2026-10-21",
   "official_challenge_rows": 25,
@@ -62,9 +62,9 @@
   "review_artifact_sha256": {
     "README.md": "1c535d2ec43ae8e420f1a3b27a4ae6de649ad3fa0e96281cc374f6e5a3e73740",
     "additional-patterns.tsv": "8b0e7ec528e8000e40c41cbc80f55c8e89f78f6c8ab7b05b96656e23d65776fc",
-    "m3-source-review.tsv": "78a69bead226d00e4e7a92fc37fe9492dea75a80d44494f5245c49c6a075a409",
-    "priorities.tsv": "19a8484595bba0ae304c70da3ab0688ac3454253993d44d9c73f3174727a5bb6",
-    "provider-review.tsv": "cd88423e4f91daec1ae087e64f0ab2a412e57ddba3b62d83b8375277270e7404"
+    "m3-source-review.tsv": "f6451bbee97dced9e1272bb1c8a559db6eed01e36322bf2808e1f34c6b6c31b3",
+    "priorities.tsv": "a271785340ff8a2d514f6c5d5581648c9f1d7bf2668c54d56fc33a920fcf8fde",
+    "provider-review.tsv": "50cdfd5fbedd7b61e72d549dfb8bd72c766a5fa612630d17e19585a843977fd0"
   },
   "role_counts": {
     "CONTRACT": 29,

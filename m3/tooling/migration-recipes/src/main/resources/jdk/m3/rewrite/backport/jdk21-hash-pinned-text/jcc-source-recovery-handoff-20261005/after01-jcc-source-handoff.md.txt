@@ -137,7 +137,7 @@ The source-canon verification order remains DIFF, POLICY_LINT, COMPILE, STATIC_A
 
 ## Actual root accounting
 
-Exact final tree objects were rehashed and followed from root `0361e4a07b77a01df170523033fef01c4052ddc5`. The actual root contains **343 entries**: 255 trees, 87 blobs and 1 Git submodule entry. The root POM is Git blob `98889a040aad5cc3c82f782bb4b173d118207988`, SHA256 `f01cca4d90bd8fa1b1125474b5178cc80762d934bcb7bf5817f08f3f0dcf6aab`; its fresh parse yields **201 declarations and 201 distinct module paths**, with no unresolved declaration root component.
+Exact final tree objects were rehashed and followed from root `0361e4a07b77a01df170523033fef01c4052ddc5`. The actual root contains **343 entries**: 255 trees, 87 blobs and 1 Git submodule entry. The root POM is Git blob `a65f71452613662769dda64100c6d64dd90ae5da`, SHA256 `1af736d1a28af6e5cdf41a2b4fefa8b9f3c5cb7a6c2f6d16537e0a822f086a7d`; its fresh parse yields **201 declarations and 201 distinct module paths**, with no unresolved declaration root component.
 
 | Declaration dimension | Actual count |
 | --- | --- |

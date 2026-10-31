@@ -43,8 +43,8 @@
     {
       "path": "m3/collections/viewport-proof/fixtures/M3FenwickInverseTest.txt",
       "pre_git_blob": "ABSENT",
-      "post_git_blob": "dafa004fcbe3fe9e4183f830b2f1159e3c40591f",
-      "sha256": "e00949e10b699f0ff93094906eee694df734471656835e3dfa73b0295deaad26"
+      "post_git_blob": "9cd8ffcd6967091ea4382e532d67454971c5804f",
+      "sha256": "94fea1247ef713bb2c02393bf82b180015383aaff3d6a1eb76a7ef806acf2ba6"
     }
   ],
   "product_java_blob_preserved": "ba6b2ebd0fac9f737deb28bce9385fff07164997",

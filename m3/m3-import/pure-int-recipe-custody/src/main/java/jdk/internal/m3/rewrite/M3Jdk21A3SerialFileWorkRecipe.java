@@ -18,16 +18,16 @@ public final class M3Jdk21A3SerialFileWorkRecipe extends M3Jdk21A3SourceSealedRe
         result.put(
                 "src/main/java/jdk/m3/a3/A3.java",
                 new Target(
-                        "cc8473795b7023cce15a604b3c7164531f0e49fc",
-                        "4fa702edb44c9a064c640c16610a3749f35f54ca",
+                        "17d55680840d31d469859b96581aca641102f9a0",
+                        "c3ba9cdbaff00ff9f7a9e84585c42cca48861a75",
                         "before/A3.java",
                         "after/A3.java",
                         true));
         result.put(
                 "src/main/java/jdk/m3/a3/A3Inv.java",
                 new Target(
-                        "e76f590d4c8de784a3281fa37abec0c46a3ef020",
-                        "d04ab86f0ada309c68f8ac7f0d14411932a3f2f9",
+                        "f1e883e5800182ff96e63241b9e89746a6fab193",
+                        "480c66539e44e468962503f6baf986162649ed0b",
                         "before/A3Inv.java",
                         "after/A3Inv.java",
                         true));
@@ -35,7 +35,7 @@ public final class M3Jdk21A3SerialFileWorkRecipe extends M3Jdk21A3SourceSealedRe
                 "src/main/java/jdk/m3/a3/A3Work.java",
                 new Target(
                         "ABSENT",
-                        "cd48192a3b3529e1e835748b73b14dd706a0b175",
+                        "2d36b813fcb8a72ab956c66adb1b22e6a4ace31b",
                         null,
                         "after/A3Work.java",
                         false));
@@ -43,7 +43,7 @@ public final class M3Jdk21A3SerialFileWorkRecipe extends M3Jdk21A3SourceSealedRe
                 "src/main/java/jdk/m3/a3/A3WorkTsv.java",
                 new Target(
                         "ABSENT",
-                        "7aea6d61a634ab6902de9aa394c103ef70a3f0b1",
+                        "5d1683303df4a414e8ab33717459d56ec443a50a",
                         null,
                         "after/A3WorkTsv.java",
                         false));
@@ -51,7 +51,7 @@ public final class M3Jdk21A3SerialFileWorkRecipe extends M3Jdk21A3SourceSealedRe
                 "src/main/java/jdk/m3/a3/A3WorkValues.java",
                 new Target(
                         "ABSENT",
-                        "ad604457bd85a9019c7ee1e6634fd79c3fb3aafe",
+                        "8304da2ea255999d2d804286363ece27ca3ab1bc",
                         null,
                         "after/A3WorkValues.java",
                         false));
@@ -59,7 +59,7 @@ public final class M3Jdk21A3SerialFileWorkRecipe extends M3Jdk21A3SourceSealedRe
                 "src/test/java/jdk/m3/a3/A3WorkTest.java",
                 new Target(
                         "ABSENT",
-                        "eb8c919bfa4690829b1162e8c03251f4f17b813b",
+                        "7c5329614af93ea536a3efa77994ab4157c3b9ff",
                         null,
                         "after/A3WorkTest.java",
                         false));

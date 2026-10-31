@@ -6,8 +6,8 @@ import hashlib,os,pathlib,subprocess
 root=pathlib.Path(__file__).resolve().parents[1]
 jdk=pathlib.Path(os.environ['M3_JDK'])
 commit='64a2ea61c73b548413fed6686a9daeeb0b9b0564'
-pins={'FrozenChars.java':'75264c85b4da2cd7d9193d8e245364efb53aa936',
-      'FrozenBytes.java':'0e249745d0e96a1d9a8754a075f33cdf42e8fc0b'}
+pins={'FrozenChars.java':'791fffa3f9938e5266663c1cb256cc4d00f8c0f5',
+      'FrozenBytes.java':'22656cfaa3ccf0c6b214f214c92324d7f3ea55be'}
 def git_blob_sha(data):
     header=b'blob '+str(len(data)).encode()+bytes([0])
     return hashlib.sha1(header+data).hexdigest()

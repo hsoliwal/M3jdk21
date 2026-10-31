@@ -42,10 +42,10 @@ public final class M3StateMaskArraysRecipe {
     private static final List<Output> OUTPUTS = List.of(
         new Output("M3StateMaskArrays.java",
             "m3/collections/src/main/java/jdk/m3/collections/M3StateMaskArrays.java",
-            "38df0ab511c2cdb43f957c16878da572484495f2d94ce851ad8342ca526b08a1"),
+            "2b6ce389b732a6f1a88164ce97f7d5b9fa5582c7e0ed5c87a585ceaeb25566b4"),
         new Output("M3StateMaskArraysSelfTest.java",
             "m3/collections/src/test/java/jdk/m3/collections/M3StateMaskArraysSelfTest.java",
-            "7608a36e5f06d2c1595bc8f251a9734270e68eb7573de84277fb459d790821b0"));
+            "c9c7f9c175c4a8f77b20e10a3cdb7ae38287208117df1f683fb931dfb83eb34e"));
 
     private M3StateMaskArraysRecipe() { }
 

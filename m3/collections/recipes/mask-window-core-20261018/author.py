@@ -8,7 +8,7 @@ import argparse, hashlib, json
 T=Path(__file__).resolve().parent
 JAVA='m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java'
 NATIVE='m3/collections/src/main/native/collections/m3_index_mask_compactor.c'
-EXPECTED={'M3IndexMaskCompactor.java': 'ec8b9d2683f5fdb99f6c3e9ad4c79dc60e8ad19cbc3fde2b09e9da2fe3a83f2b', 'm3_index_mask_compactor.c': 'd1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef'}
+EXPECTED={'M3IndexMaskCompactor.java': '394211113f2e6c875521553700e9060a30906a9aaab4c755405402042832d12e', 'm3_index_mask_compactor.c': 'ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73'}
 def sha(b):return hashlib.sha256(b).hexdigest()
 def replace_once(s,a,b):
     if s.count(a)!=1:raise ValueError('reviewed atom anchor mismatch: '+a[:90])

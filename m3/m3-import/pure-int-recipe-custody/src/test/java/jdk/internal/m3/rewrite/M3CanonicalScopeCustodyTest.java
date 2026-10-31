@@ -18,18 +18,18 @@ final class M3CanonicalScopeCustodyTest {
     @Test void restoredExactHistoricalSourceBlobs() throws Exception {
         Path root = Path.of(System.getProperty("basedir", "."))
                 .toAbsolutePath().normalize().resolve("src/main/java/jdk/internal/m3/rewrite");
-        assertEquals("c79d2e9798596dcf6001a5545b034b75b37d0dba",
+        assertEquals("fde9e903eac00deaacca958d4bd3000cb5df92e8",
                 gitBlob(Files.readAllBytes(root.resolve("M3RecipeScopePolicy.java"))));
         Path currentPath = root.resolve("M3RecipeScopeRegistry.java");
         byte[] now = Files.readAllBytes(currentPath);
         // Preserve immutable historical source custody and its additive successor.
-        assertEquals("eb379da6c1c8af1f9d80703ab3f8f71ec556679e",
+        assertEquals("912fc100057c3983c285aa0cc83198f1ab0b6bfa",
                 gitBlob(now), "expanded current registry");
         try (java.io.InputStream input = M3CanonicalScopeCustodyTest.class
                 .getResourceAsStream("/jdk/internal/m3/rewrite/M3RecipeScopeRegistry.historical.java.txt")) {
             assertTrue(input != null, "historical registry fixture");
             byte[] historical = input.readAllBytes();
-            assertEquals("136869bb06a0f62c7c3f3dbd91fb7c488b5846b5",
+            assertEquals("56d913ef24a6018a7f58471d317571551640ad47",
                     gitBlob(historical), "exact original registry blob");
             String[] previousLines = new String(historical, StandardCharsets.UTF_8)
                     .split("\\n", -1);

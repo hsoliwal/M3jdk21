@@ -20,7 +20,7 @@ import java.util.Map;
  * It is KERNEL_REPLAY, not OpenRewrite SDK execution or JDK runtime proof.
  */
 public final class M3StringGuardRepair {
-    static final String MANIFEST_SHA = "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999";
+    static final String MANIFEST_SHA = "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e";
     static final String BEFORE = "0eaa95f80d96be8040aa9584b0ddf3eee3d1e2da40d1bb9d5beef11f3a7e61bb";
     /** Exact fully reviewed V2 checker image, not a wildcard source allowance. */
     static final String REVIEWED_CHECKER_SHA = "fa88e6ee2b5903802a9463bec14133feb74a730009b08e722924064052afb10e";

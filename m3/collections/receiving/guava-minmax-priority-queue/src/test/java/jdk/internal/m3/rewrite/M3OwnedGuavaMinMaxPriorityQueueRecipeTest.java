@@ -32,7 +32,7 @@ final class M3OwnedGuavaMinMaxPriorityQueueRecipeTest {
     private static final String YAML="/META-INF/rewrite/m3-owned-guava-minmax-priority-queue.yml";
     private static final String NAME="jdk.internal.m3.OwnedGuavaMinMaxPriorityQueue20261018";
     private static final String TARGET="m3/collections/implementations/guava-minmax-priority-queue/src/main/java/jdk/m3/collections/guava/M3MinMaxPriorityQueue.java";
-    private static final String AFTER_SHA="29ffcd071461307e4cc7fc623baeba65eb19079f2dc2536cfa119a821c3b6a96";
+    private static final String AFTER_SHA="c8f44e9ca7507c1759da1b4ae497f7dda116d7776a9c5c711b32468176013c00";
     private static final int AFTER_BYTES=38983;
     private static final String TEMPLATE="M3MinMaxPriorityQueue.java.txt";
     private static final String UNRELATED="unrelated.txt";

@@ -12,19 +12,19 @@
   "supersedes": [],
   "recipe_before": {
     "path": "preimages/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
-    "sha256": "7539cf81d2d7a7b30bff97ce2812a7e67f4e3593463a898aa38c8e6b0240dfa0"
+    "sha256": "ff8b2c1db5fffa1a9013fc863a1f5dac337b2cb633c07d513339b57fcce40b80"
   },
   "recipe_after": {
     "path": "proof/sdk-001-offline/receiver/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
-    "sha256": "6553565c8dd14a857e796f741f3f8f8e7cbf3edda11df58b8dcd8a53e78e5600"
+    "sha256": "4b864a178251e0f853cc8d2fe8027962bf831f950d9b83a9d095496ae60be158"
   },
   "source_manifest_before": {
     "path": "proof/incumbent-offline-001/INPUTS.json",
-    "sha256": "f5796a267c780913f385af8aa1fcf700e9c4a929dc408c7b642a2e276398cba5"
+    "sha256": "c019f59fb541338dbdaa48e3e95a53469fbe7011ab950366b6ac8329be4a3b75"
   },
   "source_manifest_after": {
     "path": "SOURCE_SEALS.json",
-    "sha256": "8fbab5e40413771d432d5016964f5bd71d95bf4043805bac828d82bd92200bb0"
+    "sha256": "49261c5ff0b2de1636d26fb01c6d64f3dc3dc9a3a31583aea776169e6bb66d4e"
   },
   "observation_epoch_seconds": 1792549973,
   "author": "Hitesh Soliwal and Contributors to the Synexia Project",
@@ -85,7 +85,7 @@
       "evidence": [
         {
           "path": "proof/incumbent-offline-001/RESULT.json",
-          "sha256": "fd53b2706907681869f7ad2f838a85e73f3b01ef2298e93fbbb0189d20c9cf48"
+          "sha256": "4ef77be30971e5803d2f651c3fdab13b23d3d6f7ebc63e73f8be244849ebb060"
         },
         {
           "path": "proof/incumbent-offline-001/sdk.log",
@@ -136,7 +136,7 @@
       "evidence": [
         {
           "path": "proof/pom-candidate-001/RESULT.json",
-          "sha256": "3d6a95ec2df502b7ec13ef74e85f6e68e8213675fc3dbdbb42e4464eb58125a1"
+          "sha256": "e1bd32d016f340dee16e5d18e36814960ac41697331e2ce47ec24d59162384e5"
         },
         {
           "path": "proof/pom-candidate-001/sdk.log",
@@ -161,11 +161,11 @@
       "evidence": [
         {
           "path": "proof/sdk-001-offline/RESULT.json",
-          "sha256": "a950522f8342e90af73568ae052eca44f776d377a57e4a392477ec5ea95a5098"
+          "sha256": "94112bdac83b7756c78d4ea92c24b0eb4cc948e7bd73622b7d96cd0fa4df2774"
         },
         {
           "path": "proof/sdk-001-offline/recipe-proof.tsv",
-          "sha256": "9da0b557e841e5b67e440b666b8ca8704ffdae4be0c49450563b056408d29e6f"
+          "sha256": "c3a070fdd45b46db00a9acf0ba00dc5561b731423154bb2957f1315fdd34c421"
         }
       ]
     },
@@ -186,7 +186,7 @@
       "evidence": [
         {
           "path": "proof/receiver-runtime-001/RESULT.json",
-          "sha256": "54a0a9db3849ee73273e61b344009eea3bf4acacba4bc45b6c2ad8170398f285"
+          "sha256": "679ac1b3f0a18abead0c716b82a876db225f02d77afc01bcb8a3cae75f7932ec"
         },
         {
           "path": "proof/receiver-runtime-001/sdk.log",
@@ -206,7 +206,7 @@
       "evidence": [
         {
           "path": "proof/receiver-runtime-001/RESULT.json",
-          "sha256": "54a0a9db3849ee73273e61b344009eea3bf4acacba4bc45b6c2ad8170398f285"
+          "sha256": "679ac1b3f0a18abead0c716b82a876db225f02d77afc01bcb8a3cae75f7932ec"
         },
         {
           "path": "proof/receiver-runtime-001/receiver.log",
@@ -231,15 +231,15 @@
     "evidence": [
       {
         "path": "proof/sdk-001-offline/RESULT.json",
-        "sha256": "a950522f8342e90af73568ae052eca44f776d377a57e4a392477ec5ea95a5098"
+        "sha256": "94112bdac83b7756c78d4ea92c24b0eb4cc948e7bd73622b7d96cd0fa4df2774"
       },
       {
         "path": "proof/sdk-001-offline/recipe-proof.tsv",
-        "sha256": "9da0b557e841e5b67e440b666b8ca8704ffdae4be0c49450563b056408d29e6f"
+        "sha256": "c3a070fdd45b46db00a9acf0ba00dc5561b731423154bb2957f1315fdd34c421"
       },
       {
         "path": "proof/copier-qualification-001/RESULT.json",
-        "sha256": "02b696d2d3615f6b6e0742b8711cff1783b4c80371e6ad82fbbc00b79e9db671"
+        "sha256": "31c5dd3f8428a4c0d454ccf8a50dfe36b85b297f9055b51ee6b0bdc924b01fe8"
       }
     ]
   },

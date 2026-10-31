@@ -10,8 +10,8 @@ from pathlib import Path
 BASE = Path(__file__).resolve().parent
 PROTOCOL = "EXACT_CREATE_AND_TREE_IDENTITY_FOR_TWO_INVALID_UTF8_FIXTURES"
 MANIFEST_SHA256 = "9270a6b4098960e2b7c7bd87b17325b648c4de363957f36028bacc9c1955e328"
-EXPECTATIONS_SHA256 = "548b98ef8531b369f4c378bfdebf681e514a5b46da15bcf32db9ab491a7ce8d5"
-VERIFIER_SHA256 = "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa"
+EXPECTATIONS_SHA256 = "6c9daf2e41937a90d8c884a7918be803315bad3f124cfd0f8c4ea77f34c1746e"
+VERIFIER_SHA256 = "6b8ce688a81b46c20e567bd719104bac6a4cf8578a42904dbe494bca2305e443"
 SOURCE_INPUT = "be92c62ece9023b5c33676716a1076d00e26120a"
 SOURCE_ROOT = "3c4f32b66633a251ba2c117090830252a7e2da03"
 
@@ -43,7 +43,7 @@ def admit_publication_custody(publication):
     assert pub["manifest_sha256"] == MANIFEST_SHA256
     assert pub["verification_script_sha256"] == VERIFIER_SHA256
     assert pub["base_audit_script_sha256"] == "839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b"
-    assert pub["publisher_script_sha256"] == "3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd"
+    assert pub["publisher_script_sha256"] == "2c352ab7122ff72da7027cd6b06bfa6b4cf2db0531727bf56b482c062aeea754"
     counts = {"required_blob_bodies_compared_byte_for_byte": 6,
               "required_blob_identities_verified_without_body_readback": 2,
               "production_blob_bodies_compared_byte_for_byte": 4,
@@ -59,7 +59,7 @@ def admit_publication_custody(publication):
     exceptions = {row["git_blob_sha1"]: row for row in identity_rows}
     assert len(direct) == 6 and len(exceptions) == 2 and not set(direct) & set(exceptions)
     designated = bound_json({"local_path": str(BASE / "source-prepublication/DESIGNATED_COMPARISON.json"),
-                            "sha256": "39e7fe930028e5e7561414fbf8f75f247c634182c19648f6c0e6b6d0849d055a"})
+                            "sha256": "b81e40be63829a2f957308046f9b937dc1ef8d7c0bcbeab63111479d7da8ad00"})
     allowed_direct = {row["git_blob_sha1"]: row for row in designated["sources"]}
     assert len(allowed_direct) == 19
     allowed_direct.update(direct)
@@ -136,6 +136,6 @@ def admit_publication_custody(publication):
             "raw_fixture_custody": copy.deepcopy(custody),
             "raw_fixture_custody_input": copy.deepcopy(pub["raw_fixture_custody_input"]),
             "verification_script_sha256": pub["verification_script_sha256"],
-            "reviewed_raw_custody_helper_sha256": "45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be",
+            "reviewed_raw_custody_helper_sha256": "203f44729f860620949ec9e6aa7c5f2c7d766de2e406548ceb6797797bfdcc33",
             "qualification": pub["qualification"],
             "scope": "Verified source publication custody; six mandatory direct body comparisons, separately recorded additional designated-owner reads, and exactly two explicit invalid-UTF-8 Git-identity obligations. This is not universal remote raw-byte or remote SHA256 readback."}

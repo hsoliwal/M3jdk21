@@ -19,16 +19,16 @@
     "PYTHONDONTWRITEBYTECODE": "1"
   },
   "exit_code": 0,
-  "expected_source_lock_sha256": "c0de3ce42ee865bef48a037b1734fb606f4bb5acc206154826bb9102b07b9ec1",
+  "expected_source_lock_sha256": "14ae542eea2fd2ab32bfdb19b18c777a33ddbc3a54af5601790730716cdd39bb",
   "finished_utc": "2026-10-20T11:16:05.846582+00:00",
   "prior_evidence_and_frozen_helper_sha256": {
-    "SOURCE_LOCK.final2.tsv": "a9f7ffb047e63620a0c6f45dcce4955bc4e0405bceeb524be699a4b3eaba54ad",
+    "SOURCE_LOCK.final2.tsv": "51f2d037450251f04132da7c29444d1afbd19391cdcd836de74d58cab53e4d26",
     "qualification-final2/command-receipt.json": "eb4819b8f71fe82faaa017b424466b97c7dbfcd78a7e210c9c5b46296f0d1386",
     "qualification-final2/consumer-run.log": "7e88fd68f17bd026978aabae13d1ff8abda5eec149547e9811a9c53c1fcf2f13",
     "qualification-final2/qualification.json": "608f641ea5a99b3ceaa75c0df3c98eaf1b35e8271e25284ae003aa44f34cfbdf",
-    "receiver/m3/fs/tools/qualify_vfs.py": "07735a71d3466900678c8b4a0f1071724145a6d1a8f83a6c7bad8aa7389a410e",
-    "receiver/m3/fs/tools/vfs_pack_support.py": "410f158fdd7c7a81c98f5b2beb320c8eee23db20dff8db237bdd73722a7811e0",
-    "source-lock-final2.json": "3a44e23bc4f9f707db2708d687ede5040f97838237bc750400ead438cb2386f5"
+    "receiver/m3/fs/tools/qualify_vfs.py": "9ec54e63ba6e4f4a2ccd930773c967d34ed2f208332530bb3f045a8aabc6dbae",
+    "receiver/m3/fs/tools/vfs_pack_support.py": "8fd545e758153e3c1c6c49ace95083391afec5db475d90ba4a20ffff347d5c33",
+    "source-lock-final2.json": "b565455e55df3c8899d96ca43bb5ffe1149f31ed02b0d9cb3c0fe366c8aa5825"
   },
   "prior_evidence_and_frozen_helpers_unchanged": true,
   "python_executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
@@ -40,7 +40,7 @@
     "input_files": 389,
     "receiver_base": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
     "source_lock": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/SOURCE_LOCK.capture.tsv",
-    "source_lock_sha256": "c0de3ce42ee865bef48a037b1734fb606f4bb5acc206154826bb9102b07b9ec1",
+    "source_lock_sha256": "14ae542eea2fd2ab32bfdb19b18c777a33ddbc3a54af5601790730716cdd39bb",
     "vfs_upstream_commit": "685b3b723a83e56034391350ea1a02231411142f"
   },
   "source_admission_before": {
@@ -49,11 +49,11 @@
     "input_files": 389,
     "receiver_base": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
     "source_lock": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/SOURCE_LOCK.capture.tsv",
-    "source_lock_sha256": "c0de3ce42ee865bef48a037b1734fb606f4bb5acc206154826bb9102b07b9ec1",
+    "source_lock_sha256": "14ae542eea2fd2ab32bfdb19b18c777a33ddbc3a54af5601790730716cdd39bb",
     "vfs_upstream_commit": "685b3b723a83e56034391350ea1a02231411142f"
   },
-  "source_lock_after_sha256": "c0de3ce42ee865bef48a037b1734fb606f4bb5acc206154826bb9102b07b9ec1",
-  "source_lock_before_sha256": "c0de3ce42ee865bef48a037b1734fb606f4bb5acc206154826bb9102b07b9ec1",
+  "source_lock_after_sha256": "14ae542eea2fd2ab32bfdb19b18c777a33ddbc3a54af5601790730716cdd39bb",
+  "source_lock_before_sha256": "14ae542eea2fd2ab32bfdb19b18c777a33ddbc3a54af5601790730716cdd39bb",
   "source_lock_path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/SOURCE_LOCK.capture.tsv",
   "source_lock_unchanged": true,
   "started_utc": "2026-10-20T11:15:47.385589+00:00",

@@ -11,19 +11,19 @@
     {
       "path": "m3/collections/src/main/c/m3maskviewport.c",
       "master_pre_blob": "205f93c2fad9fe234fc87980ba89ef1a45cef0a8",
-      "reviewed_result_blob": "f29d081e28ba8ccc4516bd28c09e738b7a408a76",
+      "reviewed_result_blob": "b0d387f2612a315c6b53a50a814432c916ca61c8",
       "canonical_mechanism": "serial M3HashPinnedTextSnapshotRecipe results for frame-page, wide-offset and inline path"
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java",
       "master_pre_blob": "760f572442bbd4145a1e24daadae267bffae56df",
-      "reviewed_result_blob": "9cdfab35cf719ccf26f61ee61e1ae10fa98eb9ad",
+      "reviewed_result_blob": "4f73ddb9aae36dadb8003257d3a6988536a18066",
       "canonical_mechanism": "M3HashPinnedJavaSnapshotRecipe J.CompilationUnit result and JNI generated-header verification"
     },
     {
       "path": "m3/collections/viewport-proof/verify.py",
       "master_pre_blob": "1f55d3d2292ebf03d2fc6cf5bda77cd455e58aa9",
-      "reviewed_result_blob": "9614892a7257c9948716c2b49d80732183fce772",
+      "reviewed_result_blob": "53ae1ca30b7ce2526babd53331a61d3e3ec5eeae",
       "canonical_mechanism": "serial M3HashPinnedTextSnapshotRecipe results for exact exports, dual Java states, installed JNI and native page"
     }
   ],

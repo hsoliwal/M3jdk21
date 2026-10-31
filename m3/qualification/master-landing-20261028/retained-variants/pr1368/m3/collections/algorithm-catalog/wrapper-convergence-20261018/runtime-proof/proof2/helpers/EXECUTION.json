@@ -15,5 +15,5 @@
   "exit_code": 0,
   "stdout_sha256": "1313c7ff140ba00eaf45d06682fc06dc494681adf06d0a37a597373acf7e6887",
   "stderr_sha256": "7a43162d78428232335fc83924ae977ae787a9132a820a3b00c245cf5876acf8",
-  "helper_receipt_sha256": "88fbcbac792f56cab2f58b9b4ffbedc8a95b929ceda57234c843f41583fd54ac"
+  "helper_receipt_sha256": "780b5d3baced6f7ee9fb6d15721d0bdaf42fc47c19d2230e28c782841aae2e5c"
 }

@@ -1337,7 +1337,7 @@
       "required": []
     },
     "noAutomaticLaneQualification": true,
-    "packageOwnerSHA256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574",
+    "packageOwnerSHA256": "93a1c116c197854b0167c172581cd768d0f9098067bf0f1296607ca6ba855556",
     "resultSHA256": "7f381ac0f810aab4dcc7d46d8ced7eb327452852f83468b31a2763af56db6213",
     "schema": "m3.evidence.package-plan/1",
     "selectionMode": "EXPLICIT_FINISHED_BODIES_WITH_SOURCE_CLOSURE_AUDIT",
@@ -1345,7 +1345,7 @@
     "status": "FINAL_REVIEWED_SELECTION",
     "targetCommit": "c0a14387009aefc7d62bd3268055d526e04f9074"
   },
-  "planSHA256": "80bdfabfaafcb4119dacbb3c49354742218f4b4736493df1584220fd9daff545",
+  "planSHA256": "b367e2a133ec61fa4498d6fda587ccd5c212f5116c6054f1d1b3ee3fbe83fef6",
   "proofGatesExecuted": false,
   "rootLogicalMapping": "paths are relative to the original task root",
   "schema": "m3.evidence.bundle/1",
@@ -1376,12 +1376,12 @@
     {
       "bytes": 245542,
       "path": "PATHS-0001.tsv",
-      "sha256": "093138e643f1501b044111a2dc49d90964a7fe233f8dc65f856525b0b35022fb"
+      "sha256": "f900d2b062c063d04752cc4acff51b4a2b865b40a5ebd8685846eb79eabe2a85"
     },
     {
       "bytes": 12224,
       "path": "PATHS-0002.tsv",
-      "sha256": "5fa6586b5675c1dc09347c2dd6eb708819e7ca95f368554c2ae8122250e657fb"
+      "sha256": "4b8466f1d39bde6dd1e857ff4069be2992da984279ea8481ea392a6366b7a1f8"
     }
   ]
 }

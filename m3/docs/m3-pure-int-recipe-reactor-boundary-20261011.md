@@ -27,13 +27,13 @@ already-vendored source files in place.
 All seven paths are under
 `m3/vendor/synexia/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/atom/`:
 
-- `M3AtomizePureIntReturnRecipe.java` — Git blob `1e27f9dd496c099f27caa253d1518a125a39fd53`
-- `M3DocumentPureIntAtomRecipe.java` — Git blob `1d36b554449d2d5c0a0d8eab926c07fc968ed7a3`
-- `M3FileAtomCandidateTable.java` — Git blob `79e1c509b21be188605e45b345d08d37e2747a59`
-- `M3InventoryPureIntAtomCandidates.java` — Git blob `2b2744e36bcb588a739b8f45741f82a1ffc482fb`
-- `M3PatternizePureIntAtomRecipe.java` — Git blob `dad92691710df9255912ba405a68f0e98082c426`
-- `M3PureIntAtomEligibility.java` — Git blob `1facba993720c6d1c69cfe21b13321140ebee2e8`
-- `M3PureIntConvergenceRecipe.java` — Git blob `b11aff3ace8e77684cfa8cc13fbbb445a05c8a09`
+- `M3AtomizePureIntReturnRecipe.java` — Git blob `63adecfa799fcd52a73df02f6020103f066f109c`
+- `M3DocumentPureIntAtomRecipe.java` — Git blob `ed5c1afbaa791806f31c99d7eb9aa0700869690f`
+- `M3FileAtomCandidateTable.java` — Git blob `27cc32e135dae61eae42b2fa7cfa27b3bd93b4aa`
+- `M3InventoryPureIntAtomCandidates.java` — Git blob `b13c56d6a57cd110261eb4f5425afd4396fab2cc`
+- `M3PatternizePureIntAtomRecipe.java` — Git blob `c408b37be59691131f41a9c2f4566e2dcb912929`
+- `M3PureIntAtomEligibility.java` — Git blob `69fff237eb8b943c33a6ec154f9a1b6edba63481`
+- `M3PureIntConvergenceRecipe.java` — Git blob `7dc6cea0a969a1bd094e324c47a1bb724b5ff1dc`
 
 ## Verification requirements
 

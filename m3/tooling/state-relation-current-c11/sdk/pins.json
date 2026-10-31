@@ -3,45 +3,45 @@
   "admissionCommit": "baa99d4a2ab1dd71fe05706bae4e7444ade70e30",
   "sourceOnly": true,
   "providers": {
-    "openrewriteAdapter": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-    "manifestKernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+    "openrewriteAdapter": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+    "manifestKernel": "78d5fb68f13872164973a8918cc7886c5f548bca"
   },
   "files": [
     {
       "path": "FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "118a67ec53586c0dc91234767fe4a94b17852501",
+      "gitBlob": "bba9c671c3c65b5f6ef1b8833c70ecc036dfc893",
       "bytes": 1410,
-      "sha256": "a871258deebd20e21414bb239023293b48177c147c097118429265266252778a"
+      "sha256": "a461637b04d74be6eff49efe3ee4c9626fa86958ea899b8571d412d35fa7034f"
     },
     {
       "path": "README.md",
-      "gitBlob": "3d7dbf361edf3c1f53f53de2bf7f8639f6f1a751",
+      "gitBlob": "ee1336a9da41c736712beb229f168bf2cbe39821",
       "bytes": 3900,
-      "sha256": "167626b1d21f21188bf4ff18d92d148a21edefdc875083a09238566bbb4b4384"
+      "sha256": "165dda08016d0a7211993701795be5ace235ba06a90a64680ff9b0d9bd043548"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
-      "gitBlob": "6463c8e221405a3e44aceb26ce781e35a1048ca1",
+      "gitBlob": "b271965ee18c60e79a50ad1ce489ec94753d8f4b",
       "bytes": 2061,
-      "sha256": "81d84773e4ead196ea44b4d969f2786dbf2120c7543d782017252d03e15e8fa1"
+      "sha256": "aefb48831854e78b483f6fde11a0a8e862c9f958636e05f5a771d704bfe8166e"
     },
     {
       "path": "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
-      "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "gitBlob": "78d5fb68f13872164973a8918cc7886c5f548bca",
       "bytes": 10964,
-      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e"
     },
     {
       "path": "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
-      "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "gitBlob": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
       "bytes": 5187,
-      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
+      "sha256": "300a520ec9d273922d1edbdf5442e5faf825c47e8e3df7febf4baa2f39945401"
     },
     {
       "path": "pinned-engine/jdk/internal/m3/rewrite/M3StateRelationCurrentC11Recipe.java",
-      "gitBlob": "bc59a8e8df79fbb5f0c31721dbeadc14e18480fd",
+      "gitBlob": "491a9301598c887624bdad8bbd78a7c7f6c30735",
       "bytes": 827,
-      "sha256": "5bab9665b32168753e97eb2dfabfc5ac6d58241285512fb3c18932b6609652e1"
+      "sha256": "99c78748e9e7308c02dd5b9d1003231b677d184b2684c566c756dfb7d9b6c5c0"
     },
     {
       "path": "pom.xml",
@@ -51,9 +51,9 @@
     },
     {
       "path": "src/main/resources/META-INF/rewrite/state-relation-current-c11-20261019.yml",
-      "gitBlob": "b510a35dff77b3eb37909afc390d1558fa751081",
+      "gitBlob": "d8f09a20d4f0d8932e0cfffed886e763d99643e1",
       "bytes": 446,
-      "sha256": "ad3e3dcc318bd0adf19b6a4552a1b4666189e2ce04b66415201b1df9aa7a355a"
+      "sha256": "260e69562a94a55f92f9c3aedb2319b5cab83c3cd69a786e075d14d526d7372a"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/before/m3/compatibility/regex-relations-20261014/M3RelationPortProof.java",
@@ -69,9 +69,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/before/src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java",
-      "gitBlob": "ea904c0962fb976f43b45575f06f46ad198e29a2",
+      "gitBlob": "30359b57b7b553e78355d3672119c685051ec1da",
       "bytes": 2138,
-      "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa"
+      "sha256": "ae1de4b652b474c594d5fa6e8ec2d43aae720d166e885497217688c9fabae49d"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/before/src/java.base/share/native/libjava/M3StateRelation.c",
@@ -87,9 +87,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/manifest.tsv",
-      "gitBlob": "f8ff3f4cb882f0e1bc30efd8d3655e20833bc751",
+      "gitBlob": "f8f0555d5bdf111b9e585238d6b5c0b0bc2db8be",
       "bytes": 991,
-      "sha256": "fd764eea326f6167bf8447d17fbe953341f6536b416a6e88fd518275c73ea78b"
+      "sha256": "81cf9049cdd7bb87a98182b9c1482721ef7fe63a494ab85d2832f82e58e9e312"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/out/m3/compatibility/regex-relations-20261014/M3RelationPortProof.java",
@@ -105,9 +105,9 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/out/src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java",
-      "gitBlob": "ea904c0962fb976f43b45575f06f46ad198e29a2",
+      "gitBlob": "30359b57b7b553e78355d3672119c685051ec1da",
       "bytes": 2138,
-      "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa"
+      "sha256": "ae1de4b652b474c594d5fa6e8ec2d43aae720d166e885497217688c9fabae49d"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/out/src/java.base/share/native/libjava/M3StateRelation.c",
@@ -123,9 +123,9 @@
     },
     {
       "path": "src/test/java/jdk/internal/m3/rewrite/M3StateRelationCurrentC11RecipeTest.java",
-      "gitBlob": "364044851ce118d84c7cc6d993872012c1325387",
+      "gitBlob": "1315d91ec4eb924d0bbe921cabd077d3ba3b51e0",
       "bytes": 12409,
-      "sha256": "0f44ac979273f59a8914c44f7da376de45419c55759d95cef338b58811950449"
+      "sha256": "115e14d2e1ec24cdc83c4daa49d536b511723b9b32d903de959415a35eda55fa"
     },
     {
       "path": "src/test/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/historical/M3StateRelation.c.txt",
@@ -135,9 +135,9 @@
     },
     {
       "path": "verify.py",
-      "gitBlob": "66eecf2a7c6272204d44a51977ab40e93a01c32a",
+      "gitBlob": "38f05eac36c97bef0704c336600767f74b272f8e",
       "bytes": 22427,
-      "sha256": "e119ad30a4125a00d14e34ea63b0b9890cb055f113fff41fa239f9592c6671f0"
+      "sha256": "e566de20bb88cd0dd8f9d40c29e9902e5b64ae34ccb39f12c72c8b3514ddc53f"
     }
   ]
 }

@@ -3,7 +3,7 @@
 IndexedTreeArena adapts the reusable array-slot, free-list and occupancy-mask
 pattern from M3LinkedList, hsoliwal/M3jdk21 commit
 a3e88976ee8664d1ef5d0cade96aec1206b2133d, blob
-744d1c488b8342c98e49d2cfd3465c0f558b199d. Apache-2.0;
+832c838caf7a37d6f9a10b37505c3e65ed9f6292. Apache-2.0;
 copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project.
 Weak API-projection detachment is the new delta.
 

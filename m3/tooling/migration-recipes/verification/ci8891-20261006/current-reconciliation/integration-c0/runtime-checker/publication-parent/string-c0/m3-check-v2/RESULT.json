@@ -151,24 +151,24 @@
     "bundleIndex": {
       "bytes": 123241,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/bundle/BUNDLE.json",
-      "sha256": "af4f16e7c63ea8adb004de897bb3cfb1b089bac346c9360e438ae2969e36039e"
+      "sha256": "0ad486123b7fdb1d868c4cd13b25c3e797d4c63d4536df1e805ab691f5e7b11b"
     },
     "extractReceipt": {
       "bytes": 1321,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/extract/receipt.json",
-      "sha256": "91dbf5dec038c5d9e9481d62eaffd76067e367cf4b7749db2dcd14d5880b32c4"
+      "sha256": "ef90a105510eca84aafe60e4897962aa5c5227d68c0a5c62ffac56a79889775e"
     },
     "extractedRoot": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted",
     "owner": {
       "bytes": 33814,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py",
-      "sha256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574"
+      "sha256": "93a1c116c197854b0167c172581cd768d0f9098067bf0f1296607ca6ba855556"
     },
-    "ownerSHA256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574",
+    "ownerSHA256": "93a1c116c197854b0167c172581cd768d0f9098067bf0f1296607ca6ba855556",
     "projectReady": {
       "bytes": 14331,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/PROJECT-READY.json",
-      "sha256": "0d4e7b4726d4f1c598a8ccdb75357418e21ebbf67d6be6607089f7c9004d8062"
+      "sha256": "71b7e3d0e33c06cc9ffffb8105dd3c11a674ff1a70a887e7feb8c4117f3d5958"
     },
     "publicationPrefix": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/bundle/",
     "pythonExecutable": {
@@ -179,17 +179,17 @@
     "readback": {
       "bytes": 384272,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/READBACK.json",
-      "sha256": "3f1a568c9846f6b2b627aa6cfe287693e2be26c13cd2ba2052afea9443a0e0f1"
+      "sha256": "6e96e7f16edcbba5462de65eb4a9e8adfc94d9e3497c06c3224711fb94de32de"
     },
     "sourceClosure": {
       "bytes": 2214350,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/SOURCE-CLOSURE.json",
-      "sha256": "75ddf05d07f537ace036cfa6d490aa2849213d386fb14fff6736198cb45c068b"
+      "sha256": "d150ecedc8b40f4b0a55bf0bb05a82a12c76e0fb9c0c584aea2905a394ca2108"
     },
     "verifyReceipt": {
       "bytes": 1173,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/verify/receipt.json",
-      "sha256": "4af01550538d0e5b5069dff567bbacbd6f97a4d1c49ffc5c449a7faea7f288ab"
+      "sha256": "c6cc6cd2522b238c8e8950962bd25872bb0c80dad25d070a000fe2fa8741350e"
     }
   },
   "predictedFinalTree": "89c777422d73ec46ab2f733ea367f7ad04c51a02",
@@ -427,7 +427,7 @@
     "selection": {
       "bytes": 74585,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/receiving-selection-v1/RECEIVING-SELECTION.json",
-      "sha256": "de8f5754b18391d8e3768d2a7a2ee0073884427eb09e45093cc1a44bf709aa8d"
+      "sha256": "404b379a64e596dd03efe94f4ea456bdc57f16424e2297b3b598c2dc3d0854c7"
     },
     "terminal": {
       "bytes": 33725,

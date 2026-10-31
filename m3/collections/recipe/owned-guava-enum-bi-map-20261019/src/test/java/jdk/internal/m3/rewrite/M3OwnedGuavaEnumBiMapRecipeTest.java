@@ -60,8 +60,8 @@ final class M3OwnedGuavaEnumBiMapRecipeTest {
     private static final String NAME = "jdk.internal.m3.OwnedGuavaEnumBiMap20261019";
     private static final String TARGET =
             "m3/collections/implementations/guava-enum-bi-map/src/main/java/jdk/m3/collections/guava/M3EnumBiMap.java";
-    private static final String BEFORE_SHA = "878813d74e5507767849e87a06239d8eed0bc1217d113ab70de7418323f8aaac";
-    private static final String AFTER_SHA = "877f9b49b0b39fbb3531522cc5bf5d73c5c336a82007328f62ec3d992e082a3f";
+    private static final String BEFORE_SHA = "694b680979293cfe75a153caf6ee464dfc3352dd24ab6ed8230feaa0f4bc5b59";
+    private static final String AFTER_SHA = "e41a81a98854ad6692daf2908d9fa11fc585950ad735dfa61972f3101543c017";
     private static final int AFTER_BYTES = 22757;
     private static final String TEMPLATE = "M3EnumBiMap.java.txt";
     private static final String PREIMAGE = "M3EnumBiMap.scaffold.java.txt";

@@ -60,7 +60,7 @@ def run(label, command):
 
 
 def main():
-    assert sha(CRATE / 'SOURCE_SEALS.json') == '6cc232bd392dd188b227a0a7c304d0a6e6d25ed91dd3641fefb335afdfc8574e'
+    assert sha(CRATE / 'SOURCE_SEALS.json') == '5baa373db8748eba54cecfc5899eb36b5b2f09aa85cfb8399195bac6a367471a'
     sdk = read('proof/sdk-001-offline/RESULT.json')
     runtime = read(RUNTIME + 'RESULT.json')
     source_inputs = read('proof/sdk-001-offline/SOURCE_INPUTS.json')

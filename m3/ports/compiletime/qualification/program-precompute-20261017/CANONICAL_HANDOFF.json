@@ -13,22 +13,22 @@
   },
   "readback_trust_boundary": "Externally obtained GitHub response receipt; local blob consistency checked, no independent remote authentication by this script.",
   "matched_canonical_git_blobs": {
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/ALGORITHM_CATALOGUE.tsv": "a6d91b7884e7eb803ad4089a26f454535bcdae54",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/FILE_REVIEW.tsv": "4ea4cd72d8c571329249d525c21b1d198d095921",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/ALGORITHM_CATALOGUE.tsv": "16dd13511e0468585ec4367511fe957a420fee4e",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/FILE_REVIEW.tsv": "873fd3b40acd104c12f7b2f73c7b6eaeb4f0df94",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/NOTICE.md": "d44b22c8c34bac272383fbb82c9c6ce465394ae0",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/QUALIFICATION.md": "be315021940b66fcfba80fc85abb03aad1c6b38c",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/QUALIFICATION.md": "6c48a9977547d561b3a87809b7bcbf7be7490d37",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/README.md": "8e389e586c9f25b13be7c8229d4106d3b6dc8fb0",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/contract/input-seals.json": "e54308d4d2705b8accfe97170ca87f91bbaf9932",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/contract/parent-inputs.tsv": "da832e59b2af275c285088c8dda464ed1128562b",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/contract/refresh_inputs.py": "49d124d19d4ef8b09a8f5ae166f132bea9d5653b",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/contract/support/EscapeWorkProbe.java": "2e012f8b9b9c1a6da51dffcd19be375ae57f0455",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/contract/support/HeapAgent.java": "b2451f97943a809306c36c0fe9daa6c5184ae1ba",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/contract/support/SwapFailureProbe.java": "67c0773c0bfa8f1583096e7d76e483c5ac14aebe",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/contract/verify_sdk_results.py": "f73ce9ec4237e8964b5b11d24daaa1f79d7ed3c2",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/COPY_INVENTORY.tsv": "019e48a294cb7aa34a272f44ada4efc53836139e",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/contract/input-seals.json": "7a52af09e66782077d7b351392dfaa1915735a84",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/contract/parent-inputs.tsv": "99db153b6465c22f29cb169c28b27715228498bd",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/contract/refresh_inputs.py": "60b67aeea2700850d7816c3d8528c421e0ec2f76",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/contract/support/EscapeWorkProbe.java": "09113842e66cead7d4ad08dfc85dd8c435616c56",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/contract/support/HeapAgent.java": "1f5be0284f1ce7659b7122314b3ff36a67cf65b2",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/contract/support/SwapFailureProbe.java": "d3ce439a14ebeb1c2ad25805dd162386ed77f5a6",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/contract/verify_sdk_results.py": "ca6f3ee77d5988d073070d57f63a0f26c025ed92",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/COPY_INVENTORY.tsv": "bd36e84d04e533d24645c95c0fb4cba0ce59e568",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/SDK-five-tests.xml": "0de785a89e63e45c2c469a40154a4be01bbd3d5b",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/SDK_INPUTS.tsv": "c97ce71c7bdab8459e6bcb6f62e1ad22ea11f04b",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/SDK_RESULTS.tsv": "09115aa844be40e286a0e417afc6d2cbe40b8ef8",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/SDK_INPUTS.tsv": "fec43a420528d66ec03ebe88ccc715116767b8db",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/SDK_RESULTS.tsv": "44e42dbbf4f548ca73bf107c19451b7360b61f40",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/baseline-available-tests-junit/TEST-jdk.m3.compiletime.M3ConstantRegexImageTest.xml": "ad301922d77d03742b84c230c18b409fe28b9370",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/baseline-available-tests-junit/TEST-jdk.m3.compiletime.M3FormatPlanTest.xml": "2dac2fa2a4a54bda0069a90b3551f5912a7aa29d",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/baseline-available-tests-junit/TEST-jdk.m3.compiletime.M3ItemReferenceScanTest.xml": "302991a1a75ca94ea1ac59c890b1a3bb9de0bcf7",
@@ -45,7 +45,7 @@
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/commands/baseline-available-tests.stdout.log": "2da55033d06fe02a71cd2457aaf59b057230b5f7",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/commands/baseline-custody-refusal.stderr.log": "6cb1e4216b1ddba90ff49161f6600ff4305a1cde",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/commands/baseline-custody-refusal.stdout.log": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/commands/baseline-full-compile-failure.stderr.log": "5467807823d6956f9a168fba5e87e77e3551df84",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/commands/baseline-full-compile-failure.stderr.log": "b15c4e803c7c450a2b1d9393eec7cb39a004a2a1",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/commands/baseline-full-compile-failure.stdout.log": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/commands/baseline-public-api.stderr.log": "9fb01497f5426ef9a28c40aa7ae3cc93a784ffd1",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/commands/baseline-public-api.stdout.log": "98755ad260088d3103a5eba2f3a47e22da035da4",
@@ -69,22 +69,22 @@
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/commands/compile-vendored-asm.stdout.log": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/commands/package-vm-size-agent.stderr.log": "9fb01497f5426ef9a28c40aa7ae3cc93a784ffd1",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/commands/package-vm-size-agent.stdout.log": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/input-seals.json": "e54308d4d2705b8accfe97170ca87f91bbaf9932",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/input-seals.json": "7a52af09e66782077d7b351392dfaa1915735a84",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/maven.log": "3a529f858812294ede6d719cb7063856e2385387",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/payload-manifest.json": "adc41fba18c238d8bbb9d42003cfef82e0ba0c34",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/payload-manifest.json": "2a09880e7d8b61327658f05f9f45061795d1d3b0",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/receipt.json": "e8974ca2292da087115edf4a2ea1822c078f798b",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/receiver-check.log": "bc521874acb02636c11be32f5f23696244980a91",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/source-arguments/asm.args": "4899b0accfefec09c7347bc22eebe28014ef1893",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/source-arguments/baseline-available-compile.args": "5b9c328ece9b2b817ea2fdc3320df052ad81f6ee",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/source-arguments/baseline-full-compile-failure.args": "43baf6ade90651343b229d30b482b0200b92d9e5",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/source-arguments/candidate-full-compile.args": "07ad671010dd4605bd518984060a3136e4f82f3e",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/source-arguments/baseline-available-compile.args": "3cd69c9519f8c980cf4c254ea06430c75e93da8b",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/source-arguments/baseline-full-compile-failure.args": "3a834cc55c0bca6ac6950062141c08eaf2013475",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/source-arguments/candidate-full-compile.args": "e5ff30ddad389eda888b70560a97dd9f1baf4549",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/toolchain.json": "8649158c5e080e5a6709b114adab49d37b5efc32",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-java21-toolchain/m3-program-escape-sdk-v1-java21.log": "84acfc34f224bee13b7f0ddbd0c31434f9803ae0",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-java21-toolchain/m3-program-escape-sdk-v1.log": "a1139bcc48b08c6bcb2509f61cfe57feca3fe58d",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/COPY_INVENTORY.tsv": "f4226856c8392b1b39e57cd1279b872ba90c8a76",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/COPY_INVENTORY.tsv": "b89fd4d00e3b2585bd1c0f631b7e048ef9cc63e3",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/SDK-five-tests.xml": "b487d7ad4e43e95ed991c50f4db9bdddb8f6ea54",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/SDK_INPUTS.tsv": "4caa88518655bbb074aa1aaf9026bdaefea50134",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/SDK_RESULTS.tsv": "93cf276e9480e0ccc145a5c4f9232cdd7eadf416",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/SDK_INPUTS.tsv": "0d0a294629481b5f2ff1ffcf7174a88460afae5a",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/SDK_RESULTS.tsv": "60195b40b5f2c3301891be90ea879d4d737b9d08",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/baseline-junit/TEST-jdk.m3.compiletime.M3ConstantRegexImageTest.xml": "a357e093a30230e68834c8a73589d76a4df32ccf",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/baseline-junit/TEST-jdk.m3.compiletime.M3FormatPlanTest.xml": "9233da09b76303e4efe56a7a47032812d5a0f8ae",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/baseline-junit/TEST-jdk.m3.compiletime.M3ItemReferenceScanTest.xml": "5e7b42bbed59684c5f51766ed3e9e8d3ef202007",
@@ -95,7 +95,7 @@
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/commands/baseline-available-tests.stdout.log": "ef4055965a9d2d0ce9b2fb0cc0af72fb072d6993",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/commands/baseline-custody-refusal.stderr.log": "1b6a9d7bf9a8696de535c8ea61668e66ad8bc444",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/commands/baseline-custody-refusal.stdout.log": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/commands/baseline-full-compile-failure.stderr.log": "e5f01844dc21afc9252de961b344e018d4a37507",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/commands/baseline-full-compile-failure.stderr.log": "00feec914e650c234fd2092147ea2feca079d6c0",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/commands/baseline-full-compile-failure.stdout.log": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/commands/baseline-swap-escape-failure.stderr.log": "52154808b5a514ae2a5f7cc72c937e1c8c15aeb7",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/commands/baseline-swap-escape-failure.stdout.log": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
@@ -111,12 +111,12 @@
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/pom.xml.txt": "b38f012d222f30ff42fe3e36c595412459773465",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/receipt.json": "9b63099809faeffc27ba0e9f0e3857025dcd3ac4",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/toolchain.json": "e48803d74b13f4ea40abc3b01fa274149d76990a",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/verify_sdk_results.py.txt": "23a9ab77e3bf5d9e539abb213a7cc305c521eb0f",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/COPY_INVENTORY.tsv": "d063117cd55403f3c8ff87df00a2236157e7938e",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/verify_sdk_results.py.txt": "7eea4f6d722793dcf3825bd6c42156ddb261a5d4",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/COPY_INVENTORY.tsv": "da53f91b7c076aaa9a1d266282bce9b00c52a28b",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/M3ItemReferenceScan.java.txt": "976a9cbeda059437b3d39c414d9f37a694fea2f4",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/SDK-five-tests.xml": "5a22a5c138a2cbbf271dc50b2be62209dae189b9",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/SDK_INPUTS.tsv": "fe09cc5115922b5d3bc661b41df81dfb750a3fa8",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/SDK_RESULTS.tsv": "93cf276e9480e0ccc145a5c4f9232cdd7eadf416",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/SDK_INPUTS.tsv": "f6a504108790e237290bc50aef92b9220b8e26d8",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/SDK_RESULTS.tsv": "60195b40b5f2c3301891be90ea879d4d737b9d08",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/baseline-available-tests-junit/TEST-jdk.m3.compiletime.M3ConstantRegexImageTest.xml": "b01594a991989386e5ae1c94cf9bb195b79cde47",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/baseline-available-tests-junit/TEST-jdk.m3.compiletime.M3FormatPlanTest.xml": "c2fd2b46596a24bc26beecdb1e5e25b513fdbf72",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/baseline-available-tests-junit/TEST-jdk.m3.compiletime.M3ItemReferenceScanTest.xml": "47c849c3e109d1f9723e47558a54b4e86423b884",
@@ -133,7 +133,7 @@
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/commands/baseline-available-tests.stdout.log": "55d6f3915ba82d3a78c8df5ac3859e07ad6f4008",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/commands/baseline-custody-refusal.stderr.log": "a19c433a349902325c72f8970bc72217e11c9d82",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/commands/baseline-custody-refusal.stdout.log": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/commands/baseline-full-compile-failure.stderr.log": "471755d7f1ae1bd9176e20ecfeeb0225231ac896",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/commands/baseline-full-compile-failure.stderr.log": "2d752620e9b915d0f1a5c379c606827e50a557f9",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/commands/baseline-full-compile-failure.stdout.log": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/commands/baseline-public-api.stderr.log": "9fb01497f5426ef9a28c40aa7ae3cc93a784ffd1",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/commands/baseline-public-api.stdout.log": "98755ad260088d3103a5eba2f3a47e22da035da4",
@@ -157,42 +157,42 @@
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/commands/compile-vendored-asm.stdout.log": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/commands/package-vm-size-agent.stderr.log": "9fb01497f5426ef9a28c40aa7ae3cc93a784ffd1",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/commands/package-vm-size-agent.stdout.log": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/input-seals.json": "e70d1696e5861dd26fd3ebe18558b3d6c876f212",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/java-manifest.tsv": "8d3cfbdc2589b28e9a410be115351c6f3727cefe",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/input-seals.json": "faa98574be2b9126270a2dbc1b8924ccbad4da3c",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/java-manifest.tsv": "a4aa40ca87a6b14589090cc4969f62252f767983",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/maven.log": "c5ac3f400f086d3beb79e4cb3c1223dc7f2f623d",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/name-mapping.json.txt": "767c7373dab06cd66e465ccbc1f4fc526c53ea3d",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/payload-manifest.json": "89936747abe41d1c70f029be0cc566a77c14038a",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/name-mapping.json.txt": "5f24d18b0eb9a2603559a51c82537ca566cd98a1",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/payload-manifest.json": "a5b4a47a8ca201b3020cb3c1ab94c7627a75ac8a",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/receipt.json": "3372f224bee36523bf41a6f35f76ebbbcda5ac37",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/text-manifest.tsv": "9030098f2d2b940f580c0a926256a4099e4fe023",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/text-manifest.tsv": "e0505dfb3e43ce866705f50c0bee5fbaa048e562",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/toolchain.json": "8649158c5e080e5a6709b114adab49d37b5efc32",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/licenses/Apache-2.0.txt": "29f81d812f3e768fa89638d1f72920dbfd1413a8",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/payload-manifest.json": "adc41fba18c238d8bbb9d42003cfef82e0ba0c34",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/payload-manifest.json": "2a09880e7d8b61327658f05f9f45061795d1d3b0",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/pom.xml": "f16d07cfded7ff99e99651b371587992faed91bb",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/receive.py": "7b441c78df78c5c0dcc2f8a3526d588981880037",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/review/CONTRACT.md": "45b55c4766281d56107f2dae4f08f5fe0c458517",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/review/HISTORY.md": "1ca40d88718821376012e7d2e81d0b53ba392288",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/review/independent-graph-review.md": "965c43c606e5a3f12e2e7e30c674a10474d50113",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/META-INF/rewrite/m3-program-escape-precompute-20261017.yml": "321f6bf58da54dbbb5b25899c2b93e5af3e8be07",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3EscapeFlow.java.txt": "e88b784e8078a828bad98dced8054f706dfee2d6",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3GvasLiteralHarvester.java.txt": "f19f2c2a2ffcb4011f508166e4395856d27da7eb",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3ItemReferenceScan.java.txt": "42481e0b1f3ad881a77ddda55d7d3a31fb1dd0f8",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/m3__ports__compiletime__src__test__java__jdk__m3__compiletime__M3EscapePreparedTest.java.txt": "6f81f661dac183b65c4c7d02e2e5ab3a4a8904b4",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/manifest.tsv": "a0118c3462566c354b4a16e1c6f0be09b3b1f5a4",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/pre/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3EscapeFlow.java.txt": "5e4e63059fc6b1a54ab66636aef2c9e0ae1e65cb",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/pre/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3GvasLiteralHarvester.java.txt": "40400aaa7b1611cc5012a55579a5fed74f0cc3ad",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/pre/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3ItemReferenceScan.java.txt": "cda993a1cb5654b34e3e339c4306bbb1c28881a4",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/review/independent-graph-review.md": "c440bd993b19c67b09a209d0bbcda66be05833f5",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/META-INF/rewrite/m3-program-escape-precompute-20261017.yml": "e0231f2dc6133918ef7d31ff0cde1484f130ac9f",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3EscapeFlow.java.txt": "a05d6154ab9a87b807806abefad8ba465079486d",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3GvasLiteralHarvester.java.txt": "bc479ddd90c3a079fa73c753f4838ce039412d52",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3ItemReferenceScan.java.txt": "608f8b77c52ab2d2e1293b736bb77a48b2e2bd58",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/m3__ports__compiletime__src__test__java__jdk__m3__compiletime__M3EscapePreparedTest.java.txt": "38608ee32f086956b1196e879a32fda1768ced12",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/manifest.tsv": "b0cb60b4d98537683c93af99b3f00506e30bdc24",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/pre/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3EscapeFlow.java.txt": "9eda59508ea15cb6ac72fa4cf9c74a08ed84193d",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/pre/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3GvasLiteralHarvester.java.txt": "6c5cb568e5fab4036c4db54f0c381b443746ed74",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/pre/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3ItemReferenceScan.java.txt": "d9d94ebf3c1b88a8a09003846526ea77d8d6ae37",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-program-escape-precompute-20261017/m3__docs__name-mapping.d__m3-program-escape-precompute.json.txt": "d47ab3e2687a817e4794381252e0cf4cd4eca254",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-program-escape-precompute-20261017/manifest.tsv": "97288aa3e6a84a967fb2567451d8785286c3fe64",
     "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java": "3ff7e6f49fd75a34d0991ced8d069b956da0ee49",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/CATALOGUE_INDEX.tsv": "5c08780b8b454e79391a703bfb7d8208977f67c7",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/contract/emit_public_handoff.py": "ece2f288cd38f3eae464272db43775948d756afb",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/contract/verify_received_tree.py": "f5cdd827de93d9cd46dcb2736d5521ef20c721b4",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/COMMANDS.json": "83d56c1f56ec16c73f9926d57a69e65472e06893",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/EVIDENCE_FILES.tsv": "2fa46e2209363c5cc7f68e343e0dd99603c291fa",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/EVIDENCE_RECEIPT.json": "ac9ade0e6ec242fa9b13b9cc5f98d22c6ac6315d",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/contract/verify_received_tree.py": "4463b46cee2bc57b4e9182fff4293f24c95707a4",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/COMMANDS.json": "beb25760a9ae177b3a35aefbe4c3f16f5bd88bf7",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/EVIDENCE_FILES.tsv": "4e6762ccbad92cc4ca04d935d9f830edc3dc958c",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/EVIDENCE_RECEIPT.json": "3cc3a33dab8957135868f486841a3bae8e62848b",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/MAVEN_CURRENT_TREE.log": "54df8f6ceec36a941d629d8c355b0cf3f66b7791",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/MAVEN_HELPER_CONTRACT.log": "2fa89fc54e3044b10ffeaabe65ea33f30a96e3ea",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/RESULT.json": "0ce9de6f19553064e4f82c051ce265c2e71fbd19",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/RESULT.json": "984230face8eafef355b5ad441ba35c854799663",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/asm.args.txt": "528d9696a2f41faa9225f1c4dd65b81baee0d776",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/current-ast-leaf-selftest.stderr.log": "9fb01497f5426ef9a28c40aa7ae3cc93a784ffd1",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/current-ast-leaf-selftest.stdout.log": "043a8e43da0de3137764c660784c7cf7784397fe",
@@ -205,23 +205,23 @@
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/junit-reports/TEST-junit-jupiter.xml": "90d919610c9d121e3d537190b84e74e2c3d657ad",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/junit-reports/TEST-junit-platform-suite.xml": "2c9ca0d83875813b4ec906a456b5fc6f2a6cc947",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/junit-reports/TEST-junit-vintage.xml": "909331ed5aebb1ba210dc4b6469e98c21c7b7228",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/ports.args.txt": "63e6a63916c655ee3ddb2ff98eb2a7b2dcff4e74",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/ports.args.txt": "14165c8018b9ad78f1c909b4978201cd70b75397",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/receiving-head-after.stderr.log": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/receiving-head-after.stdout.log": "e954c00ef7f08d87a4abf88f70afa8f65a0cc738",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/receiving-head.stderr.log": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/receiving-head.stdout.log": "e954c00ef7f08d87a4abf88f70afa8f65a0cc738",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/receiving-source-tree.stderr.log": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/receiving-source-tree.stdout.json": "fc6f974ad59d35fe910e23082ca4292aa0b8c4bb",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/receiving-source-tree.stdout.json": "562ada89742dea8ee88df7c9d3f46099fcba24aa",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/sdk-post-admission-0.stderr.log": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/sdk-post-admission-0.stdout.log": "0ef6d8745d7e48785a2a9923e9a46f879f82d279",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/strict-current-port-and-tests.stderr.log": "9fb01497f5426ef9a28c40aa7ae3cc93a784ffd1",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/strict-current-port-and-tests.stdout.log": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/COMMANDS.json": "88c0370b8c9a21ae26c89ab3eb0212d93079859c",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/EVIDENCE_FILES.tsv": "18e975eac2e9894781cddebfddf01ea599d7ce1d",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/EVIDENCE_RECEIPT.json": "0371291c2bf2bf8d157b0d58f57f1c216ff50a0e",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/COMMANDS.json": "73c37b9b075f0e3bd1d87072a1db06f6fe98167d",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/EVIDENCE_FILES.tsv": "77bd2522abc3e20218aa649c064d0073f3c132f3",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/EVIDENCE_RECEIPT.json": "6800e81ed70d0be3a2eae528386f1f21ea2890fd",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/MAVEN_CURRENT_TREE.log": "89f004f61b9454568621bb97afdefc6fd46287bb",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/MAVEN_HELPER_CONTRACT.log": "2fa89fc54e3044b10ffeaabe65ea33f30a96e3ea",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/RESULT.json": "9d124a87e425ba65c9501c9014a96c373f822bab",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/RESULT.json": "2d9c90fa739c6585b7a2335327baa2dffb5df773",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/asm.args.txt": "c0814fe9eefe4f7353ad283ea5ad77e4f79b0a15",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/current-ast-leaf-selftest.stderr.log": "9fb01497f5426ef9a28c40aa7ae3cc93a784ffd1",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/current-ast-leaf-selftest.stdout.log": "8435f404a75ab0e95d18865c4ad4c76036c2dd7c",
@@ -234,21 +234,21 @@
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/junit-reports/TEST-junit-jupiter.xml": "d3330369536adb52f4674f742faaf564dd50e149",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/junit-reports/TEST-junit-platform-suite.xml": "0835f85d2d54138425081abd248e1374b63652c7",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/junit-reports/TEST-junit-vintage.xml": "6ee013bfc8ecdda55c25ecaa87364b43844ae9c7",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/ports.args.txt": "d2166566461b198b5e2a1be1885aa2d383cf60a8",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/ports.args.txt": "c03991aca165d94e297449264decb0c5cf824dff",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/receiving-head-after.stderr.log": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/receiving-head-after.stdout.log": "50890bf0dff92569531a842f05047462895ec031",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/receiving-head.stderr.log": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/receiving-head.stdout.log": "50890bf0dff92569531a842f05047462895ec031",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/receiving-source-tree.stderr.log": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/receiving-source-tree.stdout.json": "4b7cab2d7bf95e8d5b9aeb56c57b8133e5123ce0",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/receiving-source-tree.stdout.json": "5f248342b08180682610eed3087da4dc980a058a",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/sdk-post-admission-0.stderr.log": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/sdk-post-admission-0.stdout.log": "0ef6d8745d7e48785a2a9923e9a46f879f82d279",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/strict-current-port-and-tests.stderr.log": "9fb01497f5426ef9a28c40aa7ae3cc93a784ffd1",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/strict-current-port-and-tests.stdout.log": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
     "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/reference/CATEGORY_REFERENCES.tsv": "cfdfd986c17a534b37100acfbb1c1d072756cf13",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/reference/DONOR_CATALOGUE.tsv": "1f32dd13e8f1213f73ef1a29a1206e189d933ed2",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/reference/PROGRAM_PRECOMPUTE_EVALUATION.md": "865a3cdd918eaff5d501a212dfcdaa742697294a",
-    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/reference/SOURCE_PINS.json": "10e4979c737261dbc8be12bb4d63d2292c14d593",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/reference/DONOR_CATALOGUE.tsv": "2c7ad57ca72674aea09f7e0c3ab91948c79a46c2",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/reference/PROGRAM_PRECOMPUTE_EVALUATION.md": "7c364cf10adcbec4cdc07a1bfa616a9424bf91dc",
+    "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/reference/SOURCE_PINS.json": "1d04e64f634cf32efa604f33833ebb96709c80ab",
     "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
     "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java": "3bdeeaea9a212fe0c7d1f544510f87c4cd49eb40",
     "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java": "9d0788d3717e017d58345c5c3e62022c2915a3c8",
@@ -262,13 +262,13 @@
       "name": "m3-program-escape-precompute-20261017",
       "targets": {
         "m3/docs/name-mapping.d/m3-program-escape-precompute.json": "d293b891ed743279037f4cf4417bf8efaae9fab186dee4a3cc6bb69dc78a0e8f",
-        "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3EscapeFlow.java": "180488506ddfd0709530a7f164217d684389b4d5e77ce56b204bb0df4ad153de",
-        "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3GvasLiteralHarvester.java": "31dd73ae6b8621eb326af013560fb1fca09650248fa67dba7daf526f7c385dd6",
-        "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ItemReferenceScan.java": "eadaa78df40c19062ac56119fb123e31faf2dcc8e9b302e29a415bc7798e35f0",
-        "m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3EscapePreparedTest.java": "ea8bed1a238df1964d11b49e3a5742f44f27ff262c0fe1741bbaa0bcf5a23dcb"
+        "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3EscapeFlow.java": "f8e14d9ab9e4499457ab58ad0776a8e8124331f28ab48de23bb69bc2f83adaff",
+        "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3GvasLiteralHarvester.java": "cbe859bcfd97ee2e7bec6122c96de66d25159d00770cc84c5f0227c64f96f814",
+        "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ItemReferenceScan.java": "4c504f5272d2d66b3e1de78e8db4dd4690aa4795b98eba91a828b15bbe409994",
+        "m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3EscapePreparedTest.java": "f1a3e4fa22d4ac116e936cac4d51d459d3def5ae855bd484157ca9fe3006de46"
       },
-      "sdk_inputs_sha256": "e3c442a0973fe61a69c1768682023d1f1970b27bf24c2f945a4a5ba8aba0c4e9",
-      "sdk_results_sha256": "69b360a1288ec8ecf5fdb9d67867e1b6f941e9e12f47cd538a1cf37343ab3c9d",
+      "sdk_inputs_sha256": "f42529caa44677e118295e233ba89022c5b32f8d4dbbdf312f6ad33bf2825055",
+      "sdk_results_sha256": "c70b1ad337f5bd4d38305f7529c1ceef7ec70e63bf6a7231e37568b58fb9ba68",
       "sdk_tests_sha256": "065c2b1dcf7ad3400dcb5b07f9969b20d202efb7e446a1f9f0dd6b63baa2c6d9"
     }
   },
@@ -297,53 +297,53 @@
       "canonical_source_git_blob": "cfdfd986c17a534b37100acfbb1c1d072756cf13"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/catalogue/reference/DONOR_CATALOGUE.tsv": {
-      "sha256": "35fa29503f77b6f802cf9d259e74efdb5aaddee45a3e14a9a676c262ac2efcac",
+      "sha256": "6e7ca1d0eaa0fa5fdd6f32b087d4f6a30407c34090ffccd66008fbaf9c87f957",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/reference/DONOR_CATALOGUE.tsv",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "1f32dd13e8f1213f73ef1a29a1206e189d933ed2"
+      "canonical_source_git_blob": "2c7ad57ca72674aea09f7e0c3ab91948c79a46c2"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/catalogue/reference/PROGRAM_PRECOMPUTE_EVALUATION.md": {
-      "sha256": "48bcfc2885e40a54c1039ac251c7e0cc81ce05c94c63fccc92acd062b9657edd",
+      "sha256": "78a8e6d8ef62b1ff2a42465ea11fa8f106a561477648c6dfd2b1966443d7d2a4",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/reference/PROGRAM_PRECOMPUTE_EVALUATION.md",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "865a3cdd918eaff5d501a212dfcdaa742697294a"
+      "canonical_source_git_blob": "7c364cf10adcbec4cdc07a1bfa616a9424bf91dc"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/catalogue/reference/SOURCE_PINS.json": {
-      "sha256": "1a7c8a85fa681903613751437d75f1aa3384c0bf6dfd32c6b14694fa27d29e32",
+      "sha256": "407790e776e99156f85ae1a4ea59b3ff61f15194be8992ac4107e1779feb9719",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/reference/SOURCE_PINS.json",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "10e4979c737261dbc8be12bb4d63d2292c14d593"
+      "canonical_source_git_blob": "1d04e64f634cf32efa604f33833ebb96709c80ab"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/catalogue/verify_received_tree.py": {
-      "sha256": "1ae8053070eb82493478d472be0fcf3877544d2b00e999cf984eac696ee94f87",
+      "sha256": "67172088fda5233cd07886042b753a6eb378f24b80cb49bf3bfd62da757ad198",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/contract/verify_received_tree.py",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "f5cdd827de93d9cd46dcb2736d5521ef20c721b4"
+      "canonical_source_git_blob": "4463b46cee2bc57b4e9182fff4293f24c95707a4"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/current-tree/COMMANDS.json": {
-      "sha256": "40154c2ab576f0e3199c9abec80bbe9dd7f832e192ba20ee8ace8210d131ad79",
+      "sha256": "7e911da6fd0658a0877ee85bafae12bcf1060bc4d11e1c13a2b7213f137b50a2",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/COMMANDS.json",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "83d56c1f56ec16c73f9926d57a69e65472e06893"
+      "canonical_source_git_blob": "beb25760a9ae177b3a35aefbe4c3f16f5bd88bf7"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/current-tree/EVIDENCE_FILES.tsv": {
-      "sha256": "d915f50645ef52fd1b3658be94a9a0dcae49dc27e940cd2973da41e01342c0c3",
+      "sha256": "67577f49a1e1a230fc0543eb1dfbe6b728157c611f90bf10ddffb549db29ba5c",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/EVIDENCE_FILES.tsv",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "2fa46e2209363c5cc7f68e343e0dd99603c291fa"
+      "canonical_source_git_blob": "4e6762ccbad92cc4ca04d935d9f830edc3dc958c"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/current-tree/EVIDENCE_RECEIPT.json": {
-      "sha256": "71ad3aa6192f3614eeabc77347f19ac80d5b5f5359b406faf0a96f79dbe368c5",
+      "sha256": "2ae68df5863629d2f0caf7a21316776ebaf5b88206f7567988d691e7582ca33b",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/EVIDENCE_RECEIPT.json",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "ac9ade0e6ec242fa9b13b9cc5f98d22c6ac6315d"
+      "canonical_source_git_blob": "3cc3a33dab8957135868f486841a3bae8e62848b"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/current-tree/MAVEN_CURRENT_TREE.log": {
       "sha256": "727e43780e6c1ba5627342bdafe62aba297b9467d02696f0327049aec5d42a29",
@@ -360,11 +360,11 @@
       "canonical_source_git_blob": "2fa89fc54e3044b10ffeaabe65ea33f30a96e3ea"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/current-tree/RESULT.json": {
-      "sha256": "c6500000bad9228da059d488637ed9067c09825b308d26345c5054057578fba3",
+      "sha256": "846675b785af4447d959b3625c88ae5780d9db9d3e0eeeed05b8389f1047e7d7",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/RESULT.json",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "0ce9de6f19553064e4f82c051ce265c2e71fbd19"
+      "canonical_source_git_blob": "984230face8eafef355b5ad441ba35c854799663"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/current-tree/asm.args.txt": {
       "sha256": "9c88f08e640f2fc69557e79ce4a915feb8e04f5d9c2e113145b6027da66957c5",
@@ -451,11 +451,11 @@
       "canonical_source_git_blob": "909331ed5aebb1ba210dc4b6469e98c21c7b7228"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/current-tree/ports.args.txt": {
-      "sha256": "53df3c104a3e356d9d75c6c74c5013c960ca48212e8bf61f4c96860dc1830181",
+      "sha256": "de6e85ad303b356e5f597261ce8ed33dcadc2bc83bf0ded43ff646ccc5d09e8e",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/ports.args.txt",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "63e6a63916c655ee3ddb2ff98eb2a7b2dcff4e74"
+      "canonical_source_git_blob": "14165c8018b9ad78f1c909b4978201cd70b75397"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/current-tree/receiving-head-after.stderr.log": {
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -493,11 +493,11 @@
       "canonical_source_git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/current-tree/receiving-source-tree.stdout.json": {
-      "sha256": "b7bd6b8726f7e1df4a1180164006417e0a7907d71d178057488d5a45d5108c29",
+      "sha256": "1c49ec75e0f7f39ebb41981e7c52400d9faf8b6072f70f1b1c10ac2c98f2a25e",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/receiving-source-tree.stdout.json",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "fc6f974ad59d35fe910e23082ca4292aa0b8c4bb"
+      "canonical_source_git_blob": "562ada89742dea8ee88df7c9d3f46099fcba24aa"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/current-tree/sdk-post-admission-0.stderr.log": {
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -528,25 +528,25 @@
       "canonical_source_git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/current-tree/successor-e913/COMMANDS.json": {
-      "sha256": "fd9fa818f1cf67779898972fcf79dfd8a166700af6a87e3f6c1417efc93a04a3",
+      "sha256": "55aec97acbf1db11119a83de57e81cad0b926a8918e789a9cac6b8b5c7299cfa",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/COMMANDS.json",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "88c0370b8c9a21ae26c89ab3eb0212d93079859c"
+      "canonical_source_git_blob": "73c37b9b075f0e3bd1d87072a1db06f6fe98167d"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/current-tree/successor-e913/EVIDENCE_FILES.tsv": {
-      "sha256": "c6f1679f2658baa1da8a675936658c127bc4e013b6465b7b5a2ddbfb643e5b89",
+      "sha256": "4a202eecd620c61d627316a9582a434c937def367150b57e51b97870fe4bb03f",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/EVIDENCE_FILES.tsv",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "18e975eac2e9894781cddebfddf01ea599d7ce1d"
+      "canonical_source_git_blob": "77bd2522abc3e20218aa649c064d0073f3c132f3"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/current-tree/successor-e913/EVIDENCE_RECEIPT.json": {
-      "sha256": "3e1e3610e579a395557031ca45478da0c776aecd67f14798db7045d3929ba5a0",
+      "sha256": "227fd1d200d7ce050bea524dfced509d44898458528a0051f3586d671b1a8bc1",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/EVIDENCE_RECEIPT.json",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "0371291c2bf2bf8d157b0d58f57f1c216ff50a0e"
+      "canonical_source_git_blob": "6800e81ed70d0be3a2eae528386f1f21ea2890fd"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/current-tree/successor-e913/MAVEN_CURRENT_TREE.log": {
       "sha256": "9b43deb53139b048539a29a9468e172463de5ab907e3f6d50fc3e6f4fc6c1d5f",
@@ -563,11 +563,11 @@
       "canonical_source_git_blob": "2fa89fc54e3044b10ffeaabe65ea33f30a96e3ea"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/current-tree/successor-e913/RESULT.json": {
-      "sha256": "54064049fff48675814844d13a7283bb3e0b4f96d4a0c5e145af405cb6225425",
+      "sha256": "f90918e96dca7054e679211068f68737e785ee554ac719f21a49c0d2a276d77d",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/RESULT.json",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "9d124a87e425ba65c9501c9014a96c373f822bab"
+      "canonical_source_git_blob": "2d9c90fa739c6585b7a2335327baa2dffb5df773"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/current-tree/successor-e913/asm.args.txt": {
       "sha256": "a813539eb1608681d8047290e8905df18ca089c49aae2ce55c53ddb28caaffc8",
@@ -654,11 +654,11 @@
       "canonical_source_git_blob": "6ee013bfc8ecdda55c25ecaa87364b43844ae9c7"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/current-tree/successor-e913/ports.args.txt": {
-      "sha256": "f750793b4b0681636d6156a489a5c8563227267e114741b9013293bb8be29da1",
+      "sha256": "5ef64d7bcf2d91631d708d3b145ccd41be2cc9f5eede0c757cff170eea9f44b6",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/ports.args.txt",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "d2166566461b198b5e2a1be1885aa2d383cf60a8"
+      "canonical_source_git_blob": "c03991aca165d94e297449264decb0c5cf824dff"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/current-tree/successor-e913/receiving-head-after.stderr.log": {
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -696,11 +696,11 @@
       "canonical_source_git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/current-tree/successor-e913/receiving-source-tree.stdout.json": {
-      "sha256": "44e340c5bff5f920d6fa135d304a3582e0fe7005ff60fcb62410a86795d61aad",
+      "sha256": "38cea649499997ab76db3331e6e8f8b6b6c75b4bddb81862e78b65f9fa3288cd",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-precompute-provenance-20261017/evidence/current-tree/compiletime/successor-e913/receiving-source-tree.stdout.json",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "4b7cab2d7bf95e8d5b9aeb56c57b8133e5123ce0"
+      "canonical_source_git_blob": "5f248342b08180682610eed3087da4dc980a058a"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/current-tree/successor-e913/sdk-post-admission-0.stderr.log": {
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -731,18 +731,18 @@
       "canonical_source_git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/ALGORITHM_CATALOGUE.tsv": {
-      "sha256": "9b94fd5a86d2ba86cd8fc4a344b48afb4ff101acb6fdcfd76db9f7d1c473a63b",
+      "sha256": "d24315e469f50231222af0cd927ba4db87af81613d27adff6dc0bfb64ec2138d",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/ALGORITHM_CATALOGUE.tsv",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "a6d91b7884e7eb803ad4089a26f454535bcdae54"
+      "canonical_source_git_blob": "16dd13511e0468585ec4367511fe957a420fee4e"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/FILE_REVIEW.tsv": {
-      "sha256": "e44ea3299ed10d9c46b39e34186ec72da91b1a4c9fa210e054445c4fae2369d2",
+      "sha256": "f866c8fe282beffd6953358cdfe6e31720da443d1e9a9f02d5aa4e2435d445ae",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/FILE_REVIEW.tsv",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "4ea4cd72d8c571329249d525c21b1d198d095921"
+      "canonical_source_git_blob": "873fd3b40acd104c12f7b2f73c7b6eaeb4f0df94"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/NOTICE.md": {
       "sha256": "fc86831e244f90c7b24326baba768513c39300997ef37f05aca9be9de868b085",
@@ -752,11 +752,11 @@
       "canonical_source_git_blob": "d44b22c8c34bac272383fbb82c9c6ce465394ae0"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/QUALIFICATION.md": {
-      "sha256": "4da7cdd53c3f1af8e86210ceaba777562606c41910a42baf9ab7b43cf8e28cba",
+      "sha256": "7826dd9b8709a5db6cd27144ea60e27fc8aa27ef2a181a915049e112d4049184",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/QUALIFICATION.md",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "be315021940b66fcfba80fc85abb03aad1c6b38c"
+      "canonical_source_git_blob": "6c48a9977547d561b3a87809b7bcbf7be7490d37"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/README.md": {
       "sha256": "52abce83c5769a4fc96052c8886f324389f7fefb022cb4f7659c778701a6f79c",
@@ -766,60 +766,60 @@
       "canonical_source_git_blob": "8e389e586c9f25b13be7c8229d4106d3b6dc8fb0"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/contract/input-seals.json": {
-      "sha256": "1deb105709e42e049ebb9245ab411c98aed97b7282e21816770e98e878e2c96c",
+      "sha256": "334cb4bf785991d6f54135c8861f68129e109cb74d7fac2c94bdbd995e7760da",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/contract/input-seals.json",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "e54308d4d2705b8accfe97170ca87f91bbaf9932"
+      "canonical_source_git_blob": "7a52af09e66782077d7b351392dfaa1915735a84"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/contract/parent-inputs.tsv": {
-      "sha256": "f131fbdae5e460c89a93521873f540e93921b16729ceebb0b23eb10542eceee6",
+      "sha256": "39d8554e1f2812e457b2189d71e6c060006d515dd2748fbb85945176e38d23f0",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/contract/parent-inputs.tsv",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "da832e59b2af275c285088c8dda464ed1128562b"
+      "canonical_source_git_blob": "99db153b6465c22f29cb169c28b27715228498bd"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/contract/refresh_inputs.py": {
-      "sha256": "ae540d780b0af21e6c48fe9450a0ecd65e2786ded2e6651c47ac2cfc99faee8c",
+      "sha256": "910fa9671fe808cf804b9333fdb478a753c658c2d15675b4f3ff114409183abc",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/contract/refresh_inputs.py",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "49d124d19d4ef8b09a8f5ae166f132bea9d5653b"
+      "canonical_source_git_blob": "60b67aeea2700850d7816c3d8528c421e0ec2f76"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/contract/support/EscapeWorkProbe.java": {
-      "sha256": "7003cbfcd1ca7fc3631f3c4b81c581001f24ac1efeee680071412ad49e83dac4",
+      "sha256": "d380cbc03e9b445361c78145a4a6bbbd554c4a6f4483ee8ff2adb9cf14d53cbe",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/contract/support/EscapeWorkProbe.java",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "2e012f8b9b9c1a6da51dffcd19be375ae57f0455"
+      "canonical_source_git_blob": "09113842e66cead7d4ad08dfc85dd8c435616c56"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/contract/support/HeapAgent.java": {
-      "sha256": "6c2c03a52535b60381b60a7cba5f4dedbc1ea5f596fc03d40a955538d2dfe763",
+      "sha256": "18229030c05da068d32ca7d5711b87c5ef743279398701e7b2128d3d05e419eb",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/contract/support/HeapAgent.java",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "b2451f97943a809306c36c0fe9daa6c5184ae1ba"
+      "canonical_source_git_blob": "1f5be0284f1ce7659b7122314b3ff36a67cf65b2"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/contract/support/SwapFailureProbe.java": {
-      "sha256": "6c82ad2269a17b7dcfe22c5d93442e615f117a51198ac1ad5065c57d05fc58d0",
+      "sha256": "7637e7103b3260e0810057739aec2c81c70814a366738913a3e3d9109a642854",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/contract/support/SwapFailureProbe.java",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "67c0773c0bfa8f1583096e7d76e483c5ac14aebe"
+      "canonical_source_git_blob": "d3ce439a14ebeb1c2ad25805dd162386ed77f5a6"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/contract/verify_sdk_results.py": {
-      "sha256": "fb6741477954e1b2a9d9da582057d75c2770c168bf4a4b3f0d4cbe8b1eb85ee3",
+      "sha256": "c485b7d997159a07a6a1b0d68dd8fe2612dca850355e1ed21c5ac8d8fab254e5",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/contract/verify_sdk_results.py",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "f73ce9ec4237e8964b5b11d24daaa1f79d7ed3c2"
+      "canonical_source_git_blob": "ca6f3ee77d5988d073070d57f63a0f26c025ed92"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/qualified/COPY_INVENTORY.tsv": {
-      "sha256": "34e23a4a22026a12d26286338d92e17a9e096517c929df755e4fb4e4e5d08d01",
+      "sha256": "ca39ff9906e8c6ad90bf97c188a016802e5904ad4ca14c52010c3592a4fed54f",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/COPY_INVENTORY.tsv",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "019e48a294cb7aa34a272f44ada4efc53836139e"
+      "canonical_source_git_blob": "bd36e84d04e533d24645c95c0fb4cba0ce59e568"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/qualified/SDK-five-tests.xml": {
       "sha256": "065c2b1dcf7ad3400dcb5b07f9969b20d202efb7e446a1f9f0dd6b63baa2c6d9",
@@ -829,18 +829,18 @@
       "canonical_source_git_blob": "0de785a89e63e45c2c469a40154a4be01bbd3d5b"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/qualified/SDK_INPUTS.tsv": {
-      "sha256": "e3c442a0973fe61a69c1768682023d1f1970b27bf24c2f945a4a5ba8aba0c4e9",
+      "sha256": "f42529caa44677e118295e233ba89022c5b32f8d4dbbdf312f6ad33bf2825055",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/SDK_INPUTS.tsv",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "c97ce71c7bdab8459e6bcb6f62e1ad22ea11f04b"
+      "canonical_source_git_blob": "fec43a420528d66ec03ebe88ccc715116767b8db"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/qualified/SDK_RESULTS.tsv": {
-      "sha256": "69b360a1288ec8ecf5fdb9d67867e1b6f941e9e12f47cd538a1cf37343ab3c9d",
+      "sha256": "c70b1ad337f5bd4d38305f7529c1ceef7ec70e63bf6a7231e37568b58fb9ba68",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/SDK_RESULTS.tsv",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "09115aa844be40e286a0e417afc6d2cbe40b8ef8"
+      "canonical_source_git_blob": "44e42dbbf4f548ca73bf107c19451b7360b61f40"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/qualified/baseline-available-tests-junit/TEST-jdk.m3.compiletime.M3ConstantRegexImageTest.xml": {
       "sha256": "b49c90c26b66db63562b7d8c95709116cb6f235e932a9c0a334532ebe617c9f9",
@@ -955,11 +955,11 @@
       "canonical_source_git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/qualified/commands/baseline-full-compile-failure.stderr.log": {
-      "sha256": "8402c048ce7be25d4bc19ff34547ff045e0929c0e79dd9b7f5a9c8628c90e820",
+      "sha256": "a72a0c8d5bbf0fbc2b0590f1f22c00a697cf116925a76e3382a077850fa480cc",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/commands/baseline-full-compile-failure.stderr.log",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "5467807823d6956f9a168fba5e87e77e3551df84"
+      "canonical_source_git_blob": "b15c4e803c7c450a2b1d9393eec7cb39a004a2a1"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/qualified/commands/baseline-full-compile-failure.stdout.log": {
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -1123,11 +1123,11 @@
       "canonical_source_git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/qualified/input-seals.json": {
-      "sha256": "1deb105709e42e049ebb9245ab411c98aed97b7282e21816770e98e878e2c96c",
+      "sha256": "334cb4bf785991d6f54135c8861f68129e109cb74d7fac2c94bdbd995e7760da",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/input-seals.json",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "e54308d4d2705b8accfe97170ca87f91bbaf9932"
+      "canonical_source_git_blob": "7a52af09e66782077d7b351392dfaa1915735a84"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/qualified/maven.log": {
       "sha256": "b7144339a58a8844c6f92f24f6caaba08a35eba72cf6e682956c96de27b7ebb8",
@@ -1137,11 +1137,11 @@
       "canonical_source_git_blob": "3a529f858812294ede6d719cb7063856e2385387"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/qualified/payload-manifest.json": {
-      "sha256": "60a169a42c311294ddeb569cc649d16544752df19f5eacb20693811871050db2",
+      "sha256": "fe8c5e73e59d955728738c36c1583beb735140ecea280ae1bccd5139e4881089",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/payload-manifest.json",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "adc41fba18c238d8bbb9d42003cfef82e0ba0c34"
+      "canonical_source_git_blob": "2a09880e7d8b61327658f05f9f45061795d1d3b0"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/qualified/receipt.json": {
       "sha256": "4daa23b7a980ad7d0d500bd053f8a8a0ba52f6498aeac5a83c9afc29a2e32ec6",
@@ -1165,25 +1165,25 @@
       "canonical_source_git_blob": "4899b0accfefec09c7347bc22eebe28014ef1893"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/qualified/source-arguments/baseline-available-compile.args": {
-      "sha256": "07385cd7e5b2111b964542dc07ec10860ee24e422c662fc7f25cf41eccbebed5",
+      "sha256": "4baa667f96d8c403db641d6a66cc50eac2fff4b409a2bb0b266858ad877d7307",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/source-arguments/baseline-available-compile.args",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "5b9c328ece9b2b817ea2fdc3320df052ad81f6ee"
+      "canonical_source_git_blob": "3cd69c9519f8c980cf4c254ea06430c75e93da8b"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/qualified/source-arguments/baseline-full-compile-failure.args": {
-      "sha256": "ca2b6676168042fe2f43a67c68e3e72cfa781fdfe4e2e211f73eeb6d5740ec62",
+      "sha256": "b4f87b44d5af2e56ba89bbd680989f8214a417cccfc2009bc8c2349ad5e9324d",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/source-arguments/baseline-full-compile-failure.args",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "43baf6ade90651343b229d30b482b0200b92d9e5"
+      "canonical_source_git_blob": "3a834cc55c0bca6ac6950062141c08eaf2013475"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/qualified/source-arguments/candidate-full-compile.args": {
-      "sha256": "f6e5f9fe33ada18690dd6854fa018101321462b9c2af17a0f47022f100334715",
+      "sha256": "e928b18635aacbee6e857c38f04193386c46cb3a81914ea96afe17cda968d519",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/qualified/source-arguments/candidate-full-compile.args",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "07ad671010dd4605bd518984060a3136e4f82f3e"
+      "canonical_source_git_blob": "e5ff30ddad389eda888b70560a97dd9f1baf4549"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/qualified/toolchain.json": {
       "sha256": "b20d4b5c46fc18c6a0a170479b526de87d29a60d6c8a8a40b82e05ae397de860",
@@ -1207,11 +1207,11 @@
       "canonical_source_git_blob": "a1139bcc48b08c6bcb2509f61cfe57feca3fe58d"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v2-process-deadline/COPY_INVENTORY.tsv": {
-      "sha256": "d8ec576592bf1caf9c8797b36c4e702e905c11a571a212ccb47d511df9ee9057",
+      "sha256": "7a970292037c9b25caefba806fc88ad5efff85f376d108edc966279a22b1a87f",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/COPY_INVENTORY.tsv",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "f4226856c8392b1b39e57cd1279b872ba90c8a76"
+      "canonical_source_git_blob": "b89fd4d00e3b2585bd1c0f631b7e048ef9cc63e3"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v2-process-deadline/SDK-five-tests.xml": {
       "sha256": "a055e885d201d8c27d482f9b7d0bc6c73eff0cd8be508916a3182ab32d6b3f86",
@@ -1221,18 +1221,18 @@
       "canonical_source_git_blob": "b487d7ad4e43e95ed991c50f4db9bdddb8f6ea54"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v2-process-deadline/SDK_INPUTS.tsv": {
-      "sha256": "9720eb424b1872dfa0f22b93f1bbfbbfd00f1ff2458a3c1c58e056aaaea1b194",
+      "sha256": "03b3c05e03aed588d1afd101762a60c6d51aa1e1a8ed054a59f9663ddd42eb7a",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/SDK_INPUTS.tsv",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "4caa88518655bbb074aa1aaf9026bdaefea50134"
+      "canonical_source_git_blob": "0d0a294629481b5f2ff1ffcf7174a88460afae5a"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v2-process-deadline/SDK_RESULTS.tsv": {
-      "sha256": "ed2fde639cb9f4e13cc82cf75965e24c592e502b3c4e0c5882f9617d1e6f68fc",
+      "sha256": "186b404d33b9f39998c92953fb7cafa29f8223ea334ca1b55e1eb1a16be0cade",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/SDK_RESULTS.tsv",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "93cf276e9480e0ccc145a5c4f9232cdd7eadf416"
+      "canonical_source_git_blob": "60195b40b5f2c3301891be90ea879d4d737b9d08"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v2-process-deadline/baseline-junit/TEST-jdk.m3.compiletime.M3ConstantRegexImageTest.xml": {
       "sha256": "778541ebf79c8dbf2c84d6ae299e4be193bcd6fc895165821968a8bf869f723c",
@@ -1305,11 +1305,11 @@
       "canonical_source_git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v2-process-deadline/commands/baseline-full-compile-failure.stderr.log": {
-      "sha256": "b59da7ee5126f5743ecdb61ca985e982555a3c9b2ed19a701e7af67fffa3332f",
+      "sha256": "1c5fe8d86593c540ec8cde414b6319092a644e10f129d80c3833b0fece0df24f",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/commands/baseline-full-compile-failure.stderr.log",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "e5f01844dc21afc9252de961b344e018d4a37507"
+      "canonical_source_git_blob": "00feec914e650c234fd2092147ea2feca079d6c0"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v2-process-deadline/commands/baseline-full-compile-failure.stdout.log": {
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -1417,18 +1417,18 @@
       "canonical_source_git_blob": "e48803d74b13f4ea40abc3b01fa274149d76990a"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v2-process-deadline/verify_sdk_results.py.txt": {
-      "sha256": "b514a04878b3d76ab0ae2a65d9ab2877641d432d8e47b1d3b21a5a0fdbc3593a",
+      "sha256": "0c3b1d116d72d14cdd0f5eb33839466caa5ebfc6970e52b28cbd30ae043b18e7",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v2-process-deadline/verify_sdk_results.py.txt",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "23a9ab77e3bf5d9e539abb213a7cc305c521eb0f"
+      "canonical_source_git_blob": "7eea4f6d722793dcf3825bd6c42156ddb261a5d4"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v3-single-site-measurement/COPY_INVENTORY.tsv": {
-      "sha256": "de00128e95b0d616dbd684b73dc7c5bb06a3bf4de9df540a3c472c7a536f885a",
+      "sha256": "1c49eb9acf0abdf8ced1030248634bbcc9f5fd6e04358daa365e2060e9ae108e",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/COPY_INVENTORY.tsv",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "d063117cd55403f3c8ff87df00a2236157e7938e"
+      "canonical_source_git_blob": "da53f91b7c076aaa9a1d266282bce9b00c52a28b"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v3-single-site-measurement/M3ItemReferenceScan.java.txt": {
       "sha256": "39881510663e11b27b59fc5f1ff8e1ff86e793a2f5d7ef36cef42023aebbccbf",
@@ -1445,18 +1445,18 @@
       "canonical_source_git_blob": "5a22a5c138a2cbbf271dc50b2be62209dae189b9"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v3-single-site-measurement/SDK_INPUTS.tsv": {
-      "sha256": "0389e5857d58e72c5610a64e31d41496bbfab66def976ed271dcc491792324ec",
+      "sha256": "7e712403825503ef0ca551be4a18c4139e0a22b7d3cd4d58033246bee7a3c54b",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/SDK_INPUTS.tsv",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "fe09cc5115922b5d3bc661b41df81dfb750a3fa8"
+      "canonical_source_git_blob": "f6a504108790e237290bc50aef92b9220b8e26d8"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v3-single-site-measurement/SDK_RESULTS.tsv": {
-      "sha256": "ed2fde639cb9f4e13cc82cf75965e24c592e502b3c4e0c5882f9617d1e6f68fc",
+      "sha256": "186b404d33b9f39998c92953fb7cafa29f8223ea334ca1b55e1eb1a16be0cade",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/SDK_RESULTS.tsv",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "93cf276e9480e0ccc145a5c4f9232cdd7eadf416"
+      "canonical_source_git_blob": "60195b40b5f2c3301891be90ea879d4d737b9d08"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v3-single-site-measurement/baseline-available-tests-junit/TEST-jdk.m3.compiletime.M3ConstantRegexImageTest.xml": {
       "sha256": "562e850d15c1d379c38d5817a8ffd9aba157641be7f03ff49f6c51f99c961c23",
@@ -1571,11 +1571,11 @@
       "canonical_source_git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v3-single-site-measurement/commands/baseline-full-compile-failure.stderr.log": {
-      "sha256": "f2450acde716ca17ca3990e05f129f0b3c6fc90e4a08108daa131669f9cdc335",
+      "sha256": "55a04889c5c3378769d50bf38326bc0aaa25f70c932be2921a436ef43894fa7b",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/commands/baseline-full-compile-failure.stderr.log",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "471755d7f1ae1bd9176e20ecfeeb0225231ac896"
+      "canonical_source_git_blob": "2d752620e9b915d0f1a5c379c606827e50a557f9"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v3-single-site-measurement/commands/baseline-full-compile-failure.stdout.log": {
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -1739,18 +1739,18 @@
       "canonical_source_git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v3-single-site-measurement/input-seals.json": {
-      "sha256": "adefbd68e5ccb20aa4dd107cff5951781782ed2fe8a82f120e969bb70943ec4b",
+      "sha256": "150379461b694ead94e7f6a5c33e6c5bdf698df897108adc950d9a9be38f18e3",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/input-seals.json",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "e70d1696e5861dd26fd3ebe18558b3d6c876f212"
+      "canonical_source_git_blob": "faa98574be2b9126270a2dbc1b8924ccbad4da3c"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v3-single-site-measurement/java-manifest.tsv": {
-      "sha256": "7ac43228b215dd9a9c124018e5ebdfb455a83cad8626f2470aadda60f7701617",
+      "sha256": "46d5b607379faa1e311ff8a3e523ea971cea8d543dd093ccac3d155ae9dc681d",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/java-manifest.tsv",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "8d3cfbdc2589b28e9a410be115351c6f3727cefe"
+      "canonical_source_git_blob": "a4aa40ca87a6b14589090cc4969f62252f767983"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v3-single-site-measurement/maven.log": {
       "sha256": "49924e6206cbf57b0bdc0d887863bec3f57a1fff9d564e32bc37de00231cafcf",
@@ -1760,18 +1760,18 @@
       "canonical_source_git_blob": "c5ac3f400f086d3beb79e4cb3c1223dc7f2f623d"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v3-single-site-measurement/name-mapping.json.txt": {
-      "sha256": "469cfac93eae278aeb5914dc301a68efaf732baf3216b96009ca68308b8f0be0",
+      "sha256": "159a44eeb638aff38ba84add724dcb2a0d64e9be29411b1224ce81f499c90078",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/name-mapping.json.txt",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "767c7373dab06cd66e465ccbc1f4fc526c53ea3d"
+      "canonical_source_git_blob": "5f24d18b0eb9a2603559a51c82537ca566cd98a1"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v3-single-site-measurement/payload-manifest.json": {
-      "sha256": "c111ce66517e96623e74f89d14699bf042e4c9c4940cd61f7a251e54ebdc9455",
+      "sha256": "d42c93c1a7ad16da346a317a2ee85f133b47750f563366a4005bb07a38e2617e",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/payload-manifest.json",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "89936747abe41d1c70f029be0cc566a77c14038a"
+      "canonical_source_git_blob": "a5b4a47a8ca201b3020cb3c1ab94c7627a75ac8a"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v3-single-site-measurement/receipt.json": {
       "sha256": "c99c2f568850d76432aa913857ad1a9642e1ef98936fb41d0678bff89d417b97",
@@ -1781,11 +1781,11 @@
       "canonical_source_git_blob": "3372f224bee36523bf41a6f35f76ebbbcda5ac37"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v3-single-site-measurement/text-manifest.tsv": {
-      "sha256": "e8c07c11ef57224c84cb688356b1e5d3bb15f02214b402e2a8e72480ca8c1f08",
+      "sha256": "5e92ea89ed6fa90cc0bdc7a7ee39ed60985c5ced490a3dc69c44e77ac823a77b",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/evidence/refinements/20261017-v3-single-site-measurement/text-manifest.tsv",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "9030098f2d2b940f580c0a926256a4099e4fe023"
+      "canonical_source_git_blob": "e0505dfb3e43ce866705f50c0bee5fbaa048e562"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/evidence/refinements/20261017-v3-single-site-measurement/toolchain.json": {
       "sha256": "b20d4b5c46fc18c6a0a170479b526de87d29a60d6c8a8a40b82e05ae397de860",
@@ -1802,11 +1802,11 @@
       "canonical_source_git_blob": "29f81d812f3e768fa89638d1f72920dbfd1413a8"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/payload-manifest.json": {
-      "sha256": "60a169a42c311294ddeb569cc649d16544752df19f5eacb20693811871050db2",
+      "sha256": "fe8c5e73e59d955728738c36c1583beb735140ecea280ae1bccd5139e4881089",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/payload-manifest.json",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "adc41fba18c238d8bbb9d42003cfef82e0ba0c34"
+      "canonical_source_git_blob": "2a09880e7d8b61327658f05f9f45061795d1d3b0"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/pom.xml": {
       "sha256": "fb6a5ac61ee850c094530dac0e6c53bfc9608bf93bb2261eaef1b370d7e7969c",
@@ -1837,11 +1837,11 @@
       "canonical_source_git_blob": "1ca40d88718821376012e7d2e81d0b53ba392288"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/review/independent-graph-review.md": {
-      "sha256": "6a561552baf06d91132b1211c89c1bee462b3e7bb6fad24417e13205582e4ce3",
+      "sha256": "b12cbda61ec42bf75c35328b9f3d0c28f268f7c345341928e7db5c2d43068bdc",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/review/independent-graph-review.md",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "965c43c606e5a3f12e2e7e30c674a10474d50113"
+      "canonical_source_git_blob": "c440bd993b19c67b09a209d0bbcda66be05833f5"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java": {
       "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
@@ -1872,67 +1872,67 @@
       "canonical_source_git_blob": "d24729950508857280ea1b56d4e930f05137ec85"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/src/main/resources/META-INF/rewrite/m3-program-escape-precompute-20261017.yml": {
-      "sha256": "f453924506fb2d1122fff012594bf96c59fd591aa6c827352b430fd95a4343dc",
+      "sha256": "037131a9c19c7b81855c612f693c24a6bb61a07199a73b3f4d1fc69e4e07d35e",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/META-INF/rewrite/m3-program-escape-precompute-20261017.yml",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "321f6bf58da54dbbb5b25899c2b93e5af3e8be07"
+      "canonical_source_git_blob": "e0231f2dc6133918ef7d31ff0cde1484f130ac9f"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3EscapeFlow.java.txt": {
-      "sha256": "180488506ddfd0709530a7f164217d684389b4d5e77ce56b204bb0df4ad153de",
+      "sha256": "f8e14d9ab9e4499457ab58ad0776a8e8124331f28ab48de23bb69bc2f83adaff",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3EscapeFlow.java.txt",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "e88b784e8078a828bad98dced8054f706dfee2d6"
+      "canonical_source_git_blob": "a05d6154ab9a87b807806abefad8ba465079486d"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3GvasLiteralHarvester.java.txt": {
-      "sha256": "31dd73ae6b8621eb326af013560fb1fca09650248fa67dba7daf526f7c385dd6",
+      "sha256": "cbe859bcfd97ee2e7bec6122c96de66d25159d00770cc84c5f0227c64f96f814",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3GvasLiteralHarvester.java.txt",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "f19f2c2a2ffcb4011f508166e4395856d27da7eb"
+      "canonical_source_git_blob": "bc479ddd90c3a079fa73c753f4838ce039412d52"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3ItemReferenceScan.java.txt": {
-      "sha256": "eadaa78df40c19062ac56119fb123e31faf2dcc8e9b302e29a415bc7798e35f0",
+      "sha256": "4c504f5272d2d66b3e1de78e8db4dd4690aa4795b98eba91a828b15bbe409994",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3ItemReferenceScan.java.txt",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "42481e0b1f3ad881a77ddda55d7d3a31fb1dd0f8"
+      "canonical_source_git_blob": "608f8b77c52ab2d2e1293b736bb77a48b2e2bd58"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/m3__ports__compiletime__src__test__java__jdk__m3__compiletime__M3EscapePreparedTest.java.txt": {
-      "sha256": "ea8bed1a238df1964d11b49e3a5742f44f27ff262c0fe1741bbaa0bcf5a23dcb",
+      "sha256": "f1a3e4fa22d4ac116e936cac4d51d459d3def5ae855bd484157ca9fe3006de46",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/m3__ports__compiletime__src__test__java__jdk__m3__compiletime__M3EscapePreparedTest.java.txt",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "6f81f661dac183b65c4c7d02e2e5ab3a4a8904b4"
+      "canonical_source_git_blob": "38608ee32f086956b1196e879a32fda1768ced12"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/manifest.tsv": {
-      "sha256": "13e556fb54e01c3aac8ae328b6e75363ff626ae797652209f5e50ddc4c077c4a",
+      "sha256": "6f89d7258175b03200250d0ba233dd3a49ff090cfd9bfb9008bf888b4562ef96",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/manifest.tsv",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "a0118c3462566c354b4a16e1c6f0be09b3b1f5a4"
+      "canonical_source_git_blob": "b0cb60b4d98537683c93af99b3f00506e30bdc24"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/pre/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3EscapeFlow.java.txt": {
-      "sha256": "7d07697c8211dae24fba49eb8f5011064abc80a850f254d76fb9c56644329894",
+      "sha256": "7a3a3346f4af222c4122d302b0b07155197dc64b864de2b2944c34a9f391c522",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/pre/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3EscapeFlow.java.txt",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "5e4e63059fc6b1a54ab66636aef2c9e0ae1e65cb"
+      "canonical_source_git_blob": "9eda59508ea15cb6ac72fa4cf9c74a08ed84193d"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/pre/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3GvasLiteralHarvester.java.txt": {
-      "sha256": "e4d1a2bced4ca3f33c743aa4be386ae546f5266f68473fd6e0f3fbba68f335f4",
+      "sha256": "be66633ab96e810c332014ba1eade54dfa653ade5451498fa3e5c84aecaf5fac",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/pre/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3GvasLiteralHarvester.java.txt",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "40400aaa7b1611cc5012a55579a5fed74f0cc3ad"
+      "canonical_source_git_blob": "6c5cb568e5fab4036c4db54f0c381b443746ed74"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/pre/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3ItemReferenceScan.java.txt": {
-      "sha256": "d17344ac9c3488860e1487fe0072427c4a5688fc8a68393f8b782d92bd49a4ae",
+      "sha256": "7fd342dce0e81da0cdb3e0e9e99a3a83d7f07ed10909ec57e7eb6614635dae05",
       "mode": "100644",
       "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-program-escape-precompute-20261017/pre/m3__ports__compiletime__src__main__java__jdk__m3__compiletime__M3ItemReferenceScan.java.txt",
       "kind": "EXACT_CANONICAL_COPY",
-      "canonical_source_git_blob": "cda993a1cb5654b34e3e339c4306bbb1c28881a4"
+      "canonical_source_git_blob": "d9d94ebf3c1b88a8a09003846526ea77d8d6ae37"
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-program-escape-precompute-20261017/m3__docs__name-mapping.d__m3-program-escape-precompute.json.txt": {
       "sha256": "d293b891ed743279037f4cf4417bf8efaae9fab186dee4a3cc6bb69dc78a0e8f",

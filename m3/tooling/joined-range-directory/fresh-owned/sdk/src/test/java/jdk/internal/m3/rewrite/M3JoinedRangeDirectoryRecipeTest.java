@@ -328,7 +328,7 @@ final class M3JoinedRangeDirectoryRecipeTest {
             assertEquals("cumulative ends mismatch", endsFailure.getCause().getMessage());
         }
         Path receipt = Path.of(System.getProperty("m3.fixture.root")).resolve("target/fresh-owned-java-execution.json");
-        Files.writeString(receipt, "{\n  \"schema\": \"M3_JOINED_FRESH_OWNERSHIP_FIXTURE_V1\",\n  \"javaRelease\": 21,\n  \"compiledVariants\": 4,\n  \"semanticCohorts\": 2,\n  \"rejectedMutants\": 2,\n  \"qualifiedBeforeSha256\": \"10ddd082c142420c29985a85d8b2f77507fdbcde2552b8bfc154e658f3b2a9e3\",\n  \"afterSha256\": \"d69ef5cc0e4bd5d95808978b4a0d73982322230a623d897074840b58fab1993e\",\n  \"proofSummary\": \"JOINED_FRESH_RANGE_PASS fixtures=5 ranges=466 nested=466 freshResults=1864 invalidRanges=25 indexRefusals=3738 aliasMutations=3\"\n}\n",
+        Files.writeString(receipt, "{\n  \"schema\": \"M3_JOINED_FRESH_OWNERSHIP_FIXTURE_V1\",\n  \"javaRelease\": 21,\n  \"compiledVariants\": 4,\n  \"semanticCohorts\": 2,\n  \"rejectedMutants\": 2,\n  \"qualifiedBeforeSha256\": \"c1c2ed959d7dff0cc2625b2008a55438a6a1313b4c58943f596e2ab7f44836a8\",\n  \"afterSha256\": \"c715036aa450d3e46e22bcdd0cae9d34d593b18db79953438d988a6b2be390b2\",\n  \"proofSummary\": \"JOINED_FRESH_RANGE_PASS fixtures=5 ranges=466 nested=466 freshResults=1864 invalidRanges=25 indexRefusals=3738 aliasMutations=3\"\n}\n",
                 StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW);
     }
 

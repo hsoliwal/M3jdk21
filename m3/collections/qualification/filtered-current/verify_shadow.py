@@ -29,7 +29,7 @@ EVOLVED_GIT_BLOBS = {
     "m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java":
         "8c7c19eac9338bbc1a6f82a9e339cfb4952ad0c6",
     PREFIX + "/runtime/pom.xml":
-        "ea72015355e7fdc7534775192af94c22ea468c64",
+        "73633ae3043b72af000323449bfa052bc2b10b05",
 }
 TARGET_COUNT = 9
 

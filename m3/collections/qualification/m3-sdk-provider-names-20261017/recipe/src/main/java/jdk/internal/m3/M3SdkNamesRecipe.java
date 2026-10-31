@@ -32,9 +32,9 @@ import java.util.stream.Stream;
 public final class M3SdkNamesRecipe {
     private record Output(String template, String target, String digest) { }
     private static final List<Output> OUTPUTS = List.of(
-        new Output("M3CollectionSdkNames.java", "m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdkNames.java", "0e8d7bf9235d4075552c104d650290534b3b814014bcdb664de89fbc804fdaee"),
-        new Output("M3IndexedMultiValueMap.java", "m3/collections/src/main/java/jdk/m3/collections/M3IndexedMultiValueMap.java", "0acfd80aee31b670b2dc0fa104d43b068ada2bd37781738170efdc7560f6fa82"),
-        new Output("M3CollectionSdkContractSelfTest.java", "m3/collections/src/test/java/jdk/m3/collections/M3CollectionSdkContractSelfTest.java", "7d15455b3253291c7756b8d5e3abf33426885ba66600a63aba4e26109cba257d"),
+        new Output("M3CollectionSdkNames.java", "m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdkNames.java", "25ea3681868ca94fe746405a9054ebfa28fa6808708bcbab06a7d94241f58877"),
+        new Output("M3IndexedMultiValueMap.java", "m3/collections/src/main/java/jdk/m3/collections/M3IndexedMultiValueMap.java", "407d5b24f3dbce305c0fcd4f43fd0ff49fd9747907c0016bcd70d9276db6b1b7"),
+        new Output("M3CollectionSdkContractSelfTest.java", "m3/collections/src/test/java/jdk/m3/collections/M3CollectionSdkContractSelfTest.java", "c4a8650c0d3fc48834469f8db0aadba6ef4fe2a56235dceb2912236ab7c064fe"),
         new Output("M3_SDK_FAMILY_CATALOG.tsv", "m3/collections/src/main/resources/jdk/m3/collections/M3_SDK_FAMILY_CATALOG.tsv", "e986838120c2558a145c6b16942475c8f5ff885b166526d635ef9c10360d8313")
     );
     private M3SdkNamesRecipe() { }

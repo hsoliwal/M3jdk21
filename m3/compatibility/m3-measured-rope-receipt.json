@@ -60,45 +60,45 @@
   "publicJdkReplacement": false,
   "targets": [
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3MeasuredRope.java",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3MeasuredRope.java",
       "before": "ABSENT",
-      "after": "161d7d7c3652e299a4c1ef7535a690a3afbfdbc27bc3865f5dc45720507559d5",
+      "after": "049e52efdb2ce35cc90090fc5a532042cd23a8fa1657e47d171616f5dd44c75b",
       "resource": "00-M3MeasuredRope.java.txt"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RopeArena.java",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RopeArena.java",
       "before": "ABSENT",
-      "after": "59ae1cadaa0924f67c5d9e64f19eff68761ef91d29881063297462aa306b1d77",
+      "after": "4f75d51ceab780a7d0c309675b57d524750b8ffd578c54f886a6e0215fa85086",
       "resource": "01-M3RopeArena.java.txt"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RopeMeasure.java",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RopeMeasure.java",
       "before": "ABSENT",
-      "after": "2a5bfb457ab93601350ed848fdac74a28130758241a08d2e87d0b94ccc903768",
+      "after": "27cc459f37e58e11d17ef73e7a20cd1645f63c01a6b1036e64a6b2b09c3f5bc8",
       "resource": "02-M3RopeMeasure.java.txt"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RopeMeasures.java",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RopeMeasures.java",
       "before": "ABSENT",
-      "after": "2a489d45e8c7c83561ee35553c501cceba6fcd87aa75f9fdb6479f0404113408",
+      "after": "0abf748ed95b8de20945c1287409e036a49a23dc86f52c822e062310a27a486b",
       "resource": "03-M3RopeMeasures.java.txt"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RopeMetric.java",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RopeMetric.java",
       "before": "ABSENT",
-      "after": "4558df4d18f0ec2117490628f58a914e6487ea1bef04d2b8826fb3577e75a90f",
+      "after": "5e569e1f912aaf7915edb65a6d2b537a74a85274b2faf6226ebaa2635b8ddf30",
       "resource": "04-M3RopeMetric.java.txt"
     },
     {
-      "path": "m3/ports/precompute/src/test/java/com/m3/precompute/M3MeasuredRopeAppleScenarioTest.java",
+      "path": "m3/ports/precompute/src/test/java/jdk/m3/precompute/M3MeasuredRopeAppleScenarioTest.java",
       "before": "ABSENT",
-      "after": "233a6d1d09861b4319e415c175d9ac0695014e7398e12ee4e99b0e040c62a2f1",
+      "after": "bc00ed5bb59b348a716d09ea6e47445148ea875e3e0466e3c96b292e63ec57eb",
       "resource": "05-M3MeasuredRopeAppleScenarioTest.java.txt"
     },
     {
-      "path": "m3/ports/precompute/src/test/java/com/m3/precompute/M3MeasuredRopeTest.java",
+      "path": "m3/ports/precompute/src/test/java/jdk/m3/precompute/M3MeasuredRopeTest.java",
       "before": "ABSENT",
-      "after": "c73bfd0c415ae1457351e99c47c39147d79d57d948ecb4c75ee5e9e891e201a3",
+      "after": "2a4e3acab2dd06db009ed7de92734a351b3a8a3c6924ee835f7d121646772c35",
       "resource": "06-M3MeasuredRopeTest.java.txt"
     }
   ],

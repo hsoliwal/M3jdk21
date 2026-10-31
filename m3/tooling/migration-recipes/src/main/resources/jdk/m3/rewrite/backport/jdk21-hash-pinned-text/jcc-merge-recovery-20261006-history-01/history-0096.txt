@@ -8,8 +8,8 @@
   "publication_receipt": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/SOURCE_IMPLEMENTATION_PUBLICATION_VERIFIED.json",
     "bytes": 370323,
-    "sha256": "03ba5aa231929079fda7772dc6a798a687ba7486fa81ceacc0723407330f956a",
-    "git_blob_sha1": "adb6d06c45d636c29612fe6442374b429a8cba60"
+    "sha256": "c6500d09f2056e7ea1dad619cfbae3f8763e39ebdeedd4d63440540a2dd46146",
+    "git_blob_sha1": "349017b19d5aac98b98ec2c26b55c27671d002e4"
   },
   "publication_manifest": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-integration-0b8dc/publication/FINAL_MANIFEST.json",

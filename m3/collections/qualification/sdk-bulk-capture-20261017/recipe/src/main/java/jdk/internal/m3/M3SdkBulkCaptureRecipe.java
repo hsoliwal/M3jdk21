@@ -35,9 +35,9 @@ public final class M3SdkBulkCaptureRecipe {
     private static final String TARGET =
             "m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java";
     private static final String BEFORE =
-            "bbc218ecd8c87648976501a5f09aa8baa5af94e1ea79fdef1647ac4248f59e65";
+            "0ce075c9897724dc63c65b805480eaa918aaade46aec0188cfaf9aac3aa2863f";
     private static final String AFTER =
-            "ff73119862556f307cc3e6af918336793faae0c2575f2cedda34b4890ba916b0";
+            "ba88b504861bb43346a2a4b961c7fa0d01d815abebf0b9080c475653b2048c21";
 
     private M3SdkBulkCaptureRecipe() { }
 

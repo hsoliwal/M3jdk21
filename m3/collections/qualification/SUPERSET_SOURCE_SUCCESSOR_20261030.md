@@ -2,7 +2,7 @@
 <!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors -->
 # Superset source successor 2026-10-30
 
-Receipt `qualification/superset-source-successor-20261030.tsv` (SHA-256 `086b8000624fba0c38779a230dfd7fa41d79d3195a3d0bda67466cceb45bd116`)
+Receipt `qualification/superset-source-successor-20261030.tsv` (SHA-256 `866bd9ffd36d1530366dd93985fb30d9b3ea5166f6e4406b62a619657c0762ea`)
 seals the exact current `m3/collections` source set as one additive transition over the
 Tools4j refinement result (composed digest `6283ee8df10e7d2e4b2a0d47635ef57775fb476c1cae9545cfe1692fa59c176e`,
 510 rows): 166 refined digests and 262 admitted Java sources, resulting in 772 rows and 765 Java sources under `src`.

@@ -1,15 +1,15 @@
 {
   "baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
   "resource_root": "/dev/shm/m3jdk21-work/recipe-candidates/src/main/resources/jdk/internal/m3/rewrite/m3jdk21-integrated-utilities-20261018",
-  "manifest_sha256": "a7ea777197248e5430680dd599004ca815b881890bf7a746cb156ad79950301d",
+  "manifest_sha256": "57828683b68bfada969475578de29315df49896f146c40e70a40bdbaca514470",
   "source_intakes": [
     {
       "path": "/dev/shm/m3jdk21-work/collection-candidates/candidate-manifest.json",
-      "sha256": "6971793040645fdaae63019a73c247e4a7d8a5873b3b052e6be11cb925893801"
+      "sha256": "21a4092821657f4ff727fab1b94cc53f7933e6ec21e22076394819a3a477d825"
     },
     {
       "path": "/dev/shm/m3jdk21-work/utility-candidates/candidate-manifest.json",
-      "sha256": "4a9954456edefe502073dadd1b8b2957113909f03eaf1bd6bedeb12bc50cc407"
+      "sha256": "0ca1d7feadbc849fa3185c09f9b56334f9e4492cdf906bf44517614e981ef629"
     },
     {
       "path": "/dev/shm/m3jdk21-work/mask-candidates/manifest.json",
@@ -17,7 +17,7 @@
     },
     {
       "path": "/dev/shm/m3jdk21-work/catalogue-expanded-intake.json",
-      "sha256": "394db1601ddf15ea10494da3938aac3a886bbf8fcf254352802655696d7dd0cb"
+      "sha256": "7a5ffa266ab03918c287897019e117944fa95c53f6d8f13617afa02c1914937d"
     }
   ],
   "manifest_targets": 483,
@@ -25,7 +25,7 @@
     {
       "path": "m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
       "before_sha256": "ABSENT",
-      "after_sha256": "f123ae356ffdd5df1523205dc5f1f48e6daf461b8a6f908a9870e348e80f5e7f",
+      "after_sha256": "5bf447216af55a51b73c275182af891c1ded5c2b427fa6856139731078d2ef8c",
       "template": "templates/m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv"
     },
     {
@@ -60,14 +60,14 @@
     },
     {
       "path": "m3/docs/name-mapping.json",
-      "before_sha256": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
+      "before_sha256": "c23e6f63411b1d33a29f558c2a6370421a6f51ab99b6db99ac77ebc6e859812d",
       "after_sha256": "2bb378d4e2af9c0bf62482182acdf53f1919abe16e6146195d38d9bcfc6ab9d7",
       "template": "templates/m3/docs/name-mapping.json"
     },
     {
       "path": "m3/runtime-integration/integrated-collections/FOSS_REUSE_DECISION.json",
       "before_sha256": "ABSENT",
-      "after_sha256": "9659689fab63ae642eb4b789814f6402108c9d24a9f1b48bf924207992fd6db1",
+      "after_sha256": "3ee2e50f838470732304b728ee7c37a224611dc42fd56148faf687f3c14b1cad",
       "template": "templates/m3/runtime-integration/integrated-collections/FOSS_REUSE_DECISION.json"
     },
     {
@@ -91,7 +91,7 @@
     {
       "path": "m3/runtime-integration/integrated-collections/counterexamples.json",
       "before_sha256": "ABSENT",
-      "after_sha256": "b481d09450f49bf14dbc40d5bec89c9d6924a5e1893e614f7216e8ef5959c077",
+      "after_sha256": "e24f21e0fa610db3038f420bcc05b9f39cb38278548efadf058d3efa3d58aa27",
       "template": "templates/m3/runtime-integration/integrated-collections/counterexamples.json"
     },
     {
@@ -121,7 +121,7 @@
     {
       "path": "m3/runtime-integration/integrated-utilities/contract-catalogue.json",
       "before_sha256": "ABSENT",
-      "after_sha256": "d36b88fc08ce728285c59f1826211be0a9154df2dbf8aedcd8a9a5875150d4b8",
+      "after_sha256": "8905efb6c8928d1d6834455532b3e65f6976d839a52e6ceb517940f4baf2e2bd",
       "template": "templates/m3/runtime-integration/integrated-utilities/contract-catalogue.json"
     },
     {

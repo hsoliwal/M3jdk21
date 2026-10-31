@@ -322,16 +322,16 @@ exact-commit/workflow evidence. No throughput, native-memory saving, universal i
 external writers, whole-package completion or runtime-family acceptance follows
 from this six-owner source/member closure.
 
-[PIECE]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/com/m3/text/M3StringPiece.java
-[ARENA]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/com/m3/text/LocalM3Arena.java
-[LOCAL]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/com/m3/text/LocalM3StringPiece.java
-[JOINED]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/com/m3/text/JoinedM3StringPiece.java
-[IDENTITY]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/com/m3/text/StorageIdentity.java
-[IMAGE]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/com/m3/text/SharedLexiconImage.java
+[PIECE]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/jdk/m3/text/M3StringPiece.java
+[ARENA]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/jdk/m3/text/LocalM3Arena.java
+[LOCAL]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/jdk/m3/text/LocalM3StringPiece.java
+[JOINED]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java
+[IDENTITY]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/jdk/m3/text/StorageIdentity.java
+[IMAGE]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/jdk/m3/text/SharedLexiconImage.java
 [MODULE]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/module-info.java
 [BUILD]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/build.sh
 [POLICY]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/docs/m3jdk21-porting-invariant.md
 [CHARSEQ]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/src/java.base/share/classes/java/lang/CharSequence.java
-[CATALOG]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/com/m3/text/SharedLexiconCatalog.java
-[PREFIXZ]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java
+[CATALOG]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/jdk/m3/text/SharedLexiconCatalog.java
+[PREFIXZ]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java
 [TEST]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/test/FoundationTest.java

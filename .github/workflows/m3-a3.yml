@@ -118,15 +118,15 @@ jobs:
           # eb71d2b0169458cea295c3052cf04a6b9a6ef6fc20da8b44c78965def51204e0.
           sha256sum --check --strict - <<'CLOSURE'
           c3be01bc3d5391e36c9e9982471029cc10b66a2adf6ceaf30a8cb8307568ad67  m3-openrewrite-recipes/pom-jdk-a3-export.xml
-          0c8b6e58942bb3ba5739e7fa060b20237c056ef36ffd1a84b25016314e9f0dca  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeMasteryPortableReceipt.java
-          ee74b358c97ab2dadb899df3b9c342ff80a78ccb44b8dda73be4937397e9e712  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java
-          a0b5d68d2f08fea262e8e5fd234ab7223641192e93d04e70c86eead1a9005b9f  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java
-          7419befbae77f9d3c400149bd0913d978c16d02a2cd76dd080f7988fc92c519d  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3FileAtomCandidateTable.java
-          9bf408c86263311669209189ae39a177ee99a8711c215bae42cfabea00223c0f  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java
-          4e80e3d733bd89d91c3b673446f46da4ccdd171725489bdbe89700eaea118dd2  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java
-          89c62be14f9e2d49c372cf490a186e0c9ca88e82ac5f8f14fd76515a25a5e1e0  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3PureIntAtomEligibility.java
-          8f261fa815f20bc60362bb2c416aad864ea8f6f041f7ffb292c1591f141454e2  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3PureIntConvergenceRecipe.java
-          19c68d1684fc8011f5d6b8ed1afaf91398c444e7b7d469dae9003f270e9c3905  m3-openrewrite-recipes/src/main/resources/META-INF/m3/jdk-a3-recipe-export.tsv
+          2b7eb6aa6bb20306d77a688040c72199894ed705f93a31ab9330c8b8ea98ec76  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeMasteryPortableReceipt.java
+          4367a662ef19efd9193934778dae9ef6a58c31f45e76e9c8f3607e6f7dfa962e  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java
+          c8b90be60cace5aba0e00d438be09cb6348273a8229adf7b5df490a5c3ec6a50  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java
+          3f11b266e4bf7bb9a08cf43f6692ce3209f310059462dfe70eca56048809b01f  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3FileAtomCandidateTable.java
+          923f15cef4b6b0ecc575cf1ad95a1fac3607f77bb111b9b87bd924b76d4b2c06  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java
+          eabca39453edaebc5b7f0e9aaaf12b900ba181e21dc5c8a08640abc7f0d0b6f7  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java
+          32b98c2eafaa8e4231dcded464a88f1560cebc71fb39d5d28934482af61b0043  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3PureIntAtomEligibility.java
+          a6587bcc76d05b006757f8ded6da2c7d46bb23b521e2030b8b9d657b6a31cdf8  m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/atom/M3PureIntConvergenceRecipe.java
+          8a6b8899a53669195716e6bb2104c3d8c17be1820d8f7265e78f8577040220ea  m3-openrewrite-recipes/src/main/resources/META-INF/m3/jdk-a3-recipe-export.tsv
           e0bd1341a8c39871cbf9713a8f2e099d908c355b4663fc817440c4186953cc90  m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/M3JdkA3RecipeExportTest.java
           1004fd03646ea42477fcf52416969023014f97e98c69a98f55bb12d0adc220e5  m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/M3RecipeMasteryPortableReceiptTest.java
           0e7a04b5007e26aae4a3fe16b77110eadcef0d84ef27eefe2056ddbee0163e64  m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/atom/M3AtomCoverageClosureTest.java

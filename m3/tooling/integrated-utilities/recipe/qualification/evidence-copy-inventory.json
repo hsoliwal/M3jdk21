@@ -13,7 +13,7 @@
     {
       "path": "qualification/catalogue/candidate-intake.json",
       "source": "/dev/shm/m3jdk21-work/catalogue-expanded-intake.json",
-      "sha256": "394db1601ddf15ea10494da3938aac3a886bbf8fcf254352802655696d7dd0cb",
+      "sha256": "7a5ffa266ab03918c287897019e117944fa95c53f6d8f13617afa02c1914937d",
       "bytes": 111389,
       "category": "IMMUTABLE_GIT_SOURCE_COVERAGE_EVIDENCE",
       "copy": "EXACT_BYTES"
@@ -813,7 +813,7 @@
     {
       "path": "qualification/masks/token-donor-review.json",
       "source": "/dev/shm/m3jdk21-work/mask-candidates/qualification/token-donor-review.json",
-      "sha256": "ddbc945484e09571ddaf7775deb49b7d20c59fabc2a0fcda434e9fdae3fb9cd7",
+      "sha256": "531f8a2da752159549885afc700016d8f0b033ceabac31aa0578b4ab6f0d5bf5",
       "bytes": 13666,
       "category": "MASK_AND_COLLECTION_SOURCE_BOUND_EVIDENCE",
       "copy": "EXACT_BYTES"
@@ -845,7 +845,7 @@
     {
       "path": "qualification/recipe/RECIPE_RESULTS-1.json",
       "source": "/dev/shm/m3jdk21-work/integrated-sdk-output-1/RECIPE_RESULTS.json",
-      "sha256": "cb0b1c569a13a30f04ee3ad10b0e5694cc9d01960b24b1080869cc4a3b484dd8",
+      "sha256": "06e7da2b5446823072cc99dfd3758b2fff0d332d90831f4cbf562f8bfb88f260",
       "bytes": 5192,
       "category": "PRODUCTION_RECIPE_SOURCE_AND_EXECUTION_EVIDENCE",
       "copy": "EXACT_BYTES"
@@ -853,7 +853,7 @@
     {
       "path": "qualification/recipe/collection-intake-1.json",
       "source": "/dev/shm/m3jdk21-work/collection-candidates/candidate-manifest.json",
-      "sha256": "6971793040645fdaae63019a73c247e4a7d8a5873b3b052e6be11cb925893801",
+      "sha256": "21a4092821657f4ff727fab1b94cc53f7933e6ec21e22076394819a3a477d825",
       "bytes": 3605,
       "category": "PRODUCTION_RECIPE_SOURCE_AND_EXECUTION_EVIDENCE",
       "copy": "EXACT_BYTES"
@@ -861,7 +861,7 @@
     {
       "path": "qualification/recipe/manifest-1.tsv",
       "source": "/dev/shm/m3jdk21-work/recipe-candidates/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/manifest.tsv",
-      "sha256": "a7ea777197248e5430680dd599004ca815b881890bf7a746cb156ad79950301d",
+      "sha256": "57828683b68bfada969475578de29315df49896f146c40e70a40bdbaca514470",
       "bytes": 95320,
       "category": "PRETOKEN_PRODUCTION_MANIFEST_SNAPSHOT",
       "copy": "EXACT_BYTES"
@@ -885,7 +885,7 @@
     {
       "path": "qualification/recipe/production-resource-assembly-1.json",
       "source": "/dev/shm/m3jdk21-work/production-resource-assembly-1.json",
-      "sha256": "7623d201d243b999ac4f64623a4295ba74f28dfc4b51836216b54ad24b869009",
+      "sha256": "b9ec28ab6b3dff2e04cef29d22a7f449bc05878a38dcc9bd61d312d0237bd481",
       "bytes": 42378,
       "category": "PRODUCTION_RECIPE_SOURCE_AND_EXECUTION_EVIDENCE",
       "copy": "EXACT_BYTES"
@@ -901,7 +901,7 @@
     {
       "path": "qualification/recipe/received-sdk-output-1.json",
       "source": "/dev/shm/m3jdk21-work/received-sdk-output-1.json",
-      "sha256": "e41ce9ec2f50eeffeb5043f0d4884cf4149b427db53fc40b81b5e4c50b19a1d8",
+      "sha256": "11c43db139fc1acd20d5eab1c30198acbabb1d78e1510420fd1e447bd60cc90e",
       "bytes": 8619,
       "category": "PRODUCTION_RECIPE_SOURCE_AND_EXECUTION_EVIDENCE",
       "copy": "EXACT_BYTES"
@@ -925,7 +925,7 @@
     {
       "path": "qualification/utilities/candidate-manifest.json",
       "source": "/dev/shm/m3jdk21-work/utility-candidates/candidate-manifest.json",
-      "sha256": "4a9954456edefe502073dadd1b8b2957113909f03eaf1bd6bedeb12bc50cc407",
+      "sha256": "0ca1d7feadbc849fa3185c09f9b56334f9e4492cdf906bf44517614e981ef629",
       "bytes": 3833,
       "category": "UTILITY_SOURCE_BOUND_EVIDENCE",
       "copy": "EXACT_BYTES"

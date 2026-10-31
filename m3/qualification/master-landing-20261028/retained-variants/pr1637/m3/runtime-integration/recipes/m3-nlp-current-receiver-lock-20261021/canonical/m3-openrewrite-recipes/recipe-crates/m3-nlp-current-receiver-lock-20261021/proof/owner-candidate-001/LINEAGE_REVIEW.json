@@ -8,9 +8,9 @@
       "Template additionally declares public codeUnits() and codePoints() returning LongStream.",
       "Template test additionally covers those stream methods and LocalM3Arena interoperability."
     ],
-    "source_manifest_hash": "e09815cea88c44e4da89ca8979ba247cddeee6c97b496d1aa2309a48916a90de",
+    "source_manifest_hash": "ec7142df904511f455e07650081db9eb6518a1fab138ea7ae44be15192cde343",
     "source_template_hash": "eb62c188e6b39ccc79d9cf372f15abdba12fd5ecd21f35e96eb22dd7ab08261e",
-    "test_manifest_hash": "5f47db4885a99b1ec7dc95957276d0130f2eab7cba16614907995c722fa6f9a6",
+    "test_manifest_hash": "6a86ba78d034b115bd3895fc2b66916a4c00a485ad01e60ff6e30bbbf410fc61",
     "test_template_hash": "ad5737365bcacdf839fa62ead8369e35e78efbc7f7afd55739d708f0512d358f"
   },
   "canonical_observed_metadata": [
@@ -58,53 +58,53 @@
       "bytes": 11215,
       "canonical_head": "c28bd8e83d0b88a9dba0c0a9fdbd35a25e6ecd07",
       "canonical_template_git_blob_equal_current2779": true,
-      "git_blob": "c27d6603b32d9c7f277ed097b70ee8eac174b08b",
+      "git_blob": "10f0f669d5658e088e8835702df0676535c1f01d",
       "owner": "gvas",
       "path": "m3/core/src/jdk/m3/text/M3GvasLiteralImage.java",
       "receiving_commit": "c09e67319378740dcad570d506463594dbfad3ee",
       "receiving_commit_bytes_equal_current2779": true,
-      "sha256": "2c1a8b9cc9870fc5fdf8e6f8ca46af907c503346aaf6d783b74a6498fd3601cd",
+      "sha256": "b05c40b8999993dfec75afa646ba4fac421258f0b611ab01956b878226574a3f",
       "url": "https://github.com/hsoliwal/M3jdk21/blob/c09e67319378740dcad570d506463594dbfad3ee/m3/core/src/jdk/m3/text/M3GvasLiteralImage.java"
     },
     {
       "bytes": 33365,
-      "git_blob": "9f66122b2dba2e4e0bc417208f18d0f8a2f95dec",
+      "git_blob": "46e79d724bf6fdb8228bde6cee4132c36b2094e1",
       "owner": "bigstring",
       "path": "m3/core/src/jdk/m3/text/M3BigString.java",
       "receiving_commit": "632a9eefb68798d86acd83e886fd267938638e01",
       "receiving_commit_bytes_equal_current2779": true,
-      "sha256": "e09815cea88c44e4da89ca8979ba247cddeee6c97b496d1aa2309a48916a90de",
+      "sha256": "ec7142df904511f455e07650081db9eb6518a1fab138ea7ae44be15192cde343",
       "url": "https://github.com/hsoliwal/M3jdk21/blob/632a9eefb68798d86acd83e886fd267938638e01/m3/core/src/jdk/m3/text/M3BigString.java"
     },
     {
       "bytes": 9740,
       "canonical_head": "d6f1b7a3b9b3eda4a29877ff65b6c2d2901dd1be",
       "canonical_template_git_blob_equal_current2779": true,
-      "git_blob": "b8e29cf9431d00aa3ee5d1c658ec8c7fa8177e03",
+      "git_blob": "73d7ae9ec7fa3680d1389aabf4e65beb0018ef15",
       "owner": "rope",
       "path": "m3/core/src/jdk/m3/text/M3RopeTextIndex.java",
       "receiving_commit": "b2f989a0fc77bc95a5fddfee7b378085d742fe8c",
       "receiving_commit_bytes_equal_current2779": true,
-      "sha256": "ff2495c01b8df68a01167e29daa4ea4a6af25650e59c5cc705cc2fdc7cfa0141",
+      "sha256": "d78d4f2f7d23c0a1927d86c8f059749cbb7d3a11e7d5152aae26135effb9f34a",
       "url": "https://github.com/hsoliwal/M3jdk21/blob/b2f989a0fc77bc95a5fddfee7b378085d742fe8c/m3/core/src/jdk/m3/text/M3RopeTextIndex.java"
     },
     {
       "bytes": 7802,
       "canonical_head": "c28bd8e83d0b88a9dba0c0a9fdbd35a25e6ecd07",
       "canonical_template_git_blob_equal_current2779": true,
-      "git_blob": "d4af3a34e45b58fb6849b1d8ec85d31fdda7b287",
+      "git_blob": "7597a2831be9b98b8a16ca6e3effcb8fa431f578",
       "owner": "gvas-test",
       "path": "m3/core/test/jdk/m3/text/M3GvasLiteralImageContractTest.java",
-      "sha256": "9bb67410bda500c43eb58f65c648351fc1ac477328abe84da2537bab823f114d"
+      "sha256": "5bc63e3944756409727cd61ac9e1c00a89b432b4f311c8e1109b7223cecb6f82"
     },
     {
       "bytes": 8903,
       "canonical_head": "d6f1b7a3b9b3eda4a29877ff65b6c2d2901dd1be",
       "canonical_template_git_blob_equal_current2779": true,
-      "git_blob": "cef8b5f91b7dc666627ddf5a5eb1c8a4611ebf73",
+      "git_blob": "3b0178d24606074195a5524844fc9954fdf25fe6",
       "owner": "rope-test",
       "path": "m3/core/test/M3RopeTextIndexTest.java",
-      "sha256": "1374a5b14a32a58324f50f980731a94e5e938235fbfdf27c2e679f0ea1681c92"
+      "sha256": "98d34219367796a53690d4f276523ee0f0f8d0b4a4127be2b806a3f177f1c74a"
     }
   ]
 }

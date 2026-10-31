@@ -35,8 +35,8 @@ jobs:
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java)" = 'f546cd6d947b1a9c5f22de9bd7633cf966715f12'
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java)" = '461f927506227501e26926e08e5aa3f6e360243f'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '9ca26b26412068d7fc58b5e431d9d091c8e062e8'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankWindowContract.java)" = '0535253bbef50c54e3d5836dc724f50c437687cb'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankWindowTest.java)" = '0d3325cc1d0c96a3588bbe39130428dd3cf96e0b'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankWindowContract.java)" = '02fb2ae84402893db79761d856ee97a7466e8dca'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankWindowTest.java)" = 'cea61a6fd489b1c043a09f0bba347ab33f792720'
           test "$(git hash-object m3/collections/src/test/native/legacy_m3rankbatch.c)" = 'acdd9a32dd04c1b03e4ec2ff79be2e66ea9fd09e'
       - name: Compile original Java native owner and JNI header
         shell: bash

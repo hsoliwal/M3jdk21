@@ -34,8 +34,8 @@ jobs:
           echo '19eb81ea9c3af8833c154213a8158a5107fc0c11adf4673a274dc4aacd62085d  m3/collections/implementations/eclipse-blocks/src/main/java/org/eclipse/collections/api/block/predicate/Predicate.java' | sha256sum -c -
           echo 'c9f59d9d17766c15952eac0be0b1ab164cdc7a415112ae475e8f187105e4fea7  m3/collections/implementations/eclipse-blocks/src/main/java/org/eclipse/collections/api/block/predicate/Predicate2.java' | sha256sum -c -
           echo '4e22825c28990fb415a0e1d5b799466d371c55f586a9e9bc2486af61449152e9  m3/collections/implementations/eclipse-blocks/src/main/java/org/eclipse/collections/api/block/procedure/Procedure.java' | sha256sum -c -
-          echo 'a98a5c39eb2b9930154e2c44371067104bf6ff73e8dc8a16b5a56cae6d1bc761  m3/collections/implementations/eclipse-blocks/src/main/java/jdk/m3/collections/eclipse/M3EclipseFunctionalAdapters.java' | sha256sum -c -
-          echo '1f453b8918db6878493c11bf1e5501673b43e1050c9b0a54dce0c6a849109b0c  m3/collections/implementations/eclipse-blocks/src/test/java/jdk/m3/collections/eclipse/M3EclipseFunctionalAdaptersTest.java' | sha256sum -c -
+          echo '52ec37ab56c149fa0cb08be090f82bbdaeec6db87b91ed192402474661a7ab86  m3/collections/implementations/eclipse-blocks/src/main/java/jdk/m3/collections/eclipse/M3EclipseFunctionalAdapters.java' | sha256sum -c -
+          echo 'a0e063405214f6940f8d7a2b0121e7e6a73a86837643c14fc32ce05263855b69  m3/collections/implementations/eclipse-blocks/src/test/java/jdk/m3/collections/eclipse/M3EclipseFunctionalAdaptersTest.java' | sha256sum -c -
           test -s m3/collections/implementations/eclipse-blocks/LICENSE-EDL-1.0.txt
           test -s m3/collections/implementations/eclipse-blocks/LICENSE-EPL-1.0.txt
       - name: Direct Java21 STRICT compile without any Eclipse/JUnit/provider runtime JAR

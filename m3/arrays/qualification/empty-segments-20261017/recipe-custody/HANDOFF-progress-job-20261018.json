@@ -12,11 +12,11 @@
   "existing_host_controls": [
     {
       "path": "prepare.py",
-      "sha256": "9b0b3d93c787c9a56036cddb2b044aef30f6fa8a1fa20fa5a2edae46dfd1e62c"
+      "sha256": "7c2063fa5aa88d0872fff0157413a1d2fdca4f00d01c787f8650969e8b514014"
     },
     {
       "path": "receive.py",
-      "sha256": "db258f16e1841f6f5191c1c969c20314a8d143bfa6558b60f684bea440cc1712"
+      "sha256": "e81744965f37cb890e00f6c1c7e50f4dae44c68eedafdf46565a7e105bab5474"
     },
     {
       "path": "ENGINE_SOURCES.tsv",
@@ -24,15 +24,15 @@
     },
     {
       "path": "src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java",
-      "sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43"
+      "sha256": "fa8a8e63fd445c0fbcd877315044c6e5c36f779db6e8a11797e03ab805e5903f"
     },
     {
       "path": "contract/test_prepare.py",
-      "sha256": "f504f1dcfafb24fd87f8f677643b45eecc74674881e16bf727b76c4e6a4d1856"
+      "sha256": "79c4335d02ca2179301d617d9ae447b778f2f12361e379ff04ad77c0237e7933"
     },
     {
       "path": "contract/verify_receiver.py",
-      "sha256": "a4d82df8b31e707afe7caa5e76524d191f285e2887dbfdfa95cfdc382ae01f7d"
+      "sha256": "a400589821da1c448b3c2354aef91c7a6fd596cf265b2baca097494135126d4c"
     }
   ],
   "existing_engine_sources": [
@@ -64,7 +64,7 @@
       "evidence": {
         "SDK_INPUTS.tsv": {
           "path": "evidence/progress-job-20261018/m3jdk21-progress-job/SDK_INPUTS.tsv",
-          "sha256": "a38770ac8437868f920c93cff636a0e03255ba882a525b621c1b1b1251252dff"
+          "sha256": "5b0d277cdb87e6b8927df46bfbd027e855c0edee873577eebefef60deebd0773"
         },
         "SDK_RESULTS.tsv": {
           "path": "evidence/progress-job-20261018/m3jdk21-progress-job/SDK_RESULTS.tsv",
@@ -89,7 +89,7 @@
     },
     {
       "path": "authoring/progress-job-20261018/build_progress_job_inventory.py",
-      "sha256": "2d9c9f9d09e4789938736f6f6b8c6e4185d5ae67ddef51b3ff45fdc03e0136df",
+      "sha256": "c6cec3c5ec27e7a304648cc8c6d7335ed1a2294d84e03f5d09003d47080b8a01",
       "bytes": 15436,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/authoring/build_progress_job_inventory.py"
@@ -249,7 +249,7 @@
     },
     {
       "path": "authoring/progress-job-20261018/prepare_progress_job.py",
-      "sha256": "c0f71853a819b71d211a7f7d79b6bac0ae69f207c8fd2c32eca67637f06988b0",
+      "sha256": "eb8c9bdf0f826ec4f7c4c744439c3d1699583c5233d77aafd927c89964619bee",
       "bytes": 19658,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/authoring/prepare_progress_job.py"
@@ -257,7 +257,7 @@
     },
     {
       "path": "authoring/progress-job-20261018/prepare_public_progress_job.py",
-      "sha256": "8f9550799117b78d0b8052db56226c77cc2f67f4e40820498ef6828bed26a952",
+      "sha256": "ae66181b1e17b035952ad3bafbeba8123e08baf912577428c1f2f48f8d363edd",
       "bytes": 7876,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/authoring/prepare_public_progress_job.py"
@@ -265,7 +265,7 @@
     },
     {
       "path": "authoring/progress-job-20261018/prepare_public_progress_job_retry.py",
-      "sha256": "4c96451dc7d94724fb7cc4f08cc12ce83820f30ae7155c52a46c21b6d6fd6c83",
+      "sha256": "991f0548882d3324abf0f4c286f44350094d53b8eca83530104f5f6a498827a6",
       "bytes": 7332,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/authoring/prepare_public_progress_job_retry.py"
@@ -345,7 +345,7 @@
     },
     {
       "path": "catalogue/progress-job-public-custody-20261018.json",
-      "sha256": "095f64fe7bca107e4d39822d35b1673d6f2e53c068b20760c5d67f1798d77a17",
+      "sha256": "458ed84041b5fcb154e9aa4c92cd6d0fc84e86d36c458ceeb60677b446fd81f1",
       "bytes": 2672,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/public-custody-preparation-v2/public-custody-path-catalogue.json"
@@ -353,7 +353,7 @@
     },
     {
       "path": "datasets/m3jdk21-progress-job/DATASET.json",
-      "sha256": "168788442bd4dc682757589125c40c19b8ce199e47da89a524a4b32b4442c755",
+      "sha256": "6eccf9334359c58f4ec7acff34b6d6d3e6a1dfd360db9f426ff58b0fb64ad062",
       "bytes": 490,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/DATASET.json"
@@ -377,7 +377,7 @@
     },
     {
       "path": "datasets/m3jdk21-progress-job/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-progress-job.yml",
-      "sha256": "c90e5e35d058f3909500b607840d63ffa021a88d59948e94a4049a8857819e70",
+      "sha256": "a55607deb893e9274bab8a268386e5c6978b2169fc54d1216931ef7440eec9a4",
       "bytes": 534,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-progress-job.yml"
@@ -921,7 +921,7 @@
     },
     {
       "path": "evidence/progress-job-20261018/m3jdk21-progress-job/SDK_INPUTS.tsv",
-      "sha256": "a38770ac8437868f920c93cff636a0e03255ba882a525b621c1b1b1251252dff",
+      "sha256": "5b0d277cdb87e6b8927df46bfbd027e855c0edee873577eebefef60deebd0773",
       "bytes": 4652,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-progress-job/candidate/SDK_INPUTS.tsv"
@@ -953,7 +953,7 @@
     },
     {
       "path": "evidence/progress-job-20261018/prior-qualified-pass-v1.json",
-      "sha256": "e450b31ab138ba589acafb232c3a3960c2f134b98471cad414067c728edbfb8d",
+      "sha256": "f5a463d54c2a80d0a8f9b369587b7cb6c782393b65a17a72d0adf9cb96b22eef",
       "bytes": 583429,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/handoff-v2/prior-qualified-pass-v1.json"
@@ -977,7 +977,7 @@
     },
     {
       "path": "evidence/progress-job-20261018/receiver-contract-v2/RECEIVER_RECEIPT.json",
-      "sha256": "d2a0b55a81a3ec2fa6c2ab01c5d31668f808210312edf39d310afbf22166eec1",
+      "sha256": "b2111b226fe7d8182e332a14779dfddd858904a899ca50ca933a416a9d9b0505",
       "bytes": 1629,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/proof/recipe-v2/receiver/evidence/RECEIVER_RECEIPT.json"
@@ -1193,7 +1193,7 @@
     },
     {
       "path": "evidence/progress-job-20261018/sdk-results-v2/SDK_INPUTS.tsv",
-      "sha256": "a38770ac8437868f920c93cff636a0e03255ba882a525b621c1b1b1251252dff",
+      "sha256": "5b0d277cdb87e6b8927df46bfbd027e855c0edee873577eebefef60deebd0773",
       "bytes": 4652,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/runtime-refinement/progress-job/proof/receiving-v2/sdk-results/SDK_INPUTS.tsv"

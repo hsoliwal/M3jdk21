@@ -188,7 +188,7 @@
   "original_pr": 1289,
   "purpose": "Deliver archived JSON AST/parser/datatype integration in the active indexed Jackson module while preserving existing APIs and contract families.",
   "receipt_identity": {
-    "api_result_sha256": "440bedac85e92f03cc69fffc7a76d0a367a986e9e95cca76fe9faab010c6a273",
+    "api_result_sha256": "ee716a4ef0c27f81f5dc5091676e28cdbfc3c702798723b18bf0c2b7fe8d62c7",
     "compiler_result_sha256": "6a2e6039db1416cd37add9fc7a1116b68f590dfc226f7e01addc7488760691aa",
     "product_result_sha256": "c455fd84665f46ab12ae86e108fa04b41315a25868f7f7999e2254fe3636f457",
     "source_build_sha256": "0a3b6bdc9699a681a0e867de3b53ad9b5c6c009b60469711f4a4d464c4d451c0"
@@ -210,15 +210,15 @@
     "jdk.m3.jackson": "fcebc8acd479102127c2b6e8c8647d015e6df843cc9a1862de7b8a77a7f9b6f3"
   },
   "source_inputs": {
-    "src/main/java/jdk/m3/jackson/M3AST.java": "875e08aecc924ce2e15537bc0cfb4425345263f2a5e2ec36ba61e557cfb6f763",
-    "src/main/java/jdk/m3/jackson/M3ASTAtom.java": "f8a16ec5d9712b20a936b20613469e071e70c1c0c14bdb39a388a149516bbbca",
-    "src/main/java/jdk/m3/jackson/M3ASTBuilder.java": "905f771f86aa632c73d6d1dac672b9fddca763a6c4885c663684ade36bc83265",
+    "src/main/java/jdk/m3/jackson/M3AST.java": "5750149bddb6f86c123de8cf3de913f12165a9597ef50672149f0ffcf43fc550",
+    "src/main/java/jdk/m3/jackson/M3ASTAtom.java": "5b1a4261f94c55ebab9586d18ccaf15e4ab9792a0172574c210d36a132b9b414",
+    "src/main/java/jdk/m3/jackson/M3ASTBuilder.java": "554a6975216350b56e104f626fb4d846f94937d3e0d63cae8f882c17fd9ef38e",
     "src/main/java/jdk/m3/jackson/M3ASTParser.java": "b794e7e253a90269642a717cb30befc2cdd4bfd6ee26622023241cc035422e6f",
-    "src/main/java/jdk/m3/jackson/M3ASTPool.java": "6ab5528031f87004f8546525eddd7d566f3204b5334d956f4d2c134fa04f4ffe",
+    "src/main/java/jdk/m3/jackson/M3ASTPool.java": "cdce98179e71ff3ec1a4bd612fe0d59ac06a1f8e3226113961125f2062f28a9d",
     "src/main/java/jdk/m3/jackson/M3ASTTokenPattern.java": "b47b80a67e81771091dd3f9d11e4ebdba53c4aaf1d7a6aa2202381dbb14da706",
     "src/main/java/jdk/m3/jackson/M3Binding.java": "94ba13f9e06dd72d1591b1501d173c4f944169d9cd0411500f1f16fe8c69f7e0",
-    "src/main/java/jdk/m3/jackson/M3File.java": "0f7ebe5434d0b89f2e3027a1553d96903c7b8dc97d1eb5f8eef48b737ab14178",
-    "src/main/java/jdk/m3/jackson/M3FileTokenStore.java": "7f9a52e51b7a45c458a40399f8316676431a84b717a7e7ea29b26140fe4c1151",
+    "src/main/java/jdk/m3/jackson/M3File.java": "c01eb26f17c2810dc6ff298df32c3bb9cc7ec77a5c55e2a937fd95c7c673dbf6",
+    "src/main/java/jdk/m3/jackson/M3FileTokenStore.java": "c8c5682a28b0acc14595781fbc5db43c393070a5126dd0f990c9c205e9894b69",
     "src/main/java/jdk/m3/jackson/M3JacksonModule.java": "35c4c88123895bb24c530491c7ff30b7a211305be9ade5edf4787378621e39ac",
     "src/main/java/jdk/m3/jackson/M3JsonCodec.java": "cabb6003c8ab5fb57460ebcc54f31972aa4f48663f67589b743c4c311b306dc6",
     "src/main/java/jdk/m3/jackson/M3JsonLimits.java": "5c22e0e714a306c99de9a0720125b6576e2bfb53a63f8d9aefc4bff350fbf369",
@@ -242,6 +242,6 @@
     "src/test/java/jdk/m3/jackson/tests/M3LargeJsonAcceptance.java": "388aa5b9e1c6c933a969d2270cde33f38fb6d5c41dc96d5c7fbea963ff307210",
     "src/test/java/jdk/m3/jackson/tests/M3TokenRegexContract.java": "0179937e0add3d4bfcb8c8253826774ce410fbe8e3378078c93693c229c6205c"
   },
-  "source_lock_sha256": "a1c253b045c0996c436f44f305a3aba77ad1272ff90e3e1f04799fe90d78e008",
+  "source_lock_sha256": "4bb1a8b623b106985cca97969a79561c079ff0cf9a415fcf91e996f3ee4ab99a",
   "status": "PASS"
 }

@@ -9,12 +9,12 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[5]
 EXPECTED = {
     "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ASTLeafIndex.java": (
-        "0194ab2afa7c0a7ace8b8cb4e28aa142a44cf623176dce5feaa5e6c271173f8b",
-        "0daf29ca1e035d8facfaea0ef86f0f91158320f0d343f51b12dd6fc81a4f9428",
+        "d594b4d62b345f6614938f09fe2884041b352c2626c36a07bf30c316c67d684a",
+        "7616282198225b23b3fb60270dd14440c7f117285a039a07c24c51b3b1ebca2d",
         "M3ASTLeafIndex.java.txt"),
     "m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ASTLeafIndexSelfTest.java": (
-        "b1303aa343f542cf6339d907369eb08bec68025eb41c43eaf6500abbb84998aa",
-        "7d99521d1649131270b9dd18b3a1f2fed14a44b82447d254ad57d68ccdbb1c64",
+        "fe545c7f831d3d6261989f0252951173a1c592f4bc68526a2eddf01811d197e3",
+        "b0ff01c06b68266430adba9884bb32b72205ac37827fe7a07b3e22014f05caea",
         "M3ASTLeafIndexSelfTest.java.txt"),
 }
 def read_checked(path: Path) -> bytes:

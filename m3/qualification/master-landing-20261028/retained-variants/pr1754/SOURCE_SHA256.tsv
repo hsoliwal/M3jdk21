@@ -1,7 +1,7 @@
 path	sha256	git_blob	mode	pr	note
 .github/workflows/m3-mask-prefix-scalar-20261021.yml	318f68b84cafa79d16f2774428ab9b843c9229787f5dc22946d3a980d93fa9ed	0c42156605b46b854da1ac6ae94495c73206e740	100644	1754	PR version, not live
 m3/collections/algorithm-catalog/java-base-filtered-sorted-receiver-20261020.tsv	e386b985fa568dd265677269f12e04ef58cd8dbff9bd8859036f7cdb000e924d	fc557a7cbd3ab3b82b5ced6b94d12fd430a42c34	100644	1754	PR version, not live
-m3/docs/name-mapping.json	f2ed7569f1493ec74734485780da87fb0158470faa617f0c1bb8ee55d766ebe2	862cf17987e7c295b8658d6249a4d04ac90a05e0	100644	1754	PR version, not live
+m3/docs/name-mapping.json	510542499c09134cd5eb113ca7b35dba54c2fc63002f82760a94238f7c8d26e0	540fb9be13effd6a32faa85811e504b55b194dfe	100644	1754	PR version, not live
 m3/qualification/mask-prefix-scalar-20261021/README.md	aa952f6129ee02a749d19ea323ce92738c4f9be91704a4609edc5854a335778d	598111e7ea7511fd2db2c3e89ab57d97d985b9bc	100644	1754	PR version, not live
 m3/qualification/mask-prefix-scalar-20261021/verify.sh	1e51ca76029d50e8d6a384401bcfa4a3b6a9a8ad333f50bfb1a0a57aa90eda6d	2b2cace1ad607e0e95abbb65abb4cdebf1852ad6	100644	1754	PR version, not live
 src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java	221bc2531f34ec8febe4f6c96f4eb642a95fd575a5809eca075306d139339079	f85e7359010bd25e0a909a145e283007cff25d7c	100644	1754	PR version, not live

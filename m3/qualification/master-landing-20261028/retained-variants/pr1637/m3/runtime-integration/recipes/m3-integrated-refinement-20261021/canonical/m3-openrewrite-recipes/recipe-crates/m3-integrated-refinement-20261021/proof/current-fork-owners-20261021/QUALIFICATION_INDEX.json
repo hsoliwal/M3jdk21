@@ -10,15 +10,15 @@
   "current_fork_receipts": [
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021/nlp/evidence/OPENNLP_OWNER_001.json",
-      "sha256": "422f9ee85eb0e9dabcfef6a432ff2a32a5fe47c5457ac723532286170edced5c"
+      "sha256": "883eda0112382800955a61ce1d9cbc999954cc5a1eb50dd2cc12a2534174e6e0"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021/nlp/evidence/LUCENE_OWNER_001.json",
-      "sha256": "e64793f43586ad6dfb27df426c37f4ae1ba0f7205cc3f0be1ee92a5a50d7ee34"
+      "sha256": "a9dd5a13b0c2e827249ad12053792c5baac45cca5753c357e4023a2fcde51be9"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021/nlp/evidence/PIN_AND_SHARED_INPUT_SCOPE.json",
-      "sha256": "77e200b5ce35d939bd013b51c4d397e24afca576713d5cf370bac84a75f402a1"
+      "sha256": "049eb4c8e6c4f1e1faf4cef0c8540f4b33bc2f7f122351b6dc81a5722a3e528d"
     }
   ],
   "original_receiver_refusal": {
@@ -27,33 +27,33 @@
   },
   "nlp_correction": {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/QUALIFICATION_SUMMARY.json",
-    "sha256": "5df945f370c7800ea35f1e6fd534ea90074f9b51b8160f4f66fabdadd1f6adaa"
+    "sha256": "65fd83d34a461cac050bb8a439ae070a07d682d1641c30d3bf53acce8649d8ca"
   },
   "swt_correction": {
     "path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/QUALIFICATION_SUMMARY.json",
-    "sha256": "e0533ca5393e0f754bb8d3d8b9f9a04d50f5ee6a95d2895a54e60f93f4a237c0"
+    "sha256": "6fef58f979f61be3d9497e5c1df69a060a4b13691948a61613183447604abc25"
   },
   "nlp_actual_receiving_runtime": {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/proof/receiver-runtime-001/combined-receiver-001-receipts/RESULT.json",
-    "sha256": "38c71b8c4f6fb632f2352873cbd2578be7cf1f1383cdf34d64f4fce9e5c0cee1"
+    "sha256": "1af51c5d7642bb84f88e61816ada2bc0b3d033dfdd4387f5a35cd2a11834c935"
   },
   "swt_actual_receiving_runtime": {
     "path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-runtime-001/RESULT.json",
-    "sha256": "54a0a9db3849ee73273e61b344009eea3bf4acacba4bc45b6c2ad8170398f285"
+    "sha256": "679ac1b3f0a18abead0c716b82a876db225f02d77afc01bcb8a3cae75f7932ec"
   },
   "new_memory_receipts": [
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/FINAL_RESULT.json",
-      "sha256": "e1a67c9cb29aada8de10269fad3de345f9d83abace47669fbbd3be181ef6d634"
+      "sha256": "4da9014446d363e55bcf59c86a75d480703ea99b0161acfbd1a592f91d32efe3"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/FINAL_RESULT.json",
-      "sha256": "889d5a70900dae99b5cea3960fa03e456418f2d6b21dd49162a517794751044f"
+      "sha256": "1a611b3cfd965176fccb876946faebaa8e1a18618c2529bc66f30f53dbaf2433"
     }
   ],
   "hosted_admission": {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021/hosted-admission/OBSERVATION.json",
-    "sha256": "8b8bc38df5860776395bff41e5854879902734e8c0b44d7cb6f1a3285d405723"
+    "sha256": "101831de842f784b354e3b575ce1aa45ebd4081f3d355f70021bf414ac7d2369"
   },
   "navigation": {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021/README.md",
@@ -61,7 +61,7 @@
   },
   "bounded_owner_decisions": {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/catalogue/current-fork-owner-decisions-20261021.tsv",
-    "sha256": "69a6c866d64bb3526cb92c72fca25240bfefbc2d6a5134c5e70ea7912ed50d0e"
+    "sha256": "e25e07c8de8c4f96f036820e9aec419d2cd92fff64596d667606769956a4fa1c"
   },
   "source_built_vs_cached": "Actual combined receiving pack62 =36 source-built+26 locked external; linked image92 includes30JDK modules. Existing fork dependency lists14+16 share3 archives,27unique archives produce26 external modules.",
   "unchanged_old_packets": "Prior canonical core1273-file, SWT63-file and Maven4329-file publication inventories remain frozen; new registry and provenance bytes append after their exact last published owners.",

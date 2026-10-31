@@ -42,15 +42,15 @@ public final class M3GenericObjectListRecipe {
     private static final String TEST = "m3/collections/src/test/java/jdk/m3/collections/";
     private static final List<Output> OUTPUTS = List.of(
         new Output("M3ArrayList.java", JAVA + "M3ArrayList.java",
-                "ae1092d66bb27e18c0f435d9dc148bd0f46fbc33f9731d9e2d2194142ccc3d32"),
+                "78340d2c41e0ade88474171636a02da07ecae0860c6988acaefac5c1fdf0fa03"),
         new Output("M3IndexedListSnapshot.java", JAVA + "M3IndexedListSnapshot.java",
-                "0f0939615884c4d8bbfe2a3c9bbc5072d49faa6c20636c2eadac3104269aefaa"),
+                "75c8d36856751cbc19d81845606c57daa468b0f6008dbccc1ae009094060c50b"),
         new Output("M3GenericCollections.java", JAVA + "M3GenericCollections.java",
-                "7f44e22663f67a7e69108fd097807c36bcf0e62a421481a16dc0fbfd28435f6a"),
+                "325dc5eee8f95173a430bde278bdf46011ec804b74c9ae2ca3c79ef71613da24"),
         new Output("M3GenericArrayListSelfTest.java", TEST + "M3GenericArrayListSelfTest.java",
-                "3ef322ba4992a0fd4c60e5e96c34f99c68137f5879e809e46d773b472f652035"),
+                "79cf753a3bc3acee6c545b4599d6ee86b776f6cd37f78fe8b3ed43c269f71149"),
         new Output("M3GenericArrayListTest.java", TEST + "M3GenericArrayListTest.java",
-                "b3c599bbb1e1300517ee269c9024f07a591f5cc3178abbb665c555bb5a96bf02"));
+                "3649f527ba7716d01374fa6d348b1b9cc37730deb6b0db6f01260827054f6d7d"));
 
     private M3GenericObjectListRecipe() { }
 

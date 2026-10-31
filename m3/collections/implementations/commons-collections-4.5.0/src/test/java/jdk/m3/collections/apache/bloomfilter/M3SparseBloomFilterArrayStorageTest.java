@@ -53,8 +53,8 @@ import org.junit.jupiter.api.io.TempDir;
 class M3SparseBloomFilterArrayStorageTest {
     private static final String OWNER = "jdk.m3.collections.apache.bloomfilter.SparseBloomFilter";
     private static final Map<String, String> ORIGINALS = Map.of(
-            "SparseBloomFilter", "a207ca1729e2f9e45b4987e19ffa20cbfc3518d5329922020524d53db986ff7e",
-            "BitMaps", "2ef7091e2d21bf7c079e0d5c62bbd65c153bc521eba6390a6156ae85b60d1887");
+            "SparseBloomFilter", "6d79ee74b7d17fca422f3b3c7eda99ad0236c49c75afc416dcb07d9ce956f53c",
+            "BitMaps", "7795b336c22307ca1ae27527d669076d9334f22af2ee81370d674a6cabb3f67d");
     private static URLClassLoader originalLoader;
     private static Class<?> originalClass;
     private static long observations;

@@ -4,11 +4,11 @@
   "profile": "m3-nlp-current-receiver-lock-20261021/1.0",
   "event_count": 5,
   "events": [
-    "5699d2edf48fb71a6d0275140a75a55eed5f882c76b2945f16d3ee8e75f130ff",
-    "6d9e643ec5e35846f58674aecb5ef465e028cfdcbcddf87e78aac1e68a2beb52",
-    "2269577e54f1a54b5f721f4b7ffdcbac61c112d35160fdfc49a51badd7b8acfd",
-    "3280bc2b92368bfa4842c1094cd027d6956768feb97c06c092ead7407e9451e8",
-    "66c3e98e68cdc8199166554f5e1caf315cb4ea04e61dacf8598ee060398d827b"
+    "f2cc55326a8d90a370b4339bbd6a52426e39bd92ba315faf6e0c6074b422a3ec",
+    "d9c3a2911acc140b38b4e7869e5295b684bb2c52c322dc06ae96d537f0d9c3c7",
+    "d5dbdbaa2f1320732a41a209af72752788f3284ffa32ad107138ac51ccd34ccc",
+    "d004e61de57ba3eda73639dc64959975d0161bf88688531883a689cdca7ccd68",
+    "7224e243213f827edae62c1529bcc5ff6f350b991f2bf86154302786ab3d5ccf"
   ],
   "conformance_checks": 129,
   "control_cases": 32,
@@ -25,27 +25,27 @@
   },
   "index": {
     "path": "memory/INDEX.json",
-    "sha256": "67937bfd486c6e8449e3152ad37268bb6f7431c7c4eddf6afb4be7690ecc07aa"
+    "sha256": "76a2a40f40cccaf44b60d95ff26a73197fa999cf18607377e09f6b66e7f73f48"
   },
   "helper_lineage": {
     "path": "memory/HELPER_LINEAGE.json",
-    "sha256": "172a9897495c0c885f7c6269bcb64b49daeca78f95d45235fe6e5e9fd8820f35"
+    "sha256": "f67b9912cf7121174418ffc483b8b1f7180ce11c425e83f4cf8e92f0e81a33d2"
   },
   "profile_conformance": {
     "path": "proof/memory-conformance-001/RESULT.json",
-    "sha256": "12520811749f52afa9f28a9af4187a6185618a53ff959dda3760ef22b24f8ed6"
+    "sha256": "153da88c92b9d05bb5b481f15fa60971d2b9aa52fa32b5025d14cd4f9fcdd164"
   },
   "event_integrity": {
     "path": "proof/memory-integrity-001/RESULT.json",
-    "sha256": "6c5edf56afc68c11698662119e6531c95943a25042924fe7c7a336184ca11046"
+    "sha256": "4004a57327d43414573311842394b8eaad5fa62c966438118759438c7abc5fab"
   },
   "canonical_sdk": {
     "path": "proof/sdk-001-offline/RESULT.json",
-    "sha256": "5f9b55adcb99fb526dd044476ec647cd2ca82dc3bb25a38c71f479df9925a187"
+    "sha256": "0bf285d0e082e121e178b0a22d47d92124e84579f5436c87276e8b999142fcdb"
   },
   "actual_receiver": {
     "path": "proof/receiver-runtime-001/combined-receiver-001-receipts/RESULT.json",
-    "sha256": "38c71b8c4f6fb632f2352873cbd2578be7cf1f1383cdf34d64f4fce9e5c0cee1"
+    "sha256": "1af51c5d7642bb84f88e61816ada2bc0b3d033dfdd4387f5a35cd2a11834c935"
   },
   "qualified_sdk_inputs_unchanged": true,
   "scope": "Closed-profile conformance and actual evidence integrity only; no inherited event, test-count inflation or product admission."

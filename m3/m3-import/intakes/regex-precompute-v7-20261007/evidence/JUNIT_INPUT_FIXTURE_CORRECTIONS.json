@@ -17,7 +17,7 @@
       "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\test\\java\\com\\m3\\synexia\\importer\\SynexiaImporterTest.java",
       "preimagePath": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\fixture-correction-preimages\\SynexiaImporterTest.java",
       "preimageSha256": "6acd2f31448739fd21d54b7df7503a796bc96801a5e5ff9a5720286a959fdf1a",
-      "postimageSha256": "22442dc8d8fce2b032c6da1261a53bbdbc945afdbcfdf97d940c1da5f4c18ae0",
+      "postimageSha256": "8f9b21d5efc7f7407d8f0dafe24c67d7c5f337310ce2ec5b47d54a4fb130071b",
       "before": "        assertThrows(\n                IllegalArgumentException.class,\n                () -> SynexiaImporter.verify(synexia, temp.resolve(\"absent-target\"), manifest));",
       "after": "        write(synexia.resolve(sourcePath), bytes);\n        assertThrows(\n                IllegalArgumentException.class,\n                () -> SynexiaImporter.verify(synexia, temp.resolve(\"absent-target\"), manifest));",
       "assertionsChanged": false,

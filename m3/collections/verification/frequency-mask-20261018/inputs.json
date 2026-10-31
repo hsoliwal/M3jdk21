@@ -1,11 +1,11 @@
 [
   {
     "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
-    "sha256": "477135e13481942fef3b95b96a08d39c9c86dd92a649959c6d035b19b5784031"
+    "sha256": "e8b8c5e455d4b46bb85b5c4ee6c8234643ca6e10f8314a468f455a80067a7f7d"
   },
   {
     "path": "m3/collections/src/main/java/jdk/m3/collections/M3IntIntConsumer.java",
-    "sha256": "d7673d25fc4bb59e6b66336b2bfc86da00415100e213b7b26aea61fb4a00f484"
+    "sha256": "5d0592bc63a33cce86ba075e5fbe3370d2ea0fe1c7d7c85f2db5a465be65e381"
   },
   {
     "path": "m3/collections/src/main/java/jdk/m3/collections/M3IntIntHashMap.java",
@@ -13,7 +13,7 @@
   },
   {
     "path": "m3/collections/src/main/java/jdk/m3/collections/M3IntIterator.java",
-    "sha256": "a7b8772e974a793eef8212281340a38cec651edc983e6cad47f725c43d022e63"
+    "sha256": "020154e7e6bb3dab0223359c6bc4736c034dd203598ce673094c76ce0febd4fc"
   },
   {
     "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
@@ -25,7 +25,7 @@
   },
   {
     "path": "m3/collections/verification/frequency-mask-20261018/donor/jdk/internal/m3/primitives/DenseHash.java",
-    "sha256": "10d4a854d77f6a137782a5db69af84a6fb1d4e03fc5afa25da5180e5eac920c3"
+    "sha256": "aa93fe9ffdbce99dc341b3341d45e19e747f914b1330eacbd97d8df93ba7a2c7"
   },
   {
     "path": "m3/collections/verification/frequency-mask-20261018/donor/jdk/internal/m3/primitives/IntIntHashMap.java",

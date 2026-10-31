@@ -46,8 +46,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/ENGINE_SOURCES.tsv",
       "size": 1637,
-      "sha256": "b2e990a09f2c4b7c355b48cc33a72405829fd009f76d1866153aa07225e6684e",
-      "git_blob": "6d03a0153c494253d73f4d1eb79f78f98dde2187",
+      "sha256": "74242eb726eb5d1c5bbdc9fa4ee17c33b4afa1c96bfcddad5dcb1a4b1f4f58cb",
+      "git_blob": "78925b4ca8baffde5852d43d0af0edb5651c0bcc",
       "mode": "0644"
     },
     {
@@ -228,8 +228,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-collections21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-collections21/0002-M3FilteredDeques.java.txt",
       "size": 14945,
-      "sha256": "b6aec5a921f9eaba6feb14461bf6dca7e67cee26bb84fee3ee3143f873df5121",
-      "git_blob": "dfdbf710de34e79bb5ba87e9af018914cbfbe9a5",
+      "sha256": "66f4165c7099fd6452bb6faa8bf67a1af8d6edeedd6963bb5ba8773c507e6fe5",
+      "git_blob": "f23223df9ffc63dad08b259169de9d4f203701f0",
       "mode": "0644"
     },
     {
@@ -242,57 +242,57 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-collections21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-collections21/0004-M3MutableFilteredViews.java.txt",
       "size": 25756,
-      "sha256": "d6b88f4579c798b8715dbe7da1a41d33e0bd1329a2d518b23a20981f70b344a5",
-      "git_blob": "b1f77d8d02176ba540f44c5c97b39a0f8ec512bb",
+      "sha256": "55c549f99936d131c255f7118d51b3d40e2b5da2c26e2cf6e174120959e4f48e",
+      "git_blob": "b9d1b9aead5e35bc1da46f252f0c1e13409be127",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-collections21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-collections21/0005-M3SignalOrder.java.txt",
       "size": 9084,
-      "sha256": "3b117a531afd39f071fda04796684084812371982295a508270e58bfb70a2430",
-      "git_blob": "14674f07013af8bb4b4a8d4bc9450e6b7394290d",
+      "sha256": "3ac89d3259b1e00faa326236cfe20acf21c7616ccaf2931f43ba09bddf2cfff3",
+      "git_blob": "a8c64e0b061079dcfa694c48a823bc5f18b1cde1",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-collections21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-collections21/0007-M3FilteredCursorExceptionContract.java.txt",
       "size": 13570,
-      "sha256": "558bcb65249fba80faa5ddb00d138566132c13acfd3c6e67763c78fa1acd5fd8",
-      "git_blob": "d1273eb57076612ae33e4d92b80953c4598b9ddb",
+      "sha256": "9c6ed2cb34bff05d1af95616d1c23b2512ad599f1c20219fa523b356e4915eb2",
+      "git_blob": "3ac81bcac2b8ab628a17a735ffe3dc9fbda00684",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-collections21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-collections21/0008-M3FilteredCursorExceptionTest.java.txt",
       "size": 333,
-      "sha256": "5ff4d5d15263310027c66eac8d595c62161fdc20623b42b4f5265a77dab4cedb",
-      "git_blob": "2541f35dea93ccc80e38d4a03a2b02ee5dc0d457",
+      "sha256": "d98fb07eb403ca3e553bf57f8295d021aa3a79a396858fe1d2dc8b2a2ff97997",
+      "git_blob": "6cc9fe2cbbe24d5be0f9b49b8f76c309190ce182",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-collections21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-collections21/0009-M3FilteredDequeContract.java.txt",
       "size": 12720,
-      "sha256": "83115c8518a132029ea7b4f6818df74c9f628909a6dd8328c9aaf7a85cd2c7ea",
-      "git_blob": "60118a804d4de87f58f7323de60233c30aa37325",
+      "sha256": "0c41cf34405424203d35c448d0409531cd6ce6a6d8d69a79bb3804c855d312e3",
+      "git_blob": "d158530d481ee41f6a1c8e3b95d4ab88cae89962",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-collections21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-collections21/0010-M3SignalRadixUniformBench.java.txt",
       "size": 3279,
-      "sha256": "8b026711262170986520d92fe782913d6a138f66bb9c795b6de748b11aa3dbe4",
-      "git_blob": "dd77920695fad1bc870dec44d3f68b962af78c7c",
+      "sha256": "ddf5a717b6004d11d9c957b073fada18d363e2f00df7ced6508e3866f050e2d2",
+      "git_blob": "a68da3bb1b6743ced030a3fb0c83f44325ebb3ec",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-collections21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-collections21/0011-M3SignalRadixUniformContract.java.txt",
       "size": 8115,
-      "sha256": "dd85a7c4b19364cc9b91ecf581abb33bf613435aec0873319f7082649dbdfbac",
-      "git_blob": "83f8f678e93d34d9032dd953549fa9ec6f9aaaf8",
+      "sha256": "a7b5578a33f4edf3e48ef6a01fb156a4721b5c13a26aa0153fd689075cfbe958",
+      "git_blob": "b5e1c44f689a3cfd8755c6331165be014e5da1e9",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-collections21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-collections21/0012-M3SignalRadixUniformTest.java.txt",
       "size": 311,
-      "sha256": "482d0d75e1b926b2da7013f8f572b9559738f18e8831ab0b398dcb06825071d8",
-      "git_blob": "a52ab654e11444632ca3929f02dfe4db51010a71",
+      "sha256": "68bea0a443750976ea4921ee9620b279a9204a6e8096e643b0c7f0b128858ca0",
+      "git_blob": "17cc062c923d300d7182ba9a21832d857c7f2025",
       "mode": "0644"
     },
     {
@@ -319,22 +319,22 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-collections21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-collections21/pre/0004-M3MutableFilteredViews.java.txt",
       "size": 25720,
-      "sha256": "3c65c0d918b6cb39d4c27f98699fa97067d2aa3a7fb76ea48b2fd6092a9d0178",
-      "git_blob": "37b669dfe22a3b6be9e68aa59f9dd94e96fc3d49",
+      "sha256": "19cbdee1b2e604ad5e491f9089d2ff869852cedee8ffd086e78bc887043678eb",
+      "git_blob": "076778a34b49ca1ef7eac47cd9b6cf33b0fbe55f",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-collections21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-collections21/pre/0005-M3SignalOrder.java.txt",
       "size": 8716,
-      "sha256": "15c85e74a51a716af1b11038c05263b83b1a1ea02f345bc3838d661a158fd80f",
-      "git_blob": "dfbcd0cb5552d979af3340cdbd7aec98155841ce",
+      "sha256": "855447909cacc331ba7c11a413c1405ab4dc2cf7e4376985d5e4ba80481a9bdd",
+      "git_blob": "9f4fc3ef105d4af631c16550840347c4c91a5918",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-collections21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-collections21/pre/0009-M3FilteredDequeContract.java.txt",
       "size": 10087,
-      "sha256": "0aa372f430f3ab3614adf33bf4e33729e6f874404a6834fd13996bdee71c73fb",
-      "git_blob": "62a4dad21383e8459aaf2a374280cbc268032e3c",
+      "sha256": "2fa63ed2810dc2106763813978f6c60b6a3501cf4215bc200435597b1675825b",
+      "git_blob": "7a5a2fa42b749170b83fd348c564ed92dd5821bd",
       "mode": "0644"
     },
     {
@@ -347,15 +347,15 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-collections21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-combine-collections21/0006-m3_signal_order_jni.c.txt",
       "size": 3295,
-      "sha256": "8dc63771408057e56610719e6d562454bece9769a5727c7614c104e659dc8a22",
-      "git_blob": "ebd380c52bc2536d7b5dce9bc84dd72574181895",
+      "sha256": "58b0e89220c54ed87687b9d7140413f84654fb15ec39451e41355f6c68d50f42",
+      "git_blob": "f17c0e605955588c4bda4346bcbfde8f243cf820",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-collections21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-combine-collections21/0013-eclipse-collections-20261021.json.txt",
       "size": 2642,
-      "sha256": "2201aae2f7a422829c62bbbe3f6fd4bd1545c60611a5806b2faee9cd1b0f5224",
-      "git_blob": "6c8b6b774354d751bd23a1c29a926eae09a6eb0c",
+      "sha256": "5e84ed34b1203ec662d527e5979b204041ee455aaea868fc3493d1941ac9d220",
+      "git_blob": "eeca68b71b305a4b4287e4e4f7c864c2b2d0e195",
       "mode": "0644"
     },
     {
@@ -403,15 +403,15 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-composed21/0003-M3CollectionViews.java.txt",
       "size": 32116,
-      "sha256": "c8e9361f50f503ee0fb45c322cbd2e1f1701b84dd57f3948c210178b29bebfb4",
-      "git_blob": "6e5895458274b5cfb83ae750ca1200b7ceae94cf",
+      "sha256": "6dbd0ba6fdf580a38e1ac3f9c3237ec13a4065f1fe18dc3fa7734307c8356e9f",
+      "git_blob": "601f5a76d447148230dd9746ce0d4981bdef5eb6",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-composed21/0004-M3FilteredDeques.java.txt",
       "size": 14945,
-      "sha256": "b6aec5a921f9eaba6feb14461bf6dca7e67cee26bb84fee3ee3143f873df5121",
-      "git_blob": "dfdbf710de34e79bb5ba87e9af018914cbfbe9a5",
+      "sha256": "66f4165c7099fd6452bb6faa8bf67a1af8d6edeedd6963bb5ba8773c507e6fe5",
+      "git_blob": "f23223df9ffc63dad08b259169de9d4f203701f0",
       "mode": "0644"
     },
     {
@@ -424,92 +424,92 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-composed21/0006-M3IndexedListSnapshot.java.txt",
       "size": 15942,
-      "sha256": "86e277ee069f3f077e44f5cd93b7f75cf07d357c613250d96a8e1e494969572c",
-      "git_blob": "7bc0d70998df86cdfeb86169e1ebacdcd9474049",
+      "sha256": "f76afab9c50eb24a8a0adf1121bde6ea95f8732f78fae5c9807eea9775de8a2b",
+      "git_blob": "7ed802b83cfff7177c744bf8ce64701fd2cfa58c",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-composed21/0007-M3LongBitmapFilteredSnapshot.java.txt",
       "size": 14467,
-      "sha256": "cb1c0ab9eccd76078ec2e4b8e30dc9fb1bde945979326c3a2466392b33d66257",
-      "git_blob": "7e55630fa72a217b87f6a2c3c2770870538b8a67",
+      "sha256": "7a168e391255c94fc4711e01cc388cf1f5063ce0738df43721664001207d02b9",
+      "git_blob": "7faa96d8a79897ce6c6d34ff2b025ccee2a46ae2",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-composed21/0008-M3MutableFilteredViews.java.txt",
       "size": 25756,
-      "sha256": "d6b88f4579c798b8715dbe7da1a41d33e0bd1329a2d518b23a20981f70b344a5",
-      "git_blob": "b1f77d8d02176ba540f44c5c97b39a0f8ec512bb",
+      "sha256": "55c549f99936d131c255f7118d51b3d40e2b5da2c26e2cf6e174120959e4f48e",
+      "git_blob": "b9d1b9aead5e35bc1da46f252f0c1e13409be127",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-composed21/0009-M3SignalOrder.java.txt",
       "size": 9084,
-      "sha256": "3b117a531afd39f071fda04796684084812371982295a508270e58bfb70a2430",
-      "git_blob": "14674f07013af8bb4b4a8d4bc9450e6b7394290d",
+      "sha256": "3ac89d3259b1e00faa326236cfe20acf21c7616ccaf2931f43ba09bddf2cfff3",
+      "git_blob": "a8c64e0b061079dcfa694c48a823bc5f18b1cde1",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-composed21/0012-M3CatalogueRefinementContract.java.txt",
       "size": 10685,
-      "sha256": "661279db0cf532a67a0bf8ee5483cd91f79b49936add8e96fde08b1130f55174",
-      "git_blob": "21996b268ee67f06a941ce4db35b1ecf9633bdee",
+      "sha256": "334c6adf2ee8c310e7a3591da93c6479593659b84287e7a709de986f3f2573f1",
+      "git_blob": "bacbf2b16d39b4e2a0800f3702ef035d9b471c42",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-composed21/0013-M3CatalogueRefinementTest.java.txt",
       "size": 637,
-      "sha256": "9f932bdf49aff3acf020bf36a2f5cead295a7ff6fb87fe55c9fde3c3a656cf93",
-      "git_blob": "722dae0fd4d4fc101ae3720661ecfcd193d2ae04",
+      "sha256": "ac9ac5c9133d85a5e7802577984b08905b73945fcfbcf3f801aa4daaf1b97336",
+      "git_blob": "a0936ccf08f200f9ded965703884920e44caac4d",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-composed21/0014-M3FilteredCursorExceptionContract.java.txt",
       "size": 13570,
-      "sha256": "558bcb65249fba80faa5ddb00d138566132c13acfd3c6e67763c78fa1acd5fd8",
-      "git_blob": "d1273eb57076612ae33e4d92b80953c4598b9ddb",
+      "sha256": "9c6ed2cb34bff05d1af95616d1c23b2512ad599f1c20219fa523b356e4915eb2",
+      "git_blob": "3ac81bcac2b8ab628a17a735ffe3dc9fbda00684",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-composed21/0015-M3FilteredCursorExceptionTest.java.txt",
       "size": 333,
-      "sha256": "5ff4d5d15263310027c66eac8d595c62161fdc20623b42b4f5265a77dab4cedb",
-      "git_blob": "2541f35dea93ccc80e38d4a03a2b02ee5dc0d457",
+      "sha256": "d98fb07eb403ca3e553bf57f8295d021aa3a79a396858fe1d2dc8b2a2ff97997",
+      "git_blob": "6cc9fe2cbbe24d5be0f9b49b8f76c309190ce182",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-composed21/0016-M3FilteredDequeContract.java.txt",
       "size": 12720,
-      "sha256": "83115c8518a132029ea7b4f6818df74c9f628909a6dd8328c9aaf7a85cd2c7ea",
-      "git_blob": "60118a804d4de87f58f7323de60233c30aa37325",
+      "sha256": "0c41cf34405424203d35c448d0409531cd6ce6a6d8d69a79bb3804c855d312e3",
+      "git_blob": "d158530d481ee41f6a1c8e3b95d4ab88cae89962",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-composed21/0017-M3PackedSelectionAllocationProbe.java.txt",
       "size": 1558,
-      "sha256": "bbb4abeb2f9dbc512d6236173b68e8404ac5b11729640e1747aac6f002b933a7",
-      "git_blob": "b7b20260dee7a07a6220c2cc20fc13ba86c50ecb",
+      "sha256": "0c0d16da710e376f0cc363cc70a6430fb6e921f12dbb17b897f1d9812ef12e8b",
+      "git_blob": "8c4b0aeb5027f44fc42ba95fc68e81285680b9d1",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-composed21/0018-M3SignalRadixUniformBench.java.txt",
       "size": 3279,
-      "sha256": "8b026711262170986520d92fe782913d6a138f66bb9c795b6de748b11aa3dbe4",
-      "git_blob": "dd77920695fad1bc870dec44d3f68b962af78c7c",
+      "sha256": "ddf5a717b6004d11d9c957b073fada18d363e2f00df7ced6508e3866f050e2d2",
+      "git_blob": "a68da3bb1b6743ced030a3fb0c83f44325ebb3ec",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-composed21/0019-M3SignalRadixUniformContract.java.txt",
       "size": 8115,
-      "sha256": "dd85a7c4b19364cc9b91ecf581abb33bf613435aec0873319f7082649dbdfbac",
-      "git_blob": "83f8f678e93d34d9032dd953549fa9ec6f9aaaf8",
+      "sha256": "a7b5578a33f4edf3e48ef6a01fb156a4721b5c13a26aa0153fd689075cfbe958",
+      "git_blob": "b5e1c44f689a3cfd8755c6331165be014e5da1e9",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-composed21/0020-M3SignalRadixUniformTest.java.txt",
       "size": 311,
-      "sha256": "482d0d75e1b926b2da7013f8f572b9559738f18e8831ab0b398dcb06825071d8",
-      "git_blob": "a52ab654e11444632ca3929f02dfe4db51010a71",
+      "sha256": "68bea0a443750976ea4921ee9620b279a9204a6e8096e643b0c7f0b128858ca0",
+      "git_blob": "17cc062c923d300d7182ba9a21832d857c7f2025",
       "mode": "0644"
     },
     {
@@ -641,8 +641,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-composed21/pre/0003-M3CollectionViews.java.txt",
       "size": 31849,
-      "sha256": "48d8636ea51c1bf05a1c4747e416916695b6bcbe665467f940e71b07ce2d327a",
-      "git_blob": "11fa30e7cc498b7d46759c72ebae17b0edb78290",
+      "sha256": "e8439b49c9fd771bbbdb788c85a5922a4b45191f0309a8b901a34dd4036ca973",
+      "git_blob": "57464de019a63d4ffa3dbd595b93bff879d332cf",
       "mode": "0644"
     },
     {
@@ -662,36 +662,36 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-composed21/pre/0006-M3IndexedListSnapshot.java.txt",
       "size": 14420,
-      "sha256": "4b20bfb5ff5974218cfea24af265f6eae5e67606df2bcbfe99b51eb9b1f1ff34",
-      "git_blob": "b826029d9fffef73d9bb6797c8b6e27ec07e790d",
+      "sha256": "df976ffa7659df6b5b6ea938826f5dca51d3a6ddfcf66c8968d2c3fafe97d620",
+      "git_blob": "16588554da7d037f0b476884c777c49de7f384a0",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-composed21/pre/0007-M3LongBitmapFilteredSnapshot.java.txt",
       "size": 13929,
-      "sha256": "9b4b095f7f51b27a76e6a56cda60c6662cbbf60bcb8b55655f82c127b4451af6",
-      "git_blob": "f82ffe51ababbdd9b663ceb2b113d7efc9e121e0",
+      "sha256": "e5eb87e3d8dd3f0e0efcae9159eb4862a9b727d9ce3e498a314b43a2ee07a3ad",
+      "git_blob": "e03522cb007d2c851c29c3c16e5a866c04a6d98e",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-composed21/pre/0008-M3MutableFilteredViews.java.txt",
       "size": 25720,
-      "sha256": "3c65c0d918b6cb39d4c27f98699fa97067d2aa3a7fb76ea48b2fd6092a9d0178",
-      "git_blob": "37b669dfe22a3b6be9e68aa59f9dd94e96fc3d49",
+      "sha256": "19cbdee1b2e604ad5e491f9089d2ff869852cedee8ffd086e78bc887043678eb",
+      "git_blob": "076778a34b49ca1ef7eac47cd9b6cf33b0fbe55f",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-composed21/pre/0009-M3SignalOrder.java.txt",
       "size": 8716,
-      "sha256": "15c85e74a51a716af1b11038c05263b83b1a1ea02f345bc3838d661a158fd80f",
-      "git_blob": "dfbcd0cb5552d979af3340cdbd7aec98155841ce",
+      "sha256": "855447909cacc331ba7c11a413c1405ab4dc2cf7e4376985d5e4ba80481a9bdd",
+      "git_blob": "9f4fc3ef105d4af631c16550840347c4c91a5918",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-composed21/pre/0016-M3FilteredDequeContract.java.txt",
       "size": 10087,
-      "sha256": "0aa372f430f3ab3614adf33bf4e33729e6f874404a6834fd13996bdee71c73fb",
-      "git_blob": "62a4dad21383e8459aaf2a374280cbc268032e3c",
+      "sha256": "2fa63ed2810dc2106763813978f6c60b6a3501cf4215bc200435597b1675825b",
+      "git_blob": "7a5a2fa42b749170b83fd348c564ed92dd5821bd",
       "mode": "0644"
     },
     {
@@ -774,22 +774,22 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-combine-composed21/0010-m3_index_mask_compactor.c.txt",
       "size": 17258,
-      "sha256": "fedca631c2f0f0f73a27dde5e87395e95ac00fde07fc1d7006735c2ef18a579a",
-      "git_blob": "cb33ba47692744aa0021d3eaf1d7902029269a5a",
+      "sha256": "b68c1fa966ad617302ffab1f2a820a23fa379854d2f07216933f19259d370c59",
+      "git_blob": "32c3307d5a62502d0430c63281764c2783bccf3c",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-combine-composed21/0011-m3_signal_order_jni.c.txt",
       "size": 3295,
-      "sha256": "8dc63771408057e56610719e6d562454bece9769a5727c7614c104e659dc8a22",
-      "git_blob": "ebd380c52bc2536d7b5dce9bc84dd72574181895",
+      "sha256": "58b0e89220c54ed87687b9d7140413f84654fb15ec39451e41355f6c68d50f42",
+      "git_blob": "f17c0e605955588c4bda4346bcbfde8f243cf820",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-combine-composed21/0021-m3_mask_compactor_empty_regions.c.txt",
       "size": 6428,
-      "sha256": "48631b556931bd113464bfabca7876615261f2a4bbb17b54be6fa2fa801e96c7",
-      "git_blob": "e0fd3f4a10a816c20a9235a4c5e00e984df51240",
+      "sha256": "ceb409a1eca8d65a5e6c2a7845759e0a95c1c802e493340def2f8d05d110f02a",
+      "git_blob": "704efe4e171a370177cc7a59da0b96ca6afaa445",
       "mode": "0644"
     },
     {
@@ -802,8 +802,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-combine-composed21/0023-FILE_PASSES.tsv.txt",
       "size": 4890,
-      "sha256": "a9d157c33f80ed12b2d2118f70235fa4e34d101aa917e760cdf700bb6b024bee",
-      "git_blob": "feb9bfaf432a188e2010efb74099102c1e3f3126",
+      "sha256": "7d3ccbf4a658aa5091a39d6b9454019ed723271df3e8145cca45734f4f5f33cf",
+      "git_blob": "d12180584ed8c2dd00f9acc61999b043fc125d6c",
       "mode": "0644"
     },
     {
@@ -823,22 +823,22 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-combine-composed21/0026-SOURCE_RECEIPT.json.txt",
       "size": 32818,
-      "sha256": "ce3b0dcdb4b452f744a5dc7b37eacb98c5b47b31e3fa9716f73d1c4689b36fac",
-      "git_blob": "8b9ecf53f1c5c747f70e43a42eb7206b30ad5783",
+      "sha256": "6df69c004b0e3e21b646f4fd514a9912f3be4be7c0b29f2f04517336824b8227",
+      "git_blob": "4522d0f2b23c184742613e94b9c3728d715101ad",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-combine-composed21/0027-eclipse-collections-20261021.json.txt",
       "size": 2642,
-      "sha256": "2201aae2f7a422829c62bbbe3f6fd4bd1545c60611a5806b2faee9cd1b0f5224",
-      "git_blob": "6c8b6b774354d751bd23a1c29a926eae09a6eb0c",
+      "sha256": "5e84ed34b1203ec662d527e5979b204041ee455aaea868fc3493d1941ac9d220",
+      "git_blob": "eeca68b71b305a4b4287e4e4f7c864c2b2d0e195",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-combine-composed21/0028-name-mapping.json.txt",
       "size": 456929,
-      "sha256": "6e017ad8c780434a8681a6fb506d72975d064859b205164973f60ec9c20d8ad6",
-      "git_blob": "5000e92a4011f9f8ad92ab09cbc66e760ca34a11",
+      "sha256": "cad138a3dfa2b93419e0e414ca6a08dbe39ef8f50c11699065e4315f735af4ff",
+      "git_blob": "fea0492b87beb54b424ada5da5c8b85469aabbe5",
       "mode": "0644"
     },
     {
@@ -879,8 +879,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-combine-composed21/pre/0010-m3_index_mask_compactor.c.txt",
       "size": 16830,
-      "sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
-      "git_blob": "15024c40ba9b92fd50fb7823ecfa9543aba22be1",
+      "sha256": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73",
+      "git_blob": "f6471f52b0c001def6319542f01729620b0600ee",
       "mode": "0644"
     },
     {
@@ -1131,8 +1131,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-string21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-combine-string21/0003-FILE_PASSES.tsv.txt",
       "size": 4890,
-      "sha256": "a9d157c33f80ed12b2d2118f70235fa4e34d101aa917e760cdf700bb6b024bee",
-      "git_blob": "feb9bfaf432a188e2010efb74099102c1e3f3126",
+      "sha256": "7d3ccbf4a658aa5091a39d6b9454019ed723271df3e8145cca45734f4f5f33cf",
+      "git_blob": "d12180584ed8c2dd00f9acc61999b043fc125d6c",
       "mode": "0644"
     },
     {
@@ -1152,15 +1152,15 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-string21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-combine-string21/0006-SOURCE_RECEIPT.json.txt",
       "size": 32818,
-      "sha256": "ce3b0dcdb4b452f744a5dc7b37eacb98c5b47b31e3fa9716f73d1c4689b36fac",
-      "git_blob": "8b9ecf53f1c5c747f70e43a42eb7206b30ad5783",
+      "sha256": "6df69c004b0e3e21b646f4fd514a9912f3be4be7c0b29f2f04517336824b8227",
+      "git_blob": "4522d0f2b23c184742613e94b9c3728d715101ad",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-string21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-combine-string21/0007-name-mapping.json.txt",
       "size": 456929,
-      "sha256": "6e017ad8c780434a8681a6fb506d72975d064859b205164973f60ec9c20d8ad6",
-      "git_blob": "5000e92a4011f9f8ad92ab09cbc66e760ca34a11",
+      "sha256": "cad138a3dfa2b93419e0e414ca6a08dbe39ef8f50c11699065e4315f735af4ff",
+      "git_blob": "fea0492b87beb54b424ada5da5c8b85469aabbe5",
       "mode": "0644"
     },
     {
@@ -1285,43 +1285,43 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-views-final21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-views-final21/0001-M3CollectionViews.java.txt",
       "size": 32116,
-      "sha256": "c8e9361f50f503ee0fb45c322cbd2e1f1701b84dd57f3948c210178b29bebfb4",
-      "git_blob": "6e5895458274b5cfb83ae750ca1200b7ceae94cf",
+      "sha256": "6dbd0ba6fdf580a38e1ac3f9c3237ec13a4065f1fe18dc3fa7734307c8356e9f",
+      "git_blob": "601f5a76d447148230dd9746ce0d4981bdef5eb6",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-views-final21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-views-final21/0002-M3IndexedListSnapshot.java.txt",
       "size": 15942,
-      "sha256": "86e277ee069f3f077e44f5cd93b7f75cf07d357c613250d96a8e1e494969572c",
-      "git_blob": "7bc0d70998df86cdfeb86169e1ebacdcd9474049",
+      "sha256": "f76afab9c50eb24a8a0adf1121bde6ea95f8732f78fae5c9807eea9775de8a2b",
+      "git_blob": "7ed802b83cfff7177c744bf8ce64701fd2cfa58c",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-views-final21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-views-final21/0003-M3LongBitmapFilteredSnapshot.java.txt",
       "size": 14467,
-      "sha256": "cb1c0ab9eccd76078ec2e4b8e30dc9fb1bde945979326c3a2466392b33d66257",
-      "git_blob": "7e55630fa72a217b87f6a2c3c2770870538b8a67",
+      "sha256": "7a168e391255c94fc4711e01cc388cf1f5063ce0738df43721664001207d02b9",
+      "git_blob": "7faa96d8a79897ce6c6d34ff2b025ccee2a46ae2",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-views-final21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-views-final21/0005-M3CatalogueRefinementContract.java.txt",
       "size": 10685,
-      "sha256": "661279db0cf532a67a0bf8ee5483cd91f79b49936add8e96fde08b1130f55174",
-      "git_blob": "21996b268ee67f06a941ce4db35b1ecf9633bdee",
+      "sha256": "334c6adf2ee8c310e7a3591da93c6479593659b84287e7a709de986f3f2573f1",
+      "git_blob": "bacbf2b16d39b4e2a0800f3702ef035d9b471c42",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-views-final21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-views-final21/0006-M3CatalogueRefinementTest.java.txt",
       "size": 637,
-      "sha256": "9f932bdf49aff3acf020bf36a2f5cead295a7ff6fb87fe55c9fde3c3a656cf93",
-      "git_blob": "722dae0fd4d4fc101ae3720661ecfcd193d2ae04",
+      "sha256": "ac9ac5c9133d85a5e7802577984b08905b73945fcfbcf3f801aa4daaf1b97336",
+      "git_blob": "a0936ccf08f200f9ded965703884920e44caac4d",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-views-final21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-views-final21/0007-M3PackedSelectionAllocationProbe.java.txt",
       "size": 1558,
-      "sha256": "bbb4abeb2f9dbc512d6236173b68e8404ac5b11729640e1747aac6f002b933a7",
-      "git_blob": "b7b20260dee7a07a6220c2cc20fc13ba86c50ecb",
+      "sha256": "0c0d16da710e376f0cc363cc70a6430fb6e921f12dbb17b897f1d9812ef12e8b",
+      "git_blob": "8c4b0aeb5027f44fc42ba95fc68e81285680b9d1",
       "mode": "0644"
     },
     {
@@ -1369,22 +1369,22 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-views-final21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-views-final21/pre/0001-M3CollectionViews.java.txt",
       "size": 31849,
-      "sha256": "48d8636ea51c1bf05a1c4747e416916695b6bcbe665467f940e71b07ce2d327a",
-      "git_blob": "11fa30e7cc498b7d46759c72ebae17b0edb78290",
+      "sha256": "e8439b49c9fd771bbbdb788c85a5922a4b45191f0309a8b901a34dd4036ca973",
+      "git_blob": "57464de019a63d4ffa3dbd595b93bff879d332cf",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-views-final21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-views-final21/pre/0002-M3IndexedListSnapshot.java.txt",
       "size": 14420,
-      "sha256": "4b20bfb5ff5974218cfea24af265f6eae5e67606df2bcbfe99b51eb9b1f1ff34",
-      "git_blob": "b826029d9fffef73d9bb6797c8b6e27ec07e790d",
+      "sha256": "df976ffa7659df6b5b6ea938826f5dca51d3a6ddfcf66c8968d2c3fafe97d620",
+      "git_blob": "16588554da7d037f0b476884c777c49de7f384a0",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-views-final21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-combine-views-final21/pre/0003-M3LongBitmapFilteredSnapshot.java.txt",
       "size": 13929,
-      "sha256": "9b4b095f7f51b27a76e6a56cda60c6662cbbf60bcb8b55655f82c127b4451af6",
-      "git_blob": "f82ffe51ababbdd9b663ceb2b113d7efc9e121e0",
+      "sha256": "e5eb87e3d8dd3f0e0efcae9159eb4862a9b727d9ce3e498a314b43a2ee07a3ad",
+      "git_blob": "e03522cb007d2c851c29c3c16e5a866c04a6d98e",
       "mode": "0644"
     },
     {
@@ -1411,15 +1411,15 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-views-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-combine-views-final21/0004-m3_index_mask_compactor.c.txt",
       "size": 17258,
-      "sha256": "fedca631c2f0f0f73a27dde5e87395e95ac00fde07fc1d7006735c2ef18a579a",
-      "git_blob": "cb33ba47692744aa0021d3eaf1d7902029269a5a",
+      "sha256": "b68c1fa966ad617302ffab1f2a820a23fa379854d2f07216933f19259d370c59",
+      "git_blob": "32c3307d5a62502d0430c63281764c2783bccf3c",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-views-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-combine-views-final21/0008-m3_mask_compactor_empty_regions.c.txt",
       "size": 6428,
-      "sha256": "48631b556931bd113464bfabca7876615261f2a4bbb17b54be6fa2fa801e96c7",
-      "git_blob": "e0fd3f4a10a816c20a9235a4c5e00e984df51240",
+      "sha256": "ceb409a1eca8d65a5e6c2a7845759e0a95c1c802e493340def2f8d05d110f02a",
+      "git_blob": "704efe4e171a370177cc7a59da0b96ca6afaa445",
       "mode": "0644"
     },
     {
@@ -1432,8 +1432,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/combine-views-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-combine-views-final21/pre/0004-m3_index_mask_compactor.c.txt",
       "size": 16830,
-      "sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
-      "git_blob": "15024c40ba9b92fd50fb7823ecfa9543aba22be1",
+      "sha256": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73",
+      "git_blob": "f6471f52b0c001def6319542f01729620b0600ee",
       "mode": "0644"
     },
     {
@@ -1516,15 +1516,15 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-receive-composed21/0003-M3CollectionViews.java.txt",
       "size": 32116,
-      "sha256": "c8e9361f50f503ee0fb45c322cbd2e1f1701b84dd57f3948c210178b29bebfb4",
-      "git_blob": "6e5895458274b5cfb83ae750ca1200b7ceae94cf",
+      "sha256": "6dbd0ba6fdf580a38e1ac3f9c3237ec13a4065f1fe18dc3fa7734307c8356e9f",
+      "git_blob": "601f5a76d447148230dd9746ce0d4981bdef5eb6",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-receive-composed21/0004-M3FilteredDeques.java.txt",
       "size": 14945,
-      "sha256": "b6aec5a921f9eaba6feb14461bf6dca7e67cee26bb84fee3ee3143f873df5121",
-      "git_blob": "dfdbf710de34e79bb5ba87e9af018914cbfbe9a5",
+      "sha256": "66f4165c7099fd6452bb6faa8bf67a1af8d6edeedd6963bb5ba8773c507e6fe5",
+      "git_blob": "f23223df9ffc63dad08b259169de9d4f203701f0",
       "mode": "0644"
     },
     {
@@ -1537,92 +1537,92 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-receive-composed21/0006-M3IndexedListSnapshot.java.txt",
       "size": 15942,
-      "sha256": "86e277ee069f3f077e44f5cd93b7f75cf07d357c613250d96a8e1e494969572c",
-      "git_blob": "7bc0d70998df86cdfeb86169e1ebacdcd9474049",
+      "sha256": "f76afab9c50eb24a8a0adf1121bde6ea95f8732f78fae5c9807eea9775de8a2b",
+      "git_blob": "7ed802b83cfff7177c744bf8ce64701fd2cfa58c",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-receive-composed21/0007-M3LongBitmapFilteredSnapshot.java.txt",
       "size": 14467,
-      "sha256": "cb1c0ab9eccd76078ec2e4b8e30dc9fb1bde945979326c3a2466392b33d66257",
-      "git_blob": "7e55630fa72a217b87f6a2c3c2770870538b8a67",
+      "sha256": "7a168e391255c94fc4711e01cc388cf1f5063ce0738df43721664001207d02b9",
+      "git_blob": "7faa96d8a79897ce6c6d34ff2b025ccee2a46ae2",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-receive-composed21/0008-M3MutableFilteredViews.java.txt",
       "size": 25756,
-      "sha256": "d6b88f4579c798b8715dbe7da1a41d33e0bd1329a2d518b23a20981f70b344a5",
-      "git_blob": "b1f77d8d02176ba540f44c5c97b39a0f8ec512bb",
+      "sha256": "55c549f99936d131c255f7118d51b3d40e2b5da2c26e2cf6e174120959e4f48e",
+      "git_blob": "b9d1b9aead5e35bc1da46f252f0c1e13409be127",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-receive-composed21/0009-M3SignalOrder.java.txt",
       "size": 9084,
-      "sha256": "3b117a531afd39f071fda04796684084812371982295a508270e58bfb70a2430",
-      "git_blob": "14674f07013af8bb4b4a8d4bc9450e6b7394290d",
+      "sha256": "3ac89d3259b1e00faa326236cfe20acf21c7616ccaf2931f43ba09bddf2cfff3",
+      "git_blob": "a8c64e0b061079dcfa694c48a823bc5f18b1cde1",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-receive-composed21/0012-M3CatalogueRefinementContract.java.txt",
       "size": 10685,
-      "sha256": "661279db0cf532a67a0bf8ee5483cd91f79b49936add8e96fde08b1130f55174",
-      "git_blob": "21996b268ee67f06a941ce4db35b1ecf9633bdee",
+      "sha256": "334c6adf2ee8c310e7a3591da93c6479593659b84287e7a709de986f3f2573f1",
+      "git_blob": "bacbf2b16d39b4e2a0800f3702ef035d9b471c42",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-receive-composed21/0013-M3CatalogueRefinementTest.java.txt",
       "size": 637,
-      "sha256": "9f932bdf49aff3acf020bf36a2f5cead295a7ff6fb87fe55c9fde3c3a656cf93",
-      "git_blob": "722dae0fd4d4fc101ae3720661ecfcd193d2ae04",
+      "sha256": "ac9ac5c9133d85a5e7802577984b08905b73945fcfbcf3f801aa4daaf1b97336",
+      "git_blob": "a0936ccf08f200f9ded965703884920e44caac4d",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-receive-composed21/0014-M3FilteredCursorExceptionContract.java.txt",
       "size": 13570,
-      "sha256": "558bcb65249fba80faa5ddb00d138566132c13acfd3c6e67763c78fa1acd5fd8",
-      "git_blob": "d1273eb57076612ae33e4d92b80953c4598b9ddb",
+      "sha256": "9c6ed2cb34bff05d1af95616d1c23b2512ad599f1c20219fa523b356e4915eb2",
+      "git_blob": "3ac81bcac2b8ab628a17a735ffe3dc9fbda00684",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-receive-composed21/0015-M3FilteredCursorExceptionTest.java.txt",
       "size": 333,
-      "sha256": "5ff4d5d15263310027c66eac8d595c62161fdc20623b42b4f5265a77dab4cedb",
-      "git_blob": "2541f35dea93ccc80e38d4a03a2b02ee5dc0d457",
+      "sha256": "d98fb07eb403ca3e553bf57f8295d021aa3a79a396858fe1d2dc8b2a2ff97997",
+      "git_blob": "6cc9fe2cbbe24d5be0f9b49b8f76c309190ce182",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-receive-composed21/0016-M3FilteredDequeContract.java.txt",
       "size": 12720,
-      "sha256": "83115c8518a132029ea7b4f6818df74c9f628909a6dd8328c9aaf7a85cd2c7ea",
-      "git_blob": "60118a804d4de87f58f7323de60233c30aa37325",
+      "sha256": "0c41cf34405424203d35c448d0409531cd6ce6a6d8d69a79bb3804c855d312e3",
+      "git_blob": "d158530d481ee41f6a1c8e3b95d4ab88cae89962",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-receive-composed21/0017-M3PackedSelectionAllocationProbe.java.txt",
       "size": 1558,
-      "sha256": "bbb4abeb2f9dbc512d6236173b68e8404ac5b11729640e1747aac6f002b933a7",
-      "git_blob": "b7b20260dee7a07a6220c2cc20fc13ba86c50ecb",
+      "sha256": "0c0d16da710e376f0cc363cc70a6430fb6e921f12dbb17b897f1d9812ef12e8b",
+      "git_blob": "8c4b0aeb5027f44fc42ba95fc68e81285680b9d1",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-receive-composed21/0018-M3SignalRadixUniformBench.java.txt",
       "size": 3279,
-      "sha256": "8b026711262170986520d92fe782913d6a138f66bb9c795b6de748b11aa3dbe4",
-      "git_blob": "dd77920695fad1bc870dec44d3f68b962af78c7c",
+      "sha256": "ddf5a717b6004d11d9c957b073fada18d363e2f00df7ced6508e3866f050e2d2",
+      "git_blob": "a68da3bb1b6743ced030a3fb0c83f44325ebb3ec",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-receive-composed21/0019-M3SignalRadixUniformContract.java.txt",
       "size": 8115,
-      "sha256": "dd85a7c4b19364cc9b91ecf581abb33bf613435aec0873319f7082649dbdfbac",
-      "git_blob": "83f8f678e93d34d9032dd953549fa9ec6f9aaaf8",
+      "sha256": "a7b5578a33f4edf3e48ef6a01fb156a4721b5c13a26aa0153fd689075cfbe958",
+      "git_blob": "b5e1c44f689a3cfd8755c6331165be014e5da1e9",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-receive-composed21/0020-M3SignalRadixUniformTest.java.txt",
       "size": 311,
-      "sha256": "482d0d75e1b926b2da7013f8f572b9559738f18e8831ab0b398dcb06825071d8",
-      "git_blob": "a52ab654e11444632ca3929f02dfe4db51010a71",
+      "sha256": "68bea0a443750976ea4921ee9620b279a9204a6e8096e643b0c7f0b128858ca0",
+      "git_blob": "17cc062c923d300d7182ba9a21832d857c7f2025",
       "mode": "0644"
     },
     {
@@ -1782,8 +1782,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-receive-composed21/pre/0003-M3CollectionViews.java.txt",
       "size": 31849,
-      "sha256": "48d8636ea51c1bf05a1c4747e416916695b6bcbe665467f940e71b07ce2d327a",
-      "git_blob": "11fa30e7cc498b7d46759c72ebae17b0edb78290",
+      "sha256": "e8439b49c9fd771bbbdb788c85a5922a4b45191f0309a8b901a34dd4036ca973",
+      "git_blob": "57464de019a63d4ffa3dbd595b93bff879d332cf",
       "mode": "0644"
     },
     {
@@ -1803,36 +1803,36 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-receive-composed21/pre/0006-M3IndexedListSnapshot.java.txt",
       "size": 14420,
-      "sha256": "4b20bfb5ff5974218cfea24af265f6eae5e67606df2bcbfe99b51eb9b1f1ff34",
-      "git_blob": "b826029d9fffef73d9bb6797c8b6e27ec07e790d",
+      "sha256": "df976ffa7659df6b5b6ea938826f5dca51d3a6ddfcf66c8968d2c3fafe97d620",
+      "git_blob": "16588554da7d037f0b476884c777c49de7f384a0",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-receive-composed21/pre/0007-M3LongBitmapFilteredSnapshot.java.txt",
       "size": 13929,
-      "sha256": "9b4b095f7f51b27a76e6a56cda60c6662cbbf60bcb8b55655f82c127b4451af6",
-      "git_blob": "f82ffe51ababbdd9b663ceb2b113d7efc9e121e0",
+      "sha256": "e5eb87e3d8dd3f0e0efcae9159eb4862a9b727d9ce3e498a314b43a2ee07a3ad",
+      "git_blob": "e03522cb007d2c851c29c3c16e5a866c04a6d98e",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-receive-composed21/pre/0008-M3MutableFilteredViews.java.txt",
       "size": 25720,
-      "sha256": "3c65c0d918b6cb39d4c27f98699fa97067d2aa3a7fb76ea48b2fd6092a9d0178",
-      "git_blob": "37b669dfe22a3b6be9e68aa59f9dd94e96fc3d49",
+      "sha256": "19cbdee1b2e604ad5e491f9089d2ff869852cedee8ffd086e78bc887043678eb",
+      "git_blob": "076778a34b49ca1ef7eac47cd9b6cf33b0fbe55f",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-receive-composed21/pre/0009-M3SignalOrder.java.txt",
       "size": 8716,
-      "sha256": "15c85e74a51a716af1b11038c05263b83b1a1ea02f345bc3838d661a158fd80f",
-      "git_blob": "dfbcd0cb5552d979af3340cdbd7aec98155841ce",
+      "sha256": "855447909cacc331ba7c11a413c1405ab4dc2cf7e4376985d5e4ba80481a9bdd",
+      "git_blob": "9f4fc3ef105d4af631c16550840347c4c91a5918",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-receive-composed21/pre/0016-M3FilteredDequeContract.java.txt",
       "size": 10087,
-      "sha256": "0aa372f430f3ab3614adf33bf4e33729e6f874404a6834fd13996bdee71c73fb",
-      "git_blob": "62a4dad21383e8459aaf2a374280cbc268032e3c",
+      "sha256": "2fa63ed2810dc2106763813978f6c60b6a3501cf4215bc200435597b1675825b",
+      "git_blob": "7a5a2fa42b749170b83fd348c564ed92dd5821bd",
       "mode": "0644"
     },
     {
@@ -1943,22 +1943,22 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-composed21/0010-m3_index_mask_compactor.c.txt",
       "size": 17258,
-      "sha256": "fedca631c2f0f0f73a27dde5e87395e95ac00fde07fc1d7006735c2ef18a579a",
-      "git_blob": "cb33ba47692744aa0021d3eaf1d7902029269a5a",
+      "sha256": "b68c1fa966ad617302ffab1f2a820a23fa379854d2f07216933f19259d370c59",
+      "git_blob": "32c3307d5a62502d0430c63281764c2783bccf3c",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-composed21/0011-m3_signal_order_jni.c.txt",
       "size": 3295,
-      "sha256": "8dc63771408057e56610719e6d562454bece9769a5727c7614c104e659dc8a22",
-      "git_blob": "ebd380c52bc2536d7b5dce9bc84dd72574181895",
+      "sha256": "58b0e89220c54ed87687b9d7140413f84654fb15ec39451e41355f6c68d50f42",
+      "git_blob": "f17c0e605955588c4bda4346bcbfde8f243cf820",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-composed21/0021-m3_mask_compactor_empty_regions.c.txt",
       "size": 6428,
-      "sha256": "48631b556931bd113464bfabca7876615261f2a4bbb17b54be6fa2fa801e96c7",
-      "git_blob": "e0fd3f4a10a816c20a9235a4c5e00e984df51240",
+      "sha256": "ceb409a1eca8d65a5e6c2a7845759e0a95c1c802e493340def2f8d05d110f02a",
+      "git_blob": "704efe4e171a370177cc7a59da0b96ca6afaa445",
       "mode": "0644"
     },
     {
@@ -1971,8 +1971,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-composed21/0023-FILE_PASSES.tsv.txt",
       "size": 4890,
-      "sha256": "a9d157c33f80ed12b2d2118f70235fa4e34d101aa917e760cdf700bb6b024bee",
-      "git_blob": "feb9bfaf432a188e2010efb74099102c1e3f3126",
+      "sha256": "7d3ccbf4a658aa5091a39d6b9454019ed723271df3e8145cca45734f4f5f33cf",
+      "git_blob": "d12180584ed8c2dd00f9acc61999b043fc125d6c",
       "mode": "0644"
     },
     {
@@ -1992,22 +1992,22 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-composed21/0026-SOURCE_RECEIPT.json.txt",
       "size": 32818,
-      "sha256": "ce3b0dcdb4b452f744a5dc7b37eacb98c5b47b31e3fa9716f73d1c4689b36fac",
-      "git_blob": "8b9ecf53f1c5c747f70e43a42eb7206b30ad5783",
+      "sha256": "6df69c004b0e3e21b646f4fd514a9912f3be4be7c0b29f2f04517336824b8227",
+      "git_blob": "4522d0f2b23c184742613e94b9c3728d715101ad",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-composed21/0027-eclipse-collections-20261021.json.txt",
       "size": 2642,
-      "sha256": "2201aae2f7a422829c62bbbe3f6fd4bd1545c60611a5806b2faee9cd1b0f5224",
-      "git_blob": "6c8b6b774354d751bd23a1c29a926eae09a6eb0c",
+      "sha256": "5e84ed34b1203ec662d527e5979b204041ee455aaea868fc3493d1941ac9d220",
+      "git_blob": "eeca68b71b305a4b4287e4e4f7c864c2b2d0e195",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-composed21/0028-name-mapping.json.txt",
       "size": 456929,
-      "sha256": "6e017ad8c780434a8681a6fb506d72975d064859b205164973f60ec9c20d8ad6",
-      "git_blob": "5000e92a4011f9f8ad92ab09cbc66e760ca34a11",
+      "sha256": "cad138a3dfa2b93419e0e414ca6a08dbe39ef8f50c11699065e4315f735af4ff",
+      "git_blob": "fea0492b87beb54b424ada5da5c8b85469aabbe5",
       "mode": "0644"
     },
     {
@@ -2020,8 +2020,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-composed21/0030-manifest.json.txt",
       "size": 20025,
-      "sha256": "416f8c17500afd1d9d2d2e3a7a85e300cf9807fbac7ead514b9c48cf0494e4e5",
-      "git_blob": "bd548c076c040e6574f6178487e43c71412b4a08",
+      "sha256": "44c6af1b7031d480b1d4ecd115fcecd73ab1546e317fb54c61a8110cadc0ea02",
+      "git_blob": "cec5b6ed169564103fa457e1196fa892ffe1dd37",
       "mode": "0644"
     },
     {
@@ -2062,8 +2062,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-composed21/pre/0010-m3_index_mask_compactor.c.txt",
       "size": 16830,
-      "sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
-      "git_blob": "15024c40ba9b92fd50fb7823ecfa9543aba22be1",
+      "sha256": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73",
+      "git_blob": "f6471f52b0c001def6319542f01729620b0600ee",
       "mode": "0644"
     },
     {
@@ -2090,8 +2090,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-composed21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-composed21/pre/0030-manifest.json.txt",
       "size": 19919,
-      "sha256": "b44b3740eefe6780a11f31291b2f3f446231365ea3c441844fe4d9aa5fe0b462",
-      "git_blob": "4800b1910b4ec69cfd7aa4d1f91cf1239bf337c8",
+      "sha256": "b25b60aa2a2c48f0d5c2ee91428dcb29aaaa76239a14f38b5d14a79b8f3c8ff0",
+      "git_blob": "88b404566d3346974635134a46953c2338d57051",
       "mode": "0644"
     },
     {
@@ -2146,8 +2146,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-concat-guard21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-concat-guard21/0002-manifest.json.txt",
       "size": 20025,
-      "sha256": "416f8c17500afd1d9d2d2e3a7a85e300cf9807fbac7ead514b9c48cf0494e4e5",
-      "git_blob": "bd548c076c040e6574f6178487e43c71412b4a08",
+      "sha256": "44c6af1b7031d480b1d4ecd115fcecd73ab1546e317fb54c61a8110cadc0ea02",
+      "git_blob": "cec5b6ed169564103fa457e1196fa892ffe1dd37",
       "mode": "0644"
     },
     {
@@ -2167,8 +2167,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-concat-guard21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-concat-guard21/pre/0002-manifest.json.txt",
       "size": 19919,
-      "sha256": "b44b3740eefe6780a11f31291b2f3f446231365ea3c441844fe4d9aa5fe0b462",
-      "git_blob": "4800b1910b4ec69cfd7aa4d1f91cf1239bf337c8",
+      "sha256": "b25b60aa2a2c48f0d5c2ee91428dcb29aaaa76239a14f38b5d14a79b8f3c8ff0",
+      "git_blob": "88b404566d3346974635134a46953c2338d57051",
       "mode": "0644"
     },
     {
@@ -2342,8 +2342,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0003-EVIDENCE_TRANSPORT.json.txt",
       "size": 89706,
-      "sha256": "3a9328b5858fc6caa0e1834f9874aa8d2cf2561f8ad698ad9f1cdea92cc17797",
-      "git_blob": "179bd806afc8e784c2ea8daffd9f981cb0fc9ae0",
+      "sha256": "2b12006e8ddd5a1ee074852978243c61f53e61a592e8202e347a8d48c5e11ed9",
+      "git_blob": "eeaa7dbc1b8c41cfc45b621b1bfffd79583b5b70",
       "mode": "0644"
     },
     {
@@ -2356,8 +2356,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0005-FILE_PASSES.tsv.txt",
       "size": 52381,
-      "sha256": "f9866ffc2423bd192178d26f5c4cae408496be028c156e0dc0d3592101aaaf97",
-      "git_blob": "05332883866685c145c5789a3ddb10b03ebfccf4",
+      "sha256": "8cec081ccd4681eaeb6b67e79340cc2198abc8cbe5fba5bf6707f982bf9461f7",
+      "git_blob": "c90f8fab11f733596748d322650bda6d8859e6d2",
       "mode": "0644"
     },
     {
@@ -2384,15 +2384,15 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0009-SOURCE_RECEIPT.json.txt",
       "size": 19676,
-      "sha256": "6d0ba67e4945b288735154c84434321e493f10556b63dfdc851ab2a753a339e4",
-      "git_blob": "caabebfb91a111c3be411275e8eb9e19c706b580",
+      "sha256": "ca1f36170bf914e6fb19d9782daaa39107f7a1f574aee43d9899fb5a632f8754",
+      "git_blob": "f43df3884b43bd8d259a5b240fe9f8fe6a6d1006",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0010-EPOCHS.json.txt",
       "size": 10158,
-      "sha256": "be99aca4b7c2dd53e9e6383d0b3684190bc712bb3c3bb1fe1e618cddcde40f35",
-      "git_blob": "d6a5fc9c69adfde8c5594a78935aa7c668e19a75",
+      "sha256": "4631fe704b54911012ea452207e30213782e87c590c373e66e7e7a683913b3b1",
+      "git_blob": "2e3e18b2c0f3f1de18e05af5d06adb331ae860f8",
       "mode": "0644"
     },
     {
@@ -2405,15 +2405,15 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0012-LINKED_SDK_INPUTS.json.txt",
       "size": 18530,
-      "sha256": "f2edac9b30fe19f023bb553fb3e5384101049439c0a5d4ee106cc6b6586f8fa7",
-      "git_blob": "b03a4ba47b80a19f088107f074265e5adf679298",
+      "sha256": "23b2ab3d6465fb4a313ed6343317a68a52be8c2cd2ad04142e6681484cec92ef",
+      "git_blob": "0b81c7838630356cc31d1c48efc47feacd7d798d",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0013-LINKED_SDK_OWNERSHIP.json.txt",
       "size": 23100,
-      "sha256": "8c0b26ecc5581fb57ad605917f2efdfa21e34d067acdad20e88b499a1b285d62",
-      "git_blob": "a8a15eaf32d44284f6ad45a2bfcb853eae1ecc7c",
+      "sha256": "6c0e2e5c5d7f6d13979bf4fd03cba4ab0adda1e864185f5dad73d74ca156b30d",
+      "git_blob": "c9fba37ca3c766a59232899c0e03de0e0b27d8fd",
       "mode": "0644"
     },
     {
@@ -2426,43 +2426,43 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0015-LINKED_SDK_RESULTS.json.txt",
       "size": 7132,
-      "sha256": "cdce7bdc3088d26eff46a8a1a4badf579fa27128ca441b533fe6a9ef12a26a29",
-      "git_blob": "dfc21fefb7a4b983064c726b2dbc1bb525a26fe1",
+      "sha256": "41d3db38db820a2e76fa64c6fb1b6ba59fee55454b5252eec16cd3f17b27ca71",
+      "git_blob": "b3a049be6f195fa6b64eda76cd24386fe9c705e3",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0016-NATIVE_ADDENDA.json.txt",
       "size": 5960,
-      "sha256": "2c7e2537a3b24c80abe2285abd67e0e78b6f98ee44810e8a1ac820fe072ad8cf",
-      "git_blob": "578236ff1baab2978a94a6752cd215bd5e9caddd",
+      "sha256": "4e0bdc3ea15a6701a34691cade9467ef32eea35b3ea7935d8734e8a2c27de8bd",
+      "git_blob": "dc574e63cc9a7341dba0864c289ab2c41a13b9ad",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0017-OWNING_PROOF.json.txt",
       "size": 88517,
-      "sha256": "4fbc24a40e0a78ec10deeacfddf5a42a40fe067f726fb83d7e15f0c9d9b1deaa",
-      "git_blob": "d19fb6411232d1d0fcef20fd36dcc4ba87e16dad",
+      "sha256": "a512bbaac19b6455dd369d5b56cdc5aeb7a8595003c2cffe9f038fdab9270d20",
+      "git_blob": "6a9072c7639d9c5c038ba73d3bf0669e1db8c047",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0018-OWNING_RUN.json.txt",
       "size": 1443,
-      "sha256": "02d8b7ea58d109f6f3992405c4f106b61b2eedd8f28a2a08d054b603632de63b",
-      "git_blob": "57b8069c889bad5ca54b3a97aa2244ec4bd1863a",
+      "sha256": "ec9bf87ec749fd43d2775bbdb7f82a88ea00b3ca36b4ffb27bdf41155d1ffab3",
+      "git_blob": "88640b780c8bbd22586748b6adfabbb94d27f19d",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0019-PACKET_MANIFEST.json.txt",
       "size": 2487,
-      "sha256": "5e3d6eb075e61174c3de5b72c10f63c923bafbf9c5d84a45948eb267c23db06a",
-      "git_blob": "e1e96b3323f4db37709b65e61aee8259fb33f9db",
+      "sha256": "cff8a31e9801d8f6ba4f9f944defb6df3cd05a6535c8c1a65472fb93306c7b72",
+      "git_blob": "e91fea2cd480fb5411d30e8be2f1e71863c19f6c",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0020-RAW_EVIDENCE_SHA256.tsv.txt",
       "size": 16994,
-      "sha256": "955fb34130513aebd44937fdb0c47fd199a88e752c7a01f0835400e1032da51b",
-      "git_blob": "29d6b3a16cf3eda56035db2a5f0bd4d383fc912e",
+      "sha256": "3528987f26fab966c53a6d410335e4ad4f1d27b11054bec435cf498ec593bcbf",
+      "git_blob": "7ddec963019c0960ba57ba6cf0222d0c1bba68e3",
       "mode": "0644"
     },
     {
@@ -2489,8 +2489,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0024-RESOURCE_COMPARISON.json.txt",
       "size": 28915,
-      "sha256": "ed21be5b10e5fcfeb819827269122524979f4a0f29d51683ae38d3c3640da9df",
-      "git_blob": "650aef32cce45edd868fc5bb487a1012f440d37e",
+      "sha256": "3d3b67ec120ed3045b909847e60561c975b4c27a36b86ea649dd3e49eb28f163",
+      "git_blob": "7604e152db84aeadf7d043788638150356f10c99",
       "mode": "0644"
     },
     {
@@ -2503,22 +2503,22 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0026-OWNERSHIP.json.txt",
       "size": 8271,
-      "sha256": "d5200cfe1fc402632429ef2c1676dfde5dfb0488e39335c442fb44fdcf22ff0b",
-      "git_blob": "af857feebe7d971d62225b0a43f55f7a76a7d5f3",
+      "sha256": "e525ffeb5c6c914efe1a7514c924cffe2d083e289c4b749860f7e9c2348e0b09",
+      "git_blob": "7ccd5c6b9e3a6edb87810c55a323632e250855cb",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0027-PACKET_MANIFEST.json.txt",
       "size": 1227,
-      "sha256": "f7234aae1e9a690ccf52a7a4d6ef5a970e186fa9c88e3d9679f24efcfe89b297",
-      "git_blob": "1aa39944fb4fe9957d843c454219491a6ebe5234",
+      "sha256": "d73d9ec92016fef768d4c18d342ad5ed33c38f42684cb7a498bd494678fac4ce",
+      "git_blob": "1bfd1b1f9d09d87d69d0f598f97fc22bc901760b",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0028-QUALIFICATION.json.txt",
       "size": 2911,
-      "sha256": "1b17bbf68f773fee45be855226524f84ae5459553fec9d344d71d72d289b9ef5",
-      "git_blob": "5d5333456e58d5708051eeac4f76229525ec1b3a",
+      "sha256": "a33f114e4782e838398e33c59fbeefe7c453ca0c4c03f8b7205f8c3f24582108",
+      "git_blob": "64577e71b8396898656ee31f423e06c9c6a67789",
       "mode": "0644"
     },
     {
@@ -2545,8 +2545,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0032-SOURCE_EPOCH.json.txt",
       "size": 11726,
-      "sha256": "1ad4977db028ba0dd4c5e9a74eea6d929be85ba3db3a15ae3c85224377c8288b",
-      "git_blob": "f3733ab5a717a4855a88de17ab070792a1a450c2",
+      "sha256": "347f50b81408b5b98b31c831f726bb87acd9578d2dc08e26d6ded561f839808d",
+      "git_blob": "87a0260f08a4e7f62a556742a34ce41cab130633",
       "mode": "0644"
     },
     {
@@ -2559,8 +2559,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0034-DIAGNOSTICS.json.txt",
       "size": 15677,
-      "sha256": "ceceff7313107f8a338a46f1f715359657467a165e616dc5570743a07062ae56",
-      "git_blob": "4f8098665fbd6ebe487fcf2fcf8ddf22a046cd5d",
+      "sha256": "f946007b6ece8b83153d6d84ee1bed459526daf6cfbfde4d5b19af38ceaeb837",
+      "git_blob": "03140b7a88280c991e302e7eef4e4f23dd7d1324",
       "mode": "0644"
     },
     {
@@ -2594,22 +2594,22 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0039-PACKET_MANIFEST.json.txt",
       "size": 25631,
-      "sha256": "f39d5b1636ccd78b86dcad2b0e6a954ba0f082c6e6560ddb6e719a5aaa7a5db5",
-      "git_blob": "11096aad673d34f24245374dd417a9728b0b68d8",
+      "sha256": "8a117fa9d203a8864d282f027b1228b3640cb13cff816c042c4c4cb1c00c6d29",
+      "git_blob": "f623d2fd9a2e9d1f930b65bd87f685d36017cb87",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0040-SCOPE.md.txt",
       "size": 3333,
-      "sha256": "9d46d12bf3ff56cb7f48908034a5cd70f00940baff4b51d5bf9790755ff4f382",
-      "git_blob": "2d1433a7499737d414c29c82e91c130719c2448e",
+      "sha256": "8a447e7db52db01d206fa9528d9cc92add36aa6cece4e8f763faf036c0c39c01",
+      "git_blob": "8d39ff2cc6fa4cae8d99bcd0e7e41dba29c53528",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0041-SOURCE55_HASHES.tsv.txt",
       "size": 11739,
-      "sha256": "24e7dfcd14b1ef3ab6bc1c2a7f359abcbe424df0682c1596fbb5184342c519df",
-      "git_blob": "e016203586f10a2d6548b9bf51fd2fdd3b42833a",
+      "sha256": "22fcb7ee81637cd47fd5082c3394bae19347904ebfaddb96547f9702122afab1",
+      "git_blob": "98450de3191a8dad6e154f3008b85ec0f092b936",
       "mode": "0644"
     },
     {
@@ -2629,15 +2629,15 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0044-PACKET_MANIFEST.json.txt",
       "size": 32839,
-      "sha256": "0bc5395622babd5c0cff4ff2770d6359b14c3645e3a42669f5b85c09211f468d",
-      "git_blob": "0fedf88b22f42a34261108e969a01f6a1f12881d",
+      "sha256": "af27aa4434da6943f9ddc8e322085241af4ed4306c23b7b5736e069b69d7f76b",
+      "git_blob": "abfb965d1399ea402c043cb685447183e253d86b",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0045-RECEIVING_PROOFS.json.txt",
       "size": 54379,
-      "sha256": "a465cce54fad10b04e22c774956a6d84e98e19fe867e0471d19e20bea3bfb3c3",
-      "git_blob": "d6ddf5eacab0549978b57726ec00ff9b04daddb7",
+      "sha256": "38742ebc8e799767e3b8afd5441f844e2ac9160047576b97e714f521a247069d",
+      "git_blob": "33cc51c5a25ce9ed077b295e907aa9e3e22d97cf",
       "mode": "0644"
     },
     {
@@ -2664,15 +2664,15 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0049-SOURCE_HASHES.tsv.txt",
       "size": 17229,
-      "sha256": "8a59f4e3ed4e2ee845834bc7d5c756efe9d60711e06d5e347114070362987e66",
-      "git_blob": "48d8803696e1d1e1605983c5ee93168637f86d87",
+      "sha256": "6cfd5aa85a90f360bd30c323b42e9837ea195327134b1eb221a4b0d2d4fc0700",
+      "git_blob": "730321f0843d515db681c6fa8ffa8a04d9f92c75",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0050-MANIFEST.json.txt",
       "size": 2096,
-      "sha256": "f85ef390fef6e6521a4361d400b7adfbc6c7deb1ea3c21e1198404f41936f801",
-      "git_blob": "ae06b470f280c9bca18c2bd3c4a15e1f6d2f06d0",
+      "sha256": "0566d4fc0208c34b27f16f366e351cbcc0b1a0fbdb9392d154627b14836f8867",
+      "git_blob": "9dd1ab6eb2f97acb629e461f4062722f96c30b06",
       "mode": "0644"
     },
     {
@@ -2685,15 +2685,15 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0052-candidate.json.txt",
       "size": 1301,
-      "sha256": "e55067f05b5c7b092e92ce25ecc7f26277e39e2a38295d54040fdce189d740aa",
-      "git_blob": "e76b8b517bd31e5ccd1083f0e7bd3135daecf941",
+      "sha256": "8807db2d7d59def57c7acb525ff0912e5736b6155fba3a593db7e5e9497c0ba7",
+      "git_blob": "ce3ad2c48099ff9ece206a8d17abed7bf551ea30",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0053-E1_COMPOSITION.json.txt",
       "size": 19472,
-      "sha256": "adf54486bcf4d30413f977ac0aab0291a05dd1907a79c6c65b41abf5b137a00a",
-      "git_blob": "b4ce6ee3966fd35036fbca44cd177d8ca2076b8f",
+      "sha256": "1fe557f535b810633bcf090b660eb5897524a4ed8813d49a24a7cb20f21fa003",
+      "git_blob": "19758b8a45c0c50caeebc777be809e036334ba38",
       "mode": "0644"
     },
     {
@@ -2706,8 +2706,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0055-E2_COMPOSITION.json.txt",
       "size": 24000,
-      "sha256": "b765c27e924a755d9bc74047b5fa77be6923bc6ec0c88f7e143aa38332b70cb7",
-      "git_blob": "e8537a69a6f031c265a6a5f6a1949c6fd519c0f1",
+      "sha256": "b19986afa568f51e1e023ecb3bfac5a5a6e057a29d328887c0048355d7256237",
+      "git_blob": "0aa4c3a0ec1ace26ba3a2409c0a1c8984a2d3c82",
       "mode": "0644"
     },
     {
@@ -2720,8 +2720,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0057-README.json.txt",
       "size": 3837,
-      "sha256": "4fc884d83b60e1fe7e61063e2c7aff49484e2b35b6085f92c5a2bf11c9a014bd",
-      "git_blob": "4ccc5867c514c2f54d4d8f1dc162cf88daf72399",
+      "sha256": "8a950855d462de6dac953f07119256ca2a44050457454be9a9a31be2ac11df7f",
+      "git_blob": "3c82363aaf35df0a495a2fd77d21865ad262c7b6",
       "mode": "0644"
     },
     {
@@ -2741,15 +2741,15 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0060-combine-collections21_PRODUCT_RECEIVER.json.txt",
       "size": 2513,
-      "sha256": "78d55f1cf05a4d392bb765626d87fb147fe8a07c54902f831e24df392234c954",
-      "git_blob": "86f14acc2986d5d2270e8080dd820280f7fd9e0f",
+      "sha256": "088036c8a5f163d003a8531f86ff942e4774768b67a736ea6c65ab3564c78f5e",
+      "git_blob": "500eef0b335c740642e4732345c443bfb569cf85",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0061-combine-composed21_PRODUCT_RECEIVER.json.txt",
       "size": 7575,
-      "sha256": "191bcd33e51f4492ae954af58c25475333494e7fdc7f139506dec03576e73cc9",
-      "git_blob": "99848bf2a8159e332a37e9a95b02de468beea7ce",
+      "sha256": "2cba514d6fb7aa2a53f4c61d9b25a18f67619d82060b9f3aa7d55a9617f1f8ae",
+      "git_blob": "0fdcdb24b8eed71435483ed1a6efcc3e0151e6f8",
       "mode": "0644"
     },
     {
@@ -2762,8 +2762,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0063-combine-string21_PRODUCT_RECEIVER.json.txt",
       "size": 2512,
-      "sha256": "770c9629eb0c8cff824a074809384aa23e45e07e312e6f6a9553321c493877dc",
-      "git_blob": "dfc2e999958f4194dae0c68341dcbb37d5a68761",
+      "sha256": "fe964c5ba0a1c911ff8486964173d551c992b0df63cbceb7d66a5f6123e67e0e",
+      "git_blob": "8a0d82ec19bdd41a17df6cb388003f9ecd93f32b",
       "mode": "0644"
     },
     {
@@ -2776,8 +2776,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0065-combine-views-final21_PRODUCT_RECEIVER.json.txt",
       "size": 2479,
-      "sha256": "700126c0cd98693ffca9dbbd3452db9dfdfce737241e4586799e7bc619db586c",
-      "git_blob": "7f15eba72d1a580f8ef02b545e4ad0c9387816a1",
+      "sha256": "be24aa49024688b888393e34f864a6c53fe50b1c61fdf843fde693df330be449",
+      "git_blob": "cc292bf932987fa598a388be768b2954688495fc",
       "mode": "0644"
     },
     {
@@ -2790,15 +2790,15 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0067-receive-composed21_PRODUCT_RECEIVER.json.txt",
       "size": 10197,
-      "sha256": "885a6ece9527fae534e9ef26344317b65644020629dbb892bb0e1e4b0c96b1e3",
-      "git_blob": "4e0f1eb3b1c4f734c93e0b0c1eeead6eea841fbd",
+      "sha256": "11ada3dd7e3d810c2c6d6ca45e25bb581d09440db39edd381d43115d2d03c2d6",
+      "git_blob": "1fda2bac380d1eaf13745b91fe84846aa49734ce",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0068-receive-concat-guard21_PRODUCT_RECEIVER.json.txt",
       "size": 838,
-      "sha256": "f0147dfa5688e2fdc5b6f5d55cc8b9f264174636e191589ad728f5ef532f7668",
-      "git_blob": "a6f89fec2ea8fe3ade4b8f77d78c2b3e28164848",
+      "sha256": "034a5e30b8d558ae327c055315f7dd50bcbd6a49d67d9c8cd3baac4f32db8dec",
+      "git_blob": "a785377b3c01bc9f44906d65d187b58b138c6bfc",
       "mode": "0644"
     },
     {
@@ -2818,15 +2818,15 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0071-extract_evidence.py.txt",
       "size": 7778,
-      "sha256": "9391b912a56948929553cba4ed88dec3aab6ca8fdf0e6760773ce5ad112b413e",
-      "git_blob": "df7a98d4dadf617f581ce6cab2b5bf1a4b224d53",
+      "sha256": "e4459a1d2b579ffa522414fb84ce2ca11559dc637ccfc4cb976d5d7b79bf451e",
+      "git_blob": "bd7b3b382c49813ef664850d49491831b130c451",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/receive-review-final21/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-receive-review-final21/0072-composed-integration-20261021.json.txt",
       "size": 8918,
-      "sha256": "e4c09abbe122822b4e864e3ccd021b90e651e20eb6eae27b416c3509c20747f3",
-      "git_blob": "009711de906e60a41058703bed44740cd89093c6",
+      "sha256": "b9611d0131302d04ee2211f84ac88bfe81ac1ae010c12bf6c848725792152ff6",
+      "git_blob": "3484c348c6434502c26177847db0e542c02fabd0",
       "mode": "0644"
     },
     {
@@ -2867,8 +2867,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/tasks/m3-combined-integration-20261021/COMPOSITION.json",
       "size": 19472,
-      "sha256": "adf54486bcf4d30413f977ac0aab0291a05dd1907a79c6c65b41abf5b137a00a",
-      "git_blob": "b4ce6ee3966fd35036fbca44cd177d8ca2076b8f",
+      "sha256": "1fe557f535b810633bcf090b660eb5897524a4ed8813d49a24a7cb20f21fa003",
+      "git_blob": "19758b8a45c0c50caeebc777be809e036334ba38",
       "mode": "0644"
     },
     {
@@ -3196,8 +3196,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/tasks/m3-combined-integration-20261021/evidence/combine-collections21/PRODUCT_RECEIVER.json",
       "size": 2513,
-      "sha256": "78d55f1cf05a4d392bb765626d87fb147fe8a07c54902f831e24df392234c954",
-      "git_blob": "86f14acc2986d5d2270e8080dd820280f7fd9e0f",
+      "sha256": "088036c8a5f163d003a8531f86ff942e4774768b67a736ea6c65ab3564c78f5e",
+      "git_blob": "500eef0b335c740642e4732345c443bfb569cf85",
       "mode": "0644"
     },
     {
@@ -3238,8 +3238,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/tasks/m3-combined-integration-20261021/evidence/combine-composed21/PRODUCT_RECEIVER.json",
       "size": 7575,
-      "sha256": "191bcd33e51f4492ae954af58c25475333494e7fdc7f139506dec03576e73cc9",
-      "git_blob": "99848bf2a8159e332a37e9a95b02de468beea7ce",
+      "sha256": "2cba514d6fb7aa2a53f4c61d9b25a18f67619d82060b9f3aa7d55a9617f1f8ae",
+      "git_blob": "0fdcdb24b8eed71435483ed1a6efcc3e0151e6f8",
       "mode": "0644"
     },
     {
@@ -3322,8 +3322,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/tasks/m3-combined-integration-20261021/evidence/combine-string21/PRODUCT_RECEIVER.json",
       "size": 2512,
-      "sha256": "770c9629eb0c8cff824a074809384aa23e45e07e312e6f6a9553321c493877dc",
-      "git_blob": "dfc2e999958f4194dae0c68341dcbb37d5a68761",
+      "sha256": "fe964c5ba0a1c911ff8486964173d551c992b0df63cbceb7d66a5f6123e67e0e",
+      "git_blob": "8a0d82ec19bdd41a17df6cb388003f9ecd93f32b",
       "mode": "0644"
     },
     {
@@ -3406,8 +3406,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/tasks/m3-combined-integration-20261021/evidence/combine-views-final21/PRODUCT_RECEIVER.json",
       "size": 2479,
-      "sha256": "700126c0cd98693ffca9dbbd3452db9dfdfce737241e4586799e7bc619db586c",
-      "git_blob": "7f15eba72d1a580f8ef02b545e4ad0c9387816a1",
+      "sha256": "be24aa49024688b888393e34f864a6c53fe50b1c61fdf843fde693df330be449",
+      "git_blob": "cc292bf932987fa598a388be768b2954688495fc",
       "mode": "0644"
     },
     {
@@ -3735,8 +3735,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/tasks/m3-receiving-corrections-20261021/COMPOSITION.json",
       "size": 24000,
-      "sha256": "b765c27e924a755d9bc74047b5fa77be6923bc6ec0c88f7e143aa38332b70cb7",
-      "git_blob": "e8537a69a6f031c265a6a5f6a1949c6fd519c0f1",
+      "sha256": "b19986afa568f51e1e023ecb3bfac5a5a6e057a29d328887c0048355d7256237",
+      "git_blob": "0aa4c3a0ec1ace26ba3a2409c0a1c8984a2d3c82",
       "mode": "0644"
     },
     {
@@ -4078,8 +4078,8 @@
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/tasks/m3-receiving-corrections-20261021/evidence/receive-concat-guard21/PRODUCT_RECEIVER.json",
       "size": 838,
-      "sha256": "f0147dfa5688e2fdc5b6f5d55cc8b9f264174636e191589ad728f5ef532f7668",
-      "git_blob": "a6f89fec2ea8fe3ade4b8f77d78c2b3e28164848",
+      "sha256": "034a5e30b8d558ae327c055315f7dd50bcbd6a49d67d9c8cd3baac4f32db8dec",
+      "git_blob": "a785377b3c01bc9f44906d65d187b58b138c6bfc",
       "mode": "0644"
     },
     {
@@ -4211,22 +4211,22 @@
     {
       "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "size": 31505,
-      "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63",
-      "git_blob": "135a28d0cec9ea988607cdef6caa1f0fe5115d75",
+      "sha256": "92cc90c46a1ca672a016a89c0d65e6909e090264ba1aa76a85b7fa333470e38b",
+      "git_blob": "8d2dcf8311fd56406246998dc4218ae876a03d45",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
       "size": 19983,
-      "sha256": "5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc",
-      "git_blob": "2e7747814b90c242cd89e8ecbcce61ab15825058",
+      "sha256": "613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853",
+      "git_blob": "55be45a83f4fc7e7317534fc87a66e727c845060",
       "mode": "0644"
     },
     {
       "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
       "size": 8268,
-      "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579",
-      "git_blob": "9174dd681f0d75b5086fc19904a71524a03972dc",
+      "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0",
+      "git_blob": "d41d6dc93ec0e176f6d215d23e3b6a316a9e4a32",
       "mode": "0644"
     }
   ],

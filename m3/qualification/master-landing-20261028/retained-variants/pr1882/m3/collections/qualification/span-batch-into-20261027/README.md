@@ -11,11 +11,11 @@ postimages and two generated Java21 contract/JUnit tests. The original
 `batchIntoNative` export implements caller-owned primitive output windows.
 
 ## Exact original product source custody
-- Prior Java owner Git blob: `acb0a8aac6e04fa0eab5d52e434d11d82b9a696a`; post: `f8229851a1a36b72f807736b6df33ef5e8f4ea01`
-- Prior JNI C source blob: `3166f819c15a88c70a13f4bc90f61f393f36e224`; post: `05d13d490d6bc039a3549420fc92b5d12fd38520`
-- New Java21 standalone contract: `3797d53282f8127b11f824845773607728abcfa3`; new JUnit runner: `693cfced51b361861eedea201b022da52b07fd7a`
-- Validation script exact Synexia blob: `7da9665a1ddfa042aac93ecff86d85d5a5881fb9`
-- Focused GitHub Actions workflow blob: `ebf7f6391366c30c7315245f1de6b866bb3d2fb9`
+- Prior Java owner Git blob: `acb0a8aac6e04fa0eab5d52e434d11d82b9a696a`; post: `e6758c1789394ccc867bddc8fd299b92a4a49cb4`
+- Prior JNI C source blob: `cdd1068bcbd9554818ae2167f53a93ee54282d98`; post: `05d13d490d6bc039a3549420fc92b5d12fd38520`
+- New Java21 standalone contract: `3797d53282f8127b11f824845773607728abcfa3`; new JUnit runner: `83a9ce7363e3a212d9b5a04448a016149bfff6dd`
+- Validation script exact Synexia blob: `7ccdde528ee771878488b099b4ae7d73c6cca491`
+- Focused GitHub Actions workflow blob: `de9f385c7860be3819430ad4e6d299bd58d75ba4`
 
 ## Semantics
 `M3SpanIndex.Snapshot.earliestCoveringInto(int[] rows,int queryFrom,int length,int[] output,int outputFrom,Backend)`

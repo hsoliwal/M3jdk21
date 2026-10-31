@@ -6,4 +6,4 @@ Traceback (most recent call last):
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/workspace/scratch/6b6041146177/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/filtered-navigation-20261018/receiver-proof/isolated-u0dxqr4x/late-drift/crate/receive.py", line 154, in receive
     raise ValueError("target source drift: " + relative)
-ValueError: target source drift: m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksAliasContract.java
+ValueError: target source drift: m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksAliasContract.java

@@ -34,15 +34,15 @@ jobs:
           set -euo pipefail
           git diff --check
           cat <<'SHA' | sha256sum --check
-          d650c7fb84b1911d367b5b89ba31f943ac147a594a62948a6a862f1d23ec8010  m3/collections/src/main/java/jdk/m3/collections/M3IndexPathRank.java
-          3d63ae8ed3d7e1c02ffbc1b96daa7d14ee143fffc12da11ba9aec44eaecc0d3b  m3/collections/src/main/java/jdk/m3/collections/M3LongStateArray.java
-          bc9755bd43350d583ad724408926f4e2ef76d8c5fc8040278a2620c9dc7a65ba  m3/collections/src/test/java/jdk/m3/collections/M3IndexPathIdentitySelfTest.java
-          dcba4e115ae235321aa2558804a2b3f2cc053fa3b20a7a785b1a487422b2f60e  m3/collections/src/test/java/jdk/m3/collections/M3IndexPathIdentityTest.java
-          5af79b8408cd3f14e300a8f274e74ec539d3f945a0d03655b55ddc03eb351b70  m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java
-          3cad49e2d2e0c5aa1c8d2b880ddca19392cc072a68c2203872634550deae7b60  m3/collections/src/test/java/jdk/m3/collections/M3IndexedLiveViewContract.java
-          11eaa64f85575aac225b2839872a74e6db52d06981196488834a0f1799eaf7d3  m3/collections/src/test/java/jdk/m3/collections/M3IndexPathRankNativeSelfTest.java
-          05e276a47fc63c158fe20e3ba14fd3d3adc468b47eabf0966516c392a7cc3f98  m3/collections/src/test/java/jdk/m3/collections/M3IndexPathRankBulkSelfTest.java
-          011dc027f62c3ba5f8a7bd53808d4fd12531262434e10705b53e42446b7c7298  m3/collections/src/test/java/jdk/m3/collections/M3IndexPathRankBulkTest.java
+          7cd1301ff79253e66a102464a9bc4fec8d386ada4498d155ddbedea5852a78a6  m3/collections/src/main/java/jdk/m3/collections/M3IndexPathRank.java
+          e67c66803343afa6fb59236247642e0727d19472a9b50fc57ce3f49b8bf3713b  m3/collections/src/main/java/jdk/m3/collections/M3LongStateArray.java
+          9e35312ed62396dcdf90de83be0e30e3645336fd445382ed7a874693f0e063ac  m3/collections/src/test/java/jdk/m3/collections/M3IndexPathIdentitySelfTest.java
+          08e41bc22e79270bcfe99e6a08907c7e61ea6935d24b5c4f8f20a0bcbe2a9180  m3/collections/src/test/java/jdk/m3/collections/M3IndexPathIdentityTest.java
+          65e5c350adb03ce2db176337ff2034b8253b5d5e258dd383a6500ddef01f2ecd  m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java
+          281f673e65e0f90b52dd7780358b5cbac2fe4d91d272d1433dd6d270ed983c1d  m3/collections/src/test/java/jdk/m3/collections/M3IndexedLiveViewContract.java
+          7dce94d3df940e00ba7a72418fe581c765fbee2d0db8c77834b5100513312aed  m3/collections/src/test/java/jdk/m3/collections/M3IndexPathRankNativeSelfTest.java
+          57cef7c22d238d7efbac8552ce636bc6aad62124ad54580e0ea3726fd4b16e96  m3/collections/src/test/java/jdk/m3/collections/M3IndexPathRankBulkSelfTest.java
+          d35a3d80eb881cf73a024d38b8898d5f2169f28b5d1edf69117d2edd4f4ecf95  m3/collections/src/test/java/jdk/m3/collections/M3IndexPathRankBulkTest.java
           SHA
       - name: Compile exact Java21 identity rank and existing JNI parity probe
         shell: bash

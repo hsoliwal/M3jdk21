@@ -6,12 +6,12 @@
   "sourcePath": "m3-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017/sdk",
   "receiverCorePath": "m3/migration/original-provider-20261017/sdk",
   "moduleGitTree": "cb7764db204a5e87fca101bbec8bb9944785d589",
-  "pinsSha256": "b3c1ba7f3b85e4c0a11949f5f4b787fc994d888ac8a0c0d97aa6ae04b6276b73",
-  "workflowSha256": "faf6a553557508404de8b644ae7ff17ffaf45c74d5b0cb6f3df86c583a0b2bc0",
-  "workflowGitBlob": "f04b6bfc76e5a671968a478f44cf13268c04e5e9",
+  "pinsSha256": "c377a3a9a543aff3ff61cf2dd50fe8e156c6ff50aae0b90b0dd8c3c0e4af4cf4",
+  "workflowSha256": "426f85c348a3bbff2ac767980e1cba3a205f624d3f2ca5b85cdcb52dc68b8751",
+  "workflowGitBlob": "edad663b2e4a51e22a5e25954df237192e5b8d08",
   "receiverBase": "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
-  "originalCanonicalPreimageGitBlob": "4f5911d625090913d85f9cf41b1ead1694dffade",
-  "canonicalRecipePostimageGitBlob": "a90f96ed14bdb8c2ce3310d3ed4a3e40cea28f4f",
+  "originalCanonicalPreimageGitBlob": "80eaeba7e4e1d35cd9904a8a5c18e060abdd93f0",
+  "canonicalRecipePostimageGitBlob": "9b0f0d5fbdef643f44f039874f88417a406ef8a8",
   "runtimeApplied": false,
   "phaseAdvanced": false
 }

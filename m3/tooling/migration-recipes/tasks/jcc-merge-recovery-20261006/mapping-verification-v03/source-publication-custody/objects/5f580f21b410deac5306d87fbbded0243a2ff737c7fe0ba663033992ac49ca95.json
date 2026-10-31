@@ -33,22 +33,22 @@
     {
       "bytes": 168321,
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/source-final-readbacks/00.json",
-      "sha256": "d891ca1144a3cecc4ba6b7f9d7b69a28e0ae9ce9145ee92c15fd2bd7f292ea14"
+      "sha256": "1b7addda2c8a5ab2664dbf8ee2e5a84bdf48748982f51cd19947a8f37a8379ad"
     },
     {
       "bytes": 38889,
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/source-final-readbacks/01.json",
-      "sha256": "8a78c34d930c043b0d60dd862fc39516c04cc1341c9df309320a3e1509fafbc1"
+      "sha256": "9c98031f83bdcbf10e2eebf3c96b68dd12a12538367eff78371bfd3c8ee267c8"
     },
     {
       "bytes": 588056,
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/source-final-readbacks/02.json",
-      "sha256": "7ad0a1d3297b15bd90b54faebc7d0fe1bc5c31f7b981afdf35162f3179b0515d"
+      "sha256": "81b75b37e89c42834ab3d12cad3ccd50c48558e3a02a0db2a873a92358bfe444"
     },
     {
       "bytes": 4173,
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/source-final-readbacks/03.json",
-      "sha256": "e65efc7c623c8b0a51572abcb0444523a6be92ebb3dddaed8df6419e50d1679f"
+      "sha256": "50077b1d14d5440e8d7ec68624c06dc2ddadc4a3e6eee467805ef81c11b93f7a"
     }
   ],
   "covered_publication_files": 3144,

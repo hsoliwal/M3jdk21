@@ -4,14 +4,14 @@
   "changed_files": 3,
   "targets": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java",
       "before_sha256": "a5c251a48cb0fc6fcf8c362cf449e9ec0e94b3f0563cb17451059b5d04456923",
-      "after_sha256": "c1ae229f00911e0881de9cae102f2c65f0f7f9f8eb4da1abd364a816dd84ee0d"
+      "after_sha256": "956ae0faf7f37d4b963d0d074445484548efe73f164142f2bd0c7de0815e49d4"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/FilteredBatchContracts.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/FilteredBatchContracts.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "4cc262d5bb4ddf476c59285f630de1b55808e4530d418ed0d0d4d989c8d25575"
+      "after_sha256": "aa89ed2c1d0fc1d1add3e108c2589f07edf5709cecd8b5a42bc50f6c72ac3d96"
     },
     {
       "path": ".github/workflows/m3jdk-stored-representative-20261017.yml",

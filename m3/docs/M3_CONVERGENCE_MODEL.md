@@ -76,7 +76,7 @@ transformation outputs and immutable provenance references to public targets.
 ## Pinned canonical recipe home
 
 The exact Synexia canonical recipe-home authority consumed by this repository is recorded in
-`m3/compatibility/synexia-recipe-home-pin.tsv`. That pin binds:
+`m3/compatibility/m3-recipe-home-pin.tsv`. That pin binds:
 
 - the exact `hsoliwal/com.synexia` revision;
 - `synexia-openrewrite-recipes/CANONICAL_RECIPE_HOME.tsv`;
@@ -91,8 +91,8 @@ M3JDK21 receives the qualified generated product source and immutable handoff re
 
 ## Machine policy
 
-`m3/compatibility/synexia-public-target-policy.tsv` is the target-side license/disposition table.
-`m3/compatibility/check_synexia_public_target.py` validates it and can validate an exported
+`m3/compatibility/m3-public-target-policy.tsv` is the target-side license/disposition table.
+`m3/compatibility/check_m3_public_target.py` validates it and can validate an exported
 `SYNEXIA_M3_HANDOFF_V1` packet before receiver application.
 
 Missing/unknown license classification fails closed. This policy complements, and does not replace,
@@ -137,7 +137,7 @@ in Synexia and received as qualified product result files only.
 
 The initial moved family is the pure-int FILE convergence stack. Its canonical namespace is
 `com.synexia.rewrite.atom`; the exact Synexia source revision and Git blob identities are bound in
-`m3/compatibility/synexia-recipe-ownership.tsv`.
+`m3/compatibility/m3-recipe-ownership.tsv`.
 
 A canonical recipe executes under Synexia custody against source-sealed target
 inputs. M3JDK21 independently verifies the received output with scope, license,

@@ -48,25 +48,25 @@ public final class M3EntryFacadeCacheRecipe {
 
     private static final List<SourceAtom> ATOMS = List.of(
         new SourceAtom("slot-map", BASE + "M3SlotMap.java",
-            "a7d20300717661c26897f0b69e1e5a83400a62ad",
+            "a10ee53abb325476ac32c7210712e30cc304182c",
             "5f31da47a35009b8e2e4a44f9817fa6e2b8ffdc1"),
         new SourceAtom("ordered-slot-map", BASE + "M3OrderedSlotMap.java",
-            "e7be2297d19f22cf4dd4ef8b7d1424fe963063d9",
-            "4d5ed2b1494e3f252e92ca98b4b84072b2c17dfe"),
+            "ce5fa2ec4306af03239ab7539ad91acaeaaa8245",
+            "d93cb92653ecbe07f7b9aeeb738e0a69774ea2c5"),
         new SourceAtom("linked-hash-map", BASE + "M3LinkedHashMap.java",
-            "ade59880b8c9b2bee1b32ae67ca9d29b7382d998",
+            "e0957cfd8a7a5abfa1c0c5e7bade32997e5ed657",
             "a294b998fcf73ff4cde94f912d2998c91c2a9a0f"),
         new SourceAtom("tree-map", BASE + "M3TreeMap.java",
-            "8a85b86c027bc031ef096ad94de2747b8fd28f9c",
+            "d306dacbb73d48c955fa0b932acc2c3d1eae5626",
             "9ac4b66f4e1618281f3c88077cf816a69062fdef"),
         new SourceAtom("weak-hash-map", BASE + "M3WeakHashMap.java",
-            "5d7eb065aeca2cecc1d939532d154c87bbb01c2c", 
-            "589eff9e622c1d532c6c043ac5a107723231156c"));
+            "8fcde012cb5cf38061475e365b90e6f1ca4b0a3d", 
+            "2cfac9e572e199fcb8e5d6f529a5c1b0776449d6"));
     private static final List<SourceAtom> NEW_FILES = List.of(
         new SourceAtom("lfu-cache", BASE + "M3LFUCache.java", "MISSING",
-            "dc1dc5167efb5ed859c1aa3c41a07d6a5332c4cb"),
+            "983c3f7f1b134ced576e31c8affcf21c3078a6b1"),
         new SourceAtom("entry-facade-tests", TEST + "M3EntryFacadeCacheTest.java", "MISSING",
-            "cbf4e91fd5d6b517d410df794022972052627493"));
+            "406eba0820bc43ed20d102221cb915b948b237b0"));
 
     private M3EntryFacadeCacheRecipe() { }
 

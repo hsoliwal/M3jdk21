@@ -5,7 +5,7 @@ from pathlib import Path
 import argparse,hashlib,json,os,stat
 HERE=Path(__file__).resolve().parent;I=HERE.parent;C=I.parents[1]
 OWNER=C/'m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py'
-OWNER_SHA='89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574'
+OWNER_SHA='93a1c116c197854b0167c172581cd768d0f9098067bf0f1296607ca6ba855556'
 def sha(b):return hashlib.sha256(b).hexdigest()
 def blob(b):return hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()
 def load(p):return json.loads(p.read_bytes())
@@ -22,7 +22,7 @@ args=parser.parse_args();P=args.proof.resolve()
 # This final prospective selection requires the exact actual /9 STOP and its frozen bounded cohort.
 assert args.receiving_result is not None and args.receiving_inputs is not None and not args.receiving_pending,'exact actual primary terminal and bounded selection are mandatory'
 receiving_terminal_pin={'path':str(C/'receiver-current-c0-string/primary-observation-v1/RESULT.json'),'sha256':'6f8d824c7b58f801a3563869d1a34605b36f160a1a04ea4dc6d9dc5455e5e6e8','bytes':33725}
-receiving_selection_pin={'path':str(C/'receiver-current-c0-string-preparation/receiving-selection-v1/RECEIVING-SELECTION.json'),'sha256':'de8f5754b18391d8e3768d2a7a2ee0073884427eb09e45093cc1a44bf709aa8d','bytes':74585}
+receiving_selection_pin={'path':str(C/'receiver-current-c0-string-preparation/receiving-selection-v1/RECEIVING-SELECTION.json'),'sha256':'404b379a64e596dd03efe94f4ea456bdc57f16424e2297b3b598c2dc3d0854c7','bytes':74585}
 assert not args.receiving_result.is_symlink() and args.receiving_result.resolve()==Path(receiving_terminal_pin['path'])
 assert not args.receiving_inputs.is_symlink() and args.receiving_inputs.resolve()==Path(receiving_selection_pin['path'])
 assert pin(Path(receiving_terminal_pin['path']))==receiving_terminal_pin

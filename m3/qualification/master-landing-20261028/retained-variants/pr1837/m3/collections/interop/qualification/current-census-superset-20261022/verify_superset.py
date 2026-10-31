@@ -27,8 +27,8 @@ def git_blob(data: bytes) -> str:
 APPROVED_ADDITIVE_TEST = (
     'm3/collections/interop/src/test/java/jdk/m3/collections/interop/'
     'M3FiveLibraryArrayificationTest.java')
-APPROVED_REPAIR_SHA256 = '6d31a53eb94af7c3cfe08ce126ce1be1f8d7da1b09150bd72a12c602d3ab3565'
-APPROVED_REPAIR_GIT_BLOB = 'e220622405432368d2c46b32f9f1c197913e7c0a'
+APPROVED_REPAIR_SHA256 = '61ae67aeedc4a4a42f81f1beefc23ed43aa0c2288b6301fd7bfc1eea023fdf87'
+APPROVED_REPAIR_GIT_BLOB = '6d04f30ff77297201797c079125ebc0107906e63'
 APPROVED_REPAIR_RECIPE = 'jdk.internal.m3.M3Jdk21InteropArrayificationVar20261022'
 
 
@@ -64,7 +64,7 @@ def read_admitted_additive_revision(receipts: Path, original_rows: list[list[str
 
 # This ledger is a source-sealed extension, not a modification of the
 # original 36+7+40 history or the previous one-test compound-var transition.
-COMPILER_RECEIPT_BLOB = 'b232af6a8867ebba2ffe7082b37ea5d07f663472'
+COMPILER_RECEIPT_BLOB = '5565595c2ac4d6d725c7be0005ed91f5080a7475'
 APACHE_TEST = TEST + 'M3ApacheCollectionsTest.java'
 COMPILER_TEST_PATHS = (
     APACHE_TEST,
@@ -168,8 +168,8 @@ def verify_additions(product: Path, receipts: Path,
 # Source-history commit at which the immutable 36-owner census was authored.
 # Checking these bytes at a separate pinned checkout is not a semantic DAG walk.
 HISTORICAL_COMMIT = "a720780b1a5ab41ea27182b9b7ad873efdf533b4"
-HISTORICAL_CENSUS_BLOB = "9dbfe94767eb36c9371fd931e7513cb11e168768"
-HISTORICAL_VERIFIER_BLOB = "efe6d0f959cdc3172d6f6659f06bb486ef825291"
+HISTORICAL_CENSUS_BLOB = "9f3043103b3d63d3fdf37a17190dc85a0f918a1b"
+HISTORICAL_VERIFIER_BLOB = "cf8ccc95c7121c51551de608e47958466d42cbc9"
 
 
 def verify_historical_revisions(product: Path, receipts: Path,

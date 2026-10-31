@@ -32,7 +32,7 @@ final class M3OwnedGuavaEvictingQueueRecipeTest {
     private static final String YAML="/META-INF/rewrite/m3-owned-guava-evicting-queue.yml";
     private static final String NAME="jdk.internal.m3.OwnedGuavaEvictingQueue20261018";
     private static final String TARGET="m3/collections/implementations/guava-evicting-queue/src/main/java/jdk/m3/collections/guava/M3EvictingQueue.java";
-    private static final String AFTER_SHA="8afe356324bdaa51953933f2213b573175b64e2921df4c0df7c4a16161274840";
+    private static final String AFTER_SHA="12e10948c33dedf38961027f23c01a3a912889d2585dfe8181f35ecb43426dfb";
     private static final int AFTER_BYTES=16979;
     private static final String TEMPLATE="M3EvictingQueue.java.txt";
     private static final String UNRELATED="unrelated.txt";

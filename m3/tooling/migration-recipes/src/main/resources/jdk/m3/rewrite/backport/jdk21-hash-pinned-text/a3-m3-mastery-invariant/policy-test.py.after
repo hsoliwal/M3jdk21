@@ -56,7 +56,7 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
         with POLICY.open(encoding="utf-8", newline="") as handle:
             rows = {row["local_surface"]: row for row in csv.DictReader(handle, delimiter="\t")}
 
-        a3 = rows["m3/tooling/a3/src/main/java/com/m3/a3/A3Lab.java"]
+        a3 = rows["m3/tooling/a3/src/main/java/jdk/m3/a3/A3Lab.java"]
         self.assertEqual("TARGET_PROOF_CONSUMER", a3["disposition"])
         self.assertEqual("com.synexia.rewrite.atom", a3["canonical_owner"])
         self.assertEqual("true", a3["handoff_required"])

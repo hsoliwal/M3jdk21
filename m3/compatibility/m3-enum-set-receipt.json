@@ -21,8 +21,8 @@
         "mechanics": "word set/clear/flip/cardinality/nextSetBit/or/and/xor"
       },
       {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3EnumLongMap.java",
-        "receipt": "m3/compatibility/synexia-enum-long-map-receipt.json",
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3EnumLongMap.java",
+        "receipt": "m3/compatibility/m3-enum-long-map-receipt.json",
         "target": "com.m3.collections.M3EnumSet",
         "mechanics": "ordinal universe handling"
       }
@@ -42,15 +42,15 @@
   "publicJdkReplacement": false,
   "targets": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3EnumSet.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3EnumSet.java",
       "before": "ABSENT",
-      "after": "a4c359c8035efdf31edbe6f5c36808984bf3de628e9f7c293429a1c7578ce77c",
+      "after": "0ba36bb26b74ddb73d9587ac93d902f031e82bdab86b872ba4f944be5424a2c2",
       "resource": "00-M3EnumSet.java.txt"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3EnumSetTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3EnumSetTest.java",
       "before": "ABSENT",
-      "after": "334ec881ecaf3fa7807bf912ff3d758cf8ac9eeb162ff7e261738e73890e81c9",
+      "after": "d1dbb2bc05c21c865c097aef6959cd62e9a8ca922016012c8800a3fd9dcfd6b4",
       "resource": "01-M3EnumSetTest.java.txt"
     }
   ],

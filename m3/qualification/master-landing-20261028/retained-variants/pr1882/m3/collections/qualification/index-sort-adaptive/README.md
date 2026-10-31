@@ -5,10 +5,10 @@ This is an original M3JDK21 product-source refinement, not a compatibility overl
 
 ## Exact custody
 - Master source commit (before): b032048eece51c897d8623fd7a69f7f16eac5a57
-- Existing source Git blob (before): 30a3bcb1d3a58935c548c40b99862b5643484e06
-- Result source Git blob: a62fc49228ac09213bf44c3a9075098f1d5c65ef
-- Result standalone contract Git blob: 49a913ba2427451e12ae4016d2b529af18f3fbef
-- Result JUnit wrapper Git blob: 15d06bd2740ea7c9ebc320b697a2ac347b446d1d
+- Existing source Git blob (before): c2f9716022b9b2de10bc7ec8b6729e172ea17137
+- Result source Git blob: 9fdb435f3212a165262cb18ae11fcb1e9e56ae3e
+- Result standalone contract Git blob: 60041005c55cfaf8e9f65ff3d83ad53ed2f4f1b9
+- Result JUnit wrapper Git blob: 6ebdc79f1623c9f798824270d66df0ad3dd7e322
 - Canonical source-sealed Synexia recipe: hsoliwal/com.synexia PR #13224, commit 9524650e3f4743bf22f79945526560277eb41d7c, recipe com.synexia.m3.Jdk21IndexSortAdaptive20261023. This product branch contains only admitted Java result sources/tests and this data-only receipt, not recipe code.
 
 ## Contract and storage
@@ -29,9 +29,9 @@ obsolete intermediate Git blob f786685aa7c7cf0e4e6a1b975f98227449fb637a
 remains solely in Synexia correction memory. The default merge algorithm is
 restored; no existing collection caller silently opts into stablePrepared.
 
-New strict Java21 source contract blob: 7a61f99ac3fb5703385b61ea99b0e763a53ae82f
-New strict JUnit wrapper blob: ea757248616e6ba01fe78625ea0696b6ff3969cb
-Original adaptive JUnit wrapper remains 15d06bd2740ea7c9ebc320b697a2ac347b446d1d.
+New strict Java21 source contract blob: 50483be714e2fc8436729241a57ab941c73b4709
+New strict JUnit wrapper blob: da5360d12d1afa99b6c527fbea2b1c951a27ac20
+Original adaptive JUnit wrapper remains 6ebdc79f1623c9f798824270d66df0ad3dd7e322.
 Corrected Synexia recipe source commit: 9524650e3f4743bf22f79945526560277eb41d7c.
 
 Executable focused evidence: local normal/JVM interpreter adaptive oracle
@@ -44,7 +44,7 @@ claimed. Keep draft/HOLD until remaining qualification runs.
 
 ## Current-head modular compile and strict callback admission
 
-Canonical Synexia validation source: PR #13224 commit 2f14c1e734808b16ba01b96a3b5e2079bccf702c. The exact shell candidate (Git blob 950437ecd6f8e06e091650638056c64ec695e3e1) is received as qualification/index-sort-adaptive/verify-module-java21.sh; the exact CI result (Git blob f30cf09ce7dfbb667a7bd351f662e6ebce5422cd) is received into .github/workflows/m3-index-sort-adaptive-java21.yml. No recipe engine or Synexia runtime dependency is imported.
+Canonical Synexia validation source: PR #13224 commit 2f14c1e734808b16ba01b96a3b5e2079bccf702c. The exact shell candidate (Git blob fb9a239f8974b02de4344afac0502ca46bb10eb3) is received as qualification/index-sort-adaptive/verify-module-java21.sh; the exact CI result (Git blob c0a70e44a8bad34ce6414c42cc19e1a7c5639a45) is received into .github/workflows/m3-index-sort-adaptive-java21.yml. No recipe engine or Synexia runtime dependency is imported.
 
 The new whole-module-java21 job is dependent on the original source-sealed-java21 job, and independently compiles the real com.m3.arrays module from the existing src/main/java source, then the real com.m3.collections module with an explicit Java module path. It verifies that the collection descriptor still requires com.m3.arrays, compiles adaptive/strict contract classes through --patch-module, and executes both contracts in normal and -Xint VM modes. This tests module resolution without removing the existing requires directive.
 
@@ -64,8 +64,8 @@ Canonical Synexia source-sealed text recipe: PR #13224, commit
 `d9a82ffdde9a43a66286b53817ef352466244149`,
 `com.synexia.m3.Jdk21FullCollectionJniModuleClosure20261024`.
 The reused M3HashPinnedTextSnapshotRecipe owns one exact Python verifier target.
-Product preimage blob `cf5e385420cae668fa0e68f769545f7ca6b16e03`;
-exact emitted postimage blob `73a90bdf35b770b0e91ecc832fff65d976650a13`.
+Product preimage blob `c6e7bbe8de8b628e8e558454fb7efb1eae557c78`;
+exact emitted postimage blob `77726d987eeb1e185a64b933bc6b0049c77ff67c`.
 
 The corrected existing verifier compiles and installs original m3/arrays from
 its source POM (after pinned donor/JUnit closure), checks its real Java module
@@ -98,7 +98,7 @@ name. Corrected source now reads the first whitespace token and removes
 Synexia recipe's correction history; it is **not** the current product code.
 
 The version-neutral corrected verifier blob is
-`73a90bdf35b770b0e91ecc832fff65d976650a13`, exact canonical Synexia
+`77726d987eeb1e185a64b933bc6b0049c77ff67c`, exact canonical Synexia
 source template at `d9a82ffdde9a43a66286b53817ef352466244149`.
 The JDK 21 fixture passed explicit arrays module build,
 `--module-path` compilation and `jdeps` closure check for
@@ -120,9 +120,9 @@ already owns the original unchanged published sources under
 Canonical source-sealed Synexia recipe (PR #13224) commit:
 `3579b6591d0487a2ca4ba7be98eec8c9e168ad00`.
 Original product workflow Git blob:
-`7bcc8d43df65cc5b62638bba45514bb7bf469dc1`;
+`6e5aeabe3b065131b8789bb64e8738e46f559d75`;
 exact accepted replacement:
-`8f40e0afaf1eaeaa4d02db8809516d55f350ae4b`.
+`98a50eda1e6d148bccd09a3eb87534170d641d26`.
 The existing `M3HashPinnedTextSnapshotRecipe` owns this YAML candidate and
 its predecessor/postimage SHA-256; no recipe source belongs in this product.
 

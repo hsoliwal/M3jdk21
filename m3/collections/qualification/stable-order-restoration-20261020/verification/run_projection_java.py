@@ -16,8 +16,8 @@ BASE = ROOT / 'baseline/m3/collections'
 B = ROOT.parent / 'm3fs-vfs-20261020'
 JDK = B / 'toolchain/jdk21/bin'
 HOST = ROOT / 'custody/m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host'
-BEFORE = '77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545'
-AFTER = '7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e'
+BEFORE = '6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb'
+AFTER = 'bf601d711667e1078ca30246da6fa89b43d7ed951a3179e0a161365526581959'
 OWNERS = ['M3LongIndexProjection', 'M3LongAddressKernel', 'M3IndexMaskCompactor', 'M3IndexMaskWindow']
 TESTS = ['M3LongAddressKernelTest', 'M3LongIndexProjectionMaskOffsetTest',
          'M3IndexMaskWindowTest', 'M3IndexMaskWindowRecoveryTest', 'M3IndexOrderWindowTest']

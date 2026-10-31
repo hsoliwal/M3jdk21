@@ -1,7 +1,7 @@
 [
   {
     "variant": "baseline",
-    "kernel_sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
+    "kernel_sha256": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73",
     "exports": [
       "Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
       "Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative",

@@ -56,7 +56,7 @@ def check_rows(rows, field):
 
 handoff_path = ROOT / 'jobs-work/maven4-recipe/FINAL_HANDOFF.json'
 handoff_bytes = handoff_path.read_bytes()
-assert sha(handoff_bytes) == 'dc3cdb3e547a85c0f13de576479d19137c87de2b2bb002a1b763d0a62b371342'
+assert sha(handoff_bytes) == '5fefdaa1b42f2a674fa9056021281f33ce2bce2e10dfd397676c4b177668a8ae'
 handoff = json.loads(handoff_bytes)
 check_rows(handoff['files'], 'repository_path')
 assert len(handoff['files']) == 321
@@ -152,7 +152,7 @@ for row in helpers['sources']:
     origin(sha(data), 'hsoliwal/com.synexia', row['source_revision'], row['path'],
            'PRESERVED_HISTORY' if identical else 'UPSTREAM_MODIFIED',
            'EXACT_PUBLISHED_CORE_DONOR' if identical else 'ADAPTED_UPSTREAM')
-origin('4fc14187d5dd9e49850dae6f26a3f19af4a77809edef350bc149a434217472b2',
+origin('1c11d02ac383744c2952eca715b72272772226c0c07bd73565e7b01c4ff6e05d',
        'hsoliwal/com.synexia', CORE_COMMIT,
        MODULE + '/recipe-crates/m3-integrated-refinement-20261021/proof/receiver-001/runner.py',
        'PRESERVED_HISTORY', 'EXACT_PUBLISHED_CORE_DONOR')

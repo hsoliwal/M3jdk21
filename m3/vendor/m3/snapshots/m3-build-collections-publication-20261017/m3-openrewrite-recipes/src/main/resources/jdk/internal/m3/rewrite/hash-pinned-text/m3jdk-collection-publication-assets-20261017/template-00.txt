@@ -12,8 +12,8 @@
       "source": "m3-common/src/main/java/jdk/internal/m3/common/collections/M3FilteredViews.java",
       "source_sha256": "4cf5d18fc6076193ce85c16df4ad431a37939aec81bacc64d22af6a3ee4f145a",
       "target": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
-      "target_before": "fd880291f6119899e530e19b1dc622bb4f1ea51c6c136ab1c510d507c303c761",
-      "target_sha256": "2f8b58f63b16aa7751a331d24561caf550fd6977692fb0b8ac2c518a20a13a67",
+      "target_before": "9ec03f9f01b6bfdfbc6f76ce320422d8599f56119a0e317a21904452a615e256",
+      "target_sha256": "e5728a9629b11305553a645b428744dc0b2a04ab8545975cebd2270ae875041e",
       "token_projection": "EXACT_SOURCE_BYTES_AFTER_PACKAGE_ONLY_CHANGE; actual canonical SDK and frozen current-owner proof",
       "old_package": "jdk.internal.m3.common.collections",
       "new_package": "jdk.m3.collections",
@@ -24,10 +24,10 @@
     },
     {
       "source": "m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitiveIndexView.java",
-      "source_sha256": "c0380232909fe1f3056b2a1438d544c4a22e4290c35a603d6851e8eff68ffe2d",
+      "source_sha256": "b7938e14c342196e74bc506020ecf58f7180fa5332c813a46d5f5aefbafef47a",
       "target": "m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveIndexView.java",
       "target_before": "ABSENT",
-      "target_sha256": "4f69b71b3deb0fdd867aa90dde2fb4b762fdd9c246c8fe77689484184ca46789",
+      "target_sha256": "874378d38cee18d74072d8f5a7d44552a072cd290560dcb36d91e298a453495e",
       "mapped_java_token_count": 1695,
       "token_projection": "PASS",
       "old_package": "jdk.internal.m3.primitives",
@@ -43,10 +43,10 @@
     },
     {
       "source": "m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitiveSoaStore.java",
-      "source_sha256": "76c2218eced534aa149eea7830482437ff2a9c9b29fbfde862583e3368be6eef",
+      "source_sha256": "54a8f953dcccb7dadb57839e0124f44ce9b1da68fa1a6cddcf5098771e087a2e",
       "target": "m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveSoaStore.java",
       "target_before": "ABSENT",
-      "target_sha256": "b2c5d01b1397bb1951b918b8ccbdcaef148d3ceb228023f06ddceb302e6da533",
+      "target_sha256": "7bce76bc55cc3c552e463baf387287ee89100dea8b14e86659e27ae0ef661c0f",
       "mapped_java_token_count": 3581,
       "token_projection": "PASS",
       "old_package": "jdk.internal.m3.primitives",
@@ -62,10 +62,10 @@
     },
     {
       "source": "m3-primitives/src/main/java/jdk/internal/m3/primitives/M3SortableTopK.java",
-      "source_sha256": "fd667f665961468fe6e184fa02b81768f0be250e1c10f22385871b928eed6fb0",
+      "source_sha256": "f001578644a6c89adf52abdf911bc4c436ce0c09c241b116f45044ff68765223",
       "target": "m3/ports/collections/src/main/java/jdk/m3/util/M3SortableTopK.java",
       "target_before": "ABSENT",
-      "target_sha256": "918e2dc751569e6fcda8d8a13416c62289a068bd3f9e81418240d4be5a69d6cd",
+      "target_sha256": "88dc3a4d84e46ff31d8214cb23d0944901ace649b16cf0c26ed6d1b96cd95f5a",
       "mapped_java_token_count": 1071,
       "token_projection": "PASS",
       "old_package": "jdk.internal.m3.primitives",
@@ -81,10 +81,10 @@
     },
     {
       "source": "m3-primitives/src/main/java/jdk/internal/m3/primitives/M3RuntimeHeap.java",
-      "source_sha256": "2ef4461c44215f3f17b0c700f668391ab15c6e2ca33cabedb01fdb953e6f1207",
+      "source_sha256": "b63d0e05810b56ec8a79c9add47abe64846d492d863078458573c9e6575956b5",
       "target": "m3/ports/collections/src/main/java/jdk/m3/util/M3RuntimeHeap.java",
       "target_before": "ABSENT",
-      "target_sha256": "28b34077e96b496c60006186914489aa64fa51263d9c2aaa390704ba42ddc6be",
+      "target_sha256": "e8dd77e65aeb67120cf0c4f0b955e750e45be756d942b281cf142cf44690d49f",
       "mapped_java_token_count": 708,
       "token_projection": "PASS",
       "old_package": "jdk.internal.m3.primitives",
@@ -103,7 +103,7 @@
       "source_sha256": "b68c48d0d41d02a8441863ce2c2541ea95710cbd27461fd1630a449759716ae9",
       "target": "m3/tooling/module-packs/collections/src/test/java/jdk/m3/collections/M3FilteredViewsContract.java",
       "target_before": "ABSENT",
-      "target_sha256": "cc8179e14343a9b1182e7c8002a44f6ee12786605be9ebc750dd1926f5d53020",
+      "target_sha256": "c2d94e528efb2267fa33723966e7cdd4d6b29fb67719733756bf8749523146be",
       "token_projection": "FROZEN_ORACLE_BODY_EXACT; one explicit existing-owner import added",
       "old_package": "jdk.internal.m3.common.collections",
       "new_package": "jdk.m3.collections",
@@ -116,7 +116,7 @@
       "source_sha256": "6ab10e77da3683ae9fcffc4919f63e1456fdb397d5649d45a7f8e75b05435833",
       "target": "m3/tooling/module-packs/collections/src/test/java/jdk/m3/collections/M3MutableFilteredViewsContract.java",
       "target_before": "ABSENT",
-      "target_sha256": "4ced8eb6b3d4194462322c63a5a2afdd40397778c79454d7ef96b64c70aae62e",
+      "target_sha256": "45e9fee461ea752722424900ebedea97faa9e8ee18e5bfaa68a427a7ec3c6839",
       "token_projection": "FROZEN_ORACLE_BODY_EXACT; one explicit existing-owner import added",
       "old_package": "jdk.internal.m3.common.collections",
       "new_package": "jdk.m3.collections",
@@ -126,10 +126,10 @@
     },
     {
       "source": "frozen-independent-tests/M3PrimitiveIndexViewFilterContract.java",
-      "source_sha256": "bfaa9ba099cbaacb9f5aad273337c2853c17e09ab1106723a361c9bffc66b336",
+      "source_sha256": "adccec347f1ff8f304aa9d7b2a850bc8408a659beef3c6c3b75b10eea4536a4d",
       "target": "m3/tooling/module-packs/collections/src/test/java/jdk/m3/util/M3PrimitiveIndexViewFilterContract.java",
       "target_before": "ABSENT",
-      "target_sha256": "dbedd9430e488dfed82101668bc84f64a239d63d24672b197ee6eb6731773c82",
+      "target_sha256": "5271edd73a643d4d2a1dafa036e3d3eda71552744bce6948387adf5fdd08b411",
       "mapped_java_token_count": 2716,
       "token_projection": "PASS",
       "old_package": "jdk.internal.m3.primitives",
@@ -147,21 +147,21 @@
   "existing_owners": [
     {
       "path": "m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveKind.java",
-      "sha256": "a7ee642a4286ff3d93d6d94e719a7cb34f4ecd1955bf7e699d61402763fdda0b",
+      "sha256": "c79b8593917eb455226f5ea4e4f4b583859de33b9ad9446b159d97fffa5d2662",
       "action": "REUSE_EXISTING_SOURCE_OWNER",
       "approved_java_token_parity": "PASS",
       "token_count": 2803
     },
     {
       "path": "m3/ports/collections/src/main/java/jdk/m3/util/M3DenseHash.java",
-      "sha256": "b887113334654c253f5ef06e5d463f294e0d6db81da82531c961fc82b49948f4",
+      "sha256": "959d05bebf3003000e2be5a395febe4d9c921cac25d76bd8745174d2635eee6b",
       "action": "REUSE_EXISTING_SOURCE_OWNER",
       "approved_java_token_parity": "PASS",
       "token_count": 329
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java",
-      "sha256": "2b3bb42e411202ecb5998f99c7ca34bf5026842ecab2e4c8b64711400c1f4681",
+      "sha256": "c18a5c7f458c3b66fd867549c1e6887f87aa204dc4246104d116d03c24a8de16",
       "action": "REUSE_EXISTING_SOURCE_OWNER_UNCHANGED",
       "source_identity": "Exact original Synexia source after package-only mapping"
     }
@@ -182,8 +182,8 @@
   ],
   "existing_generic_owner": {
     "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
-    "before_sha256": "fd880291f6119899e530e19b1dc622bb4f1ea51c6c136ab1c510d507c303c761",
-    "after_sha256": "2f8b58f63b16aa7751a331d24561caf550fd6977692fb0b8ac2c518a20a13a67",
+    "before_sha256": "9ec03f9f01b6bfdfbc6f76ce320422d8599f56119a0e317a21904452a615e256",
+    "after_sha256": "e5728a9629b11305553a645b428744dc0b2a04ab8545975cebd2270ae875041e",
     "admitted_atoms": [
       "descending iterator private wrapper removal",
       "sorted map isEmpty private entry/view removal"

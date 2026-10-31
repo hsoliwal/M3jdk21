@@ -58,7 +58,7 @@ jobs:
           BASE=275b610f26c191cd70420172ac65b634a8a4df49
           NATIVE=m3/collections/src/main/native/collections/m3_index_mask_compactor.c
           git show "$BASE:$NATIVE" > "$OUT/legacy/m3_index_mask_compactor.c"
-          printf '%s  %s\n'             cb8e8c66e07cc4651e95a0c28ad834d2c9de48df34dc90c6d7da68443f1da531             "$OUT/legacy/m3_index_mask_compactor.c" | sha256sum -c -
+          printf '%s  %s\n'             a549b92b38eaa337c0e95f32c46607cace9ae46d8240d37bd58a3a48e296990d             "$OUT/legacy/m3_index_mask_compactor.c" | sha256sum -c -
           gcc -std=c17 -O2 -Wall -Wextra -Wconversion -Wshadow -Werror             -fPIC -shared -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux"             "$OUT/legacy/m3_index_mask_compactor.c"             -o "$OUT/legacy/libm3_collections_mask.so"
           java -Xcheck:jni -Djava.library.path="$OUT/legacy" -cp "$OUT/classes"             jdk.m3.collections.M3IndexMaskCompactorSelfTest --native
           java -Xcheck:jni -Djava.library.path="$OUT/legacy" -cp "$OUT/classes"             jdk.m3.collections.M3CountedBagSelfTest

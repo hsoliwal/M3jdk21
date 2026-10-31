@@ -11,8 +11,8 @@
         "Complete donor body; explicit owner and package mappings only."
       ],
       "source_sha256": "e61df0bd65c31d220cd2774ff5e8d68488da85eb114a4ea3751ae2d55cef652a",
-      "target_sha256": "17ae996cffab497f44b9aeb0262a7c5e1e8236420e35c51a0696b5918c75a9ad",
-      "target_git_blob": "3087436b73131b74278724c34db6908bd64752a6"
+      "target_sha256": "28109a5c2a66b60ac386f63257775188d4aaaf7d20e23d59d5f82d50de25d697",
+      "target_git_blob": "e459e0042137e438a4c1378d55f4cb3499f91707"
     },
     {
       "key": "cursor",
@@ -23,8 +23,8 @@
         "Complete donor body; explicit owner and package mappings only."
       ],
       "source_sha256": "bfee8b4825c1b85bcfb9a27651635d11716ce0f15b10bf7868067bc08b52b6f3",
-      "target_sha256": "60960320a4e37f31f95dadf1d63c5badad4851243e34b8995c214c39c64320f3",
-      "target_git_blob": "dd176ca10f4cf5c1ee269b339f6156016fe4a509"
+      "target_sha256": "0b271d6408977767eb452800d48b3ee2befbb7c13293430a1c2e9d5ec9d56e9e",
+      "target_git_blob": "171e200c4be0f502b7c61bd5e11583664c89c423"
     },
     {
       "key": "nativejson",
@@ -37,32 +37,32 @@
         "For nonempty output, explicitly reject target.isReadOnly() after the existing same-object overlap check. Preserves Java ByteBuffer.put writability and validation precedence before JNI can obtain a raw address; length-zero requests remain allowed. An explicit-module required-JNI probe reproduced the unguarded donor failure before this correction."
       ],
       "source_sha256": "c7b1b23c1c2323634d2bd5ef706f65967cd108cd333498ccdf457844410512d6",
-      "target_sha256": "5510d99a7068b87db686775a401a2f9f95f1abc980392c9fc695d9c1985adf6a",
-      "target_git_blob": "fc9d5a17f59e37fe6570c6640a659cb95f317e53"
+      "target_sha256": "51781e41816f19087e2c843493287dffc3dfa3b836b9148ac2124c4441242ad2",
+      "target_git_blob": "1dd65908180d6c6570d905bb522155fb68723a07"
     },
     {
       "key": "loader",
       "source_path": "m3-native-interop/src/main/java/jdk/internal/m3/nativeinterop/JniLibraryLoader.java",
-      "source_git_blob": "da5d6391af12d53a71c5f1e0f3736fa125659b64",
+      "source_git_blob": "aaa7649fa9c99c214fd8864ee3cd34c95ebfd7d9",
       "target_class": "M3JniLibraryLoader",
       "adaptations": [
         "Complete donor body; explicit owner and package mappings only."
       ],
-      "source_sha256": "fa22dcfcc2b442c72ee3dd97e5d97dd5c9ad19ee4eac422641336b7477c63699",
-      "target_sha256": "613def6113f8101dc31d7b956e73b05b7bbe63b903eadcd385dedeb7e7da9536",
-      "target_git_blob": "8f7d0f11ad5207c96777baae566c93f7dc5ade42"
+      "source_sha256": "bccce46eb05a7b040dcb7412ee3a425b4b270214bdd654c0787dbab8dfd02048",
+      "target_sha256": "41bbf9b57768873e4eb513ebb94b396234cc66f69b7f20382306e73ddafd0591",
+      "target_git_blob": "3bb89566716d7763343edc4f3ec5f4e0bac77c25"
     },
     {
       "key": "libspec",
       "source_path": "m3-native-interop/src/main/java/jdk/internal/m3/nativeinterop/NativeLibrarySpec.java",
-      "source_git_blob": "39b9f04e46411de9bf7b8063608241efb2819aca",
+      "source_git_blob": "475d90d7df3932fb622fc387d0518df1b6f3c2a1",
       "target_class": "M3NativeLibrarySpec",
       "adaptations": [
         "Complete donor body; explicit owner and package mappings only."
       ],
-      "source_sha256": "fd9bc8f19f629e6131dcb55f264eed524fa17e69bdda31d723b4addfddb8a4f5",
-      "target_sha256": "9eef35d68d5d79745d7f60f10120f09205699833e0f9fa967e5c9b5fc13e6744",
-      "target_git_blob": "b471d942156142ea9efd238b265870b0aad07e33"
+      "source_sha256": "9680242313d4e2f2a0f14d31879d7c6da0af2ef4a11b7a8f256e6b0eb4d44cda",
+      "target_sha256": "e504ae5fb6e89ebe62b8574c64809f65bd28853f79175a728aa048e1bb8305dc",
+      "target_git_blob": "f82ceb4860096a8c9a1bb9df7b2d2d65e2d97348"
     },
     {
       "key": "progress",
@@ -73,8 +73,8 @@
         "Complete donor body; explicit owner and package mappings only."
       ],
       "source_sha256": "1dea7f0324c0106d993e6688e221d1f9755c35e6c70d292c2b75eb4fd28cc00e",
-      "target_sha256": "9dec6ae3ca9968785d3f8e47a209abe3e09fa5e62798243bfe0fc9708e2087a2",
-      "target_git_blob": "41ae56507e3bcb307c8a5460645626d29e2e3aae"
+      "target_sha256": "99fe3be2cc0dace64f3894e210bcd7925cd21f1d3c3ba557acf62418e8b0f80e",
+      "target_git_blob": "223cad76aa790aa7ac7f9e352f8d58c82bce20fb"
     },
     {
       "key": "progressBase",
@@ -85,8 +85,8 @@
         "Complete donor body; explicit owner and package mappings only."
       ],
       "source_sha256": "a6ea4f264fd771e52bfe575baa35b96de8d06abec723dab7eac712d5843524de",
-      "target_sha256": "28818ae132655e930f5347f6aa53433e57d5f57836358e1e9a5370289dea73c6",
-      "target_git_blob": "933d4b2134ec59eeace722c13b1ae8b369e31fe3"
+      "target_sha256": "df3ed4363eeefa360f096a435ee176e012e609ddd5f97c5341877f8670225107",
+      "target_git_blob": "0e97fae48ee4cb1b979a83f938eea068b0bc7564"
     },
     {
       "key": "progressState",
@@ -97,8 +97,8 @@
         "Complete donor body; explicit owner and package mappings only."
       ],
       "source_sha256": "29cde61a192e454dd2ffde25e5a142cdc2a25e806ce91f7f01e6d5d7f6bf6960",
-      "target_sha256": "d529b5f4834a1ac3b0afc7ff0bf4ddd4f39999c9da42049c24c845e4c2d852cb",
-      "target_git_blob": "9731dcce6dfc603feb05707b0526256b8e3e7e02"
+      "target_sha256": "40efa824518b005df5ceacab22eb48cb1679a9720d486a58218cb5b36872094c",
+      "target_git_blob": "630d2975a2110898a0a61036b557839e6ecbb33a"
     },
     {
       "key": "progressChild",
@@ -109,8 +109,8 @@
         "Complete donor body; explicit owner and package mappings only."
       ],
       "source_sha256": "1fdd7db84f80b6e171669a3d60d5e8ec5e4971fde6c105d906b87dbf6fd2a913",
-      "target_sha256": "23b0ffdc4fcde86e6c39d02e3a1cc916310432881b32cb181b3a3d8912cf45c6",
-      "target_git_blob": "56be8ea465add3dd956d8892fb4e7fab264f8554"
+      "target_sha256": "8644473a6de41e1fbaf7808284b950f97a4d36f15096aae232f9df9b25eba25a",
+      "target_git_blob": "6ebbdbe50822f6658b9ea8c9c9c5be90d652f5db"
     },
     {
       "key": "progressSnapshot",
@@ -121,8 +121,8 @@
         "Complete donor body; explicit owner and package mappings only."
       ],
       "source_sha256": "9aea76a6dfbf7fb954ffd03081520a11e2e8ef515c0d3e556a735408187f1267",
-      "target_sha256": "5deca622172f899f1f6484b3bdc831747227d8c80590ef42422158f2722d7710",
-      "target_git_blob": "53e20e20ec7ec65c93252b84a2bb39282bfe800a"
+      "target_sha256": "339328177722be4d0651e8cdd8797e59b9f724b45ddf123fc5dfca80e3fff52a",
+      "target_git_blob": "cebc5286cfca9eba00f89dacdb1b0212230fec37"
     },
     {
       "key": "commonChild",
@@ -133,8 +133,8 @@
         "Complete donor body; explicit owner and package mappings only."
       ],
       "source_sha256": "397bcfc5e8eaa4d516f6fccd1d3c238be4432f6f6a49f77a425ae21fd7d969ff",
-      "target_sha256": "28d62e89796e60805e9e46f8dfa7ea5bb038e99579296f586a164567e09bf9ec",
-      "target_git_blob": "312ecd05a002c923bb6eeb43192bd14e4cb22ab1"
+      "target_sha256": "eb7f6c33aa27b3b78cb84202ce85091007a11ddee060c2c86421bae66344592b",
+      "target_git_blob": "3ca57efb05802f13a1cdd0e8b15f175df1792472"
     },
     {
       "key": "progressUtils",
@@ -146,8 +146,8 @@
         "Remove unused Lombok Slf4j import and annotation only; no logger calls exist, all four public arithmetic methods are preserved."
       ],
       "source_sha256": "7a5f950efde91f07e8df46a092bb34408b49532807be361a6c1da19ac3b3bf45",
-      "target_sha256": "6df6d1b10eb0c2c9465357155518093bd322a2cd4c1b667d61403a6a599ca354",
-      "target_git_blob": "5e16c6c86d645616f23ef6260c0b4c6a851ecdaa"
+      "target_sha256": "857e0fb91f379d8b3c87ed200366d39f0245ebe3561a33a6b075d7eb6b75eae0",
+      "target_git_blob": "fb47e85d6a604545c104f728ce1a24609a5f62ba"
     }
   ],
   "native": {
@@ -161,7 +161,7 @@
       "All original worker statements, geometry checks, ABI value 1 and status codes retained."
     ],
     "source_sha256": "61feb18120031285813b55a802ff6ab86af9690927fa7b1b5f1a75b13b1b01fa",
-    "target_sha256": "5e15872f9ab3c7c7d2ea41e9a67b6fe9c5cfd1dda6387adc3ab6e372d6409697"
+    "target_sha256": "2bb92d854108e2ebf5e54f6e126037b9538d532e7d08a969b5757f9d10eb1b4f"
   },
   "native_inventory_correction": "Initial inventory of m3-indexstring/src/main/native (20 C/H/CUDA files) had no JSON symbols; full PR10828 path review located the actual donor in m3-indexstring/native/src, at the same pinned revision. No absence claim applies to the complete repository.",
   "contracts": {
@@ -189,7 +189,7 @@
     "source_git_blob": "4d20058472c72ab49ddb6caa160f8f321a6af1fa",
     "source_sha256": "05c72765b610b45b9f55798cdab8c5d0146ecc7052a334286201d620733d3e86",
     "target_template": "native/m3_text_metrics_jni.c.txt",
-    "target_sha256": "00e4d58f4af904f9f5087929d66ba417f787a1c505579b3a90efbdd4361d70ce",
+    "target_sha256": "bf4ed4601838862c979051eb997a694b59584b3e8ee9b640eb82ab94de3e44fc",
     "adaptations": [
       "Retain exact source prefix: include directives, compile-time jint-width assertion, metrics_fail, metrics_unit, directMetrics0. Exclude unrelated IndexTextRangeHashes.directPrefixes0 worker.",
       "Rename exported JNI owner only to Java_jdk_m3_file_M3TextMetrics_00024Native_directMetrics0."

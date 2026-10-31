@@ -10,8 +10,8 @@
   "actual_sdk_tests": 5,
   "input_sealing_cases": 8,
   "receiver_cases": 9,
-  "actual_sdk_report_sha256": "44b0132eaca37d18b37c4f39d0b91f4f155aeae04f3093ebf8221b261d1a3b41",
-  "SDK_INPUTS_sha256": "5b374bb56dba5b5b8fbe0f563782229b8666268f4ef1185c0ed3e2d6e60b7c5f",
+  "actual_sdk_report_sha256": "bf6ada850dae673f5128ced11d612916eb105438887caa0114f5791bce8e50df",
+  "SDK_INPUTS_sha256": "d7bc765f5c6ced1fcbab1cf1d38de7a3af3095638f25688e1ae3d35aadd48501",
   "SDK_RESULTS_sha256": "5a8a37afa7757b2a345914ed673135b28debc7bd0bfd1e35ad754ec7831aa147",
   "current_outputs": [
     {

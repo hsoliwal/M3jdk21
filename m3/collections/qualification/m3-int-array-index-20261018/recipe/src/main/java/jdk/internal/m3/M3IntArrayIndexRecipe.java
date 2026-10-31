@@ -35,10 +35,10 @@ import java.util.stream.Stream;
 public final class M3IntArrayIndexRecipe {
     private record Spec(String destination, String file, String postSha) { }
     private static final List<Spec> FILES = List.of(
-            new Spec("m3/collections/src/main/java/jdk/m3/collections/M3IntList.java", "M3IntList.java.txt", "7c780a7301695f2948d008dfe88a6619e2eed5567aee79576ccce7e51071b30f"),
-            new Spec("m3/collections/src/main/java/jdk/m3/collections/M3IntArrayList.java", "M3IntArrayList.java.txt", "ba4a2f428ad628b6c54d13b3cf63429e87cf8f8ecaa4da8ae39bff4e12433efe"),
-            new Spec("m3/collections/src/main/java/jdk/m3/collections/M3IntIndexedSnapshot.java", "M3IntIndexedSnapshot.java.txt", "d84c88910a7855fd29596054ab6d30cba48affe4baee6f58e58c3d1dff9943fa"),
-            new Spec("m3/collections/src/test/java/jdk/m3/collections/M3IntArrayListContractProof.java", "M3IntArrayListContractProof.java.txt", "2c9eedd77db33d285e25e40c324ee5d338bb2d606b23eb727f00a282f1cf4d68"));
+            new Spec("m3/collections/src/main/java/jdk/m3/collections/M3IntList.java", "M3IntList.java.txt", "b16100e301609a1dab858c81748954ce226bab78641f65142700c9d064f360fa"),
+            new Spec("m3/collections/src/main/java/jdk/m3/collections/M3IntArrayList.java", "M3IntArrayList.java.txt", "1414a1dcc62a9f6c7f9a09accc308425300306a8a4cf1fc5a53fa8dffd60c60e"),
+            new Spec("m3/collections/src/main/java/jdk/m3/collections/M3IntIndexedSnapshot.java", "M3IntIndexedSnapshot.java.txt", "a4fe27ca132e64075b1de1b487b627285e327ac58e3738a77becba9d560a5f4b"),
+            new Spec("m3/collections/src/test/java/jdk/m3/collections/M3IntArrayListContractProof.java", "M3IntArrayListContractProof.java.txt", "4a7e4aee3ec8d02dc6934bdabca7d3bb227feb22e456051675074dbb142fcea3"));
     private M3IntArrayIndexRecipe() { }
 
     private static String digest(byte[] bytes) {

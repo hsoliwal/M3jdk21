@@ -20,23 +20,23 @@
   },
   "source_review": {
     "path": "FINAL_RECEIVING_FILE_REVIEW.tsv",
-    "sha256": "f1dd64a810e74f139db5c7d021bb1f5d82623501dff95f47ae6a0042fb62f602"
+    "sha256": "bee1b41ff0a751afe9b90518ca7c5fef6418f3e2f89438eecfe15c934e82d3a1"
   },
   "source_closure": {
     "path": "runtime-proof/received/SOURCE_MANIFEST.json",
-    "sha256": "90ec8c484c8ca68f1381133a0979ef88f4975dd4c46ced480db7a87d21b0a98e"
+    "sha256": "6011c6eed511e414029578a4a8492e2c571e7639fa0e6f8e21f6b3a48ad55d0b"
   },
   "actual_sdk_and_receivers": {
     "path": "runtime-proof/SDK_ACCEPTANCE.json",
-    "sha256": "4b47b37a307d7d2dd3a9358fd7d568a9743a72c8e6810e3a4d22dc1c0e6c681a"
+    "sha256": "b32ef751ff53f8e6951eb49c1165729ef5819e9f5cb3c84102f7fa7e2e6179a7"
   },
   "runtime": {
     "path": "runtime-proof/received/RECEIPT.json",
-    "sha256": "bf9bbd87748c76d0b2da931bc1246114eea49118e5b2ecc3cd5d2bf19aedc568"
+    "sha256": "96a54f14260cae789065575484f18d5d74be287e8271f40b73a3b42bae56c161"
   },
   "maven_module": {
     "path": "runtime-proof/received/MAVEN_TESTS.json",
-    "sha256": "38ebfc01f45f617bcda0e41a7a866650a3fd0b4f11636e9b734c0b2d89e89b20"
+    "sha256": "6a651189faaead92f38d20fc241eac0432224d28c9f3b9c338bf80755c98d7a9"
   },
   "public_api": {
     "status": "EXISTING_API_RETAINED",
@@ -62,7 +62,7 @@
     ],
     "receipt": {
       "path": "runtime-proof/received/API_COMPARISON.json",
-      "sha256": "f96c743cf930a1303b5881ed443190fd002d2638922ca273da6408a9b80f4bbe"
+      "sha256": "5aea0bd9e58fbdf992c0f531c3f99b79283e1486b587740a3eb96c958577ee85"
     }
   },
   "jni": {
@@ -71,13 +71,13 @@
     "added_long_entry_point": true,
     "receipt": {
       "path": "runtime-proof/received/JNI_ABI.json",
-      "sha256": "23648186cf818bdd389f3b9b950b48dfc8f4240fde5825f413eb83edc5350fc9"
+      "sha256": "41ec9f7b0fd2a4e2a7732b77b810fd5ceec2b9fff1fb0bba0021c0ac77a29d09"
     },
     "scope": "Two recorded Linux libraries; all preimage prototypes retained. No other-platform or native-speed claim."
   },
   "actual_long_facade": {
     "path": "runtime-proof/long-selftest/actual-long-selftest.json",
-    "sha256": "d655bdf6b73a4c9d29cefd55e7b0cca095db5c4e5ad94f1a8a7928feaf9fd649"
+    "sha256": "832374ab315335a85d0a7916e541ee3858c8e3ad6b9ebba9be664973cfbd7b2b"
   },
   "allocation": {
     "status": "PASS_NARROW_ALLOCATION_OBSERVATION",
@@ -105,7 +105,7 @@
     "guard_unchanged": true,
     "receipt": {
       "path": "runtime-proof/historical/HISTORICAL_DONATION_PREFLIGHT.json",
-      "sha256": "720db0fb379d84279abf54ad14acf067ea17bdf8eaca1bec71e9b1198bc26c60"
+      "sha256": "04c778e24be594365f27d5ad59cdb04d3a9e09aa8b25527a0366fd4e1c025489"
     },
     "interpretation": "Scoped runtime success does not replace or pass the unchanged historical donation verifier."
   },
@@ -117,7 +117,7 @@
   },
   "historical_candidate_metadata": {
     "path": "history/candidate-56-20261018/INVENTORY.json",
-    "sha256": "3762881c33ed3d0b67399cee60eb614ff8ff1378e40274da8207f4224b10bf15"
+    "sha256": "013c25afb55911cf62c8712fa1b540d195e00b9c5170f68ab90958069cb48cf4"
   },
   "rejected_initial_dataset": "m3jdk21-wrappers-20261018",
   "rejected_initial_source_remains_rejected": true,

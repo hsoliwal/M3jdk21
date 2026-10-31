@@ -24,7 +24,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          printf '%s\n' '5af79b8408cd3f14e300a8f274e74ec539d3f945a0d03655b55ddc03eb351b70  m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java' | sha256sum -c -
+          printf '%s\n' '65e5c350adb03ce2db176337ff2034b8253b5d5e258dd383a6500ddef01f2ecd  m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java' | sha256sum -c -
       - name: Compile real Java21 collection-owner dependency closure
         shell: bash
         run: |

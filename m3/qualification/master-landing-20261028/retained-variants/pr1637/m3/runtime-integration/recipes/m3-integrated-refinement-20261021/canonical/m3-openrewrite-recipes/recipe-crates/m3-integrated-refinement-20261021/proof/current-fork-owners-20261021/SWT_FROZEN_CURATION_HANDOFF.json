@@ -12,27 +12,27 @@
   ],
   "source_seals": {
     "path": "SOURCE_SEALS.json",
-    "sha256": "8fbab5e40413771d432d5016964f5bd71d95bf4043805bac828d82bd92200bb0",
+    "sha256": "49261c5ff0b2de1636d26fb01c6d64f3dc3dc9a3a31583aea776169e6bb66d4e",
     "bytes": 1064
   },
   "qualification_summary": {
     "path": "QUALIFICATION_SUMMARY.json",
-    "sha256": "e0533ca5393e0f754bb8d3d8b9f9a04d50f5ee6a95d2895a54e60f93f4a237c0",
+    "sha256": "6fef58f979f61be3d9497e5c1df69a060a4b13691948a61613183447604abc25",
     "bytes": 9890
   },
   "source_sdk": {
     "path": "proof/sdk-001-offline/RESULT.json",
-    "sha256": "a950522f8342e90af73568ae052eca44f776d377a57e4a392477ec5ea95a5098",
+    "sha256": "94112bdac83b7756c78d4ea92c24b0eb4cc948e7bd73622b7d96cd0fa4df2774",
     "bytes": 8058
   },
   "actual_receiver": {
     "path": "proof/receiver-runtime-001/RESULT.json",
-    "sha256": "54a0a9db3849ee73273e61b344009eea3bf4acacba4bc45b6c2ad8170398f285",
+    "sha256": "679ac1b3f0a18abead0c716b82a876db225f02d77afc01bcb8a3cae75f7932ec",
     "bytes": 2509
   },
   "correction_memory": {
     "path": "memory/FINAL_RESULT.json",
-    "sha256": "889d5a70900dae99b5cea3960fa03e456418f2d6b21dd49162a517794751044f",
+    "sha256": "1a611b3cfd965176fccb876946faebaa8e1a18618c2529bc66f30f53dbaf2433",
     "bytes": 2015
   },
   "source_inputs_readback": {
@@ -44,25 +44,25 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/QUALIFICATION_SUMMARY.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/QUALIFICATION_SUMMARY.json",
       "bytes": 9890,
-      "sha256": "e0533ca5393e0f754bb8d3d8b9f9a04d50f5ee6a95d2895a54e60f93f4a237c0"
+      "sha256": "6fef58f979f61be3d9497e5c1df69a060a4b13691948a61613183447604abc25"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/README.md",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/README.md",
       "bytes": 8990,
-      "sha256": "bf32e29ea8259fb654869b6c2f38130c7cdf1b63772bcc85ae728d13c3444b05"
+      "sha256": "9f2e2c38ec8f77ef8157d3e7ac2770061c2b55dc4fb0f7d62f0da1b7d718cc9d"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/SOURCE_SEALS.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/SOURCE_SEALS.json",
       "bytes": 1064,
-      "sha256": "8fbab5e40413771d432d5016964f5bd71d95bf4043805bac828d82bd92200bb0"
+      "sha256": "49261c5ff0b2de1636d26fb01c6d64f3dc3dc9a3a31583aea776169e6bb66d4e"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py",
       "bytes": 7436,
-      "sha256": "0a89bc61f308ab29ea491c8c3a2f9e3c821d3fdda3e0c7ecb9105d2baba8d867"
+      "sha256": "3ae33b9a03601e2dc8285e8ab0661aefeb209681bfd935e70be13357d23c7fb1"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/attribution/DependencyCustody.java",
@@ -98,19 +98,19 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/FINAL_RESULT.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/FINAL_RESULT.json",
       "bytes": 2015,
-      "sha256": "889d5a70900dae99b5cea3960fa03e456418f2d6b21dd49162a517794751044f"
+      "sha256": "1a611b3cfd965176fccb876946faebaa8e1a18618c2529bc66f30f53dbaf2433"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/HELPER_LINEAGE.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/HELPER_LINEAGE.json",
       "bytes": 2124,
-      "sha256": "f249b0a6bb57663b5109869e01a6c30be20ee0416cc3031839fa48e1e067c320"
+      "sha256": "66a2424c85ec34eeda9226bc827e64ac0f79e9c6d5efaf9b7c0ca598ba237ca3"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/INDEX.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/INDEX.json",
       "bytes": 674,
-      "sha256": "867d6dfe8087aae442408653795221bcece9afbb2383ba65eddb6fd54d4f2fc4"
+      "sha256": "770179b9f08a2c410a46bb3f9dfd77d97ebe7b459ba4db0a63069dc1dc50fd2d"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/LESSONS.md",
@@ -128,67 +128,67 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/draft-001.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/draft-001.json",
       "bytes": 10574,
-      "sha256": "325ed7260d10a27e0371ddfc3aaed2a27255b22296adaf6bda012b2dc7f11518"
+      "sha256": "0cbf52623817e0328ebfafa4e743d89597aa898eb99f4c0162266646987a9a90"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/draft-002.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/draft-002.json",
       "bytes": 10647,
-      "sha256": "080bfc5d3e07bf177c1d0473488c9011d7d741d06dbe240c22089e4a18b91f69"
+      "sha256": "77fbb5dd5949d6833151b25d70925068316fcb82f53a55c6f0b5a2542f1a4574"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/draft-003.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/draft-003.json",
       "bytes": 10418,
-      "sha256": "db13161cd083f79c043c24244157abe669279d6529b18211d329ab65e8310e90"
+      "sha256": "0383ce6ba2669a5e8cb4714023546528b434563caa3004c96308e873c0c34112"
     },
     {
-      "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events/a67a979a5c8b70422ebb3ae1de5b1ba13e4569de0d68740f4ab570f929b9d0af.json",
-      "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events/a67a979a5c8b70422ebb3ae1de5b1ba13e4569de0d68740f4ab570f929b9d0af.json",
+      "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events/fc48dd49814293e527151d91c809e20db4c97a5ff18752431004f330f4262e5e.json",
+      "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events/fc48dd49814293e527151d91c809e20db4c97a5ff18752431004f330f4262e5e.json",
       "bytes": 8663,
-      "sha256": "a67a979a5c8b70422ebb3ae1de5b1ba13e4569de0d68740f4ab570f929b9d0af"
+      "sha256": "fc48dd49814293e527151d91c809e20db4c97a5ff18752431004f330f4262e5e"
     },
     {
-      "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events/c8b07c26085cc710f66c25bb22c82d601814643e2bf4e391410c015967f73a5d.json",
-      "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events/c8b07c26085cc710f66c25bb22c82d601814643e2bf4e391410c015967f73a5d.json",
+      "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events/b4d03492e4f6853d6bae972e74d96b91b2251691a11fcdae32841e691e49b793.json",
+      "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events/b4d03492e4f6853d6bae972e74d96b91b2251691a11fcdae32841e691e49b793.json",
       "bytes": 8881,
-      "sha256": "c8b07c26085cc710f66c25bb22c82d601814643e2bf4e391410c015967f73a5d"
+      "sha256": "b4d03492e4f6853d6bae972e74d96b91b2251691a11fcdae32841e691e49b793"
     },
     {
-      "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events/cdbed0ea1d2dbe333043c8ea9328f27a0354ccb620f2d531a4e96989e12e1d3b.json",
-      "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events/cdbed0ea1d2dbe333043c8ea9328f27a0354ccb620f2d531a4e96989e12e1d3b.json",
+      "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events/3eda9073af922583f714d5cf4ae7d9f01f91debf5ac51b91ccf32cdbe2f57098.json",
+      "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/events/3eda9073af922583f714d5cf4ae7d9f01f91debf5ac51b91ccf32cdbe2f57098.json",
       "bytes": 8661,
-      "sha256": "cdbed0ea1d2dbe333043c8ea9328f27a0354ccb620f2d531a4e96989e12e1d3b"
+      "sha256": "3eda9073af922583f714d5cf4ae7d9f01f91debf5ac51b91ccf32cdbe2f57098"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/initialize_memory.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/initialize_memory.py",
       "bytes": 6779,
-      "sha256": "ddeea43c378e087c574e02cee1b18f88a0cc06ba4a9459c720b97e1c9112dbe1"
+      "sha256": "083c4377b18f1a379df77e667cfa75cfc6b3adf9a717f9212bace76ff4f8abda"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/record_memory.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/record_memory.py",
       "bytes": 19440,
-      "sha256": "597f41d5946e6ee77ebb26bc7c0d6d1a4407b81978c480df26e209a70026b6df"
+      "sha256": "8c3616b9a5a206599ca197d30c6c6fbbed11a11e38e81d63f9c3b34429961b15"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/tooling/src/jdk/internal/m3/rewrite/memory/M3RecoveryMemory.java",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/tooling/src/jdk/internal/m3/rewrite/memory/M3RecoveryMemory.java",
       "bytes": 17873,
-      "sha256": "f3a133250aa9f5d7bdb179b3fc4db32b9a617edd02b93c1c24c8b2f40a81b962"
+      "sha256": "4044a5a2669d09d9f1030f03f859ba774e5d120ca1c5dcc224212bd734bf79b7"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/tooling/src/jdk/internal/m3/rewrite/memory/M3RecoveryMemoryTest.java",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/tooling/src/jdk/internal/m3/rewrite/memory/M3RecoveryMemoryTest.java",
       "bytes": 11573,
-      "sha256": "4406ab706ba83c9dcd8618358477c6fd9094108c00bc62dd10735c4d181702b1"
+      "sha256": "b27e96e73af86cb12cf453a0b4f27b49bdae24073aa9e435061b177d02969a78"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/tooling/src/jdk/internal/m3/rewrite/sealed/SealHash.java",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/memory/tooling/src/jdk/internal/m3/rewrite/sealed/SealHash.java",
       "bytes": 1859,
-      "sha256": "17910b8b92573d6673be22b1d79d3db81c2c65fdff02251b0d4b8defd5b7373a"
+      "sha256": "316da9bf8b642f9d8ad9e055328aec0f70ddfe0f63c4649d5dc35d062fd7a11c"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/phases.tsv",
@@ -200,25 +200,25 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/pom.xml",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/pom.xml",
       "bytes": 4048,
-      "sha256": "d6011102f2ef8bf496f78cec93ea07c576f7ada161c89ac3f01d89833ae859e8"
+      "sha256": "925b7df27c43a23e7f5cb44f8597fcba84a4a9070155dedd7b358e996b7a8f18"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/preimages/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/preimages/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
       "bytes": 2179,
-      "sha256": "7539cf81d2d7a7b30bff97ce2812a7e67f4e3593463a898aa38c8e6b0240dfa0"
+      "sha256": "ff8b2c1db5fffa1a9013fc863a1f5dac337b2cb633c07d513339b57fcce40b80"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/prepare_packet.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/prepare_packet.py",
       "bytes": 7062,
-      "sha256": "dd14412c0c7895ae9a7aaedd49ddd2a317ec6dc7fc97c24df4fa1dd99e4a3d90"
+      "sha256": "d3b2319c095b0ae0e12dc408287bfbb917e0c7871e2753bcf34b188b3b100cbd"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/01-preflight.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/01-preflight.json",
       "bytes": 687,
-      "sha256": "dd80dcf24821033311f053c4377ac8b6280ef9d2735295dba6d810e19a6709a7"
+      "sha256": "f0bacd71691636bfdca9eb74e1341a4b9e3e3d4406bdf081aa4b832b1a308222"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/01-preflight.log",
@@ -230,7 +230,7 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/02-first-apply.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/02-first-apply.json",
       "bytes": 687,
-      "sha256": "2fcaadd71764120502c1b424cdcb8a02defad4abfda5fcc116d9b95094c98ace"
+      "sha256": "af2248ac713f0e3b8981392aeeebd3bdaa648c38a23efe2de5a5fb28264e0699"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/02-first-apply.log",
@@ -242,7 +242,7 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/03-fixed-point.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/03-fixed-point.json",
       "bytes": 697,
-      "sha256": "b6e5f2e15eac1e2deba1ad0a281d460772137fbe0259b9483ea08f538d530f9e"
+      "sha256": "bdb71c8270b48836b9c7c3c2de7accb6cb6ba85e593ed0171b8b87b95db7f235"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/03-fixed-point.log",
@@ -302,7 +302,7 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/RESULT.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/copier-qualification-001/RESULT.json",
       "bytes": 7547,
-      "sha256": "02b696d2d3615f6b6e0742b8711cff1783b4c80371e6ad82fbbc00b79e9db671"
+      "sha256": "31c5dd3f8428a4c0d454ccf8a50dfe36b85b297f9055b51ee6b0bdc924b01fe8"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-bootstrap-001/COMMAND.json",
@@ -350,7 +350,7 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/.github/workflows/swt-scrollbar-full-range-20261020.yml",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/.github/workflows/swt-scrollbar-full-range-20261020.yml",
       "bytes": 3073,
-      "sha256": "443fa115d1ca9e90798b2bfa97a1a592ba94eca8784f823724a0ab0966205d34"
+      "sha256": "334c91ca33d801475e26fb88dbcc8e26b70b6b4302c70d15dec1b3170414e3cd"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/AGENTS.md",
@@ -380,13 +380,13 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/receiver-map.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/receiver-map.json",
       "bytes": 847,
-      "sha256": "6eabc37f6a3225032e1d2a99fcbcf6d2f3e7c22d1a70413a58fbaa87304ee2cb"
+      "sha256": "1ec09a46a07103a713bd674fb5546379d070456119526671a476cfefc8e33f1a"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
       "bytes": 2179,
-      "sha256": "7539cf81d2d7a7b30bff97ce2812a7e67f4e3593463a898aa38c8e6b0240dfa0"
+      "sha256": "ff8b2c1db5fffa1a9013fc863a1f5dac337b2cb633c07d513339b57fcce40b80"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/proof/ScrollbarFullRangeProof.java",
@@ -398,13 +398,13 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/src/test/java/jdk/internal/m3/rewrite/ScrollbarFullRangeRecipeTest.java",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/src/test/java/jdk/internal/m3/rewrite/ScrollbarFullRangeRecipeTest.java",
       "bytes": 5435,
-      "sha256": "90d22367810a3dd7358d1b47e3129358b9a540c5a81dc79865db073480385cb6"
+      "sha256": "d1329804f837153e86fd348e8740ba8e91a2bfb9141dd9cef0ddc878734ea790"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/verify.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/verify.py",
       "bytes": 3609,
-      "sha256": "53ff0e591c650b363f50988d5ae496866ecba37b444886dedd7115c4c73d530b"
+      "sha256": "811bb0035181d89aff0b7709513cb7ae7fc36d5b1c8d4949c8f6ba25f8a92383"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java",
@@ -416,19 +416,19 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "bytes": 31505,
-      "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63"
+      "sha256": "92cc90c46a1ca672a016a89c0d65e6909e090264ba1aa76a85b7fa333470e38b"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
       "bytes": 8268,
-      "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579"
+      "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/src/main/resources/META-INF/rewrite/swt-scrollbar-full-range-20261020.yml",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/src/main/resources/META-INF/rewrite/swt-scrollbar-full-range-20261020.yml",
       "bytes": 508,
-      "sha256": "6d0f5be2c965dc21bd30ad15f52bb062cfd9f48ed44002f93256eefc5b340fe8"
+      "sha256": "b35161e5e2d234da0e776a5a13f46a8182b5abdc5cb7a596054d4b5a23c9c5ae"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-inputs/docs/m3/scrollbar-full-range-20261020/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/swt-scrollbar-full-range-20261020/ViewportScrollBarGeometry.before.java.txt",
@@ -506,19 +506,19 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-001/INPUTS.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-001/INPUTS.json",
       "bytes": 7355,
-      "sha256": "f5796a267c780913f385af8aa1fcf700e9c4a929dc408c7b642a2e276398cba5"
+      "sha256": "c019f59fb541338dbdaa48e3e95a53469fbe7011ab950366b6ac8329be4a3b75"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-001/INPUTS_AFTER.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-001/INPUTS_AFTER.json",
       "bytes": 7355,
-      "sha256": "f5796a267c780913f385af8aa1fcf700e9c4a929dc408c7b642a2e276398cba5"
+      "sha256": "c019f59fb541338dbdaa48e3e95a53469fbe7011ab950366b6ac8329be4a3b75"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-001/RESULT.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-001/RESULT.json",
       "bytes": 1842,
-      "sha256": "fd53b2706907681869f7ad2f838a85e73f3b01ef2298e93fbbb0189d20c9cf48"
+      "sha256": "4ef77be30971e5803d2f651c3fdab13b23d3d6f7ebc63e73f8be244849ebb060"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-001/sdk.log",
@@ -536,19 +536,19 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-002/INPUTS.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-002/INPUTS.json",
       "bytes": 7355,
-      "sha256": "f5796a267c780913f385af8aa1fcf700e9c4a929dc408c7b642a2e276398cba5"
+      "sha256": "c019f59fb541338dbdaa48e3e95a53469fbe7011ab950366b6ac8329be4a3b75"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-002/INPUTS_AFTER.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-002/INPUTS_AFTER.json",
       "bytes": 7355,
-      "sha256": "f5796a267c780913f385af8aa1fcf700e9c4a929dc408c7b642a2e276398cba5"
+      "sha256": "c019f59fb541338dbdaa48e3e95a53469fbe7011ab950366b6ac8329be4a3b75"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-002/RESULT.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-002/RESULT.json",
       "bytes": 1842,
-      "sha256": "97443fdc49e144d0946a89005e8b684c324d18ba295851eac00847bf133597f4"
+      "sha256": "cdcd583310b13458e61abc43fb818677ee3e0ccc5d6216c80e7b582fbacc0e1f"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/incumbent-offline-002/sdk.log",
@@ -572,13 +572,13 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-conformance-001/INPUTS_AND_COMMANDS.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-conformance-001/INPUTS_AND_COMMANDS.json",
       "bytes": 3646,
-      "sha256": "2f40e37c1c4e4d68bebb4b90f91b27db9510df9132d59a381d733c14b8d122a2"
+      "sha256": "1dfe156b1ecf7bc9badc373fa304d9cae5007748394cd4b936e5d668b22de7a2"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-conformance-001/RESULT.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-conformance-001/RESULT.json",
       "bytes": 2560,
-      "sha256": "4cecba20e8faa6c807eb6682afd6c73de0e1c8fab30363a39a750866fd6b0a84"
+      "sha256": "f0bc06066dc862757dba754f14eeb5901afecd8439b79e4854490a6dab61ecad"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-conformance-001/compile.log",
@@ -596,115 +596,115 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/001-check-COMMAND.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/001-check-COMMAND.json",
       "bytes": 1056,
-      "sha256": "247a558a657f1a45216381f1d345438fa46b0e21485d576131e28f6ec9f06b10"
+      "sha256": "37e792195b4a0e7b59948d544e7f212963d880fea0d6cbb1789e038865a99ee8"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/001-check-RESULT.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/001-check-RESULT.json",
       "bytes": 1146,
-      "sha256": "1b0c1e93dbb090c0d88467e0ac9129ced1dc1daa4119cc1dd263c15c267131c1"
+      "sha256": "822d1d9a56f09f40900cde89fddab970cd7fb302c2fc65d320c7d242a892f302"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/001-check.log",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/001-check.log",
       "bytes": 112,
-      "sha256": "5f9f695e14b20e7aecf3baef6820e62d9b038a85bac8bb9cfcc1978d9ac30361"
+      "sha256": "0536fb6a8b8ddba37ddccbdd90c20ed1c9e4d625ff8d893c848093ed049c50f1"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/001-publish-COMMAND.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/001-publish-COMMAND.json",
       "bytes": 996,
-      "sha256": "cd85c9a6f8a7ddce9e96e001535ad20cbea3a0fd4c347f94f0dc9b7da06f06cb"
+      "sha256": "dac6f0c3c3a333fe0dfcbfa5984b7a421affad5f5b7d4fa64d082c2bcf0a52d8"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/001-publish-RESULT.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/001-publish-RESULT.json",
       "bytes": 1088,
-      "sha256": "ddb1fbb9ead61c2c742629f60de34c7e4cbfaa0aa9527e0153dbf2c7e4499e83"
+      "sha256": "2bde19f59c8027d99d0830f8b9fb8ee7dc550a1fc24774cca1f70bdcf377f6aa"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/001-publish.log",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/001-publish.log",
       "bytes": 246,
-      "sha256": "fddb65991bbbb37ea22e047c418a53b1e1927696afb20abe3d248e8ff2e3707e"
+      "sha256": "3d960d9cc6d3e429bc7f8b62547d7bc3babf043ff275a7337244aeff0f627c47"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/002-check-COMMAND.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/002-check-COMMAND.json",
       "bytes": 1056,
-      "sha256": "361b6bd3837ab6103ebd94af7d2116aec1d530580f1257c33d660fc4eeddaffd"
+      "sha256": "6de3745bb2e4e953320c89430ebec66473f6ec2b4e1e9e5d53092ec179507a54"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/002-check-RESULT.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/002-check-RESULT.json",
       "bytes": 1146,
-      "sha256": "70ccfc380fdce48beee630553e95d5f9f1ec5c33fad8e82a30609f8acda7eaf7"
+      "sha256": "80c89b3b74604ff7ad38f4a9d5078e75a8bd8eb410671cc13ef9d24f19dc9da7"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/002-check.log",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/002-check.log",
       "bytes": 112,
-      "sha256": "9bf8a961eba07b1c0beff6637a79d6d0c81f0fa783792f8b111b3f28ff305115"
+      "sha256": "ffffa90d4a1735d9d8e5314fb5a01f6f036b6ef37f0d28006b3746a337154db4"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/002-publish-COMMAND.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/002-publish-COMMAND.json",
       "bytes": 996,
-      "sha256": "f93c3dd39684f722460ae4d5275b5486d2e8b1cef437465d823d5550dacff23c"
+      "sha256": "4f0f606d824924b85b24b43ff278bd9c98c459520b36b779f9d34b6e2006129a"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/002-publish-RESULT.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/002-publish-RESULT.json",
       "bytes": 1088,
-      "sha256": "472cd4a1a23ef9e28de547b31cac42dc5e8cc492454d3353bb68a99b23805252"
+      "sha256": "04a9cf45d35e35b7efb31031c26a577bfe4f6b5e194fd42d6bed83c8295a7342"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/002-publish.log",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/002-publish.log",
       "bytes": 246,
-      "sha256": "a41450222ecfef07a5a2ef813be4ff51a3b1ead0791530fe0acf2a2c5417fb4c"
+      "sha256": "8530e7f13bad29189e549f1d1edab7bce3bc2dfb8aa915d76c5303986976d0f3"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/003-check-COMMAND.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/003-check-COMMAND.json",
       "bytes": 1056,
-      "sha256": "54ffaa61a054ec0727df4fd2d5158fc89f984c77997d95d111d03e5ba552321e"
+      "sha256": "81d4ae3ce4e535f072e4385a86c0130ea674aea801cb9b8b958acaf3ff57ba19"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/003-check-RESULT.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/003-check-RESULT.json",
       "bytes": 1146,
-      "sha256": "74bc752734196fff965ec8f8e88e4297964a0a72cd38d30b39c2e1fc95753882"
+      "sha256": "6fb4d0ee17aaecd98928f4cc0f686ffc50cd5a9ce3371955aae7821d6d052eca"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/003-check.log",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/003-check.log",
       "bytes": 112,
-      "sha256": "228742483481cf96fe56e51751676d6f3abef7ec20a7ea2cb5615f3e05d1b6a0"
+      "sha256": "9dd59bc96b4bd866095f0659c3b5a7342aeb2407270340d8f4ea4e16561e87cd"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/003-publish-COMMAND.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/003-publish-COMMAND.json",
       "bytes": 996,
-      "sha256": "227e3f02c18e1c3aef8d1b01978a89b2b9aa5cf4198f376b92f03a4d90cd4cc6"
+      "sha256": "8e81be1966677670e407f8c95b9f4171440762162e4e37aeed9f5addbcb5bd13"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/003-publish-RESULT.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/003-publish-RESULT.json",
       "bytes": 1088,
-      "sha256": "2963944d7b31d4457b76821f8b513ca26cb1ef12f161ed64451ee1263b9da66b"
+      "sha256": "88a6d40233ffdd89f3285f5a30794bb0483e7ca27378321a89e3c0dd3ffdb132"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/003-publish.log",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/003-publish.log",
       "bytes": 246,
-      "sha256": "ba0901fd454528421f93a879e3f2167909757525426299aad4dbb48911c3771b"
+      "sha256": "5cb521ea3db5059fc01cab96af2267a3d7eb9b647c9451d203ecf70d183bec4f"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/RESULT.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/memory-integrity-001/RESULT.json",
       "bytes": 6329,
-      "sha256": "ddff5489e50878ce79b90f1371d81213b1f3ba3a6623ced44e2f5c5df327e33c"
+      "sha256": "3953e5c5365c6e09739caa008251bf4a9f345a843f3827ec234ca565a003c59e"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/COMMANDS.json",
@@ -716,13 +716,13 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/INPUTS.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/INPUTS.json",
       "bytes": 12699,
-      "sha256": "465aae1915cada475d7bdb13acb82c28cc08f112c672ba04c3154972d317d883"
+      "sha256": "ac2fff28eb2712a4f768778182083077e0c7040ca3e1b48a715dba0b64743f9a"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/RESULT.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/RESULT.json",
       "bytes": 1837,
-      "sha256": "3d6a95ec2df502b7ec13ef74e85f6e68e8213675fc3dbdbb42e4464eb58125a1"
+      "sha256": "e1bd32d016f340dee16e5d18e36814960ac41697331e2ce47ec24d59162384e5"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/pom-candidate-001/owner-evidence/baseline-api.log",
@@ -812,13 +812,13 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-application-001/RESULT.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-application-001/RESULT.json",
       "bytes": 743,
-      "sha256": "8c3d213e0e99a263111e65523f543a851fa05a2fd7e8538de76a5d3e6e398d1a"
+      "sha256": "9be0957893c84009c425508918629fdeef3f8137385f58fc9415ae4615fce128"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-application-001/apply.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-application-001/apply.json",
       "bytes": 655,
-      "sha256": "400e3ff854862bd3b463d058126b5a2f3660602e520f969a900dc3dcc2dd5d33"
+      "sha256": "2d029578520d8461571fe32e7cb30b3191612e9676904abd592e4dc55f2c4d2e"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-application-001/apply.log",
@@ -830,7 +830,7 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-application-001/preflight.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-application-001/preflight.json",
       "bytes": 655,
-      "sha256": "314a342c1868172b08f805060b226dd75602036d0274243f0ed53d7fcf93c7d4"
+      "sha256": "aa100e786f1f8da07f5166e8e20e90472968c17a57ca3ec65ad1ce83772490d7"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-application-001/preflight.log",
@@ -842,7 +842,7 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-application-001/replay.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-application-001/replay.json",
       "bytes": 665,
-      "sha256": "1be1d95bf728244d311e92b078c075295d01a553212819ef821ed8f51fc5d47f"
+      "sha256": "4dd36ccd80abe702a53ec1e390f4209f19dfdf63e46c1309d79573ae8c5bde33"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-application-001/replay.log",
@@ -854,7 +854,7 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-application-001/source-verification.log",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-application-001/source-verification.log",
       "bytes": 255,
-      "sha256": "f2c8a498c35048927008bfc91f1c4b264941efb7cb0b65ed88c40761640f906d"
+      "sha256": "eef6c2c0baf423e7b9b49e6c42f8a1df3f913453eeb2c1c6e10c279a583f7ee1"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-runtime-001/COMMANDS.json",
@@ -866,13 +866,13 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-runtime-001/INPUTS.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-runtime-001/INPUTS.json",
       "bytes": 5735,
-      "sha256": "eb71e18eb1d7b690d9e36ccf9b57b1a506729c9fdfd98768d371f4eaff3eaf15"
+      "sha256": "54bd0d53b55e819e82014c8d6cd1a50eac671f0d87fb67850fe81d01535243ae"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-runtime-001/RESULT.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-runtime-001/RESULT.json",
       "bytes": 2509,
-      "sha256": "54a0a9db3849ee73273e61b344009eea3bf4acacba4bc45b6c2ad8170398f285"
+      "sha256": "679ac1b3f0a18abead0c716b82a876db225f02d77afc01bcb8a3cae75f7932ec"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/receiver-runtime-001/owner-evidence/baseline-api.log",
@@ -974,31 +974,31 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/RESULT.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/RESULT.json",
       "bytes": 8058,
-      "sha256": "a950522f8342e90af73568ae052eca44f776d377a57e4a392477ec5ea95a5098"
+      "sha256": "94112bdac83b7756c78d4ea92c24b0eb4cc948e7bd73622b7d96cd0fa4df2774"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/SOURCE_INPUTS.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/SOURCE_INPUTS.json",
       "bytes": 4274,
-      "sha256": "d454a99f5cf874e1d16e6d5eb49366b567129a5a6f7ab791cab3572dacdb20eb"
+      "sha256": "187e758f76f76b72302e64e812b6547b4d5597778ad4224abea5d974f8e77cea"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/SOURCE_INPUTS_AFTER.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/SOURCE_INPUTS_AFTER.json",
       "bytes": 4274,
-      "sha256": "d454a99f5cf874e1d16e6d5eb49366b567129a5a6f7ab791cab3572dacdb20eb"
+      "sha256": "187e758f76f76b72302e64e812b6547b4d5597778ad4224abea5d974f8e77cea"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/SOURCE_SEALS.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/SOURCE_SEALS.json",
       "bytes": 1064,
-      "sha256": "8fbab5e40413771d432d5016964f5bd71d95bf4043805bac828d82bd92200bb0"
+      "sha256": "49261c5ff0b2de1636d26fb01c6d64f3dc3dc9a3a31583aea776169e6bb66d4e"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py",
       "bytes": 7436,
-      "sha256": "0a89bc61f308ab29ea491c8c3a2f9e3c821d3fdda3e0c7ecb9105d2baba8d867"
+      "sha256": "3ae33b9a03601e2dc8285e8ab0661aefeb209681bfd935e70be13357d23c7fb1"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/attribution/DependencyCustody.java",
@@ -1022,37 +1022,37 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/pom.xml",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/pom.xml",
       "bytes": 4048,
-      "sha256": "d6011102f2ef8bf496f78cec93ea07c576f7ada161c89ac3f01d89833ae859e8"
+      "sha256": "925b7df27c43a23e7f5cb44f8597fcba84a4a9070155dedd7b358e996b7a8f18"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/preimages/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/preimages/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
       "bytes": 2179,
-      "sha256": "7539cf81d2d7a7b30bff97ce2812a7e67f4e3593463a898aa38c8e6b0240dfa0"
+      "sha256": "ff8b2c1db5fffa1a9013fc863a1f5dac337b2cb633c07d513339b57fcce40b80"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/prepare_packet.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/prepare_packet.py",
       "bytes": 7062,
-      "sha256": "dd14412c0c7895ae9a7aaedd49ddd2a317ec6dc7fc97c24df4fa1dd99e4a3d90"
+      "sha256": "d3b2319c095b0ae0e12dc408287bfbb917e0c7871e2753bcf34b188b3b100cbd"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/qualify.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/qualify.py",
       "bytes": 9726,
-      "sha256": "83ad2b462c00341c609b0ff4324aba3cfb1cb0a4d46702982524e52332187408"
+      "sha256": "c50f89d00609e76c35baadc7eba90706f534ef38643ddac8651f544ad58e7939"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/src/test/java/jdk/internal/m3/rewrite/M3SwtCurrentOwnerRuntimeClosureRecipeTest.java",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/src/test/java/jdk/internal/m3/rewrite/M3SwtCurrentOwnerRuntimeClosureRecipeTest.java",
       "bytes": 31658,
-      "sha256": "bbb57bf96f106e3fa390fd2f2a4067a0b92fd3ab5cb166a305bb43cf4d4c8a7d"
+      "sha256": "2ec05f671df50d255c98ac04432fa679c5b35d0633851cfacc9d0f3f4175dd62"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/verify_sources.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/verify_sources.py",
       "bytes": 2425,
-      "sha256": "224178459a27f5aeab21cb748a69bc400902230c6b1552a2a735cfe9a0993057"
+      "sha256": "875e3c5f2961dbf957207e4d0a495cb17aa837d656d181c0de2e8a4583bb63ca"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java",
@@ -1064,37 +1064,37 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "bytes": 31505,
-      "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63"
+      "sha256": "92cc90c46a1ca672a016a89c0d65e6909e090264ba1aa76a85b7fa333470e38b"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
       "bytes": 19983,
-      "sha256": "5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc"
+      "sha256": "613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
       "bytes": 8268,
-      "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579"
+      "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/src/main/resources/META-INF/rewrite/swt-current-owner-runtime-closure-20261021.yml",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/src/main/resources/META-INF/rewrite/swt-current-owner-runtime-closure-20261021.yml",
       "bytes": 485,
-      "sha256": "9e4465558960f0c4c623dd55a45f27e6179451460e581616acf435bc7c4e6cdf"
+      "sha256": "9d32dd1cdb7cbb16370b326f524ba9b8306a22b8eb1b7214219139f1c8062339"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/swt-current-owner-runtime-closure-20261021-001/manifest.tsv",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/swt-current-owner-runtime-closure-20261021-001/manifest.tsv",
       "bytes": 232,
-      "sha256": "39a511dc8f39daa112754e7850db43f451b63b95c072649362f34b1a91a03264"
+      "sha256": "ba31fd4348f970884c297eec7cf01e00df39762fb826e8d57f0cc7c4143ce07b"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/swt-current-owner-runtime-closure-20261021-001/postimage.txt",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/swt-current-owner-runtime-closure-20261021-001/postimage.txt",
       "bytes": 2296,
-      "sha256": "6553565c8dd14a857e796f741f3f8f8e7cbf3edda11df58b8dcd8a53e78e5600"
+      "sha256": "4b864a178251e0f853cc8d2fe8027962bf831f950d9b83a9d095496ae60be158"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/maven.log",
@@ -1106,31 +1106,31 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/named-recipe.yml",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/named-recipe.yml",
       "bytes": 485,
-      "sha256": "9e4465558960f0c4c623dd55a45f27e6179451460e581616acf435bc7c4e6cdf"
+      "sha256": "9d32dd1cdb7cbb16370b326f524ba9b8306a22b8eb1b7214219139f1c8062339"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/phase-receipts/swt-current-owner-runtime-closure-20261021-001.tsv",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/phase-receipts/swt-current-owner-runtime-closure-20261021-001.tsv",
       "bytes": 448,
-      "sha256": "028be2de13b06587c66b70d326e871880f353bf1163a0b3bbd5b1eef285c3331"
+      "sha256": "822264bb156f3e5c7b8d27f0c04add7e879dcf575fec9a3b13cfe0c3bb15a519"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/proof-status.tsv",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/proof-status.tsv",
       "bytes": 90,
-      "sha256": "66922ed10caa33e71563a3265ecc384d9900b76de5cbec52dec9d9431cabca4d"
+      "sha256": "534cf456ef4174d4e704f9eeb262ecfce43defe6e7d175fa40a8bdcd75d6b3d5"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/receiver/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/receiver/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
       "bytes": 2296,
-      "sha256": "6553565c8dd14a857e796f741f3f8f8e7cbf3edda11df58b8dcd8a53e78e5600"
+      "sha256": "4b864a178251e0f853cc8d2fe8027962bf831f950d9b83a9d095496ae60be158"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/recipe-proof.tsv",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/recipe-proof.tsv",
       "bytes": 1412,
-      "sha256": "9da0b557e841e5b67e440b666b8ca8704ffdae4be0c49450563b056408d29e6f"
+      "sha256": "c3a070fdd45b46db00a9acf0ba00dc5561b731423154bb2957f1315fdd34c421"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/proof/sdk-001-offline/surefire-reports/TEST-jdk.internal.m3.rewrite.M3SwtCurrentOwnerRuntimeClosureRecipeTest.xml",
@@ -1154,31 +1154,31 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/COPIER_GUARD_LINEAGE.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/COPIER_GUARD_LINEAGE.json",
       "bytes": 447,
-      "sha256": "601bdd4d9aca155f64bbaf29377209e7bec893a5e853fa7282f7ad8af6fb69ac"
+      "sha256": "1a1b8a4e5a555266c3fa716ee60dde7bee3e64e003cb46b698427263b9028748"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/EVIDENCE_INTAKE.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/EVIDENCE_INTAKE.json",
       "bytes": 48877,
-      "sha256": "464b42216d13a061abda76fcfc4fba56c074015a645bfe138af551030aaba3e7"
+      "sha256": "44f163c8606a0a4e7dd1bde94249e11590d8577cd34ca11b6ed99034e73e4927"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/RECEIVER_EVIDENCE_INTAKE.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/RECEIVER_EVIDENCE_INTAKE.json",
       "bytes": 11553,
-      "sha256": "7616915dfef494582749091365bc697c9133063d4a01b1e38d71e74ca5ca2495"
+      "sha256": "a684b9e4115c357015e6a62314b173c19d33de46729fc7018ac8850a0d6d6440"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/RECIPE_LINEAGE.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/RECIPE_LINEAGE.json",
       "bytes": 6251,
-      "sha256": "e799f4a1b294fee16eff4182f1b8ee769478ff4e70befc5b46ff37398060705d"
+      "sha256": "9b3ad9f5b813a5667fd0bdf1d6e04bbb5ebdb7ad5628a7435ea5e4c59897c091"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/SOURCE_AND_RIGHTS.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/SOURCE_AND_RIGHTS.json",
       "bytes": 2558,
-      "sha256": "c16fc3301334af0805be9549a3f90ea98611e33000969286ba3b104d0e19cae9"
+      "sha256": "710c53c510f5dd7d5256f23cbb60d7d6938bfe0d55b5ca1eaaa45f54be3af7c8"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/TEST_DISCOVERY_REVIEW.json",
@@ -1232,37 +1232,37 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/donors/integrated-sdk-003/apply_receiver.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/donors/integrated-sdk-003/apply_receiver.py",
       "bytes": 7338,
-      "sha256": "4547d44e180aba8678a86df1d4c562316c3c0a32c936f1df248d075397132c56"
+      "sha256": "199b76317afc66b4ff61f70a626ad01ba4e2d678bfd3def95ff336d249a2b78d"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/donors/integrated-sdk-003/pom.xml",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/donors/integrated-sdk-003/pom.xml",
       "bytes": 4045,
-      "sha256": "934fb8b8fdad025d77f41166306de9f1148fd786a81db811da85b301c6af0bd1"
+      "sha256": "556a8edbd5236692ef4b059b586c63d30a71cd8a5676d63ce020fa14a00d7561"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/donors/integrated-sdk-003/prepare_packet.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/donors/integrated-sdk-003/prepare_packet.py",
       "bytes": 6927,
-      "sha256": "dcdefc9ff189c05f10c7e9f82122b9d70d1bdd0e7fb8cf9c721695e046df407c"
+      "sha256": "6a7f09ecff0cfeb9a515e817a23e22b82f87241371ac478c7d6c403c9f74583c"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/donors/integrated-sdk-003/qualify.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/donors/integrated-sdk-003/qualify.py",
       "bytes": 9709,
-      "sha256": "cf391b32516c288a75c35acf3017e6adeee80c583b832075265c42347ebf53a8"
+      "sha256": "82fad5f4cffc8f4ad39c7c9baca543cc18bad12fe6f5a3d0b799cdf7fd116a4a"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/donors/integrated-sdk-003/src/test/java/jdk/internal/m3/rewrite/M3IntegratedRefinementRecipeTest.java",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/donors/integrated-sdk-003/src/test/java/jdk/internal/m3/rewrite/M3IntegratedRefinementRecipeTest.java",
       "bytes": 31463,
-      "sha256": "962c606476db666f95d87c56c2bb9b147da42e7e4ab9551b84182a0897eda774"
+      "sha256": "5a64f5196c1388e6924238c14c7bdd70053d32d8e86d1f5e7be2e5259831efa5"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/donors/integrated-sdk-003/verify_sources.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/donors/integrated-sdk-003/verify_sources.py",
       "bytes": 2324,
-      "sha256": "134c0914bf4673b3504386a7d1a5ea90c52fe4e9ed2c430400dd824457b8df8c"
+      "sha256": "318dc14d91710372295860033b1683e695d671a19840097d77392aa110efc44f"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/intake/ATTRIBUTION.json",
@@ -1274,13 +1274,13 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/intake/HANDOFF.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/intake/HANDOFF.json",
       "bytes": 511,
-      "sha256": "ab70e96a8a4700165ca30bb0b49699ceee775d946c34a750973b852b32639d58"
+      "sha256": "9492cf6948b4b200e2d8c300f1624b3896ea01756f0ee1032cbab2255dbedfbe"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/intake/REMOTE_LINEAGE.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/intake/REMOTE_LINEAGE.json",
       "bytes": 19741,
-      "sha256": "c07003052405c72656f6f76b2aaf707cd97650963606cdbd51ab66f1d6891f7f"
+      "sha256": "7051132b371f071658576cc68bf78208498acae5453ad5e119cf51656441b65e"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/intake/SDK_001.log",
@@ -1298,7 +1298,7 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/intake/SDK_001_CUSTODY.json",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/intake/SDK_001_CUSTODY.json",
       "bytes": 4449,
-      "sha256": "b4d48c68beaf63f0f5c71e084de41b54b38ab0e3acc1d0d814749a8e241df839"
+      "sha256": "157259faf48c3d32d4da8c00a5d72aa457c74e395e5602ab678a6e0428143a4e"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/intake/attribution-compile.log",
@@ -1316,19 +1316,19 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/append_receiver_evidence.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/append_receiver_evidence.py",
       "bytes": 3221,
-      "sha256": "5a88441de34f3796a11a28ff837659bbf299323a105e33d1e55c62532d97a08d"
+      "sha256": "3357fda3d6d796d183d331f07add2c4f5b3488cbc767e5140eecfc78fd9b6010"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/author_packet.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/author_packet.py",
       "bytes": 7941,
-      "sha256": "bbbbdf5273b9329d0c56897fa0f1814cf8427d1143a2901b65ed60b500a80a2e"
+      "sha256": "2e0b5e35304638f92e5afd211229f709ccf552e7e217c842427d4bc35a231cad"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/curate_packet.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/curate_packet.py",
       "bytes": 6638,
-      "sha256": "565939192d3724729906a656f581beeb892df3e40b0c46b0fbd1e92856599940"
+      "sha256": "d577423498a7a8d2e6dbd3988cdea689baac56353f92561625a9a24e83695c8b"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/incumbent/bootstrap_owner_gate.py",
@@ -1340,73 +1340,73 @@
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/incumbent/run_owner_gate.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/incumbent/run_owner_gate.py",
       "bytes": 6841,
-      "sha256": "6f19ef65a6aaf4e7d7d76733b011a52d9821f20d04f6ca874e63ba14e9ed855d"
+      "sha256": "4131a2357dd6ec45879aba453e5682857ee822eda71efb1b06e864cbeb014899"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/incumbent/run_owner_gate_002.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/incumbent/run_owner_gate_002.py",
       "bytes": 6841,
-      "sha256": "05f7ce757507dfe17cee1da4d84fe39c6509c3e285eaba83aee81987ecd53fbe"
+      "sha256": "e3a16b587178979f0c36df93c4cdc94cad24963ad48fad4db9e96fed835dade7"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/qualify_receiver.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/qualify_receiver.py",
       "bytes": 5461,
-      "sha256": "80eab858911f37af08f15ef9145413cf4ab850ad4f83f3df36513e474c6a1716"
+      "sha256": "695f43758c7ae4f2f302158c8bf4808b5e0de94cdfa7e75ca4bfc4a370a31590"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/run_candidate_001.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/run_candidate_001.py",
       "bytes": 5554,
-      "sha256": "1add929015ee527e4c1a6ef79f0ec66d90b07bb4e536ca12b4ae02c9d1f7985a"
+      "sha256": "c210b310d274ace65f8e928bb0cb26b35eb74d234853c5a80f747344f99ade35"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/run_canonical_sdk_001.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/run_canonical_sdk_001.py",
       "bytes": 3388,
-      "sha256": "2d7d7b6df9e99df4bdbf36d302f29af691169f3be0f60f9b530c747386fcbb9f"
+      "sha256": "6a649dc468ac8f2acfbd0410cec08b5fdc38e38fab7b3ecb0c69ffb327536fc2"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/verify_applied_receiver.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/qualification-tools/verify_applied_receiver.py",
       "bytes": 6264,
-      "sha256": "457ae398cf3c2cf1c19a93aa71bf4f2d5dcb4c4c80f20c5b3aaa3bb3df0a2aea"
+      "sha256": "5649570e02a68c415054853563955f8147801f58339c2b73732f312abeb9d703"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/qualify.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/qualify.py",
       "bytes": 9726,
-      "sha256": "83ad2b462c00341c609b0ff4324aba3cfb1cb0a4d46702982524e52332187408"
+      "sha256": "c50f89d00609e76c35baadc7eba90706f534ef38643ddac8651f544ad58e7939"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/src/test/java/jdk/internal/m3/rewrite/M3SwtCurrentOwnerRuntimeClosureRecipeTest.java",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/src/test/java/jdk/internal/m3/rewrite/M3SwtCurrentOwnerRuntimeClosureRecipeTest.java",
       "bytes": 31658,
-      "sha256": "bbb57bf96f106e3fa390fd2f2a4067a0b92fd3ab5cb166a305bb43cf4d4c8a7d"
+      "sha256": "2ec05f671df50d255c98ac04432fa679c5b35d0633851cfacc9d0f3f4175dd62"
     },
     {
       "repository_path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/verify_sources.py",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/verify_sources.py",
       "bytes": 2425,
-      "sha256": "224178459a27f5aeab21cb748a69bc400902230c6b1552a2a735cfe9a0993057"
+      "sha256": "875e3c5f2961dbf957207e4d0a495cb17aa837d656d181c0de2e8a4583bb63ca"
     },
     {
       "repository_path": "m3-openrewrite-recipes/src/main/resources/META-INF/rewrite/swt-current-owner-runtime-closure-20261021.yml",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/src/main/resources/META-INF/rewrite/swt-current-owner-runtime-closure-20261021.yml",
       "bytes": 485,
-      "sha256": "9e4465558960f0c4c623dd55a45f27e6179451460e581616acf435bc7c4e6cdf"
+      "sha256": "9d32dd1cdb7cbb16370b326f524ba9b8306a22b8eb1b7214219139f1c8062339"
     },
     {
       "repository_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/swt-current-owner-runtime-closure-20261021-001/manifest.tsv",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/swt-current-owner-runtime-closure-20261021-001/manifest.tsv",
       "bytes": 232,
-      "sha256": "39a511dc8f39daa112754e7850db43f451b63b95c072649362f34b1a91a03264"
+      "sha256": "ba31fd4348f970884c297eec7cf01e00df39762fb826e8d57f0cc7c4143ce07b"
     },
     {
       "repository_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/swt-current-owner-runtime-closure-20261021-001/postimage.txt",
       "local_path": "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/swt-current-owner-runtime-closure-20261021-001/postimage.txt",
       "bytes": 2296,
-      "sha256": "6553565c8dd14a857e796f741f3f8f8e7cbf3edda11df58b8dcd8a53e78e5600"
+      "sha256": "4b864a178251e0f853cc8d2fe8027962bf831f950d9b83a9d095496ae60be158"
     }
   ],
   "file_count": 228,

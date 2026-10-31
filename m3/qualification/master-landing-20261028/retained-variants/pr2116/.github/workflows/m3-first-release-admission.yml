@@ -152,7 +152,7 @@ jobs:
           root = pathlib.Path("m3/runtime-integration/utf8-cursor-20261014/recipe")
           metadata = json.loads((root / "canonical-source.json").read_text(encoding="utf-8"))
           assert metadata["repository"] == "hsoliwal/com.synexia"
-          assert metadata["receivingProviderGitBlob"] == "2530c533003a8a17d0e782728d98a4dfebe13651"
+          assert metadata["receivingProviderGitBlob"] == "e7a3c6d89e0fad77e510fdc6d46223211493fd5a"
           assert metadata["phase_advance"] is False and metadata["runtimeApplied"] is False
           assert metadata["receiverCorePath"] == str(root / "canonical")
           actual = subprocess.check_output(

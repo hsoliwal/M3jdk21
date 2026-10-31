@@ -115,13 +115,13 @@
   "application": {
     "path": "m3/docs/m3jdk21-porting-invariant.md",
     "before": "5df3e79d6a79af0be3a9e3beffb29c0215786b489763f003ad40cd53f828216f",
-    "after": "fa84270f09a42fe4dbeb245812e7b710297825e2bfd461bce99bb64056e1399d",
+    "after": "604ef82225fdb9e6ecf00e14f7630fb0956b85ec89e5c9241537733d4054f39a",
     "template": "0.txt",
-    "outputGitBlob": "f65cc98e9088377755c51a447ce974356b28f15c"
+    "outputGitBlob": "d933c7f8a4ba875b318c499214857146724fc4da"
   },
   "policyVerifier": {
     "path": "m3/compatibility/check_m3_full_family.py",
-    "sha256": "be1b983596b6df7043cbd187617c144d52ecb07b2c555364895bdff198fdb170",
+    "sha256": "d1ad16b655fea3163566434a037b78937fadd402cd6185e7a538c9318f0f9d3d",
     "exitCode": 0,
     "stdout": "M3_FULL_FAMILY_PIN_PASS source=b24262a92b741c78c44ca61afc8dac7ee1376d8a paths=4770 families=33 license=Apache-2.0 active=STRING ordered_phases=5 completion=false\n"
   }

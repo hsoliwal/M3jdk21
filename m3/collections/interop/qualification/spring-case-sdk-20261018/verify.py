@@ -45,13 +45,13 @@ def verify():
     text = verify_manifest(TEXT, 2)
     unchanged = {
         "m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3SpringCaseInsensitiveMap.java":
-            "b4ed56f4e128e875bf6ab0808f05572ff9ef0af5",
+            "624aa9cde5c87540f7ca63612dc75b2b5a23dfc5",
         "m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SpringCaseInsensitiveContract.java":
-            "66a0f4edc0197f33d041f58b51fede0ce1044dcc",
+            "4a9b1f7a66e34312a1bedf078bedcc852748d144",
         "m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SpringCaseInsensitiveTest.java":
-            "6b2e8b8f4e241530337bd79bc379b8bfa97f73b4",
+            "661aecb390ec4519f50c329bcd58a9decba119ca",
         "m3/collections/src/main/java/jdk/m3/collections/M3LinkedHashMap.java":
-            "ade59880b8c9b2bee1b32ae67ca9d29b7382d998",
+            "e0957cfd8a7a5abfa1c0c5e7bade32997e5ed657",
         "m3/collections/interop/pom.xml":
             "3ba7abd090f122b7cbc17f7a48b879b01c79a74f",
     }
@@ -60,7 +60,7 @@ def verify():
             raise ValueError("unchanged incumbent or dependency drift: " + path)
     java_engine = HERE/"engine/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
     text_engine = HERE/"engine/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java"
-    if blob(bytes_of(java_engine)) != "d58ca50dfaeb60f581b64f43545e688aca5c6530":
+    if blob(bytes_of(java_engine)) != "907f176d32b55d78f13e3756a407f6877f25ca7d":
         raise ValueError("product original Java engine mirror mismatch")
     if blob(bytes_of(text_engine)) != "9d0788d3717e017d58345c5c3e62022c2915a3c8":
         raise ValueError("Synexia original text engine mirror mismatch")

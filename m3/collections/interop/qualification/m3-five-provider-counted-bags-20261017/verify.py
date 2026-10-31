@@ -42,9 +42,9 @@ def verify():
 
     owners={
        "m3/collections/src/main/java/jdk/m3/collections/M3LinkedHashMap.java":
-            "ade59880b8c9b2bee1b32ae67ca9d29b7382d998",
+            "e0957cfd8a7a5abfa1c0c5e7bade32997e5ed657",
        "m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3LibraryCollections.java":
-            "f05d0949cadb14bfad90287444addf6501c21992",
+            "469ff6aef1ebbbad559e40149119ce0c643d9aee",
     }
     for owner,expected in owners.items():
         if blob(checked(ROOT/owner))!=expected:

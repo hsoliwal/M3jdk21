@@ -11,8 +11,8 @@
   "source_sealed_installer": true,
   "typed_semantic_equivalence_verifier": false,
   "existing_engine_blobs": {
-    "M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
-    "M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a"
+    "M3GpuToolJoinManifest.java": "78d5fb68f13872164973a8918cc7886c5f548bca",
+    "M3GpuToolJoinRecipe.java": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00"
   },
   "existing_m3_lineage": [
     {

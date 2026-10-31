@@ -69,7 +69,7 @@
       "reason": "Complete bounded collection kernel in java.base; full-image and automatic JDK consumer admission remain open.",
       "recipe": {
         "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
-        "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+        "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
         "preconditions": [
           "Explicit absent Java targets and exact source/template/dependency hashes.",
           "Actual OpenRewrite Java/text execution, refusal/fixed-point and sealed custody gates."
@@ -83,12 +83,12 @@
         {
           "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
           "fingerprint": null,
-          "git_blob_sha1": "4d7629fac2a5fc13e2008570d8b62caacdd800bc",
+          "git_blob_sha1": "6b931aefdb4afaf8765a7228dcad5bc9e436c9f8",
           "module": "synexia-common",
           "path": "synexia-common/src/main/java/com/synexia/common/collections/SegmentedAddress28.java",
           "repo": "hsoliwal/com.synexia",
           "revision_role": "pinned",
-          "sha256": "5844dea8e82d79d4beedaa2254956a3a2bb1db20ee39fc38a6d6df59e39a3c37",
+          "sha256": "92d4ae1d60e6ce6aab79ef1b91e6de4c076e02bc0a0603a6b2fb22ca21c1d881",
           "signatures": [
             "com.synexia.common.collections.SegmentedAddress28"
           ],
@@ -209,7 +209,7 @@
       "reason": "Complete bounded collection kernel in java.base; full-image and automatic JDK consumer admission remain open.",
       "recipe": {
         "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
-        "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+        "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
         "preconditions": [
           "Explicit absent Java targets and exact source/template/dependency hashes.",
           "Actual OpenRewrite Java/text execution, refusal/fixed-point and sealed custody gates."
@@ -223,12 +223,12 @@
         {
           "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
           "fingerprint": null,
-          "git_blob_sha1": "5e71da1dd3fdc1640dc1771c952796a6c229281b",
+          "git_blob_sha1": "2a42412b95a5ee07c4e716fe37c530b254fedec1",
           "module": "synexia-common",
           "path": "synexia-common/src/main/java/com/synexia/common/collections/SegmentedIntLane28.java",
           "repo": "hsoliwal/com.synexia",
           "revision_role": "pinned",
-          "sha256": "175f3e0beb5b9e1aca7196491d19a54a95ed2218253951677e898615ba3ed8ac",
+          "sha256": "a9be9f532e5c3606fda0ff30599227301133ca70e9d1fcb1f1e2182ef72f5488",
           "signatures": [
             "com.synexia.common.collections.SegmentedIntLane28"
           ],
@@ -237,12 +237,12 @@
         {
           "commit": "aabe02e51718922c486fb04590af8818ccc7e653",
           "fingerprint": null,
-          "git_blob_sha1": "993fe654bfcb4039a6a2fa11513751e7eb2c9729",
+          "git_blob_sha1": "1613a57aa543cacb6f53f5a1c3bc0a10cf4a4cee",
           "module": "synexia-openrewrite-recipes",
           "path": "synexia-openrewrite-recipes/crates/m3-szf/src/main/resources/com/synexia/rewrite/hash-pinned-java/szf/SegmentedIntLane28.java.txt",
           "repo": "hsoliwal/com.synexia",
           "revision_role": "pinned",
-          "sha256": "bbba8cc495480bbde1d8e60ecb6b5c5ba3b8bf0583477622e3d547e5ba546ac0",
+          "sha256": "b2698128170550f44582cc9bafd0b1ba07c2bde3f06fed50829b3ef654ce6d9c",
           "signatures": [
             "com.synexia.common.collections.SegmentedIntLane28"
           ],
@@ -364,7 +364,7 @@
       "reason": "Complete bounded collection kernel in java.base; full-image and automatic JDK consumer admission remain open.",
       "recipe": {
         "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
-        "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+        "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
         "preconditions": [
           "Explicit absent Java targets and exact source/template/dependency hashes.",
           "Actual OpenRewrite Java/text execution, refusal/fixed-point and sealed custody gates."
@@ -378,12 +378,12 @@
         {
           "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
           "fingerprint": null,
-          "git_blob_sha1": "6105671f09f5a5e27147430b474719daab2b1e29",
+          "git_blob_sha1": "f7b3a7f0f4f4b896ad8325a96e90331881e69259",
           "module": "synexia-common",
           "path": "synexia-common/src/main/java/com/synexia/common/collections/SegmentedLongLane28.java",
           "repo": "hsoliwal/com.synexia",
           "revision_role": "pinned",
-          "sha256": "237289bdec5fe8d6f142dfffab22a72eebc499ea1b54f0a350bbe09c0e801394",
+          "sha256": "7fdce7c2cfe529251c69cdf186d4cabc8333c46692df78cbabdae56aa2a023e2",
           "signatures": [
             "com.synexia.common.collections.SegmentedLongLane28"
           ],
@@ -392,12 +392,12 @@
         {
           "commit": "aabe02e51718922c486fb04590af8818ccc7e653",
           "fingerprint": null,
-          "git_blob_sha1": "0ca5ca4cbd17589c2b2c33cbda4433ad6319049c",
+          "git_blob_sha1": "8f31549c019e33e0200f27c84aea154cbfc2f647",
           "module": "synexia-openrewrite-recipes",
           "path": "synexia-openrewrite-recipes/crates/m3-szf/src/main/resources/com/synexia/rewrite/hash-pinned-java/szf/SegmentedLongLane28.java.txt",
           "repo": "hsoliwal/com.synexia",
           "revision_role": "pinned",
-          "sha256": "4b6c03da1a13274ce736039359538ff3ffc1ff1586714dba95e769574907ab8e",
+          "sha256": "c43673c769bc23dc592dba3a1da9fc2aebc804640dde102f7c749e71f59b415c",
           "signatures": [
             "com.synexia.common.collections.SegmentedLongLane28"
           ],
@@ -532,7 +532,7 @@
       "reason": "Complete bounded collection kernel in java.base; full-image and automatic JDK consumer admission remain open.",
       "recipe": {
         "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
-        "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+        "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
         "preconditions": [
           "Explicit absent Java targets and exact source/template/dependency hashes.",
           "Actual OpenRewrite Java/text execution, refusal/fixed-point and sealed custody gates."
@@ -546,12 +546,12 @@
         {
           "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
           "fingerprint": null,
-          "git_blob_sha1": "8932039f353507225f31dfce7c146f5165ccfc54",
+          "git_blob_sha1": "9bb7173afa861c05b62a557db63e3a6692ddfe4c",
           "module": "synexia-common",
           "path": "synexia-common/src/main/java/com/synexia/common/collections/SegmentedBitLane28.java",
           "repo": "hsoliwal/com.synexia",
           "revision_role": "pinned",
-          "sha256": "fe535b8a1f3b22fa1a63455c9078d7b911c72a87a3255714f66e3639d11000af",
+          "sha256": "147021a606f135a4b6b0f347ce90354ee15aef12c229ec5c02a30935216a1e70",
           "signatures": [
             "com.synexia.common.collections.SegmentedBitLane28"
           ],
@@ -560,12 +560,12 @@
         {
           "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
           "fingerprint": null,
-          "git_blob_sha1": "1ee8509cdd05a7edcfc732b3c5947dd78b30ce3a",
+          "git_blob_sha1": "20549bee772f30ffabdc406bb6ab52c7435d2b01",
           "module": "synexia-common",
           "path": "synexia-common/src/main/native/collections/segmented_bit_lane.c",
           "repo": "hsoliwal/com.synexia",
           "revision_role": "pinned",
-          "sha256": "da2266d8ec93478f4fbeb6a5403e14ce8dcd6a6795c43a5d4230b2a97ef8eb0e",
+          "sha256": "5a4ba31368df4b8c3f8e71275b4db583fcba0be37e5b39d07de8112db44319d5",
           "signatures": [
             "Java_com_synexia_common_collections_SegmentedBitLane28_cardinality0"
           ],
@@ -699,7 +699,7 @@
       "reason": "Complete bounded collection kernel in java.base; full-image and automatic JDK consumer admission remain open.",
       "recipe": {
         "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
-        "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+        "path": "m3/tooling/lane28/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
         "preconditions": [
           "Explicit absent Java targets and exact source/template/dependency hashes.",
           "Actual OpenRewrite Java/text execution, refusal/fixed-point and sealed custody gates."
@@ -713,12 +713,12 @@
         {
           "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
           "fingerprint": null,
-          "git_blob_sha1": "9858def13146479794370dd56387d34edfaa95ef",
+          "git_blob_sha1": "c463d9857d917263e88933a4d07902840c3f302e",
           "module": "synexia-common",
           "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedBitAtoms.java",
           "repo": "hsoliwal/com.synexia",
           "revision_role": "pinned",
-          "sha256": "a8ac10ba4fd2d1fbc0f8f0a4a199e9ca1c28618a4bc17ad1702bc5598b1cfa29",
+          "sha256": "20bce3cf025430fea0351bdc4478b204d808cde04432437e689c2eddb55e0305",
           "signatures": [
             "com.synexia.common.collections.PackedBitAtoms"
           ],
@@ -782,7 +782,7 @@
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/M3_LATEST_M3.json",
-      "sha256": "7447eb196fd437f21c7ca6a1b6c58be217ca8214f1f092d7f4ecd706d662f368"
+      "sha256": "9e2339b75282bc7c397413c60c787194a339a63d6f17dcb8b9968474ef11c666"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/M3_LATEST_GITHUB.json",
@@ -794,7 +794,7 @@
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/M3_LATEST_NAME_MAPPING.body.json",
-      "sha256": "9c96a0f6f7cc0f9b9d3e91fc3a42ef8e4eab212726fccd5e63e483f1acd7dfb1"
+      "sha256": "12bfa8d328b74ba4de930d993c8194b8db51f3a111617690dff9f1ffebaea1c2"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/M3_LATEST_NAME_MAPPING.json",
@@ -953,7 +953,7 @@
         "reason": "MR adapts completed-work reuse to the existing JDK Matcher lifecycle; exact immutable input and region facts survive same-input reset. Scoped tests pass; complete-image admission remains open.",
         "recipe": {
           "id": "mr-1",
-          "path": "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
+          "path": "m3/tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
           "preconditions": [
             "Exact current Java preimages; original dependency pins; candidate-only recipe admission."
           ],
@@ -966,12 +966,12 @@
           {
             "commit": "cf3796cfca75284e9626b1e31703e41314c9f852",
             "fingerprint": null,
-            "git_blob_sha1": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea",
+            "git_blob_sha1": "4e1d24af8d3054a27ae3b6f2d8eebd6486225118",
             "module": "synexia-indexstring",
             "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
             "repo": "hsoliwal/com.synexia",
             "revision_role": "pinned",
-            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
+            "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e",
             "signatures": [
               "Facts precompute(CharSequence,int)",
               "Facts precompute(CharSequence,int,int,int)",
@@ -1188,12 +1188,12 @@
           {
             "commit": "4f9a91ab6239212acdb676757d96f5083d27c474",
             "fingerprint": null,
-            "git_blob_sha1": "28a5c10f1b0c859694da2c2ee880667f54ddf717",
+            "git_blob_sha1": "9116b56d55c7fd7ca63cf97f9bbc3eb369e50b7d",
             "module": "synexia-mindex/runtime",
             "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRegexAutomaton.java",
             "repo": "hsoliwal/com.synexia",
             "revision_role": "pinned",
-            "sha256": "c4cd9feb7645ccd1ef7fc66d165e33ee74fb9fbf6002d80518c228df47290b46",
+            "sha256": "904390520e960d5df8402e6ba72f752052169f089593a741e6878b8d480e7227",
             "signatures": [
               "MIndexRegexAutomaton"
             ],
@@ -1383,10 +1383,10 @@
       "bytes": 308294,
       "commit": "09075810b55229662329a158923287e8a7118f86",
       "file": "current/m3/docs/name-mapping.json",
-      "git_blob": "466f7c14d3fbe852bf9e2d1dc3e410e8b38a9ee2",
+      "git_blob": "6ba02aa22af26a2b4bb4b4890496bd300bc0a9fa",
       "membership": "Actual 090758 readback/reconstructed tree; exact-commit descriptor capture",
       "path": "m3/docs/name-mapping.json",
-      "sha256": "9c96a0f6f7cc0f9b9d3e91fc3a42ef8e4eab212726fccd5e63e483f1acd7dfb1",
+      "sha256": "12bfa8d328b74ba4de930d993c8194b8db51f3a111617690dff9f1ffebaea1c2",
       "status": "EXACT"
     },
     {
@@ -1503,21 +1503,21 @@
     {
       "bytes": 12032,
       "commit": "09075810b55229662329a158923287e8a7118f86",
-      "file": "guards/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "git_blob": "a2e8c916208b563517e51b738744a05357e633aa",
+      "file": "guards/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "git_blob": "3fdc75a71290e2fd1659bfbc7fa532828363275b",
       "membership": "Actual 090758 readback/reconstructed tree; exact-commit descriptor capture",
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
       "status": "EXACT"
     },
     {
       "bytes": 3383,
       "commit": "09075810b55229662329a158923287e8a7118f86",
       "file": "guards/m3/tooling/migration-recipes/pom.xml",
-      "git_blob": "86f223907bbb053f4792e6bf771c3c0882e1751b",
+      "git_blob": "e41cf1ce137961fc4f9eef9092acedd06425d33e",
       "membership": "Actual 090758 readback/reconstructed tree; exact-commit descriptor capture",
       "path": "m3/tooling/migration-recipes/pom.xml",
-      "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888",
+      "sha256": "3eb73bbf38c0c591b8f714f6e9923eaa25a35b5ffc7f0512b8ec7fd3602b5531",
       "status": "EXACT"
     },
     {
@@ -1533,11 +1533,11 @@
     {
       "bytes": 396,
       "commit": "09075810b55229662329a158923287e8a7118f86",
-      "file": "guards/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
-      "git_blob": "2a62a7a35e9e59cf403336c197f60d7e5915b064",
+      "file": "guards/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "git_blob": "f54f1a1e1ac98d3206e65387a629860673fb5d8c",
       "membership": "Actual 090758 readback/reconstructed tree; exact-commit descriptor capture",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
-      "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "sha256": "8006b173253ea7502efe7f7a77738b65f9df9e2871d4d6c29ff4fb8fb058c8c6",
       "status": "EXACT"
     }
   ],
@@ -1631,7 +1631,7 @@
       "reason": "JDK-owned TQ kernel and explicit canonical-backing range bridge. Finite module/JNI qualification is separate from complete-image and automatic regex dispatch admission.",
       "recipe": {
         "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-tq",
-        "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
+        "path": "m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
         "preconditions": [
           "Explicit ABSENT Java targets, exact template hashes, pinned existing recipe and backing owners.",
           "Actual Java and text recipes execute fixed-point/refusal gates before sealed-install materialization."
@@ -1645,12 +1645,12 @@
         {
           "commit": "cf3796cfca75284e9626b1e31703e41314c9f852",
           "fingerprint": null,
-          "git_blob_sha1": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea",
+          "git_blob_sha1": "4e1d24af8d3054a27ae3b6f2d8eebd6486225118",
           "module": "synexia-indexstring",
           "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
           "repo": "hsoliwal/com.synexia",
           "revision_role": "pinned",
-          "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
+          "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e",
           "signatures": [
             "Facts precompute(CharSequence,int)",
             "Facts precompute(CharSequence,int,int,int)",
@@ -1767,7 +1767,7 @@
       "reason": "JDK-owned TQ kernel and explicit canonical-backing range bridge. Finite module/JNI qualification is separate from complete-image and automatic regex dispatch admission.",
       "recipe": {
         "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-tq",
-        "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
+        "path": "m3/tooling/tq/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
         "preconditions": [
           "Explicit ABSENT Java targets, exact template hashes, pinned existing recipe and backing owners.",
           "Actual Java and text recipes execute fixed-point/refusal gates before sealed-install materialization."
@@ -1781,12 +1781,12 @@
         {
           "commit": "cf3796cfca75284e9626b1e31703e41314c9f852",
           "fingerprint": null,
-          "git_blob_sha1": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea",
+          "git_blob_sha1": "4e1d24af8d3054a27ae3b6f2d8eebd6486225118",
           "module": "synexia-indexstring",
           "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
           "repo": "hsoliwal/com.synexia",
           "revision_role": "pinned",
-          "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
+          "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e",
           "signatures": [
             "Facts precompute(CharSequence,int)",
             "Facts precompute(CharSequence,int,int,int)",

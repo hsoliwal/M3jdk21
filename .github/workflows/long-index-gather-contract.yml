@@ -40,12 +40,12 @@ jobs:
           mask=m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java
           test=m3/collections/src/test/java/jdk/m3/collections/M3LongAddressKernelPreflightContract.java
           csrc=m3/collections/src/main/native/collections/m3_long_address_kernel.c
-          echo 'f8df2c473725cc41920ee21f37242b2376b16fbd74483b5d052cf5a949aedf10' " $owner" | sha256sum -c
-          echo 'c038d19b9566200a16dba6e62727f0c7492b40eca843ef1869e97c9958e7d6a2' " $test" | sha256sum -c
-          echo '3922adc4aee464fdfedff2fcea15b8017258814d31c241eb7b6b196576373753' ' m3/collections/src/test/java/jdk/m3/collections/M3LongAddressKernelTest.java' | sha256sum -c
-          test "$(git hash-object "$csrc")" = '58853890a9043f8f4284544a8f7caca9ce8218cb'
+          echo 'ea217c25b937ee112b1256c0e810ba812871747c6577addd47829c5ab9527f0c' " $owner" | sha256sum -c
+          echo '27a7ea61a2914f4625468c2500ff4005ce200ca335a2ca59e485c3bed0711562' " $test" | sha256sum -c
+          echo '9312d3ae9658a8d9713a6a74cb2f558bcbfec76777bf3607b06229089f794199' ' m3/collections/src/test/java/jdk/m3/collections/M3LongAddressKernelTest.java' | sha256sum -c
+          test "$(git hash-object "$csrc")" = '11657a88959a963c309d44b730eef6a473f87619'
           git show '3569c790d5cc3f9bc871ab0ecd025dab0fd5cafc':"$owner" > "$out/old-src/jdk/m3/collections/M3LongAddressKernel.java"
-          test "$(git hash-object "$out/old-src/jdk/m3/collections/M3LongAddressKernel.java")" = '9ac6c5a1e121affd28e6503d922927f6c91c3a66'
+          test "$(git hash-object "$out/old-src/jdk/m3/collections/M3LongAddressKernel.java")" = 'fe30e94f5e66e2f4d43365bddb58dfdbb4f25207'
           javac --release 21 -Xlint:all -Werror -d "$out/old-classes" "$mask" "$out/old-src/jdk/m3/collections/M3LongAddressKernel.java" "$test"
           javac --release 21 -Xlint:all -Werror -d "$out/classes" "$mask" "$owner" "$test"
           javap -public -s -classpath "$out/old-classes" jdk.m3.collections.M3LongAddressKernel > "$out/api-before.txt"

@@ -32,24 +32,24 @@
     "role": "Exact compiled Java/native product source lineage. C05 packaging is pinned separately by content; the final receiving recipe execution and source commit are bound independently."
   },
   "implementation_source_sha256": {
-    "m3/arrays/pom.xml": "5f4b36566bfdb6aac752719395c235dc9e54ff36e549dea6b134f9bf66b1bb34",
-    "m3/arrays/src/main/java/jdk/m3/arrays/M3ArrayNative.java": "45c7b7f4ea8417e501f7ad9de26f8c9fe441b27b8b59722525c24542048a6021",
-    "m3/arrays/src/main/java/jdk/m3/arrays/packed/Int40Array.java": "fbfe5504a8b9c568bfbc299767beaca2ef45dbfdd7cf6deea5b029e11c4e8668",
-    "m3/arrays/src/main/java/jdk/m3/arrays/packed/Int48Array.java": "04506f12c9577dcb8fc0491ead5b0c17132255d61dd44942c5723f9c30ce7b27",
-    "m3/arrays/src/main/java/jdk/m3/arrays/packed/Int56Array.java": "7320ded0275ad0b13c29097213e73844e199333cbcb5f9cda807a4285fc0d1f3",
-    "m3/arrays/src/main/java/jdk/m3/arrays/packed/PackedCodec.java": "43be90c12c6528b71b0779801f8934202e1a5f7a94cdd64ebfd646afd0d162f2",
-    "m3/arrays/src/main/java/jdk/m3/arrays/packed/PackedIntArray.java": "47b9e131f9f030898e37e6a57371a8e08412d31bf7115dd0177f13a1b194854a",
-    "m3/arrays/src/main/java/jdk/m3/arrays/packed/VInt.java": "e973bb78db7294b13da972702eed54653ade3bfb998b0799ec60952b5854a4ac",
-    "m3/arrays/src/main/java/jdk/m3/arrays/packed/package-info.java": "753e9972c112b22b2c7bb990efdd822299c710714ecb1cbf8659ac6619ef502e",
-    "m3/arrays/src/main/java/module-info.java": "c3aa194f4bcc2b3e42537910e72f6794ff6027c9ea7c0335f403e3b7987e78cb",
+    "m3/arrays/pom.xml": "d1822dad694641975ad15364acafa34d4339e7933ce134a212b066b54f67c11b",
+    "m3/arrays/src/main/java/jdk/m3/arrays/M3ArrayNative.java": "8ab2ecce70e72986c24bbee881d286df9b907c1424fcd0c039f4bac102b66c64",
+    "m3/arrays/src/main/java/jdk/m3/arrays/packed/Int40Array.java": "1268404ce81e9cecccd7cb38a68f1d92a584bdc46cef45e066e1933bb7fa6efa",
+    "m3/arrays/src/main/java/jdk/m3/arrays/packed/Int48Array.java": "73bb294e30260d755a2f888c0c380a63847acadf49181b96efb108a0cfdc7445",
+    "m3/arrays/src/main/java/jdk/m3/arrays/packed/Int56Array.java": "dabf5f8b0932977bcdbc4161de97861189eab7898fc6ead5843e2cad0451a251",
+    "m3/arrays/src/main/java/jdk/m3/arrays/packed/PackedCodec.java": "1a3d44719a760da416077e1a995997fb19074a49c8d79e246c4ca755586f3e27",
+    "m3/arrays/src/main/java/jdk/m3/arrays/packed/PackedIntArray.java": "483ae5c1e077eec95da5734c02d36ee46aaf3c879a889356f5fb7ac6e57af9e3",
+    "m3/arrays/src/main/java/jdk/m3/arrays/packed/VInt.java": "0f9a13e99d1996533a2768faf9bf4e9c0cb14263c04f4d926cdabbd645d41f7e",
+    "m3/arrays/src/main/java/jdk/m3/arrays/packed/package-info.java": "5e881321fbef5332bef81dfafc487839ee75ba3781c0c30aee377de9a8ff7d3a",
+    "m3/arrays/src/main/java/module-info.java": "afdeccd9cff2eb83b870d216bf7ea01933bed6b55a2117cd91298392aecd8fe0",
     "m3/arrays/src/main/native/CMakeLists.txt": "646a9231233121add22d473b1d196ff24930930591fe94373ce28396390a69c0",
     "m3/arrays/src/main/native/include/m3_packed_codec.h": "f51764d3a21e7c5e713b2be8cba710ce7c9de1131a3a7e0af57a909b1c2fc3fe",
     "m3/arrays/src/main/native/m3_packed_codec.c": "a5443846d7f60ce596f69489196bd96ade82112856339986fce32f5927f323d8",
-    "m3/arrays/src/main/native/m3_packed_codec_jni.c": "5c9f84130e32bb77dcd413405f967cdfba7fa40d93351bb92c66183b31ad2d31",
+    "m3/arrays/src/main/native/m3_packed_codec_jni.c": "1ac555ba37c02f55dd93774c4514f157ecbcb3fe883ca4f5fea9d89e903b7511",
     "m3/arrays/src/main/native/tests/m3_packed_codec_checks.c": "2dbfff24d49243132268625614fb7043624e4aaa95eb764a050eca22331b3e20",
-    "m3/arrays/src/main/native/tests/m3_packed_codec_jni_fault_test.c": "c1bd363d151545f4bcae04cd578da0c94f37139e28fdc47c4882a32e9ea56b34",
-    "m3/arrays/src/main/native/tests/m3_packed_null_fixture.c": "1a9885e0a69ef295ad21eb3a1164a8ee7cf628734b6b257a0bc54576054e5943",
-    "m3/tooling/module-packs/build_pack.py": "dc5c587e15d88f4519c4e9154ac8bde061c1d253ac69a8e76438666dbf15af7f"
+    "m3/arrays/src/main/native/tests/m3_packed_codec_jni_fault_test.c": "e581cbff3905edc3ca151f978f90d6179b2d23c49af8682c27291c5f3f8930fb",
+    "m3/arrays/src/main/native/tests/m3_packed_null_fixture.c": "439f27cf29604f435ffebbb0feaedba1577168168244cd42c44a049bd16ed935",
+    "m3/tooling/module-packs/build_pack.py": "da87cbebdf47dce0929bd55d2badfe9e9be98ae1d29a8d1628fc1a954dd07bc6"
   },
   "intake_mode": "INDEPENDENT_APACHE_MODULE",
   "java_jni": {
@@ -250,9 +250,9 @@
     ]
   },
   "packaging_source_sha256": {
-    "m3/tooling/jmod-recipes/tools/jmod_pack.py": "9ebc4a17e46fa0c3d6d995bf1a22e72b722d17efb1d87889ac8a7a47f89d2bd0",
+    "m3/tooling/jmod-recipes/tools/jmod_pack.py": "f74c8861494fefefe978ad5c038e7309c9ec3e2e9bd41c913e827458a950a200",
     "m3/tooling/jmod-recipes/tools/test_jmod_resolution.py": "cde8b6560b784f967a713f5a35cbe33a9c8d4fc29532c7a5d22ab3cdabb05d97",
-    "m3/tooling/module-packs/build_pack.py": "dc5c587e15d88f4519c4e9154ac8bde061c1d253ac69a8e76438666dbf15af7f"
+    "m3/tooling/module-packs/build_pack.py": "da87cbebdf47dce0929bd55d2badfe9e9be98ae1d29a8d1628fc1a954dd07bc6"
   },
   "platform": {
     "arch": "x86_64",
@@ -292,7 +292,7 @@
       "exit_code": 0,
       "id": "packed-signed-contract",
       "inputs": {
-        "m3/arrays/src/test/java/jdk/m3/arrays/packed/PackedIntArrayTest.java": "fea7b0e43b369d163b0a2aefee73197f38d32e00913cf5404ce27badd42a0177",
+        "m3/arrays/src/test/java/jdk/m3/arrays/packed/PackedIntArrayTest.java": "621eb00b5267bea96e06ac34f7ea240459fbc3d3d8c96a95e398ddc982c15b63",
         "source_image_manifest": "efcc9c2cc2b7036fb30579fcdd77adbf28167f483a7e4f96dbd3cfda32475415"
       },
       "source": "m3/arrays/src/test/java/jdk/m3/arrays/packed/PackedIntArrayTest.java",
@@ -323,7 +323,7 @@
       "inputs": {
         "installed_image_manifest": "8517fd13ce2de1fc6d48794e5c597882db30f58c1e1084b227bf7f3c2c1d108c",
         "installed_product_jmod": "4144428e7b9b2224d67542ead1073325ac4a94757fa9c3dc8f70d20f7535a5dc",
-        "m3/arrays/src/test/java/jdk/m3/arrays/packed/MemoryProbe.java": "c5907db0d1df0b707ceca8d19ba55ffff55573edaf8ca0efa92e2763e3fd71c9",
+        "m3/arrays/src/test/java/jdk/m3/arrays/packed/MemoryProbe.java": "5a25c1fa1a0aa8fb711aad284b85d924753cff64c1ebba252b952a0d59729525",
         "source_image_manifest": "efcc9c2cc2b7036fb30579fcdd77adbf28167f483a7e4f96dbd3cfda32475415"
       },
       "source": "m3/arrays/src/test/java/jdk/m3/arrays/packed/MemoryProbe.java",
@@ -350,7 +350,7 @@
       "exit_code": 0,
       "id": "vint64-contract",
       "inputs": {
-        "m3/arrays/src/test/java/jdk/m3/arrays/packed/VIntTest.java": "fbff0299359de0d0c193bb3f1d81b6c07d52d3ac2cd6de69148df738709436f5",
+        "m3/arrays/src/test/java/jdk/m3/arrays/packed/VIntTest.java": "1ffcd3603d9a57b3cdc39dd1c5dc86540d1b729002c2fa6514cbc14aed8acad7",
         "source_image_manifest": "efcc9c2cc2b7036fb30579fcdd77adbf28167f483a7e4f96dbd3cfda32475415"
       },
       "source": "m3/arrays/src/test/java/jdk/m3/arrays/packed/VIntTest.java",
@@ -377,7 +377,7 @@
       "exit_code": 0,
       "id": "packed-native-parity",
       "inputs": {
-        "m3/arrays/src/test/java/jdk/m3/arrays/M3PackedNativeTest.java": "6010c3d7cc7025ae0f3cbe624888133feb4f2b809912717c2b74fb090eac7dee",
+        "m3/arrays/src/test/java/jdk/m3/arrays/M3PackedNativeTest.java": "2d53a101bc6ba9919f3e0f4f646eb91f8a0e8a77b6b754f48a2c5bf5426ff24a",
         "source_image_manifest": "efcc9c2cc2b7036fb30579fcdd77adbf28167f483a7e4f96dbd3cfda32475415"
       },
       "source": "m3/arrays/src/test/java/jdk/m3/arrays/M3PackedNativeTest.java",
@@ -417,7 +417,7 @@
       "exit_code": 0,
       "id": "packed-jni-failures",
       "inputs": {
-        "m3/arrays/src/main/native/tests/m3_packed_codec_jni_fault_test.c": "c1bd363d151545f4bcae04cd578da0c94f37139e28fdc47c4882a32e9ea56b34",
+        "m3/arrays/src/main/native/tests/m3_packed_codec_jni_fault_test.c": "e581cbff3905edc3ca151f978f90d6179b2d23c49af8682c27291c5f3f8930fb",
         "source_image_manifest": "efcc9c2cc2b7036fb30579fcdd77adbf28167f483a7e4f96dbd3cfda32475415"
       },
       "source": "m3/arrays/src/main/native/tests/m3_packed_codec_jni_fault_test.c",
@@ -633,7 +633,7 @@
       "id": "jmod-default-resolution-contract",
       "inputs": {
         "/tmp/m3jdk-packed-final-20261029/m3/tooling/jmod-recipes/tools/jmod_image.py": "407622e9a4db86f1b9abae2e451638713b151f14256190c0e28fe7d0739eb7cf",
-        "/tmp/m3jdk-packed-final-20261029/m3/tooling/jmod-recipes/tools/jmod_pack.py": "9ebc4a17e46fa0c3d6d995bf1a22e72b722d17efb1d87889ac8a7a47f89d2bd0",
+        "/tmp/m3jdk-packed-final-20261029/m3/tooling/jmod-recipes/tools/jmod_pack.py": "f74c8861494fefefe978ad5c038e7309c9ec3e2e9bd41c913e827458a950a200",
         "/tmp/m3jdk-packed-final-20261029/m3/tooling/jmod-recipes/tools/test_jmod_resolution.py": "cde8b6560b784f967a713f5a35cbe33a9c8d4fc29532c7a5d22ab3cdabb05d97",
         "/tmp/m3jdk21-native-packaging-1d203c91-20261029/images/jdk/bin/jar": "90b7dbc74866c8b1b067b0baf74073d283c4fc650f2052d111a8aa1f98b27a1a",
         "/tmp/m3jdk21-native-packaging-1d203c91-20261029/images/jdk/bin/java": "4e702abe9ccb5ec1cdcd36b1310b59f945e813782db7c86d0188aecf27b367a3",

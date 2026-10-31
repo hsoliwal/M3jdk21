@@ -28,7 +28,7 @@
     {
       "bytes": 1634,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/verify.json",
-      "sha256": "9ddb0ddbf2b0bd1ec544fede9ff28173a0a1f5bacc0fbfac99c863385d3cc16f"
+      "sha256": "90c2b99178b7d2f7822dc01de7c338be269bdda518dc49eae3618f4d5eb00d78"
     }
   ],
   "started": "2026-10-06T06:48:33.873734+00:00",
@@ -40,6 +40,6 @@
   "stdout": {
     "bytes": 770,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/extract.stdout.log",
-    "sha256": "36a16e499021fd7bf1e92eb8e8a2dd048e382d6acf42c426fc6a851c36337721"
+    "sha256": "3bb2b90d81bad13ecf070da95cb6ffbdc2eae08fbd490976ace5f7c85d0fd026"
   }
 }

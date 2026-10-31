@@ -25,7 +25,7 @@
       "canonical_recipe": {
         "name": "jdk.internal.m3.rewrite.M3SwingUiConvergence20261019",
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SwingUiConvergence20261019.java",
-        "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
+        "source_sha256": "7b36ecc7e50a11a2e8e65ca6c984a6ec6398988434a6005c78e21b93e39cbe62",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
         "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
         "canonical_repository": "hsoliwal/com.synexia",
@@ -46,7 +46,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
-          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "final_view_manifest_sha256": "c4a690bdf550af84ba7dc69ac1d96b8360fb41748c0928fd09ef2a5d683a4fd8",
           "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
@@ -185,7 +185,7 @@
       "canonical_recipe": {
         "name": "jdk.internal.m3.rewrite.M3SwingUiConvergence20261019",
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SwingUiConvergence20261019.java",
-        "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
+        "source_sha256": "7b36ecc7e50a11a2e8e65ca6c984a6ec6398988434a6005c78e21b93e39cbe62",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
         "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
         "canonical_repository": "hsoliwal/com.synexia",
@@ -206,7 +206,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
-          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "final_view_manifest_sha256": "c4a690bdf550af84ba7dc69ac1d96b8360fb41748c0928fd09ef2a5d683a4fd8",
           "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
@@ -345,7 +345,7 @@
       "canonical_recipe": {
         "name": "jdk.internal.m3.rewrite.M3SwingUiConvergence20261019",
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SwingUiConvergence20261019.java",
-        "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
+        "source_sha256": "7b36ecc7e50a11a2e8e65ca6c984a6ec6398988434a6005c78e21b93e39cbe62",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
         "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
         "canonical_repository": "hsoliwal/com.synexia",
@@ -366,7 +366,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
-          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "final_view_manifest_sha256": "c4a690bdf550af84ba7dc69ac1d96b8360fb41748c0928fd09ef2a5d683a4fd8",
           "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
@@ -505,7 +505,7 @@
       "canonical_recipe": {
         "name": "jdk.internal.m3.rewrite.M3SwingUiConvergence20261019",
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SwingUiConvergence20261019.java",
-        "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
+        "source_sha256": "7b36ecc7e50a11a2e8e65ca6c984a6ec6398988434a6005c78e21b93e39cbe62",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
         "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
         "canonical_repository": "hsoliwal/com.synexia",
@@ -526,7 +526,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
-          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "final_view_manifest_sha256": "c4a690bdf550af84ba7dc69ac1d96b8360fb41748c0928fd09ef2a5d683a4fd8",
           "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
@@ -665,7 +665,7 @@
       "canonical_recipe": {
         "name": "jdk.internal.m3.rewrite.M3SwingUiConvergence20261019",
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SwingUiConvergence20261019.java",
-        "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
+        "source_sha256": "7b36ecc7e50a11a2e8e65ca6c984a6ec6398988434a6005c78e21b93e39cbe62",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
         "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
         "canonical_repository": "hsoliwal/com.synexia",
@@ -686,7 +686,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
-          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "final_view_manifest_sha256": "c4a690bdf550af84ba7dc69ac1d96b8360fb41748c0928fd09ef2a5d683a4fd8",
           "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
@@ -825,7 +825,7 @@
       "canonical_recipe": {
         "name": "jdk.internal.m3.rewrite.M3SwingUiConvergence20261019",
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SwingUiConvergence20261019.java",
-        "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
+        "source_sha256": "7b36ecc7e50a11a2e8e65ca6c984a6ec6398988434a6005c78e21b93e39cbe62",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
         "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
         "canonical_repository": "hsoliwal/com.synexia",
@@ -846,7 +846,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
-          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "final_view_manifest_sha256": "c4a690bdf550af84ba7dc69ac1d96b8360fb41748c0928fd09ef2a5d683a4fd8",
           "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
@@ -985,7 +985,7 @@
       "canonical_recipe": {
         "name": "jdk.internal.m3.rewrite.M3SwingUiConvergence20261019",
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SwingUiConvergence20261019.java",
-        "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
+        "source_sha256": "7b36ecc7e50a11a2e8e65ca6c984a6ec6398988434a6005c78e21b93e39cbe62",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
         "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
         "canonical_repository": "hsoliwal/com.synexia",
@@ -1006,7 +1006,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
-          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "final_view_manifest_sha256": "c4a690bdf550af84ba7dc69ac1d96b8360fb41748c0928fd09ef2a5d683a4fd8",
           "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
@@ -1131,7 +1131,7 @@
     "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
     "current_collection_source_admission": "PASS_UNIFIED_CURRENT_MANIFEST; SDK3/module477/native477",
     "current_swing_source_admission": "PASS_EXACT_SOURCE_IDENTITY; historical runtime/SDK execution reused without a rerun claim",
-    "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+    "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
     "phase_promotion": false
   }
 }

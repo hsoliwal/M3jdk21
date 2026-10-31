@@ -14,8 +14,8 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[4] if len(HERE.parents) > 4 else Path.cwd()
 CENSUS = HERE / 'current-source-census.tsv'
 LEGACY = ROOT / 'm3/collections/interop/recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/collections-library-interop/manifest.tsv'
-RECEIPT_SHA256 = 'd9ed46c1ebb31850319dec8bdf73ee3a1eaf5fdd4bb4430d5c1ab91ba4591e26'
-LEGACY_GIT_BLOB = 'bdc0cab41cd4033421388fbd44f37203d765f57e'
+RECEIPT_SHA256 = '8d1dd8c409d6977e25f360455416d98ef89c73a4e4a011b3fee83c90fda2b936'
+LEGACY_GIT_BLOB = 'caf83a853a4bd6d80120140ff59a3e527ee233fa'
 BASE = 'm3/collections/interop/src/'
 MAIN = BASE + 'main/java/jdk/m3/collections/interop/'
 TEST = BASE + 'test/java/jdk/m3/collections/interop/'
@@ -109,24 +109,24 @@ HISTORICAL_SUCCESSORS = {
     TEST + 'M3LibraryClosureTest.java': (
         '5ece9a369bcf5a223cb163ed0857534600fcd53bcc881f239956be15a4200f40', '29691e36f212ae79c31a06a597a58e76c7e51280787c46db6d7264b30fd567e0'),
     TEST + 'M3LibraryCollectionsTest.java': (
-        '4bebee17ef96cefd2c779c76a0b190e27de311d136dec2de0fc5c05161ac199a', '792a0a8fdb7dadd0fc81e033fc0fc61cc8e2f7c4af5acdfb7098304d19b0d1f1'),
+        'db377aa16cf2de5a8f49ef273f9b5fc7fb0f1a35ac247339f0556cea086d2d04', 'f3d64d981272b45b0866d307be3ce66bdf88bc7ade581a3497f28c50e19febe5'),
 }
 PREVIOUS_CENSUS = HERE / 'previous-source-census-20261021.tsv'
-PREVIOUS_SHA256 = '5ebaf6ef12f2f954029f588e38e36c844cf97b550626a4f16e35c9219d725620'
+PREVIOUS_SHA256 = 'b0f9ec966623afa228a9122b112745acbffe2391142a64b8fae130a6810d60a2'
 SUCCESSOR_LEDGER = HERE / 'source-successor-ledger-20261021.tsv'
-SUCCESSOR_SHA256 = 'c7aabb7e4e33d378560851c94180438951611ef677c7f7b028eb48336dd112e0'
+SUCCESSOR_SHA256 = '108a05334a1fdb5e10dd07bd635400cadb5a27e94c90cb380b9f4c02bd14c3ef'
 EPOCH_76 = HERE / 'previous-source-census-76-20261021.tsv'
-EPOCH_76_SHA256 = 'c2c83e083c242ce54da263b75fe1423662b194b7e69c8f2c97a242ad6cf8f4f0'
+EPOCH_76_SHA256 = '4301e88f6e9016fb61bb2ad6392ec79bb8c02d9f0d0d7e29f8e9776dc0b616a5'
 EPOCH_76_DELTA = HERE / 'source-epoch-76-delta-20261021.tsv'
-EPOCH_76_DELTA_SHA256 = '06fa373ed02f4647d57954c27335bbfdd4f35e49bbcfc5d268b2e14c7ceaf0f8'
+EPOCH_76_DELTA_SHA256 = '747edf8eaad5a3470b269fda6e30c6dedf155673fc87b4a0b0a0c5295281ea07'
 EPOCH_76_2 = HERE / 'previous-source-census-76-epoch2-20261021.tsv'
-EPOCH_76_2_SHA256 = 'd3312d7aca804f20d9ee10a1d5ab4a4f7ad3d8e2290f15465593c2e89201ee65'
+EPOCH_76_2_SHA256 = 'cee770deadfc05337c3004e02c9fa015d64947f71a9ef94906e413f415e38b54'
 EPOCH_76_3_DELTA = HERE / 'source-epoch-76-epoch3-delta-20261021.tsv'
-EPOCH_76_3_DELTA_SHA256 = '06fb9ef4f2f39f59d879be8741585c49102ea6d55f38e4608003a5a18e376b4f'
+EPOCH_76_3_DELTA_SHA256 = 'bc19dd11e3a26efd46dd000158d9ae486505d0029608e29341335f2d60736a4a'
 EPOCH_76_3 = HERE / 'previous-source-census-76-epoch3-20261021.tsv'
-EPOCH_76_3_SHA256 = 'ac26cde080faab280c68d76aa372ce7185cded482be466650fb6d16b75bd9ffe'
+EPOCH_76_3_SHA256 = '4a3eb76fa892999da4e435a6aaddd4eff13e48fc6f50d2c39008272e4afb6c22'
 EPOCH_76_4_DELTA = HERE / 'source-epoch-76-epoch4-delta-20261021.tsv'
-EPOCH_76_4_DELTA_SHA256 = 'b0a440c2b19dbc7759bd65f0031c626b31b9d23e8fabf87c5c79c3d289c5b5e0'
+EPOCH_76_4_DELTA_SHA256 = 'd94389c12a2f089981dbcb797340541869a8c2b40a7459f16d86f5be4bf5641b'
 
 
 

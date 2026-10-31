@@ -29,12 +29,12 @@ OWNER_GIT = {
     "m3/backports/backport_execution_waves.py": "cc2a6ceb90b56d3b05d1307e705586c8d7cf1b40",
     "m3/backports/BACKPORT_EXECUTION_WAVES.md": "428d775ca476b187dceb26a012401b11b975bbbb",
     "m3/compatibility/m3-wave-admission-pin-20261014.tsv": "60c11d68f482efadeadbbe6f58bfac9ec9aa0090",
-    ".github/workflows/m3-jdk21-backport-wave-admission.yml": "9ba94e55b4c8f468fb0ff5f3cd7c530caa6fdff2"
+    ".github/workflows/m3-jdk21-backport-wave-admission.yml": "60a24153dcefb57499c921a264c94402df8af16d"
 }
 WAVE_OWNER = ".github/workflows/m3-jdk21-backport-wave-admission.yml"
-WAVE_BEFORE_SHA = "622491eea231863f0b595ead49711b5c60f63ae8ea0bf408f44a71ec84de2c85"
-WAVE_AFTER_GIT = "60ab068a3ebe7bab7c568afc405035f1fd15ffd3"
-WAVE_AFTER_SHA = "b64ac1da918bd1b5fd5dd56adc16aeb9705a854cfd262e0793fe79428ac450d6"
+WAVE_BEFORE_SHA = "1cf79b31b3dbcb74bf3858f1c898072a836ffae2da6f0d5de731cf09d4132d31"
+WAVE_AFTER_GIT = "c9017928ee7796eb70ea2c899c541ce139d7b458"
+WAVE_AFTER_SHA = "539abe591a91c37ddc16601b0ce2bcccc4a238605f8eda72c3f8008920c9b51f"
 TARGET_PATHS = list(OWNER_GIT)
 KEEP_PATHS = [name for name in TARGET_PATHS if name != WAVE_OWNER]
 RECEIVER_OUTPUTS: dict[str, str] = {}
@@ -54,8 +54,8 @@ REQUIRED_PATHS = sorted([
     *[RESOURCE + "/" + stage + "/" + name for stage in ("before", "out") for name in TARGET_PATHS],
 ])
 ORIGINAL_GIT = {
-    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java": "78d5fb68f13872164973a8918cc7886c5f548bca",
     "pom.xml": "d79867bcc09ad6329e12418e15907e54b8ab025f",
 }
 PROVIDERS = {"openrewriteAdapter": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java"],

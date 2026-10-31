@@ -18,12 +18,12 @@ PR #1681 was merged into its feature branch, not assumed merged into master.
   selected file **once** and delivers bytes synchronously to optional
   additional shadow consumers (including M3Grammar/M3AST fact producers).
 - `M3BuildState` is received **exactly** from the newer first-party
-  master Git blob `3b933d3ba3de41b8acc0a7013049de84338069d6`.
+  master Git blob `a659c276706fa394cf09503d876b04f7d837d0a8`.
   It owns SHA-256 file fingerprints, compiler-attributed ABI masks,
   dependency edge lanes and their safe reverse closure; the offline
   scan emits **unknown ABI and zero compiler edges**, not fake facts.
 - `M3BuildStateStore` is source-qualified from current master donor blob
-  `1c178381a5275b68cedea9973ee430a1b7793818`, then refined by
+  `49d803c630532c6e919f7b21d9cadb7ff3e76f1f`, then refined by
   its canonical source-sealed Synexia recipe to store `offline-scan`
   separately from `state` **inside the same existing M3FS native
   SQLite database**. There is no sqlite-jdbc production runtime

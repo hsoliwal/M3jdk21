@@ -27,8 +27,8 @@
         "mechanics": "query algebra (fromExact/and/or), Facts and the existing Matcher gate; M3TQ is already the JDK adaptation of MIndexRegexTrigramQuery"
       },
       {
-        "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexOracleCorpus.java",
-        "receipt": "m3/compatibility/synexia-regex-oracle-harness-receipt.json",
+        "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexOracleCorpus.java",
+        "receipt": "m3/compatibility/m3-regex-oracle-harness-receipt.json",
         "target": "M3PatternQueryDifferential / M3PatternQueryTest",
         "mechanics": "frozen 10k x 64 proof corpus (A5)"
       }
@@ -50,9 +50,9 @@
   "publicJdkReplacement": false,
   "targets": [
     {
-      "path": "m3/ports/precompute/src/test/java/com/m3/precompute/M3PatternQueryDifferential.java",
+      "path": "m3/ports/precompute/src/test/java/jdk/m3/precompute/M3PatternQueryDifferential.java",
       "before": "ABSENT",
-      "after": "975d7960d3c87fe5c5ca1158dba2195dfed1b808356b4f65738860f6f4e95a02",
+      "after": "fbbd71610228b2a89eee5583e4fb78c69127081621fa9fe908c45ffa4857b43f",
       "resource": "hash-pinned-java/00-M3PatternQueryDifferential.java.txt"
     },
     {

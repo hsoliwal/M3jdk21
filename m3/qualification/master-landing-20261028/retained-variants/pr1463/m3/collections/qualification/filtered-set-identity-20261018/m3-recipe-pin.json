@@ -4,7 +4,7 @@
   "canonical_recipe_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12271",
   "dataset_path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/filtered-set-identity-20261018",
   "task_evidence_path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/filtered-set-identity-20261018",
-  "manifest_sha256": "29d377e055f763fe85437a3a7901f3b98d306d1c367e7920802a72852a2585e6",
+  "manifest_sha256": "a04da62705ed2a46b68f9e59dab9bc89f490f760cdeeb55c0505dd1b382d2204",
   "intake_mode": "EXTERNAL_RECIPE_TOOL",
   "runtime_dependency_on_synexia": false
 }

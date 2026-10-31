@@ -52,9 +52,9 @@ final class M3ApacheMultiValueV2ToV3RecipeTest {
     private static final String UNTOUCHED="preserve exactly\n";
     /** The v2 postimages (owned-apache-multivalue-v2 manifest) of the three changed bodies, in manifest order. */
     private static final List<String> V2=List.of(
-            "bdd6051aecad2ff0a2c2ce7b788aeae51331e5dcef2d5c9f38270520bcdfbfc1",
-            "455e4a5cd4974be4bc9f52aef362a3fe9993802806d3b8fa6b31d2954f322ed8",
-            "b6d1c925716f44578706b5a5786f23ecab1eba652a8c6dea5f02fdf67695fcbd");
+            "fc9a03a963e2ae8e2b3dd116d575c3cdb976f3bba9326bede088a4cdafaa4f2a",
+            "68ea6bee03da4976eb237f08d6773b68a001bd44f3573abccc5a3aa3fbf3bc55",
+            "de9479635c91bd64b7570733a5074fd99b0e9db9a8bbf09b39c5a3ef0fe0e48a");
     private record Row(String path,String before,String after,String text) {
         boolean added() { return "ABSENT".equals(before); }
     }

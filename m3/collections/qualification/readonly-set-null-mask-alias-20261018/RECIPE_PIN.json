@@ -5,7 +5,7 @@
     "base_commit": "140c263a90f9803b9c46103c63355a286e0515f0",
     "datasets": [
       {
-        "after_sha256": "e4ffa9331e6dfb74cd91391c4cdc9b9cc8fa1f359e79b6f98f4ccb962b1f6fd9",
+        "after_sha256": "c92b01e8a50e0471a2bda04f198a526542843db9f9dcd8ee2a0245f1f6cdaa77",
         "before_sha256": "ABSENT",
         "id": "m3-set-null-oracle-20261018",
         "manifest_git_blob": "30b1a9547ac7bfece7af043f1e2e797e2b49bcb2",
@@ -16,7 +16,7 @@
         "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredSetNullContract.java"
       },
       {
-        "after_sha256": "ba0af20ac2ebc21a88c5283484e02106a656838f85a6568ea15b6268e8aa9c80",
+        "after_sha256": "80598a0428cd541d075c36f3338b3057737140d8224ea6125f8c8da7e018589d",
         "before_sha256": "ABSENT",
         "id": "m3-set-null-junit-20261018",
         "manifest_git_blob": "39a66c450b024987126449d7babcdf24c9112496",
@@ -27,7 +27,7 @@
         "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredSetNullTest.java"
       },
       {
-        "after_sha256": "3c5528cb59b86a5905c42c4c7e1dd4923772bdb5e2f4918c94466d809ad3344b",
+        "after_sha256": "65aa6109e703a4c36899f7a8f70cd813e7b1b4bb0b693516e232bef15c541e67",
         "before_sha256": "ABSENT",
         "id": "m3-mask-oracle-20261018",
         "manifest_git_blob": "4b3f00d2dcf563ec31e0a03e5becfa9586dc962a",
@@ -38,7 +38,7 @@
         "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3PathMaskAliasContract.java"
       },
       {
-        "after_sha256": "21524ab83d436650d247964f54ad659bcee754d279e81be2450fc22142e989c3",
+        "after_sha256": "67eb7ae638fc5efb6e7ed5b0764d8d9b1e0743a2ce60273fd33e5cb455bb6e9c",
         "before_sha256": "ABSENT",
         "id": "m3-mask-junit-20261018",
         "manifest_git_blob": "89fd225dbf8ae486d4c0f733e080961fe8e84876",
@@ -49,8 +49,8 @@
         "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3PathMaskAliasTest.java"
       },
       {
-        "after_sha256": "3f4c6ec67e0dacf16efaa0d22a1b649790b00c81e4c4f9cd8564851ffef4769b",
-        "before_sha256": "1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369",
+        "after_sha256": "6f4a606c6d1d981115d035d8d4abb8df4570eaa7b2270f5c34c0ddfd1a992a29",
+        "before_sha256": "e8a722cec3cdad01ce127936936f7c9928f094658e075aa9d1d89077e6eb7199",
         "id": "m3-readonly-set-null-20261018",
         "manifest_git_blob": "e3b88148a0d261ff15bdc1d23d1358ff6afc535b",
         "manifest_sha256": "42972edae494d1d19f42e05218b90b58122908c7e1fe6c8a42006779f02da017",
@@ -60,8 +60,8 @@
         "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java"
       },
       {
-        "after_sha256": "772c6edbf3781fcebc373e6ad79d82770112e91eab811b5883d92650dcdfd947",
-        "before_sha256": "4d1c782345de46c31e24b4822f58c431903c7b951b6a15641c88e055271f971e",
+        "after_sha256": "2efabc0400f852eee56defdea2a144093e6a6c889fb40e02beb7c2e37c92c5c8",
+        "before_sha256": "d0515af261429f4f2c959c87a4c0588093612746c4f95e4927570880778ca8ef",
         "id": "m3-path-mask-alias-20261018",
         "manifest_git_blob": "c3e4a938494f7527a927b9b415de8c408528c29b",
         "manifest_sha256": "2328c0e733f51a20e4af04ab48d86b34fab918e31fcf3c5b47a94c6e86c629fc",
@@ -121,7 +121,7 @@
     "head_commit": "08181cf261f3b9224ec6916e352435ed0494a9a7",
     "immutable_public_url": "https://github.com/hsoliwal/M3jdk21/tree/08181cf261f3b9224ec6916e352435ed0494a9a7/m3/collections/algorithm-catalog/challenge-forks-20261018",
     "inventory_status": "NOT_EVALUATED",
-    "manifest_sha256": "5c0c71817c392c6b79d0536c4aa4c927e9142aad2c5a390f3e8518b1b7b3d36c",
+    "manifest_sha256": "3a8b36fe47266a7b4460bad200264ded602450c4e360d3b1cb38d43a847446ca",
     "packet_path": "m3/collections/algorithm-catalog/challenge-forks-20261018",
     "publication_pin_status": "VERIFIED_BY_PUBLICATION_CONTROLLER",
     "pull_request": "https://github.com/hsoliwal/M3jdk21/pull/1323",

@@ -27,7 +27,7 @@
         "mechanics": "insertion-ordered primitive-long set contract"
       },
       {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java",
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongHashSet.java",
         "target": "com.m3.collections.M3LongLinkedHashSet",
         "mechanics": "open-addressed long table: probing, byte occupancy, growth and compaction"
       }
@@ -47,15 +47,15 @@
   "publicJdkReplacement": false,
   "targets": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLinkedHashSet.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongLinkedHashSet.java",
       "before": "ABSENT",
-      "after": "a482cb444e757b8cd2a9a71a46b0cdb0accbe2a60c636a76b84adf9a63c2feef",
+      "after": "32e476b7afd562aedddb76ab3ce2917352c53678975d37afbdc769f80385c76f",
       "resource": "00-M3LongLinkedHashSet.java.txt"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3LongLinkedHashSetTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3LongLinkedHashSetTest.java",
       "before": "ABSENT",
-      "after": "f33e703397f639a47228e450a2c587bcea47e9c5d0b347099d91a9c91fa047ec",
+      "after": "30dccc9225ec9d326ca4ba81ffba8cab7090be41ef6c2f18906299004635b876",
       "resource": "01-M3LongLinkedHashSetTest.java.txt"
     }
   ],

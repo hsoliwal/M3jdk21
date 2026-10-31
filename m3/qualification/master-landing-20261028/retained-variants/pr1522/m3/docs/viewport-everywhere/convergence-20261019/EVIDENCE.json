@@ -34,30 +34,30 @@
       "bytes": 25575,
       "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-collection-refinement-20261019/templates/verify.py.txt",
       "disposition": "INCLUDE_EXACT_ORIGINAL_SUPPORT_FILE_IN_RECEIVING_OR_EXPLICIT_STACK",
-      "git_blob_sha1": "f03c70f863525f8fb1276ffbd5f7044c9bd4450c",
+      "git_blob_sha1": "ab250347cbcae3679b75ad1b8ba022a2ff6af8da",
       "id": "verify",
       "receiving_target": "m3/collections/qualification/collection-refinement-20261019/verify.py",
-      "sha256": "fd40d196efbb462243eba6b43d9e78ebc4162c9e2b0f13beeafac804ae8c228e",
+      "sha256": "05f85f348dac328f3ec0c0ebcf225debd35df8a837da9916db8245301d488825",
       "url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-collection-refinement-20261019/templates/verify.py.txt"
     },
     {
       "bytes": 3237,
       "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-collection-refinement-20261019/templates/probe-plan.json.txt",
       "disposition": "INCLUDE_EXACT_ORIGINAL_SUPPORT_FILE_IN_RECEIVING_OR_EXPLICIT_STACK",
-      "git_blob_sha1": "a6617a5cc9283611260d76dea9e8f139a593712f",
+      "git_blob_sha1": "e2672b49b51c5fb1985774b6c7eb1644778fd34e",
       "id": "probe-plan",
       "receiving_target": "m3/collections/qualification/collection-refinement-20261019/probe-plan.json",
-      "sha256": "91b07ee6bec984b2229eaaa1041662e4d93a72a3e222b5111277d6c5da9e7a39",
+      "sha256": "f335a326518b11724538ea420902fde0efd73167ec2418cf5e734dcc9f42484c",
       "url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-collection-refinement-20261019/templates/probe-plan.json.txt"
     },
     {
       "bytes": 7835,
       "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/proof/verify_all_native.py",
       "disposition": "INVOKE_CANONICAL_HELPER_UNCHANGED",
-      "git_blob_sha1": "9b31917331c27105c45c63889d5ca7c71ddef929",
+      "git_blob_sha1": "208e42a265709a6126cdc674ef4d4e3a675385c2",
       "id": "all-native-helper",
       "receiving_target": null,
-      "sha256": "c7d9612fce125813980ce31f7566f0aab28045d95897b6c60690544558c80dfe",
+      "sha256": "daeaf8a9f50b31d5f88256511dca4a6551d48d34ebb48e41f6fc20dff0563c3a",
       "url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/proof/verify_all_native.py"
     }
   ],
@@ -69,9 +69,9 @@
   "manifest": {
     "bytes": 13432,
     "changes": 21,
-    "git_blob_sha1": "32617340ce118d80199a3fd426cacc2948beedbb",
+    "git_blob_sha1": "abe72af12495e1b59d5d34a40966e7def7585212",
     "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/manifest.tsv",
-    "sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+    "sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
     "targets": 60,
     "url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/manifest.tsv"
   },
@@ -237,14 +237,14 @@
   "row_tree": {
     "after": {
       "bytes": 15384,
-      "path": "m3/collections/src/main/java/com/m3/collections/M3RowTree.java",
-      "sha256": "96067f630bcf3288c69410151759fa738fd5968daccf68cd1aed2aeade38fc7b"
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3RowTree.java",
+      "sha256": "3e9ff2db9ac2918dac993bb44493269ea4c4309d156724583de549a666ae19bb"
     },
     "before": {
       "bytes": 15700,
-      "git_blob_sha1": "5f6ea21614dd532bbfecabcc505bffa53255c4f3",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3RowTree.java",
-      "sha256": "11e448e0f92eb751f8399affda3e5f4d95a5a8856e7719eb69446e35fa037233"
+      "git_blob_sha1": "65ad17fb1db3afcbb420ce1f5c45d313235aa60b",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3RowTree.java",
+      "sha256": "d8398841841dbdff9bdc3f14e02ea6783286d4a77c29b5bcfbbfb1649086ebfe"
     },
     "disposition": "CURRENT_SOURCE_REVERT_OF_RESOURCE_REJECTED_GUARD",
     "fresh_combined_resource_measurement": "NOT_RUN",

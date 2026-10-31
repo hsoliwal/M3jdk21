@@ -195,7 +195,7 @@
     },
     "tests": {
       "path": "m3/migration/test/test_migration.py",
-      "sha256": "01fa8c629c0002974a86c0ee363817f383ae4c88c61a399cc619d61c86c24413",
+      "sha256": "9ab63e43c5a72345783a08dd09ee986daf5e688e02a6d50ab17153af41b47955",
       "bytes": 13490,
       "methods": [
         "MigrationTest.test_duplicate_json_key_and_nonfinite_number_refused",
@@ -228,7 +228,7 @@
     },
     "previous": {
       "path": "m3/migration/provider/python312-linux-x86_64/previous-name-mapping.json",
-      "sha256": "fa9832d48ec7dc0334fcb3a02e1b665612ca3a9f3dfe13cd104ff3f2c42871ac",
+      "sha256": "d63273d13d34e95590d2f8511ae191a817144a2d671db68add35ef95b5103995",
       "bytes": 399438
     },
     "manifestPath": "m3/docs/name-mapping.json"

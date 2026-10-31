@@ -6,7 +6,7 @@ Receive against M3JDK21 `9a164c31b38c7013c179a3ff38b0bb60c199c7fd` using
 the unchanged `com.synexia.rewrite.M3SwingConvergence20261019` recipe in
 [canonical PR #12528](https://github.com/hsoliwal/com.synexia/pull/12528), commit
 `74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd`. Its manifest SHA-256 is
-`11f3d4890741deaa42323a11069c8c2287613dbf1f57db450e80cd8404d3781f`.
+`8c1d7492734d8151271ce11fdd23b3b77bdc68308b95c560c2b0792fd421a46b`.
 Canonical publication and [M3JDK21 receiving PR #1525](https://github.com/hsoliwal/M3jdk21/pull/1525)
 are open drafts. The receiving PR is stacked on [collection PR #1522](https://github.com/hsoliwal/M3jdk21/pull/1522).
 The mapping fragment records both the source and metadata receiving PRs.
@@ -20,12 +20,12 @@ changes this owner and adds two proofs, retaining four exact KEEP dependencies.
 ## Source and qualification epochs
 
 The owner is
-`m3/ports/swing-viewport/src/main/java/com/m3/swing/viewport/M3ViewportBinding.java`.
+`m3/ports/swing-viewport/src/main/java/jdk/m3/swing/viewport/M3ViewportBinding.java`.
 
 | Identity | SHA-256 |
 | --- | --- |
-| Current receiving preimage | `94101f8fe12a9dc4d5856fc3aff1006fbbd5722cbca17b7cede65b3d5a669b21` |
-| Qualified postimage | `b5954005074667174f2254c77cbe531c41ed7dcf12a8c05811b5e341d0a11115` |
+| Current receiving preimage | `df717cfa7b73bbfee3c58728718c56ad50af19afd610b08ce511bd4ec36690f3` |
+| Qualified postimage | `f0659cc3ef8c5cabeccb34f8e6109ccd325a3c257e295b6ff93beb281e7ee45b` |
 | Original module POM, retained | `54448ae1defe035ed9f4ac6ead6f4c9eafd47a1340b173c3fdb95d4bf0a18da1` |
 
 The recorded compiler/runtime proof used parent

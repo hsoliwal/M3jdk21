@@ -12,8 +12,8 @@ The original recipe is [Synexia #12544](https://github.com/hsoliwal/com.synexia/
 | Field | Exact value |
 | --- | --- |
 | Target | `docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml` |
-| Before SHA-256 | `7539cf81d2d7a7b30bff97ce2812a7e67f4e3593463a898aa38c8e6b0240dfa0` |
-| After SHA-256 | `6553565c8dd14a857e796f741f3f8f8e7cbf3edda11df58b8dcd8a53e78e5600` |
+| Before SHA-256 | `ff8b2c1db5fffa1a9013fc863a1f5dac337b2cb633c07d513339b57fcce40b80` |
+| After SHA-256 | `4b864a178251e0f853cc8d2fe8027962bf831f950d9b83a9d095496ae60be158` |
 | Active phase | `swt-current-owner-runtime-closure-20261021-001` |
 | Source kind and authority | One hash-pinned Maven XML file; actual Maven model execution remains the build authority |
 | Production geometry changes | Zero |
@@ -28,7 +28,7 @@ Two separate infrastructure observations remain preserved. The first offline att
 
 | Candidate | Decision and reason | Rights or identity |
 | --- | --- | --- |
-| Current proof POM | Preserve as frozen failure input; it omits the API class required by OpenRewrite | Existing first-party Apache-2.0, blob `420eabcfebc730b8d932d2db884908c1cd77840b` |
+| Current proof POM | Preserve as frozen failure input; it omits the API class required by OpenRewrite | Existing first-party Apache-2.0, blob `96d82fbd7a60cfd0a3584058e30f61972188043b` |
 | Qualified integrated SDK's `slf4j-api:2.0.13` | Selected; supplies the missing class with one dependency and no backend | MIT; exact artifact and license hashes in `provenance/SOURCE_AND_RIGHTS.json` |
 | Previously qualified scrollbar packet's `slf4j-simple:2.0.13` | Existing alternative, unnecessary backend for this proof's contract | Preserved as comparison evidence; no backend added |
 | JDK logging or a replacement logging facade | Does not supply the required `org.slf4j.LoggerFactory` binary name | No alternative implementation introduced |

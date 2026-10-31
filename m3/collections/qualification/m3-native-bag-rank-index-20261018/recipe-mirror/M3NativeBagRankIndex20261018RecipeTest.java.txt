@@ -75,9 +75,9 @@ final class M3NativeBagRankIndex20261018RecipeTest {
                     MessageDigest.getInstance("SHA-256")
                             .digest(expected.getBytes(StandardCharsets.UTF_8)));
             assertEquals(List.of(
-                    "a8686254c2439bcdd1472bdddbefd5bfa7c4b2efce24aa89b6c1453e208515a5",
-                    "9f79cf7605c30bd1766878312af6ac2e880d2faf03f790c579146aee951704ec",
-                    "58709c47d26fb7819d314fd2793caf85bd24edf84242f7db27a774b058abe827"
+                    "de56d6976a1753c3a21e793fc9c11d08f3ad52aa785dd5b02f8908b39008a5ac",
+                    "ca8149db3e2ec4b7a5d65d8ebd9660a3908487f8dc7ad84104bc65a9ecefa175",
+                    "cee68f53d50536c071db06965a05b3ed9aa0bf94f1f2c91703355e3129898322"
             ).get(i), digest);
         }
         assertTrue(apply(List.copyOf(generated.values())).isEmpty());

@@ -3,7 +3,7 @@
   "artifacts": [
     {
       "path": "proof/bootstrap-004/runner.py",
-      "sha256": "639b0ad5bcbb30e97d46d73c63fe68f514eecbade55fb5414204b1f9d2f0c848"
+      "sha256": "04f5f26f647e9840ab6ff12b723fe866148196e0569128697983a77b37f51def"
     },
     {
       "path": "proof/bootstrap-environment/maven-proxy-settings.xml",
@@ -11,7 +11,7 @@
     },
     {
       "path": "proof/bootstrap-environment/pom.xml",
-      "sha256": "934fb8b8fdad025d77f41166306de9f1148fd786a81db811da85b301c6af0bd1"
+      "sha256": "556a8edbd5236692ef4b059b586c63d30a71cd8a5676d63ce020fa14a00d7561"
     },
     {
       "path": "proof/bootstrap-environment/TOOLCHAIN.json",

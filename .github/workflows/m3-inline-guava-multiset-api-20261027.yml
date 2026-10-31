@@ -29,7 +29,7 @@ jobs:
         run: |
           set -euo pipefail
           echo '1cf974b8e73c72e0885872a0746e34e187bc020a7e19a4e5074e73ac05d4e973  m3/collections/implementations/guava-hash-multiset/src/main/java/com/google/common/collect/Multiset.java' | sha256sum -c -
-          echo '15f5c810429b33a04838739da469632929e99cbfff95f9c9eedd01e0d286dad3  m3/collections/implementations/guava-hash-multiset/src/test/java/jdk/m3/collections/guava/M3InlineGuavaMultisetBoundaryTest.java' | sha256sum -c -
+          echo '099245bbb637d2d2589e5b1ea25fb875f7a0b3c4d096bad83f6648fe251930de  m3/collections/implementations/guava-hash-multiset/src/test/java/jdk/m3/collections/guava/M3InlineGuavaMultisetBoundaryTest.java' | sha256sum -c -
       - name: STRICT javac original source and M3 implementation with NO Guava or other JAR
         shell: bash
         run: |

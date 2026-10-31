@@ -32,10 +32,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo '25f4051dcff340507c0e662413104b74a3bbb295bbe6bc78250f1ec7ea92a236  m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3FiveListFamilies.java' | sha256sum -c -
+          echo '6b58c11deb0ba2cfcf4e259fe31f5117837a8f77423dfc74f0c523997519749e  m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3FiveListFamilies.java' | sha256sum -c -
           echo '1e8e1e58e4d1cd3f18574914ec371dcc847a8fb4ec47c55b31923accb178b63f  m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3GuavaListMultimap.java' | sha256sum -c -
-          echo '93fdf15c0abb5dff4dce37c26a85d6a0340b10477b3fa73ac1e35ef9df69bd7b  m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveListFamiliesContract.java' | sha256sum -c -
-          echo '68ad68cd200a3791f29e97078cbf8e0724b1dec6f13775e1be51e505ddc59b7f  m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveListFamiliesTest.java' | sha256sum -c -
+          echo '750892b736457d8b6a5419c42421bce452c6e05e1c0288dd6266b394dc95dc29  m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveListFamiliesContract.java' | sha256sum -c -
+          echo '9827a850160aa2875c71b9c22608fd599faa4eaaa38b6f4bf92a5c4662045d27  m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveListFamiliesTest.java' | sha256sum -c -
           echo '32dfc1e0441589ccc809364d7832287b2748c5925a2625fbb51e9c6f273c6748  m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3GuavaListMultimapContract.java' | sha256sum -c -
           echo '0d792d9c4a9ff76d1a07b90297d08ce8b00ebcba9206fa128bdf0bdb942af211  m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3GuavaListMultimapRealTest.java' | sha256sum -c -
       - name: Build and test complete existing M3 java.base-only collection owners

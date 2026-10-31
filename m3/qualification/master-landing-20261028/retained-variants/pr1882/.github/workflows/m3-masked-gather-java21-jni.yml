@@ -34,10 +34,10 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
-          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java)" = 'a106baf182c47088dfb6dbfc6c249592f2a0c71b'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java)" = '9dea1df7254fc8f99449be544d410dbf973a137b'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_address_kernel.c)" = '123e40c56995574979e999e6233a218b3dc2e4cb'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3MaskedGatherContract.java)" = 'd4271622eabfab82f7329d8817b0b35d0307391f'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3MaskedGatherTest.java)" = '88ce86d76bfd740dfdab47761e9f38e9d0af1e5e'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3MaskedGatherContract.java)" = '7c62c52d5fc97d933f76db143fb0ac54000ccfff'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3MaskedGatherTest.java)" = '80714c8cd974dcdf6886bc80ca7d7b26c78def9f'
       - name: Build original Java named modules and generated JNI headers
         shell: bash
         run: |

@@ -14,7 +14,7 @@ Status: **source candidate present, proof requested; promotion NOT_AUTHORIZED**.
 ## This pass
 The existing JEP 523 workflow was missing the repository's required pinned
 source-built OpenRewrite/JUnit bootstrap. Use
-`m3/synexia-import/pure-int-recipe-custody/install.sh` and the existing
+`m3/m3-import/pure-int-recipe-custody/install.sh` and the existing
 migration-recipe reactor before the unchanged JEP 523 JUnit fixed-point proof.
 No JVM/GC product/test source is modified by this proof repair.
 

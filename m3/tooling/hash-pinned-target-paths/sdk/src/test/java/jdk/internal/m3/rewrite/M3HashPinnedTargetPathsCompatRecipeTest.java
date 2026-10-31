@@ -27,20 +27,20 @@ final class M3HashPinnedTargetPathsCompatRecipeTest {
     private static final String ROOT = "/jdk/internal/m3/rewrite/hash-pinned-target-paths-20261020/";
     private static final String DESCRIPTOR = "/META-INF/rewrite/hash-pinned-target-paths-20261020";
     private static final String NAME = "jdk.internal.m3.HashPinnedTargetPathsCompat";
-    private static final String FORWARD_MANIFEST_SHA = "6c1e16ec5381bce29b8ee8b8a4b24db7ba6b486836401b936a2d290f98b4b28f";
-    private static final String INVERSE_MANIFEST_SHA = "a6bcfc3ed2f4458c2bbc73056533faca3ab8121e67c287f9949f0b8e6eceb344";
-    private static final String FORWARD_DESCRIPTOR_SHA = "da831dd22d51b0221b7e01962d9da7826f5cd2ad5765dc15820ace5ab8f95b1f";
-    private static final String INVERSE_DESCRIPTOR_SHA = "1ae2b30f6b0f4af7c32dc78089695054a488c407a1f61cfa902b890cb9fa9203";
+    private static final String FORWARD_MANIFEST_SHA = "a5519c55b50da387e76d0b0ce2241cc25f4216eff62734557f0ed72e27051403";
+    private static final String INVERSE_MANIFEST_SHA = "1f67be7b8a07cda0e4746a516df0f637211ee7b99a2bb2ace48015539e84e499";
+    private static final String FORWARD_DESCRIPTOR_SHA = "7b5e266f805a3a8da289fcc4358f346d5b475789672f30fd153f25d5eb116784";
+    private static final String INVERSE_DESCRIPTOR_SHA = "2c3273d747559d4756cb49df36de5fddadb119a610b9fe4a8f383562a0e8ce2b";
     private static final String PROVIDER_OWNER = "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java";
-    private static final String PROVIDER_AFTER = "4b6b3310c6c9d7f60abcaca2ac43c813abdffd8e9ec472054397d38cd05bc39c";
+    private static final String PROVIDER_AFTER = "8c43e01532a256cfc2b8c55bf5ed7e3c9719be6a37b223b0cd93258c823289f4";
     private static final Map<String, String> BEFORE = Map.ofEntries(
-            Map.entry("m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java", "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599"),
-            Map.entry("m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java", "5a1e857a1003b106848ec3f3deac378b7b9633fdec8337581c3b9fe3d1b69a89"),
-            Map.entry("m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectIndexSnapshot.java.txt", "ed19c7b34e23f61ea5bfa808550a1189ccc07900b7022f3572d78c23c5929f0c"),
-            Map.entry("m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexSelfTest.java.txt", "745156bdcd632c0d664dcc9f42f19f47879fd4cfca05ecd69da4e03b60fad049"),
-            Map.entry("m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexTest.java.txt", "eec9b203115a9896ebcc074926e4817b5ebcbdeab4e259c68d3c34b773b46ed0"),
-            Map.entry("m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotStore28.java.txt", "02893ff5d555ef577789ca82fdbbe043172219ae59202d10a51f2fa1337d9152"),
-            Map.entry("m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/manifest.tsv", "2f36b00eb64eecf971ae1bcd03743f3169ea314ed41de50039f86dadb84909f7"));
+            Map.entry("m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java", "9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37"),
+            Map.entry("m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java", "3223a170646c0ad111c4319894c231e1ed5690ea0a3ed1cc4d86c3ae0ba14dae"),
+            Map.entry("m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectIndexSnapshot.java.txt", "67116969a93d0da9beffafdb36a8310247a206a96d7cb58ffbce3c053e1ad4f1"),
+            Map.entry("m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexSelfTest.java.txt", "976975d979ffbde17bdf877349d60950da984b5f7207dc9f28ffeff6fe060ff7"),
+            Map.entry("m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexTest.java.txt", "6f2b492c0be59b4c6d784b3d3be3623d5da69e7217047657c36635852b14d3b7"),
+            Map.entry("m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotStore28.java.txt", "032f837fea2e97b166fc08e7f7601d66e5d31513897a03632a08ec17bcf407bb"),
+            Map.entry("m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/manifest.tsv", "ff8ff72e0f0d03eaeb5f2012a56d3eca6dce0572e2dbe3214c5d3ce2ade31a2c"));
     private static final Set<String> PASSED = new LinkedHashSet<>();
     private static final Map<Boolean, String> EMITTED = new HashMap<>();
     private static int successfulRuns;

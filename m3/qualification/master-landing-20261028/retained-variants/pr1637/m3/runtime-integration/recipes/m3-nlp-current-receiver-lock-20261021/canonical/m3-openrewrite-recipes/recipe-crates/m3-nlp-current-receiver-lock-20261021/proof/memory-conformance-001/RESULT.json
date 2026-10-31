@@ -7,7 +7,7 @@
   "sources_unchanged": true,
   "input_receipt": {
     "path": "proof/memory-conformance-001/INPUTS_AND_COMMANDS.json",
-    "sha256": "a55ef8e87dd3c1ab234ca0584095c5fa22ee373d7ab4452c6602303b57cf9a41"
+    "sha256": "573dd5775e8be864d63da8faa38d19736a38140079ea253eb4b07da6e250ecd2"
   },
   "commands": [
     {

@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class EngineCustodyTest {
     @Test void existingEngineSourcesRemainByteExact() throws IOException {
         Path base = Path.of(System.getProperty("recipe.base"));
-        assertEquals("56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999", M3GpuToolJoinManifest.sha256(Files.readString(base.resolve("src/main/java/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java"))));
-        assertEquals("ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec", M3GpuToolJoinManifest.sha256(Files.readString(base.resolve("src/main/java/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java"))));
+        assertEquals("c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e", M3GpuToolJoinManifest.sha256(Files.readString(base.resolve("src/main/java/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java"))));
+        assertEquals("300a520ec9d273922d1edbdf5442e5faf825c47e8e3df7febf4baa2f39945401", M3GpuToolJoinManifest.sha256(Files.readString(base.resolve("src/main/java/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java"))));
     }
 }

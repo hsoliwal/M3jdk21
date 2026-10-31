@@ -25,13 +25,13 @@ def git_blob(data: bytes) -> str:
 # The 40-source receipt is immutable. The next generation has exactly one
 # source-sealed, Java21-syntax-only test transition and no other valid changes.
 COMPOUND_TEST_PATH = 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryArrayificationTest.java'
-COMPOUND_TRANSITION_SHA256 = 'ad81180bc4f5ee73dd008212fb575e62d50f815d673abd063e671c630789c24c'
+COMPOUND_TRANSITION_SHA256 = '27423e52d65e49331dc08b249170f197c27195636db5f92a68bc6fa59bda6c1d'
 COMPOUND_TRANSITION = (
     COMPOUND_TEST_PATH,
     '43d670c2278b4db3cb39e8c6d63eff56827c7ef8359e7c85aa8f72b892bba51d',
     '42d78b4fae7525467f0a5d4f34baf45b511e3b55',
-    '6d31a53eb94af7c3cfe08ce126ce1be1f8d7da1b09150bd72a12c602d3ab3565',
-    'e220622405432368d2c46b32f9f1c197913e7c0a',
+    '61ae67aeedc4a4a42f81f1beefc23ed43aa0c2288b6301fd7bfc1eea023fdf87',
+    '6d04f30ff77297201797c079125ebc0107906e63',
     'PINNED_TEST_SYNTAX_ONLY'
 )
 
@@ -56,19 +56,19 @@ def exact_compound_transition(receipts: Path) -> tuple[str, ...]:
 M3_JAVA21_REPAIR_RECIPE = 'jdk.internal.m3.M3InteropThreeJava21Diagnostics20261022'
 HISTORICAL_TEST_UPDATES = {
     'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3ApacheCollectionsTest.java':
-        ('15a5a360695ca787138002380c6482dcda6cb9c62857e58707c214d7240f5fad',
-         '10830216e66629c86b020b22a9d0beb898e97b80', '6'),
+        ('3b9f566f53b11289f22924a76b88912b9a04168026c4e4c17996f34e1a9a5345',
+         'bb7f891eee25a588321079afe46043933abd787d', '6'),
 }
 ADDITIVE_TEST_UPDATES = {
     'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryKeyRangesTest.java':
         ('ef93d9a53e0b9935c6e796b55ce2c47e4d94a732c7ac9f07b5a635eb436cc467',
          'bda93a103282d5b8a14a9ad600b054a6484d0d19', '3'),
     'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveProviderFlagSelectionTest.java':
-        ('09318eadbdbb1cb97edb39bf973f2912e6f23f377e5f38a86a9dcf313f10b4ae',
-         '2fb1629adb06dde1d56c32a7f122ed1f4834af3c', '4'),
+        ('e1eed410d9b3c65c3d96042794df88e8500311657141638e989be19eaa1b1b20',
+         '75fad22cef2129cf9b1fc848dbb73b5ba6f7fa2d', '4'),
 }
-HISTORICAL_TEST_UPDATE_RECEIPT_BLOB = '42bd7754f17ea63ae07f4e7053f522be283f7af4'
-ADDITIVE_TEST_UPDATE_RECEIPT_BLOB = '5fac1e5f7da2a29f0442e7747c2e658d4f58ff41'
+HISTORICAL_TEST_UPDATE_RECEIPT_BLOB = '60fd6f3552a92fde2afe09cf666ec374c49260ee'
+ADDITIVE_TEST_UPDATE_RECEIPT_BLOB = '32ca67406bb596219f7e16962a61b34455517766'
 
 
 def read_sealed_java21_revisions(receipts: Path, receipt_name: str,
@@ -185,8 +185,8 @@ def verify_additions(product: Path, receipts: Path,
 # Source-history commit at which the immutable 36-owner census was authored.
 # Checking these bytes at a separate pinned checkout is not a semantic DAG walk.
 HISTORICAL_COMMIT = "a720780b1a5ab41ea27182b9b7ad873efdf533b4"
-HISTORICAL_CENSUS_BLOB = "9dbfe94767eb36c9371fd931e7513cb11e168768"
-HISTORICAL_VERIFIER_BLOB = "efe6d0f959cdc3172d6f6659f06bb486ef825291"
+HISTORICAL_CENSUS_BLOB = "9f3043103b3d63d3fdf37a17190dc85a0f918a1b"
+HISTORICAL_VERIFIER_BLOB = "cf8ccc95c7121c51551de608e47958466d42cbc9"
 
 
 def verify_historical_revisions(product: Path, receipts: Path,

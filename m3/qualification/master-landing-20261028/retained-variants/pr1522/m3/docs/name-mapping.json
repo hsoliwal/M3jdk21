@@ -543,7 +543,7 @@
     {
       "source": "jdk.internal.m3.indexstring.shared.SharedArrayNative.compare / hash32 / metrics / copyTo; SharedSegments.preparedBuffers",
       "source_commit": "857c4cc0ddeb73e5ea5269a1d0ef2d30057dcfa8",
-      "source_blob_sha1": "SharedArrayNative.java:62c2e6e089b6a203b22d5aae4e15a834876f08d1;SharedSegments.java:2912e2afbc13a981ed6f6ef704b8b17047481fea;shared_arrays.cpp:8b85031cfbe1d64f43c93a1453f8670cc65dbafe;shared_string_compare.cpp:c0bf741d48304dceb73fddd0352ab510d1f2265f",
+      "source_blob_sha1": "SharedArrayNative.java:396dfbc0c6866e49c7f60df2a88418ef58e22431;SharedSegments.java:48aab5883a38394d8d3fc564761e2444e54d24c9;shared_arrays.cpp:182520825505422c2d7b5570cb3b2bb556b0f222;shared_string_compare.cpp:c3fc9b5f58ca4bee925f17578fd499ae886c75c0",
       "target": "java.lang.String.compareTo(String) -> java.lang.M3String / M3StringOwner / M3StringAtom.address; JNI projections -> M3String.getChars/getBytes and nativeCharShadow/nativeByteShadow",
       "status": "Apache source custody pinned; target direct-address fast path not implemented",
       "source_role": "shared-segment JNI compare, hash, metric and caller-owned range-copy kernels over direct ByteBuffer owners",
@@ -861,7 +861,7 @@
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
       "target_module": "m3/collections",
       "target_base_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
-      "target_preimage_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+      "target_preimage_sha256": "6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb",
       "target_postimage_sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
       "target_postimage_git_blob": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb",
       "target_rule": "Reuse the existing immutable projection and canonical values owner. Convert a proven opposite sort direction by reversing equal-key runs while retaining stable occurrence order; preserve unordered merge sort, active offsets, slices and filters.",
@@ -873,9 +873,9 @@
       "canonical_recipe": {
         "name": "jdk.internal.m3.rewrite.M3CurrentMasterConvergence20261019",
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3CurrentMasterConvergence20261019.java",
-        "source_sha256": "747023751892d1e8fe4e501411ab1aaf270abbd6cce3180a595717f7bcc85f6f",
+        "source_sha256": "a736dbf73a39ee791d15aa585798c3d53eada2d7885e67e8c8c2530529e174cd",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-current-master-convergence-20261019/manifest.tsv",
-        "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+        "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
         "canonical_repository": "hsoliwal/com.synexia",
         "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
         "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
@@ -898,7 +898,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "whole_reactor": "NOT_RUN",
-          "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
           "log_sha256": "d6bf20f3fd1ae04177b406b727c8679f8266880ed0800b057d31dcb6fde2e191"
         }
       },
@@ -950,7 +950,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "whole_reactor": "NOT_RUN",
-          "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
           "log_sha256": "d6bf20f3fd1ae04177b406b727c8679f8266880ed0800b057d31dcb6fde2e191"
         },
         {
@@ -963,7 +963,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "state": "PASS",
           "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
-          "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
           "files": 657,
           "main_java": 268,
           "test_java": 264,
@@ -993,7 +993,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "state": "PASS",
           "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
-          "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
           "tests": 477,
           "successful": 477,
           "failures": 0,
@@ -1025,9 +1025,9 @@
       "historical_canonical_recipe": {
         "name": "jdk.internal.m3.rewrite.M3ViewConvergence20261019",
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ViewConvergence20261019.java",
-        "source_sha256": "fad0237f22539813bd0000a93b7e41e97a13ff0652da30f5a9233ce0fe6ac002",
+        "source_sha256": "e4af2b1882f42fb21f93c6e8c88150e3f5a8932ea094d5686cf6e3121c7ee22d",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-view-convergence-20261019/manifest.tsv",
-        "manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+        "manifest_sha256": "c4a690bdf550af84ba7dc69ac1d96b8360fb41748c0928fd09ef2a5d683a4fd8",
         "canonical_repository": "hsoliwal/com.synexia",
         "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
         "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
@@ -1046,7 +1046,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
-          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "final_view_manifest_sha256": "c4a690bdf550af84ba7dc69ac1d96b8360fb41748c0928fd09ef2a5d683a4fd8",
           "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
@@ -1062,8 +1062,8 @@
       "current_source_admission": {
         "state": "PASS",
         "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
-        "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
-        "before_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+        "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+        "before_sha256": "6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb",
         "after_sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
         "canonical_before_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
         "canonical_after_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
@@ -1075,16 +1075,16 @@
       "source": "hsoliwal/M3JDK21 / m3/collections/src/main/java/jdk/m3/collections/M3WindowPlan.java",
       "source_commit": "dca362808e9dd533c1f6d7a99f671d4ccdd59a86",
       "source_path": "m3/collections/src/main/java/jdk/m3/collections/M3WindowPlan.java",
-      "source_blob": "de534edb6fcd76ca188b1c61a2d30b7be47c98da",
-      "source_sha256": "5a4d7bbd92429d2e3daf8c3a857abfd79189bbf1fc9450915f9ca89d8742421e",
+      "source_blob": "e83cb8477c803ebe2e6fe8b857af2524fe6a1328",
+      "source_sha256": "bd192d5a81b3b331f8df75e09a4c3f0e5c462b5e39c3a72a7a020acb6e2e6b38",
       "source_role": "EVIDENCE_ONLY historical donor lineage; its exact postimage is already present in current master and remains KEEP",
       "target": "jdk.m3.collections.M3WindowPlan",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3WindowPlan.java",
       "target_module": "m3/collections",
       "target_base_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
-      "target_preimage_sha256": "5a4d7bbd92429d2e3daf8c3a857abfd79189bbf1fc9450915f9ca89d8742421e",
-      "target_postimage_sha256": "5a4d7bbd92429d2e3daf8c3a857abfd79189bbf1fc9450915f9ca89d8742421e",
-      "target_postimage_git_blob": "de534edb6fcd76ca188b1c61a2d30b7be47c98da",
+      "target_preimage_sha256": "bd192d5a81b3b331f8df75e09a4c3f0e5c462b5e39c3a72a7a020acb6e2e6b38",
+      "target_postimage_sha256": "bd192d5a81b3b331f8df75e09a4c3f0e5c462b5e39c3a72a7a020acb6e2e6b38",
+      "target_postimage_git_blob": "e83cb8477c803ebe2e6fe8b857af2524fe6a1328",
       "target_rule": "KEEP the current checked endpoint and resident-window arithmetic byte for byte. The historical overflow repair is not reapplied; retain zero-count, valid edit and refusal-before-mutation behavior.",
       "public_api": "Existing M3WindowPlan public/protected descriptors unchanged; no widget or native host API is introduced.",
       "status": "ALREADY_RECEIVED_KEEP_RECEIVING_METADATA_PR_OPEN_DRAFT_NO_PHASE_PROMOTION",
@@ -1094,9 +1094,9 @@
       "canonical_recipe": {
         "name": "jdk.internal.m3.rewrite.M3CurrentMasterConvergence20261019",
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3CurrentMasterConvergence20261019.java",
-        "source_sha256": "747023751892d1e8fe4e501411ab1aaf270abbd6cce3180a595717f7bcc85f6f",
+        "source_sha256": "a736dbf73a39ee791d15aa585798c3d53eada2d7885e67e8c8c2530529e174cd",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-current-master-convergence-20261019/manifest.tsv",
-        "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+        "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
         "canonical_repository": "hsoliwal/com.synexia",
         "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
         "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
@@ -1119,7 +1119,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "whole_reactor": "NOT_RUN",
-          "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
           "log_sha256": "d6bf20f3fd1ae04177b406b727c8679f8266880ed0800b057d31dcb6fde2e191"
         }
       },
@@ -1171,7 +1171,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "whole_reactor": "NOT_RUN",
-          "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
           "log_sha256": "d6bf20f3fd1ae04177b406b727c8679f8266880ed0800b057d31dcb6fde2e191"
         },
         {
@@ -1184,7 +1184,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "state": "PASS",
           "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
-          "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
           "files": 657,
           "main_java": 268,
           "test_java": 264,
@@ -1214,7 +1214,7 @@
           "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT",
           "state": "PASS",
           "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
-          "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+          "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
           "tests": 477,
           "successful": 477,
           "failures": 0,
@@ -1246,9 +1246,9 @@
       "historical_canonical_recipe": {
         "name": "jdk.internal.m3.rewrite.M3ViewConvergence20261019",
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ViewConvergence20261019.java",
-        "source_sha256": "fad0237f22539813bd0000a93b7e41e97a13ff0652da30f5a9233ce0fe6ac002",
+        "source_sha256": "e4af2b1882f42fb21f93c6e8c88150e3f5a8932ea094d5686cf6e3121c7ee22d",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-view-convergence-20261019/manifest.tsv",
-        "manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+        "manifest_sha256": "c4a690bdf550af84ba7dc69ac1d96b8360fb41748c0928fd09ef2a5d683a4fd8",
         "canonical_repository": "hsoliwal/com.synexia",
         "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
         "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
@@ -1267,7 +1267,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
-          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "final_view_manifest_sha256": "c4a690bdf550af84ba7dc69ac1d96b8360fb41748c0928fd09ef2a5d683a4fd8",
           "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
@@ -1283,9 +1283,9 @@
       "current_source_admission": {
         "state": "PASS",
         "source_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
-        "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
-        "before_sha256": "5a4d7bbd92429d2e3daf8c3a857abfd79189bbf1fc9450915f9ca89d8742421e",
-        "after_sha256": "5a4d7bbd92429d2e3daf8c3a857abfd79189bbf1fc9450915f9ca89d8742421e",
+        "manifest_sha256": "0360617760458754761be8bad4bdae334b5764058960a09db7e2b8ffcf282075",
+        "before_sha256": "bd192d5a81b3b331f8df75e09a4c3f0e5c462b5e39c3a72a7a020acb6e2e6b38",
+        "after_sha256": "bd192d5a81b3b331f8df75e09a4c3f0e5c462b5e39c3a72a7a020acb6e2e6b38",
         "canonical_before_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/jdk/m3/collections/M3WindowPlan.java",
         "canonical_after_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/jdk/m3/collections/M3WindowPlan.java",
         "disposition": "KEEP"
@@ -1296,16 +1296,16 @@
       "source": "hsoliwal/M3JDK21 / m3/ports/swing-viewport/src/main/java/jdk/m3/swing/viewport/M3ViewportBinding.java",
       "source_commit": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
       "source_path": "m3/ports/swing-viewport/src/main/java/jdk/m3/swing/viewport/M3ViewportBinding.java",
-      "source_blob": "33a73cef5b34ad9aceb73799e996b5e5a2726fa3",
-      "source_sha256": "94101f8fe12a9dc4d5856fc3aff1006fbbd5722cbca17b7cede65b3d5a669b21",
+      "source_blob": "a7dfdd5af536610948264f09b7a6ff1ffb755051",
+      "source_sha256": "df717cfa7b73bbfee3c58728718c56ad50af19afd610b08ce511bd4ec36690f3",
       "source_role": "ADAPT existing first-party target owner; new private lifetime repair expressed by the canonical successor recipe",
       "target": "jdk.m3.swing.viewport.M3ViewportBinding",
       "target_path": "m3/ports/swing-viewport/src/main/java/jdk/m3/swing/viewport/M3ViewportBinding.java",
       "target_module": "m3/ports/swing-viewport",
       "target_base_commit": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
-      "target_preimage_sha256": "94101f8fe12a9dc4d5856fc3aff1006fbbd5722cbca17b7cede65b3d5a669b21",
-      "target_postimage_sha256": "b5954005074667174f2254c77cbe531c41ed7dcf12a8c05811b5e341d0a11115",
-      "target_postimage_git_blob": "b5027954f28caf5deefa0163a32b6407ee03f783",
+      "target_preimage_sha256": "df717cfa7b73bbfee3c58728718c56ad50af19afd610b08ce511bd4ec36690f3",
+      "target_postimage_sha256": "f0659cc3ef8c5cabeccb34f8e6109ccd325a3c257e295b6ff93beb281e7ee45b",
+      "target_postimage_git_blob": "1af2428e36b8ee9b484fe7dabc76866308a933a3",
       "target_rule": "Keep one private subscribed-JViewport reference. Reconcile installation and parent changes by detaching the former listener and attaching the actual new parent exactly once; detached components have no obsolete viewport subscription. Geometry and sync bodies remain unchanged.",
       "public_api": "Existing binding and nested Target public/protected descriptors unchanged; no public close/dispose API, replacement viewport or mobile host.",
       "status": "CURRENT_SOURCE_ADMITTED_REUSE_BOUNDED_EXECUTION_RECEIVING_PR_OPEN_DRAFT_NO_PHASE_PROMOTION",
@@ -1315,9 +1315,9 @@
       "canonical_recipe": {
         "name": "jdk.internal.m3.rewrite.M3SwingConvergence20261019",
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SwingConvergence20261019.java",
-        "source_sha256": "0c3f9ca25cd7180ea5e4ba4bf98a996a69bb5a3965aa7855d31cfbe7e0a567fd",
+        "source_sha256": "d1d3982714580a46b96028c4e772d7bd8df87f2dd47443784f20a3b58a753b56",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-convergence-20261019/manifest.tsv",
-        "manifest_sha256": "11f3d4890741deaa42323a11069c8c2287613dbf1f57db450e80cd8404d3781f",
+        "manifest_sha256": "8c1d7492734d8151271ce11fdd23b3b77bdc68308b95c560c2b0792fd421a46b",
         "canonical_repository": "hsoliwal/com.synexia",
         "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
         "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
@@ -1336,7 +1336,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
-          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "final_view_manifest_sha256": "c4a690bdf550af84ba7dc69ac1d96b8360fb41748c0928fd09ef2a5d683a4fd8",
           "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
@@ -1468,7 +1468,7 @@
       "canonical_recipe": {
         "name": "jdk.internal.m3.rewrite.M3SwingUiConvergence20261019",
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SwingUiConvergence20261019.java",
-        "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
+        "source_sha256": "7b36ecc7e50a11a2e8e65ca6c984a6ec6398988434a6005c78e21b93e39cbe62",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
         "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
         "canonical_repository": "hsoliwal/com.synexia",
@@ -1489,7 +1489,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
-          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "final_view_manifest_sha256": "c4a690bdf550af84ba7dc69ac1d96b8360fb41748c0928fd09ef2a5d683a4fd8",
           "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
@@ -1628,7 +1628,7 @@
       "canonical_recipe": {
         "name": "jdk.internal.m3.rewrite.M3SwingUiConvergence20261019",
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SwingUiConvergence20261019.java",
-        "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
+        "source_sha256": "7b36ecc7e50a11a2e8e65ca6c984a6ec6398988434a6005c78e21b93e39cbe62",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
         "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
         "canonical_repository": "hsoliwal/com.synexia",
@@ -1649,7 +1649,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
-          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "final_view_manifest_sha256": "c4a690bdf550af84ba7dc69ac1d96b8360fb41748c0928fd09ef2a5d683a4fd8",
           "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
@@ -1788,7 +1788,7 @@
       "canonical_recipe": {
         "name": "jdk.internal.m3.rewrite.M3SwingUiConvergence20261019",
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SwingUiConvergence20261019.java",
-        "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
+        "source_sha256": "7b36ecc7e50a11a2e8e65ca6c984a6ec6398988434a6005c78e21b93e39cbe62",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
         "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
         "canonical_repository": "hsoliwal/com.synexia",
@@ -1809,7 +1809,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
-          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "final_view_manifest_sha256": "c4a690bdf550af84ba7dc69ac1d96b8360fb41748c0928fd09ef2a5d683a4fd8",
           "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
@@ -1948,7 +1948,7 @@
       "canonical_recipe": {
         "name": "jdk.internal.m3.rewrite.M3SwingUiConvergence20261019",
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SwingUiConvergence20261019.java",
-        "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
+        "source_sha256": "7b36ecc7e50a11a2e8e65ca6c984a6ec6398988434a6005c78e21b93e39cbe62",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
         "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
         "canonical_repository": "hsoliwal/com.synexia",
@@ -1969,7 +1969,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
-          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "final_view_manifest_sha256": "c4a690bdf550af84ba7dc69ac1d96b8360fb41748c0928fd09ef2a5d683a4fd8",
           "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
@@ -2108,7 +2108,7 @@
       "canonical_recipe": {
         "name": "jdk.internal.m3.rewrite.M3SwingUiConvergence20261019",
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SwingUiConvergence20261019.java",
-        "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
+        "source_sha256": "7b36ecc7e50a11a2e8e65ca6c984a6ec6398988434a6005c78e21b93e39cbe62",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
         "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
         "canonical_repository": "hsoliwal/com.synexia",
@@ -2129,7 +2129,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
-          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "final_view_manifest_sha256": "c4a690bdf550af84ba7dc69ac1d96b8360fb41748c0928fd09ef2a5d683a4fd8",
           "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
@@ -2268,7 +2268,7 @@
       "canonical_recipe": {
         "name": "jdk.internal.m3.rewrite.M3SwingUiConvergence20261019",
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SwingUiConvergence20261019.java",
-        "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
+        "source_sha256": "7b36ecc7e50a11a2e8e65ca6c984a6ec6398988434a6005c78e21b93e39cbe62",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
         "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
         "canonical_repository": "hsoliwal/com.synexia",
@@ -2289,7 +2289,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
-          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "final_view_manifest_sha256": "c4a690bdf550af84ba7dc69ac1d96b8360fb41748c0928fd09ef2a5d683a4fd8",
           "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
@@ -2428,7 +2428,7 @@
       "canonical_recipe": {
         "name": "jdk.internal.m3.rewrite.M3SwingUiConvergence20261019",
         "source_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SwingUiConvergence20261019.java",
-        "source_sha256": "03e17219365378a2f1773c36bccf52f54c49ca3e2a343a8cb137276532ee5f3e",
+        "source_sha256": "7b36ecc7e50a11a2e8e65ca6c984a6ec6398988434a6005c78e21b93e39cbe62",
         "manifest_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-swing-ui-convergence-20261019/manifest.tsv",
         "manifest_sha256": "8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16",
         "canonical_repository": "hsoliwal/com.synexia",
@@ -2449,7 +2449,7 @@
           "skipped": 0,
           "java_lst": "NOT_RUN",
           "final_manifest_rule": "PASS for final view 21 targets / 8 changes with RowTree EXACT_KEEP, binding 7 targets / 3 changes, and Swing UI 12 targets / 12 changes. Requalify any later source or manifest change.",
-          "final_view_manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+          "final_view_manifest_sha256": "c4a690bdf550af84ba7dc69ac1d96b8360fb41748c0928fd09ef2a5d683a4fd8",
           "log_sha256": "a0d752f6748c8c4aa27cf564b18343951481d9e06a6c9bfc277509c5ccea55de",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/successor-sdk-final-selection/receipt.json"
@@ -2810,8 +2810,8 @@
               "int longestProperBorderLength()",
               "long metadataPayloadBytes()"
             ],
-            "sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
-            "git_blob_sha1": "65f259e23d818b9b35052feff37198f5ddf567b4",
+            "sha256": "5f936a3c6e69ca487eff6a0665ada01546750d9d87ce85ee50a337a4236233d0",
+            "git_blob_sha1": "317108234d7692410517731b325f7d28de99354e",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/m3/migration-pass1-prefix-evidence-20261002"
@@ -2921,8 +2921,8 @@
             "path": "m3/core/src/jdk/m3/text/M3StringPiece.java",
             "symbol": "jdk.m3.text.M3StringPiece",
             "signatures": [],
-            "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
-            "git_blob_sha1": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+            "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755",
+            "git_blob_sha1": "62506fb9b3cff0e6f24e856648528db58c45b92b",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
@@ -2934,8 +2934,8 @@
             "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
             "symbol": "jdk.m3.text.JoinedM3StringPiece",
             "signatures": [],
-            "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
-            "git_blob_sha1": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
+            "sha256": "1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7",
+            "git_blob_sha1": "5022e9811ce9391671c794446c7772569cfd369f",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
@@ -2947,8 +2947,8 @@
             "path": "m3/core/src/jdk/m3/text/LocalM3Arena.java",
             "symbol": "jdk.m3.text.LocalM3Arena",
             "signatures": [],
-            "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
-            "git_blob_sha1": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
+            "sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4",
+            "git_blob_sha1": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
@@ -2960,8 +2960,8 @@
             "path": "m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
             "symbol": "jdk.m3.text.LocalM3StringPiece",
             "signatures": [],
-            "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
-            "git_blob_sha1": "6b745c9472144ad6de01de4d06a533974e558fb1",
+            "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad",
+            "git_blob_sha1": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
@@ -2973,8 +2973,8 @@
             "path": "m3/core/src/jdk/m3/text/StorageIdentity.java",
             "symbol": "jdk.m3.text.StorageIdentity",
             "signatures": [],
-            "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
-            "git_blob_sha1": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
+            "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354",
+            "git_blob_sha1": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
@@ -3053,7 +3053,7 @@
             "symbol": "jdk.internal.m3.indexstring.FrozenChars",
             "signatures": [],
             "sha256": null,
-            "git_blob_sha1": "a8f016a1764aea6e970bc60e38f345804e82a84e",
+            "git_blob_sha1": "e7cecf3e32eca949dcf6616455caab6c62fd909d",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -4760,8 +4760,8 @@
               "static <T> MIndexVersionTable<T> prepare(List<MIndexString>, Scheme<T>, int, MIndexProgressMonitor)",
               "int[] between(MIndexString, boolean, MIndexString, boolean)"
             ],
-            "sha256": "a6cf406b99ce4064e23de1d9eddeb583b6b0f31f6ae74a06c8f98f8f8b330542",
-            "git_blob_sha1": "1675e6d7e35e3371bce2ba9b53716a00b6fd67da",
+            "sha256": "6f2ba0e4dcf2cd131e4907519b0ba91dabd41d68c5253a16834d9bb37ac160c2",
+            "git_blob_sha1": "e30893f329e957658fb6d408a6d361ce7df6c0d5",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -4881,8 +4881,8 @@
             "signatures": [
               "MIndexLibraryRelease(MIndexString origin, MIndexString group, MIndexString artifact, MIndexString rawVersion, MIndexString extension, MIndexString classifier, MIndexString contentSha256)"
             ],
-            "sha256": "fb34b0ca5dd91bcc45df89521e934af07139a3630c09b012b19876a0e54be422",
-            "git_blob_sha1": "9df260247ec226392832a01fcb99f6bc56b151c6",
+            "sha256": "b2ac4a895d541380c37f6300e1d4b04d5827db486517159b46744e64ff5acbd9",
+            "git_blob_sha1": "e1ca92f9b8e1134a799903f52b525613bbf25a5f",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -5000,8 +5000,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.vm.MIndexVmSession"
             ],
-            "sha256": "bdeb857abaa302a40c4f542c23c4629eb0091f04d56d60545d6ca51325ff92a4",
-            "git_blob_sha1": "d2fb810dccd53b5ecccde9063a348199f78e0672",
+            "sha256": "867a9ce0fb71162b38a68bd1e3d12b724bd61b15b844197a3b81f32cb4cc18cf",
+            "git_blob_sha1": "74f0fa06fc5ddb3417efdac3a8282e5f2488f07e",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -5121,8 +5121,8 @@
               "signatures": [
                 "jdk.internal.m3.mindex.vm.MIndexVmSession"
               ],
-              "sha256": "bdeb857abaa302a40c4f542c23c4629eb0091f04d56d60545d6ca51325ff92a4",
-              "git_blob_sha1": "d2fb810dccd53b5ecccde9063a348199f78e0672",
+              "sha256": "867a9ce0fb71162b38a68bd1e3d12b724bd61b15b844197a3b81f32cb4cc18cf",
+              "git_blob_sha1": "74f0fa06fc5ddb3417efdac3a8282e5f2488f07e",
               "fingerprint": null,
               "revision_role": "pinned",
               "tracking_ref": "refs/heads/develop"
@@ -5165,8 +5165,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.vm.MIndexVmPrecomputeKey"
             ],
-            "sha256": "406f451222b1f6e950c28439316fdbcd6e9cfb9463658e1deec85cfe41197f1a",
-            "git_blob_sha1": "fc9aef1cce8e43ca81fd922ca6ea406417b1334b",
+            "sha256": "424e07da19c2218db8a705776ed2884146637d4325921a06c670afe3c96129e7",
+            "git_blob_sha1": "d7eec9579f614ff521683475df3eb5b825159066",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -5286,8 +5286,8 @@
               "signatures": [
                 "jdk.internal.m3.mindex.vm.MIndexVmPrecomputeKey"
               ],
-              "sha256": "406f451222b1f6e950c28439316fdbcd6e9cfb9463658e1deec85cfe41197f1a",
-              "git_blob_sha1": "fc9aef1cce8e43ca81fd922ca6ea406417b1334b",
+              "sha256": "424e07da19c2218db8a705776ed2884146637d4325921a06c670afe3c96129e7",
+              "git_blob_sha1": "d7eec9579f614ff521683475df3eb5b825159066",
               "fingerprint": null,
               "revision_role": "pinned",
               "tracking_ref": "refs/heads/develop"
@@ -5330,8 +5330,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexClass"
             ],
-            "sha256": "bd4e1312397b2d0b836f69aa32be6f7846cce69d30abc814936d0a88af06ea7c",
-            "git_blob_sha1": "488bfc02c9830b333f45c631a9fa933cec56ea91",
+            "sha256": "6a5e0a7a89a39b8b19d919fee8c781441a7b285e627d2ea723b20cb7e3c0376b",
+            "git_blob_sha1": "754a52297ff8c9ce34ffe7c765f8d7c684e693e4",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -5452,7 +5452,7 @@
                 "jdk.internal.m3.mindex.classindex.MIndexClass"
               ],
               "sha256": null,
-              "git_blob_sha1": "488bfc02c9830b333f45c631a9fa933cec56ea91",
+              "git_blob_sha1": "754a52297ff8c9ce34ffe7c765f8d7c684e693e4",
               "fingerprint": null,
               "revision_role": "pinned",
               "tracking_ref": "refs/heads/develop"
@@ -5495,8 +5495,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexClassIndex"
             ],
-            "sha256": "047eb00e579a0bed899419373e19514f0e06876efec39b9cfa2bca2d391196aa",
-            "git_blob_sha1": "35632a8688201f2a6849b52e325daa27ae3a7bfe",
+            "sha256": "f169228bd954975a1254204a39e99187e68a99ca09f4f472dcb500349324d987",
+            "git_blob_sha1": "eead494947962c5099c6decfbcf546163249164d",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -5511,8 +5511,8 @@
               "lowerBound(int[],int,int,int)",
               "upperBound(int[],int,int,int)"
             ],
-            "sha256": "993c38054e42c14efe27b52fa0b1e4d322aa17a2f8bdf7e8a460d4adbabe9e35",
-            "git_blob_sha1": "44975a54d368ecaf774683ab5d64bd14bb070209",
+            "sha256": "9e9c2eb9edfed393379793e634573ea33a87e2220cbfd7f761325fc326a087d7",
+            "git_blob_sha1": "0e40bec4b02bde697eba68b9817cc46c566987e2",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -5613,7 +5613,7 @@
             "Counterpart-row effective declared release",
             "Exact VM-local precompute context",
             "No application dependency",
-            "Pre-existing active-pin drift reconciliation to actual receiving base 8e868958f017482cfd6c5085869263c92a011cf6 only; no runtime edit or status/contract qualification change. Complete original record: m3/docs/android-efficiency-20261020/history/class-index-counterpart-before.json SHA256 349fb2885f2e8914d4e4c6714862a8c7f04b3991c013a06b26a0af4d20bd3320."
+            "Pre-existing active-pin drift reconciliation to actual receiving base 8e868958f017482cfd6c5085869263c92a011cf6 only; no runtime edit or status/contract qualification change. Complete original record: m3/docs/android-efficiency-20261020/history/class-index-counterpart-before.json SHA256 b50cce55526cd14d0c7fe91c65b70cf94b7655d0208a493f341a4bc0a2fa5f54."
           ],
           "pending": [
             "Automatic Class/ClassLoader consumer and lifecycle hooks, module/agent/CDS/JNI/JIT admission",
@@ -5634,7 +5634,7 @@
                 "jdk.internal.m3.mindex.classindex.MIndexClassIndex"
               ],
               "sha256": null,
-              "git_blob_sha1": "35632a8688201f2a6849b52e325daa27ae3a7bfe",
+              "git_blob_sha1": "eead494947962c5099c6decfbcf546163249164d",
               "fingerprint": null,
               "revision_role": "pinned",
               "tracking_ref": "refs/heads/develop"
@@ -5675,7 +5675,7 @@
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim. Pre-existing active-pin drift reconciliation to actual receiving base 8e868958f017482cfd6c5085869263c92a011cf6 only; no runtime edit or status/contract qualification change. Complete original record: m3/docs/android-efficiency-20261020/history/class-index-counterpart-before.json SHA256 349fb2885f2e8914d4e4c6714862a8c7f04b3991c013a06b26a0af4d20bd3320."
+        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim. Pre-existing active-pin drift reconciliation to actual receiving base 8e868958f017482cfd6c5085869263c92a011cf6 only; no runtime edit or status/contract qualification change. Complete original record: m3/docs/android-efficiency-20261020/history/class-index-counterpart-before.json SHA256 b50cce55526cd14d0c7fe91c65b70cf94b7655d0208a493f341a4bc0a2fa5f54."
       },
       {
         "id": "m3.counterpart.MIndexAST",
@@ -6022,8 +6022,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexClassBoundary"
             ],
-            "sha256": "ea78f4d9e5870f6951dba8a124019aa96396261aac041c8ad8c247a6ddc35c3a",
-            "git_blob_sha1": "9166e2168afc6a78fe8bdb7e570defc178c7c35e",
+            "sha256": "016db454989437ba213e2af47d0273f70243a2d0bede85f8e79ab8c6772a5150",
+            "git_blob_sha1": "e414f8c8b247ea38473d368eadbde3f98702e682",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -6155,8 +6155,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexJvmDescriptor"
             ],
-            "sha256": "0e0ddfc53acaeb28137319fd20ee5005f9d7231949ebd3106193c287f13be9b8",
-            "git_blob_sha1": "d0eb96ae49c0456c8d31f1e714882b525b4c9a97",
+            "sha256": "3fb76c976a34e1808f42d35cc194ba490316fab8e9d4176c071180aefb362341",
+            "git_blob_sha1": "2e8995bd7b5995e908cf8e4f6c80c86244013f6d",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -6235,7 +6235,7 @@
           "id": "jdk.m3.rewrite.backport.Descriptor",
           "version": "snapshot@39702564163c017f9dc0350a305b032b06274857",
           "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
-          "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
+          "sha256": "8006b173253ea7502efe7f7a77738b65f9df9e2871d4d6c29ff4fb8fb058c8c6",
           "preconditions": [
             "Use the retained M3Jdk21HashPinnedSnapshotRecipe and exact jdk22-descriptor manifest.",
             "The owner must match df17c48e54de060060e4393e5c2f3e8e2f068bad38a69576a82709cc6d4cbdb9 or 1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67; the test is ABSENT or exact postimage.",
@@ -6332,8 +6332,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexMember"
             ],
-            "sha256": "4230b2df028a54d833284d373c044b58c4ffde0da1f15b394372d9cbff6e97da",
-            "git_blob_sha1": "70cd228801272d8e5fcb68bce280d2cb842e5ae8",
+            "sha256": "3acea5d4193a33fd6552e883f862243a23757d74855c51a450fa22ada1c0e350",
+            "git_blob_sha1": "ee7b754cd62c9bfccdea84f28c8f036917eb1126",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -6465,8 +6465,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexMemberKind"
             ],
-            "sha256": "76c8a68d9f1bafa36df848da02c1b00c4d738e7ff09c63d6761d6c8f892e20cb",
-            "git_blob_sha1": "9ba32db4528c74535a68c656b891d08924b75dc0",
+            "sha256": "196619a117a3783ad02487a3b05d8f22066a3b1667cabbd3cb17d63bba9dd4dc",
+            "git_blob_sha1": "f68a9ce030ace43d20c626c3c6f6bf8c54a0ece0",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -6598,8 +6598,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexMemberFlags"
             ],
-            "sha256": "febb6a32912e4149ca5521b149c86554f37d978382242589603aa9265139dfb9",
-            "git_blob_sha1": "9a84c2a18fecd4b67a0c503527347e2d4f75d2c8",
+            "sha256": "680cf4bd7fb80ee6a760ed0f15220c060e37a1c51cac60821fda6a363ef69154",
+            "git_blob_sha1": "34d8b046955d327ef3917da907a71a2fb20743a8",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -6731,8 +6731,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexClassFlags"
             ],
-            "sha256": "bc3fcc4bc3f582e6565c1c8509038217e7a7360dbb0e290c66b03090c0f6961e",
-            "git_blob_sha1": "d8131ebce1c01a014a9320e2ec771673f2d06b5c",
+            "sha256": "08f2e889d5e35db1a18600db4a9abbd8b6cae0ba67978363d7b1f675c4f38853",
+            "git_blob_sha1": "33d406046f18d71c255e3ef130edb7a464260782",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -6864,8 +6864,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexField"
             ],
-            "sha256": "ae3d0439814c26aa0a012984aa6d4debef70bd31590b403f9643634c231cd8b4",
-            "git_blob_sha1": "bc93b18d5ee4867a841ac036ffb35dcd1e72c3f4",
+            "sha256": "56d18634a23f188db2da23a790412ce393b3223689c2977899b79143043b4e51",
+            "git_blob_sha1": "4a41ee9ccca3a1e33514e45f38aa8dff85d7162d",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -6997,8 +6997,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexMethod"
             ],
-            "sha256": "b11190cdc801a2ce46078fa04d364d9362402c3aef4ff16aebac05a56898aaaa",
-            "git_blob_sha1": "41268ab2541b70fef70767557228bf568d9a01b7",
+            "sha256": "47acb7331e94c07ae48662e9b4a0d6e7d5189ea698e7a189c89a31bc306cb85a",
+            "git_blob_sha1": "b9bba7c3ada958ff1c2f6227459a78532dcdfd7f",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -7130,8 +7130,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexConstructor"
             ],
-            "sha256": "3b2b432ebb29f5f08e30b8f9194a2675f052a238f5f16432ac9e3d26e9d489c2",
-            "git_blob_sha1": "24be84434f65bffed5a5f0c609cbe596ae2b4985",
+            "sha256": "0f7d1f2c804978e9188dc63d9cfe9127654ad8ebfcaf3995761d77a50a862d61",
+            "git_blob_sha1": "5df90a368346a5cd4875119cfbff0d973598effa",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -7263,8 +7263,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexRecordComponent"
             ],
-            "sha256": "b63a7f5a59d3badd7340e00021f2eaa410645d0f4a5d25a5a570797897969457",
-            "git_blob_sha1": "56d5b4adead17be7fef8e4b750f13fdf75d98a31",
+            "sha256": "b340b86517b838f43eed7087477b8f8bed47e19e23b826308e2a81181e49dce5",
+            "git_blob_sha1": "17af04a726daa4fcda4aa6bf0abbd6e3a177ba9e",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -7611,8 +7611,8 @@
               "package-private static boolean eligible(J.MethodDeclaration)",
               "package-private static boolean atomized(J.MethodDeclaration)"
             ],
-            "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb",
-            "git_blob_sha1": "0041adab5913304874f5063fc2b982ff3cc1e065",
+            "sha256": "d2f8d2285d8b9b90b30f0906e2373efab8a25d9c84f0eefc252ed7acf2e20719",
+            "git_blob_sha1": "44935f75d9736744fbe0653774e324b140eea0be",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
@@ -7708,7 +7708,7 @@
           "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-merge-recovery-20261006-mapping-v04",
           "version": "0.1.0-SNAPSHOT",
           "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-          "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+          "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
           "preconditions": [
             "Four exact reviewed current mapping preimages at 09075810b55229662329a158923287e8a7118f86.",
             "Preserve all 55 ordered IDs, 53 non-JCC records, all 34 current top-level mapping objects, precompute ownership and 20 existing gates.",
@@ -8118,8 +8118,8 @@
                 "package-private static boolean eligible(J.MethodDeclaration)",
                 "package-private static boolean atomized(J.MethodDeclaration)"
               ],
-              "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb",
-              "git_blob_sha1": "0041adab5913304874f5063fc2b982ff3cc1e065",
+              "sha256": "d2f8d2285d8b9b90b30f0906e2373efab8a25d9c84f0eefc252ed7acf2e20719",
+              "git_blob_sha1": "44935f75d9736744fbe0653774e324b140eea0be",
               "fingerprint": null,
               "revision_role": "pinned",
               "tracking_ref": "refs/heads/master"
@@ -8332,7 +8332,7 @@
           "id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-merge-recovery-20261006-mapping-v04",
           "version": "0.1.0-SNAPSHOT",
           "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-          "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+          "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
           "preconditions": [
             "Four exact reviewed current mapping preimages at 09075810b55229662329a158923287e8a7118f86.",
             "Preserve all 55 ordered IDs, 53 non-JCC records, all 34 current top-level mapping objects, precompute ownership and 20 existing gates.",
@@ -8569,8 +8569,8 @@
               "boolean testPrecomputed(Facts)",
               "Facts Facts.concat(Facts,int)"
             ],
-            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
-            "git_blob_sha1": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea",
+            "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e",
+            "git_blob_sha1": "4e1d24af8d3054a27ae3b6f2d8eebd6486225118",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -8742,8 +8742,8 @@
             "signatures": [
               "jdk.internal.m3.common.collections.SegmentedAddress28"
             ],
-            "sha256": "5844dea8e82d79d4beedaa2254956a3a2bb1db20ee39fc38a6d6df59e39a3c37",
-            "git_blob_sha1": "4d7629fac2a5fc13e2008570d8b62caacdd800bc",
+            "sha256": "92d4ae1d60e6ce6aab79ef1b91e6de4c076e02bc0a0603a6b2fb22ca21c1d881",
+            "git_blob_sha1": "6b931aefdb4afaf8765a7228dcad5bc9e436c9f8",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -8881,8 +8881,8 @@
             "signatures": [
               "jdk.internal.m3.common.collections.SegmentedIntLane28"
             ],
-            "sha256": "175f3e0beb5b9e1aca7196491d19a54a95ed2218253951677e898615ba3ed8ac",
-            "git_blob_sha1": "5e71da1dd3fdc1640dc1771c952796a6c229281b",
+            "sha256": "a9be9f532e5c3606fda0ff30599227301133ca70e9d1fcb1f1e2182ef72f5488",
+            "git_blob_sha1": "2a42412b95a5ee07c4e716fe37c530b254fedec1",
             "fingerprint": null,
             "revision_role": "pinned"
           },
@@ -8895,8 +8895,8 @@
             "signatures": [
               "jdk.internal.m3.common.collections.SegmentedIntLane28"
             ],
-            "sha256": "bbba8cc495480bbde1d8e60ecb6b5c5ba3b8bf0583477622e3d547e5ba546ac0",
-            "git_blob_sha1": "993fe654bfcb4039a6a2fa11513751e7eb2c9729",
+            "sha256": "b2698128170550f44582cc9bafd0b1ba07c2bde3f06fed50829b3ef654ce6d9c",
+            "git_blob_sha1": "1613a57aa543cacb6f53f5a1c3bc0a10cf4a4cee",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -9036,8 +9036,8 @@
             "signatures": [
               "jdk.internal.m3.common.collections.SegmentedLongLane28"
             ],
-            "sha256": "237289bdec5fe8d6f142dfffab22a72eebc499ea1b54f0a350bbe09c0e801394",
-            "git_blob_sha1": "6105671f09f5a5e27147430b474719daab2b1e29",
+            "sha256": "7fdce7c2cfe529251c69cdf186d4cabc8333c46692df78cbabdae56aa2a023e2",
+            "git_blob_sha1": "f7b3a7f0f4f4b896ad8325a96e90331881e69259",
             "fingerprint": null,
             "revision_role": "pinned"
           },
@@ -9050,8 +9050,8 @@
             "signatures": [
               "jdk.internal.m3.common.collections.SegmentedLongLane28"
             ],
-            "sha256": "4b6c03da1a13274ce736039359538ff3ffc1ff1586714dba95e769574907ab8e",
-            "git_blob_sha1": "0ca5ca4cbd17589c2b2c33cbda4433ad6319049c",
+            "sha256": "c43673c769bc23dc592dba3a1da9fc2aebc804640dde102f7c749e71f59b415c",
+            "git_blob_sha1": "8f31549c019e33e0200f27c84aea154cbfc2f647",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -9191,8 +9191,8 @@
             "signatures": [
               "jdk.internal.m3.common.collections.SegmentedBitLane28"
             ],
-            "sha256": "fe535b8a1f3b22fa1a63455c9078d7b911c72a87a3255714f66e3639d11000af",
-            "git_blob_sha1": "8932039f353507225f31dfce7c146f5165ccfc54",
+            "sha256": "147021a606f135a4b6b0f347ce90354ee15aef12c229ec5c02a30935216a1e70",
+            "git_blob_sha1": "9bb7173afa861c05b62a557db63e3a6692ddfe4c",
             "fingerprint": null,
             "revision_role": "pinned"
           },
@@ -9205,8 +9205,8 @@
             "signatures": [
               "Java_jdk_internal_m3_common_collections_SegmentedBitLane28_cardinality0"
             ],
-            "sha256": "da2266d8ec93478f4fbeb6a5403e14ce8dcd6a6795c43a5d4230b2a97ef8eb0e",
-            "git_blob_sha1": "1ee8509cdd05a7edcfc732b3c5947dd78b30ce3a",
+            "sha256": "5a4ba31368df4b8c3f8e71275b4db583fcba0be37e5b39d07de8112db44319d5",
+            "git_blob_sha1": "20549bee772f30ffabdc406bb6ab52c7435d2b01",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -9311,7 +9311,7 @@
           "target_adaptations": [
             "Internal package/name",
             "JDK libjava ownership for bit count JNI",
-            "Pre-existing active-pin drift reconciliation to actual receiving base 8e868958f017482cfd6c5085869263c92a011cf6 only; no runtime edit or status/contract qualification change. Complete original record: m3/docs/android-efficiency-20261020/history/segmented-bit-lane-28-before.json SHA256 7447594bd333dff329e320c6af54b00a3b6ac5e7b45a10861ad96080000f9ddb."
+            "Pre-existing active-pin drift reconciliation to actual receiving base 8e868958f017482cfd6c5085869263c92a011cf6 only; no runtime edit or status/contract qualification change. Complete original record: m3/docs/android-efficiency-20261020/history/segmented-bit-lane-28-before.json SHA256 841af749c3d1980312ba3f96e6bbb94897470bb103376342aebbe6f9cd376c90."
           ],
           "pending": [
             "Full-image validation of normal compiled kernels and the retained M3 interpreter boundary",
@@ -9384,7 +9384,7 @@
           "supersedes": []
         },
         "source_state": "implemented",
-        "observation": "The older jdk.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement. Source recovery: LOST at master 87590cb, restored through the version 2 recipe; historical record retained in history/9af35b3/mapping-records.json. Pre-existing active-pin drift reconciliation to actual receiving base 8e868958f017482cfd6c5085869263c92a011cf6 only; no runtime edit or status/contract qualification change. Complete original record: m3/docs/android-efficiency-20261020/history/segmented-bit-lane-28-before.json SHA256 7447594bd333dff329e320c6af54b00a3b6ac5e7b45a10861ad96080000f9ddb."
+        "observation": "The older jdk.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement. Source recovery: LOST at master 87590cb, restored through the version 2 recipe; historical record retained in history/9af35b3/mapping-records.json. Pre-existing active-pin drift reconciliation to actual receiving base 8e868958f017482cfd6c5085869263c92a011cf6 only; no runtime edit or status/contract qualification change. Complete original record: m3/docs/android-efficiency-20261020/history/segmented-bit-lane-28-before.json SHA256 841af749c3d1980312ba3f96e6bbb94897470bb103376342aebbe6f9cd376c90."
       },
       {
         "id": "m3.collections.PackedBitAtoms",
@@ -9401,8 +9401,8 @@
             "signatures": [
               "jdk.internal.m3.common.collections.PackedBitAtoms"
             ],
-            "sha256": "a8ac10ba4fd2d1fbc0f8f0a4a199e9ca1c28618a4bc17ad1702bc5598b1cfa29",
-            "git_blob_sha1": "9858def13146479794370dd56387d34edfaa95ef",
+            "sha256": "20bce3cf025430fea0351bdc4478b204d808cde04432437e689c2eddb55e0305",
+            "git_blob_sha1": "c463d9857d917263e88933a4d07902840c3f302e",
             "fingerprint": null,
             "revision_role": "pinned"
           }
@@ -9543,8 +9543,8 @@
               "boolean testPrecomputed(Facts)",
               "Facts Facts.concat(Facts,int)"
             ],
-            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
-            "git_blob_sha1": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea",
+            "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e",
+            "git_blob_sha1": "4e1d24af8d3054a27ae3b6f2d8eebd6486225118",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -9769,8 +9769,8 @@
             "signatures": [
               "MIndexRegexAutomaton"
             ],
-            "sha256": "c4cd9feb7645ccd1ef7fc66d165e33ee74fb9fbf6002d80518c228df47290b46",
-            "git_blob_sha1": "28a5c10f1b0c859694da2c2ee880667f54ddf717",
+            "sha256": "904390520e960d5df8402e6ba72f752052169f089593a741e6878b8d480e7227",
+            "git_blob_sha1": "9116b56d55c7fd7ca63cf97f9bbc3eb369e50b7d",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -9861,8 +9861,8 @@
               "boolean testPrecomputed(Facts)",
               "Facts Facts.concat(Facts,int)"
             ],
-            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
-            "git_blob_sha1": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea",
+            "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e",
+            "git_blob_sha1": "4e1d24af8d3054a27ae3b6f2d8eebd6486225118",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -10120,8 +10120,8 @@
               "native long[] composeNative(long[],long[])",
               "native long[] repeatNative(long[],long)"
             ],
-            "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa",
-            "git_blob_sha1": "ea904c0962fb976f43b45575f06f46ad198e29a2",
+            "sha256": "ae1de4b652b474c594d5fa6e8ec2d43aae720d166e885497217688c9fabae49d",
+            "git_blob_sha1": "30359b57b7b553e78355d3672119c685051ec1da",
             "fingerprint": null,
             "revision_role": "pinned"
           },
@@ -10215,7 +10215,7 @@
             "Internal M3 names and packages",
             "Runnable checkpoint replaces source IProgressMonitor",
             "Numeric-only M3StateRelation subset and renamed JNI/header symbols",
-            "Scoped state-compose refinement m3.m3jdk21.android-efficiency-20261020.state-relation-sparse; complete original record m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json SHA256 53535c80f8b2b434a4be6852a03175b831f42f73b8fa73a14ea3ec28c5ee13ac."
+            "Scoped state-compose refinement m3.m3jdk21.android-efficiency-20261020.state-relation-sparse; complete original record m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json SHA256 b694b4083d79afc4e741f8389acebd91da437f7e227eac516f73dd8c900e2b09."
           ],
           "pending": [
             "Complete source API/dependency inventory and remaining Domain/RangeIndex/lifecycle surfaces",
@@ -10247,7 +10247,7 @@
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Partial adapter/source custody and all old product gates remain. Three unchanged artifacts retain previous pins. The common C active pin moves to the SDK-generated sparse refinement at receiving runtime commit 329cd9116eca5a3b2ec081fb6760ca3e6508da7e; complete previous record is preserved at m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json SHA256 53535c80f8b2b434a4be6852a03175b831f42f73b8fa73a14ea3ec28c5ee13ac. See m3.m3jdk21.android-efficiency-20261020.state-relation-sparse for precise before/after pins and bounded host evidence."
+        "observation": "Partial adapter/source custody and all old product gates remain. Three unchanged artifacts retain previous pins. The common C active pin moves to the SDK-generated sparse refinement at receiving runtime commit 329cd9116eca5a3b2ec081fb6760ca3e6508da7e; complete previous record is preserved at m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json SHA256 b694b4083d79afc4e741f8389acebd91da437f7e227eac516f73dd8c900e2b09. See m3.m3jdk21.android-efficiency-20261020.state-relation-sparse for precise before/after pins and bounded host evidence."
       },
       {
         "id": "m3.regex.ordered-relations.dispatch",
@@ -10832,7 +10832,7 @@
           "differences": [
             "Receive existing CTZ/clear-lowest-bit traversal, intrinsic calls on nonzero words and exact original portable body.",
             "Active C SHA256 b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16 / Git blob 610ca8bab47065a49b9b58814d6392a287f4fd8b becomes SHA256 faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f / Git blob d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d.",
-            "Reconcile m3.regex.ordered-relations.adapter active C pin; complete original record is retained at m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json SHA256 53535c80f8b2b434a4be6852a03175b831f42f73b8fa73a14ea3ec28c5ee13ac."
+            "Reconcile m3.regex.ordered-relations.adapter active C pin; complete original record is retained at m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json SHA256 b694b4083d79afc4e741f8389acebd91da437f7e227eac516f73dd8c900e2b09."
           ],
           "compatibility_obligations": [
             "Keep all validation before output, dimensions1..64/bit63, sparse/dense/zero/full masks, adjacent-row reuse, ceiling termination, repetition, exact and partial aliases.",
@@ -10886,7 +10886,7 @@
           "target_adaptations": [
             "Receive existing CTZ/clear-lowest-bit traversal, intrinsic calls on nonzero words and exact original portable body.",
             "Active C SHA256 b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16 / Git blob 610ca8bab47065a49b9b58814d6392a287f4fd8b becomes SHA256 faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f / Git blob d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d.",
-            "Reconcile m3.regex.ordered-relations.adapter active C pin; complete original record is retained at m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json SHA256 53535c80f8b2b434a4be6852a03175b831f42f73b8fa73a14ea3ec28c5ee13ac."
+            "Reconcile m3.regex.ordered-relations.adapter active C pin; complete original record is retained at m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json SHA256 b694b4083d79afc4e741f8389acebd91da437f7e227eac516f73dd8c900e2b09."
           ],
           "pending": [
             "Source-built integrated M3JDK21/HotSpot and full libjava",
@@ -10953,8 +10953,8 @@
               "if(ANDROID) NDK JNI discovery",
               "target_link_options 16KiB page alignment"
             ],
-            "sha256": "b298cb31ec06b22211055e90345e3ceca2d608a6e9403317187960daa8a07c55",
-            "git_blob_sha1": "2f2439e381f755a9834e10f417fcb41f784cb465",
+            "sha256": "60631ff0d3338e78d45e2c19ce4274191383dfd88cc2cf221ae425a9fe93f4a8",
+            "git_blob_sha1": "ddb1f77a6f520a266d62258f5d3277e28f533a10",
             "fingerprint": null,
             "revision_role": "pinned"
           }

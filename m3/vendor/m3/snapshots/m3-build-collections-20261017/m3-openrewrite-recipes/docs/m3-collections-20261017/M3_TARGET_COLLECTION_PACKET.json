@@ -7,28 +7,28 @@
       "crate": "m3jdk-collection-pack-java-00-20261017",
       "engine": "JAVA",
       "target": "m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveIndexView.java",
-      "source_sha256": "4f69b71b3deb0fdd867aa90dde2fb4b762fdd9c246c8fe77689484184ca46789",
+      "source_sha256": "874378d38cee18d74072d8f5a7d44552a072cd290560dcb36d91e298a453495e",
       "context_sources": 5
     },
     {
       "crate": "m3jdk-collection-pack-java-01-20261017",
       "engine": "JAVA",
       "target": "m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveSoaStore.java",
-      "source_sha256": "b2c5d01b1397bb1951b918b8ccbdcaef148d3ceb228023f06ddceb302e6da533",
+      "source_sha256": "7bce76bc55cc3c552e463baf387287ee89100dea8b14e86659e27ae0ef661c0f",
       "context_sources": 5
     },
     {
       "crate": "m3jdk-collection-pack-java-02-20261017",
       "engine": "JAVA",
       "target": "m3/ports/collections/src/main/java/jdk/m3/util/M3RuntimeHeap.java",
-      "source_sha256": "28b34077e96b496c60006186914489aa64fa51263d9c2aaa390704ba42ddc6be",
+      "source_sha256": "e8dd77e65aeb67120cf0c4f0b955e750e45be756d942b281cf142cf44690d49f",
       "context_sources": 5
     },
     {
       "crate": "m3jdk-collection-pack-java-03-20261017",
       "engine": "JAVA",
       "target": "m3/ports/collections/src/main/java/jdk/m3/util/M3SortableTopK.java",
-      "source_sha256": "918e2dc751569e6fcda8d8a13416c62289a068bd3f9e81418240d4be5a69d6cd",
+      "source_sha256": "88dc3a4d84e46ff31d8214cb23d0944901ace649b16cf0c26ed6d1b96cd95f5a",
       "context_sources": 5
     },
     {
@@ -49,21 +49,21 @@
       "crate": "m3jdk-collection-pack-java-06-20261017",
       "engine": "JAVA",
       "target": "m3/tooling/module-packs/collections/src/main/java/module-info.java",
-      "source_sha256": "72529e9cadba24f630f84c77a243854357d8602210ac9218fa6a62dd41770a73",
+      "source_sha256": "f7e2cebd4d8c631b9f5352e2bd67f480557c98a71b215403b4eceeed67188489",
       "context_sources": 8
     },
     {
       "crate": "m3jdk-collection-pack-java-07-20261017",
       "engine": "JAVA",
       "target": "m3/tooling/module-packs/collections/src/test/java/jdk/m3/util/M3PrimitiveIndexViewFilterContract.java",
-      "source_sha256": "dbedd9430e488dfed82101668bc84f64a239d63d24672b197ee6eb6731773c82",
+      "source_sha256": "5271edd73a643d4d2a1dafa036e3d3eda71552744bce6948387adf5fdd08b411",
       "context_sources": 6
     },
     {
       "crate": "m3jdk-collection-pack-java-08-20261017",
       "engine": "JAVA",
       "target": "m3/tooling/module-packs/collections/src/test/java/jdk/m3/collections/M3CollectionsPackTest.java",
-      "source_sha256": "507a05f6939727f290c585e82a750fd05bdf52373764fd0c7ba2703a1823779d",
+      "source_sha256": "b626807d8229e5e35b4c8e1bef7ad3113731653c6619945cbe8284e7b227fbf9",
       "context_sources": 14
     },
     {

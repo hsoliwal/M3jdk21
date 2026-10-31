@@ -41,10 +41,10 @@ jobs:
           set -euo pipefail
           sha256sum --check <<'DIGESTS'
           11a04c1382f9358f9bb49da6df98fdb988144a649db30638965bfb25333b4be9  m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java
-          86157abd29f46ab8f33111382dc5442cc235b45634205be2d39c552fd57e4639  m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksSelfTest.java
-          5cf617e4dec3d22d042ce4d201a42dc8779f5fbe572bf3e62ba6ab48c3ec83ad  m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksTest.java
-          3f5a760e633762469fad5a9dcd531cb39c33d11752d79ad241e506800b26e7cb  m3/collections/src/main/native/collections/m3_index_path_masks.c
-          1cba7c9ed681fbe65653b75949558640ea5aa31a1e3c8f5d83d27f9197518020  m3/collections/recipe/index-path-masks-20261017/manifest.tsv
+          4883466fcc73cea1aaa7b443abbb5612a1e9f0c06166f0576b091b273653c02e  m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksSelfTest.java
+          3ba12ceee31693b3c202a3867f42a4fdc5acba5f9c7d96f919e4f88155af71b8  m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksTest.java
+          072e6c3d30b1fd54d8ce883ed18fde75aa6c1809a1dc0c9a2de7b7e5f571f824  m3/collections/src/main/native/collections/m3_index_path_masks.c
+          c3af2d443d0c79ee375f6ac0399a874fd5662123e4ef1af52b358c2a6f8ea28f  m3/collections/recipe/index-path-masks-20261017/manifest.tsv
           094ec75e59efa040b5d21f5f4bbf893125c1d57ee394a3c57d9ae7a902017d52  m3/collections/test_verify_index_path_masks.py
           ecd2bc317fa630f4519025f2c687b59186981278fc963a7eb471dcf910819c49  m3/collections/verify_donation.py
           DIGESTS

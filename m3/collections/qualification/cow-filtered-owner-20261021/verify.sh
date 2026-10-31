@@ -14,8 +14,8 @@ trap 'rm -rf "$WORK"' EXIT
 mkdir -p "$WORK/baseline-src" "$WORK/baseline-classes" "$WORK/candidate-classes"
 
 echo "7975e471f1b1b92d2a4bdbecdc3a79049dea4a3c93342da71f8e8d403cd0ca18  $SOURCE" | sha256sum -c -
-echo "7de9f44e2a6b5dd753297d7f9792f3cb28095234c8b0c7a495c0a5372b02b074  $COW" | sha256sum -c -
-echo "15a856bea0a668e4d719b310972e7a0eb31f9bcd5c802d0bc68689835ae67d3e  $JUNIT" | sha256sum -c -
+echo "4426c3d8a6b628167e817d83b461cc6e00a569b62b8388f03c7c9ed0de9a771f  $COW" | sha256sum -c -
+echo "eba5dadea1e758806b41edf3a3a9942539a33f42d729b4862a58efe6c8b5225f  $JUNIT" | sha256sum -c -
 test -s "$ISEMPTY"
 
 git cat-file blob "$BASELINE_BLOB" > "$WORK/baseline-src/M3CollectionViews.java"

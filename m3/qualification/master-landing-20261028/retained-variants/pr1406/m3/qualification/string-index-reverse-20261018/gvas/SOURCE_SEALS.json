@@ -7,25 +7,25 @@
     {
       "path": ".github/workflows/m3-gvas-literal-precompute.yml",
       "before": "fd4f45b223492bec7258118ed57039261916d42b01df8679f8b3652111b73b85",
-      "after": "3ff5512f94b6300731c3056a2943cf2edbb8626718258d805d55612867d1a95f",
+      "after": "b5f0e0f2b1e093ccf9a7637b701e99bafb5a727336785ce2416e1f283ed4e796",
       "bytes": 1280
     },
     {
       "path": "m3/core/src/jdk/m3/text/M3GvasLiteralImage.java",
       "before": "f3ed3fd91d7e60220ba22e717f6fec41dc7759e5a221ef1dba65251d0028f8d7",
-      "after": "ac3e0cab92111e7b1af138b1f246a56083e81528dd1c951a21c2bb07d7778073",
+      "after": "c3b82376c93baf3b2728cb187428d7bbf8e363198c10732dece97606f7a26b63",
       "bytes": 10470
     },
     {
       "path": "m3/core/test/jdk/m3/text/M3GvasLookupIndexContractTest.java",
       "before": "ABSENT",
-      "after": "6e387bbd278c1cfa8891e9b19f235c22e478e9965c71f1b028f7ca9668106dd3",
+      "after": "4de11e3e9c483dcc92b5b8c203c7f07cc840f6dcf6152dc8f6cca1f9fc602213",
       "bytes": 7226
     },
     {
       "path": "m3/docs/name-mapping.d/m3-gvas-lookup-index-20261018.json",
       "before": "ABSENT",
-      "after": "6bdfc479597ef2bcaabc659b4b749d82cdf577aa68c412b4343d426bb909d3e8",
+      "after": "a766433e39a32ff20a81e1b68fc66bfe9ee0a6857e4801752c822a2748b2b5a0",
       "bytes": 1568
     },
     {
@@ -42,14 +42,14 @@
     },
     {
       "path": "m3/verify-gvas-literal-precompute.py",
-      "before": "3f68054a4bb60c573af6d0c640fe44ff5ec9630527b9e6561ee521bd18574982",
-      "after": "e940ff340cc72582e0433c012bd39837f483a9d0d1561ae01dceb449c98e64c5",
+      "before": "605b6a520374e9d3adb1a5f82dbbc55b4f9828e66c4a66f093e3fd6e7238fef5",
+      "after": "94f128c6d2732adefd299d90f63127db137119fad560832bf3ea1a04bb9f7be3",
       "bytes": 10219
     },
     {
       "path": "m3/verify-gvas-lookup-index.py",
       "before": "ABSENT",
-      "after": "338106efc7721b170c64ffcb2d37c7c91c3942d17a4c4a269dc6f70a5c91f99b",
+      "after": "24e5d8dbecff8456a5d11aef60ae186bcce5d56b69ca7236a55451a8d5bc2544",
       "bytes": 1924
     }
   ]

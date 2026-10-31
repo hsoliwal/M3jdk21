@@ -26,7 +26,7 @@ PIN_EXPECTED = {
     "source_revision": "37e4edabea6af918a4dc9a7eabd45fbdcf101881",
     "source_handoff_commit": "3a87d17df7e5d825aa1b071c5fb05c64b854c798",
     "source_estate_path": ".m3/m3jdk21-full-borrow-estate.tsv",
-    "source_estate_git_blob": "ddcec769cb1833fab5f224a41c7f6ab86295d262",
+    "source_estate_git_blob": "f637e78db34ab86d3e0d3fc717f03e05867d9d53",
     "source_dag_path": ".m3/m3jdk21-full-borrow-dag.tsv",
     "source_dag_git_blob": "3e6c56b8555231fb36d0ac620ab112aa5970d45a",
     "source_phase_path": ".m3/m3jdk21-promotion-phases.tsv",

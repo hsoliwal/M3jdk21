@@ -33,9 +33,9 @@ and the corresponding source template:
 
 ```text
 M3EclipseProgressMonitor.java
-10a41822af6ee4a71335fb2ab4e6395dd6be8c076fe8931c0e6b1391c9cef8bd
+526edc5c2a9c6640fa9e266b1f46ac747b92ee1662da2b95f9565c54f7966058
 M3EclipseProgressMonitorTest.java
-480c640c1090373c02f5fef8aac78284f0b93c1911573df468b6c9640eb90e65
+f4b9be7ac510346d18f01ca7cd622a43e70b82396929db1fb6e64407ca8a2571
 ```
 
 ## Pending promotion gates

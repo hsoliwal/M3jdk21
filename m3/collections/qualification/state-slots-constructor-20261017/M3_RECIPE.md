@@ -19,8 +19,8 @@ algorithm's behavior.
 
 **Exact preserving atom:** insert
 `public M3ObjectStateSlots28() { }` with Javadoc.
-Original source Git blob `c497ef68f62c86814ac6e04eecf73e57496c7209`
-→ generated Git blob `ba17b0a264e8781b6f0a4ed33c2d067f6d53daaf`.
+Original source Git blob `369317f1bcc830c1f7d5cc38bb01bd6bde572a2b`
+→ generated Git blob `76eaa777de381e2178e6eda766508969f765e731`.
 The constructor is already publicly callable via Java's implicit rule;
 making it explicit does not add/remove any previously callable descriptor
 or change initialization. It fixes the compiler diagnostic without

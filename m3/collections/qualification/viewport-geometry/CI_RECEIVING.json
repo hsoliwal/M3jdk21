@@ -6,7 +6,7 @@
   "canonical_recipe": "jdk.internal.m3.ViewportGeometryCi20261027",
   "authoritative_java_recipe": "jdk.internal.m3.ViewportGeometry20261027",
   "original_java_git_blob": "650356bcdffa372328e5a79f4f596a887fe5f447",
-  "qualified_java_git_blob": "d35282fb564a0a9231f31781e1a699f7e571f8de",
+  "qualified_java_git_blob": "ea42717003948d450a606b827628964c58896a23",
   "test_only_results": {
     ".github/workflows/m3-sparse-viewport-geometry.yml": {
       "before": "ABSENT",
@@ -15,8 +15,8 @@
     },
     "m3/collections/viewport-proof/fixtures/M3ViewportGeometryTest.txt": {
       "before": "ABSENT",
-      "after_git_blob": "df8a0ef8ec0ff8c7e2da3a4d70d41c050efdf7cf",
-      "sha256": "75e960d7db157ab38f9597317589be1480eadca5eaf5f3fd048f98a540c3fc58"
+      "after_git_blob": "f0305132f17593394a14a69c260520204140eea3",
+      "sha256": "b34dbbf23de35d596938579287fdf79a5c9386d0c2e5af025aa253c2974bb3b9"
     }
   },
   "local_text_sdk": {

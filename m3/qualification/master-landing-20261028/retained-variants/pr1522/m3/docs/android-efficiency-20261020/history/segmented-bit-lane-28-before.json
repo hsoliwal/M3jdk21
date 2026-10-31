@@ -13,8 +13,8 @@
       "signatures": [
         "jdk.internal.m3.common.collections.SegmentedBitLane28"
       ],
-      "sha256": "fe535b8a1f3b22fa1a63455c9078d7b911c72a87a3255714f66e3639d11000af",
-      "git_blob_sha1": "8932039f353507225f31dfce7c146f5165ccfc54",
+      "sha256": "147021a606f135a4b6b0f347ce90354ee15aef12c229ec5c02a30935216a1e70",
+      "git_blob_sha1": "9bb7173afa861c05b62a557db63e3a6692ddfe4c",
       "fingerprint": null,
       "revision_role": "pinned"
     },
@@ -27,8 +27,8 @@
       "signatures": [
         "Java_jdk_internal_m3_common_collections_SegmentedBitLane28_cardinality0"
       ],
-      "sha256": "da2266d8ec93478f4fbeb6a5403e14ce8dcd6a6795c43a5d4230b2a97ef8eb0e",
-      "git_blob_sha1": "1ee8509cdd05a7edcfc732b3c5947dd78b30ce3a",
+      "sha256": "5a4ba31368df4b8c3f8e71275b4db583fcba0be37e5b39d07de8112db44319d5",
+      "git_blob_sha1": "20549bee772f30ffabdc406bb6ab52c7435d2b01",
       "fingerprint": null,
       "revision_role": "pinned"
     }

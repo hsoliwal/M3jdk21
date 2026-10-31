@@ -49,13 +49,13 @@
     {
       "path": ".github/workflows/m3-first-release-admission.yml",
       "before_sha256": "00587a22204497ed4795162b6e9688a78cdd5067994a86ba29624df874dae3f4",
-      "after_sha256": "8e91d15837be4ec00be6abacdb23dcc2065016789292fa3745dffbd84e03e753",
+      "after_sha256": "4f000838d53ad3d25581dd3b5f5e10167c58d6e3debbd50e44cfa81a2ac3895b",
       "recipe": "canonical-text-snapshot"
     },
     {
       "path": "README.md",
       "before_sha256": "62baca9f793d8d98d89193d25f1a2f3c1d4393a9273be6db6b38641f30a7b460",
-      "after_sha256": "cc61db7c634a623a759d709f20568fd12c3242b919265d34feb3bd809e7bdb43",
+      "after_sha256": "5af573f7666220e7e3488f7082266725cef3023724438544ef4d93d6568003f1",
       "recipe": "canonical-text-snapshot"
     },
     {
@@ -84,12 +84,12 @@
     },
     {
       "path": "m3/docs/m3jdk21-porting-invariant.md",
-      "before_sha256": "6cd1bd243f216a3210433525e3742c0fc1ab02cbf02bbc40225c40c5be80a01f",
+      "before_sha256": "95a5d111f0d9b2467bcc84828adc5b0efcfd1091e35a1b5c1bf1c484a2066b03",
       "after_sha256": "e3bd365135450e90a88082b78ecd12a4a1c2d8c0632487c654186566836a1c76",
       "recipe": "canonical-text-snapshot"
     },
     {
-      "path": "m3/docs/synexia-intake-policy.tsv",
+      "path": "m3/docs/m3-intake-policy.tsv",
       "before_sha256": "519c6e3152fac4d5d06b77c859f8f5a6a6b7e54a1e3dbb5fdd999c4e100a69c7",
       "after_sha256": "7f4a36570ab48a80dd23f9b2831b1e8e6b9832f0dd6918539f19e1abea9ab761",
       "recipe": "canonical-text-snapshot"
@@ -115,13 +115,13 @@
     {
       "path": "m3/release/queue/2026-10-29/collections-failures.tsv",
       "before_sha256": "ABSENT",
-      "after_sha256": "73a44572a910df45567a720b55fa59734c6ee5cb6b8eff12d1bdc31c299746ad",
+      "after_sha256": "d1bfce1424c44474cb31f7f9bd3c2bbbd0a8db30e4ee2e2b52ecbb4e89b175a3",
       "recipe": "canonical-text-snapshot"
     },
     {
       "path": "m3/release/queue/2026-10-29/validation-summary.json",
       "before_sha256": "ABSENT",
-      "after_sha256": "f3fc07bfb371c95aad02fb87910776ac1b44a1b71cb3e7aa4dfa7813d2184c0a",
+      "after_sha256": "f58a81af366a66eea2cb56128cac38d297f6d6eb7ff641e0dea12e1131a03b9e",
       "recipe": "canonical-text-snapshot"
     },
     {
@@ -149,15 +149,15 @@
       "recipe": "canonical-text-snapshot"
     },
     {
-      "path": "m3/runtime-integration/test_synexia_intake_custody.py",
+      "path": "m3/runtime-integration/test_m3_intake_custody.py",
       "before_sha256": "ABSENT",
-      "after_sha256": "6ddb0933098e86dd44560646bb41a9c2633fbcb5d9fab2d670ebda84772a336e",
+      "after_sha256": "9ca7796238c1d47223c85f8cd1fd485687c14725486f6a8ee67b8c87fc116982",
       "recipe": "canonical-text-snapshot"
     },
     {
-      "path": "m3/runtime-integration/verify-synexia-intake.py",
-      "before_sha256": "d3c6e016fb79a03e1bbeb726fe9dc7ee0b20fa4f0f612b48096926dc66311c97",
-      "after_sha256": "83f1a4f50d26d1e5baebd3239b30002a28d116c45dc31c834bf1389edbb6c39e",
+      "path": "m3/runtime-integration/verify-m3-intake.py",
+      "before_sha256": "6f16a12a564589cb6055699f70a41e7de99716d55900efc70ed4601dafe9e3c5",
+      "after_sha256": "6d42599003415d84d3690872a40b65cad7c4506a13869a33eb4d3f5b8eab871a",
       "recipe": "canonical-text-snapshot"
     }
   ],
@@ -293,7 +293,7 @@
     "failure_catalogue": "collections-failures.tsv"
   },
   "self_provenance": {
-    "path": "m3/release/queue/2026-10-29/synexia-execution-receipt.json",
+    "path": "m3/release/queue/2026-10-29/m3-execution-receipt.json",
     "covered_by_this_receipt": false,
     "explanation": "This receipt covers the nineteen other outputs only. Its own creation and transfer are proved by the later canonical task execution and receiving pull request; no recursive self-hash or future commit identity is asserted."
   },

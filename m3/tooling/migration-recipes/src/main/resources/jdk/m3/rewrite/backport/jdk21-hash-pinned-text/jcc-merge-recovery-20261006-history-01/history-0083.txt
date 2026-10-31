@@ -3,7 +3,7 @@
   "inputs": {
     "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/SOURCE_IMPLEMENTATION_PUBLICATION_VERIFIED.json": {
       "bytes": 370323,
-      "sha256": "03ba5aa231929079fda7772dc6a798a687ba7486fa81ceacc0723407330f956a"
+      "sha256": "c6500d09f2056e7ea1dad619cfbae3f8763e39ebdeedd4d63440540a2dd46146"
     },
     "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-integration-0b8dc/publication/FINAL_MANIFEST.json": {
       "bytes": 2565850,
@@ -311,7 +311,7 @@
     },
     "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/source-binding-review/root-accounting/ROOT_ACCOUNTING.json": {
       "bytes": 114933,
-      "sha256": "cfe76d41dda4220937086d951a126bf04dec0d282ba088b6de2a6bff33b6e14d"
+      "sha256": "9d393cb0e1154049b8cf5e53ccc6e49b80e7de802a9604de056e2231b1140b25"
     },
     "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/source-binding-review/root-accounting/ROOT_ENTRIES.tsv": {
       "bytes": 41070,
@@ -323,7 +323,7 @@
     },
     "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/source-binding-review/root-accounting/FILE_SEALS.json": {
       "bytes": 525,
-      "sha256": "e912f6cad50f06e0679734efef700c07ff4249d796551bc7cb369b04dd1ad219"
+      "sha256": "b09b17bfc596d4299d958bdb9c4f310e7a2bbf4c97688bdaf635ffdbb55ce0bf"
     },
     "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/source-binding-review/root-accounting/MAVEN_DECLARATIONS.tsv": {
       "bytes": 6173,
@@ -335,7 +335,7 @@
     },
     "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/source-binding-review/donor-owners/SOURCE_TABLE.json": {
       "bytes": 11874,
-      "sha256": "e9a1af5f9d9bc36507cee743ebfaa560b2ed5a026645791736d22f1f94528bb4"
+      "sha256": "2d2ee7fb0d34bfabdb5579f79e8d3ace76a8d82e542a38d309fe9b9ad7224f98"
     }
   }
 }

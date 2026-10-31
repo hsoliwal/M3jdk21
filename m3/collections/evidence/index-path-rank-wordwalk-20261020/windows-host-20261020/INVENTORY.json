@@ -10,8 +10,8 @@
     {
       "path": "src/com/m3/collections/M3IndexPathRankSelfTest.java",
       "bytes": 10699,
-      "sha256": "d354516b794666bb594d91acb1da0128172b88771b48a899e4c456da947759d2",
-      "git_blob": "0a95152c8b7345fc73901e850bde66bb1fcd390b"
+      "sha256": "06116817a78a0d9484d855a1f6a3c5f01d01fa03b3c3a2f1dc5c881980b7b1c9",
+      "git_blob": "2a7118eeed4bb39585ca5f9479821229804b3597"
     },
     {
       "path": "src/com/m3/collections/M3IndexPathRankWordWalkProof.java",
@@ -22,13 +22,13 @@
     {
       "path": "baseline/src/com/m3/collections/M3IndexPathRank.java",
       "bytes": 9214,
-      "sha256": "9f683bec8b328f4d2ed4ae1540281ea14ccd2475e2096c60ffe77e36bfe53ecc",
-      "git_blob": "6bc439b69f739608141acf6ee3800e5b5b0163c3"
+      "sha256": "2f19eca31f904198320e769dda2c096995ba97649724b2eaf427ea6dd0171aec",
+      "git_blob": "b1aaef46be48ef4f339adc252e8af226cce3538c"
     },
     {
       "path": "PLAN.json",
       "bytes": 26322,
-      "sha256": "611ae5374fc50448ba41d4c5495145b1111af2529a234299a71b61cdf2c51e86"
+      "sha256": "bf424baa9332b6cc52e3e8ea530fd8d426fa6db146dc3356f67e26e2b6425ed2"
     },
     {
       "path": "README.md",

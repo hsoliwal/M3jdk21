@@ -7,8 +7,8 @@
       "before_path": "m3-tree-map-entry-protocol-20261018/M3SlotMap.before.java.txt",
       "after_path": "m3-tree-map-entry-protocol-20261018/src/main/java/jdk/m3/collections/M3SlotMap.java",
       "before_git_blob": "9e4d7588d5bd527f3988ca4d46d79f31132630c7",
-      "after_git_blob": "93e7f6bf7271e3b6feafd85609c338a45a82b977",
-      "after_sha256": "d6b16b35119584cba0f9d782862568393100851af68dc6dba113adc69b41799f"
+      "after_git_blob": "ff12610ddbd992dc493f5e06a89dc6484c3ad9ee",
+      "after_sha256": "9dd1dd222ab0882c117559ca088b92c73a89b48b5cfa2cc96a347e02f0b9b4dc"
     },
     {
       "name": "M3TreeMap",
@@ -22,9 +22,9 @@
       "name": "M3OrderedSlotMap",
       "before_path": "m3-tree-map-entry-protocol-20261018/M3OrderedSlotMap.before.java.txt",
       "after_path": "m3-tree-map-entry-protocol-20261018/src/main/java/jdk/m3/collections/M3OrderedSlotMap.java",
-      "before_git_blob": "e7be2297d19f22cf4dd4ef8b7d1424fe963063d9",
-      "after_git_blob": "064fd943a59958778408b9f089a1c58a0b06ae18",
-      "after_sha256": "982bf329055082c39650c1f976d7bff8bcef4a13ae028220607cdb3e093bf0c2"
+      "before_git_blob": "ce5fa2ec4306af03239ab7539ad91acaeaaa8245",
+      "after_git_blob": "641fdce56e354926336c63b6118fc519b0cea931",
+      "after_sha256": "cf92cac1f51ca8fdb4b0cdfa7c6745fb7a1961aa7636b3e18a52bd99b066258f"
     }
   ],
   "matrix": {
@@ -350,12 +350,12 @@
     "protocol132": {
       "status": "PASS",
       "receipt": "m3-avl-insertion-frontier-20261018/qualification-regression-v1/RESULT_V1.json",
-      "sha256": "b644f40bdee022b20c94c3ecbc47f2b8b7a23017fec0f1e0d66c0c1a722db823",
+      "sha256": "a3f93e65442a5aa7f3862d9376ecc2a6dac2ca8ea107ada7af8115df25672ea4",
       "codeSha256": "e8dcb2c6a1101195dbbecbb55018bb68f182f088309cdfd83f189231d69ca08e",
       "fixtures": [
         {
           "path": "eclipse-tree-full-contract-v2-20261018/TreeMapLookupEntryProof.java",
-          "sha256": "bb780f79bf22bafb48495014854fed92e9bf75227e756922451ae473bdcfddfa"
+          "sha256": "943465d49d74a7c79be2234e6bd95705f8ba9235ed0a9c5f85e1bb14698be12a"
         },
         {
           "path": "eclipse-tree-full-contract-v2-20261018/LOOKUP_ENTRY_SCENARIOS.json",
@@ -363,14 +363,14 @@
         },
         {
           "path": "m3-tree-map-entry-protocol-20261018/qualification-entry-proof-v1/FROZEN_ORACLE_V1.json",
-          "sha256": "7c72ed386772bce87e0f9418d0447212717da05911d85f7e6116fd73ad7066e5"
+          "sha256": "68b1bb04d4c90f19a4f733dc5be7d72c1785c6a8d78d921ba370a1c0a1a5f7b4"
         }
       ]
     },
     "bulk113": {
       "status": "PASS",
       "receipt": "m3-avl-insertion-frontier-20261018/qualification-regression-v1/RESULT_V1.json",
-      "sha256": "b644f40bdee022b20c94c3ecbc47f2b8b7a23017fec0f1e0d66c0c1a722db823",
+      "sha256": "a3f93e65442a5aa7f3862d9376ecc2a6dac2ca8ea107ada7af8115df25672ea4",
       "codeSha256": "e8dcb2c6a1101195dbbecbb55018bb68f182f088309cdfd83f189231d69ca08e",
       "fixtures": [
         {
@@ -382,7 +382,7 @@
     "property5040": {
       "status": "PASS",
       "receipt": "m3-avl-insertion-frontier-20261018/qualification-property-v1/RESULT_V1.json",
-      "sha256": "1bbf057bffa4b457ec3659e3b8a555028d29aa4d08dd1004cd315e22333b71e3",
+      "sha256": "953e2889adc677f9bdd5d3078cacdee43ed7295423cf8f99d580bda8fa7a71c5",
       "codeSha256": "e8dcb2c6a1101195dbbecbb55018bb68f182f088309cdfd83f189231d69ca08e",
       "fixtures": [
         {
@@ -391,7 +391,7 @@
         },
         {
           "path": "m3-avl-growth-frontier-proof-20261018/PROOF_PLAN_V1.json",
-          "sha256": "ecde1e9bb244bba2c3de62c0738c1a9f20aa72e2122d6a3b3ccf5bfd5fabdff7"
+          "sha256": "a4deb758149e889a4d53078de3b4e68ab8a1c5967e22c594006dcbd483c516ae"
         },
         {
           "path": "m3-avl-insertion-frontier-20261018/qualification-property-v1/FROZEN_ORACLE_V1.json",
@@ -403,7 +403,7 @@
   "evidencePaths": [
     {
       "path": "m3-tree-jmh-measurements-20261018/old-v2/RESULT_V1.json",
-      "sha256": "aae2b5de68f4cdcb4af8bcaa7caeb16ea46be3d78d168429695b270518ca8235",
+      "sha256": "deb69ff285685677a06d47666b20a7496335e68e633d96886c8bbe36e4a34dc9",
       "context": false
     },
     {
@@ -418,7 +418,7 @@
     },
     {
       "path": "m3-tree-jmh-measurements-20261018/protocol-v2/RESULT_V1.json",
-      "sha256": "d4741813f1f11e0af82013af2dabc45e89851ebe8f70e5d17ce3184754818ae0",
+      "sha256": "2a4399207fbe16e5cb252548b5a6d01f58f9df060faef0046ed9a6e765dd9701",
       "context": false
     },
     {
@@ -433,7 +433,7 @@
     },
     {
       "path": "m3-tree-jmh-measurements-20261018/frontier-v2/RESULT_V1.json",
-      "sha256": "c34d248b5e18fdb1f33367d65200ae7b1e7ad450823752a1238f3764d590442d",
+      "sha256": "971f09ea519779d8524820d08eb4c98d8a017d56447ce0e34072d0375915c7e7",
       "context": false
     },
     {
@@ -448,17 +448,17 @@
     },
     {
       "path": "m3-tree-jmh-comparison-20261018/M3TreeMapPublicBench.java",
-      "sha256": "53317a2b1b31023b36dd3cc9205b92822d51871dedb4a454430413a6cd9251da",
+      "sha256": "e8003148400b00d4196bc1d6a9342d30cb5c7726deeac3a48570dde10f43ba04",
       "context": true
     },
     {
       "path": "m3-tree-jmh-comparison-20261018/BENCHMARK_PLAN.json",
-      "sha256": "58596e174f37960e3469f82649228bd2b5a2232e4691704e8d58be7580144bae",
+      "sha256": "8c828aa5981eb9be9a0a00d63169366fecf45c9570769c43939197099be099e1",
       "context": true
     },
     {
       "path": "m3-tree-jmh-comparison-20261018/SOURCE_SEAL.json",
-      "sha256": "58516951dcbb47b455463ee181c667601a75e0889470f079b22da2b3936a5bea",
+      "sha256": "4c4303cb5d5b9585a28bb68a355152c68a04dd2b4fb1a2152800132cbfe1944b",
       "context": true
     },
     {
@@ -478,7 +478,7 @@
     },
     {
       "path": "m3-tree-empty-default-diagnostic-20261018/RESULT_V1.json",
-      "sha256": "fd8a05dbe011a077a2e8ae1fe52086116c24c6491a86908f77be84684588c7cc",
+      "sha256": "446a2c1bebdff2279dca279bd2ba934164a5ef8717d5903d1447d544a93d2d81",
       "context": true
     },
     {

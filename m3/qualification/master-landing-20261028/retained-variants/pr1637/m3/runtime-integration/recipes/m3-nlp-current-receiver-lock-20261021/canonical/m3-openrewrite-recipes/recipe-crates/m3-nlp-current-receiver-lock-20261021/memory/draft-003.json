@@ -9,21 +9,21 @@
     "revision": "2779aba3f98f31c324be43f731be7914e1a05935"
   },
   "parents": [
-    "6d9e643ec5e35846f58674aecb5ef465e028cfdcbcddf87e78aac1e68a2beb52"
+    "d9c3a2911acc140b38b4e7869e5295b684bb2c52c322dc06ae96d537f0d9c3c7"
   ],
   "supersedes": [],
   "recipe_before": null,
   "recipe_after": {
     "path": "proof/sdk-001-offline/named-recipe.yml",
-    "sha256": "15e677dc21d770567af56a0ada688026f9be56654f0f7d214fb276cf3f687bd7"
+    "sha256": "2e14e4dc5dbb498014f6d04eb88ac4b51277d73d8c826486861f42c6bc74b624"
   },
   "source_manifest_before": {
     "path": "preimages/m3/tooling/module-packs/nlp-search/current-source-lock.json",
-    "sha256": "054029431fbd8063c1e0397c43f3538f319984e252c92f08538881dc0a2eaff5"
+    "sha256": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a"
   },
   "source_manifest_after": {
     "path": "SOURCE_SEALS.json",
-    "sha256": "6cc232bd392dd188b227a0a7c304d0a6e6d25ed91dd3641fefb335afdfc8574e"
+    "sha256": "5baa373db8748eba54cecfc5899eb36b5b2f09aa85cfb8399195bac6a367471a"
   },
   "observation_epoch_seconds": 1792550603,
   "author": "Hitesh Soliwal and Contributors to the Synexia Project",
@@ -56,7 +56,7 @@
   "regression_fixtures": [
     {
       "path": "proof/owner-candidate-001/SharedLexiconPrecomputeCatalog.java.diff",
-      "sha256": "d474cc1e486413a0813696dd74bf354adc6fdd712e46d0e6778306e64947ad1e"
+      "sha256": "ccad0ad65131b6c2df7b496829ccf019ff5ec77d856393ae8334020f21723cb4"
     },
     {
       "path": "proof/owner-candidate-001/builder-and-whole-rope-001/baseline-public-api.log",
@@ -86,11 +86,11 @@
       "evidence": [
         {
           "path": "proof/owner-candidate-001/rope-owner-001/RESULT.json",
-          "sha256": "59a9424caff7b3eff09c562982998667dd20c46bc1a2c6e324abf36079528dea"
+          "sha256": "e6e8dc15b4f48cf0d3064a301ad2015221f5d95d1bc2a3a4f8ddfe9d8d167836"
         },
         {
           "path": "proof/owner-candidate-001/rope-owner-001/command-01.log",
-          "sha256": "027c84f6228a11eabfcff11b7bccbbb69f7e91a3d91dcd63299c85b0261916f9"
+          "sha256": "36024174295e13b3b4dd65b39a6c2353242612b520315b8948e4f941f86c053f"
         }
       ]
     },
@@ -104,7 +104,7 @@
       "evidence": [
         {
           "path": "proof/owner-candidate-001/builder-and-whole-rope-001/RESULT.json",
-          "sha256": "7e1d9d819f608db3d9766eb3273c1a816f8c8083dd0c45e218dbe51c718f062d"
+          "sha256": "9b775abf5910c2e6046bfcb38517df1ace3e89e77cd650ff5b5696135afa4b1b"
         },
         {
           "path": "proof/owner-candidate-001/builder-and-whole-rope-001/original-whole-module-rope.log",
@@ -129,11 +129,11 @@
       "evidence": [
         {
           "path": "proof/sdk-001-offline/RESULT.json",
-          "sha256": "5f9b55adcb99fb526dd044476ec647cd2ca82dc3bb25a38c71f479df9925a187"
+          "sha256": "0bf285d0e082e121e178b0a22d47d92124e84579f5436c87276e8b999142fcdb"
         },
         {
           "path": "proof/sdk-001-offline/recipe-proof.tsv",
-          "sha256": "3e524fbb755c3eae8156fd1e04cfceb56a2fd7b6095ffd6d89e2f1a33873d10a"
+          "sha256": "091f0e8ad4d89e4132f1c2c17741e0bcbd1ed27fdc46e6651d084eed7a9023c8"
         }
       ]
     },
@@ -166,7 +166,7 @@
       "evidence": [
         {
           "path": "proof/receiver-runtime-001/combined-receiver-001-receipts/RESULT.json",
-          "sha256": "38c71b8c4f6fb632f2352873cbd2578be7cf1f1383cdf34d64f4fce9e5c0cee1"
+          "sha256": "1af51c5d7642bb84f88e61816ada2bc0b3d033dfdd4387f5a35cd2a11834c935"
         },
         {
           "path": "proof/receiver-runtime-001/combined-receiver-001-receipts/command.log",
@@ -174,7 +174,7 @@
         },
         {
           "path": "proof/receiver-runtime-001/FINAL_RECEIVER_QUALIFICATION.json",
-          "sha256": "38781b148a4f46623481a6e10b04c71407608ede27ad6925ddd905436419fe41"
+          "sha256": "e9735ffaa55b10ce92e68c928cdb5e224cd0babc68eff396e8f1fd102b5d1f54"
         }
       ]
     }
@@ -195,15 +195,15 @@
     "evidence": [
       {
         "path": "proof/sdk-001-offline/RESULT.json",
-        "sha256": "5f9b55adcb99fb526dd044476ec647cd2ca82dc3bb25a38c71f479df9925a187"
+        "sha256": "0bf285d0e082e121e178b0a22d47d92124e84579f5436c87276e8b999142fcdb"
       },
       {
         "path": "proof/sdk-001-offline/recipe-proof.tsv",
-        "sha256": "3e524fbb755c3eae8156fd1e04cfceb56a2fd7b6095ffd6d89e2f1a33873d10a"
+        "sha256": "091f0e8ad4d89e4132f1c2c17741e0bcbd1ed27fdc46e6651d084eed7a9023c8"
       },
       {
         "path": "proof/copier-qualification-001/RESULT.json",
-        "sha256": "02ba2402bcbe554ec4e18ede6eec1c84c4accccb098a9779996995aaedf4289b"
+        "sha256": "597b29f2bb92576017e30c08e82300fe2e9117367f7dce54cd869964247fb569"
       }
     ]
   },

@@ -122,7 +122,7 @@
     "outputMatched": true,
     "elapsedSeconds": 0.172,
     "logPath": "target\\ast-importer-qualification\\logs\\source-drift-refused.log",
-    "logSha256": "b0da86d9df4569233240d3103370e5df50644f42e8f97dc2ddc9686c1ba18c20"
+    "logSha256": "8ac3f65511676733c8e380ac15e967890666dec0b9878fe53d0c1e94433bbb45"
   },
   {
     "label": "target-drift-refused",
@@ -147,7 +147,7 @@
     "outputMatched": true,
     "elapsedSeconds": 0.125,
     "logPath": "target\\ast-importer-qualification\\logs\\target-drift-refused.log",
-    "logSha256": "7b83d9072f3d780c81ec3cff8bd613a592d211d40dcbac075508ea2f0122c582"
+    "logSha256": "9772cc7f70d0a99923e883619306f987cdbc52a7bb3617b328dde2c04ebb6b66"
   },
   {
     "label": "framed-root-drift-refused",

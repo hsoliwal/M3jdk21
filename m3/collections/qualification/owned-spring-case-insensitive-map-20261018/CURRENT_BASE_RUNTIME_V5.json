@@ -10,8 +10,8 @@
   "maskKernelClassSHA256": "3c56df2cdced6979c30ee482834b00dfa41f5021658b65b07a11e4dfaf4eb763",
   "nativeSourceSHA256": "8610e9fcedcc8eb698acbf3161bca8ea7d16194e61c66915f9e25fe47aae27f7",
   "nativeDllSHA256": "3bb3c78efef58d90cc29160cd4b96b64ea88ef286763e94dd13c47bac7f0258c",
-  "fixtureSHA256": "e7b83f57343e3399865671eab4ec76997eed4953f8607fe8774c8ac9714c3b65",
-  "ownerSHA256": "450e3f70be37f0fa0fcee7edd4adc8a2eea4a05a40646fb3e5c531e4ee8447ca",
+  "fixtureSHA256": "3fa184fa99f7b64ee3f0a964d55ecfd17032f2269074c7671e99ffa39cde1f11",
+  "ownerSHA256": "d90b72771ab454aa1dd03eb2c5784d7aaffd612736868a66fbe2682c8ab05f7c",
   "results": {
     "provider-java": {
       "status": "PASS",

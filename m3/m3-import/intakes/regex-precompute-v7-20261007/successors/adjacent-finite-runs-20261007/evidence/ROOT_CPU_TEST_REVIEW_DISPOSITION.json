@@ -21,7 +21,7 @@
     "currentAndPriorReviewedProgram": {
       "path": "K:/codex-work/m3-regex-adjacent-finite-runs-autoreview-preparation-p0-20261007/review-repo/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
       "bytes": 141730,
-      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+      "sha256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7"
     },
     "formalReviewTerminal": {
       "path": "K:/codex-work/m3-v7-ast-publication-20261007/REGEX_ADJACENT_FORMAL_REVIEW_TERMINAL_01.json",

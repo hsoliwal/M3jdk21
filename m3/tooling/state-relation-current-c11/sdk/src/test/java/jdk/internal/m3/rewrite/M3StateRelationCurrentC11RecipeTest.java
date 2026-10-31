@@ -27,13 +27,13 @@ final class M3StateRelationCurrentC11RecipeTest {
     private static final String ROOT = "/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/";
     private static final String DESCRIPTOR = "/META-INF/rewrite/state-relation-current-c11-20261019.yml";
     private static final String NAME = "jdk.internal.m3.StateRelationCurrentC11";
-    private static final String MANIFEST_SHA = "fd764eea326f6167bf8447d17fbe953341f6536b416a6e88fd518275c73ea78b";
-    private static final String DESCRIPTOR_SHA = "ad3e3dcc318bd0adf19b6a4552a1b4666189e2ce04b66415201b1df9aa7a355a";
+    private static final String MANIFEST_SHA = "81cf9049cdd7bb87a98182b9c1482721ef7fe63a494ab85d2832f82e58e9e312";
+    private static final String DESCRIPTOR_SHA = "260e69562a94a55f92f9c3aedb2319b5cab83c3cd69a786e075d14d526d7372a";
     private static final String C_OWNER = "src/java.base/share/native/libjava/M3StateRelation.c";
     private static final String HISTORICAL = "/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/historical/M3StateRelation.c.txt";
     private static final String HISTORICAL_SHA = "66d28e350f4894498b15c0041c0a43c075f12c9e3a384214e45d9868ce1950b6";
     private static final Map<String, String> EXPECTED = Map.ofEntries(
-            Map.entry("src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java", "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa"),
+            Map.entry("src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java", "ae1de4b652b474c594d5fa6e8ec2d43aae720d166e885497217688c9fabae49d"),
             Map.entry("src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java", "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757"),
             Map.entry("src/java.base/share/native/libjava/M3StateRelation.c", "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16"),
             Map.entry("src/java.base/share/native/libjava/m3_state_relation.h", "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885"),

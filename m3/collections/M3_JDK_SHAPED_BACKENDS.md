@@ -33,7 +33,7 @@ fail-fast iteration. It also locks the non-structural rule: duplicate set insert
 map value replacement do not invalidate iterators merely because the table has cleanup pressure.
 
 See `JDK_FAMILY_MAP.tsv` for existing/pending names and
-`m3/compatibility/synexia-to-m3-family-status-20261007.tsv` for the wider MIndex/M3Index
+`m3/compatibility/m3-to-m3-family-status-20261007.tsv` for the wider MIndex/M3Index
 receiving ledger. No PENDING row is implied complete by this PR.
 
 <!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors -->

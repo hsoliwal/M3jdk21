@@ -27,14 +27,14 @@
         "mechanics": "zero-sentinel linear probing, zero-key side slot, backward-shift deletion"
       },
       {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3EnumLongMap.java",
-        "receipt": "m3/compatibility/synexia-enum-long-map-receipt.json",
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3EnumLongMap.java",
+        "receipt": "m3/compatibility/m3-enum-long-map-receipt.json",
         "target": "com.m3.collections.M3AdaptiveEnumLongMap",
         "mechanics": "dense backing and key contract"
       },
       {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3IntIntHashMap.java",
-        "receipt": "m3/compatibility/synexia-int-lanes-receipt.json (re-applied in #427)",
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3IntIntHashMap.java",
+        "receipt": "m3/compatibility/m3-int-lanes-receipt.json (re-applied in #427)",
         "target": "com.m3.collections.M3IntLongHashMap",
         "mechanics": "M3 shape: inlined DenseHash, modCount fail-fast, M3IntIterator keys"
       }
@@ -56,33 +56,33 @@
   "publicJdkReplacement": false,
   "targets": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3AdaptiveEnumLongMap.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3AdaptiveEnumLongMap.java",
       "before": "ABSENT",
-      "after": "79cac12007699fb2983853af40c27e9b00d2475390d9d1f36c245ddfe7b317d3",
+      "after": "ca73e9131f63ac0e1513b1a8c40ee3d27946cb25e25ef71fed5d4eb1406ce0bb",
       "resource": "00-M3AdaptiveEnumLongMap.java.txt"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IntLongConsumer.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IntLongConsumer.java",
       "before": "ABSENT",
-      "after": "523534ffb1824ffbdd7ac4f1dce04e9688f3f8a9b7ce637796100070df645b92",
+      "after": "7625eef668e930b943adda3528e8974760426e8b1e560240f683f6b9f8fe3ebd",
       "resource": "01-M3IntLongConsumer.java.txt"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IntLongHashMap.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IntLongHashMap.java",
       "before": "ABSENT",
-      "after": "43df8c19ca96e4da9715547ed3e2b2bd1751c26c3dc0b56af7dcfa8d1ce5cddf",
+      "after": "155b25508ea81747b63d78211aaa487f62863d7ba8d4cc18b0bab89660f5e2b2",
       "resource": "02-M3IntLongHashMap.java.txt"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3AdaptiveEnumLongMapTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3AdaptiveEnumLongMapTest.java",
       "before": "ABSENT",
-      "after": "7c86957b387dd1afa83384b1fbf05ff1c5d0807bb3255f31ffcd9dfd4b5ec140",
+      "after": "eb1ca8a3f30c04bd7b6350b4a82740a0e0779e49d4e6b0d8016b04ea9171eb22",
       "resource": "03-M3AdaptiveEnumLongMapTest.java.txt"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3IntLongHashMapTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3IntLongHashMapTest.java",
       "before": "ABSENT",
-      "after": "59fbd569f900826bead33b3297528aedc94f22b24366039cfd41d584a527ff17",
+      "after": "0eefb4f15012a1fcb3e8af9f20f00e5a8ff78cb7bd70d1c4927726c5634c1dd6",
       "resource": "04-M3IntLongHashMapTest.java.txt"
     }
   ],

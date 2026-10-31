@@ -93,7 +93,7 @@ for relative, name, expected in [
     before[relative] = raw
 
 swt_handoff_path = ROOT / 'jobs-work/swt-owner-closure-20261021/FINAL_HANDOFF.json'
-assert sha(swt_handoff_path.read_bytes()) == 'f0a4224a2b21a52297cc4ce518ea04d7957849684f0666eae7d2793476b576e5'
+assert sha(swt_handoff_path.read_bytes()) == 'b0614b31412a7b0e62a484073a4f3b806f5f82ad87de458ab3d81ca0040647aa'
 swt_handoff = json.loads(swt_handoff_path.read_text())
 for row in swt_handoff['files']:
     raw = (CANON / row['repository_path']).read_bytes()

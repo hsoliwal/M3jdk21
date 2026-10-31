@@ -105,11 +105,11 @@
     "status": "REFUSED",
     "output_created": false,
     "changed_hash_paths": [
-      "m3/core/src/com/m3/text/M3GvasLiteralImage.java"
+      "m3/core/src/jdk/m3/text/M3GvasLiteralImage.java"
     ],
     "additional_source_paths": [
-      "m3/core/src/com/m3/text/M3BigString.java",
-      "m3/core/src/com/m3/text/M3RopeTextIndex.java"
+      "m3/core/src/jdk/m3/text/M3BigString.java",
+      "m3/core/src/jdk/m3/text/M3RopeTextIndex.java"
     ],
     "admission_waived": false,
     "source_lock_modified": false,
@@ -135,17 +135,17 @@
     {
       "path": "evidence/PIN_AND_SHARED_INPUT_SCOPE.json",
       "bytes": 2552,
-      "sha256": "77e200b5ce35d939bd013b51c4d397e24afca576713d5cf370bac84a75f402a1"
+      "sha256": "049eb4c8e6c4f1e1faf4cef0c8540f4b33bc2f7f122351b6dc81a5722a3e528d"
     },
     {
       "path": "evidence/CURRENT_RECIPE_001.json",
       "bytes": 170972,
-      "sha256": "e11e19f338cb6d2fd312e1e05565c2520cfc930a20ceebf48268d3e007739507"
+      "sha256": "d7ff356db11e24b9afa5a79bc65cecd86e1cc1ae103f05f505f906b18f6df541"
     },
     {
       "path": "evidence/OPENNLP_OWNER_001.json",
       "bytes": 2082,
-      "sha256": "422f9ee85eb0e9dabcfef6a432ff2a32a5fe47c5457ac723532286170edced5c"
+      "sha256": "883eda0112382800955a61ce1d9cbc999954cc5a1eb50dd2cc12a2534174e6e0"
     },
     {
       "path": "evidence/OPENNLP_INSTALLED_ARTIFACTS.json",
@@ -155,7 +155,7 @@
     {
       "path": "evidence/LUCENE_OWNER_001.json",
       "bytes": 5371,
-      "sha256": "e64793f43586ad6dfb27df426c37f4ae1ba0f7205cc3f0be1ee92a5a50d7ee34"
+      "sha256": "a9dd5a13b0c2e827249ad12053792c5baac45cca5753c357e4023a2fcde51be9"
     },
     {
       "path": "evidence/LUCENE_INSTALLED_ARTIFACTS.json",

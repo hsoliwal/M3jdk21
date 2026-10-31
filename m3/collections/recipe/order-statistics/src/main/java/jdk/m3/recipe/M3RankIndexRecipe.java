@@ -40,19 +40,19 @@ public final class M3RankIndexRecipe {
     private static final List<Install> INPUTS = List.of(
             new Install("M3LongRankIndex.java",
                     "m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java",
-                    "d1011f31158fa96c23722e6df2fd7ec9e9c1592fba860580330c42fb3f25f4f9"),
+                    "eb083c80456c7b0bb2c3ad89df21631b4bc329178c905491bd9841c15588d265"),
             new Install("M3LongRankBatchNative.java",
                     "m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java",
-                    "a199d9601ca4c36d8dbe3d1b95a8dd7da49d5f22a15ed29a7112665a38288c82"),
+                    "a071aca93b32a37ac4f6efbe3f2c008732d7af05278e34d1480c117d5c635940"),
             new Install("m3_long_rank_batch_jni.c",
                     "m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c",
-                    "50c741073d6ef0b4efbd4a90c1f336f42945fa3bcd5824455f213f7509a52388"),
+                    "75fca9fea6741cb1b13e1b96fcc34d560a5e3bba3ee59b3b485d1ca69b72aee0"),
             new Install("M3LongRankIndexSelfTest.java",
                     "m3/collections/src/test/java/jdk/m3/collections/M3LongRankIndexSelfTest.java",
-                    "63fd0c55d60419a6ca3669bc5f877357566f06072cfdad553e9824767836e3d1"),
+                    "a3d9afad57dc08fb2d994ab00e909070ace0ef3e4f7479139844c4fe8594cf47"),
             new Install("M3LongRankIndexTest.java",
                     "m3/collections/src/test/java/jdk/m3/collections/M3LongRankIndexTest.java",
-                    "b204714a64abb5a6e73c23cf91c1399096c7a2246a714d7bc783568ede131b39"));
+                    "11aef7f8999e8d5b5477ef72e8fc19040057f7376f90baa7ca2c881563de7139"));
 
     private M3RankIndexRecipe() { }
 

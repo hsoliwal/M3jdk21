@@ -28,8 +28,8 @@ final class M3SharedLexiconBuilderExplicitCtorRecipeTest {
     private static final String FIXTURE =
             "/jdk/internal/m3/rewrite/m3-shared-lexicon-builder-explicit-ctor-20261018/SharedLexiconPrecomputeCatalog.java.before.txt";
     private static final String TARGET = "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java";
-    private static final String BEFORE_SHA256 = "8e6156376ea9548971b78bb876dc3968195266f04c17c5b061d7f5e4b52f367d";
-    private static final String AFTER_SHA256 = "421beafcb9d81cd35363e21e06737f72f8c43fa566ab70bb7501ccf1a042e352";
+    private static final String BEFORE_SHA256 = "a273220cdd1a2b20857ccba086394c0a0a726cc3f2711e9eb7fdadbaffb08256";
+    private static final String AFTER_SHA256 = "af3b64020219d3f1d0406cc52165bae30b61fa41afcd082a4c4936db315ac2f6";
     private static final String DECLARATION = "    public static final class Builder {\n";
     private static final String CONSTRUCTOR = "        public Builder() { }\n";
 

@@ -27,13 +27,13 @@
         "mechanics": "bounded, ordered mismatch ledger and root-validated receipt"
       },
       {
-        "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexStringTrialImage.java",
+        "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexStringTrialImage.java",
         "blob": "ffce8a21",
         "target": "com.m3.precompute.M3RegexOracleHarness",
         "mechanics": "sharded oracle store (ten images of 1,000 regexes x 64 inputs); stock Pattern outcomes"
       },
       {
-        "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexShape.java",
+        "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexShape.java",
         "blob": "ff989cfa",
         "target": "com.m3.precompute.M3RegexOracleHarness.literalShape",
         "mechanics": "first pruning candidate: provable literal / strict prefix / strict suffix / strict exact shapes"
@@ -55,21 +55,21 @@
   "publicJdkReplacement": false,
   "targets": [
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexOracleCorpus.java",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexOracleCorpus.java",
       "before": "ABSENT",
-      "after": "1fc9ab6e71de93f3b737c7f6297c49e787190b369f776b4247f50cb21d98e5ab",
+      "after": "7401b537410d4bb6d88a821e629eadaf66255c1f9fe80c6db0cae7977e53581f",
       "resource": "00-M3RegexOracleCorpus.java.txt"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexOracleHarness.java",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexOracleHarness.java",
       "before": "ABSENT",
-      "after": "d73788794ea4f0ef8d92e6c15077b2c907000c121c553115c2faf07ea804213f",
+      "after": "239cc3d830df1ade3150f0c22eeff4723c5bb3433e8fba14967cd8c080365896",
       "resource": "01-M3RegexOracleHarness.java.txt"
     },
     {
-      "path": "m3/ports/precompute/src/test/java/com/m3/precompute/M3RegexOracleHarnessTest.java",
+      "path": "m3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexOracleHarnessTest.java",
       "before": "ABSENT",
-      "after": "8d79f5663691a00dd6f8b1946cfa79150fdd5db812df17e7737cbb5d41088929",
+      "after": "bf7f78ab7ccf324e33d932bd670e5c4fcd8d742be0af07fec921b571c7a0ef04",
       "resource": "02-M3RegexOracleHarnessTest.java.txt"
     }
   ],

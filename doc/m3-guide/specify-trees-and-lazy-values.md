@@ -569,36 +569,36 @@ public repository source; licensing and receiver authority are unchanged.
 
 | Primary complete body | Git blob |
 | --- | --- |
-| [M3TreeMap][tree] | `8a85b86c027bc031ef096ad94de2747b8fd28f9c` |
+| [M3TreeMap][tree] | `d306dacbb73d48c955fa0b932acc2c3d1eae5626` |
 | [M3TreeSet][set] | `e414f679a341392770fb482377a51fe2f5e6518f` |
-| [M3LazyValueProvider][provider] | `5bb4a035f57206bb82dc6b19657a0f39dc2d5fe8` |
-| [M3LazyValueState][state] | `d13625a82d623a5aa99fee498e7b5afe793f504a` |
-| [M3LazyEventBits][bits] | `e0605534823bd2933b9a3f92f2481a1fef794b33` |
-| [M3LazyEventGranularity][granularity] | `7e031ea2e06900aa6326d6d587ad66f290911d6a` |
-| [M3LazyEventPolicy][policy] | `aa79f1cc24bc83a5c2db5f7427a3a461715af380` |
-| [M3LazyEventSink][sink] | `f0085ec59bbedda0ca18d752996ad489ec976d5c` |
-| [M3LazyEventSource][event-source] | `a21d4701650880ae5db7c569427ff64ec2195b92` |
-| [M3LazyEvents][events] | `c2a0aa479a4aa89b029ab9d99e22a3a27557b392` |
-| [M3LazyOperation][operation] | `9d8939d6d768c3c1861a532d185e8c27afa35994` |
+| [M3LazyValueProvider][provider] | `08eea75b8fa34523bfc6c2cd76a01080c1db4554` |
+| [M3LazyValueState][state] | `d530ca74329fc2a6d0210cb7e525c838e88c4928` |
+| [M3LazyEventBits][bits] | `5215c0fc0cb2f1a126ffb6a7efc776c9a922304b` |
+| [M3LazyEventGranularity][granularity] | `4697fe359fab94d1b16e8e88116c0e66cec87f2f` |
+| [M3LazyEventPolicy][policy] | `648fe4d9f6827bf0eb89a993a8cc4099d424de59` |
+| [M3LazyEventSink][sink] | `8bbec2e416bf4b5071718c06bff04ffda2d295c4` |
+| [M3LazyEventSource][event-source] | `6f3d78be857b5d30971ed5cd303164e34a1b6bdb` |
+| [M3LazyEvents][events] | `ec38c2141a1c9f201b6130a3eab260c0109423f5` |
+| [M3LazyOperation][operation] | `38103fb1364800438930619d278c2ea9ecc8851d` |
 
 | Dependency / build body and review scope | Git blob |
 | --- | --- |
-| [M3SlotMap](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3SlotMap.java), complete dependency body | `a7d20300717661c26897f0b69e1e5a83400a62ad` |
-| [M3OrderedSlotMap](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3OrderedSlotMap.java), complete dependency body | `e7be2297d19f22cf4dd4ef8b7d1424fe963063d9` |
-| [M3SlotArrays](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java), complete dependency body | `e337c69710c871f8caa77a1afe53149f1fd705cc` |
-| [M3SlotSpliterators](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java), complete dependency body | `30cf137538353ac8e91514fff7c5db3903da8819` |
-| [M3ProgressScope](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3ProgressScope.java), complete dependency body | `591223844f3cfd50fdf5431deb3bc2b1c9d7b5f0` |
-| [M3ProgressAdapters](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3ProgressAdapters.java), complete dependency body | `87d3fa14669325d26d0fe1f9a626fce43b357a51` |
-| [M3SystemProgress](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3SystemProgress.java), complete dependency body | `66984feed7d22b8e047f69de0862b7ade9083ede` |
-| [M3ChildProgressMonitor](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3ChildProgressMonitor.java), complete dependency body | `44a791db2fac00214479e7020ec3c509f70d7ef2` |
-| [M3LockedTreeMap](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3LockedTreeMap.java), complete dependency body | `374960e9edfd4c1bbcc0951c4592d3ffd1b31f70` |
-| [M3Collections](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3Collections.java), tree factory methods only | `3d2f5aa53bda55293b3254bed3d526b896cbd044` |
-| [m3/collections/src/main/java/module-info.java](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/module-info.java), module/build/package declarations | `e6ca30e5a04a0b7c0f1ada4f0659342cd863d78d` |
-| [m3/collections/src/main/java/com/m3/collections/package-info.java](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/package-info.java), module/build/package declarations | `3998c9f78a8617aa3b593c353f7d7ac48e93a52b` |
-| [m3/collections/pom.xml](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/pom.xml), module/build/package declarations | `3c408446a3841282754f06d82819c285a23acd8a` |
-| [m3/pom.xml](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/pom.xml), module/build/package declarations | `693156006961717eccfc649585e724d67682b3df` |
+| [M3SlotMap](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3SlotMap.java), complete dependency body | `a10ee53abb325476ac32c7210712e30cc304182c` |
+| [M3OrderedSlotMap](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3OrderedSlotMap.java), complete dependency body | `ce5fa2ec4306af03239ab7539ad91acaeaaa8245` |
+| [M3SlotArrays](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3SlotArrays.java), complete dependency body | `e337c69710c871f8caa77a1afe53149f1fd705cc` |
+| [M3SlotSpliterators](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3SlotSpliterators.java), complete dependency body | `dab4d257bf82c8dbdf8fec04e1ac0d84ac7e4a83` |
+| [M3ProgressScope](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3ProgressScope.java), complete dependency body | `3b9505cfe94c04747a4071ffc04401f74669b78d` |
+| [M3ProgressAdapters](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3ProgressAdapters.java), complete dependency body | `2d3e4c33e61a02eea44afb46b3f97dc57d41b0b9` |
+| [M3SystemProgress](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3SystemProgress.java), complete dependency body | `fb91e213206441647810a720fa8f841e07ab83cd` |
+| [M3ChildProgressMonitor](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3ChildProgressMonitor.java), complete dependency body | `a62a6ace1ec939a0eeba7b49e6369a9d081d544b` |
+| [M3LockedTreeMap](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3LockedTreeMap.java), complete dependency body | `65c544c78092f4f365c26904aac45b11e574760a` |
+| [M3Collections](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3Collections.java), tree factory methods only | `9b49f723dfa91628978e26db2564e0282a3e78a9` |
+| [m3/collections/src/main/java/module-info.java](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/module-info.java), module/build/package declarations | `bcb0af11a4d6038bc79ec582e71c63f218468a6e` |
+| [m3/collections/src/main/java/jdk/m3/collections/package-info.java](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/package-info.java), module/build/package declarations | `cb31702d369e5a371879468f84918e066bc88dce` |
+| [m3/collections/pom.xml](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/pom.xml), module/build/package declarations | `e82f308c1bc1e05807a6e6bf3104fe2d14664fa2` |
+| [m3/pom.xml](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/pom.xml), module/build/package declarations | `19766bf32f2db46fe34ee19c6bb48e553589baaf` |
 | [m3/collections/README.md](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/README.md), guide reuse | `622b61d4b719fd6879ef8df72ffbcfbaa7e54918` |
-| [doc/m3-guide/collections-reference.md](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/doc/m3-guide/collections-reference.md), guide reuse | `ce6038b8276799c9dc15662af916870d7c5b2e39` |
+| [doc/m3-guide/collections-reference.md](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/doc/m3-guide/collections-reference.md), guide reuse | `c89d5c9f08d2b345c7f41f37823fea253c79f033` |
 | [SortedSet](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/src/java.base/share/classes/java/util/SortedSet.java), bounded inherited-default/signature review | `3b4612457c6e4cc247601a6d1e0b64a1a7f720d2` |
 | [SortedMap](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/src/java.base/share/classes/java/util/SortedMap.java), bounded inherited-default/signature review | `447b0a2c7e79691d8a559feea04cca770777e966` |
 | [NavigableSet](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/src/java.base/share/classes/java/util/NavigableSet.java), bounded inherited-default/signature review | `8d7da4eddd32e426e517b741f3b360304d5a7ce8` |
@@ -606,39 +606,39 @@ public repository source; licensing and receiver authority are unchanged.
 
 | Complete test body read, NOT_RUN | Git blob |
 | --- | --- |
-| [M3MapContractTest](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3MapContractTest.java) | `d40c88ec184b90eb057dd859d840c915e4f93df8` |
-| [M3JdkCollectionDifferentialTest](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3JdkCollectionDifferentialTest.java) | `0ca5ef64c7a3fbbc8f869e96affca5dcd8672003` |
-| [M3SequenceContractTest](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3SequenceContractTest.java) | `02ba3c683428a02855517093edbaece60ba7444e` |
-| [M3LazyTreeMapSelfTest](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3LazyTreeMapSelfTest.java) | `9f076ba1d21747e412904b2042510b0ca1e460cd` |
-| [M3LazyValueStateSelfTest](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3LazyValueStateSelfTest.java) | `4c3ce5c828630c7001b9945a1555f5be63c6193f` |
-| [M3LazyObserverRegressionTest](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3LazyObserverRegressionTest.java) | `7d4a21d41dab5a06d52edf8f54689f3118198963` |
-| [M3FootprintContractTest](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3FootprintContractTest.java) | `92183e11d643a12cc797d3d3eb674793d538005a` |
-| [M3NoRetainedStructuralEntryTest](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3NoRetainedStructuralEntryTest.java) | `9e64f4c57ab840b0da744bcff43b9f703fe033f8` |
-| [M3LazyTreeMapTest](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3LazyTreeMapTest.java) | `b101de05ae69a578f273f4e455b796224a2ecf0a` |
+| [M3MapContractTest](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3MapContractTest.java) | `5f7990ac0f0922a48c1ce5c4f6cd0beeaf2c331b` |
+| [M3JdkCollectionDifferentialTest](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3JdkCollectionDifferentialTest.java) | `a6898c609081aea5205e003b0b3d2effa0ebe417` |
+| [M3SequenceContractTest](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3SequenceContractTest.java) | `60fd86464d6ef8670c2c900b9ea84b761edcaf79` |
+| [M3LazyTreeMapSelfTest](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3LazyTreeMapSelfTest.java) | `1f7a0c32fc4df8993ae41da8757b5982baff1728` |
+| [M3LazyValueStateSelfTest](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3LazyValueStateSelfTest.java) | `ff5856ec05b3933d846d2d4eb3cedd11db369fb9` |
+| [M3LazyObserverRegressionTest](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3LazyObserverRegressionTest.java) | `bbe903e870dc731230d7c292a088b92320b1bc59` |
+| [M3FootprintContractTest](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3FootprintContractTest.java) | `92183e11d643a12cc797d3d3eb674793d538005a` |
+| [M3NoRetainedStructuralEntryTest](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3NoRetainedStructuralEntryTest.java) | `effe339fd3945b49307ae97f219e0a2837e752c9` |
+| [M3LazyTreeMapTest](https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3LazyTreeMapTest.java) | `ff6206a9221d9c5f67af07adb79fd54cae61011b` |
 
-[tree]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3TreeMap.java
-[set]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3TreeSet.java
-[provider]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3LazyValueProvider.java
-[state]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3LazyValueState.java
-[bits]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3LazyEventBits.java
-[granularity]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3LazyEventGranularity.java
-[policy]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3LazyEventPolicy.java
-[sink]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3LazyEventSink.java
-[event-source]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3LazyEventSource.java
-[events]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3LazyEvents.java
-[operation]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3LazyOperation.java
+[tree]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3TreeMap.java
+[set]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3TreeSet.java
+[provider]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3LazyValueProvider.java
+[state]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3LazyValueState.java
+[bits]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3LazyEventBits.java
+[granularity]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3LazyEventGranularity.java
+[policy]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3LazyEventPolicy.java
+[sink]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3LazyEventSink.java
+[event-source]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3LazyEventSource.java
+[events]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3LazyEvents.java
+[operation]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3LazyOperation.java
 [module]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/module-info.java
 [pom]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/pom.xml
 [reactor]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/pom.xml
 [module-guide]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/README.md
-[map-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3MapContractTest.java
-[jdk-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3JdkCollectionDifferentialTest.java
-[sequence-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3SequenceContractTest.java
-[lazy-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3LazyTreeMapSelfTest.java
-[state-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3LazyValueStateSelfTest.java
-[observer-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3LazyObserverRegressionTest.java
-[footprint-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3FootprintContractTest.java
-[entry-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3NoRetainedStructuralEntryTest.java
-[wrapper-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3LazyTreeMapTest.java
+[map-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3MapContractTest.java
+[jdk-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3JdkCollectionDifferentialTest.java
+[sequence-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3SequenceContractTest.java
+[lazy-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3LazyTreeMapSelfTest.java
+[state-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3LazyValueStateSelfTest.java
+[observer-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3LazyObserverRegressionTest.java
+[footprint-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3FootprintContractTest.java
+[entry-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3NoRetainedStructuralEntryTest.java
+[wrapper-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3LazyTreeMapTest.java
 [sorted-set]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/src/java.base/share/classes/java/util/SortedSet.java
 [navigable-set]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/src/java.base/share/classes/java/util/NavigableSet.java

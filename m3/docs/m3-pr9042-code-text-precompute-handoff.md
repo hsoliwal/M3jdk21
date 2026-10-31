@@ -66,7 +66,7 @@ compiler/test/contract/native gate into a pass.
 Run:
 
 ```bash
-python3 m3/compatibility/check_synexia_pr9042_code_text_precompute.py
+python3 m3/compatibility/check_m3_pr9042_code_text_precompute.py
 mvn -B -ntp -f m3/ports/precompute/pom.xml test
 mvn -B -ntp -f m3/ports/precompute/pom.xml -Pnative test
 mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \

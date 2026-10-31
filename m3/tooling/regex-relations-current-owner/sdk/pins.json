@@ -1,24 +1,24 @@
 {
   "schema": "M3_REGEX_RELATIONS_CURRENT_OWNER_RECEIVING_SDK_INPUTS_V1",
   "providers": {
-    "openrewriteAdapter": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-    "manifestKernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+    "openrewriteAdapter": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+    "manifestKernel": "78d5fb68f13872164973a8918cc7886c5f548bca"
   },
   "files": [
     {
       "path": "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
-      "unchangedGitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
-      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+      "unchangedGitBlob": "78d5fb68f13872164973a8918cc7886c5f548bca",
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e"
     },
     {
       "path": "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
-      "unchangedGitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
+      "unchangedGitBlob": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+      "sha256": "300a520ec9d273922d1edbdf5442e5faf825c47e8e3df7febf4baa2f39945401"
     },
     {
       "path": "pinned-engine/jdk/internal/m3/rewrite/M3RegexRelationsCurrentOwnerRecipe.java",
-      "unchangedGitBlob": "c82f01cdf2c4524d86161ce3a2cdab68d5b5ad3b",
-      "sha256": "31cf12a75e4ba6fa8a1edbbe18d91a1de255a82a40777bd83459e92b99677022"
+      "unchangedGitBlob": "12558533f03ad408b570b71fa3da3489196cf41a",
+      "sha256": "78e0bc6f658791eaa0022ab382815934a0efc9fd73ee0e5d54fca7633a3aba5f"
     },
     {
       "path": "pom.xml",
@@ -27,23 +27,23 @@
     },
     {
       "path": "src/main/resources/META-INF/rewrite/m3-regex-relations-current-owner-20261017.yml",
-      "unchangedGitBlob": "622cd1e9d39e7d2724855a148f2a6866ec1c6a26",
-      "sha256": "b17b32aff512f61f78123a97f301c56d325c65b7531d2b68e04d6bffbbc3723f"
+      "unchangedGitBlob": "97e07b77e9358e03732b2dae2e3dd5f5035af668",
+      "sha256": "968d0625c70a9c42e1652ddd3ff3ab2be912ddcaa636f764d0994268e8925fe6"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/manifest.tsv",
-      "unchangedGitBlob": "bee28697e6267d75ee0eb7a9c26abd77fbf9a278",
-      "sha256": "e105f9a78f102d42ddee319ef51b1aa78b348af6ae477b136dc60669c1eb396d"
+      "unchangedGitBlob": "902ce1e652f3a6ef474c3420ce5285cfbe7986b6",
+      "sha256": "6a815fe1045d53af91b012659f1666b01d001e86a2494cc18e4b786d4d855e01"
     },
     {
       "path": "src/test/java/jdk/internal/m3/rewrite/M3RegexRelationsCurrentOwnerRecipeTest.java",
-      "unchangedGitBlob": "ed6c37da522fa59f8f1a68c5f971a6625806af71",
-      "sha256": "d4ce25880247e57766ad2580820507c280417fb2d87ad809b19bf986d0d6daf0"
+      "unchangedGitBlob": "53861074f20a1ad6e1c0ca7cb988443c1085826a",
+      "sha256": "914b5e9c1a420f8eec8265628c147649f394b4b0201d251fe522a83536f95e7b"
     },
     {
       "path": "FOSS_REUSE_DECISION.tsv",
-      "unchangedGitBlob": "28e788b70820b352ba3639716c192c0bede329ef",
-      "sha256": "5bf13b6073ae652924b2d14674077dff969f72341e3209b9e64ca777b6124258"
+      "unchangedGitBlob": "f746664c8bef51a843f2119df9359ac574b9fc41",
+      "sha256": "71ba2d76235a28c81a31d66fe924472a6d1191ae2987bebea736799427525bab"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -72,13 +72,13 @@
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/before/M3StateRelation.java",
-      "unchangedGitBlob": "ea904c0962fb976f43b45575f06f46ad198e29a2",
-      "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa"
+      "unchangedGitBlob": "30359b57b7b553e78355d3672119c685051ec1da",
+      "sha256": "ae1de4b652b474c594d5fa6e8ec2d43aae720d166e885497217688c9fabae49d"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/out/M3StateRelation.java",
-      "unchangedGitBlob": "ea904c0962fb976f43b45575f06f46ad198e29a2",
-      "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa"
+      "unchangedGitBlob": "30359b57b7b553e78355d3672119c685051ec1da",
+      "sha256": "ae1de4b652b474c594d5fa6e8ec2d43aae720d166e885497217688c9fabae49d"
     },
     {
       "path": "src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017/before/M3StateRelation.c",
@@ -102,8 +102,8 @@
     },
     {
       "path": "verify.py",
-      "unchangedGitBlob": "649eeae6c2de75629142d7f1b42d998f1abe3fb7",
-      "sha256": "86096d1f473b15b4210353de65f5aa2f00c44bc6e3021b91562e385724caf43f"
+      "unchangedGitBlob": "06ae6bcdd3e61e1c55cd8c83eb7d261dfa8e4c66",
+      "sha256": "a740df565ec4ab389b1f9ad7727e96e27d2b442febf26396fea6e79de62b4290"
     }
   ]
 }

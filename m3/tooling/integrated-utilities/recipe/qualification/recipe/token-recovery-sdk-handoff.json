@@ -2,8 +2,8 @@
   "schema": "M3_TOKEN_RECOVERY_ACTUAL_SDK_HANDOFF_V1",
   "time_utc": "2026-10-19T04:56:29.739564+00:00",
   "input_core_commit": "2717d156ad2aba73dfdfcfc6a58b59a82371798e",
-  "manifest_sha256": "97e62d3ec5cc0752e6d4bbbbdc06276834ee053147e7d294bee041ff98110b70",
-  "actual_result_receipt_sha256": "35589d10a89b79260e9da8ea5e4e5fbaacfc1624fa76dbfaf3942ae74b3ad821",
+  "manifest_sha256": "c6fae9cffa1d83bbf1e657419f0c0bcd91c37084018be0c3a2dffd0a8301f7bb",
+  "actual_result_receipt_sha256": "4e858ee505faf6ae0f23b4041654c189a99c27a1eef49fa7ad86bae0750f3cab",
   "actual_openrewrite_results": 13,
   "actual_second_sdk_run_changes": 0,
   "sdk_tests": {
@@ -25,38 +25,38 @@
   "files": [
     {
       "path": "m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
-      "before_sha256": "f123ae356ffdd5df1523205dc5f1f48e6daf461b8a6f908a9870e348e80f5e7f",
-      "after_sha256": "2aec0ce2f08dccaf2405ba5950e5ce1378de0f44546f000b85a07c675ab0e0ae",
+      "before_sha256": "5bf447216af55a51b73c275182af891c1ded5c2b427fa6856139731078d2ef8c",
+      "after_sha256": "46f7e0aa4f9c68c1959efb96b62916f5fe9abcaca6e8b3383255ccc27a6587e6",
       "actual_result": true
     },
     {
       "path": "m3/collections/algorithm-catalog/sdk-family-names-20261017.tsv",
-      "before_sha256": "e316251a7daf20a6b22db9f18e733c733386385b75f61377d8a8b0ca8be75a08",
-      "after_sha256": "e316251a7daf20a6b22db9f18e733c733386385b75f61377d8a8b0ca8be75a08",
+      "before_sha256": "dd2aed4d82561306a3bb901712b8c8bdbb08e103d32f192a2c9318363d16380a",
+      "after_sha256": "dd2aed4d82561306a3bb901712b8c8bdbb08e103d32f192a2c9318363d16380a",
       "actual_result": false
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java",
-      "before_sha256": "c1ae229f00911e0881de9cae102f2c65f0f7f9f8eb4da1abd364a816dd84ee0d",
-      "after_sha256": "c1ae229f00911e0881de9cae102f2c65f0f7f9f8eb4da1abd364a816dd84ee0d",
+      "before_sha256": "956ae0faf7f37d4b963d0d074445484548efe73f164142f2bd0c7de0815e49d4",
+      "after_sha256": "956ae0faf7f37d4b963d0d074445484548efe73f164142f2bd0c7de0815e49d4",
       "actual_result": false
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java",
-      "before_sha256": "b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d",
-      "after_sha256": "b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d",
+      "before_sha256": "f1e3e21c37cbe084ef6b9446b86293d5039cd9b2bc6c1bf86d63a86793e3b8d5",
+      "after_sha256": "f1e3e21c37cbe084ef6b9446b86293d5039cd9b2bc6c1bf86d63a86793e3b8d5",
       "actual_result": false
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
-      "before_sha256": "1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369",
-      "after_sha256": "1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369",
+      "before_sha256": "e8a722cec3cdad01ce127936936f7c9928f094658e075aa9d1d89077e6eb7199",
+      "after_sha256": "e8a722cec3cdad01ce127936936f7c9928f094658e075aa9d1d89077e6eb7199",
       "actual_result": false
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
-      "before_sha256": "477135e13481942fef3b95b96a08d39c9c86dd92a649959c6d035b19b5784031",
-      "after_sha256": "477135e13481942fef3b95b96a08d39c9c86dd92a649959c6d035b19b5784031",
+      "before_sha256": "e8b8c5e455d4b46bb85b5c4ee6c8234643ca6e10f8314a468f455a80067a7f7d",
+      "after_sha256": "e8b8c5e455d4b46bb85b5c4ee6c8234643ca6e10f8314a468f455a80067a7f7d",
       "actual_result": false
     },
     {
@@ -86,7 +86,7 @@
     {
       "path": "m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json",
       "before_sha256": "0271ca2761cb871091fb22c5d7989ff11822ff2deb65d67d2c58080878948ff5",
-      "after_sha256": "1e5c8b03586ff87d1ae1d81a97e667cbcc22710fc7fc3540c25bce11a5c9c159",
+      "after_sha256": "069db1662f60e22fa7a979436f3c7162dc5a0845930b8e5c79a679612b4a7a0a",
       "actual_result": true
     },
     {
@@ -98,13 +98,13 @@
     {
       "path": "m3/docs/name-mapping.json",
       "before_sha256": "2bb378d4e2af9c0bf62482182acdf53f1919abe16e6146195d38d9bcfc6ab9d7",
-      "after_sha256": "80094396bd12f77bf90741cd61d9b190b2fbe613ab4a07960669e9652fe9d7fc",
+      "after_sha256": "b6d6bd6cb8a203f84897610ef963e175e6be6570550732b5820e208c691e9433",
       "actual_result": true
     },
     {
       "path": "m3/runtime-integration/integrated-collections/FOSS_REUSE_DECISION.json",
-      "before_sha256": "9659689fab63ae642eb4b789814f6402108c9d24a9f1b48bf924207992fd6db1",
-      "after_sha256": "9659689fab63ae642eb4b789814f6402108c9d24a9f1b48bf924207992fd6db1",
+      "before_sha256": "3ee2e50f838470732304b728ee7c37a224611dc42fd56148faf687f3c14b1cad",
+      "after_sha256": "3ee2e50f838470732304b728ee7c37a224611dc42fd56148faf687f3c14b1cad",
       "actual_result": false
     },
     {
@@ -127,8 +127,8 @@
     },
     {
       "path": "m3/runtime-integration/integrated-collections/counterexamples.json",
-      "before_sha256": "b481d09450f49bf14dbc40d5bec89c9d6924a5e1893e614f7216e8ef5959c077",
-      "after_sha256": "b481d09450f49bf14dbc40d5bec89c9d6924a5e1893e614f7216e8ef5959c077",
+      "before_sha256": "e24f21e0fa610db3038f420bcc05b9f39cb38278548efadf058d3efa3d58aa27",
+      "after_sha256": "e24f21e0fa610db3038f420bcc05b9f39cb38278548efadf058d3efa3d58aa27",
       "actual_result": false
     },
     {
@@ -157,8 +157,8 @@
     },
     {
       "path": "m3/runtime-integration/integrated-utilities/contract-catalogue.json",
-      "before_sha256": "d36b88fc08ce728285c59f1826211be0a9154df2dbf8aedcd8a9a5875150d4b8",
-      "after_sha256": "d36b88fc08ce728285c59f1826211be0a9154df2dbf8aedcd8a9a5875150d4b8",
+      "before_sha256": "8905efb6c8928d1d6834455532b3e65f6976d839a52e6ceb517940f4baf2e2bd",
+      "after_sha256": "8905efb6c8928d1d6834455532b3e65f6976d839a52e6ceb517940f4baf2e2bd",
       "actual_result": false
     },
     {
@@ -182,7 +182,7 @@
     {
       "path": "m3/runtime-integration/token-regex/contract-catalogue.json",
       "before_sha256": "ABSENT",
-      "after_sha256": "3e1bfbf638ecf134ab2f0d81619ce2cb05472c7e12f1497b41ef54a01fbb16df",
+      "after_sha256": "b4b5279f88bed412a78cd533563b417b86b25fc19e9a0283f64d20ab8e686491",
       "actual_result": true
     },
     {

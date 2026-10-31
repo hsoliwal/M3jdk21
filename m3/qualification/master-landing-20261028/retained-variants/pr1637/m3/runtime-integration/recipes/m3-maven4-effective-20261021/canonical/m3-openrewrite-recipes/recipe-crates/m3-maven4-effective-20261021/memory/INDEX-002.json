@@ -1,16 +1,16 @@
 {
   "schema": "M3_PENDING_CORRECTION_INDEX/1",
   "events": [
-    "95505b69dac37f6285deded64ef70e9e5431ea502fca5712f35c8d6569ae6cb9",
-    "55ef022ea03a13e03640ebdb4005cf9ff1e397204258c03c26c59f337ab1711e"
+    "948de23008d7e66ebcb2f93a2b86c3ba6acaedbbae82c841d9da718a45d4b615",
+    "580fe2ff0e9dbd4e625251098948f20be7fe5207806a457aaf1176c6712034b4"
   ],
   "admission": "PENDING",
   "conformance_receipt": {
     "path": "proof/memory-conformance-001/RESULT.json",
-    "sha256": "bf55930b10f9f063c6a48d08336818fe9dcc115127ca3216916799828f1fd629"
+    "sha256": "47ee4cb235fc9e4e2ede51c26e2e824fbe4479654e9b49df9a564d316a08b678"
   },
   "predecessor_checkpoint": {
     "path": "memory/FINAL_RESULT.json",
-    "sha256": "a2503d6a070d1d1feb2ca40fcc31b1a4a8ecefc6ef6b18ad8585ac2017101a12"
+    "sha256": "d8524063a3acfb23c6b2479ad9302a08963cb60656939e862d457fe690dbf17d"
   }
 }

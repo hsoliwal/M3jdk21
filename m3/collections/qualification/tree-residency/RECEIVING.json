@@ -17,19 +17,19 @@
         "name": "jdk.internal.m3.ViewportResidencyReuse20261026",
         "dataset": "vpt-residency-reuse-20261026",
         "before_blob": "65ab293a00da1092243f7f1904771c5a0cc60a44",
-        "after_blob": "6026f2eaee317bb2fe3bcaacb3f6d2c51a3b23b3"
+        "after_blob": "b51984ad472dab8fffb75f8206155d4198dcce39"
       },
       {
         "name": "jdk.internal.m3.ViewportTreeClosure20261026",
         "dataset": "vpt-tree-closure-20261026",
-        "before_blob": "6026f2eaee317bb2fe3bcaacb3f6d2c51a3b23b3",
+        "before_blob": "b51984ad472dab8fffb75f8206155d4198dcce39",
         "after_blob": "9725e48f7850b107b8b968527827eb5fde5b1fe6"
       }
     ],
     "owner": "M3HashPinnedJavaSnapshotRecipe",
     "owner_git_blob": "98138cb6734ad86e3f77b8722fa5ff459842e841",
-    "original_receiver_git_blob": "d7f5cda465d8f473f4969d4db15d717af1391745",
-    "original_test_git_blob": "e69993797978f800a4d1b01b55093dc8dde16514"
+    "original_receiver_git_blob": "274515be1975a252783a464489505f232679455f",
+    "original_test_git_blob": "bd3c4ead8f188aaf3055447cb729e583ed8d6a18"
   },
   "local_qualification": {
     "parser": "org.openrewrite:rewrite-java-21:8.17.1",

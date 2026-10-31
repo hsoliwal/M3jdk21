@@ -4,7 +4,7 @@
 `jdk.m3fs` by [product PR #1425](https://github.com/hsoliwal/M3jdk21/pull/1425).
 No M3-on-JDK adapter, new String pool or filesystem module is introduced.
 This is a one-owner, per-file refinement of the existing
-`m3/fs/src/main/java/com/m3/fs/M3FsPrecomputeBundle.java`.
+`m3/fs/src/main/java/jdk/m3/fs/M3FsPrecomputeBundle.java`.
 
 ## Existing canonical geometry, re-used
 
@@ -40,7 +40,7 @@ The new named recipe is
 `com.synexia.m3.M3FsSegmentedUtf16IndexedEquals20261020`.
 All complete Java compilation-unit postimages are source-sealed by SHA-256;
 the exact existing M3FS owner Git preimage is
-`71e2a7d3a7b9da5670ca1ffeeeee208941eba6d6`.
+`36b6483cbaaa9b8a62b48cba69d52b94b5e82983`.
 Do not hand-patch generated receiver files.
 
 ## Qualification

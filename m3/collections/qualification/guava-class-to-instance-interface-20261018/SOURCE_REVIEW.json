@@ -12,11 +12,11 @@
   "input_pins": [
     {
       "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\class-instance-next\\PREPARED_QUALIFICATION.json",
-      "sha256": "1c09e59544196a1d1e06f1a3b91fb0525f321045dff5f865d5054b3e25407bb2"
+      "sha256": "b2ca9084ef83c242d7b4413012aff4c0d27d7c22da70ed9161304d0c67171d66"
     },
     {
       "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\class-instance-next-upstream\\PREPARED_UPSTREAM_QUALIFICATION.json",
-      "sha256": "10186283c5ed7053598bd0a543b5315967c8fab72092ced0b1c36fe186bd65a2"
+      "sha256": "d4d83bc08d9659360e5b441c79ecfb201f870d49fb0c9e890d929e5e5188188d"
     },
     {
       "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\class-instance-next-upstream\\CONTRACT_FEATURES.json",
@@ -24,7 +24,7 @@
     },
     {
       "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\class-instance-next\\src\\main\\java\\com\\m3\\collections\\interop\\M3GuavaClassToInstanceMaps.java",
-      "sha256": "8e149744d798e19f217f324553ef8373d0b761c47585380918d15f96a511af95"
+      "sha256": "379fc843df711dc887bd4bf11fb9d90373bac6842c531280da8f165c031a7078"
     },
     {
       "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\class-instance-next\\src\\test\\java\\com\\m3\\collections\\interop\\M3ClassToInstanceFocusedTest.java",
@@ -32,11 +32,11 @@
     },
     {
       "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\class-instance-next\\src\\test\\java\\com\\m3\\collections\\interop\\M3GuavaClassToInstanceMapsSelfTest.java",
-      "sha256": "c247f3c0a1b923b22cbbd693265d0960f5b062608fbe2827728f242a60cab22c"
+      "sha256": "6e8321438661cd07d24a4f82f27b45e0cb3705dcdf04eaa496c85f4ed8bc3964"
     },
     {
       "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\class-instance-next\\src\\test\\java\\com\\m3\\collections\\interop\\M3GuavaClassToInstanceMapsTest.java",
-      "sha256": "8c2cf570d004f7b3e8d1ab4476b3e7075de6a3f31c09ef6a1617eb78fd8c48d3"
+      "sha256": "af0dc1700993ea21bedb6f41d7cea33f077a8983bdb0bc7a012914e7494bfc3a"
     },
     {
       "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\class-instance-next-upstream\\src\\test\\java\\com\\google\\common\\collect\\M3ClassToInstanceUpstreamSuiteLauncher.java",

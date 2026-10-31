@@ -27,15 +27,15 @@ PROFILES = (
         "state": "before",
         "code_sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
         "plan": "plan.json",
-        "plan_sha256": "648f80ae4073400f1ea1210f8cdc26942019d53eb4452d839961c466f395d05a",
+        "plan_sha256": "7c98e1c8d7d749e2eedd381d126cf68f641b86004edc6278cd32f613324e8326",
         "recipe_id": "jcc-handoff-20261005/2",
         "seal": "70283e86d30abf8e30a09b10d77be40f99160371a98927dc151d680e3c2e4a87",
     },
     {
         "state": "after",
-        "code_sha256": "4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787",
+        "code_sha256": "dcbbabd8b7c99bcf1fe50b338bb1904f2f0c24b3a457c1ef75d849a0dd88fbb4",
         "plan": "plan-intake-8131.json",
-        "plan_sha256": "8034d77f1124584888dce10760bd2f5dae55eeb93497f7a0db1d09a3a197ec5f",
+        "plan_sha256": "eb5e8b0d78819a5a8a63dc7988d17d60480df92bec2537f6a2bd8d3aa6db7385",
         "recipe_id": "jcc-handoff-20261005/2-intake-8131",
         "seal": "0704f21408ef263d4d0adc9eb5d48e62c7c30949cb1a197fb9b7f8a21aff4152",
     },
@@ -47,13 +47,13 @@ HISTORICAL_POM = Path(
     "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
     "jdk21-hash-pinned-text/jcc-handoff-20261005/pom-before-752.xml"
 )
-HISTORICAL_POM_SHA256 = "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"
-CURRENT_POM_SHA256 = "a53bdeee8afe28b90cb0e348e718b70610a9487edb1b75b46e09bfb76e0f3dc9"
+HISTORICAL_POM_SHA256 = "3eb73bbf38c0c591b8f714f6e9923eaa25a35b5ffc7f0512b8ec7fd3602b5531"
+CURRENT_POM_SHA256 = "bc5ee8573f4a4d70319b345173c6dfee37a5cd8f4c2a929a86857328ac8107f2"
 CURRENT_PROFILE = {
     "state": "current",
-    "code_sha256": "4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787",
+    "code_sha256": "dcbbabd8b7c99bcf1fe50b338bb1904f2f0c24b3a457c1ef75d849a0dd88fbb4",
     "plan": "plan-intake-752-ci.json",
-    "plan_sha256": "e4ea964db1a6f9527122ff0dad1c969a43dc50a0f80c771c86b70bcd6da6dcaf",
+    "plan_sha256": "16dda826a4e03255bf0caa0965cc7315cd1264e5b5942bebeec1549879dace8a",
     "recipe_id": "jcc-handoff-20261005/2-intake-752-ci",
     "seal": "6e8d48067e814566e0c63db14db405c360c8ff3ab4948d352170b6ca20293594",
 }

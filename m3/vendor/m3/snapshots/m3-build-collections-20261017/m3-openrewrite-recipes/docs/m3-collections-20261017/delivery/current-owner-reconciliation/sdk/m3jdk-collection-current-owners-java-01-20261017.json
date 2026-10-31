@@ -17,7 +17,7 @@
     "-Dm3.output=/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/livebase-generated/m3jdk-collection-current-owners-java-01-20261017",
     "verify"
   ],
-  "manifestSha256": "d572af0a0820400dee0f27589f090d92e3c121952c73421bd5a9a5f3bb6dd78f",
+  "manifestSha256": "3b46af4631933f76ae01effb28fd1d30c9ac47a23ec8ad0a9ced05b64d765399",
   "logSha256": "f79ea14e8b69683edbcb03dbb459f0ab9d5e854841ec13a3081b31db2639b47b",
   "proofModified": false,
   "engineModified": false,

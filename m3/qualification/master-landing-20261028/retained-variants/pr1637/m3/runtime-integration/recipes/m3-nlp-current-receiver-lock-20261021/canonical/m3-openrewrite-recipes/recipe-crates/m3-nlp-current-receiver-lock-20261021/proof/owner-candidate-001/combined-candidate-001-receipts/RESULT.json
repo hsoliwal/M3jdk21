@@ -1,5 +1,5 @@
 {
-  "build_report_sha256": "d08888f808b7af2badbb21848ec17d3394e7e09e1717f0d3966d3f6139381841",
+  "build_report_sha256": "7e5eea1fc09f741971a89692bf6ea1c72e02132425145820ca93cd280cb64343",
   "command": [
     "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
     "-B",
@@ -15,7 +15,7 @@
     "--lucene-source",
     "/workspace/scratch/206049dfb270/nlp-work/forks/lucene",
     "--recipe-runner",
-    "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/synexia/synexia-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/run_recipe.py",
+    "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/m3/m3-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/run_recipe.py",
     "--recipe-resources",
     "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/synexia/synexia-openrewrite-recipes/src/main/resources",
     "--opennlp-dependencies",
@@ -23,7 +23,7 @@
     "--lucene-dependencies",
     "/workspace/scratch/206049dfb270/nlp-work/dependencies/lucene"
   ],
-  "driver_sha256": "85bcb7e3e70a892f17481b0dcbcf08549a598b5de52a065583b7a8b9e909f917",
+  "driver_sha256": "2af38b31aef1c27c5a44430f650963131df6d42197f20218d26aef7530c9da1d",
   "driver_unchanged": true,
   "elapsed_seconds": 204.887,
   "environment": {
@@ -38,17 +38,17 @@
   },
   "historical_bigstring_template_mismatch": "Retained separately; this gate binds the actual received source pinned by its manifest/workflow, not the differing original canonical head template.",
   "input_count": 11372,
-  "inputs_sha256": "6b0e30448dd8a126d00a1c50339c556aeef2b00b57f6df2610af9039459e5ffc",
+  "inputs_sha256": "2a8c3852de93c8a59f882d85d5e2748be56d588627ccad5fa6fb3c3e538e580a",
   "inputs_unchanged": true,
   "log_bytes": 147,
   "log_sha256": "22fc0fb84926fc6b8687f394ac0d785bcda7cb7599b8f8b081fc7e5530c68d9e",
   "module_count": 62,
-  "readback_sha256": "6b0e30448dd8a126d00a1c50339c556aeef2b00b57f6df2610af9039459e5ffc",
+  "readback_sha256": "2a8c3852de93c8a59f882d85d5e2748be56d588627ccad5fa6fb3c3e538e580a",
   "receiver_base": "2779aba3f98f31c324be43f731be7914e1a05935",
   "runtime_dependency_resolution": "Exact prequalified SHA-locked dependency directories; original source build gates invoke no Maven or network dependency fetch.",
   "schema": "M3_NLP_COMBINED_CANDIDATE_GATE_1",
   "scope": "Existing full Java21 combined source/JMOD/image gate, isolated two-file candidate; no product application yet.",
-  "source_lock_sha256": "7f591c98c603ba8128c97747fe38fd1ccfe8adb5f2cd712b98b2697fff935acb",
+  "source_lock_sha256": "271a532810591e94f5ceaab443820fdb08f96d1288e9ba5c1ce55c09d3444c8b",
   "state": "PASS",
   "tests": {
     "ModelSourceProbe": "Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData\nModelSourceProbe PASS: real token/sentence model train/serialize/reload; immutable source offsets and probability parity",

@@ -5,195 +5,195 @@
   "files": [
     {
       "path": "m3/build.sh",
-      "gitBlob": "5ac0b944e34bf5f226d77541adbcb28e35edcfe5",
+      "gitBlob": "70b50228bba3775b6feacd500eca3f3c7529e0f2",
       "bytes": 5412,
-      "sha256": "9119dec83045301a2166d0a1de3b1008dfd431eaf3b5317daa14dc7e41325807"
+      "sha256": "f3d12d51200572a8f945338bcd26931dc889c1878a1341b2b199a09b6d03590d"
     },
     {
       "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
-      "gitBlob": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
+      "gitBlob": "5022e9811ce9391671c794446c7772569cfd369f",
       "bytes": 2634,
-      "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb"
+      "sha256": "1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7"
     },
     {
       "path": "m3/core/src/jdk/m3/text/LexiconTool.java",
-      "gitBlob": "32ee9e317d9c2a464958b0cfe256b457edb2f295",
+      "gitBlob": "daee29e96b6a6b5906b4603358a1ebd03a802337",
       "bytes": 1093,
-      "sha256": "8f86470619da33cf79ce3f8c6b99e7b6a4815f1c0053c7a07985a6ea4010563a"
+      "sha256": "fb3b3a4db8bb699a326d9e2b1114ed04089400294349f97bde0ce6b73e1aa51c"
     },
     {
       "path": "m3/core/src/jdk/m3/text/LocalM3Arena.java",
-      "gitBlob": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
+      "gitBlob": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
       "bytes": 1975,
-      "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d"
+      "sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4"
     },
     {
       "path": "m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
-      "gitBlob": "6b745c9472144ad6de01de4d06a533974e558fb1",
+      "gitBlob": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
       "bytes": 2115,
-      "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51"
+      "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad"
     },
     {
       "path": "m3/core/src/jdk/m3/text/M3BigString.java",
-      "gitBlob": "9f66122b2dba2e4e0bc417208f18d0f8a2f95dec",
+      "gitBlob": "46e79d724bf6fdb8228bde6cee4132c36b2094e1",
       "bytes": 33365,
-      "sha256": "e09815cea88c44e4da89ca8979ba247cddeee6c97b496d1aa2309a48916a90de"
+      "sha256": "ec7142df904511f455e07650081db9eb6518a1fab138ea7ae44be15192cde343"
     },
     {
       "path": "m3/core/src/jdk/m3/text/M3CorpusProjectionDigest.java",
-      "gitBlob": "e47844e6ff6c5751a9b3ddaa0c04cd1b2aca9c97",
+      "gitBlob": "9bcb58b3c095385833f2e119187fe3aa4441a7c9",
       "bytes": 1320,
-      "sha256": "cf08f71d77d7598c774225d83a38d33e610e3cbceb6c360240f0d08884d5cc8e"
+      "sha256": "ae0220e4bb05d7cadb660e2b2ac1fe0dc53b1d0cdce9bcc7b1d38254be2be920"
     },
     {
       "path": "m3/core/src/jdk/m3/text/M3CorpusSourceReceipt.java",
-      "gitBlob": "8cf8e944de19fae9266196b8807c7341694bea0a",
+      "gitBlob": "ede467da0e7b2e06f74642cd3932263144bdc82d",
       "bytes": 1849,
-      "sha256": "d1eed20264582c05671b5833ece9cc975c27d11182c32e7bd3d7c929f8aab9b4"
+      "sha256": "355b97daf18ff3e65ca686ab7a952f075510ad7154c7ba865173f8161fcac0f1"
     },
     {
       "path": "m3/core/src/jdk/m3/text/M3FixedAddressMapping.java",
-      "gitBlob": "5e02839678dd2d8608e2fef4a6df5aba07401490",
+      "gitBlob": "8a0e8184feae600477a992512388c559ec10ee11",
       "bytes": 6571,
-      "sha256": "704acbd7c0899f6cb4ca47658e0ce0387d8b498ce6ca6d801f02461d2f3a0025"
+      "sha256": "03fe4ef99c923172301d287db953b59d1aa23c5f8480ddd79c64e4485a14b863"
     },
     {
       "path": "m3/core/src/jdk/m3/text/M3GvasLiteralImage.java",
-      "gitBlob": "c27d6603b32d9c7f277ed097b70ee8eac174b08b",
+      "gitBlob": "10f0f669d5658e088e8835702df0676535c1f01d",
       "bytes": 11215,
-      "sha256": "2c1a8b9cc9870fc5fdf8e6f8ca46af907c503346aaf6d783b74a6498fd3601cd"
+      "sha256": "b05c40b8999993dfec75afa646ba4fac421258f0b611ab01956b878226574a3f"
     },
     {
       "path": "m3/core/src/jdk/m3/text/M3InstanceIndexPrecompute.java",
-      "gitBlob": "e6fd8e4fa71c93d62874886135c7bb703141894b",
+      "gitBlob": "c4a499d6ef46e38ed5f12b0789683cae53309964",
       "bytes": 9693,
-      "sha256": "43af63196141d180c1d256b8420c243d99804ee480b430f31d677e57a87a041c"
+      "sha256": "2be8634db1d545bce03ba34cab2569b2adbb869b19544acd2f42bb4e02a7b5f1"
     },
     {
       "path": "m3/core/src/jdk/m3/text/M3LanguageCorpusManifest.java",
-      "gitBlob": "6ac38d5ac2b3eb45a4766a77e310b8409107ee03",
+      "gitBlob": "6b69503a79fb084d1143c8c11519853f1f596ec1",
       "bytes": 13840,
-      "sha256": "866fdae0189d1a84bd251fc7686f85d6953088d054fd77561210892ef6ce4c16"
+      "sha256": "c642619a95a3454f04df71335f2992a59a49f177e515c1e2688af7c514016867"
     },
     {
       "path": "m3/core/src/jdk/m3/text/M3LanguageGrammarSupport.java",
-      "gitBlob": "135a6a0c080603da0f4c095519b7d47315e2b281",
+      "gitBlob": "0ac0ecb7d4abe99f5c3b7a21e0099e05a92bb168",
       "bytes": 1245,
-      "sha256": "32e55e0ddc412cbbdb4c3fe22b659fe9660bed914215c92662ccaf00b189b1c7"
+      "sha256": "f2f6f8dcb6b0a0c91569a9eee0ea199c0e77a24594033534351408b2c8ccfff3"
     },
     {
       "path": "m3/core/src/jdk/m3/text/M3LexiconPrecompute.java",
-      "gitBlob": "edec2ae3a82bde34159abd9a4d1c670ad59f031f",
+      "gitBlob": "4ea2db8d3b2bfec5f720ef499b8b697186718cb9",
       "bytes": 23035,
-      "sha256": "662253bc7936943e97d911b7c15f96032e72fdbd1a9222ba47eba9506a66f490"
+      "sha256": "6211294287120ca3135e76f39313125e6c846f64b005e2cea7afa39503256ed1"
     },
     {
       "path": "m3/core/src/jdk/m3/text/M3NumberSpace.java",
-      "gitBlob": "ccd577c1b1ec62709882d3ef54db8c5d8a19557b",
+      "gitBlob": "69f517474f58e756f770fc59dc2ea1ab982fbaef",
       "bytes": 4563,
-      "sha256": "99bc5c5be96dfb4e0db2f5dbc837c568333ffc6853922cee6ba6566130513443"
+      "sha256": "6c70f843dca2bc099c99de24fb21987986e6f0ed03a79677ad88f65d27f0273e"
     },
     {
       "path": "m3/core/src/jdk/m3/text/M3RopeTextIndex.java",
-      "gitBlob": "b8e29cf9431d00aa3ee5d1c658ec8c7fa8177e03",
+      "gitBlob": "73d7ae9ec7fa3680d1389aabf4e65beb0018ef15",
       "bytes": 9740,
-      "sha256": "ff2495c01b8df68a01167e29daa4ea4a6af25650e59c5cc705cc2fdc7cfa0141"
+      "sha256": "d78d4f2f7d23c0a1927d86c8f059749cbb7d3a11e7d5152aae26135effb9f34a"
     },
     {
       "path": "m3/core/src/jdk/m3/text/M3StringPiece.java",
-      "gitBlob": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+      "gitBlob": "62506fb9b3cff0e6f24e856648528db58c45b92b",
       "bytes": 767,
-      "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479"
+      "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755"
     },
     {
       "path": "m3/core/src/jdk/m3/text/M3WordRows.java",
-      "gitBlob": "5215e2771f5ede8cb35dd78275bd85a7cda4a057",
+      "gitBlob": "651c03f6b1a1e672ac97e2d0830473bcfc06207b",
       "bytes": 17149,
-      "sha256": "df02e863f8f7fffd3f33337ebf62afe701deb66496a0fb621c136d4771ebf631"
+      "sha256": "d79d6ab8396271548b4adc2ef5393425ff8b98f5b9b7fc8a7a39d4fc0294c765"
     },
     {
       "path": "m3/core/src/jdk/m3/text/M3WordRowsNative.java",
-      "gitBlob": "75da0de5a7e76e44a310ff6bd153eba39beb1a21",
+      "gitBlob": "a68f0d75eaae64707cf6d073a2b50f89c5dfdc78",
       "bytes": 1721,
-      "sha256": "5ef1e0f4ca2fc345ee009589f1bb96d216892556d60e3f19b882d46b544aea36"
+      "sha256": "b81a8520792794a5256137c1c47960b10930237904907d4c8d0a4980386a00e5"
     },
     {
       "path": "m3/core/src/jdk/m3/text/SharedLexiconCatalog.java",
-      "gitBlob": "aa8cf83bbc8349a2ed5a0a7dad818c2d7240f577",
+      "gitBlob": "df137d5b2a52e9ad58f276132099b47692720ed2",
       "bytes": 40020,
-      "sha256": "8dbd1bd1a100efeb4b3a31a29fcdb083fa01d8037801e746c455f2b9a030b6e7"
+      "sha256": "bc04f014808aafaddd3a1bef661c094386a5a20e9f5e4e7e0ffc8c51ddbb153b"
     },
     {
       "path": "m3/core/src/jdk/m3/text/SharedLexiconFamilySidecarCatalog.java",
-      "gitBlob": "e991a6ba84d7074e9bd260cce331d5092e7ad9f5",
+      "gitBlob": "8dd76c1d5911dbf4b4b786098c1223fcdbb57b63",
       "bytes": 28182,
-      "sha256": "0482b42cb8029cadbf929c76e46bccb80367668ec119aceac702f5d5c3686a6d"
+      "sha256": "c6dbfb86e076388c923f8aa2c05b37b799474bb51bb84da0e26dea477edbadc8"
     },
     {
       "path": "m3/core/src/jdk/m3/text/SharedLexiconImage.java",
-      "gitBlob": "7d0dd69b3f92bc6e589eed4024d22686020b421c",
+      "gitBlob": "364eecefcb3822918c849606ddb177c0ceaa30d5",
       "bytes": 11400,
-      "sha256": "50527e3afcc418dfc09f0a6f6608e05db70db5ad440dc3f6a67d8099ec2f9837"
+      "sha256": "d4fcdb58e6a33d82fa18526bd4cd380869661e03f6a2beb721030b13e1789401"
     },
     {
       "path": "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java",
-      "gitBlob": "b952a245b2724140904bb666669c2880ce32cd64",
+      "gitBlob": "ce34ac405c41b3980e558efc688a5ebc1f37b47b",
       "bytes": 11009,
-      "sha256": "8e6156376ea9548971b78bb876dc3968195266f04c17c5b061d7f5e4b52f367d"
+      "sha256": "a273220cdd1a2b20857ccba086394c0a0a726cc3f2711e9eb7fdadbaffb08256"
     },
     {
       "path": "m3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java",
-      "gitBlob": "182042dfc5115a683449622dcdc6055e916f4e4c",
+      "gitBlob": "bb8931eeb17563238c92f6c1ee200fb1905595c3",
       "bytes": 13436,
-      "sha256": "76fbadbc182633ac22c449924335b7636c530cd2a8dc13fb0dc2d56a29afb42c"
+      "sha256": "bcf6d9216b549a4bf1c4c7a6bdb414c54f659be2567fcb99cdbadaafc964f049"
     },
     {
       "path": "m3/core/src/jdk/m3/text/StorageIdentity.java",
-      "gitBlob": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
+      "gitBlob": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
       "bytes": 494,
-      "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
+      "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354"
     },
     {
       "path": "m3/core/src/jdk/m3/text/M3LangDexSourceEnvelope.java",
-      "gitBlob": "7f9ac5ebfc452aadb869103471e6818339746083",
+      "gitBlob": "b3f2291429429c62825a292bd5b7f618046bed27",
       "bytes": 9495,
-      "sha256": "90b81d145a795dae62e57afe850ad7d38704fe4fcfad69614ff4cd598eb0a084"
+      "sha256": "7093a00bd467cd4a477512eaae58546588e5881a6cf3dd081fdc843c88b7120d"
     },
     {
       "path": "m3/core/src/jdk/m3/text/M3PrecomputePayload.java",
-      "gitBlob": "682e7f2abd59efd2adf30fb039616c61a16aa029",
+      "gitBlob": "5896894dec303b94847de9755033189e2112010e",
       "bytes": 17908,
-      "sha256": "60eea8ba2ee14fc11e4225d2e53a2facd690c55dc17b47424f36d94c623e0b1d"
+      "sha256": "0839cd6529f9328407cb711f2d03593131ebc07f7e0bbe23c97ddb26b1c5b446"
     },
     {
       "path": "m3/core/src/module-info.java",
-      "gitBlob": "d4cb6cd055f708d037748251d55876186cc7c5a0",
+      "gitBlob": "bdd278210a498e2665620c02413b1e658c79370e",
       "bytes": 227,
-      "sha256": "2b6c29db60f536419e3755cdf1a83d21388a2e2bd602838d8cebe516f940964c"
+      "sha256": "7a6e9eecdc3153219b6e222332e00b4cffb2a9e3b55bfaeb9c87e9a29ba009f2"
     },
     {
       "path": "m3/core/test/jdk/m3/text/M3BigStringSelfTest.java",
-      "gitBlob": "8819a1632add4eb4dc52a8961168c4b6b7af23d2",
+      "gitBlob": "8a7ce4438b2782ae2b3ce7db06a57461b00a5cd7",
       "bytes": 8955,
-      "sha256": "5f47db4885a99b1ec7dc95957276d0130f2eab7cba16614907995c722fa6f9a6"
+      "sha256": "6a86ba78d034b115bd3895fc2b66916a4c00a485ad01e60ff6e30bbbf410fc61"
     },
     {
       "path": "m3/core/test/jdk/m3/text/M3FixedAddressMappingContractTest.java",
-      "gitBlob": "af7feffbde4bf70346cc1ceea88095428d0595ee",
+      "gitBlob": "38d986c9088e8ea036ecac62876d288891cd34d5",
       "bytes": 3729,
-      "sha256": "1cd03c94cd79c614fe92feb234491b8f2effa8a79ff90145354bb6a4a2b40e26"
+      "sha256": "7f6f93a973323e6fc550cf152c2f61130ca34074a9df7ea47b6c5da8e44c2537"
     },
     {
       "path": "m3/core/test/jdk/m3/text/M3GvasLiteralImageContractTest.java",
-      "gitBlob": "d4af3a34e45b58fb6849b1d8ec85d31fdda7b287",
+      "gitBlob": "7597a2831be9b98b8a16ca6e3effcb8fa431f578",
       "bytes": 7802,
-      "sha256": "9bb67410bda500c43eb58f65c648351fc1ac477328abe84da2537bab823f114d"
+      "sha256": "5bc63e3944756409727cd61ac9e1c00a89b432b4f311c8e1109b7223cecb6f82"
     },
     {
       "path": "m3/core/test/FoundationTest.java",
-      "gitBlob": "c722aa61a9bc7953d183e1fac20c0155a19dd2dd",
+      "gitBlob": "822bb5d6b77ebb166a5cefd8f8507a2b073f17d2",
       "bytes": 17914,
-      "sha256": "0f8c4e89a3d3228b51095faa29b14e35daba46726e6a3ae89dbd6b1e69652cd0"
+      "sha256": "9c3c1480807ccb15ed6ee81dafa91a6e2a9f4bcc8c749caf0ea09ad5bbe6485b"
     },
     {
       "path": "m3/core/test/java/lang/M3CodeTextFactsReceiverTest.java",
@@ -209,117 +209,117 @@
     },
     {
       "path": "m3/core/test/LangDexProjectionReceiverTest.java",
-      "gitBlob": "00cb70ca8b2aa93c903b972269ec810f47b34f18",
+      "gitBlob": "8f56e44a5927309d54d9a82b651b383271218a1f",
       "bytes": 16049,
-      "sha256": "bbaf2dab964572006ce7e22d6d43c61719fbdae78c686141408133ee95e3111d"
+      "sha256": "2a905179ea31e47d6660ec262399d662146c0290cc65d2896bf1662155a16cb4"
     },
     {
       "path": "m3/core/test/LangDexSourceEnvelopeTest.java",
-      "gitBlob": "e23a36f4fb86d93f98ff4e1571bd3f227413563b",
+      "gitBlob": "7e7a80a03c671886a8b49afd1fc9e97fcfa151b6",
       "bytes": 6182,
-      "sha256": "afe3ac134cb089c4faeb2d360cbb0fd91c01d00927165869069d903211d46851"
+      "sha256": "abcedf684f19acdf9d5dc1bc1a811d6f6a89cfdcec3b059c5a47ddb4a102f8b0"
     },
     {
       "path": "m3/core/test/M3DictionaryFrequencyContractTest.java",
-      "gitBlob": "4bbbf21ec4e2ae5587cef0f6b5cd2ae684f7dd61",
+      "gitBlob": "969e5b4851487e1fb749399fc516b16f7685ac05",
       "bytes": 8973,
-      "sha256": "1e3f2824ffd1bbcc48e453d60d0f989d8858e6fb6be70b958c868bc33ab806c3"
+      "sha256": "f811be875b6cc719460a7f2eff9e0204369492b236f9e70f0711700132a0fed3"
     },
     {
       "path": "m3/core/test/M3InstanceIndexPrecomputeTest.java",
-      "gitBlob": "738e1025367b4aa7ad647691bfd17dfc8d3be5c7",
+      "gitBlob": "875cc39d069dbb5095fa8fc1ef9892352200e676",
       "bytes": 4551,
-      "sha256": "93869ded5c605007ce93d6b80ecc5a26d8efe9affc0be1ed6e01dfed7897ad5d"
+      "sha256": "caea058ebd42af7f343d45c139865607cff038eced989b4eb77571bd8a442bf3"
     },
     {
       "path": "m3/core/test/M3LanguageCorpusManifestTest.java",
-      "gitBlob": "3c0642143b38066b1958cd4f3cc720774a172197",
+      "gitBlob": "faf4a65c42a06994e4be05bd431fa15bd17831df",
       "bytes": 5958,
-      "sha256": "8bc4ad05d8afb3aee4d54d9dda5a4f413d3ea5678e174b6faf1df8fc6f60d614"
+      "sha256": "8ecfe8783fe8712d1e568dc7c75c0ede69a5419c9f064113229cdaab551a1723"
     },
     {
       "path": "m3/core/test/M3LanguageGrammarSupportTest.java",
-      "gitBlob": "316b8822120b42850dde74921a4b34ba2bb0d6cd",
+      "gitBlob": "cfbeac6d55cb6866ff98833f971c1f1d4ff016f1",
       "bytes": 2337,
-      "sha256": "be95f39b1c516e0523ec0c9499032f1b01157085be8d979f79cf8cb4fdbed947"
+      "sha256": "8124d4f16d422445025ee1b2922ab5bea421cdce196cd9410dea56cdcbc84ea7"
     },
     {
       "path": "m3/core/test/M3LexiconPrecomputeTest.java",
-      "gitBlob": "5b44feced8c7d38d2dc25c3b5dbd27d2d2a0ca6d",
+      "gitBlob": "16f40baeb952907372ef961527560057eed8efb1",
       "bytes": 12189,
-      "sha256": "fdc8f742adc96d93a6ab3e332c293d7dfdea97b458d9e8442694c8e11e511e7a"
+      "sha256": "86816e02860c013aed830a387d368fe2498210446565f246518532f7d9ce2cf2"
     },
     {
       "path": "m3/core/test/M3NumberSpaceContractTest.java",
-      "gitBlob": "72fc41be172bfe9bb88c28485e1952e6f6325a43",
+      "gitBlob": "f23f5f62d1b5aa6f66ad1a43ac935af07b3f82d2",
       "bytes": 6618,
-      "sha256": "9d247cf996fdbb1bfa33d03355ded5321fcd23c570d66670851d585da3104d23"
+      "sha256": "f02e0b26a639b33fb9f04ec963bd151891ccd54c6bd44f2772838b0b8155d004"
     },
     {
       "path": "m3/core/test/M3NumberSpaceExportFixture.java",
-      "gitBlob": "3390bdce6286788395cf92c2a141afc25ac74c39",
+      "gitBlob": "4c1981d060e56ec0fc448652cf50b9a50ab0e1ff",
       "bytes": 2885,
-      "sha256": "7e1e0ee02d4eeef31cfa1a518d056e5988c52a93463af0ed21e41af7ef72fa4e"
+      "sha256": "e2849c7f44357db3820e9c05ff357fcd9c09e9048d7e1c3e881b9d3d5106a5d6"
     },
     {
       "path": "m3/core/test/M3NumberSpaceTest.java",
-      "gitBlob": "11ebbe9c9e96508fb4a5520268d49fe5117c2cf3",
+      "gitBlob": "7c6dbeb96a7495cecf95058356a97ce090f6202a",
       "bytes": 2694,
-      "sha256": "60d9cb7b9812701e0dd62d8e181b938d723ea132a4e1aeb213be3127a04ed9ee"
+      "sha256": "36e73ae64cebe273754cbbe7212b6a7fba350ede5def309c5181ac245a9a39bf"
     },
     {
       "path": "m3/core/test/M3RopeTextIndexTest.java",
-      "gitBlob": "cef8b5f91b7dc666627ddf5a5eb1c8a4611ebf73",
+      "gitBlob": "3b0178d24606074195a5524844fc9954fdf25fe6",
       "bytes": 8903,
-      "sha256": "1374a5b14a32a58324f50f980731a94e5e938235fbfdf27c2e679f0ea1681c92"
+      "sha256": "98d34219367796a53690d4f276523ee0f0f8d0b4a4127be2b806a3f177f1c74a"
     },
     {
       "path": "m3/core/test/M3TranslationReceiverMapTest.java",
-      "gitBlob": "9060cb06283dd7536e12362e6add1ff2a422b945",
+      "gitBlob": "db2fa96d31c923bf22774b55d51b0e3e08517cc0",
       "bytes": 5861,
-      "sha256": "a6ba57109f9cd1f71026fffc852ac6e0e9ea11ab95f92e07827830b69bd3e6f9"
+      "sha256": "a171e79d5ad630b4905513369045b2eaca8294fea6e525f2be24b261333338ac"
     },
     {
       "path": "m3/core/test/M3WordRowsContractTest.java",
-      "gitBlob": "175b24d411295a9fc3fcc71055ba70c968633b41",
+      "gitBlob": "5d0cf2e707b04c9ecbfa87ebf3e4cb088cac48a5",
       "bytes": 9685,
-      "sha256": "22961688ea662e9598d9f6b5925b60aa0f48df027f3b468a462438035fc618ae"
+      "sha256": "1d784168c94321f1c33ad83f87446340c6c86bbe88bee7b2df25aabfc26eb990"
     },
     {
       "path": "m3/core/test/SharedLexiconCatalogFamilyAdmissionTest.java",
-      "gitBlob": "c85d432a188d9439aedb1ec716b5de47b48fccab",
+      "gitBlob": "339c772869d832796d237d16609d710d3f30e25f",
       "bytes": 13304,
-      "sha256": "e87494f65fcb7e39ebbefc391c05224e80b91dd8f59b87ba07ba3073f0fdc794"
+      "sha256": "c4d286fa58b290f8c089a13c039f88650b92f358265e179e90485faf3f9c3e66"
     },
     {
       "path": "m3/core/test/SharedLexiconFamilyContractTest.java",
-      "gitBlob": "82036c03ad2831f0ff8d04540e266ec1763a3a5e",
+      "gitBlob": "9dd03bd308939b10c1ab2fdbe1757b209ce21d2c",
       "bytes": 4567,
-      "sha256": "e074b56c40b4eaecbfd91952b2c3164ccb5cbbd1a07ae339a292a963ef1d171b"
+      "sha256": "38fb8d0a22dab116939d2cb79a5ab20706d9bfa15e6c8f38ae68967a91264db0"
     },
     {
       "path": "m3/core/test/SharedLexiconFamilySidecarCatalogTest.java",
-      "gitBlob": "1ba6dfb939c9a2247d53cc67e2b5e694afa16ce1",
+      "gitBlob": "4f14d95bdd23e4b1748525886f2c8ceab45f9ac9",
       "bytes": 9585,
-      "sha256": "ce3821bca228852b476a3f7913bdab5c887d0135a24a896329e211f047d5e348"
+      "sha256": "d5517ad3747e2cb94b15ebfdd9b875d76b9b80e4c7d1076b649b7dd93ebbe25f"
     },
     {
       "path": "m3/core/test/M3PrecomputePayloadTest.java",
-      "gitBlob": "f53d7e1b74ae2ec59ac39f3fa6f7dde3949efaef",
+      "gitBlob": "1416170dbe1be0f911be61a7bf897cead23a4bdd",
       "bytes": 3055,
-      "sha256": "fd4c12a1c38958ebe7b2e0c6d754dbd5e074f6f8c1369910ead0f0f02bcc4c16"
+      "sha256": "a7df0f11854ada05a03ab3e1129d0caf8b34b4cc2d94f49c23b9d7396fd0cb01"
     },
     {
       "path": "m3/core/test/M3PrecomputeReceiverTest.java",
-      "gitBlob": "2138707d9c23519151e2803e170958d0ba9f308d",
+      "gitBlob": "c32b382d48c61292913c7fc2b8c3d800d7cfd7ff",
       "bytes": 5313,
-      "sha256": "2681df9cd986c089a9e5ce4f9c530cf6f9b96d5c07dc5e75388018a3846b0b12"
+      "sha256": "18a4183b2da0e59f521360105b2f1ab133fc4c8df1a0f82f0fba6bfd5d130266"
     },
     {
       "path": "m3/core/test/M3SiUnitDecoderTest.java",
-      "gitBlob": "5ca5f5d2e8833ff7c9f6f11349a289b630d9f45e",
+      "gitBlob": "b595ece25f6b2cd44b55313913545ea8f21568b3",
       "bytes": 6313,
-      "sha256": "ff088458f6993dd43b181fab4e07e55501a95a9a6f56cf13fb5290490e4886d5"
+      "sha256": "62590449d5237f4452e3a0142c39a798557f2c627f3f381292b0adac85771280"
     },
     {
       "path": "m3/lexicon/english-demo.txt",
@@ -352,7 +352,7 @@
       "sha256": "2f45a0ed93f2e8710801547158d35e6f0f9feaafa796b673bdd2feb4887cb81c"
     }
   ],
-  "originalBuildGit": "5ac0b944e34bf5f226d77541adbcb28e35edcfe5",
+  "originalBuildGit": "70b50228bba3775b6feacd500eca3f3c7529e0f2",
   "modes": [
     "jit",
     "int",

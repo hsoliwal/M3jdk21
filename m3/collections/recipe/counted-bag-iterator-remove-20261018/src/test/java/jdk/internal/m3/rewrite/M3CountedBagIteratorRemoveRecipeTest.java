@@ -30,8 +30,8 @@ final class M3CountedBagIteratorRemoveRecipeTest {
     private static final String YAML="/META-INF/rewrite/m3-counted-bag-iterator-remove.yml";
     private static final String NAME="jdk.internal.m3.CountedBagIteratorRemove20261018";
     private static final String TARGET="m3/collections/src/main/java/jdk/m3/collections/M3CountedBag.java";
-    private static final String BEFORE_SHA="c04ed48de6b24bb4a86f97c4aa6187e2ce11e43b082e05ef3189c618ddf1143b";
-    private static final String AFTER_SHA="020b91ae24ab2bb991146861dbaecf6e7fa9836811804645722190b972c4e311";
+    private static final String BEFORE_SHA="583e6b5dce178ee02c2efdb919271c81a00ad60771abd06f7c942330fdfc60d1";
+    private static final String AFTER_SHA="c62a23be9e5b89c3d013f8dc0ed5351c3bf7ecc2bc809c8503a777a152d6b447";
     private static final int BEFORE_BYTES=13854;
     private static final int AFTER_BYTES=13962;
     private static final String UNRELATED="unrelated.txt";

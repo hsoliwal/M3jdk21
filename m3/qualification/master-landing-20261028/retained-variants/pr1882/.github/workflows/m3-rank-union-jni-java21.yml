@@ -37,9 +37,9 @@ jobs:
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java)" = '201c51afbf5706a146fa0cef9317e08fc4e9a58a'
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java)" = '00aa416af3cf08ebae2db8ef19cac66fe5f8c29a'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '7ea1afda505894b9cc1294bfc1c0a74a58ea0587'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongUnionValuesContract.java)" = '2aa7692d5480f557a976374509e4bc47915ffb0a'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongUnionValuesTest.java)" = '308e29580d9f22c7648b9af0bf01d0755f4ae836'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongUnionLegacyContract.java)" = '75b2ae741d4991de4d44055c753264ac442b474d'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongUnionValuesContract.java)" = 'c08a55c0ae65356f59e27a3162abd382c0cf6e0a'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongUnionValuesTest.java)" = '71fa656ccc1e8566bc7c64728a07a99115b57584'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongUnionLegacyContract.java)" = '1c7491f76f0e6977229fbf9f8d77716fcdddf069'
       - name: Compile actual Java21 source owner and all old plus new JNI exports
         shell: bash
         run: |

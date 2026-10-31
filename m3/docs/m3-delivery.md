@@ -39,7 +39,7 @@ The initial checked-in snapshot is pinned to Synexia:
 
 Manifest:
 
-    m3/synexia-import/synexia-seed-export.tsv
+    m3/m3-import/m3-seed-export.tsv
 
 Manifest root:
 
@@ -59,7 +59,7 @@ database, recipe repository, or migration framework.
 
 Receiver classification is checked in at:
 
-    m3/synexia-import/m3index-family-receiver.tsv
+    m3/m3-import/m3index-family-receiver.tsv
 
 Admitted family prefixes include the M3Index alias reactor, IndexString, MIndex compiler/AST,
 data-structure, precompute-api, DB, OpenRewrite recipes, convergence kernels and M3 recipe owners.
@@ -81,7 +81,7 @@ The Java-21 receiver lives at m3/synexia-import.
 
 Verify the checked-in target snapshot through JUnit:
 
-    mvn -B -ntp -f m3/synexia-import/pom.xml verify
+    mvn -B -ntp -f m3/m3-import/pom.xml verify
 
 With a local Synexia checkout and the manifest, the receiver supports:
 
@@ -138,8 +138,8 @@ HotSpot/JIT/GC/CDS/JVMTI/JNI integration, jtreg/runtime qualification and final 
 
 Synexia's imported Apache license and NOTICE are retained at:
 
-    m3/vendor/synexia/LICENSE
-    m3/vendor/synexia/NOTICE
+    m3/vendor/m3/LICENSE
+    m3/vendor/m3/NOTICE
 
 OpenJDK source outside the independent Apache-owned m3/ subtree retains its existing license and
 notice regime. Moving or adapting imported Apache code into OpenJDK-owned files requires a
@@ -151,8 +151,8 @@ step.
 
 The forward reusable implementation authority is the Synexia M3* family. MIndex, MatIndex and MAT
 surfaces are compatibility/history inputs, not a second forward owner. The target-side family map is
-checked in at `m3/synexia-import/m3-canonical-family-receiver.tsv`; policy rationale is in
-`m3/synexia-import/M3_CANONICAL_FAMILY_RECEIVER.md`.
+checked in at `m3/m3-import/m3-canonical-family-receiver.tsv`; policy rationale is in
+`m3/m3-import/M3_CANONICAL_FAMILY_RECEIVER.md`.
 
 M3JDK21 must not independently evolve generic M3 collection, text, AST, DAG, data-structure,
 precompute, search/regex, JNI/native or reusable recipe implementations. Reusable defects and

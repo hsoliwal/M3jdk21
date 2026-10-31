@@ -1,7 +1,7 @@
 {
   "additions": 2792,
   "base_tree": "3c4f32b66633a251ba2c117090830252a7e2da03",
-  "base_tree_model_sha256": "877a61dc6d9b4f4fa280faeadbd67db9ee3d56a68768fa06c917d85ab8fbaa80",
+  "base_tree_model_sha256": "26378280f0305c59a7529fed18de4dd938e935840260c9667fb55de4c6f6fd8a",
   "branch": "aix/jcc-source-merge-recovery-20261005",
   "bytes": 98141352,
   "changed_trees": [
@@ -13577,7 +13577,7 @@
         {
           "mode": "100644",
           "path": "CURRENT_PROJECTION.json",
-          "sha": "d20138ab763408bbbd793c1ff27778d866b29009",
+          "sha": "3c187aada912a867711f1f3adcf32fe99e99f26e",
           "size": 596276,
           "type": "blob"
         },
@@ -17087,14 +17087,14 @@
         {
           "mode": "100644",
           "path": "AMENDMENT.json",
-          "sha": "5009d7d338eaaca207129c277acc8513351939cc",
+          "sha": "fa4cdc735f58059920dc217be6b00819a859eeba",
           "size": 1177,
           "type": "blob"
         },
         {
           "mode": "100644",
           "path": "BUILD_ROLE_MAP.json",
-          "sha": "eed55a4d5b77d6bfe61746576409ae68d46f8a84",
+          "sha": "2bb90dc2511c26ea6181e949b68c1d7013c9b157",
           "size": 63816,
           "type": "blob"
         },
@@ -17129,21 +17129,21 @@
         {
           "mode": "100644",
           "path": "FILE_SEALS.json",
-          "sha": "3c068f6e10cc156cee9769a94997f5b7fbb3c4d9",
+          "sha": "d3abd93bdb9fd469679539885ee9b672c713695d",
           "size": 183376,
           "type": "blob"
         },
         {
           "mode": "100644",
           "path": "INVENTORY_REVIEW.json",
-          "sha": "e3e43e60d7ed5247cadab7e58c5515e6e7e07136",
+          "sha": "b8c254769db1c67a930d4946c491619a56ea8052",
           "size": 14727,
           "type": "blob"
         },
         {
           "mode": "100644",
           "path": "PARENT_BUILD_CONTEXT.json",
-          "sha": "665dac597b1b33414e152c9224c840e7e01127d5",
+          "sha": "8d43fa29a81040d3572525b3c864841a7a35643b",
           "size": 112397,
           "type": "blob"
         },
@@ -30779,7 +30779,7 @@
         {
           "mode": "100644",
           "path": "CURRENT_PROJECTION.json",
-          "sha": "d20138ab763408bbbd793c1ff27778d866b29009",
+          "sha": "3c187aada912a867711f1f3adcf32fe99e99f26e",
           "size": 596276,
           "type": "blob"
         },
@@ -30793,14 +30793,14 @@
         {
           "mode": "100644",
           "path": "DESIGNATED_SOURCE_OUTPUTS.json",
-          "sha": "59e4ba6f35c37c1a00da2678ed88b9f034d885e1",
+          "sha": "36e48a6a4e5b4e2592ad7d3fa90fd3800f6f5185",
           "size": 15261,
           "type": "blob"
         },
         {
           "mode": "100644",
           "path": "E4_EXECUTION_INPUT.json",
-          "sha": "428422fc77c5335a43b9c978515445f056d0d2c6",
+          "sha": "89dab4bdb446bb26d06c4de26ca8d32ea5c32674",
           "size": 12601,
           "type": "blob"
         },
@@ -30856,7 +30856,7 @@
         {
           "mode": "100644",
           "path": "RECOVERY_RESULT.json",
-          "sha": "9c14f0c7eef7ed15b9148947ee729836dc2aefe1",
+          "sha": "b930bffab5a0e9c9e9ad2b5f65804c236b199e51",
           "size": 456423,
           "type": "blob"
         },
@@ -35655,7 +35655,7 @@
         {
           "mode": "100644",
           "path": "source-includes.txt",
-          "sha": "d64110d838a6a2632f8483c88ba0b2b94901e70d",
+          "sha": "e91d85faf0dce29a4bc7e13b4bffb9dd250387ac",
           "size": 39132,
           "type": "blob"
         },
@@ -37764,7 +37764,7 @@
         {
           "mode": "100644",
           "path": "M3AtomHashDatabaseRecipe.java",
-          "sha": "05d74cb1e3417642cb11a0128b74225cb876d326",
+          "sha": "944443cc330db23f54a6a0a66495fe72e93704d5",
           "size": 11314,
           "type": "blob"
         },
@@ -37974,7 +37974,7 @@
         {
           "mode": "100644",
           "path": "M3CanonicalMultiPassPlan.java",
-          "sha": "897a218c5489c851c1906fd91a2cd64174d19d70",
+          "sha": "513f953f27d5aca5c3c2d4a9141c30f95d1d3392",
           "size": 6043,
           "type": "blob"
         },
@@ -38975,14 +38975,14 @@
         {
           "mode": "100644",
           "path": "M3GpuToolJoinManifest.java",
-          "sha": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+          "sha": "78d5fb68f13872164973a8918cc7886c5f548bca",
           "size": 10964,
           "type": "blob"
         },
         {
           "mode": "100644",
           "path": "M3GpuToolJoinRecipe.java",
-          "sha": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+          "sha": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
           "size": 5187,
           "type": "blob"
         },
@@ -40970,7 +40970,7 @@
         {
           "mode": "100644",
           "path": "M3MIndexJoinedCharsViewRecipe.java",
-          "sha": "3ba6857dec13ca5af871b73238495124b0d1602f",
+          "sha": "12e2cb84d03cdc120513d85aea9d76a0aa427b79",
           "size": 6439,
           "type": "blob"
         },
@@ -44225,7 +44225,7 @@
         {
           "mode": "100644",
           "path": "M3ScopeInference.java",
-          "sha": "f6fd8d4a558a6b9b0c78cf4d010e63e3b3e1a9da",
+          "sha": "a27177a9538c96633424b73dff48fe7f0341a51b",
           "size": 6596,
           "type": "blob"
         },
@@ -46108,7 +46108,7 @@
         {
           "mode": "100644",
           "path": "M3VerbatimJavaBaselineInventoryRecipe.java",
-          "sha": "e76b712191be02aa7998c20a799879fbb8f0c33f",
+          "sha": "461301d1cdfd83b78e11fb51a278d8b07caaeb18",
           "size": 16659,
           "type": "blob"
         },
@@ -54141,7 +54141,7 @@
         {
           "mode": "100644",
           "path": "pom.xml",
-          "sha": "98889a040aad5cc3c82f782bb4b173d118207988",
+          "sha": "a65f71452613662769dda64100c6d64dd90ae5da",
           "size": 119981,
           "type": "blob"
         },
@@ -69649,7 +69649,7 @@
     },
     {
       "bytes": 596276,
-      "git_blob": "d20138ab763408bbbd793c1ff27778d866b29009",
+      "git_blob": "3c187aada912a867711f1f3adcf32fe99e99f26e",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/corpus/CURRENT_PROJECTION.json",
       "mode": "100644",
       "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/corpus/CURRENT_PROJECTION.json",
@@ -69658,7 +69658,7 @@
         "kind": "absent"
       },
       "restored_exact_d1_artifact": false,
-      "sha256": "18c5fea0f72fe21aa78df1aa6c319eb4276fc15aa481952539c221ce651e6f49",
+      "sha256": "8626cc0e739dac6cc3b2e77496d16e7c75025f7de99f30e1b93f42796e6c4799",
       "transport_encoding": "utf-8"
     },
     {
@@ -69887,7 +69887,7 @@
     },
     {
       "bytes": 596276,
-      "git_blob": "d20138ab763408bbbd793c1ff27778d866b29009",
+      "git_blob": "3c187aada912a867711f1f3adcf32fe99e99f26e",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/CURRENT_PROJECTION.json",
       "mode": "100644",
       "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/CURRENT_PROJECTION.json",
@@ -69896,7 +69896,7 @@
         "kind": "absent"
       },
       "restored_exact_d1_artifact": false,
-      "sha256": "18c5fea0f72fe21aa78df1aa6c319eb4276fc15aa481952539c221ce651e6f49",
+      "sha256": "8626cc0e739dac6cc3b2e77496d16e7c75025f7de99f30e1b93f42796e6c4799",
       "transport_encoding": "utf-8"
     },
     {
@@ -69915,7 +69915,7 @@
     },
     {
       "bytes": 15261,
-      "git_blob": "59e4ba6f35c37c1a00da2678ed88b9f034d885e1",
+      "git_blob": "36e48a6a4e5b4e2592ad7d3fa90fd3800f6f5185",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/DESIGNATED_SOURCE_OUTPUTS.json",
       "mode": "100644",
       "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/DESIGNATED_SOURCE_OUTPUTS.json",
@@ -69924,12 +69924,12 @@
         "kind": "absent"
       },
       "restored_exact_d1_artifact": false,
-      "sha256": "296d5b9eb4f41b51a85d44bb4f05c76e8c5b6453fb55881691b9823055062510",
+      "sha256": "dab78ed3ffa2cab8dad0feb532f493130570b8da35146a78e961b75cd11dd555",
       "transport_encoding": "utf-8"
     },
     {
       "bytes": 12601,
-      "git_blob": "428422fc77c5335a43b9c978515445f056d0d2c6",
+      "git_blob": "89dab4bdb446bb26d06c4de26ca8d32ea5c32674",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/E4_EXECUTION_INPUT.json",
       "mode": "100644",
       "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/E4_EXECUTION_INPUT.json",
@@ -69938,7 +69938,7 @@
         "kind": "absent"
       },
       "restored_exact_d1_artifact": false,
-      "sha256": "a42a7069695c38edfe2a25c1f8c9e16fd0db89401976679fc6409b78eca6d852",
+      "sha256": "fd465a0de344227444f723287b0dee9fe6e25284c1767737a38b1d7d8b887c93",
       "transport_encoding": "utf-8"
     },
     {
@@ -70041,7 +70041,7 @@
     },
     {
       "bytes": 456423,
-      "git_blob": "9c14f0c7eef7ed15b9148947ee729836dc2aefe1",
+      "git_blob": "b930bffab5a0e9c9e9ad2b5f65804c236b199e51",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/RECOVERY_RESULT.json",
       "mode": "100644",
       "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/RECOVERY_RESULT.json",
@@ -70050,7 +70050,7 @@
         "kind": "absent"
       },
       "restored_exact_d1_artifact": false,
-      "sha256": "086f4ef835a0939b212bcb7595e75513ecbd46ce6bbf764a8d1f5aca1e418954",
+      "sha256": "823ef3c5f172b34d7c973f5e50424b8f7ab770687f8e2d80e2ecb2bde8dc1b77",
       "transport_encoding": "utf-8"
     },
     {
@@ -74773,7 +74773,7 @@
     },
     {
       "bytes": 1177,
-      "git_blob": "5009d7d338eaaca207129c277acc8513351939cc",
+      "git_blob": "fa4cdc735f58059920dc217be6b00819a859eeba",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/AMENDMENT.json",
       "mode": "100644",
       "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-source-inventory/AMENDMENT.json",
@@ -74782,12 +74782,12 @@
         "kind": "absent"
       },
       "restored_exact_d1_artifact": false,
-      "sha256": "e20b0de4dfa51c79e6e16d035c6c55a5d368a9641b175239cb6f41f916bd74a6",
+      "sha256": "921e421259c9bd68bd70c2412f75cffc187c2a61c725053506c4470c129e7fa3",
       "transport_encoding": "utf-8"
     },
     {
       "bytes": 63816,
-      "git_blob": "eed55a4d5b77d6bfe61746576409ae68d46f8a84",
+      "git_blob": "2bb90dc2511c26ea6181e949b68c1d7013c9b157",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/BUILD_ROLE_MAP.json",
       "mode": "100644",
       "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-source-inventory/BUILD_ROLE_MAP.json",
@@ -74796,7 +74796,7 @@
         "kind": "absent"
       },
       "restored_exact_d1_artifact": false,
-      "sha256": "cabf31b005b28c18053c107936134356986f55770368cb982800900380ee8689",
+      "sha256": "13a191d4ef3e137518df6ebd1eebc9c8858370b7ffeb9af1db7d37fd0d90e3d7",
       "transport_encoding": "utf-8"
     },
     {
@@ -74857,7 +74857,7 @@
     },
     {
       "bytes": 183376,
-      "git_blob": "3c068f6e10cc156cee9769a94997f5b7fbb3c4d9",
+      "git_blob": "d3abd93bdb9fd469679539885ee9b672c713695d",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/FILE_SEALS.json",
       "mode": "100644",
       "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-source-inventory/FILE_SEALS.json",
@@ -74866,12 +74866,12 @@
         "kind": "absent"
       },
       "restored_exact_d1_artifact": false,
-      "sha256": "02b0e8700b6d46a1c84730f8810ca510824af1da46655c5d59660b5902bb4b0c",
+      "sha256": "066f885acc4b2fd877a668c746b9efcfe844b9968982269b10371dad9d6853d9",
       "transport_encoding": "utf-8"
     },
     {
       "bytes": 14727,
-      "git_blob": "e3e43e60d7ed5247cadab7e58c5515e6e7e07136",
+      "git_blob": "b8c254769db1c67a930d4946c491619a56ea8052",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/INVENTORY_REVIEW.json",
       "mode": "100644",
       "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-source-inventory/INVENTORY_REVIEW.json",
@@ -74880,12 +74880,12 @@
         "kind": "absent"
       },
       "restored_exact_d1_artifact": false,
-      "sha256": "41178470be98b342b83f58c43afa4a603d72c115584956c4fdbc96ce6a45d039",
+      "sha256": "cae9bd963f45edd0c766f0f0a4cd6801d3239d888ef2175aea2cf965ca5f8ea6",
       "transport_encoding": "utf-8"
     },
     {
       "bytes": 112397,
-      "git_blob": "665dac597b1b33414e152c9224c840e7e01127d5",
+      "git_blob": "8d43fa29a81040d3572525b3c864841a7a35643b",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/PARENT_BUILD_CONTEXT.json",
       "mode": "100644",
       "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-source-inventory/PARENT_BUILD_CONTEXT.json",
@@ -74894,7 +74894,7 @@
         "kind": "absent"
       },
       "restored_exact_d1_artifact": false,
-      "sha256": "4f8fbf09070e4d45e42c7ac29c94401d70058fea04d98e44b3526a24c77912fc",
+      "sha256": "c2ba69331b7d22a467e72369ebf06cebe16e9b09f5b9c3f2900247d540773bfc",
       "transport_encoding": "utf-8"
     },
     {
@@ -90873,7 +90873,7 @@
     },
     {
       "bytes": 39132,
-      "git_blob": "d64110d838a6a2632f8483c88ba0b2b94901e70d",
+      "git_blob": "e91d85faf0dce29a4bc7e13b4bffb9dd250387ac",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/source-includes.txt",
       "mode": "100644",
       "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/source-includes.txt",
@@ -90882,7 +90882,7 @@
         "kind": "absent"
       },
       "restored_exact_d1_artifact": false,
-      "sha256": "739ef583031ef3b940cbd141386ca91501fb7d505ce3ed78e2c55d2a98c70407",
+      "sha256": "dfb5dd0243103456154d96398cfa1591265455fd3ae0e512afa0b72361477988",
       "transport_encoding": "utf-8"
     },
     {

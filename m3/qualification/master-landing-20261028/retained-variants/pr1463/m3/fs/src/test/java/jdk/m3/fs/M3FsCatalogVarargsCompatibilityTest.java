@@ -40,7 +40,7 @@ class M3FsCatalogVarargsCompatibilityTest {
     try (var in = M3FsCatalogVarargsCompatibilityTest.class.getResourceAsStream("/m3-fs-safevarargs/M3FsPrecomputeCatalog.java")) {
       assertNotNull(in); source = in.readAllBytes();
     }
-    assertEquals("4881ecb902097947162005442c3e35ee7a4a471c5e57d1957ea1db188befc70c",
+    assertEquals("e9dc70cd5704a6ea7e787a9398f9aff0f28883c97727ae30dab1d7b245e1233a",
         java.util.HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(source)));
     Path file = temporary.resolve("src/jdk/m3/fs/M3FsPrecomputeCatalog.java");
     Files.createDirectories(file.getParent());

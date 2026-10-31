@@ -14,7 +14,7 @@ Required correction: validate canonical nonempty relative receipt names, normali
 
 ## Source-publication contract and derivation
 
-The full inspected source verifier is V2 `8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639`. Its actual receipt schema is `jcc-source-recovery-publication/1`; the source branch is bare and its PR is an object. The derivation reader matches that layout, requires be92 parent/input/root, rejects old/dummy output commits, requires verified status and non-forced update, normalizes the exact expected branch, and binds the raw remote readback through the actual receipt SHA.
+The full inspected source verifier is V2 `a5e9c2228304ea359b5459df150c618fcc3566b88217cdc262c893c31398baa7`. Its actual receipt schema is `jcc-source-recovery-publication/1`; the source branch is bare and its PR is an object. The derivation reader matches that layout, requires be92 parent/input/root, rejects old/dummy output commits, requires verified status and non-forced update, normalizes the exact expected branch, and binds the raw remote readback through the actual receipt SHA.
 
 `git_tree_id` reconstructs every supplied nonrecursive tree and checks its content-addressed identity. Final source/proof selection walks from the actual final root through these checked objects and compares real local bodies to exact blob identities (and byte lengths when present). Base tree bodies are reusable solely by content identity; they do not replace final-root traversal. Missing ancestor objects fail admission. This proves selected artifact custody when actual inputs exist; it does not infer execution success or exhaustive source closure.
 

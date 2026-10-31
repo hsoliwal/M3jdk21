@@ -46,8 +46,8 @@ final class TQFixtureManifestConsistencyTest {
     private static final String OWNER_ROOT = RESOURCE_BASE + "m3-tq-sync/";
     private static final String TARGET =
             "m3/tooling/tq-sync/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv";
-    private static final String BEFORE_SHA = "415d3a8fe282c705dc387761af853bead2740ad43403487f013fd9d9553a6e2e";
-    private static final String AFTER_SHA = "5fede1e09fb5ff23319605a6e986ebfb11ba213685f5a8df980534bd5ba40407";
+    private static final String BEFORE_SHA = "f754ebe9b07163ed2ce00524b96f08f07aecda22e1ca578178cd92cd3f0ea834";
+    private static final String AFTER_SHA = "a1101bd525bb95242fe270fad88c8f80e3a2977a1576802d4caabbfc3d1582b6";
     private static final Path CRATE = Path.of(System.getProperty("m3.crate"));
     private static final Map<String, String> REVIEWED_AFTER = Map.of(
             "01-m3-tq.yml.txt", "67573f9e38b1ccd595e8c4be07b68f38a4cbe3d44eb81484d6f18d5e476ac60a",
@@ -158,8 +158,8 @@ final class TQFixtureManifestConsistencyTest {
         String descriptorPath = "/META-INF/rewrite/" + crate + ".yml";
         String name = inverse ? "com.m3.TQFixtureManifestConsistencyInverse20261019"
                 : "com.m3.TQFixtureManifestConsistency20261019";
-        String expected = inverse ? "1d2ec38b81eab59b803dbd5ea4176a6b5f60497b2686c5acc065294a18a110cd"
-                : "cd87ac962328cf5dd1bb02745a83ee6272db28e505de6adbeeb1655d57b4c4d3";
+        String expected = inverse ? "a358a06a4b8de86deca102dbe05a46729fe2a7eaf723ad1aba93ad1bcb33acd5"
+                : "b64e8807001d2633cb3416dfd306ce4227feca0360cd9dc3522f5a408d856a7d";
         byte[] descriptor = resourceBytes(descriptorPath);
         assertEquals(expected, sha(descriptor), "the explicit descriptor must be exact");
         Environment environment = Environment.builder()

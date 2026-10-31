@@ -1,7 +1,7 @@
 {
   "targets": 21,
   "changes": 8,
-  "manifest_sha256": "eefba93f1322bf0470add185ef2a72904346b8bec45814c7a4d422e5773a0eb4",
+  "manifest_sha256": "c4a690bdf550af84ba7dc69ac1d96b8360fb41748c0928fd09ef2a5d683a4fd8",
   "selected_production_replacements": 2,
   "new_test_sources": 5,
   "catalogue_appends": 21,

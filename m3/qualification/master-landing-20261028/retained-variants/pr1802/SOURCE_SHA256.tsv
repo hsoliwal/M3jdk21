@@ -1,6 +1,6 @@
 path	sha256	git_blob	mode	pr	note
 .github/workflows/m3jdk21-original-native-filtered-integration-20261022.yml	56711dfd23778af62d6fe34a8cf9157273f2bc511c2c13113c3a122559e3c0fc	1dfccc4314f34a4330a57c39d1974ab16b8e16ec	100644	1802	PR version, not live
-m3/docs/name-mapping.json	9c2c22d3fd5f9c1b9968e1ffe4968c9c0a61c6e1d73ba89242bd4b344432ad4b	e2d64c60414188f6bb901f46a90bf611a686925f	100644	1802	PR version, not live
+m3/docs/name-mapping.json	4025e1eb0cb616f75ecb4eb653f298f2a5145a51b037a24b6f9442b157037ba5	7479ecaa54a36be70c6fe6efdd389efa26d265dc	100644	1802	PR version, not live
 m3/qualification/mask-prefix-scalar-20261021/README.md	10e9120fce41f3a66ff045fd552c5ead8421c6146446fcdcbf343dbd1b279672	ddbab3ae8fb73503d2851f20054afd73b7c40868	100644	1802	PR version, not live
 m3/qualification/mask-prefix-scalar-20261021/verify.sh	dbae3da2da5e2b29fca3d46a03b66326283dbbc66212a76138df5de5307dbd6a	60f757ba48acfeb77d8ac6c46ce36c94262eddec	100644	1802	PR version, not live
 m3/qualification/superset-native-filtered-20261021/ALGORITHM_CATALOGUE.tsv	a148b2f1f8448940b34f0f4e535ca574eb2dc241c09da82e5f5d1b51a08cc020	3accf053ebbbb176273b502452941d3e36e4a735	100644	1802	PR version, not live

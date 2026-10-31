@@ -32,8 +32,8 @@
   "frozen_inputs": [
     {
       "path": "m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
-      "git_blob": "ca048a00bad895ea79495f54cdd5a39b2751adac",
-      "sha256": "f123ae356ffdd5df1523205dc5f1f48e6daf461b8a6f908a9870e348e80f5e7f"
+      "git_blob": "ac6127ea73ed1b2f9e02413e8316a10494c5c006",
+      "sha256": "5bf447216af55a51b73c275182af891c1ded5c2b427fa6856139731078d2ef8c"
     },
     {
       "path": "m3/runtime-integration/integrated-collections/verify.py",

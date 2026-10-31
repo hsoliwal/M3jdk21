@@ -4,12 +4,12 @@
     {
       "path": "INPUT_SEALS.json",
       "bytes": 1321,
-      "sha256": "5a26d9913a9b18f97b68aa8bf3eac6855d954f5d4e1c7c7805a16f1589f0a881"
+      "sha256": "3525da836c05f132ddee51d4a53549ce2a85ce610f082e29a47289438e6ed55f"
     },
     {
       "path": "REVIEW.md",
       "bytes": 4985,
-      "sha256": "f84ae9ee896eaadd79ae00c3c1747decd0f928872baecbec56166f363f675b59"
+      "sha256": "a5495e81d51d07bf82c219b68ef9949978dd1113258c6202642788b7813c93c8"
     },
     {
       "path": "audit_base.py.txt",
@@ -19,17 +19,17 @@
     {
       "path": "prepare_publication.py.txt",
       "bytes": 15683,
-      "sha256": "3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd"
+      "sha256": "2c352ab7122ff72da7027cd6b06bfa6b4cf2db0531727bf56b482c062aeea754"
     },
     {
       "path": "v1-v2.diff",
       "bytes": 4471,
-      "sha256": "dcb1f09d1b221eb10837874bf62e82093813eb102229567ac19ed4a9c56831d9"
+      "sha256": "76366f2ea6d7cafbeb0bcdb458d449f67842bc78e90b1510ecc2cddf8d6eaa59"
     },
     {
       "path": "verify_publication.py.txt",
       "bytes": 9623,
-      "sha256": "8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639"
+      "sha256": "a5e9c2228304ea359b5459df150c618fcc3566b88217cdc262c893c31398baa7"
     }
   ]
 }

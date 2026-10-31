@@ -4,7 +4,7 @@
   "source_manifest": {
     "path": "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-current-module-materialization-k-v1\\SOURCE_MANIFEST.tsv",
     "bytes": 97733,
-    "sha256": "66558ebc244b9e8b3be082920f160151042579dae765796f2038d15e5a54a3ba"
+    "sha256": "eaa5f823d487a9a66bf73599e527110916132d1f27f7a007244c32e8334c17af"
   },
   "patterns": {
     "process": "ProcessBuilder|Runtime\\s*\\.\\s*getRuntime\\s*\\(\\s*\\)\\s*\\.\\s*exec\\s*\\(|ProcessHandle|System\\s*\\.\\s*exit\\s*\\(",
@@ -20,7 +20,7 @@
   "matched_files": [
     {
       "path": "src/main/java/com/m3/collections/M3CollectionSdkNames.java",
-      "sha256": "0e8d7bf9235d4075552c104d650290534b3b814014bcdb664de89fbc804fdaee",
+      "sha256": "25ea3681868ca94fe746405a9054ebfa28fa6808708bcbab06a7d94241f58877",
       "sites": [
         {
           "line": 74,
@@ -59,7 +59,7 @@
     },
     {
       "path": "src/main/java/com/m3/collections/M3LongAddressKernel.java",
-      "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
+      "sha256": "8fa3ebd0a31e78aa2c763c9ab99955e419f8573a9687d3e817e913c0ed48d8ed",
       "sites": [
         {
           "line": 122,
@@ -72,7 +72,7 @@
     },
     {
       "path": "src/main/java/com/m3/collections/M3LongIndexPathMasksJNI.java",
-      "sha256": "6170e9899132ef746a88c140cebc78cbaf511aea1c797549fab3e2238d4c5a06",
+      "sha256": "d82e38a2773b65ea66a534f8ff16f9ec5e65fbcb0aff1c4db163d6c688f0df55",
       "sites": [
         {
           "line": 25,
@@ -85,7 +85,7 @@
     },
     {
       "path": "src/main/java/com/m3/collections/M3LongRankBatchNative.java",
-      "sha256": "a199d9601ca4c36d8dbe3d1b95a8dd7da49d5f22a15ed29a7112665a38288c82",
+      "sha256": "a071aca93b32a37ac4f6efbe3f2c008732d7af05278e34d1480c117d5c635940",
       "sites": [
         {
           "line": 53,
@@ -105,7 +105,7 @@
     },
     {
       "path": "src/main/java/com/m3/collections/M3ResidencyStateMaskIndex.java",
-      "sha256": "fcb1575f5366bba814870456acdf38379325f631cde86a18ae9541588e500dfc",
+      "sha256": "4443c7cd3df52a64d04d5bdb2a0bd2766b700c67e7f6c04da2ba1d2c9431cff1",
       "sites": [
         {
           "line": 216,
@@ -118,7 +118,7 @@
     },
     {
       "path": "src/main/java/com/m3/collections/M3SignalOrderNative.java",
-      "sha256": "eaa37fee096172a200088d80b2b48955d60d602061fba71d715e25f6d395acc8",
+      "sha256": "2b8b802a75e2a0268db41e732da6ed3530df6a128ea25fe3e3cbe981fe419172",
       "sites": [
         {
           "line": 20,
@@ -151,7 +151,7 @@
     },
     {
       "path": "src/main/java/com/m3/collections/M3StateMaskHistogram.java",
-      "sha256": "965a098c4f8b0103b5a497ef7e7897e0e0cb740f6f38da96fa6d4e277f859a42",
+      "sha256": "1c18c7e71d37dcb1fa3d28690243ae390f278b5cf32a613cb4c1dead4d5f961b",
       "sites": [
         {
           "line": 186,
@@ -164,7 +164,7 @@
     },
     {
       "path": "src/test/java/com/m3/collections/M3BitLaneJumpProof.java",
-      "sha256": "1a6b291f5c5e079afbfe02adf6faf2dc6de997263e24507e85ee6333365bab24",
+      "sha256": "dcd1f4d3439f558c6c685d615a24d136f2696cdf41de4a403a48f7cd6b1b578b",
       "sites": [
         {
           "line": 21,
@@ -197,7 +197,7 @@
     },
     {
       "path": "src/test/java/com/m3/collections/M3CollectionCostProbe.java",
-      "sha256": "c3b7fe8f9b10dd1607af7b5da7b657138934a1b5cf0d449960c50c2a219d35a8",
+      "sha256": "9eb73f254e4c99b2256ce020e9f081393cdaa12e3a1432a9a9163b01a9aaab0e",
       "sites": [
         {
           "line": 40,
@@ -231,7 +231,7 @@
     },
     {
       "path": "src/test/java/com/m3/collections/M3CollectionSdkCatalogSelfTest.java",
-      "sha256": "b28c7bea13e62b546cfc77b518126b1cbae52a3449bc264230ace523a10e3dc1",
+      "sha256": "c9687c706997e4204fb0df632e53425261f0a74ff1bb07690bbef53ab03fc83f",
       "sites": [
         {
           "line": 73,
@@ -363,7 +363,7 @@
     },
     {
       "path": "src/test/java/com/m3/collections/M3ObjectCountsTest.java",
-      "sha256": "18d51bc473a9dabdce01325e44b96203131755265e3bdb0bd4d2be02803f5af3",
+      "sha256": "3aa87424578802f68e3872307a6d9dcda6a95353e7e6a246f6dc5abe77165b09",
       "sites": [
         {
           "line": 110,
@@ -376,7 +376,7 @@
     },
     {
       "path": "src/test/java/com/m3/collections/M3ObjectResidencyTest.java",
-      "sha256": "6ee2da4009928feb40d5854bfedb716c904e0d2b83ed92f9ad311bbb9bdb8240",
+      "sha256": "67489edfcb143e96af1d6211c2ec60694c382bec9b293728ee29ab3e3ba4d0a5",
       "sites": [
         {
           "line": 177,

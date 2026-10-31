@@ -16,7 +16,7 @@
       "bound_files": [
         {
           "input": "crate/ENGINE_SOURCES.tsv",
-          "sha256": "b2e990a09f2c4b7c355b48cc33a72405829fd009f76d1866153aa07225e6684e",
+          "sha256": "74242eb726eb5d1c5bbdc9fa4ee17c33b4afa1c96bfcddad5dcb1a4b1f4f58cb",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/ENGINE_SOURCES.tsv"
         },
         {
@@ -146,17 +146,17 @@
         },
         {
           "input": "owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
-          "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63",
+          "sha256": "92cc90c46a1ca672a016a89c0d65e6909e090264ba1aa76a85b7fa333470e38b",
           "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
         },
         {
           "input": "owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
-          "sha256": "5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc",
+          "sha256": "613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853",
           "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java"
         },
         {
           "input": "owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
-          "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579",
+          "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0",
           "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java"
         }
       ],
@@ -194,7 +194,7 @@
       "bound_files": [
         {
           "input": "crate/ENGINE_SOURCES.tsv",
-          "sha256": "b2e990a09f2c4b7c355b48cc33a72405829fd009f76d1866153aa07225e6684e",
+          "sha256": "74242eb726eb5d1c5bbdc9fa4ee17c33b4afa1c96bfcddad5dcb1a4b1f4f58cb",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/ENGINE_SOURCES.tsv"
         },
         {
@@ -239,7 +239,7 @@
         },
         {
           "input": "crate/datasets/abseil-catalogue-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-catalogue-20261021/0003-FILE_PASSES.tsv.txt",
-          "sha256": "a9d157c33f80ed12b2d2118f70235fa4e34d101aa917e760cdf700bb6b024bee",
+          "sha256": "7d3ccbf4a658aa5091a39d6b9454019ed723271df3e8145cca45734f4f5f33cf",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-catalogue-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-catalogue-20261021/0003-FILE_PASSES.tsv.txt"
         },
         {
@@ -254,7 +254,7 @@
         },
         {
           "input": "crate/datasets/abseil-catalogue-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-catalogue-20261021/0006-name-mapping.json.txt",
-          "sha256": "cad5b4eed6529124b3125a0edafe688b557d33cc39e989214efc192af0388ba1",
+          "sha256": "d1d50cbab90f69e847509f461dea20de7c235b4e9418c877b6e60a32a998f514",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-catalogue-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-catalogue-20261021/0006-name-mapping.json.txt"
         },
         {
@@ -294,17 +294,17 @@
         },
         {
           "input": "owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
-          "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63",
+          "sha256": "92cc90c46a1ca672a016a89c0d65e6909e090264ba1aa76a85b7fa333470e38b",
           "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
         },
         {
           "input": "owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
-          "sha256": "5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc",
+          "sha256": "613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853",
           "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java"
         },
         {
           "input": "owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
-          "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579",
+          "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0",
           "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java"
         }
       ],
@@ -342,7 +342,7 @@
       "bound_files": [
         {
           "input": "crate/ENGINE_SOURCES.tsv",
-          "sha256": "b2e990a09f2c4b7c355b48cc33a72405829fd009f76d1866153aa07225e6684e",
+          "sha256": "74242eb726eb5d1c5bbdc9fa4ee17c33b4afa1c96bfcddad5dcb1a4b1f4f58cb",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/ENGINE_SOURCES.tsv"
         },
         {
@@ -377,7 +377,7 @@
         },
         {
           "input": "crate/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-views-20261021/0001-M3CollectionViews.java.txt",
-          "sha256": "579ea3c32ea255816f5c12519fd5fdc2bf316b3df2d1d34301a1a93bd0bc9c4d",
+          "sha256": "c0970f5dedf830603de01a9e3ac82e687ae93cc280c97fb9e26768d1333bac43",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-views-20261021/0001-M3CollectionViews.java.txt"
         },
         {
@@ -392,22 +392,22 @@
         },
         {
           "input": "crate/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-views-20261021/0004-M3IndexedListSnapshot.java.txt",
-          "sha256": "6057c017dd48882bdf113833aa10e657180a794c4a2e477d96b918839c79d6c7",
+          "sha256": "e60f763b670d328d480f479390ab24b6e571b38f53394f2c3d829dacd2d698d7",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-views-20261021/0004-M3IndexedListSnapshot.java.txt"
         },
         {
           "input": "crate/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-views-20261021/0005-M3LongBitmapFilteredSnapshot.java.txt",
-          "sha256": "cb1c0ab9eccd76078ec2e4b8e30dc9fb1bde945979326c3a2466392b33d66257",
+          "sha256": "7a168e391255c94fc4711e01cc388cf1f5063ce0738df43721664001207d02b9",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-views-20261021/0005-M3LongBitmapFilteredSnapshot.java.txt"
         },
         {
           "input": "crate/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-views-20261021/0007-M3CatalogueRefinementContract.java.txt",
-          "sha256": "661279db0cf532a67a0bf8ee5483cd91f79b49936add8e96fde08b1130f55174",
+          "sha256": "334c6adf2ee8c310e7a3591da93c6479593659b84287e7a709de986f3f2573f1",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-views-20261021/0007-M3CatalogueRefinementContract.java.txt"
         },
         {
           "input": "crate/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-views-20261021/0008-M3CatalogueRefinementTest.java.txt",
-          "sha256": "9f932bdf49aff3acf020bf36a2f5cead295a7ff6fb87fe55c9fde3c3a656cf93",
+          "sha256": "ac9ac5c9133d85a5e7802577984b08905b73945fcfbcf3f801aa4daaf1b97336",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-views-20261021/0008-M3CatalogueRefinementTest.java.txt"
         },
         {
@@ -422,7 +422,7 @@
         },
         {
           "input": "crate/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-views-20261021/0011-M3PackedSelectionAllocationProbe.java.txt",
-          "sha256": "bbb4abeb2f9dbc512d6236173b68e8404ac5b11729640e1747aac6f002b933a7",
+          "sha256": "0c0d16da710e376f0cc363cc70a6430fb6e921f12dbb17b897f1d9812ef12e8b",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-views-20261021/0011-M3PackedSelectionAllocationProbe.java.txt"
         },
         {
@@ -457,37 +457,37 @@
         },
         {
           "input": "crate/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-views-20261021/pre/0001-M3CollectionViews.java.txt",
-          "sha256": "511800d4d79c7d8838ddb497f031e13827decd44c9c2790093f89ea01cdaa349",
+          "sha256": "90b0ba9467d6cb6741de9a3e7b39f1a6016eef2401da3b3eadfab3cdb0e975c8",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-views-20261021/pre/0001-M3CollectionViews.java.txt"
         },
         {
           "input": "crate/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-views-20261021/pre/0002-M3FilteredNavigableSet.java.txt",
-          "sha256": "d13c5c5db3e07e5c66f8857f2c74e07d2ba60babb7d2529bd397e61894881fd0",
+          "sha256": "5dce16ffebd5d3cfdd7fdf77f509eff6784ffb7453ae76270b3ba39289df6c4a",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-views-20261021/pre/0002-M3FilteredNavigableSet.java.txt"
         },
         {
           "input": "crate/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-views-20261021/pre/0003-M3FilteredViews.java.txt",
-          "sha256": "8419315c3058bce6add897b7ffa7c6763bbb6b85418bb35e190ba8a4d2dd70c4",
+          "sha256": "5308017ea910acd0f81252e88fd8e57c2c1b49d8e6f2874bab0728c110526709",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-views-20261021/pre/0003-M3FilteredViews.java.txt"
         },
         {
           "input": "crate/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-views-20261021/pre/0004-M3IndexedListSnapshot.java.txt",
-          "sha256": "d6f1f6f1ffb2ad2ef43f97426f05d8e4ab202dcec5b51bcc4a3151003d2837b7",
+          "sha256": "3d6d6bfb82e9030a91da386e38bdec6a9bf41c268ff15c83d7c122db983f2a28",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-views-20261021/pre/0004-M3IndexedListSnapshot.java.txt"
         },
         {
           "input": "crate/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-views-20261021/pre/0005-M3LongBitmapFilteredSnapshot.java.txt",
-          "sha256": "9b4b095f7f51b27a76e6a56cda60c6662cbbf60bcb8b55655f82c127b4451af6",
+          "sha256": "e5eb87e3d8dd3f0e0efcae9159eb4862a9b727d9ce3e498a314b43a2ee07a3ad",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-abseil-views-20261021/pre/0005-M3LongBitmapFilteredSnapshot.java.txt"
         },
         {
           "input": "crate/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-views-20261021/0006-m3_index_mask_compactor.c.txt",
-          "sha256": "fedca631c2f0f0f73a27dde5e87395e95ac00fde07fc1d7006735c2ef18a579a",
+          "sha256": "b68c1fa966ad617302ffab1f2a820a23fa379854d2f07216933f19259d370c59",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-views-20261021/0006-m3_index_mask_compactor.c.txt"
         },
         {
           "input": "crate/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-views-20261021/0012-m3_mask_compactor_empty_regions.c.txt",
-          "sha256": "48631b556931bd113464bfabca7876615261f2a4bbb17b54be6fa2fa801e96c7",
+          "sha256": "ceb409a1eca8d65a5e6c2a7845759e0a95c1c802e493340def2f8d05d110f02a",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-views-20261021/0012-m3_mask_compactor_empty_regions.c.txt"
         },
         {
@@ -497,7 +497,7 @@
         },
         {
           "input": "crate/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-views-20261021/pre/0006-m3_index_mask_compactor.c.txt",
-          "sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
+          "sha256": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-views-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-views-20261021/pre/0006-m3_index_mask_compactor.c.txt"
         },
         {
@@ -527,17 +527,17 @@
         },
         {
           "input": "owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
-          "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63",
+          "sha256": "92cc90c46a1ca672a016a89c0d65e6909e090264ba1aa76a85b7fa333470e38b",
           "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
         },
         {
           "input": "owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
-          "sha256": "5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc",
+          "sha256": "613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853",
           "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java"
         },
         {
           "input": "owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
-          "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579",
+          "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0",
           "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java"
         }
       ],
@@ -575,7 +575,7 @@
       "bound_files": [
         {
           "input": "crate/ENGINE_SOURCES.tsv",
-          "sha256": "b2e990a09f2c4b7c355b48cc33a72405829fd009f76d1866153aa07225e6684e",
+          "sha256": "74242eb726eb5d1c5bbdc9fa4ee17c33b4afa1c96bfcddad5dcb1a4b1f4f58cb",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/ENGINE_SOURCES.tsv"
         },
         {
@@ -680,17 +680,17 @@
         },
         {
           "input": "owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
-          "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63",
+          "sha256": "92cc90c46a1ca672a016a89c0d65e6909e090264ba1aa76a85b7fa333470e38b",
           "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
         },
         {
           "input": "owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
-          "sha256": "5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc",
+          "sha256": "613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853",
           "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java"
         },
         {
           "input": "owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
-          "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579",
+          "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0",
           "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java"
         }
       ],
@@ -728,7 +728,7 @@
       "bound_files": [
         {
           "input": "crate/ENGINE_SOURCES.tsv",
-          "sha256": "b2e990a09f2c4b7c355b48cc33a72405829fd009f76d1866153aa07225e6684e",
+          "sha256": "74242eb726eb5d1c5bbdc9fa4ee17c33b4afa1c96bfcddad5dcb1a4b1f4f58cb",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/ENGINE_SOURCES.tsv"
         },
         {
@@ -763,12 +763,12 @@
         },
         {
           "input": "crate/datasets/abseil-idmeta-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-idmeta-20261021/0001-abseil-convergence-20261021.tsv.txt",
-          "sha256": "4393cbcb8a063fc94c8515c2af756af1096d51fa04aa4d674d4e2df25f1c0a5f",
+          "sha256": "a2aaf65a06efa7e957b157679c776382ef6010d4375ad493c5b25d6f3bc80c4b",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-idmeta-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-idmeta-20261021/0001-abseil-convergence-20261021.tsv.txt"
         },
         {
           "input": "crate/datasets/abseil-idmeta-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-idmeta-20261021/0002-FILE_PASSES.tsv.txt",
-          "sha256": "fd8975ff53c16fc3e9d5c77e23744014ea3ccd47ce8e8af4ef397c986fd14bdf",
+          "sha256": "98bdcce78513bc57eeaeafe0a27f3d6edb5dd954b16a38fc1defc5d2ed06562e",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-idmeta-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-idmeta-20261021/0002-FILE_PASSES.tsv.txt"
         },
         {
@@ -788,7 +788,7 @@
         },
         {
           "input": "crate/datasets/abseil-idmeta-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-idmeta-20261021/pre/0002-FILE_PASSES.tsv.txt",
-          "sha256": "a9d157c33f80ed12b2d2118f70235fa4e34d101aa917e760cdf700bb6b024bee",
+          "sha256": "7d3ccbf4a658aa5091a39d6b9454019ed723271df3e8145cca45734f4f5f33cf",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-idmeta-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-idmeta-20261021/pre/0002-FILE_PASSES.tsv.txt"
         },
         {
@@ -823,17 +823,17 @@
         },
         {
           "input": "owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
-          "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63",
+          "sha256": "92cc90c46a1ca672a016a89c0d65e6909e090264ba1aa76a85b7fa333470e38b",
           "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
         },
         {
           "input": "owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
-          "sha256": "5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc",
+          "sha256": "613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853",
           "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java"
         },
         {
           "input": "owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
-          "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579",
+          "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0",
           "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java"
         }
       ],
@@ -871,7 +871,7 @@
       "bound_files": [
         {
           "input": "crate/ENGINE_SOURCES.tsv",
-          "sha256": "b2e990a09f2c4b7c355b48cc33a72405829fd009f76d1866153aa07225e6684e",
+          "sha256": "74242eb726eb5d1c5bbdc9fa4ee17c33b4afa1c96bfcddad5dcb1a4b1f4f58cb",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/ENGINE_SOURCES.tsv"
         },
         {
@@ -906,7 +906,7 @@
         },
         {
           "input": "crate/datasets/abseil-acceptance-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-acceptance-20261021/0001-PRODUCT_ACCEPTANCE.json.txt",
-          "sha256": "ccec53cdddf06f2b798fd8e6ef13d0bfabe55a915a1ee77518cc4e616d2385d6",
+          "sha256": "cb36026b91ed2cb08825ee2e16776c3b38d6b865678b18e6296fbcf31e7787ca",
           "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/abseil-acceptance-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-abseil-acceptance-20261021/0001-PRODUCT_ACCEPTANCE.json.txt"
         },
         {
@@ -951,17 +951,17 @@
         },
         {
           "input": "owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
-          "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63",
+          "sha256": "92cc90c46a1ca672a016a89c0d65e6909e090264ba1aa76a85b7fa333470e38b",
           "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
         },
         {
           "input": "owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
-          "sha256": "5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc",
+          "sha256": "613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853",
           "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java"
         },
         {
           "input": "owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
-          "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579",
+          "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0",
           "source_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java"
         }
       ],
@@ -1003,7 +1003,7 @@
     {
       "mode": "0644",
       "path": "m3/collections/algorithm-catalog/abseil-convergence-20261021.tsv",
-      "postimage_sha256": "4393cbcb8a063fc94c8515c2af756af1096d51fa04aa4d674d4e2df25f1c0a5f",
+      "postimage_sha256": "a2aaf65a06efa7e957b157679c776382ef6010d4375ad493c5b25d6f3bc80c4b",
       "preimage_sha256": "ABSENT",
       "stages": [
         {
@@ -1015,105 +1015,105 @@
         {
           "dataset": "abseil-idmeta-20261021",
           "mode": "0644",
-          "postimage_sha256": "4393cbcb8a063fc94c8515c2af756af1096d51fa04aa4d674d4e2df25f1c0a5f",
+          "postimage_sha256": "a2aaf65a06efa7e957b157679c776382ef6010d4375ad493c5b25d6f3bc80c4b",
           "preimage_sha256": "92e92f83463cde1341d30f7dcf8c2d454e0e3495323e540196f62ef6f5eb4736"
         }
       ]
     },
     {
       "mode": "0644",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
-      "postimage_sha256": "579ea3c32ea255816f5c12519fd5fdc2bf316b3df2d1d34301a1a93bd0bc9c4d",
-      "preimage_sha256": "511800d4d79c7d8838ddb497f031e13827decd44c9c2790093f89ea01cdaa349",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java",
+      "postimage_sha256": "c0970f5dedf830603de01a9e3ac82e687ae93cc280c97fb9e26768d1333bac43",
+      "preimage_sha256": "90b0ba9467d6cb6741de9a3e7b39f1a6016eef2401da3b3eadfab3cdb0e975c8",
       "stages": [
         {
           "dataset": "abseil-views-20261021",
           "mode": "0644",
-          "postimage_sha256": "579ea3c32ea255816f5c12519fd5fdc2bf316b3df2d1d34301a1a93bd0bc9c4d",
-          "preimage_sha256": "511800d4d79c7d8838ddb497f031e13827decd44c9c2790093f89ea01cdaa349"
+          "postimage_sha256": "c0970f5dedf830603de01a9e3ac82e687ae93cc280c97fb9e26768d1333bac43",
+          "preimage_sha256": "90b0ba9467d6cb6741de9a3e7b39f1a6016eef2401da3b3eadfab3cdb0e975c8"
         }
       ]
     },
     {
       "mode": "0644",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java",
       "postimage_sha256": "a9b51ed9c0859ef27d308ea89e1b41cf3283dfd54478a36b1d89d6ab66711b0c",
-      "preimage_sha256": "d13c5c5db3e07e5c66f8857f2c74e07d2ba60babb7d2529bd397e61894881fd0",
+      "preimage_sha256": "5dce16ffebd5d3cfdd7fdf77f509eff6784ffb7453ae76270b3ba39289df6c4a",
       "stages": [
         {
           "dataset": "abseil-views-20261021",
           "mode": "0644",
           "postimage_sha256": "a9b51ed9c0859ef27d308ea89e1b41cf3283dfd54478a36b1d89d6ab66711b0c",
-          "preimage_sha256": "d13c5c5db3e07e5c66f8857f2c74e07d2ba60babb7d2529bd397e61894881fd0"
+          "preimage_sha256": "5dce16ffebd5d3cfdd7fdf77f509eff6784ffb7453ae76270b3ba39289df6c4a"
         }
       ]
     },
     {
       "mode": "0644",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
       "postimage_sha256": "dce9da78508449041db8907ef7bc44e9fcee1117bbe91db880e35c26933f9470",
-      "preimage_sha256": "8419315c3058bce6add897b7ffa7c6763bbb6b85418bb35e190ba8a4d2dd70c4",
+      "preimage_sha256": "5308017ea910acd0f81252e88fd8e57c2c1b49d8e6f2874bab0728c110526709",
       "stages": [
         {
           "dataset": "abseil-views-20261021",
           "mode": "0644",
           "postimage_sha256": "dce9da78508449041db8907ef7bc44e9fcee1117bbe91db880e35c26933f9470",
-          "preimage_sha256": "8419315c3058bce6add897b7ffa7c6763bbb6b85418bb35e190ba8a4d2dd70c4"
+          "preimage_sha256": "5308017ea910acd0f81252e88fd8e57c2c1b49d8e6f2874bab0728c110526709"
         }
       ]
     },
     {
       "mode": "0644",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
-      "postimage_sha256": "6057c017dd48882bdf113833aa10e657180a794c4a2e477d96b918839c79d6c7",
-      "preimage_sha256": "d6f1f6f1ffb2ad2ef43f97426f05d8e4ab202dcec5b51bcc4a3151003d2837b7",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java",
+      "postimage_sha256": "e60f763b670d328d480f479390ab24b6e571b38f53394f2c3d829dacd2d698d7",
+      "preimage_sha256": "3d6d6bfb82e9030a91da386e38bdec6a9bf41c268ff15c83d7c122db983f2a28",
       "stages": [
         {
           "dataset": "abseil-views-20261021",
           "mode": "0644",
-          "postimage_sha256": "6057c017dd48882bdf113833aa10e657180a794c4a2e477d96b918839c79d6c7",
-          "preimage_sha256": "d6f1f6f1ffb2ad2ef43f97426f05d8e4ab202dcec5b51bcc4a3151003d2837b7"
+          "postimage_sha256": "e60f763b670d328d480f479390ab24b6e571b38f53394f2c3d829dacd2d698d7",
+          "preimage_sha256": "3d6d6bfb82e9030a91da386e38bdec6a9bf41c268ff15c83d7c122db983f2a28"
         }
       ]
     },
     {
       "mode": "0644",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
-      "postimage_sha256": "cb1c0ab9eccd76078ec2e4b8e30dc9fb1bde945979326c3a2466392b33d66257",
-      "preimage_sha256": "9b4b095f7f51b27a76e6a56cda60c6662cbbf60bcb8b55655f82c127b4451af6",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongBitmapFilteredSnapshot.java",
+      "postimage_sha256": "7a168e391255c94fc4711e01cc388cf1f5063ce0738df43721664001207d02b9",
+      "preimage_sha256": "e5eb87e3d8dd3f0e0efcae9159eb4862a9b727d9ce3e498a314b43a2ee07a3ad",
       "stages": [
         {
           "dataset": "abseil-views-20261021",
           "mode": "0644",
-          "postimage_sha256": "cb1c0ab9eccd76078ec2e4b8e30dc9fb1bde945979326c3a2466392b33d66257",
-          "preimage_sha256": "9b4b095f7f51b27a76e6a56cda60c6662cbbf60bcb8b55655f82c127b4451af6"
+          "postimage_sha256": "7a168e391255c94fc4711e01cc388cf1f5063ce0738df43721664001207d02b9",
+          "preimage_sha256": "e5eb87e3d8dd3f0e0efcae9159eb4862a9b727d9ce3e498a314b43a2ee07a3ad"
         }
       ]
     },
     {
       "mode": "0644",
       "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
-      "postimage_sha256": "fedca631c2f0f0f73a27dde5e87395e95ac00fde07fc1d7006735c2ef18a579a",
-      "preimage_sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
+      "postimage_sha256": "b68c1fa966ad617302ffab1f2a820a23fa379854d2f07216933f19259d370c59",
+      "preimage_sha256": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73",
       "stages": [
         {
           "dataset": "abseil-views-20261021",
           "mode": "0644",
-          "postimage_sha256": "fedca631c2f0f0f73a27dde5e87395e95ac00fde07fc1d7006735c2ef18a579a",
-          "preimage_sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef"
+          "postimage_sha256": "b68c1fa966ad617302ffab1f2a820a23fa379854d2f07216933f19259d370c59",
+          "preimage_sha256": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73"
         }
       ]
     },
     {
       "mode": "0644",
       "path": "m3/collections/src/test/java/com/m3/collections/M3CatalogueRefinementContract.java",
-      "postimage_sha256": "661279db0cf532a67a0bf8ee5483cd91f79b49936add8e96fde08b1130f55174",
+      "postimage_sha256": "334c6adf2ee8c310e7a3591da93c6479593659b84287e7a709de986f3f2573f1",
       "preimage_sha256": "ABSENT",
       "stages": [
         {
           "dataset": "abseil-views-20261021",
           "mode": "0644",
-          "postimage_sha256": "661279db0cf532a67a0bf8ee5483cd91f79b49936add8e96fde08b1130f55174",
+          "postimage_sha256": "334c6adf2ee8c310e7a3591da93c6479593659b84287e7a709de986f3f2573f1",
           "preimage_sha256": "ABSENT"
         }
       ]
@@ -1121,13 +1121,13 @@
     {
       "mode": "0644",
       "path": "m3/collections/src/test/java/com/m3/collections/M3CatalogueRefinementTest.java",
-      "postimage_sha256": "9f932bdf49aff3acf020bf36a2f5cead295a7ff6fb87fe55c9fde3c3a656cf93",
+      "postimage_sha256": "ac9ac5c9133d85a5e7802577984b08905b73945fcfbcf3f801aa4daaf1b97336",
       "preimage_sha256": "ABSENT",
       "stages": [
         {
           "dataset": "abseil-views-20261021",
           "mode": "0644",
-          "postimage_sha256": "9f932bdf49aff3acf020bf36a2f5cead295a7ff6fb87fe55c9fde3c3a656cf93",
+          "postimage_sha256": "ac9ac5c9133d85a5e7802577984b08905b73945fcfbcf3f801aa4daaf1b97336",
           "preimage_sha256": "ABSENT"
         }
       ]
@@ -1163,13 +1163,13 @@
     {
       "mode": "0644",
       "path": "m3/collections/src/test/java/com/m3/collections/M3PackedSelectionAllocationProbe.java",
-      "postimage_sha256": "bbb4abeb2f9dbc512d6236173b68e8404ac5b11729640e1747aac6f002b933a7",
+      "postimage_sha256": "0c0d16da710e376f0cc363cc70a6430fb6e921f12dbb17b897f1d9812ef12e8b",
       "preimage_sha256": "ABSENT",
       "stages": [
         {
           "dataset": "abseil-views-20261021",
           "mode": "0644",
-          "postimage_sha256": "bbb4abeb2f9dbc512d6236173b68e8404ac5b11729640e1747aac6f002b933a7",
+          "postimage_sha256": "0c0d16da710e376f0cc363cc70a6430fb6e921f12dbb17b897f1d9812ef12e8b",
           "preimage_sha256": "ABSENT"
         }
       ]
@@ -1177,13 +1177,13 @@
     {
       "mode": "0644",
       "path": "m3/collections/src/test/native/m3_mask_compactor_empty_regions.c",
-      "postimage_sha256": "48631b556931bd113464bfabca7876615261f2a4bbb17b54be6fa2fa801e96c7",
+      "postimage_sha256": "ceb409a1eca8d65a5e6c2a7845759e0a95c1c802e493340def2f8d05d110f02a",
       "preimage_sha256": "ABSENT",
       "stages": [
         {
           "dataset": "abseil-views-20261021",
           "mode": "0644",
-          "postimage_sha256": "48631b556931bd113464bfabca7876615261f2a4bbb17b54be6fa2fa801e96c7",
+          "postimage_sha256": "ceb409a1eca8d65a5e6c2a7845759e0a95c1c802e493340def2f8d05d110f02a",
           "preimage_sha256": "ABSENT"
         }
       ]
@@ -1205,20 +1205,20 @@
     {
       "mode": "0644",
       "path": "m3/docs/abseil-convergence-20261021/FILE_PASSES.tsv",
-      "postimage_sha256": "fd8975ff53c16fc3e9d5c77e23744014ea3ccd47ce8e8af4ef397c986fd14bdf",
+      "postimage_sha256": "98bdcce78513bc57eeaeafe0a27f3d6edb5dd954b16a38fc1defc5d2ed06562e",
       "preimage_sha256": "ABSENT",
       "stages": [
         {
           "dataset": "abseil-catalogue-20261021",
           "mode": "0644",
-          "postimage_sha256": "a9d157c33f80ed12b2d2118f70235fa4e34d101aa917e760cdf700bb6b024bee",
+          "postimage_sha256": "7d3ccbf4a658aa5091a39d6b9454019ed723271df3e8145cca45734f4f5f33cf",
           "preimage_sha256": "ABSENT"
         },
         {
           "dataset": "abseil-idmeta-20261021",
           "mode": "0644",
-          "postimage_sha256": "fd8975ff53c16fc3e9d5c77e23744014ea3ccd47ce8e8af4ef397c986fd14bdf",
-          "preimage_sha256": "a9d157c33f80ed12b2d2118f70235fa4e34d101aa917e760cdf700bb6b024bee"
+          "postimage_sha256": "98bdcce78513bc57eeaeafe0a27f3d6edb5dd954b16a38fc1defc5d2ed06562e",
+          "preimage_sha256": "7d3ccbf4a658aa5091a39d6b9454019ed723271df3e8145cca45734f4f5f33cf"
         }
       ]
     },
@@ -1239,13 +1239,13 @@
     {
       "mode": "0644",
       "path": "m3/docs/abseil-convergence-20261021/PRODUCT_ACCEPTANCE.json",
-      "postimage_sha256": "ccec53cdddf06f2b798fd8e6ef13d0bfabe55a915a1ee77518cc4e616d2385d6",
+      "postimage_sha256": "cb36026b91ed2cb08825ee2e16776c3b38d6b865678b18e6296fbcf31e7787ca",
       "preimage_sha256": "ABSENT",
       "stages": [
         {
           "dataset": "abseil-acceptance-20261021",
           "mode": "0644",
-          "postimage_sha256": "ccec53cdddf06f2b798fd8e6ef13d0bfabe55a915a1ee77518cc4e616d2385d6",
+          "postimage_sha256": "cb36026b91ed2cb08825ee2e16776c3b38d6b865678b18e6296fbcf31e7787ca",
           "preimage_sha256": "ABSENT"
         }
       ]
@@ -1279,13 +1279,13 @@
     {
       "mode": "0644",
       "path": "m3/docs/name-mapping.json",
-      "postimage_sha256": "cad5b4eed6529124b3125a0edafe688b557d33cc39e989214efc192af0388ba1",
+      "postimage_sha256": "d1d50cbab90f69e847509f461dea20de7c235b4e9418c877b6e60a32a998f514",
       "preimage_sha256": "746e77693058fb09a3770e69bb60bf81dbe60fb3d7898b368e5b891b5456c6f2",
       "stages": [
         {
           "dataset": "abseil-catalogue-20261021",
           "mode": "0644",
-          "postimage_sha256": "cad5b4eed6529124b3125a0edafe688b557d33cc39e989214efc192af0388ba1",
+          "postimage_sha256": "d1d50cbab90f69e847509f461dea20de7c235b4e9418c877b6e60a32a998f514",
           "preimage_sha256": "746e77693058fb09a3770e69bb60bf81dbe60fb3d7898b368e5b891b5456c6f2"
         }
       ]

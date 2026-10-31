@@ -17,11 +17,11 @@ The three test files were generated through the same canonical Java recipe.
 
 | Executed output | SHA-256 |
 |---|---|
-| `M3ArrayDeque.java` | `c67e58ade928f25f5add7b374701fd33417890a59b324bbc2df220de5c23312b` |
-| `M3ColumnarLanes.java` | `f20ebe2b3f6877a830f4cb8670be646dd38ea496d7e1d3223340e0ec1e6fc266` |
-| `M3ArrayDequeGrowthContract.java` | `ceb6e333dfdf640a12560b3c00e3bdc200a5d89a52b8d6594b39edd137d5e56e` |
-| `M3ColumnarGrowthContract.java` | `ebf942a8bacd4426e00973fc0a7c4912db858bec480c230e5f8c0de91d2d194a` |
-| `M3ArrayExpansionTest.java` | `76d8968b8e53b8d00f82dc2d205f1f304e220b7c4c83b08cabedb1b25dcac1e1` |
+| `M3ArrayDeque.java` | `55be5f7d9747f88c751987e69f9c2587559d27f55ece13c0e8aef84506f04108` |
+| `M3ColumnarLanes.java` | `fb44d6095f7107a6f8407d290b5fa5a2e91f68e96921e7d259167bbbbe0cc49f` |
+| `M3ArrayDequeGrowthContract.java` | `576840364559d3c6e3a467b1e9f22b18cf2bb8c81e459039ac0ed7cb5663a312` |
+| `M3ColumnarGrowthContract.java` | `ff82a42cd66551c00ff12fb7bbcdc0583f4914d686b571024cbf10c3f74fb74a` |
+| `M3ArrayExpansionTest.java` | `a127595d7eb71525ddd0d73ebe8c783cda60316bedecbdf9297e0cf9653f036c` |
 
 Qualification: Java 21 strict compilation; both serial owner orders; all four
 before/after owner states; exact public API surface; zero changes at fixed point;

@@ -21,10 +21,10 @@
   "fingerprint": "FileNotFoundError: [Errno 2] No such file or directory: '/workspace/scratch/206049dfb270/jobs-work/final-review/ci-classpath-01/resource-classes:'",
   "source_format": "One colon-separated classpath line",
   "required_wrapper_format": "One path per line; qualify.py joins for the Maven property",
-  "source_sha256": "4ba0b3a88f5c5d86589589e3e3f81f98bba40aad8e294fbeaa83a3648f5d59ce",
+  "source_sha256": "179fe9c0e8dcd670df6b940d635ab68648be1551959c6bc7e7084d75a8cb848d",
   "correction": "Split the exact28 colon-delimited paths into an isolated newline input; preserve source and qualifier",
   "corrected_path": "/workspace/scratch/206049dfb270/canonical-work/CI_SUCCESSOR_PARSER_CLASSPATH.txt",
-  "corrected_sha256": "ae1ead1e1683e1eecfdd6f08ff954290feb339b0108678ffa23ea62591fef06c",
+  "corrected_sha256": "83027ce2dc2b2d0c4213b1f29815df24b47b533bda92fa4ce594f38ed465d345",
   "recipe_executed": false,
   "attempt_directory_created": false
 }

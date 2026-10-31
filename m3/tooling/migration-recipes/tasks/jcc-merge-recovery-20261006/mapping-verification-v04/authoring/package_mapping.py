@@ -127,7 +127,7 @@ def main():
     for name in ["source-publication-input.json", "mapping-input-epoch.json"]:
         add(TASK + "/" + name.replace(".json", "-v04.json"), bundle / name)
     prior_manifest = AUDIT / "publication-mapping-v03/PUBLICATION_MANIFEST.json"
-    assert sha(prior_manifest.read_bytes()) == "2f816b0f0606257ca0c1746a0a30d54b96562a4b28ba0351429c006c6baf4d92"
+    assert sha(prior_manifest.read_bytes()) == "9f4a4b463e6eacfd43eda099928fd31d2d416dc8c2748babe0c4719e33af2104"
     add(PROOF + "/prior-qualification/PUBLICATION_MANIFEST_V03.json", prior_manifest)
     source_packet_root = Path(receipt["source_input"]).parent
     publication_receipt_file = source_packet_root / "SOURCE_PUBLICATION_RECEIPT.json"

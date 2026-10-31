@@ -50,18 +50,18 @@
     {
       "path": "atom-plan/SERIAL_PLAN_RECEIPT.json",
       "bytes": 4175,
-      "sha256": "88110b0d2c4577e6918d51db2aea1140d4e8b5d3f31149963e4f0d5dccedd529"
+      "sha256": "45b28d5a2672c5526b894202d9ec8daac17692deebe1061f4f6b186c64443568"
     }
   ],
   "donorAuthority": {
     "donorCommit": "5024bb72279188f1d0dcfe19e8abdd4bdb9887c8",
     "donorOwnerBlob": "3a1f9f102946de7d7997fb7d9158315012685187",
     "donorTestsBlob": "2bf9247ac839ad3b40661061a1792043dcb8b109",
-    "initialFossDecisionSHA256": "7dedd1159bf6b1f707bc3f44a876228774bb933b2769890eceb8fa907954ecdf",
-    "serialAtomPlanReceiptSHA256": "88110b0d2c4577e6918d51db2aea1140d4e8b5d3f31149963e4f0d5dccedd529",
+    "initialFossDecisionSHA256": "83327575a2f26098a85b6c3a6621ef54b255e9e18da9ab71af0732a52334a2ab",
+    "serialAtomPlanReceiptSHA256": "45b28d5a2672c5526b894202d9ec8daac17692deebe1061f4f6b186c64443568",
     "serialAtomPlanGroups": 40,
     "serialBehavioralAtoms": 28,
-    "atomFossDecisionSHA256": "94cc305a853b2598200bbdace1a5dce63e5bd69844b57fa219ecd665c529e2f8"
+    "atomFossDecisionSHA256": "9349ec1dd02e9d9eebf25f192532a8ec9c77b1446cf91d986aff6d9ac63fd502"
   },
   "completePublicScope": {
     "publicConstructors": [

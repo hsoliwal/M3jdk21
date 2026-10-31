@@ -21,7 +21,7 @@ import org.openrewrite.text.PlainText;
 public final class M3SegmentedLaneNativeRecipe extends ScanningRecipe<M3SegmentedLaneNativeRecipe.State> {
     public static final String TARGET = "src/main/native/collections/segmented_bit_lane.c";
     private static final String RESOURCE = "/jdk/internal/m3/rewrite/segmented-lane-native/segmented_bit_lane.c.txt";
-    private static final String SHA = "4ff7fb4557c58cc59de7fbb24498f3df2a197083a5cd467670dc24b9441f1210";
+    private static final String SHA = "3567f3eed5ab042b5d88574da8f77cce967c3f35bcaf1b99d2c373af4d4ef674";
 
     public static final class State {
         private final String text;

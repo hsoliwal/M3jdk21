@@ -9,7 +9,7 @@ Maven recipe owner: `m3/collections/recipe/order-statistics`. Its five templates
 - `mvn -B -f m3/collections/recipe/order-statistics/pom.xml verify` — validate that product files match source-sealed recipe.
 - `mvn -B -f m3/collections/recipe/order-statistics/pom.xml compile` then `java -cp m3/collections/recipe/order-statistics/target/classes com.m3.recipe.M3RankIndexRecipe --check .` — direct replay.
 - `java -cp ... com.m3.recipe.M3RankIndexRecipe --apply .` — first-time install only; fail closed on existing changed product files.
-- `javac --release 21 -Xlint:all -Werror -d /tmp/m3-rank-test m3/collections/src/main/java/com/m3/collections/{M3LongIterator,M3LongCollection,M3LongRankIndex,M3LongRankBatchNative}.java m3/collections/src/test/java/com/m3/collections/M3LongRankIndexSelfTest.java && java -cp /tmp/m3-rank-test com.m3.collections.M3LongRankIndexSelfTest` — JDK-only stand-alone verification (the real module can also compile/test these classes using Maven).
+- `javac --release 21 -Xlint:all -Werror -d /tmp/m3-rank-test m3/collections/src/main/java/com/m3/collections/{M3LongIterator,M3LongCollection,M3LongRankIndex,M3LongRankBatchNative}.java m3/collections/src/test/java/jdk/m3/collections/M3LongRankIndexSelfTest.java && java -cp /tmp/m3-rank-test com.m3.collections.M3LongRankIndexSelfTest` — JDK-only stand-alone verification (the real module can also compile/test these classes using Maven).
 
 The root `m3/pom.xml` already includes the `m3/collections` module under `m3-extended`; no default-JDK module dependency is introduced.
 

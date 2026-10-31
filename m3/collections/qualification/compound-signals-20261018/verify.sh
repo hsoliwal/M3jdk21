@@ -7,12 +7,12 @@ cd "$root"
 # Exact code authority: four Synexia-generated outputs and three unchanged M3 owners.
 sha256sum --check <<'HASHES'
 da761a6b4f10d9a3c9a61979a4ee238fd6d26492d1ba0e6daacdf371f6561058  m3/collections/src/main/java/jdk/m3/collections/M3SignalOrder.java
-eaa37fee096172a200088d80b2b48955d60d602061fba71d715e25f6d395acc8  m3/collections/src/main/java/jdk/m3/collections/M3SignalOrderNative.java
+2b8b802a75e2a0268db41e732da6ed3530df6a128ea25fe3e3cbe981fe419172  m3/collections/src/main/java/jdk/m3/collections/M3SignalOrderNative.java
 e7a5991f5be2e0bad99400ff477a1c03ec9d1d8e1236f9faf366485f94966ed5  m3/collections/src/main/native/collections/m3_signal_order_jni.c
 c9bc4dc17e68606be0321e42d1c88c404a4dd7f68d7b90c266e446e19d4fa9ba  m3/collections/src/main/java/jdk/m3/collections/M3SignalDimensions.java
-372a5be9ccd7bba8aae5083e63aaca59805f4b8ed17aca5854f6ea387aa49190  m3/collections/src/test/java/jdk/m3/collections/M3SignalDimensionsContract.java
-c0812f809f09c7ae389c5a9bbf7f6b3904619cb102eae41815f78be34adc58f3  m3/collections/src/test/java/jdk/m3/collections/M3SignalDimensionsNativeContract.java
-32036f5d67de908b70e63ed4294b0ca00dfbbf22bdd5a4b4aaaaef79154375ef  m3/collections/src/test/java/jdk/m3/collections/M3SignalDimensionsTest.java
+4d7a8a18db0ea2c548cf1a0117295cb89b9bd7e8cda56f03ef57060258ab728f  m3/collections/src/test/java/jdk/m3/collections/M3SignalDimensionsContract.java
+60e7c8850d214b485359634fc57f0d5896d362da2eed613bfa0c2a0f901d4d8a  m3/collections/src/test/java/jdk/m3/collections/M3SignalDimensionsNativeContract.java
+06bd4926667ec5d37797502694bf92f114a486b2307f595d0c9cb3d48832d85a  m3/collections/src/test/java/jdk/m3/collections/M3SignalDimensionsTest.java
 HASHES
 
 jdk="${JAVA_HOME:-}"

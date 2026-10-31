@@ -15,17 +15,17 @@ import sys
 QUALIFICATION = "m3/collections/qualification/array-mask-successor-20261019"
 BITMAP = "m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe"
 HISTOGRAM = "m3/collections/recipe/state-mask-histogram-20261017"
-MANIFEST_SHA = "ad03213f94ae8b591ab06a75b8b1bc6a515d38609392e2de1e31bd2673bfdd49"
+MANIFEST_SHA = "cce9759e40ab9c513da9c2395b362d03ccb6d6876980d600b4dfd281091b4822"
 BITMAP_OUTPUTS = {
     "m3/collections/src/main/java/jdk/m3/collections/M3LongBitmapFilteredSnapshot.java":
-        "ef4e4f4b7a8871cba0e631b96480ad3cf1e43640e5bf84a89cc91806df2d54d9",
+        "4cb21dae105bbd2ca2d2772c7ba097a133e67e6de4fa77ff4deed3a354642d23",
     "m3/collections/src/test/java/jdk/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java":
-        "de0be6b6fa43ea9b824db0f79106213976e94f8f7cdf6a84f15378a6c090cc37",
+        "38a4258d2ea52d351140b81fe4da28d348d4be40e893ed4cadc968157316fcb0",
 }
 HISTORICAL = {
     "bitmap": {
         "m3/compatibility/m3-collections-receiver-20261018.tsv":
-            "def50d31fc5ef824d37608881b0bc004330d2ac6d32ec6a9c80f89c9807ecc05",
+            "5aefb87881f61f2a79453d95501e5e3ff2b9531bfecfd16a0d4290de68e0300d",
         BITMAP + "/src/main/java/jdk/internal/m3/M3LongBitmapFilteredSnapshotRecipe.java":
             "1e8fc8f95354b1cf3431e3eed5bdfbcb44ad828be7d288fdab30c69588e0d3f5",
         **{BITMAP + "/src/main/resources/templates/" + Path(path).name: digest
@@ -33,11 +33,11 @@ HISTORICAL = {
     },
     "histogram": {
         HISTOGRAM + "/SOURCE_PINS.tsv":
-            "7f6142791b6ff4e06c27c3e2c1e54fc40287e1288bc959f7b3fc112a9ed02feb",
+            "714625ec497ddb1845ea159f6cf644e4fa875f0490ebae8cb63c8bf2095bb411",
         HISTOGRAM + "/manifest.tsv":
-            "3e9c665ba9dbbe959dcb025c94463114ee37cd1385161f470a3732125e443951",
+            "317256e6702a8e5f8490f37b5706a5ad9e17e3ca0bbf3afd7c771b992fccae4f",
         HISTOGRAM + "/native-manifest.tsv":
-            "c91bd681675305d213690528c0e31fe977dc9da4abe6346e4a3ac95179cf6c45",
+            "85a677d7099c27143a6e15e97605244276d8d25ee88786ddf33328e1d00953f8",
     },
 }
 

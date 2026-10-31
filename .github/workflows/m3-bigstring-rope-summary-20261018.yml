@@ -39,8 +39,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          printf '%s  %s\n' 'e09815cea88c44e4da89ca8979ba247cddeee6c97b496d1aa2309a48916a90de' 'm3/core/src/jdk/m3/text/M3BigString.java' | sha256sum --check -
-          printf '%s  %s\n' '5f47db4885a99b1ec7dc95957276d0130f2eab7cba16614907995c722fa6f9a6' 'm3/core/test/jdk/m3/text/M3BigStringSelfTest.java' | sha256sum --check -
+          printf '%s  %s\n' 'ec7142df904511f455e07650081db9eb6518a1fab138ea7ae44be15192cde343' 'm3/core/src/jdk/m3/text/M3BigString.java' | sha256sum --check -
+          printf '%s  %s\n' '6a86ba78d034b115bd3895fc2b66916a4c00a485ad01e60ff6e30bbbf410fc61' 'm3/core/test/jdk/m3/text/M3BigStringSelfTest.java' | sha256sum --check -
           git diff --check
       - name: Compile against the actual M3 immutable text-piece owners
         shell: bash

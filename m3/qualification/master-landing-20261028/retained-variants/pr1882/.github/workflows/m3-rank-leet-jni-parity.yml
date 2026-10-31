@@ -29,7 +29,7 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3RankBatchLeetNativeContract.java)" = 'f9779493ec50e8d396522b88026c9832e19f302a'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3RankBatchLeetNativeContract.java)" = '8bf18e3584cdf64d171a86e4b520e69240e38f13'
       - name: Strict source compile and JNI generated headers
         shell: bash
         run: |

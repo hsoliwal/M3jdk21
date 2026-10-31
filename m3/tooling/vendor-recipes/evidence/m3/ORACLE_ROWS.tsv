@@ -13,13 +13,13 @@ m3/indexdb/pom.xml	org.junit.jupiter	junit-jupiter	${junit.version}-m3-source-1	
 m3/ports/collections/pom.xml	org.junit.jupiter	junit-jupiter	${junit.version}-m3-source-1	${junit.version}-m3-source-1	ALREADY_SOURCE	${junit.version}-m3-source-1
 m3/ports/precompute/pom.xml	org.junit.jupiter	junit-jupiter	${junit.version}-m3-source-1	${junit.version}-m3-source-1	ALREADY_SOURCE	${junit.version}-m3-source-1
 m3/ports/tornadovm-bulk/pom.xml	org.junit.jupiter	junit-jupiter	${junit.version}-m3-source-1	${junit.version}-m3-source-1	ALREADY_SOURCE	${junit.version}-m3-source-1
-m3/synexia-import/intakes/regex-precompute-v7-20261007/evidence/junit-module/pom.xml	org.junit.jupiter	junit-jupiter	${junit.version}-m3-source-1	${junit.version}-m3-source-1	ALREADY_SOURCE	${junit.version}-m3-source-1
-m3/synexia-import/pom.xml	org.junit.jupiter	junit-jupiter	${junit.version}-m3-source-1	${junit.version}-m3-source-1	ALREADY_SOURCE	${junit.version}-m3-source-1
-m3/synexia-import/pure-int-recipe-custody/pom.xml	org.openrewrite	rewrite-core	${openrewrite.version}	8.17.1-m3-source-1	VERSION_NOT_INLINED (inlined: 8.17.1)	8.17.1-m3-source-1
-m3/synexia-import/pure-int-recipe-custody/pom.xml	org.openrewrite	rewrite-java	${openrewrite.version}	8.17.1-m3-source-1	VERSION_NOT_INLINED (inlined: 8.17.1)	8.17.1-m3-source-1
-m3/synexia-import/pure-int-recipe-custody/pom.xml	org.openrewrite	rewrite-java-21	${openrewrite.version}	8.17.1-m3-source-1	VERSION_NOT_INLINED (inlined: 8.17.1)	8.17.1-m3-source-1
-m3/synexia-import/pure-int-recipe-custody/pom.xml	org.slf4j	slf4j-api	1.7.36	1.7.36-m3-source-1	SWITCHED	1.7.36
-m3/synexia-import/pure-int-recipe-custody/pom.xml	org.junit.jupiter	junit-jupiter	${junit.version}-m3-source-1	${junit.version}-m3-source-1	ALREADY_SOURCE	${junit.version}-m3-source-1
+m3/m3-import/intakes/regex-precompute-v7-20261007/evidence/junit-module/pom.xml	org.junit.jupiter	junit-jupiter	${junit.version}-m3-source-1	${junit.version}-m3-source-1	ALREADY_SOURCE	${junit.version}-m3-source-1
+m3/m3-import/pom.xml	org.junit.jupiter	junit-jupiter	${junit.version}-m3-source-1	${junit.version}-m3-source-1	ALREADY_SOURCE	${junit.version}-m3-source-1
+m3/m3-import/pure-int-recipe-custody/pom.xml	org.openrewrite	rewrite-core	${openrewrite.version}	8.17.1-m3-source-1	VERSION_NOT_INLINED (inlined: 8.17.1)	8.17.1-m3-source-1
+m3/m3-import/pure-int-recipe-custody/pom.xml	org.openrewrite	rewrite-java	${openrewrite.version}	8.17.1-m3-source-1	VERSION_NOT_INLINED (inlined: 8.17.1)	8.17.1-m3-source-1
+m3/m3-import/pure-int-recipe-custody/pom.xml	org.openrewrite	rewrite-java-21	${openrewrite.version}	8.17.1-m3-source-1	VERSION_NOT_INLINED (inlined: 8.17.1)	8.17.1-m3-source-1
+m3/m3-import/pure-int-recipe-custody/pom.xml	org.slf4j	slf4j-api	1.7.36	1.7.36-m3-source-1	SWITCHED	1.7.36
+m3/m3-import/pure-int-recipe-custody/pom.xml	org.junit.jupiter	junit-jupiter	${junit.version}-m3-source-1	${junit.version}-m3-source-1	ALREADY_SOURCE	${junit.version}-m3-source-1
 m3/tooling/a3/pom.xml	org.junit.jupiter	junit-jupiter	5.10.2-m3-source-1	5.10.2-m3-source-1	ALREADY_SOURCE	5.10.2-m3-source-1
 m3/tooling/a3/pom.xml		migration-recipes			PLUGIN_DEPENDENCY_UNTOUCHED (plugins resolve from repositories, not the reactor)	
 m3/tooling/a3/pom.xml		migration-recipes			PLUGIN_DEPENDENCY_UNTOUCHED (plugins resolve from repositories, not the reactor)	
@@ -159,9 +159,9 @@ m3/tooling/mr/pom.xml	org.openrewrite	rewrite-java	8.17.1-m3-source-1	8.17.1-m3-
 m3/tooling/mr/pom.xml	org.openrewrite	rewrite-java-21	8.17.1-m3-source-1	8.17.1-m3-source-1	ALREADY_SOURCE	8.17.1-m3-source-1
 m3/tooling/mr/pom.xml	org.slf4j	slf4j-api	2.0.9-m3-source-1	2.0.9-m3-source-1	ALREADY_SOURCE	2.0.9-m3-source-1
 m3/tooling/mr/pom.xml	org.junit.jupiter	junit-jupiter	5.10.2-m3-source-1	5.10.2-m3-source-1	ALREADY_SOURCE	5.10.2-m3-source-1
-m3/tooling/synexia-jdk-a3-recipes/pom.xml	org.openrewrite	rewrite-java	${rewrite.version}-m3-source-1	${rewrite.version}-m3-source-1	ALREADY_SOURCE	${rewrite.version}-m3-source-1
-m3/tooling/synexia-jdk-a3-recipes/pom.xml	org.openrewrite	rewrite-java-21	${rewrite.version}-m3-source-1	${rewrite.version}-m3-source-1	ALREADY_SOURCE	${rewrite.version}-m3-source-1
-m3/tooling/synexia-jdk-a3-recipes/pom.xml	org.junit.jupiter	junit-jupiter	${junit.version}-m3-source-1	${junit.version}-m3-source-1	ALREADY_SOURCE	${junit.version}-m3-source-1
+m3/tooling/m3-jdk-a3-recipes/pom.xml	org.openrewrite	rewrite-java	${rewrite.version}-m3-source-1	${rewrite.version}-m3-source-1	ALREADY_SOURCE	${rewrite.version}-m3-source-1
+m3/tooling/m3-jdk-a3-recipes/pom.xml	org.openrewrite	rewrite-java-21	${rewrite.version}-m3-source-1	${rewrite.version}-m3-source-1	ALREADY_SOURCE	${rewrite.version}-m3-source-1
+m3/tooling/m3-jdk-a3-recipes/pom.xml	org.junit.jupiter	junit-jupiter	${junit.version}-m3-source-1	${junit.version}-m3-source-1	ALREADY_SOURCE	${junit.version}-m3-source-1
 m3/tooling/tq-sync/pom.xml	org.openrewrite	rewrite-java	8.17.1-m3-source-1	8.17.1-m3-source-1	ALREADY_SOURCE	8.17.1-m3-source-1
 m3/tooling/tq-sync/pom.xml	org.openrewrite	rewrite-java-21	8.17.1-m3-source-1	8.17.1-m3-source-1	ALREADY_SOURCE	8.17.1-m3-source-1
 m3/tooling/tq-sync/pom.xml	org.slf4j	slf4j-api	2.0.9-m3-source-1	2.0.9-m3-source-1	ALREADY_SOURCE	2.0.9-m3-source-1

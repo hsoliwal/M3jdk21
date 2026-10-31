@@ -1,7 +1,7 @@
 {
   "status": "PASS",
   "mode": "CHECK",
-  "recipe_proof_sha256": "8675c41844c4731ab75b124ccdcd6c1e1897c43417e28f9e9d2850550f13b772",
+  "recipe_proof_sha256": "d9f44ccf27d1250271021705126126e71439cc753d0df71c165094dc6e639c02",
   "receiver_root": "9dd825588ddc2c21503e57b898bbcc2056910f8aa0c44403cee4f87fef908608",
   "repository": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/receiving",
   "files": [

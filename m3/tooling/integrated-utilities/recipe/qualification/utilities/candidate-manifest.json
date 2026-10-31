@@ -17,7 +17,7 @@
       "path": "m3/runtime-integration/integrated-utilities/contract-catalogue.json",
       "candidate": "/dev/shm/m3jdk21-work/utility-candidates/postimages/m3/runtime-integration/integrated-utilities/contract-catalogue.json",
       "pre_sha256": null,
-      "post_sha256": "d36b88fc08ce728285c59f1826211be0a9154df2dbf8aedcd8a9a5875150d4b8"
+      "post_sha256": "8905efb6c8928d1d6834455532b3e65f6976d839a52e6ceb517940f4baf2e2bd"
     },
     {
       "path": "m3/runtime-integration/integrated-utilities/verify.py",

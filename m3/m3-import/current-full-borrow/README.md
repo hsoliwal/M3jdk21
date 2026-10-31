@@ -5,7 +5,7 @@ Status: **source-pinned receiver plan; no family acceptance implied**.
 Controlling target policy remains:
 - `m3/docs/m3jdk21-porting-invariant.md`
 - `m3/docs/name-mapping.json`
-- `m3/docs/SYNEXIA_CONVERGENCE_MODEL.md`
+- `m3/docs/M3_CONVERGENCE_MODEL.md`
 
 Controlling Synexia ownership remains:
 `SYNEXIA-M3JDK21-CANONICAL-OWNERSHIP-1`.
@@ -18,7 +18,7 @@ Synexia source revision:
 
 Synexia estate source blob:
 
-`292bc31a96cd3d20c36d617045c6b01a7a7c8faf`
+`7ffcc48f68e3804899e45c5d058b583ac655d5ea`
 
 Source PR:
 
@@ -26,7 +26,7 @@ Source PR:
 
 The exact estate bytes are mirrored at:
 
-`m3/synexia-import/current-full-borrow/synexia-estate.tsv`
+`m3/m3-import/current-full-borrow/m3-estate.tsv`
 
 Synexia receiving-DAG blob:
 
@@ -34,7 +34,7 @@ Synexia receiving-DAG blob:
 
 The exact DAG bytes are mirrored at:
 
-`m3/synexia-import/current-full-borrow/synexia-dag.tsv`
+`m3/m3-import/current-full-borrow/m3-dag.tsv`
 
 M3JDK21 does not reinterpret that file as target acceptance. Every copied row begins and remains
 source inventory until target-side receipts advance it.
@@ -83,7 +83,7 @@ The mirrored serial phase plan is:
 
 It is stored at:
 
-`m3/synexia-import/current-full-borrow/promotion-phases.tsv`.
+`m3/m3-import/current-full-borrow/promotion-phases.tsv`.
 
 `ARRAYS` is deliberately a **target promotion phase**, not a new Synexia source family. It consumes
 qualified foundation/data-structure/native mechanics, while M3JDK21 retains Java array and VM

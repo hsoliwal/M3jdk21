@@ -34,9 +34,9 @@ jobs:
         shell: bash
         run: |
           printf '%s  %s\n' \
-            'b52c2947be7b45b0f66ca7fa472bf25c929266281f90c1db2566158aea8f52ae' 'm3/collections/src/main/java/jdk/m3/collections/M3WindowPlan.java' \
-            '635f5c5d8570b6424215b0fd252bc4e00a6d140dbb7dfd0db186284cdca95542' 'm3/collections/src/test/java/jdk/m3/collections/M3WindowPlanChangeContract.java' \
-            'a732f65d015ad2a6e721b6c394048fa83c028f96a5eeea89b115d2a3f49c7aae' 'm3/collections/src/test/java/jdk/m3/collections/M3WindowPlanChangeTest.java' | sha256sum -c -
+            '31a8b654dca812675747883911c334b8386bacdcc4c5ffb40cd25dcd456c8acb' 'm3/collections/src/main/java/jdk/m3/collections/M3WindowPlan.java' \
+            '1ce0e438254fad6c34f4a8b470c3034fb0b753ac34d604840368ab9136051f13' 'm3/collections/src/test/java/jdk/m3/collections/M3WindowPlanChangeContract.java' \
+            'fe8d7aa768d60dca2890ffa48bcfd8d7bd3a36445f2ad3c412538c84023d42ef' 'm3/collections/src/test/java/jdk/m3/collections/M3WindowPlanChangeTest.java' | sha256sum -c -
       - name: Compile real owner and execute seeded strict contract
         shell: bash
         run: |

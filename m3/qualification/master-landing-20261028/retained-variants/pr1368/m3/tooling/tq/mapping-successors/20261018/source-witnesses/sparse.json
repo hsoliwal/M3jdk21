@@ -47,8 +47,8 @@
       "source_url": "https://github.com/hsoliwal/com.synexia/blob/f1e9ff1f2426b20d55f82e50033c0aa8ed66bf72/synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-tq-sparse-lookup.yml",
       "source_path": "m3-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-tq-sparse-lookup.yml",
       "saved_path": "exact-source/m3-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-tq-sparse-lookup.yml",
-      "git_blob_sha1": "fce015cae3b4729490fcd07f17c1e949e3a50747",
-      "sha256": "6d6cce9b0c7a7abb4030eb24959bb4fd3c84195c3367eb00fcebfa1bdae0776e",
+      "git_blob_sha1": "6ad0cd5993cfff3d02f0c964e88b306f702d87d0",
+      "sha256": "09aaac0d4e80b57539f2b25cfba449ca4fd5a9eca2a5ac8a850445f9df8407b7",
       "bytes": 416
     },
     {

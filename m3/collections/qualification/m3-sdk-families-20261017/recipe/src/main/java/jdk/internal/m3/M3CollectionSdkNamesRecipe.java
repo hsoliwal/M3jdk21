@@ -41,11 +41,11 @@ public final class M3CollectionSdkNamesRecipe {
     private static final String CATALOG_SHA = "37acd9e3f5ba56c2cfa2dfb0a71325d3001705ed94e28315f120fc8dabaf4616";
     private static final String CATALOG_TEMPLATE_SHA = "ae5e5cf02a6376112090babe28dc6fe9156f5105956b6c05811bf30ba9c0452b";
     private static final String CATALOG_OUTPUT_SHA = "54c84bf0bc957d7fe6156f8b2df1017918947e58f430b5ce220d0b19d2678b4f";
-    private static final String SDK_SHA = "9a51f5edad8fd58ec9a7cc4dcd17cec23117de1eba486ba1b7a4c631acd8eff0";
-    private static final String CATALOG_TEST_SHA = "b28c7bea13e62b546cfc77b518126b1cbae52a3449bc264230ace523a10e3dc1";
-    private static final String SDK_TEST_SHA = "eb0ca67291ebd8d41c0d6d7f10f8a171b16d59866a2455ce406958ba4af34792";
-    private static final String PREVIOUS_CATALOG_SHA = "9fb8adfdc68a80dcdcb46f08a1dbfc24981292d930c15fd3ea672e6cbc8d0ae0";
-    private static final String PREVIOUS_TEST_SHA = "17abc051756d3cd0101dcaa4436e791d9393b28ddfef2f6d7f932835dbbcbd2a";
+    private static final String SDK_SHA = "eab54d460dffcbd3f83514c9abddce7aebdf335998a7b38278685051f6a988ea";
+    private static final String CATALOG_TEST_SHA = "c9687c706997e4204fb0df632e53425261f0a74ff1bb07690bbef53ab03fc83f";
+    private static final String SDK_TEST_SHA = "a5f5761e7454a55bf020a46db4c36b9b13b90109ef2d9a9b49d221406cb10128";
+    private static final String PREVIOUS_CATALOG_SHA = "d582d96bae89369e46b31cdbc9127e48d548136e18f61513d3dd194ff674689d";
+    private static final String PREVIOUS_TEST_SHA = "709f83dd74eaf5e9718f72cf24d33433737e066ae56d7e0154956977de2437ca";
     private static final String TOKEN = "/* @M3_FAMILY_ARRAYS@ */";
     private static final String HEADER = "upstream_fqcn\tvendor\texisting_m3_owner\t"
             + "proposed_m3_role_NOT_IMPLEMENTED\tdisposition\tsemantic_contract";

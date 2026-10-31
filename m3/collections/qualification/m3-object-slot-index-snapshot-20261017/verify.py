@@ -12,13 +12,13 @@ MIRROR = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3
 
 TARGETS = {
     "m3/collections/src/main/java/jdk/m3/collections/M3ObjectIndexSnapshot.java":
-        "ed19c7b34e23f61ea5bfa808550a1189ccc07900b7022f3572d78c23c5929f0c",
+        "67116969a93d0da9beffafdb36a8310247a206a96d7cb58ffbce3c053e1ad4f1",
     "m3/collections/src/main/java/jdk/m3/collections/M3ObjectSlotStore28.java":
-        "02893ff5d555ef577789ca82fdbbe043172219ae59202d10a51f2fa1337d9152",
+        "032f837fea2e97b166fc08e7f7601d66e5d31513897a03632a08ec17bcf407bb",
     "m3/collections/src/test/java/jdk/m3/collections/M3ObjectSlotIndexSelfTest.java":
-        "745156bdcd632c0d664dcc9f42f19f47879fd4cfca05ecd69da4e03b60fad049",
+        "976975d979ffbde17bdf877349d60950da984b5f7207dc9f28ffeff6fe060ff7",
     "m3/collections/src/test/java/jdk/m3/collections/M3ObjectSlotIndexTest.java":
-        "eec9b203115a9896ebcc074926e4817b5ebcbdeab4e259c68d3c34b773b46ed0",
+        "6f2b492c0be59b4c6d784b3d3be3623d5da69e7217047657c36635852b14d3b7",
 }
 
 def sha256(path: Path) -> str:

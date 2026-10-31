@@ -37,7 +37,7 @@ PATHS = (
 RESOURCE_ROOT = "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text"
 TASK_ROOT = "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006"
 TEXT_OWNER = "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
-TEXT_OWNER_HASH = "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+TEXT_OWNER_HASH = "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795"
 OID = re.compile(r"[0-9a-f]{40}\Z")
 SHA = re.compile(r"[0-9a-f]{64}\Z")
 INPUT_EPOCH_SHA256 = "027e47d20c7fb854e028487ceef341c929877a6421dbb75f6433b5cd007fe5ee"
@@ -337,7 +337,7 @@ def compose(current_files, prior_files, packet, *, allow_fixture=False):
     bindings["merge_recovery"] = {
         "current_input": DESTINATION, "current_input_root": DESTINATION_ROOT,
         "current_input_epoch": TASK_ROOT + "/mapping-input-epoch.json",
-        "intermediate_reviewed_input": {"commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2", "root_tree": "0812573f02908d8078d13f5f49346865cdf1c0e0", "input_epoch_sha256": "fb413e58be72aaffa1e91149479ac159c6d4b961101eed4ab10f1c99df0b6711", "scope": "Prior 52-record fixture and inherited TQ validation failures retained; current TQ record is preserved from exact C0 input."}, "current_input_epoch_sha256": INPUT_EPOCH_SHA256,
+        "intermediate_reviewed_input": {"commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2", "root_tree": "0812573f02908d8078d13f5f49346865cdf1c0e0", "input_epoch_sha256": "973be97f762b46278f16c2bae6d887f2bc407110f333fe7ae0e7070e30cbe118", "scope": "Prior 52-record fixture and inherited TQ validation failures retained; current TQ record is preserved from exact C0 input."}, "current_input_epoch_sha256": INPUT_EPOCH_SHA256,
         "earlier_reviewed_input": {"commit": "87590cb96fb0e2dc0f88fae8e01957f7179cd255", "ordered_records": 47, "non_jcc_records": 45, "top_level_mappings": 17, "gates": 20, "scope": "Earlier fixture and refused map input retained as history; current preimages come from the separately frozen C0 epoch."},
         "source_history_publication": SOURCE_HISTORY, "source_history_pr": 9427,
         "receiving_history_publication": RECEIVER_HISTORY, "receiving_history_pr": 189,

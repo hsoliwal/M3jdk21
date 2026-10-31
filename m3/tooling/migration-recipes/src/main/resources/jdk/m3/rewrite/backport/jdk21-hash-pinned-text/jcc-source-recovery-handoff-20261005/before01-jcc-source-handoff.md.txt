@@ -75,7 +75,7 @@ The source-canon checkpoint remains a separate authority. Its verification order
 
 ## Every root entry accounted, with a bounded denominator
 
-The final source root contains 343 entries: 255 trees, 87 blobs and one gitlink. Root names, modes and kinds match the frozen input; four subtree identities change: `m3-fast-search`, `synexia-algo`, `synexia-donor-inventory` and `synexia-openrewrite-recipes`. The root POM remains blob `98889a040aad5cc3c82f782bb4b173d118207988`, SHA256 `f01cca4d90bd8fa1b1125474b5178cc80762d934bcb7bf5817f08f3f0dcf6aab`.
+The final source root contains 343 entries: 255 trees, 87 blobs and one gitlink. Root names, modes and kinds match the frozen input; four subtree identities change: `m3-fast-search`, `synexia-algo`, `synexia-donor-inventory` and `synexia-openrewrite-recipes`. The root POM remains blob `a65f71452613662769dda64100c6d64dd90ae5da`, SHA256 `1af736d1a28af6e5cdf41a2b4fefa8b9f3c5cb7a6c2f6d16537e0a822f086a7d`.
 
 Fresh XML parsing finds 201 unique Maven declarations: 200 project declarations and one `m3-tornado` profile declaration. There are 190 direct paths and eleven nested paths. Eight root trees contain nested declarations, four of those are also direct modules, and four are additional containers: 194 distinct root components are referenced. A root directory is not automatically a Maven module, and declaration parsing does not prove profile activation or reactor execution.
 

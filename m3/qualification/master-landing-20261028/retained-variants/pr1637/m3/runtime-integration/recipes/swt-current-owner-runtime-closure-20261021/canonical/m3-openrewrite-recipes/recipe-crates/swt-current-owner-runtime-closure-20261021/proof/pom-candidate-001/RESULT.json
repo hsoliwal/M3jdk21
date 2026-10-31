@@ -3,7 +3,7 @@
   "status": "PASS",
   "error": null,
   "receiver_revision": "c0ffa6d76338ed1b06cfe0158b0e04d8930df546",
-  "candidate_pom_sha256": "6553565c8dd14a857e796f741f3f8f8e7cbf3edda11df58b8dcd8a53e78e5600",
+  "candidate_pom_sha256": "4b864a178251e0f853cc8d2fe8027962bf831f950d9b83a9d095496ae60be158",
   "sdk_tests": {
     "tests": 7,
     "failures": 0,
@@ -41,7 +41,7 @@
       "log_sha256": "08e66ae27bafdcd8fab887c6f2e6e1fd4c81a6f26445b77e79b03dd36246cc66"
     }
   ],
-  "inputs_sha256": "465aae1915cada475d7bdb13acb82c28cc08f112c672ba04c3154972d317d883",
+  "inputs_sha256": "ac2fff28eb2712a4f768778182083077e0c7040ca3e1b48a715dba0b64743f9a",
   "commands_sha256": "4f71800f86ce81ce5a70c60cc75618516f0fc7da8fdbd7e2439090ed7d0b7eab",
   "candidate_inputs_unchanged": true,
   "baseline_inputs_unchanged": true,

@@ -41,12 +41,12 @@ SIZE_MISSING_PASS checks=5
 Candidate template fixture assembly: nine source/test targets plus four exact unchanged dependencies. NOT an OpenRewrite execution claim. All SHA-256 seals passed.
 
 === evidence/16-candidate-harness.log SHA256=497982fee27522677ad23314135c73dc815b8c9c4639fcf63617fcccd0ea7260 ===
-m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java: OK
-m3/collections/src/main/java/com/m3/collections/M3LongCollection.java: OK
-m3/collections/src/main/java/com/m3/collections/M3LongFilteredView.java: OK
-m3/collections/src/main/java/com/m3/collections/M3LongIterator.java: OK
-m3/collections/src/main/java/com/m3/collections/M3LongSortedSet.java: OK
-m3/collections/src/main/java/com/m3/collections/M3LongSortedViews.java: OK
+m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java: OK
+m3/collections/src/main/java/jdk/m3/collections/M3LongCollection.java: OK
+m3/collections/src/main/java/jdk/m3/collections/M3LongFilteredView.java: OK
+m3/collections/src/main/java/jdk/m3/collections/M3LongIterator.java: OK
+m3/collections/src/main/java/jdk/m3/collections/M3LongSortedSet.java: OK
+m3/collections/src/main/java/jdk/m3/collections/M3LongSortedViews.java: OK
 m3/collections/src/main/java/com/m3/collections/M3ObjectSize.java: OK
 m3/collections/src/main/native/collections/m3_index_mask_compactor.c: OK
 m3/collections/src/main/native/collections/m3_object_size.c: OK

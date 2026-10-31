@@ -84,7 +84,7 @@ final class M3OriginalCliProviderRecipeTest {
         String descriptor = resource(descriptorPath);
         assertEquals(503, descriptor.getBytes(StandardCharsets.UTF_8).length,
                 "exact owned descriptor byte count");
-        assertEquals("da4f0f273a351a4397ddae750d4deee1502cb90f7fe3cad9f9e3ad0ff66aa15e",
+        assertEquals("4a092fe5569413bfe74a6517356faa341494a01c2b760b48ae67e7e5ec68da2e",
                 sha(descriptor), "exact independently pinned descriptor");
         Environment environment = Environment.builder()
                 .load(new YamlResourceLoader(
@@ -549,7 +549,7 @@ final class M3OriginalCliProviderRecipeTest {
             assertEquals(after, assertReplay(named, images(), reverse).get(name),
                     "named descriptor converged overlay in each source order");
         }
-        assertEquals("4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
+        assertEquals("c23e6f63411b1d33a29f558c2a6370421a6f51ab99b6db99ac77ebc6e859812d",
                 sha(before), "exact current receiver map preimage");
 
         // These reviewed spans cover the JSON object value, excluding its property label/comma.
@@ -566,7 +566,7 @@ final class M3OriginalCliProviderRecipeTest {
         assertEquals("298cb87b860ac4f320b223274ecbf0644810dfc4943889aad3ce74c61cb98dae",
                 sha(after.substring(valueStart, afterValueEnd)),
                 "independently reviewed pending-contract D60 migration object value");
-        assertEquals("051debeca7331c8aab5c636c0d8cd200c61d60e5c3a64362597f96c17751ab17",
+        assertEquals("21cb23e97b07152f52b39445de47337ba0fa67544c1641603e785c32eb0ff96d",
                 sha(after), "exact independently reviewed complete canonical map");
         assertArrayEquals(before.substring(0, valueStart).getBytes(StandardCharsets.UTF_8),
                 after.substring(0, valueStart).getBytes(StandardCharsets.UTF_8),
@@ -708,8 +708,8 @@ final class M3OriginalCliProviderRecipeTest {
                 "m3-mindex/runtime",
                 "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/SubMIndexString.java",
                 "jdk.internal.m3.mindex.SubMIndexString",
-                "92fa09754c4f5f85f29509a7e6077a9f0ad08f8d",
-                "80625746ec369c7071d97685e7742359e80b73f7c8b246de76e59655fa1289b7",
+                "cb7df37438bb3e50f0a42b42d59ed1644b8fc96e",
+                "e1467db80e4a1071a60961b7b5cdcb8e29de315e062a37dd36002e1c807b5028",
                 List.of("SubMIndexString of(MIndexString,int,int)",
                         "SubMIndexString ofUtf16(MIndexString,int,int)",
                         "SubMIndexString ofCodePointSafe(MIndexString,int,int)",
@@ -739,8 +739,8 @@ final class M3OriginalCliProviderRecipeTest {
                 "m3-mindex/runtime",
                 "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexCharSequence.java",
                 "jdk.internal.m3.mindex.MIndexCharSequence",
-                "6c0821756c4ac4241ab22c97ca336f07b92cfd2e",
-                "4d435e90316b69b5d4a67bdc5a46db1bf2e8d4db17e25efeb42fa899b1b37313",
+                "67cabb73156bf4cf4ff1d38172c6badf80e2eb60",
+                "70915da319ed46101c53dd20e4f8715c4e2e0b5f385e6b6e5c78aa84a33eba6c",
                 List.of("MIndexCharSequence of(MIndexString...)",
                         "MIndexCharSequence of(MIndexCompositeString)",
                         "int segmentCount()",
@@ -754,8 +754,8 @@ final class M3OriginalCliProviderRecipeTest {
                 "m3-mindex/runtime",
                 "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexCompositeString.java",
                 "jdk.internal.m3.mindex.MIndexCompositeString",
-                "71d1fcada1cec89c1b0d5f0122ca7707d0b1dd58",
-                "8037a689789fc351ccdeef8105122a961a6722bb27e8f54cfe42cfd2370365e3",
+                "5d65ff6ba2ea1b83d929ab1c00e9b75df16f3aa9",
+                "9756944bde133c742837fdb7e46ff12291098d68c980cf56e5b564cdc469786b",
                 List.of("Segment sourceSegment(int)",
                         "SubMIndexString segmentView(int)",
                         "SubMIndexString segmentViewUtf16(int)",

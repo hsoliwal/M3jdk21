@@ -105,7 +105,7 @@
     },
     {
       "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/src/test/resources/before/.github/workflows/mindex-string-backing.yml",
-      "git_blob": "812f151aa61a8fe772a2f0918430e8fa33b29f7a"
+      "git_blob": "1145b584bb032657b540c4b972f53b53cf7eef44"
     },
     {
       "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/src/test/resources/before/m3/runtime-integration/check-m3string-invariants.py",
@@ -119,7 +119,7 @@
   "outputs": [
     {
       "path": ".github/workflows/mindex-string-backing.yml",
-      "before": "72d99612078dfcbc4cd173db8b8c391ffbb92c95e0d0f33a8e1eac30fd4e1798",
+      "before": "cf9eb56cc321a4bcd403163f2a25e266d79e9c49dc7b934ea8d0221b250a9552",
       "after": "8f49f646b0b8b56b6dc70212f22366bb16112df91f8a6e7f0e86f41d545f655e"
     },
     {

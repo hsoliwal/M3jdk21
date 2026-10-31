@@ -3,7 +3,7 @@
   "historicalAvailability": {
     "bytes": 119267,
     "path": "../HISTORY-AVAILABILITY.json",
-    "sha256": "02a922e8b1cbddd611f5d2b494085062c6e7f2e65ef1b51fbe811e434c2296e5"
+    "sha256": "fb247c0a2313334176adf419e373e1b0aae3274d7c35c06d5b290185cb24cebd"
   },
   "historyMeaning": "The original workspace census remains literal history; absent historical executions are not recreated. Original published 338, 97 and 72 cohorts remain byte-for-byte unchanged.",
   "latestHeadIntegrationClaimed": false,
@@ -36,7 +36,7 @@
       "input": {
         "bytes": 3725,
         "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/source-check-v1/RESULT.json",
-        "sha256": "fb5c655d4e2d547dfab392fe6c5437602f4003e2619dbf9d1a159f29d8fc6662"
+        "sha256": "8318f9176151b91c5d61eab0fa67903b1bffca3545965ee7d572dc85fdd2cc43"
       },
       "path": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/runtime-checker/publication-parent/string-c0/source-check-v1/RESULT.json"
     },
@@ -45,7 +45,7 @@
       "input": {
         "bytes": 30821,
         "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/RESULT.json",
-        "sha256": "54b5e2d881c3b072f80ca75ad4f09933c2883dbeaf4541ed7eabc28ebf877a0a"
+        "sha256": "d71dd51337852922270495c095f82f04c06dd00e846a9c271d91c52a9a5e0dfc"
       },
       "path": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/runtime-checker/publication-parent/string-c0/m3-check-v2/RESULT.json"
     },

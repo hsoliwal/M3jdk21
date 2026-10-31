@@ -21,7 +21,7 @@
   },
   "outputs": [
     {
-      "path": "m3/fs/src/main/java/com/m3/fs/MFileStreams.java",
+      "path": "m3/fs/src/main/java/jdk/m3/fs/MFileStreams.java",
       "before_sha256": "b7083747af91c4bc4bfea41ea80ef8f74a1f63d157cbd72da54b489daa3004a5",
       "after_sha256": "dff142370a4024be9066e6680bd84dad45354f4049e9989fe9b10d1873047089",
       "mode": "100644",
@@ -29,12 +29,12 @@
       "git_blob": "18940e9cbe2e56908d0f113eda22caa830b0278e"
     },
     {
-      "path": "m3/fs/src/test/java/com/m3/fs/MFileStreamsProviderContractTest.java",
+      "path": "m3/fs/src/test/java/jdk/m3/fs/MFileStreamsProviderContractTest.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "c549e139aec32cfd9d7e63199b2c581adb98b1335973378e23b941875411ec67",
+      "after_sha256": "6a139af3498ecd3351dca255a2ac6c05fa9d065936c2eff28de12fab1c9b2235",
       "mode": "100644",
       "bytes": 16212,
-      "git_blob": "6d49a6618857429909049969f7d31df476eecfc8"
+      "git_blob": "0b24e9939c2c72abfa0e407777a400b6653c2895"
     }
   ],
   "artifacts": {
@@ -100,7 +100,7 @@
     },
     "guard": {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/streams-provider-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-streams-provider-20261021/0002-MFileStreamsProviderContractTest.java.txt",
-      "sha256": "c549e139aec32cfd9d7e63199b2c581adb98b1335973378e23b941875411ec67",
+      "sha256": "6a139af3498ecd3351dca255a2ac6c05fa9d065936c2eff28de12fab1c9b2235",
       "bytes": 16212,
       "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/streams-provider-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-streams-provider-20261021/0002-MFileStreamsProviderContractTest.java.txt"
     },
@@ -139,7 +139,7 @@
     {
       "sdk_input": "crate/ENGINE_SOURCES.tsv",
       "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/ENGINE_SOURCES.tsv",
-      "sha256": "b2e990a09f2c4b7c355b48cc33a72405829fd009f76d1866153aa07225e6684e"
+      "sha256": "74242eb726eb5d1c5bbdc9fa4ee17c33b4afa1c96bfcddad5dcb1a4b1f4f58cb"
     },
     {
       "sdk_input": "crate/datasets/streams-provider-20261021/DATASET.json",
@@ -169,7 +169,7 @@
     {
       "sdk_input": "crate/datasets/streams-provider-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-streams-provider-20261021/0002-MFileStreamsProviderContractTest.java.txt",
       "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/streams-provider-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-streams-provider-20261021/0002-MFileStreamsProviderContractTest.java.txt",
-      "sha256": "c549e139aec32cfd9d7e63199b2c581adb98b1335973378e23b941875411ec67"
+      "sha256": "6a139af3498ecd3351dca255a2ac6c05fa9d065936c2eff28de12fab1c9b2235"
     },
     {
       "sdk_input": "crate/datasets/streams-provider-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-streams-provider-20261021/manifest.tsv",
@@ -189,17 +189,17 @@
     {
       "sdk_input": "crate/prepare.py",
       "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/prepare.py",
-      "sha256": "4a585b670e5d9defab8e7d63d6fc80508321d0b0e750a15b667cbe6ee14eefc4"
+      "sha256": "912cd376f0754469d6fd17325b15e44e8b69725c6af92d99aac5d9a20b4989f0"
     },
     {
       "sdk_input": "crate/receive.py",
       "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/receive.py",
-      "sha256": "5d9df3c2623c21c43ade4cbfcbe459026af3983e1d2b21018397dc12e775898a"
+      "sha256": "bf80f52c20549eecd0959cad9824aa078c3ca857859ee66cc3765c6bd7045246"
     },
     {
       "sdk_input": "crate/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
       "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
-      "sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43"
+      "sha256": "fa8a8e63fd445c0fbcd877315044c6e5c36f779db6e8a11797e03ab805e5903f"
     },
     {
       "sdk_input": "owner/src/main/java/com/synexia/rewrite/M3EditScope.java",
@@ -219,7 +219,7 @@
     {
       "sdk_input": "owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
       "canonical_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
-      "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579"
+      "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0"
     }
   ],
   "sdk": {
@@ -252,7 +252,7 @@
     "utc": "2026-10-21T06:50:19.617458Z",
     "trigger": "stream/provider-result-domain",
     "lesson": "Validate the complete legal result domain before publishing count, digest, shadow or progress state. Nonempty reads admit -1 or1..requested; scalar reads admit -1 or0..255. Fail through the existing owned-primary cleanup and suppression atom. Do not retry malformed providers, change observer ownership or mask false EOF.",
-    "admission_implementation_sha256": "d26260c27d1ac4f4789fc130a400ebc198d85b65f75bdcaa43e670d91fb2e976"
+    "admission_implementation_sha256": "4706cfdc35a670d20b45453f44c018cd8d64be34cd878ee8b307ad3dd79ad3d8"
   },
   "limits": [
     "No full source-built M3JDK21 image, jtreg/JCK or cross-platform qualification.",

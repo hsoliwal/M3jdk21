@@ -10,7 +10,7 @@
       "path": ".github/workflows/m3-retained-capability-audit.yml",
       "before": {
         "resource": "before-00.txt",
-        "sha256": "517a8bb2f5e8e7ec0652ff33606155835084bd9669e936e7ecdc80984a857940"
+        "sha256": "698c8bbb0b79249a3af2ed24b8a88aa89cdd25dc778cbc6108fa501fe8ae6304"
       },
       "after": {
         "resource": "after-00.txt",
@@ -32,11 +32,11 @@
       "path": "m3/history/RETAINED_CAPABILITIES.tsv",
       "before": {
         "resource": "before-02.txt",
-        "sha256": "f25f982c294aa0ec17911a54e4245072923f7b1f73f2422997b567c67e7f20e5"
+        "sha256": "86de8000a91017b29e48b0ffd9cf19b264614dd8c983c08222cf5e253606c40a"
       },
       "after": {
         "resource": "after-02.txt",
-        "sha256": "3c9fa3ab96110d58d83caa75f806b8677379a5d086976245f2f74efec9c7e7d8"
+        "sha256": "683b01fc68b8661a44fd1a9fbc72c1aa68145dab9318fb0f5a3e99bc0e102181"
       }
     },
     {
@@ -88,11 +88,11 @@
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+      "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795"
     },
     {
       "path": "m3/tooling/migration-recipes/pom.xml",
-      "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"
+      "sha256": "3eb73bbf38c0c591b8f714f6e9923eaa25a35b5ffc7f0512b8ec7fd3602b5531"
     },
     {
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
@@ -100,15 +100,15 @@
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
-      "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1"
+      "sha256": "8006b173253ea7502efe7f7a77738b65f9df9e2871d4d6c29ff4fb8fb058c8c6"
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
-      "sha256": "858bd7ce63f6904757507e6417df700fd7d0f319d421401cd48403d142c3418a"
+      "sha256": "1021cb6484b2cab1ef2b04f1657ad90931ad7679bf59d8cf817936d0bf2e6cfb"
     },
     {
       "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
-      "sha256": "6a6b11543829324bcafa49e72a764c24fb44e398c6bcb7a76c34dcab1d094896"
+      "sha256": "6874a550ed5e8fbfb11e8138e445e07ef9eb089127995f92c5b8257cefa833da"
     },
     {
       "path": "m3/history/git_graph.py",

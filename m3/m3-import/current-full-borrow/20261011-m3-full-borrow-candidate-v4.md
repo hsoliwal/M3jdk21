@@ -2,13 +2,13 @@
 
 Status: **CANDIDATE MIRROR ONLY / NO TARGET PROMOTION**. Source owner: `hsoliwal/com.synexia`. Receiver/product owner: `hsoliwal/M3jdk21`.
 
-This record is subordinate to `m3/docs/m3jdk21-porting-invariant.md`, `m3/docs/name-mapping.json`, `m3/docs/synexia-intake-policy.tsv` and `AGENTS.md`. It adds no new naming, licensing, execution, runtime, or recipe owner.
+This record is subordinate to `m3/docs/m3jdk21-porting-invariant.md`, `m3/docs/name-mapping.json`, `m3/docs/m3-intake-policy.tsv` and `AGENTS.md`. It adds no new naming, licensing, execution, runtime, or recipe owner.
 
 ## Exact lineage
 
-1. Retained authoritative M3 receiver inventory `m3/synexia-import/current-full-borrow/synexia-estate.tsv` originates at Synexia commit `296323958b1019edd59b60b9c05cb148d024cfe5`. Preserve it unchanged.
+1. Retained authoritative M3 receiver inventory `m3/m3-import/current-full-borrow/m3-estate.tsv` originates at Synexia commit `296323958b1019edd59b60b9c05cb148d024cfe5`. Preserve it unchanged.
 2. Synexia candidate v3 was pinned at `ecfc155eea38b9d4c85e644761a3b2fd2d2f9d1f`, source tree `e50bae0540647e48bb4b58810ee7994a144c1084`. Its historical custody record also remains unchanged.
-3. Synexia candidate v4 is pinned at commit `68322e2b40c3d87ca1e3c1566616d2387fd4e847`, tree `949bfb4f82316dce72edca16d2921422d9faef2e`. Canonical source review: [Synexia PR #10345](https://github.com/hsoliwal/com.synexia/pull/10345). The source candidate inventory Git blob is `93037d99f9dcebfcbd4371a7c98405375f6d71f1`.
+3. Synexia candidate v4 is pinned at commit `68322e2b40c3d87ca1e3c1566616d2387fd4e847`, tree `949bfb4f82316dce72edca16d2921422d9faef2e`. Canonical source review: [Synexia PR #10345](https://github.com/hsoliwal/com.synexia/pull/10345). The source candidate inventory Git blob is `cb6edfb59475445144434f4807dc2846bd594788`.
 
 The adjacent `20261011-synexia-full-borrow-candidate-v4.tsv` is intended to be a byte-identical custody mirror of that source candidate. It is **not** a replacement for `synexia-estate.tsv`, and it does not update the M3 receiver's active source revision. Target baseline for this documentation: M3jdk21 master `985aadda29756c0fe988d7b70c8240d4eb554dc7`.
 
@@ -18,7 +18,7 @@ The 32-family source comparison has 29 unchanged identities and three changes: `
 
 Synexia-original, verified Apache-2.0 Java/JNI/native code, OpenRewrite recipes, atomizers, patternizers, tests, fixtures, templates, documentation and qualified generated expression may be reused, with exact commit/path/hash, LICENSE, NOTICE, attribution and change records. Generic reusable recipe implementation stays mastered in Synexia; this JDK uses the exact recipe handoff as authoring/proof tooling, not a runtime dependency.
 
-The source root `LICENSE` Git blob is `29f81d812f3e768fa89638d1f72920dbfd1413a8` and `NOTICE` Git blob is `97bb5d49f8bd3bc573c19afe4ea2392a3d02704e`. These root identities **do not classify every descendant file**. Re-check mixed-language/native donor files and OpenJDK/third-party licenses individually. Existing `m3/docs/synexia-intake-policy.tsv` distinguishes independent Apache modules, external recipe tooling, target-owned ports, explicit authorized relicensing and historical direct-copy review. No direct Apache copy into `src/**` is authorized by this candidate.
+The source root `LICENSE` Git blob is `29f81d812f3e768fa89638d1f72920dbfd1413a8` and `NOTICE` Git blob is `97bb5d49f8bd3bc573c19afe4ea2392a3d02704e`. These root identities **do not classify every descendant file**. Re-check mixed-language/native donor files and OpenJDK/third-party licenses individually. Existing `m3/docs/m3-intake-policy.tsv` distinguishes independent Apache modules, external recipe tooling, target-owned ports, explicit authorized relicensing and historical direct-copy review. No direct Apache copy into `src/**` is authorized by this candidate.
 
 ## Receiver admission obligations
 

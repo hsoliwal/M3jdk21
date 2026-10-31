@@ -33,13 +33,13 @@
   "sealingReviewerInvocations": 0,
   "sealingJVMInvocations": 0,
   "scope": [
-    "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/FOSS_REUSE_DECISION.tsv",
-    "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/NOTICE",
-    "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/PROVENANCE.json",
-    "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/README.md",
-    "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DONOR_EVIDENCE_INDEX.json",
-    "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/base-revision.txt",
-    "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/manifest.tsv"
+    "m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/FOSS_REUSE_DECISION.tsv",
+    "m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/NOTICE",
+    "m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/PROVENANCE.json",
+    "m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/README.md",
+    "m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DONOR_EVIDENCE_INDEX.json",
+    "m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/base-revision.txt",
+    "m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/manifest.tsv"
   ],
   "scopeBoundary": "Exactly seven metadata/recipe files at preparation03 postimages, with complete21 inventory and exact template/source/execution context. No blanket review of all21 files.",
   "completePublicationFiles": 21,
@@ -68,13 +68,13 @@
     "nativeManifestSHA256": "ea0bbea2e61b54bb6f9c418042d3b500c5b5da23a996e1ffed9807d73c5b22c0",
     "sealedInputs": 78,
     "exactChangedTargets": [
-      "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/FOSS_REUSE_DECISION.tsv",
-      "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/NOTICE",
-      "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/PROVENANCE.json",
-      "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/README.md",
-      "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DONOR_EVIDENCE_INDEX.json",
-      "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/base-revision.txt",
-      "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/manifest.tsv"
+      "m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/FOSS_REUSE_DECISION.tsv",
+      "m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/NOTICE",
+      "m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/PROVENANCE.json",
+      "m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/README.md",
+      "m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DONOR_EVIDENCE_INDEX.json",
+      "m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/base-revision.txt",
+      "m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/manifest.tsv"
     ],
     "baseline": "170e9e5cb4bf0b9f294ec8af94a40bc02d9493d7",
     "reviewerDriver": {
@@ -441,8 +441,8 @@
     {
       "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/evidence/ACTUAL_RECEIVER_APPLY.log",
       "bytes": 1384,
-      "sha256": "1a70fb8b13eba15d65349b79786382cffaa817f646bba5ffe4102627f0f25213",
-      "gitBlob": "3bf1bd1d741f9d8ddb7f26dc2d9a5a195deef6c4"
+      "sha256": "df3c577bebce01f093d87837d662557c8dc4f23dfb0a3fcb03f55191dec0bac3",
+      "gitBlob": "ff9f8496845c00c43b7de7e5cd52e5982e2c45ed"
     },
     {
       "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/evidence/ACTUAL_RECEIVER_EXECUTION_AND_REFUSALS.json",
@@ -453,14 +453,14 @@
     {
       "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/evidence/M3GpuToolJoinManifest.java",
       "bytes": 10964,
-      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999",
-      "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e",
+      "gitBlob": "78d5fb68f13872164973a8918cc7886c5f548bca"
     },
     {
       "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/evidence/MIndexRegexTrigramQuery.java",
       "bytes": 15093,
-      "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
-      "gitBlob": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea"
+      "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e",
+      "gitBlob": "4e1d24af8d3054a27ae3b6f2d8eebd6486225118"
     },
     {
       "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/evidence/PRIOR_PRODUCTION_FORMAL_REVIEW_RESULT.json",
@@ -489,80 +489,80 @@
     {
       "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/evidence/Replay.java",
       "bytes": 10190,
-      "sha256": "fab78282a3e137b5c917a1351f97ec120ef0aab0d4f0615c4c3cd37c97665b2f",
-      "gitBlob": "86bb010521e1f36a479b82306256ef7ca361e177"
+      "sha256": "a66e1edc751508972a774894525a965eff8c1fb5ce26802cdc1b82d12e6dd6cd",
+      "gitBlob": "f9c2876cc372dc93cf62c8f087a716d6e16a4c2f"
     },
     {
       "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/evidence/REVIEW01_CORRECTED_CPU_DISPOSITION.json",
       "bytes": 10442,
-      "sha256": "ed310f21df2897349770b53c4aecb8ea3143f6e998697e57a556258c8d6af456",
-      "gitBlob": "bbbf04c085a0cc98c08ca68f0d113211519e4dd0"
+      "sha256": "29b2d31348c79eff09599c8a4367fe701ea8104fd533324914ccaf48b8c7b76f",
+      "gitBlob": "1b7a794e0d7d8830f5b59e42b20c04282ba6cf3d"
     },
     {
       "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/evidence/REVIEW01_ORIGINAL_FINDING.json",
       "bytes": 1278,
-      "sha256": "434db4d33c5a9c1fed5dcbb752b9ac4098a2a707603e04bb170182681146adf8",
-      "gitBlob": "5bb348b8264fef82ecb09b210adee784cc5bacbd"
+      "sha256": "10988bfe16fd16e4f12cbc42cf7ac39cd299c1bcf533bd719efbe57f75c8c0d9",
+      "gitBlob": "48548149815340bb09189cfb68b7fe89b100f7ba"
     },
     {
       "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/evidence/ROOT_CPU_TEST_REVIEW_DISPOSITION.json",
       "bytes": 2688,
-      "sha256": "b9b72da1cb5f4c1110161cd1787d89ca0e3e4a5e80d06440212a1a55aa1844ae",
-      "gitBlob": "9c212baead87fe9c1255527b9fd6a5c65dd8f0de"
+      "sha256": "ec64521431ad00897679425b8ef727ffe6f5b0c920956d40645f922a2dff0fdb",
+      "gitBlob": "7e61f73caf210591ae65b99345d64cd3f90c4be1"
     },
     {
       "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/evidence/TEMPLATE_MIndexRegexProgram.java.txt",
       "bytes": 141730,
-      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c",
-      "gitBlob": "f39709b64c82ddd1acf349446eeac8efe8f3ef27"
+      "sha256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7",
+      "gitBlob": "98d9be66015639a8087c744d17f31c76d53c8ae5"
     },
     {
       "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/evidence/TEMPLATE_MIndexRegexTrigramQuery.java.txt",
       "bytes": 15093,
-      "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
-      "gitBlob": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea"
+      "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e",
+      "gitBlob": "4e1d24af8d3054a27ae3b6f2d8eebd6486225118"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DONOR_EVIDENCE_INDEX.json",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DONOR_EVIDENCE_INDEX.json",
       "bytes": 17039,
-      "sha256": "1a2a6e8f96c1bbdd818f35c6ba4cf73b3eddabb955d221260e9e1fc525703917",
-      "gitBlob": "1a00f44e588dbbd4b9f541b2d6fa5f069d9e52e1"
+      "sha256": "d313f93d156fd03a98a8b0509c718da5e387e59b5ceead0535117589c990b019",
+      "gitBlob": "017145894abbb197094ea0e440d13c37d16d51e2"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/FOSS_REUSE_DECISION.tsv",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/FOSS_REUSE_DECISION.tsv",
       "bytes": 1474,
       "sha256": "0fb83cb152c0eaa0bdf43ad8ce4102165c9a79a0c1ce5d16da9a68d1e5abc9da",
       "gitBlob": "059225e70157e75ad4918d5fc4bd60eab219deaa"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/NOTICE",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/NOTICE",
       "bytes": 488,
-      "sha256": "b0a0d3073dda47203bba6607e8fe582f46d5aca53f3f43e59a995d5e3ea72ab4",
-      "gitBlob": "e77ec6e7c6123a0135b252d45d91c650309e163a"
+      "sha256": "1bfa6dbc47ea3a4900d868b687028647c6b31a34a5bb15ec7e0c833d38468380",
+      "gitBlob": "b287bc55af53a5ff63256f19e5a1644586bdb49b"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/PROVENANCE.json",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/PROVENANCE.json",
       "bytes": 10140,
-      "sha256": "148f901cfbdadc0e2b04da3848296a580b31871a3136171732b459fdc9601ebd",
-      "gitBlob": "fc7a0627837476258acdcf10791884a691b3959f"
+      "sha256": "80ab7cd05f6bb31ff0185e30637fe3095a9de4a3489d7871814379badf277e14",
+      "gitBlob": "da60dd1a6268d14b3608d8acafccec6bde3ac442"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/README.md",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/README.md",
       "bytes": 5099,
       "sha256": "c024de06833a6a6ac2539a1918fecbb333a170f40e5f88fecea7a4fa3b07d275",
       "gitBlob": "e96377a8118aa2de7c8bfe3ddf4e7d9d14d9cb71"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/base-revision.txt",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/base-revision.txt",
       "bytes": 41,
       "sha256": "bf9b81c16c005766cc6d80e74be4b0396cfd75e72dad3877f7868e9485e6919f",
       "gitBlob": "94c8db3c419fccea063f5492604303ad919aed15"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/manifest.tsv",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/manifest.tsv",
       "bytes": 620,
-      "sha256": "c460929619e876fb0c96a90fbe62383157ccc872d9ef5d9947e5cd74e5937b9c",
-      "gitBlob": "3ab0de89d0388b0da8c1895a481e4ec6edb38239"
+      "sha256": "d1b8e074f294b04376b27a41a1a9ab2b4e5a94ebc280668cb526248ef9780025",
+      "gitBlob": "1d22a7f21c48e299b1d2f613c3e0299494189887"
     },
     {
       "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/review-repo/REVIEW_NOTES.md",
@@ -616,8 +616,8 @@
     {
       "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/REVIEW_TOOL_TERMINAL.log",
       "bytes": 11618,
-      "sha256": "a32b2096f15faebfe3056621d984b62d667c4101640d8079e14eec87133f1a32",
-      "gitBlob": "a09ce4c5a273363ed26e35f076aa75ffa483ddcb"
+      "sha256": "14fc86776c20bb5d18ad46bd591ea07578dc71c03f4f714a01daad4b0a3ab303",
+      "gitBlob": "6025b4638caec9cfb89a0bcbac2c9dcd742fb277"
     },
     {
       "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/FORMAL_REVIEW.exit.txt",
@@ -644,8 +644,8 @@
   "priorFinding": {
     "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-02/review-preparation-01/FORMAL_REVIEW.json",
     "bytes": 1278,
-    "sha256": "434db4d33c5a9c1fed5dcbb752b9ac4098a2a707603e04bb170182681146adf8",
-    "gitBlob": "5bb348b8264fef82ecb09b210adee784cc5bacbd"
+    "sha256": "10988bfe16fd16e4f12cbc42cf7ac39cd299c1bcf533bd719efbe57f75c8c0d9",
+    "gitBlob": "48548149815340bb09189cfb68b7fe89b100f7ba"
   },
   "rootCorrectedDispositionAuthority": {
     "path": "K:/codex-work/m3-v7-ast-publication-20261007/M3_REGEX_REVIEW01_ROOT_DISPOSITION_CUSTODY_CORRECTION_01.json",

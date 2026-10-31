@@ -6,13 +6,13 @@
     {
       "original": "M3_WRAPPER_QUALIFICATION.md",
       "retained": "M3_WRAPPER_QUALIFICATION.md",
-      "sha256": "a4c6e77af68263212df1a63d3bd1f5750e6a53a6337d86b6e396f9d323158a56",
+      "sha256": "25368ceac34d9b395c74f8e421b593bc16faf30f2e68b3584a8659bfed030008",
       "bytes": 15463
     },
     {
       "original": "M3_WRAPPER_CONTRACT_INVENTORY.md",
       "retained": "M3_WRAPPER_CONTRACT_INVENTORY.md",
-      "sha256": "f95b22400560b2726a94904cfc240f0ec14858b83ed3730f90d68fb2130a7614",
+      "sha256": "061ae2c5ff7c753e808306dbe0ef51b130e3e638a035bd88ed7468ab1c35c3a0",
       "bytes": 13409
     },
     {
@@ -24,25 +24,25 @@
     {
       "original": "M3_WRAPPER_BASELINE_CUSTODY.tsv",
       "retained": "M3_WRAPPER_BASELINE_CUSTODY.tsv",
-      "sha256": "3c33efd3d20b4006520fe16bf5672c0187d9d655fc6f12f0dce65295a74e18b9",
+      "sha256": "febf4a50bcdbe2fe09f88f4da5c31c85668286e7ea2513e73cfd8b0f3ea7502b",
       "bytes": 9110
     },
     {
       "original": "M3_WRAPPER_SERIAL_ATOMS.json",
       "retained": "M3_WRAPPER_SERIAL_ATOMS.json",
-      "sha256": "ba52d79af21bbf59213d4b19825d797d9e40c60671750257a37bd302ad55ae46",
+      "sha256": "f09468c14c2e4a8068b170e134f5713d2228a30b905178087733cb904dfed108",
       "bytes": 3339
     },
     {
       "original": "M3_PRIMITIVE_INDEX_SERIAL_ATOMS.json",
       "retained": "M3_PRIMITIVE_INDEX_SERIAL_ATOMS.json",
-      "sha256": "2f2d6a7b0b9f97aa069f3e1274334577d9586250aab75577bb5b059cf2d9ebfe",
+      "sha256": "b2d1ded118fd331ee48ec5bcfc9ea480ea0111635f2a24d54dba5ba3ad5be3d1",
       "bytes": 3127
     },
     {
       "original": "M3_TARGET_COLLECTION_PACKET.json",
       "retained": "M3_TARGET_COLLECTION_PACKET.json",
-      "sha256": "f6cfb6b2ae1824d92fd9acfb3ddec1390c2c1be5917ed2c089623445f32f6023",
+      "sha256": "b0277beed4ed5177bf7dc1cfbd7df8be31c712913d9d8b889994eba45e262256",
       "bytes": 4635
     },
     {
@@ -54,25 +54,25 @@
     {
       "original": "tests/M3PrimitiveIndexViewFilterContract.java",
       "retained": "frozen-oracles/M3PrimitiveIndexViewFilterContract.java.txt",
-      "sha256": "bfaa9ba099cbaacb9f5aad273337c2853c17e09ab1106723a361c9bffc66b336",
+      "sha256": "adccec347f1ff8f304aa9d7b2a850bc8408a659beef3c6c3b75b10eea4536a4d",
       "bytes": 12905
     },
     {
       "original": "tests/M3WrapperAllocationProbe.java",
       "retained": "frozen-oracles/M3WrapperAllocationProbe.java.txt",
-      "sha256": "cb0165736774297b035767c69089ccfb832b36fd4a9e4b679fb128e79da114ce",
+      "sha256": "47649da0cc52f4c04e7982ac58a42029f0d455712fc6dc7c3f140dfb5668eb9d",
       "bytes": 4536
     },
     {
       "original": "tests/M3WrapperNavigationCounterexample.java",
       "retained": "frozen-oracles/M3WrapperNavigationCounterexample.java.txt",
-      "sha256": "ef307d074e0925ab681a90c9c6a26cb7967e80d38ef1fbd746ac8fb7ef9bc88c",
+      "sha256": "0ad860e1fabf1c50ab03103c0975a0e62e4c5cae90cd3f50d37889cba526d80e",
       "bytes": 2496
     },
     {
       "original": "tests/M3WrapperSemanticContract.java",
       "retained": "frozen-oracles/M3WrapperSemanticContract.java.txt",
-      "sha256": "fe3a80c01a6b4b3e5df933d21cd930224a4b786da3ca00bdcf324c1facb5bb35",
+      "sha256": "aebf90e95d98cdd63e6b902b35351b228f29117f27467731d06fcd0f7aab70e5",
       "bytes": 27185
     },
     {
@@ -246,19 +246,19 @@
     {
       "original": "evidence/frozen-allocation-probe-input.json",
       "retained": "evidence/frozen-allocation-probe-input.json",
-      "sha256": "4a939ce65e71d62bb269a592a0bc92bf6676abec1abb93551116578f59fedd48",
+      "sha256": "b66bbd6317af8bd161d02949563b4fa2d1f766a4f55d3b934d808e64135646e1",
       "bytes": 132
     },
     {
       "original": "evidence/frozen-primitive-test-inputs.json",
       "retained": "evidence/frozen-primitive-test-inputs.json",
-      "sha256": "a511bd7b85f2c6ae6a21cfc8fcb50f6825520fe371512535e714f244092abfff",
+      "sha256": "878bc5c2f7472268878f8afd612b2195cf269b901e356b698b4403953c53a3c4",
       "bytes": 154
     },
     {
       "original": "evidence/frozen-test-inputs.json",
       "retained": "evidence/frozen-test-inputs.json",
-      "sha256": "a138f6476baa5b1ba40b7d35d72b270b3f107b600faa413d93b461b029b43292",
+      "sha256": "48a107e0e791fd4673967a880876f925f76a151472e08bf8859e80e67bb15de2",
       "bytes": 295
     },
     {
@@ -516,19 +516,19 @@
     {
       "original": "evidence/target-existing-module-baseline-compile.log",
       "retained": "evidence/target-existing-module-baseline-compile.log.txt",
-      "sha256": "a5899688d2b8b0d02a05d5518442d3a66c149b72203aa80df97c13a9082fec1c",
+      "sha256": "565cbb25dcbd7c9110f49dc1395c2fe5528c3035411a577353ef6c3b4ff5be8e",
       "bytes": 12011
     },
     {
       "original": "evidence/target-existing-owner-custody.json",
       "retained": "evidence/target-existing-owner-custody.json",
-      "sha256": "0779610e69588f17625adb9c258736fc23ddaae0b22843a0fc6fbd544b446c1d",
+      "sha256": "5ef94ce09bd32d859aae80abaf7684a61cecaa7c805c86dc2b2ebb3545dbb8f6",
       "bytes": 1827
     },
     {
       "original": "evidence/target-final-COMPILED_INPUTS.tsv",
       "retained": "evidence/target-final-COMPILED_INPUTS.tsv",
-      "sha256": "5316848ef5bc98174c5cad416d091d2fe9d22accf80c9949b7289d0cacd000ac",
+      "sha256": "284b999c253adb597603d4252683d9dff05c998a4315c220ef48874ec62b5cc3",
       "bytes": 12636
     },
     {
@@ -570,7 +570,7 @@
     {
       "original": "evidence/target-final-com.m3.collections-javac.log",
       "retained": "evidence/target-final-com.m3.collections-javac.log.txt",
-      "sha256": "d855acb8eed512294b21b11ca5d8f2903b38c0f0b4a16c38276aaeeeeb0b6c2e",
+      "sha256": "507bc8ce179455ecb42386ec24792ba5e5ad457b4bb5a8c009d7162ee86aab8a",
       "bytes": 12112
     },
     {
@@ -594,13 +594,13 @@
     {
       "original": "evidence/target-final-host-contracts-javac.log",
       "retained": "evidence/target-final-host-contracts-javac.log.txt",
-      "sha256": "30e99b75ecdff3bf6034c5ec61d51ee03710cd33cedc3cc6c95704dab65ee5a6",
+      "sha256": "ce5f72a86e69cd52fe6c98205fe8f5660268acbff5cb5fc9000db03a7157d023",
       "bytes": 1229
     },
     {
       "original": "evidence/target-final-host-native-oracle-javac.log",
       "retained": "evidence/target-final-host-native-oracle-javac.log.txt",
-      "sha256": "d70ee7194cb1d1487be93ff689bed43deaa17148cf633584614e6c1e94c00188",
+      "sha256": "8164cc845b2a4163dd1ae3493f8f69a336e86e5c980bb801c7109a7fee022bf7",
       "bytes": 869
     },
     {
@@ -630,13 +630,13 @@
     {
       "original": "evidence/target-final-image-contracts-javac.log",
       "retained": "evidence/target-final-image-contracts-javac.log.txt",
-      "sha256": "ba68cec4b4cb044dda6319173afd7051d51f25385a59a2526a8ef031a87e90a6",
+      "sha256": "5c6d7a65629ea5fafd11c7ff133aedbb1f12b30ef6f21f69a4b110b1ba01fe4c",
       "bytes": 1139
     },
     {
       "original": "evidence/target-final-image-native-oracle-javac.log",
       "retained": "evidence/target-final-image-native-oracle-javac.log.txt",
-      "sha256": "274ec1ec1f736f118e61688c601f6201c826888bec33ab48eb8e521e9884e2ce",
+      "sha256": "2f3b642d58841b2ddd1314dd476a15c528d9b092e8c844e098aabe05401f7de1",
       "bytes": 779
     },
     {
@@ -660,7 +660,7 @@
     {
       "original": "evidence/target-final-jdk.m3.collections-javac.log",
       "retained": "evidence/target-final-jdk.m3.collections-javac.log.txt",
-      "sha256": "140c93f8c69f41fed88646b6ceb7e86ac5264fd504995906295d1118df59ed3d",
+      "sha256": "b13bafd417ab18f0cfff5c08e6cc763bd5db7702c75e6c262fd05bff03721766",
       "bytes": 1784
     },
     {
@@ -690,7 +690,7 @@
     {
       "original": "evidence/target-final-qualification-receipt.json",
       "retained": "evidence/target-final-qualification-receipt.json",
-      "sha256": "a3fde04b79491133b7914f4bc3bb035d7a56bb69f89b597958d92d2adf61bc6a",
+      "sha256": "08d06f5a64f80f99d4f5f18e4bb92b6b2717745bd67406cdc18f584ad67cfb80",
       "bytes": 9744
     },
     {
@@ -732,7 +732,7 @@
     {
       "original": "evidence/target-projection-source-identity.json",
       "retained": "evidence/target-projection-source-identity.json",
-      "sha256": "11b902e75dbd4b645123fe4548ea69fffcde11abe2fff0e4fc562a80dd13b242",
+      "sha256": "c9d65e76264a90f5b1a62deebb30e55cb8b383814b4fd488e6684c674b35fd6b",
       "bytes": 7512
     },
     {

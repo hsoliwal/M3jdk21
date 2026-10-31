@@ -9,12 +9,12 @@ source="$owner/src/main/java/jdk/m3/collections"
 tests="$owner/src/test/java/jdk/m3/collections"
 native="$owner/src/main/native/collections/m3_span_index_jni.c"
 cd "$root"
-test "$(git hash-object "$source/M3SpanIndex.java")" = 'f8229851a1a36b72f807736b6df33ef5e8f4ea01'
+test "$(git hash-object "$source/M3SpanIndex.java")" = 'e6758c1789394ccc867bddc8fd299b92a4a49cb4'
 test "$(git hash-object "$native")" = '05d13d490d6bc039a3549420fc92b5d12fd38520'
-test "$(git hash-object "$source/M3SlotArrays.java")" = 'b945fd98cef1ea03e30131e1460c507cd90119c9'
+test "$(git hash-object "$source/M3SlotArrays.java")" = 'f6fdf4a8211885a5355a37b0f3927f54cd68dba8'
 test "$(git hash-object "$tests/M3SpanBatchIntoContract.java")" = '3797d53282f8127b11f824845773607728abcfa3'
-test "$(git hash-object "$tests/M3SpanBatchIntoTest.java")" = '693cfced51b361861eedea201b022da52b07fd7a'
-test "$(git hash-object "$tests/M3SpanIndexSelfTest.java")" = '2def1962e7db62293ef4c21d6b5206b7563b3b8f'
+test "$(git hash-object "$tests/M3SpanBatchIntoTest.java")" = '83a9ce7363e3a212d9b5a04448a016149bfff6dd'
+test "$(git hash-object "$tests/M3SpanIndexSelfTest.java")" = '44cc8f8fc4fa14cec8a149c0b7f4fc36547cf890'
 : "${JAVA_HOME:?JAVA_HOME must select JDK 21}"
 test "$("$JAVA_HOME/bin/javac" -version 2>&1)" = 'javac 21.0.12.1' ||
   "$JAVA_HOME/bin/javac" -version 2>&1 | grep -Eq '^javac 21([.]|$)'

@@ -9,13 +9,13 @@ import sys
 ROOT = Path(__file__).resolve().parents[4]
 EXPECTED = {
     "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java":
-        "fd880291f6119899e530e19b1dc622bb4f1ea51c6c136ab1c510d507c303c761",
+        "9ec03f9f01b6bfdfbc6f76ce320422d8599f56119a0e317a21904452a615e256",
     "m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java":
-        "bbc218ecd8c87648976501a5f09aa8baa5af94e1ea79fdef1647ac4248f59e65",
+        "0ce075c9897724dc63c65b805480eaa918aaade46aec0188cfaf9aac3aa2863f",
     "m3/collections/src/test/java/jdk/m3/collections/M3StoredRepresentativeContract.java":
         "9686f4d820c5872665d6273faa0de0b327b9689b12696af7827269cb8774e016",
     "m3/collections/src/test/java/jdk/m3/collections/M3StoredRepresentativeTest.java":
-        "b948aca5ae6f14b80027429e6b820800927d3013bebb972fa92b712383af55f3"
+        "446920d8a0f43b3badac44ff9440eaedc2bc9dc1f53653dcecc4de026489d316"
 }
 for path, expected in EXPECTED.items():
     file = ROOT / path
@@ -38,7 +38,7 @@ METADATA = {
     "m3/collections/verify_donation.py":
         "66a0483ff0c6ca11ad83f20fa02162e7960dc516089314d697ab456dcbcca133",
     "m3/collections/recipe/stored-representative-20261017/manifest.tsv":
-        "a62827ffafc18bd6d710d7898741d2114a0068b8ac9ee63aac02e55038e1f293"
+        "4558799d12aa2ac5dd8789af591beb8789da632c93ad9020681062d10e664931"
 }
 for name, expected in METADATA.items():
     source = ROOT / name

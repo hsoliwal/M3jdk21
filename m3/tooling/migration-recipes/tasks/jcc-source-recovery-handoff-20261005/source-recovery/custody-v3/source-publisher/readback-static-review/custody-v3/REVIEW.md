@@ -8,13 +8,13 @@ The review combines full source inspection, independent arithmetic over the actu
 
 | Artifact | SHA-256 |
 |---|---|
-| Corrected `raw_custody_v3.py` | `45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be` |
-| Corrected `verify_publication_v3.py` | `45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa` |
-| `raw-custody-v3/CUSTODY_INPUT.json` | `22b58a9e97fd6bb4ebebc6a89dc13e368107c10429bff59191914a5e639c81df` |
+| Corrected `raw_custody_v3.py` | `203f44729f860620949ec9e6aa7c5f2c7d766de2e406548ceb6797797bfdcc33` |
+| Corrected `verify_publication_v3.py` | `6b8ce688a81b46c20e567bd719104bac6a4cf8578a42904dbe494bca2305e443` |
+| `raw-custody-v3/CUSTODY_INPUT.json` | `2b2f294b13298da20e8d8cbe85581e89265fbe8d1c355a384dba308e4a8f9710` |
 | `raw-custody-v3/PROTOCOL.md` | `cdf3826e3725acded05b38031b70d9e7a8f8579540b38d65a2a8e38ce64209f5` |
-| Preserved V2 verifier | `8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639` |
+| Preserved V2 verifier | `a5e9c2228304ea359b5459df150c618fcc3566b88217cdc262c893c31398baa7` |
 | Final source manifest | `9270a6b4098960e2b7c7bd87b17325b648c4de363957f36028bacc9c1955e328` |
-| Existing V3 publisher preflight | `13e56b17314e89370fb8ce3f8417b405b89b34db8a1868d968589550975db84f` |
+| Existing V3 publisher preflight | `424ec0d0148f40d4df153bdc201b4ed334395c52a02307775286abba2ab40bdc` |
 
 The original unexecuted V3 helper/verifier drafts remain exact under `raw-custody-v3/draft-T01/`, at `a96f1aec…` and `7138709c…`. This review retains complete source snapshots, AST-only parses and exact T01/T02 textual differences. The older source review is preserved as a review of that unexecuted draft, not as evidence that its former mutable file locations still contain T01.
 
@@ -76,6 +76,6 @@ The initial narrow probe must succeed before final-payload batches. The before-b
 
 The principal reviewer checked **37 unique stable inputs**, independently parsed seven Python source files without import/execution, validated the complete captured 4/4/17 evidence, and rechecked all inputs unchanged. The inspector passed on its first execution. `REVIEW.json` contains each creation identity, tree receipt, resolved membership and file-read outcome. `INPUT_SEALS.json` binds the exact source/input bytes; source copies and draft differences are retained alongside it.
 
-The focused companion main-verifier review and T02 delta addendum are bound by `COMPANION_BINDING.json`. Their respective artifact seals are `2322e736246e2fd11d94bc4c9c5d1a5717e0bd5be6179f7e4509a9242606d43c` and `05242c715b5d63567d13c26c801e9a2c96ca4e27f14434e3a96020cdcd374a97`. Both found no remaining blocker within their scopes.
+The focused companion main-verifier review and T02 delta addendum are bound by `COMPANION_BINDING.json`. Their respective artifact seals are `7aa095fa9984eb14a337c5ca08cb293e4cd4afac839d6971a04dcef0a6e70788` and `ac45160418ceb8cc586f534cc704a9d2c887f967c1f2d0a1a0644c9a3b986976`. Both found no remaining blocker within their scopes.
 
 No reviewer executed an owner helper, verifier, project build, test, recipe, Java/native command or remote action. No source, fixture, manifest, publisher, earlier verifier or sealed review was changed by the reviewer. The corrected V3 is conditionally admitted; source qualification remains BLOCKED and export/destination acceptance remain unapproved.

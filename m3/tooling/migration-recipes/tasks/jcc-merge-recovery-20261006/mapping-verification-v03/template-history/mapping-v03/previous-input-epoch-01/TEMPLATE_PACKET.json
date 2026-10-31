@@ -2,7 +2,7 @@
   "canonical_baseline_packet": {
     "path": "current-map-validation-v03/PACKET.json",
     "result": "MIGRATION_MANIFEST_VALID completion=INCOMPLETE",
-    "sha256": "f145e87ddf885a5ceb81b1e0cf81f6040e07cebc399b2e069f65c102bcb54fd8"
+    "sha256": "095a0d67348de486d3de758308eb98ddcd6d1ce34ca6fcbc9cf10ba204519168"
   },
   "compile_only_status": "PASS",
   "crate": "jcc-merge-recovery-20261006-mapping-v03",
@@ -17,7 +17,7 @@
     {
       "bytes": 52471,
       "path": "JccMergeMappingRecoveryV03Test.java.in",
-      "sha256": "22808cffcad7aa2477fdb91c53592cce3430aab02da14a5a2b62e6c9dcfbcf27"
+      "sha256": "b87905fe15a9fa618ef394d6932f7d0f9185caf2fe9cc45a3d58689ab7df158a"
     },
     {
       "bytes": 3441,
@@ -27,22 +27,22 @@
     {
       "bytes": 626,
       "path": "m3-jcc-merge-mapping-recovery-v03.yml",
-      "sha256": "7ef86264b8742dfa06ce5bc83ea2bed6be19b24059f479c4e7f0ed61d58b84bc"
+      "sha256": "6ba1b51479a71577289d10793697967de29161a81adc7283ae7fd98a3aef6ad0"
     },
     {
       "bytes": 14710,
       "path": "render_template.py",
-      "sha256": "de6d8a59b0f49a5ca9378c1422cc3d52cb41d3e7f638f6c618ba638fa407b2dd"
+      "sha256": "32daee14b2f94d8d6dfc2ca961d34dfeef1beb31831d4d43b6f352fb2133ba5f"
     },
     {
       "bytes": 8841,
       "path": "README.md",
-      "sha256": "e28aa2f0ebb4b324dc70297de60aceab20749c9dabc0d902fdb29d7986adabf4"
+      "sha256": "17d2ade1b726142765af8e4998640444fb3f57b2e1c168bdb91aadcd7ad39438"
     },
     {
       "bytes": 6239,
       "path": "compile-check-v01/receipt.json",
-      "sha256": "c8182b75ec10d7ee66da00f5a9e92306b0b78fcdecf2114bbd1e84c6c0cadc40"
+      "sha256": "02fd2ca1753852544127c5661c520aaaa28694344b50093970aa1d953c5ecbe7"
     },
     {
       "bytes": 0,
@@ -85,12 +85,12 @@
     {
       "files_verified_unchanged": 15,
       "path": "candidate/mapping/java-template/TEMPLATE_PACKET.json",
-      "sha256": "5fe25ca79a45bd4e499fd6171dfe5375390f91f2331330797b93aec3c5eec142"
+      "sha256": "d9441405014cca0bc6b106de6cf28539920a164e2c627f04dea750072f1e054d"
     },
     {
       "files_verified_unchanged": 11,
       "path": "candidate/mapping-v02/java-template/TEMPLATE_PACKET.json",
-      "sha256": "24b0adba2b80ee105ba9904e4d00b96d441cddf4b548b5400d72ca09f1d26136"
+      "sha256": "7ec82e03ff00a2853023454b7e30decca77051a4c3ac4afe30d283722a9d5a2b"
     },
     {
       "files_verified_unchanged": 113,

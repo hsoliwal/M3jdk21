@@ -5,9 +5,9 @@
   "canonical_commit": "1a4b37fc14debf9c1ea693396166e7b6e1caa7b6",
   "recipe": "jdk.internal.m3.LongAddressCurrent20261027",
   "target": ".github/workflows/m3-long-direct-address-kernel.yml",
-  "pre_source_git_blob": "7753da6af91ccc4e1f4310629db9d05f329e3bbc",
+  "pre_source_git_blob": "f204801428099e5198e742a11ea754547d21c45b",
   "post_source_git_blob": "b0bf1b2a1e3121ccb47e74ba72e3f29bb7dca9b9",
-  "pre_source_sha256": "b563da28eca90b0ac41306bf933b984dd2e039be88a244b55c43c5c4ca46ee86",
+  "pre_source_sha256": "f1417dc5f362308a3bef929b56b600488839133b2e4770602c2b799458eb7df5",
   "post_source_sha256": "084f0590fd3ed903042bc544aad7c9f6ad38a6980899d4f498897f42e3e5fc36",
   "maven_local": {
     "version": "3.9.9",

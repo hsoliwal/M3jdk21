@@ -181,8 +181,8 @@
     ]
   },
   "fixed_verifier_hashes": {
-    "m3/tooling/tq/verify-plan.py": "ff2c31f57aac81a7049612557a3757781927563bd2d7a7b598aa62a116e1d978",
-    "m3/tooling/tq-sync/verify-plan.py": "905fb42c90ef44cbc5d4449218b825eca025fd23ae169b15606b0b95de359793",
+    "m3/tooling/tq/verify-plan.py": "269cd10606a9de7629ec0d1f4dccce2866644f979c06958d808e107b6c9188bb",
+    "m3/tooling/tq-sync/verify-plan.py": "72789b815e8dec9b6f26930952fd16d715d8588c3f5ea442b432842558647e6f",
     "m3/migration/migration.py": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
     "m3/migration/recipe.py": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
   },

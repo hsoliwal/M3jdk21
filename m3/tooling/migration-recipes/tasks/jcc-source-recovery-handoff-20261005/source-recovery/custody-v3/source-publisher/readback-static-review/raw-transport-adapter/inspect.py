@@ -42,11 +42,11 @@ def tree_id(entries):
 def main():
     pins = {
         'RAW_TRANSPORT_ADAPTER.md': 'c12b3bb6415f89a94e946d8937b50e9f974e6bcf79f4f6ecdb388dc1cdfa16c6',
-        'verify_publication.py': '8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639',
-        'prepare_publication.py': '3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd',
+        'verify_publication.py': 'a5e9c2228304ea359b5459df150c618fcc3566b88217cdc262c893c31398baa7',
+        'prepare_publication.py': '2c352ab7122ff72da7027cd6b06bfa6b4cf2db0531727bf56b482c062aeea754',
         'audit_base.py': '839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b',
-        'BASE_TREE_MODEL.json': '877a61dc6d9b4f4fa280faeadbd67db9ee3d56a68768fa06c917d85ab8fbaa80',
-        'RAW_VERIFICATION_TREE_PLAN.json': '00fa5b9e4e99621ed6b5aac3c0da4c6506f82e921a3da42fdd4645285653e319',
+        'BASE_TREE_MODEL.json': '26378280f0305c59a7529fed18de4dd938e935840260c9667fb55de4c6f6fd8a',
+        'RAW_VERIFICATION_TREE_PLAN.json': '7b2b3526fec60ea3fd6d53261ab1f509c7dcf37b9193d044f215e913ee9fbf90',
         'RAW_TOOL_CAPABILITY_OBSERVATION.json': 'fba19b92e8b20eb4ef2ba2c6dbc6d48d5bce01eec5763362f62324fe27ab410a',
         'RAW_BLOB_CREATIONS.json': '1213f1a8c1da0a7032f1dc9507c5aef152eaf94ea39db0212f3684be06778a5a'
     }

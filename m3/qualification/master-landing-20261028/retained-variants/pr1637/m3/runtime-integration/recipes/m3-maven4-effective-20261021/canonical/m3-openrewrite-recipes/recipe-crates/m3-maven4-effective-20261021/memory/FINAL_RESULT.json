@@ -3,7 +3,7 @@
   "status": "PASS",
   "profile": "m3-maven4-effective-20261021/1.0",
   "events": [
-    "95505b69dac37f6285deded64ef70e9e5431ea502fca5712f35c8d6569ae6cb9"
+    "948de23008d7e66ebcb2f93a2b86c3ba6acaedbbae82c841d9da718a45d4b615"
   ],
   "event_count": 1,
   "conformance_checks": 129,
@@ -21,39 +21,39 @@
   },
   "index": {
     "path": "memory/INDEX.json",
-    "sha256": "b8db3a0c631e507b8f1f3432c51c15b29d2c1cc99ced63bf74978ccde309c741"
+    "sha256": "c11dde22568ec1dcc437bcc9a21a7a920102e37659cd0e93621084c0a09b34bb"
   },
   "source_lineage": [
     {
       "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/com/synexia/rewrite/memory/M3RecoveryMemory.java",
-      "source_sha256": "e6352756fca8abcea531761b2f32eb76a9e98bf3f259950d558ccc46072a0c32",
+      "source_sha256": "88696555f28134225ecd731c5c81065dd53912361d46bfe3f79f60d877c62936",
       "path": "memory/tooling/src/com/synexia/rewrite/memory/M3RecoveryMemory.java",
-      "sha256": "b9e0abe186e412a4a5779b1856ea9841238554436a97f4e6268fb02f06959736",
+      "sha256": "0a9b8bfbd7f2c5ed59f1be423b7cdaea818ad22d1feb015eb9b2b22c78b0192f",
       "modification": "Profile identity and dated comment only"
     },
     {
       "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/com/synexia/rewrite/memory/M3RecoveryMemoryTest.java",
-      "source_sha256": "4406ab706ba83c9dcd8618358477c6fd9094108c00bc62dd10735c4d181702b1",
+      "source_sha256": "b27e96e73af86cb12cf453a0b4f27b49bdae24073aa9e435061b177d02969a78",
       "path": "memory/tooling/src/com/synexia/rewrite/memory/M3RecoveryMemoryTest.java",
-      "sha256": "4406ab706ba83c9dcd8618358477c6fd9094108c00bc62dd10735c4d181702b1",
+      "sha256": "b27e96e73af86cb12cf453a0b4f27b49bdae24073aa9e435061b177d02969a78",
       "modification": "Exact unchanged source"
     },
     {
       "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/com/synexia/rewrite/sealed/SealHash.java",
-      "source_sha256": "17910b8b92573d6673be22b1d79d3db81c2c65fdff02251b0d4b8defd5b7373a",
+      "source_sha256": "316da9bf8b642f9d8ad9e055328aec0f70ddfe0f63c4649d5dc35d062fd7a11c",
       "path": "memory/tooling/src/com/synexia/rewrite/sealed/SealHash.java",
-      "sha256": "17910b8b92573d6673be22b1d79d3db81c2c65fdff02251b0d4b8defd5b7373a",
+      "sha256": "316da9bf8b642f9d8ad9e055328aec0f70ddfe0f63c4649d5dc35d062fd7a11c",
       "modification": "Exact unchanged source"
     }
   ],
   "verification": [
     {
       "path": "proof/memory-conformance-001/RESULT.json",
-      "sha256": "bf55930b10f9f063c6a48d08336818fe9dcc115127ca3216916799828f1fd629"
+      "sha256": "47ee4cb235fc9e4e2ede51c26e2e824fbe4479654e9b49df9a564d316a08b678"
     },
     {
       "path": "proof/memory-conformance-001/check.log",
-      "sha256": "1a039d55d0a6ecaff3da526143ae6b5e88762f2f1d92271d55b1bd32efce5d11"
+      "sha256": "c673f9e872a61b12d9f4cd9e3bdc0a8f5f21d0b3799ba69a2b95e0ca575bee36"
     }
   ],
   "publish_command": [
@@ -72,7 +72,7 @@
     "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/tooling/target/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
     "com.synexia.rewrite.memory.M3RecoveryMemory",
     "check",
-    "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/events/95505b69dac37f6285deded64ef70e9e5431ea502fca5712f35c8d6569ae6cb9.json",
+    "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/events/948de23008d7e66ebcb2f93a2b86c3ba6acaedbbae82c841d9da718a45d4b615.json",
     "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021",
     "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/events"
   ],

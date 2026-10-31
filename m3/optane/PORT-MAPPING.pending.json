@@ -7,7 +7,7 @@
   "reuse": [
     {
       "source": "MIndexProgressMonitor",
-      "source_blob": "763ea75ea1553e679d6fcda271760328defef8cd",
+      "source_blob": "2a387a4d8c7cabfb2ce75b6bae9210281f01c867",
       "target": "jdk.m3.optane.ProgressMonitor",
       "disposition": "dependency-free operation adapter, not global progress owner"
     },

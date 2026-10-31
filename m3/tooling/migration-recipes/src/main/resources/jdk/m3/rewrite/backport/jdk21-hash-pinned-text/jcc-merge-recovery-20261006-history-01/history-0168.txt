@@ -23,7 +23,7 @@ def snapshot(p,name=None):
 f=snapshot(B/'FINAL_SOURCE_INPUTS_V3.json');packet=snapshot(B/'bound-inputs-v3/BOUND_INPUTS_REVIEW_PACKET.json');record=snapshot(B/'bound-inputs-v3/RECORD_CONTENT.json');doc=snapshot(B/'bound-inputs-v3/HANDOFF_DOCUMENT.md').decode();idx=snapshot(B/'custody-final-evidence/CUSTODY_EVIDENCE_INDEX.json');additional=snapshot(B/'custody-final-evidence/ADDITIONAL_RECEIPTS.json');prose=snapshot(B/'custody-final-evidence/CUSTODY_CARRY_PROSE.md').decode()
 assert identity(B/'FINAL_SOURCE_INPUTS_V3.json')['sha256']=='df6713ad19ce80daad0383fbd5c3716412e2dca133e1db7e0150b88e141313b5'
 assert identity(B/'bound-inputs-v3/HANDOFF_DOCUMENT.md')['sha256']=='d5e18258027f457a1fcdc45ff30b4e2e7a0723825ea95b651933af23f27fd28d'
-assert identity(B/'bound-inputs-v3/BOUND_INPUTS_REVIEW_PACKET.json')['sha256']=='e0ae5375e313a8547f5cdb8f607d2fe1c04efe91d3d43c86d1a5878329beaf59'
+assert identity(B/'bound-inputs-v3/BOUND_INPUTS_REVIEW_PACKET.json')['sha256']=='b9ff888a82341c4fbfeaee60ebc9481b9d9ec00d619585cab1df6f5bbcfe400f'
 for r in packet['files']:check(r['local_path'],r)
 assert len(packet['files'])==14
 for k in ('publication_receipt','source_inventory','root_accounting','handoff_document'):check(f[k]['local_path'],f[k])
@@ -102,9 +102,9 @@ assert counts['final_publication_call_envelopes']==sum('/final-publication-calls
 assert counts['exact_raw_create_captures']==sum('/raw-custody-v3/create-call-' in r['source_local_path'] for r in idx['items'])==4
 restoration_ref=f['additional_receipts']['source-results/ROOT_POM_RESTORATION.json'];restoration=snapshot(restoration_ref['local_path']);call_ref=f['additional_receipts']['source-results/ROOT_POM_RECOVERY_CALL.json'];call=snapshot(call_ref['local_path']);check(call_ref['local_path'],{'sha256':restoration['actual_call_sha256']})
 assert call['request']=={'repository_full_name':'hsoliwal/com.synexia','path':'pom.xml','ref':SOURCE,'encoding':'base64'}
-response=call['response']['structuredContent'];raw=base64.b64decode(''.join(response['content'].split()),validate=True);pom_path=Path(f['additional_receipts']['source-results/ROOT_POM.xml']['local_path']);assert raw==pom_path.read_bytes();assert response['sha']==restoration['git_blob']=='98889a040aad5cc3c82f782bb4b173d118207988'
+response=call['response']['structuredContent'];raw=base64.b64decode(''.join(response['content'].split()),validate=True);pom_path=Path(f['additional_receipts']['source-results/ROOT_POM.xml']['local_path']);assert raw==pom_path.read_bytes();assert response['sha']==restoration['git_blob']=='a65f71452613662769dda64100c6d64dd90ae5da'
 for p in restoration['paths']:check(p,restoration)
-assert restoration['source_commit']==SOURCE and hashlib.sha256(raw).hexdigest()==acct['root_pom']['sha256']=='f01cca4d90bd8fa1b1125474b5178cc80762d934bcb7bf5817f08f3f0dcf6aab'
+assert restoration['source_commit']==SOURCE and hashlib.sha256(raw).hexdigest()==acct['root_pom']['sha256']=='1af736d1a28af6e5cdf41a2b4fefa8b9f3c5cb7a6c2f6d16537e0a822f086a7d'
 assert not re.search(r'\{\{[^{}]+\}\}|UNBOUND_RECOVERY',doc) and SOURCE in doc and ROOT in doc and f['source_pr'] in doc
 assert prose.strip() in doc
 links=[]

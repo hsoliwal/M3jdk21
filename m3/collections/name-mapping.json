@@ -15,7 +15,7 @@
       "qualified_source_sha256": "ff0b8dbd31660f768c1e382e05bb41e60bbae70929bf68ec9d427af6db6ebb7b",
       "target": "jdk.m3.collections.M3LongCollection",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LongCollection.java",
-      "target_sha256": "ea0c1aa0957f7bafd5cf2892cbe483c98d5772192f81cc3c467d53ab5c1c7531",
+      "target_sha256": "10a4309fb0be8401f2d32a33a777f339b9bd3118f698d5e74eaaf89c087f42f1",
       "disposition": "EXISTING_TARGET_OWNER",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -29,7 +29,7 @@
       "qualified_source_sha256": "f2e5465fc296ff76ed97efd1547ee31b3ef0756a5489f0b276dff5a2eddc2e48",
       "target": "jdk.m3.collections.M3LongDeque",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LongDeque.java",
-      "target_sha256": "ffe2c4c488bef6dba327b5dcfb6ac7c2f82deddca454a52b45a1181041fe4272",
+      "target_sha256": "e84f06bd3dd086ddf01371a5b444d8f430006b622271bb19891e5a2c1f223b75",
       "disposition": "CURRENT_RECEIVER_CONTRACT_PRESERVED_OR_ADDITIVELY_RECONCILED",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia",
@@ -44,7 +44,7 @@
       "qualified_source_sha256": "8e912f0302b4082583f731e274a245cf9f98fda1e5e53adfccaef03f5da08cb0",
       "target": "jdk.m3.collections.M3LongIterator",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIterator.java",
-      "target_sha256": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201",
+      "target_sha256": "524ddc82c953ec7e205687fe8b6a1be9c343d41e1a70d221c1d20cba31843402",
       "disposition": "EXISTING_TARGET_OWNER",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -58,7 +58,7 @@
       "qualified_source_sha256": "649ceb108c0aade057a137b07b95f77ce446d3285244f8515ee2a386a0e200d4",
       "target": "jdk.m3.collections.M3LongQueue",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LongQueue.java",
-      "target_sha256": "50bc94d1dfb4950b0156c307bc4db192979b7b82c5eb4666eb05b3e5462754f8",
+      "target_sha256": "50c49ecb80fad7498ef5db681640a1b136bbcac87a1b311a08563b902db3b85f",
       "disposition": "CURRENT_RECEIVER_CONTRACT_PRESERVED_OR_ADDITIVELY_RECONCILED",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia",
@@ -73,7 +73,7 @@
       "qualified_source_sha256": "38f6f97979a4c9d7c7e2963aed6df50644511f03c5e89c2893312862de036c9a",
       "target": "jdk.m3.collections.M3LongSequence",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LongSequence.java",
-      "target_sha256": "d7cf703705bb68d1ff6c2455d7e94533baedf5c89a776f10e729c7a9410321eb",
+      "target_sha256": "8916ec7d89e2dd21a9d211db4d37715b77e1425da70ff855706fbe9d2210c7a6",
       "disposition": "RECONCILED_TARGET_OWNER",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia",
@@ -89,7 +89,7 @@
       "qualified_source_sha256": "1ef422c22b03fcaafa4e9ec32ee231cc95cd8a46614ea6663f66cc8f832879f7",
       "target": "jdk.m3.collections.M3LongStack",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LongStack.java",
-      "target_sha256": "812c2df2bc73f04e6ab7551c48cea59bc8b5c877bd347266c287764db88e4c36",
+      "target_sha256": "0e4e1bd25d2229a24415185cce8f0cfbaaf6e96e842384f4167b83bf6c1f06ab",
       "disposition": "CURRENT_RECEIVER_CONTRACT_PRESERVED_OR_ADDITIVELY_RECONCILED",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia",
@@ -104,7 +104,7 @@
       "qualified_source_sha256": "fe6558087e448d110fd3398573600071190068f4c671876a4f6649553053f057",
       "target": "jdk.m3.collections.M3LongArrayDeque",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LongArrayDeque.java",
-      "target_sha256": "42cbfad68941221a81efc34d33356334a7c9625eb7031aeaee387e2583fa832d",
+      "target_sha256": "f9a92a30f62e661e34fa3971c8d8143ef4d7c8b9a6257f45826ee6d16f9dee39",
       "disposition": "CURRENT_RECEIVER_CONTRACT_PRESERVED_OR_ADDITIVELY_RECONCILED",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia",
@@ -121,7 +121,7 @@
       "qualified_source_sha256": "cca0c92a6541d2570b981ac6e4782e7800c87c8dda5e4e566afe023c454ebd9c",
       "target": "jdk.m3.collections.M3LongArrayList",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LongArrayList.java",
-      "target_sha256": "df1c03c44c3108cf6b9e34fe5ca49c7692dd63c2250f749ce25add792e12147d",
+      "target_sha256": "eb358c4568af1a68679b924f5faf365c011b93513529957bad264dbd030048e8",
       "disposition": "CURRENT_RECEIVER_CONTRACT_PRESERVED_OR_ADDITIVELY_RECONCILED",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia",
@@ -138,7 +138,7 @@
       "qualified_source_sha256": "c0880ab0b42368b97dbdc67e9d8d44eaef1724356c0ce8c634bc70aa176d77dc",
       "target": "jdk.m3.collections.M3LazyValueProvider",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LazyValueProvider.java",
-      "target_sha256": "a0daba82e6787bcacbf3811a04a094f9442c88d2ad3513e3029a9b0767f95b66",
+      "target_sha256": "aa103a2af8e0a315e877eb8b9ab205fea2e1a26c9229958c544258f6d43d4ac7",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -152,7 +152,7 @@
       "qualified_source_sha256": "5d0662de9942433f6638d4662f4d64027d512c284840c5bb63db4f26491869cd",
       "target": "jdk.m3.collections.M3LockedMap",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LockedMap.java",
-      "target_sha256": "ab4e57cd0e256e427a21cfbff9bd1c9e910d5f971d7d59051f8d25ec8347fbca",
+      "target_sha256": "811f21c7a23721afdf85834c6818bbeeddd3c381d4781d5343a04b8ef0286640",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -166,7 +166,7 @@
       "qualified_source_sha256": "6629d467510b9b3e05f3a021880e81d07daf2f4444bb6e5cc01963f6a10710d1",
       "target": "jdk.m3.collections.M3LockedTreeMap",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LockedTreeMap.java",
-      "target_sha256": "26abeb1427bd90c278549a29f62c2b261f4e286fd36e7eb64a46bb5cdf24efd9",
+      "target_sha256": "d75d122d4c0af398d63bd90518e83e73cdd178d27471115f2b974fdcd802b4a9",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -180,7 +180,7 @@
       "qualified_source_sha256": "95ae1e725ab4624f042177dae29f4f5c8039deed6467ffff05e99e981980d6bc",
       "target": "jdk.m3.collections.M3LockedTreeSet",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LockedTreeSet.java",
-      "target_sha256": "060c8971d038ef82e80197864e00302c898d11d26a01b60791bf383954a79e09",
+      "target_sha256": "c99c46d5a1eae989712bc05cf421276d41afde32349fa5450863360901036ffe",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -194,7 +194,7 @@
       "qualified_source_sha256": "0cef50b76b48904e836eea23b3b33abb8888eb6fca078d7f941df7ab1a516a13",
       "target": "jdk.m3.collections.M3OrderedSlotMap",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3OrderedSlotMap.java",
-      "target_sha256": "015242ae386c4366471cd7d26fab886a2c362b58029982b0108976342c4f3357",
+      "target_sha256": "b3aeeca8b271382cc166a31f9e0d93c8bb8c480214bf500cd7ac70d14ccd503c",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -208,7 +208,7 @@
       "qualified_source_sha256": "fdb237b2c4f8d2d775b7dd3ccfb9f82601873672ae7183b6a82531a67f6d074f",
       "target": "jdk.m3.collections.M3BlockingDeque",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3BlockingDeque.java",
-      "target_sha256": "ac4ae1d0d2e9d10d39f15226d19bb92fd34d60da37bd0a8c822b731836c10577",
+      "target_sha256": "b45503c20440b44adccf4044789335f5eed00055184d0580f72308c8e6407a8b",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -222,7 +222,7 @@
       "qualified_source_sha256": "a7060599b2f33bc14c168e9e2394fc3f49526d2f5d7dbb249e3c580ebcdfec9e",
       "target": "jdk.m3.collections.M3LinkedHashMap",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LinkedHashMap.java",
-      "target_sha256": "5495a8200ff4030a8faa66fde2f8bb9ccca52bdcbccd200a76147698289c2c0c",
+      "target_sha256": "236099129854887ba6205be23e42d5e6af9ead09de045419f7c940d0f0bd77e6",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -236,7 +236,7 @@
       "qualified_source_sha256": "3ee00140a53fb459813b5913aba6d40cf0111435a903e9053b3942ead7e96fe4",
       "target": "jdk.m3.collections.M3LinkedHashSet",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LinkedHashSet.java",
-      "target_sha256": "b429ed027228bdb39b366b7023630a4a4da7fbef660386798083f4f3e341c757",
+      "target_sha256": "98a58d0d06c7d10c48f1f189c9daf3ef1f4f4ceba24e708ec0e1a53dbcf4db01",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -250,7 +250,7 @@
       "qualified_source_sha256": "1f46ee2c463b329e2d88fb7afdd42a764c94add458008d8022e5973b5da71112",
       "target": "jdk.m3.collections.M3Collections",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3Collections.java",
-      "target_sha256": "aa162790de8cb17341ba751c3fef6226196807157bf14d9f6516d3eaf687e926",
+      "target_sha256": "ce8bf96283a32f43e60031f9b201ff1a07091b5810303ea096c4c5f58bdfd39a",
       "disposition": "CURRENT_RECEIVER_CONTRACT_PRESERVED_OR_ADDITIVELY_RECONCILED",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia",
@@ -267,7 +267,7 @@
       "qualified_source_sha256": "666f7940a7b54bf34533c2f10d3ceaa0a3481a11e18e63e27082dd2ef90e3e50",
       "target": "jdk.m3.collections.M3LazyValueState",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LazyValueState.java",
-      "target_sha256": "c3374b459647735929490b6c01b633538e3232237e4dd52c565b4e95df0ddca4",
+      "target_sha256": "eadffd8b40dddd128fa924295df502281516e3c758548cd96ae397bdaff63c85",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -281,7 +281,7 @@
       "qualified_source_sha256": "c31a42ad996f639be5908289a181b2df59a75c8d184036fcd341cbfca27b4f09",
       "target": "jdk.m3.collections.M3LinkedList",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LinkedList.java",
-      "target_sha256": "31efffe0d25132b393178bec38906e5b977d8939a246a59115afeccb6a23e11b",
+      "target_sha256": "d8f29642e80322b10e5f756014b0e7bdcd964aa0808d506fe18f3a7fbcb2451e",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -295,7 +295,7 @@
       "qualified_source_sha256": "6c9e30f3ea8dd4ec10b08c83b81ceaa0d0b0ab0815411c261ee61ca7ecd8d34f",
       "target": "jdk.m3.collections.M3TransferQueue",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3TransferQueue.java",
-      "target_sha256": "e4f3ad7fa0fb8e9f9c0bdf3530143b7fb525515d2e43d7cc479a4bceab81ebe7",
+      "target_sha256": "0a1de0629f93118093ee54a2fdec878dbbb2ef40da74d4d9085303c67d28d959",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -309,7 +309,7 @@
       "qualified_source_sha256": "4ee669eacb371768d6c8d20790d45791c9c99472721753b89916ad45b2c0d566",
       "target": "jdk.m3.collections.M3TreeMap",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3TreeMap.java",
-      "target_sha256": "01582359b73d671f627f9bde3b266021c975bcf374f4c575fa43c05fd49218e8",
+      "target_sha256": "655ec43b42c95738d042bd762992ba5d97ef6cd07a374fa05244064e46e2c52b",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -337,7 +337,7 @@
       "qualified_source_sha256": "62069ef729a29334a6bdf4e0912353c380e8bf38a703fe355bc78a678ba42f1f",
       "target": "jdk.m3.collections.M3WeakHashMap",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3WeakHashMap.java",
-      "target_sha256": "1b1fd624108635fbb76e2608b066abfdaa4cc297b85f0052d84f17ac33c19d2a",
+      "target_sha256": "77bb56402efb9d11c1bbc096246711495039f36c00b0acc7b36a840684fd26c6",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -365,7 +365,7 @@
       "qualified_source_sha256": "16fb80dd4fe51f355894466f8c4d2f80ea7a5b9ffeb01f9eef17af957d49e332",
       "target": "jdk.m3.collections.M3SlotMap",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3SlotMap.java",
-      "target_sha256": "0499cb1f5825429fcf7434665c6785bcffa59ed4a975974a29856ad60317e806",
+      "target_sha256": "aff532279cb68435619ef39977f4709125d9061c7a67259df10cfc33c7bfd66f",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -379,7 +379,7 @@
       "qualified_source_sha256": "bb7d05da5f98ca92cab8a49a921ecf7085219b74e2f9a7220010211c05072dff",
       "target": "jdk.m3.collections.M3SlotSpliterators",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3SlotSpliterators.java",
-      "target_sha256": "4ee2b86ea682c64da881d36eb5b4aadc4ba6640389f2adbfdc8dff4d44cf4070",
+      "target_sha256": "fe7db5946cb21eecac31dc478899c4864bba09b7b302357868af296ea2e0f554",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -393,7 +393,7 @@
       "qualified_source_sha256": "fd96cc2208f63b34c3ebdf61187840ab82a349e1c8961df9860ec45896970c3a",
       "target": "jdk.m3.collections.package-info",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/package-info.java",
-      "target_sha256": "d1a378061968774e1b7a9e0e784039ae34b84efc22629cec2db0bae2f3117acc",
+      "target_sha256": "6f002fda4b65019ccabc0ba19769be5c6ed31ce210af8753ff3c795b66594e88",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -407,7 +407,7 @@
       "qualified_source_sha256": "f981447e2ffdcd86beb8d9899cb078ae75e4c99aee4cf478aeb5159a890e0059",
       "target": "jdk.m3.collections.M3LazyEventBits",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LazyEventBits.java",
-      "target_sha256": "e62aa39ad9da31a186235de8cbc63a83c84159833c1bab25747073bc8955289f",
+      "target_sha256": "f3125beac0fdbd3daf732a6fc90773149c51c1db046de064821fa236729b9f61",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -421,7 +421,7 @@
       "qualified_source_sha256": "996f794617b3e7f91d1a82ff35a52951a1463733714928a4b3cbf447aa641887",
       "target": "jdk.m3.collections.M3LazyEventGranularity",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LazyEventGranularity.java",
-      "target_sha256": "0d5d821ebc7626e6e07dc4eba0146a2c36a5db906c9010ca1745a73e27cb2020",
+      "target_sha256": "ac6575ca3a2361c33fe62914aaf1108f74b5f9b95e3fd6c44b32d891402976ce",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -435,7 +435,7 @@
       "qualified_source_sha256": "9a45efd457e28731f4e9e8ff6c128bc78957805e50f8342fb2858ae8b0fc37fd",
       "target": "jdk.m3.collections.M3LazyEventPolicy",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LazyEventPolicy.java",
-      "target_sha256": "e2504269d75b6d79b2e0fe2bcc3ce02719ff6ee326d8db478a083bc38dac1a2f",
+      "target_sha256": "d0d1664cb4ff549ff38858c1edeb6e4abb9b34ef3d1bb7d6d98489c46189439a",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -449,7 +449,7 @@
       "qualified_source_sha256": "aa9dcf95ab90bbababef955bf99bd7c5cd1de1e99ddcaba2c984bd06cdeaa7ed",
       "target": "jdk.m3.collections.M3LazyEventSink",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LazyEventSink.java",
-      "target_sha256": "2a45fb78a9d93614a9d2ed2f5bc1e42e922816fc4ae4123f4d2ac07288134e8d",
+      "target_sha256": "a00942e2bf206cf0542fd3c3c347f5e6ef946b1804c3a3843c97d88ce707901b",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -463,7 +463,7 @@
       "qualified_source_sha256": "8ed2bb589bb590a71f8371aa0ef20b700dc5327bbdb622f3071e25f9ae95243f",
       "target": "jdk.m3.collections.M3LazyEventSource",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LazyEventSource.java",
-      "target_sha256": "6e779fbed83ae72bb75588ad77028c9c644ae176284877e824828e3f5b97bf27",
+      "target_sha256": "4287116d9042680333cd8b332f8d9591e1e443c3b5125f9942289cb119a1973e",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -477,7 +477,7 @@
       "qualified_source_sha256": "25c313a03429f48d4ee6be8c6a2cd3e467446b73cf87ca942608021544eae6dc",
       "target": "jdk.m3.collections.M3LazyEvents",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LazyEvents.java",
-      "target_sha256": "35d0a22624feb3dddbe8ba11235772d3579a72fc7128e17c15b3b596b7c6c28d",
+      "target_sha256": "90428c59e1b7084953ebe4afb2467bcb213c0b39a0a2c34de08789b621c2d7bf",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -491,7 +491,7 @@
       "qualified_source_sha256": "2d6d5bf67c997fcf67d03e4faced27bc8c2791ced5c011bdb633bfb51d850abe",
       "target": "jdk.m3.collections.M3LazyOperation",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LazyOperation.java",
-      "target_sha256": "588937f401355bac4971394a185e16e89eb5e32e2a8a8aa1b7ec761fb242d667",
+      "target_sha256": "cd21e136af876c25b0cbee6923b275b835f93d19ecf30a405bf09f338600837d",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -505,7 +505,7 @@
       "qualified_source_sha256": "397bcfc5e8eaa4d516f6fccd1d3c238be4432f6f6a49f77a425ae21fd7d969ff",
       "target": "jdk.m3.collections.M3ChildProgressMonitor",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3ChildProgressMonitor.java",
-      "target_sha256": "3ccd42c38929179e855bcbfa1a6f54f9edb6968a210c65d013ed434ee592e680",
+      "target_sha256": "f3ad6ab46cb067b1caf13d23d2d2e2c2e79d1a79aa9f5421c7406090fcd9e1b9",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -519,7 +519,7 @@
       "qualified_source_sha256": "86fd3491c9ce1806d71272bbd9d1ff950fdfc49c45cee2108065faba81d629a6",
       "target": "jdk.m3.collections.M3DefaultProgressMonitor",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3DefaultProgressMonitor.java",
-      "target_sha256": "f0b52dec2ed7166f242bdd1076792dc3187fc2353d237af59df7b22403bf3d64",
+      "target_sha256": "87eac42a847f506bcb379064f4c8d7c79d46450d728a706571dede6aad497f8c",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -533,7 +533,7 @@
       "qualified_source_sha256": "f836f33c6e078b6fcccbe63d63db615534ef676caf16866edecf973d5766c3aa",
       "target": "jdk.m3.collections.M3ProgressAdapters",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3ProgressAdapters.java",
-      "target_sha256": "6d4637c9b3de4481180d6459f1312aff90141b6ddf46b91aff886bab958339c9",
+      "target_sha256": "23d6e4159634d5186a088fb8efe05da3381f165f381ad6d6247e03bbb4058a15",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -561,7 +561,7 @@
       "qualified_source_sha256": "bae8f4a057f4ef2ef5a927eafa8d7babf20275313cdb42c5620c7b4a37b9442a",
       "target": "jdk.m3.collections.M3ProgressScope",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3ProgressScope.java",
-      "target_sha256": "8ad6c20a9661ec095fb4dcd0566b400130f9c13e9c4312a625ff2dfd0c40553b",
+      "target_sha256": "8875077566d6ce16722c7b53d29d41f157997b8cc7f25d77a84d533f83201651",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -575,7 +575,7 @@
       "qualified_source_sha256": "29cde61a192e454dd2ffde25e5a142cdc2a25e806ce91f7f01e6d5d7f6bf6960",
       "target": "jdk.m3.collections.M3ProgressState",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3ProgressState.java",
-      "target_sha256": "1de191dc8e99a92f0aee3f8f24e665f9de49714f8571c0f5c3b047fbd43a6e6d",
+      "target_sha256": "cbe8c0bc1a473d3845613475e87aeaf4c5fc84fef8e0ceedde1a81993f7c298e",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -589,7 +589,7 @@
       "qualified_source_sha256": "e97ec1d4932635e08d3fc590d64ae84b4a450c6f064c1539bf63b0d4a95e6a55",
       "target": "jdk.m3.collections.M3SystemProgress",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3SystemProgress.java",
-      "target_sha256": "683b4a0532ff40682d43a51ee9e38fb1c73de3a05e53d9ec5392e4ba29cdd29b",
+      "target_sha256": "1db043000bfc0abadcb21f465dd697c4e5d7986a1e5db104ab366a7212b8ea7b",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -603,7 +603,7 @@
       "qualified_source_sha256": "d6f6fb0d890bed0f12ac066d3cd86ce55f64b1ee859a181a1008320cb22273a2",
       "target": "jdk.m3.collections.M3Progress",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3Progress.java",
-      "target_sha256": "01b387d63a1ddfb1b758e11fcee76366aea68ec391bc0d87234172857cb6a25d",
+      "target_sha256": "b0be8ec3d298a50c074a0ee9a111cddbc9870a608bf6e1f03f40830de23751c5",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -617,7 +617,7 @@
       "qualified_source_sha256": "4aeef2c5ae9dcfe40247e09c8cb7bb8fb9fa53d26a6d8ac2768d2126b6f0edc7",
       "target": "jdk.m3.collections.M3NoRetainedStructuralEntryTest",
       "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3NoRetainedStructuralEntryTest.java",
-      "target_sha256": "338d443ef01b118377940397b447b083af9a5a73c8bd8a001005b08efd5a9666",
+      "target_sha256": "05dbc94d16aa7093ff3ac963cd4eac4cd276ead2efac8028cafe96c812683e21",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -631,7 +631,7 @@
       "qualified_source_sha256": "6715161d44695ba571a45c422f75f63eda158930b3e78a91870a4c5a87562af9",
       "target": "jdk.m3.collections.M3AllocationProbe",
       "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3AllocationProbe.java",
-      "target_sha256": "47c94f4de1f02dd6544342481e1e44b159b6895767d53e238659424f4a709f6d",
+      "target_sha256": "66048c93155698f1984ac876a03c830c7d10b0d55a0caa00f4d7c970832cf893",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -645,7 +645,7 @@
       "qualified_source_sha256": "750b82113268d8e182b31124eb412e1b14ca496d97c245bf6acf1c1bf8979325",
       "target": "jdk.m3.collections.M3ConcurrentContractTest",
       "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3ConcurrentContractTest.java",
-      "target_sha256": "9aea61d2c674b81f0b8b84f053b82449ec0d97ae7e69264efd3561edef808872",
+      "target_sha256": "1c0135c30a6b5680514c09673817e866047e5099d2db8223ff7ce81a100aad13",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -659,7 +659,7 @@
       "qualified_source_sha256": "34a47bbe9299dc5bf5a88f62c1f3238eeac92c68677e0612dc57d6595accc7b0",
       "target": "jdk.m3.collections.M3FactoryContractTest",
       "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3FactoryContractTest.java",
-      "target_sha256": "62bd5948000dcd9cf7625ab0b80fd2f43b9b2f1aad351e90e04017344e556436",
+      "target_sha256": "ed7c565b4c5f6c9745ad26d994f4d0bc25d4fe84795a091845136ed39c4ddbdd",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -687,7 +687,7 @@
       "qualified_source_sha256": "e9915e685fef5f841b526010494b37596346c6e8b3f5f227fc0d9fc06ccf84d8",
       "target": "jdk.m3.collections.M3LazyTreeMapSelfTest",
       "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3LazyTreeMapSelfTest.java",
-      "target_sha256": "b61d390196173ef0d4f99a86d0569f0542f9805d639a29eff4035140f6cf10ea",
+      "target_sha256": "681c71b6fe4b8ddeca4f7a312727d7dc8652fdcad62ec73e570510643911de30",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -701,7 +701,7 @@
       "qualified_source_sha256": "8bf64f34107e0d54395b9692b2496c2db1878fe5f546d40079c8fe1ec8649c13",
       "target": "jdk.m3.collections.M3LazyTreeMapTest",
       "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3LazyTreeMapTest.java",
-      "target_sha256": "fee5f625022c58e0774380121ce5a653fea936334e0fe4be0a2e81a7fdf5f99a",
+      "target_sha256": "5b0846febfcd119a7d144c96ec6e682dc749567e32fdbcd41d1d681edb4f945a",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -715,7 +715,7 @@
       "qualified_source_sha256": "742fc8c8f22fc210e2d1b6353c7fd08c2ab5782ccaed788589dc97147e5530c5",
       "target": "jdk.m3.collections.M3LazyValueStateSelfTest",
       "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3LazyValueStateSelfTest.java",
-      "target_sha256": "e367a234f8dbb0c628443e3afec7446553f2168c50b515da96b7afa43246b7d2",
+      "target_sha256": "13fc6452134664efd81f03d79a9a04f06fe234194c6315cf92e84e24e1f62352",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -729,7 +729,7 @@
       "qualified_source_sha256": "ea40cb6c48f4786ba0b23eaea75c7b5c2af463f3c13baac48a42b228e450c5ef",
       "target": "jdk.m3.collections.M3MapContractTest",
       "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3MapContractTest.java",
-      "target_sha256": "9c94e112c9f40731ad4d05273605e6efc3f369f79f578c67cf2fed7445071cd2",
+      "target_sha256": "78112637e785c307eedb5cda6e7989a2225171cdfea3f72b0183214a15c24fd7",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -743,7 +743,7 @@
       "qualified_source_sha256": "6520ae5984c1fcd3fcd0c40d4ab82b84796afff2688ec6fb1df5c3dc5884fefb",
       "target": "jdk.m3.collections.M3SequenceContractTest",
       "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3SequenceContractTest.java",
-      "target_sha256": "665e431f88c277545a2b49cfa58d964afb02583a558f7ef886a5e744e5343d72",
+      "target_sha256": "5f05e0555d7e3af14322a544a1713d1560d80776881924eec3c91800504610ac",
       "disposition": "TARGET_SOURCE",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia"
@@ -755,7 +755,7 @@
       "source_blob_sha1": "ab51de6af292a2286ef3326398994a89b50725fc",
       "target": "jdk.m3.collections.M3FilteredLists",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java",
-      "target_sha256": "7a9d818d38beae4df178317f7913050b47d6442e85f1ef5d5873a0df89262101",
+      "target_sha256": "12bdc2271eee96fb0d24ec188cbcbe37d6c110bf3bb61682715f1af7d5984333",
       "disposition": "ADDITIVE_RECIPE_SEALED_CANDIDATE_NOT_JDK_BACKEND_PROMOTION",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia",
@@ -788,7 +788,7 @@
     {
       "target": "jdk.m3.collections.M3LongHashSet",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LongHashSet.java",
-      "target_sha256": "8d1226aac98d797e164c1844886435df3602933c287db597eb2fe275936330eb",
+      "target_sha256": "e9498cbebbf610afb5cff65606f5e9784a4280c7a6cc0e479e25128f1470b99a",
       "retained_from_target_commit": "7fad958f073602247b1c34a8fd756b1a0ecd3edb",
       "canonical_recipe": "jdk.internal.m3.rewrite.M3Jdk21PrimitiveCollectionsV1",
       "canonical_recipe_commit": "38ea4f44572b4711489d1291c898f2aac52bb054",
@@ -799,7 +799,7 @@
     {
       "target": "jdk.m3.collections.M3LongLongHashMap",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LongLongHashMap.java",
-      "target_sha256": "a1b007cd7676fe6fced9fe8330b39f402c6355d29138e0e84185becaa47d7c36",
+      "target_sha256": "23a3c156a302c3f4785b9bae12fd2b0b477e43c328fc48e843f100f383d513c4",
       "retained_from_target_commit": "7fad958f073602247b1c34a8fd756b1a0ecd3edb",
       "canonical_recipe": "jdk.internal.m3.rewrite.M3Jdk21PrimitiveCollectionsV1",
       "canonical_recipe_commit": "38ea4f44572b4711489d1291c898f2aac52bb054",
@@ -810,7 +810,7 @@
     {
       "target": "jdk.m3.collections.M3LongPriorityQueue",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LongPriorityQueue.java",
-      "target_sha256": "d42f4566595b7e95bcc573348ebf7968ebe8b53f7a68a1c8de3a2aeaa7eca04c",
+      "target_sha256": "11c4de2e3385518ecc70a245a2942f8a0c05fb2469b6fbede76c7af231bcbb8b",
       "retained_from_target_commit": "7fad958f073602247b1c34a8fd756b1a0ecd3edb",
       "canonical_recipe": "jdk.internal.m3.rewrite.M3Jdk21PrimitiveCollectionsV1",
       "canonical_recipe_commit": "38ea4f44572b4711489d1291c898f2aac52bb054",
@@ -829,7 +829,7 @@
     "Preserve the global MIndex/String/AST name-mapping file; this independently built module owns its collection mapping."
   ],
   "installed_source_manifest": "m3/collections/qualification/installed-source-receiving-20261008.tsv",
-  "installed_source_manifest_sha256": "063ae7c1857cf683464160408cfab94c9e63503d40eabc4adc630b2e668815e1",
+  "installed_source_manifest_sha256": "3719c9fdc78676a2c23ce1131792608889c377224ca4ceaddcec4945c0fe9042",
   "global_mapping_retained_byte_for_byte": "m3/docs/name-mapping.json",
   "historical_20261007_installed_source_manifest_sha256": "81d3ed294dcadf774a43b797ac8d6db51821ee1c026580d5e95b727a258e7af2",
   "current_target_baseline": "439b767c7c92e2751f7f6a47c012f96472420905",
@@ -918,7 +918,7 @@
     {
       "target": "jdk.m3.collections.M3LongList",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LongList.java",
-      "target_sha256": "7da7f46ea6bfb6dee64fe8a4eaeb914b07e537d10c3cb08ed20f440b1cfcd2dd",
+      "target_sha256": "2f9c20e17f453dabfd1fa7f1f232caf8ef65faceac823f8d65d33e9c45aa66bf",
       "disposition": "CURRENT_INTERFACE_ADDITIVE_SUPERINTERFACE",
       "target_commit": "439b767c7c92e2751f7f6a47c012f96472420905",
       "canonical_reusable_source_home": "hsoliwal/com.synexia",
@@ -927,7 +927,7 @@
     {
       "target": "jdk.m3.collections.M3LongListSpliterator",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3LongListSpliterator.java",
-      "target_sha256": "c456dc750c27dc100df3a032a422902288cb155645996703a9565ce85bcb2003",
+      "target_sha256": "4376b05a46f788ac17d3e7521886b5ab4bc17681c37aba644e21e1ab6537404b",
       "disposition": "CURRENT_TARGET_OWNER_PRESERVED_BYTE_EXACT",
       "target_commit": "439b767c7c92e2751f7f6a47c012f96472420905",
       "canonical_reusable_source_home": "hsoliwal/com.synexia",
@@ -936,7 +936,7 @@
     {
       "target": "jdk.m3.collections.M3ObjectIdentityMap",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3ObjectIdentityMap.java",
-      "target_sha256": "0e6e12dd48b62b8606de078e25a0b3a75b6d741d11bf9b5927d730d2f0110bd3",
+      "target_sha256": "5a842b880227b9bb63bf38554fc6114000558ac9c4483086d4cd43010f26ffd0",
       "disposition": "CURRENT_TARGET_OWNER_PRESERVED_BYTE_EXACT",
       "target_commit": "439b767c7c92e2751f7f6a47c012f96472420905",
       "canonical_reusable_source_home": "hsoliwal/com.synexia",
@@ -945,7 +945,7 @@
     {
       "target": "jdk.m3.collections.M3ObjectIdentitySet",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3ObjectIdentitySet.java",
-      "target_sha256": "6d6b6f58113a44438c721cd645efa45ac6c0f63842b164ebb33a94dce4066e3d",
+      "target_sha256": "b9859f4acdf3e138c1029123a3f971b04c43d98a6be28dddd2f879ff481c39e3",
       "disposition": "CURRENT_TARGET_OWNER_PRESERVED_BYTE_EXACT",
       "target_commit": "439b767c7c92e2751f7f6a47c012f96472420905",
       "canonical_reusable_source_home": "hsoliwal/com.synexia",
@@ -954,7 +954,7 @@
     {
       "target": "jdk.m3.collections.M3EnumLongMap",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3EnumLongMap.java",
-      "target_sha256": "8be53dd0b4ccd1e0f226d4ad7a667bd986b21e51d150bea6f8ddae072bdf4966",
+      "target_sha256": "f6b16429b822f1ac3bfd43652d7f3e09efc1028ddef8b72e12816a6ee39a823d",
       "disposition": "CURRENT_TARGET_OWNER_PRESERVED_BYTE_EXACT",
       "target_commit": "439b767c7c92e2751f7f6a47c012f96472420905",
       "canonical_reusable_source_home": "hsoliwal/com.synexia",
@@ -981,7 +981,7 @@
     "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V1",
     "receiver_baseline": "677437be295b23f7ccf7409be287008944d0e8b0",
     "successor_receipt": "qualification/tools4j-unix-source-successor-20261019.tsv",
-    "successor_receipt_sha256": "a802b36b031d2280c72e148baf93e0977a422ef1f07525f349526a2e2b31e46b",
+    "successor_receipt_sha256": "2e5b2593fef1f70ccf5b8a4d8b95a604ea85025b6ab8e3f1f4b3fcc234923704",
     "receipt_columns": [
       "path",
       "inherited_manifest_sha256",

@@ -21,25 +21,25 @@
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/LUCENE_OWNER_001.json",
     "relative_path": "evidence/LUCENE_OWNER_001.json",
     "bytes": 5371,
-    "sha256": "e64793f43586ad6dfb27df426c37f4ae1ba0f7205cc3f0be1ee92a5a50d7ee34"
+    "sha256": "a9dd5a13b0c2e827249ad12053792c5baac45cca5753c357e4023a2fcde51be9"
   },
   {
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/LUCENE_OWNER_001.log",
     "relative_path": "evidence/LUCENE_OWNER_001.log",
     "bytes": 4578,
-    "sha256": "7319155f1f24801fc21b17ef2111086fc359db10382475cca65452d9b968df86"
+    "sha256": "2ffa516981637795b3b0c22820f301801adc75302e4db98fb5b0e371226de1c1"
   },
   {
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/LUCENE_OWNER_001_INPUTS.json",
     "relative_path": "evidence/LUCENE_OWNER_001_INPUTS.json",
     "bytes": 2314051,
-    "sha256": "9490dddc38c2b81beab49bc6a5690e8666fb210497f5f01e1ee0cd6f39e50fd2"
+    "sha256": "c84402379af34b76fb26fc8f018f998a30b2adcacd12cf0e61e8b95a7178763b"
   },
   {
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/LUCENE_OWNER_001_READBACK.json",
     "relative_path": "evidence/LUCENE_OWNER_001_READBACK.json",
     "bytes": 2314051,
-    "sha256": "9490dddc38c2b81beab49bc6a5690e8666fb210497f5f01e1ee0cd6f39e50fd2"
+    "sha256": "c84402379af34b76fb26fc8f018f998a30b2adcacd12cf0e61e8b95a7178763b"
   },
   {
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/LUCENE_INSTALLED_ARTIFACTS.json",
@@ -51,7 +51,7 @@
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/run_lucene_gate.py",
     "relative_path": "run_lucene_gate.py",
     "bytes": 5461,
-    "sha256": "787c3440c9f80fcaf9c1fa020d3adca0c7a5c4ad37e787b4219b2f2ae864cebf"
+    "sha256": "defe508d8cec5b3952254c1d33addd15c07f194af0edfae82cf3140003f782f1"
   },
   {
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/BUILD_REPORT.json",
@@ -123,7 +123,7 @@
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/lucene/.m3/current-jmods/build.py",
     "relative_path": "forks/lucene/.m3/current-jmods/build.py",
     "bytes": 21511,
-    "sha256": "584342e4696b57872419feb12551b6f755084a2a4d21d3c7b11a0261f6885b3c"
+    "sha256": "d8136b255432f3778ece54f1d27933e12b46fd5b31f0a7418aabf961f0c10842"
   },
   {
     "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/lucene/.m3/current-jmods/source-lock.json",

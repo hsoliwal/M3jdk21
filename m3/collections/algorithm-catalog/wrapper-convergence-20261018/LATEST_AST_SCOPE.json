@@ -29,12 +29,12 @@
   "receipts": [
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/ast-hierarchy-20261018/candidate/SDK_INPUTS.tsv",
-      "sha256": "c98614a008da80c4dbee9b1f38d0d415afa9382c43ace8ec9b5a896efdf1f6b3",
+      "sha256": "129cf652ff782c48e99325a642adbc02305aaa4249fd85664527ce2774664836",
       "scope": "actual hierarchy SDK lane; separate from collection proof"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/ast-hierarchy-20261018/candidate/SDK_RESULTS.tsv",
-      "sha256": "2c64e67357632d5651b43432babd86c89bd0d1f28348e39d636d83f835a01e30",
+      "sha256": "dbe94b628a9a136e51110ca27a9dc78f5e84d9e046bbd1689102a41aef5d5239",
       "scope": "actual hierarchy SDK lane; separate from collection proof"
     },
     {
@@ -44,12 +44,12 @@
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/ast-hierarchy-target-20261018/candidate/SDK_INPUTS.tsv",
-      "sha256": "8cc628f1638de3061dbff31712daa2aa2253b91e227db05d7df98dd2a99425a7",
+      "sha256": "651e541222c9872f3ed2efaab28ff899e8846ca2cfe979d1db8fc00cc488ee9b",
       "scope": "actual hierarchy SDK lane; separate from collection proof"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/ast-hierarchy-target-20261018/candidate/SDK_RESULTS.tsv",
-      "sha256": "fc66f3eebc58fcb42f401a644fb998b6d705790ae81618e899321f5f87a16461",
+      "sha256": "ee41ae8b854d19e9e29dce4853d13152773d2c27147b14c00b31634be709c928",
       "scope": "actual hierarchy SDK lane; separate from collection proof"
     },
     {

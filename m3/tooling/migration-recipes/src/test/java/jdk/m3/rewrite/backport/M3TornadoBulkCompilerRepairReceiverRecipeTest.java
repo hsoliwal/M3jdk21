@@ -26,7 +26,7 @@ final class M3TornadoBulkCompilerRepairReceiverRecipeTest {
         var owner = new M3Jdk21HashPinnedTextSnapshotRecipe(CRATE);
         assertEquals(List.of(TARGET), owner.targetPaths());
         assertFalse(new M3TornadoBulkCompilerRepairReceiverRecipe().promotionAuthority());
-        assertEquals("69a7d1f10be7ec90d03fdd12ab1f7948423ebe37482dfd9e7fa3fcbe2af8e78c",
+        assertEquals("92cb71dcd68edbf3facd5d25c906fd81a53c038b10b757dbb4cd56aae94964e2",
                 manifestPreimage(resource("manifest.tsv")));
     }
 

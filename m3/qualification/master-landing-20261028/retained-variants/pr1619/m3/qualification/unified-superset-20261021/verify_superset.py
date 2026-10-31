@@ -25,7 +25,7 @@ DONORS = {
     1614: "4076ca2133436a90f95efb27096743ba066eff64",
 }
 MERGED_ARRAY = "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java"
-MERGED_SHA = "b93a1e746271957e9b3105c3ac1a5db87ae09818"
+MERGED_SHA = "01807d57c252db5cf68927455a9f99e689406ad5"
 RECEIVER = "m3/qualification/unified-superset-20261021"
 RECIPE = "m3/tooling/shared-frontend/recipe-custody/datasets/m3-superset-array-20261021"
 ADDITIONS = {

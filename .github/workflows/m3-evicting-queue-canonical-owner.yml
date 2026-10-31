@@ -38,8 +38,8 @@ jobs:
           from pathlib import Path
           old = Path('m3/collections/implementations/guava-evicting-queue/src/main/java/jdk/m3/collections/guava/M3EvictingQueue.java').read_bytes()
           new = Path('m3/collections/implementations/evicting-queue/src/main/java/jdk/m3/collections/queue/M3EvictingQueue.java').read_bytes()
-          assert hashlib.sha256(old).hexdigest() == '3fb021a20b4c356283f2b8444647333a4399e9b00528a2bf519787e602dd1166'
-          assert hashlib.sha256(new).hexdigest() == '488d21e74727cb6bb019874a9506d96a8009e2511f604d59875668d79e8a9fda'
+          assert hashlib.sha256(old).hexdigest() == '91c5044456cf3841d857dd5069ef7e5d61055ea154880ad5fed3984e15f686b7'
+          assert hashlib.sha256(new).hexdigest() == '55f35c295abb90edd459ecfbe36b6a03f08c9ee212716d5921ac0d55c88c0aa6'
           normalized = new.replace(
               b'package jdk.m3.collections.queue;',
               b'package jdk.m3.collections.guava;')

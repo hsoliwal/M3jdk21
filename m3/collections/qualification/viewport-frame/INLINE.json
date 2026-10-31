@@ -6,9 +6,9 @@
   "named_recipe": "jdk.internal.m3.ViewportFrameInline20261024",
   "source": "m3/collections/src/main/c/m3maskviewport.c",
   "before_git_blob": "3a0a4e8f789962f6682f6d7ba19fc335bc910528",
-  "after_git_blob": "f29d081e28ba8ccc4516bd28c09e738b7a408a76",
+  "after_git_blob": "b0d387f2612a315c6b53a50a814432c916ca61c8",
   "before_sha256": "10e8892a4a9b07a4e7fb3f53a2a1a3a4154648e4f1e013da3a0a4f600873d021",
-  "after_sha256": "388f607244b46432ac632fd05c52c1fe95b74e9561aaf0b9bcb04973b9bc9c9c",
+  "after_sha256": "c5478fed7d63b2569c0c77aada1e4015b59112944216c04ca36463aadda67034",
   "actual_local_text_sdk": {
     "tests": 7,
     "failures": 0,

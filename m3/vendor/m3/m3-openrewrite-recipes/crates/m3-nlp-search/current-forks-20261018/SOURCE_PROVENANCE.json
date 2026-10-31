@@ -10,7 +10,7 @@
     "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java": "9d0788d3717e017d58345c5c3e62022c2915a3c8",
     "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
     "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java": "d24729950508857280ea1b56d4e930f05137ec85",
-    "synexia-openrewrite-recipes/src/main/java/com/m3/rewrite/jmod/M3ModuleDescriptorRecipe.java": "302a06c5a79ecb6fd26c988dcf1fb9147e9198e1"
+    "synexia-openrewrite-recipes/src/main/java/com/m3/rewrite/jmod/M3ModuleDescriptorRecipe.java": "9882f9773cc299ef80477fbf4de080ba763ab781"
   },
   "lucene": {
     "repository": "https://github.com/hsoliwal/lucene",
@@ -35,12 +35,12 @@
     "canonical_recipe_tree": "1ecb64d6050d0270b9b0ca433224600d9c53c955",
     "java_sources": 113,
     "source_recipe": "m3-nlp-current-forks-ast-restore-20261018",
-    "source_manifest_sha256": "436b0ce1248675b5eeee4c3c204a3e13b77efced6d88f323ea35663d63f4dcd9",
+    "source_manifest_sha256": "811980904113024e9c8a3539dee571ae5bbbb78cfba896a14554d7704bf7136a",
     "new_optional_module": "jdk.m3.compiletime"
   },
   "receiver_sdk_preimages": {
-    "M3HashPinnedJavaSnapshotRecipe.java": "c4bbf3136d36608c80452226f0a59a365a065023b13c34b7ef6ca0dc2ed54e5c",
-    "M3ScopeInference.java": "17228a698f917bfabb46f8c4a20b50822820516fbc6e9ad71d52587a1918e730",
+    "M3HashPinnedJavaSnapshotRecipe.java": "0c3fba650e4fad90639f38345fcd1c37f0d9b002f2a172d329262db6ecda784b",
+    "M3ScopeInference.java": "af67395b755c045b62a0d5c2ab0f538fe9118461330eb8901c4bcbd60910fae8",
     "M3EditScope.java": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
   }
 }

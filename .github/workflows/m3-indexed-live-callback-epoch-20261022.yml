@@ -48,10 +48,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(sha256sum baseline/m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java | cut -d' ' -f1)" = '84e9437c27f59060543cd4728a5222b489fe98f7e39068e66f4431b7ee00867f'
+          test "$(sha256sum baseline/m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java | cut -d' ' -f1)" = 'c7b8f004d7702874d4353a021eb9297df207899c11556b966f6aa629f5920439'
           printf '%s\n' \
             '2e5c00296e26186c071fc47d2e3bcd16315825c8404bf271eafa8cd597c268af  m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java' \
-            'dd709c6a87a629290126b42d8123f2ce039351846950d3a0b371f5e7b1c93e03  m3/collections/src/test/java/jdk/m3/collections/M3IndexedLiveViewPreparationContract.java' \
+            '10f556673813bed4def929cd29a10063bfee430ceafe3f97c309a5a66fa3c5c0  m3/collections/src/test/java/jdk/m3/collections/M3IndexedLiveViewPreparationContract.java' \
             | sha256sum -c -
       - name: Compile original Java 21 collection owners and both differential contracts
         shell: bash

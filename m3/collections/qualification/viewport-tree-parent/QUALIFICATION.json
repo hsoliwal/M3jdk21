@@ -15,8 +15,8 @@
     "sha256": "1e719d48bbaa9fa4c8065b16848c6bd770d13f661d2e823d192e212da65b2478"
   },
   "test": {
-    "git_blob": "1140abde95743dd90e9e33a8a85ff0f034ef9321",
-    "sha256": "2d891a6bd14007f003dc34b53dd548bcae55341839c26db400fca5e7c3da29b0"
+    "git_blob": "ca7be6864f3cdb0e0970f3dd7de40042a40e7465",
+    "sha256": "08609e56a488a76f8f4ec35ff70d73941ed3cdb3445d39b631fdecb625ed71bf"
   },
   "java21_parser": {
     "artifact": "org.openrewrite:rewrite-java-21:8.17.1",
@@ -29,8 +29,8 @@
     "failures": 0,
     "skipped": 0,
     "canonical_java_recipe_blob": "98138cb6734ad86e3f77b8722fa5ff459842e841",
-    "canonical_scope_blob": "9174dd681f0d75b5086fc19904a71524a03972dc",
-    "canonical_junit_blob": "e69993797978f800a4d1b01b55093dc8dde16514",
+    "canonical_scope_blob": "d41d6dc93ec0e176f6d215d23e3b6a316a9e4a32",
+    "canonical_junit_blob": "bd3c4ead8f188aaf3055447cb729e583ed8d6a18",
     "real_java_compilation_units": true,
     "real_sdk_results": 2,
     "fixed_point": 0,

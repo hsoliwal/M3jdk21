@@ -17,7 +17,7 @@ import subprocess
 HERE = Path(__file__).resolve().parent
 CURRENT = "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2"
 CURRENT_ROOT = "0812573f02908d8078d13f5f49346865cdf1c0e0"
-INPUT_EPOCH_SHA = "fb413e58be72aaffa1e91149479ac159c6d4b961101eed4ab10f1c99df0b6711"
+INPUT_EPOCH_SHA = "973be97f762b46278f16c2bae6d887f2bc407110f333fe7ae0e7070e30cbe118"
 VALIDATOR = "m3/migration/migration.py"
 SCHEMA = "m3/docs/name-mapping.schema.json"
 PATHS = ("m3/docs/name-mapping.json", "m3/docs/jcc-source-handoff.md",

@@ -1,5 +1,5 @@
---- actual2779/m3/core/src/com/m3/text/M3BigString.java
-+++ canonical12347-immutable-head/m3/core/src/com/m3/text/M3BigString.java
+--- actual2779/m3/core/src/jdk/m3/text/M3BigString.java
++++ canonical12347-immutable-head/m3/core/src/jdk/m3/text/M3BigString.java
 @@ -8,6 +8,7 @@
  import java.util.Objects;
  import java.util.regex.Matcher;

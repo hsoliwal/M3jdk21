@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parent
 SOURCE_LINEAGES = {
     "frozenRecipeInput": {
         "commit": "f04fbac91a7891e64b77c7b24cef1ab75ec88144",
-        "gitBlob": "9174dd681f0d75b5086fc19904a71524a03972dc"
+        "gitBlob": "d41d6dc93ec0e176f6d215d23e3b6a316a9e4a32"
     },
     "branchCanonicalRefusal": {
         "commit": "24bdaa2c54d7ff2da53f3edfcf068ddd4ffa70f7",
@@ -24,7 +24,7 @@ SOURCE_LINEAGES = {
     },
     "publicHistoricalRefusal": {
         "commit": "0000dd38d8b7ea7d49173c0adee02b08563954c1",
-        "gitBlob": "2768fe5846c2c67c52e872a97f735a0fb4d0d69a"
+        "gitBlob": "a993ed2192188729cefeb45d6bcb5e49594e19b0"
     }
 }
 RESOURCE = "src/main/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020"
@@ -35,16 +35,16 @@ METHODS = ["bothPartialStatesRoundTripAndReachFixedPointsInBothOrders",
 SUITES = {SUITE: METHODS}
 OWNER_GIT = {
     "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
-    "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java": "9174dd681f0d75b5086fc19904a71524a03972dc"
+    "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java": "d41d6dc93ec0e176f6d215d23e3b6a316a9e4a32"
 }
 SCOPE_OWNER = "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java"
-C_BEFORE_SHA = "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579"
-C_AFTER_GIT = "8b7d2adb648d98ef8654e5ab4eb0f03560a982c8"
-C_AFTER_SHA = "e95b11ebad61c551bc25df3276fa560a613d476bcee2d865ac272bd35bdade9d"
+C_BEFORE_SHA = "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0"
+C_AFTER_GIT = "e9a997b3d7293460d8dae8471aefa4d964edeee3"
+C_AFTER_SHA = "858e5b5e05b8e3fea57eb30128a2265d0ca3403fa98d44a35addef73c582b078"
 TARGET_PATHS = list(OWNER_GIT)
 KEEP_PATHS = [name for name in TARGET_PATHS if name != SCOPE_OWNER]
 HISTORICAL = "src/test/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/historical/M3ScopeInference.java.txt"
-HISTORICAL_GIT = "2768fe5846c2c67c52e872a97f735a0fb4d0d69a"
+HISTORICAL_GIT = "a993ed2192188729cefeb45d6bcb5e49594e19b0"
 DIVERGENT = "src/test/resources/jdk/internal/m3/rewrite/canonical-scope-boundary-20261020/divergent/M3ScopeInference.java.txt"
 DIVERGENT_GIT = "d24729950508857280ea1b56d4e930f05137ec85"
 RECEIVER_OUTPUTS: dict[str, str] = {}
@@ -64,8 +64,8 @@ REQUIRED_PATHS = sorted([
     *[RESOURCE + "/" + stage + "/" + name for stage in ("before", "out") for name in TARGET_PATHS],
 ])
 ORIGINAL_GIT = {
-    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java": "78d5fb68f13872164973a8918cc7886c5f548bca",
     "pom.xml": "d79867bcc09ad6329e12418e15907e54b8ab025f",
     HISTORICAL: HISTORICAL_GIT,
     DIVERGENT: DIVERGENT_GIT,

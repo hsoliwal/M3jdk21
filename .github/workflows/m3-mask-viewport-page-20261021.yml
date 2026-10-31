@@ -34,8 +34,8 @@ jobs:
         run: |
           printf '%s  %s\n' \
             '99e8c061c60c3514ce9ec1b19e3a6afd618a32bd3f6841b36f931ca64383ac0c' 'm3/collections/src/main/java/jdk/m3/collections/M3MaskViewportKernel.java' \
-            '3a17cb6e0cebabdd77181bf102a558a489642cfc9945b97c6a85950162cc3a25' 'm3/collections/src/test/java/jdk/m3/collections/M3MaskViewportPageContract.java' \
-            '39dcb95ef2c4edc9f1479d728bfeac0fa7976aeb89ea5923cf4430d5cfb07821' 'm3/collections/src/test/java/jdk/m3/collections/M3FrameJavaContract.java' | sha256sum -c -
+            '81fa9fc5750b40c9580dad9a3e92632c1e59bb738006a01647b22d91ebe8cd4e' 'm3/collections/src/test/java/jdk/m3/collections/M3MaskViewportPageContract.java' \
+            'b80df74e977a8ea67e8809e5ef8c0fd7ffe6c99a28bbafcde57b554a96702b0f' 'm3/collections/src/test/java/jdk/m3/collections/M3FrameJavaContract.java' | sha256sum -c -
       - name: Compile source owners and run visible-page oracle
         shell: bash
         run: |

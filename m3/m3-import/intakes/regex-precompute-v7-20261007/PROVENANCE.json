@@ -16,14 +16,14 @@
     {
       "name": "export.tsv",
       "bytes": 8547,
-      "sha256": "ae72faedec7913ee25e74f4592b06bc9b6e31e80800587df1629619f91b20c9e",
-      "gitBlob": "7bc78e7c6f65ccd1f56cf6f06907512a5a50fa36"
+      "sha256": "002c9dd9dd192bb1b23a31e0546a5bcf0165a109afb8c2c20c5155e8180d18c3",
+      "gitBlob": "0e1d2ba77403ebf7ba7a851b84493dff8b1a7cac"
     },
     {
       "name": "SOURCE_CUSTODY.json",
       "bytes": 29478,
-      "sha256": "97df0a295c9bb3c32ff71a3df6380c5beceb21e4528c218baa12cd4c39df0fb4",
-      "gitBlob": "dc3b25ff91f9f32c66e9a9989992acf0d6bc9721"
+      "sha256": "d77b8036dd8cbbae3a3a852071fd0050c8c623b710f45d5e01188c92ae9bf918",
+      "gitBlob": "5f5e88dabb017ec2b0307a5e40e8c907f3f51311"
     },
     {
       "name": "FOSS_REUSE_DECISION.tsv",

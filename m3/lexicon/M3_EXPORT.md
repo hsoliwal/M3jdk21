@@ -4,7 +4,7 @@ Synexia is the canonical converged donor for language, translation, SI-unit,
 acronym, proper-name, frequency, n-gram and number mappings. M3JDK consumes an
 explicit export; it does not rename, reallocate or infer a replacement lexicon.
 
-`m3/lexicon/synexia-source-manifest.tsv` is the reviewed source-family map. It
+`m3/lexicon/m3-source-manifest.tsv` is the reviewed source-family map. It
 keeps the Synexia path, source identity field, mapping fields, and target
 precompute owner visible. Its final `precompute_fields` column is the v2
 requirement map for owner payloads. It is a catalog, not a license to
@@ -83,7 +83,7 @@ survive without being falsely presented as `java.lang.String` facts. Duplicate
 keys, non-object values, non-finite numbers and payloads over 1 MiB are
 rejected. Legacy input receives the explicit canonical payload `{}`.
 The field-level donor mapping is maintained in
-`m3/lexicon/synexia-precompute-field-map.tsv`; it covers the `IndexWordFacts`,
+`m3/lexicon/m3-precompute-field-map.tsv`; it covers the `IndexWordFacts`,
 `IndexWordSignalEnrichment`, `IndexWordSignalProfile`, `IndexWordSignalFlags`,
 and reviewed LangDex primitive profile families without making their values part
 of `java.lang.String`. Its
@@ -108,8 +108,8 @@ escapes; valid surrogate pairs are emitted as their Unicode scalar. The image
 itself remains the authoritative UTF-16LE payload.
 
 ```text
-python3 m3/runtime-integration/export-synexia-lexicon.py \
-  --source-manifest m3/lexicon/synexia-source-manifest.tsv \
+python3 m3/runtime-integration/export-m3-lexicon.py \
+  --source-manifest m3/lexicon/m3-source-manifest.tsv \
   --records /operator/synexia-snapshot/records.tsv \
   --output /operator/m3jdk-lexicon/export \
   --source-repository https://github.com/hsoliwal/com.synexia \
@@ -207,7 +207,7 @@ and post-export mutation refusal.
 
 ## Proper-name instance-index contract
 
-The source mapping is `m3/lexicon/synexia-instance-index-contract.tsv`. At Synexia pin `8dda47de4613d1206bef3c175a0f7edf3335ecbc`, `synexia-unicodex/CONCEPTS_VS_PROPER_NOUNS.md` documents the semantic distinction: proper-name instances sit outside the X-spine and can reference concepts. The cited C++ paths and an executable Synexia `InstanceIndex`/`InstanceRecord` API are absent at that pin; no proper-name dataset is supplied. `M3InstanceIndexPrecompute` is an M3-owned target proposal, not a port of a Synexia runtime contract. Its record identity, `nameUtf8` field, UTF-8 checks, ASCII-only A–Z folding, metadata handling, duplicate policy, and forward/reverse lookup behavior require an exact operator dataset and separate review. Proper-name records and owner precompute fields are not currently admitted to the generic Synexia lexicon export; add them only under a pinned operator source, license, and reviewed serialization contract. No second lexical interner or title catalog is admitted; title support requires a separately pinned canonical source, license, and identity contract.
+The source mapping is `m3/lexicon/m3-instance-index-contract.tsv`. At Synexia pin `8dda47de4613d1206bef3c175a0f7edf3335ecbc`, `synexia-unicodex/CONCEPTS_VS_PROPER_NOUNS.md` documents the semantic distinction: proper-name instances sit outside the X-spine and can reference concepts. The cited C++ paths and an executable Synexia `InstanceIndex`/`InstanceRecord` API are absent at that pin; no proper-name dataset is supplied. `M3InstanceIndexPrecompute` is an M3-owned target proposal, not a port of a Synexia runtime contract. Its record identity, `nameUtf8` field, UTF-8 checks, ASCII-only A–Z folding, metadata handling, duplicate policy, and forward/reverse lookup behavior require an exact operator dataset and separate review. Proper-name records and owner precompute fields are not currently admitted to the generic Synexia lexicon export; add them only under a pinned operator source, license, and reviewed serialization contract. No second lexical interner or title catalog is admitted; title support requires a separately pinned canonical source, license, and identity contract.
 
 ## LangDex source-envelope intake boundary
 

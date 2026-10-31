@@ -475,24 +475,24 @@ ledger](coverage.md) and [native build/test routes][native-readme] for remaining
 work. Historical receiver receipts retain their original scope and execution
 status; linking them does not rerun them or advance current target acceptance.
 
-[list]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java
-[deque]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java
-[collection]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/com/m3/collections/M3LongCollection.java
-[sequence]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/com/m3/collections/M3LongSequence.java
-[list-interface]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/com/m3/collections/M3LongList.java
-[stack]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/com/m3/collections/M3LongStack.java
-[queue]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/com/m3/collections/M3LongQueue.java
-[deque-interface]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/com/m3/collections/M3LongDeque.java
-[split]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/com/m3/collections/M3LongListSpliterator.java
-[iterator]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/com/m3/collections/M3LongIterator.java
-[factory]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/com/m3/collections/M3Collections.java
+[list]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/jdk/m3/collections/M3LongArrayList.java
+[deque]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/jdk/m3/collections/M3LongArrayDeque.java
+[collection]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/jdk/m3/collections/M3LongCollection.java
+[sequence]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/jdk/m3/collections/M3LongSequence.java
+[list-interface]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/jdk/m3/collections/M3LongList.java
+[stack]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/jdk/m3/collections/M3LongStack.java
+[queue]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/jdk/m3/collections/M3LongQueue.java
+[deque-interface]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/jdk/m3/collections/M3LongDeque.java
+[split]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/jdk/m3/collections/M3LongListSpliterator.java
+[iterator]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/jdk/m3/collections/M3LongIterator.java
+[factory]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/jdk/m3/collections/M3Collections.java
 [module]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/main/java/module-info.java
 [pom]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/pom.xml
-[list-tests]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/com/m3/collections/M3LongArrayListTest.java
-[deque-tests]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/com/m3/collections/M3LongArrayDequeTest.java
-[differential]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/com/m3/collections/M3PrimitiveCollectionDifferentialTest.java
-[jdk-tests]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/com/m3/collections/M3JdkShapedPrimitiveCollectionsTest.java
-[factory-tests]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/com/m3/collections/M3FactoryContractTest.java
+[list-tests]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/jdk/m3/collections/M3LongArrayListTest.java
+[deque-tests]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/jdk/m3/collections/M3LongArrayDequeTest.java
+[differential]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/jdk/m3/collections/M3PrimitiveCollectionDifferentialTest.java
+[jdk-tests]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/jdk/m3/collections/M3JdkShapedPrimitiveCollectionsTest.java
+[factory-tests]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/collections/src/test/java/jdk/m3/collections/M3FactoryContractTest.java
 [native-readme]: ../../m3/collections/README.md
 [backend]: ../../m3/collections/M3_JDK_SHAPED_BACKENDS.md
 [product]: ../../m3/collections/M3_COLLECTION_PRODUCT_SCOPE.md

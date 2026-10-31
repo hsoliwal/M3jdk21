@@ -61,7 +61,7 @@ def execute(label, command):
 
 
 def main():
-    assert sha(CRATE / 'SOURCE_SEALS.json') == '8fbab5e40413771d432d5016964f5bd71d95bf4043805bac828d82bd92200bb0'
+    assert sha(CRATE / 'SOURCE_SEALS.json') == '49261c5ff0b2de1636d26fb01c6d64f3dc3dc9a3a31583aea776169e6bb66d4e'
     sdk = read('proof/sdk-001-offline/RESULT.json')
     source_inputs = read('proof/sdk-001-offline/SOURCE_INPUTS.json')
     for row in source_inputs:
@@ -78,8 +78,8 @@ def main():
     assert emitted_sdk['exit_code'] == 0 and emitted_receiver['exit_code'] == 0
     original_pom = 'preimages/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml'
     corrected_pom = 'proof/sdk-001-offline/receiver/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml'
-    assert sha(CRATE / original_pom) == '7539cf81d2d7a7b30bff97ce2812a7e67f4e3593463a898aa38c8e6b0240dfa0'
-    assert sha(CRATE / corrected_pom) == '6553565c8dd14a857e796f741f3f8f8e7cbf3edda11df58b8dcd8a53e78e5600'
+    assert sha(CRATE / original_pom) == 'ff8b2c1db5fffa1a9013fc863a1f5dac337b2cb633c07d513339b57fcce40b80'
+    assert sha(CRATE / corrected_pom) == '4b864a178251e0f853cc8d2fe8027962bf831f950d9b83a9d095496ae60be158'
     failures = read('provenance/BASELINE_FAILURE_CLASSIFICATION.json')['attempts']
     assert [x['executed_tests'] for x in failures] == [0, 7, 0]
     offline_one = read('proof/incumbent-offline-001/RESULT.json')

@@ -24,7 +24,7 @@ Synexia provenance and may not infer promotion from custody.
 Verification:
 
 ```bash
-mvn -B -ntp -f m3/synexia-import/pure-int-recipe-custody/pom.xml clean verify
+mvn -B -ntp -f m3/m3-import/pure-int-recipe-custody/pom.xml clean verify
 ```
 
 The test verifies Git-blob identity for every custody source, recipe atom ordering,

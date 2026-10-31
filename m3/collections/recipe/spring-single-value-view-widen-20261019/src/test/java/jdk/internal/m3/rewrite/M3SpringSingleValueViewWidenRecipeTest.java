@@ -60,8 +60,8 @@ final class M3SpringSingleValueViewWidenRecipeTest {
     private static final String NAME = "jdk.internal.m3.SpringSingleValueViewWiden20261019";
     private static final String TARGET =
             "m3/collections/implementations/spring/src/main/java/jdk/m3/collections/spring/M3SingleValueMapView.java";
-    private static final String BEFORE_SHA = "6f33bb30aa4c31a9d17191720d801f0298dccea25dba4a34265db1117293d511";
-    private static final String AFTER_SHA = "f79e36374fac2033d9292e4806254272faabdc54fff9d4fc6ebd8bbcba0f681b";
+    private static final String BEFORE_SHA = "9b5fca3e124034c6e1994cc3f97339e0c98159a77db2706298024b526e434211";
+    private static final String AFTER_SHA = "81b405b382a65ab16edeca1742463f8a74b2d96dbd0c6320da802f02af0b2a71";
     private static final int AFTER_BYTES = 10873;
     private static final String TEMPLATE = "M3SingleValueMapView.java.txt";
     private static final String PREIMAGE = "M3SingleValueMapView.v1.java.txt";

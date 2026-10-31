@@ -1,5 +1,5 @@
---- v01/overlay/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccCiRepairTest.java
-+++ v02/overlay/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccCiRepairTest.java
+--- v01/overlay/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccCiRepairTest.java
++++ v02/overlay/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccCiRepairTest.java
 @@ -20,6 +20,7 @@
  import java.util.List;
  import java.util.Map;

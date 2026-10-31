@@ -19,7 +19,7 @@ The Eclipse core-runtime module gains the existing donor `M3EclipseJobs` and `M3
 | `jobs-work/emitted-target-proof-01/RESULT.json` | PASS against the source actually emitted by the recipe: 16 runtime launches with Java 21 mixed and interpreted execution. The unchanged `M3ProgressJob` oracle retains 81 checks; the scheduled contract oracle retains 153 checks for explicit baseline composition and the new defaults. A frozen stock-compiled legacy client retains six checks, including invocation through an old scheduler implementation. Strict compilation, documentation checks, exact descriptor comparison, and a retained baseline negative compile establish the four additions. |
 | `jobs-work/emitted-eclipse-owning-01/RESULT.json` | PASS for the actual unchanged whole core-runtime owning Maven POM: three production sources, four test sources, four suites, 21 tests, no failures, errors, or skips. Uses the source-qualified receiving collections artifact and actual Eclipse dependencies. Includes native Eclipse cancellation comparison, conflicting-rule serialization, and cancellation of a waiting native job without starting the M3 owner. The output module JAR is SHA256 `a8d333178423abeda8b0454a8107f989852df3bafca56d3f1cc0201da5ff610c`. |
 
-Receipt SHA256 values are `d3d012bf73991c9b1bd1dfcd5f2227cd02e090dc199b0bfc43b217e108cda1d8` for the scheduler and `f117fa9737bb59dcc6d138afbe5a543260ac2b04d507e7c5c6bd0b8b1b592e5a` for the full core-runtime owner. Both receipts bind exact commands, inputs, and output evidence. Earlier authoring failures remain history and are not substituted for these actual receiver results.
+Receipt SHA256 values are `d3d012bf73991c9b1bd1dfcd5f2227cd02e090dc199b0bfc43b217e108cda1d8` for the scheduler and `e422be6d5a56b9c169a582dfd8eaa2fe6f72b2b05da722a7d584e459d67b8eb6` for the full core-runtime owner. Both receipts bind exact commands, inputs, and output evidence. Earlier authoring failures remain history and are not substituted for these actual receiver results.
 
 ## CI correction under review
 
@@ -27,7 +27,7 @@ Independent review reproduced a concrete prerequisite failure in the emitted fra
 
 The single-file successor candidate runs the existing core-runtime owning POM after resource verification, adds its `target/classes` to the parser classpath, and retains its Surefire reports in the existing always-upload artifact. Existing triggers, permissions, checkout pinning, historical gates, and job budget are unchanged. Its canonical successor application is tracked separately; the isolated classpath trial alone is not a hosted Actions result.
 
-Evidence is retained under `jobs-work/final-review/ci-classpath-01/` and `ci-classpath-plus-core-02/`; the latter `RESULT.json` has SHA256 `51d546bbdca192faa2472a2de8758b0d6bda925060b915183ff84bbba24a17fe`. The successor handoff is `jobs-work/final-review/workflow-successor/HANDOFF.json`. The existing object-progress workflow's new exact-head scheduled job uses source readback and the actual scheduler verifier and has no parser classpath requirement.
+Evidence is retained under `jobs-work/final-review/ci-classpath-01/` and `ci-classpath-plus-core-02/`; the latter `RESULT.json` has SHA256 `9674f785acff48a25f4170026730c02b647fe8693e90066601ab386f070dacf9`. The successor handoff is `jobs-work/final-review/workflow-successor/HANDOFF.json`. The existing object-progress workflow's new exact-head scheduled job uses source readback and the actual scheduler verifier and has no parser classpath requirement.
 
 ## Boundaries
 

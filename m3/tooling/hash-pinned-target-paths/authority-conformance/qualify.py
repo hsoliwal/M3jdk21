@@ -15,13 +15,13 @@ HERE = Path(__file__).resolve().parent
 PREFIX = "m3/tooling/hash-pinned-target-paths/authority-conformance/"
 WORKFLOW = ".github/workflows/m3-hash-pinned-target-paths.yml"
 ORIGINAL = HERE.parent / "qualify.py"
-ORIGINAL_GIT = "8e1020b02531dc76ec5f59ac4284a2278393a1f5"
+ORIGINAL_GIT = "3fdbd0b7382bc07c3c9ca905845dcb824b2a1ae5"
 ORIGINAL_WORKFLOW_GIT = "2c87b2d062d3834e7144255c2db6b5f09d45ca18"
 CONTRACTS = {
     "scope": {
         "sourceCommit": "723b74515f35d3192834dded9f163af671c5bac7",
         "sourceTree": "3e3a863f12be6cd1cc390579655f7e31a5766e50",
-        "sdkFiles": 22, "verifyGitBlob": "ded464e1f4618d19d0ac76f78ab36707fc4aca7f",
+        "sdkFiles": 22, "verifyGitBlob": "e6b55bf76ae197e64e54884301d67227a0b09da1",
         "baselineCounterexamples": 9,
         "suites": {"jdk.internal.m3.rewrite.M3CanonicalScopeBoundaryRecipeTest": [
             "bothPartialStatesRoundTripAndReachFixedPointsInBothOrders",

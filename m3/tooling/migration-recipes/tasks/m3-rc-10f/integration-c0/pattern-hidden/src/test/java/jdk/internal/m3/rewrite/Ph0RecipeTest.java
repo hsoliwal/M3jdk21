@@ -58,7 +58,7 @@ import org.openrewrite.text.PlainText;
 public final class Ph0RecipeTest {
     private static final String SOURCE = "d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c";
     private static final String TARGET = "c0a14387009aefc7d62bd3268055d526e04f9074";
-    private static final String OWNER = "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6";
+    private static final String OWNER = "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795";
     private static final String NOTE = "unrelated/keep.txt";
     private static final String NOTE_TEXT = "Unrelated content must remain byte-identical.\n";
     private static final ObjectMapper JSON = new ObjectMapper();

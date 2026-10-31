@@ -39,8 +39,8 @@ jobs:
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java)" = '8ba40d4b547f53bcf47ec0fb52eda6085a27efc9'
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java)" = '77c6f8b98e39d9e22513a9c1cf5108cf82a0e866'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '2afe176456419c5d6f4a29d2bfa2ce8f24eed1c4'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3SortedTwoSumBatchContract.java)" = '7e6cd5cdef950fda1067451181279510d02ba219'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3SortedTwoSumBatchTest.java)" = 'e0a03fadb838eb6bc82f1175134fee445150eabe'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3SortedTwoSumBatchContract.java)" = '81fa89b55d12d3d9d391424602dad690f53ac200'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3SortedTwoSumBatchTest.java)" = 'c20f602faacc12a4eeffb1c79d5e18423c16372c'
       - name: Compile real M3 rank-owner Java 21 and oracle strictly
         shell: bash
         run: |

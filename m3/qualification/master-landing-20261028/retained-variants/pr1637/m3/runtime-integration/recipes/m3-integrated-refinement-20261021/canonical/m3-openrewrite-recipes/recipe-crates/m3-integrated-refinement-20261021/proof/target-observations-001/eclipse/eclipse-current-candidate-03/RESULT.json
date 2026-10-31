@@ -45,11 +45,11 @@
   "runtime_version": "3.35.0",
   "strict_java21": true,
   "source_readbacks_all_match": true,
-  "frozen_inputs_sha256": "755160a5791a49b2089ae06f0c240591544a7aaf26a021d99e70c858402fae3b",
+  "frozen_inputs_sha256": "ea375c477ad5c75afb614a6b53cf20c1540d0327b281ac9bd37353f704ec475c",
   "unchanged_original_tests": 17,
   "new_native_oracle_tests": 4,
   "retained_failure_receipt": "/workspace/scratch/206049dfb270/jobs-work/eclipse-contract-donor-01/RESULT.json",
-  "retained_failure_receipt_sha256": "8f376b6bca15d672d8f06fca66b0fcc2e77139e42933f27824bdcdfc517c243b",
+  "retained_failure_receipt_sha256": "95787030a492d507f898830f1fbbc4fd8227883751020cd9497d0e30882bbaf7",
   "actual_test_runtime_jars": [
     {
       "path": "/tmp/m3-build-m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",

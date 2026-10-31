@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # Authority record: item-residency engine (EXPLICIT_RELICENSE_PORT)
 
-This record is filed under `m3/docs/m3jdk21-porting-invariant.md`, mode `EXPLICIT_RELICENSE_PORT`: direct source reuse inside `src/**` needs recorded authority from every necessary rights holder, under target-compatible terms with correct target headers. The machine-readable policy row is in `m3/docs/synexia-intake-policy.tsv`.
+This record is filed under `m3/docs/m3jdk21-porting-invariant.md`, mode `EXPLICIT_RELICENSE_PORT`: direct source reuse inside `src/**` needs recorded authority from every necessary rights holder, under target-compatible terms with correct target headers. The machine-readable policy row is in `m3/docs/m3-intake-policy.tsv`.
 
 ## Decision
 

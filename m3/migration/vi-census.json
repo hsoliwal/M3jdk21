@@ -65,6 +65,6 @@
     "tests/resources",
     "semantic contracts"
   ],
-  "census_sha256": "342fd106c99861d7a484950ae9e0b2b28a65fd0d78a1e143974683346fc608ad",
+  "census_sha256": "79f753b94fa37011a5fe865846786d01787e465684a16c84b95f7893bad36a66",
   "mutation_authority": false
 }

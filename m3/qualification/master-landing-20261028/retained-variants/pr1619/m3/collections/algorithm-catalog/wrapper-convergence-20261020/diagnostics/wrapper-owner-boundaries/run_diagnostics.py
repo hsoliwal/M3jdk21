@@ -18,9 +18,9 @@ import tempfile
 
 
 SNAPSHOTS = {
-    "M3FilteredLists.baseline.java.txt": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75",
-    "M3FilteredLists.rejected.java.txt": "a8bfd9e5d38aa378e7dab73fdbc59ef1512ff2782670100712178bd3c7261c88",
-    "M3WrapperConvergenceContract.baseline.java.txt": "2913aeae2f20b80c669398e5727ad9bc000eccf3bb225d85bdd672c17d4fb847",
+    "M3FilteredLists.baseline.java.txt": "bb0ff9a8008521576530b0cea64d00b4f22e6e4b8424b8e5df7f416a6a8b6051",
+    "M3FilteredLists.rejected.java.txt": "8634c87656c031e98f4f594ddcb72454dc6c7558a3dca985ae39ed8aebe8a10a",
+    "M3WrapperConvergenceContract.baseline.java.txt": "989507e15f05f3d931c51e7ae65d65dbc3fac7b80bc94984e4b9922ea17e8335",
 }
 
 

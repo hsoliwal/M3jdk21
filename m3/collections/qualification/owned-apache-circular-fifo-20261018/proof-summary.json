@@ -3,7 +3,7 @@
   "baseCommit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
   "productionOwnersAdded": 1,
   "ownerBytes": 12743,
-  "ownerSHA256": "5ae11bbc515e745783cbf7d1050e95e2e40c7cd0f61044f8ef0a684a418f3663",
+  "ownerSHA256": "71c4a3a325a99526f67228f6f34429b6f21b27d0bbfa8a5a3e5799442e8e9514",
   "donor": {
     "repository": "apache/commons-collections",
     "commit": "7f7fb0244abc940a2e9dd28b67508c0483a58c3e",
@@ -17,7 +17,7 @@
   "fixture": {
     "frozenBeforeGeneration": true,
     "bytes": 13431,
-    "sha256": "daa47eee240dcc2fe971a7d1611e59ceb25ff80023bd031282aff2e27c3e3c6e"
+    "sha256": "658a9e774f8b06f93cd40f344f9db4e5e7f59f593a5fce9057a7b919a148dc7f"
   },
   "queueProtocol": {
     "status": "PASS",
@@ -104,7 +104,7 @@
   },
   "constructorSubclassProbe": {
     "status": "PASS",
-    "fixtureSHA256": "0513760bcd0ae5f6754c390bad7aa185f639484702c02744cc168e61a97a43d6",
+    "fixtureSHA256": "4402e8fdfb62ff4051937eb7d6e4c3d859fafe50f5098a9fc51604091bc89098",
     "result": {
       "status": "PASS",
       "constructorCallbacks": 6,
@@ -154,8 +154,8 @@
     "inputOrderVariants": "empty/singleton orders coincide; do not count8unique states",
     "refusalInputs": 4,
     "refusalFamilies": 2,
-    "engineSHA256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599",
-    "testSHA256": "0b4212cbf51a63456f1cc127745a1ffa27879bd8a7700e21043d280a38b4c82e"
+    "engineSHA256": "9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37",
+    "testSHA256": "96f402f96eececb15a564072b9b11fad747b73af25a46fcaf421641098434440"
   },
   "allocation": {
     "status": "MEASURED_NARROW_WORKLOAD",

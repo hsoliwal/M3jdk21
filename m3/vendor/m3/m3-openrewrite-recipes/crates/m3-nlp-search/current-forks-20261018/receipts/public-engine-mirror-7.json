@@ -11,12 +11,12 @@
   "duplicate_refusals" : 1,
   "missing_refusals" : 1,
   "source_sha256" : {
-    "m3/vendor/synexia/synexia-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/src/test/java/com/synexia/rewrite/M3NlpSearchCurrentForksAdmissionTest.java" : "eb758cade866a849346e3f362e55561158540c589180af88a0735fc56843b155",
-    "m3/vendor/synexia/synexia-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/src/test/java/com/synexia/rewrite/M3NlpSearchCurrentForksRecipeRunner.java" : "e567edf1c8398c6f301a6382510ca260552059a39ff4314767ec0a9281ac1375",
-    "m3/vendor/synexia/synexia-openrewrite-recipes/src/main/java/com/m3/rewrite/jmod/M3ModuleDescriptorRecipe.java" : "db6625450e98eed094a19142370bcd7a064eb91322eab7cf8f8cf9bb2030417f",
-    "m3/vendor/synexia/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java" : "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
-    "m3/vendor/synexia/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java" : "d108e1de83fdc9a53737216401d3e8b2c7b5e92e6ec4a2167d8e56b707eafad2",
-    "m3/vendor/synexia/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java" : "8551934cf6ad0a1063f3adc14011a1eaa5e6ff2afef177fa074dbdb6b156f8fc",
-    "m3/vendor/synexia/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java" : "8b0d400a8eeceee4a5ca0b09dcfcd7cf2305a13d55d783eea00d24c8aacdfddd"
+    "m3/vendor/m3/m3-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/src/test/java/jdk/internal/m3/rewrite/M3NlpSearchCurrentForksAdmissionTest.java" : "1309c2302fe407d6a7f3c2c52ea1cda7a6372ae5d4981b0e5e0d7ceabbd5d35a",
+    "m3/vendor/m3/m3-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/src/test/java/jdk/internal/m3/rewrite/M3NlpSearchCurrentForksRecipeRunner.java" : "93fe68e73c64671c7a565c634a959fef07aa905d8d7429f148a69ea8a635b0f3",
+    "m3/vendor/m3/m3-openrewrite-recipes/src/main/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorRecipe.java" : "737ce8cf4b4654627f9429497abb316e8c0dbe2e38c921e71eae445218c823f7",
+    "m3/vendor/m3/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java" : "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+    "m3/vendor/m3/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java" : "99353ecfa06c6bd2c45ac32ec576c6bc63b7afb216afbe4d4f343d65e86d2441",
+    "m3/vendor/m3/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java" : "9277e503606f8c16d9756d98b516191027575a535d692f3d0c03c88b77141c4a",
+    "m3/vendor/m3/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java" : "3f61002ab18470b5b36aaff96c9d983ab03f61b25414fac1e36d2a361d65c78e"
   }
 }

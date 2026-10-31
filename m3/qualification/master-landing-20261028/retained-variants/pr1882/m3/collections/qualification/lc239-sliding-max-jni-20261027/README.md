@@ -5,9 +5,9 @@
 
 ## Source custody
 - Canonical recipe: [Synexia #13224](https://github.com/hsoliwal/com.synexia/pull/13224), commit `e0e6697af20744fcbc9620001c7428e8c5b7f7dd`.
-- Existing original Java owner `m3/collections/src/main/java/com/m3/collections/M3LaneAlgorithms.java` pre-blob `ca8c32bf77825453e071d9dd771d97fd8a4b268d`, exact canonical result `6691be3fcc1d3b3b276dd2feb7aa488dea5c00d2`.
+- Existing original Java owner `m3/collections/src/main/java/jdk/m3/collections/M3LaneAlgorithms.java` pre-blob `14fe03cff82eec123d97e03f62b92f58114ee5b5`, exact canonical result `6691be3fcc1d3b3b276dd2feb7aa488dea5c00d2`.
 - Existing original JNI C owner `m3/collections/src/main/native/collections/m3_long_address_kernel.c` pre-blob `123e40c56995574979e999e6233a218b3dc2e4cb`, post-blob `b4e698c6ede7297f5e3d6d2af6fdeb25bb7fb8e7`.
-- New standalone Java21 differential contract `M3LaneSlidingMaximumContract.java`: `84cfbc24efa4884584ac7cd1b71b55d6cba6c834`; JUnit wrapper `M3LaneSlidingMaximumTest.java`: `987dde85f0260c1f43801df4d514e52a7e1ffd71`.
+- New standalone Java21 differential contract `M3LaneSlidingMaximumContract.java`: `82b4734c5f07c274380108064b67eea8544509c4`; JUnit wrapper `M3LaneSlidingMaximumTest.java`: `0b8ebf125d3fad1cf747e80eea4166f34efb8690`.
 - New exact-head native/parity workflow `.github/workflows/m3-lc239-sliding-max-jni-java21.yml`: `cbe34640a4ca8d1a9f2a19bec9266cef7ddc8098`.
 
 ## Primitive algorithm contract

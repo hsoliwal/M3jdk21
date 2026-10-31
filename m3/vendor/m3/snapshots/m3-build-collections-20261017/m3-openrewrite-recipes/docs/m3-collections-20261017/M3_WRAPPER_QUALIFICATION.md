@@ -8,9 +8,9 @@ Two existing Synexia owners received bounded candidates from exact preimages. Pu
 
 | Owner and source atom | Preserved boundary | Qualified final SHA-256 |
 | --- | --- | --- |
-| `M3FilteredViews.NavigableSetView.descendingIterator` removes intermediate private view construction | Retains exactly `nav.descendingSet().iterator()` followed by the existing filtering cursor; does not substitute the backing `descendingIterator()` method. | `48bcb4d3dd3d7ebcfda5ba502e1ae59322254009b622b229d96a8ea349426f68` |
+| `M3FilteredViews.NavigableSetView.descendingIterator` removes intermediate private view construction | Retains exactly `nav.descendingSet().iterator()` followed by the existing filtering cursor; does not substitute the backing `descendingIterator()` method. | `ba12bcdd6a5ec1129d4babc8aa7766382ad6a04dc79f210214b427842e9dcefc` |
 | `M3FilteredViews.SortedMapView.isEmpty` removes private entry-set/export-iterator construction | Retains source `entrySet`, iterator, key/value access and predicate order; no exported entry or mutation semantics change. | Same final file above. |
-| `PrimitiveIndexView.filterLane` and `filterStateMask` reuse an exact-fit result array | Only the array freshly allocated within that call is reused, and only when every projected row passes. Source rows and exported arrays never alias the result. Partial selections still copy. | `c0380232909fe1f3056b2a1438d544c4a22e4290c35a603d6851e8eff68ffe2d` |
+| `PrimitiveIndexView.filterLane` and `filterStateMask` reuse an exact-fit result array | Only the array freshly allocated within that call is reused, and only when every projected row passes. Source rows and exported arrays never alias the result. Partial selections still copy. | `b7938e14c342196e74bc506020ecf58f7180fa5332c813a46d5f5aefbafef47a` |
 
 The baseline is `hsoliwal/com.synexia@11c94feb18155a53cc213708c353791132edc4a7`. Exact originals, including original CRLFs, were materialized before execution and verified by both Git blob SHA-1 and SHA-256. `M3_WRAPPER_BASELINE_CUSTODY.tsv` records 38 exact sources, tests, focused POMs and native inputs.
 

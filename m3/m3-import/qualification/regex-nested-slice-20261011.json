@@ -9,7 +9,7 @@
   "receiver_parent": "461b77e7cadaf68832849da76bfd68c7b31b502f",
   "owner": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexProgramImageCodec.java",
   "before_sha256": "c7f17a7b60b8e90c5bc8730c6a5c222dd3598474ea126377ecdf89cb0bcc6d8e",
-  "after_sha256": "f7ad944462b279135d82c93e5490d3d6a88bf0e4dfb1de9bbb232990b9c6dc44",
+  "after_sha256": "3500c508b398f344938767325133dbd17a636580c144ae7fbd5933c17458b85a",
   "materialization": "EXACT_OPENREWRITE_SDK_POSTIMAGE",
   "source_proof": {
     "scope": "BOUNDED_COMPLETE_FILE_MATCHER_CLOSURE",

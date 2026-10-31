@@ -60,8 +60,8 @@ final class M3OwnedApacheDualLinkedHashBidiMapRecipeTest {
     private static final String NAME = "jdk.internal.m3.OwnedApacheDualLinkedHashBidiMap20261019";
     private static final String TARGET =
             "m3/collections/implementations/apache-dual-linked-hash-bidi-map/src/main/java/jdk/m3/collections/apache/M3DualLinkedHashBidiMap.java";
-    private static final String BEFORE_SHA = "9f7a911be9d9c0bbb3f2112574802e6cea9ea3e26ad922f0d68e8c6e441a23b1";
-    private static final String AFTER_SHA = "b476fb9fdde94a6fa0e28cb0a81d0cef1662dd60e83aab02aa58b259f66c059e";
+    private static final String BEFORE_SHA = "84d2620b2e71e7bb5e84c08a1677348698001d8e7c88d1d1aa415930bdcb6243";
+    private static final String AFTER_SHA = "4457495f6466485223c5994c4cb086dd4f39ea4fb78b6cbca1015ee8d8b36616";
     private static final int AFTER_BYTES = 35741;
     private static final String TEMPLATE = "M3DualLinkedHashBidiMap.java.txt";
     private static final String PREIMAGE = "M3DualLinkedHashBidiMap.scaffold.java.txt";

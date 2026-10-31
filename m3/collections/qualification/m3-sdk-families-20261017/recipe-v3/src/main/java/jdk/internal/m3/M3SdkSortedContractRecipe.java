@@ -41,12 +41,12 @@ public final class M3SdkSortedContractRecipe {
 
     private static final List<Atom> ATOMS = List.of(
         new Atom(MAIN + "M3CollectionSdk.java",
-                "042069cd167191e1faa1710fb9a9e65bca14983c",
+                "7d170065c963d3f0a7da46463b08b99e5c2281a9",
                 "0962823301c3f80dbe4956600fe572af2067439b",
                 M3SdkSortedContractRecipe::sdk),
         new Atom(TEST + "M3CollectionSdkSelfTest.java",
-                "a62b63a3399d926dabe6645f342381d2a28107ca",
-                "8d01cb9fbefb76f65a70759d93153cfc20a20008",
+                "0915fdaa1c927d3c5181a98fc2b504815f7101d5",
+                "0e0c574e077c76c853d67e24966d38646609dcfc",
                 M3SdkSortedContractRecipe::oracle)
     );
 

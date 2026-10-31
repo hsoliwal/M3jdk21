@@ -23,7 +23,7 @@ or a claim of new Git ancestry.
 | --- | --- |
 | `.github/workflows/m3-no-external-consumer-deps.yml` | `81c237f93da86aafa026099b9c799d0d99b09537` |
 | `m3/collections/interop/README.md` | `2f7104f1a694e0392713a4fd62b0883ebba3d650` |
-| `m3/collections/interop/pom.xml` | `3fc5cc0f0bee520675fea18a379c96b288c99084` |
+| `m3/collections/interop/pom.xml` | `454c34b8ba93614996346cd0890caac17fadd5e8` |
 | `m3/collections/verification/no_external_runtime.py` | `aa7baed2aa9e4ff2aa675771def00a09ccc863f3` |
 | `m3/collections/verification/test_no_external_runtime.py` | `2886c5d68444ee34e54a3352d1400a2e4fdb21a4` |
 

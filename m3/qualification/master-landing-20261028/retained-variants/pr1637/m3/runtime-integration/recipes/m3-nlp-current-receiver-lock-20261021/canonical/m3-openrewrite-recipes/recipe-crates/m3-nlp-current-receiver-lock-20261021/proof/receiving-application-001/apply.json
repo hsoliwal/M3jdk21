@@ -1,20 +1,20 @@
 {
   "status": "PASS",
   "mode": "APPLY",
-  "recipe_proof_sha256": "3e524fbb755c3eae8156fd1e04cfceb56a2fd7b6095ffd6d89e2f1a33873d10a",
+  "recipe_proof_sha256": "091f0e8ad4d89e4132f1c2c17741e0bcbd1ed27fdc46e6651d084eed7a9023c8",
   "receiver_root": "b01f50348060b191d87cd7bdc0e42061a5c994e0c0664ea78accc9b220b87380",
   "repository": "/workspace/scratch/206049dfb270/M3jdk21",
   "files": [
     {
       "path": "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java",
-      "before_sha256": "8e6156376ea9548971b78bb876dc3968195266f04c17c5b061d7f5e4b52f367d",
-      "after_sha256": "92fd76c3f0d3c10c90ea4cb52485d2dbceda513fa3d794d22ec67fd153fd62ed",
+      "before_sha256": "a273220cdd1a2b20857ccba086394c0a0a726cc3f2711e9eb7fdadbaffb08256",
+      "after_sha256": "07c498aafa158278bf2fea6ee54bae7f09bf037051f1f8207511597ccef02929",
       "action": "WRITE"
     },
     {
       "path": "m3/tooling/module-packs/nlp-search/current-source-lock.json",
-      "before_sha256": "054029431fbd8063c1e0397c43f3538f319984e252c92f08538881dc0a2eaff5",
-      "after_sha256": "7f591c98c603ba8128c97747fe38fd1ccfe8adb5f2cd712b98b2697fff935acb",
+      "before_sha256": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a",
+      "after_sha256": "271a532810591e94f5ceaab443820fdb08f96d1288e9ba5c1ce55c09d3444c8b",
       "action": "WRITE"
     }
   ]

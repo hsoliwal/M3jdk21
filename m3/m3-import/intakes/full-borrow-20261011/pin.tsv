@@ -5,7 +5,7 @@ source_pr	10336
 source_revision	37e4edabea6af918a4dc9a7eabd45fbdcf101881
 source_handoff_commit	3a87d17df7e5d825aa1b071c5fb05c64b854c798
 source_estate_path	.m3/m3jdk21-full-borrow-estate.tsv
-source_estate_git_blob	ddcec769cb1833fab5f224a41c7f6ab86295d262
+source_estate_git_blob	f637e78db34ab86d3e0d3fc717f03e05867d9d53
 source_dag_path	.m3/m3jdk21-full-borrow-dag.tsv
 source_dag_git_blob	3e6c56b8555231fb36d0ac620ab112aa5970d45a
 source_phase_path	.m3/m3jdk21-promotion-phases.tsv
@@ -14,9 +14,9 @@ source_family_count	32
 target_repository	hsoliwal/M3jdk21
 target_baseline	985aadda29756c0fe988d7b70c8240d4eb554dc7
 target_branch	master
-target_estate_copy	m3/synexia-import/intakes/full-borrow-20261011/synexia-estate.tsv
-target_dag_copy	m3/synexia-import/intakes/full-borrow-20261011/synexia-dag.tsv
-target_phase_copy	m3/synexia-import/intakes/full-borrow-20261011/promotion-phases.tsv
+target_estate_copy	m3/m3-import/intakes/full-borrow-20261011/m3-estate.tsv
+target_dag_copy	m3/m3-import/intakes/full-borrow-20261011/m3-dag.tsv
+target_phase_copy	m3/m3-import/intakes/full-borrow-20261011/promotion-phases.tsv
 copyright_notice	Copyright 2026 Hitesh Soliwal and contributors
 first_party_license	Apache-2.0
 openjdk_policy	PRESERVE_EXISTING_OPENJDK_LICENSE_NOTICE

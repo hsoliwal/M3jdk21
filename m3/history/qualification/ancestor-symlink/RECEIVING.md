@@ -23,8 +23,8 @@ but the lexical original physical source owner was absent.
 Exact source identities:
 | Original owner | Base Git blob | Reviewed canonical postimage |
 | --- | --- | --- |
-| `m3/history/verify_synexia_handoff.py` | `ffe6d2a477a1b051e3320cf4ba2f7aa45426638a` | `c49347c76257b84dbf68d9f8a54a70634d0ee263` |
-| `m3/history/test_synexia_handoff.py` | `597062f39cbd159a11d3f6e5b5820ecf8939014c` | `09ae2f61bfc7fccbeb3b6316d642289dbc9cd982` |
+| `m3/history/verify_m3_handoff.py` | `6fa0d1225d34e9e995bf9a8e418739232b349f6e` | `c9652a0324a05ce6646bcdd8be8b239f35e660a9` |
+| `m3/history/test_m3_handoff.py` | `56f5b72beec62a189a7d6ddbdda6bc03b19be88e` | `e6c67861605740a031b923fd74660e5c1f4d3bb2` |
 
 Product outputs were written only after canonical Synexia templates, and
 both product Git blobs match the templates exactly by remote readback.

@@ -1,15 +1,15 @@
 {
   "actual_root_capture": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/source-final-readbacks/00.json",
-    "sha256": "d891ca1144a3cecc4ba6b7f9d7b69a28e0ae9ce9145ee92c15fd2bd7f292ea14"
+    "sha256": "1b7addda2c8a5ab2664dbf8ee2e5a84bdf48748982f51cd19947a8f37a8379ad"
   },
   "actual_tree_verification": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/ACTUAL_FINAL_MERKLE_VERIFICATION.json",
-    "sha256": "5f580f21b410deac5306d87fbbded0243a2ff737c7fe0ba663033992ac49ca95"
+    "sha256": "b5e784421a45d9efdb0fddb8c231a5ea2502e6222538b271e32069fe05648558"
   },
   "changed_body_verification": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/ACTUAL_V04_CHANGED_BODY_VERIFICATION.json",
-    "sha256": "b07687c1a9573d5b05f9d3ebab9cc5dffa118c94033301f7617ef41da3334904"
+    "sha256": "b1276e9d8f1c1caa3b46f721db9dfae9739bc56033d61313640b7436aecc4262"
   },
   "direct_root_entries": [
     {

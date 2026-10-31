@@ -4,12 +4,12 @@
     {
       "path": "INPUT_SEALS.json",
       "bytes": 141137,
-      "sha256": "d369f629eac19101b1fc80e5cdfeec195ddd26b1555790952b604dbd0e8c045f"
+      "sha256": "9a1772699ad7537dc23edc74cb0d00c6d90fed2912a0e9ddd23c74ee2496f4c4"
     },
     {
       "path": "INSPECTION.json",
       "bytes": 8303,
-      "sha256": "e47292537c9e43a1712ad56895a462b13ede3d92efae36752ea2591045918625"
+      "sha256": "5f7c06c1fe92a589b05b96c52e24f237a98962034e0e5311b50d06e350be14f3"
     },
     {
       "path": "INSPECTION_METHOD_NOTES.json",
@@ -24,7 +24,7 @@
     {
       "path": "inspect_receiving.py",
       "bytes": 20397,
-      "sha256": "3bc757f8edd4d7965964392c670d30f5499e05c64b8b1b9ce6f37b73dc83324d"
+      "sha256": "75cd25f633540c06ebd29fde0512c18c9968e1056ec9b9123f8540e958e6d999"
     }
   ]
 }

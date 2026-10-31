@@ -6,7 +6,7 @@
   "recipe": "jdk.internal.m3.rewrite.M3JdkSortedMaskRecipe",
   "named_recipe": "jdk.internal.m3.JdkSortedMask20261019",
   "crate": "m3-openrewrite-recipes/recipes/jdk-sorted-mask-20261019",
-  "verifier_git_blob": "ae38bd39b85d8afb881758cee5d302d5dbd631dc",
+  "verifier_git_blob": "2e87d4d43b6efd174ca3004cc49977e287741387",
   "verifier_role": "Exact Apache-2.0 proof-tool mirror; Synexia remains canonical; no runtime dependency",
   "target_base": "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
   "production_source_seals": "source-seals.json",

@@ -58,7 +58,7 @@
   "license": "Apache-2.0",
   "observation_epoch_seconds": 1792548217,
   "parents": [
-    "95505b69dac37f6285deded64ef70e9e5431ea502fca5712f35c8d6569ae6cb9"
+    "948de23008d7e66ebcb2f93a2b86c3ba6acaedbbae82c841d9da718a45d4b615"
   ],
   "pending_gates": [
     "Historical failed fixture source/argv custody remains incomplete and is not reconstructed; actual receiving result stays separately authoritative."
@@ -66,14 +66,14 @@
   "profile": "m3-maven4-effective-20261021/1.0",
   "recipe_after": {
     "path": "proof/sdk-002-offline/inputs/m3-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-maven4-effective-20261021.yml",
-    "sha256": "4d630abf8c74d5c0c2e0136346777a121f3ece5895960becb8319e5a5d814d07"
+    "sha256": "061dc4bc149780a8b2722f839b8bbf48b6e0b49c4505511ab09a84fb937be935"
   },
   "recipe_before": null,
   "recipe_id": "jdk.internal.m3.Maven4Effective20261021",
   "regression_fixtures": [
     {
       "path": "memory/observations/runtime-001/CORRECTION_OBSERVATIONS.json",
-      "sha256": "d2956de9a05a40534b49270113b9d2e023c316715eb2d8ca3090edc50f2a15ab"
+      "sha256": "41a8e9ad675831f00f55495d064c37d98f4e8ecc619b9036ee9768e59a5f05e8"
     },
     {
       "path": "memory/observations/runtime-001/evidence/baseline-real-provider-001.log",
@@ -89,11 +89,11 @@
     },
     {
       "path": "memory/draft-002.json",
-      "sha256": "88540606f1513b71f9d965c3048007fbeb7bc1b5897a59a6504ced15a00b2adf"
+      "sha256": "a5f4608443fbaf2af2cc47446d7c031d5e39c33bed27bef49210e7b356ca4a67"
     },
     {
       "path": "memory/observations/runtime-001/MEMORY_DRAFT_REFUSAL.json",
-      "sha256": "98d03bab234defc962bef77865a6724ef0b60894e0e0b1e6a0d27121da3aab9c"
+      "sha256": "8d9f66a536640189e7226df9709040d1a8557b18e765124043ebd308a25414f4"
     },
     {
       "path": "memory/observations/runtime-001/HISTORICAL_SOURCE_UNKNOWN.json",
@@ -124,7 +124,7 @@
       },
       {
         "path": "memory/observations/runtime-001/qualified-candidate-002/PROOF.json",
-        "sha256": "8a65e3bb65b4fc1401cd57f8af308f46ac580a085e05b51a8e2678fd84310fb3"
+        "sha256": "be3c83482551f9398bd37dfe019dadcf083a47664ae2082876bd683b35953407"
       },
       {
         "path": "memory/observations/runtime-001/qualified-candidate-002/source-offline.log",
@@ -143,7 +143,7 @@
   },
   "source_manifest_after": {
     "path": "proof/sdk-002-offline/inputs/m3-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/SOURCE_SEALS.json",
-    "sha256": "fb401eeb0467c16ffa4d95d8de2a6c539775f096db81a7a7ac4fc717ad6e74b9"
+    "sha256": "a076d8c7c82542897aef843b640cc88e762bbf088128c4ca34c262db4c4dba27"
   },
   "source_manifest_before": {
     "path": "memory/observations/runtime-001/HISTORICAL_SOURCE_UNKNOWN.json",
@@ -164,7 +164,7 @@
       "evidence": [
         {
           "path": "memory/observations/runtime-001/CORRECTION_OBSERVATIONS.json",
-          "sha256": "d2956de9a05a40534b49270113b9d2e023c316715eb2d8ca3090edc50f2a15ab"
+          "sha256": "41a8e9ad675831f00f55495d064c37d98f4e8ecc619b9036ee9768e59a5f05e8"
         }
       ]
     },
@@ -197,7 +197,7 @@
         },
         {
           "path": "memory/observations/runtime-001/qualified-candidate-002/PROOF.json",
-          "sha256": "8a65e3bb65b4fc1401cd57f8af308f46ac580a085e05b51a8e2678fd84310fb3"
+          "sha256": "be3c83482551f9398bd37dfe019dadcf083a47664ae2082876bd683b35953407"
         }
       ]
     },
@@ -227,7 +227,7 @@
         },
         {
           "path": "memory/observations/runtime-001/qualified-candidate-002/PROOF.json",
-          "sha256": "8a65e3bb65b4fc1401cd57f8af308f46ac580a085e05b51a8e2678fd84310fb3"
+          "sha256": "be3c83482551f9398bd37dfe019dadcf083a47664ae2082876bd683b35953407"
         }
       ]
     },
@@ -257,7 +257,7 @@
         },
         {
           "path": "memory/observations/runtime-001/qualified-candidate-002/PROOF.json",
-          "sha256": "8a65e3bb65b4fc1401cd57f8af308f46ac580a085e05b51a8e2678fd84310fb3"
+          "sha256": "be3c83482551f9398bd37dfe019dadcf083a47664ae2082876bd683b35953407"
         }
       ]
     },
@@ -277,7 +277,7 @@
       "evidence": [
         {
           "path": "memory/observations/runtime-001/MEMORY_DRAFT_REFUSAL.json",
-          "sha256": "98d03bab234defc962bef77865a6724ef0b60894e0e0b1e6a0d27121da3aab9c"
+          "sha256": "8d9f66a536640189e7226df9709040d1a8557b18e765124043ebd308a25414f4"
         },
         {
           "path": "proof/memory-conformance-001/publish-002.log",

@@ -5,8 +5,8 @@
   "candidate": "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/publication-forward-candidate",
   "resources": "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/publication-forward-recipe-payload/m3-openrewrite-recipes/src/main/resources",
   "input": "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/publication-current-base/M3jdk21",
-  "beforeSha256": "fd880291f6119899e530e19b1dc622bb4f1ea51c6c136ab1c510d507c303c761",
-  "afterSha256": "2f8b58f63b16aa7751a331d24561caf550fd6977692fb0b8ac2c518a20a13a67",
+  "beforeSha256": "9ec03f9f01b6bfdfbc6f76ce320422d8599f56119a0e317a21904452a615e256",
+  "afterSha256": "e5728a9629b11305553a645b428744dc0b2a04ab8545975cebd2270ae875041e",
   "canonicalCurrentSourceSha256": "4cf5d18fc6076193ce85c16df4ad431a37939aec81bacc64d22af6a3ee4f145a",
   "packageOnlyBytesExact": true,
   "crates": [
@@ -14,13 +14,13 @@
       "crate": "m3jdk-collection-publication-owner-java-20261017",
       "kind": "java",
       "target": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
-      "manifestSha256": "8bfa4e4bcf5249687a75f0e0169858fddd963f321f695ce17c8339af7b28e7d4"
+      "manifestSha256": "a29b2a7a533726d6e123f9a266488fbf96751e42f7bad0cd182ca56640190a60"
     },
     {
       "crate": "m3jdk-collection-publication-assets-20261017",
       "kind": "text",
       "targets": 10,
-      "manifestSha256": "5e06d54decf304d4f0fdf4d559ab4406f881d25a29b4dbd1d20a93e76b6aa6bd"
+      "manifestSha256": "136179c09dad97d2a429b3b7982870b02e522adffb7e48935b3d5f434514cbb8"
     }
   ],
   "unchangedJavaCrates": [
@@ -42,12 +42,12 @@
     },
     {
       "path": "m3/docs/name-mapping.json",
-      "sha256": "cf24809fbb97547247613ed5264499468b7e8f791b428a2e545303c513249be7",
+      "sha256": "51e4b57aa235906738ce4fca524831487161bc76c9ae4e65a96efd68e11b08dc",
       "before": "03434d125f8d758a5da24f55adfdc399f6cc828f8fa5b214f1cfe8777d635283"
     },
     {
       "path": "m3/tooling/module-packs/collections/PROJECTION_SOURCE_IDENTITY.json",
-      "sha256": "f980e8f11d183a2f8a202deac9148d468f748862c7914a799df9845c268f917d",
+      "sha256": "5ae0993cac743402b2ef1ba5d5dde38835dd4d6450517e9fc8419363adcc4e6f",
       "before": "ABSENT"
     },
     {
@@ -57,7 +57,7 @@
     },
     {
       "path": "m3/tooling/module-packs/collections/build.py",
-      "sha256": "115bbc8d7bf48b25c81228797efb36ad0463fc535a8ff5be134c61ecb38c0934",
+      "sha256": "7df7f538bdb2f759406421eaae1d60b5ad0b497c6d0c2c44d1b39ee836ca42ad",
       "before": "ABSENT"
     },
     {
@@ -72,17 +72,17 @@
     },
     {
       "path": "m3/tooling/module-packs/collections/legal/NOTICE.txt",
-      "sha256": "314d833a4fbf6a5f71b971f38e336faee520a6097cc7b251028a3e24470ad144",
+      "sha256": "06ccebb09017bce1e11a9be0dc0ed5e9dbf471b482ccb6f15cf72940488095b9",
       "before": "ABSENT"
     },
     {
       "path": "m3/tooling/module-packs/collections/pom.xml",
-      "sha256": "4862d5fd5d3ac389c0dc7605d526876424e6a1b598a293738059b57d8d6f562d",
+      "sha256": "d7c9f2d737f776009dd8ed10a72b5c7d0a253600a84337937ec3c4e2952d051a",
       "before": "ABSENT"
     },
     {
       "path": "m3/tooling/module-packs/pom.xml",
-      "sha256": "1d80848a982b48c4f257c82cf44f49c6226539ffd04e28a015998fec33bb41f6",
+      "sha256": "d246473f6eeb784f53dac6c1dff4add147fed42020382c8c9e27818a69784489",
       "before": "3f09ef2205f1d22b2fd82e84c21697a506813d379dfe61f393d7b1a3ee2989bb"
     }
   ],

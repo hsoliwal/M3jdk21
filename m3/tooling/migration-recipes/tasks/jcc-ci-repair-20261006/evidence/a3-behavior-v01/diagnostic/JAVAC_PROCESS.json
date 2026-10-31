@@ -14,7 +14,7 @@
   "finish_utc": "2026-10-06T05:17:07.815741+00:00",
   "exit_code": 1,
   "exact_template": {
-    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/workspace/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/workspace/m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
     "bytes": 7514,
     "sha256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404",
     "git_blob": "bf91afcd627d8e2faa9790ea6592b6bc9c1b0e33"

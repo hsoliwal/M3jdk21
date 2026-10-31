@@ -25,23 +25,23 @@ final class M3TextMetadataCurrentOwnerRecipeTest {
     private static final String OLD = "/jdk/internal/m3/rewrite/composite-summary/";
     private static final String DESCRIPTOR = "/META-INF/rewrite/text-metadata-current-owner.yml";
     private static final String NAME = "jdk.internal.m3.rewrite.TextMetadataCurrentOwner";
-    private static final String CURRENT_SHA = "05ce3668b4347c364a4b00d3dbef2da221ad0291911cac3620277e855eb1c708";
-    private static final String OLD_SHA = "25764b426bd401b2196745a0ef5f2a13008501ae742f3111def7169f6cb73bda";
-    private static final String DESCRIPTOR_SHA = "57673d14355f9afb43340cd379dc7a2a0115ea56849df069578ad203add654cc";
+    private static final String CURRENT_SHA = "235589cc40b3677a93e26fbeafb372dc7f673fadb8eb9aff578e75fc80dc60d8";
+    private static final String OLD_SHA = "2f1544635f4f07d989c7f1be8f4b1bb13a88eead33864060461ea2271e1412c6";
+    private static final String DESCRIPTOR_SHA = "bc6aef7ae43087f3eecc67db84d139d0dc046247f919efe58b40544c26d20cbd";
     private static final String CMAKE = "m3-mindex/native-jni/CMakeLists.txt";
     private static final String COMPOSITE =
             "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/MIndexCompositeString.java";
     private static final Map<String, String> EXPECTED = Map.ofEntries(
-            Map.entry(CMAKE, "f503b4482078d539cf55cec128b584beaea44f7fbd3683262bf607fe5143d547"),
+            Map.entry(CMAKE, "60bbab6d925855e0b200e521addac17c557ef3586c7998d10db18435aafca3e6"),
             Map.entry("m3-mindex/native-jni/src/mindex_text_metadata_jni.c",
-                    "08b8871d0e57d6f64caaec775f4f99157ea302ce3b59ac707d222f383988edf8"),
-            Map.entry(COMPOSITE, "8037a689789fc351ccdeef8105122a961a6722bb27e8f54cfe42cfd2370365e3"),
+                    "6f59f995575adb64abdb37aad926267dda06a7205be5252f5bcea63635ff9462"),
+            Map.entry(COMPOSITE, "9756944bde133c742837fdb7e46ff12291098d68c980cf56e5b564cdc469786b"),
             Map.entry("m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/TextMetadata.java",
-                    "6407591f0da1d3e0d79007ad39b55922892e4127686aad29f3e35eb187b44e84"),
+                    "e44733190a98e776e753e2089a336a0bcd274f7cf209c1195a7ebbc301996fca"),
             Map.entry("m3-mindex/runtime/src/test/java/jdk/internal/m3/mindex/MIndexCompositeStructuralOpsTest.java",
-                    "08a7f0b09bb04578a08b906230dc4099583a4dadfa385089a98abe0f331b40e2"),
+                    "85d5775e8cd683f078ca49371d98802d5c0194148e9970204d5ebc5b49c90291"),
             Map.entry("m3-mindex/runtime/src/test/java/jdk/internal/m3/mindex/TextMetadataSummaryTest.java",
-                    "7f0f4d26f641b4778ad4215034259bf468f1be30bd10990cace8cf624a3906ce"));
+                    "1dd7e48ca10047e0d857864f0ae6360e5308c16b2a991ced218552d2be3ba868"));
     private static final Set<String> PASSED = new LinkedHashSet<>();
     private static int successfulRuns;
     private static int refusedRuns;

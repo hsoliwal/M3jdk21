@@ -3,21 +3,21 @@
   "publication_receipt": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/PUBLICATION_CUSTODY.json",
     "bytes": 1099619,
-    "sha256": "95f325ce57dadab60031f41514d9a9c5fa3ef6eb29a41e3c9a8c81e2dee996b8",
-    "git_blob_sha1": "0f084555dbbea3ba4c9302386ced30e1e1503dda"
+    "sha256": "bf2d3f29e903f12c201febb4c82083a32758095fdd8fbacbcf25a42e532f44fd",
+    "git_blob_sha1": "067f5f2b6b53343f68f3bf197069e05ae5b9fe3f"
   },
   "base_tree_model": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/BASE_TREE_MODEL.json",
     "bytes": 1372743,
-    "sha256": "877a61dc6d9b4f4fa280faeadbd67db9ee3d56a68768fa06c917d85ab8fbaa80",
-    "git_blob_sha1": "6ee3c1bfd76dc5c0abdba031f163a3d38294f5e9"
+    "sha256": "26378280f0305c59a7529fed18de4dd938e935840260c9667fb55de4c6f6fd8a",
+    "git_blob_sha1": "06235641c8ca32ba686fd83bdc30f4c0f488fac7"
   },
   "source_output_root": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92",
   "root_pom": {
     "local_path": "/workspace/scratch/c0bcaa06df78/m3-mastery/inventory/final-integration/build-declarations/root-pom.xml",
     "bytes": 119981,
-    "sha256": "f01cca4d90bd8fa1b1125474b5178cc80762d934bcb7bf5817f08f3f0dcf6aab",
-    "git_blob_sha1": "98889a040aad5cc3c82f782bb4b173d118207988"
+    "sha256": "1af736d1a28af6e5cdf41a2b4fefa8b9f3c5cb7a6c2f6d16537e0a822f086a7d",
+    "git_blob_sha1": "a65f71452613662769dda64100c6d64dd90ae5da"
   },
   "proofs": [
     {
@@ -35,8 +35,8 @@
       "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/RECOVERY_RESULT.json",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/RECOVERY_RESULT.json",
       "bytes": 456423,
-      "sha256": "086f4ef835a0939b212bcb7595e75513ecbd46ce6bbf764a8d1f5aca1e418954",
-      "git_blob_sha1": "9c14f0c7eef7ed15b9148947ee729836dc2aefe1",
+      "sha256": "823ef3c5f172b34d7c973f5e50424b8f7ab770687f8e2d80e2ecb2bde8dc1b77",
+      "git_blob_sha1": "b930bffab5a0e9c9e9ad2b5f65804c236b199e51",
       "mode": "100644",
       "selection_reasons": [
         "Direct actual report link",
@@ -47,8 +47,8 @@
       "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/E4_EXECUTION_INPUT.json",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/E4_EXECUTION_INPUT.json",
       "bytes": 12601,
-      "sha256": "a42a7069695c38edfe2a25c1f8c9e16fd0db89401976679fc6409b78eca6d852",
-      "git_blob_sha1": "428422fc77c5335a43b9c978515445f056d0d2c6",
+      "sha256": "fd465a0de344227444f723287b0dee9fe6e25284c1767737a38b1d7d8b887c93",
+      "git_blob_sha1": "89dab4bdb446bb26d06c4de26ca8d32ea5c32674",
       "mode": "100644",
       "selection_reasons": [
         "Direct actual report link"
@@ -69,8 +69,8 @@
       "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/CURRENT_PROJECTION.json",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/CURRENT_PROJECTION.json",
       "bytes": 596276,
-      "sha256": "18c5fea0f72fe21aa78df1aa6c319eb4276fc15aa481952539c221ce651e6f49",
-      "git_blob_sha1": "d20138ab763408bbbd793c1ff27778d866b29009",
+      "sha256": "8626cc0e739dac6cc3b2e77496d16e7c75025f7de99f30e1b93f42796e6c4799",
+      "git_blob_sha1": "3c187aada912a867711f1f3adcf32fe99e99f26e",
       "mode": "100644",
       "selection_reasons": [
         "Direct actual report link"
@@ -80,8 +80,8 @@
       "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/DESIGNATED_SOURCE_OUTPUTS.json",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/DESIGNATED_SOURCE_OUTPUTS.json",
       "bytes": 15261,
-      "sha256": "296d5b9eb4f41b51a85d44bb4f05c76e8c5b6453fb55881691b9823055062510",
-      "git_blob_sha1": "59e4ba6f35c37c1a00da2678ed88b9f034d885e1",
+      "sha256": "dab78ed3ffa2cab8dad0feb532f493130570b8da35146a78e961b75cd11dd555",
+      "git_blob_sha1": "36e48a6a4e5b4e2592ad7d3fa90fd3800f6f5185",
       "mode": "100644",
       "selection_reasons": [
         "Direct actual report link"
@@ -637,7 +637,7 @@
   "execution_review": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/E4_EXECUTION_INPUT.json",
     "bytes": 12601,
-    "sha256": "a42a7069695c38edfe2a25c1f8c9e16fd0db89401976679fc6409b78eca6d852",
-    "git_blob_sha1": "428422fc77c5335a43b9c978515445f056d0d2c6"
+    "sha256": "fd465a0de344227444f723287b0dee9fe6e25284c1767737a38b1d7d8b887c93",
+    "git_blob_sha1": "89dab4bdb446bb26d06c4de26ca8d32ea5c32674"
   }
 }

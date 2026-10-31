@@ -8,7 +8,7 @@
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
       "base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-      "before_sha256": "1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369",
+      "before_sha256": "e8a722cec3cdad01ce127936936f7c9928f094658e075aa9d1d89077e6eb7199",
       "after_sha256": "2aa572587c9a4da5d7b5504e85d1457d1bbbabc66aeadde89a75f2839ea41ade"
     },
     {
@@ -20,31 +20,31 @@
     {
       "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
       "base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-      "before_sha256": "a5cefed03d9db9429048a218945a8af71b5b7acc862e089f6cc8a451a172e212",
-      "after_sha256": "0e280bb53c2ee78a18fccd6da81492155885ebf6362f5bcd5fdc181fe46166a1"
+      "before_sha256": "e57a418a183326d17cd117bcb81c2ddd49202b8195778f38a06b970c1058f16d",
+      "after_sha256": "ef65304693d4e86fa22666d52e7c72fb99569137d3a8cc232fd2f15c1d46f2ce"
     },
     {
       "path": "m3/tooling/module-packs/collections/build.py",
       "base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-      "before_sha256": "115bbc8d7bf48b25c81228797efb36ad0463fc535a8ff5be134c61ecb38c0934",
-      "after_sha256": "41041648d9f5f6df8bf035d13cf3c0d79e08fef02ac26088cc4383a2812a2ad3"
+      "before_sha256": "7df7f538bdb2f759406421eaae1d60b5ad0b497c6d0c2c44d1b39ee836ca42ad",
+      "after_sha256": "526d7c82c6935344d577c414d01fad21bce029ed4946fbf888602f362e7faae6"
     }
   ],
   "new_test_sources": [
     {
       "path": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredTerminalTraversalContract.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "213ecb1ebe2883ca18e2889c624a055cd0f8dee04aa0974b84f78caa9e3b8df9"
+      "after_sha256": "e11a7673bbd0b665fb4416b6cbb4f4b5776431c593d8d9806f3968123d4f26a1"
     },
     {
       "path": "m3/collections/src/test/native/m3_mask_window_bounded_regions.c",
       "before_sha256": "ABSENT",
-      "after_sha256": "ce2d20d28b50cc438c2275056017bbef5c89b236ebc127a131bd95ecf6d71e4a"
+      "after_sha256": "066e1feef008e14b38cb32b5123d97ac7b8f2e4f690bd7ed9454944e458a07b0"
     },
     {
       "path": "m3/tooling/module-packs/collections/test_build_jni_symbols.py",
       "before_sha256": "ABSENT",
-      "after_sha256": "926fe20656a853fd85be1117c14a4c6a122eb4723bac0c30722985b05ca58307"
+      "after_sha256": "6178f856e3257de5acece619aeef03888f6e9240dc437b27503c2d7aa2738547"
     }
   ],
   "toolchain": {

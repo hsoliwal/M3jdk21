@@ -40,11 +40,11 @@ public final class M3FiveForkPreparedRecipe {
             "m3/collections/interop/src/test/java/jdk/m3/collections/interop/";
     private static final List<Output> OUTPUTS = List.of(
             new Output("M3FiveFamilyPreparedSelection.java", MAIN + "M3FiveFamilyPreparedSelection.java",
-                    "8b9ba8edf03de5ccce15b1be104ba846b53a5e39fcda15bdb22a741d9575db04"),
+                    "8e242fff63defc82a8d60eae9a17b63352c0d85e6fff691de8630b867de3813c"),
             new Output("M3FiveFamilyPreparedSelectionSelfTest.java", TEST + "M3FiveFamilyPreparedSelectionSelfTest.java",
-                    "9ceb788e6c6cdca0596879eff680cb6fb4591663a7379f868d4f1b0afd5bbd52"),
+                    "d160b174135c4b759adf615a1a54a09ebe5d2f838034706d7f462f507373b502"),
             new Output("M3FiveFamilyPreparedSelectionTest.java", TEST + "M3FiveFamilyPreparedSelectionTest.java",
-                    "2113f5a2dc439f59e653127900c01ac55ae547d05a93436ed46c7ca269220bf7"));
+                    "6c932ffbe8474b261a5f927710c608a032c36600e66899027a522ce0ad31abe5"));
 
     private M3FiveForkPreparedRecipe() { }
     public static void main(String[] args) throws Exception {

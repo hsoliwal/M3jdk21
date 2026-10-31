@@ -33,10 +33,10 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
-          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3SpanIndex.java)" = 'f8229851a1a36b72f807736b6df33ef5e8f4ea01'
-          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3SlotArrays.java)" = 'b945fd98cef1ea03e30131e1460c507cd90119c9'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3SpanIndex.java)" = 'e6758c1789394ccc867bddc8fd299b92a4a49cb4'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3SlotArrays.java)" = 'f6fdf4a8211885a5355a37b0f3927f54cd68dba8'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_span_index_jni.c)" = '3dccc1694fb8dd7c3148bc7f59b1cc4391d37077'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3SpanBatchIntoContract.java)" = '88e2ccf3c979fb0f25c42948639c5be17b71c5f0'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3SpanBatchIntoContract.java)" = 'd26c00b6b45ce2e4c06595504acaa345428643be'
       - name: Strict compile of original Java 21 snapshot owner and query corpus
         shell: bash
         run: |

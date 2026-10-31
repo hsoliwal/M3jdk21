@@ -41,7 +41,7 @@
     },
     {
       "path": "collections/INPUTS.json",
-      "sha256": "9560c54e6820eeb3ec9328aa51c32b84c592af26335f8e059a3fa8dd15b395d5",
+      "sha256": "17bf26b99eb2e59992290ff1733f4126586dcfabc0bf025ad5857a264a0d4759",
       "bytes": 75848,
       "kind": "original-source-input-seals",
       "original_receipt": "owning-collections-native/INPUTS.json",
@@ -65,7 +65,7 @@
     },
     {
       "path": "collections/RESULTS.json",
-      "sha256": "758fbaa193100cbd75760566cd420e0e781958ffcc2c7c2a9c5ee8eba72ddfd0",
+      "sha256": "4d3d2fa6190573e9343faa6488ec3927d0d172f5d8ab5b08b5f5d31f523098dd",
       "bytes": 5385,
       "kind": "original-owning-gate-receipt",
       "original_receipt": "owning-collections-native/RESULTS.json",

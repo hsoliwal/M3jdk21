@@ -21,7 +21,7 @@ harness/copier lineage is Synexia PR #12605 at
 The native baseline and unchanged Java parser-owner fixture originate from
 `hsoliwal/M3JDK21` at `7c0d2493edbf93ac5cb726667ce83046d3519e3e`:
 `m3/collections/src/main/native/collections/m3_index_mask_compactor.c` and
-`m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java`.
+`m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java`.
 Their Apache-2.0 file notices remain intact. The intermediate/final native
 postimages and new Java regression are exact copies of the qualified Synexia
 packet. The affine-position pattern reuses the existing Java

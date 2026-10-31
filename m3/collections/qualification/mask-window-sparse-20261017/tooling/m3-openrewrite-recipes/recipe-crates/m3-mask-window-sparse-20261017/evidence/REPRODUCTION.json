@@ -70,8 +70,8 @@
       "/workspace/scratch/48c1329dbda8/collections-20261017/reproduction/headers",
       "-d",
       "/workspace/scratch/48c1329dbda8/collections-20261017/reproduction/classes",
-      "/workspace/scratch/48c1329dbda8/collections-20261017/reproduction/generated/m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java",
-      "/workspace/scratch/48c1329dbda8/collections-20261017/reproduction/generated/m3/collections/src/test/java/com/m3/collections/M3MaskWindowSparseContract.java",
+      "/workspace/scratch/48c1329dbda8/collections-20261017/reproduction/generated/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskWindow.java",
+      "/workspace/scratch/48c1329dbda8/collections-20261017/reproduction/generated/m3/collections/src/test/java/jdk/m3/collections/M3MaskWindowSparseContract.java",
       "/workspace/scratch/48c1329dbda8/collections-20261017/reproduction/before/M3IndexMaskCompactor.java",
       "/workspace/scratch/48c1329dbda8/collections-20261017/reproduction/before/M3IndexMaskWindowSelfTest.java",
       "/workspace/scratch/48c1329dbda8/collections-20261017/reproduction/before/M3MaskNativeParityProof.java"

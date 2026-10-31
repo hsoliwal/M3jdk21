@@ -5,14 +5,14 @@
  "predecessor": {
   "path": "m3/collections/qualification/owned-apache-multivalue-20261018/SDK_SOURCE_BINDING_SUCCESSOR_V3.json",
   "bytes": 4649,
-  "sha256": "18a5bbbe10e3a97c01d7b3d55277a3e3dabc7ed4666ee00f1d7fb094ae8653d7",
-  "gitBlob": "25b06cde14971ad7c8bf67e28ca2b729b36a11a4"
+  "sha256": "9432e17d44f32a6b672484ec6e63f28221b3422722f48db9a809fa663921c5c4",
+  "gitBlob": "e9ca64f85b94f5bca631da2970c09866b27047d4"
  },
  "predecessorVerifier": {
   "path": "m3/collections/qualification/owned-apache-multivalue-20261018/verify_source_binding_successor_v3.py",
   "bytes": 5889,
-  "sha256": "c883d21bed6d2276006d41a22dd9df4d91ed3832d6a2bfdf460fa018ad6ff20e",
-  "gitBlob": "cd96d7749bb101cf9ef2c8de65e05a570ee894db"
+  "sha256": "1a47c56121ecf52ab475d463e22e118fcdcb0b330380dd4701c4a0969946aa00",
+  "gitBlob": "e28898852519c338706dba67d84056b28f628f8c"
  },
  "successors": [
   {
@@ -20,13 +20,13 @@
    "reason": "D1: incremental value and logical-key counters (v2 -> v3 recipe apache-multivalue-v2-to-v3)",
    "before": {
     "bytes": 8715,
-    "sha256": "bdd6051aecad2ff0a2c2ce7b788aeae51331e5dcef2d5c9f38270520bcdfbfc1",
-    "gitBlob": "f611496efd2a70355e2938b582fb6ef0d0f1e67d"
+    "sha256": "fc9a03a963e2ae8e2b3dd116d575c3cdb976f3bba9326bede088a4cdafaa4f2a",
+    "gitBlob": "6f6509912e147aec72716ee0f9f67746ead17396"
    },
    "after": {
     "bytes": 20447,
-    "sha256": "61d0beffcf4d61a679f2e8c0c5dd036d287bc93c423654a9b58060680e380d8a",
-    "gitBlob": "89ae2d67b96aa4a5dc7b4ff29c512e79ba859b00"
+    "sha256": "011b7b389c726378969146d25c23c5207fc6aae50d45e20ed0b4a30e394bad3d",
+    "gitBlob": "d79fa53ce2b230c43d22c38a03bd8cad81a41668"
    }
   },
   {
@@ -34,13 +34,13 @@
    "reason": "D1: incremental value and logical-key counters (v2 -> v3 recipe apache-multivalue-v2-to-v3)",
    "before": {
     "bytes": 33602,
-    "sha256": "455e4a5cd4974be4bc9f52aef362a3fe9993802806d3b8fa6b31d2954f322ed8",
-    "gitBlob": "2dbacc1339827c0476423744fa0b87e8bb1fc9f7"
+    "sha256": "68ea6bee03da4976eb237f08d6773b68a001bd44f3573abccc5a3aa3fbf3bc55",
+    "gitBlob": "9f4c2854bcc834c0f05ab2433446c37e9efb7727"
    },
    "after": {
     "bytes": 44516,
-    "sha256": "6665505b613cfd00207ff90f0c64873f77a9742edced14b57f9e1f6383b45d4c",
-    "gitBlob": "1bb83f16cd51eba74c040bf7a314769a63bcaf12"
+    "sha256": "f41170d3854dc94128f81cb5f5d2d14f05421f885301b90a3c401075386df668",
+    "gitBlob": "e8adc83475d84c5314f75891d405f89ab75487b7"
    }
   },
   {
@@ -48,13 +48,13 @@
    "reason": "D1: incremental value and logical-key counters (v2 -> v3 recipe apache-multivalue-v2-to-v3)",
    "before": {
     "bytes": 4278,
-    "sha256": "b6d1c925716f44578706b5a5786f23ecab1eba652a8c6dea5f02fdf67695fcbd",
-    "gitBlob": "75704d2810584be823503c9153417582cec3e50f"
+    "sha256": "de9479635c91bd64b7570733a5074fd99b0e9db9a8bbf09b39c5a3ef0fe0e48a",
+    "gitBlob": "805d5ece5c4743bf448bdc779f42d53527e47ce0"
    },
    "after": {
     "bytes": 4396,
-    "sha256": "4c4db74c8571d5155ae2a4d2d92431407a62b0bdecacb38c03bc1bcdf076565b",
-    "gitBlob": "e7be081e8430dcdd0c818d25e9579f77526e295d"
+    "sha256": "a2f31160ec20a3f5e6f0d157f5ac4df1f0253dbc07f3703fcc76a5fdab921dcc",
+    "gitBlob": "d1c3f6d630657c348bcb7f7d1a9935272c928e4d"
    }
   },
   {
@@ -62,8 +62,8 @@
    "reason": "changed on master after the v3 seal (last change 104f2f46ced 2026-10-24); re-pinned as found, per decision B2",
    "before": {
     "bytes": 10039,
-    "sha256": "ae1092d66bb27e18c0f435d9dc148bd0f46fbc33f9731d9e2d2194142ccc3d32",
-    "gitBlob": "250905f67429fbedfb4d6f652ea6e90a516cb59c"
+    "sha256": "78340d2c41e0ade88474171636a02da07ecae0860c6988acaefac5c1fdf0fa03",
+    "gitBlob": "23977d3c314a52e82acadee97daa7d3d659c2601"
    },
    "after": {
     "bytes": 12423,
@@ -81,8 +81,8 @@
    },
    "after": {
     "bytes": 9485,
-    "sha256": "3c12ebe71f2314472858b407f6951360c49ba81b26c4c04c325e9845553a0708",
-    "gitBlob": "9242f3853e353057d360975388c5671c6c67be49"
+    "sha256": "c26252a63cd478697eca0fc135a67bb92200c49d83ea0fb061245ed121cf6aa8",
+    "gitBlob": "9709eadaf9349eccc4e06f3def92eacc78c91831"
    }
   },
   {
@@ -95,8 +95,8 @@
    },
    "after": {
     "bytes": 25743,
-    "sha256": "0b6398e423e1a436aba20169f8bc62d4aa1a9be85ff9f9e09faa0c434743fa6b",
-    "gitBlob": "9060424b921bac10dc382ba277a3aa840ea59529"
+    "sha256": "7cf6c468e2e14ce055958de651e1e817c8cf90426664d9c0a05bcbe142509a71",
+    "gitBlob": "8155fad4828e982e30f7d66a18f6fe0a4c372105"
    }
   },
   {
@@ -104,13 +104,13 @@
    "reason": "changed on master after the v3 seal (last change b4616950bff 2026-10-18); re-pinned as found, per decision B2",
    "before": {
     "bytes": 15368,
-    "sha256": "0acfd80aee31b670b2dc0fa104d43b068ada2bd37781738170efdc7560f6fa82",
-    "gitBlob": "9035b651c5aab1f5850009372e2432ef196efc79"
+    "sha256": "407d5b24f3dbce305c0fcd4f43fd0ff49fd9747907c0016bcd70d9276db6b1b7",
+    "gitBlob": "1eb0a1c600997e7fba6bf0156e197f83c16d5b09"
    },
    "after": {
     "bytes": 18558,
-    "sha256": "f8ded6a6303a035ec23a9484070fa660e3cd0af309818d4a8356792ff37d3aad",
-    "gitBlob": "d96674e4a99416a48247485f0ce4eba533677be0"
+    "sha256": "14b95a68d51e9b7437d8e74b670f738c0b3f7306516235fbc89ed9727ab30b40",
+    "gitBlob": "e05979dc025bf7115896c19276732b92c3f2263e"
    }
   },
   {
@@ -123,8 +123,8 @@
    },
    "after": {
     "bytes": 22578,
-    "sha256": "fdff6ba0d02e89f2f3e6cd80966d367b8f435dff696888eee34b47e5cdfc6b14",
-    "gitBlob": "6f5d209b898be5e77d855bb5791809de8fb60510"
+    "sha256": "58d6ed740bf396b16b1670caaef9cb5d945b98f743656b286cc60f4e40384e64",
+    "gitBlob": "fa94088ece796316984f3972798a99c8db130922"
    }
   },
   {
@@ -132,8 +132,8 @@
    "reason": "changed on master after the v3 seal (last change 104f2f46ced 2026-10-24); re-pinned as found, per decision B2",
    "before": {
     "bytes": 9008,
-    "sha256": "f865b006888f1d4554b51cf69e7f4d6bac67458982f957f9151af0b4f09eaec8",
-    "gitBlob": "5dbc2ec9317c79d801bb4c312f2c0b7ffad6ffbd"
+    "sha256": "11a1001d54bbd39d25102dab36b9ee7a9125713f8a1496598655f41f9c47652e",
+    "gitBlob": "8f3ed8efe75e7eb4744b35537192cf1a8b169423"
    },
    "after": {
     "bytes": 9470,
@@ -146,8 +146,8 @@
    "reason": "changed on master after the v3 seal (last change 52a279e78a2 2026-10-21); re-pinned as found, per decision B2",
    "before": {
     "bytes": 11744,
-    "sha256": "cb8e8c66e07cc4651e95a0c28ad834d2c9de48df34dc90c6d7da68443f1da531",
-    "gitBlob": "a073e64cb12c59eb81247421cf3efe0628004142"
+    "sha256": "a549b92b38eaa337c0e95f32c46607cace9ae46d8240d37bd58a3a48e296990d",
+    "gitBlob": "8c2ff6e02369a2632bfdd3534d01259e9c86e21c"
    },
    "after": {
     "bytes": 21506,
@@ -160,21 +160,21 @@
   {
    "path": "m3/collections/implementations/apache/src/test/java/jdk/m3/collections/apache/M3MultiValuedMapCounterDifferentialTest.java",
    "bytes": 17228,
-   "sha256": "982a2eb799c8faa846d7528a14d215078cf0e18ae8fa700b9eec69c66aad4ef2",
-   "gitBlob": "0cb0253885cd7261962c8eb9d7c281b89275422b"
+   "sha256": "a1eb8fb0c3330ae6f44925bfb83d2c83c2dc28b73e8aca641aeed6aa1efb9b98",
+   "gitBlob": "0da5537a0b03add86314859d595111ca41d3a4b9"
   },
   {
    "path": "m3/collections/implementations/apache/src/jmh/java/jdk/m3/collections/apache/M3MultiValuedSizeBench.java",
    "bytes": 3772,
-   "sha256": "2050b6c7fa7411513f5d370f43b588cef212eb568597d3201c1e12c2f3d17ef3",
-   "gitBlob": "7cb4416713df15bd8c339f2287f63718b0fc9562"
+   "sha256": "1d773c136ad911b2d7c000d58ecae3b073d8a884d284695828d692790422f168",
+   "gitBlob": "55d27310760270d047495e0f5310305adf75ba67"
   }
  ],
  "recipe": {
   "path": "m3/collections/recipe/owned-apache-multivalue-20261024/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/apache-multivalue-v2-to-v3/manifest.tsv",
   "bytes": 1054,
-  "sha256": "9aeb000a95f9f4bdcdf5b55c1b7d4017d87dbab6d577947da5e7c995494bf441",
-  "gitBlob": "c4452e99dfd309105a82d375dc3c5bee8d76e9dc"
+  "sha256": "78a74d5a90ae3800f14ff50f562f3327af628b5fbed48f8c8b4e9e4ee48ed08d",
+  "gitBlob": "d8146d11d64b533c60021cdc0dddff086f27be41"
  },
  "limits": [
   "Source custody only: Java compilation, the contract self-tests, the counter differential test and the recipe tests are separate proofs",

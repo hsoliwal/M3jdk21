@@ -11,9 +11,9 @@ The canonical hash-pinned text recipe and sealed installer materialized exactly 
 | Operational file | Materialized SHA-256 |
 |---|---|
 | `m3/docs/jcc-source-handoff.md` | `d5e18258027f457a1fcdc45ff30b4e2e7a0723825ea95b651933af23f27fd28d` |
-| `m3/docs/name-mapping.json` | `eb42442866c73c38027b481a84c0473bea422e4628d0794fa31fc61d9f1a818e` |
+| `m3/docs/name-mapping.json` | `abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c` |
 | `m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv` | `1c4eedbf3f155bac469693da312c577d26999e7776ca1f85870f6cce125f1e35` |
-| `m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json` | `f8b27e3582eb494af2c8dd47225976f974be6edc2f6c26313975064d48739497` |
+| `m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json` | `e17e0e066988a03583beab519a2ce4381c93f31b1da8ddf465f627cd68566b8d` |
 
 The plan content seal is `0aa1f4a3e080c36d233066f0a6e1dc8e1047e6f0592dba60829b8cca3177df64`. The plan's content seal is distinct from the file hash of serialized `plan.json`.
 
@@ -48,7 +48,7 @@ This was the focused verification project using the retained recipe owner and ex
 
 ## Explicit reference and root accounting audit
 
-The [explicit reference audit](reference-audit/REFERENCE_AUDIT.json) passed at 17:42:55 UTC, SHA-256 `5867bffd36e65f2fd755921d0dbf9981a006bc0e38134b2d0e4e6830030900ea`. The checker is a read-only body, identity, Git-tree path and lineage audit. Its [independent static admission](checker-static-review/REVIEW.md) is separate from the actual run and from behavioral qualification. The [independent actual reference review](final-gate-review/REVIEW.md) reconciles the executed output with the bound inventories, installed resources and separate receiving-execution authority; it admits this bounded audit outcome for packaging. Final manifest and remote publication remain separate.
+The [explicit reference audit](reference-audit/REFERENCE_AUDIT.json) passed at 17:42:55 UTC, SHA-256 `07b4f393e8fb1cb53b86d3a83a3400972632af1a0c5de9bd9d90fc5d76a2031b`. The checker is a read-only body, identity, Git-tree path and lineage audit. Its [independent static admission](checker-static-review/REVIEW.md) is separate from the actual run and from behavioral qualification. The [independent actual reference review](final-gate-review/REVIEW.md) reconciles the executed output with the bound inventories, installed resources and separate receiving-execution authority; it admits this bounded audit outcome for packaging. Final manifest and remote publication remain separate.
 
 The audit verifies 19 active source bodies and 55 proof bodies against the actual source commit/root, 182 destination reference occurrences across 170 distinct paths, 134 exact source-recovery copies, ten current-context receipt copies, the 1,008 frozen inputs and all four materialized outputs. It also preserves 89 nonoperational E3 payloads and 56 nonoperational E2 payloads. The ordinary validator's blocked-row hash path is intentionally limited; this explicit audit supplies the separate active-reference check and reports no unverified active hash reference in the two requested rows.
 
@@ -77,7 +77,7 @@ The Linux JNI lane used the recorded GCC/JDK, sanitizer and `-Xcheck:jni` condit
 
 ## Publication custody and carried evidence
 
-The [actual source publication receipt](source-recovery/PUBLICATION_CUSTODY.json), SHA-256 `95f325ce57dadab60031f41514d9a9c5fa3ef6eb29a41e3c9a8c81e2dee996b8`, records `PUBLISHED_CUSTODY_VERIFIED`. It distinguishes 21 successful direct body reads, including all 19 designated owners and two NUL fixtures, from the six mandatory direct bodies: four production bodies and two NUL fixtures.
+The [actual source publication receipt](source-recovery/PUBLICATION_CUSTODY.json), SHA-256 `bf2d3f29e903f12c201febb4c82083a32758095fdd8fbacbcf25a42e532f44fd`, records `PUBLISHED_CUSTODY_VERIFIED`. It distinguishes 21 successful direct body reads, including all 19 designated owners and two NUL fixtures, from the six mandatory direct bodies: four production bodies and two NUL fixtures.
 
 Exactly two allowlisted malformed-UTF8 fixtures could not be recovered byte-for-byte through the connector. Their captured exact base64 create arguments, returned Git identities and final tree size/mode/identity establish the explicitly scoped custody method. Both retain `raw_body_readback=false` and `remote_sha256_observed=false`; failed read attempts remain in evidence. Authentic GitHub object identities and ordinary Git content addressing are assumptions of this method. No remote raw byte array or SHA-256 is claimed for those two exceptions.
 
@@ -95,7 +95,7 @@ The `work-tooling/` scripts preserve the actual workspace authoring/auditing imp
 
 The original donor catalogue was delivered through historical [source PR9142](https://github.com/hsoliwal/com.synexia/pull/9142) to the earlier task branch. Its five documentation files were absent from both the current be92 baseline and the tested source recovery commit `0c53…`. They are now restored exactly by the documentation-only companion [source PR9367](https://github.com/hsoliwal/com.synexia/pull/9367), commit `4990edbf4ba4afaa14e0ba2d7613331c31e21e9e`, root `1bd86f643f0e08ecb1b5a43d020bf0110e797d68`, with sole parent `0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8`. The source code and execution epoch remain pinned to `0c53…`.
 
-The separately scoped [component binding](donor-catalogue/COMPONENT_BINDING.json), SHA-256 `f02ed2799bd8b7c200a9b4777f549bb7c733751f873a441531f3eec35d73b617`, binds five exact historical documents totaling 78,467 bytes and eighteen exact supporting evidence copies. Its [source publication receipt](donor-catalogue/evidence/SOURCE_PUBLICATION.json), SHA-256 `8dadc9f70a6a2fa1f069bcc0883cef2c3d2218e701fdd166203c7304a3c50e25`, records direct byte comparison of all five documents, six complete changed or reused tree objects, and exact commit/parent/branch/PR readback. The historical authoring receipt's `published: false` is preserved as original content; the new publication receipt records the later restoration.
+The separately scoped [component binding](donor-catalogue/COMPONENT_BINDING.json), SHA-256 `b0216fe8e43a6ec8f8f4f62bd0adfd058f6948efee2bc27fc612d52b42a75631`, binds five exact historical documents totaling 78,467 bytes and eighteen exact supporting evidence copies. Its [source publication receipt](donor-catalogue/evidence/SOURCE_PUBLICATION.json), SHA-256 `8dadc9f70a6a2fa1f069bcc0883cef2c3d2218e701fdd166203c7304a3c50e25`, records direct byte comparison of all five documents, six complete changed or reused tree objects, and exact commit/parent/branch/PR readback. The historical authoring receipt's `published: false` is preserved as original content; the new publication receipt records the later restoration.
 
 | Exact receiving documentation copy | Purpose |
 |---|---|

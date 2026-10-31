@@ -7,7 +7,7 @@ This receiving branch starts at master commit `0efc1719ca5766aead09f4f7c49f50679
 
 Three existing Java21 first-party Maven installers have their exact source and
 six source templates centralized in Synexia. See
-`m3/compatibility/synexia-m3-collections-receiver-20261018.tsv`
+`m3/compatibility/m3-collections-receiver-20261018.tsv`
 for the immutable output-to-template Git blob comparison.
 
 **Four outputs are identical and two are evolved**. The index projection

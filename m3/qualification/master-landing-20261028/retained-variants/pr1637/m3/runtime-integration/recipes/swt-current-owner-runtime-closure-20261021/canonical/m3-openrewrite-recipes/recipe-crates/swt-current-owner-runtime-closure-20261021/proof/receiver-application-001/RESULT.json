@@ -21,8 +21,8 @@
       "exit": 0
     }
   ],
-  "source_seals_sha256": "8fbab5e40413771d432d5016964f5bd71d95bf4043805bac828d82bd92200bb0",
-  "sdk_receipt_sha256": "a950522f8342e90af73568ae052eca44f776d377a57e4a392477ec5ea95a5098",
+  "source_seals_sha256": "49261c5ff0b2de1636d26fb01c6d64f3dc3dc9a3a31583aea776169e6bb66d4e",
+  "sdk_receipt_sha256": "94112bdac83b7756c78d4ea92c24b0eb4cc948e7bd73622b7d96cd0fa4df2774",
   "receiving_base": "c0ffa6d76338ed1b06cfe0158b0e04d8930df546",
   "canonical_owner": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021"
 }

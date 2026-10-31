@@ -10,9 +10,9 @@ every complete current non-JCC record, including that updated TQ record.
 
 The original 47-record/45-other-record/17-mapping expectations remain frozen in
 `candidate/mapping/java-template/TEMPLATE_PACKET.json`, SHA-256
-`5fe25ca79a45bd4e499fd6171dfe5375390f91f2331330797b93aec3c5eec142`.
+`d9441405014cca0bc6b106de6cf28539920a164e2c627f04dea750072f1e054d`.
 V02 is also retained unchanged at `candidate/mapping-v02/java-template/TEMPLATE_PACKET.json`,
-SHA-256 `24b0adba2b80ee105ba9904e4d00b96d441cddf4b548b5400d72ca09f1d26136`.
+SHA-256 `7ec82e03ff00a2853023454b7e30decca77051a4c3ac4afe30d283722a9d5a2b`.
 The receiving input advance did not change either historical oracle. The current
 input epoch is `candidate/mapping-v03/input-epoch/INPUT_EPOCH.json`, SHA-256
 `027e47d20c7fb854e028487ceef341c929877a6421dbb75f6433b5cd007fe5ee`.
@@ -46,10 +46,10 @@ It writes four repository artifacts and `RENDERED_TEMPLATE_RECEIPT.json`:
 
 | Artifact | Repository destination |
 | --- | --- |
-| JUnit test | `m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccMergeMappingRecoveryV03Test.java` |
+| JUnit test | `m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccMergeMappingRecoveryV03Test.java` |
 | Focused POM | `m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/pom.xml` |
 | Named recipe | `m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-merge-mapping-recovery-v03.yml` |
-| Test input summary | `m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jcc-merge-recovery-20261006-mapping-v03/publication-input-summary.json` |
+| Test input summary | `m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jcc-merge-recovery-20261006-mapping-v03/publication-input-summary.json` |
 
 The renderer does not write the four operational mapping files, beforeimages,
 afterimages, or the original source packet. Its summary strips source bodies and
@@ -84,8 +84,8 @@ also includes these two existing historical resources from
 
 | Resource | Contents | SHA-256 |
 | --- | --- | --- |
-| `history-0014.txt` | Complete prior map | `eb42442866c73c38027b481a84c0473bea422e4628d0794fa31fc61d9f1a818e` |
-| `history-0016.txt` | Complete prior bindings | `f8b27e3582eb494af2c8dd47225976f974be6edc2f6c26313975064d48739497` |
+| `history-0014.txt` | Complete prior map | `abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c` |
+| `history-0016.txt` | Complete prior bindings | `e17e0e066988a03583beab519a2ce4381c93f31b1da8ddf465f627cd68566b8d` |
 
 From the execution workspace's repository root:
 

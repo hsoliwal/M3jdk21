@@ -36,11 +36,11 @@
   "correction_rights": [
     {
       "path": "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/provenance/SOURCE_AND_RIGHTS.json",
-      "sha256": "67555856f433a784f66865a5ed11f0e6d0229cacdc42de5cd391d1901619a115"
+      "sha256": "0f85d1ddf8f0234452146e14a5984dcd650b23b640c991498bcf256725de2ad1"
     },
     {
       "path": "m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/SOURCE_AND_RIGHTS.json",
-      "sha256": "c16fc3301334af0805be9549a3f90ea98611e33000969286ba3b104d0e19cae9"
+      "sha256": "710c53c510f5dd7d5256f23cbb60d7d6938bfe0d55b5ca1eaaa45f54be3af7c8"
     }
   ],
   "swt_fixture_clarification": "The broad frozen fixture note is narrowed by exact headers: All* suites remain EPL-2.0; dual wording applies only to geometry/differential files carrying it; received recipe/POM tooling is Apache-2.0. SLF4J API license is MIT. No relicensing.",

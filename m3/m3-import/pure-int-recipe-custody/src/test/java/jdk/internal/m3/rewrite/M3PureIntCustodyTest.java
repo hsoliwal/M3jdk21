@@ -25,25 +25,25 @@ final class M3PureIntCustodyTest {
     private static final Map<String, String> BLOBS =
             Map.of(
                     "M3PureIntAtomizeRecipe.java",
-                    "15c6435b00d984cbc2a2308ecb7fc168ed74b80f",
+                    "95cd29e51a28307d9a4bfca3e54065c1177e3ddf",
                     "M3PureIntConvergenceRecipe.java",
-                    "c2a7a3c93aa278d234c2ccfe59c0e1eb78161b95",
+                    "db03d0c99fa9ae6c369d856c39a460153d4eecaa",
                     "M3PureIntDocumentationRecipe.java",
-                    "cc3265ba0a6ea43d198618b0997f24b9f6fa7d1a",
+                    "8c975be4668eef7169f37c29bad9866ef0eedc3c",
                     "M3PureIntInventoryRecipe.java",
-                    "59499e81f01b466256b1c68b85a053a2b569c76a",
+                    "6ea761a4299a3ab61a0552d16f3c32b78965d6c8",
                     "M3PureIntLeaf.java",
-                    "e1f7fc04156b745f5d312ec2647fdb65f424f386",
+                    "8f3724b2a82c75bbbc13f3da184ce303796153ef",
                     "M3PureIntPatternizeRecipe.java",
-                    "fd5882aa092629c3a389e754aafb1e0b1bc5f6d8",
+                    "1ebd87cbd163298dd620b12b12c296724c16ceb6",
                     "M3EditScope.java",
                     "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
                     "M3ScopeInference.java",
-                    "2768fe5846c2c67c52e872a97f735a0fb4d0d69a",
+                    "a993ed2192188729cefeb45d6bcb5e49594e19b0",
                     "M3CanonicalMultiPassPlan.java",
-                    "897a218c5489c851c1906fd91a2cd64174d19d70",
+                    "513f953f27d5aca5c3c2d4a9141c30f95d1d3392",
                     "M3ContractMode.java",
-                    "e95d8dba0229ef3d56677639c796e619e9d8d0b7");
+                    "eadcb6a7c3bef8fb3e45bd7c47ea6a91c0bf48b6");
 
     @Test
     void custodySourcesRemainExactM3GitBlobs() throws Exception {

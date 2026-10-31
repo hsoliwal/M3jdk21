@@ -22,11 +22,11 @@
     }
   ],
   "fixture_restored_exactly": true,
-  "helper_sha256": "6f458df3f6c01326f1d9365c708e95545b4594daa1b966b92af79988bb7648b7",
+  "helper_sha256": "bfe1a17b7a5dfacd2408de5577e6415e8bcc0a14da43235789c0b112e93065e3",
   "locked_file_count": 145,
   "schema": "M3_NLP_SOURCE_LOCK_GUARD_PROOF_1",
   "source_coverage_guard_removed": false,
-  "source_lock_sha256": "7f591c98c603ba8128c97747fe38fd1ccfe8adb5f2cd712b98b2697fff935acb",
+  "source_lock_sha256": "271a532810591e94f5ceaab443820fdb08f96d1288e9ba5c1ce55c09d3444c8b",
   "state": "PASS",
-  "unchanged_production_verifier_sha256": "85bcb7e3e70a892f17481b0dcbcf08549a598b5de52a065583b7a8b9e909f917"
+  "unchanged_production_verifier_sha256": "2af38b31aef1c27c5a44430f650963131df6d42197f20218d26aef7530c9da1d"
 }

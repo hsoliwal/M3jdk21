@@ -8,9 +8,9 @@ import hashlib
 ROOT = Path(__file__).resolve().parents[5]
 EXPECTED = {
     "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ASTLeafIndex.java":
-        "0daf29ca1e035d8facfaea0ef86f0f91158320f0d343f51b12dd6fc81a4f9428",
+        "7616282198225b23b3fb60270dd14440c7f117285a039a07c24c51b3b1ebca2d",
     "m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ASTLeafIndexSelfTest.java":
-        "7d99521d1649131270b9dd18b3a1f2fed14a44b82447d254ad57d68ccdbb1c64",
+        "b0ff01c06b68266430adba9884bb32b72205ac37827fe7a07b3e22014f05caea",
 }
 for relative, expected in EXPECTED.items():
     full = ROOT / relative

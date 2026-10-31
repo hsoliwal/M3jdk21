@@ -71,7 +71,7 @@ def main():
     require(len(expected) == 52 and inventory(base) == expected, "current fixture changed")
     require(expected[VALIDATOR] == "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e"
             and expected[SCHEMA] == "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b", "canonical owner/schema changed")
-    require(expected[PATHS[0]] == "9c96a0f6f7cc0f9b9d3e91fc3a42ef8e4eab212726fccd5e63e483f1acd7dfb1", "current map changed")
+    require(expected[PATHS[0]] == "12bfa8d328b74ba4de930d993c8194b8db51f3a111617690dff9f1ffebaea1c2", "current map changed")
     replacements, binding = {}, None
     if args.materialized:
         actual = args.materialized.resolve(strict=True)

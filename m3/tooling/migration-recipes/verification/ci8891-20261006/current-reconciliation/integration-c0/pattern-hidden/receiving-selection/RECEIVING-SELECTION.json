@@ -43,7 +43,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/after/m3/tooling/image-gates/current-c0.json",
-      "sha256": "8c828850d86f96ba39ee8865e9b7461ffb9f26e0658a9c76f901118d36146460",
+      "sha256": "c863703da9c9ff9bb2d39b9f159ee914e071cc19882b7802648e1e61b06c48be",
       "bytes": 79664
     },
     {
@@ -58,7 +58,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/after/m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv",
-      "sha256": "ca9e687e6cb300b618f7853f11fe1739dd40609444529e26aacda3a032354131",
+      "sha256": "a212278c12aa826812457dec6351ef36807523916224855c35d684373801a338",
       "bytes": 18329
     },
     {
@@ -68,7 +68,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/before/m3/tooling/image-gates/current-c0.json",
-      "sha256": "13e26f49dac9f82ee8a01e828ead985a9896fcea195a27556741a88ea43ba74c",
+      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
       "bytes": 79672
     },
     {
@@ -83,7 +83,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/before/m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv",
-      "sha256": "ad8f41c47e2635f8863361cb790b1c2f53f394da58e449b60a229ba6722aba3d",
+      "sha256": "c19c04e609ba798652ac302a61b2579a87362f1f9fe6e2d3817820e44e94dba3",
       "bytes": 18329
     },
     {
@@ -138,32 +138,32 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/protected/m3/runtime-integration/check-m3string-invariants.py",
-      "sha256": "9407d72859629ff18b1b22796368bda50c9d4e588072aea541c36d44b8bb7dc6",
+      "sha256": "1913aceb03b079596c7c8aea80285aecd2849f81475b597e4ea4094609b749a9",
       "bytes": 48860
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/protected/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "6d1f13d20bca007ab2d0b358fdee7bf4bdc1d1e6003a87cb9451b5e7c2975194",
+      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
       "bytes": 778
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/protected/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "acd49abfe66383ae325ced5adf371716f76eb164749ddb2e19a0dcf5638a4e96",
+      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/protected/m3/tooling/image-gates/verify-current.py",
-      "sha256": "924f82ab0df19c7c24a9c208c93880fab36da2c9216572c33b4219d6c0208f64",
+      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
       "bytes": 16970
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/protected/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
-      "sha256": "0e65b26f674f68fea30151ea63a17faef2f88ca0f0679723bb3dc230fda22b72",
+      "sha256": "fd376487d4497fef3f3f058584cd04abb5622abcff14364600b96a53df588862",
       "bytes": 13233
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/protected/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
       "bytes": 12032
     },
     {
@@ -178,12 +178,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/phc-current-c0/manifest.tsv",
-      "sha256": "dc47ddb048af9ca88df53439d6609ceb21c4f8cf86f20ec5cac92fb1d4a255d4",
+      "sha256": "a5a77772a5f0a88698e9bae39f8ecb953419ef51d810273a9c33e7e491e237b5",
       "bytes": 1184
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/phc-current-c0/target-1.txt",
-      "sha256": "8c828850d86f96ba39ee8865e9b7461ffb9f26e0658a9c76f901118d36146460",
+      "sha256": "c863703da9c9ff9bb2d39b9f159ee914e071cc19882b7802648e1e61b06c48be",
       "bytes": 79664
     },
     {
@@ -198,7 +198,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v1/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/phc-current-c0/target-4.txt",
-      "sha256": "ca9e687e6cb300b618f7853f11fe1739dd40609444529e26aacda3a032354131",
+      "sha256": "a212278c12aa826812457dec6351ef36807523916224855c35d684373801a338",
       "bytes": 18329
     },
     {
@@ -228,7 +228,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/after/m3/tooling/image-gates/current-c0.json",
-      "sha256": "8c828850d86f96ba39ee8865e9b7461ffb9f26e0658a9c76f901118d36146460",
+      "sha256": "c863703da9c9ff9bb2d39b9f159ee914e071cc19882b7802648e1e61b06c48be",
       "bytes": 79664
     },
     {
@@ -243,7 +243,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/after/m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv",
-      "sha256": "ca9e687e6cb300b618f7853f11fe1739dd40609444529e26aacda3a032354131",
+      "sha256": "a212278c12aa826812457dec6351ef36807523916224855c35d684373801a338",
       "bytes": 18329
     },
     {
@@ -253,7 +253,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/before/m3/tooling/image-gates/current-c0.json",
-      "sha256": "13e26f49dac9f82ee8a01e828ead985a9896fcea195a27556741a88ea43ba74c",
+      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
       "bytes": 79672
     },
     {
@@ -268,7 +268,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/before/m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv",
-      "sha256": "ad8f41c47e2635f8863361cb790b1c2f53f394da58e449b60a229ba6722aba3d",
+      "sha256": "c19c04e609ba798652ac302a61b2579a87362f1f9fe6e2d3817820e44e94dba3",
       "bytes": 18329
     },
     {
@@ -308,32 +308,32 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/protected/m3/runtime-integration/check-m3string-invariants.py",
-      "sha256": "9407d72859629ff18b1b22796368bda50c9d4e588072aea541c36d44b8bb7dc6",
+      "sha256": "1913aceb03b079596c7c8aea80285aecd2849f81475b597e4ea4094609b749a9",
       "bytes": 48860
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/protected/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "6d1f13d20bca007ab2d0b358fdee7bf4bdc1d1e6003a87cb9451b5e7c2975194",
+      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
       "bytes": 778
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/protected/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "acd49abfe66383ae325ced5adf371716f76eb164749ddb2e19a0dcf5638a4e96",
+      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/protected/m3/tooling/image-gates/verify-current.py",
-      "sha256": "924f82ab0df19c7c24a9c208c93880fab36da2c9216572c33b4219d6c0208f64",
+      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
       "bytes": 16970
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/protected/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
-      "sha256": "0e65b26f674f68fea30151ea63a17faef2f88ca0f0679723bb3dc230fda22b72",
+      "sha256": "fd376487d4497fef3f3f058584cd04abb5622abcff14364600b96a53df588862",
       "bytes": 13233
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/protected/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
       "bytes": 12032
     },
     {
@@ -348,12 +348,12 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/phc-current-c0/manifest.tsv",
-      "sha256": "dc47ddb048af9ca88df53439d6609ceb21c4f8cf86f20ec5cac92fb1d4a255d4",
+      "sha256": "a5a77772a5f0a88698e9bae39f8ecb953419ef51d810273a9c33e7e491e237b5",
       "bytes": 1184
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/phc-current-c0/target-1.txt",
-      "sha256": "8c828850d86f96ba39ee8865e9b7461ffb9f26e0658a9c76f901118d36146460",
+      "sha256": "c863703da9c9ff9bb2d39b9f159ee914e071cc19882b7802648e1e61b06c48be",
       "bytes": 79664
     },
     {
@@ -368,7 +368,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/pattern-hidden-comment-c0-authoring-v2/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/phc-current-c0/target-4.txt",
-      "sha256": "ca9e687e6cb300b618f7853f11fe1739dd40609444529e26aacda3a032354131",
+      "sha256": "a212278c12aa826812457dec6351ef36807523916224855c35d684373801a338",
       "bytes": 18329
     },
     {
@@ -413,7 +413,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/runtime-checker-c0-authoring-v1/before/m3/tooling/image-gates/current-c0.json",
-      "sha256": "dab4ded7bc1558a151376bc3b882403f22138981377249d85114fa9186cb7657",
+      "sha256": "6f5620d8b30b4abeb09dc5ecde928ccc1943a4edf1c610a36330e09ecdb96e6f",
       "bytes": 79659
     },
     {
@@ -448,27 +448,27 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/runtime-checker-c0-authoring-v1/protected/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "acd49abfe66383ae325ced5adf371716f76eb164749ddb2e19a0dcf5638a4e96",
+      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/runtime-checker-c0-authoring-v1/protected/m3/tooling/image-gates/verify-current.py",
-      "sha256": "924f82ab0df19c7c24a9c208c93880fab36da2c9216572c33b4219d6c0208f64",
+      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
       "bytes": 16970
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/runtime-checker-c0-authoring-v1/protected/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
       "bytes": 12032
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/runtime-checker-c0-authoring-v1/protected/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/03-invariants.py.txt",
-      "sha256": "30f0399507a486fdcd01a90f4fdccaea5e1a0ec8bd81ed25661c00bdb4b59a0b",
+      "sha256": "fcfb61309318800949f5ef582f946bdbb14c40244f2dd84dd82f8b32e293d8b2",
       "bytes": 42045
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/runtime-checker-c0-authoring-v1/protected/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
-      "sha256": "187e7881ad746920b508c9a69ff11f5be64fd3452d40cf9bd2ae446a20373231",
+      "sha256": "bf6d75e8bd8176486e82f9871a116356521409ab6bd9d666c3946ad3a34ec21c",
       "bytes": 1579
     },
     {
@@ -518,7 +518,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/string-escape-c0-authoring-v2/before/m3/tooling/image-gates/current-c0.json",
-      "sha256": "0d8ad720976c1de51cf8accad95cc149a06abfe2187041fcc25d524c1f630e09",
+      "sha256": "4ee3fc8b5959dada6587607ddc68822bf555516ba5f0b973a9249640b8d26ca7",
       "bytes": 79652
     },
     {
@@ -583,22 +583,22 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/string-escape-c0-authoring-v2/protected/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "acd49abfe66383ae325ced5adf371716f76eb164749ddb2e19a0dcf5638a4e96",
+      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/string-escape-c0-authoring-v2/protected/m3/tooling/image-gates/verify-current.py",
-      "sha256": "924f82ab0df19c7c24a9c208c93880fab36da2c9216572c33b4219d6c0208f64",
+      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
       "bytes": 16970
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/string-escape-c0-authoring-v2/protected/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
-      "sha256": "0e65b26f674f68fea30151ea63a17faef2f88ca0f0679723bb3dc230fda22b72",
+      "sha256": "fd376487d4497fef3f3f058584cd04abb5622abcff14364600b96a53df588862",
       "bytes": 13233
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/string-escape-c0-authoring-v2/protected/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
       "bytes": 12032
     },
     {
@@ -688,7 +688,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/current-integration-repairs/string-escape-c0-authoring-v2/protected/m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/atom/spectrum/CORPUS.tsv",
-      "sha256": "ad8f41c47e2635f8863361cb790b1c2f53f394da58e449b60a229ba6722aba3d",
+      "sha256": "c19c04e609ba798652ac302a61b2579a87362f1f9fe6e2d3817820e44e94dba3",
       "bytes": 18329
     },
     {
@@ -2868,7 +2868,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v1/candidate/m3/runtime-integration/check-m3string-invariants.py",
-      "sha256": "9407d72859629ff18b1b22796368bda50c9d4e588072aea541c36d44b8bb7dc6",
+      "sha256": "1913aceb03b079596c7c8aea80285aecd2849f81475b597e4ea4094609b749a9",
       "bytes": 48860
     },
     {
@@ -2878,7 +2878,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v1/candidate/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "6d1f13d20bca007ab2d0b358fdee7bf4bdc1d1e6003a87cb9451b5e7c2975194",
+      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
       "bytes": 778
     },
     {
@@ -2903,32 +2903,32 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v1/candidate/m3/tooling/image-gates/current-c0.json",
-      "sha256": "13e26f49dac9f82ee8a01e828ead985a9896fcea195a27556741a88ea43ba74c",
+      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
       "bytes": 79672
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v1/candidate/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "acd49abfe66383ae325ced5adf371716f76eb164749ddb2e19a0dcf5638a4e96",
+      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v1/candidate/m3/tooling/image-gates/verify-current.py",
-      "sha256": "924f82ab0df19c7c24a9c208c93880fab36da2c9216572c33b4219d6c0208f64",
+      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
       "bytes": 16970
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v1/candidate/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
       "bytes": 12032
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v1/candidate/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/03-invariants.py.txt",
-      "sha256": "30f0399507a486fdcd01a90f4fdccaea5e1a0ec8bd81ed25661c00bdb4b59a0b",
+      "sha256": "fcfb61309318800949f5ef582f946bdbb14c40244f2dd84dd82f8b32e293d8b2",
       "bytes": 42045
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v1/candidate/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
-      "sha256": "187e7881ad746920b508c9a69ff11f5be64fd3452d40cf9bd2ae446a20373231",
+      "sha256": "bf6d75e8bd8176486e82f9871a116356521409ab6bd9d666c3946ad3a34ec21c",
       "bytes": 1579
     },
     {
@@ -2998,7 +2998,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/candidate/m3/runtime-integration/check-m3string-invariants.py",
-      "sha256": "9407d72859629ff18b1b22796368bda50c9d4e588072aea541c36d44b8bb7dc6",
+      "sha256": "1913aceb03b079596c7c8aea80285aecd2849f81475b597e4ea4094609b749a9",
       "bytes": 48860
     },
     {
@@ -3008,7 +3008,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/candidate/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "6d1f13d20bca007ab2d0b358fdee7bf4bdc1d1e6003a87cb9451b5e7c2975194",
+      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
       "bytes": 778
     },
     {
@@ -3033,32 +3033,32 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/candidate/m3/tooling/image-gates/current-c0.json",
-      "sha256": "13e26f49dac9f82ee8a01e828ead985a9896fcea195a27556741a88ea43ba74c",
+      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
       "bytes": 79672
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/candidate/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "acd49abfe66383ae325ced5adf371716f76eb164749ddb2e19a0dcf5638a4e96",
+      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/candidate/m3/tooling/image-gates/verify-current.py",
-      "sha256": "924f82ab0df19c7c24a9c208c93880fab36da2c9216572c33b4219d6c0208f64",
+      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
       "bytes": 16970
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/candidate/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
       "bytes": 12032
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/candidate/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/03-invariants.py.txt",
-      "sha256": "30f0399507a486fdcd01a90f4fdccaea5e1a0ec8bd81ed25661c00bdb4b59a0b",
+      "sha256": "fcfb61309318800949f5ef582f946bdbb14c40244f2dd84dd82f8b32e293d8b2",
       "bytes": 42045
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/candidate/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
-      "sha256": "187e7881ad746920b508c9a69ff11f5be64fd3452d40cf9bd2ae446a20373231",
+      "sha256": "bf6d75e8bd8176486e82f9871a116356521409ab6bd9d666c3946ad3a34ec21c",
       "bytes": 1579
     },
     {
@@ -3163,7 +3163,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/original-six/m3/runtime-integration/check-m3string-invariants.py",
-      "sha256": "9407d72859629ff18b1b22796368bda50c9d4e588072aea541c36d44b8bb7dc6",
+      "sha256": "1913aceb03b079596c7c8aea80285aecd2849f81475b597e4ea4094609b749a9",
       "bytes": 48860
     },
     {
@@ -3173,7 +3173,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/original-six/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "6d1f13d20bca007ab2d0b358fdee7bf4bdc1d1e6003a87cb9451b5e7c2975194",
+      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
       "bytes": 778
     },
     {
@@ -3198,32 +3198,32 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/original-six/m3/tooling/image-gates/current-c0.json",
-      "sha256": "13e26f49dac9f82ee8a01e828ead985a9896fcea195a27556741a88ea43ba74c",
+      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
       "bytes": 79672
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/original-six/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "acd49abfe66383ae325ced5adf371716f76eb164749ddb2e19a0dcf5638a4e96",
+      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/original-six/m3/tooling/image-gates/verify-current.py",
-      "sha256": "924f82ab0df19c7c24a9c208c93880fab36da2c9216572c33b4219d6c0208f64",
+      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
       "bytes": 16970
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/original-six/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
       "bytes": 12032
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/original-six/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/03-invariants.py.txt",
-      "sha256": "30f0399507a486fdcd01a90f4fdccaea5e1a0ec8bd81ed25661c00bdb4b59a0b",
+      "sha256": "fcfb61309318800949f5ef582f946bdbb14c40244f2dd84dd82f8b32e293d8b2",
       "bytes": 42045
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/original-six/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
-      "sha256": "187e7881ad746920b508c9a69ff11f5be64fd3452d40cf9bd2ae446a20373231",
+      "sha256": "bf6d75e8bd8176486e82f9871a116356521409ab6bd9d666c3946ad3a34ec21c",
       "bytes": 1579
     },
     {
@@ -3248,7 +3248,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/product-drift/m3/runtime-integration/check-m3string-invariants.py",
-      "sha256": "9407d72859629ff18b1b22796368bda50c9d4e588072aea541c36d44b8bb7dc6",
+      "sha256": "1913aceb03b079596c7c8aea80285aecd2849f81475b597e4ea4094609b749a9",
       "bytes": 48860
     },
     {
@@ -3258,7 +3258,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/product-drift/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "6d1f13d20bca007ab2d0b358fdee7bf4bdc1d1e6003a87cb9451b5e7c2975194",
+      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
       "bytes": 778
     },
     {
@@ -3283,32 +3283,32 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/product-drift/m3/tooling/image-gates/current-c0.json",
-      "sha256": "13e26f49dac9f82ee8a01e828ead985a9896fcea195a27556741a88ea43ba74c",
+      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
       "bytes": 79672
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/product-drift/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "acd49abfe66383ae325ced5adf371716f76eb164749ddb2e19a0dcf5638a4e96",
+      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/product-drift/m3/tooling/image-gates/verify-current.py",
-      "sha256": "924f82ab0df19c7c24a9c208c93880fab36da2c9216572c33b4219d6c0208f64",
+      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
       "bytes": 16970
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/product-drift/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
       "bytes": 12032
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/product-drift/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/03-invariants.py.txt",
-      "sha256": "30f0399507a486fdcd01a90f4fdccaea5e1a0ec8bd81ed25661c00bdb4b59a0b",
+      "sha256": "fcfb61309318800949f5ef582f946bdbb14c40244f2dd84dd82f8b32e293d8b2",
       "bytes": 42045
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/product-drift/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
-      "sha256": "187e7881ad746920b508c9a69ff11f5be64fd3452d40cf9bd2ae446a20373231",
+      "sha256": "bf6d75e8bd8176486e82f9871a116356521409ab6bd9d666c3946ad3a34ec21c",
       "bytes": 1579
     },
     {
@@ -3333,7 +3333,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-content/m3/runtime-integration/check-m3string-invariants.py",
-      "sha256": "9407d72859629ff18b1b22796368bda50c9d4e588072aea541c36d44b8bb7dc6",
+      "sha256": "1913aceb03b079596c7c8aea80285aecd2849f81475b597e4ea4094609b749a9",
       "bytes": 48860
     },
     {
@@ -3343,7 +3343,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-content/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "6d1f13d20bca007ab2d0b358fdee7bf4bdc1d1e6003a87cb9451b5e7c2975194",
+      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
       "bytes": 778
     },
     {
@@ -3368,32 +3368,32 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-content/m3/tooling/image-gates/current-c0.json",
-      "sha256": "13e26f49dac9f82ee8a01e828ead985a9896fcea195a27556741a88ea43ba74c",
+      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
       "bytes": 79672
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-content/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "acd49abfe66383ae325ced5adf371716f76eb164749ddb2e19a0dcf5638a4e96",
+      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-content/m3/tooling/image-gates/verify-current.py",
-      "sha256": "924f82ab0df19c7c24a9c208c93880fab36da2c9216572c33b4219d6c0208f64",
+      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
       "bytes": 16970
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-content/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
       "bytes": 12032
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-content/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/03-invariants.py.txt",
-      "sha256": "30f0399507a486fdcd01a90f4fdccaea5e1a0ec8bd81ed25661c00bdb4b59a0b",
+      "sha256": "fcfb61309318800949f5ef582f946bdbb14c40244f2dd84dd82f8b32e293d8b2",
       "bytes": 42045
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-content/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
-      "sha256": "187e7881ad746920b508c9a69ff11f5be64fd3452d40cf9bd2ae446a20373231",
+      "sha256": "bf6d75e8bd8176486e82f9871a116356521409ab6bd9d666c3946ad3a34ec21c",
       "bytes": 1579
     },
     {
@@ -3418,7 +3418,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-missing/m3/runtime-integration/check-m3string-invariants.py",
-      "sha256": "9407d72859629ff18b1b22796368bda50c9d4e588072aea541c36d44b8bb7dc6",
+      "sha256": "1913aceb03b079596c7c8aea80285aecd2849f81475b597e4ea4094609b749a9",
       "bytes": 48860
     },
     {
@@ -3428,7 +3428,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-missing/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "6d1f13d20bca007ab2d0b358fdee7bf4bdc1d1e6003a87cb9451b5e7c2975194",
+      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
       "bytes": 778
     },
     {
@@ -3453,32 +3453,32 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-missing/m3/tooling/image-gates/current-c0.json",
-      "sha256": "13e26f49dac9f82ee8a01e828ead985a9896fcea195a27556741a88ea43ba74c",
+      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
       "bytes": 79672
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-missing/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "acd49abfe66383ae325ced5adf371716f76eb164749ddb2e19a0dcf5638a4e96",
+      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-missing/m3/tooling/image-gates/verify-current.py",
-      "sha256": "924f82ab0df19c7c24a9c208c93880fab36da2c9216572c33b4219d6c0208f64",
+      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
       "bytes": 16970
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-missing/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
       "bytes": 12032
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-missing/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/03-invariants.py.txt",
-      "sha256": "30f0399507a486fdcd01a90f4fdccaea5e1a0ec8bd81ed25661c00bdb4b59a0b",
+      "sha256": "fcfb61309318800949f5ef582f946bdbb14c40244f2dd84dd82f8b32e293d8b2",
       "bytes": 42045
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-missing/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
-      "sha256": "187e7881ad746920b508c9a69ff11f5be64fd3452d40cf9bd2ae446a20373231",
+      "sha256": "bf6d75e8bd8176486e82f9871a116356521409ab6bd9d666c3946ad3a34ec21c",
       "bytes": 1579
     },
     {
@@ -3498,7 +3498,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-symlink/m3/runtime-integration/check-m3string-invariants.py",
-      "sha256": "9407d72859629ff18b1b22796368bda50c9d4e588072aea541c36d44b8bb7dc6",
+      "sha256": "1913aceb03b079596c7c8aea80285aecd2849f81475b597e4ea4094609b749a9",
       "bytes": 48860
     },
     {
@@ -3508,7 +3508,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-symlink/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "6d1f13d20bca007ab2d0b358fdee7bf4bdc1d1e6003a87cb9451b5e7c2975194",
+      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
       "bytes": 778
     },
     {
@@ -3533,32 +3533,32 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-symlink/m3/tooling/image-gates/current-c0.json",
-      "sha256": "13e26f49dac9f82ee8a01e828ead985a9896fcea195a27556741a88ea43ba74c",
+      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
       "bytes": 79672
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-symlink/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "acd49abfe66383ae325ced5adf371716f76eb164749ddb2e19a0dcf5638a4e96",
+      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-symlink/m3/tooling/image-gates/verify-current.py",
-      "sha256": "924f82ab0df19c7c24a9c208c93880fab36da2c9216572c33b4219d6c0208f64",
+      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
       "bytes": 16970
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-symlink/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
       "bytes": 12032
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-symlink/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/03-invariants.py.txt",
-      "sha256": "30f0399507a486fdcd01a90f4fdccaea5e1a0ec8bd81ed25661c00bdb4b59a0b",
+      "sha256": "fcfb61309318800949f5ef582f946bdbb14c40244f2dd84dd82f8b32e293d8b2",
       "bytes": 42045
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-0-symlink/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
-      "sha256": "187e7881ad746920b508c9a69ff11f5be64fd3452d40cf9bd2ae446a20373231",
+      "sha256": "bf6d75e8bd8176486e82f9871a116356521409ab6bd9d666c3946ad3a34ec21c",
       "bytes": 1579
     },
     {
@@ -3588,7 +3588,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-content/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "6d1f13d20bca007ab2d0b358fdee7bf4bdc1d1e6003a87cb9451b5e7c2975194",
+      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
       "bytes": 778
     },
     {
@@ -3613,32 +3613,32 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-content/m3/tooling/image-gates/current-c0.json",
-      "sha256": "13e26f49dac9f82ee8a01e828ead985a9896fcea195a27556741a88ea43ba74c",
+      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
       "bytes": 79672
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-content/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "acd49abfe66383ae325ced5adf371716f76eb164749ddb2e19a0dcf5638a4e96",
+      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-content/m3/tooling/image-gates/verify-current.py",
-      "sha256": "924f82ab0df19c7c24a9c208c93880fab36da2c9216572c33b4219d6c0208f64",
+      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
       "bytes": 16970
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-content/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
       "bytes": 12032
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-content/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/03-invariants.py.txt",
-      "sha256": "30f0399507a486fdcd01a90f4fdccaea5e1a0ec8bd81ed25661c00bdb4b59a0b",
+      "sha256": "fcfb61309318800949f5ef582f946bdbb14c40244f2dd84dd82f8b32e293d8b2",
       "bytes": 42045
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-content/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
-      "sha256": "187e7881ad746920b508c9a69ff11f5be64fd3452d40cf9bd2ae446a20373231",
+      "sha256": "bf6d75e8bd8176486e82f9871a116356521409ab6bd9d666c3946ad3a34ec21c",
       "bytes": 1579
     },
     {
@@ -3668,7 +3668,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-missing/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "6d1f13d20bca007ab2d0b358fdee7bf4bdc1d1e6003a87cb9451b5e7c2975194",
+      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
       "bytes": 778
     },
     {
@@ -3693,32 +3693,32 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-missing/m3/tooling/image-gates/current-c0.json",
-      "sha256": "13e26f49dac9f82ee8a01e828ead985a9896fcea195a27556741a88ea43ba74c",
+      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
       "bytes": 79672
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-missing/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "acd49abfe66383ae325ced5adf371716f76eb164749ddb2e19a0dcf5638a4e96",
+      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-missing/m3/tooling/image-gates/verify-current.py",
-      "sha256": "924f82ab0df19c7c24a9c208c93880fab36da2c9216572c33b4219d6c0208f64",
+      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
       "bytes": 16970
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-missing/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
       "bytes": 12032
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-missing/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/03-invariants.py.txt",
-      "sha256": "30f0399507a486fdcd01a90f4fdccaea5e1a0ec8bd81ed25661c00bdb4b59a0b",
+      "sha256": "fcfb61309318800949f5ef582f946bdbb14c40244f2dd84dd82f8b32e293d8b2",
       "bytes": 42045
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-missing/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
-      "sha256": "187e7881ad746920b508c9a69ff11f5be64fd3452d40cf9bd2ae446a20373231",
+      "sha256": "bf6d75e8bd8176486e82f9871a116356521409ab6bd9d666c3946ad3a34ec21c",
       "bytes": 1579
     },
     {
@@ -3748,7 +3748,7 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-symlink/m3/runtime-integration/fix-root-ascii-case/manifest.json",
-      "sha256": "6d1f13d20bca007ab2d0b358fdee7bf4bdc1d1e6003a87cb9451b5e7c2975194",
+      "sha256": "1eee6e6d1db0d7f602509db92e80fe00b990db2a37aae929a288b1379b602bd1",
       "bytes": 778
     },
     {
@@ -3773,32 +3773,32 @@
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-symlink/m3/tooling/image-gates/current-c0.json",
-      "sha256": "13e26f49dac9f82ee8a01e828ead985a9896fcea195a27556741a88ea43ba74c",
+      "sha256": "caa3af6b19162c603a9d29ccb92894c01b50f064f7c75846c9d0afbb8c117e70",
       "bytes": 79672
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-symlink/m3/tooling/image-gates/src/test/python/test_current_context.py",
-      "sha256": "acd49abfe66383ae325ced5adf371716f76eb164749ddb2e19a0dcf5638a4e96",
+      "sha256": "6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886",
       "bytes": 8723
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-symlink/m3/tooling/image-gates/verify-current.py",
-      "sha256": "924f82ab0df19c7c24a9c208c93880fab36da2c9216572c33b4219d6c0208f64",
+      "sha256": "66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23",
       "bytes": 16970
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-symlink/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
       "bytes": 12032
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-symlink/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/03-invariants.py.txt",
-      "sha256": "30f0399507a486fdcd01a90f4fdccaea5e1a0ec8bd81ed25661c00bdb4b59a0b",
+      "sha256": "fcfb61309318800949f5ef582f946bdbb14c40244f2dd84dd82f8b32e293d8b2",
       "bytes": 42045
     },
     {
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/observations/proof-1-symlink/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
-      "sha256": "187e7881ad746920b508c9a69ff11f5be64fd3452d40cf9bd2ae446a20373231",
+      "sha256": "bf6d75e8bd8176486e82f9871a116356521409ab6bd9d666c3946ad3a34ec21c",
       "bytes": 1579
     },
     {

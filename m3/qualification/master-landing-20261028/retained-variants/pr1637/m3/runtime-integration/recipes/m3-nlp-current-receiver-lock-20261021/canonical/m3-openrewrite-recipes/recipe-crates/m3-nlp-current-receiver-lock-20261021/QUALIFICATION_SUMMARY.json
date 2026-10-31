@@ -3,12 +3,12 @@
   "status": "LOCAL_RECIPE_AND_ACTUAL_RECEIVER_PASS",
   "source_seals": {
     "path": "SOURCE_SEALS.json",
-    "sha256": "6cc232bd392dd188b227a0a7c304d0a6e6d25ed91dd3641fefb335afdfc8574e"
+    "sha256": "5baa373db8748eba54cecfc5899eb36b5b2f09aa85cfb8399195bac6a367471a"
   },
   "sdk": {
     "receipt": {
       "path": "proof/sdk-001-offline/RESULT.json",
-      "sha256": "5f9b55adcb99fb526dd044476ec647cd2ca82dc3bb25a38c71f479df9925a187"
+      "sha256": "0bf285d0e082e121e178b0a22d47d92124e84579f5436c87276e8b999142fcdb"
     },
     "tests": 1,
     "failures": 0,
@@ -20,7 +20,7 @@
   "copier": {
     "receipt": {
       "path": "proof/copier-qualification-001/RESULT.json",
-      "sha256": "02ba2402bcbe554ec4e18ede6eec1c84c4accccb098a9779996995aaedf4289b"
+      "sha256": "597b29f2bb92576017e30c08e82300fe2e9117367f7dce54cd869964247fb569"
     },
     "writes": 2,
     "replay_writes": 0,
@@ -28,11 +28,11 @@
   },
   "receiving_application": {
     "path": "proof/receiving-application-001/RESULT.json",
-    "sha256": "91f29c76306be5b28000b916fcf73d7afad4e938abbd0a9ca81c938c98fb0467"
+    "sha256": "086499e28adf65d84acda3cc7aabafa6cea005d8ae4c4253dbb23dc62794be94"
   },
   "actual_receiving_runtime": {
     "path": "proof/receiver-runtime-001/combined-receiver-001-receipts/RESULT.json",
-    "sha256": "38c71b8c4f6fb632f2352873cbd2578be7cf1f1383cdf34d64f4fce9e5c0cee1"
+    "sha256": "1af51c5d7642bb84f88e61816ada2bc0b3d033dfdd4387f5a35cd2a11834c935"
   },
   "runtime_scope": {
     "pack_modules": 62,
@@ -46,19 +46,19 @@
   },
   "owner_candidate": {
     "path": "proof/owner-candidate-001/CANDIDATE_QUALIFICATION.json",
-    "sha256": "17e447626a1fd62e5aa649574ff5ab00ac257d642f0ed890ed8a32de40cf52fb"
+    "sha256": "bd76338ef22fa16e28ad6cc9b33ca3e264956ed0c54c09e342708cf82ba0250d"
   },
   "exact_contracts": {
     "path": "proof/owner-candidate-001/OWNER_CONTRACTS.md",
-    "sha256": "aa732e344212c8e80a717f05cdc2d10d268fc55e93e13d8f853e9d072dbbd729"
+    "sha256": "ce41b32743079df8474cd483b1bf36806b3b5e8f7ba9435843e24bba6efd497f"
   },
   "memory": {
     "path": "memory/FINAL_RESULT.json",
-    "sha256": "e1a67c9cb29aada8de10269fad3de345f9d83abace47669fbbd3be181ef6d634"
+    "sha256": "4da9014446d363e55bcf59c86a75d480703ea99b0161acfbd1a592f91d32efe3"
   },
   "source_rights": {
     "path": "provenance/SOURCE_AND_RIGHTS.json",
-    "sha256": "67555856f433a784f66865a5ed11f0e6d0229cacdc42de5cd391d1901619a115"
+    "sha256": "0f85d1ddf8f0234452146e14a5984dcd650b23b640c991498bcf256725de2ad1"
   },
   "admission": "PENDING; bounded local actual proof is not full-product or hosted acceptance.",
   "preserved_warnings": [

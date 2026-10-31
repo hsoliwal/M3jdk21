@@ -10,67 +10,67 @@
       "crate": "m3jdk-collection-current-owners-java-00-20261017",
       "kind": "java",
       "target": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
-      "manifestSha256": "1f8e7903b4efcc9073d299f2435df9bee5a3083a290fca857d6782e25f7e22ca"
+      "manifestSha256": "7347a0857e7f5b97fedd8a3b87334fafc7c793951bd9258644ef4253ef746ae5"
     },
     {
       "crate": "m3jdk-collection-current-owners-java-01-20261017",
       "kind": "java",
       "target": "m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveIndexView.java",
-      "manifestSha256": "d572af0a0820400dee0f27589f090d92e3c121952c73421bd5a9a5f3bb6dd78f"
+      "manifestSha256": "3b46af4631933f76ae01effb28fd1d30c9ac47a23ec8ad0a9ced05b64d765399"
     },
     {
       "crate": "m3jdk-collection-current-owners-java-02-20261017",
       "kind": "java",
       "target": "m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveSoaStore.java",
-      "manifestSha256": "e6c4dcf83a4149b76084efea82cc846f83d08ebddec3ff687cc2d1c356e9cf85"
+      "manifestSha256": "7d89ea341f7002cf993d1d67c1f1195356af5993e1124dc265fb30f145079d8c"
     },
     {
       "crate": "m3jdk-collection-current-owners-java-03-20261017",
       "kind": "java",
       "target": "m3/ports/collections/src/main/java/jdk/m3/util/M3RuntimeHeap.java",
-      "manifestSha256": "8c1e39df59fe37614d5e275796dabb0db3531a3d673de3497d8173e7901ddfd4"
+      "manifestSha256": "817188db1b7d8cdf19464ff6011fc07d749cbc69d47e212b33460fc3b0d99a6a"
     },
     {
       "crate": "m3jdk-collection-current-owners-java-04-20261017",
       "kind": "java",
       "target": "m3/ports/collections/src/main/java/jdk/m3/util/M3SortableTopK.java",
-      "manifestSha256": "41edc3424ee1fabe126b2836de5c38a9d4c3e9fa9f9d1d074031b810cf8d39f8"
+      "manifestSha256": "8e647dd7cb97403cd1aea238b9cd7433b97039ebc8565d116df4072e6d0c93cb"
     },
     {
       "crate": "m3jdk-collection-current-owners-java-05-20261017",
       "kind": "java",
       "target": "m3/tooling/module-packs/collections/src/main/java/module-info.java",
-      "manifestSha256": "10db12c33fbc41114e01b3d8b05c85dcbc9d09f2d7c065bdec42b2b3ad31d8b8"
+      "manifestSha256": "ab98305d7a24997ab6bf6951125662e9faf6febd16868f9251e3acf6eec8b59a"
     },
     {
       "crate": "m3jdk-collection-current-owners-java-06-20261017",
       "kind": "java",
       "target": "m3/tooling/module-packs/collections/src/test/java/jdk/m3/util/M3PrimitiveIndexViewFilterContract.java",
-      "manifestSha256": "0375a70a5d29102aef8060ce3a096aa1c858e2c15c58b3f7234867d42d1b2690"
+      "manifestSha256": "90b2b4c5b80f1b9ea506e6daf682f5a53458b7cbf68e79428b66ec36e727b297"
     },
     {
       "crate": "m3jdk-collection-current-owners-java-07-20261017",
       "kind": "java",
       "target": "m3/tooling/module-packs/collections/src/test/java/jdk/m3/collections/M3CollectionsPackTest.java",
-      "manifestSha256": "250beda6d7703c8c8b110784db3c1a7f22cfec95696dc6ccfd03f203ce9c1d10"
+      "manifestSha256": "283f436627b8b000171db264383164fd8f34762abd35133e268039efe1d3d45f"
     },
     {
       "crate": "m3jdk-collection-current-owners-java-08-20261017",
       "kind": "java",
       "target": "m3/tooling/module-packs/collections/src/test/java/jdk/m3/collections/M3FilteredViewsContract.java",
-      "manifestSha256": "b8225995edd43592859ead02b7df963a97b8cc3bba4816b4d5caeb87b58da22f"
+      "manifestSha256": "71e5b4f252c3452801c99d91d2231f0ff9601600cc7becd1f24a39d0232d3b88"
     },
     {
       "crate": "m3jdk-collection-current-owners-java-09-20261017",
       "kind": "java",
       "target": "m3/tooling/module-packs/collections/src/test/java/jdk/m3/collections/M3MutableFilteredViewsContract.java",
-      "manifestSha256": "2aae60aa9bd008ab73acc4554370ba2c39c9429a2dcfc860f14ed2559bd71f45"
+      "manifestSha256": "dac7700617fcf7b05dac44faa83b5b85704520d436dc88a0a201ce26a6680fad"
     },
     {
       "crate": "m3jdk-collection-current-owners-assets-20261017",
       "kind": "text",
       "targets": 10,
-      "manifestSha256": "434888f96328367a33f7b76d2e3c421f3f509ceb8390157ea0b4b902dd390368"
+      "manifestSha256": "f2f4d182ece3a18a0f7aab08a31c0576d0ac033d5e0859a0f9aa798b20a89637"
     }
   ],
   "omittedHistoricalRuntimePaths": [

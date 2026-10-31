@@ -1,10 +1,10 @@
 {
-  "capture_sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf",
+  "capture_sha256": "56f8fe6009122a86701c7dc6297b516b0123e9018b36895418409b63ed4cc428",
   "files": [
     {
       "bytes": 48120,
       "capture_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/V04_CHANGED_BODY_READBACKS.json",
-      "capture_sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf",
+      "capture_sha256": "56f8fe6009122a86701c7dc6297b516b0123e9018b36895418409b63ed4cc428",
       "content_role": "materialized_production",
       "expected_current_tree": "b7d53f9edea5e85ae3f070eac3464dd134ac81e4",
       "git_blob": "baa84c13b7fd330eab6b1832dab1b4b523bfd8ce",
@@ -18,7 +18,7 @@
     {
       "bytes": 203000,
       "capture_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/V04_CHANGED_BODY_READBACKS.json",
-      "capture_sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf",
+      "capture_sha256": "56f8fe6009122a86701c7dc6297b516b0123e9018b36895418409b63ed4cc428",
       "content_role": "materialized_maven_pom",
       "expected_current_tree": "b7d53f9edea5e85ae3f070eac3464dd134ac81e4",
       "git_blob": "1a1c0cc8017b9ce9eadd6eba7e2ead3400a2266f",
@@ -32,7 +32,7 @@
     {
       "bytes": 30078,
       "capture_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/V04_CHANGED_BODY_READBACKS.json",
-      "capture_sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf",
+      "capture_sha256": "56f8fe6009122a86701c7dc6297b516b0123e9018b36895418409b63ed4cc428",
       "content_role": "materialized_production",
       "expected_current_tree": "b7d53f9edea5e85ae3f070eac3464dd134ac81e4",
       "git_blob": "d1c607f5d944e82d15856ec16cad9f163558aee3",
@@ -46,7 +46,7 @@
     {
       "bytes": 3303,
       "capture_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/V04_CHANGED_BODY_READBACKS.json",
-      "capture_sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf",
+      "capture_sha256": "56f8fe6009122a86701c7dc6297b516b0123e9018b36895418409b63ed4cc428",
       "content_role": "materialized_production",
       "expected_current_tree": "b7d53f9edea5e85ae3f070eac3464dd134ac81e4",
       "git_blob": "eaacc9846285222938eee09bb91827ed22020b1b",
@@ -60,7 +60,7 @@
     {
       "bytes": 8493,
       "capture_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/V04_CHANGED_BODY_READBACKS.json",
-      "capture_sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf",
+      "capture_sha256": "56f8fe6009122a86701c7dc6297b516b0123e9018b36895418409b63ed4cc428",
       "content_role": "materialized_production",
       "expected_current_tree": "b7d53f9edea5e85ae3f070eac3464dd134ac81e4",
       "git_blob": "0d3aed858efcc450cf24822567f4ee605e84a18d",
@@ -74,7 +74,7 @@
     {
       "bytes": 27717,
       "capture_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/V04_CHANGED_BODY_READBACKS.json",
-      "capture_sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf",
+      "capture_sha256": "56f8fe6009122a86701c7dc6297b516b0123e9018b36895418409b63ed4cc428",
       "content_role": "materialized_production",
       "expected_current_tree": "b7d53f9edea5e85ae3f070eac3464dd134ac81e4",
       "git_blob": "d06c42aa8ad27118497cd057d1aef8168e4e97f5",
@@ -88,7 +88,7 @@
     {
       "bytes": 18320,
       "capture_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/V04_CHANGED_BODY_READBACKS.json",
-      "capture_sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf",
+      "capture_sha256": "56f8fe6009122a86701c7dc6297b516b0123e9018b36895418409b63ed4cc428",
       "content_role": "materialized_existing_test",
       "expected_current_tree": "b7d53f9edea5e85ae3f070eac3464dd134ac81e4",
       "git_blob": "a4b472c6f369f139676fc502909ae41bc4ad015f",

@@ -1,10 +1,10 @@
 [
   {
     "path": "tests/M3WrapperNavigationCounterexample.java",
-    "sha256": "ef307d074e0925ab681a90c9c6a26cb7967e80d38ef1fbd746ac8fb7ef9bc88c"
+    "sha256": "0ad860e1fabf1c50ab03103c0975a0e62e4c5cae90cd3f50d37889cba526d80e"
   },
   {
     "path": "tests/M3WrapperSemanticContract.java",
-    "sha256": "fe3a80c01a6b4b3e5df933d21cd930224a4b786da3ca00bdcf324c1facb5bb35"
+    "sha256": "aebf90e95d98cdd63e6b902b35351b228f29117f27467731d06fcd0f7aab70e5"
   }
 ]

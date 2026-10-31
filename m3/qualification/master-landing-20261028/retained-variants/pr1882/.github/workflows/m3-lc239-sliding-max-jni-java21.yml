@@ -35,8 +35,8 @@ jobs:
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LaneAlgorithms.java)" = '6691be3fcc1d3b3b276dd2feb7aa488dea5c00d2'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_address_kernel.c)" = '76f68619a78b52ab528f4f16dcf26b510288c7c9'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LaneSlidingMaximumContract.java)" = '84cfbc24efa4884584ac7cd1b71b55d6cba6c834'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LaneSlidingMaximumTest.java)" = '987dde85f0260c1f43801df4d514e52a7e1ffd71'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LaneSlidingMaximumContract.java)" = '82b4734c5f07c274380108064b67eea8544509c4'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LaneSlidingMaximumTest.java)" = '0b8ebf125d3fad1cf747e80eea4166f34efb8690'
       - name: Strict Java 21 original-source compile and JNI header
         shell: bash
         run: |

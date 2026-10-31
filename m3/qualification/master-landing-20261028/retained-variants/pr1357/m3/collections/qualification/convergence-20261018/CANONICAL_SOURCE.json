@@ -9,12 +9,12 @@
   "engine_changes": [],
   "datasets": {
     "converged-owners-v2-20261018": {
-      "resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-converged-owners-v2-20261018/manifest.tsv": "e166266db3ee7abfc08188b07cf6da1d886834a4a022a41ed96c27efe171be4d",
-      "resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-owners-v2-20261018/manifest.tsv": "48ee5d1905a8135cff9a8312aeaaa59af20ec5d6fa8da6929a3a571b771f6709"
+      "resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-converged-owners-v2-20261018/manifest.tsv": "e019e5419e658d1504d0c16508c90ad8d183dfacae1ac154c6877126fb228d12",
+      "resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-owners-v2-20261018/manifest.tsv": "c9f5ece439b1165709f658e4f8d19988a3ce1e611fc9f86f16d2489f5fd82cea"
     },
     "converged-oracles-20261018": {
-      "resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-converged-oracles-20261018/manifest.tsv": "d5191b0b85bfc5e2569302172a073827d716dc65b9083cdefdcd81423b3adada",
-      "resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-oracles-20261018/manifest.tsv": "1fa785122273d3f53cd8bbc7439f29819c108943bf52cd3b6afac5c263c6304f"
+      "resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-converged-oracles-20261018/manifest.tsv": "27c0acadea3d720cc24372351b4627312a288fda5764bda198ca33a7841762af",
+      "resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-oracles-20261018/manifest.tsv": "b00dbb9911d4014978ddf8512e2a88a98439e7a72d6589ece59bf7d0d5a406b6"
     },
     "converged-build-20261018": {
       "resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-converged-build-20261018/manifest.tsv": "5d4b248dd550d4a21af45b4b7d86602f5f9ec92f54720cae7c6edc801a12935e"

@@ -18,16 +18,16 @@ public final class M3Jdk21A3AlgorithmCatalogueRecipe extends M3Jdk21A3SourceSeal
         result.put(
                 "src/main/java/jdk/m3/a3/A3.java",
                 new Target(
-                        "4fa702edb44c9a064c640c16610a3749f35f54ca",
-                        "39ea70adc237392244d02eb3b9d1bf05b368bcf0",
+                        "c3ba9cdbaff00ff9f7a9e84585c42cca48861a75",
+                        "5a67b42d7a6e63de2f9d2a344eadaeaa60c8864f",
                         "before/A3.java",
                         "after/A3.java",
                         true));
         result.put(
                 "src/main/java/jdk/m3/a3/A3Plan.java",
                 new Target(
-                        "19b90c3f9064d55d28a1d2dbb9395ac0aefac966",
-                        "624bdceb4a3b1dc3e8aa32c43da42152b6f54042",
+                        "77acb89b81a4d948371b3a443a285615047ad256",
+                        "552a46632bd34e13d70f1936448de18c018071c4",
                         "before/A3Plan.java",
                         "after/A3Plan.java",
                         true));
@@ -35,15 +35,15 @@ public final class M3Jdk21A3AlgorithmCatalogueRecipe extends M3Jdk21A3SourceSeal
                 "src/main/java/jdk/m3/a3/A3Alg.java",
                 new Target(
                         "ABSENT",
-                        "bd0a88ba3c240510e57c51fb37c689205e02c9ec",
+                        "906b6353f7ceba3d97122fb25a5d5793e0183b37",
                         null,
                         "after/A3Alg.java",
                         false));
         result.put(
                 "src/test/java/jdk/m3/a3/A3PlanTest.java",
                 new Target(
-                        "3e186021ae1b8997f5bb01ddb08f9b32bf5ae7a9",
-                        "1570299bc0a09012b2752143d7d2861521801104",
+                        "4fe10060e31b23cd778f69c63033f27e7fc72d83",
+                        "1c660d64d7a86eb44e2cc96b544a782c34e47bf8",
                         "before/A3PlanTest.java",
                         "after/A3PlanTest.java",
                         true));
@@ -51,7 +51,7 @@ public final class M3Jdk21A3AlgorithmCatalogueRecipe extends M3Jdk21A3SourceSeal
                 "src/test/java/jdk/m3/a3/A3AlgTest.java",
                 new Target(
                         "ABSENT",
-                        "c59fda9b5d97c98c5682de6aeff50aa508182ef7",
+                        "3f15648966654e6d39f4e4faadd4b8fb6c1b4f35",
                         null,
                         "after/A3AlgTest.java",
                         false));

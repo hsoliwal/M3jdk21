@@ -12,8 +12,8 @@ base = Path(sys.argv[1]).resolve()
 crate = Path(__file__).resolve().parent
 candidate = Path(sys.argv[2]).resolve()
 engines = {
-    'M3VerbatimJavaPairRecipe.java': '3af361baeb3c04b81808750c1a0d1d8f5c5621a87a2065deec460c540c2cc2b9',
-    'M3Jdk21HashPinnedTextSnapshotRecipe.java': '8133bcf7e9f750c714cdd42784bdf30b60f67dd957b2831cd54cb01c9a2cfc3a',
+    'M3VerbatimJavaPairRecipe.java': '1f047576019b5777d8ba82994b491b5e986a72f14c69cb4860b8aa04ffa23467',
+    'M3Jdk21HashPinnedTextSnapshotRecipe.java': '2102795eec6a55c6e7564ada0fa439cdf0d98e4c1fc395b2d5d52e1f88890283',
 }
 engine_path = Path('jdk/m3/rewrite/backport')
 for name, sha in engines.items():

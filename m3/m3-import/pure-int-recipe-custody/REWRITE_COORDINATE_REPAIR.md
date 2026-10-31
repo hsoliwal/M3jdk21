@@ -14,7 +14,7 @@ by this static check.
 Reproduce the static gate:
 
 ```sh
-python3 -S m3/synexia-import/pure-int-recipe-custody/verify-source-rewrite-coordinate.py
+python3 -S m3/m3-import/pure-int-recipe-custody/verify-source-rewrite-coordinate.py
 ```
 
 No runtime, String, HotSpot, public Java API or Tornado backend source is modified.

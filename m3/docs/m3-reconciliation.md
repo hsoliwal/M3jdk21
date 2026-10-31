@@ -12,7 +12,7 @@ Reviewed source pin: `hsoliwal/com.synexia@9c36c18a7778e6096148a3bbee8f2af757513
 
 The parent reported 27 focused tests plus an overlapping existing 13-test gate. Those results are **not independently rerun or claimed here**. Neither those tests nor P0 prove transparent JVM String integration or JNI/performance behavior.
 
-`M3_JDK=<private-built-JDK> python3 m3/compatibility/check-synexia.py` compares P0 content, String hash after materialization and all small ranges against the exact FrozenChars source for every one of the 65,536 UTF16 code units. This verifies only those semantic dimensions. It does not prove owner equivalence, canonicalization, subSequence object identity, encoding, cache admission, pooling, prepared search or binary/API compatibility.
+`M3_JDK=<private-built-JDK> python3 m3/compatibility/check-m3.py` compares P0 content, String hash after materialization and all small ranges against the exact FrozenChars source for every one of the 65,536 UTF16 code units. This verifies only those semantic dimensions. It does not prove owner equivalence, canonicalization, subSequence object identity, encoding, cache admission, pooling, prepared search or binary/API compatibility.
 
 Source SHA-256 values:
 

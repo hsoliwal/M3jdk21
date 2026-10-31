@@ -6,63 +6,63 @@
     {
       "bytes": 19318,
       "canonical_publication_commit": "528aaf79cfae79c5dbfe7c307340329d320e8c44",
-      "git_blob": "b551b7b5bb45fd082d478c3313ada4d62487b6a7",
+      "git_blob": "ab8483d19b40f2b79ef743d906dec0147f14e777",
       "manifest": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/custody/m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/wrapper-contract-v2/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-wrapper-contract-v2/manifest.tsv",
       "manifest_target": "m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceContract.java",
       "original": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/custody/m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/wrapper-contract-v2/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-wrapper-contract-v2/M3WrapperConvergenceContract.java.txt",
       "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/jdk/m3/collections/M3WrapperConvergenceContract.java",
       "qualification_kind": "historical fixture, executed freshly in this run",
       "role": "unchanged copied historical fixture",
-      "sha256": "2913aeae2f20b80c669398e5727ad9bc000eccf3bb225d85bdd672c17d4fb847"
+      "sha256": "989507e15f05f3d931c51e7ae65d65dbc3fac7b80bc94984e4b9922ea17e8335"
     },
     {
       "bytes": 453,
       "canonical_publication_commit": "528aaf79cfae79c5dbfe7c307340329d320e8c44",
-      "git_blob": "0a6e1b09701331712dbc07e8cc18f6b2d9d26a47",
+      "git_blob": "98c2f1b84592bd563f969e577ad0ef3d2b9f8dd0",
       "manifest": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/custody/m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/wrapper-junit-v2/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-wrapper-junit-v2/manifest.tsv",
       "manifest_target": "m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceTest.java",
       "original": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/custody/m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/wrapper-junit-v2/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-wrapper-junit-v2/M3WrapperConvergenceTest.java.txt",
       "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/jdk/m3/collections/M3WrapperConvergenceTest.java",
       "qualification_kind": "historical fixture, executed freshly in this run",
       "role": "unchanged copied historical fixture",
-      "sha256": "fe071ef7e801a9bb1d57501512f0dd606f0c08652e100e6132dc7c4e4a8f6327"
+      "sha256": "37373c5fe47db51de219365a602737b278feb9b2ca34bc888dd0c0a1661e4e89"
     }
   ],
   "historical_guard_postimage_equals_current_owner": true,
   "production_owners": [
     {
       "bytes": 19677,
-      "git_blob": "10c4d16cc9cd62d36f22646988718422caa2311e",
+      "git_blob": "39dde593da4de3d7caaa4c12afc3deae7ce6a9f3",
       "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/jdk/m3/collections/M3FilteredLists.java",
       "role": "unchanged production owner",
-      "sha256": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75",
+      "sha256": "bb0ff9a8008521576530b0cea64d00b4f22e6e4b8424b8e5df7f416a6a8b6051",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java",
       "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
     },
     {
       "bytes": 31807,
-      "git_blob": "1a31827cd6274b5ad8eb62f3a5ce0e5e0667478f",
+      "git_blob": "549dc05101caed368eeb04d223ad1c08943054ee",
       "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/jdk/m3/collections/M3FilteredViews.java",
       "role": "unchanged production owner",
-      "sha256": "8419315c3058bce6add897b7ffa7c6763bbb6b85418bb35e190ba8a4d2dd70c4",
+      "sha256": "5308017ea910acd0f81252e88fd8e57c2c1b49d8e6f2874bab0728c110526709",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
       "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
     },
     {
       "bytes": 25720,
-      "git_blob": "37b669dfe22a3b6be9e68aa59f9dd94e96fc3d49",
+      "git_blob": "076778a34b49ca1ef7eac47cd9b6cf33b0fbe55f",
       "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/jdk/m3/collections/M3MutableFilteredViews.java",
       "role": "unchanged production owner",
-      "sha256": "3c65c0d918b6cb39d4c27f98699fa97067d2aa3a7fb76ea48b2fd6092a9d0178",
+      "sha256": "19cbdee1b2e604ad5e491f9089d2ff869852cedee8ffd086e78bc887043678eb",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java",
       "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
     },
     {
       "bytes": 4051,
-      "git_blob": "2fe08d8728732e5f53e75d9feb34c9c6ffc74a8d",
+      "git_blob": "f6606e83e016baa889692ac05826cdd14ee2b5d3",
       "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/jdk/m3/collections/M3SlotSpliterators.java",
       "role": "unchanged production owner",
-      "sha256": "9257ce0c9c95e3afef20624631ba048aa3d60ef53a1189cd2bbabc07da2bba2f",
+      "sha256": "f42b36dcf5555941f97dbf732ccd210a8e2152862622e626d445576a2c93e326",
       "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3SlotSpliterators.java",
       "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
     }

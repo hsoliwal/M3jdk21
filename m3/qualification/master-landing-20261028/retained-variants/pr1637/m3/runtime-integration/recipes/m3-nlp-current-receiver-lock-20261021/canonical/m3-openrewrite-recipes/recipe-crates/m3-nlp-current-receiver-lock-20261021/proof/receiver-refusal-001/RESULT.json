@@ -20,14 +20,14 @@
     "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/m3/m3-openrewrite-recipes/src/main/resources"
   ],
   "exit_code": 1,
-  "log_sha256": "59f425942a6a9cb07848ad725e3f2106efe81f69cc1fcefa8f38727e59e2d5bb",
-  "source_lock_sha256": "054029431fbd8063c1e0397c43f3538f319984e252c92f08538881dc0a2eaff5",
+  "log_sha256": "c878aa3433bd381236e7de11b69b8bc73b649dd2f39570eaf6d9a5c8c6ec87b5",
+  "source_lock_sha256": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a",
   "hash_drift": [
     {
       "module": "jdk.m3.text",
       "path": "m3/core/src/jdk/m3/text/M3GvasLiteralImage.java",
       "expected": "f3ed3fd91d7e60220ba22e717f6fec41dc7759e5a221ef1dba65251d0028f8d7",
-      "actual": "2c1a8b9cc9870fc5fdf8e6f8ca46af907c503346aaf6d783b74a6498fd3601cd"
+      "actual": "b05c40b8999993dfec75afa646ba4fac421258f0b611ab01956b878226574a3f"
     }
   ],
   "coverage_drift": [

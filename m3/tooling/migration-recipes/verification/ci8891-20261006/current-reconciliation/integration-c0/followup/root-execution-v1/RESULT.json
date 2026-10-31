@@ -3,7 +3,7 @@
   "plan": {
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/terminal-selection-v1/COMMANDS.json",
     "bytes": 7776,
-    "sha256": "77d37faa667cc76cb0d36c203b942df976a902f3b658fed224b41ec081f2df71"
+    "sha256": "da333328eb2ae80710df758b10caf00243eeb2e6ec06f0fe6bb362a9d96e9f3d"
   },
   "commands": [
     {
@@ -24,7 +24,7 @@
       "stdout": {
         "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/root-execution-v1/select.stdout.log",
         "bytes": 786,
-        "sha256": "148bc0710dee61b4080878d69cb39784f2bd579a7db90087db8a8ef7acf61c73"
+        "sha256": "a4dc3a7ab8f2b781d1e2a695b5ece40071f5b78962c39cee03b85acae19da909"
       },
       "stderr": {
         "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/root-execution-v1/select.stderr.log",
@@ -74,7 +74,7 @@
       "stdout": {
         "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/root-execution-v1/verify.stdout.log",
         "bytes": 771,
-        "sha256": "93539e39ed27bca525373bad454f4caebffb1191251023e8e25515b50a61041b"
+        "sha256": "3f4d16dac92bd8feb5903e172ddee6668202f5d1f7b523269a737fc9892de429"
       },
       "stderr": {
         "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/root-execution-v1/verify.stderr.log",
@@ -99,7 +99,7 @@
       "stdout": {
         "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/root-execution-v1/extract.stdout.log",
         "bytes": 770,
-        "sha256": "c1523549bb17f58e071399f95e7ca514f1ad4e2dbee43b4da2fa0617e566e84f"
+        "sha256": "e887ebf69e4fe80c0b353c23a65faaae3f499f189414b38164fd30d7aea6fd59"
       },
       "stderr": {
         "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/root-execution-v1/extract.stderr.log",
@@ -119,7 +119,7 @@
       "stdout": {
         "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/root-execution-v1/finish.stdout.log",
         "bytes": 1099,
-        "sha256": "23e400c0313214400ad0340dc09e84266d90ccee686b905ab70a14a96754e262"
+        "sha256": "731d6322b54144e372f62773de63975c98493ad15efd68f99e268917b4217c92"
       },
       "stderr": {
         "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/root-execution-v1/finish.stderr.log",

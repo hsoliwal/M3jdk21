@@ -4,14 +4,14 @@
   "receiving_repository": "hsoliwal/eclipse.platform.swt",
   "receiving_revision": "c0ffa6d76338ed1b06cfe0158b0e04d8930df546",
   "exact_one_line_dependency_addition": true,
-  "target_preimage_sha256": "7539cf81d2d7a7b30bff97ce2812a7e67f4e3593463a898aa38c8e6b0240dfa0",
-  "target_postimage_sha256": "6553565c8dd14a857e796f741f3f8f8e7cbf3edda11df58b8dcd8a53e78e5600",
+  "target_preimage_sha256": "ff8b2c1db5fffa1a9013fc863a1f5dac337b2cb633c07d513339b57fcce40b80",
+  "target_postimage_sha256": "4b864a178251e0f853cc8d2fe8027962bf831f950d9b83a9d095496ae60be158",
   "original_canonical_pom": {
     "repository": "hsoliwal/com.synexia",
     "revision": "9372a2d57f1a05394172a7bd85dda3f0d6d83983",
     "pull_request": 12544,
     "path": "synexia-openrewrite-recipes/recipes/swt-scrollbar-full-range-20261020/pom.xml",
-    "blob": "420eabcfebc730b8d932d2db884908c1cd77840b",
+    "blob": "96d82fbd7a60cfd0a3584058e30f61972188043b",
     "license": "Apache-2.0",
     "disposition": "Same faulty bytes, retained; separate unmerged original PR is not mutated"
   },
@@ -25,7 +25,7 @@
     "license_path": "licenses/SLF4J-2.0.13-LICENSE.txt",
     "license_sha256": "4e7f90c86ab51278228bce153122f1d8df30149d13ce9ef524c8444a84c32dcc",
     "selection_owner": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/pom.xml",
-    "selection_owner_sha256": "934fb8b8fdad025d77f41166306de9f1148fd786a81db811da85b301c6af0bd1",
+    "selection_owner_sha256": "556a8edbd5236692ef4b059b586c63d30a71cd8a5676d63ce020fa14a00d7561",
     "scope": "Build-time proof dependency from pinned offline cache; no binary payload vendored by this task"
   },
   "first_party": {

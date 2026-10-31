@@ -3,12 +3,12 @@
   "status": "PASS",
   "profile": "m3-integrated-refinement-20261021/1.0",
   "events": [
-    "3e877856e3f14207fece0d3f69c627ef420480da61a94b4210b4504ef5fc7616",
-    "115767aa323e2ea6db2f6de6b13641157abc0f68ef45bbcfeeaeabc7e84698dd",
-    "9f00fe04f180f10e0c2f0ba247d676add86c7afee28a11065a7f0fe69238b01d",
-    "7b087f5faa490efcdc3b783cd86ca790c87e4fd00b6a4580e5754f5cad84ac5b",
-    "d3f3be895c7fa277090fb372a22564b989448ea42b55be0aa3c16f5b7df37086",
-    "c12353186399bbacdc60cedb4b0f33cb0179f8f7c146f1d87bc3b27d2104f36b"
+    "12db3d3bea4b8a5b958ed799934c0bbe33ea8b416a47f45d803495f1e4b11acf",
+    "c876494cd3b2b01d905bb5a623ad97981e9ff113ebc0740978b0a4206491de2d",
+    "093cfae9d76bd99b0c97aa81cac51e3a1834c0c14c3cd7bbd0c4c0f7bcc9fe54",
+    "c960a4f166495a83f6c289b4f03ab76a74b3c42e09b2f9dd3f1046625639c120",
+    "2bc163b52e2e50a1254ba885980ed7cfdb88a5abe598f8849d4e85433afb9fa1",
+    "fc16016f246125317e2977ea0c887868414702be9d8ef627d4a664407628bf59"
   ],
   "event_count": 6,
   "conformance_checks": 129,
@@ -17,7 +17,7 @@
   "admission": "PENDING",
   "predecessor_checkpoint": {
     "path": "memory/FINAL_RESULT.json",
-    "sha256": "e7f996f34a74a48cb851e3195cddbb8bd0e6287c3c2dc5a3b540ecc39816c9c0"
+    "sha256": "228cdb2455b84dfd47d789d4bd41049877fc11ff17f50b476a363c477ccd9338"
   },
   "profile_receipt": {
     "path": "memory/PROFILE.md",
@@ -25,20 +25,20 @@
   },
   "retrieval": {
     "path": "memory/LESSONS-002.md",
-    "sha256": "559613fdefacf9bcc1792028712ec1d01c444e4725ac39e46d9c4d04073c5784"
+    "sha256": "2d15acc66d7153daa9cd8fb284a585aa629cfd63d9b424db1ea91fffc75bfd38"
   },
   "index": {
     "path": "memory/INDEX-002.json",
-    "sha256": "03b41d7fc735f9170c416b5a7af4cce90ffc70f2d925e969a0e355c4d91cb757"
+    "sha256": "7d70a15a48537909e03c4a088b2a3283fac2d2973d2c4fafaed8ba1aae52c391"
   },
   "verification": [
     {
       "path": "proof/sdk-003-workflow-successor-offline/RESULT.json",
-      "sha256": "72ea68db76198ff1f8d4e55f7df9bd6c5a40c1cc075abbfb851a7a343ff9e0ff"
+      "sha256": "57ccb0c5a801848e80e472ac533c7e287b1eaac8c36960824acc952ea19dbb25"
     },
     {
       "path": "proof/memory-integrity-002/RESULT.json",
-      "sha256": "da2b1252d13c694ef9f6a8d9545565a0bbeaa1c7ff1a15e6fed424f5659e9b31"
+      "sha256": "2b84f00e516b85310df6755fc8b29f47bd55333fd0882c4d230274ffb8d51296"
     }
   ],
   "scope": "Appended sixth correction event; original five-event checkpoint and all original test/source snapshots remain byte-identical.",

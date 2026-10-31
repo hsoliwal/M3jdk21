@@ -8,7 +8,7 @@
   "newStructuredReviewClaimed": false,
   "modelInvocations": 0,
   "diffPath": "IMPORTER_FIX_RECIPE_V3.diff",
-  "diffSha256": "1631ebdeb3b6aa78782c9a8abda60595517edc2eba74d8e7ada3ddce6043b811",
+  "diffSha256": "d2b79e4436e41a4b364215cfe302f707152b86ba8a5556413de8a22cfbeb4d8e",
   "owners": 3,
   "productionChangedLines": {
     "removed": 1,
@@ -20,19 +20,19 @@
   },
   "changes": [
     {
-      "path": "m3/synexia-import/src/main/java/com/m3/synexia/importer/SynexiaImportPlan.java",
+      "path": "m3/m3-import/src/main/java/jdk/m3/importer/M3ImportPlan.java",
       "delta": "Qualify existing outer static root helper, resolving record accessor name collision",
       "publicApiOrAlgorithmChange": false,
       "proof": "Existing strict6-owner compile after retained exact compile failure"
     },
     {
-      "path": "m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImportPlanTest.java",
+      "path": "m3/m3-import/src/test/java/jdk/m3/importer/M3ImportPlanTest.java",
       "delta": "Encode YAML fixture as UTF-8 bytes and mirror canonical source/target family paths",
       "assertionChanges": false,
       "proof": "Original ADD/M3_RECIPE assertions retained; all7cases passed"
     },
     {
-      "path": "m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImporterTest.java",
+      "path": "m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java",
       "delta": "Create source after source-failure assertions, before absent-target-root assertion",
       "assertionChanges": false,
       "publicFailureOrderingChange": false,
@@ -45,7 +45,7 @@
     "errors": 0,
     "skips": 0,
     "receipt": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\FINAL_JUNIT_PROOF.json",
-    "sha256": "315b3b737d2e22d84983b6e8440de58f7cc62d7272704b1910507594588f9eee"
+    "sha256": "a29b4c42d6f9db3705fdea63f1facab65e67af662be5bae66a8195e17ebc2806"
   },
   "noAssertionsRemovedOrWeakened": true,
   "scopeExpansion": false

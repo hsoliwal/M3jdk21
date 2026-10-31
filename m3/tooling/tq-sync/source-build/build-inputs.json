@@ -2098,16 +2098,16 @@
   "tqInputs": {
     "srcGitTree": "321f54167edaeec37daece1fdb1ed1ff387a11b6",
     "pomBlob": "ee408306125c6d8bf5b5aecf7d74eb75cdac3377",
-    "manifestBlob": "af4935f91d039791ff8c5861e02a784637d109fc",
-    "testBlob": "d873aaf44c96f37a87fc84d13ac4eec595c1473b",
+    "manifestBlob": "092517c440d9c1f4221bbf04c7863d1fc5411e29",
+    "testBlob": "6fa4ec1ff9755c2a668ba1548450f064b352ab6b",
     "engines": [
       {
         "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
-        "gitBlob": "7c11497c0183d04e66baa41ee5391de682175360"
+        "gitBlob": "40f543e413c245c900d6502a27645d05735a6ebd"
       },
       {
         "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-        "gitBlob": "4a38e39d0755462d40c2b22548b87abde938ea0b"
+        "gitBlob": "73779dee8c80a0913b88fff17637ed3f44b33ea3"
       }
     ]
   }

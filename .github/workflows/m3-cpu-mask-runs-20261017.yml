@@ -40,8 +40,8 @@ jobs:
           ROOT=m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cpu-mask-runs-20261017
           cmp -s m3/collections/src/main/java/jdk/m3/collections/M3CpuMaskRuns.java "$ROOT/M3CpuMaskRuns.java.txt"
           cmp -s m3/collections/src/test/java/jdk/m3/collections/M3CpuMaskRunsSelfTest.java "$ROOT/M3CpuMaskRunsSelfTest.java.txt"
-          echo 'dc6ff845c49c4a5691e17c362085eaf8721332613f4523a8ff0317f35ec54611  m3/collections/src/main/java/jdk/m3/collections/M3CpuMaskRuns.java' | sha256sum -c -
-          echo '2498673e941fffccbc0a25fdc8a0dec75b3fc602b69bacf6696d854b1b1a49ad  m3/collections/src/test/java/jdk/m3/collections/M3CpuMaskRunsSelfTest.java' | sha256sum -c -
+          echo 'fa64e9322f239a45cd63223dd12f6396222382021d88b8f0263dc393f9eb7dbc  m3/collections/src/main/java/jdk/m3/collections/M3CpuMaskRuns.java' | sha256sum -c -
+          echo 'd4a9fce7399db2b69d09cb334ef2479eca0ba821641f330dff173659d8664b5c  m3/collections/src/test/java/jdk/m3/collections/M3CpuMaskRunsSelfTest.java' | sha256sum -c -
       - name: Compile existing Maven/OpenRewrite recipe provider
         run: mvn -B -ntp -f m3/collections/recipe/cpu-mask-runs-20261017/pom.xml -DskipTests package
       - name: Execute named OpenRewrite candidate recipe dry-run

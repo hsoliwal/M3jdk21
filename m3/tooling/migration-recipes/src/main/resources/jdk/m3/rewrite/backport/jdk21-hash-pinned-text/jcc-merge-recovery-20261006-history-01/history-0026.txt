@@ -6,7 +6,7 @@ The source publication is [com.synexia PR9285](https://github.com/hsoliwal/com.s
 
 ## Actual changes and retained authority
 
-The existing `M3Jdk21HashPinnedTextSnapshotRecipe`, canonical `m3/docs/name-mapping.json`, schema, `migration.py` and sealed `recipe.py` installer own this change. `jdk.m3.rewrite.backport.JccSourceFinalHandoff` selects a new four-output crate. The plan seal is `af65912789780e214f09644b38f542db5f7670b83ee1fada228bce08f8f9b30e`; it is the canonical plan digest, distinct from the formatted plan file hash. The materialized mapping afterimage is SHA256 `e4ae516fea9822a4bfe26669e9749e167f52bb30049d520339ee42f3779bc0b3`.
+The existing `M3Jdk21HashPinnedTextSnapshotRecipe`, canonical `m3/docs/name-mapping.json`, schema, `migration.py` and sealed `recipe.py` installer own this change. `jdk.m3.rewrite.backport.JccSourceFinalHandoff` selects a new four-output crate. The plan seal is `af65912789780e214f09644b38f542db5f7670b83ee1fada228bce08f8f9b30e`; it is the canonical plan digest, distinct from the formatted plan file hash. The materialized mapping afterimage is SHA256 `61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8`.
 
 Exactly four existing files change through that actual recipe/installer: canonical mapping, handoff document, binding receipt and root obligations. Every preimage equals its E2 published bytes, and all seven dependency guards stay exact. New crate resources, named YAML, Java/Python tests, focused proof POM and task evidence are additive. The original E2 one-update/three-absent crate, tests, proofs and other payload files remain intact. No production Java, native source, existing owning POM, schema, validator, installer or workflow is changed.
 

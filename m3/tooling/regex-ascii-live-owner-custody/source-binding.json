@@ -35,37 +35,37 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
-      "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "gitBlob": "78d5fb68f13872164973a8918cc7886c5f548bca",
       "bytes": 10964,
-      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
-      "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "gitBlob": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
       "bytes": 5187,
-      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
+      "sha256": "300a520ec9d273922d1edbdf5442e5faf825c47e8e3df7febf4baa2f39945401"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/pinned-engine/jdk/internal/m3/rewrite/M3RegexAsciiLiveOwnerCustodyInverseRecipe.java",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/pinned-engine/jdk/internal/m3/rewrite/M3RegexAsciiLiveOwnerCustodyInverseRecipe.java",
-      "gitBlob": "488698dfa970359d9ffa61905499a58625d4e230",
+      "gitBlob": "e658c30b40e10f4dc80a986363ecf6acd8a4bca9",
       "bytes": 824,
-      "sha256": "ec97368b2c212a08d1fee230c5ff25c95153e2f12406a4a9a4f54ed4f3aa3343"
+      "sha256": "89fb0a1c4fbe83fcc91464e8e2fea99a41ebc1a66d57a2e4a676d753d136f70f"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/pinned-engine/jdk/internal/m3/rewrite/M3RegexAsciiLiveOwnerCustodyRecipe.java",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/pinned-engine/jdk/internal/m3/rewrite/M3RegexAsciiLiveOwnerCustodyRecipe.java",
-      "gitBlob": "3e810fcf37e5a441f6175345d564873c797dd943",
+      "gitBlob": "b9b79d3680dfb4751e28250f2a6e8afe7fd85993",
       "bytes": 815,
-      "sha256": "e524a949c3c578a5e1d4c200e2f392fe65d6370b24c797bd23a501382f22ceab"
+      "sha256": "53c8855aa686062babf1fb990d945a3668bfeb8c658f7aca2cd9b249e47c83e7"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/pins.json",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/pins.json",
-      "gitBlob": "9741d0d41a3ba20cec4acf5ebefdbb775f4a0430",
+      "gitBlob": "afb2be524f4473b6ec20cba76b68381e16a6234d",
       "bytes": 10386,
-      "sha256": "6b613478fe61ddcfb5b37a941f45e77d67192662ef12841b04f878ae36b83653"
+      "sha256": "c18a142c25b5189f1ac700254430a085c144934346503961eebdb3ae37475c99"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/pom.xml",
@@ -77,16 +77,16 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/META-INF/rewrite/regex-ascii-live-owner-custody-20261020.yml",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/META-INF/rewrite/regex-ascii-live-owner-custody-20261020.yml",
-      "gitBlob": "55f44f2d3f8629dd399345115b270903596b7844",
+      "gitBlob": "aca4c2d7b489cea581cb62f638dce31ac95afedc",
       "bytes": 777,
-      "sha256": "607152d04cfee9e43c7e1a2189c454a23bce17eb11c2e436774094339b6a9c2e"
+      "sha256": "840abf674390a7bcb95e7f817346223d1236c9661f586d557c9bb070e3117d6d"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/.github/workflows/m3-regex-ascii-lexical-receiver.yml",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/.github/workflows/m3-regex-ascii-lexical-receiver.yml",
-      "gitBlob": "7c7ad39526452b51f38b8e7c53ba9eab24b16688",
+      "gitBlob": "43282c4c40dfd5f195fa2b6380d69ff4a7ce2d3c",
       "bytes": 31096,
-      "sha256": "03626785e735055deb106c888cdb54b52202413a6d870834c7624e7e73da8fd4"
+      "sha256": "bdbd1bc5ca99366d70fd358e65140a958865cba13b2f4855c9a1717e46ac9ba8"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/m3/tooling/regex-ascii-lexical-receiver/README.md",
@@ -98,30 +98,30 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/m3/tooling/regex-ascii-lexical-receiver/qualify.py",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/m3/tooling/regex-ascii-lexical-receiver/qualify.py",
-      "gitBlob": "ca061246d9e540e953badd0d7b65a17ed0755565",
+      "gitBlob": "eb47ae9f9343948b0d93e3a01682ff980835587b",
       "bytes": 12664,
-      "sha256": "21b295f83febcb34a9977dc3e5ed602893136641f09bece9d69884e53b27ab48"
+      "sha256": "22e41fc9095512e956f81b13385611181dd49094bc5c3af924989984651fb0de"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
-      "gitBlob": "7c719489e46779476b77797b03fc6668f6d72324",
+      "gitBlob": "379358a00acb55b766866c822c22d17412e9a173",
       "bytes": 14670,
-      "sha256": "d1eb3f4deeee0440e4ff835394f4963bbb32cf3575cd10b4c4fdef8d95156f3b"
+      "sha256": "15144a45242b5217d10a1a555458197580e6758e3bdf1c0558067554c0706834"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/before/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
-      "gitBlob": "b0d0c63653975ee92460dffb30e953bda3c8657b",
+      "gitBlob": "3b388c656fc0af06173735c8d9dc16f641b51de6",
       "bytes": 23045,
-      "sha256": "7e9b500925dcacbda836c0a1664f46c8b241568907de633848ac52fe555a143b"
+      "sha256": "e0a482ecc1bedae59084d9d094dbc455d869a1d568febf143eed03d252f783fa"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/manifest.tsv",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/manifest.tsv",
-      "gitBlob": "2d0dca8d2b245f1b0e9b38fa487135f4205092c7",
+      "gitBlob": "5f9c13282d5e3fe3827df0e25499153d3497532a",
       "bytes": 1090,
-      "sha256": "5a2bb451392bcd9e89fddaa6443e4c14a515d3db7c952d61a10dcf67769a35d9"
+      "sha256": "908b75359f53779346c4859313023d74ab01b7f837bf59afde5ba1213c720216"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/.github/workflows/m3-regex-ascii-lexical-receiver.yml",
@@ -140,23 +140,23 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/m3/tooling/regex-ascii-lexical-receiver/qualify.py",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/m3/tooling/regex-ascii-lexical-receiver/qualify.py",
-      "gitBlob": "ec4315ca1f5a90af3f7269d0a923647b6f2bcb94",
+      "gitBlob": "88ebfa238f11422b3f0c46d850ee8e47fe334d44",
       "bytes": 22838,
-      "sha256": "203d4a2d6278400457544b103c905f8e3336caa54ddf9be35ee15b8caac15810"
+      "sha256": "8eff3b49c16aea6bf5ee2a5fdc26076ef1af40f240e3e741d5b13053e2e03d55"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
-      "gitBlob": "7c719489e46779476b77797b03fc6668f6d72324",
+      "gitBlob": "379358a00acb55b766866c822c22d17412e9a173",
       "bytes": 14670,
-      "sha256": "d1eb3f4deeee0440e4ff835394f4963bbb32cf3575cd10b4c4fdef8d95156f3b"
+      "sha256": "15144a45242b5217d10a1a555458197580e6758e3bdf1c0558067554c0706834"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/forward/out/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
-      "gitBlob": "b0d0c63653975ee92460dffb30e953bda3c8657b",
+      "gitBlob": "3b388c656fc0af06173735c8d9dc16f641b51de6",
       "bytes": 23045,
-      "sha256": "7e9b500925dcacbda836c0a1664f46c8b241568907de633848ac52fe555a143b"
+      "sha256": "e0a482ecc1bedae59084d9d094dbc455d869a1d568febf143eed03d252f783fa"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/.github/workflows/m3-regex-ascii-lexical-receiver.yml",
@@ -175,37 +175,37 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/m3/tooling/regex-ascii-lexical-receiver/qualify.py",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/m3/tooling/regex-ascii-lexical-receiver/qualify.py",
-      "gitBlob": "ec4315ca1f5a90af3f7269d0a923647b6f2bcb94",
+      "gitBlob": "88ebfa238f11422b3f0c46d850ee8e47fe334d44",
       "bytes": 22838,
-      "sha256": "203d4a2d6278400457544b103c905f8e3336caa54ddf9be35ee15b8caac15810"
+      "sha256": "8eff3b49c16aea6bf5ee2a5fdc26076ef1af40f240e3e741d5b13053e2e03d55"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
-      "gitBlob": "7c719489e46779476b77797b03fc6668f6d72324",
+      "gitBlob": "379358a00acb55b766866c822c22d17412e9a173",
       "bytes": 14670,
-      "sha256": "d1eb3f4deeee0440e4ff835394f4963bbb32cf3575cd10b4c4fdef8d95156f3b"
+      "sha256": "15144a45242b5217d10a1a555458197580e6758e3bdf1c0558067554c0706834"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/before/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
-      "gitBlob": "b0d0c63653975ee92460dffb30e953bda3c8657b",
+      "gitBlob": "3b388c656fc0af06173735c8d9dc16f641b51de6",
       "bytes": 23045,
-      "sha256": "7e9b500925dcacbda836c0a1664f46c8b241568907de633848ac52fe555a143b"
+      "sha256": "e0a482ecc1bedae59084d9d094dbc455d869a1d568febf143eed03d252f783fa"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/manifest.tsv",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/manifest.tsv",
-      "gitBlob": "ccb7ecadb79b195d243996f74ea1629ea906ee2d",
+      "gitBlob": "91ce4e163a117e1534bbbc88b7d27afc453a7740",
       "bytes": 1090,
-      "sha256": "d5f889b7a62195b8137743fdd7fc00deec9b3c3a0adaf44f6b2a55ced5d9b9b7"
+      "sha256": "2c447683e001700dd24560cca12221ecd7007f5cd18bcdf21f6790898336d8e0"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/.github/workflows/m3-regex-ascii-lexical-receiver.yml",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/.github/workflows/m3-regex-ascii-lexical-receiver.yml",
-      "gitBlob": "7c7ad39526452b51f38b8e7c53ba9eab24b16688",
+      "gitBlob": "43282c4c40dfd5f195fa2b6380d69ff4a7ce2d3c",
       "bytes": 31096,
-      "sha256": "03626785e735055deb106c888cdb54b52202413a6d870834c7624e7e73da8fd4"
+      "sha256": "bdbd1bc5ca99366d70fd358e65140a958865cba13b2f4855c9a1717e46ac9ba8"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/m3/tooling/regex-ascii-lexical-receiver/README.md",
@@ -217,44 +217,44 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/m3/tooling/regex-ascii-lexical-receiver/qualify.py",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/m3/tooling/regex-ascii-lexical-receiver/qualify.py",
-      "gitBlob": "ca061246d9e540e953badd0d7b65a17ed0755565",
+      "gitBlob": "eb47ae9f9343948b0d93e3a01682ff980835587b",
       "bytes": 12664,
-      "sha256": "21b295f83febcb34a9977dc3e5ed602893136641f09bece9d69884e53b27ab48"
+      "sha256": "22e41fc9095512e956f81b13385611181dd49094bc5c3af924989984651fb0de"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
-      "gitBlob": "7c719489e46779476b77797b03fc6668f6d72324",
+      "gitBlob": "379358a00acb55b766866c822c22d17412e9a173",
       "bytes": 14670,
-      "sha256": "d1eb3f4deeee0440e4ff835394f4963bbb32cf3575cd10b4c4fdef8d95156f3b"
+      "sha256": "15144a45242b5217d10a1a555458197580e6758e3bdf1c0558067554c0706834"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-live-owner-custody-20261020/inverse/out/m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
-      "gitBlob": "b0d0c63653975ee92460dffb30e953bda3c8657b",
+      "gitBlob": "3b388c656fc0af06173735c8d9dc16f641b51de6",
       "bytes": 23045,
-      "sha256": "7e9b500925dcacbda836c0a1664f46c8b241568907de633848ac52fe555a143b"
+      "sha256": "e0a482ecc1bedae59084d9d094dbc455d869a1d568febf143eed03d252f783fa"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/src/test/java/jdk/internal/m3/rewrite/M3RegexAsciiLiveOwnerCustodyRecipeTest.java",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/src/test/java/jdk/internal/m3/rewrite/M3RegexAsciiLiveOwnerCustodyRecipeTest.java",
-      "gitBlob": "90327a3efa2a33953548f7d46402f490d7d8ebab",
+      "gitBlob": "6de9e251de460305b5e65be33c5134654ec83758",
       "bytes": 16076,
-      "sha256": "5a5c5a5b4207cad82f1c781c9460fd6ae9269a4147217b567143ff61f36f278f"
+      "sha256": "573768d731ec77c9a8451df35e6eac2b3fa0990f69c148a7176fc993f3324603"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/sdk/verify.py",
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/sdk/verify.py",
-      "gitBlob": "c44cd964d86dbf4afa8e2c7161b660d340e5c6ac",
+      "gitBlob": "3d5b4ee2f6118a921fb78db739c251fae9381ea7",
       "bytes": 28910,
-      "sha256": "ae7db5837fe0f5ad7dafc79e092c003955a3dfdce43caffd8f637a2227446bc6"
+      "sha256": "c5808b4387b29c7dbe9779fb5e2326908852964632c2f758cadbeb0208fdbe60"
     },
     {
       "targetPath": "m3/tooling/regex-ascii-live-owner-custody/qualify.py",
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/applied-owner-custody/hosted/qualify.py",
-      "gitBlob": "c5bb43b57b854c558ea7b193982c3c5f5d7edc70",
+      "gitBlob": "b74bebc067a35328f315ad71e5b59827ff0ee860",
       "bytes": 16534,
-      "sha256": "9b1436ac01033fbac684b99fb0635427b43c81539d7654292d67b077916d6bc7"
+      "sha256": "210d7fb3414f93a828b1bd5adf9c7f681d7849dd627fe1a80f971a203a6877f5"
     },
     {
       "targetPath": ".github/workflows/m3-regex-ascii-live-owner-custody.yml",
@@ -266,9 +266,9 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/FOSS_REUSE_DECISION.tsv",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "c5549cda82b37ec7a06e216fe38fd5f1ed3ffc70",
+      "gitBlob": "dbc5c8296bfc72b3f4192eb38c6119a5be000b0a",
       "bytes": 1246,
-      "sha256": "7beb028394b29dafdeca1c4f4c37d94deaf4ad35126f7c3ed8a559a9453ee5de"
+      "sha256": "71cd4227b1d210c0f157b0b04c7e48cfd3ced3b90661979fbfb201cd1d19c1f3"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/README.md",
@@ -287,37 +287,37 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
-      "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "gitBlob": "78d5fb68f13872164973a8918cc7886c5f548bca",
       "bytes": 10964,
-      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
-      "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "gitBlob": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
       "bytes": 5187,
-      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
+      "sha256": "300a520ec9d273922d1edbdf5442e5faf825c47e8e3df7febf4baa2f39945401"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/pinned-engine/jdk/internal/m3/rewrite/M3RegexAsciiLexicalReceiverInverseRecipe.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/pinned-engine/jdk/internal/m3/rewrite/M3RegexAsciiLexicalReceiverInverseRecipe.java",
-      "gitBlob": "3e301aa374f34a04ac3364f674e1e6703f6a8761",
+      "gitBlob": "d14e93651fdac498495b1f88c52e27e57fcd7c0d",
       "bytes": 831,
-      "sha256": "dfee7fb0f0398450ba49e38e7544677cea71e2a85e997ed7492ca4ab5cd29e18"
+      "sha256": "5ceee71d49c6b12844648824d235fbf08e5abfdbb0eea53a2f231a0efe47ebc5"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/pinned-engine/jdk/internal/m3/rewrite/M3RegexAsciiLexicalReceiverRecipe.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/pinned-engine/jdk/internal/m3/rewrite/M3RegexAsciiLexicalReceiverRecipe.java",
-      "gitBlob": "71974e6dab0a12e3ad364769b3631e97f986ebe5",
+      "gitBlob": "3099dc9bf795738a6dafc1671aee70c0de5e7941",
       "bytes": 812,
-      "sha256": "661a859dd246d5a9b68a3f3601cefb95ef0fbfbeb630bbd4fd6c86b01af7a9e2"
+      "sha256": "0c07a7b696d37bfa9b3d758b72269ead299b9a2e847b30b8ad9a77f965bf496d"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/pins.json",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/pins.json",
-      "gitBlob": "7c719489e46779476b77797b03fc6668f6d72324",
+      "gitBlob": "379358a00acb55b766866c822c22d17412e9a173",
       "bytes": 14670,
-      "sha256": "d1eb3f4deeee0440e4ff835394f4963bbb32cf3575cd10b4c4fdef8d95156f3b"
+      "sha256": "15144a45242b5217d10a1a555458197580e6758e3bdf1c0558067554c0706834"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/pom.xml",
@@ -329,37 +329,37 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/META-INF/rewrite/regex-ascii-lexical-receiver-20261019.yml",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/META-INF/rewrite/regex-ascii-lexical-receiver-20261019.yml",
-      "gitBlob": "1d9be3b38744c6cd6a3443a788f1e6474bb0a0ef",
+      "gitBlob": "907bb2b6f57be7c447088376bc40ab397eeb3751",
       "bytes": 853,
-      "sha256": "75090684812de7de29172351c10b194863c6699bd0e026c335849ab10b788588"
+      "sha256": "cf250ab6e8dd2a86786c1ea172208166a6e73c579ac916c84b3238a81dab509a"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/m3/docs/name-mapping.json",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/m3/docs/name-mapping.json",
-      "gitBlob": "a7008bc04536586218da76e823bf570d50cec526",
+      "gitBlob": "499cc323ade938eace0d06275467e4e77de8f106",
       "bytes": 451339,
-      "sha256": "1085c259e66bff017137e0c63bb86fc0b8daf436865f6378075cf4c920035ef4"
+      "sha256": "870bc9346fbfe43d6eb09a3ca5ed1acf831ef303ffa27c5c91ece5b03704bdd6"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
-      "gitBlob": "7755e02e9da1546240afb96078a86e766566ff59",
+      "gitBlob": "cf0c5fb3046e924484d8ea174816d1de60527f34",
       "bytes": 19912,
-      "sha256": "606b60797ecce1ce888888dd4056fdcddffef7f5eb8f1a56cc854126c7884f0f"
+      "sha256": "c552bfff58a9f989b85cc14d4e6617e2472e62fe5ae094979b5ff9c6e176463e"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java",
-      "gitBlob": "58cdad630918df11d186312b706bcea03ab52ffe",
+      "gitBlob": "22ed1649047d484a57a7e8e3cec83bf954e4388e",
       "bytes": 37129,
-      "sha256": "9a34cb85a705f6bee43c5cbb6c7a7181996d3b3a9579aa4e547e1c2f112b8f45"
+      "sha256": "4b31ce35c17b637cf8fab3c131bd5707bfbb995c14dde7104eb17f336e40756e"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java",
-      "gitBlob": "30df0c03381ba2348899d1a842a13045466ef500",
+      "gitBlob": "9d4ba83c85b740e3d1368ecd6cc572be122ae8c2",
       "bytes": 2336,
-      "sha256": "cda9d82febd03dd401c40884bf66eb7e394c1c36af19e5406172d2e58b7a0660"
+      "sha256": "49a1c0409c18f789a1f83766b7e42b6d374eb0fa25e565c59a685859ef8721ae"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java",
@@ -371,58 +371,58 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java",
-      "gitBlob": "3cd380eca7cc903ea7fb8f80cccae1894a851ac2",
+      "gitBlob": "bdeccba2317a2d0d67860723fbc89ede281f4197",
       "bytes": 31026,
-      "sha256": "650f1ecce5c3b555ecf8ef3d8e5aaf6ad14d24f18497a5f74cdef0437f62106c"
+      "sha256": "249a77620ab454342d666680e89e8c43471bb857960aa91b1413c3b2090edec7"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java",
-      "gitBlob": "8363e554ec77a65587a18ab468bdabd967e5f10d",
+      "gitBlob": "a1c8d53d923f3e128a852cf907a8b30ccc6959b9",
       "bytes": 23015,
-      "sha256": "c5f97d75fe83e8dee3cf8c381c672edc0d8cbcb89a49fd94c158634db0342289"
+      "sha256": "8f59403494dddce9c181fb7a8d36403a0491ae7b23cbedfed30fa4d06d6b213d"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/test/jdk/java/util/regex/M3AutomatonDifferentialTest.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/test/jdk/java/util/regex/M3AutomatonDifferentialTest.java",
-      "gitBlob": "687dff70a6278355847a287d7dc3792867471b58",
+      "gitBlob": "160100dbe5854b1448627a85171cbc60d7e24d85",
       "bytes": 13035,
-      "sha256": "9f0591f385bc4717fadfacefeb75c8823a3f372413a9440a2c0838c50e9c541d"
+      "sha256": "0ca2223a848cb7b4c74a08527b3ce1f34d06ed8e53177ea8dee654ec2113be6a"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/manifest.tsv",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/manifest.tsv",
-      "gitBlob": "269bcda77ed0f8b09d475bcc7b9614d7237967a3",
+      "gitBlob": "a052cce7304144a13f4728bf666b5cb65c0d2c20",
       "bytes": 1719,
-      "sha256": "db7432adc99c7be2dfd48f7437d48abcb493c775e36049d0f13953cc36dc2186"
+      "sha256": "fe9c7b0d4da7e5369bfbcd1f142e833cedd47a213f4f37e751040f474e86e4ba"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/m3/docs/name-mapping.json",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/m3/docs/name-mapping.json",
-      "gitBlob": "b97a5f233cd993fbaf7bb3c297bf1821c6f4b8d7",
+      "gitBlob": "acb54b5a6b22d990c129adc5443c407f69caa8eb",
       "bytes": 461599,
-      "sha256": "017c24acab18146c994c89328fe1081738017f32d3f5e4635ce3402e053e20d1"
+      "sha256": "26ac7e1b0e1afa82256c86e9552bc1020b2a170ef1719833f279115c0ba5f27e"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
-      "gitBlob": "7755e02e9da1546240afb96078a86e766566ff59",
+      "gitBlob": "cf0c5fb3046e924484d8ea174816d1de60527f34",
       "bytes": 19912,
-      "sha256": "606b60797ecce1ce888888dd4056fdcddffef7f5eb8f1a56cc854126c7884f0f"
+      "sha256": "c552bfff58a9f989b85cc14d4e6617e2472e62fe5ae094979b5ff9c6e176463e"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java",
-      "gitBlob": "58cdad630918df11d186312b706bcea03ab52ffe",
+      "gitBlob": "22ed1649047d484a57a7e8e3cec83bf954e4388e",
       "bytes": 37129,
-      "sha256": "9a34cb85a705f6bee43c5cbb6c7a7181996d3b3a9579aa4e547e1c2f112b8f45"
+      "sha256": "4b31ce35c17b637cf8fab3c131bd5707bfbb995c14dde7104eb17f336e40756e"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java",
-      "gitBlob": "30df0c03381ba2348899d1a842a13045466ef500",
+      "gitBlob": "9d4ba83c85b740e3d1368ecd6cc572be122ae8c2",
       "bytes": 2336,
-      "sha256": "cda9d82febd03dd401c40884bf66eb7e394c1c36af19e5406172d2e58b7a0660"
+      "sha256": "49a1c0409c18f789a1f83766b7e42b6d374eb0fa25e565c59a685859ef8721ae"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java",
@@ -434,51 +434,51 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java",
-      "gitBlob": "e51d3910df949e63229b100bc81716bc3f2742d6",
+      "gitBlob": "763fa4ac6b6f7c84856318d95356199b30376b28",
       "bytes": 31293,
-      "sha256": "654390c7aeeacfa221a62044a9e2b863232aca461db6453a82f0270cb48ef914"
+      "sha256": "ce36631a4d358e4e476fec74c2c226e75a364f20c4fd1d09b0f0aa454e27c4c2"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java",
-      "gitBlob": "8363e554ec77a65587a18ab468bdabd967e5f10d",
+      "gitBlob": "a1c8d53d923f3e128a852cf907a8b30ccc6959b9",
       "bytes": 23015,
-      "sha256": "c5f97d75fe83e8dee3cf8c381c672edc0d8cbcb89a49fd94c158634db0342289"
+      "sha256": "8f59403494dddce9c181fb7a8d36403a0491ae7b23cbedfed30fa4d06d6b213d"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/test/jdk/java/util/regex/M3AutomatonDifferentialTest.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/test/jdk/java/util/regex/M3AutomatonDifferentialTest.java",
-      "gitBlob": "3d95edee3c14c0a2a142217da695e77ed69e8026",
+      "gitBlob": "d274d4ec554e48aac56a433a195cab65d43944d9",
       "bytes": 18394,
-      "sha256": "eb770a17a99070d430330de96bb4357088d70a447e7c7c5d6b04f50375a56d3a"
+      "sha256": "35da3140ab8ef9338daf7d2cc5dda723638803465d633ec608b246c4db785599"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/m3/docs/name-mapping.json",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/m3/docs/name-mapping.json",
-      "gitBlob": "b97a5f233cd993fbaf7bb3c297bf1821c6f4b8d7",
+      "gitBlob": "acb54b5a6b22d990c129adc5443c407f69caa8eb",
       "bytes": 461599,
-      "sha256": "017c24acab18146c994c89328fe1081738017f32d3f5e4635ce3402e053e20d1"
+      "sha256": "26ac7e1b0e1afa82256c86e9552bc1020b2a170ef1719833f279115c0ba5f27e"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
-      "gitBlob": "7755e02e9da1546240afb96078a86e766566ff59",
+      "gitBlob": "cf0c5fb3046e924484d8ea174816d1de60527f34",
       "bytes": 19912,
-      "sha256": "606b60797ecce1ce888888dd4056fdcddffef7f5eb8f1a56cc854126c7884f0f"
+      "sha256": "c552bfff58a9f989b85cc14d4e6617e2472e62fe5ae094979b5ff9c6e176463e"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java",
-      "gitBlob": "58cdad630918df11d186312b706bcea03ab52ffe",
+      "gitBlob": "22ed1649047d484a57a7e8e3cec83bf954e4388e",
       "bytes": 37129,
-      "sha256": "9a34cb85a705f6bee43c5cbb6c7a7181996d3b3a9579aa4e547e1c2f112b8f45"
+      "sha256": "4b31ce35c17b637cf8fab3c131bd5707bfbb995c14dde7104eb17f336e40756e"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java",
-      "gitBlob": "30df0c03381ba2348899d1a842a13045466ef500",
+      "gitBlob": "9d4ba83c85b740e3d1368ecd6cc572be122ae8c2",
       "bytes": 2336,
-      "sha256": "cda9d82febd03dd401c40884bf66eb7e394c1c36af19e5406172d2e58b7a0660"
+      "sha256": "49a1c0409c18f789a1f83766b7e42b6d374eb0fa25e565c59a685859ef8721ae"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java",
@@ -490,58 +490,58 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java",
-      "gitBlob": "e51d3910df949e63229b100bc81716bc3f2742d6",
+      "gitBlob": "763fa4ac6b6f7c84856318d95356199b30376b28",
       "bytes": 31293,
-      "sha256": "654390c7aeeacfa221a62044a9e2b863232aca461db6453a82f0270cb48ef914"
+      "sha256": "ce36631a4d358e4e476fec74c2c226e75a364f20c4fd1d09b0f0aa454e27c4c2"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java",
-      "gitBlob": "8363e554ec77a65587a18ab468bdabd967e5f10d",
+      "gitBlob": "a1c8d53d923f3e128a852cf907a8b30ccc6959b9",
       "bytes": 23015,
-      "sha256": "c5f97d75fe83e8dee3cf8c381c672edc0d8cbcb89a49fd94c158634db0342289"
+      "sha256": "8f59403494dddce9c181fb7a8d36403a0491ae7b23cbedfed30fa4d06d6b213d"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/test/jdk/java/util/regex/M3AutomatonDifferentialTest.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/test/jdk/java/util/regex/M3AutomatonDifferentialTest.java",
-      "gitBlob": "3d95edee3c14c0a2a142217da695e77ed69e8026",
+      "gitBlob": "d274d4ec554e48aac56a433a195cab65d43944d9",
       "bytes": 18394,
-      "sha256": "eb770a17a99070d430330de96bb4357088d70a447e7c7c5d6b04f50375a56d3a"
+      "sha256": "35da3140ab8ef9338daf7d2cc5dda723638803465d633ec608b246c4db785599"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/manifest.tsv",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/manifest.tsv",
-      "gitBlob": "e61533b4e5f7d013bb2ce790fc6c4fa82cedbc1e",
+      "gitBlob": "0d443452d237fa3363164edc4894f8f94b63be9c",
       "bytes": 1719,
-      "sha256": "df9909ff35c5c158682a58b0fd7f238cc57a144a38bc944a6abbf65b21f13e86"
+      "sha256": "2c993e3f81ccffb80536a53981869ce3880535eeec2dcce283f40310e9243e9e"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/m3/docs/name-mapping.json",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/m3/docs/name-mapping.json",
-      "gitBlob": "a7008bc04536586218da76e823bf570d50cec526",
+      "gitBlob": "499cc323ade938eace0d06275467e4e77de8f106",
       "bytes": 451339,
-      "sha256": "1085c259e66bff017137e0c63bb86fc0b8daf436865f6378075cf4c920035ef4"
+      "sha256": "870bc9346fbfe43d6eb09a3ca5ed1acf831ef303ffa27c5c91ece5b03704bdd6"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
-      "gitBlob": "7755e02e9da1546240afb96078a86e766566ff59",
+      "gitBlob": "cf0c5fb3046e924484d8ea174816d1de60527f34",
       "bytes": 19912,
-      "sha256": "606b60797ecce1ce888888dd4056fdcddffef7f5eb8f1a56cc854126c7884f0f"
+      "sha256": "c552bfff58a9f989b85cc14d4e6617e2472e62fe5ae094979b5ff9c6e176463e"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java",
-      "gitBlob": "58cdad630918df11d186312b706bcea03ab52ffe",
+      "gitBlob": "22ed1649047d484a57a7e8e3cec83bf954e4388e",
       "bytes": 37129,
-      "sha256": "9a34cb85a705f6bee43c5cbb6c7a7181996d3b3a9579aa4e547e1c2f112b8f45"
+      "sha256": "4b31ce35c17b637cf8fab3c131bd5707bfbb995c14dde7104eb17f336e40756e"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java",
-      "gitBlob": "30df0c03381ba2348899d1a842a13045466ef500",
+      "gitBlob": "9d4ba83c85b740e3d1368ecd6cc572be122ae8c2",
       "bytes": 2336,
-      "sha256": "cda9d82febd03dd401c40884bf66eb7e394c1c36af19e5406172d2e58b7a0660"
+      "sha256": "49a1c0409c18f789a1f83766b7e42b6d374eb0fa25e565c59a685859ef8721ae"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java",
@@ -553,37 +553,37 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java",
-      "gitBlob": "3cd380eca7cc903ea7fb8f80cccae1894a851ac2",
+      "gitBlob": "bdeccba2317a2d0d67860723fbc89ede281f4197",
       "bytes": 31026,
-      "sha256": "650f1ecce5c3b555ecf8ef3d8e5aaf6ad14d24f18497a5f74cdef0437f62106c"
+      "sha256": "249a77620ab454342d666680e89e8c43471bb857960aa91b1413c3b2090edec7"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java",
-      "gitBlob": "8363e554ec77a65587a18ab468bdabd967e5f10d",
+      "gitBlob": "a1c8d53d923f3e128a852cf907a8b30ccc6959b9",
       "bytes": 23015,
-      "sha256": "c5f97d75fe83e8dee3cf8c381c672edc0d8cbcb89a49fd94c158634db0342289"
+      "sha256": "8f59403494dddce9c181fb7a8d36403a0491ae7b23cbedfed30fa4d06d6b213d"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/test/jdk/java/util/regex/M3AutomatonDifferentialTest.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/main/resources/jdk/internal/m3/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/test/jdk/java/util/regex/M3AutomatonDifferentialTest.java",
-      "gitBlob": "687dff70a6278355847a287d7dc3792867471b58",
+      "gitBlob": "160100dbe5854b1448627a85171cbc60d7e24d85",
       "bytes": 13035,
-      "sha256": "9f0591f385bc4717fadfacefeb75c8823a3f372413a9440a2c0838c50e9c541d"
+      "sha256": "0ca2223a848cb7b4c74a08527b3ce1f34d06ed8e53177ea8dee654ec2113be6a"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/src/test/java/jdk/internal/m3/rewrite/M3RegexAsciiLexicalReceiverRecipeTest.java",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/src/test/java/jdk/internal/m3/rewrite/M3RegexAsciiLexicalReceiverRecipeTest.java",
-      "gitBlob": "77e2fe7348670cf744de08c8cec6fa4c8ebf2ae6",
+      "gitBlob": "f5d61fde46048098d1b25822e2ccc034cbe4318b",
       "bytes": 16047,
-      "sha256": "009427bfe21387443b46ee99bc3d2ba86f2af547be26f141f9b47d638562a4ff"
+      "sha256": "f5362d43b1705d071965e818ae355867cf18a63206511276b7ec52907febde01"
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/regex-ascii-lexical-20261019/receiver-sdk/verify.py",
       "targetPath": "m3/tooling/regex-ascii-lexical-receiver/sdk/verify.py",
-      "gitBlob": "b0d0c63653975ee92460dffb30e953bda3c8657b",
+      "gitBlob": "3b388c656fc0af06173735c8d9dc16f641b51de6",
       "bytes": 23045,
-      "sha256": "7e9b500925dcacbda836c0a1664f46c8b241568907de633848ac52fe555a143b"
+      "sha256": "e0a482ecc1bedae59084d9d094dbc455d869a1d568febf143eed03d252f783fa"
     }
   ]
 }

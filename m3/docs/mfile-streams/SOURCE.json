@@ -9,24 +9,24 @@
   "canonical_base_commit": "f04fbac91a7891e64b77c7b24cef1ab75ec88144",
   "recipe_owner": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
   "recipe_owner_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
-  "recipe_owner_git_blob": "2e7747814b90c242cd89e8ecbcce61ab15825058",
+  "recipe_owner_git_blob": "55be45a83f4fc7e7317534fc87a66e727c845060",
   "crate": "m3fs-vfs-text-20261020",
   "intake_mode": "DATA_OR_METADATA_EXPORT",
   "receiving_sequence_advanced": false,
   "runtime_changes": [],
   "observed_owners": [
     {
-      "path": "m3/file/src/main/java/com/m3/file/M3File.java",
-      "git_blob": "c182a3b1526f9fd0ca20c631d97df3048076defd",
+      "path": "m3/file/src/main/java/jdk/m3/file/M3File.java",
+      "git_blob": "fcce3a02835de29fa4ac9f83083511aad17ec049",
       "role": "Stateless Path/provider read boundary"
     },
     {
-      "path": "m3/fs/src/main/java/com/m3/fs/M3DirectoryTable.java",
-      "git_blob": "a7146dc0bfa17f3e640fc84434c708c48ae79f43",
+      "path": "m3/fs/src/main/java/jdk/m3/fs/M3DirectoryTable.java",
+      "git_blob": "fd9bb4a33791cc4c20d186e80c47e800e14b2dd5",
       "role": "Immutable directory metadata arrays and API projections"
     },
     {
-      "path": "m3/fs/src/main/java/com/m3/fs/M3FS.java",
+      "path": "m3/fs/src/main/java/jdk/m3/fs/M3FS.java",
       "git_blob": "2d048723c1db4b5dca523f70418aef9e88a5e582",
       "role": "Existing native M3FS lifetime, pages and snapshots"
     }

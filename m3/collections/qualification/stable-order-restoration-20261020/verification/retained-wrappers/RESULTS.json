@@ -254,7 +254,7 @@
   "report_finalization": {
     "finalizer_sha256": "23ef60c1f7ebc45dad8a9639ebcfd4113a8b18a08ff43de42c53ddd228c1c332",
     "operation": "Read existing logs and correct the initial driver's static known-findings narrative to the actual passing interior-null outcome; no execution result changed.",
-    "pre_finalization_report_sha256": "1c2979c678256f0d044c1b80923d5dd0e15e4203ad9bea04bfd40632cf0b7858",
+    "pre_finalization_report_sha256": "eed0ee4361f0bc17ed50499a846838001559974d7cd9a056eb7c467fc9cefc1e",
     "tests_rerun": false,
     "timestamp": "2026-10-20T11:33:39.342188+00:00"
   },

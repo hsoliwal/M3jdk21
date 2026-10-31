@@ -16,8 +16,8 @@
   "execution_review": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/E4_EXECUTION_INPUT.json",
     "bytes": 12601,
-    "sha256": "a42a7069695c38edfe2a25c1f8c9e16fd0db89401976679fc6409b78eca6d852",
-    "git_blob_sha1": "428422fc77c5335a43b9c978515445f056d0d2c6"
+    "sha256": "fd465a0de344227444f723287b0dee9fe6e25284c1767737a38b1d7d8b887c93",
+    "git_blob_sha1": "89dab4bdb446bb26d06c4de26ca8d32ea5c32674"
   },
   "proofs": [
     {
@@ -35,8 +35,8 @@
       "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/RECOVERY_RESULT.json",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/RECOVERY_RESULT.json",
       "bytes": 456423,
-      "sha256": "086f4ef835a0939b212bcb7595e75513ecbd46ce6bbf764a8d1f5aca1e418954",
-      "git_blob_sha1": "9c14f0c7eef7ed15b9148947ee729836dc2aefe1",
+      "sha256": "823ef3c5f172b34d7c973f5e50424b8f7ab770687f8e2d80e2ecb2bde8dc1b77",
+      "git_blob_sha1": "b930bffab5a0e9c9e9ad2b5f65804c236b199e51",
       "mode": "100644",
       "selection_reasons": [
         "Direct actual report link",
@@ -47,8 +47,8 @@
       "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/E4_EXECUTION_INPUT.json",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/E4_EXECUTION_INPUT.json",
       "bytes": 12601,
-      "sha256": "a42a7069695c38edfe2a25c1f8c9e16fd0db89401976679fc6409b78eca6d852",
-      "git_blob_sha1": "428422fc77c5335a43b9c978515445f056d0d2c6",
+      "sha256": "fd465a0de344227444f723287b0dee9fe6e25284c1767737a38b1d7d8b887c93",
+      "git_blob_sha1": "89dab4bdb446bb26d06c4de26ca8d32ea5c32674",
       "mode": "100644",
       "selection_reasons": [
         "Direct actual report link"
@@ -69,8 +69,8 @@
       "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/CURRENT_PROJECTION.json",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/CURRENT_PROJECTION.json",
       "bytes": 596276,
-      "sha256": "18c5fea0f72fe21aa78df1aa6c319eb4276fc15aa481952539c221ce651e6f49",
-      "git_blob_sha1": "d20138ab763408bbbd793c1ff27778d866b29009",
+      "sha256": "8626cc0e739dac6cc3b2e77496d16e7c75025f7de99f30e1b93f42796e6c4799",
+      "git_blob_sha1": "3c187aada912a867711f1f3adcf32fe99e99f26e",
       "mode": "100644",
       "selection_reasons": [
         "Direct actual report link"
@@ -80,8 +80,8 @@
       "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/DESIGNATED_SOURCE_OUTPUTS.json",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/DESIGNATED_SOURCE_OUTPUTS.json",
       "bytes": 15261,
-      "sha256": "296d5b9eb4f41b51a85d44bb4f05c76e8c5b6453fb55881691b9823055062510",
-      "git_blob_sha1": "59e4ba6f35c37c1a00da2678ed88b9f034d885e1",
+      "sha256": "dab78ed3ffa2cab8dad0feb532f493130570b8da35146a78e961b75cd11dd555",
+      "git_blob_sha1": "36e48a6a4e5b4e2592ad7d3fa90fd3800f6f5185",
       "mode": "100644",
       "selection_reasons": [
         "Direct actual report link"

@@ -17,8 +17,8 @@
     "recipe_code_shipped_to_product": false
   },
   "postimage": {
-    "git_blob_sha1": "7a61d18385d0ea635e38cc47b3d8016974de7e00",
-    "sha256": "f303615f51b7276130d8bff5c17ad48713c7d0f2ce1b24e8398caa2b34380033",
+    "git_blob_sha1": "a83f14a7e170a06c7a6cbdb7372830f803389c99",
+    "sha256": "9551ea48b7ddd0f08478e64ee1333d9b62be75f27ae653d3c81d97d51c93e5b8",
     "utf8_bytes": 11623,
     "java_release": 21,
     "license": "GPLv2 with Classpath exception (first-party OpenJDK jtreg target source)"

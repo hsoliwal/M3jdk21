@@ -7,9 +7,9 @@ Canonical owner:
 - repository: `hsoliwal/com.synexia`
 - canonical merged commit: `a062661e91e769a00c2d027e1f04a7a0c8f9dc28` (Synexia PR #9599)
 - artifact: `com.synexia:synexia-jdk-a3-recipes:1.0.0-SNAPSHOT`
-- canonical export manifest Git blob: `8a3e3d6e802e95dbcc7b0bf83a347887b02d6717`
-- canonical convergence source Git blob: `b11aff3ace8e77684cfa8cc13fbbb445a05c8a09`
-- portable mastery verifier Git blob: `cd54b351f444a497c759a009681cc97d3e79c5ba`
+- canonical export manifest Git blob: `2c51473e7adb6fa50fb0031ac6314a050b90feec`
+- canonical convergence source Git blob: `7dc6cea0a969a1bd094e324c47a1bb724b5ff1dc`
+- portable mastery verifier Git blob: `618a0dc7dcd6c4ab6b3361e09022f5c1ff82f0c4`
 
 The seven duplicate `com.synexia.rewrite.atom.*` source files formerly retained by this JDK fork are
 removed. A3 loads the canonical artifact and verifies its embedded export manifest before applying

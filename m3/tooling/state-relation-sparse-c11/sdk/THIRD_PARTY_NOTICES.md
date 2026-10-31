@@ -5,8 +5,8 @@
 
 This SDK directly imports these existing Synexia files verbatim:
 
-- M3GpuToolJoinRecipe.java, Git blob 1c1b1b568d369f688f6953161636bf36b484bf5a.
-- M3GpuToolJoinManifest.java, Git blob 38df5f97bbeec8a8a8cfc77091d56bda925c07f2.
+- M3GpuToolJoinRecipe.java, Git blob 2ec479b8609459a28fdfd8a7a7d63cc44e919f00.
+- M3GpuToolJoinManifest.java, Git blob 78d5fb68f13872164973a8918cc7886c5f548bca.
 - pom.xml, Git blob d79867bcc09ad6329e12418e15907e54b8ab025f.
 
 They retain their Apache-2.0 SPDX notices and Maven coordinates. They are reused
@@ -30,8 +30,8 @@ inventory bb4958be148665085f5bb923e56d7d6bccb8b141 and pre-code admission
 5d2d2c39120c7a779e2beb06f0af19cb7364e253 record the accepted and rejected fits.
 
 The JUnit and counter/XML/physical-closure verifier adapt the existing
-StateRelation source-custody test 364044851ce118d84c7cc6d993872012c1325387 and
-verifier 66eecf2a7c6272204d44a51977ab40e93a01c32a, Apache-2.0. Their provenance
+StateRelation source-custody test 1315d91ec4eb924d0bbe921cabd077d3ba3b51e0 and
+verifier 38f05eac36c97bef0704c336600767f74b272f8e, Apache-2.0. Their provenance
 includes prior lexical and text-metadata custody SDKs; the two original provider
 files and Maven POM remain byte-for-byte unchanged.
 

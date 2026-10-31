@@ -3,12 +3,12 @@
   "createdAtUtc": "2026-10-07T07:00:18.452661+00:00",
   "qualification": "BOUNDED_HOST_AST_ORACLES_AND_EXACT_ISOLATED_BYTE_INTAKE_ONLY",
   "proofs": {
-    "AST_FULL_ORIGINAL_ORACLE_PROOF.json": "915ad7f0dbd01aeef01fae3448baa3911fb0ac1e757e197a9306e1dae658489c",
-    "AST_IMPORTER_QUALIFICATION_PROOF.json": "9c5c2c846afce4fbb00e6f1325c13557d0965614fe5dcb50a022273529edb0ca",
-    "AST_P0_CLOSEOUT_INDEX.json": "af83dcf2a94ac02564e19d45b3dcbb213d42ff36f212639231c5e78fbed58df0",
-    "FINAL_JUNIT_PROOF.json": "315b3b737d2e22d84983b6e8440de58f7cc62d7272704b1910507594588f9eee",
-    "PROOF.json": "60d21ed0f15f4b91a00f5e13f9075ce4d9277e1f09dbdee0b991b2367e706bd0",
-    "expandedV3Replay": "a14670b53b161d6fa2b19194d52876ab670ab7a1768e7a9c6996f1f29f6e1a22"
+    "AST_FULL_ORIGINAL_ORACLE_PROOF.json": "3eb09ce3253dd6208f437aa20b4138d53448507b3bc9752e0bf29d0a8ab7b9ac",
+    "AST_IMPORTER_QUALIFICATION_PROOF.json": "312ddda73aeadd55b23526541ddc4e7f3eb98ec1221317a5c52e20563bd73299",
+    "AST_P0_CLOSEOUT_INDEX.json": "6700d549ede38c1c8eb0295e447d6123337c7348d8f1cb355c29ee41712722ec",
+    "FINAL_JUNIT_PROOF.json": "a29b4c42d6f9db3705fdea63f1facab65e67af662be5bae66a8195e17ebc2806",
+    "PROOF.json": "f06fcd6b439529d32c28b46b47f9e6b924fe160dd46631a73c28f60f510a38ed",
+    "expandedV3Replay": "e3b2c1da7f6a8799be41d4e3ca9cd8d5540c791aceb4319d47767d21265f4bd1"
   },
   "astTests": {
     "tests": 4,
@@ -33,7 +33,7 @@
   },
   "expandedThreeTargetReplay": {
     "status": "PASS",
-    "proofSha256": "a14670b53b161d6fa2b19194d52876ab670ab7a1768e7a9c6996f1f29f6e1a22",
+    "proofSha256": "e3b2c1da7f6a8799be41d4e3ca9cd8d5540c791aceb4319d47767d21265f4bd1",
     "fixedPointAndSecondApplyUnchanged": true,
     "inputDriftRefusal": true,
     "unrelatedSiblingPreserved": true

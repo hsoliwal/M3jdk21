@@ -53,7 +53,7 @@
       "signature": "runNow must recognize the Eclipse task cancellation signal ==> expected: <Status CANCEL: unknown code=1 > but was: <Status ERROR: jdk.m3.eclipse.runtime code=0 M3 task failed: synchronous cancellation org.eclipse.core.runtime.OperationCanceledException>"
     }
   ],
-  "frozen_inputs_sha256": "737097a025a14db8aec0dc52df7438d18d9a1a773ede889d99c490ef3a1f7485",
+  "frozen_inputs_sha256": "0d8a24113ff86885a1b9ce04d94a4cac74200e0335233fa6a175ddaf67b27b60",
   "all_input_readbacks_match": true,
   "original_source_or_test_changes": 0,
   "memory_event": "Real Eclipse Job and runNow cancellation diverge because donor catches OperationCanceledException as generic Exception. The native rule exclusion and never-started cancellation tests pass. Correction is confined to recognizing the Eclipse cancellation signal in the donor runNow catch; original failing evidence stays frozen.",

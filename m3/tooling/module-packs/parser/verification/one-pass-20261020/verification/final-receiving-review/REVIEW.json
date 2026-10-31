@@ -5,7 +5,7 @@
     "files": [
       {
         "actual_sdk_result": "canonical/m3-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-mfiles-9acdf5b32fc4ec6a/m3/fs/src/main/java/jdk/m3/fs/MFiles.java",
-        "after_sha256": "1c0df84c0b8c57f0098f5e9c2124932c426f774b6247da5f5946715a192456ed",
+        "after_sha256": "857cb6caee741db4bc2601a7c1c5f1b9565dbfdf926dd6e0ce5dd07f11be125e",
         "before_sha256": "b881c356f46fd5bed68d1e6d78a704b6fae7012c1fd0e576e043ea53bc8468b4",
         "pass": "onepass-mfiles-9acdf5b32fc4ec6a",
         "path": "m3/fs/src/main/java/jdk/m3/fs/MFiles.java",
@@ -16,7 +16,7 @@
       },
       {
         "actual_sdk_result": "canonical/m3-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-mfilesparalleltest-51e46243dc9989b9/m3/fs/src/test/java/jdk/m3/fs/MFilesParallelTest.java",
-        "after_sha256": "cd9b36f2c2b9e785978e54536e2ebc8867c8105d4e5451ec937e82c8cd02d64f",
+        "after_sha256": "33ddbd6108ad9f60fcaec50591dc8d47f64a19144060d830a4464d4b9a9bd04f",
         "before_sha256": "ABSENT",
         "pass": "onepass-mfilesparalleltest-51e46243dc9989b9",
         "path": "m3/fs/src/test/java/jdk/m3/fs/MFilesParallelTest.java",
@@ -414,7 +414,7 @@
         "receipt": {
           "bytes": 840,
           "path": "qualification/parser-final/lint-receipt.json",
-          "sha256": "3fbd2a4be5dfd6b84b4b381c8aa961d9fb0b8e35f0d9ff3438000aea60cde8a0"
+          "sha256": "ac0fdd0fb01684272c93288b43b095647484889247e7e2386e3ee4d81f3f6ec6"
         },
         "verified_artifacts": 4
       },
@@ -428,7 +428,7 @@
         "receipt": {
           "bytes": 29268,
           "path": "qualification/parser-final/compile-receipt.json",
-          "sha256": "1eb7a71e645166ed2a3b7228c02cff2f388371ead80b06527635a2bf0c87aa60"
+          "sha256": "01b41eae9a154acde735500c0cc39bc218ac84535a4d7778f3088c0f314e8c0b"
         },
         "verified_artifacts": 147
       },
@@ -446,7 +446,7 @@
         "receipt": {
           "bytes": 1593,
           "path": "qualification/parser-final/test-receipt.json",
-          "sha256": "c24a7342390646c8e17f29a73de367ac00476bf1a41b8468669dfe3504f32062"
+          "sha256": "1ba7797c8ce0c12c1692d24e7933da2dcf3efb9fe82c69c335dd426d18a4b138"
         },
         "verified_artifacts": 8
       },
@@ -471,7 +471,7 @@
         "receipt": {
           "bytes": 3709,
           "path": "qualification/parser-final/runtime-receipt.json",
-          "sha256": "8cc4a3042c65a5af98ced7edfb301e952efcf664136b251af423334e404cba56"
+          "sha256": "8b5f5d6c5d70057b316933773c320f0d0ca1da9a9f8a74577018f7f27d52af48"
         },
         "verified_artifacts": 21
       }
@@ -488,7 +488,7 @@
     },
     "authored/parallel/verification/generated/CLASS_SEALS.json": {
       "bytes": 56426,
-      "sha256": "70efa272912fa1f6615cab8daa2862c02de0d019d630c997a28f342e88494892"
+      "sha256": "02c6c801fb0d8be5161cf0989c28b289f7ee562c419c5932441c9f8d1b0cfdfb"
     },
     "authored/parallel/verification/generated/RESOURCE_CHECKS.json": {
       "bytes": 636,
@@ -496,7 +496,7 @@
     },
     "authored/parallel/verification/generated/RESULTS.json": {
       "bytes": 61395,
-      "sha256": "17f9d0edd589ebb7011fb504d66f3f58a27f27b2a8505324c1a0e44c194c2c9c"
+      "sha256": "031d9e3d0092d8da69a63a06d556cf04bbe061bb105b88c44acd86fa412e880a"
     },
     "authored/parallel/verification/generated/compile-tests.log": {
       "bytes": 0,
@@ -524,7 +524,7 @@
     },
     "canonical/m3-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java": {
       "bytes": 25425,
-      "sha256": "321776eb9a23a67403a8022dad3e61203e688742c8c229e3ded9de2e63e6301b"
+      "sha256": "76e5159a9cb350df2b58d410ee4aaae0ad1f96ddaedb1be420163802954154d8"
     },
     "canonical/m3-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-build-5ff31edfa72c7b2c/SDK_INPUTS.tsv": {
       "bytes": 14091,
@@ -880,7 +880,7 @@
     },
     "qualification/compiler-final/RESULTS.json": {
       "bytes": 7378,
-      "sha256": "11902b08ebf4d7f5cd6a15ce5e488975ab433e4b221d0099a6037f3f4c81b512"
+      "sha256": "6ef2e56538aef9255c7933c3afea2841c7c057c02f02433890fb190981f544d3"
     },
     "qualification/compiler-final/compile.log": {
       "bytes": 0,
@@ -928,7 +928,7 @@
     },
     "qualification/fs/inputs.json": {
       "bytes": 4868,
-      "sha256": "ca818a440ee1ea3a40678374ac7c8e29427a0a16f297563c3396c8311d6a587b"
+      "sha256": "e83ef4087dd04f78dc1ec0064d1d7ead0c587f16e1baf7cd6e8ebea7b34e4aa9"
     },
     "qualification/fs/legal-sha256.json": {
       "bytes": 1857,
@@ -940,7 +940,7 @@
     },
     "qualification/fs/module-description.txt": {
       "bytes": 1106,
-      "sha256": "2ca917b3951122dc71982d27290539f230a8bd43faf62c88708eadd9fd457bfa"
+      "sha256": "38b2b01fa83da98a132fade48e8855b04c7e6ee29d3de21491586d85740d1668"
     },
     "qualification/fs/module-descriptor-compile.log": {
       "bytes": 0,
@@ -956,11 +956,11 @@
     },
     "qualification/fs/pack/SELECTION.json": {
       "bytes": 413,
-      "sha256": "4784f4e8e6ca0f06e570814d2b5e6f503a37ac457085848e5f995f9bd14920f2"
+      "sha256": "4b12d7a40dabf1834c690bc1d6e2c7025a6b3a3c4728010d6ac2dd1fc4a6a56d"
     },
     "qualification/fs/provider-compile.log": {
       "bytes": 26844,
-      "sha256": "a963e0139016dfa302a6c59ddf976b08cc8fccbed35ba26224a38b32f6d83634"
+      "sha256": "59ec1163d44743b30b3c235508a5383e3e9a8fdfed997d485173a26ce4cc1eb9"
     },
     "qualification/fs/qualification.json": {
       "bytes": 1979,
@@ -992,7 +992,7 @@
     },
     "qualification/parser-final/INPUTS.json": {
       "bytes": 31506,
-      "sha256": "9ce677e850104c530ff1c68c482d497a17e4945bd9a6e75b7c121409ed7caeed"
+      "sha256": "e73f42359b71858edaf13e033a9a6f4cccf9b83c2446fc3853d613c495a5137e"
     },
     "qualification/parser-final/RUNTIME_PROOF.json": {
       "bytes": 1081,
@@ -1000,7 +1000,7 @@
     },
     "qualification/parser-final/STATE.json": {
       "bytes": 586,
-      "sha256": "4d003cfdd489fca93f0d59deb1233373556c91dd6390098a177abdfbf6fb08ae"
+      "sha256": "b23f3b888ea69ba267a6f8a5252fcfda6ee70a3983ff0cca546e881101745831"
     },
     "qualification/parser-final/compile-commands.json": {
       "bytes": 10758,
@@ -1008,15 +1008,15 @@
     },
     "qualification/parser-final/compile-receipt.json": {
       "bytes": 29268,
-      "sha256": "1eb7a71e645166ed2a3b7228c02cff2f388371ead80b06527635a2bf0c87aa60"
+      "sha256": "01b41eae9a154acde735500c0cc39bc218ac84535a4d7778f3088c0f314e8c0b"
     },
     "qualification/parser-final/lint-commands.json": {
       "bytes": 291,
-      "sha256": "0f1d132d7c2c0a1c0af54269740d0d24e361d71641b405e295070ef5012f1fe2"
+      "sha256": "4aaea1a54613ca6e51cfed946d4073e71de9a368baaeba3edf4001ebc16ef242"
     },
     "qualification/parser-final/lint-receipt.json": {
       "bytes": 840,
-      "sha256": "3fbd2a4be5dfd6b84b4b381c8aa961d9fb0b8e35f0d9ff3438000aea60cde8a0"
+      "sha256": "ac0fdd0fb01684272c93288b43b095647484889247e7e2386e3ee4d81f3f6ec6"
     },
     "qualification/parser-final/runtime-commands.json": {
       "bytes": 8350,
@@ -1048,7 +1048,7 @@
     },
     "qualification/parser-final/runtime-receipt.json": {
       "bytes": 3709,
-      "sha256": "8cc4a3042c65a5af98ced7edfb301e952efcf664136b251af423334e404cba56"
+      "sha256": "8b5f5d6c5d70057b316933773c320f0d0ca1da9a9f8a74577018f7f27d52af48"
     },
     "qualification/parser-final/test-M3ASTDetailsContract.log": {
       "bytes": 1110,
@@ -1080,7 +1080,7 @@
     },
     "qualification/parser-final/test-receipt.json": {
       "bytes": 1593,
-      "sha256": "c24a7342390646c8e17f29a73de367ac00476bf1a41b8468669dfe3504f32062"
+      "sha256": "1ba7797c8ce0c12c1692d24e7933da2dcf3efb9fe82c69c335dd426d18a4b138"
     },
     "receiver/m3/tooling/module-packs/parser/FACTS.md": {
       "bytes": 4623,
@@ -1116,7 +1116,7 @@
     },
     "verification/parallel-independent-review/REVIEW.json": {
       "bytes": 7147,
-      "sha256": "c9bc8efe00267cd46cf470f112e6edafa510faac44e1988e5bd802762e647e34"
+      "sha256": "33f83d12297c678816cc41491c59239503e382e851b046f5aee934af957ff68c"
     },
     "verification/sdk/onepass-build-5ff31edfa72c7b2c/RESULT.json": {
       "bytes": 3127,

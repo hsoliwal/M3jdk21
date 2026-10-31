@@ -106,13 +106,13 @@ metadata successor dataset, separate from the original product recipe stages.
 | `src/java.base/share/native/libjava/M3IndexMaskWindow.c` | `4a9c0ab3e8d7a0aac0027e8fb4789f768ee5a48b2db18b7a54e2fd543c5c7f91` |
 | `test/jdk/jdk/internal/m3/M3MaskCountTest.java` | `988ab3de69205aebd2c42b26c1be06ae098d149da110ebb5dee861515482b898` |
 | `test/jdk/jdk/internal/m3/M3MaskPreparedPredicateTest.java` | `650969a480f12a861a34252dee5512d1f53c4da9f32370fd546faacc1ef8d572` |
-| `m3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java` | `d525847598c4fb9264533d964918d29649b7647a3eaca6edc84534738befea4b` |
-| `m3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewContract.java` | `dc7e8b2e5a66fb7df32116bc344e8746ff2d6ab412f63e5f64387c594d2d03e2` |
-| `m3/core/src/com/m3/text/SharedLexiconCatalog.java` | `2bb7e88e409d9898eb81bcdf8ae3260bfa5e077e6099639e46c45364fecc8c5c` |
-| `m3/core/test/com/m3/text/SharedLexiconQualificationTest.java` | `950372d7bb358469fe0c5b59e34f0b4925e2df38c18565163339963d825053a6` |
-| `m3/fs/src/main/java/com/m3/fs/M3ColdFileImage.java` | `1a1192fa7cfdfebd31f8fa1d914e5eb10147c2d2fedd20b6498ebc0ff3f64dfc` |
-| `m3/fs/src/main/java/com/m3/fs/M3FileSystemStore.java` | `f459ad09668e2802db3f0c44c3fc283d623b2fb1ef0b0e36e1bb65311a853677` |
-| `m3/fs/src/test/java/com/m3/fs/M3QualifiedColdFileTest.java` | `71760152aa96761a5a286460c41b0179a7c627cf2096cb211eee754aad763261` |
+| `m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java` | `59a11f4bc696c4638941065f2ed56f536432155bde8eb3b7c0aaaed283064f66` |
+| `m3/collections/src/test/java/jdk/m3/collections/M3IndexedLiveViewContract.java` | `0e11da2d9dbe2b1419c03535b310d5ca6d7415980a155e325966afadd1d16326` |
+| `m3/core/src/jdk/m3/text/SharedLexiconCatalog.java` | `ab7ad78dd33fe19133dafb13f2d088b5cecfcc4084a516cd59fc6dd920718f89` |
+| `m3/core/test/com/m3/text/SharedLexiconQualificationTest.java` | `8f0c0ea2adbc0260c22fd0bace565cef5260182b68123b27b233ae52b05829a6` |
+| `m3/fs/src/main/java/jdk/m3/fs/M3ColdFileImage.java` | `be1840af26958e57506f216212f148a83a904e4278bf5ed28f3da15766d7dac1` |
+| `m3/fs/src/main/java/jdk/m3/fs/M3FileSystemStore.java` | `d779d1c024e3a987f956f72ca5e565cdb592dbe2738d6ba9170394241cef16aa` |
+| `m3/fs/src/test/java/com/m3/fs/M3QualifiedColdFileTest.java` | `e9d18b5c10f19ef3642293f34380d4db679793f6532a1cf62f02d8898b90b460` |
 
 For a later pass, consult the canonical catalogue, failed attempts and memory
 before changing an atom. Requalify changed preimages rather than replaying an

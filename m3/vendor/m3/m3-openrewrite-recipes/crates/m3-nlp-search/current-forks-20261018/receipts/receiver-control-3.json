@@ -12,7 +12,7 @@
   "missing_refusals" : 0,
   "source_sha256" : {
     "m3/tooling/module-packs/nlp-search/CURRENT_FORKS.md" : "76d4bee5535612e787e2197ad2103b85d2d14043cfa7ff1b9c4ffe48af7c1639",
-    "m3/tooling/module-packs/nlp-search/current-source-lock.json" : "054029431fbd8063c1e0397c43f3538f319984e252c92f08538881dc0a2eaff5",
-    "m3/tooling/module-packs/nlp-search/current_forks.py" : "209a243df4aee17ba2fb98e63353c1055cf5a07546bb5a854a19a9540340c037"
+    "m3/tooling/module-packs/nlp-search/current-source-lock.json" : "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a",
+    "m3/tooling/module-packs/nlp-search/current_forks.py" : "48a857120ec9af38532e86ff66e36b08bd78544978a17db496fb53cc4825cc32"
   }
 }

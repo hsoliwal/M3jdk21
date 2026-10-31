@@ -3,15 +3,15 @@
   "files": [
     {
       "path": "build_runtime_facade_handoff.py",
-      "sha256": "3c788e8d505ce27a57bf5f3b74b3590487bf6aef90ea07dc1d7b983173e89c27"
+      "sha256": "a668c8b4df6ddeb34315562169a63d9763b79a5beb6735cc3ecc3f0a8237ee4a"
     },
     {
       "path": "canonical-artifacts.json",
-      "sha256": "f83257b7b9c861d5d7ffcf40e61693db9e57f8f7f83dcebde6f4dcd83f676a0d"
+      "sha256": "3c2cb8841758af573c30c4506de7f49ec942ca293711a46d97712d682d956777"
     },
     {
       "path": "CUSTODY-SOURCE.json",
-      "sha256": "cbb722ac6706721f1a9d055c3bf746bebb1891ad9e4367a5d0a3ccf878f05f57"
+      "sha256": "9be55f89b3107393e0f40e2ba57871683ed9617770c318166d69275d2f8f70d3"
     },
     {
       "path": "pom.xml",
@@ -27,7 +27,7 @@
     },
     {
       "path": "datasets/m3-runtime-facade-custody-1/MODES.tsv",
-      "sha256": "3675321c66451066f34fde9d6eb212c75e4a2ebbb6da21df779157da8fedecd7"
+      "sha256": "6562ed5d2ef3d43a72a6979d875ed0331bcac0babeeaa66c23aa8ae96ae120ec"
     },
     {
       "path": "datasets/m3-runtime-facade-custody-1/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3-runtime-facade-custody-1.yml",
@@ -39,7 +39,7 @@
     },
     {
       "path": "datasets/m3-runtime-facade-custody-1/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-facade-custody-1/manifest.tsv",
-      "sha256": "33d18201c0c0521673ac8f7466c061684c2c1715d0fe81087329cf19f50620f2"
+      "sha256": "c922e5d4ebd7ff4bf8f6832f1bc98772f3677b32fd89655e9beecce259c09ce9"
     },
     {
       "path": "target/m3-runtime-facade-custody-1/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",

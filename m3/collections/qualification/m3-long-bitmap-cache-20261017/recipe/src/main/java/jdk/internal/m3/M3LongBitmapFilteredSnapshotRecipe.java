@@ -37,10 +37,10 @@ public final class M3LongBitmapFilteredSnapshotRecipe {
     private static final List<Output> OUTPUTS = List.of(
             new Output("M3LongBitmapFilteredSnapshot.java",
                     "m3/collections/src/main/java/jdk/m3/collections/M3LongBitmapFilteredSnapshot.java",
-                    "ef4e4f4b7a8871cba0e631b96480ad3cf1e43640e5bf84a89cc91806df2d54d9"),
+                    "4cb21dae105bbd2ca2d2772c7ba097a133e67e6de4fa77ff4deed3a354642d23"),
             new Output("M3LongBitmapFilteredSnapshotSelfTest.java",
                     "m3/collections/src/test/java/jdk/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java",
-                    "de0be6b6fa43ea9b824db0f79106213976e94f8f7cdf6a84f15378a6c090cc37"));
+                    "38a4258d2ea52d351140b81fe4da28d348d4be40e893ed4cadc968157316fcb0"));
 
     private M3LongBitmapFilteredSnapshotRecipe() { }
 

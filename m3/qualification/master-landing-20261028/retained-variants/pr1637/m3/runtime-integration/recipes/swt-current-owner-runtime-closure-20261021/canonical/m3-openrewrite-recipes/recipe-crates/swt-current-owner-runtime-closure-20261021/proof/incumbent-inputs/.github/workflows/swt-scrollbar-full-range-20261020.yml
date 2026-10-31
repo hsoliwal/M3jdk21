@@ -42,8 +42,8 @@ jobs:
         run: |
           set -euo pipefail
           git rev-parse HEAD
-          test "$(git hash-object "$Q/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java")" = 135a28d0cec9ea988607cdef6caa1f0fe5115d75
-          test "$(git hash-object "$Q/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java")" = 9174dd681f0d75b5086fc19904a71524a03972dc
+          test "$(git hash-object "$Q/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java")" = 8d2dcf8311fd56406246998dc4218ae876a03d45
+          test "$(git hash-object "$Q/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java")" = d41d6dc93ec0e176f6d215d23e3b6a316a9e4a32
           test "$(git hash-object "$Q/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java")" = 274360816db1e44a2f1796a3bc5cdeff6b0ce6db
           TARGET='bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/ViewportScrollBarGeometry.java'
           ACTUAL=$(git hash-object "$TARGET")

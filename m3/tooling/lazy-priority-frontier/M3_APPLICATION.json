@@ -17,14 +17,14 @@
   "targets": [
     {
       "path": "m3/tooling/lazy-priority-frontier/src/main/java/jdk/m3/tooling/priority/M3LazyLongPriorityFrontier.java",
-      "sha256": "d14f5bdad576363b09f5d39b8c6b45b4a7c4e5a9654ba876b30e43de43d0dd55",
-      "sourceTemplateBlob": "b90aecd8c7232c526f1cab8244b490062ab7b196",
+      "sha256": "3b125e0aee885a79b6ed48ced17ddb55cdf81ef63d8ec0c304ee7c9deb2cf672",
+      "sourceTemplateBlob": "4296118d6d81223d3bdd91f5885c7540dad2dc97",
       "disposition": "ADAPTED_COPY"
     },
     {
       "path": "m3/tooling/lazy-priority-frontier/src/test/java/jdk/m3/tooling/priority/M3LazyLongPriorityFrontierTest.java",
       "sha256": "97b96b727d6b93e8aeebc25db89391fe05c29222c69abad9f0d51a9a742d3121",
-      "sourceTemplateBlob": "90b01f1e8be67c7c7594738c7c2aa0ff2d8bfc6e",
+      "sourceTemplateBlob": "adc60eeb55022f88f1c1087a4186920374471ce3",
       "disposition": "RECIPE_OUTPUT"
     }
   ],

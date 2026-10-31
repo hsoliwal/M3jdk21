@@ -6,10 +6,10 @@
   "recipe": "jdk.m3.rewrite.backport.M3FileByteEventFactRecipe",
   "recipe_before_git_blob": "d4763cf1db02b9572a2237af0aae67dd577c6e54",
   "recipe_before_sha256": "b5200cf3f29560df5262008b030a2791d3ac5151185fa019b29e52c5af5e8780",
-  "recipe_after_git_blob": "01abe6b04ae25152aaf90c3f99db92f5d0774bef",
-  "recipe_after_sha256": "008d3b6a9a9008368a19b710568cec67a2e07b7b7b77082eeb93d9f2c1856e6b",
+  "recipe_after_git_blob": "db57826c324d831c50b09fd9a31b07465b70267d",
+  "recipe_after_sha256": "888ff6c372f0c998348681d7fac149306e1adcee4c72d9c679c3871faf7c0855",
   "regression_test": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3FileByteEventFactRecipeTest.java",
-  "regression_test_sha256": "0e83aefa3f81f3ba866ab1b26e4ea090bddc87a51bc0757d7b52850ddcee9cdd",
+  "regression_test_sha256": "f1d52b8247782201e5aa54c690cc40aa4944424f90ad260bc4e61864a1b6c13b",
   "atom": "Classify each observed target as exact BEFORE, exact AFTER, or unknown.",
   "pattern": "Transform BEFORE, retain the original SourceFile for AFTER, refuse unknown source.",
   "observed_failure": "Original fixed-point test failed with IllegalStateException preimage drift on exact AFTER source.",
@@ -66,7 +66,7 @@
     ]
   },
   "evidence": {
-    "original-sdk-tests.log": "768fb45180188a2cde74ee1af0a2c9556bc85128fec51718ce3143b0b1dfc9f2",
+    "original-sdk-tests.log": "34595b6e52baffb08207f27033837465118ffd78aeb3a13aa341e956794ce733",
     "qualified-sdk-tests.log": "aee79b7686ee1c81dbc0cbef8b04e4b2a713b9b573a01e3e6d5e3450bc3c1793"
   },
   "limitations": [

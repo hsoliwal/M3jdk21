@@ -8,9 +8,9 @@ Original product PR #1882 preimage `66ddfd93f75f4830e2e3c8fea139f95e49dec65e`:
 - `src/main/java/com/m3/collections/M3LongRankBatchNative.java`: before `3915c02d735d128b74f5857edc81864fa05048bc`, after `8106997f17e17fa584f1b3437360f31d85609188`
 - `src/main/java/com/m3/collections/M3LongRankIndex.java`: before `b1992bbe965c2f42500b02b5bb687dbb7153638b`, after `0f9763abfa67046490f344abfe620ae086d833c2`
 - `src/main/native/collections/m3_long_rank_batch_jni.c`: before `32753502cfa1e9f7e5e4a4833b22e495fe679f79`, after `294447e6fe84c37a7b7bdbc3492a9bf62a78a731`
-- New original-module standalone Java `M3LongPairDistanceContract.java`: `a28b679781123efa0b4c3ae4721d1e03de69a435`
-- Its original-module JUnit wrapper `M3LongPairDistanceTest.java`: `7dbc1c1bc8f78766492cd04252ba75fb4c2603e9`
-- Focused exact-head original C17 `javac -h` generated JNI ABI / `-Xcheck:jni` CI: `2045017c674d7a886a21b69b639dc58abb32a0c6`
+- New original-module standalone Java `M3LongPairDistanceContract.java`: `9c2f86c5550d13de1db599a8b055a93a5270788f`
+- Its original-module JUnit wrapper `M3LongPairDistanceTest.java`: `5f7ae2de23a97d10a23e773261e0288d23ab9276`
+- Focused exact-head original C17 `javac -h` generated JNI ABI / `-Xcheck:jni` CI: `268d6d3f4c79a607af53927e44bb1701a9d3ecd2`
 
 All six Git blobs were compared byte-for-byte against canonical Synexia source templates. This receiver changes exactly the original owners/results plus a separate qualification workflow; no copied donor LeetCode/HackerRank/GFG solution implementation.
 

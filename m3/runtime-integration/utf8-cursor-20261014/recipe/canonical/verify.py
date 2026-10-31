@@ -39,13 +39,13 @@ REQUIRED_PATHS = [
 ]
 REQUIRED_GIT_BLOBS = {
   "pinned-engine/jdk/internal/m3/rewrite/M3EditScope.java": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
-  "pinned-engine/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java": "2530c533003a8a17d0e782728d98a4dfebe13651",
-  "pinned-engine/jdk/internal/m3/rewrite/M3ScopeInference.java": "f6fd8d4a558a6b9b0c78cf4d010e63e3b3e1a9da",
+  "pinned-engine/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java": "e7a3c6d89e0fad77e510fdc6d46223211493fd5a",
+  "pinned-engine/jdk/internal/m3/rewrite/M3ScopeInference.java": "a27177a9538c96633424b73dff48fe7f0341a51b",
   "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/M3String.before.java.txt": "42399d411c1516a56a47dcdb10242960157b4677",
   "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/M3String.java.txt": "35ed998540e044eed8cb7596e2e2c019ae369bd3",
   "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/manifest.tsv": "9a64ff003d4c8aef8d4ef6800652acc67c44c967",
-  "src/main/resources/META-INF/rewrite/m3jdk21-utf8-cursor-20261014.yml": "a1e3eb558d4c5a47208be1941d41251bf0354794",
-  "src/test/java/jdk/internal/m3/rewrite/M3Utf8CursorRecipeTest.java": "b735eb59bf2b7f6167674d2bf8a345679e55d49f"
+  "src/main/resources/META-INF/rewrite/m3jdk21-utf8-cursor-20261014.yml": "689ebf3b35340fecb9fdc96f6be7a6a5229ab014",
+  "src/test/java/jdk/internal/m3/rewrite/M3Utf8CursorRecipeTest.java": "f05babe49ef04f36fed5f60d79162ab0afedf4f8"
 }
 
 
@@ -226,8 +226,8 @@ def main() -> None:
         "schema": "M3_UTF8_RECEIVING_SDK_RECEIPT_V1",
         "scope": "RECEIVING_PROVIDER_2530_AND_UNCHANGED_FIVE_SDK_TESTS_ONLY",
         "ciReportedSha": os.environ.get("GITHUB_SHA", "UNKNOWN"),
-        "providerGitBlob": "2530c533003a8a17d0e782728d98a4dfebe13651",
-        "testGitBlob": "b735eb59bf2b7f6167674d2bf8a345679e55d49f",
+        "providerGitBlob": "e7a3c6d89e0fad77e510fdc6d46223211493fd5a",
+        "testGitBlob": "f05babe49ef04f36fed5f60d79162ab0afedf4f8",
         "inputPinsSha256": hashlib.sha256(pins_data).hexdigest(),
         "reportSha256": hashlib.sha256(report_data).hexdigest(),
         "tests": counts,

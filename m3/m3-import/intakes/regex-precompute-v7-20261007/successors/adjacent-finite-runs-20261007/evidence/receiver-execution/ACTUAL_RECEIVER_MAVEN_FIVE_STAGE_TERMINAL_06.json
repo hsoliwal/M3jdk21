@@ -104,8 +104,8 @@
       "log": {
         "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-03/M3_REGEX_MAVEN_03_applyTwoTargets.log",
         "bytes": 1384,
-        "sha256": "1a70fb8b13eba15d65349b79786382cffaa817f646bba5ffe4102627f0f25213",
-        "gitBlob": "3bf1bd1d741f9d8ddb7f26dc2d9a5a195deef6c4"
+        "sha256": "df3c577bebce01f093d87837d662557c8dc4f23dfb0a3fcb03f55191dec0bac3",
+        "gitBlob": "ff9f8496845c00c43b7de7e5cd52e5982e2c45ed"
       },
       "exitReceipt": {
         "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-03/M3_REGEX_MAVEN_03_applyTwoTargets.exit.txt",
@@ -190,17 +190,17 @@
         "mavenInvocations": 0,
         "rootLane": "SOLE_SERIAL_JVM_LANE",
         "status": "PASS_CPU_PREFLIGHT",
-        "nativeBindingSHA256": "6199e7c6cedded723c810b40657f195afc5db82e45082a487d7588c1bca8d88d",
+        "nativeBindingSHA256": "8fe832869d5c8bba1fc728dc3169193a297329dd7197e65a78d11ef62028d950",
         "immutableInputs": 441,
         "qualifiedReplayClasses": 8,
         "receivingTargets": [
           {
             "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java",
-            "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+            "sha256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7"
           },
           {
             "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexTrigramQuery.java",
-            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f"
+            "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e"
           }
         ],
         "availableCommitBytes": 2236559360,
@@ -218,8 +218,8 @@
       "log": {
         "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_defaultCheckFixedpoint.log",
         "bytes": 976,
-        "sha256": "8226b9994c7cb4cc32a61495428faefcf61a72d6020d043b0e88944489add602",
-        "gitBlob": "c0c83565b11e8122c4aa7a5cace9f69a108dbe24"
+        "sha256": "d213424f3851ec6d562feabd80061ef20c9e00e7021016539c97a612dca570cc",
+        "gitBlob": "6e2da152ca8d0a02ac6dff75dd6d633dbfa12731"
       },
       "exitReceipt": {
         "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_defaultCheckFixedpoint.exit.txt",
@@ -227,7 +227,7 @@
         "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
         "gitBlob": "18748286e5b8b4de5db905f87cdfed1a7d48fe60"
       },
-      "originalBindingSHA256": "6199e7c6cedded723c810b40657f195afc5db82e45082a487d7588c1bca8d88d",
+      "originalBindingSHA256": "8fe832869d5c8bba1fc728dc3169193a297329dd7197e65a78d11ef62028d950",
       "negativeInspector": null
     },
     {
@@ -304,17 +304,17 @@
         "mavenInvocations": 0,
         "rootLane": "SOLE_SERIAL_JVM_LANE",
         "status": "PASS_CPU_PREFLIGHT",
-        "nativeBindingSHA256": "6199e7c6cedded723c810b40657f195afc5db82e45082a487d7588c1bca8d88d",
+        "nativeBindingSHA256": "8fe832869d5c8bba1fc728dc3169193a297329dd7197e65a78d11ef62028d950",
         "immutableInputs": 441,
         "qualifiedReplayClasses": 8,
         "receivingTargets": [
           {
             "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java",
-            "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+            "sha256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7"
           },
           {
             "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexTrigramQuery.java",
-            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f"
+            "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e"
           }
         ],
         "availableCommitBytes": 2557087744,
@@ -332,8 +332,8 @@
       "log": {
         "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_secondApplyFixedpoint.log",
         "bytes": 975,
-        "sha256": "aba6dba4c42d5b204aba61a3e68ce1322d487751c559270b5bf360b251ab6893",
-        "gitBlob": "63008343a3c8e920bcf828e9d02530cee0a814f2"
+        "sha256": "4d513ab79d39fa7bc8acb7561b04e5f1e1883ec92aca7358accb37b76b29aa65",
+        "gitBlob": "ec4abed21e4d026c7116c74aa76db1304582a782"
       },
       "exitReceipt": {
         "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_secondApplyFixedpoint.exit.txt",
@@ -341,7 +341,7 @@
         "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
         "gitBlob": "18748286e5b8b4de5db905f87cdfed1a7d48fe60"
       },
-      "originalBindingSHA256": "6199e7c6cedded723c810b40657f195afc5db82e45082a487d7588c1bca8d88d",
+      "originalBindingSHA256": "8fe832869d5c8bba1fc728dc3169193a297329dd7197e65a78d11ef62028d950",
       "negativeInspector": null
     },
     {
@@ -418,7 +418,7 @@
         "mavenInvocations": 0,
         "rootLane": "SOLE_SERIAL_JVM_LANE",
         "status": "PASS_CPU_PREFLIGHT",
-        "nativeBindingSHA256": "6199e7c6cedded723c810b40657f195afc5db82e45082a487d7588c1bca8d88d",
+        "nativeBindingSHA256": "8fe832869d5c8bba1fc728dc3169193a297329dd7197e65a78d11ef62028d950",
         "immutableInputs": 441,
         "qualifiedReplayClasses": 8,
         "receivingTargets": [
@@ -428,7 +428,7 @@
           },
           {
             "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexTrigramQuery.java",
-            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f"
+            "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e"
           }
         ],
         "availableCommitBytes": 2212773888,
@@ -446,8 +446,8 @@
       "log": {
         "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_driftProgram.log",
         "bytes": 8008,
-        "sha256": "52a71971e552d78d60a06fcaab5cce453a275a2a3e41ae0a0722593c33012024",
-        "gitBlob": "0badd3b1396a7666139b91ab2c714dffaa0c45d1"
+        "sha256": "cc001276df65546ed8b101aa9acd7ff462c61156d45d42d275c077491092c9f3",
+        "gitBlob": "76eb1b7778266e9878e98b95ad7c362562a20bd1"
       },
       "exitReceipt": {
         "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_driftProgram.exit.txt",
@@ -455,12 +455,12 @@
         "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
         "gitBlob": "f33dfa25aa16a97ca941fe1d9cabdc3689179f3f"
       },
-      "originalBindingSHA256": "6199e7c6cedded723c810b40657f195afc5db82e45082a487d7588c1bca8d88d",
+      "originalBindingSHA256": "8fe832869d5c8bba1fc728dc3169193a297329dd7197e65a78d11ef62028d950",
       "negativeInspector": {
         "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_DRIFT_1_VERIFIED.json",
         "bytes": 907,
-        "sha256": "2f8e486007470208240421eafc22437991c4a9caea3a1f220d50b005e1bde271",
-        "gitBlob": "b3eacdfc1a1ae67a43f6431e3b81e34e92dca2a9"
+        "sha256": "be3a604d7a6d4d30e4ffa0cf3c6e77a571afbf24d405d6d64de631228343091c",
+        "gitBlob": "3a3e6854e9e649edc74076f6a95fcc01ecaea801"
       }
     },
     {
@@ -537,13 +537,13 @@
         "mavenInvocations": 0,
         "rootLane": "SOLE_SERIAL_JVM_LANE",
         "status": "PASS_CPU_PREFLIGHT",
-        "nativeBindingSHA256": "6199e7c6cedded723c810b40657f195afc5db82e45082a487d7588c1bca8d88d",
+        "nativeBindingSHA256": "8fe832869d5c8bba1fc728dc3169193a297329dd7197e65a78d11ef62028d950",
         "immutableInputs": 441,
         "qualifiedReplayClasses": 8,
         "receivingTargets": [
           {
             "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java",
-            "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+            "sha256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7"
           },
           {
             "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexTrigramQuery.java",
@@ -565,8 +565,8 @@
       "log": {
         "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_driftQuery.log",
         "bytes": 8033,
-        "sha256": "3997d960abef0ffad4fcccf3a8ee84aae78dbda83c3945f81f5e1290b4e86bcf",
-        "gitBlob": "27a5f6c9fd62c39ccee7e6723030f20e0055f394"
+        "sha256": "605370c7f31277c876ecec434cc0817f4e5ffc3f9ab64499c891d695ece7f214",
+        "gitBlob": "59a13af4b82d6db8bba258a95d74ffb8b3a36831"
       },
       "exitReceipt": {
         "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_driftQuery.exit.txt",
@@ -574,12 +574,12 @@
         "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
         "gitBlob": "f33dfa25aa16a97ca941fe1d9cabdc3689179f3f"
       },
-      "originalBindingSHA256": "6199e7c6cedded723c810b40657f195afc5db82e45082a487d7588c1bca8d88d",
+      "originalBindingSHA256": "8fe832869d5c8bba1fc728dc3169193a297329dd7197e65a78d11ef62028d950",
       "negativeInspector": {
         "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_DRIFT_2_VERIFIED.json",
         "bytes": 910,
-        "sha256": "e241f9e8c83254da3a3838ef3b1a588f8ad5f800531e9de80a060a1fb4295071",
-        "gitBlob": "2979576c7fb63a53f47ac7f5746c1758bc98df25"
+        "sha256": "1b9aaa35d61f5bc5fef2e7cd6332828214af8fcd664c5d5ccd0ed10c7bdfb717",
+        "gitBlob": "98078c82567e1137b1575bc40a85664db0f49e9e"
       }
     }
   ],
@@ -803,22 +803,22 @@
     {
       "path": "K:\\codex-work\\m3-synexia-full-family-invariant-20261007\\donor-sources\\Replay.java",
       "bytes": 10190,
-      "sha256": "fab78282a3e137b5c917a1351f97ec120ef0aab0d4f0615c4c3cd37c97665b2f"
+      "sha256": "a66e1edc751508972a774894525a965eff8c1fb5ce26802cdc1b82d12e6dd6cd"
     },
     {
       "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-full-family-invariant-20261007\\donor-sources\\Replay.java",
       "bytes": 10190,
-      "sha256": "fab78282a3e137b5c917a1351f97ec120ef0aab0d4f0615c4c3cd37c97665b2f"
+      "sha256": "a66e1edc751508972a774894525a965eff8c1fb5ce26802cdc1b82d12e6dd6cd"
     },
     {
       "path": "K:\\codex-work\\m3-synexia-full-family-invariant-20261007\\donor-sources\\M3GpuToolJoinManifest.java",
       "bytes": 10964,
-      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e"
     },
     {
       "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-full-family-invariant-20261007\\donor-sources\\M3GpuToolJoinManifest.java",
       "bytes": 10964,
-      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e"
     },
     {
       "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\plugins\\maven-compiler-plugin\\3.15.0\\maven-compiler-plugin-3.15.0.jar",
@@ -2463,7 +2463,7 @@
     {
       "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java",
       "bytes": 141730,
-      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+      "sha256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7"
     },
     {
       "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-indexstring\\src\\test\\java\\com\\synexia\\indexstring\\MIndexRegexProgramTest.java",
@@ -2488,22 +2488,22 @@
     {
       "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\DIRECT_ORIGINAL40_ACTUAL_TERMINAL.json",
       "bytes": 90172,
-      "sha256": "eb947757b621f964cf7195df482030bb73a40800615bf21670949c67dc64f6c8"
+      "sha256": "79882de799b81e1443eebf5d24f72fbf14fae8925b8dce7fc70f8dd7cd042dfd"
     },
     {
       "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\DIRECT_REPLAY_ACTUAL_TERMINAL.json",
       "bytes": 11210,
-      "sha256": "91113eb3bff24a1868ae6603daf778c82e62f7240d632d2c6dbd1aa577ce7669"
+      "sha256": "f835a5f41f8ce5aecfda1ae9ab84ac18848d26c74de45b6c35bdb2dc1029103b"
     },
     {
       "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\ORIGINAL_PROGRAM3_BASELINE_FAILURE.json",
       "bytes": 17989,
-      "sha256": "7f49c0f21ef7b8b7e94a5d32c597aaee964b74606e2a1efae8d4f882d7b9f186"
+      "sha256": "cde52919e344a1daa9442e22548e56dbb4c1e1cd04600162f1aef89248f71922"
     },
     {
       "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\ORIGINAL_TRIGRAM_BASELINE_FAILURE.json",
       "bytes": 15279,
-      "sha256": "5ee95a773f6cc28f1c25bd836f6b8283a923eacbb3aa6508406287f504b9be81"
+      "sha256": "27a3e0231350118684d97d347dfffba77172442817a2389d6f7772b578013a43"
     },
     {
       "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\PRIOR_PRODUCTION_FORMAL_REVIEW_RESULT.json",
@@ -2528,7 +2528,7 @@
     {
       "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\ROOT_CPU_TEST_REVIEW_DISPOSITION.json",
       "bytes": 2688,
-      "sha256": "b9b72da1cb5f4c1110161cd1787d89ca0e3e4a5e80d06440212a1a55aa1844ae"
+      "sha256": "ec64521431ad00897679425b8ef727ffe6f5b0c920956d40645f922a2dff0fdb"
     },
     {
       "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\SHARED_ENGINE_SOURCE_PINS.json",
@@ -2538,7 +2538,7 @@
     {
       "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\STRICT_TEST_CLASS_ARTIFACTS.json",
       "bytes": 16134,
-      "sha256": "e266184e472f4d301bec397e3b5c412d688e4c2fbb5f400ee019fb677a65c7c5"
+      "sha256": "8f3be69f9c1a18bebb85ad991eeb1881d0e1b834a29cdb289da68a7a55490b68"
     },
     {
       "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\TRIGRAM_EXISTENCE_CORRECTION.diff",
@@ -2583,7 +2583,7 @@
     {
       "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\templates\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java.txt",
       "bytes": 141730,
-      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+      "sha256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7"
     },
     {
       "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\templates\\synexia-indexstring\\src\\test\\java\\com\\synexia\\indexstring\\MIndexRegexProgramTest.java.txt",
@@ -2613,22 +2613,22 @@
     {
       "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\DIRECT_ORIGINAL40_ACTUAL_TERMINAL.json",
       "bytes": 90172,
-      "sha256": "eb947757b621f964cf7195df482030bb73a40800615bf21670949c67dc64f6c8"
+      "sha256": "79882de799b81e1443eebf5d24f72fbf14fae8925b8dce7fc70f8dd7cd042dfd"
     },
     {
       "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\DIRECT_REPLAY_ACTUAL_TERMINAL.json",
       "bytes": 11210,
-      "sha256": "91113eb3bff24a1868ae6603daf778c82e62f7240d632d2c6dbd1aa577ce7669"
+      "sha256": "f835a5f41f8ce5aecfda1ae9ab84ac18848d26c74de45b6c35bdb2dc1029103b"
     },
     {
       "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\ORIGINAL_PROGRAM3_BASELINE_FAILURE.json",
       "bytes": 17989,
-      "sha256": "7f49c0f21ef7b8b7e94a5d32c597aaee964b74606e2a1efae8d4f882d7b9f186"
+      "sha256": "cde52919e344a1daa9442e22548e56dbb4c1e1cd04600162f1aef89248f71922"
     },
     {
       "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\ORIGINAL_TRIGRAM_BASELINE_FAILURE.json",
       "bytes": 15279,
-      "sha256": "5ee95a773f6cc28f1c25bd836f6b8283a923eacbb3aa6508406287f504b9be81"
+      "sha256": "27a3e0231350118684d97d347dfffba77172442817a2389d6f7772b578013a43"
     },
     {
       "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\PRIOR_PRODUCTION_FORMAL_REVIEW_RESULT.json",
@@ -2653,7 +2653,7 @@
     {
       "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\ROOT_CPU_TEST_REVIEW_DISPOSITION.json",
       "bytes": 2688,
-      "sha256": "b9b72da1cb5f4c1110161cd1787d89ca0e3e4a5e80d06440212a1a55aa1844ae"
+      "sha256": "ec64521431ad00897679425b8ef727ffe6f5b0c920956d40645f922a2dff0fdb"
     },
     {
       "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\SHARED_ENGINE_SOURCE_PINS.json",
@@ -2663,7 +2663,7 @@
     {
       "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\STRICT_TEST_CLASS_ARTIFACTS.json",
       "bytes": 16134,
-      "sha256": "e266184e472f4d301bec397e3b5c412d688e4c2fbb5f400ee019fb677a65c7c5"
+      "sha256": "8f3be69f9c1a18bebb85ad991eeb1881d0e1b834a29cdb289da68a7a55490b68"
     },
     {
       "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\TRIGRAM_EXISTENCE_CORRECTION.diff",
@@ -2708,7 +2708,7 @@
     {
       "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\templates\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java.txt",
       "bytes": 141730,
-      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+      "sha256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7"
     },
     {
       "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\templates\\synexia-indexstring\\src\\test\\java\\com\\synexia\\indexstring\\MIndexRegexProgramTest.java.txt",
@@ -2728,12 +2728,12 @@
     {
       "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-full-family-invariant-20261007\\donor-sources\\Replay.java",
       "bytes": 10190,
-      "sha256": "fab78282a3e137b5c917a1351f97ec120ef0aab0d4f0615c4c3cd37c97665b2f"
+      "sha256": "a66e1edc751508972a774894525a965eff8c1fb5ce26802cdc1b82d12e6dd6cd"
     },
     {
       "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-full-family-invariant-20261007\\donor-sources\\M3GpuToolJoinManifest.java",
       "bytes": 10964,
-      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e"
     },
     {
       "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\source\\MIndexRegexProgram.java",
@@ -2842,8 +2842,8 @@
   "qualifiedClassReceipt": {
     "path": "K:/codex-work/m3-regex-finite-runs-standalone-maven-activation-p0-20261007/REGEX_MAVEN_REPLAY_CLASS_ARTIFACTS_01.json",
     "bytes": 20435,
-    "sha256": "2bed042d281f60c0277b0342562eedd1910476b207d291c5d06a9861c0b178ae",
-    "gitBlob": "0143a8dc23f8f3aa1baa30a11a8e3739a0ad1ee8"
+    "sha256": "3dbbe8f1109615b45e3e1e2278629461d781644cdf2c8ae9191a216d19540e0e",
+    "gitBlob": "5a2171b4ee935546788761307a02918fac8d23cf"
   },
   "qualifiedMajorVersion": 65,
   "sharedOfflineCache": {
@@ -2860,20 +2860,20 @@
     {
       "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-full-family-invariant-20261007\\donor-sources\\Replay.java",
       "bytes": 10190,
-      "sha256": "fab78282a3e137b5c917a1351f97ec120ef0aab0d4f0615c4c3cd37c97665b2f"
+      "sha256": "a66e1edc751508972a774894525a965eff8c1fb5ce26802cdc1b82d12e6dd6cd"
     },
     {
       "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-full-family-invariant-20261007\\donor-sources\\M3GpuToolJoinManifest.java",
       "bytes": 10964,
-      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e"
     }
   ],
   "unrelatedOriginalSynexiaPostimages": [
     {
       "path": "K:/codex-work/m3-regex-finite-runs-standalone-maven-activation-p0-20261007/layout/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/target/com.synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
       "bytes": 141730,
-      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c",
-      "gitBlob": "f39709b64c82ddd1acf349446eeac8efe8f3ef27"
+      "sha256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7",
+      "gitBlob": "98d9be66015639a8087c744d17f31c76d53c8ae5"
     },
     {
       "path": "K:/codex-work/m3-regex-finite-runs-standalone-maven-activation-p0-20261007/layout/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/target/com.synexia/synexia-indexstring/src/test/java/com/synexia/indexstring/MIndexRegexTrigramQueryTest.java",
@@ -2890,29 +2890,29 @@
   ],
   "receivingPostimagesRestored": [
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexProgram.java",
       "bytes": 141730,
-      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c",
-      "gitBlob": "f39709b64c82ddd1acf349446eeac8efe8f3ef27"
+      "sha256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7",
+      "gitBlob": "98d9be66015639a8087c744d17f31c76d53c8ae5"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexTrigramQuery.java",
       "bytes": 15093,
-      "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
-      "gitBlob": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea"
+      "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e",
+      "gitBlob": "4e1d24af8d3054a27ae3b6f2d8eebd6486225118"
     }
   ],
   "binding": {
     "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_BINDING_01.json",
     "bytes": 34445,
-    "sha256": "6199e7c6cedded723c810b40657f195afc5db82e45082a487d7588c1bca8d88d",
-    "gitBlob": "b5d45b30ed9e0aa4b27507ce4be2ffb151fb272a"
+    "sha256": "8fe832869d5c8bba1fc728dc3169193a297329dd7197e65a78d11ef62028d950",
+    "gitBlob": "d5e8ed06bd4af556b2c44eb497153672c686d814"
   },
   "nativeManifest": {
     "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_NATIVE_COMMANDS_01.json",
     "bytes": 29039,
-    "sha256": "21c4986facf0f91b6e8060052c6e86d81e168f41dee3624b0f51d091fb0bf6fc",
-    "gitBlob": "7c6d09919320d007ac519b4207dbfbfdb31b0a3b"
+    "sha256": "835f173481f29ebf425399f085898000c1f6901b3f0915008f68911715901315",
+    "gitBlob": "5fa890a1069f0af359b18268b2737da1cf42db75"
   },
   "resourceRefusalsNative01Through05": [
     {
@@ -2958,11 +2958,11 @@
         "qualifiedMavenReplayClassesPassed": 8,
         "receiverSourcesUnchanged": [
           {
-            "targetPath": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+            "targetPath": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexProgram.java",
             "sha256": "9999e8afe1ec44de58edd644c0ca278415fb7a379f6cdacfe9dbf7011ed77131"
           },
           {
-            "targetPath": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+            "targetPath": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexTrigramQuery.java",
             "sha256": "ABSENT"
           }
         ],
@@ -3046,11 +3046,11 @@
         "qualifiedMavenReplayClassesPassed": 8,
         "receiverSourcesUnchanged": [
           {
-            "targetPath": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+            "targetPath": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexProgram.java",
             "sha256": "9999e8afe1ec44de58edd644c0ca278415fb7a379f6cdacfe9dbf7011ed77131"
           },
           {
-            "targetPath": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+            "targetPath": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexTrigramQuery.java",
             "sha256": "ABSENT"
           }
         ],
@@ -3116,8 +3116,8 @@
           "log": {
             "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-03/M3_REGEX_MAVEN_03_applyTwoTargets.log",
             "bytes": 1384,
-            "sha256": "1a70fb8b13eba15d65349b79786382cffaa817f646bba5ffe4102627f0f25213",
-            "gitBlob": "3bf1bd1d741f9d8ddb7f26dc2d9a5a195deef6c4"
+            "sha256": "df3c577bebce01f093d87837d662557c8dc4f23dfb0a3fcb03f55191dec0bac3",
+            "gitBlob": "ff9f8496845c00c43b7de7e5cd52e5982e2c45ed"
           },
           "exitFile": {
             "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-03/M3_REGEX_MAVEN_03_applyTwoTargets.exit.txt",
@@ -3160,16 +3160,16 @@
         "laterThreeGates": "NOT_LAUNCHED",
         "sourcePostimages": [
           {
-            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexProgram.java",
             "bytes": 141730,
-            "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c",
-            "gitBlob": "f39709b64c82ddd1acf349446eeac8efe8f3ef27"
+            "sha256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7",
+            "gitBlob": "98d9be66015639a8087c744d17f31c76d53c8ae5"
           },
           {
-            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexTrigramQuery.java",
             "bytes": 15093,
-            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
-            "gitBlob": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea"
+            "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e",
+            "gitBlob": "4e1d24af8d3054a27ae3b6f2d8eebd6486225118"
           }
         ],
         "restorationRequired": false,
@@ -3199,11 +3199,11 @@
         "receivingTargets": [
           {
             "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java",
-            "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+            "sha256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7"
           },
           {
             "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexTrigramQuery.java",
-            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f"
+            "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e"
           }
         ],
         "availableCommitBytes": 477376512,
@@ -3277,16 +3277,16 @@
         },
         "postimages": [
           {
-            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexProgram.java",
             "bytes": 141730,
-            "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c",
-            "gitBlob": "f39709b64c82ddd1acf349446eeac8efe8f3ef27"
+            "sha256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7",
+            "gitBlob": "98d9be66015639a8087c744d17f31c76d53c8ae5"
           },
           {
-            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexTrigramQuery.java",
             "bytes": 15093,
-            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
-            "gitBlob": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea"
+            "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e",
+            "gitBlob": "4e1d24af8d3054a27ae3b6f2d8eebd6486225118"
           }
         ],
         "restorationRequired": false,
@@ -3310,11 +3310,11 @@
         "receivingTargets": [
           {
             "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java",
-            "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+            "sha256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7"
           },
           {
             "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexTrigramQuery.java",
-            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f"
+            "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e"
           }
         ],
         "availableCommitBytes": 983240704,
@@ -3388,16 +3388,16 @@
         },
         "postimages": [
           {
-            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexProgram.java",
             "bytes": 141730,
-            "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c",
-            "gitBlob": "f39709b64c82ddd1acf349446eeac8efe8f3ef27"
+            "sha256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7",
+            "gitBlob": "98d9be66015639a8087c744d17f31c76d53c8ae5"
           },
           {
-            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexTrigramQuery.java",
             "bytes": 15093,
-            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
-            "gitBlob": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea"
+            "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e",
+            "gitBlob": "4e1d24af8d3054a27ae3b6f2d8eebd6486225118"
           }
         ],
         "restorationRequired": false,
@@ -3421,11 +3421,11 @@
         "receivingTargets": [
           {
             "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java",
-            "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+            "sha256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7"
           },
           {
             "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexTrigramQuery.java",
-            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f"
+            "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e"
           }
         ],
         "availableCommitBytes": 1634082816,
@@ -3445,8 +3445,8 @@
   "metadataReview": {
     "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/M3_REGEX_RECEIVER_ACTUAL_REVIEW_TERMINAL_02.json",
     "bytes": 40763,
-    "sha256": "4d04176cfeaa7f9d3c7c1778976b6f0065e289e41ed3db6c36d5057dda9b9941",
-    "gitBlob": "bfb979b9326d07286947caf75791385ac4a560ea"
+    "sha256": "851a4571dff6da40529dc6ab6c9c659abaeae45953b1a582216ef35fd702a99d",
+    "gitBlob": "08979cf2c8c645e8907936f19c5b6d8a236e0621"
   },
   "metadataReviewFiles": 7,
   "completeFrozenPublicationFiles": 21,

@@ -3,7 +3,7 @@
  * Generated from the source-sealed Synexia M3 long-path JNI recipe.
  *
  * Derived from the first-party M3IndexPathMasks int-row JNI Region pattern,
- * Git blob 086b49293257fd17cc7fbd1ebbb98460aa677e35.
+ * Git blob 69aef883c09997bae30825d7ad8757bc2358bf69.
  * No pinned heap array, retained pointer, global reference or Java callback.
  * This general gather backend does not claim to outperform the Java implementation.
  */

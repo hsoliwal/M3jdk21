@@ -14,13 +14,13 @@
       "source_path": "/workspace/scratch/206049dfb270/integration-work/HOSTED_BASELINE_ENGINE_PIN_REFUSAL.json",
       "path": "hosted-admission/HOSTED_BASELINE_ENGINE_PIN_REFUSAL.json",
       "bytes": 821,
-      "sha256": "9986bcb0441645b707ea07ebfbe897ecf7b71802d469e211f81fc9f64df11288"
+      "sha256": "22107c97fd217f4ef4c75f85827ced29590dcf18b7d8fd969cbcff767b85aefc"
     },
     {
       "source_path": "/workspace/scratch/206049dfb270/integration-work/HOSTED_BASELINE_ENGINE_PIN_REFUSAL.log",
       "path": "hosted-admission/HOSTED_BASELINE_ENGINE_PIN_REFUSAL.log",
       "bytes": 25640,
-      "sha256": "ad99be4e0c1d84dfdad8eb030849e14a2c07fae6b1ab09c130f7a5b5426f9a80"
+      "sha256": "fa85e07d38431705bc1ba6c53fe3bbdaa8ebf8ba66c329b8bfc49fa18be69049"
     }
   ]
 }

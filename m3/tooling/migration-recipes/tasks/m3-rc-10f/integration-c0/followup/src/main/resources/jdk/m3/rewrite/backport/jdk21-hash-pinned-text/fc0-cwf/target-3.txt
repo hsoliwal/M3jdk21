@@ -21,8 +21,8 @@ MAP = 'm3/docs/name-mapping.json'
 WORKFLOW = '.github/workflows/m3-lane28.yml'
 NAMING = 'm3/docs/counterpart-naming.md'
 LEGAL = 'src/java.base/share/legal/synexia.md'
-CURRENT_MAP_SHA = 'cf6a75806908fee920ecbf7bbe548182f1d9db179e9cc554e36739b1c45a6e6c'
-CURRENT_WORKFLOW_SHA = '1aa2a7a495a00d3a0754bcf776cf7d3ef3bd176134186bfe1ec4004bb8a74616'
+CURRENT_MAP_SHA = '1d061025b81107d52e5c2fa52f1ad156b4d941c32bbd2fba725caebefc92b21b'
+CURRENT_WORKFLOW_SHA = '2d6a9817ac4c24db803b02cfc1baa91fc38397fea813163acbab7e2ed0cec82d'
 
 
 class Ic0ContextTest(unittest.TestCase):

@@ -31,8 +31,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo '49767629cccbc847c4a66252f86ce18ce57be8aa49a685350624e570a126597f  m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3FiveProviderKeyGroups.java' | sha256sum -c -
-          echo '97debdc8af2e48e695191daa9a5ad872b9d16131556b9372441ad75c3185a30a  m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveProviderKeyGroupClosureTest.java' | sha256sum -c -
+          echo '0e6314a8f73d66738956278d7b70022f4990b7e49fb4b469dea2fa003ca7e1e0  m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3FiveProviderKeyGroups.java' | sha256sum -c -
+          echo '8dc2a4a0defb76ac027f83c22a9e8caccf39cee826aad72783656dcbfa1530ea  m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveProviderKeyGroupClosureTest.java' | sha256sum -c -
       - name: Strict Java21 compile ACTUAL M3 core and verify java.base boundary
         shell: bash
         run: |

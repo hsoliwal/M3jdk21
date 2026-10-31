@@ -132,7 +132,7 @@ class M3FocusedStringRecipeReceiptTest(unittest.TestCase):
             row["estate_manifest_path"],
         )
         self.assertEqual(
-            "292bc31a96cd3d20c36d617045c6b01a7a7c8faf",
+            "7ffcc48f68e3804899e45c5d058b583ac655d5ea",
             row["estate_manifest_git_blob"],
         )
         self.assertEqual(

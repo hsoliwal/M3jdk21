@@ -78,7 +78,7 @@
 ]]></failure>
   </testcase>
   <testcase name="qualifiedSdkResultsAreRetained" classname="com.synexia.rewrite.M3TaskRecipeTest" time="2.845">
-    <error message="Java template parse error: m3/arrays/src/test/java/com/m3/arrays/M3ArrayNumericCopySelfTest.java" type="java.lang.IllegalStateException"><![CDATA[java.lang.IllegalStateException: Java template parse error: m3/arrays/src/test/java/com/m3/arrays/M3ArrayNumericCopySelfTest.java
+    <error message="Java template parse error: m3/arrays/src/test/java/jdk/m3/arrays/M3ArrayNumericCopySelfTest.java" type="java.lang.IllegalStateException"><![CDATA[java.lang.IllegalStateException: Java template parse error: m3/arrays/src/test/java/jdk/m3/arrays/M3ArrayNumericCopySelfTest.java
 	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.parseChecked(M3HashPinnedJavaSnapshotRecipe.java:423)
 	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.parse(M3HashPinnedJavaSnapshotRecipe.java:290)
 	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.prepare(M3HashPinnedJavaSnapshotRecipe.java:226)
@@ -169,7 +169,7 @@ Caused by: java.lang.AssertionError
 ]]></failure>
   </testcase>
   <testcase name="exactReplayFixedPointAndInputOrder" classname="com.synexia.rewrite.M3TaskRecipeTest" time="1.867">
-    <error message="Java template parse error: m3/arrays/src/test/java/com/m3/arrays/M3ArrayNumericCopySelfTest.java" type="java.lang.IllegalStateException"><![CDATA[java.lang.IllegalStateException: Java template parse error: m3/arrays/src/test/java/com/m3/arrays/M3ArrayNumericCopySelfTest.java
+    <error message="Java template parse error: m3/arrays/src/test/java/jdk/m3/arrays/M3ArrayNumericCopySelfTest.java" type="java.lang.IllegalStateException"><![CDATA[java.lang.IllegalStateException: Java template parse error: m3/arrays/src/test/java/jdk/m3/arrays/M3ArrayNumericCopySelfTest.java
 	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.parseChecked(M3HashPinnedJavaSnapshotRecipe.java:423)
 	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.parse(M3HashPinnedJavaSnapshotRecipe.java:290)
 	at com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe.prepare(M3HashPinnedJavaSnapshotRecipe.java:226)

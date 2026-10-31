@@ -4,7 +4,7 @@
   "status": "FROZEN_CURRENT_INPUT_TEMPLATE_NOT_BOUND_OR_EXECUTED",
   "destination_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
   "destination_root_tree": "0812573f02908d8078d13f5f49346865cdf1c0e0",
-  "input_epoch_sha256": "fb413e58be72aaffa1e91149479ac159c6d4b961101eed4ab10f1c99df0b6711",
+  "input_epoch_sha256": "973be97f762b46278f16c2bae6d887f2bc407110f333fe7ae0e7070e30cbe118",
   "input_epoch": {
     "ordered_records": 52,
     "non_jcc_records": 50,
@@ -22,14 +22,14 @@
   "compile_only_status": "PASS",
   "previous_input_template_packet": {
     "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping/java-template/TEMPLATE_PACKET.json",
-    "sha256": "5fe25ca79a45bd4e499fd6171dfe5375390f91f2331330797b93aec3c5eec142",
+    "sha256": "d9441405014cca0bc6b106de6cf28539920a164e2c627f04dea750072f1e054d",
     "all15_packet_files_unchanged": true
   },
   "files": [
     {
       "path": "JccMergeMappingRecoveryV02Test.java.in",
       "bytes": 50280,
-      "sha256": "24b1055d8233b1d38101b5b1c5310128608b5eb601298a54a610c86b8cff9ef5"
+      "sha256": "80a5b84efedfa3785d392f2d80be7e9a6f3410974edb03a4f3ab4532b57e2d6e"
     },
     {
       "path": "pom.xml",
@@ -39,22 +39,22 @@
     {
       "path": "m3-jcc-merge-mapping-recovery-v02.yml",
       "bytes": 626,
-      "sha256": "75f43535ecc7677a2914dec4db76adf01c2e0643017e9f71c7a154eb52dc3e48"
+      "sha256": "f8610715079720189659316914aaf9167859a3df647775380134725900e49b06"
     },
     {
       "path": "render_template.py",
       "bytes": 14634,
-      "sha256": "d842dcb81d0a52b28088560f41d3d4289fb02a7754c2f1792b8bcd0720053bb2"
+      "sha256": "c47d346d3cef0ef3448a4005f76163e3af13165fba60f56ebe9cb1d424955076"
     },
     {
       "path": "README.md",
       "bytes": 7274,
-      "sha256": "fe79eb36d023bf1f5e3705cdfdf551883159c2eaf31ea8790d448cc83973d575"
+      "sha256": "47d97ba57bbdd7ffb6f137ef7ef01decc50251b450c655c204b5a2a70e4ab1bd"
     },
     {
       "path": "compile-check-v01/receipt.json",
       "bytes": 6239,
-      "sha256": "b2c0c5cac23d97da877c28cf279101262996d9255bb1dfb61492509a793193af"
+      "sha256": "0c15fae64fcee7c6539f4f726168700de10f1c0639b41e530d629ab712bbb6cb"
     },
     {
       "path": "compile-check-v01/javac.stdout.log",
@@ -69,7 +69,7 @@
     {
       "path": "self-review-v01/receipt.json",
       "bytes": 2738,
-      "sha256": "7625a7bcefeffeb21024ab2bfff2dbaf7585cfb5c62b35fdda67ec801fbf3f7f"
+      "sha256": "e132ff92e23e709aab301c67fdf9e04f2d412989a3c526fa63fcdc514bcfd7fb"
     },
     {
       "path": "self-review-v01/renderer-refusal.stdout.log",

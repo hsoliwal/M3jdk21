@@ -17,7 +17,7 @@
   "qualifiedClassReceipt": {
     "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\REGEX_MAVEN_REPLAY_CLASS_ARTIFACTS_01.json",
     "bytes": 20435,
-    "sha256": "2bed042d281f60c0277b0342562eedd1910476b207d291c5d06a9861c0b178ae"
+    "sha256": "3dbbe8f1109615b45e3e1e2278629461d781644cdf2c8ae9191a216d19540e0e"
   },
   "publishedPayloadAuthority": {
     "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\REGEX_PR9797_PUBLISHED_PAYLOAD_AUTHORITY_01.json",
@@ -38,15 +38,15 @@
   "templatesRoot": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\preparation-01\\payload\\M3jdk21\\m3\\synexia-import\\intakes\\regex-precompute-v7-20261007\\successors\\adjacent-finite-runs-20261007\\recipe\\templates",
   "postimages": [
     {
-      "targetPath": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+      "targetPath": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexProgram.java",
       "beforeSHA256": "9999e8afe1ec44de58edd644c0ca278415fb7a379f6cdacfe9dbf7011ed77131",
-      "afterSHA256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c",
+      "afterSHA256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7",
       "template": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java.txt"
     },
     {
-      "targetPath": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+      "targetPath": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexTrigramQuery.java",
       "beforeSHA256": "ABSENT",
-      "afterSHA256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
+      "afterSHA256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e",
       "template": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java.txt"
     }
   ],
@@ -261,112 +261,112 @@
   "driftPlan": {
     "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/DRIFT_NEGATIVE_COMMAND_PLANS_CPU_V3.json",
     "bytes": 8277,
-    "sha256": "9b4df2a21e8ac38c099d011f44706ee9c18164a6d02d495e46810d440f570653",
-    "gitBlob": "0debb38ff158f0db7055fa7c39f641790e1051f7"
+    "sha256": "41ba1f5f3eb9a227abee2712ddd339dccacde2b37a2755bebe2b818d7008c8ac",
+    "gitBlob": "de53765150ea3cd1c9db31952f6dd725b3d2e9b6"
   },
   "receiverImmutableInputs": [
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexProgram.java",
       "bytes": 141730,
-      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+      "sha256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexTrigramQuery.java",
       "bytes": 15093,
-      "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f"
+      "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/base-revision.txt",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/base-revision.txt",
       "bytes": 41,
       "sha256": "bf9b81c16c005766cc6d80e74be4b0396cfd75e72dad3877f7868e9485e6919f"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/manifest.tsv",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/manifest.tsv",
       "bytes": 620,
-      "sha256": "c460929619e876fb0c96a90fbe62383157ccc872d9ef5d9947e5cd74e5937b9c"
+      "sha256": "d1b8e074f294b04376b27a41a1a9ab2b4e5a94ebc280668cb526248ef9780025"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java.txt",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexProgram.java.txt",
       "bytes": 141730,
-      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+      "sha256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java.txt",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexTrigramQuery.java.txt",
       "bytes": 15093,
-      "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f"
+      "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DIRECT_ORIGINAL40_ACTUAL_TERMINAL.json",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DIRECT_ORIGINAL40_ACTUAL_TERMINAL.json",
       "bytes": 90172,
-      "sha256": "eb947757b621f964cf7195df482030bb73a40800615bf21670949c67dc64f6c8"
+      "sha256": "79882de799b81e1443eebf5d24f72fbf14fae8925b8dce7fc70f8dd7cd042dfd"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DIRECT_REPLAY_ACTUAL_TERMINAL.json",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DIRECT_REPLAY_ACTUAL_TERMINAL.json",
       "bytes": 11210,
-      "sha256": "91113eb3bff24a1868ae6603daf778c82e62f7240d632d2c6dbd1aa577ce7669"
+      "sha256": "f835a5f41f8ce5aecfda1ae9ab84ac18848d26c74de45b6c35bdb2dc1029103b"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/STRICT_TEST_CLASS_ARTIFACTS.json",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/STRICT_TEST_CLASS_ARTIFACTS.json",
       "bytes": 16134,
-      "sha256": "e266184e472f4d301bec397e3b5c412d688e4c2fbb5f400ee019fb677a65c7c5"
+      "sha256": "8f3be69f9c1a18bebb85ad991eeb1881d0e1b834a29cdb289da68a7a55490b68"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/ROOT_CPU_TEST_REVIEW_DISPOSITION.json",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/ROOT_CPU_TEST_REVIEW_DISPOSITION.json",
       "bytes": 2688,
-      "sha256": "b9b72da1cb5f4c1110161cd1787d89ca0e3e4a5e80d06440212a1a55aa1844ae"
+      "sha256": "ec64521431ad00897679425b8ef727ffe6f5b0c920956d40645f922a2dff0fdb"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/ORIGINAL_TRIGRAM_BASELINE_FAILURE.json",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/ORIGINAL_TRIGRAM_BASELINE_FAILURE.json",
       "bytes": 15279,
-      "sha256": "5ee95a773f6cc28f1c25bd836f6b8283a923eacbb3aa6508406287f504b9be81"
+      "sha256": "27a3e0231350118684d97d347dfffba77172442817a2389d6f7772b578013a43"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/ORIGINAL_PROGRAM3_BASELINE_FAILURE.json",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/ORIGINAL_PROGRAM3_BASELINE_FAILURE.json",
       "bytes": 17989,
-      "sha256": "7f49c0f21ef7b8b7e94a5d32c597aaee964b74606e2a1efae8d4f882d7b9f186"
+      "sha256": "cde52919e344a1daa9442e22548e56dbb4c1e1cd04600162f1aef89248f71922"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/donor-oracles/MIndexRegexProgramTest.java.txt",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/donor-oracles/MIndexRegexProgramTest.java.txt",
       "bytes": 39322,
       "sha256": "5c185acb76ef6de2a79eebec30a6b156fa982c7283cb0f4d0ef96840ce1a9dd6"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/donor-oracles/MIndexRegexTrigramQueryTest.java.txt",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/donor-oracles/MIndexRegexTrigramQueryTest.java.txt",
       "bytes": 11007,
       "sha256": "bae0950fd49e10eaada3d8e9e61a9b99dd251357f3952bbd867e134f77ef2225"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/SYNEXIA_ACTUAL_PUBLICATION_TERMINAL.json",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/M3_ACTUAL_PUBLICATION_TERMINAL.json",
       "bytes": 705,
       "sha256": "7040ab4eed6b35d34a90948d1e0366fff012a202503320b433b7fcb06b5eb430"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/SYNEXIA_STRICT_PRODUCTION_CLASS_ARTIFACTS.json",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/M3_STRICT_PRODUCTION_CLASS_ARTIFACTS.json",
       "bytes": 15971,
       "sha256": "e67e7e3c0d70fa9643730df1d9efe26d3f6cf3563569ceedcd2a1d4a6d5e0073"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DONOR_EVIDENCE_INDEX.json",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DONOR_EVIDENCE_INDEX.json",
       "bytes": 17039,
-      "sha256": "1a2a6e8f96c1bbdd818f35c6ba4cf73b3eddabb955d221260e9e1fc525703917"
+      "sha256": "d313f93d156fd03a98a8b0509c718da5e387e59b5ceead0535117589c990b019"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-02/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/FOSS_REUSE_DECISION.tsv",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-02/payload/M3jdk21/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/FOSS_REUSE_DECISION.tsv",
       "bytes": 1474,
       "sha256": "0fb83cb152c0eaa0bdf43ad8ce4102165c9a79a0c1ce5d16da9a68d1e5abc9da"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/NOTICE",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/NOTICE",
       "bytes": 488,
-      "sha256": "b0a0d3073dda47203bba6607e8fe582f46d5aca53f3f43e59a995d5e3ea72ab4"
+      "sha256": "1bfa6dbc47ea3a4900d868b687028647c6b31a34a5bb15ec7e0c833d38468380"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/PROVENANCE.json",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/PROVENANCE.json",
       "bytes": 5974,
       "sha256": "8826e3c512258194e8cb82391caf2067b488977677b2a913acbd278a7c397576"
     },
     {
-      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-02/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/README.md",
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-02/payload/M3jdk21/m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/README.md",
       "bytes": 4040,
       "sha256": "9e244de27da96784ae35b0e0b88f71afb4f48bbb3bcc6883348552089dcbe498"
     },
@@ -477,8 +477,8 @@
     {
       "path": "K:/codex-work/m3-regex-finite-runs-standalone-maven-activation-p0-20261007/layout/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/target/com.synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
       "bytes": 141730,
-      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c",
-      "gitBlob": "f39709b64c82ddd1acf349446eeac8efe8f3ef27"
+      "sha256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7",
+      "gitBlob": "98d9be66015639a8087c744d17f31c76d53c8ae5"
     },
     {
       "path": "K:/codex-work/m3-regex-finite-runs-standalone-maven-activation-p0-20261007/layout/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/target/com.synexia/synexia-indexstring/src/test/java/com/synexia/indexstring/MIndexRegexTrigramQueryTest.java",

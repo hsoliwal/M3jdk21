@@ -6,15 +6,15 @@ These are inputs for the existing Synexia recipe-owned correction record. They a
 
 ## Trigger and cause status
 
-The current `M3LongIndexProjection.java` has SHA-256 `77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545`, exactly the existing stable-order recipe's preimage. The already-qualified opposite-direction equal-group branch is absent; known direction changes repeat the general merge. This is an observed source/reproducibility regression and avoidable allocation/work, not a demonstrated wrong-result defect. The unchanged baseline passes the semantic oracle.
+The current `M3LongIndexProjection.java` has SHA-256 `6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb`, exactly the existing stable-order recipe's preimage. The already-qualified opposite-direction equal-group branch is absent; known direction changes repeat the general merge. This is an observed source/reproducibility regression and avoidable allocation/work, not a demonstrated wrong-result defect. The unchanged baseline passes the semantic oracle.
 
 The prior qualified postimage and exact recipe remain published at Synexia `528aaf79cfae79c5dbfe7c307340329d320e8c44`. Its manifest path is absent at current canonical `f04fbac91a7891e64b77c7b24cef1ab75ec88144` (404, while current AGENTS is readable). The exact merge, revert or publication event that caused the loss has not been established and must remain `UNRESOLVED`; source absence does not prove a recipe-engine bug.
 
 ## Atomize
 
-Owner: `m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java`. Atom: `sorted(boolean)` when the immutable selected index window already has the opposite known order. Dependencies are the existing `M3LongAddressKernel`, `M3IndexMaskCompactor` and `M3IndexMaskWindow`; no payload, progress, wrapper, mask or native owner is introduced.
+Owner: `m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java`. Atom: `sorted(boolean)` when the immutable selected index window already has the opposite known order. Dependencies are the existing `M3LongAddressKernel`, `M3IndexMaskCompactor` and `M3IndexMaskWindow`; no payload, progress, wrapper, mask or native owner is introduced.
 
-Frozen contract: signed-long order, stable duplicate physical occurrence IDs, half-open view offsets, immutable payload/index ownership, detached exports, same-direction directory sharing and distinct descriptor behavior, zero/single-element metadata, existing Java/native selection and exceptions. Public/protected signatures and encounter-order merge remain unchanged. The exact current preimage matches the original canonical input; postimage is `7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e`.
+Frozen contract: signed-long order, stable duplicate physical occurrence IDs, half-open view offsets, immutable payload/index ownership, detached exports, same-direction directory sharing and distinct descriptor behavior, zero/single-element metadata, existing Java/native selection and exceptions. Public/protected signatures and encounter-order merge remain unchanged. The exact current preimage matches the original canonical input; postimage is `bf601d711667e1078ca30246da6fa89b43d7ed951a3179e0a161365526581959`.
 
 ## Patternize
 

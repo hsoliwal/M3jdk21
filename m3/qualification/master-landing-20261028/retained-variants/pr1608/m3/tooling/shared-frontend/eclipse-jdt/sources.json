@@ -320,7 +320,7 @@
       "repository": "hsoliwal/M3jdk21",
       "commit": "677437be295b23f7ccf7409be287008944d0e8b0",
       "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ASTLeafIndex.java",
-      "sha256": "0daf29ca1e035d8facfaea0ef86f0f91158320f0d343f51b12dd6fc81a4f9428",
+      "sha256": "7616282198225b23b3fb60270dd14440c7f117285a039a07c24c51b3b1ebca2d",
       "license": "Apache-2.0",
       "role": "main",
       "destination": "jdk/m3/compiletime/M3ASTLeafIndex.java"

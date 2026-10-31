@@ -41,10 +41,10 @@ jobs:
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java)" = 'bcf60297cd2a3b04668b10b4a0baae6e80d23bbb'
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java)" = 'b6cf17d87db4d0d5890e33febda5332ca6c7ee7a'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '3290b819f9f0cfbc9b61832c4fbc9789450c3afa'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankEqualRangesContract.java)" = '7ca8f2fff2b1d662b53064596a1b29715fe60052'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankEqualRangesTest.java)" = '13512e6278aec62f4ca9f5f1839e72e809df758f'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankMonotoneSweepContract.java)" = '80b2153a19f1e6f34a2c01f2ffd18f33e2c31bb5'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankMonotoneSweepTest.java)" = '63b8064ef2da0104ba57312732d802283e3a6912'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankEqualRangesContract.java)" = 'a3b1b472a85b7c8f9ca1233556aa777bf5bfed58'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankEqualRangesTest.java)" = 'e3f80e5b82f9d6651cd323698be2746a95880938'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankMonotoneSweepContract.java)" = 'e4862e2d1b11f6d00863e44017b70a72771cf750'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankMonotoneSweepTest.java)" = 'dfcd22a42037eed8d752d63a1c28c20c6843c817'
       - name: Strict original Java 21 batch owner and JNI headers
         shell: bash
         run: |

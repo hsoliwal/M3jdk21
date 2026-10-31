@@ -60,8 +60,8 @@ final class M3OwnedGuavaArrayListMultimapRecipeTest {
     private static final String NAME = "jdk.internal.m3.OwnedGuavaArrayListMultimap20261018";
     private static final String TARGET =
             "m3/collections/implementations/guava-array-list-multimap/src/main/java/jdk/m3/collections/guava/M3ArrayListMultimap.java";
-    private static final String BEFORE_SHA = "384c82472eb9caeea7d233d417b360a8111767d931a3edea4f97eb00bfa10d65";
-    private static final String AFTER_SHA = "66ef182956a214103b2931f5d00526f1e8a0e727924e6fa73919faf1bc691fda";
+    private static final String BEFORE_SHA = "0ff245a9b2ad23c4c32b4ff237dc7dcdb3b7aed602c3d1f63a67de051bfafe2a";
+    private static final String AFTER_SHA = "be7210e85cc96642a0415985a8f2b7d631a4716c7c5d9c740045d3962e31f027";
     private static final int AFTER_BYTES = 50434;
     private static final String TEMPLATE = "M3ArrayListMultimap.java.txt";
     private static final String PREIMAGE = "M3ArrayListMultimap.scaffold.java.txt";

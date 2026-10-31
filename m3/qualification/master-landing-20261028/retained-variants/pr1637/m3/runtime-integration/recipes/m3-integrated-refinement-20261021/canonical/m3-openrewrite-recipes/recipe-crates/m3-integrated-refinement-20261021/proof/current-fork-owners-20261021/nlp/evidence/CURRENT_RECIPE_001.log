@@ -1,4 +1,4 @@
-["/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn", "-B", "-ntp", "-o", "-s", "/workspace/scratch/206049dfb270/canonical-work/maven-proxy-settings.xml", "-Dmaven.repo.local=/tmp/m3-build-m2", "-f", "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/synexia/synexia-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/pom.xml", "test", "dependency:build-classpath", "-Dmdep.outputFile=target/sdk-classpath.txt"]
+["/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn", "-B", "-ntp", "-o", "-s", "/workspace/scratch/206049dfb270/canonical-work/maven-proxy-settings.xml", "-Dmaven.repo.local=/tmp/m3-build-m2", "-f", "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/m3/m3-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/pom.xml", "test", "dependency:build-classpath", "-Dmdep.outputFile=target/sdk-classpath.txt"]
 [INFO] Scanning for projects...
 [INFO] 
 [INFO] -----< com.synexia.verification:m3-nlp-search-current-forks-proof >-----

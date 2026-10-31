@@ -8,22 +8,22 @@
     {
       "path": "m3/core/test/com/m3/text/M3GvasLookupIndexContractTest.java",
       "kind": "java",
-      "before": "6e387bbd278c1cfa8891e9b19f235c22e478e9965c71f1b028f7ca9668106dd3",
-      "after": "d5abf7d9e5aa6ec3e25626463db0c5b7d6e883a45b94e56baf5779f1c8a8bb6a",
+      "before": "4de11e3e9c483dcc92b5b8c203c7f07cc840f6dcf6152dc8f6cca1f9fc602213",
+      "after": "d86d5bddd324a32dcca0c84b24543241360fadd61b350da989056f21d7479530",
       "absent_before": false
     },
     {
       "path": "m3/docs/name-mapping.d/m3-gvas-native-path-20261019.json",
       "kind": "text",
       "before": "ABSENT",
-      "after": "576c315e5c7997e222102eaddd6d1a33c511ffc330d1def64eada78ca60ea994",
+      "after": "880e24a0ea101ba3801df98ed32e9d113383579bd15a61ff1d07cbd698d4dba1",
       "absent_before": true
     },
     {
       "path": "m3/lexicon/native/m3_fixed_address_mapping_jni.c",
       "kind": "text",
-      "before": "99ee928f3af6733d344933836541d1fbeafa69555e18148728a5ba52b8dc7f41",
-      "after": "34f24dc1f258309dd42ae02c5dc8bbf35c99c964d84ee659da4fe9ff187bec54",
+      "before": "f1ee71af4d62ccf9e3662efc6818f57096b47f445179650710a28dcd7dc183bd",
+      "after": "c8b621dc48ea21db9728ba4a978114f4c33c7692f612639bdd707ee1fb659e11",
       "absent_before": false
     },
     {
@@ -36,8 +36,8 @@
     {
       "path": "m3/verify-gvas-lookup-index.py",
       "kind": "text",
-      "before": "338106efc7721b170c64ffcb2d37c7c91c3942d17a4c4a269dc6f70a5c91f99b",
-      "after": "93dedbe27c421dbe751a2f6923f9ae4294e972a0ace131fa51eec667a66d74e7",
+      "before": "24e5d8dbecff8456a5d11aef60ae186bcce5d56b69ca7236a55451a8d5bc2544",
+      "after": "42d4203097e1003bd70671807389c0916030c05e3a765318a77a0d485ad66b44",
       "absent_before": false
     }
   ],
@@ -52,8 +52,8 @@
     "java_descriptors_sha256": "ec175e8ca49c61e111491986aeb84d52b6e067ba49b9b9f4385f7460ba1f98c5",
     "windows_map_branch_unchanged": true,
     "other_three_native_bodies_unchanged": true,
-    "native_before_sha256": "99ee928f3af6733d344933836541d1fbeafa69555e18148728a5ba52b8dc7f41",
-    "native_after_sha256": "34f24dc1f258309dd42ae02c5dc8bbf35c99c964d84ee659da4fe9ff187bec54"
+    "native_before_sha256": "f1ee71af4d62ccf9e3662efc6818f57096b47f445179650710a28dcd7dc183bd",
+    "native_after_sha256": "c8b621dc48ea21db9728ba4a978114f4c33c7692f612639bdd707ee1fb659e11"
   },
   "native_red_green": [
     {
@@ -452,34 +452,34 @@
   ],
   "unchanged_strict_proof_closure": [
     {
-      "path": "m3/core/src/com/m3/text/M3FixedAddressMapping.java",
-      "qualified_sha256": "704acbd7c0899f6cb4ca47658e0ce0387d8b498ce6ca6d801f02461d2f3a0025",
-      "target_sha256": "704acbd7c0899f6cb4ca47658e0ce0387d8b498ce6ca6d801f02461d2f3a0025"
+      "path": "m3/core/src/jdk/m3/text/M3FixedAddressMapping.java",
+      "qualified_sha256": "03fe4ef99c923172301d287db953b59d1aa23c5f8480ddd79c64e4485a14b863",
+      "target_sha256": "03fe4ef99c923172301d287db953b59d1aa23c5f8480ddd79c64e4485a14b863"
     },
     {
-      "path": "m3/core/src/com/m3/text/M3GvasLiteralImage.java",
-      "qualified_sha256": "ac3e0cab92111e7b1af138b1f246a56083e81528dd1c951a21c2bb07d7778073",
-      "target_sha256": "ac3e0cab92111e7b1af138b1f246a56083e81528dd1c951a21c2bb07d7778073"
+      "path": "m3/core/src/jdk/m3/text/M3GvasLiteralImage.java",
+      "qualified_sha256": "c3b82376c93baf3b2728cb187428d7bbf8e363198c10732dece97606f7a26b63",
+      "target_sha256": "c3b82376c93baf3b2728cb187428d7bbf8e363198c10732dece97606f7a26b63"
     },
     {
-      "path": "m3/core/test/com/m3/text/M3GvasLiteralImageContractTest.java",
+      "path": "m3/core/test/jdk/m3/text/M3GvasLiteralImageContractTest.java",
       "qualified_sha256": "b81541431b6eb57e0d8d200d0a65a1a67cc5e9a3022ac8363d401ea4bdd44a3e",
       "target_sha256": "b81541431b6eb57e0d8d200d0a65a1a67cc5e9a3022ac8363d401ea4bdd44a3e"
     },
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3GvasLiteralImageWriter.java",
-      "qualified_sha256": "68960329204f13a52204ee857a1e5a5155072222dac43622c7fd5fdbabd5abae",
-      "target_sha256": "68960329204f13a52204ee857a1e5a5155072222dac43622c7fd5fdbabd5abae"
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3GvasLiteralImageWriter.java",
+      "qualified_sha256": "4fbbd7f803b287ffc0f0db3fb6049bd9cfa52ecc8e03e84feb75573991994ad2",
+      "target_sha256": "4fbbd7f803b287ffc0f0db3fb6049bd9cfa52ecc8e03e84feb75573991994ad2"
     },
     {
       "path": "m3/lexicon/native/m3_fixed_address_mapping_jni.c",
-      "qualified_sha256": "34f24dc1f258309dd42ae02c5dc8bbf35c99c964d84ee659da4fe9ff187bec54",
-      "target_sha256": "34f24dc1f258309dd42ae02c5dc8bbf35c99c964d84ee659da4fe9ff187bec54"
+      "qualified_sha256": "c8b621dc48ea21db9728ba4a978114f4c33c7692f612639bdd707ee1fb659e11",
+      "target_sha256": "c8b621dc48ea21db9728ba4a978114f4c33c7692f612639bdd707ee1fb659e11"
     },
     {
       "path": "m3/verify-gvas-literal-precompute.py",
-      "qualified_sha256": "e940ff340cc72582e0433c012bd39837f483a9d0d1561ae01dceb449c98e64c5",
-      "target_sha256": "e940ff340cc72582e0433c012bd39837f483a9d0d1561ae01dceb449c98e64c5"
+      "qualified_sha256": "94f128c6d2732adefd299d90f63127db137119fad560832bf3ea1a04bb9f7be3",
+      "target_sha256": "94f128c6d2732adefd299d90f63127db137119fad560832bf3ea1a04bb9f7be3"
     },
     {
       "path": "m3/tests/test_gvas_literal_process_identity.py",

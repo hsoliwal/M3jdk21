@@ -5,16 +5,16 @@
   "receiving_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
   "target_files": [
     {
-      "path": "m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java",
-      "before_sha256": "8e6156376ea9548971b78bb876dc3968195266f04c17c5b061d7f5e4b52f367d",
-      "after_sha256": "92fd76c3f0d3c10c90ea4cb52485d2dbceda513fa3d794d22ec67fd153fd62ed",
+      "path": "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java",
+      "before_sha256": "a273220cdd1a2b20857ccba086394c0a0a726cc3f2711e9eb7fdadbaffb08256",
+      "after_sha256": "07c498aafa158278bf2fea6ee54bae7f09bf037051f1f8207511597ccef02929",
       "license": "Apache-2.0",
       "disposition": "EXISTING_FIRST_PARTY_DECLARATION_OR_SOURCE_LOCK_MAINTENANCE"
     },
     {
       "path": "m3/tooling/module-packs/nlp-search/current-source-lock.json",
-      "before_sha256": "054029431fbd8063c1e0397c43f3538f319984e252c92f08538881dc0a2eaff5",
-      "after_sha256": "7f591c98c603ba8128c97747fe38fd1ccfe8adb5f2cd712b98b2697fff935acb",
+      "before_sha256": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a",
+      "after_sha256": "271a532810591e94f5ceaab443820fdb08f96d1288e9ba5c1ce55c09d3444c8b",
       "license": "Apache-2.0",
       "disposition": "EXISTING_FIRST_PARTY_DECLARATION_OR_SOURCE_LOCK_MAINTENANCE"
     }
@@ -22,19 +22,19 @@
   "first_party_author": "Hitesh Soliwal and Contributors to the Synexia Project",
   "canonical_recipe_lineage": {
     "path": "provenance/RECIPE_LINEAGE.json",
-    "sha256": "c28291e446504369b98a8a8732a62fc22bc561da0bb9bbf5f97aec460653390b"
+    "sha256": "e0fde36409038a30b05393e6efb9120c8f0bbe898243b3be2fa06770e9c8f615"
   },
   "memory_helper_lineage": {
     "path": "memory/HELPER_LINEAGE.json",
-    "sha256": "172a9897495c0c885f7c6269bcb64b49daeca78f95d45235fe6e5e9fd8820f35"
+    "sha256": "f67b9912cf7121174418ffc483b8b1f7180ce11c425e83f4cf8e92f0e81a33d2"
   },
   "exact_received_source_custody": {
     "path": "proof/owner-candidate-001/LINEAGE_REVIEW.json",
-    "sha256": "d95239b5849c3518072e289a23f659ac5e5ce9905e111fd3853a8c3fec36d89a"
+    "sha256": "d49acc49bf203d835805ea661524b1392a4663983edded38c31026a82a864c0d"
   },
   "historical_received_commits": {
     "path": "proof/owner-candidate-001/RECEIVING_COMMIT_READBACK.json",
-    "sha256": "5802b3bc727a4d9f608c786ae174676dedf198c6f80fd08858ce38b546bfc22e"
+    "sha256": "38b76b3fab97a8adf541fbe4e3347437fe7f3a49d1fcb12f766054cfe7ec4040"
   },
   "license_and_notice_files": [
     {

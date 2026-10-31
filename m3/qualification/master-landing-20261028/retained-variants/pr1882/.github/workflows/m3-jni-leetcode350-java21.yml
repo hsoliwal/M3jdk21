@@ -37,8 +37,8 @@ jobs:
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java)" = 'fe4bd1751126d1a5c21c359bf9f028013d380a4f'
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java)" = 'f9de7b74124cd1e2f6f32c4e9a34af4178c1d787'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '496e04bc57c00ba66895379229f3dc4e4dc0aa2c'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankIntersectionContract.java)" = '6285beb025d699b8739c75b51ce39b3d3dc5498e'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankIntersectionTest.java)" = '715deec71b1b08ea4beae17a554e187e2b380ee7'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankIntersectionContract.java)" = '0904a4972eb1abc16877e45bac70b531a9c53250'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankIntersectionTest.java)" = '826da4157acdb23ca52966bce456094c76a9ec5d'
       - name: Strict Java 21 compilation from existing collection owners and JNI header generation
         shell: bash
         run: |

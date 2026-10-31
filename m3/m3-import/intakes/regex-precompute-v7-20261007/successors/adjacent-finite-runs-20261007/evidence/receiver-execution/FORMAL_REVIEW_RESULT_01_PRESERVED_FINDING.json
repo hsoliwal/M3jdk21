@@ -7,7 +7,7 @@
       "confidence": 0.99,
       "category": "bug",
       "code_location": {
-        "file_path": "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/manifest.tsv",
+        "file_path": "m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/manifest.tsv",
         "line": 1
       }
     }

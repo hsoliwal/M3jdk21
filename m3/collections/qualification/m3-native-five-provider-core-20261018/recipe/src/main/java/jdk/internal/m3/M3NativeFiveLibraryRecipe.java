@@ -35,11 +35,11 @@ import java.util.stream.Stream;
 public final class M3NativeFiveLibraryRecipe {
     private record Output(String file, String destination, String sha256) { }
     private static final List<Output> OUTPUTS = List.of(
-        new Output("M3IndexedBiMap.java", "m3/collections/src/main/java/jdk/m3/collections/M3IndexedBiMap.java", "60345effe659d22bd0cb756264bf17de89611a67ee40537bc25d6ccf77593e5c"),
-        new Output("M3IndexedSetMultiMap.java", "m3/collections/src/main/java/jdk/m3/collections/M3IndexedSetMultiMap.java", "18348390c8c7b50233ccab50b4b1b1887f8ce583c36cdab6498fc06eacddebc0"),
-        new Output("M3ListMultiValueMap.java", "m3/collections/src/main/java/jdk/m3/collections/M3ListMultiValueMap.java", "ae4a6501d69a07e416c9e3ecf5791ea47c70e9f37035027259a0aab5f868b307"),
-        new Output("M3NativeFiveLibrarySdk.java", "m3/collections/src/main/java/jdk/m3/collections/M3NativeFiveLibrarySdk.java", "250b9cf332fbe07048884790ae701f3270e84252024511ee67f57cb3904a73ed"),
-        new Output("M3NativeFiveLibrarySelfTest.java", "m3/collections/src/test/java/jdk/m3/collections/M3NativeFiveLibrarySelfTest.java", "3b45199d9643e7d2f8fb09a28c407aa469e67c706e0f213ed3e2103ac4a065d0"));
+        new Output("M3IndexedBiMap.java", "m3/collections/src/main/java/jdk/m3/collections/M3IndexedBiMap.java", "fbbde38cc4466530feaad9320edc7957c9e4c87b660a087bf0404e63f572610d"),
+        new Output("M3IndexedSetMultiMap.java", "m3/collections/src/main/java/jdk/m3/collections/M3IndexedSetMultiMap.java", "ca81a01ffec6f72741b48bdb7e2a763dc72a0e9bf95a8ab8e8e7acd20d5626d8"),
+        new Output("M3ListMultiValueMap.java", "m3/collections/src/main/java/jdk/m3/collections/M3ListMultiValueMap.java", "a31bbc27e2e83415d38985d2a90e245756a9e522e69ee91bfc0476795e2490c0"),
+        new Output("M3NativeFiveLibrarySdk.java", "m3/collections/src/main/java/jdk/m3/collections/M3NativeFiveLibrarySdk.java", "b4b666d5b3b30da1ad66659522f9ac323744db498bdff76ce8ad871f48313e92"),
+        new Output("M3NativeFiveLibrarySelfTest.java", "m3/collections/src/test/java/jdk/m3/collections/M3NativeFiveLibrarySelfTest.java", "b6318ca3c502b2b501e136dadd757dd4ec6bbb8e2bb36300308fad53d97a0c2f"));
     private M3NativeFiveLibraryRecipe() { }
 
     public static void main(String[] args) throws Exception {

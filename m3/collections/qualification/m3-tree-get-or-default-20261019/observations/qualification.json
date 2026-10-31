@@ -4,7 +4,7 @@
   "canonicalRecipeBase": "08e84ed4430894e07dea272758401fd7202d2187",
   "recipe": "jdk.internal.m3.TreeGetOrDefaultCallbacks",
   "recipeExecution": "OPENREWRITE_SDK_8.17.1_VIA_OFFLINE_MAVEN",
-  "manifestSha256": "c7a4b290acfcc4c2b51deb230cc2364a809c004ec1981f16352a70a524caf2f2",
+  "manifestSha256": "fbcf4dd882e42af2e391e9ecfd724ce2e9df5b64b5772cd114fc4f7b3cbb4ed2",
   "jdkOracle": "Unchanged PR 1442 fixture and all 640 complete case objects",
   "jdkRuntime": {
     "kind": "identity",

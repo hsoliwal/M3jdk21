@@ -3,13 +3,13 @@
   "engines": [
     {
       "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
-      "sha256": "750f2e8266ca308369daea14d2bb6db9f3ec90a64e45ee7d5aa1cb5192028347",
+      "sha256": "15dd2a5afe21ea373c151619bc8652e838f38b88f2fde335638b42a3983fd83e",
       "bytes": 31126,
       "status": "UNCHANGED_CANONICAL_OWNER"
     },
     {
       "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
-      "sha256": "504f1616b68fbd10c3df38adaecd0e9d90de5535d791c8c1b57958b7455c9bd3",
+      "sha256": "5d21dbe596c2b41cb6a11404d8023ba90d2ce463523e73a4953851a4332a9922",
       "bytes": 16997,
       "status": "UNCHANGED_CANONICAL_OWNER"
     },

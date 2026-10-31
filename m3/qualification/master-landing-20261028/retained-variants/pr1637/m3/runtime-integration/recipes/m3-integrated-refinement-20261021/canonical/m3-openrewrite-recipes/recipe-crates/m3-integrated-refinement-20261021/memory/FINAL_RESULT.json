@@ -3,11 +3,11 @@
   "status": "PASS",
   "profile": "m3-integrated-refinement-20261021/1.0",
   "events": [
-    "3e877856e3f14207fece0d3f69c627ef420480da61a94b4210b4504ef5fc7616",
-    "115767aa323e2ea6db2f6de6b13641157abc0f68ef45bbcfeeaeabc7e84698dd",
-    "9f00fe04f180f10e0c2f0ba247d676add86c7afee28a11065a7f0fe69238b01d",
-    "7b087f5faa490efcdc3b783cd86ca790c87e4fd00b6a4580e5754f5cad84ac5b",
-    "d3f3be895c7fa277090fb372a22564b989448ea42b55be0aa3c16f5b7df37086"
+    "12db3d3bea4b8a5b958ed799934c0bbe33ea8b416a47f45d803495f1e4b11acf",
+    "c876494cd3b2b01d905bb5a623ad97981e9ff113ebc0740978b0a4206491de2d",
+    "093cfae9d76bd99b0c97aa81cac51e3a1834c0c14c3cd7bbd0c4c0f7bcc9fe54",
+    "c960a4f166495a83f6c289b4f03ab76a74b3c42e09b2f9dd3f1046625639c120",
+    "2bc163b52e2e50a1254ba885980ed7cfdb88a5abe598f8849d4e85433afb9fa1"
   ],
   "event_count": 5,
   "conformance_checks": 129,
@@ -20,46 +20,46 @@
   },
   "retrieval": {
     "path": "memory/LESSONS.md",
-    "sha256": "706c598409aad6f3b45578dee24be2ee073fe0ad9cf036f38ebf7fdff8094ec2"
+    "sha256": "aba9f8f556e3f080850b8745e3076bb1d8a72d02b7301b88c6a86a8637d57eb2"
   },
   "index": {
     "path": "memory/INDEX.json",
-    "sha256": "5917e087a511f0992d423da08506b7e19d26f076fb3ff8a5cd5b665cb51d8ffb"
+    "sha256": "4f572a068710f592cfce850359ba01ab6240ae67b5a71351130f158c7a1f0468"
   },
   "source": [
     {
       "path": "src/test/java/com/synexia/rewrite/memory/M3RecoveryMemory.java",
-      "sha256": "e6352756fca8abcea531761b2f32eb76a9e98bf3f259950d558ccc46072a0c32"
+      "sha256": "88696555f28134225ecd731c5c81065dd53912361d46bfe3f79f60d877c62936"
     },
     {
       "path": "src/test/java/com/synexia/rewrite/memory/M3RecoveryMemoryTest.java",
-      "sha256": "4406ab706ba83c9dcd8618358477c6fd9094108c00bc62dd10735c4d181702b1"
+      "sha256": "b27e96e73af86cb12cf453a0b4f27b49bdae24073aa9e435061b177d02969a78"
     },
     {
       "path": "src/test/java/com/synexia/rewrite/memory/M3CorrectionMemoryConformanceTest.java",
-      "sha256": "38327efb177b551b609d472941eb2a8da18721d329a37dc41e2e7ac28ab095fb"
+      "sha256": "785b81a9df3449af64d6037960cd8e2a9bc82f2d6398e4d9e7636e6e693c12f3"
     },
     {
       "path": "src/test/java/com/synexia/rewrite/sealed/SealHash.java",
-      "sha256": "17910b8b92573d6673be22b1d79d3db81c2c65fdff02251b0d4b8defd5b7373a"
+      "sha256": "316da9bf8b642f9d8ad9e055328aec0f70ddfe0f63c4649d5dc35d062fd7a11c"
     }
   ],
   "verification": [
     {
       "path": "proof/memory-conformance-001/RESULT.json",
-      "sha256": "439ce4868a8e4d6274006e04ec88a4d5ac09044959ed6449f7e4b841cfa5d6b3"
+      "sha256": "0632eb9e2f87b5360e123ef4f3d67347c5a0235bf8b506bf8ee77cba6aa465b4"
     },
     {
       "path": "proof/sdk-001/RESULT.json",
-      "sha256": "839c14e212df675403786636e7806c5b227847aaace6f55a11a8e1891532211c"
+      "sha256": "8abaa831ec9108d31c1b4e8ddaf25ec4b85c9d45f2feb403c8f8621686bd833e"
     },
     {
       "path": "proof/sdk-002-offline/RESULT.json",
-      "sha256": "be10089f40c3b8b1e5da9c0233c8bbd4ab5f2c19e05dfc6756e4f49c5b4ce888"
+      "sha256": "089c9eb763810e5abe50eec6f41845779289201943e74d8604f186fee657296b"
     },
     {
       "path": "proof/memory-integrity-001/RESULT.json",
-      "sha256": "753141ece1a1a04a15acf71f882525d5a5e9a6780c55e9f41b32ba1447be2d46"
+      "sha256": "751019a3ff6e938074b14f8f87d85ec6af16bd6482f9aab357d63068a9a17847"
     }
   ],
   "historical_unknowns": "Each event states unknown predecessor versions/commands explicitly. No lost October20 event or receipt is recreated.",

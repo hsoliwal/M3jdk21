@@ -22,10 +22,10 @@ update; no OpenRewrite source, template, runner or duplicate lock owner.
 
 | Historical atom | Source identity |
 | --- | --- |
-| Frozen first handoff | `m3/docs/synexia-m3jdk21-eclipse-recipe-handoff-20261022.tsv`, Git blob `4dfffd4cae11edf342b801ca3c007c43a6137979`, 5 rows |
+| Frozen first handoff | `m3/docs/m3-m3jdk21-eclipse-recipe-handoff-20261022.tsv`, Git blob `f5f8b7e33b3cf4b8d83b05c4f6339f49a1f56a89`, 5 rows |
 | Explicit public constructor | Source recipe Synexia #12951, historical expected SHA-256 `18d05ae54945d4129c46d62e26551cbc4fd200b31c185e020b9ee6240fdc9599` |
 | Timed acquisition | Synexia #12842 and M3JDK21 #1745, pre-union SHA-256 `7d0e50075f26400bfce311919457996468321a987d86cf0145737da9fde024c5` |
-| Existing combined original class | SHA-256 `eb0bf36625effaffa147be1f650590dfa08627a5f6f52d105b8fbb201d6b5718`, Git blob `f493038c3829def666664da3c2297fa7a0e9d877` |
+| Existing combined original class | SHA-256 `bc671502c1500b60562240c1de2aa44776bf89a90ea32ab220ea646ed8491a6b`, Git blob `014fc8d30788121ed4564d7d6ff7021be06b739a` |
 
 The existing `com.m3.file.M3ResourceLocks` is **exactly** the older
 timed-acquisition source plus the original accessible public

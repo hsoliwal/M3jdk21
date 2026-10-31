@@ -6,7 +6,7 @@
   "public_host": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody",
   "existing_public_engine_owner": "m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner",
   "old_host_pom_sha256": "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d",
-  "successor_pom_sha256": "824ced27a427e35901d413eb8c8beac0ee657d991a03079a5d1cc59e29f76092",
+  "successor_pom_sha256": "2658882451ec25f1ff3ebaea743a8934aa1221db023777537636439dafa6b1e1",
   "parser_artifact_sha256": "bc5fef92a854c72e8706fc58f545a8ac3e9e4395a052b50810366b94869aef52",
   "unchanged_original_controls": 6,
   "unchanged_existing_public_engines": 4,
@@ -275,7 +275,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/DATASET.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/DATASET.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/DATASET.json",
-      "sha256": "16e1e9987e9b23283d1809a84b91fd6d2d0c1570f0ff24a1cff7fd5faed686d7",
+      "sha256": "259cb740099ecf7df7c0fef33bbc1333705ae34bdd0cd294a2d9e39ad60f7964",
       "size_bytes": 500,
       "classification": "GENERATED"
     },
@@ -299,7 +299,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3-runtime-parser-host.yml",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3-runtime-parser-host.yml",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3-runtime-parser-host.yml",
-      "sha256": "5f4e4f2a211f830b398d4daaec94f6ebbf1b8f57c4060d7a16a83a28bde8e500",
+      "sha256": "8227f1f5f52665779f313a695c21c70d1aed3271096f442c3aeaef9f70579215",
       "size_bytes": 538,
       "classification": "GENERATED"
     },
@@ -467,7 +467,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0056-M3TaskRecipeTest.java.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0056-M3TaskRecipeTest.java.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0056-M3TaskRecipeTest.java.txt",
-      "sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43",
+      "sha256": "fa8a8e63fd445c0fbcd877315044c6e5c36f779db6e8a11797e03ab805e5903f",
       "size_bytes": 17193,
       "classification": "GENERATED"
     },
@@ -475,7 +475,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0057-M3TaskRecipeTest.java.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0057-M3TaskRecipeTest.java.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0057-M3TaskRecipeTest.java.txt",
-      "sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43",
+      "sha256": "fa8a8e63fd445c0fbcd877315044c6e5c36f779db6e8a11797e03ab805e5903f",
       "size_bytes": 17193,
       "classification": "GENERATED"
     },
@@ -483,7 +483,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/manifest.tsv",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/manifest.tsv",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/manifest.tsv",
-      "sha256": "c27f7f7284f524c772942dd1b47f3382b125924ea3af7f6764daf32ada71bb6b",
+      "sha256": "5fee14ef8708e601641f56efe3cda92a69d211ab35350f7e1d9925ca45496a33",
       "size_bytes": 3172,
       "classification": "GENERATED"
     },
@@ -499,7 +499,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0002-HOST_PARSER_LINEAGE.json.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0002-HOST_PARSER_LINEAGE.json.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0002-HOST_PARSER_LINEAGE.json.txt",
-      "sha256": "628392f655ffd0050ce0b9360047e639193a158e65b978482e99a52fc1d5c8fc",
+      "sha256": "e149228dff38675a48d66fe40c4c621aa21a518b775e921a68194d001b1eb6ce",
       "size_bytes": 1987,
       "classification": "GENERATED"
     },
@@ -531,7 +531,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0004-test_prepare.py.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0004-test_prepare.py.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0004-test_prepare.py.txt",
-      "sha256": "f504f1dcfafb24fd87f8f677643b45eecc74674881e16bf727b76c4e6a4d1856",
+      "sha256": "79c4335d02ca2179301d617d9ae447b778f2f12361e379ff04ad77c0237e7933",
       "size_bytes": 5373,
       "classification": "GENERATED"
     },
@@ -539,7 +539,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0005-test_prepare.py.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0005-test_prepare.py.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0005-test_prepare.py.txt",
-      "sha256": "f504f1dcfafb24fd87f8f677643b45eecc74674881e16bf727b76c4e6a4d1856",
+      "sha256": "79c4335d02ca2179301d617d9ae447b778f2f12361e379ff04ad77c0237e7933",
       "size_bytes": 5373,
       "classification": "GENERATED"
     },
@@ -563,7 +563,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0006-verify_receiver.py.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0006-verify_receiver.py.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0006-verify_receiver.py.txt",
-      "sha256": "a4d82df8b31e707afe7caa5e76524d191f285e2887dbfdfa95cfdc382ae01f7d",
+      "sha256": "a400589821da1c448b3c2354aef91c7a6fd596cf265b2baca097494135126d4c",
       "size_bytes": 10830,
       "classification": "GENERATED"
     },
@@ -571,7 +571,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0007-DATASET.json.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0007-DATASET.json.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0007-DATASET.json.txt",
-      "sha256": "c4d6ab2aba62759a0d0a85b10c00285e6dd15ab03715d5060ddf05c52e78ccf7",
+      "sha256": "951c38ed8f2d63d3f9793b36876f7c9c763de4af4df38c4f97ece1f7b5908517",
       "size_bytes": 463,
       "classification": "GENERATED"
     },
@@ -579,7 +579,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0007-verify_receiver.py.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0007-verify_receiver.py.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0007-verify_receiver.py.txt",
-      "sha256": "a4d82df8b31e707afe7caa5e76524d191f285e2887dbfdfa95cfdc382ae01f7d",
+      "sha256": "a400589821da1c448b3c2354aef91c7a6fd596cf265b2baca097494135126d4c",
       "size_bytes": 10830,
       "classification": "GENERATED"
     },
@@ -587,7 +587,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0008-DATASET.json.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0008-DATASET.json.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0008-DATASET.json.txt",
-      "sha256": "c4d6ab2aba62759a0d0a85b10c00285e6dd15ab03715d5060ddf05c52e78ccf7",
+      "sha256": "951c38ed8f2d63d3f9793b36876f7c9c763de4af4df38c4f97ece1f7b5908517",
       "size_bytes": 463,
       "classification": "GENERATED"
     },
@@ -627,7 +627,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0010-m3-collections-contract-refinement-20261017-fixture.yml.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0010-m3-collections-contract-refinement-20261017-fixture.yml.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0010-m3-collections-contract-refinement-20261017-fixture.yml.txt",
-      "sha256": "bfe8f97a8e74c7c7e96cec70844824211bd6a48e9f9e5b92296fde79c110d5bf",
+      "sha256": "615acad0a3b06452547decbff1eaec54394126eb06aea0f96ed2efcb67adda23",
       "size_bytes": 508,
       "classification": "GENERATED"
     },
@@ -643,7 +643,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0011-m3-collections-contract-refinement-20261017-fixture.yml.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0011-m3-collections-contract-refinement-20261017-fixture.yml.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0011-m3-collections-contract-refinement-20261017-fixture.yml.txt",
-      "sha256": "bfe8f97a8e74c7c7e96cec70844824211bd6a48e9f9e5b92296fde79c110d5bf",
+      "sha256": "615acad0a3b06452547decbff1eaec54394126eb06aea0f96ed2efcb67adda23",
       "size_bytes": 508,
       "classification": "GENERATED"
     },
@@ -1011,7 +1011,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0034-0003-RECEIVING-MAP.json.txt.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0034-0003-RECEIVING-MAP.json.txt.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0034-0003-RECEIVING-MAP.json.txt.txt",
-      "sha256": "06dac031395cf7b1ab716dbc341b0e8d39fefa7bc9d3cb5689e0cea34e840f33",
+      "sha256": "c5e803398b31a8f4d6938439e42f9fadedfa96b026691d0d80f799942f168aea",
       "size_bytes": 5398,
       "classification": "GENERATED"
     },
@@ -1019,7 +1019,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0035-0003-RECEIVING-MAP.json.txt.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0035-0003-RECEIVING-MAP.json.txt.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0035-0003-RECEIVING-MAP.json.txt.txt",
-      "sha256": "06dac031395cf7b1ab716dbc341b0e8d39fefa7bc9d3cb5689e0cea34e840f33",
+      "sha256": "c5e803398b31a8f4d6938439e42f9fadedfa96b026691d0d80f799942f168aea",
       "size_bytes": 5398,
       "classification": "GENERATED"
     },
@@ -1027,7 +1027,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0035-manifest.tsv.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0035-manifest.tsv.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0035-manifest.tsv.txt",
-      "sha256": "1f741a197a6cfa5bdb7adc47a1fe48c1b5d7515686679e86d9a3ad891170fb25",
+      "sha256": "cb77f270043edfc46d266805a7e6dd0530c5b833070359374497c34117be46c0",
       "size_bytes": 497,
       "classification": "GENERATED"
     },
@@ -1035,7 +1035,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0036-HARNESS_LINEAGE.json.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0036-HARNESS_LINEAGE.json.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0036-HARNESS_LINEAGE.json.txt",
-      "sha256": "3a26e75c15328e96a95714035659afd24195c49e557b78e081530d28c3ac968f",
+      "sha256": "dc29356e385fef1a144cff8989363f19495131d711c7d7a39e09c2d202875167",
       "size_bytes": 3774,
       "classification": "GENERATED"
     },
@@ -1043,7 +1043,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0036-manifest.tsv.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0036-manifest.tsv.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0036-manifest.tsv.txt",
-      "sha256": "1f741a197a6cfa5bdb7adc47a1fe48c1b5d7515686679e86d9a3ad891170fb25",
+      "sha256": "cb77f270043edfc46d266805a7e6dd0530c5b833070359374497c34117be46c0",
       "size_bytes": 497,
       "classification": "GENERATED"
     },
@@ -1051,7 +1051,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0037-HARNESS_LINEAGE.json.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0037-HARNESS_LINEAGE.json.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0037-HARNESS_LINEAGE.json.txt",
-      "sha256": "3a26e75c15328e96a95714035659afd24195c49e557b78e081530d28c3ac968f",
+      "sha256": "dc29356e385fef1a144cff8989363f19495131d711c7d7a39e09c2d202875167",
       "size_bytes": 3774,
       "classification": "GENERATED"
     },
@@ -1059,7 +1059,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0037-HOST_CAP_LINEAGE.json.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0037-HOST_CAP_LINEAGE.json.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0037-HOST_CAP_LINEAGE.json.txt",
-      "sha256": "536adf69f0e86fa8eb5ecbe441f936a164578399c8633af861238f7678e54557",
+      "sha256": "81deb8a04803da7f9e3f8c6f412c487266c9199fbd4082d9b3162a19c7ae781e",
       "size_bytes": 1847,
       "classification": "GENERATED"
     },
@@ -1067,7 +1067,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0038-HOST_CAP_LINEAGE.json.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0038-HOST_CAP_LINEAGE.json.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0038-HOST_CAP_LINEAGE.json.txt",
-      "sha256": "536adf69f0e86fa8eb5ecbe441f936a164578399c8633af861238f7678e54557",
+      "sha256": "81deb8a04803da7f9e3f8c6f412c487266c9199fbd4082d9b3162a19c7ae781e",
       "size_bytes": 1847,
       "classification": "GENERATED"
     },
@@ -1155,7 +1155,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0053-pom.xml.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0053-pom.xml.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0053-pom.xml.txt",
-      "sha256": "824ced27a427e35901d413eb8c8beac0ee657d991a03079a5d1cc59e29f76092",
+      "sha256": "2658882451ec25f1ff3ebaea743a8934aa1221db023777537636439dafa6b1e1",
       "size_bytes": 7312,
       "classification": "GENERATED"
     },
@@ -1163,7 +1163,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0054-pom.xml.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0054-pom.xml.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0054-pom.xml.txt",
-      "sha256": "824ced27a427e35901d413eb8c8beac0ee657d991a03079a5d1cc59e29f76092",
+      "sha256": "2658882451ec25f1ff3ebaea743a8934aa1221db023777537636439dafa6b1e1",
       "size_bytes": 7312,
       "classification": "GENERATED"
     },
@@ -1171,7 +1171,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0054-prepare.py.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0054-prepare.py.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0054-prepare.py.txt",
-      "sha256": "9b0b3d93c787c9a56036cddb2b044aef30f6fa8a1fa20fa5a2edae46dfd1e62c",
+      "sha256": "7c2063fa5aa88d0872fff0157413a1d2fdca4f00d01c787f8650969e8b514014",
       "size_bytes": 8940,
       "classification": "GENERATED"
     },
@@ -1179,7 +1179,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0055-prepare.py.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0055-prepare.py.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0055-prepare.py.txt",
-      "sha256": "9b0b3d93c787c9a56036cddb2b044aef30f6fa8a1fa20fa5a2edae46dfd1e62c",
+      "sha256": "7c2063fa5aa88d0872fff0157413a1d2fdca4f00d01c787f8650969e8b514014",
       "size_bytes": 8940,
       "classification": "GENERATED"
     },
@@ -1187,7 +1187,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0055-receive.py.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0055-receive.py.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0055-receive.py.txt",
-      "sha256": "db258f16e1841f6f5191c1c969c20314a8d143bfa6558b60f684bea440cc1712",
+      "sha256": "e81744965f37cb890e00f6c1c7e50f4dae44c68eedafdf46565a7e105bab5474",
       "size_bytes": 9947,
       "classification": "GENERATED"
     },
@@ -1195,7 +1195,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0056-receive.py.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0056-receive.py.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/0056-receive.py.txt",
-      "sha256": "db258f16e1841f6f5191c1c969c20314a8d143bfa6558b60f684bea440cc1712",
+      "sha256": "e81744965f37cb890e00f6c1c7e50f4dae44c68eedafdf46565a7e105bab5474",
       "size_bytes": 9947,
       "classification": "GENERATED"
     },
@@ -1203,7 +1203,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/manifest.tsv",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/manifest.tsv",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/bootstrap-source/datasets/m3-runtime-parser-host/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-parser-host/manifest.tsv",
-      "sha256": "ef075a04f811005b0c73ed31e2d73fe9dd53eba22a90b385f33623177d5c212d",
+      "sha256": "53b9121352a16e033b17e3eae3c29d55f7fe06988349d9187663f28ba3935ed3",
       "size_bytes": 12506,
       "classification": "GENERATED"
     },
@@ -1219,7 +1219,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/HOST_PARSER_LINEAGE.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/HOST_PARSER_LINEAGE.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/HOST_PARSER_LINEAGE.json",
-      "sha256": "628392f655ffd0050ce0b9360047e639193a158e65b978482e99a52fc1d5c8fc",
+      "sha256": "e149228dff38675a48d66fe40c4c621aa21a518b775e921a68194d001b1eb6ce",
       "size_bytes": 1987,
       "classification": "GENERATED"
     },
@@ -1251,7 +1251,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/runtime-facade/PARSER_DONOR_DECISION.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/authoring/PARSER_DONOR_DECISION.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/authoring/PARSER_DONOR_DECISION.json",
-      "sha256": "e8bf689318f6a07e64b0b0e50c05fd625bd385ce40046a43a393c9faf9219ff5",
+      "sha256": "24317507f85a3c54c35b8b84bdbdbfe459381cfd608e70f419415ad709300992",
       "size_bytes": 8776,
       "classification": "FIRST_PARTY_NO_HEADER"
     },
@@ -1259,7 +1259,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/runtime-facade/build_runtime_facade_handoff.py",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/authoring/build_runtime_facade_handoff.py",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/authoring/build_runtime_facade_handoff.py",
-      "sha256": "6b7cee15ff1db182161de3da35ac1fcdc096a145af993fc33d4a9f19f09331b5",
+      "sha256": "04740557af0944b7e1f8dc8772ed338643a78260693dcbc082e888e10c8c09d0",
       "size_bytes": 14895,
       "classification": "FIRST_PARTY"
     },
@@ -1331,7 +1331,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/runtime-facade/prepare_runtime_facade.py",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/authoring/prepare_runtime_facade.py",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/authoring/prepare_runtime_facade.py",
-      "sha256": "7e77862ba0b99fb60512364f1fcf0afaa67c6f2acb6315450e6c5d926b98d715",
+      "sha256": "791d170c3924b4c2fe638fde307d68cb95344f55e0348e4ac6445208043aec8d",
       "size_bytes": 13393,
       "classification": "FIRST_PARTY"
     },
@@ -1339,7 +1339,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/runtime-facade/prepare_runtime_facade_host.py",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/authoring/prepare_runtime_facade_host.py",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/authoring/prepare_runtime_facade_host.py",
-      "sha256": "d2ac271dcb73655481bebc0d2a8f151efaec65841829a78255361071458c5c7d",
+      "sha256": "4dd3761f7c4ec32ca9cf62aec235353051dda8ffe8ce7963a6d3327d3653972f",
       "size_bytes": 13401,
       "classification": "FIRST_PARTY"
     },
@@ -1363,7 +1363,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/runtime-facade/verify_parser_successor.py",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/authoring/verify_parser_successor.py",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/authoring/verify_parser_successor.py",
-      "sha256": "98c815091d61e92a7d5d73ba573dcd7fab64b063e5277da200eb0f28b653ffb3",
+      "sha256": "d6c967004c1e26583458f5d2f0f815f2000b6a8139e8591a2f858497748889a3",
       "size_bytes": 7963,
       "classification": "FIRST_PARTY"
     },
@@ -1387,7 +1387,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/contract/test_prepare.py",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/contract/test_prepare.py",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/contract/test_prepare.py",
-      "sha256": "f504f1dcfafb24fd87f8f677643b45eecc74674881e16bf727b76c4e6a4d1856",
+      "sha256": "79c4335d02ca2179301d617d9ae447b778f2f12361e379ff04ad77c0237e7933",
       "size_bytes": 5373,
       "classification": "GENERATED"
     },
@@ -1403,7 +1403,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/contract/verify_receiver.py",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/contract/verify_receiver.py",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/contract/verify_receiver.py",
-      "sha256": "a4d82df8b31e707afe7caa5e76524d191f285e2887dbfdfa95cfdc382ae01f7d",
+      "sha256": "a400589821da1c448b3c2354aef91c7a6fd596cf265b2baca097494135126d4c",
       "size_bytes": 10830,
       "classification": "GENERATED"
     },
@@ -1411,7 +1411,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/datasets/fixture/DATASET.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/datasets/fixture/DATASET.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/datasets/fixture/DATASET.json",
-      "sha256": "c4d6ab2aba62759a0d0a85b10c00285e6dd15ab03715d5060ddf05c52e78ccf7",
+      "sha256": "951c38ed8f2d63d3f9793b36876f7c9c763de4af4df38c4f97ece1f7b5908517",
       "size_bytes": 463,
       "classification": "GENERATED"
     },
@@ -1435,7 +1435,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/datasets/fixture/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-fixture.yml",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/datasets/fixture/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-fixture.yml",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/datasets/fixture/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-fixture.yml",
-      "sha256": "bfe8f97a8e74c7c7e96cec70844824211bd6a48e9f9e5b92296fde79c110d5bf",
+      "sha256": "615acad0a3b06452547decbff1eaec54394126eb06aea0f96ed2efcb67adda23",
       "size_bytes": 508,
       "classification": "GENERATED"
     },
@@ -1627,7 +1627,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/datasets/m3jdk21-runtime-facade/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-facade/0003-RECEIVING-MAP.json.txt",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/datasets/m3jdk21-runtime-facade/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-facade/0003-RECEIVING-MAP.json.txt",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/datasets/m3jdk21-runtime-facade/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-facade/0003-RECEIVING-MAP.json.txt",
-      "sha256": "06dac031395cf7b1ab716dbc341b0e8d39fefa7bc9d3cb5689e0cea34e840f33",
+      "sha256": "c5e803398b31a8f4d6938439e42f9fadedfa96b026691d0d80f799942f168aea",
       "size_bytes": 5398,
       "classification": "GENERATED"
     },
@@ -1635,7 +1635,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/datasets/m3jdk21-runtime-facade/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-facade/manifest.tsv",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/datasets/m3jdk21-runtime-facade/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-facade/manifest.tsv",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/datasets/m3jdk21-runtime-facade/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-facade/manifest.tsv",
-      "sha256": "1f741a197a6cfa5bdb7adc47a1fe48c1b5d7515686679e86d9a3ad891170fb25",
+      "sha256": "cb77f270043edfc46d266805a7e6dd0530c5b833070359374497c34117be46c0",
       "size_bytes": 497,
       "classification": "GENERATED"
     },
@@ -1707,7 +1707,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/openrewrite-parser-module-v1/receipt.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/openrewrite-parser-module-v1/receipt.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/openrewrite-parser-module-v1/receipt.json",
-      "sha256": "b21657ca7bca3ac5fd4492382bdca448ea3ac47aa99d21061d35cce8499b9f22",
+      "sha256": "af85228d1294f6561a8159fa06c0ac9d5f7870c6871591987d32ccd04cd9b54b",
       "size_bytes": 1255,
       "classification": "GENERATED"
     },
@@ -1747,7 +1747,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/openrewrite-parser-module-v2/receipt.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/openrewrite-parser-module-v2/receipt.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/openrewrite-parser-module-v2/receipt.json",
-      "sha256": "224fbbb60e0463ff193144d04bb2b49c898fcc781bc061dac9cff840bcddcdbe",
+      "sha256": "19ac8ea5a4f6e445f9034d5c7b0730ea21eed9bcef38270731c476ccd265f1fe",
       "size_bytes": 2251,
       "classification": "GENERATED"
     },
@@ -1787,7 +1787,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/openrewrite-parser-module-v3/receipt.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/openrewrite-parser-module-v3/receipt.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/openrewrite-parser-module-v3/receipt.json",
-      "sha256": "6b336b8185161dbc7554e564c6ba4f5d800965324bf31c28df10583cb3b8fb35",
+      "sha256": "da2c570dde9779331fb2915ef66e9945e89db653dbd64561710000556fd9bfbc",
       "size_bytes": 2460,
       "classification": "GENERATED"
     },
@@ -1859,7 +1859,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/openrewrite-parser-module-v4/receipt.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/openrewrite-parser-module-v4/receipt.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/openrewrite-parser-module-v4/receipt.json",
-      "sha256": "eb3621051147d14c64f7dce96ea03c00812d88ec5cbfadffd9bd68989ac48ef9",
+      "sha256": "c997dabe801d41b4fb6f76c03fb54350ddf9714cc146ee8a4ee5b0a469333a9e",
       "size_bytes": 6477,
       "classification": "GENERATED"
     },
@@ -2123,7 +2123,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-openrewrite-javadoc-v1/retained/target/m3-openrewrite-javadoc/candidate/SDK_INPUTS.tsv",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-openrewrite-javadoc-v1/retained/target/m3-openrewrite-javadoc/candidate/SDK_INPUTS.tsv",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-openrewrite-javadoc-v1/retained/target/m3-openrewrite-javadoc/candidate/SDK_INPUTS.tsv",
-      "sha256": "255aa45b472c7baa9473711bf64c20f89a3e3970285bc058e9dc030fda674b12",
+      "sha256": "afc286b808a8837393f77388877a9324a5c4fed3e3d6a31b00020bb3c011030e",
       "size_bytes": 8400,
       "classification": "GENERATED"
     },
@@ -2435,7 +2435,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-openrewrite-javadoc-v2/retained/target/m3-openrewrite-javadoc/candidate/SDK_INPUTS.tsv",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-openrewrite-javadoc-v2/retained/target/m3-openrewrite-javadoc/candidate/SDK_INPUTS.tsv",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-openrewrite-javadoc-v2/retained/target/m3-openrewrite-javadoc/candidate/SDK_INPUTS.tsv",
-      "sha256": "35b2cb9677d4756e7388543c5b9fcd599d8804c98bf1b1152f6f2dcb59ecd176",
+      "sha256": "bf929ecb45922bc5f1d9c802776f15d8247278f7d31722872b10ba85938b92e7",
       "size_bytes": 8400,
       "classification": "GENERATED"
     },
@@ -2483,7 +2483,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-openrewrite-javadoc/candidate/SDK_INPUTS.tsv",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-openrewrite-javadoc-v3/SDK_INPUTS.tsv",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-openrewrite-javadoc-v3/SDK_INPUTS.tsv",
-      "sha256": "7763c7f44ca9ae65624fcfa0bf5cadecdff5b10b816db0e63916f18e7cd25f34",
+      "sha256": "9a3c99a49aaedc9327d5d35afb08867c871a46a94743529e977cf0b7a71ffc8f",
       "size_bytes": 8400,
       "classification": "GENERATED"
     },
@@ -2523,7 +2523,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-openrewrite-javadoc-v3/receiver-proof/evidence/RECEIVER_RECEIPT.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-openrewrite-javadoc-v3/receiver-proof/evidence/RECEIVER_RECEIPT.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-openrewrite-javadoc-v3/receiver-proof/evidence/RECEIVER_RECEIPT.json",
-      "sha256": "7f55e06b4406b550ba18efbf3d8538fa1e8f17abf268646f5198d3b145b87ed1",
+      "sha256": "202d05749c7d188689696256d76f1b35924f32af5ac11a0aa2e223a55740ca1c",
       "size_bytes": 1643,
       "classification": "GENERATED"
     },
@@ -2691,7 +2691,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-runtime-facade-custody-1-v1/retained/CUSTODY-SOURCE.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-facade-custody-1-v1/retained/CUSTODY-SOURCE.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-facade-custody-1-v1/retained/CUSTODY-SOURCE.json",
-      "sha256": "cbb722ac6706721f1a9d055c3bf746bebb1891ad9e4367a5d0a3ccf878f05f57",
+      "sha256": "9be55f89b3107393e0f40e2ba57871683ed9617770c318166d69275d2f8f70d3",
       "size_bytes": 414170,
       "classification": "GENERATED"
     },
@@ -2699,7 +2699,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-runtime-facade-custody-1-v1/retained/RETENTION.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-facade-custody-1-v1/retained/RETENTION.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-facade-custody-1-v1/retained/RETENTION.json",
-      "sha256": "23d916f6ccdfa9ab358c2e062a0ed07c18f7e8d281dcb513968086277f8b112d",
+      "sha256": "0cd7a6a736b4d3826926267fa93de2042edbff56fddb66bc098d2a24891912e3",
       "size_bytes": 2500,
       "classification": "GENERATED"
     },
@@ -2707,7 +2707,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-runtime-facade-custody-1-v1/retained/build_runtime_facade_handoff.py",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-facade-custody-1-v1/retained/build_runtime_facade_handoff.py",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-facade-custody-1-v1/retained/build_runtime_facade_handoff.py",
-      "sha256": "3c788e8d505ce27a57bf5f3b74b3590487bf6aef90ea07dc1d7b983173e89c27",
+      "sha256": "a668c8b4df6ddeb34315562169a63d9763b79a5beb6735cc3ecc3f0a8237ee4a",
       "size_bytes": 14788,
       "classification": "GENERATED"
     },
@@ -2715,7 +2715,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-runtime-facade-custody-1-v1/retained/canonical-artifacts.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-facade-custody-1-v1/retained/canonical-artifacts.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-facade-custody-1-v1/retained/canonical-artifacts.json",
-      "sha256": "f83257b7b9c861d5d7ffcf40e61693db9e57f8f7f83dcebde6f4dcd83f676a0d",
+      "sha256": "3c2cb8841758af573c30c4506de7f49ec942ca293711a46d97712d682d956777",
       "size_bytes": 413251,
       "classification": "GENERATED"
     },
@@ -2739,7 +2739,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-runtime-facade-custody-1-v1/retained/datasets/m3-runtime-facade-custody-1/MODES.tsv",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-facade-custody-1-v1/retained/datasets/m3-runtime-facade-custody-1/MODES.tsv",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-facade-custody-1-v1/retained/datasets/m3-runtime-facade-custody-1/MODES.tsv",
-      "sha256": "3675321c66451066f34fde9d6eb212c75e4a2ebbb6da21df779157da8fedecd7",
+      "sha256": "6562ed5d2ef3d43a72a6979d875ed0331bcac0babeeaa66c23aa8ae96ae120ec",
       "size_bytes": 54289,
       "classification": "GENERATED"
     },
@@ -2763,7 +2763,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-runtime-facade-custody-1-v1/retained/datasets/m3-runtime-facade-custody-1/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-facade-custody-1/manifest.tsv",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-facade-custody-1-v1/retained/datasets/m3-runtime-facade-custody-1/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-facade-custody-1/manifest.tsv",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-facade-custody-1-v1/retained/datasets/m3-runtime-facade-custody-1/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-runtime-facade-custody-1/manifest.tsv",
-      "sha256": "33d18201c0c0521673ac8f7466c061684c2c1715d0fe81087329cf19f50620f2",
+      "sha256": "c922e5d4ebd7ff4bf8f6832f1bc98772f3677b32fd89655e9beecce259c09ce9",
       "size_bytes": 79237,
       "classification": "GENERATED"
     },
@@ -2795,7 +2795,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/target/m3jdk21-runtime-facade/candidate/SDK_INPUTS.tsv",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-facade-successor-v1/SDK_INPUTS.tsv",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-facade-successor-v1/SDK_INPUTS.tsv",
-      "sha256": "049d188d3eb7e2726ab927e7a3d36795a48052ac17f41a8b883ab1593bdab08d",
+      "sha256": "2249472cb3d728661b10c17a485aaa9346c37c17940ef411647b1ea980c5f835",
       "size_bytes": 4168,
       "classification": "GENERATED"
     },
@@ -2803,7 +2803,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/target/m3jdk21-runtime-facade/candidate/SDK_RESULTS.tsv",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-facade-successor-v1/SDK_RESULTS.tsv",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-facade-successor-v1/SDK_RESULTS.tsv",
-      "sha256": "8391a158cdd49c83894b0d14467b155fb9089d70941546fbed55042e7f53bc0d",
+      "sha256": "ab81a2092dcb0af7da3fa9428da594fc3b49ebf84ccd8bf262a92b1f4b57a5a6",
       "size_bytes": 922,
       "classification": "GENERATED"
     },
@@ -2827,7 +2827,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-runtime-facade-successor-v1/receipt.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-facade-successor-v1/receipt.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-facade-successor-v1/receipt.json",
-      "sha256": "bd008b56fac68082d7a0c208b7990da6d3a08579f637e3d2c7b8b4a0fc7d723a",
+      "sha256": "fc361c4ac9ea108af4ab57e7718e87b088e6da9285fa19f0f81329db0c81dfb4",
       "size_bytes": 1051,
       "classification": "GENERATED"
     },
@@ -2835,7 +2835,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-runtime-facade-successor-v1/receiver-proof/evidence/RECEIVER_RECEIPT.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-facade-successor-v1/receiver-proof/evidence/RECEIVER_RECEIPT.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-facade-successor-v1/receiver-proof/evidence/RECEIVER_RECEIPT.json",
-      "sha256": "c164198d17b7b37402a11f8adae3f3ef317aff2baa77f2b4724f44da06952861",
+      "sha256": "d64cd0abeb4f7d2f6f8c9089a3cc1f1c29731e7e4947984e136f0966b7427cb3",
       "size_bytes": 1620,
       "classification": "GENERATED"
     },
@@ -3147,7 +3147,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/SDK_INPUTS.tsv",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-parser-host-v1/SDK_INPUTS.tsv",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-parser-host-v1/SDK_INPUTS.tsv",
-      "sha256": "6c45e8a6f2fa4b1c0c54fec944b20dac8b1bc302b5bc9aeffd1fdda0ccabc3d6",
+      "sha256": "565aefe0e42099d24a9b9da125e1a389853fa8ec88426bd3e33c63882bfbec9e",
       "size_bytes": 29923,
       "classification": "GENERATED"
     },
@@ -3155,7 +3155,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/SDK_RESULTS.tsv",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-parser-host-v1/SDK_RESULTS.tsv",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-parser-host-v1/SDK_RESULTS.tsv",
-      "sha256": "091de8a8d164527df46c6ce471c8fa6c6225a62b57984bc930fb73d603305ed1",
+      "sha256": "c2f09420a023a84fec0e9f195192a72761aeba4117e979f73b311a2335c331f7",
       "size_bytes": 13901,
       "classification": "GENERATED"
     },
@@ -3187,7 +3187,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-runtime-parser-host-v1/receiver-proof/evidence/RECEIVER_RECEIPT.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-parser-host-v1/receiver-proof/evidence/RECEIVER_RECEIPT.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-parser-host-v1/receiver-proof/evidence/RECEIVER_RECEIPT.json",
-      "sha256": "0d64bdb8d44a1b2dd9370c6cd6fdb00ee07a8f6d338b6247836e910e6ac07715",
+      "sha256": "15159a723dc9f303d33f2fdd8162c49dc5584d07e246f6d7a6d66314d070c384",
       "size_bytes": 1777,
       "classification": "GENERATED"
     },
@@ -3339,7 +3339,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/target/fixture/candidate/SDK_INPUTS.tsv",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-successor-fixture-v1/SDK_INPUTS.tsv",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-successor-fixture-v1/SDK_INPUTS.tsv",
-      "sha256": "b9e0c2a4e7684d08497ca97f6c7eb4fad06679bd5c23eb616ebbb9327ea1e0ac",
+      "sha256": "71f2c5c3dfd112bc335c91714f4908f1fe5ba069a38dff0a4d29dd16acc6ec00",
       "size_bytes": 4432,
       "classification": "GENERATED"
     },
@@ -3371,7 +3371,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-runtime-successor-fixture-v1/receipt.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-successor-fixture-v1/receipt.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-successor-fixture-v1/receipt.json",
-      "sha256": "2651268722e1fee4f23a7691325c32e6a5dc20c33a82323a1571323476956245",
+      "sha256": "48ca567dd32b8fa445833779fce04e61c83d9a7370c138a8e63d68832b0da9f6",
       "size_bytes": 1038,
       "classification": "GENERATED"
     },
@@ -3379,7 +3379,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-runtime-successor-fixture-v1/receiver-proof/evidence/RECEIVER_RECEIPT.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/recipe-runtime-successor-fixture-v1/receiver-proof/evidence/RECEIVER_RECEIPT.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-successor-fixture-v1/receiver-proof/evidence/RECEIVER_RECEIPT.json",
-      "sha256": "41b0121f750e09cb836d3d42ae15f663ca0e7b714b0c41c782369e4563bc7c97",
+      "sha256": "7d7659a8cf06b9bc9596d45189b2ad4fabcfd9d0e13ec2011cc03ad0617b99b2",
       "size_bytes": 1523,
       "classification": "GENERATED"
     },
@@ -3699,7 +3699,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/runtime-facade-patch-v1/receipt.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/evidence/runtime-facade-patch-v1/receipt.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/runtime-facade-patch-v1/receipt.json",
-      "sha256": "d2f5bc44b93f05ac5d106e3a6b29c00b1c0c86da0bf3a569ecfd6d2eedc350d0",
+      "sha256": "041f93b7f58067ae14ca3fd2d39a68a871413c69e70de603eb583e8d4ede7fd8",
       "size_bytes": 21472,
       "classification": "GENERATED"
     },
@@ -3731,7 +3731,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/history/HARNESS_LINEAGE.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/history/HARNESS_LINEAGE.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/history/HARNESS_LINEAGE.json",
-      "sha256": "3a26e75c15328e96a95714035659afd24195c49e557b78e081530d28c3ac968f",
+      "sha256": "dc29356e385fef1a144cff8989363f19495131d711c7d7a39e09c2d202875167",
       "size_bytes": 3774,
       "classification": "GENERATED"
     },
@@ -3739,7 +3739,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/history/HOST_CAP_LINEAGE.json",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/history/HOST_CAP_LINEAGE.json",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/history/HOST_CAP_LINEAGE.json",
-      "sha256": "536adf69f0e86fa8eb5ecbe441f936a164578399c8633af861238f7678e54557",
+      "sha256": "81deb8a04803da7f9e3f8c6f412c487266c9199fbd4082d9b3162a19c7ae781e",
       "size_bytes": 1847,
       "classification": "GENERATED"
     },
@@ -3867,7 +3867,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/pom.xml",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/pom.xml",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/pom.xml",
-      "sha256": "824ced27a427e35901d413eb8c8beac0ee657d991a03079a5d1cc59e29f76092",
+      "sha256": "2658882451ec25f1ff3ebaea743a8934aa1221db023777537636439dafa6b1e1",
       "size_bytes": 7312,
       "classification": "GENERATED"
     },
@@ -3875,7 +3875,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/prepare.py",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/prepare.py",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/prepare.py",
-      "sha256": "9b0b3d93c787c9a56036cddb2b044aef30f6fa8a1fa20fa5a2edae46dfd1e62c",
+      "sha256": "7c2063fa5aa88d0872fff0157413a1d2fdca4f00d01c787f8650969e8b514014",
       "size_bytes": 8940,
       "classification": "GENERATED"
     },
@@ -3883,7 +3883,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/receive.py",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/receive.py",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/receive.py",
-      "sha256": "db258f16e1841f6f5191c1c969c20314a8d143bfa6558b60f684bea440cc1712",
+      "sha256": "e81744965f37cb890e00f6c1c7e50f4dae44c68eedafdf46565a7e105bab5474",
       "size_bytes": 9947,
       "classification": "GENERATED"
     },
@@ -3891,7 +3891,7 @@
       "source": "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java",
       "path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java",
       "public_path": "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java",
-      "sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43",
+      "sha256": "fa8a8e63fd445c0fbcd877315044c6e5c36f779db6e8a11797e03ab805e5903f",
       "size_bytes": 17193,
       "classification": "GENERATED"
     }

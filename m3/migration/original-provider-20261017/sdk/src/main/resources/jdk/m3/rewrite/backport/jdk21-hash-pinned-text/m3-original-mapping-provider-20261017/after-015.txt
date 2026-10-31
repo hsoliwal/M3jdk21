@@ -4,32 +4,32 @@
     "m3/core/src/jdk/m3/text/M3StringPiece.java": {
       "repository": "hsoliwal/M3jdk21",
       "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f",
-      "git_blob_sha1": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
-      "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479"
+      "git_blob_sha1": "62506fb9b3cff0e6f24e856648528db58c45b92b",
+      "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755"
     },
     "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java": {
       "repository": "hsoliwal/M3jdk21",
       "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f",
-      "git_blob_sha1": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
-      "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb"
+      "git_blob_sha1": "5022e9811ce9391671c794446c7772569cfd369f",
+      "sha256": "1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7"
     },
     "m3/core/src/jdk/m3/text/LocalM3Arena.java": {
       "repository": "hsoliwal/M3jdk21",
       "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f",
-      "git_blob_sha1": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
-      "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d"
+      "git_blob_sha1": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
+      "sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4"
     },
     "m3/core/src/jdk/m3/text/LocalM3StringPiece.java": {
       "repository": "hsoliwal/M3jdk21",
       "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f",
-      "git_blob_sha1": "6b745c9472144ad6de01de4d06a533974e558fb1",
-      "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51"
+      "git_blob_sha1": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
+      "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad"
     },
     "m3/core/src/jdk/m3/text/StorageIdentity.java": {
       "repository": "hsoliwal/M3jdk21",
       "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f",
-      "git_blob_sha1": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
-      "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
+      "git_blob_sha1": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
+      "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354"
     }
   },
   "repository": "hsoliwal/M3jdk21",

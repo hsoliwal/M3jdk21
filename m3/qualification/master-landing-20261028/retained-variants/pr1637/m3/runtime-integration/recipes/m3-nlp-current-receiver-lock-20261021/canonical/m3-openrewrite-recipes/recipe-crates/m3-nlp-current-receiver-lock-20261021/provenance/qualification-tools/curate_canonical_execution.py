@@ -52,7 +52,7 @@ def main():
         'successful_command': ['python3', '-B', 'synexia/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/prepare_packet.py', 'M3jdk21', 'nlp-work/source-lock-correction/HANDOFF.json'],
         'command_custody': 'Retrospective exact transcription from this session tool call; not claimed to have been stored before execution.',
         'result': {'status': 'SEALED_INPUTS', 'phases': 2, 'target_paths': 2,
-                   'source_seals_sha256': '6cc232bd392dd188b227a0a7c304d0a6e6d25ed91dd3641fefb335afdfc8574e',
+                   'source_seals_sha256': '5baa373db8748eba54cecfc5899eb36b5b2f09aa85cfb8399195bac6a367471a',
                    'recipe_executed': False},
         'later_actual_recipe_result': 'proof/sdk-001-offline/RESULT.json',
         'hydration_scope': 'Unchanged baseline source custody only; actual modifications were applied later by the qualified canonical recipe copier.'}

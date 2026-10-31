@@ -1,5 +1,5 @@
---- actual2779/m3/core/test/com/m3/text/M3BigStringSelfTest.java
-+++ canonical12347-immutable-head/m3/core/test/com/m3/text/M3BigStringSelfTest.java
+--- actual2779/m3/core/test/jdk/m3/text/M3BigStringSelfTest.java
++++ canonical12347-immutable-head/m3/core/test/jdk/m3/text/M3BigStringSelfTest.java
 @@ -13,6 +13,7 @@
  
      public static void main(String[] args) throws Exception {

@@ -39,7 +39,7 @@ and verify in order, stopping on failure.
 set -eu
 synexia_root=/absolute/path/to/com.synexia
 target_root=/absolute/path/to/M3jdk21
-expected_revision=$(python3 -c 'import json,re,sys; v=json.load(open(sys.argv[1], encoding="utf-8"))["synexiaRevision"]; assert isinstance(v,str) and re.fullmatch("[0-9a-f]{40}",v); print(v)' "$target_root/m3/tooling/migration-recipes/apache-reuse/SYNEXIA_APPLICATION.json")
+expected_revision=$(python3 -c 'import json,re,sys; v=json.load(open(sys.argv[1], encoding="utf-8"))["synexiaRevision"]; assert isinstance(v,str) and re.fullmatch("[0-9a-f]{40}",v); print(v)' "$target_root/m3/tooling/migration-recipes/apache-reuse/M3_APPLICATION.json")
 test "$(git -C "$synexia_root" rev-parse HEAD)" = "$expected_revision"
 test -z "$(git -C "$synexia_root" status --porcelain --untracked-files=all -- synexia-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java)"
 mvn -o -B -ntp -f "$synexia_root/synexia-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse/pom.xml" -Pm3jdk21-receiver -Dm3.target.root="$target_root" compile
@@ -69,7 +69,7 @@ state the complete policy; no existing source owner or license is overwritten.
 ## Existing owner, not a second engine
 
 This task composes `com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe` from its existing owner at
-`m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java` (Git blob `a2e8c916208b563517e51b738744a05357e633aa`). The POM compiles that owner directly and
+`m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java` (Git blob `3fdc75a71290e2fd1659bfbc7fa532828363275b`). The POM compiles that owner directly and
 JUnit verifies the exact Git blob. It neither vendors a new engine nor adds a
 Synexia runtime dependency. Existing naming/handoff registries stay authoritative.
 
@@ -86,7 +86,7 @@ From repository root, the dependency-free packet integrity proof is:
 ```sh
 mkdir -p m3/tooling/migration-recipes/apache-reuse/target/probe
 javac --release 21 -Xlint:all -Werror -d m3/tooling/migration-recipes/apache-reuse/target/probe \
-  m3/tooling/migration-recipes/apache-reuse/src/test/java/com/synexia/handoff/ApacheReuseProof.java
+  m3/tooling/migration-recipes/apache-reuse/src/test/java/jdk/internal/m3/handoff/ApacheReuseProof.java
 java -cp m3/tooling/migration-recipes/apache-reuse/target/probe com.synexia.handoff.ApacheReuseProof \
   m3/tooling/migration-recipes/apache-reuse/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/apache-public-reuse-v1
 ```

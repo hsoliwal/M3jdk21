@@ -53,7 +53,7 @@ class M3FastListArraySpanTest
             assertNotNull(resource);
             original = resource.readAllBytes();
         }
-        assertEquals("897e945ab4a10f0a106c5e29ddf2f49265a422d12a90f73733efdedc084b0c8e",
+        assertEquals("e39c24a2aecf905b36f292ebd74dd7e823a91cb6f65a6b35f3b29ef759c3af52",
                 HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(original)));
         Path source = this.temporary.resolve("src/jdk/m3/collections/eclipse/impl/list/mutable/FastList.java");
         Files.createDirectories(source.getParent());

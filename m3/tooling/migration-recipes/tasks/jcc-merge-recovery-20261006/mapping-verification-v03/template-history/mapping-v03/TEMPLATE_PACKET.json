@@ -2,7 +2,7 @@
   "canonical_baseline_packet": {
     "path": "current-map-validation-v03/PACKET.json",
     "result": "MIGRATION_MANIFEST_VALID completion=INCOMPLETE",
-    "sha256": "6e2ab166b48662dbf216c9791597d7779163236a0dc2e4ce76c2963bb022882c"
+    "sha256": "6f3e2993d6d29e51c46099f0e0ad6d4c775a435466b4be8cfd6ef6918e927224"
   },
   "compile_only_status": "PASS",
   "crate": "jcc-merge-recovery-20261006-mapping-v03",
@@ -17,12 +17,12 @@
     {
       "bytes": 52471,
       "path": "JccMergeMappingRecoveryV03Test.java.in",
-      "sha256": "d30fb1e55a59014dc6b4df8cd79a2086a2db4c7e460c13140668d7715175c71d"
+      "sha256": "460fc9f2e2a3faa46cb16c23dcde4493ce87b3f556d5c9eabf224c79d4404728"
     },
     {
       "bytes": 9411,
       "path": "README.md",
-      "sha256": "07d8733b6e45870d3e293f0f631f636e665810a6dc845a3106e331d10df44ef6"
+      "sha256": "66295f7a2468a18354bd5574f4fda065f2d6adaebcb0e4513a36c79276c1fcc2"
     },
     {
       "bytes": 0,
@@ -37,7 +37,7 @@
     {
       "bytes": 6239,
       "path": "compile-check-v01/receipt.json",
-      "sha256": "c8182b75ec10d7ee66da00f5a9e92306b0b78fcdecf2114bbd1e84c6c0cadc40"
+      "sha256": "02fd2ca1753852544127c5661c520aaaa28694344b50093970aa1d953c5ecbe7"
     },
     {
       "bytes": 0,
@@ -62,12 +62,12 @@
     {
       "bytes": 6353,
       "path": "compile-check-v02/receipt.json",
-      "sha256": "18282ba41314228e287c7fac5562e2ecca9edefc262dac2d76fef80dbf9add5b"
+      "sha256": "2fe89571d77cb7a36a372c4b101c9f097795d51aef8e74f426e3985fb12d8c8c"
     },
     {
       "bytes": 626,
       "path": "m3-jcc-merge-mapping-recovery-v03.yml",
-      "sha256": "7ef86264b8742dfa06ce5bc83ea2bed6be19b24059f479c4e7f0ed61d58b84bc"
+      "sha256": "6ba1b51479a71577289d10793697967de29161a81adc7283ae7fd98a3aef6ad0"
     },
     {
       "bytes": 3441,
@@ -77,17 +77,17 @@
     {
       "bytes": 52471,
       "path": "previous-input-epoch-01/JccMergeMappingRecoveryV03Test.java.in",
-      "sha256": "22808cffcad7aa2477fdb91c53592cce3430aab02da14a5a2b62e6c9dcfbcf27"
+      "sha256": "b87905fe15a9fa618ef394d6932f7d0f9185caf2fe9cc45a3d58689ab7df158a"
     },
     {
       "bytes": 8841,
       "path": "previous-input-epoch-01/README.md",
-      "sha256": "e28aa2f0ebb4b324dc70297de60aceab20749c9dabc0d902fdb29d7986adabf4"
+      "sha256": "17d2ade1b726142765af8e4998640444fb3f57b2e1c168bdb91aadcd7ad39438"
     },
     {
       "bytes": 4194,
       "path": "previous-input-epoch-01/TEMPLATE_PACKET.json",
-      "sha256": "e2f496b32efd62d50649d49ad9e3714de0a5493d3f0532fef317d0384b2add67"
+      "sha256": "52972bb3b6c18131daa040e02ea1b6af800356955ad16a54f072bdef028d6c99"
     },
     {
       "bytes": 0,
@@ -102,12 +102,12 @@
     {
       "bytes": 6239,
       "path": "previous-input-epoch-01/compile-check-v01/receipt.json",
-      "sha256": "c8182b75ec10d7ee66da00f5a9e92306b0b78fcdecf2114bbd1e84c6c0cadc40"
+      "sha256": "02fd2ca1753852544127c5661c520aaaa28694344b50093970aa1d953c5ecbe7"
     },
     {
       "bytes": 626,
       "path": "previous-input-epoch-01/m3-jcc-merge-mapping-recovery-v03.yml",
-      "sha256": "7ef86264b8742dfa06ce5bc83ea2bed6be19b24059f479c4e7f0ed61d58b84bc"
+      "sha256": "6ba1b51479a71577289d10793697967de29161a81adc7283ae7fd98a3aef6ad0"
     },
     {
       "bytes": 3441,
@@ -117,7 +117,7 @@
     {
       "bytes": 14710,
       "path": "previous-input-epoch-01/render_template.py",
-      "sha256": "de6d8a59b0f49a5ca9378c1422cc3d52cb41d3e7f638f6c618ba638fa407b2dd"
+      "sha256": "32daee14b2f94d8d6dfc2ca961d34dfeef1beb31831d4d43b6f352fb2133ba5f"
     },
     {
       "bytes": 3713,
@@ -137,7 +137,7 @@
     {
       "bytes": 14710,
       "path": "render_template.py",
-      "sha256": "44814edd234cdb8b39e11f526b21fd31b43361ab1250b6c58289848c637c454c"
+      "sha256": "3f25c815e517cc4d4dc43a1ca373b577a399ec4fbb3a3b81d23008e495340904"
     },
     {
       "bytes": 3713,
@@ -185,12 +185,12 @@
     {
       "files_verified_unchanged": 15,
       "path": "candidate/mapping/java-template/TEMPLATE_PACKET.json",
-      "sha256": "5fe25ca79a45bd4e499fd6171dfe5375390f91f2331330797b93aec3c5eec142"
+      "sha256": "d9441405014cca0bc6b106de6cf28539920a164e2c627f04dea750072f1e054d"
     },
     {
       "files_verified_unchanged": 11,
       "path": "candidate/mapping-v02/java-template/TEMPLATE_PACKET.json",
-      "sha256": "24b0adba2b80ee105ba9904e4d00b96d441cddf4b548b5400d72ca09f1d26136"
+      "sha256": "7ec82e03ff00a2853023454b7e30decca77051a4c3ac4afe30d283722a9d5a2b"
     },
     {
       "files_verified_unchanged": 113,
@@ -201,7 +201,7 @@
   "previous_v03_revision": {
     "all_sealed_files_verified_unchanged": 11,
     "packet": "previous-input-epoch-01/TEMPLATE_PACKET.json",
-    "sha256": "e2f496b32efd62d50649d49ad9e3714de0a5493d3f0532fef317d0384b2add67"
+    "sha256": "52972bb3b6c18131daa040e02ea1b6af800356955ad16a54f072bdef028d6c99"
   },
   "revision": 2,
   "revision_delta": "Only input-epoch pin changed in Java and renderer; operational bodies and13controls unchanged. Fresh compile-check-v02 and self-review-v02 receipts; firstV03seal retained.",

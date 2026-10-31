@@ -7,8 +7,8 @@
       "path": "m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java",
       "references": [
         {
-          "declared_git_blob_sha1": "65f259e23d818b9b35052feff37198f5ddf567b4",
-          "expected_sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
+          "declared_git_blob_sha1": "317108234d7692410517731b325f7d28de99354e",
+          "expected_sha256": "5f936a3c6e69ca487eff6a0665ada01546750d9d87ce85ee50a337a4236233d0",
           "record": "m3.prefix-z",
           "role": "target",
           "status": "implemented-tested"
@@ -168,7 +168,7 @@
       "references": [
         {
           "declared_git_blob_sha1": null,
-          "expected_sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
+          "expected_sha256": "8006b173253ea7502efe7f7a77738b65f9df9e2871d4d6c29ff4fb8fb058c8c6",
           "record": "m3.counterpart.MIndexJvmDescriptor",
           "role": "recipe",
           "status": "implemented-unverified"

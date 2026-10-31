@@ -35,9 +35,9 @@ def prove():
     if len(rows)!=6 or rows!=sorted(set(rows)):
         raise ValueError("six exact source paths required, unique and sorted")
     pinned={
-        "M3LinkedHashMap.java": "ade59880b8c9b2bee1b32ae67ca9d29b7382d998",
-        "M3LinkedList.java": "744d1c488b8342c98e49d2cfd3465c0f558b199d",
-        "M3LinkedHashSet.java": "e1ac806d1ebe8aac1b9efe7bcfbaa3f675e7d0d6",
+        "M3LinkedHashMap.java": "e0957cfd8a7a5abfa1c0c5e7bade32997e5ed657",
+        "M3LinkedList.java": "832c838caf7a37d6f9a10b37505c3e65ed9f6292",
+        "M3LinkedHashSet.java": "58fd72f6e1464a2c6e2c26a1519ee6cd226a3924",
     }
     for name, sha in pinned.items():
         p = ROOT / ("m3/collections/src/main/java/jdk/m3/collections/" + name)

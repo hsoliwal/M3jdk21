@@ -39,8 +39,8 @@ jobs:
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java)" = 'cd0a9b800a05e3cdd6478b408b31c71784a9ebb9'
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java)" = '1965edd9843d29070b01cc9d3107c8226a176e37'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = 'd578908b39e626485638b1ca9915484912b4d1c9'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongTopKFrequencyContract.java)" = 'd717fd8134fc6f35f8da95caf6eef38a24cf748f'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongTopKFrequencyTest.java)" = '2e2262f5fec76a8cb26ab0a5c0d488c04d8ed51e'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongTopKFrequencyContract.java)" = 'ef5822c5ff9f283dd7f4ce419a46f38390d5b65c'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongTopKFrequencyTest.java)" = 'd35c068e3e5323d1b93d80a192cb1aec6340da92'
       - name: Compile original M3 rank source and LC347 independent Java oracle
         shell: bash
         run: |

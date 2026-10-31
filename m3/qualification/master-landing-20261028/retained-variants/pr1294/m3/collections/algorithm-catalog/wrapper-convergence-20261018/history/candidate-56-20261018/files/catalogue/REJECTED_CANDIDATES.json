@@ -14,14 +14,14 @@
   ],
   "evidence_source": "Exact protected probe source and baseline/initial-candidate logs read from root qualification directory and preserved byte-for-byte",
   "probe_path": "counterexamples/M3ComparatorFailureProbe.java.txt",
-  "probe_sha256": "4cd4c00c565ea75f26b83ca237330063275c661df5017d06963aeb1a76bdfe55",
+  "probe_sha256": "07296e1077905d975421f1f65020388fbe4a83e545cf5c62fc70b94f5c1cc75b",
   "execution_receipt": null,
   "note": "Initial source/probe/log identities and rejection remain unchanged. Corrected candidate gates pass; actual SDK/receiver receipts remain independently root-owned.",
   "initial_recipe_report": "Root reports initial 26-target SDK 5 tests, 8 sealing and 9 receiver cases passed. Recipe integrity does not establish behavior; the later counterexample keeps corrected runtime admission pending.",
   "local_evidence": [
     {
       "path": "counterexamples/M3ComparatorFailureProbe.java.txt",
-      "sha256": "4cd4c00c565ea75f26b83ca237330063275c661df5017d06963aeb1a76bdfe55",
+      "sha256": "07296e1077905d975421f1f65020388fbe4a83e545cf5c62fc70b94f5c1cc75b",
       "bytes": 1989,
       "evidence_kind": "PROTECTED_PROBE_SOURCE_AS_TEXT"
     },

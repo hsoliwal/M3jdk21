@@ -20,8 +20,8 @@ WORKFLOW = ".github/workflows/m3-backport-contract-current-owner.yml"
 SUITE = "jdk.internal.m3.rewrite.M3BackportContractCurrentOwnerRecipeTest"
 METHODS = ["allEightPartialStatesBothOrdersReachExactFixedPoint","allEightInverseStatesBothOrdersRecoverExactBefore","eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"]
 ENGINES = {
-    "M3GpuToolJoinRecipe": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-    "M3GpuToolJoinManifest": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+    "M3GpuToolJoinRecipe": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+    "M3GpuToolJoinManifest": "78d5fb68f13872164973a8918cc7886c5f548bca",
 }
 RECEIVER_STATE = "APPLIED"
 FROZEN_BASELINE_SOURCE = "SDK_FORWARD_BEFORE_REPLACE_PLUS_CURRENT_KEEP"

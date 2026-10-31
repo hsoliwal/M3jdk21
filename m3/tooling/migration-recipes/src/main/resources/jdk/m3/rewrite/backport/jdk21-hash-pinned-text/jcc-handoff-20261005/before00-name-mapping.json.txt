@@ -209,8 +209,8 @@
               "int longestProperBorderLength()",
               "long metadataPayloadBytes()"
             ],
-            "sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
-            "git_blob_sha1": "65f259e23d818b9b35052feff37198f5ddf567b4",
+            "sha256": "5f936a3c6e69ca487eff6a0665ada01546750d9d87ce85ee50a337a4236233d0",
+            "git_blob_sha1": "317108234d7692410517731b325f7d28de99354e",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/m3/migration-pass1-prefix-evidence-20261002"
@@ -320,8 +320,8 @@
             "path": "m3/core/src/jdk/m3/text/M3StringPiece.java",
             "symbol": "jdk.m3.text.M3StringPiece",
             "signatures": [],
-            "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
-            "git_blob_sha1": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+            "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755",
+            "git_blob_sha1": "62506fb9b3cff0e6f24e856648528db58c45b92b",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
@@ -333,8 +333,8 @@
             "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
             "symbol": "jdk.m3.text.JoinedM3StringPiece",
             "signatures": [],
-            "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
-            "git_blob_sha1": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
+            "sha256": "1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7",
+            "git_blob_sha1": "5022e9811ce9391671c794446c7772569cfd369f",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
@@ -346,8 +346,8 @@
             "path": "m3/core/src/jdk/m3/text/LocalM3Arena.java",
             "symbol": "jdk.m3.text.LocalM3Arena",
             "signatures": [],
-            "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
-            "git_blob_sha1": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
+            "sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4",
+            "git_blob_sha1": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
@@ -359,8 +359,8 @@
             "path": "m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
             "symbol": "jdk.m3.text.LocalM3StringPiece",
             "signatures": [],
-            "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
-            "git_blob_sha1": "6b745c9472144ad6de01de4d06a533974e558fb1",
+            "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad",
+            "git_blob_sha1": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
@@ -372,8 +372,8 @@
             "path": "m3/core/src/jdk/m3/text/StorageIdentity.java",
             "symbol": "jdk.m3.text.StorageIdentity",
             "signatures": [],
-            "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
-            "git_blob_sha1": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
+            "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354",
+            "git_blob_sha1": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/master"
@@ -452,7 +452,7 @@
             "symbol": "jdk.internal.m3.indexstring.FrozenChars",
             "signatures": [],
             "sha256": null,
-            "git_blob_sha1": "a8f016a1764aea6e970bc60e38f345804e82a84e",
+            "git_blob_sha1": "e7cecf3e32eca949dcf6616455caab6c62fd909d",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -2159,8 +2159,8 @@
               "static <T> MIndexVersionTable<T> prepare(List<MIndexString>, Scheme<T>, int, MIndexProgressMonitor)",
               "int[] between(MIndexString, boolean, MIndexString, boolean)"
             ],
-            "sha256": "a6cf406b99ce4064e23de1d9eddeb583b6b0f31f6ae74a06c8f98f8f8b330542",
-            "git_blob_sha1": "1675e6d7e35e3371bce2ba9b53716a00b6fd67da",
+            "sha256": "6f2ba0e4dcf2cd131e4907519b0ba91dabd41d68c5253a16834d9bb37ac160c2",
+            "git_blob_sha1": "e30893f329e957658fb6d408a6d361ce7df6c0d5",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -2280,8 +2280,8 @@
             "signatures": [
               "MIndexLibraryRelease(MIndexString origin, MIndexString group, MIndexString artifact, MIndexString rawVersion, MIndexString extension, MIndexString classifier, MIndexString contentSha256)"
             ],
-            "sha256": "fb34b0ca5dd91bcc45df89521e934af07139a3630c09b012b19876a0e54be422",
-            "git_blob_sha1": "9df260247ec226392832a01fcb99f6bc56b151c6",
+            "sha256": "b2ac4a895d541380c37f6300e1d4b04d5827db486517159b46744e64ff5acbd9",
+            "git_blob_sha1": "e1ca92f9b8e1134a799903f52b525613bbf25a5f",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -2399,8 +2399,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.vm.MIndexVmSession"
             ],
-            "sha256": "bdeb857abaa302a40c4f542c23c4629eb0091f04d56d60545d6ca51325ff92a4",
-            "git_blob_sha1": "d2fb810dccd53b5ecccde9063a348199f78e0672",
+            "sha256": "867a9ce0fb71162b38a68bd1e3d12b724bd61b15b844197a3b81f32cb4cc18cf",
+            "git_blob_sha1": "74f0fa06fc5ddb3417efdac3a8282e5f2488f07e",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -2520,8 +2520,8 @@
               "signatures": [
                 "jdk.internal.m3.mindex.vm.MIndexVmSession"
               ],
-              "sha256": "bdeb857abaa302a40c4f542c23c4629eb0091f04d56d60545d6ca51325ff92a4",
-              "git_blob_sha1": "d2fb810dccd53b5ecccde9063a348199f78e0672",
+              "sha256": "867a9ce0fb71162b38a68bd1e3d12b724bd61b15b844197a3b81f32cb4cc18cf",
+              "git_blob_sha1": "74f0fa06fc5ddb3417efdac3a8282e5f2488f07e",
               "fingerprint": null,
               "revision_role": "pinned",
               "tracking_ref": "refs/heads/develop"
@@ -2564,8 +2564,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.vm.MIndexVmPrecomputeKey"
             ],
-            "sha256": "406f451222b1f6e950c28439316fdbcd6e9cfb9463658e1deec85cfe41197f1a",
-            "git_blob_sha1": "fc9aef1cce8e43ca81fd922ca6ea406417b1334b",
+            "sha256": "424e07da19c2218db8a705776ed2884146637d4325921a06c670afe3c96129e7",
+            "git_blob_sha1": "d7eec9579f614ff521683475df3eb5b825159066",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -2685,8 +2685,8 @@
               "signatures": [
                 "jdk.internal.m3.mindex.vm.MIndexVmPrecomputeKey"
               ],
-              "sha256": "406f451222b1f6e950c28439316fdbcd6e9cfb9463658e1deec85cfe41197f1a",
-              "git_blob_sha1": "fc9aef1cce8e43ca81fd922ca6ea406417b1334b",
+              "sha256": "424e07da19c2218db8a705776ed2884146637d4325921a06c670afe3c96129e7",
+              "git_blob_sha1": "d7eec9579f614ff521683475df3eb5b825159066",
               "fingerprint": null,
               "revision_role": "pinned",
               "tracking_ref": "refs/heads/develop"
@@ -2729,8 +2729,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexClass"
             ],
-            "sha256": "bd4e1312397b2d0b836f69aa32be6f7846cce69d30abc814936d0a88af06ea7c",
-            "git_blob_sha1": "488bfc02c9830b333f45c631a9fa933cec56ea91",
+            "sha256": "6a5e0a7a89a39b8b19d919fee8c781441a7b285e627d2ea723b20cb7e3c0376b",
+            "git_blob_sha1": "754a52297ff8c9ce34ffe7c765f8d7c684e693e4",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -2851,7 +2851,7 @@
                 "jdk.internal.m3.mindex.classindex.MIndexClass"
               ],
               "sha256": null,
-              "git_blob_sha1": "488bfc02c9830b333f45c631a9fa933cec56ea91",
+              "git_blob_sha1": "754a52297ff8c9ce34ffe7c765f8d7c684e693e4",
               "fingerprint": null,
               "revision_role": "pinned",
               "tracking_ref": "refs/heads/develop"
@@ -2894,8 +2894,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexClassIndex"
             ],
-            "sha256": "047eb00e579a0bed899419373e19514f0e06876efec39b9cfa2bca2d391196aa",
-            "git_blob_sha1": "35632a8688201f2a6849b52e325daa27ae3a7bfe",
+            "sha256": "f169228bd954975a1254204a39e99187e68a99ca09f4f472dcb500349324d987",
+            "git_blob_sha1": "eead494947962c5099c6decfbcf546163249164d",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -2910,8 +2910,8 @@
               "lowerBound(int[],int,int,int)",
               "upperBound(int[],int,int,int)"
             ],
-            "sha256": "993c38054e42c14efe27b52fa0b1e4d322aa17a2f8bdf7e8a460d4adbabe9e35",
-            "git_blob_sha1": "44975a54d368ecaf774683ab5d64bd14bb070209",
+            "sha256": "9e9c2eb9edfed393379793e634573ea33a87e2220cbfd7f761325fc326a087d7",
+            "git_blob_sha1": "0e40bec4b02bde697eba68b9817cc46c566987e2",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -3032,7 +3032,7 @@
                 "jdk.internal.m3.mindex.classindex.MIndexClassIndex"
               ],
               "sha256": null,
-              "git_blob_sha1": "35632a8688201f2a6849b52e325daa27ae3a7bfe",
+              "git_blob_sha1": "eead494947962c5099c6decfbcf546163249164d",
               "fingerprint": null,
               "revision_role": "pinned",
               "tracking_ref": "refs/heads/develop"
@@ -3405,8 +3405,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexClassBoundary"
             ],
-            "sha256": "ea78f4d9e5870f6951dba8a124019aa96396261aac041c8ad8c247a6ddc35c3a",
-            "git_blob_sha1": "9166e2168afc6a78fe8bdb7e570defc178c7c35e",
+            "sha256": "016db454989437ba213e2af47d0273f70243a2d0bede85f8e79ab8c6772a5150",
+            "git_blob_sha1": "e414f8c8b247ea38473d368eadbde3f98702e682",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -3538,8 +3538,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexJvmDescriptor"
             ],
-            "sha256": "0e0ddfc53acaeb28137319fd20ee5005f9d7231949ebd3106193c287f13be9b8",
-            "git_blob_sha1": "d0eb96ae49c0456c8d31f1e714882b525b4c9a97",
+            "sha256": "3fb76c976a34e1808f42d35cc194ba490316fab8e9d4176c071180aefb362341",
+            "git_blob_sha1": "2e8995bd7b5995e908cf8e4f6c80c86244013f6d",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -3671,8 +3671,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexMember"
             ],
-            "sha256": "4230b2df028a54d833284d373c044b58c4ffde0da1f15b394372d9cbff6e97da",
-            "git_blob_sha1": "70cd228801272d8e5fcb68bce280d2cb842e5ae8",
+            "sha256": "3acea5d4193a33fd6552e883f862243a23757d74855c51a450fa22ada1c0e350",
+            "git_blob_sha1": "ee7b754cd62c9bfccdea84f28c8f036917eb1126",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -3804,8 +3804,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexMemberKind"
             ],
-            "sha256": "76c8a68d9f1bafa36df848da02c1b00c4d738e7ff09c63d6761d6c8f892e20cb",
-            "git_blob_sha1": "9ba32db4528c74535a68c656b891d08924b75dc0",
+            "sha256": "196619a117a3783ad02487a3b05d8f22066a3b1667cabbd3cb17d63bba9dd4dc",
+            "git_blob_sha1": "f68a9ce030ace43d20c626c3c6f6bf8c54a0ece0",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -3937,8 +3937,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexMemberFlags"
             ],
-            "sha256": "febb6a32912e4149ca5521b149c86554f37d978382242589603aa9265139dfb9",
-            "git_blob_sha1": "9a84c2a18fecd4b67a0c503527347e2d4f75d2c8",
+            "sha256": "680cf4bd7fb80ee6a760ed0f15220c060e37a1c51cac60821fda6a363ef69154",
+            "git_blob_sha1": "34d8b046955d327ef3917da907a71a2fb20743a8",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -4070,8 +4070,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexClassFlags"
             ],
-            "sha256": "bc3fcc4bc3f582e6565c1c8509038217e7a7360dbb0e290c66b03090c0f6961e",
-            "git_blob_sha1": "d8131ebce1c01a014a9320e2ec771673f2d06b5c",
+            "sha256": "08f2e889d5e35db1a18600db4a9abbd8b6cae0ba67978363d7b1f675c4f38853",
+            "git_blob_sha1": "33d406046f18d71c255e3ef130edb7a464260782",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -4203,8 +4203,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexField"
             ],
-            "sha256": "ae3d0439814c26aa0a012984aa6d4debef70bd31590b403f9643634c231cd8b4",
-            "git_blob_sha1": "bc93b18d5ee4867a841ac036ffb35dcd1e72c3f4",
+            "sha256": "56d18634a23f188db2da23a790412ce393b3223689c2977899b79143043b4e51",
+            "git_blob_sha1": "4a41ee9ccca3a1e33514e45f38aa8dff85d7162d",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -4336,8 +4336,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexMethod"
             ],
-            "sha256": "b11190cdc801a2ce46078fa04d364d9362402c3aef4ff16aebac05a56898aaaa",
-            "git_blob_sha1": "41268ab2541b70fef70767557228bf568d9a01b7",
+            "sha256": "47acb7331e94c07ae48662e9b4a0d6e7d5189ea698e7a189c89a31bc306cb85a",
+            "git_blob_sha1": "b9bba7c3ada958ff1c2f6227459a78532dcdfd7f",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -4469,8 +4469,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexConstructor"
             ],
-            "sha256": "3b2b432ebb29f5f08e30b8f9194a2675f052a238f5f16432ac9e3d26e9d489c2",
-            "git_blob_sha1": "24be84434f65bffed5a5f0c609cbe596ae2b4985",
+            "sha256": "0f7d1f2c804978e9188dc63d9cfe9127654ad8ebfcaf3995761d77a50a862d61",
+            "git_blob_sha1": "5df90a368346a5cd4875119cfbff0d973598effa",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -4602,8 +4602,8 @@
             "signatures": [
               "jdk.internal.m3.mindex.classindex.MIndexRecordComponent"
             ],
-            "sha256": "b63a7f5a59d3badd7340e00021f2eaa410645d0f4a5d25a5a570797897969457",
-            "git_blob_sha1": "56d5b4adead17be7fef8e4b750f13fdf75d98a31",
+            "sha256": "b340b86517b838f43eed7087477b8f8bed47e19e23b826308e2a81181e49dce5",
+            "git_blob_sha1": "17af04a726daa4fcda4aa6bf0abbd6e3a177ba9e",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"

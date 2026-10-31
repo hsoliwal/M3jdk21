@@ -28,9 +28,9 @@ jobs:
         run: |
           set -euo pipefail
           cat <<'HASHES' | sha256sum --check
-          5af79b8408cd3f14e300a8f274e74ec539d3f945a0d03655b55ddc03eb351b70  m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java
-          e3fd3faa89389b150b1bb9fae967e79732873f4cd2494196246407131541391e  m3/collections/src/test/java/jdk/m3/collections/M3IndexedLivePhysicalPageContract.java
-          330bbcac884527af49fa36f124830c653393c8477da1196c54f0b73f9235f56f  m3/collections/src/test/java/jdk/m3/collections/M3IndexedLivePhysicalPageTest.java
+          65e5c350adb03ce2db176337ff2034b8253b5d5e258dd383a6500ddef01f2ecd  m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java
+          6a2dbf4be93b6450fc287d27d1373cfc8ba46e95387a921e6e521eb5d84f20bb  m3/collections/src/test/java/jdk/m3/collections/M3IndexedLivePhysicalPageContract.java
+          9f9aca1139aee67fe4b1c2e8e36ffb7b184f2943f4cf6b050a5812c41a24ac4f  m3/collections/src/test/java/jdk/m3/collections/M3IndexedLivePhysicalPageTest.java
           HASHES
           git diff --check
       - name: Dependency-free original-source Java21 contract oracles

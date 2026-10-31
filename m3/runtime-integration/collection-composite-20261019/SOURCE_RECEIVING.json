@@ -10,70 +10,70 @@
     {
       "path": "m3/collections/qualification/jdk-rx7-view-convergence-20261019/proof/MaskWindowConvergence.java",
       "before": "ABSENT",
-      "after": "f9984077d684c918f1c1d7d218449be635e6f4cd",
+      "after": "5555cabc7ac7d1e22d728db55f908b3ab1dc9aae",
       "canonical_resource": "m3-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-collection-composite-20261019/MaskWindowConvergence.java.txt",
       "admission": "EXACT_BLOB_MATCH"
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
-      "before": "6ec7a88dafeca87760faee0c808dbd9a93ba1424",
-      "after": "a5f22ba8a49c0bf570f2da7c25d86be2bed5dc36",
+      "before": "f221ccb00feeda912eafd5daa8b0bb8b7766b572",
+      "after": "778488bf267c3ca6c30e910ff4a64ca3f8c7ad7c",
       "canonical_resource": "m3-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-collection-composite-20261019/M3FilteredViews.java.txt",
       "admission": "EXACT_BLOB_MATCH"
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongBitmapFilteredSnapshot.java",
-      "before": "a5fe77001be04ca123593908fb68ca008935d543",
-      "after": "f82ffe51ababbdd9b663ceb2b113d7efc9e121e0",
+      "before": "0428338e245926b3884482409ebb0a5ec9d8f90e",
+      "after": "e03522cb007d2c851c29c3c16e5a866c04a6d98e",
       "canonical_resource": "m3-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-collection-composite-20261019/M3LongBitmapFilteredSnapshot.java.txt",
       "admission": "EXACT_BLOB_MATCH"
     },
     {
       "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
-      "before": "317136e66200db1d8fc72d47ff9f8cf52b4566b5",
+      "before": "09c10e2b4874f70ece8c1e4392a574db652945f7",
       "after": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb",
       "canonical_resource": "m3-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-collection-composite-20261019/M3LongIndexProjection.java.txt",
       "admission": "EXACT_BLOB_MATCH"
     },
     {
       "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
-      "before": "b3df27bfafad8508c85d77ba24a4b8a4622a7878",
-      "after": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e",
+      "before": "e621934162b1e6b34a1749841f6183ee4873f132",
+      "after": "baa23467163a0e9344fe3c1d78dcc87cb707fd56",
       "canonical_resource": "m3-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3jdk21-collection-composite-20261019/m3_index_mask_window.c.txt",
       "admission": "EXACT_BLOB_MATCH"
     },
     {
       "path": "m3/collections/src/main/native/collections/m3_state_mask_histogram.c",
-      "before": "b49b0ef89dfdd07f51730a7034aef0b84516082a",
-      "after": "f7099d5e06db8c76fe5d6549f8d167f965569c35",
+      "before": "fb608faed315aded73780821d1ee7fb1b28e346d",
+      "after": "ee5fe3adb1320c7879170028c852498d90ad935c",
       "canonical_resource": "m3-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3jdk21-collection-composite-20261019/m3_state_mask_histogram.c.txt",
       "admission": "EXACT_BLOB_MATCH"
     },
     {
       "path": "m3/collections/src/test/java/jdk/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java",
-      "before": "246745524719dffdd0396166282a3382f1759bf3",
-      "after": "a714930c92090556127fa2559c2d91f58fdae434",
+      "before": "cc7a8a5a6c6176aa0057399c52853f7a04c54cc0",
+      "after": "bffb615c61bd8077e4037d40993f4f35f9088e8e",
       "canonical_resource": "m3-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-collection-composite-20261019/M3LongBitmapFilteredSnapshotSelfTest.java.txt",
       "admission": "EXACT_BLOB_MATCH"
     },
     {
       "path": "m3/collections/src/test/java/jdk/m3/collections/M3StateMaskHistogramSelfTest.java",
-      "before": "e5dc5194c885c5adbf2d243fff70a3a551935c47",
-      "after": "78808f3a52ddb2171a60225ce89fca0a5bc6a959",
+      "before": "e5b646179255d5444a5c4184819b5b0ad4faa76a",
+      "after": "8a176ad12544fb3a58d06748cc2ab88caa42b5ae",
       "canonical_resource": "m3-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-collection-composite-20261019/M3StateMaskHistogramSelfTest.java.txt",
       "admission": "EXACT_BLOB_MATCH"
     },
     {
       "path": "m3/collections/verification/view-refinement-20261019/M3FilteredNullNavigationProbe.java",
       "before": "ABSENT",
-      "after": "71395196b1d4244c7c435addd69d0d4b5c7df2bd",
+      "after": "0dcf67ac0b2fccec299f520452bb4c667aa62600",
       "canonical_resource": "m3-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-collection-composite-20261019/M3FilteredNullNavigationProbe.java.txt",
       "admission": "EXACT_BLOB_MATCH"
     },
     {
       "path": "m3/collections/verification/view-refinement-20261019/M3ProjectionRefinementProbe.java",
       "before": "ABSENT",
-      "after": "515fa0a01cb9e00cbc914714df6835f5eaa3ed5e",
+      "after": "338fa16a24ebf7202bd3ecac970a030b4af06633",
       "canonical_resource": "m3-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-collection-composite-20261019/M3ProjectionRefinementProbe.java.txt",
       "admission": "EXACT_BLOB_MATCH"
     },
@@ -106,8 +106,8 @@
       "parent": "b64dd675a79c146aefdd441bbf18041bdaeadc1a",
       "commit": "d0ae508c2286a2923c40886be74d5e02797cfcbd",
       "tree": "503b402ae83399279f0cdb9b4a7830f644d0ff5f",
-      "before_blob": "6ec7a88dafeca87760faee0c808dbd9a93ba1424",
-      "after_blob": "a5f22ba8a49c0bf570f2da7c25d86be2bed5dc36",
+      "before_blob": "f221ccb00feeda912eafd5daa8b0bb8b7766b572",
+      "after_blob": "778488bf267c3ca6c30e910ff4a64ca3f8c7ad7c",
       "status": "SOURCE_RECEIVED_UNQUALIFIED"
     },
     {
@@ -116,8 +116,8 @@
       "parent": "d0ae508c2286a2923c40886be74d5e02797cfcbd",
       "commit": "13c505d47c12870bc5a219c98c2aa5030f4e1277",
       "tree": "a34d802cb1cb86e8eb54a0d555a4997e7d99bf55",
-      "before_blob": "a5fe77001be04ca123593908fb68ca008935d543",
-      "after_blob": "f82ffe51ababbdd9b663ceb2b113d7efc9e121e0",
+      "before_blob": "0428338e245926b3884482409ebb0a5ec9d8f90e",
+      "after_blob": "e03522cb007d2c851c29c3c16e5a866c04a6d98e",
       "status": "SOURCE_RECEIVED_UNQUALIFIED"
     },
     {
@@ -126,7 +126,7 @@
       "parent": "13c505d47c12870bc5a219c98c2aa5030f4e1277",
       "commit": "8a9333f4d20cd5c3a7d62c8db0ac278ec96d0979",
       "tree": "0744c5e1b1c588558c2dc90d2341da2f9441fcaa",
-      "before_blob": "317136e66200db1d8fc72d47ff9f8cf52b4566b5",
+      "before_blob": "09c10e2b4874f70ece8c1e4392a574db652945f7",
       "after_blob": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb",
       "status": "SOURCE_RECEIVED_UNQUALIFIED"
     },
@@ -136,8 +136,8 @@
       "parent": "8a9333f4d20cd5c3a7d62c8db0ac278ec96d0979",
       "commit": "4621b54f5af3ebe8c9f1c9db570aa0b362c2f175",
       "tree": "ef10674106afcb8adb289f857ec3ec8678f13b8e",
-      "before_blob": "b3df27bfafad8508c85d77ba24a4b8a4622a7878",
-      "after_blob": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e",
+      "before_blob": "e621934162b1e6b34a1749841f6183ee4873f132",
+      "after_blob": "baa23467163a0e9344fe3c1d78dcc87cb707fd56",
       "status": "SOURCE_RECEIVED_UNQUALIFIED"
     },
     {
@@ -146,8 +146,8 @@
       "parent": "4621b54f5af3ebe8c9f1c9db570aa0b362c2f175",
       "commit": "68735918a76846ff135ba656a42e5f7c86aa35dc",
       "tree": "99a233a872f468b019a7fde3528671cda5dfb57f",
-      "before_blob": "b49b0ef89dfdd07f51730a7034aef0b84516082a",
-      "after_blob": "f7099d5e06db8c76fe5d6549f8d167f965569c35",
+      "before_blob": "fb608faed315aded73780821d1ee7fb1b28e346d",
+      "after_blob": "ee5fe3adb1320c7879170028c852498d90ad935c",
       "status": "SOURCE_RECEIVED_UNQUALIFIED"
     },
     {
@@ -177,7 +177,7 @@
       "commit": "147a6090c398eb0ce060d56d6f8f43218897fa50",
       "tree": "02785bae1108c6c0226afcf0720e2e77dca32708",
       "before_blob": "ABSENT",
-      "after_blob": "f9984077d684c918f1c1d7d218449be635e6f4cd",
+      "after_blob": "5555cabc7ac7d1e22d728db55f908b3ab1dc9aae",
       "status": "SOURCE_RECEIVED_UNQUALIFIED"
     },
     {
@@ -186,8 +186,8 @@
       "parent": "147a6090c398eb0ce060d56d6f8f43218897fa50",
       "commit": "121cd79474d8a7c495477f90111532b099e3afa5",
       "tree": "47757cd66987aeda7d51d83382b9a55c787379ff",
-      "before_blob": "246745524719dffdd0396166282a3382f1759bf3",
-      "after_blob": "a714930c92090556127fa2559c2d91f58fdae434",
+      "before_blob": "cc7a8a5a6c6176aa0057399c52853f7a04c54cc0",
+      "after_blob": "bffb615c61bd8077e4037d40993f4f35f9088e8e",
       "status": "SOURCE_RECEIVED_UNQUALIFIED"
     },
     {
@@ -196,8 +196,8 @@
       "parent": "121cd79474d8a7c495477f90111532b099e3afa5",
       "commit": "78a9d1598119c815e5ea7a0185aa7b7ecc8929a1",
       "tree": "ce0e0cb929d2dd317e84862ba424f27c269e3c56",
-      "before_blob": "e5dc5194c885c5adbf2d243fff70a3a551935c47",
-      "after_blob": "78808f3a52ddb2171a60225ce89fca0a5bc6a959",
+      "before_blob": "e5b646179255d5444a5c4184819b5b0ad4faa76a",
+      "after_blob": "8a176ad12544fb3a58d06748cc2ab88caa42b5ae",
       "status": "SOURCE_RECEIVED_UNQUALIFIED"
     },
     {
@@ -207,7 +207,7 @@
       "commit": "e6eab186b11a0d6518719532c8a4a555492bc42d",
       "tree": "272ad2bf5aefca0a4a19fc4368683350e13fbeb7",
       "before_blob": "ABSENT",
-      "after_blob": "71395196b1d4244c7c435addd69d0d4b5c7df2bd",
+      "after_blob": "0dcf67ac0b2fccec299f520452bb4c667aa62600",
       "status": "SOURCE_RECEIVED_UNQUALIFIED"
     },
     {
@@ -217,7 +217,7 @@
       "commit": "770de5132a6634b2df26d5769ebb170133ff4643",
       "tree": "be70c1a5d1f6a64aec57698333fb425935e9e353",
       "before_blob": "ABSENT",
-      "after_blob": "515fa0a01cb9e00cbc914714df6835f5eaa3ed5e",
+      "after_blob": "338fa16a24ebf7202bd3ecac970a030b4af06633",
       "status": "SOURCE_RECEIVED_UNQUALIFIED"
     },
     {

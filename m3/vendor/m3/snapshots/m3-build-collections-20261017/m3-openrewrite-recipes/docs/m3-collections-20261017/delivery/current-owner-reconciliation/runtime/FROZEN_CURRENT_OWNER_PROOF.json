@@ -1,7 +1,7 @@
 {
   "receiverBase": "a918e588dd11d5ff7e0a6d4efaa89bb1679a9798",
   "publicApiExact": true,
-  "frozenMappedOracleSha256": "97ad3fe4a018378ba4e605d2130f1219ac6b0f90bdf7c3d84a42a083474748c0",
+  "frozenMappedOracleSha256": "c06830ecf0c8cb1d872fde9cf5e2c8c1d3e08c53f0b423d77b7d0ca60d4f1ff6",
   "observations": [
     {
       "label": "before",

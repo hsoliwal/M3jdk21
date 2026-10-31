@@ -1,5 +1,5 @@
---- before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
-+++ after/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
+--- before/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java
++++ after/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java
 @@ -141,23 +141,7 @@
      public static long[] selectLong(long[] orderedRows, byte[] rowStates, int requiredMask) {
          Objects.requireNonNull(orderedRows, "orderedRows");

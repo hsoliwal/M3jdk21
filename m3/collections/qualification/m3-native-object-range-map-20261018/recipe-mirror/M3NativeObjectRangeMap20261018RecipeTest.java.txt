@@ -37,10 +37,10 @@ final class M3NativeObjectRangeMap20261018RecipeTest {
         "M3ObjectRangeMapSelfTest.java.txt",
         "M3ObjectRangeMapTest.java.txt");
     private static final List<String> DIGESTS = List.of(
-        "8bed87ee1b2b884fa0bbd0934472305698bb7b7561a7bc0c0d6a772977818317",
-        "0ffd19f51b13ff26f14e795d4779c9c656a078699623ef28efc9b36461ce04cc",
-        "f78aff3fdd0dff9d7e8faa685a92f26ba1a41d29c1c9a07d46a1af76b46a6381",
-        "55267424febd8d04b5ecf040582b73d7c0b1e831bdef2581d07ff20f98c1cd2a");
+        "319398e3dad77d4773aabba0405345f1842bc385415e63242e3d997f802d4386",
+        "a896c280666e9f2a4026f86bff29558ce0cdc2a331c4e574c6d587c255bf83e9",
+        "cffa1740a7bb1b8cfdd5e62378af26657ced83fe1e9ad1e8ccf09267c3a601c5",
+        "51c18f26295a775d642051ad0fe818c17369cbabb6e111809b36a3714456b702");
 
     private static String source(int n) throws Exception {
         try (var input = M3NativeObjectRangeMap20261018RecipeTest.class

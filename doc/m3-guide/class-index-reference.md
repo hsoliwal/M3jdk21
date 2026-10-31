@@ -143,7 +143,7 @@ Only the described member-admission errors are wrapped. Discovery/class-level re
 
 ## Actual tests and runtime prerequisites
 
-[CBProbe](../../test/jdk/jdk/internal/mindex/cb/com/m3/cb/CBProbe.java) and [VmFixture](../../test/jdk/jdk/internal/mindex/cb/com/m3/cb/VmFixture.java) are the direct source evidence read for this owner:
+[CBProbe](../../test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/CBProbe.java) and [VmFixture](../../test/jdk/jdk/internal/mindex/cb/jdk/m3/cb/VmFixture.java) are the direct source evidence read for this owner:
 
 - `bridge` defines same-named classes in distinct loaders, checks delegation, hidden/bootstrap/primitive/array roots, weak round trips, bridge modes and absence of fixture initialization; compact snapshots exercise authoritative bridge fallback
 - `core` compares class names/flags/interfaces, complete declared-method sets and field/method round trips with reflection; checks records, sealed permits, hierarchy including arrays, owner mismatch refusal, 1,000 negative name lookups, repeated-root fingerprint stability, different-closure digests and the class-count budget
@@ -156,4 +156,4 @@ The [CB tooling README](../../m3/tooling/cb/README.md) documents recipe/strict-c
 
 The inspected [Class.java](../../src/java.base/share/classes/java/lang/Class.java) and [VM.java](../../src/java.base/share/classes/jdk/internal/misc/VM.java) do not install M3CI/M3CB dispatch or automatic counterpart attachment. The explicit bridge reads original Class operations where required. The full matched image, Java SE/reflective behavior, class unloading/redefinition, GC/CDS/JVMTI/JFR, native/HotSpot Class routing, platform matrices and CPU/retained-heap/native-memory evidence remain separate gates. String storage's experimental VM admission does not promote this metadata family.
 
-The [canonical porting invariant](../../m3/docs/m3jdk21-porting-invariant.md), [name map](../../m3/docs/name-mapping.json), per-file licenses and [full-family receiver](../../m3/synexia-import/current-full-borrow/README.md) remain authoritative. Documentation does not advance the ordered String → arrays → collections → AST/compiler → remaining-families receiving phases or create a runtime dependency on the donor workspace.
+The [canonical porting invariant](../../m3/docs/m3jdk21-porting-invariant.md), [name map](../../m3/docs/name-mapping.json), per-file licenses and [full-family receiver](../../m3/m3-import/current-full-borrow/README.md) remain authoritative. Documentation does not advance the ordered String → arrays → collections → AST/compiler → remaining-families receiving phases or create a runtime dependency on the donor workspace.

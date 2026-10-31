@@ -38,7 +38,7 @@ jobs:
         run: |
           set -euo pipefail
           actual="$(sha256sum m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskWindow.java | awk '{print $1}')"
-          test "$actual" = "ca85b13d1fb115ca6ff0a3b39cb6dc185000a78911f6a4db818afb0e9d1b46ec"
+          test "$actual" = "e837290b8adb9c11e7b3250e4f5351a0c19d89f9f029db8595dc42eaad7e4dc8"
       - name: Build original Java21 owners and isolated test JNI library
         shell: bash
         run: |

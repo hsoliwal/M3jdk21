@@ -21,8 +21,8 @@
     "canonical_source_payload_count": 193,
     "new_receiver_metadata_count": 14,
     "apache_handoff_rows": 125,
-    "ledger_sha256": "a49dbe43fe9ac11edb01a951874a179f4124d7257315c5310d5d8a6b0d6f0df7",
-    "packet_sha256": "89d402fc68c6b6134ebd2735353cad445a01fc9a03ff2a9cef1d99de74308b5a"
+    "ledger_sha256": "fd426ca89928018f06a5644d41779842f091ca1f8c8d19ce80dc60c9fa4d4e2e",
+    "packet_sha256": "7b51bd0347114a44b30efcef82dd6dea6c5455304ba164efef44cca7731f9a2b"
   },
   "source_A_ledger": {
     "path": "docs/M3-SCALE/provenance/M3_FILE_PROVENANCE.tsv",
@@ -38,8 +38,8 @@
   "policy_owner_seals": [
     {
       "path": "m3/compatibility/check_m3_public_target.py",
-      "sha256": "7ece6e41605bbd118af789b18be1e0b6458a41ae7327f68f48caf8512c92db50",
-      "git_blob": "00f08f3115f37632604670ac1eb2b91fce06d906",
+      "sha256": "bc2d6ac8e6f2c2ef31f39a90f24cf1f1e064e50b16f31083d8583c425b66ca10",
+      "git_blob": "cb8242ca0be52a81d6790ddd5d980ab96ab863c1",
       "bytes": 7784
     },
     {
@@ -56,8 +56,8 @@
     },
     {
       "path": "m3/runtime-integration/verify-m3-intake.py",
-      "sha256": "d3c6e016fb79a03e1bbeb726fe9dc7ee0b20fa4f0f612b48096926dc66311c97",
-      "git_blob": "bd5429024db9e958d6b043c5befb4d9b60194f4d",
+      "sha256": "6f16a12a564589cb6055699f70a41e7de99716d55900efc70ed4601dafe9e3c5",
+      "git_blob": "6567fdd037bdc1944afc2694101fb6eff3780f3b",
       "bytes": 4750
     },
     {
@@ -68,8 +68,8 @@
     },
     {
       "path": "m3/compatibility/m3-recipe-home-policy.tsv",
-      "sha256": "2f529274bd63bed4d6ca3f1035e40c8fc2323a44cf1e43f14671c8b2464b392b",
-      "git_blob": "ac14256f695ea2757c3005380db48487c7406003",
+      "sha256": "dbad0b1e16411668d1edc25f550a9a7c9485c8f6c546ade8a56124bd9e30fa29",
+      "git_blob": "84dc0a45de8a3ce22d92144436d601df6ab248f6",
       "bytes": 5536
     },
     {
@@ -126,13 +126,13 @@
   "command_cwd": "/workspace/scratch/87fb3604f641/m3-implementation/M3jdk21",
   "evidence_files": {
     "LICENSE_LEDGER.tsv": {
-      "sha256": "a49dbe43fe9ac11edb01a951874a179f4124d7257315c5310d5d8a6b0d6f0df7",
-      "git_blob": "fa6e3c968675ff8a6e501453e62c5fcf6e36e3b9",
+      "sha256": "fd426ca89928018f06a5644d41779842f091ca1f8c8d19ce80dc60c9fa4d4e2e",
+      "git_blob": "2cda8225079fa68e9d5a8bbad4107d407731e3cb",
       "bytes": 127903
     },
     "APACHE_HANDOFF.tsv": {
-      "sha256": "89d402fc68c6b6134ebd2735353cad445a01fc9a03ff2a9cef1d99de74308b5a",
-      "git_blob": "c5df1dae9ff86225832618bc14c1d3a4783a09a9",
+      "sha256": "7b51bd0347114a44b30efcef82dd6dea6c5455304ba164efef44cca7731f9a2b",
+      "git_blob": "035b977e99a3ec01164be237b882a230009a0239",
       "bytes": 95220
     },
     "POLICY_GATE.log": {

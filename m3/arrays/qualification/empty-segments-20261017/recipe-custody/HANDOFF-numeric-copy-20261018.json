@@ -12,11 +12,11 @@
   "existing_host_controls": [
     {
       "path": "prepare.py",
-      "sha256": "9b0b3d93c787c9a56036cddb2b044aef30f6fa8a1fa20fa5a2edae46dfd1e62c"
+      "sha256": "7c2063fa5aa88d0872fff0157413a1d2fdca4f00d01c787f8650969e8b514014"
     },
     {
       "path": "receive.py",
-      "sha256": "db258f16e1841f6f5191c1c969c20314a8d143bfa6558b60f684bea440cc1712"
+      "sha256": "e81744965f37cb890e00f6c1c7e50f4dae44c68eedafdf46565a7e105bab5474"
     },
     {
       "path": "ENGINE_SOURCES.tsv",
@@ -24,15 +24,15 @@
     },
     {
       "path": "src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java",
-      "sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43"
+      "sha256": "fa8a8e63fd445c0fbcd877315044c6e5c36f779db6e8a11797e03ab805e5903f"
     },
     {
       "path": "contract/test_prepare.py",
-      "sha256": "f504f1dcfafb24fd87f8f677643b45eecc74674881e16bf727b76c4e6a4d1856"
+      "sha256": "79c4335d02ca2179301d617d9ae447b778f2f12361e379ff04ad77c0237e7933"
     },
     {
       "path": "contract/verify_receiver.py",
-      "sha256": "a4d82df8b31e707afe7caa5e76524d191f285e2887dbfdfa95cfdc382ae01f7d"
+      "sha256": "a400589821da1c448b3c2354aef91c7a6fd596cf265b2baca097494135126d4c"
     }
   ],
   "existing_engine_sources": [
@@ -64,11 +64,11 @@
       "evidence": {
         "SDK_INPUTS.tsv": {
           "path": "evidence/numeric-copy-20261018/recipe-numeric/SDK_INPUTS.tsv",
-          "sha256": "1f6796cfb9dc805b44223e02efe05596147be06052447c9f9d6d6bf7016a3365"
+          "sha256": "04132a7313abe03064f33c3c0f3572e136cf7074406c610dac436a5d73559846"
         },
         "SDK_RESULTS.tsv": {
           "path": "evidence/numeric-copy-20261018/recipe-numeric/SDK_RESULTS.tsv",
-          "sha256": "0f4c412e6b4ade2c05bb7afcec22efd626e89eebf0278762fad32c71ee593043"
+          "sha256": "d4e670b57140271fbf5f6d0cf0c372d618bfd806c19a4d282b090a885c1b278d"
         },
         "SDK_TESTS.xml": {
           "path": "evidence/numeric-copy-20261018/recipe-numeric/SDK_TESTS.xml",
@@ -81,7 +81,7 @@
   "mirrored_files": [
     {
       "path": "HOST_CAP_LINEAGE.json",
-      "sha256": "536adf69f0e86fa8eb5ecbe441f936a164578399c8633af861238f7678e54557",
+      "sha256": "81deb8a04803da7f9e3f8c6f412c487266c9199fbd4082d9b3162a19c7ae781e",
       "bytes": 1847,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/HOST_CAP_LINEAGE.json"
@@ -97,7 +97,7 @@
     },
     {
       "path": "authoring/numeric-copy-20261018/prepare_numeric_candidate.py",
-      "sha256": "7eb9e66ea6b004b425e4bb0f1165be2d0667d04111fdebf9fd40282ac4d0d505",
+      "sha256": "1aab6c44210b9e2869e086c9fbfabdb93dde4d9b33dc3574ac0df662922a8b24",
       "bytes": 5227,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/authoring/prepare_numeric_candidate.py"
@@ -105,7 +105,7 @@
     },
     {
       "path": "catalogue/numeric-copy-foss.tsv",
-      "sha256": "108b91dba8e98eefcfab1ff463bafbc7cf91206d15b506e816566de759c62141",
+      "sha256": "540caddf45180197ec8bd52037e08f96f63dcd8a52a3757f29ddd8a21e65efb3",
       "bytes": 4044,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/numeric-copy-foss.tsv"
@@ -113,7 +113,7 @@
     },
     {
       "path": "catalogue/numeric-copy-results.json",
-      "sha256": "aec98ec60ff5757aa570d44e9fcadd4803421c9614d5448e80ce11cb72f3f853",
+      "sha256": "cbba8f8ddd52fceaf98fce42ce1c3b43b6ad56580684b9a8d9e7a5ab6914dd0b",
       "bytes": 17466,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/numeric-copy-results.json"
@@ -121,7 +121,7 @@
     },
     {
       "path": "datasets/m3jdk21-numeric-copy/DATASET.json",
-      "sha256": "cf8dbe96e95421b68ffd10405954bc2d3fb10492d93500e1851ba4c194bdec16",
+      "sha256": "99608e69f06ff6d7574f0103ea27d567c8589cf4835291d0b84877e44695a03c",
       "bytes": 489,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/DATASET.json"
@@ -137,7 +137,7 @@
     },
     {
       "path": "datasets/m3jdk21-numeric-copy/MODES.tsv",
-      "sha256": "3ca80832d5055372c861442da4828a73562ddcbc4b9e9d86c83b4783983260f5",
+      "sha256": "6314b44848422ab9439e3b6e6afbfbb2b7074ecec05c7979cdeb761d22c08f0c",
       "bytes": 589,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/MODES.tsv"
@@ -145,7 +145,7 @@
     },
     {
       "path": "datasets/m3jdk21-numeric-copy/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy.yml",
-      "sha256": "ba9317a196c04c9190f017c852b22a4af335896b1ab915584ef56aa55977def1",
+      "sha256": "b2943a754509e0225efd4e4f2a91199ad77bda7ba7ab901e639bbb7146797d33",
       "bytes": 534,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy.yml"
@@ -153,7 +153,7 @@
     },
     {
       "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0003-M3ArrayCopySizeAgent.java.txt",
-      "sha256": "d73537b80f827d774fbd0aa1918919a2e1747b9cc0b26d0b9c2c257b314e5585",
+      "sha256": "f1d6631ddd126bbd9f8eed49fd4a3b1d02600675dabecec0ee2ddc849df525b3",
       "bytes": 531,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0003-M3ArrayCopySizeAgent.java.txt"
@@ -161,7 +161,7 @@
     },
     {
       "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0004-M3ArrayNumericCopyCostProbe.java.txt",
-      "sha256": "cca6bab0a6b6ecccd952591a67c2c7a3f4599b56e8d44857bdc0b39028b5dc62",
+      "sha256": "b741edde8f4ea770b4d82aab1c0687cafded48401fe7972d536e09a4d8f1698d",
       "bytes": 11658,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0004-M3ArrayNumericCopyCostProbe.java.txt"
@@ -169,7 +169,7 @@
     },
     {
       "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0005-M3Arrays.java.txt",
-      "sha256": "3221d674ac9947c97d50967659176aa5bdf3db6a51e7e3574daa3d0792a6d83d",
+      "sha256": "a7f4c973aa2a29fd457365bad5faeb421f559b19a3a419694e86642edacf4bd4",
       "bytes": 22433,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0005-M3Arrays.java.txt"
@@ -177,7 +177,7 @@
     },
     {
       "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0006-M3ArrayNumericCopySelfTest.java.txt",
-      "sha256": "546e85b54b595e5a8e49a2fb4959539b0641dc007c0bf807bfd77542a0568a45",
+      "sha256": "d55c1fbb487ae38ed2c9b07555dc784944b0bc8136272c6377be7cd2bf3d08dd",
       "bytes": 19856,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0006-M3ArrayNumericCopySelfTest.java.txt"
@@ -185,7 +185,7 @@
     },
     {
       "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0007-M3ArrayNumericCopyTest.java.txt",
-      "sha256": "1f15ea9c2ae6f93e6bbe5952c72ae68cf4dc50831f82557cf2a3cf519f7ff83a",
+      "sha256": "2dec6e0405f8abbbcbbc8bc38f51f65464454b1d5336b6677dfe6b1b3152ab33",
       "bytes": 378,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0007-M3ArrayNumericCopyTest.java.txt"
@@ -193,7 +193,7 @@
     },
     {
       "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/manifest.tsv",
-      "sha256": "a0eff138a454b42d38fe6d625c6ea43ef7ff3d02b419244b746211493f74f509",
+      "sha256": "2721d4fdab81be694faf6ff7f0db6c813be62f5cccdcb3c25084b88b0fd228e5",
       "bytes": 991,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/manifest.tsv"
@@ -201,7 +201,7 @@
     },
     {
       "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/pre/0005-M3Arrays.java.txt",
-      "sha256": "8d6afc24c677adb7ba612071d34453c8a7d8b9e1a81ac27fb06bc3f62c673edd",
+      "sha256": "87b3f76e04880c80a5bbf31e2cfe66fc7567d9b96ec5139cdf31536442ba58c7",
       "bytes": 17309,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/pre/0005-M3Arrays.java.txt"
@@ -209,7 +209,7 @@
     },
     {
       "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0001-CATALOGUE.json.txt",
-      "sha256": "702c36947088f5a894b9d76726ee20ebbfd61eb14a64b5ef35e83a2865b5bfd5",
+      "sha256": "aeeecf589fa9b07eae2474e2df0bcb115de18b580b7b3d9b83ff2566f3bd121f",
       "bytes": 8147,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0001-CATALOGUE.json.txt"
@@ -225,7 +225,7 @@
     },
     {
       "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0008-ALGORITHM_CATALOGUE.tsv.txt",
-      "sha256": "50e6381eed8e06fe9c073298b8a4cf20ad853df096887c6c8510a40bedce6569",
+      "sha256": "e225689ee0fc93496070e819f7b637aea299c3b677d3c72c833408343b4de72c",
       "bytes": 3406,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0008-ALGORITHM_CATALOGUE.tsv.txt"
@@ -233,7 +233,7 @@
     },
     {
       "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/manifest.tsv",
-      "sha256": "4369705d4578ac4c296ab6c818dc49db0461fcb14b358abf839e364748288a3a",
+      "sha256": "7e557e8d3a5131f7ba1209cae40b706249ce2fa3689b481337f1294424b3311e",
       "bytes": 504,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/manifest.tsv"
@@ -241,7 +241,7 @@
     },
     {
       "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/pre/0008-ALGORITHM_CATALOGUE.tsv.txt",
-      "sha256": "1aad547fe2f419cf2f265a8f1d7c492779c1bbc86ef685bfafd47516a98a276e",
+      "sha256": "3ab761465800d4fcb67c4a1024174292ee983b617db8708e1c8d451185730cdc",
       "bytes": 2752,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/pre/0008-ALGORITHM_CATALOGUE.tsv.txt"
@@ -257,7 +257,7 @@
     },
     {
       "path": "evidence/numeric-copy-20261018/fixture/SDK_INPUTS.tsv",
-      "sha256": "ca2677dba86f46e0bc5ffff14f5fd97e6eadc34c6b519906e002a94989f09692",
+      "sha256": "8dcce92b792b9b3d853fc70713068d9eaa2442c6c619edb6e2664ae46e96262d",
       "bytes": 4218,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/fixture/candidate/SDK_INPUTS.tsv"
@@ -297,7 +297,7 @@
     },
     {
       "path": "evidence/numeric-copy-20261018/fixture/receiver/RECEIVER_RECEIPT.json",
-      "sha256": "193cc4b28b309488be77b518ff610d80d9dbfc1721f0b77cb252a655e8c20a6d",
+      "sha256": "be98293a8cae1b541740e08a1799380b24eecca1352e5e9853fc17182b8d18b7",
       "bytes": 1523,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-fixture-proxy/receiver-proof/evidence/RECEIVER_RECEIPT.json"
@@ -449,7 +449,7 @@
     },
     {
       "path": "evidence/numeric-copy-20261018/initial-module-warning/baseline-copy-contract/commands.json",
-      "sha256": "c089a23e768cc9e044d9dad189b12c195fd3a9ca2e1805e01637b2ae5accfa14",
+      "sha256": "6c2db5255b27770a82abd77162d28d9be4dba7e9cf23dcf2a0e337910363339c",
       "bytes": 1255,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/baseline-copy-contract/commands.json"
@@ -473,7 +473,7 @@
     },
     {
       "path": "evidence/numeric-copy-20261018/initial-module-warning/baseline-seams/receipt.json",
-      "sha256": "d7673688e35c7d872b8f459c2e63caa5e435796a11f1d2954863baf399d0d077",
+      "sha256": "645f809b4713e4e11b14dd2c167dc384307350d30fd1d144227e7ee0f457b00a",
       "bytes": 2645,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/baseline-seams/receipt.json"
@@ -481,7 +481,7 @@
     },
     {
       "path": "evidence/numeric-copy-20261018/recipe-numeric/SDK_INPUTS.tsv",
-      "sha256": "1f6796cfb9dc805b44223e02efe05596147be06052447c9f9d6d6bf7016a3365",
+      "sha256": "04132a7313abe03064f33c3c0f3572e136cf7074406c610dac436a5d73559846",
       "bytes": 4673,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/SDK_INPUTS.tsv"
@@ -489,7 +489,7 @@
     },
     {
       "path": "evidence/numeric-copy-20261018/recipe-numeric/SDK_RESULTS.tsv",
-      "sha256": "0f4c412e6b4ade2c05bb7afcec22efd626e89eebf0278762fad32c71ee593043",
+      "sha256": "d4e670b57140271fbf5f6d0cf0c372d618bfd806c19a4d282b090a885c1b278d",
       "bytes": 1301,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/SDK_RESULTS.tsv"
@@ -521,7 +521,7 @@
     },
     {
       "path": "evidence/numeric-copy-20261018/recipe-numeric/receiver/RECEIVER_RECEIPT.json",
-      "sha256": "7bd5894a8159a5de4d495b8a391d1e418b69a605b0b2d984732c66ab9271d18d",
+      "sha256": "a7c49697469ad9ff1d016396b22c81c8c52ab3cd164f3e079a34396f123efaad",
       "bytes": 1580,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-numeric-v2/receiver-proof/evidence/RECEIVER_RECEIPT.json"
@@ -681,7 +681,7 @@
     },
     {
       "path": "evidence/numeric-copy-20261018/refused-input-v1/SDK_TESTS.xml",
-      "sha256": "8d7e8099e64d381e98b5aaad8d9bc1c5a5fd997ed681117c946f7f671b30466d",
+      "sha256": "f517ea5b4f36c8c42f5b017320729c2b776d03746e9f1c4c765601a99f54cb25",
       "bytes": 27459,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-numeric-v1/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
@@ -689,7 +689,7 @@
     },
     {
       "path": "evidence/numeric-copy-20261018/refused-input-v1/maven.log.txt",
-      "sha256": "89e07342dd65a0e84281fe1bb5e627c64adeab96b5d84e6d1f9c87cb8de548ce",
+      "sha256": "15c4770d78a131e57ae4c37f0bec72ef5deaffff16720a72c510d80b97fd172c",
       "bytes": 16553,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-numeric-v1/maven.log"
@@ -697,7 +697,7 @@
     },
     {
       "path": "evidence/numeric-copy-20261018/refused-input-v1/receipt.json",
-      "sha256": "a7bbc445ba2f9e4899ae2279ab04b2ecee0e8d7895b2fbba04b74db7c039dd1d",
+      "sha256": "5b1a9c52002e670a30b3f7f781c828eacada52eb269957db156cfe4142cbee5b",
       "bytes": 1077,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-numeric-v1/receipt.json"
@@ -817,7 +817,7 @@
     },
     {
       "path": "evidence/numeric-copy-20261018/resources/receipt.json",
-      "sha256": "dc1b57f8e2ea249ebc3a2f50dca5a3d0e8307beda329bcf8215679a0b262ad27",
+      "sha256": "a6bbfb315426db6c211e1a3548c8dd3d94b04332fc9272cb3c9dde768fe14a7c",
       "bytes": 71387,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-resource-v2/receipt.json"
@@ -961,7 +961,7 @@
     },
     {
       "path": "evidence/numeric-copy-20261018/semantics/receipt.json",
-      "sha256": "38a762ae2ece9308c99489ccc7e3a0edf30d3aa5183acc28e895cfc66aa8273c",
+      "sha256": "5c2160f81349065715f22a0739812161d69af04ac2584fa6bb8ebb564c9808f9",
       "bytes": 13709,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/receipt.json"

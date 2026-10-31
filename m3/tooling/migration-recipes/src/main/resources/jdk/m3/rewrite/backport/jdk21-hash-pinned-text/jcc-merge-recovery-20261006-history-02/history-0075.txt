@@ -36,7 +36,7 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-transport-adapter/FILE_SEALS.json",
       "bytes": 1600,
-      "sha256": "2102f85bd93143fd60431fd26a8069bdff2a5e4a2e6616deb6d6f934dc5191f8"
+      "sha256": "84a08c0a6e0cc74be746125f0d775656ebacd3bf06bd77466403e42181d25e90"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-transport-adapter/INPUT_SEALS.json",
@@ -51,12 +51,12 @@
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-transport-adapter/REVIEW.md",
       "bytes": 7280,
-      "sha256": "03f15a70c1ac11b52005af86f2bc193599709427f39ae250234fbf9bfbf8b626"
+      "sha256": "e87b84c716d35e57721a30b694cb89ae863fd3cbe49892be2470e8a6897b7cb2"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-transport-adapter/inspect.py",
       "bytes": 10963,
-      "sha256": "c80763ab3a3796d4f7dc8a22596dc96c060bef801b9a8fa845109ce044d36d97"
+      "sha256": "5dfd98db43d938c31ee9147ebf77e939f96ca493036650e2f08e4bf6ff156a43"
     },
     {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/publication/FINAL_MANIFEST.json",

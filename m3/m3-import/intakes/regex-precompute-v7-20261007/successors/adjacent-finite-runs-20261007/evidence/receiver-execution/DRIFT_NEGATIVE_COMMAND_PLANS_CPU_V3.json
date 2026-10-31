@@ -1,6 +1,6 @@
 [
   {
-    "targetPath": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+    "targetPath": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexProgram.java",
     "beforeEachCase": "After successful M3 second apply, validate all schema/authority/receipts, append original bounded drift marker to one task-owned target and save exact two immediate hashes.",
     "argv": [
       "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
@@ -53,7 +53,7 @@
       "EXCEPTION_ACCESS_VIOLATION"
     ],
     "afterEachCase": "Require exact Maven IllegalStateException cause/Replay+Manifest frames, EXIT1, no VM failure and both unchanged hashes; restore only the deliberate marker from exact pinned M3 template; no retry.",
-    "requiredMavenCause": "java.lang.IllegalStateException: source drift: m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+    "requiredMavenCause": "java.lang.IllegalStateException: source drift: m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexProgram.java",
     "requiredMavenExecution": "--- exec:3.5.0:java (replay-exact-regex-adjacent-finite-runs)",
     "requiredMavenFailure": "[INFO] BUILD FAILURE",
     "historicalDirectSourceFrames": [
@@ -63,7 +63,7 @@
     "CPUAdapter": "Borrow corrected exact Maven source frames and V3 all-schema/receipt-before-write law from first regex use; no regex CPU defect history implied"
   },
   {
-    "targetPath": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+    "targetPath": "m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexTrigramQuery.java",
     "beforeEachCase": "After successful M3 second apply, validate all schema/authority/receipts, append original bounded drift marker to one task-owned target and save exact two immediate hashes.",
     "argv": [
       "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
@@ -116,7 +116,7 @@
       "EXCEPTION_ACCESS_VIOLATION"
     ],
     "afterEachCase": "Require exact Maven IllegalStateException cause/Replay+Manifest frames, EXIT1, no VM failure and both unchanged hashes; restore only the deliberate marker from exact pinned M3 template; no retry.",
-    "requiredMavenCause": "java.lang.IllegalStateException: source drift: m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+    "requiredMavenCause": "java.lang.IllegalStateException: source drift: m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexTrigramQuery.java",
     "requiredMavenExecution": "--- exec:3.5.0:java (replay-exact-regex-adjacent-finite-runs)",
     "requiredMavenFailure": "[INFO] BUILD FAILURE",
     "historicalDirectSourceFrames": [

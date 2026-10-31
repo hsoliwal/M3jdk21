@@ -1,32 +1,32 @@
 [
   {
     "bytes": 23035,
-    "git_blob": "edec2ae3a82bde34159abd9a4d1c670ad59f031f",
+    "git_blob": "4ea2db8d3b2bfec5f720ef499b8b697186718cb9",
     "path": "m3/core/src/jdk/m3/text/M3LexiconPrecompute.java",
-    "sha256": "662253bc7936943e97d911b7c15f96032e72fdbd1a9222ba47eba9506a66f490"
+    "sha256": "6211294287120ca3135e76f39313125e6c846f64b005e2cea7afa39503256ed1"
   },
   {
     "bytes": 11009,
-    "git_blob": "b952a245b2724140904bb666669c2880ce32cd64",
+    "git_blob": "ce34ac405c41b3980e558efc688a5ebc1f37b47b",
     "path": "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java",
-    "sha256": "8e6156376ea9548971b78bb876dc3968195266f04c17c5b061d7f5e4b52f367d"
+    "sha256": "a273220cdd1a2b20857ccba086394c0a0a726cc3f2711e9eb7fdadbaffb08256"
   },
   {
     "bytes": 12189,
-    "git_blob": "5b44feced8c7d38d2dc25c3b5dbd27d2d2a0ca6d",
+    "git_blob": "16f40baeb952907372ef961527560057eed8efb1",
     "path": "m3/core/test/M3LexiconPrecomputeTest.java",
-    "sha256": "fdc8f742adc96d93a6ab3e332c293d7dfdea97b458d9e8442694c8e11e511e7a"
+    "sha256": "86816e02860c013aed830a387d368fe2498210446565f246518532f7d9ce2cf2"
   },
   {
     "bytes": 8903,
-    "git_blob": "cef8b5f91b7dc666627ddf5a5eb1c8a4611ebf73",
+    "git_blob": "3b0178d24606074195a5524844fc9954fdf25fe6",
     "path": "m3/core/test/M3RopeTextIndexTest.java",
-    "sha256": "1374a5b14a32a58324f50f980731a94e5e938235fbfdf27c2e679f0ea1681c92"
+    "sha256": "98d34219367796a53690d4f276523ee0f0f8d0b4a4127be2b806a3f177f1c74a"
   },
   {
     "bytes": 1401,
-    "git_blob": "7a6a5f35d3882582a54cade426304d865bae7794",
+    "git_blob": "bdb4a83fde87be3454dddcce5bb95f3831c0a4a9",
     "path": "m3/run-rope-proof.sh",
-    "sha256": "b08fdf74f4ec98ab849c5cf8f13d55dc33cc430ef83522572e0412dc4044be00"
+    "sha256": "deadc3340e0cefecaf78095204a9e6c70363e6b7f8680b64621fb57110503b08"
   }
 ]

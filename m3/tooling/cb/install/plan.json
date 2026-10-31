@@ -122,11 +122,11 @@
     },
     {
       "path": ".m3/openrewrite-recipes/src/main/java/jdk/internal/m3/bootstrap/M3BootstrapTaskRecipe.java",
-      "sha256": "58bac6968ebd2cce6f43f338c289db14435b3ef05ed2abc13402275285b89462"
+      "sha256": "d5b73971cf4107ffe5d9d2678d5a536491cd1552a2739818013e5ba4da1c3424"
     },
     {
       "path": ".m3/openrewrite-recipes/src/main/java/jdk/internal/m3/bootstrap/M3BootstrapInventoryRecipe.java",
-      "sha256": "05ac05e7f3cb7549d26866a61dec0edf19515317c95f73db82d1c517cad88ef5"
+      "sha256": "19450c4b44091c4f37689be1fa45bb30b822cd2f962a323d0991529fc65f6a71"
     },
     {
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3VI.java",

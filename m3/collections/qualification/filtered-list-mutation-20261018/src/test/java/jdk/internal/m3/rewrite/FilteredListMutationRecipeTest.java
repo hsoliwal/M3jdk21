@@ -36,7 +36,7 @@ final class FilteredListMutationRecipeTest {
     private static final String NAME = "m3jdk21-filtered-list-mutation-20261018";
     private static final String ROOT = "/jdk/internal/m3/rewrite/hash-pinned-java/" + NAME + "/";
     private static final String TARGET = "m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java";
-    private static final String BEFORE = "b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d";
+    private static final String BEFORE = "f1e3e21c37cbe084ef6b9446b86293d5039cd9b2bc6c1bf86d63a86793e3b8d5";
 
     private static InMemoryExecutionContext context() {
         return new InMemoryExecutionContext(failure -> { throw new AssertionError(failure); });

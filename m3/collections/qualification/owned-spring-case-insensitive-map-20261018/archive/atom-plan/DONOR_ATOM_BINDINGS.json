@@ -7,8 +7,8 @@
   },
   "prior_foss_decision": {
     "bytes": 7201,
-    "git_blob": "1273561125e7e7c46c60bb7320f6562fb3141c0d",
-    "sha256": "7dedd1159bf6b1f707bc3f44a876228774bb933b2769890eceb8fa907954ecdf"
+    "git_blob": "516cffd5a275df95c03bb06f31c6d2099ae077f7",
+    "sha256": "83327575a2f26098a85b6c3a6621ef54b255e9e18da9ab71af0732a52334a2ab"
   },
   "schema": "m3-spring-before-code-serial-atom-source-custody-v1",
   "source_rows": [
@@ -27,12 +27,12 @@
     {
       "bytes": 8702,
       "commit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
-      "git_blob": "ade59880b8c9b2bee1b32ae67ca9d29b7382d998",
+      "git_blob": "e0957cfd8a7a5abfa1c0c5e7bade32997e5ed657",
       "license": "Apache-2.0",
       "local_path": "donors/firstparty/M3LinkedHashMap.java.txt",
       "repository": "hsoliwal/M3jdk21",
       "scope": "SOURCE_REFERENCE_PENDING_SELECTIVE_REUSE",
-      "sha256": "5495a8200ff4030a8faa66fde2f8bb9ccca52bdcbccd200a76147698289c2c0c",
+      "sha256": "236099129854887ba6205be23e42d5e6af9ead09de045419f7c940d0f0bd77e6",
       "source_custody": "EXACT_PRIOR_INVENTORY_BYTES_UNCHANGED",
       "upstream_path": "m3/collections/src/main/java/jdk/m3/collections/M3LinkedHashMap.java"
     },
@@ -51,46 +51,46 @@
     {
       "bytes": 3512,
       "commit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
-      "git_blob": "30cf137538353ac8e91514fff7c5db3903da8819",
+      "git_blob": "dab4d257bf82c8dbdf8fec04e1ac0d84ac7e4a83",
       "license": "Apache-2.0",
       "local_path": "donors/firstparty/M3SlotSpliterators.java.txt",
       "repository": "hsoliwal/M3jdk21",
       "scope": "SOURCE_REFERENCE_PENDING_SELECTIVE_REUSE",
-      "sha256": "4ee2b86ea682c64da881d36eb5b4aadc4ba6640389f2adbfdc8dff4d44cf4070",
+      "sha256": "fe7db5946cb21eecac31dc478899c4864bba09b7b302357868af296ea2e0f554",
       "source_custody": "EXACT_PRIOR_INVENTORY_BYTES_UNCHANGED",
       "upstream_path": "m3/collections/src/main/java/jdk/m3/collections/M3SlotSpliterators.java"
     },
     {
       "bytes": 10870,
       "commit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
-      "git_blob": "a7d20300717661c26897f0b69e1e5a83400a62ad",
+      "git_blob": "a10ee53abb325476ac32c7210712e30cc304182c",
       "license": "Apache-2.0",
       "local_path": "donors/firstparty/M3SlotMap.java.txt",
       "repository": "hsoliwal/M3jdk21",
       "scope": "SOURCE_REFERENCE_PENDING_SELECTIVE_REUSE",
-      "sha256": "0499cb1f5825429fcf7434665c6785bcffa59ed4a975974a29856ad60317e806",
+      "sha256": "aff532279cb68435619ef39977f4709125d9061c7a67259df10cfc33c7bfd66f",
       "source_custody": "EXACT_PRIOR_INVENTORY_BYTES_UNCHANGED",
       "upstream_path": "m3/collections/src/main/java/jdk/m3/collections/M3SlotMap.java"
     },
     {
       "bytes": 8519,
       "commit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
-      "git_blob": "42a33b9af05d9ec4e1e9c1833a27fa5dd008564b",
+      "git_blob": "28cc6e54823713e9bffa7117a7e153a4c03af079",
       "license": "Apache-2.0",
       "local_path": "atom-plan/donors/M3ObjectSlotStore28.java.txt",
       "repository": "hsoliwal/M3jdk21",
-      "sha256": "f8c19b2dd04c6198f5061685d7fb7890531620970510fe666ce5338b115d3b12",
+      "sha256": "600de4f9468f57b5ba79e076699a11207041db197b54cd244a23f38bc022a7e2",
       "source_custody": "EXACT_UPSTREAM_GIT_BLOB_VERIFIED",
       "upstream_path": "m3/collections/src/main/java/jdk/m3/collections/M3ObjectSlotStore28.java"
     },
     {
       "bytes": 2595,
       "commit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
-      "git_blob": "2dda612d7cfdc39d8138c17a85308dc9d084b28b",
+      "git_blob": "ae1e43c52351d205ebfc7e57ca5a230a49410399",
       "license": "Apache-2.0",
       "local_path": "atom-plan/donors/M3Address28.java.txt",
       "repository": "hsoliwal/M3jdk21",
-      "sha256": "5fa8a82e3655a675aa0d1e21ba456a7dae272776c605eeba4af22a9dbc7eaa56",
+      "sha256": "fe5ed12462265b92a5297d54bce5102db9def6d5f53f468b4b1515435bc2e858",
       "source_custody": "EXACT_UPSTREAM_GIT_BLOB_VERIFIED",
       "upstream_path": "m3/collections/src/main/java/jdk/m3/collections/M3Address28.java"
     }

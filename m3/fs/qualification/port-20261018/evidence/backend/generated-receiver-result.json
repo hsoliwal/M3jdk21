@@ -281,372 +281,372 @@
   "source": [
     {
       "path": "src/main/java/com/m3/fs/M3ColdFileImage.java",
-      "sha256": "40c3f6feedb8d70a7089f807bce46c094397b4b478a49bcafed219138885e07b",
+      "sha256": "bb789cc540b1f0f62641fbebfa3c255fbf6b1b24cd142b56af19debe854caad5",
       "bytes": 13057
     },
     {
       "path": "src/main/java/com/m3/fs/M3Columns.java",
-      "sha256": "a732ebe478c6fc9501ba0422a6ad9966696b975f932ed54c9ab6b49b2d75de35",
+      "sha256": "faf9f3ce80c5719b18dc06329289629273b7c0197caccd24ee508fa147ea64ae",
       "bytes": 4173
     },
     {
       "path": "src/main/java/com/m3/fs/M3ContentId.java",
-      "sha256": "7657036de0e76f98eb2c8a09bb025dc4fc591644639086e190a1cdf057dc172d",
+      "sha256": "bc3961dfd71ff05ed9969f6bde671182502432830d4c383e7882ecd5f766c433",
       "bytes": 2347
     },
     {
       "path": "src/main/java/com/m3/fs/M3DirectoryContentStore.java",
-      "sha256": "7dafbdf74748ca9e5878733ee9409583a6668a20a699b42bc7764788a30a0c95",
+      "sha256": "fd5aadc3415e48c6214d3d53aa5cfe3b9f7fe8d73b38bfd43a391034d098a7e5",
       "bytes": 36994
     },
     {
       "path": "src/main/java/com/m3/fs/M3DirectoryTable.java",
-      "sha256": "4d3094934e60ca20048c0d8c18bd03e0c313f3fc2d0645f8458110aaca82c2de",
+      "sha256": "5638a831c3584fbed74eb3e85d63939c6b47822b9e289860280f225bcbc57abe",
       "bytes": 7270
     },
     {
       "path": "src/main/java/com/m3/fs/M3FS.java",
-      "sha256": "08a635f4451f9bf07a498d3781ab97d18129f582135af16ec8ad35974a357b39",
+      "sha256": "09361b560a5fa4fa677be046b4b12fa665b5738ff5300fe7b9823aa9ea01d2b0",
       "bytes": 38399
     },
     {
       "path": "src/main/java/com/m3/fs/M3FileManifest.java",
-      "sha256": "46ff92bf74504ea33deee085bd3dab2650210de26bb882c0819a300bece13101",
+      "sha256": "cdc1b86ef02f57bc018b28447446e3aacd3ae37b36207ca6e4e55a36212f06c8",
       "bytes": 5993
     },
     {
       "path": "src/main/java/com/m3/fs/M3FileSourceFactsImage.java",
-      "sha256": "0ebee7f185131e316e2829d878c4a140498481f5109a978ef1826ffd0b54c7c3",
+      "sha256": "41601594d1387b31f9e831a7dfd8c671948253355dd2d478eccf66691bd79472",
       "bytes": 11688
     },
     {
       "path": "src/main/java/com/m3/fs/M3FileSystemStore.java",
-      "sha256": "652f66fff68eef743623e3b04e5f3126f24d2ac98adb99d9e81402eff67e3624",
+      "sha256": "53d43c44df1417c479799a365ee811f85b9fa092fb7cce3d28cdb2ef965a406e",
       "bytes": 21655
     },
     {
       "path": "src/main/java/com/m3/fs/M3FileTokenRange.java",
-      "sha256": "006ec8b8dd7b1772839eee097e59abd1d43e0d173ede4b7519ff8781d658be7a",
+      "sha256": "c24d03ec2bfbeea684b5d153dbe5d6e1bcd463712bb3efa242dd13586bd371e8",
       "bytes": 354
     },
     {
       "path": "src/main/java/com/m3/fs/M3FileTokenRangeSha256.java",
-      "sha256": "e1ee27db82dc0c5215ef901674656f78dff1a07ac69cb7d734ae6e3e08854c02",
+      "sha256": "15cffdffd66346b15ea5e6291fd09a387d5d524a313e9be6072e2ca942a78ed5",
       "bytes": 787
     },
     {
       "path": "src/main/java/com/m3/fs/M3FsFeature.java",
-      "sha256": "fbc345dc5488d16dc7bcb0062d86e56fc0003f1ad0d96f1803cdea56324783e1",
+      "sha256": "e17d9574e8e60baa09271e7d1c7977d2d38069638cd909a9cd967d8006960895",
       "bytes": 2757
     },
     {
       "path": "src/main/java/com/m3/fs/M3FsIndexImage.java",
-      "sha256": "1fccc201530437ba9431ead28d4bbabd010cbad41472eebe5978eb3b6e0f9acb",
+      "sha256": "699d3ae12fee169fc3199acfa8dd122fc31897142ee522fc71834de4185fcc81",
       "bytes": 6332
     },
     {
       "path": "src/main/java/com/m3/fs/M3FsNative.java",
-      "sha256": "7e03b8e4d895b65190241ef38207cb912d5a45b55b0dc0ae149469db01929280",
+      "sha256": "7851cc6828428646087032a516e5be7ba3271becdec34020c198212dacc55898",
       "bytes": 20729
     },
     {
       "path": "src/main/java/com/m3/fs/M3FsPrecomputeBundle.java",
-      "sha256": "9b7c35f30a3c402393b3941e1c46d828f362ca2c266b41eed3445c0465bf26ce",
+      "sha256": "1f6a718e72aaeb403323be5634bb66309f60533afdb36ae551adc2923f438573",
       "bytes": 46126
     },
     {
       "path": "src/main/java/com/m3/fs/M3FsPrecomputeCatalog.java",
-      "sha256": "524649c6a20fbb5af962de044d86c8196af76c5b83f2e7810ba3c82ecf2cb191",
+      "sha256": "cfe4d6fd28a3238c2cdae9305402e17088fa9e9a3968812849835231f6acf1a2",
       "bytes": 21957
     },
     {
       "path": "src/main/java/com/m3/fs/M3FsPrecomputeWriter.java",
-      "sha256": "ae68bee5e20302e0a6405ee89a31a5b8b3d44b7447459f56862f452f40195ff7",
+      "sha256": "dcb7a0e77195f6e6ef64ec5198f3ade0eee09541ce0871ec574ce17de784e203",
       "bytes": 19391
     },
     {
       "path": "src/main/java/com/m3/fs/M3FsProgress.java",
-      "sha256": "83549a41c697cfff931cdbb2f062b569f23f7e34744251d8370993e37a42e8bf",
+      "sha256": "bd6789774d86c7b6d149a86008e5a555ad05a287b6beed3fa5137df8b1a40e5f",
       "bytes": 1200
     },
     {
       "path": "src/main/java/com/m3/fs/M3FsRegexImage.java",
-      "sha256": "b93d172742211e0ec597461439c65f574c825108efbf7b7744e8727bf4d0b357",
+      "sha256": "7d8e1b3a933dcafe237392f0c1d1ff778062e7f81d50de602562760037021360",
       "bytes": 9204
     },
     {
       "path": "src/main/java/com/m3/fs/M3GenerationRoot.java",
-      "sha256": "73eaf23ec20a378fe282387577ebe84a1400fc8d756738fb3d83443550a3f561",
+      "sha256": "e28536c8332519d428975f727af55841b8307d5c87c5b3c6a7e2a6e4d85bdc17",
       "bytes": 8452
     },
     {
       "path": "src/main/java/com/m3/fs/M3IdPairs.java",
-      "sha256": "9ee4bfb1a89e2bf5f3db62595a7a408d4dec206367214adad6a676391faabdd7",
+      "sha256": "97d7e3386aaea60f141145c735fc78f2af53c31174f8d2a697dc1fe789a4bbd4",
       "bytes": 2950
     },
     {
       "path": "src/main/java/com/m3/fs/M3IdTable.java",
-      "sha256": "52ac98b8a6c02151891af19a60fdb122e4bf8a68844e1c2046fa84434c36171d",
+      "sha256": "897cedef0c4554a84adeee576eb1504befde35a0d0e4fb648cdcf3bca87acae2",
       "bytes": 3306
     },
     {
       "path": "src/main/java/com/m3/fs/M3MappedObject.java",
-      "sha256": "0c80a747bd801597f74f69f7914d50021c550d0ca5555cb332e899066d3a79c2",
+      "sha256": "7f33a25ef7cbc7d259c38a33d4c8f3ce8da808641514975701dd850b28a2f3bd",
       "bytes": 6951
     },
     {
       "path": "src/main/java/com/m3/fs/M3NativeContent.java",
-      "sha256": "90f98d43f670a793ce982dc7416dea8fad7bedd2d9216279e277953487704188",
+      "sha256": "81b0fd0dc98cc95f0a83c56f3dff43ef6042f1d90e6d574dc26faf6bcaf77273",
       "bytes": 13357
     },
     {
       "path": "src/main/java/com/m3/fs/M3ObjectKind.java",
-      "sha256": "c04f9095cfda3f85d5e33df073379663c1352f3aab457c85b48f0b88f37602f4",
+      "sha256": "bca2bf8dcb24f7b0b04c448a3bdd9b07786d8d5d378782268ac14ce67746396e",
       "bytes": 483
     },
     {
       "path": "src/main/java/com/m3/fs/M3ObjectRef.java",
-      "sha256": "8c2affd6b3249b322def29d8bdc8f1c10aafe40119239773175316f7a3ddb3ac",
+      "sha256": "59ea4d14a0f69fcb93c5d5d3ac6954886015f128043ecda91b83d0889a8ce408",
       "bytes": 556
     },
     {
       "path": "src/main/java/com/m3/fs/M3PrecomputeCache.java",
-      "sha256": "8cad0547b2a7a4aa6311500582f96b6c22c463f2ed21fd99f5e89cd1bfb277eb",
+      "sha256": "dadaa8a6944d88d70d5c4563daa7011f6600784c886b04d7af27013a3af910ef",
       "bytes": 16864
     },
     {
       "path": "src/main/java/com/m3/fs/M3PrecomputeKey.java",
-      "sha256": "9404e54a2ff15ca98152f7794f885fdbb1a4788f2f6f65a12af2c970bb747501",
+      "sha256": "3e8aa88681c0953d6e3c354d55d657d114ab6b1fad20a6070d6980de567bd248",
       "bytes": 6199
     },
     {
       "path": "src/main/java/com/m3/fs/M3PrecomputeResult.java",
-      "sha256": "802c93df94319db48bdf150ca2d5d6f7ff530c756fa625c8a7f56eee6856b5d2",
+      "sha256": "74ebc55281816fd61ae6e0fe11a262b5b8372b411a076e464e710ec48de09c2b",
       "bytes": 3028
     },
     {
       "path": "src/main/java/com/m3/fs/M3PreparedBytePatternMachine.java",
-      "sha256": "68e28408e91d884a8fe20c9377d408a1bdb863e91463f40b4755d31ada73b218",
+      "sha256": "c9f431a05d954b37f527ee969d3e27695f0f19308e690b7a03abe972d33fcb98",
       "bytes": 509
     },
     {
       "path": "src/main/java/com/m3/fs/M3PreparedByteSegments.java",
-      "sha256": "c1f02edf685d23466099bb498462e3247b8ae66903e19516e4519e95ac595b3f",
+      "sha256": "4c681a197ccd8dee786fe7c04770b3ce6b5ba2922080aaa6571000ae1a3e1008",
       "bytes": 623
     },
     {
       "path": "src/main/java/com/m3/fs/M3RefTable.java",
-      "sha256": "87884b7deb102e8ae88e9ed960bb0919f217a0619953b478839083c265d99b19",
+      "sha256": "fd6b7010c12430264458ad0f05e2d70fdd76e469cde7cc76658ec22f624c34e2",
       "bytes": 3765
     },
     {
       "path": "src/main/java/com/m3/fs/M3SnapshotStore.java",
-      "sha256": "5bfc1ead9dd0fc7b8d24525b817e01120626d4ffee20be3b73d72b613c99acdc",
+      "sha256": "50ff28db1bfb55f7c31617248adec1171ca7e678da4d01f135e93679792c2ffc",
       "bytes": 19233
     },
     {
       "path": "src/main/module/module-info.java",
-      "sha256": "8778a1cdaaa17ef4adb9cd2a071d3307e12cb1c990541e4473669301ff892f0c",
+      "sha256": "ca5e86176d7c7fe258aec69f0d81ae1c25bf377f108e3cb7eec148049e6686e5",
       "bytes": 200
     },
     {
       "path": "src/test/java/com/m3/fs/M3ArrayMetadataCompatibilityTest.java",
-      "sha256": "3b67ea3fec33ba602b57bc978394d07b0f436f4543a3096a34664df787426f10",
+      "sha256": "62cd4578e6d1a3a56b7ecbbf2a31ead308d594148765b52d28faea2a308e825d",
       "bytes": 6606
     },
     {
       "path": "src/test/java/com/m3/fs/M3ArrayMetadataContractTest.java",
-      "sha256": "106259e9055726a7c9909044074beeeecb82c1593ef6e3e05469c9def1e3c849",
+      "sha256": "47d70ff9c38d87c9854f1a3d7e0b41d21f4a8d9c8070dd6c046aac565f70bc78",
       "bytes": 9041
     },
     {
       "path": "src/test/java/com/m3/fs/M3ColdFileFixture.java",
-      "sha256": "94e427adb278093ae71e7efa18e2e6a26a1033a2c433da96325ed96bf470474d",
+      "sha256": "f70f2d684eee1146a03a3a571cd3c92f38eb56333b0782ee2d41bef19d60add4",
       "bytes": 10368
     },
     {
       "path": "src/test/java/com/m3/fs/M3FSNativeTest.java",
-      "sha256": "4889a392e7a12ff5b81eb757bc406ffacd336d4af591c48564af8b4a96661dfd",
+      "sha256": "5eb8791e6ae96ca0431aece30f2ab4f737a88b2a8853cc2e723a5078cdfc9190",
       "bytes": 9536
     },
     {
       "path": "src/test/java/com/m3/fs/M3FSScrubTest.java",
-      "sha256": "b3b5b8dee9212cd81ac9f7634934e7dd95767f2d25b4d47d2a25e0c81e348608",
+      "sha256": "277d829ed4bd77ae42b043a75554435ba4243bf3ac2cb2dc06df075e32302dca",
       "bytes": 3118
     },
     {
       "path": "src/test/java/com/m3/fs/M3FileSystemStoreHeadGenerationPrecomputeTest.java",
-      "sha256": "29f36012121a8ec45a1b4677fb862c1d0022bd456cd07f83d44929091784017b",
+      "sha256": "58a773f4377b289e4612f3063fd823f53a5ae0017dfff2ad3ffdf36a22086d67",
       "bytes": 3622
     },
     {
       "path": "src/test/java/com/m3/fs/M3FsCatalogVarargsCompatibilityTest.java",
-      "sha256": "2af9a1453541652101c7c73315c2e79132b4d6f35f655776d97f906f07933217",
+      "sha256": "f156bc10453c9213f403c4f35c770d0697eed9e832e5867c446eb8664ef625fc",
       "bytes": 11049
     },
     {
       "path": "src/test/java/com/m3/fs/M3FsCheckedInodeIoTest.java",
-      "sha256": "ef23a1678b007a02bd4c9ab4d22cd042979e8990128f111ee779447d48cb9982",
+      "sha256": "d7e93df0ac1727854984fcef62eae1577911f891d281ab97bda92c7e1f306798",
       "bytes": 5502
     },
     {
       "path": "src/test/java/com/m3/fs/M3FsCompactAsciiDfaTest.java",
-      "sha256": "b0d242ea5ac7b548216a2e45db895448212f16010e0caa51ef14f86c37de8e4b",
+      "sha256": "486c72a89452bb029d50191123461f355d782a155c914b0ebb454b00a2d1cb43",
       "bytes": 4963
     },
     {
       "path": "src/test/java/com/m3/fs/M3FsFeatureTest.java",
-      "sha256": "921b286100db221a5e13d8612b8ad720b87efba55b4cfbe7ea8631b8adc3aeee",
+      "sha256": "0662aaea2d3e7fb8efc231a6047905d7925bf8b67ec48828a5f1a6de0ebd60ed",
       "bytes": 2668
     },
     {
       "path": "src/test/java/com/m3/fs/M3FsGpuPipelineMappedSetTest.java",
-      "sha256": "1ccdf87f2c1c1ee965bb275440113cd0acf4d2977fcb6d2cc995ea81bf392448",
+      "sha256": "581ec7305b1c3275db71e45fbc547ba71877ef37487ab4441b15510b5eac00dd",
       "bytes": 4174
     },
     {
       "path": "src/test/java/com/m3/fs/M3FsHotPathSelfTest.java",
-      "sha256": "84c56a764f31e8752cb88170646f5c8685a1b699a6f76cc264ddf3512e1d5bed",
+      "sha256": "ed473bc0606b1ca1e732c8281c3a3b44e130c43f0213d870e63eeb0258aeb5eb",
       "bytes": 6025
     },
     {
       "path": "src/test/java/com/m3/fs/M3FsHotPathTest.java",
-      "sha256": "1c99266d33d2e0a20f7a872170c592effd6966126a1c0efef763a42eddd49566",
+      "sha256": "29975883db203f239048563418e92fc081a0d0bf9f59a49ffacf02327251200c",
       "bytes": 882
     },
     {
       "path": "src/test/java/com/m3/fs/M3FsImageBindingTest.java",
-      "sha256": "8343698b8445ca8e4d9435c7b2c87340638eb2669e0412d83945b52afa7d2b1f",
+      "sha256": "9d02a0fbebefc7454ba02e7aab21609417c5179753caadc3a15f7c69e1c13c43",
       "bytes": 4391
     },
     {
       "path": "src/test/java/com/m3/fs/M3FsIndexedSelfTest.java",
-      "sha256": "5030c07fae6aba23cf708841112149b4bf5c6179e3e2aff5dbe27ca662f9ab14",
+      "sha256": "9a5853fe0a0ee87db508a613bd32fb44e069e6b72c5659b60199b3f55c980176",
       "bytes": 14242
     },
     {
       "path": "src/test/java/com/m3/fs/M3FsIndexedTest.java",
-      "sha256": "8562b2f4b3621cf16dae2c883f5b9ca3655f938b86246a102e19e2a8bcfeb489",
+      "sha256": "f5604850e56831410196bf91203e7e31d7e3ec2023b7db392abfa5132156b543",
       "bytes": 887
     },
     {
       "path": "src/test/java/com/m3/fs/M3FsMappedBundleViewTest.java",
-      "sha256": "02ce4978168ec84941fb6a31f6cea2b63052c6cf500adda98118fbb9d07f3d3a",
+      "sha256": "e6be1778d3063471df129ef3a6b1776d15a3f289d9cdc83162aee645d2f2e13b",
       "bytes": 5403
     },
     {
       "path": "src/test/java/com/m3/fs/M3FsNativeSemanticTest.java",
-      "sha256": "1b1286b7e1d83fe5af8a0f894fcb040efe981b3c50465e0b188f3d7485c7d759",
+      "sha256": "d294d9e138c36e7fdf0af7a5ee0b6c559dd35a59f710fdefe13b5671cb709355",
       "bytes": 4002
     },
     {
       "path": "src/test/java/com/m3/fs/M3FsPrecomputeBundleTest.java",
-      "sha256": "d328e7cd1f207baa4890c03cc7db93e0f50ffeb77afc1c9a59aafeebd632a8b0",
+      "sha256": "d82d3bca34f336c532d4f3a92f1b339b54262d5d2f569d53beb66ce2c3bc3d01",
       "bytes": 15905
     },
     {
       "path": "src/test/java/com/m3/fs/M3FsPrecomputePipelineManifestTest.java",
-      "sha256": "4b29e75b98b6a143f61cd5c1484871386517fb3c28bd698e25d3ac84dcfb49bc",
+      "sha256": "032de86d6daf42d3d5cd5afd864a99776283005f3b32f3fab9dcdb7f23d72e15",
       "bytes": 7256
     },
     {
       "path": "src/test/java/com/m3/fs/M3FsPreparedSearchStateTest.java",
-      "sha256": "0a73722a1e3edd659c73ed4442aa64430630289be01d94766d2b413ebd6ac3c6",
+      "sha256": "b843d6ccbf0b6a30080fd4d75cf09bc72e19a371e24433ac31e50104e37f60df",
       "bytes": 13239
     },
     {
       "path": "src/test/java/com/m3/fs/M3FsReadSnapshotSelfTest.java",
-      "sha256": "1f2645e8bc0094463e99326c5dfbf9b4ce9dff711455584396202caaff3e6bac",
+      "sha256": "3ae3ecb1948250a0cb2b553ca04a3e81ae8f23d116b3adc59c29c5c9503d0996",
       "bytes": 2027
     },
     {
       "path": "src/test/java/com/m3/fs/M3FsSnapshotViewSelfTest.java",
-      "sha256": "ed69961443f632e49f4bcc0ca471de2a52d56d1a487b39d9bae575189e8ea9e0",
+      "sha256": "07cd23566372148877303c1a92b764c40ca4c12eae93f16b5da70881a0b082bc",
       "bytes": 10057
     },
     {
       "path": "src/test/java/com/m3/fs/M3FsSnapshotViewTest.java",
-      "sha256": "4eee10ca7e191eba43de6c3a2085dab564e856ea293055adff279cec0f91d02b",
+      "sha256": "8ebb92d669d60cb6c24cf6e821d9f9cc19480b4b56b61e871dd5315e0b2f4399",
       "bytes": 858
     },
     {
       "path": "src/test/java/com/m3/fs/M3FsSparseFeatureTest.java",
-      "sha256": "70fdf32fc513a107336148959fadeb72d4908f8189d17d15af041fe94c875d6b",
+      "sha256": "a01d3f428311e0417488a537c46bdfa3a5840e9de29fdde22d7d4f3f4c29d0a5",
       "bytes": 4577
     },
     {
       "path": "src/test/java/com/m3/fs/M3GenerationRootDirectoryIndexTest.java",
-      "sha256": "9586165d4d214f6b65c31663493bf50cf216bce8eb4bacbb4da562d04eaa59ef",
+      "sha256": "c9857f344ba504b5ca56fc0560238db8a7d85c252d4ff4b9f7b17a4cf22379f4",
       "bytes": 4425
     },
     {
       "path": "src/test/java/com/m3/fs/M3GpuGrepSegmentsRuntimeTest.java",
-      "sha256": "6ac3fcae7c5f5706c81f24300abab9b44aab8f661de50d56a34bf7219aa91314",
+      "sha256": "8b55a06d0bd7141d63d24c0e587efc35ebcb017d9d0c56326b7dae7dcf1e94ba",
       "bytes": 2811
     },
     {
       "path": "src/test/java/com/m3/fs/M3HeadPromotionDurabilityTest.java",
-      "sha256": "2aa53dfe7bb17e9542a552b775fc90e85963254ec35c2344416ef9294744e3be",
+      "sha256": "64c99e8890bdeeae262c3304317f97b2fe8d3e5cacb7a93f34bf21a36a486b1b",
       "bytes": 4515
     },
     {
       "path": "src/test/java/com/m3/fs/M3MIndexFileTokenRangeSha256Test.java",
-      "sha256": "6f123fe685e875877f1429aa1cf565ce1f5161d44c7837ac9c2f58058f18d500",
+      "sha256": "dc88c1ab15a5bd8414f607bb6e5d6ca5d8b1c7392ae71f8e5e133a9ea4c681c7",
       "bytes": 12606
     },
     {
       "path": "src/test/java/com/m3/fs/M3MappedStorageChecks.java",
-      "sha256": "eaafc79f35001d5ed150e94989bca332704dbb64aa469d432059fd5c6a368a6b",
+      "sha256": "a6f9cc3f21f0d70b66e255ca5f0eb92f4717ef0fa4468be47f3e73f4ffb86a0b",
       "bytes": 17818
     },
     {
       "path": "src/test/java/com/m3/fs/M3MappedStorageTest.java",
-      "sha256": "1cc6fa6ee0825c0cbbfbb2b6e12f2530c8242e507273d700d7a86ed415aaa5e3",
+      "sha256": "0d6fe2c283eabaf1779042506472f998296c356a3a56e4ef5c0a912d3c40218e",
       "bytes": 751
     },
     {
       "path": "src/test/java/com/m3/fs/M3NativeContentPositionChecks.java",
-      "sha256": "e8ad33db7fe343b6053ea6059d803c1b82bfbcf121915543ba9fd891d636f7c2",
+      "sha256": "a76b3b49b3027234a420a3aac0ce4c927843e7a04909a13959134ed62df7ca23",
       "bytes": 4445
     },
     {
       "path": "src/test/java/com/m3/fs/M3NativeContentPositionTest.java",
-      "sha256": "f5d92b1f4f1801109960683387257199ab5ad501048497b1a9f4ef50abdbd08a",
+      "sha256": "ae0a5590f62d9e5dd9d74c89b000384a076718c7717773fe364e2bf6d9a87bb4",
       "bytes": 1806
     },
     {
       "path": "src/test/java/com/m3/fs/M3PrecomputeArrayMetadataTest.java",
-      "sha256": "c748a42c652f665518e46fdd9df8a1fed35cc891355d74bae9c2440bc72e5c81",
+      "sha256": "c0b4f98e015b7a41fef029e8fc8fb13e29f248bb87d70246c8b50c7ebc6b7c4c",
       "bytes": 11440
     },
     {
       "path": "src/test/java/com/m3/fs/M3PrecomputeBundleTest.java",
-      "sha256": "cfeefa6f8b7f22a4ee963be7c07a132c8fef83e50b6758ce1ec32c46697bdeb4",
+      "sha256": "cc5454dc3e763a192c7b92c823bd90a5002f3d003b30538ae84a2f340f5254a4",
       "bytes": 7732
     },
     {
       "path": "src/test/java/com/m3/fs/M3PrecomputePublicationDurabilityTest.java",
-      "sha256": "31cb48f304f9a2ac0cc9c3da53c1c97fe09c6d256e6cbebe66d3e01c6fb14ea4",
+      "sha256": "b6fd1ec3f5f22b55ccb8289030008e2cddd9ac2ce85f63c205b9964f6dddb40e",
       "bytes": 4477
     },
     {
       "path": "src/test/java/com/m3/fs/M3SegmentedUtf16FsTest.java",
-      "sha256": "557b52db349ff06240ffdb1a62612b5dc30a37436a5002e39852c236f4b6f7ab",
+      "sha256": "11894615127dc23f3b15c9ba0fc7b0a3bb2124b4ce940cceb4ca457bdabe221a",
       "bytes": 4472
     },
     {
       "path": "src/test/java/com/m3/fs/M3SnapshotStoreSelfTest.java",
-      "sha256": "93b3e7047adc657410c59bd59550ee6c2436cc1becab178a80f471aa46548e96",
+      "sha256": "7be046c8cfb27c844f70ed87cc990f16f80053ba7bf0d7e1cd475f89dabbb9bf",
       "bytes": 7418
     },
     {
       "path": "src/test/java/com/m3/fs/M3SnapshotStoreTest.java",
-      "sha256": "4870bbbcea05c0c026cdbfd0875ea5bc4f351b2cb3be3970be680b9f35d2802b",
+      "sha256": "4edae3d255a1c97ef4f0e81c75f9a775917cdc0e9f5a80d38ce265983df45a15",
       "bytes": 329
     },
     {
       "path": "src/test/java/com/m3/fs/M3TestRegexImages.java",
-      "sha256": "d66996b98ae84e0f14b2e7131ff48dfa92c6231363634a9af27f60259dcf3924",
+      "sha256": "bce0218acedc08029b2220aa961c15d937f249c5dd3377a36a07bbe61a36eb95",
       "bytes": 2605
     },
     {
@@ -661,7 +661,7 @@
     },
     {
       "path": "src/test/resources/m3-fs-safevarargs/M3FsPrecomputeCatalog.java",
-      "sha256": "4881ecb902097947162005442c3e35ee7a4a471c5e57d1957ea1db188befc70c",
+      "sha256": "e9dc70cd5704a6ea7e787a9398f9aff0f28883c97727ae30dab1d7b245e1233a",
       "bytes": 12460
     }
   ],

@@ -187,8 +187,8 @@ def qualify():
     require(before == regular(SDK / RESOURCE / "forward/before" / TARGET).read_bytes()
             and after == regular(SDK / RESOURCE / "forward/out" / TARGET).read_bytes(),
             "fresh authentic inverse/forward recipe outputs required")
-    require(ident(before)["gitBlob"] == "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597"
-            and ident(after)["gitBlob"] == "3edc23c22362b08af00f7332ddc445a0274a6dd4",
+    require(ident(before)["gitBlob"] == "5022e9811ce9391671c794446c7772569cfd369f"
+            and ident(after)["gitBlob"] == "367ea06512321bb511fd9bbb772842ce313e69dc",
             "exact admitted range atom required")
     source_values = {}
     for row in metadata["files"]:

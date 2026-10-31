@@ -22,37 +22,37 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/hosted/qualify.py",
       "targetPath": "m3/tooling/backport-contract-current-owner/qualify.py",
-      "gitBlob": "010f29a71026001260842f4acea013e870dd0479",
+      "gitBlob": "735f880afd81739cd21313302de947d49626d202",
       "bytes": 18290
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/runtime/INPUTS.json",
       "targetPath": "m3/tooling/backport-contract-current-owner/runtime/INPUTS.json",
-      "gitBlob": "d5261c6bb8d2ec79dbeb84f71f488287487cd574",
+      "gitBlob": "9cb800ba62f60e8febbbb96be91282640c799c7d",
       "bytes": 9330
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/runtime/README.md",
       "targetPath": "m3/tooling/backport-contract-current-owner/runtime/README.md",
-      "gitBlob": "ea1b43d4872012b2e771315088fc0afb05e40732",
+      "gitBlob": "c6cd72c3c9075c7c8325411363b058b77ca41b2a",
       "bytes": 7436
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/runtime/THIRD_PARTY_NOTICES.md",
       "targetPath": "m3/tooling/backport-contract-current-owner/runtime/THIRD_PARTY_NOTICES.md",
-      "gitBlob": "15f7313f0a27dac7fea366d7b29e8a04c59f5328",
+      "gitBlob": "2a6c887fae6edf083a547e6a01d25b40d37e710f",
       "bytes": 1550
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/runtime/qualify.py",
       "targetPath": "m3/tooling/backport-contract-current-owner/runtime/qualify.py",
-      "gitBlob": "e12d631b71fecfbcd2dbaff715e15935e6a4cec1",
+      "gitBlob": "a3f8492416876547eefed9c5a2d8bc5583ddd8ec",
       "bytes": 40785
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/FOSS_REUSE_DECISION.tsv",
       "targetPath": "m3/tooling/backport-contract-current-owner/sdk/FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "97446958ac069384435bc40f9ae46364ba205d31",
+      "gitBlob": "c080d9ce7d468762b2a2cdd1bc9ff389549f646a",
       "bytes": 1493
     },
     {
@@ -64,37 +64,37 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/THIRD_PARTY_NOTICES.md",
       "targetPath": "m3/tooling/backport-contract-current-owner/sdk/THIRD_PARTY_NOTICES.md",
-      "gitBlob": "0b57cea44151abad7c11d22479b1817bcce6fd6e",
+      "gitBlob": "ce6a35d31db0acdedf761fe5aa3cc9b219e053af",
       "bytes": 2254
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/pinned-engine/jdk/internal/m3/rewrite/M3BackportContractCurrentOwnerInverseRecipe.java",
       "targetPath": "m3/tooling/backport-contract-current-owner/sdk/pinned-engine/jdk/internal/m3/rewrite/M3BackportContractCurrentOwnerInverseRecipe.java",
-      "gitBlob": "702a2160b4478193cc2ee9ff228c10f6ebe3787a",
+      "gitBlob": "42939bbbed8a51c25cd4f5674aa1a35ab7dfc1b1",
       "bytes": 862
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/pinned-engine/jdk/internal/m3/rewrite/M3BackportContractCurrentOwnerRecipe.java",
       "targetPath": "m3/tooling/backport-contract-current-owner/sdk/pinned-engine/jdk/internal/m3/rewrite/M3BackportContractCurrentOwnerRecipe.java",
-      "gitBlob": "0739a5c4027b896eeebb98a20f7ad0f58d26f16a",
+      "gitBlob": "dd37367579363e685fa020861bcd7ec9e905bb46",
       "bytes": 855
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
       "targetPath": "m3/tooling/backport-contract-current-owner/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
-      "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "gitBlob": "78d5fb68f13872164973a8918cc7886c5f548bca",
       "bytes": 10964
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
       "targetPath": "m3/tooling/backport-contract-current-owner/sdk/pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
-      "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "gitBlob": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
       "bytes": 5187
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/pins.json",
       "targetPath": "m3/tooling/backport-contract-current-owner/sdk/pins.json",
-      "gitBlob": "9f2ddf29ca66b06f5ad8a1c661fdb7429daea642",
+      "gitBlob": "f205864458b8dfa91445a26643bec1ab7b2e1859",
       "bytes": 14116
     },
     {
@@ -106,7 +106,7 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/src/main/resources/META-INF/rewrite/backport-contract-current-owner-20261019.yml",
       "targetPath": "m3/tooling/backport-contract-current-owner/sdk/src/main/resources/META-INF/rewrite/backport-contract-current-owner-20261019.yml",
-      "gitBlob": "5f3ad6e2aacd9fdb7a216cdd582ef12db204cde9",
+      "gitBlob": "0a3078ac37fc3ed3e43060c807ef51e3a486d767",
       "bytes": 804
     },
     {
@@ -316,13 +316,13 @@
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/src/test/java/jdk/internal/m3/rewrite/M3BackportContractCurrentOwnerRecipeTest.java",
       "targetPath": "m3/tooling/backport-contract-current-owner/sdk/src/test/java/jdk/internal/m3/rewrite/M3BackportContractCurrentOwnerRecipeTest.java",
-      "gitBlob": "ab67ffb13b80749990754e2771c7891f5f7a2d65",
+      "gitBlob": "ec369dba4fd3c0a842fb80bd802e6745fee7524e",
       "bytes": 16186
     },
     {
       "sourcePath": "m3-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/sdk/verify.py",
       "targetPath": "m3/tooling/backport-contract-current-owner/sdk/verify.py",
-      "gitBlob": "c1b7cd322cbd715017704896fae1cd91749c8970",
+      "gitBlob": "8ad669b3954a0958820f6962de2e55f6b1988bc2",
       "bytes": 25355
     }
   ],

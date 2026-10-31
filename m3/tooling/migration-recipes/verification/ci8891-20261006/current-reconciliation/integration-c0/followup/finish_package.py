@@ -25,9 +25,9 @@ for p in sorted(project.rglob('*')):
  (withheld if hazard else flat).append(row)
 assert len(project_rows)==43 and len(withheld)==2 and len(flat)==41
 assert {r['path']:r['sha256'] for r in withheld}=={
- 'src/test/resources/before/m3/tooling/lane28/verify-plan.py':'5ca191f85c48be0ffec139b94d0ed91e0ac58be73686773241255f651799ec4b',
- 'src/test/resources/before/m3/tooling/tq/verify-plan.py':'ff2c31f57aac81a7049612557a3757781927563bd2d7a7b598aa62a116e1d978'}
-owner=(E/'package_evidence.py').read_bytes();assert sha(owner)=='89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574';(H/'package_evidence.py').write_bytes(owner)
+ 'src/test/resources/before/m3/tooling/lane28/verify-plan.py':'d56788db191b5e3361d3e35e7f07c4395b38aec4b7c0a07dcd620620f4c4687a',
+ 'src/test/resources/before/m3/tooling/tq/verify-plan.py':'269cd10606a9de7629ec0d1f4dccce2866644f979c06958d808e107b6c9188bb'}
+owner=(E/'package_evidence.py').read_bytes();assert sha(owner)=='93a1c116c197854b0167c172581cd768d0f9098067bf0f1296607ca6ba855556';(H/'package_evidence.py').write_bytes(owner)
 write(H/'READBACK.json',{'schema':'m3.fc0.package-readback/1','status':'PASS_EXACT_PACKAGE_RECONSTRUCTION','sourceClosure':pin(H/'SOURCE-CLOSURE.json'),'bundle':pin(B/'BUNDLE.json'),'files':readback,'projectFiles':43,'artifactExcludedCount':len(cl['excludedIdentities']),'consumerQualified':False,'hermetic':False,'proofGatesExecuted':False,'parentPublication':cl['parentPublication'],'receivingOutcome':cl['receivingOutcome']})
 write(H/'PROJECT-READY.json',{'schema':'m3.fc0.project-ready/1','producer':cl['producer'],'qualifiedProject':{'sourceRoot':str(project),'logicalPrefix':'fc0/project','files':project_rows},'flatFiles':flat,'archiveOnlyFiles':withheld,'flatMirrorMavenReady':False,'archive':{'bundle':pin(B/'BUNDLE.json'),'packageOwner':pin(H/'package_evidence.py')},'reconstruction':{'entrypoint':'reconstruct.py','argv':['python3','<portable>/reconstruct.py','--portable','<portable>','--output','<fresh-extraction>'],'verifyArgv':['python3','<portable>/package_evidence.py','verify','--bundle','<portable>/bundle'],'extractArgv':['python3','<portable>/package_evidence.py','extract','--bundle','<portable>/bundle','--output','<fresh-extraction>'],'mavenExampleArgv':['<admitted-maven>/bin/mvn','-o','-B','-ntp','-Dmaven.repo.local=<admitted-cache>','-f','<fresh-extraction>/fc0/project/pom.xml','test']},'originalReceiptPathsPreserved':True,'automaticRequalification':False})
 (H/'README.md').write_text('''# Fresh Fc0 source and proof evidence
@@ -50,7 +50,7 @@ python3 ../../../../verification/ci8891-20261006/current-reconciliation/integrat
 /path/to/admitted-maven/bin/mvn -o -B -ntp -Dmaven.repo.local=/path/to/admitted-cache -f /path/to/fresh-extraction/fc0/project/pom.xml test
 ```
 
-PROJECT-READY.json pins all 43 logical files and the two archive-only fixtures. Their exact source hashes are `5ca191f85c48be0ffec139b94d0ed91e0ac58be73686773241255f651799ec4b` (lane28 verifier preimage) and `ff2c31f57aac81a7049612557a3757781927563bd2d7a7b598aa62a116e1d978` (TQ verifier preimage). This document is an unqualified publication envelope outside the project census. Reconstruction preserves source bytes and receipt paths; it does not turn later Maven execution into an original receipt.
+PROJECT-READY.json pins all 43 logical files and the two archive-only fixtures. Their exact source hashes are `d56788db191b5e3361d3e35e7f07c4395b38aec4b7c0a07dcd620620f4c4687a` (lane28 verifier preimage) and `269cd10606a9de7629ec0d1f4dccce2866644f979c06958d808e107b6c9188bb` (TQ verifier preimage). This document is an unqualified publication envelope outside the project census. Reconstruction preserves source bytes and receipt paths; it does not turn later Maven execution into an original receipt.
 ''')
 tr=[mapped(project/r['path'],TASK+r['path'],'qualified-project-flat',projectPath=r['path']) for r in flat]
 write(H/'TASK-MAPPING.json',{'schema':'m3.fc0.task-mapping/1','files':tr,'logicalProjectFiles':43,'flatProjectFiles':41,'archiveOnlyFiles':withheld,'producer':cl['producer'],'readback':pin(H/'READBACK.json')})

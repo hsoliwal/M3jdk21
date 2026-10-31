@@ -43,9 +43,9 @@ final class JccMergeRecoveryTest {
             PREFIX + "-history-02", PREFIX + "-retention");
     private static final List<Integer> COUNTS = List.of(256, 187, 6);
     private static final List<String> MANIFEST_HASHES = List.of(
-            "858bd7ce63f6904757507e6417df700fd7d0f319d421401cd48403d142c3418a",
-            "6a6b11543829324bcafa49e72a764c24fb44e398c6bcb7a76c34dcab1d094896",
-            "a8fed905d1de5d2e90a1912fc15bd9064c23a389475cd69b63ebe167cbd4fc1c");
+            "1021cb6484b2cab1ef2b04f1657ad90931ad7679bf59d8cf817936d0bf2e6cfb",
+            "6874a550ed5e8fbfb11e8138e445e07ef9eb089127995f92c5b8257cefa833da",
+            "a5c3165ae514ebcf1d074d9b2f0eec8ef18e2eec4e06f7145e04f89402b12eb9");
     private static final ObjectMapper JSON = new ObjectMapper();
     private record Target(String crate, String path, String before, String after,
                           String beforeHash, String afterHash) {}

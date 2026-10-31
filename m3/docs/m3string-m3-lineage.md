@@ -209,7 +209,7 @@ a JDK-visible execution consumer. Unused metadata is not an implementation succe
 
 The current Synexia donor snapshot is pinned at `857c4cc0ddeb73e5ea5269a1d0ef2d30057dcfa8`; its exact Java/native source
 paths and Git blobs are in
-`m3/synexia-import/intakes/jni-array-address-receiver-20261007/SOURCE_PROVENANCE.tsv`.
+`m3/m3-import/intakes/jni-array-address-receiver-20261007/SOURCE_PROVENANCE.tsv`.
 The selected files are mirrored byte-for-byte under `m3/vendor/synexia/synexia-indexstring/`
 as Apache-2.0 custody only.
 

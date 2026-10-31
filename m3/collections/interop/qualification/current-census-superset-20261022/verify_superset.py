@@ -25,13 +25,13 @@ def git_blob(data: bytes) -> str:
 # The 40-source receipt is immutable. The next generation has exactly one
 # source-sealed, Java21-syntax-only test transition and no other valid changes.
 COMPOUND_TEST_PATH = 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryArrayificationTest.java'
-COMPOUND_TRANSITION_SHA256 = 'ad81180bc4f5ee73dd008212fb575e62d50f815d673abd063e671c630789c24c'
+COMPOUND_TRANSITION_SHA256 = '27423e52d65e49331dc08b249170f197c27195636db5f92a68bc6fa59bda6c1d'
 COMPOUND_TRANSITION = (
     COMPOUND_TEST_PATH,
     '43d670c2278b4db3cb39e8c6d63eff56827c7ef8359e7c85aa8f72b892bba51d',
     '42d78b4fae7525467f0a5d4f34baf45b511e3b55',
-    '6d31a53eb94af7c3cfe08ce126ce1be1f8d7da1b09150bd72a12c602d3ab3565',
-    'e220622405432368d2c46b32f9f1c197913e7c0a',
+    '61ae67aeedc4a4a42f81f1beefc23ed43aa0c2288b6301fd7bfc1eea023fdf87',
+    '6d04f30ff77297201797c079125ebc0107906e63',
     'PINNED_TEST_SYNTAX_ONLY'
 )
 
@@ -54,8 +54,8 @@ def exact_compound_transition(receipts: Path) -> tuple[str, ...]:
 # Both a historical source and a historical donor JUnit test transition are sealed.
 # This does NOT relax the 36-owner historical proof or the 40-new-file shard proofs.
 APACHE450_TRANSITIONS = (
-    ('m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3ApacheBag.java', '5ff51272c4fd48ef11a09b9138ac2329392bb2a70e2a4fe43fab2889909d224f', '86473e61bf886a28ca3a40010b6bd25f5f34cdb0', 'bd03c0a1460f9ccbb24eed31100d86fb3d7ea05be9872971cb81ad9852ad4b36', 'ac35841fb84a28d86390843e5a3dadcb390f069a', 'jdk.internal.m3.M3ApacheBagRetain450Recipe', 'PENDING_REAL_DONOR_JUNIT'),
-    ('m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3ApacheBagContractTest.java', '737dba455e469117b94cd82a48458bcbe2e4c1fd038b0beb578dcc00ccc1982a', '4184a8b861025d80010723d4700588f075eca105', 'fa8c854c0e924a6394df83eac12bfdc062147a1f04fe1270b1de288f17b0569a', '73dd1833f5384d9404392ee9a79e19559ef865fd', 'jdk.internal.m3.M3ApacheBagRetain450Recipe', 'PENDING_REAL_DONOR_JUNIT'),
+    ('m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3ApacheBag.java', '5ff51272c4fd48ef11a09b9138ac2329392bb2a70e2a4fe43fab2889909d224f', '86473e61bf886a28ca3a40010b6bd25f5f34cdb0', 'e02ad3bd18792932b5a294ea2f51b9df35c22105e64caa5fc30b4aa439215fac', '4a88b2321a1295ce10b05ef897d6c2fa1e265a13', 'jdk.internal.m3.M3ApacheBagRetain450Recipe', 'PENDING_REAL_DONOR_JUNIT'),
+    ('m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3ApacheBagContractTest.java', '737dba455e469117b94cd82a48458bcbe2e4c1fd038b0beb578dcc00ccc1982a', '4184a8b861025d80010723d4700588f075eca105', 'c07eea575a358b7e8c4cf06a56e0d4b1807a7a9e37b50b5c927c25f2a087467f', '6ad558a5fc93bda86a00aeee6e4da1ee98541095', 'jdk.internal.m3.M3ApacheBagRetain450Recipe', 'PENDING_REAL_DONOR_JUNIT'),
 )
 
 
@@ -141,8 +141,8 @@ def verify_additions(product: Path, receipts: Path,
 # Source-history commit at which the immutable 36-owner census was authored.
 # Checking these bytes at a separate pinned checkout is not a semantic DAG walk.
 HISTORICAL_COMMIT = "a720780b1a5ab41ea27182b9b7ad873efdf533b4"
-HISTORICAL_CENSUS_BLOB = "9dbfe94767eb36c9371fd931e7513cb11e168768"
-HISTORICAL_VERIFIER_BLOB = "efe6d0f959cdc3172d6f6659f06bb486ef825291"
+HISTORICAL_CENSUS_BLOB = "9f3043103b3d63d3fdf37a17190dc85a0f918a1b"
+HISTORICAL_VERIFIER_BLOB = "cf8ccc95c7121c51551de608e47958466d42cbc9"
 
 
 def verify_historical_revisions(product: Path, receipts: Path,

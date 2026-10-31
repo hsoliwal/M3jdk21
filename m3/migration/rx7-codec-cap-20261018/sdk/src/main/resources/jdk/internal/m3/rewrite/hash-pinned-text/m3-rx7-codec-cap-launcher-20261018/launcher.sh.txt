@@ -1,12 +1,12 @@
 #!/bin/sh
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
-# Provider supervisor donor: f04b6bfc76e5a671968a478f44cf13268c04e5e9.
+# Provider supervisor donor: edad663b2e4a51e22a5e25954df237192e5b8d08.
 set -eu
 python3 -I -S -B - <<'M3_RX7_CAP_PY'
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
-# Adapted from the Apache-2.0 provider supervisor, Git blob f04b6bfc76e5a671968a478f44cf13268c04e5e9.
+# Adapted from the Apache-2.0 provider supervisor, Git blob edad663b2e4a51e22a5e25954df237192e5b8d08.
 import hashlib,json,os,pathlib,re,resource,shutil,signal,stat,subprocess,time
 import xml.etree.ElementTree as ET
 MIB=1024**2

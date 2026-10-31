@@ -27,8 +27,8 @@ public final class M3LongPathInputBudgetRecipe {
             "M3LongIndexPathBudgetSelfTest.java"
     };
     private static final String[] SHA256 = {
-            "1018c6481706dc38960aa7145b24b0274e2645ade85dc36eaef26a3a6c660e0c",
-            "5f6008e5c8c88025bb998afe7a0701711c010e88a4163c5bb960ac52f7d35920"
+            "b688d2b67f75d60ebdf7d262752ccb6340fddd0adddb7cd9e3626ea148fc0b67",
+            "5608cf97b60aa12cb6b873ac12b767ab93bd1d5e2bd8516ac65a2dca8343da61"
     };
     private static final String[] RECEIVERS = {
             "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexPathBudget.java",

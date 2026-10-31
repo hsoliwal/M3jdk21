@@ -11,7 +11,7 @@ The existing A3 consumer already pins the canonical export:
 - source revision: `a062661e91e769a00c2d027e1f04a7a0c8f9dc28`
 - source PR: `9599`
 - artifact: `com.synexia:synexia-jdk-a3-recipes:1.0.0-SNAPSHOT`
-- export manifest Git blob: `8a3e3d6e802e95dbcc7b0bf83a347887b02d6717`
+- export manifest Git blob: `2c51473e7adb6fa50fb0031ac6314a050b90feec`
 
 Those canonical source blobs are unchanged on current Synexia.
 

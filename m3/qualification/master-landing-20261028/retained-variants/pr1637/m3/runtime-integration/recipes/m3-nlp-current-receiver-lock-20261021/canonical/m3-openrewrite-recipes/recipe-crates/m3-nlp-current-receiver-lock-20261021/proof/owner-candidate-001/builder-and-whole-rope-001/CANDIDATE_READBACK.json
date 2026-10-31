@@ -1,152 +1,152 @@
 [
   {
     "bytes": 2634,
-    "path": "m3/core/src/com/m3/text/JoinedM3StringPiece.java",
-    "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb"
+    "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",
+    "sha256": "1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7"
   },
   {
     "bytes": 1093,
-    "path": "m3/core/src/com/m3/text/LexiconTool.java",
-    "sha256": "8f86470619da33cf79ce3f8c6b99e7b6a4815f1c0053c7a07985a6ea4010563a"
+    "path": "m3/core/src/jdk/m3/text/LexiconTool.java",
+    "sha256": "fb3b3a4db8bb699a326d9e2b1114ed04089400294349f97bde0ce6b73e1aa51c"
   },
   {
     "bytes": 1975,
-    "path": "m3/core/src/com/m3/text/LocalM3Arena.java",
-    "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d"
+    "path": "m3/core/src/jdk/m3/text/LocalM3Arena.java",
+    "sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4"
   },
   {
     "bytes": 2115,
-    "path": "m3/core/src/com/m3/text/LocalM3StringPiece.java",
-    "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51"
+    "path": "m3/core/src/jdk/m3/text/LocalM3StringPiece.java",
+    "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad"
   },
   {
     "bytes": 33365,
-    "path": "m3/core/src/com/m3/text/M3BigString.java",
-    "sha256": "e09815cea88c44e4da89ca8979ba247cddeee6c97b496d1aa2309a48916a90de"
+    "path": "m3/core/src/jdk/m3/text/M3BigString.java",
+    "sha256": "ec7142df904511f455e07650081db9eb6518a1fab138ea7ae44be15192cde343"
   },
   {
     "bytes": 1320,
-    "path": "m3/core/src/com/m3/text/M3CorpusProjectionDigest.java",
-    "sha256": "cf08f71d77d7598c774225d83a38d33e610e3cbceb6c360240f0d08884d5cc8e"
+    "path": "m3/core/src/jdk/m3/text/M3CorpusProjectionDigest.java",
+    "sha256": "ae0220e4bb05d7cadb660e2b2ac1fe0dc53b1d0cdce9bcc7b1d38254be2be920"
   },
   {
     "bytes": 1849,
-    "path": "m3/core/src/com/m3/text/M3CorpusSourceReceipt.java",
-    "sha256": "d1eed20264582c05671b5833ece9cc975c27d11182c32e7bd3d7c929f8aab9b4"
+    "path": "m3/core/src/jdk/m3/text/M3CorpusSourceReceipt.java",
+    "sha256": "355b97daf18ff3e65ca686ab7a952f075510ad7154c7ba865173f8161fcac0f1"
   },
   {
     "bytes": 6571,
-    "path": "m3/core/src/com/m3/text/M3FixedAddressMapping.java",
-    "sha256": "704acbd7c0899f6cb4ca47658e0ce0387d8b498ce6ca6d801f02461d2f3a0025"
+    "path": "m3/core/src/jdk/m3/text/M3FixedAddressMapping.java",
+    "sha256": "03fe4ef99c923172301d287db953b59d1aa23c5f8480ddd79c64e4485a14b863"
   },
   {
     "bytes": 11215,
-    "path": "m3/core/src/com/m3/text/M3GvasLiteralImage.java",
-    "sha256": "2c1a8b9cc9870fc5fdf8e6f8ca46af907c503346aaf6d783b74a6498fd3601cd"
+    "path": "m3/core/src/jdk/m3/text/M3GvasLiteralImage.java",
+    "sha256": "b05c40b8999993dfec75afa646ba4fac421258f0b611ab01956b878226574a3f"
   },
   {
     "bytes": 9693,
-    "path": "m3/core/src/com/m3/text/M3InstanceIndexPrecompute.java",
-    "sha256": "43af63196141d180c1d256b8420c243d99804ee480b430f31d677e57a87a041c"
+    "path": "m3/core/src/jdk/m3/text/M3InstanceIndexPrecompute.java",
+    "sha256": "2be8634db1d545bce03ba34cab2569b2adbb869b19544acd2f42bb4e02a7b5f1"
   },
   {
     "bytes": 13840,
-    "path": "m3/core/src/com/m3/text/M3LanguageCorpusManifest.java",
-    "sha256": "866fdae0189d1a84bd251fc7686f85d6953088d054fd77561210892ef6ce4c16"
+    "path": "m3/core/src/jdk/m3/text/M3LanguageCorpusManifest.java",
+    "sha256": "c642619a95a3454f04df71335f2992a59a49f177e515c1e2688af7c514016867"
   },
   {
     "bytes": 1245,
-    "path": "m3/core/src/com/m3/text/M3LanguageGrammarSupport.java",
-    "sha256": "32e55e0ddc412cbbdb4c3fe22b659fe9660bed914215c92662ccaf00b189b1c7"
+    "path": "m3/core/src/jdk/m3/text/M3LanguageGrammarSupport.java",
+    "sha256": "f2f6f8dcb6b0a0c91569a9eee0ea199c0e77a24594033534351408b2c8ccfff3"
   },
   {
     "bytes": 23035,
-    "path": "m3/core/src/com/m3/text/M3LexiconPrecompute.java",
-    "sha256": "662253bc7936943e97d911b7c15f96032e72fdbd1a9222ba47eba9506a66f490"
+    "path": "m3/core/src/jdk/m3/text/M3LexiconPrecompute.java",
+    "sha256": "6211294287120ca3135e76f39313125e6c846f64b005e2cea7afa39503256ed1"
   },
   {
     "bytes": 4563,
-    "path": "m3/core/src/com/m3/text/M3NumberSpace.java",
-    "sha256": "99bc5c5be96dfb4e0db2f5dbc837c568333ffc6853922cee6ba6566130513443"
+    "path": "m3/core/src/jdk/m3/text/M3NumberSpace.java",
+    "sha256": "6c70f843dca2bc099c99de24fb21987986e6f0ed03a79677ad88f65d27f0273e"
   },
   {
     "bytes": 9740,
-    "path": "m3/core/src/com/m3/text/M3RopeTextIndex.java",
-    "sha256": "ff2495c01b8df68a01167e29daa4ea4a6af25650e59c5cc705cc2fdc7cfa0141"
+    "path": "m3/core/src/jdk/m3/text/M3RopeTextIndex.java",
+    "sha256": "d78d4f2f7d23c0a1927d86c8f059749cbb7d3a11e7d5152aae26135effb9f34a"
   },
   {
     "bytes": 767,
-    "path": "m3/core/src/com/m3/text/M3StringPiece.java",
-    "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479"
+    "path": "m3/core/src/jdk/m3/text/M3StringPiece.java",
+    "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755"
   },
   {
     "bytes": 17149,
-    "path": "m3/core/src/com/m3/text/M3WordRows.java",
-    "sha256": "df02e863f8f7fffd3f33337ebf62afe701deb66496a0fb621c136d4771ebf631"
+    "path": "m3/core/src/jdk/m3/text/M3WordRows.java",
+    "sha256": "d79d6ab8396271548b4adc2ef5393425ff8b98f5b9b7fc8a7a39d4fc0294c765"
   },
   {
     "bytes": 1721,
-    "path": "m3/core/src/com/m3/text/M3WordRowsNative.java",
-    "sha256": "5ef1e0f4ca2fc345ee009589f1bb96d216892556d60e3f19b882d46b544aea36"
+    "path": "m3/core/src/jdk/m3/text/M3WordRowsNative.java",
+    "sha256": "b81a8520792794a5256137c1c47960b10930237904907d4c8d0a4980386a00e5"
   },
   {
     "bytes": 40020,
-    "path": "m3/core/src/com/m3/text/SharedLexiconCatalog.java",
-    "sha256": "8dbd1bd1a100efeb4b3a31a29fcdb083fa01d8037801e746c455f2b9a030b6e7"
+    "path": "m3/core/src/jdk/m3/text/SharedLexiconCatalog.java",
+    "sha256": "bc04f014808aafaddd3a1bef661c094386a5a20e9f5e4e7e0ffc8c51ddbb153b"
   },
   {
     "bytes": 28182,
-    "path": "m3/core/src/com/m3/text/SharedLexiconFamilySidecarCatalog.java",
-    "sha256": "0482b42cb8029cadbf929c76e46bccb80367668ec119aceac702f5d5c3686a6d"
+    "path": "m3/core/src/jdk/m3/text/SharedLexiconFamilySidecarCatalog.java",
+    "sha256": "c6dbfb86e076388c923f8aa2c05b37b799474bb51bb84da0e26dea477edbadc8"
   },
   {
     "bytes": 11400,
-    "path": "m3/core/src/com/m3/text/SharedLexiconImage.java",
-    "sha256": "50527e3afcc418dfc09f0a6f6608e05db70db5ad440dc3f6a67d8099ec2f9837"
+    "path": "m3/core/src/jdk/m3/text/SharedLexiconImage.java",
+    "sha256": "d4fcdb58e6a33d82fa18526bd4cd380869661e03f6a2beb721030b13e1789401"
   },
   {
     "bytes": 11039,
-    "path": "m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java",
-    "sha256": "92fd76c3f0d3c10c90ea4cb52485d2dbceda513fa3d794d22ec67fd153fd62ed"
+    "path": "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java",
+    "sha256": "07c498aafa158278bf2fea6ee54bae7f09bf037051f1f8207511597ccef02929"
   },
   {
     "bytes": 13436,
-    "path": "m3/core/src/com/m3/text/SharedRelatedLexemeCatalog.java",
-    "sha256": "76fbadbc182633ac22c449924335b7636c530cd2a8dc13fb0dc2d56a29afb42c"
+    "path": "m3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java",
+    "sha256": "bcf6d9216b549a4bf1c4c7a6bdb414c54f659be2567fcb99cdbadaafc964f049"
   },
   {
     "bytes": 494,
-    "path": "m3/core/src/com/m3/text/StorageIdentity.java",
-    "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
+    "path": "m3/core/src/jdk/m3/text/StorageIdentity.java",
+    "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354"
   },
   {
     "bytes": 9495,
-    "path": "m3/core/src/com/m3/text/SynexiaLangDexSourceEnvelope.java",
-    "sha256": "90b81d145a795dae62e57afe850ad7d38704fe4fcfad69614ff4cd598eb0a084"
+    "path": "m3/core/src/jdk/m3/text/M3LangDexSourceEnvelope.java",
+    "sha256": "7093a00bd467cd4a477512eaae58546588e5881a6cf3dd081fdc843c88b7120d"
   },
   {
     "bytes": 17908,
-    "path": "m3/core/src/com/m3/text/SynexiaPrecomputePayload.java",
-    "sha256": "60eea8ba2ee14fc11e4225d2e53a2facd690c55dc17b47424f36d94c623e0b1d"
+    "path": "m3/core/src/jdk/m3/text/M3PrecomputePayload.java",
+    "sha256": "0839cd6529f9328407cb711f2d03593131ebc07f7e0bbe23c97ddb26b1c5b446"
   },
   {
     "bytes": 227,
     "path": "m3/core/src/module-info.java",
-    "sha256": "2b6c29db60f536419e3755cdf1a83d21388a2e2bd602838d8cebe516f940964c"
+    "sha256": "7a6e9eecdc3153219b6e222332e00b4cffb2a9e3b55bfaeb9c87e9a29ba009f2"
   },
   {
     "bytes": 12189,
     "path": "m3/core/test/M3LexiconPrecomputeTest.java",
-    "sha256": "fdc8f742adc96d93a6ab3e332c293d7dfdea97b458d9e8442694c8e11e511e7a"
+    "sha256": "86816e02860c013aed830a387d368fe2498210446565f246518532f7d9ce2cf2"
   },
   {
     "bytes": 8903,
     "path": "m3/core/test/M3RopeTextIndexTest.java",
-    "sha256": "1374a5b14a32a58324f50f980731a94e5e938235fbfdf27c2e679f0ea1681c92"
+    "sha256": "98d34219367796a53690d4f276523ee0f0f8d0b4a4127be2b806a3f177f1c74a"
   },
   {
     "bytes": 1401,
     "path": "m3/run-rope-proof.sh",
-    "sha256": "b08fdf74f4ec98ab849c5cf8f13d55dc33cc430ef83522572e0412dc4044be00"
+    "sha256": "deadc3340e0cefecaf78095204a9e6c70363e6b7f8680b64621fb57110503b08"
   }
 ]

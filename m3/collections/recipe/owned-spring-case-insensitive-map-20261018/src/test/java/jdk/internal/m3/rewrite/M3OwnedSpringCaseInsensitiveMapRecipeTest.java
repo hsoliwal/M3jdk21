@@ -32,7 +32,7 @@ final class M3OwnedSpringCaseInsensitiveMapRecipeTest {
     private static final String YAML="/META-INF/rewrite/m3-owned-spring-case-insensitive-map.yml";
     private static final String NAME="jdk.internal.m3.OwnedSpringCaseInsensitiveMap20261018";
     private static final String TARGET="m3/collections/implementations/spring-case-insensitive-map/src/main/java/jdk/m3/collections/spring/M3LinkedCaseInsensitiveMap.java";
-    private static final String AFTER_SHA="450e3f70be37f0fa0fcee7edd4adc8a2eea4a05a40646fb3e5c531e4ee8447ca";
+    private static final String AFTER_SHA="d90b72771ab454aa1dd03eb2c5784d7aaffd612736868a66fbe2682c8ab05f7c";
     private static final int AFTER_BYTES=31224;
     private static final String TEMPLATE="M3LinkedCaseInsensitiveMap.java.txt";
     private static final String UNRELATED="unrelated.txt";

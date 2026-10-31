@@ -34,8 +34,8 @@ jobs:
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = 'ac7f123549b2b7e0a3788fe9176bb56dee8efe85'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankUpperCountSweepContract.java)" = '41883b5b1bee07503ab506aa9bd9e9068727a882'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankUpperCountSweepTest.java)" = '7a24fb7c7a5ce623021d7d367c3186bb178c31e8'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankUpperCountSweepContract.java)" = '47edf48ca9610e28cb22b4bbfe5400a3cd0127a5'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongRankUpperCountSweepTest.java)" = 'ab80634c701686f6beda7bc749840744e8a7ef8d'
       - name: Compile real Java receiver, generated JNI header and original C kernel
         shell: bash
         run: |

@@ -37,12 +37,12 @@ PATHS = (
 RESOURCE_ROOT = "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text"
 TASK_ROOT = "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006"
 TEXT_OWNER = "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
-TEXT_OWNER_HASH = "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+TEXT_OWNER_HASH = "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795"
 OID = re.compile(r"[0-9a-f]{40}\Z")
 SHA = re.compile(r"[0-9a-f]{64}\Z")
 INPUT_EPOCH_SHA256 = "4fd3b3bd4fb09759d8bb02ca9ba45d0b2934625f24bcc4ae195f3e49394dff70"
 CURRENT_INPUT_HASHES = {
-    PATHS[0]: "9c96a0f6f7cc0f9b9d3e91fc3a42ef8e4eab212726fccd5e63e483f1acd7dfb1",
+    PATHS[0]: "12bfa8d328b74ba4de930d993c8194b8db51f3a111617690dff9f1ffebaea1c2",
     PATHS[1]: "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
     PATHS[2]: "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
     PATHS[3]: "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
@@ -337,9 +337,9 @@ def compose(current_files, prior_files, packet, *, allow_fixture=False):
     bindings["merge_recovery"] = {
         "current_input": DESTINATION, "current_input_root": DESTINATION_ROOT,
         "current_input_epoch": TASK_ROOT + "/mapping-input-epoch-v04.json",
-        "intermediate_reviewed_input": {"commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2", "root_tree": "0812573f02908d8078d13f5f49346865cdf1c0e0", "input_epoch_sha256": "fb413e58be72aaffa1e91149479ac159c6d4b961101eed4ab10f1c99df0b6711", "scope": "Prior 52-record fixture and inherited TQ validation failures retained; current TQ record is preserved from exact C0 input."}, "current_input_epoch_sha256": INPUT_EPOCH_SHA256,
+        "intermediate_reviewed_input": {"commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2", "root_tree": "0812573f02908d8078d13f5f49346865cdf1c0e0", "input_epoch_sha256": "973be97f762b46278f16c2bae6d887f2bc407110f333fe7ae0e7070e30cbe118", "scope": "Prior 52-record fixture and inherited TQ validation failures retained; current TQ record is preserved from exact C0 input."}, "current_input_epoch_sha256": INPUT_EPOCH_SHA256,
         "earlier_reviewed_input": {"commit": "87590cb96fb0e2dc0f88fae8e01957f7179cd255", "ordered_records": 47, "non_jcc_records": 45, "top_level_mappings": 17, "gates": 20, "scope": "Earlier fixture and refused map input retained as history; current preimages come from the separately frozen 090758 epoch; C0 qualification remains historical."},
-        "previous_qualified_input": {"commit": "c0a14387009aefc7d62bd3268055d526e04f9074", "root_tree": "491bbd80a51483d0710fc12c1bad3a037b385ba0", "input_epoch_sha256": "027e47d20c7fb854e028487ceef341c929877a6421dbb75f6433b5cd007fe5ee", "publication_manifest_sha256": "2f816b0f0606257ca0c1746a0a30d54b96562a4b28ba0351429c006c6baf4d92", "scope": "Actual V03 recipe: 13 JUnit methods, four Result outputs, 28 installer refusals, six packaging refusals and canonical PASS completion=INCOMPLETE against C0; preserved evidence is not qualification of the new 090758 input."},
+        "previous_qualified_input": {"commit": "c0a14387009aefc7d62bd3268055d526e04f9074", "root_tree": "491bbd80a51483d0710fc12c1bad3a037b385ba0", "input_epoch_sha256": "027e47d20c7fb854e028487ceef341c929877a6421dbb75f6433b5cd007fe5ee", "publication_manifest_sha256": "9f4a4b463e6eacfd43eda099928fd31d2d416dc8c2748babe0c4719e33af2104", "scope": "Actual V03 recipe: 13 JUnit methods, four Result outputs, 28 installer refusals, six packaging refusals and canonical PASS completion=INCOMPLETE against C0; preserved evidence is not qualification of the new 090758 input."},
         "source_history_publication": SOURCE_HISTORY, "source_history_pr": 9427,
         "receiving_history_publication": RECEIVER_HISTORY, "receiving_history_pr": 189,
         "historical_receiving_source": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",

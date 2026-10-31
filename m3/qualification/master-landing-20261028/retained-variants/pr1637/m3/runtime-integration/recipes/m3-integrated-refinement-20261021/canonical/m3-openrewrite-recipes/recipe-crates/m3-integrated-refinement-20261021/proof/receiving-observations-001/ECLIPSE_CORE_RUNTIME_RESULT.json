@@ -13,7 +13,7 @@
     "/workspace/scratch/206049dfb270/M3jdk21/m3/eclipse/core-runtime/pom.xml",
     "verify"
   ],
-  "input_receipt_sha256": "0d98c120510514da032a1719c20c751c774e7996de04bfdd2cf75767e887ced9",
+  "input_receipt_sha256": "ebcfb8444ca5a616c4b982ed14cc9c41d22fcb31231fa931c9f93095e5249042",
   "all_source_readbacks_unchanged": true,
   "owning_pom_unchanged": true,
   "production_sources": 3,

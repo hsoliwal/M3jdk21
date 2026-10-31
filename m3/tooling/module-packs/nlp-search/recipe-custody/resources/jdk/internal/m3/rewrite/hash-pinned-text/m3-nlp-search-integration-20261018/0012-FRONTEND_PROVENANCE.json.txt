@@ -16,14 +16,14 @@
     },
     {
       "candidate": "M3SourceIndex.java",
-      "sha256": "47e3083aca86032e172618e80c2ac2053a76af5c55758b65ed6e0ae76ffece30",
+      "sha256": "59aa1a178f1e0cb7936636a3fffcaa4cddaed4fdb4aca78fa5d50597cd3b79a7",
       "target": "m3/tooling/module-packs/nlp-search/frontend/src/main/java/org/m3jdk/tools/search/M3SourceIndex.java",
       "target_before": "ABSENT"
     }
   ],
   "fixture": {
     "source": "../../fixtures/frontend/M3SourceIndexProbe.java",
-    "sha256": "3e5033d4f4c3455069787095effefa4cc3f112284349c4768fcd89080931f830",
+    "sha256": "39191f8fe4a14917ca421b9d169fd9ee3b5b81d0c8c2cbfa05637e6b0f3dac61",
     "target": "m3/tooling/module-packs/nlp-search/fixtures/frontend/src/test/java/M3SourceIndexProbe.java",
     "target_before": "ABSENT",
     "test_main": "org.m3jdk.tools.search.probe.M3SourceIndexProbe"

@@ -318,7 +318,7 @@
         "lifecycleAndBoundsFailClosed"
       ],
       "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FSNativeTest.java",
-      "source_sha256": "4889a392e7a12ff5b81eb757bc406ffacd336d4af591c48564af8b4a96661dfd",
+      "source_sha256": "5eb8791e6ae96ca0431aece30f2ab4f737a88b2a8853cc2e723a5078cdfc9190",
       "tests": 3
     },
     {
@@ -328,7 +328,7 @@
         "scrubReportRejectsIncompleteNativeClassificationGeometry"
       ],
       "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FSScrubTest.java",
-      "source_sha256": "b3b5b8dee9212cd81ac9f7634934e7dd95767f2d25b4d47d2a25e0c81e348608",
+      "source_sha256": "277d829ed4bd77ae42b043a75554435ba4243bf3ac2cb2dc06df075e32302dca",
       "tests": 2
     },
     {
@@ -340,7 +340,7 @@
         "noReplaceRenamePreservesDestinationAndOverwriteRenameIsAtomic"
       ],
       "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsCheckedInodeIoTest.java",
-      "source_sha256": "ef23a1678b007a02bd4c9ab4d22cd042979e8990128f111ee779447d48cb9982",
+      "source_sha256": "d7e93df0ac1727854984fcef62eae1577911f891d281ab97bda92c7e1f306798",
       "tests": 4
     },
     {
@@ -350,7 +350,7 @@
         "currentNativeEngineAdvertisesItsImplementedSemanticSuperset"
       ],
       "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsFeatureTest.java",
-      "source_sha256": "921b286100db221a5e13d8612b8ad720b87efba55b4cfbe7ea8631b8adc3aeee",
+      "source_sha256": "0662aaea2d3e7fb8efc231a6047905d7925bf8b67ec48828a5f1a6de0ebd60ed",
       "tests": 2
     },
     {
@@ -359,7 +359,7 @@
         "integratedBlockPathPreservesBytesAndSnapshots"
       ],
       "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsHotPathTest.java",
-      "source_sha256": "1c99266d33d2e0a20f7a872170c592effd6966126a1c0efef763a42eddd49566",
+      "source_sha256": "29975883db203f239048563418e92fc081a0d0bf9f59a49ffacf02327251200c",
       "tests": 1
     },
     {
@@ -371,7 +371,7 @@
         "fallbackRunsAgainstPinnedSourceWhileAnotherOwnerReplacesTheLiveImage"
       ],
       "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsImageBindingTest.java",
-      "source_sha256": "8343698b8445ca8e4d9435c7b2c87340638eb2669e0412d83945b52afa7d2b1f",
+      "source_sha256": "9d02a0fbebefc7454ba02e7aab21609417c5179753caadc3a15f7c69e1c13c43",
       "tests": 4
     },
     {
@@ -380,7 +380,7 @@
         "indexedNativeOperations"
       ],
       "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsIndexedTest.java",
-      "source_sha256": "8562b2f4b3621cf16dae2c883f5b9ca3655f938b86246a102e19e2a8bcfeb489",
+      "source_sha256": "f5604850e56831410196bf91203e7e31d7e3ec2023b7db392abfa5132156b543",
       "tests": 1
     },
     {
@@ -389,7 +389,7 @@
         "filesystemExecutesMIndexStringAndRegexSemanticsNatively"
       ],
       "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsNativeSemanticTest.java",
-      "source_sha256": "1b1286b7e1d83fe5af8a0f894fcb040efe981b3c50465e0b188f3d7485c7d759",
+      "source_sha256": "d294d9e138c36e7fdf0af7a5ee0b6c559dd35a59f710fdefe13b5671cb709355",
       "tests": 1
     },
     {
@@ -401,7 +401,7 @@
         "readOnlyAndRetainedSnapshotUseTheAutomaticRe2Backend"
       ],
       "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsRegexFallbackTest.java",
-      "source_sha256": "f1056df5e03e0298a008d2c5dc93d343012dd3ab509a2c28d45e19552dc41703",
+      "source_sha256": "4044a4dec92d4137eb15de9beaee245eda11c99719e480be2b3dc3bdf3dc46e0",
       "tests": 4
     },
     {
@@ -410,7 +410,7 @@
         "retainedViewsSurviveConcurrentMutation"
       ],
       "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsSnapshotViewTest.java",
-      "source_sha256": "4eee10ca7e191eba43de6c3a2085dab564e856ea293055adff279cec0f91d02b",
+      "source_sha256": "8ebb92d669d60cb6c24cf6e821d9f9cc19480b4b56b61e871dd5315e0b2f4399",
       "tests": 1
     },
     {
@@ -420,7 +420,7 @@
         "rangeGeometryFailsBeforeNativeMutation"
       ],
       "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsSparseFeatureTest.java",
-      "source_sha256": "70fdf32fc513a107336148959fadeb72d4908f8189d17d15af041fe94c875d6b",
+      "source_sha256": "a01d3f428311e0417488a537c46bdfa3a5840e9de29fdde22d7d4f3f4c29d0a5",
       "tests": 2
     },
     {
@@ -429,7 +429,7 @@
         "mappedStorageAndExactByteContracts"
       ],
       "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3MappedStorageTest.java",
-      "source_sha256": "1cc6fa6ee0825c0cbbfbb2b6e12f2530c8242e507273d700d7a86ed415aaa5e3",
+      "source_sha256": "0d6fe2c283eabaf1779042506472f998296c356a3a56e4ef5c0a912d3c40218e",
       "tests": 1
     },
     {
@@ -438,7 +438,7 @@
         "freshOffAndRequiredVmsAgreeOnPositionedEndianLanes"
       ],
       "source": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3NativeContentPositionTest.java",
-      "source_sha256": "f5d92b1f4f1801109960683387257199ab5ad501048497b1a9f4ef50abdbd08a",
+      "source_sha256": "ae0a5590f62d9e5dd9d74c89b000384a076718c7717773fe364e2bf6d9a87bb4",
       "tests": 1
     }
   ],
@@ -466,7 +466,7 @@
   },
   "native_build_receipt": {
     "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-capture/qualification.json",
-    "sha256": "8ad787af5db84327867a88b48343beaad501c0f84751fc4ee15ccc5b378de4ac"
+    "sha256": "479d40bacee86af3ed6fddacc52d91eac53d100b430413b563fbe94c1a2e1bde"
   },
   "native_library_unchanged": true,
   "native_required": true,

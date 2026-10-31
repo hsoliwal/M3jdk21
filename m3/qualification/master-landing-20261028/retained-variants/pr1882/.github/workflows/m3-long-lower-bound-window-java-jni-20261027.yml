@@ -34,7 +34,7 @@ jobs:
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
           test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java)" = '52f21dbe93b97748fb53f5d5cb7d857d4b04d1cf'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '107d5f86c901042c7fe23c926495aadb568798ca'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongLowerBoundWindowContract.java)" = 'faf32537f1392a1162b610d2382b20bac0217425'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongLowerBoundWindowContract.java)" = '9576ba9a96656698a9ce204031cb9ddee80cc352'
       - name: Strict Java21 compilation and Java fallback
         shell: bash
         run: |

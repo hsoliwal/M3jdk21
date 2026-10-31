@@ -1,7 +1,7 @@
 {
   "schema": "M3_AST_BUILD_ENGINE_BOOTSTRAP_V1",
   "origin_commit": "e244d68fdee88d4a406be48e4ff1d31b60a17988",
-  "origin_engine_manifest_sha256": "b2e990a09f2c4b7c355b48cc33a72405829fd009f76d1866153aa07225e6684e",
+  "origin_engine_manifest_sha256": "74242eb726eb5d1c5bbdc9fa4ee17c33b4afa1c96bfcddad5dcb1a4b1f4f58cb",
   "sdk_dataset": "engine-bootstrap",
   "targets": 55,
   "sdk_results_sha256": "9beb77049b80e05a147d536b208bb61e91cd7ddf1644d9213a5a21987abea972",

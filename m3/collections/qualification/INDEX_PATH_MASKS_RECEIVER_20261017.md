@@ -37,7 +37,7 @@ Historical `installed_source_manifest` and filtered-view successor remain unchan
 A separately source-sealed, **exact four-path** additive successor exists at
 `m3/collections/recipe/index-path-masks-20261017/manifest.tsv`;
 its SHA-256 is
-`1cba7c9ed681fbe65653b75949558640ea5aa31a1e3c8f5d83d27f9197518020`.
+`c3af2d443d0c79ee375f6ac0399a874fd5662123e4ef1af52b358c2a6f8ea28f`.
 The pinned Python verifier's preimage is
 `1d76f334bd30046b6acce4e682307a21a6c1fc1cc98261b94f70cc3e4f9f6549`,
 its canonical postimage is

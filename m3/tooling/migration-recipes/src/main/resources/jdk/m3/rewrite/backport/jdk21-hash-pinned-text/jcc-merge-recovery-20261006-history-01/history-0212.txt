@@ -23,10 +23,10 @@ def snapshot(p,name=None):
  return load(p) if p.suffix=='.json' else d
 receipt=snapshot(V/'receipt.json');assert identity(V/'receipt.json')['sha256']=='1f4ac9825d975520a04b7dc5ac1b282d96be32601c7abe2b0cfb676b0ff2df09';freeze=snapshot(V/'inputs.json');check(V/'inputs.json',receipt['inputs']);invocation=snapshot(B/'verification-invocation-v3/EXECUTION.json','INVOCATION_EXECUTION.json');snapshot(B/'verification-invocation-v3/STARTED.json','INVOCATION_STARTED.json')
 for k in ('runner','bound_input','resource_admission','stdout','stderr'):check(invocation[k]['path'],invocation[k])
-assert invocation['runner']['sha256']=='496e1877914e15f4342111c37020a2d58790038516b62872680427e585b21f50' and invocation['resource_admission']['sha256']=='df198e3ccda995d5d40fe9e17aca02507b3cb6b5077314c05b3c06b3eeb2cd28'
+assert invocation['runner']['sha256']=='c779f94023b3914bca1558a35d39ab11aaedd00a18cf5b74e2a30bf1205de6b6' and invocation['resource_admission']['sha256']=='3b0537c2f2ef14eb83f27861a66b69c624a9b1ed611ef3ffdf3874cf77b7a29d'
 assert invocation['exit_code']==0 and invocation['stderr']['bytes']==0 and invocation['command'][1:]==['-B',str(B/'run_verification_v3.py')]
 snapshot(invocation['stdout']['path'],'invocation-stdout.log');snapshot(invocation['stderr']['path'],'invocation-stderr.log')
-packet=load(B/'bound-inputs-v3/BOUND_RESOURCES_REVIEW_PACKET.json');assert identity(B/'bound-inputs-v3/BOUND_RESOURCES_REVIEW_PACKET.json')['sha256']=='9024a1180d4f5856130d9e3a7dd1e8f18786ca8825c9569397d37003019aac9a'
+packet=load(B/'bound-inputs-v3/BOUND_RESOURCES_REVIEW_PACKET.json');assert identity(B/'bound-inputs-v3/BOUND_RESOURCES_REVIEW_PACKET.json')['sha256']=='6d09ec9408c0c8bc2ce8bdd9ef5dcb17bb70fcd1c12fb6d28b17e2cc33e6bd62'
 plan=load(C/'plan.json');assert receipt['plan_sha256']==freeze['plan_sha256']==plan['plan_sha256']==SEAL
 assert receipt['source_publication_commit']==SOURCE and receipt['source_publication_root']==ROOT and receipt['destination_preimage_commit']=='0994ecd65e86600f417f4d8702838d8c2663af61'
 f=load(B/'FINAL_SOURCE_INPUTS_V3.json');assert receipt['source_publication_custody']==f['source_publication_custody']

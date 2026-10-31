@@ -25,7 +25,7 @@ final class M3CharcopyCurrentSuccessorRecipeTest {
     private static final String DESCRIPTOR = "/META-INF/rewrite/charcopy-current-successor-20261019.yml";
     private static final String NAME = "jdk.internal.m3.CharcopyCurrentSuccessor20261019";
     private static final String MANIFEST_SHA = "db44f3abf5270084eaa529469f664333fcef6abfe4df73e78d7548f2a3287303";
-    private static final String DESCRIPTOR_SHA = "c97c3ef219bffd8177e01cd2bb585724408d5e3612253152c3a29d4af12998bf";
+    private static final String DESCRIPTOR_SHA = "e7b8fe613c05d0ed6b5d97c6d384f3bf0638eb57d6432fe0b9ebbaf3f289595b";
     private static final String OWNER = "src/java.base/share/classes/java/lang/M3String.java";
     private static final String FACTS = "src/java.base/share/classes/java/lang/M3StringFacts.java";
     private static final String OVERFLOW = "test/jdk/java/lang/String/M3StringConcatLengthOverflowTest.java";

@@ -60,8 +60,8 @@ final class M3OwnedGuavaEnumMultisetRecipeTest {
     private static final String NAME = "jdk.internal.m3.OwnedGuavaEnumMultiset20261019";
     private static final String TARGET =
             "m3/collections/implementations/guava-enum-multiset/src/main/java/jdk/m3/collections/guava/M3EnumMultiset.java";
-    private static final String BEFORE_SHA = "384a07a54c8851e66f36116e33b8eed37338598603ee532939b04b1f9b541ad9";
-    private static final String AFTER_SHA = "fdcf06fa521109e3151d8fac9c16bf18fa4b6ebd7b6c0fc402f5577b799d4cba";
+    private static final String BEFORE_SHA = "5cf6d90b24b0b9dedba315d9bcc26d170ada8cfeb00190c00be6bbaef66ec827";
+    private static final String AFTER_SHA = "a8a20c0f33eada96c82475c46e0eb47fb9f0c717bc4c810bcb307de850345a71";
     private static final int AFTER_BYTES = 21449;
     private static final String TEMPLATE = "M3EnumMultiset.java.txt";
     private static final String PREIMAGE = "M3EnumMultiset.scaffold.java.txt";

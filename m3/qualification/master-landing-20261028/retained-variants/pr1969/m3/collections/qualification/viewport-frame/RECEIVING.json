@@ -13,11 +13,11 @@
     "verifier": "1f55d3d2292ebf03d2fc6cf5bda77cd455e58aa9"
   },
   "received_exact_git_blobs": {
-    "native": "f29d081e28ba8ccc4516bd28c09e738b7a408a76",
-    "java": "9cdfab35cf719ccf26f61ee61e1ae10fa98eb9ad",
-    "verifier": "9614892a7257c9948716c2b49d80732183fce772",
-    "frame_fixture": "3e7fc02f1935fcf91981d37d2e734ab564cdfa1a",
-    "page_fixture": "fc61136966adfc5c8d839854230296ede6992db6"
+    "native": "b0d387f2612a315c6b53a50a814432c916ca61c8",
+    "java": "4f73ddb9aae36dadb8003257d3a6988536a18066",
+    "verifier": "53ae1ca30b7ce2526babd53331a61d3e3ec5eeae",
+    "frame_fixture": "20657d986071462c1511e855161dd7257432aac5",
+    "page_fixture": "3b59f72d01db754775aef7d02eb6bb21f06fb0f1"
   },
   "evidence": {
     "existing_receiver_local_java_lST_sdk": "PASS_WITH_SEPARATELY_RECORDED_HARNESS",

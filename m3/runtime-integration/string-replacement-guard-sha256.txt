@@ -1,6 +1,6 @@
-0d5049c2caeee7b34460e9a675a9dded98e61cc8bd5c3fe0bd27f3831ac916c5  m3/vendor/m3/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3StringGuardRepair.java
-56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999  m3/vendor/m3/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java
+44fd750f02258f2d58ba7310e138cf64a1ed490119f64813a2228a5a5b6f97f4  m3/vendor/m3/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3StringGuardRepair.java
+c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e  m3/vendor/m3/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java
 098da0581258b416bbf7546aec9d0f3d2783643c69d122c460fa96d56b7e9475  m3/vendor/m3/m3-openrewrite-recipes/crates/m3-string-replacement-guard/templates/M3StringReplacementRoutes.java
 1f4fa3977092afd5b44b2df231828497ed954bd3cc777c905550294b9bac7af3  m3/vendor/m3/m3-openrewrite-recipes/crates/m3-string-replacement-guard/templates/test_string_replacement_routes.py
-0f5552440e2fe8d2dcdba62a79250950573db68a5511476fea93feec51e1c5a1  m3/vendor/m3/m3-openrewrite-recipes/crates/m3-string-replacement-guard/src/test/java/M3StringGuardRepairTest.java
-93f4f13ceef936de1342b17a2175c3466495caf354c38cba267610d502e0ead3  m3/vendor/m3/m3-openrewrite-recipes/crates/m3-string-replacement-guard/verify.sh
+0a17394bdc6398ec8fcb88dd678545596e2aab7ed17edb90cc19bdbee68266a3  m3/vendor/m3/m3-openrewrite-recipes/crates/m3-string-replacement-guard/src/test/java/M3StringGuardRepairTest.java
+d1e40b698324fef7a24b03d50970eaaa43505d363ea02c8fa3eeffcf31c7f04c  m3/vendor/m3/m3-openrewrite-recipes/crates/m3-string-replacement-guard/verify.sh

@@ -37,7 +37,7 @@ jobs:
           from pathlib import Path
           path = Path('m3/collections/implementations/guava-evicting-queue/src/main/java/jdk/m3/collections/guava/M3EvictingQueue.java')
           source = path.read_bytes()
-          assert sha256(source).hexdigest() == '3fb021a20b4c356283f2b8444647333a4399e9b00528a2bf519787e602dd1166'
+          assert sha256(source).hexdigest() == '91c5044456cf3841d857dd5069ef7e5d61055ea154880ad5fed3984e15f686b7'
           assert source.count(b'copyRingInto(') == 4
           assert b'copyInto(' not in source
           assert b'package jdk.m3.collections.guava;' in source

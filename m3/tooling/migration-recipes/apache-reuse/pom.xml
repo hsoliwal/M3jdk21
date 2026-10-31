@@ -58,7 +58,7 @@
             <m3.reuse.resourceRoot>jdk/m3/rewrite/backport/jdk21-hash-pinned-text/apache-public-reuse-v1</m3.reuse.resourceRoot>
             <m3.reuse.engine>jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe</m3.reuse.engine>
             <m3.reuse.enginePath>m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</m3.reuse.enginePath>
-            <m3.reuse.engineBlob>a2e8c916208b563517e51b738744a05357e633aa</m3.reuse.engineBlob>
+            <m3.reuse.engineBlob>3fdc75a71290e2fd1659bfbc7fa532828363275b</m3.reuse.engineBlob>
             <m3.reuse.paths>m3/docs/m3-apache-reuse-policy.properties,m3/docs/m3-apache-reuse-scope.tsv,m3/docs/m3-apache-reuse.md</m3.reuse.paths>
           </systemPropertyVariables>
         </configuration>

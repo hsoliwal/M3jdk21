@@ -1053,7 +1053,7 @@
       "path": "pom.xml",
       "mode": "100644",
       "type": "blob",
-      "sha": "98889a040aad5cc3c82f782bb4b173d118207988"
+      "sha": "a65f71452613662769dda64100c6d64dd90ae5da"
     },
     {
       "path": "python",
@@ -2073,8 +2073,8 @@
   "root_pom": {
     "body_path": "/workspace/scratch/c0bcaa06df78/m3-mastery/inventory/final-integration/build-declarations/root-pom.xml",
     "bytes": 119981,
-    "sha256": "f01cca4d90bd8fa1b1125474b5178cc80762d934bcb7bf5817f08f3f0dcf6aab",
-    "git_blob_sha1": "98889a040aad5cc3c82f782bb4b173d118207988",
+    "sha256": "1af736d1a28af6e5cdf41a2b4fefa8b9f3c5cb7a6c2f6d16537e0a822f086a7d",
+    "git_blob_sha1": "a65f71452613662769dda64100c6d64dd90ae5da",
     "final_tree_path_chain": [
       {
         "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
@@ -2082,10 +2082,10 @@
         "entry": {
           "mode": "100644",
           "path": "pom.xml",
-          "sha": "98889a040aad5cc3c82f782bb4b173d118207988",
+          "sha": "a65f71452613662769dda64100c6d64dd90ae5da",
           "size": 119981,
           "type": "blob",
-          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/98889a040aad5cc3c82f782bb4b173d118207988"
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/a65f71452613662769dda64100c6d64dd90ae5da"
         }
       }
     ]
@@ -2902,15 +2902,15 @@
   "publication_receipt": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/PUBLICATION_CUSTODY.json",
     "bytes": 1099619,
-    "sha256": "95f325ce57dadab60031f41514d9a9c5fa3ef6eb29a41e3c9a8c81e2dee996b8",
-    "git_blob_sha1": "0f084555dbbea3ba4c9302386ced30e1e1503dda"
+    "sha256": "bf2d3f29e903f12c201febb4c82083a32758095fdd8fbacbcf25a42e532f44fd",
+    "git_blob_sha1": "067f5f2b6b53343f68f3bf197069e05ae5b9fe3f"
   },
   "tree_receipts": [
     {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/BASE_TREE_MODEL.json",
       "bytes": 1372743,
-      "sha256": "877a61dc6d9b4f4fa280faeadbd67db9ee3d56a68768fa06c917d85ab8fbaa80",
-      "git_blob_sha1": "6ee3c1bfd76dc5c0abdba031f163a3d38294f5e9",
+      "sha256": "26378280f0305c59a7529fed18de4dd938e935840260c9667fb55de4c6f6fd8a",
+      "git_blob_sha1": "06235641c8ca32ba686fd83bdc30f4c0f488fac7",
       "scope": "Retained content-addressed base tree bodies; exact objects rehashed."
     },
     {

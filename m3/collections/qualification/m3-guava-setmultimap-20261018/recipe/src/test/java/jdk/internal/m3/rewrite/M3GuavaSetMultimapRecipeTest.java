@@ -34,8 +34,8 @@ final class M3GuavaSetMultimapRecipeTest {
             "m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3GuavaSetMultimap.java";
     private static final String TEST =
             "m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3GuavaSetMultimapTest.java";
-    private static final String HASH_MAIN = "0517eb6b401671e18b870eeb307e74f856a071c21a4a033432d0fc3348844099";
-    private static final String HASH_TEST = "24c9b9ac0690dc04312c52363b25de179fa85ef38ad2d96696cb2e07dcef46d0";
+    private static final String HASH_MAIN = "4175df8f0a09c1a6ea5e10dfd16fb688096a1a9169699cad668210cea56f6454";
+    private static final String HASH_TEST = "ecac9e556d7b02e000d0d60ad8035f95216a165b23b2f7824d39fe6eee2f816d";
 
     private static List<SourceFile> dummy() {
         return List.of(PlainText.builder().sourcePath(Path.of("unrelated.txt")).text("KEEP").build());

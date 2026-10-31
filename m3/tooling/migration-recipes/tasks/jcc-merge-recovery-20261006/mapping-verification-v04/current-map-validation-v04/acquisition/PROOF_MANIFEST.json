@@ -20,7 +20,7 @@
   "commit": "09075810b55229662329a158923287e8a7118f86",
   "current_m3_evidence": {
     "capture": "publication/M3_LATEST_M3.json",
-    "capture_sha256": "7447eb196fd437f21c7ca6a1b6c58be217ca8214f1f092d7f4ecd706d662f368",
+    "capture_sha256": "9e2339b75282bc7c397413c60c787194a339a63d6f17dcb8b9968474ef11c666",
     "reconstructed_direct_trees": 717,
     "tree": "cd2d78c91054d43025939fb72ae17365af3b7cf5"
   },
@@ -152,15 +152,15 @@
       "sha256": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78"
     },
     {
-      "body": "receiving-merge-audit/current-map-validation-v04/acquisition/bodies/m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
+      "body": "receiving-merge-audit/current-map-validation-v04/acquisition/bodies/m3/tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
       "bytes": 392,
       "capture": "receiving-merge-audit/current-map-validation-v04/acquisition/captures/new-mr-manifest.json",
-      "capture_sha256": "ad257f74f12d212edb22aef9de7b59addee25d3ec3c482ff5ae0915e118d4f39",
+      "capture_sha256": "54307b1fd4361850d9d9d665763e3996f6f8abb7584ef547c6d69b44cc235555",
       "commit": "09075810b55229662329a158923287e8a7118f86",
       "git_blob_sha1": "d23517ac24eb1ba428f53bd34f304d70eb468406",
       "membership_verified": true,
       "mode": "100644",
-      "path": "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
+      "path": "m3/tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
       "sha256": "5b44008f02f49ce0a48fafcb4da24af69ea526a67f88041c209d6d574ed788da"
     }
   ],
@@ -697,5 +697,5 @@
   "source_publication_performed": false,
   "status": "PASS",
   "tests_executed": false,
-  "verification_script_sha256": "9529b0c0132099b17c946de27e32d9ee364bebd9a5247294bc57337a65947366"
+  "verification_script_sha256": "04967708b5615fcb8ed8567fd28b065b821c9f1e91a418763b9fa79ad16e444e"
 }

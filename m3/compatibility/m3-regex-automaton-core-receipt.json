@@ -49,20 +49,20 @@
   "runtimeDependencyOnSynexia": false,
   "publicJdkReplacement": false,
   "targets": [
-    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java", "before": "ABSENT", "after": "606b60797ecce1ce888888dd4056fdcddffef7f5eb8f1a56cc854126c7884f0f", "resource": "00-M3Automaton.java.txt"},
-    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java", "before": "ABSENT", "after": "9a34cb85a705f6bee43c5cbb6c7a7181996d3b3a9579aa4e547e1c2f112b8f45", "resource": "01-M3AutomatonOps.java.txt"},
-    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java", "before": "ABSENT", "after": "cda9d82febd03dd401c40884bf66eb7e394c1c36af19e5406172d2e58b7a0660", "resource": "02-M3ChunkCursor.java.txt"},
+    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java", "before": "ABSENT", "after": "c552bfff58a9f989b85cc14d4e6617e2472e62fe5ae094979b5ff9c6e176463e", "resource": "00-M3Automaton.java.txt"},
+    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java", "before": "ABSENT", "after": "4b31ce35c17b637cf8fab3c131bd5707bfbb995c14dde7104eb17f336e40756e", "resource": "01-M3AutomatonOps.java.txt"},
+    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java", "before": "ABSENT", "after": "49a1c0409c18f789a1f83766b7e42b6d374eb0fa25e565c59a685859ef8721ae", "resource": "02-M3ChunkCursor.java.txt"},
     {"path": "src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java", "before": "ABSENT", "after": "2b53cf0eb526ab7af3c2e224f49676d0f3570db3e523b7c98e78715a4410cbff", "resource": "03-M3NotYetReceived.java.txt"},
-    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java", "before": "ABSENT", "after": "650f1ecce5c3b555ecf8ef3d8e5aaf6ad14d24f18497a5f74cdef0437f62106c", "resource": "04-M3RegExpCompiler.java.txt"},
-    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java", "before": "ABSENT", "after": "c5f97d75fe83e8dee3cf8c381c672edc0d8cbcb89a49fd94c158634db0342289", "resource": "05-M3RunTable.java.txt"},
-    {"path": "test/jdk/java/util/regex/M3AutomatonDifferentialTest.java", "before": "ABSENT", "after": "9f0591f385bc4717fadfacefeb75c8823a3f372413a9440a2c0838c50e9c541d", "resource": "06-M3AutomatonDifferentialTest.java.txt"},
+    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java", "before": "ABSENT", "after": "249a77620ab454342d666680e89e8c43471bb857960aa91b1413c3b2090edec7", "resource": "04-M3RegExpCompiler.java.txt"},
+    {"path": "src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java", "before": "ABSENT", "after": "8f59403494dddce9c181fb7a8d36403a0491ae7b23cbedfed30fa4d06d6b213d", "resource": "05-M3RunTable.java.txt"},
+    {"path": "test/jdk/java/util/regex/M3AutomatonDifferentialTest.java", "before": "ABSENT", "after": "0ca2223a848cb7b4c74a08527b3ce1f34d06ed8e53177ea8dee654ec2113be6a", "resource": "06-M3AutomatonDifferentialTest.java.txt"},
     {"path": "test/jdk/java/util/regex/M3ChunkCursorTest.java", "before": "ABSENT", "after": "c67c253b47c0485a10f12d5ed4717341caca1277f41d9ab75443a19a8f637799", "resource": "07-M3ChunkCursorTest.java.txt"}
   ],
   "receiverCopy": {
     "descriptor": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-regex-automaton-core.yml",
-    "descriptorSha256": "11a77a2c23d154fabe8fd3479cabf408d7ce8090f36a8401cb5513196007c100",
-    "manifest": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-regex-automaton-core/manifest.tsv",
-    "manifestSha256": "a0a5ccf1b906ace5b81db857219379488962bd3b1f4e7157655e4778fedbd366",
+    "descriptorSha256": "53ba907b04200352818b4bd1913bd7237789ac6e6ced8e5944fc4fd53bd3e2c1",
+    "manifest": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-regex-automaton-core/manifest.tsv",
+    "manifestSha256": "6cdbe3507c9c0704fbf08c386ed40ed207a6138b5fed8996a73b0df1488d94eb",
     "identity": "byte-identical to the Synexia crate resources at 583bb4ecdef2 (diff -r empty)"
   },
   "oracle": {

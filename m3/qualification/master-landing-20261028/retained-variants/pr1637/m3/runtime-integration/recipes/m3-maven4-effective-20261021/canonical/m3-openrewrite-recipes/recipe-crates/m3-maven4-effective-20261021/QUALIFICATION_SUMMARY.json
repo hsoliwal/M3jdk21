@@ -41,43 +41,43 @@
   "receipts": {
     "failed_sdk": {
       "path": "proof/sdk-001-offline/RESULT.json",
-      "sha256": "9aaef3787c1fa569dfef8c0c9d2691a1d32f3b139774491f2e25d2cfa7c01f92"
+      "sha256": "3c6bd13fba7584478ac05c7abc3cd8b32d7e62d9620e8c106f7e58a87a0f0c47"
     },
     "qualified_sdk": {
       "path": "proof/sdk-002-offline/RESULT.json",
-      "sha256": "beca41e77882f29e9d389cbc858ea1b86358ea754395686bbb1697c0a7c5e794"
+      "sha256": "2507ef44c70050f5b1ce5cde5c87e0f5fd793112f2f5d5fc4a80fb51857dd586"
     },
     "recipe_proof": {
       "path": "proof/sdk-002-offline/recipe-proof.tsv",
-      "sha256": "8675c41844c4731ab75b124ccdcd6c1e1897c43417e28f9e9d2850550f13b772"
+      "sha256": "d9f44ccf27d1250271021705126126e71439cc753d0df71c165094dc6e639c02"
     },
     "source_seals": {
       "path": "SOURCE_SEALS.json",
-      "sha256": "fb401eeb0467c16ffa4d95d8de2a6c539775f096db81a7a7ac4fc717ad6e74b9"
+      "sha256": "a076d8c7c82542897aef843b640cc88e762bbf088128c4ca34c262db4c4dba27"
     },
     "successor_selection": {
       "path": "provenance/successor-002/SELECTION.json",
-      "sha256": "f288c199f97156d1fe92c70827c789fe1ead7044713751795f0f72c0a36e6a31"
+      "sha256": "b73505f3c7b0923e7d638ca59a8cf718c0b711ce60ebcd8989294100cdab7479"
     },
     "isolated_copier": {
       "path": "proof/receiver-qualification-002/RESULT.json",
-      "sha256": "6d4f4c35bb52fb413530779d1c6d18bd2b9865417c432133c6b09be46afc45ca"
+      "sha256": "d4f747220704f2aa6a31586d2d2b48384f318e45311aab876bfd43ad814728ed"
     },
     "receiving_application": {
       "path": "proof/receiving-application-001/RESULT.json",
-      "sha256": "36a2a91229a88b2e3fd53171ab738cdb3bb110e2c651b368ade1d5728c6198b2"
+      "sha256": "26aaff4fb4c95fb00d79f4d04f268f0705dddf6e1e3a1f680f06f4d49900294d"
     },
     "actual_receiver_runtime": {
       "path": "proof/receiver-runtime-001/PROOF.json",
-      "sha256": "9b1e3a81d5c37fc36bef68b4ae95554a76ccaf55a0f9464346b920a3fc09e107"
+      "sha256": "5d6ef5cfb4b94a0dde33489b3048252a5cfbd9e328ce468a8aef711aa7c9fc16"
     },
     "authoring_evidence_intake": {
       "path": "provenance/EVIDENCE_INTAKE.json",
-      "sha256": "3d221bf3870a46eb8d64b2a4f70eeac5f8bb9c85b456765394700d9af2f496cf"
+      "sha256": "5bd0cc22f2ccbf7ccf125d61a954e1b9947c3ee3867f92e98d53e60e67f16242"
     },
     "receiver_evidence_intake": {
       "path": "provenance/RECEIVER_EVIDENCE_INTAKE.json",
-      "sha256": "f32036488bb187599d9670d4a06d450622bb0f50e68aa751d3d5af6568041925"
+      "sha256": "eee6c8225df3d26698821d538fece3ea0c175e2699ff8e3786118b0873b24b31"
     },
     "source_and_rights": {
       "path": "provenance/SOURCE_AND_RIGHTS.json",
@@ -86,7 +86,7 @@
   },
   "memory": {
     "path": "memory/FINAL_RESULT-002.json",
-    "sha256": "04f671b8ccd9b682c5b1d42b2a3119de077c3de426f39c3b4d309f2d37f3505f",
+    "sha256": "7889266669dfe718488fff1282071025c9a64be331ae606237f66b8e58c13bf3",
     "status": "PASS",
     "admission": "PENDING",
     "events": 2,

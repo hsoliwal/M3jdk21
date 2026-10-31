@@ -1,5 +1,5 @@
---- m3/synexia-import/src/main/java/com/m3/synexia/importer/SynexiaImportPlan.java original80b
-+++ m3/synexia-import/src/main/java/com/m3/synexia/importer/SynexiaImportPlan.java recipe-v3
+--- m3/m3-import/src/main/java/jdk/m3/importer/M3ImportPlan.java original80b
++++ m3/m3-import/src/main/java/jdk/m3/importer/M3ImportPlan.java recipe-v3
 @@ -146,7 +146,7 @@
                  }
                  previous = row.targetPath();
@@ -9,8 +9,8 @@
              root = root == null || root.isBlank() ? expected : sha(root, "root");
              if (!root.equals(expected)) {
                  throw new IllegalArgumentException("Synexia import plan root mismatch");
---- m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImportPlanTest.java original80b
-+++ m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImportPlanTest.java recipe-v3
+--- m3/m3-import/src/test/java/jdk/m3/importer/M3ImportPlanTest.java original80b
++++ m3/m3-import/src/test/java/jdk/m3/importer/M3ImportPlanTest.java recipe-v3
 @@ -403,7 +403,7 @@
                          "m3jdk21",
                          List.of(entry(
@@ -29,8 +29,8 @@
          byte[] stale = apache("package obsolete; final class Old {}\n");
  
          write(synexia.resolve(keepSource), keep);
---- m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImporterTest.java original80b
-+++ m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImporterTest.java recipe-v3
+--- m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java original80b
++++ m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java recipe-v3
 @@ -99,6 +99,7 @@
          assertThrows(
                  IllegalArgumentException.class,

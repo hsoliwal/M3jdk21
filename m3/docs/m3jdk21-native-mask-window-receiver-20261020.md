@@ -16,9 +16,9 @@ were reused, not reimplemented:
 
 | Convergence donor | JDK product receiver | Generated SHA-256 |
 | --- | --- | --- |
-| `m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java` | `src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java` | `f42473470989a103062696f1a3f4aa348e524308391edcaffff3df311d35eacf` |
+| `m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskWindow.java` | `src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java` | `f42473470989a103062696f1a3f4aa348e524308391edcaffff3df311d35eacf` |
 | `m3/collections/src/main/native/collections/m3_index_mask_window.c` | `src/java.base/share/native/libjava/M3IndexMaskWindow.c` | `80ef8aa795825efe9940f0230ba20802084b7d164450668660297516a1091301` |
-| `m3/collections/src/test/java/com/m3/collections/M3MaskSpansContract.java` | `test/jdk/jdk/internal/m3/M3IndexMaskWindowJniTest.java` | `2490b6752d453daa7f7c4eb7d565ae2894a1236fd0ebaecac637f3230ffb5d8c` |
+| `m3/collections/src/test/java/jdk/m3/collections/M3MaskSpansContract.java` | `test/jdk/jdk/internal/m3/M3IndexMaskWindowJniTest.java` | `2490b6752d453daa7f7c4eb7d565ae2894a1236fd0ebaecac637f3230ffb5d8c` |
 
 ## Behavioral invariants
 - The user-visible data structures are dynamic arrays and primitive

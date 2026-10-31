@@ -8,7 +8,7 @@ current source variations. No project-wide package rename is performed here.
 
 The array/free-slot pattern comes from M3LinkedList in hsoliwal/M3jdk21 at
 a3e88976ee8664d1ef5d0cade96aec1206b2133d, blob
-744d1c488b8342c98e49d2cfd3465c0f558b199d. Red-black rotation and deletion-repair
+832c838caf7a37d6f9a10b37505c3e65ed9f6292. Red-black rotation and deletion-repair
 patterns are adapted from the Apache Commons TreeBidiMap KEY lane at
 03f5ae07596f2fd648419cd69e7c4f3dc01d7420, blob
 97a9068cdaf1e2c6f93d1482acdafe150ad0b1eb. The complete donor owner is unsuitable:

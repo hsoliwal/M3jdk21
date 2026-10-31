@@ -31,9 +31,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          printf '%s  %s\n' 'a69694a2ce22ca9599cb665e4845f5dee75d527b7c144fa3ea7fb4518ec2d3fa' 'm3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java' | sha256sum -c -
-          printf '%s  %s\n' '1d554f7e18523f363279e0670abc572a3f430b0a8db65850aaf57e82b15e309a' 'm3/collections/src/test/java/jdk/m3/collections/M3LongIndexProjectionMaskOffsetProof.java' | sha256sum -c -
-          printf '%s  %s\n' 'e3401ec86e0ac9d227039983e93ca00ca4fe2bd59330deb1911ec2388b51f37f' 'm3/collections/src/test/java/jdk/m3/collections/M3LongIndexProjectionMaskOffsetTest.java' | sha256sum -c -
+          printf '%s  %s\n' 'a66f854a021fea52f5fcde2d6366a75bf26facb271a33b4db88562f59902111d' 'm3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java' | sha256sum -c -
+          printf '%s  %s\n' 'f17a752d6eef1651ea3e81f29873d33178082c24f7b966fa5fc69587bdabf87a' 'm3/collections/src/test/java/jdk/m3/collections/M3LongIndexProjectionMaskOffsetProof.java' | sha256sum -c -
+          printf '%s  %s\n' '505f5062d840a45549873e394e4ebdb7c6735703b7adae52c01e12ebe86733e0' 'm3/collections/src/test/java/jdk/m3/collections/M3LongIndexProjectionMaskOffsetTest.java' | sha256sum -c -
           echo M3_LONG_MASK_DIRECT_SOURCE_SEAL_PASS
       - name: Compile original and candidate complete source; prove all-pass sharing refinement
         shell: bash

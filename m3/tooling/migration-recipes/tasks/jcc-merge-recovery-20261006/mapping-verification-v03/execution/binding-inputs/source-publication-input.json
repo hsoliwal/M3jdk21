@@ -7,9 +7,9 @@
   "ref": "refs/heads/aix/jcc-qualified-recipes-20261006",
   "scope": "current-five-owner-repair-publication",
   "publication_state": "ACTUAL_GITHUB_READBACK_VERIFIED",
-  "publication_receipt_sha256": "a6250754c30fc2b3d901eb668217b0dad4c09847bbdc559f66ab715c135c5884",
+  "publication_receipt_sha256": "fedfc31343d38c8e94230c208b8f4bd246c50e4b72d2f1c191c456e608ca1d9f",
   "commit_readback_sha256": "eb54e3d37fba4e12d7984f830c3eec2dadf03a7b8e3e733e6cb52b258df3d0c7",
-  "root_readback_sha256": "d891ca1144a3cecc4ba6b7f9d7b69a28e0ae9ce9145ee92c15fd2bd7f292ea14",
+  "root_readback_sha256": "1b7addda2c8a5ab2664dbf8ee2e5a84bdf48748982f51cd19947a8f37a8379ad",
   "ref_readback_sha256": "90a0b2ec021bb7efab42c526c527b9a6e3a04a0ddc2ec081fa8ed730fcf7bde1",
   "commit_readback": {
     "sha": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
@@ -2571,7 +2571,7 @@
     "sha256": "19d88f3a0b79ab2575ad273459781c72f5dd850cccaf0c50996e39d0b3af84e8",
     "git_blob_sha1": "a799bfd15bc1170fb73a3c931980c34347bbdba3",
     "readback_verified": true,
-    "readback_sha256": "15ef17390241752b365ec05f381cbd73e5a5f5e4b8073c81d2d266341806a679"
+    "readback_sha256": "f56aefac9955011a6f480727beb2b6c39808d9cbccdfef9e21c7bb49247bc922"
   },
   "artifacts": [
     {
@@ -2614,7 +2614,7 @@
       "sha256": "824e51c244d70b802cfe1f95e37503925cf271e9cc703d433b537c528a129c66",
       "git_blob_sha1": "d1c607f5d944e82d15856ec16cad9f163558aee3",
       "readback_verified": true,
-      "readback_sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf"
+      "readback_sha256": "56f8fe6009122a86701c7dc6297b516b0123e9018b36895418409b63ed4cc428"
     },
     {
       "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java",
@@ -2628,7 +2628,7 @@
       "sha256": "f498b969bb9e5a79f66bb87d8232d0045144145d0167751dc342ba85b0ff4d15",
       "git_blob_sha1": "3351a83e4429c4ac172f5af09998777c6b69c645",
       "readback_verified": true,
-      "readback_sha256": "15ef17390241752b365ec05f381cbd73e5a5f5e4b8073c81d2d266341806a679"
+      "readback_sha256": "f56aefac9955011a6f480727beb2b6c39808d9cbccdfef9e21c7bb49247bc922"
     },
     {
       "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3OpenRewriteTranspiler.java",
@@ -2642,7 +2642,7 @@
       "sha256": "ca98114b1f46cc0858d674393f7ac86d3e92cbbb66842cc511709e725239c911",
       "git_blob_sha1": "d06c42aa8ad27118497cd057d1aef8168e4e97f5",
       "readback_verified": true,
-      "readback_sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf"
+      "readback_sha256": "56f8fe6009122a86701c7dc6297b516b0123e9018b36895418409b63ed4cc428"
     },
     {
       "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeCrateSerialAtomReview.java",
@@ -2656,7 +2656,7 @@
       "sha256": "ead5c49ad51cf5325c5725595bf058ca73daceef092621d671aef7108f9409cc",
       "git_blob_sha1": "7d5535a3b8deb1ad0c9f604f1f94b62194ac3e11",
       "readback_verified": true,
-      "readback_sha256": "15ef17390241752b365ec05f381cbd73e5a5f5e4b8073c81d2d266341806a679"
+      "readback_sha256": "f56aefac9955011a6f480727beb2b6c39808d9cbccdfef9e21c7bb49247bc922"
     },
     {
       "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SemanticCodeInventoryRecipe.java",
@@ -2670,7 +2670,7 @@
       "sha256": "3a475b5a1ea098b0ce07368e4ef1080f8c888d7166ceefe85716a12d735b21cc",
       "git_blob_sha1": "d02f33fe0be66066efb5148d0694763cfaea2392",
       "readback_verified": true,
-      "readback_sha256": "15ef17390241752b365ec05f381cbd73e5a5f5e4b8073c81d2d266341806a679"
+      "readback_sha256": "f56aefac9955011a6f480727beb2b6c39808d9cbccdfef9e21c7bb49247bc922"
     },
     {
       "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspilePass.java",
@@ -2684,7 +2684,7 @@
       "sha256": "f68f4db3d6a849d172f9b168e81138429a6c16aa18745c518058436e0e8efca6",
       "git_blob_sha1": "ef8c0ed9e64adc66dbb663fd36fa3d8a7486123c",
       "readback_verified": true,
-      "readback_sha256": "15ef17390241752b365ec05f381cbd73e5a5f5e4b8073c81d2d266341806a679"
+      "readback_sha256": "f56aefac9955011a6f480727beb2b6c39808d9cbccdfef9e21c7bb49247bc922"
     },
     {
       "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspilePassResult.java",
@@ -2698,7 +2698,7 @@
       "sha256": "596c420fbc30eb07867c03d48b56af6fab1dc6891114362dabc9e0f8ff7bbb4f",
       "git_blob_sha1": "977b8f683dd2ab76ca2256533989f12a2814f044",
       "readback_verified": true,
-      "readback_sha256": "15ef17390241752b365ec05f381cbd73e5a5f5e4b8073c81d2d266341806a679"
+      "readback_sha256": "f56aefac9955011a6f480727beb2b6c39808d9cbccdfef9e21c7bb49247bc922"
     },
     {
       "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspilePlan.java",
@@ -2712,7 +2712,7 @@
       "sha256": "3073058ea8237577b4506ce3222ee83914f68c7451db83bb3f7f8792abf8d13a",
       "git_blob_sha1": "290b11dc5be769119cdb202262f0336ee3612313",
       "readback_verified": true,
-      "readback_sha256": "15ef17390241752b365ec05f381cbd73e5a5f5e4b8073c81d2d266341806a679"
+      "readback_sha256": "f56aefac9955011a6f480727beb2b6c39808d9cbccdfef9e21c7bb49247bc922"
     },
     {
       "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspileRun.java",
@@ -2726,7 +2726,7 @@
       "sha256": "0be8b21e6fd0ec16b21c781e6ee9d9248fa8413a4010984246fb69cf72ffd485",
       "git_blob_sha1": "14284e82051ac5936dd82d93881228a914906c84",
       "readback_verified": true,
-      "readback_sha256": "15ef17390241752b365ec05f381cbd73e5a5f5e4b8073c81d2d266341806a679"
+      "readback_sha256": "f56aefac9955011a6f480727beb2b6c39808d9cbccdfef9e21c7bb49247bc922"
     },
     {
       "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MasteryClassLoader.java",
@@ -2754,7 +2754,7 @@
       "sha256": "d825d59df9ca7839ad06af2fd5c6ae386ce373f24eecc9184d23d1fe3261d8b1",
       "git_blob_sha1": "0d3aed858efcc450cf24822567f4ee605e84a18d",
       "readback_verified": true,
-      "readback_sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf"
+      "readback_sha256": "56f8fe6009122a86701c7dc6297b516b0123e9018b36895418409b63ed4cc428"
     },
     {
       "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3AtomPatternSignalChainRecipe.java",
@@ -2768,7 +2768,7 @@
       "sha256": "876929d5e8caa03ea1e3af6d8d1d4d575d15aee3014a5f2ca425f4786eda5e98",
       "git_blob_sha1": "09df87a872817787fc8607bf11805cfa26c53aed",
       "readback_verified": true,
-      "readback_sha256": "15ef17390241752b365ec05f381cbd73e5a5f5e4b8073c81d2d266341806a679"
+      "readback_sha256": "f56aefac9955011a6f480727beb2b6c39808d9cbccdfef9e21c7bb49247bc922"
     },
     {
       "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3CodeSignalChain.java",
@@ -2782,7 +2782,7 @@
       "sha256": "a15825aef2a00641d74fba761c4858f449d6924a1286aa1eb71b1d81932351fa",
       "git_blob_sha1": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
       "readback_verified": true,
-      "readback_sha256": "15ef17390241752b365ec05f381cbd73e5a5f5e4b8073c81d2d266341806a679"
+      "readback_sha256": "f56aefac9955011a6f480727beb2b6c39808d9cbccdfef9e21c7bb49247bc922"
     },
     {
       "path": "m3-fast-search/src/main/java/jdk/internal/m3/search/CompetitiveProblemReview.java",
@@ -2796,7 +2796,7 @@
       "sha256": "83dad41fa4ce50b70f1e2e6800241b69b5136807902fd2fc6a6d024024894ac4",
       "git_blob_sha1": "baa84c13b7fd330eab6b1832dab1b4b523bfd8ce",
       "readback_verified": true,
-      "readback_sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf"
+      "readback_sha256": "56f8fe6009122a86701c7dc6297b516b0123e9018b36895418409b63ed4cc428"
     },
     {
       "path": "m3-algo/src/main/java/jdk/internal/m3/algorithms/corpus/ChallengeDonorPassLedger.java",
@@ -2810,7 +2810,7 @@
       "sha256": "a089808e8563bac1f2d57aa1cc9f131e609c1d01ffcb1af8b302579adb00c346",
       "git_blob_sha1": "074dd60249893e4c606e68823fdebf191f98f269",
       "readback_verified": true,
-      "readback_sha256": "15ef17390241752b365ec05f381cbd73e5a5f5e4b8073c81d2d266341806a679"
+      "readback_sha256": "f56aefac9955011a6f480727beb2b6c39808d9cbccdfef9e21c7bb49247bc922"
     },
     {
       "path": "m3-algo/src/main/java/jdk/internal/m3/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
@@ -2824,7 +2824,7 @@
       "sha256": "59742f333ab2a04c3cd5b12061bff182e9a2114549117ce323928d391c10fafa",
       "git_blob_sha1": "e4e55dbc3f9255ad71dfa391c43c352b31472622",
       "readback_verified": true,
-      "readback_sha256": "15ef17390241752b365ec05f381cbd73e5a5f5e4b8073c81d2d266341806a679"
+      "readback_sha256": "f56aefac9955011a6f480727beb2b6c39808d9cbccdfef9e21c7bb49247bc922"
     },
     {
       "path": "m3-donor-inventory/src/main/java/jdk/internal/m3/donor/DonorMechanicalShapeCatalog.java",
@@ -2852,7 +2852,7 @@
       "sha256": "65ed79d4af2f48ba931d5eb5dee7710eb40e823f2c0cdbad06f45e228767b4eb",
       "git_blob_sha1": "eaacc9846285222938eee09bb91827ed22020b1b",
       "readback_verified": true,
-      "readback_sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf"
+      "readback_sha256": "56f8fe6009122a86701c7dc6297b516b0123e9018b36895418409b63ed4cc428"
     }
   ],
   "source_components": [
@@ -2867,7 +2867,7 @@
       "sha256": "7846d9447016ab714a4d1c82d7f3814efa7a94049cb99bb59ba09f6f6d8c7a80",
       "git_blob_sha1": "1a1c0cc8017b9ce9eadd6eba7e2ead3400a2266f",
       "readback_verified": true,
-      "readback_sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf"
+      "readback_sha256": "56f8fe6009122a86701c7dc6297b516b0123e9018b36895418409b63ed4cc428"
     }
   ],
   "execution_reports": [

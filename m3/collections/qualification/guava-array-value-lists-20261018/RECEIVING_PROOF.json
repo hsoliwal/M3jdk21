@@ -13,13 +13,13 @@
   "bindings": [
     {
       "path": "m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3LibraryCollections.java",
-      "before_sha256": "f93bc46a69911eb8a05b13b94bb4e4d77b42e2a534576e90c1243b7cbe779fb6",
+      "before_sha256": "4308cce1ffc0f982f901a852484fc6c8dcd10d3ddcb52b4935c394ccf5500fef",
       "after_sha256": "6da1ee407d7ade0daaf1260e87e42edbede7c01ff3f7b773fef0c137d0a4e8cb"
     },
     {
       "path": "m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3LibraryCollectionsTest.java",
-      "before_sha256": "4bebee17ef96cefd2c779c76a0b190e27de311d136dec2de0fc5c05161ac199a",
-      "after_sha256": "792a0a8fdb7dadd0fc81e033fc0fc61cc8e2f7c4af5acdfb7098304d19b0d1f1"
+      "before_sha256": "db377aa16cf2de5a8f49ef273f9b5fc7fb0f1a35ac247339f0556cea086d2d04",
+      "after_sha256": "f3d64d981272b45b0866d307be3ce66bdf88bc7ade581a3497f28c50e19febe5"
     }
   ],
   "runtime_tests": {

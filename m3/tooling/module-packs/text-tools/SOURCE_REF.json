@@ -31,22 +31,22 @@
   },
   "files": {
     "m3/docs/name-mapping.json": {
-      "sha256": "fa9832d48ec7dc0334fcb3a02e1b665612ca3a9f3dfe13cd104ff3f2c42871ac",
-      "git_blob": "a44460f982940623cf6ba1ca625caeeaa889f633",
+      "sha256": "d63273d13d34e95590d2f8511ae191a817144a2d671db68add35ef95b5103995",
+      "git_blob": "8b15bc9a615b990e126598a4aeb4af133dab7492",
       "canonical_source_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-tools-recovery-20261014/4.txt",
-      "canonical_source_sha256": "fa9832d48ec7dc0334fcb3a02e1b665612ca3a9f3dfe13cd104ff3f2c42871ac",
+      "canonical_source_sha256": "d63273d13d34e95590d2f8511ae191a817144a2d671db68add35ef95b5103995",
       "license": "Apache-2.0",
-      "canonical_source_git_blob": "a44460f982940623cf6ba1ca625caeeaa889f633",
+      "canonical_source_git_blob": "8b15bc9a615b990e126598a4aeb4af133dab7492",
       "source_revision": "ebff714f37756273594086226098137d0a37b30a",
       "recipe": "M3HashPinnedTextSnapshotRecipe / m3-tools-recovery-20261014"
     },
     "m3/tooling/jmod-recipes/src/main/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorRecipe.java": {
-      "sha256": "db6625450e98eed094a19142370bcd7a064eb91322eab7cf8f8cf9bb2030417f",
-      "git_blob": "302a06c5a79ecb6fd26c988dcf1fb9147e9198e1",
+      "sha256": "737ce8cf4b4654627f9429497abb316e8c0dbe2e38c921e71eae445218c823f7",
+      "git_blob": "9882f9773cc299ef80477fbf4de080ba763ab781",
       "recipe": "M3HashPinnedJavaSnapshotRecipe or M3HashPinnedTextSnapshotRecipe / m3-text-jmods-receiver-20261014",
       "canonical_source_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-text-jmods-receiver-20261014/00-M3ModuleDescriptorRecipe.java.txt",
-      "canonical_source_git_blob": "302a06c5a79ecb6fd26c988dcf1fb9147e9198e1",
-      "canonical_source_sha256": "db6625450e98eed094a19142370bcd7a064eb91322eab7cf8f8cf9bb2030417f",
+      "canonical_source_git_blob": "9882f9773cc299ef80477fbf4de080ba763ab781",
+      "canonical_source_sha256": "737ce8cf4b4654627f9429497abb316e8c0dbe2e38c921e71eae445218c823f7",
       "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
@@ -61,12 +61,12 @@
       "license": "Apache-2.0"
     },
     "m3/tooling/module-packs/text-tools/COVERAGE.json": {
-      "sha256": "1456736be0668da70674ebcd2fdccd4dd15a3937480804a0138185071657e90e",
-      "git_blob": "8c8bd6546f80ed92fb5123de52da67b1acb88194",
+      "sha256": "eba37c17300cf308ad9aecf1e44a7c7bb36a98c58652a014a3f9b251c6a4a406",
+      "git_blob": "26af3561146e4ec0b605c2ab5fda06cedc4973eb",
       "recipe": "M3HashPinnedJavaSnapshotRecipe or M3HashPinnedTextSnapshotRecipe / m3-text-jmods-receiver-20261014",
       "canonical_source_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-text-jmods-receiver-20261014/02-COVERAGE.json.txt",
-      "canonical_source_git_blob": "8c8bd6546f80ed92fb5123de52da67b1acb88194",
-      "canonical_source_sha256": "1456736be0668da70674ebcd2fdccd4dd15a3937480804a0138185071657e90e",
+      "canonical_source_git_blob": "26af3561146e4ec0b605c2ab5fda06cedc4973eb",
+      "canonical_source_sha256": "eba37c17300cf308ad9aecf1e44a7c7bb36a98c58652a014a3f9b251c6a4a406",
       "source_revision": "3b5c4be7630f5bbb6c6957e2f4c4b3f132e4ab9c",
       "license": "Apache-2.0"
     },
@@ -401,12 +401,12 @@
       "recipe": "M3HashPinnedJavaSnapshotRecipe admission + org.openrewrite.java.ChangePackage"
     },
     ".github/workflows/m3sdk-jmod-receiver.yml": {
-      "sha256": "b283a9734172305e2375c4961b4fdf0d34161801d19141d2e735115d17e340e0",
-      "git_blob": "0d6f194a3d07f74f7b0bd924f36b2a2d4515382b",
+      "sha256": "7b2b89e66d5273783c6f4a9e22504298e70f45f3b4da999258b4dc2785dcb2a4",
+      "git_blob": "3d609e7244da5d2c66f07c46772b0a0c6b8db4b9",
       "canonical_source_path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-tools-recovery-20261014/3.txt",
-      "canonical_source_sha256": "b283a9734172305e2375c4961b4fdf0d34161801d19141d2e735115d17e340e0",
+      "canonical_source_sha256": "7b2b89e66d5273783c6f4a9e22504298e70f45f3b4da999258b4dc2785dcb2a4",
       "license": "Apache-2.0",
-      "canonical_source_git_blob": "0d6f194a3d07f74f7b0bd924f36b2a2d4515382b",
+      "canonical_source_git_blob": "3d609e7244da5d2c66f07c46772b0a0c6b8db4b9",
       "source_revision": "ebff714f37756273594086226098137d0a37b30a",
       "recipe": "M3HashPinnedTextSnapshotRecipe / m3-tools-recovery-20261014"
     }

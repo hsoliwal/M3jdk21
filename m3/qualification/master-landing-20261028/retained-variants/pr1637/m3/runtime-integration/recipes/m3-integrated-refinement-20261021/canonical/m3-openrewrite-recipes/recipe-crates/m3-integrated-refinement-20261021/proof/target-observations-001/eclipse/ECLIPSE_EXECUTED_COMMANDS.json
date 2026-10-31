@@ -28,7 +28,7 @@
       "exit_code": 0,
       "log_sha256": "2954b2e87319baf5e864136157ca178b5c6fa27e6ce2c01b1a6e980ef360c030",
       "pom_sha256": "d62076540a93bac5b3bcd57ebaddc0206efc131614af41d9a1a315be452b7ebc",
-      "result_sha256": "7c8219f905f060bed732a86cabff10d3e086c11e56a4311c32fe081956948510"
+      "result_sha256": "23456ec5686ac441b78f3597961bd45313094b0e5c4615b2434e943c37d56a2a"
     },
     {
       "trial": "eclipse-contract-donor-01",
@@ -47,7 +47,7 @@
       "exit_code": 1,
       "log_sha256": "1b6e0c8d7ebfde301d6b127a1bc7d66c0c793f07bcb1644c0f02e1e38074f275",
       "pom_sha256": "d62076540a93bac5b3bcd57ebaddc0206efc131614af41d9a1a315be452b7ebc",
-      "result_sha256": "8f376b6bca15d672d8f06fca66b0fcc2e77139e42933f27824bdcdfc517c243b"
+      "result_sha256": "95787030a492d507f898830f1fbbc4fd8227883751020cd9497d0e30882bbaf7"
     },
     {
       "trial": "eclipse-contract-candidate-02",
@@ -66,7 +66,7 @@
       "exit_code": 0,
       "log_sha256": "f4b07fb672d88529a5ca80ed6ff8f5c1f17d7800ffc06e669e284b49c7596f5b",
       "pom_sha256": "d62076540a93bac5b3bcd57ebaddc0206efc131614af41d9a1a315be452b7ebc",
-      "result_sha256": "1f6b8e28de7a10c0a8dee6afd3a747be169e6fd8943080d9c2651d11a4bf4fce"
+      "result_sha256": "2aa402488bd391f1f6f6eba259d12a67ce1972ec41a133f657bb079b822b570f"
     },
     {
       "trial": "eclipse-current-candidate-03",
@@ -86,7 +86,7 @@
       "exit_code": 0,
       "log_sha256": "cbeeeae9fca6dc11abb02fb57e88807215985bc1085d720aaebda8769768e184",
       "pom_sha256": "fe31189f987c200ada8aeb76776f6f7f38c894416872a4bfb36d904980e36a3e",
-      "result_sha256": "7584ff1ca7865cb05f3200d33283c3c5f71ad81c7fec23d0de2e8297c161921b"
+      "result_sha256": "f6fdb273fdd89ada70af7b151b1794e24874d052648226df87780fd39309558f"
     }
   ]
 }

@@ -1,22 +1,22 @@
 [
   {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/SOURCE_SEALS.json",
-    "sha256": "6cc232bd392dd188b227a0a7c304d0a6e6d25ed91dd3641fefb335afdfc8574e",
+    "sha256": "5baa373db8748eba54cecfc5899eb36b5b2f09aa85cfb8399195bac6a367471a",
     "bytes": 1402
   },
   {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/apply_receiver.py",
-    "sha256": "1e39c6f4b246222aa1cc5c8349cb28dd1cf595a7b699c498bf25c814938d0166",
+    "sha256": "2b43a48b0af414e97c0bde1031c5e891cff1de9ccc4f4c38038b3de3f1032509",
     "bytes": 7421
   },
   {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/attribution/DependencyCustody.java",
-    "sha256": "640e1dd09e65d5343ee7660e37c05a692ce854ae14b692c3c2b2aec21470827a",
+    "sha256": "93aabcd2402102ab48e97331a94d9c70e7a6e07b21699f4dca390a2c095b5c64",
     "bytes": 379
   },
   {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/attribution/expected-methods.txt",
-    "sha256": "3c0e128f7995f973ffcab8afe9abcd45fc9b078283966c10fd48157e1bdbd0ad",
+    "sha256": "832eff4da4b1b29aa9256cb7050d56a8edc643038a0be66b665bf04797dbe44a",
     "bytes": 51
   },
   {
@@ -26,37 +26,37 @@
   },
   {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/pom.xml",
-    "sha256": "db625339ac0cf0c6067da37d401f98c4d3bebe8dd00b6b96a439b0773ab7203b",
+    "sha256": "21f617d90e89fbb9c9d82802238822cebbab52963a6027fe301a5e186b9750ef",
     "bytes": 4084
   },
   {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/preimages/m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java",
-    "sha256": "8e6156376ea9548971b78bb876dc3968195266f04c17c5b061d7f5e4b52f367d",
+    "sha256": "a273220cdd1a2b20857ccba086394c0a0a726cc3f2711e9eb7fdadbaffb08256",
     "bytes": 11009
   },
   {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/preimages/m3/tooling/module-packs/nlp-search/current-source-lock.json",
-    "sha256": "054029431fbd8063c1e0397c43f3538f319984e252c92f08538881dc0a2eaff5",
+    "sha256": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a",
     "bytes": 25292
   },
   {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/prepare_packet.py",
-    "sha256": "c61c6d2f3c32bbafb2944e6739a4f33165a8290b3f8b5a8c9c81e7b2c48d3002",
+    "sha256": "fabda7308bbc4fbd65fd4ec8f46465e6c321e091b478dfde2afd50cbf45e3e77",
     "bytes": 7022
   },
   {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/qualify.py",
-    "sha256": "98cab73999f5a89ef97ef3def5ece019e5b9095478df891d5f6b3adaff2d3114",
+    "sha256": "c0fd4b4b5dd4015f0c27f34df0e3d818935d30a8c46a741c987773a4f0d6da98",
     "bytes": 9717
   },
   {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/src/test/java/jdk/internal/m3/rewrite/M3NlpCurrentReceiverLockRecipeTest.java",
-    "sha256": "e5031b1b72dffe8b2b13a886ecfc4b8ccee8caab2e00a6008aabaee782740673",
+    "sha256": "c623a57f0dec84f6f8b6e76f10b4fd495346b8b7ea373fa85e865f587b27ad00",
     "bytes": 31707
   },
   {
     "path": "m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/verify_sources.py",
-    "sha256": "102e2f52e30dece10cbaed1676dcd2c1698f1c302eacd63ed053255377281d69",
+    "sha256": "2500f1d631626e0001b8ba04c63a6d768c03b6578f00c84cbe8efe16c5f29917",
     "bytes": 2411
   },
   {
@@ -66,42 +66,42 @@
   },
   {
     "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
-    "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63",
+    "sha256": "92cc90c46a1ca672a016a89c0d65e6909e090264ba1aa76a85b7fa333470e38b",
     "bytes": 31505
   },
   {
     "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
-    "sha256": "5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc",
+    "sha256": "613fd494de5eebdbc29d8982c599d44cd321754b370175f7d097720904a04853",
     "bytes": 19983
   },
   {
     "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
-    "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579",
+    "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0",
     "bytes": 8268
   },
   {
     "path": "m3-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-nlp-current-receiver-lock-20261021.yml",
-    "sha256": "15e677dc21d770567af56a0ada688026f9be56654f0f7d214fb276cf3f687bd7",
+    "sha256": "2e14e4dc5dbb498014f6d04eb88ac4b51277d73d8c826486861f42c6bc74b624",
     "bytes": 586
   },
   {
     "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-nlp-current-receiver-lock-20261021-001/manifest.tsv",
-    "sha256": "2dda091367402d8a8fb1b7df9af6a767df3fe4245683c1bc18d9bf30f488ce1d",
+    "sha256": "99043539fdc0eb1de21fed14826929be34cb4ee763e92659d5f53686dbff66f2",
     "bytes": 209
   },
   {
     "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-nlp-current-receiver-lock-20261021-001/postimage.java.txt",
-    "sha256": "92fd76c3f0d3c10c90ea4cb52485d2dbceda513fa3d794d22ec67fd153fd62ed",
+    "sha256": "07c498aafa158278bf2fea6ee54bae7f09bf037051f1f8207511597ccef02929",
     "bytes": 11039
   },
   {
     "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-current-receiver-lock-20261021-002/manifest.tsv",
-    "sha256": "edc97c75aaadac0fe2354e32ea24d0d6376a93ab756dee220ea1e6f022066496",
+    "sha256": "9d022a2ddfcac2a5f77d5387a99f1b71e7b1637a94751f86edc00e49074882c6",
     "bytes": 204
   },
   {
     "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-nlp-current-receiver-lock-20261021-002/postimage.txt",
-    "sha256": "7f591c98c603ba8128c97747fe38fd1ccfe8adb5f2cd712b98b2697fff935acb",
+    "sha256": "271a532810591e94f5ceaab443820fdb08f96d1288e9ba5c1ce55c09d3444c8b",
     "bytes": 25536
   }
 ]

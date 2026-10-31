@@ -9,21 +9,21 @@
     "revision": "2779aba3f98f31c324be43f731be7914e1a05935"
   },
   "parents": [
-    "3280bc2b92368bfa4842c1094cd027d6956768feb97c06c092ead7407e9451e8"
+    "d004e61de57ba3eda73639dc64959975d0161bf88688531883a689cdca7ccd68"
   ],
   "supersedes": [],
   "recipe_before": null,
   "recipe_after": {
     "path": "proof/sdk-001-offline/named-recipe.yml",
-    "sha256": "15e677dc21d770567af56a0ada688026f9be56654f0f7d214fb276cf3f687bd7"
+    "sha256": "2e14e4dc5dbb498014f6d04eb88ac4b51277d73d8c826486861f42c6bc74b624"
   },
   "source_manifest_before": {
     "path": "preimages/m3/tooling/module-packs/nlp-search/current-source-lock.json",
-    "sha256": "054029431fbd8063c1e0397c43f3538f319984e252c92f08538881dc0a2eaff5"
+    "sha256": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a"
   },
   "source_manifest_after": {
     "path": "SOURCE_SEALS.json",
-    "sha256": "6cc232bd392dd188b227a0a7c304d0a6e6d25ed91dd3641fefb335afdfc8574e"
+    "sha256": "5baa373db8748eba54cecfc5899eb36b5b2f09aa85cfb8399195bac6a367471a"
   },
   "observation_epoch_seconds": 1792550604,
   "author": "Hitesh Soliwal and Contributors to the Synexia Project",
@@ -55,23 +55,23 @@
   "regression_fixtures": [
     {
       "path": "proof/intake-refusal-001/curate_nlp_owner_evidence.py",
-      "sha256": "792f96a2039256636b18c1518c75e22f6a9c7f51c59244b65d6e6460869206fb"
+      "sha256": "8d9503efc61408e70eb886d84df2f3153ea256ac2cbac0b892000d505cba8645"
     },
     {
       "path": "proof/intake-refusal-001/RESULT.json",
-      "sha256": "8db83e0906b31757239295d9e9aa65b79cd1cf481b440cfa584ed7ba581ecbee"
+      "sha256": "578982a9c4c11664d7747819784e9da05acd1c60ff24fe80223ede38868472c9"
     },
     {
       "path": "provenance/intake/owner-candidate-001-HANDOFF.json",
-      "sha256": "9abfc97ebc9c003e5ff3666d5a91bd108ea09498dbcb1b17cd9bd02c0f1e79d3"
+      "sha256": "3efcd3660550d141430e5154e636216b9809955d21020e2b3b8de5d4be96cf81"
     },
     {
       "path": "provenance/owner-candidate-001-INTAKE.json",
-      "sha256": "612c61cdd6cdbc141150c1440e83d3910d7bdc3db3f76e5a6942d0989436636c"
+      "sha256": "7d67a41359286e8d88199e6026729b262500da887d392d85f1a0103ac30be9f6"
     },
     {
       "path": "provenance/qualification-tools/curate_owner_evidence.py",
-      "sha256": "2760ec8863b443024c8045ee63bab4170d1eb54575c3b643d6b65c9470c9c1fb"
+      "sha256": "9e2f154e2013303af52041c5f4dad255ed43ce79ac57d578bff8a54ce7cf18e2"
     }
   ],
   "verification": [
@@ -84,12 +84,12 @@
         "canonical-work/curate_nlp_owner_evidence.py",
         "owner-candidate-001",
         "nlp-work/EVIDENCE_HANDOFF-LOCK-CANDIDATE.json",
-        "9abfc97ebc9c003e5ff3666d5a91bd108ea09498dbcb1b17cd9bd02c0f1e79d3"
+        "3efcd3660550d141430e5154e636216b9809955d21020e2b3b8de5d4be96cf81"
       ],
       "evidence": [
         {
           "path": "proof/intake-refusal-001/RESULT.json",
-          "sha256": "8db83e0906b31757239295d9e9aa65b79cd1cf481b440cfa584ed7ba581ecbee"
+          "sha256": "578982a9c4c11664d7747819784e9da05acd1c60ff24fe80223ede38868472c9"
         }
       ]
     },
@@ -102,12 +102,12 @@
         "canonical-work/curate_nlp_owner_evidence.py",
         "owner-candidate-001",
         "nlp-work/EVIDENCE_HANDOFF-LOCK-CANDIDATE.json",
-        "9abfc97ebc9c003e5ff3666d5a91bd108ea09498dbcb1b17cd9bd02c0f1e79d3"
+        "3efcd3660550d141430e5154e636216b9809955d21020e2b3b8de5d4be96cf81"
       ],
       "evidence": [
         {
           "path": "provenance/owner-candidate-001-INTAKE.json",
-          "sha256": "612c61cdd6cdbc141150c1440e83d3910d7bdc3db3f76e5a6942d0989436636c"
+          "sha256": "7d67a41359286e8d88199e6026729b262500da887d392d85f1a0103ac30be9f6"
         }
       ]
     },
@@ -128,11 +128,11 @@
       "evidence": [
         {
           "path": "proof/sdk-001-offline/RESULT.json",
-          "sha256": "5f9b55adcb99fb526dd044476ec647cd2ca82dc3bb25a38c71f479df9925a187"
+          "sha256": "0bf285d0e082e121e178b0a22d47d92124e84579f5436c87276e8b999142fcdb"
         },
         {
           "path": "proof/sdk-001-offline/recipe-proof.tsv",
-          "sha256": "3e524fbb755c3eae8156fd1e04cfceb56a2fd7b6095ffd6d89e2f1a33873d10a"
+          "sha256": "091f0e8ad4d89e4132f1c2c17741e0bcbd1ed27fdc46e6651d084eed7a9023c8"
         }
       ]
     },
@@ -165,7 +165,7 @@
       "evidence": [
         {
           "path": "proof/receiver-runtime-001/combined-receiver-001-receipts/RESULT.json",
-          "sha256": "38c71b8c4f6fb632f2352873cbd2578be7cf1f1383cdf34d64f4fce9e5c0cee1"
+          "sha256": "1af51c5d7642bb84f88e61816ada2bc0b3d033dfdd4387f5a35cd2a11834c935"
         },
         {
           "path": "proof/receiver-runtime-001/combined-receiver-001-receipts/command.log",
@@ -173,7 +173,7 @@
         },
         {
           "path": "proof/receiver-runtime-001/FINAL_RECEIVER_QUALIFICATION.json",
-          "sha256": "38781b148a4f46623481a6e10b04c71407608ede27ad6925ddd905436419fe41"
+          "sha256": "e9735ffaa55b10ce92e68c928cdb5e224cd0babc68eff396e8f1fd102b5d1f54"
         }
       ]
     }
@@ -194,15 +194,15 @@
     "evidence": [
       {
         "path": "proof/sdk-001-offline/RESULT.json",
-        "sha256": "5f9b55adcb99fb526dd044476ec647cd2ca82dc3bb25a38c71f479df9925a187"
+        "sha256": "0bf285d0e082e121e178b0a22d47d92124e84579f5436c87276e8b999142fcdb"
       },
       {
         "path": "proof/sdk-001-offline/recipe-proof.tsv",
-        "sha256": "3e524fbb755c3eae8156fd1e04cfceb56a2fd7b6095ffd6d89e2f1a33873d10a"
+        "sha256": "091f0e8ad4d89e4132f1c2c17741e0bcbd1ed27fdc46e6651d084eed7a9023c8"
       },
       {
         "path": "proof/copier-qualification-001/RESULT.json",
-        "sha256": "02ba2402bcbe554ec4e18ede6eec1c84c4accccb098a9779996995aaedf4289b"
+        "sha256": "597b29f2bb92576017e30c08e82300fe2e9117367f7dce54cd869964247fb569"
       }
     ]
   },

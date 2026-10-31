@@ -23,7 +23,7 @@ CANONICAL = (
     / "m3/indexdb/src/main/java/jdk/internal/m3/mindex/db/"
     "M3IndexDbFingerprintV1.java"
 )
-LEGACY_BLOB = "df44495f5e5b48ea1bf4a863df9ca188bd787948"
+LEGACY_BLOB = "428658eb8565f77f8e450a98e24e90a3837a2215"
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 
 

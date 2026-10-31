@@ -130,10 +130,10 @@ The general suite's refusal helper accepts several exception classes without che
 
 Historical [version-repair notes][version-report] report standalone Java-21 corpus/JIT/interpreter assertions and then-unexecuted JUnit/recipe gates; [later closure design][closure-design] records a reproduced recipe-fixture failure and recovery work; the [JDK proof continuation][proof] distinguishes its intended lifecycle and target gates. Read those documents with their dates, source pins and explicit limits. Their reports are not new execution at this reference's source pin, and a configured JaCoCo threshold is not measured coverage. Hosted CI is separate exact-commit/workflow evidence. This pass validates documentation/source identities and routing only. Mutable-input races, scale/resource limits, every platform/JDK combination, every malformed archive, full recipe/assembler closure and exact-head execution remain outside its proof.
 
-[artifact]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/tooling/module-packs/kernel/src/main/java/com/m3/tools/modulepack/M3ModuleArtifact.java
-[inspector]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/tooling/module-packs/kernel/src/main/java/com/m3/tools/modulepack/M3ModuleInspector.java
-[graph]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/tooling/module-packs/kernel/src/main/java/com/m3/tools/modulepack/M3ModuleGraph.java
-[inventory]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/tooling/module-packs/kernel/src/main/java/com/m3/tools/modulepack/M3ModuleInventory.java
+[artifact]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleArtifact.java
+[inspector]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleInspector.java
+[graph]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleGraph.java
+[inventory]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/tooling/module-packs/kernel/src/main/java/jdk/m3/tools/modulepack/M3ModuleInventory.java
 [readme]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/tooling/module-packs/README.md
 [admission]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/docs/community-capability-admission.md
 [invariant]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/docs/m3jdk21-porting-invariant.md
@@ -143,7 +143,7 @@ Historical [version-repair notes][version-report] report standalone Java-21 corp
 [parent-pom]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/tooling/module-packs/pom.xml
 [kernel-pom]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/tooling/module-packs/kernel/pom.xml
 [module-info]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/tooling/module-packs/kernel/src/main/java/module-info.java
-[adapter]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/tooling/module-packs/recipes/src/main/java/com/m3/rewrite/packs/M3InventoryModulePackRecipe.java
+[adapter]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/tooling/module-packs/recipes/src/main/java/jdk/m3/rewrite/packs/M3InventoryModulePackRecipe.java
 [version-report]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/tooling/module-packs/tasks/version/FINAL_REPORT.md
 [closure-design]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/tooling/module-packs/tasks/closure-20261005/DESIGN.md
 [proof]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/tooling/module-packs/verification/jdk-execution/PROOF.md

@@ -15,7 +15,7 @@ prepare a review; it does not change those authorities or any license.
    Reuse an existing guide and mapping row rather than creating a second authority.
 3. Classify the change: standalone module, reusable donor recipe, exact target adaptation,
    runtime integration, documentation, or evidence. Review the
-   [convergence model](m3/docs/SYNEXIA_CONVERGENCE_MODEL.md).
+   [convergence model](m3/docs/M3_CONVERGENCE_MODEL.md).
 4. For reusable semantics, improve and qualify the canonical Synexia recipe first; receive
    exact pinned output here. Record donor revision/path/blob, recipe identity, target
    preimage/postimage, notices and target-only adaptations. Do not independently edit

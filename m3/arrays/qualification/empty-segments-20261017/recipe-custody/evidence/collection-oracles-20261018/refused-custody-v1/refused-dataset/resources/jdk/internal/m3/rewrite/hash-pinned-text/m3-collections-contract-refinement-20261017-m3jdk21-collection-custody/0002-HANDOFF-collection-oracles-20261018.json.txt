@@ -12,11 +12,11 @@
   "existing_host_controls": [
     {
       "path": "prepare.py",
-      "sha256": "9b0b3d93c787c9a56036cddb2b044aef30f6fa8a1fa20fa5a2edae46dfd1e62c"
+      "sha256": "7c2063fa5aa88d0872fff0157413a1d2fdca4f00d01c787f8650969e8b514014"
     },
     {
       "path": "receive.py",
-      "sha256": "db258f16e1841f6f5191c1c969c20314a8d143bfa6558b60f684bea440cc1712"
+      "sha256": "e81744965f37cb890e00f6c1c7e50f4dae44c68eedafdf46565a7e105bab5474"
     },
     {
       "path": "ENGINE_SOURCES.tsv",
@@ -24,15 +24,15 @@
     },
     {
       "path": "src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
-      "sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43"
+      "sha256": "fa8a8e63fd445c0fbcd877315044c6e5c36f779db6e8a11797e03ab805e5903f"
     },
     {
       "path": "contract/test_prepare.py",
-      "sha256": "f504f1dcfafb24fd87f8f677643b45eecc74674881e16bf727b76c4e6a4d1856"
+      "sha256": "79c4335d02ca2179301d617d9ae447b778f2f12361e379ff04ad77c0237e7933"
     },
     {
       "path": "contract/verify_receiver.py",
-      "sha256": "a4d82df8b31e707afe7caa5e76524d191f285e2887dbfdfa95cfdc382ae01f7d"
+      "sha256": "a400589821da1c448b3c2354aef91c7a6fd596cf265b2baca097494135126d4c"
     }
   ],
   "existing_engine_sources": [
@@ -64,11 +64,11 @@
       "evidence": {
         "SDK_INPUTS.tsv": {
           "path": "evidence/collection-oracles-20261018/recipe/SDK_INPUTS.tsv",
-          "sha256": "cc088a0eb1665c481ac221cf55ac8ccf85bd7e12faafb73cb19e0d7f9924e221"
+          "sha256": "7994125b72e94a5b1dc90bfad98f9bed9ad8b3ec6aac6df742c4a5428f8e5d77"
         },
         "SDK_RESULTS.tsv": {
           "path": "evidence/collection-oracles-20261018/recipe/SDK_RESULTS.tsv",
-          "sha256": "47b9fed8ef0992b851c646398b8030ea37ab6e83211d1874e23ec050d2782ca0"
+          "sha256": "bb8b783d2d5c56ba2d02ac75a47e85ce404a5ddd3270f3baa16c64e07c9e31c5"
         },
         "SDK_TESTS.xml": {
           "path": "evidence/collection-oracles-20261018/recipe/SDK_TESTS.xml",
@@ -97,7 +97,7 @@
     },
     {
       "path": "authoring/collection-oracles-20261018/prepare_collection_oracles.py",
-      "sha256": "e9f098e2761f1d62c103739e429a36605404cbf5fbbd860adf70693fe53ac28b",
+      "sha256": "383b1e59ba3b0256e6e9d05b0bbc0d86a8877afea37d1e0faeee4afb08228046",
       "bytes": 15810,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/authoring/collection-oracles-20261018/prepare_collection_oracles.py"
@@ -121,7 +121,7 @@
     },
     {
       "path": "datasets/m3jdk21-collection-oracles/MODES.tsv",
-      "sha256": "22844d6fb02a47a87136e1f32c9faf3eb5b84263955e9f3cd3a27d97bbf2b960",
+      "sha256": "f2e39697a528e23c52092d53096c0b0baaeeb54bf8c071e417a91c9ca10302a2",
       "bytes": 480,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/MODES.tsv"
@@ -161,7 +161,7 @@
     },
     {
       "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/manifest.tsv",
-      "sha256": "b1ae58dc8d7e7981c56390f3f417c14d292705b1ca318c4b07e7926aa4360df4",
+      "sha256": "147fd19cadbe6135d4858577e2c6f9a7eda8d080d4b38037f80d03f1da801ea0",
       "bytes": 697,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/manifest.tsv"
@@ -193,7 +193,7 @@
     },
     {
       "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0002-CATALOGUE.json.txt",
-      "sha256": "1e20212f107d27de891ecc959a42fabe2511f7956ae03f6c871f0cd5aa01121c",
+      "sha256": "a7fd26aace96e8cd9b7a93cecbeed8abdd356fbda3d0a1635fc8d638d367a4ec",
       "bytes": 6972,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0002-CATALOGUE.json.txt"
@@ -209,7 +209,7 @@
     },
     {
       "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/manifest.tsv",
-      "sha256": "69b1272bbd3b461b40df4e9685bb893a41c1f3de16c6c963d0c22725af2ae0ce",
+      "sha256": "5d7e563c585978fbfbf2c2234820a72f4226d3cf4248ca67c8c6d758ae723fb1",
       "bytes": 506,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/manifest.tsv"
@@ -217,7 +217,7 @@
     },
     {
       "path": "evidence/collection-oracles-20261018/baseline-failures/SOURCE_RECEIPT.json",
-      "sha256": "09b423cf299ad39c8ffc09db425e97a13f6c369f9933403b08a92826de893514",
+      "sha256": "0d2ae339dfe0fed405cd7d387914d5bd6a5aebc8047f1081ea7eb7ed372b6c3d",
       "bytes": 2836,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-baseline/SOURCE_RECEIPT.json"
@@ -321,7 +321,7 @@
     },
     {
       "path": "evidence/collection-oracles-20261018/recipe/SDK_INPUTS.tsv",
-      "sha256": "cc088a0eb1665c481ac221cf55ac8ccf85bd7e12faafb73cb19e0d7f9924e221",
+      "sha256": "7994125b72e94a5b1dc90bfad98f9bed9ad8b3ec6aac6df742c4a5428f8e5d77",
       "bytes": 4369,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-collection-oracles/candidate/SDK_INPUTS.tsv"
@@ -329,7 +329,7 @@
     },
     {
       "path": "evidence/collection-oracles-20261018/recipe/SDK_RESULTS.tsv",
-      "sha256": "47b9fed8ef0992b851c646398b8030ea37ab6e83211d1874e23ec050d2782ca0",
+      "sha256": "bb8b783d2d5c56ba2d02ac75a47e85ce404a5ddd3270f3baa16c64e07c9e31c5",
       "bytes": 1058,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-collection-oracles/candidate/SDK_RESULTS.tsv"
@@ -361,7 +361,7 @@
     },
     {
       "path": "evidence/collection-oracles-20261018/recipe/receiver/RECEIVER_RECEIPT.json",
-      "sha256": "f436e7d000c90d2354ce18632ff5f3dec5966006bff25cb6377947bd75105588",
+      "sha256": "d1940c49de5a704db749399e2ec3135462608d236f9c3f293a59ded6d682ddea",
       "bytes": 1680,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/RECEIVER_RECEIPT.json"
@@ -433,7 +433,7 @@
     },
     {
       "path": "evidence/collection-oracles-20261018/recipe/receiver/late-drift-no-partial-write.stderr.log.txt",
-      "sha256": "d17eaa3abe399f4062db6543d863551dc301948d8780680053a6ccd4fdbc745b",
+      "sha256": "6b5ac489a83f4b56d97ad438c0506bb67c1a65f15f40bc6cb55205d9b6f62ed4",
       "bytes": 953,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/late-drift-no-partial-write.stderr.log"
@@ -481,7 +481,7 @@
     },
     {
       "path": "evidence/collection-oracles-20261018/recipe/receiver/sdk-result-tamper.stderr.log.txt",
-      "sha256": "13d4048c968c5239ab9cd3ed64d4c67300d8464ce5c8ba81bad7e6f74fb77599",
+      "sha256": "1d34697ca0fd6f94edda3a6fcc98717066a8cb7baba74160e5274e1d56537c62",
       "bytes": 1292,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/sdk-result-tamper.stderr.log"
@@ -497,7 +497,7 @@
     },
     {
       "path": "evidence/collection-oracles-20261018/recipe/receiver/symlink-target.stderr.log.txt",
-      "sha256": "2d5671319e6448cf111044c2b683f3852f2f5d5065d5b7932c771fae8b6b089f",
+      "sha256": "321158d57d0f64db0489131f130badddd8f2f2157f777209788d262e3ae2ffc1",
       "bytes": 1243,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/symlink-target.stderr.log"

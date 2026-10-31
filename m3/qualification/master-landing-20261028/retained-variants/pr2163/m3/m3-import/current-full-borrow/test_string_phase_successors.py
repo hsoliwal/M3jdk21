@@ -480,7 +480,7 @@ class StringTargetSuccessorTest(unittest.TestCase):
 
     def test_additional_owner_sources_match_separate_exact_receipts(self):
         mapping = self.mapping()
-        self.assertEqual("088ee2ae6ccc550af768ac17314d7b0d460e9cf3",
+        self.assertEqual("51ddee1a26da2cf3c0aa8cd452da9ed83244ddd7",
                          phase.git_blob(phase.MAP))
         self.assertEqual(4, len(phase.current_successor_blobs(mapping)))
         observed = phase.additional_owner_successors(mapping)

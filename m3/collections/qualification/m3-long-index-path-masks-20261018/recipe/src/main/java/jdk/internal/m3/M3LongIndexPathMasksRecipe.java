@@ -35,8 +35,8 @@ public final class M3LongIndexPathMasksRecipe {
         "M3LongIndexPathMasks.java", "M3LongIndexPathMasksSelfTest.java"
     };
     private static final String[] HASHES = {
-        "c7692b6d8d6f6ea6b586580b351747165e4a9a7d9bb7b37979dd737d4ea258e9",
-        "a7afd8a3162ce5def1b67bbc2b106d1f9d8a1c71c7780fd11a02a747eb1e151b"
+        "85d7512d50d223571fa91fe88df821b30740d47f1c7e4abb3ce9ff3d0d16d11e",
+        "1ea9394ad582389b99e1f68b817a47e0479cc54c3860a62a652c24446faea655"
     };
     private static final String[] TARGETS = {
         "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexPathMasks.java",

@@ -26,7 +26,7 @@
 | `m3/compatibility/regex-relations-20261014/M3RelationPortProof.java` | `e9a6beee8916cf97d5d4aac2383e7ac2fa8843e0` | #896 |
 | `m3/docs/name-mappings/regex-relations-20261014.json` | `63c0143abf061391d269303daf74909521464fee` | #896 |
 | `src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java` | `780c7887aaa6b0892a76f4eee1dcb17086a60289` | #896 |
-| `src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java` | `ea904c0962fb976f43b45575f06f46ad198e29a2` | #896 |
+| `src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java` | `30359b57b7b553e78355d3672119c685051ec1da` | #896 |
 | `src/java.base/share/native/libjava/M3StateRelation.c` | `610ca8bab47065a49b9b58814d6392a287f4fd8b` | #896 |
 | `src/java.base/share/native/libjava/m3_state_relation.h` | `18a02e228129827da486edc5b316790af6135310` | #896 |
 | `test/jdk/java/lang/String/M3StringHierarchicalRegexTest.java` | `5d47787597630efc70a4e3b173f2e788dfb6aa3a` | #896 |
@@ -49,14 +49,14 @@
 | `m3/backports/NEBULA_PROOF_GATED_ADMISSION_20261015.tsv` | `96891444042f6dd4cb51c9d8e3236b038474cc42` | #934 |
 | `m3/backports/NEBULA_UPSTREAM_PROOF_ADMISSION_20261016.tsv` | `ffff78cb1e9def6fadea247c3667961bf0539892` | #934 |
 | `m3/backports/nebula_proof_admission.py` | `f0ee29290dcefdf19f3a7a59d378946a08da0432` | #934 |
-| `m3/backports/nebula_upstream_proof_admission.py` | `f0b5e322578ffbe25616f340cd093a3ade805153` | #934 |
+| `m3/backports/nebula_upstream_proof_admission.py` | `e6d21a2f48c5863dfa7e5b478401b9e605d954f2` | #934 |
 | `m3/backports/test_nebula_proof_admission.py` | `41e23d01d0436f9a1495dff0913fda6582e257ff` | #934 |
-| `m3/backports/test_nebula_upstream_proof_admission.py` | `6afcc68289d988a7b9fad48f65dc30942ae8c4e7` | #934 |
+| `m3/backports/test_nebula_upstream_proof_admission.py` | `0d7aaf1dddccbf4e979baf2b9ee75c5ec3a2caff` | #934 |
 | `.github/workflows/m3-cpu-byte-pattern-set-20261016.yml` | `0ed9d20d064954db08ed2ba6e79b043fe99cf430` | #947 |
 | `m3/ports/capability-runtime/M3_BYTE_PATTERN_SET.md` | `aabed6eddd62ceeeb07e3f47b2e8d8ad778e2cf5` | #947 |
-| `m3/ports/capability-runtime/native/byte_pattern_set_jni.c` | `c1f9786702881c3ffaaa3d3bdb14ccd9118c1a3d` | #947 |
-| `m3/ports/capability-runtime/src/main/java/com/m3/runtime/capability/BytePatternSet.java` | `382154b23923ae7c7910e8c0fdd273e82add3ff9` | #947 |
-| `m3/ports/capability-runtime/src/test/java/com/m3/runtime/capability/BytePatternSetChecks.java` | `3196dd3b5ea276df9a3d44bfcefd33513bd01192` | #947 |
+| `m3/ports/capability-runtime/native/byte_pattern_set_jni.c` | `0ca7b4f58e44e662ad078158214c209e4c587492` | #947 |
+| `m3/ports/capability-runtime/src/main/java/jdk/m3/runtime/capability/BytePatternSet.java` | `5e5c5813c52e09f794b74dd2c67f9745ef5cda99` | #947 |
+| `m3/ports/capability-runtime/src/test/java/jdk/m3/runtime/capability/BytePatternSetChecks.java` | `29ea2fa6150ef6c69b8c2f491c0c272e4fb7391f` | #947 |
 | `test/jdk/java/lang/String/M3StringCharArrayCompositionTest.java` | `57cea18b1e6599286b74c075c5ec31489f84ce48` | #952 |
 
 ## Existing-file modifications NOT blindly applied (20 unique paths)
@@ -65,7 +65,7 @@ These are source-conflict/integration candidates, not proof that changes are mis
 
 | Existing modified path | Incoming PRs |
 | --- | --- |
-| `m3/docs/synexia-string-precompute-port-map.tsv` | #889 |
+| `m3/docs/m3-string-precompute-port-map.tsv` | #889 |
 | `src/java.base/share/classes/java/util/regex/M3PatternQuery.java` | #889, #897 |
 | `src/java.base/share/classes/java/lang/M3StringRegexDp.java` | #891, #894, #896, #907 |
 | `AGENTS.md` | #894 |
@@ -77,13 +77,13 @@ These are source-conflict/integration candidates, not proof that changes are mis
 | `m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3TextSmoke.java` | #916 |
 | `.github/workflows/m3-jdk21-backport-dag.yml` | #934 |
 | `m3/backports/BACKPORT_PROGRAMME_STATUS.md` | #934 |
-| `m3/backports/SYNEXIA_NEBULA_RECIPE_DAG_HANDOFF.tsv` | #934 |
+| `m3/backports/M3_NEBULA_RECIPE_DAG_HANDOFF.tsv` | #934 |
 | `m3/backports/pom.xml` | #934 |
-| `m3/ports/capability-runtime/src/test/java/com/m3/runtime/proof/CapabilityImageSmoke.java` | #947 |
+| `m3/ports/capability-runtime/src/test/java/jdk/m3/runtime/proof/CapabilityImageSmoke.java` | #947 |
 | `m3/ports/capability-runtime/verify_native.py` | #947 |
-| `m3/synexia-import/current-full-borrow/check_string_phase.py` | #952 |
-| `m3/synexia-import/current-full-borrow/string-target-successor-chain.tsv` | #952 |
-| `m3/synexia-import/current-full-borrow/test_string_phase_successors.py` | #952 |
+| `m3/m3-import/current-full-borrow/check_string_phase.py` | #952 |
+| `m3/m3-import/current-full-borrow/string-target-successor-chain.tsv` | #952 |
+| `m3/m3-import/current-full-borrow/test_string_phase_successors.py` | #952 |
 | `src/java.base/share/classes/java/lang/M3String.java` | #952 |
 
 ## Mandatory gates before merging

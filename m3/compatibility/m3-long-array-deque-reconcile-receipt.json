@@ -25,27 +25,27 @@
   "publicJdkReplacement": false,
   "targets": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
-      "before": "b2429000908aed794d3cac63172b81e757824e8b3bc4c56c33c39431e2d0cf0a",
-      "after": "42cbfad68941221a81efc34d33356334a7c9625eb7031aeaee387e2583fa832d",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongArrayDeque.java",
+      "before": "1b1ecd7725f8f54be60f2ed07f780615283b9f40a1bf75278fd9d26d1b330abc",
+      "after": "f9a92a30f62e661e34fa3971c8d8143ef4d7c8b9a6257f45826ee6d16f9dee39",
       "resource": "00-M3LongArrayDeque.java.txt"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongDeque.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongDeque.java",
       "before": "ABSENT",
-      "after": "ffe2c4c488bef6dba327b5dcfb6ac7c2f82deddca454a52b45a1181041fe4272",
+      "after": "e84f06bd3dd086ddf01371a5b444d8f430006b622271bb19891e5a2c1f223b75",
       "resource": "01-M3LongDeque.java.txt"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongQueue.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongQueue.java",
       "before": "ABSENT",
-      "after": "50bc94d1dfb4950b0156c307bc4db192979b7b82c5eb4666eb05b3e5462754f8",
+      "after": "50c49ecb80fad7498ef5db681640a1b136bbcac87a1b311a08563b902db3b85f",
       "resource": "02-M3LongQueue.java.txt"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3LongArrayDequeTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3LongArrayDequeTest.java",
       "before": "ABSENT",
-      "after": "5cd23d6177bf98fde595d722512bf1be7b48d9ac1e3536a66a066062be8cd19e",
+      "after": "4005c2d0debd0700366d9c718c4ed03a7cd4a162396dc748879348cdd736f4f6",
       "resource": "03-M3LongArrayDequeTest.java.txt"
     }
   ],

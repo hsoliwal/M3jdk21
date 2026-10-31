@@ -34,10 +34,10 @@ public final class M3LongBitmapFilterPlanRecipe {
     private static final List<Output> OUTPUTS = List.of(
         new Output("M3LongBitmapFilterPlan.java",
                 "m3/collections/src/main/java/jdk/m3/collections/M3LongBitmapFilterPlan.java",
-                "bd7969cfc42e26171b9904c65eb12f3321b2fbffe77a34f6d76f4db15c11c1d3"),
+                "e41090883e41627ebb4aed29e9b7624fa959ee3e8d01f5c56a68b6d441aaa2c7"),
         new Output("M3LongBitmapFilterPlanSelfTest.java",
                 "m3/collections/src/test/java/jdk/m3/collections/M3LongBitmapFilterPlanSelfTest.java",
-                "fa87bbf51b5a58b6b1562b909c3c16d0b670168165db57e6bb4430158de11fd7"));
+                "e05401c3635429c949c7216390880d3ab06da2503de7509c38522682ea2a962d"));
 
     private M3LongBitmapFilterPlanRecipe() { }
 

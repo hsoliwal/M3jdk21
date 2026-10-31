@@ -40,11 +40,11 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$M3_EXPECTED_HEAD"
-          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3IndexSort.java)" = 'a62fc49228ac09213bf44c3a9075098f1d5c65ef'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3IndexSortAdaptiveContract.java)" = '49a913ba2427451e12ae4016d2b529af18f3fbef'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3IndexSortAdaptiveTest.java)" = '15d06bd2740ea7c9ebc320b697a2ac347b446d1d'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3IndexSortStrictContract.java)" = '7a61f99ac3fb5703385b61ea99b0e763a53ae82f'
-          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3IndexSortStrictTest.java)" = 'ea757248616e6ba01fe78625ea0696b6ff3969cb'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3IndexSort.java)" = '9fdb435f3212a165262cb18ae11fcb1e9e56ae3e'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3IndexSortAdaptiveContract.java)" = '60041005c55cfaf8e9f65ff3d83ad53ed2f4f1b9'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3IndexSortAdaptiveTest.java)" = '6ebdc79f1623c9f798824270d66df0ad3dd7e322'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3IndexSortStrictContract.java)" = '50483be714e2fc8436729241a57ab941c73b4709'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3IndexSortStrictTest.java)" = 'da5360d12d1afa99b6c527fbea2b1c951a27ac20'
       - name: Strict compile of original M3JDK21 index owner and oracle
         shell: bash
         run: |

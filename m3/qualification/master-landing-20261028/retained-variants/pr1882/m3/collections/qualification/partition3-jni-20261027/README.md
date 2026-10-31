@@ -16,13 +16,13 @@ Product predecessor draft PR head:
 
 | Original source owner | Before Git blob | Result Git blob |
 |---|---|---|
-| `m3/collections/src/main/java/com/m3/collections/M3LaneAlgorithms.java` | `6691be3fcc1d3b3b276dd2feb7aa488dea5c00d2` | `a806a8604efc928053159e5c230b1da4f0f9b6be` |
-| `m3/collections/src/main/native/collections/m3_long_address_kernel.c` | `76f68619a78b52ab528f4f16dcf26b510288c7c9` | `37c75d4f2532003b36381597d38d2a4af4812c0c` |
+| `m3/collections/src/main/java/jdk/m3/collections/M3LaneAlgorithms.java` | `6691be3fcc1d3b3b276dd2feb7aa488dea5c00d2` | `a806a8604efc928053159e5c230b1da4f0f9b6be` |
+| `m3/collections/src/main/native/collections/m3_long_address_kernel.c` | `76f68619a78b52ab528f4f16dcf26b510288c7c9` | `055eee1f1194ce97cde685c54ed9247e96b73865` |
 
 Generated original-module Java 21 differential contract:
 `M3LanePartition3PreparedContract.java`, Git blob
-`43abd6148088186fbdb901d94232e1b2ecde444e`.
-JUnit runner Git blob `6c25241f09af6a91563ba54d8962f3c2c8134795`.
+`f9b9bcb81b053475aa2a49bebb723eef530c9716`.
+JUnit runner Git blob `dcbbd3ff786bb5ea50e8c0c46f5e3bb3bb33d34a`.
 Source-pinned exact PR-head Java 21/C17 JNI workflow:
 `.github/workflows/m3-lane-partition3-java21-jni.yml`,
 Git blob `f3b9a22953217aad4fb7bd21c44fe361cc218c26`.
@@ -86,7 +86,7 @@ Canonical Synexia #13224 source-sealed Java/CI successor:
 `ed64d9089f685692b4c09fb11354a3c1f23320e0`.
 Existing M3 Java candidate blob `a806a8604efc928053159e5c230b1da4f0f9b6be`
 is the exact SHA-pinned preimage; final reviewed Java blob is
-`9f512b267485bc1b68cf97eacadb42beada78372`.
+`08a2e274ed7faf940ed08f281ae9b62d92e7577f`.
 Old exact-head workflow blob `f3b9a22953217aad4fb7bd21c44fe361cc218c26`
 is replaced by `95040d48b727f1cd6ea4789271cbd2884d7aed75`.
 The prior canonical recipes and intermediate source images remain in Synexia
@@ -135,8 +135,8 @@ pins and replaces exactly one workflow:
 malformed original Git blob
 `95040d48b727f1cd6ea4789271cbd2884d7aed75`,
 SHA-256 `f54506aa24678a623e1819390e1ddca67f508833a3c66672f286edd64abb5f82`,
-with corrected Git blob `e5d1f2b4a112ba55593baa34aecb3ef8173a4fad`,
-SHA-256 `2ccbb81df480db5dc4505d2932d99946289751252e16be9bdf2b5f44e79b404d`.
+with corrected Git blob `dc38e9a797e5ce5711fe722d5a4feec346a19c3f`,
+SHA-256 `cd18d7396215ce9168c1ea0112ecd61c8210300c5bac1b2c087c7fec9e144179`.
 
 The exact corrected workflow preserves **all original Java21/C17/JNI checks**
 and the legacy shared-object fallback, with one complete

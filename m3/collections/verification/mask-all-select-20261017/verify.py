@@ -18,8 +18,8 @@ TESTS=[ROOT/'m3/collections/src/test/java/jdk/m3/collections'/n for n in (
   'M3MaskDenseSelectionProof.java','M3MaskNativeParityProof.java')]
 NATIVE=ROOT/'m3/collections/src/main/native/collections/m3_index_mask_compactor.c'
 DONOR_REVISION='7d8d33c8ccdb59309a3d45c33bae7efef9050a39'
-SOURCE_SHA='e4d8fd83ec0acb9b94bdde5a138d797ccd539c0bb87fe60d419a52f910051fcb'
-NATIVE_BLOB='f1a9488905807e6417dd267e125bfc44dbcc9297'
+SOURCE_SHA='5986cf6a903a0eddbf1191bfd0a8a80a9dbddb1c5d764b8227c54428532b5fee'
+NATIVE_BLOB='22782ee02b06b4404b5c87fd15f10f4e8e9749ea'
 JDK=Path(os.environ.get('JAVA_HOME','/usr/lib/jvm/java-21-openjdk-amd64'))
 
 def run(command):

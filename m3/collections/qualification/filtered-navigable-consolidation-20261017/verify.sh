@@ -9,9 +9,9 @@ check_blob() {
   actual=$(git hash-object "$path")
   [[ "$actual" == "$expected" ]] || { echo "blob mismatch $path: $actual != $expected" >&2; exit 1; }
 }
-check_blob 10bc8328c0aef2cab69ba0d55f7f566fc4e60df3 m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java
-check_blob ccf65b212b756fe2147b68d3c1d6655e87bb3103 m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java
-check_blob a2adc60332d2983d5a830bdcd07ceb2c34984691 m3/collections/src/test/java/jdk/m3/collections/M3FilteredNavigableFacadeSelfTest.java
+check_blob 940de9e148adab4948aa9e53be1c45174511446f m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java
+check_blob 9dfd9ff60d68cd7a2d645bfdbfed4dae9f28176f m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java
+check_blob 129be6264889d79e93913aaae1815c9155748c60 m3/collections/src/test/java/jdk/m3/collections/M3FilteredNavigableFacadeSelfTest.java
 build=$(mktemp -d)
 trap 'rm -rf -- "$build"' EXIT
 javac --release 21 -proc:none -Xlint:all -Werror -d "$build" \

@@ -67,17 +67,17 @@ def tree_id(entries):
 
 def main():
     pins = {
-        'raw_custody_v3.py': '45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be',
-        'verify_publication_v3.py': '45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa',
-        'verify_publication.py': '8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639',
+        'raw_custody_v3.py': '203f44729f860620949ec9e6aa7c5f2c7d766de2e406548ceb6797797bfdcc33',
+        'verify_publication_v3.py': '6b8ce688a81b46c20e567bd719104bac6a4cf8578a42904dbe494bca2305e443',
+        'verify_publication.py': 'a5e9c2228304ea359b5459df150c618fcc3566b88217cdc262c893c31398baa7',
         'audit_base.py': '839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b',
-        'prepare_publication.py': '3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd',
+        'prepare_publication.py': '2c352ab7122ff72da7027cd6b06bfa6b4cf2db0531727bf56b482c062aeea754',
         'raw-custody-v3/PROTOCOL.md': 'cdf3826e3725acded05b38031b70d9e7a8f8579540b38d65a2a8e38ce64209f5',
-        'raw-custody-v3/CUSTODY_INPUT.json': '22b58a9e97fd6bb4ebebc6a89dc13e368107c10429bff59191914a5e639c81df',
-        'raw-custody-v3/draft-T01/raw_custody_v3.py': 'a96f1aec811774467092a09cd750d47785fd4dd5482ce792ffac93c38deb9f5b',
-        'raw-custody-v3/draft-T01/verify_publication_v3.py': '7138709c360728c17c701391f303a02e21e6e1334b29bc3f67f6c9702f7440f4',
-        'epoch-01/PREFLIGHT.json': '13e56b17314e89370fb8ce3f8417b405b89b34db8a1868d968589550975db84f',
-        'BASE_TREE_MODEL.json': '877a61dc6d9b4f4fa280faeadbd67db9ee3d56a68768fa06c917d85ab8fbaa80'
+        'raw-custody-v3/CUSTODY_INPUT.json': '2b2f294b13298da20e8d8cbe85581e89265fbe8d1c355a384dba308e4a8f9710',
+        'raw-custody-v3/draft-T01/raw_custody_v3.py': '80f45f4a1d2e0cd49199e6885c62beff39a326aef5739e8890da5e9d991e2412',
+        'raw-custody-v3/draft-T01/verify_publication_v3.py': '11319f7fe3534240a742f6615d9bbf05bd2b3443a352c45f99b922edbf205b8b',
+        'epoch-01/PREFLIGHT.json': '424ec0d0148f40d4df153bdc201b4ed334395c52a02307775286abba2ab40bdc',
+        'BASE_TREE_MODEL.json': '26378280f0305c59a7529fed18de4dd938e935840260c9667fb55de4c6f6fd8a'
     }
     snapshots = []
     for name, expected in pins.items():

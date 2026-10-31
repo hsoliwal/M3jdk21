@@ -7,7 +7,7 @@
   "prior_commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
   "prior_root_tree": "3a270e543f9a547582ebda8ac8b69bfd134c41be",
   "publication_receipt": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/SOURCE_IMPLEMENTATION_PUBLICATION_VERIFIED.json",
-  "publication_receipt_sha256": "03ba5aa231929079fda7772dc6a798a687ba7486fa81ceacc0723407330f956a",
+  "publication_receipt_sha256": "c6500d09f2056e7ea1dad619cfbae3f8763e39ebdeedd4d63440540a2dd46146",
   "commit_binding_scope": "Uses recorded publication receipt commit/tree/ref verification; no remote call or raw commit-object rehash in this task.",
   "root_entry_count": 343,
   "root_entry_types": {
@@ -1087,7 +1087,7 @@
       "path": "pom.xml",
       "mode": "100644",
       "type": "blob",
-      "sha": "98889a040aad5cc3c82f782bb4b173d118207988"
+      "sha": "a65f71452613662769dda64100c6d64dd90ae5da"
     },
     {
       "path": "python",
@@ -2100,8 +2100,8 @@
   ],
   "root_pom": {
     "body_path": "/workspace/scratch/c0bcaa06df78/m3-mastery/inventory/final-integration/build-declarations/root-pom.xml",
-    "git_blob_sha1": "98889a040aad5cc3c82f782bb4b173d118207988",
-    "sha256": "f01cca4d90bd8fa1b1125474b5178cc80762d934bcb7bf5817f08f3f0dcf6aab",
+    "git_blob_sha1": "a65f71452613662769dda64100c6d64dd90ae5da",
+    "sha256": "1af736d1a28af6e5cdf41a2b4fefa8b9f3c5cb7a6c2f6d16537e0a822f086a7d",
     "bytes": 119981,
     "unchanged_from_0b": true
   },
@@ -3750,7 +3750,7 @@
     },
     "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/SOURCE_IMPLEMENTATION_PUBLICATION_VERIFIED.json": {
       "bytes": 370323,
-      "sha256": "03ba5aa231929079fda7772dc6a798a687ba7486fa81ceacc0723407330f956a"
+      "sha256": "c6500d09f2056e7ea1dad619cfbae3f8763e39ebdeedd4d63440540a2dd46146"
     },
     "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-integration-0b8dc/publication/FINAL_MANIFEST.json": {
       "bytes": 2565850,
@@ -3786,7 +3786,7 @@
     },
     "/workspace/scratch/c0bcaa06df78/m3-mastery/inventory/final-integration/build-declarations/root-pom.xml": {
       "bytes": 119981,
-      "sha256": "f01cca4d90bd8fa1b1125474b5178cc80762d934bcb7bf5817f08f3f0dcf6aab"
+      "sha256": "1af736d1a28af6e5cdf41a2b4fefa8b9f3c5cb7a6c2f6d16537e0a822f086a7d"
     },
     "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate-authoring/packet-e02/ROOT_POM_DECLARATIONS.json": {
       "bytes": 14404,

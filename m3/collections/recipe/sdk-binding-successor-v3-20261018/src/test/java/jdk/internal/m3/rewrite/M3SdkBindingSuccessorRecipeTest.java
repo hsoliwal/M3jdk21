@@ -35,7 +35,7 @@ final class M3SdkBindingSuccessorRecipeTest {
     private static final String YAML="/META-INF/rewrite/m3-sdk-binding-successor-v3.yml";
     private static final String NAME="jdk.internal.m3.SdkBindingSuccessor20261018";
     private static final String TARGET="m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdk.java";
-    private static final String BEFORE_SHA="258a4940136bce3998d7c2d717a6f5512f1412fd874580f242d2185be129b85a";
+    private static final String BEFORE_SHA="e4f05110dd6aaebcfb4f6a6d45d1ff0d8f5b50cc154f6372337d09877b62e83f";
     private static final String AFTER_SHA="f805ff3b86349480dd575840326eb015e5626b5eb4f0f61deccc73f83e9e1452";
     private static final String ORIGINAL_SHA="1fb66d3c334f4087bfcd2be7502dad25cfe6b18ae7c3a6d968cb44a4612e41e8";
     private static final int BEFORE_BYTES=7020;
@@ -97,8 +97,8 @@ final class M3SdkBindingSuccessorRecipeTest {
         assertArrayEquals(new String[]{TARGET,AFTER_SHA,Integer.toString(AFTER_BYTES)},
                 receipts.getFirst().split("\t",-1));
         assertArrayEquals(new String[]{"engine-src/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
-                "d58ca50dfaeb60f581b64f43545e688aca5c6530",
-                "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599","13805"},
+                "907f176d32b55d78f13e3756a407f6877f25ca7d",
+                "9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37","13805"},
                 engines.getFirst().split("\t",-1));
         String before=resource(ROOT+"M3CollectionSdk.java.before.txt");
         String after=resource(ROOT+"M3CollectionSdk.java.txt");

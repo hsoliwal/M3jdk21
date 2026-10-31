@@ -9,9 +9,9 @@ HERE=Path(__file__).resolve().parent
 ROOT=HERE.parents[4]
 RESOURCE=ROOT/"m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-spring-case-indexed-20261018"
 TARGETS={
-    "m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3SpringCaseInsensitiveMap.java":"24e2d7542cb86f777f90f99ae2db1cbc18b3fa5bb46441fd66e2c0461d09c7d8",
-    "m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SpringCaseInsensitiveContract.java":"e62a783c8d389e10627a8226cbee239ae837fdafd06893f403d52b5854146767",
-    "m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SpringCaseInsensitiveTest.java":"3cca2ebfed563f4c2eff862e580605b4b438f9632095f325833a10a6e4c47b97",
+    "m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3SpringCaseInsensitiveMap.java":"9e529d062f40aadea2e2fc5948a804059f6727c661e270e4742fca0349e14133",
+    "m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SpringCaseInsensitiveContract.java":"697c933503ae75b5c864f4503cbe0983734457abde57e3eddb99b81ae7beafe0",
+    "m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SpringCaseInsensitiveTest.java":"8571cedc31dcc9cda9a4c8b53eb9c354ee244e23a02ecbc8b452f0f838ef7805",
 }
 def exact(path):
     if path.is_symlink() or not path.is_file():
@@ -38,7 +38,7 @@ def verify():
     if seen!=sorted(TARGETS):
         raise ValueError("missing or duplicated generated target")
     incumbent=exact(ROOT/"m3/collections/src/main/java/jdk/m3/collections/M3LinkedHashMap.java")
-    if blob(incumbent)!="ade59880b8c9b2bee1b32ae67ca9d29b7382d998":
+    if blob(incumbent)!="e0957cfd8a7a5abfa1c0c5e7bade32997e5ed657":
         raise ValueError("authoritative M3 slot owner drift")
     receipt=exact(HERE/"RECEIVING.tsv")
     if b"WAITING_FOR_STRING" not in receipt or b"12213" not in receipt:
