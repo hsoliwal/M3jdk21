@@ -1,0 +1,1562 @@
+target	atom	bytecode_bytes	highest_tier
+M3UnmodifiableCollection list -	remove[class java.lang.Object]	8	3
+M3UnmodifiableCollection list -	size[]	10	3
+M3UnmodifiableCollection list -	toString[]	10	3
+M3UnmodifiableCollection list -	clear[]	8	3
+M3UnmodifiableCollection list -	isEmpty[]	10	3
+M3UnmodifiableCollection list -	add[class java.lang.Object]	8	3
+M3UnmodifiableCollection list -	toArray[]	10	3
+M3UnmodifiableCollection list -	toArray[interface java.util.function.IntFunction]	6	3
+M3UnmodifiableCollection list -	toArray[class [Ljava.lang.Object;]	11	4
+M3UnmodifiableCollection list -	iterator[]	13	4
+M3UnmodifiableCollection list -	stream[]	5	3
+M3UnmodifiableCollection list -	contains[class java.lang.Object]	11	3
+M3UnmodifiableCollection list -	spliterator[]	5	4
+M3UnmodifiableCollection list -	addAll[interface java.util.Collection]	8	3
+M3UnmodifiableCollection list -	forEach[interface java.util.function.Consumer]	6	3
+M3UnmodifiableCollection list -	removeIf[interface java.util.function.Predicate]	8	3
+M3UnmodifiableCollection list -	removeAll[interface java.util.Collection]	8	3
+M3UnmodifiableCollection list -	retainAll[interface java.util.Collection]	8	3
+M3UnmodifiableCollection list -	containsAll[interface java.util.Collection]	11	3
+M3UnmodifiableCollection list -	parallelStream[]	5	3
+M3UnmodifiableList list -	remove[int]	8	4
+M3UnmodifiableList list -	remove[class java.lang.Object]	8	4
+M3UnmodifiableList list -	size[]	10	4
+M3UnmodifiableList list -	get[int]	11	4
+M3UnmodifiableList list -	equals[class java.lang.Object]	24	3
+M3UnmodifiableList list -	toString[]	10	3
+M3UnmodifiableList list -	hashCode[]	10	3
+M3UnmodifiableList list -	indexOf[class java.lang.Object]	11	3
+M3UnmodifiableList list -	clear[]	8	3
+M3UnmodifiableList list -	lastIndexOf[class java.lang.Object]	11	4
+M3UnmodifiableList list -	isEmpty[]	10	4
+M3UnmodifiableList list -	replaceAll[interface java.util.function.UnaryOperator]	6	3
+M3UnmodifiableList list -	add[class java.lang.Object]	8	3
+M3UnmodifiableList list -	add[int, class java.lang.Object]	8	3
+M3UnmodifiableList list -	subList[int, int]	19	4
+M3UnmodifiableList list -	toArray[interface java.util.function.IntFunction]	6	3
+M3UnmodifiableList list -	toArray[]	10	4
+M3UnmodifiableList list -	toArray[class [Ljava.lang.Object;]	11	4
+M3UnmodifiableList list -	iterator[]	13	4
+M3UnmodifiableList list -	stream[]	5	3
+M3UnmodifiableList list -	contains[class java.lang.Object]	11	3
+M3UnmodifiableList list -	spliterator[]	5	4
+M3UnmodifiableList list -	addAll[int, interface java.util.Collection]	8	3
+M3UnmodifiableList list -	addAll[interface java.util.Collection]	8	3
+M3UnmodifiableList list -	set[int, class java.lang.Object]	8	3
+M3UnmodifiableList list -	forEach[interface java.util.function.Consumer]	6	3
+M3UnmodifiableList list -	sort[interface java.util.Comparator]	6	3
+M3UnmodifiableList list -	removeIf[interface java.util.function.Predicate]	8	3
+M3UnmodifiableList list -	getFirst[]	5	4
+M3UnmodifiableList list -	getLast[]	5	3
+M3UnmodifiableList list -	addFirst[class java.lang.Object]	6	3
+M3UnmodifiableList list -	addLast[class java.lang.Object]	6	3
+M3UnmodifiableList list -	removeFirst[]	5	3
+M3UnmodifiableList list -	removeLast[]	5	3
+M3UnmodifiableList list -	removeAll[interface java.util.Collection]	8	3
+M3UnmodifiableList list -	retainAll[interface java.util.Collection]	8	3
+M3UnmodifiableList list -	listIterator[int]	14	3
+M3UnmodifiableList list -	listIterator[]	13	4
+M3UnmodifiableList list -	reversed[]	5	3
+M3UnmodifiableList list -	containsAll[interface java.util.Collection]	11	3
+M3UnmodifiableList list -	parallelStream[]	5	3
+M3UnmodifiableQueue deque -	remove[]	8	3
+M3UnmodifiableQueue deque -	remove[class java.lang.Object]	8	3
+M3UnmodifiableQueue deque -	size[]	10	3
+M3UnmodifiableQueue deque -	toString[]	10	3
+M3UnmodifiableQueue deque -	clear[]	8	3
+M3UnmodifiableQueue deque -	isEmpty[]	10	3
+M3UnmodifiableQueue deque -	add[class java.lang.Object]	8	3
+M3UnmodifiableQueue deque -	toArray[class [Ljava.lang.Object;]	11	4
+M3UnmodifiableQueue deque -	toArray[interface java.util.function.IntFunction]	6	3
+M3UnmodifiableQueue deque -	toArray[]	10	3
+M3UnmodifiableQueue deque -	iterator[]	13	4
+M3UnmodifiableQueue deque -	stream[]	5	4
+M3UnmodifiableQueue deque -	contains[class java.lang.Object]	11	3
+M3UnmodifiableQueue deque -	spliterator[]	5	4
+M3UnmodifiableQueue deque -	addAll[interface java.util.Collection]	8	3
+M3UnmodifiableQueue deque -	forEach[interface java.util.function.Consumer]	6	3
+M3UnmodifiableQueue deque -	peek[]	10	3
+M3UnmodifiableQueue deque -	removeIf[interface java.util.function.Predicate]	8	3
+M3UnmodifiableQueue deque -	element[]	10	3
+M3UnmodifiableQueue deque -	removeAll[interface java.util.Collection]	8	3
+M3UnmodifiableQueue deque -	retainAll[interface java.util.Collection]	8	3
+M3UnmodifiableQueue deque -	containsAll[interface java.util.Collection]	11	3
+M3UnmodifiableQueue deque -	parallelStream[]	5	3
+M3UnmodifiableQueue deque -	poll[]	8	3
+M3UnmodifiableQueue deque -	offer[class java.lang.Object]	8	3
+M3UnmodifiableSortedSet treeset -	remove[class java.lang.Object]	8	3
+M3UnmodifiableSortedSet treeset -	size[]	10	3
+M3UnmodifiableSortedSet treeset -	equals[class java.lang.Object]	24	3
+M3UnmodifiableSortedSet treeset -	toString[]	10	3
+M3UnmodifiableSortedSet treeset -	hashCode[]	10	3
+M3UnmodifiableSortedSet treeset -	clear[]	8	3
+M3UnmodifiableSortedSet treeset -	isEmpty[]	10	3
+M3UnmodifiableSortedSet treeset -	add[class java.lang.Object]	8	3
+M3UnmodifiableSortedSet treeset -	toArray[]	10	3
+M3UnmodifiableSortedSet treeset -	toArray[interface java.util.function.IntFunction]	6	3
+M3UnmodifiableSortedSet treeset -	toArray[class [Ljava.lang.Object;]	11	4
+M3UnmodifiableSortedSet treeset -	iterator[]	13	4
+M3UnmodifiableSortedSet treeset -	stream[]	5	3
+M3UnmodifiableSortedSet treeset -	contains[class java.lang.Object]	11	3
+M3UnmodifiableSortedSet treeset -	last[]	10	4
+M3UnmodifiableSortedSet treeset -	spliterator[]	5	4
+M3UnmodifiableSortedSet treeset -	addAll[interface java.util.Collection]	8	3
+M3UnmodifiableSortedSet treeset -	first[]	10	4
+M3UnmodifiableSortedSet treeset -	forEach[interface java.util.function.Consumer]	6	3
+M3UnmodifiableSortedSet treeset -	removeIf[interface java.util.function.Predicate]	8	3
+M3UnmodifiableSortedSet treeset -	getFirst[]	5	3
+M3UnmodifiableSortedSet treeset -	getLast[]	5	3
+M3UnmodifiableSortedSet treeset -	addFirst[class java.lang.Object]	6	3
+M3UnmodifiableSortedSet treeset -	addLast[class java.lang.Object]	6	3
+M3UnmodifiableSortedSet treeset -	removeFirst[]	5	3
+M3UnmodifiableSortedSet treeset -	removeLast[]	5	3
+M3UnmodifiableSortedSet treeset -	removeAll[interface java.util.Collection]	8	3
+M3UnmodifiableSortedSet treeset -	retainAll[interface java.util.Collection]	8	3
+M3UnmodifiableSortedSet treeset -	reversed[]	5	3
+M3UnmodifiableSortedSet treeset -	containsAll[interface java.util.Collection]	11	3
+M3UnmodifiableSortedSet treeset -	parallelStream[]	5	3
+M3UnmodifiableSortedSet treeset -	comparator[]	10	4
+M3UnmodifiableSortedSet treeset -	subSet[class java.lang.Object, class java.lang.Object]	15	3
+M3UnmodifiableSortedSet treeset -	headSet[class java.lang.Object]	14	3
+M3UnmodifiableSortedSet treeset -	tailSet[class java.lang.Object]	14	3
+M3UnmodifiableNavigableSet treeset -	remove[class java.lang.Object]	8	3
+M3UnmodifiableNavigableSet treeset -	size[]	10	3
+M3UnmodifiableNavigableSet treeset -	equals[class java.lang.Object]	24	3
+M3UnmodifiableNavigableSet treeset -	toString[]	10	3
+M3UnmodifiableNavigableSet treeset -	hashCode[]	10	3
+M3UnmodifiableNavigableSet treeset -	floor[class java.lang.Object]	11	3
+M3UnmodifiableNavigableSet treeset -	clear[]	8	3
+M3UnmodifiableNavigableSet treeset -	isEmpty[]	10	4
+M3UnmodifiableNavigableSet treeset -	add[class java.lang.Object]	8	3
+M3UnmodifiableNavigableSet treeset -	toArray[class [Ljava.lang.Object;]	11	4
+M3UnmodifiableNavigableSet treeset -	toArray[]	10	3
+M3UnmodifiableNavigableSet treeset -	toArray[interface java.util.function.IntFunction]	6	3
+M3UnmodifiableNavigableSet treeset -	iterator[]	13	4
+M3UnmodifiableNavigableSet treeset -	stream[]	5	3
+M3UnmodifiableNavigableSet treeset -	contains[class java.lang.Object]	11	3
+M3UnmodifiableNavigableSet treeset -	last[]	10	4
+M3UnmodifiableNavigableSet treeset -	spliterator[]	5	4
+M3UnmodifiableNavigableSet treeset -	addAll[interface java.util.Collection]	8	3
+M3UnmodifiableNavigableSet treeset -	first[]	10	3
+M3UnmodifiableNavigableSet treeset -	forEach[interface java.util.function.Consumer]	6	3
+M3UnmodifiableNavigableSet treeset -	removeIf[interface java.util.function.Predicate]	8	3
+M3UnmodifiableNavigableSet treeset -	getFirst[]	5	3
+M3UnmodifiableNavigableSet treeset -	getLast[]	5	3
+M3UnmodifiableNavigableSet treeset -	addFirst[class java.lang.Object]	6	3
+M3UnmodifiableNavigableSet treeset -	addLast[class java.lang.Object]	6	3
+M3UnmodifiableNavigableSet treeset -	removeFirst[]	5	3
+M3UnmodifiableNavigableSet treeset -	removeLast[]	5	3
+M3UnmodifiableNavigableSet treeset -	removeAll[interface java.util.Collection]	8	3
+M3UnmodifiableNavigableSet treeset -	retainAll[interface java.util.Collection]	8	3
+M3UnmodifiableNavigableSet treeset -	reversed[]	5	3
+M3UnmodifiableNavigableSet treeset -	containsAll[interface java.util.Collection]	11	3
+M3UnmodifiableNavigableSet treeset -	parallelStream[]	5	3
+M3UnmodifiableNavigableSet treeset -	lower[class java.lang.Object]	11	3
+M3UnmodifiableNavigableSet treeset -	comparator[]	10	4
+M3UnmodifiableNavigableSet treeset -	pollFirst[]	8	4
+M3UnmodifiableNavigableSet treeset -	pollLast[]	8	3
+M3UnmodifiableNavigableSet treeset -	descendingIterator[]	13	3
+M3UnmodifiableNavigableSet treeset -	descendingSet[]	13	4
+M3UnmodifiableNavigableSet treeset -	ceiling[class java.lang.Object]	11	3
+M3UnmodifiableNavigableSet treeset -	higher[class java.lang.Object]	11	3
+M3UnmodifiableNavigableSet treeset -	subSet[class java.lang.Object, boolean, class java.lang.Object, boolean]	18	4
+M3UnmodifiableNavigableSet treeset -	subSet[class java.lang.Object, class java.lang.Object]	15	3
+M3UnmodifiableNavigableSet treeset -	headSet[class java.lang.Object, boolean]	15	3
+M3UnmodifiableNavigableSet treeset -	headSet[class java.lang.Object]	14	3
+M3UnmodifiableNavigableSet treeset -	tailSet[class java.lang.Object, boolean]	15	3
+M3UnmodifiableNavigableSet treeset -	tailSet[class java.lang.Object]	14	3
+M3UnmodifiableBag hashbag -	remove[class java.lang.Object]	8	3
+M3UnmodifiableBag hashbag -	remove[class java.lang.Object, int]	8	3
+M3UnmodifiableBag hashbag -	size[]	10	4
+M3UnmodifiableBag hashbag -	equals[class java.lang.Object]	24	3
+M3UnmodifiableBag hashbag -	toString[]	10	3
+M3UnmodifiableBag hashbag -	hashCode[]	10	3
+M3UnmodifiableBag hashbag -	clear[]	8	3
+M3UnmodifiableBag hashbag -	isEmpty[]	10	3
+M3UnmodifiableBag hashbag -	add[class java.lang.Object, int]	8	3
+M3UnmodifiableBag hashbag -	add[class java.lang.Object]	8	3
+M3UnmodifiableBag hashbag -	toArray[class [Ljava.lang.Object;]	11	3
+M3UnmodifiableBag hashbag -	toArray[interface java.util.function.IntFunction]	6	3
+M3UnmodifiableBag hashbag -	toArray[]	10	3
+M3UnmodifiableBag hashbag -	iterator[]	13	4
+M3UnmodifiableBag hashbag -	stream[]	5	3
+M3UnmodifiableBag hashbag -	contains[class java.lang.Object]	11	3
+M3UnmodifiableBag hashbag -	spliterator[]	5	4
+M3UnmodifiableBag hashbag -	addAll[interface java.util.Collection]	8	3
+M3UnmodifiableBag hashbag -	forEach[interface java.util.function.Consumer]	6	3
+M3UnmodifiableBag hashbag -	getCount[class java.lang.Object]	11	3
+M3UnmodifiableBag hashbag -	removeIf[interface java.util.function.Predicate]	8	3
+M3UnmodifiableBag hashbag -	removeAll[interface java.util.Collection]	8	3
+M3UnmodifiableBag hashbag -	retainAll[interface java.util.Collection]	8	3
+M3UnmodifiableBag hashbag -	containsAll[interface java.util.Collection]	11	3
+M3UnmodifiableBag hashbag -	parallelStream[]	5	3
+M3UnmodifiableBag hashbag -	uniqueSet[]	13	3
+M3UnmodifiableSortedBag treebag -	remove[class java.lang.Object, int]	8	3
+M3UnmodifiableSortedBag treebag -	remove[class java.lang.Object]	8	3
+M3UnmodifiableSortedBag treebag -	size[]	10	3
+M3UnmodifiableSortedBag treebag -	equals[class java.lang.Object]	24	3
+M3UnmodifiableSortedBag treebag -	toString[]	10	3
+M3UnmodifiableSortedBag treebag -	hashCode[]	10	3
+M3UnmodifiableSortedBag treebag -	clear[]	8	3
+M3UnmodifiableSortedBag treebag -	isEmpty[]	10	3
+M3UnmodifiableSortedBag treebag -	add[class java.lang.Object]	8	3
+M3UnmodifiableSortedBag treebag -	add[class java.lang.Object, int]	8	3
+M3UnmodifiableSortedBag treebag -	toArray[]	10	3
+M3UnmodifiableSortedBag treebag -	toArray[class [Ljava.lang.Object;]	11	4
+M3UnmodifiableSortedBag treebag -	toArray[interface java.util.function.IntFunction]	6	3
+M3UnmodifiableSortedBag treebag -	iterator[]	13	4
+M3UnmodifiableSortedBag treebag -	stream[]	5	3
+M3UnmodifiableSortedBag treebag -	contains[class java.lang.Object]	11	3
+M3UnmodifiableSortedBag treebag -	last[]	10	3
+M3UnmodifiableSortedBag treebag -	spliterator[]	5	4
+M3UnmodifiableSortedBag treebag -	addAll[interface java.util.Collection]	8	3
+M3UnmodifiableSortedBag treebag -	first[]	10	3
+M3UnmodifiableSortedBag treebag -	forEach[interface java.util.function.Consumer]	6	3
+M3UnmodifiableSortedBag treebag -	getCount[class java.lang.Object]	11	3
+M3UnmodifiableSortedBag treebag -	removeIf[interface java.util.function.Predicate]	8	3
+M3UnmodifiableSortedBag treebag -	removeAll[interface java.util.Collection]	8	3
+M3UnmodifiableSortedBag treebag -	retainAll[interface java.util.Collection]	8	3
+M3UnmodifiableSortedBag treebag -	containsAll[interface java.util.Collection]	11	3
+M3UnmodifiableSortedBag treebag -	parallelStream[]	5	4
+M3UnmodifiableSortedBag treebag -	comparator[]	10	3
+M3UnmodifiableSortedBag treebag -	uniqueSet[]	13	3
+M3SynchronizedCollection list -	remove[class java.lang.Object]	22	3
+M3SynchronizedCollection list -	size[]	21	4
+M3SynchronizedCollection list -	equals[class java.lang.Object]	44	4
+M3SynchronizedCollection list -	toString[]	21	3
+M3SynchronizedCollection list -	hashCode[]	21	3
+M3SynchronizedCollection list -	clear[]	24	3
+M3SynchronizedCollection list -	isEmpty[]	21	3
+M3SynchronizedCollection list -	add[class java.lang.Object]	22	3
+M3SynchronizedCollection list -	toArray[]	21	3
+M3SynchronizedCollection list -	toArray[interface java.util.function.IntFunction]	6	4
+M3SynchronizedCollection list -	toArray[class [Ljava.lang.Object;]	22	4
+M3SynchronizedCollection list -	iterator[]	10	4
+M3SynchronizedCollection list -	stream[]	5	3
+M3SynchronizedCollection list -	contains[class java.lang.Object]	22	3
+M3SynchronizedCollection list -	spliterator[]	5	4
+M3SynchronizedCollection list -	addAll[interface java.util.Collection]	22	3
+M3SynchronizedCollection list -	forEach[interface java.util.function.Consumer]	6	3
+M3SynchronizedCollection list -	removeIf[interface java.util.function.Predicate]	22	4
+M3SynchronizedCollection list -	removeAll[interface java.util.Collection]	22	3
+M3SynchronizedCollection list -	retainAll[interface java.util.Collection]	22	3
+M3SynchronizedCollection list -	containsAll[interface java.util.Collection]	22	3
+M3SynchronizedCollection list -	parallelStream[]	5	3
+M3SynchronizedBag hashbag -	remove[class java.lang.Object]	22	3
+M3SynchronizedBag hashbag -	remove[class java.lang.Object, int]	25	4
+M3SynchronizedBag hashbag -	size[]	21	3
+M3SynchronizedBag hashbag -	equals[class java.lang.Object]	29	3
+M3SynchronizedBag hashbag -	toString[]	21	3
+M3SynchronizedBag hashbag -	hashCode[]	21	3
+M3SynchronizedBag hashbag -	clear[]	24	3
+M3SynchronizedBag hashbag -	isEmpty[]	21	3
+M3SynchronizedBag hashbag -	add[class java.lang.Object, int]	25	4
+M3SynchronizedBag hashbag -	add[class java.lang.Object]	22	3
+M3SynchronizedBag hashbag -	toArray[class [Ljava.lang.Object;]	22	3
+M3SynchronizedBag hashbag -	toArray[interface java.util.function.IntFunction]	6	3
+M3SynchronizedBag hashbag -	toArray[]	21	3
+M3SynchronizedBag hashbag -	iterator[]	10	4
+M3SynchronizedBag hashbag -	stream[]	5	3
+M3SynchronizedBag hashbag -	contains[class java.lang.Object]	22	3
+M3SynchronizedBag hashbag -	spliterator[]	5	4
+M3SynchronizedBag hashbag -	addAll[interface java.util.Collection]	22	3
+M3SynchronizedBag hashbag -	forEach[interface java.util.function.Consumer]	6	3
+M3SynchronizedBag hashbag -	getCount[class java.lang.Object]	22	3
+M3SynchronizedBag hashbag -	removeIf[interface java.util.function.Predicate]	22	3
+M3SynchronizedBag hashbag -	removeAll[interface java.util.Collection]	22	3
+M3SynchronizedBag hashbag -	retainAll[interface java.util.Collection]	22	3
+M3SynchronizedBag hashbag -	containsAll[interface java.util.Collection]	22	3
+M3SynchronizedBag hashbag -	parallelStream[]	5	3
+M3SynchronizedBag hashbag -	uniqueSet[]	29	4
+M3SynchronizedMultiSet hashmultiset -	remove[class java.lang.Object]	22	2
+M3SynchronizedMultiSet hashmultiset -	remove[class java.lang.Object, int]	25	4
+M3SynchronizedMultiSet hashmultiset -	size[]	21	4
+M3SynchronizedMultiSet hashmultiset -	equals[class java.lang.Object]	29	3
+M3SynchronizedMultiSet hashmultiset -	toString[]	21	2
+M3SynchronizedMultiSet hashmultiset -	hashCode[]	21	4
+M3SynchronizedMultiSet hashmultiset -	clear[]	24	2
+M3SynchronizedMultiSet hashmultiset -	isEmpty[]	21	2
+M3SynchronizedMultiSet hashmultiset -	add[class java.lang.Object, int]	25	4
+M3SynchronizedMultiSet hashmultiset -	add[class java.lang.Object]	22	2
+M3SynchronizedMultiSet hashmultiset -	toArray[]	21	2
+M3SynchronizedMultiSet hashmultiset -	toArray[interface java.util.function.IntFunction]	6	3
+M3SynchronizedMultiSet hashmultiset -	toArray[class [Ljava.lang.Object;]	22	4
+M3SynchronizedMultiSet hashmultiset -	iterator[]	10	4
+M3SynchronizedMultiSet hashmultiset -	stream[]	5	2
+M3SynchronizedMultiSet hashmultiset -	contains[class java.lang.Object]	22	4
+M3SynchronizedMultiSet hashmultiset -	spliterator[]	5	3
+M3SynchronizedMultiSet hashmultiset -	addAll[interface java.util.Collection]	22	4
+M3SynchronizedMultiSet hashmultiset -	entrySet[]	29	3
+M3SynchronizedMultiSet hashmultiset -	forEach[interface java.util.function.Consumer]	6	3
+M3SynchronizedMultiSet hashmultiset -	getCount[class java.lang.Object]	22	2
+M3SynchronizedMultiSet hashmultiset -	removeIf[interface java.util.function.Predicate]	22	2
+M3SynchronizedMultiSet hashmultiset -	removeAll[interface java.util.Collection]	22	4
+M3SynchronizedMultiSet hashmultiset -	retainAll[interface java.util.Collection]	22	2
+M3SynchronizedMultiSet hashmultiset -	containsAll[interface java.util.Collection]	22	2
+M3SynchronizedMultiSet hashmultiset -	parallelStream[]	5	2
+M3SynchronizedMultiSet hashmultiset -	uniqueSet[]	29	3
+M3SynchronizedMultiSet hashmultiset -	setCount[class java.lang.Object, int]	25	4
+M3SynchronizedQueue deque -	remove[]	21	2
+M3SynchronizedQueue deque -	remove[class java.lang.Object]	22	3
+M3SynchronizedQueue deque -	size[]	21	3
+M3SynchronizedQueue deque -	equals[class java.lang.Object]	29	3
+M3SynchronizedQueue deque -	toString[]	21	3
+M3SynchronizedQueue deque -	hashCode[]	21	3
+M3SynchronizedQueue deque -	clear[]	24	4
+M3SynchronizedQueue deque -	isEmpty[]	21	4
+M3SynchronizedQueue deque -	add[class java.lang.Object]	22	3
+M3SynchronizedQueue deque -	toArray[]	21	3
+M3SynchronizedQueue deque -	toArray[interface java.util.function.IntFunction]	6	2
+M3SynchronizedQueue deque -	toArray[class [Ljava.lang.Object;]	22	2
+M3SynchronizedQueue deque -	iterator[]	10	4
+M3SynchronizedQueue deque -	stream[]	5	4
+M3SynchronizedQueue deque -	contains[class java.lang.Object]	22	3
+M3SynchronizedQueue deque -	spliterator[]	5	4
+M3SynchronizedQueue deque -	addAll[interface java.util.Collection]	22	3
+M3SynchronizedQueue deque -	forEach[interface java.util.function.Consumer]	6	3
+M3SynchronizedQueue deque -	peek[]	21	2
+M3SynchronizedQueue deque -	removeIf[interface java.util.function.Predicate]	22	3
+M3SynchronizedQueue deque -	element[]	21	2
+M3SynchronizedQueue deque -	removeAll[interface java.util.Collection]	22	3
+M3SynchronizedQueue deque -	retainAll[interface java.util.Collection]	22	3
+M3SynchronizedQueue deque -	containsAll[interface java.util.Collection]	22	3
+M3SynchronizedQueue deque -	parallelStream[]	5	3
+M3SynchronizedQueue deque -	poll[]	21	4
+M3SynchronizedQueue deque -	offer[class java.lang.Object]	22	3
+M3SynchronizedSortedBag treebag -	remove[class java.lang.Object, int]	25	4
+M3SynchronizedSortedBag treebag -	remove[class java.lang.Object]	22	3
+M3SynchronizedSortedBag treebag -	size[]	21	4
+M3SynchronizedSortedBag treebag -	equals[class java.lang.Object]	29	3
+M3SynchronizedSortedBag treebag -	toString[]	21	3
+M3SynchronizedSortedBag treebag -	hashCode[]	21	3
+M3SynchronizedSortedBag treebag -	clear[]	24	4
+M3SynchronizedSortedBag treebag -	isEmpty[]	21	3
+M3SynchronizedSortedBag treebag -	add[class java.lang.Object]	22	3
+M3SynchronizedSortedBag treebag -	add[class java.lang.Object, int]	25	4
+M3SynchronizedSortedBag treebag -	toArray[]	21	4
+M3SynchronizedSortedBag treebag -	toArray[class [Ljava.lang.Object;]	22	4
+M3SynchronizedSortedBag treebag -	toArray[interface java.util.function.IntFunction]	6	3
+M3SynchronizedSortedBag treebag -	iterator[]	10	4
+M3SynchronizedSortedBag treebag -	stream[]	5	3
+M3SynchronizedSortedBag treebag -	contains[class java.lang.Object]	22	3
+M3SynchronizedSortedBag treebag -	last[]	21	3
+M3SynchronizedSortedBag treebag -	spliterator[]	5	4
+M3SynchronizedSortedBag treebag -	addAll[interface java.util.Collection]	22	3
+M3SynchronizedSortedBag treebag -	first[]	21	3
+M3SynchronizedSortedBag treebag -	forEach[interface java.util.function.Consumer]	6	3
+M3SynchronizedSortedBag treebag -	getCount[class java.lang.Object]	22	3
+M3SynchronizedSortedBag treebag -	removeIf[interface java.util.function.Predicate]	22	3
+M3SynchronizedSortedBag treebag -	removeAll[interface java.util.Collection]	22	3
+M3SynchronizedSortedBag treebag -	retainAll[interface java.util.Collection]	22	3
+M3SynchronizedSortedBag treebag -	containsAll[interface java.util.Collection]	22	3
+M3SynchronizedSortedBag treebag -	parallelStream[]	5	4
+M3SynchronizedSortedBag treebag -	comparator[]	21	4
+M3SynchronizedSortedBag treebag -	uniqueSet[]	29	4
+M3PredicatedList list both	remove[int]	11	4
+M3PredicatedList list both	remove[class java.lang.Object]	11	4
+M3PredicatedList list both	size[]	10	3
+M3PredicatedList list both	get[int]	11	4
+M3PredicatedList list both	equals[class java.lang.Object]	24	4
+M3PredicatedList list both	toString[]	10	4
+M3PredicatedList list both	hashCode[]	10	4
+M3PredicatedList list both	indexOf[class java.lang.Object]	11	4
+M3PredicatedList list both	clear[]	10	4
+M3PredicatedList list both	lastIndexOf[class java.lang.Object]	11	4
+M3PredicatedList list both	isEmpty[]	10	4
+M3PredicatedList list both	replaceAll[interface java.util.function.UnaryOperator]	6	3
+M3PredicatedList list both	add[int, class java.lang.Object]	17	4
+M3PredicatedList list both	add[class java.lang.Object]	16	4
+M3PredicatedList list both	subList[int, int]	23	4
+M3PredicatedList list both	toArray[]	10	4
+M3PredicatedList list both	toArray[interface java.util.function.IntFunction]	6	3
+M3PredicatedList list both	toArray[class [Ljava.lang.Object;]	11	4
+M3PredicatedList list both	iterator[]	10	4
+M3PredicatedList list both	stream[]	5	3
+M3PredicatedList list both	contains[class java.lang.Object]	11	4
+M3PredicatedList list both	spliterator[]	5	4
+M3PredicatedList list both	addAll[int, interface java.util.Collection]	45	4
+M3PredicatedList list both	addAll[interface java.util.Collection]	42	4
+M3PredicatedList list both	set[int, class java.lang.Object]	17	4
+M3PredicatedList list both	forEach[interface java.util.function.Consumer]	6	4
+M3PredicatedList list both	sort[interface java.util.Comparator]	6	4
+M3PredicatedList list both	removeIf[interface java.util.function.Predicate]	11	4
+M3PredicatedList list both	getFirst[]	5	3
+M3PredicatedList list both	getLast[]	5	3
+M3PredicatedList list both	addFirst[class java.lang.Object]	6	3
+M3PredicatedList list both	addLast[class java.lang.Object]	6	4
+M3PredicatedList list both	removeFirst[]	5	3
+M3PredicatedList list both	removeLast[]	5	3
+M3PredicatedList list both	removeAll[interface java.util.Collection]	11	4
+M3PredicatedList list both	retainAll[interface java.util.Collection]	11	4
+M3PredicatedList list both	listIterator[int]	19	4
+M3PredicatedList list both	listIterator[]	6	4
+M3PredicatedList list both	reversed[]	5	4
+M3PredicatedList list both	containsAll[interface java.util.Collection]	11	4
+M3PredicatedList list both	parallelStream[]	5	3
+M3PredicatedList deque rejectnull	remove[int]	11	4
+M3PredicatedList deque rejectnull	remove[class java.lang.Object]	11	4
+M3PredicatedList deque rejectnull	size[]	10	3
+M3PredicatedList deque rejectnull	get[int]	11	4
+M3PredicatedList deque rejectnull	equals[class java.lang.Object]	24	4
+M3PredicatedList deque rejectnull	toString[]	10	4
+M3PredicatedList deque rejectnull	hashCode[]	10	4
+M3PredicatedList deque rejectnull	indexOf[class java.lang.Object]	11	4
+M3PredicatedList deque rejectnull	clear[]	10	4
+M3PredicatedList deque rejectnull	lastIndexOf[class java.lang.Object]	11	4
+M3PredicatedList deque rejectnull	isEmpty[]	10	4
+M3PredicatedList deque rejectnull	replaceAll[interface java.util.function.UnaryOperator]	6	3
+M3PredicatedList deque rejectnull	add[int, class java.lang.Object]	17	4
+M3PredicatedList deque rejectnull	add[class java.lang.Object]	16	4
+M3PredicatedList deque rejectnull	subList[int, int]	23	4
+M3PredicatedList deque rejectnull	toArray[]	10	4
+M3PredicatedList deque rejectnull	toArray[interface java.util.function.IntFunction]	6	3
+M3PredicatedList deque rejectnull	toArray[class [Ljava.lang.Object;]	11	4
+M3PredicatedList deque rejectnull	iterator[]	10	4
+M3PredicatedList deque rejectnull	stream[]	5	3
+M3PredicatedList deque rejectnull	contains[class java.lang.Object]	11	4
+M3PredicatedList deque rejectnull	spliterator[]	5	4
+M3PredicatedList deque rejectnull	addAll[int, interface java.util.Collection]	45	4
+M3PredicatedList deque rejectnull	addAll[interface java.util.Collection]	42	4
+M3PredicatedList deque rejectnull	set[int, class java.lang.Object]	17	4
+M3PredicatedList deque rejectnull	forEach[interface java.util.function.Consumer]	6	4
+M3PredicatedList deque rejectnull	sort[interface java.util.Comparator]	6	4
+M3PredicatedList deque rejectnull	removeIf[interface java.util.function.Predicate]	11	4
+M3PredicatedList deque rejectnull	getFirst[]	5	3
+M3PredicatedList deque rejectnull	getLast[]	5	3
+M3PredicatedList deque rejectnull	addFirst[class java.lang.Object]	6	3
+M3PredicatedList deque rejectnull	addLast[class java.lang.Object]	6	4
+M3PredicatedList deque rejectnull	removeFirst[]	5	3
+M3PredicatedList deque rejectnull	removeLast[]	5	3
+M3PredicatedList deque rejectnull	removeAll[interface java.util.Collection]	11	4
+M3PredicatedList deque rejectnull	retainAll[interface java.util.Collection]	11	4
+M3PredicatedList deque rejectnull	listIterator[int]	19	4
+M3PredicatedList deque rejectnull	listIterator[]	6	4
+M3PredicatedList deque rejectnull	reversed[]	5	4
+M3PredicatedList deque rejectnull	containsAll[interface java.util.Collection]	11	4
+M3PredicatedList deque rejectnull	parallelStream[]	5	3
+M3PredicatedQueue deque both	remove[class java.lang.Object]	11	3
+M3PredicatedQueue deque both	remove[]	10	3
+M3PredicatedQueue deque both	size[]	10	4
+M3PredicatedQueue deque both	toString[]	10	3
+M3PredicatedQueue deque both	clear[]	10	3
+M3PredicatedQueue deque both	isEmpty[]	10	3
+M3PredicatedQueue deque both	add[class java.lang.Object]	16	3
+M3PredicatedQueue deque both	toArray[]	10	3
+M3PredicatedQueue deque both	toArray[interface java.util.function.IntFunction]	6	4
+M3PredicatedQueue deque both	toArray[class [Ljava.lang.Object;]	11	4
+M3PredicatedQueue deque both	iterator[]	10	4
+M3PredicatedQueue deque both	stream[]	5	4
+M3PredicatedQueue deque both	contains[class java.lang.Object]	11	3
+M3PredicatedQueue deque both	spliterator[]	5	4
+M3PredicatedQueue deque both	addAll[interface java.util.Collection]	42	4
+M3PredicatedQueue deque both	forEach[interface java.util.function.Consumer]	6	3
+M3PredicatedQueue deque both	peek[]	10	3
+M3PredicatedQueue deque both	removeIf[interface java.util.function.Predicate]	11	3
+M3PredicatedQueue deque both	element[]	10	3
+M3PredicatedQueue deque both	removeAll[interface java.util.Collection]	11	3
+M3PredicatedQueue deque both	retainAll[interface java.util.Collection]	11	3
+M3PredicatedQueue deque both	containsAll[interface java.util.Collection]	11	4
+M3PredicatedQueue deque both	parallelStream[]	5	3
+M3PredicatedQueue deque both	poll[]	10	3
+M3PredicatedQueue deque both	offer[class java.lang.Object]	16	3
+M3PredicatedSet hashset both	remove[class java.lang.Object]	11	3
+M3PredicatedSet hashset both	size[]	10	4
+M3PredicatedSet hashset both	equals[class java.lang.Object]	24	4
+M3PredicatedSet hashset both	toString[]	10	4
+M3PredicatedSet hashset both	hashCode[]	10	4
+M3PredicatedSet hashset both	clear[]	10	4
+M3PredicatedSet hashset both	isEmpty[]	10	4
+M3PredicatedSet hashset both	add[class java.lang.Object]	16	4
+M3PredicatedSet hashset both	toArray[]	10	4
+M3PredicatedSet hashset both	toArray[class [Ljava.lang.Object;]	11	4
+M3PredicatedSet hashset both	toArray[interface java.util.function.IntFunction]	6	4
+M3PredicatedSet hashset both	iterator[]	10	4
+M3PredicatedSet hashset both	stream[]	5	4
+M3PredicatedSet hashset both	contains[class java.lang.Object]	11	4
+M3PredicatedSet hashset both	spliterator[]	5	4
+M3PredicatedSet hashset both	addAll[interface java.util.Collection]	42	4
+M3PredicatedSet hashset both	forEach[interface java.util.function.Consumer]	6	4
+M3PredicatedSet hashset both	removeIf[interface java.util.function.Predicate]	11	4
+M3PredicatedSet hashset both	removeAll[interface java.util.Collection]	11	4
+M3PredicatedSet hashset both	retainAll[interface java.util.Collection]	11	4
+M3PredicatedSet hashset both	containsAll[interface java.util.Collection]	11	4
+M3PredicatedSet hashset both	parallelStream[]	5	4
+M3PredicatedSet treeset rejectnull	remove[class java.lang.Object]	11	3
+M3PredicatedSet treeset rejectnull	size[]	10	4
+M3PredicatedSet treeset rejectnull	equals[class java.lang.Object]	24	4
+M3PredicatedSet treeset rejectnull	toString[]	10	4
+M3PredicatedSet treeset rejectnull	hashCode[]	10	4
+M3PredicatedSet treeset rejectnull	clear[]	10	4
+M3PredicatedSet treeset rejectnull	isEmpty[]	10	4
+M3PredicatedSet treeset rejectnull	add[class java.lang.Object]	16	4
+M3PredicatedSet treeset rejectnull	toArray[]	10	4
+M3PredicatedSet treeset rejectnull	toArray[class [Ljava.lang.Object;]	11	4
+M3PredicatedSet treeset rejectnull	toArray[interface java.util.function.IntFunction]	6	4
+M3PredicatedSet treeset rejectnull	iterator[]	10	4
+M3PredicatedSet treeset rejectnull	stream[]	5	4
+M3PredicatedSet treeset rejectnull	contains[class java.lang.Object]	11	4
+M3PredicatedSet treeset rejectnull	spliterator[]	5	4
+M3PredicatedSet treeset rejectnull	addAll[interface java.util.Collection]	42	4
+M3PredicatedSet treeset rejectnull	forEach[interface java.util.function.Consumer]	6	4
+M3PredicatedSet treeset rejectnull	removeIf[interface java.util.function.Predicate]	11	4
+M3PredicatedSet treeset rejectnull	removeAll[interface java.util.Collection]	11	4
+M3PredicatedSet treeset rejectnull	retainAll[interface java.util.Collection]	11	4
+M3PredicatedSet treeset rejectnull	containsAll[interface java.util.Collection]	11	4
+M3PredicatedSet treeset rejectnull	parallelStream[]	5	4
+M3PredicatedSortedSet treeset both	remove[class java.lang.Object]	11	3
+M3PredicatedSortedSet treeset both	size[]	10	4
+M3PredicatedSortedSet treeset both	equals[class java.lang.Object]	24	3
+M3PredicatedSortedSet treeset both	toString[]	10	3
+M3PredicatedSortedSet treeset both	hashCode[]	10	3
+M3PredicatedSortedSet treeset both	clear[]	10	3
+M3PredicatedSortedSet treeset both	isEmpty[]	10	3
+M3PredicatedSortedSet treeset both	add[class java.lang.Object]	16	3
+M3PredicatedSortedSet treeset both	toArray[interface java.util.function.IntFunction]	6	3
+M3PredicatedSortedSet treeset both	toArray[class [Ljava.lang.Object;]	11	4
+M3PredicatedSortedSet treeset both	toArray[]	10	3
+M3PredicatedSortedSet treeset both	iterator[]	10	4
+M3PredicatedSortedSet treeset both	stream[]	5	3
+M3PredicatedSortedSet treeset both	contains[class java.lang.Object]	11	3
+M3PredicatedSortedSet treeset both	last[]	10	4
+M3PredicatedSortedSet treeset both	spliterator[]	5	4
+M3PredicatedSortedSet treeset both	addAll[interface java.util.Collection]	42	4
+M3PredicatedSortedSet treeset both	first[]	10	4
+M3PredicatedSortedSet treeset both	forEach[interface java.util.function.Consumer]	6	4
+M3PredicatedSortedSet treeset both	removeIf[interface java.util.function.Predicate]	11	3
+M3PredicatedSortedSet treeset both	getFirst[]	5	3
+M3PredicatedSortedSet treeset both	getLast[]	5	3
+M3PredicatedSortedSet treeset both	addFirst[class java.lang.Object]	6	3
+M3PredicatedSortedSet treeset both	addLast[class java.lang.Object]	6	3
+M3PredicatedSortedSet treeset both	removeFirst[]	5	3
+M3PredicatedSortedSet treeset both	removeLast[]	5	3
+M3PredicatedSortedSet treeset both	removeAll[interface java.util.Collection]	11	3
+M3PredicatedSortedSet treeset both	retainAll[interface java.util.Collection]	11	3
+M3PredicatedSortedSet treeset both	reversed[]	5	3
+M3PredicatedSortedSet treeset both	containsAll[interface java.util.Collection]	11	4
+M3PredicatedSortedSet treeset both	parallelStream[]	5	3
+M3PredicatedSortedSet treeset both	comparator[]	10	4
+M3PredicatedSortedSet treeset both	subSet[class java.lang.Object, class java.lang.Object]	23	4
+M3PredicatedSortedSet treeset both	headSet[class java.lang.Object]	22	3
+M3PredicatedSortedSet treeset both	tailSet[class java.lang.Object]	22	3
+M3PredicatedNavigableSet treeset both	remove[class java.lang.Object]	11	3
+M3PredicatedNavigableSet treeset both	size[]	10	3
+M3PredicatedNavigableSet treeset both	equals[class java.lang.Object]	24	3
+M3PredicatedNavigableSet treeset both	toString[]	10	3
+M3PredicatedNavigableSet treeset both	hashCode[]	10	3
+M3PredicatedNavigableSet treeset both	floor[class java.lang.Object]	11	3
+M3PredicatedNavigableSet treeset both	clear[]	10	4
+M3PredicatedNavigableSet treeset both	isEmpty[]	10	4
+M3PredicatedNavigableSet treeset both	add[class java.lang.Object]	16	3
+M3PredicatedNavigableSet treeset both	toArray[]	10	3
+M3PredicatedNavigableSet treeset both	toArray[class [Ljava.lang.Object;]	11	4
+M3PredicatedNavigableSet treeset both	toArray[interface java.util.function.IntFunction]	6	3
+M3PredicatedNavigableSet treeset both	iterator[]	10	4
+M3PredicatedNavigableSet treeset both	stream[]	5	4
+M3PredicatedNavigableSet treeset both	contains[class java.lang.Object]	11	3
+M3PredicatedNavigableSet treeset both	last[]	10	3
+M3PredicatedNavigableSet treeset both	spliterator[]	5	4
+M3PredicatedNavigableSet treeset both	addAll[interface java.util.Collection]	42	4
+M3PredicatedNavigableSet treeset both	first[]	10	4
+M3PredicatedNavigableSet treeset both	forEach[interface java.util.function.Consumer]	6	3
+M3PredicatedNavigableSet treeset both	removeIf[interface java.util.function.Predicate]	11	3
+M3PredicatedNavigableSet treeset both	getFirst[]	5	3
+M3PredicatedNavigableSet treeset both	getLast[]	5	3
+M3PredicatedNavigableSet treeset both	addFirst[class java.lang.Object]	6	3
+M3PredicatedNavigableSet treeset both	addLast[class java.lang.Object]	6	3
+M3PredicatedNavigableSet treeset both	removeFirst[]	5	3
+M3PredicatedNavigableSet treeset both	removeLast[]	5	3
+M3PredicatedNavigableSet treeset both	removeAll[interface java.util.Collection]	11	3
+M3PredicatedNavigableSet treeset both	retainAll[interface java.util.Collection]	11	4
+M3PredicatedNavigableSet treeset both	reversed[]	5	3
+M3PredicatedNavigableSet treeset both	containsAll[interface java.util.Collection]	11	3
+M3PredicatedNavigableSet treeset both	parallelStream[]	5	4
+M3PredicatedNavigableSet treeset both	lower[class java.lang.Object]	11	3
+M3PredicatedNavigableSet treeset both	comparator[]	10	4
+M3PredicatedNavigableSet treeset both	pollFirst[]	10	3
+M3PredicatedNavigableSet treeset both	pollLast[]	10	3
+M3PredicatedNavigableSet treeset both	descendingIterator[]	10	3
+M3PredicatedNavigableSet treeset both	descendingSet[]	21	4
+M3PredicatedNavigableSet treeset both	ceiling[class java.lang.Object]	11	3
+M3PredicatedNavigableSet treeset both	higher[class java.lang.Object]	11	3
+M3PredicatedNavigableSet treeset both	subSet[class java.lang.Object, class java.lang.Object]	23	4
+M3PredicatedNavigableSet treeset both	subSet[class java.lang.Object, boolean, class java.lang.Object, boolean]	26	4
+M3PredicatedNavigableSet treeset both	headSet[class java.lang.Object]	22	3
+M3PredicatedNavigableSet treeset both	headSet[class java.lang.Object, boolean]	23	4
+M3PredicatedNavigableSet treeset both	tailSet[class java.lang.Object, boolean]	23	4
+M3PredicatedNavigableSet treeset both	tailSet[class java.lang.Object]	22	3
+M3PredicatedBag hashbag both	remove[class java.lang.Object]	11	4
+M3PredicatedBag hashbag both	remove[class java.lang.Object, int]	12	4
+M3PredicatedBag hashbag both	size[]	10	4
+M3PredicatedBag hashbag both	equals[class java.lang.Object]	24	4
+M3PredicatedBag hashbag both	toString[]	10	3
+M3PredicatedBag hashbag both	hashCode[]	10	4
+M3PredicatedBag hashbag both	clear[]	10	3
+M3PredicatedBag hashbag both	isEmpty[]	10	3
+M3PredicatedBag hashbag both	add[class java.lang.Object]	16	4
+M3PredicatedBag hashbag both	add[class java.lang.Object, int]	17	4
+M3PredicatedBag hashbag both	toArray[]	10	4
+M3PredicatedBag hashbag both	toArray[class [Ljava.lang.Object;]	11	4
+M3PredicatedBag hashbag both	toArray[interface java.util.function.IntFunction]	6	4
+M3PredicatedBag hashbag both	iterator[]	10	4
+M3PredicatedBag hashbag both	stream[]	5	4
+M3PredicatedBag hashbag both	contains[class java.lang.Object]	11	4
+M3PredicatedBag hashbag both	spliterator[]	5	4
+M3PredicatedBag hashbag both	addAll[interface java.util.Collection]	42	4
+M3PredicatedBag hashbag both	forEach[interface java.util.function.Consumer]	6	4
+M3PredicatedBag hashbag both	getCount[class java.lang.Object]	11	4
+M3PredicatedBag hashbag both	removeIf[interface java.util.function.Predicate]	11	4
+M3PredicatedBag hashbag both	removeAll[interface java.util.Collection]	11	4
+M3PredicatedBag hashbag both	retainAll[interface java.util.Collection]	11	4
+M3PredicatedBag hashbag both	containsAll[interface java.util.Collection]	11	4
+M3PredicatedBag hashbag both	parallelStream[]	5	4
+M3PredicatedBag hashbag both	uniqueSet[]	10	3
+M3PredicatedBag treebag both	remove[class java.lang.Object]	11	4
+M3PredicatedBag treebag both	remove[class java.lang.Object, int]	12	4
+M3PredicatedBag treebag both	size[]	10	4
+M3PredicatedBag treebag both	equals[class java.lang.Object]	24	4
+M3PredicatedBag treebag both	toString[]	10	3
+M3PredicatedBag treebag both	hashCode[]	10	4
+M3PredicatedBag treebag both	clear[]	10	3
+M3PredicatedBag treebag both	isEmpty[]	10	3
+M3PredicatedBag treebag both	add[class java.lang.Object]	16	4
+M3PredicatedBag treebag both	add[class java.lang.Object, int]	17	4
+M3PredicatedBag treebag both	toArray[]	10	4
+M3PredicatedBag treebag both	toArray[class [Ljava.lang.Object;]	11	4
+M3PredicatedBag treebag both	toArray[interface java.util.function.IntFunction]	6	4
+M3PredicatedBag treebag both	iterator[]	10	4
+M3PredicatedBag treebag both	stream[]	5	4
+M3PredicatedBag treebag both	contains[class java.lang.Object]	11	4
+M3PredicatedBag treebag both	spliterator[]	5	4
+M3PredicatedBag treebag both	addAll[interface java.util.Collection]	42	4
+M3PredicatedBag treebag both	forEach[interface java.util.function.Consumer]	6	4
+M3PredicatedBag treebag both	getCount[class java.lang.Object]	11	4
+M3PredicatedBag treebag both	removeIf[interface java.util.function.Predicate]	11	4
+M3PredicatedBag treebag both	removeAll[interface java.util.Collection]	11	4
+M3PredicatedBag treebag both	retainAll[interface java.util.Collection]	11	4
+M3PredicatedBag treebag both	containsAll[interface java.util.Collection]	11	4
+M3PredicatedBag treebag both	parallelStream[]	5	4
+M3PredicatedBag treebag both	uniqueSet[]	10	3
+M3PredicatedSortedBag treebag both	remove[class java.lang.Object, int]	12	3
+M3PredicatedSortedBag treebag both	remove[class java.lang.Object]	11	3
+M3PredicatedSortedBag treebag both	size[]	10	3
+M3PredicatedSortedBag treebag both	equals[class java.lang.Object]	24	3
+M3PredicatedSortedBag treebag both	toString[]	10	3
+M3PredicatedSortedBag treebag both	hashCode[]	10	3
+M3PredicatedSortedBag treebag both	clear[]	10	3
+M3PredicatedSortedBag treebag both	isEmpty[]	10	3
+M3PredicatedSortedBag treebag both	add[class java.lang.Object, int]	17	3
+M3PredicatedSortedBag treebag both	add[class java.lang.Object]	16	3
+M3PredicatedSortedBag treebag both	toArray[interface java.util.function.IntFunction]	6	4
+M3PredicatedSortedBag treebag both	toArray[class [Ljava.lang.Object;]	11	4
+M3PredicatedSortedBag treebag both	toArray[]	10	3
+M3PredicatedSortedBag treebag both	iterator[]	10	4
+M3PredicatedSortedBag treebag both	stream[]	5	3
+M3PredicatedSortedBag treebag both	contains[class java.lang.Object]	11	3
+M3PredicatedSortedBag treebag both	last[]	10	3
+M3PredicatedSortedBag treebag both	spliterator[]	5	4
+M3PredicatedSortedBag treebag both	addAll[interface java.util.Collection]	42	4
+M3PredicatedSortedBag treebag both	first[]	10	3
+M3PredicatedSortedBag treebag both	forEach[interface java.util.function.Consumer]	6	3
+M3PredicatedSortedBag treebag both	getCount[class java.lang.Object]	11	3
+M3PredicatedSortedBag treebag both	removeIf[interface java.util.function.Predicate]	11	3
+M3PredicatedSortedBag treebag both	removeAll[interface java.util.Collection]	11	3
+M3PredicatedSortedBag treebag both	retainAll[interface java.util.Collection]	11	3
+M3PredicatedSortedBag treebag both	containsAll[interface java.util.Collection]	11	3
+M3PredicatedSortedBag treebag both	parallelStream[]	5	3
+M3PredicatedSortedBag treebag both	comparator[]	10	3
+M3PredicatedSortedBag treebag both	uniqueSet[]	10	3
+M3PredicatedMultiSet hashmultiset both	remove[class java.lang.Object]	11	4
+M3PredicatedMultiSet hashmultiset both	remove[class java.lang.Object, int]	12	3
+M3PredicatedMultiSet hashmultiset both	size[]	10	4
+M3PredicatedMultiSet hashmultiset both	equals[class java.lang.Object]	24	3
+M3PredicatedMultiSet hashmultiset both	toString[]	10	3
+M3PredicatedMultiSet hashmultiset both	hashCode[]	10	3
+M3PredicatedMultiSet hashmultiset both	clear[]	10	3
+M3PredicatedMultiSet hashmultiset both	isEmpty[]	10	3
+M3PredicatedMultiSet hashmultiset both	add[class java.lang.Object, int]	17	3
+M3PredicatedMultiSet hashmultiset both	add[class java.lang.Object]	16	3
+M3PredicatedMultiSet hashmultiset both	toArray[class [Ljava.lang.Object;]	11	4
+M3PredicatedMultiSet hashmultiset both	toArray[]	10	3
+M3PredicatedMultiSet hashmultiset both	toArray[interface java.util.function.IntFunction]	6	3
+M3PredicatedMultiSet hashmultiset both	iterator[]	10	4
+M3PredicatedMultiSet hashmultiset both	stream[]	5	3
+M3PredicatedMultiSet hashmultiset both	contains[class java.lang.Object]	11	4
+M3PredicatedMultiSet hashmultiset both	spliterator[]	5	4
+M3PredicatedMultiSet hashmultiset both	addAll[interface java.util.Collection]	42	4
+M3PredicatedMultiSet hashmultiset both	entrySet[]	10	3
+M3PredicatedMultiSet hashmultiset both	forEach[interface java.util.function.Consumer]	6	3
+M3PredicatedMultiSet hashmultiset both	getCount[class java.lang.Object]	11	3
+M3PredicatedMultiSet hashmultiset both	removeIf[interface java.util.function.Predicate]	11	3
+M3PredicatedMultiSet hashmultiset both	removeAll[interface java.util.Collection]	11	4
+M3PredicatedMultiSet hashmultiset both	retainAll[interface java.util.Collection]	11	3
+M3PredicatedMultiSet hashmultiset both	containsAll[interface java.util.Collection]	11	4
+M3PredicatedMultiSet hashmultiset both	parallelStream[]	5	3
+M3PredicatedMultiSet hashmultiset both	uniqueSet[]	10	3
+M3PredicatedMultiSet hashmultiset both	setCount[class java.lang.Object, int]	17	3
+M3PredicatedMap hashmap both	remove[class java.lang.Object]	11	4
+M3PredicatedMap hashmap both	remove[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedMap hashmap both	size[]	10	4
+M3PredicatedMap hashmap both	get[class java.lang.Object]	11	4
+M3PredicatedMap hashmap both	put[class java.lang.Object, class java.lang.Object]	18	4
+M3PredicatedMap hashmap both	equals[class java.lang.Object]	24	4
+M3PredicatedMap hashmap both	toString[]	10	4
+M3PredicatedMap hashmap both	values[]	10	4
+M3PredicatedMap hashmap both	hashCode[]	10	4
+M3PredicatedMap hashmap both	clear[]	10	4
+M3PredicatedMap hashmap both	isEmpty[]	10	4
+M3PredicatedMap hashmap both	replace[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedMap hashmap both	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	8	3
+M3PredicatedMap hashmap both	replaceAll[interface java.util.function.BiFunction]	6	4
+M3PredicatedMap hashmap both	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	8	3
+M3PredicatedMap hashmap both	entrySet[]	37	4
+M3PredicatedMap hashmap both	putAll[interface java.util.Map]	61	4
+M3PredicatedMap hashmap both	putIfAbsent[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedMap hashmap both	compute[class java.lang.Object, interface java.util.function.BiFunction]	7	4
+M3PredicatedMap hashmap both	forEach[interface java.util.function.BiConsumer]	6	3
+M3PredicatedMap hashmap both	containsKey[class java.lang.Object]	11	4
+M3PredicatedMap hashmap both	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	7	3
+M3PredicatedMap hashmap both	keySet[]	10	4
+M3PredicatedMap hashmap both	containsValue[class java.lang.Object]	11	4
+M3PredicatedMap hashmap both	getOrDefault[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedMap hashmap both	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3PredicatedMap hashmap both	mapIterator[]	12	4
+M3PredicatedMap treemap keynull	remove[class java.lang.Object]	11	4
+M3PredicatedMap treemap keynull	remove[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedMap treemap keynull	size[]	10	4
+M3PredicatedMap treemap keynull	get[class java.lang.Object]	11	4
+M3PredicatedMap treemap keynull	put[class java.lang.Object, class java.lang.Object]	18	4
+M3PredicatedMap treemap keynull	equals[class java.lang.Object]	24	4
+M3PredicatedMap treemap keynull	toString[]	10	4
+M3PredicatedMap treemap keynull	values[]	10	4
+M3PredicatedMap treemap keynull	hashCode[]	10	4
+M3PredicatedMap treemap keynull	clear[]	10	4
+M3PredicatedMap treemap keynull	isEmpty[]	10	4
+M3PredicatedMap treemap keynull	replace[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedMap treemap keynull	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	8	3
+M3PredicatedMap treemap keynull	replaceAll[interface java.util.function.BiFunction]	6	4
+M3PredicatedMap treemap keynull	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	8	3
+M3PredicatedMap treemap keynull	entrySet[]	37	4
+M3PredicatedMap treemap keynull	putAll[interface java.util.Map]	61	4
+M3PredicatedMap treemap keynull	putIfAbsent[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedMap treemap keynull	compute[class java.lang.Object, interface java.util.function.BiFunction]	7	4
+M3PredicatedMap treemap keynull	forEach[interface java.util.function.BiConsumer]	6	3
+M3PredicatedMap treemap keynull	containsKey[class java.lang.Object]	11	4
+M3PredicatedMap treemap keynull	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	7	3
+M3PredicatedMap treemap keynull	keySet[]	10	4
+M3PredicatedMap treemap keynull	containsValue[class java.lang.Object]	11	4
+M3PredicatedMap treemap keynull	getOrDefault[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedMap treemap keynull	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3PredicatedMap treemap keynull	mapIterator[]	12	4
+M3PredicatedMap linkedmap valuenull	remove[class java.lang.Object]	11	4
+M3PredicatedMap linkedmap valuenull	remove[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedMap linkedmap valuenull	size[]	10	4
+M3PredicatedMap linkedmap valuenull	get[class java.lang.Object]	11	4
+M3PredicatedMap linkedmap valuenull	put[class java.lang.Object, class java.lang.Object]	18	4
+M3PredicatedMap linkedmap valuenull	equals[class java.lang.Object]	24	4
+M3PredicatedMap linkedmap valuenull	toString[]	10	4
+M3PredicatedMap linkedmap valuenull	values[]	10	4
+M3PredicatedMap linkedmap valuenull	hashCode[]	10	4
+M3PredicatedMap linkedmap valuenull	clear[]	10	4
+M3PredicatedMap linkedmap valuenull	isEmpty[]	10	4
+M3PredicatedMap linkedmap valuenull	replace[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedMap linkedmap valuenull	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	8	3
+M3PredicatedMap linkedmap valuenull	replaceAll[interface java.util.function.BiFunction]	6	4
+M3PredicatedMap linkedmap valuenull	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	8	3
+M3PredicatedMap linkedmap valuenull	entrySet[]	37	4
+M3PredicatedMap linkedmap valuenull	putAll[interface java.util.Map]	61	4
+M3PredicatedMap linkedmap valuenull	putIfAbsent[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedMap linkedmap valuenull	compute[class java.lang.Object, interface java.util.function.BiFunction]	7	4
+M3PredicatedMap linkedmap valuenull	forEach[interface java.util.function.BiConsumer]	6	3
+M3PredicatedMap linkedmap valuenull	containsKey[class java.lang.Object]	11	4
+M3PredicatedMap linkedmap valuenull	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	7	3
+M3PredicatedMap linkedmap valuenull	keySet[]	10	4
+M3PredicatedMap linkedmap valuenull	containsValue[class java.lang.Object]	11	4
+M3PredicatedMap linkedmap valuenull	getOrDefault[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedMap linkedmap valuenull	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3PredicatedMap linkedmap valuenull	mapIterator[]	12	4
+M3PredicatedMap hashmap rejectnull	remove[class java.lang.Object]	11	4
+M3PredicatedMap hashmap rejectnull	remove[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedMap hashmap rejectnull	size[]	10	4
+M3PredicatedMap hashmap rejectnull	get[class java.lang.Object]	11	4
+M3PredicatedMap hashmap rejectnull	put[class java.lang.Object, class java.lang.Object]	18	4
+M3PredicatedMap hashmap rejectnull	equals[class java.lang.Object]	24	4
+M3PredicatedMap hashmap rejectnull	toString[]	10	4
+M3PredicatedMap hashmap rejectnull	values[]	10	4
+M3PredicatedMap hashmap rejectnull	hashCode[]	10	4
+M3PredicatedMap hashmap rejectnull	clear[]	10	4
+M3PredicatedMap hashmap rejectnull	isEmpty[]	10	4
+M3PredicatedMap hashmap rejectnull	replace[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedMap hashmap rejectnull	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	8	3
+M3PredicatedMap hashmap rejectnull	replaceAll[interface java.util.function.BiFunction]	6	4
+M3PredicatedMap hashmap rejectnull	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	8	3
+M3PredicatedMap hashmap rejectnull	entrySet[]	37	4
+M3PredicatedMap hashmap rejectnull	putAll[interface java.util.Map]	61	4
+M3PredicatedMap hashmap rejectnull	putIfAbsent[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedMap hashmap rejectnull	compute[class java.lang.Object, interface java.util.function.BiFunction]	7	4
+M3PredicatedMap hashmap rejectnull	forEach[interface java.util.function.BiConsumer]	6	3
+M3PredicatedMap hashmap rejectnull	containsKey[class java.lang.Object]	11	4
+M3PredicatedMap hashmap rejectnull	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	7	3
+M3PredicatedMap hashmap rejectnull	keySet[]	10	4
+M3PredicatedMap hashmap rejectnull	containsValue[class java.lang.Object]	11	4
+M3PredicatedMap hashmap rejectnull	getOrDefault[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedMap hashmap rejectnull	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3PredicatedMap hashmap rejectnull	mapIterator[]	12	4
+M3PredicatedSortedMap treemap both	remove[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedSortedMap treemap both	remove[class java.lang.Object]	11	4
+M3PredicatedSortedMap treemap both	size[]	10	3
+M3PredicatedSortedMap treemap both	get[class java.lang.Object]	11	4
+M3PredicatedSortedMap treemap both	put[class java.lang.Object, class java.lang.Object]	18	4
+M3PredicatedSortedMap treemap both	equals[class java.lang.Object]	24	3
+M3PredicatedSortedMap treemap both	toString[]	10	3
+M3PredicatedSortedMap treemap both	values[]	10	3
+M3PredicatedSortedMap treemap both	hashCode[]	10	3
+M3PredicatedSortedMap treemap both	clear[]	10	3
+M3PredicatedSortedMap treemap both	isEmpty[]	10	4
+M3PredicatedSortedMap treemap both	replace[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedSortedMap treemap both	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	8	3
+M3PredicatedSortedMap treemap both	replaceAll[interface java.util.function.BiFunction]	6	3
+M3PredicatedSortedMap treemap both	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	8	3
+M3PredicatedSortedMap treemap both	entrySet[]	37	4
+M3PredicatedSortedMap treemap both	putAll[interface java.util.Map]	61	4
+M3PredicatedSortedMap treemap both	putIfAbsent[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedSortedMap treemap both	compute[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3PredicatedSortedMap treemap both	forEach[interface java.util.function.BiConsumer]	6	3
+M3PredicatedSortedMap treemap both	containsKey[class java.lang.Object]	11	4
+M3PredicatedSortedMap treemap both	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	7	3
+M3PredicatedSortedMap treemap both	keySet[]	10	3
+M3PredicatedSortedMap treemap both	containsValue[class java.lang.Object]	11	3
+M3PredicatedSortedMap treemap both	getOrDefault[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedSortedMap treemap both	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3PredicatedSortedMap treemap both	reversed[]	5	4
+M3PredicatedSortedMap treemap both	comparator[]	10	4
+M3PredicatedSortedMap treemap both	firstKey[]	10	3
+M3PredicatedSortedMap treemap both	sequencedKeySet[]	5	3
+M3PredicatedSortedMap treemap both	sequencedValues[]	5	3
+M3PredicatedSortedMap treemap both	sequencedEntrySet[]	5	3
+M3PredicatedSortedMap treemap both	putFirst[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedSortedMap treemap both	putLast[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedSortedMap treemap both	firstEntry[]	5	3
+M3PredicatedSortedMap treemap both	lastEntry[]	5	3
+M3PredicatedSortedMap treemap both	pollFirstEntry[]	5	3
+M3PredicatedSortedMap treemap both	pollLastEntry[]	5	4
+M3PredicatedSortedMap treemap both	subMap[class java.lang.Object, class java.lang.Object]	27	4
+M3PredicatedSortedMap treemap both	headMap[class java.lang.Object]	26	4
+M3PredicatedSortedMap treemap both	tailMap[class java.lang.Object]	26	4
+M3PredicatedSortedMap treemap both	lastKey[]	10	3
+M3PredicatedSortedMap treemap both	mapIterator[]	12	4
+M3PredicatedSortedMap treemap keynull	remove[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedSortedMap treemap keynull	remove[class java.lang.Object]	11	4
+M3PredicatedSortedMap treemap keynull	size[]	10	3
+M3PredicatedSortedMap treemap keynull	get[class java.lang.Object]	11	4
+M3PredicatedSortedMap treemap keynull	put[class java.lang.Object, class java.lang.Object]	18	4
+M3PredicatedSortedMap treemap keynull	equals[class java.lang.Object]	24	3
+M3PredicatedSortedMap treemap keynull	toString[]	10	3
+M3PredicatedSortedMap treemap keynull	values[]	10	3
+M3PredicatedSortedMap treemap keynull	hashCode[]	10	3
+M3PredicatedSortedMap treemap keynull	clear[]	10	3
+M3PredicatedSortedMap treemap keynull	isEmpty[]	10	4
+M3PredicatedSortedMap treemap keynull	replace[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedSortedMap treemap keynull	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	8	3
+M3PredicatedSortedMap treemap keynull	replaceAll[interface java.util.function.BiFunction]	6	3
+M3PredicatedSortedMap treemap keynull	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	8	3
+M3PredicatedSortedMap treemap keynull	entrySet[]	37	4
+M3PredicatedSortedMap treemap keynull	putAll[interface java.util.Map]	61	4
+M3PredicatedSortedMap treemap keynull	putIfAbsent[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedSortedMap treemap keynull	compute[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3PredicatedSortedMap treemap keynull	forEach[interface java.util.function.BiConsumer]	6	3
+M3PredicatedSortedMap treemap keynull	containsKey[class java.lang.Object]	11	4
+M3PredicatedSortedMap treemap keynull	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	7	3
+M3PredicatedSortedMap treemap keynull	keySet[]	10	3
+M3PredicatedSortedMap treemap keynull	containsValue[class java.lang.Object]	11	3
+M3PredicatedSortedMap treemap keynull	getOrDefault[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedSortedMap treemap keynull	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3PredicatedSortedMap treemap keynull	reversed[]	5	4
+M3PredicatedSortedMap treemap keynull	comparator[]	10	4
+M3PredicatedSortedMap treemap keynull	firstKey[]	10	3
+M3PredicatedSortedMap treemap keynull	sequencedKeySet[]	5	3
+M3PredicatedSortedMap treemap keynull	sequencedValues[]	5	3
+M3PredicatedSortedMap treemap keynull	sequencedEntrySet[]	5	3
+M3PredicatedSortedMap treemap keynull	putFirst[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedSortedMap treemap keynull	putLast[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedSortedMap treemap keynull	firstEntry[]	5	3
+M3PredicatedSortedMap treemap keynull	lastEntry[]	5	3
+M3PredicatedSortedMap treemap keynull	pollFirstEntry[]	5	3
+M3PredicatedSortedMap treemap keynull	pollLastEntry[]	5	4
+M3PredicatedSortedMap treemap keynull	subMap[class java.lang.Object, class java.lang.Object]	27	4
+M3PredicatedSortedMap treemap keynull	headMap[class java.lang.Object]	26	4
+M3PredicatedSortedMap treemap keynull	tailMap[class java.lang.Object]	26	4
+M3PredicatedSortedMap treemap keynull	lastKey[]	10	3
+M3PredicatedSortedMap treemap keynull	mapIterator[]	12	4
+M3PredicatedSortedMap treemap valuenull	remove[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedSortedMap treemap valuenull	remove[class java.lang.Object]	11	4
+M3PredicatedSortedMap treemap valuenull	size[]	10	3
+M3PredicatedSortedMap treemap valuenull	get[class java.lang.Object]	11	4
+M3PredicatedSortedMap treemap valuenull	put[class java.lang.Object, class java.lang.Object]	18	4
+M3PredicatedSortedMap treemap valuenull	equals[class java.lang.Object]	24	3
+M3PredicatedSortedMap treemap valuenull	toString[]	10	3
+M3PredicatedSortedMap treemap valuenull	values[]	10	3
+M3PredicatedSortedMap treemap valuenull	hashCode[]	10	3
+M3PredicatedSortedMap treemap valuenull	clear[]	10	3
+M3PredicatedSortedMap treemap valuenull	isEmpty[]	10	4
+M3PredicatedSortedMap treemap valuenull	replace[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedSortedMap treemap valuenull	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	8	3
+M3PredicatedSortedMap treemap valuenull	replaceAll[interface java.util.function.BiFunction]	6	3
+M3PredicatedSortedMap treemap valuenull	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	8	3
+M3PredicatedSortedMap treemap valuenull	entrySet[]	37	4
+M3PredicatedSortedMap treemap valuenull	putAll[interface java.util.Map]	61	4
+M3PredicatedSortedMap treemap valuenull	putIfAbsent[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedSortedMap treemap valuenull	compute[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3PredicatedSortedMap treemap valuenull	forEach[interface java.util.function.BiConsumer]	6	3
+M3PredicatedSortedMap treemap valuenull	containsKey[class java.lang.Object]	11	4
+M3PredicatedSortedMap treemap valuenull	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	7	3
+M3PredicatedSortedMap treemap valuenull	keySet[]	10	3
+M3PredicatedSortedMap treemap valuenull	containsValue[class java.lang.Object]	11	3
+M3PredicatedSortedMap treemap valuenull	getOrDefault[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedSortedMap treemap valuenull	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3PredicatedSortedMap treemap valuenull	reversed[]	5	4
+M3PredicatedSortedMap treemap valuenull	comparator[]	10	4
+M3PredicatedSortedMap treemap valuenull	firstKey[]	10	3
+M3PredicatedSortedMap treemap valuenull	sequencedKeySet[]	5	3
+M3PredicatedSortedMap treemap valuenull	sequencedValues[]	5	3
+M3PredicatedSortedMap treemap valuenull	sequencedEntrySet[]	5	3
+M3PredicatedSortedMap treemap valuenull	putFirst[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedSortedMap treemap valuenull	putLast[class java.lang.Object, class java.lang.Object]	7	3
+M3PredicatedSortedMap treemap valuenull	firstEntry[]	5	3
+M3PredicatedSortedMap treemap valuenull	lastEntry[]	5	3
+M3PredicatedSortedMap treemap valuenull	pollFirstEntry[]	5	3
+M3PredicatedSortedMap treemap valuenull	pollLastEntry[]	5	4
+M3PredicatedSortedMap treemap valuenull	subMap[class java.lang.Object, class java.lang.Object]	27	4
+M3PredicatedSortedMap treemap valuenull	headMap[class java.lang.Object]	26	4
+M3PredicatedSortedMap treemap valuenull	tailMap[class java.lang.Object]	26	4
+M3PredicatedSortedMap treemap valuenull	lastKey[]	10	3
+M3PredicatedSortedMap treemap valuenull	mapIterator[]	12	4
+M3TransformedCollection list both	remove[class java.lang.Object]	11	3
+M3TransformedCollection list both	size[]	10	4
+M3TransformedCollection list both	toString[]	10	3
+M3TransformedCollection list both	clear[]	10	4
+M3TransformedCollection list both	isEmpty[]	10	3
+M3TransformedCollection list both	add[class java.lang.Object]	15	3
+M3TransformedCollection list both	toArray[interface java.util.function.IntFunction]	6	3
+M3TransformedCollection list both	toArray[class [Ljava.lang.Object;]	11	4
+M3TransformedCollection list both	toArray[]	10	3
+M3TransformedCollection list both	iterator[]	10	4
+M3TransformedCollection list both	stream[]	5	4
+M3TransformedCollection list both	contains[class java.lang.Object]	11	3
+M3TransformedCollection list both	spliterator[]	5	4
+M3TransformedCollection list both	addAll[interface java.util.Collection]	15	3
+M3TransformedCollection list both	forEach[interface java.util.function.Consumer]	6	3
+M3TransformedCollection list both	removeIf[interface java.util.function.Predicate]	11	3
+M3TransformedCollection list both	removeAll[interface java.util.Collection]	11	3
+M3TransformedCollection list both	retainAll[interface java.util.Collection]	11	4
+M3TransformedCollection list both	containsAll[interface java.util.Collection]	11	3
+M3TransformedCollection list both	parallelStream[]	5	3
+M3TransformedList list both	remove[int]	11	3
+M3TransformedList list both	remove[class java.lang.Object]	11	3
+M3TransformedList list both	size[]	10	4
+M3TransformedList list both	get[int]	11	4
+M3TransformedList list both	equals[class java.lang.Object]	24	3
+M3TransformedList list both	toString[]	10	3
+M3TransformedList list both	hashCode[]	10	3
+M3TransformedList list both	indexOf[class java.lang.Object]	11	3
+M3TransformedList list both	clear[]	10	4
+M3TransformedList list both	lastIndexOf[class java.lang.Object]	11	3
+M3TransformedList list both	isEmpty[]	10	4
+M3TransformedList list both	replaceAll[interface java.util.function.UnaryOperator]	6	3
+M3TransformedList list both	add[class java.lang.Object]	15	4
+M3TransformedList list both	add[int, class java.lang.Object]	16	4
+M3TransformedList list both	subList[int, int]	23	4
+M3TransformedList list both	toArray[class [Ljava.lang.Object;]	11	4
+M3TransformedList list both	toArray[interface java.util.function.IntFunction]	6	4
+M3TransformedList list both	toArray[]	10	4
+M3TransformedList list both	iterator[]	10	4
+M3TransformedList list both	stream[]	5	4
+M3TransformedList list both	contains[class java.lang.Object]	11	3
+M3TransformedList list both	spliterator[]	5	4
+M3TransformedList list both	addAll[int, interface java.util.Collection]	16	3
+M3TransformedList list both	addAll[interface java.util.Collection]	15	3
+M3TransformedList list both	set[int, class java.lang.Object]	16	3
+M3TransformedList list both	forEach[interface java.util.function.Consumer]	6	3
+M3TransformedList list both	sort[interface java.util.Comparator]	6	3
+M3TransformedList list both	removeIf[interface java.util.function.Predicate]	11	3
+M3TransformedList list both	getFirst[]	5	3
+M3TransformedList list both	getLast[]	5	3
+M3TransformedList list both	addFirst[class java.lang.Object]	6	3
+M3TransformedList list both	addLast[class java.lang.Object]	6	3
+M3TransformedList list both	removeFirst[]	5	3
+M3TransformedList list both	removeLast[]	5	3
+M3TransformedList list both	removeAll[interface java.util.Collection]	11	3
+M3TransformedList list both	retainAll[interface java.util.Collection]	11	3
+M3TransformedList list both	listIterator[]	6	4
+M3TransformedList list both	listIterator[int]	19	4
+M3TransformedList list both	reversed[]	5	3
+M3TransformedList list both	containsAll[interface java.util.Collection]	11	3
+M3TransformedList list both	parallelStream[]	5	3
+M3TransformedSet hashset both	remove[class java.lang.Object]	11	4
+M3TransformedSet hashset both	size[]	10	4
+M3TransformedSet hashset both	equals[class java.lang.Object]	24	3
+M3TransformedSet hashset both	toString[]	10	3
+M3TransformedSet hashset both	hashCode[]	10	4
+M3TransformedSet hashset both	clear[]	10	3
+M3TransformedSet hashset both	isEmpty[]	10	3
+M3TransformedSet hashset both	add[class java.lang.Object]	15	3
+M3TransformedSet hashset both	toArray[]	10	3
+M3TransformedSet hashset both	toArray[interface java.util.function.IntFunction]	6	3
+M3TransformedSet hashset both	toArray[class [Ljava.lang.Object;]	11	4
+M3TransformedSet hashset both	iterator[]	10	4
+M3TransformedSet hashset both	stream[]	5	4
+M3TransformedSet hashset both	contains[class java.lang.Object]	11	3
+M3TransformedSet hashset both	spliterator[]	5	4
+M3TransformedSet hashset both	addAll[interface java.util.Collection]	15	3
+M3TransformedSet hashset both	forEach[interface java.util.function.Consumer]	6	4
+M3TransformedSet hashset both	removeIf[interface java.util.function.Predicate]	11	3
+M3TransformedSet hashset both	removeAll[interface java.util.Collection]	11	3
+M3TransformedSet hashset both	retainAll[interface java.util.Collection]	11	3
+M3TransformedSet hashset both	containsAll[interface java.util.Collection]	11	3
+M3TransformedSet hashset both	parallelStream[]	5	4
+M3TransformedSortedSet treeset both	remove[class java.lang.Object]	11	3
+M3TransformedSortedSet treeset both	size[]	10	4
+M3TransformedSortedSet treeset both	equals[class java.lang.Object]	24	3
+M3TransformedSortedSet treeset both	toString[]	10	3
+M3TransformedSortedSet treeset both	hashCode[]	10	3
+M3TransformedSortedSet treeset both	clear[]	10	4
+M3TransformedSortedSet treeset both	isEmpty[]	10	3
+M3TransformedSortedSet treeset both	add[class java.lang.Object]	15	3
+M3TransformedSortedSet treeset both	toArray[]	10	3
+M3TransformedSortedSet treeset both	toArray[interface java.util.function.IntFunction]	6	3
+M3TransformedSortedSet treeset both	toArray[class [Ljava.lang.Object;]	11	3
+M3TransformedSortedSet treeset both	iterator[]	10	4
+M3TransformedSortedSet treeset both	stream[]	5	4
+M3TransformedSortedSet treeset both	contains[class java.lang.Object]	11	3
+M3TransformedSortedSet treeset both	last[]	10	4
+M3TransformedSortedSet treeset both	spliterator[]	5	4
+M3TransformedSortedSet treeset both	addAll[interface java.util.Collection]	15	3
+M3TransformedSortedSet treeset both	first[]	10	4
+M3TransformedSortedSet treeset both	forEach[interface java.util.function.Consumer]	6	3
+M3TransformedSortedSet treeset both	removeIf[interface java.util.function.Predicate]	11	3
+M3TransformedSortedSet treeset both	getFirst[]	5	3
+M3TransformedSortedSet treeset both	getLast[]	5	4
+M3TransformedSortedSet treeset both	addFirst[class java.lang.Object]	6	3
+M3TransformedSortedSet treeset both	addLast[class java.lang.Object]	6	3
+M3TransformedSortedSet treeset both	removeFirst[]	5	3
+M3TransformedSortedSet treeset both	removeLast[]	5	3
+M3TransformedSortedSet treeset both	removeAll[interface java.util.Collection]	11	3
+M3TransformedSortedSet treeset both	retainAll[interface java.util.Collection]	11	3
+M3TransformedSortedSet treeset both	reversed[]	5	3
+M3TransformedSortedSet treeset both	containsAll[interface java.util.Collection]	11	3
+M3TransformedSortedSet treeset both	parallelStream[]	5	3
+M3TransformedSortedSet treeset both	comparator[]	10	4
+M3TransformedSortedSet treeset both	subSet[class java.lang.Object, class java.lang.Object]	23	4
+M3TransformedSortedSet treeset both	headSet[class java.lang.Object]	22	3
+M3TransformedSortedSet treeset both	tailSet[class java.lang.Object]	22	3
+M3TransformedNavigableSet treeset both	remove[class java.lang.Object]	11	3
+M3TransformedNavigableSet treeset both	size[]	10	3
+M3TransformedNavigableSet treeset both	equals[class java.lang.Object]	24	3
+M3TransformedNavigableSet treeset both	toString[]	10	3
+M3TransformedNavigableSet treeset both	hashCode[]	10	3
+M3TransformedNavigableSet treeset both	floor[class java.lang.Object]	11	3
+M3TransformedNavigableSet treeset both	clear[]	10	3
+M3TransformedNavigableSet treeset both	isEmpty[]	10	4
+M3TransformedNavigableSet treeset both	add[class java.lang.Object]	15	3
+M3TransformedNavigableSet treeset both	toArray[interface java.util.function.IntFunction]	6	3
+M3TransformedNavigableSet treeset both	toArray[]	10	3
+M3TransformedNavigableSet treeset both	toArray[class [Ljava.lang.Object;]	11	4
+M3TransformedNavigableSet treeset both	iterator[]	10	4
+M3TransformedNavigableSet treeset both	stream[]	5	3
+M3TransformedNavigableSet treeset both	contains[class java.lang.Object]	11	3
+M3TransformedNavigableSet treeset both	last[]	10	4
+M3TransformedNavigableSet treeset both	spliterator[]	5	4
+M3TransformedNavigableSet treeset both	addAll[interface java.util.Collection]	15	3
+M3TransformedNavigableSet treeset both	first[]	10	4
+M3TransformedNavigableSet treeset both	forEach[interface java.util.function.Consumer]	6	3
+M3TransformedNavigableSet treeset both	removeIf[interface java.util.function.Predicate]	11	3
+M3TransformedNavigableSet treeset both	getFirst[]	5	3
+M3TransformedNavigableSet treeset both	getLast[]	5	3
+M3TransformedNavigableSet treeset both	addFirst[class java.lang.Object]	6	3
+M3TransformedNavigableSet treeset both	addLast[class java.lang.Object]	6	3
+M3TransformedNavigableSet treeset both	removeFirst[]	5	3
+M3TransformedNavigableSet treeset both	removeLast[]	5	3
+M3TransformedNavigableSet treeset both	removeAll[interface java.util.Collection]	11	3
+M3TransformedNavigableSet treeset both	retainAll[interface java.util.Collection]	11	3
+M3TransformedNavigableSet treeset both	reversed[]	5	3
+M3TransformedNavigableSet treeset both	containsAll[interface java.util.Collection]	11	3
+M3TransformedNavigableSet treeset both	parallelStream[]	5	3
+M3TransformedNavigableSet treeset both	lower[class java.lang.Object]	11	3
+M3TransformedNavigableSet treeset both	comparator[]	10	4
+M3TransformedNavigableSet treeset both	pollFirst[]	10	3
+M3TransformedNavigableSet treeset both	pollLast[]	10	4
+M3TransformedNavigableSet treeset both	descendingIterator[]	10	3
+M3TransformedNavigableSet treeset both	descendingSet[]	21	4
+M3TransformedNavigableSet treeset both	ceiling[class java.lang.Object]	11	3
+M3TransformedNavigableSet treeset both	higher[class java.lang.Object]	11	3
+M3TransformedNavigableSet treeset both	subSet[class java.lang.Object, class java.lang.Object]	23	4
+M3TransformedNavigableSet treeset both	subSet[class java.lang.Object, boolean, class java.lang.Object, boolean]	26	4
+M3TransformedNavigableSet treeset both	headSet[class java.lang.Object, boolean]	23	4
+M3TransformedNavigableSet treeset both	headSet[class java.lang.Object]	22	3
+M3TransformedNavigableSet treeset both	tailSet[class java.lang.Object, boolean]	23	4
+M3TransformedNavigableSet treeset both	tailSet[class java.lang.Object]	22	3
+M3TransformedQueue deque both	remove[class java.lang.Object]	11	3
+M3TransformedQueue deque both	remove[]	10	3
+M3TransformedQueue deque both	size[]	10	3
+M3TransformedQueue deque both	toString[]	10	3
+M3TransformedQueue deque both	clear[]	10	3
+M3TransformedQueue deque both	isEmpty[]	10	3
+M3TransformedQueue deque both	add[class java.lang.Object]	15	3
+M3TransformedQueue deque both	toArray[]	10	4
+M3TransformedQueue deque both	toArray[interface java.util.function.IntFunction]	6	4
+M3TransformedQueue deque both	toArray[class [Ljava.lang.Object;]	11	4
+M3TransformedQueue deque both	iterator[]	10	4
+M3TransformedQueue deque both	stream[]	5	3
+M3TransformedQueue deque both	contains[class java.lang.Object]	11	3
+M3TransformedQueue deque both	spliterator[]	5	4
+M3TransformedQueue deque both	addAll[interface java.util.Collection]	15	3
+M3TransformedQueue deque both	forEach[interface java.util.function.Consumer]	6	3
+M3TransformedQueue deque both	peek[]	10	3
+M3TransformedQueue deque both	removeIf[interface java.util.function.Predicate]	11	4
+M3TransformedQueue deque both	element[]	10	4
+M3TransformedQueue deque both	removeAll[interface java.util.Collection]	11	3
+M3TransformedQueue deque both	retainAll[interface java.util.Collection]	11	3
+M3TransformedQueue deque both	containsAll[interface java.util.Collection]	11	4
+M3TransformedQueue deque both	parallelStream[]	5	4
+M3TransformedQueue deque both	poll[]	10	3
+M3TransformedQueue deque both	offer[class java.lang.Object]	15	3
+M3TransformedBag hashbag both	remove[class java.lang.Object]	11	3
+M3TransformedBag hashbag both	remove[class java.lang.Object, int]	12	3
+M3TransformedBag hashbag both	size[]	10	4
+M3TransformedBag hashbag both	equals[class java.lang.Object]	24	3
+M3TransformedBag hashbag both	toString[]	10	3
+M3TransformedBag hashbag both	hashCode[]	10	3
+M3TransformedBag hashbag both	clear[]	10	3
+M3TransformedBag hashbag both	isEmpty[]	10	3
+M3TransformedBag hashbag both	add[class java.lang.Object]	15	4
+M3TransformedBag hashbag both	add[class java.lang.Object, int]	16	4
+M3TransformedBag hashbag both	toArray[]	10	3
+M3TransformedBag hashbag both	toArray[interface java.util.function.IntFunction]	6	3
+M3TransformedBag hashbag both	toArray[class [Ljava.lang.Object;]	11	4
+M3TransformedBag hashbag both	iterator[]	10	4
+M3TransformedBag hashbag both	stream[]	5	3
+M3TransformedBag hashbag both	contains[class java.lang.Object]	11	3
+M3TransformedBag hashbag both	spliterator[]	5	4
+M3TransformedBag hashbag both	addAll[interface java.util.Collection]	15	3
+M3TransformedBag hashbag both	forEach[interface java.util.function.Consumer]	6	3
+M3TransformedBag hashbag both	getCount[class java.lang.Object]	11	3
+M3TransformedBag hashbag both	removeIf[interface java.util.function.Predicate]	11	4
+M3TransformedBag hashbag both	removeAll[interface java.util.Collection]	11	3
+M3TransformedBag hashbag both	retainAll[interface java.util.Collection]	11	3
+M3TransformedBag hashbag both	containsAll[interface java.util.Collection]	11	3
+M3TransformedBag hashbag both	parallelStream[]	5	3
+M3TransformedBag hashbag both	uniqueSet[]	21	4
+M3TransformedSortedBag treebag both	remove[class java.lang.Object, int]	12	3
+M3TransformedSortedBag treebag both	remove[class java.lang.Object]	11	3
+M3TransformedSortedBag treebag both	size[]	10	4
+M3TransformedSortedBag treebag both	equals[class java.lang.Object]	24	3
+M3TransformedSortedBag treebag both	toString[]	10	3
+M3TransformedSortedBag treebag both	hashCode[]	10	3
+M3TransformedSortedBag treebag both	clear[]	10	3
+M3TransformedSortedBag treebag both	isEmpty[]	10	3
+M3TransformedSortedBag treebag both	add[class java.lang.Object]	15	3
+M3TransformedSortedBag treebag both	add[class java.lang.Object, int]	16	3
+M3TransformedSortedBag treebag both	toArray[]	10	4
+M3TransformedSortedBag treebag both	toArray[interface java.util.function.IntFunction]	6	3
+M3TransformedSortedBag treebag both	toArray[class [Ljava.lang.Object;]	11	4
+M3TransformedSortedBag treebag both	iterator[]	10	4
+M3TransformedSortedBag treebag both	stream[]	5	4
+M3TransformedSortedBag treebag both	contains[class java.lang.Object]	11	3
+M3TransformedSortedBag treebag both	last[]	10	3
+M3TransformedSortedBag treebag both	spliterator[]	5	4
+M3TransformedSortedBag treebag both	addAll[interface java.util.Collection]	15	3
+M3TransformedSortedBag treebag both	first[]	10	3
+M3TransformedSortedBag treebag both	forEach[interface java.util.function.Consumer]	6	3
+M3TransformedSortedBag treebag both	getCount[class java.lang.Object]	11	3
+M3TransformedSortedBag treebag both	removeIf[interface java.util.function.Predicate]	11	3
+M3TransformedSortedBag treebag both	removeAll[interface java.util.Collection]	11	3
+M3TransformedSortedBag treebag both	retainAll[interface java.util.Collection]	11	3
+M3TransformedSortedBag treebag both	containsAll[interface java.util.Collection]	11	3
+M3TransformedSortedBag treebag both	parallelStream[]	5	4
+M3TransformedSortedBag treebag both	comparator[]	10	4
+M3TransformedSortedBag treebag both	uniqueSet[]	21	3
+M3TransformedMap hashmap both	remove[class java.lang.Object]	11	4
+M3TransformedMap hashmap both	remove[class java.lang.Object, class java.lang.Object]	7	4
+M3TransformedMap hashmap both	size[]	10	4
+M3TransformedMap hashmap both	get[class java.lang.Object]	11	4
+M3TransformedMap hashmap both	put[class java.lang.Object, class java.lang.Object]	20	4
+M3TransformedMap hashmap both	equals[class java.lang.Object]	24	4
+M3TransformedMap hashmap both	toString[]	10	4
+M3TransformedMap hashmap both	values[]	10	4
+M3TransformedMap hashmap both	hashCode[]	10	4
+M3TransformedMap hashmap both	clear[]	10	3
+M3TransformedMap hashmap both	isEmpty[]	10	4
+M3TransformedMap hashmap both	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	8	4
+M3TransformedMap hashmap both	replace[class java.lang.Object, class java.lang.Object]	7	3
+M3TransformedMap hashmap both	replaceAll[interface java.util.function.BiFunction]	6	3
+M3TransformedMap hashmap both	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	8	4
+M3TransformedMap hashmap both	entrySet[]	37	4
+M3TransformedMap hashmap both	putAll[interface java.util.Map]	15	4
+M3TransformedMap hashmap both	putIfAbsent[class java.lang.Object, class java.lang.Object]	7	4
+M3TransformedMap hashmap both	compute[class java.lang.Object, interface java.util.function.BiFunction]	7	4
+M3TransformedMap hashmap both	forEach[interface java.util.function.BiConsumer]	6	3
+M3TransformedMap hashmap both	containsKey[class java.lang.Object]	11	4
+M3TransformedMap hashmap both	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	7	3
+M3TransformedMap hashmap both	keySet[]	10	4
+M3TransformedMap hashmap both	containsValue[class java.lang.Object]	11	4
+M3TransformedMap hashmap both	getOrDefault[class java.lang.Object, class java.lang.Object]	7	4
+M3TransformedMap hashmap both	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	7	4
+M3TransformedMap hashmap both	mapIterator[]	12	4
+M3TransformedMap linkedmap both	remove[class java.lang.Object]	11	4
+M3TransformedMap linkedmap both	remove[class java.lang.Object, class java.lang.Object]	7	4
+M3TransformedMap linkedmap both	size[]	10	4
+M3TransformedMap linkedmap both	get[class java.lang.Object]	11	4
+M3TransformedMap linkedmap both	put[class java.lang.Object, class java.lang.Object]	20	4
+M3TransformedMap linkedmap both	equals[class java.lang.Object]	24	4
+M3TransformedMap linkedmap both	toString[]	10	4
+M3TransformedMap linkedmap both	values[]	10	4
+M3TransformedMap linkedmap both	hashCode[]	10	4
+M3TransformedMap linkedmap both	clear[]	10	3
+M3TransformedMap linkedmap both	isEmpty[]	10	4
+M3TransformedMap linkedmap both	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	8	4
+M3TransformedMap linkedmap both	replace[class java.lang.Object, class java.lang.Object]	7	3
+M3TransformedMap linkedmap both	replaceAll[interface java.util.function.BiFunction]	6	3
+M3TransformedMap linkedmap both	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	8	4
+M3TransformedMap linkedmap both	entrySet[]	37	4
+M3TransformedMap linkedmap both	putAll[interface java.util.Map]	15	4
+M3TransformedMap linkedmap both	putIfAbsent[class java.lang.Object, class java.lang.Object]	7	4
+M3TransformedMap linkedmap both	compute[class java.lang.Object, interface java.util.function.BiFunction]	7	4
+M3TransformedMap linkedmap both	forEach[interface java.util.function.BiConsumer]	6	3
+M3TransformedMap linkedmap both	containsKey[class java.lang.Object]	11	4
+M3TransformedMap linkedmap both	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	7	3
+M3TransformedMap linkedmap both	keySet[]	10	4
+M3TransformedMap linkedmap both	containsValue[class java.lang.Object]	11	4
+M3TransformedMap linkedmap both	getOrDefault[class java.lang.Object, class java.lang.Object]	7	4
+M3TransformedMap linkedmap both	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	7	4
+M3TransformedMap linkedmap both	mapIterator[]	12	4
+M3TransformedMap hashmap keynull	remove[class java.lang.Object]	11	4
+M3TransformedMap hashmap keynull	remove[class java.lang.Object, class java.lang.Object]	7	4
+M3TransformedMap hashmap keynull	size[]	10	4
+M3TransformedMap hashmap keynull	get[class java.lang.Object]	11	4
+M3TransformedMap hashmap keynull	put[class java.lang.Object, class java.lang.Object]	20	4
+M3TransformedMap hashmap keynull	equals[class java.lang.Object]	24	4
+M3TransformedMap hashmap keynull	toString[]	10	4
+M3TransformedMap hashmap keynull	values[]	10	4
+M3TransformedMap hashmap keynull	hashCode[]	10	4
+M3TransformedMap hashmap keynull	clear[]	10	3
+M3TransformedMap hashmap keynull	isEmpty[]	10	4
+M3TransformedMap hashmap keynull	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	8	4
+M3TransformedMap hashmap keynull	replace[class java.lang.Object, class java.lang.Object]	7	3
+M3TransformedMap hashmap keynull	replaceAll[interface java.util.function.BiFunction]	6	3
+M3TransformedMap hashmap keynull	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	8	4
+M3TransformedMap hashmap keynull	entrySet[]	37	4
+M3TransformedMap hashmap keynull	putAll[interface java.util.Map]	15	4
+M3TransformedMap hashmap keynull	putIfAbsent[class java.lang.Object, class java.lang.Object]	7	4
+M3TransformedMap hashmap keynull	compute[class java.lang.Object, interface java.util.function.BiFunction]	7	4
+M3TransformedMap hashmap keynull	forEach[interface java.util.function.BiConsumer]	6	3
+M3TransformedMap hashmap keynull	containsKey[class java.lang.Object]	11	4
+M3TransformedMap hashmap keynull	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	7	3
+M3TransformedMap hashmap keynull	keySet[]	10	4
+M3TransformedMap hashmap keynull	containsValue[class java.lang.Object]	11	4
+M3TransformedMap hashmap keynull	getOrDefault[class java.lang.Object, class java.lang.Object]	7	4
+M3TransformedMap hashmap keynull	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	7	4
+M3TransformedMap hashmap keynull	mapIterator[]	12	4
+M3TransformedMap hashmap valuenull	remove[class java.lang.Object]	11	4
+M3TransformedMap hashmap valuenull	remove[class java.lang.Object, class java.lang.Object]	7	4
+M3TransformedMap hashmap valuenull	size[]	10	4
+M3TransformedMap hashmap valuenull	get[class java.lang.Object]	11	4
+M3TransformedMap hashmap valuenull	put[class java.lang.Object, class java.lang.Object]	20	4
+M3TransformedMap hashmap valuenull	equals[class java.lang.Object]	24	4
+M3TransformedMap hashmap valuenull	toString[]	10	4
+M3TransformedMap hashmap valuenull	values[]	10	4
+M3TransformedMap hashmap valuenull	hashCode[]	10	4
+M3TransformedMap hashmap valuenull	clear[]	10	3
+M3TransformedMap hashmap valuenull	isEmpty[]	10	4
+M3TransformedMap hashmap valuenull	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	8	4
+M3TransformedMap hashmap valuenull	replace[class java.lang.Object, class java.lang.Object]	7	3
+M3TransformedMap hashmap valuenull	replaceAll[interface java.util.function.BiFunction]	6	3
+M3TransformedMap hashmap valuenull	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	8	4
+M3TransformedMap hashmap valuenull	entrySet[]	37	4
+M3TransformedMap hashmap valuenull	putAll[interface java.util.Map]	15	4
+M3TransformedMap hashmap valuenull	putIfAbsent[class java.lang.Object, class java.lang.Object]	7	4
+M3TransformedMap hashmap valuenull	compute[class java.lang.Object, interface java.util.function.BiFunction]	7	4
+M3TransformedMap hashmap valuenull	forEach[interface java.util.function.BiConsumer]	6	3
+M3TransformedMap hashmap valuenull	containsKey[class java.lang.Object]	11	4
+M3TransformedMap hashmap valuenull	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	7	3
+M3TransformedMap hashmap valuenull	keySet[]	10	4
+M3TransformedMap hashmap valuenull	containsValue[class java.lang.Object]	11	4
+M3TransformedMap hashmap valuenull	getOrDefault[class java.lang.Object, class java.lang.Object]	7	4
+M3TransformedMap hashmap valuenull	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	7	4
+M3TransformedMap hashmap valuenull	mapIterator[]	12	4
+M3TransformedSortedMap treemap both	remove[class java.lang.Object, class java.lang.Object]	7	3
+M3TransformedSortedMap treemap both	remove[class java.lang.Object]	11	3
+M3TransformedSortedMap treemap both	size[]	10	3
+M3TransformedSortedMap treemap both	get[class java.lang.Object]	11	4
+M3TransformedSortedMap treemap both	put[class java.lang.Object, class java.lang.Object]	20	4
+M3TransformedSortedMap treemap both	equals[class java.lang.Object]	24	3
+M3TransformedSortedMap treemap both	toString[]	10	3
+M3TransformedSortedMap treemap both	values[]	10	3
+M3TransformedSortedMap treemap both	hashCode[]	10	3
+M3TransformedSortedMap treemap both	clear[]	10	3
+M3TransformedSortedMap treemap both	isEmpty[]	10	4
+M3TransformedSortedMap treemap both	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	8	3
+M3TransformedSortedMap treemap both	replace[class java.lang.Object, class java.lang.Object]	7	3
+M3TransformedSortedMap treemap both	replaceAll[interface java.util.function.BiFunction]	6	3
+M3TransformedSortedMap treemap both	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	8	3
+M3TransformedSortedMap treemap both	entrySet[]	37	4
+M3TransformedSortedMap treemap both	putAll[interface java.util.Map]	15	3
+M3TransformedSortedMap treemap both	putIfAbsent[class java.lang.Object, class java.lang.Object]	7	3
+M3TransformedSortedMap treemap both	compute[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3TransformedSortedMap treemap both	forEach[interface java.util.function.BiConsumer]	6	3
+M3TransformedSortedMap treemap both	containsKey[class java.lang.Object]	11	4
+M3TransformedSortedMap treemap both	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	7	3
+M3TransformedSortedMap treemap both	keySet[]	10	3
+M3TransformedSortedMap treemap both	containsValue[class java.lang.Object]	11	3
+M3TransformedSortedMap treemap both	getOrDefault[class java.lang.Object, class java.lang.Object]	7	3
+M3TransformedSortedMap treemap both	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3TransformedSortedMap treemap both	reversed[]	5	4
+M3TransformedSortedMap treemap both	comparator[]	10	4
+M3TransformedSortedMap treemap both	firstKey[]	10	4
+M3TransformedSortedMap treemap both	sequencedKeySet[]	5	3
+M3TransformedSortedMap treemap both	sequencedValues[]	5	3
+M3TransformedSortedMap treemap both	sequencedEntrySet[]	5	3
+M3TransformedSortedMap treemap both	putFirst[class java.lang.Object, class java.lang.Object]	7	3
+M3TransformedSortedMap treemap both	putLast[class java.lang.Object, class java.lang.Object]	7	3
+M3TransformedSortedMap treemap both	firstEntry[]	5	3
+M3TransformedSortedMap treemap both	lastEntry[]	5	3
+M3TransformedSortedMap treemap both	pollFirstEntry[]	5	3
+M3TransformedSortedMap treemap both	pollLastEntry[]	5	3
+M3TransformedSortedMap treemap both	subMap[class java.lang.Object, class java.lang.Object]	27	4
+M3TransformedSortedMap treemap both	headMap[class java.lang.Object]	26	4
+M3TransformedSortedMap treemap both	tailMap[class java.lang.Object]	26	4
+M3TransformedSortedMap treemap both	lastKey[]	10	4
+M3TransformedSortedMap treemap both	mapIterator[]	12	3
+M3TransformedSortedMap treemap keynull	remove[class java.lang.Object, class java.lang.Object]	7	3
+M3TransformedSortedMap treemap keynull	remove[class java.lang.Object]	11	3
+M3TransformedSortedMap treemap keynull	size[]	10	3
+M3TransformedSortedMap treemap keynull	get[class java.lang.Object]	11	4
+M3TransformedSortedMap treemap keynull	put[class java.lang.Object, class java.lang.Object]	20	4
+M3TransformedSortedMap treemap keynull	equals[class java.lang.Object]	24	3
+M3TransformedSortedMap treemap keynull	toString[]	10	3
+M3TransformedSortedMap treemap keynull	values[]	10	3
+M3TransformedSortedMap treemap keynull	hashCode[]	10	3
+M3TransformedSortedMap treemap keynull	clear[]	10	3
+M3TransformedSortedMap treemap keynull	isEmpty[]	10	4
+M3TransformedSortedMap treemap keynull	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	8	3
+M3TransformedSortedMap treemap keynull	replace[class java.lang.Object, class java.lang.Object]	7	3
+M3TransformedSortedMap treemap keynull	replaceAll[interface java.util.function.BiFunction]	6	3
+M3TransformedSortedMap treemap keynull	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	8	3
+M3TransformedSortedMap treemap keynull	entrySet[]	37	4
+M3TransformedSortedMap treemap keynull	putAll[interface java.util.Map]	15	3
+M3TransformedSortedMap treemap keynull	putIfAbsent[class java.lang.Object, class java.lang.Object]	7	3
+M3TransformedSortedMap treemap keynull	compute[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3TransformedSortedMap treemap keynull	forEach[interface java.util.function.BiConsumer]	6	3
+M3TransformedSortedMap treemap keynull	containsKey[class java.lang.Object]	11	4
+M3TransformedSortedMap treemap keynull	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	7	3
+M3TransformedSortedMap treemap keynull	keySet[]	10	3
+M3TransformedSortedMap treemap keynull	containsValue[class java.lang.Object]	11	3
+M3TransformedSortedMap treemap keynull	getOrDefault[class java.lang.Object, class java.lang.Object]	7	3
+M3TransformedSortedMap treemap keynull	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3TransformedSortedMap treemap keynull	reversed[]	5	4
+M3TransformedSortedMap treemap keynull	comparator[]	10	4
+M3TransformedSortedMap treemap keynull	firstKey[]	10	4
+M3TransformedSortedMap treemap keynull	sequencedKeySet[]	5	3
+M3TransformedSortedMap treemap keynull	sequencedValues[]	5	3
+M3TransformedSortedMap treemap keynull	sequencedEntrySet[]	5	3
+M3TransformedSortedMap treemap keynull	putFirst[class java.lang.Object, class java.lang.Object]	7	3
+M3TransformedSortedMap treemap keynull	putLast[class java.lang.Object, class java.lang.Object]	7	3
+M3TransformedSortedMap treemap keynull	firstEntry[]	5	3
+M3TransformedSortedMap treemap keynull	lastEntry[]	5	3
+M3TransformedSortedMap treemap keynull	pollFirstEntry[]	5	3
+M3TransformedSortedMap treemap keynull	pollLastEntry[]	5	3
+M3TransformedSortedMap treemap keynull	subMap[class java.lang.Object, class java.lang.Object]	27	4
+M3TransformedSortedMap treemap keynull	headMap[class java.lang.Object]	26	4
+M3TransformedSortedMap treemap keynull	tailMap[class java.lang.Object]	26	4
+M3TransformedSortedMap treemap keynull	lastKey[]	10	4
+M3TransformedSortedMap treemap keynull	mapIterator[]	12	3
+M3UnmodifiableOrderedMap linkedmap -	remove[class java.lang.Object]	8	3
+M3UnmodifiableOrderedMap linkedmap -	remove[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableOrderedMap linkedmap -	size[]	10	3
+M3UnmodifiableOrderedMap linkedmap -	get[class java.lang.Object]	11	4
+M3UnmodifiableOrderedMap linkedmap -	put[class java.lang.Object, class java.lang.Object]	8	4
+M3UnmodifiableOrderedMap linkedmap -	equals[class java.lang.Object]	24	3
+M3UnmodifiableOrderedMap linkedmap -	toString[]	10	3
+M3UnmodifiableOrderedMap linkedmap -	values[]	13	4
+M3UnmodifiableOrderedMap linkedmap -	hashCode[]	10	3
+M3UnmodifiableOrderedMap linkedmap -	clear[]	8	3
+M3UnmodifiableOrderedMap linkedmap -	isEmpty[]	10	4
+M3UnmodifiableOrderedMap linkedmap -	replace[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableOrderedMap linkedmap -	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	8	3
+M3UnmodifiableOrderedMap linkedmap -	replaceAll[interface java.util.function.BiFunction]	6	3
+M3UnmodifiableOrderedMap linkedmap -	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	8	3
+M3UnmodifiableOrderedMap linkedmap -	entrySet[]	13	4
+M3UnmodifiableOrderedMap linkedmap -	putAll[interface java.util.Map]	8	3
+M3UnmodifiableOrderedMap linkedmap -	putIfAbsent[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableOrderedMap linkedmap -	compute[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3UnmodifiableOrderedMap linkedmap -	forEach[interface java.util.function.BiConsumer]	6	3
+M3UnmodifiableOrderedMap linkedmap -	containsKey[class java.lang.Object]	11	4
+M3UnmodifiableOrderedMap linkedmap -	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	7	3
+M3UnmodifiableOrderedMap linkedmap -	keySet[]	13	4
+M3UnmodifiableOrderedMap linkedmap -	containsValue[class java.lang.Object]	11	3
+M3UnmodifiableOrderedMap linkedmap -	getOrDefault[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableOrderedMap linkedmap -	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3UnmodifiableOrderedMap linkedmap -	firstKey[]	10	4
+M3UnmodifiableOrderedMap linkedmap -	lastKey[]	10	4
+M3UnmodifiableOrderedMap linkedmap -	previousKey[class java.lang.Object]	11	4
+M3UnmodifiableOrderedMap linkedmap -	mapIterator[]	17	3
+M3UnmodifiableOrderedMap linkedmap -	nextKey[class java.lang.Object]	11	4
+M3UnmodifiableTrie trie -	remove[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableTrie trie -	remove[class java.lang.Object]	8	4
+M3UnmodifiableTrie trie -	size[]	10	3
+M3UnmodifiableTrie trie -	get[class java.lang.Object]	11	4
+M3UnmodifiableTrie trie -	put[class java.lang.Object, class java.lang.Object]	8	4
+M3UnmodifiableTrie trie -	equals[class java.lang.Object]	11	3
+M3UnmodifiableTrie trie -	toString[]	10	3
+M3UnmodifiableTrie trie -	values[]	13	3
+M3UnmodifiableTrie trie -	hashCode[]	10	3
+M3UnmodifiableTrie trie -	clear[]	8	3
+M3UnmodifiableTrie trie -	isEmpty[]	10	4
+M3UnmodifiableTrie trie -	replace[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableTrie trie -	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	8	4
+M3UnmodifiableTrie trie -	replaceAll[interface java.util.function.BiFunction]	6	3
+M3UnmodifiableTrie trie -	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	8	3
+M3UnmodifiableTrie trie -	entrySet[]	13	4
+M3UnmodifiableTrie trie -	putAll[interface java.util.Map]	8	3
+M3UnmodifiableTrie trie -	putIfAbsent[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableTrie trie -	compute[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3UnmodifiableTrie trie -	forEach[interface java.util.function.BiConsumer]	6	3
+M3UnmodifiableTrie trie -	containsKey[class java.lang.Object]	11	4
+M3UnmodifiableTrie trie -	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	7	3
+M3UnmodifiableTrie trie -	keySet[]	13	3
+M3UnmodifiableTrie trie -	containsValue[class java.lang.Object]	11	3
+M3UnmodifiableTrie trie -	getOrDefault[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableTrie trie -	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3UnmodifiableTrie trie -	reversed[]	5	4
+M3UnmodifiableTrie trie -	comparator[]	10	4
+M3UnmodifiableTrie trie -	firstKey[]	10	3
+M3UnmodifiableTrie trie -	sequencedKeySet[]	5	3
+M3UnmodifiableTrie trie -	sequencedValues[]	5	3
+M3UnmodifiableTrie trie -	sequencedEntrySet[]	5	3
+M3UnmodifiableTrie trie -	putFirst[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableTrie trie -	putLast[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableTrie trie -	firstEntry[]	5	3
+M3UnmodifiableTrie trie -	lastEntry[]	5	3
+M3UnmodifiableTrie trie -	pollFirstEntry[]	5	3
+M3UnmodifiableTrie trie -	pollLastEntry[]	5	3
+M3UnmodifiableTrie trie -	subMap[class java.lang.Object, class java.lang.Object]	15	4
+M3UnmodifiableTrie trie -	headMap[class java.lang.Object]	14	4
+M3UnmodifiableTrie trie -	tailMap[class java.lang.Object]	14	3
+M3UnmodifiableTrie trie -	lastKey[]	10	4
+M3UnmodifiableTrie trie -	previousKey[class java.lang.Object]	11	3
+M3UnmodifiableTrie trie -	mapIterator[]	17	3
+M3UnmodifiableTrie trie -	prefixMap[class java.lang.Object]	14	2
+M3UnmodifiableTrie trie -	nextKey[class java.lang.Object]	11	3
+M3UnmodifiableBidiMap dualhashbidi -	remove[class java.lang.Object]	8	3
+M3UnmodifiableBidiMap dualhashbidi -	remove[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableBidiMap dualhashbidi -	size[]	10	3
+M3UnmodifiableBidiMap dualhashbidi -	get[class java.lang.Object]	11	4
+M3UnmodifiableBidiMap dualhashbidi -	put[class java.lang.Object, class java.lang.Object]	8	4
+M3UnmodifiableBidiMap dualhashbidi -	equals[class java.lang.Object]	24	3
+M3UnmodifiableBidiMap dualhashbidi -	toString[]	10	3
+M3UnmodifiableBidiMap dualhashbidi -	values[]	13	3
+M3UnmodifiableBidiMap dualhashbidi -	hashCode[]	10	3
+M3UnmodifiableBidiMap dualhashbidi -	clear[]	8	3
+M3UnmodifiableBidiMap dualhashbidi -	isEmpty[]	10	3
+M3UnmodifiableBidiMap dualhashbidi -	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	8	3
+M3UnmodifiableBidiMap dualhashbidi -	replace[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableBidiMap dualhashbidi -	replaceAll[interface java.util.function.BiFunction]	6	3
+M3UnmodifiableBidiMap dualhashbidi -	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	8	3
+M3UnmodifiableBidiMap dualhashbidi -	entrySet[]	13	4
+M3UnmodifiableBidiMap dualhashbidi -	getKey[class java.lang.Object]	11	4
+M3UnmodifiableBidiMap dualhashbidi -	putAll[interface java.util.Map]	8	3
+M3UnmodifiableBidiMap dualhashbidi -	putIfAbsent[class java.lang.Object, class java.lang.Object]	7	4
+M3UnmodifiableBidiMap dualhashbidi -	compute[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3UnmodifiableBidiMap dualhashbidi -	forEach[interface java.util.function.BiConsumer]	6	3
+M3UnmodifiableBidiMap dualhashbidi -	containsKey[class java.lang.Object]	11	4
+M3UnmodifiableBidiMap dualhashbidi -	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	7	3
+M3UnmodifiableBidiMap dualhashbidi -	keySet[]	13	3
+M3UnmodifiableBidiMap dualhashbidi -	containsValue[class java.lang.Object]	11	3
+M3UnmodifiableBidiMap dualhashbidi -	getOrDefault[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableBidiMap dualhashbidi -	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3UnmodifiableBidiMap dualhashbidi -	mapIterator[]	17	4
+M3UnmodifiableBidiMap dualhashbidi -	inverseBidiMap[]	40	4
+M3UnmodifiableBidiMap dualhashbidi -	removeValue[class java.lang.Object]	8	3
+M3UnmodifiableOrderedBidiMap treebidi -	remove[class java.lang.Object]	8	3
+M3UnmodifiableOrderedBidiMap treebidi -	remove[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableOrderedBidiMap treebidi -	size[]	10	3
+M3UnmodifiableOrderedBidiMap treebidi -	get[class java.lang.Object]	11	4
+M3UnmodifiableOrderedBidiMap treebidi -	put[class java.lang.Object, class java.lang.Object]	8	4
+M3UnmodifiableOrderedBidiMap treebidi -	equals[class java.lang.Object]	24	3
+M3UnmodifiableOrderedBidiMap treebidi -	toString[]	10	3
+M3UnmodifiableOrderedBidiMap treebidi -	values[]	13	3
+M3UnmodifiableOrderedBidiMap treebidi -	hashCode[]	10	3
+M3UnmodifiableOrderedBidiMap treebidi -	clear[]	8	3
+M3UnmodifiableOrderedBidiMap treebidi -	isEmpty[]	10	3
+M3UnmodifiableOrderedBidiMap treebidi -	replace[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableOrderedBidiMap treebidi -	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	8	3
+M3UnmodifiableOrderedBidiMap treebidi -	replaceAll[interface java.util.function.BiFunction]	6	3
+M3UnmodifiableOrderedBidiMap treebidi -	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	8	3
+M3UnmodifiableOrderedBidiMap treebidi -	entrySet[]	13	4
+M3UnmodifiableOrderedBidiMap treebidi -	getKey[class java.lang.Object]	11	3
+M3UnmodifiableOrderedBidiMap treebidi -	putAll[interface java.util.Map]	8	3
+M3UnmodifiableOrderedBidiMap treebidi -	putIfAbsent[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableOrderedBidiMap treebidi -	compute[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3UnmodifiableOrderedBidiMap treebidi -	forEach[interface java.util.function.BiConsumer]	6	3
+M3UnmodifiableOrderedBidiMap treebidi -	containsKey[class java.lang.Object]	11	4
+M3UnmodifiableOrderedBidiMap treebidi -	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	7	3
+M3UnmodifiableOrderedBidiMap treebidi -	keySet[]	13	3
+M3UnmodifiableOrderedBidiMap treebidi -	containsValue[class java.lang.Object]	11	3
+M3UnmodifiableOrderedBidiMap treebidi -	getOrDefault[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableOrderedBidiMap treebidi -	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3UnmodifiableOrderedBidiMap treebidi -	firstKey[]	10	3
+M3UnmodifiableOrderedBidiMap treebidi -	lastKey[]	10	3
+M3UnmodifiableOrderedBidiMap treebidi -	previousKey[class java.lang.Object]	11	3
+M3UnmodifiableOrderedBidiMap treebidi -	mapIterator[]	17	3
+M3UnmodifiableOrderedBidiMap treebidi -	inverseBidiMap[]	5	3
+M3UnmodifiableOrderedBidiMap treebidi -	nextKey[class java.lang.Object]	11	3
+M3UnmodifiableOrderedBidiMap treebidi -	inverseOrderedBidiMap[]	40	4
+M3UnmodifiableOrderedBidiMap treebidi -	removeValue[class java.lang.Object]	8	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	remove[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	remove[class java.lang.Object]	8	4
+M3UnmodifiableSortedBidiMap dualtreebidi -	size[]	10	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	get[class java.lang.Object]	11	4
+M3UnmodifiableSortedBidiMap dualtreebidi -	put[class java.lang.Object, class java.lang.Object]	8	4
+M3UnmodifiableSortedBidiMap dualtreebidi -	equals[class java.lang.Object]	24	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	toString[]	10	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	values[]	13	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	hashCode[]	10	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	clear[]	8	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	isEmpty[]	10	4
+M3UnmodifiableSortedBidiMap dualtreebidi -	replace[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	replace[class java.lang.Object, class java.lang.Object, class java.lang.Object]	8	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	replaceAll[interface java.util.function.BiFunction]	6	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	merge[class java.lang.Object, class java.lang.Object, interface java.util.function.BiFunction]	8	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	entrySet[]	13	4
+M3UnmodifiableSortedBidiMap dualtreebidi -	getKey[class java.lang.Object]	11	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	putAll[interface java.util.Map]	8	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	putIfAbsent[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	compute[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	forEach[interface java.util.function.BiConsumer]	6	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	containsKey[class java.lang.Object]	11	4
+M3UnmodifiableSortedBidiMap dualtreebidi -	computeIfAbsent[class java.lang.Object, interface java.util.function.Function]	7	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	keySet[]	13	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	containsValue[class java.lang.Object]	11	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	getOrDefault[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	computeIfPresent[class java.lang.Object, interface java.util.function.BiFunction]	7	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	reversed[]	5	4
+M3UnmodifiableSortedBidiMap dualtreebidi -	comparator[]	10	4
+M3UnmodifiableSortedBidiMap dualtreebidi -	firstKey[]	10	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	sequencedKeySet[]	5	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	sequencedValues[]	5	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	sequencedEntrySet[]	5	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	putFirst[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	putLast[class java.lang.Object, class java.lang.Object]	7	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	firstEntry[]	5	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	lastEntry[]	5	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	pollFirstEntry[]	5	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	pollLastEntry[]	5	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	subMap[class java.lang.Object, class java.lang.Object]	15	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	headMap[class java.lang.Object]	14	4
+M3UnmodifiableSortedBidiMap dualtreebidi -	tailMap[class java.lang.Object]	14	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	lastKey[]	10	4
+M3UnmodifiableSortedBidiMap dualtreebidi -	previousKey[class java.lang.Object]	11	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	mapIterator[]	17	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	inverseBidiMap[]	40	4
+M3UnmodifiableSortedBidiMap dualtreebidi -	nextKey[class java.lang.Object]	11	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	removeValue[class java.lang.Object]	8	3
+M3UnmodifiableSortedBidiMap dualtreebidi -	valueComparator[]	10	3
