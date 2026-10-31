@@ -6,6 +6,6 @@ LIB_INTAKE HdrHistogram S3_ATOMIZE PASS atoms=1379 KNOWN_PATTERN=265 UNPROVEN_LE
 LIB_INTAKE HdrHistogram S4_CONSOLIDATE PASS owner_contract_atoms=87 (proposal queue)
 LIB_INTAKE HdrHistogram S5_REFACTOR_BASELINE PASS METHOD_15=101 LOOP=71 CONST_HOIST=34 (ratchet: MOP passes may only lower these)
 LIB_INTAKE HdrHistogram S6_MODULE PASS module=jdk.m3.hdrhistogram requires=java.base exports=2 javac_warnings=72
-LIB_INTAKE HdrHistogram S7_JMOD_IMAGE PASS jmod=150125B image_modules=6 smoke='loaded=87 failed=0'
+LIB_INTAKE HdrHistogram S7_JMOD_IMAGE PASS jmod=150159B image_modules=6 smoke='loaded=87 failed=0' app_main=com.m3.lib.hdrhistogram.HistogramLogProcessor launcher=bin/HdrHistogram
 LIB_INTAKE HdrHistogram S8_LAYER PASS files=58 layer=m3/vendor/third_party-m3/relocated/HdrHistogram
 LIB_INTAKE_DONE HdrHistogram jdk.m3.hdrhistogram H:/m3-scratch/lib-intake/batch/HdrHistogram/jmods/jdk.m3.hdrhistogram.jmod

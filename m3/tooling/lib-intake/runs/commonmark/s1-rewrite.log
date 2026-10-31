@@ -10,99 +10,11 @@
 [INFO] Using active styles(s) []
 [INFO] Validating active recipes...
 [INFO] Project [commonmark] Resolving Poms...
-[WARNING] Unable to initialize RocksdbMavenPomCache, falling back to InMemoryMavenPomCache
 [INFO] Project [commonmark] Parsing source files
-java.io.IOException: There is not enough space on the disk
-	at java.base/java.io.FileOutputStream.writeBytes(Native Method)
-	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:367)
-	at org.xerial.snappy.SnappyLoader.extractLibraryFile(SnappyLoader.java:247)
-	at org.xerial.snappy.SnappyLoader.findNativeLibrary(SnappyLoader.java:358)
-	at org.xerial.snappy.SnappyLoader.loadNativeLibrary(SnappyLoader.java:179)
-	at org.xerial.snappy.SnappyLoader.loadSnappyApi(SnappyLoader.java:157)
-	at org.xerial.snappy.Snappy.init(Snappy.java:70)
-	at org.xerial.snappy.Snappy.<clinit>(Snappy.java:47)
-	at org.openrewrite.java.internal.JavaTypeCache.key(JavaTypeCache.java:58)
-	at org.openrewrite.java.internal.JavaTypeCache.get(JavaTypeCache.java:45)
-	at org.openrewrite.java.isolated.ReloadableJava17TypeMapping.methodDeclarationType(ReloadableJava17TypeMapping.java:561)
-	at org.openrewrite.java.isolated.ReloadableJava17TypeMapping.classType(ReloadableJava17TypeMapping.java:290)
-	at org.openrewrite.java.isolated.ReloadableJava17TypeMapping.type(ReloadableJava17TypeMapping.java:63)
-	at org.openrewrite.java.isolated.ReloadableJava17TypeMapping.classType(ReloadableJava17TypeMapping.java:246)
-	at org.openrewrite.java.isolated.ReloadableJava17TypeMapping.type(ReloadableJava17TypeMapping.java:63)
-	at org.openrewrite.java.isolated.ReloadableJava17TypeMapping.type(ReloadableJava17TypeMapping.java:364)
-	at org.openrewrite.java.isolated.ReloadableJava17TypeMapping.type(ReloadableJava17TypeMapping.java:356)
-	at org.openrewrite.java.isolated.ReloadableJava17ParserVisitor.visitClass(ReloadableJava17ParserVisitor.java:399)
-	at org.openrewrite.java.isolated.ReloadableJava17ParserVisitor.visitClass(ReloadableJava17ParserVisitor.java:73)
-	at com.sun.tools.javac.tree.JCTree$JCClassDecl.accept(JCTree.java:855)
-	at com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:92)
-	at org.openrewrite.java.isolated.ReloadableJava17ParserVisitor.convert(ReloadableJava17ParserVisitor.java:1668)
-	at org.openrewrite.java.isolated.ReloadableJava17ParserVisitor.convertAll(ReloadableJava17ParserVisitor.java:1721)
-	at org.openrewrite.java.isolated.ReloadableJava17ParserVisitor.visitCompilationUnit(ReloadableJava17ParserVisitor.java:551)
-	at org.openrewrite.java.isolated.ReloadableJava17ParserVisitor.visitCompilationUnit(ReloadableJava17ParserVisitor.java:73)
-	at com.sun.tools.javac.tree.JCTree$JCCompilationUnit.accept(JCTree.java:623)
-	at com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:92)
-	at org.openrewrite.java.isolated.ReloadableJava17Parser.lambda$parseInputs$0(ReloadableJava17Parser.java:166)
-	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
-	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
-	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1939)
-	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
-	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
-	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:310)
-	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
-	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
-	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
-	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:310)
-	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
-	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:735)
-	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
-	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
-	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
-	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:310)
-	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
-	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
-	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
-	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
-	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
-	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
-	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
-	at java.base/java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:276)
-	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1708)
-	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
-	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
-	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921)
-	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
-	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:682)
-	at org.openrewrite.maven.AbstractRewriteMojo.sourcesWithAutoDetectedStyles(AbstractRewriteMojo.java:286)
-	at org.openrewrite.maven.AbstractRewriteMojo.loadSourceSet(AbstractRewriteMojo.java:255)
-	at org.openrewrite.maven.AbstractRewriteMojo.listResults(AbstractRewriteMojo.java:236)
-	at org.openrewrite.maven.AbstractRewriteRunMojo.execute(AbstractRewriteRunMojo.java:62)
-	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:126)
-	at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2(MojoExecutor.java:328)
-	at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute(MojoExecutor.java:316)
-	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:212)
-	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:174)
-	at org.apache.maven.lifecycle.internal.MojoExecutor.access$000(MojoExecutor.java:75)
-	at org.apache.maven.lifecycle.internal.MojoExecutor$1.run(MojoExecutor.java:162)
-	at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute(DefaultMojosExecutionStrategy.java:39)
-	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:159)
-	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:105)
-	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:73)
-	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:53)
-	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:118)
-	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:261)
-	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:173)
-	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:101)
-	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:919)
-	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:285)
-	at org.apache.maven.cli.MavenCli.main(MavenCli.java:207)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:255)
-	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:201)
-	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:361)
-	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:314)
-[WARNING] There were problems parsing some source files, run with --errors to see full stack traces
-[WARNING] There were problems parsing m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\Extension.java
 [INFO] Running recipe(s)...
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\Extension.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\Extension.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark, newPackageName=com.m3.lib.commonmark, recursive=false}
 [WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\BlockContent.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\BlockContent.java by:
 [WARNING]     com.synexia.m3.intake.Relocate
 [WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
@@ -670,6 +582,6 @@ java.io.IOException: There is not enough space on the disk
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  13.919 s
-[INFO] Finished at: 2026-10-31T06:04:20+05:30
+[INFO] Total time:  11.914 s
+[INFO] Finished at: 2026-10-31T06:25:16+05:30
 [INFO] ------------------------------------------------------------------------

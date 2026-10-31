@@ -27,16 +27,28 @@
 # Usage (repository root, JDK 21 at JAVA_HOME, m3-work-maven-plugin 0.1.1 installed, MSYS path conversion on):
 #   bash m3/tooling/lib-intake/lib_intake.sh <lib> <work dir> [<intake.tsv>]
 set -uo pipefail
+export LC_ALL=C   # sed/grep/awk treat source bytes as bytes: a non-UTF-8 byte must never be rewritten
 LIB="$1"; W="$2"; INTAKE="${3:-m3/tooling/lib-intake/INTAKE.tsv}"
 REPO=$(pwd); BIN="$JAVA_HOME/bin"; SEP=":"; case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=";";; esac
 row=$(awk -F'\t' -v l="$LIB" '$1 == l' "$INTAKE"); [ -n "$row" ] || { echo "LIB_INTAKE_FAIL no row for $LIB in $INTAKE"; exit 2; }
-IFS=$'\t' read -r _ SRC MAPS MODULE VERSION LAYER MOP OWNERS CDEPS MAIN <<< "$row"; CDEPS="${CDEPS:--}"; MAIN="${MAIN:--}"
+IFS=$'\t' read -r _ SRC MAPS MODULE VERSION LAYER MOP OWNERS CDEPS MAIN IDEPS <<< "$row"; CDEPS="${CDEPS:--}"; MAIN="${MAIN:--}"; IDEPS="${IDEPS:--}"
 RUN="m3/tooling/lib-intake/runs/$LIB"; rm -rf "$RUN/relocation"; mkdir -p "$RUN"; rm -rf "$W"
 mkdir -p "$W/orig/java" "$W/orig/resources" "$W/proj/src/main/java" "$W/proj/src/main/resources"
 ST="$RUN/STAGES.tsv"; printf 'stage\tstatus\tevidence\n' > "$ST"
 stage() { printf '%s\t%s\t%s\n' "$1" "$2" "$3" >> "$ST"; echo "LIB_INTAKE $LIB $1 $2 $3"; [ "$2" = PASS ] || { echo "LIB_INTAKE_FAIL $LIB $1"; exit 3; }; }
 mvnw() { (unset MSYS_NO_PATHCONV; cd "$1" && shift && mvn -o -B -Dstyle.color=never "$@"); }
 javafiles() { (cd "$1" && find . -name '*.java' ! -name module-info.java | sed 's#^\./##' | LC_ALL=C sort); }
+# module name of a jar: modular, automatic, or multi-release with the descriptor under META-INF/versions/<N> (asked again
+# with the highest release <= 21; that answer has no @version)
+modname() {
+	local out rel
+	out=$("$BIN/jar" --describe-module --file "$1" 2>/dev/null | tr -d '\r')
+	if echo "$out" | grep -q 'No root module descriptor'; then
+		rel=$(echo "$out" | sed -n 's/^releases: //p' | tr ' ' '\n' | awk '$1 <= 21' | sort -n | tail -1)
+		out=$("$BIN/jar" --describe-module --file "$1" --release "$rel" 2>/dev/null | tr -d '\r')
+	fi
+	echo "$out" | grep -m1 -oE '^[A-Za-z0-9_.]+(@| jar:| automatic)' | sed -E 's/(@| jar:| automatic)$//'
+}
 
 # S0 VIEW -------------------------------------------------------------------------------------------------------------
 cp -r "$SRC/src/main/java/." "$W/orig/java/"
@@ -58,7 +70,20 @@ if [ "$MAPS" = auto ]; then
 fi
 [ "$VERSION" = auto ] && VERSION=$(grep -m1 -oE '<version>[^<]+' "$SRC/pom.xml" | sed 's/<version>//')
 [ "$LAYER" = auto ] && LAYER="m3/vendor/third_party-m3/relocated/$LIB"
-printf 'key\tvalue\nlib\t%s\nsource\t%s\nmappings\t%s\nmodule\t%s\nversion\t%s\nlayer\t%s\n' "$LIB" "$SRC" "$MAPS" "$MODULE" "$VERSION" "$LAYER" > "$RUN/RUN_CONTEXT.tsv"
+# intake dependencies (intake_deps "lib[:static],..."): libraries of this intake already relocated in the same work root.
+# Their name maps join this library's name map (imports, literals), never its ChangePackage list; this library compiles
+# against their relocated exploded modules and requires them (static when optional upstream); the image links them.
+ALLMAPS="$MAPS"; IREQ=""; ISTATIC=""; ICLS=""; IJMODS=""; IMODS=""
+if [ "$IDEPS" != - ]; then
+	for d in ${IDEPS//,/ }; do
+		dl="${d%%:*}"; ctx="m3/tooling/lib-intake/runs/$dl/RUN_CONTEXT.tsv"; wd="$(dirname "$W")/$dl"
+		{ [ -f "$ctx" ] && [ -d "$wd/classes" ]; } || stage S0_DEPS FAIL "intake dependency $dl has no relocated run in $(dirname "$W") (order it first)"
+		ALLMAPS="$ALLMAPS;$(awk -F'\t' '$1 == "mappings" { print $2 }' "$ctx")"; dmod=$(awk -F'\t' '$1 == "module" { print $2 }' "$ctx")
+		ICLS="$ICLS${ICLS:+$SEP}$wd/classes"; IJMODS="$IJMODS$SEP$wd/jmods"; IMODS="$IMODS,$dmod"
+		[ "$d" != "$dl" ] && ISTATIC="$ISTATIC $dmod" || IREQ="$IREQ $dmod"
+	done
+fi
+printf 'key\tvalue\nlib\t%s\nsource\t%s\nmappings\t%s\nmodule\t%s\nversion\t%s\nlayer\t%s\nintake_deps\t%s\n' "$LIB" "$SRC" "$MAPS" "$MODULE" "$VERSION" "$LAYER" "$IDEPS" > "$RUN/RUN_CONTEXT.tsv"
 
 # S1 RELOCATE ----------------------------------------------------------------------------------------------------------
 cp -r "$W/orig/java/." "$W/proj/src/main/java/"
@@ -80,7 +105,7 @@ cat > "$W/proj/pom.xml" <<EOF
 EOF
 mvnw "$W/proj" rewrite:runNoFork > "$RUN/s1-rewrite.log" 2>&1; rc=$?
 # the name map: mapping roots (longest first), dotted and slash forms, old name followed by a non-identifier character
-printf '%s\n' "${MAPS//;/$'\n'}" | awk -F= '{ print length($1) "\t" $1 "\t" $2 }' | sort -t$'\t' -k1,1nr |
+printf '%s\n' "${ALLMAPS//;/$'\n'}" | awk -F= '{ print length($1) "\t" $1 "\t" $2 }' | sort -t$'\t' -k1,1nr |
 	awk -F'\t' '{ o = $2; gsub(/\./, "\\.", o); s = $2; gsub(/\./, "/", s); ns = $3; gsub(/\./, "/", ns)
 		printf "s/%s([^A-Za-z0-9_$]|$)/%s\\1/g;s#%s([^A-Za-z0-9_$]|$)#%s\\1#g;", o, $3, s, ns }' > "$W/namemap.sed"
 residual=0; while IFS= read -r f; do
@@ -107,6 +132,21 @@ while IFS= read -r f; do
 	sed -E -f "$W/namemap.sed" "$W/proj/src/main/java/$f" > "$W/proj/src/main/java/$t" && rm "$W/proj/src/main/java/$f"
 	printf '%s\tOpenRewrite 8.17.1 parse failure (s1-rewrite.log); moved by the name map\n' "$f" >> "$RUN/TEXT_FALLBACK.tsv"; fallback=$((fallback + 1))
 done < <(javafiles "$W/proj/src/main/java")
+# sources that are not valid UTF-8 (stray Latin-1 bytes in comments): OpenRewrite decodes them as U+FFFD and writes that
+# back, so their relocated bytes come from the name map over the original bytes instead (LC_ALL=C), listed like a fallback
+nonutf=$(python -I -c 'import os,sys
+r=sys.argv[1]
+for d,_,fs in os.walk(r):
+    for f in fs:
+        p=os.path.join(d,f)
+        if f.endswith(".java") and f!="module-info.java":
+            try: open(p,"rb").read().decode("utf-8")
+            except UnicodeDecodeError: print(os.path.relpath(p,r).replace(os.sep,"/"))' "$(cygpath -m "$W/orig/java" 2>/dev/null || echo "$W/orig/java")" | tr -d '\r')
+for f in $nonutf; do
+	t=$(echo "$f" | sed -E -f "$W/namemap.sed"); mkdir -p "$(dirname "$W/proj/src/main/java/$t")"
+	sed -E -f "$W/namemap.sed" "$W/orig/java/$f" > "$W/proj/src/main/java/$t"
+	printf '%s\tnot valid UTF-8 (OpenRewrite re-encodes the bytes as U+FFFD); bytes kept, moved by the name map\n' "$f" >> "$RUN/TEXT_FALLBACK.tsv"; fallback=$((fallback + 1))
+done
 movedpk=$(awk -F'\t' 'NR > 1 && $3 == "MOVE"' "$RUN/RELOCATION_MAP.tsv" | wc -l)
 left=$(javafiles "$W/proj/src/main/java" | sed 's#/[^/]*$##; s#/#.#g' | LC_ALL=C sort -u | grep -cxFf <(awk -F'\t' 'NR > 1 && $3 == "MOVE" { print $1 }' "$RUN/RELOCATION_MAP.tsv") || true)
 [ "$rc" -eq 0 ] && [ "${left:-0}" -eq 0 ] && stage S1_RELOCATE PASS "map=$MAPS packages_moved=$movedpk old_dirs_left=0 text_completed_files=$residual parse_fallback_files=$fallback resources_moved=$moved meta_mapped=$mapped" ||
@@ -125,10 +165,10 @@ done < <(cd "$W/orig/resources" && find . -type f | sed 's#^\./##' | LC_ALL=C so
 [ "$differ" -eq 0 ] && stage S1b_BCP PASS "java_equal_after_name_map=$same resources_byte_equal=$rsame differing=0" || stage S1b_BCP FAIL "differing=$differ (s1b-bcp.log)"
 
 # S2 RESIDUE -------------------------------------------------------------------------------------------------------------
-mvnw "$W/proj/src" com.synexia.m3:m3-work-maven-plugin:0.1.1:relocation-scan "-Dm3.relocation.mappings=${MAPS//;/,}" \
+mvnw "$W/proj/src" com.synexia.m3:m3-work-maven-plugin:0.1.1:relocation-scan "-Dm3.relocation.mappings=${ALLMAPS//;/,}" \
 	"-Dm3.relocation.out=$(cygpath -m "$REPO/$RUN/relocation" 2>/dev/null || echo "$REPO/$RUN/relocation")" > "$RUN/s2-scan.log" 2>&1
 hits=$(($(wc -l < "$RUN/relocation/RELOCATION_SCAN.tsv") - 1))
-slash=$(printf '%s\n' "${MAPS//;/$'\n'}" | cut -d= -f1 | tr '.' '/' | while read -r s; do grep -rlE "$s([^A-Za-z0-9_\$]|\$)" "$W/proj/src/main" 2>/dev/null; done | wc -l)
+slash=$(printf '%s\n' "${ALLMAPS//;/$'\n'}" | cut -d= -f1 | tr '.' '/' | while read -r s; do grep -rlE "$s([^A-Za-z0-9_\$]|\$)" "$W/proj/src/main" 2>/dev/null; done | wc -l)
 [ "$hits" -eq 0 ] && [ "$slash" -eq 0 ] && stage S2_RESIDUE PASS "residue=0 (every kind) slash_form_files=0" || stage S2_RESIDUE FAIL "residue=$hits slash_form_files=$slash"
 
 # S3 ATOMIZE / PATTERNIZE ---------------------------------------------------------------------------------------------------
@@ -156,13 +196,17 @@ srcroot=$(cygpath -m "$W/proj/src/main/java" 2>/dev/null || echo "$W/proj/src/ma
 javafiles "$W/proj/src/main/java" | sed "s#^#$srcroot/#" > "$W/cp-sources.txt"
 # compile-only dependencies (annotations): class path for the class-path compile, module path + requires static for the module
 CP=""; STATIC=""; if [ "$CDEPS" != - ]; then
-	for j in ${CDEPS//;/ }; do CP="$CP${CP:+$SEP}$j"
-		STATIC="$STATIC $("$BIN/jar" --describe-module --file "$j" 2>/dev/null | tr -d '\r' | grep -m1 -oE '^[A-Za-z0-9_.]+@' | tr -d '@')"; done
+	# "m2:<path>" = a jar in the local Maven repository ($M2_REPO, default ~/.m2/repository): no machine paths in INTAKE.tsv
+	for j in ${CDEPS//;/ }; do [[ "$j" == m2:* ]] && j="$(cygpath -m "${M2_REPO:-$HOME/.m2/repository}" 2>/dev/null || echo "${M2_REPO:-$HOME/.m2/repository}")/${j#m2:}"
+		CP="$CP${CP:+$SEP}$j"
+		STATIC="$STATIC $(modname "$j")"; done
 fi
+[ -n "$ICLS" ] && CP="$CP${CP:+$SEP}$ICLS"; STATIC="$STATIC$ISTATIC"
 "$BIN/javac" --release 21 -nowarn -encoding UTF-8 ${CP:+-cp "$CP"} -d "$W/cp-classes" "@$(cygpath -m "$W/cp-sources.txt" 2>/dev/null || echo "$W/cp-sources.txt")" > "$RUN/s6-cp-javac.log" 2>&1 || stage S6_MODULE FAIL "class-path compile failed (s6-cp-javac.log)"
 deps=$("$BIN/jdeps" --print-module-deps --ignore-missing-deps --multi-release 21 "$W/cp-classes" 2>"$RUN/s6-jdeps.log" | tr -d '\r')
 { printf '/* GENERATED by m3/tooling/lib-intake/lib_intake.sh (pattern LIB_INTAKE_TO_JMOD v2): requires from jdeps, every package exported,\n   upstream uses/provides kept and name-mapped. */\nmodule %s {\n' "$MODULE"
   echo "$deps" | tr ',' '\n' | grep -vxE 'java.base|' | sed 's/.*/    requires &;/'
+  for s in $IREQ; do echo "    requires $s;"; done
   for s in $STATIC; do echo "    requires static $s;"; done
   javafiles "$W/proj/src/main/java" | sed 's#/[^/]*$##; s#/#.#g' | grep -v '\.java$' | LC_ALL=C sort -u | sed 's/.*/    exports &;/'
   [ -n "$UPMI" ] && sed -E 's#//.*##' "$UPMI" | tr '\n' ' ' | grep -oE '(uses|provides)[^;]+;' | sed -E -f "$W/namemap.sed" | sed 's/^/    /'
@@ -176,12 +220,12 @@ cp -r "$W/proj/src/main/resources/." "$W/classes/"
 # S7 JMOD + IMAGE ------------------------------------------------------------------------------------------------------------------
 mkdir -p "$W/jmods" "$W/legal"; rm -rf "$W/image"
 for f in LICENSE LICENSE.txt UPSTREAM_LICENSE.txt THIRD_PARTY_NOTICES.md NOTICE NOTICE.txt; do [ -f "$SRC/$f" ] && cp "$SRC/$f" "$W/legal/"; done
-rm -f "$W/jmods/$MODULE.jmod"; add="java.base,jdk.compiler,$MODULE"; [ -n "$deps" ] && add="$add,$deps"
+rm -f "$W/jmods/$MODULE.jmod"; add="java.base,jdk.compiler,$MODULE$IMODS"; [ -n "$deps" ] && add="$add,$deps"
 # an app (main_class set): the name-mapped main class goes into the module descriptor and jlink makes image/bin/<lib>
 APPMAIN=""; LAUNCH=(); if [ "$MAIN" != - ]; then APPMAIN=$(echo "$MAIN" | sed -E -f "$W/namemap.sed"); LAUNCH=(--launcher "$LIB=$MODULE"); fi
 "$BIN/jmod" create --class-path "$W/classes" --module-version "$VERSION" ${APPMAIN:+--main-class "$APPMAIN"} --legal-notices "$W/legal" "$W/jmods/$MODULE.jmod" > "$RUN/s7-jmod.log" 2>&1 &&
 "$BIN/jmod" describe "$W/jmods/$MODULE.jmod" > "$RUN/s7-jmod-describe.log" 2>&1 &&
-"$BIN/jlink" --module-path "$JAVA_HOME/jmods$SEP$W/jmods" --add-modules "$add" "${LAUNCH[@]}" --strip-debug --no-header-files --no-man-pages --output "$W/image" > "$RUN/s7-jlink.log" 2>&1 &&
+"$BIN/jlink" --module-path "$JAVA_HOME/jmods$SEP$W/jmods$IJMODS" --add-modules "$add" "${LAUNCH[@]}" --strip-debug --no-header-files --no-man-pages --output "$W/image" > "$RUN/s7-jlink.log" 2>&1 &&
 "$W/image/bin/java" --list-modules > "$RUN/s7-image-modules.log" 2>&1 && "$W/image/bin/java" --validate-modules > "$RUN/s7-validate-modules.log" 2>&1; rc=$?
 if [ -f "$RUN/SMOKE.java" ]; then
 	smoke=$("$W/image/bin/java" --add-modules "$MODULE" "$RUN/SMOKE.java" 2>&1 | tr -d '\r' | tail -1); want=$(sed -n 's#^// expect: ##p' "$RUN/SMOKE.java")
@@ -198,6 +242,9 @@ fi
 if [ "$rc" -eq 0 ] && [ "$appok" -eq 1 ] && grep -q "^$MODULE@" "$RUN/s7-image-modules.log" && [ "$smoke" = "$want" ]; then
 	stage S7_JMOD_IMAGE PASS "jmod=$(stat -c %s "$W/jmods/$MODULE.jmod")B image_modules=$(wc -l < "$RUN/s7-image-modules.log") smoke='$smoke'$app"
 else stage S7_JMOD_IMAGE FAIL "rc=$rc smoke='$smoke' want='$want'"; fi
+
+# the per-library image and class-path classes only served the proofs above; jmods and module classes stay for dependents
+rm -rf "$W/image" "$W/cp-classes"
 
 # S8 LAYER ---------------------------------------------------------------------------------------------------------------------------
 rm -rf "$LAYER"; mkdir -p "$LAYER/src/main"; cp -r "$W/proj/src/main/java" "$LAYER/src/main/"

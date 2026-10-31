@@ -5,5 +5,6 @@ mappings	org.fastfilter=com.m3.lib.fastfilter
 module	jdk.m3.fastfilter
 version	1.0.2-m3-source-1
 layer	m3/vendor/third_party-m3/relocated/fastfilter
+intake_deps	-
 java	java version 21.0.9 2025-10-21 LTS
 rewrite	rewrite-maven-plugin 5.23.1 / rewrite 8.17.1

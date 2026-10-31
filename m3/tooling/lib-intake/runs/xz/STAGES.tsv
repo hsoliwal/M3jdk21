@@ -1,6 +1,6 @@
 stage	status	evidence
 S0_VIEW	PASS	java=112 packages=9 resources=0 overlays=9, upstream_descriptor=yes
-S1_RELOCATE	PASS	map=org.tukaani.xz=com.m3.lib.xz packages_moved=9 old_dirs_left=0 text_completed_files=4 parse_fallback_files=1 resources_moved=0 meta_mapped=0
+S1_RELOCATE	PASS	map=org.tukaani.xz=com.m3.lib.xz packages_moved=9 old_dirs_left=0 text_completed_files=3 parse_fallback_files=0 resources_moved=0 meta_mapped=0
 S1b_BCP	PASS	java_equal_after_name_map=112 resources_byte_equal=0 differing=0
 S2_RESIDUE	PASS	residue=0 (every kind) slash_form_files=0
 S3_ATOMIZE	PASS	atoms=1302 KNOWN_PATTERN=248 UNPROVEN_LEAF=655 UNKNOWN_PATTERN=399

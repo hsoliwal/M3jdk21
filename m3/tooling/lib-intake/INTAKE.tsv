@@ -1,10 +1,20 @@
-lib	source_dir	mappings	module	version	layer_dir	mop_classes	owner_atoms	compile_deps	main_class
-JavaEWAH	m3/vendor/third_party/JavaEWAH	com.googlecode.javaewah=com.m3.collections.ewah;com.googlecode.javaewah32=com.m3.collections.ewah32	jdk.m3.ewah	1.1.13-m3-source-1	m3/vendor/third_party-m3/relocated/JavaEWAH	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-
-re2j	m3/vendor/third_party/re2j	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-
-fastfilter	m3/vendor/third_party/fastfilter	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-
-pcollections	m3/vendor/third_party/pcollections	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-
-HdrHistogram	m3/vendor/third_party/HdrHistogram	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	org.HdrHistogram.HistogramLogProcessor
-dec	m3/vendor/third_party/dec	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-
-xz	m3/vendor/third_party/xz	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-
-commonmark	m3/vendor/third_party/commonmark	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-
-commons-codec-1.22.1	m3/vendor/third_party/commons-codec-1.22.1	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-
+lib	source_dir	mappings	module	version	layer_dir	mop_classes	owner_atoms	compile_deps	main_class	intake_deps
+JavaEWAH	m3/vendor/third_party/JavaEWAH	com.googlecode.javaewah=com.m3.collections.ewah;com.googlecode.javaewah32=com.m3.collections.ewah32	jdk.m3.ewah	1.1.13-m3-source-1	m3/vendor/third_party-m3/relocated/JavaEWAH	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-	-
+re2j	m3/vendor/third_party/re2j	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-	-
+fastfilter	m3/vendor/third_party/fastfilter	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-	-
+pcollections	m3/vendor/third_party/pcollections	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-	-
+HdrHistogram	m3/vendor/third_party/HdrHistogram	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	org.HdrHistogram.HistogramLogProcessor	-
+dec	m3/vendor/third_party/dec	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-	-
+xz	m3/vendor/third_party/xz	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-	-
+commonmark	m3/vendor/third_party/commonmark	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-	-
+commons-codec-1.22.1	m3/vendor/third_party/commons-codec-1.22.1	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-	-
+jsoup-1.23.2	m3/vendor/third_party/jsoup-1.23.2	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	m2:org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar	-	re2j:static
+snakeyaml-2.6	m3/vendor/third_party/snakeyaml-2.6	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-	-
+commons-lang3-3.17.0	m3/vendor/third_party/commons-lang3-3.17.0	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-	-
+commons-io-2.18.0	m3/vendor/third_party/commons-io-2.18.0	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-	-
+classgraph	m3/vendor/third_party/classgraph	io.github.classgraph=com.m3.lib.classgraph;nonapi.io.github.classgraph=com.m3.lib.classgraph.nonapi	jdk.m3.classgraph	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-	-
+antlr4-runtime-4.13.2	m3/vendor/third_party/antlr4-runtime-4.13.2	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-	-
+commons-net	m3/vendor/third_party/commons-net	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-	-
+fastdoubleparser-1.0.90	m3/vendor/third_party/fastdoubleparser-1.0.90	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-	-
+jackson-core-2.19.2	m3/vendor/third_party/jackson-core-2.19.2	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-	fastdoubleparser-1.0.90
+commons-text	m3/vendor/third_party/commons-text	auto	auto	auto	auto	S:/m3-scratch/m3jdk-superset-20261029/mop/classes	H:/m3-scratch/converge-commons/atoms-owners/ATOMS.tsv	-	-	commons-lang3-3.17.0

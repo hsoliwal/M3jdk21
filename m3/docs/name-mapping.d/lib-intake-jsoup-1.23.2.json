@@ -1,0 +1,69 @@
+{
+  "schema": "M3_LIB_INTAKE_NAME_MAPPING_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors (M3 modifications)",
+  "license": "The MIT License <https://jsoup.org/license>; original notices retained",
+  "product": "M3JDK21",
+  "intake_mode": "LIB_INTAKE_TO_JMOD_V2",
+  "target_module": "jdk.m3.jsoup",
+  "target_path": "m3/vendor/third_party-m3/relocated/jsoup-1.23.2",
+  "canonical_recipe": "m3/tooling/lib-intake/lib_intake.sh (pattern LIB_INTAKE_TO_JMOD v2)",
+  "canonical_recipe_owners": [
+    "org.openrewrite.java.ChangePackage (recursive=false, longest first; boundary-checked form of com.synexia M3BoundaryCheckedPackageRenameRecipe)"
+  ],
+  "source_path": "m3/vendor/third_party/jsoup-1.23.2",
+  "source_coordinate": "org.jsoup:jsoup:1.23.2-m3-source-1",
+  "source_version": "1.23.2-m3-source-1",
+  "source_license_origin": "https://raw.githubusercontent.com/jhy/jsoup/jsoup-1.23.2/LICENSE",
+  "source_packages": [
+    "org.jsoup"
+  ],
+  "runtime_packages": [
+    "com.m3.lib.jsoup"
+  ],
+  "intake_dependencies": "re2j:static",
+  "qualification_receipt": "m3/tooling/lib-intake/runs/jsoup-1.23.2/STAGES.tsv",
+  "relocation_map": "m3/tooling/lib-intake/runs/jsoup-1.23.2/RELOCATION_MAP.tsv",
+  "legal_notice": "m3/vendor/third_party-m3/relocated/jsoup-1.23.2",
+  "mappings": [
+    {
+      "source": "org.jsoup and subpackages",
+      "target": "com.m3.lib.jsoup and subpackages",
+      "role": "relocated donor API in the optional jdk.m3.jsoup JMOD; type names retained"
+    },
+    {
+      "source": "org.jsoup.internal",
+      "target": "com.m3.lib.jsoup.internal",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.jsoup.helper",
+      "target": "com.m3.lib.jsoup.helper",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.jsoup.parser",
+      "target": "com.m3.lib.jsoup.parser",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.jsoup.safety",
+      "target": "com.m3.lib.jsoup.safety",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.jsoup.select",
+      "target": "com.m3.lib.jsoup.select",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.jsoup.nodes",
+      "target": "com.m3.lib.jsoup.nodes",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.jsoup",
+      "target": "com.m3.lib.jsoup",
+      "role": "package (ChangePackage)"
+    }
+  ]
+}

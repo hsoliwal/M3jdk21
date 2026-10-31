@@ -1,0 +1,109 @@
+{
+  "schema": "M3_LIB_INTAKE_NAME_MAPPING_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors (M3 modifications)",
+  "license": "upstream LICENSE in legal_notice (vendored source); original notices retained",
+  "product": "M3JDK21",
+  "intake_mode": "LIB_INTAKE_TO_JMOD_V2",
+  "target_module": "jdk.m3.commonmark",
+  "target_path": "m3/vendor/third_party-m3/relocated/commonmark",
+  "canonical_recipe": "m3/tooling/lib-intake/lib_intake.sh (pattern LIB_INTAKE_TO_JMOD v2)",
+  "canonical_recipe_owners": [
+    "org.openrewrite.java.ChangePackage (recursive=false, longest first; boundary-checked form of com.synexia M3BoundaryCheckedPackageRenameRecipe)"
+  ],
+  "source_path": "m3/vendor/third_party/commonmark",
+  "source_coordinate": "org.commonmark:commonmark:0.30.0-m3-source-1",
+  "source_version": "0.30.0-m3-source-1",
+  "source_license_origin": "",
+  "source_packages": [
+    "org.commonmark"
+  ],
+  "runtime_packages": [
+    "com.m3.lib.commonmark"
+  ],
+  "intake_dependencies": "-",
+  "qualification_receipt": "m3/tooling/lib-intake/runs/commonmark/STAGES.tsv",
+  "relocation_map": "m3/tooling/lib-intake/runs/commonmark/RELOCATION_MAP.tsv",
+  "legal_notice": "m3/vendor/third_party-m3/relocated/commonmark",
+  "mappings": [
+    {
+      "source": "org.commonmark and subpackages",
+      "target": "com.m3.lib.commonmark and subpackages",
+      "role": "relocated donor API in the optional jdk.m3.commonmark JMOD; type names retained"
+    },
+    {
+      "source": "org.commonmark.internal.renderer",
+      "target": "com.m3.lib.commonmark.internal.renderer",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.commonmark.renderer.markdown",
+      "target": "com.m3.lib.commonmark.renderer.markdown",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.commonmark.parser.delimiter",
+      "target": "com.m3.lib.commonmark.parser.delimiter",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.commonmark.internal.inline",
+      "target": "com.m3.lib.commonmark.internal.inline",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.commonmark.internal.util",
+      "target": "com.m3.lib.commonmark.internal.util",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.commonmark.renderer.html",
+      "target": "com.m3.lib.commonmark.renderer.html",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.commonmark.renderer.text",
+      "target": "com.m3.lib.commonmark.renderer.text",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.commonmark.parser.block",
+      "target": "com.m3.lib.commonmark.parser.block",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.commonmark.parser.beta",
+      "target": "com.m3.lib.commonmark.parser.beta",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.commonmark.internal",
+      "target": "com.m3.lib.commonmark.internal",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.commonmark.renderer",
+      "target": "com.m3.lib.commonmark.renderer",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.commonmark.parser",
+      "target": "com.m3.lib.commonmark.parser",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.commonmark.node",
+      "target": "com.m3.lib.commonmark.node",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.commonmark.text",
+      "target": "com.m3.lib.commonmark.text",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "org.commonmark",
+      "target": "com.m3.lib.commonmark",
+      "role": "package (ChangePackage)"
+    }
+  ]
+}

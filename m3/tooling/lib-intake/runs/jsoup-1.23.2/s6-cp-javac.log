@@ -1,18 +1,2 @@
-H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\Re2jRegex.java:10: error: package com.google.re2j does not exist
-    private final com.google.re2j.Pattern re2jPattern;
-                                 ^
-H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\Re2jRegex.java:12: error: package com.google.re2j does not exist
-    private Re2jRegex(com.google.re2j.Pattern re2jPattern) {
-                                     ^
-H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\Re2jRegex.java:38: error: package com.google.re2j does not exist
-        private final com.google.re2j.Matcher delegate;
-                                     ^
-H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\Re2jRegex.java:40: error: package com.google.re2j does not exist
-        Re2jMatcher(com.google.re2j.Matcher delegate) {
-                                   ^
-H:\m3-scratch\lib-intake\batch\jsoup-1.23.2\proj\src\main\java\com\m3\lib\jsoup\helper\Re2jRegex.java:19: error: package com.google.re2j does not exist
-            return new Re2jRegex(com.google.re2j.Pattern.compile(regex));
-                                                ^
 Note: Some input files use or override a deprecated API.
 Note: Recompile with -Xlint:deprecation for details.
-5 errors

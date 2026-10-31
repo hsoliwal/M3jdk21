@@ -92,3 +92,27 @@ each consolidation.
 `HOLDS.tsv` lists:
 - zero-allocation-hashing: uses the JDK-internal `sun.nio.ch`;
 - jsoup: has an optional dependency on re2j, which this batch relocates. It needs an intake-to-intake dependency column.
+
+## Waves 1 and 2 (2026-10-31)
+
+18 libraries pass every stage, and `lib_intake_combine.sh` links them into one image that validates (`COMBINED_IMAGE.tsv`).
+The libraries are JavaEWAH, re2j, fastfilter, pcollections, HdrHistogram (also an app), dec, xz, commonmark,
+commons-codec, jsoup (`requires static jdk.m3.re2j`), snakeyaml, commons-lang3, commons-io, antlr4-runtime, commons-net,
+classgraph (explicit two-root mapping), fastdoubleparser and jackson-core (`requires jdk.m3.fastdoubleparser`).
+`m3/docs/name-mapping.d/lib-intake-<lib>.json` holds 18 name-mapping records, generated from the run ledgers by
+`name_mapping.py`.
+
+New in the recipe:
+- `intake_deps`: a library depends on another library of the same intake.
+- Module names are read correctly from multi-release jars.
+- Byte-exact handling of sources that are not valid UTF-8.
+
+`HOLDS.tsv` lists four libraries:
+- zero-allocation-hashing: uses the JDK-internal `sun.nio.ch`.
+- univocity-parsers: its `Record` collides with `java.lang.Record` under Java 21.
+- commons-pool2: its optional proxy support needs cglib.
+- commons-text: the vendored source lost one byte.
+
+The catalogues cover 27,991 method atoms in 21 libraries. The L-Hash near-duplicate pass finds 121 cross-library
+algorithm families (468 leaves) and 81 families that an M3 owner already implements (473 leaves). All are candidates for
+differential admission.

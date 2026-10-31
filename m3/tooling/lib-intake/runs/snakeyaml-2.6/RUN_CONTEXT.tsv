@@ -1,0 +1,10 @@
+key	value
+lib	snakeyaml-2.6
+source	m3/vendor/third_party/snakeyaml-2.6
+mappings	org.yaml.snakeyaml=com.m3.lib.snakeyaml
+module	jdk.m3.snakeyaml
+version	2.6-m3-source-1
+layer	m3/vendor/third_party-m3/relocated/snakeyaml-2.6
+intake_deps	-
+java	java version 21.0.9 2025-10-21 LTS
+rewrite	rewrite-maven-plugin 5.23.1 / rewrite 8.17.1

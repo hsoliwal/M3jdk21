@@ -1,0 +1,283 @@
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\module-info.java:3: warning: [module] module name component m3 should avoid terminal digits
+module jdk.m3.runtime {
+          ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\Recognizer.java:21: warning: [missing-explicit-ctor] class Recognizer in exported package com.m3.lib.runtime declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public abstract class Recognizer<Symbol, ATNInterpreter extends ATNSimulator> {
+                ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\RecognitionException.java:17: warning: [serial] serializable class RecognitionException has no definition of serialVersionUID
+public class RecognitionException extends RuntimeException {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\RecognitionException.java:19: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+	private final Recognizer<?, ?> recognizer;
+	                               ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\RecognitionException.java:21: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+	private final RuleContext ctx;
+	                          ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\RecognitionException.java:23: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+	private final IntStream input;
+	                        ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\RecognitionException.java:30: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+	private Token offendingToken;
+	              ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\Parser.java:39: warning: [missing-explicit-ctor] class Parser.TraceListener in exported package com.m3.lib.runtime declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+	public class TraceListener implements ParseTreeListener {
+	       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\Parser.java:63: warning: [missing-explicit-ctor] class TrimToSizeListener in exported package com.m3.lib.runtime declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+	public static class TrimToSizeListener implements ParseTreeListener {
+	              ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\Parser.java:160: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+		setInputStream(input);
+		              ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\Parser.java:508: warning: [this-escape] previous possible 'this' escape happens here via invocation
+		setTokenStream((TokenStream)input);
+		              ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\ATNState.java:77: warning: [missing-explicit-ctor] class ATNState in exported package com.m3.lib.runtime.atn declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public abstract class ATNState {
+                ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\ParserATNSimulator.java:2180: warning: [removal] AccessController in java.security has been deprecated and marked for removal
+			return AccessController.doPrivileged(new PrivilegedAction<String>() {
+			       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\AbstractEqualityComparator.java:14: warning: [missing-explicit-ctor] class AbstractEqualityComparator in exported package com.m3.lib.runtime.misc declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public abstract class AbstractEqualityComparator<T> implements EqualityComparator<T> {
+                ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\ATNConfigSet.java:113: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+		addAll(old);
+		      ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\Array2DHashSet.java:52: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+		this.buckets = createBuckets(initialCapacity);
+		                            ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\DoubleKeyMap.java:18: warning: [missing-explicit-ctor] class DoubleKeyMap in exported package com.m3.lib.runtime.misc declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public class DoubleKeyMap<Key1, Key2, Value> {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\SemanticContext.java:30: warning: [missing-explicit-ctor] class SemanticContext in exported package com.m3.lib.runtime.atn declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public abstract class SemanticContext {
+                ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\SemanticContext.java:68: warning: [missing-explicit-ctor] class Empty in exported package com.m3.lib.runtime.atn declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+	public static class Empty extends SemanticContext {
+	              ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\SemanticContext.java:195: warning: [missing-explicit-ctor] class Operator in exported package com.m3.lib.runtime.atn declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+	public static abstract class Operator extends SemanticContext {
+	                       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\PredictionContextCache.java:16: warning: [missing-explicit-ctor] class PredictionContextCache in exported package com.m3.lib.runtime.atn declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public class PredictionContextCache {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\DecisionState.java:9: warning: [missing-explicit-ctor] class DecisionState in exported package com.m3.lib.runtime.atn declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public abstract class DecisionState extends ATNState {
+                ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\RuleStartState.java:9: warning: [missing-explicit-ctor] class RuleStartState in exported package com.m3.lib.runtime.atn declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public final class RuleStartState extends ATNState {
+             ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\RuleStopState.java:14: warning: [missing-explicit-ctor] class RuleStopState in exported package com.m3.lib.runtime.atn declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public final class RuleStopState extends ATNState {
+             ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\TokensStartState.java:10: warning: [missing-explicit-ctor] class TokensStartState in exported package com.m3.lib.runtime.atn declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public final class TokensStartState extends DecisionState {
+             ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\IntervalSet.java:63: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+			for (int e : els) add(e);
+			                     ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\Lexer.java:85: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+		this._tokenFactorySourcePair = new Pair<TokenSource, CharStream>(this, input);
+		                                                                 ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\LexerATNSimulator.java:43: warning: [missing-explicit-ctor] class SimState in exported package com.m3.lib.runtime.atn declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+	protected static class SimState {
+	                 ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\Pair.java:11: warning: [serial] serializable class Pair has no definition of serialVersionUID
+public class Pair<A,B> implements Serializable {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\Pair.java:12: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+	public final A a;
+	               ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\Pair.java:13: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+	public final B b;
+	               ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\LexerNoViableAltException.java:15: warning: [serial] serializable class LexerNoViableAltException has no definition of serialVersionUID
+public class LexerNoViableAltException extends RecognitionException {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\LexerNoViableAltException.java:20: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+	private final ATNConfigSet deadEndConfigs;
+	                           ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\pattern\ParseTreePatternMatcher.java:88: warning: [serial] serializable class CannotInvokeStartRule has no definition of serialVersionUID
+	public static class CannotInvokeStartRule extends RuntimeException {
+	              ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\pattern\ParseTreePatternMatcher.java:96: warning: [missing-explicit-ctor] class StartRuleDoesNotConsumeFullPattern in exported package com.m3.lib.runtime.tree.pattern declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+	public static class StartRuleDoesNotConsumeFullPattern extends RuntimeException {
+	              ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\pattern\ParseTreePatternMatcher.java:96: warning: [serial] serializable class StartRuleDoesNotConsumeFullPattern has no definition of serialVersionUID
+	public static class StartRuleDoesNotConsumeFullPattern extends RuntimeException {
+	              ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\pattern\ParseTreePatternMatcher.java:397: warning: [deprecation] ANTLRInputStream in com.m3.lib.runtime has been deprecated
+				ANTLRInputStream in = new ANTLRInputStream(textChunk.getText());
+				^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\pattern\ParseTreePatternMatcher.java:397: warning: [deprecation] ANTLRInputStream in com.m3.lib.runtime has been deprecated
+				ANTLRInputStream in = new ANTLRInputStream(textChunk.getText());
+				                          ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\pattern\ParseTreePatternMatcher.java:412: warning: [exports] class Chunk in module jdk.m3.runtime is not accessible to clients that require this module
+	public List<Chunk> split(String pattern) {
+	            ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\MultiMap.java:13: warning: [missing-explicit-ctor] class MultiMap in exported package com.m3.lib.runtime.misc declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public class MultiMap<K, V> extends LinkedHashMap<K, List<V>> {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\MultiMap.java:13: warning: [serial] serializable class MultiMap has no definition of serialVersionUID
+public class MultiMap<K, V> extends LinkedHashMap<K, List<V>> {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\NoViableAltException.java:15: warning: [serial] serializable class NoViableAltException has no definition of serialVersionUID
+public class NoViableAltException extends RecognitionException {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\NoViableAltException.java:18: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+	private final ATNConfigSet deadEndConfigs;
+	                           ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\NoViableAltException.java:26: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+	private final Token startToken;
+	                    ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\NoViableAltException.java:47: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+		this.setOffendingToken(offendingToken);
+		                      ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\ANTLRFileStream.java:28: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+		load(fileName, encoding);
+		    ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\ANTLRInputStream.java:65: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        load(r, initialSize, readChunkSize);
+            ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\DefaultErrorStrategy.java:19: warning: [missing-explicit-ctor] class DefaultErrorStrategy in exported package com.m3.lib.runtime declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public class DefaultErrorStrategy implements ANTLRErrorStrategy {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\BailErrorStrategy.java:39: warning: [missing-explicit-ctor] class BailErrorStrategy in exported package com.m3.lib.runtime declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public class BailErrorStrategy extends DefaultErrorStrategy {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\InputMismatchException.java:11: warning: [serial] serializable class InputMismatchException has no definition of serialVersionUID
+public class InputMismatchException extends RecognitionException {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\InputMismatchException.java:14: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+		this.setOffendingToken(recognizer.getCurrentToken());
+		                      ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\InputMismatchException.java:19: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+		this.setOffendingState(state);
+		                      ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\FailedPredicateException.java:19: warning: [serial] serializable class FailedPredicateException has no definition of serialVersionUID
+public class FailedPredicateException extends RecognitionException {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\FailedPredicateException.java:50: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+		this.setOffendingToken(recognizer.getCurrentToken());
+		                      ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\BaseErrorListener.java:20: warning: [missing-explicit-ctor] class BaseErrorListener in exported package com.m3.lib.runtime declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public class BaseErrorListener implements ANTLRErrorListener {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\CommonToken.java:13: warning: [serial] serializable class CommonToken has no definition of serialVersionUID
+public class CommonToken implements WritableToken, Serializable {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\ConsoleErrorListener.java:12: warning: [missing-explicit-ctor] class ConsoleErrorListener in exported package com.m3.lib.runtime declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public class ConsoleErrorListener extends BaseErrorListener {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\LexerInterpreter.java:68: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+		this._interp = new LexerATNSimulator(this,atn,_decisionToDFA,_sharedContextCache);
+		                                     ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\ParserInterpreter.java:121: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+		setInterpreter(new ParserATNSimulator(this, atn,
+		              ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\RuntimeMetaData.java:38: warning: [missing-explicit-ctor] class RuntimeMetaData in exported package com.m3.lib.runtime declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public class RuntimeMetaData {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\UnbufferedCharStream.java:111: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+		fill(1); // prime
+		    ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\UnbufferedCharStream.java:117: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+		fill(1); // prime
+		    ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\UnbufferedTokenStream.java:75: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+		fill(1); // prime the pump
+		    ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\BlockStartState.java:10: warning: [missing-explicit-ctor] class BlockStartState in exported package com.m3.lib.runtime.atn declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public abstract class BlockStartState extends DecisionState {
+                ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\BasicBlockStartState.java:13: warning: [missing-explicit-ctor] class BasicBlockStartState in exported package com.m3.lib.runtime.atn declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public final class BasicBlockStartState extends BlockStartState {
+             ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\BlockEndState.java:10: warning: [missing-explicit-ctor] class BlockEndState in exported package com.m3.lib.runtime.atn declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public final class BlockEndState extends ATNState {
+             ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\BasicState.java:13: warning: [missing-explicit-ctor] class BasicState in exported package com.m3.lib.runtime.atn declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public final class BasicState extends ATNState {
+             ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\CodePointTransitions.java:18: warning: [missing-explicit-ctor] class CodePointTransitions in exported package com.m3.lib.runtime.atn declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public abstract class CodePointTransitions {
+                ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\LoopEndState.java:10: warning: [missing-explicit-ctor] class LoopEndState in exported package com.m3.lib.runtime.atn declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public final class LoopEndState extends ATNState {
+             ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\PlusBlockStartState.java:14: warning: [missing-explicit-ctor] class PlusBlockStartState in exported package com.m3.lib.runtime.atn declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public final class PlusBlockStartState extends BlockStartState {
+             ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\PlusLoopbackState.java:12: warning: [missing-explicit-ctor] class PlusLoopbackState in exported package com.m3.lib.runtime.atn declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public final class PlusLoopbackState extends DecisionState {
+             ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\StarBlockStartState.java:10: warning: [missing-explicit-ctor] class StarBlockStartState in exported package com.m3.lib.runtime.atn declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public final class StarBlockStartState extends BlockStartState {
+             ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\StarLoopEntryState.java:12: warning: [missing-explicit-ctor] class StarLoopEntryState in exported package com.m3.lib.runtime.atn declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public final class StarLoopEntryState extends DecisionState {
+             ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\atn\StarLoopbackState.java:9: warning: [missing-explicit-ctor] class StarLoopbackState in exported package com.m3.lib.runtime.atn declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public final class StarLoopbackState extends ATNState {
+             ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\InterpreterDataReader.java:22: warning: [missing-explicit-ctor] class InterpreterDataReader in exported package com.m3.lib.runtime.misc declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public class InterpreterDataReader {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\InterpreterDataReader.java:24: warning: [missing-explicit-ctor] class InterpreterData in exported package com.m3.lib.runtime.misc declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+	public static class InterpreterData {
+	              ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\LogManager.java:17: warning: [missing-explicit-ctor] class LogManager in exported package com.m3.lib.runtime.misc declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public class LogManager {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\ObjectEqualityComparator.java:14: warning: [missing-explicit-ctor] class ObjectEqualityComparator in exported package com.m3.lib.runtime.misc declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public final class ObjectEqualityComparator extends AbstractEqualityComparator<Object> {
+             ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\OrderedHashSet.java:19: warning: [missing-explicit-ctor] class OrderedHashSet in exported package com.m3.lib.runtime.misc declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public class OrderedHashSet<T> extends LinkedHashSet<T> {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\OrderedHashSet.java:19: warning: [serial] serializable class OrderedHashSet has no definition of serialVersionUID
+public class OrderedHashSet<T> extends LinkedHashSet<T> {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\ParseCancellationException.java:22: warning: [serial] serializable class ParseCancellationException has no definition of serialVersionUID
+public class ParseCancellationException extends CancellationException {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\ParseCancellationException.java:32: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+		initCause(cause);
+		         ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\ParseCancellationException.java:37: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+		initCause(cause);
+		         ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\TestRig.java:18: warning: [missing-explicit-ctor] class TestRig in exported package com.m3.lib.runtime.misc declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public class TestRig {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\misc\Utils.java:22: warning: [missing-explicit-ctor] class Utils in exported package com.m3.lib.runtime.misc declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public class Utils {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\AbstractParseTreeVisitor.java:9: warning: [missing-explicit-ctor] class AbstractParseTreeVisitor in exported package com.m3.lib.runtime.tree declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public abstract class AbstractParseTreeVisitor<T> implements ParseTreeVisitor<T> {
+                ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\ParseTreeWalker.java:11: warning: [missing-explicit-ctor] class ParseTreeWalker in exported package com.m3.lib.runtime.tree declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public class ParseTreeWalker {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\IterativeParseTreeWalker.java:19: warning: [missing-explicit-ctor] class IterativeParseTreeWalker in exported package com.m3.lib.runtime.tree declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public class IterativeParseTreeWalker extends ParseTreeWalker {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\ParseTreeProperty.java:28: warning: [missing-explicit-ctor] class ParseTreeProperty in exported package com.m3.lib.runtime.tree declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public class ParseTreeProperty<V> {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\pattern\TokenTagToken.java:17: warning: [serial] serializable class TokenTagToken has no definition of serialVersionUID
+public class TokenTagToken extends CommonToken {
+       ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\xpath\XPath.java:86: warning: [deprecation] ANTLRInputStream in com.m3.lib.runtime has been deprecated
+		ANTLRInputStream in;
+		^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\xpath\XPath.java:88: warning: [deprecation] ANTLRInputStream in com.m3.lib.runtime has been deprecated
+			in = new ANTLRInputStream(new StringReader(path));
+			         ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\xpath\XPath.java:79: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+		elements = split(path);
+		                ^
+H:\m3-scratch\lib-intake\batch\antlr4-runtime-4.13.2\proj\src\main\java\com\m3\lib\runtime\tree\xpath\XPathLexerErrorListener.java:13: warning: [missing-explicit-ctor] class XPathLexerErrorListener in exported package com.m3.lib.runtime.tree.xpath declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.runtime
+public class XPathLexerErrorListener extends BaseErrorListener {
+       ^
+94 warnings

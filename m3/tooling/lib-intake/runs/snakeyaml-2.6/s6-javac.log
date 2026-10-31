@@ -1,0 +1,197 @@
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\module-info.java:3: warning: [module] module name component m3 should avoid terminal digits
+module jdk.m3.snakeyaml {
+          ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\DumperOptions.java:27: warning: [missing-explicit-ctor] class DumperOptions in exported package com.m3.lib.snakeyaml declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+public class DumperOptions {
+       ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\nodes\Node.java:52: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+    setTag(tag);
+          ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\error\Mark.java:23: warning: [serial] serializable class Mark has no definition of serialVersionUID
+public final class Mark implements Serializable {
+             ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\LoaderOptions.java:22: warning: [missing-explicit-ctor] class LoaderOptions in exported package com.m3.lib.snakeyaml declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+public class LoaderOptions {
+       ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\introspector\PropertySubstitute.java:52: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+    setActualTypeArguments(params);
+                          ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\util\PlatformFeatureDetector.java:16: warning: [missing-explicit-ctor] class PlatformFeatureDetector in exported package com.m3.lib.snakeyaml.util declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+public class PlatformFeatureDetector {
+       ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\Yaml.java:103: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+  public Yaml(Representer representer) {
+         ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\Yaml.java:124: warning: [dep-ann] deprecated item is not annotated with @Deprecated
+  public Yaml(BaseConstructor constructor, Representer representer) {
+         ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\Yaml.java:234: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+    this.name = "Yaml:" + System.identityHashCode(this);
+                                                  ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\resolver\Resolver.java:56: warning: [exports] class ResolverTuple in module jdk.m3.snakeyaml is not accessible to clients that require this module
+  protected Map<Character, List<ResolverTuple>> yamlImplicitResolvers =
+                                ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\resolver\Resolver.java:77: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+    addImplicitResolvers();
+                        ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\BaseConstructor.java:597: warning: [rawtypes] found raw type: Tuple
+    maps2fill.add(0, new Tuple(mapping, new Tuple(key, value)));
+                         ^
+  missing type arguments for generic class Tuple<T,K>
+  where T,K are type-variables:
+    T extends Object declared in class Tuple
+    K extends Object declared in class Tuple
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\BaseConstructor.java:597: warning: [rawtypes] found raw type: Tuple
+    maps2fill.add(0, new Tuple(mapping, new Tuple(key, value)));
+                                            ^
+  missing type arguments for generic class Tuple<T,K>
+  where T,K are type-variables:
+    T extends Object declared in class Tuple
+    K extends Object declared in class Tuple
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\BaseConstructor.java:597: warning: [unchecked] unchecked call to Tuple(T,K) as a member of the raw type Tuple
+    maps2fill.add(0, new Tuple(mapping, new Tuple(key, value)));
+                                        ^
+  where T,K are type-variables:
+    T extends Object declared in class Tuple
+    K extends Object declared in class Tuple
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\BaseConstructor.java:597: warning: [unchecked] unchecked call to Tuple(T,K) as a member of the raw type Tuple
+    maps2fill.add(0, new Tuple(mapping, new Tuple(key, value)));
+                     ^
+  where T,K are type-variables:
+    T extends Object declared in class Tuple
+    K extends Object declared in class Tuple
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\BaseConstructor.java:597: warning: [unchecked] unchecked method invocation: method add in class ArrayList is applied to given types
+    maps2fill.add(0, new Tuple(mapping, new Tuple(key, value)));
+                 ^
+  required: int,E
+  found:    int,Tuple
+  where E is a type-variable:
+    E extends Object declared in class ArrayList
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\BaseConstructor.java:597: warning: [unchecked] unchecked conversion
+    maps2fill.add(0, new Tuple(mapping, new Tuple(key, value)));
+                     ^
+  required: E
+  found:    Tuple
+  where E is a type-variable:
+    E extends Object declared in class ArrayList
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\representer\BaseRepresenter.java:37: warning: [missing-explicit-ctor] class BaseRepresenter in exported package com.m3.lib.snakeyaml.representer declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+public abstract class BaseRepresenter {
+                ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\representer\Representer.java:70: warning: [missing-explicit-ctor] class Representer.RepresentJavaBean in exported package com.m3.lib.snakeyaml.representer declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+  protected class RepresentJavaBean implements Represent {
+            ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\nodes\CollectionNode.java:38: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+    setFlowStyle(flowStyle);
+                ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\util\MergeUtils.java:31: warning: [missing-explicit-ctor] class MergeUtils in exported package com.m3.lib.snakeyaml.util declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+public abstract class MergeUtils {
+                ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\AbstractConstruct.java:23: warning: [missing-explicit-ctor] class AbstractConstruct in exported package com.m3.lib.snakeyaml.constructor declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+public abstract class AbstractConstruct implements Construct {
+                ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\SafeConstructor.java:214: warning: [missing-explicit-ctor] class SafeConstructor.ConstructYamlNull in exported package com.m3.lib.snakeyaml.constructor declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+  public class ConstructYamlNull extends AbstractConstruct {
+         ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\SafeConstructor.java:236: warning: [missing-explicit-ctor] class SafeConstructor.ConstructYamlBool in exported package com.m3.lib.snakeyaml.constructor declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+  public class ConstructYamlBool extends AbstractConstruct {
+         ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\SafeConstructor.java:245: warning: [missing-explicit-ctor] class SafeConstructor.ConstructYamlInt in exported package com.m3.lib.snakeyaml.constructor declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+  public class ConstructYamlInt extends AbstractConstruct {
+         ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\SafeConstructor.java:279: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
+          val += Long.parseLong(digits[j - i - 1]) * bes;
+                                                   ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\SafeConstructor.java:340: warning: [missing-explicit-ctor] class SafeConstructor.ConstructYamlFloat in exported package com.m3.lib.snakeyaml.constructor declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+  public class ConstructYamlFloat extends AbstractConstruct {
+         ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\SafeConstructor.java:378: warning: [missing-explicit-ctor] class SafeConstructor.ConstructYamlBinary in exported package com.m3.lib.snakeyaml.constructor declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+  public class ConstructYamlBinary extends AbstractConstruct {
+         ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\SafeConstructor.java:394: warning: [missing-explicit-ctor] class ConstructYamlTimestamp in exported package com.m3.lib.snakeyaml.constructor declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+  public static class ConstructYamlTimestamp extends AbstractConstruct {
+                ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\SafeConstructor.java:462: warning: [missing-explicit-ctor] class SafeConstructor.ConstructYamlOmap in exported package com.m3.lib.snakeyaml.constructor declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+  public class ConstructYamlOmap extends AbstractConstruct {
+         ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\SafeConstructor.java:496: warning: [missing-explicit-ctor] class SafeConstructor.ConstructYamlPairs in exported package com.m3.lib.snakeyaml.constructor declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+  public class ConstructYamlPairs extends AbstractConstruct {
+         ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\SafeConstructor.java:530: warning: [missing-explicit-ctor] class SafeConstructor.ConstructYamlSet in exported package com.m3.lib.snakeyaml.constructor declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+  public class ConstructYamlSet implements Construct {
+         ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\SafeConstructor.java:553: warning: [missing-explicit-ctor] class SafeConstructor.ConstructYamlStr in exported package com.m3.lib.snakeyaml.constructor declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+  public class ConstructYamlStr extends AbstractConstruct {
+         ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\SafeConstructor.java:561: warning: [missing-explicit-ctor] class SafeConstructor.ConstructYamlSeq in exported package com.m3.lib.snakeyaml.constructor declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+  public class ConstructYamlSeq implements Construct {
+         ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\SafeConstructor.java:584: warning: [missing-explicit-ctor] class SafeConstructor.ConstructYamlMap in exported package com.m3.lib.snakeyaml.constructor declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+  public class ConstructYamlMap implements Construct {
+         ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\SafeConstructor.java:607: warning: [missing-explicit-ctor] class ConstructUndefined in exported package com.m3.lib.snakeyaml.constructor declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+  public static final class ConstructUndefined extends AbstractConstruct {
+                      ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\Constructor.java:139: warning: [missing-explicit-ctor] class Constructor.ConstructMapping in exported package com.m3.lib.snakeyaml.constructor declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+  protected class ConstructMapping implements Construct {
+            ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\Constructor.java:308: warning: [missing-explicit-ctor] class Constructor.ConstructYamlObject in exported package com.m3.lib.snakeyaml.constructor declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+  protected class ConstructYamlObject implements Construct {
+            ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\Constructor.java:346: warning: [missing-explicit-ctor] class Constructor.ConstructScalar in exported package com.m3.lib.snakeyaml.constructor declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+  protected class ConstructScalar extends AbstractConstruct {
+            ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\Constructor.java:507: warning: [missing-explicit-ctor] class Constructor.ConstructSequence in exported package com.m3.lib.snakeyaml.constructor declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+  protected class ConstructSequence implements Construct {
+            ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\Constructor.java:562: warning: [rawtypes] found raw type: Class
+          Class<?>[] parameterTypes = new Class[argumentList.size()];
+                                          ^
+  missing type arguments for generic class Class<T>
+  where T is a type-variable:
+    T extends Object declared in class Class
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\Constructor.java:107: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+    addTypeDescription(theRoot);
+                      ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\constructor\DuplicateKeyException.java:21: warning: [serial] serializable class DuplicateKeyException has no definition of serialVersionUID
+public class DuplicateKeyException extends ConstructorException {
+       ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\error\MissingEnvironmentVariableException.java:19: warning: [serial] serializable class MissingEnvironmentVariableException has no definition of serialVersionUID
+public class MissingEnvironmentVariableException extends YAMLException {
+       ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\extensions\compactnotation\CompactConstructor.java:75: warning: [rawtypes] found raw type: Class
+    Class<?>[] args = new Class[data.getArguments().size()];
+                          ^
+  missing type arguments for generic class Class<T>
+  where T is a type-variable:
+    T extends Object declared in class Class
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\extensions\compactnotation\CompactConstructor.java:186: warning: [missing-explicit-ctor] class CompactConstructor.ConstructCompactObject in exported package com.m3.lib.snakeyaml.extensions.compactnotation declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+  public class ConstructCompactObject extends ConstructMapping {
+         ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\external\com\google\gdata\util\common\base\UnicodeEscaper.java:49: warning: [missing-explicit-ctor] class UnicodeEscaper in exported package com.m3.lib.snakeyaml.external.com.google.gdata.util.common.base declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+public abstract class UnicodeEscaper implements Escaper {
+                ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\inspector\UnTrustedTagInspector.java:22: warning: [missing-explicit-ctor] class UnTrustedTagInspector in exported package com.m3.lib.snakeyaml.inspector declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+public final class UnTrustedTagInspector implements TagInspector {
+             ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\introspector\MethodProperty.java:64: warning: [exports] class PropertyDescriptor in module java.desktop is not indirectly exported using 'requires transitive'
+  public MethodProperty(PropertyDescriptor property) {
+                        ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\introspector\MissingProperty.java:32: warning: [rawtypes] found raw type: Class
+    return new Class[0];
+               ^
+  missing type arguments for generic class Class<T>
+  where T is a type-variable:
+    T extends Object declared in class Class
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\representer\JsonRepresenter.java:42: warning: [missing-explicit-ctor] class JsonRepresenter.RepresentDate in exported package com.m3.lib.snakeyaml.representer declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+  protected class RepresentDate extends Representer.RepresentDate {
+            ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\representer\JsonRepresenter.java:53: warning: [missing-explicit-ctor] class JsonRepresenter.RepresentByteArray in exported package com.m3.lib.snakeyaml.representer declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+  protected class RepresentByteArray implements Represent {
+            ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\util\EnumUtils.java:19: warning: [missing-explicit-ctor] class EnumUtils in exported package com.m3.lib.snakeyaml.util declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+public class EnumUtils {
+       ^
+H:\m3-scratch\lib-intake\batch\snakeyaml-2.6\proj\src\main\java\com\m3\lib\snakeyaml\util\UriEncoder.java:28: warning: [missing-explicit-ctor] class UriEncoder in exported package com.m3.lib.snakeyaml.util declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.snakeyaml
+public abstract class UriEncoder {
+                ^
+55 warnings
