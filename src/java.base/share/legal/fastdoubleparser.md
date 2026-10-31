@@ -11,7 +11,9 @@ FastDoubleMath, FastFloatMath, FastDoubleSwar, FastIntegerMath and FftMultiplier
 
 Package ch.randelshofer.fastdoubleparser -> jdk.internal.math and type T -> M3T; the slow-path calls to
 Double.parseDouble / Float.parseFloat now call FloatingDecimal.readJavaFormatString (the JDK converter they fall back
-to), because java.base routes those methods through this code. Nothing else was changed.
+to), because java.base routes those methods through this code; M3FftMultiplier.squareFft squares the magnitude (the
+donor squared toByteArray() of a negative value, its two's complement; found by the per-atom JUnit test, unreachable
+from the parsers, which square only powers of ten). Nothing else was changed.
 
 ### LICENSE
 

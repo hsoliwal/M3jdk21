@@ -658,7 +658,8 @@ class M3FftMultiplier {
     }
 
     static BigInteger squareFft(BigInteger a) {
-        byte[] mag = a.toByteArray();
+        // M3: square of the magnitude (toByteArray() of a negative is two's complement; multiplyFft negates too)
+        byte[] mag = (a.signum() < 0 ? a.negate() : a).toByteArray();
         int bitLen = mag.length * 8;
         int bitsPerPoint = bitsPerFftPoint(bitLen);
         int fftLen = (bitLen + bitsPerPoint - 1) / bitsPerPoint + 1;   // +1 for a possible carry, see toFFTVector()
