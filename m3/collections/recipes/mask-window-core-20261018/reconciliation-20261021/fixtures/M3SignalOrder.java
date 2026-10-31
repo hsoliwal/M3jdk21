@@ -2,7 +2,7 @@
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
  */
-package com.m3.collections;
+package jdk.m3.collections;
 
 import java.util.Arrays;
 import java.util.Objects;

@@ -1,6 +1,6 @@
 path	git_blob	status	pr	note
-.github/workflows/collection-views-convergence.yml	fd89b2d69b4eff3b12ae4f9ea3ef03dc3faad0f4	modified	2216	PR version, not live; the git blob id is its content address
-.github/workflows/collections-convergence.yml	ccd9e66ed64b7a329d961044dfaca045781e74b2	modified	2216	PR version, not live; the git blob id is its content address
+.github/workflows/collection-views-convergence.yml	5ed5cd1643684b17b58f7329d4ade4b0e309a045	modified	2216	PR version, not live; the git blob id is its content address
+.github/workflows/collections-convergence.yml	0f2258153877d18b81133462e672688f60901222	modified	2216	PR version, not live; the git blob id is its content address
 .github/workflows/filtered-deque-owner-contract.yml	2609ee023a3e94b00f490e8cb7ef89ffe6b5d88e	modified	2216	PR version, not live; the git blob id is its content address
 .github/workflows/filtered-list-replacement.yml	1c57add1dfb8d4d2cc193cd72160e712ee80b766	modified	2216	PR version, not live; the git blob id is its content address
 .github/workflows/indexed-live-sorted-spliterator.yml	29b6f41ceb6893ec1e893d70d2d8c2a02b332d68	modified	2216	PR version, not live; the git blob id is its content address
@@ -11,7 +11,7 @@ path	git_blob	status	pr	note
 .github/workflows/m3-a3-portable-mastery-gate-java21.yml	b9dc18f5d4af37bac64dca70f38f266ec2e1232b	modified	2216	PR version, not live; the git blob id is its content address
 .github/workflows/m3-a3-scope-history-20261015.yml	6ff355cbfc446a5b9836b09d926f1b0c5a5a8981	modified	2216	PR version, not live; the git blob id is its content address
 .github/workflows/m3-a3-sourcefile-typing-20261015.yml	10e7a6b368aa2c50a7956d3115f053c21c7acc33	modified	2216	PR version, not live; the git blob id is its content address
-.github/workflows/m3-a3-synexia-mastery-custody.yml	-	deleted	2216	deleted by the PR (landing file kept)
+.github/workflows/m3-a3-m3-mastery-custody.yml	-	deleted	2216	deleted by the PR (landing file kept)
 .github/workflows/m3-a3.yml	0d7d9ab4162b06ebdc4426d845bdc008b0cb84a4	modified	2216	PR version, not live; the git blob id is its content address
 .github/workflows/m3-actual-javac-capture-20261027.yml	d11373e3a2444cfe3272c3405ff38a20b2a8a431	modified	2216	PR version, not live; the git blob id is its content address
 .github/workflows/m3-apache-bag-retain450.yml	657aa12223d6fa0872e98c43f708aabbf28df545	modified	2216	PR version, not live; the git blob id is its content address
@@ -22,7 +22,7 @@ path	git_blob	status	pr	note
 .github/workflows/m3-ast-scope-dispatch-20261020.yml	4953b3af0de6fabdbb479388c06de46c7e74f70e	modified	2216	PR version, not live; the git blob id is its content address
 .github/workflows/m3-ast-scoped-file-identity-receiver-20261017.yml	ca50f6ab12d13b02ee6c90db5ef0a6da403a90af	modified	2216	PR version, not live; the git blob id is its content address
 .github/workflows/m3-ast-subtree-digest.yml	167eec42845a87a3ecc1834dc9768253edc15fdd	modified	2216	PR version, not live; the git blob id is its content address
-.github/workflows/m3-backport-wave-current-output.yml	b4f2861eecfe25be0fca91f7a39601b014548279	modified	2216	PR version, not live; the git blob id is its content address
+.github/workflows/m3-backport-wave-current-output.yml	016c9ae2ba8a2da6f93dfe4978ca28650c0d28fb	modified	2216	PR version, not live; the git blob id is its content address
 .github/workflows/m3-bigstring-rope-summary-20261018.yml	b44fdbaa783d7f7aa8fdddbbe2b3af27298dd843	modified	2216	PR version, not live; the git blob id is its content address
 .github/workflows/m3-bimap-mainline-20261017.yml	6fa001b48a624a59d73df870015fd9850ec527ff	modified	2216	PR version, not live; the git blob id is its content address
 .github/workflows/m3-binary-set-index-navigation-20261018.yml	9875b18e6bc75eb4c7ae6968db171e4969a93f36	modified	2216	PR version, not live; the git blob id is its content address
@@ -46,7 +46,7 @@ path	git_blob	status	pr	note
 .github/workflows/m3-collections-mask-all-select-20261017.yml	fd7037cf60a2377fad878682098cf64b967ba3f8	modified	2216	PR version, not live; the git blob id is its content address
 .github/workflows/m3-collections-mask-receiver.yml	c3896413703dd0ab141f81387057a6f341a1a7d9	modified	2216	PR version, not live; the git blob id is its content address
 .github/workflows/m3-collections-tombstone-reuse-20261017.yml	47a5413fd978619467500346b57ee99b3043668b	modified	2216	PR version, not live; the git blob id is its content address
-.github/workflows/m3-collections.yml	6e5aeabe3b065131b8789bb64e8738e46f559d75	modified	2216	PR version, not live; the git blob id is its content address
+.github/workflows/m3-collections.yml	c42954ecf99a58893a76f3aee6dbe2d258e3a7fe	modified	2216	PR version, not live; the git blob id is its content address
 .github/workflows/m3-commons-bag-five-provider-20261018.yml	49d30852c7b25d90480608dab5a71be84bef33ab	modified	2216	PR version, not live; the git blob id is its content address
 .github/workflows/m3-compiler-signal-facts-20261022.yml	d6b7b486c5f446d140f9da4ef86372b86db60894	modified	2216	PR version, not live; the git blob id is its content address
 .github/workflows/m3-compiletime-precompute.yml	ef01d32f435aa44cf1c80a05f71319968d70cafb	modified	2216	PR version, not live; the git blob id is its content address
@@ -90,7 +90,7 @@ path	git_blob	status	pr	note
 .github/workflows/m3-filtered-navigable-consolidation.yml	aa814205755ae667a0e7553c9504cc61ace70abe	modified	2216	PR version, not live; the git blob id is its content address
 .github/workflows/m3-filtered-sorted-contract-gate-20261029.yml	ce4d5872d2b02515bb35543e434e8647ebf8d890	modified	2216	PR version, not live; the git blob id is its content address
 .github/workflows/m3-filtered-terminal-fusion-20261017.yml	8c60823d84a7664a94cb739faf0554697daa5ab9	modified	2216	PR version, not live; the git blob id is its content address
-.github/workflows/m3-first-release-admission.yml	24c409aef8288dea9f67620f21e8890c41d5c075	modified	2216	PR version, not live; the git blob id is its content address
+.github/workflows/m3-first-release-admission.yml	d1012729ae84ace3910a95c94911389a9c941c58	modified	2216	PR version, not live; the git blob id is its content address
 .github/workflows/m3-five-fork-prepared-20261018.yml	d44a21d95c2c8864b9a03c13bdf348d9dd324c1a	modified	2216	PR version, not live; the git blob id is its content address
 .github/workflows/m3-five-library-eclipse-multimaps-20261017.yml	5f25c369ef53218789f53d9a64d0c1f478b8c629	modified	2216	PR version, not live; the git blob id is its content address
 .github/workflows/m3-five-library-occurrences-20261018.yml	22b06043038843dcef364db0050cb7c4f4e78a48	modified	2216	PR version, not live; the git blob id is its content address

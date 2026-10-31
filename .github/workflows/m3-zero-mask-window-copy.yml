@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c'
-      - 'm3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java'
       - 'm3/collections/recipe/zero-mask-window-copy-20261017/**'
       - 'm3/collections/qualification/zero-mask-window-copy-20261017/**'
       - '.github/workflows/m3-zero-mask-window-copy.yml'
@@ -36,13 +36,13 @@ jobs:
           set -euxo pipefail
           mkdir -p proof/core proof/native proof/empty
           find m3/collections/src/main/java -name '*.java' -print0 | sort -z | xargs -0 javac --release 21 -proc:none -Xlint:all,-module -Werror -d proof/core
-          javac --release 21 -proc:none -cp proof/core -d proof/core m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java
-          java -Xmx512m -Djava.library.path="$PWD/proof/empty" -cp proof/core com.m3.collections.M3IndexMaskCompactorSelfTest
+          javac --release 21 -proc:none -cp proof/core -d proof/core m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java
+          java -Xmx512m -Djava.library.path="$PWD/proof/empty" -cp proof/core jdk.m3.collections.M3IndexMaskCompactorSelfTest
       - name: Count state reads and reject original implementation
         run: |
           set -euxo pipefail
           QUAL=m3/collections/qualification/zero-mask-window-copy-20261017
-          BEFORE="$PWD/m3/collections/recipe/zero-mask-window-copy-20261017/src/main/resources/com/synexia/rewrite/hash-pinned-text/native-zero-mask-window-c/m3_index_mask_compactor.c.before"
+          BEFORE="$PWD/m3/collections/recipe/zero-mask-window-copy-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/native-zero-mask-window-c/m3_index_mask_compactor.c.before"
           gcc -std=c17 -O2 -Wall -Wextra -Werror -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" "$QUAL/mask_zero_read_probe.c" -o proof/native/read-probe
           proof/native/read-probe
           gcc -std=c17 -O2 -Wall -Wextra -Werror -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" "-DM3_MASK_SOURCE=\"$BEFORE\"" "$QUAL/mask_zero_read_probe.c" -o proof/native/original-probe
@@ -52,7 +52,7 @@ jobs:
         run: |
           set -euxo pipefail
           gcc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared -fsanitize=undefined -fno-sanitize-recover=all -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" m3/collections/src/main/native/collections/m3_index_mask_compactor.c -o proof/native/libm3_collections_mask.so
-          UBSAN_OPTIONS=halt_on_error=1 java -Xmx512m -Xcheck:jni -Djava.library.path="$PWD/proof/native" -cp proof/core com.m3.collections.M3IndexMaskCompactorSelfTest --native
+          UBSAN_OPTIONS=halt_on_error=1 java -Xmx512m -Xcheck:jni -Djava.library.path="$PWD/proof/native" -cp proof/core jdk.m3.collections.M3IndexMaskCompactorSelfTest --native
           python3 -I -S -B m3/collections/qualification/zero-mask-window-copy-20261017/verify.py
           git diff --exit-code
       - uses: actions/upload-artifact@v4

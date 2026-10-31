@@ -7,10 +7,10 @@
   "canonical_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12403",
   "recipe": "com.synexia.m3.ArrayMaskLookup20261018",
   "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-array-mask-lookup-20261018",
-  "source_seals_sha256": "6ae7826b3d667534f6514f2d920ce35d7a096e2722708621c7550a8a67287cc3",
+  "source_seals_sha256": "eac14c0a231a7488d14176020ef7868c75c47c4eee66b3bc8bb806f22a655861",
   "received_target_count": 6,
   "canonical_sdk_tests_passed": 5,
-  "receiver_readback": "4f927a74be3441c919d35b1207e4eaf69d415c1911e8886ede616227f7d55baa",
+  "receiver_readback": "5388d3f3cc2516103be696e74c8abd46f979c8447559c8d166a249fc51f8436e",
   "code_bytes_match_final_receiver": true,
   "qualification_status": "BOUNDED_CORRECTNESS_PASS_NATIVE_PERFORMANCE_AND_LEGACY_LINEAGE_PENDING",
   "evidence": {

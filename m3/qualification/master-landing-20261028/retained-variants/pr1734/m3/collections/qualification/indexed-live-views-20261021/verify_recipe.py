@@ -6,7 +6,7 @@ import hashlib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[4]
-CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-indexed-live-views-20261021"
+CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-indexed-live-views-20261021"
 PRE = Path(__file__).resolve().parent / "pre"
 
 
@@ -44,7 +44,7 @@ def main() -> None:
                 raise RuntimeError("invalid successor row")
             path, prior, successor, recipe = columns
             if (path in successors or len(prior) != 64 or len(successor) != 64
-                    or recipe != "com.synexia.m3.IndexedLiveReentrancy20261021"):
+                    or recipe != "jdk.internal.m3.IndexedLiveReentrancy20261021"):
                 raise RuntimeError("duplicate/malformed successor row")
             successors[path] = (prior, successor)
         if len(successors) != 2:

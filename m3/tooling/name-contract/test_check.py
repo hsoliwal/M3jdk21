@@ -135,15 +135,15 @@ class PublicCompanionContractTests(unittest.TestCase):
             "path": "src/java.base/share/classes/java/util/Arrays.java",
         }
         self.target = {
-            "module": "com.m3.arrays", "symbol": "com.m3.arrays.M3Arrays",
-            "path": "m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java",
+            "module": "jdk.m3.arrays", "symbol": "jdk.m3.arrays.M3Arrays",
+            "path": "m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java",
         }
         self.pin_content(self.source, "package java.util; public final class Arrays {}\n")
-        self.pin_content(self.target, "package com.m3.arrays; public final class M3Arrays {}\n")
+        self.pin_content(self.target, "package jdk.m3.arrays; public final class M3Arrays {}\n")
         write(self.root, "src/java.base/share/classes/module-info.java",
               "module java.base { exports java.util; }\n")
         write(self.root, "m3/arrays/src/main/java/module-info.java",
-              "module com.m3.arrays { exports com.m3.arrays; }\n")
+              "module jdk.m3.arrays { exports jdk.m3.arrays; }\n")
         self.record = {
             "id": "arrays.companion", "status": "implemented-unverified",
             "sources": [self.source], "targets": [self.target],
@@ -216,9 +216,9 @@ class PublicCompanionContractTests(unittest.TestCase):
     def test_qualified_exports_are_not_public_companion_eligibility(self):
         for descriptor, content in (
                 ("src/java.base/share/classes/module-info.java",
-                 "module java.base { exports java.util to com.m3.arrays; }\n"),
+                 "module java.base { exports java.util to jdk.m3.arrays; }\n"),
                 ("m3/arrays/src/main/java/module-info.java",
-                 "module com.m3.arrays { exports com.m3.arrays to java.base; }\n")):
+                 "module jdk.m3.arrays { exports jdk.m3.arrays to java.base; }\n")):
             with self.subTest(descriptor=descriptor):
                 original = (self.root / descriptor).read_text(encoding="utf-8")
                 write(self.root, descriptor, content)
@@ -241,38 +241,38 @@ class PublicCompanionContractTests(unittest.TestCase):
             with self.subTest(descriptor=descriptor):
                 original = (self.root / descriptor).read_text(encoding="utf-8")
                 write(self.root, descriptor,
-                      "module wrong.owner { exports java.util; exports com.m3.arrays; }\n")
+                      "module wrong.owner { exports java.util; exports jdk.m3.arrays; }\n")
                 self.assert_refused("declared module disagrees")
                 write(self.root, descriptor, original)
 
     def test_public_companion_cannot_be_owned_by_java_base(self):
         self.target.update(module="java.base",
-                           path="src/java.base/share/classes/com/m3/arrays/M3Arrays.java")
-        self.pin_content(self.target, "package com.m3.arrays; public class M3Arrays {}\n")
+                           path="src/java.base/share/classes/jdk/m3/arrays/M3Arrays.java")
+        self.pin_content(self.target, "package jdk.m3.arrays; public class M3Arrays {}\n")
         write(self.root, "src/java.base/share/classes/module-info.java",
-              "module java.base { exports java.util; exports com.m3.arrays; }\n")
+              "module java.base { exports java.util; exports jdk.m3.arrays; }\n")
         self.assert_refused("must not be owned by java.base")
 
     def test_export_does_not_make_internal_companion_public(self):
-        self.target.update(symbol="com.m3.arrays.internal.M3Slots",
-                           path="m3/arrays/src/main/java/com/m3/arrays/internal/M3Slots.java")
+        self.target.update(symbol="jdk.m3.arrays.internal.M3Slots",
+                           path="m3/arrays/src/main/java/jdk/m3/arrays/internal/M3Slots.java")
         self.pin_content(self.target,
-                         "package com.m3.arrays.internal; public class M3Slots {}\n")
+                         "package jdk.m3.arrays.internal; public class M3Slots {}\n")
         self.record["companion_of"]["target_symbol"] = self.target["symbol"]
         write(self.root, "m3/arrays/src/main/java/module-info.java",
-              "module com.m3.arrays { exports com.m3.arrays.internal; }\n")
+              "module jdk.m3.arrays { exports jdk.m3.arrays.internal; }\n")
         self.assert_refused("must not expose an internal namespace")
 
     def test_open_companion_module_does_not_admit_private_storage(self):
         write(self.root, "m3/arrays/src/main/java/module-info.java",
-              "open module com.m3.arrays { exports com.m3.arrays; }\n")
+              "open module jdk.m3.arrays { exports jdk.m3.arrays; }\n")
         self.assert_refused("module must not be open")
 
     def test_opened_companion_package_refused_even_when_qualified(self):
-        for directive in ("opens com.m3.arrays;", "opens com.m3.arrays to java.base;"):
+        for directive in ("opens jdk.m3.arrays;", "opens jdk.m3.arrays to java.base;"):
             with self.subTest(directive=directive):
                 write(self.root, "m3/arrays/src/main/java/module-info.java",
-                      "module com.m3.arrays { exports com.m3.arrays; " + directive + " }\n")
+                      "module jdk.m3.arrays { exports jdk.m3.arrays; " + directive + " }\n")
                 self.assert_refused("package must not be opened")
 
     def test_source_relation_requires_exact_module_symbol_and_path(self):
@@ -293,7 +293,7 @@ class PublicCompanionContractTests(unittest.TestCase):
             self.record[field] = original
 
     def test_unknown_target_symbol_refused(self):
-        self.record["companion_of"]["target_symbol"] = "com.m3.arrays.NotMapped"
+        self.record["companion_of"]["target_symbol"] = "jdk.m3.arrays.NotMapped"
         self.assert_refused("missing or ambiguous companion artifact ownership")
 
     def test_internal_and_malformed_forms_refused(self):
@@ -352,9 +352,9 @@ class PublicCompanionContractTests(unittest.TestCase):
     def test_package_and_top_level_source_owner_must_agree(self):
         self.pin_content(self.target, "package other; public final class M3Arrays {}\n")
         self.assert_refused("declared package disagrees")
-        self.pin_content(self.target, "package com.m3.arrays; public final class M3Arrays {}\n")
-        self.target["path"] = "m3/arrays/src/main/java/com/m3/arrays/Other.java"
-        self.pin_content(self.target, "package com.m3.arrays; public final class M3Arrays {}\n")
+        self.pin_content(self.target, "package jdk.m3.arrays; public final class M3Arrays {}\n")
+        self.target["path"] = "m3/arrays/src/main/java/jdk/m3/arrays/Other.java"
+        self.pin_content(self.target, "package jdk.m3.arrays; public final class M3Arrays {}\n")
         self.assert_refused("top-level source owner disagrees")
 
     def test_source_path_must_be_owned_by_named_jdk_module(self):
@@ -364,16 +364,16 @@ class PublicCompanionContractTests(unittest.TestCase):
 
     def test_public_declaration_is_not_established_by_comment_or_string(self):
         for content in (
-                "package com.m3.arrays; /* public class M3Arrays {} */ class Hidden {}\n",
-                'package com.m3.arrays; class Hidden { String x = "public class M3Arrays {}"; }\n',
-                "package com.m3.arrays; class M3Arrays {}\n"):
+                "package jdk.m3.arrays; /* public class M3Arrays {} */ class Hidden {}\n",
+                'package jdk.m3.arrays; class Hidden { String x = "public class M3Arrays {}"; }\n',
+                "package jdk.m3.arrays; class M3Arrays {}\n"):
             with self.subTest(content=content):
                 self.pin_content(self.target, content)
                 self.assert_refused("public type declaration")
 
     def test_commented_module_export_does_not_count(self):
         write(self.root, "m3/arrays/src/main/java/module-info.java",
-              "module com.m3.arrays { /* exports com.m3.arrays; */ }\n")
+              "module jdk.m3.arrays { /* exports jdk.m3.arrays; */ }\n")
         self.assert_refused("not publicly exported")
 
     def test_source_path_traversal_refused(self):
@@ -411,11 +411,11 @@ class PublicCompanionContractTests(unittest.TestCase):
             key: source[key] for key in ("module", "symbol", "path")
         }
         target = second["targets"][0]
-        target.update(module="com.m3.another",
-                      path="m3/another/src/main/java/com/m3/arrays/M3Arrays.java")
-        self.pin_content(target, "package com.m3.arrays; public final class M3Arrays {}\n")
+        target.update(module="jdk.m3.another",
+                      path="m3/another/src/main/java/jdk/m3/arrays/M3Arrays.java")
+        self.pin_content(target, "package jdk.m3.arrays; public final class M3Arrays {}\n")
         write(self.root, "m3/another/src/main/java/module-info.java",
-              "module com.m3.another { exports com.m3.arrays; }\n")
+              "module jdk.m3.another { exports jdk.m3.arrays; }\n")
         self.mapping["migration"]["records"].append(second)
         self.assert_refused("conflicting public companion ownership")
 

@@ -7,7 +7,7 @@ on:
       - 'm3/runtime-integration/fix/**'
       - '.github/workflows/m3-jni-fix.yml'
       - 'm3/tooling/migration-recipes/verification/jni/**'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JniTest.java'
+      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JniTest.java'
 permissions:
   contents: read
 concurrency:

@@ -47,8 +47,8 @@ REQUIRED_GATES = frozenset({
 })
 RECIPE_ROOTS = (
     ".m3/openrewrite-recipes", ".m3/task-crates", "m3/recipes",
-    "m3/tooling/migration-recipes", "m3/tooling/synexia-jdk-a3-recipes",
-    "m3/synexia-import/pure-int-recipe-custody",
+    "m3/tooling/migration-recipes", "m3/tooling/m3jdk-a3-recipes",
+    "m3/m3-import/pure-int-recipe-custody",
     "m3/runtime-integration/recipe",
     "m3/runtime-integration/char-array-copy/recipe",
     "m3/runtime-integration/utf8-cursor-20261014/recipe/canonical",
@@ -350,7 +350,7 @@ def validate(root: Path, release_mode: bool = False,
     except (subprocess.CalledProcessError, FileNotFoundError, ValueError, OSError) as exc:
         block("git.inspect", str(exc))
 
-    # Standalone rule (2026-10-31): M3JDK21 needs no other repository to build, test, gate or release
+    # Standalone rule (2026-10-31): M3JDK 21 needs no other repository to build, test, gate or release
     # (check_standalone.py). Development mode is a ratchet against STANDALONE_BASELINE.tsv; release mode refuses any
     # cross-repository dependency when the contract's standalone.required_for_release is true. A tree without the
     # baseline, outside an enforced release, is reported without blocking.

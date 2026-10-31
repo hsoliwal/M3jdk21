@@ -4,9 +4,9 @@ on:
   pull_request:
     paths:
       - 'm3/ports/tornadovm-bulk/pom.xml'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3TornadoBulkCompilerRepairReceiverRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3TornadoBulkCompilerRepairReceiverRecipeTest.java'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tornado-bulk-compiler-20261014/**'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3TornadoBulkCompilerRepairReceiverRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3TornadoBulkCompilerRepairReceiverRecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tornado-bulk-compiler-20261014/**'
       - 'm3/tooling/migration-recipes/tasks/tornado-bulk-compiler-20261014/**'
       - '.github/workflows/m3-tornado-bulk-compiler-repair.yml'
   workflow_dispatch:
@@ -31,7 +31,7 @@ jobs:
           import xml.etree.ElementTree as ET
 
           root = Path("m3/tooling/migration-recipes/src/main/resources/"
-                      "com/m3/rewrite/backport/jdk21-hash-pinned-text/"
+                      "jdk/m3/rewrite/backport/jdk21-hash-pinned-text/"
                       "m3-tornado-bulk-compiler-20261014")
           path, before_sha, after_sha, resource = root.joinpath("manifest.tsv").read_text().strip().split("\t")
           before = root.joinpath("before-pom.xml.txt").read_bytes()
@@ -60,8 +60,8 @@ jobs:
                             "proc":"none","enablePreview":"true"}.items():
               assert config.findtext("m:"+tag, namespaces=ns) == value
           names = [x.text for x in tree.findall("./m:profiles/m:profile/m:id",ns)]
-          assert "m3-synexia-atom-pattern" in names
-          assert "m3-synexia-atom-pattern-mastery" in names
+          assert "m3-atom-pattern" in names
+          assert "m3-atom-pattern-mastery" in names
           print("PASS: exact POM sha256, contract delta, XML parse, preview and both recipe profiles")
           PY
 

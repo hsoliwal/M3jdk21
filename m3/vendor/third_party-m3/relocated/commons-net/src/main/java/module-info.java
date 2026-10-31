@@ -5,27 +5,27 @@
 
 /**
  * Defines the {@code commons-net} library,
- * relocated into M3JDK21 by LIB_INTAKE_TO_JMOD.
+ * relocated into M3JDK 21 by LIB_INTAKE_TO_JMOD.
  */
 module jdk.m3.net {
-    exports com.m3.lib.net;
-    exports com.m3.lib.net.bsd;
-    exports com.m3.lib.net.chargen;
-    exports com.m3.lib.net.daytime;
-    exports com.m3.lib.net.discard;
-    exports com.m3.lib.net.echo;
-    exports com.m3.lib.net.finger;
-    exports com.m3.lib.net.ftp;
-    exports com.m3.lib.net.ftp.parser;
-    exports com.m3.lib.net.imap;
-    exports com.m3.lib.net.io;
-    exports com.m3.lib.net.nntp;
-    exports com.m3.lib.net.ntp;
-    exports com.m3.lib.net.pop3;
-    exports com.m3.lib.net.smtp;
-    exports com.m3.lib.net.telnet;
-    exports com.m3.lib.net.tftp;
-    exports com.m3.lib.net.time;
-    exports com.m3.lib.net.util;
-    exports com.m3.lib.net.whois;
+    exports jdk.m3.lib.net;
+    exports jdk.m3.lib.net.bsd;
+    exports jdk.m3.lib.net.chargen;
+    exports jdk.m3.lib.net.daytime;
+    exports jdk.m3.lib.net.discard;
+    exports jdk.m3.lib.net.echo;
+    exports jdk.m3.lib.net.finger;
+    exports jdk.m3.lib.net.ftp;
+    exports jdk.m3.lib.net.ftp.parser;
+    exports jdk.m3.lib.net.imap;
+    exports jdk.m3.lib.net.io;
+    exports jdk.m3.lib.net.nntp;
+    exports jdk.m3.lib.net.ntp;
+    exports jdk.m3.lib.net.pop3;
+    exports jdk.m3.lib.net.smtp;
+    exports jdk.m3.lib.net.telnet;
+    exports jdk.m3.lib.net.tftp;
+    exports jdk.m3.lib.net.time;
+    exports jdk.m3.lib.net.util;
+    exports jdk.m3.lib.net.whois;
 }

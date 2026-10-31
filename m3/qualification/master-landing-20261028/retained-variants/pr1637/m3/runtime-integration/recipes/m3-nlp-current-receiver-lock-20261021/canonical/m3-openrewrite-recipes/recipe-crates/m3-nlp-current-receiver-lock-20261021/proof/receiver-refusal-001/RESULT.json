@@ -1,0 +1,46 @@
+{
+  "status": "REFUSED_UNCHANGED_RECEIVER_SOURCE_DRIFT",
+  "receiving_commit": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/tooling/module-packs/nlp-search/current_forks.py",
+    "--jdk-home",
+    "/tmp/m3-build-tools/jdk-21.0.12.1+1",
+    "--out",
+    "/workspace/scratch/206049dfb270/nlp-work/current-receiver-001",
+    "--receiver",
+    "/workspace/scratch/206049dfb270/nlp-work/receiver-source",
+    "--opennlp-source",
+    "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp",
+    "--lucene-source",
+    "/workspace/scratch/206049dfb270/nlp-work/forks/lucene",
+    "--recipe-runner",
+    "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/m3/m3-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/run_recipe.py",
+    "--recipe-resources",
+    "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/m3/m3-openrewrite-recipes/src/main/resources"
+  ],
+  "exit_code": 1,
+  "log_sha256": "c878aa3433bd381236e7de11b69b8bc73b649dd2f39570eaf6d9a5c8c6ec87b5",
+  "source_lock_sha256": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a",
+  "hash_drift": [
+    {
+      "module": "jdk.m3.text",
+      "path": "m3/core/src/jdk/m3/text/M3GvasLiteralImage.java",
+      "expected": "f3ed3fd91d7e60220ba22e717f6fec41dc7759e5a221ef1dba65251d0028f8d7",
+      "actual": "b05c40b8999993dfec75afa646ba4fac421258f0b611ab01956b878226574a3f"
+    }
+  ],
+  "coverage_drift": [
+    {
+      "module": "jdk.m3.text",
+      "extra": [
+        "m3/core/src/jdk/m3/text/M3BigString.java",
+        "m3/core/src/jdk/m3/text/M3RopeTextIndex.java"
+      ],
+      "missing": []
+    }
+  ],
+  "output_directory_created": false,
+  "gate_bypassed": false,
+  "disposition": "Combined current-fork receiver remains unqualified. Independent exact-donor gates are separate and may proceed."
+}

@@ -1,3 +1,3 @@
 path	sha256	git_blob	mode	pr	note
-.github/workflows/m3-merged-atom-preservation-20261022.yml	827eb84d0bbc58a170f7479bf8e30e884a7690ddb44151588384d0f952442e4a	b4e7ccfe5e544296283f3127744caedf1a42a921	100644	1922	PR version, not live
-m3/docs/m3jdk21-resource-locks-composed-successor-20261025.tsv	d270a651bcc8b2bc895d998c3c2922d7ac168057aeb84f0c191f0deb696b33c7	9766b32d689958173b34853cf40f6bc0537afa93	100644	1922	PR version, not live
+.github/workflows/m3-merged-atom-preservation-20261022.yml	2cd159bb3daea61498f7cd070b260b7b21239ed2bb8d567e392ef9e40bf46482	cf112ffe9514322dfbcb80d4282cad16f9070cde	100644	1922	PR version, not live
+m3/docs/m3jdk21-resource-locks-composed-successor-20261025.tsv	24e569714e600757078af948d65dddc5a1af76cda694ecc072b0f7104603d848	ca0ce76a04b14129eee4069780a30251359d5e6d	100644	1922	PR version, not live

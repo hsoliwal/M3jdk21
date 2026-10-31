@@ -6,7 +6,7 @@ Canonical source is [Synexia PR #12528](https://github.com/hsoliwal/com.synexia/
 at commit `74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd`.
 The published executions qualify the selected payload derived from M3JDK21
 `9a164c31b38c7013c179a3ff38b0bb60c199c7fd`, with current manifest
-`5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819`.
+`ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6`.
 
 These are portable documented commands. They were not executed during this
 metadata recovery, and no new reproduction launcher was created. Any later
@@ -25,9 +25,9 @@ explicit stack; do not rely on the still-open #1480 being implicitly present.
 
 Exact SHA-256 identities:
 
-- `verify.py` — `fd40d196efbb462243eba6b43d9e78ebc4162c9e2b0f13beeafac804ae8c228e`.
-- `probe-plan.json` — `91b07ee6bec984b2229eaaa1041662e4d93a72a3e222b5111277d6c5da9e7a39`.
-- Canonical [`verify_all_native.py`][native-helper] — `c7d9612fce125813980ce31f7566f0aab28045d95897b6c60690544558c80dfe`.
+- `verify.py` — `05f85f348dac328f3ec0c0ebcf225debd35df8a837da9916db8245301d488825`.
+- `probe-plan.json` — `f335a326518b11724538ea420902fde0efd73167ec2418cf5e734dcc9f42484c`.
+- Canonical [`verify_all_native.py`][native-helper] — `daeaf8a9f50b31d5f88256511dca4a6551d48d34ebb48e41f6fc20dff0563c3a`.
 
 The native helper stays at
 `synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/proof/verify_all_native.py`.

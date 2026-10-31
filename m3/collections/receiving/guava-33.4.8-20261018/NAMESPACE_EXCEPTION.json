@@ -1,7 +1,7 @@
 {
   "schema": "guava-namespace-identity-exception-v2",
   "sourceNamespace": "com.google.common",
-  "targetNamespace": "com.m3.collections.guava",
+  "targetNamespace": "jdk.m3.collections.guava",
   "authorizedScope": "User requested package-first renaming across all collections libraries",
   "identitiesChanged": [
     "declared qualified names",
@@ -25,7 +25,7 @@
   ],
   "ownedHelperMapping": {
     "source": "com.google.thirdparty.publicsuffix",
-    "target": "com.m3.collections.guava.thirdparty.publicsuffix"
+    "target": "jdk.m3.collections.guava.thirdparty.publicsuffix"
   },
   "externalProviderExclusions": [
     "com.google.common.truth",

@@ -15,7 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * The M3JDK21 naming rules of {@code NAMING_RULES.tsv}: ordered text rules, kept lines, kept spans and kept paths.
+ * The M3JDK 21 naming rules of {@code NAMING_RULES.tsv}: ordered text rules, kept lines, kept spans and kept paths.
  * This is the Java executor of the same table the rename recipe {@code jdk_naming.py} runs; a line is conformant when
  * {@link #rewrite} leaves it unchanged.
  */

@@ -5,7 +5,7 @@ import hashlib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[4]
-JAVA = ROOT / "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cpu-int8-receiver-20261017"
+JAVA = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cpu-int8-receiver-20261017"
 META = Path(__file__).resolve().with_name("text-manifest.tsv")
 
 
@@ -51,7 +51,7 @@ def verify():
                  "CPU_TOOL_RECEIVER_MAP_20261014.tsv",
                  "CPU_TOOL_RECEIVER_DEFERRALS_20261015.tsv"):
         lines = (prefix / file).read_text(encoding="utf-8").splitlines()
-        count.append(sum(line.startswith("com.synexia.m3.") for line in lines))
+        count.append(sum(line.startswith("jdk.internal.m3.") for line in lines))
     if count != [21, 19, 2]:
         raise ValueError("incomplete CPU-only catalogue closure " + str(count))
     print("M3_CPU_INT8_SOURCE_CUSTODY_PASS java=4 native_metadata=14"

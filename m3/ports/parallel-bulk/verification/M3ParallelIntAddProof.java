@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 */
-import com.m3.parallel.bulk.M3ParallelIntAddProvider;
+import jdk.m3.parallel.bulk.M3ParallelIntAddProvider;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

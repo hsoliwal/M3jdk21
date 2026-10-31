@@ -1,2 +1,2 @@
 key	repository	role	evidence
-synexia	hsoliwal/com.synexia	donor of absorbed sources, recipes and tools; lineage only, never fetched by a build, test, CI or release step	m3/vendor/synexia/README.md; m3/tooling/standalone/SYNEXIA_REFS.tsv
+synexia	hsoliwal/com.synexia	donor of absorbed sources, recipes and tools; lineage only, never fetched by a build, test, CI or release step	m3/vendor/m3/README.md; m3/tooling/standalone/M3_REFS.tsv

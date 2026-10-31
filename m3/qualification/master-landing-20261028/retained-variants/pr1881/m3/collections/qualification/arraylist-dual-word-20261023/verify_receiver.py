@@ -24,12 +24,12 @@ SHA1 = re.compile(r"^[a-f0-9]{40}$")
 SHA256 = re.compile(r"^[a-f0-9]{64}$")
 CATEGORIES = re.compile(r"^[A-Z][A-Z0-9_]{2,100}$")
 EXPECTED_ROLES = {
-    "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java": "implementation_postimage",
-    "m3/collections/src/test/java/com/m3/collections/M3ArrayListShortWordMaskContract.java": "differential_oracle_postimage",
+    "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java": "implementation_postimage",
+    "m3/collections/src/test/java/jdk/m3/collections/M3ArrayListShortWordMaskContract.java": "differential_oracle_postimage",
     "m3/arrays/pom.xml": "test_only_maven_dependency_postimage",
-    "m3/collections/src/test/java/com/m3/collections/M3LongTreeSetMaskCompactionContract.java": "one_character_java21_test_syntax_postimage",
-    "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java": "atomic_tree_sibling_key_validation_postimage",
-    "m3/collections/src/test/java/com/m3/collections/M3TreeCoverageTest.java": "negative_and_overflow_atomic_refusal_regression",
+    "m3/collections/src/test/java/jdk/m3/collections/M3LongTreeSetMaskCompactionContract.java": "one_character_java21_test_syntax_postimage",
+    "m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java": "atomic_tree_sibling_key_validation_postimage",
+    "m3/collections/src/test/java/jdk/m3/collections/M3TreeCoverageTest.java": "negative_and_overflow_atomic_refusal_regression",
 }
 NATIVE_PATHS = {
     "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",

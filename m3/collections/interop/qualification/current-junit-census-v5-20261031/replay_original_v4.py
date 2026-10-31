@@ -19,14 +19,14 @@ ORIGINAL_TEST_DIR = ("m3/collections/interop/qualification/"
                      "current-junit-census-20261026")
 REPORTS_REL = "m3/collections/interop/target/surefire-reports"
 NEW_CLASSES = frozenset(
-    "com.m3.collections.interop." + Path(row[0]).stem
+    "jdk.m3.collections.interop." + Path(row[0]).stem
     for row in v5.source_gate.EXPECTED
 )
 
 
 def additional_ids() -> set[str]:
     return {
-        "com.m3.collections.interop." + Path(row[0]).stem + "#" + method
+        "jdk.m3.collections.interop." + Path(row[0]).stem + "#" + method
         for row in v5.source_gate.EXPECTED for method in row[3].split(",")
     }
 

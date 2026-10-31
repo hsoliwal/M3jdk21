@@ -1,10 +1,10 @@
 {
-  "schema": "m3-jdk21-namespace-source-qualification-v1",
+  "schema": "m3jdk21-namespace-source-qualification-v1",
   "sourceCommit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
   "sourcePrefix": "src/java.base/share/classes",
   "sourceFiles": 59,
   "retainedPlatformReferences": 28,
-  "targetPackageRoot": "com.m3.collections.jdk.util",
+  "targetPackageRoot": "jdk.m3.collections.jdk.util",
   "sourceOnlyTree": "4c192cf510fc25a4b8fbea2c7373481b7202494f",
   "implementationTree": "6955bd77e020f253bee3cfcb753e9df395d9da1d",
   "javaTree": "8b46beb58a4e2980f02d8f91af7248e408195577",

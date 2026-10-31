@@ -26,9 +26,9 @@ default-branch merge or release.
 
 | Path | Required unchanged preimage Git blob | Canonical tested postimage Git blob |
 |---|---|---|
-| `m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionContract.java` | `a23f5bdc5bf8d4200e01903cf068921375f6e23a` | `b0a27684d9548bf3cc61051bcefe5f99e59eeba6` |
-| `m3/collections/src/test/java/com/m3/collections/M3FirstVisibleAtomContract.java` | `ca0a522f153f13c0889f4e09729961f5b2d7d93b` | `f5b9f7a1a9d213ef8846fc0b8fab064d685cad7b` |
-| `m3/collections/qualification/filtered-oracle-current-20261030/RECEIVER_RECEIPT.json` | `ABSENT` on the #2227 target head | `5b15e4cceab01ac11ed6bb0f52b567400190b3e9` |
+| `m3/collections/src/test/java/jdk/m3/collections/M3FilteredCursorExceptionContract.java` | `a23f5bdc5bf8d4200e01903cf068921375f6e23a` | `e46503c9ec2c42c17d37a20fcc0d0cc3673c9ff2` |
+| `m3/collections/src/test/java/jdk/m3/collections/M3FirstVisibleAtomContract.java` | `ca0a522f153f13c0889f4e09729961f5b2d7d93b` | `5039fef1934d156e7da31850cd13491b777d4ddd` |
+| `m3/collections/qualification/filtered-oracle-current-20261030/RECEIVER_RECEIPT.json` | `ABSENT` on the #2227 target head | `5d321688ffb7c41faa9e0aa32a0bf87ab17f8840` |
 
 The target preimage SHA-1s were re-read on #2227 before constructing the
 additive merge. The Java and C17 runtime source files remain byte-identical

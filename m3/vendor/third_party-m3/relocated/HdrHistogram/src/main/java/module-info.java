@@ -5,9 +5,9 @@
 
 /**
  * Defines the {@code HdrHistogram} library,
- * relocated into M3JDK21 by LIB_INTAKE_TO_JMOD.
+ * relocated into M3JDK 21 by LIB_INTAKE_TO_JMOD.
  */
 module jdk.m3.hdrhistogram {
-    exports com.m3.lib.hdrhistogram;
-    exports com.m3.lib.hdrhistogram.packedarray;
+    exports jdk.m3.lib.hdrhistogram;
+    exports jdk.m3.lib.hdrhistogram.packedarray;
 }

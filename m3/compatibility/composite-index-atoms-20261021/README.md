@@ -12,7 +12,7 @@ entire String/collections/path/AST scope.
 Canonical source and postimage templates live in `hsoliwal/com.synexia`, under
 `synexia-openrewrite-recipes`. `M3CompositeIndexReplay` delegates source seals, resource
 validation and scan admission to the existing `M3GpuToolJoinManifest` (Git blob
-`38df5f97bbeec8a8a8cfc77091d56bda925c07f2`). The thin host checks every input before writes,
+`78d5fb68f13872164973a8918cc7886c5f548bca`). The thin host checks every input before writes,
 then applies each selected file serially. Drift, missing required files, unsafe paths,
 occupied additions and bad templates refuse. Exact postimages replay with zero changes.
 The host requires an exclusive candidate checkout; it is not a multi-file transaction.

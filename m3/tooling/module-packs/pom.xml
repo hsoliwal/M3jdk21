@@ -144,7 +144,7 @@
       </modules>
     </profile>
     <profile>
-      <id>m3-synexia-atom-pattern</id>
+      <id>m3-atom-pattern</id>
       <build>
         <plugins>
           <plugin>
@@ -154,13 +154,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
               </dependency>
             </dependencies>
             <executions>
               <execution>
-                <id>m3-synexia-atom-pattern-verify</id>
+                <id>m3-atom-pattern-verify</id>
                 <phase>verify</phase>
                 <goals>
                   <goal>dryRun</goal>
@@ -169,7 +169,7 @@
             </executions>
             <configuration>
               <activeRecipes>
-                <recipe>com.synexia.m3.EveryModuleAtomPatternApplication</recipe>
+                <recipe>jdk.internal.m3.EveryModuleAtomPatternApplication</recipe>
               </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
@@ -232,7 +232,7 @@
       </build>
     </profile>
     <profile>
-      <id>m3-synexia-atom-pattern-mastery</id>
+      <id>m3-atom-pattern-mastery</id>
       <build>
         <plugins>
           <plugin>
@@ -242,13 +242,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
               </dependency>
             </dependencies>
             <executions>
               <execution>
-                <id>m3-synexia-atom-pattern-mastery-verify</id>
+                <id>m3-atom-pattern-mastery-verify</id>
                 <phase>verify</phase>
                 <goals>
                   <goal>dryRun</goal>
@@ -257,7 +257,7 @@
             </executions>
             <configuration>
               <activeRecipes>
-                <recipe>com.synexia.m3.EveryModuleAtomPatternMastery</recipe>
+                <recipe>jdk.internal.m3.EveryModuleAtomPatternMastery</recipe>
               </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>

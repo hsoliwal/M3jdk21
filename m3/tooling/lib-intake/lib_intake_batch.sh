@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
 # LIB_INTAKE_TO_JMOD batch: runs lib_intake.sh for every INTAKE.tsv row (or the libs given), records BATCH.tsv (lib, module,
 # result, last stage), then lib_intake_combine.sh links every passing JMOD into ONE image with the JDK's jmods and validates it
-# (COMBINED_IMAGE.tsv): the M3JDK21 optional-module set as one runtime.
+# (COMBINED_IMAGE.tsv): the M3JDK 21 optional-module set as one runtime.
 # Usage (repository root): bash m3/tooling/lib-intake/lib_intake_batch.sh <work root> [lib ...]
 set -uo pipefail
 WR="$1"; shift; D=m3/tooling/lib-intake; BIN="$JAVA_HOME/bin"; SEP=":"; case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=";";; esac

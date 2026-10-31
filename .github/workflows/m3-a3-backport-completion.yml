@@ -36,9 +36,9 @@ jobs:
           set -euo pipefail
           mvn -B -ntp -f "$PWD/m3/vendor/third_party/pom.xml" -pl rewrite-java-21,rewrite-test,junit-jupiter-5.10.2,junit-platform-launcher-1.10.2 -am -DskipTests install
 
-      # Standalone (2026-10-31): the A3 recipe export is absorbed (m3/vendor/synexia/README.md).
-      # The reactor module tooling/synexia-jdk-a3-recipes builds and verifies it in the next step
-      # (-am); no other repository is fetched (m3/tooling/standalone/SYNEXIA_REFS.tsv).
+      # Standalone (2026-10-31): the A3 recipe export is absorbed (m3/vendor/m3/README.md).
+      # The reactor module tooling/m3jdk-a3-recipes builds and verifies it in the next step
+      # (-am); no other repository is fetched (m3/tooling/standalone/M3_REFS.tsv).
       - name: Verify A3 fan-in implementation
         shell: bash
         run: |

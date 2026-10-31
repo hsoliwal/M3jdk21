@@ -1,7 +1,7 @@
 {
   "tool": "exec_command",
   "request": {
-    "cmd": "python3 /workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/overlay/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/test_installer.py --repo /workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/baseline --plan /workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/plan.json --out /workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/installer",
+    "cmd": "python3 /workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/overlay/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/test_installer.py --repo /workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/baseline --plan /workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/overlay/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/plan.json --out /workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/installer",
     "max_output_tokens": 3000,
     "yield_time_ms": 1000
   },

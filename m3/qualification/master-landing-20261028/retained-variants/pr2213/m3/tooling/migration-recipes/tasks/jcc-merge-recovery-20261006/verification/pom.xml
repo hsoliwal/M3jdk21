@@ -41,8 +41,8 @@
       <resource>
         <directory>${project.basedir}/../../../src/main/resources</directory>
         <includes>
-          <include>com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-*/**</include>
-          <include>com/m3/rewrite/backport/jcc-merge-recovery-20261006/**</include>
+          <include>jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-*/**</include>
+          <include>jdk/m3/rewrite/backport/jcc-merge-recovery-20261006/**</include>
           <include>META-INF/rewrite/m3-jcc-merge-recovery.yml</include>
         </includes>
       </resource>
@@ -59,10 +59,10 @@
             <arg>-Xlint:all</arg>
           </compilerArgs>
           <includes>
-            <include>com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</include>
+            <include>jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</include>
           </includes>
           <testIncludes>
-            <testInclude>com/m3/rewrite/backport/JccMergeRecoveryTest.java</testInclude>
+            <testInclude>jdk/m3/rewrite/backport/JccMergeRecoveryTest.java</testInclude>
           </testIncludes>
         </configuration>
       </plugin>

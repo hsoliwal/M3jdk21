@@ -13,43 +13,43 @@ import tempfile
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parent
-RESOURCE = "src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020"
-SUITE = "com.synexia.rewrite.M3BackportAppliedOwnerCustodyRecipeTest"
+RESOURCE = "src/main/resources/jdk/internal/m3/rewrite/backport-applied-owner-custody-20261020"
+SUITE = "jdk.internal.m3.rewrite.M3BackportAppliedOwnerCustodyRecipeTest"
 METHODS = ["allSixtyFourPartialStatesBothOrdersReachExactFixedPoint","allSixtyFourInverseStatesBothOrdersRecoverExactBefore","eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"]
 SUITES = {SUITE: METHODS}
 CHANGE_PATHS = ["m3/tooling/backport-contract-current-owner/qualify.py","m3/tooling/backport-contract-current-owner/README.md","m3/tooling/backport-contract-current-owner/runtime/INPUTS.json","m3/tooling/backport-contract-current-owner/runtime/qualify.py","m3/tooling/backport-contract-current-owner/runtime/README.md",".github/workflows/m3-backport-contract-current-owner.yml"]
 KEEP_PATHS = ["m3/tooling/backport-contract-current-owner/sdk/pins.json","m3/tooling/backport-contract-current-owner/sdk/verify.py"]
 TARGET_PATHS = CHANGE_PATHS + KEEP_PATHS
 OWNER_BEFORE_GIT = {
-    "m3/tooling/backport-contract-current-owner/qualify.py": "8b2f0dc1b85eb0ba755eaccb2752c14a985b5005",
+    "m3/tooling/backport-contract-current-owner/qualify.py": "13acb84b735ec47304807108f4292509e4dc1b7f",
     "m3/tooling/backport-contract-current-owner/README.md": "7b5a280796392c828899a98c384f6f543b37d32f",
-    "m3/tooling/backport-contract-current-owner/runtime/INPUTS.json": "3711ff6d7e245a9cbe7fe1b4440c9238ec8c4eef",
+    "m3/tooling/backport-contract-current-owner/runtime/INPUTS.json": "5e3967517857e79249f3e1cc28a707c9f79b8996",
     "m3/tooling/backport-contract-current-owner/runtime/qualify.py": "4c64fbf724649bd9527e95b6456bcda842ec8086",
-    "m3/tooling/backport-contract-current-owner/runtime/README.md": "295c928af7fc5b74181e9ecfce173bab32796678",
+    "m3/tooling/backport-contract-current-owner/runtime/README.md": "0dfce38a83bfcc3abee720bf38d07e79d056abfb",
     ".github/workflows/m3-backport-contract-current-owner.yml": "5ab3cba8a55c95095e3db09b8c959938aeab91e1",
-    "m3/tooling/backport-contract-current-owner/sdk/pins.json": "9f2ddf29ca66b06f5ad8a1c661fdb7429daea642",
-    "m3/tooling/backport-contract-current-owner/sdk/verify.py": "c1b7cd322cbd715017704896fae1cd91749c8970"
+    "m3/tooling/backport-contract-current-owner/sdk/pins.json": "f205864458b8dfa91445a26643bec1ab7b2e1859",
+    "m3/tooling/backport-contract-current-owner/sdk/verify.py": "8ad669b3954a0958820f6962de2e55f6b1988bc2"
 }
 OWNER_AFTER_GIT = {
-    "m3/tooling/backport-contract-current-owner/qualify.py": "010f29a71026001260842f4acea013e870dd0479",
+    "m3/tooling/backport-contract-current-owner/qualify.py": "735f880afd81739cd21313302de947d49626d202",
     "m3/tooling/backport-contract-current-owner/README.md": "0be188a28a3575c7af4bb574e7e741a12101d083",
-    "m3/tooling/backport-contract-current-owner/runtime/INPUTS.json": "d5261c6bb8d2ec79dbeb84f71f488287487cd574",
-    "m3/tooling/backport-contract-current-owner/runtime/qualify.py": "e12d631b71fecfbcd2dbaff715e15935e6a4cec1",
-    "m3/tooling/backport-contract-current-owner/runtime/README.md": "ea1b43d4872012b2e771315088fc0afb05e40732",
+    "m3/tooling/backport-contract-current-owner/runtime/INPUTS.json": "8ac731367e254e1ed9b49813f9d109d3f06eb5e0",
+    "m3/tooling/backport-contract-current-owner/runtime/qualify.py": "a3f8492416876547eefed9c5a2d8bc5583ddd8ec",
+    "m3/tooling/backport-contract-current-owner/runtime/README.md": "67d987cbad0af4aa3de0ed17a56dc69b2a1afc7b",
     ".github/workflows/m3-backport-contract-current-owner.yml": "b992bdbfb5187f868fbf3388d01edb7d9e9d905c",
-    "m3/tooling/backport-contract-current-owner/sdk/pins.json": "9f2ddf29ca66b06f5ad8a1c661fdb7429daea642",
-    "m3/tooling/backport-contract-current-owner/sdk/verify.py": "c1b7cd322cbd715017704896fae1cd91749c8970"
+    "m3/tooling/backport-contract-current-owner/sdk/pins.json": "f205864458b8dfa91445a26643bec1ab7b2e1859",
+    "m3/tooling/backport-contract-current-owner/sdk/verify.py": "8ad669b3954a0958820f6962de2e55f6b1988bc2"
 }
 DIRECTIONS = ("forward", "inverse")
 RECEIVER_OUTPUTS: dict[str, str] = {}
 RECEIVER_CUSTODY: dict[str, str] = {}
 DESCRIPTOR = "src/main/resources/META-INF/rewrite/backport-applied-owner-custody-20261020.yml"
-TEST = "src/test/java/com/synexia/rewrite/M3BackportAppliedOwnerCustodyRecipeTest.java"
+TEST = "src/test/java/jdk/internal/m3/rewrite/M3BackportAppliedOwnerCustodyRecipeTest.java"
 REQUIRED_PATHS = sorted([
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
-    "pinned-engine/com/synexia/rewrite/M3BackportAppliedOwnerCustodyRecipe.java",
-    "pinned-engine/com/synexia/rewrite/M3BackportAppliedOwnerCustodyInverseRecipe.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3BackportAppliedOwnerCustodyRecipe.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3BackportAppliedOwnerCustodyInverseRecipe.java",
     "pom.xml", DESCRIPTOR, TEST, "verify.py",
     "FOSS_REUSE_DECISION.tsv", "THIRD_PARTY_NOTICES.md", "README.md",
     *[RESOURCE + "/" + direction + "/manifest.tsv" for direction in DIRECTIONS],
@@ -57,12 +57,12 @@ REQUIRED_PATHS = sorted([
       for direction in DIRECTIONS for stage in ("before", "out") for name in TARGET_PATHS],
 ])
 ORIGINAL_GIT = {
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java": "78d5fb68f13872164973a8918cc7886c5f548bca",
     "pom.xml": "d79867bcc09ad6329e12418e15907e54b8ab025f",
 }
-PROVIDERS = {"openrewriteAdapter": ORIGINAL_GIT["pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java"],
-             "manifestKernel": ORIGINAL_GIT["pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java"]}
+PROVIDERS = {"openrewriteAdapter": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java"],
+             "manifestKernel": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java"]}
 COMPILED_PROVIDERS = ("M3GpuToolJoinRecipe", "M3GpuToolJoinManifest",
                       "M3BackportAppliedOwnerCustodyRecipe", "M3BackportAppliedOwnerCustodyInverseRecipe")
 FALSE_GATES = ("targetJavaCompiled", "originalPrivateOwnerModuleQualified", "receiverRuntimeQualified",
@@ -226,7 +226,7 @@ def validate_marker(xml: bytes, ident: str) -> None:
 def self_test_reports() -> None:
     """Prove exact provider-derived names without stripping parameter signatures."""
     # Independent literal oracle matches the sealed Java methods and pinned provider.
-    expected_suites = {"com.synexia.rewrite.M3BackportAppliedOwnerCustodyRecipeTest":["allSixtyFourPartialStatesBothOrdersReachExactFixedPoint","allSixtyFourInverseStatesBothOrdersRecoverExactBefore","eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"]}
+    expected_suites = {"jdk.internal.m3.rewrite.M3BackportAppliedOwnerCustodyRecipeTest":["allSixtyFourPartialStatesBothOrdersReachExactFixedPoint","allSixtyFourInverseStatesBothOrdersRecoverExactBefore","eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"]}
     if SUITES != expected_suites:
         raise AssertionError("sealed SDK report inventory drift")
     refused = 0
@@ -358,7 +358,7 @@ def constructor_self_test() -> dict:
         require(git_blob(actual) == OWNER_BEFORE_GIT[name]
                 and actual == regular(resource / safe(name)).read_bytes(),
                 "ORIGINAL_SDK_KEEP_OWNER_CHANGED:" + name)
-    original_resource = original_sdk / "src/main/resources/com/synexia/rewrite/backport-contract-current-owner-20261019"
+    original_resource = original_sdk / "src/main/resources/jdk/internal/m3/rewrite/backport-contract-current-owner-20261019"
     current, frozen = {}, {}
     for name in driver["PINNED"]:
         location = original_sdk / "target/emitted" if name in driver["AFTER"] else source
@@ -540,7 +540,7 @@ def reports(pins: dict, pins_data: bytes) -> None:
         require(digest(raw) == expected_sha and raw == counterpart, "actual recipe output drift: " + name)
     compiled = {}
     for name in COMPILED_PROVIDERS:
-        relative = "target/classes/com/synexia/rewrite/" + name + ".class"
+        relative = "target/classes/jdk/internal/m3/rewrite/" + name + ".class"
         raw = regular(ROOT / relative).read_bytes()
         require(len(raw) > 8 and raw[:4] == bytes.fromhex("cafebabe")
                 and int.from_bytes(raw[6:8], "big") == 65, "actual Java21 SDK provider class required")

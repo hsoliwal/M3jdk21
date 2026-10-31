@@ -13,26 +13,26 @@ sys.path.insert(0, str(HERE.parent / "current-source-successors-20261026"))
 import verify_source_v3 as v3
 
 APPROVED = "b123804aff3ac6930e420cfb82b5ce07040049fe"
-SRC = "m3/collections/interop/src/test/java/com/m3/collections/interop/"
+SRC = "m3/collections/interop/src/test/java/jdk/m3/collections/interop/"
 RECEIPT = ("m3/collections/interop/qualification/"
            "current-source-successors-v4-20261031/ADDITIVE_TEST_SOURCES_V4.tsv")
 V3_SCRIPT = ("m3/collections/interop/qualification/"
              "current-source-successors-20261026/verify_source_v3.py")
 V3_SCRIPT_BLOB = "9fdc61dcf42e190add3458f2f55dd29203f4a540"
-V3_RECEIPT_BLOB = "48226ca99a17b81deb1848a8e80b15f166819e81"
+V3_RECEIPT_BLOB = "cacfab995ec8746c5d5db65cc5a3df12f03dc41a"
 TEST = re.compile(r"@Test\b\s+void\s+([A-Za-z_$][A-Za-z0-9_$]*)\s*\(")
 
 EXPECTED = (
     (SRC + "M3Flat3MapProviderTest.java",
-     "508f91d8852c460c27cd4b81004496c58af08f5bab14432228fff2ebe33970ba",
-     "802c3479c69e22d92ede9bab4213af16e128eafc",
+     "c9498ec115a48a9c23c884c62f1011af6bb439b2826a12d454a38f0768b17a47",
+     "254d85294724b1cdcaa26a2c526da0fa17d623be",
      "nullMappingsAndThreeToFourGrowthPreserveReturnIdentity,"
      "collidingKeysAcrossWordBoundariesSurviveDeletionAndReuse,"
      "seededEightMethodDifferentialMatchesProviderAndJdk,"
      "equalValuesAndObservedHashCallbacksDoNotChangeSharedResults"),
     (SRC + "M3FrozenLongSetProviderTest.java",
-     "80e0b77589a102a71ba81cbf7e4556a453601a388129f7525385300e1dca9a7a",
-     "95a0cadb931759e68fe893f1451c92583ff3b426",
+     "d089236cb463d8b016c01b9c26216b918e7ec497442d6f01850c50216150291e",
+     "4d88d4e3912ab9a5528f8c81a836d501bcf88511",
      "differentialAgainstGuavaImmutableSortedSet,"
      "differentialAgainstEclipseImmutableLongSet"),
 )
@@ -61,7 +61,7 @@ def dedicated_methods(path: str, raw: bytes, declared: str) -> set[str]:
     if (found != declared.split(",") or len(set(found)) != len(found)
             or len(found) != len(re.findall(r"@Test\b", text))):
         raise ValueError("dedicated JUnit method drift")
-    return {"com.m3.collections.interop." + Path(path).stem + "#" + name
+    return {"jdk.m3.collections.interop." + Path(path).stem + "#" + name
             for name in found}
 
 

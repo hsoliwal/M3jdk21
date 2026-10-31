@@ -10,7 +10,7 @@ not qualify a later M3JDK21 revision. No tests were run during this recovery.
 
 The existing `M3CurrentMasterConvergence20261019` recipe has a
 [60-target manifest][manifest], SHA-256
-`5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819`.
+`ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6`.
 All 21 changed outputs were emitted and their unchanged replays passed.
 The [source intake][inputs] includes all 268 main Java files, 254 baseline test
 Java files and seven original POM resources; the [composed candidate][emission]
@@ -36,7 +36,7 @@ current admission contract.
 
 **RowTree is a current-source guard reversal.** The qualified baseline already
 contains the endpoint guard. The selected body reverses it to SHA-256
-`96067f630bcf3288c69410151759fa738fd5968daccf68cd1aed2aeade38fc7b`.
+`3e9ff2db9ac2918dac993bb44493269ea4c4309d156724583de549a666ae19bb`.
 The retained [resource experiment][resource] found endpoint gains but material
 regressions in control workloads across three independent alternating JVM pairs.
 The [current combined receipt][combined] therefore records

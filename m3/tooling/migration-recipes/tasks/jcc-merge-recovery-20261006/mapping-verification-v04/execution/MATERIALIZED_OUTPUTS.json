@@ -3,10 +3,10 @@
   "files": [
     {
       "bytes": 355729,
-      "git_blob": "99894f94301810820d049c2a1a791e24f0387628",
+      "git_blob": "6bce7c06e322a1d43526e775a006856ac4a394c3",
       "origin": "actual OpenRewrite Result afterimage",
       "path": "m3/docs/name-mapping.json",
-      "sha256": "cf84929db27261fceb704e2b9b3ebfca212dcea6a8f61acff099104118342645"
+      "sha256": "23113e94eba0ac7b745fd8dee95d27fa80fc12100534a32f447c3124879c5e39"
     },
     {
       "bytes": 18828,

@@ -8,11 +8,11 @@ generic wrapper library, or duplicate collection/recipe compiler.
 
 ## Original source and algorithm category
 
-Receiving class: `m3/collections/src/main/java/com/m3/collections/M3LongSortedSnapshot.java`.
+Receiving class: `m3/collections/src/main/java/jdk/m3/collections/M3LongSortedSnapshot.java`.
 Exact preimage Git blob: `138b09eee908f5b952658fbbe835c83f908e56fb`.
-Exact generated postimage Git blob: `25ed2be76be528acb7ee0e7353b72823a8f622a6`.
+Exact generated postimage Git blob: `50740b2486da9c0a358ed23ee4fc62737ea36fc4`.
 Preimage SHA-256: `d075b50975cb8656eb6a6fec3ed95c8f9393d3f76e424c6e92b7991b3c11bb3c`.
-Postimage SHA-256: `d49a6dedff6fdddbca9a13f33e627ffb7e7a17d57abe5fed97715d4a0c841f85`.
+Postimage SHA-256: `dc4a90345b91ce850ec99566cd227eb9197fb0a1abf5cd2d236c0a569e64732c`.
 
 Problem categories: BOUNDED_SORTED_ARRAY_VALIDATION, INDEX_MASK_COMPACTION,
 IMMUTABLE_RANK_SELECT. An input may contain unrelated/unsorted values before or

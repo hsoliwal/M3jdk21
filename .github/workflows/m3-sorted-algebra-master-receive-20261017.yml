@@ -5,8 +5,8 @@ name: M3 primitive sorted-set algebra master receipt
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3LongSortedAlgebra*.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongCompositeViews.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongSortedAlgebra*.java'
       - 'm3/collections/JDK_FAMILY_MAP.tsv'
       - 'm3/collections/qualification/*sorted*algebra*'
       - '.github/workflows/m3-sorted-algebra-master-receive-20261017.yml'
@@ -43,20 +43,20 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p m3/collections/target/sorted-algebra-classes
-          find m3/collections/src/main/java/com/m3/collections -name '*.java' -type f | LC_ALL=C sort > m3/collections/target/sorted-algebra-sources.txt
+          find m3/collections/src/main/java/jdk/m3/collections -name '*.java' -type f | LC_ALL=C sort > m3/collections/target/sorted-algebra-sources.txt
           javac --release 21 -proc:none -Xlint:all,-module -Werror \
             -d m3/collections/target/sorted-algebra-classes \
             @m3/collections/target/sorted-algebra-sources.txt
           javac --release 21 -proc:none -Xlint:all,-module -Werror \
             -cp m3/collections/target/sorted-algebra-classes \
             -d m3/collections/target/sorted-algebra-classes \
-            m3/collections/src/test/java/com/m3/collections/M3LongSortedAlgebraSelfTest.java
+            m3/collections/src/test/java/jdk/m3/collections/M3LongSortedAlgebraSelfTest.java
       - name: Execute independent JDK TreeSet and live-wrapper differential oracle
         shell: bash
         run: |
           java -ea -Xmx96m -Xss512k -Xcheck:jni \
             -cp m3/collections/target/sorted-algebra-classes \
-            com.m3.collections.M3LongSortedAlgebraSelfTest
+            jdk.m3.collections.M3LongSortedAlgebraSelfTest
 
   focused-junit:
     runs-on: ubuntu-latest

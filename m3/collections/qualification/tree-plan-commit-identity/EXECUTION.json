@@ -5,7 +5,7 @@
     "junit_passed": 13
   },
   "canonical_evidence_commit": "6c0b31b126c050c1c5b48e7ec51630ef8adef3df",
-  "canonical_evidence_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/viewport-frame-tree-receiving-20261027",
+  "canonical_evidence_path": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/viewport-frame-tree-receiving-20261027",
   "canonical_evidence_url": "https://github.com/hsoliwal/com.synexia/tree/6c0b31b126c050c1c5b48e7ec51630ef8adef3df/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/viewport-frame-tree-receiving-20261027/assembled",
   "canonical_repository": "hsoliwal/com.synexia",
   "canonical_source_commit": "7e57e961d4ae02d1aa99199362475c10c7230b82",
@@ -33,12 +33,12 @@
     "runtime_sha256": "cb13ffd5cb2023cefc678a63067559b03574e6fee0e5033fab978603d624c5cc",
     "skipped": [
       {
-        "class": "com.m3.collections.M3FilteredSplitsMaskSpansTest",
+        "class": "jdk.m3.collections.M3FilteredSplitsMaskSpansTest",
         "reason": "all-native qualification is an explicit, isolated lane",
         "test": "allNativeBackendsAreRequiredByTheFullLane"
       },
       {
-        "class": "com.m3.collections.M3FilteredSplitsMaskSpansTest",
+        "class": "jdk.m3.collections.M3FilteredSplitsMaskSpansTest",
         "reason": "native proof requires the explicit checked-JNI runner",
         "test": "maskSpanCheckedJniOracle"
       }
@@ -68,9 +68,9 @@
       "sha256": "5dc65fd77f8ca43e16cb386fe9a01d684cf13bb12de76dcec1b0f3d0674d97dd"
     },
     {
-      "git_blob": "5ec57a4effca64b541114aa9375fc78d5c415bdb",
+      "git_blob": "2ba7e8c149a503850019a4435cd2637f47483ae1",
       "path": "m3/collections/qualification/tree-plan-commit-identity/RECEIVER_RECEIPT.json",
-      "sha256": "f1d550e3192c1c31132ffa0222daae8dc7e5f5a6b5e289ceaa80c2b3b829e92e"
+      "sha256": "81492283a96d9a67139d1661bb2b168f3cf25375a7d5f1e63261f4259850772b"
     },
     {
       "git_blob": "b5a5ad87fa2c2a5789fbc46295d4d40f835b2f78",
@@ -78,24 +78,24 @@
       "sha256": "1074c5923c623d4087ff5099120cd42525c335d2dac9b83b0041d663898c2953"
     },
     {
-      "git_blob": "e9c95bcc426c7267dc4f72bb7a2158c46c219196",
+      "git_blob": "55bbe67a09c96980c58b12187e9625cb2143c389",
       "path": "m3/collections/qualification/tree-plan-commit-identity/verify_receipt.py",
-      "sha256": "8030b1d76df86319a81bc6252f6d13d947e729143efb0e6709042c7e2a493ffd"
+      "sha256": "d8e26a6fca59342281c5eaabfcf81ce13d378b6d72ad021183ec928150c350fc"
     },
     {
-      "git_blob": "ca5bc74d0ae6dcd42f3a319b4c33bef76a4d4d4a",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3TreeCoverageTest.java",
-      "sha256": "68581fef4f8b6a6c240c66decbc57bbc097c188ce04cf90bf56cba52170a4b13"
+      "git_blob": "4e946c6d354c23018b788b88cbd88a7f751f95e5",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3TreeCoverageTest.java",
+      "sha256": "a97d1a7b02c0d5eeed2a12f902a1e676ffa7269e52fd31d7511bb13fab355919"
     },
     {
-      "git_blob": "1bf770fee2929533a7ac9478b7c44e8dd3841ad3",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3TreeNativeLifecycleOracle.java",
-      "sha256": "b33d545658ba594703813dd26e83b1e94b403271ad80e1a750245542962c6871"
+      "git_blob": "74a75d9cf98ad8f2d339ca1c5d3fd94a079d8105",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3TreeNativeLifecycleOracle.java",
+      "sha256": "1a10eeda5949f575eda63e5bb4e85c63bc66e80a698ea9382e8d33e8a20340ee"
     },
     {
-      "git_blob": "64751e4e64732604d9ff7dc81e489999a5d233f2",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3TreeResidencyTest.java",
-      "sha256": "979d8c1a817979e063b8501049d9d5f921221258384ed1d18f46aacc00d5bbbf"
+      "git_blob": "65d8a366032c362a24d92b67571fed01b6434cce",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3TreeResidencyTest.java",
+      "sha256": "b3de59d36bf2b691abcb58c3df3e25e0e598cd2b73a808f265f3587a3ae7a2cc"
     }
   ],
   "retirements": [

@@ -94,7 +94,7 @@ def main():
     old = AUDIT / "current-map-validation-v03"
     require(not (HERE / "fixture").exists(), "fixture already exists")
     old_packet = (old / "PACKET.json").read_bytes()
-    require(sha(old_packet) == "6e2ab166b48662dbf216c9791597d7779163236a0dc2e4ce76c2963bb022882c", "V03 frozen packet drift")
+    require(sha(old_packet) == "29aeb75ced3b31737e02760b0880c69b1b490758c54445d1c3847803fe5e8ea3", "V03 frozen packet drift")
     old_sealed = {row["path"]: row for row in json.loads(old_packet)["files"]}
     captures = [ROOT / "publication" / ("M3_LATEST_" + name + ".json") for name in ["COMMIT", "ROOT", "M3"]]
     old_captures = [old / "root-evidence" / ("M3_FINAL_CURRENT_" + name + ".json") for name in ["COMMIT", "ROOT", "M3"]]
@@ -176,7 +176,7 @@ def main():
     old_requirements = json.loads((old / "REQUIREMENTS.json").read_bytes())
     old_required_paths = {row["path"] for row in old_requirements["required_target_recipe_paths"]}
     new_paths = {"src/java.base/share/classes/java/util/regex/Matcher.java",
-                 "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv"}
+                 "m3/tooling/mr/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv"}
     require(set(requirements) == old_required_paths | new_paths and len(requirements) == 32, "canonical artifact scope changed unexpectedly")
     require(tested == {row["path"]: row["tests"] for row in old_requirements["tested_receipts"]}, "tested receipt scope changed")
     closure = json.loads((old / "RECEIPT_CLOSURE.json").read_bytes())

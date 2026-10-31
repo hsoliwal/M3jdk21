@@ -16,11 +16,11 @@ The new standalone `M3FilteredDequeStreamContract` and JUnit `M3FilteredDequeStr
 Target master: `7f657d6ca05760af7bee7d4d2d9e14ae91ddd942`.
 Canonical Synexia develop at preparation: `408373f4101fdca2fb3625bec8af1234e5fd3e26`.
 
-- `m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java` 9257ce0c9c95e3afef20624631ba048aa3d60ef53a1189cd2bbabc07da2bba2f -> f8140cd6cf0cd7c05791be1d858381bd750d865e377ca9201e444bd771fd0238
-- `m3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java` b6aec5a921f9eaba6feb14461bf6dca7e67cee26bb84fee3ee3143f873df5121 -> 4a41e6e4135f2a9c6ce5fc216ed249d9e43b75909c73f076637da0bbe0946be4
-- `m3/collections/src/test/java/com/m3/collections/M3FilteredDequeStreamContract.java` ABSENT -> c258c1d1a32190ca0c9f8d751bd03cc4919a5bb23b42d1c3bdd8db28f9fdddbb
-- `m3/collections/src/test/java/com/m3/collections/M3FilteredDequeStreamTest.java` ABSENT -> 4733eef17ec65be39137340e81ccffa6db5a856bcf691ab6292e71bade679727
-- `m3/collections/algorithm-catalog/filtered-deque-stream-demand-20261021.tsv` ABSENT -> c0dea43359f91cf7686acde1bc36c43dbb7a6a5d5419bc60ff6212e0829df86a
+- `m3/collections/src/main/java/jdk/m3/collections/M3SlotSpliterators.java` f42b36dcf5555941f97dbf732ccd210a8e2152862622e626d445576a2c93e326 -> f8140cd6cf0cd7c05791be1d858381bd750d865e377ca9201e444bd771fd0238
+- `m3/collections/src/main/java/jdk/m3/collections/M3FilteredDeques.java` 66f4165c7099fd6452bb6faa8bf67a1af8d6edeedd6963bb5ba8773c507e6fe5 -> 4a41e6e4135f2a9c6ce5fc216ed249d9e43b75909c73f076637da0bbe0946be4
+- `m3/collections/src/test/java/jdk/m3/collections/M3FilteredDequeStreamContract.java` ABSENT -> c258c1d1a32190ca0c9f8d751bd03cc4919a5bb23b42d1c3bdd8db28f9fdddbb
+- `m3/collections/src/test/java/jdk/m3/collections/M3FilteredDequeStreamTest.java` ABSENT -> 4733eef17ec65be39137340e81ccffa6db5a856bcf691ab6292e71bade679727
+- `m3/collections/algorithm-catalog/filtered-deque-stream-demand-20261021.tsv` ABSENT -> a27fe712c6c6c00d2e3e3c4d0892c6cb59bfe816b1bdb0a83fe08c0cf917430c
 
 Canonical source recipe: `hsoliwal/com.synexia`, existing `synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017` Maven/OpenRewrite crate, dataset `filtered-deque-lazy-20261021`. The product candidate is a byte-identical sealed postimage, **not** evidence that OpenRewrite executed it.
 

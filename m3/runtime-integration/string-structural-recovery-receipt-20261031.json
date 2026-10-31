@@ -18,8 +18,8 @@
       "path": "m3/runtime-integration/check-m3string-invariants.py",
       "before_sha256": "16d78a045be8fea93dfd665568fe747db35e3dbc43264192b4446ccaf97ed688",
       "before_git_blob": "75b10f957f8004bb780a9befa4f1910a372524e5",
-      "after_sha256": "d4582743bd7808d2d2fb18664371118c155b2ff7f75f783de1043fc93032a234",
-      "after_git_blob": "3ca0dbcbd1abfa81d86763be0b598e5eab44c588"
+      "after_sha256": "7c5304aa001eacb53dc47b6911c7536b295269a298cd5351e76d1be7a6d6728d",
+      "after_git_blob": "bc60472ba646850f43064b915e2a5c8c8343db85"
     },
     {
       "path": "m3/runtime-integration/test_string_layout.py",

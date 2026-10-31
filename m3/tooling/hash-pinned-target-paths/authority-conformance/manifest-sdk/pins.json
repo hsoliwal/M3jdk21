@@ -3,22 +3,22 @@
   "admissionCommit": "24bdaa2c54d7ff2da53f3edfcf068ddd4ffa70f7",
   "sourceOnly": true,
   "providers": {
-    "openrewriteAdapter": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-    "manifestKernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
-    "authenticStrictProvider": "4a38e39d0755462d40c2b22548b87abde938ea0b"
+    "openrewriteAdapter": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+    "manifestKernel": "78d5fb68f13872164973a8918cc7886c5f548bca",
+    "authenticStrictProvider": "73779dee8c80a0913b88fff17637ed3f44b33ea3"
   },
   "files": [
     {
       "path": "FOSS_REUSE_DECISION.tsv",
-      "gitBlob": "423e3f18ccf1a3225905ee21f2332752b2be1444",
+      "gitBlob": "d707e8ffe5158e3d31459417dc242a9e0012b235",
       "bytes": 798,
-      "sha256": "dd0e8e797cf2e7cd6353fd5f49a73c3a6a45533fa8075f4b6a083e73812496df"
+      "sha256": "194c3d438ad1412615e6314f9f0e0087f4b24fa3f0e2f6083babd0d2c6db19da"
     },
     {
       "path": "README.md",
-      "gitBlob": "78e1acac891bd3f5705f7be9448286f4d823d028",
+      "gitBlob": "966e22328a70fcc4d8d5bb1fa671223eb6094ff7",
       "bytes": 2650,
-      "sha256": "f77c4bb75025af883508c4c7ed05fc88d3bf33e79ac682df05d618d232e4ff62"
+      "sha256": "36eafc4fe29b098815a7929808c1e591399e582fa29177856e45ff744cae3c33"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -28,33 +28,33 @@
     },
     {
       "path": "pinned-engine/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "gitBlob": "4a38e39d0755462d40c2b22548b87abde938ea0b",
+      "gitBlob": "73779dee8c80a0913b88fff17637ed3f44b33ea3",
       "bytes": 12355,
-      "sha256": "8133bcf7e9f750c714cdd42784bdf30b60f67dd957b2831cd54cb01c9a2cfc3a"
+      "sha256": "2102795eec6a55c6e7564ada0fa439cdf0d98e4c1fc395b2d5d52e1f88890283"
     },
     {
       "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
-      "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "gitBlob": "78d5fb68f13872164973a8918cc7886c5f548bca",
       "bytes": 10964,
-      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e"
     },
     {
       "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
-      "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "gitBlob": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
       "bytes": 5187,
-      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
+      "sha256": "300a520ec9d273922d1edbdf5442e5faf825c47e8e3df7febf4baa2f39945401"
     },
     {
       "path": "pinned-engine/com/synexia/rewrite/M3ReleaseJepManifestOrderInverseRecipe.java",
-      "gitBlob": "a74f5f5b4613f993416f546984d97d3d8ba9fab6",
+      "gitBlob": "545de33134475628c894e306748b6c3791d5f579",
       "bytes": 724,
-      "sha256": "fddbd1f2b88dd616b2583fb50a3347648e0df74739b0ee928905a38f87ae354f"
+      "sha256": "31b52ad1af995dfe57c380201f6f08ffe3a7a9d2e922b0c8feead0585e1b82cf"
     },
     {
       "path": "pinned-engine/com/synexia/rewrite/M3ReleaseJepManifestOrderRecipe.java",
-      "gitBlob": "f52ca8c5d158ad9d7850e7d5d10e1b76cf6ffe7f",
+      "gitBlob": "4679c646fe19c51f435b974447e5f67ab15a2150",
       "bytes": 707,
-      "sha256": "7957d18bd3cb1415c198bb19067c48a68b15555b2682a8853baa130a2d7fa32e"
+      "sha256": "0d6fcc637ddef1afc04a5f6a5b2731d07b4e13c6f873a5f71d7515c661ffa604"
     },
     {
       "path": "pom.xml",
@@ -64,27 +64,27 @@
     },
     {
       "path": "src/main/resources/META-INF/rewrite/release-jep-manifest-order-20261020-inverse.yml",
-      "gitBlob": "7df6b334a4159458ff4b3a3ac747bdc256987e6c",
+      "gitBlob": "1d214d79876e78bf77d61252f4aec64dfffd5547",
       "bytes": 477,
-      "sha256": "3a67c2d9ecf76adcefc6f5d45d57a390cdc8b9567e32cf504ba5f4cebc3a710f"
+      "sha256": "9f189d2aa0e2f1cf1f0c74a63c8eebc7a346321d6a67cc8ba1ac743d1a29628e"
     },
     {
       "path": "src/main/resources/META-INF/rewrite/release-jep-manifest-order-20261020.yml",
-      "gitBlob": "c1abcef077ff235972f4f41b77a75345d91788d1",
+      "gitBlob": "3443becc7bf6142c537f6bc5adbdf9fa5fcc196b",
       "bytes": 460,
-      "sha256": "35bacbafd8feda55871925e8753a8fb5636386dcf3bdbb908e4f66bdaa3ac708"
+      "sha256": "fe8d13d0185a922ec243c3019da04d63278a21a8c663c1fa5a2248e65e89c267"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/release-jep-manifest-order-20261020/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
-      "gitBlob": "5eaf5599990711619e8f9669687c7313ea6ffb0e",
+      "path": "src/main/resources/com/synexia/rewrite/release-jep-manifest-order-20261020/before/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
+      "gitBlob": "3ade13f02591c33ee106db4b9295c7f663d35eab",
       "bytes": 1966,
-      "sha256": "cc775d76fdcf53442c69ccd83558d498a53a6f0e78893bee851660612370f789"
+      "sha256": "fca288fddb97ea486df2f21d6601848dad6df016aae0bd53c291d16e8181efd3"
     },
     {
       "path": "src/main/resources/com/synexia/rewrite/release-jep-manifest-order-20261020/inverse/manifest.tsv",
-      "gitBlob": "4086511adab4951ba4404422b62d9a69314ee481",
+      "gitBlob": "06d121b9588b95683d00238d8fe4d24f7876ec10",
       "bytes": 426,
-      "sha256": "b14e152448b19ecb25ad3563f5d467de2dd10644d0d25f7c5a32652268ba242e"
+      "sha256": "1febdb3ec08af0e53b32dd509124f52bd3f354c4bcfe9b15acc9bff503fb2762"
     },
     {
       "path": "src/main/resources/com/synexia/rewrite/release-jep-manifest-order-20261020/inverse/manifest.tsv.license",
@@ -93,16 +93,16 @@
       "sha256": "f49f06fb5a11f81e2bdeb7e758b0d601c35852663daf67f8ebf803adc2f6eb1c"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/release-jep-manifest-order-20261020/inverse/out/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
-      "gitBlob": "5eaf5599990711619e8f9669687c7313ea6ffb0e",
+      "path": "src/main/resources/com/synexia/rewrite/release-jep-manifest-order-20261020/inverse/out/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
+      "gitBlob": "3ade13f02591c33ee106db4b9295c7f663d35eab",
       "bytes": 1966,
-      "sha256": "cc775d76fdcf53442c69ccd83558d498a53a6f0e78893bee851660612370f789"
+      "sha256": "fca288fddb97ea486df2f21d6601848dad6df016aae0bd53c291d16e8181efd3"
     },
     {
       "path": "src/main/resources/com/synexia/rewrite/release-jep-manifest-order-20261020/manifest.tsv",
-      "gitBlob": "668e6dd96fe2a7279b308ad93d9d13062cc5aadb",
+      "gitBlob": "74eb3a1af01a07099c9140436f824fb6878193db",
       "bytes": 426,
-      "sha256": "3ff1405843a6647c26b036dcfcc5b865820347cd089055821945413a1f74b322"
+      "sha256": "5e77250c63b6d7948cc5223040856e3fce32345c64217283e2b5b1d8d58383c2"
     },
     {
       "path": "src/main/resources/com/synexia/rewrite/release-jep-manifest-order-20261020/manifest.tsv.license",
@@ -111,16 +111,16 @@
       "sha256": "f49f06fb5a11f81e2bdeb7e758b0d601c35852663daf67f8ebf803adc2f6eb1c"
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/release-jep-manifest-order-20261020/out/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
-      "gitBlob": "bbac4e6c96ecb437d8599f2e73f3724d3dda7e26",
+      "path": "src/main/resources/com/synexia/rewrite/release-jep-manifest-order-20261020/out/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
+      "gitBlob": "e6619802dd58542168f500b625cee6dc1485d018",
       "bytes": 1966,
-      "sha256": "ce113825c8e34a7379f65da06d9e203a84666d85051acc2fe1fec672d8374aa9"
+      "sha256": "bfec24cb63b353c5dbbc72ef14f7820f8ce315d244bff3a714a21232f6bff803"
     },
     {
       "path": "src/test/java/com/synexia/rewrite/M3ReleaseJepManifestOrderRecipeTest.java",
-      "gitBlob": "c78c491b3ea5d711f2049e5efb01b6d069ea0669",
+      "gitBlob": "9f7b4f710305fb3d28cf135d0a27540b75f6611c",
       "bytes": 19734,
-      "sha256": "0fd2d6307eda02288c255a2573bf0afc696cffb3b1ce107537a654a2181cb023"
+      "sha256": "ba88d39e7162fa1e743d81515ddb8b14feb9e905df105877f7972df3937dd4b5"
     },
     {
       "path": "src/test/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-original-order/00-JEP_CATALOGUE.tsv.txt",
@@ -148,15 +148,15 @@
     },
     {
       "path": "src/test/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-original-order/10-JEP_RESIDUE_QUEUE.tsv.txt",
-      "gitBlob": "b80be09eef3cdc2474ac69a8013f821087a6e410",
+      "gitBlob": "ec6f9d3df12b09b70560feda0133f49610c61910",
       "bytes": 7580,
-      "sha256": "f1b09adeab65d6a20673e7c9d5ef94d601cf4dc1371e762f408c9fcae97d9c0c"
+      "sha256": "88072731bdd083821149164a9f749312a6909c77d0bbeddae535548cccdd50c7"
     },
     {
       "path": "src/test/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-original-order/manifest.tsv",
-      "gitBlob": "5eaf5599990711619e8f9669687c7313ea6ffb0e",
+      "gitBlob": "3ade13f02591c33ee106db4b9295c7f663d35eab",
       "bytes": 1966,
-      "sha256": "cc775d76fdcf53442c69ccd83558d498a53a6f0e78893bee851660612370f789"
+      "sha256": "fca288fddb97ea486df2f21d6601848dad6df016aae0bd53c291d16e8181efd3"
     },
     {
       "path": "src/test/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/00-JEP_CATALOGUE.tsv.txt",
@@ -220,9 +220,9 @@
     },
     {
       "path": "src/test/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/10-JEP_RESIDUE_QUEUE.tsv.txt",
-      "gitBlob": "b80be09eef3cdc2474ac69a8013f821087a6e410",
+      "gitBlob": "ec6f9d3df12b09b70560feda0133f49610c61910",
       "bytes": 7580,
-      "sha256": "f1b09adeab65d6a20673e7c9d5ef94d601cf4dc1371e762f408c9fcae97d9c0c"
+      "sha256": "88072731bdd083821149164a9f749312a6909c77d0bbeddae535548cccdd50c7"
     },
     {
       "path": "src/test/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/before-00-JEP_CATALOGUE.tsv.txt",
@@ -268,15 +268,15 @@
     },
     {
       "path": "src/test/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/before-10-JEP_RESIDUE_QUEUE.tsv.txt",
-      "gitBlob": "724aecf6723dc9b872aef4d46413b832206a9d2d",
+      "gitBlob": "0c60e009c384cece3ee51be9650253629d73798e",
       "bytes": 6956,
-      "sha256": "273ebf9f5fab37c4677fdc6be6a2f537f0b6db290a029130a6327c7c21645f91"
+      "sha256": "8b95bbe17da62e4e8694dae50e3c56792a1a468e38bae78d73444329b9218dc9"
     },
     {
       "path": "src/test/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
-      "gitBlob": "bbac4e6c96ecb437d8599f2e73f3724d3dda7e26",
+      "gitBlob": "e6619802dd58542168f500b625cee6dc1485d018",
       "bytes": 1966,
-      "sha256": "ce113825c8e34a7379f65da06d9e203a84666d85051acc2fe1fec672d8374aa9"
+      "sha256": "bfec24cb63b353c5dbbc72ef14f7820f8ce315d244bff3a714a21232f6bff803"
     },
     {
       "path": "src/test/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-row8-order/00-JEP_CATALOGUE.tsv.txt",
@@ -316,45 +316,45 @@
     },
     {
       "path": "src/test/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-row8-order/10-JEP_RESIDUE_QUEUE.tsv.txt",
-      "gitBlob": "b80be09eef3cdc2474ac69a8013f821087a6e410",
+      "gitBlob": "ec6f9d3df12b09b70560feda0133f49610c61910",
       "bytes": 7580,
-      "sha256": "f1b09adeab65d6a20673e7c9d5ef94d601cf4dc1371e762f408c9fcae97d9c0c"
+      "sha256": "88072731bdd083821149164a9f749312a6909c77d0bbeddae535548cccdd50c7"
     },
     {
       "path": "src/test/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-row8-order/manifest.tsv",
-      "gitBlob": "21c3b23ca798df1828b9753c6c45e580ec1aceb4",
+      "gitBlob": "995c5eeaa2c2937a2ecd253bdd5bac9063af090c",
       "bytes": 1966,
-      "sha256": "e3f120bc7d6d3c3c803f1b607236a6be013a9ff324839d89d1069bb7bc9feae6"
+      "sha256": "d999bd7b6472bf879ef22bfb36a34f67c67db3cdf115fb284167aee560241dd2"
     },
     {
       "path": "src/test/resources/frozen/M3Jdk21HashPinnedTextSnapshotRecipeTest.java.txt",
-      "gitBlob": "1223036479ba04515e21b6a6087d832e6f7f9394",
+      "gitBlob": "3ba1c6924668d068c47f7608aa63dfa082b8c96a",
       "bytes": 3810,
-      "sha256": "94a0c919b54bdf90ca736602a3222589a20f354ad3df0f4457db234fd65483d7"
+      "sha256": "e2dc42cf574c20f1a2b31b32ec2ed766176358d682fbd09cea27c2fdb98b7b90"
     },
     {
       "path": "src/test/resources/frozen/M3ReleaseJepAuthorityRepairRecipe.java.txt",
-      "gitBlob": "8e40addc386c60a9430f06ebb05345a2be8a6598",
+      "gitBlob": "dfb78083265f32c6e9ebc57f4302f3ef6d6ce274",
       "bytes": 1133,
-      "sha256": "48d25d62c74f52b919e65ed287116df8f1a1541807ce3b22b0473712dfaaeec9"
+      "sha256": "ae7cf0f97e80fb0a5f5f1d69d08c8507f611542235faf1cfcd7ccef6217cece2"
     },
     {
       "path": "src/test/resources/frozen/M3ReleaseJepAuthorityRepairRecipeTest.java.txt",
-      "gitBlob": "dfdd797de55426f5e93d64c324ccccb0967c04de",
+      "gitBlob": "9f4f4288c1a0e19b0b6cd3e48c1442263a64a17a",
       "bytes": 8082,
-      "sha256": "7c2dff8bcad431d8c993c1533cf3a04ac7c935c10152503ba835034d3684ddc5"
+      "sha256": "57f474a72cf38131731b1fbf849656802ed40937c7f26467c2833d0e7e27cd72"
     },
     {
       "path": "support/owned_state_relation_verify.py",
-      "gitBlob": "0c2507d78817184e9df3c367390f2ac02bc870cc",
+      "gitBlob": "56c7d75fdf56b736cfb57d59e626afdac820531c",
       "bytes": 24947,
-      "sha256": "3239415c925da1c83c4d868f1d96893d345f388e183037fb8ee7d85df4da3136"
+      "sha256": "2d658433e2695d5ffa0bd3e440dc3bddbc41fe187ee9f01135e29eb46c333c86"
     },
     {
       "path": "verify.py",
-      "gitBlob": "772f7e11b3a897d9d761c9104652c0fe4ed1c096",
+      "gitBlob": "90b8eb8ebca8c9b98d016a9429c910739cad1b22",
       "bytes": 20582,
-      "sha256": "686678279eede4a7e3ba57af93d4d59ff0da2ad93743ccb24046a538b3c42ba3"
+      "sha256": "ca64043cc4e8f55e9dce35a6dffed1f0851cea9fe9a9923d014a1bed4bef4e02"
     }
   ]
 }

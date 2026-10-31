@@ -72,9 +72,9 @@
       <arg>-Werror</arg>
      </compilerArgs>
      <includes>
-      <include>com/synexia/rewrite/*.java</include>
-      <include>com/m3/collections/M3IndexMaskCompactor.java</include>
-      <include>com/m3/collections/M3LongIndexProjection.java</include>
+      <include>jdk/internal/m3/rewrite/*.java</include>
+      <include>jdk/m3/collections/M3IndexMaskCompactor.java</include>
+      <include>jdk/m3/collections/M3LongIndexProjection.java</include>
      </includes>
      <testIncludes>
       <testInclude>**/NativeIndexRangeSdkTest.java</testInclude>

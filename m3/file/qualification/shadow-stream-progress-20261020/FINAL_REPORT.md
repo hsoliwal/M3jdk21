@@ -6,8 +6,8 @@ Status: **DRAFT / PARTIAL**. One integrated M3JDK21 SDK product; Synexia owns au
 
 ## Original owner and exact source
 - Canonical Synexia Maven/OpenRewrite PR: [hsoliwal/com.synexia#12598](https://github.com/hsoliwal/com.synexia/pull/12598), recipe `com.synexia.m3.M3NativeShadowStreams20261020` (existing `M3HashPinnedJavaSnapshotRecipe`).
-- Baseline M3JDK21 master at `065e3626aac2de62d2f531aec3bed2fca533c9f9`; original `M3File.java` Git blob `c182a3b1526f9fd0ca20c631d97df3048076defd` / SHA-256 `22b6c0e7f2a136b2d43e765ec4a0669c2bc564a7d81f0b31f4f0a13f184e36e4`.
-- Generated M3File postimage SHA-256 `93864fe41040396ffa40775ed7489f8e97ae6ee058538294e0626d046b12915c`; progress `e7258d79c6dcfb65c2598ae1480f5d7078a31fde921c4842ea8ab4209754362d`; shadow `bcbbb5567fb8afd2a8f32124096d6af97b68a3da2e67e0809343de52a812e3a5`; oracle `c38c59dcfc5137cf6685ba25f6e126e971251b66898a976dd1a3f6950c5d1352`.
+- Baseline M3JDK21 master at `065e3626aac2de62d2f531aec3bed2fca533c9f9`; original `M3File.java` Git blob `fcce3a02835de29fa4ac9f83083511aad17ec049` / SHA-256 `47a5844aa69c0571cdd7b1b7fd2e53a9f187e12837b0fd639779fc98d983e097`.
+- Generated M3File postimage SHA-256 `93864fe41040396ffa40775ed7489f8e97ae6ee058538294e0626d046b12915c`; progress `d96068e0d00efad66cc71d75791d9e07109f34d0a7322e244b08f1a45cfb3344`; shadow `3abee429e11ede5505e8fa91366a0ddf4e27495450a01d88235a2caf7c13efae`; oracle `5c69b7f9bd8b87639de574158510b50b391b686b08cfef8cb5e2fc69a3e929e7`.
 
 ## Implemented behavioral atoms
 - `M3StreamProgress`: functional `worked(long)` plus default `cancelled`, `checkCancelled` and bounded `subProgress`. Parent cancellation and quotas propagate.
@@ -23,10 +23,10 @@ OpenJDK 21.0.12.1 on Linux. Actual named module `com.m3.file`, source and test f
 javac --release 21 -proc:none -Xlint:all,-module -Werror \
   -d build/m3-file-shadows \
   m3/file/src/main/java/module-info.java \
-  m3/file/src/main/java/com/m3/file/M3File.java \
-  m3/file/src/main/java/com/m3/file/M3StreamProgress.java \
-  m3/file/src/main/java/com/m3/file/M3ShadowStreams.java \
-  m3/file/src/test/java/com/m3/file/M3ShadowStreamsContract.java
+  m3/file/src/main/java/jdk/m3/file/M3File.java \
+  m3/file/src/main/java/jdk/m3/file/M3StreamProgress.java \
+  m3/file/src/main/java/jdk/m3/file/M3ShadowStreams.java \
+  m3/file/src/test/java/jdk/m3/file/M3ShadowStreamsContract.java
 java --module-path build/m3-file-shadows -m com.m3.file/com.m3.file.M3ShadowStreamsContract
 java -Xint --module-path build/m3-file-shadows -m com.m3.file/com.m3.file.M3ShadowStreamsContract
 ```

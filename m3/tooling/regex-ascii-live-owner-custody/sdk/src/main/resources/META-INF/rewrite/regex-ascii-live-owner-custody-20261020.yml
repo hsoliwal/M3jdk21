@@ -2,15 +2,15 @@
 # SPDX-License-Identifier: Apache-2.0
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.RegexAsciiLiveOwnerCustody
+name: jdk.internal.m3.RegexAsciiLiveOwnerCustody
 displayName: Prepare lexical live-owner custody
 description: Exact lexical proof-host and workflow refinement; actual applied-head qualification remains separate.
 recipeList:
-  - com.synexia.rewrite.M3RegexAsciiLiveOwnerCustodyRecipe
+  - jdk.internal.m3.rewrite.M3RegexAsciiLiveOwnerCustodyRecipe
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.RegexAsciiLiveOwnerCustodyInverse
+name: jdk.internal.m3.RegexAsciiLiveOwnerCustodyInverse
 displayName: Recover exact prior lexical helper inputs
 description: Exact proof-input rollback data only; no product source is edited by the job.
 recipeList:
-  - com.synexia.rewrite.M3RegexAsciiLiveOwnerCustodyInverseRecipe
+  - jdk.internal.m3.rewrite.M3RegexAsciiLiveOwnerCustodyInverseRecipe

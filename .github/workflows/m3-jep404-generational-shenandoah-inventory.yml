@@ -212,8 +212,8 @@ jobs:
           generated = Path(os.environ["RUNNER_TEMP"]) / "jep404" / "file-atoms"
           expected = set()
           for root in (
-              generated / "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned",
-              generated / "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text",
+              generated / "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned",
+              generated / "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text",
           ):
               if not root.exists():
                   continue

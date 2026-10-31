@@ -44,7 +44,7 @@
    <resource>
     <directory>${repo.root}/m3/tooling/migration-recipes/src/main/resources</directory>
     <includes>
-     <include>com/synexia/rewrite/hash-pinned-java/m3-cpu-int8-receiver-20261017/**</include>
+     <include>jdk/internal/m3/rewrite/hash-pinned-java/m3-cpu-int8-receiver-20261017/**</include>
      <include>META-INF/rewrite/m3-cpu-int8-receiver-20261017.yml</include>
     </includes>
    </resource>
@@ -61,7 +61,7 @@
       <arg>-Werror</arg>
      </compilerArgs>
      <includes>
-      <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+      <include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
      </includes>
     </configuration>
    </plugin>

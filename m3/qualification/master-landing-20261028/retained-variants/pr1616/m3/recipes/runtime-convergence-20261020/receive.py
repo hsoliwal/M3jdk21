@@ -58,7 +58,7 @@ def main():
     owner = args.recipe_owner or (crate / "sdk-owner" if (crate / "sdk-owner").is_dir() else crate / "../..")
     owner = owner.resolve()
     candidate = crate / "target/candidate"
-    report = crate / "target/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+    report = crate / "target/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
     suite = ET.parse(report).getroot()
     if int(suite.attrib.get("tests", "0")) < 5 or any(
             int(suite.attrib.get(key, "0")) for key in ("failures", "errors", "skipped")):
@@ -69,7 +69,7 @@ def main():
         if directory.exists():
             expected_paths.update("crate/" + p.relative_to(crate).as_posix()
                                   for p in directory.rglob("*") if p.is_file())
-    expected_paths.update("owner/src/main/java/com/synexia/rewrite/" + name for name in
+    expected_paths.update("owner/src/main/java/jdk/internal/m3/rewrite/" + name for name in
                          ("M3EditScope.java", "M3HashPinnedJavaSnapshotRecipe.java",
                           "M3HashPinnedTextSnapshotRecipe.java", "M3ScopeInference.java"))
     if set(bound) != expected_paths:
@@ -83,7 +83,7 @@ def main():
             raise ValueError("recipe changed after SDK qualification: " + path)
 
     manifests = {}
-    for manifest in (crate / "src/main/resources/com/synexia/rewrite").glob("hash-pinned-*/*/manifest.tsv"):
+    for manifest in (crate / "src/main/resources/jdk/internal/m3/rewrite").glob("hash-pinned-*/*/manifest.tsv"):
         for path, before, after, resource in rows(manifest, 4):
             if path in manifests:
                 raise ValueError("duplicate Java/text target: " + path)

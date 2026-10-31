@@ -2,8 +2,8 @@ name: M3 Filtered List Restored History Java JNI
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredLists.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredLists*'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3FilteredLists*'
       - 'm3/collections/qualification/filtered-list-history-restore-20261017/**'
       - '.github/workflows/m3-filtered-list-history-restore.yml'
   workflow_dispatch:
@@ -26,21 +26,21 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/classes"
           javac --release 21 -proc:none -Xlint:all -Werror -h "$RUNNER_TEMP" -d "$RUNNER_TEMP/classes" \
-            m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java \
-            m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
-            m3/collections/src/test/java/com/m3/collections/M3FilteredListsContract.java \
-            m3/collections/src/test/java/com/m3/collections/M3FilteredListsEdges.java \
-            m3/collections/src/test/java/com/m3/collections/M3FilteredListsWorkProof.java \
-            m3/collections/src/test/java/com/m3/collections/M3FilteredListsDeepCompositionProof.java \
-            m3/collections/src/test/java/com/m3/collections/M3FilteredListsReadonlyDepthProof.java \
-            m3/collections/src/test/java/com/m3/collections/M3FilteredListsMaskBridgeProof.java
+            m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsContract.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsEdges.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsWorkProof.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsDeepCompositionProof.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsReadonlyDepthProof.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3FilteredListsMaskBridgeProof.java
       - name: Actual selected M3 JDK List original and restored contract probes
         run: |
           for kind in M3FilteredListsContract M3FilteredListsEdges M3FilteredListsWorkProof M3FilteredListsDeepCompositionProof M3FilteredListsReadonlyDepthProof M3FilteredListsMaskBridgeProof; do
-            java -Xss256k -cp "$RUNNER_TEMP/classes" com.m3.collections."$kind"
+            java -Xss256k -cp "$RUNNER_TEMP/classes" jdk.m3.collections."$kind"
           done
-          java -Xint -Xss256k -cp "$RUNNER_TEMP/classes" com.m3.collections.M3FilteredListsReadonlyDepthProof
-          java -Xint -Xss256k -cp "$RUNNER_TEMP/classes" com.m3.collections.M3FilteredListsDeepCompositionProof
+          java -Xint -Xss256k -cp "$RUNNER_TEMP/classes" jdk.m3.collections.M3FilteredListsReadonlyDepthProof
+          java -Xint -Xss256k -cp "$RUNNER_TEMP/classes" jdk.m3.collections.M3FilteredListsDeepCompositionProof
       - name: Build actual existing native C17 mask compactor with UBSan
         run: |
           JDK_HOME="$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")"
@@ -52,6 +52,6 @@ jobs:
       - name: Checked real Java JNI selector bridge and ABI
         run: |
           java -Xcheck:jni -Xss256k -Djava.library.path="$RUNNER_TEMP" \
-            -cp "$RUNNER_TEMP/classes" com.m3.collections.M3FilteredListsMaskBridgeProof --native
+            -cp "$RUNNER_TEMP/classes" jdk.m3.collections.M3FilteredListsMaskBridgeProof --native
           java -Xcheck:jni -Xint -Xss256k -Djava.library.path="$RUNNER_TEMP" \
-            -cp "$RUNNER_TEMP/classes" com.m3.collections.M3FilteredListsMaskBridgeProof --native
+            -cp "$RUNNER_TEMP/classes" jdk.m3.collections.M3FilteredListsMaskBridgeProof --native

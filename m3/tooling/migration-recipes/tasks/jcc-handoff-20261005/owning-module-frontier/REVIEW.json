@@ -41,8 +41,8 @@
   },
   "exact_bodies_acquired": 32,
   "unacquired_bodies": 573,
-  "pom_sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888",
-  "pom_git_blob_sha1": "86f223907bbb053f4792e6bf771c3c0882e1751b",
+  "pom_sha256": "3eb73bbf38c0c591b8f714f6e9923eaa25a35b5ffc7f0512b8ec7fd3602b5531",
+  "pom_git_blob_sha1": "e41cf1ce137961fc4f9eef9092acedd06425d33e",
   "declared_pinned_plugins": [
     {
       "coordinate": "org.apache.maven.plugins:maven-compiler-plugin:3.13.0",
@@ -116,8 +116,8 @@
     },
     "element": "BUNDLE",
     "includes": [
-      "com/m3/rewrite/scope/*",
-      "com/m3/rewrite/atom/*"
+      "jdk/m3/rewrite/scope/*",
+      "jdk/m3/rewrite/atom/*"
     ],
     "phases": [
       "prepare-agent",
@@ -142,5 +142,5 @@
   "candidate_fixture_receipts_satisfy_full_module_gate": false,
   "source_export_admitted": false,
   "jdk_acceptance": false,
-  "frontier_sha256": "ec0984ec8e9aba80170b396540026a61442e14840da3000ba0e3cb744b356b2e"
+  "frontier_sha256": "5d2d214c13e11060a8f02dfa601fff24d0a9622b19b43c182a38f4dcf867315f"
 }

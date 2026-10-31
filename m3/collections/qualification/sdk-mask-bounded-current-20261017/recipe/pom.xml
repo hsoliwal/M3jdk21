@@ -32,7 +32,7 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>com.synexia.m3.M3MaskBoundedCurrentRecipe</mainClass>
+              <mainClass>jdk.internal.m3.M3MaskBoundedCurrentRecipe</mainClass>
               <arguments>
                 <argument>--selftest</argument>
               </arguments>

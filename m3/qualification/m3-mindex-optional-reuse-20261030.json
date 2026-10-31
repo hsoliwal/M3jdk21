@@ -2,7 +2,7 @@
   "schema": "M3_MINDEX_OPTIONAL_REUSE_PASSIVE_RECEIPT_V1",
   "canonical_repository": "https://github.com/hsoliwal/com.synexia",
   "canonical_revision": "00bdbea3ee2fe0a7fc8a991f39e5dad2a0e8d604",
-  "canonical_path_root": "synexia-openrewrite-recipes/recipe-crates/m3-doop-reuse-20261030/enhancement/",
+  "canonical_path_root": "m3-openrewrite-recipes/recipe-crates/m3-doop-reuse-20261030/enhancement/",
   "reference_rule": "All evidence/recipe paths are relative to canonical_path_root at canonical_revision; target paths are repository-relative.",
   "target_repository": "hsoliwal/M3jdk21",
   "receipt_role": "PASSIVE_COMPONENT_EVIDENCE_ONLY",
@@ -11,12 +11,12 @@
   "sdk_execution": {"qualification": {"path": "evidence/qualification-summary.json", "sha256": "0b097ab9d3b0cad5790b8ec177a254a54e376ed3e0a956922186e2176e2e327d"}, "maven_log": {"path": "evidence/registration-sdk.log", "sha256": "3e9351684e3b903e12f7e3b035aa146e0591167577f8617368727a1754e6dd61"}, "scope": "Actual Java/Text SDK emissions, fixed points and missing/drift/occupied/duplicate refusals; receipt metadata execution is separate."},
   "target_preimage_revision": "95d6da5145203ee0e1abac8caa0e3287bc4da33d",
   "manifests": [
-    {"path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-mindex-field-optional-20261030/manifest.tsv", "sha256": "8e8f761b891803a23e0391efc47fbee07c32a7b74d6d36dfc7f675ccce0d02a1", "recipe": "com.synexia.m3.M3FieldOptionalReuse20261030"},
-    {"path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-mindex-method-optional-20261030/manifest.tsv", "sha256": "d016694ff7283acc030c72091e31cf9efdfb008f0019b53516ea1b108fcb1738", "recipe": "com.synexia.m3.M3MethodOptionalReuse20261030"},
-    {"path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-mindex-constructor-optional-20261030/manifest.tsv", "sha256": "6a349ef6a61b3b844372a64f3ea00f6bb2dcb6be94c893b07b0daba6b13c9ddd", "recipe": "com.synexia.m3.M3ConstructorOptionalReuse20261030"},
-    {"path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-mindex-recordcomponent-optional-20261030/manifest.tsv", "sha256": "4b40ef2d71614f758f3252a2c8d87e002516c9d4a0dd99e99c37c0f3a75c9508", "recipe": "com.synexia.m3.M3RecordComponentOptionalReuse20261030"},
-    {"path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-mindex-optional-oracle-20261030/manifest.tsv", "sha256": "4da12f8cbeb3c6cf5187de7bb9e85b5f18087b85900256c86d7f9e54eb5087bd", "recipe": "com.synexia.m3.M3ReflectiveOptionalOracle20261030"},
-    {"path": "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-mindex-optional-naming-20261030/manifest.tsv", "sha256": "81fe8e923472daa4177a903669ce19dcf9a8df530ad2214451557c376da6df1e", "engine": "M3HashPinnedTextSnapshotRecipe", "crate": "m3-mindex-optional-naming-20261030"}
+    {"path": "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-mindex-field-optional-20261030/manifest.tsv", "sha256": "8e8f761b891803a23e0391efc47fbee07c32a7b74d6d36dfc7f675ccce0d02a1", "recipe": "jdk.internal.m3.M3FieldOptionalReuse20261030"},
+    {"path": "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-mindex-method-optional-20261030/manifest.tsv", "sha256": "d016694ff7283acc030c72091e31cf9efdfb008f0019b53516ea1b108fcb1738", "recipe": "jdk.internal.m3.M3MethodOptionalReuse20261030"},
+    {"path": "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-mindex-constructor-optional-20261030/manifest.tsv", "sha256": "6a349ef6a61b3b844372a64f3ea00f6bb2dcb6be94c893b07b0daba6b13c9ddd", "recipe": "jdk.internal.m3.M3ConstructorOptionalReuse20261030"},
+    {"path": "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-mindex-recordcomponent-optional-20261030/manifest.tsv", "sha256": "4b40ef2d71614f758f3252a2c8d87e002516c9d4a0dd99e99c37c0f3a75c9508", "recipe": "jdk.internal.m3.M3RecordComponentOptionalReuse20261030"},
+    {"path": "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-mindex-optional-oracle-20261030/manifest.tsv", "sha256": "4da12f8cbeb3c6cf5187de7bb9e85b5f18087b85900256c86d7f9e54eb5087bd", "recipe": "jdk.internal.m3.M3ReflectiveOptionalOracle20261030"},
+    {"path": "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-mindex-optional-naming-20261030/manifest.tsv", "sha256": "81fe8e923472daa4177a903669ce19dcf9a8df530ad2214451557c376da6df1e", "engine": "M3HashPinnedTextSnapshotRecipe", "crate": "m3-mindex-optional-naming-20261030"}
   ],
   "source_transitions": [
     {"path": "src/java.base/share/classes/jdk/internal/mindex/M3Field.java", "before": {"sha256": "a197eb18922617e1b0992d474f2acdb3c8753eb1c0b16a014a93a5460fe66481", "git_blob_sha1": "fad031da70ce813f52e5fc06479542a224bcd81a"}, "after": {"sha256": "2751a887889e4ce360f0e85403ec06edf43185857e70d1a168daf5cb67eaa3be", "git_blob_sha1": "33f48e3452cdb5e677ab6f3c3f949153f56b5c82"}},

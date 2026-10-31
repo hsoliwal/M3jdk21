@@ -6,12 +6,12 @@ on:
     paths:
       - 'm3/ports/precompute/**'
       - 'm3/docs/M3JDK21_PORTING_INVARIANT.md'
-      - 'm3/docs/M3JDK_SYNEXIA_PORTING_INVARIANT.md'
-      - 'm3/docs/m3jdk-synexia-porting-policy.tsv'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3RegexStringPrecomputeSupersetRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3RegexStringPrecomputeSupersetRecipeTest.java'
+      - 'm3/docs/M3JDK_M3_PORTING_INVARIANT.md'
+      - 'm3/docs/m3jdk-m3-porting-policy.tsv'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3RegexStringPrecomputeSupersetRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3RegexStringPrecomputeSupersetRecipeTest.java'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-regex-string-precompute-v2.yml'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-regex-string-precompute-v2/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-regex-string-precompute-v2/**'
       - '.github/workflows/m3-regex-string-precompute-v2.yml'
   workflow_dispatch:
 

@@ -1,7 +1,7 @@
 {
   "schema": "M3_OPENREWRITE_SOURCE_BUILT_PARSER_V1",
   "status": "FAIL",
-  "sdk_inputs_sha256": "35b2cb9677d4756e7388543c5b9fcd599d8804c98bf1b1152f6f2dcb59ecd176",
+  "sdk_inputs_sha256": "bf929ecb45922bc5f1d9c802776f15d8247278f7d31722872b10ba85938b92e7",
   "sdk_results_sha256": "688b9a06ea0eaf325439aa6b6b27ec0e81f5f604fa558808dd5de18b0f33bea6",
   "coordinate": "com.synexia.sourcebuilt.openrewrite:rewrite-java-21:8.17.1-m3-javadoc-1",
   "original_donor": "openrewrite/rewrite@3bd8271be963c025ce0856072d0f09360e3184cd",

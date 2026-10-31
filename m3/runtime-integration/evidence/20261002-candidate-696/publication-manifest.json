@@ -5,7 +5,7 @@
   "files": {
     "m3/runtime-integration/evidence/20261002-candidate-696/.gitignore": "de57d71f424b1b2891ada391f780eb59694c9f60506723bfce25878fd49fc37e",
     "m3/runtime-integration/evidence/20261002-candidate-696/README.md": "1eca6f54a030ed6b5ef19ddde0cc19496a1660598b48719e7b7f9ab0d61721a7",
-    "m3/runtime-integration/evidence/20261002-candidate-696/acceptance.json": "5ed5f2d7d07b220ef00b3a1a306b7ac8e8c199d7a7691b449a8dc9cfeb5af142",
+    "m3/runtime-integration/evidence/20261002-candidate-696/acceptance.json": "fb899f4a88cb14dfea3db22ecea5137bfeb3ccf976c3f7a79138bf3851f70e3e",
     "m3/runtime-integration/evidence/20261002-candidate-696/allocation-summary.json": "ba3adef321a0c74e7ead40e4b56f8194c2ad6e576abf3c61d1cfcf6f5f7ba31e",
     "m3/runtime-integration/evidence/20261002-candidate-696/allocation.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
     "m3/runtime-integration/evidence/20261002-candidate-696/allocation.log": "d39ac9e8a57cd9907b7f3fd2908d3ca715971dceba2f8bb4b48879365bffe480",
@@ -45,7 +45,7 @@
     "m3/runtime-integration/evidence/20261002-candidate-696/protocol.log": "9906ee72dd491151f81d811bd705d965583ca471da0031cfee6f4529c12d0f84",
     "m3/runtime-integration/evidence/20261002-candidate-696/review-status.json": "244bf4297fffbe5eeffc2768d371735aed01b3efd19e24a062805e3e7658ab9b",
     "m3/runtime-integration/evidence/20261002-candidate-696/source-commit.txt": "84123235e55584572c9042064ea13528b8fe621aea9e3e6c2bb662f5fa84c0aa",
-    "m3/runtime-integration/evidence/20261002-candidate-696/source-equivalence-mergeability.json": "ef86095401b6f660eb31ab716e05a89bd9e37f59fc249d340641126ccad68c58",
+    "m3/runtime-integration/evidence/20261002-candidate-696/source-equivalence-mergeability.json": "1d054d5034f1b423489c7fac406df1821bc93ffc2714b7b7c3627110470ed540",
     "m3/runtime-integration/evidence/20261002-candidate-696/source-tree.txt": "8cc2e8bd2945e4d4d7e3bbf7b52a26df9b38547a155eaf0c312aca253783f3a6",
     "m3/runtime-integration/evidence/20261002-candidate-696/startup-dynamic-gates.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
     "m3/runtime-integration/evidence/20261002-candidate-696/startup-dynamic-gates.log": "fd48660dc2a236d37f301b946aebec7a89bbe1424734a2d3f90cb31c35f17462",

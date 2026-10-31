@@ -36,7 +36,7 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>com.synexia.m3.M3StateMaskArraysRecipe</mainClass>
+              <mainClass>jdk.internal.m3.M3StateMaskArraysRecipe</mainClass>
               <arguments>
                 <argument>--selftest</argument>
               </arguments>

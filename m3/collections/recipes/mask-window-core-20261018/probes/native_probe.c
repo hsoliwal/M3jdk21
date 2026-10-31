@@ -96,9 +96,9 @@ static void reset(int pattern, int mutation, int injected) {
 }
 static jarray execute(int long_mode, int mask) {
     JNIEnv env=&table;
-    if (long_mode) return (jarray)Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
+    if (long_mode) return (jarray)Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
         &env,NULL,(jlongArray)(void *)&a_long,7,(jbyteArray)(void *)&a_flags,11,1024,mask);
-    return (jarray)Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
+    return (jarray)Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(
         &env,NULL,(jintArray)(void *)&a_int,7,(jbyteArray)(void *)&a_flags,11,1024,mask);
 }
 int main(void) {

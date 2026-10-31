@@ -12,9 +12,9 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
-import com.m3.collections.spring.M3MultiValueMap;
-import com.m3.collections.spring.M3MultiValueMapAdapter;
-import com.m3.collections.spring.M3SingleValueMapView;
+import jdk.m3.collections.spring.M3MultiValueMap;
+import jdk.m3.collections.spring.M3MultiValueMapAdapter;
+import jdk.m3.collections.spring.M3SingleValueMapView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;

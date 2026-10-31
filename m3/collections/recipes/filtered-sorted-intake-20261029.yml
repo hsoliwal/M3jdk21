@@ -12,7 +12,7 @@ tags:
   - inventory-first
 recipeList:
   - org.openrewrite.java.search.FindTypes:
-      fullyQualifiedTypeName: com.m3.collections.M3FilteredViews
+      fullyQualifiedTypeName: jdk.m3.collections.M3FilteredViews
       checkAssignability: false
   - org.openrewrite.java.search.FindTypes:
       fullyQualifiedTypeName: java.util.NavigableSet

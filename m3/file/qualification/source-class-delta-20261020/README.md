@@ -27,9 +27,9 @@ mkdir -p build/m3file-delta-classes
 javac --release 21 -Xlint:all,-module -Werror \
   -d build/m3file-delta-classes \
   m3/file/src/main/java/module-info.java \
-  m3/file/src/main/java/com/m3/file/M3File.java \
-  m3/file/src/main/java/com/m3/file/M3FileDeltaLedger.java \
-  m3/file/src/test/java/com/m3/file/M3FileDeltaLedgerContract.java
+  m3/file/src/main/java/jdk/m3/file/M3File.java \
+  m3/file/src/main/java/jdk/m3/file/M3FileDeltaLedger.java \
+  m3/file/src/test/java/jdk/m3/file/M3FileDeltaLedgerContract.java
 java --module-path build/m3file-delta-classes \
   -m com.m3.file/com.m3.file.M3FileDeltaLedgerContract
 ```

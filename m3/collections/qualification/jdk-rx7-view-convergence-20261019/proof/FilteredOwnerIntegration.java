@@ -1,6 +1,6 @@
 /* Copyright (c) 2026, Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
-import com.m3.collections.M3FilteredNavigableSet;
-import com.m3.collections.M3FilteredViews;
+import jdk.m3.collections.M3FilteredNavigableSet;
+import jdk.m3.collections.M3FilteredViews;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;

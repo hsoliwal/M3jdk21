@@ -5,7 +5,7 @@
 
 /*
  * @test
- * @summary M3JDK21 StringReader transfers immutable String ranges to trusted encoders without a char[] intermediary
+ * @summary M3JDK 21 StringReader transfers immutable String ranges to trusted encoders without a char[] intermediary
  * @run main M3StringReaderTransferTest
  */
 

@@ -8,7 +8,7 @@ The parent admission is ab8633cc645487bc69bcd6919f328a0e1b5e40a9.
 
 The driver adapts the existing exact-custody, inherited-process-group and receipt pattern
 from state-relation-current-c11-20261019/runtime/qualify.py
-(edf9f20eaf672f661d1f469a2d036f0c28da7805, Apache-2.0).
+(b3fb888d4ea4d7a6b13bc13fef0fdcdba0bcb0f2, Apache-2.0).
 It introduces no production policy, scheduler, parser or validator. The receiver's
 eight original owners total 59,781 bytes. Five production/data inputs remain unchanged;
 three expected postimages must be the actual fresh Maven SDK outputs.
@@ -101,7 +101,7 @@ prerequisite; the runtime cannot manufacture its receipt.
 
 The applied-custody refinement was admitted before authorship in
 679bece51397656563133a4f7e00063b086c0ee7. It reuses the already qualified host
-8b2f0dc1b85eb0ba755eaccb2752c14a985b5005 and runtime
+13acb84b735ec47304807108f4292509e4dc1b7f and runtime
 4c64fbf724649bd9527e95b6456bcda842ec8086. Original SDK pins, providers, POM,
 verifier and resources remain unchanged. Authored templates require fresh actual
 Maven recipe qualification and an applied-head filesystem run before promotion.

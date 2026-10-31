@@ -7,9 +7,9 @@ Allocation sample=2 rows=65500 operations=100 nativeFilterBytes=26206400 repeate
 M3NativeIndexRangeSelfTest mode=legacy checks=638432 seededCases=2048
 Serial file pass 1 m3/collections/src/main/native/collections/m3_index_mask_compactor.c
 M3NativeIndexRangeSelfTest mode=range checks=638447 seededCases=2048
-Serial file pass 2 m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
+Serial file pass 2 m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java
 M3NativeIndexRangeSelfTest mode=range checks=638454 seededCases=2048
-Serial file pass 3 m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java
+Serial file pass 3 m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java
 M3NativeIndexRangeSelfTest mode=range checks=638454 seededCases=2048
 M3NativeIndexRangeSelfTest mode=range checks=638454 seededCases=2048
 M3NativeIndexRangeSelfTest mode=range checks=638454 seededCases=2048

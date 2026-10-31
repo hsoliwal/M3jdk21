@@ -3,9 +3,9 @@
   "sourceRepository": "hsoliwal/com.synexia",
   "sourceRevision": "2e19d0caac5d6162eaa063f4f741d0c4b45a99ff",
   "sourcePullRequest": "https://github.com/hsoliwal/com.synexia/pull/9704",
-  "recipe": "com.synexia.rewrite.M3JdkReceivingOrderRecipe",
-  "recipeCrate": "synexia-openrewrite-recipes/recipes/m3jdk-receiving-order",
-  "proofPath": "synexia-openrewrite-recipes/recipes/m3jdk-receiving-order/verification/proof.json",
+  "recipe": "jdk.internal.m3.rewrite.M3JdkReceivingOrderRecipe",
+  "recipeCrate": "m3-openrewrite-recipes/recipes/m3jdk-receiving-order",
+  "proofPath": "m3-openrewrite-recipes/recipes/m3jdk-receiving-order/verification/proof.json",
   "proofSha256": "c9b443b2c7169367d386477b57f651358bab22d8fd053a1f6fbbff080aa6c506",
   "targetBaseline": "a694bbd2b3c382a40d401a813ae547293c9d1074",
   "execution": "SDK_EXECUTION",
@@ -14,7 +14,7 @@
       "stage": "target-01",
       "repository": "target",
       "path": "m3/docs/name-mapping.json",
-      "beforeSha256": "bf18229cd5f8a0b36559f3becca71fdeec86080da50187fc6a6e27cb84794203",
+      "beforeSha256": "5f57c35325374407cefa840f8071a8f739b931854b6c420d6d09deb6a443b2d5",
       "afterSha256": "75df53d5b22e58cf094ca4ecac28cb7c88753e1e4044934970e60f1ac15a04ff"
     },
     {
@@ -34,21 +34,21 @@
     {
       "stage": "target-04",
       "repository": "target",
-      "path": "m3/compatibility/check_synexia_full_family.py",
+      "path": "m3/compatibility/check_m3_full_family.py",
       "beforeSha256": "bea7492e21312b2951b33d005a38263ffc9d15370f493fd23a17f75cf1f049bc",
-      "afterSha256": "be1b983596b6df7043cbd187617c144d52ecb07b2c555364895bdff198fdb170"
+      "afterSha256": "e5c293d6bfc4310272897bc27e34c5e4328e43805954d787e508641f524d8405"
     },
     {
       "stage": "target-05",
       "repository": "target",
-      "path": "m3/compatibility/test_synexia_full_family.py",
+      "path": "m3/compatibility/test_m3_full_family.py",
       "beforeSha256": "674fb86e571a36f554a2435f1a5f1eb0217652345b5b20b13a64b1cdcf9d9274",
-      "afterSha256": "1d6f4571cc284fd4e83a8e3e220f22ca15f4d2e0926d82bfbbd9025385afed42"
+      "afterSha256": "b7dab99816d67e791e1f86a71a5061a5d9ba48b93accf1b8185a89e9a3c2360a"
     },
     {
       "stage": "target-06",
       "repository": "target",
-      "path": ".github/workflows/m3-synexia-public-target-policy.yml",
+      "path": ".github/workflows/m3-public-target-policy.yml",
       "beforeSha256": "73248049710811e3ee7b75f34a7bc6f73e3d5d141e8ed34a8d2ac141c7387717",
       "afterSha256": "824f2d59ee578b5ec5d3aa8fd06b1049098e93729d9c0e48029a9d085cf07963"
     }

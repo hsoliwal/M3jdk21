@@ -9,7 +9,7 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--owner',type=Path,required=True);p.add_argument('--out',type=Path,required=True)
     x=p.parse_args();owner=x.owner.resolve(strict=True);out=x.out.absolute()
     if out.exists() or out.is_relative_to(owner) or not out.parent.is_dir():raise ValueError('new external evidence directory required')
-    root=owner/'src/com.m3.tools.cpu/com/m3/tools/cpu'
+    root=owner/'src/jdk.m3.tools.cpu/jdk/m3/tools/cpu'
     sources=[root/(n+'.java') for n in CLASSES]+[owner/'fixtures'/(n+'.java') for n in TESTS]
     for f in sources:
         if not f.is_file() or f.is_symlink():raise ValueError('missing source '+str(f))

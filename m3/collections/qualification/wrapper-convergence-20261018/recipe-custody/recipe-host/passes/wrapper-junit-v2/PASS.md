@@ -2,7 +2,7 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # Verification pass wrapper-junit-v2
 
-This new packet admits only the absent verification owner `m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java` against integration revision `f29b0afe7ad253cc0562bc8dfdd48fc1acec710e`. The exact postimage is `fe071ef7e801a9bb1d57501512f0dd606f0c08652e100e6132dc7c4e4a8f6327`. The original `wrapper-junit` packet remains unchanged and unqualified for this integration scope.
+This new packet admits only the absent verification owner `m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceTest.java` against integration revision `f29b0afe7ad253cc0562bc8dfdd48fc1acec710e`. The exact postimage is `37373c5fe47db51de219365a602737b278feb9b2ca34bc888dd0c0a1661e4e89`. The original `wrapper-junit` packet remains unchanged and unqualified for this integration scope.
 
 The parent contract already admits frozen JUnit entrypoints under `src/test`. This successor changes the existing test invocation to `run("readonly-policy")` and normalizes its copyright line, as documented in `../../../candidates-v2/CANDIDATE_NOTES.md` and the exact `WRAPPER_V2.diff`. The new mode calls the already frozen iterator refusal and preserved-read-effect methods. `../../../catalogue-review/RECONCILIATION.md` explains the inherited upstream comparator regression; it remains exposed by the unchanged standalone comparator mode and original compound `readonly` mode. No assertion or source oracle method is weakened, and this narrower gate must not be described as full wrapper qualification.
 

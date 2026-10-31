@@ -7,7 +7,7 @@
   "packet_modified": false,
   "fresh_build_command": [
     "python3",
-    "/dev/shm/m3-parser-reuse-f8287/final/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/contract/provider-corrections/java21-8.17.1/build_provider.py",
+    "/dev/shm/m3-parser-reuse-f8287/final/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/contract/provider-corrections/java21-8.17.1/build_provider.py",
     "--jdk",
     "/workspace/scratch/beeb6792462c/toolchain/jdk-21.0.12.1+1",
     "--maven-repository",

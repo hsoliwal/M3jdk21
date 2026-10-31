@@ -2,10 +2,10 @@
   "schema": "M3_SPARSE_VIEWPORT_CONTRACT_PRESERVING_RECEIVING_V2",
   "original_product_master": "92962fbba10cbf13799253a307dc90f4de94b179",
   "accepted_stage": "sparse-viewport-bounds-20261028",
-  "source_pre_git_blob": "d35282fb564a0a9231f31781e1a699f7e571f8de",
+  "source_pre_git_blob": "ea42717003948d450a606b827628964c58896a23",
   "source_post_git_blob": "9c7cc7e265e4aee0dca030957c8d0ac04abfccbb",
   "accepted_source_sha256": "391e8b5d81ca5c19cc9e325c5e49f28356c713dbbf1fd5530c6f3d5bd91f6e04",
-  "accepted_test_git_blob": "045c89bb5a8cf869e332c73dd557a2193aa93b7f",
+  "accepted_test_git_blob": "6120b2ce4fdb71e1594b4d725412bc045deb16e0",
   "source_provenance": "Exact existing canonical Synexia M3HashPinnedJavaSnapshotRecipe and M3TaskRecipeTest Git blobs; authentic pinned OpenRewrite Java21 parser artifact #12733140239, jar SHA256 7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4",
   "actual_local_sdk": {
     "tests": 5,
@@ -24,7 +24,7 @@
     "interpreted_total": 13,
     "interpreted_failures": 0
   },
-  "historical_existing_geometry_fixture_sha256": "75e960d7db157ab38f9597317589be1480eadca5eaf5f3fd048f98a540c3fc58",
+  "historical_existing_geometry_fixture_sha256": "b34dbbf23de35d596938579287fdf79a5c9386d0c2e5af025aa253c2974bb3b9",
   "historical_partial_write_contract": {
     "one_slot_nonempty": "out[0] receives first row then ArrayIndexOutOfBoundsException",
     "one_slot_empty": "out[0] receives zero then ArrayIndexOutOfBoundsException",

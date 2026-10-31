@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  * Adapted from Synexia MatSignalDimensions: https://github.com/hsoliwal/com.synexia/pull/11656
  */
-package com.m3.collections;
+package jdk.m3.collections;
 
 import java.util.Arrays;
 import java.util.List;

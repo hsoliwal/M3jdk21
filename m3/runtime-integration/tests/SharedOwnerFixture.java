@@ -1,7 +1,7 @@
 /* Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
  * SPDX-License-Identifier: Apache-2.0 */
-import com.synexia.indexstring.shared.SharedArrayPool;
-import com.synexia.indexstring.shared.SharedChars;
+import jdk.internal.m3.indexstring.shared.SharedArrayPool;
+import jdk.internal.m3.indexstring.shared.SharedChars;
 import java.nio.file.Path;
 public class SharedOwnerFixture {
  public static void main(String[] args)throws Exception{

@@ -15,7 +15,7 @@ explicit composed candidate recorded in PREIMAGE-CHAIN.json, not an assertion
 that all replacements are raw-c0 files. Additions require exact absence.
 
 The unchanged M3Jdk21HashPinnedTextSnapshotRecipe owner is pinned at
-8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6.
+e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795.
 The scheduler, refusal, fixed-point, state export and receipt machinery derives
 from the actual qualified Ic0 task. The runner preserves cumulative checks of
 accepted receipts, raw logs, JUnit JSON/XML, compiled artifacts, source/tool pins

@@ -8,7 +8,7 @@ import argparse, hashlib, importlib.util, json, subprocess
 
 HERE = Path(__file__).resolve().parent
 TASK = HERE.parent
-J = 'm3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java'
+J = 'm3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java'
 C = 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c'
 
 def digest(path):
@@ -77,10 +77,10 @@ def main():
         preserved('m3_index_mask_compactor.c', [
             'static void m3_throw_state_drift(', 'static void m3_bad_window(',
             'static int m3_window_valid(', 'static jint m3_count_window(',
-            'Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative(',
-            'Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative(',
-            'Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative(',
-            'Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative('])
+            'Java_jdk_m3_collections_M3IndexMaskCompactor_positionsAbiNative(',
+            'Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsNative(',
+            'Java_jdk_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative(',
+            'Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative('])
         headers_before = {p.name: digest(p) for p in (proof/'before/headers').glob('*.h')}
         headers_after = {p.name: digest(p) for p in (proof/'test/headers').glob('*.h')}
         assert headers_before and headers_before == headers_after
@@ -100,13 +100,13 @@ def main():
             outputs[version] = {}
             for clazz in ['M3RequiredExcludedMaskSelectorContract', 'M3RequiredExcludedMaskSelectorNativeContract',
                           'M3RequiredExcludedLongProbe']:
-                outputs[version][clazz] = run(version+'-'+clazz, launcher+['com.m3.collections.'+clazz], marker='PASS ')
+                outputs[version][clazz] = run(version+'-'+clazz, launcher+['jdk.m3.collections.'+clazz], marker='PASS ')
             outputs[version]['capability-current'] = run(version+'-capability-current',
-                launcher+['com.m3.collections.M3RequiredExcludedLegacyProbe', 'current'], marker='PASS ')
+                launcher+['jdk.m3.collections.M3RequiredExcludedLegacyProbe', 'current'], marker='PASS ')
             for mode, library in [('legacy', proof/'legacy-native'), ('missing', proof/version/'empty')]:
                 outputs[version]['capability-'+mode] = run(version+'-capability-'+mode,
                     ['java', '-Xmx64m', '-Xcheck:jni', '-Djava.library.path='+str(library), '-cp', cp,
-                     'com.m3.collections.M3RequiredExcludedLegacyProbe', mode], marker='PASS ')
+                     'jdk.m3.collections.M3RequiredExcludedLegacyProbe', mode], marker='PASS ')
         assert outputs['before'] == outputs['test']
         result = {'status': 'PASS_CURRENT_SOURCE_SUPPLEMENT', 'outputs': outputs,
                   'preserved_bodies': len(preservation), 'generated_headers': headers_before,

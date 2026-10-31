@@ -70,31 +70,31 @@ jobs:
 
       # Standalone (2026-10-31): the A3 recipe export is absorbed. Its eight manifest-listed
       # sources and the export manifest are byte-identical under m3/vendor/ (provenance:
-      # m3/vendor/synexia/README.md); the reactor module tooling/synexia-jdk-a3-recipes builds
+      # m3/vendor/m3/README.md); the reactor module tooling/m3jdk-a3-recipes builds
       # them into the same coordinate in the reactor step below (-am). No other repository is
-      # fetched (decisions: m3/tooling/standalone/SYNEXIA_REFS.tsv).
+      # fetched (decisions: m3/tooling/standalone/M3_REFS.tsv).
       - name: Verify absorbed A3 recipe export closure
         shell: bash
         run: |
           set -euo pipefail
-          cd "$REPO/m3/vendor/synexia/synexia-openrewrite-recipes"
+          cd "$REPO/m3/vendor/m3/m3-openrewrite-recipes"
           sha256sum --check --strict - <<'CLOSURE'
-          0c8b6e58942bb3ba5739e7fa060b20237c056ef36ffd1a84b25016314e9f0dca  src/main/java/com/synexia/rewrite/M3RecipeMasteryPortableReceipt.java
-          ee74b358c97ab2dadb899df3b9c342ff80a78ccb44b8dda73be4937397e9e712  src/main/java/com/synexia/rewrite/atom/M3AtomizePureIntReturnRecipe.java
-          a0b5d68d2f08fea262e8e5fd234ab7223641192e93d04e70c86eead1a9005b9f  src/main/java/com/synexia/rewrite/atom/M3DocumentPureIntAtomRecipe.java
-          7419befbae77f9d3c400149bd0913d978c16d02a2cd76dd080f7988fc92c519d  src/main/java/com/synexia/rewrite/atom/M3FileAtomCandidateTable.java
-          9bf408c86263311669209189ae39a177ee99a8711c215bae42cfabea00223c0f  src/main/java/com/synexia/rewrite/atom/M3InventoryPureIntAtomCandidates.java
-          4e80e3d733bd89d91c3b673446f46da4ccdd171725489bdbe89700eaea118dd2  src/main/java/com/synexia/rewrite/atom/M3PatternizePureIntAtomRecipe.java
-          89c62be14f9e2d49c372cf490a186e0c9ca88e82ac5f8f14fd76515a25a5e1e0  src/main/java/com/synexia/rewrite/atom/M3PureIntAtomEligibility.java
-          8f261fa815f20bc60362bb2c416aad864ea8f6f041f7ffb292c1591f141454e2  src/main/java/com/synexia/rewrite/atom/M3PureIntConvergenceRecipe.java
-          19c68d1684fc8011f5d6b8ed1afaf91398c444e7b7d469dae9003f270e9c3905  src/main/resources/META-INF/m3/jdk-a3-recipe-export.tsv
+          69104cee94e06e9d87aadac208140eddf585e0404385e9ee7ca40bc635a8eeba  src/main/java/jdk/internal/m3/rewrite/M3RecipeMasteryPortableReceipt.java
+          4367a662ef19efd9193934778dae9ef6a58c31f45e76e9c8f3607e6f7dfa962e  src/main/java/jdk/internal/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java
+          c8b90be60cace5aba0e00d438be09cb6348273a8229adf7b5df490a5c3ec6a50  src/main/java/jdk/internal/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java
+          3f11b266e4bf7bb9a08cf43f6692ce3209f310059462dfe70eca56048809b01f  src/main/java/jdk/internal/m3/rewrite/atom/M3FileAtomCandidateTable.java
+          923f15cef4b6b0ecc575cf1ad95a1fac3607f77bb111b9b87bd924b76d4b2c06  src/main/java/jdk/internal/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java
+          eabca39453edaebc5b7f0e9aaaf12b900ba181e21dc5c8a08640abc7f0d0b6f7  src/main/java/jdk/internal/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java
+          32b98c2eafaa8e4231dcded464a88f1560cebc71fb39d5d28934482af61b0043  src/main/java/jdk/internal/m3/rewrite/atom/M3PureIntAtomEligibility.java
+          a6587bcc76d05b006757f8ded6da2c7d46bb23b521e2030b8b9d657b6a31cdf8  src/main/java/jdk/internal/m3/rewrite/atom/M3PureIntConvergenceRecipe.java
+          11c3ddd89c939a0689eda812d497b279d6f792326fcd82096ea0317f10721ea8  src/main/resources/META-INF/m3/jdk-a3-recipe-export.tsv
           CLOSURE
 
       - name: Bootstrap pinned source-built OpenRewrite and JUnit closure
         shell: bash
         run: |
           set -euo pipefail
-          bash "$REPO/m3/synexia-import/pure-int-recipe-custody/install.sh" "$REPO" --dependencies-only
+          bash "$REPO/m3/m3-import/pure-int-recipe-custody/install.sh" "$REPO" --dependencies-only
 
       - name: Compile and install retained A3 recipe dependencies
         shell: bash
@@ -119,7 +119,7 @@ jobs:
         run: |
           set -euo pipefail
           mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java \
-            -Dexec.mainClass=com.m3.a3.A3 \
+            -Dexec.mainClass=jdk.m3.a3.A3 \
             -Dexec.args="lab --root $REPO --out m3/build/a3/lab"
           LAB="$REPO/m3/build/a3/lab/results.tsv"
           test -s "$LAB"
@@ -141,7 +141,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="inv --root $REPO --out m3/build/a3/inventory.tsv"
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=jdk.m3.a3.A3             -Dexec.args="inv --root $REPO --out m3/build/a3/inventory.tsv"
           test -s "$REPO/m3/build/a3/inventory.tsv"
           JAVA_ROWS="$(awk -F '\t' 'NR > 1 && $5 == "JAVA" {n++} END {print n+0}' "$REPO/m3/build/a3/inventory.tsv")"
           NATIVE_ROWS="$(awk -F '\t' 'NR > 1 && $5 == "NATIVE" {n++} END {print n+0}' "$REPO/m3/build/a3/inventory.tsv")"
@@ -153,7 +153,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="alg --root $REPO --out m3/build/a3/algorithms.tsv"
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=jdk.m3.a3.A3             -Dexec.args="alg --root $REPO --out m3/build/a3/algorithms.tsv"
           ALG="$REPO/m3/build/a3/algorithms.tsv"
           test -s "$ALG"
           ALG_ROWS="$(awk -F '\t' 'NR > 1 {n++} END {print n+0}' "$ALG")"
@@ -168,7 +168,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="plan --root $REPO --out m3/build/a3/plan.tsv"
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=jdk.m3.a3.A3             -Dexec.args="plan --root $REPO --out m3/build/a3/plan.tsv"
           PLAN="$REPO/m3/build/a3/plan.tsv"
           test -s "$PLAN"
           JEP_ROWS="$(awk -F '\t' 'NR > 1 && $1 == "JEP" {n++} END {print n+0}' "$PLAN")"
@@ -193,7 +193,7 @@ jobs:
           TSV
 
           mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java \
-            -Dexec.mainClass=com.m3.a3.A3 \
+            -Dexec.mainClass=jdk.m3.a3.A3 \
             -Dexec.args="work --root $REPO --inventory m3/build/a3/inventory.tsv --queue m3/build/a3/work-queue.tsv --out m3/build/a3/work.tsv"
 
           test -s "$WORK"
@@ -222,7 +222,7 @@ jobs:
           JAVA
           cp "$SRC" "$RUNNER_TEMP/Sample.before"
 
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="apply --root $FIX --out m3/build/a3/apply --file src/java.base/share/classes/example/Sample.java"
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=jdk.m3.a3.A3             -Dexec.args="apply --root $FIX --out m3/build/a3/apply --file src/java.base/share/classes/example/Sample.java"
 
           cmp "$SRC" "$RUNNER_TEMP/Sample.before"
           CANDIDATE="$FIX/m3/build/a3/apply/candidate/src/java.base/share/classes/example/Sample.java"

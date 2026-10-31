@@ -1,0 +1,17 @@
+{
+  "schema" : "M3_NLP_CURRENT_FORKS_SDK_RECEIPT_V1",
+  "engine" : "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+  "sdk_version" : "8.17.1",
+  "kind" : "java",
+  "crate" : "m3-nlp-current-forks-java-layout-engine-20261018",
+  "targets" : 2,
+  "first_application_changes" : 2,
+  "fixed_point_changes" : 0,
+  "drift_refusals" : 1,
+  "duplicate_refusals" : 1,
+  "missing_refusals" : 1,
+  "source_sha256" : {
+    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java" : "99353ecfa06c6bd2c45ac32ec576c6bc63b7afb216afbe4d4f343d65e86d2441",
+    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java" : "3f61002ab18470b5b36aaff96c9d983ab03f61b25414fac1e36d2a361d65c78e"
+  }
+}

@@ -2,7 +2,7 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # Verification pass wrapper-contract-v2
 
-This new packet admits only the absent verification owner `m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java` against integration revision `f29b0afe7ad253cc0562bc8dfdd48fc1acec710e`. The exact postimage is `2913aeae2f20b80c669398e5727ad9bc000eccf3bb225d85bdd672c17d4fb847`. The original `wrapper-contract` packet remains unchanged and unqualified for this integration scope.
+This new packet admits only the absent verification owner `m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceContract.java` against integration revision `f29b0afe7ad253cc0562bc8dfdd48fc1acec710e`. The exact postimage is `989507e15f05f3d931c51e7ae65d65dbc3fac7b80bc94984e4b9922ea17e8335`. The original `wrapper-contract` packet remains unchanged and unqualified for this integration scope.
 
 The parent contract already admits new frozen wrapper oracles under `src/test`; this separately versioned packet selects the successor documented in `../../../candidates-v2/CANDIDATE_NOTES.md` and `../../../catalogue-review/RECONCILIATION.md`. Version 2 adds only the `readonly-policy` mode and normalizes the copyright line. All original methods, modes, comparator-failure assertions, and the default `readonly` entrypoint survive. The inherited upstream comparator regression remains a failing standalone witness; a policy pass cannot establish full wrapper correctness.
 

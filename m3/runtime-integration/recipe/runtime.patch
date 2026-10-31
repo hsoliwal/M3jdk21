@@ -14103,7 +14103,7 @@ index 0000000000000000000000000000000000000000..087aa55bef9b57189d03f3388fb2e1f3
 +}
 diff --git a/src/java.base/share/legal/synexia.md b/src/java.base/share/legal/synexia.md
 new file mode 100644
-index 0000000000000000000000000000000000000000..b1b9cb02935482bb9e9351dcde267629d23d621f
+index 0000000000000000000000000000000000000000..4eee1ea522800ea2444911d8ae85631ced83b76c
 --- /dev/null
 +++ b/src/java.base/share/legal/synexia.md
 @@ -0,0 +1,260 @@
@@ -14116,7 +14116,7 @@ index 0000000000000000000000000000000000000000..b1b9cb02935482bb9e9351dcde267629
 +license/NOTICE disposition before product inclusion.
 +
 +The machine-readable receiving policy is
-+`m3/compatibility/synexia-public-target-policy.tsv`. Source-license admission is independent of
++`m3/compatibility/m3-public-target-policy.tsv`. Source-license admission is independent of
 +build, API/ABI, runtime, native, jtreg and platform acceptance.
 +
 +## Synexia Lane28 collection kernels

@@ -7,9 +7,9 @@ Decision recorded before diagnostic candidate preparation on 2026-10-20: reuse t
 ## Pins and scope
 
 - Receiving repository: `hsoliwal/M3jdk21@95d0266ff15ae1f11876cce7360b155ef33a1862`; exact collections tree `985d672bf250aa090b2399d626f0e3e1b541135d`.
-- Sole proposed production path: `m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java`.
-- Exact current/preimage SHA-256: `77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545`.
-- Exact existing postimage SHA-256: `7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e`.
+- Sole proposed production path: `m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java`.
+- Exact current/preimage SHA-256: `6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb`.
+- Exact existing postimage SHA-256: `bf601d711667e1078ca30246da6fa89b43d7ed951a3179e0a161365526581959`.
 - Canonical published handoff: `hsoliwal/com.synexia@528aaf79cfae79c5dbfe7c307340329d320e8c44`, `synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/stable-order-groups`.
 - The canonical manifest and postimage were fetched directly at that publication pin and agree with the target's exact custody manifest. The manifest path returns 404 at current canonical pin `f04fbac91a7891e64b77c7b24cef1ab75ec88144`; its repository AGENTS is readable. This task uses the published handoff and does not claim that the crate remains present at the current pin.
 

@@ -11,7 +11,7 @@ from pathlib import Path, PurePosixPath
 from prepare_public_recovery import INNER, PIN, TASK
 
 
-PREFIX = "synexia-openrewrite-recipes/recipe-crates/" + TASK
+PREFIX = "m3-openrewrite-recipes/recipe-crates/" + TASK
 LABEL = "current-runtime-recovery-20261018"
 DELIVERED = "86528a90079b89a50b51ef13da08e7e70d468cb4"
 GPL = "GPL-2.0-only WITH Classpath-exception-2.0"

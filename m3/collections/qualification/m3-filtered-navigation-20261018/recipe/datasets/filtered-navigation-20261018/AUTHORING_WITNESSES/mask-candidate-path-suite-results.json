@@ -11,7 +11,7 @@
       "-Djava.library.path=/workspace/scratch/6b6041146177/native-validation/empty-lib",
       "-cp",
       "/workspace/scratch/6b6041146177/native-validation/candidate-classes:/workspace/scratch/6b6041146177/native-validation/classes:/workspace/scratch/6b6041146177/native-validation/test-classes",
-      "com.m3.collections.M3IndexPathMasksSelfTest"
+      "jdk.m3.collections.M3IndexPathMasksSelfTest"
     ],
     "exit_code": 0,
     "stdout": "PASS M3IndexPathMasksSelfTest checks=1554 JNI=false\n",
@@ -30,7 +30,7 @@
       "-Djava.library.path=/workspace/scratch/6b6041146177/native-validation/empty-lib",
       "-cp",
       "/workspace/scratch/6b6041146177/native-validation/candidate-classes:/workspace/scratch/6b6041146177/native-validation/classes:/workspace/scratch/6b6041146177/native-validation/test-classes",
-      "com.m3.collections.M3IndexPathMaskWindowSelfTest"
+      "jdk.m3.collections.M3IndexPathMaskWindowSelfTest"
     ],
     "exit_code": 0,
     "stdout": "M3_PATH_MASK_WINDOW_PASS checks=22462 backend=JAVA nativeAvailable=false\n",
@@ -49,7 +49,7 @@
       "-Djava.library.path=/workspace/scratch/6b6041146177/native-validation/empty-lib",
       "-cp",
       "/workspace/scratch/6b6041146177/native-validation/candidate-classes:/workspace/scratch/6b6041146177/native-validation/classes:/workspace/scratch/6b6041146177/native-validation/test-classes",
-      "com.m3.collections.M3IndexPathRankSelfTest"
+      "jdk.m3.collections.M3IndexPathRankSelfTest"
     ],
     "exit_code": 0,
     "stdout": "PASS M3IndexPathRank Java21 deterministic differential: 36476 rank checks; 900 randomized paths\n",
@@ -70,7 +70,7 @@
       "-Djava.library.path=/workspace/scratch/6b6041146177/native-validation/lib",
       "-cp",
       "/workspace/scratch/6b6041146177/native-validation/candidate-classes:/workspace/scratch/6b6041146177/native-validation/classes:/workspace/scratch/6b6041146177/native-validation/test-classes",
-      "com.m3.collections.M3IndexPathMasksSelfTest",
+      "jdk.m3.collections.M3IndexPathMasksSelfTest",
       "--native"
     ],
     "exit_code": 0,
@@ -92,7 +92,7 @@
       "-Djava.library.path=/workspace/scratch/6b6041146177/native-validation/lib",
       "-cp",
       "/workspace/scratch/6b6041146177/native-validation/candidate-classes:/workspace/scratch/6b6041146177/native-validation/classes:/workspace/scratch/6b6041146177/native-validation/test-classes",
-      "com.m3.collections.M3IndexPathMaskWindowSelfTest",
+      "jdk.m3.collections.M3IndexPathMaskWindowSelfTest",
       "--native"
     ],
     "exit_code": 0,
@@ -112,7 +112,7 @@
       "-Djava.library.path=/workspace/scratch/6b6041146177/native-validation/lib",
       "-cp",
       "/workspace/scratch/6b6041146177/native-validation/candidate-classes:/workspace/scratch/6b6041146177/native-validation/classes:/workspace/scratch/6b6041146177/native-validation/test-classes",
-      "com.m3.collections.M3IndexPathRankNativeSelfTest"
+      "jdk.m3.collections.M3IndexPathRankNativeSelfTest"
     ],
     "exit_code": 0,
     "stdout": "PASS M3IndexPathRank JNI parity: 180 deterministic Java/rank/native paths\n",

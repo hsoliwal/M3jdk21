@@ -27,14 +27,14 @@ support = None
 if a.classes:
     classpath += os.pathsep + str(a.classes.resolve())
 else:
-    sources = [b/'receiver/m3/fs/src/main/java/com/m3/fs'/name for name in ['M3FsProgress.java','M3ContentId.java']]
+    sources = [b/'receiver/m3/fs/src/main/java/jdk/m3/fs'/name for name in ['M3FsProgress.java','M3ContentId.java']]
     compile_classpath = []
     if not a.baseline:
         support = b/'qualification-final2/classes'
         if not support.is_dir(): sys.exit(f'Missing generated dependency classes: {support}')
         compile_classpath = ['-cp',str(support)]
         sources += sorted((owned/'m3/fs/src/main/java').rglob('*.java'))
-        sources += [b/'authored/facade/m3/fs/src/main/java/com/m3/fs/MFileCapture.java']
+        sources += [b/'authored/facade/m3/fs/src/main/java/jdk/m3/fs/MFileCapture.java']
     subprocess.run([str(java/'javac'),'--release','21','-Xlint:all','-Werror',*compile_classpath,'-d',str(out),*map(str,sources)],check=True)
 classpath += os.pathsep + str(out)
 if support: classpath += os.pathsep + str(support)
@@ -44,5 +44,5 @@ log = owned/'verification'/f'{mode}.log'
 compiled = subprocess.run([str(java/'javac'),'--release','21','-Xlint:all','-Werror','-cp',classpath,'-d',str(out),*map(str,tests),str(launcher)],text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
 if compiled.returncode:
     log.write_text(compiled.stdout);print(compiled.stdout);sys.exit(compiled.returncode)
-result = subprocess.run([str(java/'java'),'-cp',classpath,'FacadeTestLauncher','com.m3.fs.MFileStreamsTest'],text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+result = subprocess.run([str(java/'java'),'-cp',classpath,'FacadeTestLauncher','jdk.m3.fs.MFileStreamsTest'],text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
 log.write_text(result.stdout);print(result.stdout);sys.exit(result.returncode)

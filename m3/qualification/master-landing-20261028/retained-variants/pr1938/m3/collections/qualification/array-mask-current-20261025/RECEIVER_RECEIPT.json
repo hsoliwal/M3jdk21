@@ -9,18 +9,18 @@
   "contract": "existing single Object[] reference owner, stable removal, callbacks/exception identity, modCount, serial form; no java.util public API or JNI change",
   "files": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java",
       "before_git_blob": "c43ca5578521b8f0a2ab1305f5d4becdeabc772e",
-      "after_git_blob": "b1135dc23d04d4654cedab2e8b62684e1e7d4471",
+      "after_git_blob": "3926a5970d61913304ffa7f24a32ad2740ea1a6b",
       "before_sha256": "884c9078022f64eb3c1f4aa8c306d852521be6089164c7e99b08e17c318d8282",
-      "after_sha256": "2168db105fe700ea1a8022ad362ee41d8f181180deba8404ea87d9c70f46d134"
+      "after_sha256": "9a950e6d94ccac369dff45499d1eb3b7ebcc4412d60034be69dedf1e6623a9e5"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3ArrayListShortWordMaskContract.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3ArrayListShortWordMaskContract.java",
       "before_git_blob": "3412d8c46d326e8a6bba2b674a8db18fde7a277f",
-      "after_git_blob": "e87326da9e8d59e36cd84fd1413a0f55087200aa",
+      "after_git_blob": "483e35170f7378d39eae4a0c7d47cb3e27d1a87f",
       "before_sha256": "054bcf36dfcc6915a4ced91264bbe005c183df2be4f93bf709ab0f8c42e928a7",
-      "after_sha256": "aadabb968ad9d9483d02aa67a353d9a6fec402d90c9522325342a8ca8d1d07f1"
+      "after_sha256": "1bb84e8f779096092aef0b6f821d45372c5f028648f36ecb8030abaf22ca8bb8"
     },
     {
       "path": "m3/arrays/pom.xml",

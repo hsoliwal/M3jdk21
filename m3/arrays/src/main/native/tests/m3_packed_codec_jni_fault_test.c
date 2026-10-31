@@ -1,7 +1,7 @@
 /* SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project */
 /* SPDX-License-Identifier: Apache-2.0 */
 /* Modified 2026-10-29: target JNI names and shared exception-helper fault coverage.
- * Derived from synexia_cpu_codec_jni_fault_test.c at
+ * Derived from m3_cpu_codec_jni_fault_test.c at
  * 6f878f9e5d6c5044eda15efb9e743594e70ce7f7; legacy operations are excluded. */
 #include <jni.h>
 #include <stdio.h>
@@ -18,12 +18,12 @@ static unsigned long m3_checks;
     } \
 } while (0)
 
-JNIEXPORT jbyteArray JNICALL Java_com_m3_arrays_M3ArrayNative_nativeEncodePacked(JNIEnv *, jclass, jlongArray, jint);
-JNIEXPORT jlongArray JNICALL Java_com_m3_arrays_M3ArrayNative_nativeDecodePacked(JNIEnv *, jclass, jbyteArray, jint);
-JNIEXPORT jbyteArray JNICALL Java_com_m3_arrays_M3ArrayNative_nativeEncodeUnsigned64(JNIEnv *, jclass, jlongArray);
-JNIEXPORT jlongArray JNICALL Java_com_m3_arrays_M3ArrayNative_nativeDecodeUnsigned64(JNIEnv *, jclass, jbyteArray);
-JNIEXPORT jbyteArray JNICALL Java_com_m3_arrays_M3ArrayNative_nativeEncodeZigZag64(JNIEnv *, jclass, jlongArray);
-JNIEXPORT jlongArray JNICALL Java_com_m3_arrays_M3ArrayNative_nativeDecodeZigZag64(JNIEnv *, jclass, jbyteArray);
+JNIEXPORT jbyteArray JNICALL Java_jdk_m3_arrays_M3ArrayNative_nativeEncodePacked(JNIEnv *, jclass, jlongArray, jint);
+JNIEXPORT jlongArray JNICALL Java_jdk_m3_arrays_M3ArrayNative_nativeDecodePacked(JNIEnv *, jclass, jbyteArray, jint);
+JNIEXPORT jbyteArray JNICALL Java_jdk_m3_arrays_M3ArrayNative_nativeEncodeUnsigned64(JNIEnv *, jclass, jlongArray);
+JNIEXPORT jlongArray JNICALL Java_jdk_m3_arrays_M3ArrayNative_nativeDecodeUnsigned64(JNIEnv *, jclass, jbyteArray);
+JNIEXPORT jbyteArray JNICALL Java_jdk_m3_arrays_M3ArrayNative_nativeEncodeZigZag64(JNIEnv *, jclass, jlongArray);
+JNIEXPORT jlongArray JNICALL Java_jdk_m3_arrays_M3ArrayNative_nativeDecodeZigZag64(JNIEnv *, jclass, jbyteArray);
 
 /* This documents a fault model. A real checked-JNI JVM is a separate gate. */
 enum model_case {
@@ -170,15 +170,15 @@ static void JNICALL delete_local(JNIEnv *env, jobject reference) {
 static jobject invoke(JNIEnv *env, int operation) {
     jarray source = state.scenario == NULL_INPUT ? NULL : (jarray)(void *)&source_fixture;
     switch (operation) {
-        case 0: return Java_com_m3_arrays_M3ArrayNative_nativeEncodeUnsigned64(env, NULL, (jlongArray)source);
-        case 1: return Java_com_m3_arrays_M3ArrayNative_nativeDecodeUnsigned64(env, NULL, (jbyteArray)source);
-        case 2: return Java_com_m3_arrays_M3ArrayNative_nativeEncodeZigZag64(env, NULL, (jlongArray)source);
-        case 3: return Java_com_m3_arrays_M3ArrayNative_nativeDecodeZigZag64(env, NULL, (jbyteArray)source);
+        case 0: return Java_jdk_m3_arrays_M3ArrayNative_nativeEncodeUnsigned64(env, NULL, (jlongArray)source);
+        case 1: return Java_jdk_m3_arrays_M3ArrayNative_nativeDecodeUnsigned64(env, NULL, (jbyteArray)source);
+        case 2: return Java_jdk_m3_arrays_M3ArrayNative_nativeEncodeZigZag64(env, NULL, (jlongArray)source);
+        case 3: return Java_jdk_m3_arrays_M3ArrayNative_nativeDecodeZigZag64(env, NULL, (jbyteArray)source);
         default:
             M3_CHECK(operation >= 4 && operation < 10);
             if (operation % 2 == 0)
-                return Java_com_m3_arrays_M3ArrayNative_nativeEncodePacked(env, NULL, (jlongArray)source, state.bits);
-            return Java_com_m3_arrays_M3ArrayNative_nativeDecodePacked(env, NULL, (jbyteArray)source, state.bits);
+                return Java_jdk_m3_arrays_M3ArrayNative_nativeEncodePacked(env, NULL, (jlongArray)source, state.bits);
+            return Java_jdk_m3_arrays_M3ArrayNative_nativeDecodePacked(env, NULL, (jbyteArray)source, state.bits);
     }
 }
 

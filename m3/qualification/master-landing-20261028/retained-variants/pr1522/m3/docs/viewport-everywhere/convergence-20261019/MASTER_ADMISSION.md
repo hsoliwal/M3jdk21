@@ -10,15 +10,15 @@ were not in the frozen publication map; exact recovery of those bytes is not cla
 
 Receiving source remains M3JDK21 `9a164c31b38c7013c179a3ff38b0bb60c199c7fd`. The canonical collection recipe is
 `com.synexia.rewrite.M3CurrentMasterConvergence20261019`, manifest
-`5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819`: 60 targets, 39 KEEP and 21 changes including 12 additions.
+`ab3479808088106c5fd6d2be37381390158f5d36590bffe7eb09e04a7fd71ff6`: 60 targets, 39 KEEP and 21 changes including 12 additions.
 
 ## Selected owners
 
 | Owner | Current operation |
 | --- | --- |
-| M3LongIndexProjection | Receive equal-key-run reversal into the existing immutable projection: `77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545` to `a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e`. |
-| M3WindowPlan | Already received; KEEP `5a4d7bbd92429d2e3daf8c3a857abfd79189bbf1fc9450915f9ca89d8742421e`. Its historical overflow repair is not applied again. |
-| M3RowTree | Explicit current inverse `11e448e0f92eb751f8399affda3e5f4d95a5a8856e7719eb69446e35fa037233` to `96067f630bcf3288c69410151759fa738fd5968daccf68cd1aed2aeade38fc7b` in the current manifest. The historical KEEP alone does not authorize this inverse; retain the original positive and adverse resource controls. |
+| M3LongIndexProjection | Receive equal-key-run reversal into the existing immutable projection: `6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb` to `a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e`. |
+| M3WindowPlan | Already received; KEEP `bd192d5a81b3b331f8df75e09a4c3f0e5c462b5e39c3a72a7a020acb6e2e6b38`. Its historical overflow repair is not applied again. |
+| M3RowTree | Explicit current inverse `d8398841841dbdff9bdc3f14e02ea6783286d4a77c29b5bcfbbfb1649086ebfe` to `3e9ff2db9ac2918dac993bb44493269ea4c4309d156724583de549a666ae19bb` in the current manifest. The historical KEEP alone does not authorize this inverse; retain the original positive and adverse resource controls. |
 
 Current physical-state APIs and native parity oracles remain present. No test
 exclusion or oracle weakening was used to admit the current native result.
@@ -41,7 +41,7 @@ Qualification duration is not a performance benchmark.
 ## Current Swing source admission with earlier execution reuse
 
 The existing binding manifest remains
-`11f3d4890741deaa42323a11069c8c2287613dbf1f57db450e80cd8404d3781f`;
+`8c1d7492734d8151271ce11fdd23b3b77bdc68308b95c560c2b0792fd421a46b`;
 the existing Swing UI manifest remains
 `8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16`.
 Their 19 entries retain seven byte-identical current preimages and twelve
@@ -67,8 +67,8 @@ is claimed by this metadata recovery.
 
 The guarded publication appends ten mappings to the existing 66 in
 `m3/docs/name-mapping.json`. The prior raw SHA-256 is
-`1085c259e66bff017137e0c63bb86fc0b8daf436865f6378075cf4c920035ef4` and Git blob
-`a7008bc04536586218da76e823bf570d50cec526`. Every original byte is preserved
+`ac0b133afdfedcf68727332c91e82390a951f3a03350a6cffa9de0e6edcb77f0` and Git blob
+`ce76431af299d15823c1cd30f9083ab1a9186f03`. Every original byte is preserved
 around the single insertion; all 66 original mapping objects and every other
 index value remain equal. `RECEIVING_PUBLICATION.json` records the exact seals.
 

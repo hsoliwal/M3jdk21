@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "policy": "additive; no blind renames or unverified compatibility claims",
-  "mappings": [{"source": "com.synexia.indexstring.LocalM3StringPiece", "source_commit": "9c36c18a7778e6096148a3bbee8f2af7575138b4", "target": "com.m3.text.LocalM3StringPiece", "status": "separate provisional byte-format prototype; NOT an API-compatible replacement", "canonical_owner_decision": "retain established Synexia owner; adapter/migration deferred"}, {"source": "LocalMIndexStringPiece", "target": "com.m3.text.LocalM3StringPiece", "status": "provisional semantic direction only", "source_commit": null, "compatibility_facade": "deferred until original source contract is supplied"}, {"source": "MIndex family", "target": "M3 family", "status": "requires per-type source/API/ownership mapping", "source_commit": null}, {"source": "MatIndex family", "target": "M3 family", "status": "requires per-type source/API/ownership mapping", "source_commit": null}],
+  "mappings": [{"source": "jdk.internal.m3.indexstring.LocalM3StringPiece", "source_commit": "9c36c18a7778e6096148a3bbee8f2af7575138b4", "target": "jdk.m3.text.LocalM3StringPiece", "status": "separate provisional byte-format prototype; NOT an API-compatible replacement", "canonical_owner_decision": "retain established Synexia owner; adapter/migration deferred"}, {"source": "LocalMIndexStringPiece", "target": "jdk.m3.text.LocalM3StringPiece", "status": "provisional semantic direction only", "source_commit": null, "compatibility_facade": "deferred until original source contract is supplied"}, {"source": "MIndex family", "target": "M3 family", "status": "requires per-type source/API/ownership mapping", "source_commit": null}, {"source": "MatIndex family", "target": "M3 family", "status": "requires per-type source/API/ownership mapping", "source_commit": null}],
   "imported_donor_sources": [],
-  "reviewed_synexia_commit": "9c36c18a7778e6096148a3bbee8f2af7575138b4",
-  "reviewed_contracts": "synexia-reconciliation.md",
+  "reviewed_m3_commit": "9c36c18a7778e6096148a3bbee8f2af7575138b4",
+  "reviewed_contracts": "m3-reconciliation.md",
   "migration": {
     "version": 1,
     "source": {"repo": "hsoliwal/com.synexia", "baseline_commit": "75fb1abaecb56969bea2914520bbe819f130632b", "observed_tip": "ea855a6008ecbfbdc31b9cb3a9aaf828839e1a86", "visibility": "private", "tracking_ref": "refs/heads/develop"},
@@ -17,9 +17,9 @@
         "kind": "specialization",
         "status": "implemented-tested",
         "reason": "Tested algorithm specialization over existing P0 views, not a complete canonical text-family port.",
-        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "73978088621dc70f5021befafa443f7e622b517e", "module": "synexia-indexstring", "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexPrefixZ.java", "symbol": "com.synexia.indexstring.MIndexPrefixZ", "signatures": ["MIndexPrefixZ analyze(MIndexString)", "MIndexPrefixZ analyze(MIndexString,IProgressMonitor)", "MIndexPrefixZ analyze(MIndexString,long,IProgressMonitor)", "int length()", "int prefixLengthAt(int)", "long similaritySum()", "int longestProperBorderLength()"], "sha256": "d2ccefe7aceb9797913fd1ec9daf5aba976bf4e86aefdbd9decc86d348d2cb56", "git_blob_sha1": "6b0f77329f8b18f44635b48a6d65fdec0b1aa25c", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/pull/7526/head"}],
-        "targets": [{"repo": "hsoliwal/M3jdk21", "commit": "3a8e21dcea32b97e869f3bdbb5817e1f9927ca4f", "module": "m3", "path": "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java", "symbol": "com.m3.algorithm.M3PrefixZ", "signatures": ["M3PrefixZ analyze(M3StringPiece)", "M3PrefixZ analyze(M3StringPiece,long,BooleanSupplier)", "long requiredMetadataPayloadBytes(int)", "int length()", "int prefixLengthAt(int)", "long similaritySum()", "int longestProperBorderLength()", "long metadataPayloadBytes()"], "sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a", "git_blob_sha1": "65f259e23d818b9b35052feff37198f5ddf567b4", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/m3/migration-pass1-prefix-evidence-20261002"}],
-        "owner": "com.m3.algorithm.M3PrefixZ facts; com.m3.text.M3StringPiece remains text owner",
+        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "73978088621dc70f5021befafa443f7e622b517e", "module": "m3-indexstring", "path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexPrefixZ.java", "symbol": "jdk.internal.m3.indexstring.MIndexPrefixZ", "signatures": ["MIndexPrefixZ analyze(MIndexString)", "MIndexPrefixZ analyze(MIndexString,IProgressMonitor)", "MIndexPrefixZ analyze(MIndexString,long,IProgressMonitor)", "int length()", "int prefixLengthAt(int)", "long similaritySum()", "int longestProperBorderLength()"], "sha256": "d2ccefe7aceb9797913fd1ec9daf5aba976bf4e86aefdbd9decc86d348d2cb56", "git_blob_sha1": "6b0f77329f8b18f44635b48a6d65fdec0b1aa25c", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/pull/7526/head"}],
+        "targets": [{"repo": "hsoliwal/M3jdk21", "commit": "3a8e21dcea32b97e869f3bdbb5817e1f9927ca4f", "module": "m3", "path": "m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java", "symbol": "jdk.m3.algorithm.M3PrefixZ", "signatures": ["M3PrefixZ analyze(M3StringPiece)", "M3PrefixZ analyze(M3StringPiece,long,BooleanSupplier)", "long requiredMetadataPayloadBytes(int)", "int length()", "int prefixLengthAt(int)", "long similaritySum()", "int longestProperBorderLength()", "long metadataPayloadBytes()"], "sha256": "5f936a3c6e69ca487eff6a0665ada01546750d9d87ce85ee50a337a4236233d0", "git_blob_sha1": "317108234d7692410517731b325f7d28de99354e", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/m3/migration-pass1-prefix-evidence-20261002"}],
+        "owner": "jdk.m3.algorithm.M3PrefixZ facts; jdk.m3.text.M3StringPiece remains text owner",
         "identity": {"namespace": "No identity is minted; existing immutable input owner used only during analysis.", "generation": "No input retained by the result; only a private int[] and primitive scalar facts."},
         "contract": {"differences": ["MIndexString/IProgressMonitor API is not replaced. Target accepts existing sealed M3StringPiece and BooleanSupplier.", "No beginTask/worked/done callback adaptation; cancellation also polls the inner equal-prefix scan and thread interruption.", "Source metadata budget counts its ends[] lane; target delegates lookup and counts only int[n] fact payload."], "compatibility_obligations": ["Exact UTF-16 prefix lengths and long similarity sum.", "No text normalization, payload flattening, source-owner replacement or numeric-ID translation.", "A future progress-monitor compatibility adapter requires its own mapping and tests."], "public_surface": ["M3PrefixZ analyze(M3StringPiece)", "M3PrefixZ analyze(M3StringPiece,long,BooleanSupplier)", "long requiredMetadataPayloadBytes(int)", "int length()", "int prefixLengthAt(int)", "long similaritySum()", "int longestProperBorderLength()", "long metadataPayloadBytes()"]},
         "format": {"schema": null, "abi": null, "bootstrap": "Application algorithm outside java.base; no JNI or OpenRewrite bootstrap dependency."},
@@ -38,9 +38,9 @@
         "kind": "dependency-reuse",
         "status": "pending",
         "reason": "Reused unchanged in scoped tests; not promoted to canonical Synexia storage owners.",
-        "sources": [{"repo": "hsoliwal/M3jdk21", "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f", "module": "m3", "path": "m3/core/src/com/m3/text/M3StringPiece.java", "symbol": "com.m3.text.M3StringPiece", "signatures": [], "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479", "git_blob_sha1": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/master"}, {"repo": "hsoliwal/M3jdk21", "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f", "module": "m3", "path": "m3/core/src/com/m3/text/JoinedM3StringPiece.java", "symbol": "com.m3.text.JoinedM3StringPiece", "signatures": [], "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb", "git_blob_sha1": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/master"}, {"repo": "hsoliwal/M3jdk21", "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f", "module": "m3", "path": "m3/core/src/com/m3/text/LocalM3Arena.java", "symbol": "com.m3.text.LocalM3Arena", "signatures": [], "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d", "git_blob_sha1": "d82710cd1a49b54d92afcd74cdd903cd009766ba", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/master"}, {"repo": "hsoliwal/M3jdk21", "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f", "module": "m3", "path": "m3/core/src/com/m3/text/LocalM3StringPiece.java", "symbol": "com.m3.text.LocalM3StringPiece", "signatures": [], "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51", "git_blob_sha1": "6b745c9472144ad6de01de4d06a533974e558fb1", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/master"}, {"repo": "hsoliwal/M3jdk21", "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f", "module": "m3", "path": "m3/core/src/com/m3/text/StorageIdentity.java", "symbol": "com.m3.text.StorageIdentity", "signatures": [], "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417", "git_blob_sha1": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/master"}],
+        "sources": [{"repo": "hsoliwal/M3jdk21", "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f", "module": "m3", "path": "m3/core/src/jdk/m3/text/M3StringPiece.java", "symbol": "jdk.m3.text.M3StringPiece", "signatures": [], "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755", "git_blob_sha1": "62506fb9b3cff0e6f24e856648528db58c45b92b", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/master"}, {"repo": "hsoliwal/M3jdk21", "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f", "module": "m3", "path": "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java", "symbol": "jdk.m3.text.JoinedM3StringPiece", "signatures": [], "sha256": "1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7", "git_blob_sha1": "5022e9811ce9391671c794446c7772569cfd369f", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/master"}, {"repo": "hsoliwal/M3jdk21", "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f", "module": "m3", "path": "m3/core/src/jdk/m3/text/LocalM3Arena.java", "symbol": "jdk.m3.text.LocalM3Arena", "signatures": [], "sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4", "git_blob_sha1": "025ce8014cba8a36a9e496bb0a56faef57cf0968", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/master"}, {"repo": "hsoliwal/M3jdk21", "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f", "module": "m3", "path": "m3/core/src/jdk/m3/text/LocalM3StringPiece.java", "symbol": "jdk.m3.text.LocalM3StringPiece", "signatures": [], "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad", "git_blob_sha1": "387ae5e0c656177f1df663fd5029d4b31ba2fa00", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/master"}, {"repo": "hsoliwal/M3jdk21", "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f", "module": "m3", "path": "m3/core/src/jdk/m3/text/StorageIdentity.java", "symbol": "jdk.m3.text.StorageIdentity", "signatures": [], "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354", "git_blob_sha1": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/master"}],
         "targets": [],
-        "owner": "Existing com.m3.text P0 classes",
+        "owner": "Existing jdk.m3.text P0 classes",
         "identity": {"namespace": "Owner-local; no ID translation.", "generation": "Retain owner generation; destination audit pending."},
         "contract": {"differences": [], "compatibility_obligations": ["Preserve API/native/serialization contracts; no prefix renaming."], "public_surface": []},
         "format": {"schema": null, "abi": null, "bootstrap": "Outside java.base; inclusion requires bootstrap review."},
@@ -55,13 +55,13 @@
         "observation": "Bodies inspected. LocalM3Arena copies and is NOT an interner; flat retained ranges do not close canonical payload identity/lifetime gates."
       },
       {
-        "id": "synexia.frozen-chars",
+        "id": "m3.frozen-chars",
         "kind": "pending",
         "status": "pending",
         "reason": "Body inspected: exact UTF-16BE mapped/heap units, mutable admission copies, arbitrary ranges; FrozenBytes dependency and port pending.",
-        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "synexia-indexstring", "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java", "symbol": "com.synexia.indexstring.FrozenChars", "signatures": [], "sha256": null, "git_blob_sha1": "a8f016a1764aea6e970bc60e38f345804e82a84e", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
+        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "m3-indexstring", "path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/FrozenChars.java", "symbol": "jdk.internal.m3.indexstring.FrozenChars", "signatures": [], "sha256": null, "git_blob_sha1": "e7cecf3e32eca949dcf6616455caab6c62fd909d", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
         "targets": [],
-        "owner": "com.synexia.indexstring.FrozenChars",
+        "owner": "jdk.internal.m3.indexstring.FrozenChars",
         "identity": {"namespace": "Owner-local; no ID translation.", "generation": "Retain owner generation; destination audit pending."},
         "contract": {"differences": [], "compatibility_obligations": ["Preserve API/native/serialization contracts; no prefix renaming."], "public_surface": []},
         "format": {"schema": null, "abi": null, "bootstrap": "Outside java.base; inclusion requires bootstrap review."},
@@ -76,13 +76,13 @@
         "observation": "Body inspected: exact UTF-16BE mapped/heap units, mutable admission copies, arbitrary ranges; FrozenBytes dependency and port pending."
       },
       {
-        "id": "synexia.inventory-producer",
+        "id": "m3.inventory-producer",
         "kind": "pending",
         "status": "pending",
         "reason": "Existing TSV producer reused as format authority; full source scan not executed, and lexical findings do not prove semantic ownership.",
-        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "m3-java-inventory", "path": "m3-java-inventory/src/main/java/com/synexia/m3/inventory/InventoryWriter.java", "symbol": "com.synexia.m3.inventory.InventoryWriter", "signatures": [], "sha256": null, "git_blob_sha1": "656f8749bca0a1330ef65aef28fd5c0e4d15c218", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
+        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "m3-java-inventory", "path": "m3-java-inventory/src/main/java/jdk/internal/m3/inventory/InventoryWriter.java", "symbol": "jdk.internal.m3.inventory.InventoryWriter", "signatures": [], "sha256": null, "git_blob_sha1": "656f8749bca0a1330ef65aef28fd5c0e4d15c218", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
         "targets": [],
-        "owner": "com.synexia.m3.inventory.InventoryWriter",
+        "owner": "jdk.internal.m3.inventory.InventoryWriter",
         "identity": {"namespace": "Owner-local; no ID translation.", "generation": "Retain owner generation; destination audit pending."},
         "contract": {"differences": [], "compatibility_obligations": ["Preserve API/native/serialization contracts; no prefix renaming."], "public_surface": []},
         "format": {"schema": null, "abi": null, "bootstrap": "Outside java.base; inclusion requires bootstrap review."},
@@ -97,13 +97,13 @@
         "observation": "Existing TSV producer reused as format authority; full source scan not executed, and lexical findings do not prove semantic ownership."
       },
       {
-        "id": "synexia.inventory-cli",
+        "id": "m3.inventory-cli",
         "kind": "pending",
         "status": "pending",
         "reason": "Existing scanner entry point inspected. Do not create a competing inventory scanner.",
-        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "m3-java-inventory", "path": "m3-java-inventory/src/main/java/com/synexia/m3/inventory/M3InventoryMain.java", "symbol": "com.synexia.m3.inventory.M3InventoryMain", "signatures": [], "sha256": null, "git_blob_sha1": "2168788ef1605bdf848e44d3141217bedb7c2191", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
+        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "m3-java-inventory", "path": "m3-java-inventory/src/main/java/jdk/internal/m3/inventory/M3InventoryMain.java", "symbol": "jdk.internal.m3.inventory.M3InventoryMain", "signatures": [], "sha256": null, "git_blob_sha1": "2168788ef1605bdf848e44d3141217bedb7c2191", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
         "targets": [],
-        "owner": "com.synexia.m3.inventory.M3InventoryMain",
+        "owner": "jdk.internal.m3.inventory.M3InventoryMain",
         "identity": {"namespace": "Owner-local; no ID translation.", "generation": "Retain owner generation; destination audit pending."},
         "contract": {"differences": [], "compatibility_obligations": ["Preserve API/native/serialization contracts; no prefix renaming."], "public_surface": []},
         "format": {"schema": null, "abi": null, "bootstrap": "Outside java.base; inclusion requires bootstrap review."},
@@ -122,7 +122,7 @@
         "kind": "pending",
         "status": "pending",
         "reason": "Discovered in pinned tree; README inspected, this body and signatures not yet inspected.",
-        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "synexia-mindex-indexstring-bridge", "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexCanonicalBridge.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "925e48880e091ce6410646e3f63fb61c8a3c9471", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
+        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "m3-mindex-indexstring-bridge", "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexCanonicalBridge.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "925e48880e091ce6410646e3f63fb61c8a3c9471", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
         "targets": [],
         "owner": "Existing bridge responsibility; precise semantic ownership inspection pending",
         "identity": {"namespace": "Owner-local; no ID translation.", "generation": "Retain owner generation; destination audit pending."},
@@ -143,7 +143,7 @@
         "kind": "pending",
         "status": "pending",
         "reason": "Discovered in pinned tree; README inspected, this body and signatures not yet inspected.",
-        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "synexia-mindex-indexstring-bridge", "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexDagDeferredSwap.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "2cd87536947f10d5be2095cd114606923ed4ee10", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
+        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "m3-mindex-indexstring-bridge", "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexDagDeferredSwap.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "2cd87536947f10d5be2095cd114606923ed4ee10", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
         "targets": [],
         "owner": "Existing bridge responsibility; precise semantic ownership inspection pending",
         "identity": {"namespace": "Owner-local; no ID translation.", "generation": "Retain owner generation; destination audit pending."},
@@ -164,7 +164,7 @@
         "kind": "pending",
         "status": "pending",
         "reason": "Discovered in pinned tree; README inspected, this body and signatures not yet inspected.",
-        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "synexia-mindex-indexstring-bridge", "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexDagPage.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "efdb2aba9d2cbfbd35ff544cb912758edd0ca991", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
+        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "m3-mindex-indexstring-bridge", "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexDagPage.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "efdb2aba9d2cbfbd35ff544cb912758edd0ca991", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
         "targets": [],
         "owner": "Existing bridge responsibility; precise semantic ownership inspection pending",
         "identity": {"namespace": "Owner-local; no ID translation.", "generation": "Retain owner generation; destination audit pending."},
@@ -185,7 +185,7 @@
         "kind": "pending",
         "status": "pending",
         "reason": "Discovered in pinned tree; README inspected, this body and signatures not yet inspected.",
-        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "synexia-mindex-indexstring-bridge", "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexDagPageCodec.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "608ea23a020554eb6190f6a9e5eb5a35b2a46587", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
+        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "m3-mindex-indexstring-bridge", "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexDagPageCodec.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "608ea23a020554eb6190f6a9e5eb5a35b2a46587", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
         "targets": [],
         "owner": "Existing bridge responsibility; precise semantic ownership inspection pending",
         "identity": {"namespace": "Owner-local; no ID translation.", "generation": "Retain owner generation; destination audit pending."},
@@ -206,7 +206,7 @@
         "kind": "pending",
         "status": "pending",
         "reason": "Discovered in pinned tree; README inspected, this body and signatures not yet inspected.",
-        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "synexia-mindex-indexstring-bridge", "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexKnowledgeArgumentCompiler.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "75ec30e5a67923c6ad421ab8ab8d91e6dd420a83", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
+        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "m3-mindex-indexstring-bridge", "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexKnowledgeArgumentCompiler.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "75ec30e5a67923c6ad421ab8ab8d91e6dd420a83", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
         "targets": [],
         "owner": "Existing bridge responsibility; precise semantic ownership inspection pending",
         "identity": {"namespace": "Owner-local; no ID translation.", "generation": "Retain owner generation; destination audit pending."},
@@ -227,7 +227,7 @@
         "kind": "pending",
         "status": "pending",
         "reason": "Discovered in pinned tree; README inspected, this body and signatures not yet inspected.",
-        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "synexia-mindex-indexstring-bridge", "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexKnowledgeArguments.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "134a9e7541672e21eef7cb0551f6f122b737b7f4", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
+        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "m3-mindex-indexstring-bridge", "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexKnowledgeArguments.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "134a9e7541672e21eef7cb0551f6f122b737b7f4", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
         "targets": [],
         "owner": "Existing bridge responsibility; precise semantic ownership inspection pending",
         "identity": {"namespace": "Owner-local; no ID translation.", "generation": "Retain owner generation; destination audit pending."},
@@ -248,7 +248,7 @@
         "kind": "pending",
         "status": "pending",
         "reason": "Discovered in pinned tree; README inspected, this body and signatures not yet inspected.",
-        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "synexia-mindex-indexstring-bridge", "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexLexiconCoordinateCompilerCli.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "5e01d6d2d2fad1ebe3535e1f55b7c37426d216a7", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
+        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "m3-mindex-indexstring-bridge", "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexLexiconCoordinateCompilerCli.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "5e01d6d2d2fad1ebe3535e1f55b7c37426d216a7", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
         "targets": [],
         "owner": "Existing bridge responsibility; precise semantic ownership inspection pending",
         "identity": {"namespace": "Owner-local; no ID translation.", "generation": "Retain owner generation; destination audit pending."},
@@ -269,7 +269,7 @@
         "kind": "pending",
         "status": "pending",
         "reason": "Discovered in pinned tree; README inspected, this body and signatures not yet inspected.",
-        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "synexia-mindex-indexstring-bridge", "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexLexiconCoordinateManifest.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "c31592b96a1ef6b4b654211ec0c66a3ea41a1d73", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
+        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "m3-mindex-indexstring-bridge", "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexLexiconCoordinateManifest.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "c31592b96a1ef6b4b654211ec0c66a3ea41a1d73", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
         "targets": [],
         "owner": "Existing bridge responsibility; precise semantic ownership inspection pending",
         "identity": {"namespace": "Owner-local; no ID translation.", "generation": "Retain owner generation; destination audit pending."},
@@ -290,7 +290,7 @@
         "kind": "pending",
         "status": "pending",
         "reason": "Discovered in pinned tree; README inspected, this body and signatures not yet inspected.",
-        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "synexia-mindex-indexstring-bridge", "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexLexiconCoordinatePublisher.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "bd8ee3b608ebca9f2be6464fc3fa3096b9d73c28", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
+        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "m3-mindex-indexstring-bridge", "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexLexiconCoordinatePublisher.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "bd8ee3b608ebca9f2be6464fc3fa3096b9d73c28", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
         "targets": [],
         "owner": "Existing bridge responsibility; precise semantic ownership inspection pending",
         "identity": {"namespace": "Owner-local; no ID translation.", "generation": "Retain owner generation; destination audit pending."},
@@ -311,7 +311,7 @@
         "kind": "pending",
         "status": "pending",
         "reason": "Discovered in pinned tree; README inspected, this body and signatures not yet inspected.",
-        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "synexia-mindex-indexstring-bridge", "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexLexiconCoordinateSpace.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "d6f0672ceb7847ca2c6add49ed77bacde24f6c40", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
+        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "m3-mindex-indexstring-bridge", "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexLexiconCoordinateSpace.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "d6f0672ceb7847ca2c6add49ed77bacde24f6c40", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
         "targets": [],
         "owner": "Existing bridge responsibility; precise semantic ownership inspection pending",
         "identity": {"namespace": "Owner-local; no ID translation.", "generation": "Retain owner generation; destination audit pending."},
@@ -332,7 +332,7 @@
         "kind": "pending",
         "status": "pending",
         "reason": "Discovered in pinned tree; README inspected, this body and signatures not yet inspected.",
-        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "synexia-mindex-indexstring-bridge", "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexRuntimeStructuralAdapterProvider.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "d4fd03625269406d8d6d73c9b9f4cc343c2f1568", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
+        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "m3-mindex-indexstring-bridge", "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexRuntimeStructuralAdapterProvider.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "d4fd03625269406d8d6d73c9b9f4cc343c2f1568", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
         "targets": [],
         "owner": "Existing bridge responsibility; precise semantic ownership inspection pending",
         "identity": {"namespace": "Owner-local; no ID translation.", "generation": "Retain owner generation; destination audit pending."},
@@ -353,7 +353,7 @@
         "kind": "pending",
         "status": "pending",
         "reason": "Discovered in pinned tree; README inspected, this body and signatures not yet inspected.",
-        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "synexia-mindex-indexstring-bridge", "path": "synexia-mindex-indexstring-bridge/src/main/java/com/synexia/mindex/indexstring/MIndexStringConversionBridge.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "eb7884f68b5a5b0d6f34be47c17326cf4d6222ee", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
+        "sources": [{"repo": "hsoliwal/com.synexia", "commit": "75fb1abaecb56969bea2914520bbe819f130632b", "module": "m3-mindex-indexstring-bridge", "path": "m3-mindex-indexstring-bridge/src/main/java/jdk/internal/m3/mindex/indexstring/MIndexStringConversionBridge.java", "symbol": null, "signatures": [], "sha256": null, "git_blob_sha1": "eb7884f68b5a5b0d6f34be47c17326cf4d6222ee", "fingerprint": null, "revision_role": "pinned", "tracking_ref": "refs/heads/develop"}],
         "targets": [],
         "owner": "Existing bridge responsibility; precise semantic ownership inspection pending",
         "identity": {"namespace": "Owner-local; no ID translation.", "generation": "Retain owner generation; destination audit pending."},
@@ -538,7 +538,7 @@
         "observation": "Discovery is not proof of implementation or conformance."
       },
       {
-        "id": "synexia.counterpart.MIndexVersionTable",
+        "id": "m3.counterpart.MIndexVersionTable",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Inlined dormant JDK-owned kernel; local recipe/module/runtime proof passed; complete JDK integration unverified.",
@@ -546,15 +546,15 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
-            "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/com/synexia/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexVersionTable.java.txt",
-            "symbol": "com.synexia.mindex.vm.MIndexVersionTable",
+            "module": "m3-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexVersionTable.java.txt",
+            "symbol": "jdk.internal.m3.mindex.vm.MIndexVersionTable",
             "signatures": [
               "static <T> MIndexVersionTable<T> prepare(List<MIndexString>, Scheme<T>, int, MIndexProgressMonitor)",
               "int[] between(MIndexString, boolean, MIndexString, boolean)"
             ],
-            "sha256": "a6cf406b99ce4064e23de1d9eddeb583b6b0f31f6ae74a06c8f98f8f8b330542",
-            "git_blob_sha1": "1675e6d7e35e3371bce2ba9b53716a00b6fd67da",
+            "sha256": "6f2ba0e4dcf2cd131e4907519b0ba91dabd41d68c5253a16834d9bb37ac160c2",
+            "git_blob_sha1": "e30893f329e957658fb6d408a6d361ce7df6c0d5",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -617,7 +617,7 @@
         "recipe": {
           "id": "m3-vi",
           "version": "1",
-          "path": "m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+          "path": "m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
           "sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
           "preconditions": [
             "Exact source/template pins; absent new targets or exact converged outputs."
@@ -660,7 +660,7 @@
         "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
-        "id": "synexia.counterpart.MIndexLibraryRelease",
+        "id": "m3.counterpart.MIndexLibraryRelease",
         "kind": "adapter",
         "status": "implemented-unverified",
         "reason": "Inlined dormant JDK-owned kernel; local recipe/module/runtime proof passed; complete JDK integration unverified.",
@@ -668,14 +668,14 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
-            "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/com/synexia/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexLibraryRelease.java.txt",
-            "symbol": "com.synexia.mindex.vm.MIndexLibraryRelease",
+            "module": "m3-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexLibraryRelease.java.txt",
+            "symbol": "jdk.internal.m3.mindex.vm.MIndexLibraryRelease",
             "signatures": [
               "MIndexLibraryRelease(MIndexString origin, MIndexString group, MIndexString artifact, MIndexString rawVersion, MIndexString extension, MIndexString classifier, MIndexString contentSha256)"
             ],
-            "sha256": "fb34b0ca5dd91bcc45df89521e934af07139a3630c09b012b19876a0e54be422",
-            "git_blob_sha1": "9df260247ec226392832a01fcb99f6bc56b151c6",
+            "sha256": "b2ac4a895d541380c37f6300e1d4b04d5827db486517159b46744e64ff5acbd9",
+            "git_blob_sha1": "e1ca92f9b8e1134a799903f52b525613bbf25a5f",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -736,7 +736,7 @@
         "recipe": {
           "id": "m3-vi",
           "version": "1",
-          "path": "m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+          "path": "m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
           "sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
           "preconditions": [
             "Exact source/template pins; absent new targets or exact converged outputs."
@@ -779,7 +779,7 @@
         "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
-        "id": "synexia.counterpart.MIndexVmSession",
+        "id": "m3.counterpart.MIndexVmSession",
         "kind": "pending",
         "status": "pending",
         "reason": "Concise counterpart name reserved; dependency closure and runtime integration remain unimplemented.",
@@ -787,14 +787,14 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
-            "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/com/synexia/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexVmSession.java.txt",
-            "symbol": "com.synexia.mindex.vm.MIndexVmSession",
+            "module": "m3-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexVmSession.java.txt",
+            "symbol": "jdk.internal.m3.mindex.vm.MIndexVmSession",
             "signatures": [
-              "com.synexia.mindex.vm.MIndexVmSession"
+              "jdk.internal.m3.mindex.vm.MIndexVmSession"
             ],
-            "sha256": "bdeb857abaa302a40c4f542c23c4629eb0091f04d56d60545d6ca51325ff92a4",
-            "git_blob_sha1": "d2fb810dccd53b5ecccde9063a348199f78e0672",
+            "sha256": "867a9ce0fb71162b38a68bd1e3d12b724bd61b15b844197a3b81f32cb4cc18cf",
+            "git_blob_sha1": "74f0fa06fc5ddb3417efdac3a8282e5f2488f07e",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -889,7 +889,7 @@
         "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
-        "id": "synexia.counterpart.MIndexVmPrecomputeKey",
+        "id": "m3.counterpart.MIndexVmPrecomputeKey",
         "kind": "pending",
         "status": "pending",
         "reason": "Concise counterpart name reserved; dependency closure and runtime integration remain unimplemented.",
@@ -897,14 +897,14 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
-            "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/com/synexia/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexVmPrecomputeKey.java.txt",
-            "symbol": "com.synexia.mindex.vm.MIndexVmPrecomputeKey",
+            "module": "m3-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexVmPrecomputeKey.java.txt",
+            "symbol": "jdk.internal.m3.mindex.vm.MIndexVmPrecomputeKey",
             "signatures": [
-              "com.synexia.mindex.vm.MIndexVmPrecomputeKey"
+              "jdk.internal.m3.mindex.vm.MIndexVmPrecomputeKey"
             ],
-            "sha256": "406f451222b1f6e950c28439316fdbcd6e9cfb9463658e1deec85cfe41197f1a",
-            "git_blob_sha1": "fc9aef1cce8e43ca81fd922ca6ea406417b1334b",
+            "sha256": "424e07da19c2218db8a705776ed2884146637d4325921a06c670afe3c96129e7",
+            "git_blob_sha1": "d7eec9579f614ff521683475df3eb5b825159066",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -999,7 +999,7 @@
         "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
-        "id": "synexia.counterpart.MIndexClass",
+        "id": "m3.counterpart.MIndexClass",
         "kind": "pending",
         "status": "pending",
         "reason": "Concise counterpart name reserved; dependency closure and runtime integration remain unimplemented.",
@@ -1007,14 +1007,14 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
-            "module": "synexia-mindex",
-            "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexClass.java",
-            "symbol": "com.synexia.mindex.classindex.MIndexClass",
+            "module": "m3-mindex",
+            "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexClass.java",
+            "symbol": "jdk.internal.m3.mindex.classindex.MIndexClass",
             "signatures": [
-              "com.synexia.mindex.classindex.MIndexClass"
+              "jdk.internal.m3.mindex.classindex.MIndexClass"
             ],
             "sha256": null,
-            "git_blob_sha1": "488bfc02c9830b333f45c631a9fa933cec56ea91",
+            "git_blob_sha1": "754a52297ff8c9ce34ffe7c765f8d7c684e693e4",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -1109,7 +1109,7 @@
         "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
-        "id": "synexia.counterpart.MIndexClassIndex",
+        "id": "m3.counterpart.MIndexClassIndex",
         "kind": "pending",
         "status": "pending",
         "reason": "Concise counterpart name reserved; dependency closure and runtime integration remain unimplemented.",
@@ -1117,14 +1117,14 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
-            "module": "synexia-mindex",
-            "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexClassIndex.java",
-            "symbol": "com.synexia.mindex.classindex.MIndexClassIndex",
+            "module": "m3-mindex",
+            "path": "m3-mindex/class-index/src/main/java/jdk/internal/m3/mindex/classindex/MIndexClassIndex.java",
+            "symbol": "jdk.internal.m3.mindex.classindex.MIndexClassIndex",
             "signatures": [
-              "com.synexia.mindex.classindex.MIndexClassIndex"
+              "jdk.internal.m3.mindex.classindex.MIndexClassIndex"
             ],
             "sha256": null,
-            "git_blob_sha1": "35632a8688201f2a6849b52e325daa27ae3a7bfe",
+            "git_blob_sha1": "eead494947962c5099c6decfbcf546163249164d",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "refs/heads/develop"
@@ -1219,7 +1219,7 @@
         "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
-        "id": "synexia.counterpart.MIndexAST",
+        "id": "m3.counterpart.MIndexAST",
         "kind": "pending",
         "status": "pending",
         "reason": "Concise counterpart name reserved; dependency closure and runtime integration remain unimplemented.",
@@ -1227,11 +1227,11 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
-            "module": "synexia-mindex",
-            "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexAST.java",
-            "symbol": "com.synexia.mindex.ast.MIndexAST",
+            "module": "m3-mindex",
+            "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/MIndexAST.java",
+            "symbol": "jdk.internal.m3.mindex.ast.MIndexAST",
             "signatures": [
-              "com.synexia.mindex.ast.MIndexAST"
+              "jdk.internal.m3.mindex.ast.MIndexAST"
             ],
             "sha256": null,
             "git_blob_sha1": "716f126c6faa70f8cc85aaad0be9b37fc9267fb6",
@@ -1329,7 +1329,7 @@
         "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
-        "id": "synexia.counterpart.MIndexASTPrecompute",
+        "id": "m3.counterpart.MIndexASTPrecompute",
         "kind": "pending",
         "status": "pending",
         "reason": "Concise counterpart name reserved; dependency closure and runtime integration remain unimplemented.",
@@ -1337,11 +1337,11 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
-            "module": "synexia-mindex",
-            "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexASTPrecompute.java",
-            "symbol": "com.synexia.mindex.ast.MIndexASTPrecompute",
+            "module": "m3-mindex",
+            "path": "m3-mindex/runtime/src/main/java/jdk/internal/m3/mindex/ast/MIndexASTPrecompute.java",
+            "symbol": "jdk.internal.m3.mindex.ast.MIndexASTPrecompute",
             "signatures": [
-              "com.synexia.mindex.ast.MIndexASTPrecompute"
+              "jdk.internal.m3.mindex.ast.MIndexASTPrecompute"
             ],
             "sha256": null,
             "git_blob_sha1": "9b83784ff695a2a6dc0444beecbb7d97ee049875",
@@ -1439,7 +1439,7 @@
         "observation": "See m3/docs/counterpart-naming.md; runtime effective implementation selection is not installed."
       },
       {
-        "id": "synexia.counterpart.MIndexCompilerASTPrecompute",
+        "id": "m3.counterpart.MIndexCompilerASTPrecompute",
         "kind": "pending",
         "status": "pending",
         "reason": "Concise counterpart name reserved; dependency closure and runtime integration remain unimplemented.",
@@ -1447,11 +1447,11 @@
           {
             "repo": "hsoliwal/com.synexia",
             "commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
-            "module": "synexia-mindex",
-            "path": "synexia-mindex/compiler/src/main/java/com/synexia/mindex/compiler/MIndexCompilerASTPrecompute.java",
-            "symbol": "com.synexia.mindex.compiler.MIndexCompilerASTPrecompute",
+            "module": "m3-mindex",
+            "path": "m3-mindex/compiler/src/main/java/jdk/internal/m3/mindex/compiler/MIndexCompilerASTPrecompute.java",
+            "symbol": "jdk.internal.m3.mindex.compiler.MIndexCompilerASTPrecompute",
             "signatures": [
-              "com.synexia.mindex.compiler.MIndexCompilerASTPrecompute"
+              "jdk.internal.m3.mindex.compiler.MIndexCompilerASTPrecompute"
             ],
             "sha256": null,
             "git_blob_sha1": "1ac623b8fa822f4f8ce9ed9c3bb8c9a5194184b6",

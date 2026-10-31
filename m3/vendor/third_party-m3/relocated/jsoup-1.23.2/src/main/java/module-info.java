@@ -5,18 +5,18 @@
 
 /**
  * Defines the {@code jsoup-1.23.2} library,
- * relocated into M3JDK21 by LIB_INTAKE_TO_JMOD.
+ * relocated into M3JDK 21 by LIB_INTAKE_TO_JMOD.
  */
 module jdk.m3.jsoup {
     requires java.net.http;
     requires java.xml;
     requires static org.jspecify;
     requires static jdk.m3.re2j;
-    exports com.m3.lib.jsoup;
-    exports com.m3.lib.jsoup.helper;
-    exports com.m3.lib.jsoup.internal;
-    exports com.m3.lib.jsoup.nodes;
-    exports com.m3.lib.jsoup.parser;
-    exports com.m3.lib.jsoup.safety;
-    exports com.m3.lib.jsoup.select;
+    exports jdk.m3.lib.jsoup;
+    exports jdk.m3.lib.jsoup.helper;
+    exports jdk.m3.lib.jsoup.internal;
+    exports jdk.m3.lib.jsoup.nodes;
+    exports jdk.m3.lib.jsoup.parser;
+    exports jdk.m3.lib.jsoup.safety;
+    exports jdk.m3.lib.jsoup.select;
 }

@@ -39,7 +39,7 @@ Native core is the previously qualified Guava/M3 artifact with SHA-256
 `84050590fa79bd8e6c40bb30cdfa33dad96ac96c0f77645f5723088863e066eb`.
 
 Final report SHA-256:
-`3bebc12fc628eca04f4eef43056627ca18ebf751b2c8037a6e6da97dfd210e17`.
+`3291b12871c5eaae10620c99613625f7d13bb7a094f5f280dee92406eedbcfe0`.
 SOURCE_PROVENANCE.tsv binds actual emitted postimages to exact predecessor
 bytes and recipe manifests. FOSS ledgers, prepared dependency snapshots,
 source-manifest and the final report retain the source/test/JAR identities.

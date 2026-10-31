@@ -86,15 +86,15 @@
         "-Werror",
         "-d",
         "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/proof/candidate-m3jdk21/classes",
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3ChildProgressMonitor.java",
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3DefaultProgressMonitor.java",
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3Progress.java",
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3ProgressAdapters.java",
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3ProgressMonitor.java",
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3ProgressScope.java",
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3ProgressState.java",
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3SystemProgress.java",
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/test/java/com/m3/collections/M3ProgressAdaptersPercentageSelfTest.java"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/jdk/m3/collections/M3ChildProgressMonitor.java",
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/jdk/m3/collections/M3DefaultProgressMonitor.java",
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/jdk/m3/collections/M3Progress.java",
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/jdk/m3/collections/M3ProgressAdapters.java",
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/jdk/m3/collections/M3ProgressMonitor.java",
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/jdk/m3/collections/M3ProgressScope.java",
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/jdk/m3/collections/M3ProgressState.java",
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/jdk/m3/collections/M3SystemProgress.java",
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/test/java/jdk/m3/collections/M3ProgressAdaptersPercentageSelfTest.java"
       ],
       "exit": 0,
       "seconds": 1.157881
@@ -130,47 +130,47 @@
   ],
   "api_equal": true,
   "api_sha256": "5271bca827baff7efa83f53e4f31b445d66c746be314fff0fa31e0bf94f8d452",
-  "selftest_sha256": "34de1893e04bce2cea90608fe1b6b507375228451573510139fe919a6ae46bb6",
+  "selftest_sha256": "eda7f5d8eac21d45c61c3daaa97511a998ec6ce305d0899fde45b2a8e1a67309",
   "generated_sources": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3ChildProgressMonitor.java",
-      "sha256": "3ccd42c38929179e855bcbfa1a6f54f9edb6968a210c65d013ed434ee592e680"
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ChildProgressMonitor.java",
+      "sha256": "f3ad6ab46cb067b1caf13d23d2d2e2c2e79d1a79aa9f5421c7406090fcd9e1b9"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3DefaultProgressMonitor.java",
-      "sha256": "f0b52dec2ed7166f242bdd1076792dc3187fc2353d237af59df7b22403bf3d64"
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3DefaultProgressMonitor.java",
+      "sha256": "87eac42a847f506bcb379064f4c8d7c79d46450d728a706571dede6aad497f8c"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3Progress.java",
-      "sha256": "01b387d63a1ddfb1b758e11fcee76366aea68ec391bc0d87234172857cb6a25d"
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3Progress.java",
+      "sha256": "b0be8ec3d298a50c074a0ee9a111cddbc9870a608bf6e1f03f40830de23751c5"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3ProgressAdapters.java",
-      "sha256": "87a4782840b9862cf2252f2cf53191d7eb6fa4a6b96a180f949aa59d05160231"
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ProgressAdapters.java",
+      "sha256": "2b74e2f37552ff65c46dbae5793171dd86bd1d60015356af1d6963b6327ad698"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3ProgressMonitor.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ProgressMonitor.java",
       "sha256": "f45282edf96cbf61f84df41e92c5ad958e577ea07a397bc8802c5bc8996aeb24"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3ProgressScope.java",
-      "sha256": "8ad6c20a9661ec095fb4dcd0566b400130f9c13e9c4312a625ff2dfd0c40553b"
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ProgressScope.java",
+      "sha256": "8875077566d6ce16722c7b53d29d41f157997b8cc7f25d77a84d533f83201651"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3ProgressState.java",
-      "sha256": "1de191dc8e99a92f0aee3f8f24e665f9de49714f8571c0f5c3b047fbd43a6e6d"
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ProgressState.java",
+      "sha256": "cbe8c0bc1a473d3845613475e87aeaf4c5fc84fef8e0ceedde1a81993f7c298e"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3SystemProgress.java",
-      "sha256": "683b4a0532ff40682d43a51ee9e38fb1c73de3a05e53d9ec5392e4ba29cdd29b"
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3SystemProgress.java",
+      "sha256": "1db043000bfc0abadcb21f465dd697c4e5d7986a1e5db104ab366a7212b8ea7b"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3ProgressAdaptersPercentageSelfTest.java",
-      "sha256": "34de1893e04bce2cea90608fe1b6b507375228451573510139fe919a6ae46bb6"
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3ProgressAdaptersPercentageSelfTest.java",
+      "sha256": "eda7f5d8eac21d45c61c3daaa97511a998ec6ce305d0899fde45b2a8e1a67309"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3ProgressAdaptersPercentageTest.java",
-      "sha256": "aca7937f27206488236daf3cd06a6e48666ac534d4ac3f396328bcfdd8e09248"
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3ProgressAdaptersPercentageTest.java",
+      "sha256": "19693cdc294e9f4115192d8608cd0d1cd16c292e51d4cf8a47a52b02064d23d5"
     }
   ],
   "bounds": [

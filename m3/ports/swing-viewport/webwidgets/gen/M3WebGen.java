@@ -82,8 +82,8 @@ public final class M3WebGen {
 
 	/** Output layout of one toolkit side. */
 	record Side(Path root, boolean nebula) {
-		String pkg() { return nebula ? "org.eclipse.nebula.widgets.m3web.model" : "com.m3.swing.web.model"; }
-		String wpkg() { return nebula ? "org.eclipse.nebula.widgets.m3web" : "com.m3.swing.web"; }
+		String pkg() { return nebula ? "org.eclipse.nebula.widgets.m3web.model" : "jdk.m3.swing.web.model"; }
+		String wpkg() { return nebula ? "org.eclipse.nebula.widgets.m3web" : "jdk.m3.swing.web"; }
 		Path main(String p) { return root.resolve(nebula ? "org.eclipse.nebula.widgets.m3web/src" : "src/main/java").resolve(p.replace('.', '/')); }
 		Path test(String p) { return root.resolve(nebula ? "org.eclipse.nebula.widgets.m3web.test/src" : "src/test/java").resolve(p.replace('.', '/')); }
 		Path example(String p) { return root.resolve(nebula ? "org.eclipse.nebula.widgets.m3web.snippets/src" : "examples/web").resolve(p.replace('.', '/')); }

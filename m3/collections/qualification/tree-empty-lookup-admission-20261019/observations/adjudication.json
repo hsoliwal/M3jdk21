@@ -191,7 +191,7 @@
   "fixtureExpectationsEdited": false,
   "validatorReport": {
     "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-empty-lookup-validator-5d0c45d1\\BEHAVIOR_REPORT.json",
-    "sha256": "d8d69d45adcc518706c503fb7eab5c28882257a486f5364ff6a205896ee79e34",
+    "sha256": "bd1a1e42db078a4c9a1e1a1c8bb0c69b395dc71dc5de7f77f361555561933485",
     "strictControlClause4": "FAIL: ten inherited callback sequences, outcomes/state exact"
   },
   "examples": [

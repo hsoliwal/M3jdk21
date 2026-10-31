@@ -3,8 +3,8 @@ name: Indexed live sorted Spliterator contract
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java'
-      - 'm3/collections/src/test/java/com/m3/collections/IndexedLiveSortedSpliterator*.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/IndexedLiveSortedSpliterator*.java'
       - 'm3/pom.xml'
       - '.github/workflows/indexed-live-sorted-spliterator.yml'
   workflow_dispatch:
@@ -34,6 +34,6 @@ jobs:
           mvn -B -ntp -f m3/pom.xml -Pm3-extended -pl :m3-collections -am \
             -Dsurefire.failIfNoSpecifiedTests=false \
             -Dtest=IndexedLiveSortedSpliteratorTest test
-          report=m3/collections/target/surefire-reports/TEST-com.m3.collections.IndexedLiveSortedSpliteratorTest.xml
+          report=m3/collections/target/surefire-reports/TEST-jdk.m3.collections.IndexedLiveSortedSpliteratorTest.xml
           test -s "$report"
           grep -q 'name="sortedIndexStreamContract"' "$report"

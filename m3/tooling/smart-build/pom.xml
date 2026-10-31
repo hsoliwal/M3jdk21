@@ -32,7 +32,7 @@
       <failIfNoTests>true</failIfNoTests></configuration></plugin>
     <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId>
       <version>3.4.2</version><configuration><archive><manifest>
-      <mainClass>com.m3.tooling.smartbuild.M3SmartBuildReceiver</mainClass>
+      <mainClass>jdk.m3.tooling.smartbuild.M3SmartBuildReceiver</mainClass>
       </manifest></archive></configuration></plugin>
   </plugins></build>
 </project>

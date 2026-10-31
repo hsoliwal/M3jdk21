@@ -30,7 +30,7 @@ jobs:
           python3 - <<'PY'
           import xml.etree.ElementTree as ET
           from pathlib import Path
-          p = Path('m3/tooling/smart-build/target/surefire-reports/TEST-com.m3.tooling.smartbuild.M3SmartBuildReceiverTest.xml')
+          p = Path('m3/tooling/smart-build/target/surefire-reports/TEST-jdk.m3.tooling.smartbuild.M3SmartBuildReceiverTest.xml')
           if not p.is_file():
               raise SystemExit(f'missing receiver test report: {p}')
           suite = ET.parse(p).getroot()

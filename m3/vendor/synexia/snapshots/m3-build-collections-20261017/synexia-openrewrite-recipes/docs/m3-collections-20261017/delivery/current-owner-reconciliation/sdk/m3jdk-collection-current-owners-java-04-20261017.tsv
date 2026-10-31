@@ -1,9 +1,0 @@
-evidenceKind	SDK_EXECUTION
-recipe	com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
-crate	m3jdk-collection-current-owners-java-04-20261017
-result	m3/ports/collections/src/main/java/com/m3/util/M3SortableTopK.java	ABSENT	918e2dc751569e6fcda8d8a13416c62289a068bd3f9e81418240d4be5a69d6cd
-fixedPoint	PASSED
-driftRefusal	PASSED
-duplicateRefusal	PASSED
-missingRefusal	NOT_APPLICABLE_ALL_TARGETS_ABSENT
-scope	sealed-recipe-SDK-only; runtime-contracts-and-source-mirror-gates-separate

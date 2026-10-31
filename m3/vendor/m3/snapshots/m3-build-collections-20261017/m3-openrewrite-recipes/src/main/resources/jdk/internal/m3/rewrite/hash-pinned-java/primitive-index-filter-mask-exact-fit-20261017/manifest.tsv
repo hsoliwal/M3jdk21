@@ -1,0 +1,3 @@
+# path	before_sha256	after_sha256	template
+# parse-context-sha256	a6bc4730467fb7fbeb8bfbd8caae06389314ae326cbe184961d6da5b672683ed
+synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveIndexView.java	192c8c020dded1b6cdbd772290748b4640487feb74e46652cf56860a25745c5b	b7938e14c342196e74bc506020ecf58f7180fa5332c813a46d5f5aefbafef47a	template-00.txt

@@ -1,7 +1,7 @@
 
 import java.util.*;
 import java.util.function.*;
-import com.m3.collections.*;
+import jdk.m3.collections.*;
 public class M3ComparatorFailureProbe {
     static final IllegalArgumentException SENTINEL = new IllegalArgumentException("owner comparator marker");
     static final List<String> CALLS = new ArrayList<>();

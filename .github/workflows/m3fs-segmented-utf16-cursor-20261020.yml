@@ -3,8 +3,8 @@ name: M3JDK21 M3FS composite UTF-16 indexed cursors
 on:
   pull_request:
     paths:
-      - 'm3/fs/src/main/java/com/m3/fs/M3FsPrecomputeBundle.java'
-      - 'm3/fs/src/test/java/com/m3/fs/M3FsSegmentedCursor*.java'
+      - 'm3/fs/src/main/java/jdk/m3/fs/M3FsPrecomputeBundle.java'
+      - 'm3/fs/src/test/java/jdk/m3/fs/M3FsSegmentedCursor*.java'
       - 'm3/fs/qualification/segmented-utf16-cursor-20261020/**'
       - '.github/workflows/m3fs-segmented-utf16-cursor-20261020.yml'
   workflow_dispatch:
@@ -35,10 +35,10 @@ jobs:
           set -euo pipefail
           OUT="$RUNNER_TEMP/m3fs-segmented-cursor"
           mkdir -p "$OUT/classes"
-          find m3/fs/src/main/java/com/m3/fs -name '*.java' -print > "$OUT/sources.txt"
-          printf '%s\n' m3/fs/src/test/java/com/m3/fs/M3FsSegmentedCursorSelfTest.java >> "$OUT/sources.txt"
+          find m3/fs/src/main/java/jdk/m3/fs -name '*.java' -print > "$OUT/sources.txt"
+          printf '%s\n' m3/fs/src/test/java/jdk/m3/fs/M3FsSegmentedCursorSelfTest.java >> "$OUT/sources.txt"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$OUT/classes" @"$OUT/sources.txt"
-          java -ea -Xcheck:jni -cp "$OUT/classes" com.m3.fs.M3FsSegmentedCursorSelfTest
+          java -ea -Xcheck:jni -cp "$OUT/classes" jdk.m3.fs.M3FsSegmentedCursorSelfTest
   existing-m3fs-junit-native:
     runs-on: ubuntu-latest
     timeout-minutes: 50

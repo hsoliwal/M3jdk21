@@ -7,10 +7,10 @@ import hashlib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
-CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-regex-oracle-harness"
-POLICY = ROOT / "m3/docs/m3jdk-synexia-porting-policy.tsv"
+CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-regex-oracle-harness"
+POLICY = ROOT / "m3/docs/m3jdk-m3-porting-policy.tsv"
 PROVENANCE = ROOT / "m3/ports/precompute/REGEX_ORACLE_HARNESS_PROVENANCE.tsv"
-CORPUS = ROOT / "m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexOracleCorpus.java"
+CORPUS = ROOT / "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexOracleCorpus.java"
 
 REQUIRED_POLICY = {
     "source_workspace": "hsoliwal/com.synexia",

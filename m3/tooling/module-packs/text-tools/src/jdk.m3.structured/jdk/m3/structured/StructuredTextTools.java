@@ -16,7 +16,7 @@ import java.util.Objects;
 
 /**
  * Bounded, deterministic structured-text atoms over the existing immutable TextFrame.
- * Java String remains the public facade; on M3JDK21 its backing is owned by M3 String.
+ * Java String remains the public facade; on M3JDK 21 its backing is owned by M3 String.
  * These are deliberately scoped formats, not emulations of GNU or external CLI tools.
  */
 public final class StructuredTextTools {

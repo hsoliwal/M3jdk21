@@ -65,7 +65,7 @@ New features
 * Add missing methods in AbstractMapTests. Thanks to Gary Gregory. 
 * COLLECTIONS-700:  Add ConcurrentReferenceHashMap. Thanks to Gary Gregory. 
 * Add commons.easymock.version to parameterize EasyMock version. Thanks to Gary Gregory. 
-* COLLECTIONS-869:  Add com.m3.collections.apache.IteratorUtils.chainedIterator(Iterator<? extends Iterator<? extends E>>). Thanks to Gary Gregory. 
+* COLLECTIONS-869:  Add jdk.m3.collections.apache.IteratorUtils.chainedIterator(Iterator<? extends Iterator<? extends E>>). Thanks to Gary Gregory. 
 * COLLECTIONS-533:  Add ArrayListValuedLinkedHashMap #560. Thanks to Peter De Maeyer. 
 * Add missing test AbstractIteratorTest.testForEachRemaining(). Thanks to Gary Gregory. 
 * Add FilterIterator.removeNext() #564. Thanks to Gary Gregory, Claude Warren. 
@@ -91,7 +91,7 @@ Fixed Bugs
 * Improve WrappedBloomFilterTest. All tests now assert copy() the same way. Thanks to Gary Gregory, Claude Warren. 
 * COLLECTIONS-860:  Javadoc CollectionBag.add* to throw ClassCastException. Thanks to Gary Gregory,  Daniele. 
 * Fix generics in IteratorChain.IteratorChain(Collection). Thanks to Gary Gregory. 
-* Fix generics in com.m3.collections.apache.IteratorUtils.chainedIterator(Collection). Thanks to Gary Gregory. 
+* Fix generics in jdk.m3.collections.apache.IteratorUtils.chainedIterator(Collection). Thanks to Gary Gregory. 
 * COLLECTIONS-856:  Javadoc: Document interaction between peek and filter iterator #515. Thanks to Benjamin Confino, Gary Gregory. 
 * COLLECTIONS-815:  Javadoc: Update ClosureUtils Javadoc to match runtime. Thanks to Elia Bertolina, Gary Gregory. 
 * COLLECTIONS-815:  Javadoc: Update ClosureUtils Javadoc to match runtime. Thanks to Gary Gregory. 
@@ -127,7 +127,7 @@ Apache Commons Collections 4.5.0-M2 RELEASE NOTES
 
 The Apache Commons Collections package contains types that extend and augment the Java Collections Framework.
 
-This milestone release requires Java 8 and adds the package `com.m3.collections.apache.bloomfilter`.
+This milestone release requires Java 8 and adds the package `jdk.m3.collections.apache.bloomfilter`.
 
 Changes in this version
 -----------------------
@@ -187,7 +187,7 @@ Apache Commons Collections 4.5.0-M1 RELEASE NOTES
 
 The Apache Commons Collections package contains types that extend and augment the Java Collections Framework.
 
-This milestone release requires Java 8 and adds the package `com.m3.collections.apache.bloomfilter` for review.
+This milestone release requires Java 8 and adds the package `jdk.m3.collections.apache.bloomfilter` for review.
 
 Changes in this version
 -----------------------
@@ -196,7 +196,7 @@ New features
 ------------
 
 * COLLECTIONS-843:  Implement Layered Bloom filter #402. Thanks to Claude Warren, Alex Herbert, Gary Gregory. 
-* COLLECTIONS-748:  Let com.m3.collections.apache.properties.[Sorted]PropertiesFactory accept XML input. Thanks to Gary Gregory. 
+* COLLECTIONS-748:  Let jdk.m3.collections.apache.properties.[Sorted]PropertiesFactory accept XML input. Thanks to Gary Gregory. 
 * COLLECTIONS-772:  Add private constructor to ArrayUtils; better Javadocs, #195. Thanks to Arturo Bernal, Alex Herbert, Gary Gregory, Bruno P. Kinoshita. 
 * COLLECTIONS-760:  Add tests for MapUtils. Thanks to Isira Seneviratne. 
 * Test subMap and tailMap #94. Thanks to dota17. 
@@ -216,10 +216,10 @@ New features
 * COLLECTIONS-728:  Add BloomFilter contribution. Thanks to Claude Warren. 
 * COLLECTIONS-726:  Add lambdas function to provide default values in MapUtils #81. Thanks to liuhaozzu, Gary Gregory. 
 * Add three test cases in UnmodifiableQueueTest #105. Thanks to dota17. 
-* COLLECTIONS-744:  Add com.m3.collections.apache.EnumerationUtils.asIterable(Enumeration). Thanks to Gary Gregory. 
-* COLLECTIONS-746:  Add com.m3.collections.apache.properties.PropertiesFactory.EMPTY_PROPERTIES. Thanks to Gary Gregory. 
+* COLLECTIONS-744:  Add jdk.m3.collections.apache.EnumerationUtils.asIterable(Enumeration). Thanks to Gary Gregory. 
+* COLLECTIONS-746:  Add jdk.m3.collections.apache.properties.PropertiesFactory.EMPTY_PROPERTIES. Thanks to Gary Gregory. 
 * COLLECTIONS-746:  Add PropertiesFactory. Thanks to Gary Gregory. 
-* Add com.m3.collections.apache.properties.OrderedProperties and OrderedPropertiesFactory. Thanks to Gary Gregory. 
+* Add jdk.m3.collections.apache.properties.OrderedProperties and OrderedPropertiesFactory. Thanks to Gary Gregory. 
 * Make AbstractPatriciaTrie public #407. Thanks to Vadim, Claude Warren, Gary Gregory, Alex Herbert. 
 * Add test cases for indexOf and contains method of ArrayUtils class #215. Thanks to Ajay Kumar Jha, Bruno P. Kinoshita, Claude Warren. 
 * Add Maven property project.build.outputTimestamp for build reproducibility. Thanks to Gary Gregory. 
@@ -289,7 +289,7 @@ Fixed Bugs
 * [StepSecurity] ci: Harden GitHub Actions #401. Thanks to step-security-bot, Gary Gregory. 
 * Fix punctuation and minor Javadoc issues #409. Thanks to Martin Wiesner, Bruno P. Kinoshita, Gary Gregory. 
 * Deprecate IterableUtils 0-argument constructor. Thanks to Gary Gregory. 
-* COLLECTIONS-850:  Tests in com.m3.collections.apache.multimap should not depend on map iteration order, see also #429. Thanks to Gary Gregory, Anirudh Madhavan. 
+* COLLECTIONS-850:  Tests in jdk.m3.collections.apache.multimap should not depend on map iteration order, see also #429. Thanks to Gary Gregory, Anirudh Madhavan. 
 * COLLECTIONS-850:  Reimplement FixedOrderComparator#equals() and hashCode(), see also #392. Thanks to Gary Gregory, Saurabh Rahate. 
 
 Changes
@@ -433,10 +433,10 @@ New features
 * COLLECTIONS-589:  Add null-safe MapUtils.size(Map<?, ?>) method. Thanks to Gary Gregory. 
 * COLLECTIONS-586:  PatriciaTrie prefixMap clear throws NullPointerException. Thanks to Shailender Bathula, Gary Gregory. 
 * COLLECTIONS-654:  Add class SortedProperties to sort keys. 
-* COLLECTIONS-668:  Add CollectionUtils containsAny method for primitive array: com.m3.collections.apache.CollectionUtils.containsAny(Collection<?>, T...). Thanks to Gary Gregory. 
+* COLLECTIONS-668:  Add CollectionUtils containsAny method for primitive array: jdk.m3.collections.apache.CollectionUtils.containsAny(Collection<?>, T...). Thanks to Gary Gregory. 
 * COLLECTIONS-575:  Synchronized queue wrapper in QueueUtils. Thanks to Guram Savinov, Grzegorz Rożniecki, Bruno P. Kinoshita, Gary Gregory. 
-* COLLECTIONS-670:  Add com.m3.collections.apache.IteratorUtils.first(Iterator). Thanks to Gary Gregory. 
-* COLLECTIONS-671:  Add com.m3.collections.apache.IterableUtils.first(Iterable). Thanks to Gary Gregory. 
+* COLLECTIONS-670:  Add jdk.m3.collections.apache.IteratorUtils.first(Iterator). Thanks to Gary Gregory. 
+* COLLECTIONS-671:  Add jdk.m3.collections.apache.IterableUtils.first(Iterable). Thanks to Gary Gregory. 
 
 Fixed Bugs
 ----------
@@ -449,7 +449,7 @@ Fixed Bugs
 * COLLECTIONS-653:  Update Javadoc to Build on Java 1.8. 
 * COLLECTIONS-606:  Build status, Coverage status and Maven central weren't in README.md Thanks to Vamsi Kavuri. 
 * COLLECTIONS-594:  Website spelling error: MultiValuedMapList. Thanks to Javen O'Neal.
-* COLLECTIONS-597:  Correction of Javadoc for com.m3.collections.apache.functors.CatchAndRethrowClosure. Thanks to Enrique. 
+* COLLECTIONS-597:  Correction of Javadoc for jdk.m3.collections.apache.functors.CatchAndRethrowClosure. Thanks to Enrique. 
 * COLLECTIONS-678:  The verification of unsupported iterator methods is not complete. Thanks to Oscar Luis Vera Pérez. 
 * COLLECTIONS-673:  ListUtils.partition potential integer overflow. Thanks to John Mark, Stephan Fuhrmann. 
 
@@ -459,8 +459,8 @@ Changes
 * COLLECTIONS-602:  Improve efficiency of DefaultedMap.get. Thanks to John Mark. 
 * COLLECTIONS-603:  Small improvements for generics, conditional statements, and warnings suppressions. Thanks to Artem Konovalov. 
 * COLLECTIONS-655:  Update platform from Java 6 to Java 7. 
-* COLLECTIONS-666:  com.m3.collections.apache.ListUtils.union(List, List) should pre-allocate result list. Thanks to BELUGA BEHR. 
-* COLLECTIONS-669:  Update com.m3.collections.apache.CollectionUtils.addAll(Collection<C>, C[]) to addAll(Collection<C>, C...). Thanks to BELUGA BEHR, Gary Gregory. 
+* COLLECTIONS-666:  jdk.m3.collections.apache.ListUtils.union(List, List) should pre-allocate result list. Thanks to BELUGA BEHR. 
+* COLLECTIONS-669:  Update jdk.m3.collections.apache.CollectionUtils.addAll(Collection<C>, C[]) to addAll(Collection<C>, C...). Thanks to BELUGA BEHR, Gary Gregory. 
 
  
 For complete information on Apache Commons Collections, including instructions on how to submit bug reports,

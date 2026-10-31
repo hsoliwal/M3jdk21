@@ -236,7 +236,7 @@ public final class M3FiveProviderScaffold {
     }
 
     /**
-     * M3jdk21 is the JDK: an owned store lands in place in java.base. JDK rows land in their own
+     * M3JDK 21 is the JDK: an owned store lands in place in java.base. JDK rows land in their own
      * java.util type (public API unchanged, internals on M3 lanes, TARGET_OWNED_PORT GPLv2+CPE via an
      * M3JdkHandoff packet). Provider rows keep their provider-shaped owner outside java.base and reuse
      * the java.base store of the java.util analogue of their family. Eclipse rows never land.

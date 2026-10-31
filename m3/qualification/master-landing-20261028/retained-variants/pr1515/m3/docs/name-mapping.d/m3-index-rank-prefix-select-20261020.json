@@ -4,13 +4,13 @@
   "recipe_commit": "9c8c0c58c7bdd2c8a0ca47c7ff9fa92bf3a0e7b1",
   "recipe_pr": 12563,
   "recipes": [
-    "com.synexia.m3.M3IndexPathRankPrefixSelect20261020",
-    "com.synexia.m3.M3JUnitLauncherProvenance20261020"
+    "jdk.internal.m3.M3IndexPathRankPrefixSelect20261020",
+    "jdk.internal.m3.M3JUnitLauncherProvenance20261020"
   ],
   "target_baseline": "35e661134ba99b774f34326d1138e995ccda193a",
   "targets": [
-    "com.m3.collections.M3IndexPathRank",
-    "com.m3.collections.M3IndexPathRank$Window",
+    "jdk.m3.collections.M3IndexPathRank",
+    "jdk.m3.collections.M3IndexPathRank$Window",
     "m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py"
   ],
   "public_names": "unchanged; no new public runtime class or native method",

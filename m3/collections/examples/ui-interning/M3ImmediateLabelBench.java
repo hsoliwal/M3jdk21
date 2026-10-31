@@ -12,11 +12,11 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
-package com.m3.collections.examples;
+package jdk.m3.collections.examples;
 
-import com.m3.collections.M3LabelLanes;
-import com.m3.collections.M3LabelPool;
-import com.m3.collections.M3TextExtentCache;
+import jdk.m3.collections.M3LabelLanes;
+import jdk.m3.collections.M3LabelPool;
+import jdk.m3.collections.M3TextExtentCache;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
@@ -39,7 +39,7 @@ import java.util.Random;
  * random rows into a reused char buffer (the native text path, no String) and
  * asks the extent cache.</p>
  *
- * <pre>java com.m3.collections.examples.M3ImmediateLabelBench data-dir out.tsv</pre>
+ * <pre>java jdk.m3.collections.examples.M3ImmediateLabelBench data-dir out.tsv</pre>
  */
 public final class M3ImmediateLabelBench {
 	private static final System.Logger LOG = System.getLogger (M3ImmediateLabelBench.class.getName ());

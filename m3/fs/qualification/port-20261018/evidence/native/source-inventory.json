@@ -17,7 +17,7 @@
   {
     "path": "m3/fs/native/src/m3_fs_jni.c",
     "size": 9543,
-    "sha256": "ea56331efaac72f68543a4c9ac1e39bf6cc6a1af05cc6a130ddb9222d2aa1b78"
+    "sha256": "eada61443f8883be9f36111be8a3f440d9e7695665c2f3d872234d1f9ebce506"
   },
   {
     "path": "m3/fs/native/src/m3fs.c",
@@ -37,7 +37,7 @@
   {
     "path": "m3/fs/native/src/m3fs_jni.c",
     "size": 56022,
-    "sha256": "529094daabc23688e0d06632828d2e5823d5cc31bb759094178dbfe19aa8a5b9"
+    "sha256": "bdded9357294e6586f3783f50112b48be3b2cfb905f0e5f2d3a7e8c2cb1b76b2"
   },
   {
     "path": "m3/fs/native/src/m3fs_semantic.c",

@@ -2,7 +2,7 @@
   {
     "repository": "hsoliwal/eclipse-collections",
     "commit": "489c8e63b973aaf52eb87f08f5908a152a4b8f22",
-    "path": "eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/list/fixed/ArrayAdapter.java",
+    "path": "eclipse-collections/src/main/java/jdk/m3/collections/eclipse/impl/list/fixed/ArrayAdapter.java",
     "beforeSha256": "59d82c637cf0b2a70c47618c498e1526fc23bc843b9428c9cede5ea711a0e676",
     "afterSha256": "3f186d0f1cff53bd7374308f499783097c7484e4f959318ac93a6df33cec6638",
     "template": "ArrayAdapter.java.txt",

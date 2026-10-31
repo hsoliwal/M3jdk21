@@ -4,9 +4,9 @@ on:
   pull_request:
     paths:
       - AGENTS.md
-      - m3/collections/src/main/java/com/m3/collections/M3IndexedMultiValueMap.java
-      - m3/collections/src/test/java/com/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java
-      - m3/collections/src/test/java/com/m3/collections/M3IndexedMultiValueOccurrenceTest.java
+      - m3/collections/src/main/java/jdk/m3/collections/M3IndexedMultiValueMap.java
+      - m3/collections/src/test/java/jdk/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java
+      - m3/collections/src/test/java/jdk/m3/collections/M3IndexedMultiValueOccurrenceTest.java
       - m3/collections/qualification/m3-five-library-occurrences-20261018/**
       - .github/workflows/m3-five-library-occurrences-20261018.yml
   workflow_dispatch:
@@ -39,12 +39,12 @@ jobs:
           mkdir -p "$CLS" "$NATIVE"
           find m3/collections/src/main/java -name '*.java' -print > "$RUNNER_TEMP/m3-multivalue-main-sources.txt"
           javac --release 21 -proc:none -Xlint:all,-module -Werror -d "$CLS" @"$RUNNER_TEMP/m3-multivalue-main-sources.txt" \
-            m3/collections/src/test/java/com/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java
-          java -cp "$CLS" com.m3.collections.M3IndexedMultiValueOccurrenceSelfTest
+            m3/collections/src/test/java/jdk/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java
+          java -cp "$CLS" jdk.m3.collections.M3IndexedMultiValueOccurrenceSelfTest
           cc -std=c17 -fPIC -shared -O1 -g -Wall -Wextra -Werror \
             -fsanitize=undefined -fno-sanitize-recover=all \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
             m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
             -o "$NATIVE/libm3_collections_mask.so"
           java -Xcheck:jni -Djava.library.path="$NATIVE" -cp "$CLS" \
-            com.m3.collections.M3IndexedMultiValueOccurrenceSelfTest
+            jdk.m3.collections.M3IndexedMultiValueOccurrenceSelfTest

@@ -10,7 +10,7 @@ Status: dependency-ready compatibility-port increment; NOT a completed family mi
 - The first destination observation was d6390ea3bb348f0c22afdba0819ca4ec0e97970f. The branch moved during inspection.
 - PR 7 merged documentation. PR 6 subsequently merged into its base on 2026-10-02 at 01:27:56 UTC, merge 305dc277139b0e7cff1f4e284e7019a381480153. Its tested historical head remains 3776d6e674d6c9b04539ca24aca2504aa88d4a57. A merge does not resolve its two enabled StringJoiner failures or establish compiled-mode conformance.
 
-Read m3/docs/shared-atom-concatenation.md, m3/docs/synexia-reconciliation.md and the authoritative m3/docs/name-mapping.json before resuming. Extend that mapping rather than introducing a second mapping authority.
+Read m3/docs/shared-atom-concatenation.md, m3/docs/m3-reconciliation.md and the authoritative m3/docs/name-mapping.json before resuming. Extend that mapping rather than introducing a second mapping authority.
 
 ## Ownership decision for this increment
 

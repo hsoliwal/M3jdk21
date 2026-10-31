@@ -36,7 +36,7 @@ static int read_chunk(JNIEnv *env, jintArray offsets, jintArray flags,
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_collections_M3MaskViewportNative_project(JNIEnv *env, jclass cls,
+Java_jdk_m3_collections_M3MaskViewportNative_project(JNIEnv *env, jclass cls,
         jintArray offsets, jintArray flags, jint first, jint length,
         jint required, jint forbidden, jintArray target, jint targetOffset) {
     (void) cls;
@@ -150,7 +150,7 @@ Java_com_m3_collections_M3MaskViewportNative_project(JNIEnv *env, jclass cls,
 /* The Java page contract validates the full input even for an empty result.
  * Publication is one region write, so overlapping owners need only page scratch. */
 JNIEXPORT jint JNICALL
-Java_com_m3_collections_M3MaskViewportNative_projectPage(JNIEnv *env, jclass cls,
+Java_jdk_m3_collections_M3MaskViewportNative_projectPage(JNIEnv *env, jclass cls,
         jintArray offsets, jintArray flags, jint first, jint length,
         jint required, jint forbidden, jint skipVisible, jint maxVisible,
         jintArray target, jint targetOffset) {
@@ -295,7 +295,7 @@ static int m3_read_frame(JNIEnv *env, jintArray offsets, jintArray flags,
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_collections_M3MaskViewportNative_projectFramePage(JNIEnv *env, jclass cls,
+Java_jdk_m3_collections_M3MaskViewportNative_projectFramePage(JNIEnv *env, jclass cls,
         jintArray offsets, jintArray flags, jint first, jint length,
         jint required, jint forbidden, jint skipVisible, jint maxVisible,
         jintArray rows, jint rowOffset, jintArray slots, jint slotOffset,

@@ -22,7 +22,7 @@ for row in rows:
 mapping = next(row for row in rows if row['path'] == 'm3/docs/name-mapping.json')
 before_map = json.loads(mapping['before'])
 after_map = json.loads(mapping['after'])
-identity = 'synexia.counterpart.MIndexRegexTrigramQuery'
+identity = 'm3.counterpart.MIndexRegexTrigramQuery'
 for document in (before_map, after_map):
     record = next(r for r in document['migration']['records'] if r['id'] == identity)
     assert record['status'] == 'implemented-unverified'

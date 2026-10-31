@@ -78,7 +78,7 @@ jobs:
           set -euxo pipefail
           "$MVN" -B -ntp -f m3/recipes/runtime-convergence-20261020/pom.xml \
             -Drecipe.owner.root="$GITHUB_WORKSPACE/m3/recipes/runtime-convergence-20261020/sdk-owner" \
-            -Dm3.recipe.name=com.synexia.m3jdk.RuntimeConvergence20261020 \
+            -Dm3.recipe.name=jdk.internal.m3.m3jdk.RuntimeConvergence20261020 \
             test 2>&1 | tee proof/canonical-sdk.txt
       - name: Require a read-only receiver check with zero pending changes
         shell: bash
@@ -95,7 +95,7 @@ jobs:
           set -euxo pipefail
           "$MVN" -B -ntp -f m3/recipes/runtime-convergence-20261020/pom.xml \
             -Drecipe.owner.root="$GITHUB_WORKSPACE/m3/recipes/runtime-convergence-20261020/sdk-owner" \
-            -Dm3.recipe.name=com.synexia.m3jdk.RuntimeConvergence20261020 \
+            -Dm3.recipe.name=jdk.internal.m3.m3jdk.RuntimeConvergence20261020 \
             -Pcontract -Dm3.contract.target="$GITHUB_WORKSPACE" \
             verify 2>&1 | tee proof/received-contracts.txt
           test -f m3/recipes/runtime-convergence-20261020/target/contract-proof/RECEIPT.json

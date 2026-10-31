@@ -5,22 +5,22 @@
 
 /**
  * Defines the {@code commons-io-2.18.0} library,
- * relocated into M3JDK21 by LIB_INTAKE_TO_JMOD.
+ * relocated into M3JDK 21 by LIB_INTAKE_TO_JMOD.
  */
 module jdk.m3.io {
-    exports com.m3.lib.io;
-    exports com.m3.lib.io.build;
-    exports com.m3.lib.io.channels;
-    exports com.m3.lib.io.charset;
-    exports com.m3.lib.io.comparator;
-    exports com.m3.lib.io.file;
-    exports com.m3.lib.io.file.attribute;
-    exports com.m3.lib.io.file.spi;
-    exports com.m3.lib.io.filefilter;
-    exports com.m3.lib.io.function;
-    exports com.m3.lib.io.input;
-    exports com.m3.lib.io.input.buffer;
-    exports com.m3.lib.io.monitor;
-    exports com.m3.lib.io.output;
-    exports com.m3.lib.io.serialization;
+    exports jdk.m3.lib.io;
+    exports jdk.m3.lib.io.build;
+    exports jdk.m3.lib.io.channels;
+    exports jdk.m3.lib.io.charset;
+    exports jdk.m3.lib.io.comparator;
+    exports jdk.m3.lib.io.file;
+    exports jdk.m3.lib.io.file.attribute;
+    exports jdk.m3.lib.io.file.spi;
+    exports jdk.m3.lib.io.filefilter;
+    exports jdk.m3.lib.io.function;
+    exports jdk.m3.lib.io.input;
+    exports jdk.m3.lib.io.input.buffer;
+    exports jdk.m3.lib.io.monitor;
+    exports jdk.m3.lib.io.output;
+    exports jdk.m3.lib.io.serialization;
 }

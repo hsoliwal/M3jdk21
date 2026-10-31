@@ -8,5 +8,5 @@
 module m3.vcpu {
     requires transitive m3.parallel;
 
-    exports com.m3.vcpu;
+    exports jdk.m3.vcpu;
 }

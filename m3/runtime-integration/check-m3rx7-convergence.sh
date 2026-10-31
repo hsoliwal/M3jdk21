@@ -9,7 +9,7 @@ export PATH="$M3_JAVA_HOME/bin:$PATH"
 RX7_WORK="$(mktemp -d "${TMPDIR:-/tmp}/m3rx7-convergence.XXXXXX")"
 trap 'rm -rf -- "$RX7_WORK"' EXIT
 cd "$RX7_ROOT"
-python3 m3/compatibility/check_synexia_full_borrow_receiver.py
+python3 m3/compatibility/check_m3_full_borrow_receiver.py
 bash m3/runtime-integration/check-m3rx7-v7-receiver.sh
 bash m3/runtime-integration/check-m3rx7-v7-image-codec.sh
 bash m3/runtime-integration/check-m3rx7-transition-native.sh
@@ -28,8 +28,8 @@ for RX7_TEST in M3RX7LexicalContract M3RX7TokenIndexContract; do
   java -ea -Xint -Xmx96m -Xcheck:jni --patch-module "java.base=$RX7_WORK/patch" \
     --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED -cp "$RX7_WORK/tests" "$RX7_TEST"
 done
-RX7_COLLECTION_PROD=m3/collections/src/main/java/com/m3/collections
-RX7_COLLECTION_TEST=m3/collections/src/test/java/com/m3/collections
+RX7_COLLECTION_PROD=m3/collections/src/main/java/jdk/m3/collections
+RX7_COLLECTION_TEST=m3/collections/src/test/java/jdk/m3/collections
 javac -Xlint:all -Werror -d "$RX7_WORK/collections" \
   "$RX7_COLLECTION_PROD/M3FilteredViews.java" "$RX7_COLLECTION_PROD/M3MutableFilteredViews.java" \
   "$RX7_COLLECTION_PROD/M3CollectionViews.java" "$RX7_COLLECTION_PROD/M3FilteredNavigableSet.java" \
@@ -42,6 +42,6 @@ javac -Xlint:all -Werror -d "$RX7_WORK/collections" \
 for RX7_TEST in M3FilteredSortedEdgesContract M3FilteredViewsContract M3MutableFilteredViewsContract \
   M3BoundedFilteredNavigationContract M3FilteredNavigableFacadeSelfTest \
   M3FilteredNavigableSetRangeContract M3StoredRepresentativeContract; do
-  java -ea -Xmx96m -cp "$RX7_WORK/collections" "com.m3.collections.$RX7_TEST"
+  java -ea -Xmx96m -cp "$RX7_WORK/collections" "jdk.m3.collections.$RX7_TEST"
 done
 printf '%s\n' 'M3_RX7_CONVERGENCE_HOST_PASS; full source-built SDK/reactor/M3JDK21/jtreg/JIT/GC/CDS/platform gates NOT_RUN'

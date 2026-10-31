@@ -67,8 +67,8 @@ Focused repeat:
 python3 m3/ports/compiletime/qualification/ast-scoped-file-identity-20261017/verify.py
 mkdir -p /tmp/m3-ast-owner
 javac --release 21 -proc:none -Xlint:all -Werror -d /tmp/m3-ast-owner \
-  m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ASTLeafIndex.java \
-  m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ASTLeafIndexSelfTest.java
+  m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ASTLeafIndex.java \
+  m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ASTLeafIndexSelfTest.java
 java -cp /tmp/m3-ast-owner com.m3.compiletime.M3ASTLeafIndexSelfTest
 ```
 Canonical SDK:

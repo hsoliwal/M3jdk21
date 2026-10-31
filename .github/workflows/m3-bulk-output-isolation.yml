@@ -5,9 +5,9 @@ on:
     paths:
       - 'src/java.base/share/classes/jdk/internal/vm/parallel/BulkExecution.java'
       - 'test/jdk/jdk/internal/vm/parallel/BulkExecutionIsolationTest.java'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3BulkOutputIsolationRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3BulkOutputIsolationRecipeTest.java'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-bulk-output-isolation/**'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3BulkOutputIsolationRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3BulkOutputIsolationRecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-bulk-output-isolation/**'
       - 'm3/tooling/migration-recipes/tasks/bulk-output-isolation/**'
       - 'm3/compatibility/bulk-output-isolation-20261013.md'
       - '.github/workflows/m3-bulk-output-isolation.yml'

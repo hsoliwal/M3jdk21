@@ -16,6 +16,6 @@ cp "$here/src/main/resources/META-INF/services/com.sun.source.util.Plugin" \
 javac --release 21 -proc:none -Xlint:all -Xdoclint:all/protected -Werror -d "$work/self" \
   -processorpath "$work/classes" -Xplugin:M3JdkStandard \
   "${main_sources[@]}" "${self_tests[@]}"
-java -cp "$work/classes" com.m3.compiler.standard.M3JdkStandardPluginSelfTest
-java -cp "$work/classes" com.m3.compiler.standard.M3JdkStandardCensusSelfTest
-java -cp "$work/classes" com.m3.compiler.standard.M3ChangedNameGateSelfTest
+java -cp "$work/classes" jdk.m3.compiler.standard.M3JdkStandardPluginSelfTest
+java -cp "$work/classes" jdk.m3.compiler.standard.M3JdkStandardCensusSelfTest
+java -cp "$work/classes" jdk.m3.compiler.standard.M3ChangedNameGateSelfTest

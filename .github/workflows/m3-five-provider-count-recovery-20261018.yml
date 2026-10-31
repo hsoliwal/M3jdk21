@@ -3,13 +3,13 @@ name: M3 five-provider shared counts and full-width JNI recovery
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3ObjectCounts.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3ObjectCountsTest.java'
-      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3GuavaMultiset.java'
-      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3EclipseBag.java'
-      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheMultiSet.java'
-      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveProviderFlagSelection.java'
-      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderCountSharingRegressionTest.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3ObjectCounts.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3ObjectCountsTest.java'
+      - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3GuavaMultiset.java'
+      - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3EclipseBag.java'
+      - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3ApacheMultiSet.java'
+      - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3FiveProviderFlagSelection.java'
+      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveProviderCountSharingRegressionTest.java'
       - 'm3/collections/qualification/five-provider-count-recovery-20261018/**'
       - '.github/workflows/m3-five-provider-count-recovery-20261018.yml'
   workflow_dispatch:
@@ -39,7 +39,7 @@ jobs:
           from pathlib import Path
           import hashlib
           root = Path('m3/collections/qualification/five-provider-count-recovery-20261018/recipe')
-          resources = root / 'src/main/resources/com/synexia/rewrite/five-provider-count-recovery-20261018'
+          resources = root / 'src/main/resources/jdk/internal/m3/rewrite/five-provider-count-recovery-20261018'
           for line in (resources/'manifest.tsv').read_text().splitlines():
               path,before,after,name = line.split('\t')
               payload = (resources/name).read_bytes()

@@ -8,7 +8,7 @@
     "src/java.base/share/classes/java/util/M3CollectionMasks.java": "1337bb1e4c03c974bd4e335f7201c19186ab345548479ba29cebe639310c4017",
     "src/java.base/share/native/libjava/M3CollectionMasks.c": "7ecac17c362d2bce127b08c930b4beb263d06bd79439fcffcdcc5801ca7718a7",
     "test/jdk/java/util/Collections/M3CollectionViewsTest.java": "7a245f98feee1590a6c01cec79b779441c85a72a30838d9bbec949024fed1878",
-    "test/jdk/java/util/Collections/M3CollectionMasksTest.java": "09283aa9f8e6f184f9f2e50f2967be6fc47654b591d3de0908751d84d622ce17"
+    "test/jdk/java/util/Collections/M3CollectionMasksTest.java": "73433d7592b44c9e7d8268a860532cfc72a13f342698efb3fafea4262ede33f3"
   },
   "commands": [
     {

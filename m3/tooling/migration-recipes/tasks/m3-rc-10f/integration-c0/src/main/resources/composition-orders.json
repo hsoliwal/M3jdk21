@@ -40,7 +40,7 @@
         "Jop"
       ],
       "id": "Forward",
-      "recipe": "com.synexia.m3.Ic0Forward"
+      "recipe": "jdk.internal.m3.Ic0Forward"
     },
     {
       "families": [
@@ -82,10 +82,10 @@
         "Cmp"
       ],
       "id": "Reverse",
-      "recipe": "com.synexia.m3.Ic0Reverse"
+      "recipe": "jdk.internal.m3.Ic0Reverse"
     }
   ],
-  "schema": "synexia.ic0.composition-orders/1",
+  "schema": "m3.ic0.composition-orders/1",
   "sourceCommit": "d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c",
   "targetCommit": "c0a14387009aefc7d62bd3268055d526e04f9074"
 }

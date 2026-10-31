@@ -40,7 +40,7 @@
       <resource>
         <directory>${project.basedir}/../../src/main/resources</directory>
         <includes>
-          <include>com/synexia/rewrite/hash-pinned-java/jdk-focus-a3/**</include>
+          <include>jdk/internal/m3/rewrite/hash-pinned-java/jdk-focus-a3/**</include>
           <include>META-INF/rewrite/jdk-focus.yml</include>
         </includes>
       </resource>
@@ -52,7 +52,7 @@
         <version>3.13.0</version>
         <configuration>
           <includes>
-            <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+            <include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
           </includes>
           <compilerArgs>
             <arg>-Xlint:all</arg>

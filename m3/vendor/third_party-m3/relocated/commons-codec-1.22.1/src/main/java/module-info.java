@@ -5,14 +5,14 @@
 
 /**
  * Defines the {@code commons-codec-1.22.1} library,
- * relocated into M3JDK21 by LIB_INTAKE_TO_JMOD.
+ * relocated into M3JDK 21 by LIB_INTAKE_TO_JMOD.
  */
 module jdk.m3.codec {
-    exports com.m3.lib.codec;
-    exports com.m3.lib.codec.binary;
-    exports com.m3.lib.codec.cli;
-    exports com.m3.lib.codec.digest;
-    exports com.m3.lib.codec.language;
-    exports com.m3.lib.codec.language.bm;
-    exports com.m3.lib.codec.net;
+    exports jdk.m3.lib.codec;
+    exports jdk.m3.lib.codec.binary;
+    exports jdk.m3.lib.codec.cli;
+    exports jdk.m3.lib.codec.digest;
+    exports jdk.m3.lib.codec.language;
+    exports jdk.m3.lib.codec.language.bm;
+    exports jdk.m3.lib.codec.net;
 }

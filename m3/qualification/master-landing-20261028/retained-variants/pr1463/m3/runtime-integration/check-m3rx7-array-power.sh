@@ -11,7 +11,7 @@ trap 'rm -rf -- "$WORK"' EXIT
 (cd "$ROOT" && sha256sum -c - <<'SEALED'
 fa5ecdb1a0c28813397343ee62d4ef5924d57f2738bb786e6e3af6aa99289821  src/java.base/share/classes/jdk/internal/mindex/M3RX7.java
 4242a99703fc40e351030603a8faffebe03fb5509ae615c63744ed1c88693018  src/java.base/share/classes/jdk/internal/mindex/M3RX7Transitions.java
-7a4967472aad46ac83d2862a53a5a8ee463be6750eb7a0b4ebcff3be0c4db9c1  src/java.base/share/native/libjava/M3RX7.c
+d7ec23bdeb8744ca54b1f1c676fb7c717182ae8d7d93b230aa59d1a40776984d  src/java.base/share/native/libjava/M3RX7.c
 0c7732f3836b65060763b12c7671063f1f32337ed98545e4449a444ce70f2af8  test/jdk/jdk/internal/mindex/M3RX7ArrayPowerContract.java
 SEALED
 )

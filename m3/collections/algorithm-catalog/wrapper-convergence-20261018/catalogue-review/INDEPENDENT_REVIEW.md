@@ -17,9 +17,9 @@ All production paths below are relative to `hsoliwal/M3jdk21`. The baseline is `
 
 | Owner | Baseline SHA-256 | Candidate SHA-256 |
 | --- | --- | --- |
-| `m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java` | `77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545` | `7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e` |
-| `m3/collections/src/main/native/collections/m3_index_mask_window.c` | `a5cefed03d9db9429048a218945a8af71b5b7acc862e089f6cc8a451a172e212` | `d731f12916ee7f6e935624e7dd9f108c8de99bba02e1a81f6cc96c8cd21a5b84` |
-| `m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java` | `b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d` | `032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75` |
+| `m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java` | `6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb` | `bf601d711667e1078ca30246da6fa89b43d7ed951a3179e0a161365526581959` |
+| `m3/collections/src/main/native/collections/m3_index_mask_window.c` | `e57a418a183326d17cd117bcb81c2ddd49202b8195778f38a06b970c1058f16d` | `3361cebc637103be73d7928e61b69ecc7fd6899abd4f8078019c39dfce6b3960` |
+| `m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java` | `f1e3e21c37cbe084ef6b9446b86293d5039cd9b2bc6c1bf86d63a86793e3b8d5` | `bb0ff9a8008521576530b0cea64d00b4f22e6e4b8424b8e5df7f416a6a8b6051` |
 
 ### Stable opposite-order group reversal
 

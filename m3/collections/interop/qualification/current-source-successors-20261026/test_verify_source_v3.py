@@ -51,8 +51,8 @@ class FiveTestSuccessorGate(unittest.TestCase):
 
     def test_current_review_is_not_a_source_equivalence_shortcut(self):
         self.assertEqual(5, len(v3.EXPECTED))
-        self.assertEqual(v3.EXPECTED[0][1], "6d31a53eb94af7c3cfe08ce126ce1be1f8d7da1b09150bd72a12c602d3ab3565")
-        self.assertEqual(v3.EXPECTED[0][4], "d163cdc9ebbf7c023df16c423cc094f01987e4bd")
+        self.assertEqual(v3.EXPECTED[0][1], "61ae67aeedc4a4a42f81f1beefc23ed43aa0c2288b6301fd7bfc1eea023fdf87")
+        self.assertEqual(v3.EXPECTED[0][4], "f2b5c032c52c49a98fc09e431f1b6863eb80aaa0")
         self.assertNotEqual(v3.EXPECTED[0][1], v3.EXPECTED[0][3])
 
     def file_sets(self):

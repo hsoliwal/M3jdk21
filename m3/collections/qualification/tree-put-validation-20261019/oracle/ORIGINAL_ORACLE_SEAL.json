@@ -58,7 +58,7 @@
     "throw": 12
   },
   "rootTargetCases": 30,
-  "schema": "synexia.jdk21-map-put.original-oracle.v1",
+  "schema": "m3.jdk21-map-put.original-oracle.v1",
   "status": "FROZEN_JDK21_ORIGINAL_36_CASES",
   "stderr": {
     "bytes": 0,

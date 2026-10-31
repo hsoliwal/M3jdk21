@@ -17,8 +17,8 @@
       "cwd": "/workspace/scratch/213cc9f26139/continuation/catalogue/target-inventory-20261021/source",
       "exit_code": 1,
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "stderr_sha256": "d12054259af162ad3a4b9d1388628ccf5deb072275a773022b828f0f56d15523",
-      "observed_diagnostic": "source identity drift: m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java"
+      "stderr_sha256": "4fb9946be1824f66dce3af0bb91be9c924f3d365e42c2a3cf3711d852ae5cba9",
+      "observed_diagnostic": "source identity drift: m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java"
     },
     {
       "gate": "position-selection-20261018",
@@ -35,65 +35,65 @@
       "cwd": "/workspace/scratch/213cc9f26139/continuation/catalogue/target-inventory-20261021/source",
       "exit_code": 1,
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "stderr_sha256": "e1194ac49edfd383cada36a9ec24d5b2493b0b66c8287918e5889328e3012afc",
-      "observed_diagnostic": "Traceback (most recent call last):\n  File \"/workspace/scratch/213cc9f26139/continuation/catalogue/target-inventory-20261021/source/m3/collections/qualification/m3-index-mask-position-selection-20261018/verify.py\", line 18, in <module>\n    assert actual == expected, f\"{path}: SHA-256 drift {actual}\"\n           ^^^^^^^^^^^^^^^^^^\nAssertionError: /workspace/scratch/213cc9f26139/continuation/catalogue/target-inventory-20261021/source/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java: SHA-256 drift ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c"
+      "stderr_sha256": "cc575fbe094b8475d3eea5ed51021bf6a9f00cb3e678aab451437d69789f8742",
+      "observed_diagnostic": "Traceback (most recent call last):\n  File \"/workspace/scratch/213cc9f26139/continuation/catalogue/target-inventory-20261021/source/m3/collections/qualification/m3-index-mask-position-selection-20261018/verify.py\", line 18, in <module>\n    assert actual == expected, f\"{path}: SHA-256 drift {actual}\"\n           ^^^^^^^^^^^^^^^^^^\nAssertionError: /workspace/scratch/213cc9f26139/continuation/catalogue/target-inventory-20261021/source/m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java: SHA-256 drift 226b09d8996bf6b2a952c7341495a1f6dfbec13f8bb605996b1c26b93772e29f"
     }
   ],
   "source_differences": [
     {
       "gate": "mask-selection-20261016",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
       "expected_sha256": "8c1aaba72372c6caecfa35d4121a0b518888d64933bef428a8e61c15b3a746d9",
-      "actual_sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c",
+      "actual_sha256": "226b09d8996bf6b2a952c7341495a1f6dfbec13f8bb605996b1c26b93772e29f",
       "matches": false
     },
     {
       "gate": "mask-selection-20261016",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongArrayDeque.java",
       "expected_sha256": "cc87514c9499477dd435e512881ecb045356b99f65d212866ee2d32fb3795a84",
-      "actual_sha256": "ee2ce70df68f11d14ba85a7da8485c9e82e7bc38c08601b57b69d1f39d3bdd2a",
+      "actual_sha256": "dece9461086e026b3183e8f2e67dfb7f8b173228b5f65ff5169df87d9a86ae4a",
       "matches": false
     },
     {
       "gate": "mask-selection-20261016",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongArrayList.java",
       "expected_sha256": "290a9037d22957983080b63bbf32d50286fc71a2a2e2a8ff1a6d16239617838c",
-      "actual_sha256": "968773eb7e044332b9c1a44040b49e3aa253e0f1464d8d9e38513e2ebcc8f6dd",
+      "actual_sha256": "bd06a2d6c5a0df86fc402be506c0eb6a6656fa9e8ea93c1f49b906152358464f",
       "matches": false
     },
     {
       "gate": "mask-selection-20261016",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorSelfTest.java",
       "expected_sha256": "86eb2c9a436aac6f6e5b99f5c275636ca272d849dd08aa07f8796271167c63a1",
-      "actual_sha256": "5ae3d26cf58d0fff37bff398e73ee4f3b3e44212b56c046c3690fc8f58538f0f",
+      "actual_sha256": "5b3b47df54584b1ddf3aee72307cc645691b51c44a97d83522f70986bf1c7edc",
       "matches": false
     },
     {
       "gate": "mask-selection-20261016",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorTest.java",
-      "expected_sha256": "2d4273ec51e75d07e9f551d64e3059bb325253a41edbdb7eba5564040d1da3c0",
-      "actual_sha256": "2d4273ec51e75d07e9f551d64e3059bb325253a41edbdb7eba5564040d1da3c0",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexMaskCompactorTest.java",
+      "expected_sha256": "7a2c4fd2efd054ce17daa33eb9b60e481441b4c1d3eed4b45036cf446bf345ba",
+      "actual_sha256": "7a2c4fd2efd054ce17daa33eb9b60e481441b4c1d3eed4b45036cf446bf345ba",
       "matches": true
     },
     {
       "gate": "mask-selection-20261016",
       "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
-      "expected_sha256": "d7786cd5308f4a1e6743680d35e51f5f11a66b106abdb8f170edcb92b901d1cb",
+      "expected_sha256": "ec1091ae700abede90db95bb04924ad2ea0eb53432e4ef91f5049227c3d25dcb",
       "actual_sha256": "fb907640aa9615ce28c61bb802da39e6cb16030b9f95aad266aa6c68531b4074",
       "matches": false
     },
     {
       "gate": "position-selection-20261018",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3CountedBag.java",
-      "expected_sha256": "2334edd988b5512c9ef6b7092a8ab5ac99e36df09629661ae3779f7090c5bc54",
-      "actual_sha256": "2334edd988b5512c9ef6b7092a8ab5ac99e36df09629661ae3779f7090c5bc54",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3CountedBag.java",
+      "expected_sha256": "ffd6a7340fd60377443252fc52954d740bc758edea4d0778877531cf63976bad",
+      "actual_sha256": "ffd6a7340fd60377443252fc52954d740bc758edea4d0778877531cf63976bad",
       "matches": true
     },
     {
       "gate": "position-selection-20261018",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
-      "expected_sha256": "477135e13481942fef3b95b96a08d39c9c86dd92a649959c6d035b19b5784031",
-      "actual_sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+      "expected_sha256": "e8b8c5e455d4b46bb85b5c4ee6c8234643ca6e10f8314a468f455a80067a7f7d",
+      "actual_sha256": "226b09d8996bf6b2a952c7341495a1f6dfbec13f8bb605996b1c26b93772e29f",
       "matches": false
     },
     {

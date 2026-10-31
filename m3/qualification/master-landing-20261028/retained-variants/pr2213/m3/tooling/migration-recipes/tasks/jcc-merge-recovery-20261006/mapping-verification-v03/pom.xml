@@ -42,9 +42,9 @@
       <resource>
         <directory>${project.basedir}/../../../src/main/resources</directory>
         <includes>
-          <include>com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v03/**</include>
-          <include>com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/history-0014.txt</include>
-          <include>com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/history-0016.txt</include>
+          <include>jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v03/**</include>
+          <include>jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/history-0014.txt</include>
+          <include>jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/history-0016.txt</include>
           <include>META-INF/rewrite/m3-jcc-merge-mapping-recovery-v03.yml</include>
         </includes>
       </resource>
@@ -53,7 +53,7 @@
       <testResource>
         <directory>${project.basedir}/../../../src/test/resources</directory>
         <includes>
-          <include>com/m3/rewrite/backport/jcc-merge-recovery-20261006-mapping-v03/publication-input-summary.json</include>
+          <include>jdk/m3/rewrite/backport/jcc-merge-recovery-20261006-mapping-v03/publication-input-summary.json</include>
         </includes>
       </testResource>
     </testResources>
@@ -69,10 +69,10 @@
             <arg>-Xlint:all</arg>
           </compilerArgs>
           <includes>
-            <include>com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</include>
+            <include>jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</include>
           </includes>
           <testIncludes>
-            <testInclude>com/m3/rewrite/backport/JccMergeMappingRecoveryV03Test.java</testInclude>
+            <testInclude>jdk/m3/rewrite/backport/JccMergeMappingRecoveryV03Test.java</testInclude>
           </testIncludes>
         </configuration>
       </plugin>

@@ -5,30 +5,30 @@
 
 /**
  * Defines the {@code snakeyaml-2.6} library,
- * relocated into M3JDK21 by LIB_INTAKE_TO_JMOD.
+ * relocated into M3JDK 21 by LIB_INTAKE_TO_JMOD.
  */
 module jdk.m3.snakeyaml {
     requires java.desktop;
-    exports com.m3.lib.snakeyaml;
-    exports com.m3.lib.snakeyaml.comments;
-    exports com.m3.lib.snakeyaml.composer;
-    exports com.m3.lib.snakeyaml.constructor;
-    exports com.m3.lib.snakeyaml.emitter;
-    exports com.m3.lib.snakeyaml.env;
-    exports com.m3.lib.snakeyaml.error;
-    exports com.m3.lib.snakeyaml.events;
-    exports com.m3.lib.snakeyaml.extensions.compactnotation;
-    exports com.m3.lib.snakeyaml.external.com.google.gdata.util.common.base;
-    exports com.m3.lib.snakeyaml.inspector;
-    exports com.m3.lib.snakeyaml.internal;
-    exports com.m3.lib.snakeyaml.introspector;
-    exports com.m3.lib.snakeyaml.nodes;
-    exports com.m3.lib.snakeyaml.parser;
-    exports com.m3.lib.snakeyaml.reader;
-    exports com.m3.lib.snakeyaml.representer;
-    exports com.m3.lib.snakeyaml.resolver;
-    exports com.m3.lib.snakeyaml.scanner;
-    exports com.m3.lib.snakeyaml.serializer;
-    exports com.m3.lib.snakeyaml.tokens;
-    exports com.m3.lib.snakeyaml.util;
+    exports jdk.m3.lib.snakeyaml;
+    exports jdk.m3.lib.snakeyaml.comments;
+    exports jdk.m3.lib.snakeyaml.composer;
+    exports jdk.m3.lib.snakeyaml.constructor;
+    exports jdk.m3.lib.snakeyaml.emitter;
+    exports jdk.m3.lib.snakeyaml.env;
+    exports jdk.m3.lib.snakeyaml.error;
+    exports jdk.m3.lib.snakeyaml.events;
+    exports jdk.m3.lib.snakeyaml.extensions.compactnotation;
+    exports jdk.m3.lib.snakeyaml.external.com.google.gdata.util.common.base;
+    exports jdk.m3.lib.snakeyaml.inspector;
+    exports jdk.m3.lib.snakeyaml.internal;
+    exports jdk.m3.lib.snakeyaml.introspector;
+    exports jdk.m3.lib.snakeyaml.nodes;
+    exports jdk.m3.lib.snakeyaml.parser;
+    exports jdk.m3.lib.snakeyaml.reader;
+    exports jdk.m3.lib.snakeyaml.representer;
+    exports jdk.m3.lib.snakeyaml.resolver;
+    exports jdk.m3.lib.snakeyaml.scanner;
+    exports jdk.m3.lib.snakeyaml.serializer;
+    exports jdk.m3.lib.snakeyaml.tokens;
+    exports jdk.m3.lib.snakeyaml.util;
 }

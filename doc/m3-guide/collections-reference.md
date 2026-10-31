@@ -421,18 +421,18 @@ private chat or uploaded design material is reproduced here.
 
 | Complete M3 body | Git blob |
 | --- | --- |
-| [M3LinkedHashMap][map] | `ade59880b8c9b2bee1b32ae67ca9d29b7382d998` |
-| [M3LinkedHashSet][set] | `e1ac806d1ebe8aac1b9efe7bcfbaa3f675e7d0d6` |
-| [M3SlotMap][slot-map] | `a7d20300717661c26897f0b69e1e5a83400a62ad` |
-| [M3OrderedSlotMap][ordered-map] | `e7be2297d19f22cf4dd4ef8b7d1424fe963063d9` |
+| [M3LinkedHashMap][map] | `e0957cfd8a7a5abfa1c0c5e7bade32997e5ed657` |
+| [M3LinkedHashSet][set] | `58fd72f6e1464a2c6e2c26a1519ee6cd226a3924` |
+| [M3SlotMap][slot-map] | `a10ee53abb325476ac32c7210712e30cc304182c` |
+| [M3OrderedSlotMap][ordered-map] | `ce5fa2ec4306af03239ab7539ad91acaeaaa8245` |
 | [M3SlotArrays][arrays] | `e337c69710c871f8caa77a1afe53149f1fd705cc` |
-| [M3SlotSpliterators][spliterators] | `30cf137538353ac8e91514fff7c5db3903da8819` |
-| [M3Collections][factory] | `3d2f5aa53bda55293b3254bed3d526b896cbd044` |
-| [M3MapContractTest][map-test] | `d40c88ec184b90eb057dd859d840c915e4f93df8` |
-| [M3SequenceContractTest][sequence-test] | `02ba3c683428a02855517093edbaece60ba7444e` |
-| [M3JdkCollectionDifferentialTest][jdk-test] | `0ca5ef64c7a3fbbc8f869e96affca5dcd8672003` |
-| [M3NoRetainedStructuralEntryTest][entry-test] | `9e64f4c57ab840b0da744bcff43b9f703fe033f8` |
-| [M3FactoryContractTest][factory-test] | `e7e156e6d73d178b1bf6f2ee32deb1db5bc046c6` |
+| [M3SlotSpliterators][spliterators] | `dab4d257bf82c8dbdf8fec04e1ac0d84ac7e4a83` |
+| [M3Collections][factory] | `9b49f723dfa91628978e26db2564e0282a3e78a9` |
+| [M3MapContractTest][map-test] | `5f7990ac0f0922a48c1ce5c4f6cd0beeaf2c331b` |
+| [M3SequenceContractTest][sequence-test] | `60fd86464d6ef8670c2c900b9ea84b761edcaf79` |
+| [M3JdkCollectionDifferentialTest][jdk-test] | `a6898c609081aea5205e003b0b3d2effa0ebe417` |
+| [M3NoRetainedStructuralEntryTest][entry-test] | `effe339fd3945b49307ae97f219e0a2837e752c9` |
+| [M3FactoryContractTest][factory-test] | `d11d43dd29b15a919871e49ed57804af834cb66c` |
 
 Bounded JDK-source reads covered `AbstractCollection` array/add/remove/bulk methods,
 `AbstractSet` equality/hash/bulk removal, `Spliterators.IteratorSpliterator`,
@@ -442,18 +442,18 @@ They were dependency checks for the described surfaces, not a whole-JDK scan.
 [module]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/main/java/module-info.java
 [pom]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/pom.xml
 [module-guide]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/README.md
-[map]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java
-[set]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/main/java/com/m3/collections/M3LinkedHashSet.java
-[slot-map]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/main/java/com/m3/collections/M3SlotMap.java
-[ordered-map]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/main/java/com/m3/collections/M3OrderedSlotMap.java
-[arrays]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java
-[spliterators]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java
-[factory]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/main/java/com/m3/collections/M3Collections.java
-[map-test]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/test/java/com/m3/collections/M3MapContractTest.java
-[sequence-test]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/test/java/com/m3/collections/M3SequenceContractTest.java
-[jdk-test]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/test/java/com/m3/collections/M3JdkCollectionDifferentialTest.java
-[entry-test]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/test/java/com/m3/collections/M3NoRetainedStructuralEntryTest.java
-[factory-test]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/test/java/com/m3/collections/M3FactoryContractTest.java
+[map]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/main/java/jdk/m3/collections/M3LinkedHashMap.java
+[set]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/main/java/jdk/m3/collections/M3LinkedHashSet.java
+[slot-map]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/main/java/jdk/m3/collections/M3SlotMap.java
+[ordered-map]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/main/java/jdk/m3/collections/M3OrderedSlotMap.java
+[arrays]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/main/java/jdk/m3/collections/M3SlotArrays.java
+[spliterators]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/main/java/jdk/m3/collections/M3SlotSpliterators.java
+[factory]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/main/java/jdk/m3/collections/M3Collections.java
+[map-test]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/test/java/jdk/m3/collections/M3MapContractTest.java
+[sequence-test]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/test/java/jdk/m3/collections/M3SequenceContractTest.java
+[jdk-test]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/test/java/jdk/m3/collections/M3JdkCollectionDifferentialTest.java
+[entry-test]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/test/java/jdk/m3/collections/M3NoRetainedStructuralEntryTest.java
+[factory-test]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/m3/collections/src/test/java/jdk/m3/collections/M3FactoryContractTest.java
 [abstract-collection]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/src/java.base/share/classes/java/util/AbstractCollection.java
 [abstract-set]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/src/java.base/share/classes/java/util/AbstractSet.java
 [jdk-spliterators]: https://github.com/hsoliwal/M3jdk21/blob/e90339415b849248181e80d112933bf7cfe5de27/src/java.base/share/classes/java/util/Spliterators.java

@@ -10,7 +10,7 @@
   "runtime_receiving_sequence_advanced": false,
   "canonical_recipe_repository": "hsoliwal/com.synexia",
   "canonical_source_revision": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
-  "canonical_recipe": "com.synexia.rewrite.M3ParserJmod20261018",
+  "canonical_recipe": "jdk.internal.m3.rewrite.M3ParserJmod20261018",
   "verification_order": ["patch", "lint", "compile", "test", "runtime"],
   "baseline_inventory": {"M3File.java": "ABSENT", "M3String": "java.lang package-private owner", "M3AST": "com.sun.source.util compiler event owner"},
   "initial_policy_check": "Shallow checkout lacks historical ancestor; fetch history before rerunning the unchanged receiver gate",

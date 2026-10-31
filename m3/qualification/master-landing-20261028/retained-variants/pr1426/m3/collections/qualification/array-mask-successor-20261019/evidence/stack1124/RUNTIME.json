@@ -57,7 +57,7 @@
       "argv": [
         "bash",
         "-c",
-        "set -eu\nmkdir -p \"$RUNNER_TEMP/m3-bitmap/classes\" \"$RUNNER_TEMP/m3-bitmap/lib\"\njavac --release 21 -proc:none -Xlint:all -Werror -d \"$RUNNER_TEMP/m3-bitmap/classes\" \\\n  m3/collections/src/main/java/com/m3/collections/M3LongCollection.java \\\n  m3/collections/src/main/java/com/m3/collections/M3LongIterator.java \\\n  m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java \\\n  m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java \\\n  m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \\\n  m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java \\\n  m3/collections/src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java\njava -cp \"$RUNNER_TEMP/m3-bitmap/classes\" com.m3.collections.M3LongBitmapFilteredSnapshotSelfTest\n"
+        "set -eu\nmkdir -p \"$RUNNER_TEMP/m3-bitmap/classes\" \"$RUNNER_TEMP/m3-bitmap/lib\"\njavac --release 21 -proc:none -Xlint:all -Werror -d \"$RUNNER_TEMP/m3-bitmap/classes\" \\\n  m3/collections/src/main/java/jdk/m3/collections/M3LongCollection.java \\\n  m3/collections/src/main/java/jdk/m3/collections/M3LongIterator.java \\\n  m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java \\\n  m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java \\\n  m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java \\\n  m3/collections/src/main/java/jdk/m3/collections/M3LongBitmapFilteredSnapshot.java \\\n  m3/collections/src/test/java/jdk/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java\njava -cp \"$RUNNER_TEMP/m3-bitmap/classes\" com.m3.collections.M3LongBitmapFilteredSnapshotSelfTest\n"
       ],
       "exit_code": 0,
       "seconds": 1.617976427078247,
@@ -92,7 +92,7 @@
       "argv": [
         "bash",
         "-c",
-        "set -euo pipefail\nmkdir -p target/doop-convergence/classes\njavac --release 21 -Xlint:all,-serial,-module -Werror \\\n  -d target/doop-convergence/classes \\\n  -sourcepath m3/collections/src/main/java:m3/collections/src/test/java \\\n  m3/collections/src/test/java/com/m3/collections/M3ReadonlyFilteredSlotSelfTest.java \\\n  m3/collections/src/test/java/com/m3/collections/M3MutableFilteredSlotSelfTest.java \\\n  m3/collections/src/test/java/com/m3/collections/M3IndexedFilterSortFusionSelfTest.java \\\n  m3/collections/src/test/java/com/m3/collections/M3LongDeepFilterSelfTest.java\n"
+        "set -euo pipefail\nmkdir -p target/doop-convergence/classes\njavac --release 21 -Xlint:all,-serial,-module -Werror \\\n  -d target/doop-convergence/classes \\\n  -sourcepath m3/collections/src/main/java:m3/collections/src/test/java \\\n  m3/collections/src/test/java/com/m3/collections/M3ReadonlyFilteredSlotSelfTest.java \\\n  m3/collections/src/test/java/com/m3/collections/M3MutableFilteredSlotSelfTest.java \\\n  m3/collections/src/test/java/jdk/m3/collections/M3IndexedFilterSortFusionSelfTest.java \\\n  m3/collections/src/test/java/jdk/m3/collections/M3LongDeepFilterSelfTest.java\n"
       ],
       "exit_code": 0,
       "seconds": 2.3097286224365234,
@@ -164,7 +164,7 @@
   "full_installed_m3jdk_image": false,
   "source_bytes_modes_mtime_unchanged": true,
   "input_manifest": "SOURCE_INPUTS.tsv",
-  "input_manifest_sha256": "802695b9eb1f8c0c314a0a251461ba5c0084bfead3c00818d4d13fe92bb17bb9",
+  "input_manifest_sha256": "87041ae9f20afba9dbf9b86792ad2a469fa41fe4381cdd17900d2d881bb85e6e",
   "raw_receipt_sha256": "22c1f11b5a405ac9d4ca6b4e86a07cb846ac1552d1c06eecfba66c0ccbd23a36",
   "input_count": 354,
   "assertion_counters": {

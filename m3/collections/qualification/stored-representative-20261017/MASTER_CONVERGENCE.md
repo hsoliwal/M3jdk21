@@ -17,13 +17,13 @@ a new wrapper class, collection hierarchy, entry/node owner, public descriptor o
 
 Input preimages (SHA-256):
 - `M3FilteredViews.java`: `0b7f2175dbb34ed087b76a07e93335ee488338d544fd49c332f503acfdd51ca8`
-- `M3MutableFilteredViews.java`: `2b3bb42e411202ecb5998f99c7ca34bf5026842ecab2e4c8b64711400c1f4681`
+- `M3MutableFilteredViews.java`: `c18a5c7f458c3b66fd867549c1e6887f87aa204dc4246104d116d03c24a8de16`
 
 Canonical generated outputs (SHA-256):
-- `M3FilteredViews.java`: `fd880291f6119899e530e19b1dc622bb4f1ea51c6c136ab1c510d507c303c761`
-- `M3MutableFilteredViews.java`: `bbc218ecd8c87648976501a5f09aa8baa5af94e1ea79fdef1647ac4248f59e65`
+- `M3FilteredViews.java`: `9ec03f9f01b6bfdfbc6f76ce320422d8599f56119a0e317a21904452a615e256`
+- `M3MutableFilteredViews.java`: `0ce075c9897724dc63c65b805480eaa918aaade46aec0188cfaf9aac3aa2863f`
 - `M3StoredRepresentativeContract.java`: `9686f4d820c5872665d6273faa0de0b327b9689b12696af7827269cb8774e016`
-- `M3StoredRepresentativeTest.java`: `b948aca5ae6f14b80027429e6b820800927d3013bebb972fa92b712383af55f3`
+- `M3StoredRepresentativeTest.java`: `446920d8a0f43b3badac44ff9440eaedc2bc9dc1f53653dcecc4de026489d316`
 
 The earlier six-file filtered/sorted receiver manifest remains unchanged. The exact successor
 `m3/collections/recipe/stored-representative-20261017/manifest.tsv` updates only two

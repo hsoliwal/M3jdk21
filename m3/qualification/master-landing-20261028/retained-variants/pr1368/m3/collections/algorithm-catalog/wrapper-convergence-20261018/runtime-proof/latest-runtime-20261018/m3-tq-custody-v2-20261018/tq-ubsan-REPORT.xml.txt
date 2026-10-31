@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.m3.tq.TQTest" time="71.859" tests="21" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="jdk.m3.tq.TQTest" time="71.859" tests="21" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -57,30 +57,30 @@
     <property name="maven.repo.local" value="/dev/shm/m3-tq-qualification-f8287/m2"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="refusesOccupiedWrongParserAndDuplicateJava" classname="com.m3.tq.TQTest" time="0.331">
+  <testcase name="refusesOccupiedWrongParserAndDuplicateJava" classname="jdk.m3.tq.TQTest" time="0.331">
     <system-err><![CDATA[SLF4J: No SLF4J providers were found.
 SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
 ]]></system-err>
   </testcase>
-  <testcase name="bootstrapInventoryAndModuleBoundary" classname="com.m3.tq.TQTest" time="2.67"/>
-  <testcase name="currentRuntimeModes" classname="com.m3.tq.TQTest" time="14.873"/>
-  <testcase name="currentRuntimeModes" classname="com.m3.tq.TQTest" time="2.009"/>
-  <testcase name="currentRuntimeModes" classname="com.m3.tq.TQTest" time="4.369"/>
-  <testcase name="currentRuntimeModes" classname="com.m3.tq.TQTest" time="12.087"/>
-  <testcase name="refusesTextDriftMissingAndDuplicate" classname="com.m3.tq.TQTest" time="0.035"/>
-  <testcase name="currentRecipeUpgradeAndFixedPoint" classname="com.m3.tq.TQTest" time="1.745"/>
-  <testcase name="rejectsJavaSeamMutant" classname="com.m3.tq.TQTest" time="2.298"/>
-  <testcase name="rejectsContainmentMutant" classname="com.m3.tq.TQTest" time="2.526"/>
-  <testcase name="currentRecipeRefusesMissingDriftWrongParserDuplicateAndTampering" classname="com.m3.tq.TQTest" time="0.403"/>
-  <testcase name="preservesUnrelatedSourceAndRejectsTemplateTampering" classname="com.m3.tq.TQTest" time="1.364"/>
-  <testcase name="currentPublicProtectedApiMatchesLegacy" classname="com.m3.tq.TQTest" time="2.235"/>
-  <testcase name="unchangedMappedRegressions" classname="com.m3.tq.TQTest" time="1.188"/>
-  <testcase name="currentMappedRegressionsAndModuleBoundary" classname="com.m3.tq.TQTest" time="1.783"/>
-  <testcase name="rejectsNativeUnicodeMutant" classname="com.m3.tq.TQTest" time="1.177"/>
-  <testcase name="runtimeModes" classname="com.m3.tq.TQTest" time="0.974"/>
-  <testcase name="runtimeModes" classname="com.m3.tq.TQTest" time="0.569"/>
-  <testcase name="runtimeModes" classname="com.m3.tq.TQTest" time="2.411"/>
-  <testcase name="runtimeModes" classname="com.m3.tq.TQTest" time="5.659"/>
-  <testcase name="exactRecipeAndFixedPoint" classname="com.m3.tq.TQTest" time="0.608"/>
+  <testcase name="bootstrapInventoryAndModuleBoundary" classname="jdk.m3.tq.TQTest" time="2.67"/>
+  <testcase name="currentRuntimeModes" classname="jdk.m3.tq.TQTest" time="14.873"/>
+  <testcase name="currentRuntimeModes" classname="jdk.m3.tq.TQTest" time="2.009"/>
+  <testcase name="currentRuntimeModes" classname="jdk.m3.tq.TQTest" time="4.369"/>
+  <testcase name="currentRuntimeModes" classname="jdk.m3.tq.TQTest" time="12.087"/>
+  <testcase name="refusesTextDriftMissingAndDuplicate" classname="jdk.m3.tq.TQTest" time="0.035"/>
+  <testcase name="currentRecipeUpgradeAndFixedPoint" classname="jdk.m3.tq.TQTest" time="1.745"/>
+  <testcase name="rejectsJavaSeamMutant" classname="jdk.m3.tq.TQTest" time="2.298"/>
+  <testcase name="rejectsContainmentMutant" classname="jdk.m3.tq.TQTest" time="2.526"/>
+  <testcase name="currentRecipeRefusesMissingDriftWrongParserDuplicateAndTampering" classname="jdk.m3.tq.TQTest" time="0.403"/>
+  <testcase name="preservesUnrelatedSourceAndRejectsTemplateTampering" classname="jdk.m3.tq.TQTest" time="1.364"/>
+  <testcase name="currentPublicProtectedApiMatchesLegacy" classname="jdk.m3.tq.TQTest" time="2.235"/>
+  <testcase name="unchangedMappedRegressions" classname="jdk.m3.tq.TQTest" time="1.188"/>
+  <testcase name="currentMappedRegressionsAndModuleBoundary" classname="jdk.m3.tq.TQTest" time="1.783"/>
+  <testcase name="rejectsNativeUnicodeMutant" classname="jdk.m3.tq.TQTest" time="1.177"/>
+  <testcase name="runtimeModes" classname="jdk.m3.tq.TQTest" time="0.974"/>
+  <testcase name="runtimeModes" classname="jdk.m3.tq.TQTest" time="0.569"/>
+  <testcase name="runtimeModes" classname="jdk.m3.tq.TQTest" time="2.411"/>
+  <testcase name="runtimeModes" classname="jdk.m3.tq.TQTest" time="5.659"/>
+  <testcase name="exactRecipeAndFixedPoint" classname="jdk.m3.tq.TQTest" time="0.608"/>
 </testsuite>

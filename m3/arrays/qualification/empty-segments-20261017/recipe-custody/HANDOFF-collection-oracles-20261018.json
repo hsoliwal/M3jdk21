@@ -2,7 +2,7 @@
   "schema": "M3_EXISTING_PUBLIC_RECIPE_HANDOFF_V1",
   "label": "collection-oracles-20261018",
   "canonical_repository": "hsoliwal/com.synexia",
-  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "canonical_crate": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
   "canonical_engine_baseline": "8f8200375d8d403b58e855ee5db02f2e8fac33a8",
   "canonical_successor_publication": "Recorded by the later pinned publication receipt; this staging record makes no publication claim.",
   "public_baseline": "0efc1719ca5766aead09f4f7c49f5067975bd946",
@@ -12,44 +12,44 @@
   "existing_host_controls": [
     {
       "path": "prepare.py",
-      "sha256": "9b0b3d93c787c9a56036cddb2b044aef30f6fa8a1fa20fa5a2edae46dfd1e62c"
+      "sha256": "7c2063fa5aa88d0872fff0157413a1d2fdca4f00d01c787f8650969e8b514014"
     },
     {
       "path": "receive.py",
-      "sha256": "db258f16e1841f6f5191c1c969c20314a8d143bfa6558b60f684bea440cc1712"
+      "sha256": "e81744965f37cb890e00f6c1c7e50f4dae44c68eedafdf46565a7e105bab5474"
     },
     {
       "path": "ENGINE_SOURCES.tsv",
       "sha256": "ae731c5780c73a98f6fc81079b5f863613fddea50d2a6c893c6dfd2aa2030b5c"
     },
     {
-      "path": "src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
-      "sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43"
+      "path": "src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java",
+      "sha256": "fa8a8e63fd445c0fbcd877315044c6e5c36f779db6e8a11797e03ab805e5903f"
     },
     {
       "path": "contract/test_prepare.py",
-      "sha256": "f504f1dcfafb24fd87f8f677643b45eecc74674881e16bf727b76c4e6a4d1856"
+      "sha256": "79c4335d02ca2179301d617d9ae447b778f2f12361e379ff04ad77c0237e7933"
     },
     {
       "path": "contract/verify_receiver.py",
-      "sha256": "a4d82df8b31e707afe7caa5e76524d191f285e2887dbfdfa95cfdc382ae01f7d"
+      "sha256": "a400589821da1c448b3c2354aef91c7a6fd596cf265b2baca097494135126d4c"
     }
   ],
   "existing_engine_sources": [
     {
-      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625"
     },
     {
-      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
       "sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef"
     },
     {
-      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
       "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4"
     },
     {
-      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java",
       "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
     }
   ],
@@ -64,11 +64,11 @@
       "evidence": {
         "SDK_INPUTS.tsv": {
           "path": "evidence/collection-oracles-20261018/recipe/SDK_INPUTS.tsv",
-          "sha256": "cc088a0eb1665c481ac221cf55ac8ccf85bd7e12faafb73cb19e0d7f9924e221"
+          "sha256": "7994125b72e94a5b1dc90bfad98f9bed9ad8b3ec6aac6df742c4a5428f8e5d77"
         },
         "SDK_RESULTS.tsv": {
           "path": "evidence/collection-oracles-20261018/recipe/SDK_RESULTS.tsv",
-          "sha256": "47b9fed8ef0992b851c646398b8030ea37ab6e83211d1874e23ec050d2782ca0"
+          "sha256": "bb8b783d2d5c56ba2d02ac75a47e85ce404a5ddd3270f3baa16c64e07c9e31c5"
         },
         "SDK_TESTS.xml": {
           "path": "evidence/collection-oracles-20261018/recipe/SDK_TESTS.xml",
@@ -89,10 +89,10 @@
     },
     {
       "path": "authoring/collection-oracles-20261018/prepare_collection_oracles.py",
-      "sha256": "e9f098e2761f1d62c103739e429a36605404cbf5fbbd860adf70693fe53ac28b",
+      "sha256": "383b1e59ba3b0256e6e9d05b0bbc0d86a8877afea37d1e0faeee4afb08228046",
       "bytes": 15810,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/authoring/collection-oracles-20261018/prepare_collection_oracles.py"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/authoring/collection-oracles-20261018/prepare_collection_oracles.py"
       ]
     },
     {
@@ -100,7 +100,7 @@
       "sha256": "d870c4819d2354bfbc2bc129329375780adaab0629e27c02bdf6039dccad8fd8",
       "bytes": 3812,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/authoring/collection-oracles-20261018/src/test/java/CollectionOracleWitness.java"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/authoring/collection-oracles-20261018/src/test/java/CollectionOracleWitness.java"
       ]
     },
     {
@@ -108,7 +108,7 @@
       "sha256": "68af1a3f7a2001fc7c5b98298d21e18056dcc1e9eff4e27a3023185b3b07c08d",
       "bytes": 2278,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/collection-oracle-results.json"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/collection-oracle-results.json"
       ]
     },
     {
@@ -116,7 +116,7 @@
       "sha256": "94f93fd9d23b1d8fc7e0d5f2f9a6eb2171846ff53602e11da1c33aba88a56195",
       "bytes": 501,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/DATASET.json"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/DATASET.json"
       ]
     },
     {
@@ -124,15 +124,15 @@
       "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23",
       "bytes": 747,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/ENGINE_EFFECTIVE.tsv"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/ENGINE_EFFECTIVE.tsv"
       ]
     },
     {
       "path": "datasets/m3jdk21-collection-oracles/MODES.tsv",
-      "sha256": "22844d6fb02a47a87136e1f32c9faf3eb5b84263955e9f3cd3a27d97bbf2b960",
+      "sha256": "f2e39697a528e23c52092d53096c0b0baaeeb54bf8c071e417a91c9ca10302a2",
       "bytes": 480,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/MODES.tsv"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/MODES.tsv"
       ]
     },
     {
@@ -140,92 +140,92 @@
       "sha256": "59d0a89e8feebd7d032fd0208fddda81a8629cc5319b6c39b4122d00ea41a7f0",
       "bytes": 546,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles.yml"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles.yml"
       ]
     },
     {
-      "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0004-CollectionOracleWitness.java.txt",
+      "path": "datasets/m3jdk21-collection-oracles/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0004-CollectionOracleWitness.java.txt",
       "sha256": "d870c4819d2354bfbc2bc129329375780adaab0629e27c02bdf6039dccad8fd8",
       "bytes": 3812,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0004-CollectionOracleWitness.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0004-CollectionOracleWitness.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0005-M3LongTreeSetTest.java.txt",
+      "path": "datasets/m3jdk21-collection-oracles/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0005-M3LongTreeSetTest.java.txt",
       "sha256": "088e41d28929b3916e5c6da9a12a2ebbae258116d11508235d44771a6c1b2471",
       "bytes": 16432,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0005-M3LongTreeSetTest.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0005-M3LongTreeSetTest.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0006-M3StoredRepresentativeContract.java.txt",
+      "path": "datasets/m3jdk21-collection-oracles/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0006-M3StoredRepresentativeContract.java.txt",
       "sha256": "821b8ae1ec22516dceef16f5951ab66fe3f6db799f26732c620202bab862754b",
       "bytes": 13563,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0006-M3StoredRepresentativeContract.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0006-M3StoredRepresentativeContract.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/manifest.tsv",
-      "sha256": "b1ae58dc8d7e7981c56390f3f417c14d292705b1ca318c4b07e7926aa4360df4",
+      "path": "datasets/m3jdk21-collection-oracles/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/manifest.tsv",
+      "sha256": "147fd19cadbe6135d4858577e2c6f9a7eda8d080d4b38037f80d03f1da801ea0",
       "bytes": 697,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/manifest.tsv"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/manifest.tsv"
       ]
     },
     {
-      "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/pre/0005-M3LongTreeSetTest.java.txt",
+      "path": "datasets/m3jdk21-collection-oracles/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/pre/0005-M3LongTreeSetTest.java.txt",
       "sha256": "57289895f6bf2307cf3890faa803ff8b81ec128a56e11f84df613fe65068c4cf",
       "bytes": 15877,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/pre/0005-M3LongTreeSetTest.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/pre/0005-M3LongTreeSetTest.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/pre/0006-M3StoredRepresentativeContract.java.txt",
+      "path": "datasets/m3jdk21-collection-oracles/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/pre/0006-M3StoredRepresentativeContract.java.txt",
       "sha256": "9686f4d820c5872665d6273faa0de0b327b9689b12696af7827269cb8774e016",
       "bytes": 13048,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/pre/0006-M3StoredRepresentativeContract.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/pre/0006-M3StoredRepresentativeContract.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0001-collection-oracle-repair-20261018.tsv.txt",
+      "path": "datasets/m3jdk21-collection-oracles/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0001-collection-oracle-repair-20261018.tsv.txt",
       "sha256": "b5d321f46ab46a0774f2c953cea97224e610862f104b8d2ea5be42d01d21093b",
       "bytes": 1257,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0001-collection-oracle-repair-20261018.tsv.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0001-collection-oracle-repair-20261018.tsv.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0002-CATALOGUE.json.txt",
-      "sha256": "1e20212f107d27de891ecc959a42fabe2511f7956ae03f6c871f0cd5aa01121c",
+      "path": "datasets/m3jdk21-collection-oracles/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0002-CATALOGUE.json.txt",
+      "sha256": "a7fd26aace96e8cd9b7a93cecbeed8abdd356fbda3d0a1635fc8d638d367a4ec",
       "bytes": 6972,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0002-CATALOGUE.json.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0002-CATALOGUE.json.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0003-README.md.txt",
+      "path": "datasets/m3jdk21-collection-oracles/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0003-README.md.txt",
       "sha256": "730cac0481249e5a662e7d26a95ba9d91f4be65c09733e6abbea87955f8caaad",
       "bytes": 2296,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0003-README.md.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0003-README.md.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/manifest.tsv",
-      "sha256": "69b1272bbd3b461b40df4e9685bb893a41c1f3de16c6c963d0c22725af2ae0ce",
+      "path": "datasets/m3jdk21-collection-oracles/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/manifest.tsv",
+      "sha256": "5d7e563c585978fbfbf2c2234820a72f4226d3cf4248ca67c8c6d758ae723fb1",
       "bytes": 506,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/manifest.tsv"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/manifest.tsv"
       ]
     },
     {
       "path": "evidence/collection-oracles-20261018/baseline-failures/SOURCE_RECEIPT.json",
-      "sha256": "09b423cf299ad39c8ffc09db425e97a13f6c369f9933403b08a92826de893514",
+      "sha256": "0d2ae339dfe0fed405cd7d387914d5bd6a5aebc8047f1081ea7eb7ed372b6c3d",
       "bytes": 2836,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-baseline/SOURCE_RECEIPT.json"
@@ -272,35 +272,35 @@
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/baseline-failures/surefire/TEST-com.m3.collections.M3LongTreeSetTest.xml",
+      "path": "evidence/collection-oracles-20261018/baseline-failures/surefire/TEST-jdk.m3.collections.M3LongTreeSetTest.xml",
       "sha256": "5fe72faf4164a01a618f34666c1f628c2d741ce899400d66a10df9e16f4dd2b1",
       "bytes": 10347,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-baseline/surefire/TEST-com.m3.collections.M3LongTreeSetTest.xml"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-baseline/surefire/TEST-jdk.m3.collections.M3LongTreeSetTest.xml"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/baseline-failures/surefire/TEST-com.m3.collections.M3StoredRepresentativeTest.xml",
+      "path": "evidence/collection-oracles-20261018/baseline-failures/surefire/TEST-jdk.m3.collections.M3StoredRepresentativeTest.xml",
       "sha256": "96baf482ca0539073e4ecd4d5d32393c0b4df095f044e48f0737b65d44c52ffb",
       "bytes": 7538,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-baseline/surefire/TEST-com.m3.collections.M3StoredRepresentativeTest.xml"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-baseline/surefire/TEST-jdk.m3.collections.M3StoredRepresentativeTest.xml"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/baseline-failures/surefire/com.m3.collections.M3LongTreeSetTest.txt",
+      "path": "evidence/collection-oracles-20261018/baseline-failures/surefire/jdk.m3.collections.M3LongTreeSetTest.txt",
       "sha256": "d29d865fb452d57b6ff23283d4cd4788da5ff97826ee457915d6875cb8e3fc42",
       "bytes": 3279,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-baseline/surefire/com.m3.collections.M3LongTreeSetTest.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-baseline/surefire/jdk.m3.collections.M3LongTreeSetTest.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/baseline-failures/surefire/com.m3.collections.M3StoredRepresentativeTest.txt",
+      "path": "evidence/collection-oracles-20261018/baseline-failures/surefire/jdk.m3.collections.M3StoredRepresentativeTest.txt",
       "sha256": "04d52360768871ebde6982762145348a7c085487109f7217519f5cdcfa9482d4",
       "bytes": 1282,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-baseline/surefire/com.m3.collections.M3StoredRepresentativeTest.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-baseline/surefire/jdk.m3.collections.M3StoredRepresentativeTest.txt"
       ]
     },
     {
@@ -345,7 +345,7 @@
     },
     {
       "path": "evidence/collection-oracles-20261018/module/module-receipt.json",
-      "sha256": "ae59b78fa51afdb8293dc886f4e40ad520cd4ec913395b5a79ead1e4a6cba68f",
+      "sha256": "c2c812459b403fb15deee4545a88d8078c07d0b6f1f153d7b0debcf31bc6611f",
       "bytes": 621,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-module/module-receipt.json"
@@ -360,67 +360,67 @@
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/module/surefire/TEST-com.m3.collections.M3LongTreeSetTest.xml",
+      "path": "evidence/collection-oracles-20261018/module/surefire/TEST-jdk.m3.collections.M3LongTreeSetTest.xml",
       "sha256": "6475890cfe47cbfcf06d24350f00e68149865b60b857e239dc92c1a0a42ba085",
       "bytes": 7355,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-module/surefire/TEST-com.m3.collections.M3LongTreeSetTest.xml"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-module/surefire/TEST-jdk.m3.collections.M3LongTreeSetTest.xml"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/module/surefire/TEST-com.m3.collections.M3ProgressAdaptersPercentageTest.xml",
+      "path": "evidence/collection-oracles-20261018/module/surefire/TEST-jdk.m3.collections.M3ProgressAdaptersPercentageTest.xml",
       "sha256": "ba00f66126b5f077694db199be6e0d121dfb7e1101edfff13ed07f04f1baf588",
       "bytes": 6778,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-module/surefire/TEST-com.m3.collections.M3ProgressAdaptersPercentageTest.xml"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-module/surefire/TEST-jdk.m3.collections.M3ProgressAdaptersPercentageTest.xml"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/module/surefire/TEST-com.m3.collections.M3StoredRepresentativeTest.xml",
+      "path": "evidence/collection-oracles-20261018/module/surefire/TEST-jdk.m3.collections.M3StoredRepresentativeTest.xml",
       "sha256": "597588898c6fcd54b5d8e9847eccd562b7dadfdcd3f3c95d2b77f877d32bd552",
       "bytes": 6722,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-module/surefire/TEST-com.m3.collections.M3StoredRepresentativeTest.xml"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-module/surefire/TEST-jdk.m3.collections.M3StoredRepresentativeTest.xml"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/module/surefire/com.m3.collections.M3LongTreeSetTest.txt",
+      "path": "evidence/collection-oracles-20261018/module/surefire/jdk.m3.collections.M3LongTreeSetTest.txt",
       "sha256": "5dec2a5e0af287b9037054916750f8c0f37ee0190079445cf9af8089d5278de3",
       "bytes": 322,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-module/surefire/com.m3.collections.M3LongTreeSetTest.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-module/surefire/jdk.m3.collections.M3LongTreeSetTest.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/module/surefire/com.m3.collections.M3ProgressAdaptersPercentageTest.txt",
+      "path": "evidence/collection-oracles-20261018/module/surefire/jdk.m3.collections.M3ProgressAdaptersPercentageTest.txt",
       "sha256": "1db14995dd11d8b6e947efff06d1868fc1cab4e78bab277389474d0e3aea7f3a",
       "bytes": 352,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-module/surefire/com.m3.collections.M3ProgressAdaptersPercentageTest.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-module/surefire/jdk.m3.collections.M3ProgressAdaptersPercentageTest.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/module/surefire/com.m3.collections.M3StoredRepresentativeTest.txt",
+      "path": "evidence/collection-oracles-20261018/module/surefire/jdk.m3.collections.M3StoredRepresentativeTest.txt",
       "sha256": "f3ef3797f2882508fb71e427c66e2c52209e88f2fc6b1befba1175c443480aa0",
       "bytes": 340,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-module/surefire/com.m3.collections.M3StoredRepresentativeTest.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-module/surefire/jdk.m3.collections.M3StoredRepresentativeTest.txt"
       ]
     },
     {
       "path": "evidence/collection-oracles-20261018/recipe/SDK_INPUTS.tsv",
-      "sha256": "cc088a0eb1665c481ac221cf55ac8ccf85bd7e12faafb73cb19e0d7f9924e221",
+      "sha256": "7994125b72e94a5b1dc90bfad98f9bed9ad8b3ec6aac6df742c4a5428f8e5d77",
       "bytes": 4369,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-collection-oracles/candidate/SDK_INPUTS.tsv"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-collection-oracles/candidate/SDK_INPUTS.tsv"
       ]
     },
     {
       "path": "evidence/collection-oracles-20261018/recipe/SDK_RESULTS.tsv",
-      "sha256": "47b9fed8ef0992b851c646398b8030ea37ab6e83211d1874e23ec050d2782ca0",
+      "sha256": "bb8b783d2d5c56ba2d02ac75a47e85ce404a5ddd3270f3baa16c64e07c9e31c5",
       "bytes": 1058,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-collection-oracles/candidate/SDK_RESULTS.tsv"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-collection-oracles/candidate/SDK_RESULTS.tsv"
       ]
     },
     {
@@ -428,7 +428,7 @@
       "sha256": "7cd6957b7be66bf005e17b899ca7d7b3dce0efc87f4879acd858b3d4acad24a1",
       "bytes": 14879,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-collection-oracles/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-collection-oracles/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
       ]
     },
     {
@@ -449,7 +449,7 @@
     },
     {
       "path": "evidence/collection-oracles-20261018/recipe/receiver/RECEIVER_RECEIPT.json",
-      "sha256": "f436e7d000c90d2354ce18632ff5f3dec5966006bff25cb6377947bd75105588",
+      "sha256": "d1940c49de5a704db749399e2ec3135462608d236f9c3f293a59ded6d682ddea",
       "bytes": 1680,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/RECEIVER_RECEIPT.json"
@@ -521,7 +521,7 @@
     },
     {
       "path": "evidence/collection-oracles-20261018/recipe/receiver/late-drift-no-partial-write.stderr.log.txt",
-      "sha256": "d17eaa3abe399f4062db6543d863551dc301948d8780680053a6ccd4fdbc745b",
+      "sha256": "6b5ac489a83f4b56d97ad438c0506bb67c1a65f15f40bc6cb55205d9b6f62ed4",
       "bytes": 953,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/late-drift-no-partial-write.stderr.log"
@@ -569,7 +569,7 @@
     },
     {
       "path": "evidence/collection-oracles-20261018/recipe/receiver/sdk-result-tamper.stderr.log.txt",
-      "sha256": "13d4048c968c5239ab9cd3ed64d4c67300d8464ce5c8ba81bad7e6f74fb77599",
+      "sha256": "1d34697ca0fd6f94edda3a6fcc98717066a8cb7baba74160e5274e1d56537c62",
       "bytes": 1292,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/sdk-result-tamper.stderr.log"
@@ -585,7 +585,7 @@
     },
     {
       "path": "evidence/collection-oracles-20261018/recipe/receiver/symlink-target.stderr.log.txt",
-      "sha256": "2d5671319e6448cf111044c2b683f3852f2f5d5065d5b7932c771fae8b6b089f",
+      "sha256": "321158d57d0f64db0489131f130badddd8f2f2157f777209788d262e3ae2ffc1",
       "bytes": 1243,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/symlink-target.stderr.log"
@@ -641,7 +641,7 @@
     },
     {
       "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/MODES.tsv",
-      "sha256": "cc4277ceb6f87849aac3db82fde5cb465ef006a15b23cfa7959d198bffaa2c6b",
+      "sha256": "77eddbd9fe6b11961649a4ea874427500a3619246f747cf18ed97de009c728df",
       "bytes": 9394,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/MODES.tsv"
@@ -656,491 +656,491 @@
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0004-CollectionOracleWitness.java.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0004-CollectionOracleWitness.java.txt",
       "sha256": "d870c4819d2354bfbc2bc129329375780adaab0629e27c02bdf6039dccad8fd8",
       "bytes": 3812,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0004-CollectionOracleWitness.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0004-CollectionOracleWitness.java.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/manifest.tsv",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/manifest.tsv",
       "sha256": "89224eb8c0fa01b228d6d7bb7260a3ec833443d1f69642dfe4d130a4194c5817",
       "bytes": 240,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/manifest.tsv"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/manifest.tsv"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0001-CUSTODY-collection-oracles-20261018.md.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0001-CUSTODY-collection-oracles-20261018.md.txt",
       "sha256": "bd15055adff14ca3630831ab7f54263bf421f35446f3e54cbcd5fd85b57c4d8b",
       "bytes": 2692,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0001-CUSTODY-collection-oracles-20261018.md.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0001-CUSTODY-collection-oracles-20261018.md.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0002-HANDOFF-collection-oracles-20261018.json.txt",
-      "sha256": "c0d1dceae40501793b30ecef375ff41f3579cef131e758bb05a56cb1d20dd19b",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0002-HANDOFF-collection-oracles-20261018.json.txt",
+      "sha256": "c0645d36c45bed30a80db054b5f1e527a32d344ed61b0fc16895562462bc987d",
       "bytes": 28810,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0002-HANDOFF-collection-oracles-20261018.json.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0002-HANDOFF-collection-oracles-20261018.json.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0003-build_public_recipe_handoff.py.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0003-build_public_recipe_handoff.py.txt",
       "sha256": "b7b0281d38e989bfa909190481c72cd203ff7b03411dd28ee521e569d1e6964a",
       "bytes": 12062,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0003-build_public_recipe_handoff.py.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0003-build_public_recipe_handoff.py.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0005-prepare_collection_oracles.py.txt",
-      "sha256": "e9f098e2761f1d62c103739e429a36605404cbf5fbbd860adf70693fe53ac28b",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0005-prepare_collection_oracles.py.txt",
+      "sha256": "383b1e59ba3b0256e6e9d05b0bbc0d86a8877afea37d1e0faeee4afb08228046",
       "bytes": 15810,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0005-prepare_collection_oracles.py.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0005-prepare_collection_oracles.py.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0006-DATASET.json.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0006-DATASET.json.txt",
       "sha256": "94f93fd9d23b1d8fc7e0d5f2f9a6eb2171846ff53602e11da1c33aba88a56195",
       "bytes": 501,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0006-DATASET.json.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0006-DATASET.json.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0007-ENGINE_EFFECTIVE.tsv.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0007-ENGINE_EFFECTIVE.tsv.txt",
       "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23",
       "bytes": 747,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0007-ENGINE_EFFECTIVE.tsv.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0007-ENGINE_EFFECTIVE.tsv.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0008-MODES.tsv.txt",
-      "sha256": "22844d6fb02a47a87136e1f32c9faf3eb5b84263955e9f3cd3a27d97bbf2b960",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0008-MODES.tsv.txt",
+      "sha256": "f2e39697a528e23c52092d53096c0b0baaeeb54bf8c071e417a91c9ca10302a2",
       "bytes": 480,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0008-MODES.tsv.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0008-MODES.tsv.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0009-m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles.yml.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0009-m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles.yml.txt",
       "sha256": "59d0a89e8feebd7d032fd0208fddda81a8629cc5319b6c39b4122d00ea41a7f0",
       "bytes": 546,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0009-m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles.yml.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0009-m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles.yml.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0010-0004-CollectionOracleWitness.java.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0010-0004-CollectionOracleWitness.java.txt.txt",
       "sha256": "d870c4819d2354bfbc2bc129329375780adaab0629e27c02bdf6039dccad8fd8",
       "bytes": 3812,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0010-0004-CollectionOracleWitness.java.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0010-0004-CollectionOracleWitness.java.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0011-0005-M3LongTreeSetTest.java.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0011-0005-M3LongTreeSetTest.java.txt.txt",
       "sha256": "088e41d28929b3916e5c6da9a12a2ebbae258116d11508235d44771a6c1b2471",
       "bytes": 16432,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0011-0005-M3LongTreeSetTest.java.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0011-0005-M3LongTreeSetTest.java.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0012-0006-M3StoredRepresentativeContract.java.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0012-0006-M3StoredRepresentativeContract.java.txt.txt",
       "sha256": "821b8ae1ec22516dceef16f5951ab66fe3f6db799f26732c620202bab862754b",
       "bytes": 13563,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0012-0006-M3StoredRepresentativeContract.java.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0012-0006-M3StoredRepresentativeContract.java.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0013-manifest.tsv.txt",
-      "sha256": "b1ae58dc8d7e7981c56390f3f417c14d292705b1ca318c4b07e7926aa4360df4",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0013-manifest.tsv.txt",
+      "sha256": "147fd19cadbe6135d4858577e2c6f9a7eda8d080d4b38037f80d03f1da801ea0",
       "bytes": 697,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0013-manifest.tsv.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0013-manifest.tsv.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0014-0005-M3LongTreeSetTest.java.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0014-0005-M3LongTreeSetTest.java.txt.txt",
       "sha256": "57289895f6bf2307cf3890faa803ff8b81ec128a56e11f84df613fe65068c4cf",
       "bytes": 15877,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0014-0005-M3LongTreeSetTest.java.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0014-0005-M3LongTreeSetTest.java.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0015-0006-M3StoredRepresentativeContract.java.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0015-0006-M3StoredRepresentativeContract.java.txt.txt",
       "sha256": "9686f4d820c5872665d6273faa0de0b327b9689b12696af7827269cb8774e016",
       "bytes": 13048,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0015-0006-M3StoredRepresentativeContract.java.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0015-0006-M3StoredRepresentativeContract.java.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0016-0001-collection-oracle-repair-20261018.tsv.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0016-0001-collection-oracle-repair-20261018.tsv.txt.txt",
       "sha256": "b5d321f46ab46a0774f2c953cea97224e610862f104b8d2ea5be42d01d21093b",
       "bytes": 1257,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0016-0001-collection-oracle-repair-20261018.tsv.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0016-0001-collection-oracle-repair-20261018.tsv.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0017-0002-CATALOGUE.json.txt.txt",
-      "sha256": "1e20212f107d27de891ecc959a42fabe2511f7956ae03f6c871f0cd5aa01121c",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0017-0002-CATALOGUE.json.txt.txt",
+      "sha256": "a7fd26aace96e8cd9b7a93cecbeed8abdd356fbda3d0a1635fc8d638d367a4ec",
       "bytes": 6972,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0017-0002-CATALOGUE.json.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0017-0002-CATALOGUE.json.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0018-0003-README.md.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0018-0003-README.md.txt.txt",
       "sha256": "730cac0481249e5a662e7d26a95ba9d91f4be65c09733e6abbea87955f8caaad",
       "bytes": 2296,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0018-0003-README.md.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0018-0003-README.md.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0019-manifest.tsv.txt",
-      "sha256": "69b1272bbd3b461b40df4e9685bb893a41c1f3de16c6c963d0c22725af2ae0ce",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0019-manifest.tsv.txt",
+      "sha256": "5d7e563c585978fbfbf2c2234820a72f4226d3cf4248ca67c8c6d758ae723fb1",
       "bytes": 506,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0019-manifest.tsv.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0019-manifest.tsv.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0020-SOURCE_RECEIPT.json.txt",
-      "sha256": "09b423cf299ad39c8ffc09db425e97a13f6c369f9933403b08a92826de893514",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0020-SOURCE_RECEIPT.json.txt",
+      "sha256": "0d2ae339dfe0fed405cd7d387914d5bd6a5aebc8047f1081ea7eb7ed372b6c3d",
       "bytes": 2836,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0020-SOURCE_RECEIPT.json.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0020-SOURCE_RECEIPT.json.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0021-maven.log.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0021-maven.log.txt.txt",
       "sha256": "981e637f4818c6bf4565db2f50c78b83a022e39ab442d4827b5129db02d0a5fb",
       "bytes": 22978,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0021-maven.log.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0021-maven.log.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0022-module-receipt.json.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0022-module-receipt.json.txt",
       "sha256": "206aae4a4174909e897c445a7b4cdb5347cc5e9dfb04c2c6698efaf9364305bc",
       "bytes": 446,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0022-module-receipt.json.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0022-module-receipt.json.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0023-M3LongTreeSetTest.java.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0023-M3LongTreeSetTest.java.txt.txt",
       "sha256": "57289895f6bf2307cf3890faa803ff8b81ec128a56e11f84df613fe65068c4cf",
       "bytes": 15877,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0023-M3LongTreeSetTest.java.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0023-M3LongTreeSetTest.java.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0024-M3StoredRepresentativeContract.java.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0024-M3StoredRepresentativeContract.java.txt.txt",
       "sha256": "9686f4d820c5872665d6273faa0de0b327b9689b12696af7827269cb8774e016",
       "bytes": 13048,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0024-M3StoredRepresentativeContract.java.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0024-M3StoredRepresentativeContract.java.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0025-resources.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0025-resources.txt.txt",
       "sha256": "6473a286dfd06815ee493752f9af87a514194a6e72347c585b973ee5622562a7",
       "bytes": 937,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0025-resources.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0025-resources.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0026-TEST-com.m3.collections.M3LongTreeSetTest.xml.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0026-TEST-jdk.m3.collections.M3LongTreeSetTest.xml.txt",
       "sha256": "5fe72faf4164a01a618f34666c1f628c2d741ce899400d66a10df9e16f4dd2b1",
       "bytes": 10347,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0026-TEST-com.m3.collections.M3LongTreeSetTest.xml.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0026-TEST-jdk.m3.collections.M3LongTreeSetTest.xml.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0027-TEST-com.m3.collections.M3StoredRepresentativeTest.xml.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0027-TEST-jdk.m3.collections.M3StoredRepresentativeTest.xml.txt",
       "sha256": "96baf482ca0539073e4ecd4d5d32393c0b4df095f044e48f0737b65d44c52ffb",
       "bytes": 7538,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0027-TEST-com.m3.collections.M3StoredRepresentativeTest.xml.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0027-TEST-jdk.m3.collections.M3StoredRepresentativeTest.xml.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0028-com.m3.collections.M3LongTreeSetTest.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0028-jdk.m3.collections.M3LongTreeSetTest.txt.txt",
       "sha256": "d29d865fb452d57b6ff23283d4cd4788da5ff97826ee457915d6875cb8e3fc42",
       "bytes": 3279,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0028-com.m3.collections.M3LongTreeSetTest.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0028-jdk.m3.collections.M3LongTreeSetTest.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0029-com.m3.collections.M3StoredRepresentativeTest.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0029-jdk.m3.collections.M3StoredRepresentativeTest.txt.txt",
       "sha256": "04d52360768871ebde6982762145348a7c085487109f7217519f5cdcfa9482d4",
       "bytes": 1282,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0029-com.m3.collections.M3StoredRepresentativeTest.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0029-jdk.m3.collections.M3StoredRepresentativeTest.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0030-compile.log.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0030-compile.log.txt.txt",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0030-compile.log.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0030-compile.log.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0031-receipt.json.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0031-receipt.json.txt",
       "sha256": "44846f0397778801b5746fbd2369655a4157da3e14f24b770c2a09c8f339e70e",
       "bytes": 1079,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0031-receipt.json.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0031-receipt.json.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0032-run.log.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0032-run.log.txt.txt",
       "sha256": "1f482b733fecc6ee4f0095f314fd1903b14bc20bb1cd62df4f0a94f523e2977a",
       "bytes": 267,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0032-run.log.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0032-run.log.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0033-SDK_INPUTS.tsv.txt",
-      "sha256": "cc088a0eb1665c481ac221cf55ac8ccf85bd7e12faafb73cb19e0d7f9924e221",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0033-SDK_INPUTS.tsv.txt",
+      "sha256": "7994125b72e94a5b1dc90bfad98f9bed9ad8b3ec6aac6df742c4a5428f8e5d77",
       "bytes": 4369,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0033-SDK_INPUTS.tsv.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0033-SDK_INPUTS.tsv.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0034-SDK_RESULTS.tsv.txt",
-      "sha256": "47b9fed8ef0992b851c646398b8030ea37ab6e83211d1874e23ec050d2782ca0",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0034-SDK_RESULTS.tsv.txt",
+      "sha256": "bb8b783d2d5c56ba2d02ac75a47e85ce404a5ddd3270f3baa16c64e07c9e31c5",
       "bytes": 1058,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0034-SDK_RESULTS.tsv.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0034-SDK_RESULTS.tsv.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0035-SDK_TESTS.xml.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0035-SDK_TESTS.xml.txt",
       "sha256": "7cd6957b7be66bf005e17b899ca7d7b3dce0efc87f4879acd858b3d4acad24a1",
       "bytes": 14879,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0035-SDK_TESTS.xml.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0035-SDK_TESTS.xml.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0036-maven.log.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0036-maven.log.txt.txt",
       "sha256": "3c9a1e2b50b5bc98a0d805fd069f4c2e5b4a15cc1f6afd864d5200a589e7a1dd",
       "bytes": 3183,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0036-maven.log.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0036-maven.log.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0037-receipt.json.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0037-receipt.json.txt",
       "sha256": "a6c83ba0692dd0204895924e6277628855b3454908e2db693956b8bbe126e7b9",
       "bytes": 1093,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0037-receipt.json.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0037-receipt.json.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0038-RECEIVER_RECEIPT.json.txt",
-      "sha256": "f436e7d000c90d2354ce18632ff5f3dec5966006bff25cb6377947bd75105588",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0038-RECEIVER_RECEIPT.json.txt",
+      "sha256": "d1940c49de5a704db749399e2ec3135462608d236f9c3f293a59ded6d682ddea",
       "bytes": 1680,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0038-RECEIVER_RECEIPT.json.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0038-RECEIVER_RECEIPT.json.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0039-apply-exact-sdk.stderr.log.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0039-apply-exact-sdk.stderr.log.txt.txt",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0039-apply-exact-sdk.stderr.log.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0039-apply-exact-sdk.stderr.log.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0040-apply-exact-sdk.stdout.log.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0040-apply-exact-sdk.stdout.log.txt.txt",
       "sha256": "4a64282b54d263600241b2c42b38919ac6b77e6bb31814a10bb5444573ee7cad",
       "bytes": 144,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0040-apply-exact-sdk.stdout.log.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0040-apply-exact-sdk.stdout.log.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0041-check-no-write.stderr.log.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0041-check-no-write.stderr.log.txt.txt",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0041-check-no-write.stderr.log.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0041-check-no-write.stderr.log.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0042-check-no-write.stdout.log.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0042-check-no-write.stdout.log.txt.txt",
       "sha256": "b1f5d8f47a31fa83e6d92ee6f2c9ace4b79ce0f99a7c69ddd2f4e13ade375edc",
       "bytes": 144,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0042-check-no-write.stdout.log.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0042-check-no-write.stdout.log.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0043-failed-sdk-test-refusal.stderr.log.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0043-failed-sdk-test-refusal.stderr.log.txt.txt",
       "sha256": "1047ba59e449c6d49d9b845f1ffc847a52d457fad1be4e7b651ea29a4e815474",
       "bytes": 1237,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0043-failed-sdk-test-refusal.stderr.log.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0043-failed-sdk-test-refusal.stderr.log.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0044-failed-sdk-test-refusal.stdout.log.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0044-failed-sdk-test-refusal.stdout.log.txt.txt",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0044-failed-sdk-test-refusal.stdout.log.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0044-failed-sdk-test-refusal.stdout.log.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0045-fixed-point-no-write.stderr.log.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0045-fixed-point-no-write.stderr.log.txt.txt",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0045-fixed-point-no-write.stderr.log.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0045-fixed-point-no-write.stderr.log.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0046-fixed-point-no-write.stdout.log.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0046-fixed-point-no-write.stdout.log.txt.txt",
       "sha256": "100bc5c0c96419409ee28b0f7fea64b1693d3fd998035861f68a8b615d15f988",
       "bytes": 144,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0046-fixed-point-no-write.stdout.log.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0046-fixed-point-no-write.stdout.log.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0047-late-drift-no-partial-write.stderr.log.txt.txt",
-      "sha256": "d17eaa3abe399f4062db6543d863551dc301948d8780680053a6ccd4fdbc745b",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0047-late-drift-no-partial-write.stderr.log.txt.txt",
+      "sha256": "6b5ac489a83f4b56d97ad438c0506bb67c1a65f15f40bc6cb55205d9b6f62ed4",
       "bytes": 953,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0047-late-drift-no-partial-write.stderr.log.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0047-late-drift-no-partial-write.stderr.log.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0048-late-drift-no-partial-write.stdout.log.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0048-late-drift-no-partial-write.stdout.log.txt.txt",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0048-late-drift-no-partial-write.stdout.log.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0048-late-drift-no-partial-write.stdout.log.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0049-mixed-pre-postimages.stderr.log.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0049-mixed-pre-postimages.stderr.log.txt.txt",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0049-mixed-pre-postimages.stderr.log.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0049-mixed-pre-postimages.stderr.log.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0050-mixed-pre-postimages.stdout.log.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0050-mixed-pre-postimages.stdout.log.txt.txt",
       "sha256": "5a43fd1b304d3d2c813590921b515df0052d6b5be1952aaad2115c955fdffa92",
       "bytes": 144,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0050-mixed-pre-postimages.stdout.log.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0050-mixed-pre-postimages.stdout.log.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0051-qualified-input-tamper.stderr.log.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0051-qualified-input-tamper.stderr.log.txt.txt",
       "sha256": "5e49e3277fe27fdf5bc769ff58539e2c76c6a16d8c00904d6750d76f8fb5bbee",
       "bytes": 1255,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0051-qualified-input-tamper.stderr.log.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0051-qualified-input-tamper.stderr.log.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0052-qualified-input-tamper.stdout.log.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0052-qualified-input-tamper.stdout.log.txt.txt",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0052-qualified-input-tamper.stdout.log.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0052-qualified-input-tamper.stdout.log.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0053-sdk-result-tamper.stderr.log.txt.txt",
-      "sha256": "13d4048c968c5239ab9cd3ed64d4c67300d8464ce5c8ba81bad7e6f74fb77599",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0053-sdk-result-tamper.stderr.log.txt.txt",
+      "sha256": "1d34697ca0fd6f94edda3a6fcc98717066a8cb7baba74160e5274e1d56537c62",
       "bytes": 1292,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0053-sdk-result-tamper.stderr.log.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0053-sdk-result-tamper.stderr.log.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0054-sdk-result-tamper.stdout.log.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0054-sdk-result-tamper.stdout.log.txt.txt",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0054-sdk-result-tamper.stdout.log.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0054-sdk-result-tamper.stdout.log.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0055-symlink-target.stderr.log.txt.txt",
-      "sha256": "2d5671319e6448cf111044c2b683f3852f2f5d5065d5b7932c771fae8b6b089f",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0055-symlink-target.stderr.log.txt.txt",
+      "sha256": "321158d57d0f64db0489131f130badddd8f2f2157f777209788d262e3ae2ffc1",
       "bytes": 1243,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0055-symlink-target.stderr.log.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0055-symlink-target.stderr.log.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0056-symlink-target.stdout.log.txt.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0056-symlink-target.stdout.log.txt.txt",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0056-symlink-target.stdout.log.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0056-symlink-target.stdout.log.txt.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0057-pom.xml.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0057-pom.xml.txt",
       "sha256": "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d",
       "bytes": 5855,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0057-pom.xml.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/0057-pom.xml.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/manifest.tsv",
-      "sha256": "9a30ef7d173c515cbe16b1c0e2896892d00dda0a3a3e409e9cf8bf9c763beeef",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/manifest.tsv",
+      "sha256": "b4273c1de71b997818d6614f573bea3526721dfa0827da6ae7dcc1117d85a6f6",
       "bytes": 15301,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/manifest.tsv"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/manifest.tsv"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/pre/0003-build_public_recipe_handoff.py.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/pre/0003-build_public_recipe_handoff.py.txt",
       "sha256": "b7b0281d38e989bfa909190481c72cd203ff7b03411dd28ee521e569d1e6964a",
       "bytes": 12062,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/pre/0003-build_public_recipe_handoff.py.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/pre/0003-build_public_recipe_handoff.py.txt"
       ]
     },
     {
-      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/pre/0057-pom.xml.txt",
+      "path": "evidence/collection-oracles-20261018/refused-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/pre/0057-pom.xml.txt",
       "sha256": "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d",
       "bytes": 5855,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/pre/0057-pom.xml.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-custody-v1/refused-dataset/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-custody/pre/0057-pom.xml.txt"
       ]
     },
     {
@@ -1148,7 +1148,7 @@
       "sha256": "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d",
       "bytes": 5855,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/pom.xml"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/pom.xml"
       ]
     }
   ]

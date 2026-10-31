@@ -5,16 +5,16 @@
 
 /**
  * Defines the {@code fastfilter} library,
- * relocated into M3JDK21 by LIB_INTAKE_TO_JMOD.
+ * relocated into M3JDK 21 by LIB_INTAKE_TO_JMOD.
  */
 module jdk.m3.fastfilter {
-    exports com.m3.lib.fastfilter;
-    exports com.m3.lib.fastfilter.bloom;
-    exports com.m3.lib.fastfilter.bloom.count;
-    exports com.m3.lib.fastfilter.cuckoo;
-    exports com.m3.lib.fastfilter.gcs;
-    exports com.m3.lib.fastfilter.tools;
-    exports com.m3.lib.fastfilter.utils;
-    exports com.m3.lib.fastfilter.xor;
-    exports com.m3.lib.fastfilter.xorplus;
+    exports jdk.m3.lib.fastfilter;
+    exports jdk.m3.lib.fastfilter.bloom;
+    exports jdk.m3.lib.fastfilter.bloom.count;
+    exports jdk.m3.lib.fastfilter.cuckoo;
+    exports jdk.m3.lib.fastfilter.gcs;
+    exports jdk.m3.lib.fastfilter.tools;
+    exports jdk.m3.lib.fastfilter.utils;
+    exports jdk.m3.lib.fastfilter.xor;
+    exports jdk.m3.lib.fastfilter.xorplus;
 }

@@ -4,7 +4,7 @@
 
 **Canonical recipe owner:** [Synexia #12104](https://github.com/hsoliwal/com.synexia/pull/12104), branch m3/bitlane-indexed-navigation-20261017, last pre-receiving source commit 92a2483937e683694900bb21a9fce11773a3a365.
 
-**Product base:** current M3JDK21 master original M3BitLane28 Git blob 1877cf9eea2990ed74b4d10467bf3612e3c470d4. Do not rebase, merge, force push, modify master or overwrite another collections PR. Synexia is the recipe/catalogue convergence workspace and M3JDK21 is the owning product source tree.
+**Product base:** current M3JDK21 master original M3BitLane28 Git blob 06efbf5ebba7481422e9166e1304374c7151fdc8. Do not rebase, merge, force push, modify master or overwrite another collections PR. Synexia is the recipe/catalogue convergence workspace and M3JDK21 is the owning product source tree.
 
 ## Exact three output candidates
 

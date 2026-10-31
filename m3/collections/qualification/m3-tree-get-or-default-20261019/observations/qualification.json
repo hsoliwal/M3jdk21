@@ -2,9 +2,9 @@
   "status": "PASS_SCOPED_QUALIFICATION",
   "targetBase": "0228a71901cd8f0abb38bccdc4941da2ec7d1aa9",
   "canonicalRecipeBase": "08e84ed4430894e07dea272758401fd7202d2187",
-  "recipe": "com.synexia.m3.TreeGetOrDefaultCallbacks",
+  "recipe": "jdk.internal.m3.TreeGetOrDefaultCallbacks",
   "recipeExecution": "OPENREWRITE_SDK_8.17.1_VIA_OFFLINE_MAVEN",
-  "manifestSha256": "c7a4b290acfcc4c2b51deb230cc2364a809c004ec1981f16352a70a524caf2f2",
+  "manifestSha256": "fbcf4dd882e42af2e391e9ecfd724ce2e9df5b64b5772cd114fc4f7b3cbb4ed2",
   "jdkOracle": "Unchanged PR 1442 fixture and all 640 complete case objects",
   "jdkRuntime": {
     "kind": "identity",
@@ -23,7 +23,7 @@
   },
   "baselineProvider": {
     "kind": "identity",
-    "provider": "com.m3.collections.M3TreeMap",
+    "provider": "jdk.m3.collections.M3TreeMap",
     "origin": "file:/workspace/scratch/a20ebe6f78bb/M3jdk21/m3/collections/target/classes/",
     "classSha256": "c2132b9c0641948a50befb7b42418be564b2925b6e3e73f76eb1c753aac938d5",
     "javaHome": "/tmp/m3-cursor-tools/jdk-21.0.12.1+1",
@@ -38,7 +38,7 @@
   },
   "candidateProvider": {
     "kind": "identity",
-    "provider": "com.m3.collections.M3TreeMap",
+    "provider": "jdk.m3.collections.M3TreeMap",
     "origin": "file:/workspace/scratch/a20ebe6f78bb/M3jdk21/m3/collections/target/classes/",
     "classSha256": "167f30a94f324d217529eb747fdbe1a489dd4fb0e49350265190d17ede30c071",
     "javaHome": "/tmp/m3-cursor-tools/jdk-21.0.12.1+1",

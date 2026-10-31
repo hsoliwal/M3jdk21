@@ -1,16 +1,16 @@
 path	git_blob	status	pr	note
-.github/workflows/m3-jdk-naming.yml	c5a89a0adcc4467aadf932b5b68faae27b679dfe	added	2214	PR version, not live; the git blob id is its content address
-m3/docs/synexia-m3jdk21-eclipse-recipe-handoff-20261022.tsv	4dfffd4cae11edf342b801ca3c007c43a6137979	added	2214	PR version, not live; the git blob id is its content address
+.github/workflows/m3jdk-naming.yml	c5a89a0adcc4467aadf932b5b68faae27b679dfe	added	2214	PR version, not live; the git blob id is its content address
+m3/docs/m3-m3jdk21-eclipse-recipe-handoff-20261022.tsv	30d5224faaa7c923bf72af4f7a1b1d15bbdad207	added	2214	PR version, not live; the git blob id is its content address
 m3/tooling/jdk-naming/NAMING_RULES.tsv	17d8851b5f4837e8f2e6ea6367ab9cd72093a82e	added	2214	PR version, not live; the git blob id is its content address
-m3/tooling/jdk-naming/NAMING_STANDARD.md	a491bef51954439feacc3f53db77fab9553cb5e4	added	2214	PR version, not live; the git blob id is its content address
-m3/tooling/jdk-naming/README.md	45f81717719e511970a17836722482a3127b3e38	modified	2214	PR version, not live; the git blob id is its content address
+m3/tooling/jdk-naming/NAMING_STANDARD.md	877c64d2f5146ef42fb4b0c9e91c352b99b5aac1	added	2214	PR version, not live; the git blob id is its content address
+m3/tooling/jdk-naming/README.md	ecdd4e1097ec60b9ab804ea44ba780ff480d0aa6	modified	2214	PR version, not live; the git blob id is its content address
 m3/tooling/jdk-naming/RECIPE_MEMORY.tsv	2729cf2bed817b53b7e1a809434e6333cdb76f86	added	2214	PR version, not live; the git blob id is its content address
-m3/tooling/jdk-naming/conformance/pom.xml	2f6e81f4ddd863b26e0c0840fb355600b06ecfd1	added	2214	PR version, not live; the git blob id is its content address
+m3/tooling/jdk-naming/conformance/pom.xml	334956541a160e01807d7bebc875c539fa3b633a	added	2214	PR version, not live; the git blob id is its content address
 m3/tooling/jdk-naming/conformance/src/main/java/jdk/m3/tooling/naming/BlobReader.java	10f7c54ad6cfa4f09c4ebd717e543272c00fe61a	added	2214	PR version, not live; the git blob id is its content address
-m3/tooling/jdk-naming/conformance/src/main/java/jdk/m3/tooling/naming/NamingRules.java	7c91ace4bae0518efb2acf011008df104ff23171	added	2214	PR version, not live; the git blob id is its content address
+m3/tooling/jdk-naming/conformance/src/main/java/jdk/m3/tooling/naming/NamingRules.java	98ce88e065e60eaa13462fb3de8cd2facc6732a5	added	2214	PR version, not live; the git blob id is its content address
 m3/tooling/jdk-naming/conformance/src/main/java/jdk/m3/tooling/naming/NamingScan.java	f67c0a1ee7b21c14b20e4733e64d225b583304a4	added	2214	PR version, not live; the git blob id is its content address
-m3/tooling/jdk-naming/conformance/src/test/java/jdk/m3/tooling/naming/JdkNamingConformanceTest.java	f076befd42c0b48326acc53172aafe62f93b846c	added	2214	PR version, not live; the git blob id is its content address
-m3/tooling/jdk-naming/jdk_naming.py	b01318368345c0965b6a98aef6a29b1390b4dcd8	modified	2214	PR version, not live; the git blob id is its content address
+m3/tooling/jdk-naming/conformance/src/test/java/jdk/m3/tooling/naming/JdkNamingConformanceTest.java	58398db07aed1a38a4070504c83ac06b2a2bc496	added	2214	PR version, not live; the git blob id is its content address
+m3/tooling/jdk-naming/jdk_naming.py	9ee2977626a58a9a202f01dbd8e8113b5cdbcdb9	modified	2214	PR version, not live; the git blob id is its content address
 m3/tooling/jdk-naming/reseal.py	cb8adc20698b76cbaf1fa094117565ad4feeca5f	added	2214	PR version, not live; the git blob id is its content address
-m3/tooling/jdk-naming/test_jdk_naming.py	5c116cd4b46b4d7247bc31eb7ea000587b86abb6	modified	2214	PR version, not live; the git blob id is its content address
-m3/tooling/jdk-naming/test_reseal.py	ebca1717052e9644bd55875546f6a649f8e2020a	added	2214	PR version, not live; the git blob id is its content address
+m3/tooling/jdk-naming/test_jdk_naming.py	f44e7ddd3352926aae051b7853060b77e4050d94	modified	2214	PR version, not live; the git blob id is its content address
+m3/tooling/jdk-naming/test_reseal.py	8e2c18173823d9b0a7fa61cb8b24c4ac9435ac4b	added	2214	PR version, not live; the git blob id is its content address

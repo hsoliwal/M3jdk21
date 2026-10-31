@@ -8,11 +8,11 @@ Original product PR #1882 head before pass: `1ff65d43bd3f4eb35de8e5174d46e7ac743
 
 | Original product path | Original Git blob | Exact received Git blob |
 | --- | --- | --- |
-| `src/main/java/com/m3/collections/M3LongAddressKernel.java` | `9ac6c5a1e121affd28e6503d922927f6c91c3a66` | `a106baf182c47088dfb6dbfc6c249592f2a0c71b` |
-| `src/main/native/collections/m3_long_address_kernel.c` | `821876dfb56d836a0ae23e4bc16a391fd7f97ef2` | `123e40c56995574979e999e6233a218b3dc2e4cb` |
-| `src/test/java/com/m3/collections/M3MaskedGatherContract.java` | ABSENT | `d4271622eabfab82f7329d8817b0b35d0307391f` |
-| `src/test/java/com/m3/collections/M3MaskedGatherTest.java` | ABSENT | `88ce86d76bfd740dfdab47761e9f38e9d0af1e5e` |
-| `.github/workflows/m3-masked-gather-java21-jni.yml` | ABSENT | `acfce5498e0f6e346bb22c7e6a474cf4beaba94f` |
+| `src/main/java/com/m3/collections/M3LongAddressKernel.java` | `fe30e94f5e66e2f4d43365bddb58dfdbb4f25207` | `9dea1df7254fc8f99449be544d410dbf973a137b` |
+| `src/main/native/collections/m3_long_address_kernel.c` | `9f68bba46827db2cb53bdb597042829358663f91` | `123e40c56995574979e999e6233a218b3dc2e4cb` |
+| `src/test/java/com/m3/collections/M3MaskedGatherContract.java` | ABSENT | `7c62c52d5fc97d933f76db143fb0ac54000ccfff` |
+| `src/test/java/com/m3/collections/M3MaskedGatherTest.java` | ABSENT | `80714c8cd974dcdf6886bc80ca7d7b26c78def9f` |
+| `.github/workflows/m3-masked-gather-java21-jni.yml` | ABSENT | `0a77c515f7944622918b4aff086243ceef08f641` |
 
 The first four relative paths above are under `m3/collections/` (the workflow is repository-root). The original `gatherNative` JNI symbol is retained, all existing Java method bodies retain their original source bytes and signatures, no C source was deleted and no user callback crosses JNI.
 

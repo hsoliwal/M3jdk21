@@ -15,10 +15,10 @@
     "receiptSha256": "077b03e52a2c48d8080f7f76eef66456aefe515d5627200f1945d885005fdc09"
   },
   "result": {
-    "path": "m3/core/src/com/m3/text/SharedRelatedLexemeCatalog.java",
-    "preimageSha256": "76fbadbc182633ac22c449924335b7636c530cd2a8dc13fb0dc2d56a29afb42c",
-    "postimageSha256": "38102366fa86ca63f3d00c78cd34effae7bc34ce0071544164ca74df97025b9e",
-    "postimageGitBlobSha1": "8ca7c18c9ce8bf43a1e72e04b67204d29b1114e9",
+    "path": "m3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java",
+    "preimageSha256": "bcf6d9216b549a4bf1c4c7a6bdb414c54f659be2567fcb99cdbadaafc964f049",
+    "postimageSha256": "a84cf445add13641546fba917ec32077cbe7988b70e5d8d5e72e1c793288b321",
+    "postimageGitBlobSha1": "0069a5a5cd8af919e41a150e39fc6c709bf04890",
     "origin": "Actual OpenRewrite SDK Results; never manually patched"
   },
   "executed": {

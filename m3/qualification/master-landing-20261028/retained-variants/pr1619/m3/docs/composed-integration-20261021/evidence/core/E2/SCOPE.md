@@ -46,7 +46,7 @@ method excerpts from the rebuilt image.
 ## Capture and immutability
 
 The original E1 packet's 13 files remain byte-identical, with manifest SHA-256
-`0bc5395622babd5c0cff4ff2770d6359b14c3645e3a42669f5b85c09211f468d`.
+`02e25e7791dc44c0839e7b31052a2012d641b1f98cd55ab7e09afa174e4add3d`.
 E2 is an append-only subpacket. Environment/configuration/rerun dumps and
 process identities are omitted; task/tool paths are normalized using the
 same tokens documented in E1. `PACKET_MANIFEST.json` binds original input

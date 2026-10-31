@@ -5,26 +5,26 @@
 
 /**
  * Defines the {@code commons-lang3-3.17.0} library,
- * relocated into M3JDK21 by LIB_INTAKE_TO_JMOD.
+ * relocated into M3JDK 21 by LIB_INTAKE_TO_JMOD.
  */
 module jdk.m3.lang3 {
     requires java.desktop;
-    exports com.m3.lib.lang3;
-    exports com.m3.lib.lang3.arch;
-    exports com.m3.lib.lang3.builder;
-    exports com.m3.lib.lang3.compare;
-    exports com.m3.lib.lang3.concurrent;
-    exports com.m3.lib.lang3.concurrent.locks;
-    exports com.m3.lib.lang3.event;
-    exports com.m3.lib.lang3.exception;
-    exports com.m3.lib.lang3.function;
-    exports com.m3.lib.lang3.math;
-    exports com.m3.lib.lang3.mutable;
-    exports com.m3.lib.lang3.reflect;
-    exports com.m3.lib.lang3.stream;
-    exports com.m3.lib.lang3.text;
-    exports com.m3.lib.lang3.text.translate;
-    exports com.m3.lib.lang3.time;
-    exports com.m3.lib.lang3.tuple;
-    exports com.m3.lib.lang3.util;
+    exports jdk.m3.lib.lang3;
+    exports jdk.m3.lib.lang3.arch;
+    exports jdk.m3.lib.lang3.builder;
+    exports jdk.m3.lib.lang3.compare;
+    exports jdk.m3.lib.lang3.concurrent;
+    exports jdk.m3.lib.lang3.concurrent.locks;
+    exports jdk.m3.lib.lang3.event;
+    exports jdk.m3.lib.lang3.exception;
+    exports jdk.m3.lib.lang3.function;
+    exports jdk.m3.lib.lang3.math;
+    exports jdk.m3.lib.lang3.mutable;
+    exports jdk.m3.lib.lang3.reflect;
+    exports jdk.m3.lib.lang3.stream;
+    exports jdk.m3.lib.lang3.text;
+    exports jdk.m3.lib.lang3.text.translate;
+    exports jdk.m3.lib.lang3.time;
+    exports jdk.m3.lib.lang3.tuple;
+    exports jdk.m3.lib.lang3.util;
 }

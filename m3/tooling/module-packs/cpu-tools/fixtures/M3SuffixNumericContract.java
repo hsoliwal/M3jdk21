@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
-import com.m3.tools.cpu.M3SuffixArray;
-import com.m3.tools.cpu.M3FenwickLong;
+import jdk.m3.tools.cpu.M3SuffixArray;
+import jdk.m3.tools.cpu.M3FenwickLong;
 import java.util.Arrays;
 import java.util.Random;
 

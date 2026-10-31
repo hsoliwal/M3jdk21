@@ -38,7 +38,7 @@ jobs:
             -Dtest=M3SourceSignalPluginJUnitTest test
           descriptor=m3/compiler/source-signals/target/classes/META-INF/services/com.sun.source.util.Plugin
           test -f "$descriptor"
-          grep -Fxq 'com.m3.compiler.signals.M3SourceSignalPlugin' "$descriptor"
+          grep -Fxq 'jdk.m3.compiler.signals.M3SourceSignalPlugin' "$descriptor"
 
   exact-source-vendored-original-junit:
     runs-on: ubuntu-24.04

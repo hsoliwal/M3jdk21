@@ -41,7 +41,7 @@ class ReceiverTests(unittest.TestCase):
 
     def test_missing_target_source_refused(self):
         with self.assertRaisesRegex(ValueError, "missing"):
-            receiver.safe_file("m3/collections/src/main/java/com/m3/collections/not-an-owner.java")
+            receiver.safe_file("m3/collections/src/main/java/jdk/m3/collections/not-an-owner.java")
 
 
 if __name__ == "__main__":

@@ -56,7 +56,7 @@ class DonationPacketTest(unittest.TestCase):
             self.assertNotIn(path + "\t", old)
 
     def test_duplicate_selector_is_refused_even_if_values_match(self):
-        packet = (HERE / "synexia-donation.json").read_text()
+        packet = (HERE / "m3-donation.json").read_text()
         duplicate = packet.replace(
             '"historical_installed_source_manifest_20261008"',
             '"installed_source_manifest"', 1)
@@ -101,8 +101,8 @@ class DonationPacketTest(unittest.TestCase):
 
     def test_source_transitions_admit_the_exact_receipt_and_refuse_drift(self):
         tab, newline = chr(9), chr(10)
-        path = "m3/collections/src/main/java/com/m3/collections/A.java"
-        added = "m3/collections/src/test/java/com/m3/collections/BTest.java"
+        path = "m3/collections/src/main/java/jdk/m3/collections/A.java"
+        added = "m3/collections/src/test/java/jdk/m3/collections/BTest.java"
         old, new, fresh, other = "a" * 64, "b" * 64, "c" * 64, "d" * 64
 
         def seal(rows):

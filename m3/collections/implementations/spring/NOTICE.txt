@@ -12,8 +12,8 @@ LinkedMultiValueMap: 8faf71ea1ce0e705e84a04dfaaca82c03cc30241.
 MultiValueMap API: 262601a5a4aec430eb066a23b5571b7ffd80f8dd.
 
 Sealed first-party storage owners (unchanged):
-M3LinkedHashMap: ade59880b8c9b2bee1b32ae67ca9d29b7382d998.
-M3ArrayList: 250905f67429fbedfb4d6f652ea6e90a516cb59c.
+M3LinkedHashMap: e0957cfd8a7a5abfa1c0c5e7bade32997e5ed657.
+M3ArrayList: 23977d3c314a52e82acadee97daa7d3d659c2601.
 Main storage is an owned M3 directory plus M3ArrayList objects for lists it creates.
 Caller-supplied lists and shallow-copy/clone lists retain object aliases.
 deepCopy makes a distinct modifiable M3ArrayList for each mapping.

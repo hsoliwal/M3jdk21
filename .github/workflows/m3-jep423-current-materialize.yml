@@ -138,7 +138,7 @@ jobs:
         run: |
           set -euo pipefail
           mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
-            -Dexec.mainClass=com.m3.tooling.dag.M3BackportPacketMain \
+            -Dexec.mainClass=jdk.m3.tooling.dag.M3BackportPacketMain \
             -Dexec.args="$PWD/m3/backports/recipes/jep-423-region-pinning/packet.tsv $PWD/m3/backports/recipes/jep-423-region-pinning/atom-evidence.tsv" \
             exec:java
 
@@ -188,8 +188,8 @@ jobs:
           generated = Path(os.environ["RUNNER_TEMP"]) / "jep423" / "file-atoms"
           expected = set()
           for root in (
-              generated / "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned",
-              generated / "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text",
+              generated / "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned",
+              generated / "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text",
           ):
               if not root.exists():
                   continue

@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  * Source-sealed Synexia JDK21 no-op read-only collection contract proof.
  */
-package com.m3.collections;
+package jdk.m3.collections;
 
 import java.util.ArrayList;
 import java.util.Arrays;

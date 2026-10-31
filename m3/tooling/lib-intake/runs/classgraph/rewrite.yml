@@ -1,57 +1,57 @@
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.intake.Relocate
+name: jdk.internal.m3.intake.Relocate
 displayName: LIB_INTAKE relocation of classgraph
 description: Boundary-checked package relocation, one non-recursive ChangePackage per package, longest first.
 recipeList:
   - org.openrewrite.java.ChangePackage:
       oldPackageName: nonapi.io.github.classgraph.classloaderhandler
-      newPackageName: com.m3.lib.classgraph.nonapi.classloaderhandler
+      newPackageName: jdk.m3.lib.classgraph.nonapi.classloaderhandler
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: nonapi.io.github.classgraph.fastzipfilereader
-      newPackageName: com.m3.lib.classgraph.nonapi.fastzipfilereader
+      newPackageName: jdk.m3.lib.classgraph.nonapi.fastzipfilereader
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: nonapi.io.github.classgraph.fileslice.reader
-      newPackageName: com.m3.lib.classgraph.nonapi.fileslice.reader
+      newPackageName: jdk.m3.lib.classgraph.nonapi.fileslice.reader
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: nonapi.io.github.classgraph.concurrency
-      newPackageName: com.m3.lib.classgraph.nonapi.concurrency
+      newPackageName: jdk.m3.lib.classgraph.nonapi.concurrency
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: nonapi.io.github.classgraph.reflection
-      newPackageName: com.m3.lib.classgraph.nonapi.reflection
+      newPackageName: jdk.m3.lib.classgraph.nonapi.reflection
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: nonapi.io.github.classgraph.classpath
-      newPackageName: com.m3.lib.classgraph.nonapi.classpath
+      newPackageName: jdk.m3.lib.classgraph.nonapi.classpath
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: nonapi.io.github.classgraph.fileslice
-      newPackageName: com.m3.lib.classgraph.nonapi.fileslice
+      newPackageName: jdk.m3.lib.classgraph.nonapi.fileslice
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: nonapi.io.github.classgraph.recycler
-      newPackageName: com.m3.lib.classgraph.nonapi.recycler
+      newPackageName: jdk.m3.lib.classgraph.nonapi.recycler
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: nonapi.io.github.classgraph.scanspec
-      newPackageName: com.m3.lib.classgraph.nonapi.scanspec
+      newPackageName: jdk.m3.lib.classgraph.nonapi.scanspec
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: nonapi.io.github.classgraph.types
-      newPackageName: com.m3.lib.classgraph.nonapi.types
+      newPackageName: jdk.m3.lib.classgraph.nonapi.types
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: nonapi.io.github.classgraph.utils
-      newPackageName: com.m3.lib.classgraph.nonapi.utils
+      newPackageName: jdk.m3.lib.classgraph.nonapi.utils
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: nonapi.io.github.classgraph.json
-      newPackageName: com.m3.lib.classgraph.nonapi.json
+      newPackageName: jdk.m3.lib.classgraph.nonapi.json
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: io.github.classgraph
-      newPackageName: com.m3.lib.classgraph
+      newPackageName: jdk.m3.lib.classgraph
       recursive: false

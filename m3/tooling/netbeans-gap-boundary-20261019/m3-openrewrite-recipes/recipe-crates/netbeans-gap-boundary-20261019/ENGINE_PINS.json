@@ -1,0 +1,25 @@
+{
+  "source_revision": "4565392487bf83b55a3031a26ea1a61b1b526b3c",
+  "unchanged_canonical_sources": [
+    {
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java",
+      "git_blob": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
+    },
+    {
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "git_blob": "8d2dcf8311fd56406246998dc4218ae876a03d45",
+      "sha256": "92cc90c46a1ca672a016a89c0d65e6909e090264ba1aa76a85b7fa333470e38b"
+    },
+    {
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "git_blob": "9d0788d3717e017d58345c5c3e62022c2915a3c8",
+      "sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef"
+    },
+    {
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
+      "git_blob": "d41d6dc93ec0e176f6d215d23e3b6a316a9e4a32",
+      "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0"
+    }
+  ]
+}

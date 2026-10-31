@@ -458,7 +458,7 @@ def main(argv=None):
             roots = sorted(set(roots).union(FX_MODULES))
         else:
             roots.append("com.m3pack.fx")
-    inventory = [home / "bin/java", "-cp", classes, "com.m3.tools.modulepack.M3ModuleInventory",
+    inventory = [home / "bin/java", "-cp", classes, "jdk.m3.tools.modulepack.M3ModuleInventory",
                  ",".join(roots), home / "jmods", jmods,
                  *[item.path for item in tools.modules]]
     first = command(inventory, output / "MODULES.tsv")
@@ -467,7 +467,7 @@ def main(argv=None):
     selected_modules = copy_selected_modules(tools, first, jmods)
     if tools.names:
         installed_inventory = command(
-            [home / "bin/java", "-cp", classes, "com.m3.tools.modulepack.M3ModuleInventory",
+            [home / "bin/java", "-cp", classes, "jdk.m3.tools.modulepack.M3ModuleInventory",
              ",".join(roots), home / "jmods", jmods], log / "installed-inventory.tsv")
         if inventory_modules(installed_inventory) != selected_modules:
             raise ValueError("Installed tool module closure differs from admitted inventory")
@@ -491,14 +491,14 @@ def main(argv=None):
     install_assets(tools, image)
     smoke_path = ["--module-path", smoke_classes] if baseline is not None else []
     smoke = command([image / "bin/java", "-Xcheck:jni", *smoke_path, "-m",
-                     "com.m3pack.diagnostics/com.m3.pack.diagnostics.M3DiagnosticsSmoke",
+                     "com.m3pack.diagnostics/jdk.m3.pack.diagnostics.M3DiagnosticsSmoke",
                      output / "probe.jfr"], log / "diagnostics-run.log")
     if "M3_DIAGNOSTICS_PASS" not in smoke:
         raise ValueError("Missing diagnostic proof")
     if fx_lock:
         fx_path = ["--module-path", fx_classes] if baseline is not None else []
         fx = command([image / "bin/java", "-Xcheck:jni", *fx_path, "-m",
-                      "com.m3pack.fx/com.m3.pack.fx.M3FxSmoke"], log / "javafx-run.log", 60)
+                      "com.m3pack.fx/jdk.m3.pack.fx.M3FxSmoke"], log / "javafx-run.log", 60)
         if "M3_JAVAFX_PASS" not in fx:
             raise ValueError("Missing JavaFX native/toolkit proof")
     developer = None

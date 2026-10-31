@@ -12,15 +12,15 @@ import re
 import subprocess
 from pathlib import Path
 
-COLLECTION_ROOT = "m3/collections/src/main/java/com/m3/collections"
-FAMILY_PATH = "m3/collections/src/main/resources/com/m3/collections/M3_SDK_FAMILY_CATALOG.tsv"
-PROVIDER_ROOT = "m3/collections/implementations/commons-collections-4.5.0/src/main/java/com/m3/collections/apache/trie"
+COLLECTION_ROOT = "m3/collections/src/main/java/jdk/m3/collections"
+FAMILY_PATH = "m3/collections/src/main/resources/jdk/m3/collections/M3_SDK_FAMILY_CATALOG.tsv"
+PROVIDER_ROOT = "m3/collections/implementations/commons-collections-4.5.0/src/main/java/jdk/m3/collections/apache/trie"
 FAMILY_FIELDS = ["upstream_fqcn", "vendor", "existing_m3_owner", "proposed_m3_role_NOT_IMPLEMENTED", "disposition", "semantic_contract"]
 OWNER_FIELDS = ["category", "source_path", "revision", "git_blob", "sha256", "source_scope", "source_signal", "string_relevance", "evidence_lines", "qualification"]
 EXPLICIT = {
     "src/java.base/share/classes/java/lang/String.java": "string_substrate",
     "src/java.base/share/classes/java/lang/M3FrozenLexiconIndex.java": "lexicon_nontrie",
-    "m3/collections/implementations/apache-patricia-trie/src/main/java/com/m3/collections/apache/M3PatriciaTrie.java": "provider_scaffold",
+    "m3/collections/implementations/apache-patricia-trie/src/main/java/jdk/m3/collections/apache/M3PatriciaTrie.java": "provider_scaffold",
     "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "native_owner",
 }
 for _name in ("HashMap", "HashSet", "LinkedHashMap", "LinkedHashSet", "TreeMap", "TreeSet", "IdentityHashMap", "WeakHashMap", "ImmutableCollections", "Collections", "Arrays"):

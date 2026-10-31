@@ -6,10 +6,10 @@
   "run": {"mode": "apply", "profile": "bounded", "workers": 1, "shard_count": 1, "shard_index": 0},
   "targets": {
     "files": [
-      "m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDB.java",
-      "m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticCodec.java",
-      "m3/indexdb/src/test/java/com/m3/indexdb/DbAtomTest.java",
-      "m3/indexdb/src/test/java/com/m3/indexdb/DbDigest.java"
+      "m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDB.java",
+      "m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDbSemanticCodec.java",
+      "m3/indexdb/src/test/java/jdk/m3/indexdb/DbAtomTest.java",
+      "m3/indexdb/src/test/java/jdk/m3/indexdb/DbDigest.java"
     ],
     "modules": ["m3/tooling/migration-recipes"]
   },

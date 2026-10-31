@@ -437,22 +437,22 @@ concurrent-input/resource tests, trusted external-source admission and exact-hea
 build/runtime qualification remain open. Hosted CI, if reported separately,
 must retain its own commit and scope; it is not evidence produced by this review.
 
-[CLI]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/LexiconTool.java
-[NUM]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/M3NumberSpace.java
-[INST]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/M3InstanceIndexPrecompute.java
-[INST-ORDER]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/M3InstanceIndexPrecompute.java#L54-L77
-[GRAM]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/M3LanguageGrammarSupport.java
-[ENV]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/SynexiaLangDexSourceEnvelope.java
+[CLI]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/LexiconTool.java
+[NUM]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/M3NumberSpace.java
+[INST]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/M3InstanceIndexPrecompute.java
+[INST-ORDER]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/M3InstanceIndexPrecompute.java#L54-L77
+[GRAM]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/M3LanguageGrammarSupport.java
+[ENV]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/M3LangDexSourceEnvelope.java
 [MODULE]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/module-info.java
 [BUILD]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/build.sh
 [POM]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/pom.xml
 [MAPTEST]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/verify-shared-mapping.py
-[NUMMAP]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/synexia-number-target-map.tsv
-[INSTMAP]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/synexia-instance-index-contract.tsv
-[MANIFEST]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/synexia-source-manifest.tsv
-[FIELDS]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/synexia-precompute-field-map.tsv
-[EXPORT]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/SYNEXIA_EXPORT.md
-[EXPORT-ENV]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/SYNEXIA_EXPORT.md#langdex-source-envelope-intake-boundary
+[NUMMAP]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/m3-number-target-map.tsv
+[INSTMAP]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/m3-instance-index-contract.tsv
+[MANIFEST]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/m3-source-manifest.tsv
+[FIELDS]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/m3-precompute-field-map.tsv
+[EXPORT]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/M3_EXPORT.md
+[EXPORT-ENV]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/M3_EXPORT.md#langdex-source-envelope-intake-boundary
 [NUMTEST]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/test/M3NumberSpaceTest.java
 [NUMCONTRACT]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/test/M3NumberSpaceContractTest.java
 [NUMFIX]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/test/M3NumberSpaceExportFixture.java

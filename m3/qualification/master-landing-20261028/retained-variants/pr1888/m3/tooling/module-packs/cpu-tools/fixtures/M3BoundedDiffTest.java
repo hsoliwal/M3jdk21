@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
-import com.m3.tools.cpu.CpuTools;
+import jdk.m3.tools.cpu.CpuTools;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -36,9 +36,9 @@ public final class M3BoundedDiffTest {
             var searched = CpuTools.corpusLiteral(corpus, needles, 100);
             check(searched.complete() && searched.scannedFiles() == 3 && searched.size() > 10,
                     "one compiled literal plan searches all three exact M3File snapshots");
-            check(searched.hit(0).equals(new com.m3.tools.text.search.MultiLiteralSearch.CorpusHit(0, 0, 0, 4))
-                    && searched.hit(1).equals(new com.m3.tools.text.search.MultiLiteralSearch.CorpusHit(0, 1, 6, 11))
-                    && searched.hit(2).equals(new com.m3.tools.text.search.MultiLiteralSearch.CorpusHit(0, 2, 6, 11)),
+            check(searched.hit(0).equals(new jdk.m3.tools.text.search.MultiLiteralSearch.CorpusHit(0, 0, 0, 4))
+                    && searched.hit(1).equals(new jdk.m3.tools.text.search.MultiLiteralSearch.CorpusHit(0, 1, 6, 11))
+                    && searched.hit(2).equals(new jdk.m3.tools.text.search.MultiLiteralSearch.CorpusHit(0, 2, 6, 11)),
                     "file ordinal, source-relative UTF-16 positions and duplicate pattern IDs preserved");
             check(searched.sha256().matches("[0-9a-f]{64}")
                     && CpuTools.verifyCorpusLiteral(corpus, needles, 100, searched, null),
@@ -67,9 +67,9 @@ public final class M3BoundedDiffTest {
             var regex = CpuTools.regexCorpus(corpus, "right", 5);
             check(regex.complete() && regex.scannedFiles() == 3 && regex.size() == 3,
                     "one authoritative compiled M3Regex Pattern executes against ordered M3File snapshots");
-            check(regex.hit(0).equals(new com.m3.tools.text.regex.RegexMatcher.CorpusHit(0, 6, 11))
-                    && regex.hit(1).equals(new com.m3.tools.text.regex.RegexMatcher.CorpusHit(1, 6, 11))
-                    && regex.hit(2).equals(new com.m3.tools.text.regex.RegexMatcher.CorpusHit(2, 7, 12)),
+            check(regex.hit(0).equals(new jdk.m3.tools.text.regex.RegexMatcher.CorpusHit(0, 6, 11))
+                    && regex.hit(1).equals(new jdk.m3.tools.text.regex.RegexMatcher.CorpusHit(1, 6, 11))
+                    && regex.hit(2).equals(new jdk.m3.tools.text.regex.RegexMatcher.CorpusHit(2, 7, 12)),
                     "fresh per-file matchers retain original half-open UTF-16 ranges");
             check(CpuTools.verifyRegexCorpus(corpus, "right", 5, regex, null)
                     && !CpuTools.verifyRegexCorpus(corpus, "right", 4, regex, null)
@@ -174,7 +174,7 @@ public final class M3BoundedDiffTest {
                 throw new AssertionError("incomplete line patch applied");
             } catch (IllegalStateException expected) { check(true, "incomplete line patch cannot apply"); }
             var lineMerged = CpuTools.lineMerge(before, after, independent, 2);
-            check(lineMerged.mergeable() && lineMerged.status() == com.m3.tools.text.diff.ThreeWayMerge.Status.MERGED
+            check(lineMerged.mergeable() && lineMerged.status() == jdk.m3.tools.text.diff.ThreeWayMerge.Status.MERGED
                     && lineMerged.conflictCount() == 0 && lineMerged.result().mergedChanges().size() == 2,
                     "two distinct whole-line replacements compose in base coordinates");
             check(lineMerged.apply(before).equals("#left\r\nright!\ud83d\ude42\n"),
@@ -191,7 +191,7 @@ public final class M3BoundedDiffTest {
                 throw new AssertionError("line merge accepted location-substituted base");
             } catch (IllegalArgumentException expected) { check(true, "file line merge refuses source relocation"); }
             var lineConflict = CpuTools.lineMerge(before, after, conflicting, 2);
-            check(lineConflict.status() == com.m3.tools.text.diff.ThreeWayMerge.Status.CONFLICT
+            check(lineConflict.status() == jdk.m3.tools.text.diff.ThreeWayMerge.Status.CONFLICT
                     && lineConflict.conflictCount() == 1 && lineConflict.result().conflictsComplete(),
                     "divergent same-line modifications have explicit conflict witness");
             try {
@@ -222,7 +222,7 @@ public final class M3BoundedDiffTest {
                 throw new AssertionError("location-substituted base accepted");
             } catch (IllegalArgumentException expected) { check(true, "file merge rejects substituted base"); }
             var conflict = CpuTools.merge(before, after, conflicting, 1);
-            check(!conflict.mergeable() && conflict.status() == com.m3.tools.text.diff.ThreeWayMerge.Status.CONFLICT
+            check(!conflict.mergeable() && conflict.status() == jdk.m3.tools.text.diff.ThreeWayMerge.Status.CONFLICT
                     && conflict.conflictCount() > 0, "overlapping inserts remain explicit conflicts");
             try {
                 conflict.apply(before);

@@ -47,24 +47,24 @@ class V5JUnitReceiptsTest(unittest.TestCase):
 
     def test_original_surefire_verifier_accepts_exact_test_identity(self):
         old = self.raw_historical()
-        identities = {"com.m3.collections.interop.M3Flat3MapProviderTest#one",
-                      "com.m3.collections.interop.M3FrozenLongSetProviderTest#two"}
+        identities = {"jdk.m3.collections.interop.M3Flat3MapProviderTest#one",
+                      "jdk.m3.collections.interop.M3FrozenLongSetProviderTest#two"}
         self.assertEqual(1, old.verify_reports(self.temporary_suite(identities), identities))
 
     def test_original_surefire_verifier_refuses_missing_test(self):
         old = self.raw_historical()
-        ids = {"com.m3.collections.interop.A#one", "com.m3.collections.interop.B#two"}
+        ids = {"jdk.m3.collections.interop.A#one", "jdk.m3.collections.interop.B#two"}
         with self.assertRaisesRegex(ValueError, "JUnit execution diverged"):
             old.verify_reports(self.temporary_suite({next(iter(ids))}), ids)
 
     def test_original_surefire_verifier_refuses_skipped_test(self):
         old = self.raw_historical()
-        ids = {"com.m3.collections.interop.A#one"}
+        ids = {"jdk.m3.collections.interop.A#one"}
         with self.assertRaisesRegex(ValueError, "failed or skipped"):
             old.verify_reports(self.temporary_suite(ids, bad="skip"), ids)
 
     def test_v5_rejects_flaky_or_rerun_test(self):
-        ids = {"com.m3.collections.interop.A#one"}
+        ids = {"jdk.m3.collections.interop.A#one"}
         with self.assertRaisesRegex(ValueError, "hidden flaky"):
             v5.reject_flaky(self.temporary_suite(ids, bad="flaky"))
 
@@ -72,7 +72,7 @@ class V5JUnitReceiptsTest(unittest.TestCase):
         holder = tempfile.TemporaryDirectory()
         self.addCleanup(holder.cleanup)
         root = Path(holder.name)
-        source = self.temporary_suite({"com.m3.collections.interop.A#one"})
+        source = self.temporary_suite({"jdk.m3.collections.interop.A#one"})
         (root / "TEST-Link.xml").symlink_to(next(source.glob("TEST-*.xml")))
         with self.assertRaisesRegex(ValueError, "aliased"):
             v5.reject_flaky(root)

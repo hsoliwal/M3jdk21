@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "status": "ROOT_CPU_RESOURCE_ABSENCE_REJECTED_FORMAL_ADMISSION_STILL_OPEN",
+  "originalFinding": {
+    "title": "[P1] Include the source payloads referenced by the manifest",
+    "body": "Both manifest rows name `.java.txt` resources beneath the recipe template root, but neither resource is included in the exact seven-file bundle. `M3GpuToolJoinManifest.load` opens every non-`KEEP` fourth-column resource and verifies its postimage before Replay can plan, check, or apply, so this package will fail with `cannot read recipe resource` for the first target. Add both exact pinned payload files to the published bundle (or point the rows to resources actually shipped with it).",
+    "priority": "P1",
+    "confidence": 0.99,
+    "category": "bug",
+    "code_location": {
+      "file_path": "m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/manifest.tsv",
+      "line": 1
+    }
+  },
+  "originalResult": {
+    "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-02/review-preparation-01/FORMAL_REVIEW.json",
+    "bytes": 1278,
+    "sha256": "10988bfe16fd16e4f12cbc42cf7ac39cd299c1bcf533bd719efbe57f75c8c0d9",
+    "gitBlob": "48548149815340bb09189cfb68b7fe89b100f7ba"
+  },
+  "fullPublicationInventory": {
+    "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/PUBLICATION_MAP_03.json",
+    "bytes": 18854,
+    "sha256": "5945fcaac9caed258b862ef5234538e8247dafb84d3747050fdafb7b3aa38c91",
+    "gitBlob": "1737e1a507d7d36d90a03b36eefc3a19753f5b4b"
+  },
+  "publicationFiles": 21,
+  "metadataReviewFiles": 7,
+  "exactTemplatePayloads": [
+    {
+      "targetPath": "m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexProgram.java.txt",
+      "bytes": 141730,
+      "sha256": "9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7",
+      "gitBlob": "98d9be66015639a8087c744d17f31c76d53c8ae5"
+    },
+    {
+      "targetPath": "m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexTrigramQuery.java.txt",
+      "bytes": 15093,
+      "sha256": "9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e",
+      "gitBlob": "4e1d24af8d3054a27ae3b6f2d8eebd6486225118"
+    }
+  ],
+  "correctedRootMetadataObservation": {
+    "chunk_id": "0a70b7",
+    "wall_time_seconds": 9.4e-06,
+    "exit_code": 0,
+    "original_token_count": 1685,
+    "output": "[{\"targetPath\":\"m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexProgram.java\",\"gitBlob\":\"98d9be66015639a8087c744d17f31c76d53c8ae5\",\"preimage\":\"6d814e232c0b7af0281422d146a587467db4fe32\",\"sha256\":\"9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7\",\"bytes\":141730},{\"targetPath\":\"m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexTrigramQuery.java\",\"gitBlob\":\"4e1d24af8d3054a27ae3b6f2d8eebd6486225118\",\"preimage\":\"ABSENT\",\"sha256\":\"9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e\",\"bytes\":15093},{\"targetPath\":\"m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/base-revision.txt\",\"gitBlob\":\"94c8db3c419fccea063f5492604303ad919aed15\",\"preimage\":\"ABSENT\",\"sha256\":\"bf9b81c16c005766cc6d80e74be4b0396cfd75e72dad3877f7868e9485e6919f\",\"bytes\":41},{\"targetPath\":\"m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/manifest.tsv\",\"gitBlob\":\"1d22a7f21c48e299b1d2f613c3e0299494189887\",\"preimage\":\"ABSENT\",\"sha256\":\"d1b8e074f294b04376b27a41a1a9ab2b4e5a94ebc280668cb526248ef9780025\",\"bytes\":620},{\"targetPath\":\"m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexProgram.java.txt\",\"gitBlob\":\"98d9be66015639a8087c744d17f31c76d53c8ae5\",\"preimage\":\"ABSENT\",\"sha256\":\"9e3243cd150c965eeb8dc04baabb0f686d985c57b59bfa339cfa994d7eb608d7\",\"bytes\":141730},{\"targetPath\":\"m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexTrigramQuery.java.txt\",\"gitBlob\":\"4e1d24af8d3054a27ae3b6f2d8eebd6486225118\",\"preimage\":\"ABSENT\",\"sha256\":\"9c645f73e3c302d03371d2ccd6659de22b0fee27ab328ecfd1f1c7702a151b2e\",\"bytes\":15093},{\"targetPath\":\"m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DIRECT_ORIGINAL40_ACTUAL_TERMINAL.json\",\"gitBlob\":\"855fc89e6287975ae94ad30e21122c20a17141ca\",\"preimage\":\"ABSENT\",\"sha256\":\"79882de799b81e1443eebf5d24f72fbf14fae8925b8dce7fc70f8dd7cd042dfd\",\"bytes\":90172},{\"targetPath\":\"m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DIRECT_REPLAY_ACTUAL_TERMINAL.json\",\"gitBlob\":\"43c8072cba09ae2a39be384937b3eaa863ca70c5\",\"preimage\":\"ABSENT\",\"sha256\":\"f835a5f41f8ce5aecfda1ae9ab84ac18848d26c74de45b6c35bdb2dc1029103b\",\"bytes\":11210},{\"targetPath\":\"m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/STRICT_TEST_CLASS_ARTIFACTS.json\",\"gitBlob\":\"2299f5b797472d243ce7b960792574d937a73022\",\"preimage\":\"ABSENT\",\"sha256\":\"8f3be69f9c1a18bebb85ad991eeb1881d0e1b834a29cdb289da68a7a55490b68\",\"bytes\":16134},{\"targetPath\":\"m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/ROOT_CPU_TEST_REVIEW_DISPOSITION.json\",\"gitBlob\":\"7e61f73caf210591ae65b99345d64cd3f90c4be1\",\"preimage\":\"ABSENT\",\"sha256\":\"ec64521431ad00897679425b8ef727ffe6f5b0c920956d40645f922a2dff0fdb\",\"bytes\":2688},{\"targetPath\":\"m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/ORIGINAL_TRIGRAM_BASELINE_FAILURE.json\",\"gitBlob\":\"7903dccda66782f17792eb28092c49018621dbb8\",\"preimage\":\"ABSENT\",\"sha256\":\"27a3e0231350118684d97d347dfffba77172442817a2389d6f7772b578013a43\",\"bytes\":15279},{\"targetPath\":\"m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/ORIGINAL_PROGRAM3_BASELINE_FAILURE.json\",\"gitBlob\":\"457ec61f1fe1547bec2b706c8dd7ff6de530ed32\",\"preimage\":\"ABSENT\",\"sha256\":\"cde52919e344a1daa9442e22548e56dbb4c1e1cd04600162f1aef89248f71922\",\"bytes\":17989},{\"targetPath\":\"m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/donor-oracles/MIndexRegexProgramTest.java.txt\",\"gitBlob\":\"13ec38e57bd6d4f8317566821f8d6e2dad153961\",\"preimage\":\"ABSENT\",\"sha256\":\"5c185acb76ef6de2a79eebec30a6b156fa982c7283cb0f4d0ef96840ce1a9dd6\",\"bytes\":39322},{\"targetPath\":\"m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/donor-oracles/MIndexRegexTrigramQueryTest.java.txt\",\"gitBlob\":\"601a424ef6f477e675c64cdaa0643b0247c5476a\",\"preimage\":\"ABSENT\",\"sha256\":\"bae0950fd49e10eaada3d8e9e61a9b99dd251357f3952bbd867e134f77ef2225\",\"bytes\":11007},{\"targetPath\":\"m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/M3_ACTUAL_PUBLICATION_TERMINAL.json\",\"gitBlob\":\"1e821dce0839e8ab3c702e73a4c64af0cdba779f\",\"preimage\":\"ABSENT\",\"sha256\":\"7040ab4eed6b35d34a90948d1e0366fff012a202503320b433b7fcb06b5eb430\",\"bytes\":705},{\"targetPath\":\"m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/M3_STRICT_PRODUCTION_CLASS_ARTIFACTS.json\",\"gitBlob\":\"813a5c7eb03dd2b6462d54acba11de5003c03ae8\",\"preimage\":\"ABSENT\",\"sha256\":\"e67e7e3c0d70fa9643730df1d9efe26d3f6cf3563569ceedcd2a1d4a6d5e0073\",\"bytes\":15971},{\"targetPath\":\"m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DONOR_EVIDENCE_INDEX.json\",\"gitBlob\":\"017145894abbb197094ea0e440d13c37d16d51e2\",\"preimage\":\"ABSENT\",\"sha256\":\"d313f93d156fd03a98a8b0509c718da5e387e59b5ceead0535117589c990b019\",\"bytes\":17039},{\"targetPath\":\"m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/FOSS_REUSE_DECISION.tsv\",\"gitBlob\":\"059225e70157e75ad4918d5fc4bd60eab219deaa\",\"preimage\":\"ABSENT\",\"sha256\":\"0fb83cb152c0eaa0bdf43ad8ce4102165c9a79a0c1ce5d16da9a68d1e5abc9da\",\"bytes\":1474},{\"targetPath\":\"m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/NOTICE\",\"gitBlob\":\"b287bc55af53a5ff63256f19e5a1644586bdb49b\",\"preimage\":\"ABSENT\",\"sha256\":\"1bfa6dbc47ea3a4900d868b687028647c6b31a34a5bb15ec7e0c833d38468380\",\"bytes\":488},{\"targetPath\":\"m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/PROVENANCE.json\",\"gitBlob\":\"1ab073ac911490142c699982256fce7dd694796d\",\"preimage\":\"ABSENT\",\"sha256\":\"8826e3c512258194e8cb82391caf2067b488977677b2a913acbd278a7c397576\",\"bytes\":5974},{\"targetPath\":\"m3/m3-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/README.md\",\"gitBlob\":\"242ceee1f578703f9b4e9c4146107f79e42f74dd\",\"preimage\":\"ABSENT\",\"sha256\":\"9e244de27da96784ae35b0e0b88f71afb4f48bbb3bcc6883348552089dcbe498\",\"bytes\":4040}]\r\n"
+  },
+  "rootDispositionCorrectionAuthority": {
+    "path": "K:/codex-work/m3-v7-ast-publication-20261007/M3_REGEX_REVIEW01_ROOT_DISPOSITION_CUSTODY_CORRECTION_01.json",
+    "bytes": 1732,
+    "sha256": "05fb19c34f361c1ab3809f6f4fac4deea8515f6eb0696204b67d15166518546a",
+    "gitBlob": "5b6fe8b58c6bd3ab6b177fdd6a10b5a94e95c2d5"
+  },
+  "reason": "Both required manifest resources are present byte-exact in the full package and were loaded by actual03apply2. Seven staged metadata files did not represent the complete publication.",
+  "newFormalReview": "NOT_RUN",
+  "originalFailurePreserved": true
+}

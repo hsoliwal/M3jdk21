@@ -1,0 +1,4 @@
+# path	sha256	resource
+m3/vendor/m3/snapshots/m3-build-collections-20261017/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java	5d21dbe596c2b41cb6a11404d8023ba90d2ce463523e73a4953851a4332a9922	context-00.txt
+m3/vendor/m3/snapshots/m3-build-collections-20261017/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java	962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab	context-01.txt
+m3/vendor/m3/snapshots/m3-build-collections-20261017/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java	13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4	context-02.txt

@@ -4,7 +4,7 @@
  */
 /*
  * @test
- * @summary M3JDK21 filtered CollectionViews spliterator preserves enclosing callback state
+ * @summary M3JDK 21 filtered CollectionViews spliterator preserves enclosing callback state
  * @run main FilteredSpliteratorReentrantTest
  */
 import java.util.Collection;

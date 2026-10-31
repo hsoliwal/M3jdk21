@@ -22,7 +22,7 @@ static int matches(jint state, jint required, jint forbidden) {
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_collections_M3MaskViewportNative_project(JNIEnv *env, jclass cls,
+Java_jdk_m3_collections_M3MaskViewportNative_project(JNIEnv *env, jclass cls,
         jintArray offsets, jintArray flags, jint first, jint length,
         jint required, jint forbidden, jintArray target, jint targetOffset) {
     (void) cls;
@@ -100,7 +100,7 @@ release:
 
 /* Additive JNI original-owner CPU viewport output. Old project symbol unchanged. */
 JNIEXPORT jint JNICALL
-Java_com_m3_collections_M3MaskViewportNative_projectFramePage(JNIEnv *env, jclass cls,
+Java_jdk_m3_collections_M3MaskViewportNative_projectFramePage(JNIEnv *env, jclass cls,
         jintArray offsets, jintArray flags, jint first, jint length,
         jint required, jint forbidden, jint skipVisible, jint maxVisible,
         jintArray rows, jint rowOffset, jintArray slots, jint slotOffset,

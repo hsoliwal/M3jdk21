@@ -1,0 +1,68 @@
+{
+  "schema": "M3JDK21_SYNEXIA_LONG_ARRAY_DEQUE_RECONCILE_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-long-array-deque-reconcile-20261007",
+    "pullRequest": 9799,
+    "commit": "049d757de0b",
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.LongArrayDequeReconcile",
+    "crate": "m3-long-array-deque-reconcile",
+    "resolves": [
+      "hsoliwal/com.synexia#9775 (JDK-shaped v1, on master)",
+      "hsoliwal/M3jdk21#387 (MERGED_ANCESTRY_ONLY, zero-file superset merge)"
+    ]
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "ed5f4ed1771dbc0cf5cfc6d0944de2092326bd6d",
+    "owner": "com.m3.collections.M3LongArrayDeque",
+    "oneOwnerPerContract": true
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongArrayDeque.java",
+      "before": "1b1ecd7725f8f54be60f2ed07f780615283b9f40a1bf75278fd9d26d1b330abc",
+      "after": "f9a92a30f62e661e34fa3971c8d8143ef4d7c8b9a6257f45826ee6d16f9dee39",
+      "resource": "00-M3LongArrayDeque.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongDeque.java",
+      "before": "ABSENT",
+      "after": "e84f06bd3dd086ddf01371a5b444d8f430006b622271bb19891e5a2c1f223b75",
+      "resource": "01-M3LongDeque.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongQueue.java",
+      "before": "ABSENT",
+      "after": "50c49ecb80fad7498ef5db681640a1b136bbcac87a1b311a08563b902db3b85f",
+      "resource": "02-M3LongQueue.java.txt"
+    },
+    {
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3LongArrayDequeTest.java",
+      "before": "ABSENT",
+      "after": "4005c2d0debd0700366d9c718c4ed03a7cd4a162396dc748879348cdd736f4f6",
+      "resource": "03-M3LongArrayDequeTest.java.txt"
+    }
+  ],
+  "gates": {
+    "m3CollectionsModuleCompile": "PASS_WINDOWS -Xlint:all,-module -Werror (25 sources)",
+    "m3CollectionsModuleTests": "PASS_WINDOWS 28/28 (M3JdkShapedPrimitiveCollectionsTest retained, M3LongArrayDequeTest adapted)",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3LongArrayDequeReconcileRecipeTest 3/3",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "jdkBuildJtregRuntime": "PENDING_LINUX",
+    "ci": "PENDING"
+  },
+  "semanticDecisions": [
+    "JDK shape wins: names offerFirst/offerLast/getFirst/getLast/removeFirstLong/removeLastLong, ring geometry, zeroing on removal, fail-fast iterators",
+    "lineage names first/last/removeFirst/removeLast are defaulted aliases on M3LongDeque",
+    "peek/poll keep the lineage throwing contract on empty (no null sentinel for primitives)",
+    "filterInPlace is exception-safe and bumps modCount only when it removes",
+    "M3PackedRingAtoms/M3PackedFlatArrays helpers not introduced",
+    "M3Collections factories untouched here (union PR #397 owns that file)"
+  ]
+}
