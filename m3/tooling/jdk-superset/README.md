@@ -48,7 +48,14 @@ one per jackson-core version).
      a same-host perf A/B (`tools/perf_ab_high.ps1`, `tools/perf_gate.py`) agree.
    - Strings: no M3 interner is reachable from `jdk.internal.math`, so the 4 strings are compile-time constants, which
      the JVM interns. The gap is recorded in `RECIPE_MEMORY.tsv`.
-7. Hex literals (HEX_ROUTE v1, branch `m3/jdk-number-parse-hex-exact-20261031`; it must land with #2215). The
+   - The custody record `src/java.base/share/legal/fastdoubleparser.md` names this change too.
+     `tools/custody_check.py` fails when a commit changes absorbed files and no commit up to head updates the record.
+7. Commits. The M3jdk worktree is blobless and sparse, with a 25 MB index on a nearly full disk, so commits go through
+   `tools/index_free_commit.py`, which writes no index. The index stays at the old HEAD until `git reset -q` runs, and
+   until then a porcelain commit there (`git add --sparse`, `git commit`) would revert the committed paths. The tool
+   reports INDEX_STALE after each commit (`tools/index_free_commit_check.py` checks that), and the GATES.tsv row
+   `index_sync` holds the reset: HOLD while H: is under the 350 MB floor.
+8. Hex literals (HEX_ROUTE v1, branch `m3/jdk-number-parse-hex-exact-20261031`; it must land with #2215). The
    jackson-fdp leaf (#2233) found 1,309 hex literals in its 250,000-literal corpus that #2215 rounds differently from
    stock JDK 21.0.9. Its own 600,000-literal differential held only `Double.toHexString` hex literals, at most 14 digits.
    - Atomize: `HEX_ATOMS.tsv` (`tools/hex_atoms.py`) binds the 20 atoms of the hex path to line ranges and hashes.
