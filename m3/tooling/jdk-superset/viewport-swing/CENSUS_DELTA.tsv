@@ -1,0 +1,21 @@
+scope	package	status	before	after	delta
+group	sun.swing.list	TESTED	0	42	+42
+group	sun.swing.list	CLASS_ONLY	0	0	+0
+group	sun.swing.list	UNTESTED	42	0	-42
+group	sun.swing.list	perf PRESENT	0	25	+25
+group	sun.swing.table	TESTED	1	62	+61
+group	sun.swing.table	CLASS_ONLY	10	0	-10
+group	sun.swing.table	UNTESTED	51	0	-51
+group	sun.swing.table	perf PRESENT	0	29	+29
+group	sun.swing.tree	TESTED	1	177	+176
+group	sun.swing.tree	CLASS_ONLY	10	0	-10
+group	sun.swing.tree	UNTESTED	166	0	-166
+group	sun.swing.tree	perf PRESENT	1	52	+51
+group	sun.swing.{list,table,tree}	TESTED	2	281	+279
+group	sun.swing.{list,table,tree}	CLASS_ONLY	20	0	-20
+group	sun.swing.{list,table,tree}	UNTESTED	259	0	-259
+group	sun.swing.{list,table,tree}	perf PRESENT	1	106	+105
+all M3JDK atoms	*	TESTED	920	1199	+279
+all M3JDK atoms	*	CLASS_ONLY	1265	1245	-20
+all M3JDK atoms	*	UNTESTED	662	403	-259
+all M3JDK atoms	*	perf PRESENT	647	752	+105

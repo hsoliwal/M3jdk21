@@ -1,0 +1,87 @@
+# host: Windows 11, 32 logical CPUs, stock JDK 21.0.9 + --patch-module java.desktop=<M3 classes>; static final MethodHandles (invokeExact), interleaved rounds, ns per operation
+# load list: system CPU % start 28.7, warm 43.6, end 38.6
+# load table: system CPU % start 48.6, warm 44.2, end 36.3
+# load tree: system CPU % start 50.6, warm 41.6, end 39.0
+# tier: highest -XX:+PrintCompilation tier of the atom's own method (1 = trivial method, C1 without profiling; 3 = its standalone compile stayed at C1 while the loop inlined it); loop_tier: tier of the measured loop that calls the atom through its constant MethodHandle (4 = C2 with the atom inlined)
+# tier4_deopt: a tier-4 compilation of the atom was made not entrant; note FOLDED: below 0.1 ns the JIT hoisted a loop-invariant getter out of the loop: no measurement
+pkg	atom	label	route	ns_median	ns_min	ns_max	ops_per_round	rounds	tier	loop_tier	tier4_deopt	cpu_load_start/warm/end	reference_of	speedup_vs_reference	note
+list	M3PrefixRowOffsets#startOf(int)	row start (getCellBounds)	direct	0.509	0.474	0.592	1048576	7	4	4	-	28.7/43.6/38.6	-	-	-
+list	ref:BasicListUI#getCellBounds	stock row start loop (JDK reference)	reference	18443.311	17101.904	19941.895	2048	7	-	-	-	28.7/43.6/38.6	M3PrefixRowOffsets#startOf(int)	36234.40	-
+list	M3PrefixRowOffsets#firstEndingAfter(long)	row holding an offset	direct	114.383	101.113	123.464	1048576	7	4	4	-	28.7/43.6/38.6	-	-	-
+list	M3PrefixRowOffsets#rowCount()	rows indexed	direct	0.012	0.012	0.021	1048576	7	4	4	-	28.7/43.6/38.6	-	-	FOLDED
+list	M3PrefixRowOffsets#monotone()	monotone flag	direct	0.011	0.009	0.089	1048576	7	1	4	-	28.7/43.6/38.6	-	-	FOLDED
+list	M3PrefixRowOffsets#M3PrefixRowOffsets(int[])	lane build over 8192 heights (per layout)	direct	4997.803	4614.453	7233.105	2048	7	4	-	yes	28.7/43.6/38.6	-	-	-
+list	M3ListRows#startOf(int)	row start through the UI state	direct	0.507	0.490	0.543	1048576	7	3	4	-	28.7/43.6/38.6	-	-	-
+list	M3ListRows#rowAt(int,int,int,boolean)	location to row (locationToIndex)	direct	107.857	98.982	116.935	1048576	7	4	4	-	28.7/43.6/38.6	-	-	-
+list	ref:BasicListUI#convertLocationToRow	stock location to row loop (JDK reference)	reference	18538.916	17944.824	20439.014	2048	7	-	-	-	28.7/43.6/38.6	M3ListRows#rowAt(int,int,int,boolean)	171.88	-
+list	M3ListRows#indexes(Object,int[])	gate with the same heights array	direct	0.539	0.515	0.954	1048576	7	4	4	-	28.7/43.6/38.6	-	-	-
+list	M3RowPieces#start(int)	piece start	direct	0.345	0.318	0.692	1048576	7	4	4	-	28.7/43.6/38.6	-	-	-
+list	M3RowPieces#length(int)	piece length	direct	0.334	0.321	0.463	1048576	7	4	4	-	28.7/43.6/38.6	-	-	-
+list	M3RowPieces#count()	piece count	direct	0.011	0.010	0.012	1048576	7	1	4	-	28.7/43.6/38.6	-	-	FOLDED
+list	M3RowPieces#size()	row count	direct	0.010	0.010	0.011	1048576	7	1	4	-	28.7/43.6/38.6	-	-	FOLDED
+list	M3RowPieces#reset(int)	forget the edits	direct	0.324	0.309	0.332	1048576	7	4	4	-	28.7/43.6/38.6	-	-	-
+list	M3RowPieces#insert(int,int)	insert one row after reset(n)	after reset(n)	18.639	17.755	23.553	65536	7	4	4	yes	28.7/43.6/38.6	-	-	-
+list	M3RowPieces#remove(int,int)	remove one row after reset(n)	after reset(n)	25.966	24.835	31.580	65536	7	4	4	-	28.7/43.6/38.6	-	-	-
+list	M3RowPieces#change(int,int)	change one row after reset(n)	after reset(n)	45.027	42.363	58.324	65536	7	3	4	-	28.7/43.6/38.6	-	-	-
+list	M3RowPieces#split(int)	split a piece after reset(n)	after reset(n)	2.127	1.973	3.403	65536	7	4	4	yes	28.7/43.6/38.6	-	-	-
+list	M3ListMeasure#measure(Object,JList<Object>,CellRendererPane)	delta layout of 10^4 rows after one change	after DefaultListModel.set	16867.822	13524.219	18637.354	2048	7	4	-	-	28.7/43.6/38.6	-	-	-
+table	M3SorterLanes#modelIndex(int)	view to model (convertRowIndexToModel)	direct	0.483	0.425	0.579	1048576	7	4	4	-	48.6/44.2/36.3	-	-	-
+table	ref:TableRowSorter#convertRowIndexToModel	stock view to model (JDK reference)	reference	1.076	0.865	1.416	1048576	7	-	4	-	48.6/44.2/36.3	M3SorterLanes#modelIndex(int)	2.23	-
+table	M3SorterLanes#viewIndex(int)	model to view (convertRowIndexToView)	direct	0.497	0.432	0.794	1048576	7	3	4	-	48.6/44.2/36.3	-	-	-
+table	ref:TableRowSorter#convertRowIndexToView	stock model to view (JDK reference)	reference	0.484	0.427	0.579	1048576	7	-	4	-	48.6/44.2/36.3	M3SorterLanes#viewIndex(int)	0.97	-
+table	M3SorterLanes#viewRowCount()	view rows	direct	0.011	0.009	0.012	1048576	7	4	4	-	48.6/44.2/36.3	-	-	FOLDED
+table	M3SorterLanes#transformed()	transformed flag	direct	0.010	0.009	0.029	1048576	7	3	4	-	48.6/44.2/36.3	-	-	FOLDED
+table	M3SorterLanes#sortLane(int[],int)	sort a lane of 4096 model indices	direct	393798.438	339662.500	477414.063	64	7	4	-	-	48.6/44.2/36.3	-	-	-
+table	ref:Arrays#sort(Integer[],Comparator)	stock Row sort shape: boxed TimSort (JDK reference)	reference	670679.688	575714.063	825675.000	64	7	-	-	-	48.6/44.2/36.3	M3SorterLanes#sortLane(int[],int)	1.70	-
+table	M3SorterLanes#binarySearch(int[],int)	insertion point in the view lane	direct	148.520	135.782	169.956	1048576	7	4	4	-	48.6/44.2/36.3	-	-	-
+table	M3SparseSizes#getSize(int)	getSize over 10^6 rows, 1024 custom	direct	43.865	39.420	51.081	1048576	7	4	4	-	48.6/44.2/36.3	-	-	-
+table	ref:SizeSequence#getSize	stock SizeSequence.getSize (JDK reference)	reference	184.249	176.082	189.998	1048576	7	-	4	-	48.6/44.2/36.3	M3SparseSizes#getSize(int)	4.20	-
+table	M3SparseSizes#getPosition(int)	getPosition over 10^6 rows, 1024 custom	direct	46.110	41.862	48.892	1048576	7	4	4	-	48.6/44.2/36.3	-	-	-
+table	ref:SizeSequence#getPosition	stock SizeSequence.getPosition (JDK reference)	reference	93.932	91.438	114.383	1048576	7	-	4	-	48.6/44.2/36.3	M3SparseSizes#getPosition(int)	2.04	-
+table	M3SparseSizes#getIndex(int)	getIndex over 10^6 rows, 1024 custom	direct	53.692	49.537	60.333	1048576	7	4	4	-	48.6/44.2/36.3	-	-	-
+table	ref:SizeSequence#getIndex	stock SizeSequence.getIndex (JDK reference)	reference	194.479	185.257	209.098	1048576	7	-	4	-	48.6/44.2/36.3	M3SparseSizes#getIndex(int)	3.62	-
+table	M3SparseSizes#find(int)	find in the sparse index lane	direct	46.211	42.831	51.630	1048576	7	4	4	-	48.6/44.2/36.3	-	-	-
+table	M3SparseSizes#lowerBound(int)	lowerBound in the sparse index lane	direct	41.972	38.641	45.382	1048576	7	3	4	-	48.6/44.2/36.3	-	-	-
+tree	M3FixedHeightLayoutCache#getPathForRow(int)	row to path	direct	574.710	478.864	780.133	65536	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	ref:FIXED_STOCK#getPathForRow	stock row to path (JDK reference)	reference	3967.087	3844.156	4240.172	65536	7	-	4	-	50.6/41.6/39.0	M3FixedHeightLayoutCache#getPathForRow(int)	6.90	-
+tree	M3FixedHeightLayoutCache#getRowForPath(TreePath)	path to row (fresh path instances)	direct	123.488	114.908	194.383	65536	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	ref:FIXED_STOCK#getRowForPath	stock path to row (JDK reference)	reference	178.477	167.606	233.784	65536	7	-	4	-	50.6/41.6/39.0	M3FixedHeightLayoutCache#getRowForPath(TreePath)	1.45	-
+tree	M3FixedHeightLayoutCache#getBounds(TreePath,Rectangle)	bounds of a painted row	direct	163.791	125.864	208.299	65536	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	ref:FIXED_STOCK#getBounds	stock bounds (JDK reference)	reference	207.426	176.872	267.796	65536	7	-	4	-	50.6/41.6/39.0	M3FixedHeightLayoutCache#getBounds(TreePath,Rectangle)	1.27	-
+tree	M3FixedHeightLayoutCache#getPathClosestTo(int,int)	closest path to y (visible window start)	direct	544.724	471.271	661.823	65536	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	ref:FIXED_STOCK#getPathClosestTo	stock closest path (JDK reference)	reference	4316.666	3782.198	4768.890	65536	7	-	4	-	50.6/41.6/39.0	M3FixedHeightLayoutCache#getPathClosestTo(int,int)	7.92	-
+tree	M3FixedHeightLayoutCache#isExpanded(TreePath)	isExpanded of a painted row	direct	19.377	16.208	22.119	65536	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	M3FixedHeightLayoutCache#getExpandedState(TreePath)	getExpandedState of a painted row	direct	17.813	15.195	23.491	65536	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	M3FixedHeightLayoutCache#getRowCount()	row count	direct	0.011	0.010	0.012	1048576	7	4	4	-	50.6/41.6/39.0	-	-	FOLDED
+tree	M3FixedHeightLayoutCache#getVisibleChildCount(TreePath)	visible rows below a row	direct	18.596	15.741	20.613	65536	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	M3FixedHeightLayoutCache#getVisiblePathsFrom(TreePath)	start of the visible-path enumeration	direct	68.469	60.516	91.145	65536	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	M3FixedHeightLayoutCache.Visible#nextElement()	nextElement, 40 rows per operation (one paint)	per 40-row walk	1030.127	912.598	1298.682	2048	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	M3FixedHeightLayoutCache.Visible#hasMoreElements()	hasMoreElements, 40 rows per operation (one paint)	per 40-row walk	998.145	937.158	1075.293	2048	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	composite:paintWalk(M3FixedHeightLayoutCache)	BasicTreeUI.paint row walk: closest path + 40 x (next, bounds, state)	composite	7261.670	6669.824	9423.926	2048	7	-	-	-	50.6/41.6/39.0	-	-	-
+tree	ref:paintWalk(FIXED_STOCK)	stock paint row walk (JDK reference)	reference	29149.316	26711.670	35165.332	2048	7	-	-	-	50.6/41.6/39.0	composite:paintWalk(M3FixedHeightLayoutCache)	4.01	-
+tree	M3FixedHeightLayoutCache#mapGet(TreePath)	path map lookup by an equal path	direct	19.904	18.398	32.542	65536	7	4	4	yes	50.6/41.6/39.0	-	-	-
+tree	M3VariableHeightLayoutCache#getPathForRow(int)	row to path	direct	85.548	80.774	108.527	65536	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	ref:VAR_STOCK#getPathForRow	stock row to path (JDK reference)	reference	17.468	16.519	23.940	65536	7	-	4	-	50.6/41.6/39.0	M3VariableHeightLayoutCache#getPathForRow(int)	0.20	-
+tree	M3VariableHeightLayoutCache#getRowForPath(TreePath)	path to row (fresh path instances)	direct	97.256	79.762	155.481	65536	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	ref:VAR_STOCK#getRowForPath	stock path to row (JDK reference)	reference	1163.672	1049.121	2229.639	2048	7	-	-	-	50.6/41.6/39.0	M3VariableHeightLayoutCache#getRowForPath(TreePath)	11.97	-
+tree	M3VariableHeightLayoutCache#getBounds(TreePath,Rectangle)	bounds of a painted row	direct	89.465	81.850	115.170	65536	7	4	4	yes	50.6/41.6/39.0	-	-	-
+tree	ref:VAR_STOCK#getBounds	stock bounds (JDK reference)	reference	28.622	25.153	78.484	65536	7	-	4	-	50.6/41.6/39.0	M3VariableHeightLayoutCache#getBounds(TreePath,Rectangle)	0.32	-
+tree	M3VariableHeightLayoutCache#getPathClosestTo(int,int)	closest path to y (visible window start)	direct	693.643	631.096	749.728	65536	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	ref:VAR_STOCK#getPathClosestTo	stock closest path (JDK reference)	reference	170.737	136.929	204.305	65536	7	-	4	-	50.6/41.6/39.0	M3VariableHeightLayoutCache#getPathClosestTo(int,int)	0.25	-
+tree	M3VariableHeightLayoutCache#isExpanded(TreePath)	isExpanded of a painted row	direct	73.056	61.089	79.384	65536	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	M3VariableHeightLayoutCache#getExpandedState(TreePath)	getExpandedState of a painted row	direct	74.258	63.899	98.030	65536	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	M3VariableHeightLayoutCache#getRowCount()	row count	direct	0.011	0.010	0.013	1048576	7	4	4	-	50.6/41.6/39.0	-	-	FOLDED
+tree	M3VariableHeightLayoutCache#getVisibleChildCount(TreePath)	visible rows below a row	direct	73.373	69.228	86.206	65536	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	M3VariableHeightLayoutCache#getVisiblePathsFrom(TreePath)	start of the visible-path enumeration	direct	83.862	63.538	113.272	65536	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	M3VariableHeightLayoutCache.Visible#nextElement()	nextElement, 40 rows per operation (one paint)	per 40-row walk	1858.154	1631.396	2857.764	2048	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	M3VariableHeightLayoutCache.Visible#hasMoreElements()	hasMoreElements, 40 rows per operation (one paint)	per 40-row walk	1837.598	1615.332	2161.084	2048	7	4	4	yes	50.6/41.6/39.0	-	-	-
+tree	composite:paintWalk(M3VariableHeightLayoutCache)	BasicTreeUI.paint row walk: closest path + 40 x (next, bounds, state)	composite	5916.016	4311.084	8867.041	2048	7	-	-	-	50.6/41.6/39.0	-	-	-
+tree	ref:paintWalk(VAR_STOCK)	stock paint row walk (JDK reference)	reference	4775.293	3976.660	6988.232	2048	7	-	-	-	50.6/41.6/39.0	composite:paintWalk(M3VariableHeightLayoutCache)	0.81	-
+tree	M3VariableHeightLayoutCache#mapGet(TreePath)	path map lookup by an equal path	direct	19.069	16.777	33.311	65536	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	M3ExpandedState#expandedKeysBelow(TreePath)	expanded keys below a path (1555 keys)	direct	6489.272	6059.605	7242.056	65536	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	ref:JTree#getExpandedDescendants	stock scan of the whole table (JDK reference)	reference	35712.939	30230.225	39614.941	2048	7	-	-	-	50.6/41.6/39.0	M3ExpandedState#expandedKeysBelow(TreePath)	5.50	-
+tree	M3ExpandedState#nextCapacity(int)	Hashtable growth rule	direct	0.971	0.859	1.154	1048576	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	M3ExpandedState#bucketCount()	mirrored bucket count	direct	2.351	1.962	2.604	1048576	7	1	4	-	50.6/41.6/39.0	-	-	-
+tree	M3VariableHeightLayoutCache#mix(int)	hash mixing of the path map and child index	direct	0.504	0.417	0.585	1048576	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	M3VariableHeightLayoutCache#prefix(int[],int)	Fenwick prefix over 1024 children	direct	6.430	5.643	7.858	1048576	7	4	4	-	50.6/41.6/39.0	-	-	-
+tree	M3VariableHeightLayoutCache#scan(Object[],int,Object)	last equal child among 64	direct	38.237	30.205	44.482	65536	7	4	4	yes	50.6/41.6/39.0	-	-	-

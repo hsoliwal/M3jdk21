@@ -1,0 +1,304 @@
+/*
+ * SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+ * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+ */
+// Template of gen_atom_tests.py / gen_atom_perf.py: the generated copy replaces this header.
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.function.Consumer;
+
+import javax.swing.plaf.basic.BasicListUI;
+
+import sun.swing.list.M3ListRows;
+import sun.swing.list.M3PrefixRowOffsets;
+import sun.swing.list.M3RowOffsets;
+
+/**
+ * Pattern INDEX_MAPPING / RANGE_WINDOW over height lanes: the atoms of {@code M3RowOffsets},
+ * {@code M3PrefixRowOffsets} and {@code M3ListRows} against the stock {@code BasicListUI} loops they replace
+ * ({@code getCellBounds} sums the heights before a row in {@code int}; {@code convertLocationToRow} walks the rows
+ * from the top inset) and against the {@code M3RowOffsets} Javadoc contract written as linear code.
+ */
+final class ListLanes {
+
+    static final int LANES_PER_FAMILY = 12;
+    static final int MAX_ROWS = 40;
+    static final int MAX_HEIGHT = 32;
+    static final int ZERO_ONE_IN = 3;
+    static final int NEGATIVE_ONE_IN = 5;
+    /** Three of these overflow an int sum: the wrapped sums the stock loops compute. */
+    static final int OVERFLOW_HEIGHT = Integer.MAX_VALUE / 3;
+    static final int OVERFLOW_ROWS = 8;
+    static final int MAX_TOP = 50;
+    static final int BEYOND = 3;
+    static final int MUTATION = 5;
+
+    enum Family { EMPTY, SINGLE, PLAIN, ZEROS, NEGATIVE, OVERFLOW }
+
+    private ListLanes() {
+    }
+
+    static List<int[]> lanes(String atom) {
+        Random rnd = AtomSupport.random(atom);
+        List<int[]> out = new ArrayList<>();
+        for (Family f : Family.values()) {
+            for (int k = 0; k < LANES_PER_FAMILY; k++) {
+                out.add(lane(rnd, f));
+            }
+        }
+        return out;
+    }
+
+    static int[] lane(Random rnd, Family f) {
+        switch (f) {
+            case EMPTY:
+                return new int[0];
+            case SINGLE:
+                return new int[] {rnd.nextInt(MAX_HEIGHT + 1)};
+            case OVERFLOW: {
+                int[] h = new int[1 + rnd.nextInt(OVERFLOW_ROWS)];
+                for (int i = 0; i < h.length; i++) {
+                    h[i] = OVERFLOW_HEIGHT + rnd.nextInt(MAX_HEIGHT);
+                }
+                return h;
+            }
+            default: {
+                int[] h = new int[1 + rnd.nextInt(MAX_ROWS)];
+                for (int i = 0; i < h.length; i++) {
+                    if (f == Family.ZEROS && rnd.nextInt(ZERO_ONE_IN) == 0) {
+                        h[i] = 0;
+                    } else if (f == Family.NEGATIVE && rnd.nextInt(NEGATIVE_ONE_IN) == 0) {
+                        h[i] = -1 - rnd.nextInt(MAX_HEIGHT);
+                    } else {
+                        h[i] = 1 + rnd.nextInt(MAX_HEIGHT);
+                    }
+                }
+                return h;
+            }
+        }
+    }
+
+    static void forEach(String atom, Consumer<int[]> check) {
+        for (int[] h : lanes(atom)) {
+            check.accept(h);
+        }
+    }
+
+    // ---- oracles ------------------------------------------------------------------------------------
+
+    /** Stock {@code getCellBounds}: the running {@code int} sum of the heights before {@code row}. */
+    static int stockStartOf(int[] h, int row) {
+        int y = 0;
+        for (int i = 0; i < row; i++) {
+            y += h[i];
+        }
+        return y;
+    }
+
+    /** Stock {@code convertLocationToRow} over the first {@code size} heights from {@code top}. */
+    static int stockRowAt(int[] h, int size, int top, int y0, boolean closest) {
+        int y = top;
+        if (closest && y0 < y) {
+            return 0;
+        }
+        int i;
+        for (i = 0; i < size; i++) {
+            if (y0 >= y && y0 < y + h[i]) {
+                return i;
+            }
+            y += h[i];
+        }
+        return i - 1;
+    }
+
+    /** {@code M3RowOffsets.monotone}: every height non-negative and the total fits an int. */
+    static boolean contractMonotone(int[] h) {
+        long sum = 0;
+        for (int x : h) {
+            if (x < 0) {
+                return false;
+            }
+            sum += x;
+        }
+        return sum <= Integer.MAX_VALUE;
+    }
+
+    /** {@code M3RowOffsets.firstEndingAfter}: the first row whose end is greater than {@code offset}. */
+    static int contractFirstEndingAfter(int[] h, long offset) {
+        long end = 0;
+        for (int r = 0; r < h.length; r++) {
+            end += h[r];
+            if (end > offset) {
+                return r;
+            }
+        }
+        return h.length;
+    }
+
+    /** The offsets around every row boundary of a monotone lane, and beyond its total. */
+    static long[] probes(int[] h) {
+        long[] p = new long[3 * h.length + BEYOND + 1];
+        long y = 0;
+        int k = 0;
+        for (int x : h) {
+            p[k++] = y;
+            p[k++] = y + x / 2;
+            p[k++] = y + Math.max(0, x - 1);
+            y += x;
+        }
+        for (int b = 0; b <= BEYOND; b++) {
+            p[k++] = y + b;
+        }
+        return p;
+    }
+
+    /** A UI object of the {@code java.desktop} module, as {@code BasicListUI} passes itself. */
+    static Object desktopUI() {
+        return new BasicListUI();
+    }
+
+    // ---- per-atom checks ----------------------------------------------------------------------------
+
+    static void check(String owner, String atom) {
+        switch (owner + "#" + atom) {
+            case "M3RowOffsets#rowCount" -> forEach(atom, h -> {
+                M3RowOffsets o = new M3PrefixRowOffsets(h);
+                assertEquals(h.length, o.rowCount());
+            });
+            case "M3RowOffsets#startOf" -> forEach(atom, h -> {
+                M3RowOffsets o = new M3PrefixRowOffsets(h);
+                int wrapped = 0;
+                for (int r = 0; r <= o.rowCount(); r++) {
+                    assertEquals(wrapped, o.startOf(r), "startOf " + r);
+                    wrapped = r < h.length ? wrapped + h[r] : wrapped;
+                }
+            });
+            case "M3RowOffsets#monotone" -> forEach(atom, h -> {
+                M3RowOffsets o = new M3PrefixRowOffsets(h);
+                assertEquals(contractMonotone(h), o.monotone());
+                if (o.monotone()) {
+                    for (int r = 0; r < o.rowCount(); r++) {
+                        assertTrue(o.startOf(r) <= o.startOf(r + 1), "startOf never decreases");
+                    }
+                }
+            });
+            case "M3RowOffsets#firstEndingAfter" -> forEach(atom, h -> {
+                M3RowOffsets o = new M3PrefixRowOffsets(h);
+                if (o.monotone()) {
+                    for (long offset : probes(h)) {
+                        assertEquals(contractFirstEndingAfter(h, offset), o.firstEndingAfter(offset), "offset " + offset);
+                    }
+                }
+            });
+            case "M3PrefixRowOffsets#M3PrefixRowOffsets" -> forEach(atom, h -> {
+                int[] copy = h.clone();
+                M3PrefixRowOffsets o = new M3PrefixRowOffsets(h);
+                assertArrayEquals(copy, h, "the constructor does not write the heights");
+                int total = o.startOf(h.length);
+                boolean monotone = o.monotone();
+                if (h.length > 0) {
+                    h[0] += MUTATION;
+                    assertEquals(total, o.startOf(h.length), "the lane is built once, from the heights at construction");
+                    assertEquals(monotone, o.monotone());
+                    h[0] -= MUTATION;
+                }
+                assertEquals(stockStartOf(h, h.length), total);
+            });
+            case "M3PrefixRowOffsets#rowCount" -> forEach(atom, h -> assertEquals(h.length, new M3PrefixRowOffsets(h).rowCount()));
+            case "M3PrefixRowOffsets#startOf" -> forEach(atom, h -> {
+                M3PrefixRowOffsets o = new M3PrefixRowOffsets(h);
+                for (int r = 0; r <= h.length; r++) {
+                    assertEquals(stockStartOf(h, r), o.startOf(r), "stock getCellBounds sum before row " + r);
+                }
+            });
+            case "M3PrefixRowOffsets#monotone" -> forEach(atom, h -> assertEquals(contractMonotone(h), new M3PrefixRowOffsets(h).monotone()));
+            case "M3PrefixRowOffsets#firstEndingAfter" -> forEach(atom, h -> {
+                M3PrefixRowOffsets o = new M3PrefixRowOffsets(h);
+                if (!o.monotone()) {
+                    return;
+                }
+                for (long offset : probes(h)) {
+                    int r = o.firstEndingAfter(offset);
+                    assertEquals(contractFirstEndingAfter(h, offset), r, "offset " + offset);
+                    if (r < h.length) {
+                        assertTrue(o.startOf(r + 1) > offset, "row " + r + " ends after " + offset);
+                    }
+                    if (r > 0) {
+                        assertTrue(o.startOf(r) <= offset, "row " + (r - 1) + " ends at or before " + offset);
+                    }
+                }
+            });
+            case "M3ListRows#M3ListRows" -> {
+                M3ListRows rows = new M3ListRows();
+                assertFalse(rows.indexes(desktopUI(), null), "no heights: the stock loop decides");
+                int[] h = lanes(atom).get(Family.PLAIN.ordinal() * LANES_PER_FAMILY);
+                assertEquals(M3ListRows.ENABLED, rows.indexes(desktopUI(), h));
+                assertEquals(Boolean.getBoolean("m3.swing.viewport"), M3ListRows.ENABLED, "ENABLED reads m3.swing.viewport");
+            }
+            case "M3ListRows#indexes" -> forEach(atom, h -> {
+                M3ListRows rows = new M3ListRows();
+                assertFalse(rows.indexes(new Object(), h), "a UI outside java.desktop keeps the stock loops");
+                assertFalse(rows.indexes(new ListLanes.OutsideUI(), h), "a BasicListUI subclass of another module keeps the stock loops");
+                assertFalse(rows.indexes(desktopUI(), null));
+                assertTrue(rows.indexes(desktopUI(), h), "java.desktop UI with -Dm3.swing.viewport=true");
+                int total = rows.startOf(h.length);
+                if (h.length > 0) {
+                    h[0] += MUTATION;
+                    assertTrue(rows.indexes(desktopUI(), h));
+                    assertEquals(total, rows.startOf(h.length), "the array's identity is its version");
+                    int[] next = h.clone();
+                    assertTrue(rows.indexes(desktopUI(), next));
+                    assertEquals(stockStartOf(next, next.length), rows.startOf(next.length), "a new array gets new offsets");
+                    h[0] -= MUTATION;
+                }
+            });
+            case "M3ListRows#startOf" -> forEach(atom, h -> {
+                M3ListRows rows = new M3ListRows();
+                assertTrue(rows.indexes(desktopUI(), h));
+                for (int r = 0; r <= h.length; r++) {
+                    assertEquals(stockStartOf(h, r), rows.startOf(r), "row " + r);
+                }
+            });
+            case "M3ListRows#rowAt" -> {
+                Random rnd = AtomSupport.random(atom);
+                forEach(atom, h -> {
+                    M3ListRows rows = new M3ListRows();
+                    assertTrue(rows.indexes(desktopUI(), h));
+                    int top = rnd.nextInt(MAX_TOP);
+                    for (int size = 1; size <= h.length; size++) {
+                        boolean exact = contractMonotone(h) && (long) top + stockStartOf(h, size) <= Integer.MAX_VALUE;
+                        for (long q : probes(h)) {
+                            for (int d = -1; d <= 0; d++) {
+                                int y0 = (int) Math.max(Integer.MIN_VALUE, Math.min(Integer.MAX_VALUE, top + q + d));
+                                for (boolean closest : new boolean[] {false, true}) {
+                                    int m3 = rows.rowAt(size, top, y0, closest);
+                                    String what = "size " + size + " top " + top + " y0 " + y0 + " closest " + closest;
+                                    if (closest && y0 < top) {
+                                        assertEquals(0, m3, "closest above the top: " + what);
+                                    } else if (exact) {
+                                        assertEquals(stockRowAt(h, size, top, y0, closest), m3, what);
+                                    } else {
+                                        assertEquals(M3ListRows.STOCK, m3, "negative height or int overflow: " + what);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            default -> fail("no check for " + owner + "#" + atom);
+        }
+    }
+
+    /** A list UI of the unnamed module: may write {@code cellHeights} in place, so it keeps the stock loops. */
+    static final class OutsideUI extends BasicListUI {
+    }
+}

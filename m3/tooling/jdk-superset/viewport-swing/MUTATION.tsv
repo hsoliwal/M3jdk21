@@ -1,0 +1,19 @@
+id	file	bug	test	tests_failed	tests_run	verdict	failing_dynamic_tests
+M01	list/M3PrefixRowOffsets.java	binary search boundary of firstEndingAfter	M3PrefixRowOffsetsAtomsTest	1	6	KILLED	firstEndingAfter
+M02	list/M3PrefixRowOffsets.java	overflowing lanes reported monotone	M3RowOffsetsAtomsTest	2	5	KILLED	monotone,firstEndingAfter
+M03	list/M3ListRows.java	location below the last row not clamped	M3ListRowsAtomsTest	1	5	KILLED	rowAt
+M04	list/M3RowPieces.java	piece split offset	M3RowPiecesAtomsTest	11	12	KILLED	M3RowPieces,reset,size,count,start,length
+M05	list/M3RowPieces.java	insert merges with an old piece	M3RowPiecesAtomsTest	11	12	KILLED	M3RowPieces,reset,size,count,start,length
+M06	list/M3ListMeasure.java	contentsChanged not recorded	M3ListMeasureAtomsTest	7	19	KILLED	fullMeasuresOnDeltas,changed,cellWidth,remeasured,measureAll,remeasure
+M07	list/M3ListMeasure.java	Integer values treated as unstable	M3ListMeasureAtomsTest	12	19	KILLED	added,removed,changed,cellWidth,cellHeights,remeasured
+M08	table/M3SorterLanes.java	model indices after a deletion shifted by one less	M3SorterLanesAtomsTest	20	42	KILLED	changed,M3SorterLanes,fullSortsOnDeltas,bind,transformed,viewRowCount
+M09	table/M3SorterLanes.java	merge takes the wrong half first	M3SorterLanesAtomsTest	19	42	KILLED	compare,include,fullSortsOnDeltas,transformed,viewRowCount,modelIndex
+M10	table/M3SparseSizes.java	getIndex at the end of a custom row	M3SparseSizesAtomsTest	20	22	KILLED	getSizes,length,defaultSize,count,getSize,getPosition
+M11	table/M3SparseSizes.java	removeEntries keeps the last custom entry of the range	M3SparseSizesAtomsTest	17	22	KILLED	getSizes,length,defaultSize,count,getSize,getPosition
+M12	tree/M3ExpandedState.java	chain order within a bucket reversed	M3ExpandedStateAtomsTest	12	18	KILLED	Node,M3ExpandedState,put,nextCapacity,remove,clear
+M13	tree/M3ExpandedState.java	stale child slot after a swap-remove	M3ExpandedStateAtomsTest	8	18	KILLED	M3ExpandedState,put,remove,clear,removeDescendants,link
+M14	tree/M3FixedHeightLayoutCache.java	row of a child off by one	M3FixedHeightLayoutCacheAtomsTest	66	67	KILLED	M3FixedHeightLayoutCache,expanded,setModel,setRootVisible,setRowHeight,getRowCount
+M15	tree/M3FixedHeightLayoutCache.java	collapsed subtrees still add rows to their ancestors	M3FixedHeightLayoutCacheAtomsTest	2	67	KILLED	setExpandedState,treeNodesRemoved
+M16	tree/M3VariableHeightLayoutCache.java	Fenwick descent boundary	M3VariableHeightLayoutCacheAtomsTest	93	95	KILLED	M3VariableHeightLayoutCache,is,set,expanded,stateAt,setModel
+M17	tree/M3VariableHeightLayoutCache.java	y origin ignores a visible root's height	M3VariableHeightLayoutCacheAtomsTest	55	95	KILLED	M3VariableHeightLayoutCache,set,setRootVisible,setRowHeight,setExpandedState,getBounds
+M18	tree/M3VariableHeightLayoutCache.java	scan finds the first equal child, not the last	M3VariableHeightLayoutCacheAtomsTest	3	95	KILLED	scan,buildLookup,mix
