@@ -1,0 +1,14 @@
+class	tests	failures	errors	skipped	seconds
+M3AutomatonAtomTest	41	0	0	0	0.204
+M3AutomatonOpsAtomTest	55	0	0	0	0.197
+M3BitsAtomTest	5	0	0	0	0.026
+M3BoundaryAtomTest	11	0	0	0	0.280
+M3ClassFlagsAtomTest	2	0	0	0	0.012
+M3MemberFlagsAtomTest	5	0	0	0	0.003
+M3NotYetReceivedAtomTest	1	0	0	0	0.003
+M3RX7TransitionsAtomTest	14	0	0	0	0.105
+M3RegexDpPlanAtomTest	37	0	0	0	2.241
+M3RelationImageAtomTest	8	0	0	0	0.050
+M3StateRelationAtomTest	7	0	0	0	0.120
+M3TokenEngineAtomTest	29	0	0	0	0.335
+TOTAL	215	0	0	0	3.576

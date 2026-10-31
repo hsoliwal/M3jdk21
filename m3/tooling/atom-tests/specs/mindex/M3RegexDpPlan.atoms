@@ -423,7 +423,7 @@ for (String pattern : corpus()) {
 
 @atom M3RegexDpPlan.Effect.Effect 1 SCENARIO private-constructor(rows,length)
 setup <<<
-MethodHandle ctor = M3AtomKit.findConstructor(EFFECT, MethodType.methodType(void.class, PLAN, long[].class, long.class));
+MethodHandle ctor = M3AtomKit.findConstructor(EFFECT, "Effect", MethodType.methodType(void.class, PLAN, long[].class, long.class));
 M3RegexDpPlan plan = plan("a*B");
 >>>
 check <<<
@@ -435,7 +435,7 @@ assertSameEffect(plan, plan.summarize("aaB", null), effect, "constructed from ob
 
 @atom M3RegexDpPlan.Effect.Effect 2 SCENARIO private-constructor(rows,length,withoutLeadingLow,trailingHigh)
 setup <<<
-MethodHandle ctor = M3AtomKit.findConstructor(EFFECT, MethodType.methodType(void.class, PLAN, long[].class,
+MethodHandle ctor = M3AtomKit.findConstructor(EFFECT, "Effect", MethodType.methodType(void.class, PLAN, long[].class,
         long.class, long[].class, boolean.class));
 M3RegexDpPlan plan = plan("a.*");
 >>>

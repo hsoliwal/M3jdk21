@@ -1,0 +1,13 @@
+atom	method	max_tier	compiler	osr	made_not_entrant	ns_per_op_median	ns_per_op_min	ns_per_op_p90	ops_per_batch	rounds	warmup_batches	system_cpu_pct	process_cpu_pct	cpus	checksum	host_cpu_pct_before	host_cpu_pct_after
+M3Bits.wordIndex#1 PERF	jdk.internal.mindex.M3Bits::wordIndex	3	C1	no	no	1.001	0.854	1.123	4096	25	400	20.0	3.2	32	67885665271	62	85
+M3Bits.bitMask#1 PERF	jdk.internal.mindex.M3Bits::bitMask	3	C1	no	no	0.513	0.439	0.610	4096	25	400	20.0	3.2	32	6418407151342586488	62	85
+M3Bits.wordsForBits#1 PERF	jdk.internal.mindex.M3Bits::wordsForBits	4	C2	no	yes	0.488	0.439	0.562	4096	25	400	20.0	3.2	32	69904585491	62	85
+M3Automaton.step#1 PERF	jdk.internal.mindex.M3Automaton::step	4	C2	no	yes	12.354	10.889	13.354	4096	25	400	20.0	3.2	32	3465	62	85
+M3AutomatonOps.mix#1 PERF	jdk.internal.mindex.M3AutomatonOps::mix	4	C2	no	yes	1.123	1.025	1.245	4096	25	400	20.0	3.2	32	24939517798	62	85
+M3RegexDpPlan.advance#1 PERF	jdk.internal.mindex.M3RegexDpPlan::advance	4	C2	no	yes	11.670	10.229	12.256	4096	25	400	20.0	3.2	32	1704945254	62	85
+M3RegexDpPlan.Effect.apply#1 PERF	jdk.internal.mindex.M3RegexDpPlan$Effect::apply	4	C2	no	yes	12.256	10.962	13.379	4096	25	400	20.0	3.2	32	2144711208	62	85
+M3StateRelation.compose#1 PERF	jdk.internal.mindex.M3StateRelation::compose	3	C1	no	no	792.969	736.328	852.734	256	25	400	20.0	3.2	32	1706243603435122744	62	85
+M3StateRelation.applyRows#1 PERF	jdk.internal.mindex.M3StateRelation::applyRows	4	C2	no	yes	21.631	19.995	23.340	4096	25	400	20.0	3.2	32	4651260015053306684	62	85
+M3RX7Transitions.compose#1 PERF	jdk.internal.mindex.M3RX7Transitions::compose	4	C2	no	yes	248.438	228.125	300.391	256	25	400	20.0	3.2	32	26018	62	85
+M3RX7Transitions.tokens#1 PERF	jdk.internal.mindex.M3RX7Transitions::tokens	4	C2	no	yes	10566.406	9462.109	11271.875	256	25	400	20.0	3.2	32	2407	62	85
+M3TokenEngine.find#1 PERF	jdk.internal.mindex.M3TokenEngine::find	3	C1	no	no	12228.125	10908.203	14526.953	256	25	400	20.0	3.2	32	5546752	62	85

@@ -95,7 +95,7 @@
     }
 
     private static Object stateSet(int endpoints, int stride) throws Throwable {
-        return M3AtomKit.findConstructor(STATES, MethodType.methodType(void.class, int.class, int.class)).invoke(endpoints, stride);
+        return M3AtomKit.findConstructor(STATES, "StateSet", MethodType.methodType(void.class, int.class, int.class)).invoke(endpoints, stride);
     }
 
     private static MethodHandle sv(String name, MethodType type) {

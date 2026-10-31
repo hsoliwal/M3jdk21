@@ -1,0 +1,6 @@
+stage	status	command	evidence
+ATOMIZE	PASS	atom_census_join.py (spec rows per census atom)	spec_atom_rows=215 perf_rows=12 (generated_atoms=227)
+JUNIT	PASS	run_atom_tests.sh (stock JDK 21.0.9 + --patch-module java.base)	junit_classes=12 tests=215 failures=0 errors=0 skipped=0
+JIT_PERF	PASS	M3MindexAtomPerf -XX:+PrintCompilation (warm-up then interleaved rounds)	perf_rows=12 c2=8 host_cpu_pct_before=62 after=85
+PATTERNIZE	PASS	per_atom_test_census.py + atom_census_join.py	atoms=1150 spec_covered=215 pending=935 before={'CLASS_ONLY': 484, 'TESTED': 464, 'UNTESTED': 202} after={'CLASS_ONLY': 469, 'TESTED': 681}
+MUTATION	PASS	mutate_once.py + run_atom_tests.sh per mutant, restored with git checkout	mutants=7 killed=7

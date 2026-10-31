@@ -397,11 +397,11 @@ public class M3AutomatonOpsAtomTest {
         Object frozen = freeze.invoke(counting, 7);
         Object other = counting(SET_STATES);
         incr.invoke(other, 2);
-        assertEquals(frozen, counting, "frozen copy equals the live set");
-        assertEquals(counting, frozen);
-        assertEquals(counting, counting);
-        assertNotEquals(frozen, other);
-        assertNotEquals(frozen, "not a key");
+        assertTrue(frozen.equals(counting), "frozen copy equals the live set");
+        assertTrue(counting.equals(frozen), "symmetric");
+        assertTrue(counting.equals(counting), "reflexive");
+        assertFalse(frozen.equals(other), "different members");
+        assertFalse(frozen.equals("not a key"), "foreign type");
         Map<Object, Integer> index = new HashMap<>();
         index.put(frozen, 7);
         assertEquals(7, index.get(counting), "a live set finds its frozen DFA state");
@@ -409,7 +409,7 @@ public class M3AutomatonOpsAtomTest {
 
     /** M3AutomatonOps.FrozenSet.FrozenSet#1 SCENARIO; oracle: field-capture. */
     static void FrozenSet_FrozenSet() throws Throwable {
-        MethodHandle ctor = M3AtomKit.findConstructor(FROZEN, MethodType.methodType(void.class, int[].class, long.class, int.class));
+        MethodHandle ctor = M3AtomKit.findConstructor(FROZEN, "FrozenSet", MethodType.methodType(void.class, int[].class, long.class, int.class));
         MethodHandle state = M3AtomKit.findGetter(FROZEN, "state", int.class);
         int[] values = {1, 2};
         Object frozen = ctor.invoke(values, 42L, 9);
@@ -604,10 +604,10 @@ public class M3AutomatonOpsAtomTest {
         Object a = ctor.invoke(), b = ctor.invoke();
         reset.invoke(a, 5);
         reset.invoke(b, 5);
-        assertEquals(a, b);
+        assertTrue(a.equals(b), "same point");
         reset.invoke(b, 6);
-        assertNotEquals(a, b);
-        assertNotEquals(a, Integer.valueOf(5));
+        assertFalse(a.equals(b), "different point");
+        assertFalse(a.equals(Integer.valueOf(5)), "foreign type");
     }
 
     /** M3AutomatonOps.PointTransitions.hashCode#1 SCENARIO; oracle: point-hash. */
@@ -742,7 +742,7 @@ public class M3AutomatonOpsAtomTest {
     /** M3AutomatonOps.StateListNode.StateListNode#1 SCENARIO; oracle: links-into-list. */
     static void StateListNode_StateListNode() throws Throwable {
         Object list = M3AtomKit.findConstructor(SLIST, MethodType.methodType(void.class)).invoke();
-        MethodHandle ctor = M3AtomKit.findConstructor(SNODE, MethodType.methodType(void.class, int.class, SLIST));
+        MethodHandle ctor = M3AtomKit.findConstructor(SNODE, "StateListNode", MethodType.methodType(void.class, int.class, SLIST));
         Object a = ctor.invoke(1, list);
         Object b = ctor.invoke(2, list);
         assertSame(a, M3AtomKit.findGetter(SLIST, "first", SNODE).invoke(list));
@@ -883,7 +883,7 @@ public class M3AutomatonOpsAtomTest {
     }
 
     private static Object counting(int states) throws Throwable {
-        return M3AtomKit.findConstructor(COUNTING, MethodType.methodType(void.class, int.class)).invoke(states);
+        return M3AtomKit.findConstructor(COUNTING, "CountingSet", MethodType.methodType(void.class, int.class)).invoke(states);
     }
 
     private static MethodHandle v(Class<?> owner, String name, MethodType type) {

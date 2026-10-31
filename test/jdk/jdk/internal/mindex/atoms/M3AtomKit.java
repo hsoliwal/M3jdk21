@@ -87,6 +87,12 @@ final class M3AtomKit {
         }
     }
 
+    /** Constructor atom of the named class: the simple name must match, so the handle is the intended atom. */
+    static MethodHandle findConstructor(Class<?> owner, String simpleName, MethodType type) {
+        assertEquals(simpleName, owner.getSimpleName(), "constructor atom owner");
+        return findConstructor(owner, type);
+    }
+
     static MethodHandle findGetter(Class<?> owner, String name, Class<?> type) {
         try {
             return lookup(owner).findGetter(owner, name, type);

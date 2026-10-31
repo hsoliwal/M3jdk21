@@ -1,0 +1,8 @@
+mutant	owner	mutation	test_class	tests_failed	tests_total	verdict
+M1	M3RegexDpPlan	lineTerminator drops U+2029	M3RegexDpPlanAtomTest	3	37	KILLED
+M2	M3RX7Transitions	composeJava treats state 0 as dead (< -> <=)	M3RX7TransitionsAtomTest	3	14	KILLED
+M3	M3Automaton	getStartPoints adds max+1 at maxLabel (< -> <=)	M3AutomatonAtomTest	1	41	KILLED
+M4	M3StateRelation	applyRowsUntil stop condition inverted	M3StateRelationAtomTest	3	7	KILLED
+M5	M3TokenEngine	alternative second branch reuses shared registers (pre-fix code)	M3TokenEngineAtomTest	3	29	KILLED
+M6	M3AutomatonOps	mix second shift 13 -> 12	M3AutomatonOpsAtomTest	4	55	KILLED
+M7	M3Boundary	liveLoaderCount omits bootstrap	M3BoundaryAtomTest	1	11	KILLED

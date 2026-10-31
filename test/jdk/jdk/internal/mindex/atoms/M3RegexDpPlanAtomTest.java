@@ -379,7 +379,7 @@ public class M3RegexDpPlanAtomTest {
 
     /** M3RegexDpPlan.Effect.Effect#1 SCENARIO; oracle: private-constructor(rows,length). */
     static void Effect_Effect() throws Throwable {
-        MethodHandle ctor = M3AtomKit.findConstructor(EFFECT, MethodType.methodType(void.class, PLAN, long[].class, long.class));
+        MethodHandle ctor = M3AtomKit.findConstructor(EFFECT, "Effect", MethodType.methodType(void.class, PLAN, long[].class, long.class));
         M3RegexDpPlan plan = plan("a*B");
         long[] rows = rows(plan, plan.summarize("aaB", null));
         M3RegexDpPlan.Effect effect = (M3RegexDpPlan.Effect) ctor.invoke(plan, rows, 3L);
@@ -389,7 +389,7 @@ public class M3RegexDpPlanAtomTest {
 
     /** M3RegexDpPlan.Effect.Effect#2 SCENARIO; oracle: private-constructor(rows,length,withoutLeadingLow,trailingHigh). */
     static void Effect_Effect_2() throws Throwable {
-        MethodHandle ctor = M3AtomKit.findConstructor(EFFECT, MethodType.methodType(void.class, PLAN, long[].class,
+        MethodHandle ctor = M3AtomKit.findConstructor(EFFECT, "Effect", MethodType.methodType(void.class, PLAN, long[].class,
                 long.class, long[].class, boolean.class));
         M3RegexDpPlan plan = plan("a.*");
         long[] identity = RelationOracle.identity(plan.stateCount());

@@ -11,6 +11,8 @@ never a generated file.
 spec_dir      one <Owner>.atoms per owner source file:
                 #class <Owner>AtomTest     #summary <text>     #build <Helper ...>     #import <type>
                 #runopts </othervm ...>   #helper <<< java >>>  (class-level helper members)
+                #template <CLASS_TEMPLATE> #entry <factory> #returns <type>  (default CLASS, dynamicTest, void;
+                the perf harness uses PERF_CLASS, M3AtomPerf.named, M3AtomPerf.Batch)
                 @atom <Owner[.Nested]>.<atom> <n> <PATTERN> <oracle words...>
                 <arg> = <one-line java>   or   <arg> <<<  multi-line java  >>>
 template_dir  <PATTERN>.tmpl bodies with ${arg} placeholders, plus CLASS.tmpl.
@@ -95,13 +97,25 @@ def parse_spec(path):
 
 
 def method_name(row):
+    if "method" in row:
+        return row["method"]
     owner = row["owner"].split(".")
     nested = "_".join(owner[1:])
     base = row["atom"] if not nested else nested + "_" + row["atom"]
     return base if row.get("n", 1) == 1 else "%s_%d" % (base, row["n"])
 
 
-def render_row(row, templates, spec):
+def assign_method_names(rows):
+    """Names stay the atom name; only names shared by atoms of different owners get the top owner prefix."""
+    counts = {}
+    for row in rows:
+        counts[method_name(row)] = counts.get(method_name(row), 0) + 1
+    for row in rows:
+        name = method_name(row)
+        row["method"] = name if counts[name] == 1 else row["owner"].split(".")[0] + "_" + name
+
+
+def render_row(row, templates, spec, returns="void"):
     pattern = row["pattern"]
     if pattern not in templates:
         raise SystemExit("unknown pattern %s in %s" % (pattern, spec))
@@ -119,29 +133,30 @@ def render_row(row, templates, spec):
     lines = [INDENT + line if line.strip() else "" for line in body.strip("\n").split("\n")]
     name = method_name(row)
     label = "%s.%s#%d %s" % (row["owner"], row["atom"], row.get("n", 1), pattern)
-    method = "    /** %s; oracle: %s. */\n    static void %s() throws Throwable {\n%s\n    }\n" % (
-        label, row.get("oracle", "contract"), name, "\n".join(lines))
+    method = "    /** %s; oracle: %s. */\n    static %s %s() throws Throwable {\n%s\n    }\n" % (
+        label, row.get("oracle", "contract"), returns, name, "\n".join(lines))
     return name, label, method
 
 
 def render_class(header, rows, templates, spec):
     methods, entries = [], []
     seen = set()
+    assign_method_names(rows)
     for row in rows:
         key = (row["owner"], row["atom"], row.get("n", 1))
         if key in seen:
             raise SystemExit("duplicate atom row %s in %s" % (key, spec))
         seen.add(key)
-        name, label, method = render_row(row, templates, spec)
+        name, label, method = render_row(row, templates, spec, header.get("returns", "void"))
         methods.append(method)
-        entries.append('                dynamicTest("%s", %s::%s)' % (label, header["class"], name))
+        entries.append('                %s("%s", %s::%s)' % (header.get("entry", "dynamicTest"), label, header["class"], name))
     imports = "".join("import %s;\n" % i for i in header.get("imports", []))
     helpers = "\n".join(header.get("helpers", []))
     for row in rows:
         declaration = r"(?m)^\s{4}(?:(?:private|static|public|final)\s+)+[\w<>\[\]?, ]+\s%s\s*\(" % method_name(row)
         if re.search(declaration, helpers):
             raise SystemExit("helper method clashes with generated atom method %s in %s" % (method_name(row), spec))
-    return string.Template(templates["CLASS"]).substitute(
+    return string.Template(templates[header.get("template", "CLASS")]).substitute(
         generated=GENERATED.format(spec=spec), summary=header["summary"], cls=header["class"],
         build=" ".join(header.get("build", [])), imports=imports, entries=",\n".join(entries),
         methods="\n".join(methods), helpers=helpers, runopts=header.get("runopts", ""))
