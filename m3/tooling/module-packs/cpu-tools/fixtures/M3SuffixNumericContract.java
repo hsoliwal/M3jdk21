@@ -132,6 +132,10 @@ public final class M3SuffixNumericContract {
                 "long repeated suffix order");
         ok(Arrays.equals(large.positions("xxxxx", 65_537),
                 java.util.stream.IntStream.range(0, 65_533).toArray()), "large matches");
+        M3FenwickLong outside = new M3FenwickLong(
+                new long[]{Long.MAX_VALUE, 0, Long.MAX_VALUE});
+        ok(outside.range(3,3) == 0, "empty range independent of overflowing prefix");
+        refuses(() -> outside.prefix(3));
         M3FenwickLong edge = new M3FenwickLong(new long[]{Long.MAX_VALUE, -1});
         ok(edge.range(0,1) == Long.MAX_VALUE, "max prefix");
         long[] prior = edge.values();

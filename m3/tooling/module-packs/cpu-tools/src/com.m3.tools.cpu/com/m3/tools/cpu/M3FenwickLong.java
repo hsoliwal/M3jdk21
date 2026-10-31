@@ -36,6 +36,9 @@ public final class M3FenwickLong {
     /** Sum of half-open [start,end), empty range is zero. */
     public long range(int start, int end) {
         if (start < 0 || end < start || end > size()) throw new IndexOutOfBoundsException();
+        // Empty intervals are identically zero even when the prefix before
+        // the interval is too large to represent in one signed long.
+        if (start == end) return 0L;
         return Math.subtractExact(prefix(end), prefix(start));
     }
 

@@ -13,7 +13,7 @@ coverage and passive handoff metadata. It does not contain OpenRewrite recipes.
 - M3FenwickLong: checked prefix/range sums and failure-atomic point changes.
 
 Both fixtures pass strict stock Java 21 compilation (`-Xlint:all -Werror`),
-normal JVM and `-Xint`: 326,118 + 1,051,384 = **1,377,502** checks
+normal JVM and `-Xint`: 326,118 + 1,051,386 = **1,377,504** checks
 per mode. These are bounded operations, not full graph/search/math families.
 
 Canonical source custody is in hsoliwal/com.synexia under

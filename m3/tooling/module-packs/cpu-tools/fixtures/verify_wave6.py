@@ -9,7 +9,7 @@ from pathlib import Path
 
 EXPECTED = {
     "M3WeightedGraphContract": 326_118,
-    "M3SuffixNumericContract": 1_051_384,
+    "M3SuffixNumericContract": 1_051_386,
 }
 CLASSES = ["M3ShortestPaths", "M3RollbackUnionFind", "M3SuffixArray", "M3FenwickLong"]
 
