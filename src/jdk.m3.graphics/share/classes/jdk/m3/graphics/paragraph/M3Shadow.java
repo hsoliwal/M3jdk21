@@ -1,0 +1,117 @@
+package jdk.m3.graphics.paragraph;
+
+import jdk.m3.graphics.*;
+import jdk.m3.graphics.*;
+
+public class M3Shadow {
+    public final int _color;
+    public final float _offsetX;
+    public final float _offsetY;
+    public final double _blurSigma;
+
+    public M3Shadow(int color, M3Point offset, double blurSigma) {
+        this(color, offset.getX(), offset.getY(), blurSigma);
+    }
+
+    public M3Point getOffset() {
+        return new M3Point(_offsetX, _offsetY);
+    }
+
+    @java.lang.SuppressWarnings("all")
+    public M3Shadow(final int color, final float offsetX, final float offsetY, final double blurSigma) {
+        this._color = color;
+        this._offsetX = offsetX;
+        this._offsetY = offsetY;
+        this._blurSigma = blurSigma;
+    }
+
+    @java.lang.SuppressWarnings("all")
+    public int getColor() {
+        return this._color;
+    }
+
+    @java.lang.SuppressWarnings("all")
+    public float getOffsetX() {
+        return this._offsetX;
+    }
+
+    @java.lang.SuppressWarnings("all")
+    public float getOffsetY() {
+        return this._offsetY;
+    }
+
+    @java.lang.SuppressWarnings("all")
+    public double getBlurSigma() {
+        return this._blurSigma;
+    }
+
+    @java.lang.Override
+    @java.lang.SuppressWarnings("all")
+    public boolean equals(final java.lang.Object o) {
+        if (o == this) return true;
+        if (!(o instanceof M3Shadow)) return false;
+        final M3Shadow other = (M3Shadow) o;
+        if (!other.canEqual((java.lang.Object) this)) return false;
+        if (this.getColor() != other.getColor()) return false;
+        if (java.lang.Float.compare(this.getOffsetX(), other.getOffsetX()) != 0) return false;
+        if (java.lang.Float.compare(this.getOffsetY(), other.getOffsetY()) != 0) return false;
+        if (java.lang.Double.compare(this.getBlurSigma(), other.getBlurSigma()) != 0) return false;
+        return true;
+    }
+
+    @java.lang.SuppressWarnings("all")
+    protected boolean canEqual(final java.lang.Object other) {
+        return other instanceof M3Shadow;
+    }
+
+    @java.lang.Override
+    @java.lang.SuppressWarnings("all")
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        result = result * PRIME + this.getColor();
+        result = result * PRIME + java.lang.Float.floatToIntBits(this.getOffsetX());
+        result = result * PRIME + java.lang.Float.floatToIntBits(this.getOffsetY());
+        final long $_blurSigma = java.lang.Double.doubleToLongBits(this.getBlurSigma());
+        result = result * PRIME + (int) ($_blurSigma >>> 32 ^ $_blurSigma);
+        return result;
+    }
+
+    @java.lang.Override
+    @java.lang.SuppressWarnings("all")
+    public java.lang.String toString() {
+        return "Shadow(_color=" + this.getColor() + ", _offsetX=" + this.getOffsetX() + ", _offsetY=" + this.getOffsetY() + ", _blurSigma=" + this.getBlurSigma() + ")";
+    }
+
+    /**
+     * @return {@code this}.
+     */
+    @java.lang.SuppressWarnings("all")
+    public M3Shadow withColor(final int _color) {
+        return this._color == _color ? this : new M3Shadow(_color, this._offsetX, this._offsetY, this._blurSigma);
+    }
+
+    /**
+     * @return {@code this}.
+     */
+    @java.lang.SuppressWarnings("all")
+    public M3Shadow withOffsetX(final float _offsetX) {
+        return this._offsetX == _offsetX ? this : new M3Shadow(this._color, _offsetX, this._offsetY, this._blurSigma);
+    }
+
+    /**
+     * @return {@code this}.
+     */
+    @java.lang.SuppressWarnings("all")
+    public M3Shadow withOffsetY(final float _offsetY) {
+        return this._offsetY == _offsetY ? this : new M3Shadow(this._color, this._offsetX, _offsetY, this._blurSigma);
+    }
+
+    /**
+     * @return {@code this}.
+     */
+    @java.lang.SuppressWarnings("all")
+    public M3Shadow withBlurSigma(final double _blurSigma) {
+        return this._blurSigma == _blurSigma ? this : new M3Shadow(this._color, this._offsetX, this._offsetY, _blurSigma);
+    }
+}
