@@ -10847,6 +10847,139 @@
         },
         "source_state": "implemented",
         "observation": "Additive stable capability identity. Existing mappings, queue operations and all global receiving authority remain unchanged; implemented-unverified is not acceptance or phase promotion."
+      },
+      {
+        "id": "synexia.lexicons.related-source-range",
+        "kind": "direct-port",
+        "status": "implemented-unverified",
+        "reason": "Receive the existing Synexia source-sealed bounds recipe in the existing related-lexeme catalog. This is a bounded Java candidate; installed-runtime and performance qualification remain pending.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "6e9b55d50693a64ef16ca29f7ad7d9953931b182",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/recipe-crates/m3-lexicon-selection-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-related-source-range-20261018/SharedRelatedLexemeCatalog.java.txt",
+            "symbol": "com.m3.text.SharedRelatedLexemeCatalog.findBySource",
+            "signatures": [
+              "java.util.List<Relation> findBySource(java.lang.String)"
+            ],
+            "sha256": "38102366fa86ca63f3d00c78cd34effae7bc34ce0071544164ca74df97025b9e",
+            "git_blob_sha1": "8ca7c18c9ce8bf43a1e72e04b67204d29b1114e9",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3JDK21",
+            "commit": null,
+            "module": "m3/core",
+            "path": "m3/core/src/com/m3/text/SharedRelatedLexemeCatalog.java",
+            "symbol": "com.m3.text.SharedRelatedLexemeCatalog.findBySource",
+            "signatures": [
+              "java.util.List<Relation> findBySource(java.lang.String)"
+            ],
+            "sha256": "38102366fa86ca63f3d00c78cd34effae7bc34ce0071544164ca74df97025b9e",
+            "git_blob_sha1": "8ca7c18c9ce8bf43a1e72e04b67204d29b1114e9",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "Existing com.m3.text.SharedRelatedLexemeCatalog; existing SharedLexiconCatalog identity and coordinate owners",
+        "identity": {
+          "namespace": "Exact source_id String content and existing source/record identity; no spelling, lexeme, concept or storage ID translation.",
+          "generation": "Immutable admitted relation rows retain the current catalog lifetime. Returned immutable snapshots survive close."
+        },
+        "contract": {
+          "differences": [
+            "Replace the full scan of admitted source-sorted relation rows with lower/upper binary bounds and a detached immutable result list."
+          ],
+          "compatibility_obligations": [
+            "Preserve UTF-16 String.compareTo ordering, relation direction, all original row objects and encounter order.",
+            "Check closed state before null; retain existing null, missing-source and malformed-sidecar refusals.",
+            "Keep find/findAll, parsing, source identity, coordinates, public/protected descriptors and repeated close behavior unchanged."
+          ],
+          "public_surface": [
+            "Existing public List<Relation> findBySource(String); no new Java SE API, class, module export or native symbol."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Existing Java class and sidecar formats unchanged; no JNI or native ABI change.",
+          "bootstrap": "Existing classpath m3/core owner. No java.base dependency on a companion and no installed module admission is claimed."
+        },
+        "dependencies": [
+          {
+            "id": "com.m3.text.SharedLexiconCatalog",
+            "resolution": "resolved",
+            "reason": "Existing identity/coordinate owner compiled in the exact current 26-source m3/core closure."
+          }
+        ],
+        "materialization": {
+          "admission": "Reuse existing immutable source-sorted relation admission and sidecar validation.",
+          "joins": "No joined storage or interner change.",
+          "outputs": "Copy only the selected relation range into an unmodifiable list; no shared subList retention.",
+          "cached_facts": "Reuse existing admission-time source ordering. No new retained cache, table, pointer or per-record structural node."
+        },
+        "recipe": {
+          "id": "com.synexia.m3jdk.RelatedSourceRange20261018",
+          "version": "m3-related-source-range-20261018",
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-lexicon-selection-20261018/src/main/resources/META-INF/rewrite/m3-lexicon-selection-20261018.yml",
+          "sha256": "3d40d11c21eb3ee6c8be9839a4bc051ef66765e51ab1b6ccbb49392b0c99304c",
+          "preconditions": [
+            "Exact target preimage 76fbadbc182633ac22c449924335b7636c530cd2a8dc13fb0dc2d56a29afb42c; actual SDK Results only.",
+            "Use additive 2026-10-31 current-input qualification seals. Retain original historical seals and their strict refusal; do not roll current source back.",
+            "Review this additive mapping and naming preflight before runtime promotion. All receiving phases retain their current states."
+          ],
+          "rollback": "Review an exact-postimage restoration of this single existing method. Preserve unrelated files and all source/proof history."
+        },
+        "tests": [
+          {
+            "id": "related-source-bounds-current",
+            "receipt": "m3/compatibility/lexicon-related-source-range-20261031/receipt.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0. Existing Copyright 2026 Hitesh Soliwal header retained without alteration.",
+          "publication": "Existing first-party reviewed recipe and common binary-search bounds algorithm. No private lexicon data or third-party challenge solution copied.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "6e9b55d50693a64ef16ca29f7ad7d9953931b182",
+          "target_revision": "52fb81c483c74448a12eecb63aa9465e42cdb82c",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "None: receive the exact SDK Java postimage into the pre-existing target owner."
+          ],
+          "pending": [
+            "Authoritative naming preflight and receiving review remain separate from local SDK/Java proof.",
+            "Matched source-built M3JDK21 image, full runtime/module/JNI/platform gates and measured cold/warm performance are not run.",
+            "This does not complete family.word-facts, all lexicons, shared interning, LangDex migration or any receiving phase."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3JDK21",
+              "commit": "52fb81c483c74448a12eecb63aa9465e42cdb82c",
+              "module": "m3/core",
+              "path": "m3/core/src/com/m3/text/SharedRelatedLexemeCatalog.java",
+              "symbol": "com.m3.text.SharedRelatedLexemeCatalog.findBySource",
+              "signatures": [
+                "java.util.List<Relation> findBySource(java.lang.String)"
+              ],
+              "sha256": "76fbadbc182633ac22c449924335b7636c530cd2a8dc13fb0dc2d56a29afb42c",
+              "git_blob_sha1": "182042dfc5115a683449622dcdc6055e916f4e4c",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "One existing receiver atom, exact original name and mapping retained. Five SDK groups and bounded Java/API oracle passed. This record is an unverified product candidate, not whole-family admission; the existing family.word-facts record is unchanged."
       }
     ]
   },
