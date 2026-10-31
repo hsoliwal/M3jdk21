@@ -8,28 +8,13 @@
   <artifactId>primitive-address-identity-receiver</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>3.3.0</version>
-        <executions>
-          <execution>
-            <id>verify-m3-primitive-image-and-fixed-address</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <configuration>
-              <executable>python3</executable>
-              <arguments>
-                <argument>${project.basedir}/verify.py</argument>
-              </arguments>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+  <build><plugins><plugin>
+    <groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.3.0</version>
+    <executions><execution>
+      <id>verify-m3-primitive-image-and-fixed-address</id><phase>verify</phase><goals><goal>exec</goal></goals>
+      <configuration><executable>python3</executable><arguments>
+        <argument>${project.basedir}/verify.py</argument>
+      </arguments></configuration>
+    </execution></executions>
+  </plugin></plugins></build>
 </project>

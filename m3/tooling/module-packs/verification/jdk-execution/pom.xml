@@ -28,19 +28,11 @@
         <executions>
           <execution>
             <id>java21-proof-host</id>
-            <goals>
-              <goal>enforce</goal>
-            </goals>
-            <configuration>
-              <rules>
-                <requireJavaVersion>
-                  <version>[21,22)</version>
-                </requireJavaVersion>
-                <requireMavenVersion>
-                  <version>[3.9,)</version>
-                </requireMavenVersion>
-              </rules>
-            </configuration>
+            <goals><goal>enforce</goal></goals>
+            <configuration><rules>
+              <requireJavaVersion><version>[21,22)</version></requireJavaVersion>
+              <requireMavenVersion><version>[3.9,)</version></requireMavenVersion>
+            </rules></configuration>
           </execution>
         </executions>
       </plugin>
@@ -50,101 +42,46 @@
         <version>3.1.0</version>
         <executions>
           <execution>
-            <id>assembler-refusal-tests</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <configuration>
-              <executable>python3</executable>
-              <arguments>
-                <argument>-S</argument>
-                <argument>-m</argument>
-                <argument>unittest</argument>
-                <argument>discover</argument>
-                <argument>-s</argument>
-                <argument>${m3.tools}</argument>
-                <argument>-p</argument>
-                <argument>test*.py</argument>
-                <argument>-v</argument>
-              </arguments>
-            </configuration>
+            <id>assembler-refusal-tests</id><phase>verify</phase><goals><goal>exec</goal></goals>
+            <configuration><executable>python3</executable><arguments>
+              <argument>-S</argument><argument>-m</argument><argument>unittest</argument>
+              <argument>discover</argument><argument>-s</argument><argument>${m3.tools}</argument>
+              <argument>-p</argument><argument>test*.py</argument><argument>-v</argument>
+            </arguments></configuration>
           </execution>
           <execution>
-            <id>module-kernel-contracts</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <configuration>
-              <executable>python3</executable>
-              <arguments>
-                <argument>-S</argument>
-                <argument>${m3.tools}/verify.py</argument>
-                <argument>--jdk</argument>
-                <argument>${m3.jdk}</argument>
-                <argument>--out</argument>
-                <argument>${project.build.directory}/kernel</argument>
-              </arguments>
-            </configuration>
+            <id>module-kernel-contracts</id><phase>verify</phase><goals><goal>exec</goal></goals>
+            <configuration><executable>python3</executable><arguments>
+              <argument>-S</argument><argument>${m3.tools}/verify.py</argument>
+              <argument>--jdk</argument><argument>${m3.jdk}</argument>
+              <argument>--out</argument><argument>${project.build.directory}/kernel</argument>
+            </arguments></configuration>
           </execution>
           <execution>
-            <id>password-policy-backport</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <configuration>
-              <executable>python3</executable>
-              <arguments>
-                <argument>-S</argument>
-                <argument>${m3.tools}/verify_backport.py</argument>
-                <argument>--jdk</argument>
-                <argument>${m3.jdk}</argument>
-                <argument>--repo</argument>
-                <argument>${m3.repo}</argument>
-                <argument>--out</argument>
-                <argument>${project.build.directory}/password</argument>
-              </arguments>
-            </configuration>
+            <id>password-policy-backport</id><phase>verify</phase><goals><goal>exec</goal></goals>
+            <configuration><executable>python3</executable><arguments>
+              <argument>-S</argument><argument>${m3.tools}/verify_backport.py</argument>
+              <argument>--jdk</argument><argument>${m3.jdk}</argument>
+              <argument>--repo</argument><argument>${m3.repo}</argument>
+              <argument>--out</argument><argument>${project.build.directory}/password</argument>
+            </arguments></configuration>
           </execution>
           <execution>
-            <id>diagnostics-image-regression</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <configuration>
-              <executable>python3</executable>
-              <arguments>
-                <argument>-S</argument>
-                <argument>${m3.tools}/build_pack.py</argument>
-                <argument>--jdk</argument>
-                <argument>${m3.jdk}</argument>
-                <argument>--out</argument>
-                <argument>${project.build.directory}/diagnostics</argument>
-              </arguments>
-            </configuration>
+            <id>diagnostics-image-regression</id><phase>verify</phase><goals><goal>exec</goal></goals>
+            <configuration><executable>python3</executable><arguments>
+              <argument>-S</argument><argument>${m3.tools}/build_pack.py</argument>
+              <argument>--jdk</argument><argument>${m3.jdk}</argument>
+              <argument>--out</argument><argument>${project.build.directory}/diagnostics</argument>
+            </arguments></configuration>
           </execution>
           <execution>
-            <id>developer-image-and-native-launcher</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <configuration>
-              <executable>python3</executable>
-              <arguments>
-                <argument>-S</argument>
-                <argument>${m3.tools}/build_pack.py</argument>
-                <argument>--jdk</argument>
-                <argument>${m3.jdk}</argument>
-                <argument>--profile</argument>
-                <argument>developer</argument>
-                <argument>--out</argument>
-                <argument>${project.build.directory}/developer</argument>
-              </arguments>
-            </configuration>
+            <id>developer-image-and-native-launcher</id><phase>verify</phase><goals><goal>exec</goal></goals>
+            <configuration><executable>python3</executable><arguments>
+              <argument>-S</argument><argument>${m3.tools}/build_pack.py</argument>
+              <argument>--jdk</argument><argument>${m3.jdk}</argument>
+              <argument>--profile</argument><argument>developer</argument>
+              <argument>--out</argument><argument>${project.build.directory}/developer</argument>
+            </arguments></configuration>
           </execution>
         </executions>
       </plugin>

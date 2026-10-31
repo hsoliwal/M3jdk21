@@ -5,10 +5,30 @@ Copyright 2026 Hitesh Soliwal and contributors
 
 ## Retired from the M3jdk21 poms (2026-10-31, standalone)
 
-M3jdk21 builds, tests and releases from what it carries, so the `m3-recipe-boot` profile has been removed from all
-470 poms that held it (`m3/release/check_standalone.py`: D_MAVEN 470 -> 0). The 470 blocks were one byte-identical
-pattern, removed by `RETIRE_PROFILE v1` (`m3/tooling/standalone/retire_profile.py`). The profile was dead config here,
-for two reasons:
+M3jdk21 builds, tests and releases from what it carries, so the `m3-recipe-boot` profile is retired from the 470
+poms under `m3/` that held it. The 470 blocks were one byte-identical pattern. `RETIRE_PROFILE v2`
+(`m3/tooling/standalone/retire_profile.py --restore-installer 49791e92`) retires them so that custody pins stay valid.
+The installer commit 49791e92 (#1704, 2026-10-21) added the profile and also re-serialised every pom it touched, one
+element per line. Removing only the block leaves bytes that no pin recorded before the installer can match.
+
+- 406 poms that nothing changed after the installer get their pre-installer bytes back, byte for byte. Each restore
+  is C14N-equal to removing only the profile. Each restored file also matches the `before_sha256` that the installer
+  recorded itself in `m3/qualification/recipe-boot-20261021/semantic-installation.tsv`. The pins recorded before the
+  installer verify again: the regex-relations SDK pom, model-quantize, jmod-recipes, parallel-bulk and the rx7 SDK
+  tree.
+- 38 poms changed or created after the installer keep the v1 edit: the block is removed and every other byte is
+  kept.
+- 26 poms keep the profile for now, as listed in `m3/tooling/standalone/RETIRE_m3-recipe-boot_KEEP.tsv`:
+  - 20 are under `m3/tooling/migration-recipes/`. The public-names gate refuses to change them, and they leave
+    M3jdk21 on the #2191 line.
+  - 6 have owner pins that were recorded with the profile: the guava-minmax-priority-queue implementation and
+    receiving poms, and the four Jackson donor poms locked by `m3/tooling/module-packs/jackson/SOURCE_LOCK.json`.
+    Their owners record successor pins first.
+
+`m3/release/check_standalone.py` (#2192) counts D_MAVEN 474 -> 30. That is the 26 kept poms plus 4 poms outside
+`m3/` that this retire does not touch: `.m3/openrewrite-recipes`, `make/m3/recipes`, `src/utils/IdealGraphVisualizer`
+and `src/utils/LogCompilation`. The rows are in `m3/tooling/standalone/STANDALONE_AFTER_RETIRE.tsv`. The profile was
+dead config here, for two reasons:
 
 - It activates only when `.m3/recipe-boot.properties` exists, and that file is not in the repository.
 - Its plugin dependency, `com.synexia.m3:m3-pr-stack-preservation`, is built only in `hsoliwal/com.synexia` and is

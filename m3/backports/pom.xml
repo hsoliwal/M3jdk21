@@ -25,9 +25,7 @@
           <execution>
             <id>verify-backport-catalogue</id>
             <phase>validate</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
+            <goals><goal>exec</goal></goals>
             <configuration>
               <executable>${python.executable}</executable>
               <workingDirectory>${project.basedir}</workingDirectory>
@@ -41,9 +39,7 @@
           <execution>
             <id>verify-synexia-nebula-recipe-dag-handoff</id>
             <phase>validate</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
+            <goals><goal>exec</goal></goals>
             <configuration>
               <executable>${python.executable}</executable>
               <workingDirectory>${project.basedir}</workingDirectory>
@@ -57,9 +53,7 @@
           <execution>
             <id>compile-backport-recipe-dag</id>
             <phase>validate</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
+            <goals><goal>exec</goal></goals>
             <configuration>
               <executable>${python.executable}</executable>
               <workingDirectory>${project.basedir}</workingDirectory>
@@ -81,9 +75,7 @@
           <execution>
             <id>emit-backport-execution-waves</id>
             <phase>verify</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
+            <goals><goal>exec</goal></goals>
             <configuration>
               <executable>${python.executable}</executable>
               <workingDirectory>${project.basedir}</workingDirectory>
@@ -101,9 +93,7 @@
           <execution>
             <id>emit-scoped-backport-programme-status</id>
             <phase>verify</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
+            <goals><goal>exec</goal></goals>
             <configuration>
               <executable>${python.executable}</executable>
               <workingDirectory>${project.basedir}</workingDirectory>
@@ -121,9 +111,7 @@
           <execution>
             <id>emit-jep-source-witness</id>
             <phase>verify</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
+            <goals><goal>exec</goal></goals>
             <configuration>
               <executable>${python.executable}</executable>
               <workingDirectory>${project.basedir}</workingDirectory>
@@ -139,9 +127,7 @@
           <execution>
             <id>emit-all-85-jep-proof-matrix</id>
             <phase>verify</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
+            <goals><goal>exec</goal></goals>
             <configuration>
               <executable>${python.executable}</executable>
               <workingDirectory>${project.basedir}</workingDirectory>
@@ -159,9 +145,7 @@
           <execution>
             <id>emit-backport-program-status</id>
             <phase>verify</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
+            <goals><goal>exec</goal></goals>
             <configuration>
               <executable>${python.executable}</executable>
               <workingDirectory>${project.basedir}</workingDirectory>
@@ -179,9 +163,7 @@
           <execution>
             <id>test-backport-inventory</id>
             <phase>test</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
+            <goals><goal>exec</goal></goals>
             <configuration>
               <executable>${python.executable}</executable>
               <workingDirectory>${project.basedir}</workingDirectory>
@@ -221,15 +203,11 @@
               <execution>
                 <id>m3-synexia-atom-pattern-verify</id>
                 <phase>verify</phase>
-                <goals>
-                  <goal>dryRun</goal>
-                </goals>
+                <goals><goal>dryRun</goal></goals>
               </execution>
             </executions>
             <configuration>
-              <activeRecipes>
-                <recipe>com.synexia.m3.EveryModuleAtomPatternApplication</recipe>
-              </activeRecipes>
+              <activeRecipes><recipe>com.synexia.m3.EveryModuleAtomPatternApplication</recipe></activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -309,15 +287,11 @@
               <execution>
                 <id>m3-synexia-atom-pattern-mastery-verify</id>
                 <phase>verify</phase>
-                <goals>
-                  <goal>dryRun</goal>
-                </goals>
+                <goals><goal>dryRun</goal></goals>
               </execution>
             </executions>
             <configuration>
-              <activeRecipes>
-                <recipe>com.synexia.m3.EveryModuleAtomPatternMastery</recipe>
-              </activeRecipes>
+              <activeRecipes><recipe>com.synexia.m3.EveryModuleAtomPatternMastery</recipe></activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>

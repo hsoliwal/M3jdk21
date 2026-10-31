@@ -15,51 +15,30 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.13.0</version>
-        <configuration>
-          <release>21</release>
-          <proc>none</proc>
-          <compilerArgs>
-            <arg>-Xlint:all,-module</arg>
-            <arg>-Werror</arg>
-          </compilerArgs>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
+        <configuration><release>21</release><proc>none</proc>
+          <compilerArgs><arg>-Xlint:all,-module</arg><arg>-Werror</arg></compilerArgs>
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>3.3.0</version>
+        <groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.3.0</version>
         <executions>
-          <execution>
-            <id>strict-jdk21-cpu-reference-contract</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>java</goal>
-            </goals>
+          <execution><id>strict-jdk21-cpu-reference-contract</id><phase>verify</phase>
+            <goals><goal>java</goal></goals>
             <configuration>
               <mainClass>com.m3.runtime.capability.CapabilityRuntimeChecks</mainClass>
               <classpathScope>test</classpathScope>
             </configuration>
           </execution>
-          <execution>
-            <id>strict-jdk21-byte-window-oracle</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>java</goal>
-            </goals>
+          <execution><id>strict-jdk21-byte-window-oracle</id><phase>verify</phase>
+            <goals><goal>java</goal></goals>
             <configuration>
               <mainClass>com.m3.runtime.capability.ByteSlidingWindowsChecks</mainClass>
               <classpathScope>test</classpathScope>
             </configuration>
           </execution>
-          <execution>
-            <id>strict-jdk21-byte-histogram-oracle</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>java</goal>
-            </goals>
+          <execution><id>strict-jdk21-byte-histogram-oracle</id><phase>verify</phase>
+            <goals><goal>java</goal></goals>
             <configuration>
               <mainClass>com.m3.runtime.capability.ByteHistogram256Checks</mainClass>
               <classpathScope>test</classpathScope>

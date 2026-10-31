@@ -21,11 +21,7 @@
         <configuration>
           <release>21</release>
           <showWarnings>true</showWarnings>
-          <compilerArgs>
-            <arg>-Xlint:all</arg>
-            <arg>-Werror</arg>
-            <arg>-proc:none</arg>
-          </compilerArgs>
+          <compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg><arg>-proc:none</arg></compilerArgs>
         </configuration>
       </plugin>
       <plugin>
@@ -36,9 +32,7 @@
           <execution>
             <id>proof-gated-offline-data-recipe</id>
             <phase>verify</phase>
-            <goals>
-              <goal>java</goal>
-            </goals>
+            <goals><goal>java</goal></goals>
             <configuration>
               <mainClass>com.m3.lexicon.hf.M3HfLexiconIntakeProof</mainClass>
               <classpathScope>test</classpathScope>
