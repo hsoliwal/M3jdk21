@@ -1,0 +1,757 @@
+repo	path	type	method	signature	statements	loops	calls	pure	writes_arrays	pattern
+commons-collections	com/m3/collections/apache/ArrayUtils.java	ArrayUtils	contains	(Object[],Object)boolean	2	0	1	true	false	LINEAR_SEARCH
+commons-collections	com/m3/collections/apache/ArrayUtils.java	ArrayUtils	indexOf	(Object[],Object,int)int	25	2	1	true	false	LINEAR_SEARCH
+commons-collections	com/m3/collections/apache/ArrayUtils.java	ArrayUtils	indexOf	(T[],Object)int	2	0	1	true	false	LINEAR_SEARCH
+commons-collections	com/m3/collections/apache/BagUtils.java	BagUtils	collectionBag	(Bag<E>)Bag<E>	2	0	1	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/BagUtils.java	BagUtils	emptyBag	()Bag<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/BagUtils.java	BagUtils	emptySortedBag	()SortedBag<E>	2	0	0	true	false	SORT
+commons-collections	com/m3/collections/apache/BagUtils.java	BagUtils	predicatedBag	(Bag<E>,Predicate<? super E>)Bag<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/BagUtils.java	BagUtils	predicatedSortedBag	(SortedBag<E>,Predicate<? super E>)SortedBag<E>	2	0	1	true	false	SORT
+commons-collections	com/m3/collections/apache/BagUtils.java	BagUtils	synchronizedBag	(Bag<E>)Bag<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/BagUtils.java	BagUtils	synchronizedSortedBag	(SortedBag<E>)SortedBag<E>	2	0	1	true	false	SORT
+commons-collections	com/m3/collections/apache/BagUtils.java	BagUtils	transformingBag	(Bag<E>,Transformer<? super E, ? extends E>)Bag<E>	2	0	1	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/BagUtils.java	BagUtils	transformingSortedBag	(SortedBag<E>,Transformer<? super E, ? extends E>)SortedBag<E>	2	0	1	true	false	SORT
+commons-collections	com/m3/collections/apache/BagUtils.java	BagUtils	unmodifiableBag	(Bag<? extends E>)Bag<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/BagUtils.java	BagUtils	unmodifiableSortedBag	(SortedBag<E>)SortedBag<E>	2	0	1	true	false	SORT
+commons-collections	com/m3/collections/apache/bag/CollectionBag.java	CollectionBag	collectionBag	(Bag<E>)Bag<E>	2	0	0	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/bag/CollectionSortedBag.java	CollectionSortedBag	collectionSortedBag	(SortedBag<E>)SortedBag<E>	2	0	0	true	false	SORT
+commons-collections	com/m3/collections/apache/bag/PredicatedBag.java	PredicatedBag	predicatedBag	(Bag<E>,Predicate<? super E>)PredicatedBag<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/bag/PredicatedSortedBag.java	PredicatedSortedBag	predicatedSortedBag	(SortedBag<E>,Predicate<? super E>)PredicatedSortedBag<E>	2	0	0	true	false	SORT
+commons-collections	com/m3/collections/apache/bag/SynchronizedBag.java	SynchronizedBag	synchronizedBag	(Bag<E>)SynchronizedBag<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/bag/SynchronizedSortedBag.java	SynchronizedSortedBag	synchronizedSortedBag	(SortedBag<E>)SynchronizedSortedBag<E>	2	0	0	true	false	SORT
+commons-collections	com/m3/collections/apache/bag/TransformedBag.java	TransformedBag	transformedBag	(Bag<E>,Transformer<? super E, ? extends E>)Bag<E>	11	1	6	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/bag/TransformedBag.java	TransformedBag	transformingBag	(Bag<E>,Transformer<? super E, ? extends E>)Bag<E>	2	0	0	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/bag/TransformedSortedBag.java	TransformedSortedBag	transformedSortedBag	(SortedBag<E>,Transformer<? super E, ? extends E>)TransformedSortedBag<E>	11	1	6	true	false	SORT
+commons-collections	com/m3/collections/apache/bag/TransformedSortedBag.java	TransformedSortedBag	transformingSortedBag	(SortedBag<E>,Transformer<? super E, ? extends E>)TransformedSortedBag<E>	2	0	0	true	false	SORT
+commons-collections	com/m3/collections/apache/bag/UnmodifiableBag.java	UnmodifiableBag	unmodifiableBag	(Bag<? extends E>)Bag<E>	6	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/bag/UnmodifiableSortedBag.java	UnmodifiableSortedBag	unmodifiableSortedBag	(SortedBag<E>)SortedBag<E>	5	0	0	true	false	SORT
+commons-collections	com/m3/collections/apache/bidimap/TreeBidiMap.java	TreeBidiMap	checkKey	(Object)void	2	0	1	true	false	PRECONDITION
+commons-collections	com/m3/collections/apache/bidimap/TreeBidiMap.java	TreeBidiMap	checkKeyAndValue	(Object,Object)void	3	0	2	true	false	PRECONDITION
+commons-collections	com/m3/collections/apache/bidimap/TreeBidiMap.java	TreeBidiMap	checkNonNullComparable	(Object,DataElement)void	5	0	2	true	false	PRECONDITION
+commons-collections	com/m3/collections/apache/bidimap/TreeBidiMap.java	TreeBidiMap	checkValue	(Object)void	2	0	1	true	false	PRECONDITION
+commons-collections	com/m3/collections/apache/bidimap/TreeBidiMap.java	TreeBidiMap	compare	(T,T)int	2	0	1	true	false	COMPARE_ORDER
+commons-collections	com/m3/collections/apache/bidimap/TreeBidiMap.java	TreeBidiMap	isBlack	(Node<?, ?>,DataElement)boolean	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bidimap/TreeBidiMap.java	TreeBidiMap	isRed	(Node<?, ?>,DataElement)boolean	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bidimap/TreeBidiMap.java	TreeBidiMap	makeBlack	(Node<?, ?>,DataElement)void	4	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bidimap/TreeBidiMap.java	TreeBidiMap	makeRed	(Node<?, ?>,DataElement)void	4	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bidimap/UnmodifiableBidiMap.java	UnmodifiableBidiMap	unmodifiableBidiMap	(BidiMap<? extends K, ? extends V>)BidiMap<K, V>	6	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/bidimap/UnmodifiableOrderedBidiMap.java	UnmodifiableOrderedBidiMap	unmodifiableOrderedBidiMap	(OrderedBidiMap<? extends K, ? extends V>)OrderedBidiMap<K, V>	6	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/bidimap/UnmodifiableSortedBidiMap.java	UnmodifiableSortedBidiMap	unmodifiableSortedBidiMap	(SortedBidiMap<K, ? extends V>)SortedBidiMap<K, V>	6	0	0	true	false	SORT
+commons-collections	com/m3/collections/apache/bloomfilter/BitMapExtractor.java	BitMapExtractor	fromBitMapArray	(long[])BitMapExtractor	19	1	4	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/BitMapExtractor.java	BitMapExtractor	fromIndexExtractor	(IndexExtractor,int)BitMapExtractor	9	0	5	true	false	ARITHMETIC_EXACT
+commons-collections	com/m3/collections/apache/bloomfilter/BitMaps.java	BitMaps	contains	(long[],int)boolean	2	0	2	true	false	LINEAR_SEARCH
+commons-collections	com/m3/collections/apache/bloomfilter/BitMaps.java	BitMaps	getLongBit	(int)long	2	0	0	true	false	BYTE_FIELD_CODEC
+commons-collections	com/m3/collections/apache/bloomfilter/BitMaps.java	BitMaps	getLongIndex	(int)int	2	0	0	true	false	BYTE_FIELD_CODEC
+commons-collections	com/m3/collections/apache/bloomfilter/BitMaps.java	BitMaps	mod	(long,int)int	4	0	0	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/BitMaps.java	BitMaps	newBitMap	(int)long[]	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/bloomfilter/BitMaps.java	BitMaps	newBitMap	(Shape)long[]	2	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/bloomfilter/BitMaps.java	BitMaps	numberOfBitMaps	(int)int	2	0	0	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/BitMaps.java	BitMaps	numberOfBitMaps	(Shape)int	2	0	2	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/BitMaps.java	BitMaps	set	(long[],int)void	2	0	2	true	true	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/BloomFilterExtractor.java	BloomFilterExtractor	fromBloomFilterArray	(BloomFilter<?>[])BloomFilterExtractor	14	0	6	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/CellExtractor.java	CellExtractor	from	(IndexExtractor)CellExtractor	43	1	13	false	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/bloomfilter/EnhancedDoubleHasher.java	EnhancedDoubleHasher	toLong	(byte[],int,int)long	11	1	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/IndexExtractor.java	IndexExtractor	fromBitMapExtractor	(BitMapExtractor)IndexExtractor	21	1	3	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/IndexExtractor.java	IndexExtractor	fromIndexArray	(int[])IndexExtractor	14	1	2	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/IndexFilter.java	IndexFilter	create	(Shape,IntPredicate)IntPredicate	2	0	0	true	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/bloomfilter/IndexUtils.java	IndexUtils	ensureCapacityForAdd	(int[],int)int[]	5	0	3	true	false	ARRAY_GROW_COPY
+commons-collections	com/m3/collections/apache/bloomfilter/LayerManager.java	LayerManager.Cleanup	noCleanup	()Consumer<Deque<T>>	4	0	0	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/LayerManager.java	LayerManager.Cleanup	onMaxSize	(int)Consumer<Deque<T>>	10	1	2	true	false	ARITHMETIC_EXACT
+commons-collections	com/m3/collections/apache/bloomfilter/LayerManager.java	LayerManager.Cleanup	removeEmptyTarget	()Consumer<Deque<T>>	7	0	4	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/LayerManager.java	LayerManager.Cleanup	removeIf	(Predicate<? super T>)Consumer<Deque<T>>	3	0	1	true	false	TWO_POINTER_COMPACTION
+commons-collections	com/m3/collections/apache/bloomfilter/LayerManager.java	LayerManager.ExtendCheck	advanceOnCount	(int)Predicate<LayerManager<T>>	14	0	0	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/LayerManager.java	LayerManager.ExtendCheck	advanceOnPopulated	()Predicate<LayerManager<T>>	3	0	2	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/LayerManager.java	LayerManager.ExtendCheck	advanceOnSaturation	(double)Predicate<LayerManager<T>>	9	0	4	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/LayerManager.java	LayerManager.ExtendCheck	neverAdvance	()Predicate<LayerManager<T>>	3	0	0	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/LayerManager.java	LayerManager	builder	()Builder<T>	2	0	0	true	false	REGISTRY_LOOKUP
+commons-collections	com/m3/collections/apache/bloomfilter/SetOperations.java	SetOperations	andCardinality	(BitMapExtractor,BitMapExtractor)int	4	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/SetOperations.java	SetOperations	cardinality	(BitMapExtractor)int	8	0	2	true	true	POPCOUNT_RANK
+commons-collections	com/m3/collections/apache/bloomfilter/SetOperations.java	SetOperations	cardinality	(BitMapExtractor,BitMapExtractor,LongBinaryOperator)int	9	0	3	true	true	POPCOUNT_RANK
+commons-collections	com/m3/collections/apache/bloomfilter/SetOperations.java	SetOperations	cosineDistance	(BitMapExtractor,BitMapExtractor)double	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/SetOperations.java	SetOperations	cosineSimilarity	(BitMapExtractor,BitMapExtractor)double	3	0	4	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/SetOperations.java	SetOperations	cosineSimilarity	(BloomFilter<?>,BloomFilter<?>)double	3	0	4	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/SetOperations.java	SetOperations	hammingDistance	(BitMapExtractor,BitMapExtractor)int	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/SetOperations.java	SetOperations	jaccardDistance	(BitMapExtractor,BitMapExtractor)double	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/SetOperations.java	SetOperations	jaccardSimilarity	(BitMapExtractor,BitMapExtractor)double	11	0	3	true	true	POPCOUNT_RANK
+commons-collections	com/m3/collections/apache/bloomfilter/SetOperations.java	SetOperations	orCardinality	(BitMapExtractor,BitMapExtractor)int	4	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/SetOperations.java	SetOperations	xorCardinality	(BitMapExtractor,BitMapExtractor)int	4	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/Shape.java	Shape	calculateNumberOfHashFunctions	(int,int)int	6	0	2	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/Shape.java	Shape	checkCalculatedProbability	(double)void	4	0	0	true	false	PRECONDITION
+commons-collections	com/m3/collections/apache/bloomfilter/Shape.java	Shape	checkNumberOfBits	(int)int	5	0	0	true	false	PRECONDITION
+commons-collections	com/m3/collections/apache/bloomfilter/Shape.java	Shape	checkNumberOfHashFunctions	(int)int	5	0	0	true	false	PRECONDITION
+commons-collections	com/m3/collections/apache/bloomfilter/Shape.java	Shape	checkNumberOfItems	(int)int	5	0	0	true	false	PRECONDITION
+commons-collections	com/m3/collections/apache/bloomfilter/Shape.java	Shape	checkProbability	(double)void	4	0	0	true	false	PRECONDITION
+commons-collections	com/m3/collections/apache/bloomfilter/Shape.java	Shape	fromKM	(int,int)Shape	2	0	0	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/Shape.java	Shape	fromNM	(int,int)Shape	7	0	5	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/Shape.java	Shape	fromNMK	(int,int,int)Shape	7	0	5	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/Shape.java	Shape	fromNP	(int,double)Shape	12	0	7	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/bloomfilter/Shape.java	Shape	fromPMK	(double,int,int)Shape	8	0	9	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/ClosureUtils.java	ClosureUtils	asClosure	(Transformer<? super E, ?>)Closure<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ClosureUtils.java	ClosureUtils	chainedClosure	(Closure<? super E>[])Closure<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ClosureUtils.java	ClosureUtils	chainedClosure	(Collection<? extends Closure<? super E>>)Closure<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ClosureUtils.java	ClosureUtils	doWhileClosure	(Closure<? super E>,Predicate<? super E>)Closure<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ClosureUtils.java	ClosureUtils	exceptionClosure	()Closure<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ClosureUtils.java	ClosureUtils	forClosure	(int,Closure<? super E>)Closure<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ClosureUtils.java	ClosureUtils	ifClosure	(Predicate<? super E>,Closure<? super E>)Closure<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ClosureUtils.java	ClosureUtils	ifClosure	(Predicate<? super E>,Closure<? super E>,Closure<? super E>)Closure<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ClosureUtils.java	ClosureUtils	invokerClosure	(String)Closure<E>	2	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ClosureUtils.java	ClosureUtils	invokerClosure	(String,Class<?>[],Object[])Closure<E>	2	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ClosureUtils.java	ClosureUtils	nopClosure	()Closure<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ClosureUtils.java	ClosureUtils	switchClosure	(Map<Predicate<E>, Closure<E>>)Closure<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ClosureUtils.java	ClosureUtils	switchClosure	(Predicate<? super E>[],Closure<? super E>[])Closure<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ClosureUtils.java	ClosureUtils	switchClosure	(Predicate<? super E>[],Closure<? super E>[],Closure<? super E>)Closure<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ClosureUtils.java	ClosureUtils	switchMapClosure	(Map<? extends E, Closure<E>>)Closure<E>	15	1	8	true	true	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ClosureUtils.java	ClosureUtils	whileClosure	(Predicate<? super E>,Closure<? super E>)Closure<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils.CardinalityHelper	equals	(Collection<?>,Collection<?>)boolean	2	0	1	true	false	EQUALITY_HASH_CONTRACT
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	addAll	(Collection<C>,C[])boolean	9	1	3	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	addAll	(Collection<C>,Enumeration<? extends C>)boolean	8	1	5	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	addAll	(Collection<C>,Iterable<? extends C>)boolean	7	0	5	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	addAll	(Collection<C>,Iterator<? extends C>)boolean	8	1	5	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	addIgnoreNull	(Collection<T>,T)boolean	3	0	2	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	cardinality	(O,Iterable<? super O>)int	2	0	2	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	checkIndexBounds	(int)void	4	0	0	true	false	RANGE_CHECK
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	collate	(Iterable<? extends O>,Iterable<? extends O>)List<O>	2	0	2	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	collate	(Iterable<? extends O>,Iterable<? extends O>,boolean)List<O>	2	0	2	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	collate	(Iterable<? extends O>,Iterable<? extends O>,Comparator<? super O>)List<O>	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	collate	(Iterable<? extends O>,Iterable<? extends O>,Comparator<? super O>,boolean)List<O>	22	1	14	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	collect	(Iterable<? extends I>,Transformer<? super I, ? extends O>,R)R	5	0	2	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	collect	(Iterable<I>,Transformer<? super I, ? extends O>)Collection<O>	7	0	2	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	collect	(Iterator<? extends I>,Transformer<? super I, ? extends O>,R)R	9	1	4	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	collect	(Iterator<I>,Transformer<? super I, ? extends O>)Collection<O>	2	0	1	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	containsAll	(Collection<?>,Collection<?>)boolean	26	2	6	true	false	LINEAR_SEARCH
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	containsAny	(Collection<?>,Collection<?>)boolean	19	2	6	true	false	LINEAR_SEARCH
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	containsAny	(Collection<?>,T[])boolean	19	2	5	true	false	LINEAR_SEARCH
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	countMatches	(Iterable<C>,Predicate<? super C>)int	2	0	1	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	disjunction	(Iterable<? extends O>,Iterable<? extends O>)Collection<O>	9	1	6	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	emptyCollection	()Collection<T>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	emptyIfNull	(Collection<T>)Collection<T>	2	0	1	true	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	exists	(Iterable<C>,Predicate<? super C>)boolean	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	extractSingleton	(Collection<E>)E	6	0	4	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	filter	(Iterable<T>,Predicate<? super T>)boolean	12	1	5	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	filterInverse	(Iterable<T>,Predicate<? super T>)boolean	2	0	2	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	find	(Iterable<T>,Predicate<? super T>)T	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	forAllButLastDo	(Iterable<T>,C)T	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	forAllButLastDo	(Iterator<T>,C)T	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	forAllDo	(Iterable<T>,C)C	5	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	forAllDo	(Iterator<T>,C)C	5	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	get	(Iterable<T>,int)T	3	0	2	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	get	(Iterator<T>,int)T	3	0	2	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	get	(Map<K, V>,int)Map.Entry<K, V>	4	0	4	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	get	(Object,int)Object	34	0	9	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	getCardinalityMap	(Iterable<? extends O>)Map<O, Integer>	13	1	7	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	hashCode	(Collection<? extends E>,Equator<? super E>)int	11	1	2	true	false	EQUALITY_HASH_CONTRACT
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	intersection	(Iterable<? extends O>,Iterable<? extends O>)Collection<O>	9	1	5	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	isEmpty	(Collection<?>)boolean	2	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	isEqualCollection	(Collection<?>,Collection<?>)boolean	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	isEqualCollection	(Collection<? extends E>,Collection<? extends E>,Equator<? super E>)boolean	10	0	8	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	isFull	(Collection<? extends Object>)boolean	12	0	4	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	isNotEmpty	(Collection<?>)boolean	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	isProperSubCollection	(Collection<?>,Collection<?>)boolean	4	0	5	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	isSubCollection	(Collection<?>,Collection<?>)boolean	11	1	4	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	matchesAll	(Iterable<C>,Predicate<? super C>)boolean	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	maxSize	(Collection<? extends Object>)int	12	0	4	true	false	ARITHMETIC_EXACT
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	permutations	(Collection<E>)Collection<List<E>>	8	1	4	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	predicatedCollection	(Collection<C>,Predicate<? super C>)Collection<C>	4	0	3	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	removeAll	(Collection<E>,Collection<?>)Collection<E>	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	removeAll	(Iterable<E>,Iterable<? extends E>,Equator<? super E>)Collection<E>	15	1	6	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	removeCount	(Collection<E>,int,int)Collection<E>	24	1	7	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	removeRange	(Collection<E>,int,int)Collection<E>	9	0	3	true	false	TWO_POINTER_COMPACTION
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	retainAll	(Collection<C>,Collection<?>)Collection<C>	4	0	3	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	retainAll	(Iterable<E>,Iterable<? extends E>,Equator<? super E>)Collection<E>	15	1	6	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	reverseArray	(Object[])void	12	1	1	true	true	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	select	(Iterable<? extends O>,Predicate<? super O>)Collection<O>	7	0	2	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	select	(Iterable<? extends O>,Predicate<? super O>,R)R	10	1	2	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	select	(Iterable<? extends O>,Predicate<? super O>,R,R)R	12	1	3	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	selectRejected	(Iterable<? extends O>,Predicate<? super O>)Collection<O>	7	0	2	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	selectRejected	(Iterable<? extends O>,Predicate<? super O>,R)R	10	1	2	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	size	(Object)int	35	1	9	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	sizeIsEmpty	(Object)boolean	28	0	8	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	subtract	(Iterable<? extends O>,Iterable<? extends O>)Collection<O>	3	0	2	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	subtract	(Iterable<? extends O>,Iterable<? extends O>,Predicate<O>)Collection<O>	19	2	7	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	synchronizedCollection	(Collection<C>)Collection<C>	3	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	transform	(Collection<C>,Transformer<? super C, ? extends C>)void	14	1	8	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	transformingCollection	(Collection<E>,Transformer<? super E, ? extends E>)Collection<E>	4	0	3	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	union	(Iterable<? extends O>,Iterable<? extends O>)Collection<O>	9	1	5	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/CollectionUtils.java	CollectionUtils	unmodifiableCollection	(Collection<? extends C>)Collection<C>	3	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/collection/IndexedCollection.java	IndexedCollection	nonUniqueIndexedCollection	(Collection<C>,Transformer<C, K>)IndexedCollection<K, C>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/collection/IndexedCollection.java	IndexedCollection	uniqueIndexedCollection	(Collection<C>,Transformer<C, K>)IndexedCollection<K, C>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/collection/PredicatedCollection.java	PredicatedCollection	builder	(Predicate<? super E>)Builder<E>	2	0	0	true	false	REGISTRY_LOOKUP
+commons-collections	com/m3/collections/apache/collection/PredicatedCollection.java	PredicatedCollection	notNullBuilder	()Builder<E>	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/collection/PredicatedCollection.java	PredicatedCollection	predicatedCollection	(Collection<T>,Predicate<? super T>)PredicatedCollection<T>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/collection/SynchronizedCollection.java	SynchronizedCollection	synchronizedCollection	(Collection<T>)SynchronizedCollection<T>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/collection/TransformedCollection.java	TransformedCollection	transformedCollection	(Collection<E>,Transformer<? super E, ? extends E>)TransformedCollection<E>	11	1	6	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/collection/TransformedCollection.java	TransformedCollection	transformingCollection	(Collection<E>,Transformer<? super E, ? extends E>)TransformedCollection<E>	2	0	0	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/collection/UnmodifiableBoundedCollection.java	UnmodifiableBoundedCollection	unmodifiableBoundedCollection	(BoundedCollection<? extends E>)BoundedCollection<E>	6	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/collection/UnmodifiableBoundedCollection.java	UnmodifiableBoundedCollection	unmodifiableBoundedCollection	(Collection<? extends E>)BoundedCollection<E>	19	1	3	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/collection/UnmodifiableCollection.java	UnmodifiableCollection	unmodifiableCollection	(Collection<? extends T>)Collection<T>	6	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/comparators/BooleanComparator.java	BooleanComparator	booleanComparator	(boolean)BooleanComparator	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/comparators/BooleanComparator.java	BooleanComparator	getFalseFirstComparator	()BooleanComparator	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/comparators/BooleanComparator.java	BooleanComparator	getTrueFirstComparator	()BooleanComparator	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/comparators/ComparableComparator.java	ComparableComparator	comparableComparator	()ComparableComparator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ComparatorUtils.java	ComparatorUtils	booleanComparator	(boolean)Comparator<Boolean>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ComparatorUtils.java	ComparatorUtils	chainedComparator	(Collection<Comparator<E>>)Comparator<E>	2	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ComparatorUtils.java	ComparatorUtils	chainedComparator	(Comparator<E>[])Comparator<E>	7	1	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ComparatorUtils.java	ComparatorUtils	max	(E,E,Comparator<E>)E	6	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/ComparatorUtils.java	ComparatorUtils	min	(E,E,Comparator<E>)E	6	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/ComparatorUtils.java	ComparatorUtils	naturalComparator	()Comparator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ComparatorUtils.java	ComparatorUtils	nullHighComparator	(Comparator<E>)Comparator<E>	5	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ComparatorUtils.java	ComparatorUtils	nullLowComparator	(Comparator<E>)Comparator<E>	5	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ComparatorUtils.java	ComparatorUtils	reversedComparator	(Comparator<E>)Comparator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ComparatorUtils.java	ComparatorUtils	transformedComparator	(Comparator<O>,Transformer<? super I, ? extends O>)Comparator<I>	5	0	0	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/EnumerationUtils.java	EnumerationUtils	asIterable	(Enumeration<T>)Iterable<T>	2	0	0	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/EnumerationUtils.java	EnumerationUtils	get	(Enumeration<T>,int)T	11	1	4	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/EnumerationUtils.java	EnumerationUtils	toList	(Enumeration<? extends E>)List<E>	2	0	1	true	false	STREAM_STAGE
+commons-collections	com/m3/collections/apache/EnumerationUtils.java	EnumerationUtils	toList	(StringTokenizer)List<String>	6	1	4	true	false	STREAM_STAGE
+commons-collections	com/m3/collections/apache/EnumerationUtils.java	EnumerationUtils	toSet	(Enumeration<? extends E>)Set<E>	2	0	1	true	false	STREAM_STAGE
+commons-collections	com/m3/collections/apache/FactoryUtils.java	FactoryUtils	constantFactory	(T)Factory<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/FactoryUtils.java	FactoryUtils	exceptionFactory	()Factory<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/FactoryUtils.java	FactoryUtils	instantiateFactory	(Class<T>)Factory<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/FactoryUtils.java	FactoryUtils	instantiateFactory	(Class<T>,Class<?>[],Object[])Factory<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/FactoryUtils.java	FactoryUtils	nullFactory	()Factory<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/FactoryUtils.java	FactoryUtils	prototypeFactory	(T)Factory<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/FluentIterable.java	FluentIterable	empty	()FluentIterable<T>	2	0	0	true	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/FluentIterable.java	FluentIterable	of	(Iterable<T>)FluentIterable<T>	6	0	1	true	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/FluentIterable.java	FluentIterable	of	(T)FluentIterable<T>	2	0	2	true	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/FluentIterable.java	FluentIterable	of	(T[])FluentIterable<T>	2	0	2	true	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/functors/AllPredicate.java	AllPredicate	allPredicate	(Collection<? extends Predicate<? super T>>)Predicate<T>	9	0	3	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/AllPredicate.java	AllPredicate	allPredicate	(Predicate<? super T>[])Predicate<T>	9	0	4	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/AndPredicate.java	AndPredicate	andPredicate	(Predicate<? super T>,Predicate<? super T>)Predicate<T>	2	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/AnyPredicate.java	AnyPredicate	anyPredicate	(Collection<? extends Predicate<? super T>>)Predicate<T>	9	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/AnyPredicate.java	AnyPredicate	anyPredicate	(Predicate<? super T>[])Predicate<T>	9	0	3	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/ChainedClosure.java	ChainedClosure	chainedClosure	(Closure<? super E>[])Closure<E>	6	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/ChainedClosure.java	ChainedClosure	chainedClosure	(Collection<? extends Closure<? super E>>)Closure<E>	13	1	5	true	true	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/ChainedTransformer.java	ChainedTransformer	chainedTransformer	(Collection<? extends Transformer<? super T, ? extends T>>)Transformer<T, T>	8	0	5	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/ChainedTransformer.java	ChainedTransformer	chainedTransformer	(Transformer<? super T, ? extends T>[])Transformer<T, T>	6	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/CloneTransformer.java	CloneTransformer	cloneTransformer	()Transformer<T, T>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/ClosureTransformer.java	ClosureTransformer	closureTransformer	(Closure<? super T>)Transformer<T, T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/ComparatorPredicate.java	ComparatorPredicate	comparatorPredicate	(T,Comparator<T>)Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/ComparatorPredicate.java	ComparatorPredicate	comparatorPredicate	(T,Comparator<T>,Criterion)Predicate<T>	2	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/ConstantFactory.java	ConstantFactory	constantFactory	(T)Factory<T>	5	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/ConstantTransformer.java	ConstantTransformer	constantTransformer	(O)Transformer<I, O>	5	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/ConstantTransformer.java	ConstantTransformer	nullTransformer	()Transformer<I, O>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/DefaultEquator.java	DefaultEquator	defaultEquator	()DefaultEquator<T>	2	0	0	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/functors/EqualPredicate.java	EqualPredicate	equalPredicate	(T)Predicate<T>	5	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/EqualPredicate.java	EqualPredicate	equalPredicate	(T,Equator<T>)Predicate<T>	5	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/ExceptionClosure.java	ExceptionClosure	exceptionClosure	()Closure<T>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/ExceptionFactory.java	ExceptionFactory	exceptionFactory	()Factory<T>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/ExceptionPredicate.java	ExceptionPredicate	exceptionPredicate	()Predicate<T>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/ExceptionTransformer.java	ExceptionTransformer	exceptionTransformer	()Transformer<I, O>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/FactoryTransformer.java	FactoryTransformer	factoryTransformer	(Factory<? extends O>)Transformer<I, O>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/FalsePredicate.java	FalsePredicate	falsePredicate	()Predicate<T>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/ForClosure.java	ForClosure	forClosure	(int,Closure<? super E>)Closure<E>	8	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/FunctorUtils.java	FunctorUtils	clone	(T[])T[]	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/functors/FunctorUtils.java	FunctorUtils	coerce	(P)R	2	0	0	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/functors/FunctorUtils.java	FunctorUtils	coerce	(P)R	2	0	0	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/functors/FunctorUtils.java	FunctorUtils	copy	(T[])T[]	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/functors/FunctorUtils.java	FunctorUtils	copy	(T[])T[]	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/functors/FunctorUtils.java	FunctorUtils	copy	(T[])T[]	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/functors/FunctorUtils.java	FunctorUtils	validate	(Collection<? extends java.util.function.Predicate<? super T>>)Predicate<? super T>[]	13	1	2	true	true	PRECONDITION
+commons-collections	com/m3/collections/apache/functors/FunctorUtils.java	FunctorUtils	validate	(Consumer<?>[])void	9	1	1	true	false	PRECONDITION
+commons-collections	com/m3/collections/apache/functors/FunctorUtils.java	FunctorUtils	validate	(Function<?, ?>[])void	9	1	1	true	false	PRECONDITION
+commons-collections	com/m3/collections/apache/functors/FunctorUtils.java	FunctorUtils	validate	(java.util.function.Predicate<?>[])void	9	1	1	true	false	PRECONDITION
+commons-collections	com/m3/collections/apache/functors/IdentityPredicate.java	IdentityPredicate	identityPredicate	(T)Predicate<T>	5	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/IfClosure.java	IfClosure	ifClosure	(Predicate<? super E>,Closure<? super E>)Closure<E>	2	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/IfClosure.java	IfClosure	ifClosure	(Predicate<? super E>,Closure<? super E>,Closure<? super E>)Closure<E>	2	0	3	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/IfTransformer.java	IfTransformer	ifTransformer	(Predicate<? super I>,Transformer<? super I, ? extends O>,Transformer<? super I, ? extends O>)Transformer<I, O>	2	0	3	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/IfTransformer.java	IfTransformer	ifTransformer	(Predicate<? super T>,Transformer<? super T, ? extends T>)Transformer<T, T>	2	0	3	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/InstanceofPredicate.java	InstanceofPredicate	instanceOfPredicate	(Class<?>)Predicate<Object>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/InstantiateFactory.java	InstantiateFactory	instantiateFactory	(Class<T>,Class<?>[],Object[])Factory<T>	9	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/InstantiateTransformer.java	InstantiateTransformer	instantiateTransformer	()Transformer<Class<? extends T>, T>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/InstantiateTransformer.java	InstantiateTransformer	instantiateTransformer	(Class<?>[],Object[])Transformer<Class<? extends T>, T>	8	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/InvokerTransformer.java	InvokerTransformer	invokerTransformer	(String)Transformer<I, O>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/InvokerTransformer.java	InvokerTransformer	invokerTransformer	(String,Class<?>[],Object[])Transformer<I, O>	9	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/MapTransformer.java	MapTransformer	mapTransformer	(Map<? super I, ? extends O>)Transformer<I, O>	5	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/NonePredicate.java	NonePredicate	nonePredicate	(Collection<? extends Predicate<? super T>>)Predicate<T>	6	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/NonePredicate.java	NonePredicate	nonePredicate	(Predicate<? super T>[])Predicate<T>	6	0	3	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/NOPClosure.java	NOPClosure	nopClosure	()Closure<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/NOPTransformer.java	NOPTransformer	nopTransformer	()Transformer<T, T>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/NotNullPredicate.java	NotNullPredicate	notNullPredicate	()Predicate<T>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/NotPredicate.java	NotPredicate	notPredicate	(Predicate<? super T>)Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/NullIsExceptionPredicate.java	NullIsExceptionPredicate	nullIsExceptionPredicate	(Predicate<? super T>)Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/NullIsFalsePredicate.java	NullIsFalsePredicate	nullIsFalsePredicate	(Predicate<? super T>)Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/NullIsTruePredicate.java	NullIsTruePredicate	nullIsTruePredicate	(Predicate<? super T>)Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/NullPredicate.java	NullPredicate	nullPredicate	()Predicate<T>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/OnePredicate.java	OnePredicate	onePredicate	(Collection<? extends Predicate<? super T>>)Predicate<T>	3	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/OnePredicate.java	OnePredicate	onePredicate	(Predicate<? super T>[])Predicate<T>	9	0	3	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/OrPredicate.java	OrPredicate	orPredicate	(Predicate<? super T>,Predicate<? super T>)Predicate<T>	2	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/PredicateTransformer.java	PredicateTransformer	predicateTransformer	(Predicate<? super T>)Transformer<T, Boolean>	5	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/PrototypeFactory.java	PrototypeFactory	prototypeFactory	(T)Factory<T>	20	0	8	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/StringValueTransformer.java	StringValueTransformer	stringValueTransformer	()Transformer<T, String>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/SwitchClosure.java	SwitchClosure	switchClosure	(Map<Predicate<E>, Closure<E>>)Closure<E>	18	1	7	true	true	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/SwitchClosure.java	SwitchClosure	switchClosure	(Predicate<? super E>[],Closure<? super E>[],Closure<? super E>)Closure<E>	10	0	3	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/SwitchTransformer.java	SwitchTransformer	switchTransformer	(Map<? extends Predicate<? super I>, ? extends Transformer<? super I, ? extends O>>)Transformer<I, O>	21	1	9	true	true	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/SwitchTransformer.java	SwitchTransformer	switchTransformer	(Predicate<? super I>[],Transformer<? super I, ? extends O>[],Transformer<? super I, ? extends O>)Transformer<I, O>	10	0	3	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/TransformedPredicate.java	TransformedPredicate	transformedPredicate	(Transformer<? super T, ? extends T>,Predicate<? super T>)Predicate<T>	2	0	2	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/functors/TransformerClosure.java	TransformerClosure	transformerClosure	(Transformer<? super E, ?>)Closure<E>	5	0	1	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/functors/TransformerPredicate.java	TransformerPredicate	transformerPredicate	(Transformer<? super T, Boolean>)Predicate<T>	2	0	1	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/functors/TruePredicate.java	TruePredicate	truePredicate	()Predicate<T>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/UniquePredicate.java	UniquePredicate	uniquePredicate	()Predicate<T>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/functors/WhileClosure.java	WhileClosure	whileClosure	(Predicate<? super E>,Closure<? super E>,boolean)Closure<E>	2	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	boundedIterable	(Iterable<E>,long)Iterable<E>	9	0	3	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	chainedIterable	(Iterable<? extends E>[])Iterable<E>	13	0	2	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	chainedIterable	(Iterable<? extends E>,Iterable<? extends E>)Iterable<E>	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	chainedIterable	(Iterable<? extends E>,Iterable<? extends E>,Iterable<? extends E>)Iterable<E>	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	chainedIterable	(Iterable<? extends E>,Iterable<? extends E>,Iterable<? extends E>,Iterable<? extends E>)Iterable<E>	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	checkNotNull	(Iterable<?>[])void	6	1	2	true	false	PRECONDITION
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	collatedIterable	(Comparator<? super E>,Iterable<? extends E>,Iterable<? extends E>)Iterable<E>	6	0	4	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	collatedIterable	(Iterable<? extends E>,Iterable<? extends E>)Iterable<E>	6	0	4	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	contains	(Iterable<? extends E>,E,Equator<? super E>)boolean	3	0	3	true	false	LINEAR_SEARCH
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	contains	(Iterable<E>,Object)boolean	5	0	3	true	false	LINEAR_SEARCH
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	countMatches	(Iterable<E>,Predicate<? super E>)long	3	0	4	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	duplicateList	(Iterable<E>)List<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	duplicateSequencedSet	(Iterable<E>)Set<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	duplicateSet	(Iterable<E>)Set<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	duplicateSet	(Iterable<E>,C)C	7	1	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	emptyIfNull	(Iterable<E>)Iterable<E>	2	0	1	true	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	emptyIterable	()Iterable<E>	2	0	0	true	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	emptyIteratorIfNull	(Iterable<E>)Iterator<E>	2	0	2	true	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	filteredIterable	(Iterable<E>,Predicate<? super E>)Iterable<E>	7	0	4	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	find	(Iterable<E>,Predicate<? super E>)E	2	0	2	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	first	(Iterable<T>)T	2	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	forEach	(Iterable<E>,Closure<? super E>)void	2	0	2	true	false	ITERATION_ADAPTER
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	forEachButLast	(Iterable<E>,Closure<? super E>)E	2	0	2	true	false	ITERATION_ADAPTER
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	frequency	(Iterable<E>,T)int	11	0	7	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	get	(Iterable<T>,int)T	6	0	4	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	indexOf	(Iterable<E>,Predicate<? super E>)int	2	0	2	true	false	LINEAR_SEARCH
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	isEmpty	(Iterable<?>)boolean	5	0	3	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	loopingIterable	(Iterable<E>)Iterable<E>	13	0	3	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	matchesAll	(Iterable<E>,Predicate<? super E>)boolean	2	0	2	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	matchesAny	(Iterable<E>,Predicate<? super E>)boolean	2	0	2	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	partition	(Iterable<? extends O>,Factory<R>,Predicate<? super O>[])List<R>	40	4	14	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	partition	(Iterable<? extends O>,Predicate<? super O>)List<List<O>>	5	0	3	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	partition	(Iterable<? extends O>,Predicate<? super O>[])List<List<O>>	3	0	2	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	reversedIterable	(Iterable<E>)Iterable<E>	7	0	3	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	size	(Iterable<?>)int	8	0	3	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	skippingIterable	(Iterable<E>,long)Iterable<E>	9	0	3	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	sumSizesToInt	(Iterable<? extends Collection<E>>)int	2	0	1	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	sumToInt	(Iterable<C>,ToIntFunction<C>)int	14	1	2	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	toList	(Iterable<E>)List<E>	2	0	2	true	false	STREAM_STAGE
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	toString	(Iterable<E>)String	2	0	2	true	false	TEXT_FORMAT
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	toString	(Iterable<E>,Transformer<? super E, String>)String	3	0	3	true	false	TEXT_FORMAT
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	toString	(Iterable<E>,Transformer<? super E, String>,String,String,String)String	2	0	2	true	false	TEXT_FORMAT
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	transformedIterable	(Iterable<I>,Transformer<? super I, ? extends O>)Iterable<O>	7	0	4	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	uniqueIterable	(Iterable<E>)Iterable<E>	6	0	2	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	unmodifiableIterable	(Iterable<E>)Iterable<E>	6	0	1	true	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	zippingIterable	(Iterable<? extends E>,Iterable<? extends E>)Iterable<E>	7	0	5	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/IterableUtils.java	IterableUtils	zippingIterable	(Iterable<? extends E>,Iterable<? extends E>[])Iterable<E>	14	1	5	true	true	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/iterators/EmptyIterator.java	EmptyIterator	emptyIterator	()Iterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/iterators/EmptyIterator.java	EmptyIterator	resettableEmptyIterator	()ResettableIterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/iterators/EmptyListIterator.java	EmptyListIterator	emptyListIterator	()ListIterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/iterators/EmptyListIterator.java	EmptyListIterator	resettableEmptyListIterator	()ResettableListIterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/iterators/EmptyMapIterator.java	EmptyMapIterator	emptyMapIterator	()MapIterator<K, V>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/iterators/EmptyOrderedIterator.java	EmptyOrderedIterator	emptyOrderedIterator	()OrderedIterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/iterators/EmptyOrderedMapIterator.java	EmptyOrderedMapIterator	emptyOrderedMapIterator	()OrderedMapIterator<K, V>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/iterators/ExtendedIterator.java	ExtendedIterator	create	(Iterator<T>)ExtendedIterator<T>	2	0	0	true	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/iterators/ExtendedIterator.java	ExtendedIterator	create	(Stream<T>)ExtendedIterator<T>	2	0	1	true	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/iterators/ExtendedIterator.java	ExtendedIterator	createNoRemove	(Iterator<T>)ExtendedIterator<T>	2	0	0	true	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/iterators/ExtendedIterator.java	ExtendedIterator	emptyIterator	()ExtendedIterator<?>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/iterators/ExtendedIterator.java	ExtendedIterator	flatten	(Iterator<Iterator<T>>)ExtendedIterator<T>	2	0	2	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/iterators/IteratorIterable.java	IteratorIterable	createTypesafeIterator	(Iterator<? extends E>)Iterator<E>	9	0	3	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/iterators/PeekingIterator.java	PeekingIterator	peekingIterator	(Iterator<? extends E>)PeekingIterator<E>	7	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/iterators/PushbackIterator.java	PushbackIterator	pushbackIterator	(Iterator<? extends E>)PushbackIterator<E>	7	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/iterators/UnmodifiableIterator.java	UnmodifiableIterator	unmodifiableIterator	(Iterator<? extends E>)Iterator<E>	7	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/iterators/UnmodifiableIterator.java	UnmodifiableIterator	wrap	(T)UnmodifiableIterator<E, T>	2	0	0	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/iterators/UnmodifiableListIterator.java	UnmodifiableListIterator	umodifiableListIterator	(ListIterator<? extends E>)ListIterator<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/iterators/UnmodifiableListIterator.java	UnmodifiableListIterator	unmodifiableListIterator	(ListIterator<? extends E>)ListIterator<E>	7	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/iterators/UnmodifiableMapIterator.java	UnmodifiableMapIterator	unmodifiableMapIterator	(MapIterator<? extends K, ? extends V>)MapIterator<K, V>	7	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/iterators/UnmodifiableOrderedMapIterator.java	UnmodifiableOrderedMapIterator	unmodifiableOrderedMapIterator	(OrderedMapIterator<K, ? extends V>)OrderedMapIterator<K, V>	7	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	addAll	(Iterator<? extends E>,C)C	6	1	4	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	arrayIterator	(E[])ResettableIterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	arrayIterator	(E[],int)ResettableIterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	arrayIterator	(E[],int,int)ResettableIterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	arrayIterator	(Object)ResettableIterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	arrayIterator	(Object,int)ResettableIterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	arrayIterator	(Object,int,int)ResettableIterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	arrayListIterator	(E[])ResettableListIterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	arrayListIterator	(E[],int)ResettableListIterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	arrayListIterator	(E[],int,int)ResettableListIterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	arrayListIterator	(Object)ResettableListIterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	arrayListIterator	(Object,int)ResettableListIterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	arrayListIterator	(Object,int,int)ResettableListIterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	asEnumeration	(Iterator<? extends E>)Enumeration<E>	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	asIterable	(Iterator<? extends E>)Iterable<E>	3	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	asIterator	(Enumeration<? extends E>)Iterator<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	asIterator	(Enumeration<? extends E>,Collection<? super E>)Iterator<E>	2	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	asMultipleUseIterable	(Iterator<? extends E>)Iterable<E>	3	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	boundedIterator	(Iterator<? extends E>,long)BoundedIterator<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	boundedIterator	(Iterator<? extends E>,long,long)BoundedIterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	chainedIterator	(Collection<? extends Iterator<? extends E>>)Iterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	chainedIterator	(Iterator<? extends E>[])Iterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	chainedIterator	(Iterator<? extends E>,Iterator<? extends E>)Iterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	chainedIterator	(Iterator<? extends Iterator<? extends E>>)Iterator<E>	6	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	collatedIterator	(Comparator<? super E>,Collection<Iterator<? extends E>>)Iterator<E>	3	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	collatedIterator	(Comparator<? super E>,Iterator<? extends E>[])Iterator<E>	3	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	collatedIterator	(Comparator<? super E>,Iterator<? extends E>,Iterator<? extends E>)Iterator<E>	3	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	contains	(Iterator<E>,Object)boolean	2	0	2	true	false	LINEAR_SEARCH
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	emptyIterator	()ResettableIterator<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	emptyListIterator	()ResettableListIterator<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	emptyMapIterator	()MapIterator<K, V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	emptyOrderedIterator	()OrderedIterator<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	emptyOrderedMapIterator	()OrderedMapIterator<K, V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	filteredIterator	(Iterator<? extends E>,Predicate<? super E>)Iterator<E>	4	0	2	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	filteredListIterator	(ListIterator<? extends E>,Predicate<? super E>)ListIterator<E>	4	0	2	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	find	(Iterator<E>,Predicate<? super E>)E	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	find	(Iterator<E>,Predicate<? super E>,E)E	11	1	4	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	first	(Iterator<E>)E	2	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	forEach	(Iterator<E>,Closure<? super E>)void	7	1	4	true	false	ITERATION_ADAPTER
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	forEachButLast	(Iterator<E>,Closure<? super E>)E	12	1	5	true	false	ITERATION_ADAPTER
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	get	(Iterator<E>,int)E	5	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	get	(Iterator<E>,int,IntFunction<E>)E	11	1	5	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	getIterator	(Object)Iterator<?>	43	0	13	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	indexOf	(Iterator<E>,Predicate<? super E>)int	13	1	4	true	false	LINEAR_SEARCH
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	isEmpty	(Iterator<?>)boolean	2	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	loopingIterator	(Collection<? extends E>)ResettableIterator<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	loopingListIterator	(List<E>)ResettableListIterator<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	matchesAll	(Iterator<E>,Predicate<? super E>)boolean	11	1	4	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	matchesAny	(Iterator<E>,Predicate<? super E>)boolean	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	nodeListIterator	(Node)NodeListIterator	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	nodeListIterator	(NodeList)NodeListIterator	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	objectGraphIterator	(E,Transformer<? super E, ? extends E>)Iterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	peekingIterator	(Iterator<? extends E>)Iterator<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	pushbackIterator	(Iterator<? extends E>)Iterator<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	singletonIterator	(E)ResettableIterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	singletonListIterator	(E)ListIterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	size	(Iterator<?>)int	9	1	2	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	skippingIterator	(Iterator<E>,long)SkippingIterator<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	stream	(Iterable<E>)Stream<E>	2	0	3	true	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	stream	(Iterator<E>)Stream<E>	2	0	3	true	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	toArray	(Iterator<?>)Object[]	4	0	3	true	false	CONVERSION
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	toArray	(Iterator<? extends E>,Class<E>)E[]	6	0	6	true	false	CONVERSION
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	toList	(Iterator<? extends E>)List<E>	2	0	1	true	false	STREAM_STAGE
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	toList	(Iterator<? extends E>,int)List<E>	5	0	1	true	false	STREAM_STAGE
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	toListIterator	(Iterator<? extends E>)ListIterator<E>	3	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	toSet	(Iterator<? extends E>)Set<E>	2	0	1	true	false	STREAM_STAGE
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	toSet	(Iterator<? extends E>,int)Set<E>	5	0	1	true	false	STREAM_STAGE
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	toString	(Iterator<E>)String	2	0	2	true	false	TEXT_FORMAT
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	toString	(Iterator<E>,Transformer<? super E, String>)String	2	0	1	true	false	TEXT_FORMAT
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	toString	(Iterator<E>,Transformer<? super E, String>,String,String,String)String	18	1	16	true	false	TEXT_FORMAT
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	transformedIterator	(Iterator<? extends I>,Transformer<? super I, ? extends O>)Iterator<O>	4	0	2	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	unmodifiableIterator	(Iterator<E>)Iterator<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	unmodifiableListIterator	(ListIterator<E>)ListIterator<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	unmodifiableMapIterator	(MapIterator<K, V>)MapIterator<K, V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	zippingIterator	(Iterator<? extends E>[])ZippingIterator<E>	2	0	0	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	zippingIterator	(Iterator<? extends E>,Iterator<? extends E>)ZippingIterator<E>	2	0	0	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/IteratorUtils.java	IteratorUtils	zippingIterator	(Iterator<? extends E>,Iterator<? extends E>,Iterator<? extends E>)ZippingIterator<E>	2	0	0	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/keyvalue/MultiKey.java	MultiKey	getClass	(T)Class<? extends T>	2	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/keyvalue/MultiKey.java	MultiKey	getComponentType	(T[])Class<? extends T>	16	1	2	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/keyvalue/MultiKey.java	MultiKey	newArray	(T,T)T[]	5	0	2	true	true	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/keyvalue/MultiKey.java	MultiKey	newArray	(T,T,T)T[]	6	0	2	true	true	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/keyvalue/MultiKey.java	MultiKey	newArray	(T,T,T,T)T[]	7	0	2	true	true	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/keyvalue/MultiKey.java	MultiKey	newArray	(T,T,T,T,T)T[]	8	0	2	true	true	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	defaultIfNull	(List<T>,List<T>)List<T>	2	0	0	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	emptyIfNull	(List<T>)List<T>	2	0	1	true	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	fixedSizeList	(List<E>)List<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	getFirst	(List<T>)T	2	0	2	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	getLast	(List<T>)T	2	0	3	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	hashCodeForList	(Collection<?>)int	10	1	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	indexOf	(List<E>,Predicate<E>)int	12	1	3	true	false	LINEAR_SEARCH
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	intersection	(List<? extends E>,List<? extends E>)List<E>	17	1	5	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	isEqualList	(Collection<?>,Collection<?>)boolean	17	1	11	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	lazyList	(List<E>,Factory<? extends E>)List<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	lazyList	(List<E>,Transformer<Integer, ? extends E>)List<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	longestCommonSubsequence	(CharSequence,CharSequence)String	10	1	5	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	longestCommonSubsequence	(List<E>,List<E>)List<E>	2	0	2	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	longestCommonSubsequence	(List<E>,List<E>,Equator<? super E>)List<E>	9	0	6	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	partition	(List<T>,int)List<List<T>>	6	0	1	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	predicatedList	(List<E>,Predicate<E>)List<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	removeAll	(Collection<E>,Collection<?>)List<E>	11	1	4	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	retainAll	(Collection<E>,Collection<?>)List<E>	9	1	5	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	select	(Collection<? extends E>,Predicate<? super E>)List<E>	2	0	2	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	selectRejected	(Collection<? extends E>,Predicate<? super E>)List<E>	2	0	2	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	subtract	(List<E>,List<? extends E>)List<E>	10	1	2	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	sum	(List<? extends E>,List<? extends E>)List<E>	2	0	3	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	synchronizedList	(List<E>)List<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	transformedList	(List<E>,Transformer<? super E, ? extends E>)List<E>	2	0	1	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	union	(List<? extends E>,List<? extends E>)List<E>	5	0	4	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/ListUtils.java	ListUtils	unmodifiableList	(List<? extends E>)List<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/list/FixedSizeList.java	FixedSizeList	fixedSizeList	(List<E>)FixedSizeList<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/list/FixedSizeList.java	FixedSizeList	unsupportedOperationException	()UnsupportedOperationException	2	0	0	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/list/GrowthList.java	GrowthList	growthList	(List<E>)GrowthList<E>	2	0	0	true	false	ARRAY_GROW_COPY
+commons-collections	com/m3/collections/apache/list/LazyList.java	LazyList	lazyList	(List<E>,Factory<? extends E>)LazyList<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/list/LazyList.java	LazyList	lazyList	(List<E>,Transformer<Integer, ? extends E>)LazyList<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/list/PredicatedList.java	PredicatedList	predicatedList	(List<T>,Predicate<? super T>)PredicatedList<T>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/list/SetUniqueList.java	SetUniqueList	setUniqueList	(List<E>)SetUniqueList<E>	10	0	4	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/list/TransformedList.java	TransformedList	transformedList	(List<E>,Transformer<? super E, ? extends E>)TransformedList<E>	11	1	6	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/list/TransformedList.java	TransformedList	transformingList	(List<E>,Transformer<? super E, ? extends E>)TransformedList<E>	2	0	0	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/list/TreeList.java	TreeList	checkInterval	(int,int,int,int)void	4	0	0	true	false	PRECONDITION
+commons-collections	com/m3/collections/apache/list/UnmodifiableList.java	UnmodifiableList	unmodifiableList	(List<? extends E>)List<E>	6	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	applyDefaultFunction	(Map<? super K, ?>,K,BiFunction<Map<? super K, ?>, K, R>,Function<K, R>)R	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	applyDefaultFunction	(Map<? super K, ?>,K,BiFunction<Map<? super K, ?>, K, R>,Function<K, R>,R)R	6	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	applyDefaultValue	(Map<? super K, ?>,K,BiFunction<Map<? super K, ?>, K, R>,R)R	3	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	calculateHashMapCapacity	(int)int	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	debugPrint	(PrintStream,Object,Map<?, ?>)void	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	emptyIfNull	(Map<K, V>)Map<K, V>	2	0	1	true	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	fixedSizeMap	(Map<K, V>)IterableMap<K, V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	fixedSizeSortedMap	(SortedMap<K, V>)SortedMap<K, V>	2	0	1	true	false	SORT
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getBoolean	(Map<? super K, ?>,K)Boolean	17	0	3	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getBoolean	(Map<? super K, ?>,K,Boolean)Boolean	2	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getBoolean	(Map<? super K, ?>,K,Function<K, Boolean>)Boolean	2	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getBooleanValue	(Map<? super K, ?>,K)boolean	2	0	2	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getBooleanValue	(Map<? super K, ?>,K,boolean)boolean	2	0	2	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getBooleanValue	(Map<? super K, ?>,K,Function<K, Boolean>)boolean	2	0	2	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getByte	(Map<? super K, ?>,K)Byte	9	0	3	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getByte	(Map<? super K, ?>,K,Byte)Byte	2	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getByte	(Map<? super K, ?>,K,Function<K, Byte>)Byte	2	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getByteValue	(Map<? super K, ?>,K)byte	2	0	2	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getByteValue	(Map<? super K, ?>,K,byte)byte	2	0	2	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getByteValue	(Map<? super K, ?>,K,Function<K, Byte>)byte	2	0	2	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getDouble	(Map<? super K, ?>,K)Double	9	0	3	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getDouble	(Map<? super K, ?>,K,Double)Double	2	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getDouble	(Map<? super K, ?>,K,Function<K, Double>)Double	2	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getDoubleValue	(Map<? super K, ?>,K)double	2	0	2	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getDoubleValue	(Map<? super K, ?>,K,double)double	2	0	2	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getDoubleValue	(Map<? super K, ?>,K,Function<K, Double>)double	2	0	2	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getFloat	(Map<? super K, ?>,K)Float	9	0	3	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getFloat	(Map<? super K, ?>,K,Float)Float	2	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getFloat	(Map<? super K, ?>,K,Function<K, Float>)Float	2	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getFloatValue	(Map<? super K, ?>,K)float	2	0	2	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getFloatValue	(Map<? super K, ?>,K,float)float	2	0	2	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getFloatValue	(Map<? super K, ?>,K,Function<K, Float>)float	2	0	2	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getInteger	(Map<? super K, ?>,K)Integer	9	0	3	true	false	BYTE_FIELD_CODEC
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getInteger	(Map<? super K, ?>,K,Function<K, Integer>)Integer	2	0	1	true	false	BYTE_FIELD_CODEC
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getInteger	(Map<? super K, ?>,K,Integer)Integer	2	0	1	true	false	BYTE_FIELD_CODEC
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getIntValue	(Map<? super K, ?>,K)int	2	0	2	true	false	BYTE_FIELD_CODEC
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getIntValue	(Map<? super K, ?>,K,Function<K, Integer>)int	2	0	2	true	false	BYTE_FIELD_CODEC
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getIntValue	(Map<? super K, ?>,K,int)int	2	0	2	true	false	BYTE_FIELD_CODEC
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getLong	(Map<? super K, ?>,K)Long	9	0	3	true	false	BYTE_FIELD_CODEC
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getLong	(Map<? super K, ?>,K,Function<K, Long>)Long	2	0	1	true	false	BYTE_FIELD_CODEC
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getLong	(Map<? super K, ?>,K,Long)Long	2	0	1	true	false	BYTE_FIELD_CODEC
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getLongValue	(Map<? super K, ?>,K)long	2	0	2	true	false	BYTE_FIELD_CODEC
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getLongValue	(Map<? super K, ?>,K,Function<K, Long>)long	2	0	2	true	false	BYTE_FIELD_CODEC
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getLongValue	(Map<? super K, ?>,K,long)long	2	0	2	true	false	BYTE_FIELD_CODEC
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getMap	(Map<? super K, ?>,K)Map<?, ?>	8	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getMap	(Map<? super K, ?>,K,Function<K, Map<?, ?>>)Map<?, ?>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getMap	(Map<? super K, ?>,K,Map<?, ?>)Map<?, ?>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getNumber	(Map<? super K, ?>,K)Number	18	0	3	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getNumber	(Map<? super K, ?>,K,Function<K, Number>)Number	2	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getNumber	(Map<? super K, ?>,K,Number)Number	2	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getObject	(Map<? super K, V>,K)V	5	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getObject	(Map<K, V>,K,V)V	8	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getShort	(Map<? super K, ?>,K)Short	9	0	3	true	false	BYTE_FIELD_CODEC
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getShort	(Map<? super K, ?>,K,Function<K, Short>)Short	2	0	1	true	false	BYTE_FIELD_CODEC
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getShort	(Map<? super K, ?>,K,Short)Short	2	0	1	true	false	BYTE_FIELD_CODEC
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getShortValue	(Map<? super K, ?>,K)short	2	0	2	true	false	BYTE_FIELD_CODEC
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getShortValue	(Map<? super K, ?>,K,Function<K, Short>)short	2	0	2	true	false	BYTE_FIELD_CODEC
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getShortValue	(Map<? super K, ?>,K,short)short	2	0	2	true	false	BYTE_FIELD_CODEC
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getString	(Map<? super K, ?>,K)String	8	0	2	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getString	(Map<? super K, ?>,K,Function<K, String>)String	2	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	getString	(Map<? super K, ?>,K,String)String	2	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	invertMap	(Map<K, V>)Map<V, K>	8	1	7	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	isEmpty	(Map<?, ?>)boolean	2	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	isNotEmpty	(Map<?, ?>)boolean	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	iterableMap	(Map<K, V>)IterableMap<K, V>	4	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	iterableSortedMap	(SortedMap<K, V>)IterableSortedMap<K, V>	4	0	1	true	false	SORT
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	lazyMap	(Map<K, V>,Factory<? extends V>)IterableMap<K, V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	lazyMap	(Map<K, V>,Transformer<? super K, ? extends V>)IterableMap<K, V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	lazySortedMap	(SortedMap<K, V>,Factory<? extends V>)SortedMap<K, V>	2	0	1	true	false	SORT
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	lazySortedMap	(SortedMap<K, V>,Transformer<? super K, ? extends V>)SortedMap<K, V>	2	0	1	true	false	SORT
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	multiValueMap	(Map<K, ? super Collection<V>>)MultiValueMap<K, V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	multiValueMap	(Map<K, C>,Class<C>)MultiValueMap<K, V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	multiValueMap	(Map<K, C>,Factory<C>)MultiValueMap<K, V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	orderedMap	(Map<K, V>)OrderedMap<K, V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	populateMap	(Map<K, V>,Iterable<? extends E>,Transformer<E, K>,Transformer<E, V>)void	5	1	3	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	populateMap	(Map<K, V>,Iterable<? extends V>,Transformer<V, K>)void	2	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	populateMap	(MultiMap<K, V>,Iterable<? extends E>,Transformer<E, K>,Transformer<E, V>)void	5	1	3	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	populateMap	(MultiMap<K, V>,Iterable<? extends V>,Transformer<V, K>)void	2	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	predicatedMap	(Map<K, V>,Predicate<? super K>,Predicate<? super V>)IterableMap<K, V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	predicatedSortedMap	(SortedMap<K, V>,Predicate<? super K>,Predicate<? super V>)SortedMap<K, V>	2	0	1	true	false	SORT
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	printIndent	(PrintStream,int)void	6	1	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	putAll	(Map<K, V>,Object[])Map<K, V>	37	4	9	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	safeAddToMap	(Map<? super K, Object>,K,Object)void	3	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	size	(Map<?, ?>)int	2	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	synchronizedMap	(Map<K, V>)Map<K, V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	synchronizedSortedMap	(SortedMap<K, V>)SortedMap<K, V>	2	0	1	true	false	SORT
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	toMap	(ResourceBundle)Map<String, Object>	10	1	6	true	false	STREAM_STAGE
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	toProperties	(Map<K, V>)Properties	12	1	4	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	transformedMap	(Map<K, V>,Transformer<? super K, ? extends K>,Transformer<? super V, ? extends V>)IterableMap<K, V>	2	0	1	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	transformedSortedMap	(SortedMap<K, V>,Transformer<? super K, ? extends K>,Transformer<? super V, ? extends V>)SortedMap<K, V>	2	0	1	true	false	SORT
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	unmodifiableMap	(Map<? extends K, ? extends V>)Map<K, V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	unmodifiableSortedMap	(SortedMap<K, ? extends V>)SortedMap<K, V>	2	0	1	true	false	SORT
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	verbosePrint	(PrintStream,Object,Map<?, ?>)void	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/MapUtils.java	MapUtils	verbosePrintInternal	(PrintStream,Object,Map<?, ?>,Deque<Map<?, ?>>,boolean)void	47	1	38	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/map/AbstractReferenceMap.java	AbstractReferenceMap.ReferenceStrength	resolve	(int)ReferenceStrength	10	0	0	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/map/ConcurrentReferenceHashMap.java	ConcurrentReferenceHashMap.HashEntry	newArray	(int)HashEntry<K, V>[]	2	0	0	true	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/map/ConcurrentReferenceHashMap.java	ConcurrentReferenceHashMap.Segment	newArray	(int)Segment<K, V>[]	2	0	0	true	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/map/ConcurrentReferenceHashMap.java	ConcurrentReferenceHashMap.SimpleEntry	eq	(Object,Object)boolean	2	0	1	true	false	EQUALITY_HASH_CONTRACT
+commons-collections	com/m3/collections/apache/map/ConcurrentReferenceHashMap.java	ConcurrentReferenceHashMap	builder	()Builder<K, V>	2	0	0	true	false	REGISTRY_LOOKUP
+commons-collections	com/m3/collections/apache/map/ConcurrentReferenceHashMap.java	ConcurrentReferenceHashMap	hash	(int)int	7	0	0	true	false	HASH_SPREAD
+commons-collections	com/m3/collections/apache/map/DefaultedMap.java	DefaultedMap	defaultedMap	(Map<K, V>,Factory<? extends V>)DefaultedMap<K, V>	2	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/map/DefaultedMap.java	DefaultedMap	defaultedMap	(Map<K, V>,Transformer<? super K, ? extends V>)Map<K, V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/map/DefaultedMap.java	DefaultedMap	defaultedMap	(Map<K, V>,V)DefaultedMap<K, V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/map/FixedSizeMap.java	FixedSizeMap	fixedSizeMap	(Map<K, V>)FixedSizeMap<K, V>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/map/FixedSizeSortedMap.java	FixedSizeSortedMap	fixedSizeSortedMap	(SortedMap<K, V>)FixedSizeSortedMap<K, V>	2	0	0	true	false	SORT
+commons-collections	com/m3/collections/apache/map/LazyMap.java	LazyMap	lazyMap	(Map<K, V>,Factory<? extends V>)LazyMap<K, V>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/map/LazyMap.java	LazyMap	lazyMap	(Map<K, V>,Transformer<? super K, ? extends V>)LazyMap<K, V>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/map/LazySortedMap.java	LazySortedMap	lazySortedMap	(SortedMap<K, V>,Factory<? extends V>)LazySortedMap<K, V>	2	0	0	true	false	SORT
+commons-collections	com/m3/collections/apache/map/LazySortedMap.java	LazySortedMap	lazySortedMap	(SortedMap<K, V>,Transformer<? super K, ? extends V>)LazySortedMap<K, V>	2	0	0	true	false	SORT
+commons-collections	com/m3/collections/apache/map/ListOrderedMap.java	ListOrderedMap	listOrderedMap	(Map<K, V>)ListOrderedMap<K, V>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/map/MultiKeyMap.java	MultiKeyMap	multiKeyMap	(AbstractHashedMap<MultiKey<? extends K>, V>)MultiKeyMap<K, V>	6	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/map/MultiValueMap.java	MultiValueMap	multiValueMap	(Map<K, ? super C>,Class<C>)MultiValueMap<K, V>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/map/MultiValueMap.java	MultiValueMap	multiValueMap	(Map<K, ? super C>,Factory<C>)MultiValueMap<K, V>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/map/MultiValueMap.java	MultiValueMap	multiValueMap	(Map<K, ? super Collection<V>>)MultiValueMap<K, V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/map/PassiveExpiringMap.java	PassiveExpiringMap	validateAndConvertToMillis	(long,TimeUnit)long	3	0	2	true	false	PRECONDITION
+commons-collections	com/m3/collections/apache/map/PredicatedMap.java	PredicatedMap	predicatedMap	(Map<K, V>,Predicate<? super K>,Predicate<? super V>)PredicatedMap<K, V>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/map/PredicatedSortedMap.java	PredicatedSortedMap	predicatedSortedMap	(SortedMap<K, V>,Predicate<? super K>,Predicate<? super V>)PredicatedSortedMap<K, V>	2	0	0	true	false	SORT
+commons-collections	com/m3/collections/apache/map/TransformedMap.java	TransformedMap	transformedMap	(Map<K, V>,Transformer<? super K, ? extends K>,Transformer<? super V, ? extends V>)TransformedMap<K, V>	8	0	5	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/map/TransformedMap.java	TransformedMap	transformingMap	(Map<K, V>,Transformer<? super K, ? extends K>,Transformer<? super V, ? extends V>)TransformedMap<K, V>	2	0	0	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/map/TransformedSortedMap.java	TransformedSortedMap	transformedSortedMap	(SortedMap<K, V>,Transformer<? super K, ? extends K>,Transformer<? super V, ? extends V>)TransformedSortedMap<K, V>	8	0	5	true	false	SORT
+commons-collections	com/m3/collections/apache/map/TransformedSortedMap.java	TransformedSortedMap	transformingSortedMap	(SortedMap<K, V>,Transformer<? super K, ? extends K>,Transformer<? super V, ? extends V>)TransformedSortedMap<K, V>	2	0	0	true	false	SORT
+commons-collections	com/m3/collections/apache/map/UnmodifiableEntrySet.java	UnmodifiableEntrySet	unmodifiableEntrySet	(Set<Map.Entry<K, V>>)Set<Map.Entry<K, V>>	5	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/map/UnmodifiableMap.java	UnmodifiableMap	unmodifiableMap	(Map<? extends K, ? extends V>)Map<K, V>	6	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/map/UnmodifiableOrderedMap.java	UnmodifiableOrderedMap	unmodifiableOrderedMap	(OrderedMap<? extends K, ? extends V>)OrderedMap<K, V>	6	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/map/UnmodifiableSortedMap.java	UnmodifiableSortedMap	unmodifiableSortedMap	(SortedMap<K, ? extends V>)SortedMap<K, V>	6	0	0	true	false	SORT
+commons-collections	com/m3/collections/apache/MultiMapUtils.java	MultiMapUtils	emptyIfNull	(MultiValuedMap<K, V>)MultiValuedMap<K, V>	2	0	0	true	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/MultiMapUtils.java	MultiMapUtils	emptyMultiValuedMap	()MultiValuedMap<K, V>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MultiMapUtils.java	MultiMapUtils	getCollection	(MultiValuedMap<K, V>,K)Collection<V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MultiMapUtils.java	MultiMapUtils	getValuesAsBag	(MultiValuedMap<K, V>,K)Bag<V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MultiMapUtils.java	MultiMapUtils	getValuesAsList	(MultiValuedMap<K, V>,K)List<V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MultiMapUtils.java	MultiMapUtils	getValuesAsMultiSet	(MultiValuedMap<K, V>,K)MultiSet<V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MultiMapUtils.java	MultiMapUtils	getValuesAsSet	(MultiValuedMap<K, V>,K)Set<V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MultiMapUtils.java	MultiMapUtils	invert	(MultiValuedMap<? extends V, ? extends K>,M)M	4	0	5	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/MultiMapUtils.java	MultiMapUtils	isEmpty	(MultiValuedMap<?, ?>)boolean	2	0	1	true	false	COLLECTION_ACCESSOR
+commons-collections	com/m3/collections/apache/MultiMapUtils.java	MultiMapUtils	newListValuedHashMap	()ListValuedMap<K, V>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MultiMapUtils.java	MultiMapUtils	newSetValuedHashMap	()SetValuedMap<K, V>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MultiMapUtils.java	MultiMapUtils	transformedMultiValuedMap	(MultiValuedMap<K, V>,Transformer<? super K, ? extends K>,Transformer<? super V, ? extends V>)MultiValuedMap<K, V>	2	0	1	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/MultiMapUtils.java	MultiMapUtils	unmodifiableMultiValuedMap	(MultiValuedMap<? extends K, ? extends V>)MultiValuedMap<K, V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/multimap/TransformedMultiValuedMap.java	TransformedMultiValuedMap	transformedMap	(MultiValuedMap<K, V>,Transformer<? super K, ? extends K>,Transformer<? super V, ? extends V>)TransformedMultiValuedMap<K, V>	8	0	3	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/multimap/TransformedMultiValuedMap.java	TransformedMultiValuedMap	transformingMap	(MultiValuedMap<K, V>,Transformer<? super K, ? extends K>,Transformer<? super V, ? extends V>)TransformedMultiValuedMap<K, V>	2	0	0	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/multimap/UnmodifiableMultiValuedMap.java	UnmodifiableMultiValuedMap	unmodifiableMultiValuedMap	(MultiValuedMap<? extends K, ? extends V>)UnmodifiableMultiValuedMap<K, V>	5	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MultiSetUtils.java	MultiSetUtils	containsOccurrences	(MultiSet<?>,MultiSet<?>)boolean	10	1	6	true	false	LINEAR_SEARCH
+commons-collections	com/m3/collections/apache/MultiSetUtils.java	MultiSetUtils	emptyMultiSet	()MultiSet<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MultiSetUtils.java	MultiSetUtils	emptySortedMultiSet	()SortedMultiSet<E>	2	0	0	true	false	SORT
+commons-collections	com/m3/collections/apache/MultiSetUtils.java	MultiSetUtils	predicatedMultiSet	(MultiSet<E>,Predicate<? super E>)MultiSet<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MultiSetUtils.java	MultiSetUtils	predicatedSortedMultiSet	(SortedMultiSet<E>,Predicate<? super E>)SortedMultiSet<E>	2	0	1	true	false	SORT
+commons-collections	com/m3/collections/apache/MultiSetUtils.java	MultiSetUtils	removeOccurrences	(MultiSet<?>,MultiSet<?>)boolean	16	1	8	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/MultiSetUtils.java	MultiSetUtils	retainOccurrences	(MultiSet<E>,MultiSet<?>)boolean	13	1	6	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/MultiSetUtils.java	MultiSetUtils	synchronizedMultiSet	(MultiSet<E>)MultiSet<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MultiSetUtils.java	MultiSetUtils	synchronizedSortedMultiSet	(SortedMultiSet<E>)SortedMultiSet<E>	2	0	1	true	false	SORT
+commons-collections	com/m3/collections/apache/MultiSetUtils.java	MultiSetUtils	transformingMultiSet	(MultiSet<E>,Transformer<? super E, ? extends E>)MultiSet<E>	2	0	1	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/MultiSetUtils.java	MultiSetUtils	transformingSortedMultiSet	(SortedMultiSet<E>,Transformer<? super E, ? extends E>)SortedMultiSet<E>	2	0	1	true	false	SORT
+commons-collections	com/m3/collections/apache/MultiSetUtils.java	MultiSetUtils	unmodifiableMultiSet	(MultiSet<? extends E>)MultiSet<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/MultiSetUtils.java	MultiSetUtils	unmodifiableSortedMultiSet	(SortedMultiSet<? extends E>)SortedMultiSet<E>	2	0	1	true	false	SORT
+commons-collections	com/m3/collections/apache/multiset/PredicatedMultiSet.java	PredicatedMultiSet	predicatedMultiSet	(MultiSet<E>,Predicate<? super E>)PredicatedMultiSet<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/multiset/PredicatedSortedMultiSet.java	PredicatedSortedMultiSet	predicatedSortedMultiSet	(SortedMultiSet<E>,Predicate<? super E>)PredicatedSortedMultiSet<E>	2	0	0	true	false	SORT
+commons-collections	com/m3/collections/apache/multiset/SynchronizedMultiSet.java	SynchronizedMultiSet	synchronizedMultiSet	(MultiSet<E>)SynchronizedMultiSet<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/multiset/SynchronizedSortedMultiSet.java	SynchronizedSortedMultiSet	synchronizedSortedMultiSet	(SortedMultiSet<E>)SynchronizedSortedMultiSet<E>	2	0	0	true	false	SORT
+commons-collections	com/m3/collections/apache/multiset/TransformedMultiSet.java	TransformedMultiSet	transformedMultiSet	(MultiSet<E>,Transformer<? super E, ? extends E>)TransformedMultiSet<E>	11	1	6	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/multiset/TransformedMultiSet.java	TransformedMultiSet	transformingMultiSet	(MultiSet<E>,Transformer<? super E, ? extends E>)TransformedMultiSet<E>	2	0	0	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/multiset/TransformedSortedMultiSet.java	TransformedSortedMultiSet	transformedSortedMultiSet	(SortedMultiSet<E>,Transformer<? super E, ? extends E>)TransformedSortedMultiSet<E>	11	1	6	true	false	SORT
+commons-collections	com/m3/collections/apache/multiset/TransformedSortedMultiSet.java	TransformedSortedMultiSet	transformingSortedMultiSet	(SortedMultiSet<E>,Transformer<? super E, ? extends E>)TransformedSortedMultiSet<E>	2	0	0	true	false	SORT
+commons-collections	com/m3/collections/apache/multiset/UnmodifiableMultiSet.java	UnmodifiableMultiSet	unmodifiableMultiSet	(MultiSet<? extends E>)MultiSet<E>	6	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/multiset/UnmodifiableSortedMultiSet.java	UnmodifiableSortedMultiSet	unmodifiableSortedMultiSet	(SortedMultiSet<? extends E>)SortedMultiSet<E>	6	0	0	true	false	SORT
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	allPredicate	(Collection<? extends Predicate<? super T>>)Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	allPredicate	(Predicate<? super T>[])Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	andPredicate	(Predicate<? super T>,Predicate<? super T>)Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	anyPredicate	(Collection<? extends Predicate<? super T>>)Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	anyPredicate	(Predicate<? super T>[])Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	asPredicate	(Transformer<? super T, Boolean>)Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	eitherPredicate	(Predicate<? super T>,Predicate<? super T>)Predicate<T>	3	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	equalPredicate	(T)Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	exceptionPredicate	()Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	falsePredicate	()Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	identityPredicate	(T)Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	instanceofPredicate	(Class<?>)Predicate<Object>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	invokerPredicate	(String)Predicate<T>	2	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	invokerPredicate	(String,Class<?>[],Object[])Predicate<T>	2	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	neitherPredicate	(Predicate<? super T>,Predicate<? super T>)Predicate<T>	3	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	nonePredicate	(Collection<? extends Predicate<? super T>>)Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	nonePredicate	(Predicate<? super T>[])Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	notNullPredicate	()Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	notPredicate	(Predicate<? super T>)Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	nullIsExceptionPredicate	(Predicate<? super T>)Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	nullIsFalsePredicate	(Predicate<? super T>)Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	nullIsTruePredicate	(Predicate<? super T>)Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	nullPredicate	()Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	onePredicate	(Collection<? extends Predicate<? super T>>)Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	onePredicate	(Predicate<? super T>[])Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	orPredicate	(Predicate<? super T>,Predicate<? super T>)Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	transformedPredicate	(Transformer<? super T, ? extends T>,Predicate<? super T>)Predicate<T>	2	0	1	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	truePredicate	()Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/PredicateUtils.java	PredicateUtils	uniquePredicate	()Predicate<T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/properties/AbstractPropertiesFactory.java	AbstractPropertiesFactory.PropertyFormat	toPropertyFormat	(String)PropertyFormat	2	0	2	true	false	TEXT_FORMAT
+commons-collections	com/m3/collections/apache/QueueUtils.java	QueueUtils	emptyQueue	()Queue<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/QueueUtils.java	QueueUtils	predicatedQueue	(Queue<E>,Predicate<? super E>)Queue<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/QueueUtils.java	QueueUtils	synchronizedQueue	(Queue<E>)Queue<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/QueueUtils.java	QueueUtils	transformingQueue	(Queue<E>,Transformer<? super E, ? extends E>)Queue<E>	2	0	1	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/QueueUtils.java	QueueUtils	unmodifiableQueue	(Queue<? extends E>)Queue<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/queue/PredicatedQueue.java	PredicatedQueue	predicatedQueue	(Queue<E>,Predicate<? super E>)PredicatedQueue<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/queue/SynchronizedQueue.java	SynchronizedQueue	synchronizedQueue	(Queue<E>)SynchronizedQueue<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/queue/TransformedQueue.java	TransformedQueue	transformedQueue	(Queue<E>,Transformer<? super E, ? extends E>)TransformedQueue<E>	11	1	6	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/queue/TransformedQueue.java	TransformedQueue	transformingQueue	(Queue<E>,Transformer<? super E, ? extends E>)TransformedQueue<E>	2	0	0	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/queue/UnmodifiableQueue.java	UnmodifiableQueue	unmodifiableQueue	(Queue<? extends E>)Queue<E>	6	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	difference	(Set<? extends E>,Set<? extends E>)SetView<E>	12	0	7	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	disjunction	(Set<? extends E>,Set<? extends E>)SetView<E>	16	0	13	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	emptyIfNull	(Set<T>)Set<T>	2	0	1	true	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	emptySet	()Set<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	emptySortedSet	()SortedSet<E>	2	0	0	true	false	SORT
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	hashCodeForSet	(Collection<T>)int	12	1	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	hashSet	(E[])HashSet<E>	5	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	intersection	(Set<? extends E>,Set<? extends E>)SetView<E>	10	0	6	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	isEqualSet	(Collection<?>,Collection<?>)boolean	8	0	3	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	newIdentityHashSet	()Set<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	orderedSet	(Set<E>)Set<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	predicatedNavigableSet	(NavigableSet<E>,Predicate<? super E>)SortedSet<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	predicatedSet	(Set<E>,Predicate<? super E>)Set<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	predicatedSortedSet	(SortedSet<E>,Predicate<? super E>)SortedSet<E>	2	0	1	true	false	SORT
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	synchronizedSet	(Set<E>)Set<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	synchronizedSortedSet	(SortedSet<E>)SortedSet<E>	2	0	1	true	false	SORT
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	transformedNavigableSet	(NavigableSet<E>,Transformer<? super E, ? extends E>)SortedSet<E>	2	0	1	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	transformedSet	(Set<E>,Transformer<? super E, ? extends E>)Set<E>	2	0	1	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	transformedSortedSet	(SortedSet<E>,Transformer<? super E, ? extends E>)SortedSet<E>	2	0	1	true	false	SORT
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	union	(Set<? extends E>,Set<? extends E>)SetView<E>	15	0	12	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	unmodifiableNavigableSet	(NavigableSet<E>)SortedSet<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	unmodifiableSet	(E[])Set<E>	5	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	unmodifiableSet	(Set<? extends E>)Set<E>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/SetUtils.java	SetUtils	unmodifiableSortedSet	(SortedSet<E>)SortedSet<E>	2	0	1	true	false	SORT
+commons-collections	com/m3/collections/apache/set/ListOrderedSet.java	ListOrderedSet	listOrderedSet	(List<E>)ListOrderedSet<E>	5	0	3	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/set/ListOrderedSet.java	ListOrderedSet	listOrderedSet	(Set<E>)ListOrderedSet<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/set/ListOrderedSet.java	ListOrderedSet	listOrderedSet	(Set<E>,List<E>)ListOrderedSet<E>	7	0	4	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/set/MapBackedSet.java	MapBackedSet	mapBackedSet	(Map<E, ? super V>)MapBackedSet<E, V>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/set/MapBackedSet.java	MapBackedSet	mapBackedSet	(Map<E, ? super V>,V)MapBackedSet<E, V>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/set/PredicatedNavigableSet.java	PredicatedNavigableSet	predicatedNavigableSet	(NavigableSet<E>,Predicate<? super E>)PredicatedNavigableSet<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/set/PredicatedSet.java	PredicatedSet	predicatedSet	(Set<E>,Predicate<? super E>)PredicatedSet<E>	2	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/set/PredicatedSortedSet.java	PredicatedSortedSet	predicatedSortedSet	(SortedSet<E>,Predicate<? super E>)PredicatedSortedSet<E>	2	0	0	true	false	SORT
+commons-collections	com/m3/collections/apache/set/TransformedNavigableSet.java	TransformedNavigableSet	transformedNavigableSet	(NavigableSet<E>,Transformer<? super E, ? extends E>)TransformedNavigableSet<E>	11	1	6	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/set/TransformedNavigableSet.java	TransformedNavigableSet	transformingNavigableSet	(NavigableSet<E>,Transformer<? super E, ? extends E>)TransformedNavigableSet<E>	2	0	0	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/set/TransformedSet.java	TransformedSet	transformedSet	(Set<E>,Transformer<? super E, ? extends E>)Set<E>	11	1	6	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/set/TransformedSet.java	TransformedSet	transformingSet	(Set<E>,Transformer<? super E, ? extends E>)TransformedSet<E>	2	0	0	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/set/TransformedSortedSet.java	TransformedSortedSet	transformedSortedSet	(SortedSet<E>,Transformer<? super E, ? extends E>)TransformedSortedSet<E>	11	1	6	true	false	SORT
+commons-collections	com/m3/collections/apache/set/TransformedSortedSet.java	TransformedSortedSet	transformingSortedSet	(SortedSet<E>,Transformer<? super E, ? extends E>)TransformedSortedSet<E>	2	0	0	true	false	SORT
+commons-collections	com/m3/collections/apache/set/UnmodifiableNavigableSet.java	UnmodifiableNavigableSet	unmodifiableNavigableSet	(NavigableSet<E>)NavigableSet<E>	5	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/set/UnmodifiableSet.java	UnmodifiableSet	unmodifiableSet	(Set<? extends E>)Set<E>	6	0	0	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/set/UnmodifiableSortedSet.java	UnmodifiableSortedSet	unmodifiableSortedSet	(SortedSet<E>)SortedSet<E>	5	0	0	true	false	SORT
+commons-collections	com/m3/collections/apache/SplitMapUtils.java	SplitMapUtils	readableMap	(Get<K, V>)IterableMap<K, V>	6	0	2	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/SplitMapUtils.java	SplitMapUtils	writableMap	(Put<K, V>)Map<K, V>	6	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/splitmap/TransformedSplitMap.java	TransformedSplitMap	transformingMap	(Map<K, V>,Transformer<? super J, ? extends K>,Transformer<? super U, ? extends V>)TransformedSplitMap<J, K, U, V>	2	0	0	true	false	FUNCTIONAL_ITERATE
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	asTransformer	(Closure<? super T>)Transformer<T, T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	asTransformer	(Factory<? extends O>)Transformer<I, O>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	asTransformer	(Predicate<? super T>)Transformer<T, Boolean>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	chainedTransformer	(Collection<? extends Transformer<? super T, ? extends T>>)Transformer<T, T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	chainedTransformer	(Transformer<? super T, ? extends T>[])Transformer<T, T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	cloneTransformer	()Transformer<T, T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	constantTransformer	(O)Transformer<I, O>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	exceptionTransformer	()Transformer<I, O>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	ifTransformer	(Predicate<? super I>,Transformer<? super I, ? extends O>,Transformer<? super I, ? extends O>)Transformer<I, O>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	ifTransformer	(Predicate<? super T>,Transformer<? super T, ? extends T>)Transformer<T, T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	instantiateTransformer	()Transformer<Class<? extends T>, T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	instantiateTransformer	(Class<?>[],Object[])Transformer<Class<? extends T>, T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	invokerTransformer	(String)Transformer<I, O>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	invokerTransformer	(String,Class<?>[],Object[])Transformer<I, O>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	mapTransformer	(Map<? super I, ? extends O>)Transformer<I, O>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	nopTransformer	()Transformer<T, T>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	nullTransformer	()Transformer<I, O>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	stringValueTransformer	()Transformer<T, String>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	switchMapTransformer	(Map<I, Transformer<I, O>>)Transformer<I, O>	14	1	8	true	true	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	switchTransformer	(Map<Predicate<I>, Transformer<I, O>>)Transformer<I, O>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	switchTransformer	(Predicate<? super I>,Transformer<? super I, ? extends O>,Transformer<? super I, ? extends O>)Transformer<I, O>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	switchTransformer	(Predicate<? super I>[],Transformer<? super I, ? extends O>[])Transformer<I, O>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TransformerUtils.java	TransformerUtils	switchTransformer	(Predicate<? super I>[],Transformer<? super I, ? extends O>[],Transformer<? super I, ? extends O>)Transformer<I, O>	2	0	1	true	false	DECORATOR_FACTORY
+commons-collections	com/m3/collections/apache/TrieUtils.java	TrieUtils	unmodifiableTrie	(Trie<K, ? extends V>)Trie<K, V>	2	0	1	true	false	STATIC_FACTORY
+commons-collections	com/m3/collections/apache/trie/AbstractBitwiseTrie.java	AbstractBitwiseTrie	compare	(Object,Object)boolean	2	0	1	true	false	COMPARE_ORDER
+commons-collections	com/m3/collections/apache/trie/AbstractPatriciaTrie.java	AbstractPatriciaTrie	isValidUplink	(TrieEntry<?, ?>,TrieEntry<?, ?>)boolean	2	0	1	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/trie/analyzer/StringKeyAnalyzer.java	StringKeyAnalyzer	mask	(int)int	2	0	0	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/trie/KeyAnalyzer.java	KeyAnalyzer	isEqualBitKey	(int)boolean	2	0	0	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/trie/KeyAnalyzer.java	KeyAnalyzer	isNullBitKey	(int)boolean	2	0	0	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/trie/KeyAnalyzer.java	KeyAnalyzer	isOutOfBoundsIndex	(int)boolean	2	0	0	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/trie/KeyAnalyzer.java	KeyAnalyzer	isValidBitIndex	(int)boolean	2	0	0	true	false	UNKNOWN_PATTERN
+commons-collections	com/m3/collections/apache/trie/UnmodifiableTrie.java	UnmodifiableTrie	unmodifiableTrie	(Trie<K, ? extends V>)Trie<K, V>	6	0	0	true	false	STATIC_FACTORY
