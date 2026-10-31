@@ -1,0 +1,61 @@
+# host: Windows 11 (shared with other sessions; rows vary run to run), stock JDK 21.0.9 + patched java.base (--patch-module); M3HashAtomsPerf: static final MethodHandles bound to the function (invokeExact), corpus 2048 random inputs of length 0..1100, 40 passes per round, warm-up 6, best of 7
+# committed-N: M3ByteArrayAccess over jdk.internal.util.ByteArrayLittleEndian (this change), three runs (committed-3: tools/gate.sh)
+# alternative-internal-unsafe: the same rows with M3ByteArrayAccess over jdk.internal.misc.Unsafe getLong/getInt/getShort (NOT committed; isolates the cost of the access)
+# speedup = vendored ns/op / absorbed ns/op (above 1: absorbed faster)
+run	atom	form	ns_per_op_absorbed	ns_per_op_vendored	speedup
+committed-1	M3XxHash	xx() hashBytes(byte[])	72.72	59.21	0.81
+committed-1	M3XXH3	xx3() hashBytes(byte[])	100.78	75.36	0.75
+committed-1	M3XXH3	xx128low() hashBytes(byte[])	272.42	71.41	0.26
+committed-1	M3XXH3	xx128() hashBytes(byte[]) -> long[2]	262.69	128.61	0.49
+committed-1	M3WyHash	wy_3() hashBytes(byte[])	74.42	62.80	0.84
+committed-1	M3MurmurHash_3	murmur_3() hashBytes(byte[])	108.52	92.35	0.85
+committed-1	M3MurmurHash_3	murmur_3() tuple hashBytes(byte[]) -> long[2]	101.44	85.74	0.85
+committed-1	M3CityAndFarmHash_1_1	city_1_1() hashBytes(byte[])	112.18	91.96	0.82
+committed-1	M3CityAndFarmHash_1_1	farmNa() hashBytes(byte[])	99.07	86.72	0.88
+committed-1	M3CityAndFarmHash_1_1	farmUo() hashBytes(byte[])	112.12	89.08	0.79
+committed-1	M3MetroHash	metro() hashBytes(byte[])	128.85	99.41	0.77
+committed-1	M3CharSequenceAccess	xx3() hashChars(Latin-1 String)	893.46	258.10	0.29
+committed-1	M3CharSequenceAccess	xx3() hashChars(UTF-16 String)	1685.01	109.97	0.07
+committed-1	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer, off, len)	745.76	124.78	0.17
+committed-2	M3XxHash	xx() hashBytes(byte[])	74.74	69.17	0.93
+committed-2	M3XXH3	xx3() hashBytes(byte[])	86.82	65.19	0.75
+committed-2	M3XXH3	xx128low() hashBytes(byte[])	240.01	71.61	0.30
+committed-2	M3XXH3	xx128() hashBytes(byte[]) -> long[2]	242.61	63.67	0.26
+committed-2	M3WyHash	wy_3() hashBytes(byte[])	56.44	55.80	0.99
+committed-2	M3MurmurHash_3	murmur_3() hashBytes(byte[])	101.10	79.76	0.79
+committed-2	M3MurmurHash_3	murmur_3() tuple hashBytes(byte[]) -> long[2]	101.98	84.58	0.83
+committed-2	M3CityAndFarmHash_1_1	city_1_1() hashBytes(byte[])	56.03	48.70	0.87
+committed-2	M3CityAndFarmHash_1_1	farmNa() hashBytes(byte[])	48.58	69.83	1.44
+committed-2	M3CityAndFarmHash_1_1	farmUo() hashBytes(byte[])	99.83	71.34	0.71
+committed-2	M3MetroHash	metro() hashBytes(byte[])	137.59	90.69	0.66
+committed-2	M3CharSequenceAccess	xx3() hashChars(Latin-1 String)	875.61	256.33	0.29
+committed-2	M3CharSequenceAccess	xx3() hashChars(UTF-16 String)	1617.32	100.60	0.06
+committed-2	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer, off, len)	774.05	123.25	0.16
+committed-3	M3XxHash	xx() hashBytes(byte[])	60.52	49.27	0.81
+committed-3	M3XXH3	xx3() hashBytes(byte[])	72.77	53.78	0.74
+committed-3	M3XXH3	xx128low() hashBytes(byte[])	212.29	57.02	0.27
+committed-3	M3XXH3	xx128() hashBytes(byte[]) -> long[2]	208.72	49.14	0.24
+committed-3	M3WyHash	wy_3() hashBytes(byte[])	58.11	50.76	0.87
+committed-3	M3MurmurHash_3	murmur_3() hashBytes(byte[])	83.02	70.37	0.85
+committed-3	M3MurmurHash_3	murmur_3() tuple hashBytes(byte[]) -> long[2]	79.32	72.22	0.91
+committed-3	M3CityAndFarmHash_1_1	city_1_1() hashBytes(byte[])	51.36	42.16	0.82
+committed-3	M3CityAndFarmHash_1_1	farmNa() hashBytes(byte[])	49.26	39.58	0.80
+committed-3	M3CityAndFarmHash_1_1	farmUo() hashBytes(byte[])	42.20	38.82	0.92
+committed-3	M3MetroHash	metro() hashBytes(byte[])	64.04	46.41	0.72
+committed-3	M3CharSequenceAccess	xx3() hashChars(Latin-1 String)	593.41	148.11	0.25
+committed-3	M3CharSequenceAccess	xx3() hashChars(UTF-16 String)	1489.05	87.39	0.06
+committed-3	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer, off, len)	687.52	111.67	0.16
+alternative-internal-unsafe	M3XxHash	xx() hashBytes(byte[])	57.83	63.23	1.09
+alternative-internal-unsafe	M3XXH3	xx3() hashBytes(byte[])	68.14	88.43	1.30
+alternative-internal-unsafe	M3XXH3	xx128low() hashBytes(byte[])	71.07	66.57	0.94
+alternative-internal-unsafe	M3XXH3	xx128() hashBytes(byte[]) -> long[2]	71.73	70.24	0.98
+alternative-internal-unsafe	M3WyHash	wy_3() hashBytes(byte[])	57.50	60.00	1.04
+alternative-internal-unsafe	M3MurmurHash_3	murmur_3() hashBytes(byte[])	102.21	99.54	0.97
+alternative-internal-unsafe	M3MurmurHash_3	murmur_3() tuple hashBytes(byte[]) -> long[2]	121.17	108.09	0.89
+alternative-internal-unsafe	M3CityAndFarmHash_1_1	city_1_1() hashBytes(byte[])	64.45	53.74	0.83
+alternative-internal-unsafe	M3CityAndFarmHash_1_1	farmNa() hashBytes(byte[])	59.72	47.99	0.80
+alternative-internal-unsafe	M3CityAndFarmHash_1_1	farmUo() hashBytes(byte[])	52.67	51.95	0.99
+alternative-internal-unsafe	M3MetroHash	metro() hashBytes(byte[])	55.21	57.99	1.05
+alternative-internal-unsafe	M3CharSequenceAccess	xx3() hashChars(Latin-1 String)	456.01	137.08	0.30
+alternative-internal-unsafe	M3CharSequenceAccess	xx3() hashChars(UTF-16 String)	1378.30	86.03	0.06
+alternative-internal-unsafe	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer, off, len)	353.97	132.09	0.37
