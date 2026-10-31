@@ -107,3 +107,29 @@ and a `jdk.internal` package is not exported unqualified. The ledgers and the re
 Runtime state: the module compiles and its API is complete, but its natives are not built. `M3Library` still looks for
 the donor's native module, and the JNI symbols in the shipped dll carry the old names, so calls into native code fail
 until leaf 2 builds `libm3graphics` under the new names (`ledgers/JNI_RENAME.tsv`).
+
+## Leaf 1 atom tests: JUnit and perf per atom (2026-10-31)
+
+`tools/gen_atom_tests.py <repo> <jdk.m3.graphics classes> <skija-shared-0.143.18.jar><path sep><types-0.2.0.jar>`
+generates the tests from javap facts, template first (CPU only, deterministic; `--check` proves the fixed point):
+
+- `test/jdk/jdk/m3/graphics/M3GraphicsAtomsTest01..15.java`: one JUnit test per runnable atom (jtreg `@run junit`,
+  `@modules jdk.m3.graphics`). Every public constructor, method and field of the atom is called on the M3 type and on
+  the donor type with the same deterministic cases (boundary pools, then seeded random rounds) and the outcomes are
+  compared structurally: result or thrown type, aliasing, receiver and arguments after the call, mutable statics,
+  console output. Enums: `values()`, `valueOf`, every method over every constant.
+- `M3GraphicsAtomsPerf.java` + `PerfGroup01..05`: one row per tested atom, ns/op M3 vs donor through static final
+  MethodHandles; guard: no atom slower than its donor by more than 1.5x.
+- `leaf1/ATOM_TESTS.tsv` (per atom: pattern, status, reason, counts) and `leaf1/ATOM_MEMBERS.tsv` (per member).
+- The runner is hand-written support in the same directory (`M3GraphicsAtoms*.java`).
+
+A member is BLOCKED_NATIVES when its bytecode can reach native code (a native method, `System.load*`, or a class
+initializer that loads the library, transitively); a test fails if an emitted member reaches natives, so the
+classification is checked by execution. The oracle jars come from `-Dm3.graphics.oracle=...` (jtreg:
+`-vmoption:-Dm3.graphics.oracle=...`); without it the tests abort and the harness prints PERF_SKIPPED.
+
+Result (`leaf1/ATOM_TEST_GATES.tsv`): 225 atoms, 142 tested (135 full, 7 static-pure), 79 BLOCKED_NATIVES, 4
+NOT_APPLICABLE; 1,388 members, 20,392 cases; 141 of 142 tests pass, 4 of 4 mutants killed; perf 0 outliers. The
+failing test is a real difference (`leaf1/ATOM_FINDINGS.tsv` F1): the donor jar is Multi-Release, and the absorbed
+`Cleanable`, `ReferenceUtil` and `ResourceFinder` are its Java 8 base variants, not the `META-INF/versions/9` ones a
+JDK 9+ runtime loads; `M3Cleanable` fails to initialize on JDK 21 (`sun.misc.Cleaner`).
