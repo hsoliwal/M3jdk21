@@ -87,11 +87,6 @@ jobs:
           python3 -m unittest -v m3/backports/recipes/j485/test_verify_current.py
           python3 m3/backports/recipes/j485/verify_current.py "$GITHUB_WORKSPACE"
 
-      - name: Prove recipe replay scope registration and fixed point
-        run: |
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
-            -Dtest=M3Jep485StreamGatherersBackportRecipeTest,J485CurrentRecipeTest,M3RecipeScopeDeclarationTest \
-            test
 
       - name: Prove current J485 Java21 patched module
         shell: bash

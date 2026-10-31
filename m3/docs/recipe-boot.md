@@ -3,6 +3,20 @@
 SPDX-License-Identifier: Apache-2.0  
 Copyright 2026 Hitesh Soliwal and contributors
 
+## Retired from the M3jdk21 poms (2026-10-31, standalone)
+
+M3jdk21 builds, tests and releases from what it carries, so the `m3-recipe-boot` profile has been removed from all
+470 poms that held it (`m3/release/check_standalone.py`: D_MAVEN 470 -> 0). The 470 blocks were one byte-identical
+pattern, removed by `RETIRE_PROFILE v1` (`m3/tooling/standalone/retire_profile.py`). The profile was dead config here,
+for two reasons:
+
+- It activates only when `.m3/recipe-boot.properties` exists, and that file is not in the repository.
+- Its plugin dependency, `com.synexia.m3:m3-pr-stack-preservation`, is built only in `hsoliwal/com.synexia` and is
+  not on Maven Central. It fetches pinned GitHub PR patches with a token at build time.
+
+The boot tool keeps its owner: to use it on an M3jdk21 checkout, run it from com.synexia, which is where its source,
+tests and canonical proofs live. The text below describes it as it was, for reference.
+
 The `m3-recipe-boot` profile checks a reviewed GitHub PR manifest during Maven
 `validate`. Its shared config is `.m3/recipe-boot.properties` at the Maven
 multi-module root. `.mvn/README.md` establishes that root for nested invocations.

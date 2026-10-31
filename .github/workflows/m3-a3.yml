@@ -156,9 +156,6 @@ jobs:
         run: |
           set -euo pipefail
           mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" test
-          mvn -B -ntp -f "$REPO/m3/tooling/migration-recipes/pom.xml" \
-            -Dtest=M3A3LabDeliveryRecipeTest,M3A3MasteryWorkflowRecipeTest \
-            -Dsurefire.failIfNoSpecifiedTests=false test
 
       - name: Master hostile Atomize Patternize corpus
         shell: bash

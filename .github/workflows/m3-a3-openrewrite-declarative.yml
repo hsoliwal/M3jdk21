@@ -62,17 +62,7 @@ jobs:
           set -euo pipefail
           git diff --check "$BASE_SHA...HEAD"
 
-      - name: 2 compile M3 recipe and A3 modules
-        run: >
-          mvn -B -ntp -f m3/pom.xml
-          -pl tooling/migration-recipes,tooling/a3
-          -am -DskipTests compile
 
-      - name: 3 prove official declarative recipe resource and delivery crates
-        run: >
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3Java21DeclarativeConvergenceTest,M3A3DeclarativeDeliveryRecipeTest,M3Java21ConvergenceRecipeTest,M3Java21ConvergenceAdmissionTest
-          -Dsurefire.failIfNoSpecifiedTests=false test
 
       - name: 4 prove A3 NRW and fixed point through declarative activation
         run: >

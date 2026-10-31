@@ -159,5 +159,10 @@
     "visible_queue_source": "m3/tooling/name-contract/name-plan.json",
     "visible_queue_authority": "m3/docs/name-mapping.json",
     "queue_output_command": "python3 m3/release/verify_release_admission.py --queue-out m3/release/queue/current/README.md --json-out m3/release/queue/current/admission.json"
+  },
+  "standalone": {
+    "required_for_release": true,
+    "baseline": "m3/release/STANDALONE_BASELINE.tsv",
+    "rule": "M3JDK21 builds, tests, gates and releases without any other repository (user 2026-10-31); check_standalone.py: development mode is a ratchet, release mode needs zero cross-repository dependencies"
   }
 }

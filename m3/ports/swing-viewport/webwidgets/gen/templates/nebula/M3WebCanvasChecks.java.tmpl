@@ -1,0 +1,257 @@
+package @WPKG@;
+
+import static @PKG@.M3WebChecks.check;
+
+import @PKG@.M3WebModel;
+import @PKG@.M3WebPaint;
+import @PKG@.M3WebPixelProbe;
+import @PKG@.M3WebStates;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.accessibility.ACC;
+import org.eclipse.swt.accessibility.AccessibleControlEvent;
+import org.eclipse.swt.accessibility.AccessibleEvent;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Shell;
+
+/**
+ * Desktop SWT canvas contract (pattern M3P-CORE-1), run under a Display on the hidden test desktop:
+ * computeSize, Control.print with a pixel probe, damage-only redraw (Paint event bounds), SWT key, traverse,
+ * mouse, wheel, focus and show/hide routing, blits, animation through Display.timerExec, accessibility
+ * listeners, the colour and font cache, and disposal.
+ */
+public final class M3WebCanvasChecks {
+	private static final int[] KEYS = { SWT.ARROW_LEFT, SWT.ARROW_RIGHT, SWT.ARROW_UP, SWT.ARROW_DOWN, SWT.HOME, SWT.END, SWT.PAGE_UP,
+			SWT.PAGE_DOWN, SWT.CR, ' ', SWT.ESC, SWT.TAB, SWT.DEL, SWT.BS, SWT.F1, 'a' };
+	private static final int[] TRAVERSALS = { SWT.TRAVERSE_ARROW_NEXT, SWT.TRAVERSE_ARROW_PREVIOUS, SWT.TRAVERSE_RETURN, SWT.TRAVERSE_ESCAPE,
+			SWT.TRAVERSE_TAB_NEXT, SWT.TRAVERSE_TAB_PREVIOUS, SWT.TRAVERSE_MNEMONIC };
+	private static final int[] MASKS = { 0, SWT.SHIFT, SWT.MOD1, SWT.ALT, SWT.BUTTON1 | SWT.SHIFT };
+
+	private M3WebCanvasChecks() {
+	}
+
+	/** A shell on the default display for one widget. */
+	public static Shell shell() {
+		Shell shell = new Shell(Display.getDefault());
+		shell.setBounds(0, 0, 400, 300);
+		return shell;
+	}
+
+	/** Runs the whole canvas contract and disposes the widget's shell. */
+	public static void run(M3WebCanvas<?> c) {
+		M3WebModel m = c.getModel();
+		c.setBounds(0, 0, 360, 240);
+		check(c.computeSize(SWT.DEFAULT, SWT.DEFAULT).x > 0 && c.computeSize(200, 90).x == 200 && c.computeSize(200, 90).y == 90, "computeSize");
+		c.getShell().open();
+		spin(c.getDisplay(), 150);
+		pixel(c);
+		events(c);
+		states(c);
+		accessible(c);
+		m.setDark(true);
+		damageOnly(c);
+		blits(c);
+		animation(c);
+		c.getShell().dispose();
+		m.setState(-1, M3WebStates.ERROR, !m.is(-1, M3WebStates.ERROR));
+		check(c.isDisposed(), "disposed with the shell, model changes after dispose are ignored");
+	}
+
+	/** Control.print paints the display list; the pixel probe's pick shows its colour. */
+	static void pixel(M3WebCanvas<?> c) {
+		ImageData data = printed(c);
+		int[] probe = M3WebPixelProbe.probe(c.getModel(), c.getSize().x, c.getSize().y);
+		if (probe.length == 4) {
+			int got = rgb(data, probe[0], probe[1]);
+			check(M3WebPixelProbe.close(got, probe[2], probe[3]), "printed pixel " + Integer.toHexString(got) + " != " + Integer.toHexString(probe[2]));
+		}
+	}
+
+	static ImageData printed(M3WebCanvas<?> c) {
+		Image image = new Image(c.getDisplay(), Math.max(1, c.getSize().x), Math.max(1, c.getSize().y));
+		GC gc = new GC(image);
+		check(c.print(gc), "Control.print");
+		gc.dispose();
+		ImageData data = image.getImageData();
+		image.dispose();
+		return data;
+	}
+
+	static int rgb(ImageData data, int x, int y) {
+		RGB c = data.palette.getRGB(data.getPixel(x, y));
+		return c.red << 16 | c.green << 8 | c.blue;
+	}
+
+	/** SWT events reach the model as neutral keys, traversals, pointer kinds, focus and part visibility. */
+	static void events(M3WebCanvas<?> c) {
+		M3WebModel m = c.getModel();
+		int x = m.count() > 0 ? m.itemRect(0, 0) + 2 : 5, y = m.count() > 0 ? m.itemRect(0, 1) + 2 : 5;
+		send(c, SWT.FocusIn, 0, 0, 0, 0);
+		check(m.is(-1, M3WebStates.FOCUS), "focus in");
+		for (int mask : MASKS) {
+			mouse(c, x, y, mask);
+			for (int key : KEYS) {
+				send(c, SWT.KeyDown, key, key == 'a' || key == ' ' ? key : 0, mask, 0);
+			}
+		}
+		for (int open = 0; open < 2; open++) {
+			m.setState(-1, M3WebStates.OPEN, open == 1);
+			for (int t : TRAVERSALS) {
+				send(c, SWT.Traverse, 0, 0, 0, t);
+			}
+		}
+		send(c, SWT.FocusOut, 0, 0, 0, 0);
+		check(!m.is(-1, M3WebStates.FOCUS), "focus out");
+		send(c, SWT.Hide, 0, 0, 0, 0);
+		check(!c.isPartVisible(), "hidden part");
+		send(c, SWT.Show, 0, 0, 0, 0);
+		check(c.isPartVisible() && M3WebCanvas.eventType("Paint") == SWT.Paint && M3WebCanvas.eventType("NoSuchEvent") == 0, "visible part");
+	}
+
+	private static void mouse(M3WebCanvas<?> c, int x, int y, int mask) {
+		for (int type : new int[] { SWT.MouseMove, SWT.MouseDown, SWT.MouseMove, SWT.MouseUp, SWT.MouseVerticalWheel, SWT.MouseExit }) {
+			Event e = event(type, 0, 0, mask, 0);
+			e.x = x;
+			e.y = y;
+			e.count = type == SWT.MouseVerticalWheel ? -1 : 1;
+			c.notifyListeners(type, e);
+		}
+	}
+
+	private static void send(M3WebCanvas<?> c, int type, int keyCode, int character, int mask, int detail) {
+		c.notifyListeners(type, event(type, keyCode, character, mask, detail));
+	}
+
+	private static Event event(int type, int keyCode, int character, int mask, int detail) {
+		Event e = new Event();
+		e.type = type;
+		e.keyCode = keyCode;
+		e.character = (char) character;
+		e.stateMask = mask;
+		e.detail = detail;
+		e.doit = true;
+		return e;
+	}
+
+	/** Accessibility listeners answer the model's name per child and the ARIA role. */
+	static void accessible(M3WebCanvas<?> c) {
+		AccessibleEvent e = new AccessibleEvent(c);
+		e.childID = ACC.CHILDID_SELF;
+		c.names.getName(e);
+		check(e.result != null, "accessible name");
+		if (c.getModel().count() > 0) {
+			e.childID = 0;
+			c.names.getName(e);
+			check(e.result != null, "item name");
+		}
+		AccessibleControlEvent r = new AccessibleControlEvent(c);
+		c.roles.getRole(r);
+		check(r.detail != 0 && M3WebCanvasCache.accRole("no-such-role") == ACC.ROLE_CLIENT_AREA, "accessible role");
+		cache(c);
+	}
+
+	/** The colour and font caches grow past their initial capacity and dispose every handle. */
+	static void cache(M3WebCanvas<?> c) {
+		M3WebCanvasCache cache = new M3WebCanvasCache(c.getDisplay());
+		for (int i = 0; i < 40; i++) {
+			check(cache.color(i * 0x010203) == cache.color(i * 0x010203), "cached colour");
+			check(cache.font(c.getFont(), 8 + i % 12 | (i % 3 == 0 ? M3WebPaint.BOLD : 0) | (i % 4 == 0 ? M3WebPaint.MONO : 0)) != null, "font");
+		}
+		cache.dispose();
+	}
+
+	/** D on the SWT side: after a full paint, an item change redraws exactly the model damage. */
+	static void damageOnly(M3WebCanvas<?> c) {
+		M3WebModel m = c.getModel();
+		for (long end = System.currentTimeMillis() + 3000; m.isAnimating() && System.currentTimeMillis() < end;) {
+			spin(c.getDisplay(), 20);
+		}
+		int[] paints = new int[1];
+		org.eclipse.swt.widgets.Listener counter = e -> paints[0]++;
+		c.addListener(SWT.Paint, counter);
+		c.redraw();
+		for (long end = System.currentTimeMillis() + 2000; paints[0] == 0 && System.currentTimeMillis() < end;) {
+			spin(c.getDisplay(), 20);
+		}
+		spin(c.getDisplay(), 60);
+		c.removeListener(SWT.Paint, counter);
+		if (m.count() == 0 || m.itemRect(0, 2) <= 0 || m.isAnimating()) {
+			return;
+		}
+		Rectangle[] painted = new Rectangle[1];
+		org.eclipse.swt.widgets.Listener l = e -> painted[0] = union(painted[0], new Rectangle(e.x, e.y, e.width, e.height));
+		c.addListener(SWT.Paint, l);
+		int g = m.generation(), x = Math.max(0, m.itemRect(0, 0) - 3), y = Math.max(0, m.itemRect(0, 1) - 3);
+		m.setState(0, M3WebStates.SELECTED, !m.is(0, M3WebStates.SELECTED));
+		check(c.lastRedraw[0] == x && c.lastRedraw[1] == y && c.lastRedraw[2] <= m.itemRect(0, 2) + 6 && c.lastRedraw[3] <= m.itemRect(0, 3) + 6,
+				"redraw request " + java.util.Arrays.toString(c.lastRedraw) + " equals the damage at " + x + "," + y + " visible=" + c.isPartVisible());
+		spin(c.getDisplay(), 80);
+		c.removeListener(SWT.Paint, l);
+		Rectangle r = painted[0];
+		check(r == null || m.generation() != g + 1 || (r.x >= x && r.y >= y && r.width <= m.itemRect(0, 2) + 6), "repainted region equals the damage: " + r);
+	}
+
+	/** Short scrolls blit through Control.scroll along the model's axis; hidden parts defer damage. */
+	static void blits(M3WebCanvas<?> c) {
+		M3WebModel m = c.getModel();
+		m.setLogicalCount(1000);
+		m.setItemExtent(20);
+		m.layout(c.getSize().x, c.getSize().y);
+		m.scrollTo(100);
+		m.scrollTo(105);
+		m.scrollTo(100);
+		c.update();
+		send(c, SWT.Hide, 0, 0, 0, 0);
+		m.scrollTo(120);
+		check(!c.isPartVisible(), "hidden part");
+		send(c, SWT.Show, 0, 0, 0, 0);
+		check(c.isPartVisible(), "flushed on show");
+		m.scrollTo(0);
+	}
+
+	/** Activation keys start the model's animation; Display.timerExec ticks it while the part is visible. */
+	static void animation(M3WebCanvas<?> c) {
+		M3WebModel m = c.getModel();
+		m.setFocus(m.count() > 0 ? 0 : -1);
+		for (int key : new int[] { SWT.CR, ' ' }) {
+			send(c, SWT.KeyDown, key, key, 0, 0);
+			spin(c.getDisplay(), 120);
+		}
+		m.key(M3WebStates.KEY_ENTER, 0, 0);
+		send(c, SWT.Hide, 0, 0, 0, 0);
+		spin(c.getDisplay(), 60);
+		send(c, SWT.Show, 0, 0, 0, 0);
+		spin(c.getDisplay(), 60);
+		check(c.getModel() == m, "model kept");
+	}
+
+	static void spin(Display d, int ms) {
+		long end = System.currentTimeMillis() + ms;
+		while (System.currentTimeMillis() < end) {
+			if (!d.readAndDispatch()) {
+				Thread.onSpinWait();
+			}
+		}
+	}
+
+	/** Union that starts from the first rectangle (an empty origin rectangle would pull the union to 0,0). */
+	static Rectangle union(Rectangle a, Rectangle b) {
+		return a == null ? b : a.union(b);
+	}
+
+	/** Prints the states whose records only some modes emit: a pull past the top (refresh arc) and a set value (progress arc). */
+	static void states(M3WebCanvas<?> c) {
+		M3WebModel m = c.getModel();
+		m.scrollTo(0);
+		m.pointer(M3WebStates.P_WHEEL, 5, -3, 0);
+		if (m.count() > 0) {
+			m.setValue(0, 30);
+		}
+		check(printed(c).width == c.getSize().x, "state print");
+	}
+}

@@ -1,0 +1,11 @@
+package @WPKG@.adapter;
+
+import org.junit.jupiter.api.Test;
+
+/** Viewport adapter of the existing @CONCEPT@ component {@code @CLASS@} (family @FAM@, kind @KIND@), headless on the event thread. */
+class M3@C@ViewportTest {
+	@Test
+	void adapter() throws Exception {
+		M3ViewportAdapterChecks.onEdt(() -> M3ViewportAdapterChecks.run(() -> @CREATE@, @ASPECTS@));
+	}
+}

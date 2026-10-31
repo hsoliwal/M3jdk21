@@ -1,0 +1,10 @@
+jdk.m3.runtime@4.13.2-m3-source-1
+exports com.m3.lib.runtime
+exports com.m3.lib.runtime.atn
+exports com.m3.lib.runtime.dfa
+exports com.m3.lib.runtime.misc
+exports com.m3.lib.runtime.tree
+exports com.m3.lib.runtime.tree.pattern
+exports com.m3.lib.runtime.tree.xpath
+requires java.base mandated
+

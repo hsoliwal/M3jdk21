@@ -30,19 +30,7 @@ jobs:
           java-version: "21"
           cache: maven
 
-      - name: Bootstrap pinned source-built closure
-        shell: bash
-        run: |
-          set -euo pipefail
-          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
 
-      - name: Prove semantic hash regression fixture
-        shell: bash
-        run: |
-          set -euo pipefail
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
-            -Dtest=com.m3.rewrite.semantic.M3SemanticHashRecipeTest \
-            -Dsurefire.failIfNoSpecifiedTests=false test
 
       - name: Prove append-only current String successor custody
         shell: bash

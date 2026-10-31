@@ -1,0 +1,103 @@
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\module-info.java:3: warning: [module] module name component m3 should avoid terminal digits
+module jdk.m3.classgraph {
+          ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classpath\ClasspathOrder.java:234: warning: [deprecation] URL(String) in URL has been deprecated
+                    pathElementWithoutSuffix = pathElement instanceof URL ? new URL(pathElementStrWithoutSuffix)
+                                                                            ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classpath\ClasspathOrder.java:242: warning: [deprecation] URL(String) in URL has been deprecated
+                                ? new URL("file:" + pathElementStrWithoutSuffix)
+                                  ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classpath\ClasspathOrder.java:344: warning: [deprecation] URL(String) in URL has been deprecated
+                        pathElementURL = new URL(urlStr);
+                                         ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\classpath\ClasspathOrder.java:352: warning: [deprecation] URL(String) in URL has been deprecated
+                                pathElementURL = new URL(pathElementStr);
+                                                 ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\concurrency\SingletonMap.java:53: warning: [missing-explicit-ctor] class SingletonMap in exported package com.m3.lib.classgraph.nonapi.concurrency declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.classgraph
+public abstract class SingletonMap<K, V, E extends Exception> {
+                ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\Scanner.java:424: warning: [deprecation] URL(String) in URL has been deprecated
+                    final URL classpathEntryURL = new URL(classpathEntStr);
+                                                  ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\HierarchicalTypeSignature.java:38: warning: [missing-explicit-ctor] class HierarchicalTypeSignature in exported package com.m3.lib.classgraph declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.classgraph
+public abstract class HierarchicalTypeSignature extends ScanResultObject {
+                ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\HierarchicalTypeSignature.java:81: warning: [exports] class TypePathNode in module jdk.m3.classgraph is not accessible to clients that require this module
+    protected abstract void addTypeAnnotation(List<TypePathNode> typePath, AnnotationInfo annotationInfo);
+                                                   ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\TypeSignature.java:160: warning: [exports] class TypePathNode in module jdk.m3.classgraph is not accessible to clients that require this module
+    protected abstract void addTypeAnnotation(List<TypePathNode> typePath, AnnotationInfo annotationInfo);
+                                                   ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ClassInfo.java:217: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setModifiers(classModifiers);
+                    ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ClassTypeSignature.java:176: warning: [exports] class TypePathNode in module jdk.m3.classgraph is not accessible to clients that require this module
+    protected void addTypeAnnotation(final List<TypePathNode> typePath, final AnnotationInfo annotationInfo) {
+                                                ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\Resource.java:85: warning: [exports] class ClasspathElement in module jdk.m3.classgraph is not accessible to clients that require this module
+    public Resource(final ClasspathElement classpathElement, final long length) {
+                          ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ClassInfoList.java:171: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        this(classInfoCollection instanceof Set //
+            ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ClassInfoList.java:106: warning: [this-escape] previous possible 'this' escape happens here via invocation
+            CollectionUtils.sortIfNotEmpty(this);
+                                           ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\reflection\ReflectionUtils.java:43: warning: [exports] class ReflectionDriver in module jdk.m3.classgraph is not accessible to clients that require this module
+    public ReflectionDriver reflectionDriver;
+           ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\MethodTypeSignature.java:125: warning: [exports] class TypePathNode in module jdk.m3.classgraph is not accessible to clients that require this module
+    protected void addTypeAnnotation(final List<TypePathNode> typePath, final AnnotationInfo annotationInfo) {
+                                                ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\TypeParameter.java:101: warning: [exports] class TypePathNode in module jdk.m3.classgraph is not accessible to clients that require this module
+    protected void addTypeAnnotation(final List<TypePathNode> typePath, final AnnotationInfo annotationInfo) {
+                                                ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\recycler\Recycler.java:47: warning: [missing-explicit-ctor] class Recycler in exported package com.m3.lib.classgraph.nonapi.recycler declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.classgraph
+public abstract class Recycler<T, E extends Exception> implements AutoCloseable {
+                ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\fastzipfilereader\NestedJarHandler.java:523: warning: [deprecation] URL(String) in URL has been deprecated
+            url = new URL(jarURL);
+                  ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\fastzipfilereader\ZipFileSlice.java:44: warning: [exports] class PhysicalZipFile in module jdk.m3.classgraph is not accessible to clients that require this module
+    protected final PhysicalZipFile physicalZipFile;
+                    ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\concurrency\InterruptionChecker.java:39: warning: [missing-explicit-ctor] class InterruptionChecker in exported package com.m3.lib.classgraph.nonapi.concurrency declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.classgraph
+public class InterruptionChecker {
+       ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\fileslice\FileSlice.java:161: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        nestedJarHandler.markSliceAsOpen(this);
+                                         ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ModulePathInfo.java:47: warning: [missing-explicit-ctor] class ModulePathInfo in exported package com.m3.lib.classgraph declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.classgraph
+public class ModulePathInfo {
+       ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ClassRefTypeSignature.java:170: warning: [exports] class TypePathNode in module jdk.m3.classgraph is not accessible to clients that require this module
+    protected void addTypeAnnotation(final List<TypePathNode> typePath, final AnnotationInfo annotationInfo) {
+                                                ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\TypeArgument.java:101: warning: [exports] class TypePathNode in module jdk.m3.classgraph is not accessible to clients that require this module
+    protected void addTypeAnnotation(final List<TypePathNode> typePath, final AnnotationInfo annotationInfo) {
+                                                ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\ArrayTypeSignature.java:133: warning: [exports] class TypePathNode in module jdk.m3.classgraph is not accessible to clients that require this module
+    protected void addTypeAnnotation(final List<TypePathNode> typePath, final AnnotationInfo annotationInfo) {
+                                                ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\BaseTypeSignature.java:198: warning: [exports] class TypePathNode in module jdk.m3.classgraph is not accessible to clients that require this module
+    protected void addTypeAnnotation(final List<TypePathNode> typePath, final AnnotationInfo annotationInfo) {
+                                                ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\TypeVariableSignature.java:141: warning: [exports] class TypePathNode in module jdk.m3.classgraph is not accessible to clients that require this module
+    protected void addTypeAnnotation(final List<TypePathNode> typePath, final AnnotationInfo annotationInfo) {
+                                                ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\fileslice\PathSlice.java:130: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        nestedJarHandler.markSliceAsOpen(this);
+                                         ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\json\JSONDeserializer.java:748: warning: [exports] class ClassFieldCache in module jdk.m3.classgraph is not accessible to clients that require this module
+            final ClassFieldCache classFieldCache) throws IllegalArgumentException {
+                  ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\json\JSONSerializer.java:485: warning: [exports] class ClassFieldCache in module jdk.m3.classgraph is not accessible to clients that require this module
+            final boolean onlySerializePublicFields, final ClassFieldCache classFieldCache) {
+                                                           ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\json\JSONSerializer.java:578: warning: [exports] class ClassFieldCache in module jdk.m3.classgraph is not accessible to clients that require this module
+            final int indentWidth, final boolean onlySerializePublicFields, final ClassFieldCache classFieldCache) {
+                                                                                  ^
+H:\m3-scratch\lib-intake\batch\classgraph\proj\src\main\java\com\m3\lib\classgraph\nonapi\utils\Assert.java:4: warning: [missing-explicit-ctor] class Assert in exported package com.m3.lib.classgraph.nonapi.utils declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.classgraph
+public final class Assert {
+             ^
+34 warnings

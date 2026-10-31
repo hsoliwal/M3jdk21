@@ -1,0 +1,6 @@
+gate	command	result
+subset_compile	javac --release 21 on the 13 absorbed types	0 errors
+patch_compile	javac --patch-module java.base=<FloatingDecimal + 13 M3 types> (stock JDK 21.0.9)	0 errors, 24 classes
+differential	M3ParseDifferential diff 600000: stock vs --patch-module java.base	byte-identical: 600000 inputs x (Double.parseDouble, Float.parseFloat), bits or exception class + message
+self_call	first run: FDP slow paths call Double.parseDouble/Float.parseFloat -> recursion (StackOverflowError)	JDK_SELF_CALL v1 rewrote 8 calls to FloatingDecimal.readJavaFormatString; rerun identical
+bench	M3ParseDifferential bench 600000 8 (mixed corpus incl. ~1/6 invalid inputs)	stock 307-363 ns/parse, M3 206-224 ns/parse (~1.5x), identical checksum

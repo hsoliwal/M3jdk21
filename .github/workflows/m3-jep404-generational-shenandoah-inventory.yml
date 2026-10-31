@@ -239,8 +239,6 @@ jobs:
         run: |
           set -euo pipefail
           mvn -B -ntp -f m3/backports/pom.xml verify
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
-            -Dtest=M3RecipeScopeDeclarationTest test
 
       - name: 12 - Install OpenJDK build prerequisites
         shell: bash

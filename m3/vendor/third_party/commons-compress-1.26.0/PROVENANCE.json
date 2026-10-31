@@ -31,7 +31,7 @@
       "group": "commons-io",
       "optional": false,
       "scope": "compile",
-      "version": "2.15.1-m3-source-1"
+      "version": "2.18.0-m3-source-1"
     },
     {
       "artifact": "commons-lang3",
@@ -39,7 +39,7 @@
       "group": "org.apache.commons",
       "optional": false,
       "scope": "compile",
-      "version": "3.14.0-m3-source-1"
+      "version": "3.17.0-m3-source-1"
     },
     {
       "artifact": "dec",

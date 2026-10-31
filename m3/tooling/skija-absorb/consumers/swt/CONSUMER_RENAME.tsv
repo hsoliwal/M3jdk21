@@ -1,0 +1,70 @@
+file	pkg_refs	type_tokens	shadowed_tokens	humbleui_left_in_code	collision_qualified	string_edits
+bundles/org.eclipse.swt/Eclipse SWT GPU M3/win32/org/eclipse/swt/internal/gpu/m3/M3PlaneBackend.java	1	43	0	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT GPU M3/win32/org/eclipse/swt/internal/gpu/m3/M3Target.java	3	44	0	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT GPU M3/win32/org/eclipse/swt/internal/gpu/m3/Replay.java	1	29	0	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/M3CanvasDamage.java	4	10	0	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/M3CanvasHandler.java	13	46	0	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/M3Gpu.java	1	2	0	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/M3Library.java	1	1	0	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/M3RowCanvas.java	12	87	12	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/IM3Canvas.java	10	35	0	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/IM3Image.java	3	5	0	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/IM3Resources.java	1	1	0	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/IM3Surface.java	2	3	0	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/M3CanvasAdapter.java	12	37	0	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/M3ExternalFontMetrics.java	2	2	0	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/M3ExternalGC.java	25	72	28	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/M3FontTable.java	7	37	0	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/M3GcLayer.java	2	27	0	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/M3GlyphRuns.java	11	29	1	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/M3ImageAdapter.java	3	8	0	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/M3Mirror.java	1	2	0	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/M3PaintManager.java	15	42	0	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/M3PathConverter.java	7	9	1	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/M3PlaneCanvasExtension.java	1	6	1	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/M3RegionCalculator.java	4	9	2	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/M3Resources.java	15	28	12	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/M3SurfaceAdapter.java	4	9	0	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/M3TextDrawing.java	6	21	6	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/M3TextLayoutFallback.java	4	9	4	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/M3ToSwtImageConverter.java	4	10	0	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/M3TransformConverter.java	1	5	0	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/RectangleConverter.java	2	14	0	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT Render M3/win32/org/eclipse/swt/internal/render/m3/gc/SwtToM3ImageConverter.java	5	30	1	0	0	0
+bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/internal/M3Fragment.java	0	0	10	0	0	1
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/Test_org_eclipse_swt_internal_render_Win32Backends.java	0	0	0	0	0	1
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/ExtractedFontData.java	1	2	0	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/IM3ImageDouble.java	3	3	0	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/M3CanvasDouble.java	9	31	0	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/M3GcFixture.java	4	8	2	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/M3ResourcesDouble.java	2	2	13	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/M3SurfaceDouble.java	1	2	0	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/MethodCall.java	2	4	0	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/PaintData.java	7	14	0	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/StateCanvasDouble.java	5	17	0	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_CanvasDamage.java	2	6	0	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_ClipState.java	2	11	12	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_CompositeParity.java	5	10	9	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_DrawnCustomDraw.java	1	2	0	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_GcContract.java	1	3	5	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_GcTextSafety.java	5	10	6	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_M3ToSwtImageConvert.java	5	11	0	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_M3ToSwtImageConverter.java	5	17	0	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_PixelCopy.java	5	11	2	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_RectangleConverter.java	2	14	0	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_StrokeScale.java	3	8	0	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_StrokeState.java	3	8	4	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_TextLayoutRuns.java	5	10	22	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_TransformState.java	1	6	0	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_drawArc.java	1	4	12	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_drawLine.java	1	4	12	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_drawOval.java	2	8	12	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_drawPath.java	1	4	15	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_drawPoint.java	2	8	12	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_drawPolygon.java	1	4	12	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_drawPolyline.java	1	4	12	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_drawRectangle.java	2	10	16	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_drawRoundRectangle.java	4	7	12	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_drawString.java	5	27	12	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_drawText.java	5	20	12	0	0	0
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/m3gc/Test_org_eclipse_swt_m3gc_drawText_NoCache.java	5	27	12	0	0	0

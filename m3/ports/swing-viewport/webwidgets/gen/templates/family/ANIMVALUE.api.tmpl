@@ -1,0 +1,20 @@
+package @PKG@;
+
+/** API of the lane-driven animated values (pattern M3P-ANIMVALUE-1). */
+public interface M3AnimvalueApi extends M3WebApi {
+	/** Replaces the items: skeleton row kinds ({@code title}, {@code line}, {@code avatar}) or one label. */
+	void load(String sample);
+
+	void setMax(int max);
+
+	int max();
+
+	/** Determinate progress of item 0 (0 = indeterminate). */
+	void setProgress(int value);
+
+	/** Ease-in-out cubic of the phase (0..1000). */
+	int eased();
+
+	/** Runs the transition forward, or back when it already ran. */
+	void play();
+}

@@ -1,0 +1,4 @@
+jdk.m3.fastdoubleparser@1.0.90-m3-source-1
+exports com.m3.lib.fastdoubleparser
+requires java.base mandated
+

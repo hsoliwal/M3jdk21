@@ -1,0 +1,1 @@
+s/org\.antlr\.v4\.runtime([^A-Za-z0-9_$]|$)/com.m3.lib.runtime\1/g;s#org/antlr/v4/runtime([^A-Za-z0-9_$]|$)#com/m3/lib/runtime\1#g;

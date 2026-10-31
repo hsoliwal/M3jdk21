@@ -1,0 +1,66 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------------< m3.intake:dec >----------------------------
+[INFO] Building dec 0.1.2-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- rewrite:5.23.1:runNoFork (default-cli) @ dec ---
+[INFO] Using active recipe(s) [com.synexia.m3.intake.Relocate]
+[INFO] Using active styles(s) []
+[INFO] Validating active recipes...
+[INFO] Project [dec] Resolving Poms...
+[INFO] Project [dec] Parsing source files
+[INFO] Running recipe(s)...
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\dec\proj\src\main\java\org\brotli\dec\BitReader.java to m3-scratch\lib-intake\batch\dec\proj\src\main\java\com\m3\lib\dec\BitReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.brotli.dec, newPackageName=com.m3.lib.dec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\dec\proj\src\main\java\org\brotli\dec\BrotliInputStream.java to m3-scratch\lib-intake\batch\dec\proj\src\main\java\com\m3\lib\dec\BrotliInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.brotli.dec, newPackageName=com.m3.lib.dec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\dec\proj\src\main\java\org\brotli\dec\BrotliRuntimeException.java to m3-scratch\lib-intake\batch\dec\proj\src\main\java\com\m3\lib\dec\BrotliRuntimeException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.brotli.dec, newPackageName=com.m3.lib.dec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\dec\proj\src\main\java\org\brotli\dec\Context.java to m3-scratch\lib-intake\batch\dec\proj\src\main\java\com\m3\lib\dec\Context.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.brotli.dec, newPackageName=com.m3.lib.dec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\dec\proj\src\main\java\org\brotli\dec\Decode.java to m3-scratch\lib-intake\batch\dec\proj\src\main\java\com\m3\lib\dec\Decode.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.brotli.dec, newPackageName=com.m3.lib.dec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\dec\proj\src\main\java\org\brotli\dec\Dictionary.java to m3-scratch\lib-intake\batch\dec\proj\src\main\java\com\m3\lib\dec\Dictionary.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.brotli.dec, newPackageName=com.m3.lib.dec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\dec\proj\src\main\java\org\brotli\dec\Huffman.java to m3-scratch\lib-intake\batch\dec\proj\src\main\java\com\m3\lib\dec\Huffman.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.brotli.dec, newPackageName=com.m3.lib.dec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\dec\proj\src\main\java\org\brotli\dec\HuffmanTreeGroup.java to m3-scratch\lib-intake\batch\dec\proj\src\main\java\com\m3\lib\dec\HuffmanTreeGroup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.brotli.dec, newPackageName=com.m3.lib.dec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\dec\proj\src\main\java\org\brotli\dec\IntReader.java to m3-scratch\lib-intake\batch\dec\proj\src\main\java\com\m3\lib\dec\IntReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.brotli.dec, newPackageName=com.m3.lib.dec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\dec\proj\src\main\java\org\brotli\dec\Prefix.java to m3-scratch\lib-intake\batch\dec\proj\src\main\java\com\m3\lib\dec\Prefix.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.brotli.dec, newPackageName=com.m3.lib.dec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\dec\proj\src\main\java\org\brotli\dec\RunningState.java to m3-scratch\lib-intake\batch\dec\proj\src\main\java\com\m3\lib\dec\RunningState.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.brotli.dec, newPackageName=com.m3.lib.dec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\dec\proj\src\main\java\org\brotli\dec\State.java to m3-scratch\lib-intake\batch\dec\proj\src\main\java\com\m3\lib\dec\State.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.brotli.dec, newPackageName=com.m3.lib.dec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\dec\proj\src\main\java\org\brotli\dec\Transform.java to m3-scratch\lib-intake\batch\dec\proj\src\main\java\com\m3\lib\dec\Transform.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.brotli.dec, newPackageName=com.m3.lib.dec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\dec\proj\src\main\java\org\brotli\dec\Utils.java to m3-scratch\lib-intake\batch\dec\proj\src\main\java\com\m3\lib\dec\Utils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.brotli.dec, newPackageName=com.m3.lib.dec, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\dec\proj\src\main\java\org\brotli\dec\WordTransformType.java to m3-scratch\lib-intake\batch\dec\proj\src\main\java\com\m3\lib\dec\WordTransformType.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.brotli.dec, newPackageName=com.m3.lib.dec, recursive=false}
+[WARNING] Please review and commit the results.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  9.186 s
+[INFO] Finished at: 2026-10-31T06:22:59+05:30
+[INFO] ------------------------------------------------------------------------

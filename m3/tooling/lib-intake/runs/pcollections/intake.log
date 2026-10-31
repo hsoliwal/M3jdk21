@@ -1,0 +1,11 @@
+LIB_INTAKE pcollections S0_VIEW PASS java=33 packages=1 resources=0 overlays=none upstream_descriptor=yes
+LIB_INTAKE pcollections S1_RELOCATE PASS map=org.pcollections=com.m3.lib.pcollections packages_moved=1 old_dirs_left=0 text_completed_files=0 parse_fallback_files=0 resources_moved=0 meta_mapped=0
+LIB_INTAKE pcollections S1b_BCP PASS java_equal_after_name_map=33 resources_byte_equal=0 differing=0
+LIB_INTAKE pcollections S2_RESIDUE PASS residue=0 (every kind) slash_form_files=0
+LIB_INTAKE pcollections S3_ATOMIZE PASS atoms=576 KNOWN_PATTERN=90 UNPROVEN_LEAF=248 UNKNOWN_PATTERN=238
+LIB_INTAKE pcollections S4_CONSOLIDATE PASS owner_contract_atoms=96 (proposal queue)
+LIB_INTAKE pcollections S5_REFACTOR_BASELINE PASS METHOD_15=24 LOOP=41 CONST_HOIST=2 (ratchet: MOP passes may only lower these)
+LIB_INTAKE pcollections S6_MODULE PASS module=jdk.m3.pcollections requires=java.base exports=1 javac_warnings=31
+LIB_INTAKE pcollections S7_JMOD_IMAGE PASS jmod=66059B image_modules=6 smoke='loaded=47 failed=0'
+LIB_INTAKE pcollections S8_LAYER PASS files=35 layer=m3/vendor/third_party-m3/relocated/pcollections
+LIB_INTAKE_DONE pcollections jdk.m3.pcollections H:/m3-scratch/lib-intake/batch/pcollections/jmods/jdk.m3.pcollections.jmod

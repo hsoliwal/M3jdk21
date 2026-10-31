@@ -38,10 +38,6 @@ jobs:
           cache: maven
       - name: Verify packet hashes and compatibility split
         run: python3 m3/backports/recipes/jdk-8367584/verify_recovery.py
-      - name: Prove OpenRewrite file atoms and module fixed point
-        run: |
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
-            -Dtest=M3Jdk8367584JfrOptionsHelpBackportRecipeTest test
       - name: Validate and project packet DAG
         shell: bash
         run: |

@@ -1,0 +1,3 @@
+file	reason
+com/fasterxml/jackson/core/io/schubfach/DoubleToDecimal.java	OpenRewrite 8.17.1 parse failure (s1-rewrite.log); moved by the name map
+com/fasterxml/jackson/core/io/schubfach/FloatToDecimal.java	OpenRewrite 8.17.1 parse failure (s1-rewrite.log); moved by the name map
