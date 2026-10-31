@@ -51,7 +51,7 @@ public final class M3JdkStandardCensus {
                 configuration.m3Scheme());
         System.out.println("M3_JDK_STANDARD_CENSUS_PASS files=" + result.fileCount()
                 + " findings=" + result.findingCount() + " report="
-                + configuration.root().relativize(configuration.report()));
+                + configuration.report());
     }
 
     static Result run(Path root, List<Path> files, Path report, boolean m3Scheme)
