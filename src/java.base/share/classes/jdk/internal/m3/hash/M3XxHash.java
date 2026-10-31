@@ -27,6 +27,40 @@ import static java.nio.ByteOrder.LITTLE_ENDIAN;
  * This implementation provides endian-independant hash values, but it's slower on big-endian platforms.
  */
 class M3XxHash {
+    //FLLDCIM: M3 - LITERAL_CONSTANTS v1.1: this class's magic literals, named by role (user rule: no magic numbers, no floating strings)
+    /** Bytes of one stripe: four 64-bit lanes. */
+    private static final int STRIPE_BYTES = 32;
+    /** Rotation of the round function. */
+    private static final int ROUND_ROTATION = 31;
+    /** Offset of the second lane in a stripe. */
+    private static final int LANE_2_OFFSET = 8;
+    /** Offset of the third lane in a stripe. */
+    private static final int LANE_3_OFFSET = 16;
+    /** Offset of the fourth lane in a stripe. */
+    private static final int LANE_4_OFFSET = 24;
+    /** Rotation of the second lane when the lanes merge. */
+    private static final int MERGE_ROTATION_2 = 7;
+    /** Rotation of the third lane when the lanes merge. */
+    private static final int MERGE_ROTATION_3 = 12;
+    /** Rotation of the fourth lane when the lanes merge. */
+    private static final int MERGE_ROTATION_4 = 18;
+    /** Bytes of a 64-bit word: the step of the 8-byte tail. */
+    private static final int WORD_BYTES = 8;
+    /** Rotation after a 64-bit tail word. */
+    private static final int WORD_ROTATION = 27;
+    /** Bytes of an int: the step of the 4-byte tail. */
+    private static final int INT_BYTES = 4;
+    /** Rotation after a 32-bit tail int. */
+    private static final int INT_ROTATION = 23;
+    /** Rotation after a tail byte. */
+    private static final int BYTE_ROTATION = 11;
+    /** First shift of the avalanche. */
+    private static final int AVALANCHE_SHIFT_1 = 33;
+    /** Second shift of the avalanche. */
+    private static final int AVALANCHE_SHIFT_2 = 29;
+    /** Third shift of the avalanche. */
+    private static final int AVALANCHE_SHIFT_3 = 32;
+
     // Primes if treated as unsigned
     private static final long P1 = -7046029288634856825L;
     private static final long P2 = -4417276706812531889L;
@@ -38,7 +72,7 @@ class M3XxHash {
         long hash;
         long remaining = length;
 
-        if (remaining >= 32) {
+        if (remaining >= STRIPE_BYTES) {
             long v1 = seed + P1 + P2;
             long v2 = seed + P2;
             long v3 = seed;
@@ -46,50 +80,50 @@ class M3XxHash {
 
             do {
                 v1 += access.i64(input, off) * P2;
-                v1 = Long.rotateLeft(v1, 31);
+                v1 = Long.rotateLeft(v1, ROUND_ROTATION);
                 v1 *= P1;
 
-                v2 += access.i64(input, off + 8) * P2;
-                v2 = Long.rotateLeft(v2, 31);
+                v2 += access.i64(input, off + LANE_2_OFFSET) * P2;
+                v2 = Long.rotateLeft(v2, ROUND_ROTATION);
                 v2 *= P1;
 
-                v3 += access.i64(input, off + 16) * P2;
-                v3 = Long.rotateLeft(v3, 31);
+                v3 += access.i64(input, off + LANE_3_OFFSET) * P2;
+                v3 = Long.rotateLeft(v3, ROUND_ROTATION);
                 v3 *= P1;
 
-                v4 += access.i64(input, off + 24) * P2;
-                v4 = Long.rotateLeft(v4, 31);
+                v4 += access.i64(input, off + LANE_4_OFFSET) * P2;
+                v4 = Long.rotateLeft(v4, ROUND_ROTATION);
                 v4 *= P1;
 
-                off += 32;
-                remaining -= 32;
-            } while (remaining >= 32);
+                off += STRIPE_BYTES;
+                remaining -= STRIPE_BYTES;
+            } while (remaining >= STRIPE_BYTES);
 
             hash = Long.rotateLeft(v1, 1)
-                + Long.rotateLeft(v2, 7)
-                + Long.rotateLeft(v3, 12)
-                + Long.rotateLeft(v4, 18);
+                + Long.rotateLeft(v2, MERGE_ROTATION_2)
+                + Long.rotateLeft(v3, MERGE_ROTATION_3)
+                + Long.rotateLeft(v4, MERGE_ROTATION_4);
 
             v1 *= P2;
-            v1 = Long.rotateLeft(v1, 31);
+            v1 = Long.rotateLeft(v1, ROUND_ROTATION);
             v1 *= P1;
             hash ^= v1;
             hash = hash * P1 + P4;
 
             v2 *= P2;
-            v2 = Long.rotateLeft(v2, 31);
+            v2 = Long.rotateLeft(v2, ROUND_ROTATION);
             v2 *= P1;
             hash ^= v2;
             hash = hash * P1 + P4;
 
             v3 *= P2;
-            v3 = Long.rotateLeft(v3, 31);
+            v3 = Long.rotateLeft(v3, ROUND_ROTATION);
             v3 *= P1;
             hash ^= v3;
             hash = hash * P1 + P4;
 
             v4 *= P2;
-            v4 = Long.rotateLeft(v4, 31);
+            v4 = Long.rotateLeft(v4, ROUND_ROTATION);
             v4 *= P1;
             hash ^= v4;
             hash = hash * P1 + P4;
@@ -99,27 +133,27 @@ class M3XxHash {
 
         hash += length;
 
-        while (remaining >= 8) {
+        while (remaining >= WORD_BYTES) {
             long k1 = access.i64(input, off);
             k1 *= P2;
-            k1 = Long.rotateLeft(k1, 31);
+            k1 = Long.rotateLeft(k1, ROUND_ROTATION);
             k1 *= P1;
             hash ^= k1;
-            hash = Long.rotateLeft(hash, 27) * P1 + P4;
-            off += 8;
-            remaining -= 8;
+            hash = Long.rotateLeft(hash, WORD_ROTATION) * P1 + P4;
+            off += WORD_BYTES;
+            remaining -= WORD_BYTES;
         }
 
-        if (remaining >= 4) {
+        if (remaining >= INT_BYTES) {
             hash ^= access.u32(input, off) * P1;
-            hash = Long.rotateLeft(hash, 23) * P2 + P3;
-            off += 4;
-            remaining -= 4;
+            hash = Long.rotateLeft(hash, INT_ROTATION) * P2 + P3;
+            off += INT_BYTES;
+            remaining -= INT_BYTES;
         }
 
         while (remaining != 0) {
             hash ^= access.u8(input, off) * P5;
-            hash = Long.rotateLeft(hash, 11) * P1;
+            hash = Long.rotateLeft(hash, BYTE_ROTATION) * P1;
             --remaining;
             ++off;
         }
@@ -128,11 +162,11 @@ class M3XxHash {
     }
 
     private static long finalize(long hash) {
-        hash ^= hash >>> 33;
+        hash ^= hash >>> AVALANCHE_SHIFT_1;
         hash *= P2;
-        hash ^= hash >>> 29;
+        hash ^= hash >>> AVALANCHE_SHIFT_2;
         hash *= P3;
-        hash ^= hash >>> 32;
+        hash ^= hash >>> AVALANCHE_SHIFT_3;
         return hash;
     }
 
@@ -141,6 +175,24 @@ class M3XxHash {
     }
 
     private static class AsLongHashFunction extends M3LongHashFunction {
+        //FLLDCIM: M3 - LITERAL_CONSTANTS v1.1: this class's magic literals, named by role (user rule: no magic numbers, no floating strings)
+        /** Byte length of a hashed long. */
+        private static final int LONG_LENGTH = 8;
+        /** Rotation of the round function. */
+        private static final int ROUND_ROTATION = 31;
+        /** Rotation after a 64-bit tail word. */
+        private static final int WORD_ROTATION = 27;
+        /** Byte length of a hashed int. */
+        private static final int INT_LENGTH = 4;
+        /** Rotation after a 32-bit tail int. */
+        private static final int INT_ROTATION = 23;
+        /** Byte length of a hashed short or char. */
+        private static final int SHORT_LENGTH = 2;
+        /** Rotation after a tail byte. */
+        private static final int BYTE_ROTATION = 11;
+        /** Bits of a byte: the second byte of a short. */
+        private static final int BYTE_BITS = 8;
+
         private static final long serialVersionUID = 0L;
         static final AsLongHashFunction SEEDLESS_INSTANCE = new AsLongHashFunction();
         private static final long VOID_HASH = M3XxHash.finalize(P5);
@@ -156,32 +208,32 @@ class M3XxHash {
         @Override
         public long hashLong(long input) {
             input = M3Primitives.nativeToLittleEndian(input);
-            long hash = seed() + P5 + 8;
+            long hash = seed() + P5 + LONG_LENGTH;
             input *= P2;
-            input = Long.rotateLeft(input, 31);
+            input = Long.rotateLeft(input, ROUND_ROTATION);
             input *= P1;
             hash ^= input;
-            hash = Long.rotateLeft(hash, 27) * P1 + P4;
+            hash = Long.rotateLeft(hash, WORD_ROTATION) * P1 + P4;
             return M3XxHash.finalize(hash);
         }
 
         @Override
         public long hashInt(int input) {
             input = M3Primitives.nativeToLittleEndian(input);
-            long hash = seed() + P5 + 4;
+            long hash = seed() + P5 + INT_LENGTH;
             hash ^= M3Primitives.unsignedInt(input) * P1;
-            hash = Long.rotateLeft(hash, 23) * P2 + P3;
+            hash = Long.rotateLeft(hash, INT_ROTATION) * P2 + P3;
             return M3XxHash.finalize(hash);
         }
 
         @Override
         public long hashShort(short input) {
             input = M3Primitives.nativeToLittleEndian(input);
-            long hash = seed() + P5 + 2;
+            long hash = seed() + P5 + SHORT_LENGTH;
             hash ^= M3Primitives.unsignedByte(input) * P5;
-            hash = Long.rotateLeft(hash, 11) * P1;
-            hash ^= M3Primitives.unsignedByte(input >> 8) * P5;
-            hash = Long.rotateLeft(hash, 11) * P1;
+            hash = Long.rotateLeft(hash, BYTE_ROTATION) * P1;
+            hash ^= M3Primitives.unsignedByte(input >> BYTE_BITS) * P5;
+            hash = Long.rotateLeft(hash, BYTE_ROTATION) * P1;
             return M3XxHash.finalize(hash);
         }
 
@@ -194,7 +246,7 @@ class M3XxHash {
         public long hashByte(byte input) {
             long hash = seed() + P5 + 1;
             hash ^= M3Primitives.unsignedByte(input) * P5;
-            hash = Long.rotateLeft(hash, 11) * P1;
+            hash = Long.rotateLeft(hash, BYTE_ROTATION) * P1;
             return M3XxHash.finalize(hash);
         }
 

@@ -26,6 +26,21 @@ import static java.nio.ByteOrder.BIG_ENDIAN;
 import static java.nio.ByteOrder.LITTLE_ENDIAN;
 
 public abstract class M3CharSequenceAccess extends M3Access<CharSequence> {
+    //FLLDCIM: M3 - LITERAL_CONSTANTS v1.1: this class's magic literals, named by role (user rule: no magic numbers, no floating strings)
+    /** Bit position of the second char of a read at an even offset. */
+    private static final int CHAR_1_SHIFT = 16;
+    /** Bit position of the third char of a read at an even offset. */
+    private static final int CHAR_2_SHIFT = 32;
+    /** Bit position of the fourth char of a read at an even offset. */
+    private static final int CHAR_3_SHIFT = 48;
+    /** Bits of a byte: a read at an odd offset starts at the high byte of a char, which moves down by a byte; the next char moves up by one. */
+    private static final int BYTE_BITS = 8;
+    /** Bit position of the third char of a read at an odd offset. */
+    private static final int ODD_CHAR_2_SHIFT = 24;
+    /** Bit position of the fourth char of a read at an odd offset. */
+    private static final int ODD_CHAR_3_SHIFT = 40;
+    /** Bit position of the fifth char (its low byte) of a read at an odd offset. */
+    private static final int ODD_CHAR_4_SHIFT = 56;
 
     static M3CharSequenceAccess charSequenceAccess(ByteOrder order) {
         return order == LITTLE_ENDIAN ?
@@ -50,14 +65,14 @@ public abstract class M3CharSequenceAccess extends M3Access<CharSequence> {
             final long char1 = input.charAt(base + char1Off);
             final long char2 = input.charAt(base + char2Off);
             final long char3 = input.charAt(base + char3Off);
-            return char0 | (char1 << 16) | (char2 << 32) | (char3 << 48);
+            return char0 | (char1 << CHAR_1_SHIFT) | (char2 << CHAR_2_SHIFT) | (char3 << CHAR_3_SHIFT);
         } else {
-            final long char0 = input.charAt(base + char0Off + delta) >>> 8;
+            final long char0 = input.charAt(base + char0Off + delta) >>> BYTE_BITS;
             final long char1 = input.charAt(base + char1Off + delta);
             final long char2 = input.charAt(base + char2Off + delta);
             final long char3 = input.charAt(base + char3Off + delta);
             final long char4 = input.charAt(base + char4Off);
-            return char0 | (char1 << 8) | (char2 << 24) | (char3 << 40) | (char4 << 56);
+            return char0 | (char1 << BYTE_BITS) | (char2 << ODD_CHAR_2_SHIFT) | (char3 << ODD_CHAR_3_SHIFT) | (char4 << ODD_CHAR_4_SHIFT);
         }
     }
 
@@ -67,12 +82,12 @@ public abstract class M3CharSequenceAccess extends M3Access<CharSequence> {
         if (0 == ((int)offset & 1)) {
             final long char0 = input.charAt(base + char0Off);
             final long char1 = input.charAt(base + char1Off);
-            return char0 | (char1 << 16);
+            return char0 | (char1 << CHAR_1_SHIFT);
         } else {
-            final long char0 = input.charAt(base + char0Off + delta) >>> 8;
+            final long char0 = input.charAt(base + char0Off + delta) >>> BYTE_BITS;
             final long char1 = input.charAt(base + char1Off + delta);
             final long char2 = M3Primitives.unsignedByte(input.charAt(base + char2Off));
-            return char0 | (char1 << 8) | (char2 << 24);
+            return char0 | (char1 << BYTE_BITS) | (char2 << ODD_CHAR_2_SHIFT);
         }
     }
 
@@ -82,9 +97,9 @@ public abstract class M3CharSequenceAccess extends M3Access<CharSequence> {
             return input.charAt(ix(offset));
         } else {
             final int base = ix(offset);
-            final int char0 = input.charAt(base + delta) >>> 8;
+            final int char0 = input.charAt(base + delta) >>> BYTE_BITS;
             final int char1 = input.charAt(base + char1Off);
-            return (char)(char0 | (char1 << 8));
+            return (char)(char0 | (char1 << BYTE_BITS));
         }
     }
 
@@ -152,6 +167,16 @@ public abstract class M3CharSequenceAccess extends M3Access<CharSequence> {
     }
 
     private static class LittleEndianCharSequenceAccess extends M3CharSequenceAccess {
+        //FLLDCIM: M3 - LITERAL_CONSTANTS v1.1: this class's magic literals, named by role (user rule: no magic numbers, no floating strings)
+        /** Index of the third char of a little-endian read. */
+        private static final int CHAR_2_INDEX = 2;
+        /** Index of the fourth char of a little-endian read. */
+        private static final int CHAR_3_INDEX = 3;
+        /** Index of the fifth char of a little-endian read at an odd offset. */
+        private static final int CHAR_4_INDEX = 4;
+        /** log2 of the bits of a byte: (offset & 1) << 3 is the bit position of the addressed byte in its char. */
+        private static final int BYTE_BITS_LOG2 = 3;
+
         private static final M3CharSequenceAccess INSTANCE = new LittleEndianCharSequenceAccess();
         private static final M3Access<CharSequence> INSTANCE_REVERSE = M3Access.newDefaultReverseAccess(INSTANCE);
 
@@ -159,12 +184,12 @@ public abstract class M3CharSequenceAccess extends M3Access<CharSequence> {
 
         @Override
         public long getLong(CharSequence input, long offset) {
-            return getLong(input, offset, 0, 1, 2, 3, 4, 0);
+            return getLong(input, offset, 0, 1, CHAR_2_INDEX, CHAR_3_INDEX, CHAR_4_INDEX, 0);
         }
 
         @Override
         public long getUnsignedInt(CharSequence input, long offset) {
-            return getUnsignedInt(input, offset, 0, 1, 2, 0);
+            return getUnsignedInt(input, offset, 0, 1, CHAR_2_INDEX, 0);
         }
 
         @Override
@@ -174,7 +199,7 @@ public abstract class M3CharSequenceAccess extends M3Access<CharSequence> {
 
         @Override
         public int getUnsignedByte(CharSequence input, long offset) {
-            return getUnsignedByte(input, offset, ((int) offset & 1) << 3);
+            return getUnsignedByte(input, offset, ((int) offset & 1) << BYTE_BITS_LOG2);
         }
 
         @Override
@@ -189,6 +214,14 @@ public abstract class M3CharSequenceAccess extends M3Access<CharSequence> {
     }
 
     private static class BigEndianCharSequenceAccess extends M3CharSequenceAccess {
+        //FLLDCIM: M3 - LITERAL_CONSTANTS v1.1: this class's magic literals, named by role (user rule: no magic numbers, no floating strings)
+        /** Index of the char that holds the lowest bytes of a big-endian read. */
+        private static final int CHAR_0_INDEX = 3;
+        /** Index of the char that holds the next bytes of a big-endian read. */
+        private static final int CHAR_1_INDEX = 2;
+        /** log2 of the bits of a byte: (offset & 1) << 3 is the bit position of the addressed byte in its char. */
+        private static final int BYTE_BITS_LOG2 = 3;
+
         private static final M3CharSequenceAccess INSTANCE = new BigEndianCharSequenceAccess();
         private static final M3Access<CharSequence> INSTANCE_REVERSE = M3Access.newDefaultReverseAccess(INSTANCE);
 
@@ -196,7 +229,7 @@ public abstract class M3CharSequenceAccess extends M3Access<CharSequence> {
 
         @Override
         public long getLong(CharSequence input, long offset) {
-            return getLong(input, offset, 3, 2, 1, 0, 0, 1);
+            return getLong(input, offset, CHAR_0_INDEX, CHAR_1_INDEX, 1, 0, 0, 1);
         }
 
         @Override
@@ -211,7 +244,7 @@ public abstract class M3CharSequenceAccess extends M3Access<CharSequence> {
 
         @Override
         public int getUnsignedByte(CharSequence input, long offset) {
-            return getUnsignedByte(input, offset, (((int) offset & 1) ^ 1) << 3);
+            return getUnsignedByte(input, offset, (((int) offset & 1) ^ 1) << BYTE_BITS_LOG2);
         }
 
         @Override

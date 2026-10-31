@@ -60,6 +60,21 @@ import static java.nio.ByteOrder.LITTLE_ENDIAN;
  * @see LongHashFunction#hash(Object, Access, long, long)
  */
 public abstract class M3Access<T> {
+    //FLLDCIM: M3 - LITERAL_CONSTANTS v1.1: this class's magic literals, named by role (user rule: no magic numbers, no floating strings)
+    /** Bytes of an int: offset of the second int of a long. */
+    private static final long INT_BYTES = 4L;
+    /** Bits of an int: shift of the second int of a long. */
+    private static final int INT_BITS = 32;
+    /** The low 32 bits: an int read as unsigned. */
+    private static final long UNSIGNED_INT_MASK = 0xFFFFFFFFL;
+    /** Bytes of a short: offset of the second short of an int. */
+    private static final long SHORT_BYTES = 2L;
+    /** Bits of a short: shift of the second short of an int. */
+    private static final int SHORT_BITS = 16;
+    /** Bits of a byte: shift of the second byte of a short. */
+    private static final int BYTE_BITS = 8;
+    /** The low 8 bits: a byte read as unsigned. */
+    private static final int UNSIGNED_BYTE_MASK = 0xFF;
 
     /**
      * Returns the {@code Access} to any {@link ByteBuffer}. This {@code Access} isn't useful in
@@ -135,9 +150,9 @@ public abstract class M3Access<T> {
      */
     public long getLong(T input, long offset) {
         if (byteOrder(input) == LITTLE_ENDIAN) {
-            return getUnsignedInt(input, offset) | (getUnsignedInt(input, offset + 4L) << 32);
+            return getUnsignedInt(input, offset) | (getUnsignedInt(input, offset + INT_BYTES) << INT_BITS);
         } else {
-            return getUnsignedInt(input, offset + 4L) | (getUnsignedInt(input, offset) << 32);
+            return getUnsignedInt(input, offset + INT_BYTES) | (getUnsignedInt(input, offset) << INT_BITS);
         }
     }
 
@@ -152,7 +167,7 @@ public abstract class M3Access<T> {
      * order}
      */
     public long getUnsignedInt(T input, long offset) {
-        return ((long) getInt(input, offset)) & 0xFFFFFFFFL;
+        return ((long) getInt(input, offset)) & UNSIGNED_INT_MASK;
     }
 
     /**
@@ -167,9 +182,9 @@ public abstract class M3Access<T> {
      */
     public int getInt(T input, long offset) {
         if (byteOrder(input) == LITTLE_ENDIAN) {
-            return getUnsignedShort(input, offset) | (getUnsignedShort(input, offset + 2L) << 16);
+            return getUnsignedShort(input, offset) | (getUnsignedShort(input, offset + SHORT_BYTES) << SHORT_BITS);
         } else {
-            return getUnsignedShort(input, offset + 2L) | (getUnsignedShort(input, offset) << 16);
+            return getUnsignedShort(input, offset + SHORT_BYTES) | (getUnsignedShort(input, offset) << SHORT_BITS);
         }
     }
 
@@ -185,9 +200,9 @@ public abstract class M3Access<T> {
      */
     public int getUnsignedShort(T input, long offset) {
         if (byteOrder(input) == LITTLE_ENDIAN) {
-            return getUnsignedByte(input, offset) | (getUnsignedByte(input, offset + 1L) << 8);
+            return getUnsignedByte(input, offset) | (getUnsignedByte(input, offset + 1L) << BYTE_BITS);
         } else {
-            return getUnsignedByte(input, offset + 1L) | (getUnsignedByte(input, offset) << 8);
+            return getUnsignedByte(input, offset + 1L) | (getUnsignedByte(input, offset) << BYTE_BITS);
         }
     }
 
@@ -214,7 +229,7 @@ public abstract class M3Access<T> {
      * @return a byte by the given {@code offset}, interpreted as unsigned
      */
     public int getUnsignedByte(T input, long offset) {
-        return getByte(input, offset) & 0xFF;
+        return getByte(input, offset) & UNSIGNED_BYTE_MASK;
     }
 
     /**
@@ -278,6 +293,12 @@ public abstract class M3Access<T> {
      * The default reverse byte order delegating {@code Access} class.
      */
     private static class ReverseAccess<T> extends M3Access<T> {
+        //FLLDCIM: M3 - LITERAL_CONSTANTS v1.1: this class's magic literals, named by role (user rule: no magic numbers, no floating strings)
+        /** Bits of an int: a reversed unsigned int lies in the high half of the long. */
+        private static final int INT_BITS = 32;
+        /** Bits of a short: a reversed short lies in the high half of the int. */
+        private static final int SHORT_BITS = 16;
+
         final M3Access<T> access;
         private ReverseAccess(final M3Access<T> access) {
             this.access = access;
@@ -330,7 +351,7 @@ public abstract class M3Access<T> {
         }
         @Override
         public long getUnsignedInt(final T input, final long offset) {
-            return Long.reverseBytes(access.getUnsignedInt(input, offset)) >>> 32;
+            return Long.reverseBytes(access.getUnsignedInt(input, offset)) >>> INT_BITS;
         }
         @Override
         public int getInt(final T input, final long offset) {
@@ -338,11 +359,11 @@ public abstract class M3Access<T> {
         }
         @Override
         public int getUnsignedShort(final T input, final long offset) {
-            return Integer.reverseBytes(access.getUnsignedShort(input, offset)) >>> 16;
+            return Integer.reverseBytes(access.getUnsignedShort(input, offset)) >>> SHORT_BITS;
         }
         @Override
         public int getShort(final T input, final long offset) {
-            return Integer.reverseBytes(access.getShort(input, offset)) >> 16;
+            return Integer.reverseBytes(access.getShort(input, offset)) >> SHORT_BITS;
         }
         @Override
         public int getUnsignedByte(final T input, final long offset) {

@@ -69,6 +69,10 @@ import static jdk.internal.m3.hash.M3Util.*;
  * do defensive checks, and access only bytes within the requested range.
  */
 public abstract class M3LongHashFunction implements Serializable {
+    //FLLDCIM: M3 - LITERAL_CONSTANTS v1.1: this class's magic literals, named by role (user rule: no magic numbers, no floating strings)
+    /** Bytes of a char: char offsets and lengths in bytes. */
+    private static final long CHAR_BYTES = 2L;
+
     private static final long serialVersionUID = 0L;
 
     /**
@@ -503,6 +507,10 @@ public abstract class M3LongHashFunction implements Serializable {
     private long hashByteBuffer(ByteBuffer input, int off, int len) {
         if (input.hasArray()) {
             return unsafeHash(input.array(), BYTE_BASE + input.arrayOffset() + off, len);
+        } else if (input.isDirect() && off + len > input.limit()) {
+            // read up to the capacity, as the donor's address read did (the limit does not bound it)
+            return hash(input.duplicate().order(input.order()).limit(input.capacity()),
+                    M3ByteBufferAccess.INSTANCE, off, len);
         } else {
             return hash(input, M3ByteBufferAccess.INSTANCE, off, len);
         }
@@ -567,6 +575,6 @@ public abstract class M3LongHashFunction implements Serializable {
     }
 
     long hashNativeChars(CharSequence input, int off, int len) {
-        return hash(input, nativeCharSequenceAccess(), off * 2L, len * 2L);
+        return hash(input, nativeCharSequenceAccess(), off * CHAR_BYTES, len * CHAR_BYTES);
     }
 }

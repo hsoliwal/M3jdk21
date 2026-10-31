@@ -1,11 +1,11 @@
 # host: Windows 11 (shared with other sessions; rows vary run to run), stock JDK 21.0.9 + patched java.base (--patch-module); M3HashAtomsPerf: static final MethodHandles bound to the function (invokeExact), corpus 2048 random inputs of length 0..1100, 40 passes per round, warm-up 6, best of 7
-# committed-N: M3ByteArrayAccess over jdk.internal.util.ByteArrayLittleEndian (this change), three runs (committed-3: tools/gate.sh)
+# committed-N: M3ByteArrayAccess over jdk.internal.util.ByteArrayLittleEndian (this change), five runs (committed-3: tools/gate.sh; committed-4: after the review fixes of #2232; committed-5: after LITERAL_CONSTANTS, method bytecode identical to committed-4, so its differences are host noise)
 # alternative-internal-unsafe: the same rows with M3ByteArrayAccess over jdk.internal.misc.Unsafe getLong/getInt/getShort (NOT committed; isolates the cost of the access)
 # speedup = vendored ns/op / absorbed ns/op (above 1: absorbed faster)
 # columns since the JIT leaf: median and best of the measured rounds (interleaved A/B), rounds, mean system CPU load; the earlier runs (6-column table) carried over: their single value was the best of 7 rounds
-# <variant>-clean-<path>: one JVM per M3HashAtomsPerf row group (bytes, xxh3-64, xxh3-128, string, bytebuffer, access+kernel); <variant>-clean-all: every group in one JVM (shared kernels see every input kind); variants: before = base 32f8e561b29, split = XXH3_SPLIT v1 only, after = this change (XXH3_SPLIT v1 + UNSAFE_TO_BYTE_ARRAY v2 + FACADE_ENTRY_CHECK v1); tools/jit_gate.sh
+# <variant>-clean-<path>: one JVM per M3HashAtomsPerf row group (bytes, xxh3-64, xxh3-128, string, bytebuffer, access+kernel); <variant>-clean-all: every group in one JVM (shared kernels see every input kind); variants: before = 32f8e561b29 (the absorption before review), split = XXH3_SPLIT v1 only, v2 = + UNSAFE_TO_BYTE_ARRAY v2 + FACADE_ENTRY_CHECK v1, after = + ACCESS_SHORT_NAMES v1 (this change before the merge of the review commits, whose LITERAL_CONSTANTS step leaves method bytecode unchanged); tools/jit_gate.sh
 # diag-<d>-r<n>, diag3-<d>-r<n>: diagnostic builds on top of the split (scratch, NOT committed), two repetitions: d1 = every byte[] read through jdk.internal.misc.Unsafe behind its own Preconditions.checkIndex (ByteArrayLittleEndian's check), d2 = the same reads unchecked, d3 = a checked and an unchecked instance chosen by a final field per read
-# after-gate-all: the perf step of tools/gate.sh on this change (every group in one JVM)
+# after-merged-gate-all: the perf step of tools/gate.sh on this change merged with the review commits (every group in one JVM)
 run	group	atom	form	lengths	ns_per_op_absorbed_median	ns_per_op_vendored_median	speedup_median	ns_per_op_absorbed_best	ns_per_op_vendored_best	speedup_best	rounds	load_pct
 committed-1	bytes	M3XxHash	xx() hashBytes(byte[])	0..1100	NA	NA	NA	72.72	59.21	0.81	7	NA
 committed-1	bytes	M3XXH3	xx3() hashBytes(byte[])	0..1100	NA	NA	NA	100.78	75.36	0.75	7	NA
@@ -49,6 +49,34 @@ committed-3	bytes	M3MetroHash	metro() hashBytes(byte[])	0..1100	NA	NA	NA	64.04	4
 committed-3	string	M3CharSequenceAccess	xx3() hashChars(Latin-1 String)	0..1100	NA	NA	NA	593.41	148.11	0.25	7	NA
 committed-3	string	M3CharSequenceAccess	xx3() hashChars(UTF-16 String)	0..1100	NA	NA	NA	1489.05	87.39	0.06	7	NA
 committed-3	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer, off, len)	0..1100	NA	NA	NA	687.52	111.67	0.16	7	NA
+committed-4	bytes	M3XxHash	xx() hashBytes(byte[])	0..1100	NA	NA	NA	66.48	59.31	0.89	7	NA
+committed-4	bytes	M3XXH3	xx3() hashBytes(byte[])	0..1100	NA	NA	NA	83.37	61.72	0.74	7	NA
+committed-4	bytes	M3XXH3	xx128low() hashBytes(byte[])	0..1100	NA	NA	NA	238.39	63.77	0.27	7	NA
+committed-4	bytes	M3XXH3	xx128() hashBytes(byte[]) -> long[2]	0..1100	NA	NA	NA	259.00	54.13	0.21	7	NA
+committed-4	bytes	M3WyHash	wy_3() hashBytes(byte[])	0..1100	NA	NA	NA	62.12	64.88	1.04	7	NA
+committed-4	bytes	M3MurmurHash_3	murmur_3() hashBytes(byte[])	0..1100	NA	NA	NA	104.07	84.41	0.81	7	NA
+committed-4	bytes	M3MurmurHash_3	murmur_3() tuple hashBytes(byte[]) -> long[2]	0..1100	NA	NA	NA	100.60	90.43	0.90	7	NA
+committed-4	bytes	M3CityAndFarmHash_1_1	city_1_1() hashBytes(byte[])	0..1100	NA	NA	NA	77.26	50.90	0.66	7	NA
+committed-4	bytes	M3CityAndFarmHash_1_1	farmNa() hashBytes(byte[])	0..1100	NA	NA	NA	55.76	48.83	0.88	7	NA
+committed-4	bytes	M3CityAndFarmHash_1_1	farmUo() hashBytes(byte[])	0..1100	NA	NA	NA	63.32	79.30	1.25	7	NA
+committed-4	bytes	M3MetroHash	metro() hashBytes(byte[])	0..1100	NA	NA	NA	83.50	93.07	1.11	7	NA
+committed-4	string	M3CharSequenceAccess	xx3() hashChars(Latin-1 String)	0..1100	NA	NA	NA	423.78	116.57	0.28	7	NA
+committed-4	string	M3CharSequenceAccess	xx3() hashChars(UTF-16 String)	0..1100	NA	NA	NA	1147.67	61.28	0.05	7	NA
+committed-4	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer, off, len)	0..1100	NA	NA	NA	385.08	64.80	0.17	7	NA
+committed-5	bytes	M3XxHash	xx() hashBytes(byte[])	0..1100	NA	NA	NA	75.27	68.83	0.91	7	NA
+committed-5	bytes	M3XXH3	xx3() hashBytes(byte[])	0..1100	NA	NA	NA	92.46	69.50	0.75	7	NA
+committed-5	bytes	M3XXH3	xx128low() hashBytes(byte[])	0..1100	NA	NA	NA	251.23	72.86	0.29	7	NA
+committed-5	bytes	M3XXH3	xx128() hashBytes(byte[]) -> long[2]	0..1100	NA	NA	NA	256.56	69.90	0.27	7	NA
+committed-5	bytes	M3WyHash	wy_3() hashBytes(byte[])	0..1100	NA	NA	NA	70.71	97.71	1.38	7	NA
+committed-5	bytes	M3MurmurHash_3	murmur_3() hashBytes(byte[])	0..1100	NA	NA	NA	176.55	95.66	0.54	7	NA
+committed-5	bytes	M3MurmurHash_3	murmur_3() tuple hashBytes(byte[]) -> long[2]	0..1100	NA	NA	NA	109.15	97.64	0.89	7	NA
+committed-5	bytes	M3CityAndFarmHash_1_1	city_1_1() hashBytes(byte[])	0..1100	NA	NA	NA	67.21	50.76	0.76	7	NA
+committed-5	bytes	M3CityAndFarmHash_1_1	farmNa() hashBytes(byte[])	0..1100	NA	NA	NA	59.61	53.01	0.89	7	NA
+committed-5	bytes	M3CityAndFarmHash_1_1	farmUo() hashBytes(byte[])	0..1100	NA	NA	NA	61.56	50.60	0.82	7	NA
+committed-5	bytes	M3MetroHash	metro() hashBytes(byte[])	0..1100	NA	NA	NA	90.97	57.15	0.63	7	NA
+committed-5	string	M3CharSequenceAccess	xx3() hashChars(Latin-1 String)	0..1100	NA	NA	NA	556.89	142.04	0.26	7	NA
+committed-5	string	M3CharSequenceAccess	xx3() hashChars(UTF-16 String)	0..1100	NA	NA	NA	1289.53	64.43	0.05	7	NA
+committed-5	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer, off, len)	0..1100	NA	NA	NA	484.56	69.18	0.14	7	NA
 alternative-internal-unsafe	bytes	M3XxHash	xx() hashBytes(byte[])	0..1100	NA	NA	NA	57.83	63.23	1.09	7	NA
 alternative-internal-unsafe	bytes	M3XXH3	xx3() hashBytes(byte[])	0..1100	NA	NA	NA	68.14	88.43	1.30	7	NA
 alternative-internal-unsafe	bytes	M3XXH3	xx128low() hashBytes(byte[])	0..1100	NA	NA	NA	71.07	66.57	0.94	7	NA
@@ -223,86 +251,166 @@ split-clean-all	kernel	M3Maths	unsignedLongMulXorFold(long, long)	4096 random pa
 split-clean-all	kernel	M3Maths	unsignedLongMulHigh(long, long)	4096 random pairs	0.93	0.86	0.93	0.80	0.82	1.02	9	55
 split-clean-all	kernel	M3Primitives	unsignedInt(int)	4096 random pairs	0.22	0.23	1.08	0.21	0.21	1.00	9	58
 split-clean-all	kernel	M3Util	checkArrayOffs(int, int, int)	4096 random pairs	0.29	0.28	0.98	0.27	0.27	1.00	9	58
-after-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_len_0to16_64b (len 0)	xx3() hashBytes(byte[])	0..0	0.83	3.28	3.97	0.67	2.80	4.18	9	100
-after-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_len_1to3_64b	xx3() hashBytes(byte[])	1..3	2.03	3.69	1.82	1.92	3.38	1.76	9	42
-after-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_len_4to8_64b	xx3() hashBytes(byte[])	4..8	1.80	4.41	2.44	1.70	4.09	2.41	9	41
-after-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_len_9to16_64b	xx3() hashBytes(byte[])	9..16	3.04	4.53	1.49	2.52	3.72	1.47	9	39
-after-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_len_17to128_64b	xx3() hashBytes(byte[])	17..128	10.56	21.28	2.01	9.77	19.86	2.03	9	44
-after-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_len_129to240_64b	xx3() hashBytes(byte[])	129..240	23.57	31.17	1.32	21.79	28.97	1.33	9	40
-after-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_hashLong (64-bit)	xx3() hashBytes(byte[])	241..1100	68.88	168.05	2.44	66.23	146.47	2.21	9	51
-after-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_hashLong (64-bit, blocks)	xx3() hashBytes(byte[])	1100..4200	278.34	1459.25	5.24	228.98	1353.71	5.91	9	55
-after-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_len_0to16_128b (len 0)	xx128() hashBytes(byte[]) -> long[2]	0..0	0.65	6.61	10.19	0.61	4.69	7.67	9	21
-after-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_len_1to3_128b	xx128() hashBytes(byte[]) -> long[2]	1..3	2.52	8.00	3.17	2.18	6.86	3.15	9	57
-after-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_len_4to8_128b	xx128() hashBytes(byte[]) -> long[2]	4..8	5.61	7.90	1.41	4.51	6.54	1.45	9	59
-after-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_len_9to16_128b	xx128() hashBytes(byte[]) -> long[2]	9..16	7.06	7.80	1.10	6.08	6.79	1.12	9	60
-after-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_len_17to128_128b	xx128() hashBytes(byte[]) -> long[2]	17..128	14.24	30.19	2.12	13.60	27.31	2.01	9	36
-after-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_len_129to240_128b	xx128() hashBytes(byte[]) -> long[2]	129..240	29.47	51.08	1.73	27.65	49.78	1.80	9	31
-after-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_hashLong (128-bit)	xx128() hashBytes(byte[]) -> long[2]	241..1100	90.36	197.28	2.18	73.13	154.48	2.11	9	47
-after-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_hashLong (128-bit, blocks)	xx128() hashBytes(byte[]) -> long[2]	1100..4200	235.86	1358.40	5.76	222.24	1287.57	5.79	9	51
-after-clean-bytes	bytes	M3XxHash	xx() hashBytes(byte[])	0..1100	76.57	72.79	0.95	61.70	57.25	0.93	9	57
-after-clean-bytes	bytes	M3XXH3	xx3() hashBytes(byte[])	0..1100	57.52	62.45	1.09	52.23	58.14	1.11	9	61
-after-clean-bytes	bytes	M3XXH3	xx128low() hashBytes(byte[])	0..1100	54.18	61.12	1.13	50.37	57.25	1.14	9	40
-after-clean-bytes	bytes	M3XXH3	xx128() hashBytes(byte[]) -> long[2]	0..1100	65.46	71.64	1.09	57.70	69.38	1.20	9	41
-after-clean-bytes	bytes	M3WyHash	wy_3() hashBytes(byte[])	0..1100	60.51	64.96	1.07	56.55	60.77	1.07	9	41
-after-clean-bytes	bytes	M3MurmurHash_3	murmur_3() hashBytes(byte[])	0..1100	91.26	89.28	0.98	87.57	85.40	0.98	9	38
-after-clean-bytes	bytes	M3MurmurHash_3	murmur_3() tuple hashBytes(byte[]) -> long[2]	0..1100	96.39	97.15	1.01	89.02	82.31	0.92	9	42
-after-clean-bytes	bytes	M3CityAndFarmHash_1_1	city_1_1() hashBytes(byte[])	0..1100	61.57	56.85	0.92	58.60	49.95	0.85	9	58
-after-clean-bytes	bytes	M3CityAndFarmHash_1_1	farmNa() hashBytes(byte[])	0..1100	60.75	48.68	0.80	56.59	47.49	0.84	9	44
-after-clean-bytes	bytes	M3CityAndFarmHash_1_1	farmUo() hashBytes(byte[])	0..1100	51.03	55.13	1.08	48.64	49.95	1.03	9	50
-after-clean-bytes	bytes	M3MetroHash	metro() hashBytes(byte[])	0..1100	52.75	57.70	1.09	48.02	53.56	1.12	9	43
-after-clean-string	string	M3CharSequenceAccess	xx3() hashChars(Latin-1 String)	0..550 chars	348.48	138.95	0.40	333.26	120.40	0.36	9	54
-after-clean-string	string	M3CharSequenceAccess	xx3() hashChars(UTF-16 String)	0..550 chars	979.07	89.00	0.09	942.37	79.52	0.08	9	36
-after-clean-string	string	M3CharSequenceAccess	xx3() hashChars(StringBuilder) [control: CharSequence access on both sides]	0..550 chars	580.13	277.39	0.48	543.18	258.36	0.48	9	43
-after-clean-bytebuffer	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer BIG_ENDIAN, off, len)	0..1100	101.28	71.66	0.71	93.53	66.94	0.72	9	34
-after-clean-bytebuffer	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer LITTLE_ENDIAN, off, len)	0..1100	144.72	70.96	0.49	132.54	67.96	0.51	9	31
-after-clean-bytebuffer	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(read-only heap ByteBuffer, off, len) [control: ByteBuffer access on both sides]	0..1100	325.52	216.25	0.66	308.42	203.81	0.66	9	29
-after-clean-access+kernel	access	M3ByteArrayAccess	getLong(byte[], off)	offsets 0..4095	0.27	0.26	0.99	0.26	0.25	0.97	9	0
-after-clean-access+kernel	access	M3ByteBufferAccess	getLong(direct ByteBuffer, off)	offsets 0..4095	0.30	0.31	1.04	0.29	0.29	1.00	9	40
-after-clean-access+kernel	access	M3CharSequenceAccess	getLong(UTF-16 String, off) native order	offsets 0..4095	12.13	12.56	1.04	11.46	11.50	1.00	9	38
-after-clean-access+kernel	kernel	M3Maths	unsignedLongMulXorFold(long, long)	4096 random pairs	0.96	0.98	1.02	0.86	0.90	1.05	9	31
-after-clean-access+kernel	kernel	M3Maths	unsignedLongMulHigh(long, long)	4096 random pairs	0.76	0.75	0.99	0.72	0.71	0.99	9	25
-after-clean-access+kernel	kernel	M3Primitives	unsignedInt(int)	4096 random pairs	0.23	0.22	0.96	0.19	0.19	1.00	9	25
-after-clean-access+kernel	kernel	M3Util	checkArrayOffs(int, int, int)	4096 random pairs	0.27	0.27	1.01	0.25	0.26	1.04	9	27
-after-clean-all	bytes	M3XxHash	xx() hashBytes(byte[])	0..1100	48.14	48.14	1.00	46.72	45.15	0.97	9	18
-after-clean-all	bytes	M3XXH3	xx3() hashBytes(byte[])	0..1100	47.68	54.42	1.14	45.75	49.81	1.09	9	32
-after-clean-all	bytes	M3XXH3	xx128low() hashBytes(byte[])	0..1100	47.59	54.31	1.14	43.74	53.18	1.22	9	23
-after-clean-all	bytes	M3XXH3	xx128() hashBytes(byte[]) -> long[2]	0..1100	62.35	68.10	1.09	60.87	64.79	1.06	9	23
-after-clean-all	bytes	M3WyHash	wy_3() hashBytes(byte[])	0..1100	58.48	62.55	1.07	53.55	56.25	1.05	9	34
-after-clean-all	bytes	M3MurmurHash_3	murmur_3() hashBytes(byte[])	0..1100	81.53	86.14	1.06	78.38	78.66	1.00	9	20
-after-clean-all	bytes	M3MurmurHash_3	murmur_3() tuple hashBytes(byte[]) -> long[2]	0..1100	81.44	84.62	1.04	76.04	76.36	1.00	9	19
-after-clean-all	bytes	M3CityAndFarmHash_1_1	city_1_1() hashBytes(byte[])	0..1100	53.37	47.12	0.88	47.24	43.34	0.92	9	19
-after-clean-all	bytes	M3CityAndFarmHash_1_1	farmNa() hashBytes(byte[])	0..1100	55.64	44.47	0.80	50.46	41.67	0.83	9	27
-after-clean-all	bytes	M3CityAndFarmHash_1_1	farmUo() hashBytes(byte[])	0..1100	45.78	50.95	1.11	39.85	47.02	1.18	9	29
-after-clean-all	bytes	M3MetroHash	metro() hashBytes(byte[])	0..1100	53.23	52.15	0.98	43.96	46.35	1.05	9	36
-after-clean-all	xxh3-64	M3XXH3.XXH3_len_0to16_64b (len 0)	xx3() hashBytes(byte[])	0..0	2.97	6.00	2.02	2.55	5.45	2.14	9	29
-after-clean-all	xxh3-64	M3XXH3.XXH3_len_1to3_64b	xx3() hashBytes(byte[])	1..3	4.98	13.37	2.68	4.80	12.20	2.54	9	42
-after-clean-all	xxh3-64	M3XXH3.XXH3_len_4to8_64b	xx3() hashBytes(byte[])	4..8	3.38	9.00	2.66	3.03	7.79	2.57	9	49
-after-clean-all	xxh3-64	M3XXH3.XXH3_len_9to16_64b	xx3() hashBytes(byte[])	9..16	3.94	16.86	4.28	3.76	16.11	4.28	9	44
-after-clean-all	xxh3-64	M3XXH3.XXH3_len_17to128_64b	xx3() hashBytes(byte[])	17..128	9.83	18.11	1.84	9.17	16.96	1.85	9	41
-after-clean-all	xxh3-64	M3XXH3.XXH3_len_129to240_64b	xx3() hashBytes(byte[])	129..240	24.39	27.80	1.14	21.03	23.77	1.13	9	38
-after-clean-all	xxh3-64	M3XXH3.XXH3_hashLong (64-bit)	xx3() hashBytes(byte[])	241..1100	69.26	80.36	1.16	64.05	68.40	1.07	9	41
-after-clean-all	xxh3-64	M3XXH3.XXH3_hashLong (64-bit, blocks)	xx3() hashBytes(byte[])	1100..4200	212.09	237.04	1.12	191.27	204.98	1.07	9	47
-after-clean-all	xxh3-128	M3XXH3.XXH3_len_0to16_128b (len 0)	xx128() hashBytes(byte[]) -> long[2]	0..0	7.06	17.83	2.52	5.33	16.59	3.11	9	58
-after-clean-all	xxh3-128	M3XXH3.XXH3_len_1to3_128b	xx128() hashBytes(byte[]) -> long[2]	1..3	8.12	30.46	3.75	7.93	27.63	3.49	9	51
-after-clean-all	xxh3-128	M3XXH3.XXH3_len_4to8_128b	xx128() hashBytes(byte[]) -> long[2]	4..8	6.73	17.13	2.54	6.05	13.72	2.27	9	43
-after-clean-all	xxh3-128	M3XXH3.XXH3_len_9to16_128b	xx128() hashBytes(byte[]) -> long[2]	9..16	8.22	27.11	3.30	6.63	22.66	3.42	9	56
-after-clean-all	xxh3-128	M3XXH3.XXH3_len_17to128_128b	xx128() hashBytes(byte[]) -> long[2]	17..128	16.07	26.02	1.62	14.07	23.25	1.65	9	42
-after-clean-all	xxh3-128	M3XXH3.XXH3_len_129to240_128b	xx128() hashBytes(byte[]) -> long[2]	129..240	33.12	41.05	1.24	30.35	34.92	1.15	9	48
-after-clean-all	xxh3-128	M3XXH3.XXH3_hashLong (128-bit)	xx128() hashBytes(byte[]) -> long[2]	241..1100	81.56	81.39	1.00	71.42	78.00	1.09	9	44
-after-clean-all	xxh3-128	M3XXH3.XXH3_hashLong (128-bit, blocks)	xx128() hashBytes(byte[]) -> long[2]	1100..4200	224.73	250.65	1.12	212.70	221.46	1.04	9	39
-after-clean-all	string	M3CharSequenceAccess	xx3() hashChars(Latin-1 String)	0..550 chars	383.63	151.65	0.40	353.13	140.32	0.40	9	43
-after-clean-all	string	M3CharSequenceAccess	xx3() hashChars(UTF-16 String)	0..550 chars	1173.28	81.38	0.07	1115.02	72.44	0.06	9	39
-after-clean-all	string	M3CharSequenceAccess	xx3() hashChars(StringBuilder) [control: CharSequence access on both sides]	0..550 chars	591.72	314.16	0.53	562.67	299.83	0.53	9	41
-after-clean-all	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer BIG_ENDIAN, off, len)	0..1100	330.21	75.48	0.23	308.57	69.00	0.22	9	33
-after-clean-all	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer LITTLE_ENDIAN, off, len)	0..1100	283.72	74.59	0.26	254.12	72.09	0.28	9	40
-after-clean-all	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(read-only heap ByteBuffer, off, len) [control: ByteBuffer access on both sides]	0..1100	356.21	255.14	0.72	333.76	246.58	0.74	9	32
-after-clean-all	access	M3ByteArrayAccess	getLong(byte[], off)	offsets 0..4095	0.26	0.28	1.06	0.24	0.24	1.00	9	39
-after-clean-all	access	M3ByteBufferAccess	getLong(direct ByteBuffer, off)	offsets 0..4095	0.30	0.34	1.14	0.29	0.29	1.00	9	28
-after-clean-all	access	M3CharSequenceAccess	getLong(UTF-16 String, off) native order	offsets 0..4095	15.04	14.85	0.99	14.39	14.10	0.98	9	41
-after-clean-all	kernel	M3Maths	unsignedLongMulXorFold(long, long)	4096 random pairs	0.92	0.94	1.02	0.88	0.86	0.98	9	38
-after-clean-all	kernel	M3Maths	unsignedLongMulHigh(long, long)	4096 random pairs	0.87	0.94	1.08	0.77	0.79	1.03	9	29
-after-clean-all	kernel	M3Primitives	unsignedInt(int)	4096 random pairs	0.26	0.21	0.79	0.20	0.20	0.98	9	48
-after-clean-all	kernel	M3Util	checkArrayOffs(int, int, int)	4096 random pairs	0.28	0.28	1.00	0.26	0.26	1.00	9	48
+v2-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_len_0to16_64b (len 0)	xx3() hashBytes(byte[])	0..0	0.83	3.28	3.97	0.67	2.80	4.18	9	100
+v2-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_len_1to3_64b	xx3() hashBytes(byte[])	1..3	2.03	3.69	1.82	1.92	3.38	1.76	9	42
+v2-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_len_4to8_64b	xx3() hashBytes(byte[])	4..8	1.80	4.41	2.44	1.70	4.09	2.41	9	41
+v2-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_len_9to16_64b	xx3() hashBytes(byte[])	9..16	3.04	4.53	1.49	2.52	3.72	1.47	9	39
+v2-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_len_17to128_64b	xx3() hashBytes(byte[])	17..128	10.56	21.28	2.01	9.77	19.86	2.03	9	44
+v2-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_len_129to240_64b	xx3() hashBytes(byte[])	129..240	23.57	31.17	1.32	21.79	28.97	1.33	9	40
+v2-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_hashLong (64-bit)	xx3() hashBytes(byte[])	241..1100	68.88	168.05	2.44	66.23	146.47	2.21	9	51
+v2-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_hashLong (64-bit, blocks)	xx3() hashBytes(byte[])	1100..4200	278.34	1459.25	5.24	228.98	1353.71	5.91	9	55
+v2-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_len_0to16_128b (len 0)	xx128() hashBytes(byte[]) -> long[2]	0..0	0.65	6.61	10.19	0.61	4.69	7.67	9	21
+v2-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_len_1to3_128b	xx128() hashBytes(byte[]) -> long[2]	1..3	2.52	8.00	3.17	2.18	6.86	3.15	9	57
+v2-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_len_4to8_128b	xx128() hashBytes(byte[]) -> long[2]	4..8	5.61	7.90	1.41	4.51	6.54	1.45	9	59
+v2-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_len_9to16_128b	xx128() hashBytes(byte[]) -> long[2]	9..16	7.06	7.80	1.10	6.08	6.79	1.12	9	60
+v2-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_len_17to128_128b	xx128() hashBytes(byte[]) -> long[2]	17..128	14.24	30.19	2.12	13.60	27.31	2.01	9	36
+v2-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_len_129to240_128b	xx128() hashBytes(byte[]) -> long[2]	129..240	29.47	51.08	1.73	27.65	49.78	1.80	9	31
+v2-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_hashLong (128-bit)	xx128() hashBytes(byte[]) -> long[2]	241..1100	90.36	197.28	2.18	73.13	154.48	2.11	9	47
+v2-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_hashLong (128-bit, blocks)	xx128() hashBytes(byte[]) -> long[2]	1100..4200	235.86	1358.40	5.76	222.24	1287.57	5.79	9	51
+v2-clean-bytes	bytes	M3XxHash	xx() hashBytes(byte[])	0..1100	76.57	72.79	0.95	61.70	57.25	0.93	9	57
+v2-clean-bytes	bytes	M3XXH3	xx3() hashBytes(byte[])	0..1100	57.52	62.45	1.09	52.23	58.14	1.11	9	61
+v2-clean-bytes	bytes	M3XXH3	xx128low() hashBytes(byte[])	0..1100	54.18	61.12	1.13	50.37	57.25	1.14	9	40
+v2-clean-bytes	bytes	M3XXH3	xx128() hashBytes(byte[]) -> long[2]	0..1100	65.46	71.64	1.09	57.70	69.38	1.20	9	41
+v2-clean-bytes	bytes	M3WyHash	wy_3() hashBytes(byte[])	0..1100	60.51	64.96	1.07	56.55	60.77	1.07	9	41
+v2-clean-bytes	bytes	M3MurmurHash_3	murmur_3() hashBytes(byte[])	0..1100	91.26	89.28	0.98	87.57	85.40	0.98	9	38
+v2-clean-bytes	bytes	M3MurmurHash_3	murmur_3() tuple hashBytes(byte[]) -> long[2]	0..1100	96.39	97.15	1.01	89.02	82.31	0.92	9	42
+v2-clean-bytes	bytes	M3CityAndFarmHash_1_1	city_1_1() hashBytes(byte[])	0..1100	61.57	56.85	0.92	58.60	49.95	0.85	9	58
+v2-clean-bytes	bytes	M3CityAndFarmHash_1_1	farmNa() hashBytes(byte[])	0..1100	60.75	48.68	0.80	56.59	47.49	0.84	9	44
+v2-clean-bytes	bytes	M3CityAndFarmHash_1_1	farmUo() hashBytes(byte[])	0..1100	51.03	55.13	1.08	48.64	49.95	1.03	9	50
+v2-clean-bytes	bytes	M3MetroHash	metro() hashBytes(byte[])	0..1100	52.75	57.70	1.09	48.02	53.56	1.12	9	43
+v2-clean-string	string	M3CharSequenceAccess	xx3() hashChars(Latin-1 String)	0..550 chars	348.48	138.95	0.40	333.26	120.40	0.36	9	54
+v2-clean-string	string	M3CharSequenceAccess	xx3() hashChars(UTF-16 String)	0..550 chars	979.07	89.00	0.09	942.37	79.52	0.08	9	36
+v2-clean-string	string	M3CharSequenceAccess	xx3() hashChars(StringBuilder) [control: CharSequence access on both sides]	0..550 chars	580.13	277.39	0.48	543.18	258.36	0.48	9	43
+v2-clean-bytebuffer	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer BIG_ENDIAN, off, len)	0..1100	101.28	71.66	0.71	93.53	66.94	0.72	9	34
+v2-clean-bytebuffer	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer LITTLE_ENDIAN, off, len)	0..1100	144.72	70.96	0.49	132.54	67.96	0.51	9	31
+v2-clean-bytebuffer	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(read-only heap ByteBuffer, off, len) [control: ByteBuffer access on both sides]	0..1100	325.52	216.25	0.66	308.42	203.81	0.66	9	29
+v2-clean-access+kernel	access	M3ByteArrayAccess	getLong(byte[], off)	offsets 0..4095	0.27	0.26	0.99	0.26	0.25	0.97	9	0
+v2-clean-access+kernel	access	M3ByteBufferAccess	getLong(direct ByteBuffer, off)	offsets 0..4095	0.30	0.31	1.04	0.29	0.29	1.00	9	40
+v2-clean-access+kernel	access	M3CharSequenceAccess	getLong(UTF-16 String, off) native order	offsets 0..4095	12.13	12.56	1.04	11.46	11.50	1.00	9	38
+v2-clean-access+kernel	kernel	M3Maths	unsignedLongMulXorFold(long, long)	4096 random pairs	0.96	0.98	1.02	0.86	0.90	1.05	9	31
+v2-clean-access+kernel	kernel	M3Maths	unsignedLongMulHigh(long, long)	4096 random pairs	0.76	0.75	0.99	0.72	0.71	0.99	9	25
+v2-clean-access+kernel	kernel	M3Primitives	unsignedInt(int)	4096 random pairs	0.23	0.22	0.96	0.19	0.19	1.00	9	25
+v2-clean-access+kernel	kernel	M3Util	checkArrayOffs(int, int, int)	4096 random pairs	0.27	0.27	1.01	0.25	0.26	1.04	9	27
+v2-clean-all	bytes	M3XxHash	xx() hashBytes(byte[])	0..1100	48.14	48.14	1.00	46.72	45.15	0.97	9	18
+v2-clean-all	bytes	M3XXH3	xx3() hashBytes(byte[])	0..1100	47.68	54.42	1.14	45.75	49.81	1.09	9	32
+v2-clean-all	bytes	M3XXH3	xx128low() hashBytes(byte[])	0..1100	47.59	54.31	1.14	43.74	53.18	1.22	9	23
+v2-clean-all	bytes	M3XXH3	xx128() hashBytes(byte[]) -> long[2]	0..1100	62.35	68.10	1.09	60.87	64.79	1.06	9	23
+v2-clean-all	bytes	M3WyHash	wy_3() hashBytes(byte[])	0..1100	58.48	62.55	1.07	53.55	56.25	1.05	9	34
+v2-clean-all	bytes	M3MurmurHash_3	murmur_3() hashBytes(byte[])	0..1100	81.53	86.14	1.06	78.38	78.66	1.00	9	20
+v2-clean-all	bytes	M3MurmurHash_3	murmur_3() tuple hashBytes(byte[]) -> long[2]	0..1100	81.44	84.62	1.04	76.04	76.36	1.00	9	19
+v2-clean-all	bytes	M3CityAndFarmHash_1_1	city_1_1() hashBytes(byte[])	0..1100	53.37	47.12	0.88	47.24	43.34	0.92	9	19
+v2-clean-all	bytes	M3CityAndFarmHash_1_1	farmNa() hashBytes(byte[])	0..1100	55.64	44.47	0.80	50.46	41.67	0.83	9	27
+v2-clean-all	bytes	M3CityAndFarmHash_1_1	farmUo() hashBytes(byte[])	0..1100	45.78	50.95	1.11	39.85	47.02	1.18	9	29
+v2-clean-all	bytes	M3MetroHash	metro() hashBytes(byte[])	0..1100	53.23	52.15	0.98	43.96	46.35	1.05	9	36
+v2-clean-all	xxh3-64	M3XXH3.XXH3_len_0to16_64b (len 0)	xx3() hashBytes(byte[])	0..0	2.97	6.00	2.02	2.55	5.45	2.14	9	29
+v2-clean-all	xxh3-64	M3XXH3.XXH3_len_1to3_64b	xx3() hashBytes(byte[])	1..3	4.98	13.37	2.68	4.80	12.20	2.54	9	42
+v2-clean-all	xxh3-64	M3XXH3.XXH3_len_4to8_64b	xx3() hashBytes(byte[])	4..8	3.38	9.00	2.66	3.03	7.79	2.57	9	49
+v2-clean-all	xxh3-64	M3XXH3.XXH3_len_9to16_64b	xx3() hashBytes(byte[])	9..16	3.94	16.86	4.28	3.76	16.11	4.28	9	44
+v2-clean-all	xxh3-64	M3XXH3.XXH3_len_17to128_64b	xx3() hashBytes(byte[])	17..128	9.83	18.11	1.84	9.17	16.96	1.85	9	41
+v2-clean-all	xxh3-64	M3XXH3.XXH3_len_129to240_64b	xx3() hashBytes(byte[])	129..240	24.39	27.80	1.14	21.03	23.77	1.13	9	38
+v2-clean-all	xxh3-64	M3XXH3.XXH3_hashLong (64-bit)	xx3() hashBytes(byte[])	241..1100	69.26	80.36	1.16	64.05	68.40	1.07	9	41
+v2-clean-all	xxh3-64	M3XXH3.XXH3_hashLong (64-bit, blocks)	xx3() hashBytes(byte[])	1100..4200	212.09	237.04	1.12	191.27	204.98	1.07	9	47
+v2-clean-all	xxh3-128	M3XXH3.XXH3_len_0to16_128b (len 0)	xx128() hashBytes(byte[]) -> long[2]	0..0	7.06	17.83	2.52	5.33	16.59	3.11	9	58
+v2-clean-all	xxh3-128	M3XXH3.XXH3_len_1to3_128b	xx128() hashBytes(byte[]) -> long[2]	1..3	8.12	30.46	3.75	7.93	27.63	3.49	9	51
+v2-clean-all	xxh3-128	M3XXH3.XXH3_len_4to8_128b	xx128() hashBytes(byte[]) -> long[2]	4..8	6.73	17.13	2.54	6.05	13.72	2.27	9	43
+v2-clean-all	xxh3-128	M3XXH3.XXH3_len_9to16_128b	xx128() hashBytes(byte[]) -> long[2]	9..16	8.22	27.11	3.30	6.63	22.66	3.42	9	56
+v2-clean-all	xxh3-128	M3XXH3.XXH3_len_17to128_128b	xx128() hashBytes(byte[]) -> long[2]	17..128	16.07	26.02	1.62	14.07	23.25	1.65	9	42
+v2-clean-all	xxh3-128	M3XXH3.XXH3_len_129to240_128b	xx128() hashBytes(byte[]) -> long[2]	129..240	33.12	41.05	1.24	30.35	34.92	1.15	9	48
+v2-clean-all	xxh3-128	M3XXH3.XXH3_hashLong (128-bit)	xx128() hashBytes(byte[]) -> long[2]	241..1100	81.56	81.39	1.00	71.42	78.00	1.09	9	44
+v2-clean-all	xxh3-128	M3XXH3.XXH3_hashLong (128-bit, blocks)	xx128() hashBytes(byte[]) -> long[2]	1100..4200	224.73	250.65	1.12	212.70	221.46	1.04	9	39
+v2-clean-all	string	M3CharSequenceAccess	xx3() hashChars(Latin-1 String)	0..550 chars	383.63	151.65	0.40	353.13	140.32	0.40	9	43
+v2-clean-all	string	M3CharSequenceAccess	xx3() hashChars(UTF-16 String)	0..550 chars	1173.28	81.38	0.07	1115.02	72.44	0.06	9	39
+v2-clean-all	string	M3CharSequenceAccess	xx3() hashChars(StringBuilder) [control: CharSequence access on both sides]	0..550 chars	591.72	314.16	0.53	562.67	299.83	0.53	9	41
+v2-clean-all	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer BIG_ENDIAN, off, len)	0..1100	330.21	75.48	0.23	308.57	69.00	0.22	9	33
+v2-clean-all	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer LITTLE_ENDIAN, off, len)	0..1100	283.72	74.59	0.26	254.12	72.09	0.28	9	40
+v2-clean-all	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(read-only heap ByteBuffer, off, len) [control: ByteBuffer access on both sides]	0..1100	356.21	255.14	0.72	333.76	246.58	0.74	9	32
+v2-clean-all	access	M3ByteArrayAccess	getLong(byte[], off)	offsets 0..4095	0.26	0.28	1.06	0.24	0.24	1.00	9	39
+v2-clean-all	access	M3ByteBufferAccess	getLong(direct ByteBuffer, off)	offsets 0..4095	0.30	0.34	1.14	0.29	0.29	1.00	9	28
+v2-clean-all	access	M3CharSequenceAccess	getLong(UTF-16 String, off) native order	offsets 0..4095	15.04	14.85	0.99	14.39	14.10	0.98	9	41
+v2-clean-all	kernel	M3Maths	unsignedLongMulXorFold(long, long)	4096 random pairs	0.92	0.94	1.02	0.88	0.86	0.98	9	38
+v2-clean-all	kernel	M3Maths	unsignedLongMulHigh(long, long)	4096 random pairs	0.87	0.94	1.08	0.77	0.79	1.03	9	29
+v2-clean-all	kernel	M3Primitives	unsignedInt(int)	4096 random pairs	0.26	0.21	0.79	0.20	0.20	0.98	9	48
+v2-clean-all	kernel	M3Util	checkArrayOffs(int, int, int)	4096 random pairs	0.28	0.28	1.00	0.26	0.26	1.00	9	48
+after-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_len_0to16_64b (len 0)	xx3() hashBytes(byte[])	0..0	0.82	3.05	3.71	0.69	2.71	3.92	9	0
+after-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_len_1to3_64b	xx3() hashBytes(byte[])	1..3	2.04	3.72	1.82	1.98	3.60	1.82	9	49
+after-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_len_4to8_64b	xx3() hashBytes(byte[])	4..8	2.18	4.29	1.97	1.82	3.65	2.00	9	44
+after-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_len_9to16_64b	xx3() hashBytes(byte[])	9..16	4.07	3.54	0.87	3.56	3.48	0.98	9	40
+after-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_len_17to128_64b	xx3() hashBytes(byte[])	17..128	9.89	18.76	1.90	8.95	16.98	1.90	9	34
+after-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_len_129to240_64b	xx3() hashBytes(byte[])	129..240	22.43	40.34	1.80	21.21	38.58	1.82	9	33
+after-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_hashLong (64-bit)	xx3() hashBytes(byte[])	241..1100	65.32	150.47	2.30	58.09	139.99	2.41	9	31
+after-clean-xxh3-64	xxh3-64	M3XXH3.XXH3_hashLong (64-bit, blocks)	xx3() hashBytes(byte[])	1100..4200	203.83	1204.78	5.91	183.54	1161.83	6.33	9	46
+after-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_len_0to16_128b (len 0)	xx128() hashBytes(byte[]) -> long[2]	0..0	0.78	8.23	10.52	0.61	5.14	8.39	9	19
+after-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_len_1to3_128b	xx128() hashBytes(byte[]) -> long[2]	1..3	2.59	9.57	3.70	2.30	7.15	3.10	9	68
+after-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_len_4to8_128b	xx128() hashBytes(byte[]) -> long[2]	4..8	3.15	8.18	2.60	2.31	6.76	2.93	9	53
+after-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_len_9to16_128b	xx128() hashBytes(byte[]) -> long[2]	9..16	6.30	8.96	1.42	5.43	7.69	1.42	9	55
+after-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_len_17to128_128b	xx128() hashBytes(byte[]) -> long[2]	17..128	16.59	31.32	1.89	14.42	28.01	1.94	9	48
+after-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_len_129to240_128b	xx128() hashBytes(byte[]) -> long[2]	129..240	45.87	76.77	1.67	31.42	70.59	2.25	9	56
+after-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_hashLong (128-bit)	xx128() hashBytes(byte[]) -> long[2]	241..1100	95.59	207.54	2.17	75.57	183.02	2.42	9	57
+after-clean-xxh3-128	xxh3-128	M3XXH3.XXH3_hashLong (128-bit, blocks)	xx128() hashBytes(byte[]) -> long[2]	1100..4200	283.71	1354.50	4.77	232.62	1189.44	5.11	9	57
+after-clean-bytes	bytes	M3XxHash	xx() hashBytes(byte[])	0..1100	61.30	60.20	0.98	54.11	52.39	0.97	9	23
+after-clean-bytes	bytes	M3XXH3	xx3() hashBytes(byte[])	0..1100	54.85	58.77	1.07	45.98	53.67	1.17	9	42
+after-clean-bytes	bytes	M3XXH3	xx128low() hashBytes(byte[])	0..1100	54.47	58.69	1.08	51.78	57.31	1.11	9	38
+after-clean-bytes	bytes	M3XXH3	xx128() hashBytes(byte[]) -> long[2]	0..1100	67.79	72.11	1.06	58.84	63.92	1.09	9	39
+after-clean-bytes	bytes	M3WyHash	wy_3() hashBytes(byte[])	0..1100	58.77	58.08	0.99	54.61	51.19	0.94	9	28
+after-clean-bytes	bytes	M3MurmurHash_3	murmur_3() hashBytes(byte[])	0..1100	97.58	89.31	0.92	92.91	83.63	0.90	9	32
+after-clean-bytes	bytes	M3MurmurHash_3	murmur_3() tuple hashBytes(byte[]) -> long[2]	0..1100	100.01	92.53	0.93	84.59	85.92	1.02	9	35
+after-clean-bytes	bytes	M3CityAndFarmHash_1_1	city_1_1() hashBytes(byte[])	0..1100	60.38	52.61	0.87	54.13	42.68	0.79	9	39
+after-clean-bytes	bytes	M3CityAndFarmHash_1_1	farmNa() hashBytes(byte[])	0..1100	61.01	51.05	0.84	50.55	49.35	0.98	9	40
+after-clean-bytes	bytes	M3CityAndFarmHash_1_1	farmUo() hashBytes(byte[])	0..1100	50.71	54.43	1.07	49.16	45.75	0.93	9	31
+after-clean-bytes	bytes	M3MetroHash	metro() hashBytes(byte[])	0..1100	68.71	72.51	1.06	57.01	53.67	0.94	9	33
+after-clean-string	string	M3CharSequenceAccess	xx3() hashChars(Latin-1 String)	0..550 chars	356.27	121.21	0.34	331.90	110.09	0.33	9	39
+after-clean-string	string	M3CharSequenceAccess	xx3() hashChars(UTF-16 String)	0..550 chars	1514.49	131.76	0.09	1315.55	117.79	0.09	9	72
+after-clean-string	string	M3CharSequenceAccess	xx3() hashChars(StringBuilder) [control: CharSequence access on both sides]	0..550 chars	1372.91	382.61	0.28	1330.80	319.93	0.24	9	68
+after-clean-bytebuffer	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer BIG_ENDIAN, off, len)	0..1100	114.94	77.72	0.68	102.51	71.88	0.70	9	46
+after-clean-bytebuffer	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer LITTLE_ENDIAN, off, len)	0..1100	146.06	75.90	0.52	129.73	69.43	0.54	9	38
+after-clean-bytebuffer	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(read-only heap ByteBuffer, off, len) [control: ByteBuffer access on both sides]	0..1100	279.02	243.35	0.87	249.53	225.70	0.90	9	43
+after-clean-access+kernel	access	M3ByteArrayAccess	getLong(byte[], off)	offsets 0..4095	0.27	0.26	0.98	0.25	0.25	1.00	9	0
+after-clean-access+kernel	access	M3ByteBufferAccess	getLong(direct ByteBuffer, off)	offsets 0..4095	0.28	0.29	1.05	0.27	0.28	1.03	9	34
+after-clean-access+kernel	access	M3CharSequenceAccess	getLong(UTF-16 String, off) native order	offsets 0..4095	12.17	12.19	1.00	11.22	11.54	1.03	9	34
+after-clean-access+kernel	kernel	M3Maths	unsignedLongMulXorFold(long, long)	4096 random pairs	1.40	1.61	1.15	1.05	1.17	1.11	9	47
+after-clean-access+kernel	kernel	M3Maths	unsignedLongMulHigh(long, long)	4096 random pairs	0.97	1.20	1.24	0.85	0.93	1.09	9	92
+after-clean-access+kernel	kernel	M3Primitives	unsignedInt(int)	4096 random pairs	0.32	0.23	0.72	0.22	0.21	0.93	9	92
+after-clean-access+kernel	kernel	M3Util	checkArrayOffs(int, int, int)	4096 random pairs	0.28	0.29	1.04	0.27	0.27	1.00	9	60
+after-clean-all	bytes	M3XxHash	xx() hashBytes(byte[])	0..1100	68.56	65.72	0.96	60.17	61.85	1.03	9	35
+after-clean-all	bytes	M3XXH3	xx3() hashBytes(byte[])	0..1100	62.27	75.50	1.21	56.69	60.08	1.06	9	39
+after-clean-all	bytes	M3XXH3	xx128low() hashBytes(byte[])	0..1100	70.98	76.35	1.08	61.38	66.02	1.08	9	50
+after-clean-all	bytes	M3XXH3	xx128() hashBytes(byte[]) -> long[2]	0..1100	75.82	88.22	1.16	64.80	76.23	1.18	9	44
+after-clean-all	bytes	M3WyHash	wy_3() hashBytes(byte[])	0..1100	105.20	103.77	0.99	78.27	75.88	0.97	9	49
+after-clean-all	bytes	M3MurmurHash_3	murmur_3() hashBytes(byte[])	0..1100	124.68	114.46	0.92	96.37	100.46	1.04	9	46
+after-clean-all	bytes	M3MurmurHash_3	murmur_3() tuple hashBytes(byte[]) -> long[2]	0..1100	115.67	110.89	0.96	104.83	101.82	0.97	9	48
+after-clean-all	bytes	M3CityAndFarmHash_1_1	city_1_1() hashBytes(byte[])	0..1100	66.01	61.41	0.93	60.72	49.47	0.81	9	35
+after-clean-all	bytes	M3CityAndFarmHash_1_1	farmNa() hashBytes(byte[])	0..1100	58.54	51.96	0.89	53.68	41.45	0.77	9	37
+after-clean-all	bytes	M3CityAndFarmHash_1_1	farmUo() hashBytes(byte[])	0..1100	47.49	52.58	1.11	45.37	47.60	1.05	9	21
+after-clean-all	bytes	M3MetroHash	metro() hashBytes(byte[])	0..1100	57.08	57.14	1.00	50.18	51.19	1.02	9	31
+after-clean-all	xxh3-64	M3XXH3.XXH3_len_0to16_64b (len 0)	xx3() hashBytes(byte[])	0..0	2.93	5.86	2.00	2.29	4.72	2.06	9	34
+after-clean-all	xxh3-64	M3XXH3.XXH3_len_1to3_64b	xx3() hashBytes(byte[])	1..3	5.00	14.06	2.81	4.49	13.42	2.99	9	35
+after-clean-all	xxh3-64	M3XXH3.XXH3_len_4to8_64b	xx3() hashBytes(byte[])	4..8	3.60	10.35	2.88	2.95	9.05	3.07	9	39
+after-clean-all	xxh3-64	M3XXH3.XXH3_len_9to16_64b	xx3() hashBytes(byte[])	9..16	3.53	15.05	4.26	3.33	13.99	4.20	9	43
+after-clean-all	xxh3-64	M3XXH3.XXH3_len_17to128_64b	xx3() hashBytes(byte[])	17..128	10.41	18.68	1.79	8.92	17.84	2.00	9	34
+after-clean-all	xxh3-64	M3XXH3.XXH3_len_129to240_64b	xx3() hashBytes(byte[])	129..240	23.44	29.70	1.27	20.65	25.02	1.21	9	49
+after-clean-all	xxh3-64	M3XXH3.XXH3_hashLong (64-bit)	xx3() hashBytes(byte[])	241..1100	64.83	71.61	1.10	61.41	66.00	1.07	9	34
+after-clean-all	xxh3-64	M3XXH3.XXH3_hashLong (64-bit, blocks)	xx3() hashBytes(byte[])	1100..4200	204.16	226.34	1.11	188.75	190.89	1.01	9	34
+after-clean-all	xxh3-128	M3XXH3.XXH3_len_0to16_128b (len 0)	xx128() hashBytes(byte[]) -> long[2]	0..0	6.10	14.64	2.40	4.66	12.96	2.78	9	31
+after-clean-all	xxh3-128	M3XXH3.XXH3_len_1to3_128b	xx128() hashBytes(byte[]) -> long[2]	1..3	7.77	24.11	3.10	7.29	22.78	3.13	9	33
+after-clean-all	xxh3-128	M3XXH3.XXH3_len_4to8_128b	xx128() hashBytes(byte[]) -> long[2]	4..8	6.36	17.63	2.77	5.67	12.26	2.16	9	54
+after-clean-all	xxh3-128	M3XXH3.XXH3_len_9to16_128b	xx128() hashBytes(byte[]) -> long[2]	9..16	7.99	27.28	3.42	6.28	24.19	3.85	9	53
+after-clean-all	xxh3-128	M3XXH3.XXH3_len_17to128_128b	xx128() hashBytes(byte[]) -> long[2]	17..128	18.66	29.87	1.60	15.19	25.41	1.67	9	54
+after-clean-all	xxh3-128	M3XXH3.XXH3_len_129to240_128b	xx128() hashBytes(byte[]) -> long[2]	129..240	31.05	40.85	1.32	29.62	35.79	1.21	9	43
+after-clean-all	xxh3-128	M3XXH3.XXH3_hashLong (128-bit)	xx128() hashBytes(byte[]) -> long[2]	241..1100	79.69	86.15	1.08	73.98	76.73	1.04	9	36
+after-clean-all	xxh3-128	M3XXH3.XXH3_hashLong (128-bit, blocks)	xx128() hashBytes(byte[]) -> long[2]	1100..4200	263.15	269.69	1.02	219.23	249.26	1.14	9	40
+after-clean-all	string	M3CharSequenceAccess	xx3() hashChars(Latin-1 String)	0..550 chars	433.28	162.56	0.38	398.77	137.91	0.35	9	47
+after-clean-all	string	M3CharSequenceAccess	xx3() hashChars(UTF-16 String)	0..550 chars	1230.17	93.24	0.08	1169.61	78.52	0.07	9	42
+after-clean-all	string	M3CharSequenceAccess	xx3() hashChars(StringBuilder) [control: CharSequence access on both sides]	0..550 chars	610.10	308.57	0.51	555.84	291.43	0.52	9	43
+after-clean-all	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer BIG_ENDIAN, off, len)	0..1100	358.00	155.39	0.43	341.09	148.97	0.44	9	36
+after-clean-all	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer LITTLE_ENDIAN, off, len)	0..1100	233.48	170.77	0.73	209.28	158.16	0.76	9	41
+after-clean-all	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(read-only heap ByteBuffer, off, len) [control: ByteBuffer access on both sides]	0..1100	319.00	297.90	0.93	285.54	278.42	0.98	9	44
+after-clean-all	access	M3ByteArrayAccess	getLong(byte[], off)	offsets 0..4095	0.25	0.25	1.01	0.25	0.25	1.02	9	50
+after-clean-all	access	M3ByteBufferAccess	getLong(direct ByteBuffer, off)	offsets 0..4095	0.43	0.48	1.13	0.28	0.27	0.95	9	44
+after-clean-all	access	M3CharSequenceAccess	getLong(UTF-16 String, off) native order	offsets 0..4095	13.80	14.82	1.07	12.47	13.09	1.05	9	50
+after-clean-all	kernel	M3Maths	unsignedLongMulXorFold(long, long)	4096 random pairs	1.00	0.99	0.98	0.97	0.93	0.96	9	33
+after-clean-all	kernel	M3Maths	unsignedLongMulHigh(long, long)	4096 random pairs	0.80	0.82	1.02	0.75	0.78	1.04	9	37
+after-clean-all	kernel	M3Primitives	unsignedInt(int)	4096 random pairs	0.22	0.23	1.05	0.20	0.20	1.01	9	36
+after-clean-all	kernel	M3Util	checkArrayOffs(int, int, int)	4096 random pairs	0.27	0.27	1.00	0.26	0.26	0.97	9	36
 diag-split-r1	bytes	M3XxHash	xx() hashBytes(byte[])	0..1100	71.93	63.91	0.89	63.24	56.23	0.89	9	44
 diag-split-r1	bytes	M3XXH3	xx3() hashBytes(byte[])	0..1100	88.56	64.64	0.73	81.13	58.92	0.73	9	55
 diag-split-r1	bytes	M3XXH3	xx128low() hashBytes(byte[])	0..1100	89.46	61.49	0.69	82.37	55.89	0.68	9	48
@@ -627,43 +735,43 @@ diag3-split-r2	xxh3-128	M3XXH3.XXH3_len_17to128_128b	xx128() hashBytes(byte[]) -
 diag3-split-r2	xxh3-128	M3XXH3.XXH3_len_129to240_128b	xx128() hashBytes(byte[]) -> long[2]	129..240	52.06	70.93	1.36	39.07	61.24	1.57	9	56
 diag3-split-r2	xxh3-128	M3XXH3.XXH3_hashLong (128-bit)	xx128() hashBytes(byte[]) -> long[2]	241..1100	124.40	198.22	1.59	106.26	167.57	1.58	9	58
 diag3-split-r2	xxh3-128	M3XXH3.XXH3_hashLong (128-bit, blocks)	xx128() hashBytes(byte[]) -> long[2]	1100..4200	616.43	1531.88	2.49	364.04	1194.82	3.28	9	63
-after-gate-all	bytes	M3XxHash	xx() hashBytes(byte[])	0..1100	50.68	49.30	0.97	46.51	46.43	1.00	9	20
-after-gate-all	bytes	M3XXH3	xx3() hashBytes(byte[])	0..1100	50.99	53.33	1.05	44.65	48.71	1.09	9	24
-after-gate-all	bytes	M3XXH3	xx128low() hashBytes(byte[])	0..1100	44.82	51.24	1.14	43.92	48.90	1.11	9	17
-after-gate-all	bytes	M3XXH3	xx128() hashBytes(byte[]) -> long[2]	0..1100	54.72	62.55	1.14	51.90	60.07	1.16	9	19
-after-gate-all	bytes	M3WyHash	wy_3() hashBytes(byte[])	0..1100	53.64	56.48	1.05	51.43	52.43	1.02	9	12
-after-gate-all	bytes	M3MurmurHash_3	murmur_3() hashBytes(byte[])	0..1100	77.54	77.55	1.00	70.58	75.73	1.07	9	17
-after-gate-all	bytes	M3MurmurHash_3	murmur_3() tuple hashBytes(byte[]) -> long[2]	0..1100	81.79	81.34	0.99	77.57	79.93	1.03	9	29
-after-gate-all	bytes	M3CityAndFarmHash_1_1	city_1_1() hashBytes(byte[])	0..1100	56.69	49.92	0.88	54.34	48.77	0.90	9	27
-after-gate-all	bytes	M3CityAndFarmHash_1_1	farmNa() hashBytes(byte[])	0..1100	65.28	60.97	0.93	56.81	44.84	0.79	9	35
-after-gate-all	bytes	M3CityAndFarmHash_1_1	farmUo() hashBytes(byte[])	0..1100	47.59	53.17	1.12	46.21	47.09	1.02	9	68
-after-gate-all	bytes	M3MetroHash	metro() hashBytes(byte[])	0..1100	51.47	54.17	1.05	48.68	50.24	1.03	9	38
-after-gate-all	xxh3-64	M3XXH3.XXH3_len_0to16_64b (len 0)	xx3() hashBytes(byte[])	0..0	2.66	5.22	1.96	2.28	4.51	1.98	9	31
-after-gate-all	xxh3-64	M3XXH3.XXH3_len_1to3_64b	xx3() hashBytes(byte[])	1..3	4.38	12.10	2.76	4.12	11.61	2.81	9	18
-after-gate-all	xxh3-64	M3XXH3.XXH3_len_4to8_64b	xx3() hashBytes(byte[])	4..8	3.30	8.78	2.66	2.69	8.02	2.98	9	19
-after-gate-all	xxh3-64	M3XXH3.XXH3_len_9to16_64b	xx3() hashBytes(byte[])	9..16	4.55	19.04	4.18	3.32	14.36	4.32	9	56
-after-gate-all	xxh3-64	M3XXH3.XXH3_len_17to128_64b	xx3() hashBytes(byte[])	17..128	10.09	18.44	1.83	9.46	16.93	1.79	9	50
-after-gate-all	xxh3-64	M3XXH3.XXH3_len_129to240_64b	xx3() hashBytes(byte[])	129..240	19.89	23.47	1.18	19.04	21.46	1.13	9	29
-after-gate-all	xxh3-64	M3XXH3.XXH3_hashLong (64-bit)	xx3() hashBytes(byte[])	241..1100	58.86	61.92	1.05	53.29	57.24	1.07	9	22
-after-gate-all	xxh3-64	M3XXH3.XXH3_hashLong (64-bit, blocks)	xx3() hashBytes(byte[])	1100..4200	182.29	204.58	1.12	175.50	192.96	1.10	9	26
-after-gate-all	xxh3-128	M3XXH3.XXH3_len_0to16_128b (len 0)	xx128() hashBytes(byte[]) -> long[2]	0..0	5.09	12.79	2.51	4.70	11.74	2.50	9	25
-after-gate-all	xxh3-128	M3XXH3.XXH3_len_1to3_128b	xx128() hashBytes(byte[]) -> long[2]	1..3	6.96	21.78	3.13	6.68	20.69	3.10	9	26
-after-gate-all	xxh3-128	M3XXH3.XXH3_len_4to8_128b	xx128() hashBytes(byte[]) -> long[2]	4..8	5.25	12.54	2.39	4.85	11.10	2.29	9	19
-after-gate-all	xxh3-128	M3XXH3.XXH3_len_9to16_128b	xx128() hashBytes(byte[]) -> long[2]	9..16	6.64	19.48	2.93	5.96	18.11	3.04	9	25
-after-gate-all	xxh3-128	M3XXH3.XXH3_len_17to128_128b	xx128() hashBytes(byte[]) -> long[2]	17..128	14.51	26.39	1.82	12.83	22.25	1.73	9	35
-after-gate-all	xxh3-128	M3XXH3.XXH3_len_129to240_128b	xx128() hashBytes(byte[]) -> long[2]	129..240	29.77	32.67	1.10	26.79	31.28	1.17	9	24
-after-gate-all	xxh3-128	M3XXH3.XXH3_hashLong (128-bit)	xx128() hashBytes(byte[]) -> long[2]	241..1100	70.04	74.35	1.06	65.89	70.46	1.07	9	35
-after-gate-all	xxh3-128	M3XXH3.XXH3_hashLong (128-bit, blocks)	xx128() hashBytes(byte[]) -> long[2]	1100..4200	196.62	208.95	1.06	180.46	192.26	1.07	9	25
-after-gate-all	string	M3CharSequenceAccess	xx3() hashChars(Latin-1 String)	0..550 chars	395.26	154.28	0.39	331.26	138.58	0.42	9	36
-after-gate-all	string	M3CharSequenceAccess	xx3() hashChars(UTF-16 String)	0..550 chars	1106.47	80.26	0.07	1066.98	74.10	0.07	9	39
-after-gate-all	string	M3CharSequenceAccess	xx3() hashChars(StringBuilder) [control: CharSequence access on both sides]	0..550 chars	499.00	265.25	0.53	466.27	258.64	0.55	9	34
-after-gate-all	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer BIG_ENDIAN, off, len)	0..1100	460.49	160.82	0.35	404.40	141.34	0.35	9	42
-after-gate-all	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer LITTLE_ENDIAN, off, len)	0..1100	403.40	155.96	0.39	376.88	147.65	0.39	9	38
-after-gate-all	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(read-only heap ByteBuffer, off, len) [control: ByteBuffer access on both sides]	0..1100	424.63	278.56	0.66	326.90	238.58	0.73	9	46
-after-gate-all	access	M3ByteArrayAccess	getLong(byte[], off)	offsets 0..4095	0.27	0.26	0.96	0.25	0.25	1.00	9	27
-after-gate-all	access	M3ByteBufferAccess	getLong(direct ByteBuffer, off)	offsets 0..4095	0.38	0.30	0.81	0.26	0.26	0.98	9	27
-after-gate-all	access	M3CharSequenceAccess	getLong(UTF-16 String, off) native order	offsets 0..4095	14.67	13.95	0.95	13.93	13.07	0.94	9	46
-after-gate-all	kernel	M3Maths	unsignedLongMulXorFold(long, long)	4096 random pairs	1.04	1.05	1.00	0.99	0.96	0.97	9	48
-after-gate-all	kernel	M3Maths	unsignedLongMulHigh(long, long)	4096 random pairs	0.82	0.82	1.00	0.78	0.76	0.98	9	46
-after-gate-all	kernel	M3Primitives	unsignedInt(int)	4096 random pairs	0.22	0.21	0.96	0.20	0.20	0.99	9	43
-after-gate-all	kernel	M3Util	checkArrayOffs(int, int, int)	4096 random pairs	0.28	0.29	1.04	0.26	0.26	1.02	9	43
+after-merged-gate-all	bytes	M3XxHash	xx() hashBytes(byte[])	0..1100	53.54	53.98	1.01	51.51	51.07	0.99	9	26
+after-merged-gate-all	bytes	M3XXH3	xx3() hashBytes(byte[])	0..1100	54.66	60.09	1.10	46.70	50.88	1.09	9	30
+after-merged-gate-all	bytes	M3XXH3	xx128low() hashBytes(byte[])	0..1100	49.59	53.23	1.07	45.03	48.94	1.09	9	30
+after-merged-gate-all	bytes	M3XXH3	xx128() hashBytes(byte[]) -> long[2]	0..1100	62.60	66.07	1.06	55.34	64.22	1.16	9	25
+after-merged-gate-all	bytes	M3WyHash	wy_3() hashBytes(byte[])	0..1100	58.55	58.86	1.01	53.52	56.16	1.05	9	34
+after-merged-gate-all	bytes	M3MurmurHash_3	murmur_3() hashBytes(byte[])	0..1100	106.01	89.13	0.84	88.15	85.69	0.97	9	27
+after-merged-gate-all	bytes	M3MurmurHash_3	murmur_3() tuple hashBytes(byte[]) -> long[2]	0..1100	91.97	88.44	0.96	84.33	83.98	1.00	9	31
+after-merged-gate-all	bytes	M3CityAndFarmHash_1_1	city_1_1() hashBytes(byte[])	0..1100	56.12	50.50	0.90	52.45	46.59	0.89	9	29
+after-merged-gate-all	bytes	M3CityAndFarmHash_1_1	farmNa() hashBytes(byte[])	0..1100	60.13	53.54	0.89	55.38	45.18	0.82	9	33
+after-merged-gate-all	bytes	M3CityAndFarmHash_1_1	farmUo() hashBytes(byte[])	0..1100	46.92	50.23	1.07	42.80	45.37	1.06	9	37
+after-merged-gate-all	bytes	M3MetroHash	metro() hashBytes(byte[])	0..1100	49.89	56.52	1.13	47.06	48.01	1.02	9	30
+after-merged-gate-all	xxh3-64	M3XXH3.XXH3_len_0to16_64b (len 0)	xx3() hashBytes(byte[])	0..0	2.71	5.42	2.00	2.39	5.00	2.09	9	31
+after-merged-gate-all	xxh3-64	M3XXH3.XXH3_len_1to3_64b	xx3() hashBytes(byte[])	1..3	4.26	12.25	2.88	4.02	11.35	2.82	9	33
+after-merged-gate-all	xxh3-64	M3XXH3.XXH3_len_4to8_64b	xx3() hashBytes(byte[])	4..8	3.13	8.76	2.80	2.78	7.88	2.83	9	21
+after-merged-gate-all	xxh3-64	M3XXH3.XXH3_len_9to16_64b	xx3() hashBytes(byte[])	9..16	3.59	14.57	4.06	3.36	13.21	3.93	9	29
+after-merged-gate-all	xxh3-64	M3XXH3.XXH3_len_17to128_64b	xx3() hashBytes(byte[])	17..128	9.82	18.42	1.88	8.83	16.78	1.90	9	26
+after-merged-gate-all	xxh3-64	M3XXH3.XXH3_len_129to240_64b	xx3() hashBytes(byte[])	129..240	21.62	24.48	1.13	19.11	21.64	1.13	9	30
+after-merged-gate-all	xxh3-64	M3XXH3.XXH3_hashLong (64-bit)	xx3() hashBytes(byte[])	241..1100	60.19	64.16	1.07	55.83	59.66	1.07	9	23
+after-merged-gate-all	xxh3-64	M3XXH3.XXH3_hashLong (64-bit, blocks)	xx3() hashBytes(byte[])	1100..4200	198.83	206.91	1.04	176.83	197.30	1.12	9	23
+after-merged-gate-all	xxh3-128	M3XXH3.XXH3_len_0to16_128b (len 0)	xx128() hashBytes(byte[]) -> long[2]	0..0	4.95	13.32	2.69	4.44	12.72	2.87	9	25
+after-merged-gate-all	xxh3-128	M3XXH3.XXH3_len_1to3_128b	xx128() hashBytes(byte[]) -> long[2]	1..3	7.37	23.05	3.13	6.59	21.60	3.28	9	30
+after-merged-gate-all	xxh3-128	M3XXH3.XXH3_len_4to8_128b	xx128() hashBytes(byte[]) -> long[2]	4..8	5.44	12.56	2.31	5.13	11.76	2.29	9	33
+after-merged-gate-all	xxh3-128	M3XXH3.XXH3_len_9to16_128b	xx128() hashBytes(byte[]) -> long[2]	9..16	6.66	19.93	2.99	5.82	19.33	3.32	9	21
+after-merged-gate-all	xxh3-128	M3XXH3.XXH3_len_17to128_128b	xx128() hashBytes(byte[]) -> long[2]	17..128	13.25	22.73	1.71	12.93	20.87	1.61	9	20
+after-merged-gate-all	xxh3-128	M3XXH3.XXH3_len_129to240_128b	xx128() hashBytes(byte[]) -> long[2]	129..240	27.04	34.25	1.27	25.91	32.12	1.24	9	31
+after-merged-gate-all	xxh3-128	M3XXH3.XXH3_hashLong (128-bit)	xx128() hashBytes(byte[]) -> long[2]	241..1100	80.49	84.68	1.05	69.17	76.54	1.11	9	35
+after-merged-gate-all	xxh3-128	M3XXH3.XXH3_hashLong (128-bit, blocks)	xx128() hashBytes(byte[]) -> long[2]	1100..4200	235.32	313.09	1.33	217.25	223.13	1.03	9	50
+after-merged-gate-all	string	M3CharSequenceAccess	xx3() hashChars(Latin-1 String)	0..550 chars	333.10	121.08	0.36	312.46	117.73	0.38	9	28
+after-merged-gate-all	string	M3CharSequenceAccess	xx3() hashChars(UTF-16 String)	0..550 chars	1103.17	81.65	0.07	1069.30	78.84	0.07	9	31
+after-merged-gate-all	string	M3CharSequenceAccess	xx3() hashChars(StringBuilder) [control: CharSequence access on both sides]	0..550 chars	551.29	280.07	0.51	510.50	269.41	0.53	9	31
+after-merged-gate-all	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer BIG_ENDIAN, off, len)	0..1100	343.01	151.33	0.44	328.57	139.60	0.42	9	24
+after-merged-gate-all	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(direct ByteBuffer LITTLE_ENDIAN, off, len)	0..1100	203.36	152.75	0.75	186.56	145.60	0.78	9	29
+after-merged-gate-all	bytebuffer	M3ByteBufferAccess	xx3() hashBytes(read-only heap ByteBuffer, off, len) [control: ByteBuffer access on both sides]	0..1100	266.38	256.03	0.96	255.12	237.42	0.93	9	28
+after-merged-gate-all	access	M3ByteArrayAccess	getLong(byte[], off)	offsets 0..4095	0.27	0.27	1.00	0.27	0.26	0.99	9	24
+after-merged-gate-all	access	M3ByteBufferAccess	getLong(direct ByteBuffer, off)	offsets 0..4095	0.29	0.28	0.96	0.26	0.26	0.99	9	24
+after-merged-gate-all	access	M3CharSequenceAccess	getLong(UTF-16 String, off) native order	offsets 0..4095	14.26	14.13	0.99	12.53	12.70	1.01	9	37
+after-merged-gate-all	kernel	M3Maths	unsignedLongMulXorFold(long, long)	4096 random pairs	0.99	1.00	1.01	0.96	0.91	0.95	9	35
+after-merged-gate-all	kernel	M3Maths	unsignedLongMulHigh(long, long)	4096 random pairs	0.81	0.79	0.98	0.73	0.70	0.97	9	47
+after-merged-gate-all	kernel	M3Primitives	unsignedInt(int)	4096 random pairs	0.22	0.23	1.05	0.19	0.20	1.02	9	28
+after-merged-gate-all	kernel	M3Util	checkArrayOffs(int, int, int)	4096 random pairs	0.27	0.27	1.01	0.25	0.25	1.00	9	28

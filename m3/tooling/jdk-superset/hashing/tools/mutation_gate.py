@@ -23,22 +23,53 @@ MUTANTS = [
     ("BYTE_ARRAY_BASE_ONE", "M3ByteArrayAccess.java", "static final long BYTE_BASE = 0L;",
      "static final long BYTE_BASE = 1L;"),
     ("CHECK_OFFS_NO_OVERFLOW", "M3Util.java", " || off + len < 0)", ")"),
-    ("CHARSEQ_LE_BYTE_SHIFT", "M3CharSequenceAccess.java", "return getUnsignedByte(input, offset, ((int) offset & 1) << 3);",
+    ("CHARSEQ_LE_BYTE_SHIFT", "M3CharSequenceAccess.java",
+     "return getUnsignedByte(input, offset, ((int) offset & 1) << BYTE_BITS_LOG2);",
      "return getUnsignedByte(input, offset, ((int) offset & 1) << 2);"),
     ("STRING_AS_LATIN1_BYTES", "M3LongHashFunction.java",
      "public long hashChars(String input) {\n        return hashNativeChars(input, 0, input.length());",
      "public long hashChars(String input) {\n        return hashBytes(input.getBytes(java.nio.charset.StandardCharsets.ISO_8859_1));"),
     ("MATHS_SIGNED_HIGH", "M3Maths.java", "return INSTANCE.unsignedLongMulHighImp(lhs, rhs);",
      "return Math.multiplyHigh(lhs, rhs);"),
+    # the three tuple String rewrites of STRING_INTERNALS_TO_CHARSEQ that no test reached before (review of #2232)
+    ("TUPLE_STRING_INTO_EMPTY", "M3LongTupleHashFunction.java",
+     "public void hashChars(final String input, final long[] result) {\n"
+     "        hashNativeChars(this, input, 0, input.length(), result);",
+     "public void hashChars(final String input, final long[] result) {\n"
+     "        hashNativeChars(this, input, 0, 0, result);"),
+    ("TUPLE_STRING_SLICE_INTO_EMPTY", "M3LongTupleHashFunction.java",
+     "public void hashChars(final String input, final int off, final int len, final long[] result) {\n"
+     "        checkArrayOffs(input.length(), off, len);\n"
+     "        hashNativeChars(this, input, off, len, result);",
+     "public void hashChars(final String input, final int off, final int len, final long[] result) {\n"
+     "        checkArrayOffs(input.length(), off, len);\n"
+     "        hashNativeChars(this, input, 0, 0, result);"),
+    ("TUPLE_STRING_SLICE_EMPTY", "M3LongTupleHashFunction.java",
+     "public long[] hashChars(final String input, final int off, final int len) {\n"
+     "        checkArrayOffs(input.length(), off, len);\n"
+     "        final long[] result = newResultArray();\n"
+     "        hashNativeChars(this, input, off, len, result);",
+     "public long[] hashChars(final String input, final int off, final int len) {\n"
+     "        checkArrayOffs(input.length(), off, len);\n"
+     "        final long[] result = newResultArray();\n"
+     "        hashNativeChars(this, input, 0, 0, result);"),
+    # FACADE_DROP_RAW_MEMORY v1's form: a direct buffer read through its limit instead of up to its capacity
+    ("DIRECT_BUFFER_LIMIT_BOUND", "M3LongHashFunction.java",
+     "return hash(input.duplicate().order(input.order()).limit(input.capacity()),\n"
+     "                    M3ByteBufferAccess.INSTANCE, off, len);",
+     "return hash(input, M3ByteBufferAccess.INSTANCE, off, len);"),
+    ("TUPLE_DIRECT_BUFFER_LIMIT_BOUND", "M3LongTupleHashFunction.java",
+     "f.hash(input.duplicate().order(input.order()).limit(input.capacity()), BYTE_BUF_ACCESS, off, len, result);",
+     "f.hash(input, BYTE_BUF_ACCESS, off, len, result);"),
     # the JIT leaf: XXH3_SPLIT v1, UNSAFE_TO_BYTE_ARRAY v2, FACADE_ENTRY_CHECK v1
-    ("XXH3_DISPATCH_EDGE", "M3XXH3.java", "        if (length <= 128) {\n            return XXH3_len_17to128_64b(",
-     "        if (length < 128) {\n            return XXH3_len_17to128_64b("),
-    ("XXH3_ATOM_SWAP", "M3XXH3.java", "        if (length > 8) {\n            return XXH3_len_9to16_128b(",
-     "        if (length > 8) {\n            return XXH3_len_4to8_128b("),
-    ("XXH3_MERGE_OFFSET", "M3XXH3.java", "+ XXH3_mix2Accs(acc_4, acc_5, secret, offSec + 16 * 2)",
-     "+ XXH3_mix2Accs(acc_4, acc_5, secret, offSec + 16 * 2 + 1)"),
-    ("XXH3_HASHLONG_HIGH_START", "M3XXH3.java", "secret, BYTE_BASE + 192 - 64 - 11, ~(length * XXH_PRIME64_2)",
-     "secret, BYTE_BASE + 192 - 64 - 11, length * XXH_PRIME64_2"),
+    ("XXH3_DISPATCH_EDGE", "M3XXH3.java", "        if (length <= LEN_17TO128_MAX) {\n            return XXH3_len_17to128_64b(",
+     "        if (length < LEN_17TO128_MAX) {\n            return XXH3_len_17to128_64b("),
+    ("XXH3_ATOM_SWAP", "M3XXH3.java", "        if (length > LEN_4TO8_MAX) {\n            return XXH3_len_9to16_128b(",
+     "        if (length > LEN_4TO8_MAX) {\n            return XXH3_len_4to8_128b("),
+    ("XXH3_MERGE_OFFSET", "M3XXH3.java", "+ XXH3_mix2Accs(acc_4, acc_5, secret, offSec + MIX_BYTES * ACC_PAIR_2)",
+     "+ XXH3_mix2Accs(acc_4, acc_5, secret, offSec + MIX_BYTES * ACC_PAIR_2 + 1)"),
+    ("XXH3_HASHLONG_HIGH_START", "M3XXH3.java", "secret, BYTE_BASE + SECRET_SIZE - STRIPE_LEN - SECRET_MERGEACCS_START, ~(length * XXH_PRIME64_2)",
+     "secret, BYTE_BASE + SECRET_SIZE - STRIPE_LEN - SECRET_MERGEACCS_START, length * XXH_PRIME64_2"),
     ("READ_ATOM_BIG_ENDIAN", "M3ByteArrayAccess.java", "return UNSAFE.getLongUnaligned(input, address(offset), false);",
      "return UNSAFE.getLongUnaligned(input, address(offset), true);"),
     ("READ_ATOM_ADDRESS", "M3ByteArrayAccess.java", "return Unsafe.ARRAY_BYTE_BASE_OFFSET + offset;",

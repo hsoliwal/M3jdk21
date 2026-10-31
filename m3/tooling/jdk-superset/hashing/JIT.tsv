@@ -1,5 +1,5 @@
 path	impl	atom	tier_before	tier_after	c2_compiles_before	c2_compiles_after	read_fails_before	read_fails_after	kernel_fails_before	kernel_fails_after	atom_boundaries_before	atom_boundaries_after	read_fail_reasons_before	read_fail_reasons_after
-access+kernel	absorbed	(PrintInlining text log, lines naming a hashing class)	callee is too large=7	callee is too large=4	callee is too large=7	callee is too large=4	callee is too large=7	callee is too large=4	callee is too large=7	callee is too large=4	callee is too large=7	callee is too large=4	callee is too large=7	callee is too large=4
+access+kernel	absorbed	(PrintInlining text log, lines naming a hashing class)	callee is too large=7	callee is too large=3	callee is too large=7	callee is too large=3	callee is too large=7	callee is too large=3	callee is too large=7	callee is too large=3	callee is too large=7	callee is too large=3	callee is too large=7	callee is too large=3
 access+kernel	absorbed	M3ByteArrayAccess.getLong	4	4	1	1	0	0	0	0	0	0	-	-
 access+kernel	absorbed	M3ByteBufferAccess.getLong	4	4	1	1	0	0	0	0	0	0	-	-
 access+kernel	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.getLong	4	4	2	2	9	9	0	0	0	0	low call site frequency=9	low call site frequency=9
@@ -8,11 +8,11 @@ access+kernel	absorbed	M3CharSequenceAccess.ix	4	4	1	1	0	0	0	0	0	0	-	-
 access+kernel	absorbed	M3Maths.unsignedLongMulHigh	4	4	1	1	0	0	0	0	0	0	-	-
 access+kernel	absorbed	M3Maths.unsignedLongMulXorFold	4	4	1	1	0	0	0	0	0	0	-	-
 access+kernel	absorbed	M3MathsJDK9.unsignedLongMulHighImp	4	4	1	1	0	0	0	0	0	0	-	-
-access+kernel	absorbed	M3MathsJDK9.unsignedLongMulXorFoldImp	4	2	1	0	0	0	0	0	0	0	-	-
+access+kernel	absorbed	M3MathsJDK9.unsignedLongMulXorFoldImp	4	4	1	1	0	0	0	0	0	0	-	-
 access+kernel	absorbed	M3Primitives.unsignedInt	4	4	1	1	0	0	0	0	0	0	-	-
 access+kernel	absorbed	M3Util.checkArrayOffs	4	4	1	1	0	0	0	0	0	0	-	-
 access+kernel	vendored	(PrintInlining text log, lines naming a hashing class)	callee is too large=6	callee is too large=3	callee is too large=6	callee is too large=3	callee is too large=6	callee is too large=3	callee is too large=6	callee is too large=3	callee is too large=6	callee is too large=3	callee is too large=6	callee is too large=3
-access+kernel	vendored	ByteBufferAccess.getLong	4	4	2	1	0	0	0	0	0	0	-	-
+access+kernel	vendored	ByteBufferAccess.getLong	4	4	2	2	0	0	0	0	0	0	-	-
 access+kernel	vendored	CharSequenceAccess$LittleEndianCharSequenceAccess.getLong	4	4	2	2	9	9	0	0	0	0	low call site frequency=9	low call site frequency=9
 access+kernel	vendored	CharSequenceAccess.getLong	4	4	1	1	9	9	0	0	0	0	low call site frequency=9	low call site frequency=9
 access+kernel	vendored	CharSequenceAccess.ix	3	4	0	1	0	0	0	0	0	0	-	-
@@ -23,19 +23,24 @@ access+kernel	vendored	MathsJDK9.unsignedLongMulXorFoldImp	4	4	1	1	0	0	0	0	0	0	-
 access+kernel	vendored	Primitives.unsignedInt	4	4	1	1	0	0	0	0	0	0	-	-
 access+kernel	vendored	UnsafeAccess.getLong	4	4	1	1	0	0	0	0	0	0	-	-
 access+kernel	vendored	Util.checkArrayOffs	4	4	1	1	0	0	0	0	0	0	-	-
-all	absorbed	(PrintInlining text log, lines naming a hashing class)	too big=72;hot method too big=94;callee is too large=114;already compiled into a big method=10;NodeCountInliningCutoff=86;size > DesiredMethodLimit=253	too big=92;hot method too big=95;callee is too large=130;already compiled into a big method=12;size > DesiredMethodLimit=211	too big=72;hot method too big=94;callee is too large=114;already compiled into a big method=10;NodeCountInliningCutoff=86;size > DesiredMethodLimit=253	too big=92;hot method too big=95;callee is too large=130;already compiled into a big method=12;size > DesiredMethodLimit=211	too big=72;hot method too big=94;callee is too large=114;already compiled into a big method=10;NodeCountInliningCutoff=86;size > DesiredMethodLimit=253	too big=92;hot method too big=95;callee is too large=130;already compiled into a big method=12;size > DesiredMethodLimit=211	too big=72;hot method too big=94;callee is too large=114;already compiled into a big method=10;NodeCountInliningCutoff=86;size > DesiredMethodLimit=253	too big=92;hot method too big=95;callee is too large=130;already compiled into a big method=12;size > DesiredMethodLimit=211	too big=72;hot method too big=94;callee is too large=114;already compiled into a big method=10;NodeCountInliningCutoff=86;size > DesiredMethodLimit=253	too big=92;hot method too big=95;callee is too large=130;already compiled into a big method=12;size > DesiredMethodLimit=211	too big=72;hot method too big=94;callee is too large=114;already compiled into a big method=10;NodeCountInliningCutoff=86;size > DesiredMethodLimit=253	too big=92;hot method too big=95;callee is too large=130;already compiled into a big method=12;size > DesiredMethodLimit=211
-all	absorbed	M3Access$ReverseAccess.getByte	4	4	2	2	1	1	0	0	0	0	low call site frequency=1	low call site frequency=1
-all	absorbed	M3Access$ReverseAccess.getInt	4	4	2	1	1	1	0	0	0	0	low call site frequency=1	low call site frequency=1
-all	absorbed	M3Access$ReverseAccess.getLong	4	4	2	2	0	0	0	0	0	0	-	-
-all	absorbed	M3Access$ReverseAccess.getUnsignedByte	4	4	2	2	1	1	0	0	0	0	low call site frequency=1	low call site frequency=1
-all	absorbed	M3Access$ReverseAccess.getUnsignedInt	4	4	2	1	1	1	0	0	0	0	low call site frequency=1	low call site frequency=1
+all	absorbed	(PrintInlining text log, lines naming a hashing class)	too big=72;hot method too big=94;callee is too large=114;already compiled into a big method=10;NodeCountInliningCutoff=86;size > DesiredMethodLimit=253	too big=108;hot method too big=95;callee is too large=117;already compiled into a big method=13;size > DesiredMethodLimit=259	too big=72;hot method too big=94;callee is too large=114;already compiled into a big method=10;NodeCountInliningCutoff=86;size > DesiredMethodLimit=253	too big=108;hot method too big=95;callee is too large=117;already compiled into a big method=13;size > DesiredMethodLimit=259	too big=72;hot method too big=94;callee is too large=114;already compiled into a big method=10;NodeCountInliningCutoff=86;size > DesiredMethodLimit=253	too big=108;hot method too big=95;callee is too large=117;already compiled into a big method=13;size > DesiredMethodLimit=259	too big=72;hot method too big=94;callee is too large=114;already compiled into a big method=10;NodeCountInliningCutoff=86;size > DesiredMethodLimit=253	too big=108;hot method too big=95;callee is too large=117;already compiled into a big method=13;size > DesiredMethodLimit=259	too big=72;hot method too big=94;callee is too large=114;already compiled into a big method=10;NodeCountInliningCutoff=86;size > DesiredMethodLimit=253	too big=108;hot method too big=95;callee is too large=117;already compiled into a big method=13;size > DesiredMethodLimit=259	too big=72;hot method too big=94;callee is too large=114;already compiled into a big method=10;NodeCountInliningCutoff=86;size > DesiredMethodLimit=253	too big=108;hot method too big=95;callee is too large=117;already compiled into a big method=13;size > DesiredMethodLimit=259
+all	absorbed	M3Access$ReverseAccess.getByte	4	3	2	0	1	0	0	0	0	0	low call site frequency=1	-
+all	absorbed	M3Access$ReverseAccess.getInt	4	3	2	0	1	0	0	0	0	0	low call site frequency=1	-
+all	absorbed	M3Access$ReverseAccess.getLong	4	4	2	1	0	0	0	0	0	0	-	-
+all	absorbed	M3Access$ReverseAccess.getUnsignedByte	4	3	2	0	1	0	0	0	0	0	low call site frequency=1	-
+all	absorbed	M3Access$ReverseAccess.getUnsignedInt	4	3	2	0	1	0	0	0	0	0	low call site frequency=1	-
+all	absorbed	M3Access$ReverseAccess.i32	-	4	-	2	-	1	-	0	-	0	-	low call site frequency=1
+all	absorbed	M3Access$ReverseAccess.i64	-	4	-	2	-	0	-	0	-	0	-	-
+all	absorbed	M3Access$ReverseAccess.i8	-	4	-	2	-	1	-	0	-	0	-	low call site frequency=1
+all	absorbed	M3Access$ReverseAccess.u32	-	4	-	2	-	1	-	0	-	0	-	low call site frequency=1
+all	absorbed	M3Access$ReverseAccess.u8	-	4	-	2	-	1	-	0	-	0	-	low call site frequency=1
 all	absorbed	M3Access.byteOrder	4	4	2	2	0	0	0	0	0	0	-	-
-all	absorbed	M3Access.i32	4	4	3	2	1	1	0	0	0	0	virtual call=1	virtual call=1
-all	absorbed	M3Access.i64	4	4	4	4	0	4	0	0	0	0	-	low call site frequency=4
-all	absorbed	M3Access.i8	4	4	3	1	1	1	0	0	0	0	virtual call=1	low call site frequency=1
+all	absorbed	M3Access.i32	4	-	3	-	1	-	0	-	0	-	virtual call=1	-
+all	absorbed	M3Access.i64	4	-	4	-	0	-	0	-	0	-	-	-
+all	absorbed	M3Access.i8	4	4	3	1	1	0	0	0	0	0	virtual call=1	-
 all	absorbed	M3Access.u16	3	-	0	-	0	-	0	-	0	-	-	-
-all	absorbed	M3Access.u32	4	4	3	2	0	1	0	0	0	0	-	virtual call=1
-all	absorbed	M3Access.u8	4	4	3	2	0	1	0	0	0	0	-	low call site frequency=1
+all	absorbed	M3Access.u32	4	-	3	-	0	-	0	-	0	-	-	-
+all	absorbed	M3Access.u8	4	4	3	1	0	0	0	0	0	0	-	-
 all	absorbed	M3ByteArrayAccess.address	-	4	-	1	-	0	-	0	-	0	-	-
 all	absorbed	M3ByteArrayAccess.byteOrder	4	4	1	1	0	0	0	0	0	0	-	-
 all	absorbed	M3ByteArrayAccess.getByte	4	4	1	1	0	0	0	0	0	0	-	-
@@ -50,26 +55,38 @@ all	absorbed	M3ByteArrayAccess.i64	-	4	-	2	-	0	-	0	-	0	-	-
 all	absorbed	M3ByteArrayAccess.u16	-	4	-	2	-	0	-	0	-	0	-	-
 all	absorbed	M3ByteArrayAccess.u32	-	4	-	2	-	0	-	0	-	0	-	-
 all	absorbed	M3ByteBufferAccess.byteOrder	4	4	2	2	0	0	0	0	0	0	-	-
-all	absorbed	M3ByteBufferAccess.getByte	4	4	2	2	1	1	0	0	0	0	low call site frequency=1	low call site frequency=1
-all	absorbed	M3ByteBufferAccess.getInt	4	4	2	2	1	1	0	0	0	0	low call site frequency=1	low call site frequency=1
-all	absorbed	M3ByteBufferAccess.getLong	4	4	4	4	0	0	0	0	0	0	-	-
+all	absorbed	M3ByteBufferAccess.getByte	4	4	2	3	1	1	0	0	0	0	low call site frequency=1	low call site frequency=1
+all	absorbed	M3ByteBufferAccess.getInt	4	3	2	0	1	0	0	0	0	0	low call site frequency=1	-
+all	absorbed	M3ByteBufferAccess.getLong	4	4	4	5	0	0	0	0	0	0	-	-
 all	absorbed	M3ByteBufferAccess.getUnsignedByte	4	4	2	2	1	1	0	0	0	0	low call site frequency=1	low call site frequency=1
-all	absorbed	M3ByteBufferAccess.getUnsignedInt	4	4	2	2	1	1	0	0	0	0	low call site frequency=1	low call site frequency=1
+all	absorbed	M3ByteBufferAccess.getUnsignedInt	4	3	2	0	1	0	0	0	0	0	low call site frequency=1	-
+all	absorbed	M3ByteBufferAccess.i32	-	4	-	1	-	0	-	0	-	0	-	-
+all	absorbed	M3ByteBufferAccess.i64	-	4	-	1	-	0	-	0	-	0	-	-
+all	absorbed	M3ByteBufferAccess.i8	-	4	-	1	-	0	-	0	-	0	-	-
 all	absorbed	M3ByteBufferAccess.reverseAccess	4	4	1	1	0	0	0	0	0	0	-	-
+all	absorbed	M3ByteBufferAccess.u32	-	4	-	1	-	0	-	0	-	0	-	-
+all	absorbed	M3ByteBufferAccess.u8	-	4	-	1	-	0	-	0	-	0	-	-
 all	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.byteOrder	3	-	0	-	0	-	0	-	0	-	-	-
-all	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.getInt	-	4	-	2	-	2	-	0	-	0	-	low call site frequency=2
-all	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.getLong	4	4	6	6	9	9	0	0	0	0	low call site frequency=9	low call site frequency=9
+all	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.getLong	4	4	6	4	9	9	0	0	0	0	low call site frequency=9	low call site frequency=9
 all	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.getUnsignedByte	4	4	2	2	1	1	0	0	0	0	low call site frequency=1	low call site frequency=1
-all	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.getUnsignedInt	4	4	2	4	2	2	0	0	0	0	low call site frequency=2	low call site frequency=2
+all	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.getUnsignedInt	4	4	2	2	2	2	0	0	0	0	low call site frequency=2	low call site frequency=2
+all	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.i32	-	3	-	0	-	0	-	0	-	0	-	-
+all	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.i64	-	4	-	3	-	4	-	0	-	0	-	low call site frequency=4
+all	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.u32	-	3	-	0	-	0	-	0	-	0	-	-
 all	absorbed	M3CharSequenceAccess.charSequenceAccess	3	3	0	0	0	0	0	0	0	0	-	-
-all	absorbed	M3CharSequenceAccess.getByte	4	4	2	2	1	1	0	0	0	0	low call site frequency=1	low call site frequency=1
+all	absorbed	M3CharSequenceAccess.getByte	4	3	2	0	1	0	0	0	0	0	low call site frequency=1	-
 all	absorbed	M3CharSequenceAccess.getInt	4	3	2	0	2	0	0	0	0	0	low call site frequency=2	-
 all	absorbed	M3CharSequenceAccess.getLong	4	4	3	3	9	9	0	0	0	0	low call site frequency=9	low call site frequency=9
 all	absorbed	M3CharSequenceAccess.getUnsignedByte	3	3	0	0	0	0	0	0	0	0	-	-
-all	absorbed	M3CharSequenceAccess.getUnsignedInt	3	4	0	2	0	2	0	0	0	0	-	low call site frequency=2
+all	absorbed	M3CharSequenceAccess.getUnsignedInt	3	3	0	0	0	0	0	0	0	0	-	-
+all	absorbed	M3CharSequenceAccess.i32	-	4	-	1	-	2	-	0	-	0	-	low call site frequency=2
+all	absorbed	M3CharSequenceAccess.i64	-	4	-	1	-	4	-	0	-	0	-	low call site frequency=4
+all	absorbed	M3CharSequenceAccess.i8	-	4	-	2	-	1	-	0	-	0	-	low call site frequency=1
 all	absorbed	M3CharSequenceAccess.ix	4	4	1	1	0	0	0	0	0	0	-	-
 all	absorbed	M3CharSequenceAccess.nativeCharSequenceAccess	3	3	0	0	0	0	0	0	0	0	-	-
-all	absorbed	M3CityAndFarmHash_1_1$AsLongHashFunction.finalize	3	3	0	0	0	0	0	0	0	0	-	-
+all	absorbed	M3CharSequenceAccess.u32	-	4	-	1	-	2	-	0	-	0	-	low call site frequency=2
+all	absorbed	M3CharSequenceAccess.u8	-	4	-	2	-	1	-	0	-	0	-	low call site frequency=1
+all	absorbed	M3CityAndFarmHash_1_1$AsLongHashFunction.finalize	3	4	0	1	0	0	0	0	0	0	-	-
 all	absorbed	M3CityAndFarmHash_1_1$AsLongHashFunction.hash	4	4	1	1	0	0	0	0	1	1	-	-
 all	absorbed	M3CityAndFarmHash_1_1$Na.hash	4	4	1	1	0	0	0	0	1	1	-	-
 all	absorbed	M3CityAndFarmHash_1_1$Uo.hash	4	4	1	1	0	0	0	0	2	2	-	-
@@ -100,7 +117,7 @@ all	absorbed	M3LongTupleHashFunction.unsafeHash	4	4	2	2	1	1	0	0	2	5	low call sit
 all	absorbed	M3Maths.unsignedLongMulHigh	4	4	1	1	0	0	0	0	0	0	-	-
 all	absorbed	M3Maths.unsignedLongMulXorFold	4	4	1	1	0	0	0	0	0	0	-	-
 all	absorbed	M3MathsJDK9.unsignedLongMulHighImp	3	4	0	1	0	0	0	0	0	0	-	-
-all	absorbed	M3MathsJDK9.unsignedLongMulXorFoldImp	4	4	1	1	0	0	0	0	0	0	-	-
+all	absorbed	M3MathsJDK9.unsignedLongMulXorFoldImp	4	3	1	0	0	0	0	0	0	0	-	-
 all	absorbed	M3MetroHash$AsLongHashFunction.hash	4	4	1	1	0	0	0	0	1	1	-	-
 all	absorbed	M3MetroHash$AsLongHashFunction.seed	1	1	0	0	0	0	0	0	0	0	-	-
 all	absorbed	M3MetroHash.finalize	4	4	1	1	0	0	0	0	0	0	-	-
@@ -108,14 +125,14 @@ all	absorbed	M3MetroHash.metroHash64	4	4	1	1	0	0	0	0	0	0	-	-
 all	absorbed	M3MurmurHash_3$AsLongTupleHashFunction.dualHash	3	3	0	0	0	0	0	0	0	0	-	-
 all	absorbed	M3MurmurHash_3$AsLongTupleHashFunction.newResultArray	3	3	0	0	0	0	0	0	0	0	-	-
 all	absorbed	M3MurmurHash_3$AsLongTupleHashFunction.seed	1	1	0	0	0	0	0	0	0	0	-	-
-all	absorbed	M3MurmurHash_3.finalize	4	4	1	1	0	0	0	0	0	0	-	-
+all	absorbed	M3MurmurHash_3.finalize	4	4	1	2	0	0	0	0	0	0	-	-
 all	absorbed	M3MurmurHash_3.fmix64	4	4	1	1	0	0	0	0	0	0	-	-
-all	absorbed	M3MurmurHash_3.hash	4	4	3	3	0	0	0	0	0	0	-	-
+all	absorbed	M3MurmurHash_3.hash	4	4	3	4	0	0	0	0	0	0	-	-
 all	absorbed	M3MurmurHash_3.mixK1	4	4	1	1	0	0	0	0	0	0	-	-
 all	absorbed	M3MurmurHash_3.mixK2	4	4	1	1	0	0	0	0	0	0	-	-
-all	absorbed	M3Primitives.unsignedByte	4	3	1	0	0	0	0	0	0	0	-	-
+all	absorbed	M3Primitives.unsignedByte	4	4	1	1	0	0	0	0	0	0	-	-
 all	absorbed	M3Primitives.unsignedInt	4	4	1	1	0	0	0	0	0	0	-	-
-all	absorbed	M3Primitives.unsignedShort	3	4	0	1	0	0	0	0	0	0	-	-
+all	absorbed	M3Primitives.unsignedShort	3	3	0	0	0	0	0	0	0	0	-	-
 all	absorbed	M3Util.checkArrayOffs	4	4	1	1	0	0	0	0	0	0	-	-
 all	absorbed	M3WyHash$AsLongHashFunction.hash	4	4	1	1	0	0	0	0	1	1	-	-
 all	absorbed	M3WyHash$AsLongHashFunction.seed	1	1	0	0	0	0	0	0	0	0	-	-
@@ -130,21 +147,21 @@ all	absorbed	M3XXH3.XXH128_mix32B_once	4	4	1	1	0	0	0	0	0	0	-	-
 all	absorbed	M3XXH3.XXH3_128bits_internal	4	4	3	1	46	0	9	0	29	4	NodeCountInliningCutoff=25;low call site frequency=21	-
 all	absorbed	M3XXH3.XXH3_64bits_internal	4	4	9	1	23	0	2	0	17	4	NodeCountInliningCutoff=12;low call site frequency=11	-
 all	absorbed	M3XXH3.XXH3_avalanche	4	4	1	1	0	0	0	0	0	0	-	-
-all	absorbed	M3XXH3.XXH3_hashLong	-	4	-	7	-	24	-	0	-	1	-	virtual call=24
+all	absorbed	M3XXH3.XXH3_hashLong	-	4	-	8	-	24	-	0	-	1	-	virtual call=24
 all	absorbed	M3XXH3.XXH3_len_0to16_128b	-	4	-	2	-	0	-	0	-	1	-	-
 all	absorbed	M3XXH3.XXH3_len_0to16_64b	-	4	-	4	-	4	-	0	-	1	-	virtual call=4
-all	absorbed	M3XXH3.XXH3_len_129to240_128b	-	4	-	3	-	0	-	0	-	0	-	-
-all	absorbed	M3XXH3.XXH3_len_129to240_64b	-	4	-	7	-	6	-	0	-	0	-	virtual call=6
+all	absorbed	M3XXH3.XXH3_len_129to240_128b	-	4	-	2	-	0	-	0	-	0	-	-
+all	absorbed	M3XXH3.XXH3_len_129to240_64b	-	4	-	8	-	0	-	0	-	3	-	-
 all	absorbed	M3XXH3.XXH3_len_17to128_128b	-	4	-	2	-	0	-	0	-	0	-	-
 all	absorbed	M3XXH3.XXH3_len_17to128_64b	-	4	-	3	-	0	-	0	-	8	-	-
 all	absorbed	M3XXH3.XXH3_len_1to3_128b	-	4	-	2	-	0	-	0	-	0	-	-
-all	absorbed	M3XXH3.XXH3_len_1to3_64b	-	4	-	3	-	1	-	0	-	0	-	virtual call=1
+all	absorbed	M3XXH3.XXH3_len_1to3_64b	-	4	-	3	-	3	-	0	-	0	-	virtual call=3
 all	absorbed	M3XXH3.XXH3_len_4to8_128b	-	3	-	0	-	0	-	0	-	0	-	-
 all	absorbed	M3XXH3.XXH3_len_4to8_64b	-	3	-	0	-	0	-	0	-	0	-	-
 all	absorbed	M3XXH3.XXH3_len_9to16_128b	-	3	-	0	-	0	-	0	-	0	-	-
 all	absorbed	M3XXH3.XXH3_len_9to16_64b	-	3	-	0	-	0	-	0	-	0	-	-
 all	absorbed	M3XXH3.XXH3_mergeAccs	-	4	-	1	-	0	-	0	-	0	-	-
-all	absorbed	M3XXH3.XXH3_mix16B	4	4	4	4	0	2	0	0	0	0	-	virtual call=2
+all	absorbed	M3XXH3.XXH3_mix16B	4	4	4	5	0	2	0	0	0	0	-	virtual call=2
 all	absorbed	M3XXH3.XXH3_mix2Accs	4	4	1	1	0	0	0	0	0	0	-	-
 all	absorbed	M3XXH3.XXH3_rrmxmx	4	3	1	0	0	0	0	0	0	0	-	-
 all	absorbed	M3XXH3.XXH64_avalanche	4	4	1	1	0	0	0	0	0	0	-	-
@@ -152,7 +169,7 @@ all	absorbed	M3XxHash$AsLongHashFunction.hash	4	4	1	1	0	0	0	0	1	1	-	-
 all	absorbed	M3XxHash$AsLongHashFunction.seed	1	1	0	0	0	0	0	0	0	0	-	-
 all	absorbed	M3XxHash.finalize	4	4	1	1	0	0	0	0	0	0	-	-
 all	absorbed	M3XxHash.xxHash64	4	4	3	3	0	0	0	0	0	0	-	-
-all	vendored	(PrintInlining text log, lines naming a hashing class)	too big=103;hot method too big=103;callee is too large=89;already compiled into a big method=4	too big=140;hot method too big=103;callee is too large=87;already compiled into a big method=4	too big=103;hot method too big=103;callee is too large=89;already compiled into a big method=4	too big=140;hot method too big=103;callee is too large=87;already compiled into a big method=4	too big=103;hot method too big=103;callee is too large=89;already compiled into a big method=4	too big=140;hot method too big=103;callee is too large=87;already compiled into a big method=4	too big=103;hot method too big=103;callee is too large=89;already compiled into a big method=4	too big=140;hot method too big=103;callee is too large=87;already compiled into a big method=4	too big=103;hot method too big=103;callee is too large=89;already compiled into a big method=4	too big=140;hot method too big=103;callee is too large=87;already compiled into a big method=4	too big=103;hot method too big=103;callee is too large=89;already compiled into a big method=4	too big=140;hot method too big=103;callee is too large=87;already compiled into a big method=4
+all	vendored	(PrintInlining text log, lines naming a hashing class)	too big=103;hot method too big=103;callee is too large=89;already compiled into a big method=4	too big=87;hot method too big=103;callee is too large=87;already compiled into a big method=4	too big=103;hot method too big=103;callee is too large=89;already compiled into a big method=4	too big=87;hot method too big=103;callee is too large=87;already compiled into a big method=4	too big=103;hot method too big=103;callee is too large=89;already compiled into a big method=4	too big=87;hot method too big=103;callee is too large=87;already compiled into a big method=4	too big=103;hot method too big=103;callee is too large=89;already compiled into a big method=4	too big=87;hot method too big=103;callee is too large=87;already compiled into a big method=4	too big=103;hot method too big=103;callee is too large=89;already compiled into a big method=4	too big=87;hot method too big=103;callee is too large=87;already compiled into a big method=4	too big=103;hot method too big=103;callee is too large=89;already compiled into a big method=4	too big=87;hot method too big=103;callee is too large=87;already compiled into a big method=4
 all	vendored	Access$ReverseAccess.getByte	4	4	1	1	0	0	0	0	0	0	-	-
 all	vendored	Access$ReverseAccess.getInt	4	4	1	1	0	0	0	0	0	0	-	-
 all	vendored	Access$ReverseAccess.getLong	4	4	1	1	0	0	0	0	0	0	-	-
@@ -168,7 +185,7 @@ all	vendored	Access.u8	4	4	4	4	0	0	0	0	0	0	-	-
 all	vendored	ByteBufferAccess.byteOrder	4	4	1	1	0	0	0	0	0	0	-	-
 all	vendored	ByteBufferAccess.getByte	3	4	0	1	0	0	0	0	0	0	-	-
 all	vendored	ByteBufferAccess.getInt	4	3	1	0	0	0	0	0	0	0	-	-
-all	vendored	ByteBufferAccess.getLong	4	4	5	4	0	0	0	0	0	0	-	-
+all	vendored	ByteBufferAccess.getLong	4	4	5	5	0	0	0	0	0	0	-	-
 all	vendored	ByteBufferAccess.getUnsignedByte	4	3	1	0	0	0	0	0	0	0	-	-
 all	vendored	ByteBufferAccess.getUnsignedInt	4	3	1	0	0	0	0	0	0	0	-	-
 all	vendored	ByteBufferAccess.reverseAccess	4	4	1	1	0	0	0	0	0	0	-	-
@@ -181,12 +198,12 @@ all	vendored	CharSequenceAccess$LittleEndianCharSequenceAccess.getUnsignedInt	4	
 all	vendored	CharSequenceAccess.charSequenceAccess	3	3	0	0	0	0	0	0	0	0	-	-
 all	vendored	CharSequenceAccess.getByte	3	3	0	0	0	0	0	0	0	0	-	-
 all	vendored	CharSequenceAccess.getInt	3	3	0	0	0	0	0	0	0	0	-	-
-all	vendored	CharSequenceAccess.getLong	4	4	1	1	9	9	0	0	0	0	low call site frequency=9	low call site frequency=9
+all	vendored	CharSequenceAccess.getLong	4	4	1	2	9	9	0	0	0	0	low call site frequency=9	low call site frequency=9
 all	vendored	CharSequenceAccess.getUnsignedByte	3	3	0	0	0	0	0	0	0	0	-	-
-all	vendored	CharSequenceAccess.getUnsignedInt	4	4	1	1	0	0	0	0	0	0	-	-
-all	vendored	CharSequenceAccess.ix	2	2	0	0	0	0	0	0	0	0	-	-
+all	vendored	CharSequenceAccess.getUnsignedInt	4	3	1	0	0	0	0	0	0	0	-	-
+all	vendored	CharSequenceAccess.ix	2	4	0	1	0	0	0	0	0	0	-	-
 all	vendored	CharSequenceAccess.nativeCharSequenceAccess	3	3	0	0	0	0	0	0	0	0	-	-
-all	vendored	CityAndFarmHash_1_1$AsLongHashFunction.finalize	4	4	1	1	0	0	0	0	0	0	-	-
+all	vendored	CityAndFarmHash_1_1$AsLongHashFunction.finalize	4	3	1	0	0	0	0	0	0	0	-	-
 all	vendored	CityAndFarmHash_1_1$AsLongHashFunction.hash	4	4	1	1	0	0	0	0	1	1	-	-
 all	vendored	CityAndFarmHash_1_1$Na.hash	4	4	1	1	0	0	0	0	1	1	-	-
 all	vendored	CityAndFarmHash_1_1$Uo.hash	4	4	1	1	0	0	0	0	2	2	-	-
@@ -211,7 +228,7 @@ all	vendored	CompactLatin1CharSequenceAccess.getLong	4	4	1	1	0	0	0	0	0	0	-	-
 all	vendored	CompactLatin1CharSequenceAccess.getUnsignedByte	4	4	1	1	0	0	0	0	0	0	-	-
 all	vendored	CompactLatin1CharSequenceAccess.getUnsignedInt	4	4	1	1	0	0	0	0	0	0	-	-
 all	vendored	DualHashFunction$1.hash	4	4	2	2	1	1	0	0	2	2	low call site frequency=1	low call site frequency=1
-all	vendored	DualHashFunction.checkResult	4	4	1	1	0	0	0	0	0	0	-	-
+all	vendored	DualHashFunction.checkResult	4	3	1	0	0	0	0	0	0	0	-	-
 all	vendored	DualHashFunction.hash	4	4	2	2	1	1	0	0	2	2	low call site frequency=1	low call site frequency=1
 all	vendored	LongHashFunction.hashByteBuffer	4	4	2	2	0	0	0	0	2	2	-	-
 all	vendored	LongHashFunction.hashBytes	4	4	6	6	0	0	0	0	2	2	-	-
@@ -234,12 +251,12 @@ all	vendored	MurmurHash_3$AsLongTupleHashFunction.newResultArray	4	3	1	0	0	0	0	0
 all	vendored	MurmurHash_3$AsLongTupleHashFunction.seed	1	1	0	0	0	0	0	0	0	0	-	-
 all	vendored	MurmurHash_3.finalize	4	4	2	2	0	0	0	0	0	0	-	-
 all	vendored	MurmurHash_3.fmix64	4	4	1	1	0	0	0	0	0	0	-	-
-all	vendored	MurmurHash_3.hash	4	4	4	3	0	0	0	0	0	0	-	-
+all	vendored	MurmurHash_3.hash	4	4	4	5	0	0	0	0	0	0	-	-
 all	vendored	MurmurHash_3.mixK1	4	4	1	1	0	0	0	0	0	0	-	-
 all	vendored	MurmurHash_3.mixK2	4	4	1	1	0	0	0	0	0	0	-	-
 all	vendored	Primitives.unsignedByte	3	4	0	1	0	0	0	0	0	0	-	-
 all	vendored	Primitives.unsignedInt	4	4	1	1	0	0	0	0	0	0	-	-
-all	vendored	Primitives.unsignedShort	3	3	0	0	0	0	0	0	0	0	-	-
+all	vendored	Primitives.unsignedShort	3	4	0	1	0	0	0	0	0	0	-	-
 all	vendored	UnsafeAccess.byteOrder	4	4	1	1	0	0	0	0	0	0	-	-
 all	vendored	UnsafeAccess.getByte	4	4	2	2	0	0	0	0	0	0	-	-
 all	vendored	UnsafeAccess.getInt	4	4	2	2	0	0	0	0	0	0	-	-
@@ -261,7 +278,7 @@ all	vendored	XXH3$AsLongHashFunction.seed	1	1	0	0	0	0	0	0	0	0	-	-
 all	vendored	XXH3$AsLongTupleHashFunction.dualHash	4	4	1	1	0	0	0	0	1	1	-	-
 all	vendored	XXH3$AsLongTupleHashFunction.newResultArray	4	4	1	1	0	0	0	0	0	0	-	-
 all	vendored	XXH3.XXH128_mix32B_once	4	4	1	1	0	0	0	0	0	0	-	-
-all	vendored	XXH3.XXH3_128bits_internal	4	4	3	2	21	21	9	9	21	21	low call site frequency=21	low call site frequency=21
+all	vendored	XXH3.XXH3_128bits_internal	4	4	3	2	21	21	9	9	21	19	low call site frequency=21	low call site frequency=21
 all	vendored	XXH3.XXH3_64bits_internal	4	4	5	6	45	45	3	3	13	13	low call site frequency=17;virtual call=28	low call site frequency=17;virtual call=28
 all	vendored	XXH3.XXH3_avalanche	4	4	1	1	0	0	0	0	0	0	-	-
 all	vendored	XXH3.XXH3_mix16B	4	4	4	4	2	2	0	0	0	0	virtual call=2	virtual call=2
@@ -272,45 +289,55 @@ all	vendored	XxHash$AsLongHashFunction.hash	4	4	1	1	0	0	0	0	1	1	-	-
 all	vendored	XxHash$AsLongHashFunction.seed	1	1	0	0	0	0	0	0	0	0	-	-
 all	vendored	XxHash.finalize	4	4	1	1	0	0	0	0	0	0	-	-
 all	vendored	XxHash.xxHash64	4	4	4	3	0	0	0	0	0	0	-	-
-bytebuffer	absorbed	(PrintInlining text log, lines naming a hashing class)	too big=11;hot method too big=17;callee is too large=19;size > DesiredMethodLimit=17	too big=39;hot method too big=18;callee is too large=53;already compiled into a big method=11;NodeCountInliningCutoff=42;size > DesiredMethodLimit=22	too big=11;hot method too big=17;callee is too large=19;size > DesiredMethodLimit=17	too big=39;hot method too big=18;callee is too large=53;already compiled into a big method=11;NodeCountInliningCutoff=42;size > DesiredMethodLimit=22	too big=11;hot method too big=17;callee is too large=19;size > DesiredMethodLimit=17	too big=39;hot method too big=18;callee is too large=53;already compiled into a big method=11;NodeCountInliningCutoff=42;size > DesiredMethodLimit=22	too big=11;hot method too big=17;callee is too large=19;size > DesiredMethodLimit=17	too big=39;hot method too big=18;callee is too large=53;already compiled into a big method=11;NodeCountInliningCutoff=42;size > DesiredMethodLimit=22	too big=11;hot method too big=17;callee is too large=19;size > DesiredMethodLimit=17	too big=39;hot method too big=18;callee is too large=53;already compiled into a big method=11;NodeCountInliningCutoff=42;size > DesiredMethodLimit=22	too big=11;hot method too big=17;callee is too large=19;size > DesiredMethodLimit=17	too big=39;hot method too big=18;callee is too large=53;already compiled into a big method=11;NodeCountInliningCutoff=42;size > DesiredMethodLimit=22
+bytebuffer	absorbed	(PrintInlining text log, lines naming a hashing class)	too big=11;hot method too big=17;callee is too large=19;size > DesiredMethodLimit=17	too big=30;hot method too big=18;callee is too large=41;NodeCountInliningCutoff=40;size > DesiredMethodLimit=23	too big=11;hot method too big=17;callee is too large=19;size > DesiredMethodLimit=17	too big=30;hot method too big=18;callee is too large=41;NodeCountInliningCutoff=40;size > DesiredMethodLimit=23	too big=11;hot method too big=17;callee is too large=19;size > DesiredMethodLimit=17	too big=30;hot method too big=18;callee is too large=41;NodeCountInliningCutoff=40;size > DesiredMethodLimit=23	too big=11;hot method too big=17;callee is too large=19;size > DesiredMethodLimit=17	too big=30;hot method too big=18;callee is too large=41;NodeCountInliningCutoff=40;size > DesiredMethodLimit=23	too big=11;hot method too big=17;callee is too large=19;size > DesiredMethodLimit=17	too big=30;hot method too big=18;callee is too large=41;NodeCountInliningCutoff=40;size > DesiredMethodLimit=23	too big=11;hot method too big=17;callee is too large=19;size > DesiredMethodLimit=17	too big=30;hot method too big=18;callee is too large=41;NodeCountInliningCutoff=40;size > DesiredMethodLimit=23
 bytebuffer	absorbed	M3Access$ReverseAccess.getByte	3	3	0	0	0	0	0	0	0	0	-	-
 bytebuffer	absorbed	M3Access$ReverseAccess.getInt	4	3	2	0	1	0	0	0	0	0	low call site frequency=1	-
 bytebuffer	absorbed	M3Access$ReverseAccess.getLong	4	4	2	2	0	0	0	0	0	0	-	-
-bytebuffer	absorbed	M3Access$ReverseAccess.getUnsignedByte	4	4	1	2	1	1	0	0	0	0	low call site frequency=1	low call site frequency=1
+bytebuffer	absorbed	M3Access$ReverseAccess.getUnsignedByte	4	3	1	0	1	0	0	0	0	0	low call site frequency=1	-
 bytebuffer	absorbed	M3Access$ReverseAccess.getUnsignedInt	3	3	0	0	0	0	0	0	0	0	-	-
+bytebuffer	absorbed	M3Access$ReverseAccess.i32	-	3	-	0	-	0	-	0	-	0	-	-
+bytebuffer	absorbed	M3Access$ReverseAccess.i64	-	4	-	2	-	0	-	0	-	0	-	-
+bytebuffer	absorbed	M3Access$ReverseAccess.i8	-	3	-	0	-	0	-	0	-	0	-	-
+bytebuffer	absorbed	M3Access$ReverseAccess.u32	-	3	-	0	-	0	-	0	-	0	-	-
+bytebuffer	absorbed	M3Access$ReverseAccess.u8	-	4	-	1	-	0	-	0	-	0	-	-
 bytebuffer	absorbed	M3Access.byteOrder	3	3	0	0	0	0	0	0	0	0	-	-
-bytebuffer	absorbed	M3Access.i32	4	3	1	0	1	0	0	0	0	0	virtual call=1	-
-bytebuffer	absorbed	M3Access.i64	4	4	2	4	1	0	0	0	0	0	virtual call=1	-
-bytebuffer	absorbed	M3Access.i8	4	4	3	1	2	2	0	0	0	0	low call site frequency=2	low call site frequency=2
-bytebuffer	absorbed	M3Access.u32	4	3	3	0	2	0	0	0	0	0	low call site frequency=2	-
-bytebuffer	absorbed	M3Access.u8	4	4	3	2	2	2	0	0	0	0	low call site frequency=2	low call site frequency=2
+bytebuffer	absorbed	M3Access.i32	4	-	1	-	1	-	0	-	0	-	virtual call=1	-
+bytebuffer	absorbed	M3Access.i64	4	-	2	-	1	-	0	-	0	-	virtual call=1	-
+bytebuffer	absorbed	M3Access.i8	4	-	3	-	2	-	0	-	0	-	low call site frequency=2	-
+bytebuffer	absorbed	M3Access.u32	4	-	3	-	2	-	0	-	0	-	low call site frequency=2	-
+bytebuffer	absorbed	M3Access.u8	4	-	3	-	2	-	0	-	0	-	low call site frequency=2	-
 bytebuffer	absorbed	M3ByteArrayAccess.address	-	2	-	0	-	0	-	0	-	0	-	-
 bytebuffer	absorbed	M3ByteArrayAccess.getInt	4	-	1	-	0	-	0	-	0	-	-	-
 bytebuffer	absorbed	M3ByteArrayAccess.getLong	4	-	1	-	0	-	0	-	0	-	-	-
-bytebuffer	absorbed	M3ByteArrayAccess.i32	-	4	-	2	-	0	-	0	-	0	-	-
+bytebuffer	absorbed	M3ByteArrayAccess.i32	-	4	-	1	-	0	-	0	-	0	-	-
 bytebuffer	absorbed	M3ByteArrayAccess.i64	-	4	-	2	-	0	-	0	-	0	-	-
-bytebuffer	absorbed	M3ByteBufferAccess.byteOrder	4	4	2	1	0	0	0	0	0	0	-	-
-bytebuffer	absorbed	M3ByteBufferAccess.getByte	4	3	1	0	1	0	0	0	0	0	low call site frequency=1	-
+bytebuffer	absorbed	M3ByteBufferAccess.byteOrder	4	4	2	2	0	0	0	0	0	0	-	-
+bytebuffer	absorbed	M3ByteBufferAccess.getByte	4	4	1	1	1	0	0	0	0	0	low call site frequency=1	-
 bytebuffer	absorbed	M3ByteBufferAccess.getInt	4	3	1	0	0	0	0	0	0	0	-	-
-bytebuffer	absorbed	M3ByteBufferAccess.getLong	4	4	3	4	0	0	0	0	0	0	-	-
+bytebuffer	absorbed	M3ByteBufferAccess.getLong	4	4	3	5	0	0	0	0	0	0	-	-
 bytebuffer	absorbed	M3ByteBufferAccess.getUnsignedByte	4	3	1	0	1	0	0	0	0	0	low call site frequency=1	-
 bytebuffer	absorbed	M3ByteBufferAccess.getUnsignedInt	4	3	1	0	1	0	0	0	0	0	low call site frequency=1	-
+bytebuffer	absorbed	M3ByteBufferAccess.i32	-	4	-	1	-	0	-	0	-	0	-	-
+bytebuffer	absorbed	M3ByteBufferAccess.i64	-	4	-	1	-	0	-	0	-	0	-	-
+bytebuffer	absorbed	M3ByteBufferAccess.i8	-	3	-	0	-	0	-	0	-	0	-	-
 bytebuffer	absorbed	M3ByteBufferAccess.reverseAccess	4	4	1	1	0	0	0	0	0	0	-	-
+bytebuffer	absorbed	M3ByteBufferAccess.u32	-	4	-	1	-	0	-	0	-	0	-	-
+bytebuffer	absorbed	M3ByteBufferAccess.u8	-	3	-	0	-	0	-	0	-	0	-	-
 bytebuffer	absorbed	M3LongHashFunction.hashByteBuffer	4	4	2	2	0	0	0	0	1	4	-	-
 bytebuffer	absorbed	M3LongHashFunction.hashBytes	4	4	2	2	0	0	0	0	1	4	-	-
 bytebuffer	absorbed	M3Maths.unsignedLongMulXorFold	4	4	1	1	0	0	0	0	0	0	-	-
 bytebuffer	absorbed	M3MathsJDK9.unsignedLongMulXorFoldImp	3	3	0	0	0	0	0	0	0	0	-	-
 bytebuffer	absorbed	M3Primitives.unsignedByte	3	3	0	0	0	0	0	0	0	0	-	-
 bytebuffer	absorbed	M3Primitives.unsignedInt	4	3	1	0	0	0	0	0	0	0	-	-
-bytebuffer	absorbed	M3Util.checkArrayOffs	3	4	0	1	0	0	0	0	0	0	-	-
+bytebuffer	absorbed	M3Util.checkArrayOffs	3	3	0	0	0	0	0	0	0	0	-	-
 bytebuffer	absorbed	M3XXH3$AsLongHashFunction.hash	4	4	2	2	0	0	0	0	1	4	-	-
 bytebuffer	absorbed	M3XXH3.XXH3_64bits_internal	4	4	3	1	45	0	3	0	13	4	low call site frequency=17;virtual call=28	-
 bytebuffer	absorbed	M3XXH3.XXH3_avalanche	4	4	1	1	0	0	0	0	0	0	-	-
-bytebuffer	absorbed	M3XXH3.XXH3_hashLong	-	4	-	4	-	41	-	0	-	2	-	NodeCountInliningCutoff=41
-bytebuffer	absorbed	M3XXH3.XXH3_len_0to16_64b	-	4	-	3	-	0	-	0	-	1	-	-
-bytebuffer	absorbed	M3XXH3.XXH3_len_129to240_64b	-	4	-	8	-	0	-	0	-	3	-	-
-bytebuffer	absorbed	M3XXH3.XXH3_len_17to128_64b	-	4	-	3	-	0	-	0	-	8	-	-
-bytebuffer	absorbed	M3XXH3.XXH3_len_1to3_64b	-	4	-	3	-	6	-	0	-	0	-	low call site frequency=6
+bytebuffer	absorbed	M3XXH3.XXH3_hashLong	-	4	-	4	-	33	-	0	-	2	-	NodeCountInliningCutoff=33
+bytebuffer	absorbed	M3XXH3.XXH3_len_0to16_64b	-	4	-	3	-	2	-	0	-	1	-	low call site frequency=2
+bytebuffer	absorbed	M3XXH3.XXH3_len_129to240_64b	-	4	-	8	-	0	-	0	-	0	-	-
+bytebuffer	absorbed	M3XXH3.XXH3_len_17to128_64b	-	4	-	3	-	2	-	1	-	2	-	NodeCountInliningCutoff=2
+bytebuffer	absorbed	M3XXH3.XXH3_len_1to3_64b	-	4	-	3	-	3	-	0	-	0	-	low call site frequency=3
 bytebuffer	absorbed	M3XXH3.XXH3_len_4to8_64b	-	3	-	0	-	0	-	0	-	0	-	-
 bytebuffer	absorbed	M3XXH3.XXH3_len_9to16_64b	-	3	-	0	-	0	-	0	-	0	-	-
 bytebuffer	absorbed	M3XXH3.XXH3_mergeAccs	-	4	-	1	-	0	-	0	-	0	-	-
@@ -318,26 +345,26 @@ bytebuffer	absorbed	M3XXH3.XXH3_mix16B	4	4	2	3	2	0	0	0	0	0	virtual call=2	-
 bytebuffer	absorbed	M3XXH3.XXH3_mix2Accs	4	4	1	1	0	0	0	0	0	0	-	-
 bytebuffer	absorbed	M3XXH3.XXH3_rrmxmx	4	3	1	0	0	0	0	0	0	0	-	-
 bytebuffer	absorbed	M3XXH3.XXH64_avalanche	4	4	1	1	0	0	0	0	0	0	-	-
-bytebuffer	vendored	(PrintInlining text log, lines naming a hashing class)	too big=12;hot method too big=21;callee is too large=19;NodeCountInliningCutoff=8	too big=11;hot method too big=19;callee is too large=19;NodeCountInliningCutoff=8	too big=12;hot method too big=21;callee is too large=19;NodeCountInliningCutoff=8	too big=11;hot method too big=19;callee is too large=19;NodeCountInliningCutoff=8	too big=12;hot method too big=21;callee is too large=19;NodeCountInliningCutoff=8	too big=11;hot method too big=19;callee is too large=19;NodeCountInliningCutoff=8	too big=12;hot method too big=21;callee is too large=19;NodeCountInliningCutoff=8	too big=11;hot method too big=19;callee is too large=19;NodeCountInliningCutoff=8	too big=12;hot method too big=21;callee is too large=19;NodeCountInliningCutoff=8	too big=11;hot method too big=19;callee is too large=19;NodeCountInliningCutoff=8	too big=12;hot method too big=21;callee is too large=19;NodeCountInliningCutoff=8	too big=11;hot method too big=19;callee is too large=19;NodeCountInliningCutoff=8
+bytebuffer	vendored	(PrintInlining text log, lines naming a hashing class)	too big=12;hot method too big=21;callee is too large=19;NodeCountInliningCutoff=8	too big=20;hot method too big=19;callee is too large=19	too big=12;hot method too big=21;callee is too large=19;NodeCountInliningCutoff=8	too big=20;hot method too big=19;callee is too large=19	too big=12;hot method too big=21;callee is too large=19;NodeCountInliningCutoff=8	too big=20;hot method too big=19;callee is too large=19	too big=12;hot method too big=21;callee is too large=19;NodeCountInliningCutoff=8	too big=20;hot method too big=19;callee is too large=19	too big=12;hot method too big=21;callee is too large=19;NodeCountInliningCutoff=8	too big=20;hot method too big=19;callee is too large=19	too big=12;hot method too big=21;callee is too large=19;NodeCountInliningCutoff=8	too big=20;hot method too big=19;callee is too large=19
 bytebuffer	vendored	Access$ReverseAccess.getLong	3	3	0	0	0	0	0	0	0	0	-	-
-bytebuffer	vendored	Access.byteOrder	4	4	1	1	1	1	0	0	0	0	low call site frequency=1	low call site frequency=1
+bytebuffer	vendored	Access.byteOrder	4	3	1	0	1	0	0	0	0	0	low call site frequency=1	-
 bytebuffer	vendored	Access.i32	4	4	2	2	1	1	0	0	0	0	virtual call=1	virtual call=1
 bytebuffer	vendored	Access.i64	4	4	2	2	1	1	0	0	0	0	virtual call=1	virtual call=1
 bytebuffer	vendored	Access.i8	4	4	2	2	1	1	0	0	0	0	virtual call=1	virtual call=1
 bytebuffer	vendored	Access.u32	4	4	2	2	1	1	0	0	0	0	virtual call=1	virtual call=1
 bytebuffer	vendored	Access.u8	4	4	2	2	1	1	0	0	0	0	virtual call=1	virtual call=1
-bytebuffer	vendored	ByteBufferAccess.byteOrder	3	-	0	-	0	-	0	-	0	-	-	-
+bytebuffer	vendored	ByteBufferAccess.byteOrder	3	3	0	0	0	0	0	0	0	0	-	-
 bytebuffer	vendored	ByteBufferAccess.getByte	4	4	1	1	0	0	0	0	0	0	-	-
 bytebuffer	vendored	ByteBufferAccess.getInt	4	4	1	1	0	0	0	0	0	0	-	-
 bytebuffer	vendored	ByteBufferAccess.getLong	4	4	1	1	0	0	0	0	0	0	-	-
 bytebuffer	vendored	ByteBufferAccess.getUnsignedByte	4	4	1	1	0	0	0	0	0	0	-	-
 bytebuffer	vendored	ByteBufferAccess.getUnsignedInt	4	4	1	1	0	0	0	0	0	0	-	-
-bytebuffer	vendored	ByteBufferAccess.reverseAccess	3	-	0	-	0	-	0	-	0	-	-	-
+bytebuffer	vendored	ByteBufferAccess.reverseAccess	3	3	0	0	0	0	0	0	0	0	-	-
 bytebuffer	vendored	LongHashFunction.hashByteBuffer	4	4	2	1	1	0	0	0	2	1	low call site frequency=1	-
 bytebuffer	vendored	LongHashFunction.hashBytes	4	4	2	2	1	1	0	0	2	2	low call site frequency=1	low call site frequency=1
 bytebuffer	vendored	LongHashFunction.unsafeHash	4	4	1	1	0	0	0	0	1	1	-	-
 bytebuffer	vendored	Maths.unsignedLongMulXorFold	4	4	1	1	0	0	0	0	0	0	-	-
-bytebuffer	vendored	MathsJDK9.unsignedLongMulXorFoldImp	4	3	1	0	0	0	0	0	0	0	-	-
+bytebuffer	vendored	MathsJDK9.unsignedLongMulXorFoldImp	4	4	1	1	0	0	0	0	0	0	-	-
 bytebuffer	vendored	Primitives.unsignedByte	4	4	1	1	0	0	0	0	0	0	-	-
 bytebuffer	vendored	Primitives.unsignedInt	4	4	1	1	0	0	0	0	0	0	-	-
 bytebuffer	vendored	UnsafeAccess.byteOrder	4	4	1	1	0	0	0	0	0	0	-	-
@@ -348,17 +375,17 @@ bytebuffer	vendored	UnsafeAccess.getUnsignedByte	3	3	0	0	0	0	0	0	0	0	-	-
 bytebuffer	vendored	UnsafeAccess.getUnsignedInt	3	3	0	0	0	0	0	0	0	0	-	-
 bytebuffer	vendored	Util.checkArrayOffs	3	3	0	0	0	0	0	0	0	0	-	-
 bytebuffer	vendored	XXH3$AsLongHashFunction.hash	4	4	2	2	1	1	0	0	1	1	low call site frequency=1	low call site frequency=1
-bytebuffer	vendored	XXH3.XXH3_64bits_internal	4	4	5	3	40	40	6	6	36	36	NodeCountInliningCutoff=6;low call site frequency=34	NodeCountInliningCutoff=6;low call site frequency=34
+bytebuffer	vendored	XXH3.XXH3_64bits_internal	4	4	5	3	40	90	6	6	36	26	NodeCountInliningCutoff=6;low call site frequency=34	low call site frequency=34;virtual call=56
 bytebuffer	vendored	XXH3.XXH3_avalanche	4	4	1	1	0	0	0	0	0	0	-	-
-bytebuffer	vendored	XXH3.XXH3_mix16B	4	4	2	2	0	0	0	0	0	0	-	-
+bytebuffer	vendored	XXH3.XXH3_mix16B	4	4	2	2	0	2	0	0	0	0	-	virtual call=2
 bytebuffer	vendored	XXH3.XXH3_mix2Accs	4	4	1	1	0	0	0	0	0	0	-	-
 bytebuffer	vendored	XXH3.XXH3_rrmxmx	4	4	1	1	0	0	0	0	0	0	-	-
 bytebuffer	vendored	XXH3.XXH64_avalanche	4	4	1	1	0	0	0	0	0	0	-	-
-bytes	absorbed	(PrintInlining text log, lines naming a hashing class)	too big=49;hot method too big=54;callee is too large=68;NodeCountInliningCutoff=69	too big=53;hot method too big=57;callee is too large=76	too big=49;hot method too big=54;callee is too large=68;NodeCountInliningCutoff=69	too big=53;hot method too big=57;callee is too large=76	too big=49;hot method too big=54;callee is too large=68;NodeCountInliningCutoff=69	too big=53;hot method too big=57;callee is too large=76	too big=49;hot method too big=54;callee is too large=68;NodeCountInliningCutoff=69	too big=53;hot method too big=57;callee is too large=76	too big=49;hot method too big=54;callee is too large=68;NodeCountInliningCutoff=69	too big=53;hot method too big=57;callee is too large=76	too big=49;hot method too big=54;callee is too large=68;NodeCountInliningCutoff=69	too big=53;hot method too big=57;callee is too large=76
+bytes	absorbed	(PrintInlining text log, lines naming a hashing class)	too big=49;hot method too big=54;callee is too large=68;NodeCountInliningCutoff=69	too big=52;hot method too big=57;callee is too large=86	too big=49;hot method too big=54;callee is too large=68;NodeCountInliningCutoff=69	too big=52;hot method too big=57;callee is too large=86	too big=49;hot method too big=54;callee is too large=68;NodeCountInliningCutoff=69	too big=52;hot method too big=57;callee is too large=86	too big=49;hot method too big=54;callee is too large=68;NodeCountInliningCutoff=69	too big=52;hot method too big=57;callee is too large=86	too big=49;hot method too big=54;callee is too large=68;NodeCountInliningCutoff=69	too big=52;hot method too big=57;callee is too large=86	too big=49;hot method too big=54;callee is too large=68;NodeCountInliningCutoff=69	too big=52;hot method too big=57;callee is too large=86
 bytes	absorbed	M3Access.byteOrder	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	absorbed	M3Access.i32	4	-	1	-	0	-	0	-	0	-	-	-
 bytes	absorbed	M3Access.i64	4	-	1	-	0	-	0	-	0	-	-	-
-bytes	absorbed	M3Access.i8	4	3	1	0	0	0	0	0	0	0	-	-
+bytes	absorbed	M3Access.i8	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	absorbed	M3Access.u16	3	-	0	-	0	-	0	-	0	-	-	-
 bytes	absorbed	M3Access.u32	4	-	1	-	0	-	0	-	0	-	-	-
 bytes	absorbed	M3Access.u8	4	4	1	1	0	0	0	0	0	0	-	-
@@ -394,7 +421,7 @@ bytes	absorbed	M3CityAndFarmHash_1_1.shiftMix	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	absorbed	M3CityAndFarmHash_1_1.uoH	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	absorbed	M3CityAndFarmHash_1_1.uoHash64WithSeeds	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	absorbed	M3DualHashFunction$1.hash	4	4	2	2	1	1	0	0	2	5	low call site frequency=1	low call site frequency=1
-bytes	absorbed	M3DualHashFunction.checkResult	3	2	0	0	0	0	0	0	0	0	-	-
+bytes	absorbed	M3DualHashFunction.checkResult	3	4	0	1	0	0	0	0	0	0	-	-
 bytes	absorbed	M3DualHashFunction.hash	4	4	1	2	1	1	0	0	2	5	low call site frequency=1	low call site frequency=1
 bytes	absorbed	M3LongHashFunction.hashBytes	4	4	3	3	0	0	0	0	1	1	-	-
 bytes	absorbed	M3LongHashFunction.unsafeHash	4	4	3	3	0	0	0	0	1	1	-	-
@@ -403,7 +430,7 @@ bytes	absorbed	M3LongTupleHashFunction.unsafeHash	4	4	1	2	1	1	0	0	2	5	low call s
 bytes	absorbed	M3Maths.unsignedLongMulHigh	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	absorbed	M3Maths.unsignedLongMulXorFold	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	absorbed	M3MathsJDK9.unsignedLongMulHighImp	3	4	0	1	0	0	0	0	0	0	-	-
-bytes	absorbed	M3MathsJDK9.unsignedLongMulXorFoldImp	4	3	1	0	0	0	0	0	0	0	-	-
+bytes	absorbed	M3MathsJDK9.unsignedLongMulXorFoldImp	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	absorbed	M3MetroHash$AsLongHashFunction.hash	4	4	1	1	0	0	0	0	1	1	-	-
 bytes	absorbed	M3MetroHash$AsLongHashFunction.seed	1	1	0	0	0	0	0	0	0	0	-	-
 bytes	absorbed	M3MetroHash.finalize	4	4	1	1	0	0	0	0	0	0	-	-
@@ -413,7 +440,7 @@ bytes	absorbed	M3MurmurHash_3$AsLongTupleHashFunction.newResultArray	3	3	0	0	0	0
 bytes	absorbed	M3MurmurHash_3$AsLongTupleHashFunction.seed	1	1	0	0	0	0	0	0	0	0	-	-
 bytes	absorbed	M3MurmurHash_3.finalize	4	4	2	2	0	0	0	0	0	0	-	-
 bytes	absorbed	M3MurmurHash_3.fmix64	4	4	1	1	0	0	0	0	0	0	-	-
-bytes	absorbed	M3MurmurHash_3.hash	4	4	5	5	0	0	0	0	0	0	-	-
+bytes	absorbed	M3MurmurHash_3.hash	4	4	5	4	0	0	0	0	0	0	-	-
 bytes	absorbed	M3MurmurHash_3.mixK1	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	absorbed	M3MurmurHash_3.mixK2	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	absorbed	M3Primitives.unsignedByte	4	3	1	0	0	0	0	0	0	0	-	-
@@ -425,7 +452,6 @@ bytes	absorbed	M3WyHash._wymum	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	absorbed	M3WyHash._wyr3	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	absorbed	M3WyHash.u64Rorate32	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	absorbed	M3WyHash.wyHash64	4	4	1	1	2	2	0	0	11	11	low call site frequency=2	low call site frequency=2
-bytes	absorbed	M3XXH3$AsLongHashFunction.hash	-	3	-	0	-	0	-	0	-	0	-	-
 bytes	absorbed	M3XXH3$AsLongTupleHashFunction.dualHash	4	4	1	1	0	0	0	0	1	4	-	-
 bytes	absorbed	M3XXH3$AsLongTupleHashFunction.newResultArray	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	absorbed	M3XXH3.XXH128_mix32B_once	4	4	1	1	0	0	0	0	0	0	-	-
@@ -453,8 +479,8 @@ bytes	absorbed	M3XXH3.XXH64_avalanche	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	absorbed	M3XxHash$AsLongHashFunction.hash	2	4	0	1	0	0	0	0	0	1	-	-
 bytes	absorbed	M3XxHash$AsLongHashFunction.seed	1	1	0	0	0	0	0	0	0	0	-	-
 bytes	absorbed	M3XxHash.finalize	4	4	1	1	0	0	0	0	0	0	-	-
-bytes	absorbed	M3XxHash.xxHash64	4	4	4	3	0	0	0	0	0	0	-	-
-bytes	vendored	(PrintInlining text log, lines naming a hashing class)	too big=54;hot method too big=55;callee is too large=63	too big=50;hot method too big=55;callee is too large=62	too big=54;hot method too big=55;callee is too large=63	too big=50;hot method too big=55;callee is too large=62	too big=54;hot method too big=55;callee is too large=63	too big=50;hot method too big=55;callee is too large=62	too big=54;hot method too big=55;callee is too large=63	too big=50;hot method too big=55;callee is too large=62	too big=54;hot method too big=55;callee is too large=63	too big=50;hot method too big=55;callee is too large=62	too big=54;hot method too big=55;callee is too large=63	too big=50;hot method too big=55;callee is too large=62
+bytes	absorbed	M3XxHash.xxHash64	4	4	4	4	0	0	0	0	0	0	-	-
+bytes	vendored	(PrintInlining text log, lines naming a hashing class)	too big=54;hot method too big=55;callee is too large=63	too big=50;hot method too big=53;callee is too large=61	too big=54;hot method too big=55;callee is too large=63	too big=50;hot method too big=53;callee is too large=61	too big=54;hot method too big=55;callee is too large=63	too big=50;hot method too big=53;callee is too large=61	too big=54;hot method too big=55;callee is too large=63	too big=50;hot method too big=53;callee is too large=61	too big=54;hot method too big=55;callee is too large=63	too big=50;hot method too big=53;callee is too large=61	too big=54;hot method too big=55;callee is too large=63	too big=50;hot method too big=53;callee is too large=61
 bytes	vendored	Access.byteOrder	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	vendored	Access.i32	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	vendored	Access.i64	4	4	1	1	0	0	0	0	0	0	-	-
@@ -482,7 +508,7 @@ bytes	vendored	CityAndFarmHash_1_1.uoH	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	vendored	CityAndFarmHash_1_1.uoHash64WithSeeds	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	vendored	DualHashFunction$1.hash	4	4	2	2	1	1	0	0	2	2	low call site frequency=1	low call site frequency=1
 bytes	vendored	DualHashFunction.checkResult	3	3	0	0	0	0	0	0	0	0	-	-
-bytes	vendored	DualHashFunction.hash	4	4	2	2	1	1	0	0	2	2	low call site frequency=1	low call site frequency=1
+bytes	vendored	DualHashFunction.hash	4	3	2	0	1	0	0	0	2	0	low call site frequency=1	-
 bytes	vendored	LongHashFunction.hashBytes	4	4	3	3	0	0	0	0	1	1	-	-
 bytes	vendored	LongHashFunction.unsafeHash	4	4	3	3	0	0	0	0	1	1	-	-
 bytes	vendored	LongTupleHashFunction.hashBytes	4	4	2	2	1	1	0	0	2	2	low call site frequency=1	low call site frequency=1
@@ -490,7 +516,7 @@ bytes	vendored	LongTupleHashFunction.unsafeHash	4	4	2	2	1	1	0	0	2	2	low call sit
 bytes	vendored	Maths.unsignedLongMulHigh	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	vendored	Maths.unsignedLongMulXorFold	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	vendored	MathsJDK9.unsignedLongMulHighImp	3	3	0	0	0	0	0	0	0	0	-	-
-bytes	vendored	MathsJDK9.unsignedLongMulXorFoldImp	4	3	1	0	0	0	0	0	0	0	-	-
+bytes	vendored	MathsJDK9.unsignedLongMulXorFoldImp	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	vendored	MetroHash$AsLongHashFunction.hash	4	4	1	1	0	0	0	0	1	1	-	-
 bytes	vendored	MetroHash$AsLongHashFunction.seed	1	1	0	0	0	0	0	0	0	0	-	-
 bytes	vendored	MetroHash.finalize	4	4	1	1	0	0	0	0	0	0	-	-
@@ -510,7 +536,7 @@ bytes	vendored	UnsafeAccess.byteOrder	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	vendored	UnsafeAccess.getByte	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	vendored	UnsafeAccess.getInt	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	vendored	UnsafeAccess.getLong	4	4	1	1	0	0	0	0	0	0	-	-
-bytes	vendored	UnsafeAccess.getShort	3	3	0	0	0	0	0	0	0	0	-	-
+bytes	vendored	UnsafeAccess.getShort	3	4	0	1	0	0	0	0	0	0	-	-
 bytes	vendored	UnsafeAccess.getUnsignedByte	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	vendored	UnsafeAccess.getUnsignedInt	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	vendored	UnsafeAccess.getUnsignedShort	4	4	1	1	0	0	0	0	0	0	-	-
@@ -520,11 +546,12 @@ bytes	vendored	WyHash._wymum	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	vendored	WyHash._wyr3	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	vendored	WyHash.u64Rorate32	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	vendored	WyHash.wyHash64	4	4	1	1	2	2	0	0	11	11	low call site frequency=2	low call site frequency=2
+bytes	vendored	XXH3$AsLongHashFunction.hash	-	3	-	0	-	0	-	0	-	0	-	-
 bytes	vendored	XXH3$AsLongTupleHashFunction.dualHash	4	4	1	1	0	0	0	0	1	1	-	-
 bytes	vendored	XXH3$AsLongTupleHashFunction.newResultArray	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	vendored	XXH3.XXH128_mix32B_once	4	4	1	1	0	0	0	0	0	0	-	-
-bytes	vendored	XXH3.XXH3_128bits_internal	4	4	4	2	21	21	9	9	21	21	low call site frequency=21	low call site frequency=21
-bytes	vendored	XXH3.XXH3_64bits_internal	4	4	1	2	34	34	6	6	26	26	low call site frequency=34	low call site frequency=34
+bytes	vendored	XXH3.XXH3_128bits_internal	4	4	4	2	21	21	9	9	21	19	low call site frequency=21	low call site frequency=21
+bytes	vendored	XXH3.XXH3_64bits_internal	4	4	1	1	34	34	6	6	26	26	low call site frequency=34	low call site frequency=34
 bytes	vendored	XXH3.XXH3_avalanche	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	vendored	XXH3.XXH3_mix16B	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	vendored	XXH3.XXH3_mix2Accs	4	4	1	1	0	0	0	0	0	0	-	-
@@ -533,33 +560,43 @@ bytes	vendored	XXH3.XXH64_avalanche	4	4	1	1	0	0	0	0	0	0	-	-
 bytes	vendored	XxHash$AsLongHashFunction.hash	4	4	1	1	0	0	0	0	1	1	-	-
 bytes	vendored	XxHash$AsLongHashFunction.seed	1	1	0	0	0	0	0	0	0	0	-	-
 bytes	vendored	XxHash.finalize	4	4	1	1	0	0	0	0	0	0	-	-
-bytes	vendored	XxHash.xxHash64	4	4	2	2	0	0	0	0	0	0	-	-
-string	absorbed	(PrintInlining text log, lines naming a hashing class)	too big=11;hot method too big=17;callee is too large=15;already compiled into a big method=2;size > DesiredMethodLimit=181	too big=38;hot method too big=18;callee is too large=37;already compiled into a big method=11;size > DesiredMethodLimit=95	too big=11;hot method too big=17;callee is too large=15;already compiled into a big method=2;size > DesiredMethodLimit=181	too big=38;hot method too big=18;callee is too large=37;already compiled into a big method=11;size > DesiredMethodLimit=95	too big=11;hot method too big=17;callee is too large=15;already compiled into a big method=2;size > DesiredMethodLimit=181	too big=38;hot method too big=18;callee is too large=37;already compiled into a big method=11;size > DesiredMethodLimit=95	too big=11;hot method too big=17;callee is too large=15;already compiled into a big method=2;size > DesiredMethodLimit=181	too big=38;hot method too big=18;callee is too large=37;already compiled into a big method=11;size > DesiredMethodLimit=95	too big=11;hot method too big=17;callee is too large=15;already compiled into a big method=2;size > DesiredMethodLimit=181	too big=38;hot method too big=18;callee is too large=37;already compiled into a big method=11;size > DesiredMethodLimit=95	too big=11;hot method too big=17;callee is too large=15;already compiled into a big method=2;size > DesiredMethodLimit=181	too big=38;hot method too big=18;callee is too large=37;already compiled into a big method=11;size > DesiredMethodLimit=95
+bytes	vendored	XxHash.xxHash64	4	4	2	4	0	0	0	0	0	0	-	-
+string	absorbed	(PrintInlining text log, lines naming a hashing class)	too big=11;hot method too big=17;callee is too large=15;already compiled into a big method=2;size > DesiredMethodLimit=181	too big=38;hot method too big=18;callee is too large=42;already compiled into a big method=14;size > DesiredMethodLimit=75	too big=11;hot method too big=17;callee is too large=15;already compiled into a big method=2;size > DesiredMethodLimit=181	too big=38;hot method too big=18;callee is too large=42;already compiled into a big method=14;size > DesiredMethodLimit=75	too big=11;hot method too big=17;callee is too large=15;already compiled into a big method=2;size > DesiredMethodLimit=181	too big=38;hot method too big=18;callee is too large=42;already compiled into a big method=14;size > DesiredMethodLimit=75	too big=11;hot method too big=17;callee is too large=15;already compiled into a big method=2;size > DesiredMethodLimit=181	too big=38;hot method too big=18;callee is too large=42;already compiled into a big method=14;size > DesiredMethodLimit=75	too big=11;hot method too big=17;callee is too large=15;already compiled into a big method=2;size > DesiredMethodLimit=181	too big=38;hot method too big=18;callee is too large=42;already compiled into a big method=14;size > DesiredMethodLimit=75	too big=11;hot method too big=17;callee is too large=15;already compiled into a big method=2;size > DesiredMethodLimit=181	too big=38;hot method too big=18;callee is too large=42;already compiled into a big method=14;size > DesiredMethodLimit=75
 string	absorbed	M3Access.byteOrder	3	4	0	1	0	0	0	0	0	0	-	-
-string	absorbed	M3Access.i32	4	3	1	0	1	0	0	0	0	0	virtual call=1	-
-string	absorbed	M3Access.i64	4	4	2	2	4	4	0	0	0	0	low call site frequency=4	low call site frequency=4
-string	absorbed	M3Access.i8	4	3	2	0	1	0	0	0	0	0	low call site frequency=1	-
-string	absorbed	M3Access.u32	4	3	2	0	2	0	0	0	0	0	low call site frequency=2	-
-string	absorbed	M3Access.u8	4	3	2	0	1	0	0	0	0	0	low call site frequency=1	-
-string	absorbed	M3ByteArrayAccess.address	-	4	-	1	-	0	-	0	-	0	-	-
+string	absorbed	M3Access.i32	4	-	1	-	1	-	0	-	0	-	virtual call=1	-
+string	absorbed	M3Access.i64	4	-	2	-	4	-	0	-	0	-	low call site frequency=4	-
+string	absorbed	M3Access.i8	4	-	2	-	1	-	0	-	0	-	low call site frequency=1	-
+string	absorbed	M3Access.u32	4	-	2	-	2	-	0	-	0	-	low call site frequency=2	-
+string	absorbed	M3Access.u8	4	-	2	-	1	-	0	-	0	-	low call site frequency=1	-
+string	absorbed	M3ByteArrayAccess.address	-	3	-	0	-	0	-	0	-	0	-	-
 string	absorbed	M3ByteArrayAccess.getInt	4	-	1	-	0	-	0	-	0	-	-	-
 string	absorbed	M3ByteArrayAccess.getLong	4	-	2	-	0	-	0	-	0	-	-	-
 string	absorbed	M3ByteArrayAccess.i32	-	4	-	2	-	0	-	0	-	0	-	-
 string	absorbed	M3ByteArrayAccess.i64	-	4	-	2	-	0	-	0	-	0	-	-
 string	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.byteOrder	4	4	2	3	0	0	0	0	0	0	-	-
-string	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.getByte	3	4	0	1	0	1	0	0	0	0	-	low call site frequency=1
-string	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.getInt	4	3	2	0	2	0	0	0	0	0	low call site frequency=2	-
-string	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.getLong	4	4	4	4	4	4	0	0	0	0	low call site frequency=4	low call site frequency=4
-string	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.getUnsignedByte	4	4	3	4	1	1	0	0	0	0	low call site frequency=1	low call site frequency=1
-string	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.getUnsignedInt	4	4	4	2	2	2	0	0	0	0	low call site frequency=2	low call site frequency=2
+string	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.getByte	3	-	0	-	0	-	0	-	0	-	-	-
+string	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.getInt	4	-	2	-	2	-	0	-	0	-	low call site frequency=2	-
+string	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.getLong	4	4	4	2	4	4	0	0	0	0	low call site frequency=4	low call site frequency=4
+string	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.getUnsignedByte	4	4	3	2	1	1	0	0	0	0	low call site frequency=1	low call site frequency=1
+string	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.getUnsignedInt	4	4	4	1	2	2	0	0	0	0	low call site frequency=2	low call site frequency=2
+string	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.i32	-	3	-	0	-	0	-	0	-	0	-	-
+string	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.i64	-	4	-	2	-	4	-	0	-	0	-	low call site frequency=4
+string	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.i8	-	4	-	1	-	1	-	0	-	0	-	low call site frequency=1
+string	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.u32	-	3	-	0	-	0	-	0	-	0	-	-
+string	absorbed	M3CharSequenceAccess$LittleEndianCharSequenceAccess.u8	-	4	-	2	-	1	-	0	-	0	-	low call site frequency=1
 string	absorbed	M3CharSequenceAccess.charSequenceAccess	3	3	0	0	0	0	0	0	0	0	-	-
 string	absorbed	M3CharSequenceAccess.getByte	3	3	0	0	0	0	0	0	0	0	-	-
 string	absorbed	M3CharSequenceAccess.getInt	3	3	0	0	0	0	0	0	0	0	-	-
 string	absorbed	M3CharSequenceAccess.getLong	4	4	2	2	4	4	0	0	0	0	low call site frequency=4	low call site frequency=4
 string	absorbed	M3CharSequenceAccess.getUnsignedByte	3	3	0	0	0	0	0	0	0	0	-	-
-string	absorbed	M3CharSequenceAccess.getUnsignedInt	4	4	2	1	2	2	0	0	0	0	low call site frequency=2	low call site frequency=2
+string	absorbed	M3CharSequenceAccess.getUnsignedInt	4	3	2	0	2	0	0	0	0	0	low call site frequency=2	-
+string	absorbed	M3CharSequenceAccess.i32	-	3	-	0	-	0	-	0	-	0	-	-
+string	absorbed	M3CharSequenceAccess.i64	-	4	-	1	-	4	-	0	-	0	-	low call site frequency=4
+string	absorbed	M3CharSequenceAccess.i8	-	3	-	0	-	0	-	0	-	0	-	-
 string	absorbed	M3CharSequenceAccess.ix	4	4	1	1	0	0	0	0	0	0	-	-
 string	absorbed	M3CharSequenceAccess.nativeCharSequenceAccess	3	4	0	1	0	0	0	0	0	0	-	-
+string	absorbed	M3CharSequenceAccess.u32	-	3	-	0	-	0	-	0	-	0	-	-
+string	absorbed	M3CharSequenceAccess.u8	-	3	-	0	-	0	-	0	-	0	-	-
 string	absorbed	M3LongHashFunction.hashChars	4	4	2	2	0	0	0	0	1	4	-	-
 string	absorbed	M3LongHashFunction.hashNativeChars	4	4	2	2	0	0	0	0	1	4	-	-
 string	absorbed	M3Maths.unsignedLongMulXorFold	4	4	1	1	0	0	0	0	0	0	-	-
@@ -568,9 +605,9 @@ string	absorbed	M3Primitives.unsignedInt	4	4	1	1	0	0	0	0	0	0	-	-
 string	absorbed	M3XXH3$AsLongHashFunction.hash	4	4	2	2	0	0	0	0	1	4	-	-
 string	absorbed	M3XXH3.XXH3_64bits_internal	4	4	4	1	88	0	2	0	19	4	already compiled into a medium method=11;low call site frequency=34;size > DesiredMethodLimit=43	-
 string	absorbed	M3XXH3.XXH3_avalanche	4	4	1	1	0	0	0	0	0	0	-	-
-string	absorbed	M3XXH3.XXH3_hashLong	-	4	-	3	-	74	-	0	-	2	-	low call site frequency=32;size > DesiredMethodLimit=42
+string	absorbed	M3XXH3.XXH3_hashLong	-	4	-	2	-	74	-	0	-	2	-	low call site frequency=32;size > DesiredMethodLimit=42
 string	absorbed	M3XXH3.XXH3_len_0to16_64b	-	4	-	2	-	12	-	0	-	1	-	low call site frequency=12
-string	absorbed	M3XXH3.XXH3_len_129to240_64b	-	4	-	3	-	0	-	0	-	3	-	-
+string	absorbed	M3XXH3.XXH3_len_129to240_64b	-	4	-	4	-	0	-	0	-	3	-	-
 string	absorbed	M3XXH3.XXH3_len_17to128_64b	-	4	-	2	-	0	-	0	-	8	-	-
 string	absorbed	M3XXH3.XXH3_len_1to3_64b	-	4	-	2	-	3	-	0	-	0	-	low call site frequency=3
 string	absorbed	M3XXH3.XXH3_len_4to8_64b	-	3	-	0	-	0	-	0	-	0	-	-
@@ -580,7 +617,7 @@ string	absorbed	M3XXH3.XXH3_mix16B	4	4	2	2	8	8	0	0	0	0	low call site frequency=8
 string	absorbed	M3XXH3.XXH3_mix2Accs	4	4	1	1	0	0	0	0	0	0	-	-
 string	absorbed	M3XXH3.XXH3_rrmxmx	4	3	1	0	0	0	0	0	0	0	-	-
 string	absorbed	M3XXH3.XXH64_avalanche	4	4	1	1	0	0	0	0	0	0	-	-
-string	vendored	(PrintInlining text log, lines naming a hashing class)	too big=40;hot method too big=28;callee is too large=67	too big=40;hot method too big=28;callee is too large=73	too big=40;hot method too big=28;callee is too large=67	too big=40;hot method too big=28;callee is too large=73	too big=40;hot method too big=28;callee is too large=67	too big=40;hot method too big=28;callee is too large=73	too big=40;hot method too big=28;callee is too large=67	too big=40;hot method too big=28;callee is too large=73	too big=40;hot method too big=28;callee is too large=67	too big=40;hot method too big=28;callee is too large=73	too big=40;hot method too big=28;callee is too large=67	too big=40;hot method too big=28;callee is too large=73
+string	vendored	(PrintInlining text log, lines naming a hashing class)	too big=40;hot method too big=28;callee is too large=67	too big=39;hot method too big=28;callee is too large=68	too big=40;hot method too big=28;callee is too large=67	too big=39;hot method too big=28;callee is too large=68	too big=40;hot method too big=28;callee is too large=67	too big=39;hot method too big=28;callee is too large=68	too big=40;hot method too big=28;callee is too large=67	too big=39;hot method too big=28;callee is too large=68	too big=40;hot method too big=28;callee is too large=67	too big=39;hot method too big=28;callee is too large=68	too big=40;hot method too big=28;callee is too large=67	too big=39;hot method too big=28;callee is too large=68
 string	vendored	Access.byteOrder	4	4	2	2	0	0	0	0	0	0	-	-
 string	vendored	Access.i32	4	4	2	2	1	1	0	0	0	0	virtual call=1	virtual call=1
 string	vendored	Access.i64	4	4	2	2	0	0	0	0	0	0	-	-
@@ -604,7 +641,7 @@ string	vendored	CharSequenceAccess.nativeCharSequenceAccess	3	3	0	0	0	0	0	0	0	0	
 string	vendored	CompactLatin1CharSequenceAccess.byteOrder	4	4	1	1	0	0	0	0	0	0	-	-
 string	vendored	CompactLatin1CharSequenceAccess.getByte	3	3	0	0	0	0	0	0	0	0	-	-
 string	vendored	CompactLatin1CharSequenceAccess.getInt	3	3	0	0	0	0	0	0	0	0	-	-
-string	vendored	CompactLatin1CharSequenceAccess.getLong	4	4	2	1	0	0	0	0	0	0	-	-
+string	vendored	CompactLatin1CharSequenceAccess.getLong	4	4	2	2	0	0	0	0	0	0	-	-
 string	vendored	CompactLatin1CharSequenceAccess.getUnsignedByte	3	3	0	0	0	0	0	0	0	0	-	-
 string	vendored	CompactLatin1CharSequenceAccess.getUnsignedInt	3	3	0	0	0	0	0	0	0	0	-	-
 string	vendored	LongHashFunction.hashBytes	4	4	1	1	0	0	0	0	1	1	-	-
@@ -633,7 +670,7 @@ string	vendored	XXH3.XXH3_mix16B	4	4	3	3	0	0	0	0	0	0	-	-
 string	vendored	XXH3.XXH3_mix2Accs	4	4	1	1	0	0	0	0	0	0	-	-
 string	vendored	XXH3.XXH3_rrmxmx	4	4	1	1	0	0	0	0	0	0	-	-
 string	vendored	XXH3.XXH64_avalanche	4	4	1	1	0	0	0	0	0	0	-	-
-xxh3-128	absorbed	(PrintInlining text log, lines naming a hashing class)	too big=36;hot method too big=6;callee is too large=104;size > DesiredMethodLimit=36	too big=23;hot method too big=4;callee is too large=58	too big=36;hot method too big=6;callee is too large=104;size > DesiredMethodLimit=36	too big=23;hot method too big=4;callee is too large=58	too big=36;hot method too big=6;callee is too large=104;size > DesiredMethodLimit=36	too big=23;hot method too big=4;callee is too large=58	too big=36;hot method too big=6;callee is too large=104;size > DesiredMethodLimit=36	too big=23;hot method too big=4;callee is too large=58	too big=36;hot method too big=6;callee is too large=104;size > DesiredMethodLimit=36	too big=23;hot method too big=4;callee is too large=58	too big=36;hot method too big=6;callee is too large=104;size > DesiredMethodLimit=36	too big=23;hot method too big=4;callee is too large=58
+xxh3-128	absorbed	(PrintInlining text log, lines naming a hashing class)	too big=36;hot method too big=6;callee is too large=104;size > DesiredMethodLimit=36	too big=29;callee is too large=57	too big=36;hot method too big=6;callee is too large=104;size > DesiredMethodLimit=36	too big=29;callee is too large=57	too big=36;hot method too big=6;callee is too large=104;size > DesiredMethodLimit=36	too big=29;callee is too large=57	too big=36;hot method too big=6;callee is too large=104;size > DesiredMethodLimit=36	too big=29;callee is too large=57	too big=36;hot method too big=6;callee is too large=104;size > DesiredMethodLimit=36	too big=29;callee is too large=57	too big=36;hot method too big=6;callee is too large=104;size > DesiredMethodLimit=36	too big=29;callee is too large=57
 xxh3-128	absorbed	M3Access.byteOrder	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-128	absorbed	M3Access.i32	4	-	1	-	0	-	0	-	0	-	-	-
 xxh3-128	absorbed	M3Access.i64	4	-	1	-	0	-	0	-	0	-	-	-
@@ -641,32 +678,32 @@ xxh3-128	absorbed	M3Access.i8	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-128	absorbed	M3Access.u32	4	-	1	-	0	-	0	-	0	-	-	-
 xxh3-128	absorbed	M3Access.u8	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-128	absorbed	M3ByteArrayAccess.address	-	4	-	1	-	0	-	0	-	0	-	-
-xxh3-128	absorbed	M3ByteArrayAccess.byteOrder	4	4	1	1	0	0	0	0	0	0	-	-
+xxh3-128	absorbed	M3ByteArrayAccess.byteOrder	4	4	1	2	0	0	0	0	0	0	-	-
 xxh3-128	absorbed	M3ByteArrayAccess.getByte	4	4	2	2	0	0	0	0	0	0	-	-
 xxh3-128	absorbed	M3ByteArrayAccess.getInt	4	-	2	-	0	-	0	-	0	-	-	-
 xxh3-128	absorbed	M3ByteArrayAccess.getLong	4	-	1	-	0	-	0	-	0	-	-	-
-xxh3-128	absorbed	M3ByteArrayAccess.getUnsignedByte	4	4	1	1	0	0	0	0	0	0	-	-
+xxh3-128	absorbed	M3ByteArrayAccess.getUnsignedByte	4	2	1	0	0	0	0	0	0	0	-	-
 xxh3-128	absorbed	M3ByteArrayAccess.getUnsignedInt	4	-	1	-	0	-	0	-	0	-	-	-
 xxh3-128	absorbed	M3ByteArrayAccess.i32	-	4	-	2	-	0	-	0	-	0	-	-
 xxh3-128	absorbed	M3ByteArrayAccess.i64	-	4	-	2	-	0	-	0	-	0	-	-
 xxh3-128	absorbed	M3ByteArrayAccess.u32	-	4	-	2	-	0	-	0	-	0	-	-
 xxh3-128	absorbed	M3DualHashFunction.checkResult	4	4	1	1	0	0	0	0	0	0	-	-
-xxh3-128	absorbed	M3DualHashFunction.hash	2	4	0	7	0	0	0	0	0	5	-	-
-xxh3-128	absorbed	M3LongTupleHashFunction.hashBytes	4	4	1	7	0	0	0	0	1	5	-	-
-xxh3-128	absorbed	M3LongTupleHashFunction.unsafeHash	4	4	1	7	0	0	0	0	1	5	-	-
+xxh3-128	absorbed	M3DualHashFunction.hash	2	4	0	7	0	0	0	0	0	4	-	-
+xxh3-128	absorbed	M3LongTupleHashFunction.hashBytes	4	4	1	7	0	0	0	0	1	4	-	-
+xxh3-128	absorbed	M3LongTupleHashFunction.unsafeHash	4	4	1	7	0	0	0	0	1	4	-	-
 xxh3-128	absorbed	M3Maths.unsignedLongMulHigh	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-128	absorbed	M3Maths.unsignedLongMulXorFold	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-128	absorbed	M3MathsJDK9.unsignedLongMulHighImp	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-128	absorbed	M3MathsJDK9.unsignedLongMulXorFoldImp	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-128	absorbed	M3Primitives.unsignedByte	2	2	0	0	0	0	0	0	0	0	-	-
 xxh3-128	absorbed	M3Primitives.unsignedInt	4	4	1	1	0	0	0	0	0	0	-	-
-xxh3-128	absorbed	M3XXH3$AsLongTupleHashFunction.dualHash	2	4	0	7	0	0	0	0	0	5	-	-
+xxh3-128	absorbed	M3XXH3$AsLongTupleHashFunction.dualHash	2	4	0	7	0	0	0	0	0	4	-	-
 xxh3-128	absorbed	M3XXH3$AsLongTupleHashFunction.newResultArray	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-128	absorbed	M3XXH3.XXH128_mix32B_once	4	4	1	1	0	0	0	0	0	0	-	-
-xxh3-128	absorbed	M3XXH3.XXH3_128bits_internal	4	4	9	7	49	0	0	0	22	5	low call site frequency=24;size > DesiredMethodLimit=25	-
+xxh3-128	absorbed	M3XXH3.XXH3_128bits_internal	4	4	9	7	49	0	0	0	22	4	low call site frequency=24;size > DesiredMethodLimit=25	-
 xxh3-128	absorbed	M3XXH3.XXH3_avalanche	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-128	absorbed	M3XXH3.XXH3_hashLong	-	4	-	1	-	0	-	0	-	0	-	-
-xxh3-128	absorbed	M3XXH3.XXH3_len_0to16_128b	-	4	-	2	-	0	-	0	-	2	-	-
+xxh3-128	absorbed	M3XXH3.XXH3_len_0to16_128b	-	4	-	4	-	0	-	0	-	1	-	-
 xxh3-128	absorbed	M3XXH3.XXH3_len_129to240_128b	-	4	-	1	-	0	-	0	-	0	-	-
 xxh3-128	absorbed	M3XXH3.XXH3_len_17to128_128b	-	4	-	1	-	0	-	0	-	0	-	-
 xxh3-128	absorbed	M3XXH3.XXH3_len_1to3_128b	-	4	-	1	-	0	-	0	-	0	-	-
@@ -676,7 +713,7 @@ xxh3-128	absorbed	M3XXH3.XXH3_mergeAccs	-	4	-	1	-	0	-	0	-	0	-	-
 xxh3-128	absorbed	M3XXH3.XXH3_mix2Accs	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-128	absorbed	M3XXH3.XXH64_avalanche	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-128	vendored	(PrintInlining text log, lines naming a hashing class)	too big=34;hot method too big=8;callee is too large=101	too big=34;hot method too big=8;callee is too large=100	too big=34;hot method too big=8;callee is too large=101	too big=34;hot method too big=8;callee is too large=100	too big=34;hot method too big=8;callee is too large=101	too big=34;hot method too big=8;callee is too large=100	too big=34;hot method too big=8;callee is too large=101	too big=34;hot method too big=8;callee is too large=100	too big=34;hot method too big=8;callee is too large=101	too big=34;hot method too big=8;callee is too large=100	too big=34;hot method too big=8;callee is too large=101	too big=34;hot method too big=8;callee is too large=100
-xxh3-128	vendored	Access.byteOrder	3	3	0	0	0	0	0	0	0	0	-	-
+xxh3-128	vendored	Access.byteOrder	3	4	0	1	0	0	0	0	0	0	-	-
 xxh3-128	vendored	Access.i32	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-128	vendored	Access.i64	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-128	vendored	Access.i8	4	4	1	1	0	0	0	0	0	0	-	-
@@ -689,8 +726,8 @@ xxh3-128	vendored	LongTupleHashFunction.unsafeHash	4	4	1	1	0	0	0	0	1	1	-	-
 xxh3-128	vendored	Maths.unsignedLongMulHigh	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-128	vendored	Maths.unsignedLongMulXorFold	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-128	vendored	MathsJDK9.unsignedLongMulHighImp	4	4	1	1	0	0	0	0	0	0	-	-
-xxh3-128	vendored	MathsJDK9.unsignedLongMulXorFoldImp	4	2	1	0	0	0	0	0	0	0	-	-
-xxh3-128	vendored	Primitives.unsignedByte	4	4	1	1	0	0	0	0	0	0	-	-
+xxh3-128	vendored	MathsJDK9.unsignedLongMulXorFoldImp	4	4	1	1	0	0	0	0	0	0	-	-
+xxh3-128	vendored	Primitives.unsignedByte	4	3	1	0	0	0	0	0	0	0	-	-
 xxh3-128	vendored	Primitives.unsignedInt	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-128	vendored	UnsafeAccess.byteOrder	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-128	vendored	UnsafeAccess.getByte	4	4	1	1	0	0	0	0	0	0	-	-
@@ -701,11 +738,11 @@ xxh3-128	vendored	UnsafeAccess.getUnsignedInt	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-128	vendored	XXH3$AsLongTupleHashFunction.dualHash	4	4	1	1	0	0	0	0	1	1	-	-
 xxh3-128	vendored	XXH3$AsLongTupleHashFunction.newResultArray	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-128	vendored	XXH3.XXH128_mix32B_once	4	4	1	1	0	0	0	0	0	0	-	-
-xxh3-128	vendored	XXH3.XXH3_128bits_internal	4	4	7	8	40	8	0	0	22	12	low call site frequency=40	low call site frequency=8
+xxh3-128	vendored	XXH3.XXH3_128bits_internal	4	4	7	7	40	40	0	0	22	22	low call site frequency=40	low call site frequency=40
 xxh3-128	vendored	XXH3.XXH3_avalanche	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-128	vendored	XXH3.XXH3_mix2Accs	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-128	vendored	XXH3.XXH64_avalanche	4	4	1	1	0	0	0	0	0	0	-	-
-xxh3-64	absorbed	(PrintInlining text log, lines naming a hashing class)	too big=30;hot method too big=7;callee is too large=88	too big=47;callee is too large=50	too big=30;hot method too big=7;callee is too large=88	too big=47;callee is too large=50	too big=30;hot method too big=7;callee is too large=88	too big=47;callee is too large=50	too big=30;hot method too big=7;callee is too large=88	too big=47;callee is too large=50	too big=30;hot method too big=7;callee is too large=88	too big=47;callee is too large=50	too big=30;hot method too big=7;callee is too large=88	too big=47;callee is too large=50
+xxh3-64	absorbed	(PrintInlining text log, lines naming a hashing class)	too big=30;hot method too big=7;callee is too large=88	too big=30;callee is too large=49;already compiled into a big method=1	too big=30;hot method too big=7;callee is too large=88	too big=30;callee is too large=49;already compiled into a big method=1	too big=30;hot method too big=7;callee is too large=88	too big=30;callee is too large=49;already compiled into a big method=1	too big=30;hot method too big=7;callee is too large=88	too big=30;callee is too large=49;already compiled into a big method=1	too big=30;hot method too big=7;callee is too large=88	too big=30;callee is too large=49;already compiled into a big method=1	too big=30;hot method too big=7;callee is too large=88	too big=30;callee is too large=49;already compiled into a big method=1
 xxh3-64	absorbed	M3Access.byteOrder	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-64	absorbed	M3Access.i32	4	-	1	-	0	-	0	-	0	-	-	-
 xxh3-64	absorbed	M3Access.i64	4	-	1	-	0	-	0	-	0	-	-	-
@@ -713,7 +750,7 @@ xxh3-64	absorbed	M3Access.i8	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-64	absorbed	M3Access.u32	4	-	1	-	0	-	0	-	0	-	-	-
 xxh3-64	absorbed	M3Access.u8	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-64	absorbed	M3ByteArrayAccess.address	-	4	-	1	-	0	-	0	-	0	-	-
-xxh3-64	absorbed	M3ByteArrayAccess.byteOrder	4	4	1	1	0	0	0	0	0	0	-	-
+xxh3-64	absorbed	M3ByteArrayAccess.byteOrder	4	4	1	2	0	0	0	0	0	0	-	-
 xxh3-64	absorbed	M3ByteArrayAccess.getByte	4	4	2	2	0	0	0	0	0	0	-	-
 xxh3-64	absorbed	M3ByteArrayAccess.getInt	4	-	2	-	0	-	0	-	0	-	-	-
 xxh3-64	absorbed	M3ByteArrayAccess.getLong	4	-	1	-	0	-	0	-	0	-	-	-
@@ -722,18 +759,18 @@ xxh3-64	absorbed	M3ByteArrayAccess.getUnsignedInt	4	-	1	-	0	-	0	-	0	-	-	-
 xxh3-64	absorbed	M3ByteArrayAccess.i32	-	4	-	2	-	0	-	0	-	0	-	-
 xxh3-64	absorbed	M3ByteArrayAccess.i64	-	4	-	2	-	0	-	0	-	0	-	-
 xxh3-64	absorbed	M3ByteArrayAccess.u32	-	4	-	2	-	0	-	0	-	0	-	-
-xxh3-64	absorbed	M3LongHashFunction.hashBytes	4	4	1	7	0	0	0	0	1	3	-	-
-xxh3-64	absorbed	M3LongHashFunction.unsafeHash	4	4	1	7	0	0	0	0	1	3	-	-
+xxh3-64	absorbed	M3LongHashFunction.hashBytes	4	4	1	5	0	0	0	0	1	2	-	-
+xxh3-64	absorbed	M3LongHashFunction.unsafeHash	4	4	1	5	0	0	0	0	1	1	-	-
 xxh3-64	absorbed	M3Maths.unsignedLongMulXorFold	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-64	absorbed	M3MathsJDK9.unsignedLongMulXorFoldImp	4	4	1	1	0	0	0	0	0	0	-	-
-xxh3-64	absorbed	M3Primitives.unsignedByte	3	3	0	0	0	0	0	0	0	0	-	-
+xxh3-64	absorbed	M3Primitives.unsignedByte	3	4	0	1	0	0	0	0	0	0	-	-
 xxh3-64	absorbed	M3Primitives.unsignedInt	4	4	1	1	0	0	0	0	0	0	-	-
-xxh3-64	absorbed	M3XXH3$AsLongHashFunction.hash	4	4	1	7	0	0	0	0	1	4	-	-
-xxh3-64	absorbed	M3XXH3.XXH3_64bits_internal	4	4	7	7	40	0	0	0	15	4	low call site frequency=40	-
+xxh3-64	absorbed	M3XXH3$AsLongHashFunction.hash	4	4	1	5	0	0	0	0	1	1	-	-
+xxh3-64	absorbed	M3XXH3.XXH3_64bits_internal	4	4	7	7	40	0	0	0	15	3	low call site frequency=40	-
 xxh3-64	absorbed	M3XXH3.XXH3_avalanche	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-64	absorbed	M3XXH3.XXH3_hashLong	-	4	-	1	-	0	-	0	-	0	-	-
 xxh3-64	absorbed	M3XXH3.XXH3_len_0to16_64b	-	4	-	3	-	0	-	0	-	1	-	-
-xxh3-64	absorbed	M3XXH3.XXH3_len_129to240_64b	-	4	-	2	-	0	-	0	-	0	-	-
+xxh3-64	absorbed	M3XXH3.XXH3_len_129to240_64b	-	4	-	1	-	0	-	0	-	0	-	-
 xxh3-64	absorbed	M3XXH3.XXH3_len_17to128_64b	-	4	-	1	-	0	-	0	-	0	-	-
 xxh3-64	absorbed	M3XXH3.XXH3_len_1to3_64b	-	4	-	1	-	0	-	0	-	0	-	-
 xxh3-64	absorbed	M3XXH3.XXH3_len_4to8_64b	-	4	-	1	-	0	-	0	-	0	-	-
@@ -743,8 +780,8 @@ xxh3-64	absorbed	M3XXH3.XXH3_mix16B	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-64	absorbed	M3XXH3.XXH3_mix2Accs	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-64	absorbed	M3XXH3.XXH3_rrmxmx	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-64	absorbed	M3XXH3.XXH64_avalanche	4	4	1	1	0	0	0	0	0	0	-	-
-xxh3-64	vendored	(PrintInlining text log, lines naming a hashing class)	too big=33;hot method too big=7;callee is too large=86	too big=31;hot method too big=7;callee is too large=85	too big=33;hot method too big=7;callee is too large=86	too big=31;hot method too big=7;callee is too large=85	too big=33;hot method too big=7;callee is too large=86	too big=31;hot method too big=7;callee is too large=85	too big=33;hot method too big=7;callee is too large=86	too big=31;hot method too big=7;callee is too large=85	too big=33;hot method too big=7;callee is too large=86	too big=31;hot method too big=7;callee is too large=85	too big=33;hot method too big=7;callee is too large=86	too big=31;hot method too big=7;callee is too large=85
-xxh3-64	vendored	Access.byteOrder	3	3	0	0	0	0	0	0	0	0	-	-
+xxh3-64	vendored	(PrintInlining text log, lines naming a hashing class)	too big=33;hot method too big=7;callee is too large=86	too big=33;hot method too big=7;callee is too large=88	too big=33;hot method too big=7;callee is too large=86	too big=33;hot method too big=7;callee is too large=88	too big=33;hot method too big=7;callee is too large=86	too big=33;hot method too big=7;callee is too large=88	too big=33;hot method too big=7;callee is too large=86	too big=33;hot method too big=7;callee is too large=88	too big=33;hot method too big=7;callee is too large=86	too big=33;hot method too big=7;callee is too large=88	too big=33;hot method too big=7;callee is too large=86	too big=33;hot method too big=7;callee is too large=88
+xxh3-64	vendored	Access.byteOrder	3	4	0	1	0	0	0	0	0	0	-	-
 xxh3-64	vendored	Access.i32	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-64	vendored	Access.i64	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-64	vendored	Access.i8	4	4	1	1	0	0	0	0	0	0	-	-
@@ -763,7 +800,7 @@ xxh3-64	vendored	UnsafeAccess.getLong	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-64	vendored	UnsafeAccess.getUnsignedByte	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-64	vendored	UnsafeAccess.getUnsignedInt	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-64	vendored	XXH3$AsLongHashFunction.hash	4	4	1	1	0	0	0	0	1	1	-	-
-xxh3-64	vendored	XXH3.XXH3_64bits_internal	4	4	8	8	80	80	0	0	30	28	low call site frequency=80	low call site frequency=80
+xxh3-64	vendored	XXH3.XXH3_64bits_internal	4	4	8	8	80	80	0	0	30	30	low call site frequency=80	low call site frequency=80
 xxh3-64	vendored	XXH3.XXH3_avalanche	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-64	vendored	XXH3.XXH3_mix16B	4	4	1	1	0	0	0	0	0	0	-	-
 xxh3-64	vendored	XXH3.XXH3_mix2Accs	4	4	1	1	0	0	0	0	0	0	-	-

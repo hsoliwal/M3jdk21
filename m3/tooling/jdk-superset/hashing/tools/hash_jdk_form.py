@@ -2,8 +2,11 @@
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
 """hash_jdk_form.py <donor_dir> <TYPE_RENAME.tsv> <stage_dir> <report_dir>
 
-HASH_JDK_FORM v1, step 1 of 2 of the zero-allocation-hashing absorption into java.base (step 2 is
+HASH_JDK_FORM v3, step 1 of 2 of the zero-allocation-hashing absorption into java.base (step 2 is
 absorb_rename_generic.py on <stage_dir> with ABSORB_PKGS=net.openhft.hashing=jdk.internal.m3.hash).
+v2: FACADE_DROP_RAW_MEMORY v2 reads a direct ByteBuffer up to its capacity, as the donor's address read did (v1 read it
+through its limit and threw where the donor returned a hash).
+v3 (the JIT leaf): XXH3_SPLIT v1, UNSAFE_TO_BYTE_ARRAY v2, ACCESS_SHORT_NAMES v1, FACADE_ENTRY_CHECK v1.
 
 Copies the donor files named in TYPE_RENAME.tsv from <donor_dir> to <stage_dir> and applies the rules below. Every
 rule states its expected hit count; any other count stops the run (the donor changed under the recipe). Edits are
@@ -20,9 +23,11 @@ removes the member with its annotations, its doc comment and one blank line befo
                                  per-read check, because every entry that hands a byte[] to a kernel checks
                                  [off, off + len) first (FACADE_ENTRY_CHECK v1) and XXH3's secret offsets are constants
   ACCESS_DROP_UNSAFE v1          Access.unsafe() (raw object/address access) is not kept
-  FACADE_DROP_RAW_MEMORY v1      LongHashFunction / LongTupleHashFunction: the methods that need raw memory reads
+  FACADE_DROP_RAW_MEMORY v2      LongHashFunction / LongTupleHashFunction: the methods that need raw memory reads
                                  (boolean[], char[], short[], int[], long[], addresses) are not kept; byte[] goes
-                                 through the byte[] access; direct ByteBuffers through ByteBufferAccess
+                                 through the byte[] access; direct ByteBuffers through ByteBufferAccess, over a view
+                                 whose limit is the capacity when off + len passes the limit (the donor's address read
+                                 was bounded by the capacity only, as its checkArrayOffs(capacity, ...) states)
   STRING_INTERNALS_TO_CHARSEQ v1 hashChars(String) takes the donor's own JVM-independent path (UnknownJvmStringHash:
                                  native-order chars through CharSequenceAccess) instead of the per-JVM String-internals
                                  variants, which are not kept; same hash values by the donor's definition
@@ -72,7 +77,11 @@ U = "UNSAFE_TO_BYTE_ARRAY v2"
 # UnsafeAccess reads through jdk.internal.misc.Unsafe (v2): these two tokens are allowed in that file only
 ALLOWED = {"UnsafeAccess.java": (r"\bUnsafe\b", r"\bUNSAFE\b")}
 INTERNAL_UNSAFE_IMPORT = "import jdk.internal.misc.Unsafe;\n"
-F = "FACADE_DROP_RAW_MEMORY v1"
+F = "FACADE_DROP_RAW_MEMORY v2"
+DIRECT_BRANCH = r"^        \} else if \(input instanceof DirectBuffer\) \{\n"
+DIRECT_TEST = "        } else if (input.isDirect() && off + len > input.limit()) {\n"
+DIRECT_NOTE = "            // read up to the capacity, as the donor's address read did (the limit does not bound it)\n"
+CAPACITY_VIEW = "input.duplicate().order(input.order()).limit(input.capacity())"
 S = "STRING_INTERNALS_TO_CHARSEQ v1"
 J = "STRIP_JSR305 v1"
 P = "UTIL_DROP_JVM_PROBES v1"
@@ -138,9 +147,10 @@ SUBS += [
     ("LongHashFunction.java", F, "direct-buffer-import", DIRECT_BUFFER_IMPORT, "", ONE),
     ("LongHashFunction.java", F, "byte-array-unsafe-hash", r"private long unsafeHash\(Object input,",
      "private long unsafeHash(byte[] input,", ONE),
-    ("LongHashFunction.java", F, "direct-buffer-through-buffer-access",
-     r"^        \} else if \(input instanceof DirectBuffer\) \{\n"
-     r"            return unsafeHash\(null, \(\(DirectBuffer\) input\)\.address\(\) \+ off, len\);\n", "", ONE),
+    ("LongHashFunction.java", F, "direct-buffer-capacity-view",
+     DIRECT_BRANCH + r"            return unsafeHash\(null, \(\(DirectBuffer\) input\)\.address\(\) \+ off, len\);\n",
+     DIRECT_TEST + DIRECT_NOTE + "            return hash(" + CAPACITY_VIEW + ",\n"
+     "                    ByteBufferAccess.INSTANCE, off, len);\n", ONE),
     ("LongHashFunction.java", S, "string-native-chars", r"\bVALID_STRING_HASH\.longHash\(input, this, ",
      "hashNativeChars(input, ", 2),
 
@@ -149,9 +159,9 @@ SUBS += [
      "Access<byte[]> OBJECT_ACCESS", ONE),
     ("LongTupleHashFunction.java", F, "byte-array-unsafe-hash", r"@Nullable final Object input,",
      "@Nullable final byte[] input,", ONE),
-    ("LongTupleHashFunction.java", F, "direct-buffer-through-buffer-access",
-     r"^        \} else if \(input instanceof DirectBuffer\) \{\n"
-     r"            unsafeHash\(f, null, \(\(DirectBuffer\) input\)\.address\(\) \+ off, len, result\);\n", "", ONE),
+    ("LongTupleHashFunction.java", F, "direct-buffer-capacity-view",
+     DIRECT_BRANCH + r"            unsafeHash\(f, null, \(\(DirectBuffer\) input\)\.address\(\) \+ off, len, result\);\n",
+     DIRECT_TEST + DIRECT_NOTE + "            f.hash(" + CAPACITY_VIEW + ", BYTE_BUF_ACCESS, off, len, result);\n", ONE),
     ("LongTupleHashFunction.java", S, "string-native-chars", r"\bVALID_STRING_HASH\.hash\(input, this, ",
      "hashNativeChars(this, input, ", 4),
 
