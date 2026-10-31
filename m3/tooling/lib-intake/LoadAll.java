@@ -18,14 +18,22 @@ import java.nio.file.Path;
 import java.util.List;
 
 /**
- * LIB_INTAKE generic smoke: loads every class of the intake module inside the linked image (no static initialization), so
- * a relocated reference to a class the image lacks fails here. Prints {@code loaded=N failed=F} and the failures first.
- * Usage: {@code image/bin/java --add-modules <module> LoadAll.java <class list>}.
+ * LIB_INTAKE generic smoke: loads every class of the intake module inside the linked image.
+ *
+ * <p>Classes are loaded without static initialization, so a relocated reference to a class the
+ * image lacks fails here. Prints the failures first, then {@code loaded=N failed=F}. Usage:
+ * {@code image/bin/java --add-modules <module> LoadAll.java <class list>}.
  */
 public final class LoadAll {
     private LoadAll() {
     }
 
+    /**
+     * Loads every class named in the list file and prints the counts.
+     *
+     * @param args one argument: the file listing one binary class name per line
+     * @throws Exception if the class list cannot be read
+     */
     public static void main(String[] args) throws Exception {
         List<String> names = Files.readAllLines(Path.of(args[0]));
         ClassLoader loader = ClassLoader.getSystemClassLoader();
