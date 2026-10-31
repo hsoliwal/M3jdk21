@@ -154,7 +154,7 @@ class JdkNamingTest(unittest.TestCase):
         section = standard[standard.index("## 5. The rules"):standard.index("## 6.")]
         rows = re.findall(r"^\| `([A-Z0-9_]+)` \| (.+?) \| (.+?) \|$", section, re.M)
         documented = {name for name, _b, _a in rows}
-        self.assertEqual(documented, {name for name, _r, _x in jn.TEXT_RULES})
+        self.assertEqual(documented, {name for name, _r, _x in jn.TEXT_RULES + jn.PROSE_RULES})
         for name, befores, afters in rows:
             for before, after in zip(befores.split(", "), afters.split(", ")):
                 before, after = before.strip("`"), after.strip("`")
@@ -178,6 +178,24 @@ class JdkNamingTest(unittest.TestCase):
                          "\\njdk.m3.z.W ${m3.version} m3-tq/synexia.md.txt.before Java_jdk_internal_m3_recipe_X_f")
         self.assertEqual(jn.renamed_path("src/java.base/share/legal/synexia.md"), "src/java.base/share/legal/synexia.md")
         self.assertTrue(jn.KEEP_PATH.search("src/java.base/share/legal/synexia.md"))
+
+    def test_the_product_name_follows_the_per_kind_jdk_style(self):
+        """User decision 2026-10-31: prose M3JDK (comment lines only), types M3Jdk*, constants M3JDK_*, kebab m3jdk-*;
+        the repository name hsoliwal/M3jdk21, PR references and string literals stay."""
+        cases = {
+            "// Adapted for the M3JDK21 M3FS runtime": "// Adapted for the M3JDK 21 M3FS runtime",
+            "# built in M3jdk21; see hsoliwal/M3jdk21 and M3jdk21 #2216": "# built in M3JDK 21; see hsoliwal/M3jdk21 and M3jdk21 #2216",
+            " * M3jdk is standalone; the M3 JDK image": " * M3JDK is standalone; the M3JDK image",
+            'throw new X("M3JDK21 libjava")': 'throw new X("M3JDK21 libjava")',
+            "env: M3_JDK21_REFUSE M3_JDK": "env: M3JDK21_REFUSE M3JDK",
+            "run: tar xf m3-jdk21.tar.gz m3-jdk-proof.yml": "run: tar xf m3jdk21.tar.gz m3jdk-proof.yml",
+            "id: M3-JDK-PORT-1": "id: M3JDK-PORT-1",
+            "class M3Jdk21Handoff": "class M3Jdk21Handoff",
+            "// https://github.com/hsoliwal/M3jdk21/pull/5": "// https://github.com/hsoliwal/M3jdk21/pull/5",
+        }
+        for before, after in cases.items():
+            self.assertEqual(jn.rewrite_line(before, {}), after, before)
+        self.assertEqual(jn.renamed_path(".github/workflows/m3-jdk21-backports.yml"), ".github/workflows/m3jdk21-backports.yml")
 
     def test_recipe_memory_rows_name_a_recipe_and_a_fixture_that_exist(self):
         """RECIPE_MEMORY.tsv: eight non-empty fields, an ISO-8601 UTC time, a recipe file next to the ledger, and

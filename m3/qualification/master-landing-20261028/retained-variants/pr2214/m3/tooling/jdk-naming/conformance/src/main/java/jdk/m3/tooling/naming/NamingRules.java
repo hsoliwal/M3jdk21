@@ -27,14 +27,19 @@ public final class NamingRules {
 
     private static final Pattern GROUP_REFERENCE = Pattern.compile("\\\\(\\d)");
     private static final Pattern SPAN_TOKEN = Pattern.compile("\u0000(\\d+)\u0000");
+    /** A whole comment line: PROSE rules apply only here, so string literals and data keep their exact text. */
+    private static final Pattern COMMENT_LINE = Pattern.compile("^\\s*(?://|/\\*|\\*|#|<!--)");
 
     private final List<Rule> textRules;
+    private final List<Rule> proseRules;
     private final Pattern keepLine;
     private final Pattern keepSpan;
     private final Pattern keepPath;
 
-    private NamingRules(List<Rule> textRules, Pattern keepLine, Pattern keepSpan, Pattern keepPath) {
+    private NamingRules(List<Rule> textRules, List<Rule> proseRules, Pattern keepLine, Pattern keepSpan,
+            Pattern keepPath) {
         this.textRules = textRules;
+        this.proseRules = proseRules;
         this.keepLine = keepLine;
         this.keepSpan = keepSpan;
         this.keepPath = keepPath;
@@ -43,6 +48,7 @@ public final class NamingRules {
     /** Reads the table ({@code kind name pattern replacement note}, one header line). */
     public static NamingRules load(Path tsv) throws IOException {
         List<Rule> text = new ArrayList<>();
+        List<Rule> prose = new ArrayList<>();
         List<String> keepLine = new ArrayList<>();
         List<String> keepSpan = new ArrayList<>();
         List<String> keepPath = new ArrayList<>();
@@ -54,13 +60,14 @@ public final class NamingRules {
             String[] field = line.split("\t", -1);
             switch (field[0]) {
                 case "TEXT" -> text.add(new Rule(field[1], Pattern.compile(field[2]), replacement(field[3])));
+                case "PROSE" -> prose.add(new Rule(field[1], Pattern.compile(field[2]), replacement(field[3])));
                 case "KEEP_LINE" -> keepLine.add(field[2]);
                 case "KEEP_SPAN" -> keepSpan.add(field[2]);
                 case "KEEP_PATH" -> keepPath.add(field[2]);
                 default -> throw new IllegalArgumentException("unknown rule kind " + field[0]);
             }
         }
-        return new NamingRules(List.copyOf(text), join(keepLine), join(keepSpan), join(keepPath));
+        return new NamingRules(List.copyOf(text), List.copyOf(prose), join(keepLine), join(keepSpan), join(keepPath));
     }
 
     /** A Python {@code \1} group reference becomes {@code $1}; any other replacement is literal. */
@@ -75,6 +82,10 @@ public final class NamingRules {
 
     public List<Rule> textRules() {
         return textRules;
+    }
+
+    public List<Rule> proseRules() {
+        return proseRules;
     }
 
     /** True for a legal or attribution file that keeps its name. */
@@ -95,10 +106,16 @@ public final class NamingRules {
         if (keepLine.matcher(line).find()) {
             return line;
         }
+        boolean comment = COMMENT_LINE.matcher(line).lookingAt();
         List<String> spans = new ArrayList<>();
         String text = mask(line, spans);
         for (Rule rule : textRules) {
             text = apply(rule, text, counts);
+        }
+        if (comment) {
+            for (Rule rule : proseRules) {
+                text = apply(rule, text, counts);
+            }
         }
         return restore(text, spans);
     }

@@ -40,7 +40,7 @@ public final class NamingScan {
     static final String SELF_PREFIX = "m3/tooling/jdk-naming/";
     static final Set<String> SELF = Set.of("m3/release/check_standalone.py", "m3/release/test_check_standalone.py");
     /** Every rule contains one of these literals; a line without them is conformant (the recipe's QUICK). */
-    static final Pattern QUICK = Pattern.compile("(?i)synexia|com[./_]{1,2}m3[./_]|m3([-_./])m3\\1");
+    static final Pattern QUICK = Pattern.compile("(?i)synexia|com[./_]{1,2}m3[./_]|m3([-_./])m3\\1|m3[ _-]?jdk");
     private static final int EXCERPT = 160;
 
     private final NamingRules rules;

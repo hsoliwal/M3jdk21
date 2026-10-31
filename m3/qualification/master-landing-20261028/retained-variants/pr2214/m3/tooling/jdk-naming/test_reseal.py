@@ -130,6 +130,27 @@ class ResealTest(unittest.TestCase):
         pins.add_bytes(b"same\n", b"two\n")
         self.assertIn(sha256("same\n"), pins.ambiguous)
 
+    def test_an_ambiguity_that_the_reseal_resolves_is_carried_in_a_later_pass(self):
+        """A postimage (.txt, renamed) and its lineage copy (.tsv, resealed) hold the same bytes; after the reseal
+        carries the moved path in the copy, both hold the renamed bytes, so a pin of the old bytes is no longer
+        ambiguous and must follow (M3jdk21: after-028.txt and the manifest.tsv copies)."""
+        self.put("m3/x/src/com/synexia/x/SynexiaFoo.java", JAVA)
+        listing = "m3/x/src/com/synexia/x/SynexiaFoo.java\n"
+        self.put("m3/x/after-028.txt", listing)
+        self.put("m3/x/copy/manifest.tsv", listing)
+        self.put("m3/x/pins.json", '{"after_sha256": "%s"}\n' % sha256(listing))
+        base, renamed = self.renamed()
+        first = rs.reseal(self.root, base, renamed)
+        self.assertNotIn("m3/x/pins.json", first["files"])  # ambiguous in the renamed tree
+        commit = rs.reseal_to_fixed_point(self.root, base, renamed, "refs/heads/resealed", "reseal")
+        renamed_listing = "m3/x/src/jdk/internal/m3/x/M3Foo.java\n"
+        self.assertEqual(self.show(commit, "m3/x/after-028.txt"), renamed_listing)
+        self.assertEqual(self.show(commit, "m3/x/copy/manifest.tsv"), renamed_listing)
+        self.assertEqual(self.show(commit, "m3/x/pins.json"), '{"after_sha256": "%s"}\n' % sha256(renamed_listing))
+        self.assertEqual(jn.git(self.root, "rev-parse", commit + "^"), jn.git(self.root, "rev-parse", renamed))
+        self.assertEqual(rs.reseal(self.root, base, commit)["files"], {})
+        self.assertIn(sha256(listing), self.show(commit, rs.LEDGER))
+
     def test_a_path_token_with_a_prefix_is_carried_and_an_unrelated_one_is_not(self):
         pins = rs.Pins()
         pins.add("PATH", "m3/x/SynexiaFoo.java", "m3/x/M3Foo.java")
