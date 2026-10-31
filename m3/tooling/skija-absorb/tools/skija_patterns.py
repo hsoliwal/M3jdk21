@@ -27,7 +27,7 @@ EXTENDS = re.compile(r'\bextends\s+([\w.]+)')
 NATIVE = re.compile(r'\bnative\s+[\w.<>\[\], ?]+\s+(\w+)\s*\(')
 PUBLIC_METHOD = re.compile(r'^\s*public\s+(?:static\s+|final\s+|synchronized\s+|abstract\s+|default\s+)*[\w.<>\[\], ?]+\s+(\w+)\s*\(', re.M)
 JNI_DEF = re.compile(r'\b(Java_io_github_humbleui_\w+)\s*\(')
-CC_REF = re.compile(r'"(L?io/github/humbleui/[\w/$]+;?)"')
+CC_REF = re.compile(r'"((?:\\.|[^"\\\n])*io/github/humbleui/(?:\\.|[^"\\\n])*)"')
 INFRA = {"Managed", "RefCnt", "Native", "Library", "Cleanable", "Stats", "Platform", "BufferUtil", "ResultCodec"}
 
 
