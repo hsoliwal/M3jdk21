@@ -63,7 +63,7 @@
       "group": "org.slf4j",
       "optional": true,
       "scope": "provided",
-      "version": "1.7.36-m3-source-1"
+      "version": "2.0.12-m3-source-1"
     }
   ],
   "donor": "rewrite-java-21-8.17.1",
