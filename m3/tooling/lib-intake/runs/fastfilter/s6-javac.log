@@ -1,0 +1,28 @@
+H:\m3-scratch\lib-intake\batch\fastfilter\proj\src\main\java\module-info.java:3: warning: [module] module name component m3 should avoid terminal digits
+module jdk.m3.fastfilter {
+          ^
+H:\m3-scratch\lib-intake\batch\fastfilter\proj\src\main\java\com\m3\lib\fastfilter\bloom\count\Select.java:26: warning: [missing-explicit-ctor] class Select in exported package com.m3.lib.fastfilter.bloom.count declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.fastfilter
+public class Select {
+       ^
+H:\m3-scratch\lib-intake\batch\fastfilter\proj\src\main\java\com\m3\lib\fastfilter\bloom\count\SuccinctCountingBloomRanked.java:66: warning: [cast] redundant cast to int
+        int arrayLength = (int) (buckets + 16);
+                          ^
+H:\m3-scratch\lib-intake\batch\fastfilter\proj\src\main\java\com\m3\lib\fastfilter\gcs\GolombCompressedSet.java:94: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
+            p += q + 1;
+                   ^
+H:\m3-scratch\lib-intake\batch\fastfilter\proj\src\main\java\com\m3\lib\fastfilter\gcs\Sort.java:5: warning: [missing-explicit-ctor] class Sort in exported package com.m3.lib.fastfilter.gcs declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.fastfilter
+public class Sort {
+       ^
+H:\m3-scratch\lib-intake\batch\fastfilter\proj\src\main\java\com\m3\lib\fastfilter\tools\BuildFilterFile.java:10: warning: [missing-explicit-ctor] class BuildFilterFile in exported package com.m3.lib.fastfilter.tools declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.fastfilter
+public class BuildFilterFile {
+       ^
+H:\m3-scratch\lib-intake\batch\fastfilter\proj\src\main\java\com\m3\lib\fastfilter\tools\PasswordLookup.java:10: warning: [missing-explicit-ctor] class PasswordLookup in exported package com.m3.lib.fastfilter.tools declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.fastfilter
+public class PasswordLookup {
+       ^
+H:\m3-scratch\lib-intake\batch\fastfilter\proj\src\main\java\com\m3\lib\fastfilter\utils\Hash.java:5: warning: [missing-explicit-ctor] class Hash in exported package com.m3.lib.fastfilter.utils declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.fastfilter
+public class Hash {
+       ^
+H:\m3-scratch\lib-intake\batch\fastfilter\proj\src\main\java\com\m3\lib\fastfilter\utils\StringUtils.java:3: warning: [missing-explicit-ctor] class StringUtils in exported package com.m3.lib.fastfilter.utils declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.fastfilter
+public class StringUtils {
+       ^
+9 warnings

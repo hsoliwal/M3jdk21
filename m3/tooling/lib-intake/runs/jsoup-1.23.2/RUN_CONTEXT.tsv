@@ -1,0 +1,7 @@
+key	value
+lib	jsoup-1.23.2
+source	m3/vendor/third_party/jsoup-1.23.2
+mappings	org.jsoup=com.m3.lib.jsoup
+module	jdk.m3.jsoup
+version	1.23.2-m3-source-1
+layer	m3/vendor/third_party-m3/relocated/jsoup-1.23.2

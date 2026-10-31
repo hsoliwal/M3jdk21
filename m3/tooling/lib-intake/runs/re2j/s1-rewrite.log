@@ -1,0 +1,78 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------------< m3.intake:re2j >---------------------------
+[INFO] Building re2j 1.8-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- rewrite:5.23.1:runNoFork (default-cli) @ re2j ---
+[INFO] Using active recipe(s) [com.synexia.m3.intake.Relocate]
+[INFO] Using active styles(s) []
+[INFO] Validating active recipes...
+[INFO] Project [re2j] Resolving Poms...
+[INFO] Project [re2j] Parsing source files
+[INFO] Running recipe(s)...
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\google\re2j\Characters.java to m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\m3\lib\re2j\Characters.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.google.re2j, newPackageName=com.m3.lib.re2j, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\google\re2j\CharClass.java to m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\m3\lib\re2j\CharClass.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.google.re2j, newPackageName=com.m3.lib.re2j, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\google\re2j\CharGroup.java to m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\m3\lib\re2j\CharGroup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.google.re2j, newPackageName=com.m3.lib.re2j, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\google\re2j\Compiler.java to m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\m3\lib\re2j\Compiler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.google.re2j, newPackageName=com.m3.lib.re2j, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\google\re2j\Inst.java to m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\m3\lib\re2j\Inst.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.google.re2j, newPackageName=com.m3.lib.re2j, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\google\re2j\Machine.java to m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\m3\lib\re2j\Machine.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.google.re2j, newPackageName=com.m3.lib.re2j, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\google\re2j\MachineInput.java to m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\m3\lib\re2j\MachineInput.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.google.re2j, newPackageName=com.m3.lib.re2j, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\google\re2j\Matcher.java to m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\m3\lib\re2j\Matcher.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.google.re2j, newPackageName=com.m3.lib.re2j, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\google\re2j\MatcherInput.java to m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\m3\lib\re2j\MatcherInput.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.google.re2j, newPackageName=com.m3.lib.re2j, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\google\re2j\Parser.java to m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\m3\lib\re2j\Parser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.google.re2j, newPackageName=com.m3.lib.re2j, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\google\re2j\Pattern.java to m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\m3\lib\re2j\Pattern.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.google.re2j, newPackageName=com.m3.lib.re2j, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\google\re2j\PatternSyntaxException.java to m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\m3\lib\re2j\PatternSyntaxException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.google.re2j, newPackageName=com.m3.lib.re2j, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\google\re2j\Prog.java to m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\m3\lib\re2j\Prog.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.google.re2j, newPackageName=com.m3.lib.re2j, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\google\re2j\RE2.java to m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\m3\lib\re2j\RE2.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.google.re2j, newPackageName=com.m3.lib.re2j, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\google\re2j\Regexp.java to m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\m3\lib\re2j\Regexp.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.google.re2j, newPackageName=com.m3.lib.re2j, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\google\re2j\Simplify.java to m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\m3\lib\re2j\Simplify.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.google.re2j, newPackageName=com.m3.lib.re2j, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\google\re2j\Unicode.java to m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\m3\lib\re2j\Unicode.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.google.re2j, newPackageName=com.m3.lib.re2j, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\google\re2j\UnicodeTables.java to m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\m3\lib\re2j\UnicodeTables.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.google.re2j, newPackageName=com.m3.lib.re2j, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\google\re2j\Utils.java to m3-scratch\lib-intake\batch\re2j\proj\src\main\java\com\m3\lib\re2j\Utils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=com.google.re2j, newPackageName=com.m3.lib.re2j, recursive=false}
+[WARNING] Please review and commit the results.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  11.344 s
+[INFO] Finished at: 2026-10-31T05:59:06+05:30
+[INFO] ------------------------------------------------------------------------

@@ -1,178 +1,178 @@
-H:\m3-scratch\lib-intake\work\proj\src\main\java\module-info.java:2: warning: [module] module name component m3 should avoid terminal digits
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\module-info.java:3: warning: [module] module name component m3 should avoid terminal digits
 module jdk.m3.ewah {
           ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\BitCounter.java:15: warning: [missing-explicit-ctor] class BitCounter in exported package com.m3.collections.ewah declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.ewah
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\BitCounter.java:15: warning: [missing-explicit-ctor] class BitCounter in exported package com.m3.collections.ewah declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.ewah
 public final class BitCounter implements BitmapStorage {
              ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\BitCounter.java:45: warning: [exports] interface Buffer in module jdk.m3.ewah is not accessible to clients that require this module
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\BitCounter.java:45: warning: [exports] interface Buffer in module jdk.m3.ewah is not accessible to clients that require this module
     public void addStreamOfLiteralWords(final Buffer buffer, int start, int number) {
                                               ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\BitCounter.java:72: warning: [exports] interface Buffer in module jdk.m3.ewah is not accessible to clients that require this module
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\BitCounter.java:72: warning: [exports] interface Buffer in module jdk.m3.ewah is not accessible to clients that require this module
     public void addStreamOfNegatedLiteralWords(final Buffer buffer, int start, int number) {
                                                      ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\BitmapStorage.java:40: warning: [exports] interface Buffer in module jdk.m3.ewah is not accessible to clients that require this module
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\BitmapStorage.java:40: warning: [exports] interface Buffer in module jdk.m3.ewah is not accessible to clients that require this module
     void addStreamOfLiteralWords(final Buffer buffer, final int start, final int number);
                                        ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\BitmapStorage.java:58: warning: [exports] interface Buffer in module jdk.m3.ewah is not accessible to clients that require this module
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\BitmapStorage.java:58: warning: [exports] interface Buffer in module jdk.m3.ewah is not accessible to clients that require this module
     void addStreamOfNegatedLiteralWords(final Buffer buffer, final int start, final int number);
                                               ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\EWAHIterator.java:22: warning: [exports] interface Buffer in module jdk.m3.ewah is not accessible to clients that require this module
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\EWAHIterator.java:22: warning: [exports] interface Buffer in module jdk.m3.ewah is not accessible to clients that require this module
     public EWAHIterator(final Buffer buffer) {
                               ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\EWAHIterator.java:49: warning: [exports] interface Buffer in module jdk.m3.ewah is not accessible to clients that require this module
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\EWAHIterator.java:49: warning: [exports] interface Buffer in module jdk.m3.ewah is not accessible to clients that require this module
     public Buffer buffer() {
            ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\IteratingBufferedRunningLengthWord.java:60: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\IteratingBufferedRunningLengthWord.java:60: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
             this.brlw.numberOfLiteralWords -= toDiscard;
                                               ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\IteratingBufferedRunningLengthWord.java:74: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\IteratingBufferedRunningLengthWord.java:74: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
 		this.literalWordStartPosition += x;
 		                                 ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\IteratingBufferedRunningLengthWord.java:75: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\IteratingBufferedRunningLengthWord.java:75: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
 		this.brlw.numberOfLiteralWords -= x;
 		                                  ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\EWAHCompressedBitmap.java:819: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\EWAHCompressedBitmap.java:819: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
                 karprabin += B * (W & 0xFFFFFFFF);
                                ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\EWAHCompressedBitmap.java:820: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\EWAHCompressedBitmap.java:820: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
                 karprabin += B * ((W>>>32) & 0xFFFFFFFF);
                                ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\EWAHCompressedBitmap.java:1381: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\EWAHCompressedBitmap.java:1381: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
                     this.rlw.position -= lw + 1 - wordPosition;
                                                 ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\EWAHCompressedBitmap.java:1602: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\EWAHCompressedBitmap.java:1602: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
                 pos += WORD_IN_BITS * runningLength;
                                     ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\EWAHCompressedBitmap.java:153: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\EWAHCompressedBitmap.java:153: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
         this.buffer = new LongBufferWrapper(lb.slice(), sizeInWords);
             ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\EWAHCompressedBitmap.java:154: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\EWAHCompressedBitmap.java:154: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
         this.rlw = new RunningLengthWord(this.buffer, rlwposition);
             ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\EWAHCompressedBitmap.java:299: warning: [exports] interface Buffer in module jdk.m3.ewah is not accessible to clients that require this module
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\EWAHCompressedBitmap.java:299: warning: [exports] interface Buffer in module jdk.m3.ewah is not accessible to clients that require this module
     public void addStreamOfLiteralWords(final Buffer buffer, final int start,
                                               ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\EWAHCompressedBitmap.java:345: warning: [exports] interface Buffer in module jdk.m3.ewah is not accessible to clients that require this module
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\EWAHCompressedBitmap.java:345: warning: [exports] interface Buffer in module jdk.m3.ewah is not accessible to clients that require this module
     public void addStreamOfNegatedLiteralWords(final Buffer buffer,
                                                      ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\datastructure\BitSet.java:53: warning: [exports] interface WordArray in module jdk.m3.ewah is not accessible to clients that require this module
-    public void and(WordArray bs) {
-                    ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\datastructure\BitSet.java:68: warning: [exports] interface WordArray in module jdk.m3.ewah is not accessible to clients that require this module
-    public int andcardinality(WordArray bs) {
-                              ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\datastructure\BitSet.java:84: warning: [exports] interface WordArray in module jdk.m3.ewah is not accessible to clients that require this module
-    public void andNot(WordArray bs) {
-                       ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\datastructure\BitSet.java:96: warning: [exports] interface WordArray in module jdk.m3.ewah is not accessible to clients that require this module
-    public int andNotcardinality(WordArray bs) {
-                                 ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\datastructure\BitSet.java:305: warning: [exports] interface WordArray in module jdk.m3.ewah is not accessible to clients that require this module
-    public boolean intersects(WordArray bs) {
-                              ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\datastructure\BitSet.java:374: warning: [exports] interface WordArray in module jdk.m3.ewah is not accessible to clients that require this module
-    public void or(WordArray bs) {
-                   ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\datastructure\BitSet.java:390: warning: [exports] interface WordArray in module jdk.m3.ewah is not accessible to clients that require this module
-    public int orcardinality(WordArray bs) {
-                             ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\datastructure\BitSet.java:591: warning: [exports] interface WordArray in module jdk.m3.ewah is not accessible to clients that require this module
-    public void xor(WordArray bs) {
-                    ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\datastructure\BitSet.java:607: warning: [exports] interface WordArray in module jdk.m3.ewah is not accessible to clients that require this module
-    public int xorcardinality(WordArray bs) {
-                              ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\IteratorAggregation.java:484: warning: [unchecked] unchecked cast
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\IteratorAggregation.java:484: warning: [unchecked] unchecked cast
         answer.ll = (LinkedList<IteratingRLW>) this.ll.clone();
                                                             ^
   required: LinkedList<IteratingRLW>
   found:    Object
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\IteratorAggregation.java:531: warning: [unchecked] unchecked cast
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\IteratorAggregation.java:531: warning: [unchecked] unchecked cast
         answer.ll = (LinkedList<IteratingRLW>) this.ll.clone();
                                                             ^
   required: LinkedList<IteratingRLW>
   found:    Object
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\IteratorAggregation.java:580: warning: [unchecked] unchecked cast
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\IteratorAggregation.java:580: warning: [unchecked] unchecked cast
         answer.ll = (LinkedList<IteratingRLW>) this.ll.clone();
                                                             ^
   required: LinkedList<IteratingRLW>
   found:    Object
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\NonEmptyVirtualStorage.java:16: warning: [missing-explicit-ctor] class NonEmptyVirtualStorage in exported package com.m3.collections.ewah declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.ewah
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\NonEmptyVirtualStorage.java:16: warning: [missing-explicit-ctor] class NonEmptyVirtualStorage in exported package com.m3.collections.ewah declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.ewah
 public class NonEmptyVirtualStorage implements BitmapStorage {
        ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\NonEmptyVirtualStorage.java:47: warning: [exports] interface Buffer in module jdk.m3.ewah is not accessible to clients that require this module
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\NonEmptyVirtualStorage.java:47: warning: [exports] interface Buffer in module jdk.m3.ewah is not accessible to clients that require this module
     public void addStreamOfLiteralWords(Buffer buffer, int start, int number) {
                                         ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\NonEmptyVirtualStorage.java:69: warning: [exports] interface Buffer in module jdk.m3.ewah is not accessible to clients that require this module
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\NonEmptyVirtualStorage.java:69: warning: [exports] interface Buffer in module jdk.m3.ewah is not accessible to clients that require this module
     public void addStreamOfNegatedLiteralWords(Buffer buffer, int start,
                                                ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\ReverseIntIterator.java:72: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\ReverseIntIterator.java:72: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
         this.runningLength -= WORD_IN_BITS * (rlw.getRunningLength() + this.wordLength);
                                            ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah\symmetric\RunningBitmapMerge.java:23: warning: [missing-explicit-ctor] class RunningBitmapMerge in exported package com.m3.collections.ewah.symmetric declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.ewah
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\datastructure\BitSet.java:53: warning: [exports] interface WordArray in module jdk.m3.ewah is not accessible to clients that require this module
+    public void and(WordArray bs) {
+                    ^
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\datastructure\BitSet.java:68: warning: [exports] interface WordArray in module jdk.m3.ewah is not accessible to clients that require this module
+    public int andcardinality(WordArray bs) {
+                              ^
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\datastructure\BitSet.java:84: warning: [exports] interface WordArray in module jdk.m3.ewah is not accessible to clients that require this module
+    public void andNot(WordArray bs) {
+                       ^
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\datastructure\BitSet.java:96: warning: [exports] interface WordArray in module jdk.m3.ewah is not accessible to clients that require this module
+    public int andNotcardinality(WordArray bs) {
+                                 ^
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\datastructure\BitSet.java:305: warning: [exports] interface WordArray in module jdk.m3.ewah is not accessible to clients that require this module
+    public boolean intersects(WordArray bs) {
+                              ^
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\datastructure\BitSet.java:374: warning: [exports] interface WordArray in module jdk.m3.ewah is not accessible to clients that require this module
+    public void or(WordArray bs) {
+                   ^
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\datastructure\BitSet.java:390: warning: [exports] interface WordArray in module jdk.m3.ewah is not accessible to clients that require this module
+    public int orcardinality(WordArray bs) {
+                             ^
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\datastructure\BitSet.java:591: warning: [exports] interface WordArray in module jdk.m3.ewah is not accessible to clients that require this module
+    public void xor(WordArray bs) {
+                    ^
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\datastructure\BitSet.java:607: warning: [exports] interface WordArray in module jdk.m3.ewah is not accessible to clients that require this module
+    public int xorcardinality(WordArray bs) {
+                              ^
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah\symmetric\RunningBitmapMerge.java:23: warning: [missing-explicit-ctor] class RunningBitmapMerge in exported package com.m3.collections.ewah.symmetric declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.ewah
 public class RunningBitmapMerge implements BitmapSymmetricAlgorithm {
        ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\BitCounter32.java:16: warning: [missing-explicit-ctor] class BitCounter32 in exported package com.m3.collections.ewah32 declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.ewah
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah32\BitCounter32.java:16: warning: [missing-explicit-ctor] class BitCounter32 in exported package com.m3.collections.ewah32 declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.ewah
 public final class BitCounter32 implements BitmapStorage32 {
              ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\BitCounter32.java:46: warning: [exports] interface Buffer32 in module jdk.m3.ewah is not accessible to clients that require this module
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah32\BitCounter32.java:46: warning: [exports] interface Buffer32 in module jdk.m3.ewah is not accessible to clients that require this module
     public void addStreamOfLiteralWords(Buffer32 buffer, int start, int number) {
                                         ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\BitCounter32.java:74: warning: [exports] interface Buffer32 in module jdk.m3.ewah is not accessible to clients that require this module
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah32\BitCounter32.java:74: warning: [exports] interface Buffer32 in module jdk.m3.ewah is not accessible to clients that require this module
     public void addStreamOfNegatedLiteralWords(Buffer32 buffer, int start,
                                                ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\BitmapStorage32.java:40: warning: [exports] interface Buffer32 in module jdk.m3.ewah is not accessible to clients that require this module
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah32\BitmapStorage32.java:40: warning: [exports] interface Buffer32 in module jdk.m3.ewah is not accessible to clients that require this module
     void addStreamOfLiteralWords(final Buffer32 buffer, final int start,
                                        ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\BitmapStorage32.java:59: warning: [exports] interface Buffer32 in module jdk.m3.ewah is not accessible to clients that require this module
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah32\BitmapStorage32.java:59: warning: [exports] interface Buffer32 in module jdk.m3.ewah is not accessible to clients that require this module
     void addStreamOfNegatedLiteralWords(final Buffer32 buffer, final int start,
                                               ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\EWAHIterator32.java:23: warning: [exports] interface Buffer32 in module jdk.m3.ewah is not accessible to clients that require this module
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah32\EWAHIterator32.java:23: warning: [exports] interface Buffer32 in module jdk.m3.ewah is not accessible to clients that require this module
     public EWAHIterator32(final Buffer32 buffer) {
                                 ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\EWAHIterator32.java:51: warning: [exports] interface Buffer32 in module jdk.m3.ewah is not accessible to clients that require this module
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah32\EWAHIterator32.java:51: warning: [exports] interface Buffer32 in module jdk.m3.ewah is not accessible to clients that require this module
     public Buffer32 buffer() {
            ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\EWAHCompressedBitmap32.java:127: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah32\EWAHCompressedBitmap32.java:127: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
         this.buffer = new IntBufferWrapper(ib.slice(), sizeInWords);
             ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\EWAHCompressedBitmap32.java:128: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah32\EWAHCompressedBitmap32.java:128: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
         this.rlw = new RunningLengthWord32(this.buffer, rlwposition);
             ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\EWAHCompressedBitmap32.java:275: warning: [exports] interface Buffer32 in module jdk.m3.ewah is not accessible to clients that require this module
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah32\EWAHCompressedBitmap32.java:275: warning: [exports] interface Buffer32 in module jdk.m3.ewah is not accessible to clients that require this module
     public void addStreamOfLiteralWords(final Buffer32 buffer, final int start,
                                               ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\EWAHCompressedBitmap32.java:322: warning: [exports] interface Buffer32 in module jdk.m3.ewah is not accessible to clients that require this module
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah32\EWAHCompressedBitmap32.java:322: warning: [exports] interface Buffer32 in module jdk.m3.ewah is not accessible to clients that require this module
     public void addStreamOfNegatedLiteralWords(final Buffer32 buffer,
                                                      ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\IteratorAggregation32.java:545: warning: [unchecked] unchecked cast
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah32\IteratorAggregation32.java:545: warning: [unchecked] unchecked cast
         answer.ll = (LinkedList<IteratingRLW32>) this.ll.clone();
                                                               ^
   required: LinkedList<IteratingRLW32>
   found:    Object
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\IteratorAggregation32.java:592: warning: [unchecked] unchecked cast
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah32\IteratorAggregation32.java:592: warning: [unchecked] unchecked cast
         answer.ll = (LinkedList<IteratingRLW32>) this.ll.clone();
                                                               ^
   required: LinkedList<IteratingRLW32>
   found:    Object
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\IteratorAggregation32.java:642: warning: [unchecked] unchecked cast
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah32\IteratorAggregation32.java:642: warning: [unchecked] unchecked cast
         answer.ll = (LinkedList<IteratingRLW32>) this.ll.clone();
                                                               ^
   required: LinkedList<IteratingRLW32>
   found:    Object
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\NonEmptyVirtualStorage32.java:16: warning: [missing-explicit-ctor] class NonEmptyVirtualStorage32 in exported package com.m3.collections.ewah32 declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.ewah
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah32\NonEmptyVirtualStorage32.java:16: warning: [missing-explicit-ctor] class NonEmptyVirtualStorage32 in exported package com.m3.collections.ewah32 declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.ewah
 public class NonEmptyVirtualStorage32 implements BitmapStorage32 {
        ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\NonEmptyVirtualStorage32.java:43: warning: [exports] interface Buffer32 in module jdk.m3.ewah is not accessible to clients that require this module
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah32\NonEmptyVirtualStorage32.java:43: warning: [exports] interface Buffer32 in module jdk.m3.ewah is not accessible to clients that require this module
     public void addStreamOfLiteralWords(Buffer32 buffer, int start, int number) {
                                         ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\NonEmptyVirtualStorage32.java:62: warning: [exports] interface Buffer32 in module jdk.m3.ewah is not accessible to clients that require this module
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah32\NonEmptyVirtualStorage32.java:62: warning: [exports] interface Buffer32 in module jdk.m3.ewah is not accessible to clients that require this module
     public void addStreamOfNegatedLiteralWords(Buffer32 buffer, int start,
                                                ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\symmetric\RunningBitmapMerge32.java:23: warning: [missing-explicit-ctor] class RunningBitmapMerge32 in exported package com.m3.collections.ewah32.symmetric declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.ewah
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah32\symmetric\RunningBitmapMerge32.java:23: warning: [missing-explicit-ctor] class RunningBitmapMerge32 in exported package com.m3.collections.ewah32.symmetric declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.ewah
 public class RunningBitmapMerge32 implements BitmapSymmetricAlgorithm32 {
        ^
-H:\m3-scratch\lib-intake\work\proj\src\main\java\com\m3\collections\ewah32\symmetric\ThresholdFuncBitmap32.java:80: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
+H:\m3-scratch\lib-intake\batch\JavaEWAH\proj\src\main\java\com\m3\collections\ewah32\symmetric\ThresholdFuncBitmap32.java:80: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
                 result |= (1L << pos);
                           ^
 55 warnings

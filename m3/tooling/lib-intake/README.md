@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: Apache-2.0 OR EPL-2.0 -->
-# Library intake to JMOD (pattern LIB_INTAKE_TO_JMOD v1)
+# Library intake to JMOD (pattern LIB_INTAKE_TO_JMOD v2)
 
-One recipe takes a new library or app into M3JDK21 as an optional JMOD. It runs these steps in order:
+One recipe takes new libraries and apps into M3JDK21 as optional JMODs. It runs these steps in order:
 - move packages and imports;
 - atomize and patternize;
 - set the consolidation and refactor baseline;
@@ -9,46 +9,86 @@ One recipe takes a new library or app into M3JDK21 as an optional JMOD. It runs 
 - build the JMOD and a linked image.
 
 Every stage calls an owner that already exists, writes one row to `runs/<lib>/STAGES.tsv`, and stops the run on failure.
+`lib_intake_batch.sh` runs every `INTAKE.tsv` row and then links all the JMODs into one validated image.
 
-| Stage | What | Owner |
+| Stage | What | Owner and gate |
 |---|---|---|
-| S1 RELOCATE | packages and imports | OpenRewrite `ChangePackage`, one per package, `recursive: false`, longest first. This is the boundary-checked form of com.synexia `M3BoundaryCheckedPackageRenameRecipe` (#12340). It runs offline through rewrite-maven-plugin 5.23.1 on rewrite 8.17.1 |
-| S1b BCP | behaviour and contract preserved | each relocated file must be byte-equal to its original after the textual name map |
-| S2 RESIDUE | what ChangePackage does not own | `m3work:relocation-scan` (com.synexia #14520). Java-syntax residue must be 0; other kinds go to per-owner manifests |
-| S3 ATOMIZE | atoms and pattern ids | `M3Mop atomize` + `plan` |
-| S4 CONSOLIDATE | atoms an M3 owner already holds | `absorb_plan.py` (`m3/collections/qualification/converge-commons-20261030`). OWNER_CONTRACT rows form the consolidation queue, as proposals |
-| S5 REFACTOR | ratchet baseline | METHOD_15 / LOOP / CONST_HOIST from the atomizer; MOP refactor passes may only lower them |
-| S6 MODULE | `module-info.java` | the module exports every relocated package; `javac --release 21 -Xlint:all` |
-| S7 JMOD | JMOD and image | the JDK's own `jmod create` (with `--legal-notices`) and `jmod describe`; `jlink` java.base + jdk.compiler + the module; `--list-modules`, `--validate-modules`, and a smoke run in the image (`runs/<lib>/SMOKE.java`, `// expect:` line) |
-| S8 LAYER | the M3 refactor layer | relocated sources, descriptor and notices go to `m3/vendor/third_party-m3/relocated/<lib>`. The upstream copy in `m3/vendor/third_party/<lib>` is never touched |
+| S0 VIEW | release-21 source view | `src/main/java`, then `src/main/versions/<N>` overlays with N ≤ 21, in order (the `jmod_pack.py` release view, at source level). The upstream `module-info` is set aside |
+| S1 RELOCATE | packages and imports | OpenRewrite `ChangePackage`, one per package, `recursive: false`, longest first. This is the boundary-checked form of #12340, run offline (rewrite-maven-plugin 5.23.1, rewrite 8.17.1). The same name map, dotted and slash forms, then completes string literals, comments, resource paths, `META-INF/services` and proguard text. Resources move with their packages. Files OpenRewrite cannot parse move by the name map and are listed in `TEXT_FALLBACK.tsv` |
+| S1b BCP | behaviour preserved | each Java file must equal `name-map(original)`; each package resource must be byte-equal at its new path |
+| S2 RESIDUE | nothing left behind | `m3work:relocation-scan` (com.synexia #14520) plus a slash-form grep: residue of every kind must be 0 |
+| S3 ATOMIZE | atoms and patterns | `M3Mop atomize` + `plan` |
+| S4 CONSOLIDATE | consolidation queue | `absorb_plan.py` against the M3 owners: OWNER_CONTRACT atoms, as proposals |
+| S5 REFACTOR | ratchet baseline | METHOD_15 / LOOP / CONST_HOIST |
+| S6 MODULE | `module-info` | `requires` from `jdeps --print-module-deps` over a class-path compile; `requires static` for `compile_deps`; every package exported; upstream `uses`/`provides` name-mapped; `javac --release 21 -Xlint:all` |
+| S7 JMOD | JMOD and image | `jmod create` (legal notices only), `jlink`, `--list-modules`, `--validate-modules`. Smoke: `runs/<lib>/SMOKE.java` if present, otherwise `LoadAll` (every class of the module loads in the image, 0 failures) |
+| S8 LAYER | the M3 refactor layer | `m3/vendor/third_party-m3/relocated/<lib>`; the upstream copy is never touched |
 
-`INTAKE.tsv` has one row per library: lib, source_dir, mappings (`old=new;...`), module, version, layer_dir, mop_classes,
-owner_atoms. The last two are local tool inputs: the M3Mop classes and the atoms of the M3 owners.
+## `INTAKE.tsv`
+
+The columns are lib, source_dir, mappings, module, version, layer_dir, mop_classes, owner_atoms and compile_deps.
+
+- mappings, module, version and layer_dir accept `auto`. The library's common package root `R` maps to
+  `com.m3.lib.<last segment of R>`, the module is `jdk.m3.<same>`, the version comes from the source POM, and the
+  layer is `m3/vendor/third_party-m3/relocated/<lib>`.
+- `compile_deps` lists annotation jars needed only at compile time; they become `requires static`.
+- Rows that cannot be taken in as they are go to `HOLDS.tsv` with the reason and what they need.
 
 ```bash
-unset MSYS_NO_PATHCONV                      # Maven and Windows tools need path conversion
-JAVA_HOME="C:/Program Files/Java/jdk-21" bash m3/tooling/lib-intake/lib_intake.sh <lib> <empty work dir>
+unset MSYS_NO_PATHCONV        # Maven and Windows tools need MSYS path conversion
+JAVA_HOME="C:/Program Files/Java/jdk-21" bash m3/tooling/lib-intake/lib_intake_batch.sh <empty work root> [lib ...]
 ```
 
-## First intake: JavaEWAH into `jdk.m3.ewah`
+## Wave 1
 
-JavaEWAH 1.1.13-m3-source-1 is Apache-2.0, has 62 files and no dependencies. Its packages `com.googlecode.javaewah` and
-`com.googlecode.javaewah32` are prefix neighbours, which is exactly the case where a recursive ChangePackage over-matches.
-The run was idempotent: two runs gave the same rows.
+`BATCH.tsv` holds the result per library; `COMBINED_IMAGE.tsv` holds the combined jlink, `--validate-modules` and the
+module presence check. Wave 1 covers JavaEWAH (explicit mapping, `com.m3.collections.ewah`), re2j, fastfilter,
+pcollections, HdrHistogram, dec (brotli), xz, commonmark, jsoup 1.23.2 and commons-codec 1.22.1. The automatic mapping
+gives `jdk.m3.<name>`. zero-allocation-hashing is on hold: it uses the JDK-internal `sun.nio.ch`, so it first needs a
+qualified export in M3JDK21's `java.base`.
 
-| Stage | Result |
-|---|---|
-| S1 | 5 packages moved to `com.m3.collections.ewah` / `ewah32`; 0 old package directories left |
-| S1b | 62/62 files byte-equal after the name map |
-| S2 | residue 0 of every kind |
-| S3 | 1,176 atoms: KNOWN_PATTERN 392, UNPROVEN_LEAF 622, UNKNOWN_PATTERN 162 |
-| S4 | 119 OWNER_CONTRACT atoms (consolidation queue), 412 OWNER_SHAPE, 645 GAP |
-| S5 | METHOD_15 141, LOOP 211, CONST_HOIST 33 |
-| S6 | `jdk.m3.ewah`, 5 exports; 55 javac lint warnings in the donor code (recorded in `s6-javac.log`) |
-| S7 | JMOD 156,666 B; the image has 6 modules and validates; the smoke `bitmapOf(1, 5, 9).cardinality()` prints 3 |
+The JMODs and images are build products and are not committed. Each `runs/<lib>/` keeps that library's ledgers and logs.
 
-The JMOD and the image are build products and are not committed. `runs/JavaEWAH/` keeps the ledgers and logs.
-Next leaves, all as proposals:
-- consolidate the 119 contract-equal atoms onto their M3 owners;
-- lower the S5 baseline with MOP recipes;
-- register the module pack in `m3/tooling/module-packs` for the full M3JDK image build.
+**Next leaves, all as proposals:**
+- the consolidation queues;
+- lowering the refactor baselines with MOP recipes;
+- registering the modules in `m3/tooling/module-packs` for the M3JDK21 image build;
+- more `INTAKE.tsv` rows from the vendored set.
+
+## Apps
+
+The `INTAKE.tsv` column `main_class` takes the upstream fully qualified main class. The name map relocates it, it is
+recorded in the JMOD (`jmod create --main-class`), and `jlink --launcher <lib>=<module>` puts `bin/<lib>` in the image.
+Gate S7 checks that the descriptor shows the main class and that the launcher exists.
+
+First app: HdrHistogram's `HistogramLogProcessor`. The image has `com.m3.lib.hdrhistogram.HistogramLogProcessor` as its
+main class, a `bin/HdrHistogram` launcher, and all 87 classes load.
+
+## Atomization and patternization across libraries (`catalogue/`)
+
+`pattern_catalogue.py` groups the M3Mop atoms of every intake library, together with the M3 owners, by four CPU keys:
+- `patternId`: the M3Mop pattern family;
+- `shapeKey`: structure;
+- shape plus contract: consolidation candidates;
+- `exactSha256`: copied duplicates.
+
+Each family is labelled ACCESSOR, CONSTRUCTOR, ITERATOR, OBJECT_PROTOCOL or ALGORITHM.
+
+Result over 8,406 method atoms from 11 libraries: at exact-structure level the recurrence across libraries is almost all
+accessors and constructors, and algorithms are unique to their library.
+
+`near_dup_catalogue.py` reuses the `ts-lhash` skill unchanged (tree-sitter leaves; L-Hash H2+H3+H4 signature, invariant
+to renames and literals) and adds library, file, line and method to each leaf. Over 2,083 algorithm-sized leaves in 9
+libraries and 4,338 including the M3 owners it finds:
+- 34 M3_OWNED_ALGORITHM families (224 leaves), where an M3 owner implements a near-duplicate algorithm. For example,
+  HdrHistogram's `oneAtATimeHashStep` matches the `mix` hash of `M3IntHashSet`, `M3IntIntHashMap` and `M3IntLongHashMap`;
+- 8 CROSS_LIB_ALGORITHM families (22 leaves).
+
+Every family is a candidate. L-Hash near-duplicates are coarse and some are false friends, so a differential test admits
+each consolidation.
+
+## Holds
+
+`HOLDS.tsv` lists:
+- zero-allocation-hashing: uses the JDK-internal `sun.nio.ch`;
+- jsoup: has an optional dependency on re2j, which this batch relocates. It needs an intake-to-intake dependency column.

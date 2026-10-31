@@ -1,0 +1,4 @@
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: H:\m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\Definitions.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.

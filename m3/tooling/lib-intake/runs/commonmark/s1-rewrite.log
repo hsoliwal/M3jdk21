@@ -1,0 +1,675 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------------< m3.intake:commonmark >------------------------
+[INFO] Building commonmark 0.30.0-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- rewrite:5.23.1:runNoFork (default-cli) @ commonmark ---
+[INFO] Using active recipe(s) [com.synexia.m3.intake.Relocate]
+[INFO] Using active styles(s) []
+[INFO] Validating active recipes...
+[INFO] Project [commonmark] Resolving Poms...
+[WARNING] Unable to initialize RocksdbMavenPomCache, falling back to InMemoryMavenPomCache
+[INFO] Project [commonmark] Parsing source files
+java.io.IOException: There is not enough space on the disk
+	at java.base/java.io.FileOutputStream.writeBytes(Native Method)
+	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:367)
+	at org.xerial.snappy.SnappyLoader.extractLibraryFile(SnappyLoader.java:247)
+	at org.xerial.snappy.SnappyLoader.findNativeLibrary(SnappyLoader.java:358)
+	at org.xerial.snappy.SnappyLoader.loadNativeLibrary(SnappyLoader.java:179)
+	at org.xerial.snappy.SnappyLoader.loadSnappyApi(SnappyLoader.java:157)
+	at org.xerial.snappy.Snappy.init(Snappy.java:70)
+	at org.xerial.snappy.Snappy.<clinit>(Snappy.java:47)
+	at org.openrewrite.java.internal.JavaTypeCache.key(JavaTypeCache.java:58)
+	at org.openrewrite.java.internal.JavaTypeCache.get(JavaTypeCache.java:45)
+	at org.openrewrite.java.isolated.ReloadableJava17TypeMapping.methodDeclarationType(ReloadableJava17TypeMapping.java:561)
+	at org.openrewrite.java.isolated.ReloadableJava17TypeMapping.classType(ReloadableJava17TypeMapping.java:290)
+	at org.openrewrite.java.isolated.ReloadableJava17TypeMapping.type(ReloadableJava17TypeMapping.java:63)
+	at org.openrewrite.java.isolated.ReloadableJava17TypeMapping.classType(ReloadableJava17TypeMapping.java:246)
+	at org.openrewrite.java.isolated.ReloadableJava17TypeMapping.type(ReloadableJava17TypeMapping.java:63)
+	at org.openrewrite.java.isolated.ReloadableJava17TypeMapping.type(ReloadableJava17TypeMapping.java:364)
+	at org.openrewrite.java.isolated.ReloadableJava17TypeMapping.type(ReloadableJava17TypeMapping.java:356)
+	at org.openrewrite.java.isolated.ReloadableJava17ParserVisitor.visitClass(ReloadableJava17ParserVisitor.java:399)
+	at org.openrewrite.java.isolated.ReloadableJava17ParserVisitor.visitClass(ReloadableJava17ParserVisitor.java:73)
+	at com.sun.tools.javac.tree.JCTree$JCClassDecl.accept(JCTree.java:855)
+	at com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:92)
+	at org.openrewrite.java.isolated.ReloadableJava17ParserVisitor.convert(ReloadableJava17ParserVisitor.java:1668)
+	at org.openrewrite.java.isolated.ReloadableJava17ParserVisitor.convertAll(ReloadableJava17ParserVisitor.java:1721)
+	at org.openrewrite.java.isolated.ReloadableJava17ParserVisitor.visitCompilationUnit(ReloadableJava17ParserVisitor.java:551)
+	at org.openrewrite.java.isolated.ReloadableJava17ParserVisitor.visitCompilationUnit(ReloadableJava17ParserVisitor.java:73)
+	at com.sun.tools.javac.tree.JCTree$JCCompilationUnit.accept(JCTree.java:623)
+	at com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:92)
+	at org.openrewrite.java.isolated.ReloadableJava17Parser.lambda$parseInputs$0(ReloadableJava17Parser.java:166)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1939)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:310)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:310)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:735)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:310)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at java.base/java.util.stream.ReferencePipeline$7$1.accept(ReferencePipeline.java:276)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1708)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:682)
+	at org.openrewrite.maven.AbstractRewriteMojo.sourcesWithAutoDetectedStyles(AbstractRewriteMojo.java:286)
+	at org.openrewrite.maven.AbstractRewriteMojo.loadSourceSet(AbstractRewriteMojo.java:255)
+	at org.openrewrite.maven.AbstractRewriteMojo.listResults(AbstractRewriteMojo.java:236)
+	at org.openrewrite.maven.AbstractRewriteRunMojo.execute(AbstractRewriteRunMojo.java:62)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:126)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2(MojoExecutor.java:328)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute(MojoExecutor.java:316)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:212)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:174)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.access$000(MojoExecutor.java:75)
+	at org.apache.maven.lifecycle.internal.MojoExecutor$1.run(MojoExecutor.java:162)
+	at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute(DefaultMojosExecutionStrategy.java:39)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:159)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:105)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:73)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:53)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:118)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:261)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:173)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:101)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:919)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:285)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:207)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:255)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:201)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:361)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:314)
+[WARNING] There were problems parsing some source files, run with --errors to see full stack traces
+[WARNING] There were problems parsing m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\Extension.java
+[INFO] Running recipe(s)...
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\BlockContent.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\BlockContent.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\BlockContinueImpl.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\BlockContinueImpl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\BlockQuoteParser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\BlockQuoteParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.util, newPackageName=com.m3.lib.commonmark.internal.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.text, newPackageName=com.m3.lib.commonmark.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\BlockStartImpl.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\BlockStartImpl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\Bracket.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\Bracket.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\Definitions.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\Definitions.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\Delimiter.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\Delimiter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.delimiter, newPackageName=com.m3.lib.commonmark.parser.delimiter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\DocumentBlockParser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\DocumentBlockParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\DocumentParser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\DocumentParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.delimiter, newPackageName=com.m3.lib.commonmark.parser.delimiter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.util, newPackageName=com.m3.lib.commonmark.internal.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.text, newPackageName=com.m3.lib.commonmark.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\FencedCodeBlockParser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\FencedCodeBlockParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.util, newPackageName=com.m3.lib.commonmark.internal.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.text, newPackageName=com.m3.lib.commonmark.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\HeadingParser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\HeadingParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.util, newPackageName=com.m3.lib.commonmark.internal.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.text, newPackageName=com.m3.lib.commonmark.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\HtmlBlockParser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\HtmlBlockParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\IndentedCodeBlockParser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\IndentedCodeBlockParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.util, newPackageName=com.m3.lib.commonmark.internal.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.text, newPackageName=com.m3.lib.commonmark.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\inline\AsteriskDelimiterProcessor.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\inline\AsteriskDelimiterProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.inline, newPackageName=com.m3.lib.commonmark.internal.inline, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\inline\AutolinkInlineParser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\inline\AutolinkInlineParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.inline, newPackageName=com.m3.lib.commonmark.internal.inline, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.text, newPackageName=com.m3.lib.commonmark.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\inline\BackslashInlineParser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\inline\BackslashInlineParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.inline, newPackageName=com.m3.lib.commonmark.internal.inline, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.util, newPackageName=com.m3.lib.commonmark.internal.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\inline\BackticksInlineParser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\inline\BackticksInlineParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.inline, newPackageName=com.m3.lib.commonmark.internal.inline, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.text, newPackageName=com.m3.lib.commonmark.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\inline\CoreLinkProcessor.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\inline\CoreLinkProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.inline, newPackageName=com.m3.lib.commonmark.internal.inline, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\inline\EmphasisDelimiterProcessor.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\inline\EmphasisDelimiterProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.delimiter, newPackageName=com.m3.lib.commonmark.parser.delimiter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.inline, newPackageName=com.m3.lib.commonmark.internal.inline, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\inline\EntityInlineParser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\inline\EntityInlineParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.inline, newPackageName=com.m3.lib.commonmark.internal.inline, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.util, newPackageName=com.m3.lib.commonmark.internal.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.text, newPackageName=com.m3.lib.commonmark.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\inline\HtmlInlineParser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\inline\HtmlInlineParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.inline, newPackageName=com.m3.lib.commonmark.internal.inline, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.text, newPackageName=com.m3.lib.commonmark.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\inline\LinkResultImpl.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\inline\LinkResultImpl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.inline, newPackageName=com.m3.lib.commonmark.internal.inline, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\inline\ParsedInlineImpl.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\inline\ParsedInlineImpl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.inline, newPackageName=com.m3.lib.commonmark.internal.inline, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\inline\UnderscoreDelimiterProcessor.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\inline\UnderscoreDelimiterProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.inline, newPackageName=com.m3.lib.commonmark.internal.inline, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\InlineParserContextImpl.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\InlineParserContextImpl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.delimiter, newPackageName=com.m3.lib.commonmark.parser.delimiter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\InlineParserImpl.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\InlineParserImpl.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.delimiter, newPackageName=com.m3.lib.commonmark.parser.delimiter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.inline, newPackageName=com.m3.lib.commonmark.internal.inline, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.util, newPackageName=com.m3.lib.commonmark.internal.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.text, newPackageName=com.m3.lib.commonmark.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\LinkReferenceDefinitionParser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\LinkReferenceDefinitionParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.util, newPackageName=com.m3.lib.commonmark.internal.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\ListBlockParser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\ListBlockParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.util, newPackageName=com.m3.lib.commonmark.internal.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\ListItemParser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\ListItemParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\ParagraphParser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\ParagraphParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\renderer\NodeRendererMap.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\renderer\NodeRendererMap.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.renderer, newPackageName=com.m3.lib.commonmark.internal.renderer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer, newPackageName=com.m3.lib.commonmark.renderer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\StaggeredDelimiterProcessor.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\StaggeredDelimiterProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.delimiter, newPackageName=com.m3.lib.commonmark.parser.delimiter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\ThematicBreakParser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\ThematicBreakParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\util\Escaping.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\util\Escaping.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.util, newPackageName=com.m3.lib.commonmark.internal.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\util\Html5Entities.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\util\Html5Entities.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.util, newPackageName=com.m3.lib.commonmark.internal.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\util\LineReader.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\util\LineReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.util, newPackageName=com.m3.lib.commonmark.internal.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\util\LinkScanner.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\util\LinkScanner.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.util, newPackageName=com.m3.lib.commonmark.internal.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\internal\util\Parsing.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\internal\util\Parsing.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.util, newPackageName=com.m3.lib.commonmark.internal.util, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\AbstractVisitor.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\AbstractVisitor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\Block.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\Block.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\BlockQuote.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\BlockQuote.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\BulletList.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\BulletList.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\Code.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\Code.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\CustomBlock.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\CustomBlock.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\CustomNode.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\CustomNode.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\DefinitionMap.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\DefinitionMap.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.util, newPackageName=com.m3.lib.commonmark.internal.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\Delimited.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\Delimited.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\Document.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\Document.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\Emphasis.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\Emphasis.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\FencedCodeBlock.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\FencedCodeBlock.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\HardLineBreak.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\HardLineBreak.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\Heading.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\Heading.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\HtmlBlock.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\HtmlBlock.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\HtmlInline.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\HtmlInline.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\Image.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\Image.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\IndentedCodeBlock.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\IndentedCodeBlock.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\Link.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\Link.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\LinkReferenceDefinition.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\LinkReferenceDefinition.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\ListBlock.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\ListBlock.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\ListItem.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\ListItem.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\Node.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\Node.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\Nodes.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\Nodes.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\OrderedList.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\OrderedList.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\package-info.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\Paragraph.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\Paragraph.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\SoftLineBreak.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\SoftLineBreak.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\SourceSpan.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\SourceSpan.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\SourceSpans.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\SourceSpans.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\StrongEmphasis.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\StrongEmphasis.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\Text.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\Text.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\ThematicBreak.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\ThematicBreak.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\node\Visitor.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\node\Visitor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\package-info.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark, newPackageName=com.m3.lib.commonmark, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\beta\InlineContentParser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\beta\InlineContentParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\beta\InlineContentParserFactory.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\beta\InlineContentParserFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\beta\InlineParserState.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\beta\InlineParserState.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\beta\LinkInfo.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\beta\LinkInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\beta\LinkProcessor.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\beta\LinkProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\beta\LinkResult.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\beta\LinkResult.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.inline, newPackageName=com.m3.lib.commonmark.internal.inline, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\beta\package-info.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\beta\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\beta\ParsedInline.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\beta\ParsedInline.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.inline, newPackageName=com.m3.lib.commonmark.internal.inline, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\beta\Position.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\beta\Position.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\beta\Scanner.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\beta\Scanner.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.text, newPackageName=com.m3.lib.commonmark.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\block\AbstractBlockParser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\block\AbstractBlockParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\block\AbstractBlockParserFactory.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\block\AbstractBlockParserFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\block\BlockContinue.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\block\BlockContinue.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\block\BlockParser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\block\BlockParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\block\BlockParserFactory.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\block\BlockParserFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\block\BlockStart.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\block\BlockStart.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\block\MatchedBlockParser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\block\MatchedBlockParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\block\package-info.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\block\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\block\ParserState.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\block\ParserState.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\delimiter\DelimiterProcessor.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\delimiter\DelimiterProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.delimiter, newPackageName=com.m3.lib.commonmark.parser.delimiter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\delimiter\DelimiterRun.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\delimiter\DelimiterRun.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.delimiter, newPackageName=com.m3.lib.commonmark.parser.delimiter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\IncludeSourceSpans.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\IncludeSourceSpans.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\InlineParser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\InlineParser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\InlineParserContext.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\InlineParserContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.delimiter, newPackageName=com.m3.lib.commonmark.parser.delimiter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\InlineParserFactory.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\InlineParserFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\package-info.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\Parser.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\Parser.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.delimiter, newPackageName=com.m3.lib.commonmark.parser.delimiter, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.block, newPackageName=com.m3.lib.commonmark.parser.block, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser.beta, newPackageName=com.m3.lib.commonmark.parser.beta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal, newPackageName=com.m3.lib.commonmark.internal, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark, newPackageName=com.m3.lib.commonmark, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\PostProcessor.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\PostProcessor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\SourceLine.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\SourceLine.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\parser\SourceLines.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\parser\SourceLines.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.parser, newPackageName=com.m3.lib.commonmark.parser, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\html\AttributeProvider.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\html\AttributeProvider.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.html, newPackageName=com.m3.lib.commonmark.renderer.html, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\html\AttributeProviderContext.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\html\AttributeProviderContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.html, newPackageName=com.m3.lib.commonmark.renderer.html, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\html\AttributeProviderFactory.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\html\AttributeProviderFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.html, newPackageName=com.m3.lib.commonmark.renderer.html, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\html\CoreHtmlNodeRenderer.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\html\CoreHtmlNodeRenderer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.html, newPackageName=com.m3.lib.commonmark.renderer.html, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer, newPackageName=com.m3.lib.commonmark.renderer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\html\DefaultUrlSanitizer.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\html\DefaultUrlSanitizer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.html, newPackageName=com.m3.lib.commonmark.renderer.html, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\html\HtmlNodeRendererContext.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\html\HtmlNodeRendererContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.html, newPackageName=com.m3.lib.commonmark.renderer.html, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\html\HtmlNodeRendererFactory.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\html\HtmlNodeRendererFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.html, newPackageName=com.m3.lib.commonmark.renderer.html, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer, newPackageName=com.m3.lib.commonmark.renderer, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\html\HtmlRenderer.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\html\HtmlRenderer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.renderer, newPackageName=com.m3.lib.commonmark.internal.renderer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.util, newPackageName=com.m3.lib.commonmark.internal.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.html, newPackageName=com.m3.lib.commonmark.renderer.html, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer, newPackageName=com.m3.lib.commonmark.renderer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark, newPackageName=com.m3.lib.commonmark, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\html\HtmlWriter.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\html\HtmlWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.util, newPackageName=com.m3.lib.commonmark.internal.util, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.html, newPackageName=com.m3.lib.commonmark.renderer.html, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\html\package-info.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\html\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.html, newPackageName=com.m3.lib.commonmark.renderer.html, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\html\UrlSanitizer.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\html\UrlSanitizer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.html, newPackageName=com.m3.lib.commonmark.renderer.html, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\markdown\CoreMarkdownNodeRenderer.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\markdown\CoreMarkdownNodeRenderer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.markdown, newPackageName=com.m3.lib.commonmark.renderer.markdown, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer, newPackageName=com.m3.lib.commonmark.renderer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.text, newPackageName=com.m3.lib.commonmark.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\markdown\MarkdownNodeRendererContext.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\markdown\MarkdownNodeRendererContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.markdown, newPackageName=com.m3.lib.commonmark.renderer.markdown, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\markdown\MarkdownNodeRendererFactory.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\markdown\MarkdownNodeRendererFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.markdown, newPackageName=com.m3.lib.commonmark.renderer.markdown, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer, newPackageName=com.m3.lib.commonmark.renderer, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\markdown\MarkdownRenderer.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\markdown\MarkdownRenderer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.renderer, newPackageName=com.m3.lib.commonmark.internal.renderer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.markdown, newPackageName=com.m3.lib.commonmark.renderer.markdown, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer, newPackageName=com.m3.lib.commonmark.renderer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark, newPackageName=com.m3.lib.commonmark, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\markdown\MarkdownWriter.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\markdown\MarkdownWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.markdown, newPackageName=com.m3.lib.commonmark.renderer.markdown, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.text, newPackageName=com.m3.lib.commonmark.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\markdown\package-info.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\markdown\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.markdown, newPackageName=com.m3.lib.commonmark.renderer.markdown, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\NodeRenderer.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\NodeRenderer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer, newPackageName=com.m3.lib.commonmark.renderer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\Renderer.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\Renderer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer, newPackageName=com.m3.lib.commonmark.renderer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\text\CoreTextContentNodeRenderer.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\text\CoreTextContentNodeRenderer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.text, newPackageName=com.m3.lib.commonmark.renderer.text, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer, newPackageName=com.m3.lib.commonmark.renderer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\text\LineBreakRendering.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\text\LineBreakRendering.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.text, newPackageName=com.m3.lib.commonmark.renderer.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\text\package-info.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\text\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.text, newPackageName=com.m3.lib.commonmark.renderer.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\text\TextContentNodeRendererContext.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\text\TextContentNodeRendererContext.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.text, newPackageName=com.m3.lib.commonmark.renderer.text, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\text\TextContentNodeRendererFactory.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\text\TextContentNodeRendererFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.text, newPackageName=com.m3.lib.commonmark.renderer.text, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer, newPackageName=com.m3.lib.commonmark.renderer, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\text\TextContentRenderer.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\text\TextContentRenderer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.internal.renderer, newPackageName=com.m3.lib.commonmark.internal.renderer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.text, newPackageName=com.m3.lib.commonmark.renderer.text, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer, newPackageName=com.m3.lib.commonmark.renderer, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.node, newPackageName=com.m3.lib.commonmark.node, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark, newPackageName=com.m3.lib.commonmark, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\renderer\text\TextContentWriter.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\renderer\text\TextContentWriter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.renderer.text, newPackageName=com.m3.lib.commonmark.renderer.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\text\AsciiMatcher.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\text\AsciiMatcher.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.text, newPackageName=com.m3.lib.commonmark.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\text\Characters.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\text\Characters.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.text, newPackageName=com.m3.lib.commonmark.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\text\CharMatcher.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\text\CharMatcher.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.text, newPackageName=com.m3.lib.commonmark.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\org\commonmark\text\package-info.java to m3-scratch\lib-intake\batch\commonmark\proj\src\main\java\com\m3\lib\commonmark\text\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.commonmark.text, newPackageName=com.m3.lib.commonmark.text, recursive=false}
+[WARNING] Please review and commit the results.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  13.919 s
+[INFO] Finished at: 2026-10-31T06:04:20+05:30
+[INFO] ------------------------------------------------------------------------
