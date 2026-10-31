@@ -64,8 +64,9 @@ EOF
 }
 rm -rf "$WORK" && mkdir -p "$WORK/gen" "$WORK/out" "$WORK/cls" "$WORK/hcls" "$WORK/nc" "$WORK/test"
 echo "M3_DECORATOR_FILL stage=generator"
-# The generator is four atoms: the CLI and classifier, its helper templates, the JDK_STANDARD pass and the rule checks.
-ATOMS=("$Q/M3DecoratorTemplates.java" "$Q/M3DecoratorJdkStandard.java" "$Q/M3DecoratorRuleCheck.java")
+# The generator is five atoms: the CLI and classifier, its helper templates, the JDK_STANDARD pass, the rule checks
+# and the pattern data (regular expressions and the WRAP table).
+ATOMS=("$Q/M3DecoratorTemplates.java" "$Q/M3DecoratorJdkStandard.java" "$Q/M3DecoratorRuleCheck.java" "$Q/M3DecoratorPatterns.java")
 "$BIN/javac" -proc:none -cp "$JAR" -d "$WORK/gen" "$Q/M3DecoratorFill.java" "${ATOMS[@]}"
 rules=0; "$BIN/java" -cp "$JAR$SEP$WORK/gen" M3DecoratorFill --rule-check "$SRC" "$WORK/rules.tsv" 2>/dev/null || rules=$?
 { printf '# SPDX-License-Identifier: Apache-2.0\n'; tr -d '\r' < "$WORK/rules.tsv"; } > "$Q/RULE_CHECKS.tsv"
@@ -168,8 +169,8 @@ printf 'stage\tstatus\tevidence\nrule_check\t%s\tchecks=%s fail=%s\nfill\tDONE\t
 	"$([ "$rulefail" -eq 0 ] && echo PASS || echo FAIL)" "$rulechecks" "$rulefail" "$filled" "$atoms" "$manual" "$filled" "$verdict" "$targets" "$probes" "$mism" \
 	"$([ "$caught" -eq "$ncs" ] && echo PASS || echo FAIL)" "$ncs" "$caught" "$junit" "$jtests" "$jfailed" > "$Q/STATUS.tsv"
 printf 'key\tvalue\nscaffold_rev\t%s\njava\t%s\nrun_mode\tapply\nshards\t1\n' "$SCAFFOLD_REV" "$("$BIN/java" -version 2>&1 | head -1 | tr -d '\r"')" > "$Q/RUN_CONTEXT.tsv"
-printf 'input\tsha256\nM3DecoratorFill.java\t%s\nM3DecoratorTemplates.java\t%s\nM3DecoratorJdkStandard.java\t%s\nM3DecoratorRuleCheck.java\t%s\nM3DecoratorDifferential.java\t%s\nM3PredicatedProbe.java\t%s\nNEGATIVE_CONTROLS_SPEC.tsv\t%s\ncommons-collections4-4.5.0.jar\t%s\nTARGETS.tsv\t%s\n' \
-	"$(sha "$Q/M3DecoratorFill.java")" "$(sha "${ATOMS[0]}")" "$(sha "${ATOMS[1]}")" "$(sha "${ATOMS[2]}")" "$(sha "$Q/M3DecoratorDifferential.java")" "$(sha "$Q/M3PredicatedProbe.java")" "$(sha "$Q/NEGATIVE_CONTROLS_SPEC.tsv")" \
+printf 'input\tsha256\nM3DecoratorFill.java\t%s\nM3DecoratorTemplates.java\t%s\nM3DecoratorJdkStandard.java\t%s\nM3DecoratorRuleCheck.java\t%s\nM3DecoratorPatterns.java\t%s\nM3DecoratorDifferential.java\t%s\nM3PredicatedProbe.java\t%s\nNEGATIVE_CONTROLS_SPEC.tsv\t%s\ncommons-collections4-4.5.0.jar\t%s\nTARGETS.tsv\t%s\n' \
+	"$(sha "$Q/M3DecoratorFill.java")" "$(sha "${ATOMS[0]}")" "$(sha "${ATOMS[1]}")" "$(sha "${ATOMS[2]}")" "$(sha "${ATOMS[3]}")" "$(sha "$Q/M3DecoratorDifferential.java")" "$(sha "$Q/M3PredicatedProbe.java")" "$(sha "$Q/NEGATIVE_CONTROLS_SPEC.tsv")" \
 	"$(sha "$JAR")" "$(sha "$Q/TARGETS.tsv")" > "$Q/PROVENANCE.tsv"
 printf 'order\tgate\tresult\n1\tdiff (git diff --check, run by the committer)\tEXTERNAL\n2\tlinter (javac -Xlint:all -Werror)\tPASS\n3\tcompile\tPASS\n4\ttests (M3DecoratorDifferential + probes + rule checks + negative controls)\t%s\n5\truntime\tNOT_REQUESTED\n' "$verdict" > "$Q/VERIFY_CONTRACT.tsv"
 printf '# Final report: decorator fill\n\n- Files changed: %s owned decorator classes and their README files (listed in OUTPUT_CONTRACT.tsv).\n- Delta: %s method atoms classified, %s left as MANUAL residue; scaffold bodies replaced only in classes with no MANUAL atom.\n- Verification: javac -Xlint:all -Werror passed; rule checks %s/%s pass; differential %s, %s targets, %s probe runs, %s mismatches; negative controls %s/%s caught.\n- Blockers: the %s MANUAL atoms in METHOD_ATOMS.tsv (next families in PATTERNS.tsv).\n' \
