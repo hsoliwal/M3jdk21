@@ -40,8 +40,14 @@ either maps onto a canonical owner or is absorbed later under a `jdk.m3.annotati
 3. **API:** each canonical owner has the donor's targets, retention, elements and meta-annotations. This is read back
    by the same ledger code.
 
-Result on 2026-10-31: ledger PASS, compile PASS, API PASS (4/4, 0 mismatches). Negative control: changing the
-retention of `Nullable` to CLASS makes the API check fail with exit 1 and names the mismatch.
+4. **JUnit:** with `JUNIT_CONSOLE` set to a junit-platform-console-standalone jar, it also runs
+   `tests/JdkM3AnnotationsTest`, one test per MAP_RULES atom. A CANONICAL atom's owner must equal the compiled donor
+   (targets, retention, elements and meta-annotations). A MAP atom's owner must be an annotation type that targets
+   type use or a type.
+
+Result on 2026-10-31: ledger PASS, compile PASS, API PASS (4/4, 0 mismatches), JUnit PASS (12/12). Negative control:
+changing the retention of `Nullable` to CLASS makes the API check fail with exit 1 and names the mismatch. Perf tests
+do not apply: annotation types have no runtime behaviour to time.
 
 ## Next leaves
 
