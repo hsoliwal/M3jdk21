@@ -3,13 +3,13 @@
   "donors": {
     "fastdoubleparser-1.0.90": {
       "coordinate": "ch.randelshofer:fastdoubleparser:1.0.90-m3-source-1",
-      "file_count": 66,
+      "file_count": 68,
       "license": "MIT License",
       "module": null,
       "path": "m3/vendor/third_party/fastdoubleparser-1.0.90",
-      "provenance_sha256": "707f4185483253240ac894b197a93d37a7e6e737cd199123d7c2dc0d5130d140",
+      "provenance_sha256": "cfee2e16d3aae17efbc32492a9ca8db63172454f01342c664d296abe72872d76",
       "sources_jar_sha256": "9ef19b07959b456930efdfd4c5690caeb9ac39b07a813e84557ca12957478ce4",
-      "tree_sha256": "81bc46f6b02d70f2649779c769a5afc88bc6112cc9813a574a822155713c4a81"
+      "tree_sha256": "d95b2302ce35265fc1c3d44522769592437c3218d28f51ea286fd07b5d9b3afb"
     },
     "jackson-annotations-2.19.2": {
       "coordinate": "com.fasterxml.jackson.core:jackson-annotations:2.19.2-m3-source-1",
@@ -76,10 +76,10 @@
       "sha256": "d28ab95812ea2b2024d18e037b42eaabd06ee041a74b86ce760c238d3155399d"
     }
   ],
-  "predecessor_path": "qualification/pr1289-integration-20261029/SOURCE_LOCK_PREDECESSOR.json",
-  "predecessor_sha256": "5b23e7ee19b6e8999790cfadb787b3e70a5565dfe09ed7a2cb175636a8a1f0fc",
+  "predecessor_path": "qualification/fdp-delegate/SOURCE_LOCK_PREDECESSOR.json",
+  "predecessor_sha256": "a1c253b045c0996c436f44f305a3aba77ad1272ff90e3e1f04799fe90d78e008",
   "schema": 1,
-  "target_base_revision": "649a735e23a79a4df46e6c61bfcd2fadf156d90d",
+  "target_base_revision": "52fb81c483c74448a12eecb63aa9465e42cdb82c",
   "target_repository": "https://github.com/hsoliwal/M3jdk21",
   "tree_digest_algorithm": "SHA-256 over UTF-8 POSIX relative path, NUL, lowercase file SHA-256, LF, sorted by relative path; excludes target, dependency-reduced-pom.xml, __pycache__, .DS_Store"
 }
