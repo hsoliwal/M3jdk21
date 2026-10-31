@@ -24,7 +24,7 @@ from pathlib import Path
 
 # ordered: the first matching rule rewrites a token; earlier rules are more specific
 TEXT_RULES = (
-    ("PKG_M3", re.compile(r"\bcom\.synexia\.m3\."), "jdk.internal.m3."),
+    ("PKG_M3", re.compile(r"\bcom\.synexia\.m3\b"), "jdk.internal.m3"),
     ("PKG", re.compile(r"\bcom\.synexia\.(?=[a-z])"), "jdk.internal.m3."),
     ("PKG_PATH_M3", re.compile(r"\bcom/synexia/m3/"), "jdk/internal/m3/"),
     ("PKG_PATH", re.compile(r"\bcom/synexia/(?=[a-z])"), "jdk/internal/m3/"),
@@ -42,7 +42,10 @@ PATH_RULES = (
     (re.compile(r"(^|[/_.-])synexia-"), r"\1m3-"),
     (re.compile(r"(^|[/_.-])synexia_"), r"\1m3_"),
 )
-KEEP_LINE = re.compile(r"Copyright|SPDX-|License|hsoliwal/com\.synexia|github\.com/hsoliwal")
+# dependencies are removed by the standalone work, never renamed (renaming would hide them from the check): links to
+# the Synexia repository, SYNEXIA_* secrets, and Maven groupIds (mapped in a later phase, not as Java packages)
+KEEP_LINE = re.compile(r"Copyright|SPDX-|License|hsoliwal/com\.synexia|github\.com/hsoliwal|secrets\.SYNEXIA_"
+                       r"|<groupId>\s*com\.synexia")
 TEXT_SUFFIXES = {".java", ".yml", ".yaml", ".xml", ".sh", ".py", ".mjs", ".js", ".properties", ".gradle", ".toml",
                  ".cfg", ".ini", ".c", ".h", ".cpp", ".json", ".txt"}
 DOC_SUFFIXES = {".md", ".tsv", ".rst", ".adoc", ".html", ".log", ".patch"}

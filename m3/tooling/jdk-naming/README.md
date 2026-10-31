@@ -19,7 +19,7 @@ another repository. #2185 and #2186 are closed as superseded.
 
 Some lines and files are left alone:
 - Copyright, SPDX and license lines.
-- Links to the Synexia repository. Those are dependencies, which the standalone check counts and the ABSORB, MOVE or RETIRE leaves remove; renaming would only hide them.
+- Links to the Synexia repository, `secrets.SYNEXIA_*` and Maven `<groupId>com.synexia...` lines. Those are dependencies, or Maven coordinates mapped in a later phase, which the standalone check counts and the ABSORB, MOVE or RETIRE leaves remove; renaming would only hide them.
 - Lineage: Markdown, TSV ledgers, provenance and evidence JSON, `evidence/` and `receipts/` folders, NOTICE/LICENSE, `m3/docs` and release audits.
 - A lineage path whose new name already exists stays where it is (KEEP_LINEAGE_PATH).
 
@@ -40,13 +40,13 @@ Some lines and files are left alone:
 
 | Rule | Tokens |
 |---:|---:|
-| KEBAB | 58,658 |
+| KEBAB | 58,657 |
 | PKG_PATH | 28,568 |
-| PKG | 13,479 |
-| PKG_M3 | 1,958 |
+| PKG | 12,826 |
+| PKG_M3 | 1,993 |
 | PKG_PATH_M3 | 809 |
 | SNAKE | 295 |
-| CONST | 183 |
+| CONST | 177 |
 | TYPE | 95 |
 | TYPE_M3 | 30 |
 

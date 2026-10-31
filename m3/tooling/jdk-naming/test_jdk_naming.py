@@ -67,6 +67,19 @@ class JdkNamingTest(unittest.TestCase):
         again = jn.plan(self.root)
         self.assertEqual((again["moves"], again["rewrites"]), ([], []))
 
+    def test_dependencies_and_group_ids_are_not_renamed(self):
+        self.put("m3/x/pom.xml", "<project><groupId>com.synexia.m3</groupId>\n"
+                 "<dependency><groupId>com.synexia.m3</groupId></dependency>\n</project>\n")
+        self.put(".github/workflows/w.yml", "token: ${{ secrets.SYNEXIA_READ_TOKEN }}\nenv: SYNEXIA_MODE\n")
+        self.put("m3/x/Use.java", "class Use { String p = \"com.synexia.m3\"; }\n")
+        jn.apply(self.root, jn.plan(self.root))
+        pom = (self.root / "m3/x/pom.xml").read_text(encoding="utf-8")
+        self.assertEqual(pom.count("<groupId>com.synexia.m3</groupId>"), 2)
+        workflow = (self.root / ".github/workflows/w.yml").read_text(encoding="utf-8")
+        self.assertIn("secrets.SYNEXIA_READ_TOKEN", workflow)
+        self.assertIn("env: M3_MODE", workflow)
+        self.assertIn('"jdk.internal.m3"', (self.root / "m3/x/Use.java").read_text(encoding="utf-8"))
+
     def test_collision_refuses_the_plan(self):
         self.put("m3/x/SynexiaBar.java", "class SynexiaBar {}\n")
         self.put("m3/x/M3Bar.java", "class M3Bar {}\n")
