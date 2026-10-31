@@ -1,0 +1,3 @@
+atom	recorded	before_best	after_best	vs_recorded	ref_drift	best_ratio	mean_ratio	paired_median	pairs	verdict_recorded	verdict_same_host
+Double.parseDouble (wiring)	32.36	43.46	42.03	1.299	1.122	0.967	0.972	0.988	32	NOT_COMPARABLE	PASS
+Float.parseFloat (wiring)	67.39	84.21	77.41	1.149	1.097	0.919	0.975	0.995	32	NOT_COMPARABLE	PASS

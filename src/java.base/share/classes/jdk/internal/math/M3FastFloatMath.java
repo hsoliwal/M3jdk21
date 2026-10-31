@@ -21,6 +21,12 @@ class M3FastFloatMath {
     private static final float NEGATIVE_ZERO = -0.0f;
     /** 2^64: corrects the signed conversion of an unsigned 64-bit significand. */
     private static final float TWO_POW_64 = 0x1p64f;
+    //FLLDCIM: M3 - HEX_ROUTE v1: every hex literal takes the original FloatingDecimal path (PATTERN_ROUTES.tsv HEX_*)
+    /**
+     * True: {@link #tryHexFloatToFloatTruncated} declines every hexadecimal literal, so the caller takes the original
+     * {@link FloatingDecimal} path, which rounds once (round and sticky bits) from an exact exponent.
+     */
+    private static final boolean HEX_LITERALS_TO_FLOATING_DECIMAL = true;
     /** Smallest power of ten of the exact float fast path. */
     private static final int FAST_PATH_MIN_POWER_OF_TEN = -10;
     /** Largest power of ten of the exact float fast path (10^10 is exact in a float). */
@@ -118,10 +124,18 @@ class M3FastFloatMath {
      * @param exponentOfTruncatedSignificand the exponent number of the truncated significand
      * @return the double value,
      * or {@link Double#NaN} if the fast path failed.
+     * In java.base this fast path declines every literal ({@code HEX_LITERALS_TO_FLOATING_DECIMAL}).
      */
     static float tryHexFloatToFloatTruncated(boolean isNegative, long significand, int exponent,
                                              boolean isSignificandTruncated,
                                              int exponentOfTruncatedSignificand) {
+        //FLLDCIM: M3 - HEX_ROUTE v1: decline (NaN), so results stay exactly the JDK's (PR #2215 contract). The donor body
+        // below rounds an unsigned significand >= 2^63 twice (signed cast, then + 2^64), ignores the digits a truncated
+        // significand dropped (no sticky bit), and gets an exponent the parser clamped at MAX_EXPONENT_NUMBER before it
+        // subtracted the fraction digits; tools/hex_defect_model.py
+        if (HEX_LITERALS_TO_FLOATING_DECIMAL) {
+            return Float.NaN;
+        }
         int power = isSignificandTruncated ? exponentOfTruncatedSignificand : exponent;
         if (FLOAT_MIN_EXPONENT_POWER_OF_TWO <= power && power <= FLOAT_MAX_EXPONENT_POWER_OF_TWO) {
             // Convert the significand into a float.

@@ -48,8 +48,45 @@ one per jackson-core version).
      a same-host perf A/B (`tools/perf_ab_high.ps1`, `tools/perf_gate.py`) agree.
    - Strings: no M3 interner is reachable from `jdk.internal.math`, so the 4 strings are compile-time constants, which
      the JVM interns. The gap is recorded in `RECIPE_MEMORY.tsv`.
+7. Hex literals (HEX_ROUTE v1, branch `m3/jdk-number-parse-hex-exact-20261031`; it must land with #2215). The
+   jackson-fdp leaf (#2233) found 1,309 hex literals in its 250,000-literal corpus that #2215 rounds differently from
+   stock JDK 21.0.9. Its own 600,000-literal differential held only `Double.toHexString` hex literals, at most 14 digits.
+   - Atomize: `HEX_ATOMS.tsv` (`tools/hex_atoms.py`) binds the 20 atoms of the hex path to line ranges and hashes.
+   - Root cause: `tools/hex_defect_model.py` replays the donor's hex path in exact integer arithmetic. It reproduces
+     7,854 of 7,854 differing results, and among the corpus's 45,555 hex literals it predicts exactly the 1,309 that
+     differ. Three independent defects (line numbers of the pre-image):
+     - Double rounding, `M3FastDoubleMath:1000` and `M3FastFloatMath:131`: `(double) significand + (significand < 0 ?
+       2^64 : 0)` rounds an unsigned significand >= 2^63 twice (1,303 of the 1,309). In `0x8Db1Ffd473B83a5fp196` the
+       signed cast leaves `0x8db1ffd473b83c00`, a false halfway point, so the double ends in ...708 instead of ...707.
+     - No sticky bit, `parseHexFloatLiteral` lines 420-436: digits beyond the 16 the re-parse keeps are dropped
+       without a trace (6 of the 1,309).
+     - Exponent clamp, `parseHexFloatLiteral` lines 371 and 386-397: the exponent number stops at 1024 before the
+       fraction digits are subtracted, so `0x.1p10240` gives 2^1020 instead of Infinity. That corpus cannot reach it.
+   - Fix, in-file: both hex kernels decline every literal (`HEX_LITERALS_TO_FLOATING_DECIMAL`), so `valueOfHexLiteral`
+     takes the original `FloatingDecimal` path. Every hex literal goes there, not only the inexact ones, because the
+     kernel cannot see the clamp: declining only inexact literals would also need the two parser templates changed.
+     Hex literals are rare, and the JDK rounds them correctly. javac drops the donor code behind the constant, so each
+     kernel compiles to `return NaN`.
+   - Gates (`GATES.tsv`, rows `hex_*`):
+     - JUnit `M3NumberParseHexAtomsTest`, one test per hex atom: 10/10. On the pre-image 8 fail, for example 1,213 of
+       the 1,213 affected doubles.
+     - `M3NumberParseAtomsTest` 11/11, and `M3ParseDifferential` keeps its sha256.
+     - The hex differential (`gate/M3HexParseDifferential.java`, 400,000 inputs) is identical to stock; the pre-image
+       differs on 48,350 lines.
+     - `tools/bytecode_method_delta.py`: only the two kernels changed; the decimal path is instruction-identical.
+     - Perf: the decimal paths keep their speed (paired median 0.988 / 0.995, host about 80% busy). Hex literals now
+       take about 1.25x stock's time on `toHexString` literals and 1.3x to 1.45x on the mixed hex corpus (`PERF.tsv`),
+       because the M3 scan runs before the kernel declines.
+   - Patterns: `PATTERN_ROUTES.tsv` (NUMBER-PARSE-PATTERN v1.1 routes, each with its RESIDUE).
+   - Open: the decimal grammar has the same clamp (`DEC_EXPONENT_CLAMP`): `"0." + 723 zeros + "1e10240"` gives 1e300
+     instead of Infinity. This leaf leaves the decimal path byte-identical, so #2215 needs that fix before landing.
 
 Next:
+- Fix `DEC_EXPONENT_CLAMP` (decline when the exponent number was clamped, or saturate after the fraction adjustment),
+  with a decimal clamp differential.
+- Bring exact hex literals back to M3 (`HEX_EXACT_M3`: an exact exponent from the parser, a sticky shift for
+  significands >= 2^63, a sticky flag for dropped digits). The pre-image's 53.6 ns against stock's 285 ns on
+  `toHexString` literals is the upside.
 - Point jackson-core's fast path at the JDK (`Double.parseDouble`) by recipe, then drop the three vendored
   FastDoubleParser copies.
 - A LATIN1 byte path straight over String's bytes. Only the JDK can do this; a library cannot.
