@@ -591,8 +591,10 @@ public abstract class M3LongTupleHashFunction implements Serializable {
     private static final M3Access<CharSequence> CHAR_SEQ_ACCESS = nativeCharSequenceAccess();
     private static final M3Access<ByteBuffer> BYTE_BUF_ACCESS = M3ByteBufferAccess.INSTANCE;
 
+    //FLLDCIM: HPCPOP - FACADE_ENTRY_CHECK v1: every byte[] reaches the kernels here; checked before the unchecked short-name reads
     private static void unsafeHash(final M3LongTupleHashFunction f, final byte[] input,
                                    final long off, final long len, final long[] result) {
+        java.util.Objects.checkFromIndexSize(off, len, input.length);
         f.hash(input, OBJECT_ACCESS, off, len, result);
     }
 

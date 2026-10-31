@@ -1,11 +1,12 @@
 # SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
-"""mutation_gate.py <java bin dir> <absorbed src dir> <test classes dir> <junit classpath> <oracle classes> <work dir>
+"""mutation_gate.py <java bin dir> <absorbed src dir> <test classes dirs> <junit classpath> <oracle classes> <work dir>
 
 Discriminator gate of the zero-allocation-hashing absorption: each mutant is a plausible wrong java.base form (a
-recipe slip). It is compiled into its own patch of java.base and M3HashAtomsTest runs against it; the gate passes
-only when every mutant fails the test (KILLED). Prints and writes <work dir>/MUTANTS.tsv: mutant, file, result,
-failing tests."""
+recipe slip). It is compiled into its own patch of java.base and the tests run against it (<test classes dirs>: one
+or more comma-separated class roots, each run on its own: M3HashAtomsTest, and M3HashJitAtomsTest for the JIT
+leaf's mutants); the gate passes only when every mutant fails a test (KILLED). Prints and writes
+<work dir>/MUTANTS.tsv: mutant, file, result, failing tests (Class.method beyond M3HashAtomsTest)."""
 import os
 import re
 import shutil
@@ -29,7 +30,34 @@ MUTANTS = [
      "public long hashChars(String input) {\n        return hashBytes(input.getBytes(java.nio.charset.StandardCharsets.ISO_8859_1));"),
     ("MATHS_SIGNED_HIGH", "M3Maths.java", "return INSTANCE.unsignedLongMulHighImp(lhs, rhs);",
      "return Math.multiplyHigh(lhs, rhs);"),
+    # the JIT leaf: XXH3_SPLIT v1, UNSAFE_TO_BYTE_ARRAY v2, FACADE_ENTRY_CHECK v1
+    ("XXH3_DISPATCH_EDGE", "M3XXH3.java", "        if (length <= 128) {\n            return XXH3_len_17to128_64b(",
+     "        if (length < 128) {\n            return XXH3_len_17to128_64b("),
+    ("XXH3_ATOM_SWAP", "M3XXH3.java", "        if (length > 8) {\n            return XXH3_len_9to16_128b(",
+     "        if (length > 8) {\n            return XXH3_len_4to8_128b("),
+    ("XXH3_MERGE_OFFSET", "M3XXH3.java", "+ XXH3_mix2Accs(acc_4, acc_5, secret, offSec + 16 * 2)",
+     "+ XXH3_mix2Accs(acc_4, acc_5, secret, offSec + 16 * 2 + 1)"),
+    ("XXH3_HASHLONG_HIGH_START", "M3XXH3.java", "secret, BYTE_BASE + 192 - 64 - 11, ~(length * XXH_PRIME64_2)",
+     "secret, BYTE_BASE + 192 - 64 - 11, length * XXH_PRIME64_2"),
+    ("READ_ATOM_BIG_ENDIAN", "M3ByteArrayAccess.java", "return UNSAFE.getLongUnaligned(input, address(offset), false);",
+     "return UNSAFE.getLongUnaligned(input, address(offset), true);"),
+    ("READ_ATOM_ADDRESS", "M3ByteArrayAccess.java", "return Unsafe.ARRAY_BYTE_BASE_OFFSET + offset;",
+     "return Unsafe.ARRAY_BYTE_BASE_OFFSET + offset + 1;"),
+    ("REVERSE_SHORT_NAME_SIGNED", "M3Access.java",
+     "        public long u32(final T input, final long offset) {\n            return getUnsignedInt(input, offset);",
+     "        public long u32(final T input, final long offset) {\n            return getInt(input, offset);"),
+    ("BUFFER_SHORT_NAME_SWAPPED", "M3ByteBufferAccess.java",
+     "    public long i64(final ByteBuffer input, final long offset) {\n        return getLong(input, offset);",
+     "    public long i64(final ByteBuffer input, final long offset) {\n        return Long.reverseBytes(getLong(input, offset));"),
+    ("ENTRY_CHECK_DROPPED", "M3LongHashFunction.java",
+     "        java.util.Objects.checkFromIndexSize(off, len, input.length);\n        return hash(input,",
+     "        return hash(input,"),
+    ("TUPLE_ENTRY_CHECK_DROPPED", "M3LongTupleHashFunction.java",
+     "        java.util.Objects.checkFromIndexSize(off, len, input.length);\n        f.hash(input, OBJECT_ACCESS,",
+     "        f.hash(input, OBJECT_ACCESS,"),
 ]
+FAILED = re.compile(r"(M3Hash\w*Test):(\w+)\(\)")
+BASE_TEST = "M3HashAtomsTest"
 
 
 def run(cmd):
@@ -37,7 +65,7 @@ def run(cmd):
 
 
 def main():
-    jbin, src, testc, junit, oracle, work = sys.argv[1:7]
+    jbin, src, roots, junit, oracle, work = sys.argv[1:7]
     javac, java = os.path.join(jbin, "javac"), os.path.join(jbin, "java")
     rows = []
     for name, f, old, new in MUTANTS:
@@ -55,16 +83,19 @@ def main():
         if c.returncode:
             rows.append((name, f, "COMPILE_ERROR", c.stderr.strip().splitlines()[0]))
             continue
-        t = run([java, "-Xmx1g", "--patch-module", "java.base=" + patch,
-                 "--add-opens", "java.base/jdk.internal.m3.hash=ALL-UNNAMED",
-                 "--add-exports", "java.base/sun.nio.ch=ALL-UNNAMED", "-Dm3.hash.oracle=" + oracle,
-                 "-cp", os.pathsep.join([testc, junit]), "M3GateJUnitRun", testc])
-        failed = sorted(set(re.findall(r"M3HashAtomsTest:(\w+)\(\)", t.stdout)))
-        rows.append((name, f, "KILLED" if t.returncode else "SURVIVED", ",".join(failed)))
+        killed, failed = False, set()
+        for testc in roots.split(","):
+            t = run([java, "-Xmx1g", "-XX:ErrorFile=" + os.path.join(root, "hs_err_%p.log"),
+                     "--patch-module", "java.base=" + patch,
+                     "--add-opens", "java.base/jdk.internal.m3.hash=ALL-UNNAMED",
+                     "--add-exports", "java.base/sun.nio.ch=ALL-UNNAMED", "-Dm3.hash.oracle=" + oracle,
+                     "-cp", os.pathsep.join([testc, junit]), "M3GateJUnitRun", testc])
+            killed |= t.returncode != 0
+            failed |= {m if c == BASE_TEST else c + "." + m for c, m in FAILED.findall(t.stdout)}
+        rows.append((name, f, "KILLED" if killed else "SURVIVED", ",".join(sorted(failed))))
+        print(TAB.join(rows[-1]), flush=True)
     with open(os.path.join(work, "MUTANTS.tsv"), "w", encoding="utf-8", newline=NL) as w:
         w.write("mutant\tfile\tresult\tfailing_tests\n" + "".join(TAB.join(r) + NL for r in rows))
-    for r in rows:
-        print(TAB.join(r))
     survived = [r[0] for r in rows if r[2] != "KILLED"]
     print(f"mutants={len(rows)} killed={len(rows) - len(survived)}")
     sys.exit(1 if survived else 0)

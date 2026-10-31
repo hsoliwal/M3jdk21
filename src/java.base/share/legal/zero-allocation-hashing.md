@@ -23,7 +23,7 @@ file says so above its package line.
 - Package net.openhft.hashing -> jdk.internal.m3.hash and type T -> M3T (UnsafeAccess -> M3ByteArrayAccess,
   MathsJDK9 -> M3MathsJDK9); the JetBrains and JSR-305 annotations are removed.
 - No sun.misc.Unsafe: UnsafeAccess became the byte[] access over jdk.internal.util.ByteArrayLittleEndian
-  (little-endian, bounds-checked reads, index base 0). Direct and read-only ByteBuffers are read through
+  (little-endian, bounds-checked reads, index base 0; the kernels' short-name reads: see the JIT item below). Direct and read-only ByteBuffers are read through
   ByteBufferAccess. Access.unsafe() and the LongHashFunction / LongTupleHashFunction methods that read raw memory
   (hashMemory, hashBoolean, hashBooleans, hashChars(char[]), hashShorts, hashInts, hashLongs) are not included.
 - hashChars(String) hashes the native-order chars through CharSequenceAccess (the donor's UnknownJvmStringHash path).
@@ -32,6 +32,14 @@ file says so above its package line.
   not included. The hash values do not change.
 - For javac -Xlint:all -Werror: @SuppressWarnings("fallthrough") on the MurmurHash3 tail switch, and a redundant
   (byte) cast in XXH3 is removed.
+- For the JIT: XXH3's 64- and 128-bit functions are split along the input-length classes of the xxHash reference
+  into private methods of the same class (XXH3_len_0to16, 1to3, 4to8, 9to16, 17to128 and 129to240 for each width,
+  and one XXH3_hashLong with XXH3_mergeAccs for both, the 64-bit long-input hash being the low half of the 128-bit
+  one); the statements are moved, not changed. The short-name reads the kernels use (i64, u32, i32, u16, i16) of the
+  byte[] access read through jdk.internal.misc.Unsafe without a check of their own; its getters keep the
+  bounds-checked ByteArrayLittleEndian reads, and the private byte[] entry of LongHashFunction and
+  LongTupleHashFunction, which every public byte[] and heap ByteBuffer method reaches after its own range check,
+  checks the range again with Objects.checkFromIndexSize. The hash values do not change.
 
 Nothing else was changed. Comments and documentation are the donor's and still name the donor API. The published
 sources jar carries no NOTICE file.

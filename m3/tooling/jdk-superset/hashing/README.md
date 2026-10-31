@@ -32,7 +32,10 @@ absorptions, unchanged) with `ABSORB_PKGS=net.openhft.hashing=jdk.internal.m3.ha
 
 | Rule family | What it does |
 |---|---|
-| UNSAFE_TO_BYTE_ARRAY v1 | UnsafeAccess becomes the byte[] access over `jdk.internal.util.ByteArrayLittleEndian` (little-endian, bounds-checked, index base 0); no sun.misc.Unsafe, no reflection, no pre-Nougat Android fallbacks |
+| UNSAFE_TO_BYTE_ARRAY v2 | UnsafeAccess becomes the byte[] access (little-endian, index base 0); no sun.misc.Unsafe, no reflection, no pre-Nougat Android fallbacks. Its getters read through `jdk.internal.util.ByteArrayLittleEndian`, bounds-checked (v1); v2 (the JIT leaf): the short names the kernels call (i64, u32, i32, u16, i16) read through `jdk.internal.misc.Unsafe` getLongUnaligned/getIntUnaligned/getShortUnaligned with no check of their own |
+| XXH3_SPLIT v1 | XXH3's input-length classes become private static atoms of M3XXH3 (the xxHash reference functions: XXH3_len_0to16, 1to3, 4to8, 9to16, 17to128, 129to240, 64 and 128 bit); one XXH3_hashLong (with XXH3_mergeAccs) for both widths; statements moved, never rewritten |
+| ACCESS_SHORT_NAMES v1 | the ByteBuffer, CharSequence and reverse accesses carry the M3Access short-name defaults verbatim, so a kernel's read site dispatches once |
+| FACADE_ENTRY_CHECK v1 | the private byte[] entry of both facades (`unsafeHash`) checks `[off, off + len)` with `Objects.checkFromIndexSize` before the unchecked reads |
 | FACADE_DROP_RAW_MEMORY v1 | the facade methods that read raw memory are not kept; byte[] goes through the byte[] access, direct and read-only ByteBuffers through ByteBufferAccess |
 | ACCESS_DROP_UNSAFE v1 | `Access.unsafe()` is not kept |
 | STRING_INTERNALS_TO_CHARSEQ v1 | `hashChars(String)` takes the donor's JVM-independent path (native-order chars through CharSequenceAccess); same hash values |
@@ -63,11 +66,18 @@ java.base patched; results in `GATES.tsv`:
 - `test/jdk/jdk/internal/m3/hash/M3HashAtomsTest.java`: 16/16, one test per atom, 2,698,154 comparisons against
   the vendored library (compiled unchanged by `M3HashOracle`) for every length 0..1100, fixed and random seeds and
   every kept input form;
+- `test/jdk/jdk/internal/m3/hash/M3HashJitAtomsTest.java` (the JIT leaf): 19/19, one test per atom it adds or
+  changes, and the bounds proof of every kernel (below);
 - `tools/api_surface.py`: kept 95, dropped 37, added 0;
-- `tools/mutation_gate.py`: 6/6 recipe-slip mutants killed;
+- `tools/mutation_gate.py`: 16/16 recipe-slip mutants killed (6 of the absorption, 10 of the JIT leaf);
 - `test/jdk/jdk/internal/m3/hash/M3HashAtomsPerf.java`: one row per atom, `PERF.tsv`.
 
-## Performance: what the byte[] access costs (decision needed)
+`tools/jit_gate.sh <repo> <out dir> <variant> <patch classes> <perf classes> <oracle classes>` is the JIT stage (one
+JVM per path, PrintCompilation/PrintInlining and LogCompilation logs, `JIT.tsv`, `READ_COST.tsv`, `PERF.tsv` rows).
+
+## Performance: what the byte[] access costs (decided in the JIT leaf below)
+
+The record of the absorption (PR #2232), kept as it was measured; the JIT leaf below took the decision.
 
 `PERF.tsv` (speedup = vendored / absorbed): byte[] hashing 0.66-0.99x of the vendored library, XXH3 128-bit
 0.24-0.30x. C2 leaves 30 access calls in `M3XXH3.XXH3_128bits_internal` out of line (`size > DesiredMethodLimit`):
@@ -86,9 +96,11 @@ internals and raw addresses are gone (as asked); see the next leaves.
 
 ## Next leaves
 
-1. The byte[] access decision above.
+1. The byte[] access decision above: taken in the JIT leaf (below).
 2. Strings: read `String.value`/`coder` inside java.base without Unsafe (LATIN1 through a Latin-1-as-UTF-16 access,
-   UTF16 as bytes, as the donor's ModernCompactStringHash does).
-3. Direct ByteBuffers: an address-based access over ScopedMemoryAccess.
+   UTF16 as bytes, as the donor's ModernCompactStringHash does). The JIT leaf measured why (below); it needs new code
+   outside these files (a String-backed access class, or a JavaLangAccess accessor).
+3. Direct ByteBuffers: an address-based access over ScopedMemoryAccess (a new access class), and then the split of
+   XXH3_hashLong's last stripe and merges, which the ByteBuffer path still cuts off (NodeCountInliningCutoff).
 4. The public `jdk.m3.hash` API (capability catalogue family "hashing": JDK_SUPERSET_API).
 5. Consumers (guava, commons-codec, lz4-java hashing) onto the JDK implementation; then the vendored copy goes.

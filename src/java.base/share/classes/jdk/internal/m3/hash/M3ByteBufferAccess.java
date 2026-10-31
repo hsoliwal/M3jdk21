@@ -29,6 +29,48 @@ public final class M3ByteBufferAccess extends M3Access<ByteBuffer> {
 
     private M3ByteBufferAccess() {}
 
+    //FLLDCIM: HPCPOP - ACCESS_SHORT_NAMES v1: i64 dispatches once, to this class's own getter
+    @Override
+    public long i64(final ByteBuffer input, final long offset) {
+        return getLong(input, offset);
+    }
+
+    //FLLDCIM: HPCPOP - ACCESS_SHORT_NAMES v1: u32 dispatches once, to this class's own getter
+    @Override
+    public long u32(final ByteBuffer input, final long offset) {
+        return getUnsignedInt(input, offset);
+    }
+
+    //FLLDCIM: HPCPOP - ACCESS_SHORT_NAMES v1: i32 dispatches once, to this class's own getter
+    @Override
+    public int i32(final ByteBuffer input, final long offset) {
+        return getInt(input, offset);
+    }
+
+    //FLLDCIM: HPCPOP - ACCESS_SHORT_NAMES v1: u16 dispatches once, to this class's own getter
+    @Override
+    public int u16(final ByteBuffer input, final long offset) {
+        return getUnsignedShort(input, offset);
+    }
+
+    //FLLDCIM: HPCPOP - ACCESS_SHORT_NAMES v1: i16 dispatches once, to this class's own getter
+    @Override
+    public int i16(final ByteBuffer input, final long offset) {
+        return getShort(input, offset);
+    }
+
+    //FLLDCIM: HPCPOP - ACCESS_SHORT_NAMES v1: u8 dispatches once, to this class's own getter
+    @Override
+    public int u8(final ByteBuffer input, final long offset) {
+        return getUnsignedByte(input, offset);
+    }
+
+    //FLLDCIM: HPCPOP - ACCESS_SHORT_NAMES v1: i8 dispatches once, to this class's own getter
+    @Override
+    public int i8(final ByteBuffer input, final long offset) {
+        return getByte(input, offset);
+    }
+
     @Override
     public long getLong(ByteBuffer input, long offset) {
         return input.getLong((int) offset);

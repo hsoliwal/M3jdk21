@@ -5,22 +5,23 @@ LongTupleHashFunction.java	STRIP_JSR305 v1	jsr305-import	1	1
 LongTupleHashFunction.java	STRIP_JSR305 v1	jsr305-annotation	1	1
 MurmurHash_3.java	STRIP_JSR305 v1	jsr305-import	1	1
 MurmurHash_3.java	STRIP_JSR305 v1	jsr305-annotation	1	1
-UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v1	U1-drop-reflect-import	1	1
-UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v1	U2-unsafe-import-to-byte-array-le	1	1
-UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v1	U3-object-to-byte-array-type	3	3
-UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v1	U4-drop-old-android-instance	1	1
-UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v1	U5-drop-unsafe-field	1	1
-UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v1	U6-drop-other-array-bases	5	5
-UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v1	U7-byte-base-is-index-zero	1	1
-UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v1	U8-drop-boolean-byte-values	1	1
-UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v1	U9-drop-unsafe-probe-init	1	1
-UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v1	U10-plain-instance	1	1
-UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v1	U11-object-to-byte-array-input	7	7
-UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v1	U12-object-to-byte-array-order	1	1
-UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v1	U13-unsafe-get-to-byte-array-le	3	3
-UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v1	U14-unsafe-get-byte-to-index	1	1
-UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v1	U15-order-little-endian	1	1
-UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v1	U16-drop-old-android-classes	1	1
+UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v2	U1-drop-reflect-import	1	1
+UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v2	U2-unsafe-import-to-internal-unsafe-and-byte-array-le	1	1
+UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v2	U3-object-to-byte-array-type	3	3
+UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v2	U4-drop-old-android-instance	1	1
+UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v2	U5-internal-unsafe-field	1	1
+UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v2	U6-drop-other-array-bases	5	5
+UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v2	U7-byte-base-is-index-zero	1	1
+UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v2	U8-drop-boolean-byte-values	1	1
+UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v2	U9-drop-unsafe-probe-init	1	1
+UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v2	U10-plain-instance	1	1
+UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v2	U11-object-to-byte-array-input	7	7
+UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v2	U12-object-to-byte-array-order	1	1
+UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v2	U13-unsafe-get-to-byte-array-le	3	3
+UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v2	U14-unsafe-get-byte-to-index	1	1
+UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v2	U15-order-little-endian	1	1
+UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v2	U16-drop-old-android-classes	1	1
+UnsafeAccess.java	UNSAFE_TO_BYTE_ARRAY v2	U17-unchecked-short-name-reads	1	1
 LongHashFunction.java	FACADE_DROP_RAW_MEMORY v1	direct-buffer-import	1	1
 LongHashFunction.java	FACADE_DROP_RAW_MEMORY v1	byte-array-unsafe-hash	1	1
 LongHashFunction.java	FACADE_DROP_RAW_MEMORY v1	direct-buffer-through-buffer-access	1	1
@@ -34,6 +35,17 @@ Util.java	UTIL_DROP_JVM_PROBES v1	direct-buffer-import	1	1
 XXH3.java	XXH3_SECRET_ACCESS v1	secret-byte-array-access	1	1
 MurmurHash_3.java	LINT_CLEAN v1	fallthrough-tail-switch	1	1
 XXH3.java	LINT_CLEAN v1	redundant-byte-cast	1	1
+XXH3.java	XXH3_SPLIT v1	merge-low-through-mergeAccs	1	1
+XXH3.java	XXH3_SPLIT v1	merge-high-through-mergeAccs	1	1
+XXH3.java	XXH3_SPLIT v1	anchor-XXH3_64bits_internal	1	1
+XXH3.java	XXH3_SPLIT v1	anchor-XXH3_128bits_internal	1	1
+Access.java	ACCESS_SHORT_NAMES v1	reverse-access-short-names	1	1
+ByteBufferAccess.java	ACCESS_SHORT_NAMES v1	byte-buffer-access-short-names	1	1
+CharSequenceAccess.java	ACCESS_SHORT_NAMES v1	char-sequence-access-short-names	1	1
+LongHashFunction.java	FACADE_ENTRY_CHECK v1	anchor-unsafeHash	1	1
+LongHashFunction.java	FACADE_ENTRY_CHECK v1	check-unsafeHash	1	1
+LongTupleHashFunction.java	FACADE_ENTRY_CHECK v1	anchor-unsafeHash	1	1
+LongTupleHashFunction.java	FACADE_ENTRY_CHECK v1	check-unsafeHash	1	1
 Access.java	CHANGE_NOTICE v1	notice-above-package	1	1
 ByteBufferAccess.java	CHANGE_NOTICE v1	notice-above-package	1	1
 CharSequenceAccess.java	CHANGE_NOTICE v1	notice-above-package	1	1
@@ -92,3 +104,17 @@ Util.java	UTIL_DROP_JVM_PROBES v1	drop static private boolean isJ9VM(@NotNull fi
 Util.java	UTIL_DROP_JVM_PROBES v1	drop static final StringHash VALID_STRING_HASH;	1	1
 Util.java	UTIL_DROP_JVM_PROBES v1	drop static	1	1
 Util.java	UTIL_DROP_JVM_PROBES v1	drop static long getDirectBufferAddress(@NotNull final ByteBuffer buff)	1	1
+XXH3.java	XXH3_SPLIT v1	atom XXH3_len_9to16_64b	1	1
+XXH3.java	XXH3_SPLIT v1	atom XXH3_len_4to8_64b	1	1
+XXH3.java	XXH3_SPLIT v1	atom XXH3_len_1to3_64b	1	1
+XXH3.java	XXH3_SPLIT v1	atom XXH3_len_0to16_64b	1	1
+XXH3.java	XXH3_SPLIT v1	atom XXH3_len_17to128_64b	1	1
+XXH3.java	XXH3_SPLIT v1	atom XXH3_len_129to240_64b	1	1
+XXH3.java	XXH3_SPLIT v1	atom XXH3_len_9to16_128b	1	1
+XXH3.java	XXH3_SPLIT v1	atom XXH3_len_4to8_128b	1	1
+XXH3.java	XXH3_SPLIT v1	atom XXH3_len_1to3_128b	1	1
+XXH3.java	XXH3_SPLIT v1	atom XXH3_len_0to16_128b	1	1
+XXH3.java	XXH3_SPLIT v1	atom XXH3_len_17to128_128b	1	1
+XXH3.java	XXH3_SPLIT v1	atom XXH3_len_129to240_128b	1	1
+XXH3.java	XXH3_SPLIT v1	tail XXH3_hashLong_64b_internal	1	1
+XXH3.java	XXH3_SPLIT v1	tail XXH3_hashLong_128b_internal	1	1

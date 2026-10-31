@@ -1,0 +1,913 @@
+variant	class	method	descriptor	flags	bytecode_bytes	javap_last_offset	source_file	start_line	end_line	source_lines	atom_id	gt_MaxInlineSize_35	gt_FreqInlineSize_325	gt_HugeMethodLimit_8000
+before	M3Access	toByteBuffer	()Ljdk/internal/m3/hash/M3Access;	static	4	3	M3Access.java	72	74	3	jdk/internal/m3/hash/M3Access.java@3426-3527	no	no	no
+before	M3Access	toNativeCharSequence	()Ljdk/internal/m3/hash/M3Access;	static	4	3	M3Access.java	93	96	4	jdk/internal/m3/hash/M3Access.java@4403-4597	no	no	no
+before	M3Access	toCharSequence	(Ljava/nio/ByteOrder;)Ljdk/internal/m3/hash/M3Access;	static	5	4	M3Access.java	116	119	4	jdk/internal/m3/hash/M3Access.java@5429-5645	no	no	no
+before	M3Access	<init>	()V	-	5	4	M3Access.java	124	124	1	jdk/internal/m3/hash/M3Access.java@5709-5732	no	no	no
+before	M3Access	getLong	(Ljava/lang/Object;J)J	-	53	52	M3Access.java	136	142	7	jdk/internal/m3/hash/M3Access.java@6180-6495	yes	no	no
+before	M3Access	getUnsignedInt	(Ljava/lang/Object;J)J	-	12	11	M3Access.java	154	156	3	jdk/internal/m3/hash/M3Access.java@6907-7024	no	no	no
+before	M3Access	getInt	(Ljava/lang/Object;J)I	-	53	52	M3Access.java	168	174	7	jdk/internal/m3/hash/M3Access.java@7470-7791	yes	no	no
+before	M3Access	getUnsignedShort	(Ljava/lang/Object;J)I	-	49	48	M3Access.java	186	192	7	jdk/internal/m3/hash/M3Access.java@8201-8526	yes	no	no
+before	M3Access	getShort	(Ljava/lang/Object;J)I	-	8	7	M3Access.java	204	206	3	jdk/internal/m3/hash/M3Access.java@9031-9142	no	no	no
+before	M3Access	getUnsignedByte	(Ljava/lang/Object;J)I	-	11	10	M3Access.java	216	218	3	jdk/internal/m3/hash/M3Access.java@9497-9599	no	no	no
+before	M3Access	i64	(Ljava/lang/Object;J)J	-	7	6	M3Access.java	232	232	1	jdk/internal/m3/hash/M3Access.java@10086-10170	no	no	no
+before	M3Access	u32	(Ljava/lang/Object;J)J	-	7	6	M3Access.java	233	233	1	jdk/internal/m3/hash/M3Access.java@10175-10266	no	no	no
+before	M3Access	i32	(Ljava/lang/Object;J)I	-	7	6	M3Access.java	234	234	1	jdk/internal/m3/hash/M3Access.java@10271-10354	no	no	no
+before	M3Access	u16	(Ljava/lang/Object;J)I	-	7	6	M3Access.java	235	235	1	jdk/internal/m3/hash/M3Access.java@10359-10452	no	no	no
+before	M3Access	i16	(Ljava/lang/Object;J)I	-	7	6	M3Access.java	236	236	1	jdk/internal/m3/hash/M3Access.java@10457-10542	no	no	no
+before	M3Access	u8	(Ljava/lang/Object;J)I	-	7	6	M3Access.java	237	237	1	jdk/internal/m3/hash/M3Access.java@10547-10639	no	no	no
+before	M3Access	i8	(Ljava/lang/Object;J)I	-	7	6	M3Access.java	238	238	1	jdk/internal/m3/hash/M3Access.java@10644-10728	no	no	no
+before	M3Access	byteOrder	(Ljava/lang/Object;Ljava/nio/ByteOrder;)Ljdk/internal/m3/hash/M3Access;	-	18	-1	M3Access.java	258	260	3	jdk/internal/m3/hash/M3Access.java@11441-11590	no	no	no
+before	M3Access	newDefaultReverseAccess	(Ljdk/internal/m3/hash/M3Access;)Ljdk/internal/m3/hash/M3Access;	static	23	22	M3Access.java	271	275	5	jdk/internal/m3/hash/M3Access.java@11892-12106	no	no	no
+before	M3Access$ReverseAccess	<init>	(Ljdk/internal/m3/hash/M3Access;)V	private	10	9	M3Access.java	282	284	3	jdk/internal/m3/hash/M3Access.java@12301-12394	no	no	no
+before	M3Access$ReverseAccess	getLong	(Ljava/lang/Object;J)J	-	13	12	M3Access.java	285	288	4	jdk/internal/m3/hash/M3Access.java@12403-12555	no	no	no
+before	M3Access$ReverseAccess	getUnsignedInt	(Ljava/lang/Object;J)J	-	16	15	M3Access.java	289	292	4	jdk/internal/m3/hash/M3Access.java@12564-12737	no	no	no
+before	M3Access$ReverseAccess	getInt	(Ljava/lang/Object;J)I	-	13	12	M3Access.java	293	296	4	jdk/internal/m3/hash/M3Access.java@12746-12898	no	no	no
+before	M3Access$ReverseAccess	getUnsignedShort	(Ljava/lang/Object;J)I	-	16	15	M3Access.java	297	300	4	jdk/internal/m3/hash/M3Access.java@12907-13086	no	no	no
+before	M3Access$ReverseAccess	getShort	(Ljava/lang/Object;J)I	-	16	15	M3Access.java	301	304	4	jdk/internal/m3/hash/M3Access.java@13095-13257	no	no	no
+before	M3Access$ReverseAccess	getUnsignedByte	(Ljava/lang/Object;J)I	-	10	9	M3Access.java	305	308	4	jdk/internal/m3/hash/M3Access.java@13266-13414	no	no	no
+before	M3Access$ReverseAccess	getByte	(Ljava/lang/Object;J)I	-	10	9	M3Access.java	309	312	4	jdk/internal/m3/hash/M3Access.java@13423-13555	no	no	no
+before	M3Access$ReverseAccess	byteOrder	(Ljava/lang/Object;)Ljava/nio/ByteOrder;	-	24	23	M3Access.java	313	316	4	jdk/internal/m3/hash/M3Access.java@13564-13725	no	no	no
+before	M3Access$ReverseAccess	reverseAccess	()Ljdk/internal/m3/hash/M3Access;	-	5	4	M3Access.java	317	320	4	jdk/internal/m3/hash/M3Access.java@13734-13828	no	no	no
+before	M3ByteArrayAccess	byteOrder	(Ljava/lang/Object;)Ljava/nio/ByteOrder;	bridge|synthetic	9	8	M3ByteArrayAccess.java	28	28	1		no	no	no
+before	M3ByteArrayAccess	getByte	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteArrayAccess.java	28	28	1		no	no	no
+before	M3ByteArrayAccess	getInt	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteArrayAccess.java	28	28	1		no	no	no
+before	M3ByteArrayAccess	getLong	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3ByteArrayAccess.java	28	28	1		no	no	no
+before	M3ByteArrayAccess	getShort	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteArrayAccess.java	28	28	1		no	no	no
+before	M3ByteArrayAccess	getUnsignedByte	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteArrayAccess.java	28	28	1		no	no	no
+before	M3ByteArrayAccess	getUnsignedInt	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3ByteArrayAccess.java	28	28	1		no	no	no
+before	M3ByteArrayAccess	getUnsignedShort	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteArrayAccess.java	28	28	1		no	no	no
+before	M3ByteArrayAccess	<clinit>	()V	static	20	19	M3ByteArrayAccess.java	35	37	3		no	no	no
+before	M3ByteArrayAccess	<init>	()V	private	5	4	M3ByteArrayAccess.java	39	39	1	jdk/internal/m3/hash/M3ByteArrayAccess.java@1375-1405	no	no	no
+before	M3ByteArrayAccess	getLong	([BJ)J	-	7	6	M3ByteArrayAccess.java	41	44	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@1411-1546	no	no	no
+before	M3ByteArrayAccess	getUnsignedInt	([BJ)J	-	10	9	M3ByteArrayAccess.java	46	49	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@1552-1678	no	no	no
+before	M3ByteArrayAccess	getInt	([BJ)I	-	7	6	M3ByteArrayAccess.java	51	54	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@1684-1816	no	no	no
+before	M3ByteArrayAccess	getUnsignedShort	([BJ)I	-	10	9	M3ByteArrayAccess.java	56	59	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@1822-1953	no	no	no
+before	M3ByteArrayAccess	getShort	([BJ)I	-	7	6	M3ByteArrayAccess.java	61	64	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@1959-2095	no	no	no
+before	M3ByteArrayAccess	getUnsignedByte	([BJ)I	-	10	9	M3ByteArrayAccess.java	66	69	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@2101-2229	no	no	no
+before	M3ByteArrayAccess	getByte	([BJ)I	-	5	4	M3ByteArrayAccess.java	71	74	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@2235-2338	no	no	no
+before	M3ByteArrayAccess	byteOrder	([B)Ljava/nio/ByteOrder;	-	4	3	M3ByteArrayAccess.java	76	79	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@2344-2446	no	no	no
+before	M3ByteArrayAccess	reverseAccess	()Ljdk/internal/m3/hash/M3Access;	-	4	3	M3ByteArrayAccess.java	81	84	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@2452-2552	no	no	no
+before	M3ByteBufferAccess	byteOrder	(Ljava/lang/Object;)Ljava/nio/ByteOrder;	bridge|synthetic	9	8	M3ByteBufferAccess.java	26	26	1		no	no	no
+before	M3ByteBufferAccess	getByte	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteBufferAccess.java	26	26	1		no	no	no
+before	M3ByteBufferAccess	getInt	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteBufferAccess.java	26	26	1		no	no	no
+before	M3ByteBufferAccess	getLong	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3ByteBufferAccess.java	26	26	1		no	no	no
+before	M3ByteBufferAccess	getShort	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteBufferAccess.java	26	26	1		no	no	no
+before	M3ByteBufferAccess	getUnsignedByte	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteBufferAccess.java	26	26	1		no	no	no
+before	M3ByteBufferAccess	getUnsignedInt	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3ByteBufferAccess.java	26	26	1		no	no	no
+before	M3ByteBufferAccess	getUnsignedShort	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteBufferAccess.java	26	26	1		no	no	no
+before	M3ByteBufferAccess	<clinit>	()V	static	20	19	M3ByteBufferAccess.java	27	28	2		no	no	no
+before	M3ByteBufferAccess	<init>	()V	private	5	4	M3ByteBufferAccess.java	30	30	1	jdk/internal/m3/hash/M3ByteBufferAccess.java@1218-1249	no	no	no
+before	M3ByteBufferAccess	getLong	(Ljava/nio/ByteBuffer;J)J	-	7	6	M3ByteBufferAccess.java	32	35	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@1255-1371	no	no	no
+before	M3ByteBufferAccess	getUnsignedInt	(Ljava/nio/ByteBuffer;J)J	-	10	9	M3ByteBufferAccess.java	37	40	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@1377-1520	no	no	no
+before	M3ByteBufferAccess	getInt	(Ljava/nio/ByteBuffer;J)I	-	7	6	M3ByteBufferAccess.java	42	45	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@1526-1639	no	no	no
+before	M3ByteBufferAccess	getUnsignedShort	(Ljava/nio/ByteBuffer;J)I	-	10	9	M3ByteBufferAccess.java	47	50	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@1645-1793	no	no	no
+before	M3ByteBufferAccess	getShort	(Ljava/nio/ByteBuffer;J)I	-	7	6	M3ByteBufferAccess.java	52	55	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@1799-1916	no	no	no
+before	M3ByteBufferAccess	getUnsignedByte	(Ljava/nio/ByteBuffer;J)I	-	10	9	M3ByteBufferAccess.java	57	60	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@1922-2067	no	no	no
+before	M3ByteBufferAccess	getByte	(Ljava/nio/ByteBuffer;J)I	-	7	6	M3ByteBufferAccess.java	62	65	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@2073-2184	no	no	no
+before	M3ByteBufferAccess	byteOrder	(Ljava/nio/ByteBuffer;)Ljava/nio/ByteOrder;	-	5	4	M3ByteBufferAccess.java	67	70	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@2190-2286	no	no	no
+before	M3ByteBufferAccess	reverseAccess	()Ljdk/internal/m3/hash/M3Access;	-	4	3	M3ByteBufferAccess.java	72	75	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@2292-2393	no	no	no
+before	M3CharSequenceAccess	getByte	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	28	28	1		no	no	no
+before	M3CharSequenceAccess	getInt	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	28	28	1		no	no	no
+before	M3CharSequenceAccess	getShort	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	28	28	1		no	no	no
+before	M3CharSequenceAccess	charSequenceAccess	(Ljava/nio/ByteOrder;)Ljdk/internal/m3/hash/M3CharSequenceAccess;	static	17	16	M3CharSequenceAccess.java	30	34	5	jdk/internal/m3/hash/M3CharSequenceAccess.java@1102-1325	no	no	no
+before	M3CharSequenceAccess	nativeCharSequenceAccess	()Ljdk/internal/m3/hash/M3CharSequenceAccess;	static	7	6	M3CharSequenceAccess.java	36	38	3	jdk/internal/m3/hash/M3CharSequenceAccess.java@1331-1453	no	no	no
+before	M3CharSequenceAccess	ix	(J)I	static|private	5	4	M3CharSequenceAccess.java	40	42	3	jdk/internal/m3/hash/M3CharSequenceAccess.java@1459-1537	no	no	no
+before	M3CharSequenceAccess	getLong	(Ljava/lang/CharSequence;JIIIIII)J	static	201	200	M3CharSequenceAccess.java	44	62	19	jdk/internal/m3/hash/M3CharSequenceAccess.java@1543-2623	yes	no	no
+before	M3CharSequenceAccess	getUnsignedInt	(Ljava/lang/CharSequence;JIIII)J	static	118	117	M3CharSequenceAccess.java	64	77	14	jdk/internal/m3/hash/M3CharSequenceAccess.java@2629-3360	yes	no	no
+before	M3CharSequenceAccess	getUnsignedShort	(Ljava/lang/CharSequence;JII)C	static	63	62	M3CharSequenceAccess.java	79	89	11	jdk/internal/m3/hash/M3CharSequenceAccess.java@3366-3838	yes	no	no
+before	M3CharSequenceAccess	getUnsignedByte	(Ljava/lang/CharSequence;JI)I	static	16	15	M3CharSequenceAccess.java	91	93	3	jdk/internal/m3/hash/M3CharSequenceAccess.java@3844-4009	no	no	no
+before	M3CharSequenceAccess	<init>	()V	private	5	4	M3CharSequenceAccess.java	95	95	1	jdk/internal/m3/hash/M3CharSequenceAccess.java@4015-4048	no	no	no
+before	M3CharSequenceAccess	getInt	(Ljava/lang/CharSequence;J)I	-	8	7	M3CharSequenceAccess.java	97	100	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@4054-4178	no	no	no
+before	M3CharSequenceAccess	getShort	(Ljava/lang/CharSequence;J)I	-	8	7	M3CharSequenceAccess.java	102	105	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@4184-4318	no	no	no
+before	M3CharSequenceAccess	getByte	(Ljava/lang/CharSequence;J)I	-	8	7	M3CharSequenceAccess.java	107	110	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@4324-4457	no	no	no
+before	M3CharSequenceAccess$BigEndianCharSequenceAccess	byteOrder	(Ljava/lang/Object;)Ljava/nio/ByteOrder;	bridge|synthetic	9	8	M3CharSequenceAccess.java	149	149	1		no	no	no
+before	M3CharSequenceAccess$BigEndianCharSequenceAccess	getByte	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	149	149	1		no	no	no
+before	M3CharSequenceAccess$BigEndianCharSequenceAccess	getInt	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	149	149	1		no	no	no
+before	M3CharSequenceAccess$BigEndianCharSequenceAccess	getLong	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3CharSequenceAccess.java	149	149	1		no	no	no
+before	M3CharSequenceAccess$BigEndianCharSequenceAccess	getShort	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	149	149	1		no	no	no
+before	M3CharSequenceAccess$BigEndianCharSequenceAccess	getUnsignedByte	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	149	149	1		no	no	no
+before	M3CharSequenceAccess$BigEndianCharSequenceAccess	getUnsignedInt	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3CharSequenceAccess.java	149	149	1		no	no	no
+before	M3CharSequenceAccess$BigEndianCharSequenceAccess	getUnsignedShort	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	149	149	1		no	no	no
+before	M3CharSequenceAccess$BigEndianCharSequenceAccess	<clinit>	()V	static	20	19	M3CharSequenceAccess.java	150	151	2		no	no	no
+before	M3CharSequenceAccess$BigEndianCharSequenceAccess	<init>	()V	private	5	4	M3CharSequenceAccess.java	153	153	1	jdk/internal/m3/hash/M3CharSequenceAccess.java@6016-6056	no	no	no
+before	M3CharSequenceAccess$BigEndianCharSequenceAccess	getLong	(Ljava/lang/CharSequence;J)J	-	12	11	M3CharSequenceAccess.java	155	158	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@6066-6209	no	no	no
+before	M3CharSequenceAccess$BigEndianCharSequenceAccess	getUnsignedInt	(Ljava/lang/CharSequence;J)J	-	10	9	M3CharSequenceAccess.java	160	163	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@6219-6370	no	no	no
+before	M3CharSequenceAccess$BigEndianCharSequenceAccess	getUnsignedShort	(Ljava/lang/CharSequence;J)I	-	8	7	M3CharSequenceAccess.java	165	168	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@6380-6528	no	no	no
+before	M3CharSequenceAccess$BigEndianCharSequenceAccess	getUnsignedByte	(Ljava/lang/CharSequence;J)I	-	14	13	M3CharSequenceAccess.java	170	173	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@6538-6709	no	no	no
+before	M3CharSequenceAccess$BigEndianCharSequenceAccess	byteOrder	(Ljava/lang/CharSequence;)Ljava/nio/ByteOrder;	-	4	3	M3CharSequenceAccess.java	175	178	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@6719-6826	no	no	no
+before	M3CharSequenceAccess$BigEndianCharSequenceAccess	reverseAccess	()Ljdk/internal/m3/hash/M3Access;	-	4	3	M3CharSequenceAccess.java	180	183	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@6836-6951	no	no	no
+before	M3CharSequenceAccess$LittleEndianCharSequenceAccess	byteOrder	(Ljava/lang/Object;)Ljava/nio/ByteOrder;	bridge|synthetic	9	8	M3CharSequenceAccess.java	112	112	1		no	no	no
+before	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getByte	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	112	112	1		no	no	no
+before	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getInt	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	112	112	1		no	no	no
+before	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getLong	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3CharSequenceAccess.java	112	112	1		no	no	no
+before	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getShort	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	112	112	1		no	no	no
+before	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getUnsignedByte	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	112	112	1		no	no	no
+before	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getUnsignedInt	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3CharSequenceAccess.java	112	112	1		no	no	no
+before	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getUnsignedShort	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	112	112	1		no	no	no
+before	M3CharSequenceAccess$LittleEndianCharSequenceAccess	<clinit>	()V	static	20	19	M3CharSequenceAccess.java	113	114	2		no	no	no
+before	M3CharSequenceAccess$LittleEndianCharSequenceAccess	<init>	()V	private	5	4	M3CharSequenceAccess.java	116	116	1	jdk/internal/m3/hash/M3CharSequenceAccess.java@4769-4812	no	no	no
+before	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getLong	(Ljava/lang/CharSequence;J)J	-	12	11	M3CharSequenceAccess.java	118	121	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@4822-4965	no	no	no
+before	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getUnsignedInt	(Ljava/lang/CharSequence;J)J	-	10	9	M3CharSequenceAccess.java	123	126	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@4975-5126	no	no	no
+before	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getUnsignedShort	(Ljava/lang/CharSequence;J)I	-	8	7	M3CharSequenceAccess.java	128	131	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@5136-5284	no	no	no
+before	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getUnsignedByte	(Ljava/lang/CharSequence;J)I	-	12	11	M3CharSequenceAccess.java	133	136	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@5294-5459	no	no	no
+before	M3CharSequenceAccess$LittleEndianCharSequenceAccess	byteOrder	(Ljava/lang/CharSequence;)Ljava/nio/ByteOrder;	-	4	3	M3CharSequenceAccess.java	138	141	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@5469-5579	no	no	no
+before	M3CharSequenceAccess$LittleEndianCharSequenceAccess	reverseAccess	()Ljdk/internal/m3/hash/M3Access;	-	4	3	M3CharSequenceAccess.java	143	146	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@5589-5704	no	no	no
+before	M3CityAndFarmHash_1_1	<init>	()V	-	5	4	M3CityAndFarmHash_1_1.java	32	32	1		no	no	no
+before	M3CityAndFarmHash_1_1	shiftMix	(J)J	static|private	7	6	M3CityAndFarmHash_1_1.java	37	39	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@1466-1547	no	no	no
+before	M3CityAndFarmHash_1_1	hashLen16	(JJ)J	static|private	9	8	M3CityAndFarmHash_1_1.java	41	43	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@1553-1645	no	no	no
+before	M3CityAndFarmHash_1_1	hashLen16	(JJJ)J	static|private	25	24	M3CityAndFarmHash_1_1.java	47	50	4	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@1711-1862	no	no	no
+before	M3CityAndFarmHash_1_1	mul	(J)J	static|private	8	7	M3CityAndFarmHash_1_1.java	52	54	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@1868-1941	no	no	no
+before	M3CityAndFarmHash_1_1	hash1To3Bytes	(IIII)J	static|private	38	37	M3CityAndFarmHash_1_1.java	56	60	5	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@1947-2203	yes	no	no
+before	M3CityAndFarmHash_1_1	hash4To7Bytes	(JJJ)J	static|private	19	18	M3CityAndFarmHash_1_1.java	62	65	4	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@2209-2393	no	no	no
+before	M3CityAndFarmHash_1_1	hash8To16Bytes	(JJJ)J	static|private	53	52	M3CityAndFarmHash_1_1.java	67	73	7	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@2399-2701	yes	no	no
+before	M3CityAndFarmHash_1_1	hashLen0To16	(Ljdk/internal/m3/hash/M3Access;Ljava/lang/Object;JJ)J	static|private	142	141	M3CityAndFarmHash_1_1.java	75	91	17	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@2707-3393	yes	no	no
+before	M3CityAndFarmHash_1_1	hashLen17To32	(Ljdk/internal/m3/hash/M3Access;Ljava/lang/Object;JJ)J	static|private	112	111	M3CityAndFarmHash_1_1.java	93	101	9	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@3399-3844	yes	no	no
+before	M3CityAndFarmHash_1_1	cityHashLen33To64	(Ljdk/internal/m3/hash/M3Access;Ljava/lang/Object;JJ)J	static|private	275	274	M3CityAndFarmHash_1_1.java	103	122	20	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@3850-4780	yes	no	no
+before	M3CityAndFarmHash_1_1	cityHash64	(Ljdk/internal/m3/hash/M3Access;Ljava/lang/Object;JJ)J	static	875	874	M3CityAndFarmHash_1_1.java	124	223	100	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@4786-8319	yes	yes	no
+before	M3CityAndFarmHash_1_1	asLongHashFunctionWithoutSeed	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3CityAndFarmHash_1_1.java	292	294	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@10811-10929	no	no	no
+before	M3CityAndFarmHash_1_1	asLongHashFunctionWithSeed	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	12	11	M3CityAndFarmHash_1_1.java	319	321	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@11554-11680	no	no	no
+before	M3CityAndFarmHash_1_1	asLongHashFunctionWithTwoSeeds	(JJ)Ljdk/internal/m3/hash/M3LongHashFunction;	static	10	9	M3CityAndFarmHash_1_1.java	323	325	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@11686-11833	no	no	no
+before	M3CityAndFarmHash_1_1	naHashLen33To64	(Ljdk/internal/m3/hash/M3Access;Ljava/lang/Object;JJ)J	static|private	229	228	M3CityAndFarmHash_1_1.java	330	344	15	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@11857-12650	yes	no	no
+before	M3CityAndFarmHash_1_1	naHash64	(Ljdk/internal/m3/hash/M3Access;Ljava/lang/Object;JJ)J	static	966	965	M3CityAndFarmHash_1_1.java	346	448	103	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@12656-16313	yes	yes	no
+before	M3CityAndFarmHash_1_1	naHash64WithSeeds	(Ljdk/internal/m3/hash/M3Access;Ljava/lang/Object;JJJJ)J	static|private	17	16	M3CityAndFarmHash_1_1.java	450	452	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@16319-16511	no	no	no
+before	M3CityAndFarmHash_1_1	uoH	(JJJI)J	static|private	35	34	M3CityAndFarmHash_1_1.java	454	459	6	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@16517-16710	no	no	no
+before	M3CityAndFarmHash_1_1	uoHash64WithSeeds	(Ljdk/internal/m3/hash/M3Access;Ljava/lang/Object;JJJJ)J	static	973	972	M3CityAndFarmHash_1_1.java	461	577	117	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@16716-19998	yes	yes	no
+before	M3CityAndFarmHash_1_1	naWithoutSeeds	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3CityAndFarmHash_1_1.java	595	597	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@20560-20641	no	no	no
+before	M3CityAndFarmHash_1_1	naWithSeed	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	12	11	M3CityAndFarmHash_1_1.java	622	624	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@21226-21320	no	no	no
+before	M3CityAndFarmHash_1_1	naWithSeeds	(JJ)Ljdk/internal/m3/hash/M3LongHashFunction;	static	10	9	M3CityAndFarmHash_1_1.java	626	628	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@21326-21438	no	no	no
+before	M3CityAndFarmHash_1_1	uoWithoutSeeds	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3CityAndFarmHash_1_1.java	647	649	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@22097-22178	no	no	no
+before	M3CityAndFarmHash_1_1	uoWithSeed	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	9	8	M3CityAndFarmHash_1_1.java	667	669	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@22812-22907	no	no	no
+before	M3CityAndFarmHash_1_1	uoWithSeeds	(JJ)Ljdk/internal/m3/hash/M3LongHashFunction;	static	10	9	M3CityAndFarmHash_1_1.java	685	687	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@23402-23514	no	no	no
+before	M3CityAndFarmHash_1_1$AsLongHashFunction	<init>	()V	private	5	4	M3CityAndFarmHash_1_1.java	225	225	1		no	no	no
+before	M3CityAndFarmHash_1_1$AsLongHashFunction	<clinit>	()V	static	67	66	M3CityAndFarmHash_1_1.java	227	257	31		yes	no	no
+before	M3CityAndFarmHash_1_1$AsLongHashFunction	readResolve	()Ljava/lang/Object;	private	4	3	M3CityAndFarmHash_1_1.java	229	231	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@8554-8632	no	no	no
+before	M3CityAndFarmHash_1_1$AsLongHashFunction	hashLong	(J)J	-	20	19	M3CityAndFarmHash_1_1.java	233	238	6	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@8642-8859	no	no	no
+before	M3CityAndFarmHash_1_1$AsLongHashFunction	hashInt	(I)J	-	27	26	M3CityAndFarmHash_1_1.java	240	246	7	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@8869-9159	no	no	no
+before	M3CityAndFarmHash_1_1$AsLongHashFunction	hashShort	(S)J	-	7	6	M3CityAndFarmHash_1_1.java	248	251	4	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@9169-9276	no	no	no
+before	M3CityAndFarmHash_1_1$AsLongHashFunction	hashChar	(C)J	-	41	40	M3CityAndFarmHash_1_1.java	259	266	8	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@9698-10110	yes	no	no
+before	M3CityAndFarmHash_1_1$AsLongHashFunction	hashByte	(B)J	-	19	18	M3CityAndFarmHash_1_1.java	268	273	6	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@10120-10366	no	no	no
+before	M3CityAndFarmHash_1_1$AsLongHashFunction	hashVoid	()J	-	4	3	M3CityAndFarmHash_1_1.java	275	278	4	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@10376-10451	no	no	no
+before	M3CityAndFarmHash_1_1$AsLongHashFunction	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	-	24	23	M3CityAndFarmHash_1_1.java	280	285	6	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@10461-10728	no	no	no
+before	M3CityAndFarmHash_1_1$AsLongHashFunction	finalize	(J)J	-	2	1	M3CityAndFarmHash_1_1.java	287	289	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@10738-10799	no	no	no
+before	M3CityAndFarmHash_1_1$AsLongHashFunctionSeeded	<init>	(JJ)V	private	26	25	M3CityAndFarmHash_1_1.java	302	306	5	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@11157-11326	no	no	no
+before	M3CityAndFarmHash_1_1$AsLongHashFunctionSeeded	hashVoid	()J	-	5	4	M3CityAndFarmHash_1_1.java	308	311	4	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@11336-11417	no	no	no
+before	M3CityAndFarmHash_1_1$AsLongHashFunctionSeeded	finalize	(J)J	-	14	13	M3CityAndFarmHash_1_1.java	313	316	4	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@11427-11542	no	no	no
+before	M3CityAndFarmHash_1_1$Na	<init>	()V	private	5	4	M3CityAndFarmHash_1_1.java	579	579	1		no	no	no
+before	M3CityAndFarmHash_1_1$Na	<clinit>	()V	static	11	10	M3CityAndFarmHash_1_1.java	581	581	1		no	no	no
+before	M3CityAndFarmHash_1_1$Na	readResolve	()Ljava/lang/Object;	private	4	3	M3CityAndFarmHash_1_1.java	583	585	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@20201-20273	no	no	no
+before	M3CityAndFarmHash_1_1$Na	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	-	24	23	M3CityAndFarmHash_1_1.java	587	592	6	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@20283-20548	no	no	no
+before	M3CityAndFarmHash_1_1$NaSeeded	<init>	(JJ)V	private	26	25	M3CityAndFarmHash_1_1.java	605	609	5	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@20845-20998	no	no	no
+before	M3CityAndFarmHash_1_1$NaSeeded	hashVoid	()J	-	5	4	M3CityAndFarmHash_1_1.java	611	614	4	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@21008-21089	no	no	no
+before	M3CityAndFarmHash_1_1$NaSeeded	finalize	(J)J	-	14	13	M3CityAndFarmHash_1_1.java	616	619	4	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@21099-21214	no	no	no
+before	M3CityAndFarmHash_1_1$Uo	<init>	()V	private	5	4	M3CityAndFarmHash_1_1.java	630	630	1		no	no	no
+before	M3CityAndFarmHash_1_1$Uo	<clinit>	()V	static	11	10	M3CityAndFarmHash_1_1.java	632	632	1		no	no	no
+before	M3CityAndFarmHash_1_1$Uo	readResolve	()Ljava/lang/Object;	private	4	3	M3CityAndFarmHash_1_1.java	634	636	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@21625-21697	no	no	no
+before	M3CityAndFarmHash_1_1$Uo	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	-	45	44	M3CityAndFarmHash_1_1.java	638	644	7	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@21707-22085	yes	no	no
+before	M3CityAndFarmHash_1_1$UoSeeded	<init>	(JJ)V	private	7	6	M3CityAndFarmHash_1_1.java	674	676	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@23044-23129	no	no	no
+before	M3CityAndFarmHash_1_1$UoSeeded	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	-	24	23	M3CityAndFarmHash_1_1.java	678	682	5	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@23139-23390	no	no	no
+before	M3CityAndFarmHash_1_1$UoWithOneSeed	<init>	(J)V	private	9	8	M3CityAndFarmHash_1_1.java	654	656	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@22326-22399	no	no	no
+before	M3CityAndFarmHash_1_1$UoWithOneSeed	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	-	50	49	M3CityAndFarmHash_1_1.java	658	664	7	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@22409-22800	yes	no	no
+before	M3DualHashFunction	<init>	()V	-	26	25	M3DualHashFunction.java	10	80	71		no	no	no
+before	M3DualHashFunction	checkResult	([J)V	private	33	32	M3DualHashFunction.java	14	21	8	jdk/internal/m3/hash/M3DualHashFunction.java@538-827	no	no	no
+before	M3DualHashFunction	hashLong	(J[J)V	-	13	12	M3DualHashFunction.java	24	28	5	jdk/internal/m3/hash/M3DualHashFunction.java@902-1049	no	no	no
+before	M3DualHashFunction	hashInt	(I[J)V	-	13	12	M3DualHashFunction.java	31	35	5	jdk/internal/m3/hash/M3DualHashFunction.java@1122-1266	no	no	no
+before	M3DualHashFunction	hashShort	(S[J)V	-	13	12	M3DualHashFunction.java	38	42	5	jdk/internal/m3/hash/M3DualHashFunction.java@1343-1493	no	no	no
+before	M3DualHashFunction	hashChar	(C[J)V	-	13	12	M3DualHashFunction.java	45	49	5	jdk/internal/m3/hash/M3DualHashFunction.java@1568-1715	no	no	no
+before	M3DualHashFunction	hashByte	(B[J)V	-	13	12	M3DualHashFunction.java	52	56	5	jdk/internal/m3/hash/M3DualHashFunction.java@1790-1937	no	no	no
+before	M3DualHashFunction	hashVoid	([J)V	-	12	11	M3DualHashFunction.java	59	63	5	jdk/internal/m3/hash/M3DualHashFunction.java@2000-2122	no	no	no
+before	M3DualHashFunction	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ[J)V	-	19	18	M3DualHashFunction.java	66	70	5	jdk/internal/m3/hash/M3DualHashFunction.java@2234-2450	no	no	no
+before	M3DualHashFunction	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)[J	-	21	20	M3DualHashFunction.java	71	76	6	jdk/internal/m3/hash/M3DualHashFunction.java@2455-2694	no	no	no
+before	M3DualHashFunction	asLongHashFunction	()Ljdk/internal/m3/hash/M3LongHashFunction;	-	5	4	M3DualHashFunction.java	117	119	3	jdk/internal/m3/hash/M3DualHashFunction.java@3852-3942	no	no	no
+before	M3DualHashFunction$1	<init>	(Ljdk/internal/m3/hash/M3DualHashFunction;)V	-	10	9	M3DualHashFunction.java	80	80	1		no	no	no
+before	M3DualHashFunction$1	hashLong	(J)J	-	10	9	M3DualHashFunction.java	81	84	4	jdk/internal/m3/hash/M3DualHashFunction.java@2935-3049	no	no	no
+before	M3DualHashFunction$1	hashInt	(I)J	-	10	9	M3DualHashFunction.java	86	89	4	jdk/internal/m3/hash/M3DualHashFunction.java@3059-3170	no	no	no
+before	M3DualHashFunction$1	hashShort	(S)J	-	10	9	M3DualHashFunction.java	91	94	4	jdk/internal/m3/hash/M3DualHashFunction.java@3180-3297	no	no	no
+before	M3DualHashFunction$1	hashChar	(C)J	-	10	9	M3DualHashFunction.java	96	99	4	jdk/internal/m3/hash/M3DualHashFunction.java@3307-3421	no	no	no
+before	M3DualHashFunction$1	hashByte	(B)J	-	10	9	M3DualHashFunction.java	101	104	4	jdk/internal/m3/hash/M3DualHashFunction.java@3431-3545	no	no	no
+before	M3DualHashFunction$1	hashVoid	()J	-	9	8	M3DualHashFunction.java	106	109	4	jdk/internal/m3/hash/M3DualHashFunction.java@3555-3646	no	no	no
+before	M3DualHashFunction$1	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	-	14	13	M3DualHashFunction.java	111	114	4	jdk/internal/m3/hash/M3DualHashFunction.java@3656-3839	no	no	no
+before	M3LongHashFunction	city_1_1	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3LongHashFunction.java	84	86	3	jdk/internal/m3/hash/M3LongHashFunction.java@4299-4420	no	no	no
+before	M3LongHashFunction	city_1_1	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	5	4	M3LongHashFunction.java	98	100	3	jdk/internal/m3/hash/M3LongHashFunction.java@4915-5046	no	no	no
+before	M3LongHashFunction	city_1_1	(JJ)Ljdk/internal/m3/hash/M3LongHashFunction;	static	6	5	M3LongHashFunction.java	112	114	3	jdk/internal/m3/hash/M3LongHashFunction.java@5540-5696	no	no	no
+before	M3LongHashFunction	farmNa	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3LongHashFunction.java	129	131	3	jdk/internal/m3/hash/M3LongHashFunction.java@6354-6458	no	no	no
+before	M3LongHashFunction	farmNa	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	5	4	M3LongHashFunction.java	146	148	3	jdk/internal/m3/hash/M3LongHashFunction.java@7123-7236	no	no	no
+before	M3LongHashFunction	farmNa	(JJ)Ljdk/internal/m3/hash/M3LongHashFunction;	static	6	5	M3LongHashFunction.java	163	165	3	jdk/internal/m3/hash/M3LongHashFunction.java@7906-8041	no	no	no
+before	M3LongHashFunction	farmUo	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3LongHashFunction.java	179	181	3	jdk/internal/m3/hash/M3LongHashFunction.java@8601-8705	no	no	no
+before	M3LongHashFunction	farmUo	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	5	4	M3LongHashFunction.java	195	197	3	jdk/internal/m3/hash/M3LongHashFunction.java@9267-9380	no	no	no
+before	M3LongHashFunction	farmUo	(JJ)Ljdk/internal/m3/hash/M3LongHashFunction;	static	6	5	M3LongHashFunction.java	211	213	3	jdk/internal/m3/hash/M3LongHashFunction.java@9941-10076	no	no	no
+before	M3LongHashFunction	murmur_3	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3LongHashFunction.java	224	226	3	jdk/internal/m3/hash/M3LongHashFunction.java@10505-10619	no	no	no
+before	M3LongHashFunction	murmur_3	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	5	4	M3LongHashFunction.java	237	239	3	jdk/internal/m3/hash/M3LongHashFunction.java@11050-11174	no	no	no
+before	M3LongHashFunction	xx	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3LongHashFunction.java	249	251	3	jdk/internal/m3/hash/M3LongHashFunction.java@11579-11681	no	no	no
+before	M3LongHashFunction	xx	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	5	4	M3LongHashFunction.java	261	263	3	jdk/internal/m3/hash/M3LongHashFunction.java@12053-12165	no	no	no
+before	M3LongHashFunction	xx3	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3LongHashFunction.java	273	275	3	jdk/internal/m3/hash/M3LongHashFunction.java@12575-12676	no	no	no
+before	M3LongHashFunction	xx3	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	5	4	M3LongHashFunction.java	285	287	3	jdk/internal/m3/hash/M3LongHashFunction.java@13053-13170	no	no	no
+before	M3LongHashFunction	xx128low	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3LongHashFunction.java	297	299	3	jdk/internal/m3/hash/M3LongHashFunction.java@13591-13705	no	no	no
+before	M3LongHashFunction	xx128low	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	5	4	M3LongHashFunction.java	309	311	3	jdk/internal/m3/hash/M3LongHashFunction.java@14093-14223	no	no	no
+before	M3LongHashFunction	wy_3	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3LongHashFunction.java	322	324	3	jdk/internal/m3/hash/M3LongHashFunction.java@14708-14812	no	no	no
+before	M3LongHashFunction	wy_3	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	5	4	M3LongHashFunction.java	335	337	3	jdk/internal/m3/hash/M3LongHashFunction.java@15264-15378	no	no	no
+before	M3LongHashFunction	metro	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3LongHashFunction.java	348	350	3	jdk/internal/m3/hash/M3LongHashFunction.java@15876-15984	no	no	no
+before	M3LongHashFunction	metro	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	5	4	M3LongHashFunction.java	361	363	3	jdk/internal/m3/hash/M3LongHashFunction.java@16449-16567	no	no	no
+before	M3LongHashFunction	<init>	()V	-	5	4	M3LongHashFunction.java	368	368	1	jdk/internal/m3/hash/M3LongHashFunction.java@16631-16664	no	no	no
+before	M3LongHashFunction	unsafeHash	([BJJ)J	private	12	11	M3LongHashFunction.java	443	445	3	jdk/internal/m3/hash/M3LongHashFunction.java@20564-20695	no	no	no
+before	M3LongHashFunction	hashBytes	([B)J	-	10	9	M3LongHashFunction.java	450	452	3	jdk/internal/m3/hash/M3LongHashFunction.java@20809-20911	no	no	no
+before	M3LongHashFunction	hashBytes	([BII)J	-	19	18	M3LongHashFunction.java	467	470	4	jdk/internal/m3/hash/M3LongHashFunction.java@21554-21719	no	no	no
+before	M3LongHashFunction	hashBytes	(Ljava/nio/ByteBuffer;)J	-	14	13	M3LongHashFunction.java	476	478	3	jdk/internal/m3/hash/M3LongHashFunction.java@21864-21986	no	no	no
+before	M3LongHashFunction	hashBytes	(Ljava/nio/ByteBuffer;II)J	-	17	16	M3LongHashFunction.java	496	499	4	jdk/internal/m3/hash/M3LongHashFunction.java@22739-22904	no	no	no
+before	M3LongHashFunction	hashByteBuffer	(Ljava/nio/ByteBuffer;II)J	private	41	40	M3LongHashFunction.java	501	507	7	jdk/internal/m3/hash/M3LongHashFunction.java@22910-23201	yes	no	no
+before	M3LongHashFunction	hashChars	(Ljava/lang/String;)J	-	11	10	M3LongHashFunction.java	512	514	3	jdk/internal/m3/hash/M3LongHashFunction.java@23317-23418	no	no	no
+before	M3LongHashFunction	hashChars	(Ljava/lang/String;II)J	-	17	16	M3LongHashFunction.java	531	534	4	jdk/internal/m3/hash/M3LongHashFunction.java@24252-24412	no	no	no
+before	M3LongHashFunction	hashChars	(Ljava/lang/StringBuilder;)J	-	6	5	M3LongHashFunction.java	539	541	3	jdk/internal/m3/hash/M3LongHashFunction.java@24535-24624	no	no	no
+before	M3LongHashFunction	hashChars	(Ljava/lang/StringBuilder;II)J	-	17	16	M3LongHashFunction.java	558	561	4	jdk/internal/m3/hash/M3LongHashFunction.java@25473-25640	no	no	no
+before	M3LongHashFunction	hashNativeChars	(Ljava/lang/CharSequence;)J	-	13	12	M3LongHashFunction.java	563	565	3	jdk/internal/m3/hash/M3LongHashFunction.java@25646-25752	no	no	no
+before	M3LongHashFunction	hashNativeChars	(Ljava/lang/CharSequence;II)J	-	21	20	M3LongHashFunction.java	567	569	3	jdk/internal/m3/hash/M3LongHashFunction.java@25758-25900	no	no	no
+before	M3LongTupleHashFunction	murmur_3	()Ljdk/internal/m3/hash/M3LongTupleHashFunction;	static	4	3	M3LongTupleHashFunction.java	74	76	3	jdk/internal/m3/hash/M3LongTupleHashFunction.java@3461-3585	no	no	no
+before	M3LongTupleHashFunction	murmur_3	(J)Ljdk/internal/m3/hash/M3LongTupleHashFunction;	static	5	4	M3LongTupleHashFunction.java	87	89	3	jdk/internal/m3/hash/M3LongTupleHashFunction.java@4017-4157	no	no	no
+before	M3LongTupleHashFunction	xx128	()Ljdk/internal/m3/hash/M3LongTupleHashFunction;	static	4	3	M3LongTupleHashFunction.java	100	102	3	jdk/internal/m3/hash/M3LongTupleHashFunction.java@4584-4697	no	no	no
+before	M3LongTupleHashFunction	xx128	(J)Ljdk/internal/m3/hash/M3LongTupleHashFunction;	static	5	4	M3LongTupleHashFunction.java	112	114	3	jdk/internal/m3/hash/M3LongTupleHashFunction.java@5077-5206	no	no	no
+before	M3LongTupleHashFunction	<init>	()V	-	5	4	M3LongTupleHashFunction.java	119	119	1	jdk/internal/m3/hash/M3LongTupleHashFunction.java@5270-5308	no	no	no
+before	M3LongTupleHashFunction	newResultArray	()[J	-	13	12	M3LongTupleHashFunction.java	135	137	3	jdk/internal/m3/hash/M3LongTupleHashFunction.java@5735-5824	no	no	no
+before	M3LongTupleHashFunction	hashLong	(J)[J	-	13	-1	M3LongTupleHashFunction.java	162	166	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@7046-7198	no	no	no
+before	M3LongTupleHashFunction	hashInt	(I)[J	-	13	-1	M3LongTupleHashFunction.java	191	195	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@8411-8560	no	no	no
+before	M3LongTupleHashFunction	hashShort	(S)[J	-	13	-1	M3LongTupleHashFunction.java	220	224	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@9791-9946	no	no	no
+before	M3LongTupleHashFunction	hashChar	(C)[J	-	13	-1	M3LongTupleHashFunction.java	249	253	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@11168-11320	no	no	no
+before	M3LongTupleHashFunction	hashByte	(B)[J	-	13	-1	M3LongTupleHashFunction.java	277	281	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@12489-12641	no	no	no
+before	M3LongTupleHashFunction	hashVoid	()[J	-	12	-1	M3LongTupleHashFunction.java	303	307	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@13593-13722	no	no	no
+before	M3LongTupleHashFunction	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)[J	-	20	-1	M3LongTupleHashFunction.java	342	347	6	jdk/internal/m3/hash/M3LongTupleHashFunction.java@15551-15799	no	no	no
+before	M3LongTupleHashFunction	hashBytes	([B[J)V	-	11	10	M3LongTupleHashFunction.java	352	354	3	jdk/internal/m3/hash/M3LongTupleHashFunction.java@15929-16065	no	no	no
+before	M3LongTupleHashFunction	hashBytes	([B)[J	-	17	16	M3LongTupleHashFunction.java	361	365	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@16216-16404	no	no	no
+before	M3LongTupleHashFunction	hashBytes	([BII[J)V	-	21	20	M3LongTupleHashFunction.java	389	392	4	jdk/internal/m3/hash/M3LongTupleHashFunction.java@17692-17903	no	no	no
+before	M3LongTupleHashFunction	hashBytes	([BII)[J	-	29	28	M3LongTupleHashFunction.java	399	404	6	jdk/internal/m3/hash/M3LongTupleHashFunction.java@18030-18293	no	no	no
+before	M3LongTupleHashFunction	hashBytes	(Ljava/nio/ByteBuffer;[J)V	-	15	14	M3LongTupleHashFunction.java	410	412	3	jdk/internal/m3/hash/M3LongTupleHashFunction.java@18454-18610	no	no	no
+before	M3LongTupleHashFunction	hashBytes	(Ljava/nio/ByteBuffer;)[J	-	21	20	M3LongTupleHashFunction.java	419	423	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@18765-18973	no	no	no
+before	M3LongTupleHashFunction	hashBytes	(Ljava/nio/ByteBuffer;II[J)V	-	19	18	M3LongTupleHashFunction.java	450	454	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@20389-20626	no	no	no
+before	M3LongTupleHashFunction	hashBytes	(Ljava/nio/ByteBuffer;II)[J	-	27	26	M3LongTupleHashFunction.java	461	466	6	jdk/internal/m3/hash/M3LongTupleHashFunction.java@20757-21020	no	no	no
+before	M3LongTupleHashFunction	hashChars	(Ljava/lang/String;[J)V	-	12	11	M3LongTupleHashFunction.java	472	474	3	jdk/internal/m3/hash/M3LongTupleHashFunction.java@21159-21294	no	no	no
+before	M3LongTupleHashFunction	hashChars	(Ljava/lang/String;)[J	-	18	17	M3LongTupleHashFunction.java	481	485	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@21445-21632	no	no	no
+before	M3LongTupleHashFunction	hashChars	(Ljava/lang/String;II[J)V	-	19	18	M3LongTupleHashFunction.java	511	514	4	jdk/internal/m3/hash/M3LongTupleHashFunction.java@23078-23284	no	no	no
+before	M3LongTupleHashFunction	hashChars	(Ljava/lang/String;II)[J	-	27	26	M3LongTupleHashFunction.java	521	526	6	jdk/internal/m3/hash/M3LongTupleHashFunction.java@23411-23669	no	no	no
+before	M3LongTupleHashFunction	hashChars	(Ljava/lang/CharSequence;[J)V	-	14	13	M3LongTupleHashFunction.java	532	534	3	jdk/internal/m3/hash/M3LongTupleHashFunction.java@23814-23969	no	no	no
+before	M3LongTupleHashFunction	hashChars	(Ljava/lang/CharSequence;)[J	-	20	19	M3LongTupleHashFunction.java	541	545	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@24126-24333	no	no	no
+before	M3LongTupleHashFunction	hashChars	(Ljava/lang/CharSequence;II[J)V	-	21	20	M3LongTupleHashFunction.java	570	574	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@25706-25983	no	no	no
+before	M3LongTupleHashFunction	hashChars	(Ljava/lang/CharSequence;II)[J	-	29	28	M3LongTupleHashFunction.java	581	586	6	jdk/internal/m3/hash/M3LongTupleHashFunction.java@26116-26394	no	no	no
+before	M3LongTupleHashFunction	<clinit>	()V	static	19	18	M3LongTupleHashFunction.java	590	592	3		no	no	no
+before	M3LongTupleHashFunction	unsafeHash	(Ljdk/internal/m3/hash/M3LongTupleHashFunction;[BJJ[J)V	static|private	14	13	M3LongTupleHashFunction.java	594	597	4	jdk/internal/m3/hash/M3LongTupleHashFunction.java@26704-26939	no	no	no
+before	M3LongTupleHashFunction	hashByteBuffer	(Ljdk/internal/m3/hash/M3LongTupleHashFunction;Ljava/nio/ByteBuffer;II[J)V	static|private	47	46	M3LongTupleHashFunction.java	599	606	8	jdk/internal/m3/hash/M3LongTupleHashFunction.java@26945-27349	yes	no	no
+before	M3LongTupleHashFunction	hashNativeChars	(Ljdk/internal/m3/hash/M3LongTupleHashFunction;Ljava/lang/CharSequence;II[J)V	static	23	22	M3LongTupleHashFunction.java	608	611	4	jdk/internal/m3/hash/M3LongTupleHashFunction.java@27355-27600	no	no	no
+before	M3Maths	<init>	()V	-	5	4	M3Maths.java	8	8	1		no	no	no
+before	M3Maths	<clinit>	()V	static	39	38	M3Maths.java	12	19	8		yes	no	no
+before	M3Maths	unsignedLongMulXorFold	(JJ)J	static	9	8	M3Maths.java	21	23	3	jdk/internal/m3/hash/M3Maths.java@590-732	no	no	no
+before	M3Maths	unsignedLongMulHigh	(JJ)J	static	9	8	M3Maths.java	24	26	3	jdk/internal/m3/hash/M3Maths.java@737-873	no	no	no
+before	M3Maths	unsignedLongMulXorFoldImp	(JJ)J	-	107	106	M3Maths.java	28	45	18	jdk/internal/m3/hash/M3Maths.java@879-1740	yes	no	no
+before	M3Maths	unsignedLongMulHighImp	(JJ)J	-	90	89	M3Maths.java	47	63	17	jdk/internal/m3/hash/M3Maths.java@1746-2530	yes	no	no
+before	M3MathsJDK9	<init>	()V	-	5	4	M3Maths.java	66	66	1		no	no	no
+before	M3MathsJDK9	unsignedLongMulXorFoldImp	(JJ)J	-	32	31	M3Maths.java	69	74	6	jdk/internal/m3/hash/M3Maths.java@2712-2964	no	no	no
+before	M3MathsJDK9	unsignedLongMulHighImp	(JJ)J	-	20	19	M3Maths.java	75	78	4	jdk/internal/m3/hash/M3Maths.java@2969-3138	no	no	no
+before	M3MetroHash	<init>	()V	-	5	4	M3MetroHash.java	9	9	1		no	no	no
+before	M3MetroHash	metroHash64	(JLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	static	653	652	M3MetroHash.java	16	92	77	jdk/internal/m3/hash/M3MetroHash.java@535-2840	yes	yes	no
+before	M3MetroHash	finalize	(J)J	static|private	26	25	M3MetroHash.java	94	99	6	jdk/internal/m3/hash/M3MetroHash.java@2846-3001	no	no	no
+before	M3MetroHash	asLongHashFunctionWithoutSeed	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3MetroHash.java	170	172	3	jdk/internal/m3/hash/M3MetroHash.java@5129-5247	no	no	no
+before	M3MetroHash	asLongHashFunctionWithSeed	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	9	8	M3MetroHash.java	174	176	3	jdk/internal/m3/hash/M3MetroHash.java@5253-5375	no	no	no
+before	M3MetroHash$AsLongHashFunction	<init>	()V	private	5	4	M3MetroHash.java	101	101	1		no	no	no
+before	M3MetroHash$AsLongHashFunction	<clinit>	()V	static	20	19	M3MetroHash.java	103	104	2		no	no	no
+before	M3MetroHash$AsLongHashFunction	readResolve	()Ljava/lang/Object;	private	4	3	M3MetroHash.java	106	108	3	jdk/internal/m3/hash/M3MetroHash.java@3313-3391	no	no	no
+before	M3MetroHash$AsLongHashFunction	seed	()J	-	2	1	M3MetroHash.java	110	112	3	jdk/internal/m3/hash/M3MetroHash.java@3401-3457	no	no	no
+before	M3MetroHash$AsLongHashFunction	hashLong	(J)J	-	44	43	M3MetroHash.java	114	122	9	jdk/internal/m3/hash/M3MetroHash.java@3467-3753	yes	no	no
+before	M3MetroHash$AsLongHashFunction	hashInt	(I)J	-	47	46	M3MetroHash.java	124	132	9	jdk/internal/m3/hash/M3MetroHash.java@3763-4073	yes	no	no
+before	M3MetroHash$AsLongHashFunction	hashShort	(S)J	-	48	47	M3MetroHash.java	134	142	9	jdk/internal/m3/hash/M3MetroHash.java@4083-4399	yes	no	no
+before	M3MetroHash$AsLongHashFunction	hashChar	(C)J	-	7	6	M3MetroHash.java	144	147	4	jdk/internal/m3/hash/M3MetroHash.java@4409-4516	no	no	no
+before	M3MetroHash$AsLongHashFunction	hashByte	(B)J	-	43	42	M3MetroHash.java	149	156	8	jdk/internal/m3/hash/M3MetroHash.java@4526-4777	yes	no	no
+before	M3MetroHash$AsLongHashFunction	hashVoid	()J	-	4	3	M3MetroHash.java	158	161	4	jdk/internal/m3/hash/M3MetroHash.java@4787-4869	no	no	no
+before	M3MetroHash$AsLongHashFunction	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	-	24	23	M3MetroHash.java	163	167	5	jdk/internal/m3/hash/M3MetroHash.java@4879-5117	no	no	no
+before	M3MetroHash$AsLongHashFunctionSeeded	<init>	(J)V	-	26	25	M3MetroHash.java	184	187	4	jdk/internal/m3/hash/M3MetroHash.java@5603-5743	no	no	no
+before	M3MetroHash$AsLongHashFunctionSeeded	hashVoid	()J	-	5	4	M3MetroHash.java	189	192	4	jdk/internal/m3/hash/M3MetroHash.java@5753-5834	no	no	no
+before	M3MetroHash$AsLongHashFunctionSeeded	seed	()J	-	5	4	M3MetroHash.java	194	197	4	jdk/internal/m3/hash/M3MetroHash.java@5844-5920	no	no	no
+before	M3MurmurHash_3	<init>	()V	-	5	4	M3MurmurHash_3.java	32	32	1		no	no	no
+before	M3MurmurHash_3	hash	(JLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ[J)J	static|private	555	554	M3MurmurHash_3.java	36	174	139	jdk/internal/m3/hash/M3MurmurHash_3.java@1381-7553	yes	yes	no
+before	M3MurmurHash_3	finalize	(JJJ[J)J	static|private	64	63	M3MurmurHash_3.java	176	195	20	jdk/internal/m3/hash/M3MurmurHash_3.java@7559-7966	yes	no	no
+before	M3MurmurHash_3	fmix64	(J)J	static|private	35	34	M3MurmurHash_3.java	197	204	8	jdk/internal/m3/hash/M3MurmurHash_3.java@7972-8169	no	no	no
+before	M3MurmurHash_3	mixK1	(J)J	static|private	21	20	M3MurmurHash_3.java	206	211	6	jdk/internal/m3/hash/M3MurmurHash_3.java@8175-8310	no	no	no
+before	M3MurmurHash_3	mixK2	(J)J	static|private	21	20	M3MurmurHash_3.java	213	218	6	jdk/internal/m3/hash/M3MurmurHash_3.java@8316-8451	no	no	no
+before	M3MurmurHash_3	asLongTupleHashFunctionWithoutSeed	()Ljdk/internal/m3/hash/M3LongTupleHashFunction;	static	4	3	M3MurmurHash_3.java	289	291	3	jdk/internal/m3/hash/M3MurmurHash_3.java@10833-10966	no	no	no
+before	M3MurmurHash_3	asLongHashFunctionWithoutSeed	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3MurmurHash_3.java	292	294	3	jdk/internal/m3/hash/M3MurmurHash_3.java@10971-11099	no	no	no
+before	M3MurmurHash_3	asLongTupleHashFunctionWithSeed	(J)Ljdk/internal/m3/hash/M3LongTupleHashFunction;	static	9	8	M3MurmurHash_3.java	330	332	3	jdk/internal/m3/hash/M3MurmurHash_3.java@12127-12264	no	no	no
+before	M3MurmurHash_3	asLongHashFunctionWithSeed	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	12	11	M3MurmurHash_3.java	333	335	3	jdk/internal/m3/hash/M3MurmurHash_3.java@12269-12417	no	no	no
+before	M3MurmurHash_3$AsLongTupleHashFunction	<init>	()V	private	5	4	M3MurmurHash_3.java	220	220	1		no	no	no
+before	M3MurmurHash_3$AsLongTupleHashFunction	<clinit>	()V	static	20	19	M3MurmurHash_3.java	222	223	2		no	no	no
+before	M3MurmurHash_3$AsLongTupleHashFunction	readResolve	()Ljava/lang/Object;	private	4	3	M3MurmurHash_3.java	225	227	3	jdk/internal/m3/hash/M3MurmurHash_3.java@8814-8892	no	no	no
+before	M3MurmurHash_3$AsLongTupleHashFunction	bitsLength	()I	-	4	3	M3MurmurHash_3.java	229	232	4	jdk/internal/m3/hash/M3MurmurHash_3.java@8902-8979	no	no	no
+before	M3MurmurHash_3$AsLongTupleHashFunction	newResultArray	()[J	-	4	3	M3MurmurHash_3.java	233	236	4	jdk/internal/m3/hash/M3MurmurHash_3.java@8988-9117	no	no	no
+before	M3MurmurHash_3$AsLongTupleHashFunction	seed	()J	-	2	1	M3MurmurHash_3.java	238	240	3	jdk/internal/m3/hash/M3MurmurHash_3.java@9127-9173	no	no	no
+before	M3MurmurHash_3$AsLongTupleHashFunction	hashNativeLong	(JJ[J)J	-	20	19	M3MurmurHash_3.java	242	246	5	jdk/internal/m3/hash/M3MurmurHash_3.java@9183-9398	no	no	no
+before	M3MurmurHash_3$AsLongTupleHashFunction	dualHashLong	(J[J)J	-	13	12	M3MurmurHash_3.java	248	251	4	jdk/internal/m3/hash/M3MurmurHash_3.java@9408-9578	no	no	no
+before	M3MurmurHash_3$AsLongTupleHashFunction	dualHashInt	(I[J)J	-	16	15	M3MurmurHash_3.java	253	256	4	jdk/internal/m3/hash/M3MurmurHash_3.java@9588-9769	no	no	no
+before	M3MurmurHash_3$AsLongTupleHashFunction	dualHashShort	(S[J)J	-	17	16	M3MurmurHash_3.java	258	261	4	jdk/internal/m3/hash/M3MurmurHash_3.java@9779-9966	no	no	no
+before	M3MurmurHash_3$AsLongTupleHashFunction	dualHashChar	(C[J)J	-	17	16	M3MurmurHash_3.java	263	266	4	jdk/internal/m3/hash/M3MurmurHash_3.java@9976-10161	no	no	no
+before	M3MurmurHash_3$AsLongTupleHashFunction	dualHashByte	(B[J)J	-	12	11	M3MurmurHash_3.java	268	271	4	jdk/internal/m3/hash/M3MurmurHash_3.java@10171-10339	no	no	no
+before	M3MurmurHash_3$AsLongTupleHashFunction	dualHashVoid	([J)J	-	15	14	M3MurmurHash_3.java	273	280	8	jdk/internal/m3/hash/M3MurmurHash_3.java@10349-10550	no	no	no
+before	M3MurmurHash_3$AsLongTupleHashFunction	dualHash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ[J)J	-	26	25	M3MurmurHash_3.java	282	286	5	jdk/internal/m3/hash/M3MurmurHash_3.java@10560-10821	no	no	no
+before	M3MurmurHash_3$AsLongTupleHashFunctionSeeded	<init>	(J)V	private	29	28	M3MurmurHash_3.java	300	305	6		no	no	no
+before	M3MurmurHash_3$AsLongTupleHashFunctionSeeded	seed	()J	-	5	4	M3MurmurHash_3.java	307	310	4	jdk/internal/m3/hash/M3MurmurHash_3.java@11521-11587	no	no	no
+before	M3MurmurHash_3$AsLongTupleHashFunctionSeeded	hashNativeLong	(JJ[J)J	-	30	29	M3MurmurHash_3.java	312	318	7	jdk/internal/m3/hash/M3MurmurHash_3.java@11597-11874	no	no	no
+before	M3MurmurHash_3$AsLongTupleHashFunctionSeeded	dualHashVoid	([J)J	-	30	29	M3MurmurHash_3.java	320	327	8	jdk/internal/m3/hash/M3MurmurHash_3.java@11884-12115	no	no	no
+before	M3Primitives	<init>	()V	private	5	4	M3Primitives.java	28	28	1	jdk/internal/m3/hash/M3Primitives.java@1026-1051	no	no	no
+before	M3Primitives	<clinit>	()V	static	70	69	M3Primitives.java	30	45	16		yes	no	no
+before	M3Primitives	unsignedInt	(I)J	static	7	6	M3Primitives.java	32	34	3	jdk/internal/m3/hash/M3Primitives.java@1138-1208	no	no	no
+before	M3Primitives	unsignedShort	(I)I	static	5	4	M3Primitives.java	36	38	3	jdk/internal/m3/hash/M3Primitives.java@1214-1280	no	no	no
+before	M3Primitives	unsignedByte	(I)I	static	6	5	M3Primitives.java	40	42	3	jdk/internal/m3/hash/M3Primitives.java@1286-1349	no	no	no
+before	M3Primitives	nativeToLittleEndian	(J)J	static	8	7	M3Primitives.java	47	47	1	jdk/internal/m3/hash/M3Primitives.java@1606-1688	no	no	no
+before	M3Primitives	nativeToLittleEndian	(I)I	static	8	7	M3Primitives.java	48	48	1	jdk/internal/m3/hash/M3Primitives.java@1693-1773	no	no	no
+before	M3Primitives	nativeToLittleEndian	(S)S	static	8	7	M3Primitives.java	49	49	1	jdk/internal/m3/hash/M3Primitives.java@1778-1862	no	no	no
+before	M3Primitives	nativeToLittleEndian	(C)C	static	8	7	M3Primitives.java	50	50	1	jdk/internal/m3/hash/M3Primitives.java@1867-1949	no	no	no
+before	M3Primitives	nativeToBigEndian	(J)J	static	8	7	M3Primitives.java	52	52	1	jdk/internal/m3/hash/M3Primitives.java@1955-2034	no	no	no
+before	M3Primitives	nativeToBigEndian	(I)I	static	8	7	M3Primitives.java	53	53	1	jdk/internal/m3/hash/M3Primitives.java@2039-2116	no	no	no
+before	M3Primitives	nativeToBigEndian	(S)S	static	8	7	M3Primitives.java	54	54	1	jdk/internal/m3/hash/M3Primitives.java@2121-2202	no	no	no
+before	M3Primitives	nativeToBigEndian	(C)C	static	8	7	M3Primitives.java	55	55	1	jdk/internal/m3/hash/M3Primitives.java@2207-2286	no	no	no
+before	M3Primitives$ByteOrderHelper	<init>	()V	private	5	4	M3Primitives.java	57	57	1		no	no	no
+before	M3Primitives$ByteOrderHelper	adjustByteOrder	(J)J	-	2	1	M3Primitives.java	58	58	1	jdk/internal/m3/hash/M3Primitives.java@2339-2387	no	no	no
+before	M3Primitives$ByteOrderHelper	adjustByteOrder	(I)I	-	2	1	M3Primitives.java	59	59	1	jdk/internal/m3/hash/M3Primitives.java@2396-2442	no	no	no
+before	M3Primitives$ByteOrderHelper	adjustByteOrder	(S)S	-	2	1	M3Primitives.java	60	60	1	jdk/internal/m3/hash/M3Primitives.java@2451-2501	no	no	no
+before	M3Primitives$ByteOrderHelper	adjustByteOrder	(C)C	-	2	1	M3Primitives.java	61	61	1	jdk/internal/m3/hash/M3Primitives.java@2510-2558	no	no	no
+before	M3Primitives$ByteOrderHelperReverse	<init>	()V	private	5	4	M3Primitives.java	63	63	1		no	no	no
+before	M3Primitives$ByteOrderHelperReverse	adjustByteOrder	(J)J	-	5	4	M3Primitives.java	64	64	1	jdk/internal/m3/hash/M3Primitives.java@2647-2714	no	no	no
+before	M3Primitives$ByteOrderHelperReverse	adjustByteOrder	(I)I	-	5	4	M3Primitives.java	65	65	1	jdk/internal/m3/hash/M3Primitives.java@2723-2791	no	no	no
+before	M3Primitives$ByteOrderHelperReverse	adjustByteOrder	(S)S	-	5	4	M3Primitives.java	66	66	1	jdk/internal/m3/hash/M3Primitives.java@2800-2870	no	no	no
+before	M3Primitives$ByteOrderHelperReverse	adjustByteOrder	(C)C	-	5	4	M3Primitives.java	67	67	1	jdk/internal/m3/hash/M3Primitives.java@2879-2951	no	no	no
+before	M3Util	<init>	()V	-	5	4	M3Util.java	12	12	1		no	no	no
+before	M3Util	checkArrayOffs	(III)V	static	30	29	M3Util.java	14	17	4	jdk/internal/m3/hash/M3Util.java@349-563	no	no	no
+before	M3WyHash	<init>	()V	-	5	4	M3WyHash.java	17	17	1		no	no	no
+before	M3WyHash	_wymum	(JJ)J	static|private	6	5	M3WyHash.java	25	27	3	jdk/internal/m3/hash/M3WyHash.java@1037-1160	no	no	no
+before	M3WyHash	_wyr3	(Ljdk/internal/m3/hash/M3Access;Ljava/lang/Object;JJ)J	static|private	40	39	M3WyHash.java	29	33	5	jdk/internal/m3/hash/M3WyHash.java@1166-1432	yes	no	no
+before	M3WyHash	u64Rorate32	(Ljdk/internal/m3/hash/M3Access;Ljava/lang/Object;J)J	static|private	21	20	M3WyHash.java	35	37	3	jdk/internal/m3/hash/M3WyHash.java@1438-1605	no	no	no
+before	M3WyHash	wyHash64	(JLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	static	1411	1410	M3WyHash.java	49	133	85	jdk/internal/m3/hash/M3WyHash.java@1981-7189	yes	yes	no
+before	M3WyHash	asLongHashFunctionWithoutSeed	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3WyHash.java	135	137	3	jdk/internal/m3/hash/M3WyHash.java@7195-7313	no	no	no
+before	M3WyHash	asLongHashFunctionWithSeed	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	9	8	M3WyHash.java	205	207	3	jdk/internal/m3/hash/M3WyHash.java@9580-9702	no	no	no
+before	M3WyHash$AsLongHashFunction	<init>	()V	private	5	4	M3WyHash.java	139	139	1		no	no	no
+before	M3WyHash$AsLongHashFunction	<clinit>	()V	static	11	10	M3WyHash.java	141	141	1		no	no	no
+before	M3WyHash$AsLongHashFunction	readResolve	()Ljava/lang/Object;	private	4	3	M3WyHash.java	143	145	3	jdk/internal/m3/hash/M3WyHash.java@7540-7618	no	no	no
+before	M3WyHash$AsLongHashFunction	seed	()J	-	2	1	M3WyHash.java	147	149	3	jdk/internal/m3/hash/M3WyHash.java@7628-7681	no	no	no
+before	M3WyHash$AsLongHashFunction	hashLong	(J)J	-	57	56	M3WyHash.java	151	159	9	jdk/internal/m3/hash/M3WyHash.java@7691-8052	yes	no	no
+before	M3WyHash$AsLongHashFunction	hashInt	(I)J	-	47	46	M3WyHash.java	161	168	8	jdk/internal/m3/hash/M3WyHash.java@8062-8406	yes	no	no
+before	M3WyHash$AsLongHashFunction	hashShort	(S)J	-	67	66	M3WyHash.java	170	177	8	jdk/internal/m3/hash/M3WyHash.java@8416-8776	yes	no	no
+before	M3WyHash$AsLongHashFunction	hashChar	(C)J	-	7	6	M3WyHash.java	179	182	4	jdk/internal/m3/hash/M3WyHash.java@8786-8898	no	no	no
+before	M3WyHash$AsLongHashFunction	hashByte	(B)J	-	54	53	M3WyHash.java	184	190	7	jdk/internal/m3/hash/M3WyHash.java@8908-9189	yes	no	no
+before	M3WyHash$AsLongHashFunction	hashVoid	()J	-	2	1	M3WyHash.java	192	195	4	jdk/internal/m3/hash/M3WyHash.java@9199-9273	no	no	no
+before	M3WyHash$AsLongHashFunction	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	-	24	23	M3WyHash.java	197	202	6	jdk/internal/m3/hash/M3WyHash.java@9283-9568	no	no	no
+before	M3WyHash$AsLongHashFunctionSeeded	<init>	(J)V	private	10	9	M3WyHash.java	214	216	3	jdk/internal/m3/hash/M3WyHash.java@9883-9968	no	no	no
+before	M3WyHash$AsLongHashFunctionSeeded	seed	()J	-	5	4	M3WyHash.java	218	221	4	jdk/internal/m3/hash/M3WyHash.java@9978-10051	no	no	no
+before	M3XXH3	<init>	()V	-	5	4	M3XXH3.java	33	33	1		no	no	no
+before	M3XXH3	<clinit>	()V	static	1227	1226	M3XXH3.java	34	37	4		yes	yes	no
+before	M3XXH3	XXH64_avalanche	(J)J	static|private	33	32	M3XXH3.java	67	73	7	jdk/internal/m3/hash/M3XXH3.java@5162-5364	no	no	no
+before	M3XXH3	XXH3_avalanche	(J)J	static|private	20	19	M3XXH3.java	74	78	5	jdk/internal/m3/hash/M3XXH3.java@5369-5519	no	no	no
+before	M3XXH3	XXH3_rrmxmx	(JJ)J	static|private	44	43	M3XXH3.java	79	85	7	jdk/internal/m3/hash/M3XXH3.java@5524-5805	yes	no	no
+before	M3XXH3	XXH3_mix16B	(JLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	static|private	62	61	M3XXH3.java	87	94	8	jdk/internal/m3/hash/M3XXH3.java@5811-6254	yes	no	no
+before	M3XXH3	XXH128_mix32B_once	(JJJJJJJ)J	static|private	51	50	M3XXH3.java	99	104	6	jdk/internal/m3/hash/M3XXH3.java@6350-6738	yes	no	no
+before	M3XXH3	XXH3_mix2Accs	(JJ[BJ)J	static|private	32	31	M3XXH3.java	106	110	5	jdk/internal/m3/hash/M3XXH3.java@6744-7008	no	no	no
+before	M3XXH3	XXH3_64bits_internal	(J[BLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	static|private	2478	2477	M3XXH3.java	112	347	236	jdk/internal/m3/hash/M3XXH3.java@7014-20775	yes	yes	no
+before	M3XXH3	XXH3_128bits_internal	(J[BLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ[J)J	static|private	3515	3514	M3XXH3.java	349	675	327	jdk/internal/m3/hash/M3XXH3.java@20781-40119	yes	yes	no
+before	M3XXH3	XXH3_initCustomSecret	([BJ)V	static|private	109	108	M3XXH3.java	677	686	10	jdk/internal/m3/hash/M3XXH3.java@40125-40648	yes	no	no
+before	M3XXH3	asLongHashFunctionWithoutSeed	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3XXH3.java	688	690	3	jdk/internal/m3/hash/M3XXH3.java@40654-40772	no	no	no
+before	M3XXH3	asLongHashFunctionWithSeed	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	21	20	M3XXH3.java	755	757	3	jdk/internal/m3/hash/M3XXH3.java@43687-43866	no	no	no
+before	M3XXH3	asLongTupleHashFunctionWithoutSeed	()Ljdk/internal/m3/hash/M3LongTupleHashFunction;	static	4	3	M3XXH3.java	781	783	3	jdk/internal/m3/hash/M3XXH3.java@44602-44735	no	no	no
+before	M3XXH3	asLongTupleLowHashFunctionWithoutSeed	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	7	6	M3XXH3.java	784	786	3	jdk/internal/m3/hash/M3XXH3.java@44740-44892	no	no	no
+before	M3XXH3	asLongTupleHashFunctionWithSeed	(J)Ljdk/internal/m3/hash/M3LongTupleHashFunction;	static	21	20	M3XXH3.java	912	914	3	jdk/internal/m3/hash/M3XXH3.java@50544-50743	no	no	no
+before	M3XXH3	asLongTupleLowHashFunctionWithSeed	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	12	11	M3XXH3.java	915	917	3	jdk/internal/m3/hash/M3XXH3.java@50748-50904	no	no	no
+before	M3XXH3$AsLongHashFunction	<init>	()V	private	5	4	M3XXH3.java	692	692	1		no	no	no
+before	M3XXH3$AsLongHashFunction	<clinit>	()V	static	11	10	M3XXH3.java	694	694	1		no	no	no
+before	M3XXH3$AsLongHashFunction	seed	()J	-	2	1	M3XXH3.java	696	698	3	jdk/internal/m3/hash/M3XXH3.java@41007-41060	no	no	no
+before	M3XXH3$AsLongHashFunction	hashLong	(J)J	-	71	70	M3XXH3.java	700	707	8	jdk/internal/m3/hash/M3XXH3.java@41070-41519	yes	no	no
+before	M3XXH3$AsLongHashFunction	hashInt	(I)J	-	75	74	M3XXH3.java	709	716	8	jdk/internal/m3/hash/M3XXH3.java@41529-42001	yes	no	no
+before	M3XXH3$AsLongHashFunction	hashShort	(S)J	-	82	81	M3XXH3.java	718	727	10	jdk/internal/m3/hash/M3XXH3.java@42011-42599	yes	no	no
+before	M3XXH3$AsLongHashFunction	hashChar	(C)J	-	7	6	M3XXH3.java	729	732	4	jdk/internal/m3/hash/M3XXH3.java@42609-42716	no	no	no
+before	M3XXH3$AsLongHashFunction	hashByte	(B)J	-	70	69	M3XXH3.java	734	742	9	jdk/internal/m3/hash/M3XXH3.java@42726-43207	yes	no	no
+before	M3XXH3$AsLongHashFunction	hashVoid	()J	-	34	33	M3XXH3.java	744	747	4	jdk/internal/m3/hash/M3XXH3.java@43217-43413	no	no	no
+before	M3XXH3$AsLongHashFunction	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	-	20	19	M3XXH3.java	749	752	4	jdk/internal/m3/hash/M3XXH3.java@43423-43675	no	no	no
+before	M3XXH3$AsLongHashFunctionSeeded	<init>	(J)V	private	27	26	M3XXH3.java	763	768	6		no	no	no
+before	M3XXH3$AsLongHashFunctionSeeded	seed	()J	-	5	4	M3XXH3.java	770	773	4	jdk/internal/m3/hash/M3XXH3.java@44255-44328	no	no	no
+before	M3XXH3$AsLongHashFunctionSeeded	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	-	24	23	M3XXH3.java	775	778	4	jdk/internal/m3/hash/M3XXH3.java@44338-44590	no	no	no
+before	M3XXH3$AsLongTupleHashFunction	<init>	()V	private	5	4	M3XXH3.java	788	788	1		no	no	no
+before	M3XXH3$AsLongTupleHashFunction	<clinit>	()V	static	11	10	M3XXH3.java	790	790	1		no	no	no
+before	M3XXH3$AsLongTupleHashFunction	seed	()J	-	2	1	M3XXH3.java	792	794	3	jdk/internal/m3/hash/M3XXH3.java@45142-45195	no	no	no
+before	M3XXH3$AsLongTupleHashFunction	bitsLength	()I	-	4	3	M3XXH3.java	796	799	4	jdk/internal/m3/hash/M3XXH3.java@45205-45282	no	no	no
+before	M3XXH3$AsLongTupleHashFunction	newResultArray	()[J	-	4	3	M3XXH3.java	801	804	4	jdk/internal/m3/hash/M3XXH3.java@45292-45421	no	no	no
+before	M3XXH3$AsLongTupleHashFunction	dualHashLong	(J[J)J	-	149	148	M3XXH3.java	806	827	22	jdk/internal/m3/hash/M3XXH3.java@45431-46431	yes	no	no
+before	M3XXH3$AsLongTupleHashFunction	dualHashInt	(I[J)J	-	157	156	M3XXH3.java	829	851	23	jdk/internal/m3/hash/M3XXH3.java@46441-47504	yes	no	no
+before	M3XXH3$AsLongTupleHashFunction	dualHashShort	(S[J)J	-	163	162	M3XXH3.java	853	870	18	jdk/internal/m3/hash/M3XXH3.java@47514-48594	yes	no	no
+before	M3XXH3$AsLongTupleHashFunction	dualHashChar	(C[J)J	-	8	7	M3XXH3.java	872	875	4	jdk/internal/m3/hash/M3XXH3.java@48604-48748	no	no	no
+before	M3XXH3$AsLongTupleHashFunction	dualHashByte	(B[J)J	-	150	149	M3XXH3.java	877	894	18	jdk/internal/m3/hash/M3XXH3.java@48758-49767	yes	no	no
+before	M3XXH3$AsLongTupleHashFunction	dualHashVoid	([J)J	-	81	80	M3XXH3.java	896	904	9	jdk/internal/m3/hash/M3XXH3.java@49777-50236	yes	no	no
+before	M3XXH3$AsLongTupleHashFunction	dualHash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ[J)J	-	22	21	M3XXH3.java	906	909	4	jdk/internal/m3/hash/M3XXH3.java@50246-50532	no	no	no
+before	M3XXH3$AsLongTupleHashFunctionSeeded	<init>	(J)V	private	27	26	M3XXH3.java	923	928	6		no	no	no
+before	M3XXH3$AsLongTupleHashFunctionSeeded	seed	()J	-	5	4	M3XXH3.java	930	933	4	jdk/internal/m3/hash/M3XXH3.java@51308-51381	no	no	no
+before	M3XXH3$AsLongTupleHashFunctionSeeded	dualHash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ[J)J	-	26	25	M3XXH3.java	935	938	4	jdk/internal/m3/hash/M3XXH3.java@51391-51667	no	no	no
+before	M3XxHash	<init>	()V	-	5	4	M3XxHash.java	29	29	1		no	no	no
+before	M3XxHash	xxHash64	(JLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	static	637	636	M3XxHash.java	37	128	92	jdk/internal/m3/hash/M3XxHash.java@1493-3987	yes	yes	no
+before	M3XxHash	finalize	(J)J	static|private	35	34	M3XxHash.java	130	137	8	jdk/internal/m3/hash/M3XxHash.java@3993-4188	no	no	no
+before	M3XxHash	asLongHashFunctionWithoutSeed	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3XxHash.java	139	141	3	jdk/internal/m3/hash/M3XxHash.java@4194-4312	no	no	no
+before	M3XxHash	asLongHashFunctionWithSeed	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	9	8	M3XxHash.java	213	215	3	jdk/internal/m3/hash/M3XxHash.java@6656-6778	no	no	no
+before	M3XxHash$AsLongHashFunction	<init>	()V	private	5	4	M3XxHash.java	143	143	1		no	no	no
+before	M3XxHash$AsLongHashFunction	<clinit>	()V	static	20	19	M3XxHash.java	145	146	2		no	no	no
+before	M3XxHash$AsLongHashFunction	readResolve	()Ljava/lang/Object;	private	4	3	M3XxHash.java	148	150	3	jdk/internal/m3/hash/M3XxHash.java@4608-4686	no	no	no
+before	M3XxHash$AsLongHashFunction	seed	()J	-	2	1	M3XxHash.java	152	154	3	jdk/internal/m3/hash/M3XxHash.java@4696-4749	no	no	no
+before	M3XxHash$AsLongHashFunction	hashLong	(J)J	-	61	60	M3XxHash.java	156	166	11	jdk/internal/m3/hash/M3XxHash.java@4759-5149	yes	no	no
+before	M3XxHash$AsLongHashFunction	hashInt	(I)J	-	49	48	M3XxHash.java	168	175	8	jdk/internal/m3/hash/M3XxHash.java@5159-5480	yes	no	no
+before	M3XxHash$AsLongHashFunction	hashShort	(S)J	-	72	71	M3XxHash.java	177	186	10	jdk/internal/m3/hash/M3XxHash.java@5490-5926	yes	no	no
+before	M3XxHash$AsLongHashFunction	hashChar	(C)J	-	7	6	M3XxHash.java	188	191	4	jdk/internal/m3/hash/M3XxHash.java@5936-6043	no	no	no
+before	M3XxHash$AsLongHashFunction	hashByte	(B)J	-	39	38	M3XxHash.java	193	199	7	jdk/internal/m3/hash/M3XxHash.java@6053-6310	yes	no	no
+before	M3XxHash$AsLongHashFunction	hashVoid	()J	-	4	3	M3XxHash.java	201	204	4	jdk/internal/m3/hash/M3XxHash.java@6320-6402	no	no	no
+before	M3XxHash$AsLongHashFunction	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	-	24	23	M3XxHash.java	206	210	5	jdk/internal/m3/hash/M3XxHash.java@6412-6644	no	no	no
+before	M3XxHash$AsLongHashFunctionSeeded	<init>	(J)V	private	22	21	M3XxHash.java	223	226	4	jdk/internal/m3/hash/M3XxHash.java@7006-7144	no	no	no
+before	M3XxHash$AsLongHashFunctionSeeded	seed	()J	-	5	4	M3XxHash.java	228	231	4	jdk/internal/m3/hash/M3XxHash.java@7154-7227	no	no	no
+before	M3XxHash$AsLongHashFunctionSeeded	hashVoid	()J	-	5	4	M3XxHash.java	233	236	4	jdk/internal/m3/hash/M3XxHash.java@7237-7318	no	no	no
+after	M3Access	toByteBuffer	()Ljdk/internal/m3/hash/M3Access;	static	4	3	M3Access.java	72	74	3	jdk/internal/m3/hash/M3Access.java@3426-3527	no	no	no
+after	M3Access	toNativeCharSequence	()Ljdk/internal/m3/hash/M3Access;	static	4	3	M3Access.java	93	96	4	jdk/internal/m3/hash/M3Access.java@4403-4597	no	no	no
+after	M3Access	toCharSequence	(Ljava/nio/ByteOrder;)Ljdk/internal/m3/hash/M3Access;	static	5	4	M3Access.java	116	119	4	jdk/internal/m3/hash/M3Access.java@5429-5645	no	no	no
+after	M3Access	<init>	()V	-	5	4	M3Access.java	124	124	1	jdk/internal/m3/hash/M3Access.java@5709-5732	no	no	no
+after	M3Access	getLong	(Ljava/lang/Object;J)J	-	53	52	M3Access.java	136	142	7	jdk/internal/m3/hash/M3Access.java@6180-6495	yes	no	no
+after	M3Access	getUnsignedInt	(Ljava/lang/Object;J)J	-	12	11	M3Access.java	154	156	3	jdk/internal/m3/hash/M3Access.java@6907-7024	no	no	no
+after	M3Access	getInt	(Ljava/lang/Object;J)I	-	53	52	M3Access.java	168	174	7	jdk/internal/m3/hash/M3Access.java@7470-7791	yes	no	no
+after	M3Access	getUnsignedShort	(Ljava/lang/Object;J)I	-	49	48	M3Access.java	186	192	7	jdk/internal/m3/hash/M3Access.java@8201-8526	yes	no	no
+after	M3Access	getShort	(Ljava/lang/Object;J)I	-	8	7	M3Access.java	204	206	3	jdk/internal/m3/hash/M3Access.java@9031-9142	no	no	no
+after	M3Access	getUnsignedByte	(Ljava/lang/Object;J)I	-	11	10	M3Access.java	216	218	3	jdk/internal/m3/hash/M3Access.java@9497-9599	no	no	no
+after	M3Access	i64	(Ljava/lang/Object;J)J	-	7	6	M3Access.java	232	232	1	jdk/internal/m3/hash/M3Access.java@10086-10170	no	no	no
+after	M3Access	u32	(Ljava/lang/Object;J)J	-	7	6	M3Access.java	233	233	1	jdk/internal/m3/hash/M3Access.java@10175-10266	no	no	no
+after	M3Access	i32	(Ljava/lang/Object;J)I	-	7	6	M3Access.java	234	234	1	jdk/internal/m3/hash/M3Access.java@10271-10354	no	no	no
+after	M3Access	u16	(Ljava/lang/Object;J)I	-	7	6	M3Access.java	235	235	1	jdk/internal/m3/hash/M3Access.java@10359-10452	no	no	no
+after	M3Access	i16	(Ljava/lang/Object;J)I	-	7	6	M3Access.java	236	236	1	jdk/internal/m3/hash/M3Access.java@10457-10542	no	no	no
+after	M3Access	u8	(Ljava/lang/Object;J)I	-	7	6	M3Access.java	237	237	1	jdk/internal/m3/hash/M3Access.java@10547-10639	no	no	no
+after	M3Access	i8	(Ljava/lang/Object;J)I	-	7	6	M3Access.java	238	238	1	jdk/internal/m3/hash/M3Access.java@10644-10728	no	no	no
+after	M3Access	byteOrder	(Ljava/lang/Object;Ljava/nio/ByteOrder;)Ljdk/internal/m3/hash/M3Access;	-	18	-1	M3Access.java	258	260	3	jdk/internal/m3/hash/M3Access.java@11441-11590	no	no	no
+after	M3Access	newDefaultReverseAccess	(Ljdk/internal/m3/hash/M3Access;)Ljdk/internal/m3/hash/M3Access;	static	23	22	M3Access.java	271	275	5	jdk/internal/m3/hash/M3Access.java@11892-12106	no	no	no
+after	M3Access$ReverseAccess	<init>	(Ljdk/internal/m3/hash/M3Access;)V	private	10	9	M3Access.java	282	284	3	jdk/internal/m3/hash/M3Access.java@12301-12394	no	no	no
+after	M3Access$ReverseAccess	i64	(Ljava/lang/Object;J)J	-	7	6	M3Access.java	287	290	4	jdk/internal/m3/hash/M3Access.java@12503-12625	no	no	no
+after	M3Access$ReverseAccess	u32	(Ljava/lang/Object;J)J	-	7	6	M3Access.java	293	296	4	jdk/internal/m3/hash/M3Access.java@12734-12863	no	no	no
+after	M3Access$ReverseAccess	i32	(Ljava/lang/Object;J)I	-	7	6	M3Access.java	299	302	4	jdk/internal/m3/hash/M3Access.java@12972-13092	no	no	no
+after	M3Access$ReverseAccess	u16	(Ljava/lang/Object;J)I	-	7	6	M3Access.java	305	308	4	jdk/internal/m3/hash/M3Access.java@13201-13331	no	no	no
+after	M3Access$ReverseAccess	i16	(Ljava/lang/Object;J)I	-	7	6	M3Access.java	311	314	4	jdk/internal/m3/hash/M3Access.java@13440-13562	no	no	no
+after	M3Access$ReverseAccess	u8	(Ljava/lang/Object;J)I	-	7	6	M3Access.java	317	320	4	jdk/internal/m3/hash/M3Access.java@13670-13798	no	no	no
+after	M3Access$ReverseAccess	i8	(Ljava/lang/Object;J)I	-	7	6	M3Access.java	323	326	4	jdk/internal/m3/hash/M3Access.java@13906-14026	no	no	no
+after	M3Access$ReverseAccess	getLong	(Ljava/lang/Object;J)J	-	13	12	M3Access.java	327	330	4	jdk/internal/m3/hash/M3Access.java@14035-14187	no	no	no
+after	M3Access$ReverseAccess	getUnsignedInt	(Ljava/lang/Object;J)J	-	16	15	M3Access.java	331	334	4	jdk/internal/m3/hash/M3Access.java@14196-14369	no	no	no
+after	M3Access$ReverseAccess	getInt	(Ljava/lang/Object;J)I	-	13	12	M3Access.java	335	338	4	jdk/internal/m3/hash/M3Access.java@14378-14530	no	no	no
+after	M3Access$ReverseAccess	getUnsignedShort	(Ljava/lang/Object;J)I	-	16	15	M3Access.java	339	342	4	jdk/internal/m3/hash/M3Access.java@14539-14718	no	no	no
+after	M3Access$ReverseAccess	getShort	(Ljava/lang/Object;J)I	-	16	15	M3Access.java	343	346	4	jdk/internal/m3/hash/M3Access.java@14727-14889	no	no	no
+after	M3Access$ReverseAccess	getUnsignedByte	(Ljava/lang/Object;J)I	-	10	9	M3Access.java	347	350	4	jdk/internal/m3/hash/M3Access.java@14898-15046	no	no	no
+after	M3Access$ReverseAccess	getByte	(Ljava/lang/Object;J)I	-	10	9	M3Access.java	351	354	4	jdk/internal/m3/hash/M3Access.java@15055-15187	no	no	no
+after	M3Access$ReverseAccess	byteOrder	(Ljava/lang/Object;)Ljava/nio/ByteOrder;	-	24	23	M3Access.java	355	358	4	jdk/internal/m3/hash/M3Access.java@15196-15357	no	no	no
+after	M3Access$ReverseAccess	reverseAccess	()Ljdk/internal/m3/hash/M3Access;	-	5	4	M3Access.java	359	362	4	jdk/internal/m3/hash/M3Access.java@15366-15460	no	no	no
+after	M3ByteArrayAccess	byteOrder	(Ljava/lang/Object;)Ljava/nio/ByteOrder;	bridge|synthetic	9	8	M3ByteArrayAccess.java	29	29	1		no	no	no
+after	M3ByteArrayAccess	getByte	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteArrayAccess.java	29	29	1		no	no	no
+after	M3ByteArrayAccess	getInt	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteArrayAccess.java	29	29	1		no	no	no
+after	M3ByteArrayAccess	getLong	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3ByteArrayAccess.java	29	29	1		no	no	no
+after	M3ByteArrayAccess	getShort	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteArrayAccess.java	29	29	1		no	no	no
+after	M3ByteArrayAccess	getUnsignedByte	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteArrayAccess.java	29	29	1		no	no	no
+after	M3ByteArrayAccess	getUnsignedInt	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3ByteArrayAccess.java	29	29	1		no	no	no
+after	M3ByteArrayAccess	getUnsignedShort	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteArrayAccess.java	29	29	1		no	no	no
+after	M3ByteArrayAccess	i16	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteArrayAccess.java	29	29	1		no	no	no
+after	M3ByteArrayAccess	i32	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteArrayAccess.java	29	29	1		no	no	no
+after	M3ByteArrayAccess	i64	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3ByteArrayAccess.java	29	29	1		no	no	no
+after	M3ByteArrayAccess	u16	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteArrayAccess.java	29	29	1		no	no	no
+after	M3ByteArrayAccess	u32	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3ByteArrayAccess.java	29	29	1		no	no	no
+after	M3ByteArrayAccess	<clinit>	()V	static	26	25	M3ByteArrayAccess.java	33	40	8		no	no	no
+after	M3ByteArrayAccess	<init>	()V	private	5	4	M3ByteArrayAccess.java	42	42	1	jdk/internal/m3/hash/M3ByteArrayAccess.java@1470-1500	no	no	no
+after	M3ByteArrayAccess	address	(J)J	static|private	7	6	M3ByteArrayAccess.java	45	47	3	jdk/internal/m3/hash/M3ByteArrayAccess.java@1604-1713	no	no	no
+after	M3ByteArrayAccess	i64	([BJ)J	-	13	12	M3ByteArrayAccess.java	50	53	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@1819-1966	no	no	no
+after	M3ByteArrayAccess	u32	([BJ)J	-	16	15	M3ByteArrayAccess.java	56	59	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@2072-2231	no	no	no
+after	M3ByteArrayAccess	i32	([BJ)I	-	13	12	M3ByteArrayAccess.java	62	65	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@2337-2482	no	no	no
+after	M3ByteArrayAccess	u16	([BJ)I	-	16	15	M3ByteArrayAccess.java	68	71	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@2588-2750	no	no	no
+after	M3ByteArrayAccess	i16	([BJ)I	-	13	12	M3ByteArrayAccess.java	74	77	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@2856-3003	no	no	no
+after	M3ByteArrayAccess	getLong	([BJ)J	-	7	6	M3ByteArrayAccess.java	79	82	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@3009-3144	no	no	no
+after	M3ByteArrayAccess	getUnsignedInt	([BJ)J	-	10	9	M3ByteArrayAccess.java	84	87	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@3150-3276	no	no	no
+after	M3ByteArrayAccess	getInt	([BJ)I	-	7	6	M3ByteArrayAccess.java	89	92	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@3282-3414	no	no	no
+after	M3ByteArrayAccess	getUnsignedShort	([BJ)I	-	10	9	M3ByteArrayAccess.java	94	97	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@3420-3551	no	no	no
+after	M3ByteArrayAccess	getShort	([BJ)I	-	7	6	M3ByteArrayAccess.java	99	102	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@3557-3693	no	no	no
+after	M3ByteArrayAccess	getUnsignedByte	([BJ)I	-	10	9	M3ByteArrayAccess.java	104	107	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@3699-3827	no	no	no
+after	M3ByteArrayAccess	getByte	([BJ)I	-	5	4	M3ByteArrayAccess.java	109	112	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@3833-3936	no	no	no
+after	M3ByteArrayAccess	byteOrder	([B)Ljava/nio/ByteOrder;	-	4	3	M3ByteArrayAccess.java	114	117	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@3942-4044	no	no	no
+after	M3ByteArrayAccess	reverseAccess	()Ljdk/internal/m3/hash/M3Access;	-	4	3	M3ByteArrayAccess.java	119	122	4	jdk/internal/m3/hash/M3ByteArrayAccess.java@4050-4150	no	no	no
+after	M3ByteBufferAccess	byteOrder	(Ljava/lang/Object;)Ljava/nio/ByteOrder;	bridge|synthetic	9	8	M3ByteBufferAccess.java	26	26	1		no	no	no
+after	M3ByteBufferAccess	getByte	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteBufferAccess.java	26	26	1		no	no	no
+after	M3ByteBufferAccess	getInt	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteBufferAccess.java	26	26	1		no	no	no
+after	M3ByteBufferAccess	getLong	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3ByteBufferAccess.java	26	26	1		no	no	no
+after	M3ByteBufferAccess	getShort	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteBufferAccess.java	26	26	1		no	no	no
+after	M3ByteBufferAccess	getUnsignedByte	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteBufferAccess.java	26	26	1		no	no	no
+after	M3ByteBufferAccess	getUnsignedInt	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3ByteBufferAccess.java	26	26	1		no	no	no
+after	M3ByteBufferAccess	getUnsignedShort	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteBufferAccess.java	26	26	1		no	no	no
+after	M3ByteBufferAccess	i16	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteBufferAccess.java	26	26	1		no	no	no
+after	M3ByteBufferAccess	i32	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteBufferAccess.java	26	26	1		no	no	no
+after	M3ByteBufferAccess	i64	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3ByteBufferAccess.java	26	26	1		no	no	no
+after	M3ByteBufferAccess	i8	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteBufferAccess.java	26	26	1		no	no	no
+after	M3ByteBufferAccess	u16	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteBufferAccess.java	26	26	1		no	no	no
+after	M3ByteBufferAccess	u32	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3ByteBufferAccess.java	26	26	1		no	no	no
+after	M3ByteBufferAccess	u8	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3ByteBufferAccess.java	26	26	1		no	no	no
+after	M3ByteBufferAccess	<clinit>	()V	static	20	19	M3ByteBufferAccess.java	27	28	2		no	no	no
+after	M3ByteBufferAccess	<init>	()V	private	5	4	M3ByteBufferAccess.java	30	30	1	jdk/internal/m3/hash/M3ByteBufferAccess.java@1218-1249	no	no	no
+after	M3ByteBufferAccess	i64	(Ljava/nio/ByteBuffer;J)J	-	7	6	M3ByteBufferAccess.java	33	36	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@1350-1469	no	no	no
+after	M3ByteBufferAccess	u32	(Ljava/nio/ByteBuffer;J)J	-	7	6	M3ByteBufferAccess.java	39	42	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@1570-1696	no	no	no
+after	M3ByteBufferAccess	i32	(Ljava/nio/ByteBuffer;J)I	-	7	6	M3ByteBufferAccess.java	45	48	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@1797-1914	no	no	no
+after	M3ByteBufferAccess	u16	(Ljava/nio/ByteBuffer;J)I	-	7	6	M3ByteBufferAccess.java	51	54	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@2015-2142	no	no	no
+after	M3ByteBufferAccess	i16	(Ljava/nio/ByteBuffer;J)I	-	7	6	M3ByteBufferAccess.java	57	60	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@2243-2362	no	no	no
+after	M3ByteBufferAccess	u8	(Ljava/nio/ByteBuffer;J)I	-	7	6	M3ByteBufferAccess.java	63	66	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@2462-2587	no	no	no
+after	M3ByteBufferAccess	i8	(Ljava/nio/ByteBuffer;J)I	-	7	6	M3ByteBufferAccess.java	69	72	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@2687-2804	no	no	no
+after	M3ByteBufferAccess	getLong	(Ljava/nio/ByteBuffer;J)J	-	7	6	M3ByteBufferAccess.java	74	77	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@2810-2926	no	no	no
+after	M3ByteBufferAccess	getUnsignedInt	(Ljava/nio/ByteBuffer;J)J	-	10	9	M3ByteBufferAccess.java	79	82	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@2932-3075	no	no	no
+after	M3ByteBufferAccess	getInt	(Ljava/nio/ByteBuffer;J)I	-	7	6	M3ByteBufferAccess.java	84	87	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@3081-3194	no	no	no
+after	M3ByteBufferAccess	getUnsignedShort	(Ljava/nio/ByteBuffer;J)I	-	10	9	M3ByteBufferAccess.java	89	92	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@3200-3348	no	no	no
+after	M3ByteBufferAccess	getShort	(Ljava/nio/ByteBuffer;J)I	-	7	6	M3ByteBufferAccess.java	94	97	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@3354-3471	no	no	no
+after	M3ByteBufferAccess	getUnsignedByte	(Ljava/nio/ByteBuffer;J)I	-	10	9	M3ByteBufferAccess.java	99	102	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@3477-3622	no	no	no
+after	M3ByteBufferAccess	getByte	(Ljava/nio/ByteBuffer;J)I	-	7	6	M3ByteBufferAccess.java	104	107	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@3628-3739	no	no	no
+after	M3ByteBufferAccess	byteOrder	(Ljava/nio/ByteBuffer;)Ljava/nio/ByteOrder;	-	5	4	M3ByteBufferAccess.java	109	112	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@3745-3841	no	no	no
+after	M3ByteBufferAccess	reverseAccess	()Ljdk/internal/m3/hash/M3Access;	-	4	3	M3ByteBufferAccess.java	114	117	4	jdk/internal/m3/hash/M3ByteBufferAccess.java@3847-3948	no	no	no
+after	M3CharSequenceAccess	getByte	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	28	28	1		no	no	no
+after	M3CharSequenceAccess	getInt	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	28	28	1		no	no	no
+after	M3CharSequenceAccess	getShort	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	28	28	1		no	no	no
+after	M3CharSequenceAccess	i16	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	28	28	1		no	no	no
+after	M3CharSequenceAccess	i32	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	28	28	1		no	no	no
+after	M3CharSequenceAccess	i64	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3CharSequenceAccess.java	28	28	1		no	no	no
+after	M3CharSequenceAccess	i8	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	28	28	1		no	no	no
+after	M3CharSequenceAccess	u16	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	28	28	1		no	no	no
+after	M3CharSequenceAccess	u32	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3CharSequenceAccess.java	28	28	1		no	no	no
+after	M3CharSequenceAccess	u8	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	28	28	1		no	no	no
+after	M3CharSequenceAccess	charSequenceAccess	(Ljava/nio/ByteOrder;)Ljdk/internal/m3/hash/M3CharSequenceAccess;	static	17	16	M3CharSequenceAccess.java	30	34	5	jdk/internal/m3/hash/M3CharSequenceAccess.java@1102-1325	no	no	no
+after	M3CharSequenceAccess	nativeCharSequenceAccess	()Ljdk/internal/m3/hash/M3CharSequenceAccess;	static	7	6	M3CharSequenceAccess.java	36	38	3	jdk/internal/m3/hash/M3CharSequenceAccess.java@1331-1453	no	no	no
+after	M3CharSequenceAccess	ix	(J)I	static|private	5	4	M3CharSequenceAccess.java	40	42	3	jdk/internal/m3/hash/M3CharSequenceAccess.java@1459-1537	no	no	no
+after	M3CharSequenceAccess	getLong	(Ljava/lang/CharSequence;JIIIIII)J	static	201	200	M3CharSequenceAccess.java	44	62	19	jdk/internal/m3/hash/M3CharSequenceAccess.java@1543-2623	yes	no	no
+after	M3CharSequenceAccess	getUnsignedInt	(Ljava/lang/CharSequence;JIIII)J	static	118	117	M3CharSequenceAccess.java	64	77	14	jdk/internal/m3/hash/M3CharSequenceAccess.java@2629-3360	yes	no	no
+after	M3CharSequenceAccess	getUnsignedShort	(Ljava/lang/CharSequence;JII)C	static	63	62	M3CharSequenceAccess.java	79	89	11	jdk/internal/m3/hash/M3CharSequenceAccess.java@3366-3838	yes	no	no
+after	M3CharSequenceAccess	getUnsignedByte	(Ljava/lang/CharSequence;JI)I	static	16	15	M3CharSequenceAccess.java	91	93	3	jdk/internal/m3/hash/M3CharSequenceAccess.java@3844-4009	no	no	no
+after	M3CharSequenceAccess	<init>	()V	private	5	4	M3CharSequenceAccess.java	95	95	1	jdk/internal/m3/hash/M3CharSequenceAccess.java@4015-4048	no	no	no
+after	M3CharSequenceAccess	i64	(Ljava/lang/CharSequence;J)J	-	7	6	M3CharSequenceAccess.java	98	101	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@4149-4270	no	no	no
+after	M3CharSequenceAccess	u32	(Ljava/lang/CharSequence;J)J	-	7	6	M3CharSequenceAccess.java	104	107	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@4371-4499	no	no	no
+after	M3CharSequenceAccess	i32	(Ljava/lang/CharSequence;J)I	-	7	6	M3CharSequenceAccess.java	110	113	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@4600-4719	no	no	no
+after	M3CharSequenceAccess	u16	(Ljava/lang/CharSequence;J)I	-	7	6	M3CharSequenceAccess.java	116	119	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@4820-4949	no	no	no
+after	M3CharSequenceAccess	i16	(Ljava/lang/CharSequence;J)I	-	7	6	M3CharSequenceAccess.java	122	125	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@5050-5171	no	no	no
+after	M3CharSequenceAccess	u8	(Ljava/lang/CharSequence;J)I	-	7	6	M3CharSequenceAccess.java	128	131	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@5271-5398	no	no	no
+after	M3CharSequenceAccess	i8	(Ljava/lang/CharSequence;J)I	-	7	6	M3CharSequenceAccess.java	134	137	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@5498-5617	no	no	no
+after	M3CharSequenceAccess	getInt	(Ljava/lang/CharSequence;J)I	-	8	7	M3CharSequenceAccess.java	139	142	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@5623-5747	no	no	no
+after	M3CharSequenceAccess	getShort	(Ljava/lang/CharSequence;J)I	-	8	7	M3CharSequenceAccess.java	144	147	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@5753-5887	no	no	no
+after	M3CharSequenceAccess	getByte	(Ljava/lang/CharSequence;J)I	-	8	7	M3CharSequenceAccess.java	149	152	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@5893-6026	no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	byteOrder	(Ljava/lang/Object;)Ljava/nio/ByteOrder;	bridge|synthetic	9	8	M3CharSequenceAccess.java	191	191	1		no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	getByte	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	191	191	1		no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	getInt	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	191	191	1		no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	getLong	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3CharSequenceAccess.java	191	191	1		no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	getShort	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	191	191	1		no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	getUnsignedByte	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	191	191	1		no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	getUnsignedInt	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3CharSequenceAccess.java	191	191	1		no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	getUnsignedShort	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	191	191	1		no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	i16	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	191	191	1		no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	i32	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	191	191	1		no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	i64	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3CharSequenceAccess.java	191	191	1		no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	i8	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	191	191	1		no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	u16	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	191	191	1		no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	u32	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3CharSequenceAccess.java	191	191	1		no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	u8	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	191	191	1		no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	<clinit>	()V	static	20	19	M3CharSequenceAccess.java	192	193	2		no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	<init>	()V	private	5	4	M3CharSequenceAccess.java	195	195	1	jdk/internal/m3/hash/M3CharSequenceAccess.java@7585-7625	no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	getLong	(Ljava/lang/CharSequence;J)J	-	12	11	M3CharSequenceAccess.java	197	200	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@7635-7778	no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	getUnsignedInt	(Ljava/lang/CharSequence;J)J	-	10	9	M3CharSequenceAccess.java	202	205	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@7788-7939	no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	getUnsignedShort	(Ljava/lang/CharSequence;J)I	-	8	7	M3CharSequenceAccess.java	207	210	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@7949-8097	no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	getUnsignedByte	(Ljava/lang/CharSequence;J)I	-	14	13	M3CharSequenceAccess.java	212	215	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@8107-8278	no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	byteOrder	(Ljava/lang/CharSequence;)Ljava/nio/ByteOrder;	-	4	3	M3CharSequenceAccess.java	217	220	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@8288-8395	no	no	no
+after	M3CharSequenceAccess$BigEndianCharSequenceAccess	reverseAccess	()Ljdk/internal/m3/hash/M3Access;	-	4	3	M3CharSequenceAccess.java	222	225	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@8405-8520	no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	byteOrder	(Ljava/lang/Object;)Ljava/nio/ByteOrder;	bridge|synthetic	9	8	M3CharSequenceAccess.java	154	154	1		no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getByte	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	154	154	1		no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getInt	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	154	154	1		no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getLong	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3CharSequenceAccess.java	154	154	1		no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getShort	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	154	154	1		no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getUnsignedByte	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	154	154	1		no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getUnsignedInt	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3CharSequenceAccess.java	154	154	1		no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getUnsignedShort	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	154	154	1		no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	i16	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	154	154	1		no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	i32	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	154	154	1		no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	i64	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3CharSequenceAccess.java	154	154	1		no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	i8	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	154	154	1		no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	u16	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	154	154	1		no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	u32	(Ljava/lang/Object;J)J	bridge|synthetic	10	9	M3CharSequenceAccess.java	154	154	1		no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	u8	(Ljava/lang/Object;J)I	bridge|synthetic	10	9	M3CharSequenceAccess.java	154	154	1		no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	<clinit>	()V	static	20	19	M3CharSequenceAccess.java	155	156	2		no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	<init>	()V	private	5	4	M3CharSequenceAccess.java	158	158	1	jdk/internal/m3/hash/M3CharSequenceAccess.java@6338-6381	no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getLong	(Ljava/lang/CharSequence;J)J	-	12	11	M3CharSequenceAccess.java	160	163	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@6391-6534	no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getUnsignedInt	(Ljava/lang/CharSequence;J)J	-	10	9	M3CharSequenceAccess.java	165	168	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@6544-6695	no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getUnsignedShort	(Ljava/lang/CharSequence;J)I	-	8	7	M3CharSequenceAccess.java	170	173	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@6705-6853	no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getUnsignedByte	(Ljava/lang/CharSequence;J)I	-	12	11	M3CharSequenceAccess.java	175	178	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@6863-7028	no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	byteOrder	(Ljava/lang/CharSequence;)Ljava/nio/ByteOrder;	-	4	3	M3CharSequenceAccess.java	180	183	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@7038-7148	no	no	no
+after	M3CharSequenceAccess$LittleEndianCharSequenceAccess	reverseAccess	()Ljdk/internal/m3/hash/M3Access;	-	4	3	M3CharSequenceAccess.java	185	188	4	jdk/internal/m3/hash/M3CharSequenceAccess.java@7158-7273	no	no	no
+after	M3CityAndFarmHash_1_1	<init>	()V	-	5	4	M3CityAndFarmHash_1_1.java	32	32	1		no	no	no
+after	M3CityAndFarmHash_1_1	shiftMix	(J)J	static|private	7	6	M3CityAndFarmHash_1_1.java	37	39	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@1466-1547	no	no	no
+after	M3CityAndFarmHash_1_1	hashLen16	(JJ)J	static|private	9	8	M3CityAndFarmHash_1_1.java	41	43	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@1553-1645	no	no	no
+after	M3CityAndFarmHash_1_1	hashLen16	(JJJ)J	static|private	25	24	M3CityAndFarmHash_1_1.java	47	50	4	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@1711-1862	no	no	no
+after	M3CityAndFarmHash_1_1	mul	(J)J	static|private	8	7	M3CityAndFarmHash_1_1.java	52	54	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@1868-1941	no	no	no
+after	M3CityAndFarmHash_1_1	hash1To3Bytes	(IIII)J	static|private	38	37	M3CityAndFarmHash_1_1.java	56	60	5	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@1947-2203	yes	no	no
+after	M3CityAndFarmHash_1_1	hash4To7Bytes	(JJJ)J	static|private	19	18	M3CityAndFarmHash_1_1.java	62	65	4	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@2209-2393	no	no	no
+after	M3CityAndFarmHash_1_1	hash8To16Bytes	(JJJ)J	static|private	53	52	M3CityAndFarmHash_1_1.java	67	73	7	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@2399-2701	yes	no	no
+after	M3CityAndFarmHash_1_1	hashLen0To16	(Ljdk/internal/m3/hash/M3Access;Ljava/lang/Object;JJ)J	static|private	142	141	M3CityAndFarmHash_1_1.java	75	91	17	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@2707-3393	yes	no	no
+after	M3CityAndFarmHash_1_1	hashLen17To32	(Ljdk/internal/m3/hash/M3Access;Ljava/lang/Object;JJ)J	static|private	112	111	M3CityAndFarmHash_1_1.java	93	101	9	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@3399-3844	yes	no	no
+after	M3CityAndFarmHash_1_1	cityHashLen33To64	(Ljdk/internal/m3/hash/M3Access;Ljava/lang/Object;JJ)J	static|private	275	274	M3CityAndFarmHash_1_1.java	103	122	20	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@3850-4780	yes	no	no
+after	M3CityAndFarmHash_1_1	cityHash64	(Ljdk/internal/m3/hash/M3Access;Ljava/lang/Object;JJ)J	static	875	874	M3CityAndFarmHash_1_1.java	124	223	100	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@4786-8319	yes	yes	no
+after	M3CityAndFarmHash_1_1	asLongHashFunctionWithoutSeed	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3CityAndFarmHash_1_1.java	292	294	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@10811-10929	no	no	no
+after	M3CityAndFarmHash_1_1	asLongHashFunctionWithSeed	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	12	11	M3CityAndFarmHash_1_1.java	319	321	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@11554-11680	no	no	no
+after	M3CityAndFarmHash_1_1	asLongHashFunctionWithTwoSeeds	(JJ)Ljdk/internal/m3/hash/M3LongHashFunction;	static	10	9	M3CityAndFarmHash_1_1.java	323	325	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@11686-11833	no	no	no
+after	M3CityAndFarmHash_1_1	naHashLen33To64	(Ljdk/internal/m3/hash/M3Access;Ljava/lang/Object;JJ)J	static|private	229	228	M3CityAndFarmHash_1_1.java	330	344	15	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@11857-12650	yes	no	no
+after	M3CityAndFarmHash_1_1	naHash64	(Ljdk/internal/m3/hash/M3Access;Ljava/lang/Object;JJ)J	static	966	965	M3CityAndFarmHash_1_1.java	346	448	103	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@12656-16313	yes	yes	no
+after	M3CityAndFarmHash_1_1	naHash64WithSeeds	(Ljdk/internal/m3/hash/M3Access;Ljava/lang/Object;JJJJ)J	static|private	17	16	M3CityAndFarmHash_1_1.java	450	452	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@16319-16511	no	no	no
+after	M3CityAndFarmHash_1_1	uoH	(JJJI)J	static|private	35	34	M3CityAndFarmHash_1_1.java	454	459	6	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@16517-16710	no	no	no
+after	M3CityAndFarmHash_1_1	uoHash64WithSeeds	(Ljdk/internal/m3/hash/M3Access;Ljava/lang/Object;JJJJ)J	static	973	972	M3CityAndFarmHash_1_1.java	461	577	117	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@16716-19998	yes	yes	no
+after	M3CityAndFarmHash_1_1	naWithoutSeeds	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3CityAndFarmHash_1_1.java	595	597	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@20560-20641	no	no	no
+after	M3CityAndFarmHash_1_1	naWithSeed	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	12	11	M3CityAndFarmHash_1_1.java	622	624	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@21226-21320	no	no	no
+after	M3CityAndFarmHash_1_1	naWithSeeds	(JJ)Ljdk/internal/m3/hash/M3LongHashFunction;	static	10	9	M3CityAndFarmHash_1_1.java	626	628	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@21326-21438	no	no	no
+after	M3CityAndFarmHash_1_1	uoWithoutSeeds	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3CityAndFarmHash_1_1.java	647	649	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@22097-22178	no	no	no
+after	M3CityAndFarmHash_1_1	uoWithSeed	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	9	8	M3CityAndFarmHash_1_1.java	667	669	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@22812-22907	no	no	no
+after	M3CityAndFarmHash_1_1	uoWithSeeds	(JJ)Ljdk/internal/m3/hash/M3LongHashFunction;	static	10	9	M3CityAndFarmHash_1_1.java	685	687	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@23402-23514	no	no	no
+after	M3CityAndFarmHash_1_1$AsLongHashFunction	<init>	()V	private	5	4	M3CityAndFarmHash_1_1.java	225	225	1		no	no	no
+after	M3CityAndFarmHash_1_1$AsLongHashFunction	<clinit>	()V	static	67	66	M3CityAndFarmHash_1_1.java	227	257	31		yes	no	no
+after	M3CityAndFarmHash_1_1$AsLongHashFunction	readResolve	()Ljava/lang/Object;	private	4	3	M3CityAndFarmHash_1_1.java	229	231	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@8554-8632	no	no	no
+after	M3CityAndFarmHash_1_1$AsLongHashFunction	hashLong	(J)J	-	20	19	M3CityAndFarmHash_1_1.java	233	238	6	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@8642-8859	no	no	no
+after	M3CityAndFarmHash_1_1$AsLongHashFunction	hashInt	(I)J	-	27	26	M3CityAndFarmHash_1_1.java	240	246	7	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@8869-9159	no	no	no
+after	M3CityAndFarmHash_1_1$AsLongHashFunction	hashShort	(S)J	-	7	6	M3CityAndFarmHash_1_1.java	248	251	4	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@9169-9276	no	no	no
+after	M3CityAndFarmHash_1_1$AsLongHashFunction	hashChar	(C)J	-	41	40	M3CityAndFarmHash_1_1.java	259	266	8	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@9698-10110	yes	no	no
+after	M3CityAndFarmHash_1_1$AsLongHashFunction	hashByte	(B)J	-	19	18	M3CityAndFarmHash_1_1.java	268	273	6	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@10120-10366	no	no	no
+after	M3CityAndFarmHash_1_1$AsLongHashFunction	hashVoid	()J	-	4	3	M3CityAndFarmHash_1_1.java	275	278	4	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@10376-10451	no	no	no
+after	M3CityAndFarmHash_1_1$AsLongHashFunction	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	-	24	23	M3CityAndFarmHash_1_1.java	280	285	6	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@10461-10728	no	no	no
+after	M3CityAndFarmHash_1_1$AsLongHashFunction	finalize	(J)J	-	2	1	M3CityAndFarmHash_1_1.java	287	289	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@10738-10799	no	no	no
+after	M3CityAndFarmHash_1_1$AsLongHashFunctionSeeded	<init>	(JJ)V	private	26	25	M3CityAndFarmHash_1_1.java	302	306	5	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@11157-11326	no	no	no
+after	M3CityAndFarmHash_1_1$AsLongHashFunctionSeeded	hashVoid	()J	-	5	4	M3CityAndFarmHash_1_1.java	308	311	4	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@11336-11417	no	no	no
+after	M3CityAndFarmHash_1_1$AsLongHashFunctionSeeded	finalize	(J)J	-	14	13	M3CityAndFarmHash_1_1.java	313	316	4	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@11427-11542	no	no	no
+after	M3CityAndFarmHash_1_1$Na	<init>	()V	private	5	4	M3CityAndFarmHash_1_1.java	579	579	1		no	no	no
+after	M3CityAndFarmHash_1_1$Na	<clinit>	()V	static	11	10	M3CityAndFarmHash_1_1.java	581	581	1		no	no	no
+after	M3CityAndFarmHash_1_1$Na	readResolve	()Ljava/lang/Object;	private	4	3	M3CityAndFarmHash_1_1.java	583	585	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@20201-20273	no	no	no
+after	M3CityAndFarmHash_1_1$Na	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	-	24	23	M3CityAndFarmHash_1_1.java	587	592	6	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@20283-20548	no	no	no
+after	M3CityAndFarmHash_1_1$NaSeeded	<init>	(JJ)V	private	26	25	M3CityAndFarmHash_1_1.java	605	609	5	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@20845-20998	no	no	no
+after	M3CityAndFarmHash_1_1$NaSeeded	hashVoid	()J	-	5	4	M3CityAndFarmHash_1_1.java	611	614	4	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@21008-21089	no	no	no
+after	M3CityAndFarmHash_1_1$NaSeeded	finalize	(J)J	-	14	13	M3CityAndFarmHash_1_1.java	616	619	4	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@21099-21214	no	no	no
+after	M3CityAndFarmHash_1_1$Uo	<init>	()V	private	5	4	M3CityAndFarmHash_1_1.java	630	630	1		no	no	no
+after	M3CityAndFarmHash_1_1$Uo	<clinit>	()V	static	11	10	M3CityAndFarmHash_1_1.java	632	632	1		no	no	no
+after	M3CityAndFarmHash_1_1$Uo	readResolve	()Ljava/lang/Object;	private	4	3	M3CityAndFarmHash_1_1.java	634	636	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@21625-21697	no	no	no
+after	M3CityAndFarmHash_1_1$Uo	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	-	45	44	M3CityAndFarmHash_1_1.java	638	644	7	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@21707-22085	yes	no	no
+after	M3CityAndFarmHash_1_1$UoSeeded	<init>	(JJ)V	private	7	6	M3CityAndFarmHash_1_1.java	674	676	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@23044-23129	no	no	no
+after	M3CityAndFarmHash_1_1$UoSeeded	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	-	24	23	M3CityAndFarmHash_1_1.java	678	682	5	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@23139-23390	no	no	no
+after	M3CityAndFarmHash_1_1$UoWithOneSeed	<init>	(J)V	private	9	8	M3CityAndFarmHash_1_1.java	654	656	3	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@22326-22399	no	no	no
+after	M3CityAndFarmHash_1_1$UoWithOneSeed	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	-	50	49	M3CityAndFarmHash_1_1.java	658	664	7	jdk/internal/m3/hash/M3CityAndFarmHash_1_1.java@22409-22800	yes	no	no
+after	M3DualHashFunction	<init>	()V	-	26	25	M3DualHashFunction.java	10	80	71		no	no	no
+after	M3DualHashFunction	checkResult	([J)V	private	33	32	M3DualHashFunction.java	14	21	8	jdk/internal/m3/hash/M3DualHashFunction.java@538-827	no	no	no
+after	M3DualHashFunction	hashLong	(J[J)V	-	13	12	M3DualHashFunction.java	24	28	5	jdk/internal/m3/hash/M3DualHashFunction.java@902-1049	no	no	no
+after	M3DualHashFunction	hashInt	(I[J)V	-	13	12	M3DualHashFunction.java	31	35	5	jdk/internal/m3/hash/M3DualHashFunction.java@1122-1266	no	no	no
+after	M3DualHashFunction	hashShort	(S[J)V	-	13	12	M3DualHashFunction.java	38	42	5	jdk/internal/m3/hash/M3DualHashFunction.java@1343-1493	no	no	no
+after	M3DualHashFunction	hashChar	(C[J)V	-	13	12	M3DualHashFunction.java	45	49	5	jdk/internal/m3/hash/M3DualHashFunction.java@1568-1715	no	no	no
+after	M3DualHashFunction	hashByte	(B[J)V	-	13	12	M3DualHashFunction.java	52	56	5	jdk/internal/m3/hash/M3DualHashFunction.java@1790-1937	no	no	no
+after	M3DualHashFunction	hashVoid	([J)V	-	12	11	M3DualHashFunction.java	59	63	5	jdk/internal/m3/hash/M3DualHashFunction.java@2000-2122	no	no	no
+after	M3DualHashFunction	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ[J)V	-	19	18	M3DualHashFunction.java	66	70	5	jdk/internal/m3/hash/M3DualHashFunction.java@2234-2450	no	no	no
+after	M3DualHashFunction	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)[J	-	21	20	M3DualHashFunction.java	71	76	6	jdk/internal/m3/hash/M3DualHashFunction.java@2455-2694	no	no	no
+after	M3DualHashFunction	asLongHashFunction	()Ljdk/internal/m3/hash/M3LongHashFunction;	-	5	4	M3DualHashFunction.java	117	119	3	jdk/internal/m3/hash/M3DualHashFunction.java@3852-3942	no	no	no
+after	M3DualHashFunction$1	<init>	(Ljdk/internal/m3/hash/M3DualHashFunction;)V	-	10	9	M3DualHashFunction.java	80	80	1		no	no	no
+after	M3DualHashFunction$1	hashLong	(J)J	-	10	9	M3DualHashFunction.java	81	84	4	jdk/internal/m3/hash/M3DualHashFunction.java@2935-3049	no	no	no
+after	M3DualHashFunction$1	hashInt	(I)J	-	10	9	M3DualHashFunction.java	86	89	4	jdk/internal/m3/hash/M3DualHashFunction.java@3059-3170	no	no	no
+after	M3DualHashFunction$1	hashShort	(S)J	-	10	9	M3DualHashFunction.java	91	94	4	jdk/internal/m3/hash/M3DualHashFunction.java@3180-3297	no	no	no
+after	M3DualHashFunction$1	hashChar	(C)J	-	10	9	M3DualHashFunction.java	96	99	4	jdk/internal/m3/hash/M3DualHashFunction.java@3307-3421	no	no	no
+after	M3DualHashFunction$1	hashByte	(B)J	-	10	9	M3DualHashFunction.java	101	104	4	jdk/internal/m3/hash/M3DualHashFunction.java@3431-3545	no	no	no
+after	M3DualHashFunction$1	hashVoid	()J	-	9	8	M3DualHashFunction.java	106	109	4	jdk/internal/m3/hash/M3DualHashFunction.java@3555-3646	no	no	no
+after	M3DualHashFunction$1	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	-	14	13	M3DualHashFunction.java	111	114	4	jdk/internal/m3/hash/M3DualHashFunction.java@3656-3839	no	no	no
+after	M3LongHashFunction	city_1_1	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3LongHashFunction.java	84	86	3	jdk/internal/m3/hash/M3LongHashFunction.java@4299-4420	no	no	no
+after	M3LongHashFunction	city_1_1	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	5	4	M3LongHashFunction.java	98	100	3	jdk/internal/m3/hash/M3LongHashFunction.java@4915-5046	no	no	no
+after	M3LongHashFunction	city_1_1	(JJ)Ljdk/internal/m3/hash/M3LongHashFunction;	static	6	5	M3LongHashFunction.java	112	114	3	jdk/internal/m3/hash/M3LongHashFunction.java@5540-5696	no	no	no
+after	M3LongHashFunction	farmNa	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3LongHashFunction.java	129	131	3	jdk/internal/m3/hash/M3LongHashFunction.java@6354-6458	no	no	no
+after	M3LongHashFunction	farmNa	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	5	4	M3LongHashFunction.java	146	148	3	jdk/internal/m3/hash/M3LongHashFunction.java@7123-7236	no	no	no
+after	M3LongHashFunction	farmNa	(JJ)Ljdk/internal/m3/hash/M3LongHashFunction;	static	6	5	M3LongHashFunction.java	163	165	3	jdk/internal/m3/hash/M3LongHashFunction.java@7906-8041	no	no	no
+after	M3LongHashFunction	farmUo	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3LongHashFunction.java	179	181	3	jdk/internal/m3/hash/M3LongHashFunction.java@8601-8705	no	no	no
+after	M3LongHashFunction	farmUo	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	5	4	M3LongHashFunction.java	195	197	3	jdk/internal/m3/hash/M3LongHashFunction.java@9267-9380	no	no	no
+after	M3LongHashFunction	farmUo	(JJ)Ljdk/internal/m3/hash/M3LongHashFunction;	static	6	5	M3LongHashFunction.java	211	213	3	jdk/internal/m3/hash/M3LongHashFunction.java@9941-10076	no	no	no
+after	M3LongHashFunction	murmur_3	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3LongHashFunction.java	224	226	3	jdk/internal/m3/hash/M3LongHashFunction.java@10505-10619	no	no	no
+after	M3LongHashFunction	murmur_3	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	5	4	M3LongHashFunction.java	237	239	3	jdk/internal/m3/hash/M3LongHashFunction.java@11050-11174	no	no	no
+after	M3LongHashFunction	xx	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3LongHashFunction.java	249	251	3	jdk/internal/m3/hash/M3LongHashFunction.java@11579-11681	no	no	no
+after	M3LongHashFunction	xx	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	5	4	M3LongHashFunction.java	261	263	3	jdk/internal/m3/hash/M3LongHashFunction.java@12053-12165	no	no	no
+after	M3LongHashFunction	xx3	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3LongHashFunction.java	273	275	3	jdk/internal/m3/hash/M3LongHashFunction.java@12575-12676	no	no	no
+after	M3LongHashFunction	xx3	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	5	4	M3LongHashFunction.java	285	287	3	jdk/internal/m3/hash/M3LongHashFunction.java@13053-13170	no	no	no
+after	M3LongHashFunction	xx128low	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3LongHashFunction.java	297	299	3	jdk/internal/m3/hash/M3LongHashFunction.java@13591-13705	no	no	no
+after	M3LongHashFunction	xx128low	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	5	4	M3LongHashFunction.java	309	311	3	jdk/internal/m3/hash/M3LongHashFunction.java@14093-14223	no	no	no
+after	M3LongHashFunction	wy_3	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3LongHashFunction.java	322	324	3	jdk/internal/m3/hash/M3LongHashFunction.java@14708-14812	no	no	no
+after	M3LongHashFunction	wy_3	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	5	4	M3LongHashFunction.java	335	337	3	jdk/internal/m3/hash/M3LongHashFunction.java@15264-15378	no	no	no
+after	M3LongHashFunction	metro	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3LongHashFunction.java	348	350	3	jdk/internal/m3/hash/M3LongHashFunction.java@15876-15984	no	no	no
+after	M3LongHashFunction	metro	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	5	4	M3LongHashFunction.java	361	363	3	jdk/internal/m3/hash/M3LongHashFunction.java@16449-16567	no	no	no
+after	M3LongHashFunction	<init>	()V	-	5	4	M3LongHashFunction.java	368	368	1	jdk/internal/m3/hash/M3LongHashFunction.java@16631-16664	no	no	no
+after	M3LongHashFunction	unsafeHash	([BJJ)J	private	22	21	M3LongHashFunction.java	444	447	4	jdk/internal/m3/hash/M3LongHashFunction.java@20696-20897	no	no	no
+after	M3LongHashFunction	hashBytes	([B)J	-	10	9	M3LongHashFunction.java	452	454	3	jdk/internal/m3/hash/M3LongHashFunction.java@21011-21113	no	no	no
+after	M3LongHashFunction	hashBytes	([BII)J	-	19	18	M3LongHashFunction.java	469	472	4	jdk/internal/m3/hash/M3LongHashFunction.java@21756-21921	no	no	no
+after	M3LongHashFunction	hashBytes	(Ljava/nio/ByteBuffer;)J	-	14	13	M3LongHashFunction.java	478	480	3	jdk/internal/m3/hash/M3LongHashFunction.java@22066-22188	no	no	no
+after	M3LongHashFunction	hashBytes	(Ljava/nio/ByteBuffer;II)J	-	17	16	M3LongHashFunction.java	498	501	4	jdk/internal/m3/hash/M3LongHashFunction.java@22941-23106	no	no	no
+after	M3LongHashFunction	hashByteBuffer	(Ljava/nio/ByteBuffer;II)J	private	41	40	M3LongHashFunction.java	503	509	7	jdk/internal/m3/hash/M3LongHashFunction.java@23112-23403	yes	no	no
+after	M3LongHashFunction	hashChars	(Ljava/lang/String;)J	-	11	10	M3LongHashFunction.java	514	516	3	jdk/internal/m3/hash/M3LongHashFunction.java@23519-23620	no	no	no
+after	M3LongHashFunction	hashChars	(Ljava/lang/String;II)J	-	17	16	M3LongHashFunction.java	533	536	4	jdk/internal/m3/hash/M3LongHashFunction.java@24454-24614	no	no	no
+after	M3LongHashFunction	hashChars	(Ljava/lang/StringBuilder;)J	-	6	5	M3LongHashFunction.java	541	543	3	jdk/internal/m3/hash/M3LongHashFunction.java@24737-24826	no	no	no
+after	M3LongHashFunction	hashChars	(Ljava/lang/StringBuilder;II)J	-	17	16	M3LongHashFunction.java	560	563	4	jdk/internal/m3/hash/M3LongHashFunction.java@25675-25842	no	no	no
+after	M3LongHashFunction	hashNativeChars	(Ljava/lang/CharSequence;)J	-	13	12	M3LongHashFunction.java	565	567	3	jdk/internal/m3/hash/M3LongHashFunction.java@25848-25954	no	no	no
+after	M3LongHashFunction	hashNativeChars	(Ljava/lang/CharSequence;II)J	-	21	20	M3LongHashFunction.java	569	571	3	jdk/internal/m3/hash/M3LongHashFunction.java@25960-26102	no	no	no
+after	M3LongTupleHashFunction	murmur_3	()Ljdk/internal/m3/hash/M3LongTupleHashFunction;	static	4	3	M3LongTupleHashFunction.java	74	76	3	jdk/internal/m3/hash/M3LongTupleHashFunction.java@3461-3585	no	no	no
+after	M3LongTupleHashFunction	murmur_3	(J)Ljdk/internal/m3/hash/M3LongTupleHashFunction;	static	5	4	M3LongTupleHashFunction.java	87	89	3	jdk/internal/m3/hash/M3LongTupleHashFunction.java@4017-4157	no	no	no
+after	M3LongTupleHashFunction	xx128	()Ljdk/internal/m3/hash/M3LongTupleHashFunction;	static	4	3	M3LongTupleHashFunction.java	100	102	3	jdk/internal/m3/hash/M3LongTupleHashFunction.java@4584-4697	no	no	no
+after	M3LongTupleHashFunction	xx128	(J)Ljdk/internal/m3/hash/M3LongTupleHashFunction;	static	5	4	M3LongTupleHashFunction.java	112	114	3	jdk/internal/m3/hash/M3LongTupleHashFunction.java@5077-5206	no	no	no
+after	M3LongTupleHashFunction	<init>	()V	-	5	4	M3LongTupleHashFunction.java	119	119	1	jdk/internal/m3/hash/M3LongTupleHashFunction.java@5270-5308	no	no	no
+after	M3LongTupleHashFunction	newResultArray	()[J	-	13	12	M3LongTupleHashFunction.java	135	137	3	jdk/internal/m3/hash/M3LongTupleHashFunction.java@5735-5824	no	no	no
+after	M3LongTupleHashFunction	hashLong	(J)[J	-	13	-1	M3LongTupleHashFunction.java	162	166	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@7046-7198	no	no	no
+after	M3LongTupleHashFunction	hashInt	(I)[J	-	13	-1	M3LongTupleHashFunction.java	191	195	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@8411-8560	no	no	no
+after	M3LongTupleHashFunction	hashShort	(S)[J	-	13	-1	M3LongTupleHashFunction.java	220	224	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@9791-9946	no	no	no
+after	M3LongTupleHashFunction	hashChar	(C)[J	-	13	-1	M3LongTupleHashFunction.java	249	253	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@11168-11320	no	no	no
+after	M3LongTupleHashFunction	hashByte	(B)[J	-	13	-1	M3LongTupleHashFunction.java	277	281	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@12489-12641	no	no	no
+after	M3LongTupleHashFunction	hashVoid	()[J	-	12	-1	M3LongTupleHashFunction.java	303	307	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@13593-13722	no	no	no
+after	M3LongTupleHashFunction	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)[J	-	20	-1	M3LongTupleHashFunction.java	342	347	6	jdk/internal/m3/hash/M3LongTupleHashFunction.java@15551-15799	no	no	no
+after	M3LongTupleHashFunction	hashBytes	([B[J)V	-	11	10	M3LongTupleHashFunction.java	352	354	3	jdk/internal/m3/hash/M3LongTupleHashFunction.java@15929-16065	no	no	no
+after	M3LongTupleHashFunction	hashBytes	([B)[J	-	17	16	M3LongTupleHashFunction.java	361	365	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@16216-16404	no	no	no
+after	M3LongTupleHashFunction	hashBytes	([BII[J)V	-	21	20	M3LongTupleHashFunction.java	389	392	4	jdk/internal/m3/hash/M3LongTupleHashFunction.java@17692-17903	no	no	no
+after	M3LongTupleHashFunction	hashBytes	([BII)[J	-	29	28	M3LongTupleHashFunction.java	399	404	6	jdk/internal/m3/hash/M3LongTupleHashFunction.java@18030-18293	no	no	no
+after	M3LongTupleHashFunction	hashBytes	(Ljava/nio/ByteBuffer;[J)V	-	15	14	M3LongTupleHashFunction.java	410	412	3	jdk/internal/m3/hash/M3LongTupleHashFunction.java@18454-18610	no	no	no
+after	M3LongTupleHashFunction	hashBytes	(Ljava/nio/ByteBuffer;)[J	-	21	20	M3LongTupleHashFunction.java	419	423	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@18765-18973	no	no	no
+after	M3LongTupleHashFunction	hashBytes	(Ljava/nio/ByteBuffer;II[J)V	-	19	18	M3LongTupleHashFunction.java	450	454	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@20389-20626	no	no	no
+after	M3LongTupleHashFunction	hashBytes	(Ljava/nio/ByteBuffer;II)[J	-	27	26	M3LongTupleHashFunction.java	461	466	6	jdk/internal/m3/hash/M3LongTupleHashFunction.java@20757-21020	no	no	no
+after	M3LongTupleHashFunction	hashChars	(Ljava/lang/String;[J)V	-	12	11	M3LongTupleHashFunction.java	472	474	3	jdk/internal/m3/hash/M3LongTupleHashFunction.java@21159-21294	no	no	no
+after	M3LongTupleHashFunction	hashChars	(Ljava/lang/String;)[J	-	18	17	M3LongTupleHashFunction.java	481	485	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@21445-21632	no	no	no
+after	M3LongTupleHashFunction	hashChars	(Ljava/lang/String;II[J)V	-	19	18	M3LongTupleHashFunction.java	511	514	4	jdk/internal/m3/hash/M3LongTupleHashFunction.java@23078-23284	no	no	no
+after	M3LongTupleHashFunction	hashChars	(Ljava/lang/String;II)[J	-	27	26	M3LongTupleHashFunction.java	521	526	6	jdk/internal/m3/hash/M3LongTupleHashFunction.java@23411-23669	no	no	no
+after	M3LongTupleHashFunction	hashChars	(Ljava/lang/CharSequence;[J)V	-	14	13	M3LongTupleHashFunction.java	532	534	3	jdk/internal/m3/hash/M3LongTupleHashFunction.java@23814-23969	no	no	no
+after	M3LongTupleHashFunction	hashChars	(Ljava/lang/CharSequence;)[J	-	20	19	M3LongTupleHashFunction.java	541	545	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@24126-24333	no	no	no
+after	M3LongTupleHashFunction	hashChars	(Ljava/lang/CharSequence;II[J)V	-	21	20	M3LongTupleHashFunction.java	570	574	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@25706-25983	no	no	no
+after	M3LongTupleHashFunction	hashChars	(Ljava/lang/CharSequence;II)[J	-	29	28	M3LongTupleHashFunction.java	581	586	6	jdk/internal/m3/hash/M3LongTupleHashFunction.java@26116-26394	no	no	no
+after	M3LongTupleHashFunction	<clinit>	()V	static	19	18	M3LongTupleHashFunction.java	590	592	3		no	no	no
+after	M3LongTupleHashFunction	unsafeHash	(Ljdk/internal/m3/hash/M3LongTupleHashFunction;[BJJ[J)V	static|private	24	23	M3LongTupleHashFunction.java	595	599	5	jdk/internal/m3/hash/M3LongTupleHashFunction.java@26836-27141	no	no	no
+after	M3LongTupleHashFunction	hashByteBuffer	(Ljdk/internal/m3/hash/M3LongTupleHashFunction;Ljava/nio/ByteBuffer;II[J)V	static|private	47	46	M3LongTupleHashFunction.java	601	608	8	jdk/internal/m3/hash/M3LongTupleHashFunction.java@27147-27551	yes	no	no
+after	M3LongTupleHashFunction	hashNativeChars	(Ljdk/internal/m3/hash/M3LongTupleHashFunction;Ljava/lang/CharSequence;II[J)V	static	23	22	M3LongTupleHashFunction.java	610	613	4	jdk/internal/m3/hash/M3LongTupleHashFunction.java@27557-27802	no	no	no
+after	M3Maths	<init>	()V	-	5	4	M3Maths.java	8	8	1		no	no	no
+after	M3Maths	<clinit>	()V	static	39	38	M3Maths.java	12	19	8		yes	no	no
+after	M3Maths	unsignedLongMulXorFold	(JJ)J	static	9	8	M3Maths.java	21	23	3	jdk/internal/m3/hash/M3Maths.java@590-732	no	no	no
+after	M3Maths	unsignedLongMulHigh	(JJ)J	static	9	8	M3Maths.java	24	26	3	jdk/internal/m3/hash/M3Maths.java@737-873	no	no	no
+after	M3Maths	unsignedLongMulXorFoldImp	(JJ)J	-	107	106	M3Maths.java	28	45	18	jdk/internal/m3/hash/M3Maths.java@879-1740	yes	no	no
+after	M3Maths	unsignedLongMulHighImp	(JJ)J	-	90	89	M3Maths.java	47	63	17	jdk/internal/m3/hash/M3Maths.java@1746-2530	yes	no	no
+after	M3MathsJDK9	<init>	()V	-	5	4	M3Maths.java	66	66	1		no	no	no
+after	M3MathsJDK9	unsignedLongMulXorFoldImp	(JJ)J	-	32	31	M3Maths.java	69	74	6	jdk/internal/m3/hash/M3Maths.java@2712-2964	no	no	no
+after	M3MathsJDK9	unsignedLongMulHighImp	(JJ)J	-	20	19	M3Maths.java	75	78	4	jdk/internal/m3/hash/M3Maths.java@2969-3138	no	no	no
+after	M3MetroHash	<init>	()V	-	5	4	M3MetroHash.java	9	9	1		no	no	no
+after	M3MetroHash	metroHash64	(JLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	static	653	652	M3MetroHash.java	16	92	77	jdk/internal/m3/hash/M3MetroHash.java@535-2840	yes	yes	no
+after	M3MetroHash	finalize	(J)J	static|private	26	25	M3MetroHash.java	94	99	6	jdk/internal/m3/hash/M3MetroHash.java@2846-3001	no	no	no
+after	M3MetroHash	asLongHashFunctionWithoutSeed	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3MetroHash.java	170	172	3	jdk/internal/m3/hash/M3MetroHash.java@5129-5247	no	no	no
+after	M3MetroHash	asLongHashFunctionWithSeed	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	9	8	M3MetroHash.java	174	176	3	jdk/internal/m3/hash/M3MetroHash.java@5253-5375	no	no	no
+after	M3MetroHash$AsLongHashFunction	<init>	()V	private	5	4	M3MetroHash.java	101	101	1		no	no	no
+after	M3MetroHash$AsLongHashFunction	<clinit>	()V	static	20	19	M3MetroHash.java	103	104	2		no	no	no
+after	M3MetroHash$AsLongHashFunction	readResolve	()Ljava/lang/Object;	private	4	3	M3MetroHash.java	106	108	3	jdk/internal/m3/hash/M3MetroHash.java@3313-3391	no	no	no
+after	M3MetroHash$AsLongHashFunction	seed	()J	-	2	1	M3MetroHash.java	110	112	3	jdk/internal/m3/hash/M3MetroHash.java@3401-3457	no	no	no
+after	M3MetroHash$AsLongHashFunction	hashLong	(J)J	-	44	43	M3MetroHash.java	114	122	9	jdk/internal/m3/hash/M3MetroHash.java@3467-3753	yes	no	no
+after	M3MetroHash$AsLongHashFunction	hashInt	(I)J	-	47	46	M3MetroHash.java	124	132	9	jdk/internal/m3/hash/M3MetroHash.java@3763-4073	yes	no	no
+after	M3MetroHash$AsLongHashFunction	hashShort	(S)J	-	48	47	M3MetroHash.java	134	142	9	jdk/internal/m3/hash/M3MetroHash.java@4083-4399	yes	no	no
+after	M3MetroHash$AsLongHashFunction	hashChar	(C)J	-	7	6	M3MetroHash.java	144	147	4	jdk/internal/m3/hash/M3MetroHash.java@4409-4516	no	no	no
+after	M3MetroHash$AsLongHashFunction	hashByte	(B)J	-	43	42	M3MetroHash.java	149	156	8	jdk/internal/m3/hash/M3MetroHash.java@4526-4777	yes	no	no
+after	M3MetroHash$AsLongHashFunction	hashVoid	()J	-	4	3	M3MetroHash.java	158	161	4	jdk/internal/m3/hash/M3MetroHash.java@4787-4869	no	no	no
+after	M3MetroHash$AsLongHashFunction	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	-	24	23	M3MetroHash.java	163	167	5	jdk/internal/m3/hash/M3MetroHash.java@4879-5117	no	no	no
+after	M3MetroHash$AsLongHashFunctionSeeded	<init>	(J)V	-	26	25	M3MetroHash.java	184	187	4	jdk/internal/m3/hash/M3MetroHash.java@5603-5743	no	no	no
+after	M3MetroHash$AsLongHashFunctionSeeded	hashVoid	()J	-	5	4	M3MetroHash.java	189	192	4	jdk/internal/m3/hash/M3MetroHash.java@5753-5834	no	no	no
+after	M3MetroHash$AsLongHashFunctionSeeded	seed	()J	-	5	4	M3MetroHash.java	194	197	4	jdk/internal/m3/hash/M3MetroHash.java@5844-5920	no	no	no
+after	M3MurmurHash_3	<init>	()V	-	5	4	M3MurmurHash_3.java	32	32	1		no	no	no
+after	M3MurmurHash_3	hash	(JLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ[J)J	static|private	555	554	M3MurmurHash_3.java	36	174	139	jdk/internal/m3/hash/M3MurmurHash_3.java@1381-7553	yes	yes	no
+after	M3MurmurHash_3	finalize	(JJJ[J)J	static|private	64	63	M3MurmurHash_3.java	176	195	20	jdk/internal/m3/hash/M3MurmurHash_3.java@7559-7966	yes	no	no
+after	M3MurmurHash_3	fmix64	(J)J	static|private	35	34	M3MurmurHash_3.java	197	204	8	jdk/internal/m3/hash/M3MurmurHash_3.java@7972-8169	no	no	no
+after	M3MurmurHash_3	mixK1	(J)J	static|private	21	20	M3MurmurHash_3.java	206	211	6	jdk/internal/m3/hash/M3MurmurHash_3.java@8175-8310	no	no	no
+after	M3MurmurHash_3	mixK2	(J)J	static|private	21	20	M3MurmurHash_3.java	213	218	6	jdk/internal/m3/hash/M3MurmurHash_3.java@8316-8451	no	no	no
+after	M3MurmurHash_3	asLongTupleHashFunctionWithoutSeed	()Ljdk/internal/m3/hash/M3LongTupleHashFunction;	static	4	3	M3MurmurHash_3.java	289	291	3	jdk/internal/m3/hash/M3MurmurHash_3.java@10833-10966	no	no	no
+after	M3MurmurHash_3	asLongHashFunctionWithoutSeed	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3MurmurHash_3.java	292	294	3	jdk/internal/m3/hash/M3MurmurHash_3.java@10971-11099	no	no	no
+after	M3MurmurHash_3	asLongTupleHashFunctionWithSeed	(J)Ljdk/internal/m3/hash/M3LongTupleHashFunction;	static	9	8	M3MurmurHash_3.java	330	332	3	jdk/internal/m3/hash/M3MurmurHash_3.java@12127-12264	no	no	no
+after	M3MurmurHash_3	asLongHashFunctionWithSeed	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	12	11	M3MurmurHash_3.java	333	335	3	jdk/internal/m3/hash/M3MurmurHash_3.java@12269-12417	no	no	no
+after	M3MurmurHash_3$AsLongTupleHashFunction	<init>	()V	private	5	4	M3MurmurHash_3.java	220	220	1		no	no	no
+after	M3MurmurHash_3$AsLongTupleHashFunction	<clinit>	()V	static	20	19	M3MurmurHash_3.java	222	223	2		no	no	no
+after	M3MurmurHash_3$AsLongTupleHashFunction	readResolve	()Ljava/lang/Object;	private	4	3	M3MurmurHash_3.java	225	227	3	jdk/internal/m3/hash/M3MurmurHash_3.java@8814-8892	no	no	no
+after	M3MurmurHash_3$AsLongTupleHashFunction	bitsLength	()I	-	4	3	M3MurmurHash_3.java	229	232	4	jdk/internal/m3/hash/M3MurmurHash_3.java@8902-8979	no	no	no
+after	M3MurmurHash_3$AsLongTupleHashFunction	newResultArray	()[J	-	4	3	M3MurmurHash_3.java	233	236	4	jdk/internal/m3/hash/M3MurmurHash_3.java@8988-9117	no	no	no
+after	M3MurmurHash_3$AsLongTupleHashFunction	seed	()J	-	2	1	M3MurmurHash_3.java	238	240	3	jdk/internal/m3/hash/M3MurmurHash_3.java@9127-9173	no	no	no
+after	M3MurmurHash_3$AsLongTupleHashFunction	hashNativeLong	(JJ[J)J	-	20	19	M3MurmurHash_3.java	242	246	5	jdk/internal/m3/hash/M3MurmurHash_3.java@9183-9398	no	no	no
+after	M3MurmurHash_3$AsLongTupleHashFunction	dualHashLong	(J[J)J	-	13	12	M3MurmurHash_3.java	248	251	4	jdk/internal/m3/hash/M3MurmurHash_3.java@9408-9578	no	no	no
+after	M3MurmurHash_3$AsLongTupleHashFunction	dualHashInt	(I[J)J	-	16	15	M3MurmurHash_3.java	253	256	4	jdk/internal/m3/hash/M3MurmurHash_3.java@9588-9769	no	no	no
+after	M3MurmurHash_3$AsLongTupleHashFunction	dualHashShort	(S[J)J	-	17	16	M3MurmurHash_3.java	258	261	4	jdk/internal/m3/hash/M3MurmurHash_3.java@9779-9966	no	no	no
+after	M3MurmurHash_3$AsLongTupleHashFunction	dualHashChar	(C[J)J	-	17	16	M3MurmurHash_3.java	263	266	4	jdk/internal/m3/hash/M3MurmurHash_3.java@9976-10161	no	no	no
+after	M3MurmurHash_3$AsLongTupleHashFunction	dualHashByte	(B[J)J	-	12	11	M3MurmurHash_3.java	268	271	4	jdk/internal/m3/hash/M3MurmurHash_3.java@10171-10339	no	no	no
+after	M3MurmurHash_3$AsLongTupleHashFunction	dualHashVoid	([J)J	-	15	14	M3MurmurHash_3.java	273	280	8	jdk/internal/m3/hash/M3MurmurHash_3.java@10349-10550	no	no	no
+after	M3MurmurHash_3$AsLongTupleHashFunction	dualHash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ[J)J	-	26	25	M3MurmurHash_3.java	282	286	5	jdk/internal/m3/hash/M3MurmurHash_3.java@10560-10821	no	no	no
+after	M3MurmurHash_3$AsLongTupleHashFunctionSeeded	<init>	(J)V	private	29	28	M3MurmurHash_3.java	300	305	6		no	no	no
+after	M3MurmurHash_3$AsLongTupleHashFunctionSeeded	seed	()J	-	5	4	M3MurmurHash_3.java	307	310	4	jdk/internal/m3/hash/M3MurmurHash_3.java@11521-11587	no	no	no
+after	M3MurmurHash_3$AsLongTupleHashFunctionSeeded	hashNativeLong	(JJ[J)J	-	30	29	M3MurmurHash_3.java	312	318	7	jdk/internal/m3/hash/M3MurmurHash_3.java@11597-11874	no	no	no
+after	M3MurmurHash_3$AsLongTupleHashFunctionSeeded	dualHashVoid	([J)J	-	30	29	M3MurmurHash_3.java	320	327	8	jdk/internal/m3/hash/M3MurmurHash_3.java@11884-12115	no	no	no
+after	M3Primitives	<init>	()V	private	5	4	M3Primitives.java	28	28	1	jdk/internal/m3/hash/M3Primitives.java@1026-1051	no	no	no
+after	M3Primitives	<clinit>	()V	static	70	69	M3Primitives.java	30	45	16		yes	no	no
+after	M3Primitives	unsignedInt	(I)J	static	7	6	M3Primitives.java	32	34	3	jdk/internal/m3/hash/M3Primitives.java@1138-1208	no	no	no
+after	M3Primitives	unsignedShort	(I)I	static	5	4	M3Primitives.java	36	38	3	jdk/internal/m3/hash/M3Primitives.java@1214-1280	no	no	no
+after	M3Primitives	unsignedByte	(I)I	static	6	5	M3Primitives.java	40	42	3	jdk/internal/m3/hash/M3Primitives.java@1286-1349	no	no	no
+after	M3Primitives	nativeToLittleEndian	(J)J	static	8	7	M3Primitives.java	47	47	1	jdk/internal/m3/hash/M3Primitives.java@1606-1688	no	no	no
+after	M3Primitives	nativeToLittleEndian	(I)I	static	8	7	M3Primitives.java	48	48	1	jdk/internal/m3/hash/M3Primitives.java@1693-1773	no	no	no
+after	M3Primitives	nativeToLittleEndian	(S)S	static	8	7	M3Primitives.java	49	49	1	jdk/internal/m3/hash/M3Primitives.java@1778-1862	no	no	no
+after	M3Primitives	nativeToLittleEndian	(C)C	static	8	7	M3Primitives.java	50	50	1	jdk/internal/m3/hash/M3Primitives.java@1867-1949	no	no	no
+after	M3Primitives	nativeToBigEndian	(J)J	static	8	7	M3Primitives.java	52	52	1	jdk/internal/m3/hash/M3Primitives.java@1955-2034	no	no	no
+after	M3Primitives	nativeToBigEndian	(I)I	static	8	7	M3Primitives.java	53	53	1	jdk/internal/m3/hash/M3Primitives.java@2039-2116	no	no	no
+after	M3Primitives	nativeToBigEndian	(S)S	static	8	7	M3Primitives.java	54	54	1	jdk/internal/m3/hash/M3Primitives.java@2121-2202	no	no	no
+after	M3Primitives	nativeToBigEndian	(C)C	static	8	7	M3Primitives.java	55	55	1	jdk/internal/m3/hash/M3Primitives.java@2207-2286	no	no	no
+after	M3Primitives$ByteOrderHelper	<init>	()V	private	5	4	M3Primitives.java	57	57	1		no	no	no
+after	M3Primitives$ByteOrderHelper	adjustByteOrder	(J)J	-	2	1	M3Primitives.java	58	58	1	jdk/internal/m3/hash/M3Primitives.java@2339-2387	no	no	no
+after	M3Primitives$ByteOrderHelper	adjustByteOrder	(I)I	-	2	1	M3Primitives.java	59	59	1	jdk/internal/m3/hash/M3Primitives.java@2396-2442	no	no	no
+after	M3Primitives$ByteOrderHelper	adjustByteOrder	(S)S	-	2	1	M3Primitives.java	60	60	1	jdk/internal/m3/hash/M3Primitives.java@2451-2501	no	no	no
+after	M3Primitives$ByteOrderHelper	adjustByteOrder	(C)C	-	2	1	M3Primitives.java	61	61	1	jdk/internal/m3/hash/M3Primitives.java@2510-2558	no	no	no
+after	M3Primitives$ByteOrderHelperReverse	<init>	()V	private	5	4	M3Primitives.java	63	63	1		no	no	no
+after	M3Primitives$ByteOrderHelperReverse	adjustByteOrder	(J)J	-	5	4	M3Primitives.java	64	64	1	jdk/internal/m3/hash/M3Primitives.java@2647-2714	no	no	no
+after	M3Primitives$ByteOrderHelperReverse	adjustByteOrder	(I)I	-	5	4	M3Primitives.java	65	65	1	jdk/internal/m3/hash/M3Primitives.java@2723-2791	no	no	no
+after	M3Primitives$ByteOrderHelperReverse	adjustByteOrder	(S)S	-	5	4	M3Primitives.java	66	66	1	jdk/internal/m3/hash/M3Primitives.java@2800-2870	no	no	no
+after	M3Primitives$ByteOrderHelperReverse	adjustByteOrder	(C)C	-	5	4	M3Primitives.java	67	67	1	jdk/internal/m3/hash/M3Primitives.java@2879-2951	no	no	no
+after	M3Util	<init>	()V	-	5	4	M3Util.java	12	12	1		no	no	no
+after	M3Util	checkArrayOffs	(III)V	static	30	29	M3Util.java	14	17	4	jdk/internal/m3/hash/M3Util.java@349-563	no	no	no
+after	M3WyHash	<init>	()V	-	5	4	M3WyHash.java	17	17	1		no	no	no
+after	M3WyHash	_wymum	(JJ)J	static|private	6	5	M3WyHash.java	25	27	3	jdk/internal/m3/hash/M3WyHash.java@1037-1160	no	no	no
+after	M3WyHash	_wyr3	(Ljdk/internal/m3/hash/M3Access;Ljava/lang/Object;JJ)J	static|private	40	39	M3WyHash.java	29	33	5	jdk/internal/m3/hash/M3WyHash.java@1166-1432	yes	no	no
+after	M3WyHash	u64Rorate32	(Ljdk/internal/m3/hash/M3Access;Ljava/lang/Object;J)J	static|private	21	20	M3WyHash.java	35	37	3	jdk/internal/m3/hash/M3WyHash.java@1438-1605	no	no	no
+after	M3WyHash	wyHash64	(JLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	static	1411	1410	M3WyHash.java	49	133	85	jdk/internal/m3/hash/M3WyHash.java@1981-7189	yes	yes	no
+after	M3WyHash	asLongHashFunctionWithoutSeed	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3WyHash.java	135	137	3	jdk/internal/m3/hash/M3WyHash.java@7195-7313	no	no	no
+after	M3WyHash	asLongHashFunctionWithSeed	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	9	8	M3WyHash.java	205	207	3	jdk/internal/m3/hash/M3WyHash.java@9580-9702	no	no	no
+after	M3WyHash$AsLongHashFunction	<init>	()V	private	5	4	M3WyHash.java	139	139	1		no	no	no
+after	M3WyHash$AsLongHashFunction	<clinit>	()V	static	11	10	M3WyHash.java	141	141	1		no	no	no
+after	M3WyHash$AsLongHashFunction	readResolve	()Ljava/lang/Object;	private	4	3	M3WyHash.java	143	145	3	jdk/internal/m3/hash/M3WyHash.java@7540-7618	no	no	no
+after	M3WyHash$AsLongHashFunction	seed	()J	-	2	1	M3WyHash.java	147	149	3	jdk/internal/m3/hash/M3WyHash.java@7628-7681	no	no	no
+after	M3WyHash$AsLongHashFunction	hashLong	(J)J	-	57	56	M3WyHash.java	151	159	9	jdk/internal/m3/hash/M3WyHash.java@7691-8052	yes	no	no
+after	M3WyHash$AsLongHashFunction	hashInt	(I)J	-	47	46	M3WyHash.java	161	168	8	jdk/internal/m3/hash/M3WyHash.java@8062-8406	yes	no	no
+after	M3WyHash$AsLongHashFunction	hashShort	(S)J	-	67	66	M3WyHash.java	170	177	8	jdk/internal/m3/hash/M3WyHash.java@8416-8776	yes	no	no
+after	M3WyHash$AsLongHashFunction	hashChar	(C)J	-	7	6	M3WyHash.java	179	182	4	jdk/internal/m3/hash/M3WyHash.java@8786-8898	no	no	no
+after	M3WyHash$AsLongHashFunction	hashByte	(B)J	-	54	53	M3WyHash.java	184	190	7	jdk/internal/m3/hash/M3WyHash.java@8908-9189	yes	no	no
+after	M3WyHash$AsLongHashFunction	hashVoid	()J	-	2	1	M3WyHash.java	192	195	4	jdk/internal/m3/hash/M3WyHash.java@9199-9273	no	no	no
+after	M3WyHash$AsLongHashFunction	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	-	24	23	M3WyHash.java	197	202	6	jdk/internal/m3/hash/M3WyHash.java@9283-9568	no	no	no
+after	M3WyHash$AsLongHashFunctionSeeded	<init>	(J)V	private	10	9	M3WyHash.java	214	216	3	jdk/internal/m3/hash/M3WyHash.java@9883-9968	no	no	no
+after	M3WyHash$AsLongHashFunctionSeeded	seed	()J	-	5	4	M3WyHash.java	218	221	4	jdk/internal/m3/hash/M3WyHash.java@9978-10051	no	no	no
+after	M3XXH3	<init>	()V	-	5	4	M3XXH3.java	33	33	1		no	no	no
+after	M3XXH3	<clinit>	()V	static	1227	1226	M3XXH3.java	34	37	4		yes	yes	no
+after	M3XXH3	XXH64_avalanche	(J)J	static|private	33	32	M3XXH3.java	67	73	7	jdk/internal/m3/hash/M3XXH3.java@5162-5364	no	no	no
+after	M3XXH3	XXH3_avalanche	(J)J	static|private	20	19	M3XXH3.java	74	78	5	jdk/internal/m3/hash/M3XXH3.java@5369-5519	no	no	no
+after	M3XXH3	XXH3_rrmxmx	(JJ)J	static|private	44	43	M3XXH3.java	79	85	7	jdk/internal/m3/hash/M3XXH3.java@5524-5805	yes	no	no
+after	M3XXH3	XXH3_mix16B	(JLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	static|private	62	61	M3XXH3.java	87	94	8	jdk/internal/m3/hash/M3XXH3.java@5811-6254	yes	no	no
+after	M3XXH3	XXH128_mix32B_once	(JJJJJJJ)J	static|private	51	50	M3XXH3.java	99	104	6	jdk/internal/m3/hash/M3XXH3.java@6350-6738	yes	no	no
+after	M3XXH3	XXH3_mix2Accs	(JJ[BJ)J	static|private	32	31	M3XXH3.java	106	110	5	jdk/internal/m3/hash/M3XXH3.java@6744-7008	no	no	no
+after	M3XXH3	XXH3_64bits_internal	(J[BLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	static|private	76	75	M3XXH3.java	113	125	13	jdk/internal/m3/hash/M3XXH3.java@7137-7716	yes	no	no
+after	M3XXH3	XXH3_len_0to16_64b	(JLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	static|private	89	88	M3XXH3.java	128	140	13	jdk/internal/m3/hash/M3XXH3.java@7818-8442	yes	no	no
+after	M3XXH3	XXH3_len_9to16_64b	(JLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	static|private	116	115	M3XXH3.java	143	151	9	jdk/internal/m3/hash/M3XXH3.java@8544-9263	yes	no	no
+after	M3XXH3	XXH3_len_4to8_64b	(JLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	static|private	89	88	M3XXH3.java	154	162	9	jdk/internal/m3/hash/M3XXH3.java@9363-9974	yes	no	no
+after	M3XXH3	XXH3_len_1to3_64b	(JLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	static|private	104	103	M3XXH3.java	165	173	9	jdk/internal/m3/hash/M3XXH3.java@10074-10751	yes	no	no
+after	M3XXH3	XXH3_len_17to128_64b	(JLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	static|private	207	206	M3XXH3.java	176	196	21	jdk/internal/m3/hash/M3XXH3.java@10857-11925	yes	no	no
+after	M3XXH3	XXH3_len_129to240_64b	(JLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	static|private	144	143	M3XXH3.java	199	216	18	jdk/internal/m3/hash/M3XXH3.java@12033-12768	yes	no	no
+after	M3XXH3	XXH3_128bits_internal	(J[BLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ[J)J	static|private	83	82	M3XXH3.java	219	232	14	jdk/internal/m3/hash/M3XXH3.java@12897-13528	yes	no	no
+after	M3XXH3	XXH3_len_0to16_128b	(JLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ[J)J	static|private	145	144	M3XXH3.java	235	252	18	jdk/internal/m3/hash/M3XXH3.java@13631-14537	yes	no	no
+after	M3XXH3	XXH3_len_9to16_128b	(JLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ[J)J	static|private	202	201	M3XXH3.java	255	274	20	jdk/internal/m3/hash/M3XXH3.java@14640-15831	yes	no	no
+after	M3XXH3	XXH3_len_4to8_128b	(JLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ[J)J	static|private	177	176	M3XXH3.java	277	300	24	jdk/internal/m3/hash/M3XXH3.java@15932-17094	yes	no	no
+after	M3XXH3	XXH3_len_1to3_128b	(JLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ[J)J	static|private	179	178	M3XXH3.java	303	319	17	jdk/internal/m3/hash/M3XXH3.java@17195-18321	yes	no	no
+after	M3XXH3	XXH3_len_17to128_128b	(JLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ[J)J	static|private	503	502	M3XXH3.java	322	363	42	jdk/internal/m3/hash/M3XXH3.java@18428-21036	yes	yes	no
+after	M3XXH3	XXH3_len_129to240_128b	(JLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ[J)J	static|private	492	491	M3XXH3.java	366	406	41	jdk/internal/m3/hash/M3XXH3.java@21145-23382	yes	yes	no
+after	M3XXH3	XXH3_hashLong	([BLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ[J)J	static|private	1717	1716	M3XXH3.java	409	574	166	jdk/internal/m3/hash/M3XXH3.java@23525-33548	yes	yes	no
+after	M3XXH3	XXH3_mergeAccs	(JJJJJJJJ[BJJ)J	static|private	61	60	M3XXH3.java	577	583	7	jdk/internal/m3/hash/M3XXH3.java@33663-34200	yes	no	no
+after	M3XXH3	XXH3_initCustomSecret	([BJ)V	static|private	109	108	M3XXH3.java	585	594	10	jdk/internal/m3/hash/M3XXH3.java@34206-34729	yes	no	no
+after	M3XXH3	asLongHashFunctionWithoutSeed	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3XXH3.java	596	598	3	jdk/internal/m3/hash/M3XXH3.java@34735-34853	no	no	no
+after	M3XXH3	asLongHashFunctionWithSeed	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	21	20	M3XXH3.java	663	665	3	jdk/internal/m3/hash/M3XXH3.java@37768-37947	no	no	no
+after	M3XXH3	asLongTupleHashFunctionWithoutSeed	()Ljdk/internal/m3/hash/M3LongTupleHashFunction;	static	4	3	M3XXH3.java	689	691	3	jdk/internal/m3/hash/M3XXH3.java@38683-38816	no	no	no
+after	M3XXH3	asLongTupleLowHashFunctionWithoutSeed	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	7	6	M3XXH3.java	692	694	3	jdk/internal/m3/hash/M3XXH3.java@38821-38973	no	no	no
+after	M3XXH3	asLongTupleHashFunctionWithSeed	(J)Ljdk/internal/m3/hash/M3LongTupleHashFunction;	static	21	20	M3XXH3.java	820	822	3	jdk/internal/m3/hash/M3XXH3.java@44625-44824	no	no	no
+after	M3XXH3	asLongTupleLowHashFunctionWithSeed	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	12	11	M3XXH3.java	823	825	3	jdk/internal/m3/hash/M3XXH3.java@44829-44985	no	no	no
+after	M3XXH3$AsLongHashFunction	<init>	()V	private	5	4	M3XXH3.java	600	600	1		no	no	no
+after	M3XXH3$AsLongHashFunction	<clinit>	()V	static	11	10	M3XXH3.java	602	602	1		no	no	no
+after	M3XXH3$AsLongHashFunction	seed	()J	-	2	1	M3XXH3.java	604	606	3	jdk/internal/m3/hash/M3XXH3.java@35088-35141	no	no	no
+after	M3XXH3$AsLongHashFunction	hashLong	(J)J	-	71	70	M3XXH3.java	608	615	8	jdk/internal/m3/hash/M3XXH3.java@35151-35600	yes	no	no
+after	M3XXH3$AsLongHashFunction	hashInt	(I)J	-	75	74	M3XXH3.java	617	624	8	jdk/internal/m3/hash/M3XXH3.java@35610-36082	yes	no	no
+after	M3XXH3$AsLongHashFunction	hashShort	(S)J	-	82	81	M3XXH3.java	626	635	10	jdk/internal/m3/hash/M3XXH3.java@36092-36680	yes	no	no
+after	M3XXH3$AsLongHashFunction	hashChar	(C)J	-	7	6	M3XXH3.java	637	640	4	jdk/internal/m3/hash/M3XXH3.java@36690-36797	no	no	no
+after	M3XXH3$AsLongHashFunction	hashByte	(B)J	-	70	69	M3XXH3.java	642	650	9	jdk/internal/m3/hash/M3XXH3.java@36807-37288	yes	no	no
+after	M3XXH3$AsLongHashFunction	hashVoid	()J	-	34	33	M3XXH3.java	652	655	4	jdk/internal/m3/hash/M3XXH3.java@37298-37494	no	no	no
+after	M3XXH3$AsLongHashFunction	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	-	20	19	M3XXH3.java	657	660	4	jdk/internal/m3/hash/M3XXH3.java@37504-37756	no	no	no
+after	M3XXH3$AsLongHashFunctionSeeded	<init>	(J)V	private	27	26	M3XXH3.java	671	676	6		no	no	no
+after	M3XXH3$AsLongHashFunctionSeeded	seed	()J	-	5	4	M3XXH3.java	678	681	4	jdk/internal/m3/hash/M3XXH3.java@38336-38409	no	no	no
+after	M3XXH3$AsLongHashFunctionSeeded	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	-	24	23	M3XXH3.java	683	686	4	jdk/internal/m3/hash/M3XXH3.java@38419-38671	no	no	no
+after	M3XXH3$AsLongTupleHashFunction	<init>	()V	private	5	4	M3XXH3.java	696	696	1		no	no	no
+after	M3XXH3$AsLongTupleHashFunction	<clinit>	()V	static	11	10	M3XXH3.java	698	698	1		no	no	no
+after	M3XXH3$AsLongTupleHashFunction	seed	()J	-	2	1	M3XXH3.java	700	702	3	jdk/internal/m3/hash/M3XXH3.java@39223-39276	no	no	no
+after	M3XXH3$AsLongTupleHashFunction	bitsLength	()I	-	4	3	M3XXH3.java	704	707	4	jdk/internal/m3/hash/M3XXH3.java@39286-39363	no	no	no
+after	M3XXH3$AsLongTupleHashFunction	newResultArray	()[J	-	4	3	M3XXH3.java	709	712	4	jdk/internal/m3/hash/M3XXH3.java@39373-39502	no	no	no
+after	M3XXH3$AsLongTupleHashFunction	dualHashLong	(J[J)J	-	149	148	M3XXH3.java	714	735	22	jdk/internal/m3/hash/M3XXH3.java@39512-40512	yes	no	no
+after	M3XXH3$AsLongTupleHashFunction	dualHashInt	(I[J)J	-	157	156	M3XXH3.java	737	759	23	jdk/internal/m3/hash/M3XXH3.java@40522-41585	yes	no	no
+after	M3XXH3$AsLongTupleHashFunction	dualHashShort	(S[J)J	-	163	162	M3XXH3.java	761	778	18	jdk/internal/m3/hash/M3XXH3.java@41595-42675	yes	no	no
+after	M3XXH3$AsLongTupleHashFunction	dualHashChar	(C[J)J	-	8	7	M3XXH3.java	780	783	4	jdk/internal/m3/hash/M3XXH3.java@42685-42829	no	no	no
+after	M3XXH3$AsLongTupleHashFunction	dualHashByte	(B[J)J	-	150	149	M3XXH3.java	785	802	18	jdk/internal/m3/hash/M3XXH3.java@42839-43848	yes	no	no
+after	M3XXH3$AsLongTupleHashFunction	dualHashVoid	([J)J	-	81	80	M3XXH3.java	804	812	9	jdk/internal/m3/hash/M3XXH3.java@43858-44317	yes	no	no
+after	M3XXH3$AsLongTupleHashFunction	dualHash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ[J)J	-	22	21	M3XXH3.java	814	817	4	jdk/internal/m3/hash/M3XXH3.java@44327-44613	no	no	no
+after	M3XXH3$AsLongTupleHashFunctionSeeded	<init>	(J)V	private	27	26	M3XXH3.java	831	836	6		no	no	no
+after	M3XXH3$AsLongTupleHashFunctionSeeded	seed	()J	-	5	4	M3XXH3.java	838	841	4	jdk/internal/m3/hash/M3XXH3.java@45389-45462	no	no	no
+after	M3XXH3$AsLongTupleHashFunctionSeeded	dualHash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ[J)J	-	26	25	M3XXH3.java	843	846	4	jdk/internal/m3/hash/M3XXH3.java@45472-45748	no	no	no
+after	M3XxHash	<init>	()V	-	5	4	M3XxHash.java	29	29	1		no	no	no
+after	M3XxHash	xxHash64	(JLjava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	static	637	636	M3XxHash.java	37	128	92	jdk/internal/m3/hash/M3XxHash.java@1493-3987	yes	yes	no
+after	M3XxHash	finalize	(J)J	static|private	35	34	M3XxHash.java	130	137	8	jdk/internal/m3/hash/M3XxHash.java@3993-4188	no	no	no
+after	M3XxHash	asLongHashFunctionWithoutSeed	()Ljdk/internal/m3/hash/M3LongHashFunction;	static	4	3	M3XxHash.java	139	141	3	jdk/internal/m3/hash/M3XxHash.java@4194-4312	no	no	no
+after	M3XxHash	asLongHashFunctionWithSeed	(J)Ljdk/internal/m3/hash/M3LongHashFunction;	static	9	8	M3XxHash.java	213	215	3	jdk/internal/m3/hash/M3XxHash.java@6656-6778	no	no	no
+after	M3XxHash$AsLongHashFunction	<init>	()V	private	5	4	M3XxHash.java	143	143	1		no	no	no
+after	M3XxHash$AsLongHashFunction	<clinit>	()V	static	20	19	M3XxHash.java	145	146	2		no	no	no
+after	M3XxHash$AsLongHashFunction	readResolve	()Ljava/lang/Object;	private	4	3	M3XxHash.java	148	150	3	jdk/internal/m3/hash/M3XxHash.java@4608-4686	no	no	no
+after	M3XxHash$AsLongHashFunction	seed	()J	-	2	1	M3XxHash.java	152	154	3	jdk/internal/m3/hash/M3XxHash.java@4696-4749	no	no	no
+after	M3XxHash$AsLongHashFunction	hashLong	(J)J	-	61	60	M3XxHash.java	156	166	11	jdk/internal/m3/hash/M3XxHash.java@4759-5149	yes	no	no
+after	M3XxHash$AsLongHashFunction	hashInt	(I)J	-	49	48	M3XxHash.java	168	175	8	jdk/internal/m3/hash/M3XxHash.java@5159-5480	yes	no	no
+after	M3XxHash$AsLongHashFunction	hashShort	(S)J	-	72	71	M3XxHash.java	177	186	10	jdk/internal/m3/hash/M3XxHash.java@5490-5926	yes	no	no
+after	M3XxHash$AsLongHashFunction	hashChar	(C)J	-	7	6	M3XxHash.java	188	191	4	jdk/internal/m3/hash/M3XxHash.java@5936-6043	no	no	no
+after	M3XxHash$AsLongHashFunction	hashByte	(B)J	-	39	38	M3XxHash.java	193	199	7	jdk/internal/m3/hash/M3XxHash.java@6053-6310	yes	no	no
+after	M3XxHash$AsLongHashFunction	hashVoid	()J	-	4	3	M3XxHash.java	201	204	4	jdk/internal/m3/hash/M3XxHash.java@6320-6402	no	no	no
+after	M3XxHash$AsLongHashFunction	hash	(Ljava/lang/Object;Ljdk/internal/m3/hash/M3Access;JJ)J	-	24	23	M3XxHash.java	206	210	5	jdk/internal/m3/hash/M3XxHash.java@6412-6644	no	no	no
+after	M3XxHash$AsLongHashFunctionSeeded	<init>	(J)V	private	22	21	M3XxHash.java	223	226	4	jdk/internal/m3/hash/M3XxHash.java@7006-7144	no	no	no
+after	M3XxHash$AsLongHashFunctionSeeded	seed	()J	-	5	4	M3XxHash.java	228	231	4	jdk/internal/m3/hash/M3XxHash.java@7154-7227	no	no	no
+after	M3XxHash$AsLongHashFunctionSeeded	hashVoid	()J	-	5	4	M3XxHash.java	233	236	4	jdk/internal/m3/hash/M3XxHash.java@7237-7318	no	no	no
