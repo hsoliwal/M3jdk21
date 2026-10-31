@@ -136,9 +136,18 @@ def apply(root: Path, result: dict) -> None:
         file = root / path
         text = file.read_text(encoding="utf-8", errors="surrogateescape")
         file.write_text(rewrite_text(text)[0], encoding="utf-8", errors="surrogateescape", newline="")
+    # moves on disk, then one git add of every old and new path (one git mv per file took minutes per thousand)
     for path, new in result["moves"]:
-        (root / new).parent.mkdir(parents=True, exist_ok=True)
-        subprocess.run(["git", "-C", str(root), "mv", path, new], check=True)  # a failed move stops the run
+        target = root / new
+        target.parent.mkdir(parents=True, exist_ok=True)
+        if target.exists():
+            raise SystemExit("REFUSED: move target exists: " + new)
+        (root / path).replace(target)
+    paths = [p for p, _ in result["rewrites"]] + [p for move in result["moves"] for p in move]
+    if paths:
+        listing = "\0".join(paths) + "\0"
+        subprocess.run(["git", "-C", str(root), "add", "-A", "--sparse", "--pathspec-from-file=-", "--pathspec-file-nul"],
+                       input=listing.encode("utf-8", "surrogateescape"), check=True)
 
 
 def write_tsv(result: dict, out: Path) -> None:
