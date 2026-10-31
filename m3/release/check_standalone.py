@@ -35,7 +35,9 @@ DEPENDENCY_KINDS = ("D_CHECKOUT", "D_SECRET", "D_MAVEN", "D_REPO_REF")
 NAMING_KINDS = ("N_PACKAGE", "N_PATH", "N_NAME")
 KINDS = DEPENDENCY_KINDS + NAMING_KINDS
 BASELINE = "m3/release/STANDALONE_BASELINE.tsv"
-SELF = {"m3/release/check_standalone.py", "m3/release/test_check_standalone.py", BASELINE}
+# the files that define the patterns they look for or rewrite (this check and the JDK naming recipe)
+SELF = {"m3/release/check_standalone.py", "m3/release/test_check_standalone.py", BASELINE,
+        "m3/tooling/jdk-naming/jdk_naming.py", "m3/tooling/jdk-naming/test_jdk_naming.py"}
 # The scope is fixed by path, not by what a checkout holds, so a sparse local run and a full CI run count the same
 # files; a scoped file that is not checked out is reported as unscanned. Executable and configuration files only:
 # JSON evidence, provenance and receipts are lineage (absorb-first keeps them), except the release contract.
