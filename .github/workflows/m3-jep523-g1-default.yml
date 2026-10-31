@@ -9,10 +9,8 @@ on:
       - "src/hotspot/share/gc/shared/gcConfig.cpp"
       - "test/hotspot/jtreg/gc/arguments/TestSelectDefaultGC.java"
       - "m3/backports/recipes/jep-523-g1-default/**"
-      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jep523BackportRecipe.java"
       - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk27-jep523-g1-default-java/**"
       - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-jep523-g1-default-text/**"
-      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jep523BackportRecipeTest.java"
       - "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jdk27-jep523-g1-default/**"
       - ".github/workflows/m3-jep523-g1-default.yml"
       - "m3/tooling/validators/WorkflowStructureCheck.java"
@@ -22,10 +20,8 @@ on:
       - "src/hotspot/share/gc/shared/gcConfig.cpp"
       - "test/hotspot/jtreg/gc/arguments/TestSelectDefaultGC.java"
       - "m3/backports/recipes/jep-523-g1-default/**"
-      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jep523BackportRecipe.java"
       - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk27-jep523-g1-default-java/**"
       - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-jep523-g1-default-text/**"
-      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jep523BackportRecipeTest.java"
       - "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jdk27-jep523-g1-default/**"
       - ".github/workflows/m3-jep523-g1-default.yml"
       - "m3/tooling/validators/WorkflowStructureCheck.java"
@@ -47,6 +43,10 @@ jobs:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v5
         with:
           distribution: temurin

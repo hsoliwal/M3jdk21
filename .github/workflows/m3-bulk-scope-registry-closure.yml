@@ -3,10 +3,6 @@ name: M3 Bulk Scope Registry Closure
 on:
   pull_request:
     paths:
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/scope/M3ScopeCoverageClosureTest.java'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3BulkScopeRegistryRecoveryReceiverRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3BulkScopeRegistryRecoveryReceiverRecipeTest.java'
       - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-bulk-scope-recovery-20261014/**'
       - 'm3/tooling/migration-recipes/tasks/bulk-scope-registry-recovery/**'
       - '.github/workflows/m3-bulk-scope-registry-closure.yml'
@@ -24,6 +20,10 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - name: Require exact hash-pinned Java sources and fixed-point bytes
         run: |
           python3 - <<'PY'
@@ -47,6 +47,10 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v4
         with:
           distribution: temurin

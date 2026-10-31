@@ -51,7 +51,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
-          sparse-checkout: m3/collections
+          sparse-checkout: |
+            m3/collections
+            .github/actions/legacy-recipe-custody
+            m3/release
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v4
         with:
           distribution: temurin

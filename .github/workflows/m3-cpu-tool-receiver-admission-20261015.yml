@@ -17,6 +17,10 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v4
         with:
           distribution: temurin

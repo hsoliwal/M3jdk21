@@ -40,6 +40,29 @@ jobs:
           tar -xzf "$RUNNER_TEMP/repo.tar.gz" -C "$RUNNER_TEMP/repo" --strip-components=1
           printf 'REPO=%s\n' "$RUNNER_TEMP/repo" >> "$GITHUB_ENV"
           printf 'TESTED_SHA=%s\n' "$HEAD_SHA" >> "$GITHUB_ENV"
+      - name: Plan legacy recipe custody restore
+        id: legacy-recipe-custody
+        shell: bash
+        run: bash "$REPO/.github/actions/legacy-recipe-custody/restore.sh" plan "$REPO"
+      - name: Check out the Synexia legacy recipe custody seal
+        if: steps.legacy-recipe-custody.outputs.needed == 'true'
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: hsoliwal/com.synexia
+          ref: ac6518d9a38080c589b3b51cf1f18edeca1b9c41
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
+          path: .legacy-recipe-custody-seal
+          fetch-depth: 1
+          fetch-tags: false
+          lfs: false
+          submodules: false
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: ${{ steps.legacy-recipe-custody.outputs.paths }}
+      - name: Restore and verify legacy recipe custody blobs
+        if: steps.legacy-recipe-custody.outputs.needed == 'true'
+        shell: bash
+        run: bash "$REPO/.github/actions/legacy-recipe-custody/restore.sh" restore "$REPO" "$GITHUB_WORKSPACE/.legacy-recipe-custody-seal"
       - name: Prepare pinned Java 21 test JDK
         run: |
           set -euo pipefail

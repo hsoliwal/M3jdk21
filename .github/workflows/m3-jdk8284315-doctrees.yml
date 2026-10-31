@@ -6,10 +6,8 @@ on:
       - "m3/backports/recipes/jdk-8284315/**"
       - "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
       - "m3/tooling/recipe-catalogue.tsv"
-      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk8284315*.java"
       - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk27-*8284315/**"
       - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-*8284315/**"
-      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jdk8284315*.java"
       - "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jdk27-doctrees-8284315/**"
       - "src/jdk.compiler/share/classes/com/sun/source/util/DocTrees.java"
       - "src/jdk.compiler/share/classes/com/sun/tools/javac/api/JavacTrees.java"
@@ -35,6 +33,10 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v5
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v5
         with:
           distribution: temurin

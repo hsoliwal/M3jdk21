@@ -15,7 +15,6 @@ on:
       - "m3/backports/test_file_delta_inventory.py"
       - "m3/backports/test_generate_recipe_crates.py"
       - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/**"
-      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic/**"
       - ".github/workflows/m3-jdk21-recipe-crates.yml"
   pull_request:
     paths:
@@ -24,7 +23,6 @@ on:
       - "m3/backports/test_file_delta_inventory.py"
       - "m3/backports/test_generate_recipe_crates.py"
       - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/**"
-      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic/**"
       - ".github/workflows/m3-jdk21-recipe-crates.yml"
   workflow_dispatch:
 
@@ -73,6 +71,30 @@ jobs:
           git -C "$RUNNER_TEMP/m3-current-git" rev-parse --verify "${HEAD_SHA}^{commit}"
           printf 'M3TARGET=%s\n' "$RUNNER_TEMP/m3-current-git" >> "$GITHUB_ENV"
           printf 'M3HEAD=%s\n' "$HEAD_SHA" >> "$GITHUB_ENV"
+
+      - name: Plan legacy recipe custody restore
+        id: legacy-recipe-custody
+        shell: bash
+        run: bash "$M3ROOT/.github/actions/legacy-recipe-custody/restore.sh" plan "$M3ROOT"
+      - name: Check out the Synexia legacy recipe custody seal
+        if: steps.legacy-recipe-custody.outputs.needed == 'true'
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: hsoliwal/com.synexia
+          ref: ac6518d9a38080c589b3b51cf1f18edeca1b9c41
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
+          path: .legacy-recipe-custody-seal
+          fetch-depth: 1
+          fetch-tags: false
+          lfs: false
+          submodules: false
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: ${{ steps.legacy-recipe-custody.outputs.paths }}
+      - name: Restore and verify legacy recipe custody blobs
+        if: steps.legacy-recipe-custody.outputs.needed == 'true'
+        shell: bash
+        run: bash "$M3ROOT/.github/actions/legacy-recipe-custody/restore.sh" restore "$M3ROOT" "$GITHUB_WORKSPACE/.legacy-recipe-custody-seal"
 
       - name: Fetch JDK21 baseline and donor tag
         shell: bash

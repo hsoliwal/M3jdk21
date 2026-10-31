@@ -5,7 +5,6 @@ on:
     paths:
       - 'm3/eclipse/framework/**'
       - 'm3/collections/src/main/java/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
       - '.github/workflows/m3-eclipse-framework-forward-20261017.yml'
   workflow_dispatch:
 permissions:
@@ -27,6 +26,12 @@ jobs:
             m3/eclipse/framework
             m3/collections
             m3/tooling/migration-recipes
+            .github/actions/legacy-recipe-custody
+            m3/release
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v4
         with:
           distribution: temurin

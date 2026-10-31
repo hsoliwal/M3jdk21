@@ -8,8 +8,6 @@ on:
       - 'm3/docs/a3-vendored-build-prerequisite-20261015.md'
       - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/synexia-full-delivery-a3/**'
       - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/synexia-full-delivery-a3-doc/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-synexia-full-delivery-a3.yml'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3SynexiaFullDeliveryA3RecipeTest.java'
       - 'm3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/synexia-full-delivery-a3/**'
       - 'm3/tooling/migration-recipes/tasks/synexia-full-delivery-a3/**'
       - '.github/workflows/m3-synexia-full-delivery-a3.yml'
@@ -30,6 +28,10 @@ jobs:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v5
         with:
           distribution: temurin

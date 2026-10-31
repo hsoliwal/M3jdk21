@@ -36,6 +36,12 @@ jobs:
             m3/collections/verify_donation.py
             m3/collections/recipe/filtered-sorted-views-20261017/manifest.tsv
             m3/collections/recipe/stored-representative-20261017/manifest.tsv
+            /.github/actions/legacy-recipe-custody/
+            /m3/release/legacy-recipe-custody-20261030.tsv
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v4
         with:
           distribution: temurin

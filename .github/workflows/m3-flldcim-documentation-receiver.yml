@@ -3,8 +3,6 @@ name: M3 FLLDCIM documentation receiver Java21
 on:
   pull_request:
     paths:
-      - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HierarchicalDocumentation*.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3HierarchicalDocumentation*.java'
       - 'm3/docs/m3-flldcim-receiver-*'
       - '.github/workflows/m3-flldcim-documentation-receiver.yml'
   workflow_dispatch:
@@ -20,6 +18,10 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v4
         with:
           distribution: temurin

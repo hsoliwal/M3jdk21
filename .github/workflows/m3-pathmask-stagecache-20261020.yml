@@ -5,7 +5,6 @@ on:
     paths:
       - 'm3/collections/src/main/native/collections/m3_index_path_masks.c'
       - 'm3/collections/qualification/pathmask-stage-cache-20261020/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
       - 'm3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3NativeRecipePathAdmissionTest.java'
       - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-native-*/**'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-native-*.yml'
@@ -21,6 +20,10 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -32,6 +35,10 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v4
         with:
           distribution: temurin

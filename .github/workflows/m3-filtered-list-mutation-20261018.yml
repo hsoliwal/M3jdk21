@@ -9,7 +9,6 @@ on:
       - '.github/workflows/m3-filtered-list-mutation-20261018.yml'
       - 'm3/collections/qualification/filtered-list-mutation-20261018/**'
       - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-list-mutation-20261018/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3jdk21-filtered-list-mutation-20261018.yml'
       - 'm3/collections/src/main/java/com/m3/collections/M3FilteredLists.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3FilteredListMutation*.java'
   workflow_dispatch:
@@ -33,6 +32,12 @@ jobs:
             m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite
             m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-filtered-list-mutation-20261018
             m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite
+            .github/actions/legacy-recipe-custody
+            m3/release
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v5
         with:
           distribution: temurin

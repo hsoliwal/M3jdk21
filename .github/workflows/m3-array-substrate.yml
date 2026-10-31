@@ -15,10 +15,8 @@ on:
       - 'm3/docs/m3jdk21-porting-invariant.md'
       - 'm3/docs/name-mapping.json'
       - 'm3/docs/synexia-array-port-map.tsv'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-array-substrate.yml'
       - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-array-substrate-v1/**'
       - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-array-substrate-v1/**'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3ArraySubstrateRecipeTest.java'
       - '.github/workflows/m3-array-substrate.yml'
   workflow_dispatch:
 
@@ -48,6 +46,10 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v5
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v5
         with:
           distribution: temurin

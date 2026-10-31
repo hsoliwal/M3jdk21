@@ -9,7 +9,6 @@ on:
       - 'm3/ports/parallel-bulk/verification/BITCOUNT.md'
       - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-bulk-bitcount-20261014/**'
       - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bulk-bitcount-20261014/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-parallel-bitcount.yml'
       - '.github/workflows/m3-parallel-bitcount.yml'
   workflow_dispatch:
 
@@ -55,6 +54,10 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v4
         with:
           distribution: temurin

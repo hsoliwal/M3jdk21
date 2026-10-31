@@ -1,9 +1,0 @@
-# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
-# SPDX-License-Identifier: Apache-2.0
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.Jdk21FilteredListMutation20261018
-displayName: Restore the original backing cursor check before filtered List mutation
-description: Exact-source candidate for M3FilteredLists; retain existing backing writes, physical occurrence ownership and public signatures. Runtime acceptance remains separately gated.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: m3jdk21-filtered-list-mutation-20261018

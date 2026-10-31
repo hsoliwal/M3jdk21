@@ -13,8 +13,6 @@ on:
       - 'm3/backports/recipes/j497/**'
       - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
       - 'm3/backports/test_jep_residue.py'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipeTest.java'
       - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jdk8338587-shake-xof/**'
       - '.github/workflows/m3-jdk8338587-shake-xof.yml'
   pull_request:
@@ -26,8 +24,6 @@ on:
       - 'm3/backports/recipes/j497/**'
       - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
       - 'm3/backports/test_jep_residue.py'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipeTest.java'
       - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jdk8338587-shake-xof/**'
       - '.github/workflows/m3-jdk8338587-shake-xof.yml'
   workflow_dispatch:
@@ -46,6 +42,10 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v5
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
@@ -127,6 +127,11 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: true
+
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
 
       - uses: actions/setup-java@v5
         with:
@@ -211,6 +216,11 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
+
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
 
       - uses: actions/setup-java@v5
         with:

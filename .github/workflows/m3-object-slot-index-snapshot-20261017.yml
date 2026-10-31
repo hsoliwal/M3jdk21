@@ -13,8 +13,6 @@ on:
       - 'm3/collections/src/test/java/com/m3/collections/M3ObjectSlotIndex*.java'
       - 'm3/collections/qualification/m3-object-slot-index-snapshot-20261017/**'
       - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-object-slot-index-snapshot-20261017.yml'
-      - 'm3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java'
       - '.github/workflows/m3-object-slot-index-snapshot-20261017.yml'
   workflow_dispatch:
 
@@ -33,6 +31,11 @@ jobs:
       - uses: actions/checkout@v5
         with:
           persist-credentials: false
+
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
 
       - uses: actions/setup-java@v5
         with:

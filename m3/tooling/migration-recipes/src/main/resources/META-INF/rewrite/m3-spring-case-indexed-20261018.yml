@@ -1,8 +1,0 @@
-# SPDX-License-Identifier: Apache-2.0
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.Jdk21SpringCaseIndexed20261018
-displayName: Source-sealed Spring case-insensitive Map over two existing M3 arrays/indexed-map owners
-description: Reuse current M3HashPinnedJavaSnapshotRecipe; 3 ABSENT Java21 postimages; exact M3 array owners and real Spring 6.2.0 contract tests.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: m3-spring-case-indexed-20261018

@@ -7,7 +7,6 @@ on:
       - "m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringCaseInsensitive*.java"
       - "m3/collections/interop/qualification/spring-case-indexed-20261018/**"
       - "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-spring-case-indexed-20261018/**"
-      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-spring-case-indexed-20261018.yml"
       - ".github/workflows/m3-spring-case-indexed-20261018.yml"
   push:
     branches: [m3/spring-case-indexed-receiver-20261018]
@@ -24,6 +23,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: {persist-credentials: false}
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v4
         with: {distribution: temurin, java-version: '21'}
       - name: Seal Java targets and original M3 indexed owner

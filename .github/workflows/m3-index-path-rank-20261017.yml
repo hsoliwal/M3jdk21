@@ -8,8 +8,6 @@ on:
       - 'm3/collections/qualification/indexpath-bulk-20261021/**'
       - 'm3/collections/algorithm-catalog/index-path-rank-20261017.tsv'
       - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-index-path-rank-20261017/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-index-path-rank-20261017.yml'
-      - 'm3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3IndexPathRankRecipeTest.java'
       - '.github/workflows/m3-index-path-rank-20261017.yml'
   workflow_dispatch:
 permissions:
@@ -24,6 +22,10 @@ jobs:
     timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v4
         with:
           distribution: temurin

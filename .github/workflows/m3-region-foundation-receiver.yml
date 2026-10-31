@@ -29,6 +29,12 @@ jobs:
             m3/docs
             src/java.base/share/classes/java/lang
             test/jdk/java/lang/String
+            .github/actions/legacy-recipe-custody
+            m3/release
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           ref: 855afe57a679aeb454052630de7beddcb25f5f8f

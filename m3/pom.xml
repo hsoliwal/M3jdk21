@@ -14,9 +14,6 @@
     <module>indexdb</module>
     <module>fs</module>
     <module>synexia-import</module>
-    <module>synexia-import/pure-int-recipe-custody</module>
-    <module>tooling/migration-recipes</module>
-    <module>tooling/synexia-jdk-a3-recipes</module>
     <module>tooling/a3</module>
     <module>tooling/backport-dag</module>
     <module>tooling/recipe-agent-api</module>
@@ -305,6 +302,42 @@
           </plugin>
         </plugins>
       </build>
+    </profile>
+    <profile>
+      <id>legacy-recipe-custody-m3-synexia-import-pure-int-recipe-custody</id>
+      <!-- Module present while tracked or restored from the Synexia seal (.github/actions/legacy-recipe-custody). -->
+      <activation>
+        <file>
+          <exists>${basedir}/synexia-import/pure-int-recipe-custody/pom.xml</exists>
+        </file>
+      </activation>
+      <modules>
+        <module>synexia-import/pure-int-recipe-custody</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>legacy-recipe-custody-m3-tooling-migration-recipes</id>
+      <!-- Module present while tracked or restored from the Synexia seal (.github/actions/legacy-recipe-custody). -->
+      <activation>
+        <file>
+          <exists>${basedir}/tooling/migration-recipes/pom.xml</exists>
+        </file>
+      </activation>
+      <modules>
+        <module>tooling/migration-recipes</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>legacy-recipe-custody-m3-tooling-synexia-jdk-a3-recipes</id>
+      <!-- Module present while tracked or restored from the Synexia seal (.github/actions/legacy-recipe-custody). -->
+      <activation>
+        <file>
+          <exists>${basedir}/tooling/synexia-jdk-a3-recipes/pom.xml</exists>
+        </file>
+      </activation>
+      <modules>
+        <module>tooling/synexia-jdk-a3-recipes</module>
+      </modules>
     </profile>
   </profiles>
 

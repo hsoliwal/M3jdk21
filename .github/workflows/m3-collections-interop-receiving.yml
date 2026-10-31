@@ -5,7 +5,6 @@ on:
     paths:
       - 'm3/collections/interop/**'
       - 'm3/collections/src/main/java/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
       - '.github/workflows/m3-collections-interop-receiving.yml'
   push:
     branches: [aix/m3-collections-interop-receiving-20261015]
@@ -28,6 +27,12 @@ jobs:
             m3/collections
             m3/native
             m3/tooling/migration-recipes
+            .github/actions/legacy-recipe-custody
+            m3/release
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       # Keep both historical source checkouts; the successor verifier binds
       # 36+7+40 originals, three compiled-test atoms and eight new E5 sources.
       - uses: actions/checkout@v4

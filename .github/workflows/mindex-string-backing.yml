@@ -19,11 +19,6 @@ on:
       - 'm3/docs/synexia-string-precompute-port-map.tsv'
       - 'm3/docs/string-precompute-completeness.tsv'
       - 'm3/runtime-integration/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3Java21ConvergenceRecipeTest.java'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-atom-pattern.yml'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-file-inventory.yml'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-java21-convergence.yml'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-token-regex-convergence.yml'
       - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-token-regex-convergence/**'
       - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3TokenRegexConvergenceRecipeTest.java'
@@ -96,6 +91,10 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - name: Verify exact reviewed head
         env:
           M3_EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}

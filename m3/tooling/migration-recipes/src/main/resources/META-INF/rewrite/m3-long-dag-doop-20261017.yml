@@ -1,8 +1,0 @@
----
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.rewrite.M3Jdk21LongDoopDag20261017
-displayName: M3JDK21 parent-owned primitive stream DAG and virtual collectors
-description: Admit SHA-256-pinned Java 21 additive source, exact absent-before targets; preserve original collection owners.
-recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
-      crateName: m3-long-dag-doop-20261017

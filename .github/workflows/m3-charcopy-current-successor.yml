@@ -13,9 +13,7 @@ on:
       - 'src/java.base/share/classes/java/lang/M3StringFacts.java'
       - 'test/jdk/java/lang/String/M3StringConcatLengthOverflowTest.java'
       - 'm3/runtime-integration/tests/M3StringInvariant.java'
-      - 'm3/runtime-integration/char-array-copy/recipe/apply.py'
       - 'm3/runtime-integration/char-array-copy/recipe/manifest.json'
-      - 'm3/runtime-integration/char-array-copy/recipe/test_recipe.py'
       - 'LICENSE'
 permissions:
   contents: read
@@ -105,6 +103,13 @@ jobs:
             /m3/runtime-integration/char-array-copy/recipe/manifest.json
             /m3/runtime-integration/char-array-copy/recipe/test_recipe.py
             /LICENSE
+            /.github/actions/legacy-recipe-custody/
+            /m3/release/legacy-recipe-custody-20261030.tsv
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./m3-charcopy-current-successor-source/.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
+          root: m3-charcopy-current-successor-source
       - name: Qualify charcopy named SDK and isolated historical programs
         shell: bash
         env:

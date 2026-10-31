@@ -6,8 +6,6 @@ on:
     paths:
       - 'm3/runtime-integration/fix/**'
       - '.github/workflows/m3-jni-fix.yml'
-      - 'm3/tooling/migration-recipes/verification/jni/**'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JniTest.java'
 permissions:
   contents: read
 concurrency:
@@ -26,6 +24,10 @@ jobs:
         with:
           ref: ${{ github.sha }}
           persist-credentials: false
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
         with:
           distribution: temurin

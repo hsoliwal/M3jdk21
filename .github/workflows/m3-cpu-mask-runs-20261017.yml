@@ -8,7 +8,6 @@ on:
       - 'm3/collections/recipe/cpu-mask-runs-20261017/**'
       - 'm3/collections/algorithm-catalog/cpu-mask-runs-20261017.tsv'
       - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cpu-mask-runs-20261017/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-cpu-mask-runs-20261017.yml'
       - '.github/workflows/m3-cpu-mask-runs-20261017.yml'
   workflow_dispatch:
 permissions:
@@ -23,6 +22,10 @@ jobs:
     timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v4
         with:
           distribution: temurin

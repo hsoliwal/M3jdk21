@@ -9,8 +9,6 @@ on:
       - 'm3/backports/test_jep_residue.py'
       - 'm3/backports/test_m3_extension_residue.py'
       - 'm3/backports/recipes/jep-residue-proof-gate/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3JepResidueProofGateReceiverRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3JepResidueProofGateReceiverRecipeTest.java'
       - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk21-jep-residue-proof/**'
       - 'm3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jep-residue-proof/**'
       - '.github/workflows/m3-jdk21-jep-residue-proof-gate.yml'
@@ -29,6 +27,10 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - name: Diff and Python syntax
         run: |
           set -euo pipefail
@@ -46,6 +48,10 @@ jobs:
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v4
         with:
           distribution: temurin

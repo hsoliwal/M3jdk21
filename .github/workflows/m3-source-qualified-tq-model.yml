@@ -90,6 +90,13 @@ jobs:
             /m3/vendor/third_party/*/pom.xml
             /m3/tooling/tq-sync/pom.xml
             /m3/tooling/tq-sync/source-reactor/
+            /.github/actions/legacy-recipe-custody/
+            /m3/release/legacy-recipe-custody-20261030.tsv
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./m3-source-qualified-tq-model-source/.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
+          root: m3-source-qualified-tq-model-source
       - name: Qualify actual offline Maven model under storage supervision
         shell: bash
         env:

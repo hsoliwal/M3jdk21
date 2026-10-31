@@ -6,10 +6,8 @@ on:
       - "m3/backports/recipes/jdk-8368692/**"
       - "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
       - "m3/tooling/recipe-catalogue.tsv"
-      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk8368692PasswordSystemInBackportRecipe.java"
       - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk27-password-systemin-8368692-java/**"
       - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-password-systemin-8368692-text/**"
-      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jdk8368692PasswordSystemInBackportRecipeTest.java"
       - "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jdk27-password-systemin-8368692/**"
       - "src/java.base/share/classes/sun/security/util/Password.java"
       - "src/java.base/share/conf/security/java.security"
@@ -29,6 +27,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v4
         with:
           distribution: temurin

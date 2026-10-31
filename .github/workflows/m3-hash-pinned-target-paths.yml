@@ -7,8 +7,6 @@ on:
     paths:
       - '.github/workflows/m3-hash-pinned-target-paths.yml'
       - 'm3/tooling/hash-pinned-target-paths/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java'
       - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectIndexSnapshot.java.txt'
       - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexSelfTest.java.txt'
       - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexTest.java.txt'
@@ -103,6 +101,13 @@ jobs:
             /m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexTest.java.txt
             /m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotStore28.java.txt
             /m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/manifest.tsv
+            /.github/actions/legacy-recipe-custody/
+            /m3/release/legacy-recipe-custody-20261030.tsv
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./m3-hash-pinned-target-paths-source/.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
+          root: m3-hash-pinned-target-paths-source
       - name: Qualify canonical accessor recipe and exact owning inputs
         shell: bash
         env:

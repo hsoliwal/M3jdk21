@@ -8,7 +8,6 @@ on:
       - 'm3/collections/snapshot-recipe-20261017/**'
       - 'm3/collections/qualification/sorted-snapshot-20261017/**'
       - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3long-sorted-snapshot-20261017/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3long-sorted-snapshot-20261017.yml'
       - '.github/workflows/m3-long-sorted-snapshot-20261017.yml'
   workflow_dispatch:
 
@@ -21,6 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v4
         with:
           distribution: temurin

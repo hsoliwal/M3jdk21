@@ -36,6 +36,12 @@ jobs:
             m3/docs/name-mapping.d/eclipse-core-optional-jmod-20261018.tsv
             m3/LICENSE
             m3/NOTICE
+            .github/actions/legacy-recipe-custody
+            m3/release
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v4
         with:
           distribution: temurin

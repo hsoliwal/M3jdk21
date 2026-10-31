@@ -5,26 +5,16 @@ on:
     branches:
       - "m3/a3-openrewrite-declarative-20261004"
     paths:
-      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceCatalog.java"
-      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-java21-convergence.yml"
-      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-declarative-delivery.yml"
       - "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-declarative-*/**"
       - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-declarative-yaml/**"
-      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3DeclarativeDeliveryRecipeTest.java"
-      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3Java21DeclarativeConvergenceTest.java"
       - "m3/tooling/a3/src/main/java/com/m3/a3/A3Apply.java"
       - "m3/tooling/a3/src/test/java/com/m3/a3/A3ApplyTest.java"
       - "m3/docs/a3.md"
       - ".github/workflows/m3-a3-openrewrite-declarative.yml"
   pull_request:
     paths:
-      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceCatalog.java"
-      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-java21-convergence.yml"
-      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-declarative-delivery.yml"
       - "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-declarative-*/**"
       - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-declarative-yaml/**"
-      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3DeclarativeDeliveryRecipeTest.java"
-      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3Java21DeclarativeConvergenceTest.java"
       - "m3/tooling/a3/src/main/java/com/m3/a3/A3Apply.java"
       - "m3/tooling/a3/src/test/java/com/m3/a3/A3ApplyTest.java"
       - "m3/docs/a3.md"
@@ -46,6 +36,11 @@ jobs:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
+
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
 
       - uses: actions/setup-java@v5
         with:

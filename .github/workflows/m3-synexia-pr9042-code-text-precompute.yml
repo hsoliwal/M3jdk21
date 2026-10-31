@@ -9,7 +9,6 @@ on:
       - 'm3/docs/synexia-pr9042-code-text-precompute-handoff.md'
       - 'm3/ports/precompute/**'
       - 'm3/tooling/migration-recipes/src/main/resources/**/synexia-pr9042-precompute-handoff/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-synexia-pr9042-precompute-handoff.yml'
       - '.github/workflows/m3-synexia-pr9042-code-text-precompute.yml'
   workflow_dispatch:
 
@@ -26,6 +25,10 @@ jobs:
     timeout-minutes: 35
     steps:
       - uses: actions/checkout@v5
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v5
         with:
           distribution: temurin

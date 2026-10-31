@@ -35,6 +35,12 @@ jobs:
             m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite
             m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-indexed-live-views-20261021
             m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-indexed-live-views-20261021.yml
+            .github/actions/legacy-recipe-custody
+            m3/release
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - uses: actions/setup-java@v4
         with:
           distribution: temurin

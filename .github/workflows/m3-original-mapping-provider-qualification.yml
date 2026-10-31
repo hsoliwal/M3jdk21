@@ -256,6 +256,13 @@ jobs:
             /src/java.base/share/native/libjava/M3BitLane28.c
             /src/java.base/share/native/libjava/M3StateRelation.c
             /src/java.base/share/native/libjava/m3_state_relation.h
+            /.github/actions/legacy-recipe-custody/
+            /m3/release/legacy-recipe-custody-20261030.tsv
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./m3-original-provider-source/.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
+          root: m3-original-provider-source
       - name: Qualify recipe and genuine original validator under storage supervision
         shell: bash
         env:

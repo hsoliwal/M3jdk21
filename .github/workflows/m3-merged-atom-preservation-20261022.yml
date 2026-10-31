@@ -38,6 +38,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - name: Exercise missing, drifted and forged-recipe negative oracles
         run: python3 -m unittest discover -s m3/history -p 'test_merged_atoms_preservation_20261022.py' -v
       - name: Reject disappearing merged product atoms

@@ -40,6 +40,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
+
       - uses: actions/setup-java@v5
         with:
           distribution: temurin

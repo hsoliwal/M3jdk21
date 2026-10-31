@@ -58,6 +58,12 @@ jobs:
             src/java.base/share/classes/java/util/ChangeJournal.java
             src/java.base/share/classes/java/lang/M3CodeTextSignalBatch.java
             .github/workflows/m3jdk21-name-contract.yml
+            /.github/actions/legacy-recipe-custody/
+            /m3/release/legacy-recipe-custody-20261030.tsv
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
       - name: Canonical name and package mapping gate
         run: python3 m3/tooling/name-contract/check.py
       - name: Canonical target class and JNI owner census

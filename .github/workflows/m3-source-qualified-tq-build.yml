@@ -7,9 +7,6 @@ on:
       - '.github/workflows/m3-source-qualified-tq-build.yml'
       - 'm3/vendor/third_party/**'
       - 'm3/tooling/tq-sync/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java'
-      - '.m3/task-crates/dependency-source-inline-20261010/verify_crate.py'
 permissions:
   contents: read
 concurrency:
@@ -96,6 +93,13 @@ jobs:
             /m3/tooling/tq-sync/source-build/
             /m3/tooling/tq-sync/src/
             /.m3/task-crates/dependency-source-inline-20261010/verify_crate.py
+            /.github/actions/legacy-recipe-custody/
+            /m3/release/legacy-recipe-custody-20261030.tsv
+      - name: Restore sealed legacy recipe custody from Synexia
+        uses: ./m3-source-qualified-tq-build-source/.github/actions/legacy-recipe-custody
+        with:
+          token: ${{ secrets.SYNEXIA_READ_TOKEN || github.token }}
+          root: m3-source-qualified-tq-build-source
       - name: Build existing source producers and verify TQ sync fixtures
         shell: bash
         env:
