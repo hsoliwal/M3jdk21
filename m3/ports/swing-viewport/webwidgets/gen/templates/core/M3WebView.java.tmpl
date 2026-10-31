@@ -14,8 +14,8 @@ import java.util.Arrays;
  * <li><b>P</b> retained planes: body, header, overlay and scrollbar planes carry their own offset;
  * moving a plane damages only its old and new bounds.</li>
  * </ul>
- * The window follows the contract of the Swing port's {@code M3ViewportIndexWindow.project}
- * (half-open visible range plus overscan), so both toolkits answer the same.
+ * Window, extent, scroll bar, dirty planes and damage come from the toolkit viewport core
+ * ({@code M3WebViewportCore}: SWT public M3 facades / M3JDK Swing port); this class maps pixels to rows.
  */
 //FLLDCIM: DOOP — long extents, int windows, plane offsets in one int lane
 public abstract class M3WebView extends M3WebLanes {
@@ -61,7 +61,7 @@ public abstract class M3WebView extends M3WebLanes {
 
 	/** Logical extent of all (filtered) items: may exceed the int range. */
 	public long logicalExtent() {
-		return (long) logicalCount() * itemExtent;
+		return core.extent(logicalCount(), itemExtent);
 	}
 
 	/** Number of positions along the scroll axis: the filter's matches, or every item. */
@@ -136,7 +136,11 @@ public abstract class M3WebView extends M3WebLanes {
 			return;
 		}
 		scroll = to;
+		int dirty = scrollsHorizontally() ? core.scrolled(to, 0) : core.scrolled(0, to);
 		arrange();
+		if ((dirty & M3WebViewportCore.SCROLLBAR) != 0) {
+			damage(planes[SCROLLBAR * 6], planes[SCROLLBAR * 6 + 1], planes[SCROLLBAR * 6 + 2], planes[SCROLLBAR * 6 + 3]);
+		}
 		if (Math.abs(dy) < viewLength() && (aspects() & A_D) != 0) {
 			blit += (int) dy;
 			int at = viewOrigin() + (dy > 0 ? 0 : viewLength() + (int) dy), len = (int) Math.abs(dy);
@@ -163,12 +167,7 @@ public abstract class M3WebView extends M3WebLanes {
 		int n = logicalCount();
 		int first = (int) Math.min(n, scroll / itemExtent);
 		int visible = viewLength() <= 0 ? 0 : (int) Math.min(n, (scroll % itemExtent + viewLength() + itemExtent - 1) / itemExtent);
-		int start = Math.min(first, n);
-		int end = visible == 0 ? start : (int) Math.min((long) n, (long) start + visible);
-		window[0] = start;
-		window[1] = end;
-		window[2] = visible == 0 || start == end ? start : Math.max(0, start - overscan);
-		window[3] = visible == 0 || start == end ? end : (int) Math.min((long) n, (long) end + overscan);
+		core.project(n, first, visible, overscan, window);
 	}
 
 	/** {@code k}: 0 first visible, 1 end visible, 2 first resident, 3 end resident. */
@@ -182,11 +181,7 @@ public abstract class M3WebView extends M3WebLanes {
 
 	/** Scroll bar projection into {@code out}: thumb offset and thumb length in a track of {@code track} pixels. */
 	public void thumb(int track, int[] out) {
-		long ext = Math.max(1, logicalExtent());
-		int len = (int) Math.max(Math.min(track, 8), Math.min(track, (long) track * viewLength() / ext));
-		long range = Math.max(1, ext - viewLength());
-		out[0] = (int) ((track - len) * Math.min(scroll, range) / range);
-		out[1] = len;
+		core.thumb(logicalCount(), itemExtent, viewLength(), scroll, track, out);
 	}
 
 	/** Declares a plane's bounds (in plane coordinates); families call this from layout. */

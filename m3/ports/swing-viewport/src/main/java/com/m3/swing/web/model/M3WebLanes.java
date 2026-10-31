@@ -33,7 +33,9 @@ public abstract class M3WebLanes implements M3WebApi {
 	protected String[] text = new String[8], detail = new String[8];
 	protected boolean rtl;
 	private String[] keys;
-	private int dx0 = Integer.MAX_VALUE, dy0 = Integer.MAX_VALUE, dx1 = Integer.MIN_VALUE, dy1 = Integer.MIN_VALUE, generation;
+	/** The toolkit's viewport core (SWT public M3 facades or the M3JDK Swing port), generated per side. */
+	final M3WebViewportCore core = new M3WebViewportCore();
+	private int generation;
 	private M3WebDelta delta;
 
 	@Override
@@ -215,8 +217,7 @@ public abstract class M3WebLanes implements M3WebApi {
 	}
 
 	protected void damage(int x, int y, int w, int h) {
-		dx0 = Math.min(dx0, x); dy0 = Math.min(dy0, y);
-		dx1 = Math.max(dx1, x + w); dy1 = Math.max(dy1, y + h);
+		core.damage(x, y, w, h);
 	}
 
 	protected void damageItem(int item) {
@@ -230,12 +231,12 @@ public abstract class M3WebLanes implements M3WebApi {
 
 	@Override
 	public boolean takeDamage(int[] out) {
-		if (dx0 > dx1 || dy0 > dy1) {
+		if (!core.take(out)) {
 			return false;
 		}
-		out[0] = Math.max(0, dx0); out[1] = Math.max(0, dy0);
-		out[2] = Math.min(width, dx1) - out[0]; out[3] = Math.min(height, dy1) - out[1];
-		dx0 = dy0 = Integer.MAX_VALUE; dx1 = dy1 = Integer.MIN_VALUE;
+		int x1 = Math.min(width, out[0] + out[2]), y1 = Math.min(height, out[1] + out[3]);
+		out[0] = Math.max(0, out[0]); out[1] = Math.max(0, out[1]);
+		out[2] = Math.max(0, x1 - out[0]); out[3] = Math.max(0, y1 - out[1]);
 		return true;
 	}
 

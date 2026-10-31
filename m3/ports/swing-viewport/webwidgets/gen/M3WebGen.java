@@ -96,6 +96,7 @@ public final class M3WebGen {
 			emit("core/" + c + ".java.tmpl", s.main(s.pkg()).resolve(c + ".java"), base);
 		}
 		emit("core/M3WebChecks.java.tmpl", s.test(s.pkg()).resolve("M3WebChecks.java"), base);
+		emit((s.nebula() ? "nebula/" : "swing/") + "M3WebViewportCore.java.tmpl", s.main(s.pkg()).resolve("M3WebViewportCore.java"), base);
 		String tk = s.nebula() ? "nebula/" : "swing/";
 		for (String c : s.nebula() ? new String[] { "M3WebCanvas", "M3WebCanvasCache" } : new String[] { "M3WebComponent" }) {
 			emit(tk + c + ".java.tmpl", s.main(s.wpkg()).resolve(c + ".java"), base);
