@@ -17,6 +17,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -30,36 +31,71 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Deque;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.NavigableMap;
+import java.util.NavigableSet;
 import java.util.Objects;
+import java.util.Queue;
+import java.util.RandomAccess;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.SortedSet;
 import java.util.Spliterator;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.IntFunction;
 import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
+import org.apache.commons.collections4.Bag;
+import org.apache.commons.collections4.BidiMap;
+import org.apache.commons.collections4.IterableMap;
 import org.apache.commons.collections4.MapIterator;
+import org.apache.commons.collections4.MultiSet;
+import org.apache.commons.collections4.OrderedMap;
 import org.apache.commons.collections4.ResettableIterator;
+import org.apache.commons.collections4.SortedBag;
+import org.apache.commons.collections4.bag.HashBag;
+import org.apache.commons.collections4.bag.TreeBag;
+import org.apache.commons.collections4.map.LinkedMap;
+import org.apache.commons.collections4.multiset.HashMultiSet;
 
 /**
- * Pattern DECORATOR_DIFFERENTIAL probe (PREDICATED family): deterministic scripts the seeded differential cannot reach.
- * Both sides start from fresh, equal backings with one counting {@link Pol} per side and lane; after every call the result
- * (exception class and contract message included), the backing state and the per-lane predicate call counts are compared.
+ * Pattern DECORATOR_DIFFERENTIAL probe (PREDICATED family): deterministic scripts the seeded
+ * differential cannot reach.
+ * Both sides start from fresh, equal backings with one counting {@link Pol} per side and lane;
+ * after every call the result (exception class and contract message included), the backing
+ * state and the per-lane predicate call counts are compared.
  * <ul>
- * <li>VIEW_SWEEP (refutation R1): every interface method of every view reachable in two hops from the decorator (for
- * example {@code headSet(8).headSet(6).add(4)}, {@code headSet(6).addAll([4])}, {@code entrySet().iterator()}) is called
- * with accepted, rejected and null arguments. Each call is replayed from a fresh decorator, so calls never interfere.
- * <li>MAP_ITERATOR (R2): getKey/getValue/setValue before next(), after remove() and after reset(); remove() twice;
- * re-drain after reset; next() past the end.
- * <li>LIST_ITERATOR (skeptic missed semantics 3): backward navigation, set/add of accepted, rejected and null elements.
- * <li>SERIAL (R7): the NotSerializableException message with a non-serializable predicate, a non-serializable backing
- * (a proxy) or both, so the stream order of lanes and backing is observable.
+ * <li>VIEW_SWEEP (refutation R1): every interface method of every view reachable in two hops
+ * from the decorator (for example {@code headSet(8).headSet(6).add(4)},
+ * {@code headSet(6).addAll([4])}, {@code entrySet().iterator()}) is called with accepted,
+ * rejected and null arguments. Each call is replayed from a fresh decorator, so calls never
+ * interfere.
+ * <li>MAP_ITERATOR (R2): getKey/getValue/setValue before next(), after remove() and after
+ * reset(); remove() twice; re-drain after reset; next() past the end.
+ * <li>LIST_ITERATOR (skeptic missed semantics 3): backward navigation, set/add of accepted,
+ * rejected and null elements.
+ * <li>SERIAL (R7): the NotSerializableException message with a non-serializable predicate, a
+ * non-serializable backing (a proxy) or both, so the stream order of lanes and backing is
+ * observable.
  * </ul>
- * Usage: {@code java -cp commons.jar;classes;probes M3PredicatedProbe <m3 fqn> <commons fqn> <backing> <factory> <out.tsv>
- * [policy]}. Exit 0 = no mismatch, 4 = mismatches appended to out.tsv.
+ * Usage: {@code java -cp commons.jar;classes;probes M3PredicatedProbe <m3 fqn> <commons fqn>
+ * <backing> <factory> <out.tsv> [policy]}. Exit 0 = no mismatch, 4 = mismatches appended to
+ * out.tsv.
  */
 public final class M3PredicatedProbe {
     private static final Logger LOG = Logger.getLogger(M3PredicatedProbe.class.getName());
@@ -68,17 +104,18 @@ public final class M3PredicatedProbe {
     private static final int VARIANTS = 3;
     private static final Object SKIP = new Object();
     private static final Map<String, Supplier<Object>> BACKINGS = Map.ofEntries(
-            Map.entry("list", ArrayList::new), Map.entry("deque", java.util.LinkedList::new),
-            Map.entry("treeset", java.util.TreeSet::new), Map.entry("hashset", java.util.HashSet::new),
-            Map.entry("hashbag", org.apache.commons.collections4.bag.HashBag::new),
-            Map.entry("treebag", org.apache.commons.collections4.bag.TreeBag::new),
-            Map.entry("hashmultiset", org.apache.commons.collections4.multiset.HashMultiSet::new),
-            Map.entry("hashmap", HashMap::new), Map.entry("treemap", java.util.TreeMap::new),
-            Map.entry("linkedmap", org.apache.commons.collections4.map.LinkedMap::new));
+            Map.entry("list", ArrayList::new), Map.entry("deque", LinkedList::new),
+            Map.entry("treeset", TreeSet::new), Map.entry("hashset", HashSet::new),
+            Map.entry("hashbag", HashBag::new),
+            Map.entry("treebag", TreeBag::new),
+            Map.entry("hashmultiset", HashMultiSet::new),
+            Map.entry("hashmap", HashMap::new), Map.entry("treemap", TreeMap::new),
+            Map.entry("linkedmap", LinkedMap::new));
     private static boolean rejectNull;
 
     /** Serializable counting predicate with a stable toString. */
-    static final class Pol implements org.apache.commons.collections4.Predicate<Object>, java.io.Serializable {
+    static final class Pol
+            implements org.apache.commons.collections4.Predicate<Object>, Serializable {
         private static final long serialVersionUID = 1L;
         private int calls;
 
@@ -107,7 +144,10 @@ public final class M3PredicatedProbe {
         }
     }
 
-    /** R7: forwards every call of a proxy backing to a real backing; not serializable, so the proxy is not either. */
+    /**
+     * R7: forwards every call of a proxy backing to a real backing; not serializable, so the
+     * proxy is not either.
+     */
     static final class Forward implements InvocationHandler {
         private final Object target;
 
@@ -116,7 +156,8 @@ public final class M3PredicatedProbe {
         }
 
         @Override
-        public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
+        public Object invoke(final Object proxy, final Method method, final Object[] args)
+                throws Throwable {
             try {
                 return method.invoke(target, args);
             } catch (InvocationTargetException e) {
@@ -139,28 +180,43 @@ public final class M3PredicatedProbe {
     private final List<String> mismatches = new ArrayList<>();
     private long checks;
 
-    private M3PredicatedProbe(Class<?> m3, Class<?> oracle, String kind, String factory, String policy) throws NoSuchMethodException {
+    private M3PredicatedProbe(Class<?> m3, Class<?> oracle, String kind, String factory,
+            String policy) throws NoSuchMethodException {
         this.kind = kind;
         this.policy = policy;
-        this.oracleFactory = Arrays.stream(oracle.getMethods()).filter(m -> Modifier.isStatic(m.getModifiers()) && m.getName().equals(factory))
+        this.oracleFactory = Arrays.stream(oracle.getMethods())
+                .filter(m -> Modifier.isStatic(m.getModifiers()) && m.getName().equals(factory))
                 .min(Comparator.comparing(Method::toGenericString)).orElseThrow();
         this.m3Factory = m3.getMethod(factory, oracleFactory.getParameterTypes());
         this.rootMethods = Arrays.stream(m3.getDeclaredMethods())
-                .filter(m -> Modifier.isPublic(m.getModifiers()) && !Modifier.isStatic(m.getModifiers()) && !m.isSynthetic())
+                .filter(m -> Modifier.isPublic(m.getModifiers())
+                        && !Modifier.isStatic(m.getModifiers()) && !m.isSynthetic())
                 .sorted(Comparator.comparing(Method::toGenericString)).toList();
     }
 
+    /**
+     * Runs every probe script against one decorator class and appends the mismatches to a TSV
+     * file. The process exits with status 0 when there is no mismatch and 4 otherwise.
+     *
+     * @param args the M3 class name, the Commons Collections class name, the backing kind, the
+     *        factory method name, the output TSV path and, optionally, the null policy
+     *        ({@code -} selects the default {@code both})
+     * @throws Exception if a class or factory method cannot be found, or the output file cannot
+     *         be written
+     */
     public static void main(String[] args) throws Exception {
         String policy = args.length > 5 && !args[5].equals("-") ? args[5] : "both";
         rejectNull = policy.equals("rejectnull");
-        M3PredicatedProbe p = new M3PredicatedProbe(Class.forName(args[0]), Class.forName(args[1]), args[2], args[3], policy);
+        M3PredicatedProbe p = new M3PredicatedProbe(
+                Class.forName(args[0]), Class.forName(args[1]), args[2], args[3], policy);
         p.sweep(new ArrayList<>(), 0);
         p.mapIterator();
         p.listIterators();
         p.serial();
-        Files.write(Path.of(args[4]), p.mismatches.stream().map(r -> args[0] + "\t" + r).toList(), StandardCharsets.UTF_8,
-                StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-        LOG.info(() -> "M3_PREDICATED_PROBE class=" + args[0] + " backing=" + args[2] + " policy=" + policy + " checks=" + p.checks
+        Files.write(Path.of(args[4]), p.mismatches.stream().map(r -> args[0] + "\t" + r).toList(),
+                StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+        LOG.info(() -> "M3_PREDICATED_PROBE class=" + args[0] + " backing=" + args[2]
+                + " policy=" + policy + " checks=" + p.checks
                 + " mismatches=" + p.mismatches.size());
         System.exit(p.mismatches.isEmpty() ? 0 : 4);
     }
@@ -178,7 +234,7 @@ public final class M3PredicatedProbe {
                 ((Map<Object, Object>) m).put(k, v);
             } else if (b instanceof Collection<?> c && !rejects(k)) {
                 ((Collection<Object>) c).add(k);
-                if (k % 3 == 0 && !(b instanceof java.util.Set)) {
+                if (k % 3 == 0 && !(b instanceof Set)) {
                     ((Collection<Object>) c).add(k);
                 }
             }
@@ -198,7 +254,8 @@ public final class M3PredicatedProbe {
         Object[] a = new Object[lanes.size() + 1];
         a[0] = backing;
         for (int i = 1; i < a.length; i++) {
-            boolean off = policy.equals("keynull") && i == 1 || policy.equals("valuenull") && i == 2;
+            boolean off = policy.equals("keynull") && i == 1
+                    || policy.equals("valuenull") && i == 2;
             a[i] = off ? null : lanes.get(i - 1);
         }
         return a;
@@ -209,14 +266,20 @@ public final class M3PredicatedProbe {
         Object b2 = backing();
         List<Pol> po = pols();
         List<Pol> px = pols();
-        return new Pair(call(oracleFactory, null, factoryArgs(b1, po)), call(m3Factory, null, factoryArgs(b2, px)), b1, b2, po, px);
+        return new Pair(call(oracleFactory, null, factoryArgs(b1, po)),
+                call(m3Factory, null, factoryArgs(b2, px)), b1, b2, po, px);
     }
 
-    /** VIEW_SWEEP node: replay the path from a fresh decorator, then call every method of the node's view type. */
+    /**
+     * VIEW_SWEEP node: replay the path from a fresh decorator, then call every method of the
+     * node's view type.
+     */
     private void sweep(List<Step> path, int depth) {
-        List<Method> methods = path.isEmpty() ? rootMethods : viewMethods(path.get(path.size() - 1).method().getReturnType());
+        List<Method> methods = path.isEmpty() ? rootMethods
+                : viewMethods(path.get(path.size() - 1).method().getReturnType());
         for (Method m : methods) {
-            for (int v = 0; v < (m.getParameterCount() == 0 ? 1 : VARIANTS) && mismatches.size() < 50; v++) {
+            for (int v = 0; v < (m.getParameterCount() == 0 ? 1 : VARIANTS)
+                    && mismatches.size() < 50; v++) {
                 Object[] a = args(m, v);
                 if (a == null) {
                     continue;
@@ -228,23 +291,30 @@ public final class M3PredicatedProbe {
                 }
                 Object ro = invoke(m, node[0], a, path.isEmpty());
                 Object rx = invoke(m, node[1], args(m, v), path.isEmpty());
-                String where = "VIEW_SWEEP " + label(path) + m.getName() + Arrays.toString(m.getParameterTypes()) + " v" + v;
+                String where = "VIEW_SWEEP " + label(path) + m.getName()
+                        + Arrays.toString(m.getParameterTypes()) + " v" + v;
                 compare(where, norm(identity(m, node[0], ro)), norm(identity(m, node[1], rx)));
                 compareState(where, p);
                 List<Step> next = new ArrayList<>(path);
                 next.add(new Step(m, v, path.isEmpty()));
-                if (depth < DEPTH && isView(m.getReturnType()) && !(ro instanceof Throwable) && !(rx instanceof Throwable)) {
+                if (depth < DEPTH && isView(m.getReturnType()) && !(ro instanceof Throwable)
+                        && !(rx instanceof Throwable)) {
                     sweep(next, depth + 1);
                 }
             }
         }
     }
 
-    /** hashCode()/toString() inherited from Object are identity values: compared as IDENTITY, not as numbers or class names. */
+    /**
+     * hashCode()/toString() inherited from Object are identity values: compared as IDENTITY,
+     * not as numbers or class names.
+     */
     private static Object identity(Method m, Object target, Object result) {
-        if (m.getParameterCount() == 0 && (m.getName().equals("hashCode") || m.getName().equals("toString"))) {
+        if (m.getParameterCount() == 0
+                && (m.getName().equals("hashCode") || m.getName().equals("toString"))) {
             try {
-                return target.getClass().getMethod(m.getName()).getDeclaringClass() == Object.class ? "IDENTITY_" + m.getName() : result;
+                return target.getClass().getMethod(m.getName()).getDeclaringClass() == Object.class
+                        ? "IDENTITY_" + m.getName() : result;
             } catch (NoSuchMethodException e) {
                 return e;
             }
@@ -254,7 +324,8 @@ public final class M3PredicatedProbe {
 
     private static String label(List<Step> path) {
         StringBuilder s = new StringBuilder();
-        path.forEach(st -> s.append(st.method().getName()).append("/v").append(st.variant()).append('.'));
+        path.forEach(st -> s.append(st.method().getName()).append("/v").append(st.variant())
+                .append('.'));
         return s.toString();
     }
 
@@ -273,7 +344,8 @@ public final class M3PredicatedProbe {
     }
 
     private static boolean isView(Class<?> t) {
-        return t.isInterface() && (Collection.class.isAssignableFrom(t) || Map.class.isAssignableFrom(t) || Iterator.class.isAssignableFrom(t));
+        return t.isInterface() && (Collection.class.isAssignableFrom(t)
+                || Map.class.isAssignableFrom(t) || Iterator.class.isAssignableFrom(t));
     }
 
     private static List<Method> viewMethods(Class<?> type) {
@@ -281,10 +353,14 @@ public final class M3PredicatedProbe {
                 .sorted(Comparator.comparing(Method::toGenericString)).toList();
     }
 
-    /** Root calls go through the receiver's own public method (accessible); view calls through the interface method. */
+    /**
+     * Root calls go through the receiver's own public method (accessible); view calls through
+     * the interface method.
+     */
     private static Object invoke(Method m, Object target, Object[] a, boolean root) {
         try {
-            Method callee = root ? target.getClass().getMethod(m.getName(), m.getParameterTypes()) : m;
+            Method callee = root
+                    ? target.getClass().getMethod(m.getName(), m.getParameterTypes()) : m;
             callee.setAccessible(true);
             return callee.invoke(target, a);
         } catch (InvocationTargetException e) {
@@ -327,38 +403,52 @@ public final class M3PredicatedProbe {
         }
         return switch (t.getName()) {
             case "java.lang.Object" -> element;
-            case "java.util.function.Predicate" -> (java.util.function.Predicate<Object>) x -> v == 2 || v == 1 && Objects.equals(x, 3);
-            case "java.util.function.Consumer" -> (java.util.function.Consumer<Object>) x -> { };
-            case "java.util.function.BiConsumer" -> (java.util.function.BiConsumer<Object, Object>) (x, y) -> { };
-            case "java.util.function.Function" -> (java.util.function.Function<Object, Object>) x -> element;
-            case "java.util.function.UnaryOperator" -> (java.util.function.UnaryOperator<Object>) x -> v == 0 ? x : element;
-            case "java.util.function.BiFunction" -> (java.util.function.BiFunction<Object, Object, Object>) (x, y) -> element;
-            case "java.util.function.IntFunction" -> (java.util.function.IntFunction<Object[]>) Object[]::new;
-            case "java.util.Comparator" -> Comparator.nullsFirst(Comparator.comparing(Object::toString));
+            case "java.util.function.Predicate" -> (java.util.function.Predicate<Object>) x ->
+                    v == 2 || v == 1 && Objects.equals(x, 3);
+            case "java.util.function.Consumer" -> (Consumer<Object>) x -> { };
+            case "java.util.function.BiConsumer" -> (BiConsumer<Object, Object>) (x, y) -> { };
+            case "java.util.function.Function" -> (Function<Object, Object>) x -> element;
+            case "java.util.function.UnaryOperator" ->
+                    (UnaryOperator<Object>) x -> v == 0 ? x : element;
+            case "java.util.function.BiFunction" ->
+                    (BiFunction<Object, Object, Object>) (x, y) -> element;
+            case "java.util.function.IntFunction" -> (IntFunction<Object[]>) Object[]::new;
+            case "java.util.Comparator" ->
+                    Comparator.nullsFirst(Comparator.comparing(Object::toString));
             default -> SKIP;
         };
     }
 
-    /** R2: the MapIterator state machine, incl. ResettableIterator.reset(), on both sides from fresh maps. */
+    /**
+     * R2: the MapIterator state machine, incl. ResettableIterator.reset(), on both sides from
+     * fresh maps.
+     */
     private void mapIterator() {
-        Method mi = rootMethods.stream().filter(m -> m.getName().equals("mapIterator") && m.getParameterCount() == 0).findFirst().orElse(null);
+        Method mi = rootMethods.stream()
+                .filter(m -> m.getName().equals("mapIterator") && m.getParameterCount() == 0)
+                .findFirst().orElse(null);
         if (mi == null) {
             return;
         }
-        String[] script = {"getKey", "getValue", "setValue3", "remove", "hasNext", "next", "getKey", "getValue", "setValue3", "setValueR",
-            "remove", "getKey", "getValue", "setValue3", "remove", "next", "reset", "getKey", "getValue", "setValue3", "drain", "next",
-            "getKey", "reset", "next", "remove", "reset", "getKey", "remove", "hasNext", "next", "getKey"};
+        String[] script = {"getKey", "getValue", "setValue3", "remove", "hasNext", "next",
+            "getKey", "getValue", "setValue3", "setValueR",
+            "remove", "getKey", "getValue", "setValue3", "remove", "next", "reset",
+            "getKey", "getValue", "setValue3", "drain", "next",
+            "getKey", "reset", "next", "remove", "reset", "getKey", "remove", "hasNext", "next",
+            "getKey"};
         Pair p = fresh();
         Object io = invoke(mi, p.o(), new Object[0], true);
         Object ix = invoke(mi, p.x(), new Object[0], true);
-        compare("MAP_ITERATOR resettable", io instanceof ResettableIterator, ix instanceof ResettableIterator);
+        compare("MAP_ITERATOR resettable", io instanceof ResettableIterator,
+                ix instanceof ResettableIterator);
         if (!(io instanceof MapIterator<?, ?>) || !(ix instanceof MapIterator<?, ?>)) {
             compare("MAP_ITERATOR " + mi, norm(io), norm(ix));
             return;
         }
         for (int i = 0; i < script.length; i++) {
             String where = "MAP_ITERATOR " + i + ":" + script[i];
-            compare(where, norm(mapOp((MapIterator<?, ?>) io, script[i])), norm(mapOp((MapIterator<?, ?>) ix, script[i])));
+            compare(where, norm(mapOp((MapIterator<?, ?>) io, script[i])),
+                    norm(mapOp((MapIterator<?, ?>) ix, script[i])));
             compareState(where, p);
         }
     }
@@ -395,10 +485,15 @@ public final class M3PredicatedProbe {
         }
     }
 
-    /** Skeptic missed semantics 3: backward navigation and validated set/add on the list iterator views. */
+    /**
+     * Skeptic missed semantics 3: backward navigation and validated set/add on the list
+     * iterator views.
+     */
     private void listIterators() {
-        String[] script = {"hasPrevious", "previous", "next", "next", "previous", "hasPrevious", "nextIndex", "previousIndex", "setR", "set3",
-            "addR", "add3", "previous", "set3", "remove", "remove", "next", "addNull", "setNull", "previousIndex", "nextIndex", "previous",
+        String[] script = {"hasPrevious", "previous", "next", "next", "previous", "hasPrevious",
+            "nextIndex", "previousIndex", "setR", "set3",
+            "addR", "add3", "previous", "set3", "remove", "remove", "next", "addNull", "setNull",
+            "previousIndex", "nextIndex", "previous",
             "setNull", "next", "next"};
         for (Method m : rootMethods) {
             if (!m.getName().equals("listIterator")) {
@@ -414,7 +509,8 @@ public final class M3PredicatedProbe {
             }
             for (int i = 0; i < script.length; i++) {
                 String where = "LIST_ITERATOR " + m.getParameterCount() + " " + i + ":" + script[i];
-                compare(where, norm(listOp((ListIterator<?>) io, script[i])), norm(listOp((ListIterator<?>) ix, script[i])));
+                compare(where, norm(listOp((ListIterator<?>) io, script[i])),
+                        norm(listOp((ListIterator<?>) ix, script[i])));
                 compareState(where, p);
             }
         }
@@ -448,12 +544,16 @@ public final class M3PredicatedProbe {
         return "done";
     }
 
-    /** R7: serialization with non-serializable lanes and/or a non-serializable (proxy) backing; messages name the culprit. */
+    /**
+     * R7: serialization with non-serializable lanes and/or a non-serializable (proxy) backing;
+     * messages name the culprit.
+     */
     private void serial() {
         for (String c : List.of("lanes", "backing", "both")) {
             boolean lanes = !c.equals("backing");
             boolean proxy = !c.equals("lanes");
-            compare("SERIAL " + c, serialCase(oracleFactory, lanes, proxy), serialCase(m3Factory, lanes, proxy));
+            compare("SERIAL " + c, serialCase(oracleFactory, lanes, proxy),
+                    serialCase(m3Factory, lanes, proxy));
         }
     }
 
@@ -474,7 +574,8 @@ public final class M3PredicatedProbe {
             try (ObjectOutputStream out = new ObjectOutputStream(bytes)) {
                 out.writeObject(d);
             }
-            try (ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(bytes.toByteArray()))) {
+            try (ObjectInputStream in = new ObjectInputStream(
+                    new ByteArrayInputStream(bytes.toByteArray()))) {
                 return "OK:" + in.readObject();
             }
         } catch (Exception e) {
@@ -494,7 +595,8 @@ public final class M3PredicatedProbe {
 
     private void compareState(String where, Pair p) {
         compare(where + " backing state", String.valueOf(p.b1()), String.valueOf(p.b2()));
-        compare(where + " predicate calls per lane", p.po().stream().map(x -> x.calls).toList(), p.px().stream().map(x -> x.calls).toList());
+        compare(where + " predicate calls per lane", p.po().stream().map(x -> x.calls).toList(),
+                p.px().stream().map(x -> x.calls).toList());
     }
 
     private static Object norm(Object v) {
@@ -517,7 +619,8 @@ public final class M3PredicatedProbe {
             return "A" + Arrays.stream(a).map(M3PredicatedProbe::norm).toList();
         }
         if (v instanceof Iterator<?> it) {
-            return (v instanceof MapIterator ? "MI" : v instanceof ListIterator ? "LI" : "I") + shape(v);
+            return (v instanceof MapIterator ? "MI" : v instanceof ListIterator ? "LI" : "I")
+                    + shape(v);
         }
         if (v instanceof Spliterator<?> s) {
             List<Object> out = new ArrayList<>();
@@ -528,7 +631,8 @@ public final class M3PredicatedProbe {
             return "T" + s.toList();
         }
         if (v instanceof Map.Entry<?, ?> e) {
-            return "E" + e.getKey() + "=" + e.getValue() + attempt(() -> ((Map.Entry<Object, Object>) e).setValue(REJECTED))
+            return "E" + e.getKey() + "=" + e.getValue()
+                    + attempt(() -> ((Map.Entry<Object, Object>) e).setValue(REJECTED))
                     + attempt(() -> ((Map.Entry<Object, Object>) e).setValue(e.getValue()));
         }
         if (v instanceof Collection<?> c) {
@@ -560,12 +664,12 @@ public final class M3PredicatedProbe {
         }
     }
 
-    private static final List<Class<?>> SHAPES = List.of(java.util.List.class, java.util.Set.class, java.util.SortedSet.class,
-            java.util.NavigableSet.class, java.util.Queue.class, java.util.Deque.class, java.util.RandomAccess.class,
-            java.io.Serializable.class, org.apache.commons.collections4.Bag.class, org.apache.commons.collections4.SortedBag.class,
-            org.apache.commons.collections4.MultiSet.class, java.util.SortedMap.class, java.util.NavigableMap.class,
-            org.apache.commons.collections4.IterableMap.class, org.apache.commons.collections4.OrderedMap.class,
-            org.apache.commons.collections4.BidiMap.class, ListIterator.class, MapIterator.class, ResettableIterator.class);
+    private static final List<Class<?>> SHAPES = List.of(List.class, Set.class, SortedSet.class,
+            NavigableSet.class, Queue.class, Deque.class, RandomAccess.class,
+            Serializable.class, Bag.class, SortedBag.class,
+            MultiSet.class, SortedMap.class, NavigableMap.class,
+            IterableMap.class, OrderedMap.class,
+            BidiMap.class, ListIterator.class, MapIterator.class, ResettableIterator.class);
 
     private static String shape(Object v) {
         StringBuilder bits = new StringBuilder("<");
@@ -573,7 +677,10 @@ public final class M3PredicatedProbe {
         return bits.append('>').toString();
     }
 
-    /** IAE messages and non-helpful NPE messages (requireNonNull names) are contract; helpful NPE text is not. */
+    /**
+     * IAE messages and non-helpful NPE messages (requireNonNull names) are contract; helpful NPE
+     * text is not.
+     */
     private static String message(Throwable t) {
         boolean keep = t instanceof IllegalArgumentException || t instanceof NullPointerException
                 && t.getMessage() != null && !t.getMessage().contains("because");
