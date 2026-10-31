@@ -444,7 +444,9 @@ public abstract class M3LongHashFunction implements Serializable {
      */
     public abstract <T> long hash(T input, M3Access<T> access, long off, long len);
 
+    //FLLDCIM: HPCPOP - FACADE_ENTRY_CHECK v1: every byte[] reaches the kernels here; checked before the unchecked short-name reads
     private long unsafeHash(byte[] input, long off, long len) {
+        java.util.Objects.checkFromIndexSize(off, len, input.length);
         return hash(input, M3ByteArrayAccess.INSTANCE, off, len);
     }
 

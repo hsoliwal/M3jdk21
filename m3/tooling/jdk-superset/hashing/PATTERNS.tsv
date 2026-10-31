@@ -1,0 +1,792 @@
+kind	file	line	owner	member	role	pattern	residue	version
+ATOM	M3Access.java	87	M3Access	toByteBuffer	ACCESS	ACCESS_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3Access.java	108	M3Access	toNativeCharSequence	ACCESS	ACCESS_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3Access.java	131	M3Access	toCharSequence	ACCESS	ACCESS_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3Access.java	139	M3Access	<init>	ACCESS	ACCESS_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3Access.java	151	M3Access	getLong	ACCESS	ACCESS_READ	WIDTH(8); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	169	M3Access	getUnsignedInt	ACCESS	ACCESS_READ	WIDTH(4); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	183	M3Access	getInt	ACCESS	ACCESS_READ	WIDTH(4); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	201	M3Access	getUnsignedShort	ACCESS	ACCESS_READ	WIDTH(2); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	219	M3Access	getShort	ACCESS	ACCESS_READ	WIDTH(2); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	231	M3Access	getUnsignedByte	ACCESS	ACCESS_READ	WIDTH(1); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	247	M3Access	i64	ACCESS	ACCESS_READ	WIDTH(8); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	248	M3Access	u32	ACCESS	ACCESS_READ	WIDTH(4); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	249	M3Access	i32	ACCESS	ACCESS_READ	WIDTH(4); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	250	M3Access	u16	ACCESS	ACCESS_READ	WIDTH(2); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	251	M3Access	i16	ACCESS	ACCESS_READ	WIDTH(2); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	252	M3Access	u8	ACCESS	ACCESS_READ	WIDTH(1); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	253	M3Access	i8	ACCESS	ACCESS_READ	WIDTH(1); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	273	M3Access	byteOrder	ACCESS	ACCESS_ORDER	NONE	HASH-PATTERN v1
+ATOM	M3Access.java	286	M3Access	newDefaultReverseAccess	ACCESS	ACCESS_ORDER	NONE	HASH-PATTERN v1
+ATOM	M3Access.java	303	M3Access$ReverseAccess	<init>	ACCESS	ACCESS_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3Access.java	308	M3Access$ReverseAccess	i64	ACCESS	ACCESS_READ	WIDTH(8); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	314	M3Access$ReverseAccess	u32	ACCESS	ACCESS_READ	WIDTH(4); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	320	M3Access$ReverseAccess	i32	ACCESS	ACCESS_READ	WIDTH(4); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	326	M3Access$ReverseAccess	u16	ACCESS	ACCESS_READ	WIDTH(2); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	332	M3Access$ReverseAccess	i16	ACCESS	ACCESS_READ	WIDTH(2); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	338	M3Access$ReverseAccess	u8	ACCESS	ACCESS_READ	WIDTH(1); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	344	M3Access$ReverseAccess	i8	ACCESS	ACCESS_READ	WIDTH(1); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	348	M3Access$ReverseAccess	getLong	ACCESS	ACCESS_READ	WIDTH(8); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	352	M3Access$ReverseAccess	getUnsignedInt	ACCESS	ACCESS_READ	WIDTH(4); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	356	M3Access$ReverseAccess	getInt	ACCESS	ACCESS_READ	WIDTH(4); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	360	M3Access$ReverseAccess	getUnsignedShort	ACCESS	ACCESS_READ	WIDTH(2); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	364	M3Access$ReverseAccess	getShort	ACCESS	ACCESS_READ	WIDTH(2); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	368	M3Access$ReverseAccess	getUnsignedByte	ACCESS	ACCESS_READ	WIDTH(1); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	372	M3Access$ReverseAccess	getByte	ACCESS	ACCESS_READ	WIDTH(1); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3Access.java	376	M3Access$ReverseAccess	byteOrder	ACCESS	ACCESS_ORDER	NONE	HASH-PATTERN v1
+ATOM	M3Access.java	380	M3Access$ReverseAccess	reverseAccess	ACCESS	ACCESS_ORDER	NONE	HASH-PATTERN v1
+ATOM	M3ByteArrayAccess.java	33	M3ByteArrayAccess	<clinit>	ACCESS	ACCESS_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3ByteArrayAccess.java	42	M3ByteArrayAccess	<init>	ACCESS	ACCESS_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3ByteArrayAccess.java	45	M3ByteArrayAccess	address	ACCESS	ACCESS_READ	OFFSET(byte offset to carrier index)	HASH-PATTERN v1
+ATOM	M3ByteArrayAccess.java	50	M3ByteArrayAccess	i64	ACCESS	ACCESS_READ	WIDTH(8); CHECK(none; callers check [off, off + len))	HASH-PATTERN v1
+ATOM	M3ByteArrayAccess.java	56	M3ByteArrayAccess	u32	ACCESS	ACCESS_READ	WIDTH(4); CHECK(none; callers check [off, off + len))	HASH-PATTERN v1
+ATOM	M3ByteArrayAccess.java	62	M3ByteArrayAccess	i32	ACCESS	ACCESS_READ	WIDTH(4); CHECK(none; callers check [off, off + len))	HASH-PATTERN v1
+ATOM	M3ByteArrayAccess.java	68	M3ByteArrayAccess	u16	ACCESS	ACCESS_READ	WIDTH(2); CHECK(none; callers check [off, off + len))	HASH-PATTERN v1
+ATOM	M3ByteArrayAccess.java	74	M3ByteArrayAccess	i16	ACCESS	ACCESS_READ	WIDTH(2); CHECK(none; callers check [off, off + len))	HASH-PATTERN v1
+ATOM	M3ByteArrayAccess.java	79	M3ByteArrayAccess	getLong	ACCESS	ACCESS_READ	WIDTH(8); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3ByteArrayAccess.java	84	M3ByteArrayAccess	getUnsignedInt	ACCESS	ACCESS_READ	WIDTH(4); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3ByteArrayAccess.java	89	M3ByteArrayAccess	getInt	ACCESS	ACCESS_READ	WIDTH(4); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3ByteArrayAccess.java	94	M3ByteArrayAccess	getUnsignedShort	ACCESS	ACCESS_READ	WIDTH(2); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3ByteArrayAccess.java	99	M3ByteArrayAccess	getShort	ACCESS	ACCESS_READ	WIDTH(2); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3ByteArrayAccess.java	104	M3ByteArrayAccess	getUnsignedByte	ACCESS	ACCESS_READ	WIDTH(1); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3ByteArrayAccess.java	109	M3ByteArrayAccess	getByte	ACCESS	ACCESS_READ	WIDTH(1); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3ByteArrayAccess.java	114	M3ByteArrayAccess	byteOrder	ACCESS	ACCESS_ORDER	NONE	HASH-PATTERN v1
+ATOM	M3ByteArrayAccess.java	119	M3ByteArrayAccess	reverseAccess	ACCESS	ACCESS_ORDER	NONE	HASH-PATTERN v1
+ATOM	M3ByteBufferAccess.java	27	M3ByteBufferAccess	<clinit>	ACCESS	ACCESS_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3ByteBufferAccess.java	30	M3ByteBufferAccess	<init>	ACCESS	ACCESS_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3ByteBufferAccess.java	33	M3ByteBufferAccess	i64	ACCESS	ACCESS_READ	WIDTH(8); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3ByteBufferAccess.java	39	M3ByteBufferAccess	u32	ACCESS	ACCESS_READ	WIDTH(4); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3ByteBufferAccess.java	45	M3ByteBufferAccess	i32	ACCESS	ACCESS_READ	WIDTH(4); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3ByteBufferAccess.java	51	M3ByteBufferAccess	u16	ACCESS	ACCESS_READ	WIDTH(2); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3ByteBufferAccess.java	57	M3ByteBufferAccess	i16	ACCESS	ACCESS_READ	WIDTH(2); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3ByteBufferAccess.java	63	M3ByteBufferAccess	u8	ACCESS	ACCESS_READ	WIDTH(1); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3ByteBufferAccess.java	69	M3ByteBufferAccess	i8	ACCESS	ACCESS_READ	WIDTH(1); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3ByteBufferAccess.java	74	M3ByteBufferAccess	getLong	ACCESS	ACCESS_READ	WIDTH(8); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3ByteBufferAccess.java	79	M3ByteBufferAccess	getUnsignedInt	ACCESS	ACCESS_READ	WIDTH(4); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3ByteBufferAccess.java	84	M3ByteBufferAccess	getInt	ACCESS	ACCESS_READ	WIDTH(4); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3ByteBufferAccess.java	89	M3ByteBufferAccess	getUnsignedShort	ACCESS	ACCESS_READ	WIDTH(2); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3ByteBufferAccess.java	94	M3ByteBufferAccess	getShort	ACCESS	ACCESS_READ	WIDTH(2); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3ByteBufferAccess.java	99	M3ByteBufferAccess	getUnsignedByte	ACCESS	ACCESS_READ	WIDTH(1); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3ByteBufferAccess.java	104	M3ByteBufferAccess	getByte	ACCESS	ACCESS_READ	WIDTH(1); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3ByteBufferAccess.java	109	M3ByteBufferAccess	byteOrder	ACCESS	ACCESS_ORDER	NONE	HASH-PATTERN v1
+ATOM	M3ByteBufferAccess.java	114	M3ByteBufferAccess	reverseAccess	ACCESS	ACCESS_ORDER	NONE	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	45	M3CharSequenceAccess	charSequenceAccess	ACCESS	ACCESS_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	51	M3CharSequenceAccess	nativeCharSequenceAccess	ACCESS	ACCESS_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	55	M3CharSequenceAccess	ix	ACCESS	ACCESS_READ	OFFSET(byte offset to carrier index)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	59	M3CharSequenceAccess	getLong	ACCESS	ACCESS_READ	WIDTH(8); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	79	M3CharSequenceAccess	getUnsignedInt	ACCESS	ACCESS_READ	WIDTH(4); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	94	M3CharSequenceAccess	getUnsignedShort	ACCESS	ACCESS_READ	WIDTH(2); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	106	M3CharSequenceAccess	getUnsignedByte	ACCESS	ACCESS_READ	WIDTH(1); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	110	M3CharSequenceAccess	<init>	ACCESS	ACCESS_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	113	M3CharSequenceAccess	i64	ACCESS	ACCESS_READ	WIDTH(8); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	119	M3CharSequenceAccess	u32	ACCESS	ACCESS_READ	WIDTH(4); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	125	M3CharSequenceAccess	i32	ACCESS	ACCESS_READ	WIDTH(4); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	131	M3CharSequenceAccess	u16	ACCESS	ACCESS_READ	WIDTH(2); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	137	M3CharSequenceAccess	i16	ACCESS	ACCESS_READ	WIDTH(2); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	143	M3CharSequenceAccess	u8	ACCESS	ACCESS_READ	WIDTH(1); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	149	M3CharSequenceAccess	i8	ACCESS	ACCESS_READ	WIDTH(1); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	154	M3CharSequenceAccess	getInt	ACCESS	ACCESS_READ	WIDTH(4); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	159	M3CharSequenceAccess	getShort	ACCESS	ACCESS_READ	WIDTH(2); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	164	M3CharSequenceAccess	getByte	ACCESS	ACCESS_READ	WIDTH(1); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	225	M3CharSequenceAccess$BigEndianCharSequenceAccess	<clinit>	ACCESS	ACCESS_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	228	M3CharSequenceAccess$BigEndianCharSequenceAccess	<init>	ACCESS	ACCESS_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	230	M3CharSequenceAccess$BigEndianCharSequenceAccess	getLong	ACCESS	ACCESS_READ	WIDTH(8); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	235	M3CharSequenceAccess$BigEndianCharSequenceAccess	getUnsignedInt	ACCESS	ACCESS_READ	WIDTH(4); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	240	M3CharSequenceAccess$BigEndianCharSequenceAccess	getUnsignedShort	ACCESS	ACCESS_READ	WIDTH(2); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	245	M3CharSequenceAccess$BigEndianCharSequenceAccess	getUnsignedByte	ACCESS	ACCESS_READ	WIDTH(1); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	250	M3CharSequenceAccess$BigEndianCharSequenceAccess	byteOrder	ACCESS	ACCESS_ORDER	NONE	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	255	M3CharSequenceAccess$BigEndianCharSequenceAccess	reverseAccess	ACCESS	ACCESS_ORDER	NONE	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	180	M3CharSequenceAccess$LittleEndianCharSequenceAccess	<clinit>	ACCESS	ACCESS_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	183	M3CharSequenceAccess$LittleEndianCharSequenceAccess	<init>	ACCESS	ACCESS_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	185	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getLong	ACCESS	ACCESS_READ	WIDTH(8); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	190	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getUnsignedInt	ACCESS	ACCESS_READ	WIDTH(4); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	195	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getUnsignedShort	ACCESS	ACCESS_READ	WIDTH(2); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	200	M3CharSequenceAccess$LittleEndianCharSequenceAccess	getUnsignedByte	ACCESS	ACCESS_READ	WIDTH(1); CHECK(carrier)	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	205	M3CharSequenceAccess$LittleEndianCharSequenceAccess	byteOrder	ACCESS	ACCESS_ORDER	NONE	HASH-PATTERN v1
+ATOM	M3CharSequenceAccess.java	210	M3CharSequenceAccess$LittleEndianCharSequenceAccess	reverseAccess	ACCESS	ACCESS_ORDER	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	32	M3CityAndFarmHash_1_1	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	141	M3CityAndFarmHash_1_1	shiftMix	ALGORITHM	ALG_MIX	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	145	M3CityAndFarmHash_1_1	hashLen16	ALGORITHM	ALG_MIX	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	151	M3CityAndFarmHash_1_1	hashLen16	ALGORITHM	ALG_MIX	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	156	M3CityAndFarmHash_1_1	mul	ALGORITHM	ALG_MIX	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	160	M3CityAndFarmHash_1_1	hash1To3Bytes	ALGORITHM	ALG_LENGTH_CLASS	LENGTH(1..3)	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	166	M3CityAndFarmHash_1_1	hash4To7Bytes	ALGORITHM	ALG_LENGTH_CLASS	LENGTH(4..7)	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	171	M3CityAndFarmHash_1_1	hash8To16Bytes	ALGORITHM	ALG_LENGTH_CLASS	LENGTH(8..16)	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	179	M3CityAndFarmHash_1_1	hashLen0To16	ALGORITHM	ALG_LENGTH_DISPATCH	DISPATCH(hash8To16Bytes|hash4To7Bytes|hash1To3Bytes|length 0)	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	197	M3CityAndFarmHash_1_1	hashLen17To32	ALGORITHM	ALG_LENGTH_CLASS	LENGTH(17..32)	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	207	M3CityAndFarmHash_1_1	cityHashLen33To64	ALGORITHM	ALG_LENGTH_CLASS	LENGTH(33..64)	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	228	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	ALG_STREAM	STREAM(64-byte chunks after the length classes)	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	404	M3CityAndFarmHash_1_1	asLongHashFunctionWithoutSeed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	431	M3CityAndFarmHash_1_1	asLongHashFunctionWithSeed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	435	M3CityAndFarmHash_1_1	asLongHashFunctionWithTwoSeeds	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	442	M3CityAndFarmHash_1_1	naHashLen33To64	ALGORITHM	ALG_LENGTH_CLASS	LENGTH(33..64)	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	458	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	ALG_STREAM	STREAM(64-byte chunks after the length classes)	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	562	M3CityAndFarmHash_1_1	naHash64WithSeeds	ALGORITHM	ALG_STREAM	STREAM(via naHash64)	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	566	M3CityAndFarmHash_1_1	uoH	ALGORITHM	ALG_MIX	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	573	M3CityAndFarmHash_1_1	uoHash64WithSeeds	ALGORITHM	ALG_STREAM	STREAM(64-byte chunks after the length classes)	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	707	M3CityAndFarmHash_1_1	naWithoutSeeds	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	734	M3CityAndFarmHash_1_1	naWithSeed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	738	M3CityAndFarmHash_1_1	naWithSeeds	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	765	M3CityAndFarmHash_1_1	uoWithoutSeeds	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	789	M3CityAndFarmHash_1_1	uoWithSeed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	807	M3CityAndFarmHash_1_1	uoWithSeeds	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	329	M3CityAndFarmHash_1_1$AsLongHashFunction	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	339	M3CityAndFarmHash_1_1$AsLongHashFunction	<clinit>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	341	M3CityAndFarmHash_1_1$AsLongHashFunction	readResolve	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	345	M3CityAndFarmHash_1_1$AsLongHashFunction	hashLong	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	352	M3CityAndFarmHash_1_1$AsLongHashFunction	hashInt	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	360	M3CityAndFarmHash_1_1$AsLongHashFunction	hashShort	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	371	M3CityAndFarmHash_1_1$AsLongHashFunction	hashChar	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	380	M3CityAndFarmHash_1_1$AsLongHashFunction	hashByte	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	387	M3CityAndFarmHash_1_1$AsLongHashFunction	hashVoid	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	392	M3CityAndFarmHash_1_1$AsLongHashFunction	hash	ALGORITHM	ALG_ADAPT	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	399	M3CityAndFarmHash_1_1$AsLongHashFunction	finalize	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	414	M3CityAndFarmHash_1_1$AsLongHashFunctionSeeded	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	420	M3CityAndFarmHash_1_1$AsLongHashFunctionSeeded	hashVoid	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	425	M3CityAndFarmHash_1_1$AsLongHashFunctionSeeded	finalize	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	691	M3CityAndFarmHash_1_1$Na	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	693	M3CityAndFarmHash_1_1$Na	<clinit>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	695	M3CityAndFarmHash_1_1$Na	readResolve	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	699	M3CityAndFarmHash_1_1$Na	hash	ALGORITHM	ALG_ADAPT	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	717	M3CityAndFarmHash_1_1$NaSeeded	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	723	M3CityAndFarmHash_1_1$NaSeeded	hashVoid	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	728	M3CityAndFarmHash_1_1$NaSeeded	finalize	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	742	M3CityAndFarmHash_1_1$Uo	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	750	M3CityAndFarmHash_1_1$Uo	<clinit>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	752	M3CityAndFarmHash_1_1$Uo	readResolve	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	756	M3CityAndFarmHash_1_1$Uo	hash	ALGORITHM	ALG_ADAPT	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	796	M3CityAndFarmHash_1_1$UoSeeded	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	800	M3CityAndFarmHash_1_1$UoSeeded	hash	ALGORITHM	ALG_ADAPT	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	776	M3CityAndFarmHash_1_1$UoWithOneSeed	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3CityAndFarmHash_1_1.java	780	M3CityAndFarmHash_1_1$UoWithOneSeed	hash	ALGORITHM	ALG_ADAPT	NONE	HASH-PATTERN v1
+ATOM	M3DualHashFunction.java	10	M3DualHashFunction	<init>	FACADE	FACADE_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3DualHashFunction.java	18	M3DualHashFunction	checkResult	FACADE	FACADE_ADAPTER	NONE	HASH-PATTERN v1
+ATOM	M3DualHashFunction.java	28	M3DualHashFunction	hashLong	FACADE	FACADE_ADAPTER	NONE	HASH-PATTERN v1
+ATOM	M3DualHashFunction.java	35	M3DualHashFunction	hashInt	FACADE	FACADE_ADAPTER	NONE	HASH-PATTERN v1
+ATOM	M3DualHashFunction.java	42	M3DualHashFunction	hashShort	FACADE	FACADE_ADAPTER	NONE	HASH-PATTERN v1
+ATOM	M3DualHashFunction.java	49	M3DualHashFunction	hashChar	FACADE	FACADE_ADAPTER	NONE	HASH-PATTERN v1
+ATOM	M3DualHashFunction.java	56	M3DualHashFunction	hashByte	FACADE	FACADE_ADAPTER	NONE	HASH-PATTERN v1
+ATOM	M3DualHashFunction.java	63	M3DualHashFunction	hashVoid	FACADE	FACADE_ADAPTER	NONE	HASH-PATTERN v1
+ATOM	M3DualHashFunction.java	70	M3DualHashFunction	hash	FACADE	FACADE_ADAPTER	NONE	HASH-PATTERN v1
+ATOM	M3DualHashFunction.java	75	M3DualHashFunction	hash	FACADE	FACADE_ADAPTER	NONE	HASH-PATTERN v1
+ATOM	M3DualHashFunction.java	121	M3DualHashFunction	asLongHashFunction	FACADE	FACADE_ADAPTER	NONE	HASH-PATTERN v1
+ATOM	M3DualHashFunction.java	84	M3DualHashFunction$1	<init>	FACADE	FACADE_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3DualHashFunction.java	85	M3DualHashFunction$1	hashLong	FACADE	FACADE_ADAPTER	NONE	HASH-PATTERN v1
+ATOM	M3DualHashFunction.java	90	M3DualHashFunction$1	hashInt	FACADE	FACADE_ADAPTER	NONE	HASH-PATTERN v1
+ATOM	M3DualHashFunction.java	95	M3DualHashFunction$1	hashShort	FACADE	FACADE_ADAPTER	NONE	HASH-PATTERN v1
+ATOM	M3DualHashFunction.java	100	M3DualHashFunction$1	hashChar	FACADE	FACADE_ADAPTER	NONE	HASH-PATTERN v1
+ATOM	M3DualHashFunction.java	105	M3DualHashFunction$1	hashByte	FACADE	FACADE_ADAPTER	NONE	HASH-PATTERN v1
+ATOM	M3DualHashFunction.java	110	M3DualHashFunction$1	hashVoid	FACADE	FACADE_ADAPTER	NONE	HASH-PATTERN v1
+ATOM	M3DualHashFunction.java	115	M3DualHashFunction$1	hash	FACADE	FACADE_ADAPTER	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	88	M3LongHashFunction	city_1_1	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	102	M3LongHashFunction	city_1_1	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	116	M3LongHashFunction	city_1_1	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	133	M3LongHashFunction	farmNa	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	150	M3LongHashFunction	farmNa	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	167	M3LongHashFunction	farmNa	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	183	M3LongHashFunction	farmUo	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	199	M3LongHashFunction	farmUo	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	215	M3LongHashFunction	farmUo	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	228	M3LongHashFunction	murmur_3	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	241	M3LongHashFunction	murmur_3	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	253	M3LongHashFunction	xx	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	265	M3LongHashFunction	xx	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	277	M3LongHashFunction	xx3	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	289	M3LongHashFunction	xx3	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	301	M3LongHashFunction	xx128low	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	313	M3LongHashFunction	xx128low	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	326	M3LongHashFunction	wy_3	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	339	M3LongHashFunction	wy_3	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	352	M3LongHashFunction	metro	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	365	M3LongHashFunction	metro	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	372	M3LongHashFunction	<init>	FACADE	FACADE_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	448	M3LongHashFunction	unsafeHash	FACADE	FACADE_ENTRY	CHECK(Objects.checkFromIndexSize: the byte[] entry of the unchecked reads)	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	456	M3LongHashFunction	hashBytes	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	473	M3LongHashFunction	hashBytes	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	482	M3LongHashFunction	hashBytes	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	502	M3LongHashFunction	hashBytes	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	507	M3LongHashFunction	hashByteBuffer	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	522	M3LongHashFunction	hashChars	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	541	M3LongHashFunction	hashChars	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	549	M3LongHashFunction	hashChars	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	568	M3LongHashFunction	hashChars	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	573	M3LongHashFunction	hashNativeChars	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongHashFunction.java	577	M3LongHashFunction	hashNativeChars	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	82	M3LongTupleHashFunction	murmur_3	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	95	M3LongTupleHashFunction	murmur_3	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	108	M3LongTupleHashFunction	xx128	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	120	M3LongTupleHashFunction	xx128	FACADE	FACADE_FACTORY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	127	M3LongTupleHashFunction	<init>	FACADE	FACADE_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	143	M3LongTupleHashFunction	newResultArray	FACADE	FACADE_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	170	M3LongTupleHashFunction	hashLong	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	199	M3LongTupleHashFunction	hashInt	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	228	M3LongTupleHashFunction	hashShort	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	257	M3LongTupleHashFunction	hashChar	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	285	M3LongTupleHashFunction	hashByte	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	311	M3LongTupleHashFunction	hashVoid	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	350	M3LongTupleHashFunction	hash	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	360	M3LongTupleHashFunction	hashBytes	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	369	M3LongTupleHashFunction	hashBytes	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	397	M3LongTupleHashFunction	hashBytes	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	407	M3LongTupleHashFunction	hashBytes	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	418	M3LongTupleHashFunction	hashBytes	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	427	M3LongTupleHashFunction	hashBytes	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	458	M3LongTupleHashFunction	hashBytes	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	469	M3LongTupleHashFunction	hashBytes	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	480	M3LongTupleHashFunction	hashChars	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	489	M3LongTupleHashFunction	hashChars	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	519	M3LongTupleHashFunction	hashChars	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	529	M3LongTupleHashFunction	hashChars	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	540	M3LongTupleHashFunction	hashChars	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	549	M3LongTupleHashFunction	hashChars	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	578	M3LongTupleHashFunction	hashChars	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	589	M3LongTupleHashFunction	hashChars	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	598	M3LongTupleHashFunction	<clinit>	FACADE	FACADE_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	603	M3LongTupleHashFunction	unsafeHash	FACADE	FACADE_ENTRY	CHECK(Objects.checkFromIndexSize: the byte[] entry of the unchecked reads)	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	609	M3LongTupleHashFunction	hashByteBuffer	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3LongTupleHashFunction.java	621	M3LongTupleHashFunction	hashNativeChars	FACADE	FACADE_ENTRY	NONE	HASH-PATTERN v1
+ATOM	M3Maths.java	8	M3Maths	<init>	KERNEL	KERNEL_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3Maths.java	18	M3Maths	<clinit>	KERNEL	KERNEL_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3Maths.java	27	M3Maths	unsignedLongMulXorFold	KERNEL	KERNEL_MATH	NONE	HASH-PATTERN v1
+ATOM	M3Maths.java	30	M3Maths	unsignedLongMulHigh	KERNEL	KERNEL_MATH	NONE	HASH-PATTERN v1
+ATOM	M3Maths.java	34	M3Maths	unsignedLongMulXorFoldImp	KERNEL	KERNEL_MATH	NONE	HASH-PATTERN v1
+ATOM	M3Maths.java	53	M3Maths	unsignedLongMulHighImp	KERNEL	KERNEL_MATH	NONE	HASH-PATTERN v1
+ATOM	M3Maths.java	72	M3MathsJDK9	<init>	KERNEL	KERNEL_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3Maths.java	79	M3MathsJDK9	unsignedLongMulXorFoldImp	KERNEL	KERNEL_MATH	NONE	HASH-PATTERN v1
+ATOM	M3Maths.java	85	M3MathsJDK9	unsignedLongMulHighImp	KERNEL	KERNEL_MATH	NONE	HASH-PATTERN v1
+ATOM	M3MetroHash.java	9	M3MetroHash	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MetroHash.java	54	M3MetroHash	metroHash64	ALGORITHM	ALG_STREAM	STREAM(32-byte rounds)	HASH-PATTERN v1
+ATOM	M3MetroHash.java	132	M3MetroHash	finalize	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MetroHash.java	218	M3MetroHash	asLongHashFunctionWithoutSeed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MetroHash.java	222	M3MetroHash	asLongHashFunctionWithSeed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MetroHash.java	139	M3MetroHash$AsLongHashFunction	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MetroHash.java	151	M3MetroHash$AsLongHashFunction	<clinit>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MetroHash.java	154	M3MetroHash$AsLongHashFunction	readResolve	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MetroHash.java	158	M3MetroHash$AsLongHashFunction	seed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MetroHash.java	162	M3MetroHash$AsLongHashFunction	hashLong	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3MetroHash.java	172	M3MetroHash$AsLongHashFunction	hashInt	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3MetroHash.java	182	M3MetroHash$AsLongHashFunction	hashShort	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3MetroHash.java	192	M3MetroHash$AsLongHashFunction	hashChar	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3MetroHash.java	197	M3MetroHash$AsLongHashFunction	hashByte	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3MetroHash.java	206	M3MetroHash$AsLongHashFunction	hashVoid	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3MetroHash.java	211	M3MetroHash$AsLongHashFunction	hash	ALGORITHM	ALG_ADAPT	NONE	HASH-PATTERN v1
+ATOM	M3MetroHash.java	232	M3MetroHash$AsLongHashFunctionSeeded	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MetroHash.java	237	M3MetroHash$AsLongHashFunctionSeeded	hashVoid	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3MetroHash.java	242	M3MetroHash$AsLongHashFunctionSeeded	seed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	32	M3MurmurHash_3	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	126	M3MurmurHash_3	hash	ALGORITHM	ALG_STREAM	STREAM(16-byte blocks)	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	266	M3MurmurHash_3	finalize	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	287	M3MurmurHash_3	fmix64	ALGORITHM	ALG_MIX	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	296	M3MurmurHash_3	mixK1	ALGORITHM	ALG_MIX	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	303	M3MurmurHash_3	mixK2	ALGORITHM	ALG_MIX	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	391	M3MurmurHash_3	asLongTupleHashFunctionWithoutSeed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	394	M3MurmurHash_3	asLongHashFunctionWithoutSeed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	432	M3MurmurHash_3	asLongTupleHashFunctionWithSeed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	435	M3MurmurHash_3	asLongHashFunctionWithSeed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	310	M3MurmurHash_3$AsLongTupleHashFunction	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	324	M3MurmurHash_3$AsLongTupleHashFunction	<clinit>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	327	M3MurmurHash_3$AsLongTupleHashFunction	readResolve	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	331	M3MurmurHash_3$AsLongTupleHashFunction	bitsLength	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	335	M3MurmurHash_3$AsLongTupleHashFunction	newResultArray	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	340	M3MurmurHash_3$AsLongTupleHashFunction	seed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	344	M3MurmurHash_3$AsLongTupleHashFunction	hashNativeLong	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	350	M3MurmurHash_3$AsLongTupleHashFunction	dualHashLong	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	355	M3MurmurHash_3$AsLongTupleHashFunction	dualHashInt	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	360	M3MurmurHash_3$AsLongTupleHashFunction	dualHashShort	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	365	M3MurmurHash_3$AsLongTupleHashFunction	dualHashChar	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	370	M3MurmurHash_3$AsLongTupleHashFunction	dualHashByte	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	375	M3MurmurHash_3$AsLongTupleHashFunction	dualHashVoid	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	384	M3MurmurHash_3$AsLongTupleHashFunction	dualHash	ALGORITHM	ALG_ADAPT	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	402	M3MurmurHash_3$AsLongTupleHashFunctionSeeded	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	409	M3MurmurHash_3$AsLongTupleHashFunctionSeeded	seed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	414	M3MurmurHash_3$AsLongTupleHashFunctionSeeded	hashNativeLong	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3MurmurHash_3.java	422	M3MurmurHash_3$AsLongTupleHashFunctionSeeded	dualHashVoid	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	35	M3Primitives	<init>	KERNEL	KERNEL_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	37	M3Primitives	<clinit>	KERNEL	KERNEL_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	39	M3Primitives	unsignedInt	KERNEL	KERNEL_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	43	M3Primitives	unsignedShort	KERNEL	KERNEL_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	47	M3Primitives	unsignedByte	KERNEL	KERNEL_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	54	M3Primitives	nativeToLittleEndian	KERNEL	KERNEL_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	55	M3Primitives	nativeToLittleEndian	KERNEL	KERNEL_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	56	M3Primitives	nativeToLittleEndian	KERNEL	KERNEL_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	57	M3Primitives	nativeToLittleEndian	KERNEL	KERNEL_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	59	M3Primitives	nativeToBigEndian	KERNEL	KERNEL_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	60	M3Primitives	nativeToBigEndian	KERNEL	KERNEL_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	61	M3Primitives	nativeToBigEndian	KERNEL	KERNEL_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	62	M3Primitives	nativeToBigEndian	KERNEL	KERNEL_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	64	M3Primitives$ByteOrderHelper	<init>	KERNEL	KERNEL_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	65	M3Primitives$ByteOrderHelper	adjustByteOrder	KERNEL	KERNEL_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	66	M3Primitives$ByteOrderHelper	adjustByteOrder	KERNEL	KERNEL_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	67	M3Primitives$ByteOrderHelper	adjustByteOrder	KERNEL	KERNEL_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	68	M3Primitives$ByteOrderHelper	adjustByteOrder	KERNEL	KERNEL_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	70	M3Primitives$ByteOrderHelperReverse	<init>	KERNEL	KERNEL_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	71	M3Primitives$ByteOrderHelperReverse	adjustByteOrder	KERNEL	KERNEL_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	72	M3Primitives$ByteOrderHelperReverse	adjustByteOrder	KERNEL	KERNEL_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	73	M3Primitives$ByteOrderHelperReverse	adjustByteOrder	KERNEL	KERNEL_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3Primitives.java	74	M3Primitives$ByteOrderHelperReverse	adjustByteOrder	KERNEL	KERNEL_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3Util.java	12	M3Util	<init>	KERNEL	KERNEL_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3Util.java	14	M3Util	checkArrayOffs	KERNEL	KERNEL_CHECK	NONE	HASH-PATTERN v1
+ATOM	M3WyHash.java	17	M3WyHash	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3WyHash.java	99	M3WyHash	_wymum	ALGORITHM	ALG_MIX	NONE	HASH-PATTERN v1
+ATOM	M3WyHash.java	103	M3WyHash	_wyr3	ALGORITHM	ALG_MIX	NONE	HASH-PATTERN v1
+ATOM	M3WyHash.java	109	M3WyHash	u64Rorate32	ALGORITHM	ALG_MIX	NONE	HASH-PATTERN v1
+ATOM	M3WyHash.java	123	M3WyHash	wyHash64	ALGORITHM	ALG_STREAM	STREAM(48-byte rounds)	HASH-PATTERN v1
+ATOM	M3WyHash.java	209	M3WyHash	asLongHashFunctionWithoutSeed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3WyHash.java	297	M3WyHash	asLongHashFunctionWithSeed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3WyHash.java	213	M3WyHash$AsLongHashFunction	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3WyHash.java	233	M3WyHash$AsLongHashFunction	<clinit>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3WyHash.java	235	M3WyHash$AsLongHashFunction	readResolve	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3WyHash.java	239	M3WyHash$AsLongHashFunction	seed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3WyHash.java	243	M3WyHash$AsLongHashFunction	hashLong	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3WyHash.java	253	M3WyHash$AsLongHashFunction	hashInt	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3WyHash.java	262	M3WyHash$AsLongHashFunction	hashShort	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3WyHash.java	271	M3WyHash$AsLongHashFunction	hashChar	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3WyHash.java	276	M3WyHash$AsLongHashFunction	hashByte	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3WyHash.java	284	M3WyHash$AsLongHashFunction	hashVoid	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3WyHash.java	289	M3WyHash$AsLongHashFunction	hash	ALGORITHM	ALG_ADAPT	NONE	HASH-PATTERN v1
+ATOM	M3WyHash.java	306	M3WyHash$AsLongHashFunctionSeeded	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3WyHash.java	310	M3WyHash$AsLongHashFunctionSeeded	seed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	33	M3XXH3	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	190	M3XXH3	<clinit>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	223	M3XXH3	XXH64_avalanche	ALGORITHM	ALG_MIX	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	230	M3XXH3	XXH3_avalanche	ALGORITHM	ALG_MIX	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	235	M3XXH3	XXH3_rrmxmx	ALGORITHM	ALG_MIX	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	243	M3XXH3	XXH3_mix16B	ALGORITHM	ALG_MIX	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	255	M3XXH3	XXH128_mix32B_once	ALGORITHM	ALG_MIX	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	262	M3XXH3	XXH3_mix2Accs	ALGORITHM	ALG_MIX	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	269	M3XXH3	XXH3_64bits_internal	ALGORITHM	ALG_LENGTH_DISPATCH	DISPATCH(XXH3_len_0to16_64b|XXH3_len_17to128_64b|XXH3_len_129to240_64b|XXH3_hashLong)	HASH-PATTERN v1
+ATOM	M3XXH3.java	284	M3XXH3	XXH3_len_0to16_64b	ALGORITHM	ALG_LENGTH_DISPATCH	DISPATCH(XXH3_len_9to16_64b|XXH3_len_4to8_64b|XXH3_len_1to3_64b|length 0)	HASH-PATTERN v1
+ATOM	M3XXH3.java	299	M3XXH3	XXH3_len_9to16_64b	ALGORITHM	ALG_LENGTH_CLASS	LENGTH(9..16); WIDTH(64b)	HASH-PATTERN v1
+ATOM	M3XXH3.java	310	M3XXH3	XXH3_len_4to8_64b	ALGORITHM	ALG_LENGTH_CLASS	LENGTH(4..8); WIDTH(64b)	HASH-PATTERN v1
+ATOM	M3XXH3.java	321	M3XXH3	XXH3_len_1to3_64b	ALGORITHM	ALG_LENGTH_CLASS	LENGTH(1..3); WIDTH(64b)	HASH-PATTERN v1
+ATOM	M3XXH3.java	332	M3XXH3	XXH3_len_17to128_64b	ALGORITHM	ALG_LENGTH_CLASS	LENGTH(17..128); WIDTH(64b)	HASH-PATTERN v1
+ATOM	M3XXH3.java	355	M3XXH3	XXH3_len_129to240_64b	ALGORITHM	ALG_LENGTH_CLASS	LENGTH(129..240); WIDTH(64b)	HASH-PATTERN v1
+ATOM	M3XXH3.java	375	M3XXH3	XXH3_128bits_internal	ALGORITHM	ALG_LENGTH_DISPATCH	DISPATCH(XXH3_len_0to16_128b|XXH3_len_17to128_128b|XXH3_len_129to240_128b|XXH3_hashLong)	HASH-PATTERN v1
+ATOM	M3XXH3.java	391	M3XXH3	XXH3_len_0to16_128b	ALGORITHM	ALG_LENGTH_DISPATCH	DISPATCH(XXH3_len_9to16_128b|XXH3_len_4to8_128b|XXH3_len_1to3_128b|length 0)	HASH-PATTERN v1
+ATOM	M3XXH3.java	411	M3XXH3	XXH3_len_9to16_128b	ALGORITHM	ALG_LENGTH_CLASS	LENGTH(9..16); WIDTH(128b)	HASH-PATTERN v1
+ATOM	M3XXH3.java	433	M3XXH3	XXH3_len_4to8_128b	ALGORITHM	ALG_LENGTH_CLASS	LENGTH(4..8); WIDTH(128b)	HASH-PATTERN v1
+ATOM	M3XXH3.java	459	M3XXH3	XXH3_len_1to3_128b	ALGORITHM	ALG_LENGTH_CLASS	LENGTH(1..3); WIDTH(128b)	HASH-PATTERN v1
+ATOM	M3XXH3.java	478	M3XXH3	XXH3_len_17to128_128b	ALGORITHM	ALG_LENGTH_CLASS	LENGTH(17..128); WIDTH(128b)	HASH-PATTERN v1
+ATOM	M3XXH3.java	522	M3XXH3	XXH3_len_129to240_128b	ALGORITHM	ALG_LENGTH_CLASS	LENGTH(129..240); WIDTH(128b)	HASH-PATTERN v1
+ATOM	M3XXH3.java	565	M3XXH3	XXH3_hashLong	ALGORITHM	ALG_STREAM	STREAM(1024-byte blocks of 64-byte stripes); OWNER(XXH3_hashLong_64b, low half of XXH3_hashLong_128b; M3HashJitAtomsTest.xxh3HashLong)	HASH-PATTERN v1
+ATOM	M3XXH3.java	733	M3XXH3	XXH3_mergeAccs	ALGORITHM	ALG_MIX	OWNER(the three XXH3_mergeAccs folds; M3HashJitAtomsTest.xxh3MergeAccs)	HASH-PATTERN v1
+ATOM	M3XXH3.java	741	M3XXH3	XXH3_initCustomSecret	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	752	M3XXH3	asLongHashFunctionWithoutSeed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	847	M3XXH3	asLongHashFunctionWithSeed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	873	M3XXH3	asLongTupleHashFunctionWithoutSeed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	876	M3XXH3	asLongTupleLowHashFunctionWithoutSeed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	1056	M3XXH3	asLongTupleHashFunctionWithSeed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	1059	M3XXH3	asLongTupleLowHashFunctionWithSeed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	756	M3XXH3$AsLongHashFunction	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	786	M3XXH3$AsLongHashFunction	<clinit>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	788	M3XXH3$AsLongHashFunction	seed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	792	M3XXH3$AsLongHashFunction	hashLong	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	801	M3XXH3$AsLongHashFunction	hashInt	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	810	M3XXH3$AsLongHashFunction	hashShort	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	821	M3XXH3$AsLongHashFunction	hashChar	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	826	M3XXH3$AsLongHashFunction	hashByte	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	836	M3XXH3$AsLongHashFunction	hashVoid	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	841	M3XXH3$AsLongHashFunction	hash	ALGORITHM	ALG_ADAPT	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	855	M3XXH3$AsLongHashFunctionSeeded	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	862	M3XXH3$AsLongHashFunctionSeeded	seed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	867	M3XXH3$AsLongHashFunctionSeeded	hash	ALGORITHM	ALG_ADAPT	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	880	M3XXH3$AsLongTupleHashFunction	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	934	M3XXH3$AsLongTupleHashFunction	<clinit>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	936	M3XXH3$AsLongTupleHashFunction	seed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	940	M3XXH3$AsLongTupleHashFunction	bitsLength	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	945	M3XXH3$AsLongTupleHashFunction	newResultArray	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	950	M3XXH3$AsLongTupleHashFunction	dualHashLong	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	973	M3XXH3$AsLongTupleHashFunction	dualHashInt	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	997	M3XXH3$AsLongTupleHashFunction	dualHashShort	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	1016	M3XXH3$AsLongTupleHashFunction	dualHashChar	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	1021	M3XXH3$AsLongTupleHashFunction	dualHashByte	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	1040	M3XXH3$AsLongTupleHashFunction	dualHashVoid	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	1050	M3XXH3$AsLongTupleHashFunction	dualHash	ALGORITHM	ALG_ADAPT	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	1067	M3XXH3$AsLongTupleHashFunctionSeeded	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	1074	M3XXH3$AsLongTupleHashFunctionSeeded	seed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XXH3.java	1079	M3XXH3$AsLongTupleHashFunctionSeeded	dualHash	ALGORITHM	ALG_ADAPT	NONE	HASH-PATTERN v1
+ATOM	M3XxHash.java	29	M3XxHash	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XxHash.java	71	M3XxHash	xxHash64	ALGORITHM	ALG_STREAM	STREAM(32-byte stripes)	HASH-PATTERN v1
+ATOM	M3XxHash.java	164	M3XxHash	finalize	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XxHash.java	173	M3XxHash	asLongHashFunctionWithoutSeed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XxHash.java	265	M3XxHash	asLongHashFunctionWithSeed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XxHash.java	177	M3XxHash$AsLongHashFunction	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XxHash.java	197	M3XxHash$AsLongHashFunction	<clinit>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XxHash.java	200	M3XxHash$AsLongHashFunction	readResolve	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XxHash.java	204	M3XxHash$AsLongHashFunction	seed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XxHash.java	208	M3XxHash$AsLongHashFunction	hashLong	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3XxHash.java	220	M3XxHash$AsLongHashFunction	hashInt	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3XxHash.java	229	M3XxHash$AsLongHashFunction	hashShort	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3XxHash.java	240	M3XxHash$AsLongHashFunction	hashChar	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3XxHash.java	245	M3XxHash$AsLongHashFunction	hashByte	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3XxHash.java	253	M3XxHash$AsLongHashFunction	hashVoid	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+ATOM	M3XxHash.java	258	M3XxHash$AsLongHashFunction	hash	ALGORITHM	ALG_ADAPT	NONE	HASH-PATTERN v1
+ATOM	M3XxHash.java	275	M3XxHash$AsLongHashFunctionSeeded	<init>	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XxHash.java	280	M3XxHash$AsLongHashFunctionSeeded	seed	ALGORITHM	ALG_SETUP	NONE	HASH-PATTERN v1
+ATOM	M3XxHash.java	285	M3XxHash$AsLongHashFunctionSeeded	hashVoid	ALGORITHM	ALG_PRIMITIVE	NONE	HASH-PATTERN v1
+READ_SITE	M3ByteArrayAccess.java	52	M3ByteArrayAccess	i64	ACCESS	READ_BACKING	CARRIER(UNSAFE.getLongUnaligned); WIDTH(8)	HASH-PATTERN v1
+READ_SITE	M3ByteArrayAccess.java	58	M3ByteArrayAccess	u32	ACCESS	READ_BACKING	CARRIER(UNSAFE.getIntUnaligned); WIDTH(4)	HASH-PATTERN v1
+READ_SITE	M3ByteArrayAccess.java	64	M3ByteArrayAccess	i32	ACCESS	READ_BACKING	CARRIER(UNSAFE.getIntUnaligned); WIDTH(4)	HASH-PATTERN v1
+READ_SITE	M3ByteArrayAccess.java	70	M3ByteArrayAccess	u16	ACCESS	READ_BACKING	CARRIER(UNSAFE.getShortUnaligned); WIDTH(2)	HASH-PATTERN v1
+READ_SITE	M3ByteArrayAccess.java	76	M3ByteArrayAccess	i16	ACCESS	READ_BACKING	CARRIER(UNSAFE.getShortUnaligned); WIDTH(2)	HASH-PATTERN v1
+READ_SITE	M3ByteArrayAccess.java	81	M3ByteArrayAccess	getLong	ACCESS	READ_BACKING	CARRIER(ByteArrayLittleEndian.getLong); WIDTH(8)	HASH-PATTERN v1
+READ_SITE	M3ByteArrayAccess.java	91	M3ByteArrayAccess	getInt	ACCESS	READ_BACKING	CARRIER(ByteArrayLittleEndian.getInt); WIDTH(4)	HASH-PATTERN v1
+READ_SITE	M3ByteArrayAccess.java	101	M3ByteArrayAccess	getShort	ACCESS	READ_BACKING	CARRIER(ByteArrayLittleEndian.getShort); WIDTH(2)	HASH-PATTERN v1
+READ_SITE	M3ByteArrayAccess.java	111	M3ByteArrayAccess	getByte	ACCESS	READ_BACKING	CARRIER(input[(int) offset]); WIDTH(1)	HASH-PATTERN v1
+READ_SITE	M3ByteBufferAccess.java	76	M3ByteBufferAccess	getLong	ACCESS	READ_BACKING	CARRIER(input.getLong); WIDTH(8)	HASH-PATTERN v1
+READ_SITE	M3ByteBufferAccess.java	86	M3ByteBufferAccess	getInt	ACCESS	READ_BACKING	CARRIER(input.getInt); WIDTH(4)	HASH-PATTERN v1
+READ_SITE	M3ByteBufferAccess.java	96	M3ByteBufferAccess	getShort	ACCESS	READ_BACKING	CARRIER(input.getShort); WIDTH(2)	HASH-PATTERN v1
+READ_SITE	M3ByteBufferAccess.java	106	M3ByteBufferAccess	getByte	ACCESS	READ_BACKING	CARRIER(input.get); WIDTH(1)	HASH-PATTERN v1
+READ_SITE	M3CharSequenceAccess.java	64	M3CharSequenceAccess	getLong	ACCESS	READ_BACKING	CARRIER(input.charAt); WIDTH(1)	HASH-PATTERN v1
+READ_SITE	M3CharSequenceAccess.java	65	M3CharSequenceAccess	getLong	ACCESS	READ_BACKING	CARRIER(input.charAt); WIDTH(1)	HASH-PATTERN v1
+READ_SITE	M3CharSequenceAccess.java	66	M3CharSequenceAccess	getLong	ACCESS	READ_BACKING	CARRIER(input.charAt); WIDTH(1)	HASH-PATTERN v1
+READ_SITE	M3CharSequenceAccess.java	67	M3CharSequenceAccess	getLong	ACCESS	READ_BACKING	CARRIER(input.charAt); WIDTH(1)	HASH-PATTERN v1
+READ_SITE	M3CharSequenceAccess.java	70	M3CharSequenceAccess	getLong	ACCESS	READ_BACKING	CARRIER(input.charAt); WIDTH(1)	HASH-PATTERN v1
+READ_SITE	M3CharSequenceAccess.java	71	M3CharSequenceAccess	getLong	ACCESS	READ_BACKING	CARRIER(input.charAt); WIDTH(1)	HASH-PATTERN v1
+READ_SITE	M3CharSequenceAccess.java	72	M3CharSequenceAccess	getLong	ACCESS	READ_BACKING	CARRIER(input.charAt); WIDTH(1)	HASH-PATTERN v1
+READ_SITE	M3CharSequenceAccess.java	73	M3CharSequenceAccess	getLong	ACCESS	READ_BACKING	CARRIER(input.charAt); WIDTH(1)	HASH-PATTERN v1
+READ_SITE	M3CharSequenceAccess.java	74	M3CharSequenceAccess	getLong	ACCESS	READ_BACKING	CARRIER(input.charAt); WIDTH(1)	HASH-PATTERN v1
+READ_SITE	M3CharSequenceAccess.java	83	M3CharSequenceAccess	getUnsignedInt	ACCESS	READ_BACKING	CARRIER(input.charAt); WIDTH(1)	HASH-PATTERN v1
+READ_SITE	M3CharSequenceAccess.java	84	M3CharSequenceAccess	getUnsignedInt	ACCESS	READ_BACKING	CARRIER(input.charAt); WIDTH(1)	HASH-PATTERN v1
+READ_SITE	M3CharSequenceAccess.java	87	M3CharSequenceAccess	getUnsignedInt	ACCESS	READ_BACKING	CARRIER(input.charAt); WIDTH(1)	HASH-PATTERN v1
+READ_SITE	M3CharSequenceAccess.java	88	M3CharSequenceAccess	getUnsignedInt	ACCESS	READ_BACKING	CARRIER(input.charAt); WIDTH(1)	HASH-PATTERN v1
+READ_SITE	M3CharSequenceAccess.java	89	M3CharSequenceAccess	getUnsignedInt	ACCESS	READ_BACKING	CARRIER(input.charAt); WIDTH(1)	HASH-PATTERN v1
+READ_SITE	M3CharSequenceAccess.java	97	M3CharSequenceAccess	getUnsignedShort	ACCESS	READ_BACKING	CARRIER(input.charAt); WIDTH(1)	HASH-PATTERN v1
+READ_SITE	M3CharSequenceAccess.java	100	M3CharSequenceAccess	getUnsignedShort	ACCESS	READ_BACKING	CARRIER(input.charAt); WIDTH(1)	HASH-PATTERN v1
+READ_SITE	M3CharSequenceAccess.java	101	M3CharSequenceAccess	getUnsignedShort	ACCESS	READ_BACKING	CARRIER(input.charAt); WIDTH(1)	HASH-PATTERN v1
+READ_SITE	M3CharSequenceAccess.java	107	M3CharSequenceAccess	getUnsignedByte	ACCESS	READ_BACKING	CARRIER(input.charAt); WIDTH(1)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	181	M3CityAndFarmHash_1_1	hashLen0To16	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	182	M3CityAndFarmHash_1_1	hashLen0To16	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	185	M3CityAndFarmHash_1_1	hashLen0To16	ALGORITHM	READ_INPUT	WIDTH(4); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	186	M3CityAndFarmHash_1_1	hashLen0To16	ALGORITHM	READ_INPUT	WIDTH(4); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	189	M3CityAndFarmHash_1_1	hashLen0To16	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	190	M3CityAndFarmHash_1_1	hashLen0To16	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	191	M3CityAndFarmHash_1_1	hashLen0To16	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	199	M3CityAndFarmHash_1_1	hashLen17To32	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	200	M3CityAndFarmHash_1_1	hashLen17To32	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	201	M3CityAndFarmHash_1_1	hashLen17To32	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	202	M3CityAndFarmHash_1_1	hashLen17To32	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	209	M3CityAndFarmHash_1_1	cityHashLen33To64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	210	M3CityAndFarmHash_1_1	cityHashLen33To64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	211	M3CityAndFarmHash_1_1	cityHashLen33To64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	212	M3CityAndFarmHash_1_1	cityHashLen33To64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	213	M3CityAndFarmHash_1_1	cityHashLen33To64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	214	M3CityAndFarmHash_1_1	cityHashLen33To64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	215	M3CityAndFarmHash_1_1	cityHashLen33To64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	216	M3CityAndFarmHash_1_1	cityHashLen33To64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	239	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	240	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	240	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	241	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	242	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	251	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	252	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	253	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	254	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	266	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	267	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	268	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	269	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	278	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	282	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	283	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	285	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	291	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	292	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	293	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	294	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	305	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	306	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	307	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	308	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	309	M3CityAndFarmHash_1_1	cityHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	444	M3CityAndFarmHash_1_1	naHashLen33To64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	445	M3CityAndFarmHash_1_1	naHashLen33To64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	446	M3CityAndFarmHash_1_1	naHashLen33To64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	447	M3CityAndFarmHash_1_1	naHashLen33To64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	450	M3CityAndFarmHash_1_1	naHashLen33To64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	451	M3CityAndFarmHash_1_1	naHashLen33To64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	452	M3CityAndFarmHash_1_1	naHashLen33To64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	453	M3CityAndFarmHash_1_1	naHashLen33To64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	480	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	487	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	488	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	490	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	494	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	495	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	498	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	499	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	504	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	505	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	506	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	509	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	510	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	527	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	528	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	530	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	534	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	535	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	538	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	539	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	544	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	545	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	546	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	549	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	550	M3CityAndFarmHash_1_1	naHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	593	M3CityAndFarmHash_1_1	uoHash64WithSeeds	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	594	M3CityAndFarmHash_1_1	uoHash64WithSeeds	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	595	M3CityAndFarmHash_1_1	uoHash64WithSeeds	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	596	M3CityAndFarmHash_1_1	uoHash64WithSeeds	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	597	M3CityAndFarmHash_1_1	uoHash64WithSeeds	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	598	M3CityAndFarmHash_1_1	uoHash64WithSeeds	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	599	M3CityAndFarmHash_1_1	uoHash64WithSeeds	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	600	M3CityAndFarmHash_1_1	uoHash64WithSeeds	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	656	M3CityAndFarmHash_1_1	uoHash64WithSeeds	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	657	M3CityAndFarmHash_1_1	uoHash64WithSeeds	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	659	M3CityAndFarmHash_1_1	uoHash64WithSeeds	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	664	M3CityAndFarmHash_1_1	uoHash64WithSeeds	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	665	M3CityAndFarmHash_1_1	uoHash64WithSeeds	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	668	M3CityAndFarmHash_1_1	uoHash64WithSeeds	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	669	M3CityAndFarmHash_1_1	uoHash64WithSeeds	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	675	M3CityAndFarmHash_1_1	uoHash64WithSeeds	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	676	M3CityAndFarmHash_1_1	uoHash64WithSeeds	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	677	M3CityAndFarmHash_1_1	uoHash64WithSeeds	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	680	M3CityAndFarmHash_1_1	uoHash64WithSeeds	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3CityAndFarmHash_1_1.java	681	M3CityAndFarmHash_1_1	uoHash64WithSeeds	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MetroHash.java	66	M3MetroHash	metroHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MetroHash.java	68	M3MetroHash	metroHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MetroHash.java	70	M3MetroHash	metroHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MetroHash.java	72	M3MetroHash	metroHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MetroHash.java	88	M3MetroHash	metroHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MetroHash.java	90	M3MetroHash	metroHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MetroHash.java	101	M3MetroHash	metroHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MetroHash.java	109	M3MetroHash	metroHash64	ALGORITHM	READ_INPUT	WIDTH(4); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MetroHash.java	117	M3MetroHash	metroHash64	ALGORITHM	READ_INPUT	WIDTH(2); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MetroHash.java	125	M3MetroHash	metroHash64	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MurmurHash_3.java	132	M3MurmurHash_3	hash	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MurmurHash_3.java	133	M3MurmurHash_3	hash	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MurmurHash_3.java	154	M3MurmurHash_3	hash	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MurmurHash_3.java	156	M3MurmurHash_3	hash	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MurmurHash_3.java	158	M3MurmurHash_3	hash	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MurmurHash_3.java	160	M3MurmurHash_3	hash	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MurmurHash_3.java	162	M3MurmurHash_3	hash	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MurmurHash_3.java	164	M3MurmurHash_3	hash	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MurmurHash_3.java	166	M3MurmurHash_3	hash	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MurmurHash_3.java	168	M3MurmurHash_3	hash	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MurmurHash_3.java	171	M3MurmurHash_3	hash	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MurmurHash_3.java	173	M3MurmurHash_3	hash	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MurmurHash_3.java	175	M3MurmurHash_3	hash	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MurmurHash_3.java	177	M3MurmurHash_3	hash	ALGORITHM	READ_INPUT	WIDTH(4); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MurmurHash_3.java	180	M3MurmurHash_3	hash	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MurmurHash_3.java	182	M3MurmurHash_3	hash	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3MurmurHash_3.java	184	M3MurmurHash_3	hash	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	104	M3WyHash	_wyr3	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	105	M3WyHash	_wyr3	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	106	M3WyHash	_wyr3	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	110	M3WyHash	u64Rorate32	ALGORITHM	READ_INPUT	WIDTH(4); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	110	M3WyHash	u64Rorate32	ALGORITHM	READ_INPUT	WIDTH(4); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	130	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(4); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	131	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(4); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	149	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	150	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	151	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	152	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	153	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	154	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	155	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	156	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	157	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	158	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	159	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	160	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	161	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	162	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	163	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	164	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	165	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	166	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	167	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	168	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	169	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	170	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	171	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	172	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	173	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	174	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	175	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	176	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	177	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	178	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	179	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	180	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	183	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	184	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	185	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	186	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	191	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(4); OFFSET(computed); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3WyHash.java	192	M3WyHash	wyHash64	ALGORITHM	READ_INPUT	WIDTH(4); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	244	M3XXH3	XXH3_mix16B	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	245	M3XXH3	XXH3_mix16B	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	247	M3XXH3	XXH3_mix16B	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	248	M3XXH3	XXH3_mix16B	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	257	M3XXH3	XXH128_mix32B_once	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	258	M3XXH3	XXH128_mix32B_once	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	264	M3XXH3	XXH3_mix2Accs	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	265	M3XXH3	XXH3_mix2Accs	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	295	M3XXH3	XXH3_len_0to16_64b	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	295	M3XXH3	XXH3_len_0to16_64b	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	301	M3XXH3	XXH3_len_9to16_64b	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	301	M3XXH3	XXH3_len_9to16_64b	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	302	M3XXH3	XXH3_len_9to16_64b	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	302	M3XXH3	XXH3_len_9to16_64b	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	303	M3XXH3	XXH3_len_9to16_64b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	304	M3XXH3	XXH3_len_9to16_64b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	313	M3XXH3	XXH3_len_4to8_64b	ALGORITHM	READ_INPUT	WIDTH(4); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	314	M3XXH3	XXH3_len_4to8_64b	ALGORITHM	READ_INPUT	WIDTH(4); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	315	M3XXH3	XXH3_len_4to8_64b	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	315	M3XXH3	XXH3_len_4to8_64b	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	323	M3XXH3	XXH3_len_1to3_64b	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	324	M3XXH3	XXH3_len_1to3_64b	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	325	M3XXH3	XXH3_len_1to3_64b	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	327	M3XXH3	XXH3_len_1to3_64b	ALGORITHM	READ_KEY	WIDTH(4); OFFSET(constant); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	327	M3XXH3	XXH3_len_1to3_64b	ALGORITHM	READ_KEY	WIDTH(4); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	402	M3XXH3	XXH3_len_0to16_128b	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	402	M3XXH3	XXH3_len_0to16_128b	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	405	M3XXH3	XXH3_len_0to16_128b	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	405	M3XXH3	XXH3_len_0to16_128b	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	413	M3XXH3	XXH3_len_9to16_128b	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	413	M3XXH3	XXH3_len_9to16_128b	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	414	M3XXH3	XXH3_len_9to16_128b	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	414	M3XXH3	XXH3_len_9to16_128b	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	415	M3XXH3	XXH3_len_9to16_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	416	M3XXH3	XXH3_len_9to16_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	436	M3XXH3	XXH3_len_4to8_128b	ALGORITHM	READ_INPUT	WIDTH(4); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	437	M3XXH3	XXH3_len_4to8_128b	ALGORITHM	READ_INPUT	WIDTH(4); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	439	M3XXH3	XXH3_len_4to8_128b	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	439	M3XXH3	XXH3_len_4to8_128b	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	461	M3XXH3	XXH3_len_1to3_128b	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	462	M3XXH3	XXH3_len_1to3_128b	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	463	M3XXH3	XXH3_len_1to3_128b	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	466	M3XXH3	XXH3_len_1to3_128b	ALGORITHM	READ_KEY	WIDTH(4); OFFSET(constant); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	466	M3XXH3	XXH3_len_1to3_128b	ALGORITHM	READ_KEY	WIDTH(4); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	467	M3XXH3	XXH3_len_1to3_128b	ALGORITHM	READ_KEY	WIDTH(4); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	467	M3XXH3	XXH3_len_1to3_128b	ALGORITHM	READ_KEY	WIDTH(4); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	485	M3XXH3	XXH3_len_17to128_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	486	M3XXH3	XXH3_len_17to128_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	487	M3XXH3	XXH3_len_17to128_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	488	M3XXH3	XXH3_len_17to128_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	492	M3XXH3	XXH3_len_17to128_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	493	M3XXH3	XXH3_len_17to128_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	494	M3XXH3	XXH3_len_17to128_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	495	M3XXH3	XXH3_len_17to128_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	499	M3XXH3	XXH3_len_17to128_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	500	M3XXH3	XXH3_len_17to128_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	501	M3XXH3	XXH3_len_17to128_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	502	M3XXH3	XXH3_len_17to128_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	506	M3XXH3	XXH3_len_17to128_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	507	M3XXH3	XXH3_len_17to128_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	508	M3XXH3	XXH3_len_17to128_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	509	M3XXH3	XXH3_len_17to128_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	529	M3XXH3	XXH3_len_129to240_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	530	M3XXH3	XXH3_len_129to240_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	531	M3XXH3	XXH3_len_129to240_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	532	M3XXH3	XXH3_len_129to240_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	540	M3XXH3	XXH3_len_129to240_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	541	M3XXH3	XXH3_len_129to240_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	542	M3XXH3	XXH3_len_129to240_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	543	M3XXH3	XXH3_len_129to240_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	549	M3XXH3	XXH3_len_129to240_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	550	M3XXH3	XXH3_len_129to240_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	551	M3XXH3	XXH3_len_129to240_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	552	M3XXH3	XXH3_len_129to240_128b	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(end-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	586	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	587	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	588	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	589	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	595	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	596	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	597	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	598	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	604	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	605	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	606	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	607	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	613	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	614	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	615	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	616	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	625	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	626	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	627	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	628	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	629	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	630	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	631	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	632	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	643	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	644	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	645	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	646	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	652	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	653	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	654	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	655	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	661	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	662	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	663	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	664	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	670	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	671	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	672	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	673	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	685	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	686	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	687	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	688	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	694	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	695	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	696	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	697	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	703	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	704	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	705	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	706	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	712	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	713	M3XXH3	XXH3_hashLong	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(loop); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	714	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	715	M3XXH3	XXH3_hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	745	M3XXH3	XXH3_initCustomSecret	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	746	M3XXH3	XXH3_initCustomSecret	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(loop); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	796	M3XXH3	hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	796	M3XXH3	hashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	805	M3XXH3	hashInt	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	805	M3XXH3	hashInt	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	817	M3XXH3	hashShort	ALGORITHM	READ_KEY	WIDTH(4); OFFSET(constant); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	817	M3XXH3	hashShort	ALGORITHM	READ_KEY	WIDTH(4); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	832	M3XXH3	hashByte	ALGORITHM	READ_KEY	WIDTH(4); OFFSET(constant); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	832	M3XXH3	hashByte	ALGORITHM	READ_KEY	WIDTH(4); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	838	M3XXH3	hashVoid	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	838	M3XXH3	hashVoid	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	954	M3XXH3	dualHashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	954	M3XXH3	dualHashLong	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	977	M3XXH3	dualHashInt	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	977	M3XXH3	dualHashInt	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	1005	M3XXH3	dualHashShort	ALGORITHM	READ_KEY	WIDTH(4); OFFSET(constant); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	1005	M3XXH3	dualHashShort	ALGORITHM	READ_KEY	WIDTH(4); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	1006	M3XXH3	dualHashShort	ALGORITHM	READ_KEY	WIDTH(4); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	1006	M3XXH3	dualHashShort	ALGORITHM	READ_KEY	WIDTH(4); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	1029	M3XXH3	dualHashByte	ALGORITHM	READ_KEY	WIDTH(4); OFFSET(constant); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	1029	M3XXH3	dualHashByte	ALGORITHM	READ_KEY	WIDTH(4); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	1030	M3XXH3	dualHashByte	ALGORITHM	READ_KEY	WIDTH(4); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	1030	M3XXH3	dualHashByte	ALGORITHM	READ_KEY	WIDTH(4); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	1042	M3XXH3	dualHashVoid	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	1042	M3XXH3	dualHashVoid	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	1045	M3XXH3	dualHashVoid	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XXH3.java	1045	M3XXH3	dualHashVoid	ALGORITHM	READ_KEY	WIDTH(8); OFFSET(computed); CARRIER(unsafeLE)	HASH-PATTERN v1
+READ_SITE	M3XxHash.java	82	M3XxHash	xxHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XxHash.java	86	M3XxHash	xxHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XxHash.java	90	M3XxHash	xxHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XxHash.java	94	M3XxHash	xxHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XxHash.java	137	M3XxHash	xxHash64	ALGORITHM	READ_INPUT	WIDTH(8); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XxHash.java	148	M3XxHash	xxHash64	ALGORITHM	READ_INPUT	WIDTH(4); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
+READ_SITE	M3XxHash.java	155	M3XxHash	xxHash64	ALGORITHM	READ_INPUT	WIDTH(1); OFFSET(base-relative); CARRIER(access)	HASH-PATTERN v1
