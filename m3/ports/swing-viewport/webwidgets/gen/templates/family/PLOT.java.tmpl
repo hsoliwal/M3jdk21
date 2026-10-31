@@ -1,0 +1,198 @@
+package @PKG@;
+
+import static @PKG@.M3WebStates.*;
+
+/**
+ * Painted value arrays (pattern M3P-PLOT-1, aspects R+G+D): a sparkline polyline and bars over a long
+ * horizontal extent (resident points only), gantt rows over a long vertical extent, a slice-and-dice
+ * treemap and a QR-style module matrix. Values are the value lane (gantt: start in value, length in aux).
+ * Members: sparkline, qr-code, chart, treemap, gantt.
+ */
+public class M3PlotModel extends M3WebModel implements M3PlotApi {
+	public static final int SPARK = 0, BARS = 1, QR = 2, TREEMAP = 3, GANTT = 4;
+	/** Modules per side of the matrix (version 1 size). */
+	public static final int QR_SIZE = 21;
+	private final int[] pts = new int[2 * 64];
+
+	public M3PlotModel(String concept, int role, int mode, int shape, int variant) {
+		super(concept, role, mode, shape, variant);
+		itemExtent = mode == SPARK ? 12 : mode == BARS ? 28 : 32;
+	}
+
+	@Override
+	public int aspects() {
+		return A_R | A_G | A_D;
+	}
+
+	@Override
+	public void load(String sample) {
+		clear();
+		if (mode == QR) {
+			add(sample);
+			return;
+		}
+		int n = 0;
+		for (String s : sample.split(";")) {
+			String[] f = s.split("~", -1);
+			int i = add(mode == GANTT ? "Task " + (++n) : null);
+			setValue(i, M3WebStates.parse(f[0]));
+			setAux(i, f.length > 1 ? M3WebStates.parse(f[1]) : 0);
+		}
+	}
+
+	@Override
+	public int maxValue() {
+		int m = 1;
+		for (int i = 0; i < count; i++) {
+			m = Math.max(m, mode == GANTT ? value[i] + aux[i] : value[i]);
+		}
+		return m;
+	}
+
+	@Override
+	public String accessibleName(int item) {
+		return item < 0 ? super.accessibleName(item) : super.accessibleName(item) + ": " + value[checked(item)];
+	}
+
+	@Override
+	public boolean scrollsHorizontally() {
+		return mode == SPARK || mode == BARS;
+	}
+
+	@Override
+	public int viewLength() {
+		return scrollsHorizontally() ? width : height;
+	}
+
+	@Override
+	protected boolean vertical() {
+		return mode == GANTT;
+	}
+
+	@Override
+	protected void doLayout() {
+		for (int i = 0; i < count; i++) {
+			setRect(i, 0, 0, 0, 0);
+		}
+		switch (mode) {
+		case QR: if (count > 0) { setRect(0, 0, 0, Math.min(width, height), Math.min(width, height)); } break;
+		case TREEMAP: treemap(); break;
+		default: series();
+		}
+	}
+
+	private void series() {
+		int max = maxValue(), plotH = Math.max(1, height - 4);
+		for (int i = window[2]; i < window[3]; i++) {
+			int pos = (int) ((long) i * itemExtent - scroll);
+			if (mode == GANTT) {
+				int unit = Math.max(1, width / Math.max(1, max));
+				setRect(i, value[i] * unit, pos + 4, Math.max(2, aux[i] * unit), itemExtent - 8);
+			} else {
+				int h = (int) ((long) value[i] * plotH / max);
+				setRect(i, pos, mode == SPARK ? plotH - h : height - h, mode == SPARK ? itemExtent : itemExtent - 6, mode == SPARK ? 4 : h);
+			}
+		}
+	}
+
+	private void treemap() {
+		long sum = 0;
+		for (int i = 0; i < count; i++) {
+			sum += Math.max(0, value[i]);
+		}
+		int x = 0, y = 0, w = width, h = height;
+		for (int i = 0; i < count && sum > 0; i++) {
+			int v = Math.max(0, value[i]);
+			boolean across = w >= h;
+			int side = across ? w : h, cut = i == count - 1 ? side : (int) ((long) side * v / sum);
+			setRect(i, x, y, across ? cut : w, across ? h : cut);
+			x += across ? cut : 0; y += across ? 0 : cut;
+			w -= across ? cut : 0; h -= across ? 0 : cut;
+			sum -= v;
+		}
+	}
+
+	@Override
+	protected void emit(M3WebPaint p) {
+		switch (mode) {
+		case SPARK: spark(p); break;
+		case QR: if (count > 0) { matrix(p, rects[2]); } break;
+		default: boxes(p);
+		}
+	}
+
+	private void spark(M3WebPaint p) {
+		int n = 0;
+		for (int i = window[2]; i < window[3] && n < pts.length / 2; i++, n++) {
+			pts[2 * n] = rects[i * 4] + itemExtent / 2;
+			pts[2 * n + 1] = rects[i * 4 + 1];
+		}
+		if (n > 1) {
+			p.poly(pts, 0, n, theme.slot(M3WebTheme.ACCENT));
+		}
+		if (n > 0) {
+			p.oval(pts[2 * n - 2] - 3, pts[2 * n - 1] - 3, 6, 6, theme.slot(M3WebTheme.ACCENT));
+		}
+		if (focus >= window[2] && focus < window[3]) {
+			p.ovalLine(rects[focus * 4] + itemExtent / 2 - 5, rects[focus * 4 + 1] - 5, 10, 10, theme.slot(M3WebTheme.FG));
+		}
+	}
+
+	private void boxes(M3WebPaint p) {
+		for (int i = 0; i < count; i++) {
+			int b = i * 4;
+			if (rects[b + 2] <= 0) {
+				continue;
+			}
+			int v = mode == TREEMAP ? 1 + i % 8 : V_PRIMARY, st = flags[i] | (i == focus ? HOVER : 0);
+			int fill = mode == TREEMAP ? M3WebTheme.mix(theme.fill(v, st), theme.slot(M3WebTheme.SURFACE), 75) : theme.fill(v, st);
+			p.round(rects[b], rects[b + 1], rects[b + 2], rects[b + 3], mode == BARS ? 3 : 6, fill);
+			if (mode != BARS) {
+				p.text(rects[b] + 4, rects[b + 1], rects[b + 2] - 8, rects[b + 3], mode == TREEMAP ? theme.slot(M3WebTheme.FG) : 0xffffff,
+						font() | (rtl ? M3WebPaint.RIGHT : 0), text[i] != null ? text[i] : Integer.toString(value[i]));
+			}
+		}
+	}
+
+	/** Paints the module matrix. TODO M3P-PLOT-1: real QR encoding (Reed-Solomon, masking); this matrix is not scannable. */
+	private void matrix(M3WebPaint p, int side) {
+		int m = Math.max(1, side / QR_SIZE), fg = theme.slot(M3WebTheme.FG);
+		p.rect(0, 0, m * QR_SIZE, m * QR_SIZE, 0xffffff);
+		for (int r = 0; r < QR_SIZE; r++) {
+			for (int c = 0; c < QR_SIZE; c++) {
+				if (module(r, c)) {
+					p.rect(c * m, r * m, m, m, fg);
+				}
+			}
+		}
+	}
+
+	/** True when the module at (row, col) is dark: finder patterns plus hashed data bits. */
+	@Override
+	public boolean module(int row, int col) {
+		int fr = row < 7 ? row : row >= QR_SIZE - 7 ? row - (QR_SIZE - 7) : -1;
+		int fc = col < 7 ? col : col >= QR_SIZE - 7 ? col - (QR_SIZE - 7) : -1;
+		if (fr >= 0 && fc >= 0 && !(row >= QR_SIZE - 7 && col >= QR_SIZE - 7)) {
+			int d = Math.max(Math.abs(fr - 3), Math.abs(fc - 3));
+			return d != 2;
+		}
+		int h = (count > 0 && text[0] != null ? text[0].hashCode() : 0) ^ (row * 31 + col) * 0x9E3779B1;
+		return ((h ^ (h >>> 15)) & 1) == 1;
+	}
+
+	@Override
+	public void setFocus(int item) {
+		super.setFocus(item);
+		if (item >= 0 && (mode == SPARK || mode == BARS || mode == GANTT)) {
+			long at = (long) item * itemExtent;
+			if (at < scroll || at + itemExtent > scroll + viewLength()) {
+				scrollTo(at < scroll ? at : at + itemExtent - viewLength());
+			}
+		}
+	}
+
+	@Override
+	protected void onWheel(int delta) {
+		scrollTo(scroll + (long) delta * itemExtent);
+	}
+}

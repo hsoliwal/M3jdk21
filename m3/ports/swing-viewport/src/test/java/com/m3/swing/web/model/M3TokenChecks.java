@@ -26,7 +26,7 @@ public final class M3TokenChecks {
 	public static void run(M3TokenModel m) {
 		m.layout(360, 120);
 		check(m.count() > 0, "sample items");
-		check(M3TokenModel.initials("ada  lovelace byron").equals("AL") && M3TokenModel.initials(" ").isEmpty(), "initials");
+		check(M3TokenModel.initials("ada  lovelace byron").equals("AL") && M3TokenModel.initials(" ").isEmpty() && M3TokenModel.initials(null).isEmpty(), "initials");
 		check(M3WebGlyphs.iconId("search") == M3WebGlyphs.I_SEARCH && M3WebGlyphs.iconId("nope") == M3WebGlyphs.I_DOT, "icon ids");
 		check(M3TokenModel.parse(" 12 ") == 12 && M3TokenModel.parse("x") == 0, "count parse");
 		M3WebPaint p = new M3WebPaint();

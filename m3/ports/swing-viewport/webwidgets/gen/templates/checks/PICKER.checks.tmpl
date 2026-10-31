@@ -1,0 +1,88 @@
+package @PKG@;
+
+import static @PKG@.M3WebChecks.check;
+import static @PKG@.M3WebStates.*;
+
+/** Family contract of the field + pop-up pickers (pattern M3P-PICKER-1). */
+public final class M3PickerChecks {
+	private M3PickerChecks() {
+	}
+
+	public static void run(M3PickerModel m) {
+		check(M3PickerModel.days(19700101) == 0 && M3PickerModel.civil(0) == 19700101, "epoch");
+		check(M3PickerModel.civil(M3PickerModel.days(20261030)) == 20261030 && M3PickerModel.civil(M3PickerModel.days(20000229)) == 20000229, "civil round trip");
+		check(M3PickerModel.civil(M3PickerModel.MONDAY0) == 19691229, "first Monday");
+		check(M3PickerModel.hhmm(570).equals("09:30") && M3PickerModel.iso(0).equals("1970-01-01"), "formats");
+		m.layout(360, 300);
+		M3WebPaint p = new M3WebPaint();
+		m.setState(-1, FOCUS, true);
+		m.setOpen(false);
+		check(m.key(KEY_DOWN, 0, 0) && m.isOpen(), "down opens");
+		m.paint(p);
+		keys(m, p);
+		m.setRtl(true);
+		m.setOpen(true);
+		m.paint(p);
+		click(m);
+		m.setRtl(false);
+		m.setOpen(true);
+		click(m);
+		check(!m.valueText().isEmpty() || m.mode == M3PickerModel.CASCADER, "value text");
+		m.setOpen(true);
+		check(m.key(KEY_ESCAPE, 0, 0) == (m.mode != M3PickerModel.CALENDAR), "escape closes the pop-up");
+		m.setOpen(false);
+		check(m.mode == M3PickerModel.CALENDAR || !m.key(KEY_LEFT, 0, 0), "closed picker ignores arrows (a calendar is never closed)");
+		m.pointer(P_WHEEL, 0, 1, 0);
+	}
+
+	private static void keys(M3PickerModel m, M3WebPaint p) {
+		int c = m.cursor();
+		for (int k : new int[] { KEY_RIGHT, KEY_DOWN, KEY_PAGE_DOWN, KEY_END, KEY_HOME, KEY_PAGE_UP, KEY_UP, KEY_LEFT, KEY_TAB }) {
+			m.key(k, 0, 0);
+		}
+		int expected = m.mode == M3PickerModel.TIME ? c : c - Math.floorMod(c + 1 - M3PickerModel.MONDAY0, 7);
+		check(m.mode == M3PickerModel.CASCADER || m.cursor() == expected, "keys move the cursor: " + m.cursor() + " != " + expected);
+		m.paint(p);
+		m.key(KEY_ENTER, 0, 0);
+		if (m.mode == M3PickerModel.RANGE) {
+			m.setOpen(true);
+			m.key(KEY_RIGHT, 0, 0);
+			m.key(KEY_ENTER, 0, 0);
+			check(m.rangeEnd() > m.rangeStart(), "range takes two picks");
+		}
+		if (m.mode == M3PickerModel.CASCADER) {
+			cascade(m, p);
+		}
+	}
+
+	private static void cascade(M3PickerModel m, M3WebPaint p) {
+		m.setOpen(true);
+		m.choose(0);
+		m.key(KEY_DOWN, 0, 0);
+		m.key(KEY_RIGHT, 0, 0);
+		m.paint(p);
+		m.key(KEY_LEFT, 0, 0);
+		m.key(KEY_LEFT, 0, 0);
+		m.key(KEY_RIGHT, 0, 0);
+		m.key(KEY_RIGHT, 0, 0);
+		m.key(KEY_RIGHT, 0, 0);
+		check(m.valueText().contains("/") || !m.isOpen(), "cascade path: " + m.valueText());
+		m.setRtl(true);
+		m.setOpen(true);
+		m.key(KEY_LEFT, 0, 0);
+		m.key(KEY_RIGHT, 0, 0);
+		m.setRtl(false);
+	}
+
+	private static void click(M3PickerModel m) {
+		m.layout(360, 300);
+		for (int i = 0; i < m.count(); i++) {
+			if (m.itemRect(i, 2) > 0) {
+				int x = m.itemRect(i, 0) + m.itemRect(i, 2) / 2, y = m.itemRect(i, 1) + 2;
+				m.pointer(P_DOWN, x, y, 0);
+				m.pointer(P_UP, x, y, 0);
+				return;
+			}
+		}
+	}
+}

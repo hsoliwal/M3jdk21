@@ -154,7 +154,7 @@ public class M3CommandsModel extends M3WebModel implements M3CommandsApi {
 			M3WebGlyphs.glyph(p, M3WebGlyphs.I_PLUS, x + (w - h / 2) / 2, y + 2, h / 2, ink);
 			p.text(x, y + h / 2, w, h / 2, ink, font() | M3WebPaint.CENTER, text[i]);
 		} else if (mode == APPBAR && !title) {
-			M3WebGlyphs.glyph(p, M3WebGlyphs.iconId(text[i].toLowerCase(java.util.Locale.ROOT)), x + h / 4, y + h / 4, h / 2, ink);
+			M3WebGlyphs.glyph(p, M3WebGlyphs.iconId(text[i] == null ? "" : text[i].toLowerCase(java.util.Locale.ROOT)), x + h / 4, y + h / 4, h / 2, ink);
 		} else {
 			p.text(x + pad(), y, w - 2 * pad() - (value[i] == SPLIT_KIND ? h : 0), h, ink, font() | (title ? M3WebPaint.BOLD : 0) | (rtl ? M3WebPaint.RIGHT : 0), text[i]);
 		}

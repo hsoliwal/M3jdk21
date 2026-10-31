@@ -1,0 +1,83 @@
+package @WPKG@.snippets;
+
+import @PKG@.M3WebModel;
+import @PKG@.M3WebPixelProbe;
+import @WPKG@.*;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+
+/**
+ * Desktop pixel probe of one representative widget per family (pattern M3P-CORE-1): opens the widgets on
+ * a shell, lets them paint, captures the screen with {@code new GC(display).copyArea(image, x, y)} and
+ * compares the pixel {@link M3WebPixelProbe} picks from each display list. Run under the desktop UI lock;
+ * prints one TSV row per widget and exits 0 only when every probe passes.
+ */
+public final class M3WebPixelProbeSnippet {
+	private M3WebPixelProbeSnippet() {
+	}
+
+	public static void main(String[] args) {
+		Display display = new Display();
+		Shell shell = new Shell(display, SWT.NO_TRIM | SWT.ON_TOP);
+		M3WebCanvas<?>[] widgets = {
+@PROBES@
+		};
+		for (int i = 0; i < widgets.length; i++) {
+			widgets[i].setBounds(10 + (i % 4) * 300, 10 + (i / 4) * 200, 280, 180);
+		}
+		shell.setBounds(20, 20, 1220, 640);
+		shell.open();
+		settle(display, 900);
+		int failed = report(display, widgets);
+		display.dispose();
+		System.exit(failed == 0 ? 0 : 1);
+	}
+
+	private static M3WebCanvas<?> probe(M3WebCanvas<?> widget, String sample) {
+		widget.getModel().load(sample);
+		if (widget.getModel() instanceof @PKG@.M3OverlayModel) {
+			((@PKG@.M3OverlayModel) widget.getModel()).open();
+		}
+		return widget;
+	}
+
+	private static void settle(Display display, int ms) {
+		long end = System.currentTimeMillis() + ms;
+		while (System.currentTimeMillis() < end) {
+			if (!display.readAndDispatch()) {
+				display.sleep();
+			}
+		}
+	}
+
+	private static int report(Display display, M3WebCanvas<?>[] widgets) {
+		Image screen = new Image(display, display.getBounds().width, display.getBounds().height);
+		GC gc = new GC(display);
+		gc.copyArea(screen, 0, 0);
+		gc.dispose();
+		ImageData data = screen.getImageData();
+		int failed = 0;
+		System.out.println("concept\tx\ty\texpected\tactual\tresult");
+		for (M3WebCanvas<?> w : widgets) {
+			M3WebModel m = w.getModel();
+			int[] probe = M3WebPixelProbe.probe(m, w.getSize().x, w.getSize().y);
+			if (probe.length != 3) {
+				System.out.println(m.concept() + "\t-\t-\t-\t-\tNO_PROBE");
+				continue;
+			}
+			Point at = w.toDisplay(probe[0], probe[1]);
+			org.eclipse.swt.graphics.RGB rgb = data.palette.getRGB(data.getPixel(at.x, at.y));
+			int actual = rgb.red << 16 | rgb.green << 8 | rgb.blue;
+			boolean ok = M3WebPixelProbe.close(actual, probe[2], 24);
+			failed += ok ? 0 : 1;
+			System.out.println(m.concept() + "\t" + at.x + "\t" + at.y + "\t" + Integer.toHexString(probe[2]) + "\t" + Integer.toHexString(actual) + "\t" + (ok ? "PASS" : "FAIL"));
+		}
+		screen.dispose();
+		return failed;
+	}
+}

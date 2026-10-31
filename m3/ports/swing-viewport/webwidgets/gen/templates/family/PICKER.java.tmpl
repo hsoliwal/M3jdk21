@@ -1,0 +1,423 @@
+package @PKG@;
+
+import static @PKG@.M3WebStates.*;
+
+/**
+ * Field plus pop-up over packed int values (pattern M3P-PICKER-1, aspects R+G+D+P): dates are epoch-day
+ * ints laid out as an endless list of week rows (only resident weeks get rects), times are minute-of-day
+ * slots, a cascade is a packed tree (parent in the group lane, depth in aux) shown as columns along the
+ * active path. The pop-up is the OVERLAY plane; the weekday header is the HEADER plane. Members: cascader,
+ * date-range, date-picker, calendar, time-picker.
+ */
+public class M3PickerModel extends M3WebModel implements M3PickerApi {
+	public static final int CASCADER = 0, DATE = 1, RANGE = 2, CALENDAR = 3, TIME = 4;
+	/** Epoch day of Monday 1969-12-29, the first week row. */
+	public static final int MONDAY0 = -3;
+	public static final int WEEKS = 5300, SLOTS = 96;
+	private final int[] path = new int[8];
+	private int start = Integer.MIN_VALUE, end = Integer.MIN_VALUE, cursor, depth, picks;
+
+	public M3PickerModel(String concept, int role, int mode, int shape, int variant) {
+		super(concept, role, mode, shape, variant);
+		itemExtent = 32;
+	}
+
+	@Override
+	public int aspects() {
+		return A_R | A_G | A_D | A_P;
+	}
+
+	@Override
+	public void load(String sample) {
+		clear();
+		depth = 0;
+		if (mode == CASCADER) {
+			for (String p : sample.split(";")) {
+				node(p.split("/"));
+			}
+			return;
+		}
+		setLogicalCount(mode == TIME ? SLOTS : WEEKS);
+		String[] f = sample.split("~", -1);
+		int a = mode == TIME ? M3WebStates.parse(f[0]) : days(M3WebStates.parse(f[0]));
+		setRange(a, f.length > 1 ? days(M3WebStates.parse(f[1])) : a);
+		cursor = a;
+		reveal(cursor);
+	}
+
+	private void node(String[] segs) {
+		int parent = -1;
+		for (int d = 0; d < segs.length; d++) {
+			int found = -1;
+			for (int i = 0; i < count && found < 0; i++) {
+				found = group[i] == parent && segs[d].equals(text[i]) ? i : -1;
+			}
+			if (found < 0) {
+				found = add(segs[d]);
+				setGroup(found, parent);
+				setAux(found, d);
+			}
+			parent = found;
+		}
+	}
+
+	/** Epoch day of a packed {@code yyyymmdd} (civil calendar, proleptic Gregorian). */
+	public static int days(int ymd) {
+		int y = ymd / 10000, m = ymd / 100 % 100, d = ymd % 100;
+		y -= m <= 2 ? 1 : 0;
+		int era = Math.floorDiv(y, 400), yoe = y - era * 400;
+		int doy = (153 * (m + (m > 2 ? -3 : 9)) + 2) / 5 + d - 1;
+		int doe = yoe * 365 + yoe / 4 - yoe / 100 + doy;
+		return era * 146097 + doe - 719468;
+	}
+
+	/** Packed {@code yyyymmdd} of an epoch day. */
+	public static int civil(int days) {
+		int z = days + 719468, era = Math.floorDiv(z, 146097), doe = z - era * 146097;
+		int yoe = (doe - doe / 1460 + doe / 36524 - doe / 146096) / 365;
+		int doy = doe - (365 * yoe + yoe / 4 - yoe / 100), mp = (5 * doy + 2) / 153;
+		int d = doy - (153 * mp + 2) / 5 + 1, m = mp + (mp < 10 ? 3 : -9);
+		return (yoe + era * 400 + (m <= 2 ? 1 : 0)) * 10000 + m * 100 + d;
+	}
+
+	@Override
+	public int rangeStart() {
+		return start;
+	}
+
+	@Override
+	public int rangeEnd() {
+		return end;
+	}
+
+	@Override
+	public void setRange(int a, int b) {
+		start = Math.min(a, b);
+		end = Math.max(a, b);
+		damageAll();
+		fire(-1, D_VALUE);
+	}
+
+	@Override
+	public int cursor() {
+		return cursor;
+	}
+
+	@Override
+	public boolean isOpen() {
+		return mode == CALENDAR || is(-1, OPEN);
+	}
+
+	@Override
+	public void setOpen(boolean open) {
+		setState(-1, OPEN, open);
+		relayout(-1, D_LAYOUT);
+	}
+
+	/** Picks a day (date modes, ranges take two picks) or a minute slot. */
+	@Override
+	public void pick(int v) {
+		cursor = v;
+		if (mode == RANGE && picks++ % 2 == 1) {
+			setRange(start, v);
+		} else {
+			setRange(v, v);
+		}
+		if (mode != CALENDAR && (mode != RANGE || picks % 2 == 0)) {
+			setOpen(false);
+		}
+		fire(-1, D_ACTION);
+	}
+
+	@Override
+	public String valueText() {
+		if (mode == CASCADER) {
+			StringBuilder b = new StringBuilder();
+			for (int d = 0; d < depth; d++) {
+				b.append(d == 0 ? "" : "/").append(text[path[d]]);
+			}
+			return b.toString();
+		}
+		if (start == Integer.MIN_VALUE) {
+			return "";
+		}
+		return mode == TIME ? hhmm(start) : mode == RANGE ? iso(start) + " - " + iso(end) : iso(start);
+	}
+
+	static String iso(int day) {
+		int c = civil(day);
+		return c / 10000 + "-" + two(c / 100 % 100) + "-" + two(c % 100);
+	}
+
+	static String hhmm(int minute) {
+		return two(Math.floorMod(minute, 1440) / 60) + ":" + two(Math.floorMod(minute, 60));
+	}
+
+	private static String two(int v) {
+		return (v < 10 ? "0" : "") + v;
+	}
+
+	protected int field() {
+		return mode == CALENDAR ? 0 : rowHeight() + pad();
+	}
+
+	@Override
+	public int viewOrigin() {
+		return field() + (mode == DATE || mode == RANGE || mode == CALENDAR ? rowHeight() : 0);
+	}
+
+	@Override
+	public int viewLength() {
+		return Math.max(0, height - viewOrigin());
+	}
+
+	/** Item row that shows a value: the week of a day, or the slot of a minute. */
+	public int rowOf(int v) {
+		return mode == TIME ? Math.floorMod(v, 1440) / 15 : Math.floorDiv(v - MONDAY0, 7);
+	}
+
+	/** Scrolls the minimum so the value's row is visible. */
+	public void reveal(int v) {
+		long top = (long) rowOf(v) * itemExtent;
+		if (top < scroll || top + itemExtent > scroll + viewLength()) {
+			scrollTo(top < scroll ? top : top + itemExtent - viewLength());
+		}
+	}
+
+	@Override
+	protected void doLayout() {
+		for (int i = 0; i < count; i++) {
+			setRect(i, 0, 0, 0, 0);
+		}
+		if (!isOpen()) {
+			setPlane(OVERLAY, 0, field(), 0, 0);
+			return;
+		}
+		if (mode == CASCADER) {
+			columns();
+		} else {
+			for (int i = window[2]; i < window[3]; i++) {
+				setRect(i, 0, viewOrigin() + (int) ((long) i * itemExtent - scroll), width, itemExtent);
+			}
+		}
+		setPlane(HEADER, 0, field(), width, viewOrigin() - field());
+		setPlane(OVERLAY, 0, field(), width, height - field());
+	}
+
+	private void columns() {
+		int colW = Math.max(60, width / Math.max(1, Math.min(4, depth + 1)));
+		int[] rows = new int[path.length + 1];
+		for (int i = 0; i < count; i++) {
+			int d = aux[i];
+			boolean shown = d == 0 ? group[i] < 0 : d <= depth && group[i] == path[d - 1];
+			if (shown && d < path.length) {
+				setRect(i, d * colW, field() + rows[d]++ * itemExtent, colW, itemExtent);
+			}
+		}
+	}
+
+	@Override
+	protected void emit(M3WebPaint p) {
+		if (mode != CALENDAR) {
+			int st = widgetFlags & (FOCUS | ERROR | DISABLED);
+			p.round(0, 0, width, field(), radius(), theme.slot(M3WebTheme.SURFACE));
+			p.roundLine(0, 0, width, field(), radius(), theme.line(V_DEFAULT, st));
+			p.text(pad(), 0, width - 2 * pad() - field(), field(), theme.slot(M3WebTheme.FG), font() | (rtl ? M3WebPaint.RIGHT : 0), valueText());
+			M3WebGlyphs.glyph(p, M3WebGlyphs.I_DOWN, rtl ? 0 : width - field(), 0, field(), theme.slot(M3WebTheme.MUTED));
+		}
+		if (isOpen()) {
+			popup(p);
+		}
+	}
+
+	private void popup(M3WebPaint p) {
+		p.rect(0, field(), width, height - field(), theme.slot(M3WebTheme.SURFACE));
+		if (mode == DATE || mode == RANGE || mode == CALENDAR) {
+			weekdays(p);
+		}
+		for (int i = 0; i < count; i++) {
+			int b = i * 4;
+			if (rects[b + 2] > 0) {
+				row(p, i, rects[b], rects[b + 1], rects[b + 2], rects[b + 3]);
+			}
+		}
+	}
+
+	private void weekdays(M3WebPaint p) {
+		String[] names = { "M", "T", "W", "T", "F", "S", "S" };
+		int cw = width / 7, y = field();
+		for (int c = 0; c < 7; c++) {
+			muted(p, names[c], rtl ? width - (c + 1) * cw : c * cw, y, cw, rowHeight(), M3WebPaint.CENTER);
+		}
+		int first = civil(MONDAY0 + 7 * window[0]);
+		muted(p, first / 10000 + "-" + two(first / 100 % 100), 0, y, width, rowHeight() / 3, M3WebPaint.RIGHT);
+	}
+
+	private void row(M3WebPaint p, int i, int x, int y, int w, int h) {
+		if (mode == TIME || mode == CASCADER) {
+			boolean sel = mode == TIME ? rowOf(start) == i : onPath(i);
+			if (sel || i == focus) {
+				p.rect(x, y, w, h, sel ? theme.fill(V_SUBTLE, 0) : theme.fill(V_DEFAULT, HOVER));
+			}
+			label(p, i, mode == TIME ? hhmm(i * 15) : text[i], x + pad(), y, w - 2 * pad(), h, sel ? M3WebPaint.BOLD : 0);
+			if (mode == CASCADER && hasChildren(i)) {
+				M3WebGlyphs.glyph(p, rtl ? M3WebGlyphs.I_PREV : M3WebGlyphs.I_NEXT, rtl ? x : x + w - h, y, h, theme.slot(M3WebTheme.MUTED));
+			}
+			return;
+		}
+		int cw = w / 7;
+		for (int c = 0; c < 7; c++) {
+			day(p, MONDAY0 + 7 * i + c, rtl ? x + w - (c + 1) * cw : x + c * cw, y, cw, h);
+		}
+	}
+
+	private void day(M3WebPaint p, int d, int x, int y, int w, int h) {
+		boolean edge = d == start || d == end, inside = d > start && d < end;
+		if (inside) {
+			p.rect(x, y + 2, w, h - 4, theme.fill(V_SUBTLE, 0));
+		}
+		if (edge) {
+			p.oval(x + (w - h + 4) / 2, y + 2, h - 4, h - 4, theme.slot(M3WebTheme.ACCENT));
+		}
+		if (d == cursor && (widgetFlags & FOCUS) != 0) {
+			p.ovalLine(x + (w - h + 4) / 2, y + 2, h - 4, h - 4, theme.slot(M3WebTheme.FG));
+		}
+		int dom = civil(d) % 100;
+		p.text(x, y, w, h, edge ? 0xffffff : theme.slot(M3WebTheme.FG), font() | M3WebPaint.CENTER | (dom == 1 ? M3WebPaint.BOLD : 0), Integer.toString(dom));
+	}
+
+	private boolean onPath(int i) {
+		for (int d = 0; d < depth; d++) {
+			if (path[d] == i) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean hasChildren(int i) {
+		return firstChild(i) >= 0;
+	}
+
+	private int firstChild(int i) {
+		for (int k = 0; k < count; k++) {
+			if (group[k] == i) {
+				return k;
+			}
+		}
+		return -1;
+	}
+
+	@Override
+	protected void activateAt(int item, int x, int y) {
+		if (mode == DATE || mode == RANGE || mode == CALENDAR) {
+			int c = Math.max(0, Math.min(6, x / Math.max(1, rects[item * 4 + 2] / 7)));
+			pick(MONDAY0 + 7 * item + (rtl ? 6 - c : c));
+		} else {
+			activate(item);
+		}
+	}
+
+	@Override
+	protected void activate(int item) {
+		if (mode == TIME) {
+			pick(item * 15);
+		} else if (mode == CASCADER) {
+			choose(item);
+		}
+	}
+
+	/** Cascader: makes a node the active node at its depth; a leaf completes the value. */
+	public void choose(int item) {
+		int d = Math.min(path.length - 1, aux[checked(item)]);
+		for (int n = item, k = d; n >= 0 && k >= 0; n = group[n], k--) {
+			path[k] = n;
+		}
+		depth = d + 1;
+		int child = firstChild(item);
+		setFocus(child >= 0 ? child : item);
+		if (child < 0) {
+			setOpen(false);
+			fire(item, D_ACTION);
+		} else {
+			relayout(item, D_VALUE);
+		}
+	}
+
+	@Override
+	protected boolean onKey(int key, int ch, int mods) {
+		if (!isOpen()) {
+			boolean opens = key == KEY_DOWN || key == KEY_ENTER || key == KEY_SPACE;
+			if (opens) {
+				setOpen(true);
+			}
+			return opens;
+		}
+		if (mode == CASCADER) {
+			return cascadeKey(key);
+		}
+		int step = mode == TIME ? stepTime(key) : stepDate(key);
+		if (step != 0) {
+			cursor += step;
+			reveal(cursor);
+			damageAll();
+			fire(-1, D_STATE);
+			return true;
+		}
+		if (key == KEY_ENTER || key == KEY_SPACE) {
+			pick(cursor);
+			return true;
+		}
+		return false;
+	}
+
+	private int stepDate(int key) {
+		switch (key) {
+		case KEY_LEFT: return rtl ? 1 : -1;
+		case KEY_RIGHT: return rtl ? -1 : 1;
+		case KEY_UP: return -7;
+		case KEY_DOWN: return 7;
+		case KEY_PAGE_UP: return -28;
+		case KEY_PAGE_DOWN: return 28;
+		case KEY_HOME: return -Math.floorMod(cursor - MONDAY0, 7);
+		case KEY_END: return 6 - Math.floorMod(cursor - MONDAY0, 7);
+		default: return 0;
+		}
+	}
+
+	private int stepTime(int key) {
+		return key == KEY_UP ? -15 : key == KEY_DOWN ? 15 : key == KEY_PAGE_UP ? -60 : key == KEY_PAGE_DOWN ? 60 : 0;
+	}
+
+	private boolean cascadeKey(int key) {
+		int f = focus;
+		if ((key == KEY_RIGHT) != rtl && (key == KEY_RIGHT || key == KEY_LEFT) && f >= 0) {
+			choose(f);
+			return true;
+		}
+		if ((key == KEY_LEFT || key == KEY_RIGHT) && depth > 0) {
+			depth--;
+			setFocus(path[depth]);
+			relayout(-1, D_VALUE);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	protected boolean vertical() {
+		return true;
+	}
+
+	@Override
+	protected boolean onEscape() {
+		boolean was = mode != CALENDAR && is(-1, OPEN);
+		setOpen(false);
+		return was;
+	}
+
+	@Override
+	protected void onWheel(int delta) {
+		scrollTo(scroll + (long) delta * itemExtent);
+	}
+}

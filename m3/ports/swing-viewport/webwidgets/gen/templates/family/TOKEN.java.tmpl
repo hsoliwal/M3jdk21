@@ -71,7 +71,7 @@ public class M3TokenModel extends M3WebModel implements M3TokenApi {
 	/** Upper-case first letters of the first two words. */
 	public static String initials(String name) {
 		StringBuilder b = new StringBuilder(2);
-		for (String w : name.trim().split("\\s+")) {
+		for (String w : (name == null ? "" : name).trim().split("\\s+")) {
 			if (!w.isEmpty() && b.length() < 2) {
 				b.append(Character.toUpperCase(w.charAt(0)));
 			}
@@ -174,7 +174,7 @@ public class M3TokenModel extends M3WebModel implements M3TokenApi {
 
 	private void emitCaptcha(M3WebPaint p, int i, int x, int y, int w, int h) {
 		surface(p, i, x, y, w, h);
-		int seed = text[i].hashCode();
+		int seed = text[i] == null ? 0 : text[i].hashCode();
 		for (int k = 0; k < 3; k++, seed = seed * 1103515245 + 12345) {
 			p.line(x, y + Math.floorMod(seed >> 8, h), x + w, y + Math.floorMod(seed >> 16, h), theme.slot(M3WebTheme.MUTED));
 		}

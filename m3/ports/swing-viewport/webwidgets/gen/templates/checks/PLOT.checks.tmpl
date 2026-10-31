@@ -1,0 +1,38 @@
+package @PKG@;
+
+import static @PKG@.M3WebChecks.check;
+import static @PKG@.M3WebStates.*;
+
+/** Family contract of the painted value arrays (pattern M3P-PLOT-1). */
+public final class M3PlotChecks {
+	private M3PlotChecks() {
+	}
+
+	public static void run(M3PlotModel m) {
+		m.layout(360, 200);
+		M3WebPaint p = new M3WebPaint();
+		check(m.maxValue() >= 1, "max");
+		check(m.module(0, 0) && !m.module(1, 1) && m.module(3, 3), "finder pattern");
+		check(m.module(20, 20) == m.module(20, 20), "data modules are deterministic");
+		m.paint(p);
+		check(p.count() > 0, "plot paints");
+		check(m.accessibleName(0).contains(":") && m.accessibleName(-1) != null, "values are announced");
+		for (int i = 0; i < 80; i++) {
+			m.add(null);
+			m.setValue(m.count() - 1, i % 9);
+			m.setAux(m.count() - 1, 2);
+		}
+		m.layout(360, 200);
+		m.setFocus(m.count() - 1);
+		m.paint(p);
+		m.setFocus(0);
+		m.pointer(P_WHEEL, 0, 3, 0);
+		m.paint(p);
+		m.setRtl(true);
+		m.paint(p);
+		m.setRtl(false);
+		m.load("0;0");
+		m.layout(360, 200);
+		m.paint(p);
+	}
+}

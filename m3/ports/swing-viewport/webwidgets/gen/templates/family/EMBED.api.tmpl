@@ -1,0 +1,23 @@
+package @PKG@;
+
+/** API of the facades over real elements (pattern M3P-EMBED-1). */
+public interface M3EmbedApi extends M3WebApi {
+	/** Replaces the content: {@code source~seconds} (video), a URL, {@code lat,lon~zoom}, files {@code name~percent}, or markdown lines. */
+	void load(String sample);
+
+	/** Parses markdown into blocks (headings, bullets, code, paragraphs). */
+	void markdown(String source);
+
+	boolean isPlaying();
+
+	void play(boolean playing);
+
+	/** Media position in seconds, clamped to the duration. */
+	void seek(int seconds);
+
+	/** Map pan in pixels. */
+	void pan(int dx, int dy);
+
+	/** Map zoom step (1..20). */
+	void zoom(int delta);
+}

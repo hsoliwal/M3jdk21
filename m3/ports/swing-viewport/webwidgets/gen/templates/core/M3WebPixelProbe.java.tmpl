@@ -1,0 +1,46 @@
+package @PKG@;
+
+/**
+ * Picks a pixel the display list fully determines (pattern M3P-CORE-1): the last solid fill record
+ * (RECT, ROUND, OVAL) whose centre lies inside the widget and is not inside any later record's box.
+ * Both toolkits' probes sample that pixel from a real render and compare it to the record's colour.
+ */
+public final class M3WebPixelProbe {
+	private M3WebPixelProbe() {
+	}
+
+	/** Returns {x, y, rgb} of a determined pixel, or an empty array when the list has none. */
+	public static int[] probe(M3WebModel m, int width, int height) {
+		M3WebPaint p = new M3WebPaint();
+		m.paint(p);
+		for (int i = p.count() - 1; i >= 0; i--) {
+			int op = p.get(i, M3WebPaint.F_OP);
+			int x = p.get(i, M3WebPaint.F_X) + p.get(i, M3WebPaint.F_W) / 2, y = p.get(i, M3WebPaint.F_Y) + p.get(i, M3WebPaint.F_H) / 2;
+			boolean solid = (op == M3WebPaint.RECT || op == M3WebPaint.ROUND || op == M3WebPaint.OVAL) && p.get(i, M3WebPaint.F_W) >= 6
+					&& p.get(i, M3WebPaint.F_H) >= 6;
+			if (solid && x > 0 && y > 0 && x < width - 1 && y < height - 1 && !coveredLater(p, i, x, y)) {
+				return new int[] { x, y, p.get(i, M3WebPaint.F_RGB) };
+			}
+		}
+		return new int[0];
+	}
+
+	private static boolean coveredLater(M3WebPaint p, int record, int x, int y) {
+		for (int k = record + 1; k < p.count(); k++) {
+			if (p.intersects(k, x - 2, y - 2, 4, 4)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/** True when two packed RGB values differ by at most {@code tolerance} per channel. */
+	public static boolean close(int a, int b, int tolerance) {
+		for (int s = 0; s <= 16; s += 8) {
+			if (Math.abs((a >> s & 255) - (b >> s & 255)) > tolerance) {
+				return false;
+			}
+		}
+		return true;
+	}
+}

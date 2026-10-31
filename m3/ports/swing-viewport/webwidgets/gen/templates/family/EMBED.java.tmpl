@@ -1,0 +1,257 @@
+package @PKG@;
+
+import static @PKG@.M3WebStates.*;
+
+/**
+ * Facades over real elements (pattern M3P-EMBED-1, aspects D+P): a media surface with a painted control
+ * strip on the OVERLAY plane, a web view placeholder with its address, map tiles with pan and zoom, an
+ * upload drop zone with per-file progress, and markdown blocks parsed into the item lanes. The native
+ * element itself (video, browser) is the one exception to the one-Canvas rule. Members: video-player,
+ * web-view, map, file-upload, markdown-render.
+ */
+public class M3EmbedModel extends M3WebModel implements M3EmbedApi {
+	public static final int VIDEO = 0, WEB = 1, MAP = 2, UPLOAD = 3, MARKDOWN = 4;
+	public static final int PARAGRAPH = 0, HEADING = 1, BULLET = 2, CODE = 3;
+	private int panX, panY, clock;
+
+	public M3EmbedModel(String concept, int role, int mode, int shape, int variant) {
+		super(concept, role, mode, shape, variant);
+	}
+
+	@Override
+	public int aspects() {
+		return A_D | A_P;
+	}
+
+	@Override
+	public void load(String sample) {
+		clear();
+		if (mode == MARKDOWN) {
+			markdown(sample.replace(";", "\n"));
+			return;
+		}
+		for (String s : sample.split(";")) {
+			String[] f = s.split("~", -1);
+			int i = add(f[0]);
+			setValue(i, f.length > 1 ? M3WebStates.parse(f[1]) : mode == MAP ? 12 : 0);
+		}
+	}
+
+	/** Parses markdown lines into blocks: kind in aux, heading level in value. TODO M3P-EMBED-1: inline runs, links, tables. */
+	@Override
+	public void markdown(String source) {
+		clear();
+		boolean code = false;
+		for (String line : source.split("\n", -1)) {
+			if (line.startsWith("```")) {
+				code = !code;
+				continue;
+			}
+			int level = 0;
+			while (!code && level < line.length() && level < 6 && line.charAt(level) == '#') {
+				level++;
+			}
+			boolean bullet = !code && (line.startsWith("- ") || line.startsWith("* "));
+			if (line.isBlank() && !code) {
+				continue;
+			}
+			int i = add(code ? line : level > 0 ? line.substring(level).trim() : bullet ? line.substring(2) : line);
+			setAux(i, code ? CODE : level > 0 ? HEADING : bullet ? BULLET : PARAGRAPH);
+			setValue(i, level);
+		}
+	}
+
+	@Override
+	public boolean isPlaying() {
+		return is(-1, CHECKED);
+	}
+
+	@Override
+	public void play(boolean on) {
+		setState(-1, CHECKED, on && count > 0);
+		if (isPlaying()) {
+			animate();
+		}
+	}
+
+	@Override
+	public void seek(int seconds) {
+		if (count > 0) {
+			setAux(0, Math.max(0, Math.min(value[0], seconds)));
+		}
+	}
+
+	@Override
+	public void pan(int dx, int dy) {
+		panX += dx;
+		panY += dy;
+		damageAll();
+		fire(-1, D_SCROLL);
+	}
+
+	@Override
+	public void zoom(int delta) {
+		if (count > 0) {
+			setValue(0, Math.max(1, Math.min(20, value[0] + delta)));
+		}
+	}
+
+	/** Height of the control strip (OVERLAY plane). */
+	protected int controls() {
+		return rowHeight() + pad();
+	}
+
+	@Override
+	protected void doLayout() {
+		int y = mode == UPLOAD ? 3 * rowHeight() + gap() : 0;
+		for (int i = 0; i < count; i++) {
+			int h = mode == MARKDOWN ? blockHeight(i) : mode == UPLOAD ? rowHeight() + 8 : height;
+			setRect(i, 0, y, width, mode == VIDEO || mode == WEB || mode == MAP ? height : h);
+			y += mode == MARKDOWN || mode == UPLOAD ? h + gap() / 2 : 0;
+		}
+		setPlane(OVERLAY, 0, height - controls(), width, controls());
+	}
+
+	private int blockHeight(int i) {
+		return aux[i] == HEADING ? rowHeight() + (6 - Math.min(5, value[i])) * 3 : aux[i] == CODE ? font() + 8 : font() + 10;
+	}
+
+	@Override
+	protected void emit(M3WebPaint p) {
+		switch (mode) {
+		case VIDEO: video(p); break;
+		case WEB: web(p); break;
+		case MAP: tiles(p); break;
+		case UPLOAD: upload(p); break;
+		default: blocks(p);
+		}
+	}
+
+	/** Poster surface and control strip. TODO M3P-EMBED-1: host the native media element (SWT Browser video, Swing media bridge). */
+	private void video(M3WebPaint p) {
+		p.rect(0, 0, width, height, 0x000000);
+		if (count == 0) {
+			return;
+		}
+		p.text(0, 0, width, height - controls(), 0xffffff, font() | M3WebPaint.CENTER, text[0]);
+		p.translate(plane(OVERLAY, 4), plane(OVERLAY, 5));
+		int y = plane(OVERLAY, 1), c = controls(), track = Math.max(1, width - 3 * c);
+		p.rect(0, y, width, c, M3WebTheme.mix(0x000000, 0xffffff, 75));
+		M3WebGlyphs.glyph(p, isPlaying() ? M3WebGlyphs.I_MENU : M3WebGlyphs.I_NEXT, 0, y, c, 0xffffff);
+		p.rect(c, y + c / 2 - 2, track, 4, 0x555555);
+		p.rect(c, y + c / 2 - 2, value[0] == 0 ? 0 : (int) ((long) track * aux[0] / value[0]), 4, theme.slot(M3WebTheme.ACCENT));
+		p.text(c + track, y, 2 * c, c, 0xffffff, Math.max(9, font() - 2) | M3WebPaint.CENTER, clock(aux[0]) + "/" + clock(value[0]));
+		p.translate(0, 0);
+	}
+
+	/** m:ss of a second count. */
+	public static String clock(int seconds) {
+		return seconds / 60 + ":" + (seconds % 60 < 10 ? "0" : "") + seconds % 60;
+	}
+
+	/** Address bar and placeholder. TODO M3P-EMBED-1: host the native SWT Browser / Swing browser bridge in the body rect. */
+	private void web(M3WebPaint p) {
+		int c = controls();
+		p.rect(0, 0, width, c, theme.slot(M3WebTheme.SURFACE));
+		p.round(pad(), 4, width - 2 * pad(), c - 8, (c - 8) / 2, theme.slot(M3WebTheme.BG));
+		p.text(2 * pad(), 4, width - 4 * pad(), c - 8, theme.slot(M3WebTheme.FG), font() | (rtl ? M3WebPaint.RIGHT : 0), count > 0 ? text[0] : "");
+		muted(p, "web view (native Browser element)", 0, c, width, height - c, M3WebPaint.CENTER);
+	}
+
+	private void tiles(M3WebPaint p) {
+		int t = 64 + (count > 0 ? value[0] * 4 : 0), ox = Math.floorMod(panX, t), oy = Math.floorMod(panY, t);
+		int line = theme.slot(M3WebTheme.BORDER);
+		p.rect(0, 0, width, height, M3WebTheme.mix(theme.slot(M3WebTheme.SUCCESS), theme.slot(M3WebTheme.SURFACE), 12));
+		for (int x = ox - t; x < width; x += t) {
+			p.line(x, 0, x, height, line);
+		}
+		for (int y = oy - t; y < height; y += t) {
+			p.line(0, y, width, y, line);
+		}
+		p.oval(width / 2 - 6 + panX % t / 8, height / 2 - 6, 12, 12, theme.slot(M3WebTheme.DANGER));
+		muted(p, count > 0 ? text[0] + " z" + value[0] : "", pad(), height - rowHeight(), width - 2 * pad(), rowHeight(), 0);
+	}
+
+	private void upload(M3WebPaint p) {
+		int zone = 3 * rowHeight(), st = widgetFlags & (HOVER | FOCUS | DRAGGING);
+		p.round(0, 0, width, zone, radius(), M3WebTheme.mix(theme.slot(M3WebTheme.ACCENT), theme.slot(M3WebTheme.SURFACE), (st & DRAGGING) != 0 ? 20 : 5));
+		p.roundLine(0, 0, width, zone, radius(), theme.line(V_OUTLINE, st));
+		M3WebGlyphs.glyph(p, M3WebGlyphs.I_UP, width / 2 - rowHeight() / 2, pad() / 2, rowHeight(), theme.slot(M3WebTheme.ACCENT));
+		muted(p, "Drop files or press Enter", 0, rowHeight() + pad() / 2, width, rowHeight(), M3WebPaint.CENTER);
+		for (int i = 0; i < count; i++) {
+			int b = i * 4, done = Math.max(0, Math.min(100, value[i]));
+			label(p, i, text[i], rects[b] + pad(), rects[b + 1], rects[b + 2] - 2 * pad(), rects[b + 3] - 6, 0);
+			p.rect(rects[b] + pad(), rects[b + 1] + rects[b + 3] - 5, (rects[b + 2] - 2 * pad()) * done / 100, 3,
+					theme.slot(done == 100 ? M3WebTheme.SUCCESS : M3WebTheme.ACCENT));
+		}
+	}
+
+	private void blocks(M3WebPaint p) {
+		for (int i = 0; i < count; i++) {
+			int b = i * 4, x = rects[b], y = rects[b + 1], w = rects[b + 2], h = rects[b + 3];
+			switch (aux[i]) {
+			case HEADING: p.text(x, y, w, h, theme.slot(M3WebTheme.FG), Math.min(255, font() + (6 - Math.min(5, value[i])) * 2) | M3WebPaint.BOLD | (rtl ? M3WebPaint.RIGHT : 0), text[i]); break;
+			case BULLET: p.oval(rtl ? x + w - 8 : x + 4, y + h / 2 - 2, 4, 4, theme.slot(M3WebTheme.FG));
+				label(p, i, text[i], rtl ? x : x + 14, y, w - 14, h, 0); break;
+			case CODE: p.rect(x, y, w, h, M3WebTheme.mix(theme.slot(M3WebTheme.FG), theme.slot(M3WebTheme.SURFACE), 7));
+				p.text(x + pad(), y, w - 2 * pad(), h, theme.slot(M3WebTheme.FG), font() | M3WebPaint.MONO, text[i]); break;
+			default: label(p, i, text[i], x, y, w, h, 0);
+			}
+		}
+	}
+
+	@Override
+	protected boolean onKey(int key, int ch, int mods) {
+		if (mode == VIDEO && (key == KEY_SPACE || key == KEY_ENTER)) {
+			play(!isPlaying());
+			return true;
+		}
+		if (mode == VIDEO && (key == KEY_LEFT || key == KEY_RIGHT) && count > 0) {
+			seek(aux[0] + ((key == KEY_RIGHT) != rtl ? 5 : -5));
+			return true;
+		}
+		return mode == MAP && mapKey(key);
+	}
+
+	private boolean mapKey(int key) {
+		switch (key) {
+		case KEY_LEFT: pan(32, 0); return true;
+		case KEY_RIGHT: pan(-32, 0); return true;
+		case KEY_UP: pan(0, 32); return true;
+		case KEY_DOWN: pan(0, -32); return true;
+		case KEY_PAGE_UP: zoom(1); return true;
+		case KEY_PAGE_DOWN: zoom(-1); return true;
+		default: return false;
+		}
+	}
+
+	@Override
+	protected void onWheel(int delta) {
+		if (mode == MAP) {
+			zoom(-delta);
+		}
+	}
+
+	@Override
+	public void pointer(int kind, int x, int y, int mods) {
+		if (mode == UPLOAD && kind == P_UP && y < 3 * rowHeight()) {
+			fire(-1, D_ACTION);
+		}
+		super.pointer(kind, x, y, mods);
+	}
+
+	@Override
+	protected boolean advance(int ms) {
+		clock += ms;
+		phase = (phase + ms) % 1000;
+		if (clock >= 1000 && count > 0) {
+			clock -= 1000;
+			seek(aux[0] + 1);
+		}
+		boolean more = isPlaying() && count > 0 && aux[0] < value[0];
+		if (!more) {
+			setState(-1, CHECKED, false);
+		}
+		return more;
+	}
+}

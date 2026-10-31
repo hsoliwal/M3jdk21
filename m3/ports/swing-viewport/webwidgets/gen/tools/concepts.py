@@ -63,6 +63,26 @@ def best_concept(name, aliases, tokens):
     return ([], "T3_NON_WIDGET") if words & NON_WIDGET else ([], "UNMAPPED")
 
 
+PREFIXES = ("Gtk", "Gdk", "Wx", "wx", "Fl_", "lv_", "Ion", "Mud", "Kendo", "Md", "Mat", "El", "Ant", "Rad", "Sf", "Dx", "Ui", "UI", "V", "Q", "N", "T", "Ons", "F7")
+
+
+def best_with_fallbacks(name, path, aliases, tokens):
+    cs, tier = best_concept(name, aliases, tokens)
+    if cs or tier == "T3_NON_WIDGET":
+        return cs, tier
+    for pre in PREFIXES:
+        rest = name[len(pre):]
+        if name.startswith(pre) and rest and (rest[0].isupper() or pre.endswith("_")):
+            cs2, t2 = best_concept(rest, aliases, tokens)
+            if cs2:
+                return cs2, "T4_PREFIX"
+    for seg in reversed(path.split("/")[:-1]):
+        cs3, t3 = best_concept(seg, aliases, tokens)
+        if cs3 and t3 in ("T1_ALIAS", "T2_WORD"):
+            return cs3, "T5_PATH"
+    return cs, tier
+
+
 def verify(existing, nebula, swt, jdk, m3port=frozenset()):
     if not existing or existing == "-":
         return ""
@@ -92,11 +112,15 @@ def main():
     m3port = {l.strip() for l in open(os.path.join(inp, "M3PORT.txt"))}
     swingx = sorted(set(open(os.path.join(inp, "SWINGX.txt")).read().split()))
     comps = tsv(os.path.join(inp, "UNIVERSE_COMPONENTS.tsv"))
+    add = os.path.join(inp, "HARVEST_ADDENDUM.tsv")
+    harvested = len(comps)
+    if os.path.exists(add):
+        comps += tsv(add)
     per = collections.Counter()
     with open(os.path.join(out, "COMPONENT_CONCEPTS.tsv"), "w", encoding="utf-8", newline="\n") as w:
         w.write("repo\tcomponent\tpath\tconcept\tfamily\tall_concepts\n")
         for r in comps:
-            cs, tier = best_concept(r["component"], aliases, tokens)
+            cs, tier = best_with_fallbacks(r["component"], r["path"], aliases, tokens)
             c = cs[0] if cs else ("NON_WIDGET" if tier == "T3_NON_WIDGET" else "UNMAPPED")
             per[c] += 1
             fam = members[c]["family"] if c in members else ""
@@ -118,6 +142,7 @@ def main():
                    s["needs_input_events"], s["superset_form"]]
             w.write("\t".join(row) + "\n")
     mapped = sum(v for k, v in per.items() if k != "UNMAPPED")
+    print("harvest", harvested, "addendum", len(comps) - harvested)
     print("concepts", len(order), "components", len(comps), "mapped", mapped - per["NON_WIDGET"], "non_widget", per["NON_WIDGET"], "unmapped", per["UNMAPPED"])
     print("families", dict(collections.Counter(members[c]["family"] for c in order)))
     print("nebula GENERATE", sum(1 for c in order if not members[c]["nebula_existing"]), "swing GENERATE",

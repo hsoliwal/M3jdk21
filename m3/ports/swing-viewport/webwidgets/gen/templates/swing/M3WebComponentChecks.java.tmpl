@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 
 import javax.accessibility.AccessibleContext;
 
+import @PKG@.M3WebPixelProbe;
 import @PKG@.M3WebStates;
 
 /**
@@ -27,6 +28,7 @@ public final class M3WebComponentChecks {
 		check(c.getPreferredSize().width > 0, "preferred size");
 		BufferedImage img = paint(c);
 		check(img.getRGB(0, 0) != 0 || c.getModel().count() == 0, "painted background");
+		pixel(c);
 		events(c);
 		AccessibleContext ac = c.getAccessibleContext();
 		check(ac.getAccessibleRole() != null && ac.getAccessibleName() != null && ac == c.getAccessibleContext(), "accessible");
@@ -54,6 +56,23 @@ public final class M3WebComponentChecks {
 		c.setPartVisible(false);
 		c.getModel().setState(-1, M3WebStates.ERROR, true);
 		c.setPartVisible(true);
+	}
+
+	/**
+	 * Pixel probe (offscreen): the last fill record whose centre no later record covers must show its colour
+	 * in the rendered body plane (tolerance 24 per channel for anti-aliasing).
+	 */
+	public static void pixel(M3WebComponent<?> c) {
+		c.getModel().layout(c.getWidth(), c.getHeight());
+		BufferedImage img = new BufferedImage(c.getWidth(), c.getHeight(), BufferedImage.TYPE_INT_RGB);
+		java.awt.Graphics2D g = img.createGraphics();
+		c.paint(g);
+		g.dispose();
+		int[] probe = M3WebPixelProbe.probe(c.getModel(), c.getWidth(), c.getHeight());
+		if (probe.length == 3) {
+			check(M3WebPixelProbe.close(img.getRGB(probe[0], probe[1]), probe[2], 24),
+					"pixel at " + probe[0] + "," + probe[1] + " is " + Integer.toHexString(img.getRGB(probe[0], probe[1]) & 0xffffff) + " not " + Integer.toHexString(probe[2]));
+		}
 	}
 
 	/** Paints offscreen with a clip and without one. */

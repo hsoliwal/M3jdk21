@@ -1690,9 +1690,9 @@ openjdk/jfx	SelectionModel	modules/javafx.controls/src/main/java/javafx/scene/co
 openjdk/jfx	Separator	modules/javafx.controls/src/main/java/javafx/scene/control/Separator.java	divider	TOKEN	T1_ALIAS	divider
 openjdk/jfx	SeparatorMenuItem	modules/javafx.controls/src/main/java/javafx/scene/control/SeparatorMenuItem.java	divider	TOKEN	T1_ALIAS	divider;menu
 openjdk/jfx	SingleSelectionModel	modules/javafx.controls/src/main/java/javafx/scene/control/SingleSelectionModel.java	select	PICKER	T1_ALIAS	select
-openjdk/jfx	Skin	modules/javafx.controls/src/main/java/javafx/scene/control/Skin.java	UNMAPPED		UNMAPPED	
+openjdk/jfx	Skin	modules/javafx.controls/src/main/java/javafx/scene/control/Skin.java	layout-primitive	CONTAINER	T5_PATH	layout-primitive
 openjdk/jfx	SkinBase	modules/javafx.controls/src/main/java/javafx/scene/control/SkinBase.java	NON_WIDGET		T3_NON_WIDGET	
-openjdk/jfx	Skinnable	modules/javafx.controls/src/main/java/javafx/scene/control/Skinnable.java	UNMAPPED		UNMAPPED	
+openjdk/jfx	Skinnable	modules/javafx.controls/src/main/java/javafx/scene/control/Skinnable.java	layout-primitive	CONTAINER	T5_PATH	layout-primitive
 openjdk/jfx	Slider	modules/javafx.controls/src/main/java/javafx/scene/control/Slider.java	slider	SEGMENTS	T1_ALIAS	slider
 openjdk/jfx	SortEvent	modules/javafx.controls/src/main/java/javafx/scene/control/SortEvent.java	NON_WIDGET		T3_NON_WIDGET	
 openjdk/jfx	Spinner	modules/javafx.controls/src/main/java/javafx/scene/control/Spinner.java	number-input	INPUT	T1_ALIAS	number-input
@@ -4872,10 +4872,10 @@ GeekyAnts/NativeBase	View	src/components/primitives/View/index.tsx	layout-primit
 GeekyAnts/NativeBase	VisuallyHidden	src/components/primitives/VisuallyHidden/index.tsx	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive
 GeekyAnts/NativeBase	ZStack	src/components/primitives/ZStack/index.tsx	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive
 tamagui/tamagui	accordion	code/ui/accordion/package.json	accordion	CONTAINER	T1_ALIAS	accordion
-tamagui/tamagui	adapt	code/ui/adapt/package.json	UNMAPPED		UNMAPPED	
+tamagui/tamagui	adapt	code/ui/adapt/package.json	code-block	TOKEN	T5_PATH	code-block
 tamagui/tamagui	alert-dialog	code/ui/alert-dialog/package.json	dialog	OVERLAY	T1_ALIAS	dialog;alert-banner
 tamagui/tamagui	animate-presence	code/ui/animate-presence/package.json	transition-anim	ANIMVALUE	T2_WORD	transition-anim
-tamagui/tamagui	animate	code/ui/animate/package.json	UNMAPPED		UNMAPPED	
+tamagui/tamagui	animate	code/ui/animate/package.json	code-block	TOKEN	T5_PATH	code-block
 tamagui/tamagui	avatar	code/ui/avatar/package.json	avatar	TOKEN	T1_ALIAS	avatar
 tamagui/tamagui	button	code/ui/button/package.json	button	COMMANDS	T1_ALIAS	button
 tamagui/tamagui	card	code/ui/card/package.json	card	CONTAINER	T1_ALIAS	card
@@ -4883,7 +4883,7 @@ tamagui/tamagui	checkbox-headless	code/ui/checkbox-headless/package.json	checkbo
 tamagui/tamagui	checkbox	code/ui/checkbox/package.json	checkbox	TOKEN	T1_ALIAS	checkbox
 tamagui/tamagui	collapsible	code/ui/collapsible/package.json	accordion	CONTAINER	T1_ALIAS	accordion
 tamagui/tamagui	collection	code/ui/collection/package.json	list	COLLECTION	T2_WORD	list
-tamagui/tamagui	components-test	code/ui/components-test/package.json	UNMAPPED		UNMAPPED	
+tamagui/tamagui	components-test	code/ui/components-test/package.json	code-block	TOKEN	T5_PATH	code-block
 tamagui/tamagui	context-menu	code/ui/context-menu/package.json	context-menu	COMMANDS	T1_ALIAS	context-menu;menu
 tamagui/tamagui	create-menu	code/ui/create-menu/package.json	menu	COMMANDS	T1_ALIAS	menu
 tamagui/tamagui	dialog	code/ui/dialog/package.json	dialog	OVERLAY	T1_ALIAS	dialog
@@ -4891,7 +4891,7 @@ tamagui/tamagui	dismissable	code/ui/dismissable/package.json	popover	OVERLAY	T2_
 tamagui/tamagui	field	code/ui/field/package.json	text-input	INPUT	T2_WORD	text-input
 tamagui/tamagui	focus-guard	code/ui/focus-guard/package.json	focus-trap	OVERLAY	T2_WORD	focus-trap
 tamagui/tamagui	focus-scope	code/ui/focus-scope/package.json	focus-trap	OVERLAY	T2_WORD	focus-trap
-tamagui/tamagui	focusable	code/ui/focusable/package.json	UNMAPPED		UNMAPPED	
+tamagui/tamagui	focusable	code/ui/focusable/package.json	code-block	TOKEN	T5_PATH	code-block
 tamagui/tamagui	form	code/ui/form/package.json	layout-primitive	CONTAINER	T2_WORD	layout-primitive
 tamagui/tamagui	group	code/ui/group/package.json	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive;panel
 tamagui/tamagui	image	code/ui/image/package.json	image	EMBED	T1_ALIAS	image
@@ -4912,7 +4912,7 @@ tamagui/tamagui	roving-focus	code/ui/roving-focus/package.json	focus-trap	OVERLA
 tamagui/tamagui	scroll-view	code/ui/scroll-view/package.json	scroll	COLLECTION	T1_ALIAS	scroll
 tamagui/tamagui	select	code/ui/select/package.json	select	PICKER	T1_ALIAS	select
 tamagui/tamagui	separator	code/ui/separator/package.json	divider	TOKEN	T1_ALIAS	divider
-tamagui/tamagui	shapes	code/ui/shapes/package.json	UNMAPPED		UNMAPPED	
+tamagui/tamagui	shapes	code/ui/shapes/package.json	code-block	TOKEN	T5_PATH	code-block
 tamagui/tamagui	sheet	code/ui/sheet/package.json	bottom-sheet	OVERLAY	T1_ALIAS	bottom-sheet;sheet-dialog
 tamagui/tamagui	slider	code/ui/slider/package.json	slider	SEGMENTS	T1_ALIAS	slider
 tamagui/tamagui	spacer	code/ui/spacer/package.json	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive
@@ -4922,7 +4922,7 @@ tamagui/tamagui	switch-headless	code/ui/switch-headless/package.json	switch	TOKE
 tamagui/tamagui	switch	code/ui/switch/package.json	switch	TOKEN	T1_ALIAS	switch
 tamagui/tamagui	tabs-headless	code/ui/tabs-headless/package.json	tabs	SEGMENTS	T1_ALIAS	tabs
 tamagui/tamagui	tabs	code/ui/tabs/package.json	tabs	SEGMENTS	T1_ALIAS	tabs
-tamagui/tamagui	tamagui	code/ui/tamagui/package.json	UNMAPPED		UNMAPPED	
+tamagui/tamagui	tamagui	code/ui/tamagui/package.json	code-block	TOKEN	T5_PATH	code-block
 tamagui/tamagui	text-test	code/ui/text-test/package.json	label	TOKEN	T2_WORD	label
 tamagui/tamagui	text	code/ui/text/package.json	label	TOKEN	T2_WORD	label
 tamagui/tamagui	toast	code/ui/toast/package.json	toast	OVERLAY	T1_ALIAS	toast
@@ -5300,7 +5300,7 @@ dotnet/maui	XamlParseException	src/Controls/src/Core/XamlParseException.cs	UNMAP
 dotnet/maui	XmlLineInfo	src/Controls/src/Core/XmlLineInfo.cs	alert-banner	CONTAINER	T2_WORD	alert-banner;divider
 dotnet/maui	XmlnsDefinitionAttribute	src/Controls/src/Core/XmlnsDefinitionAttribute.cs	NON_WIDGET		T3_NON_WIDGET	
 dotnet/maui	XmlnsPrefixAttribute	src/Controls/src/Core/XmlnsPrefixAttribute.cs	NON_WIDGET		T3_NON_WIDGET	
-dotnet/winforms	Appearance	src/System.Windows.Forms/System/Windows/Forms/Controls/Buttons/Appearance.cs	UNMAPPED		UNMAPPED	
+dotnet/winforms	Appearance	src/System.Windows.Forms/System/Windows/Forms/Controls/Buttons/Appearance.cs	button	COMMANDS	T5_PATH	button
 dotnet/winforms	ApplicableToButtonAttribute	src/System.Windows.Forms/System/Windows/Forms/Controls/Buttons/ApplicableToButtonAttribute.cs	button	COMMANDS	T1_ALIAS	button
 dotnet/winforms	Button	src/System.Windows.Forms/System/Windows/Forms/Controls/Buttons/Button.cs	button	COMMANDS	T1_ALIAS	button
 dotnet/winforms	ButtonBase	src/System.Windows.Forms/System/Windows/Forms/Controls/Buttons/ButtonBase.cs	button	COMMANDS	T1_ALIAS	button
@@ -5517,7 +5517,7 @@ dotnet/winforms	DateBoldEventArgs	src/System.Windows.Forms/System/Windows/Forms/
 dotnet/winforms	DateBoldEventHandler	src/System.Windows.Forms/System/Windows/Forms/Controls/MonthCalendar/DateBoldEventHandler.cs	date-picker	PICKER	T2_WORD	date-picker
 dotnet/winforms	DateRangeEventArgs	src/System.Windows.Forms/System/Windows/Forms/Controls/MonthCalendar/DateRangeEventArgs.cs	date-range	PICKER	T1_ALIAS	date-range;slider
 dotnet/winforms	DateRangeEventHandler	src/System.Windows.Forms/System/Windows/Forms/Controls/MonthCalendar/DateRangeEventHandler.cs	date-range	PICKER	T1_ALIAS	date-range;slider
-dotnet/winforms	Day	src/System.Windows.Forms/System/Windows/Forms/Controls/MonthCalendar/Day.cs	UNMAPPED		UNMAPPED	
+dotnet/winforms	Day	src/System.Windows.Forms/System/Windows/Forms/Controls/MonthCalendar/Day.cs	calendar	PICKER	T5_PATH	calendar
 dotnet/winforms	HitArea	src/System.Windows.Forms/System/Windows/Forms/Controls/MonthCalendar/HitArea.cs	layout-primitive	CONTAINER	T2_WORD	layout-primitive
 dotnet/winforms	MonthCalendar	src/System.Windows.Forms/System/Windows/Forms/Controls/MonthCalendar/MonthCalendar.cs	calendar	PICKER	T1_ALIAS	calendar
 dotnet/winforms	SelectionRange	src/System.Windows.Forms/System/Windows/Forms/Controls/MonthCalendar/SelectionRange.cs	select	PICKER	T1_ALIAS	select;slider
@@ -5564,7 +5564,7 @@ dotnet/winforms	TabDrawMode	src/System.Windows.Forms/System/Windows/Forms/Contro
 dotnet/winforms	TabPage	src/System.Windows.Forms/System/Windows/Forms/Controls/TabControl/TabPage.cs	tabs	SEGMENTS	T1_ALIAS	tabs
 dotnet/winforms	TabRenderer	src/System.Windows.Forms/System/Windows/Forms/Controls/TabControl/TabRenderer.cs	tabs	SEGMENTS	T1_ALIAS	tabs
 dotnet/winforms	TabSizeMode	src/System.Windows.Forms/System/Windows/Forms/Controls/TabControl/TabSizeMode.cs	tabs	SEGMENTS	T1_ALIAS	tabs
-dotnet/winforms	CharacterCasing	src/System.Windows.Forms/System/Windows/Forms/Controls/TextBox/CharacterCasing.cs	UNMAPPED		UNMAPPED	
+dotnet/winforms	CharacterCasing	src/System.Windows.Forms/System/Windows/Forms/Controls/TextBox/CharacterCasing.cs	text-input	INPUT	T5_PATH	text-input;layout-primitive
 dotnet/winforms	InsertKeyMode	src/System.Windows.Forms/System/Windows/Forms/Controls/TextBox/InsertKeyMode.cs	NON_WIDGET		T3_NON_WIDGET	
 dotnet/winforms	MaskFormat	src/System.Windows.Forms/System/Windows/Forms/Controls/TextBox/MaskFormat.cs	text-input	INPUT	T2_WORD	text-input
 dotnet/winforms	MaskInputRejectedEventArgs	src/System.Windows.Forms/System/Windows/Forms/Controls/TextBox/MaskInputRejectedEventArgs.cs	text-input	INPUT	T1_ALIAS	text-input
@@ -5580,12 +5580,12 @@ dotnet/winforms	ArrowDirection	src/System.Windows.Forms/System/Windows/Forms/Con
 dotnet/winforms	CachedItemHdcInfo	src/System.Windows.Forms/System/Windows/Forms/Controls/ToolStrips/CachedItemHdcInfo.cs	alert-banner	CONTAINER	T2_WORD	alert-banner;list
 dotnet/winforms	CaptionButton	src/System.Windows.Forms/System/Windows/Forms/Controls/ToolStrips/CaptionButton.cs	button	COMMANDS	T1_ALIAS	button
 dotnet/winforms	ISupportToolStripPanel	src/System.Windows.Forms/System/Windows/Forms/Controls/ToolStrips/ISupportToolStripPanel.cs	panel	CONTAINER	T1_ALIAS	panel
-dotnet/winforms	MergeAction	src/System.Windows.Forms/System/Windows/Forms/Controls/ToolStrips/MergeAction.cs	UNMAPPED		UNMAPPED	
-dotnet/winforms	MergeHistory	src/System.Windows.Forms/System/Windows/Forms/Controls/ToolStrips/MergeHistory.cs	UNMAPPED		UNMAPPED	
+dotnet/winforms	MergeAction	src/System.Windows.Forms/System/Windows/Forms/Controls/ToolStrips/MergeAction.cs	toolbar	COMMANDS	T5_PATH	toolbar
+dotnet/winforms	MergeHistory	src/System.Windows.Forms/System/Windows/Forms/Controls/ToolStrips/MergeHistory.cs	toolbar	COMMANDS	T5_PATH	toolbar
 dotnet/winforms	MergeHistoryItem	src/System.Windows.Forms/System/Windows/Forms/Controls/ToolStrips/MergeHistoryItem.cs	list	COLLECTION	T2_WORD	list
 dotnet/winforms	OpacityConverter	src/System.Windows.Forms/System/Windows/Forms/Controls/ToolStrips/OpacityConverter.cs	NON_WIDGET		T3_NON_WIDGET	
 dotnet/winforms	ProfessionalColorTable	src/System.Windows.Forms/System/Windows/Forms/Controls/ToolStrips/ProfessionalColorTable.cs	table	COLLECTION	T1_ALIAS	table
-dotnet/winforms	ProfessionalColors	src/System.Windows.Forms/System/Windows/Forms/Controls/ToolStrips/ProfessionalColors.cs	UNMAPPED		UNMAPPED	
+dotnet/winforms	ProfessionalColors	src/System.Windows.Forms/System/Windows/Forms/Controls/ToolStrips/ProfessionalColors.cs	toolbar	COMMANDS	T5_PATH	toolbar
 dotnet/winforms	StatusStrip	src/System.Windows.Forms/System/Windows/Forms/Controls/ToolStrips/StatusStrip.cs	badge	TOKEN	T2_WORD	badge;toolbar
 dotnet/winforms	ToolStrip	src/System.Windows.Forms/System/Windows/Forms/Controls/ToolStrips/ToolStrip.cs	toolbar	COMMANDS	T2_WORD	toolbar
 dotnet/winforms	ToolStripArrowRenderEventArgs	src/System.Windows.Forms/System/Windows/Forms/Controls/ToolStrips/ToolStripArrowRenderEventArgs.cs	popover	OVERLAY	T2_WORD	popover;toolbar
@@ -5677,7 +5677,7 @@ dotnet/winforms	ToolstripProfessionalRenderer	src/System.Windows.Forms/System/Wi
 dotnet/winforms	TickStyle	src/System.Windows.Forms/System/Windows/Forms/Controls/TrackBar/TickStyle.cs	config-provider	CONTAINER	T2_WORD	config-provider
 dotnet/winforms	TrackBar	src/System.Windows.Forms/System/Windows/Forms/Controls/TrackBar/TrackBar.cs	slider	SEGMENTS	T1_ALIAS	slider
 dotnet/winforms	TrackBarRenderer	src/System.Windows.Forms/System/Windows/Forms/Controls/TrackBar/TrackBarRenderer.cs	slider	SEGMENTS	T1_ALIAS	slider
-dotnet/winforms	ArraySubsetEnumerator	src/System.Windows.Forms/System/Windows/Forms/Controls/TreeView/ArraySubsetEnumerator.cs	UNMAPPED		UNMAPPED	
+dotnet/winforms	ArraySubsetEnumerator	src/System.Windows.Forms/System/Windows/Forms/Controls/TreeView/ArraySubsetEnumerator.cs	tree	COLLECTION	T5_PATH	tree
 dotnet/winforms	DrawTreeNodeEventArgs	src/System.Windows.Forms/System/Windows/Forms/Controls/TreeView/DrawTreeNodeEventArgs.cs	tree	COLLECTION	T1_ALIAS	tree
 dotnet/winforms	DrawTreeNodeEventHandler	src/System.Windows.Forms/System/Windows/Forms/Controls/TreeView/DrawTreeNodeEventHandler.cs	tree	COLLECTION	T1_ALIAS	tree
 dotnet/winforms	NodeLabelEditEventArgs	src/System.Windows.Forms/System/Windows/Forms/Controls/TreeView/NodeLabelEditEventArgs.cs	label	TOKEN	T1_ALIAS	label
@@ -5703,7 +5703,7 @@ dotnet/winforms	TreeViewImageIndexConverter	src/System.Windows.Forms/System/Wind
 dotnet/winforms	TreeViewImageKeyConverter	src/System.Windows.Forms/System/Windows/Forms/Controls/TreeView/TreeViewImageKeyConverter.cs	tree	COLLECTION	T1_ALIAS	tree;image
 dotnet/winforms	TreeViewLabelEditAccessibleObject	src/System.Windows.Forms/System/Windows/Forms/Controls/TreeView/TreeViewLabelEditAccessibleObject.cs	tree	COLLECTION	T1_ALIAS	tree;label
 dotnet/winforms	TreeViewLabelEditNativeWindow	src/System.Windows.Forms/System/Windows/Forms/Controls/TreeView/TreeViewLabelEditNativeWindow.cs	tree	COLLECTION	T1_ALIAS	tree;label
-dotnet/winforms	DomainUpDown	src/System.Windows.Forms/System/Windows/Forms/Controls/UpDown/DomainUpDown.cs	UNMAPPED		UNMAPPED	
+dotnet/winforms	DomainUpDown	src/System.Windows.Forms/System/Windows/Forms/Controls/UpDown/DomainUpDown.cs	layout-primitive	CONTAINER	T5_PATH	layout-primitive
 dotnet/winforms	NumericUpDown	src/System.Windows.Forms/System/Windows/Forms/Controls/UpDown/NumericUpDown.cs	number-input	INPUT	T1_ALIAS	number-input
 dotnet/winforms	NumericUpDownAcceleration	src/System.Windows.Forms/System/Windows/Forms/Controls/UpDown/NumericUpDownAcceleration.cs	number-input	INPUT	T1_ALIAS	number-input
 dotnet/winforms	NumericUpDownAccelerationCollection	src/System.Windows.Forms/System/Windows/Forms/Controls/UpDown/NumericUpDownAccelerationCollection.cs	number-input	INPUT	T1_ALIAS	number-input
@@ -5767,7 +5767,7 @@ microsoft/microsoft-ui-xaml	InfoBadge	controls/dev/InfoBadge/APITests/InfoBadgeT
 microsoft/microsoft-ui-xaml	InfoBar	controls/dev/InfoBar/InfoBar.cpp	alert-banner	CONTAINER	T1_ALIAS	alert-banner
 microsoft/microsoft-ui-xaml	InkCanvas	controls/dev/InkCanvas/APITests/InkCanvasTests.cs	layout-primitive	CONTAINER	T2_WORD	layout-primitive;transition-anim
 microsoft/microsoft-ui-xaml	InkToolbar	controls/dev/InkToolbar/APITests/InkToolbarTests.cs	toolbar	COMMANDS	T1_ALIAS	toolbar
-microsoft/microsoft-ui-xaml	Interactions	controls/dev/Interactions/ButtonInteraction/APITests/ButtonInteractionTests.cs	UNMAPPED		UNMAPPED	
+microsoft/microsoft-ui-xaml	Interactions	controls/dev/Interactions/ButtonInteraction/APITests/ButtonInteractionTests.cs	button	COMMANDS	T5_PATH	button
 microsoft/microsoft-ui-xaml	ItemContainer	controls/dev/ItemContainer/APITests/ItemContainerTests.cs	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive
 microsoft/microsoft-ui-xaml	ItemsView	controls/dev/ItemsView/APITests/ItemsViewTests.cs	layout-primitive	CONTAINER	T2_WORD	layout-primitive;list
 microsoft/microsoft-ui-xaml	LayoutPanel	controls/dev/LayoutPanel/APITests/LayoutPanelTests.cs	panel	CONTAINER	T1_ALIAS	panel
@@ -6302,23 +6302,501 @@ charmbracelet/bubbles	timer	timer/timer.go	UNMAPPED		UNMAPPED
 charmbracelet/bubbles	tree	tree/node.go	tree	COLLECTION	T1_ALIAS	tree
 charmbracelet/bubbles	viewport	viewport/highlight.go	UNMAPPED		UNMAPPED	
 apache/echarts	bar	src/chart/bar/BarSeries.ts	toolbar	COMMANDS	T2_WORD	toolbar
-apache/echarts	boxplot	src/chart/boxplot/BoxplotSeries.ts	UNMAPPED		UNMAPPED	
-apache/echarts	candlestick	src/chart/candlestick/CandlestickSeries.ts	UNMAPPED		UNMAPPED	
-apache/echarts	chord	src/chart/chord/ChordEdge.ts	UNMAPPED		UNMAPPED	
-apache/echarts	custom	src/chart/custom/CustomSeries.ts	UNMAPPED		UNMAPPED	
-apache/echarts	funnel	src/chart/funnel/FunnelSeries.ts	UNMAPPED		UNMAPPED	
+apache/echarts	boxplot	src/chart/boxplot/BoxplotSeries.ts	chart	PLOT	T5_PATH	chart
+apache/echarts	candlestick	src/chart/candlestick/CandlestickSeries.ts	chart	PLOT	T5_PATH	chart
+apache/echarts	chord	src/chart/chord/ChordEdge.ts	chart	PLOT	T5_PATH	chart
+apache/echarts	custom	src/chart/custom/CustomSeries.ts	chart	PLOT	T5_PATH	chart
+apache/echarts	funnel	src/chart/funnel/FunnelSeries.ts	chart	PLOT	T5_PATH	chart
 apache/echarts	gauge	src/chart/gauge/GaugeSeries.ts	led-gauge	TOKEN	T1_ALIAS	led-gauge
 apache/echarts	graph	src/chart/graph/GraphSeries.ts	chart	PLOT	T1_ALIAS	chart
-apache/echarts	heatmap	src/chart/heatmap/HeatmapLayer.ts	UNMAPPED		UNMAPPED	
+apache/echarts	heatmap	src/chart/heatmap/HeatmapLayer.ts	chart	PLOT	T5_PATH	chart
 apache/echarts	helper	src/chart/helper/EffectLine.ts	NON_WIDGET		T3_NON_WIDGET	
 apache/echarts	line	src/chart/line/LineSeries.ts	divider	TOKEN	T2_WORD	divider
-apache/echarts	lines	src/chart/lines/LinesSeries.ts	UNMAPPED		UNMAPPED	
+apache/echarts	lines	src/chart/lines/LinesSeries.ts	chart	PLOT	T5_PATH	chart
 apache/echarts	map	src/chart/map/MapSeries.ts	map	EMBED	T1_ALIAS	map
-apache/echarts	parallel	src/chart/parallel/ParallelSeries.ts	UNMAPPED		UNMAPPED	
-apache/echarts	pie	src/chart/pie/PieSeries.ts	UNMAPPED		UNMAPPED	
-apache/echarts	radar	src/chart/radar/RadarSeries.ts	UNMAPPED		UNMAPPED	
-apache/echarts	sankey	src/chart/sankey/SankeySeries.ts	UNMAPPED		UNMAPPED	
-apache/echarts	scatter	src/chart/scatter/ScatterSeries.ts	UNMAPPED		UNMAPPED	
-apache/echarts	sunburst	src/chart/sunburst/SunburstPiece.ts	UNMAPPED		UNMAPPED	
+apache/echarts	parallel	src/chart/parallel/ParallelSeries.ts	chart	PLOT	T5_PATH	chart
+apache/echarts	pie	src/chart/pie/PieSeries.ts	chart	PLOT	T5_PATH	chart
+apache/echarts	radar	src/chart/radar/RadarSeries.ts	chart	PLOT	T5_PATH	chart
+apache/echarts	sankey	src/chart/sankey/SankeySeries.ts	chart	PLOT	T5_PATH	chart
+apache/echarts	scatter	src/chart/scatter/ScatterSeries.ts	chart	PLOT	T5_PATH	chart
+apache/echarts	sunburst	src/chart/sunburst/SunburstPiece.ts	chart	PLOT	T5_PATH	chart
 apache/echarts	tree	src/chart/tree/TreeSeries.ts	tree	COLLECTION	T1_ALIAS	tree
 apache/echarts	treemap	src/chart/treemap/Breadcrumb.ts	treemap	PLOT	T1_ALIAS	treemap
+OnsenUI/OnsenUI	ons-action-sheet	onsenui/esm/elements/ons-action-sheet/animator.js	bottom-sheet	OVERLAY	T1_ALIAS	bottom-sheet;sheet-dialog
+OnsenUI/OnsenUI	ons-alert-dialog	onsenui/esm/elements/ons-alert-dialog/animator.js	dialog	OVERLAY	T1_ALIAS	dialog;alert-banner
+OnsenUI/OnsenUI	ons-dialog	onsenui/esm/elements/ons-dialog/animator.js	dialog	OVERLAY	T1_ALIAS	dialog
+OnsenUI/OnsenUI	ons-list-item	onsenui/esm/elements/ons-list-item/animator.js	list	COLLECTION	T1_ALIAS	list
+OnsenUI/OnsenUI	ons-modal	onsenui/esm/elements/ons-modal/animator.js	dialog	OVERLAY	T1_ALIAS	dialog
+OnsenUI/OnsenUI	ons-navigator	onsenui/esm/elements/ons-navigator/animator.js	UNMAPPED		UNMAPPED	
+OnsenUI/OnsenUI	ons-popover	onsenui/esm/elements/ons-popover/animator.js	popover	OVERLAY	T1_ALIAS	popover
+OnsenUI/OnsenUI	ons-ripple	onsenui/esm/elements/ons-ripple/animator-css.js	transition-anim	ANIMVALUE	T2_WORD	transition-anim
+OnsenUI/OnsenUI	ons-splitter	onsenui/esm/elements/ons-splitter/animator.js	splitter	CONTAINER	T1_ALIAS	splitter
+OnsenUI/OnsenUI	ons-toast	onsenui/esm/elements/ons-toast/animator.js	toast	OVERLAY	T1_ALIAS	toast
+OnsenUI/OnsenUI	ReduxNavigator	react-onsenui-examples/src/components/ReduxNavigator/actions.js	UNMAPPED		UNMAPPED	
+ag-grid/ag-grid	agWidgets	packages/ag-grid-community/src/agWidgets/agAbstractField.ts	grid	COLLECTION	T5_PATH	grid;layout-primitive
+ag-grid/ag-grid	alignedGrids	packages/ag-grid-community/src/alignedGrids/alignedGridsModule.ts	grid	COLLECTION	T5_PATH	grid;layout-primitive
+ag-grid/ag-grid	api	packages/ag-grid-community/src/api/apiFunctionService.ts	grid	COLLECTION	T5_PATH	grid;layout-primitive
+ag-grid/ag-grid	autoGenerateColumns	packages/ag-grid-community/src/autoGenerateColumns/autoGenerateColumnsModule.ts	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive
+ag-grid/ag-grid	clientSideRowModel	packages/ag-grid-community/src/clientSideRowModel/changedRowNodes.ts	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive
+ag-grid/ag-grid	columnAutosize	packages/ag-grid-community/src/columnAutosize/columnAutosizeApi.ts	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive
+ag-grid/ag-grid	columnMove	packages/ag-grid-community/src/columnMove/column-moving.css	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive
+ag-grid/ag-grid	columnResize	packages/ag-grid-community/src/columnResize/columnResizeApi.ts	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive
+ag-grid/ag-grid	columns	packages/ag-grid-community/src/columns/baseSingleColService.ts	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive
+ag-grid/ag-grid	components	packages/ag-grid-community/src/components/emptyBean.ts	grid	COLLECTION	T5_PATH	grid;layout-primitive
+ag-grid/ag-grid	context	packages/ag-grid-community/src/context/bean.ts	NON_WIDGET		T3_NON_WIDGET	
+ag-grid/ag-grid	csvExport	packages/ag-grid-community/src/csvExport/csvCreator.ts	grid	COLLECTION	T5_PATH	grid;layout-primitive
+ag-grid/ag-grid	dragAndDrop	packages/ag-grid-community/src/dragAndDrop/dragAndDropImageComponent.css	reorder-drag	COLLECTION	T2_WORD	reorder-drag
+ag-grid/ag-grid	edit	packages/ag-grid-community/src/edit/cell-editing.css	NON_WIDGET		T3_NON_WIDGET	
+ag-grid/ag-grid	entities	packages/ag-grid-community/src/entities/agColumn.ts	grid	COLLECTION	T5_PATH	grid;layout-primitive
+ag-grid/ag-grid	export	packages/ag-grid-community/src/export/baseCreator.ts	grid	COLLECTION	T5_PATH	grid;layout-primitive
+ag-grid/ag-grid	filter	packages/ag-grid-community/src/filter/column-filters.css	search	INPUT	T2_WORD	search
+ag-grid/ag-grid	gridBodyComp	packages/ag-grid-community/src/gridBodyComp/abstractFakeScrollComp.ts	grid	COLLECTION	T1_ALIAS	grid;layout-primitive
+ag-grid/ag-grid	gridComp	packages/ag-grid-community/src/gridComp/gridComp.ts	grid	COLLECTION	T1_ALIAS	grid;layout-primitive
+ag-grid/ag-grid	headerRendering	packages/ag-grid-community/src/headerRendering/cells/abstractCell/abstractHeaderCellComp.ts	app-bar	COMMANDS	T1_ALIAS	app-bar
+ag-grid/ag-grid	infiniteRowModel	packages/ag-grid-community/src/infiniteRowModel/infiniteBlock.ts	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive
+ag-grid/ag-grid	interfaces	packages/ag-grid-community/src/interfaces/IChartService.ts	grid	COLLECTION	T5_PATH	grid;layout-primitive
+ag-grid/ag-grid	internalFeatureFlags	packages/ag-grid-community/src/internalFeatureFlags/internalFeatureFlags.ts	grid	COLLECTION	T5_PATH	grid;layout-primitive
+ag-grid/ag-grid	misc	packages/ag-grid-community/src/misc/animationFrameModule.ts	grid	COLLECTION	T5_PATH	grid;layout-primitive
+ag-grid/ag-grid	modules	packages/ag-grid-community/src/modules/moduleRegistry.test.ts	grid	COLLECTION	T5_PATH	grid;layout-primitive
+ag-grid/ag-grid	navigation	packages/ag-grid-community/src/navigation/cellNavigationService.ts	navigation	SEGMENTS	T1_ALIAS	navigation
+ag-grid/ag-grid	pagination	packages/ag-grid-community/src/pagination/pageBoundsListener.ts	pagination	SEGMENTS	T1_ALIAS	pagination
+ag-grid/ag-grid	pinnedColumns	packages/ag-grid-community/src/pinnedColumns/pinnedColumnModule.css	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive
+ag-grid/ag-grid	pinnedRowModel	packages/ag-grid-community/src/pinnedRowModel/manualPinnedRow.css	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive
+ag-grid/ag-grid	rendering	packages/ag-grid-community/src/rendering/ariaAnnouncementService.ts	grid	COLLECTION	T5_PATH	grid;layout-primitive
+ag-grid/ag-grid	selection	packages/ag-grid-community/src/selection/baseSelectionService.ts	select	PICKER	T1_ALIAS	select
+ag-grid/ag-grid	sort	packages/ag-grid-community/src/sort/rowNodeSorter.ts	grid	COLLECTION	T5_PATH	grid;layout-primitive
+ag-grid/ag-grid	styling	packages/ag-grid-community/src/styling/calculatedColumnCss.ts	grid	COLLECTION	T5_PATH	grid;layout-primitive
+ag-grid/ag-grid	testing	packages/ag-grid-community/src/testing/testIdService.ts	grid	COLLECTION	T5_PATH	grid;layout-primitive
+ag-grid/ag-grid	theming	packages/ag-grid-community/src/theming/core/core-css.ts	grid	COLLECTION	T5_PATH	grid;layout-primitive
+ag-grid/ag-grid	tooltip	packages/ag-grid-community/src/tooltip/cellTooltip.ts	tooltip	OVERLAY	T1_ALIAS	tooltip
+ag-grid/ag-grid	undoRedo	packages/ag-grid-community/src/undoRedo/undoRedoService.ts	grid	COLLECTION	T5_PATH	grid;layout-primitive
+ag-grid/ag-grid	utils	packages/ag-grid-community/src/utils/changedPath.ts	NON_WIDGET		T3_NON_WIDGET	
+ag-grid/ag-grid	validation	packages/ag-grid-community/src/validation/apiFunctionValidator.ts	text-input	INPUT	T2_WORD	text-input
+ag-grid/ag-grid	valueService	packages/ag-grid-community/src/valueService/cellApi.ts	NON_WIDGET		T3_NON_WIDGET	
+ag-grid/ag-grid	widgets	packages/ag-grid-community/src/widgets/component.ts	grid	COLLECTION	T5_PATH	grid;layout-primitive
+microsoft/fluentui	IconGrid	apps/public-docsite/src/components/IconGrid/IconGrid.module.scss	grid	COLLECTION	T1_ALIAS	grid;icon;layout-primitive
+microsoft/fluentui	Nav	apps/public-docsite/src/components/Nav/Nav.module.scss	navigation	SEGMENTS	T1_ALIAS	navigation
+microsoft/fluentui	PageHeader	apps/public-docsite/src/components/PageHeader/PageHeader.ts	app-bar	COMMANDS	T1_ALIAS	app-bar
+microsoft/fluentui	Site	apps/public-docsite/src/components/Site/AppThemes.ts	UNMAPPED		UNMAPPED	
+microsoft/fluentui	Table	apps/public-docsite/src/components/Table/Table.module.scss	table	COLLECTION	T1_ALIAS	table
+microsoft/fluentui	ContextualMenu	apps/rit-tests-v8/src/shared/components/ContextualMenu/ContextualMenuExample.cy.tsx	menu	COMMANDS	T1_ALIAS	menu
+microsoft/fluentui	Samples	apps/theming-designer/src/components/Samples/index.tsx	UNMAPPED		UNMAPPED	
+microsoft/fluentui	AnnotationOnlyChart	packages/charts/react-charting/src/components/AnnotationOnlyChart/AnnotationOnlyChart.test.tsx	chart	PLOT	T1_ALIAS	chart
+microsoft/fluentui	AreaChart	packages/charts/react-charting/src/components/AreaChart/AreaChart.base.tsx	chart	PLOT	T1_ALIAS	chart
+microsoft/fluentui	ChartTable	packages/charts/react-charting/src/components/ChartTable/ChartTable.base.tsx	chart	PLOT	T1_ALIAS	chart;table
+microsoft/fluentui	CommonComponents	packages/charts/react-charting/src/components/CommonComponents/Annotations/ChartAnnotationLayer.styles.ts	chart	PLOT	T5_PATH	chart
+microsoft/fluentui	DeclarativeChart	packages/charts/react-charting/src/components/DeclarativeChart/DeclarativeChart.tsx	chart	PLOT	T1_ALIAS	chart
+microsoft/fluentui	DonutChart	packages/charts/react-charting/src/components/DonutChart/Arc/Arc.styles.ts	chart	PLOT	T1_ALIAS	chart
+microsoft/fluentui	FunnelChart	packages/charts/react-charting/src/components/FunnelChart/FunnelChart.base.tsx	chart	PLOT	T1_ALIAS	chart
+microsoft/fluentui	GanttChart	packages/charts/react-charting/src/components/GanttChart/GanttChart.base.tsx	gantt	PLOT	T1_ALIAS	gantt;chart
+microsoft/fluentui	GaugeChart	packages/charts/react-charting/src/components/GaugeChart/GaugeChart.base.tsx	chart	PLOT	T1_ALIAS	chart;led-gauge
+microsoft/fluentui	GroupedVerticalBarChart	packages/charts/react-charting/src/components/GroupedVerticalBarChart/GroupedVerticalBarChart.base.tsx	chart	PLOT	T1_ALIAS	chart;layout-primitive;panel
+microsoft/fluentui	HeatMapChart	packages/charts/react-charting/src/components/HeatMapChart/HeatMapChart.base.tsx	chart	PLOT	T1_ALIAS	chart;map
+microsoft/fluentui	HorizontalBarChart	packages/charts/react-charting/src/components/HorizontalBarChart/HorizontalBarChart.base.tsx	chart	PLOT	T1_ALIAS	chart
+microsoft/fluentui	HorizontalBarChartWithAxis	packages/charts/react-charting/src/components/HorizontalBarChartWithAxis/HorizontalBarChartWithAxis.base.tsx	chart	PLOT	T1_ALIAS	chart
+microsoft/fluentui	Legends	packages/charts/react-charting/src/components/Legends/Legends.base.tsx	chart	PLOT	T5_PATH	chart
+microsoft/fluentui	LineChart	packages/charts/react-charting/src/components/LineChart/LineChart.base.tsx	chart	PLOT	T1_ALIAS	chart
+microsoft/fluentui	PieChart	packages/charts/react-charting/src/components/PieChart/Arc/Arc.styles.ts	chart	PLOT	T1_ALIAS	chart
+microsoft/fluentui	PolarChart	packages/charts/react-charting/src/components/PolarChart/PolarChart.base.tsx	chart	PLOT	T1_ALIAS	chart
+microsoft/fluentui	ResponsiveContainer	packages/charts/react-charting/src/components/ResponsiveContainer/ResponsiveContainer.tsx	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive
+microsoft/fluentui	SankeyChart	packages/charts/react-charting/src/components/SankeyChart/SankeyChart.base.tsx	chart	PLOT	T1_ALIAS	chart
+microsoft/fluentui	ScatterChart	packages/charts/react-charting/src/components/ScatterChart/ScatterChart.base.tsx	chart	PLOT	T1_ALIAS	chart
+microsoft/fluentui	Sparkline	packages/charts/react-charting/src/components/Sparkline/Sparkline.base.tsx	sparkline	PLOT	T1_ALIAS	sparkline
+microsoft/fluentui	StackedBarChart	packages/charts/react-charting/src/components/StackedBarChart/MultiStackedBarChart.base.tsx	chart	PLOT	T1_ALIAS	chart;layout-primitive
+microsoft/fluentui	TreeChart	packages/charts/react-charting/src/components/TreeChart/TreeChart.base.tsx	chart	PLOT	T1_ALIAS	chart;tree
+microsoft/fluentui	VerticalBarChart	packages/charts/react-charting/src/components/VerticalBarChart/VerticalBarChart.base.tsx	chart	PLOT	T1_ALIAS	chart
+microsoft/fluentui	VerticalStackedBarChart	packages/charts/react-charting/src/components/VerticalStackedBarChart/VerticalStackedBarChart.base.tsx	chart	PLOT	T1_ALIAS	chart;layout-primitive
+microsoft/fluentui	VegaDeclarativeChart	packages/charts/react-charts/library/src/components/VegaDeclarativeChart/VegaDeclarativeChart.test.tsx	chart	PLOT	T1_ALIAS	chart
+microsoft/fluentui	Card	packages/react-cards/src/components/Card/Card.styles.ts	card	CONTAINER	T1_ALIAS	card
+microsoft/fluentui	Alert	packages/react-components/deprecated/react-alert/src/components/Alert/Alert.test.tsx	alert-banner	CONTAINER	T1_ALIAS	alert-banner
+microsoft/fluentui	InfoButton	packages/react-components/deprecated/react-infobutton/src/components/InfoButton/DefaultInfoButtonIcons.tsx	button	COMMANDS	T1_ALIAS	button
+microsoft/fluentui	InfoLabel	packages/react-components/deprecated/react-infobutton/src/components/InfoLabel/InfoLabel.cy.tsx	label	TOKEN	T1_ALIAS	label
+microsoft/fluentui	Virtualizer	packages/react-components/deprecated/react-virtualizer/src/components/Virtualizer/Virtualizer.ts	UNMAPPED		UNMAPPED	
+microsoft/fluentui	VirtualizerScrollView	packages/react-components/deprecated/react-virtualizer/src/components/VirtualizerScrollView/VirtualizerScrollView.ts	scroll	COLLECTION	T1_ALIAS	scroll
+microsoft/fluentui	VirtualizerScrollViewDynamic	packages/react-components/deprecated/react-virtualizer/src/components/VirtualizerScrollViewDynamic/VirtualizerScrollViewDynamic.ts	scroll	COLLECTION	T1_ALIAS	scroll
+microsoft/fluentui	Accordion	packages/react-components/react-accordion/library/src/components/Accordion/Accordion.test.tsx	accordion	CONTAINER	T1_ALIAS	accordion
+microsoft/fluentui	AccordionHeader	packages/react-components/react-accordion/library/src/components/AccordionHeader/AccordionHeader.test.tsx	accordion	CONTAINER	T1_ALIAS	accordion;app-bar
+microsoft/fluentui	AccordionItem	packages/react-components/react-accordion/library/src/components/AccordionItem/AccordionItem.test.tsx	accordion	CONTAINER	T1_ALIAS	accordion
+microsoft/fluentui	AccordionPanel	packages/react-components/react-accordion/library/src/components/AccordionPanel/AccordionPanel.test.tsx	accordion	CONTAINER	T1_ALIAS	accordion;panel
+microsoft/fluentui	Avatar	packages/react-components/react-avatar/library/src/components/Avatar/Avatar.test.tsx	avatar	TOKEN	T1_ALIAS	avatar
+microsoft/fluentui	AvatarGroup	packages/react-components/react-avatar/library/src/components/AvatarGroup/AvatarGroup.cy.tsx	avatar	TOKEN	T1_ALIAS	avatar;layout-primitive;panel
+microsoft/fluentui	AvatarGroupItem	packages/react-components/react-avatar/library/src/components/AvatarGroupItem/AvatarGroupItem.test.tsx	avatar	TOKEN	T1_ALIAS	avatar;layout-primitive;panel
+microsoft/fluentui	AvatarGroupPopover	packages/react-components/react-avatar/library/src/components/AvatarGroupPopover/AvatarGroupPopover.test.tsx	popover	OVERLAY	T1_ALIAS	popover;avatar;layout-primitive;panel
+microsoft/fluentui	Badge	packages/react-components/react-badge/library/src/components/Badge/Badge.test.tsx	badge	TOKEN	T1_ALIAS	badge
+microsoft/fluentui	CounterBadge	packages/react-components/react-badge/library/src/components/CounterBadge/CounterBadge.test.tsx	badge	TOKEN	T1_ALIAS	badge
+microsoft/fluentui	PresenceBadge	packages/react-components/react-badge/library/src/components/PresenceBadge/PresenceBadge.test.tsx	badge	TOKEN	T1_ALIAS	badge
+microsoft/fluentui	Breadcrumb	packages/react-components/react-breadcrumb/library/src/components/Breadcrumb/Breadcrumb.cy.tsx	breadcrumb	SEGMENTS	T1_ALIAS	breadcrumb
+microsoft/fluentui	BreadcrumbButton	packages/react-components/react-breadcrumb/library/src/components/BreadcrumbButton/BreadcrumbButton.test.tsx	breadcrumb	SEGMENTS	T1_ALIAS	breadcrumb;button
+microsoft/fluentui	BreadcrumbDivider	packages/react-components/react-breadcrumb/library/src/components/BreadcrumbDivider/BreadcrumbDivider.test.tsx	breadcrumb	SEGMENTS	T1_ALIAS	breadcrumb;divider
+microsoft/fluentui	BreadcrumbItem	packages/react-components/react-breadcrumb/library/src/components/BreadcrumbItem/BreadcrumbItem.test.tsx	breadcrumb	SEGMENTS	T1_ALIAS	breadcrumb
+microsoft/fluentui	Button	packages/react-components/react-button/library/src/components/Button/Button.test.tsx	button	COMMANDS	T1_ALIAS	button
+microsoft/fluentui	CompoundButton	packages/react-components/react-button/library/src/components/CompoundButton/CompoundButton.test.tsx	button	COMMANDS	T1_ALIAS	button
+microsoft/fluentui	MenuButton	packages/react-components/react-button/library/src/components/MenuButton/MenuButton.test.tsx	button	COMMANDS	T1_ALIAS	button;menu
+microsoft/fluentui	SplitButton	packages/react-components/react-button/library/src/components/SplitButton/SplitButton.test.tsx	split-button	COMMANDS	T1_ALIAS	split-button;button
+microsoft/fluentui	ToggleButton	packages/react-components/react-button/library/src/components/ToggleButton/ToggleButton.test.tsx	toggle-button	TOKEN	T1_ALIAS	toggle-button;button
+microsoft/fluentui	Calendar	packages/react-components/react-calendar-compat/library/src/components/Calendar/Calendar.test.tsx	calendar	PICKER	T1_ALIAS	calendar
+microsoft/fluentui	CalendarDay	packages/react-components/react-calendar-compat/library/src/components/CalendarDay/CalendarDay.tsx	calendar	PICKER	T1_ALIAS	calendar
+microsoft/fluentui	CalendarDayGrid	packages/react-components/react-calendar-compat/library/src/components/CalendarDayGrid/CalendarDayGrid.test.tsx	calendar	PICKER	T1_ALIAS	calendar;grid;layout-primitive
+microsoft/fluentui	CalendarMonth	packages/react-components/react-calendar-compat/library/src/components/CalendarMonth/CalendarMonth.test.tsx	calendar	PICKER	T1_ALIAS	calendar
+microsoft/fluentui	CalendarPicker	packages/react-components/react-calendar-compat/library/src/components/CalendarPicker/CalendarPicker.types.ts	calendar	PICKER	T1_ALIAS	calendar;select
+microsoft/fluentui	CalendarYear	packages/react-components/react-calendar-compat/library/src/components/CalendarYear/CalendarYear.test.tsx	calendar	PICKER	T1_ALIAS	calendar
+microsoft/fluentui	CardFooter	packages/react-components/react-card/library/src/components/CardFooter/CardFooter.test.tsx	card	CONTAINER	T1_ALIAS	card
+microsoft/fluentui	CardHeader	packages/react-components/react-card/library/src/components/CardHeader/CardHeader.test.tsx	app-bar	COMMANDS	T1_ALIAS	app-bar;card
+microsoft/fluentui	CardPreview	packages/react-components/react-card/library/src/components/CardPreview/CardPreview.test.tsx	card	CONTAINER	T1_ALIAS	card
+microsoft/fluentui	Carousel	packages/react-components/react-carousel/library/src/components/Carousel/Carousel.cy.tsx	carousel	SEGMENTS	T1_ALIAS	carousel
+microsoft/fluentui	CarouselAutoplayButton	packages/react-components/react-carousel/library/src/components/CarouselAutoplayButton/CarouselAutoplayButton.test.tsx	carousel	SEGMENTS	T1_ALIAS	carousel;button
+microsoft/fluentui	CarouselButton	packages/react-components/react-carousel/library/src/components/CarouselButton/CarouselButton.test.tsx	carousel	SEGMENTS	T1_ALIAS	carousel;button
+microsoft/fluentui	CarouselCard	packages/react-components/react-carousel/library/src/components/CarouselCard/CarouselCard.test.tsx	carousel	SEGMENTS	T1_ALIAS	carousel;card
+microsoft/fluentui	CarouselNav	packages/react-components/react-carousel/library/src/components/CarouselNav/CarouselNav.test.tsx	carousel	SEGMENTS	T1_ALIAS	carousel;navigation
+microsoft/fluentui	CarouselNavButton	packages/react-components/react-carousel/library/src/components/CarouselNavButton/CarouselNavButton.test.tsx	carousel	SEGMENTS	T1_ALIAS	carousel;button;navigation
+microsoft/fluentui	CarouselNavContainer	packages/react-components/react-carousel/library/src/components/CarouselNavContainer/CarouselNavContainer.test.tsx	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive;carousel;navigation
+microsoft/fluentui	CarouselNavImageButton	packages/react-components/react-carousel/library/src/components/CarouselNavImageButton/CarouselNavImageButton.test.tsx	carousel	SEGMENTS	T1_ALIAS	carousel;button;image;navigation
+microsoft/fluentui	CarouselSlider	packages/react-components/react-carousel/library/src/components/CarouselSlider/CarouselSlider.test.tsx	carousel	SEGMENTS	T1_ALIAS	carousel;slider
+microsoft/fluentui	CarouselViewport	packages/react-components/react-carousel/library/src/components/CarouselViewport/CarouselViewport.test.tsx	carousel	SEGMENTS	T1_ALIAS	carousel
+microsoft/fluentui	Checkbox	packages/react-components/react-checkbox/library/src/components/Checkbox/Checkbox.test.tsx	checkbox	TOKEN	T1_ALIAS	checkbox
+microsoft/fluentui	AlphaSlider	packages/react-components/react-color-picker/library/src/components/AlphaSlider/AlphaSlider.constants.ts	slider	SEGMENTS	T1_ALIAS	slider
+microsoft/fluentui	ColorArea	packages/react-components/react-color-picker/library/src/components/ColorArea/ColorArea.constants.ts	color-picker	PICKER	T2_WORD	color-picker;layout-primitive
+microsoft/fluentui	ColorPicker	packages/react-components/react-color-picker/library/src/components/ColorPicker/ColorPicker.test.tsx	color-picker	PICKER	T1_ALIAS	color-picker;select
+microsoft/fluentui	ColorSlider	packages/react-components/react-color-picker/library/src/components/ColorSlider/ColorSlider.constants.ts	slider	SEGMENTS	T1_ALIAS	slider
+microsoft/fluentui	Combobox	packages/react-components/react-combobox/library/src/components/Combobox/Combobox.cy.tsx	select	PICKER	T1_ALIAS	select
+microsoft/fluentui	Dropdown	packages/react-components/react-combobox/library/src/components/Dropdown/Dropdown.cy.tsx	select	PICKER	T1_ALIAS	select
+microsoft/fluentui	Listbox	packages/react-components/react-combobox/library/src/components/Listbox/Listbox.test.tsx	list	COLLECTION	T1_ALIAS	list
+microsoft/fluentui	Option	packages/react-components/react-combobox/library/src/components/Option/Option.test.tsx	select	PICKER	T2_WORD	select
+microsoft/fluentui	OptionGroup	packages/react-components/react-combobox/library/src/components/OptionGroup/OptionGroup.test.tsx	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive;panel
+microsoft/fluentui	DatePicker	packages/react-components/react-datepicker-compat/library/src/components/DatePicker/DatePicker.cy.tsx	date-picker	PICKER	T1_ALIAS	date-picker;select
+microsoft/fluentui	Dialog	packages/react-components/react-dialog/library/src/components/Dialog/Dialog.cy.tsx	dialog	OVERLAY	T1_ALIAS	dialog
+microsoft/fluentui	DialogActions	packages/react-components/react-dialog/library/src/components/DialogActions/DialogActions.test.tsx	dialog	OVERLAY	T1_ALIAS	dialog
+microsoft/fluentui	DialogBody	packages/react-components/react-dialog/library/src/components/DialogBody/DialogBody.test.tsx	dialog	OVERLAY	T1_ALIAS	dialog
+microsoft/fluentui	DialogContent	packages/react-components/react-dialog/library/src/components/DialogContent/DialogContent.test.tsx	dialog	OVERLAY	T1_ALIAS	dialog
+microsoft/fluentui	DialogSurface	packages/react-components/react-dialog/library/src/components/DialogSurface/DialogSurface.test.tsx	dialog	OVERLAY	T1_ALIAS	dialog
+microsoft/fluentui	DialogTitle	packages/react-components/react-dialog/library/src/components/DialogTitle/DialogTitle.cy.tsx	dialog	OVERLAY	T1_ALIAS	dialog;heading
+microsoft/fluentui	DialogTrigger	packages/react-components/react-dialog/library/src/components/DialogTrigger/DialogTrigger.test.tsx	dialog	OVERLAY	T1_ALIAS	dialog
+microsoft/fluentui	Divider	packages/react-components/react-divider/library/src/components/Divider/Divider.test.tsx	divider	TOKEN	T1_ALIAS	divider
+microsoft/fluentui	Drawer	packages/react-components/react-drawer/library/src/components/Drawer/Drawer.cy.tsx	drawer	OVERLAY	T1_ALIAS	drawer;navigation
+microsoft/fluentui	DrawerBody	packages/react-components/react-drawer/library/src/components/DrawerBody/DrawerBody.cy.tsx	drawer	OVERLAY	T1_ALIAS	drawer;navigation
+microsoft/fluentui	DrawerFooter	packages/react-components/react-drawer/library/src/components/DrawerFooter/DrawerFooter.cy.tsx	drawer	OVERLAY	T1_ALIAS	drawer;navigation
+microsoft/fluentui	DrawerHeader	packages/react-components/react-drawer/library/src/components/DrawerHeader/DrawerHeader.cy.tsx	app-bar	COMMANDS	T1_ALIAS	app-bar;drawer;navigation
+microsoft/fluentui	DrawerHeaderNavigation	packages/react-components/react-drawer/library/src/components/DrawerHeaderNavigation/DrawerHeaderNavigation.cy.tsx	navigation	SEGMENTS	T1_ALIAS	navigation;app-bar;drawer
+microsoft/fluentui	DrawerHeaderTitle	packages/react-components/react-drawer/library/src/components/DrawerHeaderTitle/DrawerHeaderTitle.cy.tsx	app-bar	COMMANDS	T1_ALIAS	app-bar;drawer;navigation;heading
+microsoft/fluentui	InlineDrawer	packages/react-components/react-drawer/library/src/components/InlineDrawer/InlineDrawer.cy.tsx	drawer	OVERLAY	T1_ALIAS	drawer;navigation
+microsoft/fluentui	OverlayDrawer	packages/react-components/react-drawer/library/src/components/OverlayDrawer/OverlayDrawer.cy.tsx	popover	OVERLAY	T1_ALIAS	popover;drawer;navigation
+microsoft/fluentui	Field	packages/react-components/react-field/library/src/components/Field/Field.test.tsx	text-input	INPUT	T2_WORD	text-input
+microsoft/fluentui	Image	packages/react-components/react-headless-components-preview/library/src/components/Image/Image.test.tsx	image	EMBED	T1_ALIAS	image
+microsoft/fluentui	Input	packages/react-components/react-headless-components-preview/library/src/components/Input/Input.test.tsx	text-input	INPUT	T1_ALIAS	text-input
+microsoft/fluentui	InteractionTag	packages/react-components/react-headless-components-preview/library/src/components/InteractionTag/InteractionTag.test.tsx	chip	TOKEN	T1_ALIAS	chip
+microsoft/fluentui	Label	packages/react-components/react-headless-components-preview/library/src/components/Label/Label.test.tsx	label	TOKEN	T1_ALIAS	label
+microsoft/fluentui	Link	packages/react-components/react-headless-components-preview/library/src/components/Link/Link.test.tsx	link	TOKEN	T1_ALIAS	link
+microsoft/fluentui	List	packages/react-components/react-headless-components-preview/library/src/components/List/List.cy.tsx	list	COLLECTION	T1_ALIAS	list
+microsoft/fluentui	Menu	packages/react-components/react-headless-components-preview/library/src/components/Menu/Menu.cy.tsx	menu	COMMANDS	T1_ALIAS	menu
+microsoft/fluentui	MessageBar	packages/react-components/react-headless-components-preview/library/src/components/MessageBar/MessageBar.test.tsx	message-list	COLLECTION	T1_ALIAS	message-list
+microsoft/fluentui	Overflow	packages/react-components/react-headless-components-preview/library/src/components/Overflow/Overflow.test.tsx	UNMAPPED		UNMAPPED	
+microsoft/fluentui	Persona	packages/react-components/react-headless-components-preview/library/src/components/Persona/Persona.test.tsx	UNMAPPED		UNMAPPED	
+microsoft/fluentui	Popover	packages/react-components/react-headless-components-preview/library/src/components/Popover/Popover.cy.tsx	popover	OVERLAY	T1_ALIAS	popover
+microsoft/fluentui	ProgressBar	packages/react-components/react-headless-components-preview/library/src/components/ProgressBar/ProgressBar.test.tsx	progress	ANIMVALUE	T1_ALIAS	progress
+microsoft/fluentui	Provider	packages/react-components/react-headless-components-preview/library/src/components/Provider/Provider.test.tsx	config-provider	CONTAINER	T1_ALIAS	config-provider
+microsoft/fluentui	RadioGroup	packages/react-components/react-headless-components-preview/library/src/components/RadioGroup/Radio/Radio.tsx	radio	TOKEN	T1_ALIAS	radio;toggle-group;layout-primitive;panel
+microsoft/fluentui	RangeSlider	packages/react-components/react-headless-components-preview/library/src/components/RangeSlider/RangeSlider.test.tsx	slider	SEGMENTS	T1_ALIAS	slider
+microsoft/fluentui	Rating	packages/react-components/react-headless-components-preview/library/src/components/Rating/Rating.test.tsx	rating	SEGMENTS	T1_ALIAS	rating
+microsoft/fluentui	RatingDisplay	packages/react-components/react-headless-components-preview/library/src/components/RatingDisplay/RatingDisplay.test.tsx	rating	SEGMENTS	T1_ALIAS	rating
+microsoft/fluentui	SearchBox	packages/react-components/react-headless-components-preview/library/src/components/SearchBox/Search.types.ts	search	INPUT	T1_ALIAS	search;layout-primitive
+microsoft/fluentui	Select	packages/react-components/react-headless-components-preview/library/src/components/Select/Select.test.tsx	select	PICKER	T1_ALIAS	select
+microsoft/fluentui	Skeleton	packages/react-components/react-headless-components-preview/library/src/components/Skeleton/Skeleton.test.tsx	skeleton	ANIMVALUE	T1_ALIAS	skeleton
+microsoft/fluentui	Slider	packages/react-components/react-headless-components-preview/library/src/components/Slider/Slider.test.tsx	slider	SEGMENTS	T1_ALIAS	slider
+microsoft/fluentui	SpinButton	packages/react-components/react-headless-components-preview/library/src/components/SpinButton/SpinButton.test.tsx	button	COMMANDS	T1_ALIAS	button
+microsoft/fluentui	Spinner	packages/react-components/react-headless-components-preview/library/src/components/Spinner/Spinner.test.tsx	number-input	INPUT	T1_ALIAS	number-input
+microsoft/fluentui	SwatchPicker	packages/react-components/react-headless-components-preview/library/src/components/SwatchPicker/ColorSwatch/ColorSwatch.test.tsx	select	PICKER	T1_ALIAS	select
+microsoft/fluentui	Switch	packages/react-components/react-headless-components-preview/library/src/components/Switch/Switch.test.tsx	switch	TOKEN	T1_ALIAS	switch
+microsoft/fluentui	TabList	packages/react-components/react-headless-components-preview/library/src/components/TabList/Tab/Tab.tsx	tabs	SEGMENTS	T1_ALIAS	tabs;list
+microsoft/fluentui	Tag	packages/react-components/react-headless-components-preview/library/src/components/Tag/Tag.test.tsx	chip	TOKEN	T1_ALIAS	chip
+microsoft/fluentui	TagGroup	packages/react-components/react-headless-components-preview/library/src/components/TagGroup/TagGroup.test.tsx	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive;panel;chip
+microsoft/fluentui	TagPicker	packages/react-components/react-headless-components-preview/library/src/components/TagPicker/TagPicker.cy.tsx	select	PICKER	T1_ALIAS	select;chip
+microsoft/fluentui	TeachingPopover	packages/react-components/react-headless-components-preview/library/src/components/TeachingPopover/TeachingPopover.cy.tsx	popover	OVERLAY	T1_ALIAS	popover
+microsoft/fluentui	Textarea	packages/react-components/react-headless-components-preview/library/src/components/Textarea/Textarea.test.tsx	text-area	INPUT	T1_ALIAS	text-area
+microsoft/fluentui	Toast	packages/react-components/react-headless-components-preview/library/src/components/Toast/AriaLive/AriaLive.test.tsx	toast	OVERLAY	T1_ALIAS	toast
+microsoft/fluentui	Toolbar	packages/react-components/react-headless-components-preview/library/src/components/Toolbar/Toolbar.test.tsx	toolbar	COMMANDS	T1_ALIAS	toolbar
+microsoft/fluentui	Tooltip	packages/react-components/react-headless-components-preview/library/src/components/Tooltip/Tooltip.cy.tsx	tooltip	OVERLAY	T1_ALIAS	tooltip
+microsoft/fluentui	ListItem	packages/react-components/react-list/library/src/components/ListItem/ListItem.test.tsx	list	COLLECTION	T1_ALIAS	list
+microsoft/fluentui	MenuGrid	packages/react-components/react-menu-grid-preview/library/src/components/MenuGrid/MenuGrid.cy.tsx	grid	COLLECTION	T1_ALIAS	grid;layout-primitive;menu
+microsoft/fluentui	MenuGridCell	packages/react-components/react-menu-grid-preview/library/src/components/MenuGridCell/MenuGridCell.test.tsx	grid	COLLECTION	T1_ALIAS	grid;layout-primitive;menu
+microsoft/fluentui	MenuGridGroup	packages/react-components/react-menu-grid-preview/library/src/components/MenuGridGroup/MenuGridGroup.test.tsx	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive;panel;grid;menu
+microsoft/fluentui	MenuGridGroupHeader	packages/react-components/react-menu-grid-preview/library/src/components/MenuGridGroupHeader/MenuGridGroupHeader.test.tsx	app-bar	COMMANDS	T1_ALIAS	app-bar;layout-primitive;panel;grid;menu
+microsoft/fluentui	MenuGridItem	packages/react-components/react-menu-grid-preview/library/src/components/MenuGridItem/MenuGridItem.test.tsx	grid	COLLECTION	T1_ALIAS	grid;layout-primitive;menu
+microsoft/fluentui	MenuGridRow	packages/react-components/react-menu-grid-preview/library/src/components/MenuGridRow/MenuGridRow.test.tsx	grid	COLLECTION	T1_ALIAS	grid;layout-primitive;menu
+microsoft/fluentui	MenuDivider	packages/react-components/react-menu/library/src/components/MenuDivider/MenuDivider.test.tsx	divider	TOKEN	T1_ALIAS	divider;menu
+microsoft/fluentui	MenuGroup	packages/react-components/react-menu/library/src/components/MenuGroup/MenuGroup.test.tsx	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive;panel;menu
+microsoft/fluentui	MenuGroupHeader	packages/react-components/react-menu/library/src/components/MenuGroupHeader/MenuGroupHeader.test.tsx	app-bar	COMMANDS	T1_ALIAS	app-bar;layout-primitive;panel;menu
+microsoft/fluentui	MenuItem	packages/react-components/react-menu/library/src/components/MenuItem/MenuItem.test.tsx	menu	COMMANDS	T1_ALIAS	menu
+microsoft/fluentui	MenuItemCheckbox	packages/react-components/react-menu/library/src/components/MenuItemCheckbox/MenuItemCheckbox.test.tsx	checkbox	TOKEN	T1_ALIAS	checkbox;menu
+microsoft/fluentui	MenuItemLink	packages/react-components/react-menu/library/src/components/MenuItemLink/MenuItemLink.test.tsx	menu	COMMANDS	T1_ALIAS	menu;link
+microsoft/fluentui	MenuItemRadio	packages/react-components/react-menu/library/src/components/MenuItemRadio/MenuItemRadio.test.tsx	menu	COMMANDS	T1_ALIAS	menu;radio
+microsoft/fluentui	MenuItemSwitch	packages/react-components/react-menu/library/src/components/MenuItemSwitch/MenuItemSwitch.test.tsx	menu	COMMANDS	T1_ALIAS	menu;switch
+microsoft/fluentui	MenuList	packages/react-components/react-menu/library/src/components/MenuList/MenuList.cy.tsx	list	COLLECTION	T1_ALIAS	list;menu
+microsoft/fluentui	MenuPopover	packages/react-components/react-menu/library/src/components/MenuPopover/MenuPopover.test.tsx	popover	OVERLAY	T1_ALIAS	popover;menu
+microsoft/fluentui	MenuSplitGroup	packages/react-components/react-menu/library/src/components/MenuSplitGroup/MenuSplitGroup.test.tsx	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive;panel;menu
+microsoft/fluentui	MenuTrigger	packages/react-components/react-menu/library/src/components/MenuTrigger/MenuTrigger.test.tsx	menu	COMMANDS	T1_ALIAS	menu
+microsoft/fluentui	MessageBarActions	packages/react-components/react-message-bar/library/src/components/MessageBarActions/MessageBarActions.test.tsx	message-list	COLLECTION	T1_ALIAS	message-list
+microsoft/fluentui	MessageBarBody	packages/react-components/react-message-bar/library/src/components/MessageBarBody/MessageBarBody.test.tsx	message-list	COLLECTION	T1_ALIAS	message-list
+microsoft/fluentui	MessageBarGroup	packages/react-components/react-message-bar/library/src/components/MessageBarGroup/MessageBarGroup.motions.tsx	message-list	COLLECTION	T1_ALIAS	message-list;layout-primitive;panel
+microsoft/fluentui	MessageBarTitle	packages/react-components/react-message-bar/library/src/components/MessageBarTitle/MessageBarTitle.test.tsx	message-list	COLLECTION	T1_ALIAS	message-list;heading
+microsoft/fluentui	Attachment	packages/react-components/react-migration-v0-v9/library/src/components/Attachment/Attachment.styles.ts	file-upload	EMBED	T2_WORD	file-upload
+microsoft/fluentui	Flex	packages/react-components/react-migration-v0-v9/library/src/components/Flex/Flex.styles.ts	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive
+microsoft/fluentui	FormField	packages/react-components/react-migration-v0-v9/library/src/components/FormField/FormFieldShim.tsx	layout-primitive	CONTAINER	T2_WORD	layout-primitive;text-input
+microsoft/fluentui	Grid	packages/react-components/react-migration-v0-v9/library/src/components/Grid/Grid.mixins.test.ts	grid	COLLECTION	T1_ALIAS	grid;layout-primitive
+microsoft/fluentui	ItemLayout	packages/react-components/react-migration-v0-v9/library/src/components/ItemLayout/ItemLayout.styles.ts	layout-primitive	CONTAINER	T2_WORD	layout-primitive;list
+microsoft/fluentui	Primitive	packages/react-components/react-migration-v0-v9/library/src/components/Primitive/Primitive.test.tsx	layout-primitive	CONTAINER	T2_WORD	layout-primitive
+microsoft/fluentui	Segment	packages/react-components/react-migration-v0-v9/library/src/components/Segment/Segment.styles.ts	segmented-bar	SEGMENTS	T2_WORD	segmented-bar
+microsoft/fluentui	StyledText	packages/react-components/react-migration-v0-v9/library/src/components/StyledText/StyledText.styles.ts	rich-text-editor	INPUT	T1_ALIAS	rich-text-editor
+microsoft/fluentui	Video	packages/react-components/react-migration-v0-v9/library/src/components/Video/Video.md	video-player	EMBED	T1_ALIAS	video-player
+microsoft/fluentui	Stack	packages/react-components/react-migration-v8-v9/library/src/components/Stack/StackItemShim.styles.ts	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive
+microsoft/fluentui	Theme	packages/react-components/react-migration-v8-v9/library/src/components/Theme/index.ts	config-provider	CONTAINER	T2_WORD	config-provider
+microsoft/fluentui	Blur	packages/react-components/react-motion-components-preview/library/src/components/Blur/Blur.test.ts	transition-anim	ANIMVALUE	T5_PATH	transition-anim
+microsoft/fluentui	Collapse	packages/react-components/react-motion-components-preview/library/src/components/Collapse/Collapse.test.ts	accordion	CONTAINER	T1_ALIAS	accordion;transition-anim
+microsoft/fluentui	Fade	packages/react-components/react-motion-components-preview/library/src/components/Fade/Fade.test.tsx	transition-anim	ANIMVALUE	T1_ALIAS	transition-anim
+microsoft/fluentui	Rotate	packages/react-components/react-motion-components-preview/library/src/components/Rotate/Rotate.test.ts	transition-anim	ANIMVALUE	T5_PATH	transition-anim
+microsoft/fluentui	Scale	packages/react-components/react-motion-components-preview/library/src/components/Scale/Scale.test.ts	slider	SEGMENTS	T1_ALIAS	slider
+microsoft/fluentui	Slide	packages/react-components/react-motion-components-preview/library/src/components/Slide/Slide.test.ts	transition-anim	ANIMVALUE	T2_WORD	transition-anim
+microsoft/fluentui	AppItem	packages/react-components/react-nav/library/src/components/AppItem/AppItem.test.tsx	list	COLLECTION	T2_WORD	list
+microsoft/fluentui	AppItemStatic	packages/react-components/react-nav/library/src/components/AppItemStatic/AppItemStatic.test.tsx	list	COLLECTION	T2_WORD	list
+microsoft/fluentui	Hamburger	packages/react-components/react-nav/library/src/components/Hamburger/Hamburger.test.tsx	navigation	SEGMENTS	T5_PATH	navigation
+microsoft/fluentui	NavCategory	packages/react-components/react-nav/library/src/components/NavCategory/NavCategory.test.tsx	navigation	SEGMENTS	T1_ALIAS	navigation
+microsoft/fluentui	NavCategoryItem	packages/react-components/react-nav/library/src/components/NavCategoryItem/NavCategoryItem.tsx	navigation	SEGMENTS	T1_ALIAS	navigation
+microsoft/fluentui	NavDivider	packages/react-components/react-nav/library/src/components/NavDivider/NavDivider.test.tsx	divider	TOKEN	T1_ALIAS	divider;navigation
+microsoft/fluentui	NavDrawer	packages/react-components/react-nav/library/src/components/NavDrawer/NavDrawer.test.tsx	drawer	OVERLAY	T1_ALIAS	drawer;navigation
+microsoft/fluentui	NavDrawerBody	packages/react-components/react-nav/library/src/components/NavDrawerBody/NavDrawerBody.test.tsx	drawer	OVERLAY	T1_ALIAS	drawer;navigation
+microsoft/fluentui	NavDrawerFooter	packages/react-components/react-nav/library/src/components/NavDrawerFooter/NavDrawerFooter.test.tsx	drawer	OVERLAY	T1_ALIAS	drawer;navigation
+microsoft/fluentui	NavDrawerHeader	packages/react-components/react-nav/library/src/components/NavDrawerHeader/NavDrawerHeader.test.tsx	app-bar	COMMANDS	T1_ALIAS	app-bar;drawer;navigation
+microsoft/fluentui	NavItem	packages/react-components/react-nav/library/src/components/NavItem/NavItem.test.tsx	navigation	SEGMENTS	T1_ALIAS	navigation
+microsoft/fluentui	NavSectionHeader	packages/react-components/react-nav/library/src/components/NavSectionHeader/NavSectionHeader.test.tsx	app-bar	COMMANDS	T1_ALIAS	app-bar;navigation
+microsoft/fluentui	NavSubItem	packages/react-components/react-nav/library/src/components/NavSubItem/NavSubItem.test.tsx	navigation	SEGMENTS	T1_ALIAS	navigation
+microsoft/fluentui	NavSubItemGroup	packages/react-components/react-nav/library/src/components/NavSubItemGroup/NavSubItemGroup.test.tsx	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive;panel;navigation
+microsoft/fluentui	SplitNavItem	packages/react-components/react-nav/library/src/components/SplitNavItem/SplitNavItem.test.tsx	navigation	SEGMENTS	T1_ALIAS	navigation
+microsoft/fluentui	OverflowDivider	packages/react-components/react-overflow/library/src/components/OverflowDivider/OverflowDivider.tsx	divider	TOKEN	T1_ALIAS	divider
+microsoft/fluentui	OverflowItem	packages/react-components/react-overflow/library/src/components/OverflowItem/OverflowItem.test.tsx	list	COLLECTION	T2_WORD	list
+microsoft/fluentui	OverflowReorderObserver	packages/react-components/react-overflow/library/src/components/OverflowReorderObserver/OverflowReorderObserver.tsx	reorder-drag	COLLECTION	T1_ALIAS	reorder-drag
+microsoft/fluentui	PopoverSurface	packages/react-components/react-popover/library/src/components/PopoverSurface/PopoverSurface.test.tsx	popover	OVERLAY	T1_ALIAS	popover
+microsoft/fluentui	PopoverTrigger	packages/react-components/react-popover/library/src/components/PopoverTrigger/PopoverTrigger.test.tsx	popover	OVERLAY	T1_ALIAS	popover
+microsoft/fluentui	Portal	packages/react-components/react-portal/library/src/components/Portal/Portal-node.test.tsx	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive
+microsoft/fluentui	FluentProvider	packages/react-components/react-provider/library/src/components/FluentProvider/FluentProvider-hydrate.test.tsx	config-provider	CONTAINER	T1_ALIAS	config-provider
+microsoft/fluentui	Radio	packages/react-components/react-radio/library/src/components/Radio/Radio.test.tsx	radio	TOKEN	T1_ALIAS	radio
+microsoft/fluentui	RatingItem	packages/react-components/react-rating/library/src/components/RatingItem/RatingItem.test.tsx	rating	SEGMENTS	T1_ALIAS	rating
+microsoft/fluentui	SkeletonItem	packages/react-components/react-skeleton/library/src/components/SkeletonItem/SkeletonItem.test.tsx	skeleton	ANIMVALUE	T1_ALIAS	skeleton
+microsoft/fluentui	ColorSwatch	packages/react-components/react-swatch-picker/library/src/components/ColorSwatch/ColorSwatch.constants.ts	color-picker	PICKER	T2_WORD	color-picker
+microsoft/fluentui	EmptySwatch	packages/react-components/react-swatch-picker/library/src/components/EmptySwatch/EmptySwatch.test.tsx	empty-state	CONTAINER	T1_ALIAS	empty-state
+microsoft/fluentui	ImageSwatch	packages/react-components/react-swatch-picker/library/src/components/ImageSwatch/ImageSwatch.test.tsx	image	EMBED	T1_ALIAS	image
+microsoft/fluentui	SwatchPickerRow	packages/react-components/react-swatch-picker/library/src/components/SwatchPickerRow/SwatchPickerRow.test.tsx	select	PICKER	T1_ALIAS	select;layout-primitive
+microsoft/fluentui	DataGrid	packages/react-components/react-table/library/src/components/DataGrid/DataGrid.cy.tsx	table	COLLECTION	T1_ALIAS	table;grid;layout-primitive
+microsoft/fluentui	DataGridBody	packages/react-components/react-table/library/src/components/DataGridBody/DataGridBody.test.tsx	table	COLLECTION	T1_ALIAS	table;grid;layout-primitive
+microsoft/fluentui	DataGridCell	packages/react-components/react-table/library/src/components/DataGridCell/DataGridCell.test.tsx	table	COLLECTION	T1_ALIAS	table;grid;layout-primitive
+microsoft/fluentui	DataGridHeader	packages/react-components/react-table/library/src/components/DataGridHeader/DataGridHeader.test.tsx	table	COLLECTION	T1_ALIAS	table;app-bar;grid;layout-primitive
+microsoft/fluentui	DataGridHeaderCell	packages/react-components/react-table/library/src/components/DataGridHeaderCell/DataGridHeaderCell.test.tsx	table	COLLECTION	T1_ALIAS	table;app-bar;grid;layout-primitive
+microsoft/fluentui	DataGridRow	packages/react-components/react-table/library/src/components/DataGridRow/DataGridRow.test.tsx	table	COLLECTION	T1_ALIAS	table;grid;layout-primitive
+microsoft/fluentui	DataGridSelectionCell	packages/react-components/react-table/library/src/components/DataGridSelectionCell/DataGridSelectionCell.test.tsx	table	COLLECTION	T1_ALIAS	table;select;grid;layout-primitive
+microsoft/fluentui	TableBody	packages/react-components/react-table/library/src/components/TableBody/TableBody.test.tsx	table	COLLECTION	T1_ALIAS	table
+microsoft/fluentui	TableCell	packages/react-components/react-table/library/src/components/TableCell/TableCell.test.tsx	table	COLLECTION	T1_ALIAS	table
+microsoft/fluentui	TableCellActions	packages/react-components/react-table/library/src/components/TableCellActions/TableCellActions.test.tsx	table	COLLECTION	T1_ALIAS	table
+microsoft/fluentui	TableCellLayout	packages/react-components/react-table/library/src/components/TableCellLayout/TableCellLayout.test.tsx	table	COLLECTION	T1_ALIAS	table
+microsoft/fluentui	TableHeader	packages/react-components/react-table/library/src/components/TableHeader/TableHeader.test.tsx	app-bar	COMMANDS	T1_ALIAS	app-bar;table
+microsoft/fluentui	TableHeaderCell	packages/react-components/react-table/library/src/components/TableHeaderCell/TableHeaderCell.test.tsx	app-bar	COMMANDS	T1_ALIAS	app-bar;table
+microsoft/fluentui	TableResizeHandle	packages/react-components/react-table/library/src/components/TableResizeHandle/TableResizeHandle.test.tsx	table	COLLECTION	T1_ALIAS	table
+microsoft/fluentui	TableRow	packages/react-components/react-table/library/src/components/TableRow/TableRow.test.tsx	table	COLLECTION	T1_ALIAS	table;layout-primitive
+microsoft/fluentui	TableSelectionCell	packages/react-components/react-table/library/src/components/TableSelectionCell/TableSelectionCell.test.tsx	select	PICKER	T1_ALIAS	select;table
+microsoft/fluentui	Tab	packages/react-components/react-tabs/library/src/components/Tab/Tab.test.tsx	tabs	SEGMENTS	T1_ALIAS	tabs
+microsoft/fluentui	TagPickerButton	packages/react-components/react-tag-picker/library/src/components/TagPickerButton/TagPickerButton.test.tsx	button	COMMANDS	T1_ALIAS	button;select;chip
+microsoft/fluentui	TagPickerControl	packages/react-components/react-tag-picker/library/src/components/TagPickerControl/TagPickerControl.test.tsx	select	PICKER	T1_ALIAS	select;chip
+microsoft/fluentui	TagPickerGroup	packages/react-components/react-tag-picker/library/src/components/TagPickerGroup/TagPickerGroup.test.tsx	select	PICKER	T1_ALIAS	select;layout-primitive;panel;chip
+microsoft/fluentui	TagPickerInput	packages/react-components/react-tag-picker/library/src/components/TagPickerInput/TagPickerInput.test.tsx	select	PICKER	T1_ALIAS	select;text-input;chip
+microsoft/fluentui	TagPickerList	packages/react-components/react-tag-picker/library/src/components/TagPickerList/TagPickerList.test.tsx	select	PICKER	T1_ALIAS	select;list;chip
+microsoft/fluentui	TagPickerOption	packages/react-components/react-tag-picker/library/src/components/TagPickerOption/TagPickerOption.test.tsx	select	PICKER	T1_ALIAS	select;chip
+microsoft/fluentui	TagPickerOptionGroup	packages/react-components/react-tag-picker/library/src/components/TagPickerOptionGroup/TagPickerOptionGroup.test.tsx	select	PICKER	T1_ALIAS	select;layout-primitive;panel;chip
+microsoft/fluentui	InteractionTagPrimary	packages/react-components/react-tags/library/src/components/InteractionTagPrimary/InteractionTagPrimary.test.tsx	chip	TOKEN	T1_ALIAS	chip
+microsoft/fluentui	InteractionTagSecondary	packages/react-components/react-tags/library/src/components/InteractionTagSecondary/InteractionTagSecondary.test.tsx	chip	TOKEN	T1_ALIAS	chip
+microsoft/fluentui	TeachingPopoverBody	packages/react-components/react-teaching-popover/library/src/components/TeachingPopoverBody/TeachingPopoverBody.test.tsx	popover	OVERLAY	T1_ALIAS	popover
+microsoft/fluentui	TeachingPopoverCarousel	packages/react-components/react-teaching-popover/library/src/components/TeachingPopoverCarousel/Carousel/Carousel.tsx	carousel	SEGMENTS	T1_ALIAS	carousel;popover
+microsoft/fluentui	TeachingPopoverCarouselCard	packages/react-components/react-teaching-popover/library/src/components/TeachingPopoverCarouselCard/TeachingPopoverCarouselCard.test.tsx	carousel	SEGMENTS	T1_ALIAS	carousel;popover;card
+microsoft/fluentui	TeachingPopoverCarouselFooter	packages/react-components/react-teaching-popover/library/src/components/TeachingPopoverCarouselFooter/TeachingPopoverCarouselFooter.test.tsx	carousel	SEGMENTS	T1_ALIAS	carousel;popover
+microsoft/fluentui	TeachingPopoverCarouselFooterButton	packages/react-components/react-teaching-popover/library/src/components/TeachingPopoverCarouselFooterButton/TeachingPopoverCarouselFooterButton.test.tsx	carousel	SEGMENTS	T1_ALIAS	carousel;popover;button
+microsoft/fluentui	TeachingPopoverCarouselNav	packages/react-components/react-teaching-popover/library/src/components/TeachingPopoverCarouselNav/TeachingPopoverCarouselNav.test.tsx	carousel	SEGMENTS	T1_ALIAS	carousel;popover;navigation
+microsoft/fluentui	TeachingPopoverCarouselNavButton	packages/react-components/react-teaching-popover/library/src/components/TeachingPopoverCarouselNavButton/TeachingPopoverCarouselNavButton.test.tsx	carousel	SEGMENTS	T1_ALIAS	carousel;popover;button;navigation
+microsoft/fluentui	TeachingPopoverCarouselPageCount	packages/react-components/react-teaching-popover/library/src/components/TeachingPopoverCarouselPageCount/TeachingPopoverCarouselPageCount.test.tsx	carousel	SEGMENTS	T1_ALIAS	carousel;popover
+microsoft/fluentui	TeachingPopoverFooter	packages/react-components/react-teaching-popover/library/src/components/TeachingPopoverFooter/TeachingPopoverFooter.test.tsx	popover	OVERLAY	T1_ALIAS	popover
+microsoft/fluentui	TeachingPopoverHeader	packages/react-components/react-teaching-popover/library/src/components/TeachingPopoverHeader/TeachingPopoverHeader.test.tsx	popover	OVERLAY	T1_ALIAS	popover;app-bar
+microsoft/fluentui	TeachingPopoverSurface	packages/react-components/react-teaching-popover/library/src/components/TeachingPopoverSurface/TeachingPopoverSurface.test.tsx	popover	OVERLAY	T1_ALIAS	popover
+microsoft/fluentui	TeachingPopoverTitle	packages/react-components/react-teaching-popover/library/src/components/TeachingPopoverTitle/TeachingPopoverTitle.test.tsx	popover	OVERLAY	T1_ALIAS	popover;heading
+microsoft/fluentui	TeachingPopoverTrigger	packages/react-components/react-teaching-popover/library/src/components/TeachingPopoverTrigger/TeachingPopoverTrigger.test.tsx	popover	OVERLAY	T1_ALIAS	popover
+microsoft/fluentui	Text	packages/react-components/react-text/library/src/components/Text/Text.test.tsx	label	TOKEN	T2_WORD	label
+microsoft/fluentui	TimePicker	packages/react-components/react-timepicker-compat/library/src/components/TimePicker/TimePicker.cy.tsx	time-picker	PICKER	T1_ALIAS	time-picker;select
+microsoft/fluentui	AriaLive	packages/react-components/react-toast/library/src/components/AriaLive/AriaLive.test.tsx	toast	OVERLAY	T5_PATH	toast
+microsoft/fluentui	Timer	packages/react-components/react-toast/library/src/components/Timer/Timer.tsx	toast	OVERLAY	T5_PATH	toast
+microsoft/fluentui	ToastBody	packages/react-components/react-toast/library/src/components/ToastBody/ToastBody.test.tsx	toast	OVERLAY	T1_ALIAS	toast
+microsoft/fluentui	ToastContainer	packages/react-components/react-toast/library/src/components/ToastContainer/ToastContainer.test.tsx	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive;toast
+microsoft/fluentui	ToastFooter	packages/react-components/react-toast/library/src/components/ToastFooter/ToastFooter.test.tsx	toast	OVERLAY	T1_ALIAS	toast
+microsoft/fluentui	ToastTitle	packages/react-components/react-toast/library/src/components/ToastTitle/ToastTitle.test.tsx	heading	TOKEN	T1_ALIAS	heading;toast
+microsoft/fluentui	ToastTrigger	packages/react-components/react-toast/library/src/components/ToastTrigger/ToastTrigger.test.tsx	toast	OVERLAY	T1_ALIAS	toast
+microsoft/fluentui	Toaster	packages/react-components/react-toast/library/src/components/Toaster/Toaster.test.tsx	toast	OVERLAY	T1_ALIAS	toast
+microsoft/fluentui	ToolbarButton	packages/react-components/react-toolbar/library/src/components/ToolbarButton/ToolbarButton.test.tsx	toolbar	COMMANDS	T1_ALIAS	toolbar;button
+microsoft/fluentui	ToolbarDivider	packages/react-components/react-toolbar/library/src/components/ToolbarDivider/ToolbarDivider.test.tsx	divider	TOKEN	T1_ALIAS	divider;toolbar
+microsoft/fluentui	ToolbarGroup	packages/react-components/react-toolbar/library/src/components/ToolbarGroup/ToolbarGroup.test.tsx	toolbar	COMMANDS	T1_ALIAS	toolbar;layout-primitive;panel
+microsoft/fluentui	ToolbarRadioButton	packages/react-components/react-toolbar/library/src/components/ToolbarRadioButton/ToolbarRadioButton.test.tsx	toolbar	COMMANDS	T1_ALIAS	toolbar;button;radio
+microsoft/fluentui	ToolbarRadioGroup	packages/react-components/react-toolbar/library/src/components/ToolbarRadioGroup/ToolbarRadioGroup.test.tsx	radio	TOKEN	T1_ALIAS	radio;toggle-group;toolbar;layout-primitive;panel
+microsoft/fluentui	ToolbarToggleButton	packages/react-components/react-toolbar/library/src/components/ToolbarToggleButton/ToolbarToggleButton.test.tsx	toggle-button	TOKEN	T1_ALIAS	toggle-button;toolbar;button
+microsoft/fluentui	FlatTree	packages/react-components/react-tree/library/src/components/FlatTree/FlatTree.cy.tsx	tree	COLLECTION	T1_ALIAS	tree
+microsoft/fluentui	FlatTreeItem	packages/react-components/react-tree/library/src/components/FlatTreeItem/FlatTreeItem.tsx	tree	COLLECTION	T1_ALIAS	tree
+microsoft/fluentui	Tree	packages/react-components/react-tree/library/src/components/Tree/Tree.cy.tsx	tree	COLLECTION	T1_ALIAS	tree
+microsoft/fluentui	TreeItem	packages/react-components/react-tree/library/src/components/TreeItem/TreeItem.test.tsx	tree	COLLECTION	T1_ALIAS	tree
+microsoft/fluentui	TreeItemLayout	packages/react-components/react-tree/library/src/components/TreeItemLayout/TreeItemLayout.test.tsx	tree	COLLECTION	T1_ALIAS	tree
+microsoft/fluentui	TreeItemPersonaLayout	packages/react-components/react-tree/library/src/components/TreeItemPersonaLayout/TreeItemPersonaLayout.test.tsx	tree	COLLECTION	T1_ALIAS	tree
+microsoft/fluentui	ColorTokens	packages/react-components/theme-designer/src/components/ColorTokens/AccessibilityList.tsx	chip	TOKEN	T1_ALIAS	chip
+microsoft/fluentui	Content	packages/react-components/theme-designer/src/components/Content/Content.tsx	layout-primitive	CONTAINER	T2_WORD	layout-primitive
+microsoft/fluentui	Demo	packages/react-components/theme-designer/src/components/Demo/Demo.tsx	config-provider	CONTAINER	T5_PATH	config-provider
+microsoft/fluentui	Export	packages/react-components/theme-designer/src/components/Export/ExportLink.tsx	config-provider	CONTAINER	T5_PATH	config-provider
+microsoft/fluentui	Header	packages/react-components/theme-designer/src/components/Header/Header.tsx	app-bar	COMMANDS	T1_ALIAS	app-bar
+microsoft/fluentui	Palette	packages/react-components/theme-designer/src/components/Palette/Palette.stories.tsx	config-provider	CONTAINER	T5_PATH	config-provider
+microsoft/fluentui	Sidebar	packages/react-components/theme-designer/src/components/Sidebar/AccessibilityPanel.tsx	navigation	SEGMENTS	T1_ALIAS	navigation
+microsoft/fluentui	TokenBoxes	packages/react-components/theme-designer/src/components/TokenBoxes/TokenBoxes.stories.tsx	chip	TOKEN	T1_ALIAS	chip
+microsoft/fluentui	Animation	packages/react-docsite-components/src/components/Animation/AnimationDetail/AnimationDetail.tsx	transition-anim	ANIMVALUE	T1_ALIAS	transition-anim
+microsoft/fluentui	ApiReferencesTable	packages/react-docsite-components/src/components/ApiReferencesTable/ApiReferencesTable.tsx	table	COLLECTION	T1_ALIAS	table
+microsoft/fluentui	App	packages/react-docsite-components/src/components/App/App.styles.ts	NON_WIDGET		T3_NON_WIDGET	
+microsoft/fluentui	CodeSnippet	packages/react-docsite-components/src/components/CodeSnippet/CodeSnippet.styles.ts	code-block	TOKEN	T2_WORD	code-block
+microsoft/fluentui	CodepenComponent	packages/react-docsite-components/src/components/CodepenComponent/CodepenComponent.tsx	NON_WIDGET		T3_NON_WIDGET	
+microsoft/fluentui	ColorPalette	packages/react-docsite-components/src/components/ColorPalette/ColorPalette.styles.ts	color-picker	PICKER	T2_WORD	color-picker
+microsoft/fluentui	ComponentPage	packages/react-docsite-components/src/components/ComponentPage/ComponentPage.styles.ts	layout-primitive	CONTAINER	T2_WORD	layout-primitive
+microsoft/fluentui	DisplayToggle	packages/react-docsite-components/src/components/DisplayToggle/DisplayToggle.tsx	label	TOKEN	T2_WORD	label;toggle-button
+microsoft/fluentui	EditSection	packages/react-docsite-components/src/components/EditSection/EditSection.tsx	panel	CONTAINER	T2_WORD	panel
+microsoft/fluentui	ExampleCard	packages/react-docsite-components/src/components/ExampleCard/ExampleCard.styles.ts	card	CONTAINER	T1_ALIAS	card
+microsoft/fluentui	FeedbackList	packages/react-docsite-components/src/components/FeedbackList/FeedbackList.styles.ts	list	COLLECTION	T1_ALIAS	list
+microsoft/fluentui	LoadingComponent	packages/react-docsite-components/src/components/LoadingComponent/LoadingComponent.tsx	spinner-loading	ANIMVALUE	T1_ALIAS	spinner-loading
+microsoft/fluentui	Markdown	packages/react-docsite-components/src/components/Markdown/Markdown.test.tsx	markdown-render	EMBED	T1_ALIAS	markdown-render
+microsoft/fluentui	MarkdownTable	packages/react-docsite-components/src/components/MarkdownTable/MarkdownCell.tsx	markdown-render	EMBED	T1_ALIAS	markdown-render;table
+microsoft/fluentui	Page	packages/react-docsite-components/src/components/Page/Page.module.scss	layout-primitive	CONTAINER	T2_WORD	layout-primitive
+microsoft/fluentui	PlatformBar	packages/react-docsite-components/src/components/PlatformBar/PlatformBar.base.tsx	toolbar	COMMANDS	T2_WORD	toolbar
+microsoft/fluentui	PlatformPicker	packages/react-docsite-components/src/components/PlatformPicker/PlatformPicker.module.scss	select	PICKER	T1_ALIAS	select
+microsoft/fluentui	PropertiesTable	packages/react-docsite-components/src/components/PropertiesTable/PropertiesTable.tsx	table	COLLECTION	T1_ALIAS	table
+microsoft/fluentui	ScrollBars	packages/react-docsite-components/src/components/ScrollBars/ScrollBars.tsx	scroll	COLLECTION	T1_ALIAS	scroll
+microsoft/fluentui	SideRail	packages/react-docsite-components/src/components/SideRail/SideRail.styles.ts	navigation	SEGMENTS	T1_ALIAS	navigation
+microsoft/fluentui	SiteMessageBar	packages/react-docsite-components/src/components/SiteMessageBar/SiteMessageBar.tsx	message-list	COLLECTION	T1_ALIAS	message-list
+microsoft/fluentui	TopBanner	packages/react-docsite-components/src/components/TopBanner/TopBanner.module.scss	alert-banner	CONTAINER	T1_ALIAS	alert-banner
+microsoft/fluentui	TopNav	packages/react-docsite-components/src/components/TopNav/TopNav.module.scss	navigation	SEGMENTS	T1_ALIAS	navigation
+microsoft/fluentui	BAFAccordion	packages/react-experiments/src/components/BAFAccordion/Accordion.scss	accordion	CONTAINER	T1_ALIAS	accordion
+microsoft/fluentui	Chiclet	packages/react-experiments/src/components/Chiclet/Chiclet.base.tsx	UNMAPPED		UNMAPPED	
+microsoft/fluentui	CollapsibleSection	packages/react-experiments/src/components/CollapsibleSection/CollapsibleSection.state.tsx	accordion	CONTAINER	T1_ALIAS	accordion
+microsoft/fluentui	FloatingSuggestions	packages/react-experiments/src/components/FloatingSuggestions/FloatingPeopleSuggestions/FloatingPeopleSuggestions.tsx	autocomplete	INPUT	T1_ALIAS	autocomplete
+microsoft/fluentui	FloatingSuggestionsComposite	packages/react-experiments/src/components/FloatingSuggestionsComposite/FloatingPeopleSuggestions/FloatingPeopleSuggestionItems/SuggestionItemDefault.styles.ts	autocomplete	INPUT	T1_ALIAS	autocomplete
+microsoft/fluentui	FolderCover	packages/react-experiments/src/components/FolderCover/FolderCover.scss	UNMAPPED		UNMAPPED	
+microsoft/fluentui	LayoutGroup	packages/react-experiments/src/components/LayoutGroup/LayoutGroup.tsx	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive;panel
+microsoft/fluentui	MicroFeedback	packages/react-experiments/src/components/MicroFeedback/MicroFeedback.state.ts	UNMAPPED		UNMAPPED	
+microsoft/fluentui	Pagination	packages/react-experiments/src/components/Pagination/PageNumber.tsx	pagination	SEGMENTS	T1_ALIAS	pagination
+microsoft/fluentui	PersonaCoin	packages/react-experiments/src/components/PersonaCoin/PersonaCoin.state.ts	UNMAPPED		UNMAPPED	
+microsoft/fluentui	SelectedItemsList	packages/react-experiments/src/components/SelectedItemsList/Items/CopyableItem.tsx	select	PICKER	T1_ALIAS	select;list
+microsoft/fluentui	StaticList	packages/react-experiments/src/components/StaticList/List.types.ts	list	COLLECTION	T1_ALIAS	list
+microsoft/fluentui	Tile	packages/react-experiments/src/components/Tile/Check.scss	carousel-tiles	SEGMENTS	T1_ALIAS	carousel-tiles
+microsoft/fluentui	TilesList	packages/react-experiments/src/components/TilesList/TilesList.scss	carousel-tiles	SEGMENTS	T1_ALIAS	carousel-tiles;list
+microsoft/fluentui	UnifiedPicker	packages/react-experiments/src/components/UnifiedPicker/UnifiedPeoplePicker/UnifiedPeoplePicker.test.tsx	select	PICKER	T1_ALIAS	select
+microsoft/fluentui	VirtualizedList	packages/react-experiments/src/components/VirtualizedList/VirtualizedList.scss	list	COLLECTION	T1_ALIAS	list
+microsoft/fluentui	FocusZone	packages/react-focus/src/components/FocusZone/FocusZone.EventHandler.test.tsx	focus-trap	OVERLAY	T2_WORD	focus-trap
+microsoft/fluentui	ActivityItem	packages/react/src/components/ActivityItem/ActivityItem.classNames.ts	list	COLLECTION	T2_WORD	list
+microsoft/fluentui	Announced	packages/react/src/components/Announced/Announced.base.tsx	UNMAPPED		UNMAPPED	
+microsoft/fluentui	Autofill	packages/react/src/components/Autofill/Autofill.test.tsx	UNMAPPED		UNMAPPED	
+microsoft/fluentui	Callout	packages/react/src/components/Callout/Callout.test.tsx	alert-banner	CONTAINER	T1_ALIAS	alert-banner
+microsoft/fluentui	Check	packages/react/src/components/Check/Check.base.tsx	NON_WIDGET		T3_NON_WIDGET	
+microsoft/fluentui	ChoiceGroup	packages/react/src/components/ChoiceGroup/ChoiceGroup.base.tsx	select	PICKER	T1_ALIAS	select;layout-primitive;panel
+microsoft/fluentui	Coachmark	packages/react/src/components/Coachmark/Beak/Beak.styles.ts	tour	OVERLAY	T1_ALIAS	tour
+microsoft/fluentui	ComboBox	packages/react/src/components/ComboBox/ComboBox.classNames.ts	select	PICKER	T1_ALIAS	select;layout-primitive
+microsoft/fluentui	CommandBar	packages/react/src/components/CommandBar/CommandBar.base.tsx	command-palette	COLLECTION	T1_ALIAS	command-palette
+microsoft/fluentui	DetailsList	packages/react/src/components/DetailsList/DetailsColumn.base.tsx	accordion	CONTAINER	T1_ALIAS	accordion;list
+microsoft/fluentui	DocumentCard	packages/react/src/components/DocumentCard/DocumentCard.base.tsx	card	CONTAINER	T1_ALIAS	card
+microsoft/fluentui	ExtendedPicker	packages/react/src/components/ExtendedPicker/BaseExtendedPicker.scss	select	PICKER	T1_ALIAS	select
+microsoft/fluentui	Fabric	packages/react/src/components/Fabric/Fabric.base.tsx	UNMAPPED		UNMAPPED	
+microsoft/fluentui	Facepile	packages/react/src/components/Facepile/Facepile.base.tsx	UNMAPPED		UNMAPPED	
+microsoft/fluentui	FloatingPicker	packages/react/src/components/FloatingPicker/BaseFloatingPicker.scss	select	PICKER	T1_ALIAS	select
+microsoft/fluentui	FocusTrapZone	packages/react/src/components/FocusTrapZone/FocusTrapZone.test.tsx	focus-trap	OVERLAY	T1_ALIAS	focus-trap
+microsoft/fluentui	GroupedList	packages/react/src/components/GroupedList/GroupFooter.base.tsx	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive;panel;list
+microsoft/fluentui	HoverCard	packages/react/src/components/HoverCard/BaseCard.types.ts	hover-card	OVERLAY	T1_ALIAS	hover-card;card
+microsoft/fluentui	Icon	packages/react/src/components/Icon/FontIcon.test.tsx	icon	TOKEN	T1_ALIAS	icon
+microsoft/fluentui	Keytip	packages/react/src/components/Keytip/Keytip.styles.ts	UNMAPPED		UNMAPPED	
+microsoft/fluentui	KeytipData	packages/react/src/components/KeytipData/KeytipData.tsx	NON_WIDGET		T3_NON_WIDGET	
+microsoft/fluentui	KeytipLayer	packages/react/src/components/KeytipLayer/IKeytipTreeNode.ts	video-player	EMBED	T1_ALIAS	video-player
+microsoft/fluentui	Layer	packages/react/src/components/Layer/Layer.base.tsx	popover	OVERLAY	T2_WORD	popover
+microsoft/fluentui	MarqueeSelection	packages/react/src/components/MarqueeSelection/MarqueeSelection.base.tsx	select	PICKER	T1_ALIAS	select
+microsoft/fluentui	Modal	packages/react/src/components/Modal/Modal.base.tsx	dialog	OVERLAY	T1_ALIAS	dialog
+microsoft/fluentui	OverflowSet	packages/react/src/components/OverflowSet/OverflowButton.tsx	UNMAPPED		UNMAPPED	
+microsoft/fluentui	Overlay	packages/react/src/components/Overlay/Overlay.base.tsx	popover	OVERLAY	T1_ALIAS	popover
+microsoft/fluentui	Panel	packages/react/src/components/Panel/Panel.base.tsx	panel	CONTAINER	T1_ALIAS	panel
+microsoft/fluentui	Pivot	packages/react/src/components/Pivot/Pivot.base.tsx	UNMAPPED		UNMAPPED	
+microsoft/fluentui	Popup	packages/react/src/components/Popup/Popup.test.tsx	popover	OVERLAY	T1_ALIAS	popover
+microsoft/fluentui	ProgressIndicator	packages/react/src/components/ProgressIndicator/ProgressIndicator.base.tsx	progress	ANIMVALUE	T1_ALIAS	progress
+microsoft/fluentui	ResizeGroup	packages/react/src/components/ResizeGroup/ResizeGroup.base.tsx	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive;panel
+microsoft/fluentui	ScrollablePane	packages/react/src/components/ScrollablePane/ScrollablePane.base.tsx	scroll	COLLECTION	T1_ALIAS	scroll;panel
+microsoft/fluentui	Separator	packages/react/src/components/Separator/Separator.base.tsx	divider	TOKEN	T1_ALIAS	divider
+microsoft/fluentui	Shimmer	packages/react/src/components/Shimmer/Shimmer.base.tsx	UNMAPPED		UNMAPPED	
+microsoft/fluentui	Sticky	packages/react/src/components/Sticky/Sticky.test.tsx	layout-primitive	CONTAINER	T1_ALIAS	layout-primitive
+microsoft/fluentui	SwatchColorPicker	packages/react/src/components/SwatchColorPicker/ColorPickerGridCell.base.tsx	color-picker	PICKER	T1_ALIAS	color-picker;select
+microsoft/fluentui	TeachingBubble	packages/react/src/components/TeachingBubble/TeachingBubble.base.tsx	message-list	COLLECTION	T2_WORD	message-list
+microsoft/fluentui	TextField	packages/react/src/components/TextField/MaskedTextField/MaskedTextField.test.tsx	text-input	INPUT	T1_ALIAS	text-input
+microsoft/fluentui	ThemeGenerator	packages/react/src/components/ThemeGenerator/IThemeRules.ts	config-provider	CONTAINER	T2_WORD	config-provider
+microsoft/fluentui	Toggle	packages/react/src/components/Toggle/Toggle.base.tsx	toggle-button	TOKEN	T2_WORD	toggle-button
+microsoft/fluentui	WeeklyDayPicker	packages/react/src/components/WeeklyDayPicker/WeeklyDayPicker.base.tsx	select	PICKER	T1_ALIAS	select
+microsoft/fluentui	AzureLightTheme	tools/cli/src/commands/report/__fixtures__/sample-app/packages/azure-theme/src/components/AzureLightTheme/AzureLightTheme.ts	config-provider	CONTAINER	T2_WORD	config-provider
+microsoft/fluentui	Orphan	tools/eslint-rules/rules/__fixtures__/base-hook-signature/src/components/Orphan/useOrphan.ts	UNMAPPED		UNMAPPED	
+microsoft/fluentui	Sibling	tools/eslint-rules/rules/__fixtures__/base-hook-signature/src/components/Sibling/useSibling.ts	UNMAPPED		UNMAPPED	
+telerik/kendo-ui-core	actionsheet	src/kendo.actionsheet.js	bottom-sheet	OVERLAY	T1_ALIAS	bottom-sheet;sheet-dialog
+telerik/kendo-ui-core	autocomplete	src/kendo.autocomplete.js	autocomplete	INPUT	T1_ALIAS	autocomplete
+telerik/kendo-ui-core	badge	src/kendo.badge.js	badge	TOKEN	T1_ALIAS	badge
+telerik/kendo-ui-core	binder	src/kendo.binder.js	UNMAPPED		UNMAPPED	
+telerik/kendo-ui-core	bottomnavigation	src/kendo.bottomnavigation.js	navigation	SEGMENTS	T1_ALIAS	navigation
+telerik/kendo-ui-core	button	src/kendo.button.js	button	COMMANDS	T1_ALIAS	button
+telerik/kendo-ui-core	buttongroup	src/kendo.buttongroup.js	toggle-button	TOKEN	T1_ALIAS	toggle-button;button;layout-primitive;panel
+telerik/kendo-ui-core	calendar	src/kendo.calendar.js	calendar	PICKER	T1_ALIAS	calendar
+telerik/kendo-ui-core	checkbox	src/kendo.checkbox.js	checkbox	TOKEN	T1_ALIAS	checkbox
+telerik/kendo-ui-core	color	src/kendo.color.js	color-picker	PICKER	T2_WORD	color-picker
+telerik/kendo-ui-core	colorpicker	src/kendo.colorpicker.js	color-picker	PICKER	T1_ALIAS	color-picker;select
+telerik/kendo-ui-core	combobox	src/kendo.combobox.js	select	PICKER	T1_ALIAS	select
+telerik/kendo-ui-core	core	src/kendo.core.js	UNMAPPED		UNMAPPED	
+telerik/kendo-ui-core	data	src/kendo.data.js	NON_WIDGET		T3_NON_WIDGET	
+telerik/kendo-ui-core	dateinput	src/kendo.dateinput.js	date-picker	PICKER	T1_ALIAS	date-picker;text-input
+telerik/kendo-ui-core	datepicker	src/kendo.datepicker.js	date-picker	PICKER	T1_ALIAS	date-picker;select
+telerik/kendo-ui-core	datetimepicker	src/kendo.datetimepicker.js	time-picker	PICKER	T1_ALIAS	time-picker;date-picker;select
+telerik/kendo-ui-core	dialog	src/kendo.dialog.js	dialog	OVERLAY	T1_ALIAS	dialog
+telerik/kendo-ui-core	draganddrop	src/kendo.draganddrop.js	UNMAPPED		UNMAPPED	
+telerik/kendo-ui-core	dropdownbutton	src/kendo.dropdownbutton.js	select	PICKER	T1_ALIAS	select;button
+telerik/kendo-ui-core	dropdownlist	src/kendo.dropdownlist.js	select	PICKER	T1_ALIAS	select
+telerik/kendo-ui-core	editable	src/kendo.editable.js	table	COLLECTION	T1_ALIAS	table
+telerik/kendo-ui-core	floatinglabel	src/kendo.floatinglabel.js	label	TOKEN	T1_ALIAS	label
+telerik/kendo-ui-core	fx	src/kendo.fx.js	UNMAPPED		UNMAPPED	
+telerik/kendo-ui-core	icons	src/kendo.icons.js	image	EMBED	T2_WORD	image
+telerik/kendo-ui-core	label	src/kendo.label.js	label	TOKEN	T1_ALIAS	label
+telerik/kendo-ui-core	licensing	src/kendo.licensing.js	UNMAPPED		UNMAPPED	
+telerik/kendo-ui-core	list	src/kendo.list.js	list	COLLECTION	T1_ALIAS	list
+telerik/kendo-ui-core	listbox	src/kendo.listbox.js	list	COLLECTION	T1_ALIAS	list
+telerik/kendo-ui-core	listview	src/kendo.listview.js	list	COLLECTION	T1_ALIAS	list
+telerik/kendo-ui-core	loader	src/kendo.loader.js	spinner-loading	ANIMVALUE	T2_WORD	spinner-loading
+telerik/kendo-ui-core	maskedtextbox	src/kendo.maskedtextbox.js	text-input	INPUT	T1_ALIAS	text-input
+telerik/kendo-ui-core	menu	src/kendo.menu.js	menu	COMMANDS	T1_ALIAS	menu
+telerik/kendo-ui-core	multiselect	src/kendo.multiselect.js	tag-input	INPUT	T1_ALIAS	tag-input;select
+telerik/kendo-ui-core	notification	src/kendo.notification.js	toast	OVERLAY	T1_ALIAS	toast
+telerik/kendo-ui-core	numerictextbox	src/kendo.numerictextbox.js	text-input	INPUT	T1_ALIAS	text-input
+telerik/kendo-ui-core	pager	src/kendo.pager.js	pagination	SEGMENTS	T1_ALIAS	pagination
+telerik/kendo-ui-core	panelbar	src/kendo.panelbar.js	panel	CONTAINER	T1_ALIAS	panel
+telerik/kendo-ui-core	popup	src/kendo.popup.js	popover	OVERLAY	T1_ALIAS	popover
+telerik/kendo-ui-core	progressbar	src/kendo.progressbar.js	progress	ANIMVALUE	T1_ALIAS	progress
+telerik/kendo-ui-core	resizable	src/kendo.resizable.js	splitter	CONTAINER	T1_ALIAS	splitter
+telerik/kendo-ui-core	responsivepanel	src/kendo.responsivepanel.js	panel	CONTAINER	T1_ALIAS	panel
+telerik/kendo-ui-core	router	src/kendo.router.js	navigation	SEGMENTS	T2_WORD	navigation
+telerik/kendo-ui-core	selectable	src/kendo.selectable.js	select	PICKER	T1_ALIAS	select;table
+telerik/kendo-ui-core	slider	src/kendo.slider.js	slider	SEGMENTS	T1_ALIAS	slider
+telerik/kendo-ui-core	sortable	src/kendo.sortable.js	reorder-drag	COLLECTION	T1_ALIAS	reorder-drag;table
+telerik/kendo-ui-core	splitbutton	src/kendo.splitbutton.js	split-button	COMMANDS	T1_ALIAS	split-button;button
+telerik/kendo-ui-core	splitter	src/kendo.splitter.js	splitter	CONTAINER	T1_ALIAS	splitter
+telerik/kendo-ui-core	tabstrip	src/kendo.tabstrip.js	UNMAPPED		UNMAPPED	
+telerik/kendo-ui-core	textarea	src/kendo.textarea.js	text-area	INPUT	T1_ALIAS	text-area
+telerik/kendo-ui-core	textbox	src/kendo.textbox.js	text-input	INPUT	T1_ALIAS	text-input
+telerik/kendo-ui-core	timepicker	src/kendo.timepicker.js	time-picker	PICKER	T1_ALIAS	time-picker;select
+telerik/kendo-ui-core	togglebutton	src/kendo.togglebutton.js	toggle-button	TOKEN	T1_ALIAS	toggle-button;button
+telerik/kendo-ui-core	toggleinputbase	src/kendo.toggleinputbase.js	text-input	INPUT	T1_ALIAS	text-input
+telerik/kendo-ui-core	toolbar	src/kendo.toolbar.js	toolbar	COMMANDS	T1_ALIAS	toolbar
+telerik/kendo-ui-core	tooltip	src/kendo.tooltip.js	tooltip	OVERLAY	T1_ALIAS	tooltip
+telerik/kendo-ui-core	touch	src/kendo.touch.js	UNMAPPED		UNMAPPED	
+telerik/kendo-ui-core	userevents	src/kendo.userevents.js	UNMAPPED		UNMAPPED	
+telerik/kendo-ui-core	validator	src/kendo.validator.js	UNMAPPED		UNMAPPED	
+telerik/kendo-ui-core	view	src/kendo.view.js	layout-primitive	CONTAINER	T2_WORD	layout-primitive
+telerik/kendo-ui-core	virtuallist	src/kendo.virtuallist.js	virtual-list	COLLECTION	T1_ALIAS	virtual-list
+telerik/kendo-ui-core	window	src/kendo.window.js	dialog	OVERLAY	T2_WORD	dialog

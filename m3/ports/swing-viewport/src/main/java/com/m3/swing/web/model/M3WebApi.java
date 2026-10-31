@@ -22,6 +22,9 @@ package com.m3.swing.web.model;
 public interface M3WebApi {
 	String concept();
 
+	/** Replaces the items with a sample spec in the family's format (see the family API). */
+	void load(String sample);
+
 	/** ARIA role id, see {@link M3WebStates#roleName(int)}. */
 	int role();
 

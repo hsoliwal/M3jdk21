@@ -5,11 +5,12 @@ set -euo pipefail
 gen=$1; cd_=$2; neb=$3; sw=$4
 for dst in "$neb/tools/gen" "$sw/webwidgets/gen"; do
   rm -rf "$dst"; mkdir -p "$dst"
-  cp -r "$gen/M3WebGen.java" "$gen/README.md" "$gen/RECIPE_MEMORY.tsv" "$gen/spec" "$gen/templates" "$gen/tools" "$dst/"
+  cp -r "$gen/M3WebGen.java" "$gen/README.md" "$gen/CONCEPTS.md" "$gen/RECIPE_MEMORY.tsv" "$gen/spec" "$gen/templates" "$gen/tools" "$dst/"
+  cp "$cd_/inputs/HARVEST_ADDENDUM.tsv" "$dst/spec/"
 done
-cp "$cd_/CONCEPTS.tsv" "$cd_/COMPONENT_CONCEPTS.tsv" "$gen/spec/FAMILIES.tsv" "$neb/"
+cp "$cd_/CONCEPTS.tsv" "$cd_/COMPONENT_CONCEPTS.tsv" "$gen/spec/FAMILIES.tsv" "$gen/CONCEPTS.md" "$neb/"
 cp "$gen/spec/FOSS_REUSE_DECISION.webwidgets.tsv" "$neb/FOSS_REUSE_DECISION.tsv"
 cp "$gen/README.md" "$neb/README.md"
-cp "$cd_/CONCEPTS.tsv" "$cd_/COMPONENT_CONCEPTS.tsv" "$gen/spec/FAMILIES.tsv" "$gen/README.md" "$sw/webwidgets/"
+cp "$cd_/CONCEPTS.tsv" "$cd_/COMPONENT_CONCEPTS.tsv" "$gen/spec/FAMILIES.tsv" "$gen/README.md" "$gen/CONCEPTS.md" "$sw/webwidgets/"
 cp "$gen/spec/FOSS_REUSE_DECISION.webwidgets.tsv" "$sw/webwidgets/FOSS_REUSE_DECISION.tsv"
 echo synced

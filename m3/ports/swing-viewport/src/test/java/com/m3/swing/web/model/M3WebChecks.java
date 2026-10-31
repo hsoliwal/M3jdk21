@@ -47,8 +47,20 @@ public final class M3WebChecks {
 		pointer(m);
 		damage(m);
 		localize(m);
+		nullTexts(m);
 		viewport(m);
 		removal(m);
+	}
+
+	/** Text-less items (lanes without objects) must paint in every family. */
+	static void nullTexts(M3WebModel m) {
+		int n = m.count();
+		m.add(null);
+		m.add(null, null);
+		paints(m);
+		m.remove(m.count() - 1);
+		m.remove(m.count() - 1);
+		check(m.count() == n, "null-text items removed");
 	}
 
 	/** Proves the declared viewport aspects (R resident, G logical geometry, D damage, P planes). */
