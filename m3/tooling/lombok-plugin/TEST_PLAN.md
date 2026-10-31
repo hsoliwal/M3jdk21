@@ -13,21 +13,24 @@ files; the tests read committed goldens and never need the jar.
 |---|---|---|
 | census discriminator | `java tools/LombokCensus.java <fixture manifest> LOMBOK_API.tsv out.tsv`; compare with `tools/fixture/EXPECTED_OCCURRENCES.tsv` | 14/14 rows: comments, string literals and an import that shadows `lombok.*` produce no row; FQN, nested, static-field, record-component, constructor, parameter, local and `val` uses are classified |
 | census fixed point | `tools/lombok_census.py` twice | byte-identical |
-| pattern coverage | `tools/lombok_patterns.py` | 53/53 census annotation groups covered by 50 cases |
+| class combinations | `tools/lombok_combinations.py` on both census stages | byte-identical; equal to `CLASS_COMBINATIONS.tsv` (23 rows) when com.synexia is in the census |
+| pattern coverage | `tools/lombok_patterns.py` (with `CLASS_COMBINATIONS.tsv`) | 53/53 census annotation groups and 23/23 class combinations covered; 69 cases: C01-C51 (no C48) for the groups and config keys, C68-C86 for rules and combinations |
 | pattern fixed point | `tools/lombok_patterns.py` twice | byte-identical `PATTERNS.tsv` |
 | D0 | `tools/delombok_differential.py` on the 6 delomboked rewrite modules | 267/269 files equal after normalization; 1 FORMAT (rewrite-java `J.java`: delombok line-wraps an enum constant list differently), 1 CLASSPATH (rewrite-test `RewriteTest.java`: `@Delegate` needs the delegate type, absent without a classpath) |
 
-`tools/run_gates.sh` runs all five.
+`tools/run_gates.sh` runs all of them plus `lombok_api`. `SKIP_CENSUS=1` skips census fixed point and class
+combinations: the census runs `git grep` over `m3/` at HEAD, which a shared blobless clone must not do. Use it only
+when no `m3/**/*.java` blob changed.
 
 ## T1: template round trip (unit test, jdk.compiler)
 
 For every `PATTERNS.tsv` row: bind `${Type}`, `${f}`, `${F}`, `${T}` to the case's representative class, build the
 member with `M3JdkLombokMake`, print it with javac's `Pretty`, collapse whitespace, compare with the row's signature,
-annotations (minus `@lombok.Generated` and `@SuppressWarnings`) and body. Pass: all 226 rows.
+annotations (minus `@lombok.Generated` and `@SuppressWarnings`) and body. Pass: all 499 rows.
 
 ## T2: per-case differential (jtreg, `test/langtools/tools/javac/m3/lombok/`)
 
-Inputs: the 50 representative sources of `tools/lombok_patterns.py` per profile (default, openrewrite,
+Inputs: the 69 representative sources of `tools/lombok_patterns.py` per profile (default, openrewrite,
 accessors-chain-config, accessors-prefix-config), and their goldens: delombok output with
 `-f generated:skip -f suppressWarnings:skip -f generateDelombokComment:skip`, committed under `golden/<profile>/`.
 
@@ -53,12 +56,23 @@ Pass: all cases of all profiles.
    `src/main/java/` expansion as is; `javap -p -s` per class file equal for all 269 sources (D0 is the text-level
    precursor: 267/269).
 
+In both, `javap -c -p` of every generated method and constructor must also be equal (except `@SneakyThrows`
+methods, see T2 step 3): `javap -p -s` alone cannot see the member order inside `equals` and `hashCode` (SPEC
+rule 4), which changes `hashCode` values.
+
 Pass: every class file equal. A difference is a FAIL unless it is listed in this file with its cause.
 
 ## T4: rule discriminators (jtreg, negative and edge cases)
 
 New representative cases are added to `tools/lombok_patterns.py` (so they get delombok rows) before the rule they
-cover is implemented; each `[L]` marker of `SPEC.md` has one:
+cover is implemented; each `[L]` marker of `SPEC.md` has one.
+
+Already generated, so already in T2 (2026-10-31 review): C68 equality rank (SPEC rule 4); C77 accessor prefix
+order (`@Accessors`); C69-C76 and C78-C86, one case per class-level annotation combination of
+`CLASS_COMBINATIONS.tsv` (rules 9 and 10, `@With`), among them C71 (with-ers over a hand-written constructor), C72
+(over `@Data`'s constructor), C73 (`@Value @RequiredArgsConstructor`), C74 (`@Data @AllArgsConstructor`), C75
+(`@Value @Builder`) and C86 (field-level `@With` on a `@Builder.Default` field). `tools/lombok_patterns.py` fails
+when a row of `CLASS_COMBINATIONS.tsv` has no case. Still to add:
 
 | Case | Source | Expect |
 |---|---|---|
@@ -74,10 +88,12 @@ cover is implemented; each `[L]` marker of `SPEC.md` has one:
 | C61 | `@UtilityClass` declaring a constructor | `M3LOMBOK_UTILITY_CLASS_CONSTRUCTOR` |
 | C62 | openrewrite profile, `@Value` with a `@Nullable` field | `@Nullable` on the getter and the constructor parameter (SPEC rule 7) |
 | C63 | `@Accessors(prefix="f") @Value @With` | `withCount`, `getCount` from `fCount` |
-| C64 | `@Getter(lazy=true)`, `@Cleanup`, `@Builder(toBuilder=true)` | `M3LOMBOK_UNSUPPORTED` each |
+| C64 | `@Getter(lazy=true)`, `@Cleanup`, `@Builder(toBuilder=true)`, `@EqualsAndHashCode.Include(rank = 1)` | `M3LOMBOK_UNSUPPORTED` each |
 | C65 | `lombok.config` with `lombok.toString.includeFieldNames = false` | `M3LOMBOK_CONFIG_UNSUPPORTED_KEY` |
 | C66 | `import lombok.*; import org.example.NonNull;` with `@NonNull` | not processed (shadowed), compiles against `org.example.NonNull` |
 | C67 | real Lombok on the processor path | `M3LOMBOK_CONFLICT`; with `coexist=skip`, a note and no expansion |
+| C87 | class-level `@Builder` with a hand-written all-args constructor | no constructor generated; `build()` calls the hand-written one (SPEC rule 10) |
+| C88 | `@With` on a class whose constructors match no with-er call; `@Builder @NoArgsConstructor` | javac's own "cannot be applied to given types" error at the annotation; no `M3LOMBOK_*` diagnostic (SPEC rule 10) |
 
 ## T5: order and idempotence
 

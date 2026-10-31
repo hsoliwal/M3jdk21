@@ -23,7 +23,8 @@ ignored.
 |---|---|---|
 | `LOMBOK_API.tsv`, `LOMBOK_CONFIG_KEYS.tsv` | The public Lombok API and config keys of lombok 1.18.48 (sha1 `6858f13541bab505384f07053c5a7b539bbfd3e3`): 71 types, 67 annotations with @Target, @Retention, elements and defaults; 81 config keys | `tools/lombok_api.py` (javap) |
 | `USAGE_CENSUS.tsv` | Every Lombok annotation use (annotation, target, normalized attributes), import, config key and module | `tools/lombok_census.py` + `tools/LombokCensus.java` (javac parser) |
-| `PATTERNS.tsv` | The members each annotation group generates (signature, annotations, body), per config profile | `tools/lombok_patterns.py` + `tools/PatternDiff.java` over delombok 1.18.48 |
+| `PATTERNS.tsv` | The members each annotation group generates (signature, annotations, body), per config profile; cases C68-C86 discriminate the equality rank, the accessor prefix order and every class-level annotation combination of `CLASS_COMBINATIONS.tsv` (rules 9 and 10, `@With`) | `tools/lombok_patterns.py` + `tools/PatternDiff.java` over delombok 1.18.48 |
+| `CLASS_COMBINATIONS.tsv` | Class-level annotation combinations that decide constructors, with-ers and builder members: 35 classes mix `@Value`/`@Data` with an explicit constructor annotation or `@Builder` (10 shapes); 12 of the 206 classes with type-level `@With` have neither `@Value` nor `@AllArgsConstructor`; 4 classes have `@Builder.Default` fields | `tools/lombok_combinations.py` over the census stage (`OCCURRENCES.tsv`) |
 | D0 differential | delombok 1.18.48 on the 269 vendored upstream Lombok sources vs M3JDK's committed 1.18.30 expansions | `tools/delombok_differential.py` |
 
 Census inputs: M3JDK master `52fb81c4` (all 39,147 `m3/**/*.java` blobs, 771 mention "lombok") and the com.synexia
@@ -83,7 +84,12 @@ Not used anywhere: `@NonNull`, `val`/`var`, `@Cleanup`, `@Synchronized`, `@Locke
    `@SuppressWarnings` (source retention, no class-file effect). delombok 1.18.48 adds both; the M3JDK committed
    expansions have neither [D0].
 4. Fields are visited in declaration order; static fields never take part [P-C15]. `equals` and `hashCode` visit
-   primitive fields first, then reference fields, each group in declaration order [P-C47-04, P-C47-05].
+   fields by rank, higher rank first, equal ranks in declaration order [P-C47-04, P-C47-05, P-C68-04, P-C68-05].
+   The rank comes from the field's type as written: 1000 for `boolean`, `byte`, `short`, `int`, `long`, `float`,
+   `double`, `char`; 800 for `Boolean`, `Byte`, `Short`, `Integer`, `Long`, `Float`, `Double`, `Character`, plain
+   or `java.lang.`-qualified; 0 for every other type, arrays included (Lombok
+   `HandlerUtil.defaultEqualsAndHashcodeIncludeRank`). Lombok's explicit `@EqualsAndHashCode.Include(rank = n)` is
+   unused and out of scope (`M3LOMBOK_UNSUPPORTED`). `toString` keeps declaration order [P-C68-06].
 5. Accessor names: `get` + capitalized name; `is` + capitalized name for primitive `boolean` only [P-C14-02];
    a `boolean` field already named `isX` keeps `isX()` and gets `setX` [L].
 6. A member that the source already declares (same name, same parameter count; for `equals`/`hashCode`, either
@@ -94,31 +100,58 @@ Not used anywhere: `@NonNull`, `val`/`var`, `@Cleanup`, `@Synchronized`, `@Locke
 8. `lombok.addNullAnnotations = CUSTOM:<nonnull>:<nullable>` adds `<nullable>` to the `equals` parameter and
    `<nonnull>` to the return of `toString`, with-ers, fluent/chained setters, `builder()`, builder setters and
    `build()` [P-C01-05, P-C01-10, P-C02-02, P-C31-03, P-C31-08, P-C31-10, P-C40-02].
+9. `@Builder.Default` initializers are removed before any constructor, with-er or builder property is planned
+   (Lombok runs `HandleBuilder` at priority -1024, before `HandleValue` at -512 and the constructor and `@With`
+   handlers at 0). An *initialized final* is a final field, made final by the source, `@FieldDefaults` or `@Value`,
+   that still has its initializer after that removal: it is no constructor parameter and gets no with-er and no
+   builder property. A `@Builder.Default` field therefore is a parameter of the all-args constructor and gets a
+   with-er. In case C69, `text` (`@Builder.Default`) is a constructor parameter with a with-er and a builder
+   property; `kind` (initialized, made final by `@Value`) is none of these [P-C69-01 to P-C69-08, P-C69-19 to
+   P-C69-21]. A field-level `@With` on a `@Builder.Default` field works the same way (rewrite-core `PlainText`
+   `withId`) [P-C86-01, P-C86-05].
+10. Constructors implied by `@Value`, `@Data` and class-level `@Builder` give way to explicit ones (Lombok's
+    `SkipIfConstructorExists.YES` and `I_AM_BUILDER`). `@Value` and `@Data` generate no constructor when the class
+    carries `@NoArgsConstructor`, `@RequiredArgsConstructor`, `@AllArgsConstructor` or `@Builder` [P-C69-01,
+    P-C70-01, P-C70-02, P-C73-01, P-C74-01, P-C75-01, P-C76-01, P-C80-01, P-C82-01, P-C83-01, P-C83-02, P-C84-01,
+    P-C84-02, P-C85-01] or declares a constructor [L]. Class-level `@Builder` generates its package-private
+    all-args constructor only when the class carries none of `@NoArgsConstructor`, `@RequiredArgsConstructor`,
+    `@AllArgsConstructor` [P-C69-01, P-C70-02, P-C82-01, P-C86-01] and declares no constructor [L]. Each explicit
+    constructor annotation generates its own constructor, so `@RequiredArgsConstructor` with
+    `@AllArgsConstructor(access = PRIVATE)` gives two [P-C79-01, P-C79-02, P-C84-01, P-C84-02]. The corpus has 10
+    such shapes in 35 classes (`CLASS_COMBINATIONS.tsv`), each with a case. `build()` and with-ers call whatever
+    constructor the class then has; the plugin does not check that one accepts the call, and javac reports a call
+    that matches none, as under Lombok [L].
 
 ## Per annotation
 
 ### `@Value` (class) [P-C01]
 - Class becomes `final` [P-C01-11]. Fields without an access modifier become `private`; all non-static fields
   become `final` unless marked `@NonFinal` [P-C01-02, P-C38].
-- Public all-args constructor over the non-static fields that are not initialized finals, in declaration order
-  [P-C01-01]. No constructor is generated if the class declares any constructor [L].
+- Public all-args constructor over the non-static fields that are not initialized finals (rule 9), in declaration
+  order [P-C01-01]. None is generated when the class carries an explicit constructor annotation or `@Builder`, or
+  declares a constructor (rule 10) [P-C73-01, P-C75-01, P-C76-01].
 - Getters for every non-static field [P-C01-04, P-C01-07].
 - `equals`/`hashCode`/`toString` as below, through the getters (`this.getCount()`), without `canEqual` because the
   class is final [P-C01-05, P-C01-08, P-C01-09].
 
 ### `@With` (type, field; `AccessLevel`) [P-C02 to P-C05]
-- One with-er per non-static field (type level) or for the annotated field:
-  `public T withF(final FT f) { return this.f == f ? this : new T(..., f, ...); }`, the constructor called with
-  every field in declaration order [P-C02-01]. The comparison is reference/primitive `==` for every type
-  [P-C02-05].
-- Requires an all-args constructor in field order (from `@Value` or `@AllArgsConstructor`); without one the
-  plugin reports `M3LOMBOK_WITH_NEEDS_ALL_ARGS_CONSTRUCTOR` [L].
+- One with-er per non-static field that is not an initialized final (rule 9) at type level, or for the annotated
+  field: `public T withF(final FT f) { return this.f == f ? this : new T(..., f, ...); }`, the constructor called
+  with those fields in declaration order [P-C02-01, P-C69-05 to P-C69-08]. The comparison is reference/primitive
+  `==` for every type [P-C02-05].
+- Any constructor that accepts that call serves: one generated by `@Value`, `@AllArgsConstructor` (also
+  `access = PRIVATE`), `@Data` or `@RequiredArgsConstructor` (when the with-er fields are all final), or one
+  written by hand [P-C02, P-C71, P-C72, P-C74, P-C76, P-C78 to P-C81, P-C84, P-C86]. The 12 classes with
+  type-level `@With` and neither `@Value` nor `@AllArgsConstructor` (`CLASS_COMBINATIONS.tsv`) rely on this. The
+  plugin does not look for the constructor and has no diagnostic for its absence: javac reports a with-er call
+  that matches no constructor (rule 10), as under Lombok, whose documentation accepts a hand-written constructor
+  [L].
 - `@With(AccessLevel.PRIVATE)` makes the with-er private [P-C04]; `@With(AccessLevel.NONE)` on a field suppresses
   the type-level with-er for that field [P-C05].
 
 ### `@EqualsAndHashCode` (class) with `.Include` / `.Exclude` [P-C06 to P-C13, P-C47]
 - `equals(final java.lang.Object o)`: identity test; `instanceof T`; cast; `other.canEqual((java.lang.Object) this)`
-  unless the class is final; `super.equals(o)` when `callSuper=true` [P-C09-04]; then per field:
+  unless the class is final; `super.equals(o)` when `callSuper=true` [P-C09-04]; then per field, in rule 4 order:
   primitives other than float/double `!=`; `float` `Float.compare(...) != 0`; `double` `Double.compare(...) != 0`;
   primitive arrays `java.util.Arrays.equals`; `Object[]` `java.util.Arrays.deepEquals`; other references null-safe
   `this$f == null ? other$f != null : !this$f.equals(other$f)` [P-C47-04].
@@ -151,29 +184,36 @@ Not used anywhere: `@NonNull`, `val`/`var`, `@Cleanup`, `@Synchronized`, `@Locke
 - `onlyExplicitlyIncluded=true`: only `@ToString.Include` fields [P-C21].
 
 ### `@RequiredArgsConstructor` (class; `access`) [P-C22, P-C23]
-- Constructor over final fields without initializer (and `@NonNull` fields, unused), in declaration order;
-  public, or the given access [P-C23].
+- Constructor over final fields without initializer after rule 9 (and `@NonNull` fields, unused), in declaration
+  order; public, or the given access [P-C23, P-C73-01].
 
 ### `@AllArgsConstructor` (class; `access`, `onConstructor_`) [P-C24 to P-C28]
-- Constructor over every non-static field except initialized finals [P-C24]. `access` sets its modifier
-  [P-C26, P-C27]; `onConstructor_ = {@JsonCreator}` copies the listed annotations onto it [P-C28].
+- Constructor over every non-static field except initialized finals (rule 9) [P-C24, P-C69-01]. `access` sets its
+  modifier [P-C26, P-C27]; `onConstructor_ = {@JsonCreator}` copies the listed annotations onto it [P-C28,
+  P-C76-01].
 
 ### `@NoArgsConstructor` (class) [P-C29]
 - Public no-argument constructor; an uninitialized final field is an error `M3LOMBOK_FINAL_FIELD_UNINITIALIZED` [L].
+  It assigns `this.f = T.$default$f()` for every `@Builder.Default` field [P-C70-01; D0: rewrite-test
+  `TypeValidation`].
 
 ### `@Data` (class) [P-C30]
 - `@Getter` + `@Setter` (non-final fields) + `@RequiredArgsConstructor` + `@ToString` + `@EqualsAndHashCode` with
-  `canEqual`. The constructor is skipped when the class declares any constructor [L].
+  `canEqual`. The constructor follows rule 10: none when the class carries an explicit constructor annotation or
+  `@Builder`, or declares a constructor [P-C70-01, P-C70-02, P-C74-01].
 
 ### `@Builder` (class, constructor; `builderClassName`) and `@Builder.Default` [P-C31 to P-C34]
-- Class level: package-private all-args constructor unless one exists [P-C31-01]; `public static T.TBuilder
-  builder()` [P-C31-02]; nested `public static class TBuilder` [P-C31-15] with one private field per property
-  [P-C31-05], a package-private no-arg constructor [P-C31-04], fluent setters returning the builder
-  [P-C31-09, P-C31-11], `public T build()` [P-C31-07] and `toString()` `"T.TBuilder(a=..., ...)"` [P-C31-13].
+- Class level: package-private all-args constructor over the fields of rule 9, only as rule 10 allows [P-C31-01,
+  P-C75-01]; `public static T.TBuilder builder()` [P-C31-02]; nested `public static class TBuilder` [P-C31-15]
+  with one private field per property [P-C31-05], a package-private no-arg constructor [P-C31-04], fluent setters
+  returning the builder [P-C31-09, P-C31-11], `public T build()` [P-C31-07] and `toString()`
+  `"T.TBuilder(a=..., ...)"` [P-C31-13].
 - `builderClassName = "X"` names the nested class `X` [P-C34]. Constructor level: the builder's properties are the
   constructor's parameters and `build()` calls it [P-C33].
 - `@Builder.Default` field: the initializer moves into `private static FT $default$f()`, the field loses it, the
-  builder keeps `f$value` and `f$set` and `build()` calls `$default$f()` when unset [P-C32].
+  builder keeps `f$value` and `f$set` and `build()` calls `$default$f()` when unset [P-C32]. This happens before
+  constructors and with-ers are planned (rule 9) [P-C69-02, P-C69-04]; a generated no-argument constructor assigns
+  `this.f = T.$default$f()` [P-C70-01].
 
 ### `@FieldDefaults` (class; `level`, `makeFinal`) and `@NonFinal` (field) [P-C35 to P-C38]
 - Fields without an access modifier get `level` [P-C35]; `makeFinal=true` makes every non-static field final
@@ -189,7 +229,9 @@ Not used anywhere: `@NonNull`, `val`/`var`, `@Cleanup`, `@Synchronized`, `@Locke
   `setCount(...)`, `m_active` gives `isActive()`) [P-C42, P-C50]. A field that matches no prefix gets no accessors
   and the warning `M3LOMBOK_PREFIX_MISMATCH` (delombok: "Not generating getter for this field: It does not fit your
   @Accessors prefix list.") [P-C42-07, P-C50-05]. Config key `lombok.accessors.prefix += f` adds to the list
-  [P-C50]. The longest matching prefix wins; an empty prefix means "no prefix" [L].
+  [P-C50]. Prefixes are tried in list order and the first that matches wins, not the longest: with
+  `prefix = {"_", "__", ""}`, `__count` gives `get_count()` and `_size` gives `getSize()`; an empty prefix matches
+  any field and leaves its name unchanged (`plain` gives `getPlain()`, no warning) [P-C77-01 to P-C77-03].
 - Precedence: `@Accessors` on the field, then on the class, then on enclosing classes, then config [L].
   Prefix stripping also names with-ers (`withCount`) [L].
 

@@ -1,16 +1,21 @@
 # SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
-"""lombok_patterns.py <stage_dir> <lane_dir> <java> <lombok.jar> <openrewrite_lombok.config> <USAGE_CENSUS.tsv> :
+"""lombok_patterns.py <stage_dir> <lane_dir> <java> <lombok.jar> <openrewrite_lombok.config> <USAGE_CENSUS.tsv>
+                     [CLASS_COMBINATIONS.tsv] :
 LOMBOK-PATTERN v1 (CPU). Writes one representative source per census annotation group (CASES below; plus the
-accessors chain/prefix cases SPEC.md covers), runs `lombok delombok` on them under each config profile, and runs
-PatternDiff.java (javac parser, one AST) to turn every expansion into generated-member rows.
+accessors chain/prefix cases SPEC.md covers, and C68-C86: equality rank, accessor prefix order and one case per
+class-level annotation combination of CLASS_COMBINATIONS.tsv), runs `lombok delombok` on them under each config
+profile, and runs PatternDiff.java (javac parser, one AST) to turn every expansion into generated-member rows.
   profiles  default      config.stopBubbling only (com.synexia has no lombok.config)
             openrewrite  the M3JDK UPSTREAM_LOMBOK.config verbatim (the 13 vendored rewrite modules)
             accessors-chain-config / accessors-prefix-config  one case each (lombok.accessors.chain / .prefix)
 Output <lane_dir>/PATTERNS.tsv: rows identical under default and openrewrite merge into profile "*"; delombok
-diagnostics become WARNING rows. Gate: every ANNOTATION group of USAGE_CENSUS.tsv is covered by a case, else exit 1.
+diagnostics become WARNING rows. Gate: every ANNOTATION group of USAGE_CENSUS.tsv is covered by a case and, when
+CLASS_COMBINATIONS.tsv is given, every (section, shape) row of it matches a case's class annotations
+(lombok_combinations.classify), else exit 1.
 Stub sources (JsonCreator, slf4j, the OpenRewrite nullness annotations) only let delombok resolve names."""
 import collections
+import importlib.util
 import os
 import re
 import shutil
@@ -152,6 +157,71 @@ CASES = [
      []),
     ("C51", [L + "Getter|TYPE:CLASS|-", L + "Setter|TYPE:CLASS|-"], "", BOTH, [L + "Getter", L + "Setter"],
      ["@Getter", "@Setter"], "class", "", F3, []),
+    ("C68", ["rule:equals-rank"], "", BOTH, [EH, L + "ToString"], ["@EqualsAndHashCode", "@ToString"], "class", "",
+     ["private String name;", "private Integer boxed;", "private int count;", "private java.lang.Long total;",
+      "private boolean active;"], []),
+    ("C69", ["combo:Value+With+Builder+AllArgsConstructor+Builder.Default"], "", BOTH,
+     [L + "AllArgsConstructor", L + "Builder", L + "Value", L + "With"],
+     ["@Value", "@With", "@Builder", "@AllArgsConstructor"], "class", "",
+     ["@Builder.Default", 'String text = "";', "int count;", 'String kind = "fixed";'], []),
+    ("C70", ["combo:Data+NoArgsConstructor+AllArgsConstructor+Builder+Builder.Default"], "", BOTH,
+     [L + "AllArgsConstructor", L + "Builder", L + "Data", L + "NoArgsConstructor"],
+     ["@Data", "@NoArgsConstructor", "@AllArgsConstructor", "@Builder"], "class", "",
+     ["@Builder.Default", "private boolean strict = true;", "private int count;"], []),
+    ("C71", ["combo:FieldDefaults+With+declared-constructor"], "", BOTH, [L + "AccessLevel", L + "With", FD],
+     ["@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)", "@With"], "class", "",
+     ["int count;", "String name;", "C71(int count, String name) {", "    this.count = count;",
+      "    this.name = name;", "}"], []),
+    ("C72", ["combo:FieldDefaults(makeFinal)+Data+With"], "", BOTH, [L + "AccessLevel", L + "Data", L + "With", FD],
+     ["@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)", "@Data", "@With"], "class", "",
+     ["int count;", "String name;"], []),
+    ("C73", ["combo:Value+RequiredArgsConstructor+NonFinal"], "", BOTH,
+     [L + "RequiredArgsConstructor", L + "Value", L + "experimental.NonFinal"], ["@Value", "@RequiredArgsConstructor"],
+     "class", "", ["String name;", "@NonFinal", "transient boolean seen;"], []),
+    ("C74", ["combo:Data+AllArgsConstructor+With"], "", BOTH, [L + "AllArgsConstructor", L + "Data", L + "With"],
+     ["@Data", "@AllArgsConstructor", "@With"], "class", "", ["private int count;", "private String name;"], []),
+    ("C75", ["combo:Value+Builder"], "", BOTH, [L + "Builder", L + "Value"], ["@Value", "@Builder"], "class", "",
+     ["int count;", "String name;"], []),
+    ("C76", ["combo:Value+AllArgsConstructor(onConstructor_)+With"], "", BOTH,
+     [L + "AllArgsConstructor", L + "Value", L + "With", "com.fasterxml.jackson.annotation.JsonCreator"],
+     ["@Value", "@AllArgsConstructor(onConstructor_ = {@JsonCreator})", "@With"], "class", "",
+     ["int count;", "String name;"], []),
+    ("C77", ["rule:accessors-prefix-order"], "", BOTH, [L + "Getter", AC],
+     ['@Accessors(prefix = {"_", "__", ""})', "@Getter"], "class", "",
+     ["private int __count;", "private int _size;", "private int plain;"], []),
+    ("C78", ["combo:Value+With"], "", BOTH, [L + "Value", L + "With"], ["@Value", "@With"], "class", "",
+     ["int count;", "String name;"], []),
+    ("C79", ["combo:FieldDefaults(makeFinal)+RequiredArgsConstructor+AllArgsConstructor(PRIVATE)+With+NonFinal"], "",
+     BOTH, [L + "AccessLevel", L + "AllArgsConstructor", L + "RequiredArgsConstructor", L + "With", FD,
+            L + "experimental.NonFinal"],
+     ["@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)", "@RequiredArgsConstructor",
+      "@AllArgsConstructor(access = AccessLevel.PRIVATE)", "@With"], "class", "",
+     ["int count;", "@NonFinal", "transient String cache;"], []),
+    ("C80", ["combo:FieldDefaults(makeFinal)+RequiredArgsConstructor+With+Data"], "", BOTH,
+     [L + "AccessLevel", L + "Data", L + "RequiredArgsConstructor", L + "With", FD],
+     ["@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)", "@RequiredArgsConstructor", "@With", "@Data"],
+     "class", "", ["int count;", "String name;"], []),
+    ("C81", ["combo:RequiredArgsConstructor+FieldDefaults(makeFinal)+With"], "", BOTH,
+     [L + "AccessLevel", L + "RequiredArgsConstructor", L + "With", FD],
+     ["@RequiredArgsConstructor", "@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)", "@With"], "class",
+     "", ["int count;", "String name;"], []),
+    ("C82", ["combo:Data+Builder+AllArgsConstructor"], "", BOTH, [L + "AllArgsConstructor", L + "Builder", L + "Data"],
+     ["@Data", "@Builder", "@AllArgsConstructor"], "class", "", ["private int count;", "private String name;"], []),
+    ("C83", ["combo:Data+NoArgsConstructor+AllArgsConstructor"], "", BOTH,
+     [L + "AllArgsConstructor", L + "Data", L + "NoArgsConstructor"],
+     ["@Data", "@NoArgsConstructor", "@AllArgsConstructor"], "class", "",
+     ["private int count;", "private String name;"], []),
+    ("C84", ["combo:FieldDefaults(makeFinal)+RequiredArgsConstructor+AllArgsConstructor(PRIVATE)+Data+NonFinal"], "",
+     BOTH, [L + "AccessLevel", L + "AllArgsConstructor", L + "Data", L + "RequiredArgsConstructor", L + "With", FD,
+            L + "experimental.NonFinal"],
+     ["@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)", "@RequiredArgsConstructor",
+      "@AllArgsConstructor(access = AccessLevel.PRIVATE)", "@Data"], "class", "",
+     ["@NonFinal", "transient String cache;", "@With", "int count;", "String name;"], []),
+    ("C85", ["combo:Data+NoArgsConstructor"], "", BOTH, [L + "Data", L + "NoArgsConstructor"],
+     ["@Data", "@NoArgsConstructor"], "class", "", ["private int count;", "private String name;"], []),
+    ("C86", ["combo:Value+Builder+AllArgsConstructor+Builder.Default+field-With"], "", BOTH,
+     [L + "AllArgsConstructor", L + "Builder", L + "Value", L + "With"], ["@Value", "@Builder", "@AllArgsConstructor"],
+     "class", "", ["@With", "@Builder.Default", 'String id = "id";', "String name;"], []),
 ]
 STUBS = {
     "com/fasterxml/jackson/annotation/JsonCreator.java":
@@ -167,6 +237,10 @@ DIAG = re.compile(r"[\\/]rep[\\/](?P<case>C\d\d)\.java:(?P<line>\d+): (?P<sev>wa
 INDENT = "    "
 PATTERN_HEADER = "pattern\tprofile\tcase\tcensus_keys\towner\tkind\tchange\tfields\tsignature\tannotations\tbody\n"
 NONE = "-"
+ANNOTATION_NAME = re.compile(r"@([A-Za-z][A-Za-z0-9_.]*)")
+BUILDER_DEFAULT_MEMBER = "@Builder.Default"
+COMBINATIONS_TOOL = "lombok_combinations.py"
+COMBINATIONS_MODULE = "lombok_combinations"
 
 
 def source(case):
@@ -188,6 +262,26 @@ def census_groups(census):
         next(f)
         rows = [line.rstrip("\n").split("\t") for line in f]
     return sorted({"%s|%s|%s" % (r[2], r[3], r[4]) for r in rows if r[0] == "ANNOTATION"})
+
+
+def combinations_tool():
+    """lombok_combinations.py next to this file, loaded by path (works under python -I too)."""
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), COMBINATIONS_TOOL)
+    spec = importlib.util.spec_from_file_location(COMBINATIONS_MODULE, path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def uncovered_combinations(path):
+    """(section, shape) rows of CLASS_COMBINATIONS.tsv that no case's class annotations reproduce."""
+    with open(path, encoding="utf-8") as f:
+        next(f)
+        wanted = {tuple(line.rstrip("\n").split("\t")[:2]) for line in f}
+    classify = combinations_tool().classify
+    covered = {g for c in CASES for g in classify({ANNOTATION_NAME.match(a).group(1) for a in c[5]},
+                                                    BUILDER_DEFAULT_MEMBER in c[8])}
+    return sorted(wanted - covered)
 
 
 def run_profile(profile, cases, stage, java, jar, tool):
@@ -239,6 +333,7 @@ def main(argv):
         PROFILE_CONFIG[OPENREWRITE] = f.read()
     covered = {k for c in CASES for k in c[1]}
     uncovered = [g for g in census_groups(census) if g not in covered]
+    missing = uncovered_combinations(argv[7]) if len(argv) > 7 else []
     tool = os.path.join(os.path.dirname(os.path.abspath(__file__)), "PatternDiff.java")
     profiles = sorted({p for c in CASES for p in c[3]})
     rows = []
@@ -252,12 +347,13 @@ def main(argv):
             counter[r[1]] += 1
             f.write("P-%s-%02d\t%s\n" % (r[1], counter[r[1]], "\t".join(r)))
     kinds = collections.Counter(r[5] for r in merged)
-    print("PATTERNS rows=%d cases=%d kinds=%s uncovered_census_groups=%d" % (len(merged), len(CASES),
-                                                                           dict(sorted(kinds.items())),
-                                                                           len(uncovered)))
+    print("PATTERNS rows=%d cases=%d kinds=%s uncovered_census_groups=%d uncovered_combinations=%d"
+          % (len(merged), len(CASES), dict(sorted(kinds.items())), len(uncovered), len(missing)))
     for g in uncovered:
         print("UNCOVERED " + g)
-    sys.exit(1 if uncovered else 0)
+    for section, shape in missing:
+        print("UNCOVERED_COMBINATION %s %s" % (section, shape))
+    sys.exit(1 if uncovered or missing else 0)
 
 
 if __name__ == "__main__":

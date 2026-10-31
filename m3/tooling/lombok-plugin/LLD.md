@@ -64,17 +64,26 @@ delombok output).
 |---|---|---|---|---|
 | 1 | H-CONFIG | (every unit with a Lombok name) | config view for the unit's directory chain | |
 | 2 | H-MOD | `@UtilityClass`, `@FieldDefaults`, `@Value` (finality and access part), `@NonFinal` | modifier edits, private constructor of `@UtilityClass` (C35-C38, C45, C01 MODIFIERS rows) | 1 |
-| 3 | H-NAMES | `@Accessors`, `lombok.accessors.*` | accessor name and return-type plan per field (C39-C42, C49, C50) | 1, 2 |
-| 4 | H-CTOR | `@NoArgsConstructor`, `@RequiredArgsConstructor`, `@AllArgsConstructor`, implied by `@Value`, `@Data`, `@Builder` | constructors (C22-C29, C01-01, C30, C31-01) | 2 |
-| 5 | H-ACCESS | `@Getter`, `@Setter`, implied by `@Value`, `@Data` | getters and setters (C14-C19, C51) | 3 |
-| 6 | H-WITH | `@With` | with-ers (C02-C05) | 4 (all-args constructor) |
-| 7 | H-EQUALS | `@EqualsAndHashCode` (+ `.Include`/`.Exclude`), implied by `@Value`, `@Data` | `equals`, `canEqual`, `hashCode` (C06-C13, C47) | 5 (getters when present) |
-| 8 | H-TOSTRING | `@ToString` (+ `.Include`), implied by `@Value`, `@Data` | `toString` (C20, C21) | 5 |
-| 9 | H-BUILDER | `@Builder`, `@Builder.Default` | `builder()`, nested builder class, `$default$` methods (C31-C34) | 4 |
-| 10 | H-LOG | `@Slf4j` | logger field (C46) | |
-| 11 | H-SNEAKY | `@SneakyThrows` | body rewrite with a sneaky `throw` (C44) | |
-| 12 | H-STRIP | every consumed annotation | removes the annotations and the `lombok.*` imports only they used | 2-11 succeeded for the unit |
+| 3 | H-DEFAULT | `@Builder.Default` | each initializer moved into `private static FT $default$f()`, the field left without it (SPEC rule 9; C32, C69, C70, C86 `$default$` and field BODY rows) | 2 |
+| 4 | H-NAMES | `@Accessors`, `lombok.accessors.*` | accessor name and return-type plan per field (C39-C42, C49, C50) | 1, 2 |
+| 5 | H-CTOR | `@NoArgsConstructor`, `@RequiredArgsConstructor`, `@AllArgsConstructor`, implied by `@Value`, `@Data`, `@Builder` | constructors over the fields of SPEC rule 9; implied ones only as SPEC rule 10 allows; the no-argument constructor assigns the `$default$` values (C22-C29, C01-01, C30, C31-01, C69, C70, C73-C76, C78-C86) | 2, 3 |
+| 6 | H-ACCESS | `@Getter`, `@Setter`, implied by `@Value`, `@Data` | getters and setters (C14-C19, C51) | 4 |
+| 7 | H-WITH | `@With` | with-ers over the fields of SPEC rule 9; the constructor they call is not looked up (C02-C05, C69, C71, C72, C74, C76, C78-C81, C84, C86) | 2, 3, 4 |
+| 8 | H-EQUALS | `@EqualsAndHashCode` (+ `.Include`/`.Exclude`), implied by `@Value`, `@Data` | `equals`, `canEqual`, `hashCode`, fields in SPEC rule 4 rank order (C06-C13, C47, C68) | 6 (getters when present) |
+| 9 | H-TOSTRING | `@ToString` (+ `.Include`), implied by `@Value`, `@Data` | `toString` (C20, C21) | 6 |
+| 10 | H-BUILDER | `@Builder` | `builder()`, nested builder class (C31-C34, C69, C70, C75, C82, C86) | 3, 5 |
+| 11 | H-LOG | `@Slf4j` | logger field (C46) | |
+| 12 | H-SNEAKY | `@SneakyThrows` | body rewrite with a sneaky `throw` (C44) | |
+| 13 | H-STRIP | every consumed annotation | removes the annotations and the `lombok.*` imports only they used | 2-12 succeeded for the unit |
 | S2 | H-DELEGATE | `@Delegate` | delegate methods (C43) | attributed field type |
+
+The order keeps Lombok's handler priorities wherever they change the result (`@HandlerPriority` in the lombok
+1.18.48 class files): `HandleUtilityClass` -4096 and `HandleFieldDefaults` -2048 (H-MOD), then `HandleBuilder`
+-1024, whose `@Builder.Default` part is H-DEFAULT, then `HandleValue` -512, then every other handler at 0. So
+constructors, with-ers and the builder see `@Builder.Default` fields without their initializer, and a
+`@Builder.Default` field is no initialized final (SPEC rule 9). H-MOD's `@Value` part runs before H-DEFAULT,
+although Lombok runs `HandleValue` after `HandleBuilder`: the two edit different parts of a field (modifiers,
+initializer), so their relative order does not change the result.
 
 Shared atoms used by the handlers:
 
@@ -82,7 +91,7 @@ Shared atoms used by the handlers:
 |---|---|---|---|
 | ResolveLombokNames | unit imports and annotation trees | (annotation tree, fully qualified Lombok name) pairs; single-type imports shadow `lombok.*` on-demand imports (JLS 6.4.1); the census tool `tools/LombokCensus.java` implements the same rule and its fixture is the discriminator | name outside LOMBOK-API v1: `M3LOMBOK_UNSUPPORTED` |
 | ResolveConfig | source file path, `config=` option | immutable view of the in-scope keys; bubbling stops at `config.stopBubbling = true` | unreadable file: `M3LOMBOK_CONFIG_IO`; unknown key: `M3LOMBOK_CONFIG_UNKNOWN_KEY` (warning) |
-| FieldModel | class tree | non-static fields in declaration order: name, type tree, primitive kind, array depth, final, initializer, field annotations, copyable annotations | |
+| FieldModel | class tree | non-static fields in declaration order: name, type tree, primitive kind, array depth, final, initializer (as H-DEFAULT left it), equality rank (SPEC rule 4), field annotations, copyable annotations | |
 | MemberIndex | class tree | names and arities of declared methods and constructors (for SPEC rule 6) | |
 | Make | pattern id, field binding | the `JCTree` of one `PATTERNS.tsv` row, `final` parameters, nullness and copyable annotations applied (SPEC rules 2, 7, 8) | |
 
@@ -137,7 +146,7 @@ member to the class surface.
 | `M3JdkLombokWith.java` | H-WITH |
 | `M3JdkLombokEquality.java` | H-EQUALS |
 | `M3JdkLombokToString.java` | H-TOSTRING |
-| `M3JdkLombokBuilder.java` | H-BUILDER |
+| `M3JdkLombokBuilder.java` | H-DEFAULT and H-BUILDER |
 | `M3JdkLombokLog.java` | H-LOG |
 | `M3JdkLombokSneaky.java` | H-SNEAKY and the identity set H2 reads |
 | `M3JdkLombokDelegate.java` | H-DELEGATE (S2) |
