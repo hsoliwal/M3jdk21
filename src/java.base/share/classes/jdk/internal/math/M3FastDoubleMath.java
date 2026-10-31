@@ -49,8 +49,6 @@ class M3FastDoubleMath {
     private static final int HALFWAY_TRAILING_MASK = 0x1ff;
     /** The two lowest mantissa bits (round-half-even check). */
     private static final int LOW_TWO_BITS_MASK = 3;
-    /** 2^64: corrects the signed conversion of an unsigned 64-bit significand. */
-    private static final double TWO_POW_64 = 0x1p64;
 
     /**
      * Bias used in the exponent of a double.
@@ -1031,11 +1029,15 @@ class M3FastDoubleMath {
                                                long exponentOfTruncatedSignificand) {
         long power = isSignificandTruncated ? exponentOfTruncatedSignificand : exponent;
         if (DOUBLE_MIN_EXPONENT_POWER_OF_TWO <= power && power <= DOUBLE_MAX_EXPONENT_POWER_OF_TWO) {
-            // Convert the significand into a double.
-            // The cast will round the significand if necessary.
-            // The significand is an unsigned long, however the cast treats it like a signed long.
-            // So, if the significand is negative, we have to add 1<<64 to the number.
-            double d = (double) significand + (significand < 0 ? TWO_POW_64 : 0);
+            //FLLDCIM: M3 - HEX_ROUNDING v1: the donor converted a significand at or above 2^63 as
+            // (double) significand + 2^64, rounding twice (0x8000000000000BFFp0 parsed one ulp off the JDK), and took a
+            // truncated significand as exact, losing the sticky tail (0x1.00000000000008000000000000001p0 rounded
+            // down). Now: one rounding of the unsigned value, and a truncated significand decides only when
+            // significand and significand + 1 round alike; else the JDK converter decides (NaN = slow path).
+            double d = unsignedToDouble(significand);
+            if (isSignificandTruncated && d != unsignedToDouble(significand + 1)) {
+                return Double.NaN;
+            }
 
             // Scale the significand by the power.
             // This only works if power is within the supported range, so that
@@ -1059,5 +1061,21 @@ class M3FastDoubleMath {
      */
     static double fastScalb(double number, long scaleFactor) {
         return number * Double.longBitsToDouble((scaleFactor + DOUBLE_EXPONENT_BIAS) << (DOUBLE_SIGNIFICAND_WIDTH - 1));
+    }
+
+    //FLLDCIM: M3 - HEX_ROUNDING v1: an unsigned 64-bit value to the nearest double, rounded once
+    /**
+     * Converts an unsigned 64-bit value to the nearest double (ties to even), with a single rounding: at or
+     * above 2^63 the value is halved with its lowest bit kept as a sticky bit, converted, and doubled (exact).
+     *
+     * @param unsigned an unsigned 64-bit value
+     * @return the nearest double
+     */
+    private static double unsignedToDouble(long unsigned) {
+        if (unsigned >= 0) {
+            return (double) unsigned;
+        }
+        double half = (double) (unsigned >>> 1 | unsigned & 1);
+        return half + half;
     }
 }
