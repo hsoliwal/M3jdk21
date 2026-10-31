@@ -123,11 +123,12 @@ class M3ArrayMapLiteralsTest {
         Path base = Path.of(System.getProperty("user.dir"));
         Path implementations = base.resolve("../../implementations");
         List<String> all = new ArrayList<>();
-        for (Map<String, String> member : M3ArrayMapFill.members(base.resolve("MEMBERS.tsv"))) {
-            Path source = implementations.resolve(member.get("module"))
-                    .resolve("src/main/java/jdk/m3/collections/apache/" + member.get("CLASS") + ".java");
-            for (String culprit : culprits(Files.readString(source, StandardCharsets.UTF_8))) {
-                all.add(member.get("CLASS") + " " + culprit);
+        for (String table : new String[] {"MEMBERS.tsv", "ID_MEMBERS.tsv"}) {
+            for (Map<String, String> member : M3ArrayMapFill.members(base.resolve(table))) {
+                Path source = implementations.resolve(member.get("module")).resolve(M3ArrayMapFill.source(member));
+                for (String culprit : culprits(Files.readString(source, StandardCharsets.UTF_8))) {
+                    all.add(member.get("CLASS") + " " + culprit);
+                }
             }
         }
         assertEquals(List.of(), all, "hoist every literal into a named constant (static final) of the template");

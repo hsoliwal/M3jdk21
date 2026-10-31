@@ -342,14 +342,100 @@ class M3ArrayMapAtomsTest {
     }
 
     @Test
+    void foldIdIsLongHashCode() {
+        Random random = new Random(7);
+        for (int i = 0; i < 10_000; i++) {
+            long id = random.nextLong();
+            assertEquals(Long.hashCode(id), M3LinkedMap.Atoms.foldId(id));
+        }
+        for (long id : new long[] {0L, -1L, Long.MIN_VALUE, Long.MAX_VALUE, 1L << 32, (1L << 32) + 1}) {
+            assertEquals(Long.hashCode(id), M3LinkedMap.Atoms.foldId(id), "edge " + id);
+        }
+    }
+
+    @Test
+    void findIdAgreesWithAReferenceMapThroughTombstones() {
+        for (int seed = 0; seed < SEEDS; seed++) {
+            Random random = new Random(seed);
+            int capacity = 1 + random.nextInt(400);
+            int[] index = new int[M3LinkedMap.Atoms.tableSize(capacity)];
+            long[] ids = new long[capacity];
+            Map<Long, Integer> reference = new HashMap<>();
+            int distinctFolds = 1 + random.nextInt(13);
+            for (int slot = 0; slot < capacity; slot++) {
+                long id;
+                do { // (high << 32) | (high ^ fold) folds to fold: few folds, long probe chains, ids still distinct
+                    int high = random.nextInt();
+                    id = (long) high << 32 | Integer.toUnsignedLong(high ^ random.nextInt(distinctFolds));
+                } while (reference.containsKey(id));
+                ids[slot] = id;
+                M3LinkedMap.Atoms.insert(index, slot, M3LinkedMap.Atoms.foldId(id));
+                reference.put(id, slot);
+            }
+            for (int round = 0; round < capacity / 3; round++) {
+                int slot = random.nextInt(capacity);
+                if (reference.remove(ids[slot]) != null) {
+                    int h = M3LinkedMap.Atoms.foldId(ids[slot]);
+                    index[M3LinkedMap.Atoms.positionOf(index, h, slot)] = -1;
+                    assertEquals(-1, M3LinkedMap.Atoms.findId(index, ids, ids[slot], h));
+                }
+            }
+            int[] before = index.clone();
+            for (Map.Entry<Long, Integer> entry : reference.entrySet()) {
+                long id = entry.getKey();
+                assertEquals(entry.getValue(), M3LinkedMap.Atoms.findId(index, ids, id, M3LinkedMap.Atoms.foldId(id)));
+            }
+            long absent = Long.MIN_VALUE;
+            assertEquals(-1, M3LinkedMap.Atoms.findId(index, ids, absent, M3LinkedMap.Atoms.foldId(absent)));
+            assertArrayEquals(before, index, "findId reads only");
+        }
+    }
+
+    @Test
+    void compactIdsKeepsTheOrderAndEveryLiveSlot() {
+        for (int seed = 0; seed < SEEDS; seed++) {
+            Random random = new Random(seed);
+            int used = 1 + random.nextInt(300);
+            boolean[] bits = randomBits(random, used, 1 + random.nextInt(99));
+            long[] ids = random.longs(used).toArray();
+            Object[] values = new Object[used];
+            for (int i = 0; i < used; i++) {
+                values[i] = "v" + i;
+            }
+            long[] live = pack(bits);
+            long[] idsBefore = ids.clone();
+            long[] liveBefore = live.clone();
+            long[] toIds = new long[used];
+            Object[] toValues = new Object[used];
+            long[] toLive = new long[(used + 63) >>> 6];
+            int moved = M3LinkedMap.Atoms.compactIds(ids, values, live, used, toIds, toValues, toLive);
+            int write = 0;
+            for (int read = 0; read < used; read++) {
+                if (bits[read]) {
+                    assertEquals(ids[read], toIds[write]);
+                    assertEquals(values[read], toValues[write]);
+                    write++;
+                }
+            }
+            assertEquals(write, moved);
+            for (int i = 0; i < used; i++) {
+                assertEquals(i < moved, (toLive[i >>> 6] & 1L << i) != 0, "live bit " + i);
+            }
+            assertArrayEquals(idsBefore, ids, "source ids unchanged");
+            assertArrayEquals(liveBefore, live, "LIVE unchanged");
+        }
+    }
+
+    @Test
     void everyMemberCarriesTheSameAtoms() throws Exception {
         Path implementations = Path.of(System.getProperty("user.dir")).resolve("../../implementations");
         String reference = null;
         for (String member : new String[] {"apache-hashed-map/M3HashedMap", "apache-linked-map/M3LinkedMap",
-                "apache-lru-map/M3LRUMap"}) {
+                "apache-lru-map/M3LRUMap", "m3-long-object-linked-hash-map/M3LongObjectLinkedHashMap"}) {
             String[] parts = member.split("/");
+            String pkg = parts[1].startsWith("M3LongObject") ? "id" : "apache";
             String source = Files.readString(implementations.resolve(parts[0])
-                    .resolve("src/main/java/jdk/m3/collections/apache/" + parts[1] + ".java"), StandardCharsets.UTF_8);
+                    .resolve("src/main/java/jdk/m3/collections/" + pkg + "/" + parts[1] + ".java"), StandardCharsets.UTF_8);
             String atoms = source.substring(source.indexOf("    static final class Atoms {"));
             if (reference == null) {
                 reference = atoms;

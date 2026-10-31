@@ -53,6 +53,36 @@ Every numeric literal above 2 and every non-empty string is a named `static fina
 `WORD_MASK`, `GOLDEN_RATIO_32`, `FOLD_SHIFT`, `THIS_MAP`, `KEY_VALUE_SEPARATOR` ...). As compile-time constants, the
 strings are interned by the JVM string table (M3 String storage on M3JDK).
 
+## Id lane (family ID_MAP): M3 keys
+
+An M3 key is an id: the canonical id of an interned M3String, the node id of an M3AST, or any M3 key id. Keyed by
+such ids, a map needs no key object at all. `templates/ID_MAP.java.tmpl` (members in `ID_MEMBERS.tsv`) generates
+`jdk.m3.collections.id.M3LongObjectLinkedHashMap<V>`, an insertion-ordered map from `long` ids to values:
+
+- the id is its own hash (`Atoms.foldId`, which is `Long.hashCode`);
+- equality is `==` on the `long[] ids` lane (`Atoms.findId`: one lane read per probe, no hash lane, no `equals`);
+- nothing is boxed: a lookup allocates 0 bytes;
+- slots follow the SLOTS pattern (stable `Atoms.compactIds`), so `idAt`, `valueAt` and `indexOf` are select and rank
+  over the live mask.
+
+Both templates include `templates/ATOMS.java.inc`, so every member carries the same 15 atoms. Each atom has its
+contract, its JUnit test and its performance row, as the gate above enforces. `M3IdMapDifferentialTest` runs
+seeded scripts against `LinkedHashMap<Long, String>`, comparing every return value, the order, positional access,
+the hash code and the text. Its cases include ids built to share one fold, wide runs with growth and compaction,
+and fail-fast `forEach`. One local run of `M3IdMapPerformanceTest` (200,000 random ids; JDK 21, Windows):
+
+| Workload | M3 ns/op | LinkedHashMap ns/op | HashMap ns/op | M3 / LinkedHashMap bytes/op |
+|---|---:|---:|---:|---|
+| `put` | 44.7 | 114.5 | 96.9 | 52.8 / 85.0 |
+| `get` (hit) | 11.0 | 18.3 | 18.8 | 0 / 24 |
+| `get` (miss) | 13.9 | 28.1 | 17.0 | 0 / 24 |
+| remove-put churn | 53.6 | 133.5 | 128.7 | 52.8 / 88.0 |
+| iteration | 5.9 | 8.1 | 27.6 | 0 / 0 |
+| `idAt` (select vs an iterator walk) | 808 | 497,405 | - | 0 / 32 |
+
+The id lane takes ids. Giving `java.lang.String` keys an id needs an accessor for `M3StringAtom.canonicalId` in
+java.base; that accessor is not part of this crate.
+
 ## Proof
 
 `M3ArrayMapDifferentialTest` runs the same seeded scripts on the provider class and on the member.

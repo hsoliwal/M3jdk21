@@ -31,10 +31,10 @@ jobs:
           cache: maven
       - name: Member modules compile under their own poms (-Xlint:all -Werror)
         run: |
-          for m in apache-hashed-map apache-linked-map apache-lru-map; do
+          for m in apache-hashed-map apache-linked-map apache-lru-map m3-long-object-linked-hash-map; do
             mvn -B -ntp -f m3/collections/implementations/$m/pom.xml compile
           done
-      - name: Differential against Commons Collections 4.5.0 and the fixed point
+      - name: Differential against Commons Collections 4.5.0 and java.util.LinkedHashMap, and the fixed point
         run: mvn -B -ntp -f m3/collections/qualification/array-map-fill-20261031/pom.xml -DexcludedGroups=performance test
       - name: Performance report (not a gate on shared runners)
         continue-on-error: true
