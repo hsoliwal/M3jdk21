@@ -85,12 +85,41 @@ one per jackson-core version).
        take about 1.25x stock's time on `toHexString` literals and 1.3x to 1.45x on the mixed hex corpus (`PERF.tsv`),
        because the M3 scan runs before the kernel declines.
    - Patterns: `PATTERN_ROUTES.tsv` (NUMBER-PARSE-PATTERN v1.1 routes, each with its RESIDUE).
-   - Open: the decimal grammar has the same clamp (`DEC_EXPONENT_CLAMP`): `"0." + 723 zeros + "1e10240"` gives 1e300
-     instead of Infinity. This leaf leaves the decimal path byte-identical, so #2215 needs that fix before landing.
+   - Left open by this step: the decimal grammar has the same clamp (`DEC_EXPONENT_CLAMP`). Item 9 fixes it.
+9. Decimal exponent clamp (DEC_EXPONENT_CLAMP v1, same branch). The review of #2245 found 480 of 200,000 decimal
+   literals that #2215 parses differently from stock JDK 21.0.9, all with a clamped exponent number.
+   - Atomize: `DEC_ATOMS.tsv` (`tools/hex_atoms.py ... dec`) binds the 16 atoms of the decimal path.
+   - Root cause: `parseDecFloatLiteral` stops accumulating the exponent number once it reaches `MAX_EXPONENT_NUMBER`
+     (1024), so 10240 parses as 1024. It adds the digit counts afterwards, and they can bring a clamped exponent
+     back into the kernel's range in both directions:
+     - fraction digits: `"0." + 723 zeros + "1e10240"` gave 1e300 instead of Infinity;
+     - integer digits beyond the 19 that the re-parse keeps: `"1" + 1100 zeros + "e-10240"` gave about 1e76 instead
+       of 0.0.
+   - Fix, in-file, in the two templates (CharSequence and byte[]): once the exponent number reaches the clamp,
+     `parseDecFloatLiteral` passes `DECLINED_EXPONENT` (`Integer.MIN_VALUE`) as both exponents. That lies outside both
+     decimal kernels' range, so the kernel declines and `valueOfFloatLiteral` takes the original `FloatingDecimal`
+     path. An exponent number from 1024 to 10239 that was not clamped declines too. It is outside the kernel range
+     anyway unless about 700 digits bring it back.
+   - Gates (`GATES.tsv`, rows `dec_*`):
+     - JUnit `M3NumberParseDecClampAtomsTest`, one test per atom: 10/10 over 14,034 literals in 7 shapes. On the
+       pre-image 8 of 10 fail.
+     - The decimal differential (`gate/M3DecParseDifferential.java`, 400,000 inputs) is identical to stock. The
+       pre-image differs on 74,487 lines.
+     - On the verifier's own corpus the 480 differences drop to 0. The 600,000-literal and hex differentials keep
+       their sha256.
+     - `DEC_BYTECODE_METHOD_DELTA.tsv`: only the two `parseDecFloatLiteral` methods change, by one decline block
+       before the kernel call.
+     - Perf A/B, 32 ABBA rounds, host about 90% busy: paired median 1.005 / 1.033, PASS.
+   - Patterns: `PATTERN_ROUTES.tsv` v1.2 (rows `DEC`, `DEC_EXPONENT_CLAMP`). The custody record names HEX_ROUTE v1 and
+     DEC_EXPONENT_CLAMP v1.
+10. Review fixes for #2245:
+   - The base moved, so it is merged in (no force push).
+   - The generated TSVs carry the SPDX header, written by their generators.
+   - The test and gate sources name their numbers and chars: LITERAL_CONSTANTS v1.1 `--kinds=number,char`, 49
+     constants, `CONSTANT_NAMES_TESTS.tsv`.
+   - `tools/py_literals.py` (PY_LITERALS v1) gates the Python tools: 0 magic numbers.
 
 Next:
-- Fix `DEC_EXPONENT_CLAMP` (decline when the exponent number was clamped, or saturate after the fraction adjustment),
-  with a decimal clamp differential.
 - Bring exact hex literals back to M3 (`HEX_EXACT_M3`: an exact exponent from the parser, a sticky shift for
   significands >= 2^63, a sticky flag for dropped digits). The pre-image's 53.6 ns against stock's 285 ns on
   `toHexString` literals is the upside.

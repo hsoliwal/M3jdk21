@@ -1,19 +1,21 @@
 # SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
-"""hex_atoms.py <pre_src_dir> <post_src_dir> <out.tsv>
+"""hex_atoms.py <pre_src_dir> <post_src_dir> <out.tsv> [hex|dec]
 
-HEX_ATOMS v1 (CPU, read-only): the atoms of the hexadecimal literal path of java.base's number parser (PR #2215:
+HEX_ATOMS v1 / DEC_ATOMS v1 (CPU, read-only): the atoms of one literal path of java.base's number parser (PR #2215:
 FastDoubleParser 1.0.90 absorbed as jdk.internal.math.M3*, wired into FloatingDecimal), each bound to its source range
-and raw hash in the pre-image and the post-image. A member's range runs from its declaration line to its closing brace
-(Javadoc excluded); comments, strings and chars are masked before brace matching, so the range is exact. One row per
-atom: atom role file member pre_lines pre_sha256 post_lines post_sha256 change. change = UNCHANGED | CHANGED."""
+and raw hash in the pre-image and the post-image. Atom set 'hex' (default): the hexadecimal path (HEX_ROUTE v1); atom
+set 'dec': the decimal path (DEC_EXPONENT_CLAMP v1). A member's range runs from its declaration line to its closing
+brace (Javadoc excluded); comments, strings and chars are masked before brace matching, so the range is exact. One row
+per atom: atom role file member pre_lines pre_sha256 post_lines post_sha256 change. change = UNCHANGED | CHANGED.
+The TSV starts with the Synexia SPDX header ('#' lines)."""
 import hashlib
 import os
 import re
 import sys
 
 # (role, file, member name, regex the parameter list must match)
-ATOMS = (
+HEX_ATOMS = (
     ("ENTRY_DISPATCH", "FloatingDecimal.java", "parseDouble", r"String s"),
     ("ENTRY_DISPATCH", "FloatingDecimal.java", "parseFloat", r"String s"),
     ("GRAMMAR_DISPATCH", "M3AbstractJavaFloatingPointBitsFromCharSequence.java", "parseFloatingPointLiteral", r"CharSequence"),
@@ -35,8 +37,35 @@ ATOMS = (
     ("JDK_ROUTE", "FloatingDecimal.java", "readJavaFormatString", r"String in"),
     ("JDK_ROUTE", "FloatingDecimal.java", "parseHexString", r"String s"),
 )
+DEC_ATOMS = (
+    ("ENTRY_DISPATCH", "FloatingDecimal.java", "parseDouble", r"String s"),
+    ("ENTRY_DISPATCH", "FloatingDecimal.java", "parseFloat", r"String s"),
+    ("GRAMMAR_DISPATCH", "M3AbstractJavaFloatingPointBitsFromCharSequence.java", "parseFloatingPointLiteral", r"CharSequence"),
+    ("GRAMMAR_DISPATCH", "M3AbstractJavaFloatingPointBitsFromByteArray.java", "parseFloatingPointLiteral", r"byte\[\]"),
+    ("DEC_GRAMMAR", "M3AbstractJavaFloatingPointBitsFromCharSequence.java", "parseDecFloatLiteral", r"CharSequence"),
+    ("DEC_GRAMMAR", "M3AbstractJavaFloatingPointBitsFromByteArray.java", "parseDecFloatLiteral", r"byte\[\]"),
+    ("DEC_SWAR", "M3FastDoubleSwar.java", "tryToParseFourDigits", r"byte\[\]"),
+    ("DEC_VALUE", "M3JavaDoubleBitsFromCharSequence.java", "valueOfFloatLiteral", r"CharSequence"),
+    ("DEC_VALUE", "M3JavaFloatBitsFromCharSequence.java", "valueOfFloatLiteral", r"CharSequence"),
+    ("DEC_VALUE", "M3JavaDoubleBitsFromByteArray.java", "valueOfFloatLiteral", r"byte\[\]"),
+    ("DEC_VALUE", "M3JavaFloatBitsFromByteArray.java", "valueOfFloatLiteral", r"byte\[\]"),
+    ("DEC_KERNEL", "M3FastDoubleMath.java", "tryDecFloatToDoubleTruncated", r"long significand"),
+    ("DEC_KERNEL", "M3FastFloatMath.java", "tryDecFloatToFloatTruncated", r"long significand"),
+    ("DEC_FAST", "M3FastDoubleMath.java", "tryDecToDoubleWithFastAlgorithm", r"long significand"),
+    ("DEC_FAST", "M3FastFloatMath.java", "tryDecToFloatWithFastAlgorithm", r"long significand"),
+    ("JDK_ROUTE", "FloatingDecimal.java", "readJavaFormatString", r"String in"),
+)
+ATOM_SETS = {"hex": HEX_ATOMS, "dec": DEC_ATOMS}
+DEFAULT_SET = "hex"
 MASKED = re.compile(r'//[^\n]*|/\*.*?\*/|"(?:\\.|[^"\\\n])*"|\'(?:\\.|[^\'\\\n])+\'', re.S)
 PACKAGE_DIR = os.path.join("jdk", "internal", "math")
+JAVA_SUFFIX = ".java"
+UNCHANGED, CHANGED = "UNCHANGED", "CHANGED"
+TSV_HEADER = ("# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0\n"
+              "# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others\n")
+COLUMNS = ("atom", "role", "file", "member", "pre_lines", "pre_sha256", "post_lines", "post_sha256", "change")
+REQUIRED_ARGS = 4  # program, pre, post, out
+SET_ARG = 4
 
 
 def mask(src):
@@ -63,22 +92,31 @@ def member(src, name, params):
     raise SystemExit("member not found: %s(%s)" % (name, params))
 
 
+def bind(root, file, name, params):
+    """(line range, sha256) of one member in one image."""
+    with open(os.path.join(root, PACKAGE_DIR, file), encoding="utf-8") as f:
+        first, last, digest = member(f.read(), name, params)
+    return "%d-%d" % (first, last), digest
+
+
 def main(argv):
-    pre, post, out = argv[1:4]
+    if len(argv) < REQUIRED_ARGS:
+        raise SystemExit(__doc__)
+    pre, post, out = argv[1:REQUIRED_ARGS]
+    atoms = ATOM_SETS[argv[SET_ARG] if len(argv) > SET_ARG else DEFAULT_SET]
     rows = []
-    for role, file, name, params in ATOMS:
-        cells = []
-        for root in (pre, post):
-            with open(os.path.join(root, PACKAGE_DIR, file), encoding="utf-8") as f:
-                first, last, digest = member(f.read(), name, params)
-            cells += ["%d-%d" % (first, last), digest]
-        change = "UNCHANGED" if cells[1] == cells[3] else "CHANGED"
-        rows.append((file[:-len(".java")] + "#" + name + "(" + params.replace("\\", "") + ")", role, file, name,
-                     cells[0], cells[1], cells[2], cells[3], change))
+    for role, file, name, params in atoms:
+        pre_lines, pre_sha = bind(pre, file, name, params)
+        post_lines, post_sha = bind(post, file, name, params)
+        rows.append({"atom": file[:-len(JAVA_SUFFIX)] + "#" + name + "(" + params.replace("\\", "") + ")",
+                     "role": role, "file": file, "member": name, "pre_lines": pre_lines, "pre_sha256": pre_sha,
+                     "post_lines": post_lines, "post_sha256": post_sha,
+                     "change": UNCHANGED if pre_sha == post_sha else CHANGED})
     with open(out, "w", encoding="utf-8", newline="\n") as f:
-        f.write("atom\trole\tfile\tmember\tpre_lines\tpre_sha256\tpost_lines\tpost_sha256\tchange\n")
-        f.write("".join("\t".join(r) + "\n" for r in rows))
-    print("ATOMS\t%d\tCHANGED\t%s" % (len(rows), ",".join(r[0] for r in rows if r[8] == "CHANGED")))
+        f.write(TSV_HEADER)
+        f.write("\t".join(COLUMNS) + "\n")
+        f.write("".join("\t".join(r[c] for c in COLUMNS) + "\n" for r in rows))
+    print("ATOMS\t%d\tCHANGED\t%s" % (len(rows), ",".join(r["atom"] for r in rows if r["change"] == CHANGED)))
     return 0
 
 

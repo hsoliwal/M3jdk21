@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
 alternation	scope	variant	double_ns	float_ns
 1	all	stock	962.57	923.22
 1	all	pre	696.09	1265.35

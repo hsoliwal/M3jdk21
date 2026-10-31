@@ -25,6 +25,48 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class M3HexParseDifferential {
+    //FLLDCIM: M3 - LITERAL_CONSTANTS v1: this class's magic literals, named by role (user rule: no magic numbers, no floating strings)
+    /** Initial capacity per output line of the diff mode. */
+    private static final int OUTPUT_CHARS_PER_LINE = 48;
+    /** Separates the fields of an output line. */
+    private static final char FIELD_SEPARATOR = '\t';
+    /** Ends an output line. */
+    private static final char LINE_END = '\n';
+    /** Argument index of the bench rounds. */
+    private static final int BENCH_ROUNDS_ARGUMENT = 2;
+    /** Categories 0 and 1 of literal(): Double.toHexString and Float.toHexString. */
+    private static final int TO_HEX_CATEGORIES = 2;
+    /** First category of random significands (1 to MAX_DIGITS digits). */
+    private static final int CATEGORY_RANDOM_A = 2;
+    /** Second category of random significands (1 to MAX_DIGITS digits). */
+    private static final int CATEGORY_RANDOM_B = 3;
+    /** Category of long significands (MAX_DIGITS / 2 to MAX_DIGITS - 1 digits). */
+    private static final int CATEGORY_LONG = 4;
+    /** MAX_DIGITS / MAX_DIGITS_DIVISOR: lower bound and span of the long category, digit bound of the last one. */
+    private static final int MAX_DIGITS_DIVISOR = 2;
+    /** Category of exponent numbers that the donor clamps. */
+    private static final int CATEGORY_CLAMPED = 5;
+    /** Category of near misses. */
+    private static final int CATEGORY_NEAR_MISS = 6;
+    /** Sign spellings: none, plus, minus. */
+    private static final int SIGN_KINDS = 3;
+    /** Hex prefix letter, lower case. */
+    private static final char HEX_INDICATOR_LOWER = 'x';
+    /** Hex prefix letter, upper case. */
+    private static final char HEX_INDICATOR_UPPER = 'X';
+    /** r.nextInt(digits + POINT_SLOTS_EXTRA): 0..digits places the point, digits + 1 leaves it out. */
+    private static final int POINT_SLOTS_EXTRA = 2;
+    /** The point of a hex significand. */
+    private static final char HEX_POINT = '.';
+    /** First decimal digit; ch - DIGIT_ZERO is the digit value. */
+    private static final char DIGIT_ZERO = '0';
+    /** The landing power is drawn on both sides of zero. */
+    private static final int LANDING_SIDES = 2;
+    /** Up to this many random edits per near miss. */
+    private static final int MAX_EDITS = 3;
+    /** Edit kinds: insert, delete, replace. */
+    private static final int EDIT_KINDS = 3;
+
     private static final long SEED = 20261031L;
     private static final int CATEGORIES = 8;
     private static final int MAX_DIGITS = 40;
@@ -76,15 +118,15 @@ public final class M3HexParseDifferential {
         boolean toHexOnly = bench && args[BENCH_SCOPE_ARGUMENT].equals("tohex");
         List<String> corpus = toHexOnly ? toHexStrings(Integer.parseInt(args[1])) : corpus(Integer.parseInt(args[1]), tsv);
         if (!bench) {
-            StringBuilder out = new StringBuilder(corpus.size() * 48);
+            StringBuilder out = new StringBuilder(corpus.size() * OUTPUT_CHARS_PER_LINE);
             for (int i = 0; i < corpus.size(); i++) {
                 String s = corpus.get(i);
-                out.append(i).append('\t').append(d(s)).append('\t').append(f(s)).append('\n');
+                out.append(i).append(FIELD_SEPARATOR).append(d(s)).append(FIELD_SEPARATOR).append(f(s)).append(LINE_END);
             }
             System.out.print(out);
             return;
         }
-        int rounds = Integer.parseInt(args[2]);
+        int rounds = Integer.parseInt(args[BENCH_ROUNDS_ARGUMENT]);
         long sink = 0;
         double bestD = Double.MAX_VALUE, bestF = Double.MAX_VALUE;
         for (int r = 0; r < rounds; r++) {
@@ -150,7 +192,7 @@ public final class M3HexParseDifferential {
         List<String> c = new ArrayList<>();
         SplittableRandom r = new SplittableRandom(SEED);
         while (c.size() < n) {
-            c.add(literal(r, c.size() % 2));
+            c.add(literal(r, c.size() % TO_HEX_CATEGORIES));
         }
         return c;
     }
@@ -168,17 +210,17 @@ public final class M3HexParseDifferential {
         return switch (category) {
             case 0 -> Double.toHexString(Double.longBitsToDouble(r.nextLong()));
             case 1 -> Float.toHexString(Float.intBitsToFloat(r.nextInt()));
-            case 2, 3 -> wrap(r, sign(r) + hex(r, 1 + r.nextInt(MAX_DIGITS)) + exponent(r) + suffix(r));
-            case 4 -> wrap(r, sign(r) + hex(r, MAX_DIGITS / 2 + r.nextInt(MAX_DIGITS / 2)) + exponent(r) + suffix(r));
-            case 5 -> clamped(r);
-            case 6 -> nearMiss(r);
-            default -> sign(r) + hex(r, 1 + r.nextInt(MAX_DIGITS / 2)) + "p" + (r.nextBoolean() ? "-" : "")
+            case CATEGORY_RANDOM_A, CATEGORY_RANDOM_B -> wrap(r, sign(r) + hex(r, 1 + r.nextInt(MAX_DIGITS)) + exponent(r) + suffix(r));
+            case CATEGORY_LONG -> wrap(r, sign(r) + hex(r, MAX_DIGITS / MAX_DIGITS_DIVISOR + r.nextInt(MAX_DIGITS / MAX_DIGITS_DIVISOR)) + exponent(r) + suffix(r));
+            case CATEGORY_CLAMPED -> clamped(r);
+            case CATEGORY_NEAR_MISS -> nearMiss(r);
+            default -> sign(r) + hex(r, 1 + r.nextInt(MAX_DIGITS / MAX_DIGITS_DIVISOR)) + "p" + (r.nextBoolean() ? "-" : "")
                     + r.nextInt(MAX_BINARY_EXPONENT) + suffix(r);
         };
     }
 
     private static String sign(SplittableRandom r) {
-        return new String[] {"", "+", "-"}[r.nextInt(3)];
+        return new String[] {"", "+", "-"}[r.nextInt(SIGN_KINDS)];
     }
 
     private static String suffix(SplittableRandom r) {
@@ -202,15 +244,15 @@ public final class M3HexParseDifferential {
 
     /** 0x [leading zeros] digits with the point anywhere (or none). */
     private static String hex(SplittableRandom r, int digits) {
-        StringBuilder b = new StringBuilder("0").append(r.nextBoolean() ? 'x' : 'X');
+        StringBuilder b = new StringBuilder("0").append(r.nextBoolean() ? HEX_INDICATOR_LOWER : HEX_INDICATOR_UPPER);
         b.append("0".repeat(r.nextInt(MAX_LEADING_ZEROS + 1)));
         StringBuilder m = new StringBuilder().append(NONZERO_HEX.charAt(r.nextInt(NONZERO_HEX.length())));
         for (int i = 1; i < digits; i++) {
             m.append(HEX_DIGITS.charAt(r.nextInt(HEX_DIGITS.length())));
         }
-        int point = r.nextInt(digits + 2);
+        int point = r.nextInt(digits + POINT_SLOTS_EXTRA);
         if (point <= digits) {
-            m.insert(point, '.');
+            m.insert(point, HEX_POINT);
         }
         return b.append(m).toString();
     }
@@ -224,7 +266,7 @@ public final class M3HexParseDifferential {
         int clamped = 0;
         for (char ch : Integer.toString(exponent).toCharArray()) {
             if (clamped < DONOR_EXPONENT_CLAMP) {
-                clamped = DECIMAL_RADIX * clamped + (ch - '0');
+                clamped = DECIMAL_RADIX * clamped + (ch - DIGIT_ZERO);
             }
         }
         return clamped;
@@ -234,7 +276,7 @@ public final class M3HexParseDifferential {
     private static String clamped(SplittableRandom r) {
         int exponent = CLAMPED_EXPONENTS[r.nextInt(CLAMPED_EXPONENTS.length)];
         int digits = 1 + r.nextInt(MAX_CLAMP_DIGITS);
-        int landing = r.nextInt(2 * CLAMP_WINDOW) - CLAMP_WINDOW;
+        int landing = r.nextInt(LANDING_SIDES * CLAMP_WINDOW) - CLAMP_WINDOW;
         int zeros = Math.max(0, (donorClamp(exponent) - landing) / BITS_PER_HEX_DIGIT - digits);
         StringBuilder m = new StringBuilder();
         for (int i = 0; i < digits; i++) {
@@ -246,11 +288,11 @@ public final class M3HexParseDifferential {
 
     /** A valid literal with up to three random edits from the hex grammar's alphabet. */
     private static String nearMiss(SplittableRandom r) {
-        StringBuilder b = new StringBuilder(sign(r) + hex(r, 1 + r.nextInt(MAX_DIGITS / 2)) + exponent(r) + suffix(r));
-        for (int edits = 1 + r.nextInt(3); edits > 0; edits--) {
+        StringBuilder b = new StringBuilder(sign(r) + hex(r, 1 + r.nextInt(MAX_DIGITS / MAX_DIGITS_DIVISOR)) + exponent(r) + suffix(r));
+        for (int edits = 1 + r.nextInt(MAX_EDITS); edits > 0; edits--) {
             int at = r.nextInt(b.length() + 1);
             char ch = NEAR_MISS.charAt(r.nextInt(NEAR_MISS.length()));
-            switch (r.nextInt(3)) {
+            switch (r.nextInt(EDIT_KINDS)) {
                 case 0 -> b.insert(at, ch);
                 case 1 -> {
                     if (at < b.length()) {

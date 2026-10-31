@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
 round	variant	atom	ns_per_op_atom	ns_per_op_reference	speedup
 1	pre	M3JavaDoubleBitsFromCharSequence	58.14	217.44	3.74
 1	pre	M3JavaFloatBitsFromCharSequence	93.92	101.91	1.09

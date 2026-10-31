@@ -58,12 +58,27 @@ EXPONENT_CLAMP = 2000
 # kind: (precision incl. hidden bit, min normal exponent, max exponent)
 FORMATS = {"double": (53, -1022, 1023), "float": (24, -126, 127)}
 EXIT_MISMATCH = 1
+EXIT_USAGE = 2
+HEX_RADIX = 16
+HEX_PREFIX_LENGTH = 2  # "0x"
+BINARY_BASE = 2
+HALF = Fraction(1, 2)
+PARITY_MODULUS = 2
+FORMAT_EMAX = 2  # index of the max exponent in a FORMATS tuple
+SEEN_DEFECT = 2  # index of the defect in a seen tuple (jdk, fdp, defect)
+BITS_HEX_WIDTH = {"double": 16, "float": 8}  # hex digits of a format's raw bits
+MAX_REPORTED = 10
+ARG_MODE = 1  # argv: program, mode, then its arguments
+ARG_FIRST = 2
+ARG_SECOND = 3
+ARGC_ONE_ARG = 3  # argv length of a mode with one argument
+ARGC_TWO_ARGS = 4
 TSV_HEADER = ("# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0\n"
               "# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others\n")
 
 
 def unescape(text: str) -> str:
-    return ESCAPE.sub(lambda match: chr(int(match.group(1), 16)), text)
+    return ESCAPE.sub(lambda match: chr(int(match.group(1), HEX_RADIX)), text)
 
 
 def strip(text: str) -> str:
@@ -78,7 +93,7 @@ def parse(literal: str) -> dict:
         negative, i = text[i] == "-", i + 1
     if text[i] != "0" or text[i + 1] not in "xX":
         raise ValueError("not a hex literal: " + repr(literal))
-    i += 2
+    i += HEX_PREFIX_LENGTH
     start, significand, point = i, 0, -1
     while i < len(text) and (text[i] in HEX_VALUES or text[i] == "."):
         if text[i] == ".":
@@ -125,7 +140,7 @@ def parse(literal: str) -> dict:
             j += 1
         truncated = j < end
         truncated_exponent = (point - j + skipped) * BITS_PER_HEX_DIGIT + number
-    magnitude = int(whole_and_fraction, 16) if whole_and_fraction else 0
+    magnitude = int(whole_and_fraction, HEX_RADIX) if whole_and_fraction else 0
     return {"negative": negative, "significand": significand, "digit_count": digit_count,
             "significant_digits": len(whole_and_fraction.lstrip("0")), "exponent": exponent,
             "truncated": truncated, "truncated_exponent": truncated_exponent, "clamped": clamped,
@@ -139,7 +154,7 @@ def exact(magnitude: int, power: int) -> Fraction | None:
     lead = magnitude.bit_length() + power
     if lead > EXPONENT_CLAMP:
         return None
-    return Fraction(0) if lead < -EXPONENT_CLAMP else Fraction(magnitude) * Fraction(2) ** power
+    return Fraction(0) if lead < -EXPONENT_CLAMP else Fraction(magnitude) * Fraction(BINARY_BASE) ** power
 
 
 def round_int(value: int, precision: int) -> int:
@@ -161,16 +176,16 @@ def correct(value: Fraction | None, kind: str) -> Fraction | None:
     if value is None or value == 0:
         return value
     exponent = value.numerator.bit_length() - value.denominator.bit_length()
-    if Fraction(2) ** exponent > value:
+    if Fraction(BINARY_BASE) ** exponent > value:
         exponent -= 1
-    quantum = Fraction(2) ** (max(exponent, emin) - (precision - 1))
+    quantum = Fraction(BINARY_BASE) ** (max(exponent, emin) - (precision - 1))
     scaled = value / quantum
     kept = scaled.numerator // scaled.denominator
     rest = scaled - kept
-    if rest > Fraction(1, 2) or (rest == Fraction(1, 2) and kept % 2):
+    if rest > HALF or (rest == HALF and kept % PARITY_MODULUS):
         kept += 1
     rounded = kept * quantum
-    return None if rounded >= Fraction(2) ** (emax + 1) else rounded
+    return None if rounded >= Fraction(BINARY_BASE) ** (emax + 1) else rounded
 
 
 def bits(value: Fraction | None, negative: bool, kind: str) -> int:
@@ -191,8 +206,8 @@ def fdp_fast(fields: dict, kind: str) -> tuple[Fraction | None, bool] | None:
     twice = s & SIGN_BIT != 0
     cast = round_int(round_int(s - (1 << WORD_BITS), precision) + (1 << WORD_BITS), precision) if twice \
         else round_int(s, precision)
-    value = Fraction(cast) * Fraction(2) ** power
-    return (None if value >= Fraction(2) ** (emax + 1) else value), twice
+    value = Fraction(cast) * Fraction(BINARY_BASE) ** power
+    return (None if value >= Fraction(BINARY_BASE) ** (emax + 1) else value), twice
 
 
 def defect(fields: dict, kind: str) -> str:
@@ -205,9 +220,9 @@ def defect(fields: dict, kind: str) -> str:
         return "TRUNCATED_NO_STICKY" if fields["truncated"] else "UNEXPLAINED"
     if not fields["truncated"]:
         return "BIT63_DOUBLE_ROUNDING"
-    power, emax = fields["truncated_exponent"], FORMATS[kind][2]
-    single = Fraction(round_int(s, precision)) * Fraction(2) ** power
-    if single >= Fraction(2) ** (emax + 1):
+    power, emax = fields["truncated_exponent"], FORMATS[kind][FORMAT_EMAX]
+    single = Fraction(round_int(s, precision)) * Fraction(BINARY_BASE) ** power
+    if single >= Fraction(BINARY_BASE) ** (emax + 1):
         single = None
     return "TRUNCATED_NO_STICKY" if single != correct(fields["exact"], kind) else "BIT63_DOUBLE_ROUNDING"
 
@@ -225,7 +240,7 @@ def replay(method: str, literal: str) -> dict:
 def rows(path: str):
     for line in open(path, encoding="utf-8"):
         method, literal, fdp, jdk = line.rstrip("\n").split("\t")
-        yield method, literal, int(fdp, 16), int(jdk, 16)
+        yield method, literal, int(fdp, HEX_RADIX), int(jdk, HEX_RADIX)
 
 
 def model(path: str) -> int:
@@ -238,7 +253,7 @@ def model(path: str) -> int:
         tally[r["kind"] + ":" + r["defect"]] += 1
         f = r["fields"]
         tally[r["kind"] + ":significant_hex_digits>=16"] += f["significant_digits"] >= MAX_EXACT_HEX_DIGITS
-        if (r["model"] != fdp or r["correct"] != jdk) and len(mismatches) < 10:
+        if (r["model"] != fdp or r["correct"] != jdk) and len(mismatches) < MAX_REPORTED:
             mismatches.append([method, literal, hex(fdp), hex(jdk), hex(r["model"]), hex(r["correct"])])
     print(json.dumps({"file": path, "tally": dict(sorted(tally.items())), "mismatches": mismatches}, indent=1))
     ok = tally["model_reproduces_fdp"] == tally["rows"] == tally["referee_equals_jdk"]
@@ -252,7 +267,7 @@ def affected(path: str, out: str) -> int:
         key = (r["kind"], literal)
         if key not in seen:
             seen[key] = (jdk, fdp, r["defect"])
-    width = {"double": 16, "float": 8}
+    width = BITS_HEX_WIDTH
     with open(out, "w", encoding="utf-8", newline="\n") as w:
         w.write(TSV_HEADER)
         w.write("# M3 number-parse hex atoms: every (kind, literal) pair that FastDoubleParser 1.0.90 rounds differently from\n"
@@ -263,7 +278,7 @@ def affected(path: str, out: str) -> int:
         w.write("kind\tliteral\tstock_bits\tfdp_bits\tdefect\n")
         for (kind, literal), (jdk, fdp, why) in sorted(seen.items()):
             w.write("%s\t%s\t%0*x\t%0*x\t%s\n" % (kind, literal, width[kind], jdk, width[kind], fdp, why))
-    print(json.dumps({"pairs": len(seen), "by": dict(Counter(k + ":" + v[2] for (k, _), v in seen.items()))}))
+    print(json.dumps({"pairs": len(seen), "by": dict(Counter(k + ":" + v[SEEN_DEFECT] for (k, _), v in seen.items()))}))
     return 0
 
 
@@ -301,22 +316,24 @@ def corpus(literals: str, path: str) -> int:
     tally.update({"predicted": len(predicted), "found": len(found), "predicted_only": len(predicted - found),
                   "found_only": len(found - predicted)})
     print(json.dumps({"literals": literals, "tally": dict(sorted(tally.items())),
-                      "predicted_only": sorted(predicted - found)[:10], "found_only": sorted(found - predicted)[:10]},
+                      "predicted_only": sorted(predicted - found)[:MAX_REPORTED],
+                      "found_only": sorted(found - predicted)[:MAX_REPORTED]},
                      indent=1))
     return 0 if predicted == found else EXIT_MISMATCH
 
 
 def main(argv: list[str]) -> int:
-    if len(argv) >= 3 and argv[1] == "model":
-        return model(argv[2])
-    if len(argv) == 4 and argv[1] == "corpus":
-        return corpus(argv[2], argv[3])
-    if len(argv) == 4 and argv[1] == "affected":
-        return affected(argv[2], argv[3])
-    if len(argv) >= 4 and argv[1] == "probe":
-        return probe(argv[2], argv[3:])
+    mode = argv[ARG_MODE] if len(argv) > ARG_MODE else ""
+    if len(argv) >= ARGC_ONE_ARG and mode == "model":
+        return model(argv[ARG_FIRST])
+    if len(argv) == ARGC_TWO_ARGS and mode == "corpus":
+        return corpus(argv[ARG_FIRST], argv[ARG_SECOND])
+    if len(argv) == ARGC_TWO_ARGS and mode == "affected":
+        return affected(argv[ARG_FIRST], argv[ARG_SECOND])
+    if len(argv) >= ARGC_TWO_ARGS and mode == "probe":
+        return probe(argv[ARG_FIRST], argv[ARG_SECOND:])
     sys.stderr.write(__doc__)
-    return 2
+    return EXIT_USAGE
 
 
 if __name__ == "__main__":

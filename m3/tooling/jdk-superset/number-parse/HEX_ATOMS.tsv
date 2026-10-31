@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
 atom	role	file	member	pre_lines	pre_sha256	post_lines	post_sha256	change
 FloatingDecimal#parseDouble(String s)	ENTRY_DISPATCH	FloatingDecimal.java	parseDouble	109-120	a0bb40c3ef6ab164e04fd42d370c661dceac0fdb8e27f359cc3dbe794834826d	109-120	a0bb40c3ef6ab164e04fd42d370c661dceac0fdb8e27f359cc3dbe794834826d	UNCHANGED
 FloatingDecimal#parseFloat(String s)	ENTRY_DISPATCH	FloatingDecimal.java	parseFloat	133-143	98e3697749a0e3fb52f0c0b90aa487f2b1f2f2689b389e1e6778a532a7b929b7	133-143	98e3697749a0e3fb52f0c0b90aa487f2b1f2f2689b389e1e6778a532a7b929b7	UNCHANGED

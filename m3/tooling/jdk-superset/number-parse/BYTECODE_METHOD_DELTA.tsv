@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
 class	kind	member	state	pre_lines	post_lines
 jdk/internal/math/FloatingDecimal$1	class	-	METHODS_EQUAL=3/3	-	-
 jdk/internal/math/FloatingDecimal$ASCIIToBinaryBuffer	class	-	METHODS_EQUAL=4/4	-	-

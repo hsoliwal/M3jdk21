@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+atom	recorded	before_best	after_best	vs_recorded	ref_drift	best_ratio	mean_ratio	paired_median	pairs	verdict_recorded	verdict_same_host
+Double.parseDouble (wiring)	32.36	42.41	43.00	1.329	1.089	1.014	1.021	1.005	32	NOT_COMPARABLE	PASS
+Float.parseFloat (wiring)	67.39	79.85	74.99	1.113	1.135	0.939	1.034	1.033	32	NOT_COMPARABLE	PASS

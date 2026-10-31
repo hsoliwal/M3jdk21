@@ -39,6 +39,66 @@ import java.util.regex.Pattern;
 import org.junit.jupiter.api.Test;
 
 public class M3NumberParseHexAtomsTest {
+    //FLLDCIM: M3 - LITERAL_CONSTANTS v1: this class's magic literals, named by role (user rule: no magic numbers, no floating strings)
+    /** Column of M3NumberParseHexAffected.tsv that holds the stock raw bits. */
+    private static final int AFFECTED_STOCK_FIELD = 2;
+    /** Column of M3NumberParseHexAffected.tsv that names the defect. */
+    private static final int AFFECTED_DEFECT_FIELD = 4;
+    /** Case of Shape.FLOAT_TIE in the round robin over the shapes. */
+    private static final int SHAPE_FLOAT_TIE = 2;
+    /** Case of Shape.DOUBLE_BIT63 in the round robin over the shapes. */
+    private static final int SHAPE_DOUBLE_BIT63 = 3;
+    /** Case of Shape.FLOAT_BIT63 in the round robin over the shapes. */
+    private static final int SHAPE_FLOAT_BIT63 = 4;
+    /** Case of Shape.TRUNCATED_STICKY in the round robin over the shapes. */
+    private static final int SHAPE_TRUNCATED_STICKY = 5;
+    /** Variant BELOW_TIE: one below the halfway pattern. */
+    private static final int TIE_VARIANT_BELOW = 2;
+    /** An edge window spans precision bits on both sides of the format's exponent limit. */
+    private static final int EDGE_WINDOW_SIDES = 2;
+    /** Sign spellings: none, plus, minus. */
+    private static final int SIGN_KINDS = 3;
+    /** The 0 of the 0x prefix. */
+    private static final char HEX_PREFIX_ZERO = '0';
+    /** Hex prefix letter, lower case. */
+    private static final char HEX_INDICATOR_LOWER = 'x';
+    /** Hex prefix letter, upper case. */
+    private static final char HEX_INDICATOR_UPPER = 'X';
+    /** The point of a hex significand. */
+    private static final char HEX_POINT = '.';
+    /** Binary exponent indicator, lower case. */
+    private static final char BINARY_EXPONENT_LOWER = 'p';
+    /** Binary exponent indicator, upper case. */
+    private static final char BINARY_EXPONENT_UPPER = 'P';
+    /** Hex digits beyond the precision, so the halfway bits and a tail exist. */
+    private static final int TIE_EXTRA_DIGITS = 2;
+    /** A zero digit of the dropped tail. */
+    private static final char TAIL_ZERO_DIGIT = '0';
+    /** First decimal digit; c - DIGIT_ZERO is the digit value. */
+    private static final char DIGIT_ZERO = '0';
+    /** The landing power is drawn on both sides of zero. */
+    private static final int LANDING_SIDES = 2;
+    /** Differences quoted in an assertion message. */
+    private static final int MAX_REPORTED = 5;
+    /** Seed offset of the float kernel test (the double kernel test uses 1). */
+    private static final int FLOAT_SEED_OFFSET = 2;
+    /** Random significands are shifted right by up to WORD_BITS / SHIFT_RANGE_DIVISOR bits. */
+    private static final int SHIFT_RANGE_DIVISOR = 2;
+    /** Kernel powers start at KERNEL_EXPONENT_LOW_FACTOR times the format's MAX_EXPONENT. */
+    private static final int KERNEL_EXPONENT_LOW_FACTOR = -2;
+    /** Kernel powers stay below KERNEL_EXPONENT_HIGH_FACTOR times the format's MAX_EXPONENT. */
+    private static final int KERNEL_EXPONENT_HIGH_FACTOR = 2;
+    /** Group of the integer hex digits in HEX. */
+    private static final int HEX_GROUP_INTEGER = 2;
+    /** Group of the fraction hex digits in HEX. */
+    private static final int HEX_GROUP_FRACTION = 3;
+    /** Group of the binary exponent in HEX. */
+    private static final int HEX_GROUP_EXPONENT = 4;
+    /** The referee clamps the power at REFEREE_CLAMP_FACTOR times REFEREE_EXPONENT_LIMIT before the lead exponent. */
+    private static final int REFEREE_CLAMP_FACTOR = 2;
+    /** Each shape family holds more than perShape / (COVERAGE_SHARE_DIVISOR * TIE_VARIANTS) cases. */
+    private static final int COVERAGE_SHARE_DIVISOR = 2;
+
     private static final String PKG = "jdk.internal.math.";
     private static final String AFFECTED = "M3NumberParseHexAffected.tsv";
     private static final int AFFECTED_DOUBLES = 1213;
@@ -164,8 +224,8 @@ public class M3NumberParseHexAtomsTest {
                 }
                 String[] f = line.split("\t", -1);
                 boolean asDouble = f[0].equals("double");
-                String stock = Long.toHexString(Long.parseUnsignedLong(f[2], HEX_RADIX));
-                cases.add(new Case(unescape(f[1]), f[0] + ":" + f[4], asDouble ? stock : null, asDouble ? null : stock));
+                String stock = Long.toHexString(Long.parseUnsignedLong(f[AFFECTED_STOCK_FIELD], HEX_RADIX));
+                cases.add(new Case(unescape(f[1]), f[0] + ":" + f[AFFECTED_DEFECT_FIELD], asDouble ? stock : null, asDouble ? null : stock));
             }
         } catch (IOException e) {
             throw new AssertionError("corpus missing: " + tsv, e);
@@ -183,10 +243,10 @@ public class M3NumberParseHexAtomsTest {
             String[] shaped = switch (i % Shape.values().length) {
                 case 0 -> plain(r);
                 case 1 -> tie(r, DOUBLE_PRECISION, "DOUBLE");
-                case 2 -> tie(r, FLOAT_PRECISION, "FLOAT");
-                case 3 -> bit63(r, DOUBLE_FIRST_ROUNDING_BITS, DOUBLE_PRECISION, "DOUBLE");
-                case 4 -> bit63(r, FLOAT_FIRST_ROUNDING_BITS, FLOAT_PRECISION, "FLOAT");
-                case 5 -> truncatedSticky(r);
+                case SHAPE_FLOAT_TIE -> tie(r, FLOAT_PRECISION, "FLOAT");
+                case SHAPE_DOUBLE_BIT63 -> bit63(r, DOUBLE_FIRST_ROUNDING_BITS, DOUBLE_PRECISION, "DOUBLE");
+                case SHAPE_FLOAT_BIT63 -> bit63(r, FLOAT_FIRST_ROUNDING_BITS, FLOAT_PRECISION, "FLOAT");
+                case SHAPE_TRUNCATED_STICKY -> truncatedSticky(r);
                 default -> clamped(r);
             };
             cases.add(withReference(shaped[0], shaped[1]));
@@ -242,7 +302,7 @@ public class M3NumberParseHexAtomsTest {
         return switch (pick) {
             case 0 -> cleared.or(half);
             case 1 -> cleared.or(half).or(BigInteger.ONE);
-            case 2 -> cleared.or(half.subtract(BigInteger.ONE));
+            case TIE_VARIANT_BELOW -> cleared.or(half.subtract(BigInteger.ONE));
             default -> cleared.or(half).add(BigInteger.ONE);
         };
     }
@@ -253,8 +313,8 @@ public class M3NumberParseHexAtomsTest {
         int max = asDouble ? Double.MAX_EXPONENT : Float.MAX_EXPONENT;
         int min = asDouble ? Double.MIN_EXPONENT : Float.MIN_EXPONENT;
         return switch (r.nextInt(TIE_VARIANTS)) {
-            case 0 -> max - precision + r.nextInt(2 * precision);          // overflow edge
-            case 1 -> min - precision - 1 + r.nextInt(2 * precision);      // subnormal / underflow edge
+            case 0 -> max - precision + r.nextInt(EDGE_WINDOW_SIDES * precision);          // overflow edge
+            case 1 -> min - precision - 1 + r.nextInt(EDGE_WINDOW_SIDES * precision);      // subnormal / underflow edge
             default -> min + r.nextInt(max - min);                         // normal range
         };
     }
@@ -268,12 +328,12 @@ public class M3NumberParseHexAtomsTest {
         }
         int point = Math.min(intDigits, digits.length());
         StringBuilder b = new StringBuilder();
-        b.append(new String[] {"", "+", "-"}[r.nextInt(3)]).append('0').append(r.nextBoolean() ? 'x' : 'X');
+        b.append(new String[] {"", "+", "-"}[r.nextInt(SIGN_KINDS)]).append(HEX_PREFIX_ZERO).append(r.nextBoolean() ? HEX_INDICATOR_LOWER : HEX_INDICATOR_UPPER);
         b.append("0".repeat(leadingZeros)).append(digits, 0, point);
         if (point < digits.length() || r.nextBoolean()) {
-            b.append('.').append(digits, point, digits.length());
+            b.append(HEX_POINT).append(digits, point, digits.length());
         }
-        b.append(r.nextBoolean() ? 'p' : 'P');
+        b.append(r.nextBoolean() ? BINARY_EXPONENT_LOWER : BINARY_EXPONENT_UPPER);
         b.append(exponent < 0 ? "-" : r.nextBoolean() ? "+" : "").append(Math.abs(exponent));
         if (r.nextBoolean()) {
             b.append(SUFFIXES.charAt(r.nextInt(SUFFIXES.length())));
@@ -307,7 +367,7 @@ public class M3NumberParseHexAtomsTest {
     }
 
     private static String[] tie(SplittableRandom r, int precision, String format) {
-        int minDigits = Math.max(MIN_DIGITS, precision / BITS_PER_HEX_DIGIT + 2);
+        int minDigits = Math.max(MIN_DIGITS, precision / BITS_PER_HEX_DIGIT + TIE_EXTRA_DIGITS);
         BigInteger m = significand(r, minDigits + r.nextInt(MAX_DIGITS - minDigits + 1), 1);
         String[] variant = new String[1];
         m = halfway(r, m, precision, variant);
@@ -341,7 +401,7 @@ public class M3NumberParseHexAtomsTest {
         int tail = MIN_TAIL_DIGITS + r.nextInt(MAX_TAIL_DIGITS);
         StringBuilder tailDigits = new StringBuilder();
         for (int i = 0; i < tail; i++) {
-            tailDigits.append(r.nextInt(TIE_VARIANTS) == 0 ? HEX_DIGITS.charAt(r.nextInt(HEX_DIGIT_VALUES)) : '0');
+            tailDigits.append(r.nextInt(TIE_VARIANTS) == 0 ? HEX_DIGITS.charAt(r.nextInt(HEX_DIGIT_VALUES)) : TAIL_ZERO_DIGIT);
         }
         if (r.nextBoolean()) {
             tailDigits.setCharAt(r.nextInt(tail), HEX_DIGITS.charAt(1 + r.nextInt(HEX_DIGIT_VALUES - 1)));
@@ -356,7 +416,7 @@ public class M3NumberParseHexAtomsTest {
         int clamped = 0;
         for (char c : Integer.toString(exponent).toCharArray()) {
             if (clamped < DONOR_EXPONENT_CLAMP) {
-                clamped = DECIMAL_RADIX * clamped + (c - '0');
+                clamped = DECIMAL_RADIX * clamped + (c - DIGIT_ZERO);
             }
         }
         return clamped;
@@ -369,7 +429,7 @@ public class M3NumberParseHexAtomsTest {
         int digits = 1 + r.nextInt(MAX_CLAMP_DIGITS);
         BigInteger m = significand(r, digits, 1);
         int window = precision == DOUBLE_PRECISION ? Double.MAX_EXPONENT : Float.MAX_EXPONENT;
-        int landing = r.nextInt(2 * window) - window;    // the power the donor would compute
+        int landing = r.nextInt(LANDING_SIDES * window) - window;    // the power the donor would compute
         int fractionDigits = Math.max(digits, (donorClamp(exponent) - landing) / BITS_PER_HEX_DIGIT);
         String hex = m.toString(HEX_RADIX);
         String literal = "0x" + (r.nextBoolean() ? "" : "0") + "." + "0".repeat(fractionDigits - digits) + hex
@@ -445,7 +505,7 @@ public class M3NumberParseHexAtomsTest {
                 + differ.stream().filter(d -> d.startsWith("generated")).count() + "/" + generated + ")"
                 + (byShape.isEmpty() ? "" : " by shape " + byShape);
         System.out.println(summary + (rejected > 0 ? ", rejected " + rejected : ""));
-        assertEquals(0, differ.size(), () -> summary + ", first: " + differ.subList(0, Math.min(5, differ.size())));
+        assertEquals(0, differ.size(), () -> summary + ", first: " + differ.subList(0, Math.min(MAX_REPORTED, differ.size())));
     }
 
     private static void instanceAtom(String simple, boolean asDouble, boolean bytes) throws ReflectiveOperationException {
@@ -470,14 +530,14 @@ public class M3NumberParseHexAtomsTest {
                         boolean.class, long.class)
                 : method(type("M3FastFloatMath"), "tryHexFloatToFloatTruncated", boolean.class, long.class, int.class,
                         boolean.class, int.class);
-        SplittableRandom r = new SplittableRandom(SEED + (asDouble ? 1 : 2));
+        SplittableRandom r = new SplittableRandom(SEED + (asDouble ? 1 : FLOAT_SEED_OFFSET));
         List<String> wrong = new ArrayList<>();
         int declined = 0;
         int limit = asDouble ? Double.MAX_EXPONENT : Float.MAX_EXPONENT;
         for (int n = 0; n < KERNEL_CALLS; n++) {
             long s = n == 0 ? (asDouble ? DOUBLE_TRAP_SIGNIFICAND : FLOAT_TRAP_SIGNIFICAND)
-                            : r.nextLong() >>> r.nextInt(WORD_BITS / 2);
-            int e = n == 0 ? (asDouble ? DOUBLE_TRAP_EXPONENT : FLOAT_TRAP_EXPONENT) : r.nextInt(-2 * limit, 2 * limit);
+                            : r.nextLong() >>> r.nextInt(WORD_BITS / SHIFT_RANGE_DIVISOR);
+            int e = n == 0 ? (asDouble ? DOUBLE_TRAP_EXPONENT : FLOAT_TRAP_EXPONENT) : r.nextInt(KERNEL_EXPONENT_LOW_FACTOR * limit, KERNEL_EXPONENT_HIGH_FACTOR * limit);
             boolean truncated = n != 0 && r.nextInt(TIE_VARIANTS) == 0;
             boolean negative = r.nextBoolean();
             Object got = asDouble ? call(hex, null, negative, s, (long) e, truncated, (long) e)
@@ -498,7 +558,7 @@ public class M3NumberParseHexAtomsTest {
             }
         }
         System.out.println((asDouble ? "double" : "float") + " hex kernel: declined " + declined + " of " + KERNEL_CALLS);
-        assertEquals(0, wrong.size(), () -> wrong.size() + " wrong, first: " + wrong.subList(0, Math.min(5, wrong.size())));
+        assertEquals(0, wrong.size(), () -> wrong.size() + " wrong, first: " + wrong.subList(0, Math.min(MAX_REPORTED, wrong.size())));
     }
 
     @Test
@@ -551,15 +611,15 @@ public class M3NumberParseHexAtomsTest {
     private static String[] referee(String literal) {
         Matcher m = HEX.matcher(literal.trim());
         assertTrue(m.matches(), literal);
-        String digits = m.group(2) + (m.group(3) == null ? "" : m.group(3));
+        String digits = m.group(HEX_GROUP_INTEGER) + (m.group(HEX_GROUP_FRACTION) == null ? "" : m.group(HEX_GROUP_FRACTION));
         BigInteger magnitude = digits.isEmpty() ? BigInteger.ZERO : new BigInteger(digits, HEX_RADIX);
-        BigInteger power = new BigInteger(m.group(4)).subtract(
-                BigInteger.valueOf((long) BITS_PER_HEX_DIGIT * (m.group(3) == null ? 0 : m.group(3).length())));
+        BigInteger power = new BigInteger(m.group(HEX_GROUP_EXPONENT)).subtract(
+                BigInteger.valueOf((long) BITS_PER_HEX_DIGIT * (m.group(HEX_GROUP_FRACTION) == null ? 0 : m.group(HEX_GROUP_FRACTION).length())));
         boolean negative = "-".equals(m.group(1));
         double d;
         float f;
-        long lead = magnitude.bitLength() + power.max(BigInteger.valueOf(-REFEREE_EXPONENT_LIMIT * 2))
-                .min(BigInteger.valueOf(REFEREE_EXPONENT_LIMIT * 2)).longValue();
+        long lead = magnitude.bitLength() + power.max(BigInteger.valueOf(-REFEREE_EXPONENT_LIMIT * REFEREE_CLAMP_FACTOR))
+                .min(BigInteger.valueOf(REFEREE_EXPONENT_LIMIT * REFEREE_CLAMP_FACTOR)).longValue();
         if (magnitude.signum() == 0 || lead < -REFEREE_EXPONENT_LIMIT) {
             d = 0;
             f = 0;
@@ -593,7 +653,7 @@ public class M3NumberParseHexAtomsTest {
                         + " exact " + exact[0] + "/" + exact[1]);
             }
         }
-        assertEquals(0, differ.size(), () -> differ.size() + " differ, first: " + differ.subList(0, Math.min(5, differ.size())));
+        assertEquals(0, differ.size(), () -> differ.size() + " differ, first: " + differ.subList(0, Math.min(MAX_REPORTED, differ.size())));
     }
 
     @Test
@@ -606,7 +666,7 @@ public class M3NumberParseHexAtomsTest {
             String t = c.literal().trim();
             Matcher m = HEX.matcher(t);
             assertTrue(m.matches(), c.literal());
-            String significant = (m.group(2) + (m.group(3) == null ? "" : m.group(3))).replaceFirst("^0+", "");
+            String significant = (m.group(HEX_GROUP_INTEGER) + (m.group(HEX_GROUP_FRACTION) == null ? "" : m.group(HEX_GROUP_FRACTION))).replaceFirst("^0+", "");
             if (c.shape().equals("PLAIN") && significant.length() <= MAX_DIGITS) {
                 digitCounts[significant.length()]++;
             }
@@ -619,7 +679,7 @@ public class M3NumberParseHexAtomsTest {
         for (String family : List.of("PLAIN", "DOUBLE_TIE", "DOUBLE_TIE_STICKY", "DOUBLE_BELOW_TIE", "DOUBLE_ABOVE_TIE",
                 "FLOAT_TIE", "FLOAT_TIE_STICKY", "DOUBLE_BIT63", "FLOAT_BIT63", "DOUBLE_TRUNCATED_STICKY",
                 "FLOAT_TRUNCATED_STICKY", "CLAMPED")) {
-            assertTrue(shapes.getOrDefault(family, 0) > perShape / (2 * TIE_VARIANTS), family + " " + shapes);
+            assertTrue(shapes.getOrDefault(family, 0) > perShape / (COVERAGE_SHARE_DIVISOR * TIE_VARIANTS), family + " " + shapes);
         }
         for (int digits = MIN_DIGITS; digits <= MAX_DIGITS; digits++) {
             assertTrue(digitCounts[digits] > 0, "no PLAIN significand with " + digits + " digits");

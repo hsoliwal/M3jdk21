@@ -8,7 +8,8 @@ method (its declaration line plus its Code listing). Rows: every method whose bl
 and every field that appears or disappears; plus one summary row per class. The verdict is PASS only when the changed
 methods are exactly the named ones (class is the path without .class, e.g. jdk/internal/math/M3FastDoubleMath) and
 every added field is private static final: so an in-file change can prove that the rest of the class, and every other
-class (here the decimal fast path), compiles to the same instructions."""
+class (here the decimal fast path), compiles to the same instructions. The TSV starts with the Synexia SPDX header
+('#' lines)."""
 import os
 import re
 import subprocess
@@ -19,6 +20,9 @@ FIELD = re.compile(r"^  (?:(?:public|protected|private|static|final|volatile|tra
 DECLARATION = re.compile(r"^  \S.*\)(?: throws [\w.$, ]+)?;$|^  static \{\};$")
 NAME = re.compile(r"([\w$<>]+)\(")
 NONE = "-"  # an empty cell (no trailing tabs in the TSV)
+TSV_HEADER = ("# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0\n"
+              "# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others\n")
+FIRST_ALLOWED_ARG = 5  # argv: program, javap, pre_classes, post_classes, out.tsv, then the allowed methods
 
 
 def javap(tool, path):
@@ -51,7 +55,8 @@ def method_name(declaration):
 
 
 def main(argv):
-    tool, pre, post, out_path, allowed = argv[1], argv[2], argv[3], argv[4], set(argv[5:])
+    tool, pre, post, out_path = argv[1:FIRST_ALLOWED_ARG]
+    allowed = set(argv[FIRST_ALLOWED_ARG:])
     rows, changed, bad_fields = [], set(), 0
     for root, _, names in sorted(os.walk(pre)):
         for name in sorted(n for n in names if n.endswith(".class")):
@@ -79,6 +84,7 @@ def main(argv):
             rows.append((klass, "class", NONE, "METHODS_EQUAL=%d/%d" % (same, len(set(m0) | set(m1))), NONE, NONE))
     verdict = "PASS" if changed == allowed and bad_fields == 0 else "FAIL"
     with open(out_path, "w", encoding="utf-8", newline="\n") as f:
+        f.write(TSV_HEADER)
         f.write("class\tkind\tmember\tstate\tpre_lines\tpost_lines\n")
         for r in rows:
             f.write("\t".join(str(x) for x in r) + "\n")
