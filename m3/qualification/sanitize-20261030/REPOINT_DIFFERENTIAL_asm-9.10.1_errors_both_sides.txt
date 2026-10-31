@@ -1,0 +1,33 @@
+m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractProcessTask.java:20: error: package org.apache.tools.ant does not exist
+m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractProcessTask.java:21: error: package org.apache.tools.ant does not exist
+m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractProcessTask.java:22: error: package org.apache.tools.ant does not exist
+m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractProcessTask.java:23: error: package org.apache.tools.ant does not exist
+m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractProcessTask.java:24: error: package org.apache.tools.ant.types does not exist
+m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractProcessTask.java:26: error: cannot find symbol
+m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractProcessTask.java:29: error: cannot find symbol
+m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractProcessTask.java:35: error: cannot find symbol
+m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractProcessTask.java:37: error: cannot find symbol
+m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractProcessTask.java:38: error: cannot find symbol
+m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractProcessTask.java:51: error: cannot find symbol
+m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractProcessTask.java:57: error: cannot find symbol
+m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractProcessTask.java:62: error: cannot find symbol
+m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractTransformTask.java:132: error: cannot find symbol
+m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractTransformTask.java:163: error: cannot find symbol
+m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractTransformTask.java:230: error: cannot find symbol
+m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractTransformTask.java:26: error: package org.apache.tools.ant does not exist
+m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractTransformTask.java:27: error: package org.apache.tools.ant does not exist
+m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractTransformTask.java:28: error: package org.apache.tools.ant does not exist
+m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractTransformTask.java:69: error: cannot find symbol
+m3/vendor/third_party/cglib/src/main/java/net/sf/cglib/transform/AbstractTransformTask.java:92: error: cannot find symbol
+m3/vendor/third_party/commons-compress-1.27.1/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorInputStream.java:27: error: package com.github.luben.zstd does not exist
+m3/vendor/third_party/commons-compress-1.27.1/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorInputStream.java:28: error: package com.github.luben.zstd does not exist
+m3/vendor/third_party/commons-compress-1.27.1/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorInputStream.java:39: error: cannot find symbol
+m3/vendor/third_party/commons-compress-1.27.1/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorInputStream.java:42: error: cannot find symbol
+m3/vendor/third_party/commons-compress-1.27.1/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorInputStream.java:53: error: cannot find symbol
+m3/vendor/third_party/commons-compress-1.27.1/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorInputStream.java:54: error: cannot find symbol
+m3/vendor/third_party/commons-compress-1.27.1/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorOutputStream.java:25: error: package com.github.luben.zstd does not exist
+m3/vendor/third_party/commons-compress-1.27.1/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorOutputStream.java:33: error: cannot find symbol
+m3/vendor/third_party/commons-compress-1.27.1/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorOutputStream.java:44: error: cannot find symbol
+m3/vendor/third_party/commons-compress-1.27.1/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorOutputStream.java:57: error: cannot find symbol
+m3/vendor/third_party/commons-compress-1.27.1/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorOutputStream.java:71: error: cannot find symbol
+m3/vendor/third_party/commons-compress-1.27.1/src/main/java/org/apache/commons/compress/compressors/zstandard/ZstdCompressorOutputStream.java:88: error: cannot find symbol

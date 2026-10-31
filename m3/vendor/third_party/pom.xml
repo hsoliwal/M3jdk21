@@ -15,7 +15,6 @@
     <module>antlr4-runtime-4.11.1</module>
     <module>antlr4-runtime-4.13.2</module>
     <module>apiguardian-api</module>
-    <module>asm-9.10.1</module>
     <module>asm-9.6</module>
     <module>asm-analysis</module>
     <module>asm-tree</module>
