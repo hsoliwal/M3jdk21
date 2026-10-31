@@ -6,8 +6,10 @@ on:
       - 'AGENTS.md'
       - 'm3/docs/name-mapping.json'
       - 'm3/docs/name-mapping.schema.json'
+      - 'm3/migration/requirements.txt'
       - 'm3/compatibility/check_public_names.py'
       - 'm3/arrays/src/main/java/**'
+      - 'm3/arrays/src/main/native/**'
       - 'src/java.base/share/classes/java/util/Arrays.java'
       - 'src/java.base/share/classes/module-info.java'
       - 'm3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md'
@@ -32,11 +34,12 @@ jobs:
           sparse-checkout: |
             AGENTS.md
             m3/docs/name-mapping.json
+            m3/docs/name-mapping.schema.json
+            m3/migration/requirements.txt
             m3/docs/M3JDK21_NAME_AND_PACKAGE_CONTRACT.md
             m3/tooling/name-contract/**
             m3/compatibility/check_public_names.py
-            m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java
-            m3/arrays/src/main/java/module-info.java
+            m3/arrays/src/main/**
             src/java.base/share/classes/java/util/Arrays.java
             src/java.base/share/classes/module-info.java
             src/java.base/share/classes/java/lang/Class.java
@@ -58,6 +61,11 @@ jobs:
             src/java.base/share/classes/java/util/ChangeJournal.java
             src/java.base/share/classes/java/lang/M3CodeTextSignalBatch.java
             .github/workflows/m3jdk21-name-contract.yml
+      - name: Install the shared schema validator in an isolated test environment
+        run: |
+          python3 -m venv "$RUNNER_TEMP/m3-name-contract-venv"
+          "$RUNNER_TEMP/m3-name-contract-venv/bin/python" -m pip install --disable-pip-version-check -r m3/migration/requirements.txt
+          echo "$RUNNER_TEMP/m3-name-contract-venv/bin" >> "$GITHUB_PATH"
       - name: Canonical name and package mapping gate
         run: python3 m3/tooling/name-contract/check.py
       - name: Canonical target class and JNI owner census

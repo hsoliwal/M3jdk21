@@ -23,6 +23,7 @@
  * questions.
  */
 
+// Modified 2026: retain primitive copyOfRange exception order through range-length overflow.
 package java.util;
 
 import jdk.internal.util.ArraysSupport;
@@ -3845,10 +3846,11 @@ public final class Arrays {
         if (from == 0 && to == original.length) {
             return original.clone();
         }
-        int newLength = to - from;
-        if (newLength < 0) {
+        // Preserve range ordering before subtraction can overflow.
+        if (to < from) {
             throw new IllegalArgumentException(from + " > " + to);
         }
+        int newLength = to - from;
         byte[] copy = new byte[newLength];
         System.arraycopy(original, from, copy, 0,
                 Math.min(original.length - from, newLength));
@@ -3885,10 +3887,11 @@ public final class Arrays {
         if (from == 0 && to == original.length) {
             return original.clone();
         }
-        int newLength = to - from;
-        if (newLength < 0) {
+        // Preserve range ordering before subtraction can overflow.
+        if (to < from) {
             throw new IllegalArgumentException(from + " > " + to);
         }
+        int newLength = to - from;
         short[] copy = new short[newLength];
         System.arraycopy(original, from, copy, 0,
                          Math.min(original.length - from, newLength));
@@ -3925,10 +3928,11 @@ public final class Arrays {
         if (from == 0 && to == original.length) {
             return original.clone();
         }
-        int newLength = to - from;
-        if (newLength < 0) {
+        // Preserve range ordering before subtraction can overflow.
+        if (to < from) {
             throw new IllegalArgumentException(from + " > " + to);
         }
+        int newLength = to - from;
         int[] copy = new int[newLength];
         System.arraycopy(original, from, copy, 0,
                          Math.min(original.length - from, newLength));
@@ -3965,10 +3969,11 @@ public final class Arrays {
         if (from == 0 && to == original.length) {
             return original.clone();
         }
-        int newLength = to - from;
-        if (newLength < 0) {
+        // Preserve range ordering before subtraction can overflow.
+        if (to < from) {
             throw new IllegalArgumentException(from + " > " + to);
         }
+        int newLength = to - from;
         long[] copy = new long[newLength];
         System.arraycopy(original, from, copy, 0,
                          Math.min(original.length - from, newLength));
@@ -4005,10 +4010,11 @@ public final class Arrays {
         if (from == 0 && to == original.length) {
             return original.clone();
         }
-        int newLength = to - from;
-        if (newLength < 0) {
+        // Preserve range ordering before subtraction can overflow.
+        if (to < from) {
             throw new IllegalArgumentException(from + " > " + to);
         }
+        int newLength = to - from;
         char[] copy = new char[newLength];
         System.arraycopy(original, from, copy, 0,
                          Math.min(original.length - from, newLength));
@@ -4045,10 +4051,11 @@ public final class Arrays {
         if (from == 0 && to == original.length) {
             return original.clone();
         }
-        int newLength = to - from;
-        if (newLength < 0) {
+        // Preserve range ordering before subtraction can overflow.
+        if (to < from) {
             throw new IllegalArgumentException(from + " > " + to);
         }
+        int newLength = to - from;
         float[] copy = new float[newLength];
         System.arraycopy(original, from, copy, 0,
                          Math.min(original.length - from, newLength));
@@ -4085,10 +4092,11 @@ public final class Arrays {
         if (from == 0 && to == original.length) {
             return original.clone();
         }
-        int newLength = to - from;
-        if (newLength < 0) {
+        // Preserve range ordering before subtraction can overflow.
+        if (to < from) {
             throw new IllegalArgumentException(from + " > " + to);
         }
+        int newLength = to - from;
         double[] copy = new double[newLength];
         System.arraycopy(original, from, copy, 0,
                          Math.min(original.length - from, newLength));
@@ -4125,10 +4133,11 @@ public final class Arrays {
         if (from == 0 && to == original.length) {
             return original.clone();
         }
-        int newLength = to - from;
-        if (newLength < 0) {
+        // Preserve range ordering before subtraction can overflow.
+        if (to < from) {
             throw new IllegalArgumentException(from + " > " + to);
         }
+        int newLength = to - from;
         boolean[] copy = new boolean[newLength];
         System.arraycopy(original, from, copy, 0,
                          Math.min(original.length - from, newLength));
