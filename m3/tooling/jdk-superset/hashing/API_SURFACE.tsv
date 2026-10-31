@@ -1,0 +1,133 @@
+type	member	status	rule	reason
+M3Access	<init>()	KEPT	-	-
+M3Access	ByteOrder byteOrder(T)	KEPT	-	-
+M3Access	M3Access byteOrder(T,ByteOrder)	KEPT	-	-
+M3Access	M3Access reverseAccess()	KEPT	-	-
+M3Access	int getByte(T,long)	KEPT	-	-
+M3Access	int getInt(T,long)	KEPT	-	-
+M3Access	int getShort(T,long)	KEPT	-	-
+M3Access	int getUnsignedByte(T,long)	KEPT	-	-
+M3Access	int getUnsignedShort(T,long)	KEPT	-	-
+M3Access	int i16(T,long)	KEPT	-	-
+M3Access	int i32(T,long)	KEPT	-	-
+M3Access	int i8(T,long)	KEPT	-	-
+M3Access	int u16(T,long)	KEPT	-	-
+M3Access	int u8(T,long)	KEPT	-	-
+M3Access	long getLong(T,long)	KEPT	-	-
+M3Access	long getUnsignedInt(T,long)	KEPT	-	-
+M3Access	long i64(T,long)	KEPT	-	-
+M3Access	long u32(T,long)	KEPT	-	-
+M3Access	static M3Access toByteBuffer()	KEPT	-	-
+M3Access	static M3Access toCharSequence(ByteOrder)	KEPT	-	-
+M3Access	static M3Access toNativeCharSequence()	KEPT	-	-
+M3Access	static M3Access unsafe()	DROPPED	ACCESS_DROP_UNSAFE v1	raw object/address access (sun.misc.Unsafe)
+M3LongHashFunction	<init>()	KEPT	-	-
+M3LongHashFunction	long hash(Object,M3Access,long,long)	KEPT	-	-
+M3LongHashFunction	long hashBoolean(boolean)	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads the JVM's boolean storage (sun.misc.Unsafe)
+M3LongHashFunction	long hashBooleans(boolean[])	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads the JVM's boolean storage (sun.misc.Unsafe)
+M3LongHashFunction	long hashBooleans(boolean[],int,int)	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads the JVM's boolean storage (sun.misc.Unsafe)
+M3LongHashFunction	long hashByte(byte)	KEPT	-	-
+M3LongHashFunction	long hashBytes(ByteBuffer)	KEPT	-	-
+M3LongHashFunction	long hashBytes(ByteBuffer,int,int)	KEPT	-	-
+M3LongHashFunction	long hashBytes(byte[])	KEPT	-	-
+M3LongHashFunction	long hashBytes(byte[],int,int)	KEPT	-	-
+M3LongHashFunction	long hashChar(char)	KEPT	-	-
+M3LongHashFunction	long hashChars(String)	KEPT	-	-
+M3LongHashFunction	long hashChars(String,int,int)	KEPT	-	-
+M3LongHashFunction	long hashChars(StringBuilder)	KEPT	-	-
+M3LongHashFunction	long hashChars(StringBuilder,int,int)	KEPT	-	-
+M3LongHashFunction	long hashChars(char[])	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongHashFunction	long hashChars(char[],int,int)	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongHashFunction	long hashInt(int)	KEPT	-	-
+M3LongHashFunction	long hashInts(int[])	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongHashFunction	long hashInts(int[],int,int)	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongHashFunction	long hashLong(long)	KEPT	-	-
+M3LongHashFunction	long hashLongs(long[])	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongHashFunction	long hashLongs(long[],int,int)	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongHashFunction	long hashMemory(long,long)	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a raw address (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongHashFunction	long hashShort(short)	KEPT	-	-
+M3LongHashFunction	long hashShorts(short[])	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongHashFunction	long hashShorts(short[],int,int)	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongHashFunction	long hashVoid()	KEPT	-	-
+M3LongHashFunction	static M3LongHashFunction city_1_1()	KEPT	-	-
+M3LongHashFunction	static M3LongHashFunction city_1_1(long)	KEPT	-	-
+M3LongHashFunction	static M3LongHashFunction city_1_1(long,long)	KEPT	-	-
+M3LongHashFunction	static M3LongHashFunction farmNa()	KEPT	-	-
+M3LongHashFunction	static M3LongHashFunction farmNa(long)	KEPT	-	-
+M3LongHashFunction	static M3LongHashFunction farmNa(long,long)	KEPT	-	-
+M3LongHashFunction	static M3LongHashFunction farmUo()	KEPT	-	-
+M3LongHashFunction	static M3LongHashFunction farmUo(long)	KEPT	-	-
+M3LongHashFunction	static M3LongHashFunction farmUo(long,long)	KEPT	-	-
+M3LongHashFunction	static M3LongHashFunction metro()	KEPT	-	-
+M3LongHashFunction	static M3LongHashFunction metro(long)	KEPT	-	-
+M3LongHashFunction	static M3LongHashFunction murmur_3()	KEPT	-	-
+M3LongHashFunction	static M3LongHashFunction murmur_3(long)	KEPT	-	-
+M3LongHashFunction	static M3LongHashFunction wy_3()	KEPT	-	-
+M3LongHashFunction	static M3LongHashFunction wy_3(long)	KEPT	-	-
+M3LongHashFunction	static M3LongHashFunction xx()	KEPT	-	-
+M3LongHashFunction	static M3LongHashFunction xx(long)	KEPT	-	-
+M3LongHashFunction	static M3LongHashFunction xx128low()	KEPT	-	-
+M3LongHashFunction	static M3LongHashFunction xx128low(long)	KEPT	-	-
+M3LongHashFunction	static M3LongHashFunction xx3()	KEPT	-	-
+M3LongHashFunction	static M3LongHashFunction xx3(long)	KEPT	-	-
+M3LongTupleHashFunction	<init>()	KEPT	-	-
+M3LongTupleHashFunction	int bitsLength()	KEPT	-	-
+M3LongTupleHashFunction	long[] hash(Object,M3Access,long,long)	KEPT	-	-
+M3LongTupleHashFunction	long[] hashBoolean(boolean)	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads the JVM's boolean storage (sun.misc.Unsafe)
+M3LongTupleHashFunction	long[] hashBooleans(boolean[])	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads the JVM's boolean storage (sun.misc.Unsafe)
+M3LongTupleHashFunction	long[] hashBooleans(boolean[],int,int)	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads the JVM's boolean storage (sun.misc.Unsafe)
+M3LongTupleHashFunction	long[] hashByte(byte)	KEPT	-	-
+M3LongTupleHashFunction	long[] hashBytes(ByteBuffer)	KEPT	-	-
+M3LongTupleHashFunction	long[] hashBytes(ByteBuffer,int,int)	KEPT	-	-
+M3LongTupleHashFunction	long[] hashBytes(byte[])	KEPT	-	-
+M3LongTupleHashFunction	long[] hashBytes(byte[],int,int)	KEPT	-	-
+M3LongTupleHashFunction	long[] hashChar(char)	KEPT	-	-
+M3LongTupleHashFunction	long[] hashChars(CharSequence)	KEPT	-	-
+M3LongTupleHashFunction	long[] hashChars(CharSequence,int,int)	KEPT	-	-
+M3LongTupleHashFunction	long[] hashChars(String)	KEPT	-	-
+M3LongTupleHashFunction	long[] hashChars(String,int,int)	KEPT	-	-
+M3LongTupleHashFunction	long[] hashChars(char[])	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongTupleHashFunction	long[] hashChars(char[],int,int)	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongTupleHashFunction	long[] hashInt(int)	KEPT	-	-
+M3LongTupleHashFunction	long[] hashInts(int[])	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongTupleHashFunction	long[] hashInts(int[],int,int)	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongTupleHashFunction	long[] hashLong(long)	KEPT	-	-
+M3LongTupleHashFunction	long[] hashLongs(long[])	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongTupleHashFunction	long[] hashLongs(long[],int,int)	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongTupleHashFunction	long[] hashMemory(long,long)	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a raw address (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongTupleHashFunction	long[] hashShort(short)	KEPT	-	-
+M3LongTupleHashFunction	long[] hashShorts(short[])	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongTupleHashFunction	long[] hashShorts(short[],int,int)	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongTupleHashFunction	long[] hashVoid()	KEPT	-	-
+M3LongTupleHashFunction	long[] newResultArray()	KEPT	-	-
+M3LongTupleHashFunction	static M3LongTupleHashFunction murmur_3()	KEPT	-	-
+M3LongTupleHashFunction	static M3LongTupleHashFunction murmur_3(long)	KEPT	-	-
+M3LongTupleHashFunction	static M3LongTupleHashFunction xx128()	KEPT	-	-
+M3LongTupleHashFunction	static M3LongTupleHashFunction xx128(long)	KEPT	-	-
+M3LongTupleHashFunction	void hash(Object,M3Access,long,long,long[])	KEPT	-	-
+M3LongTupleHashFunction	void hashBoolean(boolean,long[])	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads the JVM's boolean storage (sun.misc.Unsafe)
+M3LongTupleHashFunction	void hashBooleans(boolean[],int,int,long[])	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads the JVM's boolean storage (sun.misc.Unsafe)
+M3LongTupleHashFunction	void hashBooleans(boolean[],long[])	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads the JVM's boolean storage (sun.misc.Unsafe)
+M3LongTupleHashFunction	void hashByte(byte,long[])	KEPT	-	-
+M3LongTupleHashFunction	void hashBytes(ByteBuffer,int,int,long[])	KEPT	-	-
+M3LongTupleHashFunction	void hashBytes(ByteBuffer,long[])	KEPT	-	-
+M3LongTupleHashFunction	void hashBytes(byte[],int,int,long[])	KEPT	-	-
+M3LongTupleHashFunction	void hashBytes(byte[],long[])	KEPT	-	-
+M3LongTupleHashFunction	void hashChar(char,long[])	KEPT	-	-
+M3LongTupleHashFunction	void hashChars(CharSequence,int,int,long[])	KEPT	-	-
+M3LongTupleHashFunction	void hashChars(CharSequence,long[])	KEPT	-	-
+M3LongTupleHashFunction	void hashChars(String,int,int,long[])	KEPT	-	-
+M3LongTupleHashFunction	void hashChars(String,long[])	KEPT	-	-
+M3LongTupleHashFunction	void hashChars(char[],int,int,long[])	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongTupleHashFunction	void hashChars(char[],long[])	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongTupleHashFunction	void hashInt(int,long[])	KEPT	-	-
+M3LongTupleHashFunction	void hashInts(int[],int,int,long[])	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongTupleHashFunction	void hashInts(int[],long[])	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongTupleHashFunction	void hashLong(long,long[])	KEPT	-	-
+M3LongTupleHashFunction	void hashLongs(long[],int,int,long[])	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongTupleHashFunction	void hashLongs(long[],long[])	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongTupleHashFunction	void hashMemory(long,long,long[])	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a raw address (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongTupleHashFunction	void hashShort(short,long[])	KEPT	-	-
+M3LongTupleHashFunction	void hashShorts(short[],int,int,long[])	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongTupleHashFunction	void hashShorts(short[],long[])	DROPPED	FACADE_DROP_RAW_MEMORY v1	reads a typed array's memory (sun.misc.Unsafe); no byte[]/ByteBuffer form
+M3LongTupleHashFunction	void hashVoid(long[])	KEPT	-	-
