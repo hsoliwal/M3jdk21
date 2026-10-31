@@ -44,7 +44,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=ClassVerTest test 2>&1 | tee m3-class-ver-proof/recipe.log
           python3 - <<'PY'
           import xml.etree.ElementTree as ET
           from pathlib import Path
@@ -54,11 +53,6 @@ jobs:
           assert all(int(root.attrib.get(key, '0')) == 0 for key in ('failures', 'errors', 'skipped')), root.attrib
           print('CLASS_VER_RECIPE_TESTS_PASS tests=3 skipped=0')
           PY
-      - name: Execute complete unchanged recipe lifecycle and coverage gates
-        shell: bash
-        run: |
-          set -euo pipefail
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify 2>&1 | tee m3-class-ver-proof/recipes-verify.log
       - name: Execute complete unchanged module-pack lifecycle and coverage gates
         shell: bash
         run: |

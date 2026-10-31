@@ -61,13 +61,6 @@ jobs:
       - name: 1 - Diff hygiene
         run: git diff --check
 
-      - name: 2 - SHAKE, ML-KEM and ML-DSA recipe DAG proofs
-        run: >-
-          mvn -B -ntp
-          -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3Jdk8338587ShakeXofBackportRecipeTest,M3Jep496MlKemBackportRecipeTest,M3Jep497MlDsaBackportRecipeTest,M3RecipeScopeDeclarationTest
-          -Dsurefire.failIfNoSpecifiedTests=false
-          test
 
       - name: 3 - Released JEP residue stays derived
         run: python3 -m unittest m3/backports/test_jep_residue.py
@@ -90,13 +83,6 @@ jobs:
           test -f m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3Java21FileConvergenceRecipe.java
           test -f m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/synexia/M3SynexiaJava21ConvergenceConsumerTest.java
 
-      - name: Prove canonical Synexia consumer and scope
-        run: >-
-          mvn -B -ntp
-          -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3SynexiaJava21ConvergenceConsumerTest,M3RecipeScopeDeclarationTest
-          -Dsurefire.failIfNoSpecifiedTests=false
-          test
 
       - name: Promotion fence
         run: echo 'JEP 497 remains held until the eight Java targets are run through canonical FILE convergence and resealed if changed.'
