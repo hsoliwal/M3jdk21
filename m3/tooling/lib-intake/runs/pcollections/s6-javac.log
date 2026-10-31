@@ -1,0 +1,110 @@
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\module-info.java:3: warning: [module] module name component m3 should avoid terminal digits
+module jdk.m3.pcollections {
+          ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\AbstractUnmodifiableCollection.java:17: warning: [missing-explicit-ctor] class AbstractUnmodifiableCollection in exported package com.m3.lib.pcollections declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.pcollections
+public abstract class AbstractUnmodifiableCollection<E> extends AbstractCollection<E> {
+                ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\AbstractUnmodifiableList.java:19: warning: [missing-explicit-ctor] class AbstractUnmodifiableList in exported package com.m3.lib.pcollections declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.pcollections
+public abstract class AbstractUnmodifiableList<E> extends AbstractList<E> {
+                ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\AbstractUnmodifiableMap.java:23: warning: [missing-explicit-ctor] class AbstractUnmodifiableMap in exported package com.m3.lib.pcollections declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.pcollections
+public abstract class AbstractUnmodifiableMap<K, V> extends AbstractMap<K, V> {
+                ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\AbstractUnmodifiableQueue.java:17: warning: [missing-explicit-ctor] class AbstractUnmodifiableQueue in exported package com.m3.lib.pcollections declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.pcollections
+public abstract class AbstractUnmodifiableQueue<E> extends AbstractQueue<E> {
+                ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\AbstractUnmodifiableSequentialList.java:19: warning: [missing-explicit-ctor] class AbstractUnmodifiableSequentialList in exported package com.m3.lib.pcollections declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.pcollections
+public abstract class AbstractUnmodifiableSequentialList<E> extends AbstractSequentialList<E> {
+                ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\AbstractUnmodifiableSet.java:21: warning: [missing-explicit-ctor] class AbstractUnmodifiableSet in exported package com.m3.lib.pcollections declares no explicit constructors, thereby exposing a default constructor to clients of module jdk.m3.pcollections
+public abstract class AbstractUnmodifiableSet<E> extends AbstractSet<E> {
+                ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\AmortizedPQueue.java:30: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+  private final PStack<E> front;
+                          ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\AmortizedPQueue.java:31: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+  private final PStack<E> back;
+                          ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\ConsPStack.java:164: warning: [static] static method should be qualified by type name, ConsPStack, instead of by an expression
+    return this.<E>empty().plusAll(reversed); // plusAll reverses again
+               ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\ConsPStack.java:73: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+  private final E first;
+                  ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\HashPMap.java:82: warning: [rawtypes] found raw type: Entry
+              final Entry e = (Entry) o;
+                    ^
+  missing type arguments for generic class Entry<K,V>
+  where K,V are type-variables:
+    K extends Object declared in interface Entry
+    V extends Object declared in interface Entry
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\HashPMap.java:49: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+  private final PMap<Integer, PSequence<Entry<K, V>>> intMap;
+                                                      ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\MapPBag.java:39: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+  private final PMap<E, Integer> map;
+                                 ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\MapPSet.java:58: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+  private final PMap<E, Object> map;
+                                ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\IntTree.java:277: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
+          key -= node.key; // revert to parent's key
+                     ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\IntTree.java:296: warning: [lossy-conversions] implicit cast from long to int in compound assignment is possibly lossy
+        key += node.key;
+                   ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\IntTree.java:48: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+  private final V value;
+                  ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\IntTreePMap.java:139: warning: [rawtypes] found raw type: Entry
+              final Entry e = (Entry) o;
+                    ^
+  missing type arguments for generic class Entry<K,V>
+  where K,V are type-variables:
+    K extends Object declared in interface Entry
+    V extends Object declared in interface Entry
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\KVTree.java:74: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+  private final K key;
+                  ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\KVTree.java:75: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+  private final V value;
+                  ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\OrderedPMap.java:115: warning: [rawtypes] found raw type: Entry
+        final Entry e = (Entry) o;
+              ^
+  missing type arguments for generic class Entry<K,V>
+  where K,V are type-variables:
+    K extends Object declared in interface Entry
+    V extends Object declared in interface Entry
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\OrderedPMap.java:53: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+  private final PMap<K, Long> ids;
+                              ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\OrderedPMap.java:54: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+  private final PSortedMap<Long, Entry<K, V>> entries;
+                                              ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\OrderedPSet.java:47: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+  private final PMap<E, Long> ids;
+                              ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\OrderedPSet.java:48: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+  private final PSortedMap<Long, E> elements;
+                                    ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\TreePMap.java:345: warning: [rawtypes] found raw type: Entry
+        final Entry e = (Entry) o;
+              ^
+  missing type arguments for generic class Entry<K,V>
+  where K,V are type-variables:
+    K extends Object declared in interface Entry
+    V extends Object declared in interface Entry
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\TreePMap.java:49: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+  private final Comparator<? super K> ltrComparator;
+                                      ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\TreePSet.java:156: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter elements
+    return of(Comparator.naturalOrder(), elements);
+                                         ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\TreePSet.java:172: warning: [varargs] Varargs method could cause heap pollution from non-reifiable varargs parameter elements
+    return TreePSet.<E>empty(comparator).plusAll(Arrays.asList(elements));
+                                                               ^
+H:\m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\TreePSet.java:45: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+  private final Comparator<? super E> ltrComparator;
+                                      ^
+31 warnings

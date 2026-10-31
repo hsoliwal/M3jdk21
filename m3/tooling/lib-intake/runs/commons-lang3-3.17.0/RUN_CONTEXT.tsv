@@ -1,0 +1,10 @@
+key	value
+lib	commons-lang3-3.17.0
+source	m3/vendor/third_party/commons-lang3-3.17.0
+mappings	org.apache.commons.lang3=com.m3.lib.lang3
+module	jdk.m3.lang3
+version	3.17.0-m3-source-1
+layer	m3/vendor/third_party-m3/relocated/commons-lang3-3.17.0
+intake_deps	-
+java	java version 21.0.9 2025-10-21 LTS
+rewrite	rewrite-maven-plugin 5.23.1 / rewrite 8.17.1

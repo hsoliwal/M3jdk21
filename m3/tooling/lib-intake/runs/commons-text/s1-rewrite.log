@@ -1,0 +1,358 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< m3.intake:commons-text >-----------------------
+[INFO] Building commons-text 1.11.0-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- rewrite:5.23.1:runNoFork (default-cli) @ commons-text ---
+[INFO] Using active recipe(s) [com.synexia.m3.intake.Relocate]
+[INFO] Using active styles(s) []
+[INFO] Validating active recipes...
+[INFO] Project [commons-text] Resolving Poms...
+[INFO] Project [commons-text] Parsing source files
+[INFO] Running recipe(s)...
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\AlphabetConverter.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\AlphabetConverter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\Builder.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\Builder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\CaseUtils.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\CaseUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\CharacterPredicate.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\CharacterPredicate.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\CharacterPredicates.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\CharacterPredicates.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\CompositeFormat.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\CompositeFormat.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\diff\CommandVisitor.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\diff\CommandVisitor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.diff, newPackageName=com.m3.lib.text.diff, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\diff\DeleteCommand.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\diff\DeleteCommand.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.diff, newPackageName=com.m3.lib.text.diff, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\diff\EditCommand.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\diff\EditCommand.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.diff, newPackageName=com.m3.lib.text.diff, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\diff\EditScript.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\diff\EditScript.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.diff, newPackageName=com.m3.lib.text.diff, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\diff\InsertCommand.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\diff\InsertCommand.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.diff, newPackageName=com.m3.lib.text.diff, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\diff\KeepCommand.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\diff\KeepCommand.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.diff, newPackageName=com.m3.lib.text.diff, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\diff\package-info.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\diff\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.diff, newPackageName=com.m3.lib.text.diff, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\diff\ReplacementsFinder.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\diff\ReplacementsFinder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.diff, newPackageName=com.m3.lib.text.diff, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\diff\ReplacementsHandler.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\diff\ReplacementsHandler.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.diff, newPackageName=com.m3.lib.text.diff, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\diff\StringsComparator.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\diff\StringsComparator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.diff, newPackageName=com.m3.lib.text.diff, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\ExtendedMessageFormat.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\ExtendedMessageFormat.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.matcher, newPackageName=com.m3.lib.text.matcher, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\FormatFactory.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\FormatFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\FormattableUtils.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\FormattableUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\io\package-info.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\io\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.io, newPackageName=com.m3.lib.text.io, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\io\StringSubstitutorReader.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\io\StringSubstitutorReader.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.matcher, newPackageName=com.m3.lib.text.matcher, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.io, newPackageName=com.m3.lib.text.io, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\AbstractStringLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\AbstractStringLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\BiFunctionStringLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\BiFunctionStringLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\BiStringLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\BiStringLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\ConstantStringLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\ConstantStringLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\DateStringLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\DateStringLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\DefaultStringLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\DefaultStringLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\DnsStringLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\DnsStringLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\FileStringLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\FileStringLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\FunctionStringLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\FunctionStringLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\IllegalArgumentExceptions.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\IllegalArgumentExceptions.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\InetAddressKeys.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\InetAddressKeys.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\InterpolatorStringLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\InterpolatorStringLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\JavaPlatformStringLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\JavaPlatformStringLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\LocalHostStringLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\LocalHostStringLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\package-info.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\PropertiesStringLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\PropertiesStringLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\ResourceBundleStringLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\ResourceBundleStringLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\ScriptStringLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\ScriptStringLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\StringLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\StringLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\StringLookupFactory.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\StringLookupFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\UrlDecoderStringLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\UrlDecoderStringLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\UrlEncoderStringLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\UrlEncoderStringLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\UrlStringLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\UrlStringLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\XmlDecoderStringLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\XmlDecoderStringLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\XmlEncoderStringLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\XmlEncoderStringLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\lookup\XmlStringLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\lookup\XmlStringLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\matcher\AbstractStringMatcher.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\matcher\AbstractStringMatcher.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.matcher, newPackageName=com.m3.lib.text.matcher, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\matcher\package-info.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\matcher\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.matcher, newPackageName=com.m3.lib.text.matcher, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\matcher\StringMatcher.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\matcher\StringMatcher.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.matcher, newPackageName=com.m3.lib.text.matcher, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\matcher\StringMatcherFactory.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\matcher\StringMatcherFactory.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.matcher, newPackageName=com.m3.lib.text.matcher, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\numbers\DoubleFormat.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\numbers\DoubleFormat.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.numbers, newPackageName=com.m3.lib.text.numbers, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\numbers\package-info.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\numbers\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.numbers, newPackageName=com.m3.lib.text.numbers, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\numbers\ParsedDecimal.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\numbers\ParsedDecimal.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.numbers, newPackageName=com.m3.lib.text.numbers, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\package-info.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\RandomStringGenerator.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\RandomStringGenerator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\CharSequenceTokenizer.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\CharSequenceTokenizer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\CosineDistance.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\CosineDistance.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\CosineSimilarity.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\CosineSimilarity.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\Counter.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\Counter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\EditDistance.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\EditDistance.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\EditDistanceFrom.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\EditDistanceFrom.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\FuzzyScore.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\FuzzyScore.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\HammingDistance.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\HammingDistance.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\IntersectionResult.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\IntersectionResult.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\IntersectionSimilarity.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\IntersectionSimilarity.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\JaccardDistance.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\JaccardDistance.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\JaccardSimilarity.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\JaccardSimilarity.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\JaroWinklerDistance.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\JaroWinklerDistance.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\JaroWinklerSimilarity.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\JaroWinklerSimilarity.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\LevenshteinDetailedDistance.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\LevenshteinDetailedDistance.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\LevenshteinDistance.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\LevenshteinDistance.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\LevenshteinResults.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\LevenshteinResults.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\LongestCommonSubsequence.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\LongestCommonSubsequence.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\LongestCommonSubsequenceDistance.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\LongestCommonSubsequenceDistance.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\package-info.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\RegexTokenizer.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\RegexTokenizer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\SimilarityScore.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\SimilarityScore.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\SimilarityScoreFrom.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\SimilarityScoreFrom.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\similarity\Tokenizer.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\similarity\Tokenizer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.similarity, newPackageName=com.m3.lib.text.similarity, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\StrBuilder.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\StrBuilder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\StringEscapeUtils.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\StringEscapeUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.translate, newPackageName=com.m3.lib.text.translate, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\StringSubstitutor.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\StringSubstitutor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.matcher, newPackageName=com.m3.lib.text.matcher, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\StringTokenizer.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\StringTokenizer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.matcher, newPackageName=com.m3.lib.text.matcher, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\StrLookup.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\StrLookup.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.lookup, newPackageName=com.m3.lib.text.lookup, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\StrMatcher.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\StrMatcher.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.matcher, newPackageName=com.m3.lib.text.matcher, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\StrSubstitutor.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\StrSubstitutor.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\StrTokenizer.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\StrTokenizer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\TextRandomProvider.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\TextRandomProvider.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\TextStringBuilder.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\TextStringBuilder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.matcher, newPackageName=com.m3.lib.text.matcher, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\translate\AggregateTranslator.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\translate\AggregateTranslator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.translate, newPackageName=com.m3.lib.text.translate, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\translate\CharSequenceTranslator.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\translate\CharSequenceTranslator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.translate, newPackageName=com.m3.lib.text.translate, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\translate\CodePointTranslator.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\translate\CodePointTranslator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.translate, newPackageName=com.m3.lib.text.translate, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\translate\CsvTranslators.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\translate\CsvTranslators.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.translate, newPackageName=com.m3.lib.text.translate, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\translate\EntityArrays.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\translate\EntityArrays.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.translate, newPackageName=com.m3.lib.text.translate, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\translate\JavaUnicodeEscaper.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\translate\JavaUnicodeEscaper.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.translate, newPackageName=com.m3.lib.text.translate, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\translate\LookupTranslator.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\translate\LookupTranslator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.translate, newPackageName=com.m3.lib.text.translate, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\translate\NumericEntityEscaper.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\translate\NumericEntityEscaper.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.translate, newPackageName=com.m3.lib.text.translate, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\translate\NumericEntityUnescaper.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\translate\NumericEntityUnescaper.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.translate, newPackageName=com.m3.lib.text.translate, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\translate\OctalUnescaper.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\translate\OctalUnescaper.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.translate, newPackageName=com.m3.lib.text.translate, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\translate\package-info.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\translate\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.translate, newPackageName=com.m3.lib.text.translate, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\translate\SinglePassTranslator.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\translate\SinglePassTranslator.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.translate, newPackageName=com.m3.lib.text.translate, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\translate\UnicodeEscaper.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\translate\UnicodeEscaper.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.translate, newPackageName=com.m3.lib.text.translate, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\translate\UnicodeUnescaper.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\translate\UnicodeUnescaper.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.translate, newPackageName=com.m3.lib.text.translate, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\translate\UnicodeUnpairedSurrogateRemover.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\translate\UnicodeUnpairedSurrogateRemover.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text.translate, newPackageName=com.m3.lib.text.translate, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\org\apache\commons\text\WordUtils.java to m3-scratch\lib-intake\batch\commons-text\proj\src\main\java\com\m3\lib\text\WordUtils.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.apache.commons.text, newPackageName=com.m3.lib.text, recursive=false}
+[WARNING] Please review and commit the results.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  20.149 s
+[INFO] Finished at: 2026-10-31T07:34:04+05:30
+[INFO] ------------------------------------------------------------------------

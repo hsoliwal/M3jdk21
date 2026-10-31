@@ -1,0 +1,120 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< m3.intake:pcollections >-----------------------
+[INFO] Building pcollections 5.0.0-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- rewrite:5.23.1:runNoFork (default-cli) @ pcollections ---
+[INFO] Using active recipe(s) [com.synexia.m3.intake.Relocate]
+[INFO] Using active styles(s) []
+[INFO] Validating active recipes...
+[INFO] Project [pcollections] Resolving Poms...
+[INFO] Project [pcollections] Parsing source files
+[INFO] Running recipe(s)...
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\AbstractUnmodifiableCollection.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\AbstractUnmodifiableCollection.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\AbstractUnmodifiableList.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\AbstractUnmodifiableList.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\AbstractUnmodifiableMap.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\AbstractUnmodifiableMap.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\AbstractUnmodifiableQueue.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\AbstractUnmodifiableQueue.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\AbstractUnmodifiableSequentialList.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\AbstractUnmodifiableSequentialList.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\AbstractUnmodifiableSet.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\AbstractUnmodifiableSet.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\AmortizedPQueue.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\AmortizedPQueue.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\ConsPStack.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\ConsPStack.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\Empty.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\Empty.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\HashPMap.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\HashPMap.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\HashTreePBag.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\HashTreePBag.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\HashTreePMap.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\HashTreePMap.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\HashTreePSet.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\HashTreePSet.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\IntTree.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\IntTree.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\IntTreePMap.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\IntTreePMap.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\KVTree.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\KVTree.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\MapPBag.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\MapPBag.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\MapPSet.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\MapPSet.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\OrderedPMap.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\OrderedPMap.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\OrderedPSet.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\OrderedPSet.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\PBag.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\PBag.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\PCollection.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\PCollection.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\PMap.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\PMap.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\PQueue.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\PQueue.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\PSequence.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\PSequence.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\PSet.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\PSet.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\PSortedMap.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\PSortedMap.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\PSortedSet.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\PSortedSet.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\PStack.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\PStack.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\PVector.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\PVector.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\TreePMap.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\TreePMap.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\TreePSet.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\TreePSet.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\org\pcollections\TreePVector.java to m3-scratch\lib-intake\batch\pcollections\proj\src\main\java\com\m3\lib\pcollections\TreePVector.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.pcollections, newPackageName=com.m3.lib.pcollections, recursive=false}
+[WARNING] Please review and commit the results.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  9.002 s
+[INFO] Finished at: 2026-10-31T06:21:03+05:30
+[INFO] ------------------------------------------------------------------------

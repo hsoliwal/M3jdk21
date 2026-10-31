@@ -1,0 +1,8 @@
+key	value
+lib	univocity-parsers
+source	m3/vendor/third_party/univocity-parsers
+mappings	com.univocity.parsers=com.m3.lib.parsers
+module	jdk.m3.parsers
+version	2.9.1-m3-source-1
+layer	m3/vendor/third_party-m3/relocated/univocity-parsers
+intake_deps	-

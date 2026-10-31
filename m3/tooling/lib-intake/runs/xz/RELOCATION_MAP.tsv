@@ -1,0 +1,10 @@
+old	new	status
+org.tukaani.xz.rangecoder	com.m3.lib.xz.rangecoder	MOVE
+org.tukaani.xz.common	com.m3.lib.xz.common	MOVE
+org.tukaani.xz.simple	com.m3.lib.xz.simple	MOVE
+org.tukaani.xz.check	com.m3.lib.xz.check	MOVE
+org.tukaani.xz.delta	com.m3.lib.xz.delta	MOVE
+org.tukaani.xz.index	com.m3.lib.xz.index	MOVE
+org.tukaani.xz.lzma	com.m3.lib.xz.lzma	MOVE
+org.tukaani.xz.lz	com.m3.lib.xz.lz	MOVE
+org.tukaani.xz	com.m3.lib.xz	MOVE

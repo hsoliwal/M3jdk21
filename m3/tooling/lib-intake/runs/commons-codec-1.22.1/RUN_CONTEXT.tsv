@@ -1,0 +1,10 @@
+key	value
+lib	commons-codec-1.22.1
+source	m3/vendor/third_party/commons-codec-1.22.1
+mappings	org.apache.commons.codec=com.m3.lib.codec
+module	jdk.m3.codec
+version	1.22.1-m3-source-1
+layer	m3/vendor/third_party-m3/relocated/commons-codec-1.22.1
+intake_deps	-
+java	java version 21.0.9 2025-10-21 LTS
+rewrite	rewrite-maven-plugin 5.23.1 / rewrite 8.17.1
