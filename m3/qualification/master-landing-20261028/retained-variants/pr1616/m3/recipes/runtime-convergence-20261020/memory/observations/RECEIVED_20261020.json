@@ -3,7 +3,7 @@
   "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
   "license": "Apache-2.0",
   "recorded_utc": "2026-10-20T14:31:40.487201+00:00",
-  "recipe": "com.synexia.m3jdk.RuntimeConvergence20261020",
+  "recipe": "jdk.internal.m3.m3jdk.RuntimeConvergence20261020",
   "recipe_source_commit": "7ef4f0eb76eedebf81cdcfed4dacf2e908c2c8b5",
   "target_parent": "2779aba3f98f31c324be43f731be7914e1a05935",
   "status": "PASS_DECLARED_RECEIVED_JAVA_JNI_AND_ECLIPSE_SCOPE",

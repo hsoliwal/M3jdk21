@@ -9,7 +9,7 @@
   "preCodeAdmission": {
     "repository": "hsoliwal/com.synexia",
     "commit": "baa99d4a2ab1dd71fe05706bae4e7444ade70e30",
-    "path": "synexia-openrewrite-recipes/tasks/state-relation-current-c11-20261019/ADMISSION.json",
+    "path": "m3-openrewrite-recipes/tasks/state-relation-current-c11-20261019/ADMISSION.json",
     "gitBlob": "36a7443169195a3075b16d23e3c1373b192fd582"
   },
   "capBytes": 536870912,

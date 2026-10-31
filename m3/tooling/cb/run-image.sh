@@ -29,7 +29,7 @@ cc -shared -fPIC -Wall -Wextra -Werror -I"$M3_JDK/include" -I"$M3_JDK/include/li
   -cp "$out/classes" StringApiProbe > "$out/jni-enabled.log" 2>&1
 
 # Execute the retained VI oracle on this image, without patching java.base.
-cp "$root/m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/VIProbe.java.txt" \
+cp "$root/m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/VIProbe.java.txt" \
   "$out/source/VIProbe.java"
 "$M3_JDK/bin/javac" --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
   -d "$out/classes" "$out/source/VIProbe.java"

@@ -25,7 +25,7 @@ jobs:
         run: |
           set -eu
           mvn -B -ntp -f m3/collections/qualification/m3-long-index-projection-20261017/recipe/pom.xml verify
-          java -cp m3/collections/qualification/m3-long-index-projection-20261017/recipe/target/classes com.synexia.m3.M3LongIndexProjectionRecipe --check .
+          java -cp m3/collections/qualification/m3-long-index-projection-20261017/recipe/target/classes jdk.internal.m3.M3LongIndexProjectionRecipe --check .
       - name: Compile selected owner against actual existing M3 index mask backend
         run: |
           set -eu

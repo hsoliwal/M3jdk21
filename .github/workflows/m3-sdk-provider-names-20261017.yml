@@ -29,7 +29,7 @@ jobs:
           set -eu
           RECIPE=m3/collections/qualification/m3-sdk-provider-names-20261017/recipe
           mvn -B -ntp -f "$RECIPE/pom.xml" verify
-          java -cp "$RECIPE/target/classes" com.synexia.m3.M3SdkNamesRecipe --check .
+          java -cp "$RECIPE/target/classes" jdk.internal.m3.M3SdkNamesRecipe --check .
       - name: Compile actual existing M3 key map and new SDK source with strict Java 21
         run: |
           set -eu

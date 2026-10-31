@@ -18,7 +18,7 @@ import xml.etree.ElementTree as ET
 SOURCE = "d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c"
 TARGET = "c0a14387009aefc7d62bd3268055d526e04f9074"
 TARGET_TREE = "491bbd80a51483d0710fc12c1bad3a037b385ba0"
-SUITE = "com.synexia.rewrite.Fc0RecipeTest"
+SUITE = "jdk.internal.m3.rewrite.Fc0RecipeTest"
 QUALIFICATION_SHA256 = "e6e9d6b8aed3cd91cef9dade1cf08b7ca189ad2a574b98c79bac3602571cf804"
 MAIN = ("com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",)
 OWNER_SHA256 = "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
@@ -152,7 +152,7 @@ def files(directory):
 
 
 def expected_paths():
-    paths = {"pom.xml", "proof.py", "README.md", "src/test/java/com/synexia/rewrite/Fc0RecipeTest.java"}
+    paths = {"pom.xml", "proof.py", "README.md", "src/test/java/jdk/internal/m3/rewrite/Fc0RecipeTest.java"}
     paths.update("dependency-source/" + name for name in MAIN)
     paths.update("src/test/resources/before/" + name for name in REPLACEMENTS)
     for family, targets in FAMILIES.items():
@@ -345,8 +345,8 @@ def qualification(project):
             and orders["schema"] == "synexia.fc0.composition-orders/1"
             and orders["sourceCommit"] == SOURCE and orders["targetCommit"] == TARGET,
             "composition order protocol drift")
-    expected_orders = [{"id": "Forward", "recipe": "com.synexia.m3.Fc0Forward", "families": list(FAMILY_IDS)},
-                       {"id": "Reverse", "recipe": "com.synexia.m3.Fc0Reverse", "families": list(reversed(FAMILY_IDS))}]
+    expected_orders = [{"id": "Forward", "recipe": "jdk.internal.m3.Fc0Forward", "families": list(FAMILY_IDS)},
+                       {"id": "Reverse", "recipe": "jdk.internal.m3.Fc0Reverse", "families": list(reversed(FAMILY_IDS))}]
     require(orders["orders"] == value["orders"] == expected_orders, "only both declared complete orders admitted")
     require(sha(resource / "composition-orders.json") == value["compositionOrdersSHA256"]
             and sha(resource / "META-INF/rewrite/fc0-orders.yml") == value["compositionYamlSHA256"],
@@ -358,7 +358,7 @@ def qualification(project):
         require(set(family) == {"id", "crate", "namedRecipe", "manifestPath", "manifestSHA256",
                 "yamlPath", "yamlSHA256", "targets"}, "family declaration fields drift")
         require(family["crate"] == "fc0-" + family["id"].lower()
-                and family["namedRecipe"] == "com.synexia.m3.Fc0" + family["id"]
+                and family["namedRecipe"] == "jdk.internal.m3.Fc0" + family["id"]
                 and family["manifestPath"] == folder + "/manifest.tsv"
                 and family["yamlPath"] == "META-INF/rewrite/" + family["crate"] + ".yml",
                 "family path/name relationship drift")
@@ -434,7 +434,7 @@ def static_gate(proof):
     require({path.relative_to(project).as_posix() for path in files(project)} == expected_paths(), "unexpected static project file")
     value = qualification(project)
     outputs = manifest_outputs(project)
-    fixture = (project / "src/test/java/com/synexia/rewrite/Fc0RecipeTest.java").read_text()
+    fixture = (project / "src/test/java/jdk/internal/m3/rewrite/Fc0RecipeTest.java").read_text()
     observed = re.findall(r"@Test\s+(?:(?:public|final)\s+)*void\s+(\w+)\s*\(", fixture)
     require(sorted(observed) == METHODS, "actual source test method inventory drift")
     for family in value["families"]:
@@ -672,7 +672,7 @@ def run(args):
             if stage == "compile":
                 compiled = artifacts(proof)
                 required = {"classes/" + name.removesuffix(".java") + ".class" for name in MAIN}
-                required.add("test-classes/com/synexia/rewrite/Fc0RecipeTest.class")
+                required.add("test-classes/jdk/internal/m3/rewrite/Fc0RecipeTest.class")
                 require(required.issubset({row["path"] for row in compiled}), "required compiled classes missing")
                 write(proof / "build-artifacts.json", compiled)
                 compiled_seal = sha(proof / "build-artifacts.json")

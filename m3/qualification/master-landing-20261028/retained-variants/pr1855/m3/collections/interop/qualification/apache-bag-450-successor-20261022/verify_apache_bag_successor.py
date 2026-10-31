@@ -18,7 +18,7 @@ TARGET = SOURCE_ROOT + "main/java/com/m3/collections/interop/M3ApacheBag.java"
 PREVIOUS_HEAD = "378da3e595c0279faea6e2c3ea504364886f89bd"
 PREVIOUS_GATE = ("m3/collections/interop/qualification/"
                  "compiler-three-test-successor-20261022/verify_compile_successor.py")
-RECIPE = "com.synexia.m3.M3Jdk21ApacheBag450Retain20261022"
+RECIPE = "jdk.internal.m3.M3Jdk21ApacheBag450Retain20261022"
 BEFORE_HASH = "5ff51272c4fd48ef11a09b9138ac2329392bb2a70e2a4fe43fab2889909d224f"
 BEFORE_BLOB = "86473e61bf886a28ca3a40010b6bd25f5f34cdb0"
 AFTER_HASH = "2044c8d98a76056270092b01d95c0784e97752105b6bc3be4698048764b56f7e"

@@ -14,7 +14,7 @@ LEX = ROOT / "m3/lexicon/receiver"
 RESOURCES = ROOT / "m3/tooling/migration-recipes/src/main/resources"
 JAVA_CRATE = (
     RESOURCES
-    / "com/synexia/rewrite/hash-pinned-java/m3-static-language-affect-20261020"
+    / "jdk/internal/m3/rewrite/hash-pinned-java/m3-static-language-affect-20261020"
 )
 TEXT_CRATE = (
     RESOURCES

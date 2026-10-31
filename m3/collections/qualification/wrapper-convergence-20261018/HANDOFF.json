@@ -3,7 +3,7 @@
   "canonical_repository": "hsoliwal/com.synexia",
   "canonical_source_commit": "528aaf79cfae79c5dbfe7c307340329d320e8c44",
   "canonical_publication_parent": "140c263a90f9803b9c46103c63355a286e0515f0",
-  "canonical_crate_path": "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018",
+  "canonical_crate_path": "m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018",
   "canonical_commit_requirement": "Actual published canonical source commit; recipe/copy identities remain separately hash-pinned.",
   "target_repository": "hsoliwal/M3JDK21",
   "original_catalogue_base": "0d73745d7203123533dce8f8fb264ba2746f6d2d",

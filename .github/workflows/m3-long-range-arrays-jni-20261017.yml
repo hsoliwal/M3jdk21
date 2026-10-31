@@ -6,7 +6,7 @@ on:
       - "m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java"
       - "m3/collections/src/test/java/com/m3/collections/M3LongRangeSet*.java"
       - "m3/collections/qualification/long-range-set-20261017/**"
-      - "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-long-range-array-flags-20261017/**"
+      - "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-long-range-array-flags-20261017/**"
       - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3jdk21-long-range-array-flags-20261017.yml"
       - ".github/workflows/m3-long-range-arrays-jni-20261017.yml"
   push:

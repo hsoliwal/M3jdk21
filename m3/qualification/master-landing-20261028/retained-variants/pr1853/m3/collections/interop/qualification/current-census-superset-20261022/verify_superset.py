@@ -53,7 +53,7 @@ def exact_compound_transition(receipts: Path) -> tuple[str, ...]:
 
 # Subsequent source epochs are explicit: one historic 36-owner test and
 # two newly admitted 40-owner tests. Do not rewrite any earlier census.
-M3_JAVA21_REPAIR_RECIPE = 'com.synexia.m3.M3InteropThreeJava21Diagnostics20261022'
+M3_JAVA21_REPAIR_RECIPE = 'jdk.internal.m3.M3InteropThreeJava21Diagnostics20261022'
 HISTORICAL_TEST_UPDATES = {
     'm3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java':
         ('15a5a360695ca787138002380c6482dcda6cb9c62857e58707c214d7240f5fad',

@@ -1,7 +1,7 @@
 {
   "build_receipt_sha256": "a74e34860aa70fffd426e60b69ca4d054f410b3cc5e122e3dff2ac475087ea9c",
   "canonical_commit": "2f68bee30236bf0d40788c7c4a9c310904bf430c",
-  "canonical_crate": "synexia-openrewrite-recipes/crates/m3-nlp-search/m3-source-jmods-20261018",
+  "canonical_crate": "m3-openrewrite-recipes/crates/m3-nlp-search/m3-source-jmods-20261018",
   "canonical_repository": "hsoliwal/com.synexia",
   "license": "Apache-2.0 first-party proof; original payload rights unchanged",
   "manifest_sha256": "676f084abead2f6d24308c41ed253ac2dac76a0f13301bee14c54f7c0b43744f",
@@ -82,7 +82,7 @@
     "src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java": "5827f24f34317707564be6ca031ecb6ef69958b66ca69a42a787080ef6ccb006",
     "src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java": "129e8c19ef328185c45465b9c8bf9baee43bb24be54842b69833c52e3e6f3dcb"
   },
-  "recipe": "com.synexia.rewrite.M3NlpSearchSourceJmodsRecipe",
+  "recipe": "jdk.internal.m3.rewrite.M3NlpSearchSourceJmodsRecipe",
   "recipe_receipt_sha256": "807d956e79d6eb916c405c212c5ff19aac3f1fad7800f98cd9932469b32f6fd6",
   "schema": "M3_NLP_SOURCE_JMOD_CANONICAL_HANDOFF_1",
   "source_implementation_changes": 53

@@ -30,7 +30,7 @@ def main():
     parser.add_argument("--target", required=True, type=Path)
     args = parser.parse_args()
     crate = Path(__file__).resolve().parent.parent
-    resources = crate / "src/main/resources/com/synexia/rewrite"
+    resources = crate / "src/main/resources/jdk/internal/m3/rewrite"
     java = resources / "hash-pinned-java" / crate.name
     text = resources / "hash-pinned-text" / crate.name
     head = subprocess.check_output(["git", "-C", str(args.target), "rev-parse", "HEAD"], text=True).strip()
@@ -70,7 +70,7 @@ def main():
         parents.append(path + "\t" + sha(data) + "\n")
     inventory = "".join(parents).encode()
     (crate / "contract/parent-inputs.tsv").write_bytes(inventory)
-    owners = crate.parent.parent / "src/main/java/com/synexia/rewrite"
+    owners = crate.parent.parent / "src/main/java/jdk/internal/m3/rewrite"
     seals = {
         "target_revision": PIN, "source_recipe_revision": PRIVATE,
         "manifest_hashes": {kind: sha((resources / ("hash-pinned-" + kind) / crate.name / "manifest.tsv").read_bytes())

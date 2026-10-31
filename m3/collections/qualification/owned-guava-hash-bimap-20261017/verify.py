@@ -6,7 +6,7 @@ SCRIPT=Path(__file__).absolute()
 for p in (SCRIPT,*SCRIPT.parents):
  if p.is_symlink() or getattr(p,'is_junction',lambda:False)():raise RuntimeError('aliased qualification path')
 ROOT=SCRIPT.parents[4]
-OWNER=ROOT/'m3/collections/recipe/owned-guava-hash-bimap-20261017/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-guava-hash-bimap'
+OWNER=ROOT/'m3/collections/recipe/owned-guava-hash-bimap-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-hash-bimap'
 EXPECTED={'m3/collections/implementations/guava/src/main/java/com/m3/collections/guava/M3HashBiMap.java': 'e5aca4438e0687af0aa6737a96acc60c50955722e50971a272bee9a98e443987', 'm3/collections/implementations/guava/src/test/java/com/m3/collections/guava/InverseForcePutDenseOrderDiscriminator.java': '66b8bdc1cb45b9994c615abc2c0a32dfd6a774f4b5eb78d20df4b82abbb35461', 'm3/collections/implementations/guava/src/test/java/com/m3/collections/guava/M3HashBiMapCommonSelfTest.java': 'bf5c83eb152ce2c2f3f8dc6bcda071d7b93a011189efe152c349786dbdaa443e'}
 EXTRA={'m3/collections/qualification/owned-guava-hash-bimap-20261017/M3HashBiMapProtocolDiscriminator.java': 'd59f9d14c27a50f08cc868e3aa4c76ebab76ff12234a2028964dc03ad5cd1b6d', 'm3/collections/qualification/owned-guava-hash-bimap-20261017/M3HashBiMapSectionRunner.java': '38614ba7e1f86b413ba75a2b24bf98e0769907ab40abdc02c673e30f366db050', 'm3/collections/qualification/owned-guava-hash-bimap-20261017/M3HashBiMapSelfTest.java': 'd6b1229d112728a0d2f7f7936efb4b30091c6028558576c239226866453687c2'}
 def read(p):

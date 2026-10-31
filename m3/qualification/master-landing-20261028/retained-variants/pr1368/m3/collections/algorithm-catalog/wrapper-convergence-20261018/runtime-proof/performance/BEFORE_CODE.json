@@ -7,7 +7,7 @@
   "decision": "REUSE_EXISTING_PROOF_UNCHANGED",
   "foss_evaluation": {
     "selected_owner": "M3OrderWindowProof allocation mode",
-    "canonical_resource": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-wrappers-r2-20261018/0023-M3OrderWindowProof.java.txt",
+    "canonical_resource": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-wrappers-r2-20261018/0023-M3OrderWindowProof.java.txt",
     "source_sha256": "633ad8b6e70b211efc1917daea6277b38632359f9442120396fbeb187e663cf0",
     "license": "Apache-2.0; existing source header retained",
     "new_benchmark_engine": false,

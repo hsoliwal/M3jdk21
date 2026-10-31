@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-# Synexia recipe: com.synexia.rewrite.M3Jdk21ObjectPhysicalSlotProjection
+# Synexia recipe: jdk.internal.m3.rewrite.M3Jdk21ObjectPhysicalSlotProjection
 name: M3 object physical-slot 32-bit mask Java JNI
 on:
   pull_request:

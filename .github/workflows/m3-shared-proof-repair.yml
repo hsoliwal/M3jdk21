@@ -4,10 +4,10 @@ on:
   pull_request:
     paths:
       - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/semantic/M3SemanticHashRecipeTest.java"
-      - "m3/synexia-import/current-full-borrow/string-target-successor-chain.tsv"
-      - "m3/synexia-import/current-full-borrow/test_string_phase_successors.py"
+      - "m3/m3-import/current-full-borrow/string-target-successor-chain.tsv"
+      - "m3/m3-import/current-full-borrow/test_string_phase_successors.py"
       - ".github/workflows/m3-jdk21-backport-dag.yml"
-      - ".github/workflows/m3-synexia-full-borrow-receiver.yml"
+      - ".github/workflows/m3-m3-full-borrow-receiver.yml"
       - ".github/workflows/m3-shared-proof-repair.yml"
   workflow_dispatch:
 
@@ -34,7 +34,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
+          bash m3/m3-import/pure-int-recipe-custody/install.sh "$PWD"
 
       - name: Prove semantic hash regression fixture
         shell: bash
@@ -48,5 +48,5 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/synexia-import/current-full-borrow/test_string_phase_successors.py -v
-          python3 m3/synexia-import/current-full-borrow/check_string_phase.py
+          python3 m3/m3-import/current-full-borrow/test_string_phase_successors.py -v
+          python3 m3/m3-import/current-full-borrow/check_string_phase.py

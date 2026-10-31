@@ -18,7 +18,7 @@
       "id": "Cmp",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cmp/manifest.tsv",
       "manifestSHA256": "9ff6c0ec93be56758814de6a2464e063ff49fd821eaa497ecd8b974ac235821b",
-      "namedRecipe": "com.synexia.m3.Ic0Cmp",
+      "namedRecipe": "jdk.internal.m3.Ic0Cmp",
       "targets": [
         {
           "afterBytes": 423495,
@@ -37,7 +37,7 @@
       "id": "Cgo",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cgo/manifest.tsv",
       "manifestSHA256": "2d3f548908ebd33f2e93d516cd94e19830dbddf79468d9a8c0ff67b42d38e049",
-      "namedRecipe": "com.synexia.m3.Ic0Cgo",
+      "namedRecipe": "jdk.internal.m3.Ic0Cgo",
       "targets": [
         {
           "afterBytes": 5159,
@@ -96,7 +96,7 @@
       "id": "Cri",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cri/manifest.tsv",
       "manifestSHA256": "d8ba52bee5619c7f5dc95fadbb84217436e2e337d2c1f8c08a82e4a7da977925",
-      "namedRecipe": "com.synexia.m3.Ic0Cri",
+      "namedRecipe": "jdk.internal.m3.Ic0Cri",
       "targets": [
         {
           "afterBytes": 684,
@@ -115,7 +115,7 @@
       "id": "Gpc",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-gpc/manifest.tsv",
       "manifestSHA256": "b7ae7304902b40ce7dd730cadd434077d1afa1852579aa18a457e85d13bd0773",
-      "namedRecipe": "com.synexia.m3.Ic0Gpc",
+      "namedRecipe": "jdk.internal.m3.Ic0Gpc",
       "targets": [
         {
           "afterBytes": 24060,
@@ -182,7 +182,7 @@
       "id": "Cor",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cor/manifest.tsv",
       "manifestSHA256": "f6ae4f6ec95f8a238bf65313858d242f5b32c495bba2091d1b3ea9a964919974",
-      "namedRecipe": "com.synexia.m3.Ic0Cor",
+      "namedRecipe": "jdk.internal.m3.Ic0Cor",
       "targets": [
         {
           "afterBytes": 18329,
@@ -201,7 +201,7 @@
       "id": "Sdc",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-sdc/manifest.tsv",
       "manifestSHA256": "eb68a09f9c154f801830e1f40688be5c7d0af9d3fab286ed105de57b2994fb52",
-      "namedRecipe": "com.synexia.m3.Ic0Sdc",
+      "namedRecipe": "jdk.internal.m3.Ic0Sdc",
       "targets": [
         {
           "afterBytes": 76036,
@@ -236,7 +236,7 @@
       "id": "Fnd",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-fnd/manifest.tsv",
       "manifestSHA256": "3e1e1d16d6cea44d0dfda5557ac7748234886843398571a4c2ac23d5b0b0cf7f",
-      "namedRecipe": "com.synexia.m3.Ic0Fnd",
+      "namedRecipe": "jdk.internal.m3.Ic0Fnd",
       "targets": [
         {
           "afterBytes": 2759,
@@ -279,7 +279,7 @@
       "id": "Ciw",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-ciw/manifest.tsv",
       "manifestSHA256": "556d7744fc7af55e1ef7ee66012872f40633daf0afb030657bb06fcfa1bb8587",
-      "namedRecipe": "com.synexia.m3.Ic0Ciw",
+      "namedRecipe": "jdk.internal.m3.Ic0Ciw",
       "targets": [
         {
           "afterBytes": 4428,
@@ -322,7 +322,7 @@
       "id": "Cib",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-cib/manifest.tsv",
       "manifestSHA256": "9ddb6eb1dbc4b618f0cd3817ed5f03f4eecd7202dead3e762f640a93c82456e2",
-      "namedRecipe": "com.synexia.m3.Ic0Cib",
+      "namedRecipe": "jdk.internal.m3.Ic0Cib",
       "targets": [
         {
           "afterBytes": 15862,
@@ -349,7 +349,7 @@
       "id": "Jgr",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jgr/manifest.tsv",
       "manifestSHA256": "c53a4f1aaa6a37b8367225331072bf81ed39444b4ee272d2628ca6981fb49d34",
-      "namedRecipe": "com.synexia.m3.Ic0Jgr",
+      "namedRecipe": "jdk.internal.m3.Ic0Jgr",
       "targets": [
         {
           "afterBytes": 32695,
@@ -392,7 +392,7 @@
       "id": "Jma",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jma/manifest.tsv",
       "manifestSHA256": "b18df1233ea0fa070f4ca05bd47dc2bf24f25a30a754011293a922c7bba254dd",
-      "namedRecipe": "com.synexia.m3.Ic0Jma",
+      "namedRecipe": "jdk.internal.m3.Ic0Jma",
       "targets": [
         {
           "afterBytes": 12048,
@@ -443,7 +443,7 @@
       "id": "Pcd",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-pcd/manifest.tsv",
       "manifestSHA256": "775cb5f335659c16a0d8f8c06785552490b7365966317ce3a737f971808ade11",
-      "namedRecipe": "com.synexia.m3.Ic0Pcd",
+      "namedRecipe": "jdk.internal.m3.Ic0Pcd",
       "targets": [
         {
           "afterBytes": 43759,
@@ -486,7 +486,7 @@
       "id": "Pco",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-pco/manifest.tsv",
       "manifestSHA256": "b1728a56c6675ff9167e0183b6f371cccb2b53117875a327bd2b83dc2f9adf41",
-      "namedRecipe": "com.synexia.m3.Ic0Pco",
+      "namedRecipe": "jdk.internal.m3.Ic0Pco",
       "targets": [
         {
           "afterBytes": 8155,
@@ -537,7 +537,7 @@
       "id": "Pcw",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-pcw/manifest.tsv",
       "manifestSHA256": "9237f618a6d583c113755fc8ceb315fcc5a20af0fe545219494e1a0ddc17508f",
-      "namedRecipe": "com.synexia.m3.Ic0Pcw",
+      "namedRecipe": "jdk.internal.m3.Ic0Pcw",
       "targets": [
         {
           "afterBytes": 7812,
@@ -572,7 +572,7 @@
       "id": "Dgc",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-dgc/manifest.tsv",
       "manifestSHA256": "64415c0ae5a5ba87ed9c830bfbafd2596fc7d2cad32be4638a31128f1c2713be",
-      "namedRecipe": "com.synexia.m3.Ic0Dgc",
+      "namedRecipe": "jdk.internal.m3.Ic0Dgc",
       "targets": [
         {
           "afterBytes": 6189,
@@ -639,7 +639,7 @@
       "id": "Nul",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-nul/manifest.tsv",
       "manifestSHA256": "0f6ec78d70e31050ed4e481eb133b1438e378206ea9138c0b0b8c00e161c5d9e",
-      "namedRecipe": "com.synexia.m3.Ic0Nul",
+      "namedRecipe": "jdk.internal.m3.Ic0Nul",
       "targets": [
         {
           "afterBytes": 5296,
@@ -666,7 +666,7 @@
       "id": "Hct",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-hct/manifest.tsv",
       "manifestSHA256": "6449b223baded59c01d47c2a17fe1984aaf00d8427ccc7b96d54ec1aac1a119a",
-      "namedRecipe": "com.synexia.m3.Ic0Hct",
+      "namedRecipe": "jdk.internal.m3.Ic0Hct",
       "targets": [
         {
           "afterBytes": 56771,
@@ -717,7 +717,7 @@
       "id": "Hts",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-hts/manifest.tsv",
       "manifestSHA256": "a0d3fc7e68265cf11593a08647eaf6dfe3f2e38aa5199365eecea21b2624ce51",
-      "namedRecipe": "com.synexia.m3.Ic0Hts",
+      "namedRecipe": "jdk.internal.m3.Ic0Hts",
       "targets": [
         {
           "afterBytes": 77751,
@@ -760,7 +760,7 @@
       "id": "Ipr",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-ipr/manifest.tsv",
       "manifestSHA256": "caa68576a994442ea21cbef99a730932a461816fc843dbb86e4220f7b361f098",
-      "namedRecipe": "com.synexia.m3.Ic0Ipr",
+      "namedRecipe": "jdk.internal.m3.Ic0Ipr",
       "targets": [
         {
           "afterBytes": 10052,
@@ -779,7 +779,7 @@
       "id": "Aca",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-aca/manifest.tsv",
       "manifestSHA256": "89d7df5d0190e71b6fb69797fe848b37f5ffb09e274f020135e0df948488782a",
-      "namedRecipe": "com.synexia.m3.Ic0Aca",
+      "namedRecipe": "jdk.internal.m3.Ic0Aca",
       "targets": [
         {
           "afterBytes": 10008,
@@ -838,7 +838,7 @@
       "id": "Acs",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-acs/manifest.tsv",
       "manifestSHA256": "7d443b17756355cb16d4871d68372194661aafb26cc650d15a71e6ba343d3d6f",
-      "namedRecipe": "com.synexia.m3.Ic0Acs",
+      "namedRecipe": "jdk.internal.m3.Ic0Acs",
       "targets": [
         {
           "afterBytes": 7750,
@@ -854,7 +854,7 @@
           "beforeBytes": 7782,
           "beforeSHA256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after"
         },
         {
           "afterBytes": 734,
@@ -862,7 +862,7 @@
           "beforeBytes": 734,
           "beforeSHA256": "b901f0b1aae122711792a66dc9750b9ba4608d59613641e74f378218757cbb4d",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv"
         }
       ],
       "yamlPath": "META-INF/rewrite/ic0-acs.yml",
@@ -873,7 +873,7 @@
       "id": "Arm",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-arm/manifest.tsv",
       "manifestSHA256": "39336b3be2d437740a281d3ce3fbda8cd61d0e6e5ebc1e821b98518e1464c5d7",
-      "namedRecipe": "com.synexia.m3.Ic0Arm",
+      "namedRecipe": "jdk.internal.m3.Ic0Arm",
       "targets": [
         {
           "afterBytes": 6447,
@@ -897,7 +897,7 @@
           "beforeBytes": 6442,
           "beforeSHA256": "9171b0ada1d7845b63d7a586d99ef97a6fa6eccbfd84204c47a6a01c8b3e4697",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after"
         },
         {
           "afterBytes": 7516,
@@ -905,7 +905,7 @@
           "beforeBytes": 7514,
           "beforeSHA256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after"
         },
         {
           "afterBytes": 658,
@@ -913,7 +913,7 @@
           "beforeBytes": 658,
           "beforeSHA256": "b2febbb17ed96ae6f582eee2e16af3fc5e435c23e350708f56397bee9ac38ab5",
           "operation": "REPLACE",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv"
         },
         {
           "afterBytes": 5380,
@@ -940,7 +940,7 @@
       "id": "Scp",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-scp/manifest.tsv",
       "manifestSHA256": "28e9142f03ee9948b10b370daf2001941c8c1371d33ec3985ac8f70fe84679a2",
-      "namedRecipe": "com.synexia.m3.Ic0Scp",
+      "namedRecipe": "jdk.internal.m3.Ic0Scp",
       "targets": [
         {
           "afterBytes": 4259,
@@ -983,7 +983,7 @@
       "id": "Aml",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-aml/manifest.tsv",
       "manifestSHA256": "ec4632138062740f3bea0f050661a176ea356b3734934c7856331dcbc3b21937",
-      "namedRecipe": "com.synexia.m3.Ic0Aml",
+      "namedRecipe": "jdk.internal.m3.Ic0Aml",
       "targets": [
         {
           "afterBytes": 6088,
@@ -1018,7 +1018,7 @@
       "id": "Amc",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-amc/manifest.tsv",
       "manifestSHA256": "86f114bcb03dc7df22a6a1bcea80ad1f7e7030e5b0cb481b7eadff6a12ba32da",
-      "namedRecipe": "com.synexia.m3.Ic0Amc",
+      "namedRecipe": "jdk.internal.m3.Ic0Amc",
       "targets": [
         {
           "afterBytes": 9874,
@@ -1053,7 +1053,7 @@
       "id": "Agt",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-agt/manifest.tsv",
       "manifestSHA256": "49cc5867de7b3e55e3532558606cfcb13bd06b256d36314de3d668d630650e17",
-      "namedRecipe": "com.synexia.m3.Ic0Agt",
+      "namedRecipe": "jdk.internal.m3.Ic0Agt",
       "targets": [
         {
           "afterBytes": 20534,
@@ -1096,7 +1096,7 @@
       "id": "Avr",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-avr/manifest.tsv",
       "manifestSHA256": "64ee61c5460513b0d2e13be1407ae368f22528c8b6dba9ffc23ceb978acda9fe",
-      "namedRecipe": "com.synexia.m3.Ic0Avr",
+      "namedRecipe": "jdk.internal.m3.Ic0Avr",
       "targets": [
         {
           "afterBytes": 7506,
@@ -1139,7 +1139,7 @@
       "id": "Avp",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-avp/manifest.tsv",
       "manifestSHA256": "8a0b1cc6913250370e5ec724876f270b01da80c3a060ec7d66f7fe6b07bbd2d7",
-      "namedRecipe": "com.synexia.m3.Ic0Avp",
+      "namedRecipe": "jdk.internal.m3.Ic0Avp",
       "targets": [
         {
           "afterBytes": 150,
@@ -1174,7 +1174,7 @@
       "id": "Arr",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-arr/manifest.tsv",
       "manifestSHA256": "e99545b056b2ee220e71627ae06755317dc12416b626d118140b6efcba38402b",
-      "namedRecipe": "com.synexia.m3.Ic0Arr",
+      "namedRecipe": "jdk.internal.m3.Ic0Arr",
       "targets": [
         {
           "afterBytes": 6088,
@@ -1182,7 +1182,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3.java.after"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3.java.after"
         },
         {
           "afterBytes": 17041,
@@ -1190,7 +1190,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3Lab.java.after"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3Lab.java.after"
         },
         {
           "afterBytes": 7131,
@@ -1198,7 +1198,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3LabTest.java.after"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3LabTest.java.after"
         },
         {
           "afterBytes": 9874,
@@ -1206,7 +1206,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3M.java.after"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3M.java.after"
         },
         {
           "afterBytes": 10108,
@@ -1214,7 +1214,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3MCodec.java.after"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3MCodec.java.after"
         },
         {
           "afterBytes": 6319,
@@ -1222,7 +1222,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3MTest.java.after"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/A3MTest.java.after"
         },
         {
           "afterBytes": 926,
@@ -1230,7 +1230,7 @@
           "beforeBytes": null,
           "beforeSHA256": "ABSENT",
           "operation": "ADD",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/manifest.tsv"
+          "path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-mastery-receipt/manifest.tsv"
         }
       ],
       "yamlPath": "META-INF/rewrite/ic0-arr.yml",
@@ -1241,7 +1241,7 @@
       "id": "Awr",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-awr/manifest.tsv",
       "manifestSHA256": "018bc7d7ad2c11e7a284ef8adc77299f884237a0d4c0e2fadc7c0cc92b2bcda8",
-      "namedRecipe": "com.synexia.m3.Ic0Awr",
+      "namedRecipe": "jdk.internal.m3.Ic0Awr",
       "targets": [
         {
           "afterBytes": 5550,
@@ -1300,7 +1300,7 @@
       "id": "Ard",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-ard/manifest.tsv",
       "manifestSHA256": "19091afaeb78b0c2aa57d2c57a8197e0a27dee9470f0458c4c10632c1037b2da",
-      "namedRecipe": "com.synexia.m3.Ic0Ard",
+      "namedRecipe": "jdk.internal.m3.Ic0Ard",
       "targets": [
         {
           "afterBytes": 506,
@@ -1343,7 +1343,7 @@
       "id": "Awb",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-awb/manifest.tsv",
       "manifestSHA256": "8b9f6945a0f73947008d67771a27a0b5de3f1e4929538f4fb13c9bdc04874ac4",
-      "namedRecipe": "com.synexia.m3.Ic0Awb",
+      "namedRecipe": "jdk.internal.m3.Ic0Awb",
       "targets": [
         {
           "afterBytes": 5171,
@@ -1394,7 +1394,7 @@
       "id": "Amb",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-amb/manifest.tsv",
       "manifestSHA256": "07c82862622f587d850e42928e6972df02d549208e94d5742cb511be2f5e40ba",
-      "namedRecipe": "com.synexia.m3.Ic0Amb",
+      "namedRecipe": "jdk.internal.m3.Ic0Amb",
       "targets": [
         {
           "afterBytes": 5127,
@@ -1429,7 +1429,7 @@
       "id": "Awd",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-awd/manifest.tsv",
       "manifestSHA256": "af2684a3af82b6cbebf718bbe59808af8c7ef1b1de52fdcf42a0d90efecc8649",
-      "namedRecipe": "com.synexia.m3.Ic0Awd",
+      "namedRecipe": "jdk.internal.m3.Ic0Awd",
       "targets": [
         {
           "afterBytes": 2100,
@@ -1488,7 +1488,7 @@
       "id": "Aad",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-aad/manifest.tsv",
       "manifestSHA256": "d1386ec5616bd2570de480991e84880c8f6c2992b0d03f1f93bca63135832f5f",
-      "namedRecipe": "com.synexia.m3.Ic0Aad",
+      "namedRecipe": "jdk.internal.m3.Ic0Aad",
       "targets": [
         {
           "afterBytes": 3078,
@@ -1515,7 +1515,7 @@
       "id": "Jop",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/ic0-jop/manifest.tsv",
       "manifestSHA256": "207aa8d6e307c4c3cc8ff492700096c9231bbfcd19ac737b074587b7d453ba60",
-      "namedRecipe": "com.synexia.m3.Ic0Jop",
+      "namedRecipe": "jdk.internal.m3.Ic0Jop",
       "targets": [
         {
           "afterBytes": 12801,
@@ -1595,7 +1595,7 @@
         "Jop"
       ],
       "id": "Forward",
-      "recipe": "com.synexia.m3.Ic0Forward"
+      "recipe": "jdk.internal.m3.Ic0Forward"
     },
     {
       "families": [
@@ -1637,7 +1637,7 @@
         "Cmp"
       ],
       "id": "Reverse",
-      "recipe": "com.synexia.m3.Ic0Reverse"
+      "recipe": "jdk.internal.m3.Ic0Reverse"
     }
   ],
   "ownerSHA256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",

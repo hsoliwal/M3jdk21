@@ -29,12 +29,12 @@
         "sdk_report": {
           "path": "runtime-proof/latest-runtime-20261018/m3-api-doclint-20261018/SDK_REPORT.xml.txt",
           "sha256": "515412afb70954d282e0056cbc117e0def6f0c9b5bc048302e8d4060c71283a2",
-          "original_locator": "/dev/shm/m3-doclint-f8287/proof/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+          "original_locator": "/dev/shm/m3-doclint-f8287/proof/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
         },
         "source_targets": {
           "path": "runtime-proof/latest-runtime-20261018/m3-api-doclint-20261018/TARGETS.tsv",
           "sha256": "2029c778c86071e78b60e5c97af953525f0151d42c18c811b723bbe249b9b7aa",
-          "original_locator": "/dev/shm/m3-doclint-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-api-doclint-20261018/TARGETS.tsv"
+          "original_locator": "/dev/shm/m3-doclint-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-api-doclint-20261018/TARGETS.tsv"
         },
         "sdk_qualification": {
           "path": "runtime-proof/latest-runtime-20261018/m3-api-doclint-20261018/SDK_QUALIFICATION.json",
@@ -176,12 +176,12 @@
         "sdk_report": {
           "path": "runtime-proof/latest-runtime-20261018/m3-progress-scope-lint-20261018/SDK_REPORT.xml.txt",
           "sha256": "efeeab634d22e9179ace331bb688d96b7ec1f13a26851c0fc58630405eaf5202",
-          "original_locator": "/dev/shm/m3-progress-scope-lint-f8287/proof/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+          "original_locator": "/dev/shm/m3-progress-scope-lint-f8287/proof/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
         },
         "source_targets": {
           "path": "runtime-proof/latest-runtime-20261018/m3-progress-scope-lint-20261018/TARGETS.tsv",
           "sha256": "63b83c859723fb8ad0685c404006ddba843f4ff4f559f874d80e559ad36eec98",
-          "original_locator": "/dev/shm/m3-progress-scope-lint-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-progress-scope-lint-20261018/TARGETS.tsv"
+          "original_locator": "/dev/shm/m3-progress-scope-lint-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-progress-scope-lint-20261018/TARGETS.tsv"
         },
         "sdk_qualification": {
           "path": "runtime-proof/latest-runtime-20261018/m3-progress-scope-lint-20261018/SDK_QUALIFICATION.json",
@@ -246,17 +246,17 @@
         "receiver_cases": {
           "path": "runtime-proof/latest-runtime-20261018/m3-tq-custody-v2-20261018/RECEIVER_RECEIPT.json",
           "sha256": "c93f94bddb3559f80992228aee15e884e17b47ddc3924fd55adbdfe307b6b5c8",
-          "original_locator": "/dev/shm/m3-tq-successor-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-tq-custody-v2-20261018/receiver-proof/evidence/RECEIVER_RECEIPT.json"
+          "original_locator": "/dev/shm/m3-tq-successor-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-tq-custody-v2-20261018/receiver-proof/evidence/RECEIVER_RECEIPT.json"
         },
         "sdk_report": {
           "path": "runtime-proof/latest-runtime-20261018/m3-tq-custody-v2-20261018/SDK_REPORT.xml.txt",
           "sha256": "a6f261b4653890875a420011516190ae062326f91b52ed2fcd5d8fbd60a0b670",
-          "original_locator": "/dev/shm/m3-tq-successor-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-tq-custody-v2-20261018/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+          "original_locator": "/dev/shm/m3-tq-successor-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-tq-custody-v2-20261018/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
         },
         "source_targets": {
           "path": "runtime-proof/latest-runtime-20261018/m3-tq-custody-v2-20261018/TARGETS.tsv",
           "sha256": "f6aa70a7899d48b48edc3117d74d5c7b22a3d3b7166d023eb6eca8d73b3c6675",
-          "original_locator": "/dev/shm/m3-tq-successor-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-tq-custody-v2-20261018/TARGETS.tsv"
+          "original_locator": "/dev/shm/m3-tq-successor-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-tq-custody-v2-20261018/TARGETS.tsv"
         },
         "sdk_log": {
           "path": "runtime-proof/latest-runtime-20261018/m3-tq-custody-v2-20261018/SDK_LOG.txt",
@@ -416,12 +416,12 @@
         "sdk_report": {
           "path": "runtime-proof/latest-runtime-20261018/m3-native-feature-guard-20261018/SDK_REPORT.xml.txt",
           "sha256": "42a272a2d3dcf00eed8c12ee70af8f34577fee31e209223157b4239f659ce3bf",
-          "original_locator": "/dev/shm/m3-native-feature-guard-f8287/publication-proof/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+          "original_locator": "/dev/shm/m3-native-feature-guard-f8287/publication-proof/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
         },
         "source_targets": {
           "path": "runtime-proof/latest-runtime-20261018/m3-native-feature-guard-20261018/TARGETS.tsv",
           "sha256": "d4d1a13e4ff46b820486d77e1c7f12fa7251461f532f28778fe3afd0f422e052",
-          "original_locator": "/dev/shm/m3-native-feature-guard-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-native-feature-guard-20261018/TARGETS.tsv"
+          "original_locator": "/dev/shm/m3-native-feature-guard-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-native-feature-guard-20261018/TARGETS.tsv"
         },
         "sdk_qualification": {
           "path": "runtime-proof/latest-runtime-20261018/m3-native-feature-guard-20261018/SDK_QUALIFICATION.json",
@@ -464,12 +464,12 @@
         "sdk_report": {
           "path": "runtime-proof/latest-runtime-20261018/m3-object-vtable-20261018/SDK_REPORT.xml.txt",
           "sha256": "03484c1179fb857a544b14117c6d054e3f5f665e420ac92de3866c2d104f2270",
-          "original_locator": "/dev/shm/m3-object-vtable-f8287/proof/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+          "original_locator": "/dev/shm/m3-object-vtable-f8287/proof/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
         },
         "source_targets": {
           "path": "runtime-proof/latest-runtime-20261018/m3-object-vtable-20261018/TARGETS.tsv",
           "sha256": "4910f0bef2eab32079ceccfd4935a2b4610d34a5109af37f578efd16e2e94f81",
-          "original_locator": "/dev/shm/m3-object-vtable-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-object-vtable-20261018/TARGETS.tsv"
+          "original_locator": "/dev/shm/m3-object-vtable-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-object-vtable-20261018/TARGETS.tsv"
         },
         "sdk_qualification": {
           "path": "runtime-proof/latest-runtime-20261018/m3-object-vtable-20261018/SDK_QUALIFICATION.json",
@@ -701,12 +701,12 @@
       "sdk_report": {
         "path": "runtime-proof/latest-runtime-20261018/m3-object-vtable-20261018/SDK_REPORT.xml.txt",
         "sha256": "03484c1179fb857a544b14117c6d054e3f5f665e420ac92de3866c2d104f2270",
-        "original_locator": "/dev/shm/m3-object-vtable-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-object-vtable-20261018/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+        "original_locator": "/dev/shm/m3-object-vtable-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-object-vtable-20261018/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
       },
       "receiver_receipt": {
         "path": "runtime-proof/latest-runtime-20261018/m3-object-vtable-20261018/RECEIVER_RECEIPT.json",
         "sha256": "80fce2cf32e6611aa10ad947b3e8de50476263edb53fbe3645c67173f7b38db6",
-        "original_locator": "/dev/shm/m3-object-vtable-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-object-vtable-20261018/receiver-proof/evidence/RECEIVER_RECEIPT.json"
+        "original_locator": "/dev/shm/m3-object-vtable-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-object-vtable-20261018/receiver-proof/evidence/RECEIVER_RECEIPT.json"
       },
       "sdk_log": {
         "path": "runtime-proof/latest-runtime-20261018/m3-object-vtable-20261018/SDK_LOG.txt",

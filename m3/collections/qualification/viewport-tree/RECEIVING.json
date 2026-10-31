@@ -4,8 +4,8 @@
   "canonical_pr": 12855,
   "canonical_commit": "b426a7ee0ced2fbbb883d6a50738557ffead5e22",
   "canonical_recipes": [
-    "com.synexia.m3.ViewportTreeHintsMaster20261025",
-    "com.synexia.m3.ViewportTreeGenerationMaster20261025"
+    "jdk.internal.m3.ViewportTreeHintsMaster20261025",
+    "jdk.internal.m3.ViewportTreeGenerationMaster20261025"
   ],
   "original_source": "m3/collections/src/main/java/com/m3/collections/M3TreeProjection.java",
   "product_master_baseline": "882ebe18891c719c0e26b6ee42558e50e96fe33e",

@@ -18,7 +18,7 @@
       "id": "Spc",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/manifest.tsv",
       "manifestSHA256": "6495988cb6ec9ba66659f4fd2a56fccf2735a944c2b6ed401b270eaec5db6a9e",
-      "namedRecipe": "com.synexia.m3.Sc0Spc",
+      "namedRecipe": "jdk.internal.m3.Sc0Spc",
       "targets": [
         {
           "afterBytes": 778,
@@ -71,14 +71,14 @@
         "Spc"
       ],
       "id": "Forward",
-      "recipe": "com.synexia.m3.Sc0Forward"
+      "recipe": "jdk.internal.m3.Sc0Forward"
     },
     {
       "families": [
         "Spc"
       ],
       "id": "Reverse",
-      "recipe": "com.synexia.m3.Sc0Reverse"
+      "recipe": "jdk.internal.m3.Sc0Reverse"
     }
   ],
   "ownerSHA256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",

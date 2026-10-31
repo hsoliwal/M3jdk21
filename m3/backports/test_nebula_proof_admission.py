@@ -56,7 +56,7 @@ class NebulaProofAdmissionTest(unittest.TestCase):
 
     def test_nebula_or_synexia_identity_drift_fails_closed(self):
         row = self.mod.read(self.receipt)
-        for field in ("nebula_commit", "synexia_commit", "canonical_recipe_dag"):
+        for field in ("nebula_commit", "m3_commit", "canonical_recipe_dag"):
             changed = dict(row)
             changed[field] = "0" * 40 if field.endswith("_commit") else "other.Recipe"
             with self.assertRaises(ValueError):

@@ -61,7 +61,7 @@
     {
       "dataset": "m3jdk21-tq-bootstrap-20261018",
       "input_head": "1fe7f19603b260186bfa8df1f4f06d891a0f2427",
-      "qualified_crate": "/dev/shm/m3-sdk-actual-20261018-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualified_crate": "/dev/shm/m3-sdk-actual-20261018-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
       "check": {
         "dataset": "m3jdk21-tq-bootstrap-20261018",
         "targets": 12,
@@ -88,7 +88,7 @@
     {
       "dataset": "m3-recipe-path-api-20261018",
       "input_head": "d9127c0d3059d2b1075b87f9ff216cbb5467a07d",
-      "qualified_crate": "/dev/shm/m3-sdk-actual-20261018-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualified_crate": "/dev/shm/m3-sdk-actual-20261018-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
       "check": {
         "dataset": "m3-recipe-path-api-20261018",
         "targets": 1,
@@ -115,7 +115,7 @@
     {
       "dataset": "m3-tq-current-epoch-20261018",
       "input_head": "00cda43c3a1d2402ee3bac3dd22f8c2ced1407ee",
-      "qualified_crate": "/dev/shm/m3-sdk-actual-20261018-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualified_crate": "/dev/shm/m3-sdk-actual-20261018-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
       "check": {
         "dataset": "m3-tq-current-epoch-20261018",
         "targets": 14,
@@ -142,7 +142,7 @@
     {
       "dataset": "m3-tq-guard-proof-20261018",
       "input_head": "0e2cd8d9d68dd2af0ef340e8a1a90ac6de7a5cd4",
-      "qualified_crate": "/workspace/scratch/f8287c652798/combine/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualified_crate": "/workspace/scratch/f8287c652798/combine/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
       "check": {
         "dataset": "m3-tq-guard-proof-20261018",
         "targets": 4,
@@ -169,7 +169,7 @@
     {
       "dataset": "m3-combined-manifest-20261018",
       "input_head": "ab6cc64eddd17ea81242bf58a7a19cb130a58c77",
-      "qualified_crate": "/dev/shm/m3-collections-manifest-successor/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualified_crate": "/dev/shm/m3-collections-manifest-successor/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
       "check": {
         "dataset": "m3-combined-manifest-20261018",
         "targets": 2,
@@ -196,7 +196,7 @@
     {
       "dataset": "m3-regex-facts-v2-20261018",
       "input_head": "2015360812e3daf07c5e6d1e647c2fb76165e0c6",
-      "qualified_crate": "/dev/shm/m3-parser-reuse-f8287/final/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualified_crate": "/dev/shm/m3-parser-reuse-f8287/final/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
       "check": {
         "dataset": "m3-regex-facts-v2-20261018",
         "targets": 6,
@@ -223,7 +223,7 @@
     {
       "dataset": "m3-api-doclint-20261018",
       "input_head": "edd96c2a0fc2fb41486ca8ed1afa4712ac4b6723",
-      "qualified_crate": "/dev/shm/m3-doclint-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualified_crate": "/dev/shm/m3-doclint-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
       "check": {
         "dataset": "m3-api-doclint-20261018",
         "targets": 12,
@@ -250,7 +250,7 @@
     {
       "dataset": "m3-progress-scope-lint-20261018",
       "input_head": "242e43eb18cbe2613990baedb5dbb5440c3956f6",
-      "qualified_crate": "/dev/shm/m3-progress-scope-lint-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualified_crate": "/dev/shm/m3-progress-scope-lint-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
       "check": {
         "dataset": "m3-progress-scope-lint-20261018",
         "targets": 4,
@@ -277,7 +277,7 @@
     {
       "dataset": "m3-tq-custody-v2-20261018",
       "input_head": "2e9508c90952b8d66d6c3ee4855e1e4d8fd856fe",
-      "qualified_crate": "/dev/shm/m3-tq-successor-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualified_crate": "/dev/shm/m3-tq-successor-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
       "check": {
         "dataset": "m3-tq-custody-v2-20261018",
         "targets": 14,
@@ -304,7 +304,7 @@
     {
       "dataset": "m3-native-feature-guard-20261018",
       "input_head": "5c9229c23b1ac9abdfebff3bc4b8e6449f59deae",
-      "qualified_crate": "/dev/shm/m3-native-feature-guard-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualified_crate": "/dev/shm/m3-native-feature-guard-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
       "check": {
         "dataset": "m3-native-feature-guard-20261018",
         "targets": 1,
@@ -331,7 +331,7 @@
     {
       "dataset": "m3-object-vtable-20261018",
       "input_head": "19fc2c988ae7358b24e68e090eba214340d66452",
-      "qualified_crate": "/dev/shm/m3-object-vtable-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualified_crate": "/dev/shm/m3-object-vtable-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
       "check": {
         "dataset": "m3-object-vtable-20261018",
         "targets": 1,
@@ -358,7 +358,7 @@
     {
       "dataset": "m3-runtime-catalogue-20261018",
       "input_head": "c857a9ecf07270e9cd0b199221fd9d1d8d8aa744",
-      "qualified_crate": "/dev/shm/m3-latest-runtime-catalogue-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualified_crate": "/dev/shm/m3-latest-runtime-catalogue-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
       "check": {
         "dataset": "m3-runtime-catalogue-20261018",
         "targets": 43,
@@ -385,7 +385,7 @@
     {
       "dataset": "m3-catalogue-logs-20261018",
       "input_head": "8e0bf6316903989b444deaaefaeb65eef3f72faa",
-      "qualified_crate": "/dev/shm/m3-latest-runtime-catalogue-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualified_crate": "/dev/shm/m3-latest-runtime-catalogue-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
       "check": {
         "dataset": "m3-catalogue-logs-20261018",
         "targets": 3,
@@ -412,7 +412,7 @@
     {
       "dataset": "m3-tq-sparse-jtreg-20261018",
       "input_head": "4c48a3ab34a91e92bcac6e98175dfbee75abba20",
-      "qualified_crate": "/dev/shm/m3-tq-sparse-jtreg-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualified_crate": "/dev/shm/m3-tq-sparse-jtreg-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
       "check": {
         "dataset": "m3-tq-sparse-jtreg-20261018",
         "targets": 1,
@@ -439,7 +439,7 @@
     {
       "dataset": "m3-mapping-custody-v2-20261018",
       "input_head": "225c488f9b39d4534fe19cd2d72be1130875fb10",
-      "qualified_crate": "/dev/shm/m3-tq-successor-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualified_crate": "/dev/shm/m3-tq-successor-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
       "check": {
         "dataset": "m3-mapping-custody-v2-20261018",
         "targets": 75,
@@ -466,7 +466,7 @@
     {
       "dataset": "m3-map-sparse-guard-20261018",
       "input_head": "f0b80300f0048fead498d0d4c1ad385168479bb7",
-      "qualified_crate": "/dev/shm/m3-tq-successor-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualified_crate": "/dev/shm/m3-tq-successor-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
       "check": {
         "dataset": "m3-map-sparse-guard-20261018",
         "targets": 1,
@@ -493,7 +493,7 @@
     {
       "dataset": "m3-map-sparse-inputs-20261018",
       "input_head": "e7b64a183f1f42949818d49a457e8d0a02bec2f4",
-      "qualified_crate": "/dev/shm/m3-tq-successor-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualified_crate": "/dev/shm/m3-tq-successor-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
       "check": {
         "dataset": "m3-map-sparse-inputs-20261018",
         "targets": 7,
@@ -520,7 +520,7 @@
     {
       "dataset": "m3-native-index-build3-20261018",
       "input_head": "243cf1cbfa4dc6cf13a9c9744dde536ee2f6f8cd",
-      "qualified_crate": "/dev/shm/m3-native-index-pom-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualified_crate": "/dev/shm/m3-native-index-pom-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
       "check": {
         "dataset": "m3-native-index-build3-20261018",
         "targets": 2,

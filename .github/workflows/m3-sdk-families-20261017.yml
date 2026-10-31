@@ -39,10 +39,10 @@ jobs:
           cp "$V2/src/main/resources/templates/M3CollectionSdkSelfTest.java" "$TMP/$TEST/M3CollectionSdkSelfTest.java"
           cp "$MAIN/M3CollectionSdkCatalog.java" "$TMP/$MAIN/M3CollectionSdkCatalog.java"
           cp "$TEST/M3CollectionSdkCatalogSelfTest.java" "$TMP/$TEST/M3CollectionSdkCatalogSelfTest.java"
-          java -cp "$V2/target/classes" com.synexia.m3.M3CollectionSdkNamesRecipe --check "$TMP"
-          java -cp "$V3/target/classes" com.synexia.m3.M3SdkSortedContractRecipe --apply "$TMP"
-          java -cp "$V3/target/classes" com.synexia.m3.M3SdkSortedContractRecipe --check "$TMP"
-          java -cp "$V3/target/classes" com.synexia.m3.M3SdkSortedContractRecipe --check .
+          java -cp "$V2/target/classes" jdk.internal.m3.M3CollectionSdkNamesRecipe --check "$TMP"
+          java -cp "$V3/target/classes" jdk.internal.m3.M3SdkSortedContractRecipe --apply "$TMP"
+          java -cp "$V3/target/classes" jdk.internal.m3.M3SdkSortedContractRecipe --check "$TMP"
+          java -cp "$V3/target/classes" jdk.internal.m3.M3SdkSortedContractRecipe --check .
           for path in \
             "$MAIN/M3CollectionSdkCatalog.java" "$MAIN/M3CollectionSdk.java" \
             "$TEST/M3CollectionSdkCatalogSelfTest.java" "$TEST/M3CollectionSdkSelfTest.java"

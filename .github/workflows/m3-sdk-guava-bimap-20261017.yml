@@ -30,7 +30,7 @@ jobs:
           python3 - <<'PY'
           import hashlib
           from pathlib import Path
-          root=Path('m3/collections/recipes/sdk-guava-bimap-20261017/src/main/resources/com/synexia/rewrite/m3-guava-bimap-20261017')
+          root=Path('m3/collections/recipes/sdk-guava-bimap-20261017/src/main/resources/jdk/internal/m3/rewrite/m3-guava-bimap-20261017')
           for row in (root/'manifest.tsv').read_text().splitlines():
               path,before,after,template=row.split('\t')
               installed=Path(path).read_bytes()

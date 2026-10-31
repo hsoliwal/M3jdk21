@@ -63,7 +63,7 @@ jobs:
           mvn -B -ntp -f m3/vendor/third_party/pom.xml
           -pl rewrite-java-21,rewrite-test,junit-jupiter-5.10.2,junit-platform-launcher-1.10.2
           -am -DskipTests install
-      - run: bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
+      - run: bash m3/m3-import/pure-int-recipe-custody/install.sh "$PWD"
       - run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -DskipTests install
       - run: >
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml

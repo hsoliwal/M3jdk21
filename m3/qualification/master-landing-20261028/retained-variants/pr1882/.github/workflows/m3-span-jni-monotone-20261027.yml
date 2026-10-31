@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-# Canonical recipe: com.synexia.m3.SpanMonotonePageJni20261027.
+# Canonical recipe: jdk.internal.m3.SpanMonotonePageJni20261027.
 name: M3 Span JNI monotone-pages Java 21
 
 on:

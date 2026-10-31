@@ -1,10 +1,10 @@
 {
   "schema": "M3_MR_CANONICAL_QUALIFIED_SOURCE_WITNESS_V1",
   "canonical_recipe_owner": "hsoliwal/com.synexia",
-  "canonical_crate_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "canonical_crate_path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
   "canonical_dataset": "m3-regex-facts-v2-20261018",
-  "canonical_manifest_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-regex-facts-v2-20261018/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/manifest.tsv",
-  "target_local_exact_mirror_path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/manifest.tsv",
+  "canonical_manifest_path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-regex-facts-v2-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/manifest.tsv",
+  "target_local_exact_mirror_path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/manifest.tsv",
   "manifest_sha256": "3d805f0601e3460d9773e15736f759ef2d5519ecac47cf9da548079db27743a1",
   "canonical_engine_changes": false,
   "actual_sdk_tests": 5,

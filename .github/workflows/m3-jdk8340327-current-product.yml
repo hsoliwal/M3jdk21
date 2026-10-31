@@ -60,7 +60,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/recipes/jdk-8340327-java21-internal/materialize.py             --root .             --manifest m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/jdk-8340327-java21-internal/manifest.tsv             --receipt m3/build/jdk8340327/receipt.tsv
+          python3 m3/backports/recipes/jdk-8340327-java21-internal/materialize.py             --root .             --manifest m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/jdk-8340327-java21-internal/manifest.tsv             --receipt m3/build/jdk8340327/receipt.tsv
           git diff --exit-code -- src test
 
       - name: 4 - Exact target and Java21 API fence
@@ -202,7 +202,7 @@ jobs:
           python3 m3/backports/recipes/jdk-8340327-java21-internal/test_materialize.py
           python3 m3/backports/recipes/jdk-8340327-java21-internal/materialize.py \
             --root . \
-            --manifest m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/jdk-8340327-java21-internal/manifest.tsv \
+            --manifest m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/jdk-8340327-java21-internal/manifest.tsv \
             --receipt m3/build/jdk8340327/readback.tsv
           git diff --exit-code -- src test
           grep -F $'current_tree_state\tCANDIDATE_MATERIALIZED_PROVED' m3/backports/recipes/jdk-8340327-java21-internal/CURRENT_TREE_RECEIPT.tsv

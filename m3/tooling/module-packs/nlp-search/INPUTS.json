@@ -131,7 +131,7 @@
     "m3/tooling/module-packs/nlp-search/fixtures/src/test/java/RemoveRecordedModuleHashes.java": "a9cc9cdc39201e53c56befbcb4548b2a437719f2ca3945d1db2ce29e0a5c3783",
     "m3/tooling/module-packs/nlp-search/frontend/src/main/java/module-info.java": "e821a724c7e3f25c49dfc06d9809742650b9c0e45987d456688f1b2bc8f7c0c9",
     "m3/tooling/module-packs/nlp-search/frontend/src/main/java/org/m3jdk/tools/search/M3SourceIndex.java": "47e3083aca86032e172618e80c2ac2053a76af5c55758b65ed6e0ae76ffece30",
-    "m3/tooling/module-packs/nlp-search/recipe-custody/src/test/java/com/synexia/rewrite/M3NlpSearchIntegrationTest.java": "04f63847360b295e62c7b4c0176e0926911cf1a313a28ab17e4031bb0de7fa6e",
+    "m3/tooling/module-packs/nlp-search/recipe-custody/src/test/java/jdk/internal/m3/rewrite/M3NlpSearchIntegrationTest.java": "04f63847360b295e62c7b4c0176e0926911cf1a313a28ab17e4031bb0de7fa6e",
     "m3/vendor/synexia/nlp-search/OVERLAY_LOCK.json": "b6ec8e64969bc10157b6a868d1a8da5c12d61bb211878922fe56881c1daee032",
     "m3/vendor/third_party-m3/nlp-search/third_party/lucene-core/src/main/java/org/apache/lucene/analysis/CharArrayMap.java": "8b8ca85def4bb9c48a49e531e8edbd8d14f77dc05d6a1a54d829e714657c1fdb",
     "m3/vendor/third_party-m3/nlp-search/third_party/lucene-core/src/main/java/org/apache/lucene/analysis/M3TextReaders.java": "4c2e5843829487c5be8163fa0817178b8887a1c4199e9b382c88bc726c01daf0",

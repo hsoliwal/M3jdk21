@@ -16,7 +16,7 @@
     "pr": 12855,
     "commit": "d0a145f2cf26b5a60422ee99195ed7084eb47039",
     "dataset": "vpt-tree-shift-pin-20261026",
-    "named_recipe": "com.synexia.m3.ViewportTreeShiftPin20261026",
+    "named_recipe": "jdk.internal.m3.ViewportTreeShiftPin20261026",
     "original_recipe_engine_blob": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7"
   },
   "executed_local": {

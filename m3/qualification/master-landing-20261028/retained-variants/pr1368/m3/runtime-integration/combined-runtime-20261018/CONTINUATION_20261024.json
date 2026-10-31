@@ -3,7 +3,7 @@
   "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
   "license": "Apache-2.0; generated metadata only; target/donor per-file rights unchanged",
   "product_owner": "hsoliwal/M3JDK21",
-  "canonical_recipe_owner": "hsoliwal/com.synexia:synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "canonical_recipe_owner": "hsoliwal/com.synexia:m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
   "canonical_common_source_pin": "bb58cf0090e1bfbe5cafcde44c6db980945d1b59",
   "previous_runtime_publication": "38a251f419c8236c8818f5670bebe651be6f31a2",
   "received_source_head": "28e34762d10d67a86f52c40cea7eb47c76ff3a01",
@@ -37,7 +37,7 @@
       "dataset": "m3-regression-witnesses-20261024",
       "observed_input_head": "7236d45d412d23a658e27ad6e279e6e41f20bbd7",
       "canonical_common_source_pin": "bb58cf0090e1bfbe5cafcde44c6db980945d1b59",
-      "qualification_owner": "/workspace/scratch/f8287c652798/continuation-20261024/canonical-regression-proof/source-identical-host/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualification_owner": "/workspace/scratch/f8287c652798/continuation-20261024/canonical-regression-proof/source-identical-host/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
       "qualification_sha256": "8534abb13996bbe65d5969642ac914a71d56bec69ddd2f32e8017e867b7d3a05",
       "check": {
         "dataset": "m3-regression-witnesses-20261024",
@@ -67,7 +67,7 @@
       "dataset": "m3-list-iterator-guard-20261024",
       "observed_input_head": "41db68d28ada879e84e0f401a9c576acbc4e1c0b",
       "canonical_common_source_pin": "bb58cf0090e1bfbe5cafcde44c6db980945d1b59",
-      "qualification_owner": "/workspace/scratch/f8287c652798/continuation-20261024/canonical-regression-proof/source-identical-host/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "qualification_owner": "/workspace/scratch/f8287c652798/continuation-20261024/canonical-regression-proof/source-identical-host/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
       "qualification_sha256": "635f4d46b8f3be80988e2afd37fde8dd88c1b2d1862e29fe8512aae56710b7b6",
       "check": {
         "dataset": "m3-list-iterator-guard-20261024",

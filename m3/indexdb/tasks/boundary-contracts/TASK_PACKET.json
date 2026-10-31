@@ -16,7 +16,7 @@
     "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-indexdb-boundary-tests.yml",
     "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3IndexDbBoundaryRecipeTest.java",
     ".github/workflows/m3-indexdb-boundary-proof.yml",
-    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/indexdb-boundary-contracts/**",
+    "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/indexdb-boundary-contracts/**",
     "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/indexdb-boundary-proof/**"
   ],
   "invariant_locks": {

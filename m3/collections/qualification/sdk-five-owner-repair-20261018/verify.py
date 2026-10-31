@@ -7,7 +7,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
-RES = HERE / "recipe/src/main/resources/com/synexia/rewrite/m3-five-sdk-owner-repair-20261018"
+RES = HERE / "recipe/src/main/resources/jdk/internal/m3/rewrite/m3-five-sdk-owner-repair-20261018"
 
 def checked(path: Path) -> bytes:
     if not path.is_file() or path.is_symlink():

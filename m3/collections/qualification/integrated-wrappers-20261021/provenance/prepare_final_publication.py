@@ -12,8 +12,8 @@ import hashlib
 import json
 
 ROOT = Path(__file__).resolve().parents[2]
-CRATE = 'synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021'
-RESOURCE = 'synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021'
+CRATE = 'm3-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021'
+RESOURCE = 'm3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/arrayification-20261018/integrated-wrappers-20261021'
 BRANCH = 'aix/integrated-collections-refinement-20261021'
 APACHE = 'Apache-2.0'
 MIXED = 'Apache-2.0 AND (GPL-2.0-only WITH Classpath-exception-2.0)'

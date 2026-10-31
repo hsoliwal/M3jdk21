@@ -57,10 +57,10 @@
           <proc>none</proc>
           <fork>false</fork>
           <includes>
-            <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+            <include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
           </includes>
           <testIncludes>
-            <testInclude>com/synexia/rewrite/M3OwnedSpringMultiValueMapRecipeTest.java</testInclude>
+            <testInclude>jdk/internal/m3/rewrite/M3OwnedSpringMultiValueMapRecipeTest.java</testInclude>
           </testIncludes>
           <compilerArgs>
             <arg>-Xlint:all</arg>
@@ -117,7 +117,7 @@
                 </goals>
                 <configuration>
                   <skip>${m3.recipe.boot.skip}</skip>
-                  <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+                  <mainClass>jdk.internal.m3.prstack.M3RecipeBoot</mainClass>
                   <includeProjectDependencies>false</includeProjectDependencies>
                   <includePluginDependencies>true</includePluginDependencies>
                   <arguments>

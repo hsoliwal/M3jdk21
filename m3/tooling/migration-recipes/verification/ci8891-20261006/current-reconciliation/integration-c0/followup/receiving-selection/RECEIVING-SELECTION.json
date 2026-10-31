@@ -582,27 +582,27 @@
       "bytes": 21547
     },
     {
-      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.synexia.rewrite.M3DocumentJavadocContractRecipeTest.xml",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-jdk.internal.m3.rewrite.M3DocumentJavadocContractRecipeTest.xml",
       "sha256": "2fcf4dddd5182000979507fd473297ab66a8181405d9694c648b4c6342774963",
       "bytes": 21261
     },
     {
-      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.synexia.rewrite.M3MIndexJniNewStringAdmissionRecipeTest.xml",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-jdk.internal.m3.rewrite.M3MIndexJniNewStringAdmissionRecipeTest.xml",
       "sha256": "937608a8f3c370ca4a57de9fc30682c312dfe08aced731993acb136e7e77d1c5",
       "bytes": 21425
     },
     {
-      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.synexia.rewrite.M3MIndexJoinedCharsViewRecipeTest.xml",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-jdk.internal.m3.rewrite.M3MIndexJoinedCharsViewRecipeTest.xml",
       "sha256": "02b24079b3058753184900b047dde01b52c9be71e6c10bc97bd08bf86c94a456",
       "bytes": 21480
     },
     {
-      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.synexia.rewrite.M3MIndexStringBulkCharBoundaryRecipeTest.xml",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-jdk.internal.m3.rewrite.M3MIndexStringBulkCharBoundaryRecipeTest.xml",
       "sha256": "691ff98bd595aeee68508a003ec52ae3f18d5f01f50afce81671bf4d94e5f669",
       "bytes": 21426
     },
     {
-      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.synexia.rewrite.M3ScopeLiteralRepairRecipeTest.xml",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/chain/01-dag-install-prerequisite/reports/m3/tooling/migration-recipes/target/surefire-reports/TEST-jdk.internal.m3.rewrite.M3ScopeLiteralRepairRecipeTest.xml",
       "sha256": "db3ab916f3fc454720a0d74732707090d01fc9a92e6c618b573335f6f0ad849a",
       "bytes": 21237
     },

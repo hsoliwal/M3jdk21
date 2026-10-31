@@ -32,7 +32,7 @@ jobs:
         run: |
           mvn -B -ntp -f m3/collections/qualification/m3-int-array-index-20261018/recipe/pom.xml verify
           java -cp m3/collections/qualification/m3-int-array-index-20261018/recipe/target/classes \
-            com.synexia.m3.M3IntArrayIndexRecipe --check "$PWD"
+            jdk.internal.m3.M3IntArrayIndexRecipe --check "$PWD"
       - name: Compile actual M3 interfaces, owners and independent differential oracle
         shell: bash
         run: |

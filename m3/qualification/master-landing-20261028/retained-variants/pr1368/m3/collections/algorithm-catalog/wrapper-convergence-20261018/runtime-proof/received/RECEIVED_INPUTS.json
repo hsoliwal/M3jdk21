@@ -1335,7 +1335,7 @@
     "bytes": 3178,
     "sha256": "ac09456844268b592475d9da1e6eee6f154e741c893167cf21d675010580deab"
   },
-  "m3/collections/synexia-donation.json": {
+  "m3/collections/m3-donation.json": {
     "bytes": 65725,
     "sha256": "50df53dec7be6b25b0f84c1635fa3abbe1391dc8a9c28c4ad0c993b0aa5ed964"
   }

@@ -4,7 +4,7 @@
     "com.m3.file",
     "jdk.m3.parser"
   ],
-  "canonical_recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "canonical_recipe": "jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017",
   "canonical_repository": "hsoliwal/com.synexia",
   "immutable_pin": "../file-ast-native-source-pin-20261021.json",
   "target_base": "2879a91f48c184b90e7d1577ff581bd8793ae634",

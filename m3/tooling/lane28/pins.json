@@ -47,11 +47,11 @@
       "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
       "git_blob": "a2e8c916208b563517e51b738744a05357e633aa"
     },
-    ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapTaskRecipe.java": {
+    ".m3/openrewrite-recipes/src/main/java/jdk/internal/m3/bootstrap/M3BootstrapTaskRecipe.java": {
       "sha256": "58bac6968ebd2cce6f43f338c289db14435b3ef05ed2abc13402275285b89462",
       "git_blob": "cfb9fb8befe2c5ccde5035e96ae7c99b89b5f490"
     },
-    ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe.java": {
+    ".m3/openrewrite-recipes/src/main/java/jdk/internal/m3/bootstrap/M3BootstrapInventoryRecipe.java": {
       "sha256": "05ac05e7f3cb7549d26866a61dec0edf19515317c95f73db82d1c517cad88ef5",
       "git_blob": "8f1018a1bcfa203420253d59a8473ef5a18e19b6"
     },
@@ -83,7 +83,7 @@
     "runtime_dependency_on_synexia": false,
     "contributions": [
       {
-        "convergence_path": "synexia-openrewrite-recipes/crates/m3-szf/src/main/resources/com/synexia/rewrite/hash-pinned-java/szf/SegmentedIntLane28.java.txt",
+        "convergence_path": "m3-openrewrite-recipes/crates/m3-szf/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/szf/SegmentedIntLane28.java.txt",
         "convergence_commit": "aabe02e51718922c486fb04590af8818ccc7e653",
         "sha256": "bbba8cc495480bbde1d8e60ecb6b5c5ba3b8bf0583477622e3d547e5ba546ac0",
         "git_blob": "993fe654bfcb4039a6a2fa11513751e7eb2c9729",
@@ -92,7 +92,7 @@
         "target_sha256": "ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda"
       },
       {
-        "convergence_path": "synexia-openrewrite-recipes/crates/m3-szf/src/main/resources/com/synexia/rewrite/hash-pinned-java/szf/SegmentedLongLane28.java.txt",
+        "convergence_path": "m3-openrewrite-recipes/crates/m3-szf/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/szf/SegmentedLongLane28.java.txt",
         "convergence_commit": "aabe02e51718922c486fb04590af8818ccc7e653",
         "sha256": "4b6c03da1a13274ce736039359538ff3ffc1ff1586714dba95e769574907ab8e",
         "git_blob": "0ca5ca4cbd17589c2b2c33cbda4433ad6319049c",

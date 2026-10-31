@@ -243,7 +243,7 @@
       "bytes": 29632,
       "gitBlob": "e530280dcb63d520102e35b46761eebdf5cbee9c",
       "mode": "100644",
-      "path": "src/test/java/com/synexia/rewrite/Fc0RecipeTest.java",
+      "path": "src/test/java/jdk/internal/m3/rewrite/Fc0RecipeTest.java",
       "sha256": "a0075da0f61d17bed209433c0b19b720ca24402dd732630f39b4868060a36816"
     },
     {
@@ -547,7 +547,7 @@
         "bytes": 29632,
         "gitBlob": "e530280dcb63d520102e35b46761eebdf5cbee9c",
         "mode": "100644",
-        "path": "src/test/java/com/synexia/rewrite/Fc0RecipeTest.java",
+        "path": "src/test/java/jdk/internal/m3/rewrite/Fc0RecipeTest.java",
         "sha256": "a0075da0f61d17bed209433c0b19b720ca24402dd732630f39b4868060a36816"
       },
       {

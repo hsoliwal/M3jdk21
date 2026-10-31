@@ -18,7 +18,7 @@
       "id": "Rfc",
       "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/rf0-rfc/manifest.tsv",
       "manifestSHA256": "d86481ecdcf2c1fcd771738bf52c28020752e7f09e27790f174bde256b13eb63",
-      "namedRecipe": "com.synexia.m3.Rf0Rfc",
+      "namedRecipe": "jdk.internal.m3.Rf0Rfc",
       "targets": [
         {
           "afterBytes": 48860,
@@ -55,14 +55,14 @@
         "Rfc"
       ],
       "id": "Forward",
-      "recipe": "com.synexia.m3.Rf0Forward"
+      "recipe": "jdk.internal.m3.Rf0Forward"
     },
     {
       "families": [
         "Rfc"
       ],
       "id": "Reverse",
-      "recipe": "com.synexia.m3.Rf0Reverse"
+      "recipe": "jdk.internal.m3.Rf0Reverse"
     }
   ],
   "ownerSHA256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",

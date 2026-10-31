@@ -16,7 +16,7 @@ else
 fi
 proof_out=$(mktemp -d "${TMPDIR:-/tmp}/m3-source-facts-proof.XXXXXXXX")
 trap 'rm -rf -- "$proof_out"' EXIT
-proof_sourcepath="$proof_repo/m3/ports/compiletime/src/main/java:$proof_repo/m3/vendor/synexia/synexia-mindex/compiler/src/main/java:$proof_repo/m3/vendor/synexia/synexia-mindex/runtime/src/main/java"
+proof_sourcepath="$proof_repo/m3/ports/compiletime/src/main/java:$proof_repo/m3/vendor/synexia/m3-mindex/compiler/src/main/java:$proof_repo/m3/vendor/synexia/m3-mindex/runtime/src/main/java"
 "$proof_javac" --release 21 -Xlint:all -Werror -d "$proof_out" \
     -sourcepath "$proof_sourcepath" \
     "$proof_repo/m3/ports/compiletime/src/test/java/com/m3/compiletime/ast/M3SourceFactsReuseProof.java"

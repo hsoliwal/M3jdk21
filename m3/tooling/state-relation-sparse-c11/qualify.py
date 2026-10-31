@@ -17,7 +17,7 @@ ROOT = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ARTIFACTS = ROOT / "artifacts"
 PREFIX = "m3/tooling/state-relation-sparse-c11/"
 WORKFLOW = ".github/workflows/m3-state-relation-sparse-c11.yml"
-SUITE = "com.synexia.rewrite.M3StateRelationSparseC11RecipeTest"
+SUITE = "jdk.internal.m3.rewrite.M3StateRelationSparseC11RecipeTest"
 METHODS = ["bothPartialStatesRoundTripAndReachFixedPointsInBothOrders",
            "everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation",
            "historicalCRefusesBothDirectionsWithoutMutation"]
@@ -244,7 +244,7 @@ def report():
     if tuple(module["COMPILED_PROVIDERS"]) != expected_providers:
         raise RuntimeError("exact four Java21 source providers required")
     for name in expected_providers:
-        path = regular(SDK / ("target/classes/com/synexia/rewrite/" + name + ".class"))
+        path = regular(SDK / ("target/classes/jdk/internal/m3/rewrite/" + name + ".class"))
         raw = path.read_bytes()
         item = sdk["compiledProviders"][name]
         if (len(raw) <= 8 or raw[:4] != b"\xca\xfe\xba\xbe" or int.from_bytes(raw[6:8], "big") != 65
@@ -363,7 +363,7 @@ def report():
         forced = "-DM3_STATE_RELATION_FORCE_POSITIONAL_SCAN"
         if (forced in row["argv"]) != (variant == "portable"):
             raise RuntimeError("actual portable macro command required")
-        native_source = SDK / ("src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/before/"
+        native_source = SDK / ("src/main/resources/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020/before/"
                                + TARGET_C) if variant == "baseline" else SDK / "target/emitted" / TARGET_C
         if str(native_source) not in row["argv"]:
             raise RuntimeError("compile must consume actual declared original/emitted source")
@@ -443,7 +443,7 @@ def report():
     if set(benchmark["sourcesAndObjects"]) != {"baseline","sparse","portable"}:
         raise RuntimeError("exact measured source variants")
     for variant, item in benchmark["sourcesAndObjects"].items():
-        c_source = SDK / ("src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/before/"
+        c_source = SDK / ("src/main/resources/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020/before/"
                           + TARGET_C) if variant == "baseline" else SDK / "target/emitted" / TARGET_C
         object_path = regular(bench_dir / (variant + ".o"))
         if (item["sourceGitBlob"] != blob(regular(c_source).read_bytes())
@@ -465,7 +465,7 @@ def report():
         raise RuntimeError("matched benchmark compiler flags")
     preprocessing_rows, preprocessing_raw = {}, {}
     jdk = Path(execution["tools"]["java"]).parent.parent
-    for variant, c_source in (("original", SDK / ("src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/before/" + TARGET_C)),
+    for variant, c_source in (("original", SDK / ("src/main/resources/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020/before/" + TARGET_C)),
                               ("portable", SDK / "target/emitted" / TARGET_C)):
         row = next(row for row in commands if row["label"] == "state-relation-bench-" + variant + "-preprocess")
         expected_argv = [execution["tools"]["gcc"], *benchmark["compilerFlags"],

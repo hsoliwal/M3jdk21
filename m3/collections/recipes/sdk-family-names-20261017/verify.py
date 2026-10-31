@@ -5,7 +5,7 @@ import argparse, hashlib, json, shutil, subprocess, tempfile, xml.etree.ElementT
 from pathlib import Path
 TASK=Path(__file__).resolve().parent
 ROOT=TASK.parents[3]
-RES=TASK/'src/main/resources/com/synexia/rewrite/sdk-family-names-20261017'
+RES=TASK/'src/main/resources/jdk/internal/m3/rewrite/sdk-family-names-20261017'
 PRODUCT='m3/collections/interop/'
 SOURCE=PRODUCT+'src/main/java/com/m3/collections/interop/'
 TEST=PRODUCT+'src/test/java/com/m3/collections/interop/'
@@ -30,11 +30,11 @@ def main():
     try:
         with tempfile.TemporaryDirectory(prefix='m3-sdk-family-') as directory:
             tmp=Path(directory);engine=tmp/'engine';engine.mkdir()
-            source=TASK/'src/main/java/com/synexia/rewrite'
+            source=TASK/'src/main/java/jdk/internal/m3/rewrite'
             run(['javac','--release','21','-proc:none','-Xlint:all','-Werror','-d',engine,
                  source/'M3GpuToolJoinManifest.java',source/'SdkFamilyReplay.java'])
             candidate=tmp/'candidate'
-            run(['java','-cp',engine,'com.synexia.rewrite.SdkFamilyReplay',ROOT,candidate])
+            run(['java','-cp',engine,'jdk.internal.m3.rewrite.SdkFamilyReplay',ROOT,candidate])
             for path,before,after,template in rows:
                 if template!='KEEP' and sha(candidate/path)!=after:raise AssertionError('emission drift')
             classes=tmp/'classes';classes.mkdir()
@@ -83,7 +83,7 @@ def main():
             for path,before,after,template in rows:
                 if template!='KEEP' and (not (ROOT/path).exists() or sha(ROOT/path)!=after):raise AssertionError('unpublished/drifted output '+path)
             replay=tmp/'replay'
-            run(['java','-cp',engine,'com.synexia.rewrite.SdkFamilyReplay',ROOT,replay])
+            run(['java','-cp',engine,'jdk.internal.m3.rewrite.SdkFamilyReplay',ROOT,replay])
             for path,before,after,template in rows:
                 if template!='KEEP' and (replay/path).read_bytes()!=(candidate/path).read_bytes():raise AssertionError('fixed point mismatch')
             shutil.copyfile(candidate/'GENERATED_SHA256.tsv',evidence/'GENERATED_SHA256.tsv')

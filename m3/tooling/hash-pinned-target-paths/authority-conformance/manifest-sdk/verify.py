@@ -14,9 +14,9 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parent
 ADMISSION = "24bdaa2c54d7ff2da53f3edfcf068ddd4ffa70f7"
-RESOURCE = "src/main/resources/com/synexia/rewrite/release-jep-manifest-order-20261020"
+RESOURCE = "src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020"
 TARGET = "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv"
-SUITE = "com.synexia.rewrite.M3ReleaseJepManifestOrderRecipeTest"
+SUITE = "jdk.internal.m3.rewrite.M3ReleaseJepManifestOrderRecipeTest"
 METHODS = ["bothPartialStatesRoundTripAndReachFixedPointsInBothOrders",
            "everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation",
            "authenticStrictProviderReplaysElevenTargetsAndRejectsBothOrderFailures"]
@@ -29,21 +29,21 @@ REQUIRED_PATHS = [
   "README.md",
   "THIRD_PARTY_NOTICES.md",
   "pinned-engine/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-  "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
-  "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
-  "pinned-engine/com/synexia/rewrite/M3ReleaseJepManifestOrderInverseRecipe.java",
-  "pinned-engine/com/synexia/rewrite/M3ReleaseJepManifestOrderRecipe.java",
+  "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
+  "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
+  "pinned-engine/jdk/internal/m3/rewrite/M3ReleaseJepManifestOrderInverseRecipe.java",
+  "pinned-engine/jdk/internal/m3/rewrite/M3ReleaseJepManifestOrderRecipe.java",
   "pom.xml",
   "src/main/resources/META-INF/rewrite/release-jep-manifest-order-20261020-inverse.yml",
   "src/main/resources/META-INF/rewrite/release-jep-manifest-order-20261020.yml",
-  "src/main/resources/com/synexia/rewrite/release-jep-manifest-order-20261020/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
-  "src/main/resources/com/synexia/rewrite/release-jep-manifest-order-20261020/inverse/manifest.tsv",
-  "src/main/resources/com/synexia/rewrite/release-jep-manifest-order-20261020/inverse/manifest.tsv.license",
-  "src/main/resources/com/synexia/rewrite/release-jep-manifest-order-20261020/inverse/out/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
-  "src/main/resources/com/synexia/rewrite/release-jep-manifest-order-20261020/manifest.tsv",
-  "src/main/resources/com/synexia/rewrite/release-jep-manifest-order-20261020/manifest.tsv.license",
-  "src/main/resources/com/synexia/rewrite/release-jep-manifest-order-20261020/out/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
-  "src/test/java/com/synexia/rewrite/M3ReleaseJepManifestOrderRecipeTest.java",
+  "src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
+  "src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/inverse/manifest.tsv",
+  "src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/inverse/manifest.tsv.license",
+  "src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/inverse/out/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
+  "src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/manifest.tsv",
+  "src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/manifest.tsv.license",
+  "src/main/resources/jdk/internal/m3/rewrite/release-jep-manifest-order-20261020/out/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-repair-20261006/manifest.tsv",
+  "src/test/java/jdk/internal/m3/rewrite/M3ReleaseJepManifestOrderRecipeTest.java",
   "src/test/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-original-order/00-JEP_CATALOGUE.tsv.txt",
   "src/test/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-original-order/01-PROGRAM_STATUS_2026-10-06.md.txt",
   "src/test/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-authority-original-order/04-program_status.py.txt",
@@ -85,8 +85,8 @@ REQUIRED_PATHS = [
   "verify.py"
 ]
 FROZEN_GIT = {
-  "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-  "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+  "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+  "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
   "pinned-engine/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java": "4a38e39d0755462d40c2b22548b87abde938ea0b",
   "pom.xml": "d79867bcc09ad6329e12418e15907e54b8ab025f",
   "src/test/resources/frozen/M3ReleaseJepAuthorityRepairRecipeTest.java.txt": "dfdd797de55426f5e93d64c324ccccb0967c04de",
@@ -100,10 +100,10 @@ PROVIDERS = {"openrewriteAdapter": "1c1b1b568d369f688f6953161636bf36b484bf5a",
              "manifestKernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
              "authenticStrictProvider": "4a38e39d0755462d40c2b22548b87abde938ea0b"}
 COMPILED_PROVIDERS = [
-    "com/synexia/rewrite/M3GpuToolJoinRecipe",
-    "com/synexia/rewrite/M3GpuToolJoinManifest",
-    "com/synexia/rewrite/M3ReleaseJepManifestOrderRecipe",
-    "com/synexia/rewrite/M3ReleaseJepManifestOrderInverseRecipe",
+    "jdk/internal/m3/rewrite/M3GpuToolJoinRecipe",
+    "jdk/internal/m3/rewrite/M3GpuToolJoinManifest",
+    "jdk/internal/m3/rewrite/M3ReleaseJepManifestOrderRecipe",
+    "jdk/internal/m3/rewrite/M3ReleaseJepManifestOrderInverseRecipe",
     "com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe",
 ]
 

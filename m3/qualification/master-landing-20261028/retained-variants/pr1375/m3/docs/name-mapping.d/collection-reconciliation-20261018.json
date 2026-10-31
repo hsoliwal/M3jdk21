@@ -3,7 +3,7 @@
   "status": "ISOLATED_EXISTING_OWNER_RECONCILIATION_PRODUCT_HOLD",
   "source_repo": "hsoliwal/com.synexia",
   "source_commit": "7fafc4e3c9b9c7ab2b5d942768564ac865be3074",
-  "recipe": "com.synexia.rewrite.M3Jdk21CollectionReconcileRecipe",
+  "recipe": "jdk.internal.m3.rewrite.M3Jdk21CollectionReconcileRecipe",
   "target_base": "fcf3965eb7e021560aa49bbc722fd2edf4abb1b7",
   "source_pr": 12386,
   "target_module": "m3/collections",

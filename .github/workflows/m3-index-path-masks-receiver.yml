@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-# Synexia source-sealed recipe: com.synexia.m3.Jdk21IndexPathMasks20261017
+# Synexia source-sealed recipe: jdk.internal.m3.Jdk21IndexPathMasks20261017
 name: M3 indexed 32-bit mask paths Java21 and JNI
 on:
   pull_request:

@@ -1,6 +1,6 @@
 {
   "canonical_repository": "hsoliwal/com.synexia",
-  "canonical_task": "synexia-openrewrite-recipes/recipe-crates/collection-view-range-20261016/wrapper-composition-20261017",
+  "canonical_task": "m3-openrewrite-recipes/recipe-crates/collection-view-range-20261016/wrapper-composition-20261017",
   "target_repository": "hsoliwal/M3jdk21",
   "target_base": "b2df8a4d342286421c7d1eeb91a73e5d69d39bdb",
   "common_predecessor": "cb501d5447c659606f4a5d0910379abaa0c36739",

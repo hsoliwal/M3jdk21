@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 # Owning generator for m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/atom/spectrum/CORPUS.tsv
-# (consumed by com.m3.rewrite.synexia.M3SynexiaPureIntRepositoryCorpusTest.verifyPin).
+# (consumed by com.m3.rewrite.synexia.M3PureIntRepositoryCorpusTest.verifyPin).
 #
 # Keeps the pinned path and category columns of the existing CORPUS.tsv and recomputes
 # bytes, git blob SHA-1 and SHA-256 from the working tree at ROOT with CPU tools only.

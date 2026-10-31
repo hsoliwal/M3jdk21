@@ -12,7 +12,7 @@
   "mappings": [
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3ContentId.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/fs/M3ContentId.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3ContentId.java"
@@ -21,7 +21,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3DirectoryContentStore.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/fs/M3DirectoryContentStore.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3DirectoryContentStore.java"
@@ -30,7 +30,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3FileManifest.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/fs/M3FileManifest.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3FileManifest.java",
@@ -42,7 +42,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3FileSystemStore.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/fs/M3FileSystemStore.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3FileSystemStore.java",
@@ -53,7 +53,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3FsPrecomputeBundle.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/fs/M3FsPrecomputeBundle.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3FsPrecomputeBundle.java",
@@ -64,7 +64,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3FsPrecomputeCatalog.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/fs/M3FsPrecomputeCatalog.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3FsPrecomputeCatalog.java",
@@ -74,7 +74,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3FsPrecomputeWriter.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/fs/M3FsPrecomputeWriter.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3FsPrecomputeWriter.java"
@@ -83,7 +83,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3GenerationRoot.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/fs/M3GenerationRoot.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3GenerationRoot.java",
@@ -94,7 +94,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3MappedObject.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/fs/M3MappedObject.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3MappedObject.java"
@@ -103,7 +103,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3NativeContent.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/fs/M3NativeContent.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3NativeContent.java"
@@ -112,7 +112,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3ObjectKind.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/fs/M3ObjectKind.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3ObjectKind.java"
@@ -121,7 +121,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3ObjectRef.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/fs/M3ObjectRef.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3ObjectRef.java"
@@ -130,7 +130,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3PrecomputeCache.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/fs/M3PrecomputeCache.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3PrecomputeCache.java"
@@ -139,7 +139,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3PrecomputeKey.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/fs/M3PrecomputeKey.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3PrecomputeKey.java",
@@ -150,7 +150,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3PrecomputeResult.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/fs/M3PrecomputeResult.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3PrecomputeResult.java"
@@ -159,7 +159,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/MIndexFileSystem.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/fs/MIndexFileSystem.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3FS.java",
@@ -169,7 +169,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/MIndexFsFeature.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/fs/MIndexFsFeature.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3FsFeature.java"
@@ -178,7 +178,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/MIndexFsMIndexImage.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/fs/MIndexFsMIndexImage.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3FsIndexImage.java"
@@ -187,7 +187,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/MIndexFsNative.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/fs/MIndexFsNative.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3FsNative.java"
@@ -196,7 +196,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/MIndexSnapshotStore.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/fs/MIndexSnapshotStore.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3SnapshotStore.java",
@@ -206,7 +206,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3FileSystemStoreHeadGenerationPrecomputeTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/M3FileSystemStoreHeadGenerationPrecomputeTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3FileSystemStoreHeadGenerationPrecomputeTest.java"
@@ -215,7 +215,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3FsCatalogVarargsCompatibilityTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/M3FsCatalogVarargsCompatibilityTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3FsCatalogVarargsCompatibilityTest.java"
@@ -224,7 +224,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3FsCompactAsciiDfaTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/M3FsCompactAsciiDfaTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3FsCompactAsciiDfaTest.java"
@@ -233,7 +233,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3FsGpuPipelineMappedSetTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/M3FsGpuPipelineMappedSetTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3FsGpuPipelineMappedSetTest.java"
@@ -242,7 +242,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3FsMappedBundleViewTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/M3FsMappedBundleViewTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3FsMappedBundleViewTest.java"
@@ -251,7 +251,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3FsPrecomputeBundleTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/M3FsPrecomputeBundleTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3FsPrecomputeBundleTest.java"
@@ -260,7 +260,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3FsPrecomputePipelineManifestTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/M3FsPrecomputePipelineManifestTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3FsPrecomputePipelineManifestTest.java"
@@ -269,7 +269,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3FsPreparedSearchStateTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/M3FsPreparedSearchStateTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3FsPreparedSearchStateTest.java"
@@ -278,7 +278,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3GenerationRootDirectoryIndexTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/M3GenerationRootDirectoryIndexTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3GenerationRootDirectoryIndexTest.java"
@@ -287,7 +287,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3GpuGrepSegmentsRuntimeTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/M3GpuGrepSegmentsRuntimeTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3GpuGrepSegmentsRuntimeTest.java"
@@ -296,7 +296,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3MIndexFileTokenRangeSha256Test.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/M3MIndexFileTokenRangeSha256Test.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3MIndexFileTokenRangeSha256Test.java"
@@ -305,7 +305,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3MappedStorageChecks.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/M3MappedStorageChecks.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3MappedStorageChecks.java"
@@ -314,7 +314,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3MappedStorageTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/M3MappedStorageTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3MappedStorageTest.java"
@@ -323,7 +323,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3PrecomputeBundleTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/M3PrecomputeBundleTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3PrecomputeBundleTest.java"
@@ -332,7 +332,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3SegmentedUtf16FsTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/M3SegmentedUtf16FsTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3SegmentedUtf16FsTest.java"
@@ -341,7 +341,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFileSystemNativeTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/MIndexFileSystemNativeTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3FSNativeTest.java"
@@ -350,7 +350,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFileSystemScrubTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/MIndexFileSystemScrubTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3FSScrubTest.java"
@@ -359,7 +359,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFsFeatureTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/MIndexFsFeatureTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3FsFeatureTest.java"
@@ -368,7 +368,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFsHotPathSelfTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/MIndexFsHotPathSelfTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3FsHotPathSelfTest.java"
@@ -377,7 +377,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFsHotPathTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/MIndexFsHotPathTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3FsHotPathTest.java"
@@ -386,7 +386,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFsIndexedSelfTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/MIndexFsIndexedSelfTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3FsIndexedSelfTest.java"
@@ -395,7 +395,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFsIndexedTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/MIndexFsIndexedTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3FsIndexedTest.java"
@@ -404,7 +404,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFsNativeSemanticTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/MIndexFsNativeSemanticTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3FsNativeSemanticTest.java"
@@ -413,7 +413,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFsReadSnapshotSelfTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/MIndexFsReadSnapshotSelfTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3FsReadSnapshotSelfTest.java"
@@ -422,7 +422,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFsSnapshotViewSelfTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/MIndexFsSnapshotViewSelfTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3FsSnapshotViewSelfTest.java"
@@ -431,7 +431,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFsSnapshotViewTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/MIndexFsSnapshotViewTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3FsSnapshotViewTest.java"
@@ -440,7 +440,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFsSparseFeatureTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/MIndexFsSparseFeatureTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3FsSparseFeatureTest.java"
@@ -449,7 +449,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexSnapshotStoreSelfTest.java"
+        "m3-indexstring/src/test/java/jdk/internal/m3/indexstring/fs/MIndexSnapshotStoreSelfTest.java"
       ],
       "targets": [
         "m3/fs/src/test/java/com/m3/fs/M3SnapshotStoreSelfTest.java"
@@ -458,7 +458,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/test/resources/m3-fs-safevarargs/M3FsPrecomputeCatalog.java"
+        "m3-indexstring/src/test/resources/m3-fs-safevarargs/M3FsPrecomputeCatalog.java"
       ],
       "targets": [
         "m3/fs/src/test/resources/m3-fs-safevarargs/M3FsPrecomputeCatalog.java"
@@ -467,39 +467,39 @@
     },
     {
       "donors": [
-        "synexia-indexstring/verification/m3fs/M3FileSystemSelfTest.java"
+        "m3-indexstring/verification/m3fs/M3FileSystemSelfTest.java"
       ],
       "targets": [],
       "adaptation": "Inspected historical qualification reference only. This legacy Synexia harness is not a receiver production source or a fresh-run evidence claim."
     },
     {
       "donors": [
-        "synexia-indexstring/verification/mindexfs-hotpath/verify.sh"
+        "m3-indexstring/verification/mindexfs-hotpath/verify.sh"
       ],
       "targets": [],
       "adaptation": "Inspected historical qualification reference only. This legacy Synexia harness is not a receiver production source or a fresh-run evidence claim."
     },
     {
       "donors": [
-        "synexia-indexstring/verification/mindexfs-indexed-operations/verify.sh"
+        "m3-indexstring/verification/mindexfs-indexed-operations/verify.sh"
       ],
       "targets": [],
       "adaptation": "Inspected historical qualification reference only. This legacy Synexia harness is not a receiver production source or a fresh-run evidence claim."
     },
     {
       "donors": [
-        "synexia-indexstring/verification/mindexfs-read-snapshots/verify.sh"
+        "m3-indexstring/verification/mindexfs-read-snapshots/verify.sh"
       ],
       "targets": [],
       "adaptation": "Inspected historical qualification reference only. This legacy Synexia harness is not a receiver production source or a fresh-run evidence claim."
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileImage.java",
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MappedMIndexFile.java",
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileTokenKind.java",
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexId.java",
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexStringHash.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileImage.java",
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MappedMIndexFile.java",
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileTokenKind.java",
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/IndexId.java",
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/IndexStringHash.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3ColdFileImage.java",
@@ -509,13 +509,13 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSourceFactsImage.java",
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileAttributes.java",
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileByteFacts.java",
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileByteFactsSnapshot.java",
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSourceFacts.java",
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSourceFactsSnapshot.java",
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSourceFactsKey.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileSourceFactsImage.java",
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileAttributes.java",
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileByteFacts.java",
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileByteFactsSnapshot.java",
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileSourceFacts.java",
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileSourceFactsSnapshot.java",
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileSourceFactsKey.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3FileSourceFactsImage.java",
@@ -525,7 +525,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileTokenRange.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileTokenRange.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3FileTokenRange.java"
@@ -534,7 +534,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileTokenRangeSha256.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileTokenRangeSha256.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3FileTokenRangeSha256.java"
@@ -543,7 +543,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexRegexProgram.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3FsRegexImage.java"
@@ -552,7 +552,7 @@
     },
     {
       "donors": [
-        "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStringBitOps.java"
+        "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexStringBitOps.java"
       ],
       "targets": [
         "m3/fs/src/main/java/com/m3/fs/M3FsIndexImage.java"

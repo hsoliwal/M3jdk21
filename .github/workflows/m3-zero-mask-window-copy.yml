@@ -42,7 +42,7 @@ jobs:
         run: |
           set -euxo pipefail
           QUAL=m3/collections/qualification/zero-mask-window-copy-20261017
-          BEFORE="$PWD/m3/collections/recipe/zero-mask-window-copy-20261017/src/main/resources/com/synexia/rewrite/hash-pinned-text/native-zero-mask-window-c/m3_index_mask_compactor.c.before"
+          BEFORE="$PWD/m3/collections/recipe/zero-mask-window-copy-20261017/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/native-zero-mask-window-c/m3_index_mask_compactor.c.before"
           gcc -std=c17 -O2 -Wall -Wextra -Werror -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" "$QUAL/mask_zero_read_probe.c" -o proof/native/read-probe
           proof/native/read-probe
           gcc -std=c17 -O2 -Wall -Wextra -Werror -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" "-DM3_MASK_SOURCE=\"$BEFORE\"" "$QUAL/mask_zero_read_probe.c" -o proof/native/original-probe

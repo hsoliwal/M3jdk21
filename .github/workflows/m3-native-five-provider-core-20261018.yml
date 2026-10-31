@@ -29,7 +29,7 @@ jobs:
           set -eu
           R=m3/collections/qualification/m3-native-five-provider-core-20261018/recipe
           mvn -B -ntp -f "$R/pom.xml" verify
-          java -cp "$R/target/classes" com.synexia.m3.M3NativeFiveLibraryRecipe --check .
+          java -cp "$R/target/classes" jdk.internal.m3.M3NativeFiveLibraryRecipe --check .
       - name: Enforce native-core-only dependency boundary
         run: |
           set -eu

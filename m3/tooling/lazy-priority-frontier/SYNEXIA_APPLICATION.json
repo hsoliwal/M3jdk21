@@ -1,5 +1,5 @@
 {
-  "schema": "SYNEXIA_APACHE_HANDOFF_APPLICATION_V1",
+  "schema": "M3_APACHE_HANDOFF_APPLICATION_V1",
   "sourceRepository": "hsoliwal/com.synexia",
   "sourceRevision": "18a3a5ba297cee10a0bc2ca379cc30d4623aa173",
   "sourcePullRequest": 10629,
@@ -9,7 +9,7 @@
   "targetBranch": "m3/lazy-long-priority-frontier-receiver-20261012",
   "recipe": {
     "owner": "Synexia",
-    "class": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "class": "jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe",
     "crate": "m3-jdk-lazy-long-priority-frontier-20261012-v1",
     "admission": "exact ABSENT preimage and SHA-256 postimage per target"
   },

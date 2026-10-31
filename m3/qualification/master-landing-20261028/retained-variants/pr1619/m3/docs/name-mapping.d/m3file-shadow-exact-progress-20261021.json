@@ -4,7 +4,7 @@
   "module": "com.m3.file",
   "intake_mode": "INDEPENDENT_APACHE_MODULE",
   "source_owner": "hsoliwal/com.synexia",
-  "canonical_recipe": "com.synexia.m3.M3FileShadowExactProgress20261021",
+  "canonical_recipe": "jdk.internal.m3.M3FileShadowExactProgress20261021",
   "canonical_recipe_pr": 12676,
   "canonical_recipe_revision": "0c8cf65608e3050c9957deae6cdaf60dab417221",
   "target_base_branch": "chatgpt/m3jdk21-unified-doop-ast-mop-collections-20261021",

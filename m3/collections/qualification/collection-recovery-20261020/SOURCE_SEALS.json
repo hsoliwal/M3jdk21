@@ -2,7 +2,7 @@
   "schema": 1,
   "target_repository": "hsoliwal/M3JDK21",
   "target_revision": "df532e779056dbec203dde20030657c3d144f5b5",
-  "recipe": "com.synexia.m3.CollectionRecovery20261020",
+  "recipe": "jdk.internal.m3.CollectionRecovery20261020",
   "runtime_dependency_on_synexia": false,
   "ordered_parents": [
     1459
@@ -64,5 +64,5 @@
     }
   ],
   "disclosure": "Already-public exact donor bodies only. No IDE-private codec body published.",
-  "replay_of": "com.synexia.m3.CollectionComposite20261019"
+  "replay_of": "jdk.internal.m3.CollectionComposite20261019"
 }

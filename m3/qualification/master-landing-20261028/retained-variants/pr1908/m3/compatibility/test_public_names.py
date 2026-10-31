@@ -73,7 +73,7 @@ class PublicNamesTest(unittest.TestCase):
         self.assertFalse(self.issue("src/java.base/share/classes/java/util/M3Existing.java", status="M"))
 
     def test_new_synexia_recipe_crate_refused(self):
-        self.assertTrue(self.issue("synexia-openrewrite-recipes/crates/catalogue/pom.xml"))
+        self.assertTrue(self.issue("m3-openrewrite-recipes/crates/catalogue/pom.xml"))
 
     def test_historical_product_recipe_source_mutation_refused(self):
         self.assertTrue(self.issue(
@@ -115,7 +115,7 @@ class PublicNamesTest(unittest.TestCase):
             "m3/qualification/collection-convergence-20261024/RECEIPT-v2.json",
             "m3/qualification/collection-convergence-20261025/RECEIPT.json",
             "m3/qualification/experiment-20261024/RECEIPT.json",
-            "m3/synexia-import/current-full-borrow/string-source-observation-v4.tsv",
+            "m3/m3-import/current-full-borrow/string-source-observation-v4.tsv",
             ".github/workflows/public-api-naming-20261026.yml",
             "m3/collections/qualification/sort-20261026/README.md",
         )
@@ -126,7 +126,7 @@ class PublicNamesTest(unittest.TestCase):
 
     def test_receipt_exception_does_not_admit_transformations_or_public_types(self):
         self.assertTrue(self.issue(
-            "synexia-openrewrite-recipes/recipes/dated-20261026/RECEIPT.json"))
+            "m3-openrewrite-recipes/recipes/dated-20261026/RECEIPT.json"))
         self.assertTrue(self.issue(
             "src/java.base/share/classes/java/util/M3Refactor20261026.java",
             "package java.util; public class M3Refactor20261026 {}"))

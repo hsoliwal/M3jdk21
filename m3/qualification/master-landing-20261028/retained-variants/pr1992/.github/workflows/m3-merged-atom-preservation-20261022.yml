@@ -8,7 +8,7 @@ on:
       - 'm3/collections/**'
       - 'm3/tooling/migration-recipes/**'
       - 'm3/history/**'
-      - 'm3/docs/synexia-m3jdk21-source-successions.tsv'
+      - 'm3/docs/m3-m3jdk21-source-successions.tsv'
       - '.github/workflows/**'
   push:
     branches:
@@ -19,7 +19,7 @@ on:
       - 'm3/collections/**'
       - 'm3/tooling/migration-recipes/**'
       - 'm3/history/**'
-      - 'm3/docs/synexia-m3jdk21-source-successions.tsv'
+      - 'm3/docs/m3-m3jdk21-source-successions.tsv'
       - '.github/workflows/**'
   workflow_dispatch:
 

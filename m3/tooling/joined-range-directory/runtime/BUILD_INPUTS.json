@@ -154,13 +154,13 @@
       "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
     },
     {
-      "path": "m3/core/src/com/m3/text/SynexiaLangDexSourceEnvelope.java",
+      "path": "m3/core/src/com/m3/text/M3LangDexSourceEnvelope.java",
       "gitBlob": "7f9ac5ebfc452aadb869103471e6818339746083",
       "bytes": 9495,
       "sha256": "90b81d145a795dae62e57afe850ad7d38704fe4fcfad69614ff4cd598eb0a084"
     },
     {
-      "path": "m3/core/src/com/m3/text/SynexiaPrecomputePayload.java",
+      "path": "m3/core/src/com/m3/text/M3PrecomputePayload.java",
       "gitBlob": "682e7f2abd59efd2adf30fb039616c61a16aa029",
       "bytes": 17908,
       "sha256": "60eea8ba2ee14fc11e4225d2e53a2facd690c55dc17b47424f36d94c623e0b1d"
@@ -304,19 +304,19 @@
       "sha256": "ce3821bca228852b476a3f7913bdab5c887d0135a24a896329e211f047d5e348"
     },
     {
-      "path": "m3/core/test/SynexiaPrecomputePayloadTest.java",
+      "path": "m3/core/test/M3PrecomputePayloadTest.java",
       "gitBlob": "f53d7e1b74ae2ec59ac39f3fa6f7dde3949efaef",
       "bytes": 3055,
       "sha256": "fd4c12a1c38958ebe7b2e0c6d754dbd5e074f6f8c1369910ead0f0f02bcc4c16"
     },
     {
-      "path": "m3/core/test/SynexiaPrecomputeReceiverTest.java",
+      "path": "m3/core/test/M3PrecomputeReceiverTest.java",
       "gitBlob": "2138707d9c23519151e2803e170958d0ba9f308d",
       "bytes": 5313,
       "sha256": "2681df9cd986c089a9e5ce4f9c530cf6f9b96d5c07dc5e75388018a3846b0b12"
     },
     {
-      "path": "m3/core/test/SynexiaSiUnitDecoderTest.java",
+      "path": "m3/core/test/M3SiUnitDecoderTest.java",
       "gitBlob": "5ca5f5d2e8833ff7c9f6f11349a289b630d9f45e",
       "bytes": 6313,
       "sha256": "ff088458f6993dd43b181fab4e07e55501a95a9a6f56cf13fb5290490e4886d5"
@@ -328,25 +328,25 @@
       "sha256": "675fc9570dafa8e1cec54d6aa894a3780a292fc203302ad6c251ef08f9aab9c1"
     },
     {
-      "path": "m3/lexicon/synexia-number-target-map.tsv",
+      "path": "m3/lexicon/m3-number-target-map.tsv",
       "gitBlob": "e2ac289eb63e963a6afdecba6272ad5bde237ffc",
       "bytes": 500,
       "sha256": "3175dcfbbd865a49c4fa321a4c23fb177076b6de8cb50a2a6a0bec83132e8346"
     },
     {
-      "path": "m3/lexicon/synexia-precompute-field-map.tsv",
+      "path": "m3/lexicon/m3-precompute-field-map.tsv",
       "gitBlob": "005869c8bd785825dd53f13972b4b2fdd25b3f66",
       "bytes": 13715,
       "sha256": "95c1e09b23af8deb680b2fe218499b7d6ab741a29895621bb73de58112833d23"
     },
     {
-      "path": "m3/lexicon/synexia-source-manifest.tsv",
+      "path": "m3/lexicon/m3-source-manifest.tsv",
       "gitBlob": "d359a91a5d7eed0cefde831cff265e11f74e39d9",
       "bytes": 6159,
       "sha256": "d0bb4561580083a953b3b3a63fe5c061ce041c8ee68cffedd4042688ba52a0c8"
     },
     {
-      "path": "m3/lexicon/synexia-word-source-revisions.tsv",
+      "path": "m3/lexicon/m3-word-source-revisions.tsv",
       "gitBlob": "901dc57bb281931b10920401760bb81d2f41b448",
       "bytes": 245,
       "sha256": "2f45a0ed93f2e8710801547158d35e6f0f9feaafa796b673bdd2feb4887cb81c"
@@ -364,14 +364,14 @@
     "M3LexiconPrecomputeTest",
     "M3DictionaryFrequencyContractTest",
     "M3TranslationReceiverMapTest",
-    "SynexiaPrecomputePayloadTest",
-    "SynexiaPrecomputeReceiverTest",
+    "M3PrecomputePayloadTest",
+    "M3PrecomputeReceiverTest",
     "LangDexProjectionReceiverTest",
     "LangDexSourceEnvelopeTest",
     "SharedLexiconFamilySidecarCatalogTest",
     "SharedLexiconCatalogFamilyAdmissionTest",
     "SharedLexiconFamilyContractTest",
-    "SynexiaSiUnitDecoderTest",
+    "M3SiUnitDecoderTest",
     "M3NumberSpaceTest",
     "M3NumberSpaceContractTest",
     "M3LanguageGrammarSupportTest",

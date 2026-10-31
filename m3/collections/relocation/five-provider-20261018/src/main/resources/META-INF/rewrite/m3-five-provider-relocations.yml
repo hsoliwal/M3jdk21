@@ -1,6 +1,6 @@
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.RelocateGuavaFork20261018
+name: jdk.internal.m3.RelocateGuavaFork20261018
 displayName: Source-first M3 SDK relocation of Guava into isolated packages
 description: Move Java package and import references for a staged pinned fork; preserve upstream license headers, content, and independent API qualification.
 recipeList:
@@ -10,7 +10,7 @@ recipeList:
       recursive: true
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.RelocateEclipseFork20261018
+name: jdk.internal.m3.RelocateEclipseFork20261018
 displayName: Source-first M3 SDK relocation of Eclipse into isolated packages
 description: Move Java package and import references for a staged pinned fork; preserve upstream license headers, content, and independent API qualification.
 recipeList:
@@ -20,7 +20,7 @@ recipeList:
       recursive: true
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.RelocateApacheCommonsFork20261018
+name: jdk.internal.m3.RelocateApacheCommonsFork20261018
 displayName: Source-first M3 SDK relocation of ApacheCommons into isolated packages
 description: Move Java package and import references for a staged pinned fork; preserve upstream license headers, content, and independent API qualification.
 recipeList:
@@ -30,7 +30,7 @@ recipeList:
       recursive: true
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.RelocateSpringFork20261018
+name: jdk.internal.m3.RelocateSpringFork20261018
 displayName: Source-first M3 SDK relocation of Spring into isolated packages
 description: Move Java package and import references for a staged pinned fork; preserve upstream license headers, content, and independent API qualification.
 recipeList:
@@ -40,7 +40,7 @@ recipeList:
       recursive: true
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.RelocateIsolatedJdkFork20261018
+name: jdk.internal.m3.RelocateIsolatedJdkFork20261018
 displayName: Source-first M3 SDK relocation of IsolatedJdk into isolated packages
 description: Move Java package and import references for a staged pinned fork; preserve upstream license headers, content, and independent API qualification.
 recipeList:

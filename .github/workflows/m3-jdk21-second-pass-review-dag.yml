@@ -75,7 +75,7 @@ jobs:
         working-directory: ${{ runner.temp }}/com.synexia
         run: >-
           ./mvnw -B -ntp
-          -pl synexia-m3-recipe
+          -pl m3-m3-recipe
           -Dtest=M3SecondPassReviewDagPlanTest
           test
 
@@ -83,5 +83,5 @@ jobs:
         working-directory: ${{ runner.temp }}/com.synexia
         run: >-
           ./mvnw -B -ntp
-          -f synexia-openrewrite-recipes/verification/m3-atom-pattern-signal-chain-20261004/pom.xml
+          -f m3-openrewrite-recipes/verification/m3-atom-pattern-signal-chain-20261004/pom.xml
           verify

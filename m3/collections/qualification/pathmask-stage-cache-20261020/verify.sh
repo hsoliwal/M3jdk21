@@ -10,7 +10,7 @@ from pathlib import Path
 import sys
 
 root = Path(sys.argv[1])
-resource = root / "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java"
+resource = root / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java"
 crates = ("m3-native-recipe-path-20261020", "m3-native-pathmask-stagecache-20261020",
           "m3-native-pathmask-test-20261020")
 seen = set()

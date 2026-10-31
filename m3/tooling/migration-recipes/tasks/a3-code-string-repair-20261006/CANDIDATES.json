@@ -17,7 +17,7 @@
       }
     },
     {
-      "repository_path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+      "repository_path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
       "before": {
         "resource": "before-01-A3RegexMatrix.java.after.txt",
         "bytes": 7514,
@@ -32,7 +32,7 @@
       }
     },
     {
-      "repository_path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+      "repository_path": "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
       "before": {
         "resource": "before-02-manifest.tsv.txt",
         "bytes": 658,

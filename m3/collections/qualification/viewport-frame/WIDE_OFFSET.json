@@ -3,7 +3,7 @@
   "canonical_repo": "hsoliwal/com.synexia",
   "canonical_commit": "42f6416eb9257da01f43ebf1d0277131c25eb50a",
   "canonical_dataset": "viewport-frame-wide-20261023",
-  "recipe": "com.synexia.m3.ViewportFrameWideOffset20261023",
+  "recipe": "jdk.internal.m3.ViewportFrameWideOffset20261023",
   "source_path": "m3/collections/src/main/c/m3maskviewport.c",
   "pre_sha256": "7a9001af6f285c005003f8e4cdfbc8b8521f1641418c4bb6f1769eeaf1c8c485",
   "post_sha256": "10e8892a4a9b07a4e7fb3f53a2a1a3a4154648e4f1e013da3a0a4f600873d021",

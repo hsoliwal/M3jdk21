@@ -10,7 +10,7 @@ from pathlib import Path
 import re
 
 BASE = "m3/tooling/migration-recipes"
-PACKAGE = "com.synexia.rewrite.atom"
+PACKAGE = "jdk.internal.m3.rewrite.atom"
 DESCRIPTORS = {
     "m3-atom-pattern.yml": ("M3AtomizePureIntReturnRecipe",),
     "m3-file-inventory.yml": ("M3InventoryPureIntAtomCandidates",),
@@ -21,7 +21,7 @@ DESCRIPTORS = {
         "M3DocumentPureIntAtomRecipe",
     ),
 }
-OWNER_DIR = f"{BASE}/src/main/java/com/synexia/rewrite/atom"
+OWNER_DIR = f"{BASE}/src/main/java/jdk/internal/m3/rewrite/atom"
 REGISTRY = f"{BASE}/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java"
 CONSUMER = f"{BASE}/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java"
 CONSUMER_TEST = f"{BASE}/src/test/java/com/m3/rewrite/M3Java21ConvergenceRecipeTest.java"

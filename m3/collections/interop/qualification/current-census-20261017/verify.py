@@ -13,7 +13,7 @@ import subprocess
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[4] if len(HERE.parents) > 4 else Path.cwd()
 CENSUS = HERE / 'current-source-census.tsv'
-LEGACY = ROOT / 'm3/collections/interop/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/collections-library-interop/manifest.tsv'
+LEGACY = ROOT / 'm3/collections/interop/recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/collections-library-interop/manifest.tsv'
 RECEIPT_SHA256 = 'bc80523d994a68c8f87bfc5fb2a1cc75ad0559b31f84f317c70a40290552603e'
 PREDECESSOR = HERE / 'predecessor-source-census-20261017.tsv'
 PREDECESSOR_SHA256 = '5ebaf6ef12f2f954029f588e38e36c844cf97b550626a4f16e35c9219d725620'

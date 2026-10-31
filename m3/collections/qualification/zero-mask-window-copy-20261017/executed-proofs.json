@@ -52,7 +52,7 @@
     "expected_negative": false,
     "log_sha256": "65eff558fc12afee1a1ca4fe04c24b4a6dbd084f9e47b6aa4d0ce81d290c803b",
     "result_lines": [
-      "[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.851 s -- in com.synexia.rewrite.M3ZeroMaskWindowCopyRecipeTest",
+      "[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.851 s -- in jdk.internal.m3.rewrite.M3ZeroMaskWindowCopyRecipeTest",
       "[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0"
     ]
   },

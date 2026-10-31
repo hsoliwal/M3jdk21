@@ -1032,7 +1032,7 @@
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-apache-circular-fifo-20261018/engine-src/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "m3/collections/recipe/owned-apache-circular-fifo-20261018/engine-src/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "bytes": 13805,
       "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599",
       "scope": "new packet input"
@@ -1056,25 +1056,25 @@
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-apache-circular-fifo-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-apache-circular-fifo/engine-receipt.tsv",
+      "path": "m3/collections/recipe/owned-apache-circular-fifo-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-apache-circular-fifo/engine-receipt.tsv",
       "bytes": 179,
       "sha256": "7b1a2aee52fb611cc6fdf406bee8eeaf25d505598d4cbb08b86b228f7e6670de",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-apache-circular-fifo-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-apache-circular-fifo/M3CircularFifoQueue.java.txt",
+      "path": "m3/collections/recipe/owned-apache-circular-fifo-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-apache-circular-fifo/M3CircularFifoQueue.java.txt",
       "bytes": 12743,
       "sha256": "5ae11bbc515e745783cbf7d1050e95e2e40c7cd0f61044f8ef0a684a418f3663",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-apache-circular-fifo-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-apache-circular-fifo/manifest.tsv",
+      "path": "m3/collections/recipe/owned-apache-circular-fifo-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-apache-circular-fifo/manifest.tsv",
       "bytes": 218,
       "sha256": "7635b24fc6f5c5deb497830e98ca735022da1ac69d8ada60045f0266222322c6",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-apache-circular-fifo-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-apache-circular-fifo/source-receipt.tsv",
+      "path": "m3/collections/recipe/owned-apache-circular-fifo-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-apache-circular-fifo/source-receipt.tsv",
       "bytes": 188,
       "sha256": "ab9e2bc7d860e583e8265b4cdc7072ae454bbf8f115ad2a8b890e67548ed9866",
       "scope": "new packet input"
@@ -1086,7 +1086,7 @@
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-apache-circular-fifo-20261018/src/test/java/com/synexia/rewrite/M3OwnedApacheCircularFifoQueueRecipeTest.java",
+      "path": "m3/collections/recipe/owned-apache-circular-fifo-20261018/src/test/java/jdk/internal/m3/rewrite/M3OwnedApacheCircularFifoQueueRecipeTest.java",
       "bytes": 13503,
       "sha256": "0b4212cbf51a63456f1cc127745a1ffa27879bd8a7700e21043d280a38b4c82e",
       "scope": "new packet input"

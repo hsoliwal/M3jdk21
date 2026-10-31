@@ -3,8 +3,8 @@
   "sourceRepository": "hsoliwal/com.synexia",
   "sourceRevision": "eaba5869004e320845edb652a73b8f9f2085d305",
   "sourcePullRequest": 12120,
-  "recipe": "com.synexia.m3jdk.MaskWindowSparse20261017",
-  "sourceCrate": "synexia-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017",
+  "recipe": "jdk.internal.m3.m3jdk.MaskWindowSparse20261017",
+  "sourceCrate": "m3-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017",
   "targetBaseline": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
   "outputs": [
     {

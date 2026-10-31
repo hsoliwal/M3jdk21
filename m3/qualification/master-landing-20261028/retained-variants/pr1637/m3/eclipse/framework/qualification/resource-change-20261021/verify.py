@@ -31,7 +31,7 @@ def main():
     jdk = Path(os.environ['JAVA_HOME']).resolve()
     framework = root / 'm3/eclipse/framework'
     collections = root / 'm3/collections'
-    crate = root / 'm3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021'
+    crate = root / 'm3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021'
     commands = []
     receipt = {'status': 'RUNNING_OR_INCOMPLETE', 'commands': commands,
                'scope': 'Current framework owner; real Eclipse dependencies; strict-compiled collections; existing Linux JNI. No full image/workspace claim.'}

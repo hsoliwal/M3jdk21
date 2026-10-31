@@ -4,5 +4,5 @@ name: com.m3.rewrite.DbMark
 displayName: Prove retained metadata and scheduler provenance
 description: Correct the exact marker expectation without removing inherited metadata or OpenRewrite provenance.
 recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: db-mark

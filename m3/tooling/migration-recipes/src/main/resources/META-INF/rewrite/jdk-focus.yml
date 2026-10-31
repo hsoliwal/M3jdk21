@@ -4,5 +4,5 @@ name: com.m3.rewrite.FocusA3
 displayName: Restore the exact A3 catalogue repair
 description: Replay the PR113 compiler and generated-source repair without downgrading the newer serial-file owner. Run from migration-recipes root.
 recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: jdk-focus-a3

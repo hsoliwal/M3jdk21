@@ -11,7 +11,7 @@ on:
       - 'm3/collections/src/test/java/com/m3/collections/M3MaskSpansContract.java'
       - 'm3/collections/qualification/m3-index-mask-window-20261017/**'
       - 'm3/collections/pom-m3-index-mask-window-20261017.xml'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-index-mask-window-20261017/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-index-mask-window-20261017/**'
       - '.github/workflows/m3-index-mask-window-20261017.yml'
   workflow_dispatch:
 concurrency:

@@ -3,7 +3,7 @@
   "source_repository": "hsoliwal/com.synexia",
   "source_commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
   "target_base": "81f1aeb9b88408a763601982806f9c46f917ba82",
-  "recipe_path": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+  "recipe_path": "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
   "recipe_sha256": "b96894a77e5c310addbda72b248ab56fedf8ceb24e5de81fe6e5d090982a4abc",
   "recipe_blob": "1c960db1d2f2f3cbf9acdfb9162e265597dfa03c",
   "source_templates": {

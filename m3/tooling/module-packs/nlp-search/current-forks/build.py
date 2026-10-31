@@ -34,7 +34,7 @@ CAPABILITY = TARGET / "m3/ports/capability-runtime/src/main/java"
 DATE = "2026-10-18T00:00:00Z"
 SCHEMA = "m3-nlp-search-current-forks-v1"
 LUCENE_HEAD = "d1b7235f1ba1c1eea5b04a5b7e6554595a90719e"
-RECIPE_MAIN = "com.synexia.rewrite.M3CurrentForkMaterializer"
+RECIPE_MAIN = "jdk.internal.m3.rewrite.M3CurrentForkMaterializer"
 PROTECTED = ("aggregate", "external-aggregate", "base-pack", "bridge-pack", "compiler-pack", "modular",
              "jmods", "probe-classes", "spi-classes", "compiler-probe-classes",
              "packer-fixtures", "layer", "generated", "capability-classes",

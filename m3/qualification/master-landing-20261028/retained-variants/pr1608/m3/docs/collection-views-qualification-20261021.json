@@ -1,7 +1,7 @@
 {
   "schema": "M3_COLLECTION_VIEWS_CONTINUATION_V1",
   "receiving_base": "477ae612ef1a7f3b5f069456153a482989d60c4f",
-  "canonical_recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "canonical_recipe": "jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017",
   "canonical_dataset": "collection-final-20261021",
   "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12609",
   "correction_memory_head": "29bfb0317568e5ed00b7280b81350114b6035d9f3db50fac89606fbba5c785e9",

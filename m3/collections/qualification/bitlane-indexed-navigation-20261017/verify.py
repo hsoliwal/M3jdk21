@@ -65,7 +65,7 @@ def receipt(root: Path) -> dict[str, bytes]:
         path = row["path"]
         expected = EXPECTED[path]
         if tuple(row[key] for key in
-                 ("pre_sha256", "post_sha256", "synexia_template_git_blob", "role")) != expected:
+                 ("pre_sha256", "post_sha256", "m3_template_git_blob", "role")) != expected:
             raise ValueError("refused: receipt authority drift")
         value = read_file(root / path)
         assert_image(value, expected[1], expected[2], path)

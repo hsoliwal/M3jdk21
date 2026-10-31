@@ -173,7 +173,7 @@ class Verifier:
         self.poms = [self.donor / "pom.xml", self.base / "pom.xml", self.pack / "pom.xml",
                      self.pack / "reactor/pom.xml"]
         self.metadata = [self.pack / name for name in
-                         ("provenance.json", "name-mapping.json", "synexia-donation.json")]
+                         ("provenance.json", "name-mapping.json", "m3-donation.json")]
         self.environment = os.environ.copy()
         for key in ("JAVA_TOOL_OPTIONS", "JDK_JAVA_OPTIONS", "_JAVA_OPTIONS", "CLASSPATH",
                     "LD_LIBRARY_PATH", "LD_PRELOAD"):

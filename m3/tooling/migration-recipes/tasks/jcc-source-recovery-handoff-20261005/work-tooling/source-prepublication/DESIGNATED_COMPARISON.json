@@ -4,10 +4,10 @@
   "source_output_root": null,
   "sources": [
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeMasteryLab.java",
       "record": "synexia.jcc-recipe-laboratory",
-      "symbol": "com.synexia.rewrite.M3RecipeMasteryLab",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
+      "symbol": "jdk.internal.m3.rewrite.M3RecipeMasteryLab",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeMasteryLab.java",
       "bytes": 42415,
       "sha256": "f6d5ce57ca487bb56d412c0da39bd5ac8956c64aafb056231e67e331d22caeae",
       "git_blob_sha1": "0623297a95e17528b62129b207661b4962752393",
@@ -16,10 +16,10 @@
       "changed": false
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeMasterySchedulePlanner.java",
       "record": "synexia.jcc-recipe-laboratory",
-      "symbol": "com.synexia.rewrite.M3RecipeMasterySchedulePlanner",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java",
+      "symbol": "jdk.internal.m3.rewrite.M3RecipeMasterySchedulePlanner",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeMasterySchedulePlanner.java",
       "bytes": 10021,
       "sha256": "b0a7e5236a3e2bcfd593aee081c01650d920a49cf2e7254679cf8b23e67238cb",
       "git_blob_sha1": "7f8cc7134df7ea5d019a9a78ce3cfce7809135fc",
@@ -28,10 +28,10 @@
       "changed": false
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "record": "synexia.jcc-recipe-laboratory",
-      "symbol": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "symbol": "jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "bytes": 23211,
       "sha256": "adee46f08cd93edb1f97c30be904d0b686cc6426f56c1fae0ee6d670693526df",
       "git_blob_sha1": "dad21d3e762dabdfeb71f2d8815c25b401079994",
@@ -40,10 +40,10 @@
       "changed": true
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java",
       "record": "synexia.jcc-recipe-laboratory",
-      "symbol": "com.synexia.rewrite.M3OpenRewriteRuntimeRecipeInventoryRecipe",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java",
+      "symbol": "jdk.internal.m3.rewrite.M3OpenRewriteRuntimeRecipeInventoryRecipe",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java",
       "bytes": 6188,
       "sha256": "f498b969bb9e5a79f66bb87d8232d0045144145d0167751dc342ba85b0ff4d15",
       "git_blob_sha1": "3351a83e4429c4ac172f5af09998777c6b69c645",
@@ -52,10 +52,10 @@
       "changed": false
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3OpenRewriteTranspiler.java",
       "record": "synexia.jcc-recipe-laboratory",
-      "symbol": "com.synexia.rewrite.M3OpenRewriteTranspiler",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+      "symbol": "jdk.internal.m3.rewrite.M3OpenRewriteTranspiler",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3OpenRewriteTranspiler.java",
       "bytes": 27278,
       "sha256": "e86f43f32599de822191a233f1e3802e4f8120cd415ee2c90bcf67a56d4e6951",
       "git_blob_sha1": "d1c3303969a0eae68d571aa12157ae23010e36af",
@@ -64,10 +64,10 @@
       "changed": false
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeCrateSerialAtomReview.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeCrateSerialAtomReview.java",
       "record": "synexia.jcc-recipe-laboratory",
-      "symbol": "com.synexia.rewrite.M3RecipeCrateSerialAtomReview",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeCrateSerialAtomReview.java",
+      "symbol": "jdk.internal.m3.rewrite.M3RecipeCrateSerialAtomReview",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeCrateSerialAtomReview.java",
       "bytes": 23936,
       "sha256": "ead5c49ad51cf5325c5725595bf058ca73daceef092621d671aef7108f9409cc",
       "git_blob_sha1": "7d5535a3b8deb1ad0c9f604f1f94b62194ac3e11",
@@ -76,10 +76,10 @@
       "changed": false
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SemanticCodeInventoryRecipe.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SemanticCodeInventoryRecipe.java",
       "record": "synexia.jcc-recipe-laboratory",
-      "symbol": "com.synexia.rewrite.M3SemanticCodeInventoryRecipe",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SemanticCodeInventoryRecipe.java",
+      "symbol": "jdk.internal.m3.rewrite.M3SemanticCodeInventoryRecipe",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SemanticCodeInventoryRecipe.java",
       "bytes": 36683,
       "sha256": "3a475b5a1ea098b0ce07368e4ef1080f8c888d7166ceefe85716a12d735b21cc",
       "git_blob_sha1": "d02f33fe0be66066efb5148d0694763cfaea2392",
@@ -88,10 +88,10 @@
       "changed": false
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePass.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspilePass.java",
       "record": "synexia.jcc-recipe-laboratory",
-      "symbol": "com.synexia.rewrite.M3TranspilePass",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePass.java",
+      "symbol": "jdk.internal.m3.rewrite.M3TranspilePass",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspilePass.java",
       "bytes": 528,
       "sha256": "f68f4db3d6a849d172f9b168e81138429a6c16aa18745c518058436e0e8efca6",
       "git_blob_sha1": "ef8c0ed9e64adc66dbb663fd36fa3d8a7486123c",
@@ -100,10 +100,10 @@
       "changed": false
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePassResult.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspilePassResult.java",
       "record": "synexia.jcc-recipe-laboratory",
-      "symbol": "com.synexia.rewrite.M3TranspilePassResult",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePassResult.java",
+      "symbol": "jdk.internal.m3.rewrite.M3TranspilePassResult",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspilePassResult.java",
       "bytes": 1441,
       "sha256": "596c420fbc30eb07867c03d48b56af6fab1dc6891114362dabc9e0f8ff7bbb4f",
       "git_blob_sha1": "977b8f683dd2ab76ca2256533989f12a2814f044",
@@ -112,10 +112,10 @@
       "changed": false
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePlan.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspilePlan.java",
       "record": "synexia.jcc-recipe-laboratory",
-      "symbol": "com.synexia.rewrite.M3TranspilePlan",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePlan.java",
+      "symbol": "jdk.internal.m3.rewrite.M3TranspilePlan",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspilePlan.java",
       "bytes": 3759,
       "sha256": "3073058ea8237577b4506ce3222ee83914f68c7451db83bb3f7f8792abf8d13a",
       "git_blob_sha1": "290b11dc5be769119cdb202262f0336ee3612313",
@@ -124,10 +124,10 @@
       "changed": false
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspileRun.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspileRun.java",
       "record": "synexia.jcc-recipe-laboratory",
-      "symbol": "com.synexia.rewrite.M3TranspileRun",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspileRun.java",
+      "symbol": "jdk.internal.m3.rewrite.M3TranspileRun",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspileRun.java",
       "bytes": 3256,
       "sha256": "0be8b21e6fd0ec16b21c781e6ee9d9248fa8413a4010984246fb69cf72ffd485",
       "git_blob_sha1": "14284e82051ac5936dd82d93881228a914906c84",
@@ -136,10 +136,10 @@
       "changed": false
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryClassLoader.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MasteryClassLoader.java",
       "record": "synexia.jcc-recipe-laboratory",
-      "symbol": "com.synexia.rewrite.M3MasteryClassLoader",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryClassLoader.java",
+      "symbol": "jdk.internal.m3.rewrite.M3MasteryClassLoader",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MasteryClassLoader.java",
       "bytes": 2538,
       "sha256": "e2fee64f28c2fd71db1d0f2fba8a9bf3bd4c3d210119d4e12823b7d01a98ec0a",
       "git_blob_sha1": "b4081310a343cbd067c7deb5e907031598e82536",
@@ -148,10 +148,10 @@
       "changed": false
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryContractSurface.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MasteryContractSurface.java",
       "record": "synexia.jcc-recipe-laboratory",
-      "symbol": "com.synexia.rewrite.M3MasteryContractSurface",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryContractSurface.java",
+      "symbol": "jdk.internal.m3.rewrite.M3MasteryContractSurface",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MasteryContractSurface.java",
       "bytes": 8493,
       "sha256": "d825d59df9ca7839ad06af2fd5c6ae386ce373f24eecc9184d23d1fe3261d8b1",
       "git_blob_sha1": "0d3aed858efcc450cf24822567f4ee605e84a18d",
@@ -160,10 +160,10 @@
       "changed": true
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3AtomPatternSignalChainRecipe.java",
       "record": "synexia.jcc-java-jni-regression",
-      "symbol": "com.synexia.rewrite.M3AtomPatternSignalChainRecipe",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java",
+      "symbol": "jdk.internal.m3.rewrite.M3AtomPatternSignalChainRecipe",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3AtomPatternSignalChainRecipe.java",
       "bytes": 72231,
       "sha256": "876929d5e8caa03ea1e3af6d8d1d4d575d15aee3014a5f2ca425f4786eda5e98",
       "git_blob_sha1": "09df87a872817787fc8607bf11805cfa26c53aed",
@@ -172,10 +172,10 @@
       "changed": false
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3CodeSignalChain.java",
       "record": "synexia.jcc-java-jni-regression",
-      "symbol": "com.synexia.rewrite.M3CodeSignalChain",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java",
+      "symbol": "jdk.internal.m3.rewrite.M3CodeSignalChain",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3CodeSignalChain.java",
       "bytes": 30230,
       "sha256": "a15825aef2a00641d74fba761c4858f449d6924a1286aa1eb71b1d81932351fa",
       "git_blob_sha1": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
@@ -184,10 +184,10 @@
       "changed": false
     },
     {
-      "path": "m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+      "path": "m3-fast-search/src/main/java/jdk/internal/m3/search/CompetitiveProblemReview.java",
       "record": "synexia.jcc-java-jni-regression",
-      "symbol": "com.synexia.m3.search.CompetitiveProblemReview",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+      "symbol": "jdk.internal.m3.search.CompetitiveProblemReview",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-fast-search/src/main/java/jdk/internal/m3/search/CompetitiveProblemReview.java",
       "bytes": 48120,
       "sha256": "83dad41fa4ce50b70f1e2e6800241b69b5136807902fd2fc6a6d024024894ac4",
       "git_blob_sha1": "baa84c13b7fd330eab6b1832dab1b4b523bfd8ce",
@@ -196,10 +196,10 @@
       "changed": true
     },
     {
-      "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+      "path": "m3-algo/src/main/java/jdk/internal/m3/algorithms/corpus/ChallengeDonorPassLedger.java",
       "record": "synexia.jcc-java-jni-regression",
-      "symbol": "com.synexia.algorithms.corpus.ChallengeDonorPassLedger",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+      "symbol": "jdk.internal.m3.algorithms.corpus.ChallengeDonorPassLedger",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-algo/src/main/java/jdk/internal/m3/algorithms/corpus/ChallengeDonorPassLedger.java",
       "bytes": 33076,
       "sha256": "a089808e8563bac1f2d57aa1cc9f131e609c1d01ffcb1af8b302579adb00c346",
       "git_blob_sha1": "074dd60249893e4c606e68823fdebf191f98f269",
@@ -208,10 +208,10 @@
       "changed": true
     },
     {
-      "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
+      "path": "m3-algo/src/main/java/jdk/internal/m3/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
       "record": "synexia.jcc-java-jni-regression",
-      "symbol": "com.synexia.algorithms.corpus.CompetitiveCapabilityPlanIndex",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
+      "symbol": "jdk.internal.m3.algorithms.corpus.CompetitiveCapabilityPlanIndex",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-algo/src/main/java/jdk/internal/m3/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
       "bytes": 17440,
       "sha256": "59742f333ab2a04c3cd5b12061bff182e9a2114549117ce323928d391c10fafa",
       "git_blob_sha1": "e4e55dbc3f9255ad71dfa391c43c352b31472622",
@@ -220,10 +220,10 @@
       "changed": false
     },
     {
-      "path": "synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java",
+      "path": "m3-donor-inventory/src/main/java/jdk/internal/m3/donor/DonorMechanicalShapeCatalog.java",
       "record": "synexia.jcc-java-jni-regression",
-      "symbol": "com.synexia.donor.DonorMechanicalShapeCatalog",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java",
+      "symbol": "jdk.internal.m3.donor.DonorMechanicalShapeCatalog",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-donor-inventory/src/main/java/jdk/internal/m3/donor/DonorMechanicalShapeCatalog.java",
       "bytes": 20208,
       "sha256": "32ad3ecb53a611de29ce8bdcf4079d77576b3b6d5a56a847b67c9cbd5c91b326",
       "git_blob_sha1": "108514ff8960adc20c9fd88d4fd01ba55cc2f3c8",

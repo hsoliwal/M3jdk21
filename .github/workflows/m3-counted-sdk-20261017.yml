@@ -29,7 +29,7 @@ jobs:
           set -eu
           RECIPE=m3/collections/qualification/m3-counted-sdk-20261017/recipe
           mvn -B -ntp -f "$RECIPE/pom.xml" verify
-          java -cp "$RECIPE/target/classes" com.synexia.m3.M3CountedSdkRecipe --check .
+          java -cp "$RECIPE/target/classes" jdk.internal.m3.M3CountedSdkRecipe --check .
       - name: Compile and run real M3 owner and core counted JUnit contracts
         run: |
           set -eu

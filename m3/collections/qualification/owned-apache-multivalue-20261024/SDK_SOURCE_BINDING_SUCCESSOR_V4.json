@@ -171,7 +171,7 @@
   }
  ],
  "recipe": {
-  "path": "m3/collections/recipe/owned-apache-multivalue-20261024/src/main/resources/com/synexia/rewrite/hash-pinned-java/apache-multivalue-v2-to-v3/manifest.tsv",
+  "path": "m3/collections/recipe/owned-apache-multivalue-20261024/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/apache-multivalue-v2-to-v3/manifest.tsv",
   "bytes": 1054,
   "sha256": "9aeb000a95f9f4bdcdf5b55c1b7d4017d87dbab6d577947da5e7c995494bf441",
   "gitBlob": "c4452e99dfd309105a82d375dc3c5bee8d76e9dc"

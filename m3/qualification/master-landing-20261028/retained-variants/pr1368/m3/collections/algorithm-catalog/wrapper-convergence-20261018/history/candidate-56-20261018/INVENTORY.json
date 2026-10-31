@@ -1,5 +1,5 @@
 {
-  "task": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018",
+  "task": "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018",
   "source_files": [
     {
       "path": "catalogue/AST_BUILD_STATUS.md",

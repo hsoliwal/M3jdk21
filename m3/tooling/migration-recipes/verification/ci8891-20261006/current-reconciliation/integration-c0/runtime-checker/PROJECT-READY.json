@@ -102,7 +102,7 @@
       "bytes": 29472,
       "gitBlob": "f01596caba6af1bf75d9da908ee9523e4f013763",
       "mode": "100644",
-      "path": "src/test/java/com/synexia/rewrite/Rf0RecipeTest.java",
+      "path": "src/test/java/jdk/internal/m3/rewrite/Rf0RecipeTest.java",
       "sha256": "00c17108cc43c398022f4023fab69f071fb6f6572d90529e5250429904b084ee"
     },
     {
@@ -231,7 +231,7 @@
         "bytes": 29472,
         "gitBlob": "f01596caba6af1bf75d9da908ee9523e4f013763",
         "mode": "100644",
-        "path": "src/test/java/com/synexia/rewrite/Rf0RecipeTest.java",
+        "path": "src/test/java/jdk/internal/m3/rewrite/Rf0RecipeTest.java",
         "sha256": "00c17108cc43c398022f4023fab69f071fb6f6572d90529e5250429904b084ee"
       },
       {

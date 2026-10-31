@@ -12,7 +12,7 @@
       "selected_preimage_sha256": "11e448e0f92eb751f8399affda3e5f4d95a5a8856e7719eb69446e35fa037233",
       "selected_postimage_sha256": "96067f630bcf3288c69410151759fa738fd5968daccf68cd1aed2aeade38fc7b",
       "final_manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
-      "selection_record": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/manifest.tsv",
+      "selection_record": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/m3-current-master-convergence-20261019/manifest.tsv",
       "scope": "The current unified recipe explicitly removes the subsequently merged optional endpoint guard. The current SDK/module/native receipts qualify this exact inverse. An old KEEP row alone does not authorize it.",
       "historical_selection": {
         "source_base_commit": "c2a8733f6eebaadcc206a61d08906bfd8b6d60dc",
@@ -20,7 +20,7 @@
         "sha256": "96067f630bcf3288c69410151759fa738fd5968daccf68cd1aed2aeade38fc7b",
         "optional_guard_sha256": "11e448e0f92eb751f8399affda3e5f4d95a5a8856e7719eb69446e35fa037233",
         "resource_evidence": {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/rowtree-resources/attempt02/RECEIPT.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/rowtree-resources/attempt02/RECEIPT.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/rowtree-resources/attempt02/RECEIPT.json",
@@ -32,7 +32,7 @@
       },
       "evidence": [
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-sdk/receipt.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-sdk/receipt.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-sdk/receipt.json",
@@ -52,7 +52,7 @@
           "log_sha256": "d6bf20f3fd1ae04177b406b727c8679f8266880ed0800b057d31dcb6fde2e191"
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/verification/receipt.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/verification/receipt.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/verification/receipt.json",
@@ -73,7 +73,7 @@
           "console_aborted": 2
         },
         {
-          "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-native-convergence-attempt01/execution/RECEIPT.json",
+          "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-native-convergence-attempt01/execution/RECEIPT.json",
           "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
           "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
           "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-native-convergence-attempt01/execution/RECEIPT.json",
@@ -141,7 +141,7 @@
   ],
   "final_selected_module_and_all_native": "PASS_CURRENT_MASTER_9A164C31_MANIFEST_5BB24C67",
   "sdk": {
-    "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-sdk/receipt.json",
+    "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-sdk/receipt.json",
     "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
     "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
     "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-sdk/receipt.json",
@@ -173,7 +173,7 @@
   },
   "current_collection_receipts": [
     {
-      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/verification/receipt.json",
+      "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/verification/receipt.json",
       "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
       "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
       "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/verification/receipt.json",
@@ -194,7 +194,7 @@
       "console_aborted": 2
     },
     {
-      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/VERIFIER_EXECUTION.json",
+      "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/VERIFIER_EXECUTION.json",
       "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
       "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
       "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-master-reconciliation/VERIFIER_EXECUTION.json",
@@ -203,7 +203,7 @@
       "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
     },
     {
-      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-native-convergence-attempt01/execution/RECEIPT.json",
+      "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-native-convergence-attempt01/execution/RECEIPT.json",
       "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
       "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
       "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-native-convergence-attempt01/execution/RECEIPT.json",
@@ -226,7 +226,7 @@
       "scope": "Complete collections JUnit suite with ten required production libraries; tests may explicitly exercise Java paths. No native UI or mobile execution."
     },
     {
-      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-native-convergence-attempt01/execution/canonical-output/receipt.json",
+      "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-native-convergence-attempt01/execution/canonical-output/receipt.json",
       "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
       "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
       "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-native-convergence-attempt01/execution/canonical-output/receipt.json",
@@ -237,7 +237,7 @@
   ],
   "current_swing_receipts": [
     {
-      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
+      "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
       "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
       "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
       "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/ADMISSION.json",
@@ -246,7 +246,7 @@
       "publication_state": "PUBLISHED_CANONICAL_PR_OPEN_DRAFT"
     },
     {
-      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
+      "canonical_path": "m3-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",
       "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
       "canonical_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12528",
       "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/delivery-metadata/current-swing-9a164c31/MODULE_ADMISSION.json",

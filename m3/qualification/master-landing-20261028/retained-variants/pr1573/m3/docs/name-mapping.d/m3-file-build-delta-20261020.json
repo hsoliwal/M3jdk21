@@ -6,7 +6,7 @@
   "target_repository": "hsoliwal/M3jdk21",
   "target_baseline": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
   "intake_mode": "INDEPENDENT_APACHE_MODULE",
-  "recipe_owner": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017",
+  "recipe_owner": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017",
   "dataset": "file-delta-20261020",
   "source_revision_disposition": "The engine and frozen source/class delta contract are pinned above. The qualified dataset revision and result hashes are recorded in the publication handoff.",
   "status": "BOUNDED_EXISTING_OWNER_EXTENSION",
@@ -48,12 +48,12 @@
   ],
   "public_jdk_contracts_renamed": false,
   "new_payload_store": false,
-  "synexia_runtime_dependency_added": false,
+  "m3_runtime_dependency_added": false,
   "native_symbols_added": false,
   "abi_equivalence_claimed": false,
   "build_task_skipping_implemented": false,
   "whole_family_phase_advanced": false,
-  "recipe_name": "com.synexia.m3jdk.AstBuildReverse20261017",
+  "recipe_name": "jdk.internal.m3.m3jdk.AstBuildReverse20261017",
   "recipe_engine_revision": "f04fbac91a7891e64b77c7b24cef1ab75ec88144",
   "contract_revision": "f35e7eb0c6a50c41858e290f8641ab263273510d"
 }

@@ -20,7 +20,7 @@ SOURCE_PREFIX = "m3/collections/interop/src/"
 ORIGINAL_VERIFIER = (
     "m3/collections/interop/qualification/current-census-superset-20261022/"
     "verify_superset.py")
-RECIPE = "com.synexia.m3.M3Jdk21InteropThreeTestCompile20261022"
+RECIPE = "jdk.internal.m3.M3Jdk21InteropThreeTestCompile20261022"
 TEST_ROOT = SOURCE_PREFIX + "test/java/com/m3/collections/interop/"
 APPROVED = {
     TEST_ROOT + "M3ApacheCollectionsTest.java": (

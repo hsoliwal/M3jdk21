@@ -16,7 +16,7 @@ import subprocess
 
 ROOT = Path(__file__).resolve().parents[4]
 OLD_DIR = (ROOT / "m3/tooling/migration-recipes/src/main/resources"
-           "/com/synexia/rewrite/hash-pinned-java/m3-index-path-rank-20261017")
+           "/jdk/internal/m3/rewrite/hash-pinned-java/m3-index-path-rank-20261017")
 NEW_DIR = ROOT / "m3/collections/qualification/indexpath-bulk-20261021"
 OLD_NAMES = {
     "m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java",

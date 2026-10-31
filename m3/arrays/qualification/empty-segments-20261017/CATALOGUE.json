@@ -4,7 +4,7 @@
   "category": "ARRAYS / SEGMENTED_INDEXING / DUPLICATE_CUMULATIVE_BOUNDARIES",
   "operation": "immutable byte/UTF-16/int/long join scalar lookup and segment descriptors",
   "state": "RECIPE_RECEIVED_LOCAL_LINUX_JAVA_JNI_VALIDATED",
-  "canonical_recipe_owner": "hsoliwal/com.synexia / synexia-openrewrite-recipes",
+  "canonical_recipe_owner": "hsoliwal/com.synexia / m3-openrewrite-recipes",
   "target_mode": "INDEPENDENT_APACHE_MODULE",
   "receiving_phase": "STRING remains active; array-family runtime promotion is not claimed",
   "first_party_attribution": "Copyright 2026 Hitesh Soliwal and contributors; Apache-2.0",
@@ -87,10 +87,10 @@
   ],
   "donors": [
     {
-      "id": "synexia-suffix-bound",
+      "id": "m3-suffix-bound",
       "disposition": "ADAPT",
       "revision": "10e8628b2479e56f6f841f160233d3a8bf04a6db",
-      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexSuffixArray.java",
+      "path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexSuffixArray.java",
       "blob": "a615902abd072c382959cfb99ac4e3fc2a42a298",
       "url": "https://github.com/hsoliwal/com.synexia/blob/10e8628b2479e56f6f841f160233d3a8bf04a6db/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexSuffixArray.java",
       "license": "Apache-2.0",
@@ -107,10 +107,10 @@
       "fit": "The target already uses low + ((high-low) >>> 1) and first-greater upperBound; reuse primitive control structure locally without a new module dependency."
     },
     {
-      "id": "synexia-joined-byte-empty-descriptors",
+      "id": "m3-joined-byte-empty-descriptors",
       "disposition": "EVIDENCE_ONLY",
       "revision": "10e8628b2479e56f6f841f160233d3a8bf04a6db",
-      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedByteSequence.java",
+      "path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexJoinedByteSequence.java",
       "blob": "b4fab9a449fb99d1225d8ff908122688ef25822d",
       "url": "https://github.com/hsoliwal/com.synexia/blob/10e8628b2479e56f6f841f160233d3a8bf04a6db/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedByteSequence.java",
       "license": "Apache-2.0",

@@ -67,7 +67,7 @@ jobs:
               if hashlib.sha256(data).hexdigest() != expected:
                   raise SystemExit('source pre/postimage SHA256 invalid')
           receipt = Path('m3/collections/interop/qualification/arrayification-var-20261022/source-handoff.tsv').read_text()
-          if 'com.synexia.m3.M3Jdk21InteropArrayificationVar20261022' not in receipt:
+          if 'jdk.internal.m3.M3Jdk21InteropArrayificationVar20261022' not in receipt:
               raise SystemExit('missing canonical Synexia source receipt')
           print('M3_FIVE_LIBRARY_VAR_SOURCE_RECEIVER_PASS')
           PY

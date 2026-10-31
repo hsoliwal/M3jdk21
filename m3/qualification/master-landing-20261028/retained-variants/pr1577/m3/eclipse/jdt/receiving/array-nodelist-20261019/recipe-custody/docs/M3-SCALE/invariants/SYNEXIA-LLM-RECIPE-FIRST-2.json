@@ -5,9 +5,9 @@
   "missingEvidence": "HOLD",
   "canonicalDocument": "docs/M3-SCALE/invariants/SYNEXIA-LLM-RECIPE-FIRST-2.md",
   "canonicalRepository": "hsoliwal/com.synexia",
-  "canonicalModule": "synexia-openrewrite-recipes",
-  "policyRecipe": "com.synexia.rewrite.M3RecipeCustody",
-  "policyCrate": "synexia-openrewrite-recipes/verification/recipe-custody-20261006",
+  "canonicalModule": "m3-openrewrite-recipes",
+  "policyRecipe": "jdk.internal.m3.rewrite.M3RecipeCustody",
+  "policyCrate": "m3-openrewrite-recipes/verification/recipe-custody-20261006",
   "requires": [
     "INVENTORY_EXACT_TREE_AND_HISTORY",
     "REUSE_CANONICAL_OWNER",
@@ -40,11 +40,11 @@
   "finiteTestsImplyUniversalProof": false,
   "policyRecordGrantsPromotionAuthority": false,
   "rootAgentPolicy": "AGENTS.md",
-  "moduleAgentPointer": "synexia-openrewrite-recipes/AGENTS.md",
+  "moduleAgentPointer": "m3-openrewrite-recipes/AGENTS.md",
   "externalProductBoundary": "Preserve docs/M3JDK21_DONOR_BOUNDARY.md; explicit target owns runtime and promotion.",
   "enforcementBoundary": "Existing host admission remains authoritative. Source-seal tests verify custody/replay/refusal, not global runtime enforcement or evidence authenticity.",
-  "serialReviewPolicyRecipe": "com.synexia.m3.SerialReviewInvariant20261019",
-  "serialReviewPolicyCrate": "synexia-openrewrite-recipes/verification/parser-collections-sdk-20261019",
+  "serialReviewPolicyRecipe": "jdk.internal.m3.SerialReviewInvariant20261019",
+  "serialReviewPolicyCrate": "m3-openrewrite-recipes/verification/parser-collections-sdk-20261019",
   "serialRefinementRequirements": [
     "STANDING_REQUIREMENT_FOR_FUTURE_CODING_TASKS",
     "ACTUAL_OWNER_AND_SMALLEST_USEFUL_ATOM",
@@ -60,7 +60,7 @@
   "reviewCatalogue": {
     "owner": "tools/short-flag-query/reviews/*.tsv",
     "columns": ["category", "candidate", "source", "revision_or_reference", "rights", "complexity", "contract_comparison", "decision", "qualification"],
-    "search": "python synexia-openrewrite-recipes/verification/materialization-leases-20261015/verify.py --category <category>",
+    "search": "python m3-openrewrite-recipes/verification/materialization-leases-20261015/verify.py --category <category>",
     "updateRule": "Append observations or explicit supersession; retain earlier accepted, rejected, failed, deferred and unmeasured alternatives.",
     "comparisonAxes": ["correctness_and_assumptions", "null_exception_effect_ownership_api_jni_abi_compatibility", "time_space_allocation_complexity", "measured_resources_or_NOT_MEASURED", "license_notice_provenance_adaptation_rights"],
     "newTransformationAuthority": false

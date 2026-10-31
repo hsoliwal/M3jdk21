@@ -1,6 +1,6 @@
 {
   "captured_utc": "2026-10-18T04:45:19.094817+00:00",
-  "source": "/workspace/scratch/817ecea506c1/synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018",
+  "source": "/workspace/scratch/817ecea506c1/m3-work/m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018",
   "baseline_repository": "/workspace/scratch/817ecea506c1/M3JDK21",
   "baseline_commit": "0d73745d7203123533dce8f8fb264ba2746f6d2d",
   "source_lineage": "UNCOMMITTED_LOCAL_CANDIDATE_NO_RECIPE_OR_RECEIPT_PRESENT_IN_TASK",

@@ -1,6 +1,6 @@
 {
   "schema": "m3-wrapper-sdk-acceptance/v1",
-  "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "recipe": "jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017",
   "engine_changes": [],
   "datasets": [
     {

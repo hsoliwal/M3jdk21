@@ -28,8 +28,8 @@ jobs:
           set -euo pipefail
           ROOT=m3/collections/qualification/m3-long-path-input-budget-20261018/recipe
           mvn -B -ntp -f "$ROOT/pom.xml" package
-          java -cp "$ROOT/target/classes" com.synexia.m3.M3LongPathInputBudgetRecipeSelfTest "$ROOT/templates"
-          java -cp "$ROOT/target/classes" com.synexia.m3.M3LongPathInputBudgetRecipe --check . "$ROOT/templates"
+          java -cp "$ROOT/target/classes" jdk.internal.m3.M3LongPathInputBudgetRecipeSelfTest "$ROOT/templates"
+          java -cp "$ROOT/target/classes" jdk.internal.m3.M3LongPathInputBudgetRecipe --check . "$ROOT/templates"
       - name: Strict Java21 Java-only contract
         run: |
           set -euo pipefail

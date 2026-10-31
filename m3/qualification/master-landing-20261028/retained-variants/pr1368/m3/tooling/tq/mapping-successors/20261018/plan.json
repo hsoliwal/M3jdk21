@@ -130,7 +130,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0001-M3StringFacts.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0001-M3StringFacts.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0015-0001-M3StringFacts.java.txt.txt",
@@ -138,7 +138,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0002-M3StringPrecomputeBridge.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0002-M3StringPrecomputeBridge.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0016-0002-M3StringPrecomputeBridge.java.txt.txt",
@@ -146,7 +146,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0003-System.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0003-System.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0017-0003-System.java.txt.txt",
@@ -154,7 +154,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0004-Matcher.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0004-Matcher.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0018-0004-Matcher.java.txt.txt",
@@ -162,7 +162,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0005-JavaLangAccess.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0005-JavaLangAccess.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0019-0005-JavaLangAccess.java.txt.txt",
@@ -170,7 +170,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0006-M3RegexReuseTest.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0006-M3RegexReuseTest.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0020-0006-M3RegexReuseTest.java.txt.txt",
@@ -178,7 +178,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/manifest.tsv",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/manifest.tsv",
       "before": null,
       "after": {
         "resource": "payloads/after/0021-manifest.tsv.txt",
@@ -186,7 +186,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0001-M3StringFacts.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0001-M3StringFacts.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0022-0001-M3StringFacts.java.txt.txt",
@@ -194,7 +194,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0002-M3StringPrecomputeBridge.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0002-M3StringPrecomputeBridge.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0023-0002-M3StringPrecomputeBridge.java.txt.txt",
@@ -202,7 +202,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0003-System.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0003-System.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0024-0003-System.java.txt.txt",
@@ -210,7 +210,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0004-Matcher.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0004-Matcher.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0025-0004-Matcher.java.txt.txt",
@@ -218,7 +218,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0005-JavaLangAccess.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0005-JavaLangAccess.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0026-0005-JavaLangAccess.java.txt.txt",
@@ -226,7 +226,7 @@
       }
     },
     {
-      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0006-M3RegexReuseTest.java.txt",
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0006-M3RegexReuseTest.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0027-0006-M3RegexReuseTest.java.txt.txt",
@@ -475,7 +475,7 @@
       }
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-tq-sparse-lookup.yml",
+      "path": "m3-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-tq-sparse-lookup.yml",
       "before": null,
       "after": {
         "resource": "payloads/after/0049-m3jdk21-tq-sparse-lookup.yml.txt",
@@ -483,7 +483,7 @@
       }
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/M3TQ.java.txt",
+      "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/M3TQ.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0050-M3TQ.java.txt.txt",
@@ -491,7 +491,7 @@
       }
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/M3TQSparseContainmentTest.java.txt",
+      "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/M3TQSparseContainmentTest.java.txt",
       "before": null,
       "after": {
         "resource": "payloads/after/0051-M3TQSparseContainmentTest.java.txt.txt",
@@ -499,7 +499,7 @@
       }
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/manifest.tsv",
+      "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/manifest.tsv",
       "before": null,
       "after": {
         "resource": "payloads/after/0052-manifest.tsv.txt",

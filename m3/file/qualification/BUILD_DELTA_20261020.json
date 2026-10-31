@@ -4,7 +4,7 @@
   "product": "M3JDK21 (integrated JDK SDK; not optional Synexia runtime wrapper)",
   "source_repo": "hsoliwal/com.synexia",
   "source_branch": "aix/m3jdk21-maven-gradle-file-delta-20261020",
-  "canonical_recipe": "com.synexia.m3.M3Jdk21BuildDelta20261020",
+  "canonical_recipe": "jdk.internal.m3.M3Jdk21BuildDelta20261020",
   "base_master": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
   "target_branch": "aix/m3jdk21-integrated-build-delta-20261020",
   "scope": [

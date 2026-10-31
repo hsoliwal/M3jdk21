@@ -6,7 +6,7 @@
   "new_type_or_naming_migration": false,
   "reviewed_exclusion": "No naming migration: current public target owner and signatures remain unchanged; this packet records the existing owner refinement rather than introducing another name.",
   "canonical_recipe_owner": "hsoliwal/com.synexia",
-  "canonical_recipe_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/filtered-set-identity-20261018",
+  "canonical_recipe_path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/filtered-set-identity-20261018",
   "engine_revision": "140c263a90f9803b9c46103c63355a286e0515f0",
   "scope": "SEPARATE_APACHE_MODULE_NOT_JDK_BACKEND_PROMOTION",
   "receiving_stage_advance": false,

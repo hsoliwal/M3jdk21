@@ -4,7 +4,7 @@
   "sourcePr": 11964,
   "commit": "903346ea342e0abbdee5fa8849a341848ba259b9",
   "tree": "2e5d96c369acbe8d4de0f35a2b89f6bb1b9892de",
-  "modulePath": "synexia-openrewrite-recipes/recipes/text-boundaries-20261014/utf8-receiver-sdk-2530-20261017/sdk",
+  "modulePath": "m3-openrewrite-recipes/recipes/text-boundaries-20261014/utf8-receiver-sdk-2530-20261017/sdk",
   "moduleGitTree": "b57eb5b8e1845df4fc13d30f747607caa382a4e3",
   "receiverCorePath": "m3/runtime-integration/utf8-cursor-20261014/recipe/canonical",
   "taskRoot": "386ad0b7902680aafac0fabf390d2ba0c25915b5c4e7f1e500c21ae3c246bd50",

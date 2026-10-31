@@ -166,7 +166,7 @@
       "resource": "after-025.txt"
     },
     {
-      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "path": "m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
       "before": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
       "after": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
       "resource": "after-026.txt"
@@ -196,7 +196,7 @@
       "resource": "after-030.txt"
     },
     {
-      "path": "m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+      "path": "m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
       "before": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
       "after": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
       "resource": "after-031.txt"

@@ -27,12 +27,12 @@ on:
       - 'm3/migration/src/com/m3/migration/ExactFileRecipe.java'
       - 'm3/migration/test/RecipeContractTest.java'
       - 'm3/migration/test/test_migration.py'
-      - 'm3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv'
+      - 'm3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv'
       - 'm3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv'
       - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv'
       - 'm3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv'
       - 'm3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv'
-      - 'm3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv'
+      - 'm3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv'
       - 'src/java.base/share/classes/java/util/regex/Matcher.java'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3Address28.java'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java'
@@ -88,12 +88,12 @@ on:
       - 'm3/migration/src/com/m3/migration/ExactFileRecipe.java'
       - 'm3/migration/test/RecipeContractTest.java'
       - 'm3/migration/test/test_migration.py'
-      - 'm3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv'
+      - 'm3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv'
       - 'm3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv'
       - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv'
       - 'm3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv'
       - 'm3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv'
-      - 'm3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv'
+      - 'm3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv'
       - 'src/java.base/share/classes/java/util/regex/Matcher.java'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3Address28.java'
       - 'src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java'
@@ -222,12 +222,12 @@ jobs:
             /m3/migration/src/com/m3/migration/ExactFileRecipe.java
             /m3/migration/test/RecipeContractTest.java
             /m3/migration/test/test_migration.py
-            /m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv
+            /m3/tooling/cb/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cb/manifest.tsv
             /m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv
             /m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv
             /m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv
             /m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv
-            /m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv
+            /m3/tooling/vi/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-vi/manifest.tsv
             /src/java.base/share/classes/java/util/regex/Matcher.java
             /src/java.base/share/classes/jdk/internal/mindex/M3Address28.java
             /src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java
@@ -397,7 +397,7 @@ jobs:
                       content=path.read_bytes()
                       if len(content)!=record[stream+"Bytes"] or hashlib.sha256(content).hexdigest()!=record[stream+"Sha256"]:raise RuntimeError("CLI output receipt drift")
               baseline_error=(root/"provider"/records_by_label["baseline-validate"]["stderrPath"]).read_text(encoding="utf-8")
-              if "target hash drift: src/java.base/share/classes/jdk/internal/mindex/M3TQ.java" not in baseline_error or "missing file: synexia-openrewrite-recipes/" not in baseline_error:raise RuntimeError("original baseline diagnostics absent")
+              if "target hash drift: src/java.base/share/classes/jdk/internal/mindex/M3TQ.java" not in baseline_error or "missing file: m3-openrewrite-recipes/" not in baseline_error:raise RuntimeError("original baseline diagnostics absent")
               marker=(root/"provider"/records_by_label["current-validate"]["stdoutPath"]).read_text(encoding="utf-8")
               completion=(root/"provider"/records_by_label["current-complete"]["stderrPath"]).read_text(encoding="utf-8").splitlines()
               if marker!="MIGRATION_MANIFEST_VALID completion=INCOMPLETE\n" or len(completion)!=158:raise RuntimeError("unchanged completion boundaries lost")

@@ -7,6 +7,6 @@ description: >
   receipt while retaining Synexia as the reusable recipe/evidence owner.
 recipeList:
   - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
-      crateName: synexia-a3-portable-mastery-gate
+      crateName: m3-a3-portable-mastery-gate
   - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
-      crateName: synexia-a3-portable-mastery-gate-text
+      crateName: m3-a3-portable-mastery-gate-text

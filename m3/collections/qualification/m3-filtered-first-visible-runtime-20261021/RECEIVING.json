@@ -8,8 +8,8 @@
   "canonical_recipe_pr": 12666,
   "canonical_recipe_pr_url": "https://github.com/hsoliwal/com.synexia/pull/12666",
   "canonical_recipe_revision": "0a8af61d5ca4361612b46aa071a14d215e328fc3",
-  "canonical_recipe": "com.synexia.m3.FilteredFirstVisibleRuntime20261021",
-  "canonical_recipe_path": "synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021",
+  "canonical_recipe": "jdk.internal.m3.FilteredFirstVisibleRuntime20261021",
+  "canonical_recipe_path": "m3-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021",
   "canonical_recipe_stack_prerequisite": {
     "pull_request": 12650,
     "revision": "ad4ff6084a3b95c9e5dc993eff96efef03ea8f2c"
@@ -18,7 +18,7 @@
     "repository": "hsoliwal/M3JDK21",
     "pull_request": 1603,
     "revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
-    "target_manifest_path": "synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/TARGETS.json",
+    "target_manifest_path": "m3-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/TARGETS.json",
     "target_manifest_sha256": "4507907e05eb0ce4db04351c9d08a2e644f92639fc502836d4d4114e099aa775"
   },
   "receiving_baseline": "6d9bad615851f346e3062e3034ccd74cbe2776af",
@@ -59,7 +59,7 @@
     {
       "repository": "hsoliwal/com.synexia",
       "commit": "0a8af61d5ca4361612b46aa071a14d215e328fc3",
-      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-first-visible-runtime-20261021-wrapper-owner/M3FilteredViews.java.txt",
+      "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-filtered-first-visible-runtime-20261021-wrapper-owner/M3FilteredViews.java.txt",
       "sha256": "4209587c4cc43537e1ce0d7b316d1824a4de0f25154fef1a87cbe7e9ae9871ea",
       "git_blob": "d88392fdd5fe0674ed13adf544585654dc8cfc59",
       "target_path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
@@ -68,7 +68,7 @@
     {
       "repository": "hsoliwal/com.synexia",
       "commit": "0a8af61d5ca4361612b46aa071a14d215e328fc3",
-      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-first-visible-runtime-20261021-selection-probe/M3FirstVisibleAtomContract.java.txt",
+      "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-filtered-first-visible-runtime-20261021-selection-probe/M3FirstVisibleAtomContract.java.txt",
       "sha256": "cea097e4b1cf67a3cd2d8fdd4df5f29751db7d767daf785732c350003acede29",
       "git_blob": "1e2e0ad454cd091ad5c8f165c18cc6d0a115b14e",
       "target_path": "m3/collections/src/test/java/com/m3/collections/M3FirstVisibleAtomContract.java",
@@ -77,7 +77,7 @@
     {
       "repository": "hsoliwal/com.synexia",
       "commit": "0a8af61d5ca4361612b46aa071a14d215e328fc3",
-      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-first-visible-runtime-20261021-selection-test/M3FirstVisibleAtomTest.java.txt",
+      "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-filtered-first-visible-runtime-20261021-selection-test/M3FirstVisibleAtomTest.java.txt",
       "sha256": "c16fa40bc6768618df372d8d43936f5761d3375c35dfeeb9da15b84dc4fcb44d",
       "git_blob": "160212a78452e6e97c84cc2bea24b94ea960306d",
       "target_path": "m3/collections/src/test/java/com/m3/collections/M3FirstVisibleAtomTest.java",
@@ -89,7 +89,7 @@
   "preserved_native_lane": {
     "pull_request": 1642,
     "revision": "6d9bad615851f346e3062e3034ccd74cbe2776af",
-    "canonical_recipe": "com.synexia.m3.MaskNativeAtomsRuntime20261021",
+    "canonical_recipe": "jdk.internal.m3.MaskNativeAtomsRuntime20261021",
     "canonical_revision": "ad4ff6084a3b95c9e5dc993eff96efef03ea8f2c",
     "files": [
       {
@@ -154,20 +154,20 @@
   },
   "canonical_evidence": {
     "three_stage_qualification": {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/results.json",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/results.json",
       "sha256": "275770822abb8985e09a99f435f1e0958d03db5463eb1ba7d95cc7a46d6c0cd7",
       "commands": 44,
       "exact_output_comparisons": 38,
       "normal_cases_per_stage": 64,
       "caller_owned_failure_probes_per_stage": 1104,
       "qualification_manifest": {
-        "path": "synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/FILES.json",
+        "path": "m3-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/FILES.json",
         "sha256": "f97d250bc8a2eda0e46808935ce56ee200344a175ac44d0e1532e7c88b9a0112",
         "files": 76
       }
     },
     "emitted_source_verification": {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/verification/collections/evidence/results.json",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/verification/collections/evidence/results.json",
       "sha256": "5a784073627b22c0bd9358df79c51eb5adb7d775f3366013117711f061283071",
       "commands": 9,
       "exact_output_comparisons": 6,
@@ -178,7 +178,7 @@
     },
     "selection_tape_sha256": "53a3ac80b4ba43ad3df0c2397041513fb02346c2ba2cb2ddebc12b7540329b99",
     "source_replay": {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/evidence/recipe-sdk/recipe-proof.tsv",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/evidence/recipe-sdk/recipe-proof.tsv",
       "sha256": "688e24e3c80dfa2ea64bc6cfbb952291b3eeb5898a3cd8a6e20d2565513cecfe",
       "scope": "source-replay-only",
       "file_phases": 3,
@@ -186,7 +186,7 @@
       "synthetic_chain_refusal_controls": 8
     },
     "isolated_copier": {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/evidence/copier/results.json",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/evidence/copier/results.json",
       "sha256": "066a66dd283ee9eee30bf862a13a4f300d200b7f77a590a5752a579d38e6f829",
       "commands": 8,
       "refusals": 6,
@@ -197,7 +197,7 @@
   "canonical_catalogue": {
     "repository": "hsoliwal/com.synexia",
     "revision": "0a8af61d5ca4361612b46aa071a14d215e328fc3",
-    "path": "synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/catalogue.tsv",
+    "path": "m3-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/catalogue.tsv",
     "sha256": "baca96aaa58cd6504544bf63b93ded22da3b09c08e65a006680a05e3598bd548",
     "row_ids": [
       "first_visible_set_atom_20261021",
@@ -209,7 +209,7 @@
     "external_sources": "LeetCode, HackerRank and GeeksforGeeks are category/compatibility references only; no challenge or editorial implementation body copied"
   },
   "canonical_notice": {
-    "path": "synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/NOTICE.md",
+    "path": "m3-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/NOTICE.md",
     "sha256": "761011acd6947fb98c03feaaa4d3422ea251aec9a4e6ad31c33b315c7e81d683",
     "target_notice_retention": "Canonical NOTICE retained verbatim as the prefix of this target packet NOTICE.md; target-specific receiving attribution appended"
   },
@@ -311,7 +311,7 @@
       {
         "repository": "hsoliwal/com.synexia",
         "revision": "0a8af61d5ca4361612b46aa071a14d215e328fc3",
-        "path": "synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/verification/collections/verify_emitted.py",
+        "path": "m3-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/verification/collections/verify_emitted.py",
         "sha256": "962e81d03b4af96e1d647b9bb6ca90ecfd65ffec38a309dee7683f5c2368809d"
       },
       {

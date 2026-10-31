@@ -8,7 +8,7 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[4]
 AST = ROOT / "m3/ast"
-CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-universal-ast-dag-20261020"
+CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-universal-ast-dag-20261020"
 MANIFEST = CRATE / "manifest.tsv"
 
 def sha(path):

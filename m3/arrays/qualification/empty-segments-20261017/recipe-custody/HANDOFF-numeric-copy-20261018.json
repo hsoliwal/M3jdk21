@@ -2,7 +2,7 @@
   "schema": "M3_EXISTING_PUBLIC_RECIPE_HANDOFF_V1",
   "label": "numeric-copy-20261018",
   "canonical_repository": "hsoliwal/com.synexia",
-  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "canonical_crate": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
   "canonical_engine_baseline": "8f8200375d8d403b58e855ee5db02f2e8fac33a8",
   "canonical_successor_publication": "Recorded by the later pinned publication receipt; this staging record makes no publication claim.",
   "public_baseline": "4b24824c3aa09d802121447f8970d442a855f064",
@@ -23,7 +23,7 @@
       "sha256": "ae731c5780c73a98f6fc81079b5f863613fddea50d2a6c893c6dfd2aa2030b5c"
     },
     {
-      "path": "src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+      "path": "src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java",
       "sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43"
     },
     {
@@ -37,19 +37,19 @@
   ],
   "existing_engine_sources": [
     {
-      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625"
     },
     {
-      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
       "sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef"
     },
     {
-      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
       "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4"
     },
     {
-      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java",
       "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
     }
   ],
@@ -84,7 +84,7 @@
       "sha256": "536adf69f0e86fa8eb5ecbe441f936a164578399c8633af861238f7678e54557",
       "bytes": 1847,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/HOST_CAP_LINEAGE.json"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/HOST_CAP_LINEAGE.json"
       ]
     },
     {
@@ -108,7 +108,7 @@
       "sha256": "108b91dba8e98eefcfab1ff463bafbc7cf91206d15b506e816566de759c62141",
       "bytes": 4044,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/numeric-copy-foss.tsv"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/numeric-copy-foss.tsv"
       ]
     },
     {
@@ -116,7 +116,7 @@
       "sha256": "aec98ec60ff5757aa570d44e9fcadd4803421c9614d5448e80ce11cb72f3f853",
       "bytes": 17466,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/numeric-copy-results.json"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/numeric-copy-results.json"
       ]
     },
     {
@@ -124,7 +124,7 @@
       "sha256": "cf8dbe96e95421b68ffd10405954bc2d3fb10492d93500e1851ba4c194bdec16",
       "bytes": 489,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/DATASET.json"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/DATASET.json"
       ]
     },
     {
@@ -132,7 +132,7 @@
       "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23",
       "bytes": 747,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/ENGINE_EFFECTIVE.tsv"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/ENGINE_EFFECTIVE.tsv"
       ]
     },
     {
@@ -140,7 +140,7 @@
       "sha256": "3ca80832d5055372c861442da4828a73562ddcbc4b9e9d86c83b4783983260f5",
       "bytes": 589,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/MODES.tsv"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/MODES.tsv"
       ]
     },
     {
@@ -148,103 +148,103 @@
       "sha256": "ba9317a196c04c9190f017c852b22a4af335896b1ab915584ef56aa55977def1",
       "bytes": 534,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy.yml"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy.yml"
       ]
     },
     {
-      "path": "datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0003-M3ArrayCopySizeAgent.java.txt",
+      "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0003-M3ArrayCopySizeAgent.java.txt",
       "sha256": "d73537b80f827d774fbd0aa1918919a2e1747b9cc0b26d0b9c2c257b314e5585",
       "bytes": 531,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0003-M3ArrayCopySizeAgent.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0003-M3ArrayCopySizeAgent.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0004-M3ArrayNumericCopyCostProbe.java.txt",
+      "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0004-M3ArrayNumericCopyCostProbe.java.txt",
       "sha256": "cca6bab0a6b6ecccd952591a67c2c7a3f4599b56e8d44857bdc0b39028b5dc62",
       "bytes": 11658,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0004-M3ArrayNumericCopyCostProbe.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0004-M3ArrayNumericCopyCostProbe.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0005-M3Arrays.java.txt",
+      "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0005-M3Arrays.java.txt",
       "sha256": "3221d674ac9947c97d50967659176aa5bdf3db6a51e7e3574daa3d0792a6d83d",
       "bytes": 22433,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0005-M3Arrays.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0005-M3Arrays.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0006-M3ArrayNumericCopySelfTest.java.txt",
+      "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0006-M3ArrayNumericCopySelfTest.java.txt",
       "sha256": "546e85b54b595e5a8e49a2fb4959539b0641dc007c0bf807bfd77542a0568a45",
       "bytes": 19856,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0006-M3ArrayNumericCopySelfTest.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0006-M3ArrayNumericCopySelfTest.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0007-M3ArrayNumericCopyTest.java.txt",
+      "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0007-M3ArrayNumericCopyTest.java.txt",
       "sha256": "1f15ea9c2ae6f93e6bbe5952c72ae68cf4dc50831f82557cf2a3cf519f7ff83a",
       "bytes": 378,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0007-M3ArrayNumericCopyTest.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0007-M3ArrayNumericCopyTest.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/manifest.tsv",
+      "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/manifest.tsv",
       "sha256": "a0eff138a454b42d38fe6d625c6ea43ef7ff3d02b419244b746211493f74f509",
       "bytes": 991,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/manifest.tsv"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/manifest.tsv"
       ]
     },
     {
-      "path": "datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/pre/0005-M3Arrays.java.txt",
+      "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/pre/0005-M3Arrays.java.txt",
       "sha256": "8d6afc24c677adb7ba612071d34453c8a7d8b9e1a81ac27fb06bc3f62c673edd",
       "bytes": 17309,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/pre/0005-M3Arrays.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/pre/0005-M3Arrays.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0001-CATALOGUE.json.txt",
+      "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0001-CATALOGUE.json.txt",
       "sha256": "702c36947088f5a894b9d76726ee20ebbfd61eb14a64b5ef35e83a2865b5bfd5",
       "bytes": 8147,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0001-CATALOGUE.json.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0001-CATALOGUE.json.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0002-README.md.txt",
+      "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0002-README.md.txt",
       "sha256": "cbf6808232d4242ee055046f7ad25a44bebf0086dfe53766f43665766b362ba8",
       "bytes": 6619,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0002-README.md.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0002-README.md.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0008-ALGORITHM_CATALOGUE.tsv.txt",
+      "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0008-ALGORITHM_CATALOGUE.tsv.txt",
       "sha256": "50e6381eed8e06fe9c073298b8a4cf20ad853df096887c6c8510a40bedce6569",
       "bytes": 3406,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0008-ALGORITHM_CATALOGUE.tsv.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/0008-ALGORITHM_CATALOGUE.tsv.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/manifest.tsv",
+      "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/manifest.tsv",
       "sha256": "4369705d4578ac4c296ab6c818dc49db0461fcb14b358abf839e364748288a3a",
       "bytes": 504,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/manifest.tsv"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/manifest.tsv"
       ]
     },
     {
-      "path": "datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/pre/0008-ALGORITHM_CATALOGUE.tsv.txt",
+      "path": "datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/pre/0008-ALGORITHM_CATALOGUE.tsv.txt",
       "sha256": "1aad547fe2f419cf2f265a8f1d7c492779c1bbc86ef685bfafd47516a98a276e",
       "bytes": 2752,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/pre/0008-ALGORITHM_CATALOGUE.tsv.txt"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-numeric-copy/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-numeric-copy/pre/0008-ALGORITHM_CATALOGUE.tsv.txt"
       ]
     },
     {
@@ -260,7 +260,7 @@
       "sha256": "ca2677dba86f46e0bc5ffff14f5fd97e6eadc34c6b519906e002a94989f09692",
       "bytes": 4218,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/fixture/candidate/SDK_INPUTS.tsv"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/fixture/candidate/SDK_INPUTS.tsv"
       ]
     },
     {
@@ -268,7 +268,7 @@
       "sha256": "4dfc646b45dad6214452eb4de5888689916479de51b9cfac4268c426236ff999",
       "bytes": 883,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/fixture/candidate/SDK_RESULTS.tsv"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/fixture/candidate/SDK_RESULTS.tsv"
       ]
     },
     {
@@ -276,7 +276,7 @@
       "sha256": "0fa17586c52fef135b91691cea188429b544dcd5ed987d342b807bb3c81c2d8f",
       "bytes": 14679,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/fixture/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/fixture/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
       ]
     },
     {
@@ -484,7 +484,7 @@
       "sha256": "1f6796cfb9dc805b44223e02efe05596147be06052447c9f9d6d6bf7016a3365",
       "bytes": 4673,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/SDK_INPUTS.tsv"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/SDK_INPUTS.tsv"
       ]
     },
     {
@@ -492,7 +492,7 @@
       "sha256": "0f4c412e6b4ade2c05bb7afcec22efd626e89eebf0278762fad32c71ee593043",
       "bytes": 1301,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/SDK_RESULTS.tsv"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/SDK_RESULTS.tsv"
       ]
     },
     {
@@ -500,7 +500,7 @@
       "sha256": "f247eaf35f3dc536315bc90e01a6c318a882a65ff9316025c8f967754ea7169a",
       "bytes": 14808,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
       ]
     },
     {
@@ -684,7 +684,7 @@
       "sha256": "8d7e8099e64d381e98b5aaad8d9bc1c5a5fd997ed681117c946f7f671b30466d",
       "bytes": 27459,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-numeric-v1/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-numeric-v1/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
       ]
     },
     {
@@ -1060,7 +1060,7 @@
       "sha256": "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d",
       "bytes": 5855,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/pom.xml"
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/pom.xml"
       ]
     }
   ]

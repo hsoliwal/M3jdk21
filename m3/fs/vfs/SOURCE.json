@@ -18,10 +18,10 @@
   ],
   "intake_mode": "INDEPENDENT_APACHE_MODULE",
   "recipe_owners": [
-    "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
-    "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe"
+    "jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "jdk.internal.m3.rewrite.M3HashPinnedTextSnapshotRecipe"
   ],
-  "recipe_crate": "synexia-openrewrite-recipes/recipe-crates/m3fs-vfs-20261020",
+  "recipe_crate": "m3-openrewrite-recipes/recipe-crates/m3fs-vfs-20261020",
   "receiving_sequence_advanced": false,
   "source_rows": [
     {

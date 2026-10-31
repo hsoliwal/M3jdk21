@@ -7,8 +7,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[5]
 HERE = Path(__file__).resolve().parent
 CRATE = "m3jdk21-five-library-index-views-20261017"
-RES = HERE / "src/main/resources/com/synexia/rewrite/hash-pinned-java" / CRATE
-MIRROR = HERE / "canonical/src/main/resources/com/synexia/rewrite/hash-pinned-java" / CRATE
+RES = HERE / "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java" / CRATE
+MIRROR = HERE / "canonical/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java" / CRATE
 
 HISTORICAL_MANIFEST_SHA256 = "e6c0c9e779be05fafbf30158ec578a120a8154516462e71b75e03c333c27b78a"
 INDEX_PATH = "m3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveLibraryIndexViews.java"

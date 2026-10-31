@@ -45,7 +45,7 @@ jobs:
           import re
           from pathlib import Path
           root = Path.cwd().resolve()
-          receipt = root / "m3/docs/synexia-m3jdk21-eclipse-recipe-handoff-20261022.tsv"
+          receipt = root / "m3/docs/m3-m3jdk21-eclipse-recipe-handoff-20261022.tsv"
           lines = [line for line in receipt.read_text(encoding="utf-8").splitlines()
                    if line and not line.startswith("#")]
           if len(lines) != 5:
@@ -60,7 +60,7 @@ jobs:
                       or any(part in ("..", ".") for part in Path(relative).parts)):
                   raise SystemExit("unsafe or unsorted M3 handoff source path")
               last = relative
-              if not relative.endswith(".java") or not recipe.startswith("com.synexia.m3."):
+              if not relative.endswith(".java") or not recipe.startswith("jdk.internal.m3."):
                   raise SystemExit("invalid M3 product recipe binding")
               if (previous != "ABSENT" and not re.fullmatch("[0-9a-f]{64}", previous)):
                   raise SystemExit("invalid original preimage SHA-256")
@@ -83,7 +83,7 @@ jobs:
                   expected_row = "\t".join((
                       relative, historical, successor, "hsoliwal/com.synexia#12951",
                       "hsoliwal/com.synexia#12842", "hsoliwal/M3jdk21#1821",
-                      "com.synexia.rewrite.M3Jdk21ResourceLocksComposedSuccessor",
+                      "jdk.internal.m3.rewrite.M3Jdk21ResourceLocksComposedSuccessor",
                       "PENDING_RECIPE_AND_PRODUCT_CI"))
                   successor_rows = [row for row in successor_receipt.read_text(
                       encoding="utf-8").splitlines() if row and not row.startswith("#")]

@@ -29,9 +29,9 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Validate source-built recipe coordinate
-        run: python3 -S m3/synexia-import/pure-int-recipe-custody/verify-source-rewrite-coordinate.py
+        run: python3 -S m3/m3-import/pure-int-recipe-custody/verify-source-rewrite-coordinate.py
       - name: Install pinned source recipe custody
-        run: bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
+        run: bash m3/m3-import/pure-int-recipe-custody/install.sh "$PWD"
       - name: Target recipe/JUnit custody
         run: |
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \

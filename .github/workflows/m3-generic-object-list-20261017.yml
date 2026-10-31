@@ -29,7 +29,7 @@ jobs:
           set -euo pipefail
           RECIPE=m3/collections/qualification/m3-generic-object-list-20261017/recipe
           mvn -B -ntp -f "$RECIPE/pom.xml" verify
-          java -cp "$RECIPE/target/classes" com.synexia.m3.M3GenericObjectListRecipe --check .
+          java -cp "$RECIPE/target/classes" jdk.internal.m3.M3GenericObjectListRecipe --check .
       - name: Differential Java21 object List and indexed snapshot
         shell: bash
         run: |

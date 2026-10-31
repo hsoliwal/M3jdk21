@@ -78,7 +78,7 @@ contracts=[
     'M3IndexMaskCompactorSelfTest','M3NativeIndexRangeSelfTest',
     'M3RequiredExcludedMaskSelectorContract','M3RequiredExcludedMaskSelectorNativeContract']
 new_contracts=['M3FilteredListMutationProof','M3IndexOrderWindowContract']
-resource=repo/'m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-resource-probe/resources/com/synexia/rewrite/hash-pinned-java/m3-wrapper-index-resource-probe/M3IndexOrderWindowResourceProbe.java.txt'
+resource=repo/'m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/passes/index-resource-probe/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-wrapper-index-resource-probe/M3IndexOrderWindowResourceProbe.java.txt'
 resource_java=out/'probe-src/com/m3/collections/M3IndexOrderWindowResourceProbe.java'
 resource_java.parent.mkdir(parents=True,exist_ok=True)
 shutil.copyfile(resource,resource_java)

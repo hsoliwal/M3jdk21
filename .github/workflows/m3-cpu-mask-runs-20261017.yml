@@ -7,7 +7,7 @@ on:
       - 'm3/collections/src/test/java/com/m3/collections/M3CpuMaskRunsSelfTest.java'
       - 'm3/collections/recipe/cpu-mask-runs-20261017/**'
       - 'm3/collections/algorithm-catalog/cpu-mask-runs-20261017.tsv'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cpu-mask-runs-20261017/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cpu-mask-runs-20261017/**'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-cpu-mask-runs-20261017.yml'
       - '.github/workflows/m3-cpu-mask-runs-20261017.yml'
   workflow_dispatch:
@@ -37,7 +37,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ROOT=m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cpu-mask-runs-20261017
+          ROOT=m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-cpu-mask-runs-20261017
           cmp -s m3/collections/src/main/java/com/m3/collections/M3CpuMaskRuns.java "$ROOT/M3CpuMaskRuns.java.txt"
           cmp -s m3/collections/src/test/java/com/m3/collections/M3CpuMaskRunsSelfTest.java "$ROOT/M3CpuMaskRunsSelfTest.java.txt"
           echo 'dc6ff845c49c4a5691e17c362085eaf8721332613f4523a8ff0317f35ec54611  m3/collections/src/main/java/com/m3/collections/M3CpuMaskRuns.java' | sha256sum -c -
@@ -48,4 +48,4 @@ jobs:
         run: >
           mvn -B -ntp -f m3/collections/recipe/cpu-mask-runs-20261017/pom.xml
           org.openrewrite.maven:rewrite-maven-plugin:5.23.1:dryRun
-          -Drewrite.activeRecipes=com.synexia.m3.CpuMaskRuns20261017
+          -Drewrite.activeRecipes=jdk.internal.m3.CpuMaskRuns20261017

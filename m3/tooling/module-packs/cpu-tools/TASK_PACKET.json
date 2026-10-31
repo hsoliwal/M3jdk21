@@ -5,8 +5,8 @@
   "invariant_id": "M3-COMMUNITY-1-2-4",
   "base_commit": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
   "canonical_repository": "hsoliwal/com.synexia",
-  "canonical_recipe_home": "synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018",
-  "canonical_recipe": "com.synexia.m3jdk.CpuToolsJmod20261018",
+  "canonical_recipe_home": "m3-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018",
+  "canonical_recipe": "jdk.internal.m3.m3jdk.CpuToolsJmod20261018",
   "donor_revision": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
   "run": {
     "mode": "apply",

@@ -5,9 +5,9 @@
   "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005",
   "sources": [
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeMasteryLab.java",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeMasteryLab.java",
       "bytes": 42415,
       "sha256": "f6d5ce57ca487bb56d412c0da39bd5ac8956c64aafb056231e67e331d22caeae",
       "git_blob_sha1": "0623297a95e17528b62129b207661b4962752393",
@@ -15,10 +15,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -104,8 +104,8 @@
         }
       ],
       "repo": "hsoliwal/com.synexia",
-      "module": "synexia-openrewrite-recipes",
-      "symbol": "com.synexia.rewrite.M3RecipeMasteryLab",
+      "module": "m3-openrewrite-recipes",
+      "symbol": "jdk.internal.m3.rewrite.M3RecipeMasteryLab",
       "signatures": [],
       "fingerprint": null,
       "revision_role": "pinned",
@@ -116,9 +116,9 @@
       "input_git_blob_sha1": "0623297a95e17528b62129b207661b4962752393"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeMasterySchedulePlanner.java",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeMasterySchedulePlanner.java",
       "bytes": 10021,
       "sha256": "b0a7e5236a3e2bcfd593aee081c01650d920a49cf2e7254679cf8b23e67238cb",
       "git_blob_sha1": "7f8cc7134df7ea5d019a9a78ce3cfce7809135fc",
@@ -126,10 +126,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -215,8 +215,8 @@
         }
       ],
       "repo": "hsoliwal/com.synexia",
-      "module": "synexia-openrewrite-recipes",
-      "symbol": "com.synexia.rewrite.M3RecipeMasterySchedulePlanner",
+      "module": "m3-openrewrite-recipes",
+      "symbol": "jdk.internal.m3.rewrite.M3RecipeMasterySchedulePlanner",
       "signatures": [],
       "fingerprint": null,
       "revision_role": "pinned",
@@ -227,9 +227,9 @@
       "input_git_blob_sha1": "7f8cc7134df7ea5d019a9a78ce3cfce7809135fc"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "bytes": 23211,
       "sha256": "adee46f08cd93edb1f97c30be904d0b686cc6426f56c1fae0ee6d670693526df",
       "git_blob_sha1": "dad21d3e762dabdfeb71f2d8815c25b401079994",
@@ -237,10 +237,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -326,8 +326,8 @@
         }
       ],
       "repo": "hsoliwal/com.synexia",
-      "module": "synexia-openrewrite-recipes",
-      "symbol": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+      "module": "m3-openrewrite-recipes",
+      "symbol": "jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe",
       "signatures": [],
       "fingerprint": null,
       "revision_role": "pinned",
@@ -338,9 +338,9 @@
       "input_git_blob_sha1": "6a58762e7c066fb7f67018c0c702c95ea35de4fe"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java",
       "bytes": 6188,
       "sha256": "f498b969bb9e5a79f66bb87d8232d0045144145d0167751dc342ba85b0ff4d15",
       "git_blob_sha1": "3351a83e4429c4ac172f5af09998777c6b69c645",
@@ -348,10 +348,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -437,8 +437,8 @@
         }
       ],
       "repo": "hsoliwal/com.synexia",
-      "module": "synexia-openrewrite-recipes",
-      "symbol": "com.synexia.rewrite.M3OpenRewriteRuntimeRecipeInventoryRecipe",
+      "module": "m3-openrewrite-recipes",
+      "symbol": "jdk.internal.m3.rewrite.M3OpenRewriteRuntimeRecipeInventoryRecipe",
       "signatures": [],
       "fingerprint": null,
       "revision_role": "pinned",
@@ -449,9 +449,9 @@
       "input_git_blob_sha1": "3351a83e4429c4ac172f5af09998777c6b69c645"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3OpenRewriteTranspiler.java",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3OpenRewriteTranspiler.java",
       "bytes": 27278,
       "sha256": "e86f43f32599de822191a233f1e3802e4f8120cd415ee2c90bcf67a56d4e6951",
       "git_blob_sha1": "d1c3303969a0eae68d571aa12157ae23010e36af",
@@ -459,10 +459,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -548,8 +548,8 @@
         }
       ],
       "repo": "hsoliwal/com.synexia",
-      "module": "synexia-openrewrite-recipes",
-      "symbol": "com.synexia.rewrite.M3OpenRewriteTranspiler",
+      "module": "m3-openrewrite-recipes",
+      "symbol": "jdk.internal.m3.rewrite.M3OpenRewriteTranspiler",
       "signatures": [],
       "fingerprint": null,
       "revision_role": "pinned",
@@ -560,9 +560,9 @@
       "input_git_blob_sha1": "d1c3303969a0eae68d571aa12157ae23010e36af"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeCrateSerialAtomReview.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeCrateSerialAtomReview.java",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeCrateSerialAtomReview.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RecipeCrateSerialAtomReview.java",
       "bytes": 23936,
       "sha256": "ead5c49ad51cf5325c5725595bf058ca73daceef092621d671aef7108f9409cc",
       "git_blob_sha1": "7d5535a3b8deb1ad0c9f604f1f94b62194ac3e11",
@@ -570,10 +570,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -659,8 +659,8 @@
         }
       ],
       "repo": "hsoliwal/com.synexia",
-      "module": "synexia-openrewrite-recipes",
-      "symbol": "com.synexia.rewrite.M3RecipeCrateSerialAtomReview",
+      "module": "m3-openrewrite-recipes",
+      "symbol": "jdk.internal.m3.rewrite.M3RecipeCrateSerialAtomReview",
       "signatures": [],
       "fingerprint": null,
       "revision_role": "pinned",
@@ -671,9 +671,9 @@
       "input_git_blob_sha1": "7d5535a3b8deb1ad0c9f604f1f94b62194ac3e11"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SemanticCodeInventoryRecipe.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SemanticCodeInventoryRecipe.java",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SemanticCodeInventoryRecipe.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3SemanticCodeInventoryRecipe.java",
       "bytes": 36683,
       "sha256": "3a475b5a1ea098b0ce07368e4ef1080f8c888d7166ceefe85716a12d735b21cc",
       "git_blob_sha1": "d02f33fe0be66066efb5148d0694763cfaea2392",
@@ -681,10 +681,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -770,8 +770,8 @@
         }
       ],
       "repo": "hsoliwal/com.synexia",
-      "module": "synexia-openrewrite-recipes",
-      "symbol": "com.synexia.rewrite.M3SemanticCodeInventoryRecipe",
+      "module": "m3-openrewrite-recipes",
+      "symbol": "jdk.internal.m3.rewrite.M3SemanticCodeInventoryRecipe",
       "signatures": [],
       "fingerprint": null,
       "revision_role": "pinned",
@@ -782,9 +782,9 @@
       "input_git_blob_sha1": "d02f33fe0be66066efb5148d0694763cfaea2392"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePass.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspilePass.java",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePass.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspilePass.java",
       "bytes": 528,
       "sha256": "f68f4db3d6a849d172f9b168e81138429a6c16aa18745c518058436e0e8efca6",
       "git_blob_sha1": "ef8c0ed9e64adc66dbb663fd36fa3d8a7486123c",
@@ -792,10 +792,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -881,8 +881,8 @@
         }
       ],
       "repo": "hsoliwal/com.synexia",
-      "module": "synexia-openrewrite-recipes",
-      "symbol": "com.synexia.rewrite.M3TranspilePass",
+      "module": "m3-openrewrite-recipes",
+      "symbol": "jdk.internal.m3.rewrite.M3TranspilePass",
       "signatures": [],
       "fingerprint": null,
       "revision_role": "pinned",
@@ -893,9 +893,9 @@
       "input_git_blob_sha1": "ef8c0ed9e64adc66dbb663fd36fa3d8a7486123c"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePassResult.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspilePassResult.java",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePassResult.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspilePassResult.java",
       "bytes": 1441,
       "sha256": "596c420fbc30eb07867c03d48b56af6fab1dc6891114362dabc9e0f8ff7bbb4f",
       "git_blob_sha1": "977b8f683dd2ab76ca2256533989f12a2814f044",
@@ -903,10 +903,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -992,8 +992,8 @@
         }
       ],
       "repo": "hsoliwal/com.synexia",
-      "module": "synexia-openrewrite-recipes",
-      "symbol": "com.synexia.rewrite.M3TranspilePassResult",
+      "module": "m3-openrewrite-recipes",
+      "symbol": "jdk.internal.m3.rewrite.M3TranspilePassResult",
       "signatures": [],
       "fingerprint": null,
       "revision_role": "pinned",
@@ -1004,9 +1004,9 @@
       "input_git_blob_sha1": "977b8f683dd2ab76ca2256533989f12a2814f044"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePlan.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspilePlan.java",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePlan.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspilePlan.java",
       "bytes": 3759,
       "sha256": "3073058ea8237577b4506ce3222ee83914f68c7451db83bb3f7f8792abf8d13a",
       "git_blob_sha1": "290b11dc5be769119cdb202262f0336ee3612313",
@@ -1014,10 +1014,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -1103,8 +1103,8 @@
         }
       ],
       "repo": "hsoliwal/com.synexia",
-      "module": "synexia-openrewrite-recipes",
-      "symbol": "com.synexia.rewrite.M3TranspilePlan",
+      "module": "m3-openrewrite-recipes",
+      "symbol": "jdk.internal.m3.rewrite.M3TranspilePlan",
       "signatures": [],
       "fingerprint": null,
       "revision_role": "pinned",
@@ -1115,9 +1115,9 @@
       "input_git_blob_sha1": "290b11dc5be769119cdb202262f0336ee3612313"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspileRun.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspileRun.java",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspileRun.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3TranspileRun.java",
       "bytes": 3256,
       "sha256": "0be8b21e6fd0ec16b21c781e6ee9d9248fa8413a4010984246fb69cf72ffd485",
       "git_blob_sha1": "14284e82051ac5936dd82d93881228a914906c84",
@@ -1125,10 +1125,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -1214,8 +1214,8 @@
         }
       ],
       "repo": "hsoliwal/com.synexia",
-      "module": "synexia-openrewrite-recipes",
-      "symbol": "com.synexia.rewrite.M3TranspileRun",
+      "module": "m3-openrewrite-recipes",
+      "symbol": "jdk.internal.m3.rewrite.M3TranspileRun",
       "signatures": [],
       "fingerprint": null,
       "revision_role": "pinned",
@@ -1226,9 +1226,9 @@
       "input_git_blob_sha1": "14284e82051ac5936dd82d93881228a914906c84"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryClassLoader.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MasteryClassLoader.java",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryClassLoader.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MasteryClassLoader.java",
       "bytes": 2538,
       "sha256": "e2fee64f28c2fd71db1d0f2fba8a9bf3bd4c3d210119d4e12823b7d01a98ec0a",
       "git_blob_sha1": "b4081310a343cbd067c7deb5e907031598e82536",
@@ -1236,10 +1236,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -1325,8 +1325,8 @@
         }
       ],
       "repo": "hsoliwal/com.synexia",
-      "module": "synexia-openrewrite-recipes",
-      "symbol": "com.synexia.rewrite.M3MasteryClassLoader",
+      "module": "m3-openrewrite-recipes",
+      "symbol": "jdk.internal.m3.rewrite.M3MasteryClassLoader",
       "signatures": [],
       "fingerprint": null,
       "revision_role": "pinned",
@@ -1337,9 +1337,9 @@
       "input_git_blob_sha1": "b4081310a343cbd067c7deb5e907031598e82536"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryContractSurface.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MasteryContractSurface.java",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryContractSurface.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MasteryContractSurface.java",
       "bytes": 8493,
       "sha256": "d825d59df9ca7839ad06af2fd5c6ae386ce373f24eecc9184d23d1fe3261d8b1",
       "git_blob_sha1": "0d3aed858efcc450cf24822567f4ee605e84a18d",
@@ -1347,10 +1347,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -1436,8 +1436,8 @@
         }
       ],
       "repo": "hsoliwal/com.synexia",
-      "module": "synexia-openrewrite-recipes",
-      "symbol": "com.synexia.rewrite.M3MasteryContractSurface",
+      "module": "m3-openrewrite-recipes",
+      "symbol": "jdk.internal.m3.rewrite.M3MasteryContractSurface",
       "signatures": [],
       "fingerprint": null,
       "revision_role": "pinned",
@@ -1448,9 +1448,9 @@
       "input_git_blob_sha1": "7a31cc620465c33d978a5b70ffca0f3e221f1c01"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3AtomPatternSignalChainRecipe.java",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3AtomPatternSignalChainRecipe.java",
       "bytes": 72231,
       "sha256": "876929d5e8caa03ea1e3af6d8d1d4d575d15aee3014a5f2ca425f4786eda5e98",
       "git_blob_sha1": "09df87a872817787fc8607bf11805cfa26c53aed",
@@ -1458,10 +1458,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -1547,8 +1547,8 @@
         }
       ],
       "repo": "hsoliwal/com.synexia",
-      "module": "synexia-openrewrite-recipes",
-      "symbol": "com.synexia.rewrite.M3AtomPatternSignalChainRecipe",
+      "module": "m3-openrewrite-recipes",
+      "symbol": "jdk.internal.m3.rewrite.M3AtomPatternSignalChainRecipe",
       "signatures": [],
       "fingerprint": null,
       "revision_role": "pinned",
@@ -1559,9 +1559,9 @@
       "input_git_blob_sha1": "09df87a872817787fc8607bf11805cfa26c53aed"
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3CodeSignalChain.java",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3CodeSignalChain.java",
       "bytes": 30230,
       "sha256": "a15825aef2a00641d74fba761c4858f449d6924a1286aa1eb71b1d81932351fa",
       "git_blob_sha1": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
@@ -1569,10 +1569,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -1658,8 +1658,8 @@
         }
       ],
       "repo": "hsoliwal/com.synexia",
-      "module": "synexia-openrewrite-recipes",
-      "symbol": "com.synexia.rewrite.M3CodeSignalChain",
+      "module": "m3-openrewrite-recipes",
+      "symbol": "jdk.internal.m3.rewrite.M3CodeSignalChain",
       "signatures": [],
       "fingerprint": null,
       "revision_role": "pinned",
@@ -1670,9 +1670,9 @@
       "input_git_blob_sha1": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6"
     },
     {
-      "path": "m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+      "path": "m3-fast-search/src/main/java/jdk/internal/m3/search/CompetitiveProblemReview.java",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-fast-search/src/main/java/jdk/internal/m3/search/CompetitiveProblemReview.java",
       "bytes": 48120,
       "sha256": "83dad41fa4ce50b70f1e2e6800241b69b5136807902fd2fc6a6d024024894ac4",
       "git_blob_sha1": "baa84c13b7fd330eab6b1832dab1b4b523bfd8ce",
@@ -1781,7 +1781,7 @@
       ],
       "repo": "hsoliwal/com.synexia",
       "module": "m3-fast-search",
-      "symbol": "com.synexia.m3.search.CompetitiveProblemReview",
+      "symbol": "jdk.internal.m3.search.CompetitiveProblemReview",
       "signatures": [],
       "fingerprint": null,
       "revision_role": "pinned",
@@ -1792,9 +1792,9 @@
       "input_git_blob_sha1": "73511dfb8af08cabf51ccb64f926ee84b4af0048"
     },
     {
-      "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+      "path": "m3-algo/src/main/java/jdk/internal/m3/algorithms/corpus/ChallengeDonorPassLedger.java",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-algo/src/main/java/jdk/internal/m3/algorithms/corpus/ChallengeDonorPassLedger.java",
       "bytes": 33076,
       "sha256": "a089808e8563bac1f2d57aa1cc9f131e609c1d01ffcb1af8b302579adb00c346",
       "git_blob_sha1": "074dd60249893e4c606e68823fdebf191f98f269",
@@ -1802,10 +1802,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-algo",
+          "name": "m3-algo",
           "entry": {
             "mode": "040000",
-            "path": "synexia-algo",
+            "path": "m3-algo",
             "sha": "9f550e2b7618e0f15e65a16d68799b8d97b83b7a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/9f550e2b7618e0f15e65a16d68799b8d97b83b7a"
@@ -1902,8 +1902,8 @@
         }
       ],
       "repo": "hsoliwal/com.synexia",
-      "module": "synexia-algo",
-      "symbol": "com.synexia.algorithms.corpus.ChallengeDonorPassLedger",
+      "module": "m3-algo",
+      "symbol": "jdk.internal.m3.algorithms.corpus.ChallengeDonorPassLedger",
       "signatures": [],
       "fingerprint": null,
       "revision_role": "pinned",
@@ -1914,9 +1914,9 @@
       "input_git_blob_sha1": "2f35db68a22a7bff1f5ca1a3cacbb9423730298e"
     },
     {
-      "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
+      "path": "m3-algo/src/main/java/jdk/internal/m3/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-algo/src/main/java/jdk/internal/m3/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
       "bytes": 17440,
       "sha256": "59742f333ab2a04c3cd5b12061bff182e9a2114549117ce323928d391c10fafa",
       "git_blob_sha1": "e4e55dbc3f9255ad71dfa391c43c352b31472622",
@@ -1924,10 +1924,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-algo",
+          "name": "m3-algo",
           "entry": {
             "mode": "040000",
-            "path": "synexia-algo",
+            "path": "m3-algo",
             "sha": "9f550e2b7618e0f15e65a16d68799b8d97b83b7a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/9f550e2b7618e0f15e65a16d68799b8d97b83b7a"
@@ -2024,8 +2024,8 @@
         }
       ],
       "repo": "hsoliwal/com.synexia",
-      "module": "synexia-algo",
-      "symbol": "com.synexia.algorithms.corpus.CompetitiveCapabilityPlanIndex",
+      "module": "m3-algo",
+      "symbol": "jdk.internal.m3.algorithms.corpus.CompetitiveCapabilityPlanIndex",
       "signatures": [],
       "fingerprint": null,
       "revision_role": "pinned",
@@ -2036,9 +2036,9 @@
       "input_git_blob_sha1": "e4e55dbc3f9255ad71dfa391c43c352b31472622"
     },
     {
-      "path": "synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java",
+      "path": "m3-donor-inventory/src/main/java/jdk/internal/m3/donor/DonorMechanicalShapeCatalog.java",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-donor-inventory/src/main/java/jdk/internal/m3/donor/DonorMechanicalShapeCatalog.java",
       "bytes": 20208,
       "sha256": "32ad3ecb53a611de29ce8bdcf4079d77576b3b6d5a56a847b67c9cbd5c91b326",
       "git_blob_sha1": "108514ff8960adc20c9fd88d4fd01ba55cc2f3c8",
@@ -2046,10 +2046,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-donor-inventory",
+          "name": "m3-donor-inventory",
           "entry": {
             "mode": "040000",
-            "path": "synexia-donor-inventory",
+            "path": "m3-donor-inventory",
             "sha": "c5b779af825e71cb677ecba0b757c053ecffc89b",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/c5b779af825e71cb677ecba0b757c053ecffc89b"
@@ -2128,8 +2128,8 @@
         }
       ],
       "repo": "hsoliwal/com.synexia",
-      "module": "synexia-donor-inventory",
-      "symbol": "com.synexia.donor.DonorMechanicalShapeCatalog",
+      "module": "m3-donor-inventory",
+      "symbol": "jdk.internal.m3.donor.DonorMechanicalShapeCatalog",
       "signatures": [],
       "fingerprint": null,
       "revision_role": "pinned",
@@ -2142,7 +2142,7 @@
   ],
   "proof_references": [
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/RECOVERY_REPORT.md",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/RECOVERY_REPORT.md",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/publication/RECOVERY_REPORT.md",
       "bytes": 16279,
@@ -2152,10 +2152,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -2220,7 +2220,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/RECOVERY_RESULT.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/RECOVERY_RESULT.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/RECOVERY_RESULT.json",
       "bytes": 456423,
@@ -2230,10 +2230,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -2320,7 +2320,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/E4_EXECUTION_INPUT.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/E4_EXECUTION_INPUT.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/E4_EXECUTION_INPUT.json",
       "bytes": 12601,
@@ -2330,10 +2330,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -2420,7 +2420,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/SAFE_ADDITIONS_STAGED.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/SAFE_ADDITIONS_STAGED.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/SAFE_ADDITIONS_STAGED.json",
       "bytes": 1516300,
@@ -2430,10 +2430,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -2520,7 +2520,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/CURRENT_PROJECTION.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/CURRENT_PROJECTION.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/CURRENT_PROJECTION.json",
       "bytes": 596276,
@@ -2530,10 +2530,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -2620,7 +2620,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/DESIGNATED_SOURCE_OUTPUTS.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/DESIGNATED_SOURCE_OUTPUTS.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/DESIGNATED_SOURCE_OUTPUTS.json",
       "bytes": 15261,
@@ -2630,10 +2630,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -2720,7 +2720,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-framing-review/REVIEW.md",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-framing-review/REVIEW.md",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/contract-framing-review/REVIEW.md",
       "bytes": 7269,
@@ -2730,10 +2730,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -2831,7 +2831,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-units-epoch02-review/REVIEW.md",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-units-epoch02-review/REVIEW.md",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/current-units-epoch02-review/REVIEW.md",
       "bytes": 7425,
@@ -2841,10 +2841,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -2953,9 +2953,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/RESULT.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/RESULT.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/RESULT.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/RESULT.json",
       "bytes": 2586,
       "sha256": "066c4fa046adf063f2bffb02ac8d6be949e5f85d55de489dd081d56bddcd93dd",
       "git_blob_sha1": "1a55550a8fe316b98743f3fa3f63bb8719a3b360",
@@ -2963,10 +2963,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -3064,7 +3064,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-units-epoch02/RESULT.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-units-epoch02/RESULT.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-units-epoch02/RESULT.json",
       "bytes": 20809,
@@ -3074,10 +3074,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -3175,7 +3175,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/RESULT.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/RESULT.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/observation-regression-epoch02/RESULT.json",
       "bytes": 17990,
@@ -3185,10 +3185,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -3286,7 +3286,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/upstream-regression-epoch02/RESULT.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/upstream-regression-epoch02/RESULT.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/upstream-regression-epoch02/RESULT.json",
       "bytes": 14193,
@@ -3296,10 +3296,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -3397,7 +3397,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/RESULT.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/RESULT.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/native-lane-epoch02/RESULT.json",
       "bytes": 11617,
@@ -3407,10 +3407,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -3508,7 +3508,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/UPSTREAM_CLASSIFICATION_EPOCH_02.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/UPSTREAM_CLASSIFICATION_EPOCH_02.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/UPSTREAM_CLASSIFICATION_EPOCH_02.json",
       "bytes": 883,
@@ -3518,10 +3518,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -3608,7 +3608,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/t03-execution-review/REVIEW.md",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/t03-execution-review/REVIEW.md",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/t03-execution-review/REVIEW.md",
       "bytes": 12253,
@@ -3618,10 +3618,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -3730,7 +3730,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-owner-upstream-review/t03-applicability-review/REVIEW.md",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-owner-upstream-review/t03-applicability-review/REVIEW.md",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/current-owner-upstream-review/t03-applicability-review/REVIEW.md",
       "bytes": 6678,
@@ -3740,10 +3740,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -3863,7 +3863,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-owner-upstream-review/t03-provider-execution-review/REVIEW.md",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-owner-upstream-review/t03-provider-execution-review/REVIEW.md",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/current-owner-upstream-review/t03-provider-execution-review/REVIEW.md",
       "bytes": 7777,
@@ -3873,10 +3873,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -3996,7 +3996,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/native-lane-epoch02-review/REVIEW.md",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/native-lane-epoch02-review/REVIEW.md",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/native-lane-epoch02-review/REVIEW.md",
       "bytes": 9790,
@@ -4006,10 +4006,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -4118,7 +4118,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-runtime-admission/CURRENT_RUNTIME_ADMISSION.md",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-runtime-admission/CURRENT_RUNTIME_ADMISSION.md",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-runtime-admission/CURRENT_RUNTIME_ADMISSION.md",
       "bytes": 13254,
@@ -4128,10 +4128,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -4229,7 +4229,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/runtime-availability-epoch02/AVAILABILITY.md",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/runtime-availability-epoch02/AVAILABILITY.md",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/runtime-availability-epoch02/AVAILABILITY.md",
       "bytes": 10374,
@@ -4239,10 +4239,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -4340,9 +4340,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/T03_REPLAY_SCOPE.md",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/T03_REPLAY_SCOPE.md",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/T03_REPLAY_SCOPE.md",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/T03_REPLAY_SCOPE.md",
       "bytes": 4990,
       "sha256": "726902d1072bdad532aa891c1a855282e702a51ca422a5ee341358e4965b87e3",
       "git_blob_sha1": "748884fc81dfa87ee3a09f2b0f255481ff23b689",
@@ -4350,10 +4350,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -4418,9 +4418,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/verify.sh",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/verify.sh",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/verify.sh",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/verify.sh",
       "bytes": 30326,
       "sha256": "a46e4877d5fd07afa65283652cc1b7407584291425a88740ba8d5dd3411e9441",
       "git_blob_sha1": "2aa03ddf92e0bea905103a26396f4f8341711220",
@@ -4428,10 +4428,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -4496,9 +4496,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/provider-v2.py",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/provider-v2.py",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/provider-v2.py",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/provider-v2.py",
       "bytes": 11627,
       "sha256": "da9311e1f014a36801aff09060696aafd54c79fe28c5ec6ea3b8ca7036b13558",
       "git_blob_sha1": "b98e9ad56452bc9db9a65e085413a5e1f4379457",
@@ -4506,10 +4506,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -4574,9 +4574,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence-applicability.py",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence-applicability.py",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence-applicability.py",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence-applicability.py",
       "bytes": 7338,
       "sha256": "7ac61a5b7a91fea2023a4e28e7d93f2a69a570694a66e0e7f5c091c2e2538893",
       "git_blob_sha1": "58ac97001ccc441b5d01eeac272ba908b33edb68",
@@ -4584,10 +4584,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -4652,7 +4652,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/LAUNCH.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/LAUNCH.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/final-t03/LAUNCH.json",
       "bytes": 1128,
@@ -4662,10 +4662,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -4763,7 +4763,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/SEED.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/SEED.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/final-t03/SEED.json",
       "bytes": 693595,
@@ -4773,10 +4773,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -4874,7 +4874,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/parser-t02-candidate-epoch01/RESULT.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/parser-t02-candidate-epoch01/RESULT.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/parser-t02-candidate-epoch01/RESULT.json",
       "bytes": 14247,
@@ -4884,10 +4884,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -4985,7 +4985,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/CAMPAIGN_RESULT.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/CAMPAIGN_RESULT.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/observation-regression-epoch02/CAMPAIGN_RESULT.json",
       "bytes": 599,
@@ -4995,10 +4995,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -5096,7 +5096,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/PARITY.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/PARITY.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/native-lane-epoch02/PARITY.json",
       "bytes": 1394,
@@ -5106,10 +5106,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -5207,7 +5207,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-api-epoch02/REVIEW.md",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-api-epoch02/REVIEW.md",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/contract-api-epoch02/REVIEW.md",
       "bytes": 2865,
@@ -5217,10 +5217,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -5318,7 +5318,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/t03-execution-review/FILE_SEALS.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/t03-execution-review/FILE_SEALS.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/t03-execution-review/FILE_SEALS.json",
       "bytes": 2062,
@@ -5328,10 +5328,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -5440,9 +5440,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-parser.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-parser.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization-jcc-be92-parser.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization-jcc-be92-parser.json",
       "bytes": 550,
       "sha256": "9a2b2e07a6b54330b6d7457e9df4ed631617e11351daa9670ff51e00e8263d66",
       "git_blob_sha1": "aa13035f107b82f230e82ffeee01243dccaeb2be",
@@ -5450,10 +5450,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -5551,9 +5551,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-parser/receipts/materialization.tsv",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-parser/receipts/materialization.tsv",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization/jcc-be92-parser/receipts/materialization.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization/jcc-be92-parser/receipts/materialization.tsv",
       "bytes": 19818,
       "sha256": "865c1ed23e83694fdcb00011a615448615bfbf661baf6c99bd4486aa829b9bec",
       "git_blob_sha1": "22dcb8986dbda5251ea9c04e446880c64417fe5f",
@@ -5561,10 +5561,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -5695,9 +5695,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-contract.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-contract.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization-jcc-be92-contract.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization-jcc-be92-contract.json",
       "bytes": 554,
       "sha256": "c72fd6137847627eeffbe5d92c8c14537ef7912c99742ebddf2cf197669f0389",
       "git_blob_sha1": "0625973c7794161b2e7d1888b5d94ca88ca7d040",
@@ -5705,10 +5705,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -5806,9 +5806,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-contract/receipts/materialization.tsv",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-contract/receipts/materialization.tsv",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization/jcc-be92-contract/receipts/materialization.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization/jcc-be92-contract/receipts/materialization.tsv",
       "bytes": 19766,
       "sha256": "2fe8c1f9eb21ea008a12c1deb304c8cb2ee417d84407db78ce67ef7cd00620ec",
       "git_blob_sha1": "7ddfef5cc2224d35f507f611bc27f00de29a86e0",
@@ -5816,10 +5816,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -5950,9 +5950,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-convergence.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-convergence.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization-jcc-be92-convergence.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization-jcc-be92-convergence.json",
       "bytes": 560,
       "sha256": "9732bdf683770abb602127ce7cd663b0db448683de8a0a30633abafbf4d69ea6",
       "git_blob_sha1": "507484ee82dedbd0ec0ead3701a9475399fe77a5",
@@ -5960,10 +5960,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -6061,9 +6061,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-convergence/receipts/materialization.tsv",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-convergence/receipts/materialization.tsv",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization/jcc-be92-convergence/receipts/materialization.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization/jcc-be92-convergence/receipts/materialization.tsv",
       "bytes": 35476,
       "sha256": "9efc02ffe63e045d16284b8283a722f5974702f7a83510e0a115335d68f0389e",
       "git_blob_sha1": "16558854fd261ca1262000296e1465ae7e0aa0bf",
@@ -6071,10 +6071,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -6205,9 +6205,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-observation-imports.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-observation-imports.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization-jcc-be92-observation-imports.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization-jcc-be92-observation-imports.json",
       "bytes": 576,
       "sha256": "ab92660e01e24283f56ac18c15f853cd6033eb5b5deeecc23949c269f1a7e557",
       "git_blob_sha1": "c02ef4fd7a1172ee3925905a8513944c69bb5d77",
@@ -6215,10 +6215,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -6316,9 +6316,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-observation-imports/receipts/materialization.tsv",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-observation-imports/receipts/materialization.tsv",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization/jcc-be92-observation-imports/receipts/materialization.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization/jcc-be92-observation-imports/receipts/materialization.tsv",
       "bytes": 20416,
       "sha256": "41b33c4ddf348357ae78015b2b4380a49b85a24e9af9be1e5df4644d49971dc6",
       "git_blob_sha1": "8ca3c1425b1493c6bbe557c6a6bc18427fcf99e4",
@@ -6326,10 +6326,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -6460,9 +6460,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-upstream-imports.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-upstream-imports.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization-jcc-be92-upstream-imports.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization-jcc-be92-upstream-imports.json",
       "bytes": 570,
       "sha256": "f1c18ebb2c88a8cc00d518ff1cb615b34ab55e494a5cf5811dd0032b5f9849dd",
       "git_blob_sha1": "aee158a0b3db79dfe880ed5a68ea36147410357d",
@@ -6470,10 +6470,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -6571,9 +6571,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-upstream-imports/receipts/materialization.tsv",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-upstream-imports/receipts/materialization.tsv",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization/jcc-be92-upstream-imports/receipts/materialization.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization/jcc-be92-upstream-imports/receipts/materialization.tsv",
       "bytes": 20827,
       "sha256": "6f9a81a6337c3f12348db495590436457094c9bbb71874e22a525b3e4df45256",
       "git_blob_sha1": "b2f8c8e9454ba3160dd3df628540de8bcf26f9e0",
@@ -6581,10 +6581,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -6715,9 +6715,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-parser.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-parser.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay-jcc-be92-parser.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay-jcc-be92-parser.json",
       "bytes": 554,
       "sha256": "6dd4d88cc1c6101add61ad2003a1eedc1569c392c20e67f4152059c9d20e6289",
       "git_blob_sha1": "5b42410ca62ac0a1c231cec8bc45780deda60005",
@@ -6725,10 +6725,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -6826,9 +6826,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-parser/receipts/materialization.tsv",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-parser/receipts/materialization.tsv",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay/jcc-be92-parser/receipts/materialization.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay/jcc-be92-parser/receipts/materialization.tsv",
       "bytes": 19316,
       "sha256": "85380910bcbe353610b4c7bdf7923a5d915ca191f05f6d25ca73ccc4bc602655",
       "git_blob_sha1": "01e035ffb3515315e463ae3d539b4b77de1a672e",
@@ -6836,10 +6836,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -6970,9 +6970,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-contract.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-contract.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay-jcc-be92-contract.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay-jcc-be92-contract.json",
       "bytes": 558,
       "sha256": "9710c4147eeff9787b7f611ddc085ac49709a8e0f24849559286cc61e8c27e41",
       "git_blob_sha1": "92503dd9bc5751613f72da452157538a8e257573",
@@ -6980,10 +6980,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -7081,9 +7081,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-contract/receipts/materialization.tsv",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-contract/receipts/materialization.tsv",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay/jcc-be92-contract/receipts/materialization.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay/jcc-be92-contract/receipts/materialization.tsv",
       "bytes": 19282,
       "sha256": "0f21875027bcc7dc9cfa68e1e965225e7ce1f03802a60fe22d5f1800d5afae0c",
       "git_blob_sha1": "cfbe75bf8bbf7043125a7628b60b212c637fa483",
@@ -7091,10 +7091,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -7225,9 +7225,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-convergence.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-convergence.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay-jcc-be92-convergence.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay-jcc-be92-convergence.json",
       "bytes": 564,
       "sha256": "35602ad28d2a0fcd92ca7a69a71fcec99a20a82673023139bcae912bbc9640b2",
       "git_blob_sha1": "02f359082dd7b2d0084f49eacaaa59f8967d2a5b",
@@ -7235,10 +7235,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -7336,9 +7336,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-convergence/receipts/materialization.tsv",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-convergence/receipts/materialization.tsv",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay/jcc-be92-convergence/receipts/materialization.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay/jcc-be92-convergence/receipts/materialization.tsv",
       "bytes": 34556,
       "sha256": "a87f0ecf67b05914872f58d3cd6afe3494285ff74b3935b95f35181416775883",
       "git_blob_sha1": "ba103fcf5e81819018c11b95a00ebac2905551e7",
@@ -7346,10 +7346,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -7480,9 +7480,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-observation-imports.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-observation-imports.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay-jcc-be92-observation-imports.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay-jcc-be92-observation-imports.json",
       "bytes": 580,
       "sha256": "268e3c473143016e256e69360ea3909c403da1cd41c5f264f957e1af7ad6042a",
       "git_blob_sha1": "4cf378780c7ef9fc80ea8ac16c8210f53e1f02ac",
@@ -7490,10 +7490,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -7591,9 +7591,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-observation-imports/receipts/materialization.tsv",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-observation-imports/receipts/materialization.tsv",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay/jcc-be92-observation-imports/receipts/materialization.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay/jcc-be92-observation-imports/receipts/materialization.tsv",
       "bytes": 19719,
       "sha256": "208992e13de48a1740b2e0b6075fc756f935d797a3e3080b8a9fe8564ec455c6",
       "git_blob_sha1": "f94af1af0d6bb82cd007c0f47b2376365c90d4fa",
@@ -7601,10 +7601,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -7735,9 +7735,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-upstream-imports.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-upstream-imports.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay-jcc-be92-upstream-imports.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay-jcc-be92-upstream-imports.json",
       "bytes": 574,
       "sha256": "93d8bbe6b54f3a473dae75c0809a7c465c7c29d6c0534598e1d26b013c75e8c9",
       "git_blob_sha1": "337049e4cb8104042a82a405d9f4e3b568ec640b",
@@ -7745,10 +7745,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -7846,9 +7846,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-upstream-imports/receipts/materialization.tsv",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-upstream-imports/receipts/materialization.tsv",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay/jcc-be92-upstream-imports/receipts/materialization.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay/jcc-be92-upstream-imports/receipts/materialization.tsv",
       "bytes": 19992,
       "sha256": "23ce3c33b1154fffd08a367140e3ceeac7bcc78185940dfb3ccd13ca8b933419",
       "git_blob_sha1": "65842208bc32f5df8d06951f52dc1770a00b2818",
@@ -7856,10 +7856,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -7990,9 +7990,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/source-packets/32-final-source-packet.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/source-packets/32-final-source-packet.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/source-packets/32-final-source-packet.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/source-packets/32-final-source-packet.json",
       "bytes": 215015,
       "sha256": "acd4a586753334a9cee8d81d2ac9745cf87160fe7a10e0a1ac6a041d059d050d",
       "git_blob_sha1": "5e32b23f0265d2bc25dc9671023fea0620823a04",
@@ -8000,10 +8000,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -8112,9 +8112,9 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/status.tsv",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/status.tsv",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
-      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/status.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/status.tsv",
       "bytes": 3859,
       "sha256": "896a92c9ba590d7b3a1955422b83781aff0b7695bc96897d3ed30227eb21215a",
       "git_blob_sha1": "4eb2f20a69e351bd7a499a76d48782bfcf9d1853",
@@ -8122,10 +8122,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -8223,7 +8223,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-api-epoch02/FILE_SEALS.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-api-epoch02/FILE_SEALS.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/contract-api-epoch02/FILE_SEALS.json",
       "bytes": 17549,
@@ -8233,10 +8233,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -8334,7 +8334,7 @@
       ]
     },
     {
-      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/native-lane-epoch02-review/FILE_SEALS.json",
+      "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/native-lane-epoch02-review/FILE_SEALS.json",
       "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/native-lane-epoch02-review/FILE_SEALS.json",
       "bytes": 2146,
@@ -8344,10 +8344,10 @@
       "final_tree_path_chain": [
         {
           "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-          "name": "synexia-openrewrite-recipes",
+          "name": "m3-openrewrite-recipes",
           "entry": {
             "mode": "040000",
-            "path": "synexia-openrewrite-recipes",
+            "path": "m3-openrewrite-recipes",
             "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
             "type": "tree",
             "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
@@ -8594,7 +8594,7 @@
             "creation_response_git_sha": "59b4ec83f687499a54f15695b9b246599f9579d7",
             "failed_final_read": {
               "git_blob": "59b4ec83f687499a54f15695b9b246599f9579d7",
-              "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+              "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
               "raw_body_readback": false,
               "read_attempt": "FAILED_UTF8_REENCODING",
               "remote_sha256_observed": false,
@@ -8603,7 +8603,7 @@
             },
             "failed_probe_read": {
               "git_blob": "59b4ec83f687499a54f15695b9b246599f9579d7",
-              "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+              "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
               "raw_body_readback": false,
               "read_attempt": "FAILED_UTF8_REENCODING",
               "remote_sha256_observed": false,
@@ -8613,7 +8613,7 @@
             "final_tree_size": 4,
             "git_blob": "59b4ec83f687499a54f15695b9b246599f9579d7",
             "method": "BASE64_CREATE_AND_REMOTE_GIT_TREE_IDENTITY",
-            "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+            "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
             "raw_body_readback": false,
             "remote_sha256_observed": false,
             "sha256_local_uploaded_bytes": "823a8864668594f33fd21b51f42c08643d90be2f0d903653175047f5d0298e6c",
@@ -8624,7 +8624,7 @@
             "creation_response_git_sha": "24cdc62e634934527d551324c2449bcf951b5589",
             "failed_final_read": {
               "git_blob": "24cdc62e634934527d551324c2449bcf951b5589",
-              "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+              "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
               "raw_body_readback": false,
               "read_attempt": "FAILED_UTF8_REENCODING",
               "remote_sha256_observed": false,
@@ -8633,7 +8633,7 @@
             },
             "failed_probe_read": {
               "git_blob": "24cdc62e634934527d551324c2449bcf951b5589",
-              "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+              "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
               "raw_body_readback": false,
               "read_attempt": "FAILED_UTF8_REENCODING",
               "remote_sha256_observed": false,
@@ -8643,7 +8643,7 @@
             "final_tree_size": 22,
             "git_blob": "24cdc62e634934527d551324c2449bcf951b5589",
             "method": "BASE64_CREATE_AND_REMOTE_GIT_TREE_IDENTITY",
-            "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+            "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
             "raw_body_readback": false,
             "remote_sha256_observed": false,
             "sha256_local_uploaded_bytes": "7eb80c376a9681170665f5c0d8b86214e9b44aa6f1d08690a83b26aeba536f3c",
@@ -8688,7 +8688,7 @@
     "destination_gates_passed": false,
     "proofs": [
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/RECOVERY_REPORT.md",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/RECOVERY_REPORT.md",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 16279,
         "sha256": "b21708f3c4537237db3608f8c12ba54ee1940817eb7d5594c1fea5bdeab29259",
@@ -8697,7 +8697,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/RECOVERY_REPORT.md"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/RECOVERY_RESULT.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/RECOVERY_RESULT.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 456423,
         "sha256": "086f4ef835a0939b212bcb7595e75513ecbd46ce6bbf764a8d1f5aca1e418954",
@@ -8706,7 +8706,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/RECOVERY_RESULT.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/E4_EXECUTION_INPUT.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/E4_EXECUTION_INPUT.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 12601,
         "sha256": "a42a7069695c38edfe2a25c1f8c9e16fd0db89401976679fc6409b78eca6d852",
@@ -8715,7 +8715,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/E4_EXECUTION_INPUT.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/SAFE_ADDITIONS_STAGED.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/SAFE_ADDITIONS_STAGED.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 1516300,
         "sha256": "a3c4741cad08018ff12f21288fa1483ffd55b2c878ab65f5c3c0ce82a10e3e91",
@@ -8724,7 +8724,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/SAFE_ADDITIONS_STAGED.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/CURRENT_PROJECTION.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/CURRENT_PROJECTION.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 596276,
         "sha256": "18c5fea0f72fe21aa78df1aa6c319eb4276fc15aa481952539c221ce651e6f49",
@@ -8733,7 +8733,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/CURRENT_PROJECTION.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/DESIGNATED_SOURCE_OUTPUTS.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/DESIGNATED_SOURCE_OUTPUTS.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 15261,
         "sha256": "296d5b9eb4f41b51a85d44bb4f05c76e8c5b6453fb55881691b9823055062510",
@@ -8742,7 +8742,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/DESIGNATED_SOURCE_OUTPUTS.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-framing-review/REVIEW.md",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-framing-review/REVIEW.md",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 7269,
         "sha256": "76822940bd1cc9234a5ac5486bb63b73743f6e1d30e8cfcbfc6f5000c787007c",
@@ -8751,7 +8751,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-framing-review/REVIEW.md"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-units-epoch02-review/REVIEW.md",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-units-epoch02-review/REVIEW.md",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 7425,
         "sha256": "890439836c59488cef7b5a83959f504efe14ac17023e33baa9c9fde53449ce6c",
@@ -8760,7 +8760,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-units-epoch02-review/REVIEW.md"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/RESULT.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/RESULT.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 2586,
         "sha256": "066c4fa046adf063f2bffb02ac8d6be949e5f85d55de489dd081d56bddcd93dd",
@@ -8769,7 +8769,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/RESULT.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-units-epoch02/RESULT.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-units-epoch02/RESULT.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 20809,
         "sha256": "a7a92fc26c62ce0938464a75dff13ea1785822f787bf17e03ebf6dd0cc45296f",
@@ -8778,7 +8778,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-units-epoch02/RESULT.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/RESULT.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/RESULT.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 17990,
         "sha256": "041ba5fa63b335839675d773c36588d6207c11d0933ad303fa3378a5922000d4",
@@ -8787,7 +8787,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/RESULT.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/upstream-regression-epoch02/RESULT.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/upstream-regression-epoch02/RESULT.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 14193,
         "sha256": "c6a3b0125bae6af2b9f704784b4b114eb988da44cfb56696287134d309629609",
@@ -8796,7 +8796,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/upstream-regression-epoch02/RESULT.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/RESULT.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/RESULT.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 11617,
         "sha256": "206f4380105bfe863704b92bba17f8ce2df7bbb82d0fbe986751c1dc4d721796",
@@ -8805,7 +8805,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/RESULT.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/UPSTREAM_CLASSIFICATION_EPOCH_02.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/UPSTREAM_CLASSIFICATION_EPOCH_02.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 883,
         "sha256": "b7262f5ce0c1868e8b4741b2bd46c09fd26c16bc5a044179988c42ce80642c3e",
@@ -8814,7 +8814,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/UPSTREAM_CLASSIFICATION_EPOCH_02.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/t03-execution-review/REVIEW.md",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/t03-execution-review/REVIEW.md",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 12253,
         "sha256": "d6109ae253343f5c157d867732f3eea954cc4e57438968154b476407a21e86b2",
@@ -8823,7 +8823,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/t03-execution-review/REVIEW.md"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-owner-upstream-review/t03-applicability-review/REVIEW.md",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-owner-upstream-review/t03-applicability-review/REVIEW.md",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 6678,
         "sha256": "9d290b484f5d5c6ddb3c2c37842f2edd43555b29e0933ba5c7c92796c8326b8f",
@@ -8832,7 +8832,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-owner-upstream-review/t03-applicability-review/REVIEW.md"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-owner-upstream-review/t03-provider-execution-review/REVIEW.md",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-owner-upstream-review/t03-provider-execution-review/REVIEW.md",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 7777,
         "sha256": "47779ed5f43d7a512c5a372650569fa1442d8099ce544fe3c6b59196c955471a",
@@ -8841,7 +8841,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-owner-upstream-review/t03-provider-execution-review/REVIEW.md"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/native-lane-epoch02-review/REVIEW.md",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/native-lane-epoch02-review/REVIEW.md",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 9790,
         "sha256": "f29f2a7394019d1e882c61f2e7527afe90bbffde0f840c56703f3eb82399a281",
@@ -8850,7 +8850,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/native-lane-epoch02-review/REVIEW.md"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-runtime-admission/CURRENT_RUNTIME_ADMISSION.md",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-runtime-admission/CURRENT_RUNTIME_ADMISSION.md",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 13254,
         "sha256": "5227dbd72cd7e24ada181695f51da97819af29640a3f712a50a1463cd14fc75f",
@@ -8859,7 +8859,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-runtime-admission/CURRENT_RUNTIME_ADMISSION.md"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/runtime-availability-epoch02/AVAILABILITY.md",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/runtime-availability-epoch02/AVAILABILITY.md",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 10374,
         "sha256": "0b5a82147a0d36894b6eca57b51d73886b94574b4bacf674f302461505af701f",
@@ -8868,7 +8868,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/runtime-availability-epoch02/AVAILABILITY.md"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/T03_REPLAY_SCOPE.md",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/T03_REPLAY_SCOPE.md",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 4990,
         "sha256": "726902d1072bdad532aa891c1a855282e702a51ca422a5ee341358e4965b87e3",
@@ -8877,7 +8877,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/T03_REPLAY_SCOPE.md"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/verify.sh",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/verify.sh",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 30326,
         "sha256": "a46e4877d5fd07afa65283652cc1b7407584291425a88740ba8d5dd3411e9441",
@@ -8886,7 +8886,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/verify.sh"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/provider-v2.py",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/provider-v2.py",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 11627,
         "sha256": "da9311e1f014a36801aff09060696aafd54c79fe28c5ec6ea3b8ca7036b13558",
@@ -8895,7 +8895,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/provider-v2.py"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence-applicability.py",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence-applicability.py",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 7338,
         "sha256": "7ac61a5b7a91fea2023a4e28e7d93f2a69a570694a66e0e7f5c091c2e2538893",
@@ -8904,7 +8904,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence-applicability.py"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/LAUNCH.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/LAUNCH.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 1128,
         "sha256": "206c1664179770263006a3108e72421cf06725b0df3c57bf75664a60cd2c233e",
@@ -8913,7 +8913,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/LAUNCH.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/SEED.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/SEED.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 693595,
         "sha256": "d33cf9575e511976bc042f5e9c91f3c3d9154a169567d462b4db9d4c027d9204",
@@ -8922,7 +8922,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/SEED.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/parser-t02-candidate-epoch01/RESULT.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/parser-t02-candidate-epoch01/RESULT.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 14247,
         "sha256": "039b7d54e6de11a865874ef8f2820f3071e61700bf06224d94afdd0315ed63a6",
@@ -8931,7 +8931,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/parser-t02-candidate-epoch01/RESULT.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/CAMPAIGN_RESULT.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/CAMPAIGN_RESULT.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 599,
         "sha256": "622c75ca29de15c17344089df368255fa13dd35f340c708cd80d8476a1966a28",
@@ -8940,7 +8940,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/CAMPAIGN_RESULT.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/PARITY.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/PARITY.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 1394,
         "sha256": "b1d375e04deb8078e47e261238308de2d4312d6b0ed55a400725031884cfb0a6",
@@ -8949,7 +8949,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/PARITY.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-api-epoch02/REVIEW.md",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-api-epoch02/REVIEW.md",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 2865,
         "sha256": "eb6ddcfbba9e9f6d0fc675c4c58f9b279cd7c96cbd8acb9749e41591497f6c30",
@@ -8958,7 +8958,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-api-epoch02/REVIEW.md"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/t03-execution-review/FILE_SEALS.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/t03-execution-review/FILE_SEALS.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 2062,
         "sha256": "b928cc49ef7897f3c7c76fc057a56af86b5b8eb1c7576d65eeb094eec70694e2",
@@ -8967,7 +8967,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/t03-execution-review/FILE_SEALS.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-parser.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-parser.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 550,
         "sha256": "9a2b2e07a6b54330b6d7457e9df4ed631617e11351daa9670ff51e00e8263d66",
@@ -8976,7 +8976,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-parser.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-parser/receipts/materialization.tsv",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-parser/receipts/materialization.tsv",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 19818,
         "sha256": "865c1ed23e83694fdcb00011a615448615bfbf661baf6c99bd4486aa829b9bec",
@@ -8985,7 +8985,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-parser/receipts/materialization.tsv"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-contract.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-contract.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 554,
         "sha256": "c72fd6137847627eeffbe5d92c8c14537ef7912c99742ebddf2cf197669f0389",
@@ -8994,7 +8994,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-contract.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-contract/receipts/materialization.tsv",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-contract/receipts/materialization.tsv",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 19766,
         "sha256": "2fe8c1f9eb21ea008a12c1deb304c8cb2ee417d84407db78ce67ef7cd00620ec",
@@ -9003,7 +9003,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-contract/receipts/materialization.tsv"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-convergence.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-convergence.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 560,
         "sha256": "9732bdf683770abb602127ce7cd663b0db448683de8a0a30633abafbf4d69ea6",
@@ -9012,7 +9012,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-convergence.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-convergence/receipts/materialization.tsv",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-convergence/receipts/materialization.tsv",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 35476,
         "sha256": "9efc02ffe63e045d16284b8283a722f5974702f7a83510e0a115335d68f0389e",
@@ -9021,7 +9021,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-convergence/receipts/materialization.tsv"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-observation-imports.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-observation-imports.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 576,
         "sha256": "ab92660e01e24283f56ac18c15f853cd6033eb5b5deeecc23949c269f1a7e557",
@@ -9030,7 +9030,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-observation-imports.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-observation-imports/receipts/materialization.tsv",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-observation-imports/receipts/materialization.tsv",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 20416,
         "sha256": "41b33c4ddf348357ae78015b2b4380a49b85a24e9af9be1e5df4644d49971dc6",
@@ -9039,7 +9039,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-observation-imports/receipts/materialization.tsv"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-upstream-imports.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-upstream-imports.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 570,
         "sha256": "f1c18ebb2c88a8cc00d518ff1cb615b34ab55e494a5cf5811dd0032b5f9849dd",
@@ -9048,7 +9048,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-upstream-imports.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-upstream-imports/receipts/materialization.tsv",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-upstream-imports/receipts/materialization.tsv",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 20827,
         "sha256": "6f9a81a6337c3f12348db495590436457094c9bbb71874e22a525b3e4df45256",
@@ -9057,7 +9057,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-upstream-imports/receipts/materialization.tsv"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-parser.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-parser.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 554,
         "sha256": "6dd4d88cc1c6101add61ad2003a1eedc1569c392c20e67f4152059c9d20e6289",
@@ -9066,7 +9066,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-parser.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-parser/receipts/materialization.tsv",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-parser/receipts/materialization.tsv",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 19316,
         "sha256": "85380910bcbe353610b4c7bdf7923a5d915ca191f05f6d25ca73ccc4bc602655",
@@ -9075,7 +9075,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-parser/receipts/materialization.tsv"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-contract.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-contract.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 558,
         "sha256": "9710c4147eeff9787b7f611ddc085ac49709a8e0f24849559286cc61e8c27e41",
@@ -9084,7 +9084,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-contract.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-contract/receipts/materialization.tsv",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-contract/receipts/materialization.tsv",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 19282,
         "sha256": "0f21875027bcc7dc9cfa68e1e965225e7ce1f03802a60fe22d5f1800d5afae0c",
@@ -9093,7 +9093,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-contract/receipts/materialization.tsv"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-convergence.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-convergence.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 564,
         "sha256": "35602ad28d2a0fcd92ca7a69a71fcec99a20a82673023139bcae912bbc9640b2",
@@ -9102,7 +9102,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-convergence.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-convergence/receipts/materialization.tsv",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-convergence/receipts/materialization.tsv",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 34556,
         "sha256": "a87f0ecf67b05914872f58d3cd6afe3494285ff74b3935b95f35181416775883",
@@ -9111,7 +9111,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-convergence/receipts/materialization.tsv"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-observation-imports.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-observation-imports.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 580,
         "sha256": "268e3c473143016e256e69360ea3909c403da1cd41c5f264f957e1af7ad6042a",
@@ -9120,7 +9120,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-observation-imports.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-observation-imports/receipts/materialization.tsv",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-observation-imports/receipts/materialization.tsv",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 19719,
         "sha256": "208992e13de48a1740b2e0b6075fc756f935d797a3e3080b8a9fe8564ec455c6",
@@ -9129,7 +9129,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-observation-imports/receipts/materialization.tsv"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-upstream-imports.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-upstream-imports.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 574,
         "sha256": "93d8bbe6b54f3a473dae75c0809a7c465c7c29d6c0534598e1d26b013c75e8c9",
@@ -9138,7 +9138,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-upstream-imports.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-upstream-imports/receipts/materialization.tsv",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-upstream-imports/receipts/materialization.tsv",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 19992,
         "sha256": "23ce3c33b1154fffd08a367140e3ceeac7bcc78185940dfb3ccd13ca8b933419",
@@ -9147,7 +9147,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-upstream-imports/receipts/materialization.tsv"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/source-packets/32-final-source-packet.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/source-packets/32-final-source-packet.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 215015,
         "sha256": "acd4a586753334a9cee8d81d2ac9745cf87160fe7a10e0a1ac6a041d059d050d",
@@ -9156,7 +9156,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/source-packets/32-final-source-packet.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/status.tsv",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/status.tsv",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 3859,
         "sha256": "896a92c9ba590d7b3a1955422b83781aff0b7695bc96897d3ed30227eb21215a",
@@ -9165,7 +9165,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/status.tsv"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-api-epoch02/FILE_SEALS.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-api-epoch02/FILE_SEALS.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 17549,
         "sha256": "0fcc8c3808d4ada7d55c7ab3055539f81c651d08da5d794ec8aeae263e18c232",
@@ -9174,7 +9174,7 @@
         "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-api-epoch02/FILE_SEALS.json"
       },
       {
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/native-lane-epoch02-review/FILE_SEALS.json",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/native-lane-epoch02-review/FILE_SEALS.json",
         "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
         "bytes": 2146,
         "sha256": "2fe867381a466d94a9c42c8e71f5ddf0dcea5601b432fcfed03bc70f95462d37",
@@ -9205,7 +9205,7 @@
         "T03_execution": "NOT_RERUN",
         "result": {
           "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/parser-t02-candidate-epoch01/RESULT.json",
-          "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/parser-t02-candidate-epoch01/RESULT.json",
+          "repository_path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/parser-t02-candidate-epoch01/RESULT.json",
           "bytes": 14247,
           "sha256": "039b7d54e6de11a865874ef8f2820f3071e61700bf06224d94afdd0315ed63a6",
           "git_blob": "a5d44068a5e01ec4c09612b2b145476d7c0268cc"
@@ -9224,7 +9224,7 @@
         "T03_execution": "NOT_RERUN",
         "result": {
           "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-units-epoch02/RESULT.json",
-          "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-units-epoch02/RESULT.json",
+          "repository_path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-units-epoch02/RESULT.json",
           "bytes": 20809,
           "sha256": "a7a92fc26c62ce0938464a75dff13ea1785822f787bf17e03ebf6dd0cc45296f",
           "git_blob": "864b64878c8f06c45b9b6dad6d89c3284aaed612"
@@ -9243,7 +9243,7 @@
         "T03_execution": "NOT_RERUN",
         "result": {
           "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/observation-regression-epoch02/RESULT.json",
-          "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/RESULT.json",
+          "repository_path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/RESULT.json",
           "bytes": 17990,
           "sha256": "041ba5fa63b335839675d773c36588d6207c11d0933ad303fa3378a5922000d4",
           "git_blob": "d6f19056296663d3da760957937a8f3edec64535"
@@ -9262,7 +9262,7 @@
         "T03_execution": "NOT_RERUN",
         "result": {
           "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/upstream-regression-epoch02/RESULT.json",
-          "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/upstream-regression-epoch02/RESULT.json",
+          "repository_path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/upstream-regression-epoch02/RESULT.json",
           "bytes": 14193,
           "sha256": "c6a3b0125bae6af2b9f704784b4b114eb988da44cfb56696287134d309629609",
           "git_blob": "2527bcf3a09ba0051880b06fd1e402a1fcfb5e36"
@@ -9281,7 +9281,7 @@
         "T03_execution": "NOT_RERUN",
         "result": {
           "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/native-lane-epoch02/RESULT.json",
-          "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/RESULT.json",
+          "repository_path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/RESULT.json",
           "bytes": 11617,
           "sha256": "206f4380105bfe863704b92bba17f8ce2df7bbb82d0fbe986751c1dc4d721796",
           "git_blob": "0b22050eb54dab0e05cdb1f7b34e411abd092f53"
@@ -9322,7 +9322,7 @@
       "compiler_count_limit": "The campaign reports76 paired-case compilations; two additional loader-control compilations are not included in that printed count.",
       "result": {
         "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/observation-regression-epoch02/CAMPAIGN_RESULT.json",
-        "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/CAMPAIGN_RESULT.json",
+        "repository_path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/CAMPAIGN_RESULT.json",
         "bytes": 599,
         "sha256": "622c75ca29de15c17344089df368255fa13dd35f340c708cd80d8476a1966a28",
         "git_blob": "c0882c9cb45ebead41fc3889aebb02b40622de9d"
@@ -9339,7 +9339,7 @@
       "test": "M3OpenRewriteTranspilerTest.runsConcernSeparatedMechanicalPassesAndChainsReceipts",
       "classification_correction": {
         "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/UPSTREAM_CLASSIFICATION_EPOCH_02.json",
-        "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/UPSTREAM_CLASSIFICATION_EPOCH_02.json",
+        "repository_path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/UPSTREAM_CLASSIFICATION_EPOCH_02.json",
         "bytes": 883,
         "sha256": "b7262f5ce0c1868e8b4741b2bd46c09fd26c16bc5a044179988c42ce80642c3e",
         "git_blob": "e9a31d082ced46a6f57b0874a25b10df61634753"
@@ -9358,7 +9358,7 @@
       "RXM_compiler_parity_rows": 6,
       "parity": {
         "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/native-lane-epoch02/PARITY.json",
-        "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/PARITY.json",
+        "repository_path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/PARITY.json",
         "bytes": 1394,
         "sha256": "b1d375e04deb8078e47e261238308de2d4312d6b0ed55a400725031884cfb0a6",
         "git_blob": "74a05b892b158f2473e102c541be20274d636e44"
@@ -9380,8 +9380,8 @@
       "equal_resources": 34,
       "behavioral_suites_rerun": false,
       "result": {
-        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/RESULT.json",
-        "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/RESULT.json",
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/RESULT.json",
+        "repository_path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/RESULT.json",
         "bytes": 2586,
         "sha256": "066c4fa046adf063f2bffb02ac8d6be949e5f85d55de489dd081d56bddcd93dd",
         "git_blob": "1a55550a8fe316b98743f3fa3f63bb8719a3b360"
@@ -9397,7 +9397,7 @@
       "scope": "Baseline and candidate compiled signatures are equal; helper package signatures remain equal and a private valueFrame method is added. This does not assert equal composite contract fingerprints.",
       "report": {
         "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/contract-api-epoch02/REVIEW.md",
-        "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-api-epoch02/REVIEW.md",
+        "repository_path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-api-epoch02/REVIEW.md",
         "bytes": 2865,
         "sha256": "eb6ddcfbba9e9f6d0fc675c4c58f9b279cd7c96cbd8acb9749e41591497f6c30",
         "git_blob": "00284ac27872ad911924d3491b4277fb30247a22"
@@ -9416,7 +9416,7 @@
   },
   "current_designated_changes": [
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "before_sha256": "5c30358f276a7587b3364e03f67330cd017f5325fb1f0afb15cb20a5ba8859f6",
       "after_sha256": "adee46f08cd93edb1f97c30be904d0b686cc6426f56c1fae0ee6d670693526df",
       "before_git_blob_sha1": "6a58762e7c066fb7f67018c0c702c95ea35de4fe",
@@ -9425,7 +9425,7 @@
       "scope": "Designated source body difference from current be92; actual recipe/write proof is separately required."
     },
     {
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryContractSurface.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MasteryContractSurface.java",
       "before_sha256": "870deda207b85f081da2f7a2953082a91098ea46757c4586b4b91d490685749e",
       "after_sha256": "d825d59df9ca7839ad06af2fd5c6ae386ce373f24eecc9184d23d1fe3261d8b1",
       "before_git_blob_sha1": "7a31cc620465c33d978a5b70ffca0f3e221f1c01",
@@ -9434,7 +9434,7 @@
       "scope": "Designated source body difference from current be92; actual recipe/write proof is separately required."
     },
     {
-      "path": "m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+      "path": "m3-fast-search/src/main/java/jdk/internal/m3/search/CompetitiveProblemReview.java",
       "before_sha256": "ae0991705fc55a84d0fcf39fa8c8a11f958d4a2d54138a8b3daf4de120318ea8",
       "after_sha256": "83dad41fa4ce50b70f1e2e6800241b69b5136807902fd2fc6a6d024024894ac4",
       "before_git_blob_sha1": "73511dfb8af08cabf51ccb64f926ee84b4af0048",
@@ -9443,7 +9443,7 @@
       "scope": "Designated source body difference from current be92; actual recipe/write proof is separately required."
     },
     {
-      "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+      "path": "m3-algo/src/main/java/jdk/internal/m3/algorithms/corpus/ChallengeDonorPassLedger.java",
       "before_sha256": "460ac381ab86ad926d1253b012032a1ea2b0b53a02ea3169436958ec35c45ade",
       "after_sha256": "a089808e8563bac1f2d57aa1cc9f131e609c1d01ffcb1af8b302579adb00c346",
       "before_git_blob_sha1": "2f35db68a22a7bff1f5ca1a3cacbb9423730298e",

@@ -18,10 +18,10 @@ def run(name,argv,expected=0,timeout=40):
  if (expected==0 and p.returncode!=0) or (expected!=0 and p.returncode==0): raise RuntimeError(name+'\n'+p.stdout+p.stderr)
  return p
 JH=P(shutil.which('javac')).resolve().parents[1]; ENGINE=OUT/'engine';ENGINE.mkdir()
-run('engine-compile',['javac','--release','21','-Xlint:all','-Werror','-d',ENGINE,*sorted((TASK/'src/main/java/com/synexia/rewrite').glob('*.java')),TASK/'probes/KernelCancellationProof.java'])
-def replay(name,root,res=RES): return run(name,['java','-cp',ENGINE,'com.synexia.rewrite.SealReplay','apply',root,res])
+run('engine-compile',['javac','--release','21','-Xlint:all','-Werror','-d',ENGINE,*sorted((TASK/'src/main/java/jdk/internal/m3/rewrite').glob('*.java')),TASK/'probes/KernelCancellationProof.java'])
+def replay(name,root,res=RES): return run(name,['java','-cp',ENGINE,'jdk.internal.m3.rewrite.SealReplay','apply',root,res])
 CAND=OUT/'candidate';shutil.copytree(BASE,CAND)
-run('preflight',['java','-cp',ENGINE,'com.synexia.rewrite.SealReplay','check',CAND,RES])
+run('preflight',['java','-cp',ENGINE,'jdk.internal.m3.rewrite.SealReplay','check',CAND,RES])
 # Deliberate prerequisite order, followed by native, actual java.base, then fixtures.
 assert changes[0][0]=='m3/native/include/m3_jni_core.h'
 for n,row in enumerate(changes):
@@ -36,7 +36,7 @@ for n,row in enumerate(changes):
    run('intermediate-java-base-compile',['javac','--release','21','-Xlint:all','-Werror','--patch-module','java.base='+str(CAND/'src/java.base/share/classes'),'-d',patch,CAND/row[0]])
 assert 'changes=0' in replay('fixed-point-1',CAND).stdout
 assert 'changes=0' in replay('fixed-point-2',CAND).stdout
-run('kernel-cancellation',['java','-cp',ENGINE,'com.synexia.rewrite.KernelCancellationProof',RES])
+run('kernel-cancellation',['java','-cp',ENGINE,'jdk.internal.m3.rewrite.KernelCancellationProof',RES])
 for variant,root in [('baseline',BASE),('candidate',CAND)]:
  W=OUT/variant/'build';W.mkdir(parents=True,exist_ok=True)
  for d in ['classes','patch','native','headers']: (W/d).mkdir(exist_ok=True)
@@ -99,7 +99,7 @@ for case in ['source-drift','keep-drift','missing-source','template-drift','dupl
   elif case=='symlink-source':p=P(tmp)/'outside';shutil.copy2(owner,p);owner.unlink();owner.symlink_to(p)
   else:p=owner.parent;o=P(tmp)/'outside';shutil.move(p,o);p.symlink_to(o,target_is_directory=True)
   before=snapshot(root)
-  q=run('refusal-'+case,['java','-cp',ENGINE,'com.synexia.rewrite.SealReplay','apply',root,res],expected=1)
+  q=run('refusal-'+case,['java','-cp',ENGINE,'jdk.internal.m3.rewrite.SealReplay','apply',root,res],expected=1)
   assert before==snapshot(root);refusals.append({'case':case,'exitCode':q.returncode,'targetBytesUnchanged':True})
 (E/'REFUSALS.json').write_text(json.dumps(refusals,indent=2)+'\n')
 result={'status':'SELECTED_SOURCE_PASS_HOLD_FULL_PRODUCT','javaChecks':236639,'jniChecks':320006,'sortedSplitChecks':361273,'nativeSpanCases':9712,'nativeSpanChecks':67784,'commonHeaderChecks':16777730,'partialStates':32,'prewriteRefusals':7,'kernelCancellationChecks':2,'apiComparisons':5,'jniExports':9,'missingNativeChecks':21,'notRun':['Maven/OpenRewrite SDK','whole owning module','installed M3JDK21 image/jtreg/JCK','cross-platform union','whole live-wrapper suite','remaining programme'],'sourceSha256':snapshot(CAND)}

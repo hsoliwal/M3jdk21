@@ -5,6 +5,6 @@ name: com.m3.rewrite.synexia.PureIntConvergence
 displayName: Apply the borrowed Synexia pure-int convergence recipe
 description: >-
   Target-side activation only. The reusable implementation is canonically owned by Synexia and
-  imported under com.synexia.rewrite.atom from an exact source-bound handoff.
+  imported under jdk.internal.m3.rewrite.atom from an exact source-bound handoff.
 recipeList:
-  - com.synexia.rewrite.atom.M3PureIntConvergenceRecipe
+  - jdk.internal.m3.rewrite.atom.M3PureIntConvergenceRecipe

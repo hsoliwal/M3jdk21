@@ -11,10 +11,10 @@ C="$ROOT/m3/collections/src/main/native/collections/m3_index_mask_compactor.c"
 RES="$TASK/src/main/resources/current-mask-window"
 JAVA_HOME="$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")"
 mkdir -p "$WORK/engine" "$WORK/classes" "$WORK/headers" "$WORK/native" "$WORK/missing"
-javac --release 21 -Xlint:all -Werror -d "$WORK/engine" "$TASK"/src/main/java/com/synexia/rewrite/*.java
-java -cp "$WORK/engine" com.synexia.rewrite.SealReplay check "$ROOT" "$RES"
-java -cp "$WORK/engine" com.synexia.rewrite.SealReplay apply "$ROOT" "$RES"
-java -cp "$WORK/engine" com.synexia.rewrite.SealReplay apply "$ROOT" "$RES"
+javac --release 21 -Xlint:all -Werror -d "$WORK/engine" "$TASK"/src/main/java/jdk/internal/m3/rewrite/*.java
+java -cp "$WORK/engine" jdk.internal.m3.rewrite.SealReplay check "$ROOT" "$RES"
+java -cp "$WORK/engine" jdk.internal.m3.rewrite.SealReplay apply "$ROOT" "$RES"
+java -cp "$WORK/engine" jdk.internal.m3.rewrite.SealReplay apply "$ROOT" "$RES"
 javac --release 21 -Xlint:all -Werror -h "$WORK/headers" -d "$WORK/classes" \
  "$SRC/M3IndexMaskCompactor.java" "$SRC/M3LongAddressKernel.java" "$SRC/M3LongIndexProjection.java" \
  "$ROOT/m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java"

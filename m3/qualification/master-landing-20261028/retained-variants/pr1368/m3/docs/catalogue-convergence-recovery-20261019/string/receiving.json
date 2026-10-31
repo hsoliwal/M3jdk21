@@ -13,14 +13,14 @@
   "canonical_commit_verification": "Root verified C1 before invoking this offline authoring script.",
   "handoff_recipe": {
     "dataset": "m3-catalogue-receiving-handoff-recovery-20261018",
-    "name": "com.synexia.m3.M3CatalogueReceivingHandoffRecovery20261018",
-    "engine_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+    "name": "jdk.internal.m3.M3CatalogueReceivingHandoffRecovery20261018",
+    "engine_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
     "engine_git_blob": "9d0788d3717e017d58345c5c3e62022c2915a3c8",
-    "manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-catalogue-receiving-handoff-recovery-20261018/manifest.tsv",
+    "manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-catalogue-receiving-handoff-recovery-20261018/manifest.tsv",
     "source_role": "Later canonical metadata-only change; no C2 self-pin in these postimages."
   },
   "runtime_intake": {
-    "path": "synexia-openrewrite-recipes/recipe-crates/m3-catalogue-refinement-20261018/convergence-recovery-20261019/intake/RECEIVING_OUTPUTS.json",
+    "path": "m3-openrewrite-recipes/recipe-crates/m3-catalogue-refinement-20261018/convergence-recovery-20261019/intake/RECEIVING_OUTPUTS.json",
     "sha256": "6ed0db8cfdb7dbdcd61fa7a475774ecf33e43077c6c21b9afbaa24e2c49e4baa",
     "git_blob": "e26fdf5ed5394f4529bc682e6cbb5f47a478185a",
     "bytes": 40949,
@@ -53,9 +53,9 @@
       "after_git_blob": "55eced1e59d58e0a91a23543da79fc982146c3d0",
       "bytes": 9496,
       "mode": "100644",
-      "canonical_manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
+      "canonical_manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
       "canonical_preimage": null,
-      "canonical_postimage": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-catalogue-regex-receiving-recovery-v2-20261018/001-README.md.txt"
+      "canonical_postimage": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-catalogue-regex-receiving-recovery-v2-20261018/001-README.md.txt"
     },
     {
       "path": "m3/runtime-integration/regex-latin1-recovery-20261019/run_actual_owners.py",
@@ -67,9 +67,9 @@
       "after_git_blob": "77bd3bc1cafa1c244ee1ed70fe948a4be9a85170",
       "bytes": 21964,
       "mode": "100644",
-      "canonical_manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
+      "canonical_manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
       "canonical_preimage": null,
-      "canonical_postimage": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-catalogue-regex-receiving-recovery-v2-20261018/002-run_actual_owners.py.txt"
+      "canonical_postimage": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-catalogue-regex-receiving-recovery-v2-20261018/002-run_actual_owners.py.txt"
     },
     {
       "path": "m3/runtime-integration/regex-latin1-recovery-20261019/source-seals.json",
@@ -81,9 +81,9 @@
       "after_git_blob": "fc0346eda9b621d9c6253ddb007347f4717a1013",
       "bytes": 6569,
       "mode": "100644",
-      "canonical_manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
+      "canonical_manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
       "canonical_preimage": null,
-      "canonical_postimage": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-catalogue-regex-receiving-recovery-v2-20261018/003-source-seals.json.txt"
+      "canonical_postimage": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-catalogue-regex-receiving-recovery-v2-20261018/003-source-seals.json.txt"
     },
     {
       "path": "m3/runtime-integration/regex-latin1-recovery-20261019/src/test/java/RegexDpNativeHarness.java",
@@ -95,9 +95,9 @@
       "after_git_blob": "8782fbb7f81379d3a523d709f66a7a73e3c5faf0",
       "bytes": 16968,
       "mode": "100644",
-      "canonical_manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
+      "canonical_manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
       "canonical_preimage": null,
-      "canonical_postimage": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/001-RegexDpNativeHarness.java.txt"
+      "canonical_postimage": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/001-RegexDpNativeHarness.java.txt"
     },
     {
       "path": "m3/runtime-integration/regex-latin1-recovery-20261019/src/test/java/RegexGraph.java",
@@ -109,9 +109,9 @@
       "after_git_blob": "d083482be24fcbcaf0976c4505efc533e79b0ca5",
       "bytes": 2505,
       "mode": "100644",
-      "canonical_manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
+      "canonical_manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
       "canonical_preimage": null,
-      "canonical_postimage": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/002-RegexGraph.java.txt"
+      "canonical_postimage": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/002-RegexGraph.java.txt"
     },
     {
       "path": "m3/runtime-integration/regex-latin1-recovery-20261019/src/test/java/RegexJavaBenchmark.java",
@@ -123,9 +123,9 @@
       "after_git_blob": "4c5976c951ed8a78d522e51cb00f60b9f7357a42",
       "bytes": 3262,
       "mode": "100644",
-      "canonical_manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
+      "canonical_manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
       "canonical_preimage": null,
-      "canonical_postimage": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/003-RegexJavaBenchmark.java.txt"
+      "canonical_postimage": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/003-RegexJavaBenchmark.java.txt"
     },
     {
       "path": "m3/runtime-integration/regex-latin1-recovery-20261019/src/test/java/java/lang/M3StringRegexRecoveryTest.java",
@@ -137,9 +137,9 @@
       "after_git_blob": "8b0246065ed7abccc78d8cefa5a95f4e093b5834",
       "bytes": 18174,
       "mode": "100644",
-      "canonical_manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
+      "canonical_manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
       "canonical_preimage": null,
-      "canonical_postimage": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/004-M3StringRegexRecoveryTest.java.txt"
+      "canonical_postimage": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/004-M3StringRegexRecoveryTest.java.txt"
     },
     {
       "path": "m3/runtime-integration/regex-latin1-recovery-20261019/src/test/native/RegexDpNativeAdapter.c",
@@ -151,9 +151,9 @@
       "after_git_blob": "ed8c39ea4049c9ba8bfbbd4f70e1d65d905f9dd4",
       "bytes": 1992,
       "mode": "100644",
-      "canonical_manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
+      "canonical_manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
       "canonical_preimage": null,
-      "canonical_postimage": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-catalogue-regex-receiving-recovery-v2-20261018/004-RegexDpNativeAdapter.c.txt"
+      "canonical_postimage": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-catalogue-regex-receiving-recovery-v2-20261018/004-RegexDpNativeAdapter.c.txt"
     },
     {
       "path": "src/java.base/share/classes/java/lang/M3String.java",
@@ -165,9 +165,9 @@
       "after_git_blob": "e53f62018eaf8e5dbf9cc85969bf3828e6950712",
       "bytes": 55652,
       "mode": "100644",
-      "canonical_manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
-      "canonical_preimage": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/pre/005-M3String.java.txt",
-      "canonical_postimage": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/005-M3String.java.txt"
+      "canonical_manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
+      "canonical_preimage": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/pre/005-M3String.java.txt",
+      "canonical_postimage": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/005-M3String.java.txt"
     },
     {
       "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
@@ -179,9 +179,9 @@
       "after_git_blob": "49881018bb80c1c8a0c528a1a4e2a7eaf0f535f4",
       "bytes": 13697,
       "mode": "100644",
-      "canonical_manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
-      "canonical_preimage": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/pre/006-M3StringRegexDp.java.txt",
-      "canonical_postimage": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/006-M3StringRegexDp.java.txt"
+      "canonical_manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
+      "canonical_preimage": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/pre/006-M3StringRegexDp.java.txt",
+      "canonical_postimage": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/006-M3StringRegexDp.java.txt"
     },
     {
       "path": "src/java.base/share/native/libjava/M3StringRegexDp.c",
@@ -193,9 +193,9 @@
       "after_git_blob": "c94abc2a1ecd2de533bae8382748a25841acd5c6",
       "bytes": 11813,
       "mode": "100644",
-      "canonical_manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
-      "canonical_preimage": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-catalogue-regex-receiving-recovery-v2-20261018/pre/005-M3StringRegexDp.c.txt",
-      "canonical_postimage": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-catalogue-regex-receiving-recovery-v2-20261018/005-M3StringRegexDp.c.txt"
+      "canonical_manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
+      "canonical_preimage": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-catalogue-regex-receiving-recovery-v2-20261018/pre/005-M3StringRegexDp.c.txt",
+      "canonical_postimage": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-catalogue-regex-receiving-recovery-v2-20261018/005-M3StringRegexDp.c.txt"
     },
     {
       "path": "test/jdk/java/lang/String/M3StringPathCursorTest.java",
@@ -207,19 +207,19 @@
       "after_git_blob": "0d1dc25517ec2d80ad92d36d418f83cb1c46e075",
       "bytes": 24177,
       "mode": "100644",
-      "canonical_manifest": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
+      "canonical_manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/manifest.tsv",
       "canonical_preimage": null,
-      "canonical_postimage": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/007-M3StringPathCursorTest.java.txt"
+      "canonical_postimage": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-catalogue-regex-receiving-recovery-v2-20261018/007-M3StringPathCursorTest.java.txt"
     }
   ],
   "runtime_recipes": [
     {
       "dataset": "m3-catalogue-regex-latin1-recovery-v2-20261018",
-      "name": "com.synexia.m3.M3CatalogueRegexLatin1RecoveryV220261018"
+      "name": "jdk.internal.m3.M3CatalogueRegexLatin1RecoveryV220261018"
     },
     {
       "dataset": "m3-catalogue-regex-receiving-recovery-v2-20261018",
-      "name": "com.synexia.m3.M3CatalogueRegexReceivingRecoveryV220261018"
+      "name": "jdk.internal.m3.M3CatalogueRegexReceivingRecoveryV220261018"
     }
   ],
   "selection": "SELECT_RECOVERY_V2_64_UNIT_WIDTH1_BLOCK_STOP",
@@ -241,7 +241,7 @@
     "decision": "REJECT",
     "active_registration": false,
     "selection": {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-catalogue-refinement-20261018/convergence-recovery-20261019/string/qualification/runtime-v1-001/BENCHMARK_SELECTION.json",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-catalogue-refinement-20261018/convergence-recovery-20261019/string/qualification/runtime-v1-001/BENCHMARK_SELECTION.json",
       "sha256": "391f8be428f77daeb7187de1b5a00aa2b599597c958a3c92ab572e9ead7bebf4",
       "git_blob": "50732f3669d31eea0477582028bc27677ac1738e",
       "bytes": 116062,
@@ -251,7 +251,7 @@
   },
   "canonical_evidence": [
     {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-catalogue-refinement-20261018/convergence-recovery-20261019/string/publication/QUALIFICATION_SUMMARY.json",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-catalogue-refinement-20261018/convergence-recovery-20261019/string/publication/QUALIFICATION_SUMMARY.json",
       "sha256": "8f2106e401e6b62ceacb5798206e1353a9aa94f212db3d2b5f8cf9d69295bb6e",
       "git_blob": "697cc64eb101cbbe33e676329ab9d83cd1dbf8db",
       "bytes": 28879,
@@ -259,7 +259,7 @@
       "url": "https://github.com/hsoliwal/com.synexia/blob/0a3e7f9f4b2fe5067532cc79b75f4dea2aa6c5b2/synexia-openrewrite-recipes/recipe-crates/m3-catalogue-refinement-20261018/convergence-recovery-20261019/string/publication/QUALIFICATION_SUMMARY.json"
     },
     {
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-catalogue-refinement-20261018/convergence-recovery-20261019/string/qualification/runtime-v2-001/BENCHMARK_SELECTION.json",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-catalogue-refinement-20261018/convergence-recovery-20261019/string/qualification/runtime-v2-001/BENCHMARK_SELECTION.json",
       "sha256": "0ceb2986cba82ead0fece8e5d01c1612b36094b8296005ebe75ada2a8a6bcbc4",
       "git_blob": "5950f4992c1a42cb0014ffc694368d8d29085a0d",
       "bytes": 116106,

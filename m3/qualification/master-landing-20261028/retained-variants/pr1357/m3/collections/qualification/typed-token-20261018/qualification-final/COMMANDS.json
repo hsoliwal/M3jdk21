@@ -52,8 +52,8 @@
       "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/tests",
       "/workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk/jdk/internal/mindex/M3TokenRegexPlanContract.java",
       "/workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk/jdk/internal/mindex/M3TokenCompilerLexicalContract.java",
-      "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/typed-token-20261018/src/test/java/M3CharacterPlanPreservation.java",
-      "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/typed-token-20261018/src/test/java/M3TokenResourceProbe.java"
+      "/workspace/scratch/8cbeab1c181e/Synexia/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/typed-token-20261018/src/test/java/M3CharacterPlanPreservation.java",
+      "/workspace/scratch/8cbeab1c181e/Synexia/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/typed-token-20261018/src/test/java/M3TokenResourceProbe.java"
     ],
     "exit_code": 0,
     "max_rss_kib": 112204,
@@ -76,7 +76,7 @@
       "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux",
       "-fsyntax-only",
       "/workspace/scratch/8cbeab1c181e/M3jdk21-typed/src/java.base/share/native/libjava/M3RegexDpPlan.c",
-      "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/typed-token-20261018/src/test/native/libM3TokenPlanProof.c"
+      "/workspace/scratch/8cbeab1c181e/Synexia/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/typed-token-20261018/src/test/native/libM3TokenPlanProof.c"
     ],
     "exit_code": 0,
     "max_rss_kib": 11264,
@@ -103,7 +103,7 @@
       "-fsanitize=undefined",
       "-fno-sanitize-recover=undefined",
       "/workspace/scratch/8cbeab1c181e/M3jdk21-typed/src/java.base/share/native/libjava/M3RegexDpPlan.c",
-      "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/typed-token-20261018/src/test/native/libM3TokenPlanProof.c",
+      "/workspace/scratch/8cbeab1c181e/Synexia/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/typed-token-20261018/src/test/native/libM3TokenPlanProof.c",
       "-o",
       "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification-final/libM3TokenPlanProof.so"
     ],

@@ -2,7 +2,7 @@
   "schema": "M3_DOOP_PRESSURE_SAMPLING_PASSIVE_RECEIPT_V1",
   "canonical_repository": "https://github.com/hsoliwal/com.synexia",
   "canonical_revision": "00bdbea3ee2fe0a7fc8a991f39e5dad2a0e8d604",
-  "canonical_path_root": "synexia-openrewrite-recipes/recipe-crates/m3-doop-reuse-20261030/enhancement/",
+  "canonical_path_root": "m3-openrewrite-recipes/recipe-crates/m3-doop-reuse-20261030/enhancement/",
   "reference_rule": "All evidence/recipe paths are relative to canonical_path_root at canonical_revision; target paths are repository-relative.",
   "target_repository": "hsoliwal/M3jdk21",
   "receipt_role": "PASSIVE_COMPONENT_EVIDENCE_ONLY",
@@ -11,7 +11,7 @@
   "sdk_execution": {"qualification": {"path": "evidence/qualification-summary.json", "sha256": "0b097ab9d3b0cad5790b8ec177a254a54e376ed3e0a956922186e2176e2e327d"}, "maven_log": {"path": "evidence/registration-sdk.log", "sha256": "3e9351684e3b903e12f7e3b035aa146e0591167577f8617368727a1754e6dd61"}, "scope": "Actual Java/Text SDK emissions, fixed points and missing/drift/occupied/duplicate refusals; receipt metadata execution is separate."},
   "target_preimage_revision": "7efa3fdcef80bce1f82be8a3f8925ff2cb452d71",
   "manifests": [
-    {"path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-doop-pressure-sampling-20261030/manifest.tsv", "sha256": "10e3f5f2b67f68d8c93b7dd13f4fcd9cd1e00ce0d5b9b89f0fb82487c591bedc", "recipe": "com.synexia.m3.DoopPressureSampling20261030"}
+    {"path": "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-doop-pressure-sampling-20261030/manifest.tsv", "sha256": "10e3f5f2b67f68d8c93b7dd13f4fcd9cd1e00ce0d5b9b89f0fb82487c591bedc", "recipe": "jdk.internal.m3.DoopPressureSampling20261030"}
   ],
   "source_transitions": [
     {"path": "m3/collections/src/main/java/com/m3/collections/M3ObjectResidency.java", "before": {"sha256": "71cac88509429c9fa8f6465bc1e6acc33cafb60232be245c93fd3679c9851cc6", "git_blob_sha1": "e7f690493e34dbb1b1041d8af924ab6a8c02f527"}, "after": {"sha256": "b96dab2d42101105c1cdbff31a0d68303340eed439c4972d109075cc99818284", "git_blob_sha1": "e8347cd7780dbeb5a95759ef734a6dbf942d9edd"}},

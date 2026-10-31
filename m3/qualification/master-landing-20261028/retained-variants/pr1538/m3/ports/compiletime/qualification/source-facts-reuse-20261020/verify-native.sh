@@ -14,8 +14,8 @@ mkdir -p "$OUT/classes"
   "$REPO/m3/arrays/src/main/native/m3_arrays_jni.c" \
   -o "$OUT/libm3_arrays.so"
 SOURCE_PATH="$REPO/m3/ports/compiletime/src/main/java"
-SOURCE_PATH+=":$REPO/m3/vendor/synexia/synexia-mindex/compiler/src/main/java"
-SOURCE_PATH+=":$REPO/m3/vendor/synexia/synexia-mindex/runtime/src/main/java"
+SOURCE_PATH+=":$REPO/m3/vendor/synexia/m3-mindex/compiler/src/main/java"
+SOURCE_PATH+=":$REPO/m3/vendor/synexia/m3-mindex/runtime/src/main/java"
 "$JAVA_HOME/bin/javac" --release 21 -proc:none -Xlint:all -Werror \
   -sourcepath "$SOURCE_PATH" -d "$OUT/classes" \
   "$REPO/m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java" \

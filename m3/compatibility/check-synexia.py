@@ -12,7 +12,7 @@ def git_blob_sha(data):
     header=b'blob '+str(len(data)).encode()+bytes([0])
     return hashlib.sha1(header+data).hexdigest()
 
-fixture=root/'compatibility'/'synexia-reference'
+fixture=root/'compatibility'/'m3-reference'
 source_dir=fixture/'src'/'com'/'synexia'/'indexstring'
 paths=[]
 for name,expected in pins.items():
@@ -25,9 +25,9 @@ license_bytes=(fixture/'LICENSE-2.0.txt').read_bytes()
 if git_blob_sha(license_bytes)!='29f81d812f3e768fa89638d1f72920dbfd1413a8':
     raise ValueError('Synexia Apache-2.0 license blob pin mismatch')
 shim=source_dir/'MIndexAddressedView.java'
-mapped_test=source_dir/'SynexiaMappedStorageTest.java'
+mapped_test=source_dir/'M3MappedStorageTest.java'
 classes=root/'build/reference-test-classes'/commit
 classes.mkdir(parents=True,exist_ok=True)
-subprocess.run([str(jdk/'bin/javac'),'--release','21','--module-path',str(root/'build/com.m3.text.jar'),'--add-modules','com.m3.text','-d',str(classes),*paths,str(shim),str(mapped_test),str(root/'compatibility/SynexiaContractTest.java')],check=True)
-subprocess.run([str(jdk/'bin/java'),'-ea','--module-path',str(root/'build/com.m3.text.jar'),'--add-modules','com.m3.text','-cp',str(classes),'SynexiaContractTest'],check=True)
-subprocess.run([str(jdk/'bin/java'),'-ea','--module-path',str(root/'build/com.m3.text.jar'),'--add-modules','com.m3.text','-cp',str(classes),'com.synexia.indexstring.SynexiaMappedStorageTest'],check=True)
+subprocess.run([str(jdk/'bin/javac'),'--release','21','--module-path',str(root/'build/com.m3.text.jar'),'--add-modules','com.m3.text','-d',str(classes),*paths,str(shim),str(mapped_test),str(root/'compatibility/M3ContractTest.java')],check=True)
+subprocess.run([str(jdk/'bin/java'),'-ea','--module-path',str(root/'build/com.m3.text.jar'),'--add-modules','com.m3.text','-cp',str(classes),'M3ContractTest'],check=True)
+subprocess.run([str(jdk/'bin/java'),'-ea','--module-path',str(root/'build/com.m3.text.jar'),'--add-modules','com.m3.text','-cp',str(classes),'jdk.internal.m3.indexstring.M3MappedStorageTest'],check=True)

@@ -3,7 +3,7 @@
   "product": "M3JDK21 one integrated Java21 / HotSpot / JNI SDK",
   "module": "com.m3.collections",
   "intake_mode": "INDEPENDENT_APACHE_MODULE",
-  "canonical_recipe": "com.synexia.m3.M3IndexedHistogramNative20261021",
+  "canonical_recipe": "jdk.internal.m3.M3IndexedHistogramNative20261021",
   "recipe_repository": "hsoliwal/com.synexia",
   "recipe_branch": "chatgpt/m3jdk21-indexed-histogram-native-20261021",
   "canonical_recipe_revision": "05ac14e4b8e1037d4d2423538cdbcd05577d2f62",

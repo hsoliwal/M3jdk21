@@ -49,21 +49,21 @@ jobs:
                     'en', 'FREQUENCY_TSV', '0', '1', 'false', '4096', '2', 'APPROVED']
           (root / 'approval.tsv').write_text('\t'.join(columns) + '\n' + '\t'.join(values)
                                              + '\n', encoding='utf-8')
-          rows = pathlib.Path('m3/lexicon/synexia-source-manifest.tsv').read_text(encoding='utf-8').splitlines()
+          rows = pathlib.Path('m3/lexicon/m3-source-manifest.tsv').read_text(encoding='utf-8').splitlines()
           chosen = [row for row in rows if row.startswith('dictlang.huggingface\t')]
           assert len(chosen) == 1, 'existing source family must remain mapped'
           (root / 'manifest.tsv').write_text(rows[0] + '\n' + chosen[0] + '\n', encoding='utf-8')
           PY
           java -cp m3/lexicon/hf-intake/target/classes \
             com.m3.lexicon.hf.M3HfLexiconIntakeRecipe \
-            "$tmp/approval.tsv" "$tmp/fixture.tsv" "$tmp/synexia-source.records.tsv"
-          python3 m3/runtime-integration/export-synexia-lexicon.py \
+            "$tmp/approval.tsv" "$tmp/fixture.tsv" "$tmp/m3-source.records.tsv"
+          python3 m3/runtime-integration/export-m3-lexicon.py \
             --source-manifest "$tmp/manifest.tsv" \
-            --records "$tmp/synexia-source.records.tsv" \
+            --records "$tmp/m3-source.records.tsv" \
             --output "$tmp/export" \
             --source-repository https://github.com/hsoliwal/com.synexia \
             --source-commit 892e3f6c51d78bc0948e8a8cf736055b4c70eafa
-          python3 m3/runtime-integration/verify-synexia-lexicon.py "$tmp/export"
+          python3 m3/runtime-integration/verify-m3-lexicon.py "$tmp/export"
       - name: Reuse the existing C11 JNI word-row receiver, four runtime modes
         shell: bash
         run: |

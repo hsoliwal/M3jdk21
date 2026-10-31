@@ -32,7 +32,7 @@ jobs:
       - name: Check exact recipe-emitted source
         run: |
           RECIPE=m3/collections/qualification/m3-long-index-path-masks-20261018/recipe
-          java -cp "$RECIPE/target/classes" com.synexia.m3.M3LongIndexPathMasksRecipe --check . "$RECIPE/templates"
+          java -cp "$RECIPE/target/classes" jdk.internal.m3.M3LongIndexPathMasksRecipe --check . "$RECIPE/templates"
       - name: Strict Java21 compile and differential test
         run: |
           mkdir -p /tmp/m3-long-path
@@ -44,5 +44,5 @@ jobs:
         run: |
           set -eu
           RECIPE=m3/collections/qualification/m3-long-index-path-masks-20261018/recipe
-          java -cp "$RECIPE/target/classes" com.synexia.m3.M3LongIndexPathMasksRecipe --apply . "$RECIPE/templates"
-          java -cp "$RECIPE/target/classes" com.synexia.m3.M3LongIndexPathMasksRecipe --check . "$RECIPE/templates"
+          java -cp "$RECIPE/target/classes" jdk.internal.m3.M3LongIndexPathMasksRecipe --apply . "$RECIPE/templates"
+          java -cp "$RECIPE/target/classes" jdk.internal.m3.M3LongIndexPathMasksRecipe --check . "$RECIPE/templates"

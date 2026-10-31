@@ -13,47 +13,47 @@
   ],
   "original_recipe_manifests": [
     {
-      "path": "datasets/m3jdk21-object-vtable/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-object-vtable/manifest.tsv",
+      "path": "datasets/m3jdk21-object-vtable/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-object-vtable/manifest.tsv",
       "sha256": "2a4a846c550f46b3706b5ad6ab41284ff3b7364273a5c66853a435e268cb9e1c"
     },
     {
-      "path": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
+      "path": "datasets/m3jdk21-progress-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
       "sha256": "8c0e19e8fc7313972a3be729f7426675ca83f9eee2672e8a500d16a0b6ba9f69"
     },
     {
-      "path": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
+      "path": "datasets/m3jdk21-progress-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
       "sha256": "5d6927f1f955ddf25b83684a52b252dd549d01e984b51ec64cae8fc5077159e9"
     },
     {
-      "path": "datasets/m3jdk21-functional-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/manifest.tsv",
+      "path": "datasets/m3jdk21-functional-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/manifest.tsv",
       "sha256": "ced34475778273e4471aa984eb3df78701590611f0a60b78150e7c5ca56f53ac"
     },
     {
-      "path": "datasets/m3jdk21-functional-doclint/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/manifest.tsv",
+      "path": "datasets/m3jdk21-functional-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/manifest.tsv",
       "sha256": "0a1487e54f02814e8263d7e9945eb0475b39cd68b07c1b4eb0402f5750fa9316"
     },
     {
-      "path": "datasets/m3jdk21-strings-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-strings-doclint/manifest.tsv",
+      "path": "datasets/m3jdk21-strings-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-strings-doclint/manifest.tsv",
       "sha256": "a83d10bf4f9eb85ab73be27c3cf0e0dff6a2a715361e2f0e295d978e9ac74f86"
     },
     {
-      "path": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv",
+      "path": "datasets/m3jdk21-progress-scope-lint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv",
       "sha256": "0f55fb75b49c743fbbc43127d9a2e791eff59dd067956a0094bb7d5f353a88e8"
     },
     {
-      "path": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv",
+      "path": "datasets/m3jdk21-progress-scope-lint/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv",
       "sha256": "4a0302444667f6fb59983e06609cd40dbcd8d2ab16df772a65f00bc916a3d57d"
     },
     {
-      "path": "datasets/m3jdk21-native-feature-guard/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-native-feature-guard/manifest.tsv",
+      "path": "datasets/m3jdk21-native-feature-guard/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-native-feature-guard/manifest.tsv",
       "sha256": "5cc1de2df9bf395a7eb33bd7ed4b5f700ce8ffd7700431657021d6d2eeeb7f0d"
     },
     {
-      "path": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
+      "path": "datasets/m3jdk21-runtime-control/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
       "sha256": "d3e5f9373fbdcf10c555b084b75f25f644beea01d1a052ae159e2bf049ffd6ef"
     },
     {
-      "path": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
+      "path": "datasets/m3jdk21-runtime-control/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
       "sha256": "152abb3f955b1be8a9d2fe02c649b6e5de4bf61b66eb1ead1d0822457752fc02"
     }
   ],
@@ -72,8 +72,8 @@
           "dataset": "m3jdk21-runtime-control",
           "before": "1aad547fe2f419cf2f265a8f1d7c492779c1bbc86ef685bfafd47516a98a276e",
           "after": "6e129506e8e1bb6c8e728ed82ddae11822129da00b708959dc65deb40d2d0e0c",
-          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
-          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0001-ALGORITHM_CATALOGUE.tsv.txt"
+          "manifest": "datasets/m3jdk21-runtime-control/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
+          "template": "datasets/m3jdk21-runtime-control/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0001-ALGORITHM_CATALOGUE.tsv.txt"
         }
       ]
     },
@@ -91,8 +91,8 @@
           "dataset": "m3jdk21-runtime-control",
           "before": "5e44ba190257db7d9715d80e7870d6a1b69f8c76cc3c285182193e80fc0da443",
           "after": "e2c0e81911a8ea4e6d0d6b77eacc36fa4a4aca2c792536b9c32cbcdd40be0404",
-          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
-          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0002-check_object_adapter_progress_receiver_20261017.py.txt"
+          "manifest": "datasets/m3jdk21-runtime-control/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
+          "template": "datasets/m3jdk21-runtime-control/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0002-check_object_adapter_progress_receiver_20261017.py.txt"
         }
       ]
     },
@@ -110,8 +110,8 @@
           "dataset": "m3jdk21-functional-doclint",
           "before": "ABSENT",
           "after": "3b62981be6a617b903c559cc31904eca2bffb2b200380f1be57e07a8f634d969",
-          "manifest": "datasets/m3jdk21-functional-doclint/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/manifest.tsv",
-          "template": "datasets/m3jdk21-functional-doclint/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/0001-m3-functional-progress-doclint-20261018.tsv.txt"
+          "manifest": "datasets/m3jdk21-functional-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/manifest.tsv",
+          "template": "datasets/m3jdk21-functional-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/0001-m3-functional-progress-doclint-20261018.tsv.txt"
         }
       ]
     },
@@ -129,8 +129,8 @@
           "dataset": "m3jdk21-progress-doclint",
           "before": "ABSENT",
           "after": "7246c16a0e8ec742eba98dac97e24b7fc3947250ad5d2a22f72ac32dcddf0219",
-          "manifest": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
-          "template": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0001-m3-progress-doclint-20261018.tsv.txt"
+          "manifest": "datasets/m3jdk21-progress-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
+          "template": "datasets/m3jdk21-progress-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0001-m3-progress-doclint-20261018.tsv.txt"
         }
       ]
     },
@@ -148,8 +148,8 @@
           "dataset": "m3jdk21-progress-scope-lint",
           "before": "ABSENT",
           "after": "1a45edfa747a03b3491063648a455083633e7de836e4c46241de104d689eebee",
-          "manifest": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv",
-          "template": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/0001-m3-progress-scope-lint-20261018.tsv.txt"
+          "manifest": "datasets/m3jdk21-progress-scope-lint/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv",
+          "template": "datasets/m3jdk21-progress-scope-lint/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/0001-m3-progress-scope-lint-20261018.tsv.txt"
         }
       ]
     },
@@ -167,8 +167,8 @@
           "dataset": "m3jdk21-runtime-control",
           "before": "ABSENT",
           "after": "e84be3f274caf1543ce7a2eb10aced6670fa488ad5478719be5b3227dc48a611",
-          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
-          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0003-test_object_adapter_progress_receiver_20261018.py.txt"
+          "manifest": "datasets/m3jdk21-runtime-control/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
+          "template": "datasets/m3jdk21-runtime-control/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0003-test_object_adapter_progress_receiver_20261018.py.txt"
         }
       ]
     },
@@ -186,8 +186,8 @@
           "dataset": "m3jdk21-runtime-control",
           "before": "856910b716021260d387c0e3230c774223d7afc6ba62eab8e0c35668ffc8f2da",
           "after": "234293306f44acc4f756816564b9dea6146962b13ac2529397e25f062cce49bc",
-          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
-          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0004-verify_m3_default_template_20261017.py.txt"
+          "manifest": "datasets/m3jdk21-runtime-control/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
+          "template": "datasets/m3jdk21-runtime-control/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0004-verify_m3_default_template_20261017.py.txt"
         }
       ]
     },
@@ -205,8 +205,8 @@
           "dataset": "m3jdk21-runtime-control",
           "before": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
           "after": "d63db548f89f25622399329148872225a438e9121cb3436d967bccd3bdff0c02",
-          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
-          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0005-name-mapping.json.txt"
+          "manifest": "datasets/m3jdk21-runtime-control/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
+          "template": "datasets/m3jdk21-runtime-control/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0005-name-mapping.json.txt"
         }
       ]
     },
@@ -224,8 +224,8 @@
           "dataset": "m3jdk21-runtime-control",
           "before": "ABSENT",
           "after": "3f88e143299a558a1a4f20c86d012b0823dc9f9ee4d519ce28cd16bc9cf35ff4",
-          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
-          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0006-CATALOGUE.tsv.txt"
+          "manifest": "datasets/m3jdk21-runtime-control/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
+          "template": "datasets/m3jdk21-runtime-control/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0006-CATALOGUE.tsv.txt"
         }
       ]
     },
@@ -243,8 +243,8 @@
           "dataset": "m3jdk21-runtime-control",
           "before": "ABSENT",
           "after": "6c6e6dca85d5bf211ec04d8164d357918950348c4c3a9413be453c2bb11de364",
-          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
-          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0007-CURRENT_OWNERS.json.txt"
+          "manifest": "datasets/m3jdk21-runtime-control/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
+          "template": "datasets/m3jdk21-runtime-control/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0007-CURRENT_OWNERS.json.txt"
         }
       ]
     },
@@ -262,8 +262,8 @@
           "dataset": "m3jdk21-runtime-control",
           "before": "ABSENT",
           "after": "1c5b958b528e94183f710dea0f4b7ce9319750407062ca51285bd66286b4d377",
-          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
-          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0008-FILE_REVIEW.tsv.txt"
+          "manifest": "datasets/m3jdk21-runtime-control/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
+          "template": "datasets/m3jdk21-runtime-control/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0008-FILE_REVIEW.tsv.txt"
         }
       ]
     },
@@ -281,8 +281,8 @@
           "dataset": "m3jdk21-runtime-control",
           "before": "ABSENT",
           "after": "04e8ff5ea3b57b861ce4381c120e56584478c1f8004c2397829fb8c59e8dd49a",
-          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
-          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0009-README.md.txt"
+          "manifest": "datasets/m3jdk21-runtime-control/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
+          "template": "datasets/m3jdk21-runtime-control/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0009-README.md.txt"
         }
       ]
     },
@@ -300,8 +300,8 @@
           "dataset": "m3jdk21-object-vtable",
           "before": "665bb788428c8d3837d052ac4f69a2756bb1823918726b41a7a7008eadfafd8d",
           "after": "d6283c23f650714e85b9a910f6cda656146552ae95950a04b02af861b636dca2",
-          "manifest": "datasets/m3jdk21-object-vtable/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-object-vtable/manifest.tsv",
-          "template": "datasets/m3jdk21-object-vtable/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-object-vtable/0001-classLoader.cpp.txt"
+          "manifest": "datasets/m3jdk21-object-vtable/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-object-vtable/manifest.tsv",
+          "template": "datasets/m3jdk21-object-vtable/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-object-vtable/0001-classLoader.cpp.txt"
         }
       ]
     },
@@ -319,8 +319,8 @@
           "dataset": "m3jdk21-native-feature-guard",
           "before": "04c5281944444e9a9c4bee49748b2a80f7661f44897003f87619403e709e2ddb",
           "after": "bcc1693812f4e81ae490ed9ca03c38d6411a7ba81eb2108c1436d693991e0e30",
-          "manifest": "datasets/m3jdk21-native-feature-guard/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-native-feature-guard/manifest.tsv",
-          "template": "datasets/m3jdk21-native-feature-guard/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-native-feature-guard/0001-M3PrimitiveFixedArena.c.txt"
+          "manifest": "datasets/m3jdk21-native-feature-guard/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-native-feature-guard/manifest.tsv",
+          "template": "datasets/m3jdk21-native-feature-guard/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-native-feature-guard/0001-M3PrimitiveFixedArena.c.txt"
         }
       ]
     },
@@ -338,8 +338,8 @@
           "dataset": "m3jdk21-progress-doclint",
           "before": "bad73b8ae0b17e2160845c41058ebdda55fb755affecad51ef37fbc8e0d25534",
           "after": "b549cf18db454b6cff5d4a8181b54fdae1e26659ecc2d7f205e4d2ea6da9f93a",
-          "manifest": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
-          "template": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0002-Runnable.java.txt"
+          "manifest": "datasets/m3jdk21-progress-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
+          "template": "datasets/m3jdk21-progress-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0002-Runnable.java.txt"
         }
       ]
     },
@@ -357,8 +357,8 @@
           "dataset": "m3jdk21-strings-doclint",
           "before": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d",
           "after": "20071ef19a84a81f9bccd9a4260df58225442810aef2cbe0b1ec4980c8251087",
-          "manifest": "datasets/m3jdk21-strings-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-strings-doclint/manifest.tsv",
-          "template": "datasets/m3jdk21-strings-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-strings-doclint/0001-Strings.java.txt"
+          "manifest": "datasets/m3jdk21-strings-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-strings-doclint/manifest.tsv",
+          "template": "datasets/m3jdk21-strings-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-strings-doclint/0001-Strings.java.txt"
         }
       ]
     },
@@ -376,8 +376,8 @@
           "dataset": "m3jdk21-progress-doclint",
           "before": "a9d2d8cc73583297fb6c07dee24765473aaaeeaae2651a0b54eb411ed2d46261",
           "after": "6b1ecf702a9e59b171efcaa28dd18fb72265d2bedbfeb2b8bc9d831a74d4892f",
-          "manifest": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
-          "template": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0003-Callable.java.txt"
+          "manifest": "datasets/m3jdk21-progress-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
+          "template": "datasets/m3jdk21-progress-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0003-Callable.java.txt"
         }
       ]
     },
@@ -395,8 +395,8 @@
           "dataset": "m3jdk21-progress-doclint",
           "before": "63f808755d552e372f9669c47041b2aeb52f5e34d0f92428aa5899273e4515d4",
           "after": "e887630e8a6fe2cb3b24f890fe02118abb06b9a340f8d79f47344840b9b2b6aa",
-          "manifest": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
-          "template": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0004-Executor.java.txt"
+          "manifest": "datasets/m3jdk21-progress-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
+          "template": "datasets/m3jdk21-progress-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0004-Executor.java.txt"
         }
       ]
     },
@@ -414,8 +414,8 @@
           "dataset": "m3jdk21-progress-doclint",
           "before": "ca9342b2227960f32bde645c6df74dcd993d23deafad1429fac6521816daa868",
           "after": "9196858f2b800cc32671801563da29b14f881bbf37477419664aa6abd795ce2d",
-          "manifest": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
-          "template": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0005-ExecutorService.java.txt"
+          "manifest": "datasets/m3jdk21-progress-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
+          "template": "datasets/m3jdk21-progress-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0005-ExecutorService.java.txt"
         }
       ]
     },
@@ -433,8 +433,8 @@
           "dataset": "m3jdk21-progress-doclint",
           "before": "a402533489745504fa3e9b8ca667be9b0d9cc3a370bbe2092c70f20051afb2f7",
           "after": "77436155c7936ab04698de243fc91b8a9c53a500e63247c364de591c45c1d733",
-          "manifest": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
-          "template": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0006-MonitoredCallable.java.txt"
+          "manifest": "datasets/m3jdk21-progress-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
+          "template": "datasets/m3jdk21-progress-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0006-MonitoredCallable.java.txt"
         }
       ]
     },
@@ -452,8 +452,8 @@
           "dataset": "m3jdk21-progress-doclint",
           "before": "8c975815e833bca4c214313efde24acf776a1ef676140701f9a5293ef4b5415b",
           "after": "2670d2b928981c1068c2299dc1458c2b9dc7dc372d2e8d2527005d695c77f06e",
-          "manifest": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
-          "template": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0007-MonitoredRunnable.java.txt"
+          "manifest": "datasets/m3jdk21-progress-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
+          "template": "datasets/m3jdk21-progress-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0007-MonitoredRunnable.java.txt"
         }
       ]
     },
@@ -471,8 +471,8 @@
           "dataset": "m3jdk21-progress-doclint",
           "before": "58d084535f0e1c76adc102cffd1eff2cadae5c80877812908281699a55ce88b3",
           "after": "368f6b70ca1639ed193c477d1523a1707cf9ec65d056275552e8ca42f500ae93",
-          "manifest": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
-          "template": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0008-ProgressMonitor.java.txt"
+          "manifest": "datasets/m3jdk21-progress-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
+          "template": "datasets/m3jdk21-progress-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0008-ProgressMonitor.java.txt"
         }
       ]
     },
@@ -490,15 +490,15 @@
           "dataset": "m3jdk21-progress-doclint",
           "before": "5073890ccf101b597e656b2516be70b83f0b77f9accdc157d75fc8d6f525a359",
           "after": "d1fc14e9b59c305d6f71df76afb86d9e7d9e4cabd0899105e5d001380ce4c736",
-          "manifest": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
-          "template": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0009-ProgressMonitors.java.txt"
+          "manifest": "datasets/m3jdk21-progress-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
+          "template": "datasets/m3jdk21-progress-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0009-ProgressMonitors.java.txt"
         },
         {
           "dataset": "m3jdk21-progress-scope-lint",
           "before": "d1fc14e9b59c305d6f71df76afb86d9e7d9e4cabd0899105e5d001380ce4c736",
           "after": "48b06f44b71fd22a2bafc4e8a99d7542d280830043d929ce1d26ae338f3b4efc",
-          "manifest": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv",
-          "template": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/0002-ProgressMonitors.java.txt"
+          "manifest": "datasets/m3jdk21-progress-scope-lint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv",
+          "template": "datasets/m3jdk21-progress-scope-lint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/0002-ProgressMonitors.java.txt"
         }
       ]
     },
@@ -516,15 +516,15 @@
           "dataset": "m3jdk21-functional-doclint",
           "before": "4de2f5ed281ed6f56b872bd4ae9cc832ffb11b6c78e84a0774d7d6058a4a31fc",
           "after": "025c5fa47f9505eccea26c540bc3e320762346c464ecca37ec1994297285a073",
-          "manifest": "datasets/m3jdk21-functional-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/manifest.tsv",
-          "template": "datasets/m3jdk21-functional-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/0002-Consumer.java.txt"
+          "manifest": "datasets/m3jdk21-functional-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/manifest.tsv",
+          "template": "datasets/m3jdk21-functional-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/0002-Consumer.java.txt"
         },
         {
           "dataset": "m3jdk21-progress-scope-lint",
           "before": "025c5fa47f9505eccea26c540bc3e320762346c464ecca37ec1994297285a073",
           "after": "52773610a8cd4d4e0808c2895e504b09ce9c0c05a0273e81cc533bad19ab6226",
-          "manifest": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv",
-          "template": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/0003-Consumer.java.txt"
+          "manifest": "datasets/m3jdk21-progress-scope-lint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv",
+          "template": "datasets/m3jdk21-progress-scope-lint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/0003-Consumer.java.txt"
         }
       ]
     },
@@ -542,15 +542,15 @@
           "dataset": "m3jdk21-functional-doclint",
           "before": "7943afca3f9a3816e8f75a62b9c6104c31b883a1a1e614fb795a8fc85333c744",
           "after": "e116c9989d314cb6ffdaef60e8f665205afccdd28ee3674af2c6eedc008da588",
-          "manifest": "datasets/m3jdk21-functional-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/manifest.tsv",
-          "template": "datasets/m3jdk21-functional-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/0003-Function.java.txt"
+          "manifest": "datasets/m3jdk21-functional-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/manifest.tsv",
+          "template": "datasets/m3jdk21-functional-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/0003-Function.java.txt"
         },
         {
           "dataset": "m3jdk21-progress-scope-lint",
           "before": "e116c9989d314cb6ffdaef60e8f665205afccdd28ee3674af2c6eedc008da588",
           "after": "73877c7a547bb812a6901cae0af4866645de978b867e055204cd53f6dffb6476",
-          "manifest": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv",
-          "template": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/0004-Function.java.txt"
+          "manifest": "datasets/m3jdk21-progress-scope-lint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv",
+          "template": "datasets/m3jdk21-progress-scope-lint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/0004-Function.java.txt"
         }
       ]
     },
@@ -568,15 +568,15 @@
           "dataset": "m3jdk21-functional-doclint",
           "before": "49c58acaea3e70e81ec7187b47551d1e0cf6906443bcf3d71e8c9cbba4d032c6",
           "after": "2d5f23125e22f4d20d80d7734e883c45fd179207f0ab508fdd0c9e8616156766",
-          "manifest": "datasets/m3jdk21-functional-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/manifest.tsv",
-          "template": "datasets/m3jdk21-functional-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/0004-Supplier.java.txt"
+          "manifest": "datasets/m3jdk21-functional-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/manifest.tsv",
+          "template": "datasets/m3jdk21-functional-doclint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/0004-Supplier.java.txt"
         },
         {
           "dataset": "m3jdk21-progress-scope-lint",
           "before": "2d5f23125e22f4d20d80d7734e883c45fd179207f0ab508fdd0c9e8616156766",
           "after": "84170e0863237433f20c3fdc4617eea990731fa7a1e5b0aeaf6b03f89e55c096",
-          "manifest": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv",
-          "template": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/0005-Supplier.java.txt"
+          "manifest": "datasets/m3jdk21-progress-scope-lint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv",
+          "template": "datasets/m3jdk21-progress-scope-lint/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/0005-Supplier.java.txt"
         }
       ]
     },
@@ -594,8 +594,8 @@
           "dataset": "m3jdk21-runtime-control",
           "before": "ABSENT",
           "after": "9faf22addfe520efd30ef8181fa1b89bb4e130f65acb35d2ac9e8b58a3ce38aa",
-          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
-          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0010-M3RuntimeCompatibilityHold.java.txt"
+          "manifest": "datasets/m3jdk21-runtime-control/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
+          "template": "datasets/m3jdk21-runtime-control/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0010-M3RuntimeCompatibilityHold.java.txt"
         }
       ]
     }

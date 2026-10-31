@@ -113,7 +113,7 @@
     "universal performance or allocation improvement",
     "admission phase promotion"
   ],
-  "canonical_task": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/tasks/m3-string-key-collections-20261021",
+  "canonical_task": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/tasks/m3-string-key-collections-20261021",
   "source_receipts": [
     {
       "target_file": "SOURCE_BUILD.json",

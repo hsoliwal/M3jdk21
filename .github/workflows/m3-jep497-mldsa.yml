@@ -72,7 +72,7 @@ jobs:
       - name: 3 - Released JEP residue stays derived
         run: python3 -m unittest m3/backports/test_jep_residue.py
 
-  synexia-file-convergence:
+  m3-file-convergence:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
@@ -87,14 +87,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test -f m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3Java21FileConvergenceRecipe.java
-          test -f m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/synexia/M3SynexiaJava21ConvergenceConsumerTest.java
+          test -f m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3Java21FileConvergenceRecipe.java
+          test -f m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/synexia/M3Java21ConvergenceConsumerTest.java
 
       - name: Prove canonical Synexia consumer and scope
         run: >-
           mvn -B -ntp
           -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3SynexiaJava21ConvergenceConsumerTest,M3RecipeScopeDeclarationTest
+          -Dtest=M3Java21ConvergenceConsumerTest,M3RecipeScopeDeclarationTest
           -Dsurefire.failIfNoSpecifiedTests=false
           test
 

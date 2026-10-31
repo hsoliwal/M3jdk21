@@ -34,7 +34,7 @@ jobs:
         run: |
           mvn -B -ntp -f m3/collections/interop/qualification/m3-direct-spring-multivaluemap-20261017/recipe/pom.xml verify
           java -cp m3/collections/interop/qualification/m3-direct-spring-multivaluemap-20261017/recipe/target/classes \
-            com.synexia.m3.M3SpringDirect20261017Recipe --check "$PWD"
+            jdk.internal.m3.M3SpringDirect20261017Recipe --check "$PWD"
       - name: Compile existing real M3 core, retain java.base-only dependency
         shell: bash
         run: |

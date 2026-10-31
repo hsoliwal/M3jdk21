@@ -2,7 +2,7 @@
   "schema": "M3_EXISTING_PUBLIC_RECIPE_HANDOFF_V1",
   "label": "runtime-restore-07ba-20261018",
   "canonical_repository": "hsoliwal/com.synexia",
-  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "canonical_crate": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
   "canonical_engine_baseline": "8f8200375d8d403b58e855ee5db02f2e8fac33a8",
   "canonical_successor_publication": "Recorded by the later pinned publication receipt; this staging record makes no publication claim.",
   "public_baseline": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
@@ -23,7 +23,7 @@
       "sha256": "ae731c5780c73a98f6fc81079b5f863613fddea50d2a6c893c6dfd2aa2030b5c"
     },
     {
-      "path": "src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+      "path": "src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java",
       "sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43"
     },
     {
@@ -37,19 +37,19 @@
   ],
   "existing_engine_sources": [
     {
-      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625"
     },
     {
-      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
       "sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef"
     },
     {
-      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
       "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4"
     },
     {
-      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java",
       "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
     }
   ],
@@ -71,7 +71,7 @@
           "sha256": "a553e09196f64ddd5d1334b8ffcb0cb655cbc0bbec624aa953a5d6a479a6cee0"
         },
         "SDK_TESTS.xml": {
-          "path": "evidence/current-runtime-recovery-20261018/surefire/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+          "path": "evidence/current-runtime-recovery-20261018/surefire/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml",
           "sha256": "e277555166595fee4b322d8162605607b3d10051af8863fc42fcfa407af655d4"
         }
       }
@@ -148,7 +148,7 @@
       "sha256": "604faedc6179c80f00dc249002b7830ad91e48e5296cd41815aebf40eeb9ad0e",
       "bytes": 508,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/DATASET.json"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/DATASET.json"
       ]
     },
     {
@@ -156,7 +156,7 @@
       "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23",
       "bytes": 747,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/ENGINE_EFFECTIVE.tsv"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/ENGINE_EFFECTIVE.tsv"
       ]
     },
     {
@@ -164,7 +164,7 @@
       "sha256": "0ccd38339eaad4db6dae38ae82d6a5995038facceade4112c1001481d379f00e",
       "bytes": 2027,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/MODES.tsv"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/MODES.tsv"
       ]
     },
     {
@@ -172,415 +172,415 @@
       "sha256": "be4d492e6fb2777d7997dc0f6fc8db517af65cbe2e2bba6d9edb57967cacd5cd",
       "bytes": 550,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba.yml"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba.yml"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0019-Runnable.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0019-Runnable.java.txt",
       "sha256": "b549cf18db454b6cff5d4a8181b54fdae1e26659ecc2d7f205e4d2ea6da9f93a",
       "bytes": 2565,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0019-Runnable.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0019-Runnable.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0020-Strings.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0020-Strings.java.txt",
       "sha256": "20071ef19a84a81f9bccd9a4260df58225442810aef2cbe0b1ec4980c8251087",
       "bytes": 17999,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0020-Strings.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0020-Strings.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0021-Callable.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0021-Callable.java.txt",
       "sha256": "6b1ecf702a9e59b171efcaa28dd18fb72265d2bedbfeb2b8bc9d831a74d4892f",
       "bytes": 3165,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0021-Callable.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0021-Callable.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0022-Executor.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0022-Executor.java.txt",
       "sha256": "e887630e8a6fe2cb3b24f890fe02118abb06b9a340f8d79f47344840b9b2b6aa",
       "bytes": 6052,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0022-Executor.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0022-Executor.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0023-ExecutorService.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0023-ExecutorService.java.txt",
       "sha256": "9196858f2b800cc32671801563da29b14f881bbf37477419664aa6abd795ce2d",
       "bytes": 20247,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0023-ExecutorService.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0023-ExecutorService.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0024-MonitoredCallable.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0024-MonitoredCallable.java.txt",
       "sha256": "77436155c7936ab04698de243fc91b8a9c53a500e63247c364de591c45c1d733",
       "bytes": 1534,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0024-MonitoredCallable.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0024-MonitoredCallable.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0025-MonitoredRunnable.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0025-MonitoredRunnable.java.txt",
       "sha256": "2670d2b928981c1068c2299dc1458c2b9dc7dc372d2e8d2527005d695c77f06e",
       "bytes": 1172,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0025-MonitoredRunnable.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0025-MonitoredRunnable.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0026-ProgressMonitor.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0026-ProgressMonitor.java.txt",
       "sha256": "368f6b70ca1639ed193c477d1523a1707cf9ec65d056275552e8ca42f500ae93",
       "bytes": 3394,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0026-ProgressMonitor.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0026-ProgressMonitor.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0027-ProgressMonitors.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0027-ProgressMonitors.java.txt",
       "sha256": "48b06f44b71fd22a2bafc4e8a99d7542d280830043d929ce1d26ae338f3b4efc",
       "bytes": 10395,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0027-ProgressMonitors.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0027-ProgressMonitors.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0028-Consumer.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0028-Consumer.java.txt",
       "sha256": "52773610a8cd4d4e0808c2895e504b09ce9c0c05a0273e81cc533bad19ab6226",
       "bytes": 3571,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0028-Consumer.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0028-Consumer.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0029-Function.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0029-Function.java.txt",
       "sha256": "73877c7a547bb812a6901cae0af4866645de978b867e055204cd53f6dffb6476",
       "bytes": 4834,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0029-Function.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0029-Function.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0030-Supplier.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0030-Supplier.java.txt",
       "sha256": "84170e0863237433f20c3fdc4617eea990731fa7a1e5b0aeaf6b03f89e55c096",
       "bytes": 2640,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0030-Supplier.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0030-Supplier.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0031-M3RuntimeCompatibilityHold.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0031-M3RuntimeCompatibilityHold.java.txt",
       "sha256": "9faf22addfe520efd30ef8181fa1b89bb4e130f65acb35d2ac9e8b58a3ce38aa",
       "bytes": 14663,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0031-M3RuntimeCompatibilityHold.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0031-M3RuntimeCompatibilityHold.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/manifest.tsv",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/manifest.tsv",
       "sha256": "c69efcbeb4a4cdc36cdc021c285915fdce360c9f50f69251226019f8799c2cb6",
       "bytes": 2813,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/manifest.tsv"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/manifest.tsv"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0019-Runnable.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0019-Runnable.java.txt",
       "sha256": "bad73b8ae0b17e2160845c41058ebdda55fb755affecad51ef37fbc8e0d25534",
       "bytes": 2211,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0019-Runnable.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0019-Runnable.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0020-Strings.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0020-Strings.java.txt",
       "sha256": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d",
       "bytes": 10897,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0020-Strings.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0020-Strings.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0021-Callable.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0021-Callable.java.txt",
       "sha256": "a9d2d8cc73583297fb6c07dee24765473aaaeeaae2651a0b54eb411ed2d46261",
       "bytes": 2727,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0021-Callable.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0021-Callable.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0022-Executor.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0022-Executor.java.txt",
       "sha256": "63f808755d552e372f9669c47041b2aeb52f5e34d0f92428aa5899273e4515d4",
       "bytes": 5506,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0022-Executor.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0022-Executor.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0023-ExecutorService.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0023-ExecutorService.java.txt",
       "sha256": "ca9342b2227960f32bde645c6df74dcd993d23deafad1429fac6521816daa868",
       "bytes": 19302,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0023-ExecutorService.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0023-ExecutorService.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0024-MonitoredCallable.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0024-MonitoredCallable.java.txt",
       "sha256": "a402533489745504fa3e9b8ca667be9b0d9cc3a370bbe2092c70f20051afb2f7",
       "bytes": 975,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0024-MonitoredCallable.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0024-MonitoredCallable.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0025-MonitoredRunnable.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0025-MonitoredRunnable.java.txt",
       "sha256": "8c975815e833bca4c214313efde24acf776a1ef676140701f9a5293ef4b5415b",
       "bytes": 908,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0025-MonitoredRunnable.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0025-MonitoredRunnable.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0026-ProgressMonitor.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0026-ProgressMonitor.java.txt",
       "sha256": "58d084535f0e1c76adc102cffd1eff2cadae5c80877812908281699a55ce88b3",
       "bytes": 1285,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0026-ProgressMonitor.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0026-ProgressMonitor.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0027-ProgressMonitors.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0027-ProgressMonitors.java.txt",
       "sha256": "5073890ccf101b597e656b2516be70b83f0b77f9accdc157d75fc8d6f525a359",
       "bytes": 6695,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0027-ProgressMonitors.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0027-ProgressMonitors.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0028-Consumer.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0028-Consumer.java.txt",
       "sha256": "4de2f5ed281ed6f56b872bd4ae9cc832ffb11b6c78e84a0774d7d6058a4a31fc",
       "bytes": 3159,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0028-Consumer.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0028-Consumer.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0029-Function.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0029-Function.java.txt",
       "sha256": "7943afca3f9a3816e8f75a62b9c6104c31b883a1a1e614fb795a8fc85333c744",
       "bytes": 4389,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0029-Function.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0029-Function.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0030-Supplier.java.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0030-Supplier.java.txt",
       "sha256": "49c58acaea3e70e81ec7187b47551d1e0cf6906443bcf3d71e8c9cbba4d032c6",
       "bytes": 2242,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0030-Supplier.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0030-Supplier.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0001-ALGORITHM_CATALOGUE.tsv.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0001-ALGORITHM_CATALOGUE.tsv.txt",
       "sha256": "bea7b397c823b5849159fcc0dd89e599b83f694f4caf84d6a05dfbe0ad8892f6",
       "bytes": 5700,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0001-ALGORITHM_CATALOGUE.tsv.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0001-ALGORITHM_CATALOGUE.tsv.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0002-check_object_adapter_progress_receiver_20261017.py.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0002-check_object_adapter_progress_receiver_20261017.py.txt",
       "sha256": "e2c0e81911a8ea4e6d0d6b77eacc36fa4a4aca2c792536b9c32cbcdd40be0404",
       "bytes": 8803,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0002-check_object_adapter_progress_receiver_20261017.py.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0002-check_object_adapter_progress_receiver_20261017.py.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0003-m3-functional-progress-doclint-20261018.tsv.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0003-m3-functional-progress-doclint-20261018.tsv.txt",
       "sha256": "3b62981be6a617b903c559cc31904eca2bffb2b200380f1be57e07a8f634d969",
       "bytes": 694,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0003-m3-functional-progress-doclint-20261018.tsv.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0003-m3-functional-progress-doclint-20261018.tsv.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0004-m3-progress-doclint-20261018.tsv.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0004-m3-progress-doclint-20261018.tsv.txt",
       "sha256": "7246c16a0e8ec742eba98dac97e24b7fc3947250ad5d2a22f72ac32dcddf0219",
       "bytes": 1866,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0004-m3-progress-doclint-20261018.tsv.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0004-m3-progress-doclint-20261018.tsv.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0005-m3-progress-scope-lint-20261018.tsv.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0005-m3-progress-scope-lint-20261018.tsv.txt",
       "sha256": "1a45edfa747a03b3491063648a455083633e7de836e4c46241de104d689eebee",
       "bytes": 950,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0005-m3-progress-scope-lint-20261018.tsv.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0005-m3-progress-scope-lint-20261018.tsv.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0006-test_object_adapter_progress_receiver_20261018.py.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0006-test_object_adapter_progress_receiver_20261018.py.txt",
       "sha256": "e84be3f274caf1543ce7a2eb10aced6670fa488ad5478719be5b3227dc48a611",
       "bytes": 14842,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0006-test_object_adapter_progress_receiver_20261018.py.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0006-test_object_adapter_progress_receiver_20261018.py.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0007-verify_m3_default_template_20261017.py.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0007-verify_m3_default_template_20261017.py.txt",
       "sha256": "234293306f44acc4f756816564b9dea6146962b13ac2529397e25f062cce49bc",
       "bytes": 1128,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0007-verify_m3_default_template_20261017.py.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0007-verify_m3_default_template_20261017.py.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0008-name-mapping.json.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0008-name-mapping.json.txt",
       "sha256": "d63db548f89f25622399329148872225a438e9121cb3436d967bccd3bdff0c02",
       "bytes": 411184,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0008-name-mapping.json.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0008-name-mapping.json.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0009-ADMISSION.json.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0009-ADMISSION.json.txt",
       "sha256": "e921ec70d5a48e34f9f0a47f9f881b983c1efa62fe64b606c0883677478402a0",
       "bytes": 42505,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0009-ADMISSION.json.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0009-ADMISSION.json.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0010-CATALOGUE.tsv.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0010-CATALOGUE.tsv.txt",
       "sha256": "4baf92cdab38c03ef4a18e7fdf9e2cee914fb0641e02650fb4629c6960ec147b",
       "bytes": 1512,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0010-CATALOGUE.tsv.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0010-CATALOGUE.tsv.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0011-README.md.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0011-README.md.txt",
       "sha256": "5509f68c1ffd80067d2de0e47243777a1435b2a5746e93175188a0684352ebec",
       "bytes": 2420,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0011-README.md.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0011-README.md.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0012-RECEIVING-MAP.json.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0012-RECEIVING-MAP.json.txt",
       "sha256": "4cff79c7cf4399e6ed9593d23e373ee9c1e791bf1432d12d684771a1c2d51d8a",
       "bytes": 893,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0012-RECEIVING-MAP.json.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0012-RECEIVING-MAP.json.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0013-CATALOGUE.tsv.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0013-CATALOGUE.tsv.txt",
       "sha256": "3f88e143299a558a1a4f20c86d012b0823dc9f9ee4d519ce28cd16bc9cf35ff4",
       "bytes": 5316,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0013-CATALOGUE.tsv.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0013-CATALOGUE.tsv.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0014-CURRENT_OWNERS.json.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0014-CURRENT_OWNERS.json.txt",
       "sha256": "6c6e6dca85d5bf211ec04d8164d357918950348c4c3a9413be453c2bb11de364",
       "bytes": 2042,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0014-CURRENT_OWNERS.json.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0014-CURRENT_OWNERS.json.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0015-FILE_REVIEW.tsv.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0015-FILE_REVIEW.tsv.txt",
       "sha256": "1c5b958b528e94183f710dea0f4b7ce9319750407062ca51285bd66286b4d377",
       "bytes": 7737,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0015-FILE_REVIEW.tsv.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0015-FILE_REVIEW.tsv.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0016-README.md.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0016-README.md.txt",
       "sha256": "04e8ff5ea3b57b861ce4381c120e56584478c1f8004c2397829fb8c59e8dd49a",
       "bytes": 6157,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0016-README.md.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0016-README.md.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0017-classLoader.cpp.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0017-classLoader.cpp.txt",
       "sha256": "d6283c23f650714e85b9a910f6cda656146552ae95950a04b02af861b636dca2",
       "bytes": 63464,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0017-classLoader.cpp.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0017-classLoader.cpp.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0018-M3PrimitiveFixedArena.c.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0018-M3PrimitiveFixedArena.c.txt",
       "sha256": "bcc1693812f4e81ae490ed9ca03c38d6411a7ba81eb2108c1436d693991e0e30",
       "bytes": 3170,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0018-M3PrimitiveFixedArena.c.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/0018-M3PrimitiveFixedArena.c.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/manifest.tsv",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/manifest.tsv",
       "sha256": "3e2848f7e6aa17ce9143d83996537c1d65c4a964cc6ae7add1783a17179ba095",
       "bytes": 3306,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/manifest.tsv"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/manifest.tsv"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0001-ALGORITHM_CATALOGUE.tsv.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0001-ALGORITHM_CATALOGUE.tsv.txt",
       "sha256": "50e6381eed8e06fe9c073298b8a4cf20ad853df096887c6c8510a40bedce6569",
       "bytes": 3406,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0001-ALGORITHM_CATALOGUE.tsv.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0001-ALGORITHM_CATALOGUE.tsv.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0002-check_object_adapter_progress_receiver_20261017.py.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0002-check_object_adapter_progress_receiver_20261017.py.txt",
       "sha256": "5e44ba190257db7d9715d80e7870d6a1b69f8c76cc3c285182193e80fc0da443",
       "bytes": 1304,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0002-check_object_adapter_progress_receiver_20261017.py.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0002-check_object_adapter_progress_receiver_20261017.py.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0007-verify_m3_default_template_20261017.py.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0007-verify_m3_default_template_20261017.py.txt",
       "sha256": "856910b716021260d387c0e3230c774223d7afc6ba62eab8e0c35668ffc8f2da",
       "bytes": 1176,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0007-verify_m3_default_template_20261017.py.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0007-verify_m3_default_template_20261017.py.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0008-name-mapping.json.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0008-name-mapping.json.txt",
       "sha256": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
       "bytes": 404076,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0008-name-mapping.json.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0008-name-mapping.json.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0017-classLoader.cpp.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0017-classLoader.cpp.txt",
       "sha256": "665bb788428c8d3837d052ac4f69a2756bb1823918726b41a7a7008eadfafd8d",
       "bytes": 63485,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0017-classLoader.cpp.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0017-classLoader.cpp.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0018-M3PrimitiveFixedArena.c.txt",
+      "path": "datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0018-M3PrimitiveFixedArena.c.txt",
       "sha256": "04c5281944444e9a9c4bee49748b2a80f7661f44897003f87619403e709e2ddb",
       "bytes": 3143,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0018-M3PrimitiveFixedArena.c.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-runtime-restore-07ba/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-restore-07ba/pre/0018-M3PrimitiveFixedArena.c.txt"
       ]
     },
     {
@@ -852,7 +852,7 @@
       "sha256": "7d713a8be46e237b768922294e11b4f55506ce8861040e5b317fff8464a92b8b",
       "bytes": 15102,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/SDK_INPUTS.tsv"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/SDK_INPUTS.tsv"
       ]
     },
     {
@@ -860,7 +860,7 @@
       "sha256": "a553e09196f64ddd5d1334b8ffcb0cb655cbc0bbec624aa953a5d6a479a6cee0",
       "bytes": 5208,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/SDK_RESULTS.tsv"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/SDK_RESULTS.tsv"
       ]
     },
     {
@@ -868,7 +868,7 @@
       "sha256": "f569b753170bd264e3a62c069c248f096e251ff53d7ed7aa723e3de24cee9b76",
       "bytes": 55926,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/java.patch"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/java.patch"
       ]
     },
     {
@@ -876,7 +876,7 @@
       "sha256": "bea7b397c823b5849159fcc0dd89e599b83f694f4caf84d6a05dfbe0ad8892f6",
       "bytes": 5700,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/backports/ALGORITHM_CATALOGUE.tsv"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/backports/ALGORITHM_CATALOGUE.tsv"
       ]
     },
     {
@@ -884,7 +884,7 @@
       "sha256": "e2c0e81911a8ea4e6d0d6b77eacc36fa4a4aca2c792536b9c32cbcdd40be0404",
       "bytes": 8803,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/compatibility/check_object_adapter_progress_receiver_20261017.py"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/compatibility/check_object_adapter_progress_receiver_20261017.py"
       ]
     },
     {
@@ -892,7 +892,7 @@
       "sha256": "3b62981be6a617b903c559cc31904eca2bffb2b200380f1be57e07a8f634d969",
       "bytes": 694,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/compatibility/m3-functional-progress-doclint-20261018.tsv"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/compatibility/m3-functional-progress-doclint-20261018.tsv"
       ]
     },
     {
@@ -900,7 +900,7 @@
       "sha256": "7246c16a0e8ec742eba98dac97e24b7fc3947250ad5d2a22f72ac32dcddf0219",
       "bytes": 1866,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/compatibility/m3-progress-doclint-20261018.tsv"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/compatibility/m3-progress-doclint-20261018.tsv"
       ]
     },
     {
@@ -908,7 +908,7 @@
       "sha256": "1a45edfa747a03b3491063648a455083633e7de836e4c46241de104d689eebee",
       "bytes": 950,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/compatibility/m3-progress-scope-lint-20261018.tsv"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/compatibility/m3-progress-scope-lint-20261018.tsv"
       ]
     },
     {
@@ -916,7 +916,7 @@
       "sha256": "e84be3f274caf1543ce7a2eb10aced6670fa488ad5478719be5b3227dc48a611",
       "bytes": 14842,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/compatibility/test_object_adapter_progress_receiver_20261018.py"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/compatibility/test_object_adapter_progress_receiver_20261018.py"
       ]
     },
     {
@@ -924,7 +924,7 @@
       "sha256": "234293306f44acc4f756816564b9dea6146962b13ac2529397e25f062cce49bc",
       "bytes": 1128,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/compatibility/verify_m3_default_template_20261017.py"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/compatibility/verify_m3_default_template_20261017.py"
       ]
     },
     {
@@ -932,7 +932,7 @@
       "sha256": "d63db548f89f25622399329148872225a438e9121cb3436d967bccd3bdff0c02",
       "bytes": 411184,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/docs/name-mapping.json"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/docs/name-mapping.json"
       ]
     },
     {
@@ -940,7 +940,7 @@
       "sha256": "e921ec70d5a48e34f9f0a47f9f881b983c1efa62fe64b606c0883677478402a0",
       "bytes": 42505,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/runtime-integration/merged-repair-recovery-20261018/ADMISSION.json"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/runtime-integration/merged-repair-recovery-20261018/ADMISSION.json"
       ]
     },
     {
@@ -948,7 +948,7 @@
       "sha256": "4baf92cdab38c03ef4a18e7fdf9e2cee914fb0641e02650fb4629c6960ec147b",
       "bytes": 1512,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/runtime-integration/merged-repair-recovery-20261018/CATALOGUE.tsv"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/runtime-integration/merged-repair-recovery-20261018/CATALOGUE.tsv"
       ]
     },
     {
@@ -956,7 +956,7 @@
       "sha256": "5509f68c1ffd80067d2de0e47243777a1435b2a5746e93175188a0684352ebec",
       "bytes": 2420,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/runtime-integration/merged-repair-recovery-20261018/README.md"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/runtime-integration/merged-repair-recovery-20261018/README.md"
       ]
     },
     {
@@ -964,7 +964,7 @@
       "sha256": "4cff79c7cf4399e6ed9593d23e373ee9c1e791bf1432d12d684771a1c2d51d8a",
       "bytes": 893,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/runtime-integration/merged-repair-recovery-20261018/RECEIVING-MAP.json"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/runtime-integration/merged-repair-recovery-20261018/RECEIVING-MAP.json"
       ]
     },
     {
@@ -972,7 +972,7 @@
       "sha256": "3f88e143299a558a1a4f20c86d012b0823dc9f9ee4d519ce28cd16bc9cf35ff4",
       "bytes": 5316,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv"
       ]
     },
     {
@@ -980,7 +980,7 @@
       "sha256": "6c6e6dca85d5bf211ec04d8164d357918950348c4c3a9413be453c2bb11de364",
       "bytes": 2042,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/runtime-integration/runtime-repair-20261018/CURRENT_OWNERS.json"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/runtime-integration/runtime-repair-20261018/CURRENT_OWNERS.json"
       ]
     },
     {
@@ -988,7 +988,7 @@
       "sha256": "1c5b958b528e94183f710dea0f4b7ce9319750407062ca51285bd66286b4d377",
       "bytes": 7737,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/runtime-integration/runtime-repair-20261018/FILE_REVIEW.tsv"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/runtime-integration/runtime-repair-20261018/FILE_REVIEW.tsv"
       ]
     },
     {
@@ -996,7 +996,7 @@
       "sha256": "04e8ff5ea3b57b861ce4381c120e56584478c1f8004c2397829fb8c59e8dd49a",
       "bytes": 6157,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/runtime-integration/runtime-repair-20261018/README.md"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/m3/runtime-integration/runtime-repair-20261018/README.md"
       ]
     },
     {
@@ -1004,7 +1004,7 @@
       "sha256": "d6283c23f650714e85b9a910f6cda656146552ae95950a04b02af861b636dca2",
       "bytes": 63464,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/hotspot/share/classfile/classLoader.cpp"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/hotspot/share/classfile/classLoader.cpp"
       ]
     },
     {
@@ -1012,7 +1012,7 @@
       "sha256": "bcc1693812f4e81ae490ed9ca03c38d6411a7ba81eb2108c1436d693991e0e30",
       "bytes": 3170,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c"
       ]
     },
     {
@@ -1020,7 +1020,7 @@
       "sha256": "b549cf18db454b6cff5d4a8181b54fdae1e26659ecc2d7f205e4d2ea6da9f93a",
       "bytes": 2565,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/lang/Runnable.java"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/lang/Runnable.java"
       ]
     },
     {
@@ -1028,7 +1028,7 @@
       "sha256": "20071ef19a84a81f9bccd9a4260df58225442810aef2cbe0b1ec4980c8251087",
       "bytes": 17999,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/util/Strings.java"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/util/Strings.java"
       ]
     },
     {
@@ -1036,7 +1036,7 @@
       "sha256": "6b1ecf702a9e59b171efcaa28dd18fb72265d2bedbfeb2b8bc9d831a74d4892f",
       "bytes": 3165,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/util/concurrent/Callable.java"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/util/concurrent/Callable.java"
       ]
     },
     {
@@ -1044,7 +1044,7 @@
       "sha256": "e887630e8a6fe2cb3b24f890fe02118abb06b9a340f8d79f47344840b9b2b6aa",
       "bytes": 6052,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/util/concurrent/Executor.java"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/util/concurrent/Executor.java"
       ]
     },
     {
@@ -1052,7 +1052,7 @@
       "sha256": "9196858f2b800cc32671801563da29b14f881bbf37477419664aa6abd795ce2d",
       "bytes": 20247,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/util/concurrent/ExecutorService.java"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/util/concurrent/ExecutorService.java"
       ]
     },
     {
@@ -1060,7 +1060,7 @@
       "sha256": "77436155c7936ab04698de243fc91b8a9c53a500e63247c364de591c45c1d733",
       "bytes": 1534,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java"
       ]
     },
     {
@@ -1068,7 +1068,7 @@
       "sha256": "2670d2b928981c1068c2299dc1458c2b9dc7dc372d2e8d2527005d695c77f06e",
       "bytes": 1172,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java"
       ]
     },
     {
@@ -1076,7 +1076,7 @@
       "sha256": "368f6b70ca1639ed193c477d1523a1707cf9ec65d056275552e8ca42f500ae93",
       "bytes": 3394,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java"
       ]
     },
     {
@@ -1084,7 +1084,7 @@
       "sha256": "48b06f44b71fd22a2bafc4e8a99d7542d280830043d929ce1d26ae338f3b4efc",
       "bytes": 10395,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java"
       ]
     },
     {
@@ -1092,7 +1092,7 @@
       "sha256": "52773610a8cd4d4e0808c2895e504b09ce9c0c05a0273e81cc533bad19ab6226",
       "bytes": 3571,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/util/function/Consumer.java"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/util/function/Consumer.java"
       ]
     },
     {
@@ -1100,7 +1100,7 @@
       "sha256": "73877c7a547bb812a6901cae0af4866645de978b867e055204cd53f6dffb6476",
       "bytes": 4834,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/util/function/Function.java"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/util/function/Function.java"
       ]
     },
     {
@@ -1108,7 +1108,7 @@
       "sha256": "84170e0863237433f20c3fdc4617eea990731fa7a1e5b0aeaf6b03f89e55c096",
       "bytes": 2640,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/util/function/Supplier.java"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/src/java.base/share/classes/java/util/function/Supplier.java"
       ]
     },
     {
@@ -1116,7 +1116,7 @@
       "sha256": "9faf22addfe520efd30ef8181fa1b89bb4e130f65acb35d2ac9e8b58a3ce38aa",
       "bytes": 14663,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/test/jdk/java/lang/Object/M3RuntimeCompatibilityHold.java"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/test/jdk/java/lang/Object/M3RuntimeCompatibilityHold.java"
       ]
     },
     {
@@ -1124,23 +1124,23 @@
       "sha256": "495a080427dd7da36c4a7928358860a83a5e47cda83ff20213336e51f69bb03e",
       "bytes": 118295,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/text.patch"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/candidate/text.patch"
       ]
     },
     {
-      "path": "evidence/current-runtime-recovery-20261018/surefire/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "path": "evidence/current-runtime-recovery-20261018/surefire/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml",
       "sha256": "e277555166595fee4b322d8162605607b3d10051af8863fc42fcfa407af655d4",
       "bytes": 14792,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
       ]
     },
     {
-      "path": "evidence/current-runtime-recovery-20261018/surefire/com.synexia.rewrite.M3TaskRecipeTest.txt",
+      "path": "evidence/current-runtime-recovery-20261018/surefire/jdk.internal.m3.rewrite.M3TaskRecipeTest.txt",
       "sha256": "ff9cfb3923a7ec767233c20b1f7ac54c3f22c1459e32c20d249681f6d6863430",
       "bytes": 322,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/surefire-reports/com.synexia.rewrite.M3TaskRecipeTest.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-runtime-restore-07ba/surefire-reports/jdk.internal.m3.rewrite.M3TaskRecipeTest.txt"
       ]
     },
     {
@@ -1148,7 +1148,7 @@
       "sha256": "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d",
       "bytes": 5855,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/pom.xml"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/pom.xml"
       ]
     }
   ]

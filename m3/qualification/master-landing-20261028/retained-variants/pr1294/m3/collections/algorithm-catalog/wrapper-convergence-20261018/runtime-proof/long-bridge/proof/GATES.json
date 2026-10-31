@@ -9,11 +9,11 @@
       "-Xlint:all",
       "-Werror",
       "-d",
-      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/baseline-classes",
-      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/baseline/m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasks.java",
-      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
-      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/baseline/m3/collections/src/test/java/com/m3/collections/M3LongIndexPathMasksSelfTest.java",
-      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/src/test/java/com/m3/collections/M3LongPathBridgeBehaviorProbe.java"
+      "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/baseline-classes",
+      "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/baseline/m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasks.java",
+      "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/baseline/m3/collections/src/test/java/com/m3/collections/M3LongIndexPathMasksSelfTest.java",
+      "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/src/test/java/com/m3/collections/M3LongPathBridgeBehaviorProbe.java"
     ],
     "exit_code": 0,
     "seconds": 2.367,
@@ -27,7 +27,7 @@
       "-Xmx256m",
       "-Xss256k",
       "-cp",
-      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/baseline-classes",
+      "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/baseline-classes",
       "com.m3.collections.M3LongIndexPathMasksSelfTest"
     ],
     "exit_code": 0,
@@ -42,7 +42,7 @@
       "-Xmx256m",
       "-Xss256k",
       "-cp",
-      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/baseline-classes",
+      "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/baseline-classes",
       "com.m3.collections.M3LongPathBridgeBehaviorProbe"
     ],
     "exit_code": 0,
@@ -55,7 +55,7 @@
     "command": [
       "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javap",
       "-classpath",
-      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/baseline-classes",
+      "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/baseline-classes",
       "-public",
       "-s",
       "-constants",
@@ -76,11 +76,11 @@
       "-Xlint:all",
       "-Werror",
       "-d",
-      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/candidate-classes",
-      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/candidates/m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasks.java",
-      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
-      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/baseline/m3/collections/src/test/java/com/m3/collections/M3LongIndexPathMasksSelfTest.java",
-      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/src/test/java/com/m3/collections/M3LongPathBridgeBehaviorProbe.java"
+      "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/candidate-classes",
+      "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/candidates/m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasks.java",
+      "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/candidates/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/baseline/m3/collections/src/test/java/com/m3/collections/M3LongIndexPathMasksSelfTest.java",
+      "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/src/test/java/com/m3/collections/M3LongPathBridgeBehaviorProbe.java"
     ],
     "exit_code": 0,
     "seconds": 1.592,
@@ -94,7 +94,7 @@
       "-Xmx256m",
       "-Xss256k",
       "-cp",
-      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/candidate-classes",
+      "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/candidate-classes",
       "com.m3.collections.M3LongIndexPathMasksSelfTest"
     ],
     "exit_code": 0,
@@ -109,7 +109,7 @@
       "-Xmx256m",
       "-Xss256k",
       "-cp",
-      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/candidate-classes",
+      "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/candidate-classes",
       "com.m3.collections.M3LongPathBridgeBehaviorProbe"
     ],
     "exit_code": 0,
@@ -122,7 +122,7 @@
     "command": [
       "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javap",
       "-classpath",
-      "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/candidate-classes",
+      "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/candidate-classes",
       "-public",
       "-s",
       "-constants",

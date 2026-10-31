@@ -169,6 +169,6 @@
     "compiled_owner_sha256": "b575827c4a385f992bc245f553ef44d307f564b8b04f0922ba94d833bb97ce9f",
     "limitation": "Unpinned shared host; only 150 warmups + 400 calls per case; noisy native/JVM allocation/compiler effects; no isolated cost gate or universal speed claim",
     "complete_receipt_sha256": "683c42dbfa977547b852decdb84013a0c089b1af5695d956f487a6727794d73c",
-    "canonical_evidence": "synexia-openrewrite-recipes/recipe-crates/m3-netbeans-collection-atoms-20261019/evidence/native-mask/REVIEW.json"
+    "canonical_evidence": "m3-openrewrite-recipes/recipe-crates/m3-netbeans-collection-atoms-20261019/evidence/native-mask/REVIEW.json"
   }
 }

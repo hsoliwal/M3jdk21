@@ -21,7 +21,7 @@
     "classification": "SOURCE_INSPECTED_NOT_AN_OBSERVED_SECOND_EXECUTION_FAILURE",
     "reason": "The actual v1 run refused a manifest row before reaching the unchanged target-count guard."
   },
-  "engine_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+  "engine_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
   "engine_sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef",
   "allowed_structured_suffixes": [
     ".py",
@@ -68,30 +68,30 @@
     {
       "delivered_path": "history/catalogue-delivery-v1/SDK_FAILURE.xml",
       "sha256": "9db18d4a54629dfd97e5c46322c02472dcb99ef83898da843485aac0d89df723",
-      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-wrap-catalog-20261018/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+      "origin": "com.synexia/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-wrap-catalog-20261018/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
     },
     {
       "delivered_path": "history/catalogue-delivery-v1/DATASET.json",
       "sha256": "2de631902ebb47ac2eec1afc1a0a58ebf206dd02ef2889e44856838684796212",
-      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018/DATASET.json"
+      "origin": "com.synexia/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018/DATASET.json"
     },
     {
       "delivered_path": "history/catalogue-delivery-v1/MODES.tsv",
       "sha256": "adfb16bf09dcd3b6ffc3a9c3a5a5c2f5891724ccab0d16bf7534eacf15d2b168",
-      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018/MODES.tsv"
+      "origin": "com.synexia/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018/MODES.tsv"
     },
     {
       "delivered_path": "history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
       "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23",
-      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018/ENGINE_EFFECTIVE.tsv"
+      "origin": "com.synexia/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018/ENGINE_EFFECTIVE.tsv"
     },
     {
       "delivered_path": "history/catalogue-delivery-v1/manifest.tsv",
       "sha256": "575fa6a49a303e7ebbf0c7800776641286cb67c70b2bc86e52db09c540131017",
-      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog-20261018/manifest.tsv"
+      "origin": "com.synexia/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog-20261018/manifest.tsv"
     }
   ],
-  "unchanged_failed_dataset": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018",
+  "unchanged_failed_dataset": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018",
   "previous_payload_reconstruction": "history/catalogue-delivery-v1/V1_PAYLOAD_MAPPING.json",
   "next_authority": "Parent must seal and run both existing TEXT datasets serially; static packaging admission is not an SDK qualification pass.",
   "immutable_evidence_payload_edits": 0,

@@ -2,7 +2,7 @@ name: M3 A3 scope history and full custody JUnit
 on:
   pull_request:
     paths:
-      - 'm3/synexia-import/pure-int-recipe-custody/**'
+      - 'm3/m3-import/pure-int-recipe-custody/**'
       - '.github/workflows/m3-a3-scope-history-20261015.yml'
   workflow_dispatch:
 permissions:
@@ -19,13 +19,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           sparse-checkout: |
-            m3/synexia-import/pure-int-recipe-custody
+            m3/m3-import/pure-int-recipe-custody
           sparse-checkout-cone-mode: true
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
           cache: maven
-          cache-dependency-path: m3/synexia-import/pure-int-recipe-custody/pom.xml
+          cache-dependency-path: m3/m3-import/pure-int-recipe-custody/pom.xml
       - name: Compile A3 source and execute every custody JUnit class
-        run: mvn -B -ntp -f m3/synexia-import/pure-int-recipe-custody/pom.xml test
+        run: mvn -B -ntp -f m3/m3-import/pure-int-recipe-custody/pom.xml test

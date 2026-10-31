@@ -4,4 +4,4 @@ name: com.m3.rewrite.ExtendRetainedView
 displayName: Extend the pinned IndexString retained view
 description: Source/dependency-fenced additive owner extension; not caller lowering.
 recipeList:
-  - com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe
+  - jdk.internal.m3.rewrite.M3MIndexJoinedCharsViewRecipe

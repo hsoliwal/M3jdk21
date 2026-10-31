@@ -7,7 +7,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
-TEMPLATES = ROOT / "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-native-generic-deque-priority-20261018"
+TEMPLATES = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-native-generic-deque-priority-20261018"
 SOURCE_BLOBS = {
   "M3ArrayDeque.java": "9df441b51b1912fcaece88197b0e69e6fe89986a",
   "M3PriorityQueue.java": "bd462291a8a33862d943e0afc5dd839693548e8b",

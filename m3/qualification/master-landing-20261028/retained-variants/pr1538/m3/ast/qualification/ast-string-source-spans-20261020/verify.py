@@ -8,7 +8,7 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[4]
 AST = ROOT / "m3/ast"
-CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-source-spans-20261020"
+CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-ast-source-spans-20261020"
 
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()

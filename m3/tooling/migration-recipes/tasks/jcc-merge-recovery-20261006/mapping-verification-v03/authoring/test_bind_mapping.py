@@ -21,10 +21,10 @@ class MappingBindingTest(unittest.TestCase):
         def image(body):
             return {"content_base64": base64.b64encode(body).decode(), "bytes": len(body),
                     "sha256": binder.digest(body), "git_blob_sha1": binder.git_object("blob", body)}
-        pom = image(b'<project><modules><module>synexia-openrewrite-recipes</module><module>synexia-algo/nested</module></modules>'
+        pom = image(b'<project><modules><module>m3-openrewrite-recipes</module><module>m3-algo/nested</module></modules>'
                     b'<profiles><profile><id>fixture</id><modules><module>m3-fast-search</module></modules></profile></profiles></project>\n')
         entries = [{"path": "pom.xml", "type": "blob", "mode": "100644", "sha": pom["git_blob_sha1"]}]
-        for path in ["synexia-openrewrite-recipes", "synexia-algo", "synexia-donor-inventory", "m3-fast-search"]:
+        for path in ["m3-openrewrite-recipes", "m3-algo", "m3-donor-inventory", "m3-fast-search"]:
             entries.append({"path": path, "type": "tree", "mode": "040000", "sha": binder.git_object("tree", b"")})
         tree = binder.tree_hash(entries)
         commit = "c" * 40
@@ -35,15 +35,15 @@ class MappingBindingTest(unittest.TestCase):
                 continue
             sources = list(record["sources"])
             if record["id"] == binder.LAB:
-                sources += [{"path": binder.IOP, "module": "synexia-openrewrite-recipes", "symbol": "com.synexia.rewrite.M3IopPatternMechanicalPasses"}]
+                sources += [{"path": binder.IOP, "module": "m3-openrewrite-recipes", "symbol": "jdk.internal.m3.rewrite.M3IopPatternMechanicalPasses"}]
             for source in sources:
                 body = ("// SYNTHETIC FIXTURE ONLY: " + source["path"] + "\n").encode()
                 artifacts.append(dict(image(body), path=source["path"], module=source["module"], symbol=source["symbol"],
                     capability_id=record["id"], commit=commit, repository=binder.SOURCE_REPO,
                     readback_verified=True, readback_sha256=binder.digest(b"synthetic readback marker")))
-        build_body = (cls.audit.parent / "runtime-resolution/chrome-pom-repair-v01/materialized/synexia-openrewrite-recipes/pom.xml").read_bytes()
+        build_body = (cls.audit.parent / "runtime-resolution/chrome-pom-repair-v01/materialized/m3-openrewrite-recipes/pom.xml").read_bytes()
         build_component = dict(image(build_body), kind="module-pom-compile-edge", repository=binder.SOURCE_REPO, commit=commit,
-            path="synexia-openrewrite-recipes/pom.xml", module="synexia-openrewrite-recipes",
+            path="m3-openrewrite-recipes/pom.xml", module="m3-openrewrite-recipes",
             readback_verified=True, readback_sha256=binder.digest(b"unpublishable fixture build-component marker"))
         cls.packet = {"schema": "m3-jcc-source-publication-input/1", "fixture": True,
             "repository": binder.SOURCE_REPO, "commit": commit, "root_tree": tree, "ref": ref,

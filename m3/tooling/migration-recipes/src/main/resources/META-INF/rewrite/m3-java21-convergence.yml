@@ -14,4 +14,4 @@ tags:
   - behavior-contract-preserving
 causesAnotherCycle: true
 recipeList:
-  - com.synexia.rewrite.M3Jdk21FileConvergenceRecipe
+  - jdk.internal.m3.rewrite.M3Jdk21FileConvergenceRecipe

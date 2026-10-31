@@ -17,7 +17,7 @@ ROOT = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ARTIFACTS = ROOT / "artifacts"
 PREFIX = "m3/tooling/state-relation-current-c11/"
 WORKFLOW = ".github/workflows/m3-state-relation-current-c11.yml"
-SUITE = "com.synexia.rewrite.M3StateRelationCurrentC11RecipeTest"
+SUITE = "jdk.internal.m3.rewrite.M3StateRelationCurrentC11RecipeTest"
 METHODS = ["exactFiveOwnersReplayAsFixedPointInBothOrders",
            "everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation",
            "historicalCRefusesCurrentOwnership"]
@@ -158,7 +158,7 @@ def report():
             raise RuntimeError("source-only SDK receipt exceeds its boundary")
     providers = {}
     for name in ("M3GpuToolJoinRecipe","M3GpuToolJoinManifest","M3StateRelationCurrentC11Recipe"):
-        path = regular(SDK / ("target/classes/com/synexia/rewrite/" + name + ".class"))
+        path = regular(SDK / ("target/classes/jdk/internal/m3/rewrite/" + name + ".class"))
         data = path.read_bytes()
         if data[:4] != b"\xca\xfe\xba\xbe" or int.from_bytes(data[6:8], "big") != 65:
             raise RuntimeError("real major65 SDK provider required")

@@ -8,7 +8,7 @@ import sys
 HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parents[3]  # repo root: m3/collections/qualification/<crate>/verify.py
 TEMPLATES = (ROOT / "m3/tooling/migration-recipes/src/main/resources"
-    / "com/synexia/rewrite/hash-pinned-java/m3jdk21-long-range-array-flags-20261017")
+    / "jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-long-range-array-flags-20261017")
 MANIFEST = TEMPLATES / "manifest.tsv"
 
 def checked_data(p):

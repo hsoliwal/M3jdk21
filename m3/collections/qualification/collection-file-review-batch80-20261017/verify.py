@@ -10,7 +10,7 @@ for component in (SCRIPT, *SCRIPT.parents):
         raise RuntimeError("aliased qualification path")
 ROOT = Path(__file__).resolve().parents[4]
 RECIPE = ROOT / "m3/collections/recipe/collection-file-review-batch80-20261017"
-OWNER = RECIPE / "src/main/resources/com/synexia/rewrite/hash-pinned-text/collection-file-review-batch80"
+OWNER = RECIPE / "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/collection-file-review-batch80"
 EXPECTED = {
     "m3/collections/algorithm-catalog/README-collection-file-review-20261017.md": "f598ec356cd140e71a7d2c085c61ac857b8a7d8e8228723a85df7cfff60db4d9",
     "m3/collections/algorithm-catalog/SOURCE_INVARIANT_CONTRACT-20261017.md": "e80c95e72cdff72e8f14be43e70a768a503eaeea0b168a1ce6393696d51c1fe5",

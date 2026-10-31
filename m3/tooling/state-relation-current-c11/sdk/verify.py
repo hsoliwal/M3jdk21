@@ -13,8 +13,8 @@ import tempfile
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parent
-RESOURCE = "src/main/resources/com/synexia/rewrite/state-relation-current-c11-20261019"
-SUITE = "com.synexia.rewrite.M3StateRelationCurrentC11RecipeTest"
+RESOURCE = "src/main/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019"
+SUITE = "jdk.internal.m3.rewrite.M3StateRelationCurrentC11RecipeTest"
 METHODS = ["exactFiveOwnersReplayAsFixedPointInBothOrders",
            "everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation",
            "historicalCRefusesCurrentOwnership"]
@@ -28,29 +28,29 @@ OWNER_GIT = {
 }
 KEEP_PATHS = list(OWNER_GIT)
 TARGET_PATHS = KEEP_PATHS
-HISTORICAL = "src/test/resources/com/synexia/rewrite/state-relation-current-c11-20261019/historical/M3StateRelation.c.txt"
+HISTORICAL = "src/test/resources/jdk/internal/m3/rewrite/state-relation-current-c11-20261019/historical/M3StateRelation.c.txt"
 HISTORICAL_GIT = "5b30f71d8ed878b3199225b9512b75a090ff896c"
 RECEIVER_OUTPUTS: dict[str, str] = {}
 RECEIVER_CUSTODY: dict[str, str] = {}
 DESCRIPTOR = "src/main/resources/META-INF/rewrite/state-relation-current-c11-20261019.yml"
-TEST = "src/test/java/com/synexia/rewrite/M3StateRelationCurrentC11RecipeTest.java"
+TEST = "src/test/java/jdk/internal/m3/rewrite/M3StateRelationCurrentC11RecipeTest.java"
 REQUIRED_PATHS = sorted([
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
-    "pinned-engine/com/synexia/rewrite/M3StateRelationCurrentC11Recipe.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3StateRelationCurrentC11Recipe.java",
     "pom.xml", DESCRIPTOR, TEST, "verify.py", HISTORICAL,
     "FOSS_REUSE_DECISION.tsv", "THIRD_PARTY_NOTICES.md", "README.md",
     RESOURCE + "/manifest.tsv",
     *[RESOURCE + "/" + stage + "/" + name for stage in ("before", "out") for name in KEEP_PATHS],
 ])
 ORIGINAL_GIT = {
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
     "pom.xml": "d79867bcc09ad6329e12418e15907e54b8ab025f",
     HISTORICAL: HISTORICAL_GIT,
 }
-PROVIDERS = {"openrewriteAdapter": ORIGINAL_GIT["pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java"],
-             "manifestKernel": ORIGINAL_GIT["pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java"]}
+PROVIDERS = {"openrewriteAdapter": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java"],
+             "manifestKernel": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java"]}
 COMPILED_PROVIDERS = ("M3GpuToolJoinRecipe", "M3GpuToolJoinManifest", "M3StateRelationCurrentC11Recipe")
 FALSE_GATES = ("targetJavaCompiled", "originalPrivateOwnerModuleQualified", "receiverRuntimeQualified",
                "currentC11Qualified", "nativeExecuted", "jniRuntimeQualified",
@@ -198,7 +198,7 @@ def validate_marker(xml: bytes, ident: str) -> None:
 def self_test_reports() -> None:
     """Prove exact provider-derived names without stripping parameter signatures."""
     # Independent literal oracle matches the sealed Java methods and pinned provider.
-    expected_suites = {"com.synexia.rewrite.M3StateRelationCurrentC11RecipeTest":["exactFiveOwnersReplayAsFixedPointInBothOrders","everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation","historicalCRefusesCurrentOwnership"]}
+    expected_suites = {"jdk.internal.m3.rewrite.M3StateRelationCurrentC11RecipeTest":["exactFiveOwnersReplayAsFixedPointInBothOrders","everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation","historicalCRefusesCurrentOwnership"]}
     if SUITES != expected_suites:
         raise AssertionError("sealed SDK report inventory drift")
     refused = 0
@@ -407,7 +407,7 @@ def reports(pins: dict, pins_data: bytes) -> None:
             "KEEP-only recipe must not emit product source")
     compiled = {}
     for name in COMPILED_PROVIDERS:
-        relative = "target/classes/com/synexia/rewrite/" + name + ".class"
+        relative = "target/classes/jdk/internal/m3/rewrite/" + name + ".class"
         raw = regular(ROOT / relative).read_bytes()
         require(len(raw) > 8 and raw[:4] == bytes.fromhex("cafebabe")
                 and int.from_bytes(raw[6:8], "big") == 65, "actual Java21 SDK provider class required")

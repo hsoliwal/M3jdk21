@@ -7,7 +7,7 @@ import argparse, hashlib, json, os, re, shutil, subprocess, tempfile
 from pathlib import Path
 TASK=Path(__file__).resolve().parent
 ROOT=TASK.parents[3]
-RES=TASK/'src/main/resources/com/synexia/rewrite/native-index-range-20261017'
+RES=TASK/'src/main/resources/jdk/internal/m3/rewrite/native-index-range-20261017'
 JAVA='m3/collections/src/main/java/com/m3/collections/'
 C='m3/collections/src/main/native/collections/m3_index_mask_compactor.c'
 SELF='m3/collections/src/test/java/com/m3/collections/M3NativeIndexRangeSelfTest.java'
@@ -49,11 +49,11 @@ def main():
     try:
         with tempfile.TemporaryDirectory(prefix='m3-native-range-') as d:
             tmp=Path(d); engine=tmp/'engine';engine.mkdir()
-            pkg=TASK/'src/main/java/com/synexia/rewrite'
+            pkg=TASK/'src/main/java/jdk/internal/m3/rewrite'
             run(['javac','--release','21','-Xlint:all','-Werror','-d',engine,
                  pkg/'M3GpuToolJoinManifest.java',pkg/'NativeIndexRangeReplay.java'])
             candidate=tmp/'candidate'
-            run(['java','-cp',engine,'com.synexia.rewrite.NativeIndexRangeReplay',ROOT,candidate])
+            run(['java','-cp',engine,'jdk.internal.m3.rewrite.NativeIndexRangeReplay',ROOT,candidate])
             baseline=tmp/'baseline';shutil.copytree(TASK/'before',baseline)
             base_classes=tmp/'base-classes';base_lib=tmp/'base-lib'
             compile_java(baseline,base_classes,candidate);compile_c(baseline/C,base_lib)
@@ -120,7 +120,7 @@ if(x!=NULL){(*e)->ThrowNew(e,x,"legacy-native-witness");(*e)->DeleteLocalRef(e,x
                     if template!='KEEP' and (not (ROOT/path).exists() or sha(ROOT/path)!=after):
                         raise AssertionError('generated output not installed: '+path+'; use --apply after template qualification')
             replay=tmp/'fixed-point'
-            run(['java','-cp',engine,'com.synexia.rewrite.NativeIndexRangeReplay',ROOT,replay])
+            run(['java','-cp',engine,'jdk.internal.m3.rewrite.NativeIndexRangeReplay',ROOT,replay])
             for path,before,after,template in rows:
                 if template!='KEEP' and (candidate/path).read_bytes()!=(replay/path).read_bytes():raise AssertionError('nonrepeatable '+path)
             shutil.copyfile(candidate/'GENERATED_SHA256.tsv',evidence/'GENERATED_SHA256.tsv')

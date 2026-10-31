@@ -3,7 +3,7 @@
   "policy": "M3-COLLECTION-JNI-ARRAY-STORAGE-1",
   "canonical_repository": "hsoliwal/com.synexia",
   "canonical_revision": "7e70e5b22ee98834e6bb87e2b68f3029bd08e2b5",
-  "canonical_packet": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/lfu-native-lanes-v1/",
+  "canonical_packet": "m3-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/lfu-native-lanes-v1/",
   "recipe": "Current M3HashPinnedJavaSnapshotRecipe + context manifest m3-lfu-native-lanes-v1-20261023; exact canonical trio4170473b archived unchanged",
   "base_revision": "9360755ec2988370a1bd77c5d66ba659a73af37c",
   "production_path": "m3/collections/src/main/java/com/m3/collections/M3LFUCache.java",

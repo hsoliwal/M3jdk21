@@ -4,7 +4,7 @@
   "canonical_baseline": "8c15ac5a714caed2034b41f15cae715d30f111f5",
   "canonical_repository": "hsoliwal/com.synexia",
   "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12609",
-  "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018",
+  "canonical_path": "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018",
   "dataset": "file-ast-final-20261021",
   "canonical_immutable_pin": "file-ast-native-source-pin-20261021.json",
   "source_sha256": {
@@ -94,7 +94,7 @@
   },
   "jdt_custody_correction": {
     "canonical_commit": "08e84ed4430894e07dea272758401fd7202d2187",
-    "path": "synexia-job/src/main/java/com/synexia/job/utils/ProgressCalculationUtils.java",
+    "path": "m3-job/src/main/java/jdk/internal/m3/job/utils/ProgressCalculationUtils.java",
     "git_blob": "b0eb1223d9d9513828d5c015db3c3af69659bee7",
     "sha256": "7a5f950efde91f07e8df46a092bb34408b49532807be361a6c1da19ac3b3bf45",
     "source_body_changed": false

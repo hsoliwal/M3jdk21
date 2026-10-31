@@ -144,7 +144,7 @@ def verify_image(jdk, out):
     tests.mkdir()
     services = tests / "META-INF/services"
     services.mkdir(parents=True)
-    (services / "com.synexia.mindex.MIndexTensorBackend").write_text(
+    (services / "jdk.internal.m3.mindex.MIndexTensorBackend").write_text(
         "jdk.m3.nlp.search.test.SourceIntegrationProbe$ExternalBackend\n", encoding="utf-8")
     run([image / "bin/javac", "-source", "21", "-target", "21", "--enable-preview",
          "-Xlint:all,-preview", "-Werror", "--add-modules", MODULE,

@@ -2057,32 +2057,32 @@
     },
     {
       "bytes": 228,
-      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/synexia-import/current-full-borrow/historical-evidence.tsv",
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/m3-import/current-full-borrow/historical-evidence.tsv",
       "sha256": "4057f1681c9e0c16ef879d9b9ea432f46d8be504b31f8bc152d9a16704ec56f0"
     },
     {
       "bytes": 1328,
-      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/synexia-import/current-full-borrow/pin.tsv",
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/m3-import/current-full-borrow/pin.tsv",
       "sha256": "d84e185891f08d76da765e43d1e138e33fbef99f50de9cc83a99c5284ab46ab5"
     },
     {
       "bytes": 1070,
-      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/synexia-import/current-full-borrow/promotion-phases.tsv",
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/m3-import/current-full-borrow/promotion-phases.tsv",
       "sha256": "e4730068f321d551913a4cf7d40832f43b315c3973312c73b744ca5081758eb5"
     },
     {
       "bytes": 3721,
-      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/synexia-import/current-full-borrow/receiver-status.tsv",
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/m3-import/current-full-borrow/receiver-status.tsv",
       "sha256": "7c1326d024e111e953c139e30be1cfe3026bab0458d648963efb0247684a0715"
     },
     {
       "bytes": 3735,
-      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/synexia-import/current-full-borrow/synexia-dag.tsv",
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/m3-import/current-full-borrow/m3-dag.tsv",
       "sha256": "b888ee614bf2a07ece1844b789eaec396e06bb42f29ff5e1183e2fc9ae4c2b33"
     },
     {
       "bytes": 10360,
-      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/synexia-import/current-full-borrow/synexia-estate.tsv",
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/m3-import/current-full-borrow/m3-estate.tsv",
       "sha256": "90c2b8a5f1046e397d2b049b0155858877788e714dd3e1c7540b008069b42c13"
     },
     {

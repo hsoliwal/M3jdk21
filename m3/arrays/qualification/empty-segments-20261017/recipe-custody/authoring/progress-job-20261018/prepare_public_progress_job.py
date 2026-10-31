@@ -13,7 +13,7 @@ import subprocess
 
 TASK = "m3-collections-contract-refinement-20261017"
 DATASET = "m3jdk21-progress-job-custody"
-PREFIX = "synexia-openrewrite-recipes/recipe-crates/" + TASK
+PREFIX = "m3-openrewrite-recipes/recipe-crates/" + TASK
 PIN = "86528a90079b89a50b51ef13da08e7e70d468cb4"
 
 

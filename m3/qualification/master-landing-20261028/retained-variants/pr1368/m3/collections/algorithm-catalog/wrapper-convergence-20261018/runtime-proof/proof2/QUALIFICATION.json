@@ -14,11 +14,11 @@
   "input_sealing_tests": 8,
   "receiver_contract_cases": 9,
   "receiver_receipt": {
-    "path": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/proof/receiver-proof/evidence/RECEIVER_RECEIPT.json",
+    "path": "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/proof/receiver-proof/evidence/RECEIVER_RECEIPT.json",
     "sha256": "4de6dfea72a69f6316010d14ea8baf6bbb4cf0c2e56f99cc9ab15b463273165b"
   },
   "source_manifest_rows": 337,
-  "generated_root": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-wrapper-proof2-20261018/candidate",
+  "generated_root": "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-wrapper-proof2-20261018/candidate",
   "generated_files": [
     {
       "path": "m3/collections/verification/wrapper-convergence-20261018/README.md",

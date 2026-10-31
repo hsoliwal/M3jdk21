@@ -16,7 +16,7 @@ RECEIVER = HERE.parents[2]
 SDK = HERE / "sdk"
 ROOT = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ARTIFACTS = ROOT / "artifacts"
-SUITE = "com.synexia.rewrite.M3RegexRelationsCurrentOwnerRecipeTest"
+SUITE = "jdk.internal.m3.rewrite.M3RegexRelationsCurrentOwnerRecipeTest"
 METHODS = ["allPartialStatesAndOrdersReachExactFixedPoint",
            "eachOwnedInputRefusesDriftMissingAndDuplicateOwnership",
            "currentOwnerMembersAndCustodyRemainExact"]
@@ -150,17 +150,17 @@ def report():
         raise RuntimeError("actual Surefire XML differs from SDK receipt")
     providers = []
     for name, expected in ENGINES.items():
-        source = regular(SDK / ("pinned-engine/com/synexia/rewrite/" + name + ".java"))
+        source = regular(SDK / ("pinned-engine/jdk/internal/m3/rewrite/" + name + ".java"))
         if blob(source.read_bytes()) != expected:
             raise RuntimeError("original provider source was replaced")
-        compiled = regular(SDK / ("target/classes/com/synexia/rewrite/" + name + ".class"))
+        compiled = regular(SDK / ("target/classes/jdk/internal/m3/rewrite/" + name + ".class"))
         data = compiled.read_bytes()
         if len(data) < 8 or data[:4] != b"\xca\xfe\xba\xbe" or int.from_bytes(data[6:8], "big") != 65:
             raise RuntimeError("actual provider Java21 class file required")
-        providers.append({"class": "com.synexia.rewrite." + name, "sourceGitBlob": expected,
+        providers.append({"class": "jdk.internal.m3.rewrite." + name, "sourceGitBlob": expected,
                           "classBytes": len(data), "classSha256": hashlib.sha256(data).hexdigest(),
                           "classMajor": 65})
-    fixture_root = SDK / "src/main/resources/com/synexia/rewrite/m3-regex-relations-current-owner-20261017"
+    fixture_root = SDK / "src/main/resources/jdk/internal/m3/rewrite/m3-regex-relations-current-owner-20261017"
     before = regular(fixture_root / "before/M3StringRegexDp.java")
     if before.stat().st_size != 12888 or sha256(before) != BEFORE_SHA256:
         raise RuntimeError("current immutable BEFORE owner differs")

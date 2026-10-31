@@ -25,7 +25,7 @@ class CanonicalAtomDescriptorTest(unittest.TestCase):
                        "recipeList:\n" + refs + "\n")
         for name in self.owners:
             self.write(f"{OWNER_DIR}/{name}.java",
-                       "package com.synexia.rewrite.atom;\n"
+                       "package jdk.internal.m3.rewrite.atom;\n"
                        f"public final class {name} {{}}\n")
         self.write(REGISTRY,
                    "\n".join('Map.entry("' + PACKAGE + "." + name +

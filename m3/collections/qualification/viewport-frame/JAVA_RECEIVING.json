@@ -4,7 +4,7 @@
   "canonical_pr": 12855,
   "canonical_head": "5b844bdbf0be47e3aef9700d33a2deff7373050f",
   "dataset": "viewport-master-api-20261024",
-  "canonical_named_recipe": "com.synexia.m3.ViewportMasterApi20261024",
+  "canonical_named_recipe": "jdk.internal.m3.ViewportMasterApi20261024",
   "product_branch": "m3/viewport-frame-merged-20261023",
   "product_parent": "a1398309b97997e9da758a4f34dcc20aae274952",
   "source_outputs": [

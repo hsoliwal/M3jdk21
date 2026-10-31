@@ -1,14 +1,14 @@
 {
   "modification_notice": "Modified 2026 by Hitesh Soliwal and contributors: restore exact collection receiving provenance and verification while retaining current owners and String phase authority.",
-  "manifest": "m3/collections/synexia-donation.json",
+  "manifest": "m3/collections/m3-donation.json",
   "source_revision": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
   "canonical_recipe_implementation_blob": "6807cabe2c5715f9c3b307e21dcc7cb700f2be38",
   "package": "com.m3.collections",
   "scope": "SEPARATE_APACHE_MODULE_NOT_JDK_BACKEND_PROMOTION",
   "type_mappings": [
     {
-      "source": "com.synexia.common.collections.LongCollection",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/LongCollection.java",
+      "source": "jdk.internal.m3.common.collections.LongCollection",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/LongCollection.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "9b072d9c2ad8c559d339f9cced4afbb926faa1d3",
       "source_sha256": "ff0b8dbd31660f768c1e382e05bb41e60bbae70929bf68ec9d427af6db6ebb7b",
@@ -21,8 +21,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.LongDeque",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/LongDeque.java",
+      "source": "jdk.internal.m3.common.collections.LongDeque",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/LongDeque.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "0d6f5179c74896ced20bfcdccf9d126eb32e38e3",
       "source_sha256": "f2e5465fc296ff76ed97efd1547ee31b3ef0756a5489f0b276dff5a2eddc2e48",
@@ -36,8 +36,8 @@
       "historical_20261007_target_sha256": "f9daac2eaf0e9557de7aec1459b8328b7bdf13450974dd7cc5e00ea9a97084f9"
     },
     {
-      "source": "com.synexia.common.collections.LongIterator",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/LongIterator.java",
+      "source": "jdk.internal.m3.common.collections.LongIterator",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/LongIterator.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "de7f337c6ae0fa3ce740dc18362367d66992da1b",
       "source_sha256": "8e912f0302b4082583f731e274a245cf9f98fda1e5e53adfccaef03f5da08cb0",
@@ -50,8 +50,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.LongQueue",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/LongQueue.java",
+      "source": "jdk.internal.m3.common.collections.LongQueue",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/LongQueue.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "fde82af25504c10f7edf3129438977673085103c",
       "source_sha256": "649ceb108c0aade057a137b07b95f77ce446d3285244f8515ee2a386a0e200d4",
@@ -65,8 +65,8 @@
       "historical_20261007_target_sha256": "67a41cef6350b511762c5cc4651a03fc06a34b663b6c936a2e30e1284235a8a7"
     },
     {
-      "source": "com.synexia.common.collections.LongSequence",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/LongSequence.java",
+      "source": "jdk.internal.m3.common.collections.LongSequence",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/LongSequence.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "1aad67c4c9a5a5da1752be8f272dc3aa7be68293",
       "source_sha256": "38f6f97979a4c9d7c7e2963aed6df50644511f03c5e89c2893312862de036c9a",
@@ -81,8 +81,8 @@
       "successor_manifest_sha256": "9ee7aec783d7078a40fd89042dda3ec4a0fd9670d970f937c4da5934a9c409f0"
     },
     {
-      "source": "com.synexia.common.collections.LongStack",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/LongStack.java",
+      "source": "jdk.internal.m3.common.collections.LongStack",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/LongStack.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "a921486ff0c2ceccb95fc40b7a27fa558507d672",
       "source_sha256": "1ef422c22b03fcaafa4e9ec32ee231cc95cd8a46614ea6663f66cc8f832879f7",
@@ -96,8 +96,8 @@
       "historical_20261007_target_sha256": "4ec109c48a4ab27ee86d3a0d24dbfe0c6a95a78db934739b9b1e8fa134368b7a"
     },
     {
-      "source": "com.synexia.common.collections.PackedLongDeque",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/PackedLongDeque.java",
+      "source": "jdk.internal.m3.common.collections.PackedLongDeque",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/PackedLongDeque.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "443dfaf7b32398890c3d018481756aa9f59b0a3b",
       "source_sha256": "fe6558087e448d110fd3398573600071190068f4c671876a4f6649553053f057",
@@ -113,8 +113,8 @@
       "historical_20261007_target_sha256": "a3df5b0e77a505a71e97d85f745647b409084c55600f89f39209cf0d429aa3b6"
     },
     {
-      "source": "com.synexia.common.collections.PackedLongList",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/PackedLongList.java",
+      "source": "jdk.internal.m3.common.collections.PackedLongList",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/PackedLongList.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "27e68c73376df0d0d9374a7d756d640b9a9c3fe2",
       "source_sha256": "cca0c92a6541d2570b981ac6e4782e7800c87c8dda5e4e566afe023c454ebd9c",
@@ -130,8 +130,8 @@
       "historical_20261007_target_sha256": "66f7b7584b0985e0d168c0b913dcd767a7f7e19c61ed4b7cb8a6d4ce7250ab49"
     },
     {
-      "source": "com.synexia.common.collections.jdk.LazyValueProvider",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/LazyValueProvider.java",
+      "source": "jdk.internal.m3.common.collections.jdk.LazyValueProvider",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/jdk/LazyValueProvider.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "139a63e109a5f1abbbbd3fc553d037b593e11836",
       "source_sha256": "c0880ab0b42368b97dbdc67e9d8d44eaef1724356c0ce8c634bc70aa176d77dc",
@@ -144,8 +144,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.LockedMap",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/LockedMap.java",
+      "source": "jdk.internal.m3.common.collections.jdk.LockedMap",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/jdk/LockedMap.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "2642ec24858198f57f718a90a90903f689b792cb",
       "source_sha256": "5d0662de9942433f6638d4662f4d64027d512c284840c5bb63db4f26491869cd",
@@ -158,8 +158,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.LockedTreeMap",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/LockedTreeMap.java",
+      "source": "jdk.internal.m3.common.collections.jdk.LockedTreeMap",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/jdk/LockedTreeMap.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "a24fb20532d77a6081b025e5753db23572698bd6",
       "source_sha256": "6629d467510b9b3e05f3a021880e81d07daf2f4444bb6e5cc01963f6a10710d1",
@@ -172,8 +172,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.LockedTreeSet",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/LockedTreeSet.java",
+      "source": "jdk.internal.m3.common.collections.jdk.LockedTreeSet",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/jdk/LockedTreeSet.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "8cf204a47cab8c19f49dd20f1af99121335f810a",
       "source_sha256": "95ae1e725ab4624f042177dae29f4f5c8039deed6467ffff05e99e981980d6bc",
@@ -186,8 +186,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.OrderedSlotMap",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/OrderedSlotMap.java",
+      "source": "jdk.internal.m3.common.collections.jdk.OrderedSlotMap",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/jdk/OrderedSlotMap.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "27ea899e1cc26f9c3fdb413969d27d23bda0d398",
       "source_sha256": "af20d25233e0a0a1f44c004ecfc74496fc528b65aedd32aad7d82259243b1a39",
@@ -200,8 +200,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.PackedBlockingDeque",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/PackedBlockingDeque.java",
+      "source": "jdk.internal.m3.common.collections.jdk.PackedBlockingDeque",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/jdk/PackedBlockingDeque.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "2c52670cd7c3384fcc97fe172ae0a4e05ac7f115",
       "source_sha256": "fdb237b2c4f8d2d775b7dd3ccfb9f82601873672ae7183b6a82531a67f6d074f",
@@ -214,8 +214,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.PackedHashMap",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/PackedHashMap.java",
+      "source": "jdk.internal.m3.common.collections.jdk.PackedHashMap",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/jdk/PackedHashMap.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "99d665440d96d94a323a85f9c4bf20347acfb593",
       "source_sha256": "a7060599b2f33bc14c168e9e2394fc3f49526d2f5d7dbb249e3c580ebcdfec9e",
@@ -228,8 +228,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.PackedHashSet",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/PackedHashSet.java",
+      "source": "jdk.internal.m3.common.collections.jdk.PackedHashSet",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/jdk/PackedHashSet.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "0a5a4d26273dcae019de270631f8fe9406446c21",
       "source_sha256": "f7aa136b932aa7d5cf50f8abec59aa421d531d63bff6321946e5b1e95e7a3111",
@@ -242,8 +242,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.PackedJdkCollections",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/PackedJdkCollections.java",
+      "source": "jdk.internal.m3.common.collections.jdk.PackedJdkCollections",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/jdk/PackedJdkCollections.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "0bccd19999d40c1a4dd30cd5261457d63f4ce758",
       "source_sha256": "1f46ee2c463b329e2d88fb7afdd42a764c94add458008d8022e5973b5da71112",
@@ -259,8 +259,8 @@
       "historical_20261007_target_sha256": "c1f0a1da98a23d655a68496c0ea7b4c50d1a833fcf1655ab7799d19856fe9734"
     },
     {
-      "source": "com.synexia.common.collections.jdk.PackedLazyValueState",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/PackedLazyValueState.java",
+      "source": "jdk.internal.m3.common.collections.jdk.PackedLazyValueState",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/jdk/PackedLazyValueState.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "724e284b866b9a89bc96e0065d422717c1b3d656",
       "source_sha256": "3d01703ab16541f285db7beb1ccdb78a69d1692dd9bfcac9de47bd84751c9c7b",
@@ -273,8 +273,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.PackedLinkedList",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/PackedLinkedList.java",
+      "source": "jdk.internal.m3.common.collections.jdk.PackedLinkedList",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/jdk/PackedLinkedList.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "515f618689e2ba56935c31bf13bbf8562f30db0c",
       "source_sha256": "6b75e3b056e6db5055270397b930431c7a5d024c315be690d4db654ebe595b65",
@@ -287,8 +287,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.PackedTransferQueue",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/PackedTransferQueue.java",
+      "source": "jdk.internal.m3.common.collections.jdk.PackedTransferQueue",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/jdk/PackedTransferQueue.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "8d175aec2cd846bc4db4ab59f8157d5505935db8",
       "source_sha256": "6c9e30f3ea8dd4ec10b08c83b81ceaa0d0b0ab0815411c261ee61ca7ecd8d34f",
@@ -301,8 +301,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.PackedTreeMap",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/PackedTreeMap.java",
+      "source": "jdk.internal.m3.common.collections.jdk.PackedTreeMap",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/jdk/PackedTreeMap.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "2c573a2bef1d84cce54ca15953ccf3429755af8a",
       "source_sha256": "4ee669eacb371768d6c8d20790d45791c9c99472721753b89916ad45b2c0d566",
@@ -315,8 +315,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.PackedTreeSet",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/PackedTreeSet.java",
+      "source": "jdk.internal.m3.common.collections.jdk.PackedTreeSet",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/jdk/PackedTreeSet.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "7d55c8488f3ff4c6365e0c96ac7189393ffc8c5d",
       "source_sha256": "57c00aa21ca260077299f718bb8cf489d7795e0a54e9ef86d9263333fbed4147",
@@ -329,8 +329,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.PackedWeakMap",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/PackedWeakMap.java",
+      "source": "jdk.internal.m3.common.collections.jdk.PackedWeakMap",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/jdk/PackedWeakMap.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "4aba72b84518bbd523433eca7c726adb87cf3cc5",
       "source_sha256": "62069ef729a29334a6bdf4e0912353c380e8bf38a703fe355bc78a678ba42f1f",
@@ -343,8 +343,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.SlotArrays",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/SlotArrays.java",
+      "source": "jdk.internal.m3.common.collections.jdk.SlotArrays",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/jdk/SlotArrays.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "4fe0b5517f4f96f38876ebfe1bfd329d66def204",
       "source_sha256": "ae3fae638766ad6d65867a1762fb664956335c63129ab47c2c2ccfa54c577932",
@@ -357,8 +357,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.SlotMap",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/SlotMap.java",
+      "source": "jdk.internal.m3.common.collections.jdk.SlotMap",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/jdk/SlotMap.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "3ceabb2f939096e16562940009495484c0cf581f",
       "source_sha256": "16fb80dd4fe51f355894466f8c4d2f80ea7a5b9ffeb01f9eef17af957d49e332",
@@ -371,8 +371,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.SlotSpliterators",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/SlotSpliterators.java",
+      "source": "jdk.internal.m3.common.collections.jdk.SlotSpliterators",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/jdk/SlotSpliterators.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "6f170346aa54d0ffcfdc1992406cc13f578b0818",
       "source_sha256": "a6cc66b52fc46e2e034472a43da602180f2c6cb47d3b85aaca2ee63e7a3a043f",
@@ -385,8 +385,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.package-info",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/package-info.java",
+      "source": "jdk.internal.m3.common.collections.jdk.package-info",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/jdk/package-info.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "ff136ea0838429ab39e994a69301507797e1a4da",
       "source_sha256": "fd96cc2208f63b34c3ebdf61187840ab82a349e1c8961df9860ec45896970c3a",
@@ -399,8 +399,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.lazy.event.LazyEventBits",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/lazy/event/LazyEventBits.java",
+      "source": "jdk.internal.m3.common.lazy.event.LazyEventBits",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/lazy/event/LazyEventBits.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "ef0ebd1f26d49f01b7176006950ae8360e728c67",
       "source_sha256": "f981447e2ffdcd86beb8d9899cb078ae75e4c99aee4cf478aeb5159a890e0059",
@@ -413,8 +413,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.lazy.event.LazyEventGranularity",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/lazy/event/LazyEventGranularity.java",
+      "source": "jdk.internal.m3.common.lazy.event.LazyEventGranularity",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/lazy/event/LazyEventGranularity.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "d5c2b0a71f47bf397cbf76edd43db097969857c9",
       "source_sha256": "996f794617b3e7f91d1a82ff35a52951a1463733714928a4b3cbf447aa641887",
@@ -427,8 +427,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.lazy.event.LazyEventPolicy",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/lazy/event/LazyEventPolicy.java",
+      "source": "jdk.internal.m3.common.lazy.event.LazyEventPolicy",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/lazy/event/LazyEventPolicy.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "0f1434a9d0c4974d2e9d4daa218e0ee2f0433010",
       "source_sha256": "9a45efd457e28731f4e9e8ff6c128bc78957805e50f8342fb2858ae8b0fc37fd",
@@ -441,8 +441,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.lazy.event.LazyEventSink",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/lazy/event/LazyEventSink.java",
+      "source": "jdk.internal.m3.common.lazy.event.LazyEventSink",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/lazy/event/LazyEventSink.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "9eadea9bde80dd1d7a86fd23b4cb97b9786938cf",
       "source_sha256": "aa9dcf95ab90bbababef955bf99bd7c5cd1de1e99ddcaba2c984bd06cdeaa7ed",
@@ -455,8 +455,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.lazy.event.LazyEventSource",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/lazy/event/LazyEventSource.java",
+      "source": "jdk.internal.m3.common.lazy.event.LazyEventSource",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/lazy/event/LazyEventSource.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "8fb34c9283f11e0db0a752480fbd196ee79b5c48",
       "source_sha256": "8ed2bb589bb590a71f8371aa0ef20b700dc5327bbdb622f3071e25f9ae95243f",
@@ -469,8 +469,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.lazy.event.LazyEvents",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/lazy/event/LazyEvents.java",
+      "source": "jdk.internal.m3.common.lazy.event.LazyEvents",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/lazy/event/LazyEvents.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "109c4f0fd3d7726debded3f1d8dd81284dacdc1e",
       "source_sha256": "25c313a03429f48d4ee6be8c6a2cd3e467446b73cf87ca942608021544eae6dc",
@@ -483,8 +483,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.lazy.event.LazyOperation",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/lazy/event/LazyOperation.java",
+      "source": "jdk.internal.m3.common.lazy.event.LazyOperation",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/lazy/event/LazyOperation.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "f21bd420edb755356165eabc9bbbb9266048a87c",
       "source_sha256": "2d6d5bf67c997fcf67d03e4faced27bc8c2791ced5c011bdb633bfb51d850abe",
@@ -497,8 +497,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.progress.ChildProgressMonitor",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/progress/ChildProgressMonitor.java",
+      "source": "jdk.internal.m3.common.progress.ChildProgressMonitor",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/progress/ChildProgressMonitor.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "3909723ae02d81a27e5a6056fe8cfacd82042840",
       "source_sha256": "397bcfc5e8eaa4d516f6fccd1d3c238be4432f6f6a49f77a425ae21fd7d969ff",
@@ -511,8 +511,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.progress.DefaultProgressMonitor",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/progress/DefaultProgressMonitor.java",
+      "source": "jdk.internal.m3.common.progress.DefaultProgressMonitor",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/progress/DefaultProgressMonitor.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "7dd9cc7b2a810eaa8ba946aec0b94e124a667def",
       "source_sha256": "f20685bf29db34cd7cb68e7546bea7825f62ceb90f4546fd8a7f1849e1dd9b69",
@@ -525,8 +525,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.progress.ProgressAdapters",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/progress/ProgressAdapters.java",
+      "source": "jdk.internal.m3.common.progress.ProgressAdapters",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/progress/ProgressAdapters.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "3a26ac8d7a86bc608e75745871b465d93ebcd5bb",
       "source_sha256": "f836f33c6e078b6fcccbe63d63db615534ef676caf16866edecf973d5766c3aa",
@@ -539,8 +539,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.progress.ProgressMonitor",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/progress/ProgressMonitor.java",
+      "source": "jdk.internal.m3.common.progress.ProgressMonitor",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/progress/ProgressMonitor.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "7457acbf97423af4d8405ebd3efabd224f7373fa",
       "source_sha256": "a6ea4f264fd771e52bfe575baa35b96de8d06abec723dab7eac712d5843524de",
@@ -553,8 +553,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.progress.ProgressScope",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/progress/ProgressScope.java",
+      "source": "jdk.internal.m3.common.progress.ProgressScope",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/progress/ProgressScope.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "8bdfd5c6b82deb8eaaf521e12ed5230ccf7ed8b2",
       "source_sha256": "bae8f4a057f4ef2ef5a927eafa8d7babf20275313cdb42c5620c7b4a37b9442a",
@@ -567,8 +567,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.progress.ProgressState",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/progress/ProgressState.java",
+      "source": "jdk.internal.m3.common.progress.ProgressState",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/progress/ProgressState.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "87b14cb9a32f6d6c0f53441aaeedfab9333826cf",
       "source_sha256": "29cde61a192e454dd2ffde25e5a142cdc2a25e806ce91f7f01e6d5d7f6bf6960",
@@ -581,8 +581,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.progress.SystemProgress",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/progress/SystemProgress.java",
+      "source": "jdk.internal.m3.common.progress.SystemProgress",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/progress/SystemProgress.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "98d95d576dc7d5d548389fd83a53a574b8ec440c",
       "source_sha256": "e97ec1d4932635e08d3fc590d64ae84b4a450c6f064c1539bf63b0d4a95e6a55",
@@ -595,8 +595,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.utils.Progress",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/utils/Progress.java",
+      "source": "jdk.internal.m3.common.utils.Progress",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/utils/Progress.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "f61e6504ccb95d8c183d4f830e6c8a2a582d3fca",
       "source_sha256": "d6f6fb0d890bed0f12ac066d3cd86ce55f64b1ee859a181a1008320cb22273a2",
@@ -609,8 +609,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.LeanNoRetainedStructuralEntryTest",
-      "source_path": "synexia-common/src/test/java/com/synexia/common/collections/jdk/LeanNoRetainedStructuralEntryTest.java",
+      "source": "jdk.internal.m3.common.collections.jdk.LeanNoRetainedStructuralEntryTest",
+      "source_path": "m3-common/src/test/java/jdk/internal/m3/common/collections/jdk/LeanNoRetainedStructuralEntryTest.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "51271aef243bde31f7060075ca924896b528d459",
       "source_sha256": "4aeef2c5ae9dcfe40247e09c8cb7bb8fb9fa53d26a6d8ac2768d2126b6f0edc7",
@@ -623,8 +623,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.PackedAllocationProbe",
-      "source_path": "synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedAllocationProbe.java",
+      "source": "jdk.internal.m3.common.collections.jdk.PackedAllocationProbe",
+      "source_path": "m3-common/src/test/java/jdk/internal/m3/common/collections/jdk/PackedAllocationProbe.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "673c3ecede1d05db33400901e26478830d469c02",
       "source_sha256": "6715161d44695ba571a45c422f75f63eda158930b3e78a91870a4c5a87562af9",
@@ -637,8 +637,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.PackedConcurrentContractTest",
-      "source_path": "synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedConcurrentContractTest.java",
+      "source": "jdk.internal.m3.common.collections.jdk.PackedConcurrentContractTest",
+      "source_path": "m3-common/src/test/java/jdk/internal/m3/common/collections/jdk/PackedConcurrentContractTest.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "1a6d4245d21545a3b2a311bec327eacf17110e7d",
       "source_sha256": "750b82113268d8e182b31124eb412e1b14ca496d97c245bf6acf1c1bf8979325",
@@ -651,8 +651,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.PackedFactoryContractTest",
-      "source_path": "synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedFactoryContractTest.java",
+      "source": "jdk.internal.m3.common.collections.jdk.PackedFactoryContractTest",
+      "source_path": "m3-common/src/test/java/jdk/internal/m3/common/collections/jdk/PackedFactoryContractTest.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "fe5bf1d2211f24cd6cd91359f0d05f72786632eb",
       "source_sha256": "34a47bbe9299dc5bf5a88f62c1f3238eeac92c68677e0612dc57d6595accc7b0",
@@ -665,8 +665,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.PackedFootprintContractTest",
-      "source_path": "synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedFootprintContractTest.java",
+      "source": "jdk.internal.m3.common.collections.jdk.PackedFootprintContractTest",
+      "source_path": "m3-common/src/test/java/jdk/internal/m3/common/collections/jdk/PackedFootprintContractTest.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "7b74200227b8a81c9787175fcf8477265a50b3f0",
       "source_sha256": "efb8acad332e73e6b13326d7019e4bcdec0ed20024c6658b888c5d04bba9408c",
@@ -679,8 +679,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.PackedLazyTreeMapSelfTest",
-      "source_path": "synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedLazyTreeMapSelfTest.java",
+      "source": "jdk.internal.m3.common.collections.jdk.PackedLazyTreeMapSelfTest",
+      "source_path": "m3-common/src/test/java/jdk/internal/m3/common/collections/jdk/PackedLazyTreeMapSelfTest.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "9a9043f24148b3b775203e4623aa12d643b280e7",
       "source_sha256": "b24d29b5f50a9db8061366edd60a5ec2a4a85c1e121ba5c3d02b3fc57a072b5b",
@@ -693,8 +693,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.PackedLazyTreeMapTest",
-      "source_path": "synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedLazyTreeMapTest.java",
+      "source": "jdk.internal.m3.common.collections.jdk.PackedLazyTreeMapTest",
+      "source_path": "m3-common/src/test/java/jdk/internal/m3/common/collections/jdk/PackedLazyTreeMapTest.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "7734282fe2f4b789fe721964e00c6db6ce86e069",
       "source_sha256": "8bf64f34107e0d54395b9692b2496c2db1878fe5f546d40079c8fe1ec8649c13",
@@ -707,8 +707,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.PackedLazyValueStateSelfTest",
-      "source_path": "synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedLazyValueStateSelfTest.java",
+      "source": "jdk.internal.m3.common.collections.jdk.PackedLazyValueStateSelfTest",
+      "source_path": "m3-common/src/test/java/jdk/internal/m3/common/collections/jdk/PackedLazyValueStateSelfTest.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "230eb9b9ba3ff9b8a8f220703fd48f2a47e4ee5b",
       "source_sha256": "742fc8c8f22fc210e2d1b6353c7fd08c2ab5782ccaed788589dc97147e5530c5",
@@ -721,8 +721,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.PackedMapContractTest",
-      "source_path": "synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedMapContractTest.java",
+      "source": "jdk.internal.m3.common.collections.jdk.PackedMapContractTest",
+      "source_path": "m3-common/src/test/java/jdk/internal/m3/common/collections/jdk/PackedMapContractTest.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "222c3fd2f605c6eb2c1827fce375b136c4142a07",
       "source_sha256": "ea40cb6c48f4786ba0b23eaea75c7b5c2af463f3c13baac48a42b228e450c5ef",
@@ -735,8 +735,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.common.collections.jdk.PackedSequenceContractTest",
-      "source_path": "synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedSequenceContractTest.java",
+      "source": "jdk.internal.m3.common.collections.jdk.PackedSequenceContractTest",
+      "source_path": "m3-common/src/test/java/jdk/internal/m3/common/collections/jdk/PackedSequenceContractTest.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "8b2c012d8893c8d46728e2eb794187e9f4cea7a0",
       "source_sha256": "6520ae5984c1fcd3fcd0c40d4ab82b84796afff2688ec6fb1df5c3dc5884fefb",
@@ -749,8 +749,8 @@
       "canonical_source_owner": "hsoliwal/com.synexia"
     },
     {
-      "source": "com.synexia.primitives.M3FilteredLists",
-      "source_path": "synexia-primitives/src/main/java/com/synexia/primitives/M3FilteredLists.java",
+      "source": "jdk.internal.m3.primitives.M3FilteredLists",
+      "source_path": "m3-primitives/src/main/java/jdk/internal/m3/primitives/M3FilteredLists.java",
       "source_commit": "dcc01cbf67317709e8dfad123acbfc5d187699ad",
       "source_blob_sha1": "ab51de6af292a2286ef3326398994a89b50725fc",
       "target": "com.m3.collections.M3FilteredLists",
@@ -759,7 +759,7 @@
       "disposition": "ADDITIVE_RECIPE_SEALED_CANDIDATE_NOT_JDK_BACKEND_PROMOTION",
       "license": "Apache-2.0",
       "canonical_source_owner": "hsoliwal/com.synexia",
-      "canonical_recipe": "com.synexia.rewrite.M3Jdk21FilteredListsReceiver20261017",
+      "canonical_recipe": "jdk.internal.m3.rewrite.M3Jdk21FilteredListsReceiver20261017",
       "public_api": "opt-in M3FilteredLists.filtered and readOnlyFiltered only; no changed old overloads",
       "native_abi": "UNCHANGED_PREDICATES_IN_JAVA"
     }
@@ -790,7 +790,7 @@
       "target_path": "m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java",
       "target_sha256": "8d1226aac98d797e164c1844886435df3602933c287db597eb2fe275936330eb",
       "retained_from_target_commit": "7fad958f073602247b1c34a8fd756b1a0ecd3edb",
-      "canonical_recipe": "com.synexia.rewrite.M3Jdk21PrimitiveCollectionsV1",
+      "canonical_recipe": "jdk.internal.m3.rewrite.M3Jdk21PrimitiveCollectionsV1",
       "canonical_recipe_commit": "38ea4f44572b4711489d1291c898f2aac52bb054",
       "canonical_origin_notice": "M3_JDK_SHAPED_BACKENDS.md",
       "license": "Apache-2.0",
@@ -801,7 +801,7 @@
       "target_path": "m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
       "target_sha256": "a1b007cd7676fe6fced9fe8330b39f402c6355d29138e0e84185becaa47d7c36",
       "retained_from_target_commit": "7fad958f073602247b1c34a8fd756b1a0ecd3edb",
-      "canonical_recipe": "com.synexia.rewrite.M3Jdk21PrimitiveCollectionsV1",
+      "canonical_recipe": "jdk.internal.m3.rewrite.M3Jdk21PrimitiveCollectionsV1",
       "canonical_recipe_commit": "38ea4f44572b4711489d1291c898f2aac52bb054",
       "canonical_origin_notice": "M3_JDK_SHAPED_BACKENDS.md",
       "license": "Apache-2.0",
@@ -812,7 +812,7 @@
       "target_path": "m3/collections/src/main/java/com/m3/collections/M3LongPriorityQueue.java",
       "target_sha256": "d42f4566595b7e95bcc573348ebf7968ebe8b53f7a68a1c8de3a2aeaa7eca04c",
       "retained_from_target_commit": "7fad958f073602247b1c34a8fd756b1a0ecd3edb",
-      "canonical_recipe": "com.synexia.rewrite.M3Jdk21PrimitiveCollectionsV1",
+      "canonical_recipe": "jdk.internal.m3.rewrite.M3Jdk21PrimitiveCollectionsV1",
       "canonical_recipe_commit": "38ea4f44572b4711489d1291c898f2aac52bb054",
       "canonical_origin_notice": "M3_JDK_SHAPED_BACKENDS.md",
       "license": "Apache-2.0",
@@ -835,12 +835,12 @@
   "current_target_baseline": "439b767c7c92e2751f7f6a47c012f96472420905",
   "active_phase": "STRING",
   "phase_advance": false,
-  "receiving_repair_recipe": "synexia-openrewrite-recipes/recipes/m3jdk-packed-collections-receiving-repair-20261008",
+  "receiving_repair_recipe": "m3-openrewrite-recipes/recipes/m3jdk-packed-collections-receiving-repair-20261008",
   "receiving_repair_manifest_sha256": "31ef71b432356b141588bbc1352638890f1abeae81acb89d97a497f8e0eda513",
   "historical_superseded_type_mappings": [
     {
-      "source": "com.synexia.common.collections.LongSequenceSpliterator",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/LongSequenceSpliterator.java",
+      "source": "jdk.internal.m3.common.collections.LongSequenceSpliterator",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/LongSequenceSpliterator.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "435383c58c7f4085101a84b0156cdeffb056bbbb",
       "source_sha256": "83c55cb10c8cfb9212fa9dfdc52b17910401d423939b0cf7d4f5b384e1970686",
@@ -854,8 +854,8 @@
       "receiving_reuse": "Existing M3LongListSpliterator supplies traversal"
     },
     {
-      "source": "com.synexia.common.collections.PackedArrayCapacity",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/PackedArrayCapacity.java",
+      "source": "jdk.internal.m3.common.collections.PackedArrayCapacity",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/PackedArrayCapacity.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "0606653c5bad347ab80d10e6a55daa02e43c46c8",
       "source_sha256": "604869a454f8c75cb42438bf86e3c82974afb1bfc8d0cfa7264a4f6fd6947171",
@@ -869,8 +869,8 @@
       "receiving_reuse": "Current primitive concrete owners retain their own storage helpers; no redundant owner is restored"
     },
     {
-      "source": "com.synexia.common.collections.PackedFlatArrays",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/PackedFlatArrays.java",
+      "source": "jdk.internal.m3.common.collections.PackedFlatArrays",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/PackedFlatArrays.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "2a3044cf9659ad3102ed4f99c7efbe7676ddc5a8",
       "source_sha256": "f8a3a16bcb9a9d9e367ef9ee7732ed1143d283395942f4dcde4e332027c18c23",
@@ -884,8 +884,8 @@
       "receiving_reuse": "Current primitive concrete owners retain their own storage helpers; no redundant owner is restored"
     },
     {
-      "source": "com.synexia.common.collections.PackedRingAtoms",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/PackedRingAtoms.java",
+      "source": "jdk.internal.m3.common.collections.PackedRingAtoms",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/PackedRingAtoms.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "c68a230f25260cbf5a1dd96ae130755a0ec36698",
       "source_sha256": "36a703f468b33769cc033dc9196bfcde8d36bef43989006459535127d51b42d5",
@@ -899,8 +899,8 @@
       "receiving_reuse": "Current primitive concrete owners retain their own storage helpers; no redundant owner is restored"
     },
     {
-      "source": "com.synexia.common.collections.PackedSupport",
-      "source_path": "synexia-common/src/main/java/com/synexia/common/collections/PackedSupport.java",
+      "source": "jdk.internal.m3.common.collections.PackedSupport",
+      "source_path": "m3-common/src/main/java/jdk/internal/m3/common/collections/PackedSupport.java",
       "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
       "source_blob_sha1": "a7135d8123a41a949b15e5f969e78a1053c3e4c8",
       "source_sha256": "ba18323df281922ccad50b7e5adc93e69e609d46ef06e2f226b4cd0f6492fe9d",
@@ -965,8 +965,8 @@
     "modification_notice": "Modified 2026 by Hitesh Soliwal and contributors: serial catalogue-driven collection contract refinement through canonical Synexia recipes.",
     "target_baseline": "677437be295b23f7ccf7409be287008944d0e8b0",
     "canonical_repository": "hsoliwal/com.synexia",
-    "canonical_recipe": "com.synexia.m3.NetBeansCollectionAtoms20261019",
-    "canonical_recipe_path": "synexia-openrewrite-recipes/recipe-crates/m3-netbeans-collection-atoms-20261019",
+    "canonical_recipe": "jdk.internal.m3.NetBeansCollectionAtoms20261019",
+    "canonical_recipe_path": "m3-openrewrite-recipes/recipe-crates/m3-netbeans-collection-atoms-20261019",
     "qualification": "m3/collections/qualification/netbeans-collection-atoms-20261019/README.md",
     "catalogue": "m3/collections/algorithm-catalog/netbeans-collection-atoms-20261019.tsv",
     "netbeans_donor_revision": "f26ca8d8025ff820b8ffe751b6db6c1cc67baa97",
@@ -998,7 +998,7 @@
     "new_pass_hash_drift_in_previously_current_rows": 3,
     "source_refinement_paths": 9,
     "canonical_recipe_repository": "hsoliwal/com.synexia",
-    "canonical_recipe_crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+    "canonical_recipe_crate": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
     "canonical_metadata_datasets": [
       "tools4j-receipt-20261019",
       "tools4j-donation-gate-20261019",

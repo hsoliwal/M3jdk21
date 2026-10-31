@@ -158,7 +158,7 @@ def main():
             'qualified target allowlist differs')
 
     source_module = crate.parent.parent
-    runner_module = build / 'qualified-copier/synexia-openrewrite-recipes'
+    runner_module = build / 'qualified-copier/m3-openrewrite-recipes'
     runner_crate = runner_module / 'recipe-crates' / crate.name
 
     def copy_qualified(path):
@@ -170,10 +170,10 @@ def main():
     for name in ['apply_receiver.py', 'phases.tsv', 'atom-chains.tsv', 'pom.xml']:
         copy_qualified(crate / name)
     require(sha(observed[crate / 'apply_receiver.py']) == COPIER, 'qualified copier changed')
-    copy_qualified(crate / 'src/test/java/com/synexia/rewrite/M3FilteredFirstVisibleRuntimeRecipeTest.java')
+    copy_qualified(crate / 'src/test/java/jdk/internal/m3/rewrite/M3FilteredFirstVisibleRuntimeRecipeTest.java')
     for name in ['M3EditScope.java', 'M3ScopeInference.java', 'M3HashPinnedJavaSnapshotRecipe.java',
                  'M3HashPinnedTextSnapshotRecipe.java']:
-        owner = source_module / 'src/main/java/com/synexia/rewrite' / name
+        owner = source_module / 'src/main/java/jdk/internal/m3/rewrite' / name
         retain(owner, proof[name])
         copy_qualified(owner)
     for name in ['recipe-proof.tsv', 'proof-status.tsv', 'named-recipe.yml']:
@@ -182,7 +182,7 @@ def main():
         for path in sorted((crate / directory).rglob('*')):
             if path.is_file():
                 copy_qualified(path)
-    resources = source_module / 'src/main/resources/com/synexia/rewrite'
+    resources = source_module / 'src/main/resources/jdk/internal/m3/rewrite'
     phases = list(csv.DictReader(observed[crate / 'phases.tsv'].decode().splitlines(), delimiter='\t'))
     atoms = list(csv.DictReader(observed[crate / 'atom-chains.tsv'].decode().splitlines(), delimiter='\t'))
     for kind, phase_id in [(row['kind'], row['id']) for row in phases] + [

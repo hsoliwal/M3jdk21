@@ -183,7 +183,7 @@ def main():
         receipt["frozen_stock_client_classes"] = frozen_classes
         receipt["new_client_classes"] = class_tree(clients)
         receipt["checks"] = counts
-        receipt["synexia_result_runtime"] = "NOT_RUN: exact IJobResult/AbstractJob/IAdaptable source review only; no stubbed substitute or whole context closure claim"
+        receipt["m3_result_runtime"] = "NOT_RUN: exact IJobResult/AbstractJob/IAdaptable source review only; no stubbed substitute or whole context closure claim"
         receipt["result"] = "PASS"
     except Exception as error:
         receipt["result"] = "FAIL"

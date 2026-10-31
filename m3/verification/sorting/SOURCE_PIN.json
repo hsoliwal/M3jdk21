@@ -6,10 +6,10 @@
     "repository": "hsoliwal/com.synexia",
     "commit": "630dc5f4d87c9adda17e26653e5393641d838fac",
     "tree": "bece4453da6f5dea9b7cb6fead5fccb42e9e1978",
-    "crate_path": "synexia-openrewrite-recipes/recipes/m3-java-util-sorts-20261018",
+    "crate_path": "m3-openrewrite-recipes/recipes/m3-java-util-sorts-20261018",
     "url": "https://github.com/hsoliwal/com.synexia/tree/630dc5f4d87c9adda17e26653e5393641d838fac/synexia-openrewrite-recipes/recipes/m3-java-util-sorts-20261018"
   },
-  "canonical_recipe": "com.synexia.m3.JavaUtilSorts20261018",
+  "canonical_recipe": "jdk.internal.m3.JavaUtilSorts20261018",
   "runtime_owner": {
     "repository": "hsoliwal/M3jdk21",
     "receiving_base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
@@ -206,37 +206,37 @@
         "bytes": 4119
       },
       {
-        "path": "src/main/java/com/synexia/rewrite/M3EditScope.java",
+        "path": "src/main/java/jdk/internal/m3/rewrite/M3EditScope.java",
         "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
         "git_blob_sha1": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
         "bytes": 1052
       },
       {
-        "path": "src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "path": "src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
         "sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625",
         "git_blob_sha1": "3bdeeaea9a212fe0c7d1f544510f87c4cd49eb40",
         "bytes": 31181
       },
       {
-        "path": "src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+        "path": "src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
         "sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef",
         "git_blob_sha1": "9d0788d3717e017d58345c5c3e62022c2915a3c8",
         "bytes": 18026
       },
       {
-        "path": "src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+        "path": "src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
         "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4",
         "git_blob_sha1": "d24729950508857280ea1b56d4e930f05137ec85",
         "bytes": 7655
       },
       {
-        "path": "src/main/java/com/synexia/rewrite/sorts/M3JavaUtilSortsApply.java",
+        "path": "src/main/java/jdk/internal/m3/rewrite/sorts/M3JavaUtilSortsApply.java",
         "sha256": "d0f7d62e58286821a26bfc468a57f6d009553afb101c319e2c631327c240d08c",
         "git_blob_sha1": "29d043ee142c27514e57c280fe46647ab6cc4c82",
         "bytes": 18444
       },
       {
-        "path": "src/main/java/com/synexia/rewrite/sorts/M3JavaUtilSortsRecipe.java",
+        "path": "src/main/java/jdk/internal/m3/rewrite/sorts/M3JavaUtilSortsRecipe.java",
         "sha256": "121666954936dcc80209742563ba2c496175d10be4d8dd49774db798ead26047",
         "git_blob_sha1": "ed23d6f83e800403677dcebc0e1e1ed684c9f598",
         "bytes": 1482
@@ -248,145 +248,145 @@
         "bytes": 447
       },
       {
-        "path": "src/test/java/com/synexia/rewrite/sorts/M3JavaUtilSortsPacketTest.java",
+        "path": "src/test/java/jdk/internal/m3/rewrite/sorts/M3JavaUtilSortsPacketTest.java",
         "sha256": "3feb4acf1d771408f212e961a20daba8de7d38ce06d3c812cf26f3cda0384cbb",
         "git_blob_sha1": "518e27ce06aca9702d1b44509b0169a06cd7c7a6",
         "bytes": 9646
       },
       {
-        "path": "src/test/java/com/synexia/rewrite/sorts/M3RecipeReplayTest.java",
+        "path": "src/test/java/jdk/internal/m3/rewrite/sorts/M3RecipeReplayTest.java",
         "sha256": "7667ef6a3ed98ccc5ba0bb67857b5b567a9fe689f5a83512541600b884389173",
         "git_blob_sha1": "6576716668ee3d3e28e7d0443493ba2c1bdaa660",
         "bytes": 19023
       },
       {
-        "path": "src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-add-fixture/Carrier.java.txt",
+        "path": "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-java/sort-add-fixture/Carrier.java.txt",
         "sha256": "69512e9fca52ca82ff704a0b13e5ef1a4b784203a0914af288111fa9cdff5b7f",
         "git_blob_sha1": "baad0061779bbb01efed93b8bce15eb2a79e6dc7",
         "bytes": 1112
       },
       {
-        "path": "src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-add-fixture/Extra.java.txt",
+        "path": "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-java/sort-add-fixture/Extra.java.txt",
         "sha256": "51e316c22299c64429328ec8ea37cb59cbc76371d0c842c179cd8959446d8ef9",
         "git_blob_sha1": "68855cac4d7d1881ecd000782ae2ad4aa7ea3e4a",
         "bytes": 472
       },
       {
-        "path": "src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-add-fixture/Numbers.java.txt",
+        "path": "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-java/sort-add-fixture/Numbers.java.txt",
         "sha256": "b19c66dbf7523359189f7302ddf089db8f7c935fe416b71cbeaf0f926ea36406",
         "git_blob_sha1": "d3037ef54f4293e570f22307fd5fb3a0d8c850df",
         "bytes": 339
       },
       {
-        "path": "src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-add-fixture/manifest.tsv",
+        "path": "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-java/sort-add-fixture/manifest.tsv",
         "sha256": "e0a427549f4da581ef62cb47aac3978c43b9e7b48acfdfd6651f05f97a6318f9",
         "git_blob_sha1": "ce470e7160c835bd039c958a2099f111c96023d4",
         "bytes": 455
       },
       {
-        "path": "src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-bad-hash-fixture/Numbers.java.txt",
+        "path": "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-java/sort-bad-hash-fixture/Numbers.java.txt",
         "sha256": "b19c66dbf7523359189f7302ddf089db8f7c935fe416b71cbeaf0f926ea36406",
         "git_blob_sha1": "d3037ef54f4293e570f22307fd5fb3a0d8c850df",
         "bytes": 339
       },
       {
-        "path": "src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-bad-hash-fixture/manifest.tsv",
+        "path": "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-java/sort-bad-hash-fixture/manifest.tsv",
         "sha256": "7cc14e24fd5dc0db280516b44ceb8cbf6048ab32f8717fc1887a1f634f8aef54",
         "git_blob_sha1": "949b8acfb591a8ece91f6d3f8cf53cdaa692f186",
         "bytes": 211
       },
       {
-        "path": "src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-malformed-fixture/Broken.java.txt",
+        "path": "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-java/sort-malformed-fixture/Broken.java.txt",
         "sha256": "db9055fd41209bc22173e561f1194a581b367e4b91db1ac6853dd32ecc326b59",
         "git_blob_sha1": "d772ad638143eeda275b203ef2f8d0cdfa3f723e",
         "bytes": 58
       },
       {
-        "path": "src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-malformed-fixture/manifest.tsv",
+        "path": "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-java/sort-malformed-fixture/manifest.tsv",
         "sha256": "020b1a6ea1275faf184e2c84ad0a30f9d1d72514f681c60aa6929b59a844723f",
         "git_blob_sha1": "cde579afaead8a9cdbc0b89957c5d5c17a7d8d19",
         "bytes": 209
       },
       {
-        "path": "src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-replace-fixture/Carrier.java.txt",
+        "path": "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-java/sort-replace-fixture/Carrier.java.txt",
         "sha256": "69512e9fca52ca82ff704a0b13e5ef1a4b784203a0914af288111fa9cdff5b7f",
         "git_blob_sha1": "baad0061779bbb01efed93b8bce15eb2a79e6dc7",
         "bytes": 1112
       },
       {
-        "path": "src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-replace-fixture/Extra.java.txt",
+        "path": "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-java/sort-replace-fixture/Extra.java.txt",
         "sha256": "51e316c22299c64429328ec8ea37cb59cbc76371d0c842c179cd8959446d8ef9",
         "git_blob_sha1": "68855cac4d7d1881ecd000782ae2ad4aa7ea3e4a",
         "bytes": 472
       },
       {
-        "path": "src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-replace-fixture/Numbers-before.java.txt",
+        "path": "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-java/sort-replace-fixture/Numbers-before.java.txt",
         "sha256": "d8b509c96058eb36d837d299c88f49fdf1c7641b22ab78ec0b4314d332876d68",
         "git_blob_sha1": "d59ce81d88f562bccb09bce2fef8924240194539",
         "bytes": 382
       },
       {
-        "path": "src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-replace-fixture/Numbers.java.txt",
+        "path": "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-java/sort-replace-fixture/Numbers.java.txt",
         "sha256": "b19c66dbf7523359189f7302ddf089db8f7c935fe416b71cbeaf0f926ea36406",
         "git_blob_sha1": "d3037ef54f4293e570f22307fd5fb3a0d8c850df",
         "bytes": 339
       },
       {
-        "path": "src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-replace-fixture/manifest.tsv",
+        "path": "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-java/sort-replace-fixture/manifest.tsv",
         "sha256": "c6a2bc5793ea4abcdcb1ec222cdfc70ae2e5ac45ed23292a0152ea097b2a52df",
         "git_blob_sha1": "7cb05ec94c9ad057d5a04cf683242097f0263009",
         "bytes": 513
       },
       {
-        "path": "src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-unsorted-fixture/Carrier.java.txt",
+        "path": "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-java/sort-unsorted-fixture/Carrier.java.txt",
         "sha256": "69512e9fca52ca82ff704a0b13e5ef1a4b784203a0914af288111fa9cdff5b7f",
         "git_blob_sha1": "baad0061779bbb01efed93b8bce15eb2a79e6dc7",
         "bytes": 1112
       },
       {
-        "path": "src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-unsorted-fixture/Extra.java.txt",
+        "path": "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-java/sort-unsorted-fixture/Extra.java.txt",
         "sha256": "51e316c22299c64429328ec8ea37cb59cbc76371d0c842c179cd8959446d8ef9",
         "git_blob_sha1": "68855cac4d7d1881ecd000782ae2ad4aa7ea3e4a",
         "bytes": 472
       },
       {
-        "path": "src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-unsorted-fixture/Numbers.java.txt",
+        "path": "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-java/sort-unsorted-fixture/Numbers.java.txt",
         "sha256": "b19c66dbf7523359189f7302ddf089db8f7c935fe416b71cbeaf0f926ea36406",
         "git_blob_sha1": "d3037ef54f4293e570f22307fd5fb3a0d8c850df",
         "bytes": 339
       },
       {
-        "path": "src/test/resources/com/synexia/rewrite/hash-pinned-java/sort-unsorted-fixture/manifest.tsv",
+        "path": "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-java/sort-unsorted-fixture/manifest.tsv",
         "sha256": "0904420c6b9f6339abccd96c3113c9574df4c5988fbd259b7d2140b26f2ade30",
         "git_blob_sha1": "a7f91e34e9ab867ac4caa0a2968b36c1691767f5",
         "bytes": 513
       },
       {
-        "path": "src/test/resources/com/synexia/rewrite/hash-pinned-text/sort-text-bad-hash-fixture/Fixture.md.txt",
+        "path": "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-text/sort-text-bad-hash-fixture/Fixture.md.txt",
         "sha256": "88b5bafe27dd33aca4a03e8468e519b21e910ad5890a515181f415209726311b",
         "git_blob_sha1": "bc5af7350cfd7d1b7e0ee14d7c375b03329d8637",
         "bytes": 18
       },
       {
-        "path": "src/test/resources/com/synexia/rewrite/hash-pinned-text/sort-text-bad-hash-fixture/manifest.tsv",
+        "path": "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-text/sort-text-bad-hash-fixture/manifest.tsv",
         "sha256": "059dc5dbd63ca2e879e5ae0640c9c7d8ba4d46eeff5af3b14be60ab168b9b1f7",
         "git_blob_sha1": "de1bc98f7dc45fef4bd1611581da7de54f51eaed",
         "bytes": 198
       },
       {
-        "path": "src/test/resources/com/synexia/rewrite/hash-pinned-text/sort-text-fixture/Fixture.json.txt",
+        "path": "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-text/sort-text-fixture/Fixture.json.txt",
         "sha256": "0227630315f81c8e05e9516db88b7f3e131f6cb0dd8bab87befccbfbc728272f",
         "git_blob_sha1": "1c04772981ee89fa8f8532551205fae68d2db30e",
         "bytes": 65
       },
       {
-        "path": "src/test/resources/com/synexia/rewrite/hash-pinned-text/sort-text-fixture/Fixture.md.txt",
+        "path": "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-text/sort-text-fixture/Fixture.md.txt",
         "sha256": "58f3347655bb90cb257a24f17161c7773a61a70356c47bcd69c37d679eea703d",
         "git_blob_sha1": "41f6618bc07c3ceae97cf8bd6a875134d83b8ec3",
         "bytes": 67
       },
       {
-        "path": "src/test/resources/com/synexia/rewrite/hash-pinned-text/sort-text-fixture/manifest.tsv",
+        "path": "src/test/resources/jdk/internal/m3/rewrite/hash-pinned-text/sort-text-fixture/manifest.tsv",
         "sha256": "3b6ef32a77fa90ac3d6f87946d985b34b420edb986f5deb7520124d76321c661",
         "git_blob_sha1": "58b89e94b4d1aac1de85531b96dc3043e19ea943",
         "bytes": 313

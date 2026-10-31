@@ -16,7 +16,7 @@
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-5.txt",
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/composition-orders.json",
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/qualification.json",
-    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/java/com/synexia/rewrite/Sc0RecipeTest.java",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/java/jdk/internal/m3/rewrite/Sc0RecipeTest.java",
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/m3/runtime-integration/fix-root-ascii-case/manifest.json",
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/m3/tooling/image-gates/current-c0.json",
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/03-M3StringPrecomputeSearchTest.java.txt",

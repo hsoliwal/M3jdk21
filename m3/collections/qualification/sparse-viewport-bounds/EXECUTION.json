@@ -5,7 +5,7 @@
     "repo": "hsoliwal/com.synexia",
     "pr": 12855,
     "dataset": "sparse-viewport-bounds-20261028",
-    "recipe": "com.synexia.m3.SparseViewportBounds20261028",
+    "recipe": "jdk.internal.m3.SparseViewportBounds20261028",
     "source_commit": "99d5ca5217d8065da8c288fafbc122f51c0f32dd"
   },
   "source": {

@@ -13,8 +13,8 @@ import tempfile
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parent
-RESOURCE = "src/main/resources/com/synexia/rewrite/joined-range-directory-20261020"
-SUITE = "com.synexia.rewrite.M3JoinedRangeDirectoryRecipeTest"
+RESOURCE = "src/main/resources/jdk/internal/m3/rewrite/joined-range-directory-20261020"
+SUITE = "jdk.internal.m3.rewrite.M3JoinedRangeDirectoryRecipeTest"
 METHODS = ["allTwoPartialStatesBothOrdersReachExactFixedPoint","allTwoInverseStatesBothOrdersRecoverExactBefore","eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"]
 SUITES = {SUITE: METHODS}
 CHANGE_PATHS = ["m3/core/src/com/m3/text/JoinedM3StringPiece.java"]
@@ -38,12 +38,12 @@ DIRECTIONS = ("forward", "inverse")
 RECEIVER_OUTPUTS: dict[str, str] = {}
 RECEIVER_CUSTODY: dict[str, str] = {}
 DESCRIPTOR = "src/main/resources/META-INF/rewrite/joined-range-directory-20261020.yml"
-TEST = "src/test/java/com/synexia/rewrite/M3JoinedRangeDirectoryRecipeTest.java"
+TEST = "src/test/java/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryRecipeTest.java"
 REQUIRED_PATHS = sorted([
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
-    "pinned-engine/com/synexia/rewrite/M3JoinedRangeDirectoryRecipe.java",
-    "pinned-engine/com/synexia/rewrite/M3JoinedRangeDirectoryInverseRecipe.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryRecipe.java",
+    "pinned-engine/jdk/internal/m3/rewrite/M3JoinedRangeDirectoryInverseRecipe.java",
     "pom.xml", DESCRIPTOR, TEST, "verify.py",
     "FOSS_REUSE_DECISION.tsv", "THIRD_PARTY_NOTICES.md", "README.md",
     *[RESOURCE + "/" + direction + "/manifest.tsv" for direction in DIRECTIONS],
@@ -51,12 +51,12 @@ REQUIRED_PATHS = sorted([
       for direction in DIRECTIONS for stage in ("before", "out") for name in TARGET_PATHS],
 ])
 ORIGINAL_GIT = {
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-    "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+    "pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
     "pom.xml": "d79867bcc09ad6329e12418e15907e54b8ab025f",
 }
-PROVIDERS = {"openrewriteAdapter": ORIGINAL_GIT["pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java"],
-             "manifestKernel": ORIGINAL_GIT["pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java"]}
+PROVIDERS = {"openrewriteAdapter": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinRecipe.java"],
+             "manifestKernel": ORIGINAL_GIT["pinned-engine/jdk/internal/m3/rewrite/M3GpuToolJoinManifest.java"]}
 COMPILED_PROVIDERS = ("M3GpuToolJoinRecipe", "M3GpuToolJoinManifest",
                       "M3JoinedRangeDirectoryRecipe", "M3JoinedRangeDirectoryInverseRecipe")
 FALSE_GATES = ("targetJavaCompiled", "originalPrivateOwnerModuleQualified", "originalPrivateModelQualified",
@@ -221,7 +221,7 @@ def validate_marker(xml: bytes, ident: str) -> None:
 def self_test_reports() -> None:
     """Prove exact provider-derived names without stripping parameter signatures."""
     # Independent literal oracle matches the sealed Java methods and pinned provider.
-    expected_suites = {"com.synexia.rewrite.M3JoinedRangeDirectoryRecipeTest":["allTwoPartialStatesBothOrdersReachExactFixedPoint","allTwoInverseStatesBothOrdersRecoverExactBefore","eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"]}
+    expected_suites = {"jdk.internal.m3.rewrite.M3JoinedRangeDirectoryRecipeTest":["allTwoPartialStatesBothOrdersReachExactFixedPoint","allTwoInverseStatesBothOrdersRecoverExactBefore","eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"]}
     if SUITES != expected_suites:
         raise AssertionError("sealed SDK report inventory drift")
     refused = 0
@@ -438,7 +438,7 @@ def reports(pins: dict, pins_data: bytes) -> None:
         require(digest(raw) == expected_sha and raw == counterpart, "actual recipe output drift: " + key)
     compiled = {}
     for name in COMPILED_PROVIDERS:
-        relative = "target/classes/com/synexia/rewrite/" + name + ".class"
+        relative = "target/classes/jdk/internal/m3/rewrite/" + name + ".class"
         raw = regular(ROOT / relative).read_bytes()
         require(len(raw) > 8 and raw[:4] == bytes.fromhex("cafebabe")
                 and int.from_bytes(raw[6:8], "big") == 65, "actual Java21 SDK provider class required")

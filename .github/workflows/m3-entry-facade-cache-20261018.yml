@@ -46,4 +46,4 @@ jobs:
       - name: Test owning M3 collection module
         run: mvn -B -ntp -f m3/collections/pom.xml test
       - name: Verify generated source postimages
-        run: java -cp m3/collections/qualification/m3-entry-facade-cache-20261018/recipe/target/classes com.synexia.m3.M3EntryFacadeCacheRecipe --check .
+        run: java -cp m3/collections/qualification/m3-entry-facade-cache-20261018/recipe/target/classes jdk.internal.m3.M3EntryFacadeCacheRecipe --check .

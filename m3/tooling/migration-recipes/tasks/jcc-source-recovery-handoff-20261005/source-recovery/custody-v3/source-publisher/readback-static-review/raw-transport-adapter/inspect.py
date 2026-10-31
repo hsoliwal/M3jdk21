@@ -67,7 +67,7 @@ def main():
     encoded = ''.join(probe['content'].split())
     probe_bytes = base64.b64decode(encoded, validate=True)
     assert git_object('blob', probe_bytes) == probe['sha']
-    expected_probe = ROOT / 'recovery-baseline-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryClassLoader.java'
+    expected_probe = ROOT / 'recovery-baseline-be92/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3MasteryClassLoader.java'
     assert probe_bytes == read(expected_probe)
     assert '/be92c62ece9023b5c33676716a1076d00e26120a/' in probe['display_url']
 

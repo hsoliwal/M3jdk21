@@ -4,13 +4,13 @@
   "tree": "51246136763bff28b9fcc5daf01c884ae05bca7c",
   "source_rows": [
     {
-      "path": ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe.java",
+      "path": ".m3/openrewrite-recipes/src/main/java/jdk/internal/m3/bootstrap/M3BootstrapInventoryRecipe.java",
       "sha256": "05ac05e7f3cb7549d26866a61dec0edf19515317c95f73db82d1c517cad88ef5",
       "bytes": 2302,
       "git_blob": "8f1018a1bcfa203420253d59a8473ef5a18e19b6"
     },
     {
-      "path": ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapTaskRecipe.java",
+      "path": ".m3/openrewrite-recipes/src/main/java/jdk/internal/m3/bootstrap/M3BootstrapTaskRecipe.java",
       "sha256": "58bac6968ebd2cce6f43f338c289db14435b3ef05ed2abc13402275285b89462",
       "bytes": 1526,
       "git_blob": "cfb9fb8befe2c5ccde5035e96ae7c99b89b5f490"

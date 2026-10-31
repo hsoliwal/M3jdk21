@@ -2,7 +2,7 @@
 from pathlib import Path
 import hashlib,json,stat
 H=Path(__file__).resolve().parent;I=H.parent;S=H/'source';E=H/'extracted';B=H/'bundle'
-SP='synexia-openrewrite-recipes/';MP='m3/tooling/migration-recipes/';TASK='tasks/m3-rc-10f/integration-c0/pattern-hidden/';PORT='verification/ci8891-20261006/current-reconciliation/integration-c0/pattern-hidden/'
+SP='m3-openrewrite-recipes/';MP='m3/tooling/migration-recipes/';TASK='tasks/m3-rc-10f/integration-c0/pattern-hidden/';PORT='verification/ci8891-20261006/current-reconciliation/integration-c0/pattern-hidden/'
 def sha(b):return hashlib.sha256(b).hexdigest()
 def blob(b):return hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()
 def load(p):return json.loads(p.read_bytes())

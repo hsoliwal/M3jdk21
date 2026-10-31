@@ -4,7 +4,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[4]
 RECIPE=ROOT/'m3/collections/recipe/zero-mask-window-copy-20261017'
-RES=RECIPE/'src/main/resources/com/synexia/rewrite'
+RES=RECIPE/'src/main/resources/jdk/internal/m3/rewrite'
 EXPECTED={
  'm3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java':('native-zero-mask-window-java','hash-pinned-java','86eb2c9a436aac6f6e5b99f5c275636ca272d849dd08aa07f8796271167c63a1','6b6fe32c60db7fb0e31e17e6cce0df727c856f17adff9eba32d5efd141498872'),
  'm3/collections/src/main/native/collections/m3_index_mask_compactor.c':('native-zero-mask-window-c','hash-pinned-text','59b1bb47f2df09f1455e4ce2160becbeefd6da877ecddca4ad245a286d14fa48','cb8e8c66e07cc4651e95a0c28ad834d2c9de48df34dc90c6d7da68443f1da531')}

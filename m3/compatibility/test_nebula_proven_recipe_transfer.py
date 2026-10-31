@@ -14,8 +14,8 @@ EXPECTED_STAGES = [
     "NEBULA_REPROOF",
     "NEBULA_CANONICAL_HOME",
     "NEBULA_FILE_RECIPE_HANDOFF",
-    "SYNEXIA_CANONICAL_OWNER",
-    "SYNEXIA_NEBULA_PROVEN_RECIPE",
+    "M3_CANONICAL_OWNER",
+    "M3_NEBULA_PROVEN_RECIPE",
     "M3JDK21_CONSUMER",
 ]
 
@@ -26,8 +26,8 @@ EXPECTED_REPOS = {
     "NEBULA_REPROOF": "hsoliwal/nebula",
     "NEBULA_CANONICAL_HOME": "hsoliwal/nebula",
     "NEBULA_FILE_RECIPE_HANDOFF": "hsoliwal/nebula",
-    "SYNEXIA_CANONICAL_OWNER": "hsoliwal/com.synexia",
-    "SYNEXIA_NEBULA_PROVEN_RECIPE": "hsoliwal/com.synexia",
+    "M3_CANONICAL_OWNER": "hsoliwal/com.synexia",
+    "M3_NEBULA_PROVEN_RECIPE": "hsoliwal/com.synexia",
     "M3JDK21_CONSUMER": "hsoliwal/M3jdk21",
 }
 
@@ -56,7 +56,7 @@ def test_hosted_nebula_reproof_is_not_misreported_as_green() -> None:
 def test_canonical_ownership_flows_nebula_to_synexia_to_m3jdk21() -> None:
     rows = {row["stage"]: row for row in load()}
     assert rows["NEBULA_FILE_RECIPE_HANDOFF"]["role"] == "TARGET_BINDING"
-    assert rows["SYNEXIA_NEBULA_PROVEN_RECIPE"]["role"] == "CANONICAL_RECIPE_HOME"
+    assert rows["M3_NEBULA_PROVEN_RECIPE"]["role"] == "CANONICAL_RECIPE_HOME"
     assert rows["M3JDK21_CONSUMER"]["role"] == "RECEIVER"
 
 if __name__ == "__main__":

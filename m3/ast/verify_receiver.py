@@ -25,8 +25,8 @@ EXPECTED_SUCCESSOR = {'schema': 'M3_AST_HIERARCHY_SOURCE_SUCCESSOR_V1',
  'canonical_repository': 'hsoliwal/com.synexia',
  'canonical_baseline_commit': '98368e107f4a205d852ef958cd48c1ee633219b1',
  'canonical_source_commit': '9f500fff0bcdf96807899e96090e245fb530c48b',
- 'recipe_owner': 'synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017',
- 'recipe_name': 'com.synexia.m3jdk.CollectionsContractRefinement20261017',
+ 'recipe_owner': 'm3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017',
+ 'recipe_name': 'jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017',
  'canonical_dataset': 'ast-hierarchy-20261018',
  'target_dataset': 'ast-hierarchy-target-20261018',
  'previous_source_sha256': 'f9d353aa68b31d4d723d584940cb87a39163958d2e7c0962e2a648c96fcf1434',
@@ -131,7 +131,7 @@ def qualify_successor(fields):
 if digest(BORROW) != HISTORICAL_BORROW_SHA256:
     raise SystemExit('FAIL: historical SOURCE_BORROW.tsv drift')
 fields = dict(line.split('\t', 1) for line in BORROW.read_text().splitlines()[1:])
-if fields['source_recipe'] != 'com.synexia.rewrite.M3ASTL0L5Target20261017':
+if fields['source_recipe'] != 'jdk.internal.m3.rewrite.M3ASTL0L5Target20261017':
     raise SystemExit('FAIL: missing historical canonical recipe identity')
 if not TEST.is_file() or not SOURCE.is_file():
     raise SystemExit('FAIL: incomplete Java sources')

@@ -72,7 +72,7 @@
       <arg>-Werror</arg>
      </compilerArgs>
      <includes>
-      <include>com/synexia/rewrite/*.java</include>
+      <include>jdk/internal/m3/rewrite/*.java</include>
       <include>com/m3/collections/M3IndexMaskCompactor.java</include>
       <include>com/m3/collections/M3LongIndexProjection.java</include>
      </includes>
@@ -156,7 +156,7 @@
         </goals>
         <configuration>
          <skip>${m3.recipe.boot.skip}</skip>
-         <mainClass>com.synexia.m3.prstack.M3RecipeBoot</mainClass>
+         <mainClass>jdk.internal.m3.prstack.M3RecipeBoot</mainClass>
          <includeProjectDependencies>false</includeProjectDependencies>
          <includePluginDependencies>true</includePluginDependencies>
          <arguments>

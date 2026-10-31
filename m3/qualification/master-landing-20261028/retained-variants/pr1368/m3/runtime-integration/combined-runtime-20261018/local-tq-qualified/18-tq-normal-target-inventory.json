@@ -30,27 +30,27 @@
     "sha256": "14b77cdc0501b9b2ca4b036a96a5c5131891ff02d0fe19a9da18bc6ceb0880ef"
   },
   {
-    "path": "bootstrap/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe$1.class",
+    "path": "bootstrap/jdk/internal/m3/bootstrap/M3BootstrapInventoryRecipe$1.class",
     "bytes": 4300,
     "sha256": "1985219905e5e9eedc3d5069cb96c8f265096bdef714b7974db5732151162b26"
   },
   {
-    "path": "bootstrap/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe$Atom.class",
+    "path": "bootstrap/jdk/internal/m3/bootstrap/M3BootstrapInventoryRecipe$Atom.class",
     "bytes": 1220,
     "sha256": "e60593e06c5e3d2e96dd27fb88a5e4a673d11bcc2172dda9b0e29d2f6f34985a"
   },
   {
-    "path": "bootstrap/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe$Atoms.class",
+    "path": "bootstrap/jdk/internal/m3/bootstrap/M3BootstrapInventoryRecipe$Atoms.class",
     "bytes": 720,
     "sha256": "cc6e6a09df35b2f96acf1edee2c9209d00acf541bed5a56039504261d6838bcd"
   },
   {
-    "path": "bootstrap/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe.class",
+    "path": "bootstrap/jdk/internal/m3/bootstrap/M3BootstrapInventoryRecipe.class",
     "bytes": 1660,
     "sha256": "4d6a87726bf78c751123870f00f81fcda6dea34a588916adfc4cb55e9b94f682"
   },
   {
-    "path": "bootstrap/com/synexia/m3/bootstrap/M3BootstrapTaskRecipe.class",
+    "path": "bootstrap/jdk/internal/m3/bootstrap/M3BootstrapTaskRecipe.class",
     "bytes": 3107,
     "sha256": "1404825d6614535c244aeef6b05cb5885b9129c7188bff5898d6fa31648d4204"
   },

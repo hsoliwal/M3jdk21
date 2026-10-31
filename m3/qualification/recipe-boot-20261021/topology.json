@@ -4,7 +4,7 @@
   "poms": {
     ".m3/openrewrite-recipes/pom.xml": {
       "gav": [
-        "com.synexia.m3.bootstrap",
+        "jdk.internal.m3.bootstrap",
         "m3-recipe-first-bootstrap",
         "1.0.0-SNAPSHOT"
       ],
@@ -32,7 +32,7 @@
     },
     "m3/arrays/qualification/empty-segments-20261017/recipe-custody/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-collections-contract-refinement-recipe-proof",
         "1"
       ],
@@ -59,7 +59,7 @@
     },
     "m3/ast/recipe-custody/hierarchy-encoding-20261018/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-collections-contract-refinement-recipe-proof",
         "1"
       ],
@@ -2318,7 +2318,7 @@
     },
     "m3/collections/interop/qualification/m3-direct-spring-multivaluemap-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-spring-direct-provider-recipe",
         "1.0.0"
       ],
@@ -2415,7 +2415,7 @@
     },
     "m3/collections/interop/recipe/five-library-index-views-20261017/canonical/recipes/m3jdk21-five-library-index-views-20261017/pom.xml": {
       "gav": [
-        "com.synexia.proof",
+        "jdk.internal.m3.proof",
         "m3-five-library-index-view-qualification",
         "1.0.0"
       ],
@@ -2428,7 +2428,7 @@
     },
     "m3/collections/interop/recipe/five-library-index-views-20261017/pom.xml": {
       "gav": [
-        "com.synexia.proof",
+        "jdk.internal.m3.proof",
         "m3-five-library-receiver-recipe-proof",
         "1.0.0"
       ],
@@ -2442,7 +2442,7 @@
     },
     "m3/collections/interop/recipe/m3jdk21-five-provider-key-groups-20261018/pom.xml": {
       "gav": [
-        "com.synexia.proof",
+        "jdk.internal.m3.proof",
         "m3jdk21-five-provider-key-groups",
         "1.0.0"
       ],
@@ -2456,7 +2456,7 @@
     },
     "m3/collections/interop/recipe/m3jdk21-five-provider-key-ranges-20261018/pom.xml": {
       "gav": [
-        "com.synexia.proof",
+        "jdk.internal.m3.proof",
         "m3jdk21-five-provider-key-ranges",
         "1.0.0"
       ],
@@ -2540,7 +2540,7 @@
     },
     "m3/collections/qualification/bimap-mainline-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-bimap-mainline-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2582,7 +2582,7 @@
     },
     "m3/collections/qualification/filtered-list-mutation-20261018/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-filtered-list-mutation-receiver-proof",
         "1.0-SNAPSHOT"
       ],
@@ -2610,7 +2610,7 @@
     },
     "m3/collections/qualification/five-library-prepared-rows-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-five-library-prepared-rows-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2624,7 +2624,7 @@
     },
     "m3/collections/qualification/five-provider-count-recovery-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "five-provider-count-recovery-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2652,7 +2652,7 @@
     },
     "m3/collections/qualification/m3-arrayification-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-arrayification-20261018-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2666,7 +2666,7 @@
     },
     "m3/collections/qualification/m3-commons-bag-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-commons-bag-recipe-20261018",
         "1.0.0-SNAPSHOT"
       ],
@@ -2680,7 +2680,7 @@
     },
     "m3/collections/qualification/m3-counted-sdk-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-counted-sdk-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2694,7 +2694,7 @@
     },
     "m3/collections/qualification/m3-entry-facade-cache-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-entry-facade-cache-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2721,7 +2721,7 @@
     },
     "m3/collections/qualification/m3-filtered-navigation-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-collections-contract-refinement-recipe-proof",
         "1"
       ],
@@ -2749,7 +2749,7 @@
     },
     "m3/collections/qualification/m3-five-fork-prepared-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-five-fork-prepared-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2763,7 +2763,7 @@
     },
     "m3/collections/qualification/m3-five-library-occurrences-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-five-library-occurrence-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2777,7 +2777,7 @@
     },
     "m3/collections/qualification/m3-five-provider-bimaps-master-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-five-provider-bidi-master-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2791,7 +2791,7 @@
     },
     "m3/collections/qualification/m3-five-provider-current-census-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-five-provider-current-census-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2805,7 +2805,7 @@
     },
     "m3/collections/qualification/m3-generic-object-list-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-generic-object-list-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2819,7 +2819,7 @@
     },
     "m3/collections/qualification/m3-guava-setmultimap-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-guava-setmultimap-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2847,7 +2847,7 @@
     },
     "m3/collections/qualification/m3-int-array-index-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-int-array-index-source-recipe",
         "1.0.0"
       ],
@@ -2861,7 +2861,7 @@
     },
     "m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-linked-list-live-mask-recipe",
         "1.0.0"
       ],
@@ -2875,7 +2875,7 @@
     },
     "m3/collections/qualification/m3-long-bitmap-algebra-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-long-bitmap-algebra-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2889,7 +2889,7 @@
     },
     "m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-long-bitmap-filter-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2917,7 +2917,7 @@
     },
     "m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-long-direct-address-kernel-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2931,7 +2931,7 @@
     },
     "m3/collections/qualification/m3-long-index-path-jni-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-long-index-path-jni-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2945,7 +2945,7 @@
     },
     "m3/collections/qualification/m3-long-index-path-masks-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-long-index-path-mask-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2959,7 +2959,7 @@
     },
     "m3/collections/qualification/m3-long-index-projection-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-long-index-projection-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2973,7 +2973,7 @@
     },
     "m3/collections/qualification/m3-long-path-input-budget-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-long-path-input-budget-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2987,7 +2987,7 @@
     },
     "m3/collections/qualification/m3-native-five-provider-core-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-five-provider-native-core-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -3014,7 +3014,7 @@
     },
     "m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-sdk-sorted-contract-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -3028,7 +3028,7 @@
     },
     "m3/collections/qualification/m3-sdk-families-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-collection-sdk-names-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -3042,7 +3042,7 @@
     },
     "m3/collections/qualification/m3-sdk-provider-names-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-sdk-provider-names-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -3056,7 +3056,7 @@
     },
     "m3/collections/qualification/m3-state-mask-arrays-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-state-mask-arrays-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -3068,9 +3068,9 @@
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/collections/qualification/m3-state-mask-arrays-20261017/recipe/pom.xml"
     },
-    "m3/collections/qualification/mask-window-sparse-20261017/tooling/synexia-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017/pom.xml": {
+    "m3/collections/qualification/mask-window-sparse-20261017/tooling/m3-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "mask-window-sparse-proof",
         "1.0-SNAPSHOT"
       ],
@@ -3080,7 +3080,7 @@
       "before_sha256": "e0309d1cc2abb5eefe001bb11f2e16f58c008097fc36ead8f20de691f424acad",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/mask-window-sparse-20261017/tooling/synexia-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017/pom.xml"
+      "install_root": "m3/collections/qualification/mask-window-sparse-20261017/tooling/m3-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017/pom.xml"
     },
     "m3/collections/qualification/object-state-batch-28/pom.xml": {
       "gav": [
@@ -3098,7 +3098,7 @@
     },
     "m3/collections/qualification/sdk-bulk-capture-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "sdk-bulk-capture-recipe-receiver",
         "1.0.0"
       ],
@@ -3126,7 +3126,7 @@
     },
     "m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "sdk-mask-bounded-current-recipe",
         "1.0.0"
       ],
@@ -3140,7 +3140,7 @@
     },
     "m3/collections/qualification/stable-order-restoration-20261020/recipe-custody/catalogue/recipe-host/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-wrapper-convergence-recipe-proof",
         "1"
       ],
@@ -3153,7 +3153,7 @@
     },
     "m3/collections/qualification/stable-order-restoration-20261020/recipe-custody/recipe-host/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-wrapper-convergence-recipe-proof",
         "1"
       ],
@@ -3166,7 +3166,7 @@
     },
     "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-wrapper-convergence-recipe-proof",
         "1"
       ],
@@ -3221,7 +3221,7 @@
     },
     "m3/collections/recipe/cpu-mask-runs-20261017/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-cpu-mask-runs-recipe",
         "1"
       ],
@@ -3487,7 +3487,7 @@
     },
     "m3/collections/recipe/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-collection-lane-recipe-proof",
         "1"
       ],
@@ -3542,7 +3542,7 @@
     },
     "m3/collections/recipes/native-index-range-20261017/pom.xml": {
       "gav": [
-        "com.synexia.m3.recipes",
+        "jdk.internal.m3.recipes",
         "native-index-range-20261017",
         "1.0.0-SNAPSHOT"
       ],
@@ -3569,7 +3569,7 @@
     },
     "m3/collections/recipes/sdk-family-names-20261017/pom.xml": {
       "gav": [
-        "com.synexia.m3.recipes",
+        "jdk.internal.m3.recipes",
         "sdk-family-names-20261017",
         "1.0.0-SNAPSHOT"
       ],
@@ -3581,7 +3581,7 @@
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/collections/recipes/sdk-family-names-20261017/pom.xml"
     },
-    "m3/collections/recipes/sdk-family-names-20261017/src/main/resources/com/synexia/rewrite/sdk-family-names-20261017/templates/m3/collections/interop/pom.xml": {
+    "m3/collections/recipes/sdk-family-names-20261017/src/main/resources/jdk/internal/m3/rewrite/sdk-family-names-20261017/templates/m3/collections/interop/pom.xml": {
       "gav": [
         "com.m3",
         "m3-collections-interop",
@@ -3596,7 +3596,7 @@
     },
     "m3/collections/recipes/sdk-guava-bimap-20261017/pom.xml": {
       "gav": [
-        "com.synexia.m3.recipes",
+        "jdk.internal.m3.recipes",
         "sdk-guava-bimap-20261017",
         "1.0.0-SNAPSHOT"
       ],
@@ -3610,7 +3610,7 @@
     },
     "m3/collections/relocation/five-provider-20261018/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "five-provider-package-relocation-recipes",
         "1.0.0-SNAPSHOT"
       ],
@@ -3638,7 +3638,7 @@
     },
     "m3/collections/snapshot-recipe-20261017/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-long-sorted-snapshot-recipe-proof",
         "1.0-SNAPSHOT"
       ],
@@ -3666,7 +3666,7 @@
     },
     "m3/collections/wrappers/composition-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "wrapper-composition-20261017",
         "1"
       ],
@@ -3778,7 +3778,7 @@
     },
     "m3/eclipse/jdt/receiving/array-nodelist-20261019/compiler/pom.xml": {
       "gav": [
-        "com.synexia.receiving",
+        "jdk.internal.m3.receiving",
         "jdt-exact-compiler-source",
         "20261019"
       ],
@@ -3787,7 +3787,7 @@
       "git_blob": "4e96ea49cb9d3659ab6efc1936b1491313d0fc11",
       "before_sha256": "07e7a6b26afd0da99d1c41dc41e933dd608654b73f5566c1ba48fdaa1e5a5d27",
       "parent_gav": [
-        "com.synexia.receiving",
+        "jdk.internal.m3.receiving",
         "jdt-array-nodelist-source",
         "20261019"
       ],
@@ -3798,7 +3798,7 @@
     },
     "m3/eclipse/jdt/receiving/array-nodelist-20261019/core/pom.xml": {
       "gav": [
-        "com.synexia.receiving",
+        "jdk.internal.m3.receiving",
         "jdt-exact-core-source",
         "20261019"
       ],
@@ -3807,7 +3807,7 @@
       "git_blob": "0105308e5011bbb7c07614acc55246d6a2ba9b81",
       "before_sha256": "23c9d2027f18f58c7e53df5f6563ec3a9f2d97cd0ee54729f51ea38f6b2313f3",
       "parent_gav": [
-        "com.synexia.receiving",
+        "jdk.internal.m3.receiving",
         "jdt-array-nodelist-source",
         "20261019"
       ],
@@ -3818,7 +3818,7 @@
     },
     "m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml": {
       "gav": [
-        "com.synexia.receiving",
+        "jdk.internal.m3.receiving",
         "jdt-array-nodelist-source",
         "20261019"
       ],
@@ -3830,9 +3830,9 @@
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml"
     },
-    "m3/eclipse/jdt/receiving/array-nodelist-20261019/recipe-custody/synexia-openrewrite-recipes/verification/parser-collections-sdk-20261019/pom.xml": {
+    "m3/eclipse/jdt/receiving/array-nodelist-20261019/recipe-custody/m3-openrewrite-recipes/verification/parser-collections-sdk-20261019/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "parser-collections-sdk",
         "1.0-SNAPSHOT"
       ],
@@ -4131,7 +4131,7 @@
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-program-escape-precompute-recipe-proof",
         "1"
       ],
@@ -4313,7 +4313,7 @@
     },
     "m3/runtime-integration/qualification/bitlane-count-skip-20261019/recipes/m3jdk21-bitlane-runtime-count-skip-20261019/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3jdk21-bitlane-runtime-count-skip-proof",
         "1.0-SNAPSHOT"
       ],
@@ -4341,7 +4341,7 @@
     },
     "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-facade-custody-1-v1/retained/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-collections-contract-refinement-recipe-proof",
         "1"
       ],
@@ -4354,7 +4354,7 @@
     },
     "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-facade-v1/retained/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-collections-contract-refinement-recipe-proof",
         "1"
       ],
@@ -4367,7 +4367,7 @@
     },
     "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/parser-source/rewrite-java-21/pom.xml": {
       "gav": [
-        "com.synexia.sourcebuilt.openrewrite",
+        "jdk.internal.m3.sourcebuilt.openrewrite",
         "rewrite-java-21",
         "8.17.1-m3-javadoc-1"
       ],
@@ -4380,7 +4380,7 @@
     },
     "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-runtime-progress-facade-recipe-proof",
         "1"
       ],
@@ -4404,10 +4404,10 @@
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
-    "m3/synexia-import/intakes/regex-precompute-v7-20261007/evidence/junit-module/pom.xml": {
+    "m3/m3-import/intakes/regex-precompute-v7-20261007/evidence/junit-module/pom.xml": {
       "gav": [
         "com.m3",
-        "m3-synexia-import",
+        "m3-m3-import",
         "0.1.0-SNAPSHOT"
       ],
       "parent": null,
@@ -4417,10 +4417,10 @@
       "disposition": "EXCLUDE",
       "classification": "RETAINED_EVIDENCE"
     },
-    "m3/synexia-import/pom.xml": {
+    "m3/m3-import/pom.xml": {
       "gav": [
         "com.m3",
-        "m3-synexia-import",
+        "m3-m3-import",
         "0.1.0-SNAPSHOT"
       ],
       "parent": null,
@@ -4429,12 +4429,12 @@
       "before_sha256": "d85d3d4ed6c2ed2b2c637d64805c5f9462e2157ba66019be15075ca1bafbddb0",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/synexia-import/pom.xml"
+      "install_root": "m3/m3-import/pom.xml"
     },
-    "m3/synexia-import/pure-int-recipe-custody/pom.xml": {
+    "m3/m3-import/pure-int-recipe-custody/pom.xml": {
       "gav": [
         "com.synexia",
-        "synexia-openrewrite-recipes",
+        "m3-openrewrite-recipes",
         "1.0.0-SNAPSHOT"
       ],
       "parent": null,
@@ -4560,7 +4560,7 @@
     },
     "m3/tooling/charcopy-current-successor/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "charcopy-current-successor-proof",
         "1.0.0"
       ],
@@ -4653,7 +4653,7 @@
     },
     "m3/tooling/jmod-recipes/quantize-recipe-20261017/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-cpu-int8-receiver-recipe",
         "1.0-SNAPSHOT"
       ],
@@ -4707,7 +4707,7 @@
     },
     "m3/tooling/migration-recipes/apache-reuse/pom.xml": {
       "gav": [
-        "com.synexia.build",
+        "jdk.internal.m3.build",
         "apache-public-reuse-proof",
         "1.0-SNAPSHOT"
       ],
@@ -4970,7 +4970,7 @@
     },
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/followup/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-current-followup-c0",
         "1.0.0"
       ],
@@ -4984,7 +4984,7 @@
     },
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/pattern-hidden/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-current-pattern-hidden-c0",
         "1.0.0"
       ],
@@ -4998,7 +4998,7 @@
     },
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-current-integration-c0",
         "1.0.0"
       ],
@@ -5012,7 +5012,7 @@
     },
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-current-runtime-checker-c0",
         "1.0.0"
       ],
@@ -5071,7 +5071,7 @@
     },
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-current-string-c0",
         "1.0.0"
       ],
@@ -5334,7 +5334,7 @@
     },
     "m3/tooling/module-packs/nlp-search/recipe-custody/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-nlp-search-integration-receiver-proof",
         "1"
       ],
@@ -5359,9 +5359,9 @@
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/tooling/module-packs/parser/pom.xml"
     },
-    "m3/tooling/module-packs/parser/qualification/owner-current-20261019/recipe-custody/synexia-openrewrite-recipes/verification/parser-collections-sdk-20261019/pom.xml": {
+    "m3/tooling/module-packs/parser/qualification/owner-current-20261019/recipe-custody/m3-openrewrite-recipes/verification/parser-collections-sdk-20261019/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "parser-collections-sdk",
         "1.0-SNAPSHOT"
       ],
@@ -5480,9 +5480,9 @@
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/tooling/mr/pom.xml"
     },
-    "m3/tooling/netbeans-gap-boundary-20261019/synexia-openrewrite-recipes/recipe-crates/netbeans-gap-boundary-20261019/pom.xml": {
+    "m3/tooling/netbeans-gap-boundary-20261019/m3-openrewrite-recipes/recipe-crates/netbeans-gap-boundary-20261019/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "netbeans-gap-boundary-proof",
         "1.0-SNAPSHOT"
       ],
@@ -5492,7 +5492,7 @@
       "before_sha256": "675e68a6c0bbc00ecc6fcd4aada1d25d21dc9e5a64471fa480d5cd44e08b956a",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/netbeans-gap-boundary-20261019/synexia-openrewrite-recipes/recipe-crates/netbeans-gap-boundary-20261019/pom.xml"
+      "install_root": "m3/tooling/netbeans-gap-boundary-20261019/m3-openrewrite-recipes/recipe-crates/netbeans-gap-boundary-20261019/pom.xml"
     },
     "m3/tooling/recipe-agent-api/pom.xml": {
       "gav": [
@@ -5550,7 +5550,7 @@
     },
     "m3/tooling/region-foundation-repair/pom.xml": {
       "gav": [
-        "com.synexia.rewrite",
+        "jdk.internal.m3.rewrite",
         "m3jdk-region-foundation-repair",
         "1.0.0-SNAPSHOT"
       ],
@@ -5620,7 +5620,7 @@
     },
     "m3/tooling/shared-frontend/recipe-custody/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-ast-build-reverse-recipe-proof",
         "1"
       ],
@@ -5633,7 +5633,7 @@
     },
     "m3/tooling/sort-recipes/m3-java-util-sorts-20261018/pom.xml": {
       "gav": [
-        "com.synexia.recipes",
+        "jdk.internal.m3.recipes",
         "m3-java-util-sorts-20261018",
         "1.0.0"
       ],
@@ -5670,10 +5670,10 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_RECIPE_PROOF"
     },
-    "m3/tooling/synexia-jdk-a3-recipes/pom.xml": {
+    "m3/tooling/m3-jdk-a3-recipes/pom.xml": {
       "gav": [
         "com.synexia",
-        "synexia-jdk-a3-recipes",
+        "m3-jdk-a3-recipes",
         "1.0.0-SNAPSHOT"
       ],
       "parent": null,
@@ -5682,11 +5682,11 @@
       "before_sha256": "adb92d8db5802590986586d0de67f0e75888d40fdaf3df080de10b59165982e1",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/synexia-jdk-a3-recipes/pom.xml"
+      "install_root": "m3/tooling/m3-jdk-a3-recipes/pom.xml"
     },
-    "m3/tooling/text-metadata-current-owner/source/synexia-openrewrite-recipes/tasks/composite-summary-20261012/pom.xml": {
+    "m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes/tasks/composite-summary-20261012/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "composite-summary-proof",
         "1.0.0"
       ],
@@ -5697,7 +5697,7 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_QUALIFICATION"
     },
-    "m3/tooling/text-metadata-current-owner/source/synexia-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/pom.xml": {
+    "m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-string-matched-build-workflow-sdk-1c1b-38df",
@@ -5710,9 +5710,9 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_QUALIFICATION"
     },
-    "m3/tooling/text-metadata-current-owner/source/synexia-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/pom.xml": {
+    "m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "text-metadata-current-owner-proof",
         "1.0.0"
       ],
@@ -5739,7 +5739,7 @@
     },
     "m3/tooling/tq-sync/source-reactor/pom.xml": {
       "gav": [
-        "com.synexia.m3.recipe",
+        "jdk.internal.m3.recipe",
         "source-qualified-tq-reactor",
         "1.0.0-SNAPSHOT"
       ],
@@ -5793,9 +5793,9 @@
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/tooling/vi/pom.xml"
     },
-    "m3/vendor/synexia/snapshots/m3-build-collections-20261017/synexia-openrewrite-recipes/verification/m3-build-shared-ast-20261017/pom.xml": {
+    "m3/vendor/synexia/snapshots/m3-build-collections-20261017/m3-openrewrite-recipes/verification/m3-build-shared-ast-20261017/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-build-shared-ast-recipe-proof",
         "1.0.0-SNAPSHOT"
       ],
@@ -5804,11 +5804,11 @@
       "git_blob": "47be771fcf7bc5553e077347a9b261e8fdbf6e10",
       "before_sha256": "c16ef223d677f886efe60492d5ce72e14d6e1fb14115637b8fa3bb638b542a7c",
       "disposition": "EXCLUDE",
-      "classification": "SYNEXIA_CUSTODY"
+      "classification": "M3_CUSTODY"
     },
-    "m3/vendor/synexia/synexia-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/pom.xml": {
+    "m3/vendor/synexia/m3-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-nlp-search-current-forks-proof",
         "1"
       ],
@@ -5817,7 +5817,7 @@
       "git_blob": "03f7b2c4345609fd93eda917d2d77b2959126b10",
       "before_sha256": "a0db36dba008ed574230acca30b565c886391b9b3b68fd2d802f68442b90750f",
       "disposition": "EXCLUDE",
-      "classification": "SYNEXIA_CUSTODY"
+      "classification": "M3_CUSTODY"
     },
     "m3/vendor/third_party/HdrHistogram/pom.xml": {
       "gav": [
@@ -7894,7 +7894,7 @@
       "gav": [
         "org.apache.opennlp",
         "opennlp-tools",
-        "2.4.0-synexia-source-1"
+        "2.4.0-m3-source-1"
       ],
       "parent": null,
       "reason": "NO_PARENT",

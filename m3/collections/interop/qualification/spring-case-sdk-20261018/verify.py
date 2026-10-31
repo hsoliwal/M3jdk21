@@ -8,8 +8,8 @@ import sys
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[4]
 CANON = HERE / "canonical" / "src/main/resources"
-JAVA = CANON / "com/synexia/rewrite/hash-pinned-java/m3-spring-case-sdk-20261018"
-TEXT = CANON / "com/synexia/rewrite/hash-pinned-text/m3-spring-case-sdk-metadata-20261018"
+JAVA = CANON / "jdk/internal/m3/rewrite/hash-pinned-java/m3-spring-case-sdk-20261018"
+TEXT = CANON / "jdk/internal/m3/rewrite/hash-pinned-text/m3-spring-case-sdk-metadata-20261018"
 
 def bytes_of(path):
     if path.is_symlink() or not path.is_file():
@@ -58,8 +58,8 @@ def verify():
     for path, expected in unchanged.items():
         if blob(bytes_of(ROOT/path)) != expected:
             raise ValueError("unchanged incumbent or dependency drift: " + path)
-    java_engine = HERE/"engine/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
-    text_engine = HERE/"engine/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java"
+    java_engine = HERE/"engine/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
+    text_engine = HERE/"engine/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java"
     if blob(bytes_of(java_engine)) != "d58ca50dfaeb60f581b64f43545e688aca5c6530":
         raise ValueError("product original Java engine mirror mismatch")
     if blob(bytes_of(text_engine)) != "9d0788d3717e017d58345c5c3e62022c2915a3c8":

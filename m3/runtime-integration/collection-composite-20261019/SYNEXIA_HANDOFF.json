@@ -2,7 +2,7 @@
   "schema": 1,
   "target_repository": "hsoliwal/M3JDK21",
   "target_revision": "ffc08348874ffcf3037d1c0dcf02f7685945daea",
-  "recipe": "com.synexia.m3.CollectionComposite20261019",
+  "recipe": "jdk.internal.m3.CollectionComposite20261019",
   "runtime_dependency_on_synexia": false,
   "ordered_parents": [
     1447,

@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.TokenRegexConvergence
+name: jdk.internal.m3.TokenRegexConvergence
 displayName: Complete M3JDK token-aware regex over M3 token lanes
 description: >-
   Current-master receiver for token-sequence regular expressions in java.base. Receives the

@@ -7,11 +7,11 @@
     {
       "repo": "hsoliwal/com.synexia",
       "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
-      "module": "synexia-common",
-      "path": "synexia-common/src/main/java/com/synexia/common/collections/SegmentedBitLane28.java",
-      "symbol": "com.synexia.common.collections.SegmentedBitLane28",
+      "module": "m3-common",
+      "path": "m3-common/src/main/java/jdk/internal/m3/common/collections/SegmentedBitLane28.java",
+      "symbol": "jdk.internal.m3.common.collections.SegmentedBitLane28",
       "signatures": [
-        "com.synexia.common.collections.SegmentedBitLane28"
+        "jdk.internal.m3.common.collections.SegmentedBitLane28"
       ],
       "sha256": "fe535b8a1f3b22fa1a63455c9078d7b911c72a87a3255714f66e3639d11000af",
       "git_blob_sha1": "8932039f353507225f31dfce7c146f5165ccfc54",
@@ -21,8 +21,8 @@
     {
       "repo": "hsoliwal/com.synexia",
       "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
-      "module": "synexia-common",
-      "path": "synexia-common/src/main/native/collections/segmented_bit_lane.c",
+      "module": "m3-common",
+      "path": "m3-common/src/main/native/collections/segmented_bit_lane.c",
       "symbol": "Java_com_synexia_common_collections_SegmentedBitLane28_cardinality0",
       "signatures": [
         "Java_com_synexia_common_collections_SegmentedBitLane28_cardinality0"

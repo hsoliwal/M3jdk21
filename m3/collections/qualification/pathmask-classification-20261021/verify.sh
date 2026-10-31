@@ -10,7 +10,7 @@ from hashlib import sha256
 from pathlib import Path
 import sys
 root = Path(sys.argv[1])
-crate = root / "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-index-pathmask-classification-20261021"
+crate = root / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-index-pathmask-classification-20261021"
 expected_paths = [
   "m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
   "m3/collections/src/test/java/com/m3/collections/M3IndexPathMaskClassificationProof.java",

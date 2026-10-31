@@ -14,8 +14,8 @@ import importlib.util
 import json
 
 
-OLD_PREFIX = "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017"
-NEW_PREFIX = "synexia-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018"
+OLD_PREFIX = "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017"
+NEW_PREFIX = "m3-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018"
 PUBLIC_OLD = "m3/arrays/qualification/empty-segments-20261017/recipe-custody"
 PUBLIC_NEW = "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody"
 OLD_POM = "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d"
@@ -24,7 +24,7 @@ PARSER_JAR = "bc5fef92a854c72e8706fc58f545a8ac3e9e4395a052b50810366b94869aef52"
 PUBLIC_BASELINE = "86528a90079b89a50b51ef13da08e7e70d468cb4"
 CANONICAL_BASELINE = "8f8200375d8d403b58e855ee5db02f2e8fac33a8"
 CONTROLS = ("prepare.py", "receive.py", "ENGINE_SOURCES.tsv",
-            "src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+            "src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java",
             "contract/test_prepare.py", "contract/verify_receiver.py")
 ENGINES = ("M3HashPinnedJavaSnapshotRecipe.java", "M3HashPinnedTextSnapshotRecipe.java",
            "M3ScopeInference.java", "M3EditScope.java")
@@ -80,7 +80,7 @@ def main():
         if (host / relative).read_bytes() != data or (public / PUBLIC_OLD / relative).read_bytes() != data:
             raise ValueError("original/public/successor control differs: " + relative)
     for name in ENGINES:
-        relative = "src/main/java/com/synexia/rewrite/" + name
+        relative = "src/main/java/jdk/internal/m3/rewrite/" + name
         if (owner / relative).read_bytes() != (public / PUBLIC_OLD / "sdk-owner" / relative).read_bytes():
             raise ValueError("existing public engine differs: " + name)
     for label in ("openrewrite-parser-module-v4", "runtime-facade-patch-v1"):

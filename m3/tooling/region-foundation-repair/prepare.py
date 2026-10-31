@@ -27,8 +27,8 @@ for name, sha in engines.items():
 classes = crate / 'target/input-classes'
 classes.mkdir(parents=True, exist_ok=True)
 subprocess.run(['javac', '--release', '21', '-Xlint:all', '-Werror', '-d', str(classes),
-                str(crate/'src/main/java/com/synexia/rewrite/RegionFoundationInputs.java')], check=True)
-subprocess.run(['java', '-cp', str(classes), 'com.synexia.rewrite.RegionFoundationInputs', str(base), str(candidate)], check=True)
+                str(crate/'src/main/java/jdk/internal/m3/rewrite/RegionFoundationInputs.java')], check=True)
+subprocess.run(['java', '-cp', str(classes), 'jdk.internal.m3.rewrite.RegionFoundationInputs', str(base), str(candidate)], check=True)
 resource = crate/'src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-region-foundation-20261016'
 resource.mkdir(parents=True, exist_ok=True)
 paths = ['.github/workflows/m3-foundation.yml', 'm3/docs/name-mapping.json',

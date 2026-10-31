@@ -10,10 +10,10 @@ on:
       - 'm3/core/**'
       - 'm3/build.sh'
       - 'm3/lexicon/english-demo.txt'
-      - 'm3/lexicon/synexia-number-target-map.tsv'
-      - 'm3/lexicon/synexia-precompute-field-map.tsv'
-      - 'm3/lexicon/synexia-source-manifest.tsv'
-      - 'm3/lexicon/synexia-word-source-revisions.tsv'
+      - 'm3/lexicon/m3-number-target-map.tsv'
+      - 'm3/lexicon/m3-precompute-field-map.tsv'
+      - 'm3/lexicon/m3-source-manifest.tsv'
+      - 'm3/lexicon/m3-word-source-revisions.tsv'
 permissions:
   contents: read
 concurrency:
@@ -99,10 +99,10 @@ jobs:
             /m3/core/
             /m3/build.sh
             /m3/lexicon/english-demo.txt
-            /m3/lexicon/synexia-number-target-map.tsv
-            /m3/lexicon/synexia-precompute-field-map.tsv
-            /m3/lexicon/synexia-source-manifest.tsv
-            /m3/lexicon/synexia-word-source-revisions.tsv
+            /m3/lexicon/m3-number-target-map.tsv
+            /m3/lexicon/m3-precompute-field-map.tsv
+            /m3/lexicon/m3-source-manifest.tsv
+            /m3/lexicon/m3-word-source-revisions.tsv
       - name: Qualify exact recipe outputs and unchanged original core contracts
         shell: bash
         env:

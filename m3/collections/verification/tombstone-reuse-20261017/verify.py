@@ -108,7 +108,7 @@ def main():
         if cls(new)!=cls(again):
             raise AssertionError('repeat compilation differs')
         summary={'status':'PASS_SELECTED_SOURCE_JAVA21','base_commit':cfg['base_commit'],
-                 'synexia_recipe_commit':cfg['synexia_recipe_commit'],
+                 'm3_recipe_commit':cfg['m3_recipe_commit'],
                  'compiled_class_files':len(cls(new)), 'command_count':len(receipts),
                  'api_descriptors':'IDENTICAL','repeat_classes':'IDENTICAL',
                  'jtreg':'NOT_RUN','full_maven_reactor':'NOT_RUN','native_jni':'UNCHANGED_NOT_RUN',

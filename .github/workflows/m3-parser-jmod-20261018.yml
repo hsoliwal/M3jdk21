@@ -41,7 +41,7 @@ jobs:
           set -euo pipefail
           python3 m3/compatibility/check_synexia_full_family.py
           python3 m3/compatibility/check_synexia_full_borrow_receiver.py
-          python3 m3/runtime-integration/verify-synexia-intake.py
+          python3 m3/runtime-integration/verify-m3-intake.py
       - name: Provision the SQLite JDBC driver and slf4j-api the facts contract needs (local Maven repository, sealed by lint)
         shell: bash
         run: |

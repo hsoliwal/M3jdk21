@@ -74,7 +74,7 @@ jobs:
           # Keep the same closed-source-coordinate bootstrap as the canonical
           # backport-DAG workflow. Do not silently fall back to Maven Central
           # for the private *-m3-source-1 coordinates.
-          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
+          bash m3/m3-import/pure-int-recipe-custody/install.sh "$PWD"
           # Install the exact migration-recipes reactor and its required
           # source-built dependencies before the focused JEP authority test.
           mvn -B -ntp -f m3/pom.xml -pl tooling/migration-recipes -am -DskipTests install

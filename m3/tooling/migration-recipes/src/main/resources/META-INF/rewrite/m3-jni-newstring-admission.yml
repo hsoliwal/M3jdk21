@@ -7,5 +7,5 @@ description: >-
   the runtime activation boundary. Generic hash-pinned recipe mechanics are Synexia-owned;
   the OpenJDK String bootstrap/JNI ABI integration and qualification remain target-specific.
 recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: mindex-jni-newstring-admission

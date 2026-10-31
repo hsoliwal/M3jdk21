@@ -1152,7 +1152,7 @@
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-guava-evicting-queue-20261018/engine-src/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "m3/collections/recipe/owned-guava-evicting-queue-20261018/engine-src/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "bytes": 13805,
       "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599",
       "scope": "new packet input"
@@ -1176,25 +1176,25 @@
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-guava-evicting-queue-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-guava-evicting-queue/engine-receipt.tsv",
+      "path": "m3/collections/recipe/owned-guava-evicting-queue-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-evicting-queue/engine-receipt.tsv",
       "bytes": 179,
       "sha256": "7b1a2aee52fb611cc6fdf406bee8eeaf25d505598d4cbb08b86b228f7e6670de",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-guava-evicting-queue-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-guava-evicting-queue/M3EvictingQueue.java.txt",
+      "path": "m3/collections/recipe/owned-guava-evicting-queue-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-evicting-queue/M3EvictingQueue.java.txt",
       "bytes": 16979,
       "sha256": "8afe356324bdaa51953933f2213b573175b64e2921df4c0df7c4a16161274840",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-guava-evicting-queue-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-guava-evicting-queue/manifest.tsv",
+      "path": "m3/collections/recipe/owned-guava-evicting-queue-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-evicting-queue/manifest.tsv",
       "bytes": 209,
       "sha256": "2914f73e8065512f357f55364cc91014cdcd2b8bf159255099da490ddeef1596",
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-guava-evicting-queue-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-guava-evicting-queue/source-receipt.tsv",
+      "path": "m3/collections/recipe/owned-guava-evicting-queue-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-guava-evicting-queue/source-receipt.tsv",
       "bytes": 183,
       "sha256": "4f607134bf557b261d3227ff1126136028552ca3c2578d5673ec26a0c2eb93c9",
       "scope": "new packet input"
@@ -1206,7 +1206,7 @@
       "scope": "new packet input"
     },
     {
-      "path": "m3/collections/recipe/owned-guava-evicting-queue-20261018/src/test/java/com/synexia/rewrite/M3OwnedGuavaEvictingQueueRecipeTest.java",
+      "path": "m3/collections/recipe/owned-guava-evicting-queue-20261018/src/test/java/jdk/internal/m3/rewrite/M3OwnedGuavaEvictingQueueRecipeTest.java",
       "bytes": 13459,
       "sha256": "ea5c450de991672fdeb1d66fa73cacbe86fa1bde30f1c89f3af4a92d5e3f7e1b",
       "scope": "new packet input"

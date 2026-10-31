@@ -60,8 +60,8 @@ jobs:
                             "proc":"none","enablePreview":"true"}.items():
               assert config.findtext("m:"+tag, namespaces=ns) == value
           names = [x.text for x in tree.findall("./m:profiles/m:profile/m:id",ns)]
-          assert "m3-synexia-atom-pattern" in names
-          assert "m3-synexia-atom-pattern-mastery" in names
+          assert "m3-m3-atom-pattern" in names
+          assert "m3-m3-atom-pattern-mastery" in names
           print("PASS: exact POM sha256, contract delta, XML parse, preview and both recipe profiles")
           PY
 
@@ -81,8 +81,8 @@ jobs:
           -am -DskipTests install
       - name: Validate canonical source rewrite and install custody
         run: |
-          python3 -S m3/synexia-import/pure-int-recipe-custody/verify-source-rewrite-coordinate.py
-          bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
+          python3 -S m3/m3-import/pure-int-recipe-custody/verify-source-rewrite-coordinate.py
+          bash m3/m3-import/pure-int-recipe-custody/install.sh "$PWD"
       - name: Compile and test exact receiver
         run: >-
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml

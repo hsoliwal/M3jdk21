@@ -3,8 +3,8 @@
   "canonical_repo": "hsoliwal/com.synexia",
   "canonical_commit": "894e228ec20172c59f46627bdd357ac8bd37542b",
   "canonical_dataset": "vpt-geometry-ci-20261027",
-  "canonical_recipe": "com.synexia.m3.ViewportGeometryCi20261027",
-  "authoritative_java_recipe": "com.synexia.m3.ViewportGeometry20261027",
+  "canonical_recipe": "jdk.internal.m3.ViewportGeometryCi20261027",
+  "authoritative_java_recipe": "jdk.internal.m3.ViewportGeometry20261027",
   "original_java_git_blob": "650356bcdffa372328e5a79f4f596a887fe5f447",
   "qualified_java_git_blob": "d35282fb564a0a9231f31781e1a699f7e571f8de",
   "test_only_results": {

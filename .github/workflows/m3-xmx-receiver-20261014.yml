@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - 'm3/collections/src/test/java/com/m3/collections/M3ObjectResidencyRuntimePressureTest.java'
-      - 'm3/compatibility/synexia-xmx-memory-receiver-20261014.tsv'
+      - 'm3/compatibility/m3-xmx-memory-receiver-20261014.tsv'
       - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3XmxReceiverRecipe.java'
       - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3XmxReceiverRecipeTest.java'
       - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-xmx-receiver/**'
@@ -36,7 +36,7 @@ jobs:
               ('m3/collections/src/test/java/com/m3/collections/M3ObjectResidencyRuntimePressureTest.java',
                'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-xmx-receiver/M3ObjectResidencyRuntimePressureTest.java.txt',
                'bf05ea2b323a83f5c1569bc88d0d5417093df8d1e7f88c00f6831e27e276a4b5'),
-              ('m3/compatibility/synexia-xmx-memory-receiver-20261014.tsv',
+              ('m3/compatibility/m3-xmx-memory-receiver-20261014.tsv',
                'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-xmx-receiver/receiver.tsv.txt',
                'ab5ee0eb73ffb562402b9f6eabd73551a677330c64a24f4d23d89e52081c325f')
           ]

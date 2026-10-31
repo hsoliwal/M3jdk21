@@ -112,7 +112,7 @@
   ],
   "canonical_evidence": {
     "repository": "hsoliwal/com.synexia",
-    "path": "synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/evidence/arrays-collections/index.json",
+    "path": "m3-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/evidence/arrays-collections/index.json",
     "sha256": "a07092aa4493e86a4114a3de3868c77ce9529b9a188f9bf24c20b7979d7efc49",
     "role": "Logs, exact commands, failure traces and module input hashes belong to canonical task evidence; this product snapshot is data only."
   },

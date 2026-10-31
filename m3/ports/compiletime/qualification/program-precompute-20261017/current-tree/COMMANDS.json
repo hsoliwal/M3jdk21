@@ -3,9 +3,9 @@
     "name": "sdk-post-admission-0",
     "argv": [
       "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
-      "/tmp/m3-program-private/synexia-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/receive.py",
+      "/tmp/m3-program-private/m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/receive.py",
       "--crate",
-      "/tmp/m3-program-private/synexia-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017",
+      "/tmp/m3-program-private/m3-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017",
       "--target",
       "/tmp/m3-program-receiving",
       "--check"

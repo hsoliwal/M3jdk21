@@ -1,5 +1,5 @@
 {
-  "schema": "SYNEXIA_M3_WRAPPER_CONVERGENCE_ACCEPTANCE_V1",
+  "schema": "M3_M3_WRAPPER_CONVERGENCE_ACCEPTANCE_V1",
   "target_repository": "hsoliwal/M3JDK21",
   "tested_target_base": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
   "original_discovery_base": "0d73745d7203123533dce8f8fb264ba2746f6d2d",

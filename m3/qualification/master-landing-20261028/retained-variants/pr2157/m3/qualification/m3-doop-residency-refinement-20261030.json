@@ -2,7 +2,7 @@
   "schema": "M3_RESIDENCY_REFINEMENT_PASSIVE_RECEIPT_V1",
   "canonical_repository": "https://github.com/hsoliwal/com.synexia",
   "canonical_revision": "0074acbbd70862be08e2d85dc72c3135e7a614de",
-  "canonical_path_root": "synexia-openrewrite-recipes/recipe-crates/m3-doop-reuse-20261030/refinement-20261030/",
+  "canonical_path_root": "m3-openrewrite-recipes/recipe-crates/m3-doop-reuse-20261030/refinement-20261030/",
   "reference_rule": "Evidence and recipe references are relative to canonical_path_root at canonical_revision; target paths are repository-relative.",
   "target_repository": "hsoliwal/M3jdk21",
   "receipt_role": "PASSIVE_COMPONENT_EVIDENCE_ONLY",
@@ -38,22 +38,22 @@
   "manifests": [
     {
       "crate": "m3-doop-reentrant-eviction-20261030",
-      "recipe": "com.synexia.m3.DoopReentrantEviction20261030",
-      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-doop-reentrant-eviction-20261030/manifest.tsv",
+      "recipe": "jdk.internal.m3.DoopReentrantEviction20261030",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-doop-reentrant-eviction-20261030/manifest.tsv",
       "sha256": "0b183474cf3c1896af224eaf2edde3739e0f92ea5602a51daf69ae6fcaef9c72",
       "git_blob_sha1": "94a754a7e3ef7082b9a0df6d58a96532a8d54610"
     },
     {
       "crate": "m3-doop-callback-error-20261030",
-      "recipe": "com.synexia.m3.DoopCallbackError20261030",
-      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-doop-callback-error-20261030/manifest.tsv",
+      "recipe": "jdk.internal.m3.DoopCallbackError20261030",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-doop-callback-error-20261030/manifest.tsv",
       "sha256": "02181ba50c08e9f981d5f889cdf3eacc4fe0206418969d775ddd24bf09e38916",
       "git_blob_sha1": "38a54372fcb53d9ab56e0b00033510e11f513547"
     },
     {
       "crate": "m3-doop-publication-budget-20261030",
-      "recipe": "com.synexia.m3.DoopPublicationBudget20261030",
-      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-doop-publication-budget-20261030/manifest.tsv",
+      "recipe": "jdk.internal.m3.DoopPublicationBudget20261030",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-doop-publication-budget-20261030/manifest.tsv",
       "sha256": "58c43b1d99a034813b630d66a37f4d5a33e1db928f66dcaccc53e26e962a69ed",
       "git_blob_sha1": "dd4be0b10471c6965e45382eb8482ef41fc4bca4"
     }

@@ -8,5 +8,5 @@ description: >-
   schedule matrix, and CLI absorption gate. Candidate-only; OpenJDK product source and canonical
   promotion remain outside this recipe.
 recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: a3-mastery-receipt

@@ -3,9 +3,9 @@
   "sourceRepository": "hsoliwal/com.synexia",
   "sourceRevision": "2e19d0caac5d6162eaa063f4f741d0c4b45a99ff",
   "sourcePullRequest": "https://github.com/hsoliwal/com.synexia/pull/9704",
-  "recipe": "com.synexia.rewrite.M3JdkReceivingOrderRecipe",
-  "recipeCrate": "synexia-openrewrite-recipes/recipes/m3jdk-receiving-order",
-  "proofPath": "synexia-openrewrite-recipes/recipes/m3jdk-receiving-order/verification/proof.json",
+  "recipe": "jdk.internal.m3.rewrite.M3JdkReceivingOrderRecipe",
+  "recipeCrate": "m3-openrewrite-recipes/recipes/m3jdk-receiving-order",
+  "proofPath": "m3-openrewrite-recipes/recipes/m3jdk-receiving-order/verification/proof.json",
   "proofSha256": "c9b443b2c7169367d386477b57f651358bab22d8fd053a1f6fbbff080aa6c506",
   "targetBaseline": "a694bbd2b3c382a40d401a813ae547293c9d1074",
   "execution": "SDK_EXECUTION",
@@ -48,7 +48,7 @@
     {
       "stage": "target-06",
       "repository": "target",
-      "path": ".github/workflows/m3-synexia-public-target-policy.yml",
+      "path": ".github/workflows/m3-m3-public-target-policy.yml",
       "beforeSha256": "73248049710811e3ee7b75f34a7bc6f73e3d5d141e8ed34a8d2ac141c7387717",
       "afterSha256": "824f2d59ee578b5ec5d3aa8fd06b1049098e93729d9c0e48029a9d085cf07963"
     }

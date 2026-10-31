@@ -23,35 +23,35 @@
       }
     },
     {
-      "path": "pinned-engine/com/synexia/rewrite/M3EditScope.java",
+      "path": "pinned-engine/jdk/internal/m3/rewrite/M3EditScope.java",
       "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
       "unchangedGitBlob": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
       "origin": {
         "repository": "hsoliwal/M3jdk21",
         "commit": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
-        "path": "m3/vendor/synexia/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+        "path": "m3/vendor/synexia/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java",
         "license": "Apache-2.0"
       }
     },
     {
-      "path": "pinned-engine/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "pinned-engine/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "sha256": "c4bbf3136d36608c80452226f0a59a365a065023b13c34b7ef6ca0dc2ed54e5c",
       "unchangedGitBlob": "2530c533003a8a17d0e782728d98a4dfebe13651",
       "origin": {
         "repository": "hsoliwal/M3jdk21",
         "commit": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
-        "path": "m3/vendor/synexia/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "path": "m3/vendor/synexia/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
         "license": "Apache-2.0"
       }
     },
     {
-      "path": "pinned-engine/com/synexia/rewrite/M3ScopeInference.java",
+      "path": "pinned-engine/jdk/internal/m3/rewrite/M3ScopeInference.java",
       "sha256": "17228a698f917bfabb46f8c4a20b50822820516fbc6e9ad71d52587a1918e730",
       "unchangedGitBlob": "f6fd8d4a558a6b9b0c78cf4d010e63e3b3e1a9da",
       "origin": {
         "repository": "hsoliwal/M3jdk21",
         "commit": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
-        "path": "m3/vendor/synexia/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+        "path": "m3/vendor/synexia/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
         "license": "Apache-2.0"
       }
     },
@@ -66,18 +66,18 @@
       }
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/M3String.before.java.txt",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/M3String.before.java.txt",
       "sha256": "d4dcb3f3320e42a977001254cdd9ac58105cea0a427839ec81d945912476943f",
       "unchangedGitBlob": "42399d411c1516a56a47dcdb10242960157b4677",
       "origin": {
         "repository": "hsoliwal/com.synexia",
         "commit": "11c94feb18155a53cc213708c353791132edc4a7",
-        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/M3String.before.java.txt",
+        "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/M3String.before.java.txt",
         "license": "GPL-2.0-only WITH Classpath-exception-2.0"
       }
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/M3String.java.txt",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/M3String.java.txt",
       "sha256": "cd1192e27c981da03aeae2385d3d54ad31d912f043cf8c7dfba18c7b9106b728",
       "unchangedGitBlob": "35ed998540e044eed8cb7596e2e2c019ae369bd3",
       "origin": {
@@ -88,13 +88,13 @@
       }
     },
     {
-      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/manifest.tsv",
+      "path": "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/manifest.tsv",
       "sha256": "590277ad57c9ace4000d615a0ed43211441b1a458d2670d4016442d76b81ae4d",
       "unchangedGitBlob": "9a64ff003d4c8aef8d4ef6800652acc67c44c967",
       "origin": {
         "repository": "hsoliwal/com.synexia",
         "commit": "11c94feb18155a53cc213708c353791132edc4a7",
-        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/manifest.tsv",
+        "path": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-utf8-cursor-20261014/manifest.tsv",
         "license": "Apache-2.0"
       }
     },
@@ -105,18 +105,18 @@
       "origin": {
         "repository": "hsoliwal/com.synexia",
         "commit": "11c94feb18155a53cc213708c353791132edc4a7",
-        "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-utf8-cursor-20261014.yml",
+        "path": "m3-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-utf8-cursor-20261014.yml",
         "license": "Apache-2.0"
       }
     },
     {
-      "path": "src/test/java/com/synexia/rewrite/M3Utf8CursorRecipeTest.java",
+      "path": "src/test/java/jdk/internal/m3/rewrite/M3Utf8CursorRecipeTest.java",
       "sha256": "408f5d205697cff156f4908f53c0ee074ee7c60fcb9f4aed9917fd226ab136be",
       "unchangedGitBlob": "b735eb59bf2b7f6167674d2bf8a345679e55d49f",
       "origin": {
         "repository": "hsoliwal/com.synexia",
         "commit": "11c94feb18155a53cc213708c353791132edc4a7",
-        "path": "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3Utf8CursorRecipeTest.java",
+        "path": "m3-openrewrite-recipes/src/test/java/jdk/internal/m3/rewrite/M3Utf8CursorRecipeTest.java",
         "license": "Apache-2.0"
       }
     },

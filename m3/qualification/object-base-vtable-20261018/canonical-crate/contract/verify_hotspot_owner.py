@@ -19,7 +19,7 @@ target = args.target.resolve()
 jdk = args.jdk.resolve()
 crate = Path(__file__).resolve().parent.parent
 relative = Path("src/hotspot/share/classfile/classLoader.cpp")
-resources = crate / "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-object-base-vtable-20261018"
+resources = crate / "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-object-base-vtable-20261018"
 manifest = (resources / "manifest.tsv").read_text().strip().split("\t")
 assert len(manifest) == 4 and manifest[0] == relative.as_posix()
 digest = lambda value: hashlib.sha256(value).hexdigest()
