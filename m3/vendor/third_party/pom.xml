@@ -86,7 +86,6 @@
     <module>junit-jupiter-engine-5.10.2</module>
     <module>junit-jupiter-engine-5.11.4</module>
     <module>junit-jupiter-params-5.10.2</module>
-    <module>junit-jupiter-params-5.11.4</module>
     <module>junit-platform-commons-1.10.2</module>
     <module>junit-platform-commons-1.11.4</module>
     <module>junit-platform-engine-1.10.2</module>

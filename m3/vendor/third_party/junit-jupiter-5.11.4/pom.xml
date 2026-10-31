@@ -33,7 +33,7 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
-      <version>5.11.4-m3-source-1</version>
+      <version>5.10.2-m3-source-1</version>
       <!-- source module -->
     </dependency>
   </dependencies>

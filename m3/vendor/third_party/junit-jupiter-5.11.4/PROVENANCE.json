@@ -31,7 +31,7 @@
       "group": "org.junit.jupiter",
       "optional": false,
       "scope": "compile",
-      "version": "5.11.4-m3-source-1"
+      "version": "5.10.2-m3-source-1"
     }
   ],
   "donor": "junit-jupiter-5.11.4",
