@@ -207,9 +207,14 @@
       "upstream": "ch/randelshofer/fastdoubleparser/JavaDoubleBitsFromCharSequence.java"
     },
     {
-      "kind": "unmodified-production",
+      "base_repository": "m3/vendor/third_party/fastdoubleparser-1.0.90/upstream-excluded/ch/randelshofer/fastdoubleparser/JavaDoubleParser.java",
+      "base_sha256": "4eaaf436e7b76b4ac800e1261f98b240caf25b811f0a114ba73093f4767f8b9f",
+      "kind": "m3-overlay-source",
+      "overlay": "FDP_DELEGATES_TO_JDK v1",
+      "recipe": "m3/tooling/fdp-delegate/tools/fdp_delegate_overlay.py",
+      "recipe_sha256": "acd81c51a41b4444f8eb53c793403789fbddddc744aae35440302984c7536396",
       "repository": "m3/vendor/third_party/fastdoubleparser-1.0.90/src/main/java/ch/randelshofer/fastdoubleparser/JavaDoubleParser.java",
-      "sha256": "4eaaf436e7b76b4ac800e1261f98b240caf25b811f0a114ba73093f4767f8b9f",
+      "sha256": "4a543d61076c6f6d2a589168b1bd80218de9948cf75d0523a3a20271f928334c",
       "upstream": "ch/randelshofer/fastdoubleparser/JavaDoubleParser.java"
     },
     {
@@ -231,9 +236,14 @@
       "upstream": "ch/randelshofer/fastdoubleparser/JavaFloatBitsFromCharSequence.java"
     },
     {
-      "kind": "unmodified-production",
+      "base_repository": "m3/vendor/third_party/fastdoubleparser-1.0.90/upstream-excluded/ch/randelshofer/fastdoubleparser/JavaFloatParser.java",
+      "base_sha256": "ab82daaac3aca15fb55c06bbd54658fb16d6a55b9fbfa951ca03dc2995fd7f8c",
+      "kind": "m3-overlay-source",
+      "overlay": "FDP_DELEGATES_TO_JDK v1",
+      "recipe": "m3/tooling/fdp-delegate/tools/fdp_delegate_overlay.py",
+      "recipe_sha256": "acd81c51a41b4444f8eb53c793403789fbddddc744aae35440302984c7536396",
       "repository": "m3/vendor/third_party/fastdoubleparser-1.0.90/src/main/java/ch/randelshofer/fastdoubleparser/JavaFloatParser.java",
-      "sha256": "ab82daaac3aca15fb55c06bbd54658fb16d6a55b9fbfa951ca03dc2995fd7f8c",
+      "sha256": "6d2fbfc7a553b73f51992559093c284ef240f956346233de7ad209a91e8d085d",
       "upstream": "ch/randelshofer/fastdoubleparser/JavaFloatParser.java"
     },
     {
@@ -383,8 +393,8 @@
     {
       "kind": "retained-provenance",
       "repository": "m3/vendor/third_party/fastdoubleparser-1.0.90/OVERLAY_SOURCES.json",
-      "sha256": "3d667019c60da21843a19a60b8cfa12775d1ce0d1871a1fbe48378c704ddad05",
-      "upstream": "fetch_overlays.py"
+      "sha256": "b792ea2f2a2eb1fbe67e48729f0edccbc4d51400e83ad603d285d4cd99c055b6",
+      "upstream": "fetch_overlays.py; m3_overlays: m3/tooling/fdp-delegate/tools/fdp_delegate_overlay.py"
     },
     {
       "kind": "unmodified-production-descriptor",
@@ -403,13 +413,25 @@
       "repository": "m3/vendor/third_party/fastdoubleparser-1.0.90/src/main/descriptor/21/module-info.java",
       "sha256": "99daf602779eb83d0d2181f1ae5b20d6326d8e52e3cec52c178a8016652c0dd8",
       "upstream": "ch.randelshofer.fastdoubleparser/module-info.java"
+    },
+    {
+      "kind": "unmodified-production-superseded-by-m3-overlay",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.90/upstream-excluded/ch/randelshofer/fastdoubleparser/JavaDoubleParser.java",
+      "sha256": "4eaaf436e7b76b4ac800e1261f98b240caf25b811f0a114ba73093f4767f8b9f",
+      "upstream": "ch/randelshofer/fastdoubleparser/JavaDoubleParser.java"
+    },
+    {
+      "kind": "unmodified-production-superseded-by-m3-overlay",
+      "repository": "m3/vendor/third_party/fastdoubleparser-1.0.90/upstream-excluded/ch/randelshofer/fastdoubleparser/JavaFloatParser.java",
+      "sha256": "ab82daaac3aca15fb55c06bbd54658fb16d6a55b9fbfa951ca03dc2995fd7f8c",
+      "upstream": "ch/randelshofer/fastdoubleparser/JavaFloatParser.java"
     }
   ],
   "group": "ch.randelshofer",
   "kind": "MODULE",
   "license": "MIT License",
   "license_file": "LICENSE",
-  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "modifications": "M3 overlays FDP_DELEGATES_TO_JDK v1: JavaDoubleParser and JavaFloatParser delegate their parse methods to java.base Double.parseDouble/Float.parseFloat (recipe m3/tooling/fdp-delegate/tools/fdp_delegate_overlay.py; the unchanged upstream files are retained under upstream-excluded/). No other upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
   "module_descriptors": [
     "META-INF/versions/22/module-info.class: class version 66 needs JDK 22 (toolchain is JDK 21); not reproduced"
   ],
