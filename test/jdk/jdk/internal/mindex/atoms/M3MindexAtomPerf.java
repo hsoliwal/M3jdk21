@@ -9,12 +9,14 @@
  * @test
  * @summary Per-atom MethodHandle invokeExact perf harness of the jdk.internal.mindex lookup/index hot paths
  * @modules java.base/jdk.internal.mindex:+open jdk.management
- * @build M3AtomKit M3AtomPerf AutomatonOracle DotStarOracle RelationOracle TokenRegexOracle
+ * @build M3AtomKit M3AtomPerf AutomatonOracle DotStarOracle RelationOracle TokenRegexOracle ReflectOracle
  * @run main/othervm-XX:+UnlockDiagnosticVMOptions -XX:+PrintCompilation M3MindexAtomPerf
  */
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodType;
+import jdk.internal.mindex.M3CI;
+import jdk.internal.mindex.M3MemberKind;
 import jdk.internal.mindex.M3Automaton;
 import jdk.internal.mindex.M3AutomatonOps;
 import jdk.internal.mindex.M3RegexDpPlan;
@@ -38,7 +40,10 @@ public class M3MindexAtomPerf {
                 M3AtomPerf.named("M3StateRelation.applyRows#1 PERF", M3MindexAtomPerf::applyRows),
                 M3AtomPerf.named("M3RX7Transitions.compose#1 PERF", M3MindexAtomPerf::M3RX7Transitions_compose),
                 M3AtomPerf.named("M3RX7Transitions.tokens#1 PERF", M3MindexAtomPerf::tokens),
-                M3AtomPerf.named("M3TokenEngine.find#1 PERF", M3MindexAtomPerf::find)), args);
+                M3AtomPerf.named("M3TokenEngine.find#1 PERF", M3MindexAtomPerf::find),
+                M3AtomPerf.named("M3CI.findText#1 PERF", M3MindexAtomPerf::findText),
+                M3AtomPerf.named("M3CI.lowerBound#1 PERF", M3MindexAtomPerf::lowerBound),
+                M3AtomPerf.named("M3CI.memberRow#1 PERF", M3MindexAtomPerf::memberRow)), args);
     }
 
     /** M3Bits.wordIndex#1 PERF; oracle: Math.floorDiv. */
@@ -311,6 +316,92 @@ public class M3MindexAtomPerf {
         });
     }
 
+    /** M3CI.findText#1 PERF; oracle: content-lookup(Optional-of-text). */
+    static M3AtomPerf.Batch findText() throws Throwable {
+        int size = SNAPSHOT.size();
+        String[] names = new String[OPS];
+        int[] rows = ints("findText", size);
+        for (int k = 0; k < OPS; k++) names[k] = SNAPSHOT.binaryName(rows[k]);
+        long reference = 0;
+        for (int k = 0; k < OPS; k++) reference += SNAPSHOT.classRows(names[k]).length == 1 ? 1 : 0;
+        long expected = reference;
+        return M3AtomPerf.checkedBatch(OPS, expected, () -> {
+            long sum = 0;
+            try {
+                for (int i = 0; i < OPS; i++) {
+                    sum += (int) FIND_TEXT.invokeExact(SNAPSHOT, (CharSequence) names[i]) >= 0 ? 1 : 0;
+                }
+            } catch (Throwable t) {
+                throw new AssertionError(t);
+            }
+            return sum;
+        });
+    }
+
+    /** M3CI.lowerBound#1 PERF; oracle: linear-scan. */
+    static M3AtomPerf.Batch lowerBound() throws Throwable {
+        final int laneLength = 1 << 12;
+        int[] sorted = M3AtomKit.random("lowerBound.lane").ints(laneLength, 0, laneLength * 4).sorted().toArray();
+        int[] probes = ints("lowerBound.probes", laneLength * 4);
+        long reference = 0;
+        for (int p : probes) {
+            int at = 0;
+            while (at < sorted.length && sorted[at] < p) at++;
+            reference += at;
+        }
+        long expected = reference;
+        return M3AtomPerf.checkedBatch(OPS, expected, () -> {
+            long sum = 0;
+            try {
+                for (int i = 0; i < OPS; i++) {
+                    sum += (int) LOWER_BOUND.invokeExact(sorted, 0, sorted.length, probes[i]);
+                }
+            } catch (Throwable t) {
+                throw new AssertionError(t);
+            }
+            return sum;
+        });
+    }
+
+    /** M3CI.memberRow#1 PERF; oracle: java.lang.reflect(declared-member). */
+    static M3AtomPerf.Batch memberRow() throws Throwable {
+        java.util.List<int[]> keys = new java.util.ArrayList<>();
+        java.util.List<ReflectOracle.Declared> declared = new java.util.ArrayList<>();
+        Class<?>[] classes = ReflectOracle.classes(SNAPSHOT);
+        for (int row = 0; row < classes.length; row++) {
+            for (ReflectOracle.Declared d : ReflectOracle.declared(classes[row])) {
+                keys.add(new int[] {row});
+                declared.add(d);
+            }
+        }
+        int[] pick = ints("memberRow", keys.size());
+        int[] classRows = new int[OPS];
+        M3MemberKind[] kinds = new M3MemberKind[OPS];
+        String[] names = new String[OPS];
+        String[] descriptors = new String[OPS];
+        long reference = 0;
+        for (int k = 0; k < OPS; k++) {
+            ReflectOracle.Declared d = declared.get(pick[k]);
+            classRows[k] = keys.get(pick[k])[0];
+            kinds[k] = d.kind();
+            names[k] = d.name();
+            descriptors[k] = d.descriptor();
+            reference += 1;
+        }
+        long expected = reference;
+        return M3AtomPerf.checkedBatch(OPS, expected, () -> {
+            long sum = 0;
+            try {
+                for (int i = 0; i < OPS; i++) {
+                    sum += (int) MEMBER_ROW.invokeExact(SNAPSHOT, classRows[i], kinds[i], (CharSequence) names[i], (CharSequence) descriptors[i]) >= 0 ? 1 : 0;
+                }
+            } catch (Throwable t) {
+                throw new AssertionError(t);
+            }
+            return sum;
+        });
+    }
+
     /** Calls per batch of the scalar atoms and of the composite atoms. */
     private static final int OPS = 4_096;
     private static final int COMPOSITE_OPS = 256;
@@ -360,6 +451,14 @@ public class M3MindexAtomPerf {
     private static final MethodHandle NEW_ENGINE = M3AtomKit.findConstructor(ENGINE, MethodType.methodType(void.class,
             jdk.internal.mindex.M3TokenPredicateCache.class, boolean.class))
             .asType(MethodType.methodType(Object.class, jdk.internal.mindex.M3TokenPredicateCache.class, boolean.class));
+
+    private static final MethodHandle FIND_TEXT = M3AtomKit.findVirtual(M3CI.class, "findText",
+            MethodType.methodType(int.class, CharSequence.class));
+    private static final MethodHandle LOWER_BOUND = M3AtomKit.findStatic(M3CI.class, "lowerBound",
+            MethodType.methodType(int.class, int[].class, int.class, int.class, int.class));
+    private static final MethodHandle MEMBER_ROW = M3AtomKit.findVirtual(M3CI.class, "memberRow",
+            MethodType.methodType(int.class, int.class, M3MemberKind.class, CharSequence.class, CharSequence.class));
+    private static final M3CI SNAPSHOT = ReflectOracle.snapshot();
 
     private static int[] ints(String atom, int bound) {
         return M3AtomKit.random(atom).ints(OPS, 0, bound).toArray();

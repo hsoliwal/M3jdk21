@@ -1,0 +1,27 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+// CLASS_ONLY atoms of M3Descriptor.java. Oracle: java.lang.invoke.MethodType.descriptorString.
+#class M3DescriptorAtomTest
+#summary Per-atom contracts of jdk.internal.mindex.M3Descriptor against MethodType.descriptorString
+#build ReflectOracle
+#import jdk.internal.mindex.M3Descriptor java.lang.reflect.Method java.util.List
+
+@atom M3Descriptor.M3Descriptor 1 UTILITY_CTOR java.lang.reflect.Modifier
+type = M3Descriptor
+
+@atom M3Descriptor.executable 1 SCENARIO java.lang.invoke.MethodType.descriptorString
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(M3Descriptor.class, "executable",
+        MethodType.methodType(String.class, Class[].class, Class.class));
+>>>
+check <<<
+for (Class<?> c : List.of(String.class, ReflectOracle.Base.class, java.util.HashMap.class, Thread.class)) {
+    for (Method m : c.getDeclaredMethods()) {
+        String expected = MethodType.methodType(m.getReturnType(), m.getParameterTypes()).descriptorString();
+        assertEquals(expected, (String) atom.invoke(m.getParameterTypes(), m.getReturnType()), m.toString());
+        assertEquals(expected, M3Descriptor.method(m));
+    }
+}
+assertEquals("()V", (String) atom.invoke(new Class<?>[0], void.class));
+assertEquals("([[I[Ljava/lang/String;J)D", (String) atom.invoke(new Class<?>[] {int[][].class, String[].class, long.class}, double.class));
+>>>

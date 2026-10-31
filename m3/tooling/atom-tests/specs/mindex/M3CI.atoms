@@ -1,0 +1,948 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+// CLASS_ONLY atoms of M3CI.java (primitive projection of class and declared-member metadata).
+// Oracle: java.lang.Class / java.lang.reflect over the snapshot closure of ReflectOracle fixtures; java.util models
+// (TreeSet, TreeMap, Arrays.binarySearch semantics) for the private lane builders; FNV-1a and SHA-256 references.
+#class M3CIAtomTest
+#summary Per-atom contracts of jdk.internal.mindex.M3CI against java.lang.Class/java.lang.reflect and java.util models
+#build ReflectOracle
+#import jdk.internal.mindex.M3CI jdk.internal.mindex.M3MemberKind jdk.internal.mindex.M3VI java.lang.reflect.AnnotatedElement java.lang.reflect.Field java.lang.reflect.Method java.security.MessageDigest java.util.ArrayList java.util.Arrays java.util.HashSet java.util.HexFormat java.util.IdentityHashMap java.util.List java.util.Map java.util.Optional java.util.Set java.util.SplittableRandom java.util.TreeMap java.util.TreeSet
+#helper <<<
+    private static final M3CI CI = ReflectOracle.snapshot();
+    private static final Class<?>[] CLASSES = ReflectOracle.classes(CI);
+    private static final Map<Class<?>, Integer> ROWS = ReflectOracle.rows(CI);
+    private static final Class<?> OWNER = M3CI.class;
+    private static final Class<?> SYMBOLS = M3AtomKit.type("M3CI$Symbols");
+    private static final Class<?> DISCOVERY = M3AtomKit.type("M3CI$Discovery");
+    private static final Class<?> FROZEN = M3AtomKit.type("M3CI$Frozen");
+    private static final Class<?> DRAFT = M3AtomKit.type("M3CI$MemberDraft");
+    private static final Class<?> NAME_INDEX = M3AtomKit.type("M3CI$NameIndex");
+    /** FNV-1a 64 offset basis and prime (the documented structural hash). */
+    private static final long FNV_SEED = 0xcbf29ce484222325L;
+    private static final long FNV_PRIME = 0x100000001b3L;
+    private static final int BYTE_MASK = 0xff;
+    /** Length of a SHA-256 fingerprint in hex digits. */
+    private static final int SHA256_HEX = 64;
+    /** Generated model sizes of the private lane-builder checks. */
+    private static final int MODEL_ROWS = 40;
+    private static final int MODEL_FANOUT = 3;
+
+    private static MethodHandle st(String name, MethodType type) {
+        return M3AtomKit.findStatic(OWNER, name, type);
+    }
+
+    private static MethodHandle vi(String name, MethodType type) {
+        return M3AtomKit.findVirtual(OWNER, name, type);
+    }
+
+    private static int row(Class<?> c) {
+        return ReflectOracle.rowOf(ROWS, c);
+    }
+
+    private static Object symbols() throws Throwable {
+        return M3AtomKit.findConstructor(SYMBOLS, MethodType.methodType(void.class)).invoke();
+    }
+
+    private static List<String> symbolValues(Object symbols) throws Throwable {
+        return (List<String>) M3AtomKit.findGetter(SYMBOLS, "values", ArrayList.class).invoke(symbols);
+    }
+
+    private static long fnv(long current, int value) {
+        long hash = current;
+        for (int shift = 0; shift < Integer.SIZE; shift += Byte.SIZE) {
+            hash ^= (value >>> shift) & BYTE_MASK;
+            hash *= FNV_PRIME;
+        }
+        return hash;
+    }
+
+    private static Object discoverRoots() throws Throwable {
+        return st("discover", MethodType.methodType(DISCOVERY, java.util.Collection.class, int.class, M3VI.Progress.class))
+                .invoke(ReflectOracle.ROOTS, M3CI.Options.standard().maxClasses(), M3VI.Progress.none());
+    }
+
+    private static Object freezeWith(Object discovery, boolean retain) throws Throwable {
+        return st("freeze", MethodType.methodType(FROZEN, DISCOVERY, boolean.class, M3VI.Progress.class))
+                .invoke(discovery, retain, M3VI.Progress.none());
+    }
+
+    private static M3CI fromFrozen(Object frozen) throws Throwable {
+        return (M3CI) M3AtomKit.findConstructor(OWNER, "M3CI", MethodType.methodType(void.class, FROZEN)).invoke(frozen);
+    }
+
+    private static int[] lane(String name) throws Throwable {
+        return (int[]) M3AtomKit.findGetter(OWNER, name, int[].class).invoke(CI);
+    }
+
+    private static int[] randomRows(SplittableRandom random, int bound) {
+        return random.ints(random.nextInt(MODEL_FANOUT + 1), 0, bound).distinct().toArray();
+    }
+
+    /** Asserts one lane of every member row against its reflective element. */
+    private static void forEachMember(MemberCheck check) throws Throwable {
+        int seen = 0;
+        for (int row = 0; row < CI.size(); row++) {
+            for (ReflectOracle.Declared d : ReflectOracle.declared(CLASSES[row])) {
+                int member = ReflectOracle.memberRow(CI, row, d);
+                assertTrue(member >= 0, "indexed " + d);
+                check.accept(member, d);
+                seen++;
+            }
+        }
+        assertEquals(CI.memberSize(), seen, "every member row checked");
+    }
+
+    @FunctionalInterface
+    interface MemberCheck {
+        void accept(int member, ReflectOracle.Declared declared) throws Throwable;
+    }
+>>>
+
+@atom M3CI.M3CI 1 SCENARIO discover+freeze+ctor=compile
+check <<<
+M3CI direct = fromFrozen(freezeWith(discoverRoots(), true));
+assertEquals(CI.size(), direct.size());
+assertEquals(CI.memberSize(), direct.memberSize());
+assertEquals(CI.fingerprintSha256Hex(), direct.fingerprintSha256Hex(), "same lanes, same fingerprint");
+for (int row = 0; row < CI.size(); row++) assertEquals(CI.binaryName(row), direct.binaryName(row));
+>>>
+
+@atom M3CI.simpleName 1 SCENARIO java.lang.Class.getSimpleName
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getSimpleName(), CI.simpleName(row), CLASSES[row].getName());
+M3AtomKit.expect(IndexOutOfBoundsException.class, () -> CI.simpleName(CI.size()));
+>>>
+
+@atom M3CI.packageName 1 SCENARIO java.lang.Class.getPackageName
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getPackageName(), CI.packageName(row));
+>>>
+
+@atom M3CI.moduleName 1 SCENARIO java.lang.Module.getName
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    assertEquals(Optional.ofNullable(CLASSES[row].getModule().getName()), CI.moduleName(row), CLASSES[row].getName());
+}
+assertEquals(Optional.of("java.base"), CI.moduleName(row(Object.class)));
+assertEquals(Optional.empty(), CI.moduleName(row(ReflectOracle.class)), "unnamed module");
+>>>
+
+@atom M3CI.typeName 1 SCENARIO java.lang.Class.getTypeName
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getTypeName(), CI.typeName(row));
+assertEquals("int[][]", CI.typeName(row(int[][].class)));
+>>>
+
+@atom M3CI.flags 1 SCENARIO java.lang.Class.isXxx
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(ReflectOracle.classFlags(CLASSES[row]), CI.flags(row), CLASSES[row].getName());
+>>>
+
+@atom M3CI.superclassRow 1 SCENARIO java.lang.Class.getSuperclass
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(row(CLASSES[row].getSuperclass()), CI.superclassRow(row));
+assertEquals(-1, CI.superclassRow(row(Object.class)));
+>>>
+
+@atom M3CI.componentTypeRow 1 SCENARIO java.lang.Class.getComponentType
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(row(CLASSES[row].getComponentType()), CI.componentTypeRow(row));
+assertEquals(row(int[].class), CI.componentTypeRow(row(int[][].class)));
+>>>
+
+@atom M3CI.nestHostRow 1 SCENARIO java.lang.Class.getNestHost
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(row(CLASSES[row].getNestHost()), CI.nestHostRow(row));
+assertEquals(row(ReflectOracle.class), CI.nestHostRow(row(ReflectOracle.Derived.Inner.class)));
+>>>
+
+@atom M3CI.declaringClassRow 1 SCENARIO java.lang.Class.getDeclaringClass
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(row(CLASSES[row].getDeclaringClass()), CI.declaringClassRow(row));
+>>>
+
+@atom M3CI.enclosingClassRow 1 SCENARIO java.lang.Class.getEnclosingClass
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(row(CLASSES[row].getEnclosingClass()), CI.enclosingClassRow(row));
+assertEquals(row(ReflectOracle.class), CI.enclosingClassRow(row(ReflectOracle.local())), "local class encloses in its method's class");
+>>>
+
+@atom M3CI.structuralHash64 1 SCENARIO deterministic+distinct
+setup <<<
+M3CI again = ReflectOracle.snapshot();
+Set<Long> distinct = new HashSet<>();
+>>>
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    assertEquals(CI.structuralHash64(row), again.structuralHash64(row), "deterministic for " + CLASSES[row].getName());
+    distinct.add(CI.structuralHash64(row));
+}
+assertEquals(CI.size(), distinct.size(), "no two rows share a structural hash");
+>>>
+
+@atom M3CI.interfaceCount 1 SCENARIO java.lang.Class.getInterfaces
+check <<<
+for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getInterfaces().length, CI.interfaceCount(row));
+>>>
+
+@atom M3CI.interfaceRow 1 SCENARIO java.lang.Class.getInterfaces(order)
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    Class<?>[] interfaces = CLASSES[row].getInterfaces();
+    for (int k = 0; k < interfaces.length; k++) assertEquals(row(interfaces[k]), CI.interfaceRow(row, k), "declaration order");
+    int r = row;
+    M3AtomKit.expect(IndexOutOfBoundsException.class, () -> CI.interfaceRow(r, interfaces.length));
+}
+>>>
+
+@atom M3CI.directSubtypeCount 1 SCENARIO reverse-of-getSuperclass+getInterfaces
+check <<<
+int[] expected = new int[CI.size()];
+for (Class<?> c : CLASSES) {
+    if (ROWS.containsKey(c.getSuperclass())) expected[row(c.getSuperclass())]++;
+    for (Class<?> i : c.getInterfaces()) expected[row(i)]++;
+}
+for (int row = 0; row < CI.size(); row++) assertEquals(expected[row], CI.directSubtypeCount(row), CLASSES[row].getName());
+>>>
+
+@atom M3CI.directSubtypeRow 1 SCENARIO java.util.TreeSet(reverse-hierarchy)
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    TreeSet<Integer> expected = new TreeSet<>();
+    for (int r = 0; r < CI.size(); r++) {
+        Class<?> c = CLASSES[r];
+        if (c.getSuperclass() == CLASSES[row] || Arrays.asList(c.getInterfaces()).contains(CLASSES[row])) expected.add(r);
+    }
+    List<Integer> got = new ArrayList<>();
+    for (int k = 0; k < CI.directSubtypeCount(row); k++) got.add(CI.directSubtypeRow(row, k));
+    assertEquals(new ArrayList<>(expected), got, CLASSES[row].getName());
+}
+>>>
+
+@atom M3CI.supertypeCount 1 SCENARIO transitive-closure
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    assertEquals(ReflectOracle.supertypes(ROWS, CLASSES[row]).size(), CI.supertypeCount(row), CLASSES[row].getName());
+}
+>>>
+
+@atom M3CI.supertypeRow 1 SCENARIO java.util.TreeSet(transitive-closure)
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    List<Integer> got = new ArrayList<>();
+    for (int k = 0; k < CI.supertypeCount(row); k++) got.add(CI.supertypeRow(row, k));
+    assertEquals(new ArrayList<>(ReflectOracle.supertypes(ROWS, CLASSES[row])), got, CLASSES[row].getName());
+    for (int s : got) assertTrue(CI.isAssignableFrom(s, row), "a supertype row is assignable");
+}
+>>>
+
+@atom M3CI.classAnnotationCount 1 SCENARIO getDeclaredAnnotations
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    assertEquals(ReflectOracle.annotationNames(CLASSES[row]).size(), CI.classAnnotationCount(row), CLASSES[row].getName());
+}
+assertEquals(2, CI.classAnnotationCount(row(ReflectOracle.Base.class)));
+>>>
+
+@atom M3CI.classAnnotationTypeName 1 SCENARIO getDeclaredAnnotations(type-names)
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    TreeSet<String> got = new TreeSet<>();
+    for (int k = 0; k < CI.classAnnotationCount(row); k++) got.add(CI.classAnnotationTypeName(row, k));
+    assertEquals(ReflectOracle.annotationNames(CLASSES[row]), got, CLASSES[row].getName());
+}
+>>>
+
+@atom M3CI.permittedSubclassCount 1 SCENARIO java.lang.Class.getPermittedSubclasses
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    Class<?>[] permitted = CLASSES[row].getPermittedSubclasses();
+    assertEquals(permitted == null ? 0 : permitted.length, CI.permittedSubclassCount(row), CLASSES[row].getName());
+}
+assertEquals(2, CI.permittedSubclassCount(row(ReflectOracle.Shape.class)));
+>>>
+
+@atom M3CI.permittedSubclassName 1 SCENARIO java.lang.Class.getPermittedSubclasses(order)
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    Class<?>[] permitted = CLASSES[row].getPermittedSubclasses();
+    for (int k = 0; permitted != null && k < permitted.length; k++) assertEquals(permitted[k].getName(), CI.permittedSubclassName(row, k));
+}
+>>>
+
+@atom M3CI.declaredClassRows 1 SCENARIO java.lang.Class.getDeclaredClasses
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    TreeSet<Integer> expected = new TreeSet<>();
+    for (Class<?> d : CLASSES[row].getDeclaredClasses()) expected.add(row(d));
+    assertArrayEquals(expected.stream().mapToInt(Integer::intValue).toArray(), CI.declaredClassRows(row), CLASSES[row].getName());
+}
+>>>
+
+@atom M3CI.nestMemberRows 1 SCENARIO java.lang.Class.getNestHost(shared)
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    TreeSet<Integer> expected = new TreeSet<>();
+    for (int r = 0; r < CI.size(); r++) if (CLASSES[r].getNestHost() == CLASSES[row].getNestHost()) expected.add(r);
+    assertArrayEquals(expected.stream().mapToInt(Integer::intValue).toArray(), CI.nestMemberRows(row), CLASSES[row].getName());
+}
+>>>
+
+@atom M3CI.permittedSubclassRows 1 SCENARIO java.lang.Class.getPermittedSubclasses(rows)
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    Class<?>[] permitted = CLASSES[row].getPermittedSubclasses();
+    int[] expected = permitted == null ? new int[0] : Arrays.stream(permitted).mapToInt(c -> row(c)).toArray();
+    assertArrayEquals(expected, CI.permittedSubclassRows(row), CLASSES[row].getName());
+}
+>>>
+
+@atom M3CI.memberRows 1 SCENARIO declared-members-by-name
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    Map<String, Set<String>> byName = new TreeMap<>();
+    for (ReflectOracle.Declared d : ReflectOracle.declared(CLASSES[row])) {
+        byName.computeIfAbsent(d.name(), n -> new TreeSet<>()).add(d.kind() + d.descriptor());
+    }
+    for (Map.Entry<String, Set<String>> e : byName.entrySet()) {
+        int[] rows = CI.memberRows(row, e.getKey());
+        Set<String> got = new TreeSet<>();
+        for (int k = 0; k < rows.length; k++) {
+            if (k > 0) assertEquals(rows[k - 1] + 1, rows[k], "contiguous rows");
+            got.add(CI.memberKind(rows[k]) + CI.memberDescriptor(rows[k]));
+        }
+        assertEquals(e.getValue(), got, CLASSES[row].getName() + "#" + e.getKey());
+    }
+    assertEquals(0, CI.memberRows(row, "no such member name").length);
+}
+>>>
+
+@atom M3CI.memberRows 2 SCENARIO declared-members-by-kind
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    for (M3MemberKind kind : M3MemberKind.values()) {
+        long expected = ReflectOracle.declared(CLASSES[row]).stream().filter(d -> d.kind() == kind).count();
+        int[] rows = CI.memberRows(row, kind);
+        assertEquals(expected, rows.length, CLASSES[row].getName() + " " + kind);
+        for (int m : rows) assertEquals(kind, CI.memberKind(m));
+    }
+}
+M3AtomKit.expectMessage(NullPointerException.class, "kind", () -> CI.memberRows(0, (M3MemberKind) null));
+>>>
+
+@atom M3CI.memberRow 1 SCENARIO (kind,name,descriptor)-lookup
+check <<<
+forEachMember((member, d) -> {
+    assertEquals(d.name(), CI.memberName(member));
+    assertEquals(d.descriptor(), CI.memberDescriptor(member));
+    assertEquals(d.kind(), CI.memberKind(member));
+});
+int base = row(ReflectOracle.Base.class);
+assertEquals(-1, CI.memberRow(base, M3MemberKind.METHOD, "sum", "(J)I"), "unknown descriptor");
+assertEquals(-1, CI.memberRow(base, M3MemberKind.FIELD, "sum", "([I)I"), "kind mismatch");
+>>>
+
+@atom M3CI.memberModifiers 1 SCENARIO java.lang.reflect.Member.getModifiers
+check <<<
+forEachMember((member, d) -> assertEquals(ReflectOracle.modifiers(d.element()), CI.memberModifiers(member), d.toString()));
+>>>
+
+@atom M3CI.memberFlags 1 SCENARIO M3MemberFlags.of(reflective)
+check <<<
+forEachMember((member, d) -> assertEquals(ReflectOracle.memberFlags(d.element()), CI.memberFlags(member), d.toString()));
+>>>
+
+@atom M3CI.memberStructuralHash64 1 SCENARIO deterministic
+setup <<<
+M3CI again = ReflectOracle.snapshot();
+>>>
+check <<<
+forEachMember((member, d) -> assertEquals(CI.memberStructuralHash64(member), again.memberStructuralHash64(member), d.toString()));
+>>>
+
+@atom M3CI.memberAnnotationCount 1 SCENARIO getDeclaredAnnotations
+check <<<
+forEachMember((member, d) -> assertEquals(ReflectOracle.annotationNames(d.element()).size(), CI.memberAnnotationCount(member), d.toString()));
+>>>
+
+@atom M3CI.memberAnnotationTypeName 1 SCENARIO getDeclaredAnnotations(type-names)
+check <<<
+forEachMember((member, d) -> assertEquals(ReflectOracle.annotationNames(d.element()),
+        new TreeSet<>(ReflectOracle.annotationList(CI, member)), d.toString()));
+>>>
+
+@atom M3CI.memberExceptionCount 1 SCENARIO Executable.getExceptionTypes
+check <<<
+forEachMember((member, d) -> assertEquals(ReflectOracle.exceptionDescriptors(d.element()).size(), CI.memberExceptionCount(member), d.toString()));
+>>>
+
+@atom M3CI.memberExceptionTypeDescriptor 1 SCENARIO Class.descriptorString(exceptions)
+check <<<
+forEachMember((member, d) -> {
+    List<String> expected = ReflectOracle.exceptionDescriptors(d.element());
+    for (int k = 0; k < expected.size(); k++) assertEquals(expected.get(k), CI.memberExceptionTypeDescriptor(member, k));
+});
+>>>
+
+@atom M3CI.fingerprintSha256Hex 1 SCENARIO java.util.HexFormat+determinism
+setup <<<
+M3CI other = M3CI.compile(List.of(String.class), M3CI.Options.standard(), null);
+>>>
+check <<<
+assertEquals(HexFormat.of().formatHex(CI.fingerprintSha256()), CI.fingerprintSha256Hex());
+assertEquals(SHA256_HEX, CI.fingerprintSha256Hex().length());
+assertEquals(ReflectOracle.snapshot().fingerprintSha256Hex(), CI.fingerprintSha256Hex(), "deterministic");
+assertNotEquals(other.fingerprintSha256Hex(), CI.fingerprintSha256Hex(), "different closure, different fingerprint");
+>>>
+
+@atom M3CI.primitivePayloadBytes 1 SCENARIO lane-accounting-identity
+check <<<
+long size = CI.size(), members = CI.memberSize();
+long interfaces = 0, subtypes = 0, supertypes = 0, annotations = 0, permitted = 0;
+for (int row = 0; row < size; row++) {
+    interfaces += CI.interfaceCount(row);
+    subtypes += CI.directSubtypeCount(row);
+    supertypes += CI.supertypeCount(row);
+    annotations += CI.classAnnotationCount(row);
+    permitted += CI.permittedSubclassCount(row);
+}
+long memberAnnotations = 0, exceptions = 0;
+for (int m = 0; m < members; m++) {
+    memberAnnotations += CI.memberAnnotationCount(m);
+    exceptions += CI.memberExceptionCount(m);
+}
+int keys = (int) M3AtomKit.findVirtual(OWNER, "binaryNameKeyCount", MethodType.methodType(int.class)).invoke(CI);
+final int perClassLanes = 14, offsetLanes = 6, perMemberLanes = 5, memberOffsetLanes = 2;
+long ints = perClassLanes * size + offsetLanes * (size + 1) + interfaces + subtypes + supertypes + annotations + permitted
+        + keys + (keys + 1) + size + perMemberLanes * members + memberOffsetLanes * (members + 1) + memberAnnotations + exceptions;
+long longs = size + members;
+assertEquals(ints * Integer.BYTES + longs * Long.BYTES + members, CI.primitivePayloadBytes());
+>>>
+
+@atom M3CI.binaryNameKeyCount 1 SCENARIO distinct-binary-names
+check <<<
+Set<String> names = new HashSet<>();
+for (Class<?> c : CLASSES) names.add(c.getName());
+assertEquals(names.size(), (int) vi("binaryNameKeyCount", MethodType.methodType(int.class)).invoke(CI));
+>>>
+
+@atom M3CI.binaryNameKey 1 SCENARIO key-set=binary-names
+setup <<<
+MethodHandle key = vi("binaryNameKey", MethodType.methodType(String.class, int.class));
+int count = (int) vi("binaryNameKeyCount", MethodType.methodType(int.class)).invoke(CI);
+>>>
+check <<<
+Set<String> got = new TreeSet<>();
+for (int k = 0; k < count; k++) got.add((String) key.invoke(CI, k));
+Set<String> expected = new TreeSet<>();
+for (Class<?> c : CLASSES) expected.add(c.getName());
+assertEquals(expected, got);
+M3AtomKit.expect(IndexOutOfBoundsException.class, () -> key.invoke(CI, count));
+>>>
+
+@atom M3CI.rowsForBinaryNameKey 1 SCENARIO rows-grouped-by-name
+setup <<<
+MethodHandle key = vi("binaryNameKey", MethodType.methodType(String.class, int.class));
+MethodHandle rows = vi("rowsForBinaryNameKey", MethodType.methodType(int[].class, int.class));
+int count = (int) vi("binaryNameKeyCount", MethodType.methodType(int.class)).invoke(CI);
+>>>
+check <<<
+int total = 0;
+for (int k = 0; k < count; k++) {
+    String name = (String) key.invoke(CI, k);
+    int[] got = (int[]) rows.invoke(CI, k);
+    for (int r : got) assertEquals(name, CI.binaryName(r));
+    assertArrayEquals(CI.classRows(name), got);
+    total += got.length;
+}
+assertEquals(CI.size(), total, "every row under exactly one key");
+>>>
+
+@atom M3CI.uniqueMemberNameIds 1 SCENARIO distinct-member-names
+setup <<<
+int[] ids = (int[]) vi("uniqueMemberNameIds", MethodType.methodType(int[].class)).invoke(CI);
+Set<String> names = new HashSet<>();
+for (int m = 0; m < CI.memberSize(); m++) names.add(CI.memberName(m));
+>>>
+check <<<
+assertEquals(names.size(), ids.length);
+for (int k = 1; k < ids.length; k++) assertTrue(ids[k - 1] < ids[k], "strictly ascending ids");
+>>>
+
+@atom M3CI.checkClassRow 1 SCENARIO Objects.checkIndex
+setup <<<
+MethodHandle atom = vi("checkClassRow", MethodType.methodType(int.class, int.class));
+>>>
+check <<<
+assertEquals(0, (int) atom.invoke(CI, 0));
+assertEquals(CI.size() - 1, (int) atom.invoke(CI, CI.size() - 1));
+M3AtomKit.expect(IndexOutOfBoundsException.class, () -> atom.invoke(CI, CI.size()));
+M3AtomKit.expect(IndexOutOfBoundsException.class, () -> atom.invoke(CI, -1));
+>>>
+
+@atom M3CI.checkMemberRow 1 SCENARIO Objects.checkIndex
+setup <<<
+MethodHandle atom = vi("checkMemberRow", MethodType.methodType(int.class, int.class));
+>>>
+check <<<
+assertEquals(CI.memberSize() - 1, (int) atom.invoke(CI, CI.memberSize() - 1));
+M3AtomKit.expect(IndexOutOfBoundsException.class, () -> atom.invoke(CI, CI.memberSize()));
+>>>
+
+@atom M3CI.optionalText 1 SCENARIO java.util.Optional
+setup <<<
+MethodHandle atom = vi("optionalText", MethodType.methodType(Optional.class, int.class));
+int id = (int) vi("findText", MethodType.methodType(int.class, CharSequence.class)).invoke(CI, "java.lang.Object");
+>>>
+check <<<
+assertEquals(Optional.empty(), atom.invoke(CI, -1));
+assertEquals(Optional.of("java.lang.Object"), atom.invoke(CI, id));
+>>>
+
+@atom M3CI.findField 1 SCENARIO Class.getDeclaredFields+descriptor
+setup <<<
+MethodHandle atom = st("findField", MethodType.methodType(Optional.class, Class.class, String.class, String.class));
+Field value = ReflectOracle.Base.class.getField("value");
+>>>
+check <<<
+assertEquals(Optional.of(value), atom.invoke(ReflectOracle.Base.class, "value", "Ljava/lang/Object;"));
+assertEquals(Optional.empty(), atom.invoke(ReflectOracle.Base.class, "value", "I"), "descriptor must match");
+assertEquals(Optional.empty(), atom.invoke(ReflectOracle.Base.class, "missing", "I"));
+>>>
+
+@atom M3CI.findMethod 1 SCENARIO Class.getDeclaredMethods+descriptor
+setup <<<
+MethodHandle atom = st("findMethod", MethodType.methodType(Optional.class, Class.class, String.class, String.class));
+Method sum = ReflectOracle.Base.class.getMethod("sum", int[].class);
+Method bridge = ReflectOracle.Base.class.getDeclaredMethod("compareTo", Object.class);
+>>>
+check <<<
+assertEquals(Optional.of(sum), atom.invoke(ReflectOracle.Base.class, "sum", "([I)I"));
+assertEquals(Optional.of(bridge), atom.invoke(ReflectOracle.Base.class, "compareTo", "(Ljava/lang/Object;)I"), "bridge by descriptor");
+assertEquals(Optional.empty(), atom.invoke(ReflectOracle.Base.class, "sum", "()I"));
+>>>
+
+@atom M3CI.findConstructor 1 SCENARIO Class.getDeclaredConstructors+descriptor
+setup <<<
+MethodHandle atom = st("findConstructor", MethodType.methodType(Optional.class, Class.class, String.class, String.class));
+String name = ReflectOracle.Base.class.getName();
+>>>
+check <<<
+assertEquals(Optional.of(ReflectOracle.Base.class.getDeclaredConstructor()), atom.invoke(ReflectOracle.Base.class, name, "()V"));
+assertEquals(Optional.of(ReflectOracle.Base.class.getDeclaredConstructor(int.class, String[].class)),
+        atom.invoke(ReflectOracle.Base.class, name, "(I[Ljava/lang/String;)V"));
+assertEquals(Optional.empty(), atom.invoke(ReflectOracle.Base.class, "other", "()V"), "constructor name is the class name");
+>>>
+
+@atom M3CI.findRecordComponent 1 SCENARIO Class.getRecordComponents+descriptor
+setup <<<
+MethodHandle atom = st("findRecordComponent", MethodType.methodType(Optional.class, Class.class, String.class, String.class));
+>>>
+check <<<
+Optional<?> found = (Optional<?>) atom.invoke(ReflectOracle.Circle.class, "radius", "D");
+java.lang.reflect.RecordComponent component = (java.lang.reflect.RecordComponent) found.orElseThrow();
+assertEquals(ReflectOracle.Circle.class.getRecordComponents()[0].getAccessor(), component.getAccessor(), "the radius component");
+assertEquals(ReflectOracle.Circle.class, component.getDeclaringRecord());
+assertEquals(Optional.empty(), atom.invoke(ReflectOracle.Circle.class, "radius", "I"));
+assertEquals(Optional.empty(), atom.invoke(ReflectOracle.Base.class, "radius", "D"), "not a record");
+>>>
+
+@atom M3CI.discover 1 SCENARIO closure-order(loader,name)+limit
+setup <<<
+Object discovery = discoverRoots();
+Class<?>[] classes = (Class<?>[]) M3AtomKit.findVirtual(DISCOVERY, "classes", MethodType.methodType(Class[].class)).invoke(discovery);
+>>>
+check <<<
+assertArrayEquals(CLASSES, classes, "snapshot rows follow discovery order");
+for (int k = 1; k < classes.length; k++) {
+    int a = CI.loaderSpaceId(k - 1), b = CI.loaderSpaceId(k);
+    assertTrue(a < b || a == b && classes[k - 1].getName().compareTo(classes[k].getName()) < 0, "sorted by loader then name");
+}
+MethodHandle atom = st("discover", MethodType.methodType(DISCOVERY, java.util.Collection.class, int.class, M3VI.Progress.class));
+M3AtomKit.expectMessage(IllegalArgumentException.class, "exceeds maxClasses", () -> atom.invoke(ReflectOracle.ROOTS, 1, M3VI.Progress.none()));
+>>>
+
+@atom M3CI.enqueue 1 SCENARIO identity-dedup+limit
+setup <<<
+MethodHandle atom = st("enqueue", MethodType.methodType(void.class, Class.class, IdentityHashMap.class, java.util.ArrayDeque.class, int.class));
+IdentityHashMap<Class<?>, Boolean> seen = new IdentityHashMap<>();
+java.util.ArrayDeque<Class<?>> queue = new java.util.ArrayDeque<>();
+>>>
+check <<<
+atom.invoke((Class<?>) null, seen, queue, 2);
+atom.invoke(String.class, seen, queue, 2);
+atom.invoke(String.class, seen, queue, 2);
+atom.invoke(Integer.class, seen, queue, 2);
+assertEquals(List.of(String.class, Integer.class), new ArrayList<>(queue), "null and duplicates ignored");
+M3AtomKit.expectMessage(IllegalArgumentException.class, "maxClasses=2", () -> atom.invoke(Long.class, seen, queue, 2));
+>>>
+
+@atom M3CI.freeze 1 SCENARIO retain-flag-only-changes-the-boundary
+setup <<<
+Object discovery = discoverRoots();
+M3CI standard = fromFrozen(freezeWith(discovery, true));
+M3CI compact = fromFrozen(freezeWith(discovery, false));
+>>>
+check <<<
+assertTrue(standard.boundary().retained());
+assertFalse(compact.boundary().retained());
+assertEquals(standard.fingerprintSha256Hex(), compact.fingerprintSha256Hex(), "the boundary is not part of the lanes");
+assertEquals(CI.fingerprintSha256Hex(), standard.fingerprintSha256Hex());
+>>>
+
+@atom M3CI.admitMembers 1 SCENARIO declared-member-count
+setup <<<
+MethodHandle atom = st("admitMembers", MethodType.methodType(void.class, SYMBOLS, int.class, Class.class, List.class));
+>>>
+check <<<
+for (Class<?> c : List.of(ReflectOracle.Base.class, ReflectOracle.Circle.class, ReflectOracle.Color.class, Object.class)) {
+    List<Object> out = new ArrayList<>();
+    atom.invoke(symbols(), 0, c, out);
+    assertEquals(ReflectOracle.declared(c).size(), out.size(), c.getName());
+}
+>>>
+
+@atom M3CI.annotationNameIds 1 SCENARIO sorted-unique-ids(annotation-names)
+setup <<<
+MethodHandle atom = st("annotationNameIds", MethodType.methodType(int[].class, SYMBOLS, AnnotatedElement.class));
+Object symbols = symbols();
+>>>
+check <<<
+int[] ids = (int[]) atom.invoke(symbols, ReflectOracle.Base.class);
+TreeSet<String> names = new TreeSet<>();
+for (int id : ids) names.add(symbolValues(symbols).get(id));
+assertEquals(ReflectOracle.annotationNames(ReflectOracle.Base.class), names);
+for (int k = 1; k < ids.length; k++) assertTrue(ids[k - 1] < ids[k], "sorted unique");
+assertEquals(0, ((int[]) atom.invoke(symbols, Object.class)).length);
+>>>
+
+@atom M3CI.permittedNameIds 1 SCENARIO getPermittedSubclasses(order)
+setup <<<
+MethodHandle atom = st("permittedNameIds", MethodType.methodType(int[].class, SYMBOLS, Class.class));
+Object symbols = symbols();
+>>>
+check <<<
+int[] ids = (int[]) atom.invoke(symbols, ReflectOracle.Shape.class);
+Class<?>[] permitted = ReflectOracle.Shape.class.getPermittedSubclasses();
+assertEquals(permitted.length, ids.length);
+for (int k = 0; k < ids.length; k++) assertEquals(permitted[k].getName(), symbolValues(symbols).get(ids[k]));
+assertEquals(0, ((int[]) atom.invoke(symbols, String.class)).length, "not sealed");
+>>>
+
+@atom M3CI.exceptionDescriptorIds 1 SCENARIO Class.descriptorString(order)
+setup <<<
+MethodHandle atom = st("exceptionDescriptorIds", MethodType.methodType(int[].class, SYMBOLS, Class[].class));
+Object symbols = symbols();
+Class<?>[] types = {java.io.IOException.class, InterruptedException.class, java.io.IOException.class};
+>>>
+check <<<
+int[] ids = (int[]) atom.invoke(symbols, types);
+assertEquals(types.length, ids.length, "order and duplicates kept");
+for (int k = 0; k < ids.length; k++) assertEquals(types[k].descriptorString(), symbolValues(symbols).get(ids[k]));
+assertEquals(ids[0], ids[2], "interned once");
+>>>
+
+@atom M3CI.reverseHierarchy 1 SCENARIO java.util.TreeSet(reverse-edges)
+setup <<<
+MethodHandle atom = st("reverseHierarchy", MethodType.methodType(int[][].class, int.class, int[].class, int[][].class));
+SplittableRandom random = M3AtomKit.random("reverseHierarchy");
+>>>
+check <<<
+for (int c = 0; c < M3AtomKit.CASES; c++) {
+    int[] supers = random.ints(MODEL_ROWS, -1, MODEL_ROWS).toArray();
+    int[][] interfaces = new int[MODEL_ROWS][];
+    for (int r = 0; r < MODEL_ROWS; r++) {
+        int superRow = supers[r];
+        interfaces[r] = Arrays.stream(randomRows(random, MODEL_ROWS)).filter(i -> i != superRow).toArray();
+    }
+    int[][] got = (int[][]) atom.invoke(MODEL_ROWS, supers, interfaces);
+    for (int t = 0; t < MODEL_ROWS; t++) {
+        TreeSet<Integer> expected = new TreeSet<>();
+        for (int r = 0; r < MODEL_ROWS; r++) {
+            if (supers[r] == t) expected.add(r);
+            for (int i : interfaces[r]) if (i == t) expected.add(r);
+        }
+        assertArrayEquals(expected.stream().mapToInt(Integer::intValue).toArray(), got[t]);
+    }
+}
+>>>
+
+@atom M3CI.transitiveSupertypes 1 SCENARIO fixed-point-closure
+setup <<<
+MethodHandle atom = st("transitiveSupertypes", MethodType.methodType(int[][].class, int.class, int[].class, int[][].class, int[].class, int.class));
+SplittableRandom random = M3AtomKit.random("transitiveSupertypes");
+>>>
+check <<<
+for (int c = 0; c < M3AtomKit.CASES; c++) {
+    int[] supers = new int[MODEL_ROWS];
+    int[][] interfaces = new int[MODEL_ROWS][];
+    int[] flags = new int[MODEL_ROWS];
+    for (int r = 0; r < MODEL_ROWS; r++) {
+        supers[r] = r == 0 ? -1 : random.nextInt(-1, r);
+        interfaces[r] = r == 0 ? new int[0] : randomRows(random, r);
+        flags[r] = random.nextInt(4) == 0 ? jdk.internal.mindex.M3ClassFlags.INTERFACE : 0;
+    }
+    int[][] got = (int[][]) atom.invoke(MODEL_ROWS, supers, interfaces, flags, 0);
+    for (int r = 0; r < MODEL_ROWS; r++) {
+        TreeSet<Integer> closure = new TreeSet<>(List.of(r));
+        if (flags[r] != 0) closure.add(0);
+        boolean changed = true;
+        while (changed) {
+            changed = false;
+            for (int x : new ArrayList<>(closure)) {
+                if (supers[x] >= 0) changed |= closure.add(supers[x]);
+                for (int i : interfaces[x]) changed |= closure.add(i);
+            }
+        }
+        assertArrayEquals(closure.stream().mapToInt(Integer::intValue).toArray(), got[r], "row " + r);
+    }
+}
+>>>
+
+@atom M3CI.buildNameIndex 1 SCENARIO java.util.TreeMap(grouped-rows)
+setup <<<
+MethodHandle atom = st("buildNameIndex", MethodType.methodType(NAME_INDEX, int[].class));
+MethodHandle keys = M3AtomKit.findVirtual(NAME_INDEX, "keys", MethodType.methodType(int[].class));
+MethodHandle offsets = M3AtomKit.findVirtual(NAME_INDEX, "offsets", MethodType.methodType(int[].class));
+MethodHandle rows = M3AtomKit.findVirtual(NAME_INDEX, "rows", MethodType.methodType(int[].class));
+int[] ids = M3AtomKit.random("buildNameIndex").ints(MODEL_ROWS, 0, MODEL_ROWS / 4).toArray();
+>>>
+check <<<
+Object index = atom.invoke(ids);
+TreeMap<Integer, List<Integer>> model = new TreeMap<>();
+for (int r = 0; r < ids.length; r++) model.computeIfAbsent(ids[r], k -> new ArrayList<>()).add(r);
+int[] k = (int[]) keys.invoke(index), o = (int[]) offsets.invoke(index), rs = (int[]) rows.invoke(index);
+assertArrayEquals(model.keySet().stream().mapToInt(Integer::intValue).toArray(), k);
+int at = 0;
+for (List<Integer> group : model.values()) {
+    assertEquals(group, Arrays.stream(Arrays.copyOfRange(rs, o[at], o[at + 1])).boxed().toList());
+    at++;
+}
+assertEquals(ids.length, o[o.length - 1]);
+>>>
+
+@atom M3CI.classHash 1 SCENARIO producer-of-structuralHash64
+setup <<<
+Method atom = Arrays.stream(OWNER.getDeclaredMethods()).filter(m -> m.getName().equals("classHash")).findFirst().orElseThrow();
+atom.setAccessible(true);
+String[] lanes = {"loaderSpaces", "binaryNameIds", "simpleNameIds", "canonicalNameIds", "packageNameIds", "moduleNameIds",
+        "typeNameIds", "modifiers", "flags", "superclassRows", "componentTypeRows", "nestHostRows", "declaringClassRows",
+        "enclosingClassRows", "interfaceOffsets", "interfaceRows", "classAnnotationOffsets", "classAnnotationNameIds",
+        "permittedOffsets", "permittedNameIds", "memberOffsets"};
+>>>
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    Object[] args = new Object[atom.getParameterCount()];
+    args[0] = row;
+    for (int k = 0; k < lanes.length; k++) args[k + 1] = lane(lanes[k]);
+    args[lanes.length + 1] = M3AtomKit.findGetter(OWNER, "memberKinds", byte[].class).invoke(CI);
+    args[lanes.length + 2] = lane("memberNameIds");
+    args[lanes.length + 3] = lane("memberDescriptorIds");
+    args[lanes.length + 4] = lane("memberModifiers");
+    args[lanes.length + 5] = lane("memberFlags");
+    assertEquals(CI.structuralHash64(row), (long) atom.invoke(null, args), CLASSES[row].getName());
+}
+>>>
+
+@atom M3CI.memberHash 1 SCENARIO FNV-1a(member-draft-fields)
+setup <<<
+MethodHandle atom = st("memberHash", MethodType.methodType(long.class, DRAFT));
+MethodHandle draft = M3AtomKit.findConstructor(DRAFT, "MemberDraft", MethodType.methodType(void.class, int.class,
+        M3MemberKind.class, int.class, int.class, int.class, int.class, int[].class, int[].class));
+>>>
+check <<<
+Object d = draft.invoke(3, M3MemberKind.METHOD, 11, 12, 0x9, 0x4, new int[] {5, 6}, new int[] {7});
+long expected = FNV_SEED;
+for (int v : new int[] {3, M3MemberKind.METHOD.code(), 11, 12, 0x9, 0x4, 5, 6, 7}) expected = fnv(expected, v);
+assertEquals(expected, (long) atom.invoke(d));
+>>>
+
+@atom M3CI.hash 1 SCENARIO FNV-1a-64(4-bytes-little-endian)
+setup <<<
+MethodHandle atom = st("hash", MethodType.methodType(long.class, long.class, int.class));
+SplittableRandom random = M3AtomKit.random("hash");
+>>>
+check <<<
+for (int k = 0; k < M3AtomKit.OPERATIONS; k++) {
+    long seed = random.nextLong();
+    int value = random.nextInt();
+    assertEquals(fnv(seed, value), (long) atom.invoke(seed, value));
+}
+assertEquals(fnv(FNV_SEED, 0), (long) atom.invoke(FNV_SEED, 0));
+>>>
+
+@atom M3CI.fingerprint 1 SCENARIO SHA-256(frozen-lanes)
+setup <<<
+MethodHandle atom = st("fingerprint", MethodType.methodType(byte[].class, FROZEN));
+Object frozen = freezeWith(discoverRoots(), true);
+>>>
+check <<<
+byte[] digest = (byte[]) atom.invoke(frozen);
+assertEquals(MessageDigest.getInstance("SHA-256").getDigestLength(), digest.length);
+assertArrayEquals(CI.fingerprintSha256(), digest);
+>>>
+
+@atom M3CI.offsets 1 SCENARIO prefix-sum-of-lengths
+setup <<<
+MethodHandle atom = st("offsets", MethodType.methodType(int[].class, int[][].class));
+>>>
+check <<<
+assertArrayEquals(new int[] {0, 2, 2, 5}, (int[]) atom.invoke((Object) new int[][] {{1, 2}, {}, {3, 4, 5}}));
+assertArrayEquals(new int[] {0}, (int[]) atom.invoke((Object) new int[0][]));
+>>>
+
+@atom M3CI.flatten 1 SCENARIO concatenation
+setup <<<
+MethodHandle atom = st("flatten", MethodType.methodType(int[].class, int[][].class, int.class));
+>>>
+check <<<
+assertArrayEquals(new int[] {1, 2, 3, 4, 5}, (int[]) atom.invoke(new int[][] {{1, 2}, {}, {3, 4, 5}}, 5));
+>>>
+
+@atom M3CI.prefixSum 1 SCENARIO in-place-prefix-sum
+setup <<<
+MethodHandle atom = st("prefixSum", MethodType.methodType(void.class, int[].class));
+int[] values = {0, 2, 0, 3, 1};
+>>>
+check <<<
+atom.invoke(values);
+assertArrayEquals(new int[] {0, 2, 2, 5, 6}, values);
+>>>
+
+@atom M3CI.sortedUnique 1 SCENARIO java.util.TreeSet
+setup <<<
+MethodHandle atom = st("sortedUnique", MethodType.methodType(int[].class, int[].class));
+SplittableRandom random = M3AtomKit.random("sortedUnique");
+>>>
+check <<<
+for (int k = 0; k < M3AtomKit.CASES; k++) {
+    int[] values = random.ints(random.nextInt(MODEL_ROWS), 0, MODEL_ROWS / 2).toArray();
+    int[] expected = new TreeSet<>(Arrays.stream(values).boxed().toList()).stream().mapToInt(Integer::intValue).toArray();
+    assertArrayEquals(expected, (int[]) atom.invoke(values.clone()));
+}
+>>>
+
+@atom M3CI.rowOf 1 SCENARIO identity-map-lookup
+setup <<<
+MethodHandle atom = st("rowOf", MethodType.methodType(int.class, IdentityHashMap.class, Class.class));
+IdentityHashMap<Class<?>, Integer> rows = new IdentityHashMap<>(Map.of(String.class, 4));
+>>>
+check <<<
+assertEquals(4, (int) atom.invoke(rows, String.class));
+assertEquals(-1, (int) atom.invoke(rows, Integer.class));
+assertEquals(-1, (int) atom.invoke(rows, (Class<?>) null));
+>>>
+
+@atom M3CI.requiredRow 1 SCENARIO identity-map-lookup-or-fail
+setup <<<
+MethodHandle atom = st("requiredRow", MethodType.methodType(int.class, IdentityHashMap.class, Class.class));
+IdentityHashMap<Class<?>, Integer> rows = new IdentityHashMap<>(Map.of(String.class, 4));
+>>>
+check <<<
+assertEquals(4, (int) atom.invoke(rows, String.class));
+M3AtomKit.expectMessage(IllegalStateException.class, "hierarchy closure missing java.lang.Integer", () -> atom.invoke(rows, Integer.class));
+>>>
+
+@atom M3CI.filled 1 SCENARIO java.util.Arrays.fill
+setup <<<
+MethodHandle atom = st("filled", MethodType.methodType(int[].class, int.class, int.class));
+int[] expected = new int[MODEL_ROWS];
+Arrays.fill(expected, -1);
+>>>
+check <<<
+assertArrayEquals(expected, (int[]) atom.invoke(MODEL_ROWS, -1));
+assertArrayEquals(new int[0], (int[]) atom.invoke(0, 1));
+>>>
+
+@atom M3CI.totalLength 1 SCENARIO sum-of-lengths
+setup <<<
+MethodHandle atom = st("totalLength", MethodType.methodType(long.class, int[][].class));
+>>>
+check <<<
+assertEquals(6L, (long) atom.asFixedArity().invoke(new int[][] {new int[1], new int[2], new int[3]}));
+assertEquals(0L, (long) atom.asFixedArity().invoke(new int[0][]));
+>>>
+
+@atom M3CI.findText 1 SCENARIO binary-search-of-snapshot-texts
+setup <<<
+MethodHandle atom = vi("findText", MethodType.methodType(int.class, CharSequence.class));
+MethodHandle text = vi("optionalText", MethodType.methodType(Optional.class, int.class));
+>>>
+check <<<
+for (int row = 0; row < CI.size(); row++) {
+    for (String value : new String[] {CI.binaryName(row), CI.simpleName(row), CI.typeName(row)}) {
+        int id = (int) atom.invoke(CI, new StringBuilder(value));
+        assertEquals(Optional.of(value), text.invoke(CI, id), "found by content, not identity");
+    }
+}
+assertEquals(-1, (int) atom.invoke(CI, "no.such.Text"));
+>>>
+
+@atom M3CI.compareText 1 SCENARIO sign(String.compareTo)
+setup <<<
+MethodHandle atom = st("compareText", MethodType.methodType(int.class, String.class, CharSequence.class));
+String[] words = {"", "a", "ab", "b", "B", "é", "abc", "ab￿"};
+>>>
+check <<<
+for (String x : words) {
+    for (String y : words) {
+        assertEquals(Integer.signum(x.compareTo(y)), Integer.signum((int) atom.invoke(x, new StringBuilder(y))), x + " vs " + y);
+    }
+}
+>>>
+
+@atom M3CI.lowerBound 1 SCENARIO first-index>=value
+setup <<<
+MethodHandle atom = st("lowerBound", MethodType.methodType(int.class, int[].class, int.class, int.class, int.class));
+int[] sorted = {1, 3, 3, 3, 7, 9};
+>>>
+check <<<
+for (int value = 0; value <= 10; value++) {
+    int expected = 0;
+    while (expected < sorted.length && sorted[expected] < value) expected++;
+    assertEquals(expected, (int) atom.invoke(sorted, 0, sorted.length, value), "value " + value);
+}
+assertEquals(2, (int) atom.invoke(sorted, 2, 4, 3), "respects the window");
+M3AtomKit.expect(IndexOutOfBoundsException.class, () -> atom.invoke(sorted, 0, sorted.length + 1, 3));
+>>>
+
+@atom M3CI.upperBound 1 SCENARIO first-index>value
+setup <<<
+MethodHandle atom = st("upperBound", MethodType.methodType(int.class, int[].class, int.class, int.class, int.class));
+int[] sorted = {1, 3, 3, 3, 7, 9};
+>>>
+check <<<
+for (int value = 0; value <= 10; value++) {
+    int expected = 0;
+    while (expected < sorted.length && sorted[expected] <= value) expected++;
+    assertEquals(expected, (int) atom.invoke(sorted, 0, sorted.length, value), "value " + value);
+}
+M3AtomKit.expectMessage(NullPointerException.class, "sorted", () -> atom.invoke((int[]) null, 0, 0, 0));
+>>>
+
+@atom M3CI.Frozen.withFingerprint 1 SCENARIO copy-with-cloned-digest
+setup <<<
+MethodHandle atom = M3AtomKit.findVirtual(FROZEN, "withFingerprint", MethodType.methodType(FROZEN, byte[].class));
+MethodHandle digest = M3AtomKit.findVirtual(FROZEN, "fingerprintSha256", MethodType.methodType(byte[].class));
+Object frozen = freezeWith(discoverRoots(), true);
+byte[] supplied = {1, 2, 3};
+>>>
+check <<<
+Object copy = atom.invoke(frozen, supplied);
+supplied[0] = 9;
+assertArrayEquals(new byte[] {1, 2, 3}, (byte[]) digest.invoke(copy), "the supplied digest is cloned");
+assertArrayEquals(CI.fingerprintSha256(), (byte[]) digest.invoke(frozen), "the original keeps its digest");
+>>>
+
+@atom M3CI.Symbols.order 1 SCENARIO java.util.TreeMap(text-order)
+setup <<<
+Object symbols = symbols();
+MethodHandle add = M3AtomKit.findVirtual(SYMBOLS, "add", MethodType.methodType(int.class, String.class));
+MethodHandle order = M3AtomKit.findVirtual(SYMBOLS, "order", MethodType.methodType(int[].class));
+String[] words = {"pear", "apple", "Zebra", "apple", "", "fig"};
+>>>
+check <<<
+TreeMap<String, Integer> model = new TreeMap<>();
+for (String w : words) model.putIfAbsent(w, (int) add.invoke(symbols, w));
+assertArrayEquals(model.values().stream().mapToInt(Integer::intValue).toArray(), (int[]) order.invoke(symbols));
+>>>
