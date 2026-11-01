@@ -48,7 +48,7 @@ def verify_receiver(root):
             if not path.is_file() or sha256(path) != expected:
                 raise ValueError("receiver source drift: " + relative)
         if entry.get("source_roots"):
-            actual = {str(p.relative_to(root)) for source in entry["source_roots"]
+            actual = {p.relative_to(root).as_posix() for source in entry["source_roots"]
                       for p in (root / source).rglob("*.java")}
             expected = {p for p in entry["files"] if p.endswith(".java")}
             if actual != expected:
@@ -170,7 +170,7 @@ def build(args):
     root = args.receiver.resolve()
     jdk = args.jdk_home.resolve()
     for executable in ("java", "javac", "jar", "jmod", "jlink"):
-        if not (jdk / "bin" / executable).is_file():
+        if not (jdk / "bin" / (executable + (".exe" if os.name == "nt" else ""))).is_file():
             raise ValueError("complete JDK 21 required: missing " + executable)
     lock = verify_receiver(root)
     out = args.out.resolve()

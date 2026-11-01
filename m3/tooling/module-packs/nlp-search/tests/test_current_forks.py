@@ -41,7 +41,7 @@ class ModuleCollectionTest(unittest.TestCase):
         return DRIVER.collect_jmods(build, self.jars, self.legal, self.owners)
 
     def notices(self):
-        return {str(path.relative_to(self.legal)): path.read_bytes()
+        return {path.relative_to(self.legal).as_posix(): path.read_bytes()
                 for path in self.legal.rglob("*") if path.is_file()}
 
     def test_repeated_notices_keep_original_scope_once(self):
