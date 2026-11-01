@@ -10936,11 +10936,11 @@
         "tests": [
           {
             "id": "related-source-bounds-current",
-            "receipt": "m3/compatibility/lexicon-related-source-range-20261031/receipt.json"
+            "receipt": "m3/compatibility/lexicon-related-source-range/receipt.json"
           },
           {
             "id": "related-source-bounded-observation-20261031",
-            "receipt": "m3/compatibility/lexicon-related-source-range-20261031/measurement.json"
+            "receipt": "m3/compatibility/lexicon-related-source-range/measurement.json"
           }
         ],
         "provenance": {
