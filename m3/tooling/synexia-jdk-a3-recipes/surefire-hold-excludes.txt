@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+# HOLD (m3/tooling/standalone/GATES.tsv A3_EXPORT_TAG_ASSERTION): at the pinned export revision
+# a062661e this test expects a "synexia" tag that the sealed M3PureIntConvergenceRecipe never carried;
+# both files stay byte-identical (sealed in .github/workflows/m3-a3.yml) and the donor export build fails the same way.
+com.synexia.rewrite.M3JdkA3RecipeExportTest#exportedConvergenceRecipeIsTheCanonicalFileLocalDag
