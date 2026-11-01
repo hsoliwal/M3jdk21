@@ -13,7 +13,7 @@ public class M3Surface extends M3RefCnt {
     public final M3BackendRenderTarget _renderTarget;
 
     /**
-     * @deprecated - use {@link #wrapPixels(ImageInfo, long, long)}
+     * @deprecated - use {@link #wrapPixels(M3ImageInfo, long, long)}
      */
     @Deprecated
     public static M3Surface makeRasterDirect(M3ImageInfo imageInfo,
@@ -51,7 +51,7 @@ public class M3Surface extends M3RefCnt {
     }
 
     /**
-     * @deprecated - use {@link #wrapPixels(ImageInfo, long, long, SurfaceProps)}
+     * @deprecated - use {@link #wrapPixels(M3ImageInfo, long, long, M3SurfaceProps)}
      */
     @Deprecated
     public static M3Surface makeRasterDirect(M3ImageInfo imageInfo,
@@ -111,7 +111,7 @@ public class M3Surface extends M3RefCnt {
     }
 
     /**
-     * @deprecated - use {@link #wrapPixels(Pixmap)}
+     * @deprecated - use {@link #wrapPixels(M3Pixmap)}
      */
     @Deprecated
     public static M3Surface makeRasterDirect(M3Pixmap pixmap) {
@@ -123,7 +123,7 @@ public class M3Surface extends M3RefCnt {
     }
 
     /**
-     * @deprecated - use {@link #wrapPixels(Pixmap, SurfaceProps)}
+     * @deprecated - use {@link #wrapPixels(M3Pixmap, M3SurfaceProps)}
      */
     @Deprecated
     public static M3Surface makeRasterDirect(M3Pixmap pixmap,
@@ -232,7 +232,7 @@ public class M3Surface extends M3RefCnt {
     }
 
     /**
-     * @deprecated - use {@link #wrapBackendRenderTarget(DirectContext, BackendRenderTarget, SurfaceOrigin, ColorType, ColorSpace)}
+     * @deprecated - use {@link #wrapBackendRenderTarget(M3DirectContext, M3BackendRenderTarget, M3SurfaceOrigin, M3ColorType, M3ColorSpace)}
      */
     @Deprecated
     public static M3Surface makeFromBackendRenderTarget(M3DirectContext context,
@@ -244,11 +244,11 @@ public class M3Surface extends M3RefCnt {
     }
 
     /**
-     * <p>Wraps a GPU-backed buffer into {@link Surface}.</p>
+     * <p>Wraps a GPU-backed buffer into {@link M3Surface}.</p>
      *
-     * <p>Caller must ensure backendRenderTarget is valid for the lifetime of returned {@link Surface}.</p>
+     * <p>Caller must ensure backendRenderTarget is valid for the lifetime of returned {@link M3Surface}.</p>
      *
-     * <p>{@link Surface} is returned if all parameters are valid. backendRenderTarget is valid if its pixel
+     * <p>{@link M3Surface} is returned if all parameters are valid. backendRenderTarget is valid if its pixel
      * configuration agrees with colorSpace and context;
      * for instance, if backendRenderTarget has an sRGB configuration, then context must support sRGB,
      * and colorSpace must be present. Further, backendRenderTarget width and height must not exceed
@@ -271,7 +271,7 @@ public class M3Surface extends M3RefCnt {
     }
 
     /**
-     * @deprecated - use {@link #wrapBackendRenderTarget(DirectContext, BackendRenderTarget, SurfaceOrigin, ColorType, ColorSpace, SurfaceProps)}
+     * @deprecated - use {@link #wrapBackendRenderTarget(M3DirectContext, M3BackendRenderTarget, M3SurfaceOrigin, M3ColorType, M3ColorSpace, M3SurfaceProps)}
      */
     @Deprecated
     public static M3Surface makeFromBackendRenderTarget(M3DirectContext context,
@@ -284,11 +284,11 @@ public class M3Surface extends M3RefCnt {
     }
 
     /**
-     * <p>Wraps a GPU-backed buffer into {@link Surface}.</p>
+     * <p>Wraps a GPU-backed buffer into {@link M3Surface}.</p>
      *
-     * <p>Caller must ensure backendRenderTarget is valid for the lifetime of returned {@link Surface}.</p>
+     * <p>Caller must ensure backendRenderTarget is valid for the lifetime of returned {@link M3Surface}.</p>
      *
-     * <p>{@link Surface} is returned if all parameters are valid. backendRenderTarget is valid if its pixel
+     * <p>{@link M3Surface} is returned if all parameters are valid. backendRenderTarget is valid if its pixel
      * configuration agrees with colorSpace and context;
      * for instance, if backendRenderTarget has an sRGB configuration, then context must support sRGB,
      * and colorSpace must be present. Further, backendRenderTarget width and height must not exceed
@@ -328,7 +328,7 @@ public class M3Surface extends M3RefCnt {
     }
 
     /**
-     * @deprecated - use {@link #wrapMTKView(DirectContext, long, SurfaceOrigin, int, ColorType, ColorSpace, SurfaceProps)}
+     * @deprecated - use {@link #wrapMTKView(M3DirectContext, long, M3SurfaceOrigin, int, M3ColorType, M3ColorSpace, M3SurfaceProps)}
      */
     @Deprecated
     public static M3Surface makeFromMTKView(M3DirectContext context,
@@ -366,7 +366,7 @@ public class M3Surface extends M3RefCnt {
     /**
      * @deprecated - use makeRaster(ImageInfo.makeN32Premul(width, height))
      *
-     * <p>Allocates raster {@link Surface}.</p>
+     * <p>Allocates raster {@link M3Surface}.</p>
      *
      * <p>Canvas returned by Surface draws directly into pixels. Allocates and zeroes pixel memory.
      * Pixel memory size is height times width times four. Pixel memory is deleted when Surface is deleted.</p>

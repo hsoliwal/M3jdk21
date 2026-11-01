@@ -32,21 +32,21 @@ public class M3ImageInfo {
     }
 
     /**
-     * @return  ImageInfo with {@link ColorType#N32}
+     * @return  ImageInfo with {@link M3ColorType#N32}
      */
     public static M3ImageInfo makeN32(int width, int height, M3ColorAlphaType alphaType) {
         return new M3ImageInfo(new M3ColorInfo(M3ColorType.N32, alphaType, null), width, height);
     }
 
     /**
-     * @return  ImageInfo with {@link ColorType#N32}
+     * @return  ImageInfo with {@link M3ColorType#N32}
      */
     public static M3ImageInfo makeN32(int width, int height, M3ColorAlphaType alphaType, M3ColorSpace colorSpace) {
         return new M3ImageInfo(new M3ColorInfo(M3ColorType.N32, alphaType, colorSpace), width, height);
     }
 
     /**
-     * @return  ImageInfo with {@link ColorType#N32} and {@link ColorSpace#getSRGB()}
+     * @return  ImageInfo with {@link M3ColorType#N32} and {@link M3ColorSpace#getSRGB()}
      *
      * @see     <a href="https://fiddle.skia.org/c/@ImageInfo_MakeS32">https://fiddle.skia.org/c/@ImageInfo_MakeS32</a>
      */
@@ -55,28 +55,28 @@ public class M3ImageInfo {
     }
 
     /**
-     * @return  ImageInfo with {@link ColorType#N32} and {@link ColorAlphaType#PREMUL}
+     * @return  ImageInfo with {@link M3ColorType#N32} and {@link M3ColorAlphaType#PREMUL}
      */
     public static M3ImageInfo makeN32Premul(int width, int height) {
         return new M3ImageInfo(new M3ColorInfo(M3ColorType.N32, M3ColorAlphaType.PREMUL, null), width, height);
     }
 
     /**
-     * @return  ImageInfo with {@link ColorType#N32} and {@link ColorAlphaType#PREMUL}
+     * @return  ImageInfo with {@link M3ColorType#N32} and {@link M3ColorAlphaType#PREMUL}
      */
     public static M3ImageInfo makeN32Premul(int width, int height, M3ColorSpace colorSpace) {
         return new M3ImageInfo(new M3ColorInfo(M3ColorType.N32, M3ColorAlphaType.PREMUL, colorSpace), width, height);
     }
 
     /**
-     * @return  ImageInfo with {@link ColorType#ALPHA_8} and {@link ColorAlphaType#PREMUL}
+     * @return  ImageInfo with {@link M3ColorType#ALPHA_8} and {@link M3ColorAlphaType#PREMUL}
      */
     public static M3ImageInfo makeA8(int width, int height) {
         return new M3ImageInfo(new M3ColorInfo(M3ColorType.ALPHA_8, M3ColorAlphaType.PREMUL, null), width, height);
     }
 
     /**
-     * @return  ImageInfo with {@link ColorType#UNKNOWN} and {@link ColorAlphaType#UNKNOWN}
+     * @return  ImageInfo with {@link M3ColorType#UNKNOWN} and {@link M3ColorAlphaType#UNKNOWN}
      */
     public static M3ImageInfo makeUnknown(int width, int height) {
         return new M3ImageInfo(new M3ColorInfo(M3ColorType.UNKNOWN, M3ColorAlphaType.UNKNOWN, null), width, height);
@@ -121,7 +121,7 @@ public class M3ImageInfo {
      * <p>Does not check if ColorType allows alpha, or if any pixel value has
      * transparency.</p>
      *
-     * @return  true if alphaType is {@link ColorAlphaType#OPAQUE}
+     * @return  true if alphaType is {@link M3ColorAlphaType#OPAQUE}
      */
     public boolean isOpaque() {
         return _colorInfo.isOpaque();
@@ -148,7 +148,7 @@ public class M3ImageInfo {
 
     /**
      * Returns number of bytes per pixel required by ColorType.
-     * Returns zero if {@link #getColorType()} is {@link ColorType#UNKNOWN}.
+     * Returns zero if {@link #getColorType()} is {@link M3ColorType#UNKNOWN}.
      *
      * @return  bytes in pixel
      */
@@ -158,7 +158,7 @@ public class M3ImageInfo {
 
     /**
      * Returns bit shift converting row bytes to row pixels.
-     * Returns zero for {@link ColorType#UNKNOWN}.
+     * Returns zero for {@link M3ColorType#UNKNOWN}.
      *
      * @return  one of: 0, 1, 2, 3, 4; left shift to convert pixels to bytes
      */

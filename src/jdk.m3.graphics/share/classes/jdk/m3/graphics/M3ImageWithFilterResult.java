@@ -3,7 +3,7 @@ package jdk.m3.graphics;
 import jdk.m3.graphics.*;
 
 /**
- * Result of filtering an image with {@link Image#makeWithFilter}.
+ * Result of filtering an image with {@link M3Image#makeWithFilter}.
  */
 public class M3ImageWithFilterResult implements AutoCloseable {
     /**

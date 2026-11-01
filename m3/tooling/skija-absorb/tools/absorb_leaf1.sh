@@ -20,6 +20,7 @@
 #   S0  mr_select.py (MR_SELECT v1)                             leaf1/MR_SELECT.tsv
 #   S1  lombok delombok, delombok_clean.py
 #   S2  TYPE_RENAME.tsv plus the SneakyThrow helper row         leaf1/TYPE_RENAME_L1.tsv
+#       absorb_rename_check.py (JAVADOC_REF v1 self-check), then
 #       absorb_rename.py with the string ledger                 leaf1/RENAME_COUNTS.tsv, leaf1/STRING_MENTIONS.tsv
 #   S3  normalize_ws.py (NORMALIZE_WS v1)                       src/jdk.m3.graphics/share/classes/jdk/**.java
 # Gates
@@ -29,6 +30,9 @@
 #       javac and the added SneakyThrow helper
 #   G4  javac --release 21 -Xlint:all of the module: 0 errors; every warning kind is disabled in Java.gmk; jdeps: the
 #       module depends on java.base only (JDK_SELF_CALL: no absorbed call can re-enter a JDK API the module implements)
+#   G4b doclint: the module compiled as the JDK build compiles it (DOCLINT of Java.gmk, -Xlint:all minus the disabled
+#       kinds, -Werror): exit 0, 0 errors (no "reference not found": JAVADOC_REF v1), 0 warnings; the undocumented
+#       members of the "missing" group (left out of DOCLINT) are counted, not gated
 #   G5  M3GraphicsLeaf1Probe on this JDK with the module on the module path (F1, F2, F3, F4)
 #   G6  the probe inside a jlink image of java.base + jdk.m3.graphics: M3Library.load takes the JDK-bundled branch
 #       (skipped when the JDK has no jmods)
@@ -86,7 +90,10 @@ step "S1 delombok + delombok_clean.py"
 [ ! -s "$work/delombok.log" ] || { head -20 "$work/delombok.log"; die "delombok reported problems"; }
 "$PY" -I "$TOOLS/delombok_clean.py" "$work/src1"
 
-step "S2 TYPE_RENAME_L1 + absorb_rename.py"
+step "S2 TYPE_RENAME_L1 + absorb_rename.py (self-check of JAVADOC_REF v1 first)"
+"$PY" -I "$TOOLS/absorb_rename_check.py" > "$work/absorb_rename_check.log" \
+  || { cat "$work/absorb_rename_check.log"; die "absorb_rename_check.py failed"; }
+tail -1 "$work/absorb_rename_check.log"
 { cat "$L0/TYPE_RENAME.tsv"; printf '%s\n' "$HELPER_ROW"; } > "$L1/TYPE_RENAME_L1.tsv"
 "$PY" -I "$TOOLS/absorb_rename.py" "$work/src1" "$L1/TYPE_RENAME_L1.tsv" "$work/src2" "$L1" "$L0/CC_STRING_RENAME.tsv"
 
@@ -138,6 +145,25 @@ done < "$work/cm.kinds"
 deps=$("$J/jdeps" --module-path "$work/cm" -s --module "$MODULE" | tr -d '\r')
 [ "$deps" = "$MODULE -> java.base" ] || die "module dependencies: $deps"
 echo "jdeps: $deps (JDK_SELF_CALL: the module implements no java.base API, so no absorbed call re-enters it)"
+
+# FLLDCIM: BLLSE - G4b doclint gate: DOCLINT of Java.gmk with -Werror, errors and warnings counted
+step "G4b doclint of module $MODULE as the JDK build compiles it"
+doclint=$(sed -n -E 's/^DOCLINT \+= //p' "$repo/make/modules/$MODULE/Java.gmk")
+[ -n "$doclint" ] || die "no DOCLINT in make/modules/$MODULE/Java.gmk"
+lint="-Xlint:all$(for k in $disabled; do printf ',-%s' "$k"; done)"
+rc=0
+"$J/javac" --release "$RELEASE" -encoding UTF-8 -proc:none $lint -Werror $doclint -Xmaxerrs "$MAX_WARNINGS" \
+  -Xmaxwarns "$MAX_WARNINGS" -d "$work/cd" @"$work/module.list" > "$work/doclint.log" 2>&1 || rc=$?
+errors=$(grep -c ': error: ' "$work/doclint.log" || true)
+refs=$(grep -c ': error: reference not found' "$work/doclint.log" || true)
+warnings=$(grep -c ': warning: ' "$work/doclint.log" || true)
+"$J/javac" --release "$RELEASE" -encoding UTF-8 -proc:none -Xdoclint:missing/protected \
+  -Xmaxwarns "$MAX_WARNINGS" -d "$work/cdm" @"$work/module.list" > "$work/doclint_missing.log" 2>&1 || true
+missing=$(grep -c ': warning: ' "$work/doclint_missing.log" || true)
+echo "doclint: $lint -Werror $doclint: exit $rc, errors=${errors:-0} (reference not found ${refs:-0})" \
+  "warnings=${warnings:-0}; group missing (not in DOCLINT): ${missing:-0} warnings"
+[ "$rc" -eq 0 ] && [ "${errors:-0}" -eq 0 ] && [ "${warnings:-0}" -eq 0 ] \
+  || { head -20 "$work/doclint.log"; die "doclint: exit $rc, ${errors:-0} errors, ${warnings:-0} warnings"; }
 
 step "G5 runtime probe on this JDK"
 "$J/javac" --release "$RELEASE" --module-path "$work/cm" --add-modules "$MODULE" -d "$work/probe" \

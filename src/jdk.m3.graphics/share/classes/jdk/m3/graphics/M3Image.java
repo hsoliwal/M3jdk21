@@ -14,7 +14,7 @@ public class M3Image extends M3RefCnt implements M3IHasImageInfo {
     }
 
     /**
-     * @deprecated - use {@link #makeRasterFromBytes(ImageInfo, byte[], long)}
+     * @deprecated - use {@link #makeRasterFromBytes(M3ImageInfo, byte[], long)}
      */
     @Deprecated
     public static M3Image makeRaster(M3ImageInfo imageInfo, byte[] bytes, long rowBytes) {
@@ -119,7 +119,7 @@ public class M3Image extends M3RefCnt implements M3IHasImageInfo {
     }
 
     /**
-     * @deprecated - use {@link #makeRasterFromData(ImageInfo, Data, long)}
+     * @deprecated - use {@link #makeRasterFromData(M3ImageInfo, M3Data, long)}
      */
     @Deprecated
     public static M3Image makeRaster(M3ImageInfo imageInfo, M3Data data, long rowBytes) {
@@ -163,7 +163,7 @@ public class M3Image extends M3RefCnt implements M3IHasImageInfo {
     }
 
     /**
-     * @deprecated - use {@link #makeRasterFromBitmap(Bitmap)}
+     * @deprecated - use {@link #makeRasterFromBitmap(M3Bitmap)}
      */
     @Deprecated
     public static M3Image makeFromBitmap(M3Bitmap bitmap) {
@@ -203,7 +203,7 @@ public class M3Image extends M3RefCnt implements M3IHasImageInfo {
     }
 
     /**
-     * @deprecated - use {@link #makeRasterFromPixmap(Pixmap)}
+     * @deprecated - use {@link #makeRasterFromPixmap(M3Pixmap)}
      */
     @Deprecated
     public static M3Image makeFromPixmap(M3Pixmap pixmap) {
@@ -263,7 +263,7 @@ public class M3Image extends M3RefCnt implements M3IHasImageInfo {
     }
 
     /**
-     * @deprecated - use {@link EncoderPNG#encode(Image)}, {@link EncoderJPEG#encode(Image)} or {@link EncoderWEBP#encode(Image)}
+     * @deprecated - use {@link M3EncoderPNG#encode(M3Image)}, {@link M3EncoderJPEG#encode(M3Image)} or {@link M3EncoderWEBP#encode(M3Image)}
      */
     @Deprecated
     public M3Data encodeToData() {
@@ -271,7 +271,7 @@ public class M3Image extends M3RefCnt implements M3IHasImageInfo {
     }
 
     /**
-     * @deprecated - use {@link EncoderPNG#encode(Image)}, {@link EncoderJPEG#encode(Image)} or {@link EncoderWEBP#encode(Image)}
+     * @deprecated - use {@link M3EncoderPNG#encode(M3Image)}, {@link M3EncoderJPEG#encode(M3Image)} or {@link M3EncoderWEBP#encode(M3Image)}
      */
     @Deprecated
     public M3Data encodeToData(M3EncodedImageFormat format) {
@@ -279,7 +279,7 @@ public class M3Image extends M3RefCnt implements M3IHasImageInfo {
     }
 
     /**
-     * @deprecated - use {@link EncoderPNG#encode(Image, EncodePNGOptions)}, {@link EncoderJPEG#encode(Image, EncodeJPEGOptions)} or {@link EncoderWEBP#encode(Image, EncodeWEBPOptions)}
+     * @deprecated - use {@link M3EncoderPNG#encode(M3Image, M3EncodePNGOptions)}, {@link M3EncoderJPEG#encode(M3Image, M3EncodeJPEGOptions)} or {@link M3EncoderWEBP#encode(M3Image, M3EncodeWEBPOptions)}
      */
     @Deprecated
     public M3Data encodeToData(M3EncodedImageFormat format, int quality) {
@@ -545,7 +545,7 @@ public class M3Image extends M3RefCnt implements M3IHasImageInfo {
      * @param clipBounds   expected bounds of filtered Image
      * @return             ImageWithFilterResult containing the filtered Image (or null), actual bounds, and offset
      *
-     * @see ImageWithFilterResult
+     * @see M3ImageWithFilterResult
      */
     public static M3ImageWithFilterResult makeWithFilter(M3DirectContext context,
                                                        M3ImageFilter filter,

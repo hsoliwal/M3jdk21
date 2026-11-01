@@ -21,7 +21,8 @@ The changes were mechanical, and the tools that made them are in `m3/tooling/ski
 - Packages were renamed: `io.github.humbleui.skija[.x]` and `io.github.humbleui.types` became `jdk.m3.graphics[.x]`, and
   `io.github.humbleui.skija.impl` became `jdk.m3.graphics.impl`.
 - Every type `T` was renamed `M3T`. The one string literal that names a class file, `"Library.class"` in
-  `M3Library`, became `"M3Library.class"`.
+  `M3Library`, became `"M3Library.class"`. The references of the Javadoc tags (`{@link}`, `{@linkplain}`,
+  `{@value}`, `@see`, `@throws`) follow the same rename (2026-11-01); their labels and the prose are the donor's.
 - Line ends became LF, and trailing blanks were removed.
 
 The public API is otherwise the donor's, member for member: the javap surface is equal after the rename.
