@@ -7,6 +7,8 @@
 #      OUT         scratch directory (default ./out-lombok-gates); never on a nearly full drive
 #      COM_SYNEXIA optional com.synexia checkout added to the census (files on disk, ripgrep: M3_RG or rg on PATH)
 #      PREFETCH=1  fetch the m3/**/*.java blobs in one batch first (blobless clones; not on a shared clone)
+#      SKIP_CENSUS=1 print SKIP for census_fixed_point instead of running it: it runs git grep over m3/ at HEAD,
+#                  which a shared blobless clone must not do; use only when no m3/**/*.java blob changed
 set -u
 here=$(cd "$(dirname "$0")" && pwd)
 lane=$(dirname "$here")
@@ -46,24 +48,36 @@ printf 'origin\trev\tmodule\tvariant\tpath\tsha\tstaged\nfixture\t-\tfixture\t-\
     && cmp -s "$out/fixture.tsv" "$here/fixture/EXPECTED_OCCURRENCES.tsv"
 report "census_discriminator: fixture rows equal EXPECTED_OCCURRENCES.tsv" $?
 
-origins=("git:m3jdk=$repo@HEAD@m3/*.java")
-[ -n "${COM_SYNEXIA:-}" ] && origins+=("fs:com.synexia=$COM_SYNEXIA")
-status=0
-for run in 1 2; do
-    rm -rf "$out/stage$run"
-    python "$here/lombok_census.py" "$out/stage$run" "$out/census$run" "$java" "$lane/LOMBOK_API.tsv" \
-        "$lane/LOMBOK_CONFIG_KEYS.tsv" "${origins[@]}" > /dev/null || status=1
-done
-[ "$status" = 0 ] && cmp -s "$out/census1/USAGE_CENSUS.tsv" "$out/census2/USAGE_CENSUS.tsv"
-report "census_fixed_point: two runs byte-identical" $?
+if [ "${SKIP_CENSUS:-0}" = 1 ]; then
+    echo "SKIP census_fixed_point: SKIP_CENSUS=1"
+    echo "SKIP class_combinations: SKIP_CENSUS=1 (it reads the census stage)"
+else
+    origins=("git:m3jdk=$repo@HEAD@m3/*.java")
+    [ -n "${COM_SYNEXIA:-}" ] && origins+=("fs:com.synexia=$COM_SYNEXIA")
+    status=0
+    for run in 1 2; do
+        rm -rf "$out/stage$run"
+        python "$here/lombok_census.py" "$out/stage$run" "$out/census$run" "$java" "$lane/LOMBOK_API.tsv" \
+            "$lane/LOMBOK_CONFIG_KEYS.tsv" "${origins[@]}" > /dev/null || status=1
+    done
+    [ "$status" = 0 ] && cmp -s "$out/census1/USAGE_CENSUS.tsv" "$out/census2/USAGE_CENSUS.tsv"
+    report "census_fixed_point: two runs byte-identical" $?
+    for run in 1 2; do
+        python "$here/lombok_combinations.py" "$out/stage$run/OCCURRENCES.tsv" "$out/combinations$run.tsv" \
+            > /dev/null || status=1
+    done
+    [ "$status" = 0 ] && cmp -s "$out/combinations1.tsv" "$out/combinations2.tsv" \
+        && { [ -z "${COM_SYNEXIA:-}" ] || cmp -s "$out/combinations1.tsv" "$lane/CLASS_COMBINATIONS.tsv"; }
+    report "class_combinations: both stages project alike; with COM_SYNEXIA equal to CLASS_COMBINATIONS.tsv" $?
+fi
 
 status=0
 for run in 1 2; do
     mkdir -p "$out/patterns$run"
     python "$here/lombok_patterns.py" "$out/pat$run" "$out/patterns$run" "$java" "$jar" "$config" \
-        "$lane/USAGE_CENSUS.tsv" > /dev/null || status=1
+        "$lane/USAGE_CENSUS.tsv" "$lane/CLASS_COMBINATIONS.tsv" > /dev/null || status=1
 done
-report "pattern_coverage: every census annotation group has a case" $status
+report "pattern_coverage: every census annotation group and class combination has a case" $status
 cmp -s "$out/patterns1/PATTERNS.tsv" "$out/patterns2/PATTERNS.tsv" && cmp -s "$out/patterns1/PATTERNS.tsv" "$lane/PATTERNS.tsv"
 report "pattern_fixed_point: two runs byte-identical and equal to PATTERNS.tsv" $?
 

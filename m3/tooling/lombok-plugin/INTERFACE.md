@@ -94,11 +94,14 @@ file and line).
 | `M3LOMBOK_SKIPPED_EXISTING` | warning | the member is already declared (same name and parameter count; `equals`/`hashCode` as a pair); not generated |
 | `M3LOMBOK_EQUALS_WITHOUT_SUPER` | warning | `@EqualsAndHashCode`/`@Data`/`@Value` on a class extending a type other than `Object` without `callSuper` |
 | `M3LOMBOK_PREFIX_MISMATCH` | warning | field matches none of the accessor prefixes; no accessor generated for it |
-| `M3LOMBOK_WITH_NEEDS_ALL_ARGS_CONSTRUCTOR` | error | `@With` on a class without an all-args constructor in field order |
 | `M3LOMBOK_FINAL_FIELD_UNINITIALIZED` | error | `@NoArgsConstructor` with an uninitialized final field |
 | `M3LOMBOK_UTILITY_CLASS_CONSTRUCTOR` | error | `@UtilityClass` on a class that declares a constructor |
 | `M3LOMBOK_DELEGATE_UNRESOLVED` | error | the `@Delegate` field's type cannot be attributed |
 | `M3LOMBOK_INTERNAL` | error | a handler failed; the unit is left unexpanded and unstripped |
+
+There is no plugin diagnostic for a with-er or `build()` whose constructor call matches no constructor. Any
+constructor that accepts the call serves, generated or written by hand; when none does, javac reports the call at
+the annotation that generated it, as under Lombok (`SPEC.md` `@With` and rule 10).
 
 ## Guarantees
 
