@@ -55,6 +55,95 @@ one per jackson-core version).
    until then a porcelain commit there (`git add --sparse`, `git commit`) would revert the committed paths. The tool
    reports INDEX_STALE after each commit (`tools/index_free_commit_check.py` checks that), and the GATES.tsv row
    `index_sync` holds the reset: HOLD while H: is under the 350 MB floor.
+8. Decimal exponent clamp (DEC_EXPONENT_CLAMP v1). The review of the stacked hex leaf (#2245) found 480 of
+   200,000 decimal literals that this branch parses differently from stock JDK 21.0.9, all with a clamped exponent
+   number. #2245 fixed it on its own branch (9f6d5f3f9f7); the same change is now here, so #2215 keeps its contract
+   (results exactly the JDK's) without the stacked leaf.
+   - Root cause: `parseDecFloatLiteral` stops accumulating the exponent number once it reaches `MAX_EXPONENT_NUMBER`
+     (1024), so 10240 parses as 1024, and adds the digit counts afterwards: `"0." + 723 zeros + "1e10240"` gave 1e300
+     instead of Infinity, `"1" + 1100 zeros + "e-10240"` about 1e76 instead of 0.0.
+   - Fix, in-file, in the two templates (CharSequence and byte[]): once the exponent number reaches the clamp, both
+     exponents become `DECLINED_EXPONENT` (`Integer.MIN_VALUE`), outside both decimal kernels' range, so the kernel
+     declines and `FloatingDecimal` decides. The text, the gate, the JUnit test and the tools are byte-identical to
+     #2245's, so the stack merges without a code conflict.
+   - Gates (`GATES.tsv`, rows `dec_clamp_*`, run on this branch's images):
+     - JUnit `M3NumberParseDecClampAtomsTest`, one test per atom: 10/10. The pre-image fails 8 of 10.
+     - Decimal differential (`gate/M3DecParseDifferential.java`): 400,000 literals, identical to stock; the pre-image
+       differs on 74,487 lines. The corpus has 274,526 literals with a zero run of 100 or more chars, 135,618 with an
+       integer part of 100 or more digits, and exponent numbers of 5 and 6 digits of both signs (146,239).
+     - The verifier's corpus (seed 0x5EED2245): 480 differences -> 0. `M3ParseDifferential` keeps sha256 233e0f59....
+     - `DEC_BYTECODE_METHOD_DELTA.tsv`: only the two `parseDecFloatLiteral` change, by one decline block.
+     - Perf A/B on a busy host: two ABBA runs at High priority; the first (32 rounds) failed on noise
+       (Double.parseDouble paired median 1.069 while the instance atoms of the changed template measured 0.956 to
+       1.040), the second (64 rounds) passed with 0.986 / 1.014, and the gate over all 96 pairs passes with 1.005 /
+       1.009.
+   - Patterns: `PATTERN_ROUTES.tsv` (NUMBER-PARSE-PATTERN v1.2 rows `HEX`, `DEC`, `DEC_EXPONENT_CLAMP`). Records bound
+     to this branch's images are named `*_PR2215`, so merging into #2245 keeps both sides.
+   - Still open on this branch: the hex path (21,851 of the verifier's 200,000 hex literals differ from stock). #2245
+     routes it (HEX_ROUTE v1).
+9. Hex literals (HEX_ROUTE v1, branch `m3/jdk-number-parse-hex-exact-20261031`; it must land with #2215). The
+   jackson-fdp leaf (#2233) found 1,309 hex literals in its 250,000-literal corpus that #2215 rounds differently from
+   stock JDK 21.0.9. Its own 600,000-literal differential held only `Double.toHexString` hex literals, at most 14 digits.
+   - Atomize: `HEX_ATOMS.tsv` (`tools/hex_atoms.py`) binds the 20 atoms of the hex path to line ranges and hashes.
+   - Root cause: `tools/hex_defect_model.py` replays the donor's hex path in exact integer arithmetic. It reproduces
+     7,854 of 7,854 differing results, and among the corpus's 45,555 hex literals it predicts exactly the 1,309 that
+     differ. Three independent defects (line numbers of the pre-image):
+     - Double rounding, `M3FastDoubleMath:1000` and `M3FastFloatMath:131`: `(double) significand + (significand < 0 ?
+       2^64 : 0)` rounds an unsigned significand >= 2^63 twice (1,303 of the 1,309). In `0x8Db1Ffd473B83a5fp196` the
+       signed cast leaves `0x8db1ffd473b83c00`, a false halfway point, so the double ends in ...708 instead of ...707.
+     - No sticky bit, `parseHexFloatLiteral` lines 420-436: digits beyond the 16 the re-parse keeps are dropped
+       without a trace (6 of the 1,309).
+     - Exponent clamp, `parseHexFloatLiteral` lines 371 and 386-397: the exponent number stops at 1024 before the
+       fraction digits are subtracted, so `0x.1p10240` gives 2^1020 instead of Infinity. That corpus cannot reach it.
+   - Fix, in-file: both hex kernels decline every literal (`HEX_LITERALS_TO_FLOATING_DECIMAL`), so `valueOfHexLiteral`
+     takes the original `FloatingDecimal` path. Every hex literal goes there, not only the inexact ones, because the
+     kernel cannot see the clamp: declining only inexact literals would also need the two parser templates changed.
+     Hex literals are rare, and the JDK rounds them correctly. javac drops the donor code behind the constant, so each
+     kernel compiles to `return NaN`.
+   - Gates (`GATES.tsv`, rows `hex_*`):
+     - JUnit `M3NumberParseHexAtomsTest`, one test per hex atom: 10/10. On the pre-image 8 fail, for example 1,213 of
+       the 1,213 affected doubles.
+     - `M3NumberParseAtomsTest` 11/11, and `M3ParseDifferential` keeps its sha256.
+     - The hex differential (`gate/M3HexParseDifferential.java`, 400,000 inputs) is identical to stock; the pre-image
+       differs on 48,350 lines.
+     - `tools/bytecode_method_delta.py`: only the two kernels changed; the decimal path is instruction-identical.
+     - Perf: the decimal paths keep their speed (paired median 0.988 / 0.995, host about 80% busy). Hex literals now
+       take about 1.25x stock's time on `toHexString` literals and 1.3x to 1.45x on the mixed hex corpus (`PERF.tsv`),
+       because the M3 scan runs before the kernel declines.
+   - Patterns: `PATTERN_ROUTES.tsv` (NUMBER-PARSE-PATTERN v1.1 routes, each with its RESIDUE).
+   - Left open by this step: the decimal grammar has the same clamp (`DEC_EXPONENT_CLAMP`). Item 10 fixes it.
+10. Decimal exponent clamp (DEC_EXPONENT_CLAMP v1, same branch). The review of #2245 found 480 of 200,000 decimal
+   literals that #2215 parses differently from stock JDK 21.0.9, all with a clamped exponent number.
+   - Atomize: `DEC_ATOMS.tsv` (`tools/hex_atoms.py ... dec`) binds the 16 atoms of the decimal path.
+   - Root cause: `parseDecFloatLiteral` stops accumulating the exponent number once it reaches `MAX_EXPONENT_NUMBER`
+     (1024), so 10240 parses as 1024. It adds the digit counts afterwards, and they can bring a clamped exponent
+     back into the kernel's range in both directions:
+     - fraction digits: `"0." + 723 zeros + "1e10240"` gave 1e300 instead of Infinity;
+     - integer digits beyond the 19 that the re-parse keeps: `"1" + 1100 zeros + "e-10240"` gave about 1e76 instead
+       of 0.0.
+   - Fix, in-file, in the two templates (CharSequence and byte[]): once the exponent number reaches the clamp,
+     `parseDecFloatLiteral` passes `DECLINED_EXPONENT` (`Integer.MIN_VALUE`) as both exponents. That lies outside both
+     decimal kernels' range, so the kernel declines and `valueOfFloatLiteral` takes the original `FloatingDecimal`
+     path. An exponent number from 1024 to 10239 that was not clamped declines too. It is outside the kernel range
+     anyway unless about 700 digits bring it back.
+   - Gates (`GATES.tsv`, rows `dec_*`):
+     - JUnit `M3NumberParseDecClampAtomsTest`, one test per atom: 10/10 over 14,034 literals in 7 shapes. On the
+       pre-image 8 of 10 fail.
+     - The decimal differential (`gate/M3DecParseDifferential.java`, 400,000 inputs) is identical to stock. The
+       pre-image differs on 74,487 lines.
+     - On the verifier's own corpus the 480 differences drop to 0. The 600,000-literal and hex differentials keep
+       their sha256.
+     - `DEC_BYTECODE_METHOD_DELTA.tsv`: only the two `parseDecFloatLiteral` methods change, by one decline block
+       before the kernel call.
+     - Perf A/B, 32 ABBA rounds, host about 90% busy: paired median 1.005 / 1.033, PASS.
+   - Patterns: `PATTERN_ROUTES.tsv` v1.2 (rows `DEC`, `DEC_EXPONENT_CLAMP`). The custody record names HEX_ROUTE v1 and
+     DEC_EXPONENT_CLAMP v1.
+11. Review fixes for #2245:
+   - The base moved, so it is merged in (no force push).
+   - The generated TSVs carry the SPDX header, written by their generators.
+   - The test and gate sources name their numbers and chars: LITERAL_CONSTANTS v1.1 `--kinds=number,char`, 49
+     constants, `CONSTANT_NAMES_TESTS.tsv`.
+   - `tools/py_literals.py` (PY_LITERALS v1) gates the Python tools: 0 magic numbers.
 
 ### number-parse JIT leaf: atomize, test, JIT, patternize (stacked on #2215)
 
@@ -112,7 +201,7 @@ equals stock):
 Latent FFT defects (no caller reaches them; recorded as FFT_LATENT v1 in RECIPE_MEMORY.tsv for the BigDecimal leaf):
 length-12 mixed radix, multiplyFft / squareFft for small operands, pointwise operations on vector views.
 
-Review fixes (after merging the moved base a5d6cc2a79; RECIPE_MEMORY.tsv rows 20-29):
+Review fixes (after merging the moved base a5d6cc2a79; RECIPE_MEMORY.tsv rows 25-34):
 - Custody: `fastdoubleparser.md` names JIT_ATOMIZE v1, HEX_ROUNDING v1, SWAR_HEX_BORROW v1, NUMBER-PARSE-PATTERN v1
   and CNPCDA v1. `tools/custody_names_check.py` (CUSTODY_NAMES v1) checks that the record names the recipe of every
   commit that changes absorbed files: `custody_check.py` passes on a merge commit alone, because a merge's
@@ -122,10 +211,38 @@ Review fixes (after merging the moved base a5d6cc2a79; RECIPE_MEMORY.tsv rows 20
 - Literals: 0 HOIST holds for the production code. The leaf's test and gate code are not hoisted yet
   (LITERALS_TEST_SUMMARY.tsv; OPEN).
 
+Hex reconciliation (HEX_RECONCILE v1, after merging #2245; GATES.tsv rows `hex_reconcile_*`). #2245 routes every hex
+literal to the JDK (HEX_ROUTE v1), this leaf had corrected the M3 hex path instead (HEX_ROUNDING v1, SWAR_HEX_BORROW
+v1); one implementation stays. #2245's hex gates were run with `HEX_LITERALS_TO_FLOATING_DECIMAL = false` against
+this leaf's code:
+- the 1,309 affected literals: 0 differ (HEX_ROUNDING v1 fixes the double rounding and the missing sticky bit);
+- the hex differential (400,000 lines): 35,198 differ from stock, every one where stock gives +-Infinity;
+- the exponent clamp probe `0x.1p10240`: 2^1020 instead of Infinity; JUnit `M3NumberParseHexAtomsTest`: 8 of 10 fail.
+The exponent clamp is not fixed on the M3 hex path, so the route stays (constant true) and HEX_ROUNDING v1 is removed:
+the donor body and `TWO_POW_64` are back behind the constant as on #2245, `unsignedToDouble` / `unsignedToFloat` are
+gone, their anchors stay. `bytecode_method_delta.py`: only the two hex kernels (now `return NaN`) changed and the two
+helpers removed; the kernels are instruction-identical to #2245's. SWAR_HEX_BORROW v1 stays (a grammar fix, not a
+rounding variant). The price of the route (HEX_BENCH_RECONCILE.tsv): `toHexString` literals take 1.10x / 1.21x
+stock's time, the mixed hex corpus 1.69x / 1.60x, where the exact M3 path would take 0.20x / 0.78x and 0.77x / 1.21x.
+`M3NumberParseEveryAtomTest` checks the route contract on the kernels (196/196); JIT_SIZE.tsv and PATTERNS.tsv are
+regenerated (`tools/atom_patterns.py` tags the kernels and `valueOfHexLiteral` FIXED:HEX_ROUTE v1, the decimal
+template atoms FIXED:DEC_EXPONENT_CLAMP v1).
+
+Test literals (LITERAL_CONSTANTS v1.2, GATES.tsv rows `literal_constants_v1_2`, `test_literals_hoist`): the recipe now
+reads an annotation by its grammar, so the literals of `@Test` methods are keyed to their method (v1.1 keyed them all
+to `<init>`). `M3NumberParseJitPerf`, `M3NumberParseAtomsPerf`, `M3NumberParseAtomsTest` and `gate/M3ParseDifferential`
+name their numbers and chars: 135 literals, 109 constants, every method instruction-identical, the gates unchanged.
+Open: `M3NumberParseEveryAtomTest` (540 literals; its local tables become named tables first). The jtreg tests
+`TestFDBigInteger`, `ToString` and `TestFloatingDecimal` pass on the final patched java.base.
+
 Next:
 - Remove the last call boundary of the decimal path: the scanner hands its state (significand and packed index) to
   the caller instead of calling the value chain, so the loop holder stays below InlineSmallCode.
 - Per-atom perf rows for the atoms this leaf created (the composites have rows in PERF_JIT.tsv and PERF.tsv).
+- Bring exact hex literals back to M3 (`HEX_EXACT_M3`: an exact exponent from the parser, a sticky shift for
+  significands >= 2^63, a sticky flag for dropped digits). The pre-image's 53.6 ns against stock's 285 ns on
+  `toHexString` literals is the upside. HEX_ROUNDING v1 (30352e4921, removed again by HEX_RECONCILE v1) has
+  the sticky shift and the truncation rule; the exact exponent is the missing part.
 - Point jackson-core's fast path at the JDK (`Double.parseDouble`) by recipe, then drop the three vendored
   FastDoubleParser copies.
 - A LATIN1 byte path straight over String's bytes. Only the JDK can do this; a library cannot.
