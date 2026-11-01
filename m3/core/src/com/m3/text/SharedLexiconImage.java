@@ -147,27 +147,28 @@ public final class SharedLexiconImage {
     boolean startsWith(int index, String prefix) {
         Objects.requireNonNull(prefix);
         Objects.checkIndex(index, offsets.length);
-        ByteBuffer record = recordBytes(index);
-        if (prefix.length() > record.remaining() / 2) return false;
+        int begin = payloadOffset + offsets[index] * 2;
+        if (prefix.length() > lengths[index]) return false;
         for (int at = 0; at < prefix.length(); at++) {
-            int offset = at * 2;
-            int unit = (record.get(offset) & 0xff) | ((record.get(offset + 1) & 0xff) << 8);
+            int offset = begin + at * 2;
+            int unit = (mapping.get(offset) & 0xff) | ((mapping.get(offset + 1) & 0xff) << 8);
             if (unit != prefix.charAt(at)) return false;
         }
         return true;
     }
 
     private int compareRecordTo(int index, String value) {
-        ByteBuffer record = recordBytes(index);
-        int units = Math.min(record.remaining() / 2, value.length());
+        Objects.checkIndex(index, offsets.length);
+        int begin = payloadOffset + offsets[index] * 2;
+        int units = Math.min(lengths[index], value.length());
         for (int at = 0; at < units; at++) {
-            int offset = at * 2;
-            int recordUnit = (record.get(offset) & 0xff)
-                    | ((record.get(offset + 1) & 0xff) << 8);
+            int offset = begin + at * 2;
+            int recordUnit = (mapping.get(offset) & 0xff)
+                    | ((mapping.get(offset + 1) & 0xff) << 8);
             char valueUnit = value.charAt(at);
             if (recordUnit != valueUnit) return Integer.compare(recordUnit, valueUnit);
         }
-        return Integer.compare(record.remaining() / 2, value.length());
+        return Integer.compare(lengths[index], value.length());
     }
     /** Copies and checks a record before it can become immutable local backing. */
     public LocalM3StringPiece copyRecord(int index, LocalM3Arena arena) throws IOException {
