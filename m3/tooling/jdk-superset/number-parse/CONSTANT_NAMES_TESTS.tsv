@@ -1,0 +1,58 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+# LITERAL_CONSTANTS v1.1 names ledger for the number-parse test and gate sources (input of tools/literal_constants.py
+# apply ... --kinds=number,char): the numbers and chars of M3NumberParseHexAtomsTest and M3HexParseDifferential.
+# member: 'm#k' = k-th occurrence of the literal in member m (source order) | 'm' | '*'. One name per role.
+class	member	literal	name	role
+M3NumberParseHexAtomsTest	affected	2	AFFECTED_STOCK_FIELD	Column of M3NumberParseHexAffected.tsv that holds the stock raw bits.
+M3NumberParseHexAtomsTest	affected	4	AFFECTED_DEFECT_FIELD	Column of M3NumberParseHexAffected.tsv that names the defect.
+M3NumberParseHexAtomsTest	generated	2	SHAPE_FLOAT_TIE	Case of Shape.FLOAT_TIE in the round robin over the shapes.
+M3NumberParseHexAtomsTest	generated	3	SHAPE_DOUBLE_BIT63	Case of Shape.DOUBLE_BIT63 in the round robin over the shapes.
+M3NumberParseHexAtomsTest	generated	4	SHAPE_FLOAT_BIT63	Case of Shape.FLOAT_BIT63 in the round robin over the shapes.
+M3NumberParseHexAtomsTest	generated	5	SHAPE_TRUNCATED_STICKY	Case of Shape.TRUNCATED_STICKY in the round robin over the shapes.
+M3NumberParseHexAtomsTest	halfway	2	TIE_VARIANT_BELOW	Variant BELOW_TIE: one below the halfway pattern.
+M3NumberParseHexAtomsTest	target	2	EDGE_WINDOW_SIDES	An edge window spans precision bits on both sides of the format's exponent limit.
+M3NumberParseHexAtomsTest	render	3	SIGN_KINDS	Sign spellings: none, plus, minus.
+M3NumberParseHexAtomsTest	render	'0'	HEX_PREFIX_ZERO	The 0 of the 0x prefix.
+M3NumberParseHexAtomsTest	render	'x'	HEX_INDICATOR_LOWER	Hex prefix letter, lower case.
+M3NumberParseHexAtomsTest	render	'X'	HEX_INDICATOR_UPPER	Hex prefix letter, upper case.
+M3NumberParseHexAtomsTest	render	'.'	HEX_POINT	The point of a hex significand.
+M3NumberParseHexAtomsTest	render	'p'	BINARY_EXPONENT_LOWER	Binary exponent indicator, lower case.
+M3NumberParseHexAtomsTest	render	'P'	BINARY_EXPONENT_UPPER	Binary exponent indicator, upper case.
+M3NumberParseHexAtomsTest	tie	2	TIE_EXTRA_DIGITS	Hex digits beyond the precision, so the halfway bits and a tail exist.
+M3NumberParseHexAtomsTest	clamped	2	LANDING_SIDES	The landing power is drawn on both sides of zero.
+M3NumberParseHexAtomsTest	*	5	MAX_REPORTED	Differences quoted in an assertion message.
+M3NumberParseHexAtomsTest	kernel#1	2	FLOAT_SEED_OFFSET	Seed offset of the float kernel test (the double kernel test uses 1).
+M3NumberParseHexAtomsTest	kernel#2	2	SHIFT_RANGE_DIVISOR	Random significands are shifted right by up to WORD_BITS / SHIFT_RANGE_DIVISOR bits.
+M3NumberParseHexAtomsTest	kernel#3	2	KERNEL_EXPONENT_HIGH_FACTOR	Kernel powers stay below KERNEL_EXPONENT_HIGH_FACTOR times the format's MAX_EXPONENT.
+M3NumberParseHexAtomsTest	kernel	-2	KERNEL_EXPONENT_LOW_FACTOR	Kernel powers start at KERNEL_EXPONENT_LOW_FACTOR times the format's MAX_EXPONENT.
+M3NumberParseHexAtomsTest	referee#1	2	HEX_GROUP_INTEGER	Group of the integer hex digits in HEX.
+M3NumberParseHexAtomsTest	referee	3	HEX_GROUP_FRACTION	Group of the fraction hex digits in HEX.
+M3NumberParseHexAtomsTest	referee	4	HEX_GROUP_EXPONENT	Group of the binary exponent in HEX.
+M3NumberParseHexAtomsTest	referee	2	REFEREE_CLAMP_FACTOR	The referee clamps the power at REFEREE_CLAMP_FACTOR times REFEREE_EXPONENT_LIMIT before the lead exponent.
+M3NumberParseHexAtomsTest	<init>#1	2	HEX_GROUP_INTEGER	Group of the integer hex digits in HEX.
+M3NumberParseHexAtomsTest	<init>	3	HEX_GROUP_FRACTION	Group of the fraction hex digits in HEX.
+M3NumberParseHexAtomsTest	<init>	2	COVERAGE_SHARE_DIVISOR	Each shape family holds more than perShape / (COVERAGE_SHARE_DIVISOR * TIE_VARIANTS) cases.
+M3NumberParseHexAtomsTest	truncatedSticky	'0'	TAIL_ZERO_DIGIT	A zero digit of the dropped tail.
+M3NumberParseHexAtomsTest	donorClamp	'0'	DIGIT_ZERO	First decimal digit; c - DIGIT_ZERO is the digit value.
+M3HexParseDifferential	main	48	OUTPUT_CHARS_PER_LINE	Initial capacity per output line of the diff mode.
+M3HexParseDifferential	main	2	BENCH_ROUNDS_ARGUMENT	Argument index of the bench rounds.
+M3HexParseDifferential	main	'\t'	FIELD_SEPARATOR	Separates the fields of an output line.
+M3HexParseDifferential	main	'\n'	LINE_END	Ends an output line.
+M3HexParseDifferential	toHexStrings	2	TO_HEX_CATEGORIES	Categories 0 and 1 of literal(): Double.toHexString and Float.toHexString.
+M3HexParseDifferential	literal#1	2	CATEGORY_RANDOM_A	First category of random significands (1 to MAX_DIGITS digits).
+M3HexParseDifferential	literal	3	CATEGORY_RANDOM_B	Second category of random significands (1 to MAX_DIGITS digits).
+M3HexParseDifferential	literal	4	CATEGORY_LONG	Category of long significands (MAX_DIGITS / 2 to MAX_DIGITS - 1 digits).
+M3HexParseDifferential	literal	5	CATEGORY_CLAMPED	Category of exponent numbers that the donor clamps.
+M3HexParseDifferential	literal	6	CATEGORY_NEAR_MISS	Category of near misses.
+M3HexParseDifferential	literal	2	MAX_DIGITS_DIVISOR	MAX_DIGITS / MAX_DIGITS_DIVISOR: lower bound and span of the long category, digit bound of the last one.
+M3HexParseDifferential	sign	3	SIGN_KINDS	Sign spellings: none, plus, minus.
+M3HexParseDifferential	hex	'x'	HEX_INDICATOR_LOWER	Hex prefix letter, lower case.
+M3HexParseDifferential	hex	'X'	HEX_INDICATOR_UPPER	Hex prefix letter, upper case.
+M3HexParseDifferential	hex	2	POINT_SLOTS_EXTRA	r.nextInt(digits + POINT_SLOTS_EXTRA): 0..digits places the point, digits + 1 leaves it out.
+M3HexParseDifferential	hex	'.'	HEX_POINT	The point of a hex significand.
+M3HexParseDifferential	clamped	2	LANDING_SIDES	The landing power is drawn on both sides of zero.
+M3HexParseDifferential	nearMiss	2	MAX_DIGITS_DIVISOR	MAX_DIGITS / MAX_DIGITS_DIVISOR: lower bound and span of the long category, digit bound of the last one.
+M3HexParseDifferential	nearMiss#1	3	MAX_EDITS	Up to this many random edits per near miss.
+M3HexParseDifferential	nearMiss#2	3	EDIT_KINDS	Edit kinds: insert, delete, replace.
+M3HexParseDifferential	donorClamp	'0'	DIGIT_ZERO	First decimal digit; ch - DIGIT_ZERO is the digit value.

@@ -51,6 +51,12 @@ class M3FastDoubleMath {
     private static final int LOW_TWO_BITS_MASK = 3;
     /** 2^64: corrects the signed conversion of an unsigned 64-bit significand. */
     private static final double TWO_POW_64 = 0x1p64;
+    //FLLDCIM: M3 - HEX_ROUTE v1: every hex literal takes the original FloatingDecimal path (PATTERN_ROUTES.tsv HEX_*)
+    /**
+     * True: {@link #tryHexFloatToDoubleTruncated} declines every hexadecimal literal, so the caller takes the original
+     * {@link FloatingDecimal} path, which rounds once (round and sticky bits) from an exact exponent.
+     */
+    private static final boolean HEX_LITERALS_TO_FLOATING_DECIMAL = true;
 
     /**
      * Bias used in the exponent of a double.
@@ -988,9 +994,17 @@ class M3FastDoubleMath {
      * @param exponentOfTruncatedSignificand the exponent number of the truncated significand
      * @return the double value,
      * or {@link Double#NaN} if the fast path failed.
+     * In java.base this fast path declines every literal ({@code HEX_LITERALS_TO_FLOATING_DECIMAL}).
      */
     static double tryHexFloatToDoubleTruncated(boolean isNegative, long significand, long exponent, boolean isSignificandTruncated,
                                                long exponentOfTruncatedSignificand) {
+        //FLLDCIM: M3 - HEX_ROUTE v1: decline (NaN), so results stay exactly the JDK's (PR #2215 contract). The donor body
+        // below rounds an unsigned significand >= 2^63 twice (signed cast, then + 2^64), ignores the digits a truncated
+        // significand dropped (no sticky bit), and gets an exponent the parser clamped at MAX_EXPONENT_NUMBER before it
+        // subtracted the fraction digits (0x.1p10240 -> 2^1020 instead of Infinity); tools/hex_defect_model.py
+        if (HEX_LITERALS_TO_FLOATING_DECIMAL) {
+            return Double.NaN;
+        }
         long power = isSignificandTruncated ? exponentOfTruncatedSignificand : exponent;
         if (DOUBLE_MIN_EXPONENT_POWER_OF_TWO <= power && power <= DOUBLE_MAX_EXPONENT_POWER_OF_TWO) {
             // Convert the significand into a double.

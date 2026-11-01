@@ -6,9 +6,11 @@
 # at High priority so other processes on the host disturb the timing less; -Affinity pins it to a logical-CPU mask
 # (on a hybrid CPU: the performance cores, so every run measures the same core type). Variant order alternates per
 # round (ABBA) so a run-order bias (the second JVM of a round on a warmer CPU) cancels. One row per atom per variant
-# per round.
+# per round, after the Synexia SPDX header ('#' lines; perf_gate.py skips them).
 param([string]$JavaBin, [string]$TestClasses, [string]$Out, [int]$Rounds, [string]$Variants, [string]$Affinity = '')
 $lines = New-Object System.Collections.Generic.List[string]
+$lines.Add('# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0')
+$lines.Add('# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others')
 $lines.Add("round`tvariant`tatom`tns_per_op_atom`tns_per_op_reference`tspeedup")
 for ($r = 1; $r -le $Rounds; $r++) {
     $order = $Variants.Split(',')

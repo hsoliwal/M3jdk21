@@ -84,6 +84,14 @@ abstract class M3AbstractJavaFloatingPointBitsFromCharSequence extends M3Abstrac
     private static final char INFINITY_CHAR_Y = 'y';
     /** Length of Infinity. */
     private static final int INFINITY_CHAR_COUNT = 8;
+    //FLLDCIM: M3 - DEC_EXPONENT_CLAMP v1: a decimal literal whose exponent number reached the clamp takes the original FloatingDecimal path (PATTERN_ROUTES.tsv DEC_EXPONENT_CLAMP)
+    /**
+     * Both exponents that {@link #parseDecFloatLiteral} passes on for a literal whose exponent number reached
+     * {@code MAX_EXPONENT_NUMBER}. It lies outside the decimal range of every kernel (double [-325, 308], float
+     * [-45, 38]), so the kernel declines (NaN) and {@code valueOfFloatLiteral} calls
+     * {@link FloatingDecimal#readJavaFormatString}.
+     */
+    private static final int DECLINED_EXPONENT = Integer.MIN_VALUE;
 
     /**
      * Skips optional white space in the provided string
@@ -133,6 +141,8 @@ abstract class M3AbstractJavaFloatingPointBitsFromCharSequence extends M3Abstrac
      * @param hasLeadingZero true if we have consumed the optional leading zero
      * @return the bit pattern of the parsed value, if the input is legal;
      * otherwise, {@code -1L}.
+     * In java.base a literal whose exponent number reaches {@code MAX_EXPONENT_NUMBER} is passed on with
+     * {@link #DECLINED_EXPONENT}, so the original {@link FloatingDecimal} path decides it (DEC_EXPONENT_CLAMP v1).
      */
     private long parseDecFloatLiteral(CharSequence str, int index, int startIndex, int endIndex, boolean isNegative, boolean hasLeadingZero) {
         // Parse significand
@@ -242,6 +252,15 @@ abstract class M3AbstractJavaFloatingPointBitsFromCharSequence extends M3Abstrac
         } else {
             isSignificandTruncated = false;
             exponentOfTruncatedSignificand = 0;
+        }
+        //FLLDCIM: M3 - DEC_EXPONENT_CLAMP v1: decline, so results stay exactly the JDK's (PR #2215 contract). The
+        // exponent loop stops accumulating digits once the exponent number reaches MAX_EXPONENT_NUMBER, and the digit
+        // counts (fraction digits; digits beyond the 19 the re-parse keeps) are added afterwards, so they can bring a
+        // clamped exponent back into range: "0." + 723 zeros + "1e10240" gave 1e300 and "1" + 1100 zeros + "e-10240"
+        // gave 1e76, where the JDK gives Infinity and 0.0
+        if (Math.abs(expNumber) >= M3AbstractFloatValueParser.MAX_EXPONENT_NUMBER) {
+            exponent = DECLINED_EXPONENT;
+            exponentOfTruncatedSignificand = DECLINED_EXPONENT;
         }
         return valueOfFloatLiteral(str, startIndex, endIndex, isNegative, significand, exponent, isSignificandTruncated,
                 exponentOfTruncatedSignificand);
