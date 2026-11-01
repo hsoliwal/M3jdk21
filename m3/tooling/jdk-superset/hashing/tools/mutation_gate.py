@@ -22,13 +22,44 @@ MUTANTS = [
     ("BYTE_ARRAY_BASE_ONE", "M3ByteArrayAccess.java", "static final long BYTE_BASE = 0L;",
      "static final long BYTE_BASE = 1L;"),
     ("CHECK_OFFS_NO_OVERFLOW", "M3Util.java", " || off + len < 0)", ")"),
-    ("CHARSEQ_LE_BYTE_SHIFT", "M3CharSequenceAccess.java", "return getUnsignedByte(input, offset, ((int) offset & 1) << 3);",
+    ("CHARSEQ_LE_BYTE_SHIFT", "M3CharSequenceAccess.java",
+     "return getUnsignedByte(input, offset, ((int) offset & 1) << BYTE_BITS_LOG2);",
      "return getUnsignedByte(input, offset, ((int) offset & 1) << 2);"),
     ("STRING_AS_LATIN1_BYTES", "M3LongHashFunction.java",
      "public long hashChars(String input) {\n        return hashNativeChars(input, 0, input.length());",
      "public long hashChars(String input) {\n        return hashBytes(input.getBytes(java.nio.charset.StandardCharsets.ISO_8859_1));"),
     ("MATHS_SIGNED_HIGH", "M3Maths.java", "return INSTANCE.unsignedLongMulHighImp(lhs, rhs);",
      "return Math.multiplyHigh(lhs, rhs);"),
+    # the three tuple String rewrites of STRING_INTERNALS_TO_CHARSEQ that no test reached before (review of #2232)
+    ("TUPLE_STRING_INTO_EMPTY", "M3LongTupleHashFunction.java",
+     "public void hashChars(final String input, final long[] result) {\n"
+     "        hashNativeChars(this, input, 0, input.length(), result);",
+     "public void hashChars(final String input, final long[] result) {\n"
+     "        hashNativeChars(this, input, 0, 0, result);"),
+    ("TUPLE_STRING_SLICE_INTO_EMPTY", "M3LongTupleHashFunction.java",
+     "public void hashChars(final String input, final int off, final int len, final long[] result) {\n"
+     "        checkArrayOffs(input.length(), off, len);\n"
+     "        hashNativeChars(this, input, off, len, result);",
+     "public void hashChars(final String input, final int off, final int len, final long[] result) {\n"
+     "        checkArrayOffs(input.length(), off, len);\n"
+     "        hashNativeChars(this, input, 0, 0, result);"),
+    ("TUPLE_STRING_SLICE_EMPTY", "M3LongTupleHashFunction.java",
+     "public long[] hashChars(final String input, final int off, final int len) {\n"
+     "        checkArrayOffs(input.length(), off, len);\n"
+     "        final long[] result = newResultArray();\n"
+     "        hashNativeChars(this, input, off, len, result);",
+     "public long[] hashChars(final String input, final int off, final int len) {\n"
+     "        checkArrayOffs(input.length(), off, len);\n"
+     "        final long[] result = newResultArray();\n"
+     "        hashNativeChars(this, input, 0, 0, result);"),
+    # FACADE_DROP_RAW_MEMORY v1's form: a direct buffer read through its limit instead of up to its capacity
+    ("DIRECT_BUFFER_LIMIT_BOUND", "M3LongHashFunction.java",
+     "return hash(input.duplicate().order(input.order()).limit(input.capacity()),\n"
+     "                    M3ByteBufferAccess.INSTANCE, off, len);",
+     "return hash(input, M3ByteBufferAccess.INSTANCE, off, len);"),
+    ("TUPLE_DIRECT_BUFFER_LIMIT_BOUND", "M3LongTupleHashFunction.java",
+     "f.hash(input.duplicate().order(input.order()).limit(input.capacity()), BYTE_BUF_ACCESS, off, len, result);",
+     "f.hash(input, BYTE_BUF_ACCESS, off, len, result);"),
 ]
 
 

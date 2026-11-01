@@ -24,21 +24,28 @@ import static java.nio.ByteOrder.LITTLE_ENDIAN;
 import static java.nio.ByteOrder.nativeOrder;
 
 final class M3Primitives {
+    //FLLDCIM: M3 - LITERAL_CONSTANTS v1.1: this class's magic literals, named by role (user rule: no magic numbers, no floating strings)
+    /** The low 32 bits: an int as an unsigned value. */
+    private static final long UNSIGNED_INT_MASK = 0xFFFFFFFFL;
+    /** The low 16 bits: a short as an unsigned value. */
+    private static final int UNSIGNED_SHORT_MASK = 0xFFFF;
+    /** The low 8 bits: a byte as an unsigned value. */
+    private static final int UNSIGNED_BYTE_MASK = 0xFF;
 
     private M3Primitives() {}
 
     static final boolean NATIVE_LITTLE_ENDIAN = nativeOrder() == LITTLE_ENDIAN;
 
     static long unsignedInt(int i) {
-        return i & 0xFFFFFFFFL;
+        return i & UNSIGNED_INT_MASK;
     }
 
     static int unsignedShort(int s) {
-        return s & 0xFFFF;
+        return s & UNSIGNED_SHORT_MASK;
     }
 
     static int unsignedByte(int b) {
-        return b & 0xFF;
+        return b & UNSIGNED_BYTE_MASK;
     }
 
     private static final ByteOrderHelper H2LE = NATIVE_LITTLE_ENDIAN ? new ByteOrderHelper() : new ByteOrderHelperReverse();
