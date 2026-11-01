@@ -35,6 +35,13 @@ final class DotStarOracle {
     /** Probability that a generated atom is starred / is a dot. */
     private static final double STAR_RATE = 0.4;
     private static final double DOT_RATE = 0.2;
+    //FLLDCIM: SFA - LITERAL GATE v1: the line terminators of java.util.regex '.' (no DOTALL), by Unicode name
+    /** U+0085 NEXT LINE (NEL). */
+    private static final int NEXT_LINE = 0x85;
+    /** U+2028 LINE SEPARATOR. */
+    private static final int LINE_SEPARATOR = 0x2028;
+    /** U+2029 PARAGRAPH SEPARATOR. */
+    private static final int PARAGRAPH_SEPARATOR = 0x2029;
 
     private static final Map<String, Pattern> COMPILED = new HashMap<>();
 
@@ -96,7 +103,8 @@ final class DotStarOracle {
     }
 
     static boolean lineTerminator(int codePoint) {
-        return codePoint == '\n' || codePoint == '\r' || codePoint == 0x85 || codePoint == 0x2028 || codePoint == 0x2029;
+        return codePoint == '\n' || codePoint == '\r' || codePoint == NEXT_LINE || codePoint == LINE_SEPARATOR
+                || codePoint == PARAGRAPH_SEPARATOR;
     }
 
     static boolean atomMatches(char atom, int codePoint) {

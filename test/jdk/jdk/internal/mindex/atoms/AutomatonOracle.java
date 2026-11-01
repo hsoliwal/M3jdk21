@@ -29,6 +29,13 @@ final class AutomatonOracle {
     static final int MAX_LENGTH = 5;
     /** Largest UTF-16 code unit label. */
     static final int MAX_LABEL = 0xFFFF;
+    //FLLDCIM: SFA - LITERAL GATE v1: the fields of a transition row are named, not indexed by literals
+    /** Index of the destination state in a transition row {dest, min, max} of {@link #transitions}. */
+    static final int DEST = 0;
+    /** Index of the smallest label of the range in a transition row. */
+    static final int MIN = 1;
+    /** Index of the largest label of the range in a transition row. */
+    static final int MAX = 2;
 
     private static final Map<String, Pattern> COMPILED = new HashMap<>();
 
@@ -59,8 +66,8 @@ final class AutomatonOracle {
             BitSet next = new BitSet();
             for (int s = states.nextSetBit(0); s >= 0; s = states.nextSetBit(s + 1)) {
                 for (int[] t : transitions(a, s)) {
-                    if (t[1] <= unit && unit <= t[2]) {
-                        next.set(t[0]);
+                    if (t[MIN] <= unit && unit <= t[MAX]) {
+                        next.set(t[DEST]);
                     }
                 }
             }
@@ -118,7 +125,7 @@ final class AutomatonOracle {
             int[][] ts = transitions(a, s);
             for (int i = 0; i < ts.length; i++) {
                 for (int j = i + 1; j < ts.length; j++) {
-                    if (ts[i][1] <= ts[j][2] && ts[j][1] <= ts[i][2]) {
+                    if (ts[i][MIN] <= ts[j][MAX] && ts[j][MIN] <= ts[i][MAX]) {
                         return false;
                     }
                 }
@@ -139,17 +146,17 @@ final class AutomatonOracle {
             transitions += ts.length;
             assertEquals(ts.length, a.getNumTransitions(s), "count of state " + s);
             for (int i = 0; i < ts.length; i++) {
-                assertTrue(ts[i][0] >= 0 && ts[i][0] < a.getNumStates(), "dest in range");
-                assertTrue(0 <= ts[i][1] && ts[i][1] <= ts[i][2] && ts[i][2] <= MAX_LABEL, "label range");
+                assertTrue(ts[i][DEST] >= 0 && ts[i][DEST] < a.getNumStates(), "dest in range");
+                assertTrue(0 <= ts[i][MIN] && ts[i][MIN] <= ts[i][MAX] && ts[i][MAX] <= MAX_LABEL, "label range");
                 if (i > 0) {
                     int[] p = ts[i - 1];
                     int[] q = ts[i];
-                    boolean ordered = p[1] < q[1] || p[1] == q[1] && (p[2] < q[2] || p[2] == q[2] && p[0] <= q[0]);
+                    boolean ordered = p[MIN] < q[MIN] || p[MIN] == q[MIN] && (p[MAX] < q[MAX] || p[MAX] == q[MAX] && p[DEST] <= q[DEST]);
                     assertTrue(ordered, "sorted by (min, max, dest) at state " + s);
                 }
                 for (int j = 0; j < ts.length; j++) {
-                    if (i != j && ts[i][0] == ts[j][0]) {
-                        assertTrue(ts[j][1] > ts[i][2] + 1 || ts[i][1] > ts[j][2] + 1,
+                    if (i != j && ts[i][DEST] == ts[j][DEST]) {
+                        assertTrue(ts[j][MIN] > ts[i][MAX] + 1 || ts[i][MIN] > ts[j][MAX] + 1,
                                 "merged ranges to one destination at state " + s);
                     }
                 }

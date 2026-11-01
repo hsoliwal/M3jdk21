@@ -25,35 +25,46 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 public class M3MemberKindAtomTest {
+    /** wire code of FIELD (frozen in the M3Class member table) */
+    private static final int FIELD_CODE = 0;
+    /** wire code of METHOD */
+    private static final int METHOD_CODE = 1;
+    /** wire code of CONSTRUCTOR */
+    private static final int CONSTRUCTOR_CODE = 2;
+    /** wire code of RECORD_COMPONENT, the last kind */
+    private static final int RECORD_COMPONENT_CODE = 3;
+    /** number of member kinds; also the first code past the last kind */
+    private static final int KIND_COUNT = 4;
+
     @TestFactory
     Stream<DynamicTest> atoms() {
         return Stream.of(
                 dynamicTest("M3MemberKind.M3MemberKind#1 SCENARIO", M3MemberKindAtomTest::M3MemberKind),
-                dynamicTest("M3MemberKind.code#1 SCENARIO", M3MemberKindAtomTest::code),
+                dynamicTest("M3MemberKind.code#1 GETTER_DIFF", M3MemberKindAtomTest::code),
                 dynamicTest("M3MemberKind.fromCode#1 SCENARIO", M3MemberKindAtomTest::fromCode));
     }
 
     /** M3MemberKind.M3MemberKind#1 SCENARIO; oracle: enum-constant-codes. */
     static void M3MemberKind() throws Throwable {
-        assertEquals(4, M3MemberKind.values().length);
+        assertEquals(KIND_COUNT, M3MemberKind.values().length);
         int expected = 0;
         for (M3MemberKind kind : M3MemberKind.values()) assertEquals(expected++, kind.code(), "code follows declaration order");
         assertEquals(M3MemberKind.RECORD_COMPONENT, M3MemberKind.valueOf("RECORD_COMPONENT"));
     }
 
-    /** M3MemberKind.code#1 SCENARIO; oracle: stable-wire-codes. */
+    /** M3MemberKind.code#1 GETTER_DIFF; oracle: stable-wire-codes. */
     static void code() throws Throwable {
-        assertEquals(0, M3MemberKind.FIELD.code());
-        assertEquals(1, M3MemberKind.METHOD.code());
-        assertEquals(2, M3MemberKind.CONSTRUCTOR.code());
-        assertEquals(3, M3MemberKind.RECORD_COMPONENT.code());
+        assertEquals(FIELD_CODE, M3MemberKind.FIELD.code());
+        assertEquals(METHOD_CODE, M3MemberKind.METHOD.code());
+        assertEquals(CONSTRUCTOR_CODE, M3MemberKind.CONSTRUCTOR.code());
+        assertEquals(RECORD_COMPONENT_CODE, M3MemberKind.RECORD_COMPONENT.code());
         assertEquals(EnumSet.allOf(M3MemberKind.class).size(), java.util.Arrays.stream(M3MemberKind.values()).mapToInt(M3MemberKind::code).distinct().count());
     }
 
     /** M3MemberKind.fromCode#1 SCENARIO; oracle: inverse-of-code. */
     static void fromCode() throws Throwable {
         for (M3MemberKind kind : M3MemberKind.values()) assertSame(kind, M3MemberKind.fromCode(kind.code()));
-        for (int bad : new int[] {-1, 4, Integer.MAX_VALUE}) {
+        for (int bad : new int[] {-1, KIND_COUNT, Integer.MAX_VALUE}) {
             M3AtomKit.expectMessage(IllegalArgumentException.class, "unknown member kind: " + bad, () -> M3MemberKind.fromCode(bad));
         }
     }

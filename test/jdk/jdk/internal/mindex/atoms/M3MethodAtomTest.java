@@ -32,14 +32,14 @@ public class M3MethodAtomTest {
     Stream<DynamicTest> atoms() {
         return Stream.of(
                 dynamicTest("M3Method.M3Method#1 SCENARIO", M3MethodAtomTest::M3Method),
-                dynamicTest("M3Method.isSynthetic#1 SCENARIO", M3MethodAtomTest::isSynthetic),
-                dynamicTest("M3Method.isVarArgs#1 SCENARIO", M3MethodAtomTest::isVarArgs),
-                dynamicTest("M3Method.isDefault#1 SCENARIO", M3MethodAtomTest::isDefault),
-                dynamicTest("M3Method.annotationCount#1 SCENARIO", M3MethodAtomTest::annotationCount),
-                dynamicTest("M3Method.annotationTypeNameAt#1 SCENARIO", M3MethodAtomTest::annotationTypeNameAt),
-                dynamicTest("M3Method.exceptionCount#1 SCENARIO", M3MethodAtomTest::exceptionCount),
+                dynamicTest("M3Method.isSynthetic#1 MEMBER_VIEW_DIFF", M3MethodAtomTest::isSynthetic),
+                dynamicTest("M3Method.isVarArgs#1 MEMBER_VIEW_DIFF", M3MethodAtomTest::isVarArgs),
+                dynamicTest("M3Method.isDefault#1 MEMBER_VIEW_DIFF", M3MethodAtomTest::isDefault),
+                dynamicTest("M3Method.annotationCount#1 MEMBER_VIEW_DIFF", M3MethodAtomTest::annotationCount),
+                dynamicTest("M3Method.annotationTypeNameAt#1 MEMBER_ANNOTATION_NAMES", M3MethodAtomTest::annotationTypeNameAt),
+                dynamicTest("M3Method.exceptionCount#1 MEMBER_VIEW_DIFF", M3MethodAtomTest::exceptionCount),
                 dynamicTest("M3Method.exceptionTypeDescriptorAt#1 SCENARIO", M3MethodAtomTest::exceptionTypeDescriptorAt),
-                dynamicTest("M3Method.structuralHash64#1 SCENARIO", M3MethodAtomTest::structuralHash64));
+                dynamicTest("M3Method.structuralHash64#1 MEMBER_VIEW_DIFF", M3MethodAtomTest::structuralHash64));
     }
 
     /** M3Method.M3Method#1 SCENARIO; oracle: kind-checked-constructor. */
@@ -49,27 +49,27 @@ public class M3MethodAtomTest {
         M3AtomKit.expectMessage(IllegalArgumentException.class, "not a method", () -> NEW.invoke(CI, other));
     }
 
-    /** M3Method.isSynthetic#1 SCENARIO; oracle: Method.isSynthetic. */
+    /** M3Method.isSynthetic#1 MEMBER_VIEW_DIFF; oracle: Method.isSynthetic. */
     static void isSynthetic() throws Throwable {
         each((member, d) -> assertEquals(reflective(d).isSynthetic(), view(member).isSynthetic(), d.toString()));
     }
 
-    /** M3Method.isVarArgs#1 SCENARIO; oracle: Method.isVarArgs. */
+    /** M3Method.isVarArgs#1 MEMBER_VIEW_DIFF; oracle: Method.isVarArgs. */
     static void isVarArgs() throws Throwable {
         each((member, d) -> assertEquals(reflective(d).isVarArgs(), view(member).isVarArgs(), d.toString()));
     }
 
-    /** M3Method.isDefault#1 SCENARIO; oracle: Method.isDefault. */
+    /** M3Method.isDefault#1 MEMBER_VIEW_DIFF; oracle: Method.isDefault. */
     static void isDefault() throws Throwable {
         each((member, d) -> assertEquals(reflective(d).isDefault(), view(member).isDefault(), d.toString()));
     }
 
-    /** M3Method.annotationCount#1 SCENARIO; oracle: getDeclaredAnnotations. */
+    /** M3Method.annotationCount#1 MEMBER_VIEW_DIFF; oracle: getDeclaredAnnotations. */
     static void annotationCount() throws Throwable {
         each((member, d) -> assertEquals(reflective(d).getDeclaredAnnotations().length, view(member).annotationCount(), d.toString()));
     }
 
-    /** M3Method.annotationTypeNameAt#1 SCENARIO; oracle: getDeclaredAnnotations(type-names). */
+    /** M3Method.annotationTypeNameAt#1 MEMBER_ANNOTATION_NAMES; oracle: getDeclaredAnnotations(type-names). */
     static void annotationTypeNameAt() throws Throwable {
         each((member, d) -> {
             TreeSet<String> got = new TreeSet<>();
@@ -78,7 +78,7 @@ public class M3MethodAtomTest {
         });
     }
 
-    /** M3Method.exceptionCount#1 SCENARIO; oracle: Method.getExceptionTypes. */
+    /** M3Method.exceptionCount#1 MEMBER_VIEW_DIFF; oracle: Method.getExceptionTypes. */
     static void exceptionCount() throws Throwable {
         each((member, d) -> assertEquals(reflective(d).getExceptionTypes().length, view(member).exceptionCount()));
     }
@@ -91,7 +91,7 @@ public class M3MethodAtomTest {
         });
     }
 
-    /** M3Method.structuralHash64#1 SCENARIO; oracle: delegates-to-M3CI. */
+    /** M3Method.structuralHash64#1 MEMBER_VIEW_DIFF; oracle: delegates-to-M3CI. */
     static void structuralHash64() throws Throwable {
         each((member, d) -> assertEquals(CI.memberStructuralHash64(member), view(member).structuralHash64()));
     }

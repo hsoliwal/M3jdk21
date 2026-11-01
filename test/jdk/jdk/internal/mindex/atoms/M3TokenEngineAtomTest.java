@@ -35,6 +35,47 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 public class M3TokenEngineAtomTest {
+    /** token position after the prefix "a" (one letter per token) */
+    private static final int AFTER_A = 1;
+    /** token position after the prefix "aa" */
+    private static final int AFTER_AA = 2;
+    /** token position after the tape "aaa" */
+    private static final int AFTER_AAA = 3;
+    /** token position after the prefix "ab" */
+    private static final int AFTER_AB = 2;
+    /** token position after the prefix "aba" */
+    private static final int AFTER_ABA = 3;
+    /** token position after the tape "abc" */
+    private static final int AFTER_ABC = 3;
+    /** token position after the tape "abab" */
+    private static final int AFTER_ABAB = 4;
+    /** register slot of the start of group 1 */
+    private static final int GROUP_START = 2;
+    /** register slot of the end of group 1 */
+    private static final int GROUP_END = 3;
+    /** distinct values of one MODEL_STRIDE register lane */
+    private static final int[] MODEL_REGISTERS = {1, 2, 3, 4, 5, 6};
+    /** MODEL_REGISTERS reversed */
+    private static final int[] REVERSED_REGISTERS = {6, 5, 4, 3, 2, 1};
+    /** endpoint added by addModified */
+    private static final int MODIFIED_POSITION = 7;
+    /** register slot addModified rewrites */
+    private static final int MODIFIED_SLOT = 4;
+    /** value addModified writes into MODIFIED_SLOT */
+    private static final int MODIFIED_VALUE = 99;
+    /** endpoint both sets of the union hold */
+    private static final int SHARED_END = 5;
+    /** endpoint only the right set holds */
+    private static final int RIGHT_ONLY_END = 3;
+    /** start register of the right set's copy of SHARED_END; the left copy wins */
+    private static final int RIGHT_START = 2;
+    /** destination words beyond MODEL_STRIDE */
+    private static final int WIDE_EXTRA = 2;
+    /** registers of a match [0, 2) whose group did not participate */
+    private static final int[] MATCH_REGISTERS = {0, 2, -1, -1};
+    /** value written into a supplied or returned array; must not reach the result */
+    private static final int CLOBBER = 9;
+
     @TestFactory
     Stream<DynamicTest> atoms() {
         return Stream.of(
@@ -103,7 +144,7 @@ public class M3TokenEngineAtomTest {
         MethodHandle searchFrom = ev("searchFrom", MethodType.methodType(int.class));
         assertEquals(0, (int) searchFrom.invoke(engine));
         findMode(engine, M3TokenMatcher.FIND_NEXT);
-        assertEquals(tape.significant()[2], (int) searchFrom.invoke(engine), "raw token after the first match");
+        assertEquals(tape.significant()[AFTER_AB], (int) searchFrom.invoke(engine), "raw token after the first match");
         findMode(engine, M3TokenMatcher.FIND_NEXT);
         assertNull(findMode(engine, M3TokenMatcher.FIND_NEXT));
         assertEquals(tape.index().count(), (int) searchFrom.invoke(engine), "exhausted: one past the last raw token");
@@ -130,9 +171,9 @@ public class M3TokenEngineAtomTest {
         TokenRegexOracle.Tape tape = TokenRegexOracle.tape("aaa", false);
         Object all = engine("a+", tape, false);
         Object next = engine("a+", tape, false);
-        assertArrayEquals(new int[] {0, 3}, regs(findMode(all, M3TokenMatcher.FIND_ALL_SPANS)));
-        assertArrayEquals(new int[] {0, 2}, regs(findMode(all, M3TokenMatcher.FIND_ALL_SPANS)), "every span of start 0");
-        assertArrayEquals(new int[] {0, 3}, regs(findMode(next, M3TokenMatcher.FIND_NEXT)));
+        assertArrayEquals(new int[] {0, AFTER_AAA}, regs(findMode(all, M3TokenMatcher.FIND_ALL_SPANS)));
+        assertArrayEquals(new int[] {0, AFTER_AA}, regs(findMode(all, M3TokenMatcher.FIND_ALL_SPANS)), "every span of start 0");
+        assertArrayEquals(new int[] {0, AFTER_AAA}, regs(findMode(next, M3TokenMatcher.FIND_NEXT)));
         assertNull(regs(findMode(next, M3TokenMatcher.FIND_NEXT)), "continues after the previous end");
     }
 
@@ -268,7 +309,7 @@ public class M3TokenEngineAtomTest {
         int alt = compiled.nodeX(group);
         MethodHandle atom = ev("alternative", MethodType.methodType(STATES, int.class, int.class, int[].class));
         assertEquals(M3TokenPattern.N_ALT, compiled.nodeOp(alt));
-        assertArrayEquals(new int[] {2, 1, 3}, positions(atom.invoke(engine, alt, 0, fill(stride(pattern)))), "branches in written order");
+        assertArrayEquals(new int[] {AFTER_AB, AFTER_A, AFTER_ABC}, positions(atom.invoke(engine, alt, 0, fill(stride(pattern)))), "branches in written order");
         int[] shared = fill(stride(pattern));
         int[] before = shared.clone();
         atom.invoke(engine, alt, 0, shared);
@@ -292,9 +333,9 @@ public class M3TokenEngineAtomTest {
         int node = M3TokenPattern.compile(pattern).rootNode();
         MethodHandle atom = ev("sequence", MethodType.methodType(STATES, int.class, int.class, int[].class));
         assertEquals(M3TokenPattern.N_SEQ, M3TokenPattern.compile(pattern).nodeOp(node));
-        assertArrayEquals(new int[] {2}, positions(atom.invoke(engine, node, 0, fill(NO_GROUP_STRIDE))));
+        assertArrayEquals(new int[] {AFTER_AB}, positions(atom.invoke(engine, node, 0, fill(NO_GROUP_STRIDE))));
         assertArrayEquals(new int[0], positions(atom.invoke(engine, node, 1, fill(NO_GROUP_STRIDE))), "stops at the first empty step");
-        assertArrayEquals(new int[] {4}, positions(atom.invoke(engine, node, 2, fill(NO_GROUP_STRIDE))));
+        assertArrayEquals(new int[] {AFTER_ABAB}, positions(atom.invoke(engine, node, AFTER_AB, fill(NO_GROUP_STRIDE))));
     }
 
     /** M3TokenEngine.group#1 SCENARIO; oracle: capture-slots. */
@@ -306,10 +347,10 @@ public class M3TokenEngineAtomTest {
         int node = M3TokenPattern.compile(pattern).rootNode();
         MethodHandle atom = ev("group", MethodType.methodType(STATES, int.class, int.class, int[].class));
         Object out = atom.invoke(engine, node, 0, fill(stride(pattern)));
-        assertArrayEquals(new int[] {2}, positions(out));
+        assertArrayEquals(new int[] {AFTER_AB}, positions(out));
         int[] registers = stateRegisters(out, 0, stride(pattern));
-        assertEquals(0, registers[2], "group start slot");
-        assertEquals(2, registers[3], "group end slot");
+        assertEquals(0, registers[GROUP_START], "group start slot");
+        assertEquals(AFTER_AB, registers[GROUP_END], "group end slot");
         assertArrayEquals(new int[0], positions(atom.invoke(engine, node, 1, fill(stride(pattern)))));
     }
 
@@ -337,8 +378,8 @@ public class M3TokenEngineAtomTest {
         MethodHandle add = sv("add", MethodType.methodType(void.class, int.class, int[].class));
         int node = M3TokenPattern.compile("b").rootNode();
         Object input = stateSet(tape.letters().length() + 1, NO_GROUP_STRIDE);
-        for (int position : new int[] {3, 1, 0}) add.invoke(input, position, fill(NO_GROUP_STRIDE));
-        assertArrayEquals(new int[] {4, 2}, positions(atom.invoke(engine, node, input)), "input order, failures dropped");
+        for (int position : new int[] {AFTER_ABA, AFTER_A, 0}) add.invoke(input, position, fill(NO_GROUP_STRIDE));
+        assertArrayEquals(new int[] {AFTER_ABAB, AFTER_AB}, positions(atom.invoke(engine, node, input)), "input order, failures dropped");
     }
 
     /** M3TokenEngine.result#1 SCENARIO; oracle: raw-projection+geometry. */
@@ -348,16 +389,16 @@ public class M3TokenEngineAtomTest {
         MethodHandle atom = ev("result", MethodType.methodType(RESULT, int.class, int.class, STATES, int.class));
         MethodHandle add = sv("add", MethodType.methodType(void.class, int.class, int[].class));
         Object states = stateSet(tape.letters().length() + 1, stride("(?<x> a) b"));
-        add.invoke(states, 2, new int[] {-1, -1, 0, 1});
-        int[] r = regs(atom.invoke(engine, 0, 2, states, 0));
+        add.invoke(states, AFTER_AB, new int[] {-1, -1, 0, 1});
+        int[] r = regs(atom.invoke(engine, 0, AFTER_AB, states, 0));
         int[] raw = tape.significant();
         assertArrayEquals(new int[] {raw[0], raw[1] + 1, raw[0], raw[0] + 1}, r, "projected back to raw tokens");
         Object empty = stateSet(tape.letters().length() + 1, stride("(?<x> a) b"));
         add.invoke(empty, 1, new int[] {-1, -1, 1, 1});
-        assertArrayEquals(new int[] {raw[0], raw[1] + 1, raw[1], raw[1]}, regs(atom.invoke(engine, 0, 2, empty, 0)), "empty group at a boundary");
+        assertArrayEquals(new int[] {raw[0], raw[1] + 1, raw[1], raw[1]}, regs(atom.invoke(engine, 0, AFTER_AB, empty, 0)), "empty group at a boundary");
         Object bad = stateSet(tape.letters().length() + 1, stride("(?<x> a) b"));
-        add.invoke(bad, 1, new int[] {-1, -1, 2, 1});
-        M3AtomKit.expectMessage(IllegalStateException.class, "capture geometry", () -> atom.invoke(engine, 0, 2, bad, 0));
+        add.invoke(bad, 1, new int[] {-1, -1, AFTER_AB, AFTER_A});
+        M3AtomKit.expectMessage(IllegalStateException.class, "capture geometry", () -> atom.invoke(engine, 0, AFTER_AB, bad, 0));
     }
 
     /** M3TokenEngine.rawToken#1 SCENARIO; oracle: significant-lane. */
@@ -387,7 +428,7 @@ public class M3TokenEngineAtomTest {
         MethodHandle atom = ev("states", MethodType.methodType(STATES));
         Object first = atom.invoke(engine);
         assertEquals(0, (int) COUNT.invoke(first));
-        assertEquals(4, (int) M3AtomKit.findGetter(STATES, "endpointCount", int.class).invoke(first), "one endpoint per boundary");
+        assertEquals(AFTER_ABC + 1, (int) M3AtomKit.findGetter(STATES, "endpointCount", int.class).invoke(first), "one endpoint per boundary");
         assertEquals(stride("(?<x> a)"), (int) M3AtomKit.findGetter(STATES, "stride", int.class).invoke(first));
         assertNotSame(first, atom.invoke(engine));
     }
@@ -437,11 +478,13 @@ public class M3TokenEngineAtomTest {
     static void StateSet_addModified() throws Throwable {
         MethodHandle atom = sv("addModified", MethodType.methodType(void.class, int.class, int[].class, int.class, int.class));
         Object set = stateSet(HEAVY_TAPE + 1, MODEL_STRIDE);
-        int[] source = {1, 2, 3, 4, 5, 6};
-        atom.invoke(set, 7, source, 4, 99);
-        assertArrayEquals(new int[] {1, 2, 3, 4, 99, 6}, stateRegisters(set, 0, MODEL_STRIDE));
-        assertArrayEquals(new int[] {1, 2, 3, 4, 5, 6}, source, "source not modified");
-        M3AtomKit.expect(IndexOutOfBoundsException.class, () -> atom.invoke(set, 8, source, MODEL_STRIDE, 0));
+        int[] source = MODEL_REGISTERS.clone();
+        atom.invoke(set, MODIFIED_POSITION, source, MODIFIED_SLOT, MODIFIED_VALUE);
+        int[] expected = MODEL_REGISTERS.clone();
+        expected[MODIFIED_SLOT] = MODIFIED_VALUE;
+        assertArrayEquals(expected, stateRegisters(set, 0, MODEL_STRIDE));
+        assertArrayEquals(MODEL_REGISTERS, source, "source not modified");
+        M3AtomKit.expect(IndexOutOfBoundsException.class, () -> atom.invoke(set, MODIFIED_POSITION + 1, source, MODEL_STRIDE, 0));
     }
 
     /** M3TokenEngine.StateSet.addAll#1 SCENARIO; oracle: ordered-union(first-wins). */
@@ -450,13 +493,13 @@ public class M3TokenEngineAtomTest {
         MethodHandle addAll = sv("addAll", MethodType.methodType(void.class, STATES));
         Object left = stateSet(HEAVY_TAPE + 1, NO_GROUP_STRIDE);
         Object right = stateSet(HEAVY_TAPE + 1, NO_GROUP_STRIDE);
-        add.invoke(left, 5, new int[] {0, 5});
-        add.invoke(right, 3, new int[] {1, 3});
-        add.invoke(right, 5, new int[] {2, 5});
+        add.invoke(left, SHARED_END, new int[] {0, SHARED_END});
+        add.invoke(right, RIGHT_ONLY_END, new int[] {1, RIGHT_ONLY_END});
+        add.invoke(right, SHARED_END, new int[] {RIGHT_START, SHARED_END});
         addAll.invoke(left, right);
-        assertArrayEquals(new int[] {5, 3}, positions(left));
-        assertArrayEquals(new int[] {0, 5}, stateRegisters(left, 0, NO_GROUP_STRIDE), "existing endpoint keeps its registers");
-        assertArrayEquals(new int[] {1, 3}, stateRegisters(left, 1, NO_GROUP_STRIDE));
+        assertArrayEquals(new int[] {SHARED_END, RIGHT_ONLY_END}, positions(left));
+        assertArrayEquals(new int[] {0, SHARED_END}, stateRegisters(left, 0, NO_GROUP_STRIDE), "existing endpoint keeps its registers");
+        assertArrayEquals(new int[] {1, RIGHT_ONLY_END}, stateRegisters(left, 1, NO_GROUP_STRIDE));
     }
 
     /** M3TokenEngine.StateSet.copyRegisters#1 SCENARIO; oracle: bounds+destination-size. */
@@ -464,10 +507,10 @@ public class M3TokenEngineAtomTest {
         MethodHandle add = sv("add", MethodType.methodType(void.class, int.class, int[].class));
         MethodHandle copy = sv("copyRegisters", MethodType.methodType(void.class, int.class, int[].class));
         Object set = stateSet(HEAVY_TAPE + 1, MODEL_STRIDE);
-        add.invoke(set, 1, new int[] {6, 5, 4, 3, 2, 1});
-        int[] wide = new int[MODEL_STRIDE + 2];
+        add.invoke(set, 1, REVERSED_REGISTERS.clone());
+        int[] wide = new int[MODEL_STRIDE + WIDE_EXTRA];
         copy.invoke(set, 0, wide);
-        assertArrayEquals(new int[] {6, 5, 4, 3, 2, 1, 0, 0}, wide, "a larger destination keeps its tail");
+        assertArrayEquals(Arrays.copyOf(REVERSED_REGISTERS, MODEL_STRIDE + WIDE_EXTRA), wide, "a larger destination keeps its tail");
         M3AtomKit.expectMessage(IllegalArgumentException.class, "too small", () -> copy.invoke(set, 0, new int[MODEL_STRIDE - 1]));
         M3AtomKit.expect(IndexOutOfBoundsException.class, () -> copy.invoke(set, 1, new int[MODEL_STRIDE]));
     }
@@ -488,13 +531,13 @@ public class M3TokenEngineAtomTest {
     /** M3TokenEngine.Result.registers#1 SCENARIO; oracle: defensive-copies. */
     static void Result_registers() throws Throwable {
         MethodHandle ctor = M3AtomKit.findConstructor(RESULT, MethodType.methodType(void.class, int[].class));
-        int[] source = {0, 2, -1, -1};
+        int[] source = MATCH_REGISTERS.clone();
         Object result = ctor.invoke(source);
-        source[0] = 9;
+        source[0] = CLOBBER;
         int[] first = (int[]) REGISTERS.invoke(result);
-        assertArrayEquals(new int[] {0, 2, -1, -1}, first, "construction copies");
-        first[1] = 9;
-        assertArrayEquals(new int[] {0, 2, -1, -1}, (int[]) REGISTERS.invoke(result), "accessor copies");
+        assertArrayEquals(MATCH_REGISTERS, first, "construction copies");
+        first[1] = CLOBBER;
+        assertArrayEquals(MATCH_REGISTERS, (int[]) REGISTERS.invoke(result), "accessor copies");
         M3AtomKit.expectMessage(NullPointerException.class, "registers", () -> ctor.invoke((int[]) null));
     }
 
@@ -514,6 +557,8 @@ public class M3TokenEngineAtomTest {
     /** Register stride of a pattern without groups, and the stride used by the StateSet model checks. */
     private static final int NO_GROUP_STRIDE = 2;
     private static final int MODEL_STRIDE = 6;
+    /** Registers per group: its start and its end. */
+    private static final int REGISTERS_PER_GROUP = 2;
     /** Tape length that exhausts the work budget of a nested-repetition pattern. */
     private static final int HEAVY_TAPE = 60;
 
@@ -555,10 +600,10 @@ public class M3TokenEngineAtomTest {
 
     /** Registers of a Java match: (start, end) of every group, -1 when it did not participate. */
     private static int[] javaRegisters(Matcher m) {
-        int[] out = new int[2 * (m.groupCount() + 1)];
+        int[] out = new int[REGISTERS_PER_GROUP * (m.groupCount() + 1)];
         for (int g = 0; g <= m.groupCount(); g++) {
-            out[2 * g] = m.start(g);
-            out[2 * g + 1] = m.end(g);
+            out[REGISTERS_PER_GROUP * g] = m.start(g);
+            out[REGISTERS_PER_GROUP * g + 1] = m.end(g);
         }
         return out;
     }
@@ -570,7 +615,7 @@ public class M3TokenEngineAtomTest {
     }
 
     private static int stride(String pattern) {
-        return 2 * (M3TokenPattern.compile(pattern).groupCount() + 1);
+        return REGISTERS_PER_GROUP * (M3TokenPattern.compile(pattern).groupCount() + 1);
     }
 
     /** Ends e such that the pattern matches exactly [start, e). */

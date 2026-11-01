@@ -27,6 +27,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 public class M3MemberAtomTest {
+    /** multiplier of M3Member.hashCode: 31 * identityHashCode(owner) + row */
+    private static final int HASH_MULTIPLIER = 31;
+
     @TestFactory
     Stream<DynamicTest> atoms() {
         return Stream.of(
@@ -34,12 +37,12 @@ public class M3MemberAtomTest {
                 dynamicTest("M3Member.owner#1 SCENARIO", M3MemberAtomTest::owner),
                 dynamicTest("M3Member.row#1 SCENARIO", M3MemberAtomTest::row),
                 dynamicTest("M3Member.declaringClass#1 SCENARIO", M3MemberAtomTest::declaringClass),
-                dynamicTest("M3Member.modifiers#1 SCENARIO", M3MemberAtomTest::modifiers),
-                dynamicTest("M3Member.flags#1 SCENARIO", M3MemberAtomTest::flags),
+                dynamicTest("M3Member.modifiers#1 MEMBER_ROW_DIFF", M3MemberAtomTest::modifiers),
+                dynamicTest("M3Member.flags#1 MEMBER_ROW_DIFF", M3MemberAtomTest::flags),
                 dynamicTest("M3Member.hasFlag#1 SCENARIO", M3MemberAtomTest::hasFlag),
-                dynamicTest("M3Member.annotationCount#1 SCENARIO", M3MemberAtomTest::annotationCount),
+                dynamicTest("M3Member.annotationCount#1 MEMBER_ROW_DIFF", M3MemberAtomTest::annotationCount),
                 dynamicTest("M3Member.annotationTypeNameAt#1 SCENARIO", M3MemberAtomTest::annotationTypeNameAt),
-                dynamicTest("M3Member.exceptionCount#1 SCENARIO", M3MemberAtomTest::exceptionCount),
+                dynamicTest("M3Member.exceptionCount#1 MEMBER_ROW_DIFF", M3MemberAtomTest::exceptionCount),
                 dynamicTest("M3Member.exceptionTypeDescriptorAt#1 SCENARIO", M3MemberAtomTest::exceptionTypeDescriptorAt),
                 dynamicTest("M3Member.structuralHash64#1 SCENARIO", M3MemberAtomTest::structuralHash64),
                 dynamicTest("M3Member.tryReflectiveElement#1 SCENARIO", M3MemberAtomTest::tryReflectiveElement),
@@ -74,12 +77,12 @@ public class M3MemberAtomTest {
         });
     }
 
-    /** M3Member.modifiers#1 SCENARIO; oracle: Member.getModifiers. */
+    /** M3Member.modifiers#1 MEMBER_ROW_DIFF; oracle: Member.getModifiers. */
     static void modifiers() throws Throwable {
         all((member, d) -> assertEquals(ReflectOracle.modifiers(d.element()), CI.memberAt(member).modifiers(), d.toString()));
     }
 
-    /** M3Member.flags#1 SCENARIO; oracle: M3MemberFlags.of(reflective). */
+    /** M3Member.flags#1 MEMBER_ROW_DIFF; oracle: M3MemberFlags.of(reflective). */
     static void flags() throws Throwable {
         all((member, d) -> assertEquals(ReflectOracle.memberFlags(d.element()), CI.memberAt(member).flags(), d.toString()));
     }
@@ -92,7 +95,7 @@ public class M3MemberAtomTest {
         });
     }
 
-    /** M3Member.annotationCount#1 SCENARIO; oracle: getDeclaredAnnotations. */
+    /** M3Member.annotationCount#1 MEMBER_ROW_DIFF; oracle: getDeclaredAnnotations. */
     static void annotationCount() throws Throwable {
         all((member, d) -> assertEquals(ReflectOracle.annotationNames(d.element()).size(), CI.memberAt(member).annotationCount(), d.toString()));
     }
@@ -106,7 +109,7 @@ public class M3MemberAtomTest {
         });
     }
 
-    /** M3Member.exceptionCount#1 SCENARIO; oracle: Executable.getExceptionTypes. */
+    /** M3Member.exceptionCount#1 MEMBER_ROW_DIFF; oracle: Executable.getExceptionTypes. */
     static void exceptionCount() throws Throwable {
         all((member, d) -> assertEquals(ReflectOracle.exceptionDescriptors(d.element()).size(), CI.memberAt(member).exceptionCount(), d.toString()));
     }
@@ -150,7 +153,7 @@ public class M3MemberAtomTest {
         M3CI other = ReflectOracle.snapshot();
         for (int m = 0; m < CI.memberSize(); m++) {
             assertEquals(CI.memberAt(m).hashCode(), CI.memberAt(m).hashCode());
-            assertEquals(31 * System.identityHashCode(CI) + m, CI.memberAt(m).hashCode());
+            assertEquals(HASH_MULTIPLIER * System.identityHashCode(CI) + m, CI.memberAt(m).hashCode());
             assertTrue(CI.memberAt(m).equals(CI.memberAt(m)));
             assertFalse(CI.memberAt(m).equals(other.memberAt(m)), "views of different snapshots differ");
         }

@@ -25,6 +25,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 public class M3StateRelationAtomTest {
+    /** active set {0, 1, 2}: every row of SATURATING_ROWS */
+    private static final long FIRST_THREE_STATES = 0b111L;
+    /** rows whose union saturates at row 0 (all states), so the ceiling stops the scan */
+    private static final long[] SATURATING_ROWS = {-1L, 1L, 2L};
+
     @TestFactory
     Stream<DynamicTest> atoms() {
         return Stream.of(
@@ -86,8 +91,8 @@ public class M3StateRelationAtomTest {
             assertEquals(union(rows, active), (long) atom.invokeExact(p, PAD, active, ceiling),
                     "ceiling-bounded union equals the full union");
         }
-        long[] saturating = {-1L, 1L, 2L};
-        assertEquals(-1L, (long) atom.invokeExact(saturating, 0, 0b111L, -1L), "stops at the ceiling");
+        long[] saturating = SATURATING_ROWS.clone();
+        assertEquals(-1L, (long) atom.invokeExact(saturating, 0, FIRST_THREE_STATES, -1L), "stops at the ceiling");
     }
 
     /** M3StateRelation.composeNative#1 NATIVE_LANE; oracle: RelationOracle.compose. */
@@ -126,11 +131,13 @@ public class M3StateRelationAtomTest {
     private static final double[] DENSITIES = {0.05, 0.3, 0.7};
     /** Padding words around every row block (offsets must be honoured exactly). */
     private static final int PAD = 3;
+    /** Words of a padded block beyond its rows: PAD before and PAD after. */
+    private static final int PAD_WORDS = 2 * PAD;
     /** Fill of the padding words; must survive every call. */
     private static final long FILL = 0x5A5A5A5A5A5A5A5AL;
 
     private static long[] padded(long[] rows) {
-        long[] out = new long[rows.length + 2 * PAD];
+        long[] out = new long[rows.length + PAD_WORDS];
         Arrays.fill(out, FILL);
         System.arraycopy(rows, 0, out, PAD, rows.length);
         return out;
@@ -154,7 +161,7 @@ public class M3StateRelationAtomTest {
             double density = DENSITIES[c % DENSITIES.length];
             long[] left = RelationOracle.randomRelation(random, states, density);
             long[] right = RelationOracle.randomRelation(random, states, density);
-            if (c % 2 == 1 && states > 1) {
+            if (c % M3AtomKit.PARITY == 1 && states > 1) {
                 left[1] = left[0];
             }
             long[] l = padded(left);

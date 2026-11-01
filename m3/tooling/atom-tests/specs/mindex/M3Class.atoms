@@ -6,6 +6,7 @@
 #summary Per-atom contracts of jdk.internal.mindex.M3Class against java.lang.Class
 #build ReflectOracle
 #import jdk.internal.mindex.M3CI jdk.internal.mindex.M3Class jdk.internal.mindex.M3ClassFlags jdk.internal.mindex.M3Constructor jdk.internal.mindex.M3Field jdk.internal.mindex.M3Method java.lang.annotation.Annotation java.lang.reflect.Field java.util.Arrays java.util.HashSet java.util.List java.util.Map java.util.Optional java.util.Set
+#const int SHAPE_IMPLEMENTATIONS = 2 // Circle and Square, the ReflectOracle classes implementing Shape
 #helper <<<
     private static final M3CI CI = ReflectOracle.snapshot();
     private static final Class<?>[] CLASSES = ReflectOracle.classes(CI);
@@ -42,30 +43,20 @@ M3AtomKit.expect(IndexOutOfBoundsException.class, () -> ctor.invoke(CI, CI.size(
 M3AtomKit.expectMessage(NullPointerException.class, "owner", () -> ctor.invoke((M3CI) null, 0));
 >>>
 
-@atom M3Class.simpleName 1 SCENARIO java.lang.Class.getSimpleName
-check <<<
-for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getSimpleName(), view(row).simpleName());
->>>
+@atom M3Class.simpleName 1 CLASS_VIEW_DIFF java.lang.Class.getSimpleName
+expected = CLASSES[row].getSimpleName()
 
-@atom M3Class.packageName 1 SCENARIO java.lang.Class.getPackageName
-check <<<
-for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getPackageName(), view(row).packageName());
->>>
+@atom M3Class.packageName 1 CLASS_VIEW_DIFF java.lang.Class.getPackageName
+expected = CLASSES[row].getPackageName()
 
-@atom M3Class.moduleName 1 SCENARIO java.lang.Module.getName
-check <<<
-for (int row = 0; row < CI.size(); row++) assertEquals(Optional.ofNullable(CLASSES[row].getModule().getName()), view(row).moduleName());
->>>
+@atom M3Class.moduleName 1 CLASS_VIEW_DIFF java.lang.Module.getName
+expected = Optional.ofNullable(CLASSES[row].getModule().getName())
 
-@atom M3Class.typeName 1 SCENARIO java.lang.Class.getTypeName
-check <<<
-for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getTypeName(), view(row).typeName());
->>>
+@atom M3Class.typeName 1 CLASS_VIEW_DIFF java.lang.Class.getTypeName
+expected = CLASSES[row].getTypeName()
 
-@atom M3Class.flags 1 SCENARIO java.lang.Class.isXxx
-check <<<
-for (int row = 0; row < CI.size(); row++) assertEquals(ReflectOracle.classFlags(CLASSES[row]), view(row).flags());
->>>
+@atom M3Class.flags 1 CLASS_VIEW_DIFF java.lang.Class.isXxx
+expected = ReflectOracle.classFlags(CLASSES[row])
 
 @atom M3Class.hasFlag 1 SCENARIO flag-membership
 check <<<
@@ -76,21 +67,15 @@ for (int row = 0; row < CI.size(); row++) {
 }
 >>>
 
-@atom M3Class.isSynthetic 1 SCENARIO java.lang.Class.isSynthetic
-check <<<
-for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].isSynthetic(), view(row).isSynthetic());
->>>
+@atom M3Class.isSynthetic 1 CLASS_VIEW_DIFF java.lang.Class.isSynthetic
+expected = CLASSES[row].isSynthetic()
 
-@atom M3Class.isMemberClass 1 SCENARIO java.lang.Class.isMemberClass
-check <<<
-for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].isMemberClass(), view(row).isMemberClass());
-assertTrue(view(ReflectOracle.Derived.Inner.class).isMemberClass());
->>>
+@atom M3Class.isMemberClass 1 CLASS_VIEW_DIFF java.lang.Class.isMemberClass
+expected = CLASSES[row].isMemberClass()
+extra = assertTrue(view(ReflectOracle.Derived.Inner.class).isMemberClass());
 
-@atom M3Class.interfaceCount 1 SCENARIO java.lang.Class.getInterfaces
-check <<<
-for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getInterfaces().length, view(row).interfaceCount());
->>>
+@atom M3Class.interfaceCount 1 CLASS_VIEW_DIFF java.lang.Class.getInterfaces
+expected = CLASSES[row].getInterfaces().length
 
 @atom M3Class.interfaceAt 1 SCENARIO java.lang.Class.getInterfaces(order)
 check <<<
@@ -100,11 +85,9 @@ for (int row = 0; row < CI.size(); row++) {
 }
 >>>
 
-@atom M3Class.directSubtypeCount 1 SCENARIO reverse-hierarchy
-check <<<
-for (int row = 0; row < CI.size(); row++) assertEquals(CI.directSubtypeCount(row), view(row).directSubtypeCount());
-assertTrue(view(ReflectOracle.Shape.class).directSubtypeCount() >= 2, "Circle and Square implement Shape");
->>>
+@atom M3Class.directSubtypeCount 1 CLASS_VIEW_DIFF reverse-hierarchy
+expected = CI.directSubtypeCount(row)
+extra = assertTrue(view(ReflectOracle.Shape.class).directSubtypeCount() >= SHAPE_IMPLEMENTATIONS, "Circle and Square implement Shape");
 
 @atom M3Class.directSubtypeAt 1 SCENARIO getSuperclass/getInterfaces-of-subtype
 check <<<
@@ -116,10 +99,8 @@ for (int row = 0; row < CI.size(); row++) {
 }
 >>>
 
-@atom M3Class.supertypeCount 1 SCENARIO transitive-closure
-check <<<
-for (int row = 0; row < CI.size(); row++) assertEquals(ReflectOracle.supertypes(ROWS, CLASSES[row]).size(), view(row).supertypeCount());
->>>
+@atom M3Class.supertypeCount 1 CLASS_VIEW_DIFF transitive-closure
+expected = ReflectOracle.supertypes(ROWS, CLASSES[row]).size()
 
 @atom M3Class.supertypeAt 1 SCENARIO Class.isAssignableFrom
 check <<<
@@ -131,10 +112,8 @@ for (int row = 0; row < CI.size(); row++) {
 }
 >>>
 
-@atom M3Class.annotationCount 1 SCENARIO getDeclaredAnnotations
-check <<<
-for (int row = 0; row < CI.size(); row++) assertEquals(ReflectOracle.annotationNames(CLASSES[row]).size(), view(row).annotationCount());
->>>
+@atom M3Class.annotationCount 1 CLASS_VIEW_DIFF getDeclaredAnnotations
+expected = ReflectOracle.annotationNames(CLASSES[row]).size()
 
 @atom M3Class.annotationTypeNameAt 1 SCENARIO getDeclaredAnnotations(type-names)
 check <<<
@@ -179,15 +158,11 @@ for (int row = 0; row < CI.size(); row++) {
 }
 >>>
 
-@atom M3Class.structuralHash64 1 SCENARIO delegates-to-M3CI
-check <<<
-for (int row = 0; row < CI.size(); row++) assertEquals(CI.structuralHash64(row), view(row).structuralHash64());
->>>
+@atom M3Class.structuralHash64 1 CLASS_VIEW_DIFF delegates-to-M3CI
+expected = CI.structuralHash64(row)
 
-@atom M3Class.getPackage 1 SCENARIO java.lang.Class.getPackage
-check <<<
-for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getPackage(), view(row).getPackage());
->>>
+@atom M3Class.getPackage 1 CLASS_VIEW_DIFF java.lang.Class.getPackage
+expected = CLASSES[row].getPackage()
 
 @atom M3Class.getProtectionDomain 1 SCENARIO java.lang.Class.getProtectionDomain
 check <<<
@@ -195,10 +170,8 @@ assertSame(ReflectOracle.class.getProtectionDomain(), view(ReflectOracle.class).
 assertSame(Object.class.getProtectionDomain(), view(Object.class).getProtectionDomain());
 >>>
 
-@atom M3Class.desiredAssertionStatus 1 SCENARIO java.lang.Class.desiredAssertionStatus
-check <<<
-for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].desiredAssertionStatus(), view(row).desiredAssertionStatus());
->>>
+@atom M3Class.desiredAssertionStatus 1 CLASS_VIEW_DIFF java.lang.Class.desiredAssertionStatus
+expected = CLASSES[row].desiredAssertionStatus()
 
 @atom M3Class.getResource 1 SCENARIO java.lang.Class.getResource
 check <<<

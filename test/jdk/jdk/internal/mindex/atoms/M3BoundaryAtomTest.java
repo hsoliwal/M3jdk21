@@ -29,20 +29,37 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 public class M3BoundaryAtomTest {
+    /** loader spaces of the constructor fixture: bootstrap (null) and APP */
+    private static final int FIXTURE_LOADER_SPACES = 2;
+    /** class count given to a boundary without references */
+    private static final int DETACHED_CLASSES = 7;
+    /** loader-space count given to a boundary without references */
+    private static final int DETACHED_LOADER_SPACES = 3;
+    /** classes of the compact source {String.class, null} */
+    private static final int COMPACT_SOURCE_CLASSES = 2;
+    /** loader space of OTHER in LOADERS {null, APP, OTHER} */
+    private static final int OTHER_SPACE = 2;
+    /** String and the hidden seed class, both reachable */
+    private static final int LIVE_CLASSES = 2;
+    /** bootstrap, APP and the transient loader, all reachable */
+    private static final int LIVE_LOADERS = 3;
+    /** bootstrap and APP once the transient loader is collected */
+    private static final int LOADERS_AFTER_COLLECT = 2;
+
     @TestFactory
     Stream<DynamicTest> atoms() {
         return Stream.of(
                 dynamicTest("M3Boundary.M3Boundary#1 SCENARIO", M3BoundaryAtomTest::M3Boundary),
                 dynamicTest("M3Boundary.of#1 SCENARIO", M3BoundaryAtomTest::of),
                 dynamicTest("M3Boundary.retained#1 SCENARIO", M3BoundaryAtomTest::retained),
-                dynamicTest("M3Boundary.classCount#1 SCENARIO", M3BoundaryAtomTest::classCount),
-                dynamicTest("M3Boundary.loaderSpaceCount#1 SCENARIO", M3BoundaryAtomTest::loaderSpaceCount),
+                dynamicTest("M3Boundary.classCount#1 GETTER_DIFF", M3BoundaryAtomTest::classCount),
+                dynamicTest("M3Boundary.loaderSpaceCount#1 GETTER_DIFF", M3BoundaryAtomTest::loaderSpaceCount),
                 dynamicTest("M3Boundary.classAt#1 SCENARIO", M3BoundaryAtomTest::classAt),
                 dynamicTest("M3Boundary.loaderAt#1 SCENARIO", M3BoundaryAtomTest::loaderAt),
                 dynamicTest("M3Boundary.loaderSpaceOf#1 SCENARIO", M3BoundaryAtomTest::loaderSpaceOf),
-                dynamicTest("M3Boundary.liveClassCount#1 SCENARIO", M3BoundaryAtomTest::liveClassCount),
-                dynamicTest("M3Boundary.liveLoaderCount#1 SCENARIO", M3BoundaryAtomTest::liveLoaderCount),
-                dynamicTest("M3Boundary.retainedReferenceCount#1 SCENARIO", M3BoundaryAtomTest::retainedReferenceCount));
+                dynamicTest("M3Boundary.liveClassCount#1 GETTER_DIFF", M3BoundaryAtomTest::liveClassCount),
+                dynamicTest("M3Boundary.liveLoaderCount#1 GETTER_DIFF", M3BoundaryAtomTest::liveLoaderCount),
+                dynamicTest("M3Boundary.retainedReferenceCount#1 GETTER_DIFF", M3BoundaryAtomTest::retainedReferenceCount));
     }
 
     /** M3Boundary.M3Boundary#1 SCENARIO; oracle: private-constructor-fields. */
@@ -51,16 +68,16 @@ public class M3BoundaryAtomTest {
                 WeakReference[].class, WeakReference[].class, int.class, int.class));
         WeakReference<?>[] classes = {new WeakReference<>(String.class)};
         WeakReference<?>[] loaders = {new WeakReference<>(null), new WeakReference<>(APP)};
-        M3Boundary boundary = (M3Boundary) ctor.invoke(classes, loaders, 1, 2);
+        M3Boundary boundary = (M3Boundary) ctor.invoke(classes, loaders, 1, FIXTURE_LOADER_SPACES);
         assertTrue(boundary.retained());
         assertEquals(1, boundary.classCount());
-        assertEquals(2, boundary.loaderSpaceCount());
+        assertEquals(FIXTURE_LOADER_SPACES, boundary.loaderSpaceCount());
         assertEquals(Optional.of(String.class), boundary.classAt(0));
         assertEquals(Optional.of(APP), boundary.loaderAt(1));
-        M3Boundary detached = (M3Boundary) ctor.invoke(new WeakReference<?>[0], new WeakReference<?>[0], 7, 3);
+        M3Boundary detached = (M3Boundary) ctor.invoke(new WeakReference<?>[0], new WeakReference<?>[0], DETACHED_CLASSES, DETACHED_LOADER_SPACES);
         assertFalse(detached.retained());
-        assertEquals(7, detached.classCount(), "counts are kept without references");
-        assertEquals(3, detached.loaderSpaceCount());
+        assertEquals(DETACHED_CLASSES, detached.classCount(), "counts are kept without references");
+        assertEquals(DETACHED_LOADER_SPACES, detached.loaderSpaceCount());
     }
 
     /** M3Boundary.of#1 SCENARIO; oracle: source-arrays+M3CI.compile. */
@@ -80,7 +97,7 @@ public class M3BoundaryAtomTest {
         M3AtomKit.expectMessage(NullPointerException.class, "classes", () -> boundaryOf(null, LOADERS, true));
         M3AtomKit.expectMessage(NullPointerException.class, "loaders", () -> boundaryOf(CLASSES, null, false));
         M3AtomKit.expectMessage(NullPointerException.class, "classes[1]", () -> boundaryOf(new Class<?>[] {String.class, null}, LOADERS, true));
-        assertEquals(2, boundaryOf(new Class<?>[] {String.class, null}, LOADERS, false).classCount(), "compact does not inspect elements");
+        assertEquals(COMPACT_SOURCE_CLASSES, boundaryOf(new Class<?>[] {String.class, null}, LOADERS, false).classCount(), "compact does not inspect elements");
     }
 
     /** M3Boundary.retained#1 SCENARIO; oracle: retain-flag. */
@@ -90,14 +107,14 @@ public class M3BoundaryAtomTest {
         assertFalse(boundaryOf(new Class<?>[0], LOADERS, true).retained(), "an empty class lane retains nothing");
     }
 
-    /** M3Boundary.classCount#1 SCENARIO; oracle: source-array-length. */
+    /** M3Boundary.classCount#1 GETTER_DIFF; oracle: source-array-length. */
     static void classCount() throws Throwable {
         assertEquals(CLASSES.length, retainedBoundary().classCount());
         assertEquals(CLASSES.length, compactBoundary().classCount());
         assertEquals(0, boundaryOf(new Class<?>[0], new ClassLoader[0], true).classCount());
     }
 
-    /** M3Boundary.loaderSpaceCount#1 SCENARIO; oracle: source-array-length. */
+    /** M3Boundary.loaderSpaceCount#1 GETTER_DIFF; oracle: source-array-length. */
     static void loaderSpaceCount() throws Throwable {
         assertEquals(LOADERS.length, retainedBoundary().loaderSpaceCount());
         assertEquals(LOADERS.length, compactBoundary().loaderSpaceCount());
@@ -121,7 +138,7 @@ public class M3BoundaryAtomTest {
         M3Boundary boundary = retainedBoundary();
         assertEquals(Optional.empty(), boundary.loaderAt(0), "bootstrap space has no loader object");
         assertSame(APP, boundary.loaderAt(1).orElseThrow());
-        assertSame(OTHER, boundary.loaderAt(2).orElseThrow());
+        assertSame(OTHER, boundary.loaderAt(OTHER_SPACE).orElseThrow());
         assertEquals(Optional.empty(), compactBoundary().loaderAt(1));
         M3AtomKit.expect(IndexOutOfBoundsException.class, () -> boundary.loaderAt(LOADERS.length));
         M3AtomKit.expect(IndexOutOfBoundsException.class, () -> boundary.loaderAt(-1));
@@ -133,39 +150,39 @@ public class M3BoundaryAtomTest {
         ClassLoader stranger = new ClassLoader(APP) { };
         assertEquals(0, boundary.loaderSpaceOf(null), "bootstrap is always zero");
         assertEquals(1, boundary.loaderSpaceOf(APP));
-        assertEquals(2, boundary.loaderSpaceOf(OTHER));
+        assertEquals(OTHER_SPACE, boundary.loaderSpaceOf(OTHER));
         assertEquals(-1, boundary.loaderSpaceOf(stranger), "unknown loader");
         assertEquals(-1, compactBoundary().loaderSpaceOf(APP), "detached snapshot");
         assertEquals(0, compactBoundary().loaderSpaceOf(null));
     }
 
-    /** M3Boundary.liveClassCount#1 SCENARIO; oracle: java.lang.ref.WeakReference-atomic-clear. */
+    /** M3Boundary.liveClassCount#1 GETTER_DIFF; oracle: java.lang.ref.WeakReference-atomic-clear. */
     static void liveClassCount() throws Throwable {
         Class<?> hidden = hiddenClass("M3BoundaryLiveSeed");
         M3Boundary boundary = boundaryOf(new Class<?>[] {String.class, hidden}, LOADERS, true);
         WeakReference<Class<?>> probe = new WeakReference<>(hidden);
-        assertEquals(2, boundary.liveClassCount());
+        assertEquals(LIVE_CLASSES, boundary.liveClassCount());
         hidden = null;
         collect(probe);
         boolean collected = probe.get() == null;
-        assertEquals(collected ? 1 : 2, boundary.liveClassCount(), "boundary references clear with the probe");
+        assertEquals(collected ? 1 : LIVE_CLASSES, boundary.liveClassCount(), "boundary references clear with the probe");
         assertEquals(!collected, boundary.classAt(1).isPresent());
         assertEquals(0, compactBoundary().liveClassCount());
     }
 
-    /** M3Boundary.liveLoaderCount#1 SCENARIO; oracle: java.lang.ref.WeakReference-atomic-clear. */
+    /** M3Boundary.liveLoaderCount#1 GETTER_DIFF; oracle: java.lang.ref.WeakReference-atomic-clear. */
     static void liveLoaderCount() throws Throwable {
         ClassLoader transientLoader = new ClassLoader(APP) { };
         M3Boundary boundary = boundaryOf(CLASSES, new ClassLoader[] {null, APP, transientLoader}, true);
         WeakReference<ClassLoader> probe = new WeakReference<>(transientLoader);
-        assertEquals(3, boundary.liveLoaderCount(), "bootstrap counts as live");
+        assertEquals(LIVE_LOADERS, boundary.liveLoaderCount(), "bootstrap counts as live");
         transientLoader = null;
         collect(probe);
-        assertEquals(probe.get() == null ? 2 : 3, boundary.liveLoaderCount());
+        assertEquals(probe.get() == null ? LOADERS_AFTER_COLLECT : LIVE_LOADERS, boundary.liveLoaderCount());
         assertEquals(0, compactBoundary().liveLoaderCount());
     }
 
-    /** M3Boundary.retainedReferenceCount#1 SCENARIO; oracle: array-lengths. */
+    /** M3Boundary.retainedReferenceCount#1 GETTER_DIFF; oracle: array-lengths. */
     static void retainedReferenceCount() throws Throwable {
         assertEquals(CLASSES.length + LOADERS.length, retainedBoundary().retainedReferenceCount());
         assertEquals(0, compactBoundary().retainedReferenceCount());
@@ -196,26 +213,38 @@ public class M3BoundaryAtomTest {
         return boundaryOf(CLASSES, LOADERS, false);
     }
 
+    /** Class-file magic number. */
+    private static final int CLASS_MAGIC = 0xCAFEBABE;
+    /** Class-file major version of Java 21. */
+    private static final int JAVA_21_MAJOR = 65;
+    /** Constant-pool tags and access flags of the minimal top-level seed class. */
+    private static final int CONSTANT_UTF8 = 1;
+    private static final int CONSTANT_CLASS = 7;
+    private static final int ACC_FINAL_SUPER = 0x0011;
+    /** Constant-pool entries #1..#4 of the seed; the count field is entries + 1. */
+    private static final int POOL_COUNT = 5;
+    private static final int THIS_CLASS = 1;
+    private static final int SUPER_CLASS = 3;
+
     /** Same minimal top-level class file as M3ClassFlagsAtomTest: a collectable hidden class. */
     private static Class<?> hiddenClass(String name) throws Exception {
         java.io.ByteArrayOutputStream bytes = new java.io.ByteArrayOutputStream();
         java.io.DataOutputStream out = new java.io.DataOutputStream(bytes);
-        final int magic = 0xCAFEBABE, major = 65, pool = 5, utf8 = 1, klass = 7, flags = 0x0011, self = 1, sup = 3;
-        out.writeInt(magic);
+        out.writeInt(CLASS_MAGIC);
         out.writeShort(0);
-        out.writeShort(major);
-        out.writeShort(pool);
-        out.writeByte(klass);
-        out.writeShort(self + 1);
-        out.writeByte(utf8);
+        out.writeShort(JAVA_21_MAJOR);
+        out.writeShort(POOL_COUNT);
+        out.writeByte(CONSTANT_CLASS);
+        out.writeShort(THIS_CLASS + 1);
+        out.writeByte(CONSTANT_UTF8);
         out.writeUTF(name);
-        out.writeByte(klass);
-        out.writeShort(sup + 1);
-        out.writeByte(utf8);
+        out.writeByte(CONSTANT_CLASS);
+        out.writeShort(SUPER_CLASS + 1);
+        out.writeByte(CONSTANT_UTF8);
         out.writeUTF("java/lang/Object");
-        out.writeShort(flags);
-        out.writeShort(self);
-        out.writeShort(sup);
+        out.writeShort(ACC_FINAL_SUPER);
+        out.writeShort(THIS_CLASS);
+        out.writeShort(SUPER_CLASS);
         out.writeShort(0);
         out.writeShort(0);
         out.writeShort(0);

@@ -2,7 +2,7 @@ scope	metric	before	after
 jdk.internal.mindex	UNTESTED	202	0
 jdk.internal.mindex	CLASS_ONLY	484	300
 jdk.internal.mindex	TESTED	464	850
-jdk.internal.mindex	perf_PRESENT	53	150
+jdk.internal.mindex	perf_PRESENT	53	151
 M3Address28	spec_rows/atoms	-	0/8
 M3Automaton	spec_rows/atoms	-	41/41
 M3AutomatonOps	spec_rows/atoms	-	55/55
