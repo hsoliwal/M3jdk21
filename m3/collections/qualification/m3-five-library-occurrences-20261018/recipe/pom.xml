@@ -24,6 +24,20 @@
       <version>24.1.0</version>
       <scope>provided</scope>
     </dependency>
+    <!-- Pinned OpenRewrite's JUnit runtime requires SLF4J LoggerFactory.
+         Both artifacts are test-only; preserve original Java21 -Werror. -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.36</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.7.36</version>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
