@@ -22,7 +22,7 @@ jobs:
     timeout-minutes: 20
     env:
       Q: m3/tooling/joined-range-directory/current-baseline
-      PROOF: ${{ github.workspace }}/../m3-core-runtime-${{ github.run_id }}-${{ github.run_attempt }}
+      PROOF: ${{ github.workspace }}/m3-core-runtime-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
