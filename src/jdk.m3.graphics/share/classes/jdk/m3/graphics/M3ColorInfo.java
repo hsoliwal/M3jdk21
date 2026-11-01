@@ -14,7 +14,7 @@ public class M3ColorInfo {
     public final M3ColorAlphaType _alphaType;
     public final M3ColorSpace _colorSpace;
     /**
-     * Creates an ColorInfo with {@link ColorType#UNKNOWN}, {@link ColorAlphaType#UNKNOWN},
+     * Creates an ColorInfo with {@link M3ColorType#UNKNOWN}, {@link M3ColorAlphaType#UNKNOWN},
      * and no ColorSpace.
      */
     public static final M3ColorInfo DEFAULT = new M3ColorInfo(M3ColorType.UNKNOWN, M3ColorAlphaType.UNKNOWN, null);
@@ -25,7 +25,7 @@ public class M3ColorInfo {
 
     /**
      * Returns number of bytes per pixel required by ColorType.
-     * Returns zero if getColorType() is {@link ColorType#UNKNOWN}.
+     * Returns zero if getColorType() is {@link M3ColorType#UNKNOWN}.
      *
      * @return  bytes in pixel
      *
@@ -37,7 +37,7 @@ public class M3ColorInfo {
 
     /**
      * Returns bit shift converting row bytes to row pixels.
-     * Returns zero for {@link ColorType#UNKNOWN}.
+     * Returns zero for {@link M3ColorType#UNKNOWN}.
      *
      * @return  one of: 0, 1, 2, 3, 4; left shift to convert pixels to bytes
      *

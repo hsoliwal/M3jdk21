@@ -38,7 +38,7 @@ public class M3AnimationBuilder extends M3Managed {
     }
 
     /**
-     * <p>Register a {@link Logger} with this builder.</p>
+     * <p>Register a {@link M3Logger} with this builder.</p>
      */
     public M3AnimationBuilder setLogger(M3Logger logger) {
         try {

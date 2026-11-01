@@ -11,7 +11,7 @@ package jdk.m3.graphics;
 public final class M3VkImageInfo {
     private final long _vkImage;
     /**
-     * @see VulkanAlloc
+     * @see M3VulkanAlloc
      */
     private final M3VulkanAlloc _alloc;
     private final int _imageTiling;
@@ -71,7 +71,7 @@ public final class M3VkImageInfo {
     }
 
     /**
-     * @see VulkanAlloc
+     * @see M3VulkanAlloc
      */
     @java.lang.SuppressWarnings("all")
     public M3VulkanAlloc getAlloc() {

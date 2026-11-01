@@ -8,3 +8,8 @@
 # M3ColorType and M3SVGLengthContext), and 1 module (the "m3" component of the module name).
 
 DISABLED_WARNINGS_java += missing-explicit-ctor this-escape fallthrough module
+
+# Doclint as java.base and jdk.compiler run it (-Xdoclint:all/protected) without the "missing" group: the absorbed
+# Javadoc is the donor's and leaves members undocumented. m3/tooling/skija-absorb/tools/absorb_leaf1.sh (gate G4b)
+# compiles the module with these flags, the lint kinds above and -Werror: 0 errors, 0 warnings.
+DOCLINT += -Xdoclint:all/protected,-missing

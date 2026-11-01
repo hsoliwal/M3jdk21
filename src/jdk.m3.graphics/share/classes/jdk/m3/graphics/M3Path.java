@@ -156,8 +156,8 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     }
 
     /**
-     * Constructs an empty Path. By default, Path has no verbs, no {@link Point}, and no weights.
-     * FillMode is set to {@link PathFillMode#WINDING}.
+     * Constructs an empty Path. By default, Path has no verbs, no {@link M3Point}, and no weights.
+     * FillMode is set to {@link M3PathFillMode#WINDING}.
      *
      * @see <a href="https://fiddle.skia.org/c/@Path_empty_constructor">https://fiddle.skia.org/c/@Path_empty_constructor</a>
      */
@@ -167,8 +167,8 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     }
 
     /**
-     * Constructs an empty {@link Path} with specified {@link PathFillMode}.
-     * By default, {@link Path} has no verbs, no {@link Point}, and no weights.
+     * Constructs an empty {@link M3Path} with specified {@link M3PathFillMode}.
+     * By default, {@link M3Path} has no verbs, no {@link M3Point}, and no weights.
      */
     public M3Path(M3PathFillMode fillMode) {
         this(_nMake(fillMode.ordinal()));
@@ -178,11 +178,11 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     /**
      * <p>Constructs a copy of an existing path. Copy constructor makes two
      * paths identical by value. Internally, path and the returned result share
-     * pointer values. The underlying verb array, {@link Point} array and
+     * pointer values. The underlying verb array, {@link M3Point} array and
      * weights are copied when modified.</p>
      *
-     * <p>Creating a {@link Path} copy is very efficient and never allocates
-     * memory. {@link Path} are always copied by value from the interface; the
+     * <p>Creating a {@link M3Path} copy is very efficient and never allocates
+     * memory. {@link M3Path} are always copied by value from the interface; the
      * underlying shared pointers are not exposed.</p>
      *
      * @param path  Path to copy by value
@@ -195,7 +195,7 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     }
 
     /**
-     * Compares this path and o; Returns true if {@link PathFillMode}, verb array, Point array, and weights
+     * Compares this path and o; Returns true if {@link M3PathFillMode}, verb array, Point array, and weights
      * are equivalent.
      *
      * @param other  Path to compare
@@ -215,7 +215,7 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
      * <p>Returns true if Path contain equal verbs and equal weights.
      * If Path contain one or more conics, the weights must match.</p>
      *
-     * <p>{@link PathBuilder#conicTo(float, float, float, float, float)} may add different verbs
+     * <p>{@link M3PathBuilder#conicTo(float, float, float, float, float)} may add different verbs
      * depending on conic weight, so it is not trivial to interpolate a pair of Path
      * containing conics with different conic weight values.</p>
      *
@@ -235,7 +235,7 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     }
 
     /**
-     * <p>Interpolates between Path with {@link Point} array of equal size.
+     * <p>Interpolates between Path with {@link M3Point} array of equal size.
      * Copy verb array and weights to out, and set out Point array to a weighted
      * average of this Point array and ending Point array, using the formula:
      *
@@ -246,7 +246,7 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
      * range.</p>
      *
      * <p>interpolate() returns null if Point array is not
-     * the same size as ending Point array. Call {@link #isInterpolatable(Path)} to check Path
+     * the same size as ending Point array. Call {@link #isInterpolatable(M3Path)} to check Path
      * compatibility prior to calling interpolate().</p>
      *
      * @param ending  Point array averaged with this Point array
@@ -270,9 +270,9 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     }
 
     /**
-     * Returns {@link PathFillMode}, the rule used to fill {@link Path}.
+     * Returns {@link M3PathFillMode}, the rule used to fill {@link M3Path}.
      *
-     * @return  current {@link PathFillMode} setting
+     * @return  current {@link M3PathFillMode} setting
      */
     public M3PathFillMode getFillMode() {
         try {
@@ -284,10 +284,10 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     }
 
     /**
-     * Creates an {@link Path} with the same properties and data, and with
-     * {@link PathFillMode} set to fillMode.
+     * Creates an {@link M3Path} with the same properties and data, and with
+     * {@link M3PathFillMode} set to fillMode.
      *
-     * @return  new {@link Path}
+     * @return  new {@link M3Path}
      */
     public M3Path makeWithFillMode(M3PathFillMode fillMode) {
         try {
@@ -299,11 +299,11 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     }
 
    /**
-    * Returns if {@link PathFillMode} describes area outside {@link Path}
+    * Returns if {@link M3PathFillMode} describes area outside {@link M3Path}
     * geometry. The inverse fill area extends indefinitely.
     *
-    * @return  true if {@link PathFillMode} is {@link PathFillMode#INVERSE_WINDING}
-    *          or {@link PathFillMode#INVERSE_EVEN_ODD}
+    * @return  true if {@link M3PathFillMode} is {@link M3PathFillMode#INVERSE_WINDING}
+    *          or {@link M3PathFillMode#INVERSE_EVEN_ODD}
     */
     public boolean isInverseFillType() {
         try {
@@ -315,12 +315,12 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     }
 
     /**
-     * Creates an {@link Path} with the same properties and data, and with
-     * {@link PathFillMode} replaced with its inverse. The inverse of
-     * {@link PathFillMode} describes the area unmodified by the original
-     * {@link PathFillMode}.
+     * Creates an {@link M3Path} with the same properties and data, and with
+     * {@link M3PathFillMode} replaced with its inverse. The inverse of
+     * {@link M3PathFillMode} describes the area unmodified by the original
+     * {@link M3PathFillMode}.
      *
-     * @return  new {@link Path}
+     * @return  new {@link M3Path}
      */
     public M3Path makeToggleInverseFillType() {
         try {
@@ -362,7 +362,7 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     }
 
     /**
-     * Returns {@link RRect} if this path is recognized as an oval, circle or RRect.
+     * Returns {@link M3RRect} if this path is recognized as an oval, circle or RRect.
      *
      * @return  bounds is recognized as an oval, circle or RRect, null otherwise
      *
@@ -381,8 +381,8 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     /**
      * <p>Returns if Path is empty.</p>
      *
-     * <p>Empty Path may have FillMode but has no {@link Point}, {@link PathVerb}, or conic weight.
-     * {@link Path()} constructs empty Path; {@link #reset()} make Path empty.</p>
+     * <p>Empty Path may have FillMode but has no {@link M3Point}, {@link M3PathVerb}, or conic weight.
+     * {@link M3Path()} constructs empty Path; {@link #reset()} make Path empty.</p>
      *
      * @return  true if the path contains no Verb array
      */
@@ -398,10 +398,10 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     /**
      * <p>Returns if contour is closed.</p>
      *
-     * <p>Contour is closed if Path Verb array was last modified by {@link PathBuilder#closePath()}. When stroked,
-     * closed contour draws {@link PaintStrokeJoin} instead of {@link PaintStrokeCap} at first and last Point.</p>
+     * <p>Contour is closed if Path Verb array was last modified by {@link M3PathBuilder#closePath()}. When stroked,
+     * closed contour draws {@link M3PaintStrokeJoin} instead of {@link M3PaintStrokeCap} at first and last Point.</p>
      *
-     * @return  true if the last contour ends with a {@link PathVerb#CLOSE}
+     * @return  true if the last contour ends with a {@link M3PathVerb#CLOSE}
      *
      * @see <a href="https://fiddle.skia.org/c/@Path_isLastContourClosed">https://fiddle.skia.org/c/@Path_isLastContourClosed</a>
      */
@@ -433,7 +433,7 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     /**
      * Returns true if the path is volatile; it will not be altered or discarded
      * by the caller after it is drawn. Path by default have volatile set false, allowing
-     * {@link Surface} to attach a cache of data which speeds repeated drawing. If true, {@link Surface}
+     * {@link M3Surface} to attach a cache of data which speeds repeated drawing. If true, {@link M3Surface}
      * may not speed repeated drawing.
      *
      * @return  true if caller will alter Path after drawing
@@ -448,23 +448,23 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     }
 
     /**
-     * <p>Return a copy of {@link Path} with isVolatile indicating whether it
-     * will be altered or discarded by the caller after it is drawn. {@link Path}
+     * <p>Return a copy of {@link M3Path} with isVolatile indicating whether it
+     * will be altered or discarded by the caller after it is drawn. {@link M3Path}
      * by default have volatile set false, allowing Skia to attach a cache of
      * data which speeds repeated drawing.</p>
      *
      * <p>Mark temporary paths, discarded or modified after use, as volatile
      * to inform Skia that the path need not be cached.</p>
      *
-     * <p>Mark animating {@link Path} volatile to improve performance. Mark
-     * unchanging {@link Path} non-volatile to improve repeated rendering.</p>
+     * <p>Mark animating {@link M3Path} volatile to improve performance. Mark
+     * unchanging {@link M3Path} non-volatile to improve repeated rendering.</p>
      *
-     * <p>raster surface {@link Path} draws are affected by volatile for some
-     * shadows. GPU surface {@link Path} draws are affected by volatile for some
+     * <p>raster surface {@link M3Path} draws are affected by volatile for some
+     * shadows. GPU surface {@link M3Path} draws are affected by volatile for some
      * shadows and concave geometries.</p>
      *
-     * @param isVolatile  true if caller will alter {@link Path} after drawing
-     * @return            new {@link Path}
+     * @param isVolatile  true if caller will alter {@link M3Path} after drawing
+     * @return            new {@link M3Path}
      */
     public M3Path makeWithVolatile(boolean isVolatile) {
         try {
@@ -535,7 +535,7 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
 
     /**
      * Returns array of two points if Path contains only one line;
-     * Verb array has two entries: {@link PathVerb#MOVE}, {@link PathVerb#LINE}.
+     * Verb array has two entries: {@link M3PathVerb#MOVE}, {@link M3PathVerb#LINE}.
      * Returns null if Path is not one line.
      *
      * @return  Point[2] if Path contains exactly one line, null otherwise
@@ -554,7 +554,7 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     /**
      * Return a read-only view into the path's points.
      *
-     * @return  array of {@link Point}s
+     * @return  array of {@link M3Point}s
      */
     public M3Point[] getPoints() {
         try {
@@ -568,7 +568,7 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     /**
      * Return a read-only view into the path's verbs.
      *
-     * @return  array of {@link PathVerb}s
+     * @return  array of {@link M3PathVerb}s
      */
     public M3PathVerb[] getVerbs() {
         try {
@@ -616,8 +616,8 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     }
 
     /**
-     * Returns the number of verbs: {@link PathVerb#MOVE}, {@link PathVerb#LINE}, {@link PathVerb#QUAD}, {@link PathVerb#CONIC},
-     * {@link PathVerb#CUBIC}, and {@link PathVerb#CLOSE}; added to Path.
+     * Returns the number of verbs: {@link M3PathVerb#MOVE}, {@link M3PathVerb#LINE}, {@link M3PathVerb#QUAD}, {@link M3PathVerb#CONIC},
+     * {@link M3PathVerb#CUBIC}, and {@link M3PathVerb#CLOSE}; added to Path.
      *
      * @return  length of verb array
      *
@@ -635,7 +635,7 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     /**
      * Return the last point, or null.
      *
-     * @return  The last if the path contains one or more {@link Point}, else
+     * @return  The last if the path contains one or more {@link M3Point}, else
      *          returns null
      * @see     <a href="https://fiddle.skia.org/c/@Path_getLastPt">https://fiddle.skia.org/c/@Path_getLastPt</a>
      */
@@ -669,7 +669,7 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
      * be larger or smaller than area affected when Path is drawn.</p>
      *
      * <p>Rect returned includes all Point added to Path, including Point associated with
-     * {@link PathVerb#MOVE} that define empty contours.</p>
+     * {@link M3PathVerb#MOVE} that define empty contours.</p>
      *
      * @return  bounds of all Point in Point array
      */
@@ -705,7 +705,7 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
      * Returned bounds width and height may be larger or smaller than area affected
      * when Path is drawn.</p>
      *
-     * <p>Includes Point associated with {@link PathVerb#MOVE} that define empty
+     * <p>Includes Point associated with {@link M3PathVerb#MOVE} that define empty
      * contours.</p>
      *
      * Behaves identically to {@link #getBounds()} when Path contains
@@ -786,7 +786,7 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     /**
      * <p>Returns Rect if Path is equivalent to Rect when filled.</p>
      *
-     * rect may be smaller than the Path bounds. Path bounds may include {@link PathVerb#MOVE} points
+     * rect may be smaller than the Path bounds. Path bounds may include {@link M3PathVerb#MOVE} points
      * that do not alter the area drawn by the returned rect.
      *
      * @return  bounds if Path contains Rect, null otherwise
@@ -803,14 +803,14 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     }
 
     /**
-     * <p>Return a copy of {@link Path} with verb array, {@link Point} array,
-     * and weight transformed by matrix. {@link #makeTransform(Matrix33)} may
+     * <p>Return a copy of {@link M3Path} with verb array, {@link M3Point} array,
+     * and weight transformed by matrix. {@link #makeTransform(M3Matrix33)} may
      * change verbs and increase their number.</p>
      *
      * <p>If the resulting path has any non-finite values, returns null.</p>
      *
-     * @param matrix  {@link Matrix33} to apply to {@link Path}
-     * @return        {@link Path} if finite, or null
+     * @param matrix  {@link M3Matrix33} to apply to {@link M3Path}
+     * @return        {@link M3Path} if finite, or null
      */
     public M3Path makeTransform(M3Matrix33 matrix) {
         try {
@@ -823,11 +823,11 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     }
 
     /**
-     * Returns {@link Path} with {@link Point} array offset by (dx, dy).
+     * Returns {@link M3Path} with {@link M3Point} array offset by (dx, dy).
      *
-     * @param dx  offset added to {@link Point} array x-axis coordinates
-     * @param dy  offset added to {@link Point} array y-axis coordinates
-     * @return    new {@link Path}
+     * @param dx  offset added to {@link M3Point} array x-axis coordinates
+     * @param dy  offset added to {@link M3Point} array y-axis coordinates
+     * @return    new {@link M3Path}
      */
     public M3Path makeOffset(float dx, float dy) {
         try {
@@ -840,21 +840,21 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     }
 
     /**
-     * Returns {@link Path} with {@link Point} array scaled by s.
+     * Returns {@link M3Path} with {@link M3Point} array scaled by s.
      *
-     * @param s  scale applied to {@link Point} array coordinates
-     * @return   new {@link Path}
+     * @param s  scale applied to {@link M3Point} array coordinates
+     * @return   new {@link M3Path}
      */
     public M3Path makeScale(float s) {
         return makeScale(s, s);
     }
 
     /**
-     * Returns {@link Path} with {@link Point} array scaled by (sx, sy).
+     * Returns {@link M3Path} with {@link M3Point} array scaled by (sx, sy).
      *
-     * @param sx  scale applied to {@link Point} array x-axis coordinates
-     * @param sy  scale applied to {@link Point} array y-axis coordinates
-     * @return    new {@link Path}
+     * @param sx  scale applied to {@link M3Point} array x-axis coordinates
+     * @param sy  scale applied to {@link M3Point} array y-axis coordinates
+     * @return    new {@link M3Path}
      */
     public M3Path makeScale(float sx, float sy) {
         try {
@@ -867,13 +867,13 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     }
 
     /**
-     * <p>Returns array of {@link PathSegmentType} this {@link Path} contains.</p>
+     * <p>Returns array of {@link M3PathSegmentType} this {@link M3Path} contains.</p>
      *
      * <p>Returns empty array if Path contains no lines, or curves: quads, conics, or cubics.</p>
      *
      * <p>getSegmentTypes() returns a cached result; it is very fast.</p>
      *
-     * @return  array of {@link PathSegmentType} this {@link Path} contains
+     * @return  array of {@link M3PathSegmentType} this {@link M3Path} contains
      */
     public M3PathSegmentType[] getSegmentTypes() {
         try {
@@ -937,7 +937,7 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     }
 
     /**
-     * Sets {@link PathFillMode}, the rule used to fill {@link Path}
+     * Sets {@link M3PathFillMode}, the rule used to fill {@link M3Path}
      *
      * @return this
      */
@@ -950,7 +950,7 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     /**
      * <p>Sets Path to its initial state.</p>
      *
-     * <p>Removes verb array, Point array, and weights, and sets FillMode to {@link PathFillMode#WINDING}.
+     * <p>Removes verb array, Point array, and weights, and sets FillMode to {@link M3PathFillMode#WINDING}.
      * Internal storage associated with Path is released.</p>
      *
      * @return  this
@@ -964,10 +964,10 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     }
 
     /**
-     * Iterates through verb array, and associated {@link Point} array and conic
+     * Iterates through verb array, and associated {@link M3Point} array and conic
      * weight.
      *
-     * @return  {@link PathSegmentIterator}
+     * @return  {@link M3PathSegmentIterator}
      */
     @Override
     public M3PathSegmentIterator iterator() {
@@ -975,12 +975,12 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     }
 
     /**
-     * Iterates through verb array, and associated {@link Point} array and conic
+     * Iterates through verb array, and associated {@link M3Point} array and conic
      * weight. Provides options to treat open contours as closed, and to ignore
      * degenerate data.
      *
-     * @param forceClose  true if open contours generate {@link PathVerb#CLOSE}
-     * @return            {@link PathSegmentIterator}
+     * @param forceClose  true if open contours generate {@link M3PathVerb#CLOSE}
+     * @return            {@link M3PathSegmentIterator}
      */
     public M3PathSegmentIterator iterator(boolean forceClose) {
         return M3PathSegmentIterator.make(this, forceClose);
@@ -988,7 +988,7 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
 
     /**
      * Returns true if the point (x, y) is contained by Path, taking into
-     * account {@link PathFillMode}.
+     * account {@link M3PathFillMode}.
      *
      * @param x  x-axis value of containment test
      * @param y  y-axis value of containment test
@@ -1007,7 +1007,7 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
 
     /**
      * Returns true if the point is contained by Path, taking into
-     * account {@link PathFillMode}.
+     * account {@link M3PathFillMode}.
      *
      * @param p  point of containment test
      * @return   true if Point is in Path
@@ -1055,7 +1055,7 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
     /**
      * <p>Writes Path to byte buffer.</p>
      *
-     * <p>Writes {@link PathFillMode}, verb array, Point array, conic weight, and
+     * <p>Writes {@link M3PathFillMode}, verb array, Point array, conic weight, and
      * additionally writes computed information like path convexity and bounds.</p>
      *
      * <p>Use only be used in concert with {@link makeFromBytes(byte[])};
@@ -1078,7 +1078,7 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
      * <p>Initializes Path from byte buffer. Returns null if the buffer is
      * data is inconsistent, or the length is too small.</p>
      *
-     * <p>Reads {@link PathFillMode}, verb array, Point array, conic weight, and
+     * <p>Reads {@link M3PathFillMode}, verb array, Point array, conic weight, and
      * additionally reads computed information like path convexity and bounds.</p>
      *
      * <p>Used only in concert with {@link serializeToBytes()};
@@ -1099,10 +1099,10 @@ public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
      * <p>Returns a non-zero, globally unique value. A different value is returned
      * if verb array, Point array, or conic weight changes.</p>
      *
-     * <p>Setting {@link PathFillMode} does not change generation identifier.</p>
+     * <p>Setting {@link M3PathFillMode} does not change generation identifier.</p>
      *
      * <p>Each time the path is modified, a different generation identifier will be returned.
-     * {@link PathFillMode} does affect generation identifier on Android framework.</p>
+     * {@link M3PathFillMode} does affect generation identifier on Android framework.</p>
      *
      * @return  non-zero, globally unique value
      *

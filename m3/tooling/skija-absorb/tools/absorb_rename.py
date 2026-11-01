@@ -10,6 +10,11 @@ ledger:
   RENAME v1        package prefixes io.github.humbleui.skija.impl -> jdk.m3.graphics.impl, io.github.humbleui.skija ->
                    jdk.m3.graphics, io.github.humbleui.types -> jdk.m3.graphics; every type token of the map T -> M3T
                    when it is unqualified or qualified by one of the new packages; files move to <pkg dirs>/M3T.java
+  JAVADOC_REF v1   the same package and type-token rule (and the same javac scope) inside the reference of a Javadoc
+                   tag: {@link REF label}, {@linkplain REF label}, {@value REF}, @see REF, @throws REF, @exception REF;
+                   REF is what javadoc parses as the reference (up to blank space outside parentheses), so the class,
+                   the parameter types and a constructor name follow the rename and the label text is kept. A quoted or
+                   HTML @see is not a reference. A donor package left in a reference stops the run
   STRING_RENAME v1 the Java rows of the string ledger (rows of CC_STRING_RENAME.tsv whose file is a .java source;
                    gen_rename.py makes them from skija_patterns.py's JAVA_CLASSREFS.tsv): in the file of the row, every
                    string literal equal to the old text becomes the new text. A row that is UNMAPPED, matches no
@@ -36,6 +41,15 @@ BINARY_NAME = re.compile(r'io[./]github[./]humbleui(?:[./][a-z_$][\w$]*)*[./][A-
 SOURCE_SET = re.compile(r'^shared/java\d*/')
 UNMAPPED = "UNMAPPED"
 TEXT_BLOCK = '"""'
+DOC_OPEN, DOC_CLOSE, EMPTY_BLOCK = "/**", "*/", "/**/"
+DOC_INLINE_REF = re.compile(r'\{@(?:link|linkplain|value)(?=[ \t])')
+DOC_BLOCK_REF = re.compile(r'@(?:see|throws|exception)(?=[ \t])')
+DOC_LINE_LEAD = re.compile(r'[ \t]*(?:/\*\*|\*)?[ \t]*')
+REF_SPACE, REF_NO_START = " \t\r\n", '"<*}\r\n'
+REF_OPEN, REF_CLOSE, INLINE_END = "(<", ")>", "}"
+OLD_PACKAGE = re.compile(r'\bio\.github\.humbleui\b')
+DOC_COUNTS = (("pkg", "javadoc_pkg"), ("type_token", "javadoc_type_token"),
+              ("type_token_shadowed", "javadoc_type_token_shadowed"))
 
 
 def masked(s):
@@ -114,6 +128,61 @@ def rename(s, simple, counts, vis=None):
         out.append(s[i:b] + simple[name])
         i = t.end()
         counts["type_token"] += 1
+    out.append(s[i:])
+    return "".join(out)
+
+
+# FLLDCIM: MRL - JAVADOC_REF v1 leaf: reference end as javadoc parses it
+def ref_end(doc, j, inline):
+    """End of the reference that starts at doc[j], as javadoc parses it: blank space outside parentheses (and
+    generics), or the closing brace of an inline tag."""
+    k, depth = j, 0
+    while k < len(doc):
+        c = doc[k]
+        if c in REF_OPEN:
+            depth += 1
+        elif c in REF_CLOSE:
+            depth -= 1
+        elif depth <= 0 and (c in REF_SPACE or (inline and c == INLINE_END)):
+            break
+        k += 1
+    return k
+
+
+# FLLDCIM: MRL - JAVADOC_REF v1 leaf: tag reference positions of one doc comment
+def doc_refs(doc):
+    """(start, end) of the reference of every tag in a doc comment: inline tags anywhere, block tags first on a line."""
+    tags = [(t.end(), True) for t in DOC_INLINE_REF.finditer(doc)]
+    tags += [(t.end(), False) for t in DOC_BLOCK_REF.finditer(doc)
+             if DOC_LINE_LEAD.fullmatch(doc, doc.rfind("\n", 0, t.start()) + 1, t.start())]
+    spans = []
+    for end, inline in sorted(tags):
+        j = end
+        while j < len(doc) and doc[j] in " \t":
+            j += 1
+        if j < len(doc) and doc[j] not in REF_NO_START:
+            spans.append((j, ref_end(doc, j, inline)))
+    return spans
+
+
+# FLLDCIM: MRL - JAVADOC_REF v1: RENAME v1 inside Javadoc references (#2243 verifier e)
+def rename_doc_refs(s, simple, counts, vis):
+    """JAVADOC_REF v1: RENAME v1 (with the file's javac scope) applied to the reference of every Javadoc tag."""
+    out, i = [], 0
+    for c in MASK.finditer(s):
+        text = c.group(0)
+        if not text.startswith(DOC_OPEN) or text == EMPTY_BLOCK:
+            continue
+        body = text[:-len(DOC_CLOSE)]
+        for a, b in doc_refs(body):
+            local = Counter()
+            new = rename(body[a:b], simple, local, vis)
+            if OLD_PACKAGE.search(new):
+                raise SystemExit(f"donor package left in a Javadoc reference: {new}")
+            for key, doc_key in DOC_COUNTS:
+                counts[doc_key] += local[key]
+            out.append(s[i:c.start() + a] + new)
+            i = c.start() + b
     out.append(s[i:])
     return "".join(out)
 
@@ -206,7 +275,7 @@ def main():
             if old_fqn not in fq:
                 raise SystemExit(f"{old_fqn} is not in the rename map")
             vis = visible(s, by_pkg, fq)
-            s = rename(strip_jb(s, counts), simple, counts, vis)
+            s = rename_doc_refs(rename(strip_jb(s, counts), simple, counts, vis), simple, counts, vis)
             rows = ledger.get(rel, [])
             if rows:
                 used.add(rel)
@@ -228,4 +297,5 @@ def main():
     print(" ".join(f"{k}={v}" for k, v in sorted(counts.items())), f"mentions={len(mentions)}")
 
 
-main()
+if __name__ == "__main__":
+    main()

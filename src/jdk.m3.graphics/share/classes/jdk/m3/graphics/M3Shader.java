@@ -7,7 +7,7 @@ public class M3Shader extends M3RuntimeEffectChild {
     static { M3Library.staticLoad(); }
     /**
      * Returns true if the shader is guaranteed to produce only opaque
-     * colors, subject to the {@link Paint} using the shader to apply an opaque
+     * colors, subject to the {@link M3Paint} using the shader to apply an opaque
      * alpha value. Subclasses should override this to allow some
      * optimizations.
      */
@@ -21,7 +21,7 @@ public class M3Shader extends M3RuntimeEffectChild {
     }
 
     /**
-     * Iff this shader is backed by a single {@link Image}, return its ptr (the caller must ref this
+     * Iff this shader is backed by a single {@link M3Image}, return its ptr (the caller must ref this
      * if they want to keep it longer than the lifetime of the shader). If not, return nullptr.
      */
     public M3Image getImage() {
@@ -60,7 +60,7 @@ public class M3Shader extends M3RuntimeEffectChild {
      *
      * <p>A null input is assumed to be the destination CS.
      *
-     * @param input the {@link ColorSpace} to use for input
+     * @param input the {@link M3ColorSpace} to use for input
      */
     public M3Shader makeWithWorkingColorSpace(M3ColorSpace input) {
         return makeWithWorkingColorSpace(input, null);
@@ -79,14 +79,14 @@ public class M3Shader extends M3RuntimeEffectChild {
      *
      * <p>If the shader is not performing colorspace conversion but needs to operate in the {@code input}
      * then it should have {@code output} be the same as {@code input}. Regardless of the {@code output} here,
-     * the RGBA values of the returned {@link Shader} are always converted from {@code output} to the
+     * the RGBA values of the returned {@link M3Shader} are always converted from {@code output} to the
      * destination surface color space.
      *
      * <p>A null input is assumed to be the destination CS.
      * A null output is assumed to be the input.
      *
-     * @param input the {@link ColorSpace} to use for input
-     * @param output the {@link ColorSpace} to use for output, or null
+     * @param input the {@link M3ColorSpace} to use for input
+     * @param output the {@link M3ColorSpace} to use for output, or null
      */
     public M3Shader makeWithWorkingColorSpace(M3ColorSpace input, M3ColorSpace output) {
         try {

@@ -114,11 +114,17 @@ differs from what the recipe produces, so a `check` after a `run` proves the fix
    `"M3Library.class"` (`ledgers/JAVA_CLASSREFS.tsv` -> `ledgers/CC_STRING_RENAME.tsv`). Every other literal that
    names a donor type is listed in `leaf1/STRING_MENTIONS.tsv`: the native loader's module name (replaced in leaf 2)
    and 223 messages and toString texts, kept as the donor prints them. A class-file or binary-name literal left
-   unrenamed stops the run.
+   unrenamed stops the run. JAVADOC_REF v1 applies the same rename, with the same scope rule, to the reference of
+   every Javadoc tag (`{@link}`, `{@linkplain}`, `{@value}`, `@see`, `@throws`): the class, the parameter types of a
+   member reference and a constructor name (520 tokens, 3 qualified packages); labels and prose stay as the donor
+   wrote them. `tools/absorb_rename_check.py` checks the rule on 12 fixed cases before the stage runs.
 5. `tools/normalize_ws.py` (NORMALIZE_WS v1): LF line ends, no trailing blanks, no blank lines at the end (jcheck).
 6. Gates: 0 errors with no jar on the classpath. The javap surface equals the donor's renamed surface, 4,622 = 4,622,
    and the surface of the jars as Java 21 loads them. `tools/M3GraphicsLeaf1Probe.java` runs the three versioned
-   classes and the loader's class-file lookup on JDK 21, on the module path and from a jlink image.
+   classes and the loader's class-file lookup on JDK 21, on the module path and from a jlink image. Doclint (G4b):
+   the module compiles as the JDK build compiles it, with `DOCLINT += -Xdoclint:all/protected,-missing` of
+   `make/modules/jdk.m3.graphics/Java.gmk`, its lint kinds and `-Werror`: 0 errors, 0 warnings (before JAVADOC_REF
+   v1: 470 "reference not found"). The "missing" group stays out of DOCLINT: 3,784 donor members have no comment.
 
 Owner correction (recorded): `io.github.humbleui.skija.impl` maps to `jdk.m3.graphics.impl`, not
 `jdk.internal.m3.graphics`. SWT Render M3 uses `impl.Native` (6 places) and `impl.Library`, so the package is exported,

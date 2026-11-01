@@ -152,7 +152,7 @@ public class M3Paint extends M3Managed {
 
     /**
      * Retrieves alpha and RGB, unpremultiplied, packed into 32 bits.
-     * Use helpers {@link Color#getA(int)}, {@link Color#getR(int)}, {@link Color#getG(int)}, and {@link Color#getB(int)} to extract
+     * Use helpers {@link M3Color#getA(int)}, {@link M3Color#getR(int)}, {@link M3Color#getG(int)}, and {@link M3Color#getB(int)} to extract
      * a color component.
      *
      * @return  unpremultiplied ARGB
@@ -438,7 +438,7 @@ public class M3Paint extends M3Managed {
     }
 
     /**
-     * @return  {@link Shader} or null
+     * @return  {@link M3Shader} or null
      * @see     <a href="https://fiddle.skia.org/c/@Paint_refShader">https://fiddle.skia.org/c/@Paint_refShader</a>
      */
     public M3Shader getShader() {
@@ -468,7 +468,7 @@ public class M3Paint extends M3Managed {
     }
 
     /**
-     * @return  {@link ColorFilter} or null
+     * @return  {@link M3ColorFilter} or null
      * @see     <a href="https://fiddle.skia.org/c/@Paint_refColorFilter">https://fiddle.skia.org/c/@Paint_refColorFilter</a>
      */
     public M3ColorFilter getColorFilter() {
@@ -482,7 +482,7 @@ public class M3Paint extends M3Managed {
     }
 
     /**
-     * @param colorFilter {@link ColorFilter} to apply to subsequent draw
+     * @param colorFilter {@link M3ColorFilter} to apply to subsequent draw
      *
      * @see <a href="https://fiddle.skia.org/c/@Blend_Mode_Methods">https://fiddle.skia.org/c/@Blend_Mode_Methods</a>
      * @see <a href="https://fiddle.skia.org/c/@Paint_setColorFilter">https://fiddle.skia.org/c/@Paint_setColorFilter</a>
@@ -529,7 +529,7 @@ public class M3Paint extends M3Managed {
     }
 
     /**
-     * Returns BlendMode. By default, returns {@link BlendMode#SRC_OVER}.
+     * Returns BlendMode. By default, returns {@link M3BlendMode#SRC_OVER}.
      *
      * @return  mode used to combine source color with destination color
      */
@@ -563,7 +563,7 @@ public class M3Paint extends M3Managed {
     }
 
     /**
-     * @return  {@link PathEffect} or null
+     * @return  {@link M3PathEffect} or null
      * @see     <a href="https://fiddle.skia.org/c/@Paint_refPathEffect">https://fiddle.skia.org/c/@Paint_refPathEffect</a>
      */
     public M3PathEffect getPathEffect() {
@@ -577,7 +577,7 @@ public class M3Paint extends M3Managed {
     }
 
     /**
-     * @param p  replace {@link Path} with a modification when drawn
+     * @param p  replace {@link M3Path} with a modification when drawn
      *
      * @see <a href="https://fiddle.skia.org/c/@Mask_Filter_Methods">https://fiddle.skia.org/c/@Mask_Filter_Methods</a>
      * @see <a href="https://fiddle.skia.org/c/@Paint_setPathEffect">https://fiddle.skia.org/c/@Paint_setPathEffect</a>
@@ -593,7 +593,7 @@ public class M3Paint extends M3Managed {
     }
 
     /**
-     * @return  {@link MaskFilter} if previously set, null otherwise
+     * @return  {@link M3MaskFilter} if previously set, null otherwise
      * @see     <a href="https://fiddle.skia.org/c/@Paint_refMaskFilter">https://fiddle.skia.org/c/@Paint_refMaskFilter</a>
      */
     public M3MaskFilter getMaskFilter() {
@@ -624,7 +624,7 @@ public class M3Paint extends M3Managed {
     }
 
     /**
-     * @return  {@link ImageFilter} or null
+     * @return  {@link M3ImageFilter} or null
      * @see     <a href="https://fiddle.skia.org/c/@Paint_refImageFilter">https://fiddle.skia.org/c/@Paint_refImageFilter</a>
      */
     public M3ImageFilter getImageFilter() {
