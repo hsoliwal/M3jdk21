@@ -5,7 +5,7 @@ import jdk.m3.graphics.impl.*;
 
 /**
  * <p>A Logger subclass can be used to receive
- * {@link io.github.humbleui.skija.skottie.AnimationBuilder} parsing errors and warnings.</p>
+ * {@link jdk.m3.graphics.skottie.M3AnimationBuilder} parsing errors and warnings.</p>
  */
 public abstract class M3Logger extends M3RefCnt {
     static { M3Library.staticLoad(); }

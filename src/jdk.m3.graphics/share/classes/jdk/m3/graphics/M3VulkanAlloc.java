@@ -23,7 +23,7 @@ public final class M3VulkanAlloc {
     /**
      * <p>Flat bitmask representing Skia-specific custom allocation states.</p>
      *
-     * <p><b>CRITICAL:</b> This field expects a bitmask combined from {@link VulkanAllocFlag},
+     * <p><b>CRITICAL:</b> This field expects a bitmask combined from {@link M3VulkanAllocFlag},
      * <i>not</i> native Vulkan driver property flags (such as {@code VkMemoryPropertyFlags}).
      */
     private final int _flags;
@@ -78,7 +78,7 @@ public final class M3VulkanAlloc {
     /**
      * <p>Flat bitmask representing Skia-specific custom allocation states.</p>
      *
-     * <p><b>CRITICAL:</b> This field expects a bitmask combined from {@link VulkanAllocFlag},
+     * <p><b>CRITICAL:</b> This field expects a bitmask combined from {@link M3VulkanAllocFlag},
      * <i>not</i> native Vulkan driver property flags (such as {@code VkMemoryPropertyFlags}).
      */
     @java.lang.SuppressWarnings("all")
@@ -154,7 +154,7 @@ public final class M3VulkanAlloc {
      * <p>This can be indeterminate iff Tex uses borrow semantics.</p>
      * @param flags <p>Flat bitmask representing Skia-specific custom allocation states.</p>
      *
-     * <p><b>CRITICAL:</b> This field expects a bitmask combined from {@link VulkanAllocFlag},
+     * <p><b>CRITICAL:</b> This field expects a bitmask combined from {@link M3VulkanAllocFlag},
      * <i>not</i> native Vulkan driver property flags (such as {@code VkMemoryPropertyFlags}).
      * @param backendMemory <p>Opaque handle or pointer to the native memory allocator block.</p>
      *

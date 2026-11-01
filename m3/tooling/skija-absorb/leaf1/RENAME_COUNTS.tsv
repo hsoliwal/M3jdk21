@@ -1,5 +1,8 @@
 rule	count
 files	225
+javadoc_pkg	3
+javadoc_type_token	520
+javadoc_type_token_shadowed	0
 jb_annotation	3026
 jb_import	194
 pkg	401

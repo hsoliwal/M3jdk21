@@ -1,7 +1,7 @@
 package jdk.m3.graphics;
 
 /**
- * Configuration flags for {@link VulkanAlloc}, represented as bitmask bits.
+ * Configuration flags for {@link M3VulkanAlloc}, represented as bitmask bits.
  */
 public enum M3VulkanAllocFlag {
     /**

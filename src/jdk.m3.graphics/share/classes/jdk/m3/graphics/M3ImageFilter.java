@@ -172,7 +172,7 @@ public class M3ImageFilter extends M3RefCnt implements M3Flattenable {
      * <p>Create a filter that applies a crop to the result of the input filter.
      * Pixels within the crop rectangle are unmodified from what the input
      * produced. Pixels outside of crop match the provided
-     * {@link FilterTileMode} (defaulting to {@link FilterTileMode#DECAL}).</p>
+     * {@link M3FilterTileMode} (defaulting to {@link M3FilterTileMode#DECAL}).</p>
      *
      * <p>NOTE: The optional Rect crop argument for many of the factory methods
      * is equivalent to creating the filter without a crop and then wrapping it
@@ -665,7 +665,7 @@ public class M3ImageFilter extends M3RefCnt implements M3Flattenable {
      * the shader.</p>
      *
      * <p>The shader is defined in the image filter's local coordinate system,
-     * so will automatically be affected by {@link Canvas}' transform.</p>
+     * so will automatically be affected by {@link M3Canvas}' transform.</p>
      *
      * <p>Like {@link makeImage} and {@link makePicture}, this is a leaf filter
      * that can be used to introduce inputs to a complex filter graph, but

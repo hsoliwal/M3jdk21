@@ -17,7 +17,7 @@ public class M3AnimationFrameInfo {
      *
      * <p>Note that this is the *earliest* frame that can be used
      * for blending. Any frame from [_requiredFrame, i) can be
-     * used, unless its getDisposalMethod() is {@link AnimationDisposalMode#RESTORE_PREVIOUS}.</p>
+     * used, unless its getDisposalMethod() is {@link M3AnimationDisposalMode#RESTORE_PREVIOUS}.</p>
      */
     public int _requiredFrame;
     /**
@@ -57,7 +57,7 @@ public class M3AnimationFrameInfo {
      * <p>The rectangle updated by this frame.</p>
      *
      * <p>It may be empty, if the frame does not change the image. It will
-     * always be contained by {@link Codec#getSize()}.
+     * always be contained by {@link M3Codec#getSize()}.
      */
     public M3IRect _frameRect;
 
@@ -68,7 +68,7 @@ public class M3AnimationFrameInfo {
      *
      * <p>Note that this is the *earliest* frame that can be used
      * for blending. Any frame from [_requiredFrame, i) can be
-     * used, unless its getDisposalMethod() is {@link AnimationDisposalMode#RESTORE_PREVIOUS}.</p>
+     * used, unless its getDisposalMethod() is {@link M3AnimationDisposalMode#RESTORE_PREVIOUS}.</p>
      */
     @java.lang.SuppressWarnings("all")
     public int getRequiredFrame() {
@@ -136,7 +136,7 @@ public class M3AnimationFrameInfo {
      * <p>The rectangle updated by this frame.</p>
      *
      * <p>It may be empty, if the frame does not change the image. It will
-     * always be contained by {@link Codec#getSize()}.
+     * always be contained by {@link M3Codec#getSize()}.
      */
     @java.lang.SuppressWarnings("all")
     public M3IRect getFrameRect() {
@@ -150,7 +150,7 @@ public class M3AnimationFrameInfo {
      *
      * <p>Note that this is the *earliest* frame that can be used
      * for blending. Any frame from [_requiredFrame, i) can be
-     * used, unless its getDisposalMethod() is {@link AnimationDisposalMode#RESTORE_PREVIOUS}.</p>
+     * used, unless its getDisposalMethod() is {@link M3AnimationDisposalMode#RESTORE_PREVIOUS}.</p>
      * @return {@code this}.
      */
     @java.lang.SuppressWarnings("all")
@@ -232,7 +232,7 @@ public class M3AnimationFrameInfo {
      * <p>The rectangle updated by this frame.</p>
      *
      * <p>It may be empty, if the frame does not change the image. It will
-     * always be contained by {@link Codec#getSize()}.
+     * always be contained by {@link M3Codec#getSize()}.
      * @return {@code this}.
      */
     @java.lang.SuppressWarnings("all")
@@ -307,7 +307,7 @@ public class M3AnimationFrameInfo {
      *
      * <p>Note that this is the *earliest* frame that can be used
      * for blending. Any frame from [_requiredFrame, i) can be
-     * used, unless its getDisposalMethod() is {@link AnimationDisposalMode#RESTORE_PREVIOUS}.</p>
+     * used, unless its getDisposalMethod() is {@link M3AnimationDisposalMode#RESTORE_PREVIOUS}.</p>
      * @param duration Number of milliseconds to show this frame.
      * @param fullyReceived <p>Whether the end marker for this frame is contained in the stream.</p>
      *
@@ -326,7 +326,7 @@ public class M3AnimationFrameInfo {
      * @param frameRect <p>The rectangle updated by this frame.</p>
      *
      * <p>It may be empty, if the frame does not change the image. It will
-     * always be contained by {@link Codec#getSize()}.
+     * always be contained by {@link M3Codec#getSize()}.
      */
     @java.lang.SuppressWarnings("all")
     public M3AnimationFrameInfo(final int requiredFrame, final int duration, final boolean fullyReceived, final M3ColorAlphaType alphaType, final boolean hasAlphaWithinBounds, final M3AnimationDisposalMode disposalMethod, final M3BlendMode blendMode, final M3IRect frameRect) {
@@ -347,7 +347,7 @@ public class M3AnimationFrameInfo {
      *
      * <p>Note that this is the *earliest* frame that can be used
      * for blending. Any frame from [_requiredFrame, i) can be
-     * used, unless its getDisposalMethod() is {@link AnimationDisposalMode#RESTORE_PREVIOUS}.</p>
+     * used, unless its getDisposalMethod() is {@link M3AnimationDisposalMode#RESTORE_PREVIOUS}.</p>
      * @return {@code this}.
      */
     @java.lang.SuppressWarnings("all")
@@ -422,7 +422,7 @@ public class M3AnimationFrameInfo {
      * <p>The rectangle updated by this frame.</p>
      *
      * <p>It may be empty, if the frame does not change the image. It will
-     * always be contained by {@link Codec#getSize()}.
+     * always be contained by {@link M3Codec#getSize()}.
      * @return {@code this}.
      */
     @java.lang.SuppressWarnings("all")

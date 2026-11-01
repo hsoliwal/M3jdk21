@@ -145,13 +145,13 @@ public class M3Canvas extends M3Managed {
      * <p>Draws pts using clip, Matrix and Paint paint.</p>
      *
      * <p>The shape of point drawn depends on paint
-     * PaintStrokeCap. If paint is set to {@link PaintStrokeCap#ROUND}, each point draws a
-     * circle of diameter Paint stroke width. If paint is set to {@link PaintStrokeCap#SQUARE}
-     * or {@link PaintStrokeCap#BUTT}, each point draws a square of width and height
+     * PaintStrokeCap. If paint is set to {@link M3PaintStrokeCap#ROUND}, each point draws a
+     * circle of diameter Paint stroke width. If paint is set to {@link M3PaintStrokeCap#SQUARE}
+     * or {@link M3PaintStrokeCap#BUTT}, each point draws a square of width and height
      * Paint stroke width.</p>
      *
      * <p>Each line segment respects paint PaintStrokeCap and Paint stroke width.
-     * PaintMode is ignored, as if were set to {@link PaintMode#STROKE}.</p>
+     * PaintMode is ignored, as if were set to {@link M3PaintMode#STROKE}.</p>
      *
      * <p>Always draws each element one at a time; is not affected by
      * PaintStrokeJoin, and unlike drawPath(), does not create a mask from all points
@@ -170,13 +170,13 @@ public class M3Canvas extends M3Managed {
      * <p>Draws pts using clip, Matrix and Paint paint.</p>
      *
      * <p>The shape of point drawn depends on paint
-     * PaintStrokeCap. If paint is set to {@link PaintStrokeCap#ROUND}, each point draws a
-     * circle of diameter Paint stroke width. If paint is set to {@link PaintStrokeCap#SQUARE}
-     * or {@link PaintStrokeCap#BUTT}, each point draws a square of width and height
+     * PaintStrokeCap. If paint is set to {@link M3PaintStrokeCap#ROUND}, each point draws a
+     * circle of diameter Paint stroke width. If paint is set to {@link M3PaintStrokeCap#SQUARE}
+     * or {@link M3PaintStrokeCap#BUTT}, each point draws a square of width and height
      * Paint stroke width.</p>
      *
      * <p>Each line segment respects paint PaintStrokeCap and Paint stroke width.
-     * PaintMode is ignored, as if were set to {@link PaintMode#STROKE}.</p>
+     * PaintMode is ignored, as if were set to {@link M3PaintMode#STROKE}.</p>
      *
      * <p>Always draws each element one at a time; is not affected by
      * PaintStrokeJoin, and unlike drawPath(), does not create a mask from all points
@@ -205,7 +205,7 @@ public class M3Canvas extends M3Managed {
      * the final point is ignored.</p>
      *
      * <p>Each line segment respects paint PaintStrokeCap and Paint stroke width.
-     * PaintMode is ignored, as if were set to {@link PaintMode#STROKE}.</p>
+     * PaintMode is ignored, as if were set to {@link M3PaintMode#STROKE}.</p>
      *
      * <p>Always draws each element one at a time; is not affected by
      * PaintStrokeJoin, and unlike drawPath(), does not create a mask from all points
@@ -228,7 +228,7 @@ public class M3Canvas extends M3Managed {
      * the final point is ignored.</p>
      *
      * <p>Each line segment respects paint PaintStrokeCap and Paint stroke width.
-     * PaintMode is ignored, as if were set to {@link PaintMode#STROKE}.</p>
+     * PaintMode is ignored, as if were set to {@link M3PaintMode#STROKE}.</p>
      *
      * <p>Always draws each element one at a time; is not affected by
      * PaintStrokeJoin, and unlike drawPath(), does not create a mask from all points
@@ -256,7 +256,7 @@ public class M3Canvas extends M3Managed {
      * count minus one lines are drawn; the first and last point are used once.</p>
      *
      * <p>Each line segment respects paint PaintStrokeCap and Paint stroke width.
-     * PaintMode is ignored, as if were set to {@link PaintMode#STROKE}.</p>
+     * PaintMode is ignored, as if were set to {@link M3PaintMode#STROKE}.</p>
      *
      * <p>Always draws each element one at a time; is not affected by
      * PaintStrokeJoin, and unlike drawPath(), does not create a mask from all points
@@ -278,7 +278,7 @@ public class M3Canvas extends M3Managed {
      * count minus one lines are drawn; the first and last point are used once.</p>
      *
      * <p>Each line segment respects paint PaintStrokeCap and Paint stroke width.
-     * PaintMode is ignored, as if were set to {@link PaintMode#STROKE}.</p>
+     * PaintMode is ignored, as if were set to {@link M3PaintMode#STROKE}.</p>
      *
      * <p>Always draws each element one at a time; is not affected by
      * PaintStrokeJoin, and unlike drawPath(), does not create a mask from all points
@@ -998,8 +998,8 @@ public class M3Canvas extends M3Managed {
     }
 
     /**
-     * <p>For the PDF backend, associates the point with a name that {@link Canvas#annotateLinkToDestination} can make a jump to.</p>
-     * <p>For the SVG backend, functions like {@link Canvas#annotateRectWithURL}.</p>
+     * <p>For the PDF backend, associates the point with a name that {@link M3Canvas#annotateLinkToDestination} can make a jump to.</p>
+     * <p>For the SVG backend, functions like {@link M3Canvas#annotateRectWithURL}.</p>
      * Does nothing on other backends.
      */
     public M3Canvas annotateNamedDestination(float x, float y, String name) {
@@ -1011,7 +1011,7 @@ public class M3Canvas extends M3Managed {
     }
 
     /**
-     * For the PDF backend, makes a link over the given rectangle that goes to the respective {@link Canvas#annotateNamedDestination}.
+     * For the PDF backend, makes a link over the given rectangle that goes to the respective {@link M3Canvas#annotateNamedDestination}.
      * Does nothing on other backends.
      */
     public M3Canvas annotateLinkToDestination(M3Rect r, String name) {

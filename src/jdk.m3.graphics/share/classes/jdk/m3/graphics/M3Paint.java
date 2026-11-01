@@ -231,7 +231,7 @@ value ? /* M3-LEAF kind=FIELDACCESS id=38b13e716df84f420979d95c1dad88097364abc58
 
     /**
      * Retrieves alpha and RGB, unpremultiplied, packed into 32 bits.
-     * Use helpers {@link Color#getA(int)}, {@link Color#getR(int)}, {@link Color#getG(int)}, and {@link Color#getB(int)} to extract
+     * Use helpers {@link M3Color#getA(int)}, {@link M3Color#getR(int)}, {@link M3Color#getG(int)}, and {@link M3Color#getB(int)} to extract
      * a color component.
      *
      * @return  unpremultiplied ARGB
@@ -660,7 +660,7 @@ _nGetFillPathCull(_ptr, /* M3-LEAF kind=INVOCATION id=21b05cbc0da67cd8f2d1781872
     }
 
     /**
-     * @return  {@link Shader} or null
+     * @return  {@link M3Shader} or null
      * @see     <a href="https://fiddle.skia.org/c/@Paint_refShader">https://fiddle.skia.org/c/@Paint_refShader</a>
      */
     /* M3-ATOM kind=METHOD id=57c8ccb0e6825562826318d27f31a63b254f1d5abba8dc6d644e9862cdce7a84 contract=PUBLIC_API patterns=EXCEPTION_BOUNDARY */
@@ -708,7 +708,7 @@ _nGetFillPathCull(_ptr, /* M3-LEAF kind=INVOCATION id=21b05cbc0da67cd8f2d1781872
     }
 
     /**
-     * @return  {@link ColorFilter} or null
+     * @return  {@link M3ColorFilter} or null
      * @see     <a href="https://fiddle.skia.org/c/@Paint_refColorFilter">https://fiddle.skia.org/c/@Paint_refColorFilter</a>
      */
     /* M3-ATOM kind=METHOD id=ebdb0e157aa02c121ec5e3c41fc7888f4c6c24b69a6c7c7790b56f3bdabefb72 contract=PUBLIC_API patterns=EXCEPTION_BOUNDARY */
@@ -732,7 +732,7 @@ _nGetFillPathCull(_ptr, /* M3-LEAF kind=INVOCATION id=21b05cbc0da67cd8f2d1781872
     }
 
     /**
-     * @param colorFilter {@link ColorFilter} to apply to subsequent draw
+     * @param colorFilter {@link M3ColorFilter} to apply to subsequent draw
      *
      * @see <a href="https://fiddle.skia.org/c/@Blend_Mode_Methods">https://fiddle.skia.org/c/@Blend_Mode_Methods</a>
      * @see <a href="https://fiddle.skia.org/c/@Paint_setColorFilter">https://fiddle.skia.org/c/@Paint_setColorFilter</a>
@@ -805,7 +805,7 @@ _nGetFillPathCull(_ptr, /* M3-LEAF kind=INVOCATION id=21b05cbc0da67cd8f2d1781872
     }
 
     /**
-     * Returns BlendMode. By default, returns {@link BlendMode#SRC_OVER}.
+     * Returns BlendMode. By default, returns {@link M3BlendMode#SRC_OVER}.
      *
      * @return  mode used to combine source color with destination color
      */
@@ -860,7 +860,7 @@ _nGetBlendMode(_ptr)];
     }
 
     /**
-     * @return  {@link PathEffect} or null
+     * @return  {@link M3PathEffect} or null
      * @see     <a href="https://fiddle.skia.org/c/@Paint_refPathEffect">https://fiddle.skia.org/c/@Paint_refPathEffect</a>
      */
     /* M3-ATOM kind=METHOD id=8859ed532b50934ddf385d71c724984422ebe2cc6998b0fa16bb313eb3d4bc18 contract=PUBLIC_API patterns=EXCEPTION_BOUNDARY */
@@ -884,7 +884,7 @@ _nGetBlendMode(_ptr)];
     }
 
     /**
-     * @param p  replace {@link Path} with a modification when drawn
+     * @param p  replace {@link M3Path} with a modification when drawn
      *
      * @see <a href="https://fiddle.skia.org/c/@Mask_Filter_Methods">https://fiddle.skia.org/c/@Mask_Filter_Methods</a>
      * @see <a href="https://fiddle.skia.org/c/@Paint_setPathEffect">https://fiddle.skia.org/c/@Paint_setPathEffect</a>
@@ -908,7 +908,7 @@ _nGetBlendMode(_ptr)];
     }
 
     /**
-     * @return  {@link MaskFilter} if previously set, null otherwise
+     * @return  {@link M3MaskFilter} if previously set, null otherwise
      * @see     <a href="https://fiddle.skia.org/c/@Paint_refMaskFilter">https://fiddle.skia.org/c/@Paint_refMaskFilter</a>
      */
     /* M3-ATOM kind=METHOD id=25f965b7c4bf79c4c1db39dfd849dadc3b10025e501ace810282444bf7157b26 contract=PUBLIC_API patterns=EXCEPTION_BOUNDARY */
@@ -957,7 +957,7 @@ _nGetBlendMode(_ptr)];
     }
 
     /**
-     * @return  {@link ImageFilter} or null
+     * @return  {@link M3ImageFilter} or null
      * @see     <a href="https://fiddle.skia.org/c/@Paint_refImageFilter">https://fiddle.skia.org/c/@Paint_refImageFilter</a>
      */
     /* M3-ATOM kind=METHOD id=e22c5bb34bb50b2b0081fae6ca101268d03f065d7f5f956a8ae47b7ad9072636 contract=PUBLIC_API patterns=EXCEPTION_BOUNDARY */

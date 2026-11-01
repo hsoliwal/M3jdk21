@@ -48,7 +48,7 @@ public class M3PictureRecorder extends M3Managed {
 
     /**
      * <p>Signal that the caller is done recording. This invalidates the canvas returned by
-     * {@link #beginRecording(Rect)}/{@link #getRecordingCanvas()}.</p>
+     * {@link #beginRecording(M3Rect)}/{@link #getRecordingCanvas()}.</p>
      *
      * <p>The returned picture is immutable. If during recording drawables were added to the canvas,
      * these will have been "drawn" into a recording canvas, so that this resulting picture will
@@ -71,7 +71,7 @@ public class M3PictureRecorder extends M3Managed {
      * Signal that the caller is done recording, and update the cull rect to use for bounding
      * box hierarchy (BBH) generation. The behavior is the same as calling
      * {@link #finishRecordingAsPicture()}, except that this method updates the cull rect
-     * initially passed into {@link #beginRecording(Rect)}.
+     * initially passed into {@link #beginRecording(M3Rect)}.
      *
      * @param cull the new culling rectangle to use as the overall bound for BBH generation
      *             and subsequent culling operations.
@@ -101,13 +101,13 @@ public class M3PictureRecorder extends M3Managed {
     // TODO
     /**
      * <p>Signal that the caller is done recording. This invalidates the canvas returned by
-     * {@link #beginRecording(Rect)}/{@link #getRecordingCanvas()}.</p>
+     * {@link #beginRecording(M3Rect)}/{@link #getRecordingCanvas()}.</p>
      *
      * <p>Unlike {@link #finishRecordingAsPicture()}, which returns an immutable picture,
      * the returned drawable may contain live references to other drawables (if they were added to
      * the recording canvas) and therefore this drawable will reflect the current state of those
      * nested drawables anytime it is drawn or a new picture is snapped from it (by calling
-     * {@link Drawable#makePictureSnapshot()}).</p>
+     * {@link M3Drawable#makePictureSnapshot()}).</p>
      */
     // public Drawable finishRecordingAsPicture(@NotNull Rect cull) {
     //     Stats.onNativeCall();

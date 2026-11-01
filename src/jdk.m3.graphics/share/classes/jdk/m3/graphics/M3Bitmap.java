@@ -13,11 +13,11 @@ public class M3Bitmap extends M3Managed implements M3IHasImageInfo {
     }
 
     /**
-     * Creates an empty Bitmap without pixels, with {@link ColorType#UNKNOWN},
-     * {@link ColorAlphaType#UNKNOWN}, and with a width and height of zero.
+     * Creates an empty Bitmap without pixels, with {@link M3ColorType#UNKNOWN},
+     * {@link M3ColorAlphaType#UNKNOWN}, and with a width and height of zero.
      * PixelRef origin is set to (0, 0). Bitmap is not volatile.
      *
-     * Use {@link #setImageInfo(ImageInfo, long)} to associate ColorType, ColorAlphaType, width, and height after Bitmap has been created.
+     * Use {@link #setImageInfo(M3ImageInfo, long)} to associate ColorType, ColorAlphaType, width, and height after Bitmap has been created.
      *
      * @see <a href="https://fiddle.skia.org/c/@Bitmap_empty_constructor">https://fiddle.skia.org/c/@Bitmap_empty_constructor</a>
      */
@@ -131,8 +131,8 @@ public class M3Bitmap extends M3Managed implements M3IHasImageInfo {
      * Returns row bytes, the interval from one pixel row to the next. Row bytes
      * is at least as large as: getWidth() * getBytesPerPixel().
      *
-     * Returns zero if getColorType() is {@link ColorType#UNKNOWN}, or if row bytes
-     * supplied to {@link #setImageInfo(ImageInfo)} is not large enough to hold a row of pixels.
+     * Returns zero if getColorType() is {@link M3ColorType#UNKNOWN}, or if row bytes
+     * supplied to {@link #setImageInfo(M3ImageInfo)} is not large enough to hold a row of pixels.
      *
      * @return  byte length of pixel row
      */
@@ -147,27 +147,27 @@ public class M3Bitmap extends M3Managed implements M3IHasImageInfo {
 
     /**
      * <p>Sets alpha type, if argument is compatible with current color type.
-     * Returns true unless argument is {@link ColorAlphaType#UNKNOWN} and current
-     * value is {@link ColorAlphaType#UNKNOWN}.</p>
+     * Returns true unless argument is {@link M3ColorAlphaType#UNKNOWN} and current
+     * value is {@link M3ColorAlphaType#UNKNOWN}.</p>
      *
-     * <p>Returns true if current color type is {@link ColorType#UNKNOWN}.
-     * Argument is ignored, and alpha type remains {@link ColorAlphaType#UNKNOWN}.</p>
+     * <p>Returns true if current color type is {@link M3ColorType#UNKNOWN}.
+     * Argument is ignored, and alpha type remains {@link M3ColorAlphaType#UNKNOWN}.</p>
      *
-     * <p>Returns true if current color type is {@link ColorType#RGB_565} or
-     * {@link ColorType#GRAY_8}. Argument is ignored, and alpha type remains
-     * {@link ColorAlphaType#OPAQUE}.</p>
+     * <p>Returns true if current color type is {@link M3ColorType#RGB_565} or
+     * {@link M3ColorType#GRAY_8}. Argument is ignored, and alpha type remains
+     * {@link M3ColorAlphaType#OPAQUE}.</p>
      *
-     * <p>If current color type is {@link ColorType#ARGB_4444}, {@link ColorType#RGBA_8888},
-     * {@link ColorType#BGRA_8888}, or {@link ColorType#RGBA_F16}: returns true unless
-     * argument is {@link ColorAlphaType#UNKNOWN} and current alpha type is not
-     * {@link ColorAlphaType#UNKNOWN}. If current alpha type is
-     * {@link ColorAlphaType#UNKNOWN}, argument is ignored.</p>
+     * <p>If current color type is {@link M3ColorType#ARGB_4444}, {@link M3ColorType#RGBA_8888},
+     * {@link M3ColorType#BGRA_8888}, or {@link M3ColorType#RGBA_F16}: returns true unless
+     * argument is {@link M3ColorAlphaType#UNKNOWN} and current alpha type is not
+     * {@link M3ColorAlphaType#UNKNOWN}. If current alpha type is
+     * {@link M3ColorAlphaType#UNKNOWN}, argument is ignored.</p>
      *
-     * <p>If current color type is {@link ColorType#ALPHA_8}, returns true unless
-     * argument is {@link ColorAlphaType#UNKNOWN} and current alpha type is not
-     * {@link ColorAlphaType#UNKNOWN}. If current alpha type is
-     * {@link ColorAlphaType#UNKNOWN}, argument is ignored. If argument is
-     * {@link ColorAlphaType#UNPREMUL}, it is treated as {@link ColorAlphaType#PREMUL}.</p>
+     * <p>If current color type is {@link M3ColorType#ALPHA_8}, returns true unless
+     * argument is {@link M3ColorAlphaType#UNKNOWN} and current alpha type is not
+     * {@link M3ColorAlphaType#UNKNOWN}. If current alpha type is
+     * {@link M3ColorAlphaType#UNKNOWN}, argument is ignored. If argument is
+     * {@link M3ColorAlphaType#UNPREMUL}, it is treated as {@link M3ColorAlphaType#PREMUL}.</p>
      *
      * <p>This changes alpha type in PixelRef; all bitmaps sharing PixelRef
      * are affected.</p>
@@ -187,15 +187,15 @@ public class M3Bitmap extends M3Managed implements M3IHasImageInfo {
     }
 
     /**
-     * <p>Sets the {@link ColorSpace} associated with this {@link Bitmap}.</p>
+     * <p>Sets the {@link M3ColorSpace} associated with this {@link M3Bitmap}.</p>
      *
      * <p>The raw pixel data is not altered by this call; no conversion is
      * performed.</p>
      *
-     * <p>This changes {@link ColorSpace} in {@link PixelRef}; all bitmaps
-     * sharing {@link PixelRef} are affected.
+     * <p>This changes {@link M3ColorSpace} in {@link M3PixelRef}; all bitmaps
+     * sharing {@link M3PixelRef} are affected.
      *
-     * @param colorSpace  {@link ColorSpace} to set
+     * @param colorSpace  {@link M3ColorSpace} to set
      * @return            this
      */
     public M3Bitmap setColorSpace(M3ColorSpace colorSpace) {
@@ -214,7 +214,7 @@ public class M3Bitmap extends M3Managed implements M3IHasImageInfo {
      * Returns minimum memory required for pixel storage.
      * Does not include unused memory on last row when getRowBytesAsPixels() exceeds getWidth().
      * Returns zero if height() or width() is 0.
-     * Returns getHeight() times getRowBytes() if getColorType() is {@link ColorType#UNKNOWN}.
+     * Returns getHeight() times getRowBytes() if getColorType() is {@link M3ColorType#UNKNOWN}.
      *
      * @return  size in bytes of image buffer
      */
@@ -265,7 +265,7 @@ public class M3Bitmap extends M3Managed implements M3IHasImageInfo {
      * been initialized by Bitmap().</p>
      *
      * <p>Sets width, height, row bytes to zero; pixel address to nullptr; ColorType to
-     * {@link ColorType#UNKNOWN}; and ColorAlphaType to {@link ColorAlphaType#UNKNOWN}.</p>
+     * {@link M3ColorType#UNKNOWN}; and ColorAlphaType to {@link M3ColorAlphaType#UNKNOWN}.</p>
      *
      * <p>If PixelRef is allocated, its reference count is decreased by one, releasing
      * its memory if Bitmap is the sole owner.</p>
@@ -285,14 +285,14 @@ public class M3Bitmap extends M3Managed implements M3IHasImageInfo {
      * without alpha in each pixel; for other ColorType, returns true if all
      * pixels have alpha values equivalent to 1.0 or greater.</p>
      *
-     * <p>For {@link ColorType#RGB_565} or {@link ColorType#GRAY_8}: always
-     * returns true. For {@link ColorType#ALPHA_8}, {@link ColorType#BGRA_8888},
-     * {@link ColorType#RGBA_8888}: returns true if all pixel alpha values are 255.
-     * For {@link ColorType#ARGB_4444}: returns true if all pixel alpha values are 15.
-     * For {@link ColorType#RGBA_F16}: returns true if all pixel alpha values are 1.0 or
+     * <p>For {@link M3ColorType#RGB_565} or {@link M3ColorType#GRAY_8}: always
+     * returns true. For {@link M3ColorType#ALPHA_8}, {@link M3ColorType#BGRA_8888},
+     * {@link M3ColorType#RGBA_8888}: returns true if all pixel alpha values are 255.
+     * For {@link M3ColorType#ARGB_4444}: returns true if all pixel alpha values are 15.
+     * For {@link M3ColorType#RGBA_F16}: returns true if all pixel alpha values are 1.0 or
      * greater.</p>
      *
-     * <p>Returns false for {@link ColorType#UNKNOWN}.
+     * <p>Returns false for {@link M3ColorType#UNKNOWN}.
      *
      * @return    true if all pixels have opaque values or ColorType is opaque
      */
@@ -327,14 +327,14 @@ public class M3Bitmap extends M3Managed implements M3IHasImageInfo {
      * Frees pixels, and returns true if successful.</p>
      *
      * <p>imageInfo.getAlphaType() may be altered to a value permitted by imageInfo.getColorSpace().
-     * If imageInfo.getColorType() is {@link ColorType#UNKNOWN}, imageInfo.getAlphaType() is
-     * set to {@link ColorAlphaType#UNKNOWN}.
-     * If imageInfo.colorType() is {@link ColorType#ALPHA_8} and imageInfo.getAlphaType() is
-     * {@link ColorAlphaType#UNPREMUL}, imageInfo.getAlphaType() is replaced by {@link ColorAlphaType#PREMUL}.
-     * If imageInfo.colorType() is {@link ColorType#RGB_565} or {@link ColorType#GRAY_8},
-     * imageInfo.getAlphaType() is set to {@link ColorAlphaType#OPAQUE}.
-     * If imageInfo.colorType() is {@link ColorType#ARGB_4444}, {@link ColorType#RGBA_8888},
-     * {@link ColorType#BGRA_8888}, or {@link ColorType#RGBA_F16}: imageInfo.getAlphaType() remains
+     * If imageInfo.getColorType() is {@link M3ColorType#UNKNOWN}, imageInfo.getAlphaType() is
+     * set to {@link M3ColorAlphaType#UNKNOWN}.
+     * If imageInfo.colorType() is {@link M3ColorType#ALPHA_8} and imageInfo.getAlphaType() is
+     * {@link M3ColorAlphaType#UNPREMUL}, imageInfo.getAlphaType() is replaced by {@link M3ColorAlphaType#PREMUL}.
+     * If imageInfo.colorType() is {@link M3ColorType#RGB_565} or {@link M3ColorType#GRAY_8},
+     * imageInfo.getAlphaType() is set to {@link M3ColorAlphaType#OPAQUE}.
+     * If imageInfo.colorType() is {@link M3ColorType#ARGB_4444}, {@link M3ColorType#RGBA_8888},
+     * {@link M3ColorType#BGRA_8888}, or {@link M3ColorType#RGBA_F16}: imageInfo.getAlphaType() remains
      * unchanged.</p>
      *
      * <p>Calls reset() and returns false if:
@@ -358,18 +358,18 @@ public class M3Bitmap extends M3Managed implements M3IHasImageInfo {
      * rowBytes. Frees pixels, and returns true if successful.</p>
      *
      * <p>imageInfo.getAlphaType() may be altered to a value permitted by imageInfo.getColorSpace().
-     * If imageInfo.getColorType() is {@link ColorType#UNKNOWN}, imageInfo.getAlphaType() is
-     * set to {@link ColorAlphaType#UNKNOWN}.
-     * If imageInfo.colorType() is {@link ColorType#ALPHA_8} and imageInfo.getAlphaType() is
-     * {@link ColorAlphaType#UNPREMUL}, imageInfo.getAlphaType() is replaced by {@link ColorAlphaType#PREMUL}.
-     * If imageInfo.colorType() is {@link ColorType#RGB_565} or {@link ColorType#GRAY_8},
-     * imageInfo.getAlphaType() is set to {@link ColorAlphaType#OPAQUE}.
-     * If imageInfo.colorType() is {@link ColorType#ARGB_4444}, {@link ColorType#RGBA_8888},
-     * {@link ColorType#BGRA_8888}, or {@link ColorType#RGBA_F16}: imageInfo.getAlphaType() remains
+     * If imageInfo.getColorType() is {@link M3ColorType#UNKNOWN}, imageInfo.getAlphaType() is
+     * set to {@link M3ColorAlphaType#UNKNOWN}.
+     * If imageInfo.colorType() is {@link M3ColorType#ALPHA_8} and imageInfo.getAlphaType() is
+     * {@link M3ColorAlphaType#UNPREMUL}, imageInfo.getAlphaType() is replaced by {@link M3ColorAlphaType#PREMUL}.
+     * If imageInfo.colorType() is {@link M3ColorType#RGB_565} or {@link M3ColorType#GRAY_8},
+     * imageInfo.getAlphaType() is set to {@link M3ColorAlphaType#OPAQUE}.
+     * If imageInfo.colorType() is {@link M3ColorType#ARGB_4444}, {@link M3ColorType#RGBA_8888},
+     * {@link M3ColorType#BGRA_8888}, or {@link M3ColorType#RGBA_F16}: imageInfo.getAlphaType() remains
      * unchanged.</p>
      *
      * <p>rowBytes must equal or exceed imageInfo.getMinRowBytes(). If imageInfo.getColorSpace() is
-     * {@link ColorType#UNKNOWN}, rowBytes is ignored and treated as zero; for all other
+     * {@link M3ColorType#UNKNOWN}, rowBytes is ignored and treated as zero; for all other
      * ColorSpace values, rowBytes of zero is treated as imageInfo.getMinRowBytes().</p>
      *
      * <p>Calls reset() and returns false if:
@@ -469,7 +469,7 @@ public class M3Bitmap extends M3Managed implements M3IHasImageInfo {
     }
 
     /**
-     * <p>Sets ImageInfo to info following the rules in {@link #setImageInfo(ImageInfo, long)} and allocates pixel
+     * <p>Sets ImageInfo to info following the rules in {@link #setImageInfo(M3ImageInfo, long)} and allocates pixel
      * memory.</p>
      *
      * <p>Returns false and calls reset() if ImageInfo could not be set, or memory could
@@ -490,7 +490,7 @@ public class M3Bitmap extends M3Managed implements M3IHasImageInfo {
 
     /**
      * Sets ImageInfo to width, height, and native color type; and allocates
-     * pixel memory. Sets ImageInfo to {@link ColorAlphaType#PREMUL}.
+     * pixel memory. Sets ImageInfo to {@link M3ColorAlphaType#PREMUL}.
      *
      * Calls reset() and returns false if width exceeds 29 bits or is negative,
      * or height is negative.
@@ -510,8 +510,8 @@ public class M3Bitmap extends M3Managed implements M3IHasImageInfo {
 
     /**
      * Sets ImageInfo to width, height, and native color type; and allocates
-     * pixel memory. If opaque is true, sets ImageInfo to {@link ColorAlphaType#OPAQUE};
-     * otherwise, sets to {@link ColorAlphaType#PREMUL}.
+     * pixel memory. If opaque is true, sets ImageInfo to {@link M3ColorAlphaType#OPAQUE};
+     * otherwise, sets to {@link M3ColorAlphaType#PREMUL}.
      *
      * Calls reset() and returns false if width exceeds 29 bits or is negative,
      * or height is negative.
@@ -570,7 +570,7 @@ public class M3Bitmap extends M3Managed implements M3IHasImageInfo {
      * <p>Allocates pixel memory with HeapAllocator, and replaces existing PixelRef.
      * The allocation size is determined by ImageInfo width, height, and ColorType.</p>
      *
-     * <p>Returns false if info().colorType() is {@link ColorType#UNKNOWN}, or allocation fails.</p>
+     * <p>Returns false if info().colorType() is {@link M3ColorType#UNKNOWN}, or allocation fails.</p>
      *
      * @return  true if the allocation succeeds
      */
@@ -706,8 +706,8 @@ public class M3Bitmap extends M3Managed implements M3IHasImageInfo {
     /**
      * Replaces pixel values with color, interpreted as being in the sRGB.
      * All pixels contained by getBounds() are affected. If the getColorType() is
-     * {@link ColorType#GRAY_8} or {@link ColorType#RGB_565}, then alpha is ignored; RGB is
-     * treated as opaque. If getColorType() is {@link ColorType#ALPHA_8}, then RGB is ignored.
+     * {@link M3ColorType#GRAY_8} or {@link M3ColorType#RGB_565}, then alpha is ignored; RGB is
+     * treated as opaque. If getColorType() is {@link M3ColorType#ALPHA_8}, then RGB is ignored.
      *
      * @param color      unpremultiplied color
      * @return           this
@@ -728,8 +728,8 @@ public class M3Bitmap extends M3Managed implements M3IHasImageInfo {
     /**
      * Replaces pixel values with color, interpreted as being in the sRGB.
      * All pixels contained by getBounds() are affected. If the getColorType() is
-     * {@link ColorType#GRAY_8} or {@link ColorType#RGB_565}, then alpha is ignored; RGB is
-     * treated as opaque. If getColorType() is {@link ColorType#ALPHA_8}, then RGB is ignored.
+     * {@link M3ColorType#GRAY_8} or {@link M3ColorType#RGB_565}, then alpha is ignored; RGB is
+     * treated as opaque. If getColorType() is {@link M3ColorType#ALPHA_8}, then RGB is ignored.
      *
      * @param color      unpremultiplied color
      * @param area       rectangle to fill
@@ -752,8 +752,8 @@ public class M3Bitmap extends M3Managed implements M3IHasImageInfo {
     /**
      * Replaces pixel values with color, interpreted as being in the sRGB ColorSpace.
      * All pixels contained by getBounds() are affected. If the getColorType() is
-     * {@link ColorType#GRAY_8} or {@link ColorType#RGB_565}, then alpha is ignored; RGB is
-     * treated as opaque. If getColorType() is {@link ColorType#ALPHA_8}, then RGB is ignored.
+     * {@link M3ColorType#GRAY_8} or {@link M3ColorType#RGB_565}, then alpha is ignored; RGB is
+     * treated as opaque. If getColorType() is {@link M3ColorType#ALPHA_8}, then RGB is ignored.
      *
      * @param color  unpremultiplied color
      * @return           this
@@ -774,9 +774,9 @@ public class M3Bitmap extends M3Managed implements M3IHasImageInfo {
      * Replaces pixel values inside area with color, interpreted as being in the sRGB
      * ColorSpace. If area does not intersect getBounds(), call has no effect.
      *
-     * If the getColorType() is {@link ColorType#GRAY_8} or {@link ColorType#RGB_565},
+     * If the getColorType() is {@link M3ColorType#GRAY_8} or {@link M3ColorType#RGB_565},
      * then alpha is ignored; RGB is treated as opaque. If getColorType() is
-     * {@link ColorType#ALPHA_8}, then RGB is ignored.
+     * {@link M3ColorType#ALPHA_8}, then RGB is ignored.
      *
      * @param color  unpremultiplied color
      * @param area   rectangle to fill
@@ -796,10 +796,10 @@ public class M3Bitmap extends M3Managed implements M3IHasImageInfo {
 
     /**
      * <p>Returns pixel at (x, y) as unpremultiplied color.
-     * Returns black with alpha if ColorType is {@link ColorType#ALPHA_8}.</p>
+     * Returns black with alpha if ColorType is {@link M3ColorType#ALPHA_8}.</p>
      *
      * <p>Input is not validated: out of bounds values of x or y returns undefined values
-     * or may crash if. Fails if ColorType is {@link ColorType#UNKNOWN} or
+     * or may crash if. Fails if ColorType is {@link M3ColorType#UNKNOWN} or
      * pixel address is nullptr.</p>
      *
      * <p>ColorSpace in ImageInfo is ignored. Some color precision may be lost in the
@@ -821,10 +821,10 @@ public class M3Bitmap extends M3Managed implements M3IHasImageInfo {
 
     /**
      * <p>Returns pixel at (x, y) as unpremultiplied color.
-     * Returns black with alpha if ColorType is {@link ColorType#ALPHA_8}.</p>
+     * Returns black with alpha if ColorType is {@link M3ColorType#ALPHA_8}.</p>
      *
      * <p>Input is not validated: out of bounds values of x or y returns undefined values
-     * or may crash if. Fails if ColorType is {@link ColorType#UNKNOWN} or
+     * or may crash if. Fails if ColorType is {@link M3ColorType#UNKNOWN} or
      * pixel address is nullptr.</p>
      *
      * <p>ColorSpace in ImageInfo is ignored. Some color precision may be lost in the
@@ -913,9 +913,9 @@ public class M3Bitmap extends M3Managed implements M3IHasImageInfo {
      * </ul>
      *
      * <p>Pixels are copied only if pixel conversion is possible. If Bitmap getColorType() is
-     * {@link ColorType#GRAY_8}, or {@link ColorType#ALPHA_8}; dstInfo.colorType() must match.
-     * If Bitmap getColorType() is {@link ColorType#GRAY_8}, dstInfo.getColorSpace() must match.
-     * If Bitmap getAlphaType() is {@link ColorAlphaType#OPAQUE}, dstInfo.getAlphaType() must
+     * {@link M3ColorType#GRAY_8}, or {@link M3ColorType#ALPHA_8}; dstInfo.colorType() must match.
+     * If Bitmap getColorType() is {@link M3ColorType#GRAY_8}, dstInfo.getColorSpace() must match.
+     * If Bitmap getAlphaType() is {@link M3ColorAlphaType#OPAQUE}, dstInfo.getAlphaType() must
      * match. If Bitmap getColorSpace() is null, dstInfo.getColorSpace() must match. Returns
      * false if pixel conversion is not possible.</p>
      *
