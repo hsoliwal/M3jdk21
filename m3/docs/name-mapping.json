@@ -10937,6 +10937,10 @@
           {
             "id": "related-source-bounds-current",
             "receipt": "m3/compatibility/lexicon-related-source-range-20261031/receipt.json"
+          },
+          {
+            "id": "related-source-bounded-observation-20261031",
+            "receipt": "m3/compatibility/lexicon-related-source-range-20261031/measurement.json"
           }
         ],
         "provenance": {

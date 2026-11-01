@@ -1,0 +1,92 @@
+{
+  "schema": "M3_LEXICON_RECEIVER_WINDOWS_OBSERVATION_V1",
+  "status": "ISOLATED_WINDOWS_COMPONENT_PROOF_NOT_JDK_ADMISSION",
+  "date": "2026-10-31",
+  "sourceRevision": "52fb81c483c74448a12eecb63aa9465e42cdb82c",
+  "receiverTree": "d1003e61b7f45cc6b14f8c7dab523e30ab7752a9",
+  "nativeTree": "17beb612ced559544542c8df2bf4f5f928402e19",
+  "scope": {
+    "productionJavaFiles": 17,
+    "existingProofClasses": 4,
+    "rawGitBlobsVerified": 24,
+    "productionChanges": 0
+  },
+  "maven": {
+    "status": "PASS_OFFLINE",
+    "checks": {
+      "receiver": 806797,
+      "boundary": 203,
+      "composition": 2734316
+    },
+    "logSha256": "3ead431df5b4afa7bd8631208845971d4f526620b82685056267797bbb5366ad"
+  },
+  "jni": {
+    "status": "PASS_NATIVE_REQUIRED",
+    "proof": "com.m3.lexicon.M3LexiconWireProof",
+    "checks": 356804,
+    "source": "m3/lexicon/native/m3_lexicon_wire_jni.c",
+    "sourceGitBlob": "4e1ae84caa172d3489b0e5e2ac19c6fa551bd8ac",
+    "compiler": "MinGW GCC15.2.0 x86_64-posix-seh;-std=c11 -Wall -Wextra -Werror -shared -O2",
+    "jvm": "Oracle JDK21.0.9+7-LTS-338 Windowsx64;-Xcheck:jni",
+    "librarySha256": "bc0a821f4d3a63c2000688f60e3983fa7cff9ffbd343adca5d5d9715c68f5420",
+    "logSha256": "35e00b61a966cc4f019879937f8f3956eb6792ec690850e0e3ae95ec6be3b68d"
+  },
+  "evidence": {
+    "canonicalRepository": "hsoliwal/com.synexia",
+    "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-lexicon-selection-20261018/qualification/current-related-20261031/receiver-native",
+    "receiptSha256": "271eff73b0b176d559ee76e5811c85ce28c82d65748d3da21252662406b69b50",
+    "sourceManifestSha256": "2ccda021120aba14c3ed572fa86a3ad835dbdd01654f316c28f93037a9334953",
+    "blobVerificationSha256": "f89f4f451c26da1bd5c7ddb2bebe1f80bead52517815b3aff2077cbf78345eb0"
+  },
+  "runtimeDependencies": "Existing separate receiver classpath retains Apache Commons lang3/csv/io/codec; this does not inline those libraries or create a java.base dependency.",
+  "limitations": [
+    "Isolated receiver proof on stock Windows x64 JDK21; no installed M3JDK/HotSpot or java.base integration",
+    "No Linux/macOS/Android/other ABI qualification or jtreg/full SDK gates",
+    "JNI byte-copy accelerator only; dictionary authentication belongs to existing Java wire owner",
+    "Existing finite proof does not establish all null/read-only/overlapping-slice cases, concurrent mutation, GC stress or long-lived native-owner lifecycle",
+    "JNI pointers/array elements are call-scoped in this source; no retained-pointer lifetime or process-memory/performance qualification",
+    "No source implementation generated; Chrome generation HOLD retained"
+  ],
+  "phaseAdvanced": false,
+  "donorDeletion": false,
+  "coreProof": {
+    "sourceRevision": "52fb81c483c74448a12eecb63aa9465e42cdb82c",
+    "summary": {
+      "result_groups": {
+        "PASS": 17,
+        "HOLD": 2,
+        "NOT_RUN": 2
+      },
+      "flat_pass": 17,
+      "flat_hold": 1,
+      "flat_not_run": 2,
+      "runtime_invocations": 22,
+      "completed_assertion_checks": 204904,
+      "exported_records": 10001,
+      "native_full_contract_passes": 0,
+      "native_platform_holds": 4
+    },
+    "scope": "26 original sealed production files read-only; 20 flat mains inventoried; six nested tests inventory-only",
+    "maven": "CPU orchestration completed; not an all-contracts pass",
+    "holdReason": "Original corruption write failed on Windows while the image remained mapped; no source/test edits or unmapping workaround applied.",
+    "parentSidecars": "Two not repeated by this sweep; earlier baseline/candidate tests separately passed 12 and17 checks.",
+    "limits": [
+      "Windows x64/JDK21/GCC only; no Linux/macOS execution",
+      "General Java mains tested in default JVM mode only; parent two sidecars not repeated",
+      "Native-required word-row run in default/interpreter/compact-off/c2; all HOLD after parity phase",
+      "Word-row partial checks count unavailable because original final banner was not reached",
+      "Mapped file corruption writes blocked by Windows; no test edits, unmapping hacks, or assertion bypass",
+      "Six nested tests NOT_RUN; java.lang patch surface and fixed-address tests unqualified",
+      "Maven exit 0 means orchestration completed; authoritative proof statuses include HOLD",
+      "Parent receiver JNI wire proof not repeated; no fixed-address mapping activated"
+    ],
+    "evidence": {
+      "canonicalRepository": "hsoliwal/com.synexia",
+      "canonicalPath": "synexia-openrewrite-recipes/recipe-crates/m3-lexicon-selection-20261018/qualification/current-related-20261031/core-contracts",
+      "receiptSha256": "8bf0a03c7e87d8cf96e19e91027f850df68d890b7b4883c153a500d0ff8b97a5",
+      "resultsSha256": "82f3df483e6684d0a9ba6f78f1a450df871173338c3ab3cea5fb6785471c38c9",
+      "sourceVerificationSha256": "69a11260a9031b66a58c08b9b13db2eef8ea3b2a5fcbf69e8234b45f8dcd9fdc",
+      "commandsSha256": "e36569abe216b4b9c3dd9ad57445fa189a85eeaa8c0904e091ec344134b30c87"
+    }
+  }
+}
