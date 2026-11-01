@@ -12,6 +12,7 @@ jars (skija-shared-0.143.18.jar and types-0.2.0.jar, separated by the platform p
   test/jdk/jdk/m3/graphics/M3GraphicsAtomsContractTest.java plain JUnit contract tests of atoms without a donor class
   test/jdk/jdk/m3/graphics/M3GraphicsAtomsRecipes.java      how the tests build values and proxies of donor types
   test/jdk/jdk/m3/graphics/M3GraphicsAtomsDomains.java      int parameters used as enum ordinals or switch codes
+  test/jdk/jdk/m3/graphics/M3GraphicsAtomsRenames.java      the TYPE_RENAME names and the class-name members
   test/jdk/jdk/m3/graphics/M3GraphicsAtomsPerf.java         jtreg main/othervm harness, one row per tested atom
   test/jdk/jdk/m3/graphics/M3GraphicsAtomsPerfGroupNN.java  static final MethodHandles and timed loops per row
   m3/tooling/skija-absorb/leaf1/ATOM_TESTS.tsv              per atom: pattern, status, reason, counts
@@ -27,12 +28,22 @@ identity hashes pinned (-XX:hashCode=2) so every hashCode compares exactly; perf
 normalized bytecode of the member and its module callees on both sides; the Multi-Release variant the oracle loads
 must be the MR_SELECT source of the M3 class, and the TYPE_RENAME rows must follow the runner's rename rule.
 
+v3 (verifier of #2243): a string or message that equals the oracle's only after dropping the M3 prefix of a
+TYPE_RENAME name (M3GraphicsAtomsRenames.NAMES, no other identifier) matches only in a member whose bytecode reaches a
+class-name API (CLASS_NAMES); anywhere else it is a mismatch. RELATIONAL rows call binary geometry and comparison
+members (Rect.intersect(Rect), IRect.contains(IPoint), Point.offset(Point), equals) with an argument built from the
+receiver by a relation (shared edge, touching corner, containment, identical, disjoint, ...) through field-mapping
+constructors whose fields are a rectangle (left, top, right, bottom) or a point (x, y). The Multi-Release check reuses
+mr_select.py: the JEP 238 choice of the oracle jars (mr_select.jar_versions) must equal leaf1/MR_SELECT.tsv class for
+class, in both directions, version and jar entry.
+
 The hand-written runner (M3GraphicsAtoms*.java) executes the cases. The generator computes the same case counts
 (cases(), mirror of M3GraphicsAtoms.cases) and every test asserts them. Members whose bytecode can reach native code
 (native methods, class initializers that load the library, transitively) are BLOCKED_NATIVES; the tests fail when an
 emitted member reaches natives, so the classification is checked by execution. --check regenerates in memory and
 exits 1 when a generated file differs from disk (fixed point).
 """
+import importlib.util
 import os
 import re
 import subprocess
@@ -46,7 +57,7 @@ TOOL = "m3/tooling/skija-absorb/tools/gen_atom_tests.py"
 TEST_DIR = "test/jdk/jdk/m3/graphics"
 LEAF = "m3/tooling/skija-absorb/leaf1"
 LEDGERS = "m3/tooling/skija-absorb/ledgers"
-GENERATED = re.compile(r"^M3GraphicsAtoms(Test\d+|PerfGroup\d+|Recipes|Perf|Domains|ContractTest)\.java$")
+GENERATED = re.compile(r"^M3GraphicsAtoms(Test\d+|PerfGroup\d+|Recipes|Perf|Domains|ContractTest|Renames)\.java$")
 DONOR_ROOT = "io.github.humbleui."
 M3_ROOT = "jdk.m3.graphics"
 M3_PREFIX = "M3"
@@ -67,7 +78,7 @@ MAX_CONST_NAME = 24
 MAX_DOMAIN_DEPTH = 3
 INTS_PER_LINE = 16
 BATCH = 80
-KIND_ORDER = ("STATIC_FIELD", "FIELD", "CTOR", "STATIC_METHOD", "METHOD", "PERTURB")
+KIND_ORDER = ("STATIC_FIELD", "FIELD", "CTOR", "STATIC_METHOD", "METHOD", "PERTURB", "RELATIONAL")
 BOXED = frozenset("java.lang." + n for n in ("Boolean", "Byte", "Character", "Short", "Integer", "Long", "Float",
                                             "Double"))
 JDK_KINDS = {"java.util.function.Supplier": "SUPPLIER", "java.lang.Runnable": "RUNNABLE", "java.net.URL": "URL"}
@@ -104,6 +115,28 @@ DONOR_REF = re.compile(r"io/github/humbleui/[A-Za-z0-9_/$]+")
 M3_REF = re.compile(r"jdk/m3/graphics/[A-Za-z0-9_/$]+")
 INDY_INDEX = re.compile(r"InvokeDynamic #\d+:")
 WIDE_SLOTS = ("J", "D")
+# FLLDCIM: SFA - v3: rename normalization only for TYPE_RENAME names, expected only where class names are printed
+CLASS_NAME_API = re.compile(r"^java\.lang\.Class\.(getName|getSimpleName|getTypeName|getCanonicalName|toString)$")
+NAME_SEPARATOR = ";"
+# FLLDCIM: TOP - v3: RELATIONAL rows (mirror of M3GraphicsAtomsRelations: relations per role pair, bases per primitive)
+RELATIONAL = "RELATIONAL"
+ROLE_OF_FIELD = {"left": "L", "top": "T", "right": "R", "bottom": "B", "x": "X", "y": "Y"}
+ROLE_KINDS = {"BLRT": "RECT", "XY": "POINT"}
+RELATIONS = {("RECT", "RECT"): 11, ("RECT", "POINT"): 13, ("POINT", "POINT"): 6}
+BASES = {"I": 3, "F": 4}
+
+
+def load_tool(name):
+    """A sibling tool as a module (tools/<name>.py), also under python -I."""
+    spec = importlib.util.spec_from_file_location(name, os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                                                     name + ".py"))
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+# FLLDCIM: MRL - v3: the Multi-Release rule of mr_select.py (JEP 238) instead of a second, weaker one
+MR = load_tool("mr_select")
 
 
 # ---------------------------------------------------------------- inputs
@@ -366,16 +399,27 @@ def jar_classes(jars):
     return sorted(out)
 
 
-def multi_release_variants(jars):
-    """{donor binary name: 'versions/N'} for classes a multi-release oracle jar replaces on Java N+ (JEP 238)."""
-    out = {}
-    for jar in jars.split(os.pathsep):
-        with zipfile.ZipFile(jar) as z:
-            for n in sorted(z.namelist()):
-                m = re.match(r"^META-INF/(versions/\d+)/(.+)\.class$", n)
-                if m and "module-info" not in m.group(2):
-                    out[m.group(2).replace("/", ".")] = m.group(1)
+def mr_cross_check(jar_chosen, selected):
+    """MR_SELECT v1 against the oracle jars, both directions (mr_select.cross_check, plus the jar entry): for every
+    class that the jars version (JEP 238: highest K <= release, Multi-Release manifests only) or that MR_SELECT.tsv
+    selects above the root, the selected version, the jar entry and the release bound agree. Rows: (donor, jar version,
+    MR_SELECT version, MR_SELECT source, MATCH or MISMATCH)."""
+    out = []
+    for name in sorted(set(jar_chosen) | {n for n, r in selected.items() if r["selected"] != MR.ROOT_LABEL}):
+        jar = jar_chosen.get(name)
+        row = selected.get(name, {})
+        jar_label = MR.label(jar[0]) if jar else MR.ROOT_LABEL
+        sel_label = row.get("selected", MR.ROOT_LABEL)
+        bounded = sel_label == MR.ROOT_LABEL or (sel_label.isdigit() and int(sel_label) <= int(MR_RELEASE)
+                                                 and sel_label in row.get("versions", "").split(","))
+        match = jar_label == sel_label and (jar[1] if jar else "-") == row.get("jar_entry", "-") and bounded
+        out.append((name, jar_label, sel_label, row.get("source", "-"), "MATCH" if match else "MISMATCH"))
     return out
+
+
+def mr_text(row):
+    return "jar %s (mr_select.jar_versions, release %s); MR_SELECT %s, M3 source %s: %s" % (
+        row[1], MR_RELEASE, row[2], row[3], row[4])
 
 
 def walk_classes(root):
@@ -410,7 +454,8 @@ class Model:
         otext, oerr = javap(mr + ["-public", "-s"], sorted(self.donor_to_m3), oracle_jars)
         self.oracle_api = parse_api(otext)
         self.oracle_missing = sorted(set(re.findall(r"class not found: ([\w.$]+)", oerr)))
-        self.mr_variants = multi_release_variants(oracle_jars)
+        self.mr_rows = {r[0]: r for r in mr_cross_check(MR.jar_versions(oracle_jars.split(os.pathsep),
+                                                                         int(MR_RELEASE))[0], self.mr_select)}
         all_classes = sorted(p[:-6].replace(os.sep, "/").replace("/", ".") for p in walk_classes(m3_classes))
         self.classes, self.bodies = parse_bodies(javap(["-c", "-p", "-s"], all_classes, m3_classes)[0])
         _, self.oracle_bodies = parse_bodies(javap(mr + ["-c", "-p", "-s"], jar_classes(oracle_jars), oracle_jars)[0])
@@ -423,7 +468,8 @@ class Model:
         self.native_instances = {}
         self.edge_map = {k: self.edges(k) for k in self.bodies}
         self.touch = self.native_closure()
-        self.nondet = self.nondet_closure()
+        self.nondet = self.closure(NONDETERMINISTIC)
+        self.classname = self.closure(CLASS_NAME_API)
 
     # ---- bytecode closures
     def resolve(self, owner, name, desc):
@@ -476,8 +522,9 @@ class Model:
                     touch[k] = changed = True
         return touch
 
-    def nondet_closure(self):
-        nd = {k: any(NONDETERMINISTIC.match(j) for j in b["jdk"]) for k, b in self.bodies.items()}
+    def closure(self, jdk_calls):
+        """{body: True} when the body or a module body it reaches calls a JDK method matching jdk_calls."""
+        nd = {k: any(jdk_calls.match(j) for j in b["jdk"]) for k, b in self.bodies.items()}
         changed = True
         while changed:
             changed = False
@@ -633,6 +680,22 @@ class Generator:
             self.classify(a)
         for a in self.atoms:
             self.domains(a)
+        self.class_names = self.class_name_keys()
+
+    # FLLDCIM: SFA - v3: members where a rename-only string or message match is expected
+    def class_name_keys(self):
+        """Runner keys (atom.name(descriptor)) of the tested calls whose bytecode, with its module callees, reaches a
+        class-name API: only there may a text differ from the oracle's by the M3 prefix of a TYPE_RENAME name."""
+        out = set()
+        for a in self.atoms:
+            for m in a.tested():
+                if m["kind"] not in ("CTOR", "STATIC_METHOD", "METHOD") or not m["m3desc"]:
+                    continue
+                name = "<init>" if m["kind"] == "CTOR" else m["name"]
+                key = self.m.resolve(a.m3, name, m["m3desc"])
+                if key and self.m.classname.get(key):
+                    out.add("%s.%s%s" % (a.short, name, m["desc"]))
+        return out
 
     def recipe_levels(self):
         """Which value types can be built: level 0 recipes take no value parameters, level k recipes take values
@@ -862,6 +925,7 @@ class Generator:
                 seen.add((row["kind"], row["name"], row["params"]))
                 a.members.append(row)
         self.perturb(a)
+        self.relational(a)
         a.members.sort(key=lambda r: (KIND_ORDER.index(r["kind"]), r["name"], r["desc"]))
         self.atom_status(a, t)
 
@@ -999,6 +1063,44 @@ class Generator:
         a.members.append(mrow("PERTURB", "<init>", shorts, "TESTED", reason, len(positions) * PERTURB_ROUNDS,
                               m3desc=x["desc"]))
 
+    # ---- relational cases (v3)
+    # FLLDCIM: TOP - v3: geometry roles of a value atom, from its field-mapping constructor and field names
+    def geometry(self, short_name):
+        """(kind, constructor descriptor, roles) of a runnable value atom built by a field-mapping public constructor
+        whose parameters are all int or all float and whose fields are a rectangle (left, top, right, bottom: RECT) or
+        a point (x, y: POINT), roles in parameter order; else None."""
+        a = self.by_short.get(short_name)
+        if a is None or short_name not in self.candidates:
+            return None
+        for x in sorted(self.api(a)["members"], key=lambda x: x["desc"]):
+            if x["kind"] != "ctor" or "public" not in x["mods"] or self.touches(a, x):
+                continue
+            params, fields = tokens(x["desc"])[0], self.field_mapping(a, x)
+            if not fields or len(set(params)) != 1 or params[0] not in BASES:
+                continue
+            roles = "".join(ROLE_OF_FIELD.get(f.lstrip("_").lower(), "?") for f in fields)
+            if "".join(sorted(roles)) in ROLE_KINDS:
+                return ROLE_KINDS["".join(sorted(roles))], "(%s)" % "".join(params), roles
+        return None
+
+    # FLLDCIM: TOP - v3: RELATIONAL rows of binary geometry and comparison members (#2243 verifier VFY3)
+    def relational(self, a):
+        """RELATIONAL rows: each tested instance method of a geometry atom whose first geometry parameter forms a role
+        pair of RELATIONS with the receiver, and equals(Object) against the atom's own geometry."""
+        recv = self.geometry(a.short)
+        for m in [m for m in a.tested() if m["kind"] == "METHOD"] if recv else []:
+            related = [(0, recv)] if (m["name"], m["params"]) == ("equals", EQUALS_PARAMS) else [
+                (p, g) for p, g in ((p, self.geometry(binary(t[1:-1])) if t.startswith("L") else None)
+                                    for p, t in enumerate(m["params"])) if g and (recv[0], g[0]) in RELATIONS][:1]
+            for p, g in related:
+                bases = BASES[tokens(recv[1])[0][0]]
+                row = mrow(RELATIONAL, m["name"], m["params"], "TESTED", "%s x %s: %d relations x %d bases; receiver "
+                           "<init>%s %s, argument %d <init>%s %s" % (recv[0], g[0], RELATIONS[(recv[0], g[0])], bases,
+                                                                    recv[1], recv[2], p, g[1], g[2]),
+                           RELATIONS[(recv[0], g[0])] * bases, m3desc=m["m3desc"])
+                row["relation"] = (recv[1] + recv[2], "%d%s%s" % (p, g[1], g[2]))
+                a.members.append(row)
+
     # ---- int domains
     def domains(self, a):
         for m in a.members:
@@ -1107,7 +1209,7 @@ class Generator:
                      kind == "METHOD" and name.startswith("with"), kind == "CTOR" and bool(params),
                      kind == "METHOD", kind == "STATIC_METHOD", kind == "FIELD", True]
             return (order.index(True), name, m["desc"])
-        tested = [m for m in a.tested() if m["kind"] != "PERTURB"]
+        tested = [m for m in a.tested() if m["kind"] not in ("PERTURB", RELATIONAL)]
         return min(tested, key=rank) if tested else None
 
     def code_identity(self, a, m):
@@ -1119,13 +1221,9 @@ class Generator:
         return "SAME" if key and self.m.same_closure(key) else "DIFF"
 
     def oracle_variant(self, a):
-        v = self.m.mr_variants.get(a.donor)
-        if not v:
-            return "-", True
-        sel = self.m.mr_select.get(a.donor)
-        match = bool(sel) and v == "versions/" + sel["selected"]
-        return "%s; M3 source %s (MR_SELECT): %s" % (v, sel["source"] if sel else "base", "MATCH" if match
-                                                     else "MISMATCH"), match
+        """The MR_SELECT cross-check of the atom's donor class: '-' when neither the jars nor MR_SELECT version it."""
+        row = self.m.mr_rows.get(a.donor)
+        return (mr_text(row), row[4] == "MATCH") if row else ("-", True)
 
 
 # ---------------------------------------------------------------- emission
@@ -1163,7 +1261,7 @@ def desc_base(params):
 
 
 class Constants:
-    ORDER = ("KIND", "SIDE", "PATTERN", "CODE", "ATOM", "NAME", "DESC", "TOKEN", "CASES", "HANDLE")
+    ORDER = ("KIND", "SIDE", "PATTERN", "CODE", "ATOM", "NAME", "DESC", "RELATION", "TOKEN", "CASES", "HANDLE", "KEY")
 
     def __init__(self):
         self.by_key, self.used, self.decl = {}, set(), defaultdict(list)
@@ -1259,6 +1357,11 @@ def desc_const(c, params):
     return c.get("DESC", "String", "D_" + base, jstr("(" + "".join(params) + ")"))
 
 
+def relation_const(c, spec):
+    """A RELATIONAL spec constant: "(IIII)LTRB" (receiver) is R_IIII_LTRB, "0(II)XY" (argument 0) is R_0_II_XY."""
+    return c.get("RELATION", "String", "R_" + re.sub(r"[^A-Za-z0-9]+", "_", spec).strip("_"), jstr(spec))
+
+
 def render_atom(a, c, method):
     lines = ["    /** %s %s -> %s: %d members, %d cases. */" % (a.pattern, a.short, a.m3.rsplit(".", 1)[1],
                                                               len(a.tested()), a.total_cases()),
@@ -1266,6 +1369,12 @@ def render_atom(a, c, method):
     for m in a.tested():
         if m["kind"] == "PERTURB":
             lines.append("                .perturb(%s)" % desc_const(c, m["params"]))
+        elif m["kind"] == RELATIONAL:
+            call = "                .relational(%s, %s, %s, %s, %s)" % (
+                kind_const(c, "METHOD"), name_const(c, m["name"]), desc_const(c, m["params"]),
+                relation_const(c, m["relation"][0]), relation_const(c, m["relation"][1]))
+            cut = call.index(", ", call.index(", ", call.index(", ") + 2) + 2) + 1
+            lines += [call] if len(call) <= MAX_LINE else [call[:cut], "                        " + call[cut + 1:]]
         else:
             lines.append("                .member(%s, %s, %s)" % (kind_const(c, m["kind"]), name_const(c, m["name"]),
                                                                   desc_const(c, m["params"])))
@@ -1397,6 +1506,32 @@ def render_domains(gen):
     return "\n".join(lines)
 
 
+# FLLDCIM: TmOP - v3: M3GraphicsAtomsRenames from TYPE_RENAME_L1.tsv and the class-name closure
+def render_renames(gen):
+    c = Constants()
+    names = sorted(d.rsplit(".", 1)[1] for d in gen.m.donor_to_m3)
+    keys = [c.get("KEY", "String", "K_" + snake(k.split("(")[0].replace(".", "_")), jstr(k)) for k in
+            sorted(gen.class_names)]
+    lines = [JAVA_HEADER, "import java.util.Set;", "", "/**",
+             " * Generated by %s; do not edit. The leaf-1 type" % TOOL,
+             " * rename as the atom tests compare texts: the donor simple names of m3/tooling/skija-absorb/leaf1/",
+             " * TYPE_RENAME_L1.tsv (%d rows; every M3 name is M3 + the donor simple name, which the generator" % len(names),
+             " * checks), and the members whose bytecode, with its module callees, reaches a class-name API",
+             " * (java.lang.Class.getName, getSimpleName, getTypeName, getCanonicalName, toString). A string or message",
+             " * that equals the oracle's only after dropping the M3 prefix of one of these names matches in such a",
+             " * member and is a mismatch anywhere else (M3GraphicsAtomsCompare.texts).", " */",
+             "final class M3GraphicsAtomsRenames {"]
+    lines += const_line("String", "SEPARATOR", jstr(NAME_SEPARATOR))
+    lines += const_line("String", "DONOR_SIMPLE_NAMES", jstr(NAME_SEPARATOR.join(names)))
+    lines += c.lines(("KEY",))
+    lines += ["", "    /** The donor simple names of the rename (M3 name = M3 + donor simple name). */",
+              "    static final Set<String> NAMES = Set.of(DONOR_SIMPLE_NAMES.split(SEPARATOR));", "",
+              "    /** Member keys (atom.name(descriptor)) whose bytecode reaches a class-name API. */",
+              "    static final Set<String> CLASS_NAMES = Set.of(%s);" % ", ".join(keys), "",
+              "    private M3GraphicsAtomsRenames() {}", "}", ""]
+    return "\n".join(lines)
+
+
 def literal_parts(literal):
     """A key literal for 'Map.entry(' lines: whole, or cut after ';' with '+ ' continuations."""
     if len("            Map.entry(" + literal + ",") <= MAX_LINE:
@@ -1451,11 +1586,11 @@ def render_perf_main(groups, n_rows):
              " *          final MethodHandles. Per row: warm-up until both loops are compiled, then calibration of the",
              " *          passes to 2 ms rounds, then 11 rounds alternating which side runs first; ns/op per side is the",
              " *          median round, ratio = M3 / oracle, spread = interquartile range of the round ratios over their",
-             " *          median. No re-measuring. Guard: no atom slower than its oracle by more than 1.5x",
-             " *          (-Dm3.graphics.perf.slack=<factor>). C2 only and foreground compilation",
-             " *          (-XX:-TieredCompilation -Xbatch) keep the two sides' compiled loops alike; the blackhole keeps",
-             " *          every result. Rows whose code is the same on both sides (SAME) give the harness's own spread.",
-             " *          Without the oracle: PERF_SKIPPED.",
+             " *          median. No re-measuring. Rows whose code is the same on both sides (SAME) are the run's noise",
+             " *          (verdict NOISE, never failing); guard: no DIFF row slower than its oracle by more than",
+             " *          max(1.5x slack (-Dm3.graphics.perf.slack=<factor>), the largest SAME ratio of the run). C2 only",
+             " *          and foreground compilation (-XX:-TieredCompilation -Xbatch) keep the two sides' compiled loops",
+             " *          alike; the blackhole keeps every result. Without the oracle: PERF_SKIPPED.",
              " * @requires vm.compiler2.enabled",
              " * @modules jdk.m3.graphics",
              " * @run main/othervm -Xmx512m -XX:-TieredCompilation -Xbatch -XX:+UnlockExperimentalVMOptions",
@@ -1531,6 +1666,7 @@ def generate(gen):
     out["%s/M3GraphicsAtomsPerf.java" % TEST_DIR] = render_perf_main(groups, len(tested))
     out["%s/M3GraphicsAtomsRecipes.java" % TEST_DIR] = render_recipes(gen)
     out["%s/M3GraphicsAtomsDomains.java" % TEST_DIR] = render_domains(gen)
+    out["%s/M3GraphicsAtomsRenames.java" % TEST_DIR] = render_renames(gen)
     out["%s/ATOM_TESTS.tsv" % LEAF] = tsv(
         ("atom", "donor", "pattern", "pattern_source", "status", "scope", "reason", "members_tested",
          "members_blocked_natives", "members_excluded", "cases", "receivers", "test_class", "perf_member",
@@ -1590,20 +1726,21 @@ def main(argv):
     tested = [a for a in gen.atoms if a.tested()]
     perturbed = [a for a in tested if any(m["kind"] == "PERTURB" for m in a.members)]
     print("atoms=%d tested=%d blocked_natives=%d not_applicable=%d members_tested=%d cases=%d files=%d "
-          "max_lines=%d api_diffs=%d perturbed=%d domains=%d proxied=%d contracts=%d perf_same=%d changed=%d "
-          "stale=%d" % (
+          "max_lines=%d api_diffs=%d perturbed=%d relational=%d relational_cases=%d domains=%d proxied=%d "
+          "contracts=%d class_name_members=%d perf_same=%d changed=%d stale=%d" % (
               len(gen.atoms), counts["TESTED"], counts["BLOCKED_NATIVES"], counts["NOT_APPLICABLE"],
               sum(len(a.tested()) for a in tested), sum(a.total_cases() for a in tested), len(out),
               max(t.count("\n") for r, t in out.items() if r.endswith(".java")),
-              sum(len(a.api_diff) for a in gen.atoms), len(perturbed), len(domain_entries(gen)), len(gen.proxied),
-              sum(a.scope == "CONTRACT" for a in gen.atoms), sum(a.perf_code == "SAME" for a in tested if a.perf),
-              len(differ), len(stale)))
+              sum(len(a.api_diff) for a in gen.atoms), len(perturbed),
+              sum(m["kind"] == RELATIONAL for a in tested for m in a.members),
+              sum(m["cases"] for a in tested for m in a.members if m["kind"] == RELATIONAL), len(domain_entries(gen)),
+              len(gen.proxied), sum(a.scope == "CONTRACT" for a in gen.atoms), len(gen.class_names),
+              sum(a.perf_code == "SAME" for a in tested if a.perf), len(differ), len(stale)))
     mismatches = 0
+    for name, row in sorted(gen.m.mr_rows.items()):
+        print("MR_VARIANT\t%s\t%s" % (gen.m.donor_to_m3.get(name, name), mr_text(row)))
+        mismatches += row[4] != "MATCH"
     for a in gen.atoms:
-        text, match = gen.oracle_variant(a)
-        if text != "-":
-            print("MR_VARIANT\t%s\t%s" % (a.m3, text))
-            mismatches += 0 if match else 1
         for d in a.api_diff:
             print("API_DIFF\t%s\t%s" % (a.m3, "\t".join(d)))
     for d in gen.m.rename_mismatches:

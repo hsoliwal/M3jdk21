@@ -616,6 +616,8 @@ jdk.m3.graphics.M3IPoint	METHOD	toString()	TESTED	-	12	-	-	-
 jdk.m3.graphics.M3IPoint	METHOD	withX(I)	TESTED	-	24	-	-	-
 jdk.m3.graphics.M3IPoint	METHOD	withY(I)	TESTED	-	24	-	-	-
 jdk.m3.graphics.M3IPoint	PERTURB	<init>(II)	TESTED	equals and hashCode on copies with exactly one field changed: 2 of 2 fields (_x,_y)	4	-	-	-
+jdk.m3.graphics.M3IPoint	RELATIONAL	equals(Ljava/lang/Object;)	TESTED	POINT x POINT: 6 relations x 3 bases; receiver <init>(II) XY, argument 0 <init>(II) XY	18	-	-	-
+jdk.m3.graphics.M3IPoint	RELATIONAL	offset(Ltypes/IPoint;)	TESTED	POINT x POINT: 6 relations x 3 bases; receiver <init>(II) XY, argument 0 <init>(II) XY	18	-	-	-
 jdk.m3.graphics.M3IRange	FIELD	_end()	TESTED	-	12	-	-	-
 jdk.m3.graphics.M3IRange	FIELD	_start()	TESTED	-	12	-	-	-
 jdk.m3.graphics.M3IRange	CTOR	<init>(II)	TESTED	-	24	-	-	-
@@ -661,6 +663,10 @@ jdk.m3.graphics.M3IRect	METHOD	withRight(I)	TESTED	-	24	-	-	-
 jdk.m3.graphics.M3IRect	METHOD	withTop(I)	TESTED	-	24	-	-	-
 jdk.m3.graphics.M3IRect	METHOD	withWidth(I)	TESTED	-	24	-	-	-
 jdk.m3.graphics.M3IRect	PERTURB	<init>(IIII)	TESTED	equals and hashCode on copies with exactly one field changed: 4 of 4 fields (_left,_top,_right,_bottom)	8	-	-	-
+jdk.m3.graphics.M3IRect	RELATIONAL	contains(Ltypes/IPoint;)	TESTED	RECT x POINT: 13 relations x 3 bases; receiver <init>(IIII) LTRB, argument 0 <init>(II) XY	39	-	-	-
+jdk.m3.graphics.M3IRect	RELATIONAL	equals(Ljava/lang/Object;)	TESTED	RECT x RECT: 11 relations x 3 bases; receiver <init>(IIII) LTRB, argument 0 <init>(IIII) LTRB	33	-	-	-
+jdk.m3.graphics.M3IRect	RELATIONAL	intersect(Ltypes/IRect;)	TESTED	RECT x RECT: 11 relations x 3 bases; receiver <init>(IIII) LTRB, argument 0 <init>(IIII) LTRB	33	-	-	-
+jdk.m3.graphics.M3IRect	RELATIONAL	offset(Ltypes/IPoint;)	TESTED	RECT x POINT: 13 relations x 3 bases; receiver <init>(IIII) LTRB, argument 0 <init>(II) XY	39	-	-	-
 jdk.m3.graphics.M3ImageInfo	STATIC_FIELD	DEFAULT()	TESTED	-	1	-	-	-
 jdk.m3.graphics.M3ImageInfo	FIELD	_colorInfo()	TESTED	-	12	-	-	-
 jdk.m3.graphics.M3ImageInfo	FIELD	_height()	TESTED	-	12	-	-	-
@@ -832,6 +838,8 @@ jdk.m3.graphics.M3Point	METHOD	toString()	TESTED	-	12	-	-	-
 jdk.m3.graphics.M3Point	METHOD	withX(F)	TESTED	-	24	-	-	-
 jdk.m3.graphics.M3Point	METHOD	withY(F)	TESTED	-	24	-	-	-
 jdk.m3.graphics.M3Point	PERTURB	<init>(FF)	TESTED	equals and hashCode on copies with exactly one field changed: 2 of 2 fields (_x,_y)	4	-	-	-
+jdk.m3.graphics.M3Point	RELATIONAL	equals(Ljava/lang/Object;)	TESTED	POINT x POINT: 6 relations x 4 bases; receiver <init>(FF) XY, argument 0 <init>(FF) XY	24	-	-	-
+jdk.m3.graphics.M3Point	RELATIONAL	offset(Ltypes/Point;)	TESTED	POINT x POINT: 6 relations x 4 bases; receiver <init>(FF) XY, argument 0 <init>(FF) XY	24	-	-	-
 jdk.m3.graphics.M3Point3	STATIC_FIELD	ZERO()	TESTED	-	1	-	-	-
 jdk.m3.graphics.M3Point3	FIELD	_x()	TESTED	-	12	-	-	-
 jdk.m3.graphics.M3Point3	FIELD	_y()	TESTED	-	12	-	-	-
@@ -924,6 +932,10 @@ jdk.m3.graphics.M3Rect	METHOD	withRight(F)	TESTED	-	24	-	-	-
 jdk.m3.graphics.M3Rect	METHOD	withTop(F)	TESTED	-	24	-	-	-
 jdk.m3.graphics.M3Rect	METHOD	withWidth(F)	TESTED	-	24	-	-	-
 jdk.m3.graphics.M3Rect	PERTURB	<init>(FFFF)	TESTED	equals and hashCode on copies with exactly one field changed: 4 of 4 fields (_left,_top,_right,_bottom)	8	-	-	-
+jdk.m3.graphics.M3Rect	RELATIONAL	contains(Ltypes/Point;)	TESTED	RECT x POINT: 13 relations x 4 bases; receiver <init>(FFFF) LTRB, argument 0 <init>(FF) XY	52	-	-	-
+jdk.m3.graphics.M3Rect	RELATIONAL	equals(Ljava/lang/Object;)	TESTED	RECT x RECT: 11 relations x 4 bases; receiver <init>(FFFF) LTRB, argument 0 <init>(FFFF) LTRB	44	-	-	-
+jdk.m3.graphics.M3Rect	RELATIONAL	intersect(Ltypes/Rect;)	TESTED	RECT x RECT: 11 relations x 4 bases; receiver <init>(FFFF) LTRB, argument 0 <init>(FFFF) LTRB	44	-	-	-
+jdk.m3.graphics.M3Rect	RELATIONAL	offset(Ltypes/Point;)	TESTED	RECT x POINT: 13 relations x 4 bases; receiver <init>(FFFF) LTRB, argument 0 <init>(FF) XY	52	-	-	-
 jdk.m3.graphics.M3RegionOp	STATIC_FIELD	_values()	TESTED	-	1	-	-	-
 jdk.m3.graphics.M3RegionOp	STATIC_METHOD	valueOf(Ljava/lang/String;)	TESTED	-	24	-	-	-
 jdk.m3.graphics.M3RegionOp	STATIC_METHOD	values()	TESTED	-	1	-	-	-

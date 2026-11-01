@@ -6,7 +6,8 @@
 #
 # Runs the leaf-1 atom test recipe end to end from the repository root (CPU only, deterministic):
 #   1. jdk.m3.graphics classes      javac --release 21 -proc:none of src/jdk.m3.graphics (no module-info)
-#   2. generate + fixed point       tools/gen_atom_tests.py, then --check (0 files differ)
+#   2. generate + fixed point       tools/gen_atom_tests.py, then --check (0 files differ); tools/mr_check_selftest.py
+#                                   (the Multi-Release cross-check against MR_SELECT.tsv and its negative cases)
 #   3. test classes                 javac --release 21 -Xlint:all of test/jdk/jdk/m3/graphics
 #   4. JUnit                        identity hashes pinned (the jtreg @run lines), unpinned, without the oracle
 #   5. mutants                      tools/atom_mutants.py (leaf1/ATOM_MUTANTS.tsv)
@@ -25,7 +26,7 @@ TOOLS=m3/tooling/skija-absorb/tools
 TESTS=test/jdk/jdk/m3/graphics
 
 if [ "$#" -ne 3 ]; then
-    sed -n '5,17p' "$0"
+    sed -n '5,18p' "$0"
     exit 2
 fi
 WORK=$1
@@ -73,6 +74,7 @@ step module m3javac.log "$JAVAC" --release 21 -proc:none -nowarn -encoding UTF-8
     "@$WORK/m3srcs.txt"
 step generate gen.log python "$TOOLS/gen_atom_tests.py" . "$WORK/m3classes" "$ORACLE"
 step fixed_point gen_check.log python "$TOOLS/gen_atom_tests.py" . "$WORK/m3classes" "$ORACLE" --check
+step mr_selftest mr_selftest.log python -I "$TOOLS/mr_check_selftest.py" . "$WORK" "$ORACLE"
 step tests testjavac.log "$JAVAC" --release 21 -Xlint:all -encoding UTF-8 -cp "$CONSOLE" -d "$WORK/tests" \
     $TESTS/*.java
 step junit junit_pinned.log junit "${PINNED[@]}" "-Dm3.graphics.oracle=$ORACLE" || true
