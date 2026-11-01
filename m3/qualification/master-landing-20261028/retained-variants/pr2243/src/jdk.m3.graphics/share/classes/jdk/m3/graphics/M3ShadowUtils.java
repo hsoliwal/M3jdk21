@@ -19,7 +19,7 @@ public class M3ShadowUtils {
      * @param lightRadius          The radius of the disc light.
      * @param ambientColor         The color of the ambient shadow.
      * @param spotColor            The color of the spot shadow.
-     * @param flags                See {@link ShadowUtilsFlag}
+     * @param flags                See {@link M3ShadowUtilsFlag}
      */
     public static void drawShadow(M3Canvas canvas,
                                   M3Path path,

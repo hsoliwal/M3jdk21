@@ -114,11 +114,17 @@ differs from what the recipe produces, so a `check` after a `run` proves the fix
    `"M3Library.class"` (`ledgers/JAVA_CLASSREFS.tsv` -> `ledgers/CC_STRING_RENAME.tsv`). Every other literal that
    names a donor type is listed in `leaf1/STRING_MENTIONS.tsv`: the native loader's module name (replaced in leaf 2)
    and 223 messages and toString texts, kept as the donor prints them. A class-file or binary-name literal left
-   unrenamed stops the run.
+   unrenamed stops the run. JAVADOC_REF v1 applies the same rename, with the same scope rule, to the reference of
+   every Javadoc tag (`{@link}`, `{@linkplain}`, `{@value}`, `@see`, `@throws`): the class, the parameter types of a
+   member reference and a constructor name (520 tokens, 3 qualified packages); labels and prose stay as the donor
+   wrote them. `tools/absorb_rename_check.py` checks the rule on 12 fixed cases before the stage runs.
 5. `tools/normalize_ws.py` (NORMALIZE_WS v1): LF line ends, no trailing blanks, no blank lines at the end (jcheck).
 6. Gates: 0 errors with no jar on the classpath. The javap surface equals the donor's renamed surface, 4,622 = 4,622,
    and the surface of the jars as Java 21 loads them. `tools/M3GraphicsLeaf1Probe.java` runs the three versioned
-   classes and the loader's class-file lookup on JDK 21, on the module path and from a jlink image.
+   classes and the loader's class-file lookup on JDK 21, on the module path and from a jlink image. Doclint (G4b):
+   the module compiles as the JDK build compiles it, with `DOCLINT += -Xdoclint:all/protected,-missing` of
+   `make/modules/jdk.m3.graphics/Java.gmk`, its lint kinds and `-Werror`: 0 errors, 0 warnings (before JAVADOC_REF
+   v1: 470 "reference not found"). The "missing" group stays out of DOCLINT: 3,784 donor members have no comment.
 
 Owner correction (recorded): `io.github.humbleui.skija.impl` maps to `jdk.m3.graphics.impl`, not
 `jdk.internal.m3.graphics`. SWT Render M3 uses `impl.Native` (6 places) and `impl.Library`, so the package is exported,
@@ -128,13 +134,14 @@ Runtime state: the module compiles and its API is complete, but its natives are 
 the donor's native module, and the JNI symbols in the shipped dll carry the old names, so calls into native code fail
 until leaf 2 builds `libm3graphics` under the new names (`ledgers/JNI_RENAME.tsv`).
 
-## Leaf 1 atom tests: JUnit and perf per atom (2026-10-31, generator v2)
+## Leaf 1 atom tests: JUnit and perf per atom (2026-10-31, generator v2; v3 2026-11-01)
 
 `tools/atom_tests.sh <work dir> <oracle jars> <junit console jar>` (oracle jars: skija-shared-0.143.18.jar and
 types-0.2.0.jar joined by the path separator; JUnit: junit-platform-console-standalone 1.11.4) runs the whole recipe
 from the repository root (CPU only, deterministic): module classes, `tools/gen_atom_tests.py`
-and its `--check` fixed point, test compile, JUnit (identity hashes pinned, unpinned, without the oracle),
-`tools/atom_mutants.py`, the perf harness twice, and `tools/atom_ledgers.py`, which writes the execution ledgers.
+and its `--check` fixed point, `tools/mr_check_selftest.py`, test compile, JUnit (identity hashes pinned, unpinned,
+without the oracle), `tools/atom_mutants.py`, the perf harness twice, and `tools/atom_ledgers.py`, which writes the
+execution ledgers.
 
 The generator builds the tests from javap facts, template first:
 
@@ -146,10 +153,12 @@ The generator builds the tests from javap facts, template first:
   console output. Enums: `values()`, `valueOf`, every method over every constant.
 - `M3GraphicsAtomsContractTest.java`: plain JUnit contracts of atoms without a donor class (M3SneakyThrow:
   SNEAKY_THROW, no oracle needed).
-- `M3GraphicsAtomsRecipes.java` (how values and interface proxies are built) and `M3GraphicsAtomsDomains.java` (int
-  parameters used as enum ordinals or switch codes).
+- `M3GraphicsAtomsRecipes.java` (how values and interface proxies are built), `M3GraphicsAtomsDomains.java` (int
+  parameters used as enum ordinals or switch codes) and `M3GraphicsAtomsRenames.java` (the TYPE_RENAME names and the
+  members that reach a class-name API).
 - `M3GraphicsAtomsPerf.java` + `PerfGroup01..05`: one row per tested atom, ns/op M3 vs donor through static final
-  MethodHandles, each row flagged SAME or DIFF by its bytecode; guard: no atom slower than its donor by more than 1.5x.
+  MethodHandles, each row flagged SAME or DIFF by its bytecode; SAME rows are the run's noise; guard: no DIFF row
+  slower than its donor by more than max(1.5x, the largest SAME ratio of the run).
 - `leaf1/ATOM_TESTS.tsv` (per atom) and `leaf1/ATOM_MEMBERS.tsv` (per member, with int domains and the hash mode).
 - The runner is hand-written support in the same directory (`M3GraphicsAtoms*.java`).
 
@@ -176,16 +185,42 @@ v2 answers the review of #2243, one rule per item:
 Minor items: floats compare by raw bits (NaN payloads), the console mask covers ISO-8601 timestamps only, donor
 objects compare to depth 8 with cycle detection, and the three abstract native atoms without members say so.
 
+v3 answers the verifier of #2243 (2026-11-01), one rule per item (`leaf1/ATOM_FINDINGS.tsv` F9-F13):
+
+1. Rename normalization (mutant VFY1). v2 dropped an `M3` prefix before any capitalized identifier in strings and
+   messages and only counted it. Now a text that equals the oracle's only after dropping the prefix maps only the
+   TYPE_RENAME names (`M3GraphicsAtomsRenames.NAMES`, generated from `leaf1/TYPE_RENAME_L1.tsv`; `M3Foo` stays when Foo
+   is not renamed) and matches only in a member whose bytecode reaches a class-name API (`CLASS_NAMES`, from the
+   generator's closure; none of the tested members does). Anywhere else it is a mismatch. VFY1 (`M3Rect(...)` from
+   toString) and VFY1B (`M3Rect::makeXYWH` in a message) survive the v2 tests and are killed by v3.
+2. RELATIONAL rows (mutant VFY3). Binary geometry and comparison members of rectangle and point atoms (a field-mapping
+   constructor whose fields are left, top, right, bottom or x, y) also run with an argument built from the receiver:
+   for two rectangles identical, shared edges, touching corners, contained, containing, overlapping, disjoint; for a
+   point inside, on each edge and corner, and just outside each edge; for two points identical, negated, zero, same x
+   or y, disjoint (`M3GraphicsAtomsRelations`): 12 rows (intersect, contains, offset, equals), 420 cases. VFY3
+   (`IRect.intersect` with `<` for `<=`: IRect(0,0,10,10) and IRect(10,0,20,10) give IRect(10,0,10,10) instead of
+   null) and VFY3B (`IRect.contains` with the right edge excluded) survive the v2 tests and are killed by v3.
+3. Perf gate. Rows whose code is the same on both sides (SAME) are the run's noise: verdict NOISE, never failing. A
+   DIFF row fails only above max(1.5x, the largest SAME ratio of the run), and is OK_NOISE_BAND between the two. A
+   2000-pause slowdown in `RRect.inflate` (a DIFF row) still fails the harness (238x).
+4. Multi-Release check. The generator takes the JEP 238 choice of the oracle jars from `mr_select.jar_versions` and
+   compares it with `leaf1/MR_SELECT.tsv` in both directions, with the jar entry and the release bound.
+   `tools/mr_check_selftest.py` runs the check on the real jars and on 6 negative cases (a missing, other-version,
+   other-entry or above-release ledger row; a jar with versions/9 and versions/11; a jar without a Multi-Release
+   manifest).
+5. Javadoc references: JAVADOC_REF v1 and doclint gate G4b on #2208 (b23a388c), merged here (see leaf 1 above).
+
 A member is BLOCKED_NATIVES when its bytecode can reach native code (a native method, `System.load*`, or a class
 initializer that loads the library, transitively); a test fails if an emitted member reaches natives, so the
 classification is checked by execution. The oracle jars come from `-Dm3.graphics.oracle=...` (jtreg:
 `-vmoption:-Dm3.graphics.oracle=...`); without it the atom tests abort, the contract test runs, and the harness prints
 PERF_SKIPPED.
 
-Result (`leaf1/ATOM_TEST_GATES.tsv`, after merging #2208's MR_SELECT fix c500a57e): 225 atoms, 144 tested (FULL,
-STATIC_PURE and one CONTRACT), 79 BLOCKED_NATIVES, 2 NOT_APPLICABLE; 1,454 members, 20,938 cases; 144 of 144 tests
-pass, also without pinned identity hashes; 8 of 8 mutants killed (the four of #2243 and the four of its review; REV4,
-ColorInfo.hashCode 43 -> 0, only with pinned identity hashes); perf 0 outliers in both runs. On the 129 rows whose
-code is the same on both sides the ratio has median 1.00 and p10..p90 0.96..1.07, but single rows reach 0.58 and 1.50
-and move by up to 0.49 between runs (`leaf1/ATOM_FINDINGS.tsv` F9): the 1.5x guard has no margin at that extreme.
-F1-F4 of #2243 are closed by c500a57e.
+Result (`leaf1/ATOM_TEST_GATES.tsv`, v3, after merging #2208 head b23a388c): 225 atoms, 144 tested (FULL,
+STATIC_PURE and one CONTRACT), 79 BLOCKED_NATIVES, 2 NOT_APPLICABLE; 1,466 members, 21,358 cases (12 RELATIONAL rows,
+420 cases); 144 of 144 tests pass, also without pinned identity hashes; 0 rename-only text matches; Multi-Release
+self-check 8 of 8; 12 of 12 mutants killed (the four of #2243, the four of its review, the four of its verifier; REV4,
+ColorInfo.hashCode 43 -> 0, only with pinned identity hashes). Perf: 0 outliers in both runs; the 129 SAME rows have
+median 1.00 and p10..p90 0.90..1.15, and their largest ratio, the noise ceiling, was 1.917 (FontFeature.parse, which
+the v2 guard would have failed) and 1.458; the 13 DIFF rows stay below the threshold. F1-F4 of #2243 are closed by
+c500a57e, F9-F13 by v3 and b23a388c.

@@ -11,11 +11,11 @@
  *          final MethodHandles. Per row: warm-up until both loops are compiled, then calibration of the
  *          passes to 2 ms rounds, then 11 rounds alternating which side runs first; ns/op per side is the
  *          median round, ratio = M3 / oracle, spread = interquartile range of the round ratios over their
- *          median. No re-measuring. Guard: no atom slower than its oracle by more than 1.5x
- *          (-Dm3.graphics.perf.slack=<factor>). C2 only and foreground compilation
- *          (-XX:-TieredCompilation -Xbatch) keep the two sides' compiled loops alike; the blackhole keeps
- *          every result. Rows whose code is the same on both sides (SAME) give the harness's own spread.
- *          Without the oracle: PERF_SKIPPED.
+ *          median. No re-measuring. Rows whose code is the same on both sides (SAME) are the run's noise
+ *          (verdict NOISE, never failing); guard: no DIFF row slower than its oracle by more than
+ *          max(1.5x slack (-Dm3.graphics.perf.slack=<factor>), the largest SAME ratio of the run). C2 only
+ *          and foreground compilation (-XX:-TieredCompilation -Xbatch) keep the two sides' compiled loops
+ *          alike; the blackhole keeps every result. Without the oracle: PERF_SKIPPED.
  * @requires vm.compiler2.enabled
  * @modules jdk.m3.graphics
  * @run main/othervm -Xmx512m -XX:-TieredCompilation -Xbatch -XX:+UnlockExperimentalVMOptions

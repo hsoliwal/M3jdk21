@@ -115,7 +115,9 @@ public class M3GraphicsAtomsTest12 {
             "(Lskija/svg/SVGPreserveAspectRatioAlign;Lskija/svg/SVGPreserveAspectRatioScale;)";
     private static final String D_SVG_PRESERVE_ASPECT_RATI_3 = "(Lskija/svg/SVGPreserveAspectRatioScale;)";
     private static final String D_Z = "(Z)";
-    private static final int CASES_I_POINT = 329;
+    private static final String R_0_II_XY = "0(II)XY";
+    private static final String R_II_XY = "(II)XY";
+    private static final int CASES_I_POINT = 365;
     private static final int CASES_I_RANGE = 196;
     private static final int CASES_SHAPING_OPTIONS = 345;
     private static final int CASES_SVG_LENGTH = 220;
@@ -218,7 +220,7 @@ public class M3GraphicsAtomsTest12 {
                 .verify(CASES_SVG_PRESERVE_ASPECT_RATIO);
     }
 
-    /** VALUE_DATA types.IPoint -> M3IPoint: 20 members, 329 cases. */
+    /** VALUE_DATA types.IPoint -> M3IPoint: 22 members, 365 cases. */
     @Test
     void iPoint() {
         M3GraphicsAtoms.atom(A_I_POINT)
@@ -242,6 +244,8 @@ public class M3GraphicsAtomsTest12 {
                 .member(METHOD, N_WITH_X, D_I)
                 .member(METHOD, N_WITH_Y, D_I)
                 .perturb(D_II)
+                .relational(METHOD, N_EQUALS, D_OBJECT, R_II_XY, R_0_II_XY)
+                .relational(METHOD, N_OFFSET, D_I_POINT, R_II_XY, R_0_II_XY)
                 .verify(CASES_I_POINT);
     }
 

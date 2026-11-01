@@ -29,7 +29,10 @@ import org.junit.jupiter.api.Assumptions;
  * class and message (M3GraphicsAtomsMessages), the result's aliasing of the receiver and arguments, the receiver and
  * arguments after the call, the atom's public static mutable fields, and the console output (ISO-8601 timestamps
  * masked, every other character compared). {@link Atom#perturb} adds equals and hashCode cases on copies with exactly
- * one field changed (M3GraphicsAtomsPerturb). A hashCode result compares exactly when identity hashes are pinned or
+ * one field changed (M3GraphicsAtomsPerturb); {@link Atom#relational} calls a binary geometry or comparison member with
+ * an argument related to the receiver (shared edge, corner, containment, ...: M3GraphicsAtomsRelations). A text that
+ * equals the oracle's only after the rename normalization matches only in a member that prints class names
+ * (M3GraphicsAtomsCompare.texts). A hashCode result compares exactly when identity hashes are pinned or
  * the receiver has no identity-hashed part, else by partition over the member's cases (M3GraphicsAtomsHashes). A call
  * that reaches native code fails the test: the generator lists only members it found pure, and natives are
  * BLOCKED_NATIVES in ATOM_TESTS.tsv. The number of cases per member is {@link #cases}; the generator computes the same
@@ -52,6 +55,8 @@ final class M3GraphicsAtoms {
     private static final String COMMA = ",";
     private static final String NONE = "-";
     private static final String PERTURB = "PERTURB";
+    private static final String RELATIONAL = "RELATIONAL";
+    private static final String NO_LABEL = "";
     private static final String TAB = "\t";
     private static final String NEWLINE = "\n";
     private static final String HASH = "#";
@@ -161,13 +166,24 @@ final class M3GraphicsAtoms {
             List<String> tokens = M3GraphicsAtomsOracle.params(descriptor);
             String key = key(atom, name, descriptor);
             int n = cases(kind, tokens.size(), constants);
-            hashes.clear();
-            returned = 0;
-            thrown.clear();
-            resolve(kind, name, descriptor, key)
-                    .ifPresent(c -> IntStream.range(0, n).forEach(i -> check(c, tokens, i)));
+            start(key);
+            resolve(kind, name, descriptor, key).ifPresent(c -> IntStream.range(0, n)
+                    .forEach(i -> check(c, logicalCase(atom, kind, key, tokens, i), i, NO_LABEL)));
             M3GraphicsAtomsHashes.partition(hashes).ifPresent(d -> mismatches.add(key + COLON + d));
             return counted(kind.name(), name + descriptor, n);
+        }
+
+        //FLLDCIM: TOP - v3 RELATIONAL cases (#2243 verifier VFY3): argument built from the receiver by a relation
+        /** Cases of a binary member whose argument (argument spec) is built from the receiver by a relation. */
+        Atom relational(Kind kind, String name, String descriptor, String receiver, String argument) {
+            List<String> tokens = M3GraphicsAtomsOracle.params(descriptor);
+            String key = key(atom, name, descriptor);
+            int n = M3GraphicsAtomsRelations.cases(receiver, argument);
+            start(key);
+            resolve(kind, name, descriptor, key).ifPresent(c -> IntStream.range(0, n).forEach(i -> check(c,
+                    M3GraphicsAtomsRelations.logicalCase(atom, key, tokens, receiver, argument, i), i,
+                    M3GraphicsAtomsRelations.label(receiver, argument, i))));
+            return counted(RELATIONAL, name + descriptor, n);
         }
 
         /** Equals and hashCode on copies with exactly one field changed, built by the constructor of a descriptor. */
@@ -175,8 +191,7 @@ final class M3GraphicsAtoms {
             List<Integer> positions = M3GraphicsAtomsPerturb.positions(descriptor);
             int n = positions.size() * M3GraphicsAtomsPerturb.ROUNDS;
             String key = key(atom, PERTURB, descriptor);
-            returned = 0;
-            thrown.clear();
+            start(key);
             IntStream.range(0, n).forEach(i -> {
                 M3GraphicsAtomsPerturb.Pair p = M3GraphicsAtomsPerturb.pair(atom, descriptor, positions, i);
                 M3GraphicsAtomsPerturb.Observed o = M3GraphicsAtomsPerturb.observe(p,
@@ -192,16 +207,25 @@ final class M3GraphicsAtoms {
         /** Prints the atom row and fails when the case count differs from the generator's or any case mismatched. */
         void verify(int generatedCases) {
             int[] h = M3GraphicsAtomsHashes.countsAndReset();
+            int[] renamed = M3GraphicsAtomsCompare.renamedAndReset();
             System.out.println(String.join(TAB, ROW, atom, String.valueOf(members), String.valueOf(cases),
-                    String.valueOf(mismatches.size()), String.valueOf(M3GraphicsAtomsCompare.normalizedAndReset()),
+                    String.valueOf(mismatches.size()), String.valueOf(renamed[M3GraphicsAtomsCompare.EXPECTED]),
                     String.valueOf(M3GraphicsAtomsMessages.normalizedAndReset()), String.valueOf(h[EXACT]),
                     String.valueOf(h[PARTITIONED]), String.valueOf(h[SKIPPED]),
-                    String.valueOf(M3GraphicsAtomsCompare.environmentAndReset())));
+                    String.valueOf(M3GraphicsAtomsCompare.environmentAndReset()),
+                    String.valueOf(renamed[M3GraphicsAtomsCompare.UNEXPECTED])));
             assertEquals(generatedCases, cases, CASE_COUNT + atom);
             if (!mismatches.isEmpty()) {
                 fail(atom + COLON + mismatches.size() + MISMATCHES + MAX_REPORTED + COLON + NEWLINE
                         + String.join(NEWLINE, mismatches.subList(0, Math.min(MAX_REPORTED, mismatches.size()))));
             }
+        }
+
+        private void start(String key) {
+            hashes.clear();
+            returned = 0;
+            thrown.clear();
+            M3GraphicsAtomsCompare.member(key);
         }
 
         private Atom counted(String kind, String member, int n) {
@@ -226,8 +250,7 @@ final class M3GraphicsAtoms {
             }
         }
 
-        private void check(Call c, List<String> tokens, int i) {
-            List<M3GraphicsAtomsValues.Logical> l = logicalCase(atom, c.kind(), c.key(), tokens, i);
+        private void check(Call c, List<M3GraphicsAtomsValues.Logical> l, int i, String label) {
             List<M3GraphicsAtomsValues.Logical> args = l.subList(1, l.size());
             M3GraphicsAtomsRun.Outcome m3 = M3GraphicsAtomsRun.run(M3GraphicsAtomsOracle.Side.M3,
                     types.get(M3GraphicsAtomsOracle.Side.M3), c, l.get(0), args);
@@ -244,7 +267,7 @@ final class M3GraphicsAtoms {
             if (partitioned) {
                 hashes.add(new int[] {(Integer) m3.result(), (Integer) oracle.result()});
             }
-            compare(m3, oracle, !partitioned).ifPresent(d -> mismatches.add(c.key() + HASH + i + COLON + d));
+            compare(m3, oracle, !partitioned).ifPresent(d -> mismatches.add(c.key() + HASH + i + label + COLON + d));
         }
 
         private static Optional<String> compare(M3GraphicsAtomsRun.Outcome m, M3GraphicsAtomsRun.Outcome o,

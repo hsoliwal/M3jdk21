@@ -25,6 +25,7 @@ TAB = "\t"
 NL = "\n"
 ORIGIN_2243 = "#2243"
 ORIGIN_REVIEW = "#2243 review"
+ORIGIN_VERIFIER = "#2243 verifier"
 MUTANTS = (
     ("MUT1_rect_width", ORIGIN_2243, "jdk/m3/graphics/M3Rect.java",
      "        return _right - _left;", "        return _left - _right;", "types.Rect"),
@@ -50,6 +51,16 @@ MUTANTS = (
     ("REV4_colorinfo_hash_null_constant", ORIGIN_REVIEW, "jdk/m3/graphics/M3ColorInfo.java",
      "        result = result * PRIME + ($_colorSpace == null ? 43 : $_colorSpace.hashCode());",
      "        result = result * PRIME + ($_colorSpace == null ? 0 : $_colorSpace.hashCode());", "skija.ColorInfo"),
+    # FLLDCIM: TOP - v3 verifier mutants: rename-only text differences (VFY1) and relational geometry edges (VFY3)
+    ("VFY1_rect_tostring_m3_prefix", ORIGIN_VERIFIER, "jdk/m3/graphics/M3Rect.java",
+     '        return "Rect(_left=" + this.getLeft()', '        return "M3Rect(_left=" + this.getLeft()', "types.Rect"),
+    ("VFY1B_rect_message_m3_prefix", ORIGIN_VERIFIER, "jdk/m3/graphics/M3Rect.java",
+     'throw new IllegalArgumentException("Rect::makeXYWH expected w >= 0, got: " + w);',
+     'throw new IllegalArgumentException("M3Rect::makeXYWH expected w >= 0, got: " + w);', "types.Rect"),
+    ("VFY3_irect_intersect_shared_edge", ORIGIN_VERIFIER, "jdk/m3/graphics/M3IRect.java",
+     "        if (_right <= other._left ||", "        if (_right < other._left ||", "types.IRect"),
+    ("VFY3B_irect_contains_right_edge", ORIGIN_VERIFIER, "jdk/m3/graphics/M3IRect.java",
+     "vec._x <= _right", "vec._x < _right", "types.IRect"),
 )
 
 

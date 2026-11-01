@@ -334,7 +334,7 @@ public class M3BreakIterator extends M3Managed implements Cloneable {
      * returned by {@link next()}, {@link next(int)}, {@link previous()},
      * {@link first()}, {@link last()}, {@link following(int)} or
      * {@link preceding(int)}. If any of these methods returns
-     * {@link BreakIterator#DONE} because either first or last text boundary
+     * {@link M3BreakIterator#DONE} because either first or last text boundary
      * has been reached, it returns the first or last text boundary depending
      * on which one is reached.
      */
@@ -349,7 +349,7 @@ public class M3BreakIterator extends M3Managed implements Cloneable {
 
     /**
      * Returns the boundary following the current boundary. If the current
-     * boundary is the last text boundary, it returns {@link BreakIterator#DONE}
+     * boundary is the last text boundary, it returns {@link M3BreakIterator#DONE}
      * and the iterator's current position is unchanged. Otherwise, the
      * iterator's current position is set to the boundary following the current
      * boundary.
@@ -390,7 +390,7 @@ public class M3BreakIterator extends M3Managed implements Cloneable {
 
     /**
      * Returns the boundary following the current boundary. If the current
-     * boundary is the last text boundary, it returns {@link BreakIterator#DONE}
+     * boundary is the last text boundary, it returns {@link M3BreakIterator#DONE}
      * and the iterator's current position is unchanged. Otherwise, the
      * iterator's current position is set to the boundary following the current
      * boundary.
@@ -431,10 +431,10 @@ public class M3BreakIterator extends M3Managed implements Cloneable {
     /**
      * Returns the last boundary preceding the specified character offset.
      * If the specified offset is equal to the first text boundary, it returns
-     * {@link BreakIterator#DONE} and the iterator's current position is
+     * {@link M3BreakIterator#DONE} and the iterator's current position is
      * unchanged. Otherwise, the iterator's current position is set to the
      * returned boundary. The value returned is always less than the offset or
-     * the value {@link BreakIterator#DONE}.
+     * the value {@link M3BreakIterator#DONE}.
      */
     public int preceding(int offset) {
         try {
@@ -448,10 +448,10 @@ public class M3BreakIterator extends M3Managed implements Cloneable {
     /**
      * Returns the first boundary following the specified character offset.
      * If the specified offset is equal to the last text boundary, it returns
-     * {@link BreakIterator#DONE} and the iterator's current position is
+     * {@link M3BreakIterator#DONE} and the iterator's current position is
      * unchanged. Otherwise, the iterator's current position is set to the
      * returned boundary. The value returned is always greater than the offset or
-     * the value {@link BreakIterator#DONE}.
+     * the value {@link M3BreakIterator#DONE}.
      */
     public int following(int offset) {
         try {

@@ -13,17 +13,18 @@ import java.util.regex.Pattern;
  * Throwables of the jdk.m3.graphics atom tests compare by class (through the rename) and by message, along the cause
  * chain up to {@link #MAX_CAUSES} levels. Before the comparison both messages are normalized the same way: a donor
  * class name ({@code io.github.humbleui.skija.X}, dotted or slashed) becomes its M3 name by the leaf-1 rename
- * (M3GraphicsAtomsOracle.m3Name, which the generator checks against TYPE_RENAME_L1.tsv), the rename's {@code M3}
- * prefix is dropped, class-loader descriptions ({@code (X is in unnamed module of loader 'app'; ...)}) and identity
- * hashes ({@code @1b6d3586}) are removed, and the local-variable name in a helpful NullPointerException message
- * ({@code because "p" is null}, {@code "<local1>"}, {@code "<parameter1>"}) becomes {@code "<local>"}, since it
- * depends on whether the class file carries a LocalVariableTable. Messages that needed the normalization are counted.
+ * (M3GraphicsAtomsOracle.m3Name, which the generator checks against TYPE_RENAME_L1.tsv), class-loader descriptions
+ * ({@code (X is in unnamed module of loader 'app'; ...)}) and identity hashes ({@code @1b6d3586}) are removed, and the
+ * local-variable name in a helpful NullPointerException message ({@code because "p" is null}, {@code "<local1>"},
+ * {@code "<parameter1>"}) becomes {@code "<local>"}, since it depends on whether the class file carries a
+ * LocalVariableTable. Messages that needed this normalization are counted. Normalized messages that still differ go
+ * to M3GraphicsAtomsCompare.texts: equal after dropping the M3 prefix of a TYPE_RENAME name is a match only in a
+ * member that reaches a class-name API, else a mismatch.
  */
 final class M3GraphicsAtomsMessages {
     private static final int MAX_CAUSES = 4;
     private static final Pattern DONOR = Pattern.compile(
             "io([./])github\\1humbleui\\1(?:skija|types)(?:\\1[a-z_][a-z0-9_]*)*\\1[A-Z][\\w$]*");
-    private static final Pattern RENAMED = Pattern.compile("(?<![\\w$])M3(?=[A-Z])");
     private static final Pattern LOADER = Pattern.compile(" ?\\([^()]* of loader [^()]*\\)");
     private static final Pattern IDENTITY = Pattern.compile("@[0-9a-f]{1,8}\\b");
     private static final Pattern LOCAL = Pattern.compile(
@@ -53,9 +54,10 @@ final class M3GraphicsAtomsMessages {
     }
 
     /** A message after the normalization described in the class comment ("null" for no message). */
+    //FLLDCIM: SFA - v3 (#2243 verifier VFY1): no blanket M3-prefix drop; rename-only differences gated in texts()
     static String normalized(String message) {
         String s = DONOR.matcher(String.valueOf(message)).replaceAll(r -> Matcher.quoteReplacement(m3Name(r.group())));
-        s = RENAMED.matcher(LOADER.matcher(s).replaceAll(EMPTY)).replaceAll(EMPTY);
+        s = LOADER.matcher(s).replaceAll(EMPTY);
         return LOCAL.matcher(IDENTITY.matcher(s).replaceAll(AT)).replaceAll(Matcher.quoteReplacement(LOCAL_NAME));
     }
 
@@ -68,8 +70,9 @@ final class M3GraphicsAtomsMessages {
         }
         String mm = normalized(m.getMessage());
         String om = normalized(o.getMessage());
-        if (!mm.equals(om)) {
-            return differ(path + MESSAGE, mm, om);
+        Optional<String> text = mm.equals(om) ? Optional.empty() : M3GraphicsAtomsCompare.texts(path + MESSAGE, mm, om);
+        if (text.isPresent()) {
+            return text;
         }
         if (!Objects.equals(m.getMessage(), o.getMessage())) {
             NORMALIZED.incrementAndGet();

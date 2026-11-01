@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -24,9 +25,12 @@ import java.util.stream.Stream;
  * sets and maps element by element; donor objects as M3GraphicsAtomsObjects describes; other JDK objects by equals
  * when the class declares it, else by toString when declared; the same object on both sides (a shared JDK argument) is
  * equal; two test proxies of the same interface are the same receiver. Types compare through the rename (M3 class
- * name = renamed donor class name). An M3 string equals the oracle string when it does after removing the rename's
- * {@code M3} prefix before an upper-case identifier (toString carries the class name); such matches are counted
- * ({@link #normalizedAndReset()}). Throwables compare by class and normalized message along their causes
+ * name = renamed donor class name). Strings compare exactly; a string (or a normalized exception message) that equals
+ * the oracle's only after dropping the {@code M3} prefix of a TYPE_RENAME name ({@code M3Rect} to {@code Rect}, from
+ * M3GraphicsAtomsRenames.NAMES only: {@code M3Foo} stays when Foo is not renamed) matches only in a member whose
+ * bytecode reaches a class-name API (M3GraphicsAtomsRenames.CLASS_NAMES; such matches are counted as expected) and
+ * is a mismatch anywhere else, counted as unexpected ({@link #texts}). Throwables compare by class and normalized
+ * message along their causes
  * (M3GraphicsAtomsMessages). A hashCode compares exactly when identity hashes are pinned or the value has no
  * identity-hashed part (M3GraphicsAtomsHashes), and a URL compares by presence, since it points into the side's own
  * class-loader layout; both are counted per atom.
@@ -35,11 +39,17 @@ final class M3GraphicsAtomsCompare {
     /** A call result: a value, or the throwable of the call. */
     record Result(Object value, Throwable thrown) {}
 
+    /** Index of the expected rename-only matches in {@link #renamedAndReset()}. */
+    static final int EXPECTED = 0;
+    /** Index of the unexpected rename-only matches (mismatches) in {@link #renamedAndReset()}. */
+    static final int UNEXPECTED = 1;
     private static final int MAX_SHOWN = 160;
-    private static final Pattern RENAMED = Pattern.compile("(?<![\\w$])M3(?=[A-Z])");
+    private static final Pattern M3_NAME = Pattern.compile("(?<![\\w$])M3([A-Z][A-Za-z0-9_]*)");
+    private static final int NAME = 1;
+    private static final String RENAME_ONLY = " (equal only after dropping the M3 prefix of a TYPE_RENAME name; the "
+            + "member reaches no class-name API)";
     private static final String EQUALS = "equals";
     private static final String TO_STRING = "toString";
-    private static final String EMPTY = "";
     private static final String OPEN = "[";
     private static final String CLOSE = "]";
     private static final String SIZE = ".size";
@@ -47,8 +57,10 @@ final class M3GraphicsAtomsCompare {
     private static final String VERSUS = " / oracle ";
     private static final String ELLIPSIS = "...";
     private static final Optional<String> SAME = Optional.empty();
-    private static final AtomicInteger NORMALIZED = new AtomicInteger();
+    private static final AtomicInteger RENAME_EXPECTED = new AtomicInteger();
+    private static final AtomicInteger RENAME_UNEXPECTED = new AtomicInteger();
     private static final AtomicInteger ENVIRONMENT = new AtomicInteger();
+    private static volatile boolean classNames;
 
     private M3GraphicsAtomsCompare() {}
 
@@ -78,9 +90,38 @@ final class M3GraphicsAtomsCompare {
         return m3.getName().equals(M3GraphicsAtomsOracle.isDonor(o) ? M3GraphicsAtomsOracle.m3Name(o) : o);
     }
 
-    /** The number of string matches that needed the rename normalization since the last call. */
-    static int normalizedAndReset() {
-        return NORMALIZED.getAndSet(0);
+    //FLLDCIM: SFA - v3 (#2243 verifier VFY1): rename normalization for TYPE_RENAME names only, gated per member
+    /** Starts the cases of a member: a rename-only match is expected only when it reaches a class-name API. */
+    static void member(String key) {
+        classNames = M3GraphicsAtomsRenames.CLASS_NAMES.contains(key);
+    }
+
+    /** The rename-only matches since the last call: [{@link #EXPECTED}, {@link #UNEXPECTED}]. */
+    static int[] renamedAndReset() {
+        return new int[] {RENAME_EXPECTED.getAndSet(0), RENAME_UNEXPECTED.getAndSet(0)};
+    }
+
+    /** A text without the M3 prefix of TYPE_RENAME names ({@code M3Rect} is {@code Rect}; {@code M3Foo} stays). */
+    static String renamed(String s) {
+        return M3_NAME.matcher(s).replaceAll(r -> Matcher.quoteReplacement(
+                M3GraphicsAtomsRenames.NAMES.contains(r.group(NAME)) ? r.group(NAME) : r.group()));
+    }
+
+    /**
+     * Two different texts at a path: when they are equal after {@link #renamed}, a match in a member that reaches a
+     * class-name API (counted as expected), else a mismatch that says so (counted as unexpected); otherwise the
+     * difference.
+     */
+    static Optional<String> texts(String path, String m, String o) {
+        if (!renamed(m).equals(renamed(o))) {
+            return differ(path, m, o);
+        }
+        if (classNames) {
+            RENAME_EXPECTED.incrementAndGet();
+            return SAME;
+        }
+        RENAME_UNEXPECTED.incrementAndGet();
+        return Optional.of(path + COLON + show(m) + VERSUS + show(o) + RENAME_ONLY);
     }
 
     /** The number of comparisons settled by the environment rule (a URL compares by presence) since the last call. */
@@ -152,12 +193,12 @@ final class M3GraphicsAtomsCompare {
     }
 
     private static List<Object> sortedEntries(Map<?, ?> map) {
-        return map.entrySet().stream().sorted(Comparator.comparing(e -> normalized(String.valueOf(e.getKey()))))
+        return map.entrySet().stream().sorted(Comparator.comparing(e -> renamed(String.valueOf(e.getKey()))))
                 .flatMap(e -> Stream.of(e.getKey(), e.getValue())).toList();
     }
 
     private static List<?> sorted(Collection<?> c) {
-        return c.stream().sorted(Comparator.comparing(v -> normalized(String.valueOf(v)))).toList();
+        return c.stream().sorted(Comparator.comparing(v -> renamed(String.valueOf(v)))).toList();
     }
 
     private static Optional<String> sequences(List<?> m, List<?> o, int depth, String path) {
@@ -215,18 +256,7 @@ final class M3GraphicsAtomsCompare {
     }
 
     private static Optional<String> strings(String m, String o, String path) {
-        if (m.equals(o)) {
-            return SAME;
-        }
-        if (!normalized(m).equals(o)) {
-            return differ(path, m, o);
-        }
-        NORMALIZED.incrementAndGet();
-        return SAME;
-    }
-
-    private static String normalized(String s) {
-        return RENAMED.matcher(s).replaceAll(EMPTY);
+        return m.equals(o) ? SAME : texts(path, m, o);
     }
 
     private static Optional<String> check(boolean same, String path, Object m, Object o) {

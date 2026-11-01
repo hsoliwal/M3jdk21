@@ -100,7 +100,7 @@ public class M3SaveLayerRec {
      *                   (respecting the current clip).
      *                   If null, the new layer is initialized with transparent-black.
      * @param tileMode   If the 'backdrop' is not null, or 'flags' has
-     *                   {@link SaveLayerRecFlag#INIT_WITH_PREVIOUS} set, this tile
+     *                   {@link M3SaveLayerRecFlag#INIT_WITH_PREVIOUS} set, this tile
      *                   mode is used when the new layer would read outside the backdrop
      *                   image's available content.
      * @param colorSpace If not null, when the layer is restored, a color space

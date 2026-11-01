@@ -3,7 +3,7 @@ package jdk.m3.graphics;
 import jdk.m3.graphics.impl.*;
 
 /**
- * <p>RuntimeEffect supports creating custom {@link Shader} and {@link ColorFilter}
+ * <p>RuntimeEffect supports creating custom {@link M3Shader} and {@link M3ColorFilter}
  * objects using Skia's SkSL shading language.</p>
  *
  * <p>NOTE: This API is experimental and subject to change.</p>

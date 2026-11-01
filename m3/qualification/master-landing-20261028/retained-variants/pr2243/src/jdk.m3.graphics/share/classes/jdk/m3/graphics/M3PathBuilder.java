@@ -23,8 +23,8 @@ public class M3PathBuilder extends M3Managed {
 
     /**
      * Constructs an empty PathBuilder. By default, PathBuilder has no verbs, no
-     * {@link Point}, and no weights. FillMode is set to
-     * {@link PathFillMode#WINDING}.
+     * {@link M3Point}, and no weights. FillMode is set to
+     * {@link M3PathFillMode#WINDING}.
      */
     public M3PathBuilder() {
         this(_nMake(), _FinalizerHolder.PTR);
@@ -33,7 +33,7 @@ public class M3PathBuilder extends M3Managed {
 
     /**
      * Constructs an empty PathBuilder with the specified fill mode. By default,
-     * PathBuilder has no verbs, no {@link Point}, and no weights.
+     * PathBuilder has no verbs, no {@link M3Point}, and no weights.
      *
      * @param fillMode  fill mode for paths created by this builder
      */
@@ -54,11 +54,11 @@ public class M3PathBuilder extends M3Managed {
     }
 
     /**
-     * Constructs an {@link PathBuilder} that is a copy of an existing
-     * {@link Path}. Copies the FillType and replays all of the verbs from the
-     * {@link Path} into the {@link PathBuilder}.
+     * Constructs an {@link M3PathBuilder} that is a copy of an existing
+     * {@link M3Path}. Copies the FillType and replays all of the verbs from the
+     * {@link M3Path} into the {@link M3PathBuilder}.
      *
-     * @param path  {@link Path} to copy
+     * @param path  {@link M3Path} to copy
      */
     public M3PathBuilder(M3Path path) {
         this(_nMakeFromPath(M3Native.getPtr(path)), _FinalizerHolder.PTR);
@@ -81,9 +81,9 @@ public class M3PathBuilder extends M3Managed {
     }
 
     /**
-     * Returns {@link PathFillMode}, the rule used to fill {@link Path}.
+     * Returns {@link M3PathFillMode}, the rule used to fill {@link M3Path}.
      *
-     * @return  current {@link PathFillMode} setting
+     * @return  current {@link M3PathFillMode} setting
      */
     public M3PathFillMode getFillMode() {
         try {
@@ -95,16 +95,16 @@ public class M3PathBuilder extends M3Managed {
     }
 
     /**
-     * <p>Returns minimum and maximum axes values of {@link Point} array.
+     * <p>Returns minimum and maximum axes values of {@link M3Point} array.
      * Returns (0, 0, 0, 0) if PathBuilder contains no points.</p>
      *
-     * <p>{@link Rect} returned includes all {@link Point} added to PathBuilder,
-     * including {@link Point} associated with {@link PathVerb#MOVE} that define
+     * <p>{@link M3Rect} returned includes all {@link M3Point} added to PathBuilder,
+     * including {@link M3Point} associated with {@link M3PathVerb#MOVE} that define
      * empty contours.</p>
      *
      * <p>If any of the points are non-finite, returns null.</p>
      *
-     * @return  bounds of all {@link Point} in {@link Point} array, or null
+     * @return  bounds of all {@link M3Point} in {@link M3Point} array, or null
      */
     public M3Rect computeFiniteBounds() {
         try {
@@ -134,10 +134,10 @@ public class M3PathBuilder extends M3Managed {
 
 
     /**
-     * Returns an immutable {@link Path} representing the current state of the
+     * Returns an immutable {@link M3Path} representing the current state of the
      * builder. The builder is unchanged after returning the path.
      *
-     * @return  {@link Path} representing the current state of the builder.
+     * @return  {@link M3Path} representing the current state of the builder.
      */
     public M3Path snapshot() {
         try {
@@ -149,12 +149,12 @@ public class M3PathBuilder extends M3Managed {
     }
 
     /**
-     * Returns an immutable {@link Path} representing the current state of the
+     * Returns an immutable {@link M3Path} representing the current state of the
      * builder. The builder is unchanged after returning the path.
      *
      * @param matrix  transformation matrix to apply to the points after they
      *                are copied into the resulting path.
-     * @return        {@link Path} representing the current state of the builder.
+     * @return        {@link M3Path} representing the current state of the builder.
      */
     public M3Path snapshot(M3Matrix33 matrix) {
         try {
@@ -172,7 +172,7 @@ public class M3PathBuilder extends M3Managed {
      * {@link #snapshot()} followed by {@link #reset()} if you don't need to
      * preserve the builder state.
      *
-     * @return  immutable {@link Path}
+     * @return  immutable {@link M3Path}
      */
     public M3Path detach() {
         try {
@@ -188,7 +188,7 @@ public class M3PathBuilder extends M3Managed {
      * transformed by the specified matrix, and resets the builder to empty.
      *
      * @param matrix  transformation matrix to apply
-     * @return        immutable {@link Path}
+     * @return        immutable {@link M3Path}
      */
     public M3Path detach(M3Matrix33 matrix) {
         try {
@@ -229,19 +229,19 @@ public class M3PathBuilder extends M3Managed {
     }
 
     /**
-     * <p>Specifies whether {@link Path} is volatile; whether it will be altered
-     * or discarded by the caller after it is drawn. {@link Path} by default
+     * <p>Specifies whether {@link M3Path} is volatile; whether it will be altered
+     * or discarded by the caller after it is drawn. {@link M3Path} by default
      * have volatile set false, allowing Skia to attach a cache of data which
      * speeds repeated drawing.</p>
      *
      * <p>Mark temporary paths, discarded or modified after use, as volatile
      * to inform Skia that the path need not be cached.</p>
      *
-     * <p>Mark animating {@link Path} volatile to improve performance. Mark
-     * unchanging {@link Path} non-volatile to improve repeated rendering.</p>
+     * <p>Mark animating {@link M3Path} volatile to improve performance. Mark
+     * unchanging {@link M3Path} non-volatile to improve repeated rendering.</p>
      *
-     * <p>raster surface {@link Path} draws are affected by volatile for some
-     * shadows. GPU surface {@link Path} draws are affected by volatile for some
+     * <p>raster surface {@link M3Path} draws are affected by volatile for some
+     * shadows. GPU surface {@link M3Path} draws are affected by volatile for some
      * shadows and concave geometries.</p>
      *
      * @param isVolatile  volatile flag value
@@ -254,9 +254,9 @@ public class M3PathBuilder extends M3Managed {
     }
 
     /**
-     * Sets PathBuilder to its initial state. Removes verb array, {@link Point}
-     * array, and weights, and sets {@link PathFillMode} to
-     * {@link PathFillMode#WINDING}. Internal storage associated with
+     * Sets PathBuilder to its initial state. Removes verb array, {@link M3Point}
+     * array, and weights, and sets {@link M3PathFillMode} to
+     * {@link M3PathFillMode#WINDING}. Internal storage associated with
      * PathBuilder is preserved.
      *
      * @return  reference to PathBuilder
@@ -301,11 +301,11 @@ public class M3PathBuilder extends M3Managed {
     }
     /**
      * <p>Adds line from last point to (x, y). If PathBuilder is empty, or last
-     * verb is {@link PathVerb#CLOSE}, last point is set to (0, 0) before adding
+     * verb is {@link M3PathVerb#CLOSE}, last point is set to (0, 0) before adding
      * line.</p>
      *
-     * <p>lineTo() appends {@link PathVerb#MOVE} to verb array and (0, 0) to
-     * Point array, if needed. lineTo() then appends {@link PathVerb#LINE} to
+     * <p>lineTo() appends {@link M3PathVerb#MOVE} to verb array and (0, 0) to
+     * Point array, if needed. lineTo() then appends {@link M3PathVerb#LINE} to
      * verb array and (x, y) to Point array.</p>
      *
      * @param x  end of added line on x-axis
@@ -320,11 +320,11 @@ public class M3PathBuilder extends M3Managed {
 
     /**
      * <p>Adds line from last point to (x, y). If PathBuilder is empty, or last
-     * verb is {@link PathVerb#CLOSE}, last point is set to (0, 0) before adding
+     * verb is {@link M3PathVerb#CLOSE}, last point is set to (0, 0) before adding
      * line.</p>
      *
-     * <p>lineTo() appends {@link PathVerb#MOVE} to verb array and (0, 0) to
-     * Point array, if needed. lineTo() then appends {@link PathVerb#LINE} to
+     * <p>lineTo() appends {@link M3PathVerb#MOVE} to verb array and (0, 0) to
+     * Point array, if needed. lineTo() then appends {@link M3PathVerb#LINE} to
      * verb array and (x, y) to Point array.</p>
      *
      * @param p  end Point of added line
@@ -336,11 +336,11 @@ public class M3PathBuilder extends M3Managed {
 
     /**
      * Adds quad from last point towards (x1, y1), to (x2, y2).
-     * If PathBuilder is empty, or last {@link PathVerb} is {@link PathVerb#CLOSE}, last point is set to (0, 0)
+     * If PathBuilder is empty, or last {@link M3PathVerb} is {@link M3PathVerb#CLOSE}, last point is set to (0, 0)
      * before adding quad.
      *
-     * Appends {@link PathVerb#MOVE} to verb array and (0, 0) to Point array, if needed;
-     * then appends {@link PathVerb#QUAD} to verb array; and (x1, y1), (x2, y2)
+     * Appends {@link M3PathVerb#MOVE} to verb array and (0, 0) to Point array, if needed;
+     * then appends {@link M3PathVerb#QUAD} to verb array; and (x1, y1), (x2, y2)
      * to Point array.
      *
      * @param x1  control Point of quad on x-axis
@@ -358,11 +358,11 @@ public class M3PathBuilder extends M3Managed {
     /**
      * <p>Adds quad from last point towards Point p1, to Point p2.</p>
      *
-     * <p>If PathBuilder is empty, or last {@link PathVerb} is {@link PathVerb#CLOSE}, last point is set to (0, 0)
+     * <p>If PathBuilder is empty, or last {@link M3PathVerb} is {@link M3PathVerb#CLOSE}, last point is set to (0, 0)
      * before adding quad.</p>
      *
-     * <p>Appends {@link PathVerb#MOVE} to verb array and (0, 0) to Point array, if needed;
-     * then appends {@link PathVerb#QUAD} to verb array; and Point p1, p2
+     * <p>Appends {@link M3PathVerb#MOVE} to verb array and (0, 0) to Point array, if needed;
+     * then appends {@link M3PathVerb#QUAD} to verb array; and Point p1, p2
      * to Point array.</p>
      *
      * @param p1  control Point of added quad
@@ -376,18 +376,18 @@ public class M3PathBuilder extends M3Managed {
     /**
      * <p>Adds conic from last point towards (x1, y1), to (x2, y2), weighted by w.</p>
      *
-     * <p>If PathBuilder is empty, or last {@link PathVerb} is {@link PathVerb#CLOSE}, last point is set to (0, 0)
+     * <p>If PathBuilder is empty, or last {@link M3PathVerb} is {@link M3PathVerb#CLOSE}, last point is set to (0, 0)
      * before adding conic.</p>
      *
-     * <p>Appends {@link PathVerb#MOVE} to verb array and (0, 0) to Point array, if needed.</p>
+     * <p>Appends {@link M3PathVerb#MOVE} to verb array and (0, 0) to Point array, if needed.</p>
      *
-     * <p>If w is finite and not one, appends {@link PathVerb#CONIC} to verb array;
+     * <p>If w is finite and not one, appends {@link M3PathVerb#CONIC} to verb array;
      * and (x1, y1), (x2, y2) to Point array; and w to conic weights.</p>
      *
-     * <p>If w is one, appends {@link PathVerb#QUAD} to verb array, and
+     * <p>If w is one, appends {@link M3PathVerb#QUAD} to verb array, and
      * (x1, y1), (x2, y2) to Point array.</p>
      *
-     * <p>If w is not finite, appends {@link PathVerb#LINE} twice to verb array, and
+     * <p>If w is not finite, appends {@link M3PathVerb#LINE} twice to verb array, and
      * (x1, y1), (x2, y2) to Point array.</p>
      *
      * @param x1  control Point of conic on x-axis
@@ -406,18 +406,18 @@ public class M3PathBuilder extends M3Managed {
     /**
      * <p>Adds conic from last point towards Point p1, to Point p2, weighted by w.</p>
      *
-     * <p>If PathBuilder is empty, or last {@link PathVerb} is {@link PathVerb#CLOSE}, last point is set to (0, 0)
+     * <p>If PathBuilder is empty, or last {@link M3PathVerb} is {@link M3PathVerb#CLOSE}, last point is set to (0, 0)
      * before adding conic.</p>
      *
-     * <p>Appends {@link PathVerb#MOVE} to verb array and (0, 0) to Point array, if needed.</p>
+     * <p>Appends {@link M3PathVerb#MOVE} to verb array and (0, 0) to Point array, if needed.</p>
      *
-     * <p>If w is finite and not one, appends {@link PathVerb#CONIC} to verb array;
+     * <p>If w is finite and not one, appends {@link M3PathVerb#CONIC} to verb array;
      * and Point p1, p2 to Point array; and w to conic weights.</p>
      *
-     * <p>If w is one, appends {@link PathVerb#QUAD} to verb array, and Point p1, p2
+     * <p>If w is one, appends {@link M3PathVerb#QUAD} to verb array, and Point p1, p2
      * to Point array.</p>
      *
-     * <p>If w is not finite, appends {@link PathVerb#LINE} twice to verb array, and
+     * <p>If w is not finite, appends {@link M3PathVerb#LINE} twice to verb array, and
      * Point p1, p2 to Point array.</p>
      *
      * @param p1  control Point of added conic
@@ -431,11 +431,11 @@ public class M3PathBuilder extends M3Managed {
 
     /**
      * <p>Adds cubic from last point towards (x1, y1), then towards (x2, y2), ending at
-     * (x3, y3). If PathBuilder is empty, or last {@link PathVerb} is {@link PathVerb#CLOSE}, last point is set to
+     * (x3, y3). If PathBuilder is empty, or last {@link M3PathVerb} is {@link M3PathVerb#CLOSE}, last point is set to
      * (0, 0) before adding cubic.</p>
      *
-     * <p>Appends {@link PathVerb#MOVE} to verb array and (0, 0) to Point array, if needed;
-     * then appends {@link PathVerb#CUBIC} to verb array; and (x1, y1), (x2, y2), (x3, y3)
+     * <p>Appends {@link M3PathVerb#MOVE} to verb array and (0, 0) to Point array, if needed;
+     * then appends {@link M3PathVerb#CUBIC} to verb array; and (x1, y1), (x2, y2), (x3, y3)
      * to Point array.</p>
      *
      * @param x1  first control Point of cubic on x-axis
@@ -454,11 +454,11 @@ public class M3PathBuilder extends M3Managed {
 
     /**
      * <p>Adds cubic from last point towards Point p1, then towards Point p2, ending at
-     * Point p3. If PathBuilder is empty, or last {@link PathVerb} is {@link PathVerb#CLOSE}, last point is set to
+     * Point p3. If PathBuilder is empty, or last {@link M3PathVerb} is {@link M3PathVerb#CLOSE}, last point is set to
      * (0, 0) before adding cubic.</p>
      *
-     * <p>Appends {@link PathVerb#MOVE} to verb array and (0, 0) to Point array, if needed;
-     * then appends {@link PathVerb#CUBIC} to verb array; and Point p1, p2, p3
+     * <p>Appends {@link M3PathVerb#MOVE} to verb array and (0, 0) to Point array, if needed;
+     * then appends {@link M3PathVerb#CUBIC} to verb array; and Point p1, p2, p3
      * to Point array.</p>
      *
      * @param p1  first control Point of cubic
@@ -471,13 +471,13 @@ public class M3PathBuilder extends M3Managed {
     }
 
     /**
-     * <p>Appends {@link PathVerb#CLOSE} to PathBuilder. A closed contour connects the first and last Point
+     * <p>Appends {@link M3PathVerb#CLOSE} to PathBuilder. A closed contour connects the first and last Point
      * with line, forming a continuous loop. Open and closed contour draw the same
-     * with {@link PaintMode#FILL}. With {@link PaintMode#STROKE}, open contour draws
-     * {@link PaintStrokeCap} at contour start and end; closed contour draws
-     * {@link PaintStrokeJoin} at contour start and end.</p>
+     * with {@link M3PaintMode#FILL}. With {@link M3PaintMode#STROKE}, open contour draws
+     * {@link M3PaintStrokeCap} at contour start and end; closed contour draws
+     * {@link M3PaintStrokeJoin} at contour start and end.</p>
      *
-     * <p>close() has no effect if PathBuilder is empty or last PathBuilder {@link PathVerb} is {@link PathVerb#CLOSE}.</p>
+     * <p>close() has no effect if PathBuilder is empty or last PathBuilder {@link M3PathVerb} is {@link M3PathVerb#CLOSE}.</p>
      *
      * @return  reference to PathBuilder
      */
@@ -500,9 +500,9 @@ public class M3PathBuilder extends M3Managed {
     }
 
     /**
-     * Append a series of {@link #lineTo(Point)}
+     * Append a series of {@link #lineTo(M3Point)}
      *
-     * @param pts  array of {@link Point}
+     * @param pts  array of {@link M3Point}
      * @return     reference to PathBuilder.
      */
     public M3PathBuilder polylineTo(M3Point[] pts) {
@@ -548,11 +548,11 @@ public class M3PathBuilder extends M3Managed {
     }
 
     /**
-     * <p>Adds line from last point to vector (dx, dy). If PathBuilder is empty, or last {@link PathVerb} is
-     * {@link PathVerb#CLOSE}, last point is set to (0, 0) before adding line.</p>
+     * <p>Adds line from last point to vector (dx, dy). If PathBuilder is empty, or last {@link M3PathVerb} is
+     * {@link M3PathVerb#CLOSE}, last point is set to (0, 0) before adding line.</p>
      *
-     * <p>Appends {@link PathVerb#MOVE} to verb array and (0, 0) to Point array, if needed;
-     * then appends {@link PathVerb#LINE} to verb array and line end to Point array.</p>
+     * <p>Appends {@link M3PathVerb#MOVE} to verb array and (0, 0) to Point array, if needed;
+     * then appends {@link M3PathVerb#LINE} to verb array and line end to Point array.</p>
      *
      * <p>Line end is last point plus vector (dx, dy).</p>
      *
@@ -569,11 +569,11 @@ public class M3PathBuilder extends M3Managed {
     }
 
     /**
-     * <p>Adds line from last point to vector (dx, dy). If PathBuilder is empty, or last {@link PathVerb} is
-     * {@link PathVerb#CLOSE}, last point is set to (0, 0) before adding line.</p>
+     * <p>Adds line from last point to vector (dx, dy). If PathBuilder is empty, or last {@link M3PathVerb} is
+     * {@link M3PathVerb#CLOSE}, last point is set to (0, 0) before adding line.</p>
      *
-     * <p>Appends {@link PathVerb#MOVE} to verb array and (0, 0) to Point array, if needed;
-     * then appends {@link PathVerb#LINE} to verb array and line end to Point array.</p>
+     * <p>Appends {@link M3PathVerb#MOVE} to verb array and (0, 0) to Point array, if needed;
+     * then appends {@link M3PathVerb#LINE} to verb array and line end to Point array.</p>
      *
      * <p>Line end is last point plus vector (dx, dy).</p>
      *
@@ -588,11 +588,11 @@ public class M3PathBuilder extends M3Managed {
 
     /**
      * <p>Adds quad from last point towards vector (dx1, dy1), to vector (dx2, dy2).
-     * If PathBuilder is empty, or last {@link PathVerb}
-     * is {@link PathVerb#CLOSE}, last point is set to (0, 0) before adding quad.</p>
+     * If PathBuilder is empty, or last {@link M3PathVerb}
+     * is {@link M3PathVerb#CLOSE}, last point is set to (0, 0) before adding quad.</p>
      *
-     * <p>Appends {@link PathVerb#MOVE} to verb array and (0, 0) to Point array,
-     * if needed; then appends {@link PathVerb#QUAD} to verb array; and appends quad
+     * <p>Appends {@link M3PathVerb#MOVE} to verb array and (0, 0) to Point array,
+     * if needed; then appends {@link M3PathVerb#QUAD} to verb array; and appends quad
      * control and quad end to Point array.</p>
      *
      * <p>Quad control is last point plus vector (dx1, dy1).</p>
@@ -615,11 +615,11 @@ public class M3PathBuilder extends M3Managed {
 
     /**
      * <p>Adds quad from last point towards vector (dx1, dy1), to vector (dx2, dy2).
-     * If PathBuilder is empty, or last {@link PathVerb}
-     * is {@link PathVerb#CLOSE}, last point is set to (0, 0) before adding quad.</p>
+     * If PathBuilder is empty, or last {@link M3PathVerb}
+     * is {@link M3PathVerb#CLOSE}, last point is set to (0, 0) before adding quad.</p>
      *
-     * <p>Appends {@link PathVerb#MOVE} to verb array and (0, 0) to Point array,
-     * if needed; then appends {@link PathVerb#QUAD} to verb array; and appends quad
+     * <p>Appends {@link M3PathVerb#MOVE} to verb array and (0, 0) to Point array,
+     * if needed; then appends {@link M3PathVerb#QUAD} to verb array; and appends quad
      * control and quad end to Point array.</p>
      *
      * <p>Quad control is last point plus vector (dx1, dy1).</p>
@@ -638,15 +638,15 @@ public class M3PathBuilder extends M3Managed {
 
     /**
      * <p>Adds conic from last point towards vector (dx1, dy1), to vector (dx2, dy2),
-     * weighted by w. If PathBuilder is empty, or last {@link PathVerb}
-     * is {@link PathVerb#CLOSE}, last point is set to (0, 0) before adding conic.</p>
+     * weighted by w. If PathBuilder is empty, or last {@link M3PathVerb}
+     * is {@link M3PathVerb#CLOSE}, last point is set to (0, 0) before adding conic.</p>
      *
-     * <p>Appends {@link PathVerb#MOVE} to verb array and (0, 0) to Point array,
+     * <p>Appends {@link M3PathVerb#MOVE} to verb array and (0, 0) to Point array,
      * if needed.</p>
      *
-     * <p>If w is finite and not one, next appends {@link PathVerb#CONIC} to verb array,
+     * <p>If w is finite and not one, next appends {@link M3PathVerb#CONIC} to verb array,
      * and w is recorded as conic weight; otherwise, if w is one, appends
-     * {@link PathVerb#QUAD} to verb array; or if w is not finite, appends {@link PathVerb#LINE}
+     * {@link M3PathVerb#QUAD} to verb array; or if w is not finite, appends {@link M3PathVerb#LINE}
      * twice to verb array.</p>
      *
      * <p>In all cases appends Point control and end to Point array.
@@ -670,15 +670,15 @@ public class M3PathBuilder extends M3Managed {
 
     /**
      * <p>Adds conic from last point towards vector (dx1, dy1), to vector (dx2, dy2),
-     * weighted by w. If PathBuilder is empty, or last {@link PathVerb}
-     * is {@link PathVerb#CLOSE}, last point is set to (0, 0) before adding conic.</p>
+     * weighted by w. If PathBuilder is empty, or last {@link M3PathVerb}
+     * is {@link M3PathVerb#CLOSE}, last point is set to (0, 0) before adding conic.</p>
      *
-     * <p>Appends {@link PathVerb#MOVE} to verb array and (0, 0) to Point array,
+     * <p>Appends {@link M3PathVerb#MOVE} to verb array and (0, 0) to Point array,
      * if needed.</p>
      *
-     * <p>If w is finite and not one, next appends {@link PathVerb#CONIC} to verb array,
+     * <p>If w is finite and not one, next appends {@link M3PathVerb#CONIC} to verb array,
      * and w is recorded as conic weight; otherwise, if w is one, appends
-     * {@link PathVerb#QUAD} to verb array; or if w is not finite, appends {@link PathVerb#LINE}
+     * {@link M3PathVerb#QUAD} to verb array; or if w is not finite, appends {@link M3PathVerb#LINE}
      * twice to verb array.</p>
      *
      * <p>In all cases appends Point control and end to Point array.
@@ -699,11 +699,11 @@ public class M3PathBuilder extends M3Managed {
     /**
      * <p>Adds cubic from last point towards vector (dx1, dy1), then towards
      * vector (dx2, dy2), to vector (dx3, dy3).
-     * If PathBuilder is empty, or last {@link PathVerb}
-     * is {@link PathVerb#CLOSE}, last point is set to (0, 0) before adding cubic.</p>
+     * If PathBuilder is empty, or last {@link M3PathVerb}
+     * is {@link M3PathVerb#CLOSE}, last point is set to (0, 0) before adding cubic.</p>
      *
-     * <p>Appends {@link PathVerb#MOVE} to verb array and (0, 0) to Point array,
-     * if needed; then appends {@link PathVerb#CUBIC} to verb array; and appends cubic
+     * <p>Appends {@link M3PathVerb#MOVE} to verb array and (0, 0) to Point array,
+     * if needed; then appends {@link M3PathVerb#CUBIC} to verb array; and appends cubic
      * control and cubic end to Point array.</p>
      *
      * <p>Cubic control is last point plus vector (dx1, dy1).</p>
@@ -729,11 +729,11 @@ public class M3PathBuilder extends M3Managed {
     /**
      * <p>Adds cubic from last point towards vector (dx1, dy1), then towards
      * vector (dx2, dy2), to vector (dx3, dy3).
-     * If PathBuilder is empty, or last {@link PathVerb}
-     * is {@link PathVerb#CLOSE}, last point is set to (0, 0) before adding cubic.</p>
+     * If PathBuilder is empty, or last {@link M3PathVerb}
+     * is {@link M3PathVerb#CLOSE}, last point is set to (0, 0) before adding cubic.</p>
      *
-     * <p>Appends {@link PathVerb#MOVE} to verb array and (0, 0) to Point array,
-     * if needed; then appends {@link PathVerb#CUBIC} to verb array; and appends cubic
+     * <p>Appends {@link M3PathVerb#MOVE} to verb array and (0, 0) to Point array,
+     * if needed; then appends {@link M3PathVerb#CUBIC} to verb array; and appends cubic
      * control and cubic end to Point array.</p>
      *
      * <p>Cubic control is last point plus vector (dx1, dy1).</p>
@@ -768,7 +768,7 @@ public class M3PathBuilder extends M3Managed {
      *
      * <p>rEllipticalArcTo() implements the functionality of svg arc, although SVG "sweep-flag" value is
      * opposite the integer value of sweep; SVG "sweep-flag" uses 1 for clockwise, while
-     * {@link PathDirection#CLOCKWISE} cast to int is zero.</p>
+     * {@link M3PathDirection#CLOCKWISE} cast to int is zero.</p>
      *
      * @param rx           radius before x-axis rotation
      * @param ry           radius before x-axis rotation
@@ -875,7 +875,7 @@ public class M3PathBuilder extends M3Managed {
      *
      * <p>ellipticalArcTo() implements the functionality of SVG arc, although SVG sweep-flag value
      * is opposite the integer value of sweep; SVG sweep-flag uses 1 for clockwise,
-     * while {@link PathDirection#CLOCKWISE} cast to int is zero.</p>
+     * while {@link M3PathDirection#CLOCKWISE} cast to int is zero.</p>
      *
      * @param rx           radius on x-axis before x-axis rotation
      * @param ry           radius on y-axis before x-axis rotation
@@ -907,7 +907,7 @@ public class M3PathBuilder extends M3Managed {
      *
      * <p>ellipticalArcTo() implements the functionality of SVG arc, although SVG sweep-flag value is
      * opposite the integer value of sweep; SVG sweep-flag uses 1 for clockwise, while
-     * {@link PathDirection#CLOCKWISE} cast to int is zero.</p>
+     * {@link M3PathDirection#CLOCKWISE} cast to int is zero.</p>
      *
      * @param r            radii on axes before x-axis rotation
      * @param xAxisRotate  x-axis rotation in degrees; positive values are clockwise
@@ -945,7 +945,7 @@ public class M3PathBuilder extends M3Managed {
     /**
      * Adds a new contour to the PathBuilder, defined by the rect. The verbs added to the path will be:
      *
-     * {@link PathVerb#MOVE}, {@link PathVerb#LINE}, {@link PathVerb#LINE}, {@link PathVerb#LINE}, {@link PathVerb#CLOSE}
+     * {@link M3PathVerb#MOVE}, {@link M3PathVerb#LINE}, {@link M3PathVerb#LINE}, {@link M3PathVerb#LINE}, {@link M3PathVerb#CLOSE}
      *
      * @param rect  rectangle to add
      * @return      reference to PathBuilder
@@ -958,7 +958,7 @@ public class M3PathBuilder extends M3Managed {
      * Adds a new contour to the PathBuilder, defined by the rect, and wound in
      * the specified direction. The verbs added to the path will be:
      *
-     * {@link PathVerb#MOVE}, {@link PathVerb#LINE}, {@link PathVerb#LINE}, {@link PathVerb#LINE}, {@link PathVerb#CLOSE}
+     * {@link M3PathVerb#MOVE}, {@link M3PathVerb#LINE}, {@link M3PathVerb#LINE}, {@link M3PathVerb#LINE}, {@link M3PathVerb#CLOSE}
      *
      * @param rect  rectangle to add
      * @param dir   winding direction for the rectangle
@@ -972,7 +972,7 @@ public class M3PathBuilder extends M3Managed {
      * Adds a new contour to the PathBuilder, defined by the rect, and wound in
      * the specified direction. The verbs added to the path will be:
      *
-     * {@link PathVerb#MOVE}, {@link PathVerb#LINE}, {@link PathVerb#LINE}, {@link PathVerb#LINE}, {@link PathVerb#CLOSE}
+     * {@link M3PathVerb#MOVE}, {@link M3PathVerb#LINE}, {@link M3PathVerb#LINE}, {@link M3PathVerb#LINE}, {@link M3PathVerb#CLOSE}
      *
      *  start specifies which corner to begin the contour:
      *      0: upper-left  corner
@@ -1207,9 +1207,9 @@ public class M3PathBuilder extends M3Managed {
      * @param src     path to add
      * @param dx      x-axis offset
      * @param dy      y-axis offset
-     * @param extend  if false, src verb array, {@link Point} array, and conic
+     * @param extend  if false, src verb array, {@link M3Point} array, and conic
      *                weights are added unaltered. If true, add line before
-     *                appending verbs, {@link Point}, and conic weights.
+     *                appending verbs, {@link M3Point}, and conic weights.
      * @return        reference to PathBuilder
      */
     public M3PathBuilder addPath(M3Path src, float dx, float dy, boolean extend) {
@@ -1227,9 +1227,9 @@ public class M3PathBuilder extends M3Managed {
      *
      * @param src     path to add
      * @param offset  offset
-     * @param extend  if false, src verb array, {@link Point} array, and conic
+     * @param extend  if false, src verb array, {@link M3Point} array, and conic
      *                weights are added unaltered. If true, add line before
-     *                appending verbs, {@link Point}, and conic weights.
+     *                appending verbs, {@link M3Point}, and conic weights.
      * @return        reference to PathBuilder
      */
     public M3PathBuilder addPath(M3Path src, M3Point offset, boolean extend) {
@@ -1252,9 +1252,9 @@ public class M3PathBuilder extends M3Managed {
      *
      * @param src     path to add
      * @param matrix  transformation matrix
-     * @param extend  if false, src verb array, {@link Point} array, and conic
+     * @param extend  if false, src verb array, {@link M3Point} array, and conic
      *                weights are added unaltered. If true, add line before
-     *                appending verbs, {@link Point}, and conic weights.
+     *                appending verbs, {@link M3Point}, and conic weights.
      * @return        reference to PathBuilder
      */
     public M3PathBuilder addPath(M3Path src, M3Matrix33 matrix, boolean extend) {
@@ -1269,11 +1269,11 @@ public class M3PathBuilder extends M3Managed {
     }
 
     /**
-     * <p>Grows PathBuilder verb array and {@link Point} array to contain additional space.
+     * <p>Grows PathBuilder verb array and {@link M3Point} array to contain additional space.
      * May improve performance and use less memory by
      * reducing the number and size of allocations when creating PathBuilder.</p>
      *
-     * @param extraPtCount     number of additional {@link Point} to allocate
+     * @param extraPtCount     number of additional {@link M3Point} to allocate
      * @param extraVerbCount   number of additional verbs
      * @param extraConicCount  number of additional conic weights
      * @return                 reference to PathBuilder
@@ -1285,11 +1285,11 @@ public class M3PathBuilder extends M3Managed {
     }
 
     /**
-     * <p>Grows PathBuilder verb array and {@link Point} array to contain additional space.
+     * <p>Grows PathBuilder verb array and {@link M3Point} array to contain additional space.
      * May improve performance and use less memory by
      * reducing the number and size of allocations when creating PathBuilder.</p>
      *
-     * @param extraPtCount  number of additional {@link Point} and verbs to allocate
+     * @param extraPtCount  number of additional {@link M3Point} and verbs to allocate
      * @return              reference to PathBuilder
      */
     public M3PathBuilder incReserve(int extraPtCount) {
@@ -1363,10 +1363,10 @@ public class M3PathBuilder extends M3Managed {
     }
 
     /**
-     * Returns if {@link Path} is empty. Empty {@link PathBuilder} may have
-     * {@link PathFillMode} but has no {@link Point}, {@link PathVerb}, or conic
-     * weight. {@link PathBuilder()} constructs empty {@link PathBuilder};
-     * {@link #reset()} makes {@link Path} empty.
+     * Returns if {@link M3Path} is empty. Empty {@link M3PathBuilder} may have
+     * {@link M3PathFillMode} but has no {@link M3Point}, {@link M3PathVerb}, or conic
+     * weight. {@link M3PathBuilder()} constructs empty {@link M3PathBuilder};
+     * {@link #reset()} makes {@link M3Path} empty.
      *
      * @return  true if the builder is empty
      */
@@ -1380,7 +1380,7 @@ public class M3PathBuilder extends M3Managed {
     }
 
     /**
-     * Returns the last point in the builder, or null if {@link Point} array is
+     * Returns the last point in the builder, or null if {@link M3Point} array is
      * empty.
      *
      * @return  last point, or null if empty
@@ -1421,8 +1421,8 @@ public class M3PathBuilder extends M3Managed {
     }
 
     /**
-     * Sets the last point on the path. If {@link Point} array is empty, append
-     * {@link PathVerb#MOVE} to verb array and append p to {@link Point} array.
+     * Sets the last point on the path. If {@link M3Point} array is empty, append
+     * {@link M3PathVerb#MOVE} to verb array and append p to {@link M3Point} array.
      *
      * @param x  x-coordinate
      * @param y  y-coordinate
@@ -1435,8 +1435,8 @@ public class M3PathBuilder extends M3Managed {
     }
 
     /**
-     * Sets the last point on the path. If {@link Point} array is empty, append
-     * {@link PathVerb#MOVE} to verb array and append p to {@link Point} array.
+     * Sets the last point on the path. If {@link M3Point} array is empty, append
+     * {@link M3PathVerb#MOVE} to verb array and append p to {@link M3Point} array.
      *
      * @param p  point to set
      * @return   reference to PathBuilder
@@ -1446,7 +1446,7 @@ public class M3PathBuilder extends M3Managed {
     }
 
     /**
-     * Returns the number of points in the builder. {@link Point} count is
+     * Returns the number of points in the builder. {@link M3Point} count is
      * initially zero.
      *
      * @return  PathBuilder Point array length
@@ -1461,11 +1461,11 @@ public class M3PathBuilder extends M3Managed {
     }
 
     /**
-     * Returns if {@link PathFillMode} describes area outside {@link Path}
+     * Returns if {@link M3PathFillMode} describes area outside {@link M3Path}
      * geometry. The inverse fill area extends indefinitely.
      *
-     * @return  true if fill mode is {@link PathFillMode#INVERSE_WINDING} or
-     *          {@link PathFillMode#INVERSE_EVEN_ODD}
+     * @return  true if fill mode is {@link M3PathFillMode#INVERSE_WINDING} or
+     *          {@link M3PathFillMode#INVERSE_EVEN_ODD}
      */
     public boolean isInverseFillType() {
         try {

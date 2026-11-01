@@ -3,8 +3,8 @@ package jdk.m3.graphics;
 import jdk.m3.graphics.impl.*;
 
 /**
- * <p>RuntimeEffectBuilder is a utility to simplify creating {@link Shader}, {@link ColorFilter},
- * and {@link Blender} objects from {@link RuntimeEffect}s.</p>
+ * <p>RuntimeEffectBuilder is a utility to simplify creating {@link M3Shader}, {@link M3ColorFilter},
+ * and {@link M3Blender} objects from {@link M3RuntimeEffect}s.</p>
  *
  * <p>NOTE: Like RuntimeEffect, this API is experimental and subject to change!</p>
  *

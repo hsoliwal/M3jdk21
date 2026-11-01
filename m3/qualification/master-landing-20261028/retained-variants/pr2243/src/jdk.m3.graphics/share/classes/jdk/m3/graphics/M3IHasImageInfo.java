@@ -46,7 +46,7 @@ public interface M3IHasImageInfo {
 
     /**
      * Returns number of bytes per pixel required by ColorType.
-     * Returns zero if colorType is {@link ColorType#UNKNOWN}.
+     * Returns zero if colorType is {@link M3ColorType#UNKNOWN}.
      *
      * @return  bytes in pixel
      */
@@ -57,7 +57,7 @@ public interface M3IHasImageInfo {
 
     /**
      * Returns bit shift converting row bytes to row pixels.
-     * Returns zero for {@link ColorType#UNKNOWN}.
+     * Returns zero for {@link M3ColorType#UNKNOWN}.
      *
      * @return  one of: 0, 1, 2, 3; left shift to convert pixels to bytes
      */
@@ -68,7 +68,7 @@ public interface M3IHasImageInfo {
     /**
      * Returns true if either getWidth() or getHeight() are zero.
      *
-     * Does not check if PixelRef is null; call {@link Bitmap#drawsNothing()} to check
+     * Does not check if PixelRef is null; call {@link M3Bitmap#drawsNothing()} to check
      * getWidth(), getHeight(), and PixelRef.
      *
      * @return  true if dimensions do not enclose area
@@ -85,7 +85,7 @@ public interface M3IHasImageInfo {
      * <p>Does not check if SkColorType allows alpha, or if any pixel value has
      * transparency.</p>
      *
-     * @return  true if ImageInfo ColorAlphaType is {@link ColorAlphaType#OPAQUE}
+     * @return  true if ImageInfo ColorAlphaType is {@link M3ColorAlphaType#OPAQUE}
      */
     default boolean isOpaque() {
         return getImageInfo()._colorInfo.isOpaque();

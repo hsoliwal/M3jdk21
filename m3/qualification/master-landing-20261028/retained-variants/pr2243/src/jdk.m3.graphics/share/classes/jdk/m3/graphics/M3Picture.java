@@ -30,7 +30,7 @@ public class M3Picture extends M3RefCnt {
      * commands are recorded, each command in the Picture is sent separately to canvas.</p>
      *
      * <p>To add a single command to draw Picture to recording canvas, call
-     * {@link Canvas#drawPicture} instead.</p>
+     * {@link M3Canvas#drawPicture} instead.</p>
      *
      * @param canvas  receiver of drawing commands
      * @return        this
@@ -46,7 +46,7 @@ public class M3Picture extends M3RefCnt {
      * commands are recorded, each command in the Picture is sent separately to canvas.</p>
      *
      * <p>To add a single command to draw Picture to recording canvas, call
-     * {@link Canvas#drawPicture} instead.</p>
+     * {@link M3Canvas#drawPicture} instead.</p>
      *
      * @param canvas  receiver of drawing commands
      * @param abort   return true to interrupt the playback

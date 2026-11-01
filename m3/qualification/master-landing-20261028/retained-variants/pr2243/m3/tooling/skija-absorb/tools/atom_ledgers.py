@@ -11,7 +11,8 @@ Writes the execution ledgers of the jdk.m3.graphics atom tests from the logs tha
                             (ATOM_MEMBERS.tsv null_params: no value without natives)
   leaf1/ATOM_TEST_GATES.tsv one row per gate: what ran and what it printed
 
-Exits 1 when a log is missing or a gate failed (tests, fixed point, mutants, perf outliers).
+Exits 1 when a log is missing or a gate failed (tests, fixed point, Multi-Release self-check, mutants, perf outliers
+above the SAME-code noise ceiling, texts that matched only through the rename outside class-name members).
 """
 import hashlib
 import os
@@ -54,15 +55,20 @@ def console(log):
     return out
 
 
+ATOM_FIELDS = ("members", "cases", "mismatches", "rename_expected", "messages", "hash_exact", "hash_partition",
+               "hash_skipped", "environment", "rename_unexpected")
+
+
 def harness(log):
-    """Sums of the ATOM rows: members, cases, mismatches, strings, messages, hash exact/partition/skipped, env."""
-    sums = [0] * 9
+    """Sums of the ATOM rows: members, cases, mismatches, rename-only matches expected (class-name members),
+    messages matched after normalization, hash exact/partition/skipped, URL comparisons by presence, rename-only
+    matches unexpected (each one a mismatch)."""
+    sums = [0] * len(ATOM_FIELDS)
     for line in log:
         f = line.split(TAB)
-        if f[0] == "ATOM" and len(f) == 11:
+        if f[0] == "ATOM" and len(f) == len(ATOM_FIELDS) + 2:
             sums = [a + int(b) for a, b in zip(sums, f[2:])]
-    return dict(zip(("members", "cases", "mismatches", "strings", "messages", "hash_exact", "hash_partition",
-                     "hash_skipped", "environment"), sums))
+    return dict(zip(ATOM_FIELDS, sums))
 
 
 def quantile(values, q):
@@ -91,6 +97,9 @@ def write_perf(repo, data):
                 "11 rounds alternating the first side; ns/op = median round; no re-measuring%s" % NL)
         f.write("# ratio = ns/op M3 / ns/op oracle (above 1: M3 slower); spread = IQR of the 11 round ratios / their "
                 "median; code SAME = same bytecode on both sides (member and module callees, modulo the rename)%s" % NL)
+        f.write("# v3 gate: SAME rows are the run's noise (verdict NOISE, never failing); a DIFF row is an OUTLIER only "
+                "above max(slack 1.5, largest SAME ratio of the run), OK_NOISE_BAND between the slack and that "
+                "ceiling%s" % NL)
         f.write(TAB.join(("run", "atom", "pattern", "member", "code", "calls", "ns_per_op_m3", "ns_per_op_oracle",
                           "ratio", "spread", "verdict")) + NL)
         for run in RUNS:
@@ -100,7 +109,7 @@ def write_perf(repo, data):
 
 def same_stats(data):
     """Identical-code rows: per-run ratio distribution and the run-to-run difference of each row's ratio."""
-    ratios = {run: {(r[1], r[3]): float(r[8]) for r in data[run] if r[4] == "SAME" and r[10].startswith("OK")}
+    ratios = {run: {(r[1], r[3]): float(r[8]) for r in data[run] if r[4] == "SAME" and r[10].startswith("NOISE")}
               for run in RUNS}
     both = sorted(set(ratios[RUNS[0]]) & set(ratios[RUNS[1]]))
     deltas = [abs(ratios[RUNS[0]][k] - ratios[RUNS[1]][k]) for k in both]
@@ -143,6 +152,7 @@ def sha(path):
 def gates(repo, work, oracle, data, summary, same, gaps):
     gen = lines(work, "gen.log")
     check = lines(work, "gen_check.log")
+    mr_check = lines(work, "mr_selftest.log")
     m3javac = lines(work, "m3javac.log")
     testjavac = lines(work, "testjavac.log")
     pinned, unpinned, none = (lines(work, n) for n in ("junit_pinned.log", "junit_unpinned.log",
@@ -162,8 +172,8 @@ def gates(repo, work, oracle, data, summary, same, gaps):
     errors = lambda log: sum(" error" in x for x in log)
     warnings = lambda log: sum(" warning" in x for x in log)
     rows = [
-        ("base", "worktree HEAD with #2208 head c500a57e merged (MR_SELECT v1); module compiled with javac --release 21 "
-                 "-proc:none (JDK 21.0.9), no module-info",
+        ("base", "worktree HEAD with #2208 head b23a388c merged (MR_SELECT v1, JAVADOC_REF v1); module compiled with "
+                 "javac --release 21 -proc:none (JDK 21.0.9), no module-info",
          "%d sources, %d classes, %d errors" % (sources, classes, errors(m3javac))),
         ("oracle", "the oracle jars, loaded in their own class loader (parent: platform loader); javap --multi-release 21",
          jars + "; " + "; ".join(mr)),
@@ -174,15 +184,23 @@ def gates(repo, work, oracle, data, summary, same, gaps):
          "%d mismatches" % sum(line.startswith("RENAME_RULE_MISMATCH") for line in gen)),
         ("fixed_point", "python tools/gen_atom_tests.py <repo> <m3 classes> <oracle jars> --check",
          "NOT_FIXED_POINT" if any("NOT_FIXED_POINT" in x for x in check) else "0 files differ, 0 stale"),
+        ("mr_check", "python -I tools/mr_check_selftest.py <repo> <work> <oracle jars>: the generator's Multi-Release "
+                     "cross-check (mr_select.jar_versions vs leaf1/MR_SELECT.tsv, both directions) on the real jars "
+                     "and on negative cases",
+         next((x for x in mr_check if x.startswith("mr_check_cases")), "summary missing") + "; " + "; ".join(
+             x.split(TAB)[1] + " " + x.split(TAB)[0] for x in mr_check if x.startswith(("PASS", "FAIL")))),
         ("compile", "javac --release 21 -Xlint:all -encoding UTF-8 -cp junit-platform-console-standalone-1.11.4 "
                     "test/jdk/jdk/m3/graphics/*.java",
          "%d sources, %d errors, %d warnings" % (tests, errors(testjavac), warnings(testjavac))),
         ("junit", "java %s -Dm3.graphics.oracle=<jars> -jar junit-platform-console-standalone-1.11.4.jar execute "
                   "(identity hashes pinned, as the jtreg @run lines)" % PINNED,
          "%d tests found, %d successful, %d failed; %d members, %d cases, %d mismatching; %d messages matched after "
-         "normalization; hashCode: %d exact, %d by partition; %d URL comparisons by presence" % (
+         "normalization; texts equal only after dropping the M3 prefix of a TYPE_RENAME name: %d in class-name "
+         "members (expected), %d elsewhere (mismatches); hashCode: %d exact, %d by partition; %d URL comparisons by "
+         "presence" % (
              cp["found"], cp["successful"], cp["failed"], hp["members"], hp["cases"], hp["mismatches"],
-             hp["messages"], hp["hash_exact"], hp["hash_partition"], hp["environment"])),
+             hp["messages"], hp["rename_expected"], hp["rename_unexpected"], hp["hash_exact"], hp["hash_partition"],
+             hp["environment"])),
         ("junit_unpinned", "same without %s" % PINNED,
          "%d tests found, %d successful, %d failed; %d mismatching; hashCode: %d exact, %d by partition, %d nested "
          "skipped" % (cu["found"], cu["successful"], cu["failed"], hu["mismatches"], hu["hash_exact"],
@@ -193,8 +211,8 @@ def gates(repo, work, oracle, data, summary, same, gaps):
         ("coverage", "tools/atom_ledgers.py -> leaf1/ATOM_COVERAGE.tsv",
          "%d members THROWS_ONLY (the oracle never returned normally), %d members NULL_ONLY (a reference parameter "
          "without a native-free value)" % (gaps["THROWS_ONLY"], gaps["NULL_ONLY"])),
-        ("mutants", "python tools/atom_mutants.py (leaf1/ATOM_MUTANTS.tsv): 8 single-edit mutants compiled ahead of "
-                    "the module classes",
+        ("mutants", "python tools/atom_mutants.py (leaf1/ATOM_MUTANTS.tsv): %d single-edit mutants compiled ahead of "
+                    "the module classes" % len(mutants),
          "%d/%d killed with pinned identity hashes; %d/%d without (%s)" % (
              killed, len(mutants), killed_unpinned, len(mutants),
              ", ".join(m["mutant"] + " survives" for m in mutants if m["result_unpinned"] != "KILLED") or "-")),
@@ -202,8 +220,8 @@ def gates(repo, work, oracle, data, summary, same, gaps):
     for run in RUNS:
         rows.append(("perf_run%s" % run, "java %s M3GraphicsAtomsPerf (leaf1/ATOM_PERF.tsv run %s)" % (PERF_FLAGS, run),
                      summary[run].replace(TAB, " ") + "; " + same[run].replace(TAB, " ")))
-    rows.append(("perf_same_code", "ATOM_PERF.tsv rows with code SAME and verdict OK*: the harness's own spread",
-                 same_stats(data)))
+    rows.append(("perf_same_code", "ATOM_PERF.tsv rows with code SAME (verdict NOISE*): the run's noise, which sets "
+                                   "the DIFF threshold max(slack, largest SAME ratio)", same_stats(data)))
     rows.append(("perf_skip", "M3GraphicsAtomsPerf without -Dm3.graphics.oracle",
                  next((x for x in skip if x.startswith("PERF_SKIPPED")), "no PERF_SKIPPED line").replace(TAB, " ")))
     with open(os.path.join(repo, LEAF, "ATOM_TEST_GATES.tsv"), "w", encoding="utf-8", newline=NL) as f:
@@ -212,7 +230,8 @@ def gates(repo, work, oracle, data, summary, same, gaps):
             f.write(TAB.join(r) + NL)
     outliers = sum("outliers=0" not in summary[run] for run in RUNS)
     ok = (cp["failed"] == 0 and cp["found"] > 0 and cu["failed"] == 0 and cn["failed"] == 0 and killed == len(mutants)
-          and not any("NOT_FIXED_POINT" in x for x in check) and outliers == 0)
+          and not any("NOT_FIXED_POINT" in x for x in check) and outliers == 0 and hp["rename_unexpected"] == 0
+          and not any(x.startswith("FAIL") for x in mr_check) and any(x.startswith("mr_check_cases") for x in mr_check))
     return ok, rows
 
 

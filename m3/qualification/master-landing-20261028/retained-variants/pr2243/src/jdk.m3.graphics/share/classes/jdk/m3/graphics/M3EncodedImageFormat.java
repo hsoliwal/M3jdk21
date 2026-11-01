@@ -2,7 +2,7 @@ package jdk.m3.graphics;
 
 
 /**
- * @deprecated - use {@link EncoderJPEG}, {@link EncoderPNG} or {@link EncoderWEBP} directly
+ * @deprecated - use {@link M3EncoderJPEG}, {@link M3EncoderPNG} or {@link M3EncoderWEBP} directly
  */
 @Deprecated
 public enum M3EncodedImageFormat {

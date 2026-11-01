@@ -8,20 +8,20 @@ public enum M3RuntimeEffectUniformFlag {
 
     /**
      * Uniform is declared with layout(color). Colors should be supplied as unpremultiplied,
-     * extended-range (unclamped) sRGB (ie {@link Color4f}). The uniform will be automatically
+     * extended-range (unclamped) sRGB (ie {@link M3Color4f}). The uniform will be automatically
      * transformed to unpremultiplied extended-range working-space colors.
      */
     COLOR(0x2),
 
     /**
      * When used with MeshSpecification, indicates that the uniform is present in the
-     * vertex shader. Not used with {@link RuntimeEffect}.
+     * vertex shader. Not used with {@link M3RuntimeEffect}.
      */
     VERTEX(0x4),
 
     /**
      * When used with MeshSpecification, indicates that the uniform is present in the
-     * fragment shader. Not used with {@link RuntimeEffect}.
+     * fragment shader. Not used with {@link M3RuntimeEffect}.
      */
     FRAGMENT(0x8),
 
