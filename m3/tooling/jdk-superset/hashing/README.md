@@ -326,6 +326,19 @@ ranges over three runs of each side on the merged build. The methods above FreqI
 stopped on a LogCompilation element that the VM's exit had cut off (a `<fragment>`), and `method_sizes.py` and
 `hash_patterns.py` now carry the variant column that was added to `METHOD_SIZES.tsv` by hand.
 
+**After the second verification (2026-11-01).** Two points were raised on 6269b33f07. (g) The bounds and the XXH3
+geometry the tests restate carry M3XXH3's names where M3XXH3 names the same quantity: `SHORT_INPUT_MAX` (the end
+of XXH3_len_0to16 and of its 9..16 class), `LEN_4TO8_MIN`, `LEN_4TO8_MAX`, `LEN_17TO128_MAX`, `MIDSIZE_MAX`,
+`STRIPE_LEN`, `SECRET_SIZE`, `SECRET_MERGEACCS_START` and `MIX_BYTES`; `MIDSIZE_MIN` names the first midsize
+length, and bounds M3XXH3 does not name keep their `LEN_<class>_MIN/MAX` names. The values are restated in the
+tests, never read from M3XXH3, so a slipped production bound still fails a test; javac folds the constants, and
+the 167 methods of the test classes are instruction-identical before and after (per-method javap, constant-pool
+indexes removed). (h) The gates already ran on the stock ConsoleLauncher at 6269b33f07; no file of the branch
+names M3GateJUnitRun any more. `tools/gate.sh` ran as one command in a fresh blobless sparse clone of the branch
+that holds only this lane, the hash sources and tests, the legal file and the three vendored donor trees
+(zero-allocation-hashing, annotations, jsr305), with nothing outside the repository but JDK 21.0.9 and
+junit-platform-console-standalone 1.11.4: gate.sh exit 0 (4 min 29 s): recipe reproduces the 16 committed sources; patch 42 classes; BYTECODE_IDENTITY 42/42 IDENTICAL; constants: 0 numeric literals left to name; M3HashAtomsTest 16/16 twice (prebuilt oracle, test.src); M3HashJitAtomsTest 19/19 twice, 954,133 comparisons; API surface kept 95, dropped 37, added 0; mutation_gate.py 21/21 killed; MUTANTS.tsv, API_SURFACE.tsv and BYTECODE_IDENTITY.tsv byte-identical to the committed tables; M3HashAtomsPerf 41 rows (evidence).
+
 **Root causes left (Strings, direct ByteBuffers).** Strings: the CharSequence access builds every 8-byte read from
 up to four `CharSequence.charAt` calls (coder test and bounds check each), 511-795 budget bytes per read, so
 `XXH3_hashLong` still passes DesiredMethodLimit on the String path and the work per read is four loads. Counted two

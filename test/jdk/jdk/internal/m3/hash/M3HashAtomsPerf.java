@@ -74,13 +74,15 @@ public class M3HashAtomsPerf {
     private static final int LEN_4TO8_MIN = 4;
     private static final int LEN_4TO8_MAX = 8;
     private static final int LEN_9TO16_MIN = 9;
-    private static final int LEN_9TO16_MAX = 16;
+    /** M3XXH3.SHORT_INPUT_MAX: the last length of XXH3_len_0to16 and of its 9..16 class. */
+    private static final int SHORT_INPUT_MAX = 16;
     private static final int LEN_17TO128_MIN = 17;
     private static final int LEN_17TO128_MAX = 128;
-    private static final int LEN_129TO240_MIN = 129;
-    private static final int LEN_129TO240_MAX = 240;
+    /** The midsize class XXH3_len_129to240; M3XXH3.MIDSIZE_MAX is its last length. */
+    private static final int MIDSIZE_MIN = 129;
+    private static final int MIDSIZE_MAX = 240;
     /** The first input length XXH3_hashLong serves (XXH3_MIDSIZE_MAX + 1). */
-    private static final int LONG_LEN_MIN = LEN_129TO240_MAX + 1;
+    private static final int LONG_LEN_MIN = MIDSIZE_MAX + 1;
     private static final double PERCENT = 100.0;
     private static final String NA = "NA";
     private static final String SLACK_PROPERTY = "M3_PERF_SLACK";
@@ -392,8 +394,8 @@ public class M3HashAtomsPerf {
     /** [lo, hi] per XXH3 atom: len_0, len_1to3, len_4to8, len_9to16, len_17to128, len_129to240, hashLong (0 or 1
      *  full block of 1024 bytes), hashLong (1 to 4 blocks). */
     private static final int[][] XXH3_CLASSES = {{LEN_0, LEN_0}, {LEN_1TO3_MIN, LEN_1TO3_MAX},
-            {LEN_4TO8_MIN, LEN_4TO8_MAX}, {LEN_9TO16_MIN, LEN_9TO16_MAX}, {LEN_17TO128_MIN, LEN_17TO128_MAX},
-            {LEN_129TO240_MIN, LEN_129TO240_MAX}, {LONG_LEN_MIN, LONG_MIN}, {LONG_MIN, LONG_MAX}};
+            {LEN_4TO8_MIN, LEN_4TO8_MAX}, {LEN_9TO16_MIN, SHORT_INPUT_MAX}, {LEN_17TO128_MIN, LEN_17TO128_MAX},
+            {MIDSIZE_MIN, MIDSIZE_MAX}, {LONG_LEN_MIN, LONG_MIN}, {LONG_MIN, LONG_MAX}};
     private static final String[] XXH3_ATOMS_64 = {"XXH3_len_0to16_64b (len 0)", "XXH3_len_1to3_64b",
             "XXH3_len_4to8_64b", "XXH3_len_9to16_64b", "XXH3_len_17to128_64b", "XXH3_len_129to240_64b",
             "XXH3_hashLong (64-bit)", "XXH3_hashLong (64-bit, blocks)"};
