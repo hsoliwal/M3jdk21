@@ -4,7 +4,8 @@
 #
 # mutation_run.sh <worktree> <out_dir> <MUTANTS.tsv> <MUTATION.tsv> : ATOM-TEST MUTATION RUN v1 (no JDK build).
 # Reproduces the discriminator evidence from the repository: every row of MUTANTS.tsv (id, owner file under PKG_DIR,
-# exact old text, replacement, test class, description; @n and @uXXXX escapes as in mutate_once.py) is applied once
+# exact old text on one line, replacement, test class, description; every field non-empty, since the tab-separated
+# fields are read with IFS; @n and @uXXXX are the Java escapes \n and \uXXXX as in mutate_once.py) is applied once
 # with mutate_once.py, the named test class runs through run_atom_tests.sh, and the owner file is restored with
 # git checkout (also when a step fails). A mutant is KILLED when the class has a failing or erroring test, SURVIVED when
 # it passes, NOT_APPLIED when the old text is not found exactly once. Writes MUTATION.tsv: mutant, owner, mutation,
@@ -13,11 +14,13 @@ set -uo pipefail
 WT=${1:?worktree}; OUT=${2:?out_dir}; MUTANTS=${3:?MUTANTS.tsv}; RESULT=${4:?MUTATION.tsv}
 PKG_DIR=${PKG_DIR:-"src/java.base/share/classes/jdk/internal/mindex"}
 T="$WT/m3/tooling/atom-tests"
+# Git Bash would rewrite mutant texts that start with '/' or '//' as paths before python sees them
+export MSYS_NO_PATHCONV=1
 mkdir -p "$OUT"
 printf 'mutant\towner\tmutation\ttest_class\ttests_failed\ttests_total\tverdict\n' > "$RESULT.tmp"
 status=0
 while IFS=$'\t' read -r id file old new cls desc; do
-  [ "$id" = "id" ] && continue
+  { [ -z "$id" ] || [ "$id" = "id" ]; } && continue
   owner="$WT/$PKG_DIR/$file"
   restore() { git -C "$WT" checkout -- "$PKG_DIR/$file"; }
   if ! python "$T/mutate_once.py" "$owner" "$old" "$new" > /dev/null; then
