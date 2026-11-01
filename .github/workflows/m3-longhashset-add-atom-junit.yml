@@ -1,0 +1,87 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 LC705 add(long) exact per-atom JUnit receiver
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongHashSet.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongHashSetAddAtomTest.java'
+      - 'm3/collections/qualification/leetcodify-longhashset-onepass/**'
+      - '.github/workflows/m3-longhashset-add-atom-junit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  jdk21-atom-and-existing-reshash-contracts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            m3/arrays
+            m3/collections
+          sparse-checkout-cone-mode: true
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Refuse source/preimage, JUnit method or version drift
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java)" = "2e07abc5a2c210ec48760d7105259470ec364500"
+          test "$(git rev-parse HEAD:m3/collections/src/test/java/com/m3/collections/M3LongHashSetAddAtomTest.java)" = "8582964eebce98001320aaec0863653f80dba0cd"
+          test "$(java -version 2>&1 | head -1 | grep -E '21[.]')" != ""
+      - name: Build pinned M3 arrays Java21 dependency (no source mutations)
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
+      - name: Run dedicated three-atom-method JUnit and retained rehash tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=M3LongHashSetAddAtomTest,M3LongHashSetStagedRehashTest \
+            -Dsurefire.failIfNoSpecifiedTests=true test
+      - name: Verify exactly five actual executed Jupiter methods and zero skips
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as E
+          reports = Path('m3/collections/target/surefire-reports')
+          names = ('M3LongHashSetAddAtomTest', 'M3LongHashSetStagedRehashTest')
+          expected = {
+              'singleProbeAddMaintainsJdkMembershipUnderCollisionsAndTombstones',
+              'duplicateInsertionDoesNotAdvanceIteratorButNewInsertionDoes',
+              'absentInsertionAfterDeletionRetainsUniquenessAndSafeCapacity',
+              'randomizedOperationsPreserveKeysAndStateLanes',
+              'tombstoneRebuildPreservesZeroExtremesAndIteratorEpoch',
+          }
+          results = []
+          for name in names:
+              files = list(reports.glob('TEST-*'+name+'.xml'))
+              assert len(files) == 1, (name, files)
+              root = E.parse(files[0]).getroot()
+              for key in ('failures', 'errors', 'skipped'):
+                  assert int(root.attrib.get(key, -1)) == 0, (name, key, root.attrib)
+              cases = root.findall('testcase')
+              assert int(root.attrib.get('tests', -1)) == len(cases)
+              assert cases, 'no actual Jupiter methods'
+              for case in cases:
+                  assert not list(case), 'skipped/failed/flaky JUnit method'
+                  results.append(case.attrib['name'])
+          assert len(results) == 5 and set(results) == expected, results
+          print('M3_LC705_JUPITER_PER_ATOM_PASS tests=5 skipped=0')
+          PY
+          git diff --exit-code -- m3/arrays/src m3/collections/src
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3jdk21-lc705-per-atom-jupiter
+          path: m3/collections/target/surefire-reports/
+          if-no-files-found: warn
+          retention-days: 14
