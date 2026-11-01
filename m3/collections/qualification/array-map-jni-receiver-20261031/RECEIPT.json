@@ -1,0 +1,85 @@
+{
+  "schema": "m3.receiver-postimage-reference/v1",
+  "status": "DRAFT_UNADMITTED",
+  "repository": "hsoliwal/M3jdk21",
+  "preimage": "fc4dae42dd5fde0832f41d7159018ebe90b1a032",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "revision": "d5f8d8890333d1b7f72a39b00ae664a3797808df",
+    "pullRequest": 14988,
+    "recipeId": "ARRAY_MAP_FILL",
+    "recipeVersion": 2,
+    "path": "synexia-openrewrite-recipes/recipe-crates/array-map-fill-20261031",
+    "qualificationPath": "synexia-openrewrite-recipes/recipe-crates/array-map-fill-20261031/proof/QUALIFICATION.json",
+    "postimageManifestPath": "synexia-openrewrite-recipes/recipe-crates/array-map-fill-20261031/proof/POSTIMAGES.json",
+    "improvementMemoryReference": "synexia-openrewrite-recipes/recipe-crates/array-map-fill-20261031/proof/LESSONS.jsonl"
+  },
+  "postimages": [
+    {
+      "path": "m3/collections/implementations/apache-hashed-map/pom.xml",
+      "sha256": "f257fdd21d6cc0a53f4cfa7812c6534abe14079597f95fc38ebcea716575c7ac",
+      "gitBlob": "7025e5c060575151d2e90f4422b597376b59f55f"
+    },
+    {
+      "path": "m3/collections/implementations/apache-hashed-map/src/main/java/jdk/m3/collections/apache/M3HashedMap.java",
+      "sha256": "8381509894426270bd03f3b2a0c28c2173cdf7b5ebe9f7b315a585f2e49d7717",
+      "gitBlob": "0a1372c6d3e8f9e62be29875a9d64f0ee9d062d1"
+    },
+    {
+      "path": "m3/collections/implementations/apache-linked-map/pom.xml",
+      "sha256": "4d889b929f60a28a33b6be96c91c92d7a00ee2ebe7810ef078b50a93a5b09eed",
+      "gitBlob": "19b1364e8af01bbc5342581268b881b90b0ea3d1"
+    },
+    {
+      "path": "m3/collections/implementations/apache-linked-map/src/main/java/jdk/m3/collections/apache/M3LinkedMap.java",
+      "sha256": "74d1e5f79b6438aa5d11b5056b4bf012e55d04fea2e108f667fb9dc88950b94e",
+      "gitBlob": "b53f91c8955129623551e86bd9417c4f00428ed1"
+    },
+    {
+      "path": "m3/collections/implementations/apache-lru-map/pom.xml",
+      "sha256": "662b2b2a038914c1b2f2e09c507174fa3076f8b952b3293e8bb35c0346890d89",
+      "gitBlob": "026b53cceddb8d03672a71317f789f5029465c70"
+    },
+    {
+      "path": "m3/collections/implementations/apache-lru-map/src/main/java/jdk/m3/collections/apache/M3LRUMap.java",
+      "sha256": "2f11037ce046dd273cb3aa1db07d38f743a668db95c3ab8e452e39f21f880b70",
+      "gitBlob": "160a72baeb18d95addde3d72d2aa94dcdc848f6e"
+    }
+  ],
+  "componentEvidence": {
+    "runtime": "stock Oracle JDK21.0.9 Windows x64",
+    "strictMemberMavenBuilds": 3,
+    "recipeCorrectnessJUnit": 37,
+    "isolatedAbsentNativeJUnit": 1,
+    "performanceJUnitMethods": 7,
+    "cataloguedAlgorithmAtoms": 12,
+    "measuredAtomRows": 13,
+    "currentNativeJUnit": 5,
+    "nativeCTest": 3,
+    "JniExports": 12,
+    "publicProtectedDescriptors": "PASS_EXACT",
+    "freshContextSixOutputReplay": "PASS"
+  },
+  "targetGates": {
+    "naming": {
+      "status": "FAIL",
+      "exit": 2,
+      "message": "M3JDK21_NAME_RECEIVER_REFUSED: companion relation source hash drift: src/java.base/share/classes/java/util/Arrays.java",
+      "synexiaReceipt": "synexia-openrewrite-recipes/recipe-crates/array-map-fill-20261031/proof/NAMING_PREFLIGHT.json"
+    },
+    "installedM3JdkImage": "NOT_RUN",
+    "jtreg": "NOT_RUN",
+    "productGcJni": "NOT_RUN",
+    "retainedHeapAndNativeProcessMemory": "NOT_MEASURED",
+    "apiProjectionLfuLifetime": "PENDING",
+    "familyCompletion": false,
+    "repositoryCompletion": false,
+    "automaticApplication": false
+  },
+  "phase": {
+    "STRING": "QUALIFICATION_REQUIRED",
+    "ARRAYS": "WAITING_FOR_PREDECESSOR",
+    "COLLECTIONS": "WAITING_FOR_PREDECESSOR"
+  },
+  "custody": "Only six generated product postimages and this passive reference receipt. Canonical recipes, templates, fixtures, improvement memory and executors remain exclusively in Synexia."
+}
