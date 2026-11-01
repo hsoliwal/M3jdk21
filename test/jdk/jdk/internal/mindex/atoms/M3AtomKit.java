@@ -35,6 +35,9 @@ final class M3AtomKit {
     static final int OPERATIONS = 2_000;
     /** Number of generated cases of one structural check. */
     static final int CASES = 200;
+    //FLLDCIM: SFA - LITERAL GATE v1: shared names of the spec bodies' alternation and register geometry
+    /** Modulus of the even/odd alternation of generated cases (every second case takes the other branch). */
+    static final int PARITY = 2;
 
     private M3AtomKit() {
     }

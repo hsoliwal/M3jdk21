@@ -42,24 +42,91 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 public class M3CIAtomTest {
+    /** annotations ReflectOracle.Base declares */
+    private static final int BASE_ANNOTATIONS = 2;
+    /** Circle and Square, the permitted subclasses of ReflectOracle.Shape */
+    private static final int SHAPE_PERMITTED = 2;
+    /** int lanes with one entry per class row (loaderSpaces .. enclosingClassRows) */
+    private static final int PER_CLASS_LANES = 14;
+    /** int offset lanes with one entry per class row plus one */
+    private static final int OFFSET_LANES = 6;
+    /** int lanes with one entry per member row (declaring row .. flags) */
+    private static final int PER_MEMBER_LANES = 5;
+    /** int offset lanes with one entry per member row plus one */
+    private static final int MEMBER_OFFSET_LANES = 2;
+    /** queue limit of the enqueue check: String and Integer fit, Long does not */
+    private static final int MAX_CLASSES = 2;
+    /** index of the second IOException in the exception types */
+    private static final int DUPLICATE_TYPE = 2;
+    /** one generated row in INTERFACE_ODDS is an interface */
+    private static final int INTERFACE_ODDS = 4;
+    /** name ids are drawn from [0, MODEL_ROWS / ROWS_PER_NAME): about four rows per name */
+    private static final int ROWS_PER_NAME = 4;
+    /** owner row of the member draft */
+    private static final int DRAFT_OWNER = 3;
+    /** name id of the member draft */
+    private static final int DRAFT_NAME_ID = 11;
+    /** descriptor id of the member draft */
+    private static final int DRAFT_DESCRIPTOR_ID = 12;
+    /** modifiers of the member draft (public static) */
+    private static final int DRAFT_MODIFIERS = 0x9;
+    /** member flags of the member draft */
+    private static final int DRAFT_FLAGS = 0x4;
+    /** first annotation name id of the member draft */
+    private static final int DRAFT_ANNOTATION_A = 5;
+    /** second annotation name id of the member draft */
+    private static final int DRAFT_ANNOTATION_B = 6;
+    /** exception descriptor id of the member draft */
+    private static final int DRAFT_EXCEPTION_ID = 7;
+    /** rows of lengths 2, 0 and 3 (the empty row in the middle) */
+    private static final int[][] RAGGED = {{1, 2}, {}, {3, 4, 5}};
+    /** prefix sums of the RAGGED row lengths */
+    private static final int[] RAGGED_OFFSETS = {0, 2, 2, 5};
+    /** the RAGGED rows concatenated */
+    private static final int[] RAGGED_FLAT = {1, 2, 3, 4, 5};
+    /** input of the in-place prefix sum */
+    private static final int[] PREFIX_INPUT = {0, 2, 0, 3, 1};
+    /** PREFIX_INPUT after the in-place prefix sum */
+    private static final int[] PREFIX_SUMS = {0, 2, 2, 5, 6};
+    /** values are drawn from [0, MODEL_ROWS / DUPLICATE_FACTOR): duplicates are likely */
+    private static final int DUPLICATE_FACTOR = 2;
+    /** row the identity map gives String.class */
+    private static final int STRING_ROW = 4;
+    /** lengths of the arrays summed by totalLength */
+    private static final int[] TOTAL_LENGTHS = {1, 2, 3};
+    /** sorted lane with a run of three equal values */
+    private static final int[] SORTED_RUNS = {1, 3, 3, 3, 7, 9};
+    /** probes 0..PROBE_MAX cover both ends and every gap of SORTED_RUNS */
+    private static final int PROBE_MAX = 10;
+    /** the value of the run of SORTED_RUNS */
+    private static final int RUN_VALUE = 3;
+    /** first index of the searched window, inside the run */
+    private static final int WINDOW_FROM = 2;
+    /** end of the searched window */
+    private static final int WINDOW_TO = 4;
+    /** a fingerprint digest supplied by the caller */
+    private static final byte[] SUPPLIED_DIGEST = {1, 2, 3};
+    /** value the caller writes into its digest after the call */
+    private static final byte CLOBBER = 9;
+
     @TestFactory
     Stream<DynamicTest> atoms() {
         return Stream.of(
                 dynamicTest("M3CI.M3CI#1 SCENARIO", M3CIAtomTest::M3CI),
-                dynamicTest("M3CI.simpleName#1 SCENARIO", M3CIAtomTest::simpleName),
-                dynamicTest("M3CI.packageName#1 SCENARIO", M3CIAtomTest::packageName),
+                dynamicTest("M3CI.simpleName#1 CI_ROW_DIFF", M3CIAtomTest::simpleName),
+                dynamicTest("M3CI.packageName#1 CI_ROW_DIFF", M3CIAtomTest::packageName),
                 dynamicTest("M3CI.moduleName#1 SCENARIO", M3CIAtomTest::moduleName),
-                dynamicTest("M3CI.typeName#1 SCENARIO", M3CIAtomTest::typeName),
-                dynamicTest("M3CI.flags#1 SCENARIO", M3CIAtomTest::flags),
-                dynamicTest("M3CI.superclassRow#1 SCENARIO", M3CIAtomTest::superclassRow),
-                dynamicTest("M3CI.componentTypeRow#1 SCENARIO", M3CIAtomTest::componentTypeRow),
-                dynamicTest("M3CI.nestHostRow#1 SCENARIO", M3CIAtomTest::nestHostRow),
-                dynamicTest("M3CI.declaringClassRow#1 SCENARIO", M3CIAtomTest::declaringClassRow),
-                dynamicTest("M3CI.enclosingClassRow#1 SCENARIO", M3CIAtomTest::enclosingClassRow),
+                dynamicTest("M3CI.typeName#1 CI_ROW_DIFF", M3CIAtomTest::typeName),
+                dynamicTest("M3CI.flags#1 CI_ROW_DIFF", M3CIAtomTest::flags),
+                dynamicTest("M3CI.superclassRow#1 CI_ROW_DIFF", M3CIAtomTest::superclassRow),
+                dynamicTest("M3CI.componentTypeRow#1 CI_ROW_DIFF", M3CIAtomTest::componentTypeRow),
+                dynamicTest("M3CI.nestHostRow#1 CI_ROW_DIFF", M3CIAtomTest::nestHostRow),
+                dynamicTest("M3CI.declaringClassRow#1 CI_ROW_DIFF", M3CIAtomTest::declaringClassRow),
+                dynamicTest("M3CI.enclosingClassRow#1 CI_ROW_DIFF", M3CIAtomTest::enclosingClassRow),
                 dynamicTest("M3CI.structuralHash64#1 SCENARIO", M3CIAtomTest::structuralHash64),
-                dynamicTest("M3CI.interfaceCount#1 SCENARIO", M3CIAtomTest::interfaceCount),
+                dynamicTest("M3CI.interfaceCount#1 CI_ROW_DIFF", M3CIAtomTest::interfaceCount),
                 dynamicTest("M3CI.interfaceRow#1 SCENARIO", M3CIAtomTest::interfaceRow),
-                dynamicTest("M3CI.directSubtypeCount#1 SCENARIO", M3CIAtomTest::directSubtypeCount),
+                dynamicTest("M3CI.directSubtypeCount#1 CI_ROW_DIFF", M3CIAtomTest::directSubtypeCount),
                 dynamicTest("M3CI.directSubtypeRow#1 SCENARIO", M3CIAtomTest::directSubtypeRow),
                 dynamicTest("M3CI.supertypeCount#1 SCENARIO", M3CIAtomTest::supertypeCount),
                 dynamicTest("M3CI.supertypeRow#1 SCENARIO", M3CIAtomTest::supertypeRow),
@@ -73,15 +140,15 @@ public class M3CIAtomTest {
                 dynamicTest("M3CI.memberRows#1 SCENARIO", M3CIAtomTest::memberRows),
                 dynamicTest("M3CI.memberRows#2 SCENARIO", M3CIAtomTest::memberRows_2),
                 dynamicTest("M3CI.memberRow#1 SCENARIO", M3CIAtomTest::memberRow),
-                dynamicTest("M3CI.memberModifiers#1 SCENARIO", M3CIAtomTest::memberModifiers),
-                dynamicTest("M3CI.memberFlags#1 SCENARIO", M3CIAtomTest::memberFlags),
-                dynamicTest("M3CI.memberStructuralHash64#1 SCENARIO", M3CIAtomTest::memberStructuralHash64),
-                dynamicTest("M3CI.memberAnnotationCount#1 SCENARIO", M3CIAtomTest::memberAnnotationCount),
+                dynamicTest("M3CI.memberModifiers#1 CI_MEMBER_DIFF", M3CIAtomTest::memberModifiers),
+                dynamicTest("M3CI.memberFlags#1 CI_MEMBER_DIFF", M3CIAtomTest::memberFlags),
+                dynamicTest("M3CI.memberStructuralHash64#1 CI_MEMBER_DIFF", M3CIAtomTest::memberStructuralHash64),
+                dynamicTest("M3CI.memberAnnotationCount#1 CI_MEMBER_DIFF", M3CIAtomTest::memberAnnotationCount),
                 dynamicTest("M3CI.memberAnnotationTypeName#1 SCENARIO", M3CIAtomTest::memberAnnotationTypeName),
-                dynamicTest("M3CI.memberExceptionCount#1 SCENARIO", M3CIAtomTest::memberExceptionCount),
+                dynamicTest("M3CI.memberExceptionCount#1 CI_MEMBER_DIFF", M3CIAtomTest::memberExceptionCount),
                 dynamicTest("M3CI.memberExceptionTypeDescriptor#1 SCENARIO", M3CIAtomTest::memberExceptionTypeDescriptor),
-                dynamicTest("M3CI.fingerprintSha256Hex#1 SCENARIO", M3CIAtomTest::fingerprintSha256Hex),
-                dynamicTest("M3CI.primitivePayloadBytes#1 SCENARIO", M3CIAtomTest::primitivePayloadBytes),
+                dynamicTest("M3CI.fingerprintSha256Hex#1 GETTER_DIFF", M3CIAtomTest::fingerprintSha256Hex),
+                dynamicTest("M3CI.primitivePayloadBytes#1 GETTER_DIFF", M3CIAtomTest::primitivePayloadBytes),
                 dynamicTest("M3CI.binaryNameKeyCount#1 SCENARIO", M3CIAtomTest::binaryNameKeyCount),
                 dynamicTest("M3CI.binaryNameKey#1 SCENARIO", M3CIAtomTest::binaryNameKey),
                 dynamicTest("M3CI.rowsForBinaryNameKey#1 SCENARIO", M3CIAtomTest::rowsForBinaryNameKey),
@@ -132,13 +199,13 @@ public class M3CIAtomTest {
         for (int row = 0; row < CI.size(); row++) assertEquals(CI.binaryName(row), direct.binaryName(row));
     }
 
-    /** M3CI.simpleName#1 SCENARIO; oracle: java.lang.Class.getSimpleName. */
+    /** M3CI.simpleName#1 CI_ROW_DIFF; oracle: java.lang.Class.getSimpleName. */
     static void simpleName() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getSimpleName(), CI.simpleName(row), CLASSES[row].getName());
         M3AtomKit.expect(IndexOutOfBoundsException.class, () -> CI.simpleName(CI.size()));
     }
 
-    /** M3CI.packageName#1 SCENARIO; oracle: java.lang.Class.getPackageName. */
+    /** M3CI.packageName#1 CI_ROW_DIFF; oracle: java.lang.Class.getPackageName. */
     static void packageName() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getPackageName(), CI.packageName(row));
     }
@@ -152,41 +219,41 @@ public class M3CIAtomTest {
         assertEquals(Optional.empty(), CI.moduleName(row(ReflectOracle.class)), "unnamed module");
     }
 
-    /** M3CI.typeName#1 SCENARIO; oracle: java.lang.Class.getTypeName. */
+    /** M3CI.typeName#1 CI_ROW_DIFF; oracle: java.lang.Class.getTypeName. */
     static void typeName() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getTypeName(), CI.typeName(row));
         assertEquals("int[][]", CI.typeName(row(int[][].class)));
     }
 
-    /** M3CI.flags#1 SCENARIO; oracle: java.lang.Class.isXxx. */
+    /** M3CI.flags#1 CI_ROW_DIFF; oracle: java.lang.Class.isXxx. */
     static void flags() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(ReflectOracle.classFlags(CLASSES[row]), CI.flags(row), CLASSES[row].getName());
     }
 
-    /** M3CI.superclassRow#1 SCENARIO; oracle: java.lang.Class.getSuperclass. */
+    /** M3CI.superclassRow#1 CI_ROW_DIFF; oracle: java.lang.Class.getSuperclass. */
     static void superclassRow() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(row(CLASSES[row].getSuperclass()), CI.superclassRow(row));
         assertEquals(-1, CI.superclassRow(row(Object.class)));
     }
 
-    /** M3CI.componentTypeRow#1 SCENARIO; oracle: java.lang.Class.getComponentType. */
+    /** M3CI.componentTypeRow#1 CI_ROW_DIFF; oracle: java.lang.Class.getComponentType. */
     static void componentTypeRow() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(row(CLASSES[row].getComponentType()), CI.componentTypeRow(row));
         assertEquals(row(int[].class), CI.componentTypeRow(row(int[][].class)));
     }
 
-    /** M3CI.nestHostRow#1 SCENARIO; oracle: java.lang.Class.getNestHost. */
+    /** M3CI.nestHostRow#1 CI_ROW_DIFF; oracle: java.lang.Class.getNestHost. */
     static void nestHostRow() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(row(CLASSES[row].getNestHost()), CI.nestHostRow(row));
         assertEquals(row(ReflectOracle.class), CI.nestHostRow(row(ReflectOracle.Derived.Inner.class)));
     }
 
-    /** M3CI.declaringClassRow#1 SCENARIO; oracle: java.lang.Class.getDeclaringClass. */
+    /** M3CI.declaringClassRow#1 CI_ROW_DIFF; oracle: java.lang.Class.getDeclaringClass. */
     static void declaringClassRow() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(row(CLASSES[row].getDeclaringClass()), CI.declaringClassRow(row));
     }
 
-    /** M3CI.enclosingClassRow#1 SCENARIO; oracle: java.lang.Class.getEnclosingClass. */
+    /** M3CI.enclosingClassRow#1 CI_ROW_DIFF; oracle: java.lang.Class.getEnclosingClass. */
     static void enclosingClassRow() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(row(CLASSES[row].getEnclosingClass()), CI.enclosingClassRow(row));
         assertEquals(row(ReflectOracle.class), CI.enclosingClassRow(row(ReflectOracle.local())), "local class encloses in its method's class");
@@ -203,7 +270,7 @@ public class M3CIAtomTest {
         assertEquals(CI.size(), distinct.size(), "no two rows share a structural hash");
     }
 
-    /** M3CI.interfaceCount#1 SCENARIO; oracle: java.lang.Class.getInterfaces. */
+    /** M3CI.interfaceCount#1 CI_ROW_DIFF; oracle: java.lang.Class.getInterfaces. */
     static void interfaceCount() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getInterfaces().length, CI.interfaceCount(row));
     }
@@ -218,7 +285,7 @@ public class M3CIAtomTest {
         }
     }
 
-    /** M3CI.directSubtypeCount#1 SCENARIO; oracle: reverse-of-getSuperclass+getInterfaces. */
+    /** M3CI.directSubtypeCount#1 CI_ROW_DIFF; oracle: reverse-of-getSuperclass+getInterfaces. */
     static void directSubtypeCount() throws Throwable {
         int[] expected = new int[CI.size()];
         for (Class<?> c : CLASSES) {
@@ -264,7 +331,7 @@ public class M3CIAtomTest {
         for (int row = 0; row < CI.size(); row++) {
             assertEquals(ReflectOracle.annotationNames(CLASSES[row]).size(), CI.classAnnotationCount(row), CLASSES[row].getName());
         }
-        assertEquals(2, CI.classAnnotationCount(row(ReflectOracle.Base.class)));
+        assertEquals(BASE_ANNOTATIONS, CI.classAnnotationCount(row(ReflectOracle.Base.class)));
     }
 
     /** M3CI.classAnnotationTypeName#1 SCENARIO; oracle: getDeclaredAnnotations(type-names). */
@@ -282,7 +349,7 @@ public class M3CIAtomTest {
             Class<?>[] permitted = CLASSES[row].getPermittedSubclasses();
             assertEquals(permitted == null ? 0 : permitted.length, CI.permittedSubclassCount(row), CLASSES[row].getName());
         }
-        assertEquals(2, CI.permittedSubclassCount(row(ReflectOracle.Shape.class)));
+        assertEquals(SHAPE_PERMITTED, CI.permittedSubclassCount(row(ReflectOracle.Shape.class)));
     }
 
     /** M3CI.permittedSubclassName#1 SCENARIO; oracle: java.lang.Class.getPermittedSubclasses(order). */
@@ -365,23 +432,23 @@ public class M3CIAtomTest {
         assertEquals(-1, CI.memberRow(base, M3MemberKind.FIELD, "sum", "([I)I"), "kind mismatch");
     }
 
-    /** M3CI.memberModifiers#1 SCENARIO; oracle: java.lang.reflect.Member.getModifiers. */
+    /** M3CI.memberModifiers#1 CI_MEMBER_DIFF; oracle: java.lang.reflect.Member.getModifiers. */
     static void memberModifiers() throws Throwable {
         forEachMember((member, d) -> assertEquals(ReflectOracle.modifiers(d.element()), CI.memberModifiers(member), d.toString()));
     }
 
-    /** M3CI.memberFlags#1 SCENARIO; oracle: M3MemberFlags.of(reflective). */
+    /** M3CI.memberFlags#1 CI_MEMBER_DIFF; oracle: M3MemberFlags.of(reflective). */
     static void memberFlags() throws Throwable {
         forEachMember((member, d) -> assertEquals(ReflectOracle.memberFlags(d.element()), CI.memberFlags(member), d.toString()));
     }
 
-    /** M3CI.memberStructuralHash64#1 SCENARIO; oracle: deterministic. */
+    /** M3CI.memberStructuralHash64#1 CI_MEMBER_DIFF; oracle: deterministic. */
     static void memberStructuralHash64() throws Throwable {
         M3CI again = ReflectOracle.snapshot();
         forEachMember((member, d) -> assertEquals(CI.memberStructuralHash64(member), again.memberStructuralHash64(member), d.toString()));
     }
 
-    /** M3CI.memberAnnotationCount#1 SCENARIO; oracle: getDeclaredAnnotations. */
+    /** M3CI.memberAnnotationCount#1 CI_MEMBER_DIFF; oracle: getDeclaredAnnotations. */
     static void memberAnnotationCount() throws Throwable {
         forEachMember((member, d) -> assertEquals(ReflectOracle.annotationNames(d.element()).size(), CI.memberAnnotationCount(member), d.toString()));
     }
@@ -392,7 +459,7 @@ public class M3CIAtomTest {
                 new TreeSet<>(ReflectOracle.annotationList(CI, member)), d.toString()));
     }
 
-    /** M3CI.memberExceptionCount#1 SCENARIO; oracle: Executable.getExceptionTypes. */
+    /** M3CI.memberExceptionCount#1 CI_MEMBER_DIFF; oracle: Executable.getExceptionTypes. */
     static void memberExceptionCount() throws Throwable {
         forEachMember((member, d) -> assertEquals(ReflectOracle.exceptionDescriptors(d.element()).size(), CI.memberExceptionCount(member), d.toString()));
     }
@@ -405,7 +472,7 @@ public class M3CIAtomTest {
         });
     }
 
-    /** M3CI.fingerprintSha256Hex#1 SCENARIO; oracle: java.util.HexFormat+determinism. */
+    /** M3CI.fingerprintSha256Hex#1 GETTER_DIFF; oracle: java.util.HexFormat+determinism. */
     static void fingerprintSha256Hex() throws Throwable {
         M3CI other = M3CI.compile(List.of(String.class), M3CI.Options.standard(), null);
         assertEquals(HexFormat.of().formatHex(CI.fingerprintSha256()), CI.fingerprintSha256Hex());
@@ -414,7 +481,7 @@ public class M3CIAtomTest {
         assertNotEquals(other.fingerprintSha256Hex(), CI.fingerprintSha256Hex(), "different closure, different fingerprint");
     }
 
-    /** M3CI.primitivePayloadBytes#1 SCENARIO; oracle: lane-accounting-identity. */
+    /** M3CI.primitivePayloadBytes#1 GETTER_DIFF; oracle: lane-accounting-identity. */
     static void primitivePayloadBytes() throws Throwable {
         long size = CI.size(), members = CI.memberSize();
         long interfaces = 0, subtypes = 0, supertypes = 0, annotations = 0, permitted = 0;
@@ -431,9 +498,9 @@ public class M3CIAtomTest {
             exceptions += CI.memberExceptionCount(m);
         }
         int keys = (int) M3AtomKit.findVirtual(OWNER, "binaryNameKeyCount", MethodType.methodType(int.class)).invoke(CI);
-        final int perClassLanes = 14, offsetLanes = 6, perMemberLanes = 5, memberOffsetLanes = 2;
-        long ints = perClassLanes * size + offsetLanes * (size + 1) + interfaces + subtypes + supertypes + annotations + permitted
-                + keys + (keys + 1) + size + perMemberLanes * members + memberOffsetLanes * (members + 1) + memberAnnotations + exceptions;
+        long ints = PER_CLASS_LANES * size + OFFSET_LANES * (size + 1) + interfaces + subtypes + supertypes + annotations + permitted
+                + keys + (keys + 1) + size + PER_MEMBER_LANES * members + MEMBER_OFFSET_LANES * (members + 1) + memberAnnotations
+                + exceptions;
         long longs = size + members;
         assertEquals(ints * Integer.BYTES + longs * Long.BYTES + members, CI.primitivePayloadBytes());
     }
@@ -564,12 +631,13 @@ public class M3CIAtomTest {
         MethodHandle atom = st("enqueue", MethodType.methodType(void.class, Class.class, IdentityHashMap.class, java.util.ArrayDeque.class, int.class));
         IdentityHashMap<Class<?>, Boolean> seen = new IdentityHashMap<>();
         java.util.ArrayDeque<Class<?>> queue = new java.util.ArrayDeque<>();
-        atom.invoke((Class<?>) null, seen, queue, 2);
-        atom.invoke(String.class, seen, queue, 2);
-        atom.invoke(String.class, seen, queue, 2);
-        atom.invoke(Integer.class, seen, queue, 2);
+        atom.invoke((Class<?>) null, seen, queue, MAX_CLASSES);
+        atom.invoke(String.class, seen, queue, MAX_CLASSES);
+        atom.invoke(String.class, seen, queue, MAX_CLASSES);
+        atom.invoke(Integer.class, seen, queue, MAX_CLASSES);
         assertEquals(List.of(String.class, Integer.class), new ArrayList<>(queue), "null and duplicates ignored");
-        M3AtomKit.expectMessage(IllegalArgumentException.class, "maxClasses=2", () -> atom.invoke(Long.class, seen, queue, 2));
+        M3AtomKit.expectMessage(IllegalArgumentException.class, "maxClasses=" + MAX_CLASSES,
+                () -> atom.invoke(Long.class, seen, queue, MAX_CLASSES));
     }
 
     /** M3CI.freeze#1 SCENARIO; oracle: retain-flag-only-changes-the-boundary. */
@@ -624,7 +692,7 @@ public class M3CIAtomTest {
         int[] ids = (int[]) atom.invoke(symbols, types);
         assertEquals(types.length, ids.length, "order and duplicates kept");
         for (int k = 0; k < ids.length; k++) assertEquals(types[k].descriptorString(), symbolValues(symbols).get(ids[k]));
-        assertEquals(ids[0], ids[2], "interned once");
+        assertEquals(ids[0], ids[DUPLICATE_TYPE], "interned once");
     }
 
     /** M3CI.reverseHierarchy#1 SCENARIO; oracle: java.util.TreeSet(reverse-edges). */
@@ -661,7 +729,7 @@ public class M3CIAtomTest {
             for (int r = 0; r < MODEL_ROWS; r++) {
                 supers[r] = r == 0 ? -1 : random.nextInt(-1, r);
                 interfaces[r] = r == 0 ? new int[0] : randomRows(random, r);
-                flags[r] = random.nextInt(4) == 0 ? jdk.internal.mindex.M3ClassFlags.INTERFACE : 0;
+                flags[r] = random.nextInt(INTERFACE_ODDS) == 0 ? jdk.internal.mindex.M3ClassFlags.INTERFACE : 0;
             }
             int[][] got = (int[][]) atom.invoke(MODEL_ROWS, supers, interfaces, flags, 0);
             for (int r = 0; r < MODEL_ROWS; r++) {
@@ -686,7 +754,7 @@ public class M3CIAtomTest {
         MethodHandle keys = M3AtomKit.findVirtual(NAME_INDEX, "keys", MethodType.methodType(int[].class));
         MethodHandle offsets = M3AtomKit.findVirtual(NAME_INDEX, "offsets", MethodType.methodType(int[].class));
         MethodHandle rows = M3AtomKit.findVirtual(NAME_INDEX, "rows", MethodType.methodType(int[].class));
-        int[] ids = M3AtomKit.random("buildNameIndex").ints(MODEL_ROWS, 0, MODEL_ROWS / 4).toArray();
+        int[] ids = M3AtomKit.random("buildNameIndex").ints(MODEL_ROWS, 0, MODEL_ROWS / ROWS_PER_NAME).toArray();
         Object index = atom.invoke(ids);
         TreeMap<Integer, List<Integer>> model = new TreeMap<>();
         for (int r = 0; r < ids.length; r++) model.computeIfAbsent(ids[r], k -> new ArrayList<>()).add(r);
@@ -708,15 +776,14 @@ public class M3CIAtomTest {
                 "typeNameIds", "modifiers", "flags", "superclassRows", "componentTypeRows", "nestHostRows", "declaringClassRows",
                 "enclosingClassRows", "interfaceOffsets", "interfaceRows", "classAnnotationOffsets", "classAnnotationNameIds",
                 "permittedOffsets", "permittedNameIds", "memberOffsets"};
+        String[] memberLanes = {"memberNameIds", "memberDescriptorIds", "memberModifiers", "memberFlags"};
         for (int row = 0; row < CI.size(); row++) {
             Object[] args = new Object[atom.getParameterCount()];
             args[0] = row;
             for (int k = 0; k < lanes.length; k++) args[k + 1] = lane(lanes[k]);
-            args[lanes.length + 1] = M3AtomKit.findGetter(OWNER, "memberKinds", byte[].class).invoke(CI);
-            args[lanes.length + 2] = lane("memberNameIds");
-            args[lanes.length + 3] = lane("memberDescriptorIds");
-            args[lanes.length + 4] = lane("memberModifiers");
-            args[lanes.length + 5] = lane("memberFlags");
+            int at = lanes.length + 1;
+            args[at++] = M3AtomKit.findGetter(OWNER, "memberKinds", byte[].class).invoke(CI);
+            for (String name : memberLanes) args[at++] = lane(name);
             assertEquals(CI.structuralHash64(row), (long) atom.invoke(null, args), CLASSES[row].getName());
         }
     }
@@ -726,9 +793,13 @@ public class M3CIAtomTest {
         MethodHandle atom = st("memberHash", MethodType.methodType(long.class, DRAFT));
         MethodHandle draft = M3AtomKit.findConstructor(DRAFT, "MemberDraft", MethodType.methodType(void.class, int.class,
                 M3MemberKind.class, int.class, int.class, int.class, int.class, int[].class, int[].class));
-        Object d = draft.invoke(3, M3MemberKind.METHOD, 11, 12, 0x9, 0x4, new int[] {5, 6}, new int[] {7});
+        Object d = draft.invoke(DRAFT_OWNER, M3MemberKind.METHOD, DRAFT_NAME_ID, DRAFT_DESCRIPTOR_ID, DRAFT_MODIFIERS, DRAFT_FLAGS,
+                new int[] {DRAFT_ANNOTATION_A, DRAFT_ANNOTATION_B}, new int[] {DRAFT_EXCEPTION_ID});
         long expected = FNV_SEED;
-        for (int v : new int[] {3, M3MemberKind.METHOD.code(), 11, 12, 0x9, 0x4, 5, 6, 7}) expected = fnv(expected, v);
+        for (int v : new int[] {DRAFT_OWNER, M3MemberKind.METHOD.code(), DRAFT_NAME_ID, DRAFT_DESCRIPTOR_ID, DRAFT_MODIFIERS, DRAFT_FLAGS,
+                DRAFT_ANNOTATION_A, DRAFT_ANNOTATION_B, DRAFT_EXCEPTION_ID}) {
+            expected = fnv(expected, v);
+        }
         assertEquals(expected, (long) atom.invoke(d));
     }
 
@@ -756,22 +827,22 @@ public class M3CIAtomTest {
     /** M3CI.offsets#1 SCENARIO; oracle: prefix-sum-of-lengths. */
     static void offsets() throws Throwable {
         MethodHandle atom = st("offsets", MethodType.methodType(int[].class, int[][].class));
-        assertArrayEquals(new int[] {0, 2, 2, 5}, (int[]) atom.invoke((Object) new int[][] {{1, 2}, {}, {3, 4, 5}}));
+        assertArrayEquals(RAGGED_OFFSETS, (int[]) atom.invoke((Object) RAGGED));
         assertArrayEquals(new int[] {0}, (int[]) atom.invoke((Object) new int[0][]));
     }
 
     /** M3CI.flatten#1 SCENARIO; oracle: concatenation. */
     static void flatten() throws Throwable {
         MethodHandle atom = st("flatten", MethodType.methodType(int[].class, int[][].class, int.class));
-        assertArrayEquals(new int[] {1, 2, 3, 4, 5}, (int[]) atom.invoke(new int[][] {{1, 2}, {}, {3, 4, 5}}, 5));
+        assertArrayEquals(RAGGED_FLAT, (int[]) atom.invoke(RAGGED, RAGGED_FLAT.length));
     }
 
     /** M3CI.prefixSum#1 SCENARIO; oracle: in-place-prefix-sum. */
     static void prefixSum() throws Throwable {
         MethodHandle atom = st("prefixSum", MethodType.methodType(void.class, int[].class));
-        int[] values = {0, 2, 0, 3, 1};
+        int[] values = PREFIX_INPUT.clone();
         atom.invoke(values);
-        assertArrayEquals(new int[] {0, 2, 2, 5, 6}, values);
+        assertArrayEquals(PREFIX_SUMS, values);
     }
 
     /** M3CI.sortedUnique#1 SCENARIO; oracle: java.util.TreeSet. */
@@ -779,7 +850,7 @@ public class M3CIAtomTest {
         MethodHandle atom = st("sortedUnique", MethodType.methodType(int[].class, int[].class));
         SplittableRandom random = M3AtomKit.random("sortedUnique");
         for (int k = 0; k < M3AtomKit.CASES; k++) {
-            int[] values = random.ints(random.nextInt(MODEL_ROWS), 0, MODEL_ROWS / 2).toArray();
+            int[] values = random.ints(random.nextInt(MODEL_ROWS), 0, MODEL_ROWS / DUPLICATE_FACTOR).toArray();
             int[] expected = new TreeSet<>(Arrays.stream(values).boxed().toList()).stream().mapToInt(Integer::intValue).toArray();
             assertArrayEquals(expected, (int[]) atom.invoke(values.clone()));
         }
@@ -788,8 +859,8 @@ public class M3CIAtomTest {
     /** M3CI.rowOf#1 SCENARIO; oracle: identity-map-lookup. */
     static void rowOf() throws Throwable {
         MethodHandle atom = st("rowOf", MethodType.methodType(int.class, IdentityHashMap.class, Class.class));
-        IdentityHashMap<Class<?>, Integer> rows = new IdentityHashMap<>(Map.of(String.class, 4));
-        assertEquals(4, (int) atom.invoke(rows, String.class));
+        IdentityHashMap<Class<?>, Integer> rows = new IdentityHashMap<>(Map.of(String.class, STRING_ROW));
+        assertEquals(STRING_ROW, (int) atom.invoke(rows, String.class));
         assertEquals(-1, (int) atom.invoke(rows, Integer.class));
         assertEquals(-1, (int) atom.invoke(rows, (Class<?>) null));
     }
@@ -797,8 +868,8 @@ public class M3CIAtomTest {
     /** M3CI.requiredRow#1 SCENARIO; oracle: identity-map-lookup-or-fail. */
     static void requiredRow() throws Throwable {
         MethodHandle atom = st("requiredRow", MethodType.methodType(int.class, IdentityHashMap.class, Class.class));
-        IdentityHashMap<Class<?>, Integer> rows = new IdentityHashMap<>(Map.of(String.class, 4));
-        assertEquals(4, (int) atom.invoke(rows, String.class));
+        IdentityHashMap<Class<?>, Integer> rows = new IdentityHashMap<>(Map.of(String.class, STRING_ROW));
+        assertEquals(STRING_ROW, (int) atom.invoke(rows, String.class));
         M3AtomKit.expectMessage(IllegalStateException.class, "hierarchy closure missing java.lang.Integer", () -> atom.invoke(rows, Integer.class));
     }
 
@@ -814,7 +885,8 @@ public class M3CIAtomTest {
     /** M3CI.totalLength#1 SCENARIO; oracle: sum-of-lengths. */
     static void totalLength() throws Throwable {
         MethodHandle atom = st("totalLength", MethodType.methodType(long.class, int[][].class));
-        assertEquals(6L, (long) atom.asFixedArity().invoke(new int[][] {new int[1], new int[2], new int[3]}));
+        int[][] arrays = Arrays.stream(TOTAL_LENGTHS).mapToObj(int[]::new).toArray(int[][]::new);
+        assertEquals((long) Arrays.stream(TOTAL_LENGTHS).sum(), (long) atom.asFixedArity().invoke(arrays));
         assertEquals(0L, (long) atom.asFixedArity().invoke(new int[0][]));
     }
 
@@ -845,21 +917,21 @@ public class M3CIAtomTest {
     /** M3CI.lowerBound#1 SCENARIO; oracle: first-index>=value. */
     static void lowerBound() throws Throwable {
         MethodHandle atom = st("lowerBound", MethodType.methodType(int.class, int[].class, int.class, int.class, int.class));
-        int[] sorted = {1, 3, 3, 3, 7, 9};
-        for (int value = 0; value <= 10; value++) {
+        int[] sorted = SORTED_RUNS.clone();
+        for (int value = 0; value <= PROBE_MAX; value++) {
             int expected = 0;
             while (expected < sorted.length && sorted[expected] < value) expected++;
             assertEquals(expected, (int) atom.invoke(sorted, 0, sorted.length, value), "value " + value);
         }
-        assertEquals(2, (int) atom.invoke(sorted, 2, 4, 3), "respects the window");
-        M3AtomKit.expect(IndexOutOfBoundsException.class, () -> atom.invoke(sorted, 0, sorted.length + 1, 3));
+        assertEquals(WINDOW_FROM, (int) atom.invoke(sorted, WINDOW_FROM, WINDOW_TO, RUN_VALUE), "respects the window");
+        M3AtomKit.expect(IndexOutOfBoundsException.class, () -> atom.invoke(sorted, 0, sorted.length + 1, RUN_VALUE));
     }
 
     /** M3CI.upperBound#1 SCENARIO; oracle: first-index>value. */
     static void upperBound() throws Throwable {
         MethodHandle atom = st("upperBound", MethodType.methodType(int.class, int[].class, int.class, int.class, int.class));
-        int[] sorted = {1, 3, 3, 3, 7, 9};
-        for (int value = 0; value <= 10; value++) {
+        int[] sorted = SORTED_RUNS.clone();
+        for (int value = 0; value <= PROBE_MAX; value++) {
             int expected = 0;
             while (expected < sorted.length && sorted[expected] <= value) expected++;
             assertEquals(expected, (int) atom.invoke(sorted, 0, sorted.length, value), "value " + value);
@@ -872,10 +944,10 @@ public class M3CIAtomTest {
         MethodHandle atom = M3AtomKit.findVirtual(FROZEN, "withFingerprint", MethodType.methodType(FROZEN, byte[].class));
         MethodHandle digest = M3AtomKit.findVirtual(FROZEN, "fingerprintSha256", MethodType.methodType(byte[].class));
         Object frozen = freezeWith(discoverRoots(), true);
-        byte[] supplied = {1, 2, 3};
+        byte[] supplied = SUPPLIED_DIGEST.clone();
         Object copy = atom.invoke(frozen, supplied);
-        supplied[0] = 9;
-        assertArrayEquals(new byte[] {1, 2, 3}, (byte[]) digest.invoke(copy), "the supplied digest is cloned");
+        supplied[0] = CLOBBER;
+        assertArrayEquals(SUPPLIED_DIGEST, (byte[]) digest.invoke(copy), "the supplied digest is cloned");
         assertArrayEquals(CI.fingerprintSha256(), (byte[]) digest.invoke(frozen), "the original keeps its digest");
     }
 

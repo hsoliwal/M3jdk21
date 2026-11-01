@@ -35,6 +35,9 @@ final class TokenRegexOracle {
     private static final int MAX_ITEMS = 3;
     private static final int MAX_DEPTH = 2;
     private static final int MAX_BOUND = 3;
+    //FLLDCIM: SFA - LITERAL GATE v1: number of quantifier kinds drawn for a non-optional item
+    /** Quantifier kinds of a repeatable item: '*', '+' and '{min,MAX_BOUND}'. */
+    private static final int QUANTIFIER_KINDS = 3;
     private static final double GROUP_RATE = 0.3;
     private static final double QUANT_RATE = 0.4;
     private static final double ALT_RATE = 0.4;
@@ -191,7 +194,7 @@ final class TokenRegexOracle {
         if (max == 1) {
             quant = "?";
         } else {
-            int choice = random.nextInt(3);
+            int choice = random.nextInt(QUANTIFIER_KINDS);
             int min = random.nextInt(0, MAX_BOUND);
             quant = choice == 0 ? "*" : choice == 1 ? "+" : "{" + min + "," + MAX_BOUND + "}";
         }

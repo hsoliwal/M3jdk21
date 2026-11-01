@@ -5,27 +5,33 @@
 #summary Per-atom contracts of jdk.internal.mindex.M3MemberKind: stable codes, total decoding, ordinal order
 #import jdk.internal.mindex.M3MemberKind java.util.EnumSet
 
+#const int FIELD_CODE = 0 // wire code of FIELD (frozen in the M3Class member table)
+#const int METHOD_CODE = 1 // wire code of METHOD
+#const int CONSTRUCTOR_CODE = 2 // wire code of CONSTRUCTOR
+#const int RECORD_COMPONENT_CODE = 3 // wire code of RECORD_COMPONENT, the last kind
+#const int KIND_COUNT = 4 // number of member kinds; also the first code past the last kind
 @atom M3MemberKind.M3MemberKind 1 SCENARIO enum-constant-codes
 check <<<
-assertEquals(4, M3MemberKind.values().length);
+assertEquals(KIND_COUNT, M3MemberKind.values().length);
 int expected = 0;
 for (M3MemberKind kind : M3MemberKind.values()) assertEquals(expected++, kind.code(), "code follows declaration order");
 assertEquals(M3MemberKind.RECORD_COMPONENT, M3MemberKind.valueOf("RECORD_COMPONENT"));
 >>>
 
-@atom M3MemberKind.code 1 SCENARIO stable-wire-codes
-check <<<
-assertEquals(0, M3MemberKind.FIELD.code());
-assertEquals(1, M3MemberKind.METHOD.code());
-assertEquals(2, M3MemberKind.CONSTRUCTOR.code());
-assertEquals(3, M3MemberKind.RECORD_COMPONENT.code());
+@atom M3MemberKind.code 1 GETTER_DIFF stable-wire-codes
+expected = FIELD_CODE
+receiver = M3MemberKind.FIELD
+extra <<<
+assertEquals(METHOD_CODE, M3MemberKind.METHOD.code());
+assertEquals(CONSTRUCTOR_CODE, M3MemberKind.CONSTRUCTOR.code());
+assertEquals(RECORD_COMPONENT_CODE, M3MemberKind.RECORD_COMPONENT.code());
 assertEquals(EnumSet.allOf(M3MemberKind.class).size(), java.util.Arrays.stream(M3MemberKind.values()).mapToInt(M3MemberKind::code).distinct().count());
 >>>
 
 @atom M3MemberKind.fromCode 1 SCENARIO inverse-of-code
 check <<<
 for (M3MemberKind kind : M3MemberKind.values()) assertSame(kind, M3MemberKind.fromCode(kind.code()));
-for (int bad : new int[] {-1, 4, Integer.MAX_VALUE}) {
+for (int bad : new int[] {-1, KIND_COUNT, Integer.MAX_VALUE}) {
     M3AtomKit.expectMessage(IllegalArgumentException.class, "unknown member kind: " + bad, () -> M3MemberKind.fromCode(bad));
 }
 >>>

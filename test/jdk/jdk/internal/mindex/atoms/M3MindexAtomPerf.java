@@ -27,6 +27,13 @@ import java.util.regex.Matcher;
 
 
 public class M3MindexAtomPerf {
+    /** labels drawn past the alphabet, which reach no transition */
+    private static final int OFF_ALPHABET_LABELS = 2;
+    /** length of the sorted lane searched by lowerBound */
+    private static final int LANE_LENGTH = 1 << 12;
+    /** values and probes are drawn from [0, VALUE_SPREAD * LANE_LENGTH): gaps and duplicates */
+    private static final int VALUE_SPREAD = 4;
+
     public static void main(String[] args) throws Throwable {
         M3AtomPerf.run(java.util.List.of(
                 M3AtomPerf.named("M3Bits.wordIndex#1 PERF", M3MindexAtomPerf::wordIndex),
@@ -41,6 +48,8 @@ public class M3MindexAtomPerf {
                 M3AtomPerf.named("M3RX7Transitions.compose#1 PERF", M3MindexAtomPerf::M3RX7Transitions_compose),
                 M3AtomPerf.named("M3RX7Transitions.tokens#1 PERF", M3MindexAtomPerf::tokens),
                 M3AtomPerf.named("M3TokenEngine.find#1 PERF", M3MindexAtomPerf::find),
+                M3AtomPerf.named("M3TokenEngine.alternative#1 PERF", M3MindexAtomPerf::alternative),
+                M3AtomPerf.named("M3TokenEngine.alternative#2 PERF", M3MindexAtomPerf::alternative_2),
                 M3AtomPerf.named("M3CI.findText#1 PERF", M3MindexAtomPerf::findText),
                 M3AtomPerf.named("M3CI.lowerBound#1 PERF", M3MindexAtomPerf::lowerBound),
                 M3AtomPerf.named("M3CI.memberRow#1 PERF", M3MindexAtomPerf::memberRow)), args);
@@ -107,12 +116,14 @@ public class M3MindexAtomPerf {
     static M3AtomPerf.Batch step() throws Throwable {
         M3Automaton dfa = dfa();
         int[] states = ints("step.states", dfa.getNumStates());
-        int[] labels = ints("step.labels", LABELS + 2);
+        int[] labels = ints("step.labels", LABELS + OFF_ALPHABET_LABELS);
         for (int k = 0; k < OPS; k++) labels[k] += 'a' - 1;
         long reference = 0;
         for (int k = 0; k < OPS; k++) {
             int dest = -1;
-            for (int[] t : AutomatonOracle.transitions(dfa, states[k])) if (t[1] <= labels[k] && labels[k] <= t[2]) dest = t[0];
+            for (int[] t : AutomatonOracle.transitions(dfa, states[k])) {
+                if (t[AutomatonOracle.MIN] <= labels[k] && labels[k] <= t[AutomatonOracle.MAX]) dest = t[AutomatonOracle.DEST];
+            }
             reference += dest;
         }
         long expected = reference;
@@ -274,7 +285,7 @@ public class M3MindexAtomPerf {
     /** M3RX7Transitions.tokens#1 PERF; oracle: RelationOracle.tokens. */
     static M3AtomPerf.Batch tokens() throws Throwable {
         SplittableRandom random = M3AtomKit.random("tokens");
-        short[] rows = RelationOracle.randomTable(random, TRANSFER_STATES, TOKENS, DEAD_RATE / 4);
+        short[] rows = RelationOracle.randomTable(random, TRANSFER_STATES, TOKENS, SPARSE_DEAD_RATE);
         int[] ids = random.ints(TOKENS, 0, TOKENS).toArray();
         short[] run = RelationOracle.tokens(rows, TRANSFER_STATES, TOKENS, ids, 0, ids.length);
         long reference = 0;
@@ -297,6 +308,52 @@ public class M3MindexAtomPerf {
     static M3AtomPerf.Batch find() throws Throwable {
         String letters = TokenRegexOracle.letters(M3AtomKit.random("engine.tape"), TAPE);
         String pattern = "a b* (?<x> c)?";
+        Object engine = NEW_ENGINE.invokeExact(TokenRegexOracle.bind(pattern, TokenRegexOracle.tape(letters, false)), false);
+        Matcher m = TokenRegexOracle.javaMatcher(pattern, letters);
+        long perScan = 0;
+        while (m.find()) perScan += m.start() * (long) TAPE + m.end();
+        long reference = perScan * COMPOSITE_OPS;
+        long expected = reference;
+        return M3AtomPerf.checkedBatch(COMPOSITE_OPS, expected, () -> {
+            long sum = 0;
+            try {
+                for (int i = 0; i < COMPOSITE_OPS; i++) {
+                    sum += scan(engine);
+                }
+            } catch (Throwable t) {
+                throw new AssertionError(t);
+            }
+            return sum;
+        });
+    }
+
+    /** M3TokenEngine.alternative#1 PERF; oracle: java.util.regex.Matcher.find(alternation). */
+    static M3AtomPerf.Batch alternative() throws Throwable {
+        String letters = TokenRegexOracle.letters(M3AtomKit.random("engine.alternation"), TAPE);
+        String pattern = "(a b | a | b | c)+";
+        Object engine = NEW_ENGINE.invokeExact(TokenRegexOracle.bind(pattern, TokenRegexOracle.tape(letters, false)), false);
+        Matcher m = TokenRegexOracle.javaMatcher(pattern, letters);
+        long perScan = 0;
+        while (m.find()) perScan += m.start() * (long) TAPE + m.end();
+        long reference = perScan * COMPOSITE_OPS;
+        long expected = reference;
+        return M3AtomPerf.checkedBatch(COMPOSITE_OPS, expected, () -> {
+            long sum = 0;
+            try {
+                for (int i = 0; i < COMPOSITE_OPS; i++) {
+                    sum += scan(engine);
+                }
+            } catch (Throwable t) {
+                throw new AssertionError(t);
+            }
+            return sum;
+        });
+    }
+
+    /** M3TokenEngine.alternative#2 PERF; oracle: java.util.regex.Matcher.find(alternation-with-group). */
+    static M3AtomPerf.Batch alternative_2() throws Throwable {
+        String letters = TokenRegexOracle.letters(M3AtomKit.random("engine.alternation"), TAPE);
+        String pattern = "((?<x> a) b | a | b | c)+";
         Object engine = NEW_ENGINE.invokeExact(TokenRegexOracle.bind(pattern, TokenRegexOracle.tape(letters, false)), false);
         Matcher m = TokenRegexOracle.javaMatcher(pattern, letters);
         long perScan = 0;
@@ -340,9 +397,8 @@ public class M3MindexAtomPerf {
 
     /** M3CI.lowerBound#1 PERF; oracle: linear-scan. */
     static M3AtomPerf.Batch lowerBound() throws Throwable {
-        final int laneLength = 1 << 12;
-        int[] sorted = M3AtomKit.random("lowerBound.lane").ints(laneLength, 0, laneLength * 4).sorted().toArray();
-        int[] probes = ints("lowerBound.probes", laneLength * 4);
+        int[] sorted = M3AtomKit.random("lowerBound.lane").ints(LANE_LENGTH, 0, LANE_LENGTH * VALUE_SPREAD).sorted().toArray();
+        int[] probes = ints("lowerBound.probes", LANE_LENGTH * VALUE_SPREAD);
         long reference = 0;
         for (int p : probes) {
             int at = 0;
@@ -492,10 +548,15 @@ public class M3MindexAtomPerf {
         return sum;
     }
 
+    /** Longest run of the d..f suffix of the perf DFA language. */
+    private static final int SUFFIX_MAX = 3;
+    /** Dead-transition rate of the token tables: a quarter of DEAD_RATE, so token runs stay alive. */
+    private static final double SPARSE_DEAD_RATE = DEAD_RATE / 4;
+
     private static M3Automaton dfa() {
         M3Automaton any = M3AutomatonOps.makeUnitRange('a', 'a' + LABELS - 1);
         M3Automaton nfa = M3AutomatonOps.concatenate(M3AutomatonOps.repeat(any), M3AutomatonOps.makeUnits("abc"),
-                M3AutomatonOps.repeat(M3AutomatonOps.makeUnitRange('d', 'f'), 1, 3));
+                M3AutomatonOps.repeat(M3AutomatonOps.makeUnitRange('d', 'f'), 1, SUFFIX_MAX));
         return M3AutomatonOps.minimize(nfa, M3AutomatonOps.DEFAULT_WORK_LIMIT);
     }
 }

@@ -7,6 +7,24 @@
 #summary Per-atom contracts of jdk.internal.mindex.M3RegexDpPlan against java.util.regex and a BitSet NFA
 #build DotStarOracle RelationOracle
 #import jdk.internal.mindex.M3RegexDpPlan java.util.ArrayList java.util.BitSet java.util.List java.util.SplittableRandom java.util.concurrent.atomic.AtomicInteger
+#const int STAR_TOKEN_BIT = 1 // state bit of the first token, a*, of "a*." (bit k marks token k - 1)
+#const int DOT_TOKEN_BIT = 2 // state bit of the second token, '.', of "a*."
+#const int A_STAR_DOT_TOKENS = 2 // tokens of "a*.": a* and .
+#const int MAX_LEVELS = 6 // cap of nullableLevels: bridges of span 1, 2, 4, .., 32 cover a 64-bit star run
+#const int PRIMARY_FIXED = 1 // advanceUtf16Rows invocation bit: primary relation at its fixed point
+#const int SKIPPED_FIXED = 2 // advanceUtf16Rows invocation bit: skipped relation at its fixed point
+#const int PRIMARY_ZERO = 4 // advanceUtf16Rows invocation bit: primary relation is zero
+#const int SKIPPED_ZERO = 8 // advanceUtf16Rows invocation bit: skipped relation is zero
+#const int PREVIOUS_AVAILABLE = 16 // advanceUtf16Rows invocation bit: the previous predicate is available
+#const long AAB_UNITS = 3L // length of the summarized text "aaB"
+#const long AAA_UNITS = 3L // length of the summarized text "aaa"
+#const int THEN_CASES = M3AtomKit.CASES / 4 // random triples per corpus pattern of the concatenation check
+#const int PIECE_LENGTH = 2 // longest piece of a concatenation triple
+#const int CHECKPOINTS_PER_CALL = 2 // checkpoint calls of one composition: before and after
+#const long[] UTF16_COUNTS = {0, 1, 2, 3, 7} // repeat counts of repeatedUtf16: empty, identity, pair, odd, longer run
+#const int EMPTY_FIRST_ROW_PERIOD = 3 // every third case starts with an empty first row
+#const double COMPOSE_DENSITY = 0.3 // bit density of the composeJava relations
+#const double APPLY_DENSITY = 0.2 // bit density of the applyRows relations
 #helper <<<
     private static final Class<?> PLAN = M3RegexDpPlan.class;
     private static final Class<?> EFFECT = M3RegexDpPlan.Effect.class;
@@ -26,6 +44,8 @@
     private static final String ALL_STARS = "a*B*1*.*a*B*1*.*a*B*1*.*a*B*1*.*a*";
     /** Repeat counts: small, and at the native-eligibility threshold (count >= 256). */
     private static final long[] REPEATS = {0, 1, 2, 3, 5, 256, 300};
+    /** Index of the second-largest count of REPEATS. */
+    private static final int LARGE_REPEAT = REPEATS.length - 2;
     /** Maximal run of starred atoms (63 atoms) exercising all six nullable doubling levels. */
     private static final String MAX_STAR_RUN = "a*".repeat(DotStarOracle.MAX_TOKENS);
 
@@ -88,10 +108,10 @@ setup <<<
 MethodHandle ctor = M3AtomKit.findConstructor(PLAN, MethodType.methodType(void.class, long[].class, long.class,
         long.class, int.class));
 long[] literals = new long[DotStarOracle.LITERALS.length()];
-literals[DotStarOracle.LITERALS.indexOf('a')] = 1L << 1;
+literals[DotStarOracle.LITERALS.indexOf('a')] = 1L << STAR_TOKEN_BIT;
 >>>
 check <<<
-M3RegexDpPlan direct = (M3RegexDpPlan) ctor.invoke(literals, 1L << 2, 1L << 1, 2);
+M3RegexDpPlan direct = (M3RegexDpPlan) ctor.invoke(literals, 1L << DOT_TOKEN_BIT, 1L << STAR_TOKEN_BIT, A_STAR_DOT_TOKENS);
 M3RegexDpPlan parsed = plan("a*.");
 assertEquals(parsed.stateCount(), direct.stateCount());
 assertEquals(parsed.initialState(), direct.initialState(), "same program, same closure of the start state");
@@ -102,7 +122,7 @@ for (String text : DotStarOracle.texts(UNITS, TEXT_LENGTH)) {
 
 @atom M3RegexDpPlan.prepare 1 SCENARIO DotStarOracle.admitted+java.util.regex
 setup <<<
-List<String> refused = List.of("a", "", "*a", "a**", "ab", "a+", "a?", "[a]*", "a*é", "a*".repeat(64),
+List<String> refused = List.of("a", "", "*a", "a**", "ab", "a+", "a?", "[a]*", "a*é", "a*".repeat(DotStarOracle.MAX_TOKENS + 1),
         "a*" + "b".repeat(DotStarOracle.MAX_PATTERN), "(a)*", "a*|b", "a\\*");
 >>>
 check <<<
@@ -120,13 +140,15 @@ for (String pattern : refused) {
 M3AtomKit.expectMessage(NullPointerException.class, "pattern", () -> M3RegexDpPlan.prepare(null));
 >>>
 
-@atom M3RegexDpPlan.stateCount 1 SCENARIO DotStarOracle.parse
-check <<<
+@atom M3RegexDpPlan.stateCount 1 GETTER_DIFF DotStarOracle.parse
+setup <<<
 for (String pattern : corpus()) {
     assertEquals(DotStarOracle.parse(pattern).tokens() + 1, plan(pattern).stateCount(), pattern);
 }
-assertEquals(Long.SIZE, plan(MAX_STAR_RUN).stateCount(), "63 atoms use all 64 state bits");
 >>>
+expected = Long.SIZE
+receiver = plan(MAX_STAR_RUN)
+label = , "63 atoms use all 64 state bits"
 
 @atom M3RegexDpPlan.initialState 1 SCENARIO DotStarOracle.initial+java.util.regex(empty)
 check <<<
@@ -236,18 +258,17 @@ for (int c = Character.MIN_VALUE; c <= Character.MAX_VALUE; c++) {
 setup <<<
 MethodHandle atom = M3AtomKit.findStatic(PLAN, "nullableLevels", MethodType.methodType(int.class, long.class));
 SplittableRandom random = M3AtomKit.random("nullableLevels");
-final int maxLevels = 6;
 >>>
 check <<<
 for (int k = 0; k < M3AtomKit.OPERATIONS; k++) {
-    long stars = random.nextLong() & random.nextLong() | (k % Long.SIZE == 0 ? -1L >>> (k % maxLevels) : 0L);
+    long stars = random.nextLong() & random.nextLong() | (k % Long.SIZE == 0 ? -1L >>> (k % MAX_LEVELS) : 0L);
     int run = 0;
     int best = 0;
     for (int bit = 0; bit < Long.SIZE; bit++) {
         run = (stars & (1L << bit)) != 0 ? run + 1 : 0;
         best = Math.max(best, run);
     }
-    int expected = best == 0 ? 0 : Math.min(maxLevels, Integer.SIZE - Integer.numberOfLeadingZeros(best));
+    int expected = best == 0 ? 0 : Math.min(MAX_LEVELS, Integer.SIZE - Integer.numberOfLeadingZeros(best));
     assertEquals(expected, (int) atom.invokeExact(stars), Long.toBinaryString(stars));
 }
 >>>
@@ -262,7 +283,7 @@ for (String pattern : corpus()) {
     M3RegexDpPlan plan = plan(pattern);
     DotStarOracle.Program program = DotStarOracle.parse(pattern);
     for (int k = 0; k < M3AtomKit.CASES; k++) {
-        long frontier = random.nextLong() & universe(plan) & (k % 2 == 0 ? 1L : -1L);
+        long frontier = random.nextLong() & universe(plan) & (k % M3AtomKit.PARITY == 0 ? 1L : -1L);
         assertEquals(DotStarOracle.bits(DotStarOracle.closure(program, DotStarOracle.set(frontier))),
                 (long) atom.invokeExact(plan, frontier), pattern);
     }
@@ -334,7 +355,6 @@ MethodHandle atom = virtual("advanceUtf16Rows", MethodType.methodType(int.class,
         long.class, long.class, int.class, boolean.class));
 MethodHandle advanceRows = virtual("advanceRows", MethodType.methodType(void.class, long[].class, long.class));
 MethodHandle identityRows = virtual("identityRows", MethodType.methodType(long[].class));
-final int primaryZero = 4, skippedZero = 8, previous = 16;
 M3RegexDpPlan plan = plan(WIDE);
 long matched = 1L << 1;
 >>>
@@ -348,12 +368,12 @@ advanceRows.invokeExact(plan, expectedSkipped, matched);
 assertEquals(0, (int) atom.invokeExact(plan, rows, skipped, matched, 0L, 0, false), "no fixed-point search");
 assertArrayEquals(expectedRows, rows);
 assertArrayEquals(expectedSkipped, skipped);
-int zero = (int) atom.invokeExact(plan, rows, skipped, 0L, matched, previous, true);
-assertEquals(primaryZero | skippedZero | previous | 1 | 2, zero, "zero predicate absorbs both lanes");
+int zero = (int) atom.invokeExact(plan, rows, skipped, 0L, matched, PREVIOUS_AVAILABLE, true);
+assertEquals(PRIMARY_ZERO | SKIPPED_ZERO | PREVIOUS_AVAILABLE | PRIMARY_FIXED | SKIPPED_FIXED, zero, "zero predicate absorbs both lanes");
 assertArrayEquals(new long[plan.stateCount()], rows);
 assertArrayEquals(new long[plan.stateCount()], skipped);
 int primaryOnly = (int) atom.invokeExact(plan, rows, (long[]) null, 0L, matched, 0, true);
-assertEquals(primaryZero | previous | 1, primaryOnly, "zero predicate without a skipped lane");
+assertEquals(PRIMARY_ZERO | PREVIOUS_AVAILABLE | PRIMARY_FIXED, primaryOnly, "zero predicate without a skipped lane");
 >>>
 
 @atom M3RegexDpPlan.advanceRowsToFixedPoint 1 SCENARIO DotStarOracle.step(fixed-point)
@@ -428,8 +448,8 @@ M3RegexDpPlan plan = plan("a*B");
 >>>
 check <<<
 long[] rows = rows(plan, plan.summarize("aaB", null));
-M3RegexDpPlan.Effect effect = (M3RegexDpPlan.Effect) ctor.invoke(plan, rows, 3L);
-assertEquals(3L, effect.length());
+M3RegexDpPlan.Effect effect = (M3RegexDpPlan.Effect) ctor.invoke(plan, rows, AAB_UNITS);
+assertEquals(AAB_UNITS, effect.length());
 assertSameEffect(plan, plan.summarize("aaB", null), effect, "constructed from observed rows");
 >>>
 
@@ -448,15 +468,16 @@ M3RegexDpPlan.Effect plain = (M3RegexDpPlan.Effect) ctor.invoke(plan, identity, 
 assertSameEffect(plan, plan.identity(), plain, "no boundary metadata");
 >>>
 
-@atom M3RegexDpPlan.Effect.length 1 SCENARIO Math.addExact/multiplyExact
+@atom M3RegexDpPlan.Effect.length 1 GETTER_DIFF Math.addExact/multiplyExact
 setup <<<
 M3RegexDpPlan plan = plan("a*");
 M3RegexDpPlan.Effect three = plan.summarize("aaa", null);
 >>>
-check <<<
-assertEquals(3L, three.length());
-assertEquals(6L, three.then(three, null).length());
-assertEquals(3L * REPEATS[REPEATS.length - 1], three.repeated(REPEATS[REPEATS.length - 1], null).length());
+expected = AAA_UNITS
+receiver = three
+extra <<<
+assertEquals(AAA_UNITS + AAA_UNITS, three.then(three, null).length());
+assertEquals(AAA_UNITS * REPEATS[REPEATS.length - 1], three.repeated(REPEATS[REPEATS.length - 1], null).length());
 assertEquals(0L, three.repeated(0, null).length());
 M3AtomKit.expect(ArithmeticException.class, () -> three.repeated(Long.MAX_VALUE, null));
 >>>
@@ -484,21 +505,22 @@ for (String pattern : corpus()) {
 setup <<<
 SplittableRandom random = M3AtomKit.random("then");
 AtomicInteger calls = new AtomicInteger();
+List<String> pieces = DotStarOracle.texts(UNITS, PIECE_LENGTH);
 >>>
 check <<<
 for (String pattern : corpus()) {
     M3RegexDpPlan plan = plan(pattern);
-    for (int k = 0; k < M3AtomKit.CASES / 4; k++) {
-        String a = DotStarOracle.texts(UNITS, 2).get(random.nextInt(43));
-        String b = DotStarOracle.texts(UNITS, 2).get(random.nextInt(43));
-        String c = DotStarOracle.texts(UNITS, 2).get(random.nextInt(43));
+    for (int k = 0; k < THEN_CASES; k++) {
+        String a = pieces.get(random.nextInt(pieces.size()));
+        String b = pieces.get(random.nextInt(pieces.size()));
+        String c = pieces.get(random.nextInt(pieces.size()));
         M3RegexDpPlan.Effect ea = plan.summarize(a, null), eb = plan.summarize(b, null), ec = plan.summarize(c, null);
         assertSameEffect(plan, plan.summarize(a + b, null), ea.then(eb, null), "homomorphism " + a + "|" + b);
         assertSameEffect(plan, ea.then(eb, null).then(ec, null), ea.then(eb.then(ec, null), null), "associative");
     }
     calls.set(0);
     plan.identity().then(plan.identity(), calls::incrementAndGet);
-    assertEquals(2, calls.get(), "checkpoint before and after composition");
+    assertEquals(CHECKPOINTS_PER_CALL, calls.get(), "checkpoint before and after composition");
     M3AtomKit.expectMessage(IllegalArgumentException.class, "different regex plan",
             () -> plan.identity().then(plan("a*").identity(), null));
     M3AtomKit.expectMessage(NullPointerException.class, "right", () -> plan.identity().then(null, null));
@@ -534,7 +556,7 @@ for (String pattern : List.of("a*", ".*", "a.*B", WIDE)) {
     M3RegexDpPlan plan = plan(pattern);
     for (String unit : List.of(DotStarOracle.LOW + "a" + DotStarOracle.HIGH, "B" + DotStarOracle.HIGH, DotStarOracle.LOW + "1")) {
         M3RegexDpPlan.Effect effect = plan.summarizeUtf16(unit, null);
-        for (long count : new long[] {0, 1, 2, 3, 7}) {
+        for (long count : UTF16_COUNTS) {
             M3RegexDpPlan.Effect direct = (M3RegexDpPlan.Effect) atom.invoke(effect, count, count * unit.length(), (Runnable) null);
             M3RegexDpPlan.Effect expected = plan.summarizeUtf16(unit.repeat((int) count), null);
             assertSameEffect(plan, expected, direct, pattern + " " + count + "x");
@@ -558,10 +580,10 @@ for (String pattern : List.of("a*", "a*B", ".*1*", WIDE, ALL_STARS)) {
             assertSameEffect(plan, expected, effect.repeated(count, null), pattern + " " + unit + " x" + count);
             calls.set(0);
             assertSameEffect(plan, expected, effect.repeated(count, calls::incrementAndGet), "checkpointed");
-            assertTrue(calls.get() >= 2, "checkpoint before and after");
+            assertTrue(calls.get() >= CHECKPOINTS_PER_CALL, "checkpoint before and after");
         }
-        assertArrayEquals(RelationOracle.power(rows(plan, effect), REPEATS[REPEATS.length - 2]),
-                rows(plan, effect.repeated(REPEATS[REPEATS.length - 2], null)), "relation power");
+        assertArrayEquals(RelationOracle.power(rows(plan, effect), REPEATS[LARGE_REPEAT]),
+                rows(plan, effect.repeated(REPEATS[LARGE_REPEAT], null)), "relation power");
     }
     M3AtomKit.expectMessage(IllegalArgumentException.class, "negative repeat count", () -> plan.identity().repeated(-1, null));
 }
@@ -590,8 +612,8 @@ SplittableRandom random = M3AtomKit.random("needsRowUnion");
 check <<<
 for (int k = 0; k < M3AtomKit.OPERATIONS; k++) {
     long[] rows = new long[random.nextInt(1, Long.SIZE)];
-    for (int q = 0; q < rows.length; q++) rows[q] = k % 2 == 0 ? 1L << random.nextInt(Long.SIZE) : random.nextLong();
-    if (k % 3 == 0) rows[0] = 0L;
+    for (int q = 0; q < rows.length; q++) rows[q] = k % M3AtomKit.PARITY == 0 ? 1L << random.nextInt(Long.SIZE) : random.nextLong();
+    if (k % EMPTY_FIRST_ROW_PERIOD == 0) rows[0] = 0L;
     boolean expected = false;
     for (long row : rows) expected |= Long.bitCount(row) > 1;
     assertEquals(expected, (boolean) atom.invokeExact(rows));
@@ -603,13 +625,12 @@ setup <<<
 MethodHandle atom = M3AtomKit.findStatic(PLAN, "composeJava", MethodType.methodType(void.class, long[].class,
         long[].class, long[].class));
 SplittableRandom random = M3AtomKit.random("composeJava");
-final double density = 0.3;
 >>>
 check <<<
 for (int k = 0; k < M3AtomKit.CASES; k++) {
     int states = random.nextInt(1, Long.SIZE + 1);
-    long[] left = RelationOracle.randomRelation(random, states, density);
-    long[] right = RelationOracle.randomRelation(random, states, density);
+    long[] left = RelationOracle.randomRelation(random, states, COMPOSE_DENSITY);
+    long[] right = RelationOracle.randomRelation(random, states, COMPOSE_DENSITY);
     long[] result = new long[states];
     atom.invokeExact(left, right, result);
     assertArrayEquals(RelationOracle.compose(left, right), result);
@@ -620,11 +641,10 @@ for (int k = 0; k < M3AtomKit.CASES; k++) {
 setup <<<
 MethodHandle atom = M3AtomKit.findStatic(PLAN, "applyRows", MethodType.methodType(long.class, long[].class, long.class));
 SplittableRandom random = M3AtomKit.random("applyRows");
-final double density = 0.2;
 >>>
 check <<<
 for (int k = 0; k < M3AtomKit.OPERATIONS; k++) {
-    long[] rows = RelationOracle.randomRelation(random, Long.SIZE, density);
+    long[] rows = RelationOracle.randomRelation(random, Long.SIZE, APPLY_DENSITY);
     long frontier = random.nextLong();
     assertEquals(RelationOracle.compose(new long[] {frontier}, rows)[0], (long) atom.invokeExact(rows, frontier));
 }

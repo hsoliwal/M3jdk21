@@ -30,6 +30,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 public class M3RelationImageAtomTest {
+    /** a state bit outside a one-state relation */
+    private static final int FOREIGN_STATE = 2;
+    /** checkpoint call after which the caller zeroes its image; decode must have its snapshot */
+    private static final int MUTATING_CHECKPOINT = 2;
+    /** rows of the image whose state-count field is corrupted */
+    private static final int CORRUPTED_ROWS = 2;
+
     @TestFactory
     Stream<DynamicTest> atoms() {
         return Stream.of(
@@ -63,7 +70,7 @@ public class M3RelationImageAtomTest {
             assertTrue(calls.get() >= states, "checkpoint runs at least once per row");
             assertArrayEquals(encoded, (byte[]) ENCODE.invokeExact(rows, scope, (Runnable) null), "null checkpoint");
         }
-        long[] foreign = {1L << 2};
+        long[] foreign = {1L << FOREIGN_STATE};
         M3AtomKit.expectMessage(IllegalArgumentException.class, "foreign state bits",
                 () -> { byte[] b = (byte[]) ENCODE.invokeExact(foreign, scope, (Runnable) null); });
         M3AtomKit.expectMessage(IllegalArgumentException.class, "[1,64]",
@@ -97,7 +104,7 @@ public class M3RelationImageAtomTest {
         String receipt = sha256Hex(encoded);
         byte[] mutable = encoded.clone();
         AtomicInteger calls = new AtomicInteger();
-        Runnable mutateLater = () -> { if (calls.incrementAndGet() == 2) java.util.Arrays.fill(mutable, (byte) 0); };
+        Runnable mutateLater = () -> { if (calls.incrementAndGet() == MUTATING_CHECKPOINT) java.util.Arrays.fill(mutable, (byte) 0); };
         assertArrayEquals(rows, (long[]) DECODE.invokeExact(mutable, receipt, scope, MAX_STATES, mutateLater),
                 "snapshot taken before the second checkpoint");
         M3AtomKit.expectMessage(IllegalArgumentException.class, "receipt mismatch",
@@ -110,7 +117,7 @@ public class M3RelationImageAtomTest {
         wrongStates[STATES_OFFSET + Integer.BYTES - 1] = 1;
         String wrongStatesReceipt = sha256Hex(wrongStates);
         M3AtomKit.expectMessage(IllegalArgumentException.class, "version/state mismatch",
-                () -> { long[] r = (long[]) DECODE.invokeExact(wrongStates, wrongStatesReceipt, scope, 2, (Runnable) null); });
+                () -> { long[] r = (long[]) DECODE.invokeExact(wrongStates, wrongStatesReceipt, scope, CORRUPTED_ROWS, (Runnable) null); });
         byte[] foreign = image(new long[] {1L << 1}, scope);
         String foreignReceipt = sha256Hex(foreign);
         M3AtomKit.expectMessage(IllegalArgumentException.class, "foreign state bits",

@@ -35,6 +35,103 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 public class M3AutomatonOpsAtomTest {
+    /** states reported by the TooComplex refusal */
+    private static final int REFUSED_STATES = 3;
+    /** transitions reported by the TooComplex refusal */
+    private static final int REFUSED_TRANSITIONS = 4;
+    /** work limit reported by the TooComplex refusal */
+    private static final int REFUSED_EFFORT = 5;
+    /** texts up to two units over EDGES reach both extreme units */
+    private static final int EDGE_TEXT_LENGTH = 2;
+    /** lower bound of the bounded and at-least repetitions */
+    private static final int REPEAT_MIN = 2;
+    /** upper bound of the bounded repetitions */
+    private static final int REPEAT_MAX = 3;
+    /** states of the acceptList automaton */
+    private static final int LIST_STATES = 6;
+    /** second accepting state of the acceptList automaton */
+    private static final int MIDDLE_ACCEPT = 4;
+    /** last (and third accepting) state of the acceptList automaton */
+    private static final int LAST_ACCEPT = 5;
+    /** state offset added by acceptList */
+    private static final int ACCEPT_OFFSET = 10;
+    /** longest text of the complement and reverse checks */
+    private static final int EXHAUSTIVE_LENGTH = 4;
+    /** longest text of the totalize language check over EDGES */
+    private static final int TOTALIZE_LENGTH = 3;
+    /** n of the (a|b)*a(a|b){n} automaton of the liveness, determinize and minimize checks */
+    private static final int EXPONENT = 2;
+    /** sorted members of a state set */
+    private static final int[] MEMBERS = {2, 5, 9};
+    /** MEMBERS in insertion order */
+    private static final int[] MEMBERS_INSERTED = {9, 2, 5};
+    /** a two-member state set */
+    private static final int[] PAIR = {1, 3};
+    /** member added twice, counted once */
+    private static final int REPEATED_MEMBER = 4;
+    /** members of the longHash check */
+    private static final int[] HASHED_MEMBERS = {3, 7, 11};
+    /** members across one 64-state word */
+    private static final int[] SPREAD_MEMBERS = {1, 40, 63};
+    /** members of the live set and of its frozen copy */
+    private static final int[] EQUAL_MEMBERS = {6, 2, 8};
+    /** DFA state given to the frozen copy and found through the live set */
+    private static final int DFA_STATE = 7;
+    /** only member of the other set (also a member of EQUAL_MEMBERS) */
+    private static final int OTHER_MEMBER = 2;
+    /** members passed to the FrozenSet constructor */
+    private static final int[] FIELD_VALUES = {1, 2};
+    /** hash passed to the FrozenSet constructor */
+    private static final long FIELD_HASH = 42L;
+    /** DFA state passed to the FrozenSet constructor */
+    private static final int FIELD_STATE = 9;
+    /** members of the same-array check */
+    private static final int[] ARRAY_VALUES = {4, 8};
+    /** members of the size check */
+    private static final int[] SIZE_VALUES = {4, 8, 15};
+    /** member added before the freeze */
+    private static final int FROZEN_MEMBER = 5;
+    /** DFA state given by freeze */
+    private static final int FREEZE_STATE = 3;
+    /** member added after the freeze; must not reach the frozen copy */
+    private static final int LATE_MEMBER = 9;
+    /** insertion order with a repeated member */
+    private static final int[] UNSORTED_WITH_DUPLICATE = {40, 3, 17, 3};
+    /** UNSORTED_WITH_DUPLICATE sorted and distinct */
+    private static final int[] SORTED_DISTINCT = {3, 17, 40};
+    /** the member next to member 1 */
+    private static final int SECOND_MEMBER = 2;
+    /** distinct members of a two-member counting set */
+    private static final int DISTINCT_MEMBERS = 2;
+    /** ints per packed transition: dest, min, max */
+    private static final int TRANSITION_INTS = 3;
+    /** the smaller point of the comparison */
+    private static final int LOW_POINT = 3;
+    /** the larger point of the comparison */
+    private static final int HIGH_POINT = 7;
+    /** point given by reset */
+    private static final int RESET_POINT = 12;
+    /** point both objects share */
+    private static final int SAME_POINT = 5;
+    /** a different point */
+    private static final int OTHER_POINT = 6;
+    /** a point; its hash is the point */
+    private static final int HASHED_POINT = 77;
+    /** point of the first slot object */
+    private static final int FIRST_POINT = 4;
+    /** point given to the reused first slot after reset */
+    private static final int REUSED_POINT = 9;
+    /** points are drawn from [0, POINT_SPREAD * MANY_POINTS): repeats and new points mix */
+    private static final int POINT_SPREAD = 2;
+    /** generated ranges span one to three units */
+    private static final int RANGE_SPAN = 3;
+    /** list states are i * STATE_STRIDE: distinct and not consecutive */
+    private static final int STATE_STRIDE = 3;
+    /** state of the second linked node */
+    private static final int SECOND_Q = 2;
+    /** nodes linked into the list */
+    private static final int LINKED_NODES = 2;
+
     @TestFactory
     Stream<DynamicTest> atoms() {
         return Stream.of(
@@ -65,7 +162,7 @@ public class M3AutomatonOpsAtomTest {
                 dynamicTest("M3AutomatonOps.StateKey.array#1 SCENARIO", M3AutomatonOpsAtomTest::StateKey_array),
                 dynamicTest("M3AutomatonOps.StateKey.size#1 SCENARIO", M3AutomatonOpsAtomTest::StateKey_size),
                 dynamicTest("M3AutomatonOps.StateKey.longHash#1 SCENARIO", M3AutomatonOpsAtomTest::StateKey_longHash),
-                dynamicTest("M3AutomatonOps.StateKey.hashCode#1 SCENARIO", M3AutomatonOpsAtomTest::StateKey_hashCode),
+                dynamicTest("M3AutomatonOps.StateKey.hashCode#1 GETTER_DIFF", M3AutomatonOpsAtomTest::StateKey_hashCode),
                 dynamicTest("M3AutomatonOps.StateKey.equals#1 SCENARIO", M3AutomatonOpsAtomTest::StateKey_equals),
                 dynamicTest("M3AutomatonOps.FrozenSet.FrozenSet#1 SCENARIO", M3AutomatonOpsAtomTest::FrozenSet_FrozenSet),
                 dynamicTest("M3AutomatonOps.FrozenSet.array#1 SCENARIO", M3AutomatonOpsAtomTest::FrozenSet_array),
@@ -83,7 +180,7 @@ public class M3AutomatonOpsAtomTest {
                 dynamicTest("M3AutomatonOps.PointTransitions.compareTo#1 SCENARIO", M3AutomatonOpsAtomTest::PointTransitions_compareTo),
                 dynamicTest("M3AutomatonOps.PointTransitions.reset#1 SCENARIO", M3AutomatonOpsAtomTest::PointTransitions_reset),
                 dynamicTest("M3AutomatonOps.PointTransitions.equals#1 SCENARIO", M3AutomatonOpsAtomTest::PointTransitions_equals),
-                dynamicTest("M3AutomatonOps.PointTransitions.hashCode#1 SCENARIO", M3AutomatonOpsAtomTest::PointTransitions_hashCode),
+                dynamicTest("M3AutomatonOps.PointTransitions.hashCode#1 GETTER_DIFF", M3AutomatonOpsAtomTest::PointTransitions_hashCode),
                 dynamicTest("M3AutomatonOps.PointTransitionSet.next#1 SCENARIO", M3AutomatonOpsAtomTest::PointTransitionSet_next),
                 dynamicTest("M3AutomatonOps.PointTransitionSet.find#1 SCENARIO", M3AutomatonOpsAtomTest::PointTransitionSet_find),
                 dynamicTest("M3AutomatonOps.PointTransitionSet.reset#1 SCENARIO", M3AutomatonOpsAtomTest::PointTransitionSet_reset),
@@ -102,9 +199,9 @@ public class M3AutomatonOpsAtomTest {
 
     /** M3AutomatonOps.TooComplex.TooComplex#1 SCENARIO; oracle: message+determinize-refusal. */
     static void TooComplex_TooComplex() throws Throwable {
-        M3AutomatonOps.TooComplex refusal = new M3AutomatonOps.TooComplex(3, 4, 5);
-        assertEquals("Determinizing automaton with 3 states and 4 transitions would require more than 5 effort.",
-                refusal.getMessage());
+        M3AutomatonOps.TooComplex refusal = new M3AutomatonOps.TooComplex(REFUSED_STATES, REFUSED_TRANSITIONS, REFUSED_EFFORT);
+        assertEquals("Determinizing automaton with " + REFUSED_STATES + " states and " + REFUSED_TRANSITIONS
+                + " transitions would require more than " + REFUSED_EFFORT + " effort.", refusal.getMessage());
         assertTrue(refusal instanceof RuntimeException);
         M3Automaton nfa = exponential(SHIFT_B);
         M3AutomatonOps.TooComplex thrown = assertThrows(M3AutomatonOps.TooComplex.class,
@@ -136,7 +233,7 @@ public class M3AutomatonOpsAtomTest {
         assertLanguage(M3AutomatonOps.makeUnitRange('a', 'a'), "a");
         assertLanguage(M3AutomatonOps.makeUnitRange('c', 'b'), "(?!)");
         AutomatonOracle.assertLanguage(M3AutomatonOps.makeUnitRange(0, AutomatonOracle.MAX_LABEL), "[\\x{0}-\\x{ffff}]",
-                AutomatonOracle.EDGES, 2);
+                AutomatonOracle.EDGES, EDGE_TEXT_LENGTH);
     }
 
     /** M3AutomatonOps.makeUnits#1 SCENARIO; oracle: java.util.regex(quoted). */
@@ -185,29 +282,31 @@ public class M3AutomatonOpsAtomTest {
     /** M3AutomatonOps.repeat#2 SCENARIO; oracle: java.util.regex({min,}). */
     static void repeat_2() throws Throwable {
         assertLanguage(M3AutomatonOps.repeat(w("a"), 0), "a*");
-        assertLanguage(M3AutomatonOps.repeat(w("a"), 2), "a{2,}");
+        assertLanguage(M3AutomatonOps.repeat(w("a"), REPEAT_MIN), "a{" + REPEAT_MIN + ",}");
         assertLanguage(M3AutomatonOps.repeat(w("ab"), 1), "(ab){1,}");
     }
 
     /** M3AutomatonOps.repeat#3 SCENARIO; oracle: java.util.regex({min,max}). */
     static void repeat_3() throws Throwable {
-        assertLanguage(M3AutomatonOps.repeat(w("a"), 1, 3), "a{1,3}");
-        assertLanguage(M3AutomatonOps.repeat(w("ab"), 0, 2), "(ab){0,2}");
-        assertLanguage(M3AutomatonOps.repeat(w("b"), 2, 2), "b{2}");
-        assertLanguage(M3AutomatonOps.repeat(w("c"), 3, 1), "(?!)");
-        assertLanguage(M3AutomatonOps.repeat(M3AutomatonOps.optional(w("a")), 2, 3), "(?:a?){2,3}");
+        assertLanguage(M3AutomatonOps.repeat(w("a"), 1, REPEAT_MAX), "a{1," + REPEAT_MAX + "}");
+        assertLanguage(M3AutomatonOps.repeat(w("ab"), 0, REPEAT_MIN), "(ab){0," + REPEAT_MIN + "}");
+        assertLanguage(M3AutomatonOps.repeat(w("b"), REPEAT_MIN, REPEAT_MIN), "b{" + REPEAT_MIN + "}");
+        assertLanguage(M3AutomatonOps.repeat(w("c"), REPEAT_MAX, 1), "(?!)");
+        assertLanguage(M3AutomatonOps.repeat(M3AutomatonOps.optional(w("a")), REPEAT_MIN, REPEAT_MAX),
+                "(?:a?){" + REPEAT_MIN + "," + REPEAT_MAX + "}");
     }
 
     /** M3AutomatonOps.acceptList#1 SCENARIO; oracle: java.util.BitSet-iteration+offset. */
     static void acceptList() throws Throwable {
         MethodHandle atom = M3AtomKit.findStatic(OPS, "acceptList", MethodType.methodType(int[].class, M3Automaton.class, int.class));
         M3Automaton a = new M3Automaton();
-        for (int i = 0; i < 6; i++) a.createState();
+        for (int i = 0; i < LIST_STATES; i++) a.createState();
         a.setAccept(1, true);
-        a.setAccept(4, true);
-        a.setAccept(5, true);
-        assertArrayEquals(new int[] {1, 4, 5}, (int[]) atom.invokeExact(a, 0));
-        assertArrayEquals(new int[] {11, 14, 15}, (int[]) atom.invokeExact(a, 10));
+        a.setAccept(MIDDLE_ACCEPT, true);
+        a.setAccept(LAST_ACCEPT, true);
+        assertArrayEquals(new int[] {1, MIDDLE_ACCEPT, LAST_ACCEPT}, (int[]) atom.invokeExact(a, 0));
+        assertArrayEquals(new int[] {ACCEPT_OFFSET + 1, ACCEPT_OFFSET + MIDDLE_ACCEPT, ACCEPT_OFFSET + LAST_ACCEPT},
+                (int[]) atom.invokeExact(a, ACCEPT_OFFSET));
         assertArrayEquals(new int[0], (int[]) atom.invokeExact(M3AutomatonOps.makeEmpty(), 0));
     }
 
@@ -217,7 +316,7 @@ public class M3AutomatonOpsAtomTest {
                 M3AutomatonOps.makeAnyString(), M3AutomatonOps.union(w(""), w("c")))) {
             M3Automaton c = M3AutomatonOps.complement(a, WORK);
             AutomatonOracle.assertWellFormed(c);
-            for (String text : AutomatonOracle.texts(AutomatonOracle.EDGES, 4)) {
+            for (String text : AutomatonOracle.texts(AutomatonOracle.EDGES, EXHAUSTIVE_LENGTH)) {
                 assertEquals(!AutomatonOracle.accepts(a, text), AutomatonOracle.accepts(c, text), text);
             }
         }
@@ -254,7 +353,7 @@ public class M3AutomatonOpsAtomTest {
         for (M3Automaton a : List.of(w("abc"), M3AutomatonOps.concatenate(M3AutomatonOps.repeat(chr('a')), w("bc")),
                 M3AutomatonOps.union(w("ab"), w("ca"), w("")), withDeadStates())) {
             M3Automaton r = M3AutomatonOps.reverse(a);
-            for (String text : AutomatonOracle.texts(AutomatonOracle.ABC, 4)) {
+            for (String text : AutomatonOracle.texts(AutomatonOracle.ABC, EXHAUSTIVE_LENGTH)) {
                 assertEquals(AutomatonOracle.accepts(a, new StringBuilder(text).reverse()), AutomatonOracle.accepts(r, text), text);
             }
         }
@@ -270,12 +369,12 @@ public class M3AutomatonOpsAtomTest {
             for (int s = 0; s < t.getNumStates(); s++) {
                 int next = 0;
                 for (int[] tr : AutomatonOracle.transitions(t, s)) {
-                    assertEquals(next, tr[1], "contiguous coverage of state " + s);
-                    next = tr[2] + 1;
+                    assertEquals(next, tr[AutomatonOracle.MIN], "contiguous coverage of state " + s);
+                    next = tr[AutomatonOracle.MAX] + 1;
                 }
                 assertEquals(AutomatonOracle.MAX_LABEL + 1, next, "covers every unit");
             }
-            AutomatonOracle.assertSameLanguage(a, t, AutomatonOracle.EDGES, 3);
+            AutomatonOracle.assertSameLanguage(a, t, AutomatonOracle.EDGES, TOTALIZE_LENGTH);
         }
     }
 
@@ -286,7 +385,7 @@ public class M3AutomatonOpsAtomTest {
         BitSet live = reachable(r);
         live.and(coReachable(r));
         assertEquals(r.getNumStates(), live.cardinality(), "every remaining state is live");
-        assertEquals(3, r.getNumStates());
+        assertEquals(FIXTURE_LIVE, r.getNumStates());
         AutomatonOracle.assertSameLanguage(a, r, AutomatonOracle.ABC, AutomatonOracle.MAX_LENGTH);
         assertEquals(0, M3AutomatonOps.removeDeadStates(M3AutomatonOps.makeEmpty()).getNumStates());
     }
@@ -294,7 +393,7 @@ public class M3AutomatonOpsAtomTest {
     /** M3AutomatonOps.liveFromInitial#1 SCENARIO; oracle: BFS-reachability. */
     static void liveFromInitial() throws Throwable {
         MethodHandle atom = M3AtomKit.findStatic(OPS, "liveFromInitial", MethodType.methodType(BitSet.class, M3Automaton.class));
-        for (M3Automaton a : List.of(withDeadStates(), w("abc"), new M3Automaton(), exponential(2))) {
+        for (M3Automaton a : List.of(withDeadStates(), w("abc"), new M3Automaton(), exponential(EXPONENT))) {
             assertEquals(reachable(a), (BitSet) atom.invokeExact(a));
         }
     }
@@ -302,14 +401,14 @@ public class M3AutomatonOpsAtomTest {
     /** M3AutomatonOps.liveToAccept#1 SCENARIO; oracle: fixed-point-co-reachability. */
     static void liveToAccept() throws Throwable {
         MethodHandle atom = M3AtomKit.findStatic(OPS, "liveToAccept", MethodType.methodType(BitSet.class, M3Automaton.class));
-        for (M3Automaton a : List.of(withDeadStates(), w("abc"), new M3Automaton(), exponential(2))) {
+        for (M3Automaton a : List.of(withDeadStates(), w("abc"), new M3Automaton(), exponential(EXPONENT))) {
             assertEquals(coReachable(a), (BitSet) atom.invokeExact(a));
         }
     }
 
     /** M3AutomatonOps.determinize#1 SCENARIO; oracle: same-language+recomputed-determinism+work-limit. */
     static void determinize() throws Throwable {
-        for (M3Automaton a : List.of(exponential(2), M3AutomatonOps.union(w("ab"), w("ac"), M3AutomatonOps.repeat(chr('a'))), withDeadStates(),
+        for (M3Automaton a : List.of(exponential(EXPONENT), M3AutomatonOps.union(w("ab"), w("ac"), M3AutomatonOps.repeat(chr('a'))), withDeadStates(),
                 M3AutomatonOps.concatenate(M3AutomatonOps.repeat(M3AutomatonOps.makeUnitRange('a', 'c')), w("cb")))) {
             M3Automaton d = M3AutomatonOps.determinize(a, WORK);
             assertTrue(d.isDeterministic());
@@ -350,11 +449,11 @@ public class M3AutomatonOpsAtomTest {
         MethodHandle array = v(STATE_KEY, "array", MethodType.methodType(int[].class));
         MethodHandle incr = v(COUNTING, "incr", MethodType.methodType(void.class, int.class));
         Object frozen = M3AtomKit.findConstructor(FROZEN, MethodType.methodType(void.class, int[].class, long.class, int.class))
-                .invoke(new int[] {2, 5, 9}, 0L, 0);
+                .invoke(MEMBERS.clone(), 0L, 0);
         Object counting = counting(SET_STATES);
-        assertArrayEquals(new int[] {2, 5, 9}, (int[]) array.invoke(frozen));
-        for (int s : new int[] {9, 2, 5}) incr.invoke(counting, s);
-        assertArrayEquals(new int[] {2, 5, 9}, (int[]) array.invoke(counting), "sorted view of the counting set");
+        assertArrayEquals(MEMBERS, (int[]) array.invoke(frozen));
+        for (int s : MEMBERS_INSERTED) incr.invoke(counting, s);
+        assertArrayEquals(MEMBERS, (int[]) array.invoke(counting), "sorted view of the counting set");
     }
 
     /** M3AutomatonOps.StateKey.size#1 SCENARIO; oracle: virtual-dispatch(FrozenSet,CountingSet). */
@@ -362,11 +461,11 @@ public class M3AutomatonOpsAtomTest {
         MethodHandle size = v(STATE_KEY, "size", MethodType.methodType(int.class));
         MethodHandle incr = v(COUNTING, "incr", MethodType.methodType(void.class, int.class));
         Object frozen = M3AtomKit.findConstructor(FROZEN, MethodType.methodType(void.class, int[].class, long.class, int.class))
-                .invoke(new int[] {1, 3}, 0L, 0);
+                .invoke(PAIR.clone(), 0L, 0);
         Object counting = counting(SET_STATES);
-        assertEquals(2, (int) size.invoke(frozen));
-        incr.invoke(counting, 4);
-        incr.invoke(counting, 4);
+        assertEquals(PAIR.length, (int) size.invoke(frozen));
+        incr.invoke(counting, REPEATED_MEMBER);
+        incr.invoke(counting, REPEATED_MEMBER);
         assertEquals(1, (int) size.invoke(counting), "distinct members");
     }
 
@@ -375,16 +474,20 @@ public class M3AutomatonOpsAtomTest {
         MethodHandle hash = v(STATE_KEY, "longHash", MethodType.methodType(long.class));
         MethodHandle incr = v(COUNTING, "incr", MethodType.methodType(void.class, int.class));
         Object counting = counting(SET_STATES);
-        for (int s : new int[] {3, 7, 11}) incr.invoke(counting, s);
-        assertEquals(3 + fmix(3) + fmix(7) + fmix(11), (long) hash.invoke(counting));
+        long expected = HASHED_MEMBERS.length;
+        for (int s : HASHED_MEMBERS) {
+            incr.invoke(counting, s);
+            expected += fmix(s);
+        }
+        assertEquals(expected, (long) hash.invoke(counting));
     }
 
-    /** M3AutomatonOps.StateKey.hashCode#1 SCENARIO; oracle: Long.hashCode(longHash). */
+    /** M3AutomatonOps.StateKey.hashCode#1 GETTER_DIFF; oracle: Long.hashCode(longHash). */
     static void StateKey_hashCode() throws Throwable {
         MethodHandle incr = v(COUNTING, "incr", MethodType.methodType(void.class, int.class));
         MethodHandle hash = v(STATE_KEY, "longHash", MethodType.methodType(long.class));
         Object counting = counting(SET_STATES);
-        for (int s : new int[] {1, 40, 63}) incr.invoke(counting, s);
+        for (int s : SPREAD_MEMBERS) incr.invoke(counting, s);
         assertEquals(Long.hashCode((long) hash.invoke(counting)), counting.hashCode());
     }
 
@@ -393,33 +496,33 @@ public class M3AutomatonOpsAtomTest {
         MethodHandle incr = v(COUNTING, "incr", MethodType.methodType(void.class, int.class));
         MethodHandle freeze = v(COUNTING, "freeze", MethodType.methodType(FROZEN, int.class));
         Object counting = counting(SET_STATES);
-        for (int s : new int[] {6, 2, 8}) incr.invoke(counting, s);
-        Object frozen = freeze.invoke(counting, 7);
+        for (int s : EQUAL_MEMBERS) incr.invoke(counting, s);
+        Object frozen = freeze.invoke(counting, DFA_STATE);
         Object other = counting(SET_STATES);
-        incr.invoke(other, 2);
+        incr.invoke(other, OTHER_MEMBER);
         assertTrue(frozen.equals(counting), "frozen copy equals the live set");
         assertTrue(counting.equals(frozen), "symmetric");
         assertTrue(counting.equals(counting), "reflexive");
         assertFalse(frozen.equals(other), "different members");
         assertFalse(frozen.equals("not a key"), "foreign type");
         Map<Object, Integer> index = new HashMap<>();
-        index.put(frozen, 7);
-        assertEquals(7, index.get(counting), "a live set finds its frozen DFA state");
+        index.put(frozen, DFA_STATE);
+        assertEquals(DFA_STATE, index.get(counting), "a live set finds its frozen DFA state");
     }
 
     /** M3AutomatonOps.FrozenSet.FrozenSet#1 SCENARIO; oracle: field-capture. */
     static void FrozenSet_FrozenSet() throws Throwable {
         MethodHandle ctor = M3AtomKit.findConstructor(FROZEN, "FrozenSet", MethodType.methodType(void.class, int[].class, long.class, int.class));
         MethodHandle state = M3AtomKit.findGetter(FROZEN, "state", int.class);
-        int[] values = {1, 2};
-        Object frozen = ctor.invoke(values, 42L, 9);
-        assertEquals(9, (int) state.invoke(frozen));
+        int[] values = FIELD_VALUES.clone();
+        Object frozen = ctor.invoke(values, FIELD_HASH, FIELD_STATE);
+        assertEquals(FIELD_STATE, (int) state.invoke(frozen));
         assertSame(values, M3AtomKit.findGetter(FROZEN, "values", int[].class).invoke(frozen), "values are not copied");
     }
 
     /** M3AutomatonOps.FrozenSet.array#1 SCENARIO; oracle: same-array. */
     static void FrozenSet_array() throws Throwable {
-        int[] values = {4, 8};
+        int[] values = ARRAY_VALUES.clone();
         Object frozen = M3AtomKit.findConstructor(FROZEN, MethodType.methodType(void.class, int[].class, long.class, int.class))
                 .invoke(values, 0L, 0);
         assertSame(values, v(FROZEN, "array", MethodType.methodType(int[].class)).invoke(frozen));
@@ -428,8 +531,8 @@ public class M3AutomatonOpsAtomTest {
     /** M3AutomatonOps.FrozenSet.size#1 SCENARIO; oracle: values.length. */
     static void FrozenSet_size() throws Throwable {
         Object frozen = M3AtomKit.findConstructor(FROZEN, MethodType.methodType(void.class, int[].class, long.class, int.class))
-                .invoke(new int[] {4, 8, 15}, 0L, 0);
-        assertEquals(3, (int) v(FROZEN, "size", MethodType.methodType(int.class)).invoke(frozen));
+                .invoke(SIZE_VALUES.clone(), 0L, 0);
+        assertEquals(SIZE_VALUES.length, (int) v(FROZEN, "size", MethodType.methodType(int.class)).invoke(frozen));
     }
 
     /** M3AutomatonOps.FrozenSet.longHash#1 SCENARIO; oracle: stored-hash. */
@@ -509,12 +612,12 @@ public class M3AutomatonOpsAtomTest {
         MethodHandle freeze = v(COUNTING, "freeze", MethodType.methodType(FROZEN, int.class));
         MethodHandle array = v(FROZEN, "array", MethodType.methodType(int[].class));
         Object counting = counting(SET_STATES);
-        incr.invoke(counting, 5);
+        incr.invoke(counting, FROZEN_MEMBER);
         incr.invoke(counting, 1);
-        Object frozen = freeze.invoke(counting, 3);
-        incr.invoke(counting, 9);
-        assertArrayEquals(new int[] {1, 5}, (int[]) array.invoke(frozen), "later changes do not reach the frozen copy");
-        assertEquals(3, (int) M3AtomKit.findGetter(FROZEN, "state", int.class).invoke(frozen));
+        Object frozen = freeze.invoke(counting, FREEZE_STATE);
+        incr.invoke(counting, LATE_MEMBER);
+        assertArrayEquals(new int[] {1, FROZEN_MEMBER}, (int[]) array.invoke(frozen), "later changes do not reach the frozen copy");
+        assertEquals(FREEZE_STATE, (int) M3AtomKit.findGetter(FROZEN, "state", int.class).invoke(frozen));
     }
 
     /** M3AutomatonOps.CountingSet.array#1 SCENARIO; oracle: java.util.TreeSet-order. */
@@ -522,9 +625,9 @@ public class M3AutomatonOpsAtomTest {
         MethodHandle incr = v(COUNTING, "incr", MethodType.methodType(void.class, int.class));
         MethodHandle array = v(COUNTING, "array", MethodType.methodType(int[].class));
         Object counting = counting(SET_STATES);
-        for (int s : new int[] {40, 3, 17, 3}) incr.invoke(counting, s);
+        for (int s : UNSORTED_WITH_DUPLICATE) incr.invoke(counting, s);
         int[] first = (int[]) array.invoke(counting);
-        assertArrayEquals(new int[] {3, 17, 40}, first);
+        assertArrayEquals(SORTED_DISTINCT, first);
         assertSame(first, (int[]) array.invoke(counting), "cached until the next change");
     }
 
@@ -536,10 +639,10 @@ public class M3AutomatonOpsAtomTest {
         Object counting = counting(SET_STATES);
         incr.invoke(counting, 1);
         incr.invoke(counting, 1);
-        incr.invoke(counting, 2);
-        assertEquals(2, (int) size.invoke(counting));
+        incr.invoke(counting, SECOND_MEMBER);
+        assertEquals(DISTINCT_MEMBERS, (int) size.invoke(counting));
         decr.invoke(counting, 1);
-        assertEquals(2, (int) size.invoke(counting), "still referenced once");
+        assertEquals(DISTINCT_MEMBERS, (int) size.invoke(counting), "still referenced once");
         decr.invoke(counting, 1);
         assertEquals(1, (int) size.invoke(counting));
     }
@@ -551,8 +654,8 @@ public class M3AutomatonOpsAtomTest {
         Object counting = counting(SET_STATES);
         incr.invoke(counting, 0);
         assertEquals(1L + fmix(0), (long) hash.invoke(counting), "equals the initial frozen set hash mix(0) + 1");
-        incr.invoke(counting, 63);
-        assertEquals(2L + fmix(0) + fmix(63), (long) hash.invoke(counting));
+        incr.invoke(counting, SET_STATES - 1);
+        assertEquals((long) DISTINCT_MEMBERS + fmix(0) + fmix(SET_STATES - 1), (long) hash.invoke(counting));
     }
 
     /** M3AutomatonOps.TransitionList.add#1 SCENARIO; oracle: java.util.ArrayList-of-triples. */
@@ -566,9 +669,11 @@ public class M3AutomatonOpsAtomTest {
             add.invoke(list, transition(i, 'a' + i, 'b' + i));
             model.add(new int[] {i, 'a' + i, 'b' + i});
         }
-        assertEquals(3 * MANY_POINTS, (int) next.invoke(list));
+        assertEquals(TRANSITION_INTS * MANY_POINTS, (int) next.invoke(list));
         int[] packed = (int[]) transitions.invoke(list);
-        for (int i = 0; i < MANY_POINTS; i++) assertArrayEquals(model.get(i), java.util.Arrays.copyOfRange(packed, 3 * i, 3 * i + 3));
+        for (int i = 0; i < MANY_POINTS; i++) {
+            assertArrayEquals(model.get(i), java.util.Arrays.copyOfRange(packed, TRANSITION_INTS * i, TRANSITION_INTS * (i + 1)));
+        }
     }
 
     /** M3AutomatonOps.PointTransitions.compareTo#1 SCENARIO; oracle: Integer.compare(point). */
@@ -576,11 +681,11 @@ public class M3AutomatonOpsAtomTest {
         MethodHandle ctor = M3AtomKit.findConstructor(POINT, MethodType.methodType(void.class));
         MethodHandle reset = v(POINT, "reset", MethodType.methodType(void.class, int.class));
         Object a = ctor.invoke(), b = ctor.invoke();
-        reset.invoke(a, 3);
-        reset.invoke(b, 7);
+        reset.invoke(a, LOW_POINT);
+        reset.invoke(b, HIGH_POINT);
         assertTrue(((Comparable<Object>) a).compareTo(b) < 0);
         assertTrue(((Comparable<Object>) b).compareTo(a) > 0);
-        reset.invoke(b, 3);
+        reset.invoke(b, LOW_POINT);
         assertEquals(0, ((Comparable<Object>) a).compareTo(b));
     }
 
@@ -591,8 +696,8 @@ public class M3AutomatonOpsAtomTest {
         MethodHandle next = M3AtomKit.findGetter(TLIST, "next", int.class);
         MethodHandle add = v(TLIST, "add", MethodType.methodType(void.class, M3Automaton.Transition.class));
         add.invoke(starts.invoke(p), transition(1, 'a', 'a'));
-        v(POINT, "reset", MethodType.methodType(void.class, int.class)).invoke(p, 12);
-        assertEquals(12, (int) M3AtomKit.findGetter(POINT, "point", int.class).invoke(p));
+        v(POINT, "reset", MethodType.methodType(void.class, int.class)).invoke(p, RESET_POINT);
+        assertEquals(RESET_POINT, (int) M3AtomKit.findGetter(POINT, "point", int.class).invoke(p));
         assertEquals(0, (int) next.invoke(starts.invoke(p)), "starts cleared");
         assertEquals(0, (int) next.invoke(M3AtomKit.findGetter(POINT, "ends", TLIST).invoke(p)), "ends cleared");
     }
@@ -602,19 +707,19 @@ public class M3AutomatonOpsAtomTest {
         MethodHandle ctor = M3AtomKit.findConstructor(POINT, MethodType.methodType(void.class));
         MethodHandle reset = v(POINT, "reset", MethodType.methodType(void.class, int.class));
         Object a = ctor.invoke(), b = ctor.invoke();
-        reset.invoke(a, 5);
-        reset.invoke(b, 5);
+        reset.invoke(a, SAME_POINT);
+        reset.invoke(b, SAME_POINT);
         assertTrue(a.equals(b), "same point");
-        reset.invoke(b, 6);
+        reset.invoke(b, OTHER_POINT);
         assertFalse(a.equals(b), "different point");
-        assertFalse(a.equals(Integer.valueOf(5)), "foreign type");
+        assertFalse(a.equals(Integer.valueOf(SAME_POINT)), "foreign type");
     }
 
-    /** M3AutomatonOps.PointTransitions.hashCode#1 SCENARIO; oracle: point-hash. */
+    /** M3AutomatonOps.PointTransitions.hashCode#1 GETTER_DIFF; oracle: point-hash. */
     static void PointTransitions_hashCode() throws Throwable {
         Object a = M3AtomKit.findConstructor(POINT, MethodType.methodType(void.class)).invoke();
-        v(POINT, "reset", MethodType.methodType(void.class, int.class)).invoke(a, 77);
-        assertEquals(77, a.hashCode());
+        v(POINT, "reset", MethodType.methodType(void.class, int.class)).invoke(a, HASHED_POINT);
+        assertEquals(HASHED_POINT, a.hashCode());
     }
 
     /** M3AutomatonOps.PointTransitionSet.next#1 SCENARIO; oracle: append+reuse. */
@@ -622,11 +727,11 @@ public class M3AutomatonOpsAtomTest {
         Object set = M3AtomKit.findConstructor(POINTS, MethodType.methodType(void.class)).invoke();
         MethodHandle next = v(POINTS, "next", MethodType.methodType(POINT, int.class));
         MethodHandle count = M3AtomKit.findGetter(POINTS, "count", int.class);
-        Object first = next.invoke(set, 4);
+        Object first = next.invoke(set, FIRST_POINT);
         for (int i = 1; i < MANY_POINTS; i++) next.invoke(set, i);
         assertEquals(MANY_POINTS, (int) count.invoke(set), "grows past the initial capacity");
         v(POINTS, "reset", MethodType.methodType(void.class)).invoke(set);
-        assertSame(first, next.invoke(set, 9), "slot objects are reused after reset");
+        assertSame(first, next.invoke(set, REUSED_POINT), "slot objects are reused after reset");
     }
 
     /** M3AutomatonOps.PointTransitionSet.find#1 SCENARIO; oracle: java.util.HashMap(linear-then-hash). */
@@ -637,7 +742,7 @@ public class M3AutomatonOpsAtomTest {
         Map<Integer, Object> model = new HashMap<>();
         SplittableRandom random = M3AtomKit.random("PointTransitionSet.find");
         for (int k = 0; k < M3AtomKit.OPERATIONS; k++) {
-            int point = random.nextInt(MANY_POINTS * 2);
+            int point = random.nextInt(MANY_POINTS * POINT_SPREAD);
             Object found = find.invoke(set, point);
             Object previous = model.putIfAbsent(point, found);
             if (previous != null) assertSame(previous, found, "one object per point");
@@ -685,22 +790,24 @@ public class M3AutomatonOpsAtomTest {
         TreeMap<Integer, Integer> startCount = new TreeMap<>(), endCount = new TreeMap<>();
         SplittableRandom random = M3AtomKit.random("PointTransitionSet.add");
         for (int k = 0; k < MANY_POINTS; k++) {
-            int min = random.nextInt(MANY_POINTS), max = min + random.nextInt(3);
+            int min = random.nextInt(MANY_POINTS), max = min + random.nextInt(RANGE_SPAN);
             add.invoke(set, transition(k, min, max));
             startCount.merge(min, 1, Integer::sum);
             endCount.merge(max + 1, 1, Integer::sum);
         }
         for (Map.Entry<Integer, Integer> e : startCount.entrySet()) {
-            assertEquals(3 * e.getValue(), (int) next.invoke(starts.invoke(find.invoke(set, e.getKey()))), "starts at " + e.getKey());
+            assertEquals(TRANSITION_INTS * e.getValue(), (int) next.invoke(starts.invoke(find.invoke(set, e.getKey()))),
+                    "starts at " + e.getKey());
         }
         for (Map.Entry<Integer, Integer> e : endCount.entrySet()) {
-            assertEquals(3 * e.getValue(), (int) next.invoke(ends.invoke(find.invoke(set, e.getKey()))), "ends at " + e.getKey());
+            assertEquals(TRANSITION_INTS * e.getValue(), (int) next.invoke(ends.invoke(find.invoke(set, e.getKey()))),
+                    "ends at " + e.getKey());
         }
     }
 
     /** M3AutomatonOps.minimize#1 SCENARIO; oracle: same-language+canonical-size+idempotent. */
     static void minimize() throws Throwable {
-        List<M3Automaton> inputs = List.of(exponential(2), withDeadStates(), M3AutomatonOps.union(w("ab"), w("ab")),
+        List<M3Automaton> inputs = List.of(exponential(EXPONENT), withDeadStates(), M3AutomatonOps.union(w("ab"), w("ab")),
                 M3AutomatonOps.repeat(M3AutomatonOps.union(chr('a'), chr('b'))), M3AutomatonOps.makeAnyString(), w("abcd"));
         for (M3Automaton a : inputs) {
             M3Automaton m = M3AutomatonOps.minimize(a, WORK);
@@ -708,8 +815,9 @@ public class M3AutomatonOpsAtomTest {
             AutomatonOracle.assertSameLanguage(a, m, AutomatonOracle.ABC, AutomatonOracle.MAX_LENGTH);
             assertEquals(m.getNumStates(), M3AutomatonOps.minimize(m, WORK).getNumStates(), "idempotent");
         }
-        assertEquals(8, M3AutomatonOps.minimize(exponential(2), WORK).getNumStates(), "2^(n+1) states for n = 2");
-        assertEquals(5, M3AutomatonOps.minimize(w("abcd"), WORK).getNumStates(), "a word needs |w| + 1 states");
+        assertEquals(1 << (EXPONENT + 1), M3AutomatonOps.minimize(exponential(EXPONENT), WORK).getNumStates(),
+                "2^(n+1) states for n = " + EXPONENT);
+        assertEquals("abcd".length() + 1, M3AutomatonOps.minimize(w("abcd"), WORK).getNumStates(), "a word needs |w| + 1 states");
         M3Automaton star1 = M3AutomatonOps.repeat(M3AutomatonOps.union(chr('a'), chr('b')));
         M3Automaton star2 = M3AutomatonOps.repeat(M3AutomatonOps.concatenate(M3AutomatonOps.repeat(chr('a')), M3AutomatonOps.repeat(chr('b'))));
         assertEquals(M3AutomatonOps.minimize(star1, WORK).getNumStates(), M3AutomatonOps.minimize(star2, WORK).getNumStates(),
@@ -727,8 +835,8 @@ public class M3AutomatonOpsAtomTest {
         MethodHandle next = M3AtomKit.findGetter(SNODE, "next", SNODE);
         LinkedList<Integer> model = new LinkedList<>();
         for (int i = 0; i < SET_STATES; i++) {
-            add.invoke(list, i * 3);
-            model.addLast(i * 3);
+            add.invoke(list, i * STATE_STRIDE);
+            model.addLast(i * STATE_STRIDE);
         }
         assertEquals(model.size(), (int) size.invoke(list));
         Object node = first.invoke(list);
@@ -744,12 +852,12 @@ public class M3AutomatonOpsAtomTest {
         Object list = M3AtomKit.findConstructor(SLIST, MethodType.methodType(void.class)).invoke();
         MethodHandle ctor = M3AtomKit.findConstructor(SNODE, "StateListNode", MethodType.methodType(void.class, int.class, SLIST));
         Object a = ctor.invoke(1, list);
-        Object b = ctor.invoke(2, list);
+        Object b = ctor.invoke(SECOND_Q, list);
         assertSame(a, M3AtomKit.findGetter(SLIST, "first", SNODE).invoke(list));
         assertSame(b, M3AtomKit.findGetter(SLIST, "last", SNODE).invoke(list));
         assertSame(a, M3AtomKit.findGetter(SNODE, "prev", SNODE).invoke(b));
         assertSame(list, M3AtomKit.findGetter(SNODE, "sl", SLIST).invoke(a));
-        assertEquals(2, (int) M3AtomKit.findGetter(SLIST, "size", int.class).invoke(list));
+        assertEquals(LINKED_NODES, (int) M3AtomKit.findGetter(SLIST, "size", int.class).invoke(list));
     }
 
     /** M3AutomatonOps.StateListNode.remove#1 SCENARIO; oracle: java.util.LinkedList-remove. */
@@ -806,6 +914,14 @@ public class M3AutomatonOpsAtomTest {
     private static final int C2 = 0xC2B2AE35;
     private static final int SHIFT_A = 16;
     private static final int SHIFT_B = 13;
+
+    /** withDeadStates: 0 -a-> 1 -b-> 2 (accepting), 0 -b-> 3 (dead end), 4 -c-> 2 (unreachable). */
+    private static final int FIXTURE_STATES = 5;
+    private static final int FIXTURE_ACCEPT = 2;
+    private static final int FIXTURE_DEAD = 3;
+    private static final int FIXTURE_UNREACHABLE = 4;
+    /** States of withDeadStates that are reachable and co-reachable: 0, 1 and 2. */
+    private static final int FIXTURE_LIVE = 3;
 
     private static M3Automaton w(String word) {
         return M3AutomatonOps.makeUnits(word);
@@ -872,13 +988,13 @@ public class M3AutomatonOpsAtomTest {
     /** NFA with unreachable and dead states for the liveness checks. */
     private static M3Automaton withDeadStates() {
         M3Automaton a = new M3Automaton();
-        for (int i = 0; i < 5; i++) a.createState();
+        for (int i = 0; i < FIXTURE_STATES; i++) a.createState();
         a.addTransition(0, 1, 'a');
-        a.addTransition(0, 3, 'b');
-        a.addTransition(1, 2, 'b');
-        a.addTransition(4, 2, 'c');
+        a.addTransition(0, FIXTURE_DEAD, 'b');
+        a.addTransition(1, FIXTURE_ACCEPT, 'b');
+        a.addTransition(FIXTURE_UNREACHABLE, FIXTURE_ACCEPT, 'c');
         a.finishState();
-        a.setAccept(2, true);
+        a.setAccept(FIXTURE_ACCEPT, true);
         return a;
     }
 

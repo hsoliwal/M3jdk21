@@ -21,7 +21,8 @@ import java.util.function.LongSupplier;
  * returns a checksum that must equal the oracle checksum computed before timing, so every timed batch
  * is also a correctness check and its result cannot be dead code. All cases warm up first, then the
  * timed rounds interleave the cases (round r times case 1..n) so host load drifts hit every atom alike.
- * The system and process CPU load are sampled every round; PERF rows go to stdout and, when the system
+ * The system and process CPU load are sampled every round, and the bytes the timing thread allocates are
+ * counted around every timed batch (bytes_per_op; -1 when the VM cannot count); PERF rows go to stdout and, when the system
  * property {@code m3.perf.out} names a file, to that TSV.
  */
 final class M3AtomPerf {
@@ -32,10 +33,42 @@ final class M3AtomPerf {
     private static final double NANOS_PER_MILLI = 1_000_000.0;
     /** Percent scale of the load samples. */
     private static final double PERCENT = 100.0;
+    //FLLDCIM: SFA - LITERAL GATE v1: the median round is named
+    /** Index of the median of the sorted per-round times. */
+    private static final int MEDIAN_ROUND = ROUNDS / 2;
     /** Quantile of the reported upper bound. */
     private static final double P90 = 0.9;
 
+    //FLLDCIM: HPCPOP - allocation per op is measured with the timing (finding e of #2251: hot-path allocation)
+    /** Allocation counter of the current thread, or null when the VM does not support it. */
+    private static final com.sun.management.ThreadMXBean THREADS = threads();
+    /** Reported when the VM cannot count allocated bytes. */
+    private static final long NO_COUNT = -1L;
+
     private M3AtomPerf() {
+    }
+
+    private static com.sun.management.ThreadMXBean threads() {
+        var bean = ManagementFactory.getThreadMXBean();
+        return bean instanceof com.sun.management.ThreadMXBean t && t.isThreadAllocatedMemorySupported()
+                && t.isThreadAllocatedMemoryEnabled() ? t : null;
+    }
+
+    /** The cases whose atom label starts with one of the arguments (every case without arguments). */
+    static List<Case> selected(List<Case> cases, String[] args) {
+        if (args.length == 0) {
+            return cases;
+        }
+        List<Case> out = cases.stream().filter(c -> Arrays.stream(args).anyMatch(c.atom()::startsWith)).toList();
+        if (out.isEmpty()) {
+            throw new AssertionError("no perf case starts with " + Arrays.toString(args));
+        }
+        return out;
+    }
+
+    /** Bytes allocated so far by the current thread, or NO_COUNT. */
+    private static long allocated() {
+        return THREADS == null ? NO_COUNT : THREADS.getCurrentThreadAllocatedBytes();
     }
 
     /** One timed unit: {@code ops} atom calls returning a checksum, plus the expected checksum. */
@@ -79,7 +112,8 @@ final class M3AtomPerf {
     }
 
     /** Warms up every case, runs the interleaved rounds and reports one PERF row per case. */
-    static void run(List<Case> cases, String[] args) throws Throwable {
+    static void run(List<Case> all, String[] args) throws Throwable {
+        List<Case> cases = selected(all, args);
         List<Batch> batches = new ArrayList<>();
         for (Case c : cases) {
             batches.add(c.factory().make());
@@ -90,6 +124,7 @@ final class M3AtomPerf {
             }
         }
         double[][] nsPerOp = new double[cases.size()][ROUNDS];
+        long[] bytes = new long[cases.size()];
         double systemSum = 0;
         double processSum = 0;
         int samples = 0;
@@ -97,9 +132,11 @@ final class M3AtomPerf {
         for (int r = 0; r < ROUNDS; r++) {
             for (int k = 0; k < batches.size(); k++) {
                 Batch b = batches.get(k);
+                long allocatedBefore = allocated();
                 long start = System.nanoTime();
                 long sum = b.body().getAsLong();
                 long elapsed = System.nanoTime() - start;
+                bytes[k] += allocated() - allocatedBefore;
                 totalNanos += elapsed;
                 if (sum != b.expected()) {
                     throw new AssertionError(cases.get(k).atom() + " round " + r + ": checksum " + sum);
@@ -118,14 +155,15 @@ final class M3AtomPerf {
         double processLoad = samples == 0 ? Double.NaN : PERCENT * processSum / samples;
         List<String> rows = new ArrayList<>();
         rows.add("atom\tns_per_op_median\tns_per_op_min\tns_per_op_p90\tops_per_batch\trounds\twarmup_batches"
-                + "\tsystem_cpu_pct\tprocess_cpu_pct\tcpus\tchecksum");
+                + "\tsystem_cpu_pct\tprocess_cpu_pct\tcpus\tchecksum\tbytes_per_op");
         for (int k = 0; k < cases.size(); k++) {
             double[] sorted = nsPerOp[k].clone();
             Arrays.sort(sorted);
-            rows.add(String.format(Locale.ROOT, "%s\t%.3f\t%.3f\t%.3f\t%d\t%d\t%d\t%.1f\t%.1f\t%d\t%d",
-                    cases.get(k).atom(), sorted[ROUNDS / 2], sorted[0], sorted[(int) (P90 * (ROUNDS - 1))],
+            double bytesPerOp = THREADS == null ? NO_COUNT : (double) bytes[k] / ((long) ROUNDS * batches.get(k).ops());
+            rows.add(String.format(Locale.ROOT, "%s\t%.3f\t%.3f\t%.3f\t%d\t%d\t%d\t%.1f\t%.1f\t%d\t%d\t%.1f",
+                    cases.get(k).atom(), sorted[MEDIAN_ROUND], sorted[0], sorted[(int) (P90 * (ROUNDS - 1))],
                     batches.get(k).ops(), ROUNDS, WARMUP_BATCHES, systemLoad, processLoad,
-                    Runtime.getRuntime().availableProcessors(), batches.get(k).expected()));
+                    Runtime.getRuntime().availableProcessors(), batches.get(k).expected(), bytesPerOp));
         }
         PrintStream out = System.out;
         rows.forEach(out::println);

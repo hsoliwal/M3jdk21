@@ -32,16 +32,16 @@ public class M3ConstructorAtomTest {
     Stream<DynamicTest> atoms() {
         return Stream.of(
                 dynamicTest("M3Constructor.M3Constructor#1 SCENARIO", M3ConstructorAtomTest::M3Constructor),
-                dynamicTest("M3Constructor.name#1 SCENARIO", M3ConstructorAtomTest::name),
-                dynamicTest("M3Constructor.descriptor#1 SCENARIO", M3ConstructorAtomTest::descriptor),
-                dynamicTest("M3Constructor.getModifiers#1 SCENARIO", M3ConstructorAtomTest::getModifiers),
-                dynamicTest("M3Constructor.isSynthetic#1 SCENARIO", M3ConstructorAtomTest::isSynthetic),
-                dynamicTest("M3Constructor.isVarArgs#1 SCENARIO", M3ConstructorAtomTest::isVarArgs),
-                dynamicTest("M3Constructor.annotationCount#1 SCENARIO", M3ConstructorAtomTest::annotationCount),
-                dynamicTest("M3Constructor.annotationTypeNameAt#1 SCENARIO", M3ConstructorAtomTest::annotationTypeNameAt),
-                dynamicTest("M3Constructor.exceptionCount#1 SCENARIO", M3ConstructorAtomTest::exceptionCount),
+                dynamicTest("M3Constructor.name#1 MEMBER_VIEW_DIFF", M3ConstructorAtomTest::name),
+                dynamicTest("M3Constructor.descriptor#1 MEMBER_VIEW_DIFF", M3ConstructorAtomTest::descriptor),
+                dynamicTest("M3Constructor.getModifiers#1 MEMBER_VIEW_DIFF", M3ConstructorAtomTest::getModifiers),
+                dynamicTest("M3Constructor.isSynthetic#1 MEMBER_VIEW_DIFF", M3ConstructorAtomTest::isSynthetic),
+                dynamicTest("M3Constructor.isVarArgs#1 MEMBER_VIEW_DIFF", M3ConstructorAtomTest::isVarArgs),
+                dynamicTest("M3Constructor.annotationCount#1 MEMBER_VIEW_DIFF", M3ConstructorAtomTest::annotationCount),
+                dynamicTest("M3Constructor.annotationTypeNameAt#1 MEMBER_ANNOTATION_NAMES", M3ConstructorAtomTest::annotationTypeNameAt),
+                dynamicTest("M3Constructor.exceptionCount#1 MEMBER_VIEW_DIFF", M3ConstructorAtomTest::exceptionCount),
                 dynamicTest("M3Constructor.exceptionTypeDescriptorAt#1 SCENARIO", M3ConstructorAtomTest::exceptionTypeDescriptorAt),
-                dynamicTest("M3Constructor.structuralHash64#1 SCENARIO", M3ConstructorAtomTest::structuralHash64),
+                dynamicTest("M3Constructor.structuralHash64#1 MEMBER_VIEW_DIFF", M3ConstructorAtomTest::structuralHash64),
                 dynamicTest("M3Constructor.toString#1 SCENARIO", M3ConstructorAtomTest::atom_toString));
     }
 
@@ -53,37 +53,37 @@ public class M3ConstructorAtomTest {
         M3AtomKit.expect(IndexOutOfBoundsException.class, () -> NEW.invoke(CI, CI.memberSize()));
     }
 
-    /** M3Constructor.name#1 SCENARIO; oracle: Constructor.getName. */
+    /** M3Constructor.name#1 MEMBER_VIEW_DIFF; oracle: Constructor.getName. */
     static void name() throws Throwable {
         each((member, d) -> assertEquals(reflective(d).getName(), view(member).name()));
     }
 
-    /** M3Constructor.descriptor#1 SCENARIO; oracle: JVM-descriptor(params)V. */
+    /** M3Constructor.descriptor#1 MEMBER_VIEW_DIFF; oracle: JVM-descriptor(params)V. */
     static void descriptor() throws Throwable {
         each((member, d) -> assertEquals(ReflectOracle.descriptor(reflective(d).getParameterTypes(), void.class), view(member).descriptor()));
     }
 
-    /** M3Constructor.getModifiers#1 SCENARIO; oracle: Constructor.getModifiers. */
+    /** M3Constructor.getModifiers#1 MEMBER_VIEW_DIFF; oracle: Constructor.getModifiers. */
     static void getModifiers() throws Throwable {
         each((member, d) -> assertEquals(reflective(d).getModifiers(), view(member).getModifiers()));
     }
 
-    /** M3Constructor.isSynthetic#1 SCENARIO; oracle: Constructor.isSynthetic. */
+    /** M3Constructor.isSynthetic#1 MEMBER_VIEW_DIFF; oracle: Constructor.isSynthetic. */
     static void isSynthetic() throws Throwable {
         each((member, d) -> assertEquals(reflective(d).isSynthetic(), view(member).isSynthetic()));
     }
 
-    /** M3Constructor.isVarArgs#1 SCENARIO; oracle: Constructor.isVarArgs. */
+    /** M3Constructor.isVarArgs#1 MEMBER_VIEW_DIFF; oracle: Constructor.isVarArgs. */
     static void isVarArgs() throws Throwable {
         each((member, d) -> assertEquals(reflective(d).isVarArgs(), view(member).isVarArgs()));
     }
 
-    /** M3Constructor.annotationCount#1 SCENARIO; oracle: getDeclaredAnnotations. */
+    /** M3Constructor.annotationCount#1 MEMBER_VIEW_DIFF; oracle: getDeclaredAnnotations. */
     static void annotationCount() throws Throwable {
         each((member, d) -> assertEquals(reflective(d).getDeclaredAnnotations().length, view(member).annotationCount()));
     }
 
-    /** M3Constructor.annotationTypeNameAt#1 SCENARIO; oracle: getDeclaredAnnotations(type-names). */
+    /** M3Constructor.annotationTypeNameAt#1 MEMBER_ANNOTATION_NAMES; oracle: getDeclaredAnnotations(type-names). */
     static void annotationTypeNameAt() throws Throwable {
         each((member, d) -> {
             TreeSet<String> got = new TreeSet<>();
@@ -92,7 +92,7 @@ public class M3ConstructorAtomTest {
         });
     }
 
-    /** M3Constructor.exceptionCount#1 SCENARIO; oracle: Constructor.getExceptionTypes. */
+    /** M3Constructor.exceptionCount#1 MEMBER_VIEW_DIFF; oracle: Constructor.getExceptionTypes. */
     static void exceptionCount() throws Throwable {
         each((member, d) -> assertEquals(reflective(d).getExceptionTypes().length, view(member).exceptionCount()));
     }
@@ -105,7 +105,7 @@ public class M3ConstructorAtomTest {
         });
     }
 
-    /** M3Constructor.structuralHash64#1 SCENARIO; oracle: delegates-to-M3CI. */
+    /** M3Constructor.structuralHash64#1 MEMBER_VIEW_DIFF; oracle: delegates-to-M3CI. */
     static void structuralHash64() throws Throwable {
         each((member, d) -> assertEquals(CI.memberStructuralHash64(member), view(member).structuralHash64()));
     }

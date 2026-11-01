@@ -37,34 +37,37 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 public class M3ClassAtomTest {
+    /** Circle and Square, the ReflectOracle classes implementing Shape */
+    private static final int SHAPE_IMPLEMENTATIONS = 2;
+
     @TestFactory
     Stream<DynamicTest> atoms() {
         return Stream.of(
                 dynamicTest("M3Class.M3Class#1 SCENARIO", M3ClassAtomTest::M3Class),
-                dynamicTest("M3Class.simpleName#1 SCENARIO", M3ClassAtomTest::simpleName),
-                dynamicTest("M3Class.packageName#1 SCENARIO", M3ClassAtomTest::packageName),
-                dynamicTest("M3Class.moduleName#1 SCENARIO", M3ClassAtomTest::moduleName),
-                dynamicTest("M3Class.typeName#1 SCENARIO", M3ClassAtomTest::typeName),
-                dynamicTest("M3Class.flags#1 SCENARIO", M3ClassAtomTest::flags),
+                dynamicTest("M3Class.simpleName#1 CLASS_VIEW_DIFF", M3ClassAtomTest::simpleName),
+                dynamicTest("M3Class.packageName#1 CLASS_VIEW_DIFF", M3ClassAtomTest::packageName),
+                dynamicTest("M3Class.moduleName#1 CLASS_VIEW_DIFF", M3ClassAtomTest::moduleName),
+                dynamicTest("M3Class.typeName#1 CLASS_VIEW_DIFF", M3ClassAtomTest::typeName),
+                dynamicTest("M3Class.flags#1 CLASS_VIEW_DIFF", M3ClassAtomTest::flags),
                 dynamicTest("M3Class.hasFlag#1 SCENARIO", M3ClassAtomTest::hasFlag),
-                dynamicTest("M3Class.isSynthetic#1 SCENARIO", M3ClassAtomTest::isSynthetic),
-                dynamicTest("M3Class.isMemberClass#1 SCENARIO", M3ClassAtomTest::isMemberClass),
-                dynamicTest("M3Class.interfaceCount#1 SCENARIO", M3ClassAtomTest::interfaceCount),
+                dynamicTest("M3Class.isSynthetic#1 CLASS_VIEW_DIFF", M3ClassAtomTest::isSynthetic),
+                dynamicTest("M3Class.isMemberClass#1 CLASS_VIEW_DIFF", M3ClassAtomTest::isMemberClass),
+                dynamicTest("M3Class.interfaceCount#1 CLASS_VIEW_DIFF", M3ClassAtomTest::interfaceCount),
                 dynamicTest("M3Class.interfaceAt#1 SCENARIO", M3ClassAtomTest::interfaceAt),
-                dynamicTest("M3Class.directSubtypeCount#1 SCENARIO", M3ClassAtomTest::directSubtypeCount),
+                dynamicTest("M3Class.directSubtypeCount#1 CLASS_VIEW_DIFF", M3ClassAtomTest::directSubtypeCount),
                 dynamicTest("M3Class.directSubtypeAt#1 SCENARIO", M3ClassAtomTest::directSubtypeAt),
-                dynamicTest("M3Class.supertypeCount#1 SCENARIO", M3ClassAtomTest::supertypeCount),
+                dynamicTest("M3Class.supertypeCount#1 CLASS_VIEW_DIFF", M3ClassAtomTest::supertypeCount),
                 dynamicTest("M3Class.supertypeAt#1 SCENARIO", M3ClassAtomTest::supertypeAt),
-                dynamicTest("M3Class.annotationCount#1 SCENARIO", M3ClassAtomTest::annotationCount),
+                dynamicTest("M3Class.annotationCount#1 CLASS_VIEW_DIFF", M3ClassAtomTest::annotationCount),
                 dynamicTest("M3Class.annotationTypeNameAt#1 SCENARIO", M3ClassAtomTest::annotationTypeNameAt),
                 dynamicTest("M3Class.permittedSubclassCount#1 SCENARIO", M3ClassAtomTest::permittedSubclassCount),
                 dynamicTest("M3Class.permittedSubclassNameAt#1 SCENARIO", M3ClassAtomTest::permittedSubclassNameAt),
                 dynamicTest("M3Class.getNestMembers#1 SCENARIO", M3ClassAtomTest::getNestMembers),
                 dynamicTest("M3Class.memberRows#1 SCENARIO", M3ClassAtomTest::memberRows),
-                dynamicTest("M3Class.structuralHash64#1 SCENARIO", M3ClassAtomTest::structuralHash64),
-                dynamicTest("M3Class.getPackage#1 SCENARIO", M3ClassAtomTest::getPackage),
+                dynamicTest("M3Class.structuralHash64#1 CLASS_VIEW_DIFF", M3ClassAtomTest::structuralHash64),
+                dynamicTest("M3Class.getPackage#1 CLASS_VIEW_DIFF", M3ClassAtomTest::getPackage),
                 dynamicTest("M3Class.getProtectionDomain#1 SCENARIO", M3ClassAtomTest::getProtectionDomain),
-                dynamicTest("M3Class.desiredAssertionStatus#1 SCENARIO", M3ClassAtomTest::desiredAssertionStatus),
+                dynamicTest("M3Class.desiredAssertionStatus#1 CLASS_VIEW_DIFF", M3ClassAtomTest::desiredAssertionStatus),
                 dynamicTest("M3Class.getResource#1 SCENARIO", M3ClassAtomTest::getResource),
                 dynamicTest("M3Class.getSigners#1 SCENARIO", M3ClassAtomTest::getSigners),
                 dynamicTest("M3Class.getAnnotation#1 SCENARIO", M3ClassAtomTest::getAnnotation),
@@ -95,27 +98,27 @@ public class M3ClassAtomTest {
         M3AtomKit.expectMessage(NullPointerException.class, "owner", () -> ctor.invoke((M3CI) null, 0));
     }
 
-    /** M3Class.simpleName#1 SCENARIO; oracle: java.lang.Class.getSimpleName. */
+    /** M3Class.simpleName#1 CLASS_VIEW_DIFF; oracle: java.lang.Class.getSimpleName. */
     static void simpleName() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getSimpleName(), view(row).simpleName());
     }
 
-    /** M3Class.packageName#1 SCENARIO; oracle: java.lang.Class.getPackageName. */
+    /** M3Class.packageName#1 CLASS_VIEW_DIFF; oracle: java.lang.Class.getPackageName. */
     static void packageName() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getPackageName(), view(row).packageName());
     }
 
-    /** M3Class.moduleName#1 SCENARIO; oracle: java.lang.Module.getName. */
+    /** M3Class.moduleName#1 CLASS_VIEW_DIFF; oracle: java.lang.Module.getName. */
     static void moduleName() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(Optional.ofNullable(CLASSES[row].getModule().getName()), view(row).moduleName());
     }
 
-    /** M3Class.typeName#1 SCENARIO; oracle: java.lang.Class.getTypeName. */
+    /** M3Class.typeName#1 CLASS_VIEW_DIFF; oracle: java.lang.Class.getTypeName. */
     static void typeName() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getTypeName(), view(row).typeName());
     }
 
-    /** M3Class.flags#1 SCENARIO; oracle: java.lang.Class.isXxx. */
+    /** M3Class.flags#1 CLASS_VIEW_DIFF; oracle: java.lang.Class.isXxx. */
     static void flags() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(ReflectOracle.classFlags(CLASSES[row]), view(row).flags());
     }
@@ -129,18 +132,18 @@ public class M3ClassAtomTest {
         }
     }
 
-    /** M3Class.isSynthetic#1 SCENARIO; oracle: java.lang.Class.isSynthetic. */
+    /** M3Class.isSynthetic#1 CLASS_VIEW_DIFF; oracle: java.lang.Class.isSynthetic. */
     static void isSynthetic() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].isSynthetic(), view(row).isSynthetic());
     }
 
-    /** M3Class.isMemberClass#1 SCENARIO; oracle: java.lang.Class.isMemberClass. */
+    /** M3Class.isMemberClass#1 CLASS_VIEW_DIFF; oracle: java.lang.Class.isMemberClass. */
     static void isMemberClass() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].isMemberClass(), view(row).isMemberClass());
         assertTrue(view(ReflectOracle.Derived.Inner.class).isMemberClass());
     }
 
-    /** M3Class.interfaceCount#1 SCENARIO; oracle: java.lang.Class.getInterfaces. */
+    /** M3Class.interfaceCount#1 CLASS_VIEW_DIFF; oracle: java.lang.Class.getInterfaces. */
     static void interfaceCount() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getInterfaces().length, view(row).interfaceCount());
     }
@@ -153,10 +156,10 @@ public class M3ClassAtomTest {
         }
     }
 
-    /** M3Class.directSubtypeCount#1 SCENARIO; oracle: reverse-hierarchy. */
+    /** M3Class.directSubtypeCount#1 CLASS_VIEW_DIFF; oracle: reverse-hierarchy. */
     static void directSubtypeCount() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(CI.directSubtypeCount(row), view(row).directSubtypeCount());
-        assertTrue(view(ReflectOracle.Shape.class).directSubtypeCount() >= 2, "Circle and Square implement Shape");
+        assertTrue(view(ReflectOracle.Shape.class).directSubtypeCount() >= SHAPE_IMPLEMENTATIONS, "Circle and Square implement Shape");
     }
 
     /** M3Class.directSubtypeAt#1 SCENARIO; oracle: getSuperclass/getInterfaces-of-subtype. */
@@ -169,7 +172,7 @@ public class M3ClassAtomTest {
         }
     }
 
-    /** M3Class.supertypeCount#1 SCENARIO; oracle: transitive-closure. */
+    /** M3Class.supertypeCount#1 CLASS_VIEW_DIFF; oracle: transitive-closure. */
     static void supertypeCount() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(ReflectOracle.supertypes(ROWS, CLASSES[row]).size(), view(row).supertypeCount());
     }
@@ -184,7 +187,7 @@ public class M3ClassAtomTest {
         }
     }
 
-    /** M3Class.annotationCount#1 SCENARIO; oracle: getDeclaredAnnotations. */
+    /** M3Class.annotationCount#1 CLASS_VIEW_DIFF; oracle: getDeclaredAnnotations. */
     static void annotationCount() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(ReflectOracle.annotationNames(CLASSES[row]).size(), view(row).annotationCount());
     }
@@ -232,12 +235,12 @@ public class M3ClassAtomTest {
         }
     }
 
-    /** M3Class.structuralHash64#1 SCENARIO; oracle: delegates-to-M3CI. */
+    /** M3Class.structuralHash64#1 CLASS_VIEW_DIFF; oracle: delegates-to-M3CI. */
     static void structuralHash64() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(CI.structuralHash64(row), view(row).structuralHash64());
     }
 
-    /** M3Class.getPackage#1 SCENARIO; oracle: java.lang.Class.getPackage. */
+    /** M3Class.getPackage#1 CLASS_VIEW_DIFF; oracle: java.lang.Class.getPackage. */
     static void getPackage() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].getPackage(), view(row).getPackage());
     }
@@ -248,7 +251,7 @@ public class M3ClassAtomTest {
         assertSame(Object.class.getProtectionDomain(), view(Object.class).getProtectionDomain());
     }
 
-    /** M3Class.desiredAssertionStatus#1 SCENARIO; oracle: java.lang.Class.desiredAssertionStatus. */
+    /** M3Class.desiredAssertionStatus#1 CLASS_VIEW_DIFF; oracle: java.lang.Class.desiredAssertionStatus. */
     static void desiredAssertionStatus() throws Throwable {
         for (int row = 0; row < CI.size(); row++) assertEquals(CLASSES[row].desiredAssertionStatus(), view(row).desiredAssertionStatus());
     }

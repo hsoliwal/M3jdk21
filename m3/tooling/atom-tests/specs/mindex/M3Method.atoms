@@ -32,39 +32,26 @@ each((member, d) -> assertEquals(member, view(member).row()));
 M3AtomKit.expectMessage(IllegalArgumentException.class, "not a method", () -> NEW.invoke(CI, other));
 >>>
 
-@atom M3Method.isSynthetic 1 SCENARIO Method.isSynthetic
-check <<<
-each((member, d) -> assertEquals(reflective(d).isSynthetic(), view(member).isSynthetic(), d.toString()));
->>>
+@atom M3Method.isSynthetic 1 MEMBER_VIEW_DIFF Method.isSynthetic
+expected = reflective(d).isSynthetic()
+label = , d.toString()
 
-@atom M3Method.isVarArgs 1 SCENARIO Method.isVarArgs
-check <<<
-each((member, d) -> assertEquals(reflective(d).isVarArgs(), view(member).isVarArgs(), d.toString()));
->>>
+@atom M3Method.isVarArgs 1 MEMBER_VIEW_DIFF Method.isVarArgs
+expected = reflective(d).isVarArgs()
+label = , d.toString()
 
-@atom M3Method.isDefault 1 SCENARIO Method.isDefault
-check <<<
-each((member, d) -> assertEquals(reflective(d).isDefault(), view(member).isDefault(), d.toString()));
->>>
+@atom M3Method.isDefault 1 MEMBER_VIEW_DIFF Method.isDefault
+expected = reflective(d).isDefault()
+label = , d.toString()
 
-@atom M3Method.annotationCount 1 SCENARIO getDeclaredAnnotations
-check <<<
-each((member, d) -> assertEquals(reflective(d).getDeclaredAnnotations().length, view(member).annotationCount(), d.toString()));
->>>
+@atom M3Method.annotationCount 1 MEMBER_VIEW_DIFF getDeclaredAnnotations
+expected = reflective(d).getDeclaredAnnotations().length
+label = , d.toString()
 
-@atom M3Method.annotationTypeNameAt 1 SCENARIO getDeclaredAnnotations(type-names)
-check <<<
-each((member, d) -> {
-    TreeSet<String> got = new TreeSet<>();
-    for (int k = 0; k < view(member).annotationCount(); k++) got.add(view(member).annotationTypeNameAt(k));
-    assertEquals(ReflectOracle.annotationNames(d.element()), got);
-});
->>>
+@atom M3Method.annotationTypeNameAt 1 MEMBER_ANNOTATION_NAMES getDeclaredAnnotations(type-names)
 
-@atom M3Method.exceptionCount 1 SCENARIO Method.getExceptionTypes
-check <<<
-each((member, d) -> assertEquals(reflective(d).getExceptionTypes().length, view(member).exceptionCount()));
->>>
+@atom M3Method.exceptionCount 1 MEMBER_VIEW_DIFF Method.getExceptionTypes
+expected = reflective(d).getExceptionTypes().length
 
 @atom M3Method.exceptionTypeDescriptorAt 1 SCENARIO Class.descriptorString(exceptions)
 check <<<
@@ -74,7 +61,5 @@ each((member, d) -> {
 });
 >>>
 
-@atom M3Method.structuralHash64 1 SCENARIO delegates-to-M3CI
-check <<<
-each((member, d) -> assertEquals(CI.memberStructuralHash64(member), view(member).structuralHash64()));
->>>
+@atom M3Method.structuralHash64 1 MEMBER_VIEW_DIFF delegates-to-M3CI
+expected = CI.memberStructuralHash64(member)

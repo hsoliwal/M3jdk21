@@ -26,6 +26,29 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 public class M3RX7TransitionsAtomTest {
+    /** a state flag other than 0 and 1 */
+    private static final byte INVALID_FLAG = 2;
+    /** length of a flag lane one longer than the one-state table it goes with */
+    private static final int FLAGS_OF_TWO = 2;
+    /** the smallest dimension with an off-diagonal */
+    private static final int SMALL_STATES = 2;
+    /** first destination past a two-state transfer table */
+    private static final int OUT_OF_RANGE_STATE = 2;
+    /** a negative state other than the dead marker -1 */
+    private static final int BELOW_DEAD = -2;
+    /** index of the table length in a {length, states, columns} case */
+    private static final int LENGTH = 0;
+    /** index of the state count in a {length, states, columns} case */
+    private static final int STATES = 1;
+    /** index of the column count in a {length, states, columns} case */
+    private static final int COLUMNS = 2;
+    /** table length that is not states * columns for a 1 x 1 table */
+    private static final int WRONG_LENGTH = 2;
+    /** states of the valid flag lane {0, 1, 1, 0} */
+    private static final int FLAG_STATES = 4;
+    /** a flag lane one shorter than FLAG_STATES */
+    private static final int SHORT_FLAGS = 3;
+
     @TestFactory
     Stream<DynamicTest> atoms() {
         return Stream.of(
@@ -71,7 +94,7 @@ public class M3RX7TransitionsAtomTest {
             assertNotSame(accepting, got, "fresh result");
         }
         M3AtomKit.expectMessage(IllegalArgumentException.class, "invalid state flag",
-                () -> { byte[] b = (byte[]) atom.invokeExact(new short[] {0}, 1, 1, new byte[] {2}); });
+                () -> { byte[] b = (byte[]) atom.invokeExact(new short[] {0}, 1, 1, new byte[] {INVALID_FLAG}); });
         M3AtomKit.expectMessage(IllegalArgumentException.class, "invalid transition state",
                 () -> { byte[] b = (byte[]) atom.invokeExact(new short[] {1}, 1, 1, new byte[] {0}); });
     }
@@ -95,7 +118,7 @@ public class M3RX7TransitionsAtomTest {
             }
         }
         M3AtomKit.expectMessage(IllegalArgumentException.class, "invalid state flags",
-                () -> { long[] m = (long[]) atom.invokeExact(new short[] {0}, 1, 1, new byte[2]); });
+                () -> { long[] m = (long[]) atom.invokeExact(new short[] {0}, 1, 1, new byte[FLAGS_OF_TWO]); });
     }
 
     /** M3RX7Transitions.tokens#1 SCENARIO; oracle: RelationOracle.tokens. */
@@ -106,7 +129,7 @@ public class M3RX7TransitionsAtomTest {
         for (int c = 0; c < M3AtomKit.CASES; c++) {
             int states = random.nextInt(1, GEN_STATES);
             int tokens = random.nextInt(1, GEN_COLUMNS);
-            short[] rows = RelationOracle.randomTable(random, states, tokens, DEAD_RATE / 4);
+            short[] rows = RelationOracle.randomTable(random, states, tokens, SPARSE_DEAD_RATE);
             int[] ids = random.ints(random.nextInt(0, GEN_STATES), 0, tokens).toArray();
             int offset = ids.length == 0 ? 0 : random.nextInt(ids.length);
             int length = ids.length - offset;
@@ -149,7 +172,7 @@ public class M3RX7TransitionsAtomTest {
         SplittableRandom random = M3AtomKit.random("repeat");
         for (int c = 0; c < M3AtomKit.CASES; c++) {
             int states = random.nextInt(1, GEN_STATES);
-            short[] rows = RelationOracle.randomTransfer(random, states, DEAD_RATE / 4);
+            short[] rows = RelationOracle.randomTransfer(random, states, SPARSE_DEAD_RATE);
             for (long count : COUNTS) {
                 short[] got = (short[]) atom.invokeExact(rows.clone(), count);
                 assertArrayEquals(RelationOracle.powerTransfer(rows, count), got, "count=" + count);
@@ -164,7 +187,7 @@ public class M3RX7TransitionsAtomTest {
     /** M3RX7Transitions.identity#1 SCENARIO; oracle: index-identity. */
     static void identity() throws Throwable {
         MethodHandle atom = M3AtomKit.findStatic(OWNER, "identity", MethodType.methodType(short[].class, int.class));
-        for (int states : new int[] {1, 2, GEN_STATES, MAX_STATES}) {
+        for (int states : new int[] {1, SMALL_STATES, GEN_STATES, MAX_STATES}) {
             short[] rows = (short[]) atom.invokeExact(states);
             assertEquals(states, rows.length);
             for (int q = 0; q < states; q++) assertEquals(q, rows[q]);
@@ -196,9 +219,9 @@ public class M3RX7TransitionsAtomTest {
         M3AtomKit.expectMessage(IllegalArgumentException.class, "dimensions",
                 () -> { int n = (int) atom.invokeExact(new short[MAX_STATES + 1]); });
         M3AtomKit.expectMessage(IllegalArgumentException.class, "invalid transition state",
-                () -> { int n = (int) atom.invokeExact(new short[] {0, 2}); });
+                () -> { int n = (int) atom.invokeExact(new short[] {0, OUT_OF_RANGE_STATE}); });
         M3AtomKit.expectMessage(IllegalArgumentException.class, "invalid transition state",
-                () -> { int n = (int) atom.invokeExact(new short[] {-2}); });
+                () -> { int n = (int) atom.invokeExact(new short[] {BELOW_DEAD}); });
     }
 
     /** M3RX7Transitions.checkTable#1 SCENARIO; oracle: bounded-table-dimensions. */
@@ -207,9 +230,9 @@ public class M3RX7TransitionsAtomTest {
                 MethodType.methodType(void.class, short[].class, int.class, int.class));
         atom.invokeExact(new short[0], 1, 0);
         atom.invokeExact(new short[MAX_CELLS], MAX_STATES, MAX_CELLS / MAX_STATES);
-        for (int[] bad : new int[][] {{1, 0, 1}, {1, MAX_STATES + 1, 0}, {1, 1, -1}, {2, 1, 1}}) {
+        for (int[] bad : new int[][] {{1, 0, 1}, {1, MAX_STATES + 1, 0}, {1, 1, -1}, {WRONG_LENGTH, 1, 1}}) {
             M3AtomKit.expectMessage(IllegalArgumentException.class, "dimensions",
-                    () -> { atom.invokeExact(new short[bad[0]], bad[1], bad[2]); });
+                    () -> { atom.invokeExact(new short[bad[LENGTH]], bad[STATES], bad[COLUMNS]); });
         }
         M3AtomKit.expectMessage(IllegalArgumentException.class, "dimensions",
                 () -> { atom.invokeExact(new short[MAX_CELLS + MAX_STATES], MAX_STATES, MAX_CELLS / MAX_STATES + 1); });
@@ -219,8 +242,8 @@ public class M3RX7TransitionsAtomTest {
     /** M3RX7Transitions.checkFlags#1 SCENARIO; oracle: zero-one-flags. */
     static void checkFlags() throws Throwable {
         MethodHandle atom = M3AtomKit.findStatic(OWNER, "checkFlags", MethodType.methodType(void.class, byte[].class, int.class));
-        atom.invokeExact(new byte[] {0, 1, 1, 0}, 4);
-        M3AtomKit.expectMessage(IllegalArgumentException.class, "invalid state flags", () -> { atom.invokeExact(new byte[3], 4); });
+        atom.invokeExact(new byte[] {0, 1, 1, 0}, FLAG_STATES);
+        M3AtomKit.expectMessage(IllegalArgumentException.class, "invalid state flags", () -> { atom.invokeExact(new byte[SHORT_FLAGS], FLAG_STATES); });
         M3AtomKit.expectMessage(IllegalArgumentException.class, "invalid state flag", () -> { atom.invokeExact(new byte[] {-1}, 1); });
         M3AtomKit.expectMessage(NullPointerException.class, "flags", () -> { atom.invokeExact((byte[]) null, 1); });
     }
@@ -229,7 +252,7 @@ public class M3RX7TransitionsAtomTest {
     static void checkState() throws Throwable {
         MethodHandle atom = M3AtomKit.findStatic(OWNER, "checkState", MethodType.methodType(void.class, int.class, int.class));
         for (int state = -1; state < GEN_STATES; state++) atom.invokeExact(state, GEN_STATES);
-        for (int bad : new int[] {Integer.MIN_VALUE, -2, GEN_STATES, Integer.MAX_VALUE}) {
+        for (int bad : new int[] {Integer.MIN_VALUE, BELOW_DEAD, GEN_STATES, Integer.MAX_VALUE}) {
             M3AtomKit.expectMessage(IllegalArgumentException.class, "invalid transition state", () -> { atom.invokeExact(bad, GEN_STATES); });
         }
     }
@@ -253,7 +276,7 @@ public class M3RX7TransitionsAtomTest {
         Class<?> owner = M3AtomKit.type("M3RX7Transitions");
         short[] rows = RelationOracle.randomTransfer(M3AtomKit.random("repeat0"), GEN_STATES, DEAD_RATE);
         short[] result = new short[GEN_STATES];
-        long count = COUNTS[COUNTS.length - 2];
+        long count = COUNTS[LARGE_COUNT];
         MethodHandle atom = M3AtomKit.findStatic(owner, "repeat0",
                 MethodType.methodType(void.class, short[].class, long.class, short[].class));
         M3AtomKit.assertNativeLane(owner, "repeat0", () -> {
@@ -272,6 +295,10 @@ public class M3RX7TransitionsAtomTest {
     private static final double DEAD_RATE = 0.2;
     /** Exponents probed by repeat: small, word-crossing and extreme. */
     private static final long[] COUNTS = {0, 1, 2, 3, 7, 64, 1000, 65_537, Long.MAX_VALUE};
+    /** Index of the largest exponent of COUNTS below Long.MAX_VALUE. */
+    private static final int LARGE_COUNT = COUNTS.length - 2;
+    /** Dead-transition rate of the token-closure and repeat checks: a quarter of DEAD_RATE, so chains stay alive. */
+    private static final double SPARSE_DEAD_RATE = DEAD_RATE / 4;
 
     private static byte[] flags(SplittableRandom random, int states, double rate) {
         byte[] flags = new byte[states];

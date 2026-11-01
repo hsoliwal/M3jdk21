@@ -32,36 +32,23 @@ each((member, d) -> assertEquals(member, view(member).row()));
 M3AtomKit.expectMessage(IllegalArgumentException.class, "not a field", () -> NEW.invoke(CI, other));
 >>>
 
-@atom M3Field.getModifiers 1 SCENARIO Field.getModifiers
-check <<<
-each((member, d) -> assertEquals(reflective(d).getModifiers(), view(member).getModifiers(), d.toString()));
->>>
+@atom M3Field.getModifiers 1 MEMBER_VIEW_DIFF Field.getModifiers
+expected = reflective(d).getModifiers()
+label = , d.toString()
 
-@atom M3Field.isSynthetic 1 SCENARIO Field.isSynthetic
-check <<<
-each((member, d) -> assertEquals(reflective(d).isSynthetic(), view(member).isSynthetic(), d.toString()));
->>>
+@atom M3Field.isSynthetic 1 MEMBER_VIEW_DIFF Field.isSynthetic
+expected = reflective(d).isSynthetic()
+label = , d.toString()
 
-@atom M3Field.isEnumConstant 1 SCENARIO Field.isEnumConstant
-check <<<
-each((member, d) -> assertEquals(reflective(d).isEnumConstant(), view(member).isEnumConstant(), d.toString()));
->>>
+@atom M3Field.isEnumConstant 1 MEMBER_VIEW_DIFF Field.isEnumConstant
+expected = reflective(d).isEnumConstant()
+label = , d.toString()
 
-@atom M3Field.annotationCount 1 SCENARIO getDeclaredAnnotations
-check <<<
-each((member, d) -> assertEquals(reflective(d).getDeclaredAnnotations().length, view(member).annotationCount(), d.toString()));
->>>
+@atom M3Field.annotationCount 1 MEMBER_VIEW_DIFF getDeclaredAnnotations
+expected = reflective(d).getDeclaredAnnotations().length
+label = , d.toString()
 
-@atom M3Field.annotationTypeNameAt 1 SCENARIO getDeclaredAnnotations(type-names)
-check <<<
-each((member, d) -> {
-    TreeSet<String> got = new TreeSet<>();
-    for (int k = 0; k < view(member).annotationCount(); k++) got.add(view(member).annotationTypeNameAt(k));
-    assertEquals(ReflectOracle.annotationNames(d.element()), got);
-});
->>>
+@atom M3Field.annotationTypeNameAt 1 MEMBER_ANNOTATION_NAMES getDeclaredAnnotations(type-names)
 
-@atom M3Field.structuralHash64 1 SCENARIO delegates-to-M3CI
-check <<<
-each((member, d) -> assertEquals(CI.memberStructuralHash64(member), view(member).structuralHash64()));
->>>
+@atom M3Field.structuralHash64 1 MEMBER_VIEW_DIFF delegates-to-M3CI
+expected = CI.memberStructuralHash64(member)
