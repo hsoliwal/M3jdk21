@@ -127,8 +127,17 @@ public final class M3IndexedMultivalueOccurrenceRecipeTest {
     }
 
     @Test void namedRecipeDiscovery() {
-        var named = Environment.builder().scanClassLoader(getClass().getClassLoader())
-                .build().activateRecipes("com.synexia.m3.IndexedMultivalueOccurrence20261018");
+        // Surefire may isolate the test loader from recipe dependency loaders.
+        // Require the original YAML resource and the runtime discovery mechanism.
+        String resource = "META-INF/rewrite/m3-indexed-multivalue-occurrences-20261018.yml";
+        String recipeName = "com.synexia.m3.IndexedMultivalueOccurrence20261018";
+        assertNotNull(getClass().getClassLoader().getResource(resource),
+                "indexed multivalue recipe descriptor was not packaged");
+        var environment = Environment.builder().scanRuntimeClasspath().build();
+        assertTrue(environment.listRecipes().stream()
+                .anyMatch(candidate -> recipeName.equals(candidate.getName())),
+                "indexed multivalue recipe is absent from the runtime catalogue");
+        var named = environment.activateRecipes(recipeName);
         assertTrue(named.validateAll().stream().allMatch(v -> v.isValid()));
     }
 }
