@@ -38,3 +38,13 @@ The separate canonical [Synexia PR #15080](https://github.com/hsoliwal/com.synex
 This pass checks `count == 0` only **after** Java null/range validation and after JNI direct-window validation. It avoids JNI transitions for valid zero-length windows even when the arrays differ. It preserves all public descriptors, native symbols, allocation and GC ownership, and invalid-input exception behavior. The existing JUnit owner gains a distinct-array empty-window and invalid-bounds test.
 
 A local independent Java21 + C11 `-Xcheck:jni` probe executed 1,071,843 window comparisons without a mismatch. Actual M3JDK21 product CI, API/ABI and performance evaluation for this second stage remain PENDING; the previously recorded stage-1 Java/native successes do **not** apply automatically to the new stage. The unrelated `java.util.Arrays` source-seal receiver gate remains blocking.
+
+## Stage 2 actual native and Java test evidence (2026-11-01)
+
+[Array Substrate Actions run #41285256464](https://github.com/hsoliwal/M3jdk21/actions/runs/41285256464) at exact stage-2 Java/JNI commit `259703f9feafcd912b8706e512d9f20644f8b1a3`:
+
+- **Native:** CMake/CTest 4 tests passed; Maven `-Pnative-linux -DargLine=-Xcheck:jni test` BUILD SUCCESS, 59 JUnit tests, 0 failures/errors, 9 skipped, including all 7 `M3ArrayNativeTest` methods.
+- **Java:** Maven BUILD SUCCESS, 46 JUnit tests, 0 failures/errors, 14 skipped, including all 7 `M3ArrayNativeTest` methods.
+- **Receiving:** failed independently with `M3JDK21_NAME_RECEIVER_REFUSED` for the historical `java.util.Arrays.java` SHA-256 companion pin. No file in `java.base` was modified by this PR, so this failure requires a separate proof-gated source-pin reconciliation, not a bypass.
+
+Overall workflow status remains **failure**; full Java-base naming, performance and installed-image release remain on HOLD. These are the first verified **actual target** Java/C/JNI results for stage 2, distinct from the local standalone proof.
