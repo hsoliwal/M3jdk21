@@ -1,0 +1,11 @@
+PATCH classes=15
+COMPILED list classes=23
+RUN list [-Djava.awt.headless=true -Dm3.swing.viewport=true]: --select-class M3ListMeasureAtomsTest --select-class M3ListRowsAtomsTest --select-class M3PrefixRowOffsetsAtomsTest --select-class M3RowOffsetsAtomsTest --select-class M3RowPiecesAtomsTest
+COMPILED table classes=18
+RUN table [-Djava.awt.headless=true]: --select-class M3SorterLanesAtomsTest --select-class M3SparseSizesAtomsTest
+COMPILED tree classes=29
+RUN tree [-Djava.awt.headless=true]: --select-class M3FixedHeightLayoutCacheAtomsTest --select-class M3VariableHeightLayoutCacheAtomsTest
+RUN tree [-Djava.awt.headless=true -Dm3.swing.viewport=true]: --select-class M3ExpandedStateAtomsTest
+REACH exec files=289
+reach atoms=281 reached=270 interface_rows=15 not_reached=0
+EXIT 0

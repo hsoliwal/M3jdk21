@@ -1,0 +1,173 @@
+    246  302 %     3       sun.swing.table.M3SorterLanes::createViewToModel @ 25 (44 bytes)
+    246  303       3       sun.swing.table.M3SorterLanes::createViewToModel (44 bytes)
+    247  307       3       sun.swing.table.M3SorterLanes::binaryInsertion (102 bytes)
+    248  308       3       sun.swing.table.M3SorterLanes::runEnd (157 bytes)
+    249  309 %     4       sun.swing.table.M3SorterLanes::binaryInsertion @ 23 (102 bytes)
+    259  311       3       sun.swing.table.M3SorterLanes::merge (130 bytes)
+    260  312 %     4       sun.swing.table.M3SorterLanes::merge @ 44 (130 bytes)
+    267  313       4       sun.swing.table.M3SorterLanes::merge (130 bytes)
+    276  311       3       sun.swing.table.M3SorterLanes::merge (130 bytes)   made not entrant
+    281  314 %     3       sun.swing.table.M3SorterLanes::setModelToViewFromViewToModel @ 20 (43 bytes)
+    282  315       3       sun.swing.table.M3SorterLanes::setModelToViewFromViewToModel (43 bytes)
+    609  432       3       sun.swing.table.M3SparseSizes::setSize (123 bytes)
+    609  433       3       sun.swing.table.M3SparseSizes::find (70 bytes)
+    609  434       3       sun.swing.table.M3SparseSizes::insert (118 bytes)
+   1948  576       3       sun.swing.table.M3SorterLanes::modelIndex (7 bytes)
+   1949  578       4       sun.swing.table.M3SorterLanes::modelIndex (7 bytes)
+   1949  576       3       sun.swing.table.M3SorterLanes::modelIndex (7 bytes)   made not entrant
+   1951  581 %     3       M3TableAtomsPerf::b0 @ 4 (43 bytes)
+   1952  582       3       M3TableAtomsPerf::b0 (43 bytes)
+   1952  583 %     4       M3TableAtomsPerf::b0 @ 4 (43 bytes)
+   1956  581 %     3       M3TableAtomsPerf::b0 @ 4 (43 bytes)   made not entrant
+   1956  583 %     4       M3TableAtomsPerf::b0 @ 4 (43 bytes)   made not entrant
+   1959  586 %     3       M3TableAtomsPerf::b1 @ 4 (40 bytes)
+   1960  587       3       M3TableAtomsPerf::b1 (40 bytes)
+   1960  588 %     4       M3TableAtomsPerf::b1 @ 4 (40 bytes)
+   1962  586 %     3       M3TableAtomsPerf::b1 @ 4 (40 bytes)   made not entrant
+   1963  588 %     4       M3TableAtomsPerf::b1 @ 4 (40 bytes)   made not entrant
+   1963  592       3       sun.swing.table.M3SorterLanes::viewIndex (7 bytes)
+   1966  597 %     3       M3TableAtomsPerf::b2 @ 4 (43 bytes)
+   1967  598       3       M3TableAtomsPerf::b2 (43 bytes)
+   1967  599 %     4       M3TableAtomsPerf::b2 @ 4 (43 bytes)
+   1970  597 %     3       M3TableAtomsPerf::b2 @ 4 (43 bytes)   made not entrant
+   1971  599 %     4       M3TableAtomsPerf::b2 @ 4 (43 bytes)   made not entrant
+   1975  602 %     3       M3TableAtomsPerf::b3 @ 4 (40 bytes)
+   1975  603       3       M3TableAtomsPerf::b3 (40 bytes)
+   1976  604 %     4       M3TableAtomsPerf::b3 @ 4 (40 bytes)
+   1979  602 %     3       M3TableAtomsPerf::b3 @ 4 (40 bytes)   made not entrant
+   1979  604 %     4       M3TableAtomsPerf::b3 @ 4 (40 bytes)   made not entrant
+   1980  611       3       sun.swing.table.M3SorterLanes::viewRowCount (6 bytes)
+   1981  613       4       sun.swing.table.M3SorterLanes::viewRowCount (6 bytes)
+   1981  611       3       sun.swing.table.M3SorterLanes::viewRowCount (6 bytes)   made not entrant
+   1982  616 %     3       M3TableAtomsPerf::b4 @ 4 (37 bytes)
+   1983  617       3       M3TableAtomsPerf::b4 (37 bytes)
+   1983  618 %     4       M3TableAtomsPerf::b4 @ 4 (37 bytes)
+   1985  616 %     3       M3TableAtomsPerf::b4 @ 4 (37 bytes)   made not entrant
+   1985  618 %     4       M3TableAtomsPerf::b4 @ 4 (37 bytes)   made not entrant
+   1986  621       3       sun.swing.table.M3SorterLanes::transformed (13 bytes)
+   1988  624 %     3       M3TableAtomsPerf::b5 @ 4 (44 bytes)
+   1989  625       3       M3TableAtomsPerf::b5 (44 bytes)
+   1989  626 %     4       M3TableAtomsPerf::b5 @ 4 (44 bytes)
+   1992  624 %     3       M3TableAtomsPerf::b5 @ 4 (44 bytes)   made not entrant
+   1992  626 %     4       M3TableAtomsPerf::b5 @ 4 (44 bytes)   made not entrant
+   1993  635       4       sun.swing.table.M3SorterLanes::binaryInsertion (102 bytes)
+   1996  307       3       sun.swing.table.M3SorterLanes::binaryInsertion (102 bytes)   made not entrant
+   1998  636       4       sun.swing.table.M3SorterLanes::runEnd (157 bytes)
+   2004  308       3       sun.swing.table.M3SorterLanes::runEnd (157 bytes)   made not entrant
+   2160  681       3       sun.swing.table.M3SorterLanes::binarySearch (61 bytes)
+   2162  687       4       sun.swing.table.M3SorterLanes::binarySearch (61 bytes)
+   2164  681       3       sun.swing.table.M3SorterLanes::binarySearch (61 bytes)   made not entrant
+   2177  690 %     3       M3TableAtomsPerf::b8 @ 4 (46 bytes)
+   2178  691       3       M3TableAtomsPerf::b8 (46 bytes)
+   2185  692 %     4       M3TableAtomsPerf::b8 @ 4 (46 bytes)
+   2188  690 %     3       M3TableAtomsPerf::b8 @ 4 (46 bytes)   made not entrant
+   2340  692 %     4       M3TableAtomsPerf::b8 @ 4 (46 bytes)   made not entrant
+   2341  694       3       sun.swing.table.M3SparseSizes::getSize (54 bytes)
+   2341  696       4       sun.swing.table.M3SparseSizes::find (70 bytes)
+   2342  433       3       sun.swing.table.M3SparseSizes::find (70 bytes)   made not entrant
+   2342  697       4       sun.swing.table.M3SparseSizes::getSize (54 bytes)
+   2344  694       3       sun.swing.table.M3SparseSizes::getSize (54 bytes)   made not entrant
+   2347  699 %     3       M3TableAtomsPerf::b9 @ 4 (43 bytes)
+   2347  700       3       M3TableAtomsPerf::b9 (43 bytes)
+   2349  701 %     4       M3TableAtomsPerf::b9 @ 4 (43 bytes)
+   2352  699 %     3       M3TableAtomsPerf::b9 @ 4 (43 bytes)   made not entrant
+   2397  701 %     4       M3TableAtomsPerf::b9 @ 4 (43 bytes)   made not entrant
+   2411  703 %     3       M3TableAtomsPerf::b10 @ 4 (40 bytes)
+   2412  704       3       M3TableAtomsPerf::b10 (40 bytes)
+   2421  705 %     4       M3TableAtomsPerf::b10 @ 4 (40 bytes)
+   2425  703 %     3       M3TableAtomsPerf::b10 @ 4 (40 bytes)   made not entrant
+   2622  705 %     4       M3TableAtomsPerf::b10 @ 4 (40 bytes)   made not entrant
+   2623  707       3       sun.swing.table.M3SparseSizes::build (89 bytes)
+   2623  706       3       sun.swing.table.M3SparseSizes::getPosition (74 bytes)
+   2624  709       4       sun.swing.table.M3SparseSizes::getPosition (74 bytes)
+   2625  706       3       sun.swing.table.M3SparseSizes::getPosition (74 bytes)   made not entrant
+   2625  710       4       sun.swing.table.M3SparseSizes::build (89 bytes)
+   2625  707       3       sun.swing.table.M3SparseSizes::build (89 bytes)   made not entrant
+   2628  712 %     3       M3TableAtomsPerf::b11 @ 4 (43 bytes)
+   2629  713       3       M3TableAtomsPerf::b11 (43 bytes)
+   2631  714 %     4       M3TableAtomsPerf::b11 @ 4 (43 bytes)
+   2634  712 %     3       M3TableAtomsPerf::b11 @ 4 (43 bytes)   made not entrant
+   2677  714 %     4       M3TableAtomsPerf::b11 @ 4 (43 bytes)   made not entrant
+   2686  716 %     3       M3TableAtomsPerf::b12 @ 4 (40 bytes)
+   2687  717       3       M3TableAtomsPerf::b12 (40 bytes)
+   2691  718 %     4       M3TableAtomsPerf::b12 @ 4 (40 bytes)
+   2694  716 %     3       M3TableAtomsPerf::b12 @ 4 (40 bytes)   made not entrant
+   2783  718 %     4       M3TableAtomsPerf::b12 @ 4 (40 bytes)   made not entrant
+   2783  719       3       sun.swing.table.M3SparseSizes::start (21 bytes)
+   2784  723       4       sun.swing.table.M3SparseSizes::start (21 bytes)
+   2784  724       3       sun.swing.table.M3SparseSizes::getIndex (181 bytes)
+   2784  725       3       sun.swing.table.M3SparseSizes::total (22 bytes)
+   2785  719       3       sun.swing.table.M3SparseSizes::start (21 bytes)   made not entrant
+   2785  727       4       sun.swing.table.M3SparseSizes::getIndex (181 bytes)
+   2788  724       3       sun.swing.table.M3SparseSizes::getIndex (181 bytes)   made not entrant
+   2792  729 %     3       M3TableAtomsPerf::b13 @ 4 (43 bytes)
+   2793  730       3       M3TableAtomsPerf::b13 (43 bytes)
+   2795  731 %     4       M3TableAtomsPerf::b13 @ 4 (43 bytes)
+   2798  729 %     3       M3TableAtomsPerf::b13 @ 4 (43 bytes)   made not entrant
+   2852  731 %     4       M3TableAtomsPerf::b13 @ 4 (43 bytes)   made not entrant
+   2868  736 %     3       M3TableAtomsPerf::b14 @ 4 (40 bytes)
+   2869  737       3       M3TableAtomsPerf::b14 (40 bytes)
+   2877  738 %     4       M3TableAtomsPerf::b14 @ 4 (40 bytes)
+   2878  736 %     3       M3TableAtomsPerf::b14 @ 4 (40 bytes)   made not entrant
+   3072  738 %     4       M3TableAtomsPerf::b14 @ 4 (40 bytes)   made not entrant
+   3077  741 %     3       M3TableAtomsPerf::b15 @ 4 (43 bytes)
+   3078  742       3       M3TableAtomsPerf::b15 (43 bytes)
+   3080  743 %     4       M3TableAtomsPerf::b15 @ 4 (43 bytes)
+   3081  741 %     3       M3TableAtomsPerf::b15 @ 4 (43 bytes)   made not entrant
+   3119  743 %     4       M3TableAtomsPerf::b15 @ 4 (43 bytes)   made not entrant
+   3120  744       3       sun.swing.table.M3SparseSizes::lowerBound (18 bytes)
+   3126  747 %     3       M3TableAtomsPerf::b16 @ 4 (43 bytes)
+   3126  748       3       M3TableAtomsPerf::b16 (43 bytes)
+   3128  749 %     4       M3TableAtomsPerf::b16 @ 4 (43 bytes)
+   3130  747 %     3       M3TableAtomsPerf::b16 @ 4 (43 bytes)   made not entrant
+   3174  749 %     4       M3TableAtomsPerf::b16 @ 4 (43 bytes)   made not entrant
+   3174  750 %     4       M3TableAtomsPerf::b0 @ 4 (43 bytes)
+   3177  751       4       M3TableAtomsPerf::b0 (43 bytes)
+   3179  582       3       M3TableAtomsPerf::b0 (43 bytes)   made not entrant
+   3179  752 %     4       M3TableAtomsPerf::b1 @ 4 (40 bytes)
+   3181  753       4       M3TableAtomsPerf::b1 (40 bytes)
+   3184  587       3       M3TableAtomsPerf::b1 (40 bytes)   made not entrant
+   3184  754 %     4       M3TableAtomsPerf::b2 @ 4 (43 bytes)
+   3186  755       4       M3TableAtomsPerf::b2 (43 bytes)
+   3189  598       3       M3TableAtomsPerf::b2 (43 bytes)   made not entrant
+   3189  756 %     4       M3TableAtomsPerf::b3 @ 4 (40 bytes)
+   3191  757 %     4       M3TableAtomsPerf::b4 @ 4 (37 bytes)
+   3192  758       4       M3TableAtomsPerf::b4 (37 bytes)
+   3194  617       3       M3TableAtomsPerf::b4 (37 bytes)   made not entrant
+   3194  759 %     4       M3TableAtomsPerf::b5 @ 4 (44 bytes)
+   3196  760       4       M3TableAtomsPerf::b5 (44 bytes)
+   3197  625       3       M3TableAtomsPerf::b5 (44 bytes)   made not entrant
+   3212  761       3       sun.swing.table.M3SorterLanes::sortLane (190 bytes)
+   3388  776 %     4       M3TableAtomsPerf::b8 @ 4 (46 bytes)
+   3393  777       4       M3TableAtomsPerf::b8 (46 bytes)
+   3395  691       3       M3TableAtomsPerf::b8 (46 bytes)   made not entrant
+   3525  778 %     4       M3TableAtomsPerf::b9 @ 4 (43 bytes)
+   3527  779       4       M3TableAtomsPerf::b9 (43 bytes)
+   3529  700       3       M3TableAtomsPerf::b9 (43 bytes)   made not entrant
+   3578  780 %     4       M3TableAtomsPerf::b10 @ 4 (40 bytes)
+   3582  781       4       M3TableAtomsPerf::b10 (40 bytes)
+   3586  704       3       M3TableAtomsPerf::b10 (40 bytes)   made not entrant
+   3777  782 %     4       M3TableAtomsPerf::b11 @ 4 (43 bytes)
+   3780  783       4       M3TableAtomsPerf::b11 (43 bytes)
+   3782  713       3       M3TableAtomsPerf::b11 (43 bytes)   made not entrant
+   3837  784 %     4       M3TableAtomsPerf::b12 @ 4 (40 bytes)
+   3840  785       4       M3TableAtomsPerf::b12 (40 bytes)
+   3842  717       3       M3TableAtomsPerf::b12 (40 bytes)   made not entrant
+   3934  786 %     4       M3TableAtomsPerf::b13 @ 4 (43 bytes)
+   3938  787       4       M3TableAtomsPerf::b13 (43 bytes)
+   3941  730       3       M3TableAtomsPerf::b13 (43 bytes)   made not entrant
+   4000  788 %     4       M3TableAtomsPerf::b14 @ 4 (40 bytes)
+   4003  789       4       M3TableAtomsPerf::b14 (40 bytes)
+   4005  737       3       M3TableAtomsPerf::b14 (40 bytes)   made not entrant
+   4205  790 %     4       M3TableAtomsPerf::b15 @ 4 (43 bytes)
+   4207  791       4       M3TableAtomsPerf::b15 (43 bytes)
+   4208  742       3       M3TableAtomsPerf::b15 (43 bytes)   made not entrant
+   4254  792 %     4       M3TableAtomsPerf::b16 @ 4 (43 bytes)
+   4256  793       4       M3TableAtomsPerf::b16 (43 bytes)
+   4257  748       3       M3TableAtomsPerf::b16 (43 bytes)   made not entrant
+   4298  794       4       M3TableAtomsPerf::b3 (40 bytes)
+   4299  603       3       M3TableAtomsPerf::b3 (40 bytes)   made not entrant
+   6480  803 %     4       sun.swing.table.M3SorterLanes::sortLane @ 21 (190 bytes)
+   7682  806 %     4       sun.swing.table.M3SorterLanes::sortLane @ 121 (190 bytes)
+   7697  807       4       sun.swing.table.M3SorterLanes::sortLane (190 bytes)
+   7733  761       3       sun.swing.table.M3SorterLanes::sortLane (190 bytes)   made not entrant
