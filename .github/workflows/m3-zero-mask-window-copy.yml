@@ -46,10 +46,28 @@ jobs:
       - name: Strict Java and Java-only contract
         run: |
           set -euxo pipefail
-          mkdir -p proof/core proof/native proof/empty
-          find m3/collections/src/main/java -name '*.java' -print0 | sort -z | xargs -0 javac --release 21 -proc:none -Xlint:all,-module -Werror -d proof/core
-          javac --release 21 -proc:none -cp proof/core -d proof/core m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java
-          java -Xmx512m -Djava.library.path="$PWD/proof/empty" -cp proof/core com.m3.collections.M3IndexMaskCompactorSelfTest
+          mkdir -p proof/arrays proof/core proof/native proof/empty
+          # Source-build the exact named module required by module com.m3.collections.
+          # Preserve Java21 strict -Werror and both original JPMS descriptors.
+          find m3/arrays/src/main/java -name '*.java' | sort > proof/array-sources.txt
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            -d proof/arrays @proof/array-sources.txt
+          jar --create --file proof/m3-arrays.jar -C proof/arrays .
+          jar --describe-module --file proof/m3-arrays.jar | tee proof/arrays-module.txt
+          grep -q '^com.m3.arrays ' proof/arrays-module.txt
+          find m3/collections/src/main/java -name '*.java' | sort > proof/core-sources.txt
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            --module-path proof/m3-arrays.jar -d proof/core @proof/core-sources.txt
+          # Compile the original Java differential as a patched test class of
+          # com.m3.collections; do not erase module-info.java or use a fake stub.
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            --module-path "proof/core:proof/m3-arrays.jar" \
+            --patch-module com.m3.collections=m3/collections/src/test/java \
+            -d proof/core \
+            m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java
+          java -Xmx512m -Djava.library.path="$PWD/proof/empty" \
+            --module-path "proof/core:proof/m3-arrays.jar" \
+            --module com.m3.collections/com.m3.collections.M3IndexMaskCompactorSelfTest
       - name: Count state reads and reject original implementation
         run: |
           set -euxo pipefail
@@ -64,7 +82,10 @@ jobs:
         run: |
           set -euxo pipefail
           gcc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared -fsanitize=undefined -fno-sanitize-recover=all -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" m3/collections/src/main/native/collections/m3_index_mask_compactor.c -o proof/native/libm3_collections_mask.so
-          UBSAN_OPTIONS=halt_on_error=1 java -Xmx512m -Xcheck:jni -Djava.library.path="$PWD/proof/native" -cp proof/core com.m3.collections.M3IndexMaskCompactorSelfTest --native
+          UBSAN_OPTIONS=halt_on_error=1 java -Xmx512m -Xcheck:jni \
+            -Djava.library.path="$PWD/proof/native" \
+            --module-path "proof/core:proof/m3-arrays.jar" \
+            --module com.m3.collections/com.m3.collections.M3IndexMaskCompactorSelfTest --native
           python3 -I -S -B m3/collections/qualification/zero-mask-window-successor-20261031/verify_source_v2.py --product . --original-checkout old-zero-mask-20261017
           git diff --exit-code
       - name: Execute independently named Java and required-JNI JUnit atoms
