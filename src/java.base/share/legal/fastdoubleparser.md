@@ -13,7 +13,11 @@ Package ch.randelshofer.fastdoubleparser -> jdk.internal.math and type T -> M3T;
 Double.parseDouble / Float.parseFloat now call FloatingDecimal.readJavaFormatString (the JDK converter they fall back
 to), because java.base routes those methods through this code; M3FftMultiplier.squareFft squares the magnitude (the
 donor squared toByteArray() of a negative value, its two's complement; found by the per-atom JUnit test, unreachable
-from the parsers, which square only powers of ten). Nothing else was changed.
+from the parsers, which square only powers of ten); LITERAL_CONSTANTS v1 (no magic numbers): 488 literals in 8 of
+the 13 source files became 205 private static final constants named by role, each with the literal's own type and
+spelling and a one-line Javadoc giving the role, under one //FLLDCIM anchor comment in each of the 10 classes that
+declare them (nested classes included); javac folds the constants back, so the method bytecode is unchanged
+(m3/tooling/jdk-superset/number-parse/CONSTANTS.tsv, BYTECODE_IDENTITY.tsv). Nothing else was changed.
 
 ### LICENSE
 
