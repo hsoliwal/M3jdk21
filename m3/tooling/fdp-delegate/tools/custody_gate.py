@@ -13,7 +13,9 @@
 4. the central vendored-tree verifier's per-module rule (.m3/task-crates/dependency-source-inline-20261010/
    verify_crate.py: every PROVENANCE pin byte-identical, pom carries the -m3-source-1 version) for those donors;
 5. tamper probes on a scratch copy: each mutation must make verify_source.py refuse with its specific reason.
-Writes nothing into the repository; prints one JSON record and exits 1 unless every check passes.
+The record also carries the repository HEAD and whether the worktree's donor, pack and recipe equal it
+(GIT_NO_LAZY_FETCH=1). Writes nothing into the repository; prints one JSON record and exits 1 unless every check
+passes.
 """
 from __future__ import annotations
 
@@ -21,6 +23,7 @@ import argparse
 import hashlib
 import importlib.util
 import json
+import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -39,10 +42,17 @@ RETAINED = "upstream-excluded/ch/randelshofer/fastdoubleparser/JavaDoubleParser.
 STRAY = "src/main/java/ch/randelshofer/fastdoubleparser/M3Stray.java"
 POM_VERSION = "<version>{}</version>"
 TAMPER_NOTE = b"\n// tamper probe\n"
+GIT_ENV = {"GIT_NO_LAZY_FETCH": "1"}
 
 
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def git(*args: str) -> tuple[int, str]:
+    result = subprocess.run(["git", "-C", str(REPO), *args], capture_output=True, text=True, check=False,
+                            env={**os.environ, **GIT_ENV})
+    return result.returncode, result.stdout.strip()
 
 
 def run(args: list[object]) -> tuple[int, str]:
@@ -157,9 +167,12 @@ def main(argv: list[str] | None = None) -> int:
     args.out.mkdir(parents=True, exist_ok=True)
     verify_code, verify = run([sys.executable, "-I", REPO / DONOR_REL / "verify_source.py"])
     check_code, check = run([sys.executable, "-I", REPO / TOOL_REL, "--check"])
+    head = git("rev-parse", "HEAD")[1]
+    matches_head = git("diff", "--quiet", "HEAD", "--", DONOR_REL, PACK_REL, TOOL_REL)[0] == 0
     record = {"gate": "d_custody", "verify_source": {"exit": verify_code, "receipt": verify},
               "recipe_fixed_point": {"exit": check_code, "result": check},
-              "jackson_pack_lock": lock_check(), "central_crate_rule": crate_rule(), "tamper_probes": tamper(args.out)}
+              "jackson_pack_lock": lock_check(), "central_crate_rule": crate_rule(), "tamper_probes": tamper(args.out),
+              "repository_head": head, "worktree_matches_head": matches_head}
     passed = (verify_code == 0 and check_code == 0
               and all(row["ok"] for key in ("jackson_pack_lock", "central_crate_rule", "tamper_probes")
                       for row in record[key]))
