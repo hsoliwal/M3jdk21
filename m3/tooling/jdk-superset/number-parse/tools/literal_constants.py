@@ -12,6 +12,9 @@
                                             constants_out gets one row per replaced occurrence
   check <src_dir> <names.tsv> <file>...     apply without writing; prints the edit count (0 = fixed point)
   A file argument 'F.java:m1,m2' limits the run to those members of F (an edited region of a larger file).
+  v1.1: apply and check take an optional first file argument --kinds=number,char that limits HOIST to those literal
+  kinds (test and gate sources name their numbers and chars; their message strings stay inline). The TSVs this tool
+  writes start with the Synexia SPDX header ('#' lines, which every reader of these ledgers skips).
 
 Lexing is token-exact (SFA): comments, strings, text blocks and chars are whole tokens; only literal tokens are replaced,
 everything else is copied byte for byte. A unary minus belongs to its literal (-1074 is one value).
@@ -54,6 +57,10 @@ UNARY_AFTER = {"(", "[", ",", "=", "return", "case", "?", ":", "{", ";", "->", "
                "==", "!=", "<", ">", "<=", ">=", "+", "-", "*", "/", "%", "&", "|", "^", "<<", ">>", ">>>", "~",
                "+=", "-=", "*=", "/=", "%=", "&=", "|=", "^=", "<<=", ">>=", ">>>="}
 COLS = ("file", "line", "col", "kind", "type", "literal", "value", "class", "member", "disposition", "before", "after")
+TSV_HEADER = ("# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0\n"
+              "# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others\n")
+KINDS_OPTION = "--kinds="
+KINDS_SEPARATOR = ","
 
 
 class Tok:
@@ -343,13 +350,14 @@ def class_bodies(toks):
     return opens
 
 
-def plan(path, rel, names, used_idents, members=None):
-    """(edits, declarations by class, ledger rows, problems) for one file; nothing is written."""
+def plan(path, rel, names, used_idents, members=None, kinds=None):
+    """(edits, declarations by class, ledger rows, problems) for one file; nothing is written.
+    kinds: None for every HOIST literal, else the literal kinds (number, char, string, text) to hoist."""
     rows = literal_rows(path, rel, members)
     existing = field_decls(rows[0]["_toks"]) if rows else {}
     decls, edits, ledger, problems = {}, [], [], []
     for r in rows:
-        if r["disposition"] != "HOIST":
+        if r["disposition"] != "HOIST" or (kinds is not None and r["kind"] not in kinds):
             continue
         hit = ledger_name(names, r)
         if not hit:
@@ -430,6 +438,7 @@ def main(argv):
     cmd, src_dir, aux, rest = argv[1], argv[2], argv[3], argv[4:]
     if cmd == "inventory":
         with open(aux, "w", encoding="utf-8", newline="\n") as f:
+            f.write(TSV_HEADER)
             f.write("\t".join(COLS) + "\n")
             for rel, members in file_args(rest):
                 tables = {}
@@ -446,9 +455,11 @@ def main(argv):
                     r = dict(r, literal="<%d elements>" % r["_count"], value="", before="", after="")
                     f.write("\t".join(str(r[c]) for c in COLS) + "\n")
         return 0
-    out_ledger = None
+    out_ledger, kinds = None, None
     if cmd == "apply":
         out_ledger, rest = rest[0], rest[1:]
+    if rest and rest[0].startswith(KINDS_OPTION):
+        kinds, rest = set(rest[0][len(KINDS_OPTION):].split(KINDS_SEPARATOR)), rest[1:]
     names = load_ledger(aux)
     used = set()
     for rel, _ in file_args(rest):
@@ -456,7 +467,7 @@ def main(argv):
                  if t.kind == "ident"}
     results, problems, ledger, total = {}, [], [], 0
     for rel, members in file_args(rest):
-        rows, edits, decls, rows_ledger, bad = plan(os.path.join(src_dir, rel), rel, names, used, members)
+        rows, edits, decls, rows_ledger, bad = plan(os.path.join(src_dir, rel), rel, names, used, members, kinds)
         problems += bad
         ledger += rows_ledger
         if edits and not bad:
@@ -470,6 +481,7 @@ def main(argv):
             with open(os.path.join(src_dir, rel), "w", encoding="utf-8", newline="") as f:
                 f.write(text)
         with open(out_ledger, "w", encoding="utf-8", newline="\n") as f:
+            f.write(TSV_HEADER)
             f.write("\t".join(LEDGER_COLS) + "\n")
             for row in ledger:
                 f.write("\t".join(str(x) for x in row) + "\n")
