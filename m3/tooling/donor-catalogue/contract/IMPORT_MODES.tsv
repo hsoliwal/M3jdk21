@@ -1,0 +1,7 @@
+mode	direct_source_allowed	requires_compatible_lineage	requires_isolation	description
+ADAPT	true	true	false	Transform compatible source behind an unchanged target contract
+ISOLATE	true	false	true	Retain differently licensed source only behind an explicit independent distribution boundary
+ORACLE_ONLY	false	false	false	Use behavior tests documentation or benchmarks without importing implementation expression
+PATCH	true	true	false	Apply an exact compatible-lineage source delta after per-file review
+REJECT	false	false	false	Candidate is inadmissible
+SPEC_REIMPLEMENT	false	false	false	Write an implementation-independent specification then implement without copying expression
