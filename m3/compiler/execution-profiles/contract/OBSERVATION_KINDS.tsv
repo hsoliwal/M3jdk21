@@ -1,0 +1,11 @@
+kind	portable_meaning	consumer_limit
+CALL_EDGE	A producer observed one canonical caller to callee edge	Does not prove dispatch closure or unobserved-edge absence
+CLASS_INITIALIZE	A producer observed initialization of one canonical JVM class	Does not prove initialization order outside the bound workload
+CLASS_LOAD	A producer observed loading of one canonical JVM class	Does not prove all load paths or future dynamic loading
+COMPILED_METHOD	A producer observed compilation of one canonical JVM method	Does not prescribe tier threshold compiler or generated code
+DYNAMIC_PROXY_INTERFACE	A producer observed an interface participating in dynamic proxy creation	Does not close generated proxy shape or invocation behavior
+NATIVE_LIBRARY_LOAD	A producer observed a native library load identity	Does not prove ABI compatibility safety or complete native reachability
+REFLECTIVE_MEMBER	A producer observed reflective access to one canonical member	Does not prove reflection closure or authorize member removal
+RESOURCE_ACCESS	A producer observed access to one canonical resource identity	Does not prove all resource lookups or packaging closure
+SERVICE_PROVIDER	A producer observed one service provider identity	Does not prove provider-set closure or initialization behavior
+STARTUP_MARKER	A producer recorded a canonical startup boundary marker	Does not define universal startup completion or performance
