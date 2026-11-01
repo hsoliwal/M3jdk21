@@ -22,6 +22,7 @@ jobs:
         with:
           fetch-depth: 1
           sparse-checkout: |
+            m3/arrays
             m3/collections
             .github/workflows
       - uses: actions/setup-java@v4
@@ -37,7 +38,12 @@ jobs:
           OUT="$RUNNER_TEMP/m3-fifo-index-wrap"
           mkdir -p "$OUT/core" "$OUT/classes" "$OUT/native"
           curl --fail --location --silent --show-error             --output "$OUT/commons-collections4-4.5.0.jar"             https://repo.maven.apache.org/maven2/org/apache/commons/commons-collections4/4.5.0/commons-collections4-4.5.0.jar
+          # The collection module requires the arrays module: compile it first, then resolve it from the module path.
+          mkdir -p "$OUT/arrays"
+          find m3/arrays/src/main/java -name '*.java' | sort > "$OUT/arrays.args"
+          javac --release 21 -g -proc:none -Xlint:all,-module -Werror -d "$OUT/arrays" @"$OUT/arrays.args"
           find m3/collections/src/main/java -name '*.java' | sort > "$OUT/core.args"
+          printf -- '--module-path\n%s\n' "$OUT/arrays" >> "$OUT/core.args"
           javac --release 21 -g -proc:none -Xlint:all,-module -Werror             -d "$OUT/core" @"$OUT/core.args"
           javac --release 21 -g -proc:none -Xlint:all,-module -Werror             -cp "$OUT/core:$OUT/commons-collections4-4.5.0.jar"             -d "$OUT/classes"             m3/collections/implementations/apache-circular-fifo/src/main/java/com/m3/collections/apache/M3CircularFifoQueue.java             m3/collections/qualification/owned-apache-circular-fifo-20261018/CircularFifoProtocolProof.java             m3/collections/qualification/owned-apache-circular-fifo-20261018/CircularFifoMutationProbe.java             m3/collections/qualification/owned-apache-circular-fifo-index-wrap-20261018/CircularFifoIndexWrapProof.java
           gcc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux"             m3/collections/src/main/native/collections/m3_index_mask_compactor.c             -o "$OUT/native/libm3_collections_mask.so"

@@ -43,7 +43,9 @@ jobs:
           cache: maven
       - name: Verify source-sealed transformation recipe
         run: mvn -B -ntp -f m3/collections/qualification/m3-entry-facade-cache-20261018/recipe/pom.xml verify
+      - name: Build m3/arrays and its JNI library, which the collection module requires
+        run: mvn -B -ntp -f m3/arrays/pom.xml -Pnative-linux -DskipTests install
       - name: Test owning M3 collection module
-        run: mvn -B -ntp -f m3/collections/pom.xml test
+        run: mvn -B -ntp -f m3/collections/pom.xml "-Dm3.arrays.native.path=$GITHUB_WORKSPACE/m3/arrays/target/native/libm3_arrays.so" test
       - name: Verify generated source postimages
         run: java -cp m3/collections/qualification/m3-entry-facade-cache-20261018/recipe/target/classes com.synexia.m3.M3EntryFacadeCacheRecipe --check .
