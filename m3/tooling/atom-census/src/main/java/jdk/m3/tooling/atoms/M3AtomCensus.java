@@ -269,6 +269,7 @@ public final class M3AtomCensus {
         private final List<Rule> rules;
         private final List<Atom> atoms;
         private final Deque<String> types = new ArrayDeque<>();
+        private final Deque<String> semanticTypes = new ArrayDeque<>();
         private final List<SemanticAtom> semantic;
         private final Map<String, Integer> occurrences = new HashMap<>();
         private int anonymousIndex;
@@ -299,7 +300,7 @@ public final class M3AtomCensus {
             if (start < 0 || end <= start || end > text.length()) {
                 throw new IllegalArgumentException("unbound semantic source span: " + path + ":" + name);
             }
-            String owner = String.join(".", types);
+            String owner = String.join(".", semanticTypes);
             String label = name.replace('\t', ' ').replace('\n', ' ');
             String spec = signature.replace('\t', ' ').replace('\n', ' ');
             String key = owner + '\0' + kind.name() + '\0' + label + '\0' + spec;
@@ -316,10 +317,14 @@ public final class M3AtomCensus {
         @Override
         public Void visitClass(ClassTree tree, Void unused) {
             String name = tree.getSimpleName().toString();
-            if (name.isEmpty()) name = "<anonymous" + (++anonymousIndex) + ">";
+            String semanticName = name.isEmpty() ? "<anonymous" + (++anonymousIndex) + ">" : name;
+            // Existing static-method census deliberately uses javac's original empty
+            // anonymous name. A separate semantic stack retains its opt-in identity.
             types.addLast(name);
-            add(M3AtomKind.DECLARATION_ONLY, name, tree.getKind().name(), tree);
+            semanticTypes.addLast(semanticName);
+            add(M3AtomKind.DECLARATION_ONLY, semanticName, tree.getKind().name(), tree);
             super.visitClass(tree, unused);
+            semanticTypes.removeLast();
             types.removeLast();
             return null;
         }

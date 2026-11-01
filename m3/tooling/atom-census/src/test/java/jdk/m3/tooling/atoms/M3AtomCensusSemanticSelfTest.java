@@ -121,6 +121,35 @@ public final class M3AtomCensusSemanticSelfTest {
                     temp.resolve("linked-out").toString(), linkedRoot.toString()}), "symlinked Java"),
                     "symlinked input refused");
             check(!Files.exists(temp.resolve("linked-out")), "symlink error must not publish output");
+
+            // A Java21 anonymous class can declare a static method. Its javac
+            // simple name is empty; legacy output must retain that exact owner.
+            Path anonymous = Files.createDirectory(temp.resolve("anonymous"));
+            Files.writeString(anonymous.resolve("Anonymous.java"), """
+                    package fixture;
+                    class Anonymous {
+                        Object value = new Object() {
+                            static int hash(Object key) { return key == null ? 0 : key.hashCode(); }
+                        };
+                    }
+                    """, StandardCharsets.UTF_8);
+            Path anonLegacy = temp.resolve("anon-legacy");
+            Path anonSemantic = temp.resolve("anon-semantic");
+            M3AtomCensus.main(new String[]{"fixture", rules.toString(),
+                    anonLegacy.toString(), anonymous.toString()});
+            M3AtomCensus.main(new String[]{"--semantic", "fixture", rules.toString(),
+                    anonSemantic.toString(), anonymous.toString()});
+            check(Files.mismatch(anonLegacy.resolve("ATOM_CENSUS_fixture.tsv"),
+                    anonSemantic.resolve("ATOM_CENSUS_fixture.tsv")) == -1,
+                    "anonymous static method legacy census unchanged");
+            String oldOwner = Files.readString(anonLegacy.resolve("ATOM_CENSUS_fixture.tsv"),
+                    StandardCharsets.UTF_8);
+            check(oldOwner.contains("\tAnonymous.\thash\t"),
+                    "original javac empty anonymous owner retained");
+            String newOwner = Files.readString(anonSemantic.resolve("SEMANTIC_CENSUS_fixture.tsv"),
+                    StandardCharsets.UTF_8);
+            check(newOwner.contains("Anonymous.<anonymous1>"),
+                    "distinct semantic owner includes deterministic anonymous ordinal");
             return checks;
         } finally {
             try (var walk = Files.walk(temp)) {
