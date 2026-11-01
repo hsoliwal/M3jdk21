@@ -1,0 +1,5 @@
+owner	path	base_commit	git_blob_sha	retained_responsibility	new_leaf_action
+m3-source-signals	m3/compiler/source-signals/README.md	f21ff07726099341f4f86b6a317e5a76a39d1dd2	9fcd48b0d0c5f0b694954d7c6cbbbf8b646417f1	Attributed source-time compiler facts	NO_CHANGE
+hotspot-cds	src/hotspot/share/cds/archiveBuilder.hpp	f21ff07726099341f4f86b6a317e5a76a39d1dd2	1440ea577ecef0fddada3beb9608ede819457da1	CDS static and dynamic archive construction	NO_CHANGE
+hotspot-compiler	src/hotspot/share/compiler/compileBroker.hpp	f21ff07726099341f4f86b6a317e5a76a39d1dd2	03508b8e361ecb6286c77d95ba5abef2a7532b68	Runtime compiler queues services and policy integration	NO_CHANGE
+m3-execution-profiles	m3/compiler/execution-profiles/**	f21ff07726099341f4f86b6a317e5a76a39d1dd2	ABSENT	Portable execution-profile artifact validation and deterministic merge	CREATE_ADDITIVE
