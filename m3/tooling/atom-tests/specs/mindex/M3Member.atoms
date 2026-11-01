@@ -1,0 +1,133 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+// CLASS_ONLY atoms of M3Member.java (declared-member view over one frozen M3CI row).
+// Oracle: java.lang.reflect members of the ReflectOracle snapshot (every member row).
+#class M3MemberAtomTest
+#summary Per-atom contracts of jdk.internal.mindex.M3Member against java.lang.reflect members
+#build ReflectOracle
+#import jdk.internal.mindex.M3CI jdk.internal.mindex.M3Member jdk.internal.mindex.M3MemberFlags java.util.TreeSet
+#helper <<<
+    private static final M3CI CI = ReflectOracle.snapshot();
+    private static final Class<?>[] CLASSES = ReflectOracle.classes(CI);
+    private static final int[] FLAGS = {M3MemberFlags.SYNTHETIC, M3MemberFlags.BRIDGE, M3MemberFlags.VARARGS,
+            M3MemberFlags.DEFAULT_METHOD, M3MemberFlags.ENUM_CONSTANT, M3MemberFlags.RECORD_COMPONENT};
+
+    private static int all(ReflectOracle.MemberCheck check) throws Throwable {
+        int seen = ReflectOracle.forEachMember(CI, null, check);
+        assertEquals(CI.memberSize(), seen, "every member row");
+        return seen;
+    }
+>>>
+
+@atom M3Member.M3Member 1 SCENARIO package-private-constructor
+setup <<<
+MethodHandle ctor = M3AtomKit.findConstructor(M3Member.class, "M3Member", MethodType.methodType(void.class, M3CI.class, int.class));
+>>>
+check <<<
+assertEquals(CI.memberAt(0), (M3Member) ctor.invoke(CI, 0));
+M3AtomKit.expect(IndexOutOfBoundsException.class, () -> ctor.invoke(CI, CI.memberSize()));
+M3AtomKit.expectMessage(NullPointerException.class, "owner", () -> ctor.invoke((M3CI) null, 0));
+>>>
+
+@atom M3Member.owner 1 SCENARIO identity
+check <<<
+all((member, d) -> assertSame(CI, CI.memberAt(member).owner()));
+>>>
+
+@atom M3Member.row 1 SCENARIO identity
+check <<<
+for (int m = 0; m < CI.memberSize(); m++) assertEquals(m, CI.memberAt(m).row());
+>>>
+
+@atom M3Member.declaringClass 1 SCENARIO Member.getDeclaringClass
+check <<<
+all((member, d) -> {
+    Class<?> declarer = d.element() instanceof java.lang.reflect.Member m ? m.getDeclaringClass()
+            : ((java.lang.reflect.RecordComponent) d.element()).getDeclaringRecord();
+    assertSame(declarer, CLASSES[CI.memberAt(member).declaringClass().row()], d.toString());
+});
+>>>
+
+@atom M3Member.modifiers 1 SCENARIO Member.getModifiers
+check <<<
+all((member, d) -> assertEquals(ReflectOracle.modifiers(d.element()), CI.memberAt(member).modifiers(), d.toString()));
+>>>
+
+@atom M3Member.flags 1 SCENARIO M3MemberFlags.of(reflective)
+check <<<
+all((member, d) -> assertEquals(ReflectOracle.memberFlags(d.element()), CI.memberAt(member).flags(), d.toString()));
+>>>
+
+@atom M3Member.hasFlag 1 SCENARIO flag-membership
+check <<<
+all((member, d) -> {
+    int expected = ReflectOracle.memberFlags(d.element());
+    for (int flag : FLAGS) assertEquals((expected & flag) != 0, CI.memberAt(member).hasFlag(flag), d + " flag " + flag);
+});
+>>>
+
+@atom M3Member.annotationCount 1 SCENARIO getDeclaredAnnotations
+check <<<
+all((member, d) -> assertEquals(ReflectOracle.annotationNames(d.element()).size(), CI.memberAt(member).annotationCount(), d.toString()));
+>>>
+
+@atom M3Member.annotationTypeNameAt 1 SCENARIO getDeclaredAnnotations(type-names)
+check <<<
+all((member, d) -> {
+    TreeSet<String> got = new TreeSet<>();
+    for (int k = 0; k < CI.memberAt(member).annotationCount(); k++) got.add(CI.memberAt(member).annotationTypeNameAt(k));
+    assertEquals(ReflectOracle.annotationNames(d.element()), got, d.toString());
+});
+>>>
+
+@atom M3Member.exceptionCount 1 SCENARIO Executable.getExceptionTypes
+check <<<
+all((member, d) -> assertEquals(ReflectOracle.exceptionDescriptors(d.element()).size(), CI.memberAt(member).exceptionCount(), d.toString()));
+>>>
+
+@atom M3Member.exceptionTypeDescriptorAt 1 SCENARIO Class.descriptorString(exceptions)
+check <<<
+all((member, d) -> {
+    var expected = ReflectOracle.exceptionDescriptors(d.element());
+    for (int k = 0; k < expected.size(); k++) assertEquals(expected.get(k), CI.memberAt(member).exceptionTypeDescriptorAt(k));
+});
+>>>
+
+@atom M3Member.structuralHash64 1 SCENARIO delegates-to-M3CI
+check <<<
+for (int m = 0; m < CI.memberSize(); m++) assertEquals(CI.memberStructuralHash64(m), CI.memberAt(m).structuralHash64());
+>>>
+
+@atom M3Member.tryReflectiveElement 1 SCENARIO round-trip-to-reflection
+check <<<
+all((member, d) -> {
+    var element = CI.memberAt(member).tryReflectiveElement().orElseThrow();
+    if (d.element() instanceof java.lang.reflect.RecordComponent rc) {
+        assertEquals(rc.getAccessor(), ((java.lang.reflect.RecordComponent) element).getAccessor(), d.toString());
+    } else {
+        assertEquals(d.element(), element, d.toString());
+    }
+});
+M3CI compact = M3CI.compile(ReflectOracle.ROOTS, M3CI.Options.compact(), null);
+assertTrue(compact.memberAt(0).tryReflectiveElement().isEmpty(), "compact snapshots keep no JVM boundary");
+>>>
+
+@atom M3Member.toReflectiveElement 1 SCENARIO round-trip-or-IllegalStateException
+check <<<
+all((member, d) -> assertNotNull(CI.memberAt(member).toReflectiveElement()));
+M3CI compact = M3CI.compile(ReflectOracle.ROOTS, M3CI.Options.compact(), null);
+M3AtomKit.expectMessage(IllegalStateException.class, "no longer live", () -> compact.memberAt(0).toReflectiveElement());
+>>>
+
+@atom M3Member.hashCode 1 SCENARIO equals-consistent
+setup <<<
+M3CI other = ReflectOracle.snapshot();
+>>>
+check <<<
+for (int m = 0; m < CI.memberSize(); m++) {
+    assertEquals(CI.memberAt(m).hashCode(), CI.memberAt(m).hashCode());
+    assertEquals(31 * System.identityHashCode(CI) + m, CI.memberAt(m).hashCode());
+    assertTrue(CI.memberAt(m).equals(CI.memberAt(m)));
+    assertFalse(CI.memberAt(m).equals(other.memberAt(m)), "views of different snapshots differ");
+}
+>>>

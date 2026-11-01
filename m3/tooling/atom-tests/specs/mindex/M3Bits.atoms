@@ -1,0 +1,52 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+// Atoms of src/java.base/share/classes/jdk/internal/mindex/M3Bits.java (package-private bit-address arithmetic).
+// Oracle: java.util.BitSet word geometry for indices it can hold, exact long arithmetic above that.
+#class M3BitsAtomTest
+#summary Per-atom contracts of jdk.internal.mindex.M3Bits against java.util.BitSet word geometry
+#import java.util.BitSet
+#helper <<<
+    /** Largest bit index whose java.util.BitSet oracle is materialized (4096 words). */
+    private static final int BITSET_LIMIT = 1 << 18;
+
+    private static BitSet bitSetWith(int bit) {
+        BitSet bits = new BitSet();
+        bits.set(bit);
+        return bits;
+    }
+>>>
+
+@atom M3Bits.M3Bits 1 UTILITY_CTOR java.lang.reflect.Modifier
+type = M3Bits
+
+@atom M3Bits.wordIndex 1 PURE_DIFF java.util.BitSet+Math.floorDiv
+type = M3Bits
+mtype = MethodType.methodType(int.class, int.class)
+in = int
+out = int
+inputs = M3AtomKit.intDomain("wordIndex", 0, Integer.MAX_VALUE)
+oracle = x < BITSET_LIMIT ? bitSetWith(x).toLongArray().length - 1 : Math.floorDiv(x, Long.SIZE)
+
+@atom M3Bits.bitMask 1 PURE_DIFF java.util.BitSet+Long.rotateLeft
+type = M3Bits
+mtype = MethodType.methodType(long.class, int.class)
+in = int
+out = long
+inputs = M3AtomKit.intDomain("bitMask", 0, Integer.MAX_VALUE)
+oracle = x < BITSET_LIMIT ? bitSetWith(x).toLongArray()[x / Long.SIZE] : Long.rotateLeft(1L, Math.floorMod(x, Long.SIZE))
+
+@atom M3Bits.wordsForBits 1 PURE_DIFF java.util.BitSet.size+Math.ceilDiv
+type = M3Bits
+mtype = MethodType.methodType(int.class, int.class)
+in = int
+out = int
+inputs = M3AtomKit.intDomain("wordsForBits", 0, Integer.MAX_VALUE)
+oracle = x < BITSET_LIMIT ? new BitSet(x).size() / Long.SIZE : (int) Math.ceilDiv((long) x, Long.SIZE)
+
+@atom M3Bits.bitCapacity 1 PURE_DIFF java.util.BitSet.size+Math.multiplyExact
+type = M3Bits
+mtype = MethodType.methodType(int.class, int.class)
+in = int
+out = int
+inputs = M3AtomKit.intDomain("bitCapacity", 0, Integer.MAX_VALUE / Long.SIZE)
+oracle = x < BITSET_LIMIT / Long.SIZE ? new BitSet(x * Long.SIZE).size() : Math.multiplyExact(x, Long.SIZE)

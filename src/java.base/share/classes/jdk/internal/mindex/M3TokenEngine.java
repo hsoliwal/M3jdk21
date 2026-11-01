@@ -201,8 +201,11 @@ final class M3TokenEngine {
 
     private StateSet alternative(int node, int position, int[] registers) {
         StateSet out = states();
+        // Callers may pass the shared scratch lane; the first branch rewrites it while evaluating
+        // its groups, so the second branch starts from a copy of the incoming captures.
+        int[] incoming = registers.clone();
         out.addAll(eval(pattern.nodeX(node), position, registers));
-        out.addAll(eval(pattern.nodeY(node), position, registers));
+        out.addAll(eval(pattern.nodeY(node), position, incoming));
         return out;
     }
 
