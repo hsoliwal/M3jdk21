@@ -49,8 +49,30 @@ final class SorterScript {
     /** The stock cutoff: more than a tenth of the view's rows changed sorts everything. */
     static final int CUTOFF_DIVISOR = 10;
     static final int[] LANE_SIZES = {0, 1, 2, 3, 31, 32, 33, 64, 65, 100, 257};
-    static final int SHAPES = 6;
+    //FLLDCIM: MRL - named filter modulus (viewport-swing RECIPE_MEMORY 12)
+    /** The sorted-run filter drops every key divisible by this. */
+    static final int FILTER_MODULUS = 3;
     static final int TRIALS = 40;
+
+    //FLLDCIM: MRL - op, choice and shape enums replace switch case numbers (viewport-swing RECIPE_MEMORY 12)
+    /** The script operations; a {@link Mix} weighs them in this order. */
+    enum Op { KEYS, FILTER, INSERT, DELETE, UPDATE, STRUCTURE, QUERY }
+
+    static final Op[] OPS = Op.values();
+
+    /** The sort keys {@code randomKeys} draws. */
+    enum KeysChoice { NONE, KEY_ASCENDING, KEY_DESCENDING, KEY_UNSORTED, KEY_ASCENDING_ID_DESCENDING, ID_DESCENDING,
+        KEY_DESCENDING_ID_UNSORTED }
+
+    static final KeysChoice[] KEYS_CHOICES = KeysChoice.values();
+
+    /** The row filters {@code randomFilter} draws. */
+    enum FilterChoice { NONE, EVEN, BELOW_PIVOT, NOT_PIVOT, NOTHING, EVERYTHING }
+
+    static final FilterChoice[] FILTER_CHOICES = FilterChoice.values();
+
+    /** Lane shapes that TimSort-like sorts treat differently. */
+    enum LaneShape { IDENTITY, REVERSED, SHUFFLED, REVERSED_RUNS, HALF_SORTED, PAIRS_SWAPPED }
 
     enum Mix {
         KEYS(6, 1, 1, 1, 1, 0, 0), FILTER(2, 6, 1, 1, 1, 0, 0), INSERT(1, 1, 7, 0, 0, 0, 0), DELETE(1, 1, 0, 7, 0, 0, 0),
@@ -282,18 +304,18 @@ final class SorterScript {
     // ---- script ---------------------------------------------------------------------------------------------
 
     List<RowSorter.SortKey> randomKeys() {
-        switch (rnd.nextInt(7)) {
-            case 0:
+        switch (KEYS_CHOICES[rnd.nextInt(KEYS_CHOICES.length)]) {
+            case NONE:
                 return List.of();
-            case 1:
+            case KEY_ASCENDING:
                 return List.of(new RowSorter.SortKey(KEY, SortOrder.ASCENDING));
-            case 2:
+            case KEY_DESCENDING:
                 return List.of(new RowSorter.SortKey(KEY, SortOrder.DESCENDING));
-            case 3:
+            case KEY_UNSORTED:
                 return List.of(new RowSorter.SortKey(KEY, SortOrder.UNSORTED));
-            case 4:
+            case KEY_ASCENDING_ID_DESCENDING:
                 return List.of(new RowSorter.SortKey(KEY, SortOrder.ASCENDING), new RowSorter.SortKey(ID, SortOrder.DESCENDING));
-            case 5:
+            case ID_DESCENDING:
                 return List.of(new RowSorter.SortKey(ID, SortOrder.DESCENDING));
             default:
                 return List.of(new RowSorter.SortKey(KEY, SortOrder.DESCENDING), new RowSorter.SortKey(ID, SortOrder.UNSORTED));
@@ -301,18 +323,18 @@ final class SorterScript {
     }
 
     IntPredicate randomFilter() {
-        int pick = rnd.nextInt(6);
+        FilterChoice pick = FILTER_CHOICES[rnd.nextInt(FILTER_CHOICES.length)];
         int pivot = rnd.nextInt(KEY_RANGE);
         switch (pick) {
-            case 0:
+            case NONE:
                 return null;
-            case 1:
+            case EVEN:
                 return k -> k % 2 == 0;
-            case 2:
+            case BELOW_PIVOT:
                 return k -> k < pivot;
-            case 3:
+            case NOT_PIVOT:
                 return k -> k != pivot;
-            case 4:
+            case NOTHING:
                 return k -> false;
             default:
                 return k -> true;
@@ -452,13 +474,13 @@ final class SorterScript {
                 op -= mix.weights[k++];
             }
             boolean bulk = mix == Mix.BULK && rnd.nextBoolean();
-            switch (k) {
-                case 0 -> keys();
-                case 1 -> filter();
-                case 2 -> insert(bulk);
-                case 3 -> delete(bulk);
-                case 4 -> update(bulk);
-                case 5 -> structure();
+            switch (OPS[k]) {
+                case KEYS -> keys();
+                case FILTER -> filter();
+                case INSERT -> insert(bulk);
+                case DELETE -> delete(bulk);
+                case UPDATE -> update(bulk);
+                case STRUCTURE -> structure();
                 default -> query();
             }
         }
@@ -470,7 +492,7 @@ final class SorterScript {
         stock.setSortKeys(k);
         host.setKeys(k);
         if (filtered) {
-            IntPredicate p = key -> key % 3 != 0;
+            IntPredicate p = key -> key % FILTER_MODULUS != 0;
             stock.setRowFilter(stockFilter(p));
             host.filter = p;
             host.sort();
@@ -482,22 +504,22 @@ final class SorterScript {
     // ---- sorting an int lane with the host's order ---------------------------------------------------
 
     /** A lane of model indices in one of the shapes TimSort-like sorts treat differently. */
-    int[] laneShape(int n, int shape) {
+    int[] laneShape(int n, LaneShape shape) {
         int[] a = new int[n];
         for (int i = 0; i < n; i++) {
             a[i] = i;
         }
         switch (shape) {
-            case 0 -> {
+            case IDENTITY -> {
             }
-            case 1 -> reverse(a, 0, n);
-            case 2 -> shuffle(a);
-            case 3 -> {
+            case REVERSED -> reverse(a, 0, n);
+            case SHUFFLED -> shuffle(a);
+            case REVERSED_RUNS -> {
                 for (int lo = 0; lo < n; lo += MAX_RUN * MAX_RUN) {
                     reverse(a, lo, Math.min(n, lo + MAX_RUN * MAX_RUN));
                 }
             }
-            case 4 -> {
+            case HALF_SORTED -> {
                 shuffle(a);
                 Arrays.sort(a, 0, n / 2);
             }
@@ -558,8 +580,8 @@ final class SorterScript {
 
     void sortLaneContract() {
         for (int n : LANE_SIZES) {
-            for (int shape = 0; shape < SHAPES; shape++) {
-                TableHost h = laneHost(n, shape % 2 == 1);
+            for (LaneShape shape : LaneShape.values()) {
+                TableHost h = laneHost(n, shape.ordinal() % 2 == 1);
                 int extra = MAX_RUN;
                 int[] a = Arrays.copyOf(laneShape(n, shape), n + extra);
                 for (int i = n; i < n + extra; i++) {
@@ -580,7 +602,10 @@ final class SorterScript {
     void runEndContract() {
         MethodHandle runEnd = AtomSupport.virtual(M3SorterLanes.class, "runEnd", int.class, int[].class, int.class, int.class);
         for (int n : LANE_SIZES) {
-            for (int shape = 0; shape < SHAPES && n > 0; shape++) {
+            if (n == 0) {
+                continue;
+            }
+            for (LaneShape shape : LaneShape.values()) {
                 TableHost h = laneHost(n, false);
                 int[] a = laneShape(n, shape);
                 int lo = rnd.nextInt(n);
@@ -611,7 +636,7 @@ final class SorterScript {
         for (int trial = 0; trial < TRIALS; trial++) {
             int n = 2 + rnd.nextInt(MAX_ROWS);
             TableHost h = laneHost(n, rnd.nextBoolean());
-            int[] a = laneShape(n, 2);
+            int[] a = laneShape(n, LaneShape.SHUFFLED);
             int lo = rnd.nextInt(n - 1);
             int hi = lo + 1 + rnd.nextInt(n - lo - 1) + 1;
             hi = Math.min(hi, n);
@@ -636,7 +661,7 @@ final class SorterScript {
         for (int trial = 0; trial < TRIALS; trial++) {
             int n = 2 + rnd.nextInt(MAX_ROWS);
             TableHost h = laneHost(n, rnd.nextBoolean());
-            int[] a = laneShape(n, 2);
+            int[] a = laneShape(n, LaneShape.SHUFFLED);
             int lo = rnd.nextInt(n - 1);
             int hi = lo + 2 + rnd.nextInt(n - lo - 1);
             hi = Math.min(hi, n);

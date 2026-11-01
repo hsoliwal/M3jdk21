@@ -18,8 +18,11 @@ import java.util.Arrays;
  */
 final class PerfSupport {
 
-    static final int WARMUP_ROUNDS = Integer.getInteger("perf.warmup", 5);
-    static final int ROUNDS = Integer.getInteger("perf.rounds", 7);
+    //FLLDCIM: MRL - property defaults named (viewport-swing RECIPE_MEMORY 12)
+    static final int DEFAULT_WARMUP_ROUNDS = 5;
+    static final int DEFAULT_ROUNDS = 7;
+    static final int WARMUP_ROUNDS = Integer.getInteger("perf.warmup", DEFAULT_WARMUP_ROUNDS);
+    static final int ROUNDS = Integer.getInteger("perf.rounds", DEFAULT_ROUNDS);
     /** Operations per round by cost class: a round of one atom takes milliseconds, not microseconds. */
     static final int FAST = 1 << 20;
     static final int MEDIUM = 1 << 16;

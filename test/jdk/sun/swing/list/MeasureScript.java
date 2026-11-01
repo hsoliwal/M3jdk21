@@ -70,6 +70,26 @@ final class MeasureScript {
     /** {@code M3ListMeasure.MAX_PIECES}: more pieces make the next layout measure every row. */
     static final int MAX_PIECES = 1024;
     static final String HTML = "<html>two<br>lines</html>";
+    //FLLDCIM: MRL - stable-value vector and op enums replace numeric literals (viewport-swing RECIPE_MEMORY 12)
+    /** One stable value of every type {@code isStableValue} admits: null, String, Boolean, Character, Byte, Short,
+     *  Integer, Long, Float and Double. */
+    static final Object[] STABLE_VALUES = {null, "s", Boolean.TRUE, 'c', (byte) 1, (short) 2, 3, 4L, 5f, 6d};
+
+    /** The row values {@link #value} draws; the kinds before {@code BUILDER} are stable values. */
+    enum ValueKind { TEXT, HTML_TEXT, NUMBER, EMPTY_OR_NULL, LETTER, REAL, REPEATED, BUILDER, ICON }
+
+    static final ValueKind[] VALUE_KINDS = ValueKind.values();
+    static final int STABLE_KINDS = ValueKind.BUILDER.ordinal();
+
+    /** The model events of {@link #event}: a mix may force one kind, else one of all of them is drawn. */
+    enum EventKind { INSERT, REMOVE, CHANGE, INSERT_BATCH, APPEND }
+
+    static final EventKind[] EVENT_KINDS = EventKind.values();
+
+    /** The list and renderer setup changes of {@link #input}. */
+    enum InputChange { FONT, RENDERER, ICON_TEXT_GAP, HTML_DISABLE, ORIENTATION, CELL_WIDTH, CELL_HEIGHT }
+
+    static final InputChange[] INPUT_CHANGES = InputChange.values();
 
     enum Mix {
         EVENTS(10, 0, 0), INSERTS(10, 0, 0), REMOVALS(10, 0, 0), CHANGES(10, 0, 0), INPUTS(6, 4, 0), VALUES(8, 0, 2),
@@ -149,23 +169,23 @@ final class MeasureScript {
     }
 
     Object value(boolean allowUnstable) {
-        int kind = rnd.nextInt(allowUnstable ? 9 : 7);
+        ValueKind kind = VALUE_KINDS[rnd.nextInt(allowUnstable ? VALUE_KINDS.length : STABLE_KINDS)];
         switch (kind) {
-            case 0:
+            case TEXT:
                 return "v" + "w".repeat(rnd.nextInt(MAX_TEXT));
-            case 1:
+            case HTML_TEXT:
                 return HTML;
-            case 2:
+            case NUMBER:
                 return rnd.nextInt();
-            case 3:
+            case EMPTY_OR_NULL:
                 return rnd.nextBoolean() ? "" : null;
-            case 4:
+            case LETTER:
                 return (char) ('a' + rnd.nextInt(MAX_TEXT));
-            case 5:
+            case REAL:
                 return rnd.nextDouble();
-            case 6:
+            case REPEATED:
                 return "x".repeat(1 + rnd.nextInt(MAX_TEXT));
-            case 7:
+            case BUILDER:
                 return new StringBuilder("sb").append("z".repeat(rnd.nextInt(MAX_TEXT)));
             default:
                 return new ImageIcon(new BufferedImage(1 + rnd.nextInt(ICON_SIZE), 1 + rnd.nextInt(ICON_SIZE),
@@ -242,10 +262,11 @@ final class MeasureScript {
     void event(Mix mix) {
         int n = model.getSize();
         boolean unstableOk = mix.unstable > 0;
-        int kind = mix == Mix.INSERTS ? 0 : mix == Mix.REMOVALS ? 1 : mix == Mix.CHANGES ? 2 : rnd.nextInt(5);
-        if (n == 0 || kind == 0) {
+        EventKind kind = mix == Mix.INSERTS ? EventKind.INSERT : mix == Mix.REMOVALS ? EventKind.REMOVE
+                : mix == Mix.CHANGES ? EventKind.CHANGE : EVENT_KINDS[rnd.nextInt(EVENT_KINDS.length)];
+        if (n == 0 || kind == EventKind.INSERT) {
             model.add(rnd.nextInt(n + 1), value(unstableOk));
-        } else if (kind == 1) {
+        } else if (kind == EventKind.REMOVE) {
             int from = rnd.nextInt(n);
             int to = Math.min(n - 1, from + rnd.nextInt(MAX_RUN));
             if (to > from) {
@@ -253,9 +274,9 @@ final class MeasureScript {
             } else {
                 model.remove(from);
             }
-        } else if (kind == 2) {
+        } else if (kind == EventKind.CHANGE) {
             model.set(rnd.nextInt(n), value(unstableOk));
-        } else if (kind == 3) {
+        } else if (kind == EventKind.INSERT_BATCH) {
             List<Object> batch = new ArrayList<>();
             for (int k = 1 + rnd.nextInt(MAX_RUN); k > 0; k--) {
                 batch.add(value(unstableOk));
@@ -273,32 +294,32 @@ final class MeasureScript {
     void input() {
         DefaultListCellRenderer m3r = (DefaultListCellRenderer) list.getCellRenderer();
         DefaultListCellRenderer sr = (DefaultListCellRenderer) stockList.getCellRenderer();
-        switch (rnd.nextInt(7)) {
-            case 0 -> {
+        switch (INPUT_CHANGES[rnd.nextInt(INPUT_CHANGES.length)]) {
+            case FONT -> {
                 Font f = new Font(Font.DIALOG, Font.PLAIN, FONT_SIZES[rnd.nextInt(FONT_SIZES.length)]);
                 list.setFont(f);
                 stockList.setFont(f);
             }
-            case 1 -> {
+            case RENDERER -> {
                 list.setCellRenderer(new DefaultListCellRenderer());
                 stockList.setCellRenderer(new DefaultListCellRenderer());
             }
-            case 2 -> {
+            case ICON_TEXT_GAP -> {
                 m3r.setIconTextGap(m3r.getIconTextGap() == GAP ? GAP + 1 : GAP);
                 sr.setIconTextGap(m3r.getIconTextGap());
             }
-            case 3 -> {
+            case HTML_DISABLE -> {
                 Object v = Boolean.TRUE.equals(m3r.getClientProperty("html.disable")) ? null : Boolean.TRUE;
                 m3r.putClientProperty("html.disable", v);
                 sr.putClientProperty("html.disable", v);
             }
-            case 4 -> {
+            case ORIENTATION -> {
                 ComponentOrientation o = list.getComponentOrientation().isLeftToRight()
                         ? ComponentOrientation.RIGHT_TO_LEFT : ComponentOrientation.LEFT_TO_RIGHT;
                 list.setComponentOrientation(o);
                 stockList.setComponentOrientation(o);
             }
-            case 5 -> {
+            case CELL_WIDTH -> {
                 int w = list.getFixedCellWidth() == -1 ? FIXED_WIDTH : -1;
                 list.setFixedCellWidth(w);
                 stockList.setFixedCellWidth(w);
@@ -344,7 +365,7 @@ final class MeasureScript {
         assertEquals(DELTA_ROWS, layout(), "the first layout measures every row");
         model.add(DELTA_ROWS / 2, "inserted");
         model.set(1, "changed");
-        assertEquals(3, layout(), "two new rows plus the probe");
+        assertEquals(2 + 1, layout(), "two new rows plus the probe");
         model.remove(0);
         assertEquals(1, layout(), "a removal leaves only the probe to measure");
     }
@@ -353,20 +374,20 @@ final class MeasureScript {
     void untrackable() {
         fill(MAX_ROWS, false);
         layout();
-        int before = measure.fullMeasuresOnDeltas();
+        int counted = measure.fullMeasuresOnDeltas();
         measure.changed(-1, -1);
         usable = false;
-        assertEquals(before + 1, measure.fullMeasuresOnDeltas(), "an index below 0 means every row");
+        assertEquals(++counted, measure.fullMeasuresOnDeltas(), "an index below 0 means every row");
         assertEquals(model.getSize(), layout());
         measure.removed(0, model.getSize());
         usable = false;
-        assertEquals(before + 2, measure.fullMeasuresOnDeltas(), "a removal beyond the rows cannot be tracked");
+        assertEquals(++counted, measure.fullMeasuresOnDeltas(), "a removal beyond the rows cannot be tracked");
         measure.removed(0, model.getSize());
-        assertEquals(before + 2, measure.fullMeasuresOnDeltas(), "already unusable: not counted twice");
+        assertEquals(counted, measure.fullMeasuresOnDeltas(), "already unusable: not counted twice");
         assertEquals(model.getSize(), layout());
         measure.added(model.getSize() + 1, model.getSize() + 1);
         usable = false;
-        assertEquals(before + 3, measure.fullMeasuresOnDeltas(), "an insertion beyond the end cannot be tracked");
+        assertEquals(++counted, measure.fullMeasuresOnDeltas(), "an insertion beyond the end cannot be tracked");
         layout();
     }
 
@@ -457,10 +478,9 @@ final class MeasureScript {
 
     static void isStableValueContract() {
         MethodHandle h = AtomSupport.statik(M3ListMeasure.class, "isStableValue", boolean.class, Object.class);
-        Object[] stableValues = {null, "s", Boolean.TRUE, 'c', (byte) 1, (short) 2, 3, 4L, 5f, 6d};
         Object[] unstableValues = {new StringBuilder("sb"), new Object(), BigInteger.ONE, new AtomicInteger(),
             new ImageIcon(new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB)), new String[] {"a"}};
-        for (Object v : stableValues) {
+        for (Object v : STABLE_VALUES) {
             assertTrue((boolean) AtomSupport.call(h, v), "stable: " + v);
         }
         for (Object v : unstableValues) {
