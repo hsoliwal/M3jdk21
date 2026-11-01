@@ -2,10 +2,12 @@
 #include <jni.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <string.h>
 #include "m3_arrays.h"
 #include "../../../../native/include/m3_jni_core.h"
 
 #define M3_ARRAY_CHUNK 1024
+#define M3_UTF16_EQUAL_CHUNK_MIN 32
 
 static void throw_illegal(JNIEnv *env, const char *message) {
   m3_jni_throw_new(env, "java/lang/IllegalArgumentException", message);
@@ -56,6 +58,16 @@ Java_com_m3_arrays_M3ArrayNative_nativeCompareUtf16(
     if ((*env)->ExceptionCheck(env)) return 0;
     (*env)->GetCharArrayRegion(env, right_array, right_start + compared, take, right);
     if ((*env)->ExceptionCheck(env)) return 0;
+    /*
+     * Byte equality implies identical UTF-16 code units on both endian orders.
+     * On a mismatch, retain the scalar code-unit oracle's exact signed result.
+     * Each region is fully populated and take <= M3_ARRAY_CHUNK before memcmp.
+     */
+    if (take >= M3_UTF16_EQUAL_CHUNK_MIN
+        && memcmp(left, right, (size_t)take * sizeof(jchar)) == 0) {
+      compared += take;
+      continue;
+    }
     int result = m3_compare_utf16(
         (const uint16_t *)left, 0U, (const uint16_t *)right, 0U, (size_t)take);
     if (result != 0) return (jint)result;

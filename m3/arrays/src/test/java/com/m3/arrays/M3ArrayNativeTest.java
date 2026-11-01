@@ -221,6 +221,44 @@ class M3ArrayNativeTest {
         }
     }
 
+    @Test
+    void nativeChunkEqualityFastPathPreservesExactSignedUtf16Differences() throws ReflectiveOperationException {
+        if (!loadOptionalNative()) return;
+        Method raw = M3ArrayNative.class.getDeclaredMethod(
+                "nativeCompareUtf16", char[].class, int.class, char[].class, int.class, int.class);
+        raw.setAccessible(true);
+        Random random = new Random(0x4d33434c4cL);
+        int[] lengths = {0, 1, 2, 7, 31, 32, 33, 63, 64, 65, 127, 255,
+                         511, 512, 1023, 1024, 1025, 2048, 4097};
+        for (int count : lengths) {
+            for (int seed = 0; seed < 8; seed++) {
+                int leftStart = seed % 4;
+                int rightStart = (seed * 3) % 4 + 1;
+                char[] left = randomUnits(random, leftStart + count + 8);
+                char[] right = new char[rightStart + count + 8];
+                System.arraycopy(left, leftStart, right, rightStart, count);
+                assertComparison(left, leftStart, right, rightStart, count);
+                assertEquals(0, ((Integer) raw.invoke(null,
+                        left, leftStart, right, rightStart, count)).intValue());
+
+                int[] mismatches = {0, 31, 32, 63, 1023, 1024, count - 1};
+                for (int index : mismatches) {
+                    if (index < 0 || index >= count) continue;
+                    char before = right[rightStart + index];
+                    right[rightStart + index] = (char) (before ^ 0x8000);
+                    int expected = scalarCompare(left, leftStart, right, rightStart, count);
+                    assertEquals(expected, M3ArrayNative.compareUtf16(
+                            left, leftStart, right, rightStart, count));
+                    assertEquals(expected, ((Integer) raw.invoke(null,
+                            left, leftStart, right, rightStart, count)).intValue());
+                    assertEquals(-expected, ((Integer) raw.invoke(null,
+                            right, rightStart, left, leftStart, count)).intValue());
+                    right[rightStart + index] = before;
+                }
+            }
+        }
+    }
+
     private static boolean loadOptionalNative() {
         String path = System.getProperty("m3.arrays.native.path");
         if (path == null || path.isBlank()) {
