@@ -27,6 +27,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ProgressMonitor;
+import java.util.concurrent.TimeUnit;
 import java.util.function.IntBinaryOperator;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.Test;
@@ -46,26 +47,34 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 class M3DistributionSortsAtomsPerf {
     private static final Access OWNER = new Access("java.util.M3DistributionSorts");
-    /** Interleaved measurement: WARMUP discarded rounds, then ROUNDS measured rounds of OPS calls each. */
-    private static final int WARMUP = Integer.getInteger("m3.perf.warmup", 30);
-    private static final int ROUNDS = Integer.getInteger("m3.perf.rounds", 15);
-    private static final int OPS = Integer.getInteger("m3.perf.ops", 2000);
+    //FLLDCIM: MRL - property defaults named (literal gate, util-lang-m3 RECIPE_MEMORY R017)
+    /** Interleaved measurement defaults: WARMUP discarded rounds, then ROUNDS measured rounds of OPS calls each. */
+    private static final int DEFAULT_WARMUP = 30;
+    private static final int DEFAULT_ROUNDS = 15;
+    private static final int DEFAULT_OPS = 2000;
+    private static final int WARMUP = Integer.getInteger("m3.perf.warmup", DEFAULT_WARMUP);
+    private static final int ROUNDS = Integer.getInteger("m3.perf.rounds", DEFAULT_ROUNDS);
+    private static final int OPS = Integer.getInteger("m3.perf.ops", DEFAULT_OPS);
+    /**
+     * The OS load counters are read at least this long after they were primed at the end of the warm-up (Windows
+     * refreshes them at most every 500 ms, and the first read after a refresh-less interval repeats the old value).
+     */
+    private static final long LOAD_SAMPLE_MS = 500;
     private static final int SMALL = 24;
     private static final int LARGE = 1000;
     private static final long SEED = 0x4D33_5045_5246L;
     private static final int E_ACUTE = 0xE9;
     private static final int EMOJI = 0x1F600;
     private static final String PERF_OUT = System.getProperty("m3.perf.out");
-    private static final Access CONTEXT = new Access("java.util.M3SortContext");
-    private static final MethodHandle LSD = exact(OWNER.method("lsd", 4), MethodType.methodType(void.class, int[].class, long[].class, int.class, Object.class));
+    private static final String UNAVAILABLE = "NA";
+    private static final MethodHandle LSD = exact(OWNER.method("lsd"), MethodType.methodType(void.class, int[].class, long[].class, int.class, Object.class));
 
     /** lsd: invokeExact timing interleaved with Arrays.sort(Integer[],comparingLong); both must produce the same checksum. */
     @Test
     void perf_lsd() throws Throwable {
         Random r = new Random(SEED);
         long[] keys = IntStream.range(0, LARGE).mapToLong(i -> r.nextLong()).toArray();
-        IntBinaryOperator byKey = (x, y) -> Long.compare(keys[x], keys[y]);
-        Object ctx = CONTEXT.constructor("M3SortContext", 2).invoke(byKey, (ProgressMonitor) null);
+        Object ctx = longContext(keys);
         int[] src = IntStream.range(0, LARGE).toArray();
         int[] a = new int[LARGE];
         Integer[] boxed = boxedLabels(LARGE);
@@ -75,7 +84,11 @@ class M3DistributionSortsAtomsPerf {
         long[] jdkNanos = new long[ROUNDS];
         long check = 0;
         long jdkCheck = 0;
+        long window = 0;
         for (int round = -WARMUP; round < ROUNDS; round++) {
+            if (round == 0) {
+                window = startLoadWindow();
+            }
             long t0 = System.nanoTime();
             for (int op = 0; op < OPS; op++) {
                 System.arraycopy(src, 0, a, 0, LARGE);
@@ -94,18 +107,18 @@ class M3DistributionSortsAtomsPerf {
                 jdkNanos[round] = t2 - t1;
             }
         }
+        double[] loads = loads(window);
         assertEquals(jdkCheck, check, "lsd and Arrays.sort(Integer[],comparingLong) agree");
-        report(OWNER.type.getSimpleName(), "lsd", "Arrays.sort(Integer[],comparingLong)", m3Nanos, jdkNanos);
+        report(OWNER.type.getSimpleName(), "lsd", "Arrays.sort(Integer[],comparingLong)", m3Nanos, jdkNanos, loads);
     }
-    private static final MethodHandle COUNTING = exact(OWNER.method("counting", 4), MethodType.methodType(void.class, int[].class, long[].class, int.class, Object.class));
+    private static final MethodHandle COUNTING = exact(OWNER.method("counting"), MethodType.methodType(void.class, int[].class, long[].class, int.class, Object.class));
 
     /** counting: invokeExact timing interleaved with Arrays.sort(Integer[],comparingLong); both must produce the same checksum. */
     @Test
     void perf_counting() throws Throwable {
         Random r = new Random(SEED);
         long[] keys = IntStream.range(0, LARGE).mapToLong(i -> r.nextInt(LARGE)).toArray();
-        IntBinaryOperator byKey = (x, y) -> Long.compare(keys[x], keys[y]);
-        Object ctx = CONTEXT.constructor("M3SortContext", 2).invoke(byKey, (ProgressMonitor) null);
+        Object ctx = longContext(keys);
         int[] src = IntStream.range(0, LARGE).toArray();
         int[] a = new int[LARGE];
         Integer[] boxed = boxedLabels(LARGE);
@@ -115,7 +128,11 @@ class M3DistributionSortsAtomsPerf {
         long[] jdkNanos = new long[ROUNDS];
         long check = 0;
         long jdkCheck = 0;
+        long window = 0;
         for (int round = -WARMUP; round < ROUNDS; round++) {
+            if (round == 0) {
+                window = startLoadWindow();
+            }
             long t0 = System.nanoTime();
             for (int op = 0; op < OPS; op++) {
                 System.arraycopy(src, 0, a, 0, LARGE);
@@ -134,21 +151,13 @@ class M3DistributionSortsAtomsPerf {
                 jdkNanos[round] = t2 - t1;
             }
         }
+        double[] loads = loads(window);
         assertEquals(jdkCheck, check, "counting and Arrays.sort(Integer[],comparingLong) agree");
-        report(OWNER.type.getSimpleName(), "counting", "Arrays.sort(Integer[],comparingLong)", m3Nanos, jdkNanos);
+        report(OWNER.type.getSimpleName(), "counting", "Arrays.sort(Integer[],comparingLong)", m3Nanos, jdkNanos, loads);
     }
     /** A handle adapted to an exact type over public classes, for constant invokeExact call sites. */
     static MethodHandle exact(MethodHandle h, MethodType erased) {
         return h.asType(erased);
-    }
-
-    static Object context(int[] keys) {
-        try {
-            IntBinaryOperator byKey = (x, y) -> Integer.compare(keys[x], keys[y]);
-            return CONTEXT.constructor("M3SortContext", 2).invoke(byKey, (ProgressMonitor) null);
-        } catch (Throwable e) {
-            throw new AssertionError(e);
-        }
     }
 
     static int[] randomKeys(int n) {
@@ -167,13 +176,43 @@ class M3DistributionSortsAtomsPerf {
                 : (sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2.0;
     }
 
-    /** One PERF row: median ns/op of the M3 atom and of its JDK baseline, with the host load. */
-    static void report(String owner, String atom, String baseline, long[] m3, long[] jdk) throws Exception {
+    static com.sun.management.OperatingSystemMXBean os() {
+        return (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+    }
+
+    //FLLDCIM: BLLSE - load sampled after the warm-up, JVM and host apart (util-lang-m3 RECIPE_MEMORY R012)
+    /** Primes the JVM and host load counters at the end of the warm-up; returns the window start (nanoTime). */
+    static long startLoadWindow() {
+        os().getProcessCpuLoad();
+        os().getCpuLoad();
+        return System.nanoTime();
+    }
+
+    /**
+     * {jvm load, host load, window ms} over [window start, max(now, window start + LOAD_SAMPLE_MS)]: the JVM
+     * process share and the whole-host share of all CPUs (OperatingSystemMXBean getProcessCpuLoad / getCpuLoad).
+     */
+    static double[] loads(long windowStart) throws InterruptedException {
+        long elapsed = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - windowStart);
+        if (elapsed < LOAD_SAMPLE_MS) {
+            Thread.sleep(LOAD_SAMPLE_MS - elapsed);
+        }
+        double jvm = os().getProcessCpuLoad();
+        double host = os().getCpuLoad();
+        return new double[] {jvm, host, TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - windowStart)};
+    }
+
+    static String load(double value) {
+        return value < 0 ? UNAVAILABLE : String.format("%.3f", value);
+    }
+
+    /** One PERF row: median ns/op of the M3 atom and of its JDK baseline, with the JVM and host load. */
+    static void report(String owner, String atom, String baseline, long[] m3, long[] jdk, double[] loads)
+            throws Exception {
         double m3Ns = median(m3) / OPS;
         double jdkNs = median(jdk) / OPS;
-        double cpu = ((com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean()).getCpuLoad();
         String row = String.join("\t", owner, atom, String.format("%.2f", m3Ns), baseline, String.format("%.2f", jdkNs),
-                String.format("%.3f", m3Ns / jdkNs), String.format("%.3f", cpu),
+                String.format("%.3f", m3Ns / jdkNs), load(loads[0]), load(loads[1]), String.format("%.0f", loads[2]),
                 Integer.toString(Runtime.getRuntime().availableProcessors()), WARMUP + "/" + ROUNDS + "/" + OPS);
         System.out.println("PERF\t" + row);
         if (PERF_OUT != null) {
@@ -181,6 +220,29 @@ class M3DistributionSortsAtomsPerf {
                     StandardOpenOption.APPEND);
         }
         assertTrue(m3Ns > 0 && jdkNs > 0, "measured " + atom);
+    }
+    //FLLDCIM: IDL - the classes open exactly what they reflect (util-lang-m3 RECIPE_MEMORY R011)
+    /** M3SortContext is reflected only by the sort rows, so only their classes open java.util. */
+    private static final Access CONTEXT = new Access("java.util.M3SortContext");
+
+    /** A context comparing labels by {@code keys[label]}, without a monitor. */
+    static Object context(int[] keys) {
+        IntBinaryOperator byKey = (x, y) -> Integer.compare(keys[x], keys[y]);
+        return newContext(byKey);
+    }
+
+    /** A context comparing labels by the long {@code keys[label]}, without a monitor. */
+    static Object longContext(long[] keys) {
+        IntBinaryOperator byKey = (x, y) -> Long.compare(keys[x], keys[y]);
+        return newContext(byKey);
+    }
+
+    private static Object newContext(IntBinaryOperator comparator) {
+        try {
+            return CONTEXT.constructor("M3SortContext").invoke(comparator, (ProgressMonitor) null);
+        } catch (Throwable e) {
+            throw new AssertionError(e);
+        }
     }
 
     /** Full-privilege access to one owner type through MethodHandles.privateLookupIn. */
@@ -197,16 +259,17 @@ class M3DistributionSortsAtomsPerf {
             }
         }
 
-        /** The unique declared, non-synthetic method {@code atom} with {@code arity} parameters. */
-        MethodHandle method(String atom, int arity) {
+        //FLLDCIM: IOP - name lookup replaces the arity lookup; overloads name their signature (util-lang-m3 RECIPE_MEMORY R016)
+        /** The unique declared, non-synthetic method {@code atom}; an overloaded atom needs its signature. */
+        MethodHandle method(String atom) {
             Method found = null;
             for (Method m : type.getDeclaredMethods()) {
-                if (m.getName().equals(atom) && m.getParameterCount() == arity && !m.isSynthetic()) {
-                    assertEquals(null, found, "ambiguous atom " + atom + "/" + arity);
+                if (m.getName().equals(atom) && !m.isSynthetic()) {
+                    assertEquals(null, found, "overloaded atom " + atom + ": name its parameter signature");
                     found = m;
                 }
             }
-            assertTrue(found != null, "missing atom " + atom + "/" + arity);
+            assertTrue(found != null, "missing atom " + atom);
             try {
                 return lookup.unreflect(found);
             } catch (IllegalAccessException e) {
@@ -228,11 +291,24 @@ class M3DistributionSortsAtomsPerf {
             throw new AssertionError("missing atom " + atom + "(" + signature + ")");
         }
 
-        /** The declared constructor with {@code arity} parameters; {@code atom} must be the simple type name. */
-        MethodHandle constructor(String atom, int arity) {
+        //FLLDCIM: IOP - single-constructor lookup without an arity literal (util-lang-m3 RECIPE_MEMORY R016)
+        /** The only declared constructor; {@code atom} must be the simple type name. */
+        MethodHandle constructor(String atom) {
+            assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
+            Constructor<?>[] declared = type.getDeclaredConstructors();
+            assertEquals(1, declared.length, "overloaded constructor " + atom + ": name its parameter signature");
+            try {
+                return lookup.unreflectConstructor(declared[0]);
+            } catch (IllegalAccessException e) {
+                throw new AssertionError(atom, e);
+            }
+        }
+
+        /** The declared constructor whose parameter types print as {@code signature}. */
+        MethodHandle constructor(String atom, String signature) {
             assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
             for (Constructor<?> c : type.getDeclaredConstructors()) {
-                if (c.getParameterCount() == arity && !c.isSynthetic()) {
+                if (!c.isSynthetic() && signature(c.getParameterTypes()).equals(signature)) {
                     try {
                         return lookup.unreflectConstructor(c);
                     } catch (IllegalAccessException e) {
@@ -240,7 +316,7 @@ class M3DistributionSortsAtomsPerf {
                     }
                 }
             }
-            throw new AssertionError("missing constructor " + atom + "/" + arity);
+            throw new AssertionError("missing constructor " + atom + "(" + signature + ")");
         }
 
         /** The declared constructors, for the private non-instantiable utility pattern. */

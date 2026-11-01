@@ -47,12 +47,12 @@ class M3StringLeafCursorAtomsTest {
     private static final Access M3_STRING = new Access("java.lang.M3String");
     private static final Access POOL = new Access("java.lang.M3StringPool");
     private static final Access JAVA_STRING = new Access("java.lang.String");
-    private static final MethodHandle INTERN_CHARS = POOL.method("internChars", 3);
-    private static final MethodHandle CONCAT = POOL.method("concat", 2);
-    private static final MethodHandle RANGE = M3_STRING.method("range", 3);
-    private static final MethodHandle OWNER_OF = M3_STRING.method("owner", 0);
-    private static final MethodHandle START_OF = M3_STRING.method("start", 0);
-    private static final MethodHandle COORDINATE_OF = M3_STRING.method("coordinate", 0);
+    private static final MethodHandle INTERN_CHARS = POOL.method("internChars");
+    private static final MethodHandle CONCAT = POOL.method("concat");
+    private static final MethodHandle RANGE = M3_STRING.method("range");
+    private static final MethodHandle OWNER_OF = M3_STRING.method("owner");
+    private static final MethodHandle START_OF = M3_STRING.method("start", "");
+    private static final MethodHandle COORDINATE_OF = M3_STRING.method("coordinate");
     private static final byte LATIN1 = (byte) JAVA_STRING.constant("LATIN1");
     private static final byte UTF16 = (byte) JAVA_STRING.constant("UTF16");
     private static final long SEED = 0x4D33_5354_5247L;
@@ -72,7 +72,7 @@ class M3StringLeafCursorAtomsTest {
 
     static {
         try {
-            M3_STRING.method("activate", 1).invoke((String) null);
+            M3_STRING.method("activate").invoke((String) null);
         } catch (Throwable e) {
             throw new ExceptionInInitializerError(e);
         }
@@ -81,8 +81,8 @@ class M3StringLeafCursorAtomsTest {
     @Test
     void constructorOne() throws Throwable {
         Access cursor = new Access("java.lang.M3StringLeafCursor");
-        MethodHandle next = cursor.method("next", 0);
-        MethodHandle make = cursor.constructor("M3StringLeafCursor", 2);
+        MethodHandle next = cursor.method("next");
+        MethodHandle make = cursor.constructor("M3StringLeafCursor", "M3String,boolean");
         for (boolean coalesce : new boolean[] {false, true}) {
             String left = "left-" + PAIR + "-".repeat(PIECE_UNITS);
             String right = "right" + (char) CJK;
@@ -90,9 +90,9 @@ class M3StringLeafCursorAtomsTest {
             Object c = make.invoke(source, coalesce);
             StringBuilder seen = new StringBuilder();
             while ((boolean) next.invoke(c)) {
-                Object owner = cursor.method("owner", 0).invoke(c);
-                int start = (int) cursor.method("start", 0).invoke(c);
-                int length = (int) cursor.method("length", 0).invoke(c);
+                Object owner = cursor.method("owner").invoke(c);
+                int start = (int) cursor.method("start", "").invoke(c);
+                int length = (int) cursor.method("length").invoke(c);
                 seen.append(text(RANGE.invoke(owner, start, length)));
             }
             assertEquals(left + right, seen.toString(), "M3StringLeafCursor coalesce=" + coalesce);
@@ -102,8 +102,8 @@ class M3StringLeafCursorAtomsTest {
     @Test
     void constructorTwo() throws Throwable {
         Access cursor = new Access("java.lang.M3StringLeafCursor");
-        MethodHandle next = cursor.method("next", 0);
-        MethodHandle make = cursor.constructor("M3StringLeafCursor", 3);
+        MethodHandle next = cursor.method("next");
+        MethodHandle make = cursor.constructor("M3StringLeafCursor", "M3String,M3String,boolean");
         for (boolean coalesce : new boolean[] {false, true}) {
             String left = "left-" + PAIR + "-".repeat(PIECE_UNITS);
             String right = "right" + (char) CJK;
@@ -111,9 +111,9 @@ class M3StringLeafCursorAtomsTest {
             Object c = make.invoke(source, m3(right), coalesce);
             StringBuilder seen = new StringBuilder();
             while ((boolean) next.invoke(c)) {
-                Object owner = cursor.method("owner", 0).invoke(c);
-                int start = (int) cursor.method("start", 0).invoke(c);
-                int length = (int) cursor.method("length", 0).invoke(c);
+                Object owner = cursor.method("owner").invoke(c);
+                int start = (int) cursor.method("start", "").invoke(c);
+                int length = (int) cursor.method("length").invoke(c);
                 seen.append(text(RANGE.invoke(owner, start, length)));
             }
             assertEquals(left + right + right, seen.toString(), "M3StringLeafCursor coalesce=" + coalesce);
@@ -123,8 +123,8 @@ class M3StringLeafCursorAtomsTest {
     @Test
     void constructorOwnerRange() throws Throwable {
         Access cursor = new Access("java.lang.M3StringLeafCursor");
-        MethodHandle next = cursor.method("next", 0);
-        MethodHandle make = cursor.constructor("M3StringLeafCursor", 4);
+        MethodHandle next = cursor.method("next");
+        MethodHandle make = cursor.constructor("M3StringLeafCursor", "M3StringOwner,int,int,boolean");
         for (boolean coalesce : new boolean[] {false, true}) {
             String left = "left-" + PAIR + "-".repeat(PIECE_UNITS);
             String right = "right" + (char) CJK;
@@ -132,9 +132,9 @@ class M3StringLeafCursorAtomsTest {
             Object c = make.invoke(OWNER_OF.invoke(source), 1, (left + right).length() - 2, coalesce);
             StringBuilder seen = new StringBuilder();
             while ((boolean) next.invoke(c)) {
-                Object owner = cursor.method("owner", 0).invoke(c);
-                int start = (int) cursor.method("start", 0).invoke(c);
-                int length = (int) cursor.method("length", 0).invoke(c);
+                Object owner = cursor.method("owner").invoke(c);
+                int start = (int) cursor.method("start", "").invoke(c);
+                int length = (int) cursor.method("length").invoke(c);
                 seen.append(text(RANGE.invoke(owner, start, length)));
             }
             assertEquals((left + right).substring(1, (left + right).length() - 1), seen.toString(), "M3StringLeafCursor coalesce=" + coalesce);
@@ -144,8 +144,8 @@ class M3StringLeafCursorAtomsTest {
     @Test
     void next() throws Throwable {
         Access cursor = new Access("java.lang.M3StringLeafCursor");
-        MethodHandle make = cursor.constructor("M3StringLeafCursor", 2);
-        MethodHandle atom = cursor.method("next", 0);
+        MethodHandle make = cursor.constructor("M3StringLeafCursor", "M3String,boolean");
+        MethodHandle atom = cursor.method("next");
         String a = "alpha".repeat(PIECE_UNITS);
         String b = "beta" + PAIR;
         Object atomA = m3(a);
@@ -167,12 +167,12 @@ class M3StringLeafCursorAtomsTest {
         assertEquals(1 + 1 + 1, raw, "three visible leaf occurrences");
         assertEquals(1 + 1, merged, "two adjacent ranges of one owner coalesce into one leaf");
         CharSequence whole = (CharSequence) atomA;
-        Object gapped = tupleOf(whole.subSequence(0, PIECE_UNITS), whole.subSequence(2 * PIECE_UNITS, 3 * PIECE_UNITS));
+        Object gapped = tupleOf(whole.subSequence(0, PIECE_UNITS), whole.subSequence(2 * PIECE_UNITS, 2 * PIECE_UNITS + PIECE_UNITS));
         Object e = make.invoke(gapped, true);
         int gappedLeaves = 0;
         while ((boolean) atom.invoke(e)) {
             gappedLeaves++;
-            assertEquals(PIECE_UNITS, (int) cursor.method("length", 0).invoke(e), "non-adjacent ranges stay separate");
+            assertEquals(PIECE_UNITS, (int) cursor.method("length").invoke(e), "non-adjacent ranges stay separate");
         }
         assertEquals(1 + 1, gappedLeaves, "same owner but a gap: no coalescing");
     }
@@ -183,13 +183,13 @@ class M3StringLeafCursorAtomsTest {
         String left = "x".repeat(PIECE_UNITS) + PAIR;
         String right = "y" + (char) E_ACUTE;
         Object source = m3Tuple(left, right);
-        Object c = cursor.constructor("M3StringLeafCursor", 2).invoke(source, false);
+        Object c = cursor.constructor("M3StringLeafCursor", "M3String,boolean").invoke(source, false);
         int consumed = 0;
         String expected = left + right;
-        while ((boolean) cursor.method("next", 0).invoke(c)) {
-            Object owner = cursor.method("owner", 0).invoke(c);
-            int start = (int) cursor.method("start", 0).invoke(c);
-            int length = (int) cursor.method("length", 0).invoke(c);
+        while ((boolean) cursor.method("next").invoke(c)) {
+            Object owner = cursor.method("owner").invoke(c);
+            int start = (int) cursor.method("start", "").invoke(c);
+            int length = (int) cursor.method("length").invoke(c);
             assertTrue(length > 0, "owner: empty leaves are never reported");
             int ownerLength = (int) new Access("java.lang.M3StringOwner").field("length").get(owner);
             assertTrue(start >= 0 && start + length <= ownerLength, "owner: range inside the owner");
@@ -206,13 +206,13 @@ class M3StringLeafCursorAtomsTest {
         String left = "x".repeat(PIECE_UNITS) + PAIR;
         String right = "y" + (char) E_ACUTE;
         Object source = m3Tuple(left, right);
-        Object c = cursor.constructor("M3StringLeafCursor", 2).invoke(source, false);
+        Object c = cursor.constructor("M3StringLeafCursor", "M3String,boolean").invoke(source, false);
         int consumed = 0;
         String expected = left + right;
-        while ((boolean) cursor.method("next", 0).invoke(c)) {
-            Object owner = cursor.method("owner", 0).invoke(c);
-            int start = (int) cursor.method("start", 0).invoke(c);
-            int length = (int) cursor.method("length", 0).invoke(c);
+        while ((boolean) cursor.method("next").invoke(c)) {
+            Object owner = cursor.method("owner").invoke(c);
+            int start = (int) cursor.method("start", "").invoke(c);
+            int length = (int) cursor.method("length").invoke(c);
             assertTrue(length > 0, "start: empty leaves are never reported");
             int ownerLength = (int) new Access("java.lang.M3StringOwner").field("length").get(owner);
             assertTrue(start >= 0 && start + length <= ownerLength, "start: range inside the owner");
@@ -229,13 +229,13 @@ class M3StringLeafCursorAtomsTest {
         String left = "x".repeat(PIECE_UNITS) + PAIR;
         String right = "y" + (char) E_ACUTE;
         Object source = m3Tuple(left, right);
-        Object c = cursor.constructor("M3StringLeafCursor", 2).invoke(source, false);
+        Object c = cursor.constructor("M3StringLeafCursor", "M3String,boolean").invoke(source, false);
         int consumed = 0;
         String expected = left + right;
-        while ((boolean) cursor.method("next", 0).invoke(c)) {
-            Object owner = cursor.method("owner", 0).invoke(c);
-            int start = (int) cursor.method("start", 0).invoke(c);
-            int length = (int) cursor.method("length", 0).invoke(c);
+        while ((boolean) cursor.method("next").invoke(c)) {
+            Object owner = cursor.method("owner").invoke(c);
+            int start = (int) cursor.method("start", "").invoke(c);
+            int length = (int) cursor.method("length").invoke(c);
             assertTrue(length > 0, "length: empty leaves are never reported");
             int ownerLength = (int) new Access("java.lang.M3StringOwner").field("length").get(owner);
             assertTrue(start >= 0 && start + length <= ownerLength, "length: range inside the owner");
@@ -251,8 +251,8 @@ class M3StringLeafCursorAtomsTest {
         Access cursor = new Access("java.lang.M3StringLeafCursor");
         Object source = m3("pushed-" + "z".repeat(PIECE_UNITS));
         Object owner = OWNER_OF.invoke(source);
-        Object c = cursor.constructor("M3StringLeafCursor", 2).invoke(m3(""), false);
-        MethodHandle atom = cursor.method("push", 3);
+        Object c = cursor.constructor("M3StringLeafCursor", "M3String,boolean").invoke(m3(""), false);
+        MethodHandle atom = cursor.method("push");
         VarHandle size = cursor.field("pendingSize");
         int initial = ((Object[]) cursor.field("pendingOwners").get(c)).length;
         atom.invoke(c, owner, 0, 0);
@@ -264,9 +264,9 @@ class M3StringLeafCursorAtomsTest {
         assertEquals(initial * 2, ((Object[]) cursor.field("pendingOwners").get(c)).length, "push doubles");
         assertThrows(IndexOutOfBoundsException.class, () -> atom.invoke(c, owner, 1, ((CharSequence) source).length()));
         StringBuilder lifo = new StringBuilder();
-        while ((boolean) cursor.method("next", 0).invoke(c)) {
-            lifo.append(text(RANGE.invoke(cursor.method("owner", 0).invoke(c),
-                    (int) cursor.method("start", 0).invoke(c), (int) cursor.method("length", 0).invoke(c))));
+        while ((boolean) cursor.method("next").invoke(c)) {
+            lifo.append(text(RANGE.invoke(cursor.method("owner").invoke(c),
+                    (int) cursor.method("start", "").invoke(c), (int) cursor.method("length").invoke(c))));
         }
         assertEquals(new StringBuilder(text(source).substring(0, initial + 1)).reverse().toString(), lifo.toString(),
                 "the pending stack is consumed last-in first-out");
@@ -275,13 +275,13 @@ class M3StringLeafCursorAtomsTest {
     @Test
     void pullRaw() throws Throwable {
         Access cursor = new Access("java.lang.M3StringLeafCursor");
-        MethodHandle atom = cursor.method("pullRaw", 0);
+        MethodHandle atom = cursor.method("pullRaw");
         String left = "L".repeat(PIECE_UNITS);
         String right = "R".repeat(PIECE_UNITS) + PAIR;
         Object source = m3Tuple(left, right);
         Object tupleOwner = OWNER_OF.invoke(source);
         int length = ((CharSequence) source).length();
-        Object c = cursor.constructor("M3StringLeafCursor", 4).invoke(tupleOwner, 1, length - 2, false);
+        Object c = cursor.constructor("M3StringLeafCursor", "M3StringOwner,int,int,boolean").invoke(tupleOwner, 1, length - 2, false);
         StringBuilder seen = new StringBuilder();
         while ((boolean) atom.invoke(c)) {
             Object raw = cursor.field("rawOwner").get(c);
@@ -361,8 +361,8 @@ class M3StringLeafCursorAtomsTest {
         return new String(bytes, fromChar * unit, chars * unit, coder == LATIN1 ? StandardCharsets.ISO_8859_1 : utf16Native());
     }
 
-    private static final MethodHandle TUPLE = new Access("java.lang.M3StringTuple").constructor("M3StringTuple", 4);
-    private static final MethodHandle WHOLE = M3_STRING.method("whole", 1);
+    private static final MethodHandle TUPLE = new Access("java.lang.M3StringTuple").constructor("M3StringTuple");
+    private static final MethodHandle WHOLE = M3_STRING.method("whole");
     private static long nextTupleId = SEED;
 
     /** A hand-built tuple over two existing M3Strings: no pool canonicalization or flattening. */
@@ -385,16 +385,17 @@ class M3StringLeafCursorAtomsTest {
             }
         }
 
-        /** The unique declared, non-synthetic method {@code atom} with {@code arity} parameters. */
-        MethodHandle method(String atom, int arity) {
+        //FLLDCIM: IOP - name lookup replaces the arity lookup; overloads name their signature (util-lang-m3 RECIPE_MEMORY R016)
+        /** The unique declared, non-synthetic method {@code atom}; an overloaded atom needs its signature. */
+        MethodHandle method(String atom) {
             Method found = null;
             for (Method m : type.getDeclaredMethods()) {
-                if (m.getName().equals(atom) && m.getParameterCount() == arity && !m.isSynthetic()) {
-                    assertEquals(null, found, "ambiguous atom " + atom + "/" + arity);
+                if (m.getName().equals(atom) && !m.isSynthetic()) {
+                    assertEquals(null, found, "overloaded atom " + atom + ": name its parameter signature");
                     found = m;
                 }
             }
-            assertTrue(found != null, "missing atom " + atom + "/" + arity);
+            assertTrue(found != null, "missing atom " + atom);
             try {
                 return lookup.unreflect(found);
             } catch (IllegalAccessException e) {
@@ -416,11 +417,24 @@ class M3StringLeafCursorAtomsTest {
             throw new AssertionError("missing atom " + atom + "(" + signature + ")");
         }
 
-        /** The declared constructor with {@code arity} parameters; {@code atom} must be the simple type name. */
-        MethodHandle constructor(String atom, int arity) {
+        //FLLDCIM: IOP - single-constructor lookup without an arity literal (util-lang-m3 RECIPE_MEMORY R016)
+        /** The only declared constructor; {@code atom} must be the simple type name. */
+        MethodHandle constructor(String atom) {
+            assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
+            Constructor<?>[] declared = type.getDeclaredConstructors();
+            assertEquals(1, declared.length, "overloaded constructor " + atom + ": name its parameter signature");
+            try {
+                return lookup.unreflectConstructor(declared[0]);
+            } catch (IllegalAccessException e) {
+                throw new AssertionError(atom, e);
+            }
+        }
+
+        /** The declared constructor whose parameter types print as {@code signature}. */
+        MethodHandle constructor(String atom, String signature) {
             assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
             for (Constructor<?> c : type.getDeclaredConstructors()) {
-                if (c.getParameterCount() == arity && !c.isSynthetic()) {
+                if (!c.isSynthetic() && signature(c.getParameterTypes()).equals(signature)) {
                     try {
                         return lookup.unreflectConstructor(c);
                     } catch (IllegalAccessException e) {
@@ -428,7 +442,7 @@ class M3StringLeafCursorAtomsTest {
                     }
                 }
             }
-            throw new AssertionError("missing constructor " + atom + "/" + arity);
+            throw new AssertionError("missing constructor " + atom + "(" + signature + ")");
         }
 
         /** The declared constructors, for the private non-instantiable utility pattern. */

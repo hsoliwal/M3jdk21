@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class M3ComparisonSortsAtomsTest {
     private static final Access OWNER = new Access("java.util.M3ComparisonSorts");
     private static final Access CONTEXT = new Access("java.util.M3SortContext");
-    private static final MethodHandle NEW_CONTEXT = CONTEXT.constructor("M3SortContext", 2);
+    private static final MethodHandle NEW_CONTEXT = CONTEXT.constructor("M3SortContext");
     private static final long SEED = 0x4D33_534F_5254L;
     /** Kernel lengths around the insertion cut-off (24), TimSort MIN_MERGE (32) and powers of two. */
     private static final int[] SIZES = {2, 3, 4, 5, 7, 8, 16, 23, 24, 25, 31, 32, 33, 63, 64, 65, 100, 128, 257, 1000};
@@ -70,19 +70,63 @@ class M3ComparisonSortsAtomsTest {
     private static final int DIGIT_MASK = (1 << DIGIT_BITS) - 1;
     private static final int RADIX = 1 << DIGIT_BITS;
     private static final int TOP_SHIFT = Long.SIZE - DIGIT_BITS;
-    /** M3ComparisonSorts(): the only constructor is private and creates no observable state. */
+    //FLLDCIM: MRL - test vectors and fixtures hoisted to named constants per pattern (util-lang-m3 RECIPE_MEMORY R017)
+    /** depthLimit probes: small lengths, both sides of powers of two, and Integer.MAX_VALUE. */
+    private static final int[] DEPTH_PROBES = {1, 2, 3, 4, 7, 8, 9, 1023, 1024, 1025, Integer.MAX_VALUE};
+    /** skipCycleEquals fixture: equal keys, a different key at SKIP_DIFFERENT_AT, an equal key in the last slot. */
+    private static final int[] SKIP_KEYS = {5, 5, 5, 7, 5};
+    private static final int SKIP_DIFFERENT_AT = 3;
+    /** Rebalance fixture: heights of a three-node chain 0 - 1 - 2 before rebalancing. */
+    private static final int[] CHAIN_HEIGHTS = {3, 2, 1};
+    /** Rotation fixture: node ids of a chain x - y, y's inner and outer subtrees, and the five node heights. */
+    private static final int ROTATE_X = 0;
+    private static final int ROTATE_Y = 1;
+    private static final int ROTATE_OUTER_A = 2;
+    private static final int ROTATE_INNER_B = 3;
+    private static final int ROTATE_OUTER_C = 4;
+    private static final int[] ROTATE_HEIGHTS = {3, 2, 1, 1, 1};
+    /** childHeight fixture: heights of nodes 0..2, addressed through links 1..3. */
+    private static final int[] LINK_HEIGHTS = {3, 1, 2};
+    /** updateHeight fixture: node 0 links to node 1 (left link 2) and node 2 (right link 3); nodes 1, 2 are leaves. */
+    private static final int[] UPDATE_LEFT = {2, 0, 0};
+    private static final int[] UPDATE_RIGHT = {3, 0, 0};
+    private static final int[] UPDATE_HEIGHTS = {0, 4, 2};
+    /** winnerAt fixture: winners of the internal wires 1..4 of a five-leaf tree; leaf position 3 is removed. */
+    private static final int[] WIRE_WINNERS = {-1, 4, 2, 3, 0};
+    private static final int REMOVED_POSITION = 3;
+    /** comparePiles fixture: top keys (equal keys at piles 0 and 2) and top positions. */
+    private static final int[] PILE_KEYS = {7, 3, 7, 1};
+    private static final int[] PILE_TOPS = {1, 2, 3, 4};
+    /** compareExchange fixture: keys with an inversion at (0, 1) and equal keys at (1, 2); the order after the swap. */
+    private static final int[] EXCHANGE_KEYS = {4, 2, 2, 9};
+    private static final int[] EXCHANGED = {1, 0, 2, 3};
+    //FLLDCIM: TOP - utility-class contract replaces the assertSame tautology (util-lang-m3 RECIPE_MEMORY R014)
+    /**
+     * M3ComparisonSorts(): the utility-class contract. The class is final and extends Object; its only constructor is private
+     * and takes no arguments; no field and no method is an instance member, so an instance could hold no state and
+     * do nothing (the constructor only denies instantiation). The private constructor itself completes normally.
+     */
     @Test
     void M3ComparisonSorts() throws Throwable {
+        Class<?> type = OWNER.type;
+        assertTrue(Modifier.isFinal(type.getModifiers()), "M3ComparisonSorts is final");
+        assertSame(Object.class, type.getSuperclass(), "M3ComparisonSorts extends Object directly");
         Constructor<?>[] declared = OWNER.constructors();
         assertEquals(1, declared.length, "M3ComparisonSorts declares one constructor");
         assertTrue(Modifier.isPrivate(declared[0].getModifiers()), "M3ComparisonSorts constructor is private");
-        Object instance = OWNER.constructor("M3ComparisonSorts", 0).invoke();
-        assertSame(OWNER.type, instance.getClass());
+        assertEquals(0, declared[0].getParameterCount(), "M3ComparisonSorts constructor takes no arguments");
+        for (java.lang.reflect.Field f : type.getDeclaredFields()) {
+            assertTrue(Modifier.isStatic(f.getModifiers()), "M3ComparisonSorts declares instance field " + f.getName());
+        }
+        for (Method m : type.getDeclaredMethods()) {
+            assertTrue(Modifier.isStatic(m.getModifiers()), "M3ComparisonSorts declares instance method " + m.getName());
+        }
+        OWNER.constructor("M3ComparisonSorts").invoke();
     }
     /** sort(a, algorithm, c): every comparison algorithm sorts; numeric-only algorithms are rejected. */
     @Test
     void sort() throws Throwable {
-        MethodHandle atom = OWNER.method("sort", 3);
+        MethodHandle atom = OWNER.method("sort");
         for (SortAlgorithm algorithm : SortAlgorithm.values()) {
             if (algorithm.requiresNumericKeys()) {
                 int[] keys = keys(SIZES[SIZES.length - 1], Shape.RANDOM);
@@ -104,7 +148,7 @@ class M3ComparisonSortsAtomsTest {
     /** quick(a, lo, hi, c) sorts [lo, hi) only (QUICK). */
     @Test
     void quick() throws Throwable {
-        MethodHandle atom = OWNER.method("quick", 4);
+        MethodHandle atom = OWNER.method("quick");
         forEachVector(0, (keys, labels) -> {
             int n = labels.length;
             int[][] ranges = {{0, n}, {n / QUARTER, n - n / QUARTER}, {n / THIRD, n / THIRD}};
@@ -118,8 +162,8 @@ class M3ComparisonSortsAtomsTest {
     /** intro(a, lo, hi, depth, c) sorts [lo, hi) for any depth budget, including the heap fallback at 0. */
     @Test
     void intro() throws Throwable {
-        MethodHandle atom = OWNER.method("intro", 5);
-        MethodHandle depthLimit = OWNER.method("depthLimit", 1);
+        MethodHandle atom = OWNER.method("intro");
+        MethodHandle depthLimit = OWNER.method("depthLimit");
         forEachVector(0, (keys, labels) -> {
             int n = labels.length;
             int[] depths = {0, 1, (int) depthLimit.invoke(Math.max(1, n))};
@@ -134,8 +178,8 @@ class M3ComparisonSortsAtomsTest {
     /** dualPivotQuick(a, lo, hi, depth, c) sorts [lo, hi) for any depth budget, including the heap fallback at 0. */
     @Test
     void dualPivotQuick() throws Throwable {
-        MethodHandle atom = OWNER.method("dualPivotQuick", 5);
-        MethodHandle depthLimit = OWNER.method("depthLimit", 1);
+        MethodHandle atom = OWNER.method("dualPivotQuick");
+        MethodHandle depthLimit = OWNER.method("depthLimit");
         forEachVector(0, (keys, labels) -> {
             int n = labels.length;
             int[] depths = {0, 1, (int) depthLimit.invoke(Math.max(1, n))};
@@ -150,9 +194,8 @@ class M3ComparisonSortsAtomsTest {
     /** depthLimit(n) is the logarithmic budget 2 * floor(log2 n). */
     @Test
     void depthLimit() throws Throwable {
-        MethodHandle atom = OWNER.method("depthLimit", 1);
-        int[] probes = {1, 2, 3, 4, 7, 8, 9, 1023, 1024, 1025, Integer.MAX_VALUE};
-        for (int n : probes) {
+        MethodHandle atom = OWNER.method("depthLimit");
+        for (int n : DEPTH_PROBES) {
             int floorLog2 = java.math.BigInteger.valueOf(n).bitLength() - 1;
             assertEquals(2 * floorLog2, (int) atom.invoke(n), "depthLimit(" + n + ")");
         }
@@ -160,7 +203,7 @@ class M3ComparisonSortsAtomsTest {
     /** medianPivot(a, lo, hi, c) returns the label holding the median key of first, middle and last. */
     @Test
     void medianPivot() throws Throwable {
-        MethodHandle atom = OWNER.method("medianPivot", 4);
+        MethodHandle atom = OWNER.method("medianPivot");
         forEachVector(MEDIAN_SAMPLES, (keys, labels) -> {
             int n = labels.length;
             int lo = n / QUARTER;
@@ -179,7 +222,7 @@ class M3ComparisonSortsAtomsTest {
     /** partitionThreeWay(a, lo, hi, pivot, c) packs [equalLo, equalHi) with keys below, equal and above the pivot. */
     @Test
     void partitionThreeWay() throws Throwable {
-        MethodHandle atom = OWNER.method("partitionThreeWay", 5);
+        MethodHandle atom = OWNER.method("partitionThreeWay");
         forEachVector(1, (keys, labels) -> {
             int n = labels.length;
             int lo = n / QUARTER;
@@ -199,7 +242,7 @@ class M3ComparisonSortsAtomsTest {
     /** mergeSort(a, work, lo, hi, c) stably sorts [lo, hi) using the caller's work lane (MERGE). */
     @Test
     void mergeSort() throws Throwable {
-        MethodHandle atom = OWNER.method("mergeSort", 5);
+        MethodHandle atom = OWNER.method("mergeSort");
         forEachVector(0, (keys, labels) -> {
             int n = labels.length;
             int[] a = labels.clone();
@@ -212,7 +255,7 @@ class M3ComparisonSortsAtomsTest {
     /** bottomUpMerge(a, c) sorts the whole lane (BOTTOM_UP_MERGE, stable=BOTTOM_UP_MERGE contract). */
     @Test
     void bottomUpMerge() throws Throwable {
-        MethodHandle atom = OWNER.method("bottomUpMerge", 2);
+        MethodHandle atom = OWNER.method("bottomUpMerge");
         forEachVector(2, (keys, labels) -> {
             int[] a = labels.clone();
             atom.invoke(a, context(keys));
@@ -222,7 +265,7 @@ class M3ComparisonSortsAtomsTest {
     /** naturalMerge(a, c) sorts the whole lane (NATURAL_MERGE, stable=NATURAL_MERGE contract). */
     @Test
     void naturalMerge() throws Throwable {
-        MethodHandle atom = OWNER.method("naturalMerge", 2);
+        MethodHandle atom = OWNER.method("naturalMerge");
         forEachVector(2, (keys, labels) -> {
             int[] a = labels.clone();
             atom.invoke(a, context(keys));
@@ -232,7 +275,7 @@ class M3ComparisonSortsAtomsTest {
     /** ascendingRun(a, lo, hi, c) measures the maximal run at lo (end index), reversing a strictly descending run. */
     @Test
     void ascendingRun() throws Throwable {
-        MethodHandle atom = OWNER.method("ascendingRun", 4);
+        MethodHandle atom = OWNER.method("ascendingRun");
         forEachVector(2, (keys, labels) -> {
             int n = labels.length;
             for (int lo : new int[] {0, (n - 2) / 2, n - 2}) {
@@ -256,7 +299,7 @@ class M3ComparisonSortsAtomsTest {
     /** mergeAdjacent(a, work, lo, mid, hi, c) stably merges two sorted adjacent runs; the left run wins ties. */
     @Test
     void mergeAdjacent() throws Throwable {
-        MethodHandle atom = OWNER.method("mergeAdjacent", 6);
+        MethodHandle atom = OWNER.method("mergeAdjacent");
         forEachVector(0, (keys, labels) -> {
             int n = labels.length;
             for (int mid : new int[] {n / QUARTER, n / 2, n}) {
@@ -269,7 +312,7 @@ class M3ComparisonSortsAtomsTest {
     /** inPlaceMergeSort(a, lo, hi, c) sorts [lo, hi) only (IN_PLACE_MERGE). */
     @Test
     void inPlaceMergeSort() throws Throwable {
-        MethodHandle atom = OWNER.method("inPlaceMergeSort", 4);
+        MethodHandle atom = OWNER.method("inPlaceMergeSort");
         forEachVector(0, (keys, labels) -> {
             int n = labels.length;
             int[][] ranges = {{0, n}, {n / QUARTER, n - n / QUARTER}, {n / THIRD, n / THIRD}};
@@ -283,7 +326,7 @@ class M3ComparisonSortsAtomsTest {
     /** rotateMerge(a, lo, mid, hi, c) stably merges two sorted adjacent runs without a buffer. */
     @Test
     void rotateMerge() throws Throwable {
-        MethodHandle atom = OWNER.method("rotateMerge", 5);
+        MethodHandle atom = OWNER.method("rotateMerge");
         forEachVector(0, (keys, labels) -> {
             int n = labels.length;
             int lo = n / QUARTER;
@@ -297,7 +340,7 @@ class M3ComparisonSortsAtomsTest {
     /** lowerBound(a, lo, hi, value, c) is the first index in [lo, hi] whose key is >= key(value). */
     @Test
     void lowerBound() throws Throwable {
-        MethodHandle atom = OWNER.method("lowerBound", 5);
+        MethodHandle atom = OWNER.method("lowerBound");
         forEachVector(0, (keys, labels) -> {
             int n = labels.length;
             int lo = n / QUARTER;
@@ -314,7 +357,7 @@ class M3ComparisonSortsAtomsTest {
     /** upperBound(a, lo, hi, value, c) is the first index in [lo, hi] whose key is > key(value). */
     @Test
     void upperBound() throws Throwable {
-        MethodHandle atom = OWNER.method("upperBound", 5);
+        MethodHandle atom = OWNER.method("upperBound");
         forEachVector(0, (keys, labels) -> {
             int n = labels.length;
             int lo = n / QUARTER;
@@ -331,7 +374,7 @@ class M3ComparisonSortsAtomsTest {
     /** heap(a, lo, hi, c) sorts [lo, hi) only (HEAP). */
     @Test
     void heap() throws Throwable {
-        MethodHandle atom = OWNER.method("heap", 4);
+        MethodHandle atom = OWNER.method("heap");
         forEachVector(0, (keys, labels) -> {
             int n = labels.length;
             int[][] ranges = {{0, n}, {n / QUARTER, n - n / QUARTER}, {n / THIRD, n / THIRD}};
@@ -345,7 +388,7 @@ class M3ComparisonSortsAtomsTest {
     /** siftMaximum(a, lo, size, root, c): bottom-up sifting builds a max-heap on [lo, lo + size). */
     @Test
     void siftMaximum() throws Throwable {
-        MethodHandle atom = OWNER.method("siftMaximum", 5);
+        MethodHandle atom = OWNER.method("siftMaximum");
         forEachVector(1, (keys, labels) -> {
             int n = labels.length;
             int lo = n / QUARTER;
@@ -364,7 +407,7 @@ class M3ComparisonSortsAtomsTest {
     /** shell(a, c) sorts the whole lane (SHELL, stable=SHELL contract). */
     @Test
     void shell() throws Throwable {
-        MethodHandle atom = OWNER.method("shell", 2);
+        MethodHandle atom = OWNER.method("shell");
         forEachVector(2, (keys, labels) -> {
             int[] a = labels.clone();
             atom.invoke(a, context(keys));
@@ -374,7 +417,7 @@ class M3ComparisonSortsAtomsTest {
     /** insertion(a, lo, hi, c) sorts [lo, hi) only (INSERTION). */
     @Test
     void insertion() throws Throwable {
-        MethodHandle atom = OWNER.method("insertion", 4);
+        MethodHandle atom = OWNER.method("insertion");
         forEachVector(0, (keys, labels) -> {
             int n = labels.length;
             int[][] ranges = {{0, n}, {n / QUARTER, n - n / QUARTER}, {n / THIRD, n / THIRD}};
@@ -388,7 +431,7 @@ class M3ComparisonSortsAtomsTest {
     /** binaryInsertion(a, lo, hi, c) sorts [lo, hi) only (BINARY_INSERTION). */
     @Test
     void binaryInsertion() throws Throwable {
-        MethodHandle atom = OWNER.method("binaryInsertion", 4);
+        MethodHandle atom = OWNER.method("binaryInsertion");
         forEachVector(0, (keys, labels) -> {
             int n = labels.length;
             int[][] ranges = {{0, n}, {n / QUARTER, n - n / QUARTER}, {n / THIRD, n / THIRD}};
@@ -402,7 +445,7 @@ class M3ComparisonSortsAtomsTest {
     /** selection(a, c) sorts the whole lane (SELECTION, stable=SELECTION contract). */
     @Test
     void selection() throws Throwable {
-        MethodHandle atom = OWNER.method("selection", 2);
+        MethodHandle atom = OWNER.method("selection");
         forEachVector(2, (keys, labels) -> {
             int[] a = labels.clone();
             atom.invoke(a, context(keys));
@@ -412,7 +455,7 @@ class M3ComparisonSortsAtomsTest {
     /** doubleSelection(a, c) sorts the whole lane (DOUBLE_SELECTION, stable=DOUBLE_SELECTION contract). */
     @Test
     void doubleSelection() throws Throwable {
-        MethodHandle atom = OWNER.method("doubleSelection", 2);
+        MethodHandle atom = OWNER.method("doubleSelection");
         forEachVector(2, (keys, labels) -> {
             int[] a = labels.clone();
             atom.invoke(a, context(keys));
@@ -422,7 +465,7 @@ class M3ComparisonSortsAtomsTest {
     /** bubble(a, c) sorts the whole lane (BUBBLE, stable=BUBBLE contract). */
     @Test
     void bubble() throws Throwable {
-        MethodHandle atom = OWNER.method("bubble", 2);
+        MethodHandle atom = OWNER.method("bubble");
         forEachVector(2, (keys, labels) -> {
             int[] a = labels.clone();
             atom.invoke(a, context(keys));
@@ -432,7 +475,7 @@ class M3ComparisonSortsAtomsTest {
     /** cocktail(a, c) sorts the whole lane (COCKTAIL, stable=COCKTAIL contract). */
     @Test
     void cocktail() throws Throwable {
-        MethodHandle atom = OWNER.method("cocktail", 2);
+        MethodHandle atom = OWNER.method("cocktail");
         forEachVector(2, (keys, labels) -> {
             int[] a = labels.clone();
             atom.invoke(a, context(keys));
@@ -442,7 +485,7 @@ class M3ComparisonSortsAtomsTest {
     /** comb(a, c) sorts the whole lane (COMB, stable=COMB contract). */
     @Test
     void comb() throws Throwable {
-        MethodHandle atom = OWNER.method("comb", 2);
+        MethodHandle atom = OWNER.method("comb");
         forEachVector(2, (keys, labels) -> {
             int[] a = labels.clone();
             atom.invoke(a, context(keys));
@@ -452,7 +495,7 @@ class M3ComparisonSortsAtomsTest {
     /** gnome(a, c) sorts the whole lane (GNOME, stable=GNOME contract). */
     @Test
     void gnome() throws Throwable {
-        MethodHandle atom = OWNER.method("gnome", 2);
+        MethodHandle atom = OWNER.method("gnome");
         forEachVector(2, (keys, labels) -> {
             int[] a = labels.clone();
             atom.invoke(a, context(keys));
@@ -462,7 +505,7 @@ class M3ComparisonSortsAtomsTest {
     /** oddEven(a, c) sorts the whole lane (ODD_EVEN, stable=ODD_EVEN contract). */
     @Test
     void oddEven() throws Throwable {
-        MethodHandle atom = OWNER.method("oddEven", 2);
+        MethodHandle atom = OWNER.method("oddEven");
         forEachVector(2, (keys, labels) -> {
             int[] a = labels.clone();
             atom.invoke(a, context(keys));
@@ -472,7 +515,7 @@ class M3ComparisonSortsAtomsTest {
     /** cycle(a, c) sorts the whole lane (CYCLE, stable=CYCLE contract). */
     @Test
     void cycle() throws Throwable {
-        MethodHandle atom = OWNER.method("cycle", 2);
+        MethodHandle atom = OWNER.method("cycle");
         forEachVector(2, (keys, labels) -> {
             int[] a = labels.clone();
             atom.invoke(a, context(keys));
@@ -482,7 +525,7 @@ class M3ComparisonSortsAtomsTest {
     /** cycleRank(a, start, item, c) = start + count of keys after start that are smaller than key(item). */
     @Test
     void cycleRank() throws Throwable {
-        MethodHandle atom = OWNER.method("cycleRank", 4);
+        MethodHandle atom = OWNER.method("cycleRank");
         forEachVector(1, (keys, labels) -> {
             int n = labels.length;
             for (int start : new int[] {0, n / 2, n - 1}) {
@@ -497,19 +540,20 @@ class M3ComparisonSortsAtomsTest {
     /** skipCycleEquals(a, position, item, c) skips slots holding key(item); running off the end is a contract violation. */
     @Test
     void skipCycleEquals() throws Throwable {
-        MethodHandle atom = OWNER.method("skipCycleEquals", 4);
-        int[] keys = {5, 5, 5, 7, 5};
+        MethodHandle atom = OWNER.method("skipCycleEquals");
+        int[] keys = SKIP_KEYS.clone();
         int[] a = identity(keys.length);
-        assertEquals(3, (int) atom.invoke(a, 0, 0, context(keys)), "skips the equal prefix");
-        assertEquals(3, (int) atom.invoke(a, 3, 0, context(keys)), "a different key stops at once");
+        assertEquals(SKIP_DIFFERENT_AT, (int) atom.invoke(a, 0, 0, context(keys)), "skips the equal prefix");
+        assertEquals(SKIP_DIFFERENT_AT, (int) atom.invoke(a, SKIP_DIFFERENT_AT, 0, context(keys)),
+                "a different key stops at once");
         IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
-                () -> atom.invoke(a, 4, 0, context(keys)));
+                () -> atom.invoke(a, keys.length - 1, 0, context(keys)));
         assertEquals("Comparison method violates its general contract", e.getMessage());
     }
     /** pancake(a, c) sorts the whole lane (PANCAKE, stable=PANCAKE contract). */
     @Test
     void pancake() throws Throwable {
-        MethodHandle atom = OWNER.method("pancake", 2);
+        MethodHandle atom = OWNER.method("pancake");
         forEachVector(2, (keys, labels) -> {
             int[] a = labels.clone();
             atom.invoke(a, context(keys));
@@ -519,7 +563,7 @@ class M3ComparisonSortsAtomsTest {
     /** bingo(a, c) sorts the whole lane (BINGO, stable=BINGO contract). */
     @Test
     void bingo() throws Throwable {
-        MethodHandle atom = OWNER.method("bingo", 2);
+        MethodHandle atom = OWNER.method("bingo");
         forEachVector(2, (keys, labels) -> {
             int[] a = labels.clone();
             atom.invoke(a, context(keys));
@@ -529,7 +573,7 @@ class M3ComparisonSortsAtomsTest {
     /** tree(a, c) sorts the whole lane (TREE, stable=TREE contract). */
     @Test
     void tree() throws Throwable {
-        MethodHandle atom = OWNER.method("tree", 2);
+        MethodHandle atom = OWNER.method("tree");
         forEachVector(2, (keys, labels) -> {
             int[] a = labels.clone();
             atom.invoke(a, context(keys));
@@ -539,16 +583,16 @@ class M3ComparisonSortsAtomsTest {
     /** rebalance(node, left, right, height, c) restores |balance| <= 1 for LL, LR, RR and RL chains. */
     @Test
     void rebalance() throws Throwable {
-        MethodHandle atom = OWNER.method("rebalance", 5);
+        MethodHandle atom = OWNER.method("rebalance");
         int[][] shapes = {{-1, -1}, {-1, 1}, {1, 1}, {1, -1}};
         for (int[] shape : shapes) {
-            int[] left = new int[3];
-            int[] right = new int[3];
-            int[] height = {3, 2, 1};
+            int[] left = new int[CHAIN_HEIGHTS.length];
+            int[] right = new int[CHAIN_HEIGHTS.length];
+            int[] height = CHAIN_HEIGHTS.clone();
             link(0, 1, shape[0], left, right);
             link(1, 2, shape[1], left, right);
             List<Integer> before = inOrder(0, left, right);
-            int root = (int) atom.invoke(0, left, right, height, context(new int[3]));
+            int root = (int) atom.invoke(0, left, right, height, context(new int[CHAIN_HEIGHTS.length]));
             assertEquals(before, inOrder(root, left, right), "rebalance preserves in-order");
             assertEquals(before.get(1), root, "rebalance lifts the middle node");
             assertEquals(2, height[root], "rebalance balanced height");
@@ -561,16 +605,16 @@ class M3ComparisonSortsAtomsTest {
     /** rotateTreeLeft(node, left, right, height, c) lifts the right child, preserving in-order labels. */
     @Test
     void rotateTreeLeft() throws Throwable {
-        MethodHandle atom = OWNER.method("rotateTreeLeft", 5);
+        MethodHandle atom = OWNER.method("rotateTreeLeft");
         // Nodes 0..4; a chain x(=0) with child y(=1) on the right side, y has inner and outer subtrees.
-        final int x = 0;
-        final int y = 1;
-        final int outerA = 2;
-        final int innerB = 3;
-        final int outerC = 4;
+        final int x = ROTATE_X;
+        final int y = ROTATE_Y;
+        final int outerA = ROTATE_OUTER_A;
+        final int innerB = ROTATE_INNER_B;
+        final int outerC = ROTATE_OUTER_C;
         int[] left = new int[outerC + 1];
         int[] right = new int[outerC + 1];
-        int[] height = {3, 2, 1, 1, 1};
+        int[] height = ROTATE_HEIGHTS.clone();
         left[x] = outerA + 1;
         right[x] = y + 1;
         left[y] = innerB + 1;
@@ -585,16 +629,16 @@ class M3ComparisonSortsAtomsTest {
     /** rotateTreeRight(node, left, right, height, c) lifts the left child, preserving in-order labels. */
     @Test
     void rotateTreeRight() throws Throwable {
-        MethodHandle atom = OWNER.method("rotateTreeRight", 5);
+        MethodHandle atom = OWNER.method("rotateTreeRight");
         // Nodes 0..4; a chain x(=0) with child y(=1) on the left side, y has inner and outer subtrees.
-        final int x = 0;
-        final int y = 1;
-        final int outerA = 2;
-        final int innerB = 3;
-        final int outerC = 4;
+        final int x = ROTATE_X;
+        final int y = ROTATE_Y;
+        final int outerA = ROTATE_OUTER_A;
+        final int innerB = ROTATE_INNER_B;
+        final int outerC = ROTATE_OUTER_C;
         int[] left = new int[outerC + 1];
         int[] right = new int[outerC + 1];
-        int[] height = {3, 2, 1, 1, 1};
+        int[] height = ROTATE_HEIGHTS.clone();
         right[x] = outerA + 1;
         left[x] = y + 1;
         right[y] = innerB + 1;
@@ -609,8 +653,8 @@ class M3ComparisonSortsAtomsTest {
     /** childHeight(child, height): link 0 is empty (height 0); link k is node k - 1. */
     @Test
     void childHeight() throws Throwable {
-        MethodHandle atom = OWNER.method("childHeight", 2);
-        int[] height = {3, 1, 2};
+        MethodHandle atom = OWNER.method("childHeight");
+        int[] height = LINK_HEIGHTS.clone();
         assertEquals(0, (int) atom.invoke(0, height), "empty link");
         for (int node = 0; node < height.length; node++) {
             assertEquals(height[node], (int) atom.invoke(node + 1, height), "link " + (node + 1));
@@ -619,23 +663,23 @@ class M3ComparisonSortsAtomsTest {
     /** updateHeight(node, left, right, height): height = 1 + max(child heights). */
     @Test
     void updateHeight() throws Throwable {
-        MethodHandle atom = OWNER.method("updateHeight", 4);
-        int[] left = {2, 0, 0};
-        int[] right = {3, 0, 0};
-        int[] height = {0, 4, 2};
+        MethodHandle atom = OWNER.method("updateHeight");
+        int[] left = UPDATE_LEFT.clone();
+        int[] right = UPDATE_RIGHT.clone();
+        int[] height = UPDATE_HEIGHTS.clone();
         atom.invoke(0, left, right, height);
-        assertEquals(5, height[0], "1 + max(4, 2)");
+        assertEquals(1 + Math.max(UPDATE_HEIGHTS[1], UPDATE_HEIGHTS[2]), height[0], "1 + max(child heights)");
         atom.invoke(1, left, right, height);
         assertEquals(1, height[1], "leaf height");
+        left[0] = right[0];
         right[0] = 0;
-        left[0] = 3;
         atom.invoke(0, left, right, height);
-        assertEquals(3, height[0], "single child");
+        assertEquals(1 + UPDATE_HEIGHTS[2], height[0], "single child");
     }
     /** tournament(a, c) sorts the whole lane (TOURNAMENT, stable=TOURNAMENT contract). */
     @Test
     void tournament() throws Throwable {
-        MethodHandle atom = OWNER.method("tournament", 2);
+        MethodHandle atom = OWNER.method("tournament");
         forEachVector(2, (keys, labels) -> {
             int[] a = labels.clone();
             atom.invoke(a, context(keys));
@@ -645,15 +689,15 @@ class M3ComparisonSortsAtomsTest {
     /** winnerAt(wire, length, winners, removed): internal wires read winners; leaves map to unremoved positions. */
     @Test
     void winnerAt() throws Throwable {
-        MethodHandle atom = OWNER.method("winnerAt", 4);
-        int length = 5;
-        int[] winners = {-1, 4, 2, 3, 0};
-        long[] removed = {1L << 3};
+        MethodHandle atom = OWNER.method("winnerAt");
+        int[] winners = WIRE_WINNERS.clone();
+        int length = winners.length;
+        long[] removed = {1L << REMOVED_POSITION};
         for (long wire = 1; wire < length; wire++) {
             assertEquals(winners[(int) wire], (int) atom.invoke(wire, length, winners, removed), "internal " + wire);
         }
         for (int position = 0; position < length; position++) {
-            int expected = position == 3 ? -1 : position;
+            int expected = position == REMOVED_POSITION ? -1 : position;
             assertEquals(expected, (int) atom.invoke((long) length + position, length, winners, removed),
                     "leaf " + position);
         }
@@ -661,20 +705,21 @@ class M3ComparisonSortsAtomsTest {
     /** tournamentWinner(left, right, keys, c): -1 is a bye, the smaller key wins and equal keys prefer the left position. */
     @Test
     void tournamentWinner() throws Throwable {
-        MethodHandle atom = OWNER.method("tournamentWinner", 4);
+        MethodHandle atom = OWNER.method("tournamentWinner");
         int[] values = {1, 2, 1, 0};
         int[] keys = identity(values.length);
         Object c = context(values);
         assertEquals(2, (int) atom.invoke(-1, 2, keys, c), "left bye");
         assertEquals(1, (int) atom.invoke(1, -1, keys, c), "right bye");
-        assertEquals(3, (int) atom.invoke(0, 3, keys, c), "smaller key wins");
+        int smallest = values.length - 1;
+        assertEquals(smallest, (int) atom.invoke(0, smallest, keys, c), "smaller key wins");
         assertEquals(0, (int) atom.invoke(2, 0, keys, c), "equal keys: lower position");
         assertEquals(0, (int) atom.invoke(0, 2, keys, c), "equal keys: lower position, either side");
     }
     /** patience(a, c) sorts the whole lane (PATIENCE, stable=PATIENCE contract). */
     @Test
     void patience() throws Throwable {
-        MethodHandle atom = OWNER.method("patience", 2);
+        MethodHandle atom = OWNER.method("patience");
         forEachVector(2, (keys, labels) -> {
             int[] a = labels.clone();
             atom.invoke(a, context(keys));
@@ -684,7 +729,7 @@ class M3ComparisonSortsAtomsTest {
     /** siftPile(heap, size, root, tops, keys, c): sifting every parent yields a min-heap of piles. */
     @Test
     void siftPile() throws Throwable {
-        MethodHandle atom = OWNER.method("siftPile", 6);
+        MethodHandle atom = OWNER.method("siftPile");
         forEachVector(1, (keys, labels) -> {
             int piles = labels.length;
             int[] tops = IntStream.range(0, piles).map(i -> i + 1).toArray();
@@ -706,10 +751,10 @@ class M3ComparisonSortsAtomsTest {
     /** comparePiles(left, right, tops, keys, c) orders piles by top key, then by top position. */
     @Test
     void comparePiles() throws Throwable {
-        MethodHandle atom = OWNER.method("comparePiles", 5);
-        int[] values = {7, 3, 7, 1};
+        MethodHandle atom = OWNER.method("comparePiles");
+        int[] values = PILE_KEYS.clone();
         int[] keys = identity(values.length);
-        int[] tops = {1, 2, 3, 4};
+        int[] tops = PILE_TOPS.clone();
         Object c = context(values);
         assertTrue((int) atom.invoke(1, 0, tops, keys, c) < 0, "smaller top key first");
         assertTrue((int) atom.invoke(0, 1, tops, keys, c) > 0, "larger top key later");
@@ -719,7 +764,7 @@ class M3ComparisonSortsAtomsTest {
     /** strand(a, c) sorts the whole lane (STRAND, stable=STRAND contract). */
     @Test
     void strand() throws Throwable {
-        MethodHandle atom = OWNER.method("strand", 2);
+        MethodHandle atom = OWNER.method("strand");
         forEachVector(2, (keys, labels) -> {
             int[] a = labels.clone();
             atom.invoke(a, context(keys));
@@ -729,7 +774,7 @@ class M3ComparisonSortsAtomsTest {
     /** mergeStrand(sorted, sortedLength, strand, strandLength, out, c) stably merges; the accumulated run wins ties. */
     @Test
     void mergeStrand() throws Throwable {
-        MethodHandle atom = OWNER.method("mergeStrand", 6);
+        MethodHandle atom = OWNER.method("mergeStrand");
         forEachVector(0, (keys, labels) -> {
             int n = labels.length;
             int split = n / THIRD;
@@ -744,7 +789,7 @@ class M3ComparisonSortsAtomsTest {
     /** bitonicSort(a, lo, length, ascending, c) sorts an arbitrary-length range in either direction. */
     @Test
     void bitonicSort() throws Throwable {
-        MethodHandle atom = OWNER.method("bitonicSort", 5);
+        MethodHandle atom = OWNER.method("bitonicSort");
         forEachVector(0, (keys, labels) -> {
             int n = labels.length;
             int lo = n / QUARTER;
@@ -760,7 +805,7 @@ class M3ComparisonSortsAtomsTest {
     /** bitonicMerge(a, lo, length, ascending, c) merges a half sorted against the direction with an aligned rest. */
     @Test
     void bitonicMerge() throws Throwable {
-        MethodHandle atom = OWNER.method("bitonicMerge", 5);
+        MethodHandle atom = OWNER.method("bitonicMerge");
         forEachVector(0, (keys, labels) -> {
             int n = labels.length;
             int half = n >>> 1;
@@ -776,7 +821,7 @@ class M3ComparisonSortsAtomsTest {
     /** oddEvenMergeSort(a, lo, wires, c) sorts the real prefix of a virtual power-of-two network. */
     @Test
     void oddEvenMergeSort() throws Throwable {
-        MethodHandle atom = OWNER.method("oddEvenMergeSort", 4);
+        MethodHandle atom = OWNER.method("oddEvenMergeSort");
         forEachVector(0, (keys, labels) -> {
             int[] a = labels.clone();
             long wires = Long.highestOneBit(Math.max(1, a.length - 1)) << 1;
@@ -787,7 +832,7 @@ class M3ComparisonSortsAtomsTest {
     /** oddEvenNetworkMerge(a, lo, length, 1, c) merges two sorted virtual halves of the network. */
     @Test
     void oddEvenNetworkMerge() throws Throwable {
-        MethodHandle atom = OWNER.method("oddEvenNetworkMerge", 5);
+        MethodHandle atom = OWNER.method("oddEvenNetworkMerge");
         forEachVector(0, (keys, labels) -> {
             int n = labels.length;
             long wires = Long.highestOneBit(Math.max(1, n - 1)) << 1;
@@ -800,20 +845,20 @@ class M3ComparisonSortsAtomsTest {
     /** compareExchange(a, i, j, c) leaves key(a[i]) <= key(a[j]) and never swaps equal keys. */
     @Test
     void compareExchange() throws Throwable {
-        MethodHandle atom = OWNER.method("compareExchange", 4);
-        int[] keys = {4, 2, 2, 9};
+        MethodHandle atom = OWNER.method("compareExchange");
+        int[] keys = EXCHANGE_KEYS.clone();
         int[] a = identity(keys.length);
         atom.invoke(a, 0, 1, context(keys));
-        assertArrayEquals(new int[] {1, 0, 2, 3}, a, "greater left swaps");
+        assertArrayEquals(EXCHANGED, a, "greater left swaps");
         atom.invoke(a, 0, 2, context(keys));
-        assertArrayEquals(new int[] {1, 0, 2, 3}, a, "equal keys stay");
-        atom.invoke(a, 1, 3, context(keys));
-        assertArrayEquals(new int[] {1, 0, 2, 3}, a, "ordered pair stays");
+        assertArrayEquals(EXCHANGED, a, "equal keys stay");
+        atom.invoke(a, 1, keys.length - 1, context(keys));
+        assertArrayEquals(EXCHANGED, a, "ordered pair stays");
     }
     /** rotate(a, lo, mid, hi, c) moves [mid, hi) before [lo, mid), like Collections.rotate(sub, lo - mid). */
     @Test
     void rotate() throws Throwable {
-        MethodHandle atom = OWNER.method("rotate", 5);
+        MethodHandle atom = OWNER.method("rotate");
         forEachVector(0, (keys, labels) -> {
             int n = labels.length;
             int lo = n / QUARTER;
@@ -830,7 +875,7 @@ class M3ComparisonSortsAtomsTest {
     /** reverse(a, lo, hi, c) matches java.util.Collections.reverse on the sub-list. */
     @Test
     void reverse() throws Throwable {
-        MethodHandle atom = OWNER.method("reverse", 4);
+        MethodHandle atom = OWNER.method("reverse");
         forEachVector(0, (keys, labels) -> {
             int n = labels.length;
             int[][] ranges = {{0, n}, {n / QUARTER, n - n / QUARTER}, {n / 2, n / 2}};
@@ -847,7 +892,7 @@ class M3ComparisonSortsAtomsTest {
     /** swap(a, i, j, c) matches java.util.Collections.swap. */
     @Test
     void swap() throws Throwable {
-        MethodHandle atom = OWNER.method("swap", 4);
+        MethodHandle atom = OWNER.method("swap");
         forEachVector(1, (keys, labels) -> {
             int n = labels.length;
             int[][] pairs = {{0, n - 1}, {n / 2, n / 2}, {n - 1, 0}};
@@ -1075,16 +1120,17 @@ class M3ComparisonSortsAtomsTest {
             }
         }
 
-        /** The unique declared, non-synthetic method {@code atom} with {@code arity} parameters. */
-        MethodHandle method(String atom, int arity) {
+        //FLLDCIM: IOP - name lookup replaces the arity lookup; overloads name their signature (util-lang-m3 RECIPE_MEMORY R016)
+        /** The unique declared, non-synthetic method {@code atom}; an overloaded atom needs its signature. */
+        MethodHandle method(String atom) {
             Method found = null;
             for (Method m : type.getDeclaredMethods()) {
-                if (m.getName().equals(atom) && m.getParameterCount() == arity && !m.isSynthetic()) {
-                    assertEquals(null, found, "ambiguous atom " + atom + "/" + arity);
+                if (m.getName().equals(atom) && !m.isSynthetic()) {
+                    assertEquals(null, found, "overloaded atom " + atom + ": name its parameter signature");
                     found = m;
                 }
             }
-            assertTrue(found != null, "missing atom " + atom + "/" + arity);
+            assertTrue(found != null, "missing atom " + atom);
             try {
                 return lookup.unreflect(found);
             } catch (IllegalAccessException e) {
@@ -1106,11 +1152,24 @@ class M3ComparisonSortsAtomsTest {
             throw new AssertionError("missing atom " + atom + "(" + signature + ")");
         }
 
-        /** The declared constructor with {@code arity} parameters; {@code atom} must be the simple type name. */
-        MethodHandle constructor(String atom, int arity) {
+        //FLLDCIM: IOP - single-constructor lookup without an arity literal (util-lang-m3 RECIPE_MEMORY R016)
+        /** The only declared constructor; {@code atom} must be the simple type name. */
+        MethodHandle constructor(String atom) {
+            assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
+            Constructor<?>[] declared = type.getDeclaredConstructors();
+            assertEquals(1, declared.length, "overloaded constructor " + atom + ": name its parameter signature");
+            try {
+                return lookup.unreflectConstructor(declared[0]);
+            } catch (IllegalAccessException e) {
+                throw new AssertionError(atom, e);
+            }
+        }
+
+        /** The declared constructor whose parameter types print as {@code signature}. */
+        MethodHandle constructor(String atom, String signature) {
             assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
             for (Constructor<?> c : type.getDeclaredConstructors()) {
-                if (c.getParameterCount() == arity && !c.isSynthetic()) {
+                if (!c.isSynthetic() && signature(c.getParameterTypes()).equals(signature)) {
                     try {
                         return lookup.unreflectConstructor(c);
                     } catch (IllegalAccessException e) {
@@ -1118,7 +1177,7 @@ class M3ComparisonSortsAtomsTest {
                     }
                 }
             }
-            throw new AssertionError("missing constructor " + atom + "/" + arity);
+            throw new AssertionError("missing constructor " + atom + "(" + signature + ")");
         }
 
         /** The declared constructors, for the private non-instantiable utility pattern. */

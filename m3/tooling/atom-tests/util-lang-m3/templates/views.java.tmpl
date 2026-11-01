@@ -30,6 +30,11 @@ import jdk.internal.m3.M3IndexedArray;
     private static final Comparator<Item> BY_RANK = Comparator.comparingInt(Item::rank);
     private static final Predicate<Item> KEEP = item -> item.rank() % KEEP_MODULUS != 0;
     private static final String READ_ONLY = "read-only M3 view";
+    //FLLDCIM: TmOP - named kind selections replace the boolean template leftovers (util-lang-m3 RECIPE_MEMORY R015)
+    /** View-kind selections of the spec rows: a value-epoch constructor or select builds no state-aware view. */
+    private static final Predicate<Kind> ALL_KINDS = kind -> true;
+    private static final Predicate<Kind> PLAIN_KINDS = kind -> !kind.stateAware;
+    private static final Predicate<Kind> STATE_KINDS = kind -> kind.stateAware;
 //@@ HELPERS
     record Item(int rank, int id) { }
 
@@ -114,9 +119,16 @@ import jdk.internal.m3.M3IndexedArray;
     }
 
     static void forEachKind(KindCheck check) throws Throwable {
+        forEachKind(ALL_KINDS, check);
+    }
+
+    /** Runs {@code check} on a fresh fixture for every view kind that {@code selected} admits. */
+    static void forEachKind(Predicate<Kind> selected, KindCheck check) throws Throwable {
         for (Kind kind : Kind.values()) {
-            Fixture f = new Fixture();
-            check.check(f, kind, f.view(kind), f.expected(kind));
+            if (selected.test(kind)) {
+                Fixture f = new Fixture();
+                check.check(f, kind, f.view(kind), f.expected(kind));
+            }
         }
     }
 
@@ -192,7 +204,7 @@ import jdk.internal.m3.M3IndexedArray;
 
     static long stateVersion(Fixture f) {
         try {
-            return (long) new Access("jdk.internal.m3.M3IndexedArray").method("stateVersion", 0).invoke(f.backing);
+            return (long) new Access("jdk.internal.m3.M3IndexedArray").method("stateVersion").invoke(f.backing);
         } catch (Throwable e) {
             throw new AssertionError(e);
         }
@@ -205,11 +217,8 @@ import jdk.internal.m3.M3IndexedArray;
     /** ${atom}(backing, predicate, comparator${ctor_doc}) builds a lazy ${ctor_mode} view; a null backing is rejected. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle ctor = OWNER.constructor("${atom}", ${arity});
-        forEachKind((f, kind, view, expected) -> {
-            if (kind.stateAware != ${state_aware}) {
-                return;
-            }
+        MethodHandle ctor = OWNER.constructor("${atom}", "${signature}");
+        forEachKind(${kinds}, (f, kind, view, expected) -> {
             assertEquals("${atom}", view.getClass().getSimpleName(), "factories return the view type");
             Predicate<Item> p = kind.filtered ? KEEP : null;
             Comparator<Item> c = kind.sorted ? BY_RANK : null;
@@ -306,7 +315,7 @@ import jdk.internal.m3.M3IndexedArray;
     /** ${atom}(expected, origin, count, index) iterates the root directory window [origin, origin + count). */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 4);
+        MethodHandle atom = OWNER.method("${atom}");
         forEachKind((f, kind, view, expected) -> {
             int n = view.size();
             int origin = n / QUARTER;
@@ -323,7 +332,7 @@ import jdk.internal.m3.M3IndexedArray;
     /** ${atom}(expected, origin, count, from, to) windows absolute coordinates and validates the range. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 5);
+        MethodHandle atom = OWNER.method("${atom}");
         forEachKind((f, kind, view, expected) -> {
             int n = view.size();
             long v = version(f, kind);
@@ -347,7 +356,7 @@ import jdk.internal.m3.M3IndexedArray;
     /** ${atom}() is the value epoch for plain views and the state epoch for state-aware views. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 0);
+        MethodHandle atom = OWNER.method("${atom}");
         forEachKind((f, kind, view, expected) -> {
             assertEquals(version(f, kind), (long) atom.invoke(view), "${atom} " + kind);
             long before = (long) atom.invoke(view);
@@ -361,7 +370,7 @@ import jdk.internal.m3.M3IndexedArray;
     /** ${atom}(expected, slot) reads the slot under the expected epoch and rejects a stale one. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 2);
+        MethodHandle atom = OWNER.method("${atom}");
         forEachKind((f, kind, view, expected) -> {
             view.size();
             int[] slots = indexes(view);
@@ -376,7 +385,7 @@ import jdk.internal.m3.M3IndexedArray;
     /** ${atom}(expected) passes on the current epoch and throws ConcurrentModificationException otherwise. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 1);
+        MethodHandle atom = OWNER.method("${atom}");
         forEachKind((f, kind, view, expected) -> {
             long v = version(f, kind);
             atom.invoke(view, v);
@@ -388,7 +397,7 @@ import jdk.internal.m3.M3IndexedArray;
     /** ${atom}() selects lazily, reuses the directory while the epoch is unchanged and rebuilds after a change. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 0);
+        MethodHandle atom = OWNER.method("${atom}");
         VarHandle indexedVersion = OWNER.field("indexedVersion");
         VarHandle modCount = new Access("java.util.AbstractList").field("modCount");
         forEachKind((f, kind, view, expected) -> {
@@ -489,7 +498,7 @@ import jdk.internal.m3.M3IndexedArray;
         forEachKind((f, kind, view, expected) -> {
             int n = expected.size();
             List<Item> sub = view.subList(n / QUARTER, n);
-            MethodHandle atom = new Access(sub.getClass().getName()).method("${atom}", 2);
+            MethodHandle atom = new Access(sub.getClass().getName()).method("${atom}");
             atom.invoke(sub, 0, 0);
             assertThrows(UnsupportedOperationException.class, () -> atom.invoke(sub, 0, 1));
             assertThrows(UnsupportedOperationException.class, sub::clear);
@@ -505,7 +514,7 @@ import jdk.internal.m3.M3IndexedArray;
             int n = expected.size();
             List<Item> sub = view.subList(n / QUARTER, n);
             int count = sub.size();
-            MethodHandle atom = new Access(sub.getClass().getName()).method("${atom}", 1);
+            MethodHandle atom = new Access(sub.getClass().getName()).method("${atom}");
             atom.invoke(sub, 0);
             atom.invoke(sub, count);
             for (int bad : new int[] {-1, count + 1}) {
@@ -591,7 +600,7 @@ import jdk.internal.m3.M3IndexedArray;
         forEachKind((f, kind, view, expected) -> {
             Spliterator<Item> s = view.spliterator();
             Access a = new Access(s.getClass().getName());
-            MethodHandle atom = a.method("${atom}", 0);
+            MethodHandle atom = a.method("${atom}");
             f.append(new Item(1, ITEMS));
             synchronized (f.backing) {
                 atom.invoke(s);
@@ -683,7 +692,7 @@ import jdk.internal.m3.M3IndexedArray;
     void ${test}() throws Throwable {
         forEachKind((f, kind, view, expected) -> {
             ListIterator<Item> it = view.listIterator();
-            MethodHandle atom = new Access(it.getClass().getName()).method("${atom}", 0);
+            MethodHandle atom = new Access(it.getClass().getName()).method("${atom}");
             atom.invoke(it);
             f.lease(0);
             if (kind.stateAware) {
@@ -730,7 +739,7 @@ import jdk.internal.m3.M3IndexedArray;
 //@@ SUPPORT SLOT_VALUES
     /** Values of a slot directory, read through the valueAtSlot atom of the owner. */
     private static List<Item> slotValues(Fixture f, int[] slots) throws Throwable {
-        MethodHandle valueAt = OWNER.method("valueAtSlot", 1);
+        MethodHandle valueAt = OWNER.method("valueAtSlot");
         List<Item> out = new ArrayList<>();
         for (int slot : slots) {
             out.add((Item) valueAt.invoke(f.backing, slot));
@@ -741,7 +750,7 @@ import jdk.internal.m3.M3IndexedArray;
     /** ${atom}(required, forbidden) rejects overlapping state bits and accepts disjoint ones. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 2);
+        MethodHandle atom = OWNER.method("${atom}");
         atom.invoke(M3IndexedArray.LIVE, M3IndexedArray.LEASED | M3IndexedArray.RETIRED);
         atom.invoke(0, 0);
         assertEquals("overlapping required/forbidden M3 state bits", assertThrows(IllegalArgumentException.class,
@@ -751,11 +760,8 @@ import jdk.internal.m3.M3IndexedArray;
     /** ${atom}(${select_doc}) returns the slot directory of the model selection; mutating callbacks are rejected. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", ${arity});
-        forEachKind((f, kind, view, expected) -> {
-            if (kind.stateAware && !${state_capable}) {
-                return;
-            }
+        MethodHandle atom = OWNER.method("${atom}", "${signature}");
+        forEachKind(${kinds}, (f, kind, view, expected) -> {
             Predicate<Item> p = kind.filtered ? KEEP : null;
             Comparator<Item> c = kind.sorted ? BY_RANK : null;
             int[] slots = (int[]) atom.invoke(${select_args});
@@ -774,7 +780,7 @@ import jdk.internal.m3.M3IndexedArray;
     /** ${atom}() reuses the most recently freed slot first, else allocates the next slot at generation 1. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 0);
+        MethodHandle atom = OWNER.method("${atom}");
         Fixture f = new Fixture();
         int allocated = (int) OWNER.field("allocated").get(f.backing);
         long first = f.handles.get(0);
@@ -791,7 +797,7 @@ import jdk.internal.m3.M3IndexedArray;
     /** ${atom}(handle) accepts live handles and rejects stale, forged or out-of-range ones. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 1);
+        MethodHandle atom = OWNER.method("${atom}");
         Fixture f = new Fixture();
         long live = f.handles.get(0);
         assertEquals((int) live, (int) atom.invoke(f.backing, live));
@@ -809,7 +815,7 @@ import jdk.internal.m3.M3IndexedArray;
     /** ${atom}(slot) derives the state bits from the lease count and bumps only the state epoch. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 1);
+        MethodHandle atom = OWNER.method("${atom}");
         Fixture f = new Fixture();
         int slot = (int) (long) f.handles.get(0);
         int[] leases = (int[]) OWNER.field("leaseCounts").get(f.backing);
@@ -831,7 +837,7 @@ import jdk.internal.m3.M3IndexedArray;
     /** ${atom}(slot) is the payload stored in that physical slot. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 1);
+        MethodHandle atom = OWNER.method("${atom}");
         Fixture f = new Fixture();
         for (int i = 0; i < f.model.size(); i++) {
             assertSame(f.model.get(i), atom.invoke(f.backing, (int) f.backing.handleAt(i)), "${atom} index " + i);
@@ -841,20 +847,20 @@ import jdk.internal.m3.M3IndexedArray;
     /** ${atom}(slot, generation) packs the generation into the high and the unsigned slot into the low 32 bits. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 2);
+        MethodHandle atom = OWNER.method("${atom}");
         Fixture f = new Fixture();
         int[] generations = (int[]) OWNER.field("generations").get(f.backing);
         for (long handle : f.handles) {
             assertEquals(handle, (long) atom.invoke((int) handle, generations[(int) handle]), "${atom} round trip");
         }
-        assertEquals(0xFFFF_FFFFL | (1L << Integer.SIZE), (long) atom.invoke(-1, 1), "the slot is unsigned");
+        assertEquals(Integer.toUnsignedLong(-1) | (1L << Integer.SIZE), (long) atom.invoke(-1, 1), "the slot is unsigned");
         assertEquals((long) Integer.MAX_VALUE << Integer.SIZE, (long) atom.invoke(0, Integer.MAX_VALUE));
     }
 //@@ PATTERN ARRAY_REJECT_REENTRANT | uses= | oracle=ConcurrentModificationException once the epoch moved
     /** ${atom}(${reject_doc}) throws once the ${epoch_doc} epoch moved past the initial one. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", ${arity});
+        MethodHandle atom = OWNER.method("${atom}", "${signature}");
         Fixture f = new Fixture();
         long initial = ${initial};
         atom.invoke(${reject_args});
@@ -866,7 +872,7 @@ import jdk.internal.m3.M3IndexedArray;
     /** ${atom}(indexes, comparator, version, stateAware) stably sorts slot indexes by their payloads. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 4);
+        MethodHandle atom = OWNER.method("${atom}");
         Fixture f = new Fixture();
         for (int i = 0; i < ITEMS * QUARTER; i++) {
             f.append(new Item(i < ITEMS * 2 ? 0 : i % RANKS, ITEMS + i));

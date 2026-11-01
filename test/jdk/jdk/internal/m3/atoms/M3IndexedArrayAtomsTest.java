@@ -6,7 +6,7 @@
 /*
  * @test
  * @summary Per-atom contracts of jdk.internal.m3.M3IndexedArray private atoms against an ArrayList model (generated, template views)
- * @modules java.base/jdk.internal.m3:open java.base/java.util:open
+ * @modules java.base/jdk.internal.m3:+open
  * @run junit/othervm M3IndexedArrayAtomsTest
  */
 
@@ -61,10 +61,15 @@ class M3IndexedArrayAtomsTest {
     private static final Comparator<Item> BY_RANK = Comparator.comparingInt(Item::rank);
     private static final Predicate<Item> KEEP = item -> item.rank() % KEEP_MODULUS != 0;
     private static final String READ_ONLY = "read-only M3 view";
+    //FLLDCIM: TmOP - named kind selections replace the boolean template leftovers (util-lang-m3 RECIPE_MEMORY R015)
+    /** View-kind selections of the spec rows: a value-epoch constructor or select builds no state-aware view. */
+    private static final Predicate<Kind> ALL_KINDS = kind -> true;
+    private static final Predicate<Kind> PLAIN_KINDS = kind -> !kind.stateAware;
+    private static final Predicate<Kind> STATE_KINDS = kind -> kind.stateAware;
     /** checkMasks(required, forbidden) rejects overlapping state bits and accepts disjoint ones. */
     @Test
     void checkMasks() throws Throwable {
-        MethodHandle atom = OWNER.method("checkMasks", 2);
+        MethodHandle atom = OWNER.method("checkMasks");
         atom.invoke(M3IndexedArray.LIVE, M3IndexedArray.LEASED | M3IndexedArray.RETIRED);
         atom.invoke(0, 0);
         assertEquals("overlapping required/forbidden M3 state bits", assertThrows(IllegalArgumentException.class,
@@ -73,11 +78,8 @@ class M3IndexedArrayAtomsTest {
     /** select(predicate, comparator) returns the slot directory of the model selection; mutating callbacks are rejected. */
     @Test
     void selectValueEpoch() throws Throwable {
-        MethodHandle atom = OWNER.method("select", 2);
-        forEachKind((f, kind, view, expected) -> {
-            if (kind.stateAware && !false) {
-                return;
-            }
+        MethodHandle atom = OWNER.method("select", "Predicate,Comparator");
+        forEachKind(PLAIN_KINDS, (f, kind, view, expected) -> {
             Predicate<Item> p = kind.filtered ? KEEP : null;
             Comparator<Item> c = kind.sorted ? BY_RANK : null;
             int[] slots = (int[]) atom.invoke(f.backing, p, c);
@@ -95,11 +97,8 @@ class M3IndexedArrayAtomsTest {
     /** select(predicate, comparator, required, forbidden, stateAware) returns the slot directory of the model selection; mutating callbacks are rejected. */
     @Test
     void selectStateEpoch() throws Throwable {
-        MethodHandle atom = OWNER.method("select", 5);
-        forEachKind((f, kind, view, expected) -> {
-            if (kind.stateAware && !true) {
-                return;
-            }
+        MethodHandle atom = OWNER.method("select", "Predicate,Comparator,int,int,boolean");
+        forEachKind(ALL_KINDS, (f, kind, view, expected) -> {
             Predicate<Item> p = kind.filtered ? KEEP : null;
             Comparator<Item> c = kind.sorted ? BY_RANK : null;
             int[] slots = (int[]) atom.invoke(f.backing, p, c, kind.stateAware ? M3IndexedArray.LIVE : 0, kind.stateAware ? M3IndexedArray.LEASED : 0, kind.stateAware);
@@ -117,7 +116,7 @@ class M3IndexedArrayAtomsTest {
     /** allocateSlot() reuses the most recently freed slot first, else allocates the next slot at generation 1. */
     @Test
     void allocateSlot() throws Throwable {
-        MethodHandle atom = OWNER.method("allocateSlot", 0);
+        MethodHandle atom = OWNER.method("allocateSlot");
         Fixture f = new Fixture();
         int allocated = (int) OWNER.field("allocated").get(f.backing);
         long first = f.handles.get(0);
@@ -133,7 +132,7 @@ class M3IndexedArrayAtomsTest {
     /** validSlot(handle) accepts live handles and rejects stale, forged or out-of-range ones. */
     @Test
     void validSlot() throws Throwable {
-        MethodHandle atom = OWNER.method("validSlot", 1);
+        MethodHandle atom = OWNER.method("validSlot");
         Fixture f = new Fixture();
         long live = f.handles.get(0);
         assertEquals((int) live, (int) atom.invoke(f.backing, live));
@@ -150,7 +149,7 @@ class M3IndexedArrayAtomsTest {
     /** updateLeaseMask(slot) derives the state bits from the lease count and bumps only the state epoch. */
     @Test
     void updateLeaseMask() throws Throwable {
-        MethodHandle atom = OWNER.method("updateLeaseMask", 1);
+        MethodHandle atom = OWNER.method("updateLeaseMask");
         Fixture f = new Fixture();
         int slot = (int) (long) f.handles.get(0);
         int[] leases = (int[]) OWNER.field("leaseCounts").get(f.backing);
@@ -171,7 +170,7 @@ class M3IndexedArrayAtomsTest {
     /** valueAtSlot(slot) is the payload stored in that physical slot. */
     @Test
     void valueAtSlot() throws Throwable {
-        MethodHandle atom = OWNER.method("valueAtSlot", 1);
+        MethodHandle atom = OWNER.method("valueAtSlot");
         Fixture f = new Fixture();
         for (int i = 0; i < f.model.size(); i++) {
             assertSame(f.model.get(i), atom.invoke(f.backing, (int) f.backing.handleAt(i)), "valueAtSlot index " + i);
@@ -180,19 +179,19 @@ class M3IndexedArrayAtomsTest {
     /** pack(slot, generation) packs the generation into the high and the unsigned slot into the low 32 bits. */
     @Test
     void pack() throws Throwable {
-        MethodHandle atom = OWNER.method("pack", 2);
+        MethodHandle atom = OWNER.method("pack");
         Fixture f = new Fixture();
         int[] generations = (int[]) OWNER.field("generations").get(f.backing);
         for (long handle : f.handles) {
             assertEquals(handle, (long) atom.invoke((int) handle, generations[(int) handle]), "pack round trip");
         }
-        assertEquals(0xFFFF_FFFFL | (1L << Integer.SIZE), (long) atom.invoke(-1, 1), "the slot is unsigned");
+        assertEquals(Integer.toUnsignedLong(-1) | (1L << Integer.SIZE), (long) atom.invoke(-1, 1), "the slot is unsigned");
         assertEquals((long) Integer.MAX_VALUE << Integer.SIZE, (long) atom.invoke(0, Integer.MAX_VALUE));
     }
     /** rejectReentrantMutation(initialVersion) throws once the value epoch moved past the initial one. */
     @Test
     void rejectValueEpoch() throws Throwable {
-        MethodHandle atom = OWNER.method("rejectReentrantMutation", 1);
+        MethodHandle atom = OWNER.method("rejectReentrantMutation", "long");
         Fixture f = new Fixture();
         long initial = f.backing.version();
         atom.invoke(f.backing, initial);
@@ -203,7 +202,7 @@ class M3IndexedArrayAtomsTest {
     /** rejectReentrantMutation(initialVersion, stateAware) throws once the state epoch moved past the initial one. */
     @Test
     void rejectStateEpoch() throws Throwable {
-        MethodHandle atom = OWNER.method("rejectReentrantMutation", 2);
+        MethodHandle atom = OWNER.method("rejectReentrantMutation", "long,boolean");
         Fixture f = new Fixture();
         long initial = stateVersion(f);
         atom.invoke(f.backing, initial, true);
@@ -214,7 +213,7 @@ class M3IndexedArrayAtomsTest {
     /** stableSort(indexes, comparator, version, stateAware) stably sorts slot indexes by their payloads. */
     @Test
     void stableSort() throws Throwable {
-        MethodHandle atom = OWNER.method("stableSort", 4);
+        MethodHandle atom = OWNER.method("stableSort");
         Fixture f = new Fixture();
         for (int i = 0; i < ITEMS * QUARTER; i++) {
             f.append(new Item(i < ITEMS * 2 ? 0 : i % RANKS, ITEMS + i));
@@ -321,9 +320,16 @@ class M3IndexedArrayAtomsTest {
     }
 
     static void forEachKind(KindCheck check) throws Throwable {
+        forEachKind(ALL_KINDS, check);
+    }
+
+    /** Runs {@code check} on a fresh fixture for every view kind that {@code selected} admits. */
+    static void forEachKind(Predicate<Kind> selected, KindCheck check) throws Throwable {
         for (Kind kind : Kind.values()) {
-            Fixture f = new Fixture();
-            check.check(f, kind, f.view(kind), f.expected(kind));
+            if (selected.test(kind)) {
+                Fixture f = new Fixture();
+                check.check(f, kind, f.view(kind), f.expected(kind));
+            }
         }
     }
 
@@ -399,7 +405,7 @@ class M3IndexedArrayAtomsTest {
 
     static long stateVersion(Fixture f) {
         try {
-            return (long) new Access("jdk.internal.m3.M3IndexedArray").method("stateVersion", 0).invoke(f.backing);
+            return (long) new Access("jdk.internal.m3.M3IndexedArray").method("stateVersion").invoke(f.backing);
         } catch (Throwable e) {
             throw new AssertionError(e);
         }
@@ -410,7 +416,7 @@ class M3IndexedArrayAtomsTest {
     }
     /** Values of a slot directory, read through the valueAtSlot atom of the owner. */
     private static List<Item> slotValues(Fixture f, int[] slots) throws Throwable {
-        MethodHandle valueAt = OWNER.method("valueAtSlot", 1);
+        MethodHandle valueAt = OWNER.method("valueAtSlot");
         List<Item> out = new ArrayList<>();
         for (int slot : slots) {
             out.add((Item) valueAt.invoke(f.backing, slot));
@@ -432,16 +438,17 @@ class M3IndexedArrayAtomsTest {
             }
         }
 
-        /** The unique declared, non-synthetic method {@code atom} with {@code arity} parameters. */
-        MethodHandle method(String atom, int arity) {
+        //FLLDCIM: IOP - name lookup replaces the arity lookup; overloads name their signature (util-lang-m3 RECIPE_MEMORY R016)
+        /** The unique declared, non-synthetic method {@code atom}; an overloaded atom needs its signature. */
+        MethodHandle method(String atom) {
             Method found = null;
             for (Method m : type.getDeclaredMethods()) {
-                if (m.getName().equals(atom) && m.getParameterCount() == arity && !m.isSynthetic()) {
-                    assertEquals(null, found, "ambiguous atom " + atom + "/" + arity);
+                if (m.getName().equals(atom) && !m.isSynthetic()) {
+                    assertEquals(null, found, "overloaded atom " + atom + ": name its parameter signature");
                     found = m;
                 }
             }
-            assertTrue(found != null, "missing atom " + atom + "/" + arity);
+            assertTrue(found != null, "missing atom " + atom);
             try {
                 return lookup.unreflect(found);
             } catch (IllegalAccessException e) {
@@ -463,11 +470,24 @@ class M3IndexedArrayAtomsTest {
             throw new AssertionError("missing atom " + atom + "(" + signature + ")");
         }
 
-        /** The declared constructor with {@code arity} parameters; {@code atom} must be the simple type name. */
-        MethodHandle constructor(String atom, int arity) {
+        //FLLDCIM: IOP - single-constructor lookup without an arity literal (util-lang-m3 RECIPE_MEMORY R016)
+        /** The only declared constructor; {@code atom} must be the simple type name. */
+        MethodHandle constructor(String atom) {
+            assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
+            Constructor<?>[] declared = type.getDeclaredConstructors();
+            assertEquals(1, declared.length, "overloaded constructor " + atom + ": name its parameter signature");
+            try {
+                return lookup.unreflectConstructor(declared[0]);
+            } catch (IllegalAccessException e) {
+                throw new AssertionError(atom, e);
+            }
+        }
+
+        /** The declared constructor whose parameter types print as {@code signature}. */
+        MethodHandle constructor(String atom, String signature) {
             assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
             for (Constructor<?> c : type.getDeclaredConstructors()) {
-                if (c.getParameterCount() == arity && !c.isSynthetic()) {
+                if (!c.isSynthetic() && signature(c.getParameterTypes()).equals(signature)) {
                     try {
                         return lookup.unreflectConstructor(c);
                     } catch (IllegalAccessException e) {
@@ -475,7 +495,7 @@ class M3IndexedArrayAtomsTest {
                     }
                 }
             }
-            throw new AssertionError("missing constructor " + atom + "/" + arity);
+            throw new AssertionError("missing constructor " + atom + "(" + signature + ")");
         }
 
         /** The declared constructors, for the private non-instantiable utility pattern. */

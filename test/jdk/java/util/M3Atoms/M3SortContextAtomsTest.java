@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class M3SortContextAtomsTest {
     private static final Access OWNER = new Access("java.util.M3SortContext");
     private static final Access CONTEXT = new Access("java.util.M3SortContext");
-    private static final MethodHandle NEW_CONTEXT = CONTEXT.constructor("M3SortContext", 2);
+    private static final MethodHandle NEW_CONTEXT = CONTEXT.constructor("M3SortContext");
     private static final long SEED = 0x4D33_534F_5254L;
     /** Kernel lengths around the insertion cut-off (24), TimSort MIN_MERGE (32) and powers of two. */
     private static final int[] SIZES = {2, 3, 4, 5, 7, 8, 16, 23, 24, 25, 31, 32, 33, 63, 64, 65, 100, 128, 257, 1000};
@@ -73,7 +73,7 @@ class M3SortContextAtomsTest {
     /** M3SortContext(comparator, monitor): null comparator is rejected; NONE means no monitor; live monitors are checked. */
     @Test
     void M3SortContext() throws Throwable {
-        MethodHandle ctor = OWNER.constructor("M3SortContext", 2);
+        MethodHandle ctor = OWNER.constructor("M3SortContext");
         IntBinaryOperator natural = Integer::compare;
         NullPointerException npe = assertThrows(NullPointerException.class,
                 () -> ctor.invoke((IntBinaryOperator) null, (ProgressMonitor) null));
@@ -92,8 +92,8 @@ class M3SortContextAtomsTest {
     void compare() throws Throwable {
         RecordingMonitor monitor = new RecordingMonitor();
         IntBinaryOperator reversed = (x, y) -> Integer.compare(y, x);
-        Object context = OWNER.constructor("M3SortContext", 2).invoke(reversed, (ProgressMonitor) monitor);
-        MethodHandle atom = OWNER.method("compare", 2);
+        Object context = OWNER.constructor("M3SortContext").invoke(reversed, (ProgressMonitor) monitor);
+        MethodHandle atom = OWNER.method("compare");
         for (int i = 0; i < FLUSH_BATCH; i++) {
             assertEquals(Integer.compare(-i, i), Integer.signum((int) atom.invoke(context, i, -i)), "compare value");
         }
@@ -103,9 +103,9 @@ class M3SortContextAtomsTest {
     @Test
     void step() throws Throwable {
         RecordingMonitor monitor = new RecordingMonitor();
-        Object context = OWNER.constructor("M3SortContext", 2).invoke((IntBinaryOperator) Integer::compare,
+        Object context = OWNER.constructor("M3SortContext").invoke((IntBinaryOperator) Integer::compare,
                 (ProgressMonitor) monitor);
-        MethodHandle atom = OWNER.method("step", 0);
+        MethodHandle atom = OWNER.method("step");
         for (int i = 1; i < FLUSH_BATCH; i++) {
             atom.invoke(context);
         }
@@ -120,7 +120,7 @@ class M3SortContextAtomsTest {
             atom.invoke(context);
         }
         assertThrows(CancellationException.class, () -> atom.invoke(context), "cancellation surfaces at the batch");
-        Object silent = OWNER.constructor("M3SortContext", 2).invoke((IntBinaryOperator) Integer::compare,
+        Object silent = OWNER.constructor("M3SortContext").invoke((IntBinaryOperator) Integer::compare,
                 (ProgressMonitor) null);
         for (int i = 0; i < FLUSH_BATCH; i++) {
             atom.invoke(silent);
@@ -131,10 +131,10 @@ class M3SortContextAtomsTest {
     @Test
     void finish() throws Throwable {
         RecordingMonitor monitor = new RecordingMonitor();
-        MethodHandle ctor = OWNER.constructor("M3SortContext", 2);
+        MethodHandle ctor = OWNER.constructor("M3SortContext");
         Object context = ctor.invoke((IntBinaryOperator) Integer::compare, (ProgressMonitor) monitor);
-        MethodHandle step = OWNER.method("step", 0);
-        MethodHandle atom = OWNER.method("finish", 0);
+        MethodHandle step = OWNER.method("step");
+        MethodHandle atom = OWNER.method("finish");
         int partial = FLUSH_BATCH / QUARTER;
         for (int i = 0; i < partial; i++) {
             step.invoke(context);
@@ -151,10 +151,10 @@ class M3SortContextAtomsTest {
     @Test
     void flush() throws Throwable {
         RecordingMonitor monitor = new RecordingMonitor();
-        Object context = OWNER.constructor("M3SortContext", 2).invoke((IntBinaryOperator) Integer::compare,
+        Object context = OWNER.constructor("M3SortContext").invoke((IntBinaryOperator) Integer::compare,
                 (ProgressMonitor) monitor);
-        MethodHandle step = OWNER.method("step", 0);
-        MethodHandle atom = OWNER.method("flush", 0);
+        MethodHandle step = OWNER.method("step");
+        MethodHandle atom = OWNER.method("flush");
         step.invoke(context);
         step.invoke(context);
         monitor.cancelled = true;
@@ -356,16 +356,17 @@ class M3SortContextAtomsTest {
             }
         }
 
-        /** The unique declared, non-synthetic method {@code atom} with {@code arity} parameters. */
-        MethodHandle method(String atom, int arity) {
+        //FLLDCIM: IOP - name lookup replaces the arity lookup; overloads name their signature (util-lang-m3 RECIPE_MEMORY R016)
+        /** The unique declared, non-synthetic method {@code atom}; an overloaded atom needs its signature. */
+        MethodHandle method(String atom) {
             Method found = null;
             for (Method m : type.getDeclaredMethods()) {
-                if (m.getName().equals(atom) && m.getParameterCount() == arity && !m.isSynthetic()) {
-                    assertEquals(null, found, "ambiguous atom " + atom + "/" + arity);
+                if (m.getName().equals(atom) && !m.isSynthetic()) {
+                    assertEquals(null, found, "overloaded atom " + atom + ": name its parameter signature");
                     found = m;
                 }
             }
-            assertTrue(found != null, "missing atom " + atom + "/" + arity);
+            assertTrue(found != null, "missing atom " + atom);
             try {
                 return lookup.unreflect(found);
             } catch (IllegalAccessException e) {
@@ -387,11 +388,24 @@ class M3SortContextAtomsTest {
             throw new AssertionError("missing atom " + atom + "(" + signature + ")");
         }
 
-        /** The declared constructor with {@code arity} parameters; {@code atom} must be the simple type name. */
-        MethodHandle constructor(String atom, int arity) {
+        //FLLDCIM: IOP - single-constructor lookup without an arity literal (util-lang-m3 RECIPE_MEMORY R016)
+        /** The only declared constructor; {@code atom} must be the simple type name. */
+        MethodHandle constructor(String atom) {
+            assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
+            Constructor<?>[] declared = type.getDeclaredConstructors();
+            assertEquals(1, declared.length, "overloaded constructor " + atom + ": name its parameter signature");
+            try {
+                return lookup.unreflectConstructor(declared[0]);
+            } catch (IllegalAccessException e) {
+                throw new AssertionError(atom, e);
+            }
+        }
+
+        /** The declared constructor whose parameter types print as {@code signature}. */
+        MethodHandle constructor(String atom, String signature) {
             assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
             for (Constructor<?> c : type.getDeclaredConstructors()) {
-                if (c.getParameterCount() == arity && !c.isSynthetic()) {
+                if (!c.isSynthetic() && signature(c.getParameterTypes()).equals(signature)) {
                     try {
                         return lookup.unreflectConstructor(c);
                     } catch (IllegalAccessException e) {
@@ -399,7 +413,7 @@ class M3SortContextAtomsTest {
                     }
                 }
             }
-            throw new AssertionError("missing constructor " + atom + "/" + arity);
+            throw new AssertionError("missing constructor " + atom + "(" + signature + ")");
         }
 
         /** The declared constructors, for the private non-instantiable utility pattern. */

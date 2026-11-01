@@ -5,8 +5,9 @@
 Both inputs come from per_atom_test_census.py (the before run over the base test tree, the after run over the
 same tree plus this branch's tests). Writes CENSUS_BEFORE_AFTER.tsv next to this file: per package of the
 util-lang-m3 group the UNTESTED / CLASS_ONLY / TESTED / perf-PRESENT counts before and after, a TOTAL row
-over all 2,847 atoms, and one SIDE_EFFECT row per atom whose status changed although TEST_PATTERNS.tsv
-binds no test to it (name-match artifacts of the census, not claimed as tested)."""
+over all 2,847 atoms, one SIDE_EFFECT row per atom whose status changed although TEST_PATTERNS.tsv
+binds no test to it (name-match artifacts of the census, not claimed as tested), and one HOLD row per atom that
+TEST_PATTERNS.tsv holds with a stated reason (never claimed as tested, whatever the census name match says)."""
 import collections
 import os
 import sys
@@ -25,12 +26,13 @@ def load(path):
 
 def main():
     before, after = load(sys.argv[1]), load(sys.argv[2])
-    bound = set()
+    bound, held = set(), set()
     with open(os.path.join(HERE, "TEST_PATTERNS.tsv"), encoding="utf-8") as f:
         next(f)
         for line in f:
-            owner, atom = line.split("\t")[:2]
-            bound.add((owner.rsplit(".", 1)[-1].split("$")[0], atom))
+            owner, atom, pattern = line.split("\t")[:3]
+            key = (owner.rsplit(".", 1)[-1].split("$")[0], atom)
+            (held if pattern == "HOLD" else bound).add(key)
     counts = collections.Counter()
     side = []
     for b, a in zip(before, after):
@@ -39,7 +41,10 @@ def main():
             for key in (row[2], "TOTAL"):
                 counts[(key, when, row[8])] += 1
                 counts[(key, when, row[9])] += 1
-        if b[8] != a[8] and (b[3].split(".")[0], b[4]) not in bound:
+        key = (b[3].split(".")[0], b[4])
+        if key in held:
+            side.append(("HOLD", b[2], b[3], b[4], b[8] + "->" + a[8]))
+        elif b[8] != a[8] and key not in bound:
             side.append(("SIDE_EFFECT", b[2], b[3], b[4], b[8] + "->" + a[8]))
     with open(os.path.join(HERE, "CENSUS_BEFORE_AFTER.tsv"), "w", encoding="utf-8", newline="\n") as w:
         w.write("row\tpackage\t" + "\t".join(f"before_{s}" for s in STATES) + "\t"
@@ -50,7 +55,7 @@ def main():
                               + [str(counts[(p, "after", s)]) for s in STATES]) + "\n")
         w.writelines("\t".join(r) + "\n" for r in side)
     print(" ".join(f"{s}:{counts[('TOTAL', 'before', s)]}->{counts[('TOTAL', 'after', s)]}" for s in STATES),
-          f"side_effects={len(side)}")
+          f"side_effects={sum(r[0] == 'SIDE_EFFECT' for r in side)} hold={sum(r[0] == 'HOLD' for r in side)}")
 
 
 main()
