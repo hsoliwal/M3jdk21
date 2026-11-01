@@ -1,0 +1,17 @@
+dimension	key	count
+pattern	ENUM	64
+pattern	IMPL_INFRA	7
+pattern	INTERFACE	8
+pattern	MANAGED_OWNED	37
+pattern	MANAGED_REFCNT	20
+pattern	NATIVE_HANDLE	1
+pattern	NATIVE_STATIC_FACADE	19
+pattern	STATIC_UTIL	1
+pattern	SUBTYPE_PURE	8
+pattern	VALUE_DATA	52
+binding	defined/exported	965
+binding	defined/not_exported	3
+binding	undefined/not_exported	5
+dll_exports_without_java_native	-	65
+cc_class_strings	-	51
+cc_jni_definitions	-	1031

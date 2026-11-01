@@ -1,0 +1,3 @@
+file	old	new	count
+bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/internal/M3Fragment.java	"io.github.humbleui.skija.Surface"	"jdk.m3.graphics.M3Surface"	1
+tests/org.eclipse.swt.tests/JUnit Tests/org/eclipse/swt/tests/junit/Test_org_eclipse_swt_internal_render_Win32Backends.java	"io.github.humbleui.skija.Surface"	"jdk.m3.graphics.M3Surface"	1

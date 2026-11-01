@@ -1,0 +1,1236 @@
+package jdk.m3.graphics;
+
+import jdk.m3.graphics.impl.*;
+import jdk.m3.graphics.*;
+
+/**
+ * <p>Path contain geometry. Path may be empty, or contain one or more verbs that
+ * outline a figure. Path always starts with a move verb to a Cartesian coordinate,
+ * and may be followed by additional verbs that add lines or curves.</p>
+ *
+ * <p>Adding a close verb makes the geometry into a continuous loop, a closed contour.
+ * Path may contain any number of contours, each beginning with a move verb.</p>
+ *
+ * <p>Path contours may contain only a move verb, or may also contain lines,
+ * quadratic beziers, conics, and cubic beziers. Path contours may be open or
+ * closed.</p>
+ *
+ * <p>When used to draw a filled area, Path describes whether the fill is inside or
+ * outside the geometry. Path also describes the winding rule used to fill
+ * overlapping contours.</p>
+ *
+ * <p>Internally, Path lazily computes metrics likes bounds and convexity. Call
+ * {@link #updateBoundsCache()} to make Path thread safe.</p>
+ */
+public class M3Path extends M3Managed implements Iterable<M3PathSegment> {
+    static { M3Library.staticLoad(); }
+
+    public static class _FinalizerHolder {
+        public static final long PTR = _nGetFinalizer();
+    }
+
+    public static M3Path makeRaw(M3Point[] points, M3PathVerb[] verbs, float[] conicWeights, M3PathFillMode fillMode) {
+        return makeRaw(points, verbs, conicWeights, fillMode, false);
+    }
+
+    public static M3Path makeRaw(M3Point[] points, M3PathVerb[] verbs, float[] conicWeights, M3PathFillMode fillMode, boolean isVolatile) {
+        M3Stats.onNativeCall();
+        int[] verbOrdinals = new int[verbs.length];
+        for (int i = 0; i < verbs.length; i++) {
+            verbOrdinals[i] = verbs[i].ordinal();
+        }
+        float[] coords = new float[points.length * 2];
+        for (int i = 0; i < points.length; i++) {
+            coords[i * 2] = points[i]._x;
+            coords[i * 2 + 1] = points[i]._y;
+        }
+        return new M3Path(_nMakeRaw(coords, verbOrdinals, conicWeights, fillMode.ordinal(), isVolatile));
+    }
+
+    public static M3Path makeRect(M3Rect rect) {
+        return makeRect(rect, M3PathDirection.CLOCKWISE, 0);
+    }
+
+    public static M3Path makeRect(M3Rect rect, M3PathDirection dir) {
+        return makeRect(rect, dir, 0);
+    }
+
+    public static M3Path makeRect(M3Rect rect, M3PathDirection dir, int startIndex) {
+        M3Stats.onNativeCall();
+        return new M3Path(_nMakeRect(rect._left, rect._top, rect._right, rect._bottom, dir.ordinal(), startIndex));
+    }
+
+    public static M3Path makeOval(M3Rect oval) {
+        return makeOval(oval, M3PathDirection.CLOCKWISE);
+    }
+
+    public static M3Path makeOval(M3Rect oval, M3PathDirection dir) {
+        M3Stats.onNativeCall();
+        return new M3Path(_nMakeOval(oval._left, oval._top, oval._right, oval._bottom, dir.ordinal()));
+    }
+
+    public static M3Path makeCircle(float x, float y, float radius) {
+        return makeCircle(x, y, radius, M3PathDirection.CLOCKWISE);
+    }
+
+    public static M3Path makeCircle(float x, float y, float radius, M3PathDirection dir) {
+        M3Stats.onNativeCall();
+        return new M3Path(_nMakeCircle(x, y, radius, dir.ordinal()));
+    }
+
+    public static M3Path makeRRect(M3RRect rrect) {
+        return makeRRect(rrect, M3PathDirection.CLOCKWISE, 0);
+    }
+
+    public static M3Path makeRRect(M3RRect rrect, M3PathDirection dir) {
+        return makeRRect(rrect, dir, 0);
+    }
+
+    public static M3Path makeRRect(M3RRect rrect, M3PathDirection dir, int startIndex) {
+        try {
+            M3Stats.onNativeCall();
+            return new M3Path(_nMakeRRect(rrect._left, rrect._top, rrect._right, rrect._bottom,
+                                        rrect._radii, dir.ordinal(), startIndex));
+        } finally {
+            M3ReferenceUtil.reachabilityFence(rrect);
+        }
+    }
+
+    public static M3Path makePolygon(M3Point[] pts, boolean isClosed) {
+        return makePolygon(pts, isClosed, M3PathFillMode.WINDING, false);
+    }
+
+    public static M3Path makePolygon(M3Point[] pts, boolean isClosed, M3PathFillMode fillMode) {
+        return makePolygon(pts, isClosed, fillMode, false);
+    }
+
+    public static M3Path makePolygon(M3Point[] pts, boolean isClosed, M3PathFillMode fillMode, boolean isVolatile) {
+        M3Stats.onNativeCall();
+        float[] coords = new float[pts.length * 2];
+        for (int i = 0; i < pts.length; i++) {
+            coords[i * 2] = pts[i]._x;
+            coords[i * 2 + 1] = pts[i]._y;
+        }
+        return new M3Path(_nMakePolygon(coords, isClosed, fillMode.ordinal(), isVolatile));
+    }
+
+    public static M3Path makeLine(M3Point a, M3Point b) {
+        return makeLine(a._x, a._y, b._x, b._y);
+    }
+
+    public static M3Path makeLine(float x0, float y0, float x1, float y1) {
+        M3Stats.onNativeCall();
+        return new M3Path(_nMakeLine(x0, y0, x1, y1));
+    }
+
+    public static M3Path makeFromSVGString(String svg) {
+        assert svg != null : "Can't makeFromSVGString with svg == null";
+        M3Stats.onNativeCall();
+        long res = _nMakeFromSVGString(svg);
+        if (res == 0)
+            throw new IllegalArgumentException("Failed to parse SVG Path string: " + svg);
+        else
+            return new M3Path(res);
+    }
+
+    /**
+     * <p>Returns Path that is the result of applying the Op to the first path and the second path.
+     * <p>The resulting path will be constructed from non-overlapping contours.
+     * <p>The curve order is reduced where possible so that cubics may be turned
+     * into quadratics, and quadratics maybe turned into lines.
+     *
+     * @param one The first operand (for difference, the minuend)
+     * @param two The second operand (for difference, the subtrahend)
+     * @param op  The operator to apply.
+     * @return    Path if operation was able to produce a result, null otherwise
+     */
+    public static M3Path makeCombining(M3Path one, M3Path two, M3PathOp op) {
+        try {
+            M3Stats.onNativeCall();
+            long ptr = _nMakeCombining(M3Native.getPtr(one), M3Native.getPtr(two), op.ordinal());
+            return ptr == 0 ? null : new M3Path(ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(one);
+            M3ReferenceUtil.reachabilityFence(two);
+        }
+    }
+
+    /**
+     * Constructs an empty Path. By default, Path has no verbs, no {@link Point}, and no weights.
+     * FillMode is set to {@link PathFillMode#WINDING}.
+     *
+     * @see <a href="https://fiddle.skia.org/c/@Path_empty_constructor">https://fiddle.skia.org/c/@Path_empty_constructor</a>
+     */
+    public M3Path() {
+        this(_nMake(M3PathFillMode.WINDING.ordinal()));
+        M3Stats.onNativeCall();
+    }
+
+    /**
+     * Constructs an empty {@link Path} with specified {@link PathFillMode}.
+     * By default, {@link Path} has no verbs, no {@link Point}, and no weights.
+     */
+    public M3Path(M3PathFillMode fillMode) {
+        this(_nMake(fillMode.ordinal()));
+        M3Stats.onNativeCall();
+    }
+
+    /**
+     * <p>Constructs a copy of an existing path. Copy constructor makes two
+     * paths identical by value. Internally, path and the returned result share
+     * pointer values. The underlying verb array, {@link Point} array and
+     * weights are copied when modified.</p>
+     *
+     * <p>Creating a {@link Path} copy is very efficient and never allocates
+     * memory. {@link Path} are always copied by value from the interface; the
+     * underlying shared pointers are not exposed.</p>
+     *
+     * @param path  Path to copy by value
+     * @see <a href="https://fiddle.skia.org/c/@Path_copy_const_SkPath">https://fiddle.skia.org/c/@Path_copy_const_SkPath</a>
+     */
+    public M3Path(M3Path path) {
+        this(_nMakeCopy(M3Native.getPtr(path)));
+        M3ReferenceUtil.reachabilityFence(path);
+        M3Stats.onNativeCall();
+    }
+
+    /**
+     * Compares this path and o; Returns true if {@link PathFillMode}, verb array, Point array, and weights
+     * are equivalent.
+     *
+     * @param other  Path to compare
+     * @return   true if this and Path are equivalent
+    */
+    @Override
+    public boolean _nativeEquals(M3Native other) {
+        try {
+            return _nEquals(_ptr, M3Native.getPtr(other));
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+            M3ReferenceUtil.reachabilityFence(other);
+        }
+    }
+
+    /**
+     * <p>Returns true if Path contain equal verbs and equal weights.
+     * If Path contain one or more conics, the weights must match.</p>
+     *
+     * <p>{@link PathBuilder#conicTo(float, float, float, float, float)} may add different verbs
+     * depending on conic weight, so it is not trivial to interpolate a pair of Path
+     * containing conics with different conic weight values.</p>
+     *
+     * @param compare  Path to compare
+     * @return         true if Path verb array and weights are equivalent
+     *
+     * @see <a href="https://fiddle.skia.org/c/@Path_isInterpolatable">https://fiddle.skia.org/c/@Path_isInterpolatable</a>
+     */
+    public boolean isInterpolatable(M3Path compare) {
+        try {
+            M3Stats.onNativeCall();
+            return _nIsInterpolatable(_ptr, M3Native.getPtr(compare));
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+            M3ReferenceUtil.reachabilityFence(compare);
+        }
+    }
+
+    /**
+     * <p>Interpolates between Path with {@link Point} array of equal size.
+     * Copy verb array and weights to out, and set out Point array to a weighted
+     * average of this Point array and ending Point array, using the formula:
+     *
+     * <p>{@code (Path Point * weight) + ending Point * (1 - weight)}
+     *
+     * <p>weight is most useful when between zero (ending Point array) and
+     * one (this Point_Array); will work with values outside of this
+     * range.</p>
+     *
+     * <p>interpolate() returns null if Point array is not
+     * the same size as ending Point array. Call {@link #isInterpolatable(Path)} to check Path
+     * compatibility prior to calling interpolate().</p>
+     *
+     * @param ending  Point array averaged with this Point array
+     * @param weight  contribution of this Point array, and
+     *                one minus contribution of ending Point array
+     * @return        interpolated Path if Path contain same number of Point, null otherwise
+     *
+     * @see <a href="https://fiddle.skia.org/c/@Path_interpolate">https://fiddle.skia.org/c/@Path_interpolate</a>
+     */
+    public M3Path makeInterpolate(M3Path ending, float weight) {
+        try {
+            M3Stats.onNativeCall();
+            long ptr = _nMakeInterpolate(_ptr, M3Native.getPtr(ending), weight);
+            if (ptr == 0)
+                throw new IllegalArgumentException("Point array is not the same size as ending Point array");
+            return new M3Path(ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+            M3ReferenceUtil.reachabilityFence(ending);
+        }
+    }
+
+    /**
+     * Returns {@link PathFillMode}, the rule used to fill {@link Path}.
+     *
+     * @return  current {@link PathFillMode} setting
+     */
+    public M3PathFillMode getFillMode() {
+        try {
+            M3Stats.onNativeCall();
+            return M3PathFillMode._values[_nGetFillMode(_ptr)];
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * Creates an {@link Path} with the same properties and data, and with
+     * {@link PathFillMode} set to fillMode.
+     *
+     * @return  new {@link Path}
+     */
+    public M3Path makeWithFillMode(M3PathFillMode fillMode) {
+        try {
+            M3Stats.onNativeCall();
+            return new M3Path(_nMakeWithFillMode(_ptr, fillMode.ordinal()));
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+   /**
+    * Returns if {@link PathFillMode} describes area outside {@link Path}
+    * geometry. The inverse fill area extends indefinitely.
+    *
+    * @return  true if {@link PathFillMode} is {@link PathFillMode#INVERSE_WINDING}
+    *          or {@link PathFillMode#INVERSE_EVEN_ODD}
+    */
+    public boolean isInverseFillType() {
+        try {
+            M3Stats.onNativeCall();
+            return _nIsInverseFillType(_ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * Creates an {@link Path} with the same properties and data, and with
+     * {@link PathFillMode} replaced with its inverse. The inverse of
+     * {@link PathFillMode} describes the area unmodified by the original
+     * {@link PathFillMode}.
+     *
+     * @return  new {@link Path}
+     */
+    public M3Path makeToggleInverseFillType() {
+        try {
+            M3Stats.onNativeCall();
+            return new M3Path(_nMakeToggleInverseFillType(_ptr));
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * Returns true if the path is convex. If necessary, it will first compute the convexity.
+     *
+     * @return  true or false
+     */
+    public boolean isConvex() {
+        try {
+            M3Stats.onNativeCall();
+            return _nIsConvex(_ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * Returns oval bounds if this path is recognized as an oval or circle.
+     *
+     * @return  bounds is recognized as an oval or circle, null otherwise
+     *
+     * @see <a href="https://fiddle.skia.org/c/@Path_isOval">https://fiddle.skia.org/c/@Path_isOval</a>
+     */
+    public M3Rect isOval() {
+        try {
+            M3Stats.onNativeCall();
+            return _nIsOval(_ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * Returns {@link RRect} if this path is recognized as an oval, circle or RRect.
+     *
+     * @return  bounds is recognized as an oval, circle or RRect, null otherwise
+     *
+     * @see <a href="https://fiddle.skia.org/c/@Path_isRRect">https://fiddle.skia.org/c/@Path_isRRect</a>
+     */
+    public M3RRect isRRect() {
+        try {
+            M3Stats.onNativeCall();
+            return _nIsRRect(_ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+
+    /**
+     * <p>Returns if Path is empty.</p>
+     *
+     * <p>Empty Path may have FillMode but has no {@link Point}, {@link PathVerb}, or conic weight.
+     * {@link Path()} constructs empty Path; {@link #reset()} make Path empty.</p>
+     *
+     * @return  true if the path contains no Verb array
+     */
+    public boolean isEmpty() {
+        try {
+            M3Stats.onNativeCall();
+            return _nIsEmpty(_ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * <p>Returns if contour is closed.</p>
+     *
+     * <p>Contour is closed if Path Verb array was last modified by {@link PathBuilder#closePath()}. When stroked,
+     * closed contour draws {@link PaintStrokeJoin} instead of {@link PaintStrokeCap} at first and last Point.</p>
+     *
+     * @return  true if the last contour ends with a {@link PathVerb#CLOSE}
+     *
+     * @see <a href="https://fiddle.skia.org/c/@Path_isLastContourClosed">https://fiddle.skia.org/c/@Path_isLastContourClosed</a>
+     */
+    public boolean isLastContourClosed() {
+        try {
+            M3Stats.onNativeCall();
+            return _nIsLastContourClosed(_ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * Returns true for finite Point array values between negative Float.MIN_VALUE and
+     * positive Float.MAX_VALUE. Returns false for any Point array value of
+     * Float.POSITIVE_INFINITY, Float.NEGATIVE_INFINITY, or Float.NaN.
+     *
+     * @return  true if all Point values are finite
+     */
+    public boolean isFinite() {
+        try {
+            M3Stats.onNativeCall();
+            return _nIsFinite(_ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * Returns true if the path is volatile; it will not be altered or discarded
+     * by the caller after it is drawn. Path by default have volatile set false, allowing
+     * {@link Surface} to attach a cache of data which speeds repeated drawing. If true, {@link Surface}
+     * may not speed repeated drawing.
+     *
+     * @return  true if caller will alter Path after drawing
+     */
+    public boolean isVolatile() {
+        try {
+            M3Stats.onNativeCall();
+            return _nIsVolatile(_ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * <p>Return a copy of {@link Path} with isVolatile indicating whether it
+     * will be altered or discarded by the caller after it is drawn. {@link Path}
+     * by default have volatile set false, allowing Skia to attach a cache of
+     * data which speeds repeated drawing.</p>
+     *
+     * <p>Mark temporary paths, discarded or modified after use, as volatile
+     * to inform Skia that the path need not be cached.</p>
+     *
+     * <p>Mark animating {@link Path} volatile to improve performance. Mark
+     * unchanging {@link Path} non-volatile to improve repeated rendering.</p>
+     *
+     * <p>raster surface {@link Path} draws are affected by volatile for some
+     * shadows. GPU surface {@link Path} draws are affected by volatile for some
+     * shadows and concave geometries.</p>
+     *
+     * @param isVolatile  true if caller will alter {@link Path} after drawing
+     * @return            new {@link Path}
+     */
+    public M3Path makeWithVolatile(boolean isVolatile) {
+        try {
+            M3Stats.onNativeCall();
+            return new M3Path(_nMakeWithVolatile(_ptr, isVolatile));
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * <p>Tests if line between Point pair is degenerate.</p>
+     *
+     * <p>Line with no length or that moves a very short distance is degenerate; it is
+     * treated as a point.</p>
+     *
+     * <p>exact changes the equality test. If true, returns true only if p1 equals p2.
+     * If false, returns true if p1 equals or nearly equals p2.</p>
+     *
+     * @param p1     line start point
+     * @param p2     line end point
+     * @param exact  if false, allow nearly equals
+     * @return       true if line is degenerate; its length is effectively zero
+     *
+     * @see <a href="https://fiddle.skia.org/c/@Path_IsLineDegenerate">https://fiddle.skia.org/c/@Path_IsLineDegenerate</a>
+     */
+    public static boolean isLineDegenerate(M3Point p1, M3Point p2, boolean exact) {
+        M3Stats.onNativeCall();
+        return _nIsLineDegenerate(p1._x, p1._y, p2._x, p2._y, exact);
+    }
+
+    /**
+     * <p>Tests if quad is degenerate.</p>
+     *
+     * <p>Quad with no length or that moves a very short distance is degenerate; it is
+     * treated as a point.</p>
+     *
+     * @param p1     quad start point
+     * @param p2     quad control point
+     * @param p3     quad end point
+     * @param exact  if true, returns true only if p1, p2, and p3 are equal;
+     *               if false, returns true if p1, p2, and p3 are equal or nearly equal
+     * @return       true if quad is degenerate; its length is effectively zero
+     */
+    public static boolean isQuadDegenerate(M3Point p1, M3Point p2, M3Point p3, boolean exact) {
+        M3Stats.onNativeCall();
+        return _nIsQuadDegenerate(p1._x, p1._y, p2._x, p2._y, p3._x, p3._y, exact);
+    }
+
+    /**
+     * <p>Tests if cubic is degenerate.</p>
+     *
+     * <p>Cubic with no length or that moves a very short distance is degenerate; it is
+     * treated as a point.</p>
+     *
+     * @param p1     cubic start point
+     * @param p2     cubic control point 1
+     * @param p3     cubic control point 2
+     * @param p4     cubic end point
+     * @param exact  if true, returns true only if p1, p2, p3, and p4 are equal;
+     *               if false, returns true if p1, p2, p3, and p4 are equal or nearly equal
+     * @return       true if cubic is degenerate; its length is effectively zero
+     */
+    public static boolean isCubicDegenerate(M3Point p1, M3Point p2, M3Point p3, M3Point p4, boolean exact) {
+        M3Stats.onNativeCall();
+        return _nIsCubicDegenerate(p1._x, p1._y, p2._x, p2._y, p3._x, p3._y, p4._x, p4._y, exact);
+    }
+
+    /**
+     * Returns array of two points if Path contains only one line;
+     * Verb array has two entries: {@link PathVerb#MOVE}, {@link PathVerb#LINE}.
+     * Returns null if Path is not one line.
+     *
+     * @return  Point[2] if Path contains exactly one line, null otherwise
+     *
+     * @see <a href="https://fiddle.skia.org/c/@Path_isLine">https://fiddle.skia.org/c/@Path_isLine</a>
+     */
+    public M3Point[] getAsLine() {
+        try {
+            M3Stats.onNativeCall();
+            return _nMaybeGetAsLine(_ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * Return a read-only view into the path's points.
+     *
+     * @return  array of {@link Point}s
+     */
+    public M3Point[] getPoints() {
+        try {
+            M3Stats.onNativeCall();
+            return _nGetPoints(_ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * Return a read-only view into the path's verbs.
+     *
+     * @return  array of {@link PathVerb}s
+     */
+    public M3PathVerb[] getVerbs() {
+        try {
+            M3Stats.onNativeCall();
+            int[] verbOrdinals = _nGetVerbs(_ptr);
+            M3PathVerb[] verbs = new M3PathVerb[verbOrdinals.length];
+            for (int i = 0; i < verbOrdinals.length; i++) {
+                verbs[i] = M3PathVerb._values[verbOrdinals[i]];
+            }
+            return verbs;
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * Return a read-only view into the path's conic-weights.
+     *
+     * @return  array of conic weights.
+     */
+    public float[] getConicWeights() {
+        try {
+            M3Stats.onNativeCall();
+            return _nGetConicWeights(_ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * Returns the number of points in Path.
+     * Point count is initially zero.
+     *
+     * @return  Path Point array length
+     *
+     * @see <a href="https://fiddle.skia.org/c/@Path_countPoints">https://fiddle.skia.org/c/@Path_countPoints</a>
+     */
+    public int getPointsCount() {
+        try {
+            M3Stats.onNativeCall();
+            return _nGetPointsCount(_ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * Returns the number of verbs: {@link PathVerb#MOVE}, {@link PathVerb#LINE}, {@link PathVerb#QUAD}, {@link PathVerb#CONIC},
+     * {@link PathVerb#CUBIC}, and {@link PathVerb#CLOSE}; added to Path.
+     *
+     * @return  length of verb array
+     *
+     * @see <a href="https://fiddle.skia.org/c/@Path_countVerbs">https://fiddle.skia.org/c/@Path_countVerbs</a>
+     */
+    public int getVerbsCount() {
+        try {
+            M3Stats.onNativeCall();
+            return _nCountVerbs(_ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * Return the last point, or null.
+     *
+     * @return  The last if the path contains one or more {@link Point}, else
+     *          returns null
+     * @see     <a href="https://fiddle.skia.org/c/@Path_getLastPt">https://fiddle.skia.org/c/@Path_getLastPt</a>
+     */
+    public M3Point getLastPt() {
+        try {
+            M3Stats.onNativeCall();
+            return _nGetLastPt(_ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * Returns the approximate byte size of the Path in memory.
+     *
+     * @return  approximate size
+     */
+    public long getApproximateBytesUsed() {
+        try {
+            M3Stats.onNativeCall();
+            return _nApproximateBytesUsed(_ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * <p>Returns minimum and maximum axes values of Point array.</p>
+     *
+     * <p>Returns (0, 0, 0, 0) if Path contains no points. Returned bounds width and height may
+     * be larger or smaller than area affected when Path is drawn.</p>
+     *
+     * <p>Rect returned includes all Point added to Path, including Point associated with
+     * {@link PathVerb#MOVE} that define empty contours.</p>
+     *
+     * @return  bounds of all Point in Point array
+     */
+    public M3Rect getBounds() {
+        try {
+            M3Stats.onNativeCall();
+            return _nGetBounds(_ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * <p>Updates internal bounds so that subsequent calls to {@link #getBounds()} are instantaneous.
+     * Unaltered copies of Path may also access cached bounds through {@link #getBounds()}.</p>
+     *
+     * <p>For now, identical to calling {@link #getBounds()} and ignoring the returned value.</p>
+     *
+     * <p>Call to prepare Path subsequently drawn from multiple threads,
+     * to avoid a race condition where each draw separately computes the bounds.</p>
+     *
+     * @return  this
+     */
+    public M3Path updateBoundsCache() {
+        M3Stats.onNativeCall();
+        _nUpdateBoundsCache(_ptr);
+        return this;
+    }
+
+    /**
+     * <p>Returns minimum and maximum axes values of the lines and curves in Path.
+     * Returns (0, 0, 0, 0) if Path contains no points.
+     * Returned bounds width and height may be larger or smaller than area affected
+     * when Path is drawn.</p>
+     *
+     * <p>Includes Point associated with {@link PathVerb#MOVE} that define empty
+     * contours.</p>
+     *
+     * Behaves identically to {@link #getBounds()} when Path contains
+     * only lines. If Path contains curves, computed bounds includes
+     * the maximum extent of the quad, conic, or cubic; is slower than {@link #getBounds()};
+     * and unlike {@link #getBounds()}, does not cache the result.
+     *
+     * @return  tight bounds of curves in Path
+     *
+     * @see <a href="https://fiddle.skia.org/c/@Path_computeTightBounds">https://fiddle.skia.org/c/@Path_computeTightBounds</a>
+     */
+    public M3Rect computeTightBounds() {
+        try {
+            M3Stats.onNativeCall();
+            return _nComputeTightBounds(_ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * <p>Returns true if rect is contained by Path.
+     * May return false when rect is contained by Path.</p>
+     *
+     * <p>For now, only returns true if Path has one contour and is convex.
+     * rect may share points and edges with Path and be contained.
+     * Returns true if rect is empty, that is, it has zero width or height; and
+     * the Point or line described by rect is contained by Path.</p>
+     *
+     * @param rect  Rect, line, or Point checked for containment
+     * @return      true if rect is contained
+     *
+     * @see <a href="https://fiddle.skia.org/c/@Path_conservativelyContainsRect">https://fiddle.skia.org/c/@Path_conservativelyContainsRect</a>
+     */
+    public boolean conservativelyContainsRect(M3Rect rect) {
+        try {
+            M3Stats.onNativeCall();
+            return _nConservativelyContainsRect(_ptr, rect._left, rect._top, rect._right, rect._bottom);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * <p>Approximates conic with quad array. Conic is constructed from start Point p0,
+     * control Point p1, end Point p2, and weight w.</p>
+     *
+     * <p>Quad array is stored in pts; this storage is supplied by caller.</p>
+     *
+     * <p>Maximum quad count is 2 to the pow2.</p>
+     *
+     * <p>Every third point in array shares last Point of previous quad and first Point of
+     * next quad. Maximum pts storage size is given by: {@code (1 + 2 * (1 << pow2)).</p>}</p>
+     *
+     * <p>Returns quad count used the approximation, which may be smaller
+     * than the number requested.</p>
+     *
+     * <p>conic weight determines the amount of influence conic control point has on the curve.</p>
+     *
+     * <p>w less than one represents an elliptical section. w greater than one represents
+     * a hyperbolic section. w equal to one represents a parabolic section.</p>
+     *
+     * <p>Two quad curves are sufficient to approximate an elliptical conic with a sweep
+     * of up to 90 degrees; in this case, set pow2 to one.</p>
+     *
+     * @param p0    conic start Point
+     * @param p1    conic control Point
+     * @param p2    conic end Point
+     * @param w     conic weight
+     * @param pow2  quad count, as power of two, normally 0 to 5 (1 to 32 quad curves)
+     * @return      number of quad curves written to pts
+     */
+    public static M3Point[] convertConicToQuads(M3Point p0, M3Point p1, M3Point p2, float w, int pow2) {
+        M3Stats.onNativeCall();
+        return _nConvertConicToQuads(p0._x, p0._y, p1._x, p1._y, p2._x, p2._y, w, pow2);
+    }
+
+    /**
+     * <p>Returns Rect if Path is equivalent to Rect when filled.</p>
+     *
+     * rect may be smaller than the Path bounds. Path bounds may include {@link PathVerb#MOVE} points
+     * that do not alter the area drawn by the returned rect.
+     *
+     * @return  bounds if Path contains Rect, null otherwise
+     *
+     * @see <a href="https://fiddle.skia.org/c/@Path_isRect">https://fiddle.skia.org/c/@Path_isRect</a>
+     */
+    public M3Rect isRect() {
+        try {
+            M3Stats.onNativeCall();
+            return _nIsRect(_ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * <p>Return a copy of {@link Path} with verb array, {@link Point} array,
+     * and weight transformed by matrix. {@link #makeTransform(Matrix33)} may
+     * change verbs and increase their number.</p>
+     *
+     * <p>If the resulting path has any non-finite values, returns null.</p>
+     *
+     * @param matrix  {@link Matrix33} to apply to {@link Path}
+     * @return        {@link Path} if finite, or null
+     */
+    public M3Path makeTransform(M3Matrix33 matrix) {
+        try {
+            M3Stats.onNativeCall();
+            long ptr = _nMakeTransform(_ptr, matrix._mat);
+            return ptr == 0 ? null : new M3Path(ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * Returns {@link Path} with {@link Point} array offset by (dx, dy).
+     *
+     * @param dx  offset added to {@link Point} array x-axis coordinates
+     * @param dy  offset added to {@link Point} array y-axis coordinates
+     * @return    new {@link Path}
+     */
+    public M3Path makeOffset(float dx, float dy) {
+        try {
+            M3Stats.onNativeCall();
+            long ptr = _nMakeOffset(_ptr, dx, dy);
+            return ptr == 0 ? null : new M3Path(ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * Returns {@link Path} with {@link Point} array scaled by s.
+     *
+     * @param s  scale applied to {@link Point} array coordinates
+     * @return   new {@link Path}
+     */
+    public M3Path makeScale(float s) {
+        return makeScale(s, s);
+    }
+
+    /**
+     * Returns {@link Path} with {@link Point} array scaled by (sx, sy).
+     *
+     * @param sx  scale applied to {@link Point} array x-axis coordinates
+     * @param sy  scale applied to {@link Point} array y-axis coordinates
+     * @return    new {@link Path}
+     */
+    public M3Path makeScale(float sx, float sy) {
+        try {
+            M3Stats.onNativeCall();
+            long ptr = _nMakeScale(_ptr, sx, sy);
+            return ptr == 0 ? null : new M3Path(ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * <p>Returns array of {@link PathSegmentType} this {@link Path} contains.</p>
+     *
+     * <p>Returns empty array if Path contains no lines, or curves: quads, conics, or cubics.</p>
+     *
+     * <p>getSegmentTypes() returns a cached result; it is very fast.</p>
+     *
+     * @return  array of {@link PathSegmentType} this {@link Path} contains
+     */
+    public M3PathSegmentType[] getSegmentTypes() {
+        try {
+            M3Stats.onNativeCall();
+            int mask = _nGetSegmentMasks(_ptr);
+            M3PathSegmentType[] result = new M3PathSegmentType[Integer.bitCount(mask)];
+            int idx = 0;
+            for (M3PathSegmentType type: M3PathSegmentType._values) {
+                if ((mask & type._value) != 0) {
+                    result[idx] = type;
+                    ++idx;
+                }
+            }
+            return result;
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * <p>Specifies whether Path is volatile; whether it will be altered or discarded
+     * by the caller after it is drawn. Path by default have volatile set false, allowing
+     * SkBaseDevice to attach a cache of data which speeds repeated drawing.</p>
+     *
+     * <p>Mark temporary paths, discarded or modified after use, as volatile
+     * to inform SkBaseDevice that the path need not be cached.</p>
+     *
+     * <p>Mark animating Path volatile to improve performance.
+     * Mark unchanging Path non-volatile to improve repeated rendering.</p>
+     *
+     * <p>raster surface Path draws are affected by volatile for some shadows.
+     * GPU surface Path draws are affected by volatile for some shadows and concave geometries.</p>
+     *
+     * @param isVolatile  true if caller will alter Path after drawing
+     * @return            this
+     */
+    public M3Path setVolatile(boolean isVolatile) {
+        M3Stats.onNativeCall();
+        _nSetVolatile(_ptr, isVolatile);
+        return this;
+    }
+
+    /**
+     * <p>Exchanges the verb array, Point array, weights, and FillMode with other.
+     * Cached state is also exchanged. swap() internally exchanges pointers, so
+     * it is lightweight and does not allocate memory.</p>
+     *
+     * @param   other  Path exchanged by value
+     * @return  this
+     *
+     * @see <a href="https://fiddle.skia.org/c/@Path_swap">https://fiddle.skia.org/c/@Path_swap</a>
+     */
+    public M3Path swap(M3Path other) {
+        try {
+            M3Stats.onNativeCall();
+            _nSwap(_ptr, M3Native.getPtr(other));
+            return this;
+        } finally {
+            M3ReferenceUtil.reachabilityFence(other);
+        }
+    }
+
+    /**
+     * Sets {@link PathFillMode}, the rule used to fill {@link Path}
+     *
+     * @return this
+     */
+    public M3Path setFillMode(M3PathFillMode fillMode) {
+        M3Stats.onNativeCall();
+        _nSetFillMode(_ptr, fillMode.ordinal());
+        return this;
+    }
+
+    /**
+     * <p>Sets Path to its initial state.</p>
+     *
+     * <p>Removes verb array, Point array, and weights, and sets FillMode to {@link PathFillMode#WINDING}.
+     * Internal storage associated with Path is released.</p>
+     *
+     * @return  this
+     *
+     * @see <a href="https://fiddle.skia.org/c/@Path_reset">https://fiddle.skia.org/c/@Path_reset</a>
+     */
+    public M3Path reset() {
+        M3Stats.onNativeCall();
+        _nReset(_ptr);
+        return this;
+    }
+
+    /**
+     * Iterates through verb array, and associated {@link Point} array and conic
+     * weight.
+     *
+     * @return  {@link PathSegmentIterator}
+     */
+    @Override
+    public M3PathSegmentIterator iterator() {
+        return iterator(false);
+    }
+
+    /**
+     * Iterates through verb array, and associated {@link Point} array and conic
+     * weight. Provides options to treat open contours as closed, and to ignore
+     * degenerate data.
+     *
+     * @param forceClose  true if open contours generate {@link PathVerb#CLOSE}
+     * @return            {@link PathSegmentIterator}
+     */
+    public M3PathSegmentIterator iterator(boolean forceClose) {
+        return M3PathSegmentIterator.make(this, forceClose);
+    }
+
+    /**
+     * Returns true if the point (x, y) is contained by Path, taking into
+     * account {@link PathFillMode}.
+     *
+     * @param x  x-axis value of containment test
+     * @param y  y-axis value of containment test
+     * @return   true if Point is in Path
+     *
+     * @see <a href="https://fiddle.skia.org/c/@Path_contains">https://fiddle.skia.org/c/@Path_contains</a>
+     */
+    public boolean contains(float x, float y) {
+        try {
+            M3Stats.onNativeCall();
+            return _nContains(_ptr, x, y);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * Returns true if the point is contained by Path, taking into
+     * account {@link PathFillMode}.
+     *
+     * @param p  point of containment test
+     * @return   true if Point is in Path
+     *
+     * @see <a href="https://fiddle.skia.org/c/@Path_contains">https://fiddle.skia.org/c/@Path_contains</a>
+     */
+    public boolean contains(M3Point p) {
+        return contains(p._x, p._y);
+    }
+
+    /**
+     * Writes text representation of Path to standard output. The representation may be
+     * directly compiled as C++ code. Floating point values are written
+     * with limited precision; it may not be possible to reconstruct original Path
+     * from output.
+     *
+     * @return  this
+     *
+     * @see <a href="https://fiddle.skia.org/c/@Path_dump_2">https://fiddle.skia.org/c/@Path_dump_2</a>
+     */
+    public M3Path dump() {
+        M3Stats.onNativeCall();
+        _nDump(_ptr);
+        return this;
+    }
+
+    /**
+     * <p>Writes text representation of Path to standard output. The representation may be
+     * directly compiled as C++ code. Floating point values are written
+     * in hexadecimal to preserve their exact bit pattern. The output reconstructs the
+     * original Path.</p>
+     *
+     * <p>Use instead of {@link dump()} when submitting</p>
+     *
+     * @return  this
+     *
+     * @see <a href="https://fiddle.skia.org/c/@Path_dumpHex">https://fiddle.skia.org/c/@Path_dumpHex</a>
+     */
+    public M3Path dumpHex() {
+        M3Stats.onNativeCall();
+        _nDumpHex(_ptr);
+        return this;
+    }
+
+    /**
+     * <p>Writes Path to byte buffer.</p>
+     *
+     * <p>Writes {@link PathFillMode}, verb array, Point array, conic weight, and
+     * additionally writes computed information like path convexity and bounds.</p>
+     *
+     * <p>Use only be used in concert with {@link makeFromBytes(byte[])};
+     * the format used for Path in memory is not guaranteed.</p>
+     *
+     * @return  serialized Path; length always a multiple of 4
+     *
+     * @see <a href="https://fiddle.skia.org/c/@Path_writeToMemory">https://fiddle.skia.org/c/@Path_writeToMemory</a>
+     */
+    public byte[] serializeToBytes() {
+        try {
+            M3Stats.onNativeCall();
+            return _nSerializeToBytes(_ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * <p>Initializes Path from byte buffer. Returns null if the buffer is
+     * data is inconsistent, or the length is too small.</p>
+     *
+     * <p>Reads {@link PathFillMode}, verb array, Point array, conic weight, and
+     * additionally reads computed information like path convexity and bounds.</p>
+     *
+     * <p>Used only in concert with {@link serializeToBytes()};
+     * the format used for Path in memory is not guaranteed.</p>
+     *
+     * @param data  storage for Path
+     * @return      reconstructed Path, or null if data is invalid
+     *
+     * @see <a href="https://fiddle.skia.org/c/@Path_readFromMemory">https://fiddle.skia.org/c/@Path_readFromMemory</a>
+     */
+    public static M3Path makeFromBytes(byte[] data) {
+        M3Stats.onNativeCall();
+        long ptr = _nMakeFromBytes(data);
+        return ptr == 0 ? null : new M3Path(ptr);
+    }
+
+    /**
+     * <p>Returns a non-zero, globally unique value. A different value is returned
+     * if verb array, Point array, or conic weight changes.</p>
+     *
+     * <p>Setting {@link PathFillMode} does not change generation identifier.</p>
+     *
+     * <p>Each time the path is modified, a different generation identifier will be returned.
+     * {@link PathFillMode} does affect generation identifier on Android framework.</p>
+     *
+     * @return  non-zero, globally unique value
+     *
+     * @see <a href="https://fiddle.skia.org/c/@Path_getGenerationID">https://fiddle.skia.org/c/@Path_getGenerationID</a>
+     * @see <a href="https://bugs.chromium.org/p/skia/issues/detail?id=1762">https://bugs.chromium.org/p/skia/issues/detail?id=1762</a>
+     */
+    public int getGenerationId() {
+        try {
+            M3Stats.onNativeCall();
+            return _nGetGenerationId(_ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * Returns if Path data is consistent. Corrupt Path data is detected if
+     * internal values are out of range or internal storage does not match
+     * array dimensions.
+     *
+     * @return  true if Path data is consistent
+     */
+    public boolean isValid() {
+        try {
+            M3Stats.onNativeCall();
+            return _nIsValid(_ptr);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * Returns the filled equivalent of the stroked path, filling the destination path.
+     *
+     * @param paint     Paint describing the stroke properties
+     * @param dst       Path to fill with the result, may be the same as src, but may not be nullptr
+     * @param cull      Optional limit passed to PathEffect
+     * @param matrix    Matrix to apply to the path
+     * @return          true if the dst path was updated, false if it was not (e.g. if the path represents hairline and cannot be filled)
+     */
+    public boolean fillWithPaint(M3Paint paint, M3PathBuilder dst, M3Rect cull, M3Matrix33 matrix) {
+        try {
+            assert paint != null : "Path::fillWithPaint expected paint != null";
+            assert dst != null : "Path::fillWithPaint expected dst != null";
+            assert matrix != null : "Path::fillWithPaint expected matrix != null";
+            M3Stats.onNativeCall();
+            return _nFillWithPaint(_ptr, M3Native.getPtr(paint), M3Native.getPtr(dst), cull, matrix._mat);
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+            M3ReferenceUtil.reachabilityFence(paint);
+            M3ReferenceUtil.reachabilityFence(dst);
+        }
+    }
+
+    public boolean fillWithPaint(M3Paint paint, M3PathBuilder dst, M3Matrix33 matrix) {
+        return fillWithPaint(paint, dst, null, matrix);
+    }
+
+    public boolean fillWithPaint(M3Paint paint, M3PathBuilder dst) {
+        return fillWithPaint(paint, dst, null, M3Matrix33.IDENTITY);
+    }
+
+    public boolean fillWithPaint(M3Paint paint, M3PathBuilder dst, float resScale) {
+        return fillWithPaint(paint, dst, null, M3Matrix33.makeScale(resScale));
+    }
+
+    public M3Path(long ptr) {
+        super(ptr, _FinalizerHolder.PTR);
+    }
+
+    public static native long    _nGetFinalizer();
+    public static native long    _nMakeRaw(float[] coords, int[] verbs, float[] conicWeights, int fillMode, boolean isVolatile);
+    public static native long    _nMakeRect(float l, float t, float r, float b, int dir, int startIndex);
+    public static native long    _nMakeOval(float l, float t, float r, float b, int dir);
+    public static native long    _nMakeCircle(float x, float y, float radius, int dir);
+    public static native long    _nMakeRRect(float l, float t, float r, float b, float[] radii, int dir, int startIndex);
+    public static native long    _nMakePolygon(float[] coords, boolean isClosed, int fillMode, boolean isVolatile);
+    public static native long    _nMakeLine(float x0, float y0, float x1, float y1);
+    public static native long    _nMakeFromSVGString(String s);
+    public static native long    _nMake(int fillMode);
+    public static native long    _nMakeCopy(long ptr);
+    public static native long    _nMakeCombining(long onePtr, long twoPtr, int op);
+    public static native boolean _nEquals(long aPtr, long bPtr);
+    public static native boolean _nIsInterpolatable(long ptr, long comparePtr);
+    public static native long    _nMakeInterpolate(long ptr, long endingPtr, float weight);
+    public static native int     _nGetFillMode(long ptr);
+    public static native long    _nMakeWithFillMode(long ptr, int fillMode);
+    public static native boolean _nIsInverseFillType(long ptr);
+    public static native long    _nMakeToggleInverseFillType(long ptr);
+    public static native boolean _nIsConvex(long ptr);
+    public static native M3Rect    _nIsOval(long ptr);
+    public static native M3RRect   _nIsRRect(long ptr);
+    public static native boolean _nIsEmpty(long ptr);
+    public static native boolean _nIsLastContourClosed(long ptr);
+    public static native boolean _nIsFinite(long ptr);
+    public static native boolean _nIsVolatile(long ptr);
+    public static native long    _nMakeWithVolatile(long ptr, boolean isVolatile);
+    public static native boolean _nIsLineDegenerate(float x0, float y0, float x1, float y1, boolean exact);
+    public static native boolean _nIsQuadDegenerate(float x0, float y0, float x1, float y1, float x2, float y2, boolean exact);
+    public static native boolean _nIsCubicDegenerate(float x0, float y0, float x1, float y1, float x2, float y2, float x3, float y3, boolean exact);
+    public static native M3Point[] _nMaybeGetAsLine(long ptr);
+    public static native M3Point[] _nGetPoints(long ptr);
+    public static native int[]   _nGetVerbs(long ptr);
+    public static native float[] _nGetConicWeights(long ptr);
+    public static native int     _nGetPointsCount(long ptr);
+    public static native int     _nCountVerbs(long ptr);
+    public static native M3Point   _nGetLastPt(long ptr);
+    public static native long    _nApproximateBytesUsed(long ptr);
+    public static native M3Rect    _nGetBounds(long ptr);
+    public static native void    _nUpdateBoundsCache(long ptr);
+    public static native M3Rect    _nComputeTightBounds(long ptr);
+    public static native boolean _nConservativelyContainsRect(long ptr, float l, float t, float r, float b);
+    public static native M3Point[] _nConvertConicToQuads(float x0, float y0, float x1, float y1, float x2, float y2, float w, int pow2);
+    public static native M3Rect    _nIsRect(long ptr);
+    public static native long    _nMakeTransform(long ptr, float[] matrix);
+    public static native long    _nMakeOffset(long ptr, float dx, float dy);
+    public static native long    _nMakeScale(long ptr, float sx, float sy);
+    public static native int     _nGetSegmentMasks(long ptr);
+    public static native void    _nSetVolatile(long ptr, boolean isVolatile);
+    public static native void    _nSwap(long ptr, long otherPtr);
+    public static native void    _nSetFillMode(long ptr, int fillMode);
+    public static native void    _nReset(long ptr);
+    public static native boolean _nContains(long ptr, float x, float y);
+    public static native void    _nDump(long ptr);
+    public static native void    _nDumpHex(long ptr);
+    public static native byte[]  _nSerializeToBytes(long ptr);
+    public static native long    _nMakeFromBytes(byte[] data);
+    public static native int     _nGetGenerationId(long ptr);
+    public static native boolean _nIsValid(long ptr);
+    public static native boolean _nFillWithPaint(long ptr, long srcPath, long dstPathBuilder, M3Rect cull, float[] matrix);
+}

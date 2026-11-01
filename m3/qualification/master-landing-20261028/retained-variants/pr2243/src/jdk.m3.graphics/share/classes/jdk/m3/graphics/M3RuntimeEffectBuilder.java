@@ -1,0 +1,354 @@
+package jdk.m3.graphics;
+
+import jdk.m3.graphics.impl.*;
+
+/**
+ * <p>RuntimeEffectBuilder is a utility to simplify creating {@link Shader}, {@link ColorFilter},
+ * and {@link Blender} objects from {@link RuntimeEffect}s.</p>
+ *
+ * <p>NOTE: Like RuntimeEffect, this API is experimental and subject to change!</p>
+ *
+ * <p>Given a RuntimeEffect, the RuntimeEffectBuilder manages creating an input data block and
+ * provides a convenient way to build shader, color filter, and blender objects with optional
+ * uniforms and children.</p>
+ *
+ * <p>Usage:</p>
+ * <pre>{@code
+ * RuntimeEffect effect = RuntimeEffect.makeForShader(skslCode);
+ * RuntimeEffectBuilder builder = new RuntimeEffectBuilder(effect);
+ * builder.setUniform("name", ...);
+ * builder.setChild("name", ...);
+ * Shader shader = builder.makeShader(null);
+ * }</pre>
+ */
+public class M3RuntimeEffectBuilder extends M3Managed {
+    static {
+        M3Library.staticLoad();
+    }
+
+    public final M3RuntimeEffect _effect;
+    public final M3Data _uniforms;
+
+    /**
+     * Creates a RuntimeEffectBuilder for the given effect with zero-initialized uniforms.
+     *
+     * @param effect  the RuntimeEffect to build with
+     */
+    public M3RuntimeEffectBuilder(M3RuntimeEffect effect) {
+        super(_nMake(M3Native.getPtr(effect)), _FinalizerHolder.PTR);
+        _effect = effect;
+        _uniforms = new M3Data(_nGetUniforms(_ptr));
+    }
+
+    /**
+     * Creates a RuntimeEffectBuilder for the given effect with the specified uniforms.
+     *
+     * @param effect   the RuntimeEffect to build with
+     * @param uniforms the uniform data to use
+     */
+    public M3RuntimeEffectBuilder(M3RuntimeEffect effect, M3Data uniforms) {
+        super(_nMakeWithUniforms(M3Native.getPtr(effect), M3Native.getPtr(uniforms)), _FinalizerHolder.PTR);
+        _effect = effect;
+        _uniforms = uniforms;
+    }
+
+    /**
+     * Copy constructor for RuntimeEffectBuilder.
+     *
+     * @param other  the RuntimeEffectBuilder to copy from
+     */
+    public M3RuntimeEffectBuilder(M3RuntimeEffectBuilder other) {
+        super(_nMakeCopy(M3Native.getPtr(other)), _FinalizerHolder.PTR);
+        _effect = other._effect;
+        _uniforms = other._uniforms;
+        M3ReferenceUtil.reachabilityFence(other);
+    }
+
+    /**
+     * Creates a shader from this builder's effect, uniforms, and children.
+     *
+     * @return  new Shader
+     */
+    public M3Shader makeShader() {
+        return makeShader(null);
+    }
+
+    /**
+     * Creates a shader from this builder's effect, uniforms, and children with a local matrix.
+     *
+     * @param localMatrix  optional local matrix to apply to the shader, or null
+     * @return             new Shader
+     */
+    public M3Shader makeShader(M3Matrix33 localMatrix) {
+        try {
+            M3Stats.onNativeCall();
+            float[] matrix = localMatrix == null ? null : localMatrix._mat;
+            return new M3Shader(_nMakeShader(_ptr, matrix));
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * Creates a color filter from this builder's effect, uniforms, and children.
+     *
+     * @return  new ColorFilter
+     */
+    public M3ColorFilter makeColorFilter() {
+        try {
+            M3Stats.onNativeCall();
+            return new M3ColorFilter(_nMakeColorFilter(_ptr));
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * Creates a blender from this builder's effect, uniforms, and children.
+     *
+     * @return  new Blender
+     */
+    public M3Blender makeBlender() {
+        try {
+            M3Stats.onNativeCall();
+            return new M3Blender(_nMakeBlender(_ptr));
+        } finally {
+            M3ReferenceUtil.reachabilityFence(this);
+        }
+    }
+
+    /**
+     * Sets a float uniform variable by name.
+     *
+     * @param name   the name of the uniform variable
+     * @param value  the float value
+     * @return       this builder for chaining
+     */
+    public M3RuntimeEffectBuilder setUniform(String name, float value) {
+        assert name != null : "Can\'t setUniform with name == null";
+        M3Stats.onNativeCall();
+        _nSetUniformFloats(_ptr, name, new float[] {value});
+        return this;
+    }
+
+    /**
+     * Sets a float2 uniform variable by name.
+     *
+     * @param name  the name of the uniform variable
+     * @param v1    first float value
+     * @param v2    second float value
+     * @return      this builder for chaining
+     */
+    public M3RuntimeEffectBuilder setUniform(String name, float v1, float v2) {
+        assert name != null : "Can\'t setUniform with name == null";
+        M3Stats.onNativeCall();
+        _nSetUniformFloats(_ptr, name, new float[] {v1, v2});
+        return this;
+    }
+
+    /**
+     * Sets a float3 uniform variable by name.
+     *
+     * @param name  the name of the uniform variable
+     * @param v1    first float value
+     * @param v2    second float value
+     * @param v3    third float value
+     * @return      this builder for chaining
+     */
+    public M3RuntimeEffectBuilder setUniform(String name, float v1, float v2, float v3) {
+        assert name != null : "Can\'t setUniform with name == null";
+        M3Stats.onNativeCall();
+        _nSetUniformFloats(_ptr, name, new float[] {v1, v2, v3});
+        return this;
+    }
+
+    /**
+     * Sets a float4 uniform variable by name.
+     *
+     * @param name  the name of the uniform variable
+     * @param v1    first float value
+     * @param v2    second float value
+     * @param v3    third float value
+     * @param v4    fourth float value
+     * @return      this builder for chaining
+     */
+    public M3RuntimeEffectBuilder setUniform(String name, float v1, float v2, float v3, float v4) {
+        assert name != null : "Can\'t setUniform with name == null";
+        M3Stats.onNativeCall();
+        _nSetUniformFloats(_ptr, name, new float[] {v1, v2, v3, v4});
+        return this;
+    }
+
+    /**
+     * Sets a float array uniform variable by name.
+     *
+     * @param name   the name of the uniform variable
+     * @param value  the float array
+     * @return       this builder for chaining
+     */
+    public M3RuntimeEffectBuilder setUniform(String name, float[] value) {
+        assert name != null : "Can\'t setUniform with name == null";
+        M3Stats.onNativeCall();
+        _nSetUniformFloats(_ptr, name, value);
+        return this;
+    }
+
+    /**
+     * Sets a Matrix33 uniform variable by name.
+     *
+     * @param name   the name of the uniform variable
+     * @param value  the Matrix33 value
+     * @return       this builder for chaining
+     */
+    public M3RuntimeEffectBuilder setUniform(String name, M3Matrix33 value) {
+        assert name != null : "Can\'t setUniform with name == null";
+        M3Stats.onNativeCall();
+        _nSetUniformFloats(_ptr, name, value._mat);
+        return this;
+    }
+
+    /**
+     * Sets a Matrix44 uniform variable by name.
+     *
+     * @param name   the name of the uniform variable
+     * @param value  the Matrix44 value
+     * @return       this builder for chaining
+     */
+    public M3RuntimeEffectBuilder setUniform(String name, M3Matrix44 value) {
+        assert name != null : "Can\'t setUniform with name == null";
+        M3Stats.onNativeCall();
+        _nSetUniformFloats(_ptr, name, value._mat);
+        return this;
+    }
+
+    /**
+     * Sets an int uniform variable by name.
+     *
+     * @param name   the name of the uniform variable
+     * @param value  the int value
+     * @return       this builder for chaining
+     */
+    public M3RuntimeEffectBuilder setUniform(String name, int value) {
+        assert name != null : "Can\'t setUniform with name == null";
+        M3Stats.onNativeCall();
+        _nSetUniformInts(_ptr, name, new int[] {value});
+        return this;
+    }
+
+    /**
+     * Sets an int2 uniform variable by name.
+     *
+     * @param name  the name of the uniform variable
+     * @param v1    first int value
+     * @param v2    second int value
+     * @return      this builder for chaining
+     */
+    public M3RuntimeEffectBuilder setUniform(String name, int v1, int v2) {
+        assert name != null : "Can\'t setUniform with name == null";
+        M3Stats.onNativeCall();
+        _nSetUniformInts(_ptr, name, new int[] {v1, v2});
+        return this;
+    }
+
+    /**
+     * Sets an int3 uniform variable by name.
+     *
+     * @param name  the name of the uniform variable
+     * @param v1    first int value
+     * @param v2    second int value
+     * @param v3    third int value
+     * @return      this builder for chaining
+     */
+    public M3RuntimeEffectBuilder setUniform(String name, int v1, int v2, int v3) {
+        assert name != null : "Can\'t setUniform with name == null";
+        M3Stats.onNativeCall();
+        _nSetUniformInts(_ptr, name, new int[] {v1, v2, v3});
+        return this;
+    }
+
+    /**
+     * Sets an int4 uniform variable by name.
+     *
+     * @param name  the name of the uniform variable
+     * @param v1    first int value
+     * @param v2    second int value
+     * @param v3    third int value
+     * @param v4    fourth int value
+     * @return      this builder for chaining
+     */
+    public M3RuntimeEffectBuilder setUniform(String name, int v1, int v2, int v3, int v4) {
+        assert name != null : "Can\'t setUniform with name == null";
+        M3Stats.onNativeCall();
+        _nSetUniformInts(_ptr, name, new int[] {v1, v2, v3, v4});
+        return this;
+    }
+
+    /**
+     * Sets an int array uniform variable by name.
+     *
+     * @param name   the name of the uniform variable
+     * @param value  the int array
+     * @return       this builder for chaining
+     */
+    public M3RuntimeEffectBuilder setUniform(String name, int[] value) {
+        assert name != null : "Can\'t setUniform with name == null";
+        M3Stats.onNativeCall();
+        _nSetUniformInts(_ptr, name, value);
+        return this;
+    }
+
+    /**
+     * Sets a child effect (shader, color filter, or blender) by name.
+     *
+     * @param name   the name of the child effect
+     * @param child  the child effect (Shader, ColorFilter, or Blender), or null to unset
+     * @return       this builder for chaining
+     */
+    public M3RuntimeEffectBuilder setChild(String name, M3RuntimeEffectChild child) {
+        try {
+            assert name != null : "Can\'t setChild with name == null";
+            M3Stats.onNativeCall();
+            _nSetChild(_ptr, name, M3Native.getPtr(child));
+            return this;
+        } finally {
+            M3ReferenceUtil.reachabilityFence(child);
+        }
+    }
+
+
+    public static class _FinalizerHolder {
+        public static final long PTR = _nGetFinalizer();
+    }
+
+    public static native long _nGetFinalizer();
+
+    public static native long _nMake(long effectPtr);
+
+    public static native long _nMakeWithUniforms(long effectPtr, long uniformsPtr);
+
+    public static native long _nMakeCopy(long builderPtr);
+
+    public static native long _nMakeShader(long ptr, float[] localMatrix);
+
+    public static native long _nMakeColorFilter(long ptr);
+
+    public static native long _nMakeBlender(long ptr);
+
+    public static native long _nGetUniforms(long ptr);
+
+    public static native void _nSetUniformFloats(long ptr, String name, float[] values);
+
+    public static native void _nSetUniformInts(long ptr, String name, int[] values);
+
+    public static native void _nSetChild(long ptr, String name, long childPtr);
+
+    @java.lang.SuppressWarnings("all")
+    public M3RuntimeEffect getEffect() {
+        return this._effect;
+    }
+
+    @java.lang.SuppressWarnings("all")
+    public M3Data getUniforms() {
+        return this._uniforms;
+    }
+}

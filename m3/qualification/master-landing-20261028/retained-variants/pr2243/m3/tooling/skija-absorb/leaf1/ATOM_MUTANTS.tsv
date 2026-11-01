@@ -1,0 +1,9 @@
+mutant	origin	source	expected_atom	result	failing_atoms	first_failure	result_unpinned
+MUT1_rect_width	#2243	jdk/m3/graphics/M3Rect.java	types.Rect	KILLED	skija.SaveLayerRec,skija.paragraph.TextBox,types.IRect,types.RRect,types.Rect	types.Rect._bottom()#0: receiver.getWidth(): M3 -3.4028235E38 / oracle 3.4028235E38	KILLED
+MUT2_colortype_bpp	#2243	jdk/m3/graphics/M3ColorType.java	skija.ColorType	KILLED	skija.ColorInfo,skija.ColorType,skija.ImageInfo	skija.ColorType.getBytesPerPixel()#18: result: M3 8 / oracle 16	KILLED
+MUT3_blendmode_order	#2243	jdk/m3/graphics/M3BlendMode.java	skija.BlendMode	KILLED	skija.AnimationFrameInfo,skija.BlendMode	skija.BlendMode._values()#0: result[0]: M3 SRC / oracle CLEAR	KILLED
+MUT4_color4f_alias	#2243	jdk/m3/graphics/M3Color4f.java	skija.Color4f	KILLED	skija.Color4f	skija.Color4f.premultiply()#3: aliases: M3 0 / oracle 1	KILLED
+REV1_rect_makexywh_checks	#2243 review	jdk/m3/graphics/M3Rect.java	types.Rect	KILLED	skija.svg.SVGLengthContext,types.Rect	types.Rect.makeXYWH(FFFF)#4: result.message: M3 Rect::makeXYWH expected h >= 0, got: -1.0 / oracle Rect::makeXYWH expected w >= 0, got: -Infinity	KILLED
+REV2_rect_equals_bottom	#2243 review	jdk/m3/graphics/M3Rect.java	types.Rect	KILLED	types.Rect	types.Rect.PERTURB(FFFF)#6: perturbed.equals: M3 [true, true] / oracle [false, false]	KILLED
+REV3_colorinfo_equals_alphatype	#2243 review	jdk/m3/graphics/M3ColorInfo.java	skija.ColorInfo	KILLED	skija.ColorInfo	skija.ColorInfo.PERTURB(Lskija/ColorType;Lskija/ColorAlphaType;Lskija/ColorSpace;)#2: perturbed.equals: M3 [true, true] / oracle [false, false]	KILLED
+REV4_colorinfo_hash_null_constant	#2243 review	jdk/m3/graphics/M3ColorInfo.java	skija.ColorInfo	KILLED	skija.ColorInfo,skija.IHasImageInfo,skija.ImageInfo	skija.ColorInfo.DEFAULT()#0: result.hashCode(): M3 208919 / oracle 208962	SURVIVED
