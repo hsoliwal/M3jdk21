@@ -20,3 +20,13 @@ This receiver stays in a **draft PR / HOLD** until actual Maven, source digest, 
 ## Provenance
 
 Source shape is first-party maintenance of existing Apache-2.0 M3 Java/JNI code. Original JDK/donor rights, upstream receipts, package names and binary contracts remain unchanged. No rebase, squash, or force push; no default branch write. Related category-first inventory, held work queue, tests and reusable OpenRewrite recipe are canonical in the private convergence workspace.
+
+## Real GitHub Actions readback (2026-11-01)
+
+Run: [M3 Array Substrate #41282563855](https://github.com/hsoliwal/M3jdk21/actions/runs/41282563855) at source head `6a49cfa96164ac692178144e18981f15d362b6f5`.
+
+- `native`: **PASS**. CMake/CTest passed 4 native tests; Maven completed 58 JUnit tests (0 failures/errors, 9 skipped) with requested `-Xcheck:jni`. `M3ArrayNativeTest` reported 6 of 6 passing, including the new identical-window case.
+- `java`: **PASS**. Maven reported 45 JUnit tests (0 failures/errors, 14 skipped), including all 6 `M3ArrayNativeTest` methods. Auxiliary SDK tests passed in the workflow.
+- `receiving`: **FAIL**, due to `M3JDK21_NAME_RECEIVER_REFUSED: companion relation source hash drift: src/java.base/share/classes/java/util/Arrays.java (sha256)`. This PR did **not** modify that Java base file; treat this as a separate source-pin reconciliation task, not permission to update its hash or suppress its gate.
+
+**Overall workflow remains FAILED.** No merge/release claims, and skipped tests do not count as passing. The local isolated proof remains a separate narrower source of evidence; A/A-calibrated performance and whole-JDK acceptance are still pending.
