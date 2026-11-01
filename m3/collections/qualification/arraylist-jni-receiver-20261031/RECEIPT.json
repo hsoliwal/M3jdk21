@@ -1,0 +1,80 @@
+{
+  "schema": "m3.receiver-postimage-reference/v1",
+  "status": "DRAFT_UNADMITTED",
+  "repository": "hsoliwal/M3jdk21",
+  "preimage": "4d4d187f7c7e8ec8c1ad256927febfc4b931251e",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "pullRequest": 14998,
+    "revision": "8a341d66bbc40a7ca236c6cb882189e10e793798",
+    "recipeId": "M3HashPinnedJavaSnapshotRecipe",
+    "crateId": "m3-arraylist-required-jni-v1",
+    "path": "synexia-openrewrite-recipes/recipe-crates/arraylist-required-jni-20261031",
+    "qualification": "synexia-openrewrite-recipes/recipe-crates/arraylist-required-jni-20261031/proof/QUALIFICATION.json",
+    "mavenVerify": "synexia-openrewrite-recipes/recipe-crates/arraylist-required-jni-20261031/validation/MAVEN_VERIFY_RECEIPT.json"
+  },
+  "postimages": [
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java",
+      "sha256": "07458436473e0e34688df8796ca1d4444cd487f9a5b4cc72bfcc6b5cb018792d",
+      "gitBlob": "541e242d09ffd0dbdc4c012cd9740c12c0838e75"
+    },
+    {
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3CollectionAllocationBenchmark.java",
+      "sha256": "3a32992f6fd4a20ef0f917448f2b64c5655bee935c4087b58f306d6b228ef759",
+      "gitBlob": "c694b20f0db3ac332177f3813076e19343284493"
+    },
+    {
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3GenericArrayListTest.java",
+      "sha256": "647db570bc9402b0103c151072571abe8a5c721b4ad8d916f840cfbbf9e536a5",
+      "gitBlob": "172bd0f2b4922a5ee908f725a8b8c36fed910910"
+    }
+  ],
+  "componentEvidence": {
+    "runtime": "Oracle JDK21.0.9 Windows x64",
+    "strictCompilation": true,
+    "correctnessJUnit": 17,
+    "isolatedMissingNativeJUnit": 1,
+    "dynamicPerformanceJUnit": 10,
+    "requiredArrayJNI": true,
+    "optionalMaskJNI": false,
+    "publicProtectedDescriptors": 24,
+    "abi": "PASS_EXACT",
+    "actualSDK": {
+      "postimages": 3,
+      "replayChanges": 0,
+      "refusals": 18,
+      "metadataPreserved": 3,
+      "freshHosts": 2,
+      "mavenVerify": true
+    },
+    "benchmark": {
+      "samplesPerProtocol": 518,
+      "groupsPerProtocol": 74,
+      "protocols": [
+        "checked JNI",
+        "normal runtime"
+      ],
+      "speedThreshold": false,
+      "emptyListJavaAllocation": "baseline32B;requiredJNI48B",
+      "nativeProcessMemory": "NOT_MEASURED"
+    }
+  },
+  "targetGates": {
+    "naming": "INHERITED_SOURCE_HASH_REFUSAL_UNRESOLVED",
+    "targetModuleFixtureTagProviderConfiguration": "PENDING",
+    "fullTargetMavenSuite": "NOT_RUN",
+    "installedM3JdkImage": "NOT_RUN",
+    "jtregProductGcJni": "NOT_RUN",
+    "retainedNativeProcessMemory": "NOT_MEASURED",
+    "familyCompletion": false,
+    "repositoryCompletion": false,
+    "automaticApplication": false
+  },
+  "phase": {
+    "STRING": "QUALIFICATION_REQUIRED",
+    "ARRAYS": "WAITING_FOR_PREDECESSOR",
+    "COLLECTIONS": "WAITING_FOR_PREDECESSOR"
+  },
+  "custody": "Only three actual recipe Java postimages and this passive receipt. Recipes, templates, validation, contexts and improvement memory remain exclusively in Synexia."
+}
