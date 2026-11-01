@@ -1,0 +1,1301 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+//@@ IMPORTS
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
+import java.util.SortAlgorithm;
+import java.util.Sorts;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ProgressMonitor;
+import java.util.function.IntBinaryOperator;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
+import java.util.stream.Stream;
+//@@ CONSTANTS
+    private static final Access CONTEXT = new Access("java.util.M3SortContext");
+    private static final MethodHandle NEW_CONTEXT = CONTEXT.constructor("M3SortContext", 2);
+    private static final long SEED = 0x4D33_534F_5254L;
+    /** Kernel lengths around the insertion cut-off (24), TimSort MIN_MERGE (32) and powers of two. */
+    private static final int[] SIZES = {2, 3, 4, 5, 7, 8, 16, 23, 24, 25, 31, 32, 33, 63, 64, 65, 100, 128, 257, 1000};
+    private static final int FEW_DISTINCT = 3;
+    private static final int WIDE = 1 << 20;
+    private static final int SAWTOOTH_PERIOD = 5;
+    private static final int QUARTER = 4;
+    private static final int THIRD = 3;
+    private static final int MEDIAN_SAMPLES = 3;
+    /** M3SortContext's constructor checks cancellation once on a live monitor. */
+    private static final int CONSTRUCTION_CHECKS = 1;
+    /** M3SortContext.step reports work to its monitor in batches of this many steps. */
+    private static final int FLUSH_BATCH = 1024;
+    /** Index bases exercised for the numeric kernels (Sorts passes fromIndex as base). */
+    private static final int[] BASES = {0, 7};
+    private static final long NARROW_SPAN = 1000;
+    private static final long NARROW_MIN = -500;
+    private static final int DIGIT_BITS = Byte.SIZE;
+    private static final int DIGIT_MASK = (1 << DIGIT_BITS) - 1;
+    private static final int RADIX = 1 << DIGIT_BITS;
+    private static final int TOP_SHIFT = Long.SIZE - DIGIT_BITS;
+//@@ HELPERS
+    enum Shape { RANDOM, FEW, ASCENDING, DESCENDING, EQUAL, ORGAN_PIPE, SAWTOOTH }
+
+    /** Deterministic key vector for one (length, shape) pair. */
+    static int[] keys(int n, Shape shape) {
+        Random r = new Random(SEED ^ ((long) n << Integer.SIZE) ^ shape.ordinal());
+        return IntStream.range(0, n).map(i -> switch (shape) {
+            case RANDOM -> r.nextInt(WIDE) - WIDE / 2;
+            case FEW -> r.nextInt(FEW_DISTINCT);
+            case ASCENDING -> i;
+            case DESCENDING -> n - i;
+            case EQUAL -> 0;
+            case ORGAN_PIPE -> Math.min(i, n - 1 - i);
+            case SAWTOOTH -> i % SAWTOOTH_PERIOD;
+        }).toArray();
+    }
+
+    interface VectorCheck {
+        void check(int[] keys, int[] labels) throws Throwable;
+    }
+
+    /** Runs {@code check} over every (size, shape) vector whose length is at least {@code minLength}. */
+    static void forEachVector(int minLength, VectorCheck check) throws Throwable {
+        for (int n : SIZES) {
+            if (n >= minLength) {
+                for (Shape s : Shape.values()) {
+                    check.check(keys(n, s), identity(n));
+                }
+            }
+        }
+    }
+
+    static int[] identity(int n) {
+        return IntStream.range(0, n).toArray();
+    }
+
+    /** A borrowed M3SortContext comparing labels by {@code keys[label]}, without a monitor. */
+    static Object context(int[] keys) throws Throwable {
+        IntBinaryOperator byKey = (x, y) -> Integer.compare(keys[x], keys[y]);
+        return NEW_CONTEXT.invoke(byKey, (ProgressMonitor) null);
+    }
+
+    /** A context over long keys addressed as {@code keys[index - base]}. */
+    static Object longContext(long[] keys, int base) throws Throwable {
+        IntBinaryOperator byKey = (x, y) -> Long.compare(keys[x - base], keys[y - base]);
+        return NEW_CONTEXT.invoke(byKey, (ProgressMonitor) null);
+    }
+
+    /** JDK differential: [lo, hi) stably ordered by key (java.util.Arrays.sort over objects is stable). */
+    static int[] stableOrder(int[] keys, int[] labels, int lo, int hi) {
+        Integer[] boxed = IntStream.of(labels).boxed().toArray(Integer[]::new);
+        Arrays.sort(boxed, lo, hi, Comparator.comparingInt(l -> keys[l]));
+        return Stream.of(boxed).mapToInt(Integer::intValue).toArray();
+    }
+
+    static int[] keysAlong(int[] keys, int[] labels, int lo, int hi) {
+        return IntStream.range(lo, hi).map(i -> keys[labels[i]]).toArray();
+    }
+
+    /** Sorted-permutation contract; stable kernels must equal the stable JDK order exactly. */
+    static void assertSortedPermutation(int[] keys, int[] before, int[] after, int lo, int hi,
+                                        boolean stable, String atom) {
+        String where = atom + " n=" + before.length + " [" + lo + "," + hi + ")";
+        int[] expected = stableOrder(keys, before, lo, hi);
+        if (stable) {
+            assertArrayEquals(expected, after, where + " stable order");
+            return;
+        }
+        assertArrayEquals(Arrays.copyOfRange(before, 0, lo), Arrays.copyOfRange(after, 0, lo), where + " prefix");
+        assertArrayEquals(Arrays.copyOfRange(before, hi, before.length),
+                Arrays.copyOfRange(after, hi, after.length), where + " suffix");
+        int[] got = Arrays.copyOfRange(after, lo, hi);
+        int[] want = Arrays.copyOfRange(before, lo, hi);
+        Arrays.sort(got);
+        Arrays.sort(want);
+        assertArrayEquals(want, got, where + " permutation");
+        assertArrayEquals(keysAlong(keys, expected, lo, hi), keysAlong(keys, after, lo, hi), where + " key order");
+    }
+
+    static boolean stable(String algorithm) {
+        return SortAlgorithm.valueOf(algorithm).isStable();
+    }
+
+    /** Labels whose keys are pre-sorted stably on [lo, mid) and [mid, hi): two adjacent runs. */
+    static int[] twoRuns(int[] keys, int lo, int mid, int hi) {
+        int[] a = stableOrder(keys, identity(keys.length), lo, mid);
+        return stableOrder(keys, a, mid, hi);
+    }
+
+    /** Recording monitor for the context protocol. */
+    static final class RecordingMonitor implements ProgressMonitor {
+        final List<Long> worked = new ArrayList<>();
+        int cancelChecks;
+        boolean cancelled;
+
+        @Override
+        public void worked(long units) {
+            worked.add(units);
+        }
+
+        @Override
+        public boolean isCancelled() {
+            return cancelled;
+        }
+
+        @Override
+        public void checkCancelled() {
+            cancelChecks++;
+            ProgressMonitor.super.checkCancelled();
+        }
+    }
+
+
+    enum LongShape {
+        NARROW(true), WIDE_RANDOM(false), EXTREMES(false), FEW(true), EQUAL(true), DESCENDING(false);
+
+        final boolean narrow;
+
+        LongShape(boolean narrow) {
+            this.narrow = narrow;
+        }
+    }
+
+    static long[] longKeys(int n, LongShape shape) {
+        Random r = new Random(SEED ^ ((long) n << Integer.SIZE) ^ shape.ordinal());
+        long[] extremes = {Long.MIN_VALUE, Long.MAX_VALUE, 0L, -1L, 1L, Long.MIN_VALUE + 1, Long.MAX_VALUE - 1};
+        return IntStream.range(0, n).mapToLong(i -> switch (shape) {
+            case NARROW -> NARROW_MIN + r.nextInt((int) NARROW_SPAN);
+            case WIDE_RANDOM -> r.nextLong();
+            case EXTREMES -> extremes[r.nextInt(extremes.length)];
+            case FEW -> r.nextInt(FEW_DISTINCT) - 1L;
+            case EQUAL -> Long.MIN_VALUE;
+            case DESCENDING -> (long) (n - i) << Integer.SIZE;
+        }).toArray();
+    }
+
+    interface LongVectorCheck {
+        void check(long[] keys, int base, int[] order) throws Throwable;
+    }
+
+    static void forEachLongVector(boolean narrowOnly, LongVectorCheck check) throws Throwable {
+        for (int n : SIZES) {
+            for (LongShape s : LongShape.values()) {
+                if (narrowOnly && !s.narrow) {
+                    continue;
+                }
+                for (int base : BASES) {
+                    check.check(longKeys(n, s), base, IntStream.range(0, n).map(i -> i + base).toArray());
+                }
+            }
+        }
+    }
+
+    /** Independent radix digit: the sign-biased key as an unsigned BigInteger, shifted and masked. */
+    static int biasedDigit(long key, int shift) {
+        java.math.BigInteger biased = java.math.BigInteger.valueOf(key).subtract(
+                java.math.BigInteger.valueOf(Long.MIN_VALUE));
+        return biased.shiftRight(shift).intValue() & DIGIT_MASK;
+    }
+
+    static void assertLongSorted(long[] keys, int base, int[] before, int[] after, int from, int to,
+                                 boolean stable, String where) {
+        Integer[] boxed = IntStream.of(before).boxed().toArray(Integer[]::new);
+        Arrays.sort(boxed, from, to, Comparator.comparingLong(i -> keys[i - base]));
+        int[] expected = Stream.of(boxed).mapToInt(Integer::intValue).toArray();
+        if (stable) {
+            assertArrayEquals(expected, after, where + " stable order");
+            return;
+        }
+        int[] got = after.clone();
+        int[] want = before.clone();
+        Arrays.sort(got);
+        Arrays.sort(want);
+        assertArrayEquals(want, got, where + " permutation");
+        assertArrayEquals(IntStream.of(expected).mapToLong(i -> keys[i - base]).toArray(),
+                IntStream.of(after).mapToLong(i -> keys[i - base]).toArray(), where + " key order");
+    }
+//@@ PATTERN SORT_DISPATCH | uses= | oracle=java.util.Arrays.sort differential (stable object order or primitive key order); IllegalArgumentException for numeric-only algorithms
+    /** ${atom}(a, algorithm, c): every comparison algorithm sorts; numeric-only algorithms are rejected. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 3);
+        for (SortAlgorithm algorithm : SortAlgorithm.values()) {
+            if (algorithm.requiresNumericKeys()) {
+                int[] keys = keys(SIZES[SIZES.length - 1], Shape.RANDOM);
+                IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+                        () -> atom.invoke(identity(keys.length), algorithm, context(keys)));
+                assertTrue(e.getMessage().contains(algorithm.name()), e.getMessage());
+                continue;
+            }
+            forEachVector(0, (keys, labels) -> {
+                int[] a = labels.clone();
+                atom.invoke(a, algorithm, context(keys));
+                assertSortedPermutation(keys, labels, a, 0, a.length, algorithm.isStable(), algorithm.name());
+            });
+        }
+        int[] single = {0};
+        atom.invoke(single, SortAlgorithm.BITONIC, context(new int[] {1}));
+        assertArrayEquals(new int[] {0}, single, "length < 2 returns before dispatch");
+    }
+//@@ PATTERN SORT_FULL | uses= | oracle=java.util.Arrays.sort differential (stable object order or primitive key order)
+    /** ${atom}(a, c) sorts the whole lane (${algorithm}, stable=${algorithm} contract). */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 2);
+        forEachVector(2, (keys, labels) -> {
+            int[] a = labels.clone();
+            atom.invoke(a, context(keys));
+            assertSortedPermutation(keys, labels, a, 0, a.length, stable("${algorithm}"), "${atom}");
+        });
+    }
+//@@ PATTERN SORT_RANGE | uses= | oracle=java.util.Arrays.sort differential (stable object order or primitive key order) on [lo,hi), untouched outside
+    /** ${atom}(a, lo, hi, c) sorts [lo, hi) only (${algorithm}). */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 4);
+        forEachVector(0, (keys, labels) -> {
+            int n = labels.length;
+            int[][] ranges = {{0, n}, {n / QUARTER, n - n / QUARTER}, {n / THIRD, n / THIRD}};
+            for (int[] r : ranges) {
+                int[] a = labels.clone();
+                atom.invoke(a, r[0], r[1], context(keys));
+                assertSortedPermutation(keys, labels, a, r[0], r[1], stable("${algorithm}"), "${atom}");
+            }
+        });
+    }
+//@@ PATTERN SORT_RANGE_DEPTH | uses= | oracle=java.util.Arrays.sort differential (stable object order or primitive key order) for depth 0, 1, depthLimit
+    /** ${atom}(a, lo, hi, depth, c) sorts [lo, hi) for any depth budget, including the heap fallback at 0. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 5);
+        MethodHandle depthLimit = OWNER.method("depthLimit", 1);
+        forEachVector(0, (keys, labels) -> {
+            int n = labels.length;
+            int[] depths = {0, 1, (int) depthLimit.invoke(Math.max(1, n))};
+            for (int depth : depths) {
+                int[] a = labels.clone();
+                atom.invoke(a, n / QUARTER, n, depth, context(keys));
+                assertSortedPermutation(keys, labels, a, n / QUARTER, n, stable("${algorithm}"),
+                        "${atom} depth=" + depth);
+            }
+        });
+    }
+//@@ PATTERN SORT_BUFFERED_RANGE | uses= | oracle=java.util.Arrays.sort differential (stable object order or primitive key order)
+    /** ${atom}(a, work, lo, hi, c) stably sorts [lo, hi) using the caller's work lane (${algorithm}). */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 5);
+        forEachVector(0, (keys, labels) -> {
+            int n = labels.length;
+            int[] a = labels.clone();
+            int[] work = new int[n];
+            Arrays.fill(work, -1);
+            atom.invoke(a, work, n / QUARTER, n, context(keys));
+            assertSortedPermutation(keys, labels, a, n / QUARTER, n, stable("${algorithm}"), "${atom}");
+        });
+    }
+//@@ PATTERN DEPTH_LIMIT | uses= | oracle=BigInteger.bitLength floor log2
+    /** ${atom}(n) is the logarithmic budget 2 * floor(log2 n). */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 1);
+        int[] probes = {1, 2, 3, 4, 7, 8, 9, 1023, 1024, 1025, Integer.MAX_VALUE};
+        for (int n : probes) {
+            int floorLog2 = java.math.BigInteger.valueOf(n).bitLength() - 1;
+            assertEquals(2 * floorLog2, (int) atom.invoke(n), "${atom}(" + n + ")");
+        }
+    }
+//@@ PATTERN MEDIAN_OF_THREE | uses= | oracle=Arrays.sort of the three sampled keys
+    /** ${atom}(a, lo, hi, c) returns the label holding the median key of first, middle and last. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 4);
+        forEachVector(MEDIAN_SAMPLES, (keys, labels) -> {
+            int n = labels.length;
+            int lo = n / QUARTER;
+            int[] a = labels.clone();
+            int first = a[lo];
+            int middle = a[lo + ((n - lo) >>> 1)];
+            int last = a[n - 1];
+            int[] three = {keys[first], keys[middle], keys[last]};
+            Arrays.sort(three);
+            int pivot = (int) atom.invoke(a, lo, n, context(keys));
+            assertTrue(pivot == first || pivot == middle || pivot == last, "${atom} returns a sampled label");
+            assertEquals(three[1], keys[pivot], "${atom} median key");
+            assertArrayEquals(labels, a, "${atom} does not move labels");
+        });
+    }
+//@@ PATTERN PARTITION_THREE_WAY | uses= | oracle=per-index signum against the pivot + permutation
+    /** ${atom}(a, lo, hi, pivot, c) packs [equalLo, equalHi) with keys below, equal and above the pivot. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 5);
+        forEachVector(1, (keys, labels) -> {
+            int n = labels.length;
+            int lo = n / QUARTER;
+            int pivot = labels[lo + (n - lo) / 2];
+            int[] a = labels.clone();
+            long bounds = (long) atom.invoke(a, lo, n, pivot, context(keys));
+            int equalLo = (int) (bounds >>> Integer.SIZE);
+            int equalHi = (int) bounds;
+            assertTrue(lo <= equalLo && equalLo < equalHi && equalHi <= n, "${atom} bounds");
+            for (int i = lo; i < n; i++) {
+                int expected = i < equalLo ? -1 : i < equalHi ? 0 : 1;
+                assertEquals(expected, Integer.signum(Integer.compare(keys[a[i]], keys[pivot])), "${atom} at " + i);
+            }
+            assertSortedPermutation(keys, labels, stableOrder(keys, a, lo, n), lo, n, false, "${atom}");
+        });
+    }
+//@@ PATTERN RUN_ASCENDING | uses= | oracle=linear run scan + reversal check
+    /** ${atom}(a, lo, hi, c) measures the maximal run at lo (${run_measure}), reversing a strictly descending run. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 4);
+        forEachVector(2, (keys, labels) -> {
+            int n = labels.length;
+            for (int lo : new int[] {0, (n - 2) / 2, n - 2}) {
+                int[] a = labels.clone();
+                boolean descending = keys[a[lo + 1]] < keys[a[lo]];
+                int end = lo + 2;
+                while (end < n && (descending ? keys[a[end]] < keys[a[end - 1]] : keys[a[end]] >= keys[a[end - 1]])) {
+                    end++;
+                }
+                int result = (int) atom.invoke(a, lo, n, context(keys));
+                assertEquals(${run_result}, result, "${atom} run end from " + lo);
+                for (int i = lo; i < end; i++) {
+                    assertEquals(descending ? labels[end - 1 - (i - lo)] : labels[i], a[i], "${atom} run order");
+                }
+                assertArrayEquals(Arrays.copyOfRange(labels, end, n), Arrays.copyOfRange(a, end, n), "${atom} tail");
+            }
+            assertEquals(${single_result}, (int) atom.invoke(labels.clone(), n - 1, n, context(keys)),
+                    "${atom} one-element run");
+        });
+    }
+//@@ PATTERN MERGE_RUNS_BUFFERED | uses= | oracle=Arrays.sort stable order of the two runs
+    /** ${atom}(a, work, lo, mid, hi, c) stably merges two sorted adjacent runs; the left run wins ties. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 6);
+        forEachVector(0, (keys, labels) -> {
+            int n = labels.length;
+            for (int mid : new int[] {n / QUARTER, n / 2, n}) {
+                int[] a = twoRuns(keys, 0, mid, n);
+                atom.invoke(a, new int[n], 0, mid, n, context(keys));
+                assertArrayEquals(stableOrder(keys, labels, 0, n), a, "${atom} mid=" + mid);
+            }
+        });
+    }
+//@@ PATTERN MERGE_RUNS_IN_PLACE | uses= | oracle=Arrays.sort stable order of the two runs
+    /** ${atom}(a, lo, mid, hi, c) stably merges two sorted adjacent runs without a buffer. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 5);
+        forEachVector(0, (keys, labels) -> {
+            int n = labels.length;
+            int lo = n / QUARTER;
+            for (int mid : new int[] {lo, (lo + n) / 2, n}) {
+                int[] a = twoRuns(keys, lo, mid, n);
+                atom.invoke(a, lo, mid, n, context(keys));
+                assertArrayEquals(stableOrder(keys, labels, lo, n), a, "${atom} mid=" + mid);
+            }
+        });
+    }
+//@@ PATTERN BOUND | uses= | oracle=linear scan bound
+    /** ${atom}(a, lo, hi, value, c) is the first index in [lo, hi] whose key is ${bound_relation} key(value). */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 5);
+        forEachVector(0, (keys, labels) -> {
+            int n = labels.length;
+            int lo = n / QUARTER;
+            int[] a = stableOrder(keys, labels, lo, n);
+            for (int value = 0; value < n; value++) {
+                int expected = lo;
+                while (expected < n && ${bound_advance}) {
+                    expected++;
+                }
+                assertEquals(expected, (int) atom.invoke(a, lo, n, value, context(keys)), "${atom} value=" + value);
+            }
+        });
+    }
+//@@ PATTERN GALLOP | uses= | oracle=linear scan bound for every hint
+    /** ${atom}(key, a, base, len, hint, c): offset k with the TimSort ${gallop_side} gallop contract, for every hint. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 6);
+        forEachVector(1, (keys, labels) -> {
+            int n = labels.length;
+            int base = n / QUARTER;
+            int len = n - base;
+            if (len == 0) {
+                return;
+            }
+            int[] a = stableOrder(keys, labels, base, n);
+            Object c = context(keys);
+            for (int key = 0; key < n; key++) {
+                int expected = 0;
+                while (expected < len && ${gallop_advance}) {
+                    expected++;
+                }
+                for (int hint = 0; hint < len; hint++) {
+                    assertEquals(expected, (int) atom.invoke(key, a, base, len, hint, c),
+                            "${atom} key=" + key + " hint=" + hint);
+                }
+            }
+        });
+    }
+//@@ PATTERN HEAP_SIFT_MAX | uses= | oracle=max-heap property + permutation
+    /** ${atom}(a, lo, size, root, c): bottom-up sifting builds a max-heap on [lo, lo + size). */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 5);
+        forEachVector(1, (keys, labels) -> {
+            int n = labels.length;
+            int lo = n / QUARTER;
+            int size = n - lo;
+            int[] a = labels.clone();
+            Object c = context(keys);
+            for (int parent = (size >>> 1) - 1; parent >= 0; parent--) {
+                atom.invoke(a, lo, size, parent, c);
+            }
+            for (int child = 1; child < size; child++) {
+                assertTrue(keys[a[lo + (child - 1) / 2]] >= keys[a[lo + child]], "${atom} heap order at " + child);
+            }
+            assertSortedPermutation(keys, labels, stableOrder(keys, a, lo, n), lo, n, false, "${atom}");
+        });
+    }
+//@@ PATTERN CYCLE_RANK | uses= | oracle=IntStream count of smaller keys
+    /** ${atom}(a, start, item, c) = start + count of keys after start that are smaller than key(item). */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 4);
+        forEachVector(1, (keys, labels) -> {
+            int n = labels.length;
+            for (int start : new int[] {0, n / 2, n - 1}) {
+                for (int item : new int[] {labels[start], labels[n - 1], labels[0]}) {
+                    long smaller = IntStream.range(start + 1, n).filter(i -> keys[labels[i]] < keys[item]).count();
+                    assertEquals(start + (int) smaller, (int) atom.invoke(labels.clone(), start, item, context(keys)),
+                            "${atom} start=" + start + " item=" + item);
+                }
+            }
+        });
+    }
+//@@ PATTERN CYCLE_SKIP_EQUALS | uses= | oracle=fixture + IllegalArgumentException message
+    /** ${atom}(a, position, item, c) skips slots holding key(item); running off the end is a contract violation. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 4);
+        int[] keys = {5, 5, 5, 7, 5};
+        int[] a = identity(keys.length);
+        assertEquals(3, (int) atom.invoke(a, 0, 0, context(keys)), "skips the equal prefix");
+        assertEquals(3, (int) atom.invoke(a, 3, 0, context(keys)), "a different key stops at once");
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+                () -> atom.invoke(a, 4, 0, context(keys)));
+        assertEquals("Comparison method violates its general contract", e.getMessage());
+    }
+//@@ PATTERN AVL_CHILD_HEIGHT | uses= | oracle=fixture link table
+    /** ${atom}(child, height): link 0 is empty (height 0); link k is node k - 1. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 2);
+        int[] height = {3, 1, 2};
+        assertEquals(0, (int) atom.invoke(0, height), "empty link");
+        for (int node = 0; node < height.length; node++) {
+            assertEquals(height[node], (int) atom.invoke(node + 1, height), "link " + (node + 1));
+        }
+    }
+//@@ PATTERN AVL_UPDATE_HEIGHT | uses= | oracle=1 + max(child heights)
+    /** ${atom}(node, left, right, height): height = 1 + max(child heights). */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 4);
+        int[] left = {2, 0, 0};
+        int[] right = {3, 0, 0};
+        int[] height = {0, 4, 2};
+        atom.invoke(0, left, right, height);
+        assertEquals(5, height[0], "1 + max(4, 2)");
+        atom.invoke(1, left, right, height);
+        assertEquals(1, height[1], "leaf height");
+        right[0] = 0;
+        left[0] = 3;
+        atom.invoke(0, left, right, height);
+        assertEquals(3, height[0], "single child");
+    }
+//@@ PATTERN AVL_ROTATE | uses=AVL_TREE | oracle=in-order sequence + recomputed heights
+    /** ${atom}(node, left, right, height, c) lifts the ${rotate_side} child, preserving in-order labels. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 5);
+        // Nodes 0..4; a chain x(=0) with child y(=1) on the ${rotate_side} side, y has inner and outer subtrees.
+        final int x = 0;
+        final int y = 1;
+        final int outerA = 2;
+        final int innerB = 3;
+        final int outerC = 4;
+        int[] left = new int[outerC + 1];
+        int[] right = new int[outerC + 1];
+        int[] height = {3, 2, 1, 1, 1};
+        ${rotate_build}
+        List<Integer> before = inOrder(x, left, right);
+        int root = (int) atom.invoke(x, left, right, height, context(new int[outerC + 1]));
+        assertEquals(y, root, "${atom} returns the lifted child");
+        assertEquals(before, inOrder(root, left, right), "${atom} preserves in-order sequence");
+        assertEquals(1 + height[innerB], height[x], "old root height");
+        assertEquals(1 + height[x], height[y], "new root height");
+    }
+
+//@@ PATTERN AVL_REBALANCE | uses=AVL_TREE | oracle=in-order sequence + balanced height for LL/LR/RR/RL
+    /** ${atom}(node, left, right, height, c) restores |balance| <= 1 for LL, LR, RR and RL chains. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 5);
+        int[][] shapes = {{-1, -1}, {-1, 1}, {1, 1}, {1, -1}};
+        for (int[] shape : shapes) {
+            int[] left = new int[3];
+            int[] right = new int[3];
+            int[] height = {3, 2, 1};
+            link(0, 1, shape[0], left, right);
+            link(1, 2, shape[1], left, right);
+            List<Integer> before = inOrder(0, left, right);
+            int root = (int) atom.invoke(0, left, right, height, context(new int[3]));
+            assertEquals(before, inOrder(root, left, right), "${atom} preserves in-order");
+            assertEquals(before.get(1), root, "${atom} lifts the middle node");
+            assertEquals(2, height[root], "${atom} balanced height");
+        }
+        int[] left = {2, 0};
+        int[] right = {0, 0};
+        int[] height = {2, 1};
+        assertEquals(0, (int) atom.invoke(0, left, right, height, context(new int[2])), "balanced node stays");
+    }
+
+//@@ PATTERN TOURNAMENT_WIRE | uses= | oracle=fixture wire table + removed bitset
+    /** ${atom}(wire, length, winners, removed): internal wires read winners; leaves map to unremoved positions. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 4);
+        int length = 5;
+        int[] winners = {-1, 4, 2, 3, 0};
+        long[] removed = {1L << 3};
+        for (long wire = 1; wire < length; wire++) {
+            assertEquals(winners[(int) wire], (int) atom.invoke(wire, length, winners, removed), "internal " + wire);
+        }
+        for (int position = 0; position < length; position++) {
+            int expected = position == 3 ? -1 : position;
+            assertEquals(expected, (int) atom.invoke((long) length + position, length, winners, removed),
+                    "leaf " + position);
+        }
+    }
+//@@ PATTERN TOURNAMENT_WINNER | uses= | oracle=fixture truth table
+    /** ${atom}(left, right, keys, c): -1 is a bye, the smaller key wins and equal keys prefer the left position. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 4);
+        int[] values = {1, 2, 1, 0};
+        int[] keys = identity(values.length);
+        Object c = context(values);
+        assertEquals(2, (int) atom.invoke(-1, 2, keys, c), "left bye");
+        assertEquals(1, (int) atom.invoke(1, -1, keys, c), "right bye");
+        assertEquals(3, (int) atom.invoke(0, 3, keys, c), "smaller key wins");
+        assertEquals(0, (int) atom.invoke(2, 0, keys, c), "equal keys: lower position");
+        assertEquals(0, (int) atom.invoke(0, 2, keys, c), "equal keys: lower position, either side");
+    }
+//@@ PATTERN PILE_COMPARE | uses= | oracle=fixture truth table
+    /** ${atom}(left, right, tops, keys, c) orders piles by top key, then by top position. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 5);
+        int[] values = {7, 3, 7, 1};
+        int[] keys = identity(values.length);
+        int[] tops = {1, 2, 3, 4};
+        Object c = context(values);
+        assertTrue((int) atom.invoke(1, 0, tops, keys, c) < 0, "smaller top key first");
+        assertTrue((int) atom.invoke(0, 1, tops, keys, c) > 0, "larger top key later");
+        assertTrue((int) atom.invoke(0, 2, tops, keys, c) < 0, "equal keys: earlier position first");
+        assertEquals(0, (int) atom.invoke(2, 2, tops, keys, c), "a pile equals itself");
+    }
+//@@ PATTERN PILE_SIFT | uses= | oracle=min-heap property + permutation
+    /** ${atom}(heap, size, root, tops, keys, c): sifting every parent yields a min-heap of piles. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 6);
+        forEachVector(1, (keys, labels) -> {
+            int piles = labels.length;
+            int[] tops = IntStream.range(0, piles).map(i -> i + 1).toArray();
+            int[] heap = identity(piles);
+            Object c = context(keys);
+            for (int parent = (piles >>> 1) - 1; parent >= 0; parent--) {
+                atom.invoke(heap, piles, parent, tops, labels, c);
+            }
+            for (int child = 1; child < piles; child++) {
+                int p = heap[(child - 1) / 2];
+                int q = heap[child];
+                assertTrue(keys[p] < keys[q] || keys[p] == keys[q] && p < q, "${atom} heap order at " + child);
+            }
+            int[] sorted = heap.clone();
+            Arrays.sort(sorted);
+            assertArrayEquals(identity(piles), sorted, "${atom} permutation");
+        });
+    }
+//@@ PATTERN MERGE_STRAND | uses= | oracle=Arrays.sort stable order
+    /** ${atom}(sorted, sortedLength, strand, strandLength, out, c) stably merges; the accumulated run wins ties. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 6);
+        forEachVector(0, (keys, labels) -> {
+            int n = labels.length;
+            int split = n / THIRD;
+            int[] runs = twoRuns(keys, 0, split, n);
+            int[] sorted = Arrays.copyOf(runs, split);
+            int[] strand = Arrays.copyOfRange(runs, split, n);
+            int[] out = new int[n];
+            atom.invoke(sorted, split, strand, n - split, out, context(keys));
+            assertArrayEquals(stableOrder(keys, labels, 0, n), out, "${atom} split=" + split);
+        });
+    }
+//@@ PATTERN BITONIC_SORT | uses= | oracle=java.util.Arrays.sort differential (stable object order or primitive key order) in both directions
+    /** ${atom}(a, lo, length, ascending, c) sorts an arbitrary-length range in either direction. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 5);
+        forEachVector(0, (keys, labels) -> {
+            int n = labels.length;
+            int lo = n / QUARTER;
+            int[] up = labels.clone();
+            atom.invoke(up, lo, n - lo, true, context(keys));
+            assertSortedPermutation(keys, labels, up, lo, n, false, "${atom} ascending");
+            int[] down = labels.clone();
+            atom.invoke(down, lo, n - lo, false, context(keys));
+            int[] negated = IntStream.of(keys).map(k -> -k).toArray();
+            assertSortedPermutation(negated, labels, down, lo, n, false, "${atom} descending");
+        });
+    }
+//@@ PATTERN BITONIC_MERGE | uses= | oracle=java.util.Arrays.sort differential (stable object order or primitive key order) in both directions
+    /** ${atom}(a, lo, length, ascending, c) merges a half sorted against the direction with an aligned rest. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 5);
+        forEachVector(0, (keys, labels) -> {
+            int n = labels.length;
+            int half = n >>> 1;
+            int[] negated = IntStream.of(keys).map(k -> -k).toArray();
+            int[] up = stableOrder(keys, stableOrder(negated, labels, 0, half), half, n);
+            atom.invoke(up, 0, n, true, context(keys));
+            assertSortedPermutation(keys, labels, up, 0, n, false, "${atom} ascending");
+            int[] down = stableOrder(negated, stableOrder(keys, labels, 0, half), half, n);
+            atom.invoke(down, 0, n, false, context(keys));
+            assertSortedPermutation(negated, labels, down, 0, n, false, "${atom} descending");
+        });
+    }
+//@@ PATTERN ODD_EVEN_MERGE_SORT | uses= | oracle=java.util.Arrays.sort differential (stable object order or primitive key order)
+    /** ${atom}(a, lo, wires, c) sorts the real prefix of a virtual power-of-two network. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 4);
+        forEachVector(0, (keys, labels) -> {
+            int[] a = labels.clone();
+            long wires = Long.highestOneBit(Math.max(1, a.length - 1)) << 1;
+            atom.invoke(a, 0L, wires, context(keys));
+            assertSortedPermutation(keys, labels, a, 0, a.length, false, "${atom}");
+        });
+    }
+//@@ PATTERN ODD_EVEN_NETWORK_MERGE | uses= | oracle=java.util.Arrays.sort differential (stable object order or primitive key order)
+    /** ${atom}(a, lo, length, 1, c) merges two sorted virtual halves of the network. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 5);
+        forEachVector(0, (keys, labels) -> {
+            int n = labels.length;
+            long wires = Long.highestOneBit(Math.max(1, n - 1)) << 1;
+            int half = (int) Math.min(n, wires >>> 1);
+            int[] a = twoRuns(keys, 0, half, n);
+            atom.invoke(a, 0L, wires, 1L, context(keys));
+            assertSortedPermutation(keys, labels, a, 0, n, false, "${atom}");
+        });
+    }
+//@@ PATTERN COMPARE_EXCHANGE | uses= | oracle=fixture
+    /** ${atom}(a, i, j, c) leaves key(a[i]) <= key(a[j]) and never swaps equal keys. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 4);
+        int[] keys = {4, 2, 2, 9};
+        int[] a = identity(keys.length);
+        atom.invoke(a, 0, 1, context(keys));
+        assertArrayEquals(new int[] {1, 0, 2, 3}, a, "greater left swaps");
+        atom.invoke(a, 0, 2, context(keys));
+        assertArrayEquals(new int[] {1, 0, 2, 3}, a, "equal keys stay");
+        atom.invoke(a, 1, 3, context(keys));
+        assertArrayEquals(new int[] {1, 0, 2, 3}, a, "ordered pair stays");
+    }
+//@@ PATTERN PERMUTE_SWAP | uses=BOXED | oracle=java.util.Collections.swap
+    /** ${atom}(a, i, j, c) matches java.util.Collections.swap. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 4);
+        forEachVector(1, (keys, labels) -> {
+            int n = labels.length;
+            int[][] pairs = {{0, n - 1}, {n / 2, n / 2}, {n - 1, 0}};
+            for (int[] p : pairs) {
+                int[] a = labels.clone();
+                List<Integer> oracle = boxed(labels);
+                atom.invoke(a, p[0], p[1], context(keys));
+                Collections.swap(oracle, p[0], p[1]);
+                assertEquals(oracle, boxed(a), "${atom} " + Arrays.toString(p));
+            }
+        });
+    }
+
+//@@ PATTERN PERMUTE_REVERSE | uses= | oracle=java.util.Collections.reverse(subList)
+    /** ${atom}(a, lo, hi, c) matches java.util.Collections.reverse on the sub-list. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 4);
+        forEachVector(0, (keys, labels) -> {
+            int n = labels.length;
+            int[][] ranges = {{0, n}, {n / QUARTER, n - n / QUARTER}, {n / 2, n / 2}};
+            for (int[] r : ranges) {
+                int[] a = labels.clone();
+                List<Integer> oracle = IntStream.of(labels).boxed()
+                        .collect(java.util.stream.Collectors.toCollection(ArrayList::new));
+                atom.invoke(a, r[0], r[1], context(keys));
+                Collections.reverse(oracle.subList(r[0], r[1]));
+                assertEquals(oracle, IntStream.of(a).boxed().toList(), "${atom} " + Arrays.toString(r));
+            }
+        });
+    }
+//@@ PATTERN PERMUTE_ROTATE | uses= | oracle=java.util.Collections.rotate(subList)
+    /** ${atom}(a, lo, mid, hi, c) moves [mid, hi) before [lo, mid), like Collections.rotate(sub, lo - mid). */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 5);
+        forEachVector(0, (keys, labels) -> {
+            int n = labels.length;
+            int lo = n / QUARTER;
+            for (int mid : new int[] {lo, (lo + n) / 2, n}) {
+                int[] a = labels.clone();
+                List<Integer> oracle = IntStream.of(labels).boxed()
+                        .collect(java.util.stream.Collectors.toCollection(ArrayList::new));
+                atom.invoke(a, lo, mid, n, context(keys));
+                Collections.rotate(oracle.subList(lo, n), lo - mid);
+                assertEquals(oracle, IntStream.of(a).boxed().toList(), "${atom} mid=" + mid);
+            }
+        });
+    }
+//@@ PATTERN TIM_SORT | uses= | oracle=java.util.Arrays.sort differential (stable object order or primitive key order)
+    /** ${atom}(a, lo, hi, c, work, workBase, workLen) stably sorts [lo, hi), with or without a work lane. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 7);
+        forEachVector(0, (keys, labels) -> {
+            int n = labels.length;
+            int lo = n / QUARTER;
+            int[] a = labels.clone();
+            atom.invoke(a, lo, n, context(keys), (int[]) null, 0, 0);
+            assertSortedPermutation(keys, labels, a, lo, n, true, "${atom} no work lane");
+            int[] b = labels.clone();
+            int[] work = new int[n];
+            atom.invoke(b, 0, n, context(keys), work, 0, n);
+            assertSortedPermutation(keys, labels, b, 0, n, true, "${atom} caller work lane");
+        });
+        int[] keys = keys(SIZES[SIZES.length - 1] * QUARTER, Shape.SAWTOOTH);
+        int[] a = identity(keys.length);
+        atom.invoke(a, 0, a.length, context(keys), (int[]) null, 0, 0);
+        assertSortedPermutation(keys, identity(keys.length), a, 0, a.length, true, "${atom} many runs");
+    }
+//@@ PATTERN TIM_BINARY_SORT | uses= | oracle=java.util.Arrays.sort differential (stable object order or primitive key order)
+    /** ${atom}(a, lo, hi, start, c) inserts [start, hi) into the sorted prefix [lo, start), stably. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 5);
+        forEachVector(1, (keys, labels) -> {
+            int n = labels.length;
+            int lo = n / QUARTER;
+            for (int start : new int[] {lo, lo + 1, (lo + n) / 2, n}) {
+                int[] a = stableOrder(keys, labels, lo, Math.max(lo, Math.min(start, n)));
+                atom.invoke(a, lo, n, Math.min(start, n), context(keys));
+                assertSortedPermutation(keys, labels, a, lo, n, true, "${atom} start=" + start);
+            }
+        });
+    }
+//@@ PATTERN TIM_MIN_RUN | uses= | oracle=listsort.txt top-bits formula
+    /** ${atom}(n): n below MIN_MERGE, else the top bits of n plus one when any lower bit is set (listsort.txt). */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 1);
+        int minMerge = (int) OWNER.constant("MIN_MERGE");
+        int keptBits = Integer.SIZE - Integer.numberOfLeadingZeros(minMerge) - 1;
+        IntStream probes = IntStream.concat(IntStream.range(0, minMerge * minMerge),
+                IntStream.of(Integer.MAX_VALUE, Integer.MAX_VALUE - 1, 1 << (Integer.SIZE - 2)));
+        for (int n : probes.toArray()) {
+            int expected;
+            if (n < minMerge) {
+                expected = n;
+            } else {
+                int shift = (Integer.SIZE - Integer.numberOfLeadingZeros(n)) - keptBits;
+                expected = (n >>> shift) + ((n & ((1 << shift) - 1)) != 0 ? 1 : 0);
+                assertTrue(expected >= minMerge / 2 && expected <= minMerge, "${atom} bound for " + n);
+            }
+            assertEquals(expected, (int) atom.invoke(n), "${atom}(" + n + ")");
+        }
+    }
+//@@ PATTERN TIM_CONSTRUCTOR | uses= | oracle=OpenJDK TimSort tmp and run-stack sizing table
+    /** ${atom}(a, c, work, workBase, workLen) sizes tmp storage and the run stack from a.length. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle ctor = OWNER.constructor("${atom}", 5);
+        int initial = (int) OWNER.constant("INITIAL_TMP_STORAGE_LENGTH");
+        // listsort.txt stack bounds carried by the OpenJDK donor: length thresholds and stack sizes.
+        int[][] stackBounds = {{119, 5}, {120, 10}, {1541, 10}, {1542, 24}, {119150, 24}, {119151, 49}};
+        VarHandle tmp = OWNER.field("tmp");
+        VarHandle tmpLen = OWNER.field("tmpLen");
+        VarHandle tmpBase = OWNER.field("tmpBase");
+        VarHandle runBase = OWNER.field("runBase");
+        for (int[] bound : stackBounds) {
+            int length = bound[0];
+            int[] keys = new int[length];
+            Object ts = ctor.invoke(identity(length), context(keys), (int[]) null, 0, 0);
+            int expectedTmp = length < 2 * initial ? length >>> 1 : initial;
+            assertEquals(expectedTmp, ((int[]) tmp.get(ts)).length, "tmp for " + length);
+            assertEquals(expectedTmp, (int) tmpLen.get(ts));
+            assertEquals(0, (int) tmpBase.get(ts));
+            assertEquals(bound[1], ((int[]) runBase.get(ts)).length, "run stack for " + length);
+            int[] work = new int[length];
+            Object borrowed = ctor.invoke(identity(length), context(keys), work, 1, length - 1);
+            assertSame(work, tmp.get(borrowed), "an adequate work lane is borrowed");
+            assertEquals(1, (int) tmpBase.get(borrowed));
+            assertEquals(length - 1, (int) tmpLen.get(borrowed));
+        }
+    }
+//@@ PATTERN TIM_PUSH_RUN | uses=TIM_STATE | oracle=run-stack fields
+    /** ${atom}(base, len) appends one pending run to the run stack. */
+    @Test
+    void ${test}() throws Throwable {
+        Object ts = timSort(new int[SIZES[SIZES.length - 1]]);
+        MethodHandle atom = OWNER.method("${atom}", 2);
+        int[][] runs = {{0, 10}, {10, 5}, {15, 3}};
+        for (int i = 0; i < runs.length; i++) {
+            atom.invoke(ts, runs[i][0], runs[i][1]);
+            assertEquals(i + 1, (int) OWNER.field("stackSize").get(ts));
+            assertEquals(runs[i][0], ((int[]) OWNER.field("runBase").get(ts))[i]);
+            assertEquals(runs[i][1], ((int[]) OWNER.field("runLen").get(ts))[i]);
+        }
+    }
+
+//@@ PATTERN TIM_MERGE_AT | uses=TIM_STATE | oracle=Arrays.sort stable order of the merged runs
+    /** ${atom}(i) merges runs i and i + 1 (i = stackSize - 2 or - 3) stably and pops one run. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle push = OWNER.method("pushRun", 2);
+        MethodHandle atom = OWNER.method("${atom}", 1);
+        int[] lengths = {40, 25, 15};
+        int total = IntStream.of(lengths).sum();
+        for (Shape shape : Shape.values()) {
+            for (int i : new int[] {0, 1}) {
+                int[] keys = keys(total, shape);
+                int[] a = runs(keys, lengths);
+                Object ts = timSort(keys, a);
+                push.invoke(ts, 0, lengths[0]);
+                push.invoke(ts, lengths[0], lengths[1]);
+                push.invoke(ts, lengths[0] + lengths[1], lengths[2]);
+                atom.invoke(ts, i);
+                assertEquals(2, (int) OWNER.field("stackSize").get(ts), "${atom} pops one run");
+                int[] runLen = (int[]) OWNER.field("runLen").get(ts);
+                int mergedBase = i == 0 ? 0 : lengths[0];
+                int mergedEnd = mergedBase + lengths[i] + lengths[i + 1];
+                assertEquals(lengths[i] + lengths[i + 1], runLen[i], "${atom} merged length");
+                assertArrayEquals(stableOrder(keys, runs(keys, lengths), mergedBase, mergedEnd), a,
+                        "${atom}(" + i + ") " + shape);
+            }
+        }
+    }
+//@@ PATTERN TIM_MERGE_COLLAPSE | uses=TIM_STATE | oracle=run-stack invariants + stable runs
+    /** ${atom}() re-establishes runLen[i-2] > runLen[i-1] + runLen[i] and runLen[i-1] > runLen[i]. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle push = OWNER.method("pushRun", 2);
+        MethodHandle atom = OWNER.method("${atom}", 0);
+        int[] lengths = {50, 40, 30, 20, 25, 5, 5, 60, 7, 3};
+        int total = IntStream.of(lengths).sum();
+        for (Shape shape : Shape.values()) {
+            int[] keys = keys(total, shape);
+            int[] a = runs(keys, lengths);
+            Object ts = timSort(keys, a);
+            int base = 0;
+            for (int len : lengths) {
+                push.invoke(ts, base, len);
+                base += len;
+                atom.invoke(ts);
+                int size = (int) OWNER.field("stackSize").get(ts);
+                int[] runLen = (int[]) OWNER.field("runLen").get(ts);
+                int[] runBase = (int[]) OWNER.field("runBase").get(ts);
+                for (int i = 1; i < size; i++) {
+                    assertTrue(runLen[i - 1] > runLen[i], "${atom} decreasing run lengths " + shape);
+                    if (i >= 2) {
+                        assertTrue(runLen[i - 2] > runLen[i - 1] + runLen[i], "${atom} Fibonacci invariant");
+                    }
+                }
+                for (int i = 0; i < size; i++) {
+                    int from = runBase[i];
+                    int to = from + runLen[i];
+                    assertArrayEquals(Arrays.copyOfRange(stableOrder(keys, identity(total), from, to), from, to),
+                            Arrays.copyOfRange(a, from, to), "${atom} run " + i + " is a stable run");
+                }
+            }
+        }
+    }
+//@@ PATTERN TIM_FORCE_COLLAPSE | uses=TIM_STATE | oracle=Arrays.sort stable order
+    /** ${atom}() merges every pending run; the whole range is then one stable run. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle push = OWNER.method("pushRun", 2);
+        MethodHandle atom = OWNER.method("${atom}", 0);
+        int[] lengths = {9, 33, 2, 17, 64, 1};
+        int total = IntStream.of(lengths).sum();
+        for (Shape shape : Shape.values()) {
+            int[] keys = keys(total, shape);
+            int[] a = runs(keys, lengths);
+            Object ts = timSort(keys, a);
+            int base = 0;
+            for (int len : lengths) {
+                push.invoke(ts, base, len);
+                base += len;
+            }
+            atom.invoke(ts);
+            assertEquals(1, (int) OWNER.field("stackSize").get(ts), "${atom} leaves one run");
+            assertArrayEquals(stableOrder(keys, identity(total), 0, total), a, "${atom} " + shape);
+        }
+    }
+//@@ PATTERN TIM_MERGE_LO_HI | uses=TIM_STATE | oracle=Arrays.sort stable order
+    /** ${atom}(base1, len1, base2, len2) stably merges trimmed adjacent runs (${merge_side} side buffered). */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 4);
+        int[][] shapes = ${merge_lengths};
+        for (int[] lens : shapes) {
+            for (int streak : new int[] {1, 9}) {
+                int len1 = lens[0];
+                int len2 = lens[1];
+                int[] keys = new int[len1 + len2];
+                // run 2 starts strictly below run 1 and run 1 ends strictly above run 2 (mergeAt's trimming);
+                // the middle values overlap so equal keys cross the runs.
+                for (int i = 0; i < len1; i++) {
+                    keys[i] = 1 + i / streak;
+                }
+                for (int i = 0; i < len2; i++) {
+                    keys[len1 + i] = i / streak;
+                }
+                keys[len1 - 1] = Integer.MAX_VALUE;
+                int[] a = runs(keys, lens);
+                Object ts = timSort(keys, a);
+                atom.invoke(ts, 0, len1, len1, len2);
+                assertArrayEquals(stableOrder(keys, identity(keys.length), 0, keys.length), a,
+                        "${atom} " + len1 + "+" + len2 + " streak=" + streak);
+            }
+        }
+    }
+//@@ PATTERN TIM_ENSURE_CAPACITY | uses=TIM_STATE | oracle=capacity bounds + identity of tmp
+    /** ${atom}(min) returns tmp holding at least min slots, growing to a bounded power of two. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 1);
+        int length = SIZES[SIZES.length - 1];
+        Object ts = timSort(new int[length]);
+        int[] initial = (int[]) OWNER.field("tmp").get(ts);
+        assertSame(initial, (int[]) atom.invoke(ts, initial.length), "no growth when large enough");
+        for (int min : new int[] {initial.length + 1, length / 2 - 1, length / 2}) {
+            int[] grown = (int[]) atom.invoke(ts, min);
+            assertTrue(grown.length >= min, "${atom}(" + min + ") capacity");
+            assertTrue(grown.length <= Math.max(min, length >>> 1), "${atom} bounded by half the lane");
+            assertSame(grown, OWNER.field("tmp").get(ts));
+            assertEquals(grown.length, (int) OWNER.field("tmpLen").get(ts));
+            assertEquals(0, (int) OWNER.field("tmpBase").get(ts));
+        }
+    }
+//@@ PATTERN CONTEXT_CONSTRUCTOR | uses= | oracle=recording ProgressMonitor protocol
+    /** ${atom}(comparator, monitor): null comparator is rejected; NONE means no monitor; live monitors are checked. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle ctor = OWNER.constructor("${atom}", 2);
+        IntBinaryOperator natural = Integer::compare;
+        NullPointerException npe = assertThrows(NullPointerException.class,
+                () -> ctor.invoke((IntBinaryOperator) null, (ProgressMonitor) null));
+        assertEquals("comparator", npe.getMessage());
+        assertEquals(null, OWNER.field("monitor").get(ctor.invoke(natural, ProgressMonitor.NONE)), "NONE is dropped");
+        RecordingMonitor live = new RecordingMonitor();
+        Object context = ctor.invoke(natural, (ProgressMonitor) live);
+        assertSame(live, OWNER.field("monitor").get(context));
+        assertEquals(1, live.cancelChecks, "construction checks cancellation once");
+        RecordingMonitor cancelled = new RecordingMonitor();
+        cancelled.cancelled = true;
+        assertThrows(CancellationException.class, () -> ctor.invoke(natural, (ProgressMonitor) cancelled));
+    }
+//@@ PATTERN CONTEXT_COMPARE | uses= | oracle=comparator value + recording ProgressMonitor
+    /** ${atom}(left, right) returns the comparator's value and counts one step per call. */
+    @Test
+    void ${test}() throws Throwable {
+        RecordingMonitor monitor = new RecordingMonitor();
+        IntBinaryOperator reversed = (x, y) -> Integer.compare(y, x);
+        Object context = OWNER.constructor("M3SortContext", 2).invoke(reversed, (ProgressMonitor) monitor);
+        MethodHandle atom = OWNER.method("${atom}", 2);
+        for (int i = 0; i < FLUSH_BATCH; i++) {
+            assertEquals(Integer.compare(-i, i), Integer.signum((int) atom.invoke(context, i, -i)), "${atom} value");
+        }
+        assertEquals(List.of((long) FLUSH_BATCH), monitor.worked, "${atom} steps are reported per batch");
+    }
+//@@ PATTERN CONTEXT_STEP | uses= | oracle=recording ProgressMonitor batches + cancellation
+    /** ${atom}() reports work every FLUSH_BATCH steps and then checks cancellation. */
+    @Test
+    void ${test}() throws Throwable {
+        RecordingMonitor monitor = new RecordingMonitor();
+        Object context = OWNER.constructor("M3SortContext", 2).invoke((IntBinaryOperator) Integer::compare,
+                (ProgressMonitor) monitor);
+        MethodHandle atom = OWNER.method("${atom}", 0);
+        for (int i = 1; i < FLUSH_BATCH; i++) {
+            atom.invoke(context);
+        }
+        assertEquals(List.of(), monitor.worked, "no report before a full batch");
+        assertEquals(FLUSH_BATCH - 1, (int) OWNER.field("pending").get(context));
+        atom.invoke(context);
+        assertEquals(List.of((long) FLUSH_BATCH), monitor.worked, "one batch reported");
+        assertEquals(0, (int) OWNER.field("pending").get(context));
+        assertEquals(CONSTRUCTION_CHECKS + 1, monitor.cancelChecks, "construction and flush check cancellation");
+        monitor.cancelled = true;
+        for (int i = 1; i < FLUSH_BATCH; i++) {
+            atom.invoke(context);
+        }
+        assertThrows(CancellationException.class, () -> atom.invoke(context), "cancellation surfaces at the batch");
+        Object silent = OWNER.constructor("M3SortContext", 2).invoke((IntBinaryOperator) Integer::compare,
+                (ProgressMonitor) null);
+        for (int i = 0; i < FLUSH_BATCH; i++) {
+            atom.invoke(silent);
+        }
+        assertEquals(0, (int) OWNER.field("pending").get(silent), "no monitor, no pending count");
+    }
+//@@ PATTERN CONTEXT_FINISH | uses= | oracle=recording ProgressMonitor partial batch
+    /** ${atom}() flushes a partial batch; with no monitor it is a no-op. */
+    @Test
+    void ${test}() throws Throwable {
+        RecordingMonitor monitor = new RecordingMonitor();
+        MethodHandle ctor = OWNER.constructor("M3SortContext", 2);
+        Object context = ctor.invoke((IntBinaryOperator) Integer::compare, (ProgressMonitor) monitor);
+        MethodHandle step = OWNER.method("step", 0);
+        MethodHandle atom = OWNER.method("${atom}", 0);
+        int partial = FLUSH_BATCH / QUARTER;
+        for (int i = 0; i < partial; i++) {
+            step.invoke(context);
+        }
+        atom.invoke(context);
+        assertEquals(List.of((long) partial), monitor.worked, "${atom} reports the partial batch");
+        atom.invoke(context);
+        assertEquals(List.of((long) partial), monitor.worked, "${atom} with nothing pending reports nothing");
+        assertEquals(CONSTRUCTION_CHECKS + 2, monitor.cancelChecks, "both ${atom} calls check cancellation");
+        ctor.invoke((IntBinaryOperator) Integer::compare, (ProgressMonitor) null);
+        atom.invoke(ctor.invoke((IntBinaryOperator) Integer::compare, (ProgressMonitor) null));
+    }
+//@@ PATTERN CONTEXT_FLUSH | uses= | oracle=recording ProgressMonitor report-then-cancel order
+    /** ${atom}() reports pending work, resets it, then throws if the monitor is cancelled. */
+    @Test
+    void ${test}() throws Throwable {
+        RecordingMonitor monitor = new RecordingMonitor();
+        Object context = OWNER.constructor("M3SortContext", 2).invoke((IntBinaryOperator) Integer::compare,
+                (ProgressMonitor) monitor);
+        MethodHandle step = OWNER.method("step", 0);
+        MethodHandle atom = OWNER.method("${atom}", 0);
+        step.invoke(context);
+        step.invoke(context);
+        monitor.cancelled = true;
+        assertThrows(CancellationException.class, () -> atom.invoke(context));
+        assertEquals(List.of(2L), monitor.worked, "${atom} reports before checking cancellation");
+        assertEquals(0, (int) OWNER.field("pending").get(context), "${atom} resets pending");
+        monitor.cancelled = false;
+        atom.invoke(context);
+        assertEquals(List.of(2L), monitor.worked, "empty ${atom} reports nothing");
+    }
+//@@ PATTERN DIST_DISPATCH | uses= | oracle=Arrays.sort(Integer[], comparingLong) stable order
+    /** ${atom}(order, keys, base, algorithm, c): numeric algorithms sort; comparison-only ones are rejected. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 5);
+        for (SortAlgorithm algorithm : SortAlgorithm.values()) {
+            if (!algorithm.requiresNumericKeys()) {
+                long[] keys = longKeys(SIZES[0], LongShape.FEW);
+                IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+                        () -> atom.invoke(identity(keys.length), keys, 0, algorithm, longContext(keys, 0)));
+                assertEquals("Not a numeric algorithm: " + algorithm, e.getMessage());
+                continue;
+            }
+            boolean bounded = algorithm == SortAlgorithm.COUNTING || algorithm == SortAlgorithm.PIGEONHOLE;
+            forEachLongVector(bounded, (keys, base, order) -> {
+                int[] a = order.clone();
+                atom.invoke(a, keys, base, algorithm, longContext(keys, base));
+                assertLongSorted(keys, base, order, a, 0, a.length, algorithm.isStable(), algorithm.name());
+            });
+        }
+        int[] single = {3};
+        atom.invoke(single, new long[] {1}, 3, SortAlgorithm.QUICK, longContext(new long[] {1}, 3));
+        assertArrayEquals(new int[] {3}, single, "length < 2 returns before dispatch");
+    }
+//@@ PATTERN DIST_KERNEL | uses= | oracle=Arrays.sort(Integer[], comparingLong) stable order
+    /** ${atom}(order, keys, base, c) sorts indices by keys[index - base] (${algorithm}). */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 4);
+        forEachLongVector(${narrow}, (keys, base, order) -> {
+            if (order.length < 2) {
+                return;
+            }
+            int[] a = order.clone();
+            atom.invoke(a, keys, base, longContext(keys, base));
+            assertLongSorted(keys, base, order, a, 0, a.length, stable("${algorithm}"), "${atom}");
+        });
+    }
+//@@ PATTERN DIST_KERNEL_RANGE_SHIFT | uses= | oracle=Arrays.sort(Integer[], comparingLong) on [from,to)
+    /** ${atom}(order, ${scratch_arg}keys, base, from, to, shift, c) sorts [from, to) from the top digit down. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", ${arity});
+        forEachLongVector(false, (keys, base, order) -> {
+            int n = order.length;
+            int[][] ranges = {{0, n}, {n / QUARTER, n - n / QUARTER}};
+            for (int[] r : ranges) {
+                int[] a = order.clone();
+                atom.invoke(a, ${scratch_value}keys, base, r[0], r[1], TOP_SHIFT, longContext(keys, base));
+                assertLongSorted(keys, base, order, a, r[0], r[1], stable("${algorithm}"),
+                        "${atom} " + Arrays.toString(r));
+            }
+        });
+    }
+//@@ PATTERN DIST_EXTREMUM | uses= | oracle=LongStream.min/max + step count
+    /** ${atom}(keys, c) equals LongStream.${stream_op}() and counts one step per key. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 2);
+        forEachLongVector(false, (keys, base, order) -> {
+            if (keys.length == 0) {
+                return;
+            }
+            long expected = LongStream.of(keys).${stream_op}().getAsLong();
+            assertEquals(expected, (long) atom.invoke(keys, longContext(keys, base)), "${atom}");
+        });
+        RecordingMonitor monitor = new RecordingMonitor();
+        long[] keys = new long[FLUSH_BATCH];
+        Object context = NEW_CONTEXT.invoke((IntBinaryOperator) Integer::compare, (ProgressMonitor) monitor);
+        atom.invoke(keys, context);
+        assertEquals(List.of((long) FLUSH_BATCH), monitor.worked, "${atom} steps once per key");
+    }
+//@@ PATTERN DIST_HISTOGRAM_SPAN | uses= | oracle=Sorts.MAX_HISTOGRAM_SPAN bounds
+    /** ${atom}(min, max) = max - min + 1 below Sorts.MAX_HISTOGRAM_SPAN; wider or overflowing spans are rejected. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 2);
+        long span = Sorts.MAX_HISTOGRAM_SPAN;
+        assertEquals(1, (int) atom.invoke(5L, 5L));
+        assertEquals((int) NARROW_SPAN + 1, (int) atom.invoke(NARROW_MIN, NARROW_MIN + NARROW_SPAN));
+        assertEquals((int) span, (int) atom.invoke(-1L, span - 2));
+        assertEquals((int) span, (int) atom.invoke(0L, span - 1));
+        long[][] rejected = {{0, span}, {-1, span}, {Long.MIN_VALUE, Long.MAX_VALUE}, {Long.MIN_VALUE, 0}};
+        for (long[] r : rejected) {
+            IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> atom.invoke(r[0], r[1]));
+            assertTrue(e.getMessage().startsWith("Numeric key span exceeds " + span), e.getMessage());
+        }
+    }
+//@@ PATTERN DIST_DIGIT | uses= | oracle=BigInteger sign-biased digit + top-digit monotonicity
+    /** ${atom}(index, keys, base, shift) is byte shift/8 of the sign-biased key; the top digit is order-preserving. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 4);
+        forEachLongVector(false, (keys, base, order) -> {
+            for (int index : order) {
+                for (int shift = 0; shift < Long.SIZE; shift += DIGIT_BITS) {
+                    assertEquals(biasedDigit(keys[index - base], shift), (int) atom.invoke(index, keys, base, shift),
+                            "${atom} shift=" + shift);
+                }
+            }
+        });
+        long[] ordered = {Long.MIN_VALUE, -1L << TOP_SHIFT, -1L, 0L, 1L << TOP_SHIFT, Long.MAX_VALUE};
+        for (int i = 1; i < ordered.length; i++) {
+            assertTrue((int) atom.invoke(i - 1, ordered, 0, TOP_SHIFT) <= (int) atom.invoke(i, ordered, 0, TOP_SHIFT),
+                    "${atom} top digit preserves signed order");
+        }
+    }
+//@@ PATTERN DIST_BOUNDARIES | uses= | oracle=running prefix sum
+    /** ${atom}(counts, from, c): starts[0] = from and starts[b + 1] = starts[b] + counts[b]. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 3);
+        Random r = new Random(SEED);
+        int[] counts = IntStream.range(0, RADIX).map(i -> r.nextInt(FEW_DISTINCT + 1)).toArray();
+        for (int from : BASES) {
+            int[] starts = (int[]) atom.invoke(counts, from, longContext(new long[0], 0));
+            assertEquals(RADIX + 1, starts.length);
+            int running = from;
+            for (int b = 0; b < RADIX; b++) {
+                assertEquals(running, starts[b], "${atom} start of bucket " + b);
+                running += counts[b];
+            }
+            assertEquals(running, starts[RADIX], "${atom} end");
+        }
+    }
+//@@ PATTERN DIST_HISTOGRAM | uses= | oracle=BigInteger sign-biased digit counts
+    /** ${atom}(order, keys, base, from, to, shift, c) counts each digit over [from, to). */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 7);
+        forEachLongVector(false, (keys, base, order) -> {
+            int n = order.length;
+            for (int shift : new int[] {0, DIGIT_BITS * THIRD, TOP_SHIFT}) {
+                int[] counts = (int[]) atom.invoke(order, keys, base, n / QUARTER, n, shift, longContext(keys, base));
+                int[] expected = new int[RADIX];
+                for (int i = n / QUARTER; i < n; i++) {
+                    expected[biasedDigit(keys[order[i] - base], shift)]++;
+                }
+                assertArrayEquals(expected, counts, "${atom} shift=" + shift);
+            }
+        });
+    }
+//@@ SUPPORT AVL_TREE
+    private static List<Integer> inOrder(int node, int[] left, int[] right) {
+        List<Integer> out = new ArrayList<>();
+        if (node >= 0) {
+            if (left[node] != 0) {
+                out.addAll(inOrder(left[node] - 1, left, right));
+            }
+            out.add(node);
+            if (right[node] != 0) {
+                out.addAll(inOrder(right[node] - 1, left, right));
+            }
+        }
+        return out;
+    }
+
+    private static void link(int parent, int child, int side, int[] left, int[] right) {
+        if (side < 0) {
+            left[parent] = child + 1;
+        } else {
+            right[parent] = child + 1;
+        }
+    }
+//@@ SUPPORT BOXED
+    private static List<Integer> boxed(int[] a) {
+        return IntStream.of(a).boxed().collect(java.util.stream.Collectors.toCollection(ArrayList::new));
+    }
+//@@ SUPPORT TIM_STATE
+    private static Object timSort(int[] keys) throws Throwable {
+        return timSort(keys, identity(keys.length));
+    }
+
+    private static Object timSort(int[] keys, int[] a) throws Throwable {
+        return OWNER.constructor("M3TimSort", 5).invoke(a, context(keys), (int[]) null, 0, 0);
+    }
+
+    /** Labels sorted stably within each consecutive run of the given lengths. */
+    private static int[] runs(int[] keys, int[] lengths) {
+        int[] a = identity(keys.length);
+        int base = 0;
+        for (int len : lengths) {
+            a = stableOrder(keys, a, base, base + len);
+            base += len;
+        }
+        return a;
+    }

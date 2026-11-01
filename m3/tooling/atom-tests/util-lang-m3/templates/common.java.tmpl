@@ -1,0 +1,12 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+//@@ PATTERN PRIVATE_UTILITY_CONSTRUCTOR | uses= | oracle=reflection: one private constructor, no state
+    /** ${atom}(): the only constructor is private and creates no observable state. */
+    @Test
+    void ${test}() throws Throwable {
+        Constructor<?>[] declared = OWNER.constructors();
+        assertEquals(1, declared.length, "${atom} declares one constructor");
+        assertTrue(Modifier.isPrivate(declared[0].getModifiers()), "${atom} constructor is private");
+        Object instance = OWNER.constructor("${atom}", 0).invoke();
+        assertSame(OWNER.type, instance.getClass());
+    }

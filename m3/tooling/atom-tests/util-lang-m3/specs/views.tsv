@@ -1,0 +1,60 @@
+test_class	owner	atom	pattern	params
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	*	CLASS	{"modules": "java.base/jdk.internal.m3:open java.base/java.util:open", "summary": "Per-atom contracts of jdk.internal.m3.M3IndexedView against java.util.ArrayList views (generated, template views)"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	M3IndexedView	VIEW_CONSTRUCTOR	{"test": "constructorValueView", "arity": "3", "ctor_doc": "", "ctor_mode": "value-epoch", "state_aware": "false", "ctor_args": "f.backing, p, c", "null_backing_args": "(M3IndexedArray<Item>) null, (Predicate<Item>) null, (Comparator<Item>) null"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	M3IndexedView	VIEW_CONSTRUCTOR	{"test": "constructorStateView", "arity": "6", "ctor_doc": ", required, forbidden, stateAware", "ctor_mode": "state-epoch", "state_aware": "true", "ctor_args": "f.backing, p, c, M3IndexedArray.LIVE, M3IndexedArray.LEASED, true", "null_backing_args": "(M3IndexedArray<Item>) null, (Predicate<Item>) null, (Comparator<Item>) null, 0, 0, true"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	size	VIEW_SIZE	{"test": "view_size"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	get	VIEW_GET	{"test": "view_get"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	subList	VIEW_SUBLIST	{"test": "view_subList"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	spliterator	VIEW_SPLITERATOR	{"test": "view_spliterator"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	iterator	VIEW_ITERATOR	{"test": "view_iterator"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	listIterator	VIEW_LIST_ITERATOR	{"test": "view_listIterator"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	iteratorFor	VIEW_ITERATOR_FOR	{}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	range	VIEW_RANGE	{}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	currentVersion	VIEW_CURRENT_VERSION	{}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	viewValue	VIEW_VIEW_VALUE	{}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	checkVersion	VIEW_CHECK_VERSION	{}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	refresh	VIEW_REFRESH	{}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	IndexRange	RANGE_CONSTRUCTOR	{"test": "range_constructor"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	size	RANGE_SIZE	{"test": "range_size"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	get	RANGE_GET	{"test": "range_get"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	set	RANGE_READ_ONLY_INDEXED	{"test": "range_set", "range_args_doc": "index, element", "call_bad": "set(-1, probe)", "call_ok": "set(0, probe)"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	add	RANGE_READ_ONLY_INDEXED	{"test": "range_add", "range_args_doc": "index, element", "call_bad": "add(count + 1, probe)", "call_ok": "add(0, probe)"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	remove	RANGE_READ_ONLY_INDEXED	{"test": "range_remove", "range_args_doc": "index", "call_bad": "remove(-1)", "call_ok": "remove(0)"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	addAll	RANGE_ADD_ALL	{"test": "range_addAll", "range_args_doc": "values", "call_empty": "addAll(List.of())", "call_full": "addAll(List.of(new Item(0, -1)))", "extra_check": ""}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	addAll	RANGE_ADD_ALL	{"test": "range_addAllAt", "range_args_doc": "index, values", "call_empty": "addAll(0, List.of())", "call_full": "addAll(0, List.of(new Item(0, -1)))", "extra_check": "assertThrows(IndexOutOfBoundsException.class, () -> sub.addAll(count + 1, List.of()));"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	removeRange	RANGE_REMOVE_RANGE	{"test": "range_removeRange"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	checkAddIndex	RANGE_CHECK_ADD_INDEX	{"test": "range_checkAddIndex"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	iterator	RANGE_ITERATOR	{"test": "range_iterator"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	listIterator	RANGE_LIST_ITERATOR	{"test": "range_listIterator"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	subList	RANGE_SUBLIST	{"test": "range_subList"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	spliterator	RANGE_SPLITERATOR	{"test": "range_spliterator"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	IndexSpliterator	SPLIT_CONSTRUCTOR	{"test": "spliterator_lateConstructor", "split_args_doc": "", "split_mode": "late-binding", "split_source": "view.spliterator()", "split_end_before": "-1", "split_size": "expected.size()", "split_end_after": "expected.size()"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	IndexSpliterator	SPLIT_CONSTRUCTOR	{"test": "spliterator_boundConstructor", "split_args_doc": "expected, cursor, end", "split_mode": "bound", "split_source": "view.subList(1, n).spliterator()", "split_end_before": "n", "split_size": "n - 1", "split_end_after": "n"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	bind	SPLIT_BIND	{"test": "spliterator_bind"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	trySplit	SPLIT_TRY_SPLIT	{"test": "spliterator_trySplit"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	tryAdvance	SPLIT_TRY_ADVANCE	{"test": "spliterator_tryAdvance"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	estimateSize	SPLIT_ESTIMATE_SIZE	{"test": "spliterator_estimateSize"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	characteristics	SPLIT_CHARACTERISTICS	{"test": "spliterator_characteristics"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	getComparator	SPLIT_GET_COMPARATOR	{"test": "spliterator_getComparator"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	check	ITER_CHECK	{"test": "iterator_check"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	hasNext	ITER_WALK	{"test": "iterator_hasNext"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	next	ITER_WALK	{"test": "iterator_next"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	hasPrevious	ITER_WALK	{"test": "iterator_hasPrevious"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	previous	ITER_WALK	{"test": "iterator_previous"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	nextIndex	ITER_WALK	{"test": "iterator_nextIndex"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	previousIndex	ITER_WALK	{"test": "iterator_previousIndex"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	remove	ITER_READ_ONLY	{"test": "iterator_remove", "iter_call": "remove()"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	set	ITER_READ_ONLY	{"test": "iterator_set", "iter_call": "set(probe)"}
+M3IndexedViewAtomsTest	jdk.internal.m3.M3IndexedView	add	ITER_READ_ONLY	{"test": "iterator_add", "iter_call": "add(probe)"}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	*	CLASS	{"modules": "java.base/jdk.internal.m3:open java.base/java.util:open", "summary": "Per-atom contracts of jdk.internal.m3.M3IndexedArray private atoms against an ArrayList model (generated, template views)"}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	checkMasks	ARRAY_CHECK_MASKS	{}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	select	ARRAY_SELECT	{"test": "selectValueEpoch", "arity": "2", "state_capable": "false", "select_doc": "predicate, comparator", "select_args": "f.backing, p, c"}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	select	ARRAY_SELECT	{"test": "selectStateEpoch", "arity": "5", "state_capable": "true", "select_doc": "predicate, comparator, required, forbidden, stateAware", "select_args": "f.backing, p, c, kind.stateAware ? M3IndexedArray.LIVE : 0, kind.stateAware ? M3IndexedArray.LEASED : 0, kind.stateAware"}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	allocateSlot	ARRAY_ALLOCATE_SLOT	{}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	validSlot	ARRAY_VALID_SLOT	{}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	updateLeaseMask	ARRAY_UPDATE_LEASE_MASK	{}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	valueAtSlot	ARRAY_VALUE_AT_SLOT	{}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	pack	ARRAY_PACK	{}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	rejectReentrantMutation	ARRAY_REJECT_REENTRANT	{"test": "rejectValueEpoch", "arity": "1", "reject_doc": "initialVersion", "epoch_doc": "value", "initial": "f.backing.version()", "reject_args": "f.backing, initial", "move": "f.append(new Item(0, ITEMS));"}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	rejectReentrantMutation	ARRAY_REJECT_REENTRANT	{"test": "rejectStateEpoch", "arity": "2", "reject_doc": "initialVersion, stateAware", "epoch_doc": "state", "initial": "stateVersion(f)", "reject_args": "f.backing, initial, true", "move": "f.lease(0);"}
+M3IndexedArrayAtomsTest	jdk.internal.m3.M3IndexedArray	stableSort	ARRAY_STABLE_SORT	{}

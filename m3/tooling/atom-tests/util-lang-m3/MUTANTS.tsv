@@ -1,0 +1,19 @@
+mutant	source	original	mutated	test_class	test_method
+M01	java/util/M3ComparisonSorts.java	while (hole > lo && c.compare(value, a[hole - 1]) < 0) {	while (hole > lo && c.compare(value, a[hole - 1]) <= 0) {	M3ComparisonSortsAtomsTest	insertion
+M02	java/util/M3ComparisonSorts.java	            leftCut = upperBound(a, lo, mid, a[rightCut], c);	            leftCut = lowerBound(a, lo, mid, a[rightCut], c);	M3ComparisonSortsAtomsTest	rotateMerge
+M03	java/util/M3ComparisonSorts.java	        return 2 * (31 - Integer.numberOfLeadingZeros(length));	        return 2 * (32 - Integer.numberOfLeadingZeros(length));	M3ComparisonSortsAtomsTest	depthLimit
+M04	java/util/M3TimSort.java	            r |= (n & 1);	            r = (n & 1);	M3TimSortAtomsTest	minRunLength
+M05	java/util/M3DistributionSorts.java	return (int) (((keys[index - base] ^ Long.MIN_VALUE) >>> shift) & 255L);	return (int) (((keys[index - base]) >>> shift) & 255L);	M3DistributionSortsAtomsTest	digit
+M06	java/util/M3SortContext.java	if (monitor != null && ++pending == 1024) flush();	if (monitor != null && ++pending == 1023) flush();	M3SortContextAtomsTest	step
+M07	jdk/internal/m3/M3IndexedView.java	            return Spliterator.ORDERED | Spliterator.SIZED | Spliterator.SUBSIZED	            return Spliterator.ORDERED | Spliterator.SIZED	M3IndexedViewAtomsTest	spliterator_characteristics
+M08	jdk/internal/m3/M3IndexedView.java	                final int middle = (cursor + end) >>> 1;	                final int middle = (cursor + end + 1) >>> 1;	M3IndexedViewAtomsTest	spliterator_trySplit
+M09	java/lang/M3StringCodePointPrecompute.java	                if ((long) pairedLowOffsets[middle] - middle < threshold) {	                if ((long) pairedLowOffsets[middle] - middle <= threshold) {	M3StringCodePointPrecomputeAtomsTest	offsetByCodePoints
+M10	java/lang/M3StringBuilderLane.java	                ? (char) (flat[index] & 0xff)	                ? (char) flat[index]	M3StringBuilderLaneAtomsTest	flatCharAt
+M11	java/lang/M3StringLeafCursor.java	            if (rawOwner == owner && start + length == rawStart) {	            if (rawOwner == owner) {	M3StringLeafCursorAtomsTest	next
+M12	java/util/M3ComparisonSorts.java	        return order < 0 || (order == 0 && left < right) ? left : right;	        return order < 0 || (order == 0 && left > right) ? left : right;	M3ComparisonSortsAtomsTest	tournamentWinner
+M13	java/lang/M3ObjectRuntime.java	                return left == right;	                return left.equals(right);	M3ObjectRuntimeAtomsTest	plan_same
+M14	java/lang/M3ObjectRuntime.java	            return subscriberCount != 0 || parentCount != 0;	            return subscriberCount != 0;	M3ObjectRuntimeAtomsTest	state_interested
+M15	jdk/internal/m3/M3IndexedArray.java	return ((long) generation << 32) | Integer.toUnsignedLong(slot);	return ((long) generation << 32) | slot;	M3IndexedArrayAtomsTest	pack
+M16	jdk/internal/m3/M3IntAlgorithms.java	&& (value == Integer.MIN_VALUE	&& (false	M3IntAlgorithmsAtomsTest	lonelySparse
+M17	jdk/internal/util/M3PipelinePlan.java	if (filter) nextFilterMask[pageIndex] |= 1L << lane;	if (!filter) nextFilterMask[pageIndex] |= 1L << lane;	M3PipelinePlanAtomsTest	append
+M18	java/lang/M3ObjectRuntime.java	int accepted = state.requested[i] & mask;	int accepted = mask;	M3ObjectRuntimeAtomsTest	captureLocked
