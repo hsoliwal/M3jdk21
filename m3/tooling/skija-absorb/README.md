@@ -6,8 +6,9 @@ Goal: M3jdk carries the graphics stack itself. SWT (Render M3, GPU M3), Nebula, 
 M3jdk owner, with no Skija, HumbleUI or Lombok jar downstream. This leaf is inventory and proposal only. Nothing under
 `src/` changes yet.
 
-Donor: HumbleUI Skija 0.143.18 (`shared/java`, 217 Java types; `platform/cc`, the JNI glue) and HumbleUI Types 0.2.0
-(7 types). Both are Apache-2.0. Native: Skia chrome/m143 (BSD-3-Clause) with its third-party libraries; see
+Donor: HumbleUI Skija 0.143.18 (`shared/java`, 217 Java types, 3 of them in their Java 9 versions from `shared/java9`;
+`platform/cc`, the JNI glue) and HumbleUI Types 0.2.0 (7 types). Both are Apache-2.0. Native: Skia chrome/m143
+(BSD-3-Clause) with its third-party libraries; see
 `FOSS_REUSE_DECISION.tsv`. The source snapshot is the one used by the SWT census (`i31-census/skija-capabilities/skija-0.143.18`).
 The 0.143.18 binding is the one SWT now runs (SWT L12, PR #310: real-app smoke 31/31 in stock, m3 and gpu).
 
@@ -16,11 +17,15 @@ The 0.143.18 binding is the one SWT now runs (SWT L12, PR #310: real-app smoke 3
 1. Atomize: `atomize_patternize.py` (tree-sitter L-Hash, com.synexia `donor-atomize`) over `shared/java`. Result: 217
    files, 2,918 atoms, 0 errors, 1,559 exact classes (334 with 2 or more members) and 135 structural classes.
    Files: `ledgers/PATTERNS_EXACT.tsv`, `ledgers/PATTERNS_STRUCTURAL.tsv`, `ledgers/SPECTRUM.tsv`, `ledgers/PROOF.json`.
-2. Patternize per type: `tools/skija_patterns.py <skija_root> <dll_exports> <out>` writes `ledgers/CLASSES.tsv`,
-   `ledgers/JNI_BINDINGS.tsv`, `ledgers/CC_CLASSREFS.tsv`, `ledgers/OWNER_MAP.tsv` and `ledgers/SUMMARY.tsv`. The pattern
-   set is closed (SKIJA-PATTERN v1); a type outside it would be a RESIDUE row (typed @IAntiPattern).
+   These atoms are those of the jar-root variants; the 3 classes taken from `shared/java9` were not re-atomized.
+2. Patternize per type: `tools/skija_patterns.py <skija_root> <dll_exports> <out> jdk.m3.graphics jdk.m3.graphics.impl`
+   writes `ledgers/CLASSES.tsv`, `ledgers/JNI_BINDINGS.tsv`, `ledgers/CC_CLASSREFS.tsv`, `ledgers/JAVA_CLASSREFS.tsv`,
+   `ledgers/OWNER_MAP.tsv` and `ledgers/SUMMARY.tsv`, over the source of each class that `tools/mr_select.py` selects
+   (the highest Multi-Release version <= 21). The pattern set is closed (SKIJA-PATTERN v1); a type outside it would be
+   a RESIDUE row (typed @IAntiPattern).
 3. Rename package: `tools/gen_rename.py <ledgers> <types_classes> jdk.m3.graphics` writes `ledgers/TYPE_RENAME.tsv`,
-   `ledgers/JNI_RENAME.tsv` and `ledgers/CC_STRING_RENAME.tsv`, plus `recipe/M3SkijaToGraphics.yml`. The recipe is an
+   `ledgers/JNI_RENAME.tsv` and `ledgers/CC_STRING_RENAME.tsv` (the string ledger: Java literals that name a donor
+   class for a run-time lookup, then the C++ class-name strings), plus `recipe/M3SkijaToGraphics.yml`. The recipe is an
    OpenRewrite declarative recipe with one ChangeType per type, for the absorbed sources and every consumer.
 
 ## Results
@@ -88,17 +93,32 @@ exports `jdk.m3.graphics` plus `.impl`, `.paragraph`, `.resources`, `.shaper`, `
 `PLATFORM_MODULES` of `make/conf/module-loader-map.conf`, and `make/modules/jdk.m3.graphics/Java.gmk` disables the four
 lint kinds it raises. Licence and changes: `src/jdk.m3.graphics/share/legal/skija.md`.
 
-Pipeline (each stage gated, `leaf1/GATES.tsv`):
+Pipeline (each stage gated, `leaf1/GATES.tsv`). `tools/absorb_leaf1.sh run|check <repo> <work_dir>` runs all of it,
+the leaf-0 ledgers included, from the donor to the repository, then the gates; `check` exits 1 when the repository
+differs from what the recipe produces, so a `check` after a `run` proves the fixed point:
 
 1. Donor compile with Lombok: 275 classes. Its public surface equals the published 0.143.18 jars.
-2. `lombok.jar delombok` 1.18.48, then `tools/delombok_clean.py`. The tool removes the markers and the timestamps, which
-   would make the output non-deterministic, and adds the SneakyThrow helper. The result compiles without Lombok, and its
-   API is unchanged (plus the helper).
-3. `tools/absorb_rename.py`. It strips the JetBrains annotations (3,026), renames packages (401) and type tokens (6,584).
-   Edits happen only in code regions (SFA), and an unqualified token is renamed only when javac's scope makes it ours:
-   1 token is shadowed by `java.nio.file.*`. The one string naming the old package is reported in
-   `leaf1/STRING_MENTIONS.tsv`; it is the native loader's module name, replaced in leaf 2.
-4. Gates: 0 errors with no jar on the classpath. The javap surface equals the donor's renamed surface: 4,622 = 4,622.
+2. `tools/mr_select.py` (MR_SELECT v1). The published jars are Multi-Release: from Java 9 on, `impl.Cleanable`,
+   `impl.ReferenceUtil` and `impl.ResourceFinder` load from `META-INF/versions/9` (sources in `shared/java9`), not from
+   the jar root (`shared/java`, compiled for Java 8). For every class the stage takes the highest version <= 21 and
+   checks the choice against the versioned entries of the jars: 3 classes come from `shared/java9`, 214 from the root,
+   no other changes (`leaf1/MR_SELECT.tsv`). The root variant of `Cleanable` needs `sun.misc.Cleaner`, which JDK 21 does
+   not have; the root `ReferenceUtil` fence is empty; the root `ResourceFinder` never looks inside a named module.
+3. `lombok.jar delombok` 1.18.48 (Lombok on its classpath), then `tools/delombok_clean.py`. The tool removes the markers
+   and the timestamps, which would make the output non-deterministic, and adds the SneakyThrow helper. The result
+   compiles without Lombok, and its API is unchanged (plus the helper).
+4. `tools/absorb_rename.py`. It strips the JetBrains annotations (3,026), renames packages (401) and type tokens
+   (6,585). Edits happen only in code regions (SFA), and an unqualified token is renamed only when javac's scope makes
+   it ours: 3 tokens are shadowed by `java.nio.file.*`. A string literal changes only through the string ledger: the
+   one literal that names a donor class for a run-time lookup, `"Library.class"` in `M3Library.load`, becomes
+   `"M3Library.class"` (`ledgers/JAVA_CLASSREFS.tsv` -> `ledgers/CC_STRING_RENAME.tsv`). Every other literal that
+   names a donor type is listed in `leaf1/STRING_MENTIONS.tsv`: the native loader's module name (replaced in leaf 2)
+   and 223 messages and toString texts, kept as the donor prints them. A class-file or binary-name literal left
+   unrenamed stops the run.
+5. `tools/normalize_ws.py` (NORMALIZE_WS v1): LF line ends, no trailing blanks, no blank lines at the end (jcheck).
+6. Gates: 0 errors with no jar on the classpath. The javap surface equals the donor's renamed surface, 4,622 = 4,622,
+   and the surface of the jars as Java 21 loads them. `tools/M3GraphicsLeaf1Probe.java` runs the three versioned
+   classes and the loader's class-file lookup on JDK 21, on the module path and from a jlink image.
 
 Owner correction (recorded): `io.github.humbleui.skija.impl` maps to `jdk.m3.graphics.impl`, not
 `jdk.internal.m3.graphics`. SWT Render M3 uses `impl.Native` (6 places) and `impl.Library`, so the package is exported,
