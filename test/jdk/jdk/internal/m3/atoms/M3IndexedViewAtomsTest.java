@@ -6,7 +6,7 @@
 /*
  * @test
  * @summary Per-atom contracts of jdk.internal.m3.M3IndexedView against java.util.ArrayList views (generated, template views)
- * @modules java.base/jdk.internal.m3:open java.base/java.util:open
+ * @modules java.base/jdk.internal.m3:+open java.base/java.util:open
  * @run junit/othervm M3IndexedViewAtomsTest
  */
 
@@ -61,14 +61,16 @@ class M3IndexedViewAtomsTest {
     private static final Comparator<Item> BY_RANK = Comparator.comparingInt(Item::rank);
     private static final Predicate<Item> KEEP = item -> item.rank() % KEEP_MODULUS != 0;
     private static final String READ_ONLY = "read-only M3 view";
+    //FLLDCIM: TmOP - named kind selections replace the boolean template leftovers (util-lang-m3 RECIPE_MEMORY R015)
+    /** View-kind selections of the spec rows: a value-epoch constructor or select builds no state-aware view. */
+    private static final Predicate<Kind> ALL_KINDS = kind -> true;
+    private static final Predicate<Kind> PLAIN_KINDS = kind -> !kind.stateAware;
+    private static final Predicate<Kind> STATE_KINDS = kind -> kind.stateAware;
     /** M3IndexedView(backing, predicate, comparator) builds a lazy value-epoch view; a null backing is rejected. */
     @Test
     void constructorValueView() throws Throwable {
-        MethodHandle ctor = OWNER.constructor("M3IndexedView", 3);
-        forEachKind((f, kind, view, expected) -> {
-            if (kind.stateAware != false) {
-                return;
-            }
+        MethodHandle ctor = OWNER.constructor("M3IndexedView", "M3IndexedArray,Predicate,Comparator");
+        forEachKind(PLAIN_KINDS, (f, kind, view, expected) -> {
             assertEquals("M3IndexedView", view.getClass().getSimpleName(), "factories return the view type");
             Predicate<Item> p = kind.filtered ? KEEP : null;
             Comparator<Item> c = kind.sorted ? BY_RANK : null;
@@ -82,11 +84,8 @@ class M3IndexedViewAtomsTest {
     /** M3IndexedView(backing, predicate, comparator, required, forbidden, stateAware) builds a lazy state-epoch view; a null backing is rejected. */
     @Test
     void constructorStateView() throws Throwable {
-        MethodHandle ctor = OWNER.constructor("M3IndexedView", 6);
-        forEachKind((f, kind, view, expected) -> {
-            if (kind.stateAware != true) {
-                return;
-            }
+        MethodHandle ctor = OWNER.constructor("M3IndexedView", "M3IndexedArray,Predicate,Comparator,int,int,boolean");
+        forEachKind(STATE_KINDS, (f, kind, view, expected) -> {
             assertEquals("M3IndexedView", view.getClass().getSimpleName(), "factories return the view type");
             Predicate<Item> p = kind.filtered ? KEEP : null;
             Comparator<Item> c = kind.sorted ? BY_RANK : null;
@@ -176,7 +175,7 @@ class M3IndexedViewAtomsTest {
     /** iteratorFor(expected, origin, count, index) iterates the root directory window [origin, origin + count). */
     @Test
     void iteratorFor() throws Throwable {
-        MethodHandle atom = OWNER.method("iteratorFor", 4);
+        MethodHandle atom = OWNER.method("iteratorFor");
         forEachKind((f, kind, view, expected) -> {
             int n = view.size();
             int origin = n / QUARTER;
@@ -192,7 +191,7 @@ class M3IndexedViewAtomsTest {
     /** range(expected, origin, count, from, to) windows absolute coordinates and validates the range. */
     @Test
     void range() throws Throwable {
-        MethodHandle atom = OWNER.method("range", 5);
+        MethodHandle atom = OWNER.method("range");
         forEachKind((f, kind, view, expected) -> {
             int n = view.size();
             long v = version(f, kind);
@@ -215,7 +214,7 @@ class M3IndexedViewAtomsTest {
     /** currentVersion() is the value epoch for plain views and the state epoch for state-aware views. */
     @Test
     void currentVersion() throws Throwable {
-        MethodHandle atom = OWNER.method("currentVersion", 0);
+        MethodHandle atom = OWNER.method("currentVersion");
         forEachKind((f, kind, view, expected) -> {
             assertEquals(version(f, kind), (long) atom.invoke(view), "currentVersion " + kind);
             long before = (long) atom.invoke(view);
@@ -228,7 +227,7 @@ class M3IndexedViewAtomsTest {
     /** viewValue(expected, slot) reads the slot under the expected epoch and rejects a stale one. */
     @Test
     void viewValue() throws Throwable {
-        MethodHandle atom = OWNER.method("viewValue", 2);
+        MethodHandle atom = OWNER.method("viewValue");
         forEachKind((f, kind, view, expected) -> {
             view.size();
             int[] slots = indexes(view);
@@ -242,7 +241,7 @@ class M3IndexedViewAtomsTest {
     /** checkVersion(expected) passes on the current epoch and throws ConcurrentModificationException otherwise. */
     @Test
     void checkVersion() throws Throwable {
-        MethodHandle atom = OWNER.method("checkVersion", 1);
+        MethodHandle atom = OWNER.method("checkVersion");
         forEachKind((f, kind, view, expected) -> {
             long v = version(f, kind);
             atom.invoke(view, v);
@@ -253,7 +252,7 @@ class M3IndexedViewAtomsTest {
     /** refresh() selects lazily, reuses the directory while the epoch is unchanged and rebuilds after a change. */
     @Test
     void refresh() throws Throwable {
-        MethodHandle atom = OWNER.method("refresh", 0);
+        MethodHandle atom = OWNER.method("refresh");
         VarHandle indexedVersion = OWNER.field("indexedVersion");
         VarHandle modCount = new Access("java.util.AbstractList").field("modCount");
         forEachKind((f, kind, view, expected) -> {
@@ -389,7 +388,7 @@ class M3IndexedViewAtomsTest {
         forEachKind((f, kind, view, expected) -> {
             int n = expected.size();
             List<Item> sub = view.subList(n / QUARTER, n);
-            MethodHandle atom = new Access(sub.getClass().getName()).method("removeRange", 2);
+            MethodHandle atom = new Access(sub.getClass().getName()).method("removeRange");
             atom.invoke(sub, 0, 0);
             assertThrows(UnsupportedOperationException.class, () -> atom.invoke(sub, 0, 1));
             assertThrows(UnsupportedOperationException.class, sub::clear);
@@ -404,7 +403,7 @@ class M3IndexedViewAtomsTest {
             int n = expected.size();
             List<Item> sub = view.subList(n / QUARTER, n);
             int count = sub.size();
-            MethodHandle atom = new Access(sub.getClass().getName()).method("checkAddIndex", 1);
+            MethodHandle atom = new Access(sub.getClass().getName()).method("checkAddIndex");
             atom.invoke(sub, 0);
             atom.invoke(sub, count);
             for (int bad : new int[] {-1, count + 1}) {
@@ -497,7 +496,7 @@ class M3IndexedViewAtomsTest {
         forEachKind((f, kind, view, expected) -> {
             Spliterator<Item> s = view.spliterator();
             Access a = new Access(s.getClass().getName());
-            MethodHandle atom = a.method("bind", 0);
+            MethodHandle atom = a.method("bind");
             f.append(new Item(1, ITEMS));
             synchronized (f.backing) {
                 atom.invoke(s);
@@ -583,7 +582,7 @@ class M3IndexedViewAtomsTest {
     void iterator_check() throws Throwable {
         forEachKind((f, kind, view, expected) -> {
             ListIterator<Item> it = view.listIterator();
-            MethodHandle atom = new Access(it.getClass().getName()).method("check", 0);
+            MethodHandle atom = new Access(it.getClass().getName()).method("check");
             atom.invoke(it);
             f.lease(0);
             if (kind.stateAware) {
@@ -813,9 +812,16 @@ class M3IndexedViewAtomsTest {
     }
 
     static void forEachKind(KindCheck check) throws Throwable {
+        forEachKind(ALL_KINDS, check);
+    }
+
+    /** Runs {@code check} on a fresh fixture for every view kind that {@code selected} admits. */
+    static void forEachKind(Predicate<Kind> selected, KindCheck check) throws Throwable {
         for (Kind kind : Kind.values()) {
-            Fixture f = new Fixture();
-            check.check(f, kind, f.view(kind), f.expected(kind));
+            if (selected.test(kind)) {
+                Fixture f = new Fixture();
+                check.check(f, kind, f.view(kind), f.expected(kind));
+            }
         }
     }
 
@@ -891,7 +897,7 @@ class M3IndexedViewAtomsTest {
 
     static long stateVersion(Fixture f) {
         try {
-            return (long) new Access("jdk.internal.m3.M3IndexedArray").method("stateVersion", 0).invoke(f.backing);
+            return (long) new Access("jdk.internal.m3.M3IndexedArray").method("stateVersion").invoke(f.backing);
         } catch (Throwable e) {
             throw new AssertionError(e);
         }
@@ -915,16 +921,17 @@ class M3IndexedViewAtomsTest {
             }
         }
 
-        /** The unique declared, non-synthetic method {@code atom} with {@code arity} parameters. */
-        MethodHandle method(String atom, int arity) {
+        //FLLDCIM: IOP - name lookup replaces the arity lookup; overloads name their signature (util-lang-m3 RECIPE_MEMORY R016)
+        /** The unique declared, non-synthetic method {@code atom}; an overloaded atom needs its signature. */
+        MethodHandle method(String atom) {
             Method found = null;
             for (Method m : type.getDeclaredMethods()) {
-                if (m.getName().equals(atom) && m.getParameterCount() == arity && !m.isSynthetic()) {
-                    assertEquals(null, found, "ambiguous atom " + atom + "/" + arity);
+                if (m.getName().equals(atom) && !m.isSynthetic()) {
+                    assertEquals(null, found, "overloaded atom " + atom + ": name its parameter signature");
                     found = m;
                 }
             }
-            assertTrue(found != null, "missing atom " + atom + "/" + arity);
+            assertTrue(found != null, "missing atom " + atom);
             try {
                 return lookup.unreflect(found);
             } catch (IllegalAccessException e) {
@@ -946,11 +953,24 @@ class M3IndexedViewAtomsTest {
             throw new AssertionError("missing atom " + atom + "(" + signature + ")");
         }
 
-        /** The declared constructor with {@code arity} parameters; {@code atom} must be the simple type name. */
-        MethodHandle constructor(String atom, int arity) {
+        //FLLDCIM: IOP - single-constructor lookup without an arity literal (util-lang-m3 RECIPE_MEMORY R016)
+        /** The only declared constructor; {@code atom} must be the simple type name. */
+        MethodHandle constructor(String atom) {
+            assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
+            Constructor<?>[] declared = type.getDeclaredConstructors();
+            assertEquals(1, declared.length, "overloaded constructor " + atom + ": name its parameter signature");
+            try {
+                return lookup.unreflectConstructor(declared[0]);
+            } catch (IllegalAccessException e) {
+                throw new AssertionError(atom, e);
+            }
+        }
+
+        /** The declared constructor whose parameter types print as {@code signature}. */
+        MethodHandle constructor(String atom, String signature) {
             assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
             for (Constructor<?> c : type.getDeclaredConstructors()) {
-                if (c.getParameterCount() == arity && !c.isSynthetic()) {
+                if (!c.isSynthetic() && signature(c.getParameterTypes()).equals(signature)) {
                     try {
                         return lookup.unreflectConstructor(c);
                     } catch (IllegalAccessException e) {
@@ -958,7 +978,7 @@ class M3IndexedViewAtomsTest {
                     }
                 }
             }
-            throw new AssertionError("missing constructor " + atom + "/" + arity);
+            throw new AssertionError("missing constructor " + atom + "(" + signature + ")");
         }
 
         /** The declared constructors, for the private non-instantiable utility pattern. */

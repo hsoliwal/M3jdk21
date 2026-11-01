@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class M3DistributionSortsAtomsTest {
     private static final Access OWNER = new Access("java.util.M3DistributionSorts");
     private static final Access CONTEXT = new Access("java.util.M3SortContext");
-    private static final MethodHandle NEW_CONTEXT = CONTEXT.constructor("M3SortContext", 2);
+    private static final MethodHandle NEW_CONTEXT = CONTEXT.constructor("M3SortContext");
     private static final long SEED = 0x4D33_534F_5254L;
     /** Kernel lengths around the insertion cut-off (24), TimSort MIN_MERGE (32) and powers of two. */
     private static final int[] SIZES = {2, 3, 4, 5, 7, 8, 16, 23, 24, 25, 31, 32, 33, 63, 64, 65, 100, 128, 257, 1000};
@@ -70,19 +70,35 @@ class M3DistributionSortsAtomsTest {
     private static final int DIGIT_MASK = (1 << DIGIT_BITS) - 1;
     private static final int RADIX = 1 << DIGIT_BITS;
     private static final int TOP_SHIFT = Long.SIZE - DIGIT_BITS;
-    /** M3DistributionSorts(): the only constructor is private and creates no observable state. */
+    /** A single-element order at a non-zero index base returns before dispatch. */
+    private static final int SINGLE_BASE = 3;
+    //FLLDCIM: TOP - utility-class contract replaces the assertSame tautology (util-lang-m3 RECIPE_MEMORY R014)
+    /**
+     * M3DistributionSorts(): the utility-class contract. The class is final and extends Object; its only constructor is private
+     * and takes no arguments; no field and no method is an instance member, so an instance could hold no state and
+     * do nothing (the constructor only denies instantiation). The private constructor itself completes normally.
+     */
     @Test
     void M3DistributionSorts() throws Throwable {
+        Class<?> type = OWNER.type;
+        assertTrue(Modifier.isFinal(type.getModifiers()), "M3DistributionSorts is final");
+        assertSame(Object.class, type.getSuperclass(), "M3DistributionSorts extends Object directly");
         Constructor<?>[] declared = OWNER.constructors();
         assertEquals(1, declared.length, "M3DistributionSorts declares one constructor");
         assertTrue(Modifier.isPrivate(declared[0].getModifiers()), "M3DistributionSorts constructor is private");
-        Object instance = OWNER.constructor("M3DistributionSorts", 0).invoke();
-        assertSame(OWNER.type, instance.getClass());
+        assertEquals(0, declared[0].getParameterCount(), "M3DistributionSorts constructor takes no arguments");
+        for (java.lang.reflect.Field f : type.getDeclaredFields()) {
+            assertTrue(Modifier.isStatic(f.getModifiers()), "M3DistributionSorts declares instance field " + f.getName());
+        }
+        for (Method m : type.getDeclaredMethods()) {
+            assertTrue(Modifier.isStatic(m.getModifiers()), "M3DistributionSorts declares instance method " + m.getName());
+        }
+        OWNER.constructor("M3DistributionSorts").invoke();
     }
     /** sort(order, keys, base, algorithm, c): numeric algorithms sort; comparison-only ones are rejected. */
     @Test
     void sort() throws Throwable {
-        MethodHandle atom = OWNER.method("sort", 5);
+        MethodHandle atom = OWNER.method("sort");
         for (SortAlgorithm algorithm : SortAlgorithm.values()) {
             if (!algorithm.requiresNumericKeys()) {
                 long[] keys = longKeys(SIZES[0], LongShape.FEW);
@@ -98,14 +114,14 @@ class M3DistributionSortsAtomsTest {
                 assertLongSorted(keys, base, order, a, 0, a.length, algorithm.isStable(), algorithm.name());
             });
         }
-        int[] single = {3};
-        atom.invoke(single, new long[] {1}, 3, SortAlgorithm.QUICK, longContext(new long[] {1}, 3));
-        assertArrayEquals(new int[] {3}, single, "length < 2 returns before dispatch");
+        int[] single = {SINGLE_BASE};
+        atom.invoke(single, new long[] {1}, SINGLE_BASE, SortAlgorithm.QUICK, longContext(new long[] {1}, SINGLE_BASE));
+        assertArrayEquals(new int[] {SINGLE_BASE}, single, "length < 2 returns before dispatch");
     }
     /** minimum(keys, c) equals LongStream.min() and counts one step per key. */
     @Test
     void minimum() throws Throwable {
-        MethodHandle atom = OWNER.method("minimum", 2);
+        MethodHandle atom = OWNER.method("minimum");
         forEachLongVector(false, (keys, base, order) -> {
             if (keys.length == 0) {
                 return;
@@ -122,7 +138,7 @@ class M3DistributionSortsAtomsTest {
     /** maximum(keys, c) equals LongStream.max() and counts one step per key. */
     @Test
     void maximum() throws Throwable {
-        MethodHandle atom = OWNER.method("maximum", 2);
+        MethodHandle atom = OWNER.method("maximum");
         forEachLongVector(false, (keys, base, order) -> {
             if (keys.length == 0) {
                 return;
@@ -139,9 +155,9 @@ class M3DistributionSortsAtomsTest {
     /** histogramSpan(min, max) = max - min + 1 below Sorts.MAX_HISTOGRAM_SPAN; wider or overflowing spans are rejected. */
     @Test
     void histogramSpan() throws Throwable {
-        MethodHandle atom = OWNER.method("histogramSpan", 2);
+        MethodHandle atom = OWNER.method("histogramSpan");
         long span = Sorts.MAX_HISTOGRAM_SPAN;
-        assertEquals(1, (int) atom.invoke(5L, 5L));
+        assertEquals(1, (int) atom.invoke(NARROW_MIN, NARROW_MIN), "min == max");
         assertEquals((int) NARROW_SPAN + 1, (int) atom.invoke(NARROW_MIN, NARROW_MIN + NARROW_SPAN));
         assertEquals((int) span, (int) atom.invoke(-1L, span - 2));
         assertEquals((int) span, (int) atom.invoke(0L, span - 1));
@@ -154,7 +170,7 @@ class M3DistributionSortsAtomsTest {
     /** counting(order, keys, base, c) sorts indices by keys[index - base] (COUNTING). */
     @Test
     void counting() throws Throwable {
-        MethodHandle atom = OWNER.method("counting", 4);
+        MethodHandle atom = OWNER.method("counting");
         forEachLongVector(true, (keys, base, order) -> {
             if (order.length < 2) {
                 return;
@@ -167,7 +183,7 @@ class M3DistributionSortsAtomsTest {
     /** pigeonhole(order, keys, base, c) sorts indices by keys[index - base] (PIGEONHOLE). */
     @Test
     void pigeonhole() throws Throwable {
-        MethodHandle atom = OWNER.method("pigeonhole", 4);
+        MethodHandle atom = OWNER.method("pigeonhole");
         forEachLongVector(true, (keys, base, order) -> {
             if (order.length < 2) {
                 return;
@@ -180,7 +196,7 @@ class M3DistributionSortsAtomsTest {
     /** bucket(order, keys, base, c) sorts indices by keys[index - base] (BUCKET). */
     @Test
     void bucket() throws Throwable {
-        MethodHandle atom = OWNER.method("bucket", 4);
+        MethodHandle atom = OWNER.method("bucket");
         forEachLongVector(false, (keys, base, order) -> {
             if (order.length < 2) {
                 return;
@@ -193,7 +209,7 @@ class M3DistributionSortsAtomsTest {
     /** digit(index, keys, base, shift) is byte shift/8 of the sign-biased key; the top digit is order-preserving. */
     @Test
     void digit() throws Throwable {
-        MethodHandle atom = OWNER.method("digit", 4);
+        MethodHandle atom = OWNER.method("digit");
         forEachLongVector(false, (keys, base, order) -> {
             for (int index : order) {
                 for (int shift = 0; shift < Long.SIZE; shift += DIGIT_BITS) {
@@ -211,7 +227,7 @@ class M3DistributionSortsAtomsTest {
     /** boundaries(counts, from, c): starts[0] = from and starts[b + 1] = starts[b] + counts[b]. */
     @Test
     void boundaries() throws Throwable {
-        MethodHandle atom = OWNER.method("boundaries", 3);
+        MethodHandle atom = OWNER.method("boundaries");
         Random r = new Random(SEED);
         int[] counts = IntStream.range(0, RADIX).map(i -> r.nextInt(FEW_DISTINCT + 1)).toArray();
         for (int from : BASES) {
@@ -228,7 +244,7 @@ class M3DistributionSortsAtomsTest {
     /** histogram(order, keys, base, from, to, shift, c) counts each digit over [from, to). */
     @Test
     void histogram() throws Throwable {
-        MethodHandle atom = OWNER.method("histogram", 7);
+        MethodHandle atom = OWNER.method("histogram");
         forEachLongVector(false, (keys, base, order) -> {
             int n = order.length;
             for (int shift : new int[] {0, DIGIT_BITS * THIRD, TOP_SHIFT}) {
@@ -244,7 +260,7 @@ class M3DistributionSortsAtomsTest {
     /** lsd(order, keys, base, c) sorts indices by keys[index - base] (LSD_RADIX). */
     @Test
     void lsd() throws Throwable {
-        MethodHandle atom = OWNER.method("lsd", 4);
+        MethodHandle atom = OWNER.method("lsd");
         forEachLongVector(false, (keys, base, order) -> {
             if (order.length < 2) {
                 return;
@@ -257,7 +273,7 @@ class M3DistributionSortsAtomsTest {
     /** msd(order, scratch, keys, base, from, to, shift, c) sorts [from, to) from the top digit down. */
     @Test
     void msd() throws Throwable {
-        MethodHandle atom = OWNER.method("msd", 8);
+        MethodHandle atom = OWNER.method("msd");
         forEachLongVector(false, (keys, base, order) -> {
             int n = order.length;
             int[][] ranges = {{0, n}, {n / QUARTER, n - n / QUARTER}};
@@ -272,7 +288,7 @@ class M3DistributionSortsAtomsTest {
     /** americanFlag(order, keys, base, from, to, shift, c) sorts [from, to) from the top digit down. */
     @Test
     void americanFlag() throws Throwable {
-        MethodHandle atom = OWNER.method("americanFlag", 7);
+        MethodHandle atom = OWNER.method("americanFlag");
         forEachLongVector(false, (keys, base, order) -> {
             int n = order.length;
             int[][] ranges = {{0, n}, {n / QUARTER, n - n / QUARTER}};
@@ -475,16 +491,17 @@ class M3DistributionSortsAtomsTest {
             }
         }
 
-        /** The unique declared, non-synthetic method {@code atom} with {@code arity} parameters. */
-        MethodHandle method(String atom, int arity) {
+        //FLLDCIM: IOP - name lookup replaces the arity lookup; overloads name their signature (util-lang-m3 RECIPE_MEMORY R016)
+        /** The unique declared, non-synthetic method {@code atom}; an overloaded atom needs its signature. */
+        MethodHandle method(String atom) {
             Method found = null;
             for (Method m : type.getDeclaredMethods()) {
-                if (m.getName().equals(atom) && m.getParameterCount() == arity && !m.isSynthetic()) {
-                    assertEquals(null, found, "ambiguous atom " + atom + "/" + arity);
+                if (m.getName().equals(atom) && !m.isSynthetic()) {
+                    assertEquals(null, found, "overloaded atom " + atom + ": name its parameter signature");
                     found = m;
                 }
             }
-            assertTrue(found != null, "missing atom " + atom + "/" + arity);
+            assertTrue(found != null, "missing atom " + atom);
             try {
                 return lookup.unreflect(found);
             } catch (IllegalAccessException e) {
@@ -506,11 +523,24 @@ class M3DistributionSortsAtomsTest {
             throw new AssertionError("missing atom " + atom + "(" + signature + ")");
         }
 
-        /** The declared constructor with {@code arity} parameters; {@code atom} must be the simple type name. */
-        MethodHandle constructor(String atom, int arity) {
+        //FLLDCIM: IOP - single-constructor lookup without an arity literal (util-lang-m3 RECIPE_MEMORY R016)
+        /** The only declared constructor; {@code atom} must be the simple type name. */
+        MethodHandle constructor(String atom) {
+            assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
+            Constructor<?>[] declared = type.getDeclaredConstructors();
+            assertEquals(1, declared.length, "overloaded constructor " + atom + ": name its parameter signature");
+            try {
+                return lookup.unreflectConstructor(declared[0]);
+            } catch (IllegalAccessException e) {
+                throw new AssertionError(atom, e);
+            }
+        }
+
+        /** The declared constructor whose parameter types print as {@code signature}. */
+        MethodHandle constructor(String atom, String signature) {
             assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
             for (Constructor<?> c : type.getDeclaredConstructors()) {
-                if (c.getParameterCount() == arity && !c.isSynthetic()) {
+                if (!c.isSynthetic() && signature(c.getParameterTypes()).equals(signature)) {
                     try {
                         return lookup.unreflectConstructor(c);
                     } catch (IllegalAccessException e) {
@@ -518,7 +548,7 @@ class M3DistributionSortsAtomsTest {
                     }
                 }
             }
-            throw new AssertionError("missing constructor " + atom + "/" + arity);
+            throw new AssertionError("missing constructor " + atom + "(" + signature + ")");
         }
 
         /** The declared constructors, for the private non-instantiable utility pattern. */

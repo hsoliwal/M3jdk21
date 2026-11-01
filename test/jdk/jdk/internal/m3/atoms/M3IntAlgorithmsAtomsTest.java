@@ -50,18 +50,22 @@ class M3IntAlgorithmsAtomsTest {
     private static final int[] LENGTHS = {0, 1, 2, 3, 7, 64, 65, 500};
     private static final int NARROW = 40;
     private static final int OPS_PAST_PAGE = 70;
+    /** A run with duplicates and both neighbour cases: 5 twice, 7 alone, 9 next to 10. */
+    private static final int[] NEIGHBOUR_RUN = {5, 5, 7, 9, 10};
+    /** tableCapacity lengths: empty, tiny, around a power of two (the test adds half the cap). */
+    private static final int[] TABLE_LENGTHS = {0, 1, 2, 3, 5, 64, 65};
     /** M3IntAlgorithms(): the only constructor is private and refuses instantiation with an AssertionError. */
     @Test
     void M3IntAlgorithms() throws Throwable {
         Constructor<?>[] declared = OWNER.constructors();
         assertEquals(1, declared.length);
         assertTrue(Modifier.isPrivate(declared[0].getModifiers()));
-        assertEquals("no instances", assertThrows(AssertionError.class, () -> OWNER.constructor("M3IntAlgorithms", 0).invoke()).getMessage());
+        assertEquals("no instances", assertThrows(AssertionError.class, () -> OWNER.constructor("M3IntAlgorithms").invoke()).getMessage());
     }
     /** lonelyDense(values, offset, length, minimum, width) returns the lonely numbers of the range in input order. */
     @Test
     void lonelyDense() throws Throwable {
-        MethodHandle atom = OWNER.method("lonelyDense", 5);
+        MethodHandle atom = OWNER.method("lonelyDense");
         for (int[] values : vectors()) {
             if (values.length == 0) {
                 continue;
@@ -80,18 +84,13 @@ class M3IntAlgorithmsAtomsTest {
     /** lonelySparse(values, offset, length) returns the lonely numbers of the range in input order. */
     @Test
     void lonelySparse() throws Throwable {
-        MethodHandle atom = OWNER.method("lonelySparse", 3);
+        MethodHandle atom = OWNER.method("lonelySparse");
         for (int[] values : vectors()) {
             if (values.length == 0) {
                 continue;
             }
             int offset = values.length > 2 ? 1 : 0;
             int length = values.length - offset;
-            int min = IntStream.of(values).skip(offset).min().getAsInt();
-            long width = (long) IntStream.of(values).skip(offset).max().getAsInt() - min + 1;
-            if (false) {
-                continue;
-            }
             assertArrayEquals(lonelyOracle(values, offset, length), (int[]) atom.invoke(values, offset, length),
                     "lonelySparse " + java.util.Arrays.toString(values));
         }
@@ -99,7 +98,7 @@ class M3IntAlgorithmsAtomsTest {
     /** hasBit(words, index) tests one bit of a little-endian long[] bitmap, exactly as java.util.BitSet. */
     @Test
     void hasBit() throws Throwable {
-        MethodHandle atom = OWNER.method("hasBit", 2);
+        MethodHandle atom = OWNER.method("hasBit");
         long[] words = new Random(SEED).longs(LENGTHS.length).toArray();
         words[0] |= 1L | Long.MIN_VALUE;
         BitSet oracle = BitSet.valueOf(words);
@@ -110,9 +109,9 @@ class M3IntAlgorithmsAtomsTest {
     /** tableCapacity(length) is the smallest power of two at least 2 * length (at least 2), up to MAX_HASH_CAPACITY. */
     @Test
     void tableCapacity() throws Throwable {
-        MethodHandle atom = OWNER.method("tableCapacity", 1);
+        MethodHandle atom = OWNER.method("tableCapacity");
         int cap = (int) OWNER.constant("MAX_HASH_CAPACITY");
-        for (int length : new int[] {0, 1, 2, 3, 5, 64, 65, cap / 2}) {
+        for (int length : IntStream.concat(IntStream.of(TABLE_LENGTHS), IntStream.of(cap / 2)).toArray()) {
             long needed = Math.max(2L, 2L * length);
             long expected = Long.highestOneBit(needed - 1) << 1;
             assertEquals(expected == 1 ? 2 : expected, (long) (int) atom.invoke(length), "tableCapacity(" + length + ")");
@@ -122,10 +121,10 @@ class M3IntAlgorithmsAtomsTest {
     /** findSlot(...): linear-probing slots are stable per value and membership matches java.util.HashSet. */
     @Test
     void findSlot() throws Throwable {
-        MethodHandle find = OWNER.method("findSlot", 4);
-        MethodHandle contains = OWNER.method("contains", 4);
+        MethodHandle find = OWNER.method("findSlot");
+        MethodHandle contains = OWNER.method("contains");
         for (int[] values : vectors()) {
-            int capacity = (int) OWNER.method("tableCapacity", 1).invoke(values.length);
+            int capacity = (int) OWNER.method("tableCapacity").invoke(values.length);
             int[] keys = new int[capacity];
             byte[] state = new byte[capacity];
             Set<Integer> oracle = new HashSet<>();
@@ -149,10 +148,10 @@ class M3IntAlgorithmsAtomsTest {
     /** contains(...): linear-probing slots are stable per value and membership matches java.util.HashSet. */
     @Test
     void contains() throws Throwable {
-        MethodHandle find = OWNER.method("findSlot", 4);
-        MethodHandle contains = OWNER.method("contains", 4);
+        MethodHandle find = OWNER.method("findSlot");
+        MethodHandle contains = OWNER.method("contains");
         for (int[] values : vectors()) {
-            int capacity = (int) OWNER.method("tableCapacity", 1).invoke(values.length);
+            int capacity = (int) OWNER.method("tableCapacity").invoke(values.length);
             int[] keys = new int[capacity];
             byte[] state = new byte[capacity];
             Set<Integer> oracle = new HashSet<>();
@@ -173,6 +172,7 @@ class M3IntAlgorithmsAtomsTest {
             }
         }
     }
+
     /** Deterministic int vectors: narrow (dense path), wide (sparse path) and extreme values. */
     static List<int[]> vectors() {
         List<int[]> out = new ArrayList<>();
@@ -183,7 +183,7 @@ class M3IntAlgorithmsAtomsTest {
         }
         out.add(new int[] {0, Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE + 2, Integer.MAX_VALUE - 2});
         out.add(new int[] {Integer.MIN_VALUE, Integer.MIN_VALUE + 1, Integer.MAX_VALUE, Integer.MAX_VALUE - 1});
-        out.add(new int[] {5, 5, 7, 9, 10});
+        out.add(NEIGHBOUR_RUN.clone());
         return out;
     }
 
@@ -196,16 +196,6 @@ class M3IntAlgorithmsAtomsTest {
         return IntStream.range(offset, offset + length).map(i -> values[i])
                 .filter(v -> counts.get((long) v) == 1 && !counts.containsKey(v - 1L) && !counts.containsKey(v + 1L))
                 .toArray();
-    }
-
-    /** A java.lang.reflect.Proxy implementing the private M3PipelinePlan.Sink, recording accepted values. */
-    static Object sink(List<Object> seen) throws ClassNotFoundException {
-        Class<?> type = Class.forName("jdk.internal.util.M3PipelinePlan" + "$" + "Sink");
-        return Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type}, (proxy, method, args) -> {
-            assertEquals("accept", method.getName());
-            seen.add(args[0]);
-            return null;
-        });
     }
 
     /** Full-privilege access to one owner type through MethodHandles.privateLookupIn. */
@@ -222,16 +212,17 @@ class M3IntAlgorithmsAtomsTest {
             }
         }
 
-        /** The unique declared, non-synthetic method {@code atom} with {@code arity} parameters. */
-        MethodHandle method(String atom, int arity) {
+        //FLLDCIM: IOP - name lookup replaces the arity lookup; overloads name their signature (util-lang-m3 RECIPE_MEMORY R016)
+        /** The unique declared, non-synthetic method {@code atom}; an overloaded atom needs its signature. */
+        MethodHandle method(String atom) {
             Method found = null;
             for (Method m : type.getDeclaredMethods()) {
-                if (m.getName().equals(atom) && m.getParameterCount() == arity && !m.isSynthetic()) {
-                    assertEquals(null, found, "ambiguous atom " + atom + "/" + arity);
+                if (m.getName().equals(atom) && !m.isSynthetic()) {
+                    assertEquals(null, found, "overloaded atom " + atom + ": name its parameter signature");
                     found = m;
                 }
             }
-            assertTrue(found != null, "missing atom " + atom + "/" + arity);
+            assertTrue(found != null, "missing atom " + atom);
             try {
                 return lookup.unreflect(found);
             } catch (IllegalAccessException e) {
@@ -253,11 +244,24 @@ class M3IntAlgorithmsAtomsTest {
             throw new AssertionError("missing atom " + atom + "(" + signature + ")");
         }
 
-        /** The declared constructor with {@code arity} parameters; {@code atom} must be the simple type name. */
-        MethodHandle constructor(String atom, int arity) {
+        //FLLDCIM: IOP - single-constructor lookup without an arity literal (util-lang-m3 RECIPE_MEMORY R016)
+        /** The only declared constructor; {@code atom} must be the simple type name. */
+        MethodHandle constructor(String atom) {
+            assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
+            Constructor<?>[] declared = type.getDeclaredConstructors();
+            assertEquals(1, declared.length, "overloaded constructor " + atom + ": name its parameter signature");
+            try {
+                return lookup.unreflectConstructor(declared[0]);
+            } catch (IllegalAccessException e) {
+                throw new AssertionError(atom, e);
+            }
+        }
+
+        /** The declared constructor whose parameter types print as {@code signature}. */
+        MethodHandle constructor(String atom, String signature) {
             assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
             for (Constructor<?> c : type.getDeclaredConstructors()) {
-                if (c.getParameterCount() == arity && !c.isSynthetic()) {
+                if (!c.isSynthetic() && signature(c.getParameterTypes()).equals(signature)) {
                     try {
                         return lookup.unreflectConstructor(c);
                     } catch (IllegalAccessException e) {
@@ -265,7 +269,7 @@ class M3IntAlgorithmsAtomsTest {
                     }
                 }
             }
-            throw new AssertionError("missing constructor " + atom + "/" + arity);
+            throw new AssertionError("missing constructor " + atom + "(" + signature + ")");
         }
 
         /** The declared constructors, for the private non-instantiable utility pattern. */

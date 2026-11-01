@@ -6,13 +6,13 @@ jdk.internal.m3.M3IntAlgorithms	hasBit	BIT_TEST	test/jdk/jdk/internal/m3/atoms/M
 jdk.internal.m3.M3IntAlgorithms	tableCapacity	INT_TABLE_CAPACITY	test/jdk/jdk/internal/m3/atoms/M3IntAlgorithmsAtomsTest.java::tableCapacity	smallest power of two >= 2 * length; OOME past the cap
 jdk.internal.m3.M3IntAlgorithms	findSlot	INT_HASH_SLOT	test/jdk/jdk/internal/m3/atoms/M3IntAlgorithmsAtomsTest.java::findSlot	java.util.HashSet membership over an open-addressing table
 jdk.internal.m3.M3IntAlgorithms	contains	INT_HASH_SLOT	test/jdk/jdk/internal/m3/atoms/M3IntAlgorithmsAtomsTest.java::contains	java.util.HashSet membership over an open-addressing table
-jdk.internal.m3.io.M3IO	M3IO	PRIVATE_UTILITY_CONSTRUCTOR	test/jdk/jdk/internal/m3/atoms/M3IOAtomsTest.java::M3IO	reflection: one private constructor, no state
+jdk.internal.m3.io.M3IO	M3IO	PRIVATE_UTILITY_CONSTRUCTOR	test/jdk/jdk/internal/m3/atoms/M3IOAtomsTest.java::M3IO	reflection: final class, one private no-arg constructor that completes, no instance members
 jdk.internal.m3.io.M3IO	active	BIT_TEST	test/jdk/jdk/internal/m3/atoms/M3IOAtomsTest.java::active	java.util.BitSet.valueOf(words).get(index)
 jdk.internal.util.M3PipelinePlan	M3PipelinePlan	PIPE_CONSTRUCTOR	test/jdk/jdk/internal/util/M3Atoms/M3PipelinePlanAtomsTest.java::M3PipelinePlan	empty plan is the identity pipeline
 jdk.internal.util.M3PipelinePlan	append	PIPE_APPEND	test/jdk/jdk/internal/util/M3Atoms/M3PipelinePlanAtomsTest.java::append	java.util.stream filter/map pipeline; persistence across appends
 jdk.internal.util.M3PipelinePlan	traverse	PIPE_TRAVERSE	test/jdk/jdk/internal/util/M3Atoms/M3PipelinePlanAtomsTest.java::traverse	java.util.stream order of surviving values
 jdk.internal.util.M3PipelinePlan	accept	PIPE_SINK_ACCEPT	test/jdk/jdk/internal/util/M3Atoms/M3PipelinePlanAtomsTest.java::accept	one accept call per surviving value
-java.lang.M3ObjectRuntime	M3ObjectRuntime	PRIVATE_UTILITY_CONSTRUCTOR	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::M3ObjectRuntime	reflection: one private constructor, no state
+java.lang.M3ObjectRuntime	M3ObjectRuntime	PRIVATE_UTILITY_CONSTRUCTOR	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::M3ObjectRuntime	reflection: final class, one private no-arg constructor that completes, no instance members
 java.lang.M3ObjectRuntime	enabled	OBJ_ENABLED	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::enabled	startup property jdk.m3.objectEvents.enabled=true
 java.lang.M3ObjectRuntime	of	OBJ_OF	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::of	identity-bound capability, same as M3Object.of
 java.lang.M3ObjectRuntime	findLocked	OBJ_FIND_LOCKED	test/jdk/java/lang/M3Atoms/M3ObjectRuntimeAtomsTest.java::findLocked	registry lookup never creates an owner
@@ -69,7 +69,7 @@ jdk.internal.m3.M3IndexedView	get	PERF_LOOP	test/jdk/jdk/internal/m3/atoms/M3Ind
 java.lang.M3StringCodePointPrecompute	codePointCount	PERF_LOOP	test/jdk/java/lang/M3Atoms/M3StringCodePointPrecomputeAtomsPerf.java::perf_codePointCount	same checksum as the JDK baseline; interleaved invokeExact timing
 java.lang.M3StringCodePointPrecompute	offsetByCodePoints	PERF_LOOP	test/jdk/java/lang/M3Atoms/M3StringCodePointPrecomputeAtomsPerf.java::perf_offsetByCodePoints	same checksum as the JDK baseline; interleaved invokeExact timing
 java.lang.M3StringBuilderLane	charAt	PERF_LOOP	test/jdk/java/lang/M3Atoms/M3StringBuilderLaneAtomsPerf.java::perf_charAt	same checksum as the JDK baseline; interleaved invokeExact timing
-java.util.M3ComparisonSorts	M3ComparisonSorts	PRIVATE_UTILITY_CONSTRUCTOR	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::M3ComparisonSorts	reflection: one private constructor, no state
+java.util.M3ComparisonSorts	M3ComparisonSorts	PRIVATE_UTILITY_CONSTRUCTOR	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::M3ComparisonSorts	reflection: final class, one private no-arg constructor that completes, no instance members
 java.util.M3ComparisonSorts	sort	SORT_DISPATCH	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::sort	java.util.Arrays.sort differential (stable object order or primitive key order); IllegalArgumentException for numeric-only algorithms
 java.util.M3ComparisonSorts	quick	SORT_RANGE	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::quick	java.util.Arrays.sort differential (stable object order or primitive key order) on [lo,hi), untouched outside
 java.util.M3ComparisonSorts	intro	SORT_RANGE_DEPTH	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::intro	java.util.Arrays.sort differential (stable object order or primitive key order) for depth 0, 1, depthLimit
@@ -140,7 +140,7 @@ java.util.M3TimSort	gallopRight	GALLOP	test/jdk/java/util/M3Atoms/M3TimSortAtoms
 java.util.M3TimSort	mergeLo	TIM_MERGE_LO_HI	test/jdk/java/util/M3Atoms/M3TimSortAtomsTest.java::mergeLo	Arrays.sort stable order
 java.util.M3TimSort	mergeHi	TIM_MERGE_LO_HI	test/jdk/java/util/M3Atoms/M3TimSortAtomsTest.java::mergeHi	Arrays.sort stable order
 java.util.M3TimSort	ensureCapacity	TIM_ENSURE_CAPACITY	test/jdk/java/util/M3Atoms/M3TimSortAtomsTest.java::ensureCapacity	capacity bounds + identity of tmp
-java.util.M3DistributionSorts	M3DistributionSorts	PRIVATE_UTILITY_CONSTRUCTOR	test/jdk/java/util/M3Atoms/M3DistributionSortsAtomsTest.java::M3DistributionSorts	reflection: one private constructor, no state
+java.util.M3DistributionSorts	M3DistributionSorts	PRIVATE_UTILITY_CONSTRUCTOR	test/jdk/java/util/M3Atoms/M3DistributionSortsAtomsTest.java::M3DistributionSorts	reflection: final class, one private no-arg constructor that completes, no instance members
 java.util.M3DistributionSorts	sort	DIST_DISPATCH	test/jdk/java/util/M3Atoms/M3DistributionSortsAtomsTest.java::sort	Arrays.sort(Integer[], comparingLong) stable order
 java.util.M3DistributionSorts	minimum	DIST_EXTREMUM	test/jdk/java/util/M3Atoms/M3DistributionSortsAtomsTest.java::minimum	LongStream.min/max + step count
 java.util.M3DistributionSorts	maximum	DIST_EXTREMUM	test/jdk/java/util/M3Atoms/M3DistributionSortsAtomsTest.java::maximum	LongStream.min/max + step count
@@ -159,7 +159,7 @@ java.util.M3SortContext	compare	CONTEXT_COMPARE	test/jdk/java/util/M3Atoms/M3Sor
 java.util.M3SortContext	step	CONTEXT_STEP	test/jdk/java/util/M3Atoms/M3SortContextAtomsTest.java::step	recording ProgressMonitor batches + cancellation
 java.util.M3SortContext	finish	CONTEXT_FINISH	test/jdk/java/util/M3Atoms/M3SortContextAtomsTest.java::finish	recording ProgressMonitor partial batch
 java.util.M3SortContext	flush	CONTEXT_FLUSH	test/jdk/java/util/M3Atoms/M3SortContextAtomsTest.java::flush	recording ProgressMonitor report-then-cancel order
-java.lang.M3StringCodePointPrecompute	M3StringCodePointPrecompute	PRIVATE_UTILITY_CONSTRUCTOR	test/jdk/java/lang/M3Atoms/M3StringCodePointPrecomputeAtomsTest.java::M3StringCodePointPrecompute	reflection: one private constructor, no state
+java.lang.M3StringCodePointPrecompute	M3StringCodePointPrecompute	PRIVATE_UTILITY_CONSTRUCTOR	test/jdk/java/lang/M3Atoms/M3StringCodePointPrecomputeAtomsTest.java::M3StringCodePointPrecompute	reflection: final class, one private no-arg constructor that completes, no instance members
 java.lang.M3StringCodePointPrecompute	prepare	CP_PREPARE	test/jdk/java/lang/M3Atoms/M3StringCodePointPrecomputeAtomsTest.java::prepare	java.lang.String.codePointCount pair count; cache identity; empty/over-budget refusal
 java.lang.M3StringCodePointPrecompute	maximumRetainedPrimitiveBytes	CP_MAX_RETAINED	test/jdk/java/lang/M3Atoms/M3StringCodePointPrecomputeAtomsTest.java::maximumRetainedPrimitiveBytes	SLOTS * MAX_SOURCE_UNITS / 2 * Integer.BYTES
 java.lang.M3StringCodePointPrecompute	slot	CP_SLOT	test/jdk/java/lang/M3Atoms/M3StringCodePointPrecomputeAtomsTest.java::slot	range [0, SLOTS), determinism and the cache slot used by prepare
@@ -190,8 +190,10 @@ java.lang.M3StringBuilderLane	logicalCoder	LANE_LOGICAL_CODER	test/jdk/java/lang
 java.lang.M3StringBuilderLane	copyOut	LANE_COPY_OUT	test/jdk/java/lang/M3Atoms/M3StringBuilderLaneAtomsTest.java::copyOut	java.lang.StringBuilder logical content, prefix preserved
 java.lang.M3StringBuilderLane	copyFlat	LANE_COPY_FLAT	test/jdk/java/lang/M3Atoms/M3StringBuilderLaneAtomsTest.java::copyFlat	same-coder copy and Latin-1 inflation
 java.lang.M3StringBuilderLane	detached	LANE_DETACHED	test/jdk/java/lang/M3Atoms/M3StringBuilderLaneAtomsTest.java::detached	exact-length copy of the StringBuilder content
+java.lang.M3StringBuilderLane	flatten	LANE_FLATTEN	test/jdk/java/lang/M3Atoms/M3StringBuilderLaneAtomsTest.java::flatten	java.lang.StringBuilder logical content, stock capacity and coder; lane detach where AbstractStringBuilder declares m3Lane
 java.lang.M3StringBuilderLane	compose	LANE_COMPOSE	test/jdk/java/lang/M3Atoms/M3StringBuilderLaneAtomsTest.java::compose	admitted flat chunk text; cache identity; null while admission is off
 java.lang.M3StringBuilderLane	pieceCount	LANE_PIECE_COUNT	test/jdk/java/lang/M3Atoms/M3StringBuilderLaneAtomsTest.java::pieceCount	number of push calls, empty pieces included
+java.lang.M3StringBuilderLane	liftable	HOLD	-	first conjunct is the static field String.M3_JOINED_STRINGS, which stock JDK 21.0.9 java.lang.String does not declare (nor String.m3()): every call throws NoSuchFieldError before the LIFT_UNITS, PIN_RATIO and admission conjuncts are evaluated; run_atom_tests.sh patches only the M3 classes into java.base (String and AbstractStringBuilder are compiled API-only), so the predicate can run only on an M3JDK build (make images + jtreg): NOT_RUN here
 jdk.internal.m3.M3IndexedView	M3IndexedView	VIEW_CONSTRUCTOR	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::constructorValueView	ArrayList model filtered and stably sorted
 jdk.internal.m3.M3IndexedView	M3IndexedView	VIEW_CONSTRUCTOR	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::constructorStateView	ArrayList model filtered and stably sorted
 jdk.internal.m3.M3IndexedView	size	VIEW_SIZE	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::view_size	ArrayList model size, live after append

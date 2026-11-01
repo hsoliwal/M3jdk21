@@ -12,9 +12,9 @@ M3StringCodePointPrecomputeAtomsTest	java.lang.M3StringCodePointPrecompute	paire
 M3StringCodePointPrecomputeAtomsTest	java.lang.M3StringCodePointPrecompute	retainedPrimitiveBytes	CP_RETAINED_BYTES	{}
 M3StringCodePointPrecomputeAtomsTest	java.lang.M3StringCodePointPrecompute	Entry	CP_ENTRY_CONSTRUCTOR	{}
 M3StringLeafCursorAtomsTest	java.lang.M3StringLeafCursor	*	CLASS	{"summary": "Per-atom contracts of java.lang.M3StringLeafCursor: leaf ranges reassemble the source text (generated, template strings)"}
-M3StringLeafCursorAtomsTest	java.lang.M3StringLeafCursor	M3StringLeafCursor	LEAF_CONSTRUCTOR	{"test": "constructorOne", "arity": "2", "leaf_args_doc": "source, coalesce", "leaf_expect_doc": "the source", "leaf_args": "source, coalesce", "leaf_expect": "left + right"}
-M3StringLeafCursorAtomsTest	java.lang.M3StringLeafCursor	M3StringLeafCursor	LEAF_CONSTRUCTOR	{"test": "constructorTwo", "arity": "3", "leaf_args_doc": "first, second, coalesce", "leaf_expect_doc": "first then second", "leaf_args": "source, m3(right), coalesce", "leaf_expect": "left + right + right"}
-M3StringLeafCursorAtomsTest	java.lang.M3StringLeafCursor	M3StringLeafCursor	LEAF_CONSTRUCTOR	{"test": "constructorOwnerRange", "arity": "4", "leaf_args_doc": "owner, start, count, coalesce", "leaf_expect_doc": "the owner range", "leaf_args": "OWNER_OF.invoke(source), 1, (left + right).length() - 2, coalesce", "leaf_expect": "(left + right).substring(1, (left + right).length() - 1)"}
+M3StringLeafCursorAtomsTest	java.lang.M3StringLeafCursor	M3StringLeafCursor	LEAF_CONSTRUCTOR	{"test": "constructorOne", "leaf_args_doc": "source, coalesce", "leaf_expect_doc": "the source", "leaf_args": "source, coalesce", "leaf_expect": "left + right", "signature": "M3String,boolean"}
+M3StringLeafCursorAtomsTest	java.lang.M3StringLeafCursor	M3StringLeafCursor	LEAF_CONSTRUCTOR	{"test": "constructorTwo", "leaf_args_doc": "first, second, coalesce", "leaf_expect_doc": "first then second", "leaf_args": "source, m3(right), coalesce", "leaf_expect": "left + right + right", "signature": "M3String,M3String,boolean"}
+M3StringLeafCursorAtomsTest	java.lang.M3StringLeafCursor	M3StringLeafCursor	LEAF_CONSTRUCTOR	{"test": "constructorOwnerRange", "leaf_args_doc": "owner, start, count, coalesce", "leaf_expect_doc": "the owner range", "leaf_args": "OWNER_OF.invoke(source), 1, (left + right).length() - 2, coalesce", "leaf_expect": "(left + right).substring(1, (left + right).length() - 1)", "signature": "M3StringOwner,int,int,boolean"}
 M3StringLeafCursorAtomsTest	java.lang.M3StringLeafCursor	next	LEAF_NEXT	{}
 M3StringLeafCursorAtomsTest	java.lang.M3StringLeafCursor	owner	LEAF_ACCESSOR	{}
 M3StringLeafCursorAtomsTest	java.lang.M3StringLeafCursor	start	LEAF_ACCESSOR	{}
@@ -33,5 +33,7 @@ M3StringBuilderLaneAtomsTest	java.lang.M3StringBuilderLane	logicalCoder	LANE_LOG
 M3StringBuilderLaneAtomsTest	java.lang.M3StringBuilderLane	copyOut	LANE_COPY_OUT	{}
 M3StringBuilderLaneAtomsTest	java.lang.M3StringBuilderLane	copyFlat	LANE_COPY_FLAT	{}
 M3StringBuilderLaneAtomsTest	java.lang.M3StringBuilderLane	detached	LANE_DETACHED	{}
+M3StringBuilderLaneAtomsTest	java.lang.M3StringBuilderLane	flatten	LANE_FLATTEN	{}
+M3StringBuilderLaneAtomsTest	java.lang.M3StringBuilderLane	liftable	HOLD	{"reason": "first conjunct is the static field String.M3_JOINED_STRINGS, which stock JDK 21.0.9 java.lang.String does not declare (nor String.m3()): every call throws NoSuchFieldError before the LIFT_UNITS, PIN_RATIO and admission conjuncts are evaluated; run_atom_tests.sh patches only the M3 classes into java.base (String and AbstractStringBuilder are compiled API-only), so the predicate can run only on an M3JDK build (make images + jtreg): NOT_RUN here"}
 M3StringBuilderLaneAtomsTest	java.lang.M3StringBuilderLane	compose	LANE_COMPOSE	{}
 M3StringBuilderLaneAtomsTest	java.lang.M3StringBuilderLane	pieceCount	LANE_PIECE_COUNT	{}

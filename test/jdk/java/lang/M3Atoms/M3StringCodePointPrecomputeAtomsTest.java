@@ -47,12 +47,12 @@ class M3StringCodePointPrecomputeAtomsTest {
     private static final Access M3_STRING = new Access("java.lang.M3String");
     private static final Access POOL = new Access("java.lang.M3StringPool");
     private static final Access JAVA_STRING = new Access("java.lang.String");
-    private static final MethodHandle INTERN_CHARS = POOL.method("internChars", 3);
-    private static final MethodHandle CONCAT = POOL.method("concat", 2);
-    private static final MethodHandle RANGE = M3_STRING.method("range", 3);
-    private static final MethodHandle OWNER_OF = M3_STRING.method("owner", 0);
-    private static final MethodHandle START_OF = M3_STRING.method("start", 0);
-    private static final MethodHandle COORDINATE_OF = M3_STRING.method("coordinate", 0);
+    private static final MethodHandle INTERN_CHARS = POOL.method("internChars");
+    private static final MethodHandle CONCAT = POOL.method("concat");
+    private static final MethodHandle RANGE = M3_STRING.method("range");
+    private static final MethodHandle OWNER_OF = M3_STRING.method("owner");
+    private static final MethodHandle START_OF = M3_STRING.method("start", "");
+    private static final MethodHandle COORDINATE_OF = M3_STRING.method("coordinate");
     private static final byte LATIN1 = (byte) JAVA_STRING.constant("LATIN1");
     private static final byte UTF16 = (byte) JAVA_STRING.constant("UTF16");
     private static final long SEED = 0x4D33_5354_5247L;
@@ -72,36 +72,52 @@ class M3StringCodePointPrecomputeAtomsTest {
 
     static {
         try {
-            M3_STRING.method("activate", 1).invoke((String) null);
+            M3_STRING.method("activate").invoke((String) null);
         } catch (Throwable e) {
             throw new ExceptionInInitializerError(e);
         }
     }
-    /** M3StringCodePointPrecompute(): the only constructor is private and creates no observable state. */
+    /** Sorted int lanes for lowerBound: empty, one value, short, and odd values only. */
+    private static final int[][] BOUND_LANES = {{}, {2}, {2, 4, 9}, {1, 3, 5, 7, 9, 11, 13}};
+    //FLLDCIM: TOP - utility-class contract replaces the assertSame tautology (util-lang-m3 RECIPE_MEMORY R014)
+    /**
+     * M3StringCodePointPrecompute(): the utility-class contract. The class is final and extends Object; its only constructor is private
+     * and takes no arguments; no field and no method is an instance member, so an instance could hold no state and
+     * do nothing (the constructor only denies instantiation). The private constructor itself completes normally.
+     */
     @Test
     void M3StringCodePointPrecompute() throws Throwable {
+        Class<?> type = OWNER.type;
+        assertTrue(Modifier.isFinal(type.getModifiers()), "M3StringCodePointPrecompute is final");
+        assertSame(Object.class, type.getSuperclass(), "M3StringCodePointPrecompute extends Object directly");
         Constructor<?>[] declared = OWNER.constructors();
         assertEquals(1, declared.length, "M3StringCodePointPrecompute declares one constructor");
         assertTrue(Modifier.isPrivate(declared[0].getModifiers()), "M3StringCodePointPrecompute constructor is private");
-        Object instance = OWNER.constructor("M3StringCodePointPrecompute", 0).invoke();
-        assertSame(OWNER.type, instance.getClass());
+        assertEquals(0, declared[0].getParameterCount(), "M3StringCodePointPrecompute constructor takes no arguments");
+        for (java.lang.reflect.Field f : type.getDeclaredFields()) {
+            assertTrue(Modifier.isStatic(f.getModifiers()), "M3StringCodePointPrecompute declares instance field " + f.getName());
+        }
+        for (Method m : type.getDeclaredMethods()) {
+            assertTrue(Modifier.isStatic(m.getModifiers()), "M3StringCodePointPrecompute declares instance method " + m.getName());
+        }
+        OWNER.constructor("M3StringCodePointPrecompute").invoke();
     }
     /** prepare(source) builds geometry once per (owner, coordinate) and refuses empty or over-budget ranges. */
     @Test
     void prepare() throws Throwable {
-        MethodHandle atom = OWNER.method("prepare", 1);
+        MethodHandle atom = OWNER.method("prepare");
         Access geometry = new Access("java.lang.M3StringCodePointPrecompute$Geometry");
         for (String s : corpus()) {
             Object source = m3(s);
             Object g = atom.invoke(source);
             assertEquals(s.length(), (int) geometry.field("utf16Length").get(g), "prepare length");
             assertEquals(s.length() - s.codePointCount(0, s.length()),
-                    (int) geometry.method("pairedLowCount", 0).invoke(g), "prepare pairs of " + s.length());
+                    (int) geometry.method("pairedLowCount").invoke(g), "prepare pairs of " + s.length());
             assertSame(g, atom.invoke(source), "prepare cache hit");
         }
         Object straddling = m3Tuple("ab" + HIGH, LOW + "cd");
         Object g = atom.invoke(straddling);
-        assertEquals(1, (int) geometry.method("pairedLowCount", 0).invoke(g), "a pair across tuple leaves");
+        assertEquals(1, (int) geometry.method("pairedLowCount").invoke(g), "a pair across tuple leaves");
         int max = (int) OWNER.constant("MAX_SOURCE_UNITS");
         assertEquals(null, atom.invoke(m3("")), "empty source");
         assertEquals(null, atom.invoke(m3("x".repeat(max + 1))), "over the source budget");
@@ -111,17 +127,17 @@ class M3StringCodePointPrecomputeAtomsTest {
     void maximumRetainedPrimitiveBytes() throws Throwable {
         long slots = (int) OWNER.constant("SLOTS");
         long units = (int) OWNER.constant("MAX_SOURCE_UNITS");
-        assertEquals(slots * (units / 2) * Integer.BYTES, (long) OWNER.method("maximumRetainedPrimitiveBytes", 0).invoke());
+        assertEquals(slots * (units / 2) * Integer.BYTES, (long) OWNER.method("maximumRetainedPrimitiveBytes").invoke());
         String densest = PAIR.repeat((int) units / 2);
-        Object g = OWNER.method("prepare", 1).invoke(m3(densest));
-        long one = (long) new Access("java.lang.M3StringCodePointPrecompute$Geometry").method("retainedPrimitiveBytes", 0)
+        Object g = OWNER.method("prepare").invoke(m3(densest));
+        long one = (long) new Access("java.lang.M3StringCodePointPrecompute$Geometry").method("retainedPrimitiveBytes")
                 .invoke(g);
-        assertEquals(slots * one, (long) OWNER.method("maximumRetainedPrimitiveBytes", 0).invoke(), "the bound is attained by dense pairs");
+        assertEquals(slots * one, (long) OWNER.method("maximumRetainedPrimitiveBytes").invoke(), "the bound is attained by dense pairs");
     }
     /** slot(owner, coordinate) is a deterministic slot in [0, SLOTS) where prepare caches its entry. */
     @Test
     void slot() throws Throwable {
-        MethodHandle atom = OWNER.method("slot", 2);
+        MethodHandle atom = OWNER.method("slot");
         int slots = (int) OWNER.constant("SLOTS");
         AtomicReferenceArray<?> cache = (AtomicReferenceArray<?>) OWNER.constant("CACHE");
         Access entry = new Access("java.lang.M3StringCodePointPrecompute$Entry");
@@ -132,16 +148,15 @@ class M3StringCodePointPrecomputeAtomsTest {
             int slot = (int) atom.invoke(owner, coordinate);
             assertTrue(slot >= 0 && slot < slots, "slot range");
             assertEquals(slot, (int) atom.invoke(owner, coordinate), "slot deterministic");
-            Object g = OWNER.method("prepare", 1).invoke(source);
+            Object g = OWNER.method("prepare").invoke(source);
             assertSame(g, entry.field("geometry").get(cache.get(slot)), "prepare caches at slot");
         }
     }
     /** lowerBound(values, key) is the number of sorted values strictly below key. */
     @Test
     void lowerBound() throws Throwable {
-        MethodHandle atom = OWNER.method("lowerBound", 2);
-        int[][] lanes = {{}, {2}, {2, 4, 9}, {1, 3, 5, 7, 9, 11, 13}};
-        for (int[] values : lanes) {
+        MethodHandle atom = OWNER.method("lowerBound");
+        for (int[] values : BOUND_LANES) {
             for (int key = -1; key <= values.length * 2 + QUARTER; key++) {
                 final int k = key;
                 long below = Arrays.stream(values).filter(v -> v < k).count();
@@ -153,8 +168,8 @@ class M3StringCodePointPrecomputeAtomsTest {
     @Test
     void Geometry() throws Throwable {
         Access geometry = new Access("java.lang.M3StringCodePointPrecompute$Geometry");
-        MethodHandle ctor = geometry.constructor("Geometry", 2);
-        MethodHandle count = geometry.method("codePointCount", 2);
+        MethodHandle ctor = geometry.constructor("Geometry");
+        MethodHandle count = geometry.method("codePointCount");
         for (String s : corpus()) {
             if (s.length() > EXHAUSTIVE) {
                 continue;
@@ -171,9 +186,9 @@ class M3StringCodePointPrecomputeAtomsTest {
     @Test
     void codePointCount() throws Throwable {
         Access geometry = new Access("java.lang.M3StringCodePointPrecompute$Geometry");
-        MethodHandle atom = geometry.method("codePointCount", 2);
+        MethodHandle atom = geometry.method("codePointCount");
         for (String s : corpus()) {
-            Object g = OWNER.method("prepare", 1).invoke(m3(s));
+            Object g = OWNER.method("prepare").invoke(m3(s));
             int n = s.length();
             int step = n > EXHAUSTIVE ? n / EXHAUSTIVE : 1;
             for (int begin = -1; begin <= n + 1; begin += step) {
@@ -190,9 +205,9 @@ class M3StringCodePointPrecomputeAtomsTest {
     @Test
     void offsetByCodePoints() throws Throwable {
         Access geometry = new Access("java.lang.M3StringCodePointPrecompute$Geometry");
-        MethodHandle atom = geometry.method("offsetByCodePoints", 2);
+        MethodHandle atom = geometry.method("offsetByCodePoints");
         for (String s : corpus()) {
-            Object g = OWNER.method("prepare", 1).invoke(m3(s));
+            Object g = OWNER.method("prepare").invoke(m3(s));
             int n = s.length();
             int step = n > EXHAUSTIVE ? n / EXHAUSTIVE : 1;
             for (int index = -1; index <= n + 1; index += step) {
@@ -210,9 +225,9 @@ class M3StringCodePointPrecomputeAtomsTest {
     void pairedLowCount() throws Throwable {
         Access geometry = new Access("java.lang.M3StringCodePointPrecompute$Geometry");
         for (String s : corpus()) {
-            Object g = OWNER.method("prepare", 1).invoke(m3(s));
-            assertEquals(s.length() - s.codePointCount(0, s.length()), (int) geometry.method("pairedLowCount", 0).invoke(g));
-            assertEquals(pairedLows(s).length, (int) geometry.method("pairedLowCount", 0).invoke(g));
+            Object g = OWNER.method("prepare").invoke(m3(s));
+            assertEquals(s.length() - s.codePointCount(0, s.length()), (int) geometry.method("pairedLowCount").invoke(g));
+            assertEquals(pairedLows(s).length, (int) geometry.method("pairedLowCount").invoke(g));
         }
     }
     /** retainedPrimitiveBytes() is the primitive lane size: one int per paired low surrogate. */
@@ -220,8 +235,8 @@ class M3StringCodePointPrecomputeAtomsTest {
     void retainedPrimitiveBytes() throws Throwable {
         Access geometry = new Access("java.lang.M3StringCodePointPrecompute$Geometry");
         for (String s : corpus()) {
-            Object g = OWNER.method("prepare", 1).invoke(m3(s));
-            assertEquals((long) pairedLows(s).length * Integer.BYTES, (long) geometry.method("retainedPrimitiveBytes", 0).invoke(g));
+            Object g = OWNER.method("prepare").invoke(m3(s));
+            assertEquals((long) pairedLows(s).length * Integer.BYTES, (long) geometry.method("retainedPrimitiveBytes").invoke(g));
         }
     }
     /** Entry(owner, coordinate, geometry) retains the owner weakly and the coordinate and geometry exactly. */
@@ -231,8 +246,8 @@ class M3StringCodePointPrecomputeAtomsTest {
         Object source = m3("entry" + PAIR);
         Object owner = OWNER_OF.invoke(source);
         long coordinate = (long) COORDINATE_OF.invoke(source);
-        Object g = OWNER.method("prepare", 1).invoke(source);
-        Object e = entry.constructor("Entry", 3).invoke(new WeakReference<>(owner), coordinate, g);
+        Object g = OWNER.method("prepare").invoke(source);
+        Object e = entry.constructor("Entry").invoke(new WeakReference<>(owner), coordinate, g);
         assertSame(owner, ((WeakReference<?>) entry.field("owner").get(e)).get());
         assertEquals(coordinate, (long) entry.field("coordinate").get(e));
         assertSame(g, entry.field("geometry").get(e));
@@ -307,8 +322,8 @@ class M3StringCodePointPrecomputeAtomsTest {
         return new String(bytes, fromChar * unit, chars * unit, coder == LATIN1 ? StandardCharsets.ISO_8859_1 : utf16Native());
     }
 
-    private static final MethodHandle TUPLE = new Access("java.lang.M3StringTuple").constructor("M3StringTuple", 4);
-    private static final MethodHandle WHOLE = M3_STRING.method("whole", 1);
+    private static final MethodHandle TUPLE = new Access("java.lang.M3StringTuple").constructor("M3StringTuple");
+    private static final MethodHandle WHOLE = M3_STRING.method("whole");
     private static long nextTupleId = SEED;
 
     /** A hand-built tuple over two existing M3Strings: no pool canonicalization or flattening. */
@@ -331,16 +346,17 @@ class M3StringCodePointPrecomputeAtomsTest {
             }
         }
 
-        /** The unique declared, non-synthetic method {@code atom} with {@code arity} parameters. */
-        MethodHandle method(String atom, int arity) {
+        //FLLDCIM: IOP - name lookup replaces the arity lookup; overloads name their signature (util-lang-m3 RECIPE_MEMORY R016)
+        /** The unique declared, non-synthetic method {@code atom}; an overloaded atom needs its signature. */
+        MethodHandle method(String atom) {
             Method found = null;
             for (Method m : type.getDeclaredMethods()) {
-                if (m.getName().equals(atom) && m.getParameterCount() == arity && !m.isSynthetic()) {
-                    assertEquals(null, found, "ambiguous atom " + atom + "/" + arity);
+                if (m.getName().equals(atom) && !m.isSynthetic()) {
+                    assertEquals(null, found, "overloaded atom " + atom + ": name its parameter signature");
                     found = m;
                 }
             }
-            assertTrue(found != null, "missing atom " + atom + "/" + arity);
+            assertTrue(found != null, "missing atom " + atom);
             try {
                 return lookup.unreflect(found);
             } catch (IllegalAccessException e) {
@@ -362,11 +378,24 @@ class M3StringCodePointPrecomputeAtomsTest {
             throw new AssertionError("missing atom " + atom + "(" + signature + ")");
         }
 
-        /** The declared constructor with {@code arity} parameters; {@code atom} must be the simple type name. */
-        MethodHandle constructor(String atom, int arity) {
+        //FLLDCIM: IOP - single-constructor lookup without an arity literal (util-lang-m3 RECIPE_MEMORY R016)
+        /** The only declared constructor; {@code atom} must be the simple type name. */
+        MethodHandle constructor(String atom) {
+            assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
+            Constructor<?>[] declared = type.getDeclaredConstructors();
+            assertEquals(1, declared.length, "overloaded constructor " + atom + ": name its parameter signature");
+            try {
+                return lookup.unreflectConstructor(declared[0]);
+            } catch (IllegalAccessException e) {
+                throw new AssertionError(atom, e);
+            }
+        }
+
+        /** The declared constructor whose parameter types print as {@code signature}. */
+        MethodHandle constructor(String atom, String signature) {
             assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
             for (Constructor<?> c : type.getDeclaredConstructors()) {
-                if (c.getParameterCount() == arity && !c.isSynthetic()) {
+                if (!c.isSynthetic() && signature(c.getParameterTypes()).equals(signature)) {
                     try {
                         return lookup.unreflectConstructor(c);
                     } catch (IllegalAccessException e) {
@@ -374,7 +403,7 @@ class M3StringCodePointPrecomputeAtomsTest {
                     }
                 }
             }
-            throw new AssertionError("missing constructor " + atom + "/" + arity);
+            throw new AssertionError("missing constructor " + atom + "(" + signature + ")");
         }
 
         /** The declared constructors, for the private non-instantiable utility pattern. */

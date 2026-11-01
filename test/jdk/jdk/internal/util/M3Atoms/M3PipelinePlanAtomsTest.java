@@ -50,82 +50,61 @@ class M3PipelinePlanAtomsTest {
     private static final int[] LENGTHS = {0, 1, 2, 3, 7, 64, 65, 500};
     private static final int NARROW = 40;
     private static final int OPS_PAST_PAGE = 70;
+    /** The traverse filter keeps values that are not multiples of this. */
+    private static final int FILTER_MODULUS = 3;
     /** M3PipelinePlan(source, pages, filterMask, size): an empty operation table yields the source unchanged. */
     @Test
     void M3PipelinePlan() throws Throwable {
         List<Integer> source = IntStream.range(0, NARROW).boxed().toList();
-        Object plan = OWNER.constructor("M3PipelinePlan", 4).invoke(source, new Object[0][], new long[0], 0);
-        assertEquals(source, OWNER.method("toList", 0).invoke(plan));
+        Object plan = OWNER.constructor("M3PipelinePlan").invoke(source, new Object[0][], new long[0], 0);
+        assertEquals(source, OWNER.method("toList").invoke(plan));
     }
     /** append(operation, filter) returns a new plan (pages persistent) equal to the matching stream pipeline. */
     @Test
     void append() throws Throwable {
-        MethodHandle atom = OWNER.method("append", 2);
+        MethodHandle atom = OWNER.method("append");
         List<Integer> source = IntStream.range(0, NARROW).boxed().toList();
-        Object empty = OWNER.method("from", 1).invoke(source);
+        Object empty = OWNER.method("from").invoke(source);
         Predicate<Integer> odd = v -> (v & 1) == 1;
         Function<Integer, Integer> inc = v -> v + 1;
         Object filtered = atom.invoke(empty, odd, true);
         Object mapped = atom.invoke(filtered, inc, false);
-        assertEquals(source, OWNER.method("toList", 0).invoke(empty), "append leaves the original plan unchanged");
-        assertEquals(source.stream().filter(odd).toList(), OWNER.method("toList", 0).invoke(filtered));
-        assertEquals(source.stream().filter(odd).map(inc).toList(), OWNER.method("toList", 0).invoke(mapped));
+        assertEquals(source, OWNER.method("toList").invoke(empty), "append leaves the original plan unchanged");
+        assertEquals(source.stream().filter(odd).toList(), OWNER.method("toList").invoke(filtered));
+        assertEquals(source.stream().filter(odd).map(inc).toList(), OWNER.method("toList").invoke(mapped));
         Object deep = empty;
         for (int i = 0; i < OPS_PAST_PAGE; i++) {
             deep = atom.invoke(deep, inc, false);
         }
-        assertEquals(source.stream().map(v -> v + OPS_PAST_PAGE).toList(), OWNER.method("toList", 0).invoke(deep),
+        assertEquals(source.stream().map(v -> v + OPS_PAST_PAGE).toList(), OWNER.method("toList").invoke(deep),
                 "operations past one 64-lane page");
     }
     /** traverse(sink) pushes each surviving, mapped value to the sink once, in source order. */
     @Test
     void traverse() throws Throwable {
         List<Integer> source = IntStream.range(0, NARROW).boxed().toList();
-        Object plan = OWNER.method("from", 1).invoke(source);
-        plan = OWNER.method("filter", 1).invoke(plan, (Predicate<Integer>) v -> v % 3 != 0);
-        plan = OWNER.method("map", 1).invoke(plan, (Function<Integer, Integer>) v -> v * 2);
+        Object plan = OWNER.method("from").invoke(source);
+        plan = OWNER.method("filter").invoke(plan, (Predicate<Integer>) v -> v % FILTER_MODULUS != 0);
+        plan = OWNER.method("map").invoke(plan, (Function<Integer, Integer>) v -> v * 2);
         List<Object> seen = new ArrayList<>();
-        OWNER.method("traverse", 1).invoke(plan, sink(seen));
-        assertEquals(source.stream().filter(v -> v % 3 != 0).map(v -> v * 2).collect(Collectors.toList()), seen);
+        OWNER.method("traverse").invoke(plan, sink(seen));
+        assertEquals(source.stream().filter(v -> v % FILTER_MODULUS != 0).map(v -> v * 2).collect(Collectors.toList()), seen);
     }
     /** accept(value) is invoked once per surviving value; a filter that rejects everything never calls it. */
     @Test
     void accept() throws Throwable {
         List<Integer> source = IntStream.range(0, NARROW).boxed().toList();
-        Object plan = OWNER.method("filter", 1).invoke(OWNER.method("from", 1).invoke(source),
+        Object plan = OWNER.method("filter").invoke(OWNER.method("from").invoke(source),
                 (Predicate<Integer>) v -> false);
         List<Object> seen = new ArrayList<>();
-        OWNER.method("traverse", 1).invoke(plan, sink(seen));
+        OWNER.method("traverse").invoke(plan, sink(seen));
         assertEquals(List.of(), seen, "no value survives, accept is never called");
         Object sinkInstance = sink(seen);
-        new Access("jdk.internal.util.M3PipelinePlan$Sink").method("accept", 1).invoke(sinkInstance, "direct");
+        new Access("jdk.internal.util.M3PipelinePlan$Sink").method("accept").invoke(sinkInstance, "direct");
         assertEquals(List.of("direct"), seen);
     }
-    /** Deterministic int vectors: narrow (dense path), wide (sparse path) and extreme values. */
-    static List<int[]> vectors() {
-        List<int[]> out = new ArrayList<>();
-        Random r = new Random(SEED);
-        for (int n : LENGTHS) {
-            out.add(IntStream.range(0, n).map(i -> r.nextInt(NARROW) - NARROW / 2).toArray());
-            out.add(IntStream.range(0, n).map(i -> r.nextInt()).toArray());
-        }
-        out.add(new int[] {0, Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE + 2, Integer.MAX_VALUE - 2});
-        out.add(new int[] {Integer.MIN_VALUE, Integer.MIN_VALUE + 1, Integer.MAX_VALUE, Integer.MAX_VALUE - 1});
-        out.add(new int[] {5, 5, 7, 9, 10});
-        return out;
-    }
 
-    /** Oracle: values occurring once with neither neighbour present, in input order (HashMap counts). */
-    static int[] lonelyOracle(int[] values, int offset, int length) {
-        Map<Long, Integer> counts = new HashMap<>();
-        for (int i = offset; i < offset + length; i++) {
-            counts.merge((long) values[i], 1, Integer::sum);
-        }
-        return IntStream.range(offset, offset + length).map(i -> values[i])
-                .filter(v -> counts.get((long) v) == 1 && !counts.containsKey(v - 1L) && !counts.containsKey(v + 1L))
-                .toArray();
-    }
-
+    //FLLDCIM: IDL - pipeline-only helper emitted only where used, so @modules stays exact (util-lang-m3 RECIPE_MEMORY R019)
     /** A java.lang.reflect.Proxy implementing the private M3PipelinePlan.Sink, recording accepted values. */
     static Object sink(List<Object> seen) throws ClassNotFoundException {
         Class<?> type = Class.forName("jdk.internal.util.M3PipelinePlan" + "$" + "Sink");
@@ -150,16 +129,17 @@ class M3PipelinePlanAtomsTest {
             }
         }
 
-        /** The unique declared, non-synthetic method {@code atom} with {@code arity} parameters. */
-        MethodHandle method(String atom, int arity) {
+        //FLLDCIM: IOP - name lookup replaces the arity lookup; overloads name their signature (util-lang-m3 RECIPE_MEMORY R016)
+        /** The unique declared, non-synthetic method {@code atom}; an overloaded atom needs its signature. */
+        MethodHandle method(String atom) {
             Method found = null;
             for (Method m : type.getDeclaredMethods()) {
-                if (m.getName().equals(atom) && m.getParameterCount() == arity && !m.isSynthetic()) {
-                    assertEquals(null, found, "ambiguous atom " + atom + "/" + arity);
+                if (m.getName().equals(atom) && !m.isSynthetic()) {
+                    assertEquals(null, found, "overloaded atom " + atom + ": name its parameter signature");
                     found = m;
                 }
             }
-            assertTrue(found != null, "missing atom " + atom + "/" + arity);
+            assertTrue(found != null, "missing atom " + atom);
             try {
                 return lookup.unreflect(found);
             } catch (IllegalAccessException e) {
@@ -181,11 +161,24 @@ class M3PipelinePlanAtomsTest {
             throw new AssertionError("missing atom " + atom + "(" + signature + ")");
         }
 
-        /** The declared constructor with {@code arity} parameters; {@code atom} must be the simple type name. */
-        MethodHandle constructor(String atom, int arity) {
+        //FLLDCIM: IOP - single-constructor lookup without an arity literal (util-lang-m3 RECIPE_MEMORY R016)
+        /** The only declared constructor; {@code atom} must be the simple type name. */
+        MethodHandle constructor(String atom) {
+            assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
+            Constructor<?>[] declared = type.getDeclaredConstructors();
+            assertEquals(1, declared.length, "overloaded constructor " + atom + ": name its parameter signature");
+            try {
+                return lookup.unreflectConstructor(declared[0]);
+            } catch (IllegalAccessException e) {
+                throw new AssertionError(atom, e);
+            }
+        }
+
+        /** The declared constructor whose parameter types print as {@code signature}. */
+        MethodHandle constructor(String atom, String signature) {
             assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
             for (Constructor<?> c : type.getDeclaredConstructors()) {
-                if (c.getParameterCount() == arity && !c.isSynthetic()) {
+                if (!c.isSynthetic() && signature(c.getParameterTypes()).equals(signature)) {
                     try {
                         return lookup.unreflectConstructor(c);
                     } catch (IllegalAccessException e) {
@@ -193,7 +186,7 @@ class M3PipelinePlanAtomsTest {
                     }
                 }
             }
-            throw new AssertionError("missing constructor " + atom + "/" + arity);
+            throw new AssertionError("missing constructor " + atom + "(" + signature + ")");
         }
 
         /** The declared constructors, for the private non-instantiable utility pattern. */
