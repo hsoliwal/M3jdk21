@@ -41,16 +41,16 @@ jobs:
           javac -J-Djava.io.tmpdir="$M3_TASK_OUT/tmp" --release 21 -g -encoding UTF-8 -proc:none -Xlint:all,-module -Werror -d "$M3_TASK_OUT/arrays" @"$M3_TASK_OUT/arrays.args"
           find m3/collections/src/main/java -name '*.java' | sort > "$M3_TASK_OUT/core.args"
           javac -J-Djava.io.tmpdir="$M3_TASK_OUT/tmp" --release 21 -g -encoding UTF-8 -proc:none -Xlint:all,-module --module-path "$M3_TASK_OUT/arrays" -Werror -d "$M3_TASK_OUT/core" @"$M3_TASK_OUT/core.args"
-          javac -J-Djava.io.tmpdir="$M3_TASK_OUT/tmp" --release 21 -g -encoding UTF-8 -proc:none -Xlint:all,-module -Werror -cp "$M3_TASK_OUT/core:$M3_TASK_OUT/arrays:$M3_PROVIDER" -d "$M3_TASK_OUT/classes" @"$M3_TASK_OUT/owned.args" m3/collections/src/test/java/com/m3/collections/M3CollectionSdkCatalogSelfTest.java m3/collections/src/test/java/com/m3/collections/M3CollectionSdkSelfTest.java m3/collections/src/test/java/com/m3/collections/M3SdkOwnerFactorySelfTest.java m3/collections/implementations/apache/src/test/java/com/m3/collections/apache/M3MultiValuedMapCounterDifferentialTest.java
+          javac -J-Djava.io.tmpdir="$M3_TASK_OUT/tmp" --release 21 -g -encoding UTF-8 -proc:none -Xlint:all,-module -Werror -cp "$M3_TASK_OUT/core:$M3_TASK_OUT/arrays:$M3_PROVIDER" -d "$M3_TASK_OUT/classes" @"$M3_TASK_OUT/owned.args" m3/collections/src/test/java/jdk/m3/collections/M3CollectionSdkCatalogSelfTest.java m3/collections/src/test/java/jdk/m3/collections/M3CollectionSdkSelfTest.java m3/collections/src/test/java/jdk/m3/collections/M3SdkOwnerFactorySelfTest.java m3/collections/implementations/apache/src/test/java/jdk/m3/collections/apache/M3MultiValuedMapCounterDifferentialTest.java
           gcc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" m3/collections/src/main/native/collections/m3_index_mask_compactor.c -o "$M3_TASK_OUT/native/libm3_collections_mask.so"
           M3_CP="$M3_TASK_OUT/classes:$M3_TASK_OUT/core:$M3_TASK_OUT/arrays:$M3_PROVIDER"
-          java -Xmx512m -XX:-UsePerfData -Djava.io.tmpdir="$M3_TASK_OUT/tmp" -Djava.library.path="$M3_TASK_OUT/absent" -cp "$M3_CP" com.m3.collections.M3CollectionSdkSelfTest
-          java -Xmx512m -XX:-UsePerfData -Xcheck:jni -Djava.io.tmpdir="$M3_TASK_OUT/tmp" -Djava.library.path="$M3_TASK_OUT/native" -cp "$M3_CP" com.m3.collections.M3CollectionSdkSelfTest
-          java -Xmx512m -XX:-UsePerfData -Djava.io.tmpdir="$M3_TASK_OUT/tmp" -cp "$M3_CP" com.m3.collections.M3SdkOwnerFactorySelfTest
-          java -Xmx512m -XX:-UsePerfData -Xint -Djava.io.tmpdir="$M3_TASK_OUT/tmp" -cp "$M3_CP" com.m3.collections.M3SdkOwnerFactorySelfTest
-          java -Xmx512m -XX:-UsePerfData -Djava.io.tmpdir="$M3_TASK_OUT/tmp" -cp "$M3_CP" com.m3.collections.apache.M3MultiValuedMapSelfTest
+          java -Xmx512m -XX:-UsePerfData -Djava.io.tmpdir="$M3_TASK_OUT/tmp" -Djava.library.path="$M3_TASK_OUT/absent" -cp "$M3_CP" jdk.m3.collections.M3CollectionSdkSelfTest
+          java -Xmx512m -XX:-UsePerfData -Xcheck:jni -Djava.io.tmpdir="$M3_TASK_OUT/tmp" -Djava.library.path="$M3_TASK_OUT/native" -cp "$M3_CP" jdk.m3.collections.M3CollectionSdkSelfTest
+          java -Xmx512m -XX:-UsePerfData -Djava.io.tmpdir="$M3_TASK_OUT/tmp" -cp "$M3_CP" jdk.m3.collections.M3SdkOwnerFactorySelfTest
+          java -Xmx512m -XX:-UsePerfData -Xint -Djava.io.tmpdir="$M3_TASK_OUT/tmp" -cp "$M3_CP" jdk.m3.collections.M3SdkOwnerFactorySelfTest
+          java -Xmx512m -XX:-UsePerfData -Djava.io.tmpdir="$M3_TASK_OUT/tmp" -cp "$M3_CP" jdk.m3.collections.apache.M3MultiValuedMapSelfTest
           java -Xmx512m -XX:-UsePerfData -Djava.io.tmpdir="$M3_TASK_OUT/tmp" -cp "$M3_CP" ApacheM3MultiValueCandidateProbe
-          java -Xmx512m -XX:-UsePerfData -Djava.io.tmpdir="$M3_TASK_OUT/tmp" -cp "$M3_CP" com.m3.collections.apache.M3MultiValuedMapCounterDifferentialTest
+          java -Xmx512m -XX:-UsePerfData -Djava.io.tmpdir="$M3_TASK_OUT/tmp" -cp "$M3_CP" jdk.m3.collections.apache.M3MultiValuedMapCounterDifferentialTest
   sdk-receiving:
     runs-on: ubuntu-latest
     timeout-minutes: 15

@@ -5,22 +5,22 @@
 
 /**
  * Defines the {@code commonmark} library,
- * relocated into M3JDK21 by LIB_INTAKE_TO_JMOD.
+ * relocated into M3JDK 21 by LIB_INTAKE_TO_JMOD.
  */
 module jdk.m3.commonmark {
-    exports com.m3.lib.commonmark;
-    exports com.m3.lib.commonmark.internal;
-    exports com.m3.lib.commonmark.internal.inline;
-    exports com.m3.lib.commonmark.internal.renderer;
-    exports com.m3.lib.commonmark.internal.util;
-    exports com.m3.lib.commonmark.node;
-    exports com.m3.lib.commonmark.parser;
-    exports com.m3.lib.commonmark.parser.beta;
-    exports com.m3.lib.commonmark.parser.block;
-    exports com.m3.lib.commonmark.parser.delimiter;
-    exports com.m3.lib.commonmark.renderer;
-    exports com.m3.lib.commonmark.renderer.html;
-    exports com.m3.lib.commonmark.renderer.markdown;
-    exports com.m3.lib.commonmark.renderer.text;
-    exports com.m3.lib.commonmark.text;
+    exports jdk.m3.lib.commonmark;
+    exports jdk.m3.lib.commonmark.internal;
+    exports jdk.m3.lib.commonmark.internal.inline;
+    exports jdk.m3.lib.commonmark.internal.renderer;
+    exports jdk.m3.lib.commonmark.internal.util;
+    exports jdk.m3.lib.commonmark.node;
+    exports jdk.m3.lib.commonmark.parser;
+    exports jdk.m3.lib.commonmark.parser.beta;
+    exports jdk.m3.lib.commonmark.parser.block;
+    exports jdk.m3.lib.commonmark.parser.delimiter;
+    exports jdk.m3.lib.commonmark.renderer;
+    exports jdk.m3.lib.commonmark.renderer.html;
+    exports jdk.m3.lib.commonmark.renderer.markdown;
+    exports jdk.m3.lib.commonmark.renderer.text;
+    exports jdk.m3.lib.commonmark.text;
 }

@@ -72,16 +72,16 @@ class PublicNamesTest(unittest.TestCase):
     def test_existing_public_jdk_types_not_renamed(self):
         self.assertFalse(self.issue("src/java.base/share/classes/java/util/M3Existing.java", status="M"))
 
-    def test_new_synexia_recipe_crate_refused(self):
-        self.assertTrue(self.issue("synexia-openrewrite-recipes/crates/catalogue/pom.xml"))
+    def test_new_m3_recipe_crate_refused(self):
+        self.assertTrue(self.issue("m3-openrewrite-recipes/crates/catalogue/pom.xml"))
 
     def test_historical_product_recipe_source_mutation_refused(self):
         self.assertTrue(self.issue(
-            "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/OldRecipe.java", status="M"))
+            "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/OldRecipe.java", status="M"))
 
     def test_new_openrewrite_java_recipe_refused(self):
         self.assertTrue(self.issue(
-            "m3/collections/src/main/java/com/m3/rewrite/OptimizeRecipe.java",
+            "m3/collections/src/main/java/jdk/m3/rewrite/OptimizeRecipe.java",
             "class OptimizeRecipe {}"))
 
     def test_new_openrewrite_yaml_descriptor_refused(self):
@@ -128,7 +128,7 @@ class PublicNamesTest(unittest.TestCase):
         self.assertTrue(self.issue(filename, content.replace("\tPENDING\n", "")))
 
     def test_exact_source_borrow_tsv_version_is_checked(self):
-        filename = "m3/synexia-import/current-full-borrow/string-source-observation-v3.tsv"
+        filename = "m3/m3-import/current-full-borrow/string-source-observation-v3.tsv"
         data = ("schema\ttarget_path\tpredecessor_git_blob\n"
                 "M3JDK21_STRING_SOURCE_OBSERVATION_V3\t"
                 "src/java.base/share/classes/java/lang/M3String.java\tbefore\n")
@@ -146,7 +146,7 @@ class PublicNamesTest(unittest.TestCase):
         self.assertTrue(self.issue(filename, data.replace(
             "src/java.base/share/classes/java/lang/M3String.java",
             "src/java.base/share/native/libjava/Other.c")))
-        successor = "m3/synexia-import/current-full-borrow/string-target-successor-v4.tsv"
+        successor = "m3/m3-import/current-full-borrow/string-target-successor-v4.tsv"
         self.assertFalse(self.issue(successor, data.replace(
             "SOURCE_OBSERVATION_V3", "TARGET_SUCCESSOR_V4")))
 

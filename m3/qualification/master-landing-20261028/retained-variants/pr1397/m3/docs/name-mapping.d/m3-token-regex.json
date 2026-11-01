@@ -3,14 +3,14 @@
   "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf (TOKEN-REGEX, scaffold-first).",
   "mappings": [
     {
-      "source": "com.synexia.mindex.language.IndexedTokens (Synexia branch m3/m3string-token-regex-v1-20261018 73a8ac29f453, no PR; not on develop pin 11c94feb1815)",
+      "source": "jdk.internal.m3.mindex.language.IndexedTokens (Synexia branch m3/m3string-token-regex-v1-20261018 73a8ac29f453, no PR; not on develop pin 11c94feb1815)",
       "source_commit": "73a8ac29f453",
       "target": "jdk.internal.mindex.M3TokenIndex",
       "status": "scaffold: lanes, validation, trivia view and span rules implemented; G7 PASS_WINDOWS",
       "target_rule": "token occurrence lanes kind/lexeme/start/end/flags/binding + attribute columns; no spelling store; LEXICONS word-id lanes as the plain-text source"
     },
     {
-      "source": "com.synexia.mindex.language.MIndexTokenRegex (same branch, no PR)",
+      "source": "jdk.internal.m3.mindex.language.MIndexTokenRegex (same branch, no PR)",
       "source_commit": "73a8ac29f453",
       "target": "jdk.internal.mindex.M3TokenPattern + jdk.internal.mindex.M3TokenMatcher",
       "status": "scaffold: parser and AST implemented from the T-Rex grammar spec; match bodies M3NotYetReceived until the donor PR merges",
@@ -24,7 +24,7 @@
       "target_rule": "cache key (pattern root, flags, canonical-store generation); occurrence predicates never cached by spelling"
     },
     {
-      "source": "com.synexia.indexstring.projection.MIndexTaggedRegex (develop 11c94feb1815, blob 811b429f)",
+      "source": "jdk.internal.m3.indexstring.projection.MIndexTaggedRegex (develop 11c94feb1815, blob 811b429f)",
       "source_commit": "11c94feb1815",
       "target": "jdk.internal.mindex.M3TokenMatcher (captures)",
       "status": "PENDING (M3NotYetReceived): capture registers composed per token",

@@ -15,7 +15,7 @@
     "Map default callbacks, held descriptors and iterator lifecycle",
     "forward/inverse serialized graph; no donor class wire identity claim"
   ],
-  "proposed_target": "m3/collections/implementations/guava/src/main/java/com/m3/collections/guava/M3HashBiMap.java",
+  "proposed_target": "m3/collections/implementations/guava/src/main/java/jdk/m3/collections/guava/M3HashBiMap.java",
   "architecture": "Borrow array donor plus bounded licensed helpers; implement only validated protocol delta",
   "full_guava_completion": false
 }

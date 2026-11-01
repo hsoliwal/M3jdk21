@@ -2,7 +2,7 @@
  * Copyright (c) 2026.
  * SPDX-License-Identifier: GPL-2.0-only WITH Classpath-exception-2.0
  *
- * M3JDK21 internal immutable storage. Independently authored implementation.
+ * M3JDK 21 internal immutable storage. Independently authored implementation.
  */
 package jdk.internal.m3;
 

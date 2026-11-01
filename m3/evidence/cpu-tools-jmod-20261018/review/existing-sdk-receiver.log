@@ -13,9 +13,9 @@ FAIL: test_exact_qualified_successors_and_drift_refusal (__main__.SdkReceiverTes
 Traceback (most recent call last):
   File "/workspace/scratch/f4826e049195/M3jdk21/m3/tooling/jmod-recipes/tools/test_verify_sdk_receiver.py", line 82, in test_exact_qualified_successors_and_drift_refusal
     self.assertEqual(successor, git_blob_sha1(payload))
-AssertionError: '83b1483c6c5e6a39c519f82af603382914eed3e5' != '86b62fddc148b372145e807438dd7cd018acca0f'
+AssertionError: '83b1483c6c5e6a39c519f82af603382914eed3e5' != '1b20225a72caf20a7c02f9ef1ca2cb068294bff6'
 - 83b1483c6c5e6a39c519f82af603382914eed3e5
-+ 86b62fddc148b372145e807438dd7cd018acca0f
++ 1b20225a72caf20a7c02f9ef1ca2cb068294bff6
 
 
 ----------------------------------------------------------------------

@@ -34,23 +34,23 @@ file to add to this directory's denominator.
 
 | Physical source at the current pin | Exact Git blob SHA | Contract reference and review origin |
 | --- | --- | --- |
-| [JoinedM3StringPiece.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/JoinedM3StringPiece.java) | `cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597` | [Existing six-owner storage review](m3-packages.md#textstorage-api-contracts) |
-| [LexiconTool.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/LexiconTool.java) | `32ee9e317d9c2a464958b0cfe256b457edb2f295` | [New complete body/member review](text-projection-reference.md#lexicontool-explicit-file-effects-and-diagnostic-lifetime) |
-| [LocalM3Arena.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/LocalM3Arena.java) | `d82710cd1a49b54d92afcd74cdd903cd009766ba` | [Existing six-owner storage review](m3-packages.md#textstorage-api-contracts) |
-| [LocalM3StringPiece.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/LocalM3StringPiece.java) | `6b745c9472144ad6de01de4d06a533974e558fb1` | [Existing six-owner storage review](m3-packages.md#textstorage-api-contracts) |
-| [M3InstanceIndexPrecompute.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/M3InstanceIndexPrecompute.java) | `e6fd8e4fa71c93d62874886135c7bb703141894b` | [New complete body/member review](text-projection-reference.md#m3instanceindexprecompute-operator-records-and-exact-scope) |
-| [M3LanguageGrammarSupport.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/M3LanguageGrammarSupport.java) | `135a6a0c080603da0f4c095519b7d47315e2b281` | [New complete body/member review](text-projection-reference.md#m3languagegrammarsupport-one-immutable-signal) |
-| [M3LexiconPrecompute.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/M3LexiconPrecompute.java) | `edec2ae3a82bde34159abd9a4d1c670ad59f031f` | [Existing six-owner catalog review](lexicon-catalog-reference.md#m3lexiconprecompute-typed-values) |
-| [M3NumberSpace.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/M3NumberSpace.java) | `ccd577c1b1ec62709882d3ef54db8c5d8a19557b` | [New complete body/member review](text-projection-reference.md#m3numberspace-generated-range-and-explicit-materialization) |
-| [M3StringPiece.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/M3StringPiece.java) | `99cb72623fa6bc2d5426553e04aaf0e5bfa993cc` | [Existing six-owner storage review](m3-packages.md#textstorage-api-contracts) |
-| [SharedLexiconCatalog.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/SharedLexiconCatalog.java) | `aa8cf83bbc8349a2ed5a0a7dad818c2d7240f577` | [Existing six-owner catalog review](lexicon-catalog-reference.md#sharedlexiconcatalog-startup-first-touch-and-close) |
-| [SharedLexiconFamilySidecarCatalog.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/SharedLexiconFamilySidecarCatalog.java) | `e991a6ba84d7074e9bd260cce331d5092e7ad9f5` | [Existing six-owner catalog review](lexicon-catalog-reference.md#five-family-file-sidecars) |
-| [SharedLexiconImage.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/SharedLexiconImage.java) | `7d0dd69b3f92bc6e589eed4024d22686020b421c` | [Existing six-owner storage review](m3-packages.md#sharedlexiconimage-file-and-lifetime-contract) |
-| [SharedLexiconPrecomputeCatalog.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java) | `b952a245b2724140904bb666669c2880ce32cd64` | [Existing six-owner catalog review](lexicon-catalog-reference.md#in-memory-sharedlexiconprecomputecatalog) |
-| [SharedRelatedLexemeCatalog.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/SharedRelatedLexemeCatalog.java) | `182042dfc5115a683449622dcdc6055e916f4e4c` | [Existing six-owner catalog review](lexicon-catalog-reference.md#related-lexemes-direction-and-multiplicity) |
-| [StorageIdentity.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/StorageIdentity.java) | `7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a` | [Existing six-owner storage review](m3-packages.md#textstorage-api-contracts) |
-| [SynexiaLangDexSourceEnvelope.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/SynexiaLangDexSourceEnvelope.java) | `7f9ac5ebfc452aadb869103471e6818339746083` | [New complete body/member review](text-projection-reference.md#synexialangdexsourceenvelope-verification-without-admission) |
-| [SynexiaPrecomputePayload.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/com/m3/text/SynexiaPrecomputePayload.java) | `682e7f2abd59efd2adf30fb039616c61a16aa029` | [Existing six-owner catalog review](lexicon-catalog-reference.md#typed-per-record-payload) |
+| [JoinedM3StringPiece.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java) | `5022e9811ce9391671c794446c7772569cfd369f` | [Existing six-owner storage review](m3-packages.md#textstorage-api-contracts) |
+| [LexiconTool.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/LexiconTool.java) | `daee29e96b6a6b5906b4603358a1ebd03a802337` | [New complete body/member review](text-projection-reference.md#lexicontool-explicit-file-effects-and-diagnostic-lifetime) |
+| [LocalM3Arena.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/LocalM3Arena.java) | `025ce8014cba8a36a9e496bb0a56faef57cf0968` | [Existing six-owner storage review](m3-packages.md#textstorage-api-contracts) |
+| [LocalM3StringPiece.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/LocalM3StringPiece.java) | `387ae5e0c656177f1df663fd5029d4b31ba2fa00` | [Existing six-owner storage review](m3-packages.md#textstorage-api-contracts) |
+| [M3InstanceIndexPrecompute.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/M3InstanceIndexPrecompute.java) | `c4a499d6ef46e38ed5f12b0789683cae53309964` | [New complete body/member review](text-projection-reference.md#m3instanceindexprecompute-operator-records-and-exact-scope) |
+| [M3LanguageGrammarSupport.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/M3LanguageGrammarSupport.java) | `0ac0ecb7d4abe99f5c3b7a21e0099e05a92bb168` | [New complete body/member review](text-projection-reference.md#m3languagegrammarsupport-one-immutable-signal) |
+| [M3LexiconPrecompute.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/M3LexiconPrecompute.java) | `4ea2db8d3b2bfec5f720ef499b8b697186718cb9` | [Existing six-owner catalog review](lexicon-catalog-reference.md#m3lexiconprecompute-typed-values) |
+| [M3NumberSpace.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/M3NumberSpace.java) | `69f517474f58e756f770fc59dc2ea1ab982fbaef` | [New complete body/member review](text-projection-reference.md#m3numberspace-generated-range-and-explicit-materialization) |
+| [M3StringPiece.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/M3StringPiece.java) | `62506fb9b3cff0e6f24e856648528db58c45b92b` | [Existing six-owner storage review](m3-packages.md#textstorage-api-contracts) |
+| [SharedLexiconCatalog.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/SharedLexiconCatalog.java) | `df137d5b2a52e9ad58f276132099b47692720ed2` | [Existing six-owner catalog review](lexicon-catalog-reference.md#sharedlexiconcatalog-startup-first-touch-and-close) |
+| [SharedLexiconFamilySidecarCatalog.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/SharedLexiconFamilySidecarCatalog.java) | `8dd76c1d5911dbf4b4b786098c1223fcdbb57b63` | [Existing six-owner catalog review](lexicon-catalog-reference.md#five-family-file-sidecars) |
+| [SharedLexiconImage.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/SharedLexiconImage.java) | `364eecefcb3822918c849606ddb177c0ceaa30d5` | [Existing six-owner storage review](m3-packages.md#sharedlexiconimage-file-and-lifetime-contract) |
+| [SharedLexiconPrecomputeCatalog.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java) | `ce34ac405c41b3980e558efc688a5ebc1f37b47b` | [Existing six-owner catalog review](lexicon-catalog-reference.md#in-memory-sharedlexiconprecomputecatalog) |
+| [SharedRelatedLexemeCatalog.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java) | `bb8931eeb17563238c92f6c1ee200fb1905595c3` | [Existing six-owner catalog review](lexicon-catalog-reference.md#related-lexemes-direction-and-multiplicity) |
+| [StorageIdentity.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/StorageIdentity.java) | `8cd2ae86bee8f04f0d69709eed12897ff5c6a71c` | [Existing six-owner storage review](m3-packages.md#textstorage-api-contracts) |
+| [SynexiaLangDexSourceEnvelope.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/M3LangDexSourceEnvelope.java) | `b3f2291429429c62825a292bd5b7f618046bed27` | [New complete body/member review](text-projection-reference.md#synexialangdexsourceenvelope-verification-without-admission) |
+| [SynexiaPrecomputePayload.java](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/src/jdk/m3/text/M3PrecomputePayload.java) | `5896894dec303b94847de9755033189e2112010e` | [Existing six-owner catalog review](lexicon-catalog-reference.md#typed-per-record-payload) |
 
 The original source-sampled package inventory stays intact. The accounting here
 advances bounded body-reference coverage from six storage plus six catalog
@@ -80,11 +80,11 @@ distinct from the Git blob identifiers in the routing table.
 
 | Source file | SHA-256 |
 | --- | --- |
-| LexiconTool.java | `8f86470619da33cf79ce3f8c6b99e7b6a4815f1c0053c7a07985a6ea4010563a` |
-| M3NumberSpace.java | `99bc5c5be96dfb4e0db2f5dbc837c568333ffc6853922cee6ba6566130513443` |
-| M3InstanceIndexPrecompute.java | `43af63196141d180c1d256b8420c243d99804ee480b430f31d677e57a87a041c` |
-| M3LanguageGrammarSupport.java | `32e55e0ddc412cbbdb4c3fe22b659fe9660bed914215c92662ccaf00b189b1c7` |
-| SynexiaLangDexSourceEnvelope.java | `90b81d145a795dae62e57afe850ad7d38704fe4fcfad69614ff4cd598eb0a084` |
+| LexiconTool.java | `fb3b3a4db8bb699a326d9e2b1114ed04089400294349f97bde0ce6b73e1aa51c` |
+| M3NumberSpace.java | `6c70f843dca2bc099c99de24fb21987986e6f0ed03a79677ad88f65d27f0273e` |
+| M3InstanceIndexPrecompute.java | `2be8634db1d545bce03ba34cab2569b2adbb869b19544acd2f42bb4e02a7b5f1` |
+| M3LanguageGrammarSupport.java | `f2f6f8dcb6b0a0c91569a9eee0ea199c0e77a24594033534351408b2c8ccfff3` |
+| SynexiaLangDexSourceEnvelope.java | `7093a00bd467cd4a477512eaae58546588e5881a6cf3dd081fdc843c88b7120d` |
 
 ## Build, tests and supporting-source scope
 
@@ -105,15 +105,15 @@ Every entry is **NOT_RUN** in this documentation pass.
 
 | Source under `m3/core/test/` unless noted | Exact Git blob SHA | Review role |
 | --- | --- | --- |
-| [M3NumberSpaceTest.java][NT] | `11ebbe9c9e96508fb4a5520268d49fe5117c2cf3` | Direct number-view/parser assertions |
-| [M3NumberSpaceContractTest.java][NC] | `72fc41be172bfe9bb88c28485e1952e6f6325a43` | Full range and source/target/field-map assertions |
-| [M3NumberSpaceExportFixture.java][NF] | `3390bdce6286788395cf92c2a141afc25ac74c39` | Java-owner TSV producer helper, not in core build test list |
-| [M3InstanceIndexPrecomputeTest.java][IT] | `738e1025367b4aa7ad647691bfd17dfc8d3be5c7` | Operator-proposal construction/lookup/selected rejection assertions |
-| [M3LanguageGrammarSupportTest.java][GT] | `316b8822120b42850dde74921a4b34ba2bb0d6cd` | Sixteen support signals and manifest mapping |
-| [LangDexSourceEnvelopeTest.java][ET] | `e23a36f4fb86d93f98ff4e1571bd3f227413563b` | Wire/receipt fixture and focused rejection cases |
-| [LangDexProjectionReceiverTest.java][PT] | `00cb70ca8b2aa93c903b972269ec810f47b34f18` | Separate synthetic catalog/payload route; not envelope admission |
-| [FoundationTest.java][FT] | `c722aa61a9bc7953d183e1fac20c0155a19dd2dd` | Existing image/storage tests and optional exported catalog path |
-| [m3/runtime-integration/tests/test_m3_number_space_export.py][NP] | `1d20650067803940820354696446ddcfd7cd3ade` | Fixture-driven exporter/verifier orchestration and deterministic output assertions |
+| [M3NumberSpaceTest.java][NT] | `7c6dbeb96a7495cecf95058356a97ce090f6202a` | Direct number-view/parser assertions |
+| [M3NumberSpaceContractTest.java][NC] | `f23f5f62d1b5aa6f66ad1a43ac935af07b3f82d2` | Full range and source/target/field-map assertions |
+| [M3NumberSpaceExportFixture.java][NF] | `4c1981d060e56ec0fc448652cf50b9a50ab0e1ff` | Java-owner TSV producer helper, not in core build test list |
+| [M3InstanceIndexPrecomputeTest.java][IT] | `875cc39d069dbb5095fa8fc1ef9892352200e676` | Operator-proposal construction/lookup/selected rejection assertions |
+| [M3LanguageGrammarSupportTest.java][GT] | `cfbeac6d55cb6866ff98833f971c1f1d4ff016f1` | Sixteen support signals and manifest mapping |
+| [LangDexSourceEnvelopeTest.java][ET] | `7e7a80a03c671886a8b49afd1fc9e97fcfa151b6` | Wire/receipt fixture and focused rejection cases |
+| [LangDexProjectionReceiverTest.java][PT] | `8f56e44a5927309d54d9a82b651b383271218a1f` | Separate synthetic catalog/payload route; not envelope admission |
+| [FoundationTest.java][FT] | `822bb5d6b77ebb166a5cefd8f8507a2b073f17d2` | Existing image/storage tests and optional exported catalog path |
+| [m3/runtime-integration/tests/test_m3_number_space_export.py][NP] | `401f4b281d5c66d8082e1a965fc94c301a5862f7` | Fixture-driven exporter/verifier orchestration and deterministic output assertions |
 
 The complete core listing contains no dedicated LexiconTool test. Its concrete
 callers inspected here are [build.sh][BUILD] and
@@ -167,11 +167,11 @@ No empty search result is used as proof that additional callers cannot exist.
 [PT]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/test/LangDexProjectionReceiverTest.java
 [FT]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/core/test/FoundationTest.java
 [NP]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/runtime-integration/tests/test_m3_number_space_export.py
-[NM]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/synexia-number-target-map.tsv
-[IM]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/synexia-instance-index-contract.tsv
-[SM]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/synexia-source-manifest.tsv
-[FM]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/synexia-precompute-field-map.tsv
-[EX]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/SYNEXIA_EXPORT.md
+[NM]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/m3-number-target-map.tsv
+[IM]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/m3-instance-index-contract.tsv
+[SM]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/m3-source-manifest.tsv
+[FM]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/m3-precompute-field-map.tsv
+[EX]: https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/lexicon/M3_EXPORT.md
 
 
 ## Six-owner member-depth continuation, 15 October 2026

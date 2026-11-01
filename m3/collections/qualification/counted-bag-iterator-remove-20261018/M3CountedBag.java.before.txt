@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  * Generated through the source-sealed Synexia M3 recipe; do not edit output directly.
  */
-package com.m3.collections;
+package jdk.m3.collections;
 
 import java.util.AbstractCollection;
 import java.util.AbstractSet;

@@ -115,7 +115,7 @@
     },
     {
       "path": "m3/vendor/third_party/apiguardian-api/pom.xml",
-      "git_blob": "6538a4c5e7c12f3d51c125e6cad5d6bf0c141279",
+      "git_blob": "70cb82de07e1057ad7142ce64aa341f12acf444f",
       "size": 3323,
       "origin": "pinned_repository_connector"
     },
@@ -6268,8 +6268,8 @@
     },
     {
       "path": "m3/vendor/third_party/apiguardian-api/pom.xml",
-      "git_blob": "6538a4c5e7c12f3d51c125e6cad5d6bf0c141279",
-      "sha256": "0d6c98a7e1d59844d3c64ed1e4c59381c5a46834f2731375a7a6c9642ca62091",
+      "git_blob": "70cb82de07e1057ad7142ce64aa341f12acf444f",
+      "sha256": "e539758ff9c8f9b634d2b111d26b43d575b4329965bb854783c6f59eaa1a3ee1",
       "bytes": 3323
     },
     {

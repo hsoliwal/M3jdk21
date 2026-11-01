@@ -11,8 +11,8 @@
   "ast_leaf_checks": 88828,
   "execution_files": 27,
   "execution_bytes": 98016,
-  "inventory_sha256": "c6f1679f2658baa1da8a675936658c127bc4e013b6465b7b5a2ddbfb643e5b89",
-  "source_gate_sha256": "1ae8053070eb82493478d472be0fcf3877544d2b00e999cf984eac696ee94f87",
+  "inventory_sha256": "4a202eecd620c61d627316a9582a434c937def367150b57e51b97870fe4bb03f",
+  "source_gate_sha256": "67172088fda5233cd07886042b753a6eb378f24b80cb49bf3bfd62da757ad198",
   "literal_bytes_preserved": true,
   "nul_git_stdout": "Lossless JSON string envelope produced by the checker",
   "argfile_names": "Only filenames gain .txt; contents copied literally",
@@ -24,7 +24,7 @@
   "records": [
     {
       "path": "COMMANDS.json",
-      "sha256": "fd9fa818f1cf67779898972fcf79dfd8a166700af6a87e3f6c1417efc93a04a3",
+      "sha256": "55aec97acbf1db11119a83de57e81cad0b926a8918e789a9cac6b8b5c7299cfa",
       "bytes": 3812,
       "source": "/tmp/m3-program-latest-compiletime/COMMANDS.json"
     },
@@ -42,7 +42,7 @@
     },
     {
       "path": "RESULT.json",
-      "sha256": "54064049fff48675814844d13a7283bb3e0b4f96d4a0c5e145af405cb6225425",
+      "sha256": "f90918e96dca7054e679211068f68737e785ee554ac719f21a49c0d2a276d77d",
       "bytes": 25943,
       "source": "/tmp/m3-program-latest-compiletime/RESULT.json"
     },
@@ -120,7 +120,7 @@
     },
     {
       "path": "ports.args.txt",
-      "sha256": "f750793b4b0681636d6156a489a5c8563227267e114741b9013293bb8be29da1",
+      "sha256": "5ef64d7bcf2d91631d708d3b145ccd41be2cc9f5eede0c757cff170eea9f44b6",
       "bytes": 6956,
       "source": "/tmp/m3-program-latest-compiletime/ports.args"
     },
@@ -156,7 +156,7 @@
     },
     {
       "path": "receiving-source-tree.stdout.json",
-      "sha256": "44e340c5bff5f920d6fa135d304a3582e0fe7005ff60fcb62410a86795d61aad",
+      "sha256": "38cea649499997ab76db3331e6e8f8b6b6c75b4bddb81862e78b65f9fa3288cd",
       "bytes": 20561,
       "source": "/tmp/m3-program-latest-compiletime/receiving-source-tree.stdout.json"
     },

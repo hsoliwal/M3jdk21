@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
-import com.m3.tools.cpu.M3ShortestPaths;
-import com.m3.tools.cpu.M3RollbackUnionFind;
+import jdk.m3.tools.cpu.M3ShortestPaths;
+import jdk.m3.tools.cpu.M3RollbackUnionFind;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

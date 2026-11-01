@@ -17,13 +17,13 @@ ROOT = Path(os.environ["M3_PROOF_ROOT"]).resolve()
 ARTIFACTS = ROOT / "artifacts"
 PREFIX = "m3/tooling/state-relation-sparse-c11/"
 WORKFLOW = ".github/workflows/m3-state-relation-sparse-c11.yml"
-SUITE = "com.synexia.rewrite.M3StateRelationSparseC11RecipeTest"
+SUITE = "jdk.internal.m3.rewrite.M3StateRelationSparseC11RecipeTest"
 METHODS = ["bothPartialStatesRoundTripAndReachFixedPointsInBothOrders",
            "everyOwnerRefusesDriftMissingAndDuplicateWithoutMutation",
            "historicalCRefusesBothDirectionsWithoutMutation"]
 ENGINES = {
-    "M3GpuToolJoinRecipe": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-    "M3GpuToolJoinManifest": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+    "M3GpuToolJoinRecipe": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+    "M3GpuToolJoinManifest": "78d5fb68f13872164973a8918cc7886c5f548bca",
 }
 FORBIDDEN = ("originalPrivateModelQualified", "stringDispatchQualified", "fullNativeTargetQualified",
              "windowsQualified", "fullMatchedJdkQualified", "performanceRetentionQualified",
@@ -69,13 +69,13 @@ def write(name, value):
 
 TARGET_C = "src/java.base/share/native/libjava/M3StateRelation.c"
 SOURCE_GIT = {
-    "src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java": "ea904c0962fb976f43b45575f06f46ad198e29a2",
-    "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java": "780c7887aaa6b0892a76f4eee1dcb17086a60289",
-    "src/java.base/share/native/libjava/M3StateRelation.c": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
-    "src/java.base/share/native/libjava/m3_state_relation.h": "18a02e228129827da486edc5b316790af6135310",
+    "src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java": "30359b57b7b553e78355d3672119c685051ec1da",
+    "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java": "d70a152bdedc380ed8b28861ea94ef4c2adbea90",
+    "src/java.base/share/native/libjava/M3StateRelation.c": "89b3127f0f262de3e00ba28a01079a659013dce2",
+    "src/java.base/share/native/libjava/m3_state_relation.h": "0e0c70e60b2cee61c3df31982a26f4251955cb61",
     "m3/compatibility/regex-relations-20261014/M3RelationPortProof.java": "e9a6beee8916cf97d5d4aac2383e7ac2fa8843e0"
 }
-AFTER_GIT = {**SOURCE_GIT, TARGET_C: "106b95061f1adaca160e8fece2ad083f07f0b51b"}
+AFTER_GIT = {**SOURCE_GIT, TARGET_C: "816734640bdce057d1ab787a3a555cd50cf8a43e"}
 
 def owner_plan(original, post, actual):
     lanes = (original, post, actual)
@@ -206,7 +206,7 @@ def report():
     module = runpy.run_path(str(regular(SDK / "verify.py")), run_name="m3_sparse_sdk_reuse")
     pins, pins_data = module["inputs"]()
     if module["SUITES"] != {SUITE: METHODS} or module["RECEIVER_OUTPUTS"] != {
-            TARGET_C: "4c453d51223c3223f07fb88b39e1c1b6ed9891de8157d32a63990a9a4488ece9"}:
+            TARGET_C: "9cf05ae88cdde947d5c62001e2025a64a094531bbd727f51deb2e62b57636c60"}:
         raise RuntimeError("exact three-method one-C recipe contract required")
     expected_custody = {row["path"]: row["sha256"] for row in record["receiverOriginalOwners"]
                         if row["path"] != TARGET_C}
@@ -244,7 +244,7 @@ def report():
     if tuple(module["COMPILED_PROVIDERS"]) != expected_providers:
         raise RuntimeError("exact four Java21 source providers required")
     for name in expected_providers:
-        path = regular(SDK / ("target/classes/com/synexia/rewrite/" + name + ".class"))
+        path = regular(SDK / ("target/classes/jdk/internal/m3/rewrite/" + name + ".class"))
         raw = path.read_bytes()
         item = sdk["compiledProviders"][name]
         if (len(raw) <= 8 or raw[:4] != b"\xca\xfe\xba\xbe" or int.from_bytes(raw[6:8], "big") != 65
@@ -363,7 +363,7 @@ def report():
         forced = "-DM3_STATE_RELATION_FORCE_POSITIONAL_SCAN"
         if (forced in row["argv"]) != (variant == "portable"):
             raise RuntimeError("actual portable macro command required")
-        native_source = SDK / ("src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/before/"
+        native_source = SDK / ("src/main/resources/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020/before/"
                                + TARGET_C) if variant == "baseline" else SDK / "target/emitted" / TARGET_C
         if str(native_source) not in row["argv"]:
             raise RuntimeError("compile must consume actual declared original/emitted source")
@@ -443,7 +443,7 @@ def report():
     if set(benchmark["sourcesAndObjects"]) != {"baseline","sparse","portable"}:
         raise RuntimeError("exact measured source variants")
     for variant, item in benchmark["sourcesAndObjects"].items():
-        c_source = SDK / ("src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/before/"
+        c_source = SDK / ("src/main/resources/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020/before/"
                           + TARGET_C) if variant == "baseline" else SDK / "target/emitted" / TARGET_C
         object_path = regular(bench_dir / (variant + ".o"))
         if (item["sourceGitBlob"] != blob(regular(c_source).read_bytes())
@@ -465,7 +465,7 @@ def report():
         raise RuntimeError("matched benchmark compiler flags")
     preprocessing_rows, preprocessing_raw = {}, {}
     jdk = Path(execution["tools"]["java"]).parent.parent
-    for variant, c_source in (("original", SDK / ("src/main/resources/com/synexia/rewrite/state-relation-sparse-c11-20261020/before/" + TARGET_C)),
+    for variant, c_source in (("original", SDK / ("src/main/resources/jdk/internal/m3/rewrite/state-relation-sparse-c11-20261020/before/" + TARGET_C)),
                               ("portable", SDK / "target/emitted" / TARGET_C)):
         row = next(row for row in commands if row["label"] == "state-relation-bench-" + variant + "-preprocess")
         expected_argv = [execution["tools"]["gcc"], *benchmark["compilerFlags"],

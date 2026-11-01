@@ -126,7 +126,7 @@ static jlong m3_window_scan_range(JNIEnv *env, jintArray rows, jbyteArray states
 
 }
 
-/* Internal M3JDK21 ABI: retains the original full-remainder semantics. */
+/* Internal M3JDK 21 ABI: retains the original full-remainder semantics. */
 JNIEXPORT jlong JNICALL
 Java_jdk_internal_m3_M3IndexMaskWindow_scanNative(
         JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint first,

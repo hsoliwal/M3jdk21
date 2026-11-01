@@ -115,26 +115,26 @@
     {
       "local_path": "donors/m3/M3ArrayList.java.txt",
       "bytes": 10039,
-      "sha256": "ae1092d66bb27e18c0f435d9dc148bd0f46fbc33f9731d9e2d2194142ccc3d32",
-      "git_blob": "250905f67429fbedfb4d6f652ea6e90a516cb59c"
+      "sha256": "78340d2c41e0ade88474171636a02da07ecae0860c6988acaefac5c1fdf0fa03",
+      "git_blob": "23977d3c314a52e82acadee97daa7d3d659c2601"
     },
     {
       "local_path": "donors/m3/M3IntPriorityQueue.java.txt",
       "bytes": 6371,
-      "sha256": "71f6dcf76eeab67a78c902efbcd3a781931c49477656f84659245c9c8fd75d59",
-      "git_blob": "3ee7233f27105d326832e212b01b8da17142569e"
+      "sha256": "a02d894db12ed3b7141651bbb5301268a2e1219d6d10bc17c12400344b134b80",
+      "git_blob": "7816135483c11e4c898e9ecd79443ac96085fa99"
     },
     {
       "local_path": "donors/m3/M3LinkedList.java.txt",
       "bytes": 10719,
-      "sha256": "1f9a2315db0f9a695402b47a7f6f1e124ed08e186e3460f9ce9757b324bd43c0",
-      "git_blob": "744d1c488b8342c98e49d2cfd3465c0f558b199d"
+      "sha256": "55d9c9e273f302d0e3291bd853d3b198b44a73baeef819089432ff197ae7a3b6",
+      "git_blob": "832c838caf7a37d6f9a10b37505c3e65ed9f6292"
     },
     {
       "local_path": "donors/m3/M3LongPriorityQueue.java.txt",
       "bytes": 6107,
-      "sha256": "d42f4566595b7e95bcc573348ebf7968ebe8b53f7a68a1c8de3a2aeaa7eca04c",
-      "git_blob": "2fb403549f2baf0afe5b04743647c26ebd4cce80"
+      "sha256": "11c4de2e3385518ecc70a245a2942f8a0c05fb2469b6fbede76c7af231bcbb8b",
+      "git_blob": "7ea8b9cd3ebe1d582026a98649d8598c72789cc3"
     },
     {
       "local_path": "donors/m3/M3SlotArrays.java.txt",
@@ -145,8 +145,8 @@
     {
       "local_path": "donors/m3/M3SlotSpliterators.java.txt",
       "bytes": 3512,
-      "sha256": "4ee2b86ea682c64da881d36eb5b4aadc4ba6640389f2adbfdc8dff4d44cf4070",
-      "git_blob": "30cf137538353ac8e91514fff7c5db3903da8819"
+      "sha256": "fe7db5946cb21eecac31dc478899c4864bba09b7b302357868af296ea2e0f554",
+      "git_blob": "dab4d257bf82c8dbdf8fec04e1ac0d84ac7e4a83"
     }
   ],
   "rootBeforeOwnerAdmissionSHA256": "4454ab11d7d65a8a7aa7d6b2e6a2cabf7a9437488fd70e09db97b2941d659b4c",
@@ -159,11 +159,11 @@
   "priorSelectedCoreCommit": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
   "selectedCoreTree": "a493469edd30b3345cc32f608fca19b55b4a378a",
   "currentCoreCustodySHA256": "fde5fca9b6608d022b6fecac5bfc189d934812f9ff721084b7e568f2c2006b56",
-  "currentCoreRuntimeSHA256": "602494cad7e16cbf6c39fa0f1e6ba0a5889e563195b282d05d11572c349abdb5",
+  "currentCoreRuntimeSHA256": "4ba523ad8d2e96254d81d5b6d3587ac2118f9fcf196122b64f1afb14dc26cda1",
   "currentSnapshotProjectionReceipt": {
     "path": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/MASK_PROJECTION_V4.json",
     "bytes": 13270,
-    "sha256": "81fa7bad692b5af77efba651dc201fa0159b5853b21f71bbec2b3cab09b9c1aa"
+    "sha256": "ae92daa318e3e472642b54cd108c5d8356cce584e8db49fd997cb0409c0599ca"
   },
   "historicalScope": "Original qualified129 full owner protocol and prior07ba6e selected130 snapshot receipts remain immutable; current source/native compatibility is separately recorded."
 }

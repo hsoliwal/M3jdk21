@@ -24,13 +24,13 @@
   ],
   "input_sealer_tests": 8,
   "receiver_cases": 9,
-  "sdk_inputs_sha256": "77ee7b358d615f5ad4fb0c1fa5e1e669ca7b259b60ca7dbeed32e4355e464641",
+  "sdk_inputs_sha256": "8f1c3129876308fb534b15eb3cc9f551700880d674bcab03c5bc033404a05ca6",
   "sdk_results_sha256": "d998f5aec0cc01249d674e1c90c2805794356a7c1b26454389c20eb8e282a50e",
-  "receiver_receipt_sha256": "9a93f1111d25e25038f97e1304dbd7e38b124d1be0f4c6679bd67ad8191ed966",
+  "receiver_receipt_sha256": "461e509c4333d7e032c6401f3481203ffb21ca5cd6ef81e5e2f0f8a660191e7e",
   "actual_junit_report_sha256": "69b1277d2b2d40f6f50d7747965ab120743760547759347b8332b3a2a472e990",
   "actual_maven_log_sha256": "97f3a099b69688a1acaab7bcff3a82d29c75ad3daa630f230b120329afc70613",
   "effective_engine_manifest_sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23",
-  "origin_engine_manifest_sha256": "b2e990a09f2c4b7c355b48cc33a72405829fd009f76d1866153aa07225e6684e",
+  "origin_engine_manifest_sha256": "74242eb726eb5d1c5bbdc9fa4ee17c33b4afa1c96bfcddad5dcb1a4b1f4f58cb",
   "execution": "Real Maven/OpenRewrite SDK recipes, followed by isolated serial receiver cases.",
   "product_runtime_behavior_claimed": false
 }

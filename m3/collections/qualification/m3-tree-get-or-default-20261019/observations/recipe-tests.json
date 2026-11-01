@@ -7,7 +7,7 @@
   },
   "suites": [
     {
-      "name": "com.synexia.rewrite.M3TreeMapGetOrDefaultRecipeTest",
+      "name": "jdk.internal.m3.rewrite.M3TreeMapGetOrDefaultRecipeTest",
       "tests": 5,
       "failures": 0,
       "errors": 0,

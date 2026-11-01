@@ -3,24 +3,24 @@
   "files": [
     {
       "bytes": 328312,
-      "git_blob": "3dfd81017130ba33df9b8a73f630d148932b7a39",
+      "git_blob": "7b97f9376dbb885108a112dffb623b22a9821193",
       "origin": "actual OpenRewrite Result afterimage",
       "path": "m3/docs/name-mapping.json",
-      "sha256": "cd154a05fc8f5d40234e35cd30fc0dd7ced0e483bc7e416479758125b159e077"
+      "sha256": "d4f1a513c663906dd4ec498c46864568dbee9866b48b3a1e41f7240a58c04e1c"
     },
     {
       "bytes": 18828,
-      "git_blob": "f700b1f33588b59dc5479e2454ea350bc6b61498",
+      "git_blob": "5765f894e00e150139bf9569190048a028110744",
       "origin": "actual OpenRewrite Result afterimage",
       "path": "m3/docs/jcc-source-handoff.md",
-      "sha256": "261be30cb15a192623c861087985b84c50942c4f8dc61dcc4e1154f995866150"
+      "sha256": "52178015a89e5f1c08ab280725e5fb45a3617fdc9035fdecf793cd3c2b503858"
     },
     {
       "bytes": 255461,
-      "git_blob": "5977a3a9d3dfa25d50c286f26589a076a8ba1967",
+      "git_blob": "73d2b00c9c46145f3081c33b4a5c31236928a803",
       "origin": "actual OpenRewrite Result afterimage",
       "path": "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
-      "sha256": "e2535210d308ffc06b9c54243f31b5bcc55ba8797cf59584eb9cc929b012c7d7"
+      "sha256": "283d44e6e66405165706447446ed5242104ac1e79d33a6ceafc0cbe1a128de09"
     },
     {
       "bytes": 108212,

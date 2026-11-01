@@ -82,7 +82,7 @@ The Java and native commands are the retained source-gated bitmap/histogram comm
 
 The final #12403-engine SDK Results were independently received from the same exact preimages and compared byte-for-byte with every corresponding tested file. This establishes source identity between the executed composed fixture and the final publication outputs. The two newer view-owner blobs and the newer indexed-list owner are never overwritten by older #1412 snapshots.
 
-The independent receiver pins still hold: `M3LongIndexProjection` is Git blob `317136e66200db1d8fc72d47ff9f8cf52b4566b5` and `M3StateMaskArrays` is `06dc86a44df0e962613273011ff7d653f20d6ea9`. The successor preserves those checks.
+The independent receiver pins still hold: `M3LongIndexProjection` is Git blob `09c10e2b4874f70ece8c1e4392a574db652945f7` and `M3StateMaskArrays` is `06dc86a44df0e962613273011ff7d653f20d6ea9`. The successor preserves those checks.
 
 ## Review evidence and remaining gates
 

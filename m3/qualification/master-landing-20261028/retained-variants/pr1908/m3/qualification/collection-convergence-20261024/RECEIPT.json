@@ -19,7 +19,7 @@
     {
       "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
       "preimage_sha256": "6ebdbef74bd512c22fa9503bdd461f0c00c666c4797b7bceafcddcc2c896779e",
-      "postimage_sha256": "0c79f59b111bc1669a626c4a45598b7205319522b0c00c56ef009a8b9ea660e5",
+      "postimage_sha256": "5617cf2586a2c0b4f8ae9f710e86e4f39f4b880a9fb1fe3deadc04a3f6c58fa9",
       "license": "GPL-2.0-only WITH Classpath-exception-2.0"
     },
     {
@@ -30,20 +30,20 @@
     },
     {
       "path": "src/java.base/share/native/libjava/M3IndexMaskWindow.c",
-      "preimage_sha256": "153ec9727301febd6fff24a55877ec549850ebac997366fe25bb04e9b9bee81b",
-      "postimage_sha256": "4a9c0ab3e8d7a0aac0027e8fb4789f768ee5a48b2db18b7a54e2fd543c5c7f91",
+      "preimage_sha256": "dd0f8229d0009ed6b82858c980f2cb4deeb9ade5f4d49d489f4d9cb9c4728e31",
+      "postimage_sha256": "a284d0cc09ca01e2c41b67024ac9fd911e69165abd1bf01246f40499e810f8da",
       "license": "Apache-2.0"
     },
     {
       "path": "test/jdk/java/util/CollectionViews/FilteredCopyOnWriteBulkTest.java",
       "preimage_sha256": "ABSENT",
-      "postimage_sha256": "6563e9bb7017b11a338a93f781bb96a94ce98b00bd3887c3b398a99bfdab6a75",
+      "postimage_sha256": "f76ea9211061da96c3eb307cda9542e5ea553c72998b0b2e84fc7968c8606e5b",
       "license": "GPL-2.0-only WITH Classpath-exception-2.0"
     },
     {
       "path": "test/jdk/java/util/CollectionViews/FilteredIsEmptyDirectTest.java",
       "preimage_sha256": "ABSENT",
-      "postimage_sha256": "0fe6343c88b471507754c96f7f7921e56f9cd4dc70f08b854ca9f4bedb578ba7",
+      "postimage_sha256": "2132b8298b148f9ae35260c0ae4daad57646e8b63613a820a9a93336035766c5",
       "license": "GPL-2.0-only WITH Classpath-exception-2.0"
     },
     {
@@ -61,13 +61,13 @@
     {
       "path": "test/jdk/java/util/CollectionViews/FilteredRepresentativeContractTest.java",
       "preimage_sha256": "ABSENT",
-      "postimage_sha256": "b50da4e43303e37e53435cfc0a8f264a9aded64ebcef7bae9e55ef98a3fbd698",
+      "postimage_sha256": "894d1a62a679fd06497634a624e567446bbc89cae07fad847555389bb6991bbf",
       "license": "GPL-2.0-only WITH Classpath-exception-2.0"
     },
     {
       "path": "test/jdk/java/util/CollectionViews/FilteredSortedSpliteratorMetadataTest.java",
       "preimage_sha256": "ABSENT",
-      "postimage_sha256": "e3d8f4208b2f8d3f0b05f512d39e30e276ad4496632f917376f3ebb8e37957ad",
+      "postimage_sha256": "253432540a994554e635b89ce52059328cbde1d56361bc23d7ce5fcf55b49045",
       "license": "GPL-2.0-only WITH Classpath-exception-2.0"
     },
     {
@@ -79,7 +79,7 @@
     {
       "path": "test/jdk/jdk/internal/m3/M3MaskCollectionViewIntegrationTest.java",
       "preimage_sha256": "ABSENT",
-      "postimage_sha256": "56410d2d889a1a581c83c8d597b449fcfa2a2f4b373ab1e10514041d25d0e3f6",
+      "postimage_sha256": "7b4a25da354a6eb0f5554399e83b16ca90cb5ff2f8d2b3c9f0233016000a625d",
       "license": "Apache-2.0"
     },
     {

@@ -103,15 +103,15 @@ def main():
         objects = []
         for name, owner in rows:
             obj = OUT / 'native' / (name + '.o')
-            run(cc + ['-fPIC', '-include', OUT / 'headers' / ('com_m3_collections_' + owner + '.h'),
+            run(cc + ['-fPIC', '-include', OUT / 'headers' / ('jdk_m3_collections_' + owner + '.h'),
                       '-c', native / name, '-o', obj])
             objects.append(obj)
         run(cc + ['-shared', *objects, '-o', OUT / 'native' / ('lib' + library + '.so')])
     # Existing navigation fixture has its own test-only JNI ABI; keep it out of the product library.
     run([JAVA / 'bin/javac', '--release', '21', '-Xlint:all,-module', '-Werror',
          '-cp', OUT / 'classes', '-h', OUT / 'headers', '-d', OUT / 'fixture-classes',
-         MODULE / 'src/test/java/com/m3/collections/M3BitLaneJumpProof.java'])
-    run(cc + ['-shared', '-fPIC', '-include', OUT / 'headers/com_m3_collections_M3BitLaneJumpProof.h',
+         MODULE / 'src/test/java/jdk/m3/collections/M3BitLaneJumpProof.java'])
+    run(cc + ['-shared', '-fPIC', '-include', OUT / 'headers/jdk_m3_collections_M3BitLaneJumpProof.h',
               MODULE / 'src/test/native/m3_bitlane_jump_jni.c', '-o',
               OUT / 'native/libm3_bitlane_jump_test.so'])
     for fixture in ('spans', 'regions'):
@@ -136,7 +136,7 @@ def main():
         expected_classes = {str(p.relative_to(OUT / 'classes')) for p in (OUT / 'classes').rglob('*.class')}
         actual_classes = {name for name in archive.namelist() if name.endswith('.class')}
         if expected_classes != actual_classes: raise RuntimeError('Packaged class inventory differs from fresh compilation')
-        for name in ('LICENSE', 'NOTICE', 'provenance.json', 'synexia-donation.json', 'name-mapping.json', 'SYNEXIA-DONATION-NOTICE.txt'):
+        for name in ('LICENSE', 'NOTICE', 'provenance.json', 'm3-donation.json', 'name-mapping.json', 'M3-DONATION-NOTICE.txt'):
             if archive.read('META-INF/' + name) != (MODULE / name).read_bytes():
                 raise RuntimeError('Packaged module legal/provenance bytes differ: ' + name)
     runtime_modules = subprocess.check_output([JAVA / 'bin/jdeps', '--print-module-deps', jar], text=True).strip()
@@ -160,9 +160,9 @@ def main():
                  ('M3SignalDimensionsNativeContract', []),
                  ('M3ResidencyStateMaskProof', ['native']),
                  ('M3BitLaneJumpProof', [str(OUT / 'native/libm3_bitlane_jump_test.so')])]
-    for name, args in contracts: run(java + ['com.m3.collections.' + name, *args])
+    for name, args in contracts: run(java + ['jdk.m3.collections.' + name, *args])
     run([JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp,
-         'com.m3.collections.M3BudgetedMaskWindowContract', '--missing'])
+         'jdk.m3.collections.M3BudgetedMaskWindowContract', '--missing'])
     native_fixtures = [MODULE / 'src/test/native' / name for name in
                        ('m3_mask_window_spans.c', 'm3_mask_window_regions.c', 'm3_bitlane_jump_jni.c')]
     proof = {'status': 'PASS_OWNING_COLLECTION_JAVA_AND_JNI', 'head_sha': head,

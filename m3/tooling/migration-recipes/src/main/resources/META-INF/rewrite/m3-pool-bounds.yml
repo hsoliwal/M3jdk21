@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.PoolBounds
+name: jdk.internal.m3.PoolBounds
 displayName: M3JDK21 string pool bounds with back-pressure and flat refusal
 description: >-
   M3StringPool caps the native bytes its VM-local scalar lane retains (-Dm3.string.pool.maxBytes,
@@ -14,7 +14,7 @@ description: >-
   text step: String.java (Javadoc the pinned Java parser cannot parse). Stacks on crate
   m3-equality-gates (its postimages are these preimages).
 recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: m3-pool-bounds
-  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedTextSnapshotRecipe:
       crateName: m3-pool-bounds

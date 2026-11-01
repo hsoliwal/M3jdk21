@@ -7,13 +7,13 @@ on:
     paths:
       - '.github/workflows/m3-hash-pinned-target-paths.yml'
       - 'm3/tooling/hash-pinned-target-paths/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectIndexSnapshot.java.txt'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexSelfTest.java.txt'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexTest.java.txt'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotStore28.java.txt'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/manifest.tsv'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectIndexSnapshot.java.txt'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexSelfTest.java.txt'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexTest.java.txt'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotStore28.java.txt'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/manifest.tsv'
 permissions:
   contents: read
 concurrency:
@@ -96,13 +96,13 @@ jobs:
             /.gitattributes
             /.github/workflows/m3-hash-pinned-target-paths.yml
             /m3/tooling/hash-pinned-target-paths/
-            /m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java
-            /m3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java
-            /m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectIndexSnapshot.java.txt
-            /m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexSelfTest.java.txt
-            /m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexTest.java.txt
-            /m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotStore28.java.txt
-            /m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/manifest.tsv
+            /m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java
+            /m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java
+            /m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectIndexSnapshot.java.txt
+            /m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexSelfTest.java.txt
+            /m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotIndexTest.java.txt
+            /m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/M3ObjectSlotStore28.java.txt
+            /m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/manifest.tsv
       - name: Qualify canonical accessor recipe and exact owning inputs
         shell: bash
         env:
@@ -354,8 +354,8 @@ jobs:
                   external+=sorted((sdk/"target/surefire-reports").glob("TEST-*.xml"))
                   external+=sorted((sdk/"target/surefire-reports").glob("*.txt"))
                   external+=[sdk/"target/sdk-receipt.json",sdk/"target/recipe-test-counters.json",qualifier.parent/"source-binding.json"]
-                  external+=[sdk/"target/emitted/m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",sdk/"target/inverse-emitted/m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"]
-                  aliases={sdk/"target/emitted/m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java":"emitted-product-provider.java",sdk/"target/inverse-emitted/m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java":"emitted-inverse-provider.java"}
+                  external+=[sdk/"target/emitted/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",sdk/"target/inverse-emitted/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java"]
+                  aliases={sdk/"target/emitted/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java":"emitted-product-provider.java",sdk/"target/inverse-emitted/m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java":"emitted-inverse-provider.java"}
                   child=runpy.run_path(str(authority/"qualify.py"),run_name="m3_authority_artifact_contract")
                   new_sources=child["artifact_sources"]()
                   aliases.update(dict(new_sources))
@@ -380,7 +380,7 @@ jobs:
                   planned=sum(p.stat().st_size for p,d in copies)+len(tail)+len(commands)
                   if len(by_name)+3>64 or payload+1024**2>8*1024**2 or before+planned+1024**2>496*1024**2:raise RuntimeError("complete artifact payload exceeds closed budget")
                   if completed:
-                      api_suite="com.synexia.rewrite.M3HashPinnedTargetPathsCompatRecipeTest"
+                      api_suite="jdk.internal.m3.rewrite.M3HashPinnedTargetPathsCompatRecipeTest"
                       original_members={"binding.log","toolchain.log","sdk-inputs.log","sdk-maven.log","sdk-reports.log","sdk-report.log","binding-receipt.json","qualification-receipt.json","storage-guard-receipt.json","hosted-receipt.json","TEST-"+api_suite+".xml",api_suite+".txt","sdk-receipt.json","recipe-test-counters.json","source-binding.json","emitted-product-provider.java","emitted-inverse-provider.java"}
                       added_logs={name+".log" for name in ("authority-binding","scope-inputs","manifest-inputs","scope-maven","scope-reports","manifest-maven","manifest-reports","authority-report")}
                       expected_members=original_members|added_logs|{"authority-binding-receipt.json","authority-qualification-receipt.json"}|{name for path,name in new_sources}

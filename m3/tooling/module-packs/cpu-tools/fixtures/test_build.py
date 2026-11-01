@@ -84,9 +84,9 @@ class BuildContracts(unittest.TestCase):
                 stale.unlink()
 
     def test_linked_release_collision_refuses_even_without_jmod_file(self):
-        jdk = self.source_jdk("java.base jdk.compiler com.m3.tools.cpu")
-        self.assertFalse((jdk / "jmods/com.m3.tools.cpu.jmod").exists())
-        with self.assertRaisesRegex(ValueError, "com.m3.tools.cpu"):
+        jdk = self.source_jdk("java.base jdk.compiler jdk.m3.tools.cpu")
+        self.assertFalse((jdk / "jmods/jdk.m3.tools.cpu.jmod").exists())
+        with self.assertRaisesRegex(ValueError, "jdk.m3.tools.cpu"):
             build.source_jdk_modules(jdk)
 
     def test_source_jdk_missing_or_ambiguous_module_inventory_refuses(self):

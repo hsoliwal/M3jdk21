@@ -19,16 +19,16 @@ RECEIPT_REL = ("m3/collections/interop/qualification/"
                "current-source-successors-20261026/CURRENT_TEST_SUCCESSIONS.tsv")
 V2_REL = ("m3/collections/interop/qualification/"
           "current-census-superset-20261024/verify_superset_v2.py")
-JAVA_BASE = SOURCE_PREFIX + "test/java/com/m3/collections/interop/"
+JAVA_BASE = SOURCE_PREFIX + "test/java/jdk/m3/collections/interop/"
 STATUS = "SOURCE_ONLY_PENDING_FULL_JUNIT"
-MERGE_RECIPE = "com.synexia.m3.InteropStableMergeAndFactoryCensus"
-SPRING_RECIPE = "com.synexia.rewrite.M3SpringArrayOracle20261026"
+MERGE_RECIPE = "jdk.internal.m3.InteropStableMergeAndFactoryCensus"
+SPRING_RECIPE = "jdk.internal.m3.rewrite.M3SpringArrayOracle20261026"
 EXPECTED = (
     (JAVA_BASE + "M3FiveLibraryArrayificationTest.java",
-     "6d31a53eb94af7c3cfe08ce126ce1be1f8d7da1b09150bd72a12c602d3ab3565",
-     "e220622405432368d2c46b32f9f1c197913e7c0a",
-     "76944bcd035774a87852940ad1d314db1013ae3a189bbda8f847356a62449f1d",
-     "d163cdc9ebbf7c023df16c423cc094f01987e4bd", MERGE_RECIPE, STATUS),
+     "61ae67aeedc4a4a42f81f1beefc23ed43aa0c2288b6301fd7bfc1eea023fdf87",
+     "6d04f30ff77297201797c079125ebc0107906e63",
+     "5d44bfddbd702464f2cbdb48a01a5552accff2f0b4bb968770930b45d9dcf2e8",
+     "f2b5c032c52c49a98fc09e431f1b6863eb80aaa0", MERGE_RECIPE, STATUS),
     (JAVA_BASE + "M3LibraryClosureTest.java",
      "5ece9a369bcf5a223cb163ed0857534600fcd53bcc881f239956be15a4200f40",
      "141661a24e962506a2f1f87106e7d7eab15e5d7c",
@@ -37,24 +37,24 @@ EXPECTED = (
     (JAVA_BASE + "M3SdkFamiliesTest.java",
      "9b84b5d1c5d8b6f40e125cd458f5fa737e0cb84d742359105e332643929701fc",
      "dedf938dc8a292ae43b89d11666219a4e3f8487d",
-     "d41be8f32b9ad6eca1a5e5b30ed8f556a28aaf837e1d01b8e61e5763bd376720",
-     "ff4754059d05d2c9a40b93c05867024639b1bf6d", MERGE_RECIPE, STATUS),
+     "3ad80486a3400dfe614eb443127c51381e6b07ec51981a6b8beda6cf53302b77",
+     "4cfdcb18cb8417c607bb582069bfdc07975d9998", MERGE_RECIPE, STATUS),
     (JAVA_BASE + "M3SpringArrayContractTest.java",
      "a8b537381b64899e263eb481a95a83ae40a9b7ed8109fe401f2329c750419267",
      "978dc2e1b8468ae3178a35adc478267d34723b4e",
-     "3282d28c0bf4272e8a426baccfbca383a89a05fae7b624e1a2340d1864135dd1",
-     "dc2090392322557e021d7b27508dc95680f6e601", SPRING_RECIPE, STATUS),
+     "ceb7961ae103e752b5d81701bf1db574c50cf9281b45f4081946b95fbb44f531",
+     "ab03efb6dc1e0fc4c531bfdf89bcca1f2627506b", SPRING_RECIPE, STATUS),
     (JAVA_BASE + "M3SpringCaseInsensitiveSdkFactoryTest.java",
      "4ae299915a2d3a0d0b93ed74943d03f9298134f5b54878c6533ab8f4f3ad1d30",
      "f2927f1a920cc3628ac09d1fe3202628912adff1",
-     "42530ed135329f1160693b9d998bbb86f9be8b1cca29ccb2af07d9eaa25d1fba",
-     "530bbe2f3def29336a71c0d9030c8d541055641e", MERGE_RECIPE, STATUS),
+     "d49de83f9c56021165434e7bfdfa3267f5d7010867135aa36022c7eca682f702",
+     "4cec6718324f96d96ff5e183087569d8503758ce", MERGE_RECIPE, STATUS),
 )
 # Interop sources added after the predecessor, admitted by exact git blob: the two provider tests master received
 # through superset #2166 (2026-10-30). Any other addition, any deletion, or another blob for these paths still fails.
 ADMITTED_ADDITIONS = {
-    JAVA_BASE + "M3Flat3MapProviderTest.java": "802c3479c69e22d92ede9bab4213af16e128eafc",
-    JAVA_BASE + "M3FrozenLongSetProviderTest.java": "95a0cadb931759e68fe893f1451c92583ff3b426",
+    JAVA_BASE + "M3Flat3MapProviderTest.java": "254d85294724b1cdcaa26a2c526da0fa17d623be",
+    JAVA_BASE + "M3FrozenLongSetProviderTest.java": "4d88d4e3912ab9a5528f8c81a836d501bcf88511",
 }
 HEX40 = re.compile(r"[0-9a-f]{40}\Z")
 HEX64 = re.compile(r"[0-9a-f]{64}\Z")

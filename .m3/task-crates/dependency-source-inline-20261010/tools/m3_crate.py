@@ -31,8 +31,8 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--repo", type=Path, required=True, help="M3jdk21 worktree")
     ap.add_argument("--c6", type=Path, required=True)
-    ap.add_argument("--synexia-crate", type=Path, required=True)
-    ap.add_argument("--synexia-pr", default="(pending)")
+    ap.add_argument("--m3-crate", type=Path, required=True)
+    ap.add_argument("--m3-pr", default="(pending)")
     ap.add_argument("--baseline", required=True)
     ap.add_argument("--consumers", type=Path, required=True, help="file listing the consumer pom paths (repo-relative)")
     args = ap.parse_args()
@@ -63,8 +63,8 @@ def main() -> int:
         shutil.copyfile(args.c6 / "SHADE_CLOSURE.tsv", crate / "SHADE_CLOSURE.tsv")
     for n in ("gen_third_party.py", "build_modules.py", "switch_consumers.py", "m3_crate.py", "ModuleCompile.java", "make_lock2.py", "ApiSurface.java", "api_gate.py", "pom_classpath.py", "finalize.sh", "shade_pom.py", "shade_closure.py"):
         shutil.copyfile(args.c6 / n, crate / "tools" / n)
-    # synexia-side evidence pointers (not copied: the crate in the Synexia PR is canonical)
-    syn_ev = json.loads((args.synexia_crate / "evidence.json").read_text(encoding="utf-8"))
+    # m3-side evidence pointers (not copied: the crate in the Synexia PR is canonical)
+    syn_ev = json.loads((args.m3_crate / "evidence.json").read_text(encoding="utf-8"))
     # downstream dependency ledger: every non-plugin third-party dependency of the consumer poms
     by_coord = {}
     for m in mods:
@@ -158,8 +158,8 @@ def main() -> int:
     (args.repo / "m3" / "vendor" / "third_party" / ".gitattributes").write_text(
         "# Vendored upstream sources are byte-for-byte (PROVENANCE.json pins each SHA-256); whitespace is upstream's.\n* -whitespace\n",
         encoding="utf-8", newline="\n")
-    evidence = {"schema": "m3.dependency-source-inline.receiver.v1", "generated": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "baseline": args.baseline, "synexia_pr": args.synexia_pr,
-                "synexia_crate": {"path": ".m3/task-crates/dependency-source-inline-20261010 (hsoliwal/com.synexia)", "evidence_sha256": sha256(args.synexia_crate / "evidence.json"), "counts": syn_ev["counts"]},
+    evidence = {"schema": "m3.dependency-source-inline.receiver.v1", "generated": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "baseline": args.baseline, "m3_pr": args.m3_pr,
+                "m3_crate": {"path": ".m3/task-crates/dependency-source-inline-20261010 (hsoliwal/com.synexia)", "evidence_sha256": sha256(args.m3_crate / "evidence.json"), "counts": syn_ev["counts"]},
                 "user_directives": ["pull all thriepart code and inline ands refactor it", "inline and refactor all third party code ... jdk cannot have downstream dependency"], "counts": counts}
     (crate / "evidence.json").write_text(json.dumps(evidence, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
     verify = '''#!/usr/bin/env python3
@@ -206,7 +206,7 @@ if __name__ == "__main__":
 User directives (2026-10-10/11): "pull all thriepart code and inline ands refactor it", "inline and refactor all
 third party code ... jdk cannot have downstream dependency", "commit to github using pr".
 
-The Synexia crate (`.m3/task-crates/dependency-source-inline-20261010` in hsoliwal/com.synexia, PR {args.synexia_pr})
+The Synexia crate (`.m3/task-crates/dependency-source-inline-20261010` in hsoliwal/com.synexia, PR {args.m3_pr})
 is canonical: inventories, locks, donor-superset receipts, FOSS ledger, the CPU atomize/patternize projection.
 This receiver vendors every third-party artifact the M3jdk21 build-time tooling resolves, including the complete
 OpenRewrite 8.17.1 runtime closure, into `m3/vendor/third_party/` ({counts["modules"]} modules, `<version>{SUFFIX}`,
@@ -225,7 +225,7 @@ published sources jars omit (SPI registrations, jar-level legal files, build-fil
 `src/**` (GPLv2+CPE); the JDK runtime itself has no third-party dependency.
 
 Shaded jar (maven-shade-plugin): `m3/vendor/third_party/m3-tooling-shaded` merges the vendored OpenRewrite stack into one
-artifact, `com.m3.vendor:m3-tooling-third-party:8.17.1-m3-shaded-1`, built only from in-repo source modules. It merges
+artifact, `jdk.m3.vendor:m3-tooling-third-party:8.17.1-m3-shaded-1`, built only from in-repo source modules. It merges
 services and legal texts, strips jar signatures, and applies no relocation (OpenRewrite resolves recipes and Jackson
 type ids by class name). `SHADE_CLOSURE.tsv` proves every merged artifact is a vendored source module.
 

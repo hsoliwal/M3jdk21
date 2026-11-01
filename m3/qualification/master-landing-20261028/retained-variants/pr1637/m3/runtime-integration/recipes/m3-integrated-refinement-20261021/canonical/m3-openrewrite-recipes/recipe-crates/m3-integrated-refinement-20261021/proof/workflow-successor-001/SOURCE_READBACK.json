@@ -1,0 +1,256 @@
+{
+  "schema": "M3_SUCCESSOR_SOURCE_COMPARISON/1",
+  "scope": "SDK002 versus SDK003 emitted source readback, not a rerun of receiving runtime gates",
+  "changed": [
+    {
+      "path": ".github/workflows/m3-eclipse-framework-forward-20261017.yml",
+      "before_sha256": "73727306149bdfb0836857638d0e0f3527cf967bf9c0982f67a27a5d22ef1918",
+      "after_sha256": "c64fe14c50aaa5f931c39749152455b9f789e3df17944063ef0293e54cf92d09"
+    }
+  ],
+  "unchanged": [
+    {
+      "path": ".github/workflows/m3-collections.yml",
+      "before_sha256": "871d309a9e061205c1c6d3deff63568dfeac69155b89fc906ce32a482e8ea947",
+      "after_sha256": "871d309a9e061205c1c6d3deff63568dfeac69155b89fc906ce32a482e8ea947"
+    },
+    {
+      "path": ".github/workflows/m3-object-progress-candidate.yml",
+      "before_sha256": "56dda91dd9934451a5501035e3b4b666626ecd23550dfe33c094dc282045b91d",
+      "after_sha256": "56dda91dd9934451a5501035e3b4b666626ecd23550dfe33c094dc282045b91d"
+    },
+    {
+      "path": "m3/collections/algorithm-catalog/masked-sort-fusion-20261021.tsv",
+      "before_sha256": "ea4470322312aff688188a2c02f628851f3c858204f0cc7801b0c5c3abf98f79",
+      "after_sha256": "ea4470322312aff688188a2c02f628851f3c858204f0cc7801b0c5c3abf98f79"
+    },
+    {
+      "path": "m3/collections/algorithm-catalog/resource-change-20261021.tsv",
+      "before_sha256": "2172590fb288c1d8a96aad4f544f96f59ea8f25b9d491869bb2353c4cd21b836",
+      "after_sha256": "2172590fb288c1d8a96aad4f544f96f59ea8f25b9d491869bb2353c4cd21b836"
+    },
+    {
+      "path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
+      "before_sha256": "ff4856bf3d68c63a059b7700631543a453fc5d7552efdcfb80ac3b7e4bd4dae1",
+      "after_sha256": "ff4856bf3d68c63a059b7700631543a453fc5d7552efdcfb80ac3b7e4bd4dae1"
+    },
+    {
+      "path": "m3/collections/qualification/masked-sort-fusion-20261021/README.md",
+      "before_sha256": "f5f513a0f65e2847767e65766daa39b3b5b33b88ff8376faf1248df01f7e224d",
+      "after_sha256": "f5f513a0f65e2847767e65766daa39b3b5b33b88ff8376faf1248df01f7e224d"
+    },
+    {
+      "path": "m3/collections/qualification/masked-sort-fusion-20261021/SOURCE_IDENTITY.json",
+      "before_sha256": "9d798af724646d706d7260291622221756503ad46f8ba76e0fc8b30f02b62272",
+      "after_sha256": "9d798af724646d706d7260291622221756503ad46f8ba76e0fc8b30f02b62272"
+    },
+    {
+      "path": "m3/collections/qualification/masked-sort-fusion-20261021/src/test/java/com/m3/collections/M3CollectionSurfaceProbe.java",
+      "before_sha256": "7ed233a90b497b9d3fb508430526dfa9aee5d4b82b8976de841fd33717cab77b",
+      "after_sha256": "7ed233a90b497b9d3fb508430526dfa9aee5d4b82b8976de841fd33717cab77b"
+    },
+    {
+      "path": "m3/collections/qualification/masked-sort-fusion-20261021/src/test/java/com/m3/collections/M3MaskedSortAllocationProbe.java",
+      "before_sha256": "0a5b583a832e88b2f078d40f01dc4542831a0203f80b985dbedf89e3a3e17e85",
+      "after_sha256": "0a5b583a832e88b2f078d40f01dc4542831a0203f80b985dbedf89e3a3e17e85"
+    },
+    {
+      "path": "m3/collections/qualification/masked-sort-fusion-20261021/verify.py",
+      "before_sha256": "ccb96655df8458c0bda1c5d8b12c7b61d8dc00ea6b74b89469f7f32ad4726463",
+      "after_sha256": "ccb96655df8458c0bda1c5d8b12c7b61d8dc00ea6b74b89469f7f32ad4726463"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java",
+      "before_sha256": "a9b51ed9c0859ef27d308ea89e1b41cf3283dfd54478a36b1d89d6ab66711b0c",
+      "after_sha256": "a9b51ed9c0859ef27d308ea89e1b41cf3283dfd54478a36b1d89d6ab66711b0c"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+      "before_sha256": "dce9da78508449041db8907ef7bc44e9fcee1117bbe91db880e35c26933f9470",
+      "after_sha256": "dce9da78508449041db8907ef7bc44e9fcee1117bbe91db880e35c26933f9470"
+    },
+    {
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java",
+      "before_sha256": "1b304f64d9c5225311112e45d0fbf792d958cfb5b0acd54034b310ac217183d5",
+      "after_sha256": "1b304f64d9c5225311112e45d0fbf792d958cfb5b0acd54034b310ac217183d5"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredEndpointRestorationContract.java",
+      "before_sha256": "a1cf85feec6621af519dc03d86389945527f7c6544947a28ce49ac2328db8773",
+      "after_sha256": "a1cf85feec6621af519dc03d86389945527f7c6544947a28ce49ac2328db8773"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredEndpointRestorationTest.java",
+      "before_sha256": "294b4a465a3189f8115210b626a9a44dcb19e53f6e73ddf98395bdc13a11a488",
+      "after_sha256": "294b4a465a3189f8115210b626a9a44dcb19e53f6e73ddf98395bdc13a11a488"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3MaskedSortFusionContract.java",
+      "before_sha256": "998bc0564c810b309a3e50959eff492ba34005d136d6fa241cdddf18edba2556",
+      "after_sha256": "998bc0564c810b309a3e50959eff492ba34005d136d6fa241cdddf18edba2556"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3MaskedSortFusionTest.java",
+      "before_sha256": "875ae162364ad9ea588c5224543115177b0dc30d6b20cb44eb0fa20d17022647",
+      "after_sha256": "875ae162364ad9ea588c5224543115177b0dc30d6b20cb44eb0fa20d17022647"
+    },
+    {
+      "path": "m3/eclipse/core-runtime/algorithm-catalog/jobs-executor-20261021.tsv",
+      "before_sha256": "097aa0453736d6b3d13272a5d12e3562a25ec26cc56a5154cbc01195a0cb2ef2",
+      "after_sha256": "097aa0453736d6b3d13272a5d12e3562a25ec26cc56a5154cbc01195a0cb2ef2"
+    },
+    {
+      "path": "m3/eclipse/core-runtime/qualification/M3_ECLIPSE_JOBS_20261021.md",
+      "before_sha256": "b7c7c07a300ed7e2d83aacdc48c9af30eaf89e1c4d61a2bd42d32ab316f3cadd",
+      "after_sha256": "b7c7c07a300ed7e2d83aacdc48c9af30eaf89e1c4d61a2bd42d32ab316f3cadd"
+    },
+    {
+      "path": "m3/eclipse/core-runtime/src/main/java/jdk/m3/eclipse/runtime/M3EclipseJobScheduler.java",
+      "before_sha256": "2496bdc6c9f84c59afe0631ef429c8ab5558ff946a0d0b878fa48cb85fb5f60d",
+      "after_sha256": "2496bdc6c9f84c59afe0631ef429c8ab5558ff946a0d0b878fa48cb85fb5f60d"
+    },
+    {
+      "path": "m3/eclipse/core-runtime/src/main/java/jdk/m3/eclipse/runtime/M3EclipseJobs.java",
+      "before_sha256": "0e62436dad1fc1634b2cf9da8882f1e8a4579a0b466f1a40e8a274c33da7dfec",
+      "after_sha256": "0e62436dad1fc1634b2cf9da8882f1e8a4579a0b466f1a40e8a274c33da7dfec"
+    },
+    {
+      "path": "m3/eclipse/core-runtime/src/test/java/jdk/m3/eclipse/runtime/M3EclipseJobSchedulerTest.java",
+      "before_sha256": "a007137e532ba8c75e826e684ab16d78791eb34f54da69af3d4d70a981b7366b",
+      "after_sha256": "a007137e532ba8c75e826e684ab16d78791eb34f54da69af3d4d70a981b7366b"
+    },
+    {
+      "path": "m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseJobsCompatibilityTest.java",
+      "before_sha256": "477ff26a926afec5e678f88814bf0b389198474ce166914259da51b8be6273ab",
+      "after_sha256": "477ff26a926afec5e678f88814bf0b389198474ce166914259da51b8be6273ab"
+    },
+    {
+      "path": "m3/eclipse/core-runtime/src/test/java/jdk/m3/eclipse/runtime/M3EclipseJobsTest.java",
+      "before_sha256": "124bed935425c23286e8dad54048a851b3cfb031b523b140e6bb3bec8e9d27b7",
+      "after_sha256": "124bed935425c23286e8dad54048a851b3cfb031b523b140e6bb3bec8e9d27b7"
+    },
+    {
+      "path": "m3/eclipse/framework/pom.xml",
+      "before_sha256": "15002d6c3b3ab9ca8d8ecb820a260d41ce7d9f1fd04f811fa9af396808ae4f2e",
+      "after_sha256": "15002d6c3b3ab9ca8d8ecb820a260d41ce7d9f1fd04f811fa9af396808ae4f2e"
+    },
+    {
+      "path": "m3/eclipse/framework/qualification/resource-change-20261021/README.md",
+      "before_sha256": "40977e98f0d556cfb2730da4b526ede005412aed774c10adcb29456f865a872b",
+      "after_sha256": "40977e98f0d556cfb2730da4b526ede005412aed774c10adcb29456f865a872b"
+    },
+    {
+      "path": "m3/eclipse/framework/qualification/resource-change-20261021/verify.py",
+      "before_sha256": "5ce3e500b7ab49f944c896833d9877e465bdd84fb46d9cafeb9f8bf7bc13ece0",
+      "after_sha256": "5ce3e500b7ab49f944c896833d9877e465bdd84fb46d9cafeb9f8bf7bc13ece0"
+    },
+    {
+      "path": "m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseBundleSnapshot.java",
+      "before_sha256": "e5116e8dd992cda03ef61d22073378266ebf5ea618806e31ea78732adf2dde0f",
+      "after_sha256": "e5116e8dd992cda03ef61d22073378266ebf5ea618806e31ea78732adf2dde0f"
+    },
+    {
+      "path": "m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseExtensionSnapshot.java",
+      "before_sha256": "725f07a4f2be1dfb2b9334cff3dadf098c35e56f6e76a2cdbbd84cef83995c70",
+      "after_sha256": "725f07a4f2be1dfb2b9334cff3dadf098c35e56f6e76a2cdbbd84cef83995c70"
+    },
+    {
+      "path": "m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseIndexedSnapshot.java",
+      "before_sha256": "8ce80830b0a7fd5c33cd6c03e961c7d9b56efaec2d0e9af8392d3c23a5dfc5d7",
+      "after_sha256": "8ce80830b0a7fd5c33cd6c03e961c7d9b56efaec2d0e9af8392d3c23a5dfc5d7"
+    },
+    {
+      "path": "m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseResourceDeltaSnapshot.java",
+      "before_sha256": "503e90a18d3f645b3effcb5423c265cf1abca313112b455b90240dcabefd3cef",
+      "after_sha256": "503e90a18d3f645b3effcb5423c265cf1abca313112b455b90240dcabefd3cef"
+    },
+    {
+      "path": "m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseRuntimeActivator.java",
+      "before_sha256": "960bf2ac8568de59c57e5dd0b6735d0f1abe821208edb74dcb97812cae8eed38",
+      "after_sha256": "960bf2ac8568de59c57e5dd0b6735d0f1abe821208edb74dcb97812cae8eed38"
+    },
+    {
+      "path": "m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseRuntimeServices.java",
+      "before_sha256": "5c9ef7d3ea9bb6de5df5b809418c5c938949fae5eef338843f385f0d72cc199e",
+      "after_sha256": "5c9ef7d3ea9bb6de5df5b809418c5c938949fae5eef338843f385f0d72cc199e"
+    },
+    {
+      "path": "m3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseDeltaIdentitySetTest.java",
+      "before_sha256": "44192b4116f99413f62dc5bed280d065de8bab0efffdd5441af628d43ade51da",
+      "after_sha256": "44192b4116f99413f62dc5bed280d065de8bab0efffdd5441af628d43ade51da"
+    },
+    {
+      "path": "m3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseFrameworkSnapshotsTest.java",
+      "before_sha256": "2e5a91ddb11677caf49bf344f1d5ac733408803339aed8b9e7f631b48260100f",
+      "after_sha256": "2e5a91ddb11677caf49bf344f1d5ac733408803339aed8b9e7f631b48260100f"
+    },
+    {
+      "path": "m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseResourceChangeSnapshotTest.java",
+      "before_sha256": "8759dbe391f8f20f8dab5051d08862d4ffaf30e2dd4e75b7471411ab30cf9289",
+      "after_sha256": "8759dbe391f8f20f8dab5051d08862d4ffaf30e2dd4e75b7471411ab30cf9289"
+    },
+    {
+      "path": "m3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseRuntimeActivatorTest.java",
+      "before_sha256": "37c8c48defbdda10d719c34eb17aa4ef9a43128ef15e372cb7ea69708133ec9f",
+      "after_sha256": "37c8c48defbdda10d719c34eb17aa4ef9a43128ef15e372cb7ea69708133ec9f"
+    },
+    {
+      "path": "m3/runtime-integration/scheduled-progress-20261021/CATALOGUE.tsv",
+      "before_sha256": "470eb027d5842680262d15c56b17b9a78591e713fc0fc4ba9ac89a0aa50629f0",
+      "after_sha256": "470eb027d5842680262d15c56b17b9a78591e713fc0fc4ba9ac89a0aa50629f0"
+    },
+    {
+      "path": "m3/runtime-integration/scheduled-progress-20261021/README.md",
+      "before_sha256": "a0962ac611bbb03f5c2d5038acf1b1ed2b1871fe7a82fabb3264423c7a819431",
+      "after_sha256": "a0962ac611bbb03f5c2d5038acf1b1ed2b1871fe7a82fabb3264423c7a819431"
+    },
+    {
+      "path": "m3/runtime-integration/scheduled-progress-20261021/SOURCE_PIN.json",
+      "before_sha256": "813d1c2d6e2641673fd741a1b1231c7b34b20c411439c1fea8f29e0d70c1471d",
+      "after_sha256": "813d1c2d6e2641673fd741a1b1231c7b34b20c411439c1fea8f29e0d70c1471d"
+    },
+    {
+      "path": "m3/runtime-integration/scheduled-progress-20261021/src/test/java/LegacyScheduledClient.java",
+      "before_sha256": "32881654d117127b11be68a2511a0d5860a3032f0e7ca1ada0332c7f648e0c90",
+      "after_sha256": "32881654d117127b11be68a2511a0d5860a3032f0e7ca1ada0332c7f648e0c90"
+    },
+    {
+      "path": "m3/runtime-integration/scheduled-progress-20261021/verify.py",
+      "before_sha256": "635c8de8abb48adb1263518f837e4820a4dc5dad7c6c3b8aaefb4548e8094c0e",
+      "after_sha256": "635c8de8abb48adb1263518f837e4820a4dc5dad7c6c3b8aaefb4548e8094c0e"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/build.py",
+      "before_sha256": "9d234928ec6c951c66bc22bfce8c2379e8d646a3e13d43cc69fa1b6a24db9464",
+      "after_sha256": "9d234928ec6c951c66bc22bfce8c2379e8d646a3e13d43cc69fa1b6a24db9464"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/tests/test_native_abi.py",
+      "before_sha256": "90a8a865d0b44b6b241fa19eecf6bf4d46c2a21a2ab6aab5cb02ece144fa6c3b",
+      "after_sha256": "90a8a865d0b44b6b241fa19eecf6bf4d46c2a21a2ab6aab5cb02ece144fa6c3b"
+    },
+    {
+      "path": "m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py",
+      "before_sha256": "19c8ac41b3f25e43a7053d6a8a24cb2256806200b0ab64f58e83ada246ccea76",
+      "after_sha256": "19c8ac41b3f25e43a7053d6a8a24cb2256806200b0ab64f58e83ada246ccea76"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ScheduledExecutorService.java",
+      "before_sha256": "97ada5bb138bcf47b5ac8b168c36a5ff17936acf64e83c4e7f3a7151b279cd3d",
+      "after_sha256": "97ada5bb138bcf47b5ac8b168c36a5ff17936acf64e83c4e7f3a7151b279cd3d"
+    },
+    {
+      "path": "test/jdk/java/util/concurrent/ProgressJob/M3ScheduledProgress.java",
+      "before_sha256": "07e0d48234769058b425c01777bfadce3af4bb1633d1ba66e78605fd12d9c480",
+      "after_sha256": "07e0d48234769058b425c01777bfadce3af4bb1633d1ba66e78605fd12d9c480"
+    }
+  ],
+  "old_sdk": {
+    "path": "proof/sdk-002-offline/RESULT.json",
+    "sha256": "a1abf22e70da8c9ea163546910a24b0d6bd65fa08da6fc51329773f421d1287d"
+  },
+  "new_sdk": {
+    "path": "proof/sdk-003-workflow-successor-offline/RESULT.json",
+    "sha256": "c7edd6e3cc89d93b7fd6fce6bb98b9c0d204531fd8bbfa47d9abcb9bf2dfa818"
+  }
+}

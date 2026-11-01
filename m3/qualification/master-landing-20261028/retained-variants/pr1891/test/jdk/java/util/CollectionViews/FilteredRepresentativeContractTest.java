@@ -4,7 +4,7 @@
  */
 /*
  * @test
- * @summary M3JDK21 backed filtered views use stored visible members and original set identity
+ * @summary M3JDK 21 backed filtered views use stored visible members and original set identity
  * @run main/othervm FilteredRepresentativeContractTest
  */
 import java.util.ArrayList;

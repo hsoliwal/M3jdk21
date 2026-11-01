@@ -62,7 +62,7 @@
               <arguments>
                 <argument>${project.basedir}/prepare_sources.py</argument>
                 <argument>--synexia</argument>
-                <argument>${synexia.root}</argument>
+                <argument>${m3.root}</argument>
                 <argument>--product</argument>
                 <argument>${m3.product.root}</argument>
                 <argument>--out</argument>

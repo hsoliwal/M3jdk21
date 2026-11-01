@@ -3,24 +3,24 @@
   "addedPaths": [
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/README.md",
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/RECONSTRUCT.md",
-    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/dependency-source/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/pom.xml",
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/proof.py",
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/META-INF/rewrite/sc0-orders.yml",
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/META-INF/rewrite/sc0-spc.yml",
-    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/manifest.tsv",
-    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-1.txt",
-    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-2.txt",
-    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-3.txt",
-    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-4.txt",
-    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-5.txt",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/manifest.tsv",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-1.txt",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-2.txt",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-3.txt",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-4.txt",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-5.txt",
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/composition-orders.json",
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/qualification.json",
-    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/java/com/synexia/rewrite/Sc0RecipeTest.java",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/java/jdk/internal/m3/rewrite/Sc0RecipeTest.java",
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/m3/runtime-integration/fix-root-ascii-case/manifest.json",
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/m3/tooling/image-gates/current-c0.json",
-    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/03-M3StringPrecomputeSearchTest.java.txt",
-    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/03-M3StringPrecomputeSearchTest.java.txt",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv",
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java",
     "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/CURRENT-DELIVERY.json",
     "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/CURRENT-DELIVERY.md",
@@ -151,24 +151,24 @@
     "bundleIndex": {
       "bytes": 123241,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/bundle/BUNDLE.json",
-      "sha256": "af4f16e7c63ea8adb004de897bb3cfb1b089bac346c9360e438ae2969e36039e"
+      "sha256": "a13fea2b9340daf792af3960b7d98666064f28525e146a480381cf46e1fa8956"
     },
     "extractReceipt": {
       "bytes": 1321,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/extract/receipt.json",
-      "sha256": "91dbf5dec038c5d9e9481d62eaffd76067e367cf4b7749db2dcd14d5880b32c4"
+      "sha256": "27bdb63612926659564bfe7d4fe91c27dcdcc5137fbda8d8d67458ecebd83429"
     },
     "extractedRoot": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted",
     "owner": {
       "bytes": 33814,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py",
-      "sha256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574"
+      "sha256": "93a1c116c197854b0167c172581cd768d0f9098067bf0f1296607ca6ba855556"
     },
-    "ownerSHA256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574",
+    "ownerSHA256": "93a1c116c197854b0167c172581cd768d0f9098067bf0f1296607ca6ba855556",
     "projectReady": {
       "bytes": 14331,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/PROJECT-READY.json",
-      "sha256": "0d4e7b4726d4f1c598a8ccdb75357418e21ebbf67d6be6607089f7c9004d8062"
+      "sha256": "4e99f141b6069e8bbdcac7ca4d746bbf07bc46e089d75e63aea17687ac15c1ff"
     },
     "publicationPrefix": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/bundle/",
     "pythonExecutable": {
@@ -179,17 +179,17 @@
     "readback": {
       "bytes": 384272,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/READBACK.json",
-      "sha256": "3f1a568c9846f6b2b627aa6cfe287693e2be26c13cd2ba2052afea9443a0e0f1"
+      "sha256": "0478407e5a003ca49cf1734d9c1a302924a59d4925f59d140d947163a41e13b0"
     },
     "sourceClosure": {
       "bytes": 2214350,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/SOURCE-CLOSURE.json",
-      "sha256": "75ddf05d07f537ace036cfa6d490aa2849213d386fb14fff6736198cb45c068b"
+      "sha256": "6437600b8a1c34b55be3cd9dc1853fead56c5e42951b1962568fb7507056b82c"
     },
     "verifyReceipt": {
       "bytes": 1173,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/verify/receipt.json",
-      "sha256": "4af01550538d0e5b5069dff567bbacbd6f97a4d1c49ffc5c449a7faea7f288ab"
+      "sha256": "512994fcdca26a35b9033df3a45f434e7a4acd67d73ab3e68ac4b663c3944b9c"
     }
   },
   "predictedFinalTree": "89c777422d73ec46ab2f733ea367f7ad04c51a02",
@@ -427,7 +427,7 @@
     "selection": {
       "bytes": 74585,
       "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/receiving-selection-v1/RECEIVING-SELECTION.json",
-      "sha256": "de8f5754b18391d8e3768d2a7a2ee0073884427eb09e45093cc1a44bf709aa8d"
+      "sha256": "ee018354430dd4a256f88b09ad93adbcc91139adc6c2d6c83a050acd24030a2a"
     },
     "terminal": {
       "bytes": 33725,

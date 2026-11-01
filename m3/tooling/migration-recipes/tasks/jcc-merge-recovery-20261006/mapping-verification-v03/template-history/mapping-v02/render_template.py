@@ -16,10 +16,10 @@ from pathlib import Path
 import re
 
 HERE = Path(__file__).resolve().parent
-TEST_PATH = "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccMergeMappingRecoveryV02Test.java"
+TEST_PATH = "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccMergeMappingRecoveryV02Test.java"
 POM_PATH = "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v02/pom.xml"
 YAML_PATH = "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-merge-mapping-recovery-v02.yml"
-SUMMARY_PATH = ("m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/"
+SUMMARY_PATH = ("m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/"
                 "jcc-merge-recovery-20261006-mapping-v02/publication-input-summary.json")
 BEFORE_PINS = (
     "22ce39ac68e6f5efab18e9bbf6d3da45af585067d88848f1eb7ce8a76987df87",
@@ -27,9 +27,9 @@ BEFORE_PINS = (
     "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
     "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
 )
-PRIOR_MAP_PIN = "eb42442866c73c38027b481a84c0473bea422e4628d0794fa31fc61d9f1a818e"
-PRIOR_BINDINGS_PIN = "f8b27e3582eb494af2c8dd47225976f974be6edc2f6c26313975064d48739497"
-INPUT_EPOCH_PIN = "fb413e58be72aaffa1e91149479ac159c6d4b961101eed4ab10f1c99df0b6711"
+PRIOR_MAP_PIN = "abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c"
+PRIOR_BINDINGS_PIN = "59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6"
+INPUT_EPOCH_PIN = "2ea3ffe30ac6824bcc6d708c431b848a4c7997bdb4cdeaaddea1a62640734718"
 
 
 def load_binder():
@@ -137,7 +137,7 @@ def main():
     binder.require({row["path"]: row["sha256"] for row in guard_plan["guards"]}
                    == {row["path"]: row["sha256"] for row in epoch["guards"]}, "current epoch/plan guards differ")
     expected_plan = {"schema": "m3.sealed-install/1",
-                     "recipe_id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/" + binder.CRATE,
+                     "recipe_id": "jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/" + binder.CRATE,
                      "version": 1, "source_commit": packet["commit"], "destination_base": binder.DESTINATION,
                      "scope": "Exact current 20-owner mapping metadata; source and destination acceptance remain blocked",
                      "outputs": sorted(expected_plan_rows, key=lambda row: row["path"]), "guards": guard_plan["guards"]}

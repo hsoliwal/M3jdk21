@@ -6,7 +6,7 @@ Status: source-review proposals only. No target patch, interface change, recipe 
 
 ## 1. Linear stable conversion between already-known opposite sort orders
 
-Existing owner: `m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java`, private `sorted(boolean)`.
+Existing owner: `m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java`, private `sorted(boolean)`.
 
 The current source already returns a shared immutable view when `order` equals the requested direction. When `order` proves the opposite direction, it still copies the physical-index window and allocates a second `int[size]` scratch array for a full bottom-up stable merge sort. The immutable order metadata is retained by slices and stable filtering.
 
@@ -22,7 +22,7 @@ Required evidence: current preimage/API seal; recipe fixed point/refusal; indepe
 
 ## 2. Binary boundary discovery in the existing packed interval owner
 
-Existing owner: `m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java`.
+Existing owner: `m3/collections/src/main/java/jdk/m3/collections/M3LongRangeSet.java`.
 
 The full-read source keeps sorted nonoverlapping nonadjacent parallel `starts[]` and `ends[]` lanes. Its `add(from,to)` currently linearly scans every preceding end before coalescing overlapping/touching intervals. Its `remove` uses a binary search for its first affected interval but linearly searches the last start.
 

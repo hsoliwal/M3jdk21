@@ -1,7 +1,7 @@
 {
   "request": {
     "expected_entries": 72,
-    "path": "synexia-openrewrite-recipes",
+    "path": "m3-openrewrite-recipes",
     "recursive": false,
     "sha": "5a67aa71bdb2451ba09053276a2283339d61015b",
     "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/5a67aa71bdb2451ba09053276a2283339d61015b"

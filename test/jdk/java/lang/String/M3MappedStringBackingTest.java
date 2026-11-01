@@ -57,7 +57,7 @@ public class M3MappedStringBackingTest {
     private static final int COMMIT_SLOT_1 = 40;
 
     public static void main(String[] args) throws Exception {
-        Path directory = Files.createTempDirectory("m3-jdk-backing");
+        Path directory = Files.createTempDirectory("m3jdk-backing");
         Path textPath = directory.resolve("strings.midx");
 
         String logical = new String(new char[] {
@@ -132,7 +132,7 @@ public class M3MappedStringBackingTest {
         }
 
         System.out.println(
-                "M3_JDK_MAPPED_BACKING_PASS|utf16=1|utf8=1|alias=1|substring=1|jni=0");
+                "M3JDK_MAPPED_BACKING_PASS|utf16=1|utf8=1|alias=1|substring=1|jni=0");
     }
 
     private static void writeFixture(Path textPath, String logical) throws Exception {

@@ -5,10 +5,10 @@ on:
     branches: ['m3/direct-spring-multivaluemap-20261017']
   pull_request:
     paths:
-      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3SpringArrayMultiValueMap.java'
-      - 'm3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java'
+      - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3SpringArrayMultiValueMap.java'
+      - 'm3/collections/interop/src/main/java/jdk/m3/collections/interop/M3LibraryCollections.java'
       - 'm3/collections/interop/sdk-family-bindings.tsv'
-      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringArrayContractTest.java'
+      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SpringArrayContractTest.java'
       - 'm3/collections/interop/qualification/m3-direct-spring-multivaluemap-20261017/**'
       - '.github/workflows/m3-direct-spring-multivalue-20261017.yml'
   workflow_dispatch:
@@ -34,7 +34,7 @@ jobs:
         run: |
           mvn -B -ntp -f m3/collections/interop/qualification/m3-direct-spring-multivaluemap-20261017/recipe/pom.xml verify
           java -cp m3/collections/interop/qualification/m3-direct-spring-multivaluemap-20261017/recipe/target/classes \
-            com.synexia.m3.M3SpringDirect20261017Recipe --check "$PWD"
+            jdk.internal.m3.M3SpringDirect20261017Recipe --check "$PWD"
       - name: Compile existing real M3 core, retain java.base-only dependency
         shell: bash
         run: |
@@ -52,14 +52,14 @@ jobs:
       - name: Real Spring 6.2 Maven/JUnit and all retained interop tests
         run: |
           mvn -B -ntp -f m3/collections/interop/pom.xml verify
-          test -s m3/collections/interop/target/surefire-reports/TEST-com.m3.collections.interop.M3SpringArrayContractTest.xml
+          test -s m3/collections/interop/target/surefire-reports/TEST-jdk.m3.collections.interop.M3SpringArrayContractTest.xml
       - name: Inspect compiled implementation inheritance (no vendor adapter)
         run: |
           javap -classpath m3/collections/interop/target/classes \
-            com.m3.collections.interop.M3SpringArrayMultiValueMap | \
+            jdk.m3.collections.interop.M3SpringArrayMultiValueMap | \
             grep 'extends java.util.AbstractMap'
           ! javap -classpath m3/collections/interop/target/classes \
-            com.m3.collections.interop.M3SpringArrayMultiValueMap | grep MultiValueMapAdapter
+            jdk.m3.collections.interop.M3SpringArrayMultiValueMap | grep MultiValueMapAdapter
       - name: Preserve original M3 C17 JNI source boundary
         shell: bash
         run: |

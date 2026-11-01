@@ -20,14 +20,14 @@
     {
       "path": "m3/collections/src/test/native/m3_gather_spans.c",
       "before_git_blob": "8bc50f0947bfe3fa50527583e917836647fc51f7",
-      "after_git_blob": "8ec47e6a4a1a9943c8c0a10f09f2ec3c7200c527",
-      "after_sha256": "fc71fd2db0f7a5f0779d8816cf7e9e4017a466dd2df79ee00fcf3dbbbec15f99"
+      "after_git_blob": "dd67563d23c53d11901aff26df18b56756037bb5",
+      "after_sha256": "d4511c8638fe4275bf34569187a3a9113cdb963e60a2bb5cccd4949465975042"
     },
     {
       "path": "m3/collections/src/test/native/m3_mask_window_regions.c",
-      "before_git_blob": "0af0179adf84c52faa760336045f53ef0f4faeca",
-      "after_git_blob": "aa01be5d40ab3dd416d765ec4adbf0239b185ede",
-      "after_sha256": "8d508b86d29967cce5e6231c4518c63efecf9360f52e9f4f834bdab1f0a9f025"
+      "before_git_blob": "a77c1d7e63e365608842d3bec87d1d78a3982a76",
+      "after_git_blob": "e99e5c055b1d59870aa83f35970457da621c281c",
+      "after_sha256": "d2595635b1de32c71927cdfb9b4d2cfbcbfed8e7514f532da63bbc490412031c"
     }
   ],
   "source_evidence": "Both current-master preimages exactly equal the original accepted 669a949d recipe inputs, with two accepted postimage Git objects retained from PR2115. No source rewriting occurs in this receiver.",
@@ -46,16 +46,16 @@
     "Protected/default branches"
   ],
   "gather_java_oracle_recovery": {
-    "path": "m3/collections/src/test/java/com/m3/collections/M3NetBeansGatherSpansTest.java",
+    "path": "m3/collections/src/test/java/jdk/m3/collections/M3NetBeansGatherSpansTest.java",
     "current_master_preimage_blob": "b3fa33be7f74ae31a17d39b86713607a335f3211",
-    "exact_canonical_postimage_blob": "f3e630a49726118cfb220ab3dbc3b89bca2c32a6",
+    "exact_canonical_postimage_blob": "6321a00e51c61296154fa1c501422f57f5b12511",
     "recipe": "hsoliwal/com.synexia@977cb34746e56e5c71128c41475425a28c932787 / m3-gather-exception-oracle-20261029",
     "source_proof": "canonical pre/post .template Git blobs are byte-identical to current master and PR2115 outputs",
     "unchanged_owners": {
-      "M3LongAddressKernel.java": "79d261d7bf7edde29e7502852eceb8d16be6cdde",
-      "M3IndexMaskCompactor.java": "9060424b921bac10dc382ba277a3aa840ea59529",
-      "M3LongAddressBoundedSelfTest.java": "1470a9ac73857ddb6bfc43db94d5dc7d9e3f8465",
-      "m3_long_address_kernel.c": "58853890a9043f8f4284544a8f7caca9ce8218cb"
+      "M3LongAddressKernel.java": "c043aec43ec3d1d630b669871a907c51f61ebe4b",
+      "M3IndexMaskCompactor.java": "8155fad4828e982e30f7d66a18f6fe0a4c372105",
+      "M3LongAddressBoundedSelfTest.java": "b7ea4eb0a9c7fbdf4ae7e6d2ffc8386ea8ccfdf0",
+      "m3_long_address_kernel.c": "11657a88959a963c309d44b730eef6a473f87619"
     },
     "historic_executed_oracle": "Synexia candidate Java-only 4/4, real-JNI 4/4, interpreter JNI 2/2, negative controls; originally scoped to prior verified sources",
     "current_branch_java_junit": "PENDING: current exact-base JUnit, full JNI and installed JDK not executed"
@@ -66,8 +66,8 @@
     "compiler": "gcc 14.2.0 -std=c17 -O1 -g -Wall -Wextra -Werror -Wpedantic -fsanitize=undefined -fno-sanitize-recover=all",
     "sanitizer": "UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1",
     "candidate_fixtures": [
-      "8ec47e6a4a1a9943c8c0a10f09f2ec3c7200c527",
-      "58853890a9043f8f4284544a8f7caca9ce8218cb"
+      "dd67563d23c53d11901aff26df18b56756037bb5",
+      "11657a88959a963c309d44b730eef6a473f87619"
     ],
     "success_exit_code": 0,
     "negative_baseline_fixture": "8bc50f0947bfe3fa50527583e917836647fc51f7",

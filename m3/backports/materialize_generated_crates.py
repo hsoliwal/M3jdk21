@@ -19,8 +19,8 @@ from pathlib import Path
 import sys
 
 
-JAVA_ROOT = Path("src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned")
-TEXT_ROOT = Path("src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text")
+JAVA_ROOT = Path("src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned")
+TEXT_ROOT = Path("src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text")
 ABSENT = "ABSENT"
 BASELINE_REF = "jdk-21+35"
 DONOR_REFS = {

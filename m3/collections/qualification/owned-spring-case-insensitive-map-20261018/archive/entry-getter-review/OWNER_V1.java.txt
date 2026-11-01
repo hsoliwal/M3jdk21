@@ -16,7 +16,7 @@
 
 // Modified 2026 by Hitesh Soliwal and contributors: M3 array-owned storage and nominal type.
 // Storage atoms retain their Apache-2.0 M3/Synexia attribution.
-package com.m3.collections.spring;
+package jdk.m3.collections.spring;
 
 import java.io.Serializable;
 import java.io.Serial;

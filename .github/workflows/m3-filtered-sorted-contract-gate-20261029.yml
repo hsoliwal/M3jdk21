@@ -2,8 +2,8 @@ name: M3 filtered/sorted Java 21 contract gate
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3FilteredSortedContractGate20261029.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3FilteredSortedContractGate20261029.java'
       - '.github/workflows/m3-filtered-sorted-contract-gate-20261029.yml'
   workflow_dispatch:
 jobs:
@@ -18,17 +18,17 @@ jobs:
       - name: Verify pinned owner source blob
         shell: bash
         run: |
-          actual="$(git hash-object m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java)"
-          test "$actual" = "102fa70995471fefdd18edb6a58c6a85cf80fdb8"
+          actual="$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java)"
+          test "$actual" = "519351f238626fbf8a48819693292345174444d4"
       - name: Compile actual owner and standalone contract
         shell: bash
         run: |
           mkdir -p build/m3-filtered-contract
           javac --release 21 -proc:none -Xlint:all -Werror -d build/m3-filtered-contract \
-            m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java \
-            m3/collections/src/test/java/com/m3/collections/M3FilteredSortedContractGate20261029.java
+            m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3FilteredSortedContractGate20261029.java
       - name: Execute normal and interpreted runtime contracts
         shell: bash
         run: |
-          java -cp build/m3-filtered-contract com.m3.collections.M3FilteredSortedContractGate20261029
-          java -Xint -cp build/m3-filtered-contract com.m3.collections.M3FilteredSortedContractGate20261029
+          java -cp build/m3-filtered-contract jdk.m3.collections.M3FilteredSortedContractGate20261029
+          java -Xint -cp build/m3-filtered-contract jdk.m3.collections.M3FilteredSortedContractGate20261029

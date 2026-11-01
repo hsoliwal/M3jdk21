@@ -6,9 +6,9 @@
 from pathlib import Path
 import argparse, ast, hashlib, json, os, re, shutil, subprocess, sys, time
 T=Path(__file__).resolve().parent
-J='m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java'
+J='m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java'
 C='m3/collections/src/main/native/collections/m3_index_mask_compactor.c'
-TEST='m3/collections/src/test/java/com/m3/collections/M3MaskWindowKernelSelfTest.java'
+TEST='m3/collections/src/test/java/jdk/m3/collections/M3MaskWindowKernelSelfTest.java'
 R=T/'src/main/resources/m3-mask-window'
 BASE='55b44776b15b658c14f33ee2c4e01b013d6547a8'
 def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -62,7 +62,7 @@ def main():
         run('recipe-lint',['javac','--release','21','-proc:none','-Xlint:all','-Werror','-d',lint,*tools])
         run('recipe-compile',['javac','--release','21','-proc:none','-d',cp,*tools])
         def seal(root,res=R,mode='apply',fail=False):
-            answer=run('recipe-'+mode,['java','-cp',cp,'com.synexia.rewrite.SealReplay',mode,root,res],fail)
+            answer=run('recipe-'+mode,['java','-cp',cp,'jdk.internal.m3.rewrite.SealReplay',mode,root,res],fail)
             if not fail and mode=='check' and 'changes=0' not in answer:raise ValueError('not a fixed point')
             return answer
         def seed(root):
@@ -125,19 +125,19 @@ def main():
             run('probe-compile',['gcc',*cflags,*ubsan,'-O2',definition,T/'probes/native_probe.c','-o',native_probe])
             event('COMPILE',{'name':stage,'result':'PASS'})
             descriptor=''
-            for clazz in ['com.m3.collections.M3IndexMaskCompactor','com.m3.collections.M3IndexMaskCompactor$Backend']:
+            for clazz in ['jdk.m3.collections.M3IndexMaskCompactor','jdk.m3.collections.M3IndexMaskCompactor$Backend']:
                 descriptor+=run('api',['javap','-public','-s','-cp',classes,clazz])
             api.append(descriptor)
             symbols=run('symbols',['nm','-D','--defined-only',library])
             exports.append(sorted(s.split()[-1] for s in symbols.splitlines() if 'Java_' in s))
             outputs[stage]={'native_work':run('probe-test',[native_probe],marker='NATIVE_PROBE_PASS')}
-            launcher=['java','-Xmx32m','-Xcheck:jni','-Djava.library.path='+str(lib),'-cp',classes,'com.m3.collections.M3MaskWindowKernelSelfTest']
+            launcher=['java','-Xmx32m','-Xcheck:jni','-Djava.library.path='+str(lib),'-cp',classes,'jdk.m3.collections.M3MaskWindowKernelSelfTest']
             outputs[stage]['java']=run('java-test',launcher,marker='M3_MASK_WINDOW_PASS')
             event('TEST',{'name':stage,'result':'PASS'})
             outputs[stage]['jni']=run('jni-runtime',launcher+['--native'],marker='M3_MASK_WINDOW_PASS')
             empty=folder/'empty';empty.mkdir()
             outputs[stage]['missing']=run('missing-runtime',['java','-Djava.library.path='+str(empty),'-cp',classes,
-                'com.m3.collections.M3MaskWindowKernelSelfTest','--missing'],marker='M3_MASK_WINDOW_PASS')
+                'jdk.m3.collections.M3MaskWindowKernelSelfTest','--missing'],marker='M3_MASK_WINDOW_PASS')
             event('RUNTIME',{'name':stage,'result':'PASS'})
             sources[stage]={'java':sha(root/J),'native':sha(root/C)};java_out[stage]=(classes,lib)
         for lane in ['java','jni','missing']:
@@ -148,7 +148,7 @@ def main():
         for name,(classes,library) in {'old-java-new-native':(java_out['before'][0],java_out['test'][1]),
                                       'new-java-old-native':(java_out['test'][0],java_out['before'][1])}.items():
             matrix[name]=run('binary-matrix',['java','-Xmx32m','-Xcheck:jni','-Djava.library.path='+str(library),'-cp',classes,
-                'com.m3.collections.M3MaskWindowKernelSelfTest','--native'],marker='M3_MASK_WINDOW_PASS')
+                'jdk.m3.collections.M3MaskWindowKernelSelfTest','--native'],marker='M3_MASK_WINDOW_PASS')
             if matrix[name]!=outputs['before']['jni']:raise ValueError('binary matrix drift')
         # Older pre-positions JNI binary must still serve the current Java fallback.
         legacy=out/'legacy-native';legacy.mkdir();legacy_source=T/'legacy/m3_index_mask_compactor.c'
@@ -157,7 +157,7 @@ def main():
         run('legacy-compile',['gcc',*cflags,*ubsan,'-O2','-fPIC','-shared',legacy_source,'-o',legacy/'libm3_collections_mask.so'])
         matrix['new-java-pre-positions-native']=run('legacy-runtime',['java','-Xmx32m','-Xcheck:jni',
             '-Djava.library.path='+str(legacy),'-cp',java_out['test'][0],
-            'com.m3.collections.M3MaskWindowKernelSelfTest','--native'],marker='M3_MASK_WINDOW_PASS')
+            'jdk.m3.collections.M3MaskWindowKernelSelfTest','--native'],marker='M3_MASK_WINDOW_PASS')
         if matrix['new-java-pre-positions-native']!=outputs['before']['jni']:raise ValueError('legacy positions fallback drift')
         # Deliberately broken test images must be detected; product recipe output is never edited.
         mutants={
@@ -173,7 +173,7 @@ def main():
             library=folder/'libm3_collections_mask.so'
             run('mutant-compile',['gcc',*cflags,*ubsan,'-O2','-fPIC','-shared',source,'-o',library])
             run('mutant-runtime',['java','-Xmx32m','-Xcheck:jni','-Djava.library.path='+str(folder),'-cp',java_out['test'][0],
-                'com.m3.collections.M3MaskWindowKernelSelfTest','--native'],fail=True,marker=(
+                'jdk.m3.collections.M3MaskWindowKernelSelfTest','--native'],fail=True,marker=(
                     'java.util.ConcurrentModificationException: aligned selection states changed'
                     if name=='state-offset' else 'java.lang.AssertionError: long independent offsets'))
         seal(root,mode='check');times={p:(root/p).stat().st_mtime_ns for p,_,_,_ in rows()};seal(root)

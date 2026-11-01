@@ -218,11 +218,11 @@ class SdkProfileTests(unittest.TestCase):
     def test_release_retains_exact_layout_and_all_other_properties(self):
         original = self.release.replace("\n", "\r\n") + "# retained comment\r\n"
         linked = ('IMPLEMENTOR="fixture owner"\nJAVA_VERSION="21"\n'
-                  'MODULES="java.base jdk.compiler jdk.jlink com.m3.arrays"\nSOURCE="fixture-source"\n')
+                  'MODULES="java.base jdk.compiler jdk.jlink jdk.m3.arrays"\nSOURCE="fixture-source"\n')
         expected = original.replace('MODULES="java.base jdk.compiler jdk.jlink"',
-                                    'MODULES="java.base jdk.compiler jdk.jlink com.m3.arrays"')
+                                    'MODULES="java.base jdk.compiler jdk.jlink jdk.m3.arrays"')
         self.assertEqual(expected.encode(), build_pack.sdk_release_bytes(original, linked,
-                                                                         {*self.modules, "com.m3.arrays"}))
+                                                                         {*self.modules, "jdk.m3.arrays"}))
 
     def test_release_property_drift_and_module_drift_refuse(self):
         for candidate in (self.release.replace('JAVA_VERSION="21"', 'JAVA_VERSION="21.0.1"'),
@@ -231,13 +231,13 @@ class SdkProfileTests(unittest.TestCase):
             with self.subTest(candidate=candidate), self.assertRaisesRegex(ValueError, "property drift"):
                 build_pack.sdk_release_bytes(self.release, candidate, self.modules)
         with self.assertRaisesRegex(ValueError, "module inventory"):
-            build_pack.sdk_release_bytes(self.release, self.release, {*self.modules, "com.m3.arrays"})
+            build_pack.sdk_release_bytes(self.release, self.release, {*self.modules, "jdk.m3.arrays"})
         with self.assertRaisesRegex(ValueError, "duplicate"):
             build_pack.sdk_release(self.release + 'MODULES="java.base"\n')
 
     def test_runtime_module_parser_rejects_ignored_signals_and_duplicates(self):
-        self.assertEqual({"java.base": "21", "com.m3.arrays": ""},
-                         build_pack.sdk_module_versions("java.base@21\ncom.m3.arrays\n"))
+        self.assertEqual({"java.base": "21", "jdk.m3.arrays": ""},
+                         build_pack.sdk_module_versions("java.base@21\njdk.m3.arrays\n"))
         for text in ("", "java.base@21\njava.base@21\n", "WARNING: ignored\njava.base@21\n", "java.base@\n"):
             with self.subTest(text=text), self.assertRaises(ValueError):
                 build_pack.sdk_module_versions(text)
@@ -398,14 +398,14 @@ class SdkProfileTests(unittest.TestCase):
             text = ""
             if "--list-modules" in values:
                 text = "".join(name + "@21\n" for name in sorted(self.modules))
-            elif "com.m3.tools.modulepack.M3ModuleInventory" in values:
+            elif "jdk.m3.tools.modulepack.M3ModuleInventory" in values:
                 self.assertEqual(set(self.modules), set(values[4].split(",")))
                 text = inventory
             elif Path(values[0]).name == "jlink":
                 self.linked_image(Path(values[values.index("--output") + 1]))
             elif Path(values[0]).name == "jmod" and values[1] == "create":
                 Path(values[-1]).write_bytes(b"synthetic outside-image fixture archive")
-            elif "com.m3pack.diagnostics/com.m3.pack.diagnostics.M3DiagnosticsSmoke" in values:
+            elif "com.m3pack.diagnostics/jdk.m3.pack.diagnostics.M3DiagnosticsSmoke" in values:
                 self.assertIn("--module-path", values)
                 self.assertEqual(str(destination / "diagnostics-classes"), values[values.index("--module-path") + 1])
                 text = "M3_DIAGNOSTICS_PASS"

@@ -17,7 +17,7 @@ Adapted from the existing array/collection custody proof host for one-file passe
     <m3.pass>fixture-java</m3.pass>
     <m3.crate.name>m3-wrapper-${m3.pass}</m3.crate.name>
     <m3.resources>${project.basedir}/passes/${m3.pass}/resources</m3.resources>
-    <m3.recipe.name>com.synexia.m3.WrapperConvergence20261018</m3.recipe.name>
+    <m3.recipe.name>jdk.internal.m3.WrapperConvergence20261018</m3.recipe.name>
     <m3.parser.classpath></m3.parser.classpath>
     <rewrite.version>8.17.1</rewrite.version>
     <m3.recipe.test.maxHeap>768m</m3.recipe.test.maxHeap>
@@ -39,18 +39,18 @@ Adapted from the existing array/collection custody proof host for one-file passe
       </plugin>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
         <configuration><release>21</release><proc>none</proc><includes>
-          <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
-          <include>com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java</include>
-          <include>com/synexia/rewrite/M3ScopeInference.java</include>
-          <include>com/synexia/rewrite/M3EditScope.java</include>
-        </includes><testIncludes><testInclude>com/synexia/rewrite/M3TaskRecipeTest.java</testInclude></testIncludes>
+          <include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+          <include>jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java</include>
+          <include>jdk/internal/m3/rewrite/M3ScopeInference.java</include>
+          <include>jdk/internal/m3/rewrite/M3EditScope.java</include>
+        </includes><testIncludes><testInclude>jdk/internal/m3/rewrite/M3TaskRecipeTest.java</testInclude></testIncludes>
           <compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs></configuration>
       </plugin>
       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>
         <configuration>
           <failIfNoTests>true</failIfNoTests>
           <useModulePath>false</useModulePath>
-          <includes><include>com/synexia/rewrite/M3TaskRecipeTest.java</include></includes>
+          <includes><include>jdk/internal/m3/rewrite/M3TaskRecipeTest.java</include></includes>
           <argLine>-Xmx${m3.recipe.test.maxHeap} -XX:-UsePerfData -Djava.io.tmpdir=${project.basedir}/target -Duser.home=${project.basedir}/target</argLine>
           <systemPropertyVariables>
             <m3.pass>${m3.pass}</m3.pass>

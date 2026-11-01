@@ -1,0 +1,83 @@
+{
+  "all_inputs_match_qualified_candidate": true,
+  "all_module_jar_hashes_equal_candidate": true,
+  "artifact_manifest_sha256": "19289dc7efb3fbca55613246d379c615c069aeb9312eaf7b658e9028a108a718",
+  "build_report_sha256": "a8972e9ab070c0263f1fe16fce5ee845a928a17f1d088c979ea4d7ae6817e6cf",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "/workspace/scratch/206049dfb270/M3jdk21/m3/tooling/module-packs/nlp-search/current_forks.py",
+    "--receiver",
+    "/workspace/scratch/206049dfb270/M3jdk21",
+    "--jdk-home",
+    "/tmp/m3-build-tools/jdk-21.0.12.1+1",
+    "--out",
+    "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001",
+    "--opennlp-source",
+    "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp",
+    "--lucene-source",
+    "/workspace/scratch/206049dfb270/nlp-work/forks/lucene",
+    "--recipe-runner",
+    "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/m3/m3-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/run_recipe.py",
+    "--recipe-resources",
+    "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/synexia/synexia-openrewrite-recipes/src/main/resources",
+    "--opennlp-dependencies",
+    "/workspace/scratch/206049dfb270/nlp-work/dependencies/opennlp",
+    "--lucene-dependencies",
+    "/workspace/scratch/206049dfb270/nlp-work/dependencies/lucene"
+  ],
+  "driver_sha256": "2af38b31aef1c27c5a44430f650963131df6d42197f20218d26aef7530c9da1d",
+  "driver_unchanged": true,
+  "elapsed_seconds": 205.232,
+  "emitted_target_seals": [
+    {
+      "after_sha256": "07c498aafa158278bf2fea6ee54bae7f09bf037051f1f8207511597ccef02929",
+      "before_sha256": "a273220cdd1a2b20857ccba086394c0a0a726cc3f2711e9eb7fdadbaffb08256",
+      "candidate_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/candidates/m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java",
+      "kind": "JAVA",
+      "target_path": "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java"
+    },
+    {
+      "after_sha256": "271a532810591e94f5ceaab443820fdb08f96d1288e9ba5c1ce55c09d3444c8b",
+      "before_sha256": "c072c8b97e8f83d0e9d2f0b9d3cdcd334622a1227888251ee13f4de28b5d843a",
+      "candidate_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/candidates/m3/tooling/module-packs/nlp-search/current-source-lock.json",
+      "kind": "TEXT",
+      "target_path": "m3/tooling/module-packs/nlp-search/current-source-lock.json"
+    }
+  ],
+  "environment": {
+    "JAVA_HOME": "/tmp/m3-build-tools/jdk-21.0.12.1+1",
+    "JAVA_TOOL_OPTIONS": "-Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "exit_code": 0,
+  "forks_tracked_clean": {
+    "lucene": true,
+    "opennlp": true
+  },
+  "input_count": 11373,
+  "inputs_sha256": "baf1eccd6e7377c03a3f1237538500f40ad01a6404bb19fe83144c022e54e93e",
+  "inputs_unchanged": true,
+  "limits": [
+    "Java21 staged companion pins are distinct from original donor-basis commits and Java25 full upstream lane.",
+    "External dependency archives are hash locked, not source built by this proof.",
+    "No full String/HotSpot/JDK family, platform, optional Faiss native or performance admission.",
+    "Original historical BigString template mismatch remains recorded."
+  ],
+  "log_bytes": 146,
+  "log_sha256": "4c5e3d9cecaabdb0552118f2fc78a68e63bec81d4da95a7eba419752ca463265",
+  "m3_owner_jar_hashes_equal_candidate": true,
+  "module_count": 62,
+  "readback_sha256": "baf1eccd6e7377c03a3f1237538500f40ad01a6404bb19fe83144c022e54e93e",
+  "receiver": "/workspace/scratch/206049dfb270/M3jdk21",
+  "receiver_historical_base": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "schema": "M3_NLP_COMBINED_ACTUAL_RECEIVER_GATE_1",
+  "scope": "Actual emitted two-file target and complete unchanged current_forks.py Java21 source/JMOD/image gate.",
+  "source_lock_sha256": "271a532810591e94f5ceaab443820fdb08f96d1288e9ba5c1ce55c09d3444c8b",
+  "state": "PASS",
+  "tests": {
+    "ModelSourceProbe": "Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData\nModelSourceProbe PASS: real token/sentence model train/serialize/reload; immutable source offsets and probability parity",
+    "SourceFactsProbe": "Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData\nSourceFactsProbe PASS: 2000 raw UTF-16 digest oracles; snapshot/null contracts",
+    "SourceIntegrationProbe": "Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData\nOct 21, 2026 3:38:58 AM org.apache.lucene.util.HotspotVMOptions <clinit>\nWARNING: Lucene cannot access JVM internals to optimize algorithms or calculate object sizes, unless the 'jdk.management' Java module is readable [please add 'jdk.management' to modular application either by command line or its module descriptor].\nWARNING: A restricted method in java.lang.foreign.Linker has been called\nWARNING: java.lang.foreign.Linker::downcallHandle has been called by module org.apache.lucene.core\nWARNING: Use --enable-native-access=org.apache.lucene.core to avoid a warning for this module\n\nSourceIntegrationProbe PASS: M3File/M3String/M3AST sharing; 2000 AST span oracles; 300 Unicode token oracles; disk indexing/query/term-vector offsets"
+  }
+}

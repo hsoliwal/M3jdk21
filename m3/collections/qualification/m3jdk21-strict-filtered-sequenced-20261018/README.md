@@ -6,9 +6,9 @@ recipes and donor/category evidence; **no Synexia runtime dependency**.
 
 Canonical recipe-first [Synexia PR #12281](https://github.com/hsoliwal/com.synexia/pull/12281)
 source commit `4eb4bd87fe8c9526e377efc1afd2401ba4f1e1a2`.
-Original M3JDK21 master source blob: `6ec7a88dafeca87760faee0c808dbd9a93ba1424`, strict preimage SHA256:
-`1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369`. Generated owner post SHA256:
-`dd76093f07091d7224d9f4ec9f7d3a84271c3eef858186ff5d7de9b25158fe82`.
+Original M3JDK21 master source blob: `f221ccb00feeda912eafd5daa8b0bb8b7766b572`, strict preimage SHA256:
+`e8a722cec3cdad01ce127936936f7c9928f094658e075aa9d1d89077e6eb7199`. Generated owner post SHA256:
+`dbeeae9b8661757d90afc7fbb5e25c5209fe52ac11444795e028f2c5bab7e267`.
 
 This receiver does **not** import OpenJDK, Guava, Apache, Eclipse, Spring,
 their adapters, or source from LeetCode/HackerRank/GfG.

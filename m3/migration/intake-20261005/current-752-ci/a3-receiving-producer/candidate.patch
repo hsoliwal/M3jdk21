@@ -1,7 +1,7 @@
-diff --git a/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java b/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java
+diff --git a/m3/tooling/a3/src/main/java/jdk/m3/a3/A3Alg.java b/m3/tooling/a3/src/main/java/jdk/m3/a3/A3Alg.java
 index bd0a88b..0116188 100644
---- a/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java
-+++ b/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java
+--- a/m3/tooling/a3/src/main/java/jdk/m3/a3/A3Alg.java
++++ b/m3/tooling/a3/src/main/java/jdk/m3/a3/A3Alg.java
 @@ -35,20 +35,33 @@ org.openrewrite.config.CompositeRecipe
              Reuse reuse,
              String nextProof) {
@@ -50,10 +50,10 @@ index bd0a88b..0116188 100644
              validate(this);
          }
  
-diff --git a/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java b/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java
+diff --git a/m3/tooling/a3/src/test/java/jdk/m3/a3/A3PlanTest.java b/m3/tooling/a3/src/test/java/jdk/m3/a3/A3PlanTest.java
 index 1570299..1aa3d92 100644
---- a/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java
-+++ b/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java
+--- a/m3/tooling/a3/src/test/java/jdk/m3/a3/A3PlanTest.java
++++ b/m3/tooling/a3/src/test/java/jdk/m3/a3/A3PlanTest.java
 @@ -25,10 +25,10 @@ org.openrewrite.config.CompositeRecipe
                  backports.resolve("JEP_CATALOGUE.tsv"),
                  """
@@ -89,17 +89,17 @@ index 33bf780..fa247df 100644
                  "src/main/java/com/m3/a3/A3Alg.java",
                  new Target(
                          "ABSENT",
--                        "bd0a88ba3c240510e57c51fb37c689205e02c9ec",
-+                        "01161889ae30d4adeb746ba78ca38d53e7383a47",
+-                        "906b6353f7ceba3d97122fb25a5d5793e0183b37",
++                        "f10cfcf833d845dcc621c5c5085c0a3125b8cc14",
                          null,
                          "after/A3Alg.java",
                          false));
 @@ -46,7 +46,7 @@
                  "src/test/java/com/m3/a3/A3PlanTest.java",
                  new Target(
-                         "3e186021ae1b8997f5bb01ddb08f9b32bf5ae7a9",
--                        "1570299bc0a09012b2752143d7d2861521801104",
-+                        "1aa3d9274f635e1d3ad7f148949d85ab62d4d68d",
+                         "4fe10060e31b23cd778f69c63033f27e7fc72d83",
+-                        "1c660d64d7a86eb44e2cc96b544a782c34e47bf8",
++                        "1fb13b93f6ec9ec220aed71385dfa65edd20e8c1",
                          "before/A3PlanTest.java",
                          "after/A3PlanTest.java",
                          true));

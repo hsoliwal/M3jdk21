@@ -14,7 +14,7 @@ OUTPUT = WORK / "token-recovery-sdk-output"
 MODULE = WORK / "recipe-token-candidates"
 HANDOFF = WORK / "token-recovery-sdk-handoff.json"
 INVENTORY = WORK / "token-recovery-recipe-inventory-pre-receive.json"
-MANIFEST = MODULE / "src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018/manifest.tsv"
+MANIFEST = MODULE / "src/main/resources/jdk/internal/m3/rewrite/m3jdk21-integrated-utilities-20261018/manifest.tsv"
 
 
 def sha(path):
@@ -26,7 +26,7 @@ def require(condition, message):
         raise SystemExit(message)
 
 
-require(sha(HANDOFF) == "d6a8a17ff4a28fa8dc0aa266c7c64b790632410b0270ea008f4a4d8707978fc4", "handoff drift")
+require(sha(HANDOFF) == "faa8070f990a70aead19e3d2121897b1b1de111e37401edec01b73233ff7d736", "handoff drift")
 require(sha(INVENTORY) == "bd4b3ebb81f82034caab8fec0829e7e77f3099da781dd714c2becce81962d8b0", "source inventory drift")
 handoff = json.loads(HANDOFF.read_text())
 inventory = json.loads(INVENTORY.read_text())

@@ -138,7 +138,7 @@ def check_command(row, suite, allowed_classpath):
 
 def check_test_classes(suite, product_classes):
     inventory = class_inventory(suite["output"])
-    top_levels = {"FacadeTestLauncher", *["com/m3/fs/" + name for name in suite["fixtures"]]}
+    top_levels = {"FacadeTestLauncher", *["jdk/m3/fs/" + name for name in suite["fixtures"]]}
     for name in inventory:
         stem = name[:-len(".class")]
         require(any(stem == prefix or stem.startswith(prefix + "$") for prefix in top_levels),
@@ -160,8 +160,8 @@ def main():
               "junit_tests": 0, "observation_assertions": 0, "commands": [], "results": [],
               "preserved_outputs": [], "previous_runtime_receipt": str(old_receipt) if old_receipt else None}
     try:
-        require((Q / "com/m3/fs/MFileCapture.class").is_file(), "Generated capture classes are not ready")
-        require((Q / "com/m3/fs/MFileContentView.class").is_file(), "Generated content-view classes are not ready")
+        require((Q / "jdk/m3/fs/MFileCapture.class").is_file(), "Generated capture classes are not ready")
+        require((Q / "jdk/m3/fs/MFileContentView.class").is_file(), "Generated content-view classes are not ready")
         require((J / "bin/javac").is_file(), "Selected Java 21 compiler is unavailable")
         report["test_sources"] = compare_test_sources()
         write_json(O / "test-source-hashes.json", report["test_sources"])
@@ -188,22 +188,22 @@ def main():
              "output": B / "authored/facade/verification/current-classes",
              "logs": [B / "authored/facade/verification/current-behavior.log"],
              "fixtures": ["MFilesBehaviorTest", "MFilesProviderTest", "MFileCaptureTest"],
-             "source_root": B / "authored/facade/m3/fs/src/test/java/com/m3/fs",
-             "java_mains": [["FacadeTestLauncher", "com.m3.fs.MFilesBehaviorTest", "com.m3.fs.MFilesProviderTest", "com.m3.fs.MFileCaptureTest"]]},
+             "source_root": B / "authored/facade/m3/fs/src/test/java/jdk/m3/fs",
+             "java_mains": [["FacadeTestLauncher", "jdk.m3.fs.MFilesBehaviorTest", "jdk.m3.fs.MFilesProviderTest", "jdk.m3.fs.MFileCaptureTest"]]},
             {"name": "streams", "helper": B / "authored/streams/verification/run_stream_tests.py",
              "arguments": ["--classes", str(Q)], "expected": 35,
              "output": B / "authored/streams/verification/generated-classes",
              "logs": [B / "authored/streams/verification/generated.log"],
              "fixtures": ["MFileStreamsTest"],
-             "source_root": B / "authored/streams/m3/fs/src/test/java/com/m3/fs",
-             "java_mains": [["FacadeTestLauncher", "com.m3.fs.MFileStreamsTest"]]},
+             "source_root": B / "authored/streams/m3/fs/src/test/java/jdk/m3/fs",
+             "java_mains": [["FacadeTestLauncher", "jdk.m3.fs.MFileStreamsTest"]]},
             {"name": "facts", "helper": B / "run_generated_facts.py",
              "arguments": ["--classes", str(Q), "--out", str(B / "facts-capture"), "--java-home", str(J)], "expected": 1,
              "output": B / "facts-capture/tests", "archive_parent": B / "facts-capture",
              "logs": [B / "facts-capture" / name for name in ("compile.log", "junit.log", "consumer.log", "result.json")],
              "fixtures": ["MFileObservationSelfTest", "MFileObservationTest"],
-             "source_root": R / "src/test/java/com/m3/fs",
-             "java_mains": [["FacadeTestLauncher", "com.m3.fs.MFileObservationTest"], ["com.m3.fs.MFileObservationSelfTest"]]},
+             "source_root": R / "src/test/java/jdk/m3/fs",
+             "java_mains": [["FacadeTestLauncher", "jdk.m3.fs.MFileObservationTest"], ["jdk.m3.fs.MFileObservationSelfTest"]]},
         ]
         audit_directory = O / "audit"
         audit_directory.mkdir()

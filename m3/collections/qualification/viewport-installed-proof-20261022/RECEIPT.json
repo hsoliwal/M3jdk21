@@ -18,8 +18,8 @@
     {
       "path": "m3/collections/viewport-proof/CMakeLists.txt",
       "before_sha256": "ABSENT",
-      "after_sha256": "42c729b26b2cded8dd1ca723b724648ad8807768637feba738c18f1293db248b",
-      "git_blob": "f9ae1de7a223c62bc87c8a946013a4b0496bb1b3"
+      "after_sha256": "26b5922e84d61c357c9527711f0aa7d393407eeb728a33d9feac1f1d2c40cddb",
+      "git_blob": "d6fe9780e28e007aacb6786d37a36a7197cd11d3"
     },
     {
       "path": "m3/collections/viewport-proof/verify.py",

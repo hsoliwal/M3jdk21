@@ -3,7 +3,7 @@
 
 ## Existing owner and failure
 
-Reuse `M3KeyedParallelismPlan` from the exact existing Synexia snapshot at `fea5cef9f7a569e6ceb557f1965e234a3f075aba`, source blob `045e64a2dfc5c395bde5ec211196254ae7a680bb` (Apache-2.0). The receiver preimage is byte-identical. A failed worker publishes its original exception, then exits; the coordinator can remain blocked inserting into that worker's full queue before consuming the failure completion. The frozen latch-controlled baseline oracle timed out after 5.103 seconds, and the owning test JVM dump showed the same blocked admission.
+Reuse `M3KeyedParallelismPlan` from the exact existing Synexia snapshot at `fea5cef9f7a569e6ceb557f1965e234a3f075aba`, source blob `f42593121ff1e9fb93842f7a7d0c0950dfb3f689` (Apache-2.0). The receiver preimage is byte-identical. A failed worker publishes its original exception, then exits; the coordinator can remain blocked inserting into that worker's full queue before consuming the failure completion. The frozen latch-controlled baseline oracle timed out after 5.103 seconds, and the owning test JVM dump showed the same blocked admission.
 
 ## Selected behavioral atom
 

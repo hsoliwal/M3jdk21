@@ -35,7 +35,7 @@ def obj(path):
 def main():
     original = PUB / 'readback-static-review/raw-transport-adapter'
     old_seal = obj(original / 'FILE_SEALS.json')
-    assert sha(read(original / 'FILE_SEALS.json')) == '2102f85bd93143fd60431fd26a8069bdff2a5e4a2e6616deb6d6f934dc5191f8'
+    assert sha(read(original / 'FILE_SEALS.json')) == '57191a4d26a67022fb1a27d064ca082e0fc7bb5771827edf5e1d2ea3b7aaeda4'
     for row in old_seal['files']:
         raw = read(row['path'])
         assert len(raw) == row['bytes'] and sha(raw) == row['sha256']

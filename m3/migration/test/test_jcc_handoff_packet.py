@@ -15,7 +15,7 @@ import unittest
 
 
 CRATE = Path(
-    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/"
+    "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
     "jdk21-hash-pinned-text/jcc-handoff-20261005"
 )
 REGISTRY = "m3/docs/name-mapping.json"
@@ -29,11 +29,11 @@ GUARDS = {
     "m3/docs/name-mapping.schema.json",
     "m3/migration/migration.py",
     "m3/migration/recipe.py",
-    "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/"
+    "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/"
     "M3Jdk21HashPinnedTextSnapshotRecipe.java",
     "m3/tooling/migration-recipes/pom.xml",
     "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
-    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/"
+    "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
     "jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
 }
 UNRELATED = "unrelated/preserve.bin"

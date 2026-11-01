@@ -16,7 +16,7 @@
   </dependencies>
   <build>
     <resources>
-      <resource><directory>browser/web</directory><targetPath>com/m3/llm/browser</targetPath></resource>
+      <resource><directory>browser/web</directory><targetPath>jdk/m3/llm/browser</targetPath></resource>
       <resource><directory>.</directory><targetPath>META-INF</targetPath><includes><include>LICENSE</include><include>NOTICE</include></includes></resource>
     </resources>
     <plugins>

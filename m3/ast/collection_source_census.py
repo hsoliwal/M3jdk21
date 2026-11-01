@@ -6,7 +6,7 @@ import hashlib
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
-SOURCE = ROOT / 'm3/collections/src/main/java/com/m3/collections'
+SOURCE = ROOT / 'm3/collections/src/main/java/jdk/m3/collections'
 FAMILIES = (
  ('ARRAY', ('Array','Lane','Segment','Arena','Slot')),
  ('LIST', ('List','Sequence')),

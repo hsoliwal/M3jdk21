@@ -2,7 +2,7 @@
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
  *
- * Modified 2026-10-19: target-owned M3JDK21 collection-view implementation.
+ * Modified 2026-10-19: target-owned M3JDK 21 collection-view implementation.
  * First-party behavior/algorithm provenance: M3CollectionViews at
  * a3e88976ee8664d1ef5d0cade96aec1206b2133d and reentrant traversal atom at
  * e915f032dc0819cf3642837a98af36c16009dd3f. Original Apache attribution and
@@ -17,7 +17,7 @@ import java.util.function.Predicate;
 
 /**
  * Live filtered collection views and explicit, stable collection snapshots.
- * This is an additive M3JDK21 API.
+ * This is an additive M3JDK 21 API.
  *
  * <p>A live view retains its backing collection and predicate. It does not
  * retain a second element store, cache predicate results, or synchronize the

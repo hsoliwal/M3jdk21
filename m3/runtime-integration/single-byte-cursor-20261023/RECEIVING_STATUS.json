@@ -6,10 +6,10 @@
   "canonicalRepository": "hsoliwal/com.synexia",
   "canonicalCommit": "16949a8b1f740d8fdc91d0623b22864d2bc02871",
   "canonicalPullRequest": "https://github.com/hsoliwal/com.synexia/pull/13188",
-  "recipeId": "com.synexia.rewrite.M3Jdk21SingleByteCursorReuse",
+  "recipeId": "jdk.internal.m3.rewrite.M3Jdk21SingleByteCursorReuse",
   "authoringCommit": "aa7661674605341352b97ad844177106eae2f053",
   "custodyManifest": {
-    "path": "synexia-openrewrite-recipes/tasks/m3-single-byte-cursor-20261023/qualification/SOURCE_CUSTODY.json",
+    "path": "m3-openrewrite-recipes/tasks/m3-single-byte-cursor-20261023/qualification/SOURCE_CUSTODY.json",
     "gitBlob": "2cde42a04e825ee4d296422167de2a96dc3292e3",
     "sha256": "106edcd6b36371050c2049ecc47e0e06c1fa4124a5bde4e7ee0e53e75eda222f"
   },

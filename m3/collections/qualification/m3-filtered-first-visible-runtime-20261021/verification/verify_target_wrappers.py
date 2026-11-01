@@ -27,13 +27,13 @@ COPIER = 'ffbe6545ed75a96a534814ab6c6705a79be555aec28bf97f9db5dbf038c88720'
 QUALIFICATION = 'f97d250bc8a2eda0e46808935ce56ee200344a175ac44d0e1532e7c88b9a0112'
 PRIOR_INPUTS = '2f0ebb7adf0f22979fedff62190cb28f412da5ed87837a2c9c142b1191554cb1'
 LAUNCHER = '5a13137e385cb6a04ed2c7f130b5ff6436268d2973a93ae1349d091af2efbe5c'
-OWNER = 'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java'
+OWNER = 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java'
 TARGETS = {
     OWNER: '4209587c4cc43537e1ce0d7b316d1824a4de0f25154fef1a87cbe7e9ae9871ea',
-    'm3/collections/src/test/java/com/m3/collections/M3FirstVisibleAtomContract.java':
-        'cea097e4b1cf67a3cd2d8fdd4df5f29751db7d767daf785732c350003acede29',
-    'm3/collections/src/test/java/com/m3/collections/M3FirstVisibleAtomTest.java':
-        'c16fa40bc6768618df372d8d43936f5761d3375c35dfeeb9da15b84dc4fcb44d',
+    'm3/collections/src/test/java/jdk/m3/collections/M3FirstVisibleAtomContract.java':
+        '2e1e184d757695e3f65b0f8d1e1e0ab74327626f3b0ad33d21c309c6b4f95bfe',
+    'm3/collections/src/test/java/jdk/m3/collections/M3FirstVisibleAtomTest.java':
+        'f2c51985b6966d0eda1531ea21742477f8c0ee504f188938f3dca381e44d9367',
 }
 
 
@@ -158,7 +158,7 @@ def main():
             'qualified target allowlist differs')
 
     source_module = crate.parent.parent
-    runner_module = build / 'qualified-copier/synexia-openrewrite-recipes'
+    runner_module = build / 'qualified-copier/m3-openrewrite-recipes'
     runner_crate = runner_module / 'recipe-crates' / crate.name
 
     def copy_qualified(path):
@@ -170,10 +170,10 @@ def main():
     for name in ['apply_receiver.py', 'phases.tsv', 'atom-chains.tsv', 'pom.xml']:
         copy_qualified(crate / name)
     require(sha(observed[crate / 'apply_receiver.py']) == COPIER, 'qualified copier changed')
-    copy_qualified(crate / 'src/test/java/com/synexia/rewrite/M3FilteredFirstVisibleRuntimeRecipeTest.java')
+    copy_qualified(crate / 'src/test/java/jdk/internal/m3/rewrite/M3FilteredFirstVisibleRuntimeRecipeTest.java')
     for name in ['M3EditScope.java', 'M3ScopeInference.java', 'M3HashPinnedJavaSnapshotRecipe.java',
                  'M3HashPinnedTextSnapshotRecipe.java']:
-        owner = source_module / 'src/main/java/com/synexia/rewrite' / name
+        owner = source_module / 'src/main/java/jdk/internal/m3/rewrite' / name
         retain(owner, proof[name])
         copy_qualified(owner)
     for name in ['recipe-proof.tsv', 'proof-status.tsv', 'named-recipe.yml']:
@@ -182,7 +182,7 @@ def main():
         for path in sorted((crate / directory).rglob('*')):
             if path.is_file():
                 copy_qualified(path)
-    resources = source_module / 'src/main/resources/com/synexia/rewrite'
+    resources = source_module / 'src/main/resources/jdk/internal/m3/rewrite'
     phases = list(csv.DictReader(observed[crate / 'phases.tsv'].decode().splitlines(), delimiter='\t'))
     atoms = list(csv.DictReader(observed[crate / 'atom-chains.tsv'].decode().splitlines(), delimiter='\t'))
     for kind, phase_id in [(row['kind'], row['id']) for row in phases] + [
@@ -280,7 +280,7 @@ def main():
     require(not compiled, 'strict Java compilation emitted diagnostics')
     launch = [jdk / 'bin/java', '-XX:-UsePerfData', '-cp', classpath]
     first_visible = frozen / 'evidence/logs/baseline-first-visible.log'
-    run('target-direct-probe', [*launch, 'com.m3.collections.M3FirstVisibleAtomContract'], reference=first_visible)
+    run('target-direct-probe', [*launch, 'jdk.m3.collections.M3FirstVisibleAtomContract'], reference=first_visible)
     junit = run('target-junit', [*launch, 'ReceivingJUnitRunner'])
     require(junit == observed[first_visible]
             + b'PASS receiving-junit found=1 succeeded=1 skipped=0 aborted=0 failed=0\n',
@@ -289,16 +289,16 @@ def main():
                         'equal': True, 'actual_sha256': sha(junit.splitlines(keepends=True)[0]),
                         'reference_sha256': sha(observed[first_visible])})
     write_json('comparisons.json', comparisons)
-    run('target-navigation-tape', [*launch, 'com.m3.collections.M3FilteredNavigationReconciliationContract', 'tape'],
+    run('target-navigation-tape', [*launch, 'jdk.m3.collections.M3FilteredNavigationReconciliationContract', 'tape'],
         reference=frozen / 'receipts/baseline-navigation-tape.log')
     for mode in ['controls', 'late', 'real']:
-        run('target-range-' + mode, [*launch, 'com.m3.collections.M3FilteredRangeFailureContract', mode],
+        run('target-range-' + mode, [*launch, 'jdk.m3.collections.M3FilteredRangeFailureContract', mode],
             expected=0 if mode == 'controls' else 1,
             reference=frozen / ('receipts/baseline-range-' + mode + '.log'))
-    run('target-open-comparator-origin', [*launch, 'com.m3.collections.M3WrapperConvergenceContract', 'comparator-failure'],
+    run('target-open-comparator-origin', [*launch, 'jdk.m3.collections.M3WrapperConvergenceContract', 'comparator-failure'],
         expected=1, reference=frozen / 'receipts/baseline-open-comparator-origin.log')
     run('target-api', [jdk / 'bin/javap', '-J-XX:-UsePerfData', '-protected', '-classpath', classes,
-                      'com.m3.collections.M3FilteredViews'], reference=frozen / 'receipts/baseline-api.log')
+                      'jdk.m3.collections.M3FilteredViews'], reference=frozen / 'receipts/baseline-api.log')
     for path, raw in observed.items():
         require(path.read_bytes() == raw, 'qualification input changed during target execution: ' + str(path))
     final = snapshot(repo)

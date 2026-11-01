@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
 """C6 DEPENDENCY-SOURCE-INLINE, phase COMPOSE (attribution lock): write the donor-superset lock in
-the develop format (SYNEXIA-DONOR-ATTRIBUTION-1: license + licenseSha256 + every conventionally named
+the develop format (M3-DONOR-ATTRIBUTION-1: license + licenseSha256 + every conventionally named
 legal file declared as a notice + upstreamRepository/copyright/licenseName/reuseDisposition) for every
 inventoried artifact.
 

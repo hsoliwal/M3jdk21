@@ -1,8 +1,8 @@
 /* Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
  * SPDX-License-Identifier: Apache-2.0
  */
-import com.m3.text.SynexiaLangDexSourceEnvelope;
-import com.m3.text.SynexiaLangDexSourceEnvelope.Receipt;
+import jdk.m3.text.M3LangDexSourceEnvelope;
+import jdk.m3.text.M3LangDexSourceEnvelope.Receipt;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -43,7 +43,7 @@ public final class LangDexSourceEnvelopeTest {
                 link(Long.toString(largeId + 1), "100"))) + "\n";
         byte[] producerBytes = producerWire.getBytes(StandardCharsets.US_ASCII);
         Receipt producerReceipt = new Receipt(REVISION, 6, 6, sha256(producerBytes));
-        Receipt producerResult = SynexiaLangDexSourceEnvelope.verify(
+        Receipt producerResult = M3LangDexSourceEnvelope.verify(
                 new ByteArrayInputStream(producerBytes), producerReceipt);
         check(producerResult.equals(producerReceipt), "pinned Synexia expected-wire fixture");
 
@@ -53,7 +53,7 @@ public final class LangDexSourceEnvelopeTest {
                 + link(Long.toString(Long.MAX_VALUE), Long.toString(Long.MIN_VALUE)) + "\n";
         byte[] bytes = wire.getBytes(StandardCharsets.US_ASCII);
         Receipt expected = new Receipt(REVISION, 7, 7, sha256(bytes));
-        Receipt actual = SynexiaLangDexSourceEnvelope.verify(
+        Receipt actual = M3LangDexSourceEnvelope.verify(
                 new ByteArrayInputStream(bytes), expected);
         check(actual.equals(expected), "receipt round trip");
 
@@ -108,7 +108,7 @@ public final class LangDexSourceEnvelopeTest {
 
     private static void rejectBytes(String label, byte[] value, Receipt expected) throws Exception {
         try {
-            SynexiaLangDexSourceEnvelope.verify(new ByteArrayInputStream(value), expected);
+            M3LangDexSourceEnvelope.verify(new ByteArrayInputStream(value), expected);
             throw new AssertionError("accepted " + label);
         } catch (IOException expectedFailure) {
             checks++;

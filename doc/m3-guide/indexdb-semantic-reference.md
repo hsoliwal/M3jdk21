@@ -24,15 +24,15 @@ Paths in the first eight rows are under `m3/indexdb/src/main/java/com/m3/indexdb
 
 | Complete source owner | Blob SHA | Contract location and member boundary |
 | --- | --- | --- |
-| [M3IndexDB][store] | `61e913815a3dc8d94280a765cc050f2e75c9c040` | [Persistence](indexdb-persistence-reference.md#store-lifecycle-and-every-public-operation): all nine public methods, private path/publication/size/hash helpers, closed state and `SizeFailure` |
-| [M3IndexDbArtifact][artifact] | `7b152b2ed51a559c40b466cc7183e94c3b06a342` | [Artifact values](indexdb-persistence-reference.md#artifact-values-and-validation): canonical constructor, `create`, explicit payload/length accessors, generated projections and array equality boundary |
-| [M3IndexDbSemanticCodec][codec] | `da78ddcd3dbce6777a7434b7917434c4a2074cf6` | [Wire format](indexdb-persistence-reference.md#v1-semantic-wire-layout): package-private encode/decode; private constructor, framing, budget, text, SHA, ordinal/count, string-table and edge-emission helpers |
-| [M3IndexDbSemanticEdge][edge] | `81b2c71d69b99a081629b1c39db38664af1476e6` | [Identity records](#identity-records-and-kinds): canonical constructor and all four projections; endpoint/role/ordinal validation |
-| [M3IndexDbSemanticFingerprint][fingerprint] | `df44495f5e5b48ea1bf4a863df9ca188bd787948` | [Fingerprint algebra](#fingerprint-values-and-every-entry-point): canonical constructor, seven projections, nested `Component`, leaf/compose/distance/UTF-16/hash-hex APIs and private framing/hash/vote helpers |
-| [M3IndexDbSemanticIndex][index] | `a7245a61c9ccf353be202790f8058f84a0016205` | [Construction](#graph-construction-order-and-recomposition) and [query map](#queries-traversal-and-storage-adapters): constants, all 20 top-level public methods, nested `Similarity`, private indexes, composition/order/validation and `HashKind`/`VisitState` |
-| [M3IndexDbSemanticKind][kind] | `d024ecc2a6c39ae8e232a02493995f505c9a82e3` | [Kinds](#identity-records-and-kinds): all twelve constants; generated `values`/`valueOf` and persisted enum-order boundary |
-| [M3IndexDbSemanticNode][node] | `1c995542cd6d1a9c09126e9cadb4b2d6b2f11a7b` | [Identity records](#identity-records-and-kinds): both constructors, `withFingerprint`, all seven projections and identity/token validation |
-| [com.synexia.mindex.db.M3IndexDbFingerprintV1][compatibility] | `a51449e205016cfc01fb0ccbdb70e0038539b276` | [Compatibility](#historical-compatibility-owner): same declared fingerprint/component surface, its own record type, algorithm/framing and bounded parity tests |
+| [M3IndexDB][store] | `99f391c0c0697e38c47cb8c6a0542d9f49e38558` | [Persistence](indexdb-persistence-reference.md#store-lifecycle-and-every-public-operation): all nine public methods, private path/publication/size/hash helpers, closed state and `SizeFailure` |
+| [M3IndexDbArtifact][artifact] | `c158ed81aeabff2f045b6e970a1a70a7774547ea` | [Artifact values](indexdb-persistence-reference.md#artifact-values-and-validation): canonical constructor, `create`, explicit payload/length accessors, generated projections and array equality boundary |
+| [M3IndexDbSemanticCodec][codec] | `642fabc4af616333a30eded2b1d6cfaffc6712a7` | [Wire format](indexdb-persistence-reference.md#v1-semantic-wire-layout): package-private encode/decode; private constructor, framing, budget, text, SHA, ordinal/count, string-table and edge-emission helpers |
+| [M3IndexDbSemanticEdge][edge] | `b34c8d612cc1410523480bae8424fa7983638a97` | [Identity records](#identity-records-and-kinds): canonical constructor and all four projections; endpoint/role/ordinal validation |
+| [M3IndexDbSemanticFingerprint][fingerprint] | `428658eb8565f77f8e450a98e24e90a3837a2215` | [Fingerprint algebra](#fingerprint-values-and-every-entry-point): canonical constructor, seven projections, nested `Component`, leaf/compose/distance/UTF-16/hash-hex APIs and private framing/hash/vote helpers |
+| [M3IndexDbSemanticIndex][index] | `fa42c21f8610bd5b0fad6cf5b8fde3d19482ebd4` | [Construction](#graph-construction-order-and-recomposition) and [query map](#queries-traversal-and-storage-adapters): constants, all 20 top-level public methods, nested `Similarity`, private indexes, composition/order/validation and `HashKind`/`VisitState` |
+| [M3IndexDbSemanticKind][kind] | `e952c4e01aeba18f4c6c59e9a6be533af428528e` | [Kinds](#identity-records-and-kinds): all twelve constants; generated `values`/`valueOf` and persisted enum-order boundary |
+| [M3IndexDbSemanticNode][node] | `8157557dd28426fb61f3948cc0c3c3ed4c6a9e16` | [Identity records](#identity-records-and-kinds): both constructors, `withFingerprint`, all seven projections and identity/token validation |
+| [com.synexia.mindex.db.M3IndexDbFingerprintV1][compatibility] | `64318cf995164aee065e07dc6315b60630e377f5` | [Compatibility](#historical-compatibility-owner): same declared fingerprint/component surface, its own record type, algorithm/framing and bounded parity tests |
 
 All nine complete bodies are covered here, including internal helpers. Generated record/enum behavior is identified rather than counted as extra source declarations; inherited `Object`/`Enum` APIs are not a new method-by-method JDK audit. There is no native package documentation in these two physical production roots. Inline documentation, complete inbound callers, exact-head execution and whole-package/runtime qualification remain open.
 
@@ -211,17 +211,17 @@ The retained known-answer leaf has domain METHOD, structural features private/st
 
 The hierarchy fixtures are finite examples. They do not establish analyzer completeness, language/type equivalence, cryptographic collision absence, exhaustive graph orders, concurrency safety or resource behavior. Decoder normalization versus strict canonical-byte rejection, direct-constructor channel incoherence, repeated memberships with distinct ordinals and very deep graphs retain explicit caller/qualification obligations. Whole-package inline documentation, full inbound-consumer mapping, exact-head builds and all target receiving/runtime gates remain open.
 
-[store]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDB.java
-[artifact]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbArtifact.java
-[codec]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticCodec.java
-[edge]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticEdge.java
-[fingerprint]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticFingerprint.java
-[index]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticIndex.java
-[kind]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticKind.java
-[node]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticNode.java
-[compatibility]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/com/synexia/mindex/db/M3IndexDbFingerprintV1.java
-[test-index]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/com/m3/indexdb/M3IndexDbSemanticIndexTest.java
-[test-fail]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/com/m3/indexdb/M3IndexDbSemanticFailClosedTest.java
-[test-boundary]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/com/m3/indexdb/M3IndexDbSemanticBoundaryTest.java
-[test-parity]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/com/m3/indexdb/M3IndexDbFingerprintV1ParityTest.java
-[test-compat-boundary]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/com/m3/indexdb/M3IndexDbFingerprintV1BoundaryTest.java
+[store]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDB.java
+[artifact]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDbArtifact.java
+[codec]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDbSemanticCodec.java
+[edge]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDbSemanticEdge.java
+[fingerprint]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDbSemanticFingerprint.java
+[index]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDbSemanticIndex.java
+[kind]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDbSemanticKind.java
+[node]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/jdk/m3/indexdb/M3IndexDbSemanticNode.java
+[compatibility]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/main/java/jdk/internal/m3/mindex/db/M3IndexDbFingerprintV1.java
+[test-index]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDbSemanticIndexTest.java
+[test-fail]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDbSemanticFailClosedTest.java
+[test-boundary]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDbSemanticBoundaryTest.java
+[test-parity]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDbFingerprintV1ParityTest.java
+[test-compat-boundary]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/indexdb/src/test/java/jdk/m3/indexdb/M3IndexDbFingerprintV1BoundaryTest.java

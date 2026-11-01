@@ -200,7 +200,7 @@ m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/pom.xml	1ea378ca
 m3/collections/qualification/m3-sdk-families-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/collections/qualification/m3-sdk-provider-names-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/collections/qualification/m3-state-mask-arrays-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/mask-window-sparse-20261017/tooling/synexia-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017/pom.xml	1ea378ca6eb0d33f	RETIRED
+m3/collections/qualification/mask-window-sparse-20261017/tooling/m3-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/collections/qualification/object-state-batch-28/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/collections/qualification/sdk-bulk-capture-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/collections/qualification/sdk-five-owner-repair-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
@@ -292,7 +292,7 @@ m3/runtime-integration/fix/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/runtime-integration/primitive-address-identity/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/runtime-integration/qualification/bitlane-count-skip-20261019/recipes/m3jdk21-bitlane-runtime-count-skip-20261019/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/runtime-integration/regex-precompute/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/synexia-import/pom.xml	1ea378ca6eb0d33f	RETIRED
+m3/m3-import/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/tooling/atom-logic-receiver/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/tooling/backport-dag/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/tooling/cb/pom.xml	1ea378ca6eb0d33f	RETIRED
@@ -330,7 +330,7 @@ m3/tooling/module-packs/parser/real-providers/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/tooling/module-packs/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/tooling/module-packs/verification/jdk-execution/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/tooling/mr/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/netbeans-gap-boundary-20261019/synexia-openrewrite-recipes/recipe-crates/netbeans-gap-boundary-20261019/pom.xml	1ea378ca6eb0d33f	RETIRED
+m3/tooling/netbeans-gap-boundary-20261019/m3-openrewrite-recipes/recipe-crates/netbeans-gap-boundary-20261019/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/tooling/recipe-agent-api/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/tooling/regex-relations-current-owner/sdk/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/tooling/region-foundation-repair/pom.xml	1ea378ca6eb0d33f	RETIRED
@@ -338,7 +338,7 @@ m3/tooling/shared-frontend/eclipse-jdt/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/tooling/shared-frontend/openrewrite-runtime/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/tooling/shared-frontend/openrewrite-tool/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/tooling/shared-frontend/openrewrite/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/synexia-jdk-a3-recipes/pom.xml	1ea378ca6eb0d33f	RETIRED
+m3/tooling/m3jdk-a3-recipes/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/tooling/tq-sync/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/tooling/tq-sync/source-reactor/pom.xml	1ea378ca6eb0d33f	RETIRED
 m3/tooling/tq/pom.xml	1ea378ca6eb0d33f	RETIRED

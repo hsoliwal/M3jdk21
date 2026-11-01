@@ -90,7 +90,7 @@ verify	UNKNOWN STEP	2026-10-29T23:33:26.3181357Z 100  343M    0  343M    0     0
 verify	UNKNOWN STEP	2026-10-29T23:33:26.3182601Z 100  349M    0  349M    0     0  7815k      0 --:--:--  0:00:45 --:--:-- 6870k
 verify	UNKNOWN STEP	2026-10-29T23:33:38.0703698Z ##[group]Run set -euo pipefail
 verify	UNKNOWN STEP	2026-10-29T23:33:38.0704300Z [36;1mset -euo pipefail[0m
-verify	UNKNOWN STEP	2026-10-29T23:33:38.0705158Z [36;1mpython3 "$REPO/m3/runtime-integration/verify-synexia-intake.py" --repo "$REPO"[0m
+verify	UNKNOWN STEP	2026-10-29T23:33:38.0705158Z [36;1mpython3 "$REPO/m3/runtime-integration/verify-m3-intake.py" --repo "$REPO"[0m
 verify	UNKNOWN STEP	2026-10-29T23:33:38.0795912Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
 verify	UNKNOWN STEP	2026-10-29T23:33:38.0796759Z env:
 verify	UNKNOWN STEP	2026-10-29T23:33:38.0797099Z   REPO: /home/runner/work/_temp/repo

@@ -6,8 +6,8 @@ Source authority: private Synexia draft [#14086](https://github.com/hsoliwal/com
 exact canonical commit `f86a6668152dfa5218d0e1086b75e01349a5511e`.
 Receiving source paths use the three exact files from its hash-pinned Java snapshot,
 not a second independently invented implementation. Original M3JDK21 preimage
-Git blobs: `3ee7233f27105d326832e212b01b8da17142569e`,
-`2fb403549f2baf0afe5b04743647c26ebd4cce80`. The helper path was absent.
+Git blobs: `7816135483c11e4c898e9ecd79443ac96085fa99`,
+`7ea8b9cd3ebe1d582026a98649d8598c72789cc3`. The helper path was absent.
 
 Acceptance boundary: additive bulk constructors and cold-path policy extraction only.
 No changes to existing offer, removal, iterator, JNI or external dependency rules.

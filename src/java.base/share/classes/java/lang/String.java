@@ -153,7 +153,7 @@ public final class String
      * Shadows produced from M3String are allocated by the JNI shadow boundary. Bootstrap Strings
      * created before M3 activation retain the stock representation.</p>
      *
-     * <p>M3JDK21 retains the ordinary Java 21 String layout <em>as well as</em> its
+     * <p>M3JDK 21 retains the ordinary Java 21 String layout <em>as well as</em> its
      * canonical M3 owner/coordinate. For a nonempty M3-backed String, this field refers
      * to the VM-wide shared zero-length byte[] sentinel, not a duplicate spelling.
      * The coder and m3 fields describe the real immutable text; native region readers

@@ -5,7 +5,7 @@
 
 ## Source and atom
 
-Original `m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java` Git blob `7b777fcabcf7c47ab75ad0df1095663b11dcc31c`, SHA-256 `511800d4d79c7d8838ddb497f031e13827decd44c9c2790093f89ea01cdaa349`.
+Original `m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java` Git blob `a8470a26113a3f55e407a80bef95953146f3ce72`, SHA-256 `90b0ba9467d6cb6741de9a3e7b39f1a6016eef2401da3b3eadfab3cdb0e975c8`.
 Candidate Git blob `a99cd0355879a2f941079e8401de00b51cd0093e`, SHA-256 `34c5ebc2cfde388f02dfee4fcaa64d1cb81058210d5dcb261bb76ef01adaf0c7`.
 
 Replace the single `FilteredCollection.isEmpty()` terminal scan. Before: `!iterator().hasNext()` constructs a transient filtering iterator and stops when the predicate finds a visible element. After: scan `backing.iterator()` with the same `hasNext`/`next`/`visible` call order, stopping on the first visible item. This avoids only the temporary selected iterator; no external entry/payload/cache exists. Inherited by `FilteredCollection`, `FilteredSet`, `FilteredSortedSet`, `FilteredNavigableSet` (these have no `iterator()` override at the pinned source epoch).

@@ -1,7 +1,7 @@
-diff --git a/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java b/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java
+diff --git a/m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java b/m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java
 index e094fdd..10c4d16 100644
---- a/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java
-+++ b/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java
+--- a/m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java
++++ b/m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java
 @@ -133,6 +133,19 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
          StrictReadOnlyList(List<E> delegate) { this.delegate = Objects.requireNonNull(delegate); }
          @Override public int size() { return delegate.size(); }
@@ -22,10 +22,10 @@ index e094fdd..10c4d16 100644
          @Override public ListIterator<E> listIterator(int index) {
              return Collections.unmodifiableList(delegate).listIterator(index);
          }
-diff --git a/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java b/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java
+diff --git a/m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java b/m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java
 index ccf65b2..d84e5ab 100644
---- a/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java
-+++ b/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java
+--- a/m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java
++++ b/m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java
 @@ -1,3 +1,4 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
  // SPDX-License-Identifier: Apache-2.0
@@ -47,10 +47,10 @@ index ccf65b2..d84e5ab 100644
      @Override public Iterator<E> descendingIterator() { return delegate.descendingIterator(); }
      @Override public int size() { return delegate.size(); }
      @Override public boolean isEmpty() { return delegate.isEmpty(); }
-diff --git a/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java b/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
+diff --git a/m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java b/m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java
 index 6ec7a88..c75721c 100644
---- a/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
-+++ b/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
+--- a/m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java
++++ b/m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java
 @@ -1,12 +1,14 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
  /*
   * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
@@ -281,10 +281,10 @@ index 6ec7a88..c75721c 100644
                  @Override public Iterator<Entry<K, V>> iterator() {
                      Iterator<Entry<K, V>> cursor = sorted.entrySet().iterator();
                      Iterator<Entry<K, V>> filtered = M3FilteredViews.filtered(cursor,
-diff --git a/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java b/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java
+diff --git a/m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java b/m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java
 index ef0fac5..1e77b20 100644
---- a/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java
-+++ b/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java
+--- a/m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java
++++ b/m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java
 @@ -1,6 +1,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
  /*
   * Copyright 2026 Hitesh Soliwal and contributors
@@ -314,10 +314,10 @@ index ef0fac5..1e77b20 100644
              throw new IllegalArgumentException("source/output metadata alias");
          }
          for (int[] plane : statePlanes) {
-diff --git a/m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java b/m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java
+diff --git a/m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java b/m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java
 index c1c0bea..a6612fd 100644
---- a/m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java
-+++ b/m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java
+--- a/m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java
++++ b/m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java
 @@ -9,8 +9,10 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
  import java.util.Arrays;
  import java.util.BitSet;
@@ -346,10 +346,10 @@ index c1c0bea..a6612fd 100644
      public int[] physicalIndices() { return Arrays.copyOfRange(positions, from, to); }
  
      /** Detached copy; mutable callers cannot modify the canonical reference lane. */
-diff --git a/m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java b/m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java
+diff --git a/m3/collections/src/main/java/jdk/m3/collections/M3LongArrayDeque.java b/m3/collections/src/main/java/jdk/m3/collections/M3LongArrayDeque.java
 index 73d9011..c049870 100644
---- a/m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java
-+++ b/m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java
+--- a/m3/collections/src/main/java/jdk/m3/collections/M3LongArrayDeque.java
++++ b/m3/collections/src/main/java/jdk/m3/collections/M3LongArrayDeque.java
 @@ -1,5 +1,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
  /*
   * Copyright 2026 Hitesh Soliwal and contributors
@@ -393,10 +393,10 @@ index 73d9011..c049870 100644
      private int physicalIndex(int logicalIndex) {
          return (head + logicalIndex) & mask();
      }
-diff --git a/m3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java b/m3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java
+diff --git a/m3/collections/src/main/java/jdk/m3/collections/M3LongCompositeViews.java b/m3/collections/src/main/java/jdk/m3/collections/M3LongCompositeViews.java
 index 7d4a3b8..31d199e 100644
---- a/m3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java
-+++ b/m3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java
+--- a/m3/collections/src/main/java/jdk/m3/collections/M3LongCompositeViews.java
++++ b/m3/collections/src/main/java/jdk/m3/collections/M3LongCompositeViews.java
 @@ -254,7 +254,73 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
              return last;
          }
@@ -471,10 +471,10 @@ index 7d4a3b8..31d199e 100644
              M3LongIterator cursor = iterator();
              boolean found = false;
              long last = 0L;
-diff --git a/m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java b/m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java
+diff --git a/m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java b/m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java
 index ef1a953..37b669d 100644
---- a/m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java
-+++ b/m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java
+--- a/m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java
++++ b/m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java
 @@ -1,3 +1,4 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
  /*
@@ -499,10 +499,10 @@ index ef1a953..37b669d 100644
  
          @Override public int size() {
              int count = 0;
-diff --git a/m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java b/m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java
+diff --git a/m3/collections/src/main/java/jdk/m3/collections/M3ObjectIndexSnapshot.java b/m3/collections/src/main/java/jdk/m3/collections/M3ObjectIndexSnapshot.java
 index a212ea5..d20986b 100644
---- a/m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java
-+++ b/m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java
+--- a/m3/collections/src/main/java/jdk/m3/collections/M3ObjectIndexSnapshot.java
++++ b/m3/collections/src/main/java/jdk/m3/collections/M3ObjectIndexSnapshot.java
 @@ -8,11 +8,15 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
  import java.util.AbstractList;
  import java.util.Arrays;
@@ -567,10 +567,10 @@ index a212ea5..d20986b 100644
      public int physicalSlotAt(int index) {
          return physicalSlots[denseRow(index)];
      }
-diff --git a/m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java b/m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java
+diff --git a/m3/collections/src/main/java/jdk/m3/collections/M3SlotSpliterators.java b/m3/collections/src/main/java/jdk/m3/collections/M3SlotSpliterators.java
 index 30cf137..2fe08d8 100644
---- a/m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java
-+++ b/m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java
+--- a/m3/collections/src/main/java/jdk/m3/collections/M3SlotSpliterators.java
++++ b/m3/collections/src/main/java/jdk/m3/collections/M3SlotSpliterators.java
 @@ -1,3 +1,4 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +// Modified 2026 by Hitesh Soliwal and contributors: retain lazy comparator lookup for filtered split children.
  // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: Synexia-to-M3 package/type adaptation.

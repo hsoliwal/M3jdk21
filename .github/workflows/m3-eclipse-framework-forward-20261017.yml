@@ -5,7 +5,7 @@ on:
     paths:
       - 'm3/eclipse/framework/**'
       - 'm3/collections/src/main/java/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
       - '.github/workflows/m3-eclipse-framework-forward-20261017.yml'
   workflow_dispatch:
 permissions:
@@ -42,8 +42,8 @@ jobs:
           from pathlib import Path
           import hashlib
           import subprocess
-          original = Path('m3/eclipse/framework/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/eclipse-framework-m3-index-forward')
-          current = Path('m3/eclipse/framework/recipe/flags-20261020/src/test/resources/com/synexia/rewrite/hash-pinned-java/m3-eclipse-full-delta-flags-20261020')
+          original = Path('m3/eclipse/framework/recipe/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/eclipse-framework-m3-index-forward')
+          current = Path('m3/eclipse/framework/recipe/flags-20261020/src/test/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-eclipse-full-delta-flags-20261020')
           old = [row.split('\t') for row in (original/'manifest.tsv').read_text().splitlines() if row and not row.startswith('#')]
           latest = [row.split('\t') for row in (current/'manifest.tsv').read_text().splitlines() if row and not row.startswith('#')]
           assert len(old) == 8 and len(latest) == 2
@@ -54,8 +54,8 @@ jobs:
           # The historical recipe postimages stay sealed. Admit only this
           # qualified test-fixture successor after the full-width flags API.
           successor_tests = {
-              'm3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseRuntimeActivatorTest.java': 'ca493e93c4a5c068948af0573563ca091b47e4455d9c7ef46a2dd9f3751d270c',
-              'm3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseDeltaIdentitySetTest.java': 'a363fa6cca4799cc9ff1866d7848f4a1b7e3d60b9c707fdb035b28a240d1b8ae',
+              'm3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseRuntimeActivatorTest.java': '510f39d07ad486dbb7565c9db66cc30b480a11a2f21839a2d4e5193b5ada1022',
+              'm3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseDeltaIdentitySetTest.java': '3f3221dc9c8d4a9b34c86374f2c798d96603b9b6201a5ae85fc0c0aeae01cc0e',
           }
           for path, after_hash in successor_tests.items():
               assert hashlib.sha256(Path(path).read_bytes()).hexdigest() == after_hash, path
@@ -63,11 +63,11 @@ jobs:
               assert hashlib.sha256((original/template).read_bytes()).hexdigest() == expected, template
               if path not in replacements and path not in successor_tests:
                   assert hashlib.sha256(Path(path).read_bytes()).hexdigest() == expected, path
-          delta = 'm3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseResourceDeltaSnapshot.java'
-          assert originals[delta][2] == '3e499ab33152d8a79c3171ce96a20ae35968c8e573e1ac48b999ede35a7581ec'
-          assert replacements[delta][1] == '94fc5f6ac7d87439758e8dc6544754e0a77ebbff52d36bbb8ae18a6447aa555c'
-          identity = Path('m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseDeltaIdentitySetTest.java')
-          assert hashlib.sha256(identity.read_bytes()).hexdigest() == 'a363fa6cca4799cc9ff1866d7848f4a1b7e3d60b9c707fdb035b28a240d1b8ae'
+          delta = 'm3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseResourceDeltaSnapshot.java'
+          assert originals[delta][2] == '1ce2e7fac96924f307ab150a21e93303d2d0f1ecd422c68d6ab20b35039b276c'
+          assert replacements[delta][1] == '21a893d7f976e5bf2d42998335d99556edfffb266016cce15d5784ebc1c19274'
+          identity = Path('m3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseDeltaIdentitySetTest.java')
+          assert hashlib.sha256(identity.read_bytes()).hexdigest() == '3f3221dc9c8d4a9b34c86374f2c798d96603b9b6201a5ae85fc0c0aeae01cc0e'
           for path, before, after, template in latest:
               prior = current/template.replace('.after.txt','.before.txt')
               assert hashlib.sha256(prior.read_bytes()).hexdigest() == before, prior
@@ -93,7 +93,7 @@ jobs:
           test -f proof/arrays-classes/module-info.class
           jar --create --file proof/m3-arrays.jar -C proof/arrays-classes .
           jar --describe-module --file proof/m3-arrays.jar > proof/arrays-module-describe.txt
-          grep -q '^com.m3.arrays' proof/arrays-module-describe.txt
+          grep -q '^jdk.m3.arrays' proof/arrays-module-describe.txt
           find m3/collections/src/main/java -name '*.java' | sort > proof/m3-sources.txt
           test -s proof/m3-sources.txt
           javac --release 21 --module-path proof/m3-arrays.jar -Xlint:all,-module -Werror \
@@ -102,7 +102,7 @@ jobs:
           jar --create --file proof/m3-collections.jar -C proof/classes .
           jar --create --file proof/m3-collections-osgi.jar --manifest m3/eclipse/framework/osgi/m3-collections.MF -C proof/classes .
           jar --describe-module --file proof/m3-collections.jar > proof/core-module-describe.txt
-          grep -q '^com.m3.collections' proof/core-module-describe.txt
+          grep -q '^jdk.m3.collections' proof/core-module-describe.txt
           mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file \
             -Dfile="$GITHUB_WORKSPACE/proof/m3-arrays.jar" \
             -DpomFile="$GITHUB_WORKSPACE/m3/arrays/pom.xml" -Dpackaging=jar
@@ -124,9 +124,9 @@ jobs:
           print('ECLIPSE_API_OSGI_SERVICE_JUNIT_TESTS',n)
           PY
           unzip -p m3/eclipse/framework/target/m3-eclipse-framework-forward-0.1.0-SNAPSHOT.jar META-INF/MANIFEST.MF > proof/eclipse-bundle-manifest.txt
-          grep -q 'Bundle-Activator: com.m3.eclipse.framework.M3EclipseRuntimeActivator' proof/eclipse-bundle-manifest.txt
+          grep -q 'Bundle-Activator: jdk.m3.eclipse.framework.M3EclipseRuntimeActivator' proof/eclipse-bundle-manifest.txt
           unzip -p proof/m3-collections-osgi.jar META-INF/MANIFEST.MF > proof/collections-bundle-manifest.txt
-          grep -q 'Export-Package: com.m3.collections' proof/collections-bundle-manifest.txt
+          grep -q 'Export-Package: jdk.m3.collections' proof/collections-bundle-manifest.txt
           git diff --exit-code -- m3/eclipse/framework/src m3/collections/src/main/java
       - name: Retain exact-head evidence including failures
         uses: actions/upload-artifact@v4

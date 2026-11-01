@@ -8,7 +8,7 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[4]
 AST = ROOT / "m3/ast"
-CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-universal-ast-dag-20261020"
+CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-universal-ast-dag-20261020"
 MANIFEST = CRATE / "manifest.tsv"
 
 def sha(path):
@@ -40,14 +40,14 @@ if rows != sorted(rows) or len(rows) != len(set(rows)):
 if len(rows) != 9:
     raise SystemExit("FAIL expected 9 sealed Java targets")
 
-production = sorted(str(p) for p in (AST / "src/main/java/com/m3/ast").glob("M3*.java"))
-selftest = AST / "src/test/java/com/m3/ast/M3UniversalAstDagSelfTest.java"
+production = sorted(str(p) for p in (AST / "src/main/java/jdk/m3/ast").glob("M3*.java"))
+selftest = AST / "src/test/java/jdk/m3/ast/M3UniversalAstDagSelfTest.java"
 with tempfile.TemporaryDirectory(prefix="m3-universal-ast-dag-") as directory:
     out = Path(directory)
     run(["javac", "--release", "21", "-proc:none", "-Xlint:all", "-Werror",
          "-d", str(out), *production, str(selftest)])
-    first = run(["java", "-Xmx256m", "-cp", str(out), "com.m3.ast.M3UniversalAstDagSelfTest"])
-    second = run(["java", "-Xmx256m", "-cp", str(out), "com.m3.ast.M3UniversalAstDagSelfTest"])
+    first = run(["java", "-Xmx256m", "-cp", str(out), "jdk.m3.ast.M3UniversalAstDagSelfTest"])
+    second = run(["java", "-Xmx256m", "-cp", str(out), "jdk.m3.ast.M3UniversalAstDagSelfTest"])
     if first != second or not first.startswith("M3_UNIVERSAL_AST_DAG_PASS checks="):
         raise SystemExit("FAIL nondeterministic/unexpected proof: " + first + " / " + second)
     print(first)

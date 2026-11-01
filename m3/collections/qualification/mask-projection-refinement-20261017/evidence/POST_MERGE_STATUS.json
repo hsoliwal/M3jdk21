@@ -8,7 +8,7 @@
   "merge_performed_by_this_task": false,
   "merge_message_disposition": "preserve current master tree unchanged; retain PR heads as explicit parents",
   "qualified_projection_blob": "3903692e611c8b91cd043d92547249facbcf939e",
-  "merge_projection_blob": "317136e66200db1d8fc72d47ff9f8cf52b4566b5",
+  "merge_projection_blob": "09c10e2b4874f70ece8c1e4392a574db652945f7",
   "qualified_native_blob": "0e8669991317266651e2d7a129bbf4b94b716797",
   "merge_native_blob": "073d16f32c268b67b2b21a8d4152494654df8d56",
   "qualification_applies_to": "9ab8197611e4a9f9d1a285a687bca16fd47d1d50 exact source; canonical45-file receiver",

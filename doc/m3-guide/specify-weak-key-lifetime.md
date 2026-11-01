@@ -246,20 +246,20 @@ lifetime, callback interference, arbitrary collision/reentrancy, exhaustive
 default-method aliasing, OOME recovery and Java SE completeness remain broader
 than these finite tests. No claim of deterministic eviction or leak freedom follows.
 
-Exact owner blob: `5d7eb065aeca2cecc1d939532d154c87bbb01c2c`.
-Shared bodies: `M3SlotMap` `a7d20300717661c26897f0b69e1e5a83400a62ad`,
+Exact owner blob: `8fcde012cb5cf38061475e365b90e6f1ca4b0a3d`.
+Shared bodies: `M3SlotMap` `a10ee53abb325476ac32c7210712e30cc304182c`,
 `M3SlotArrays` `e337c69710c871f8caa77a1afe53149f1fd705cc`.
 
-[owner]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3WeakHashMap.java
-[slot-map]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3SlotMap.java
-[arrays]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java
-[factory]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/com/m3/collections/M3Collections.java
+[owner]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3WeakHashMap.java
+[slot-map]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3SlotMap.java
+[arrays]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3SlotArrays.java
+[factory]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/jdk/m3/collections/M3Collections.java
 [module]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/main/java/module-info.java
 [pom]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/pom.xml
 [guide]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/README.md
-[map-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3MapContractTest.java
-[footprint-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3FootprintContractTest.java
-[entry-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3NoRetainedStructuralEntryTest.java
-[factory-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3FactoryContractTest.java
-[allocation-probe]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/com/m3/collections/M3AllocationProbe.java
+[map-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3MapContractTest.java
+[footprint-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3FootprintContractTest.java
+[entry-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3NoRetainedStructuralEntryTest.java
+[factory-test]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3FactoryContractTest.java
+[allocation-probe]: https://github.com/hsoliwal/M3jdk21/blob/1011050da4205a901ad079d7711b6b8efd8a9af7/m3/collections/src/test/java/jdk/m3/collections/M3AllocationProbe.java
 [abstract-collection]: https://github.com/hsoliwal/M3jdk21/blob/7abdf87cb497d0d94abeb723d70c50f856ecc381/src/java.base/share/classes/java/util/AbstractCollection.java

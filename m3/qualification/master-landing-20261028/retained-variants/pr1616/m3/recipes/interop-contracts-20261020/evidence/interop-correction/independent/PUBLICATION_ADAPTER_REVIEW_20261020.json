@@ -55,12 +55,12 @@
       "known_inputs": [
         {
           "local_path": "work-interop-fix-20261020/independent/M3SpringArrayMultiValueMap.java",
-          "source_path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3SpringArrayMultiValueMap.java",
+          "source_path": "m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3SpringArrayMultiValueMap.java",
           "sha256": "8062247a92ee9dc90d313b715ba9158e47c53b3e7848508a5fdd54ddaaaecb96"
         },
         {
           "local_path": "work-final-review-20261020/interop/M3ApacheBag.java",
-          "source_path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java",
+          "source_path": "m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3ApacheBag.java",
           "sha256": "5ff51272c4fd48ef11a09b9138ac2329392bb2a70e2a4fe43fab2889909d224f"
         }
       ],

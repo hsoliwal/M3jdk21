@@ -25,10 +25,10 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
-import com.m3.collections.guava.M3HashMultiset;
+import jdk.m3.collections.guava.M3HashMultiset;
 
 /**
- * Runnable example for com.m3.collections.guava.M3HashMultiset: the same provider-API calls on com.google.common.collect.HashMultiset and on the owned class,
+ * Runnable example for jdk.m3.collections.guava.M3HashMultiset: the same provider-API calls on com.google.common.collect.HashMultiset and on the owned class,
  * then a local allocation and footprint comparison. Output goes through java.util.logging (a ConsoleHandler).
  *
  * <p>Run from the module directory after {@code mvn package} (or with the module's classes directory):

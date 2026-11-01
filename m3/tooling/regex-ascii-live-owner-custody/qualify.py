@@ -20,8 +20,8 @@ WORKFLOW = ".github/workflows/m3-regex-ascii-live-owner-custody.yml"
 ORIGINAL_SDK = RECEIVER / "m3/tooling/regex-ascii-lexical-receiver/sdk"
 ORIGINAL_PREFIX = "m3/tooling/regex-ascii-lexical-receiver/"
 ENGINES = {
-    "M3GpuToolJoinRecipe": "1c1b1b568d369f688f6953161636bf36b484bf5a",
-    "M3GpuToolJoinManifest": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+    "M3GpuToolJoinRecipe": "2ec479b8609459a28fdfd8a7a7d63cc44e919f00",
+    "M3GpuToolJoinManifest": "78d5fb68f13872164973a8918cc7886c5f548bca",
 }
 FORBIDDEN = ("originalPrivateModelQualified", "stringDispatchQualified", "jniRuntimeQualified",
              "windowsQualified", "fullMatchedJdkQualified", "performanceRetentionQualified",
@@ -149,8 +149,8 @@ def binding(fresh=False):
 def checked_sdk(label, root, *, helper):
     module = runpy.run_path(str(regular(root / "verify.py")), run_name="m3_lexical_" + label + "_report")
     pins, pins_raw = module["inputs"]()
-    expected_suite = ("com.synexia.rewrite.M3RegexAsciiLiveOwnerCustodyRecipeTest" if helper
-                      else "com.synexia.rewrite.M3RegexAsciiLexicalReceiverRecipeTest")
+    expected_suite = ("jdk.internal.m3.rewrite.M3RegexAsciiLiveOwnerCustodyRecipeTest" if helper
+                      else "jdk.internal.m3.rewrite.M3RegexAsciiLexicalReceiverRecipeTest")
     expected_methods = (["allEightPartialStatesBothOrdersReachExactFixedPoint",
                          "allEightInverseStatesBothOrdersRecoverExactBefore",
                          "eachOwnedInputRefusesDriftMissingAndDuplicateOwnership"] if helper else
@@ -201,7 +201,7 @@ def checked_sdk(label, root, *, helper):
         emitted_root = root / "target/emitted/regex-ascii-lexical-receiver-20261019"
     compiled = {}
     for name in expected_classes:
-        raw = regular(root / ("target/classes/com/synexia/rewrite/" + name + ".class")).read_bytes()
+        raw = regular(root / ("target/classes/jdk/internal/m3/rewrite/" + name + ".class")).read_bytes()
         if len(raw) < 9 or raw[:4] != bytes.fromhex("cafebabe") or int.from_bytes(raw[6:8], "big") != 65:
             raise RuntimeError("actual Java21 provider classes required")
         compiled[name] = identity(raw)

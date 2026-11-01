@@ -20,17 +20,17 @@
     "changed_files": 6
   },
   "fenwick_exact_blobs": {
-    "m3/collections/src/main/java/com/m3/collections/M3SparseExtents.java": "ba6b2ebd0fac9f737deb28bce9385fff07164997",
+    "m3/collections/src/main/java/jdk/m3/collections/M3SparseExtents.java": "ba6b2ebd0fac9f737deb28bce9385fff07164997",
     ".github/workflows/m3-sparse-viewport-geometry.yml": "bc5a1a4e0e2d3ec2049caf2cf360c0a64c1ec30c",
-    "m3/collections/viewport-proof/fixtures/M3FenwickInverseTest.txt": "dafa004fcbe3fe9e4183f830b2f1159e3c40591f",
-    "m3/collections/qualification/viewport-fenwick/DOCUMENTATION.json": "f56c52907bc52b2188b2ebdaab015c70161faafe",
-    "m3/collections/qualification/viewport-fenwick/GEOMETRY_CI.json": "1938fb005d19fb85a1f68130dff6342fbe50e3cc",
-    "m3/collections/qualification/viewport-fenwick/RECEIVING.json": "7ffd1552c957bb613e7ca004857472c696a63778"
+    "m3/collections/viewport-proof/fixtures/M3FenwickInverseTest.txt": "9cd8ffcd6967091ea4382e532d67454971c5804f",
+    "m3/collections/qualification/viewport-fenwick/DOCUMENTATION.json": "75f175cf3b104d7e870dd464726ad8484dafe39f",
+    "m3/collections/qualification/viewport-fenwick/GEOMETRY_CI.json": "11d86595f9b63fc38e51342ddfbf0e3ffd731f5e",
+    "m3/collections/qualification/viewport-fenwick/RECEIVING.json": "3a4d655b23e6c360c6b5920f7ef9ea9052657646"
   },
   "combined_workflow": {
     "source_pr": 2047,
     "source_commit": "7c41f2fc002ec6c26ba9d68381f4ce5733c95df7",
-    "git_blob": "46aaae839ed91bc65fc4fa3c2af0554a0d94f8b5",
+    "git_blob": "eed7192be9e163bf842a540edaf2453d4e272d2b",
     "historical_success_run": 40538731130,
     "historical_success_valid_only_for_source_epoch": true
   },
@@ -59,7 +59,7 @@
         "kind": "ABSENT"
       },
       {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3SparseExtents.java",
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3SparseExtents.java",
         "kind": "EVOLVED"
       },
       {

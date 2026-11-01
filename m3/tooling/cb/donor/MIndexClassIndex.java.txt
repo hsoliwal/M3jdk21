@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: Apache-2.0
-package com.synexia.mindex.classindex;
+package jdk.internal.m3.mindex.classindex;
 
-import com.synexia.mindex.MIndexProgressMonitor;
-import com.synexia.mindex.MIndexString;
-import com.synexia.mindex.foundation.MIndexAlgorithm;
-import com.synexia.mindex.foundation.MIndexExecutionContext;
+import jdk.internal.m3.mindex.MIndexProgressMonitor;
+import jdk.internal.m3.mindex.MIndexString;
+import jdk.internal.m3.mindex.foundation.MIndexAlgorithm;
+import jdk.internal.m3.mindex.foundation.MIndexExecutionContext;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Constructor;

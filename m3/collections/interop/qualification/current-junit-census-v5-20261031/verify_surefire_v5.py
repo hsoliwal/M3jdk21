@@ -20,7 +20,7 @@ JUNIT_V4 = ("m3/collections/interop/qualification/"
 JUNIT_V4_BLOB = "f3995e0ff372fae238062de29dfa56ac08ab4a95"
 HISTORICAL = ("m3/collections/interop/qualification/"
               "runtime-junit-census-20261022/verify_surefire.py")
-HISTORICAL_BLOB = "91a438127d48fac9b32104a1e98f1a3eb18bdc5d"
+HISTORICAL_BLOB = "0f8f6c50854d53672c3a07d26473b8457d439cbf"
 
 
 def load_exact(approved: Path, relative: str, blob: str, module_name: str):

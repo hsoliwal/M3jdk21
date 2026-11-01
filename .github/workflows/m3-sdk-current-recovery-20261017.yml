@@ -2,10 +2,10 @@ name: M3 SDK historical partition + primitive bag recovery
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3CollectionSdk.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3IndexPartitions.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongBag.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3SdkRecovery*.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3CollectionSdk.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexPartitions.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongBag.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3SdkRecovery*.java'
       - 'm3/collections/qualification/sdk-current-recovery-20261017/**'
       - '.github/workflows/m3-sdk-current-recovery-20261017.yml'
   workflow_dispatch:
@@ -35,4 +35,4 @@ jobs:
         run: |
           set -euo pipefail
           gcc -std=c17 -O2 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic -fPIC -shared             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux"             m3/collections/src/main/native/collections/m3_index_path_masks.c             -o "$RUNNER_TEMP/libm3_collections_pathmask.so"
-          java -Xcheck:jni -Djava.library.path="$RUNNER_TEMP"             -cp "m3/collections/target/classes:m3/collections/target/test-classes"             com.m3.collections.M3SdkRecoverySelfTest --native
+          java -Xcheck:jni -Djava.library.path="$RUNNER_TEMP"             -cp "m3/collections/target/classes:m3/collections/target/test-classes"             jdk.m3.collections.M3SdkRecoverySelfTest --native

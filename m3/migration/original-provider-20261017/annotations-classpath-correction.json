@@ -7,7 +7,7 @@
     "repository": "hsoliwal/com.synexia",
     "commit": "f726d4ce761edf73b04ee2950cbd42790d2370b2",
     "pullRequest": 12200,
-    "sourcePath": "synexia-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017/sdk",
+    "sourcePath": "m3-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017/sdk",
     "moduleGitTree": "3c02e3896096753a63654d56650a4561118db2b4",
     "pinsSha256": "6797e1dc7a1317bfd06ef5353c6e4007430c6199ccd9cb793a5a05499f572d24",
     "sdkFiles": 72,
@@ -24,7 +24,7 @@
   "executedBaseline": {
     "receiverRepository": "hsoliwal/M3jdk21",
     "head": "23779f5eb89a506d341e92438db92cc985c26158",
-    "workflowBlob": "f04b6bfc76e5a671968a478f44cf13268c04e5e9",
+    "workflowBlob": "edad663b2e4a51e22a5e25954df237192e5b8d08",
     "runs": [
       {
         "run": 39030437080,
@@ -64,7 +64,7 @@
     "custodyNegativeControls": 22
   },
   "receiverBase": "4598bfc398d3024e7ea67e42034e857a53a1b378",
-  "productionMapGitBlob": "4f5911d625090913d85f9cf41b1ead1694dffade",
+  "productionMapGitBlob": "986147e2df24ef25076d451c49782d8e7e354a11",
   "sourceReviews": "Three independent source reviews clear; no candidate execution inferred",
   "candidateExecution": "NOT_RUN",
   "formalAutoreview": "NOT_RUN_STORAGE_HOLD",

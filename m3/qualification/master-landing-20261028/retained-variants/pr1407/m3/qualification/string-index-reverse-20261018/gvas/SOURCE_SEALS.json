@@ -2,30 +2,30 @@
   "schema": "M3_EXACT_TASK_INPUTS_V1",
   "target_repository": "hsoliwal/M3jdk21",
   "target_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-  "recipe": "com.synexia.m3.GvasLookupIndex20261018",
+  "recipe": "jdk.internal.m3.GvasLookupIndex20261018",
   "files": [
     {
       "path": ".github/workflows/m3-gvas-literal-precompute.yml",
       "before": "fd4f45b223492bec7258118ed57039261916d42b01df8679f8b3652111b73b85",
-      "after": "3ff5512f94b6300731c3056a2943cf2edbb8626718258d805d55612867d1a95f",
+      "after": "ffb17b23ce33815cf114ec4fe122cdaf3233e440eac93242bc736ecf24de72ac",
       "bytes": 1280
     },
     {
-      "path": "m3/core/src/com/m3/text/M3GvasLiteralImage.java",
+      "path": "m3/core/src/jdk/m3/text/M3GvasLiteralImage.java",
       "before": "f3ed3fd91d7e60220ba22e717f6fec41dc7759e5a221ef1dba65251d0028f8d7",
-      "after": "ac3e0cab92111e7b1af138b1f246a56083e81528dd1c951a21c2bb07d7778073",
+      "after": "c3b82376c93baf3b2728cb187428d7bbf8e363198c10732dece97606f7a26b63",
       "bytes": 10470
     },
     {
-      "path": "m3/core/test/com/m3/text/M3GvasLookupIndexContractTest.java",
+      "path": "m3/core/test/jdk/m3/text/M3GvasLookupIndexContractTest.java",
       "before": "ABSENT",
-      "after": "6e387bbd278c1cfa8891e9b19f235c22e478e9965c71f1b028f7ca9668106dd3",
+      "after": "4de11e3e9c483dcc92b5b8c203c7f07cc840f6dcf6152dc8f6cca1f9fc602213",
       "bytes": 7226
     },
     {
       "path": "m3/docs/name-mapping.d/m3-gvas-lookup-index-20261018.json",
       "before": "ABSENT",
-      "after": "6bdfc479597ef2bcaabc659b4b749d82cdf577aa68c412b4343d426bb909d3e8",
+      "after": "a766433e39a32ff20a81e1b68fc66bfe9ee0a6857e4801752c822a2748b2b5a0",
       "bytes": 1568
     },
     {
@@ -42,14 +42,14 @@
     },
     {
       "path": "m3/verify-gvas-literal-precompute.py",
-      "before": "3f68054a4bb60c573af6d0c640fe44ff5ec9630527b9e6561ee521bd18574982",
-      "after": "e940ff340cc72582e0433c012bd39837f483a9d0d1561ae01dceb449c98e64c5",
+      "before": "43ac8c6462f35d10624f1a78c96082550d4413866951f74b5fee6efd407f08c3",
+      "after": "3800dc92899c3409120a8b5fd9c6b2f0482021b56b83a7fa5b6c6b99cfc558ed",
       "bytes": 10219
     },
     {
       "path": "m3/verify-gvas-lookup-index.py",
       "before": "ABSENT",
-      "after": "338106efc7721b170c64ffcb2d37c7c91c3942d17a4c4a269dc6f70a5c91f99b",
+      "after": "f8a45cfd9444b5fc81e30b2091f08790f851e299e1236be7872418eed30ec67c",
       "bytes": 1924
     }
   ]

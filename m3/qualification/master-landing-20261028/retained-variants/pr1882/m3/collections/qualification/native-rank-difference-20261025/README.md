@@ -7,9 +7,9 @@
 - M3LongRankBatchNative.java: 201c51afbf525b442d9b80b8a03ad4208b52c782 -> 5aa4d2c8cc8683a08ab20625c8763cac6c1fd9c6
 - M3LongRankIndex.java: 00aa416af3cf08ebae2db8ef19cac66fe5f8c29a -> 716189db70586d221f63dc647d692951d77094cf
 - m3_long_rank_batch_jni.c: 7ea1afda505894b9cc1294bfc1c0a74a58ea0587 -> 25a228e37629490a18fe395f4c51df4f76296701
-- M3LongDifferenceContract.java (new): 22ebb243b0fbad16daa1972dadc1d2cbce5e41dc
-- M3LongDifferenceTest.java (new): 74591bf6eb38b640b6603fb2c33b6e0167dc5d6b
-- Original focused GitHub Actions Java/JNI gate (new): 5f99a1912aefc0e6f912d785c6059337f32e5c58
+- M3LongDifferenceContract.java (new): ee40ca003555cfec40e872bea4a14d7af8ee4570
+- M3LongDifferenceTest.java (new): 694100470abe2485df01c286a4ae2a30a7c989bb
+- Original focused GitHub Actions Java/JNI gate (new): d7d2b27a41f8aef51ddcdac423ff4748970be36f
 
 ## Problem category and algorithm choice
 LeetCode #2215 (distinct difference of two arrays), #350 (duplicate-aware occurrence frequencies), and the existing #349/#88 intersection/merge donor categories. The implementation is first-party Apache-2.0 Java and C, **not copied LeetCode challenge submissions**. Sorted run-group cursors over original immutable primitive arrays implement:

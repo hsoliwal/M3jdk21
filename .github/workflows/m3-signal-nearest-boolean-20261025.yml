@@ -3,10 +3,10 @@ name: M3JDK21 consolidated source-sealed signal acceptance
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3Signal*.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3SourceSignalQualityFactory.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3Signal*.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3LongTreeSetMaskCompactionContract.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3Signal*.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3SourceSignalQualityFactory.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3Signal*.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongTreeSetMaskCompactionContract.java'
       - 'm3/collections/qualification/signal-*/**'
       - '.github/workflows/m3-signal-nearest-boolean-20261025.yml'
   workflow_dispatch:
@@ -37,7 +37,7 @@ jobs:
           previous=""
           while IFS=$'\t' read -r relative expected strong; do
             [[ -z "$relative" || "$relative" == \#* ]] && continue
-            [[ "$relative" =~ ^m3/collections/src/(main|test)/java/com/m3/collections/[A-Za-z0-9_]+[.]java$ ]] || exit 1
+            [[ "$relative" =~ ^m3/collections/src/(main|test)/java/jdk/m3/collections/[A-Za-z0-9_]+[.]java$ ]] || exit 1
             [[ "$expected" =~ ^[0-9a-f]{40}$ ]] || exit 1
             [[ "$strong" =~ ^[0-9a-f]{64}$ ]] || exit 1
             [[ -z "$previous" || "$relative" > "$previous" ]] || exit 1
@@ -64,36 +64,36 @@ jobs:
           out="$RUNNER_TEMP/m3-signal-consolidated"
           mkdir -p "$out/classes"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
-            m3/collections/src/main/java/com/m3/collections/M3ChildProgressMonitor.java \
-            m3/collections/src/main/java/com/m3/collections/M3ProgressMonitor.java \
-            m3/collections/src/main/java/com/m3/collections/M3ProgressState.java \
-            m3/collections/src/main/java/com/m3/collections/M3ShadowStreams.java \
-            m3/collections/src/main/java/com/m3/collections/M3SignalBooleanQuery.java \
-            m3/collections/src/main/java/com/m3/collections/M3SignalColumns.java \
-            m3/collections/src/main/java/com/m3/collections/M3SignalDependencyEpochs.java \
-            m3/collections/src/main/java/com/m3/collections/M3SignalExactIntegerDistance.java \
-            m3/collections/src/main/java/com/m3/collections/M3SignalExactRangeIndex.java \
-            m3/collections/src/main/java/com/m3/collections/M3SignalQualitySchema.java \
-            m3/collections/src/main/java/com/m3/collections/M3SignalRelations.java \
-            m3/collections/src/main/java/com/m3/collections/M3SignalTopK.java \
-            m3/collections/src/main/java/com/m3/collections/M3SourceSignalImage.java \
-            m3/collections/src/main/java/com/m3/collections/M3SourceSignalQualityFactory.java \
-            m3/collections/src/test/java/com/m3/collections/M3SignalColumnsSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3SignalTopKSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3SourceSignalImageSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3SignalDependencyEpochsSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3SignalQualitySchemaSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3SourceSignalQualityFactorySelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3SignalExactRangeIndexSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3SignalBooleanQuerySelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3SignalExecutionPressureSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3SignalViewportWindowSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3SignalRankedQuerySelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3SignalExactIntegerDistanceSelfTest.java \
-            m3/collections/src/test/java/com/m3/collections/M3SignalNearestBooleanSelfTest.java
+            m3/collections/src/main/java/jdk/m3/collections/M3ChildProgressMonitor.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3ProgressMonitor.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3ProgressState.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3ShadowStreams.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalBooleanQuery.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalColumns.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalDependencyEpochs.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalExactIntegerDistance.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalExactRangeIndex.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalQualitySchema.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalRelations.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalTopK.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SourceSignalImage.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SourceSignalQualityFactory.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3SignalColumnsSelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3SignalTopKSelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3SourceSignalImageSelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3SignalDependencyEpochsSelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3SignalQualitySchemaSelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3SourceSignalQualityFactorySelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3SignalExactRangeIndexSelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3SignalBooleanQuerySelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3SignalExecutionPressureSelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3SignalViewportWindowSelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3SignalRankedQuerySelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3SignalExactIntegerDistanceSelfTest.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3SignalNearestBooleanSelfTest.java
           for test in M3SignalColumnsSelfTest M3SignalTopKSelfTest M3SourceSignalImageSelfTest M3SignalDependencyEpochsSelfTest M3SignalQualitySchemaSelfTest M3SourceSignalQualityFactorySelfTest M3SignalExactRangeIndexSelfTest M3SignalBooleanQuerySelfTest M3SignalExecutionPressureSelfTest M3SignalViewportWindowSelfTest M3SignalRankedQuerySelfTest M3SignalExactIntegerDistanceSelfTest M3SignalNearestBooleanSelfTest; do
-            java -Xss256k -cp "$out/classes" "com.m3.collections.$test"
-            java -Xint -Xss256k -cp "$out/classes" "com.m3.collections.$test"
+            java -Xss256k -cp "$out/classes" "jdk.m3.collections.$test"
+            java -Xint -Xss256k -cp "$out/classes" "jdk.m3.collections.$test"
           done
       - name: Build original source-vendored JUnit 5.10.2 and first-party arrays
         shell: bash
@@ -116,7 +116,7 @@ jobs:
           suites = "M3SignalColumns,M3SignalTopK,M3SourceSignalImage,M3SignalDependencyEpochs,M3SignalQualitySchema,M3SourceSignalQualityFactory,M3SignalExactRangeIndex,M3SignalBooleanQuery,M3SignalExecutionPressure,M3SignalViewportWindow,M3SignalRankedQuery,M3SignalExactIntegerDistance,M3SignalNearestBoolean".split(",")
           total = 0
           for suite in suites:
-              path = report_dir / ("TEST-com.m3.collections." + suite + "Test.xml")
+              path = report_dir / ("TEST-jdk.m3.collections." + suite + "Test.xml")
               if not path.is_file():
                   raise SystemExit("Missing owning JUnit XML: " + str(path))
               element = ET.parse(path).getroot()

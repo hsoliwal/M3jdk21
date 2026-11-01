@@ -19,7 +19,7 @@
   "offline_repository": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/m2",
   "stdout_sha256": "c3b617c8f251ed7f131c7dac7411339f45d647335b2b21671f8b35dfeae1ae3f",
   "stderr_sha256": "9ddf3781b5e43a87b1d67caac2bc4b251f9ce8d77c509c8369129f4b0359fd55",
-  "inputs_sha256": "beb03b4d9b2fda498ff4f845972c75b1a5417c94513e5e6d4477d8cb467c6b82",
+  "inputs_sha256": "3ef45b842c78a6fe484bd2d1de0c10f3055e1b84ff2816922a0a991eada49c60",
   "inputs_unchanged": true,
   "source_export_admitted": false,
   "owning_module_99_percent_gate": "NOT_EXECUTED: exact whole-module source closure is not staged.",
@@ -33,5 +33,5 @@
     "skipped": "0",
     "time": "0.901"
   },
-  "surefire_xml_sha256": "715d036afa0ec9a29dd7d31bbf9189e587b3dd81b55860ab35d4b4734340e5c5"
+  "surefire_xml_sha256": "769fc28d944832e61b167f5a381efb253ce1ba247ea32816130f2c464f3e4cb0"
 }

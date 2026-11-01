@@ -9,7 +9,7 @@ inferred from the inventory, the lock plan and the receipts; nothing is authored
                             non-Java jar entries under src/main/resources, multi-release sources retained
                             uncompiled under upstream-excluded/, LICENSE + THIRD_PARTY_NOTICES.md +
                             PROVENANCE.json + README.md + verify_source.py + .gitattributes at the module root,
-                            coordinates <group>:<artifact>:<version>-synexia-source-1, Automatic-Module-Name
+                            coordinates <group>:<artifact>:<version>-m3-source-1, Automatic-Module-Name
                             copied from the published binary jar's manifest.
 * any other status       -> donors/maven-sources/<id>/ byte-for-byte image (SOURCE_MANIFEST + legal texts +
                             UPSTREAM_LICENSE.*), no build; reason recorded in the ledger.
@@ -21,7 +21,7 @@ import argparse, csv, hashlib, io, json, os, re, shutil, subprocess, sys, zipfil
 from pathlib import Path
 
 CENTRAL = "https://repo.maven.apache.org/maven2/"
-SUFFIX = "-synexia-source-1"
+SUFFIX = "-m3-source-1"
 JAVAP = r"C:\Program Files\Java\jdk-21\bin\javap.exe"
 LEGAL_RE = re.compile(r"(?i)(.*[-_.])?(license|licence|notice|copying|copyright)([._-].*)?$")
 RELEASE = {"caffeine": 11, "tomlj": 11, "antlr4-runtime": 11, "snakeyaml-engine": 11, "ecj": 17, "commonmark": 11, "fastdoubleparser": 21, "jackson-core": 21, "jackson-databind": 21, "jackson-dataformat-yaml": 21, "jackson-datatype-jsr310": 21, "lucene-core": 11, "lucene-queries": 11, "lucene-sandbox": 11, "rewrite-core": 17, "rewrite-java": 17, "rewrite-java-21": 21, "rewrite-test": 17, "rewrite-xml": 17, "rewrite-yaml": 17, "micrometer-core": 8, "classgraph": 8, "gizmo": 11, "jandex": 8, "fastfilter": 11,
@@ -289,7 +289,7 @@ def main() -> int:
     ap.add_argument("--template", type=Path, required=True, help="third_party/re2j (verify_source.py template)")
     ap.add_argument("--module-root", default="third_party", help="repo-relative directory for compiled modules")
     ap.add_argument("--image-root", default="donors/maven-sources", help="repo-relative directory for byte-for-byte images")
-    ap.add_argument("--suffix", default="-synexia-source-1", help="version suffix of the source-built coordinate")
+    ap.add_argument("--suffix", default="-m3-source-1", help="version suffix of the source-built coordinate")
     ap.add_argument("--owner", default="Synexia", help="name of the receiving repository in generated texts")
     ap.add_argument("--only", default="", help="comma-separated donor ids to generate (default: all)")
     ap.add_argument("--api-surface", type=Path, nargs="*", default=[], help="API_SURFACE.tsv files; non-admissible verdicts demote PASS donors to images")

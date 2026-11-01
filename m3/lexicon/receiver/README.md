@@ -5,7 +5,7 @@
 Thin M3JDK21 receiver for the Synexia lexicon lane ("m3jdk ... lexicons and all"). Package `com.m3.lexicon`,
 Java 21, no runtime dependencies. Canonical source: Synexia crate
 `synexia-openrewrite-recipes/crates/m3-lexicons-receiver-v1` (hash-pinned postimages of these files).
-Ledger: `m3/lexicon/LEXICON_RECEIVER_LEDGER.tsv`; data rows: `m3/lexicon/synexia-lexicon-data-manifest-20261018.tsv`;
+Ledger: `m3/lexicon/LEXICON_RECEIVER_LEDGER.tsv`; data rows: `m3/lexicon/m3-lexicon-data-manifest-20261018.tsv`;
 design: `m3/docs/m3-lexicons-separator-wordid-20261018.md`.
 
 | class | role |

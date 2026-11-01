@@ -12,7 +12,7 @@ from pathlib import Path, PurePosixPath
 
 TASK = "m3-collections-contract-refinement-20261017"
 DATASET = "m3jdk21-progress-job"
-PREFIX = "synexia-openrewrite-recipes/recipe-crates/" + TASK
+PREFIX = "m3-openrewrite-recipes/recipe-crates/" + TASK
 LABEL = "progress-job-20261018"
 GPL = "GPL-2.0-only WITH Classpath-exception-2.0"
 

@@ -8,7 +8,7 @@ The final source snapshot is bound to `hsoliwal/com.synexia` commit `d1cf2d81ee7
 
 - Final and old root trees each independently match their expected Git tree SHA. Both have 343 immediate entries: 255 trees, 87 blobs, one gitlink. Names, modes and types are identical.
 - Exactly four root subtree object IDs changed: `m3-fast-search`, `synexia-algo`, `synexia-donor-inventory`, `synexia-openrewrite-recipes`. Every other root entry is exactly equal.
-- Root `pom.xml` is final blob `98889a040aad5cc3c82f782bb4b173d118207988`, 119981 bytes, SHA-256 `f01cca4d90bd8fa1b1125474b5178cc80762d934bcb7bf5817f08f3f0dcf6aab`. The actual local body matches both final and old root entries.
+- Root `pom.xml` is final blob `a65f71452613662769dda64100c6d64dd90ae5da`, 119981 bytes, SHA-256 `1af736d1a28af6e5cdf41a2b4fefa8b9f3c5cb7a6c2f6d16537e0a822f086a7d`. The actual local body matches both final and old root entries.
 - Fresh XML parsing yields 201 unique module paths: 190 direct paths and 11 nested paths across eight nested roots; 194 unique immediate-root components. There are 200 project declarations and one `m3-tornado` profile declaration. The entire ordered declaration/context list equals the prior E2 declaration artifact, and every root component exists in the final root.
 - These are declarations, not proof of profile activation, acquisition/build of every module POM, complete reactor closure, destination export or delivered capability.
 

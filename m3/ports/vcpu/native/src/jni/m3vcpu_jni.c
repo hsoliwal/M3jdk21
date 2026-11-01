@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 /*
- * m3vcpu_jni.c - thin JNI glue for com.m3.vcpu.internal.NativeVcpu. Six entry points:
+ * m3vcpu_jni.c - thin JNI glue for jdk.m3.vcpu.internal.NativeVcpu. Six entry points:
  *   long open(String selector, int device)        selector: "auto" | "gpu" | "name[:dev],..."
  *   long alloc(long session, long bytes)           zero-filled device buffer
  *   void upload(long buffer, long byteOffset, Object src, int srcOffset, int length)
@@ -279,7 +279,7 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
     return m3j_int_array == NULL ? JNI_ERR : JNI_VERSION_1_8;
 }
 
-JNIEXPORT jlong JNICALL Java_com_m3_vcpu_internal_NativeVcpu_open(JNIEnv *env, jclass type, jstring selector,
+JNIEXPORT jlong JNICALL Java_jdk_m3_vcpu_internal_NativeVcpu_open(JNIEnv *env, jclass type, jstring selector,
                                                                    jint device)
 {
     const char *sel = NULL;
@@ -319,7 +319,7 @@ JNIEXPORT jlong JNICALL Java_com_m3_vcpu_internal_NativeVcpu_open(JNIEnv *env, j
     return handle;
 }
 
-JNIEXPORT jlong JNICALL Java_com_m3_vcpu_internal_NativeVcpu_alloc(JNIEnv *env, jclass type, jlong session,
+JNIEXPORT jlong JNICALL Java_jdk_m3_vcpu_internal_NativeVcpu_alloc(JNIEnv *env, jclass type, jlong session,
                                                                     jlong bytes)
 {
     m3j_session *owner;
@@ -476,7 +476,7 @@ static void m3j_download_int_region(JNIEnv *env, m3j_session *owner, m3vcpu_buf 
     if (staging != local) free(staging);
 }
 
-JNIEXPORT void JNICALL Java_com_m3_vcpu_internal_NativeVcpu_upload(JNIEnv *env, jclass type,
+JNIEXPORT void JNICALL Java_jdk_m3_vcpu_internal_NativeVcpu_upload(JNIEnv *env, jclass type,
         jlong buffer, jlong byte_offset, jobject src, jint src_offset, jint length)
 {
     m3vcpu_buf *buf = NULL;
@@ -524,7 +524,7 @@ JNIEXPORT void JNICALL Java_com_m3_vcpu_internal_NativeVcpu_upload(JNIEnv *env, 
     m3j_release(owner);
 }
 
-JNIEXPORT void JNICALL Java_com_m3_vcpu_internal_NativeVcpu_download(JNIEnv *env, jclass type,
+JNIEXPORT void JNICALL Java_jdk_m3_vcpu_internal_NativeVcpu_download(JNIEnv *env, jclass type,
         jlong buffer, jlong byte_offset, jintArray dst, jint dst_offset, jint length)
 {
     m3vcpu_buf *buf = NULL;
@@ -549,7 +549,7 @@ JNIEXPORT void JNICALL Java_com_m3_vcpu_internal_NativeVcpu_download(JNIEnv *env
     m3j_release(owner);
 }
 
-JNIEXPORT void JNICALL Java_com_m3_vcpu_internal_NativeVcpu_launch(JNIEnv *env, jclass type, jlong session,
+JNIEXPORT void JNICALL Java_jdk_m3_vcpu_internal_NativeVcpu_launch(JNIEnv *env, jclass type, jlong session,
                                                                     jstring kernel, jlong global, jint local,
                                                                     jlongArray buffers)
 {
@@ -623,7 +623,7 @@ launch_done:
     m3j_release(owner);
 }
 
-JNIEXPORT void JNICALL Java_com_m3_vcpu_internal_NativeVcpu_close(JNIEnv *env, jclass type, jlong handle)
+JNIEXPORT void JNICALL Java_jdk_m3_vcpu_internal_NativeVcpu_close(JNIEnv *env, jclass type, jlong handle)
 {
     m3j_session *owner = NULL;
     m3vcpu_buf *buf = NULL;

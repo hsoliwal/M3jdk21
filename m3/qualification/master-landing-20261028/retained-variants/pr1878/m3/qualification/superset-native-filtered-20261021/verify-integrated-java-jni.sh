@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-# Exact original-owner Java21/JNI host probe; not a source-built full M3JDK21 image.
+# Exact original-owner Java21/JNI host probe; not a source-built full M3JDK 21 image.
 set -euo pipefail
 
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
@@ -24,15 +24,15 @@ if [[ "$(git -C "$root" hash-object "$root/src/java.base/share/classes/jdk/inter
   echo 'HOLD: JDK-owned Java mask receiver drift' >&2
   exit 1
 fi
-if [[ "$(git -C "$root" hash-object "$root/src/java.base/share/native/libjava/M3IndexMaskWindow.c")" != 59b2130ca8e897e75e24afbd45e8fd885c55b0e9 ]]; then
+if [[ "$(git -C "$root" hash-object "$root/src/java.base/share/native/libjava/M3IndexMaskWindow.c")" != d8cc9be4ba6cbef3f1106923390aaf1949c2e4fb ]]; then
   echo 'HOLD: JDK-owned native mask receiver drift' >&2
   exit 1
 fi
-if [[ "$(git -C "$root" hash-object "$root/test/jdk/jdk/internal/m3/M3MaskCollectionViewIntegrationTest.java")" != a5a7d4508513b829d1ac14b9562aa108998a0e3f ]]; then
+if [[ "$(git -C "$root" hash-object "$root/test/jdk/jdk/internal/m3/M3MaskCollectionViewIntegrationTest.java")" != 56634718dcc1e843ea65bd262a2b95dcfa627110 ]]; then
   echo 'HOLD: cross-contract oracle source drift' >&2
   exit 1
 fi
-if [[ "$(sha256sum "$root/src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java" | cut -d' ' -f1)" != "10c40ed918edd6b756db3cd17c46afeb54490d7a74efcbd67d3b22022accef56" ]]; then
+if [[ "$(sha256sum "$root/src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java" | cut -d' ' -f1)" != "902c188b1cc454134ad7738bcf46a484278fd541dc5d60f9fb6dc6fa3a81805b" ]]; then
   echo 'HOLD: fused indexed-array owner drift' >&2
   exit 1
 fi
@@ -48,7 +48,7 @@ base="$root/src/java.base/share/classes"
 libjava="$root/src/java.base/share/native/libjava"
 tests="$root/test/jdk"
 
-# Compile only the original, exact M3JDK21 product owners. Passing the
+# Compile only the original, exact M3JDK 21 product owners. Passing the
 # entire OpenJDK source tree to --patch-module can implicitly compile unrelated
 # WeakHashMap.java and fail on its upstream this-escape warning under -Werror.
 # Keep ALL lint categories enabled and source-stage only these four JDK owners.

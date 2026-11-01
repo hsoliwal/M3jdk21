@@ -2,8 +2,8 @@
  * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0
  */
-import com.m3.text.LocalM3Arena;
-import com.m3.text.M3StringPiece;
+import jdk.m3.text.LocalM3Arena;
+import jdk.m3.text.M3StringPiece;
 import java.lang.management.ManagementFactory;
 import java.util.Locale;
 

@@ -1,7 +1,7 @@
 {
   "schema": "synexia.data.owning-module-test-proof.v1",
   "status": "PASS_OWNING_MODULE_DEFAULT_COMPILE_AND_POSITIVE_TESTS",
-  "plan_sha256": "1a266929edd136f0388582e4cf10fcf0bb0c8390bd96bf948d4bedbc4e965689",
+  "plan_sha256": "9b22513342af7170ad11722c9ee6b3c948086bcb87d08e5f875df19a5bbcaedc",
   "storage_protection": "ACTIVE",
   "native_outcomes": [
     {

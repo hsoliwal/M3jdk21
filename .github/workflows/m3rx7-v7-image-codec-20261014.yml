@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
-# Adapted from provider supervisor f04b6bfc76e5a671968a478f44cf13268c04e5e9.
+# Adapted from provider supervisor edad663b2e4a51e22a5e25954df237192e5b8d08.
 name: M3RX7 v7 Image Codec Receiver
 on:
   pull_request:

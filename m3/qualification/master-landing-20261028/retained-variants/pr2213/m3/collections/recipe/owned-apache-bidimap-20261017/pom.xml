@@ -57,7 +57,7 @@
           <proc>none</proc>
           <fork>false</fork>
           <includes>
-            <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+            <include>jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
           </includes>
           <testIncludes>
             <testInclude>**/M3OwnedApacheBidiMap*RecipeTest.java</testInclude>

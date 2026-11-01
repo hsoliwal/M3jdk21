@@ -29,7 +29,7 @@ import java.util.List;
  * </p>
  */
 public final class M3WebDifferential {
-	static final String NEB = "org.eclipse.nebula.widgets.m3web.model.", SW = "com.m3.swing.web.model.";
+	static final String NEB = "org.eclipse.nebula.widgets.m3web.model.", SW = "jdk.m3.swing.web.model.";
 	static final String[] OPS = { "load", "layout", "keys", "pointer", "rtl", "dark", "variant", "tick", "scroll", "logical", "filter" };
 
 	public static void main(String[] args) throws Exception {

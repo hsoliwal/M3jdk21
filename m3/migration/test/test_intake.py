@@ -27,8 +27,8 @@ SOURCE_COMMIT = 'd' * 40
 FRESH_SOURCE_COMMIT = '99221b0f25a1b09c32855d76e295b816f632a46b'
 TARGET_COMMIT = 'e' * 40
 SOURCE_PATH = 'source/src/main/java/example/Owner.java'
-RECIPE = 'com.synexia.rewrite.Pcr'
-MAPPING_ID = 'synexia.intake.pcr.Owner'
+RECIPE = 'jdk.internal.m3.rewrite.Pcr'
+MAPPING_ID = 'm3.intake.pcr.Owner'
 SYNTHETIC = 'SYNTHETIC RECEIPT PARSER FIXTURE; NO UPSTREAM TOOL WAS EXECUTED\n'
 STAGES = ('lint', 'compile', 'test', 'runtime')
 
@@ -91,7 +91,7 @@ class IntakeTest(unittest.TestCase):
                  'sha': git_object('blob', b'Synthetic source root\n')},
                 {'path': 'source', 'mode': '040000', 'type': 'tree', 'sha': '3' * 40}]
         self.root_inventory = {'sha': tree_id(rows), 'tree': rows, 'truncated': False}
-        self.recipe_resource = 'com/synexia/rewrite/hash-pinned-java/pcs-reconciled-v1/manifest.tsv'
+        self.recipe_resource = 'jdk/internal/m3/rewrite/hash-pinned-java/pcs-reconciled-v1/manifest.tsv'
         self.template_resource = self.recipe_resource.rsplit('/', 1)[0] + '/Owner.java.txt'
         self.recipe_manifest_bytes = (SOURCE_PATH + '\t' + sha(b'synthetic prior source')
                                       + '\t' + self.candidate_sha + '\tOwner.java.txt\n').encode()
@@ -101,7 +101,7 @@ class IntakeTest(unittest.TestCase):
                                     'gitBlob': self.candidate_git, 'artifact': self.candidate_artifact}],
                          'materialization': {'manifest': manifest_ref, 'output': None, 'patch': None}}
         self.packet = {
-            'schema': 'm3.synexia-intake/1',
+            'schema': 'm3.m3-intake/1',
             'source': {'repo': 'hsoliwal/com.synexia', 'commit': SOURCE_COMMIT,
                        'tree': self.root_inventory['sha']},
             'target': {'repo': 'hsoliwal/M3jdk21', 'commit': TARGET_COMMIT, 'tree': 'f' * 40},
@@ -142,7 +142,7 @@ class IntakeTest(unittest.TestCase):
     def proof_model(self, role):
         historical = '/synthetic/proof/' + role
         runtime = ['/synthetic/jdk/bin/java', '-ea',
-                   'com.synexia.rewrite.PcrTest' if role == 'recipe' else 'example.SyntheticConsumer']
+                   'jdk.internal.m3.rewrite.PcrTest' if role == 'recipe' else 'example.SyntheticConsumer']
         if role == 'recipe':
             runtime.insert(2, '-Dpcr.output=' + historical + '/generated-candidate')
         commands = {'lane': 'synthetic-' + role, 'workspace': '/synthetic/workspace', 'parents': [],
@@ -156,7 +156,7 @@ class IntakeTest(unittest.TestCase):
                     'commands': {stage: [['/synthetic/tool', stage]] for stage in STAGES}}
         commands['commands']['runtime'] = [runtime]
         commands['commands']['compile'][0].append('-Dproof.sources=' + historical + '/sources')
-        prefix = 'synexia-openrewrite-recipes/src/main/resources/'
+        prefix = 'm3-openrewrite-recipes/src/main/resources/'
         staged = ([{'path': prefix + resource, 'sha256': sha(content),
                     'gitBlob': git_object('blob', content), 'bytes': len(content)}
                    for resource, content in [(self.recipe_resource, self.recipe_manifest_bytes),
@@ -297,7 +297,7 @@ class IntakeTest(unittest.TestCase):
         receipt = self.admit()
         self.assertEqual(receipt, self.admit())
         self.assertEqual(before, self.snapshot())
-        self.assertEqual('m3.synexia-intake-receipt/1', receipt['schema'])
+        self.assertEqual('m3.m3-intake-receipt/1', receipt['schema'])
         self.assertEqual('RECEIVED_FOR_REVIEW', receipt['state'])
         self.assertEqual((2, 1, 0), (receipt['rootOwners'], receipt['outputs'], receipt['productWrites']))
         for flag in ('wholeSourceTreeCovered', 'dependencyClosureComplete',
@@ -339,7 +339,7 @@ class IntakeTest(unittest.TestCase):
         self.assertEqual(2, code)
         self.assertIn('packet seal drift', errors)
         self.assertFalse(destination.exists())
-        duplicate = b'{"schema":"m3.synexia-intake/1","schema":"m3.synexia-intake/1"}'
+        duplicate = b'{"schema":"m3.m3-intake/1","schema":"m3.m3-intake/1"}'
         code, _, errors = self.cli(['--output', str(destination)], packet_bytes=duplicate)
         self.assertEqual(2, code)
         self.assertIn('duplicate JSON key', errors)
@@ -666,7 +666,7 @@ class IntakeTest(unittest.TestCase):
         receipt = self.put_json('source-inventory-receipt.json', {
             'repo': 'hsoliwal/com.synexia', 'commit': SOURCE_COMMIT,
             'inventory_sha256': sha(inventory.read_bytes()), 'scope_complete': False,
-            'producer': 'com.synexia.m3.inventory.InventoryWriter'})
+            'producer': 'jdk.internal.m3.inventory.InventoryWriter'})
         stdout, stderr = io.StringIO(), io.StringIO()
         with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
             code = migration.main(['reconcile', str(self.root), '--inventory', str(inventory),
@@ -806,10 +806,10 @@ class IntakeTest(unittest.TestCase):
     def domain_fixture(self, kind, count, additions=0, crate=None, recipe_name=None, source_commit=SOURCE_COMMIT):
         """Author protocol-shaped data; this is not an executed Java recipe receipt."""
         recipe_name = recipe_name or kind.capitalize()
-        recipe_id = 'com.synexia.rewrite.' + recipe_name
+        recipe_id = 'jdk.internal.m3.rewrite.' + recipe_name
         crate = crate or kind + '-v1'
-        resource = 'com/synexia/rewrite/hash-pinned-java/' + crate + '/manifest.tsv'
-        root_resource = 'synexia-openrewrite-recipes/src/main/resources/'
+        resource = 'jdk/internal/m3/rewrite/hash-pinned-java/' + crate + '/manifest.tsv'
+        root_resource = 'm3-openrewrite-recipes/src/main/resources/'
         outputs, targets, resources = [], [], []
         for index in range(count):
             path = 'source/src/main/java/example/Owner' + str(index) + '.java'
@@ -857,7 +857,7 @@ class IntakeTest(unittest.TestCase):
         marker = kind.upper() + '_VERIFIED ' + ' '.join(key + '=' + str(value) for key, value in fields.items()) + '\n'
         historical = '/synthetic/domain/' + kind
         command = ['/synthetic/jdk/bin/java', '-ea', '-D' + kind + '.output=' + historical + '/generated-candidate',
-                   'com.synexia.rewrite.' + ('Mrp2Test' if crate == 'mrp-v2' else recipe_name + 'Test')]
+                   'jdk.internal.m3.rewrite.' + ('Mrp2Test' if crate == 'mrp-v2' else recipe_name + 'Test')]
         proof = {'commands': {'inputs': historical + '/inputs.json', 'javaHome': '/synthetic/jdk',
                               'commands': {'runtime': [command]}}, 'stdout': [SYNTHETIC + marker],
                  'staging': [{'path': root_resource + name, 'sha256': sha(data),
@@ -867,7 +867,7 @@ class IntakeTest(unittest.TestCase):
                                for name, data in resources]}
         if crate == 'mrp-v2':
             legacy_command = ['/synthetic/jdk/bin/java', '-ea', '-Dmrp.output=' + historical + '/legacy-candidate',
-                              'com.synexia.rewrite.MrpTest']
+                              'jdk.internal.m3.rewrite.MrpTest']
             proof['commands']['commands']['runtime'].insert(0, legacy_command)
             proof['stdout'].insert(0, SYNTHETIC + 'MRP_VERIFIED crate=mrp-v1 targets=2 compatibility=synthetic\n')
         return {'recipe': recipe_id, 'outputSeal': seal}, manifest, proof
@@ -977,7 +977,7 @@ class IntakeTest(unittest.TestCase):
         mappings = []
         for index, output in enumerate(self.manifest['files']):
             record = copy.deepcopy(self.intake_record)
-            record['id'] = 'synexia.intake.' + kind + '2.Owner' + str(index)
+            record['id'] = 'm3.intake.' + kind + '2.Owner' + str(index)
             record['owner'] = 'example.Owner' + str(index)
             record['sources'][0].update(commit=self.source_commit, path=output['path'],
                                          symbol=record['owner'], sha256=output['sha256'],
@@ -995,7 +995,7 @@ class IntakeTest(unittest.TestCase):
         producer['commands']['commands']['runtime'] = [[
             '/synthetic/jdk/bin/java', '-ea',
             '-D' + kind + '.output=/synthetic/proof/recipe/generated-candidate',
-            'com.synexia.rewrite.' + ('Mre2Test' if kind == 'mre' else 'Mrc2Test')]]
+            'jdk.internal.m3.rewrite.' + ('Mre2Test' if kind == 'mre' else 'Mrc2Test')]]
         producer['commands']['runtimePatterns'] = {'1': ['^' + kind.upper() + '_VERIFIED ']}
         producer['stdout'] = partial_proof['stdout'][0]
         producer['staging']['files'] = sorted(partial_proof['staging'], key=lambda row: row['path'])
@@ -1017,7 +1017,7 @@ class IntakeTest(unittest.TestCase):
                 output = json.loads((self.root / manifest['materialization']['output']['path']).read_bytes())
                 self.assertEqual('synexia.' + kind + '.output/1', output['schema'])
                 self.assertEqual(kind + '-v2', output['crate'])
-                self.assertEqual('com.synexia.rewrite.' + ('Mre2' if kind == 'mre' else 'Mrc2'), output['recipe'])
+                self.assertEqual('jdk.internal.m3.rewrite.' + ('Mre2' if kind == 'mre' else 'Mrc2'), output['recipe'])
                 self.assertEqual((count, replacements, additions),
                                  (output['targetCount'], output['replacements'], output['additions']))
                 command = proof['commands']['commands']['runtime'][0]
@@ -1030,7 +1030,7 @@ class IntakeTest(unittest.TestCase):
             for name in (kind.capitalize(), kind.capitalize() + '3', kind.upper() + '2'):
                 with self.subTest(kind=kind, name=name):
                     lane, manifest, proof = self.alias_fixture(kind)
-                    lane['recipe'] = manifest['recipe'] = 'com.synexia.rewrite.' + name
+                    lane['recipe'] = manifest['recipe'] = 'jdk.internal.m3.rewrite.' + name
                     ref = manifest['materialization']['output']
                     output = json.loads((self.root / ref['path']).read_bytes())
                     output['recipe'] = lane['recipe']
@@ -1044,7 +1044,7 @@ class IntakeTest(unittest.TestCase):
                 lane, manifest, proof = self.alias_fixture(kind)
                 ref = manifest['materialization']['output']
                 output = json.loads((self.root / ref['path']).read_bytes())
-                output['recipe'] = 'com.synexia.rewrite.' + kind.capitalize()
+                output['recipe'] = 'jdk.internal.m3.rewrite.' + kind.capitalize()
                 manifest['materialization']['output'] = self.put_json(ref['path'], output)
                 with self.assertRaisesRegex(ValueError, 'OUTPUT.json differs'):
                     migration._intake_materialization(self.root, lane, manifest, proof)
@@ -1064,9 +1064,9 @@ class IntakeTest(unittest.TestCase):
                     lane, manifest, proof = self.alias_fixture(kind)
                     command = proof['commands']['commands']['runtime'][0]
                     if variant == 'old-main':
-                        command[-1] = 'com.synexia.rewrite.' + kind.capitalize() + 'Test'
+                        command[-1] = 'jdk.internal.m3.rewrite.' + kind.capitalize() + 'Test'
                     elif variant == 'other-main':
-                        command[-1] = 'com.synexia.rewrite.' + ('Mrc2Test' if kind == 'mre' else 'Mre2Test')
+                        command[-1] = 'jdk.internal.m3.rewrite.' + ('Mrc2Test' if kind == 'mre' else 'Mre2Test')
                     else:
                         command[2] = command[2].replace('-D' + kind + '.output=', '-D' + kind + '2.output=')
                     with self.assertRaises(ValueError):
@@ -1138,10 +1138,10 @@ class IntakeTest(unittest.TestCase):
             'mrc', 6, 0, 'mrc-v3', 'Mrc3', FRESH_SOURCE_COMMIT)
         self.packet['lanes'][0].update(lane)
         for record in self.doc['migration']['records']:
-            if record['id'].startswith('synexia.intake.'):
+            if record['id'].startswith('m3.intake.'):
                 record['recipe']['id'] = lane['recipe']
         producer = self.proofs['recipe']
-        producer['commands']['commands']['runtime'][0][-1] = 'com.synexia.rewrite.Mrc3Test'
+        producer['commands']['commands']['runtime'][0][-1] = 'jdk.internal.m3.rewrite.Mrc3Test'
         producer['stdout'] = proof['stdout'][0]
         producer['staging']['files'] = sorted(proof['staging'], key=lambda row: row['path'])
         producer['artifacts'] = [producer['artifacts'][0]] + proof['artifacts']
@@ -1159,12 +1159,12 @@ class IntakeTest(unittest.TestCase):
                      'wholeSourceTreeCovered', 'dependencyClosureComplete'):
             self.assertIs(receipt[flag], False)
         output = json.loads((self.root / self.manifest['materialization']['output']['path']).read_bytes())
-        self.assertEqual(('synexia.mrc.output/1', 'mrc-v3', 'com.synexia.rewrite.Mrc3'),
+        self.assertEqual(('m3.mrc.output/1', 'mrc-v3', 'jdk.internal.m3.rewrite.Mrc3'),
                          (output['schema'], output['crate'], output['recipe']))
         self.assertEqual((6, 6, 0, 64, 25), (output['targetCount'], output['replacements'],
                          output['additions'], output['mixedStates'], output['inventoryRefusals']))
         command = self.proofs['recipe']['commands']['commands']['runtime'][0]
-        self.assertEqual('com.synexia.rewrite.Mrc3Test', command[-1])
+        self.assertEqual('jdk.internal.m3.rewrite.Mrc3Test', command[-1])
         self.assertIn('-Dmrc.output=/synthetic/proof/recipe/generated-candidate', command)
         self.assertEqual(before, self.snapshot())
 
@@ -1176,11 +1176,11 @@ class IntakeTest(unittest.TestCase):
                     'Mrc3', FRESH_SOURCE_COMMIT)
                 command = proof['commands']['commands']['runtime'][0]
                 if variant == 'old-main':
-                    command[-1] = 'com.synexia.rewrite.Mrc2Test'
+                    command[-1] = 'jdk.internal.m3.rewrite.Mrc2Test'
                 elif variant == 'old-recipe':
                     ref = manifest['materialization']['output']
                     output = json.loads((self.root / ref['path']).read_bytes())
-                    output['recipe'] = 'com.synexia.rewrite.Mrc2'
+                    output['recipe'] = 'jdk.internal.m3.rewrite.Mrc2'
                     manifest['materialization']['output'] = self.put_json(ref['path'], output)
                 elif variant == 'alias-property':
                     command[2] = command[2].replace('-Dmrc.output=', '-Dmrc3.output=')
@@ -1214,7 +1214,7 @@ class IntakeTest(unittest.TestCase):
         mappings = []
         for index, output in enumerate(self.manifest['files']):
             record = copy.deepcopy(self.intake_record)
-            record['id'] = 'synexia.intake.mrc2.Owner' + str(index)
+            record['id'] = 'm3.intake.mrc2.Owner' + str(index)
             record['owner'] = 'example.Owner' + str(index)
             record['sources'][0].update(commit=self.source_commit, path=output['path'],
                                        symbol=record['owner'], sha256=output['sha256'],
@@ -1232,7 +1232,7 @@ class IntakeTest(unittest.TestCase):
         producer['commands']['commands']['runtime'] = [[
             '/synthetic/jdk/bin/java', '-ea',
             '-Dmrc.output=/synthetic/proof/recipe/generated-candidate',
-            'com.synexia.rewrite.Mrc4Test']]
+            'jdk.internal.m3.rewrite.Mrc4Test']]
         producer['commands']['runtimePatterns'] = {'1': ['^MRC_VERIFIED ']}
         producer['stdout'] = proof['stdout'][0]
         producer['staging']['files'] = sorted(proof['staging'], key=lambda row: row['path'])
@@ -1251,7 +1251,7 @@ class IntakeTest(unittest.TestCase):
         self.assertEqual('mrc2', lane['id'])
         self.assertEqual(7, len(lane['mappings']))
         self.assertEqual(7, len([record for record in self.doc['migration']['records']
-                                if record['id'].startswith('synexia.intake.')]))
+                                if record['id'].startswith('m3.intake.')]))
         self.assertEqual([row['path'] for row in self.manifest['files']],
                          [row['path'] for row in self.proofs['consumer']['staging']['files']])
         self.assertEqual(8, len(self.proofs['recipe']['staging']['files']))
@@ -1263,12 +1263,12 @@ class IntakeTest(unittest.TestCase):
                      'wholeSourceTreeCovered', 'dependencyClosureComplete'):
             self.assertIs(receipt[flag], False)
         output = json.loads((self.root / self.manifest['materialization']['output']['path']).read_bytes())
-        self.assertEqual(('synexia.mrc.output/1', 'mrc-v4', 'com.synexia.rewrite.Mrc4'),
+        self.assertEqual(('m3.mrc.output/1', 'mrc-v4', 'jdk.internal.m3.rewrite.Mrc4'),
                          (output['schema'], output['crate'], output['recipe']))
         self.assertEqual((7, 7, 0, 128, 29), (output['targetCount'], output['replacements'],
                          output['additions'], output['mixedStates'], output['inventoryRefusals']))
         command = self.proofs['recipe']['commands']['commands']['runtime'][0]
-        self.assertEqual('com.synexia.rewrite.Mrc4Test', command[-1])
+        self.assertEqual('jdk.internal.m3.rewrite.Mrc4Test', command[-1])
         self.assertIn('-Dmrc.output=/synthetic/proof/recipe/generated-candidate', command)
         self.assertEqual(receipt, self.admit())
         self.assertEqual(before, self.snapshot())
@@ -1281,11 +1281,11 @@ class IntakeTest(unittest.TestCase):
                     'Mrc4', FRESH_SOURCE_COMMIT)
                 command = proof['commands']['commands']['runtime'][0]
                 if variant == 'old-main':
-                    command[-1] = 'com.synexia.rewrite.Mrc3Test'
+                    command[-1] = 'jdk.internal.m3.rewrite.Mrc3Test'
                 elif variant == 'old-recipe':
                     ref = manifest['materialization']['output']
                     output = json.loads((self.root / ref['path']).read_bytes())
-                    output['recipe'] = 'com.synexia.rewrite.Mrc3'
+                    output['recipe'] = 'jdk.internal.m3.rewrite.Mrc3'
                     manifest['materialization']['output'] = self.put_json(ref['path'], output)
                 elif variant == 'alias-property':
                     command[2] = command[2].replace('-Dmrc.output=', '-Dmrc4.output=')

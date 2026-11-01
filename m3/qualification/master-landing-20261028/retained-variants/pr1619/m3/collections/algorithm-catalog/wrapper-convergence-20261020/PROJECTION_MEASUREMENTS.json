@@ -6,7 +6,7 @@
     "-Xms256m",
     "-Xmx512m"
   ],
-  "probe": "m3/collections/src/test/java/com/m3/collections/M3ProjectionRefinementProbe.java",
+  "probe": "m3/collections/src/test/java/jdk/m3/collections/M3ProjectionRefinementProbe.java",
   "warmup_operations": 30,
   "measured_operations": 40,
   "repetitions_per_owner": 3,

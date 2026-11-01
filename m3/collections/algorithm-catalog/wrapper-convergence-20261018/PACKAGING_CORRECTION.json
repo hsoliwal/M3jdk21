@@ -3,7 +3,7 @@
   "status": "CORRECTED_DELIVERY_CANDIDATES_PENDING_ACTUAL_SDK",
   "rejected_dataset": "m3jdk21-wrap-catalog-20261018",
   "failed_targets": 314,
-  "original_acceptance_freeze_sha256": "667d1f0d7db87012b8a2d6b994dd86325bd45b493305050b2211b8cc0ed29448",
+  "original_acceptance_freeze_sha256": "ed0f907d22ecfef9aef3ab4176dc9b0b0cd13451d1099d119952a3d8fc564e34",
   "actual_sdk_result": {
     "status": "BUILD_FAILURE",
     "tests": 5,
@@ -21,7 +21,7 @@
     "classification": "SOURCE_INSPECTED_NOT_AN_OBSERVED_SECOND_EXECUTION_FAILURE",
     "reason": "The actual v1 run refused a manifest row before reaching the unchanged target-count guard."
   },
-  "engine_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+  "engine_path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
   "engine_sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef",
   "allowed_structured_suffixes": [
     ".py",
@@ -40,8 +40,8 @@
   "renamed_delivery_paths": 161,
   "runtime_source_edits": 0,
   "engine_harness_edits": 0,
-  "source_manifest_sha256_unchanged": "90ec8c484c8ca68f1381133a0979ef88f4975dd4c46ced480db7a87d21b0a98e",
-  "runtime_receipt_sha256_unchanged": "bf9bbd87748c76d0b2da931bc1246114eea49118e5b2ecc3cd5d2bf19aedc568",
+  "source_manifest_sha256_unchanged": "e6973ba853554d97f35823512c189bd190181db1d2d10309d5b0b1a09b4fb4ad",
+  "runtime_receipt_sha256_unchanged": "82e76d78b19dd5ab9e6987e6593c14be5dd3e714051ce1444a82b21fe154fd11",
   "corrected_datasets": [
     "m3jdk21-wrap-evidence-20261018",
     "m3jdk21-wrap-catalog2-20261018"
@@ -52,12 +52,12 @@
   "failure_evidence": [
     {
       "delivered_path": "history/catalogue-delivery-v1/ACCEPTANCE_FREEZE.json",
-      "sha256": "667d1f0d7db87012b8a2d6b994dd86325bd45b493305050b2211b8cc0ed29448",
+      "sha256": "ed0f907d22ecfef9aef3ab4176dc9b0b0cd13451d1099d119952a3d8fc564e34",
       "origin": "audit/collections-navigation-correction/final/CATALOGUE_ACCEPTANCE_FREEZE.json"
     },
     {
       "delivered_path": "history/catalogue-delivery-v1/SEAL_RECEIPT.json",
-      "sha256": "45e2340c971c625851f489efa61570f4e192467fb746760ff73febe8a613c782",
+      "sha256": "d371d06b98f89c9a2cd702e8eb7b713510ffadfa0dc4572d6916addc382efc59",
       "origin": "qualification/wrappers/catalogue-seal.json"
     },
     {
@@ -67,31 +67,31 @@
     },
     {
       "delivered_path": "history/catalogue-delivery-v1/SDK_FAILURE.xml",
-      "sha256": "9db18d4a54629dfd97e5c46322c02472dcb99ef83898da843485aac0d89df723",
-      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-wrap-catalog-20261018/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+      "sha256": "8bfe7c80bb695dbc544c888d4b978b4f818df82f4abd5b8db5f1077c5784ce73",
+      "origin": "com.synexia/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-wrap-catalog-20261018/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
     },
     {
       "delivered_path": "history/catalogue-delivery-v1/DATASET.json",
-      "sha256": "2de631902ebb47ac2eec1afc1a0a58ebf206dd02ef2889e44856838684796212",
-      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018/DATASET.json"
+      "sha256": "947c993fb05b930bb8a8a4c00cd1891508e05f245701a8ba51ae790361dc0971",
+      "origin": "com.synexia/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018/DATASET.json"
     },
     {
       "delivered_path": "history/catalogue-delivery-v1/MODES.tsv",
       "sha256": "adfb16bf09dcd3b6ffc3a9c3a5a5c2f5891724ccab0d16bf7534eacf15d2b168",
-      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018/MODES.tsv"
+      "origin": "com.synexia/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018/MODES.tsv"
     },
     {
       "delivered_path": "history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
       "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23",
-      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018/ENGINE_EFFECTIVE.tsv"
+      "origin": "com.synexia/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018/ENGINE_EFFECTIVE.tsv"
     },
     {
       "delivered_path": "history/catalogue-delivery-v1/manifest.tsv",
-      "sha256": "575fa6a49a303e7ebbf0c7800776641286cb67c70b2bc86e52db09c540131017",
-      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog-20261018/manifest.tsv"
+      "sha256": "d5de62766e2e918d83cf38c5b52b05317d96729f2a2eb5bf4f34fc68c32ed3de",
+      "origin": "com.synexia/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog-20261018/manifest.tsv"
     }
   ],
-  "unchanged_failed_dataset": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018",
+  "unchanged_failed_dataset": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018",
   "previous_payload_reconstruction": "history/catalogue-delivery-v1/V1_PAYLOAD_MAPPING.json",
   "next_authority": "Parent must seal and run both existing TEXT datasets serially; static packaging admission is not an SDK qualification pass.",
   "immutable_evidence_payload_edits": 0,

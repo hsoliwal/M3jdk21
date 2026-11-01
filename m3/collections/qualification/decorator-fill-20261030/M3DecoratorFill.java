@@ -266,7 +266,7 @@ public final class M3DecoratorFill {
                 StandardCharsets.UTF_8, java.nio.file.StandardOpenOption.CREATE,
                         java.nio.file.StandardOpenOption.APPEND);
         Files.writeString(Path.of(args[3]), text, StandardCharsets.UTF_8);
-        LOG.info(() -> "M3_JDK_STANDARD class=" + fill.m3Simple + " renamed="
+        LOG.info(() -> "M3JDK_STANDARD class=" + fill.m3Simple + " renamed="
                 + standard.donorRows.size()
                 + " residue=" + standard.residue.size());
         if (!standard.residue.isEmpty()) {

@@ -42,7 +42,7 @@ The default manifest is adjacent to the received script. Its structure is:
   },
   "files": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
       "before_sha256": "<64 lowercase hexadecimal characters>",
       "after_sha256": "<64 lowercase hexadecimal characters>",
       "role": "runtime"

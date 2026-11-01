@@ -27,8 +27,8 @@ import org.apache.commons.collections4.MultiSet;
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.ResettableIterator;
 import org.apache.commons.collections4.SetValuedMap;
-import com.m3.collections.apache.M3ListValuedMap;
-import com.m3.collections.apache.M3SetValuedMap;
+import jdk.m3.collections.apache.M3ListValuedMap;
+import jdk.m3.collections.apache.M3SetValuedMap;
 
 public final class ApacheM3MultiValueCandidateProbe {
  private static final String DONOR =

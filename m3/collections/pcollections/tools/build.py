@@ -23,13 +23,13 @@ import xml.etree.ElementTree as ElementTree
 from pathlib import Path
 
 STAGES = ("lint", "compile", "test", "runtime")
-MODULES = ("org.pcollections", "com.m3.collections", "com.m3.pcollections")
+MODULES = ("org.pcollections", "jdk.m3.collections", "jdk.m3.pcollections")
 DONOR_COMMIT = "1f2212e7bf935451ea421ca3d499ef3c96c45e5c"
 DONOR_TEST_COUNT = 264
 CONTRACTS = ("M3PVectorContract", "M3PHashContract", "M3PDerivedContract")
 VIEW_CONTRACT = "M3PViewsContract"
 RESOURCE_PROBE = "M3PResourceProbe"
-JNI_PREFIX = "Java_com_m3_collections_M3IndexMaskCompactor_"
+JNI_PREFIX = "Java_jdk_m3_collections_M3IndexMaskCompactor_"
 JNI_METHODS = {"selectNative", "rangeAbiNative", "selectRangeNative", "positionsAbiNative",
                "selectPositionsNative", "selectWindowNative", "selectLongWindowNative"}
 DEPENDENCIES = {
@@ -155,8 +155,8 @@ class Verifier:
             raise ValueError("Output must be disjoint from source owners and the supplied JDK")
         self.sources = {
             "org.pcollections": sorted((self.donor / "src/main/java").rglob("*.java")),
-            "com.m3.collections": sorted((self.base / "src/main/java").rglob("*.java")),
-            "com.m3.pcollections": sorted((self.pack / "src/main/java").rglob("*.java")),
+            "jdk.m3.collections": sorted((self.base / "src/main/java").rglob("*.java")),
+            "jdk.m3.pcollections": sorted((self.pack / "src/main/java").rglob("*.java")),
         }
         self.donor_tests = sorted((self.donor / "src/test/java").rglob("*.java"))
         self.m3_tests = sorted((self.pack / "src/test/java").rglob("*.java"))
@@ -173,7 +173,7 @@ class Verifier:
         self.poms = [self.donor / "pom.xml", self.base / "pom.xml", self.pack / "pom.xml",
                      self.pack / "reactor/pom.xml"]
         self.metadata = [self.pack / name for name in
-                         ("provenance.json", "name-mapping.json", "synexia-donation.json")]
+                         ("provenance.json", "name-mapping.json", "m3-donation.json")]
         self.environment = os.environ.copy()
         for key in ("JAVA_TOOL_OPTIONS", "JDK_JAVA_OPTIONS", "_JAVA_OPTIONS", "CLASSPATH",
                     "LD_LIBRARY_PATH", "LD_PRELOAD"):
@@ -334,13 +334,13 @@ class Verifier:
         for metadata in self.metadata:
             if not isinstance(json.loads(metadata.read_text(encoding="utf-8")), dict):
                 raise ValueError("Scoped metadata must be a JSON object: " + str(metadata))
-        new_sources = self.sources["com.m3.pcollections"] + self.m3_tests
+        new_sources = self.sources["jdk.m3.pcollections"] + self.m3_tests
         for source in new_sources:
             data = source.read_bytes()
             text = data.decode("utf-8")
             if b"\0" in data or not data.endswith(b"\n") or "SPDX-License-Identifier: Apache-2.0" not in text:
                 raise ValueError("New Java source hygiene failure: " + str(source))
-        owner = self.base / "src/main/java/com/m3/collections/M3IndexMaskCompactor.java"
+        owner = self.base / "src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java"
         declarations = set(re.findall(r"\bnative\s+[\w\[\]]+\s+(\w+)\s*\(", owner.read_text(encoding="utf-8")))
         exports = set(re.findall(r"\bJava_\w+(?=\s*\()", self.native_source.read_text(encoding="utf-8")))
         if declarations != JNI_METHODS or exports != {JNI_PREFIX + name for name in JNI_METHODS}:
@@ -381,7 +381,7 @@ class Verifier:
                      "--add-modules", "java.management,jdk.management", "-proc:none",
                      "-Xlint:all,-module", "-Werror", "-cp", donor_classpath,
                      "-d", self.stage_dir / "m3-tests", *self.m3_tests)
-        header = headers / "com_m3_collections_M3IndexMaskCompactor.h"
+        header = headers / "jdk_m3_collections_M3IndexMaskCompactor.h"
         header_exports = set(re.findall(r"\bJava_\w+(?=\s*\()", header.read_text(encoding="utf-8")))
         expected = {JNI_PREFIX + name for name in JNI_METHODS}
         if header_exports != expected:
@@ -438,8 +438,8 @@ class Verifier:
         rows = ["artifact\tversion\tjar\tmodule\trequires\tdisposition"]
         for module in MODULES:
             requires = "java.base"
-            if module == "com.m3.pcollections":
-                requires += ",org.pcollections,com.m3.collections"
+            if module == "jdk.m3.pcollections":
+                requires += ",org.pcollections,jdk.m3.collections"
             rows.append("\t".join((module, "1", str(jars / (module + ".jar")), module, requires, "JMOD")))
         (self.stage_dir / "INPUT_JMOD_IMAGE.tsv").write_text("\n".join(rows) + "\n", encoding="utf-8")
         (self.stage_dir / "EMPTY_DESCRIPTOR_MANIFEST.tsv").write_text(
@@ -510,13 +510,13 @@ class Verifier:
         if not linked:
             options += ["-Djava.library.path=" + str(compiled / ("native" if native else "empty-native"))]
         if linked:
-            options += ["--add-modules", "com.m3.pcollections,java.management,jdk.management",
-                        "--add-reads", "com.m3.pcollections=java.management",
-                        "--add-reads", "com.m3.pcollections=jdk.management",
-                        "--patch-module", "com.m3.pcollections=" + str(compiled / "m3-tests"),
-                        "-m", "com.m3.pcollections/com.m3.pcollections." + name]
+            options += ["--add-modules", "jdk.m3.pcollections,java.management,jdk.management",
+                        "--add-reads", "jdk.m3.pcollections=java.management",
+                        "--add-reads", "jdk.m3.pcollections=jdk.management",
+                        "--patch-module", "jdk.m3.pcollections=" + str(compiled / "m3-tests"),
+                        "-m", "jdk.m3.pcollections/jdk.m3.pcollections." + name]
         else:
-            options += ["-cp", self.classpath(), "com.m3.pcollections." + name]
+            options += ["-cp", self.classpath(), "jdk.m3.pcollections." + name]
         marker = name + (" PASS mode=" + mode if name == VIEW_CONTRACT else " PASS")
         return self.command(label + "-" + name + ("-" + mode.lstrip("-") if mode else ""),
                             java, *options, *([mode] if mode else []), expected=marker)
@@ -535,18 +535,18 @@ class Verifier:
         if not linked:
             options += ["--module-path", str(compiled / "modules"), "-Djava.library.path="
                         + str(compiled / ("native" if mode == "--native" else "empty-native"))]
-        options += ["--add-modules", "com.m3.pcollections,java.management,jdk.management",
-                    "--add-reads", "com.m3.pcollections=java.management",
-                    "--add-reads", "com.m3.pcollections=jdk.management",
-                    "--patch-module", "com.m3.pcollections=" + str(compiled / "m3-tests"),
-                    "-m", "com.m3.pcollections/com.m3.pcollections." + RESOURCE_PROBE, mode]
+        options += ["--add-modules", "jdk.m3.pcollections,java.management,jdk.management",
+                    "--add-reads", "jdk.m3.pcollections=java.management",
+                    "--add-reads", "jdk.m3.pcollections=jdk.management",
+                    "--patch-module", "jdk.m3.pcollections=" + str(compiled / "m3-tests"),
+                    "-m", "jdk.m3.pcollections/jdk.m3.pcollections." + RESOURCE_PROBE, mode]
         output = self.command(label + "-resource-" + mode.lstrip("-"), java, *options)
         records = [json.loads(line) for line in output.splitlines() if line.startswith("{")]
         environments = [record for record in records if record.get("environment")]
         if len(environments) != 1 or any(environments[0].get(key) != module for key, module in
-                                       (("m3Module", "com.m3.pcollections"),
+                                       (("m3Module", "jdk.m3.pcollections"),
                                         ("donorModule", "org.pcollections"),
-                                        ("jniOwnerModule", "com.m3.collections"))):
+                                        ("jniOwnerModule", "jdk.m3.collections"))):
             raise ValueError("Resource probe did not verify all three named module identities")
         scenarios = {}
         for record in records:
@@ -572,7 +572,7 @@ class Verifier:
                      "--jdk-home", self.home, "--image-tsv", compiled / "INPUT_JMOD_IMAGE.tsv",
                      "--manifest", compiled / "EMPTY_DESCRIPTOR_MANIFEST.tsv", "--layer-root", self.repo,
                      "--out", self.stage_dir / "pack", "--legal-notices", compiled / "legal",
-                     "--native-library", "com.m3.collections=" + str(compiled / "native"),
+                     "--native-library", "jdk.m3.collections=" + str(compiled / "native"),
                      "--add-modules", "java.se,jdk.management,jdk.compiler,jdk.jlink,jdk.jartool,jdk.jdeps")
         image = self.stage_dir / "pack/image"
         linked_library = image / "lib/libm3_collections_mask.so"

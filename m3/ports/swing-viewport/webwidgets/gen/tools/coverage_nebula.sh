@@ -8,7 +8,7 @@
 # Usage: coverage_nebula.sh <build dir of gate_nebula.sh> <widgets/m3web dir> <swt jar> <junit4 jar> <hamcrest jar> <out dir> [COVERAGE_EXCEPTIONS.tsv]
 set -euo pipefail
 b=$1; src=$2; swt=$3; junit=$4; ham=$5; out=$6; exc=${7:-/dev/null}
-jdk=${M3_JDK21:-"/c/Program Files/Java/jdk-21"}
+jdk=${M3JDK21:-"/c/Program Files/Java/jdk-21"}
 m2=$(cygpath -m "$HOME/.m2/repository")
 agent=$m2/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar
 cli=$m2/org/jacoco/org.jacoco.cli/0.8.15/org.jacoco.cli-0.8.15-nodeps.jar

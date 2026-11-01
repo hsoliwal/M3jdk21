@@ -1,5 +1,5 @@
 {
-  "schema": "synexia.m3jdk21.static-jdk-action-selection.v1",
+  "schema": "m3.m3jdk21.static-jdk-action-selection.v1",
   "id": "m3.index-path-rank.window-wordwalk.java21.20261020",
   "action": "QUALIFY_FIXED_SOURCE_SET_WITH_EXISTING_JDK_TOOLS",
   "record_kind": "STATIC_SELECTION_DATA",
@@ -28,36 +28,36 @@
   },
   "source_pins": [
     {
-      "path": "src/com/m3/collections/M3IndexPathRank.java",
+      "path": "src/jdk/m3/collections/M3IndexPathRank.java",
       "bytes": 9834,
       "git_blob": "4a60fd1fab763c03dd14f1e4e5abe4ff33a712fa",
       "sha256": "24fc18d444d8e92d0a136b2541b5a92e203e3179b1ab1c4518f6d6becf902e2a",
       "license": "Apache-2.0",
-      "repository_path": "m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java",
+      "repository_path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexPathRank.java",
       "source_head": "4fd2abe76a3a63f5c363f69b4a5f979540a95bdb"
     },
     {
-      "path": "src/com/m3/collections/M3IndexPathRankSelfTest.java",
+      "path": "src/jdk/m3/collections/M3IndexPathRankSelfTest.java",
       "bytes": 10699,
-      "git_blob": "0a95152c8b7345fc73901e850bde66bb1fcd390b",
-      "sha256": "d354516b794666bb594d91acb1da0128172b88771b48a899e4c456da947759d2",
+      "git_blob": "2a7118eeed4bb39585ca5f9479821229804b3597",
+      "sha256": "06116817a78a0d9484d855a1f6a3c5f01d01fa03b3c3a2f1dc5c881980b7b1c9",
       "license": "Apache-2.0",
-      "repository_path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathRankSelfTest.java",
+      "repository_path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexPathRankSelfTest.java",
       "source_head": "4fd2abe76a3a63f5c363f69b4a5f979540a95bdb"
     },
     {
-      "path": "src/com/m3/collections/M3IndexPathRankWordWalkProof.java",
+      "path": "src/jdk/m3/collections/M3IndexPathRankWordWalkProof.java",
       "bytes": 4857,
       "git_blob": "18267cd65e757a2d875754d4b852c2205b2e4e7d",
       "sha256": "876fd1c73030a39b1e629580111b94cee6cd39205da34e2ff900a0570057eae9",
       "license": "Apache-2.0",
-      "repository_path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathRankWordWalkProof.java",
+      "repository_path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexPathRankWordWalkProof.java",
       "source_head": "4fd2abe76a3a63f5c363f69b4a5f979540a95bdb"
     },
     {
-      "path": "baseline/src/com/m3/collections/M3IndexPathRank.java",
-      "git_blob": "6bc439b69f739608141acf6ee3800e5b5b0163c3",
-      "sha256": "9f683bec8b328f4d2ed4ae1540281ea14ccd2475e2096c60ffe77e36bfe53ecc",
+      "path": "baseline/src/jdk/m3/collections/M3IndexPathRank.java",
+      "git_blob": "b1aaef46be48ef4f339adc252e8af226cce3538c",
+      "sha256": "2f19eca31f904198320e769dda2c096995ba97649724b2eaf427ea6dd0171aec",
       "bytes": 9214,
       "license": "Apache-2.0",
       "role": "Exact incumbent owner; shared candidate test sources are used unchanged for both strict compilations"
@@ -75,7 +75,7 @@
   },
   "command_manifest": {
     "path": "../evidence/index-path-rank-wordwalk-20261020/windows-host-20261020/PLAN.json",
-    "sha256": "611ae5374fc50448ba41d4c5495145b1111af2529a234299a71b61cdf2c51e86",
+    "sha256": "bf424baa9332b6cc52e3e8ea530fd8d426fa6db146dc3356f67e26e2b6425ed2",
     "commands": [
       {
         "id": "baseline-compile",
@@ -129,7 +129,7 @@
   ],
   "observed_result": {
     "path": "../evidence/index-path-rank-wordwalk-20261020/windows-host-20261020/RESULT.json",
-    "sha256": "08e96d5f9e30f325a5e2bd4ae6cef1847b87e2f4da16fb1355e67bce457e6228",
+    "sha256": "d36c0f50664a6538ac525b3b403549040f73215b7e9a7a8b5f15e8dbab9789b1",
     "status": "PASS_EXACT_BASELINE_CANDIDATE_JAVA_AND_API",
     "rank_checks_per_variant": 36476,
     "randomized_paths_per_variant": 900,

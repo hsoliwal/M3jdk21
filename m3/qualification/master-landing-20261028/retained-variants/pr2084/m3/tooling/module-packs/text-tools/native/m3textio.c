@@ -62,7 +62,7 @@ static jint m3_mkfifo(JNIEnv *env, jbyteArray input, jint mode) {
     return result;
 }
 
-JNIEXPORT jint JNICALL Java_com_synexia_unix4jm3_io_FileTools_mkfifo0
+JNIEXPORT jint JNICALL Java_jdk_internal_m3_unix4jm3_io_FileTools_mkfifo0
   (JNIEnv *env, jclass owner, jbyteArray path, jint mode) {
     (void)owner;
     return m3_mkfifo(env, path, mode);

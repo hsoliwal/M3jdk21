@@ -1,4 +1,4 @@
-{"file":"jdk/internal/m3/M3ByteSlices.java","line":1,"kind":"FILE","category":"source_inventory","sha256":"1c0c1706425764b69e9966881ab436c5cd03cf763d5aeff5e79529376df2b272","proof":"UNPROVEN"}
+{"file":"jdk/internal/m3/M3ByteSlices.java","line":1,"kind":"FILE","category":"source_inventory","sha256":"f738702d61feb17c6a12bb8bca0df9360e552016d9e237ce7b8d19c8212f34f5","proof":"UNPROVEN"}
 {"file":"jdk/internal/m3/M3ByteSlices.java","line":37,"kind":"ALLOCATION","category":"dynamic_arrays","sha256":"de2261e9700d8d947051c94086cab75a893f4fb2ab09b995fe7ca05dcc258e21","proof":"UNPROVEN"}
 {"file":"jdk/internal/m3/M3ByteSlices.java","line":38,"kind":"ALLOCATION","category":"dynamic_arrays","sha256":"21a418361471617c11f1f874833e7fd355d97f513822d9f646262822d81cd6cd","proof":"UNPROVEN"}
 {"file":"jdk/internal/m3/M3ByteSlices.java","line":41,"kind":"ALLOCATION","category":"dynamic_arrays","sha256":"21a418361471617c11f1f874833e7fd355d97f513822d9f646262822d81cd6cd","proof":"UNPROVEN"}
@@ -54,7 +54,7 @@
 {"file":"jdk/internal/m3/M3ByteSlices.java","line":302,"kind":"INVOCATION","category":"dynamic_arrays","sha256":"f4d346ebb21d966f1ab7a8f54606705dc3bb45e2d61768b774c4119a5ba11ed8","proof":"UNPROVEN"}
 {"file":"jdk/internal/m3/M3ByteSlices.java","line":305,"kind":"METHOD","category":"behavioral_atom","sha256":"dba8fd3bbe09f2ed52745654d7592863ee27ae6a30dade2307fb12192fcaf063","proof":"UNPROVEN"}
 {"file":"jdk/internal/m3/M3ByteSlices.java","line":315,"kind":"METHOD","category":"behavioral_atom","sha256":"74f6a88dd4efbbb68d17195d9b899a1e48744de285c3ae5d288f5f1e51beeb12","proof":"UNPROVEN"}
-{"file":"jdk/internal/m3/M3CompositeBytes.java","line":1,"kind":"FILE","category":"source_inventory","sha256":"9166977ae4041c835afe7b33f2d25f523276cbca84d8e315c8c05bb7c038d30b","proof":"UNPROVEN"}
+{"file":"jdk/internal/m3/M3CompositeBytes.java","line":1,"kind":"FILE","category":"source_inventory","sha256":"43fe0741274d433e79def84eb83a6415c53e36cda96a832102882f75862308ef","proof":"UNPROVEN"}
 {"file":"jdk/internal/m3/M3CompositeBytes.java","line":30,"kind":"METHOD","category":"behavioral_atom","sha256":"85d3938ae2a07dba4d78b8bda958c3f6a524ef3f8becaeecd73ae76bd4b41b65","proof":"UNPROVEN"}
 {"file":"jdk/internal/m3/M3CompositeBytes.java","line":39,"kind":"ALLOCATION","category":"dynamic_arrays","sha256":"0b1bb1298c89c071477df6a07a7fcfec7c15cc50e3d72300b78d7895281fbc49","proof":"UNPROVEN"}
 {"file":"jdk/internal/m3/M3CompositeBytes.java","line":47,"kind":"INVOCATION","category":"storage_ownership","sha256":"2d7035d995c3f2c97084e436c4bff5c63f091243510aa86db78988338850a185","proof":"UNPROVEN"}
@@ -85,7 +85,7 @@
 {"file":"jdk/internal/m3/M3CompositeBytes.java","line":192,"kind":"INVOCATION","category":"dynamic_arrays","sha256":"530177ff78cc2f8a1e7bf8671c91aeeedd2aefeb69c59e8c94fad792643db34b","proof":"UNPROVEN"}
 {"file":"jdk/internal/m3/M3CompositeBytes.java","line":193,"kind":"INVOCATION","category":"dynamic_arrays","sha256":"7a1194a3a940dc5275d6d86856724f9e146364cf06ee52888bc6c5ae14b672f3","proof":"UNPROVEN"}
 {"file":"jdk/internal/m3/M3CompositeBytes.java","line":197,"kind":"METHOD","category":"behavioral_atom","sha256":"56702b4b63ec75ecf6c89b985b1d24b55314360aa1cf8fb3c9a047e31ffbb94e","proof":"UNPROVEN"}
-{"file":"jdk/internal/m3/M3IndexedArray.java","line":1,"kind":"FILE","category":"source_inventory","sha256":"67b40cc53868d05622d40c6a8adc5932e0511ef513385b74748df35baef9f059","proof":"UNPROVEN"}
+{"file":"jdk/internal/m3/M3IndexedArray.java","line":1,"kind":"FILE","category":"source_inventory","sha256":"1e40533e27940169e3de0e4750c791e9df683225e13f5059e18b84e623823c90","proof":"UNPROVEN"}
 {"file":"jdk/internal/m3/M3IndexedArray.java","line":36,"kind":"ALLOCATION","category":"dynamic_arrays","sha256":"e0944989b1fbcf315af4cb38a112314a00f7edec506d055a1bfeb39f384e1330","proof":"UNPROVEN"}
 {"file":"jdk/internal/m3/M3IndexedArray.java","line":37,"kind":"ALLOCATION","category":"dynamic_arrays","sha256":"73c0c5209176921ec14c6f8ff489a9e4ef82c60b80378209b150fa64a1d9e592","proof":"UNPROVEN"}
 {"file":"jdk/internal/m3/M3IndexedArray.java","line":38,"kind":"ALLOCATION","category":"dynamic_arrays","sha256":"73c0c5209176921ec14c6f8ff489a9e4ef82c60b80378209b150fa64a1d9e592","proof":"UNPROVEN"}
@@ -172,7 +172,7 @@
 {"file":"jdk/internal/m3/M3IntAlgorithms.java","line":163,"kind":"METHOD","category":"behavioral_atom","sha256":"f3e00444b1041b9019a336d540a1a0b4ee6967dcb75b3663017d0b4e6b95cae3","proof":"UNPROVEN"}
 {"file":"jdk/internal/m3/M3IntAlgorithms.java","line":165,"kind":"OPERATOR","category":"xor_candidate","sha256":"cc200a4310322cde347ec8d77a44cb6761d6106a1ac6a1b9a5902dd4efe26981","proof":"UNPROVEN"}
 {"file":"jdk/internal/m3/M3IntAlgorithms.java","line":173,"kind":"METHOD","category":"behavioral_atom","sha256":"b99d09b144b11a3508b575922e174abfb7a028d10ea260225cb61249abda0c8c","proof":"UNPROVEN"}
-{"file":"jdk/internal/m3/M3ObjectMetrics.java","line":1,"kind":"FILE","category":"source_inventory","sha256":"9d4c7e4bffb427beba511bf6706df0fd490b2979f9beadb92486fae8bdc2c867","proof":"UNPROVEN"}
+{"file":"jdk/internal/m3/M3ObjectMetrics.java","line":1,"kind":"FILE","category":"source_inventory","sha256":"6df526393dc1c2b9046ac5b306e401a55245191cfadc861ec5efcf1adfc987e2","proof":"UNPROVEN"}
 {"file":"jdk/internal/m3/M3ObjectMetrics.java","line":28,"kind":"METHOD","category":"behavioral_atom","sha256":"f3c42e680758d39452e70e1ce92dbfb69f597180e1b7fbd84e3e6f49fa62b078","proof":"UNPROVEN"}
 {"file":"jdk/internal/m3/M3ObjectMetrics.java","line":30,"kind":"METHOD","category":"behavioral_atom","sha256":"65a5d4900672074c9c714a7d65dce5eccecbb85c297990f2b892d44d0ea6b992","proof":"UNPROVEN"}
 {"file":"jdk/internal/m3/M3ObjectMetrics.java","line":35,"kind":"METHOD","category":"behavioral_atom","sha256":"88acc8007edb0113e9e2f044089ff06a326382c225dd5305811578393d083776","proof":"UNPROVEN"}

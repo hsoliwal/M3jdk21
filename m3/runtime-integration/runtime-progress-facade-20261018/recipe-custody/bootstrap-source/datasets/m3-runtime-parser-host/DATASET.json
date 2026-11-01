@@ -4,7 +4,7 @@
   "repository": "hsoliwal/com.synexia",
   "baseline_ref": "8f8200375d8d403b58e855ee5db02f2e8fac33a8",
   "crate_name": "m3-collections-contract-refinement-20261017-m3-runtime-parser-host",
-  "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "recipe_name": "jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017",
   "targets": 57,
   "java_targets": 11,
   "text_targets": 46,

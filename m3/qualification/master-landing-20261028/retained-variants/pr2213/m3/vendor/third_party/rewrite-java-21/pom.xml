@@ -83,7 +83,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.15.0</version>
-        <!-- Upstream bytes are compiled as published: no annotation processing, no warnings-as-errors. M3jdk21 integration is checked separately with -Werror. -->
+        <!-- Upstream bytes are compiled as published: no annotation processing, no warnings-as-errors. M3JDK 21 integration is checked separately with -Werror. -->
         <configuration>
           <source>21</source>
           <target>21</target>

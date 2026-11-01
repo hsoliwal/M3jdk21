@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: jdk.internal.m3.CollectionDense20261019
+displayName: M3JDK21 dense collection selection
+description: Refine target-owned snapshot and mask atoms without changing collection contracts.
+recipeList:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk-collection-dense-20261019
+  - jdk.internal.m3.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3jdk-collection-dense-20261019

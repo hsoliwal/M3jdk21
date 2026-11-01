@@ -1,6 +1,6 @@
 // Copyright 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
-import com.m3.tools.text.ngram.NGrams;
+import jdk.m3.tools.text.ngram.NGrams;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.SplittableRandom;

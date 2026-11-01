@@ -124,10 +124,10 @@ while IFS=$'\t' read -r id ref target check backing policy expect; do
 			ev=$(awk -F'\t' -v e="$expect" '$1 == e { print $1 " expected=" $5 " actual=" $6 " " $7 }' "$d/rules.tsv")
 			[ "$crc" -ne 0 ] && [ -n "$(awk -F'\t' -v e="$expect" '$1 == e && $7 == "FAIL"' "$d/rules.tsv")" ] && caught=CAUGHT
 		else
-			IFS=$'\t' read -r noracle nfactory < <(awk -F'\t' -v m="com.m3.collections.apache.$target" -v b="$backing" -v p="$policy" \
+			IFS=$'\t' read -r noracle nfactory < <(awk -F'\t' -v m="jdk.m3.collections.apache.$target" -v b="$backing" -v p="$policy" \
 				'$1 == m && $3 == b && $6 == p { print $2 "\t" $4; exit }' "$Q/TARGETS.tsv" | tr -d '\r')
 			main=M3DecoratorDifferential; [ "$check" = probe ] && main=M3PredicatedProbe
-			"$BIN/java" -cp "$JAR$SEP$d/cls$SEP$WORK/cls$SEP$WORK/hcls" "$main" "com.m3.collections.apache.$target" "$noracle" "$backing" "$nfactory" \
+			"$BIN/java" -cp "$JAR$SEP$d/cls$SEP$WORK/cls$SEP$WORK/hcls" "$main" "jdk.m3.collections.apache.$target" "$noracle" "$backing" "$nfactory" \
 				"$d/mismatch.tsv" "$policy" > "$d/log.txt" 2>&1 || crc=$?
 			ev="exit=$crc $(grep -o 'mismatches=[0-9]*' "$d/log.txt" | tail -1); first: $(head -1 "$d/mismatch.tsv" 2>/dev/null | cut -f2- | tr '\t' ' ' | cut -c1-160)"
 			[ "$crc" -eq 4 ] && caught=CAUGHT

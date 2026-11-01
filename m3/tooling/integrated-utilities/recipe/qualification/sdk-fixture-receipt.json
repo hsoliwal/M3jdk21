@@ -26,7 +26,7 @@
   "source_files": [
     {
       "path": "ENGINE_PROVENANCE.json",
-      "sha256": "dcbfa2198dcaf5230592c4208a50710c53767c2eb9ec3030edbdbee6c97dbb64"
+      "sha256": "472a25db0cf377775b628e2955fdd09ce19ad01b182fbd4b7f1aea096e225012"
     },
     {
       "path": "NOTICE.md",
@@ -42,31 +42,31 @@
     },
     {
       "path": "src/main/java/com/synexia/rewrite/IntegratedUtilitiesRunner.java",
-      "sha256": "2fc68d51cf0631124daa79f9c59f816242915a984a776e880ed2727ab0a0a590"
+      "sha256": "8e8c95731b8321396fb57e50770aa74b6262b8450942ff6384e18215e7a4c982"
     },
     {
       "path": "src/main/java/com/synexia/rewrite/M3GpuToolJoinManifest.java",
-      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+      "sha256": "c874b5d4b5fe8886d53763ab91d050f431c4b7c09d3fe34d58680231ccb1cf7e"
     },
     {
       "path": "src/main/java/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
-      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
+      "sha256": "300a520ec9d273922d1edbdf5442e5faf825c47e8e3df7febf4baa2f39945401"
     },
     {
       "path": "src/main/java/com/synexia/rewrite/M3IntegratedUtilitiesRecipe.java",
-      "sha256": "2bf8f3f4dd6f22056eb3e908febbae4f40aca1a30bbd5a1540d13603eb20b80c"
+      "sha256": "6c7a5b3e61d51208a9e39c3efb2b685310d448ee00678e2c23f87d27d3dba1ef"
     },
     {
       "path": "src/main/resources/META-INF/rewrite/m3jdk21-integrated-utilities-20261018.yml",
-      "sha256": "6b94b6356acb19d05562db6a34c98453f868ec2dd3f156393a5ac498e868b1db"
+      "sha256": "f5bf4a2c2d8f57ba409ccb27cfbdc2bf9aa6e661682e7cd8b308022ab9ff337f"
     },
     {
       "path": "src/test/java/com/synexia/rewrite/EngineCustodyTest.java",
-      "sha256": "9ef9c985b84a6bc7e48bbc7da7fd16b586877251d855f5e734375b99dc9733f9"
+      "sha256": "5d0241642bdc13d88930dc0e4fbd2a1abbb19ed98b83b6042251ea80bd1afccc"
     },
     {
       "path": "src/test/java/com/synexia/rewrite/IntegratedUtilitiesRecipeTest.java",
-      "sha256": "375198a7ce53b5255f5f7085fb567c9295e8269d05d74c20c21e8618ad480e2f"
+      "sha256": "ed8b03718bc2e5c71f4dd1ebc3f45e91a4b413a3386a91aed4f234b2427796d3"
     },
     {
       "path": "src/test/resources/com/synexia/rewrite/integrated-utilities-fixture/before/README.md",

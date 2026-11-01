@@ -62,10 +62,10 @@ index 4047196..e5b3206 100644
  def _row(
      *,
      jep: str,
-diff --git a/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java b/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java
+diff --git a/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java b/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java
 index 63344ac..e349a7c 100644
---- a/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java
-+++ b/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java
+--- a/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java
++++ b/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java
 @@ -94,7 +94,7 @@ com.synexia.rewrite.CiRecipeTest$1
                              output.put(
                                      after.getSourcePath()
@@ -75,10 +75,10 @@ index 63344ac..e349a7c 100644
                                      after.printAll());
                          });
          return output;
-diff --git a/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java b/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java
+diff --git a/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java b/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java
 index c186560..8e7d6c7 100644
---- a/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java
-+++ b/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java
+--- a/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java
++++ b/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java
 @@ -97,7 +97,7 @@ com.synexia.rewrite.CiRecipeTest$1
                              output.put(
                                      after.getSourcePath()

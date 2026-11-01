@@ -16,8 +16,8 @@
   },
   "final_map": {
     "path": "m3/docs/name-mapping.json",
-    "git_blob_sha1": "d8baac9900534e93c3337676c17f061449f42ee4",
-    "sha256": "4f9e82d22a7c14c1739b975ed6fb53fddc7610cd41782b078d143f9eb23454e9",
+    "git_blob_sha1": "be762328ca1b418c9f0ab5a7545df755e1159290",
+    "sha256": "7ab3e555a8be6988034a7e540982ec243f6180a7f8228d2d4fcbf1a1108ddc02",
     "bytes": 633358
   },
   "canonical_commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
@@ -110,7 +110,7 @@
       "pointer": "/migration/records/30/observation",
       "change": "explicit snapshot and receiving identity pointer",
       "snapshot_path": "m3/docs/android-efficiency-20261020/history/class-index-counterpart-before.json",
-      "snapshot_sha256": "349fb2885f2e8914d4e4c6714862a8c7f04b3991c013a06b26a0af4d20bd3320"
+      "snapshot_sha256": "b50cce55526cd14d0c7fe91c65b70cf94b7655d0208a493f341a4bc0a2fa5f54"
     },
     {
       "pointer": "/migration/records/50/targets/0/commit",
@@ -173,7 +173,7 @@
       "pointer": "/migration/records/50/observation",
       "change": "explicit snapshot and receiving identity pointer",
       "snapshot_path": "m3/docs/android-efficiency-20261020/history/segmented-bit-lane-28-before.json",
-      "snapshot_sha256": "7447594bd333dff329e320c6af54b00a3b6ac5e7b45a10861ad96080000f9ddb"
+      "snapshot_sha256": "841af749c3d1980312ba3f96e6bbb94897470bb103376342aebbe6f9cd376c90"
     },
     {
       "pointer": "/migration/records/56/targets/2/commit",
@@ -182,13 +182,13 @@
     },
     {
       "pointer": "/migration/records/56/targets/2/sha256",
-      "before": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
-      "after": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f"
+      "before": "0df1989292b23b1f185f222db61ad55d5e38b30d5b758436ca9d62b8de277bbd",
+      "after": "03fa3e35008045561b57f11e4cff1ff3e04fc8b90220d1525d86f345b75fa332"
     },
     {
       "pointer": "/migration/records/56/targets/2/git_blob_sha1",
-      "before": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
-      "after": "d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d"
+      "before": "89b3127f0f262de3e00ba28a01079a659013dce2",
+      "after": "5d2a8cc83a7551f4d2a82dfa5781c7a79531d444"
     },
     {
       "pointer": "/migration/records/56/sync/target_revision",
@@ -211,28 +211,28 @@
       "pointer": "/migration/records/56/observation",
       "change": "explicit snapshot and receiving identity pointer",
       "snapshot_path": "m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json",
-      "snapshot_sha256": "53535c80f8b2b434a4be6852a03175b831f42f73b8fa73a14ea3ec28c5ee13ac"
+      "snapshot_sha256": "9d54908573ec1b984485adba62f3978ed4b8414481d1a97ab77d3716b48f3431"
     }
   ],
   "complete_original_record_snapshots": [
     {
       "path": "m3/docs/android-efficiency-20261020/history/class-index-counterpart-before.json",
-      "sha256": "349fb2885f2e8914d4e4c6714862a8c7f04b3991c013a06b26a0af4d20bd3320",
-      "git_blob_sha1": "0d92ce61c5af1d0458771724b238e5b46d03064b",
+      "sha256": "b50cce55526cd14d0c7fe91c65b70cf94b7655d0208a493f341a4bc0a2fa5f54",
+      "git_blob_sha1": "6f5e6f64a44605889f8e7b502ac6b7762dd00c08",
       "record_index": 30,
       "record_id": "synexia.counterpart.MIndexClassIndex"
     },
     {
       "path": "m3/docs/android-efficiency-20261020/history/segmented-bit-lane-28-before.json",
-      "sha256": "7447594bd333dff329e320c6af54b00a3b6ac5e7b45a10861ad96080000f9ddb",
-      "git_blob_sha1": "3b49d7f7aacd35863f7f105eeb04a2c9abea43f2",
+      "sha256": "841af749c3d1980312ba3f96e6bbb94897470bb103376342aebbe6f9cd376c90",
+      "git_blob_sha1": "58625263f24ba82b65554dbc8d2f2560ae529ada",
       "record_index": 50,
       "record_id": "synexia.collections.SegmentedBitLane28"
     },
     {
       "path": "m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json",
-      "sha256": "53535c80f8b2b434a4be6852a03175b831f42f73b8fa73a14ea3ec28c5ee13ac",
-      "git_blob_sha1": "4054e1dea3a52ed30f3aa30136232e4d90399be1",
+      "sha256": "9d54908573ec1b984485adba62f3978ed4b8414481d1a97ab77d3716b48f3431",
+      "git_blob_sha1": "cc63125583799cdfeaee11914f49964ccf9789eb",
       "record_index": 56,
       "record_id": "synexia.regex.ordered-relations.adapter"
     }
@@ -246,9 +246,9 @@
     },
     {
       "path": "src/java.base/share/native/libjava/M3StateRelation.c",
-      "sha256": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f",
-      "git_blob_sha1": "d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d",
-      "before_sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16"
+      "sha256": "03fa3e35008045561b57f11e4cff1ff3e04fc8b90220d1525d86f345b75fa332",
+      "git_blob_sha1": "5d2a8cc83a7551f4d2a82dfa5781c7a79531d444",
+      "before_sha256": "0df1989292b23b1f185f222db61ad55d5e38b30d5b758436ca9d62b8de277bbd"
     },
     {
       "path": "m3/arrays/src/main/native/CMakeLists.txt",
@@ -280,10 +280,10 @@
       "repo": "hsoliwal/com.synexia",
       "commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
       "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-android-efficiency-20261020/src/java.base/share/native/libjava/M3StateRelation.c.txt",
-      "git_blob_sha1": "d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d",
-      "expected_sha256": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f",
+      "git_blob_sha1": "5d2a8cc83a7551f4d2a82dfa5781c7a79531d444",
+      "expected_sha256": "03fa3e35008045561b57f11e4cff1ff3e04fc8b90220d1525d86f345b75fa332",
       "kind": "canonical-source",
-      "sha256": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f",
+      "sha256": "03fa3e35008045561b57f11e4cff1ff3e04fc8b90220d1525d86f345b75fa332",
       "bytes": 7673
     },
     {
@@ -340,10 +340,10 @@
       "repo": "hsoliwal/M3JDK21",
       "commit": "329cd9116eca5a3b2ec081fb6760ca3e6508da7e",
       "path": "src/java.base/share/native/libjava/M3StateRelation.c",
-      "git_blob_sha1": "d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d",
-      "expected_sha256": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f",
+      "git_blob_sha1": "5d2a8cc83a7551f4d2a82dfa5781c7a79531d444",
+      "expected_sha256": "03fa3e35008045561b57f11e4cff1ff3e04fc8b90220d1525d86f345b75fa332",
       "kind": "receiving-runtime",
-      "sha256": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f",
+      "sha256": "03fa3e35008045561b57f11e4cff1ff3e04fc8b90220d1525d86f345b75fa332",
       "bytes": 7673
     },
     {

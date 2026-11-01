@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.FlatNeedleGate
+name: jdk.internal.m3.FlatNeedleGate
 displayName: M3JDK21 flat needles over M3 sources gated by exact trigrams
 description: >-
   A flat needle (a literal, the common needle) searched over an M3 source passed only the 64-bit
@@ -18,5 +18,5 @@ description: >-
   M3StringSearchPrecompute and the jtreg proof; String is no longer a target (the epoch-2 text
   step is retired). The preimages are the master owners; the step stacks on no other crate.
 recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: m3-flat-needle-gate

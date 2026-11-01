@@ -351,7 +351,7 @@ public final class M3ASTScopeContract {
     private static void pluginScopes(Path work) throws Exception {
         Module compiler = M3AST.class.getModule();
         if (!compiler.canUse(M3AST.Consumer.class)) {
-            // Test-only: grant the uses declaration in M3JDK21's real compiler
+            // Test-only: grant the uses declaration in M3JDK 21's real compiler
             // descriptor when this contract runs on the supplied stock JDK.
             Class.forName("jdk.internal.module.Modules").getMethod("addUses", Module.class, Class.class)
                     .invoke(null, compiler, M3AST.Consumer.class);

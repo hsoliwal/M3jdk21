@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
 import java.util.function.Supplier;
-import com.m3.collections.spring.M3MultiValueMap;
+import jdk.m3.collections.spring.M3MultiValueMap;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 

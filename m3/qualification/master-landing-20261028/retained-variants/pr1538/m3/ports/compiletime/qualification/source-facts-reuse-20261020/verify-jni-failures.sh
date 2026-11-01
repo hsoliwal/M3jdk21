@@ -3,7 +3,7 @@
 # Copyright 2026 Hitesh Soliwal and contributors
 # Finite JNI-vtable fault proof, separate from the actual JVM native-required gate.
 # Approved donor: hsoliwal/com.synexia @ 8e1f56d448fd31ee5b666c922947e39c2036d4fd
-# synexia-indexstring/native/src/mindex_array_flatten_jni.c
+# m3-indexstring/native/src/mindex_array_flatten_jni.c
 # donor Git blob b35c9143e27d27c913f9e3bcd407601f8a3e50bb, Apache-2.0.
 # The target keeps its existing IllegalArgumentException/message mapping; the
 # donor's failed second-pass lookup cleanup/refusal and pending throwable law are reused.

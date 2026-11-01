@@ -22,7 +22,7 @@ No provider type is impersonated and the captured data does not track later
 source mutations. Comparator-colliding JDK sorted projection refuses.
 
 Source Java postimage SHA256 values:
-5becc5f604dc0309fe000c5388e76488f11f22e3f725ae01f073f2c3e85b73c0
+2c635fe91efa15c339539213beb23446e48f8acaf962cb58fb9560ce6ce89c7b
 511c42a8f8cf2119770931307ef4c29f35e0fdbbc1ba438e170aa151905ca76e
 
 Parent five-provider Maven and checked JNI receipts apply to the historical

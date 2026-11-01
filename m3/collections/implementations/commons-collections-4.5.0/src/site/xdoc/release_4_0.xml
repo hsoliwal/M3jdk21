@@ -41,7 +41,7 @@ API that we couldn't fix due to backwards compatibility restrictions.
 <p>
 As such, this release can not be considered to be a simple, drop-in, replacement
 for commons-collections. To help with the migration to this new version, the
-package has changed to "com.m3.collections.apache", thus it is possible
+package has changed to "jdk.m3.collections.apache", thus it is possible
 to have both commons-collections versions in the classpath.
 </p>
 <p>
@@ -178,7 +178,7 @@ have changed.
 <li>Changed scope of various fields to private / package private where appropriate.</li>
 <li>An iterator over a "Flat3Map#entrySet()" will now return independent Map.Entry objects that will not change anymore when the iterator progresses.</li>
 <li>Several closure and transformer implementations in the functor package will now copy an array as input parameter to their constructor (e.g. ChainedClosure).</li>
-<li>Change base package to "com.m3.collections.apache".</li>
+<li>Change base package to "jdk.m3.collections.apache".</li>
 <li>The constructors for all *Utils classes are now private to prevent instantiation.</li>
 <li>"CompositeSet" does not inherit from "CompositeCollection" anymore. The inner class "SetMutator" has been updated accordingly. Thanks to Michael Pradel.</li>
 <li>Change maven coordinates to "org.apache.commons.commons-collections4". Thanks to Olivier Lamy.</li>

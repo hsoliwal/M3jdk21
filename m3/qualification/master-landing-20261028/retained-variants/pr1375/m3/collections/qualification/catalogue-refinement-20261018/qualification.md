@@ -13,7 +13,7 @@ This qualification is scoped to the source revisions and measurements in the adj
 
 | Public source path | Change |
 | --- | --- |
-| `m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java` | Direct source traversal in `CollectionView.isEmpty`, `SortedMapView.isEmpty`, `NavigableSetView.firstVisible` and `NavigableMapView.firstVisible`. Successful map navigation still returns a fresh detached immutable entry. |
+| `m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java` | Direct source traversal in `CollectionView.isEmpty`, `SortedMapView.isEmpty`, `NavigableSetView.firstVisible` and `NavigableMapView.firstVisible`. Successful map navigation still returns a fresh detached immutable entry. |
 | `m3/collections/src/main/native/collections/m3_index_mask_compactor.c` | The int/long selection-window emission passes reuse their input scratch for accepted values. All seven current compactor exports remain. |
 | `m3/collections/src/main/native/collections/m3_index_mask_window.c` | The shared legacy/bounded scan transfers row payload only from the first admitted flag onward. Both window exports remain. |
 | `m3/tooling/module-packs/collections/build.py` | Parse the complete actual `javac -h` declaration set, reject malformed/duplicate/missing declarations, and require exact binary export equality. |

@@ -1,65 +1,65 @@
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.intake.Relocate
+name: jdk.internal.m3.intake.Relocate
 displayName: LIB_INTAKE relocation of commonmark
 description: Boundary-checked package relocation, one non-recursive ChangePackage per package, longest first.
 recipeList:
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.commonmark.internal.renderer
-      newPackageName: com.m3.lib.commonmark.internal.renderer
+      newPackageName: jdk.m3.lib.commonmark.internal.renderer
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.commonmark.renderer.markdown
-      newPackageName: com.m3.lib.commonmark.renderer.markdown
+      newPackageName: jdk.m3.lib.commonmark.renderer.markdown
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.commonmark.parser.delimiter
-      newPackageName: com.m3.lib.commonmark.parser.delimiter
+      newPackageName: jdk.m3.lib.commonmark.parser.delimiter
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.commonmark.internal.inline
-      newPackageName: com.m3.lib.commonmark.internal.inline
+      newPackageName: jdk.m3.lib.commonmark.internal.inline
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.commonmark.internal.util
-      newPackageName: com.m3.lib.commonmark.internal.util
+      newPackageName: jdk.m3.lib.commonmark.internal.util
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.commonmark.renderer.html
-      newPackageName: com.m3.lib.commonmark.renderer.html
+      newPackageName: jdk.m3.lib.commonmark.renderer.html
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.commonmark.renderer.text
-      newPackageName: com.m3.lib.commonmark.renderer.text
+      newPackageName: jdk.m3.lib.commonmark.renderer.text
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.commonmark.parser.block
-      newPackageName: com.m3.lib.commonmark.parser.block
+      newPackageName: jdk.m3.lib.commonmark.parser.block
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.commonmark.parser.beta
-      newPackageName: com.m3.lib.commonmark.parser.beta
+      newPackageName: jdk.m3.lib.commonmark.parser.beta
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.commonmark.internal
-      newPackageName: com.m3.lib.commonmark.internal
+      newPackageName: jdk.m3.lib.commonmark.internal
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.commonmark.renderer
-      newPackageName: com.m3.lib.commonmark.renderer
+      newPackageName: jdk.m3.lib.commonmark.renderer
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.commonmark.parser
-      newPackageName: com.m3.lib.commonmark.parser
+      newPackageName: jdk.m3.lib.commonmark.parser
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.commonmark.node
-      newPackageName: com.m3.lib.commonmark.node
+      newPackageName: jdk.m3.lib.commonmark.node
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.commonmark.text
-      newPackageName: com.m3.lib.commonmark.text
+      newPackageName: jdk.m3.lib.commonmark.text
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.commonmark
-      newPackageName: com.m3.lib.commonmark
+      newPackageName: jdk.m3.lib.commonmark
       recursive: false

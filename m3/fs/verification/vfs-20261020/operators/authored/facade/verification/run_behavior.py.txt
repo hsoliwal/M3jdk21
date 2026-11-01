@@ -53,11 +53,11 @@ if not a.baseline and not extra_classpath:
         runtime_deps.append(artifact)
     extra_classpath = os.pathsep.join(map(str, runtime_deps))
 classpath = os.pathsep.join(map(str, deps)) + (os.pathsep + extra_classpath if extra_classpath else "")
-test_sources = [facade / "m3/fs/src/test/java/com/m3/fs/MFilesBehaviorTest.java", facade / "verification/FacadeTestLauncher.java"]
-test_classes = ["com.m3.fs.MFilesBehaviorTest"]
+test_sources = [facade / "m3/fs/src/test/java/jdk/m3/fs/MFilesBehaviorTest.java", facade / "verification/FacadeTestLauncher.java"]
+test_classes = ["jdk.m3.fs.MFilesBehaviorTest"]
 if a.baseline:
-    if (receiver / "src/main/java/com/m3/fs/MFiles.java").exists():
-        if a.receiver is not None or not (classes / "com/m3/fs/M3FS.class").exists():
+    if (receiver / "src/main/java/jdk/m3/fs/MFiles.java").exists():
+        if a.receiver is not None or not (classes / "jdk/m3/fs/M3FS.class").exists():
             sys.exit("Expected the original pre-facade receiver; pass its checkout with --receiver.")
         print("Reusing pre-facade classes captured before recipe application.")
     else:
@@ -78,10 +78,10 @@ else:
         subprocess.run([str(java / "javac"), "--release", "21", "-Xlint:all", "-Werror", "-cp", classpath,
                         "-d", str(classes), *map(str, owned_sources)], check=True)
         classpath = str(classes) + os.pathsep + classpath
-    test_sources.append(facade / "m3/fs/src/test/java/com/m3/fs/MFilesProviderTest.java")
-    test_classes.append("com.m3.fs.MFilesProviderTest")
-    test_sources.append(facade / "m3/fs/src/test/java/com/m3/fs/MFileCaptureTest.java")
-    test_classes.append("com.m3.fs.MFileCaptureTest")
+    test_sources.append(facade / "m3/fs/src/test/java/jdk/m3/fs/MFilesProviderTest.java")
+    test_classes.append("jdk.m3.fs.MFilesProviderTest")
+    test_sources.append(facade / "m3/fs/src/test/java/jdk/m3/fs/MFileCaptureTest.java")
+    test_classes.append("jdk.m3.fs.MFileCaptureTest")
 subprocess.run([str(java / "javac"), "--release", "21", "-Xlint:all", "-Werror", "-cp", classpath, "-d", str(classes), *map(str, test_sources)], check=True)
 result = subprocess.run([str(java / "java"), "-cp", str(classes) + os.pathsep + classpath,
                          "FacadeTestLauncher", *test_classes], text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)

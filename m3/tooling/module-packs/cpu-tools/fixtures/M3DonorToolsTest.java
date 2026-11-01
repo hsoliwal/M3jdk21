@@ -1,22 +1,22 @@
 // Copyright 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
 // Independent contract witnesses for the 16 pinned CPU-tool receiving modules.
-import com.m3.tools.codec.varint.VarInts;
-import com.m3.tools.constraint.interval.Intervals;
-import com.m3.tools.graph.paths.ShortestPaths;
-import com.m3.tools.graph.topology.TopologicalOrder;
-import com.m3.tools.plan.priority.StablePriorityQueue;
-import com.m3.tools.stats.streaming.RunningStatistics;
-import com.m3.tools.text.diff.TextDelta;
-import com.m3.tools.text.frequency.TermFrequency;
-import com.m3.tools.text.index.InvertedIndex;
-import com.m3.tools.text.ngram.NGrams;
-import com.m3.tools.text.normalize.UnicodeNormalizer;
-import com.m3.tools.text.regex.RegexMatcher;
-import com.m3.tools.text.search.ExactSearch;
-import com.m3.tools.text.similarity.EditDistance;
-import com.m3.tools.text.tokenize.WordTokenizer;
-import com.m3.tools.verify.sha256.Sha256;
+import jdk.m3.tools.codec.varint.VarInts;
+import jdk.m3.tools.constraint.interval.Intervals;
+import jdk.m3.tools.graph.paths.ShortestPaths;
+import jdk.m3.tools.graph.topology.TopologicalOrder;
+import jdk.m3.tools.plan.priority.StablePriorityQueue;
+import jdk.m3.tools.stats.streaming.RunningStatistics;
+import jdk.m3.tools.text.diff.TextDelta;
+import jdk.m3.tools.text.frequency.TermFrequency;
+import jdk.m3.tools.text.index.InvertedIndex;
+import jdk.m3.tools.text.ngram.NGrams;
+import jdk.m3.tools.text.normalize.UnicodeNormalizer;
+import jdk.m3.tools.text.regex.RegexMatcher;
+import jdk.m3.tools.text.search.ExactSearch;
+import jdk.m3.tools.text.similarity.EditDistance;
+import jdk.m3.tools.text.tokenize.WordTokenizer;
+import jdk.m3.tools.verify.sha256.Sha256;
 import java.math.BigInteger;
 import java.text.BreakIterator;
 import java.text.Normalizer;

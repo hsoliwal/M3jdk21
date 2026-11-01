@@ -7,9 +7,9 @@ on:
     paths:
       - '.github/workflows/m3-view-order-sdk-20261020.yml'
       - 'm3/collections/qualification/view-order-sdk-20261020/**'
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java'
       - 'm3/collections/src/main/native/collections/**'
       - 'src/java.base/share/native/libjava/m3_jni_util.h'
 permissions:
@@ -54,9 +54,9 @@ jobs:
           set -euo pipefail
           git rev-parse HEAD
           git -C current-stack rev-parse HEAD
-          test "$(git hash-object "$Q/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java")" = 135a28d0cec9ea988607cdef6caa1f0fe5115d75
-          test "$(git hash-object "$Q/src/main/java/com/synexia/rewrite/M3ScopeInference.java")" = 9174dd681f0d75b5086fc19904a71524a03972dc
-          test "$(git hash-object "$Q/src/main/java/com/synexia/rewrite/M3EditScope.java")" = 274360816db1e44a2f1796a3bc5cdeff6b0ce6db
+          test "$(git hash-object "$Q/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java")" = 8d2dcf8311fd56406246998dc4218ae876a03d45
+          test "$(git hash-object "$Q/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java")" = d41d6dc93ec0e176f6d215d23e3b6a316a9e4a32
+          test "$(git hash-object "$Q/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java")" = 274360816db1e44a2f1796a3bc5cdeff6b0ce6db
       - name: Actual canonical Maven OpenRewrite generation and refusal tests
         shell: bash
         run: |
@@ -68,7 +68,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          JAVA=m3/collections/src/main/java/com/m3/collections
+          JAVA=m3/collections/src/main/java/jdk/m3/collections
           for name in M3FilteredViews M3FilteredNavigableSet M3SlotSpliterators M3IndexMaskCompactor M3LongAddressKernel; do
             cmp "$JAVA/$name.java" "current-stack/$JAVA/$name.java"
           done

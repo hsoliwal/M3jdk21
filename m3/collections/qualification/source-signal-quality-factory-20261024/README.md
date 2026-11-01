@@ -23,7 +23,7 @@ This source receiver contains:
 Product source Git blobs equal the original canonical Synexia template blobs:
 `f097c9505a15be8f94e3b26ade413febd98c58b5`,
 `eb960b5d4e74a6d44b02130727f339e43a976421`,
-`6e7d5fdcab3c4ba74f7fb04432884ef2681c3f9c`.
+`84c3fe1d0c172bc81c3457a7a7f617924ea2345c`.
 
 The original Java21 workflow source SHA-256 succession is exact:
 `2596cc2d39c02e0a5838df24ba0dd1a7593d7a3683131a19af0543c25ced73b5`

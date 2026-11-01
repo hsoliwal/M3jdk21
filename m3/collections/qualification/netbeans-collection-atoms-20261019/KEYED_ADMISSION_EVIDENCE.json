@@ -3,10 +3,10 @@
     "repository": "hsoliwal/com.synexia",
     "revision": "fea5cef9f7a569e6ceb557f1965e234a3f075aba",
     "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-stream-superset-20261018/M3KeyedParallelismPlan.java.txt",
-    "blob": "045e64a2dfc5c395bde5ec211196254ae7a680bb",
+    "blob": "f42593121ff1e9fb93842f7a7d0c0950dfb3f689",
     "display_url": "https://github.com/hsoliwal/com.synexia/blob/fea5cef9f7a569e6ceb557f1965e234a3f075aba/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-stream-superset-20261018/M3KeyedParallelismPlan.java.txt",
     "receiver_introduction": "42f3e7fb22017e992eadd3dd85bb01b3058a1a08",
-    "receiver_preimage_sha256": "efaf6160476817518ce6921c336c5b0d7232be7772a312185c503dee5bceb1bd",
+    "receiver_preimage_sha256": "3c36bb031264386cfa666e7ed8400b6c71fceb4905ddfbb136708c94e3cf8087",
     "license": "Apache-2.0",
     "reuse": "Existing source-sealed Synexia key-affinity owner, exact byte-identical master preimage; no new third-party implementation copied."
   },
@@ -21,7 +21,7 @@
       "/workspace/scratch/7c44d2972e9b/collection-candidates/maven-trial/target/classes",
       "-d",
       "/workspace/scratch/7c44d2972e9b/collection-candidates/keyed-admission-correction/frozen-oracle-classes",
-      "/workspace/scratch/7c44d2972e9b/collection-candidates/keyed-admission-correction/postimages/m3/collections/src/test/java/com/m3/collections/M3KeyedParallelismAdmissionContract.java"
+      "/workspace/scratch/7c44d2972e9b/collection-candidates/keyed-admission-correction/postimages/m3/collections/src/test/java/jdk/m3/collections/M3KeyedParallelismAdmissionContract.java"
     ],
     "command": [
       "/tmp/m3-collections-tools-20261019/jdk-21.0.12.1+1/bin/java",
@@ -29,7 +29,7 @@
       "/workspace/scratch/7c44d2972e9b/collection-candidates/keyed-admission-correction/frozen-oracle-classes:/workspace/scratch/7c44d2972e9b/collection-candidates/maven-trial/target/classes",
       "com.m3.collections.M3KeyedParallelismAdmissionContract"
     ],
-    "oracle_sha256": "6e1568e4172fa18420f9eef7910d695f536055cb46f72af1343f0b3c19505e87",
+    "oracle_sha256": "56613ff3643a0530f311f58c43fa873252b6e7be582af69b24de2c09bcddc236",
     "runtime_owner": "unchanged master677 M3KeyedParallelismPlan, in isolated trial classes",
     "exit_code": 1,
     "elapsed_seconds": 5.103,
@@ -39,7 +39,7 @@
   "candidate_proof": {
     "compile_exit_code": 0,
     "production_postimage_sha256": "e04578b316177e7c1f8a987e8e1ba2809adc662d0943dd3a718393ad1c2f3bdf",
-    "frozen_oracle_sha256": "6e1568e4172fa18420f9eef7910d695f536055cb46f72af1343f0b3c19505e87",
+    "frozen_oracle_sha256": "56613ff3643a0530f311f58c43fa873252b6e7be582af69b24de2c09bcddc236",
     "runs": [
       {
         "command": [
@@ -83,31 +83,31 @@
     "coordinator_source_exactly_unchanged": true,
     "coordinator_sha256": "79b4f0077eb141508771086f34009b5ac2432721cc8bb3b00ae08a62d03e195c",
     "canonical_template_matches_exact_preimage": true,
-    "canonical_template_sha256": "efaf6160476817518ce6921c336c5b0d7232be7772a312185c503dee5bceb1bd",
-    "source_preimage_git_blob_sha1": "045e64a2dfc5c395bde5ec211196254ae7a680bb"
+    "canonical_template_sha256": "3c36bb031264386cfa666e7ed8400b6c71fceb4905ddfbb136708c94e3cf8087",
+    "source_preimage_git_blob_sha1": "f42593121ff1e9fb93842f7a7d0c0950dfb3f689"
   },
   "recipe_materialization": {
     "receiver": "/workspace/scratch/7c44d2972e9b/synexia/synexia-openrewrite-recipes/recipe-crates/m3-netbeans-collection-atoms-20261019/target/keyed-admission-receiver",
     "files": [
       {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3KeyedParallelismPlan.java",
-        "actual_recipe_output": "/workspace/scratch/7c44d2972e9b/synexia/synexia-openrewrite-recipes/recipe-crates/m3-netbeans-collection-atoms-20261019/target/keyed-admission-receiver/m3/collections/src/main/java/com/m3/collections/M3KeyedParallelismPlan.java",
-        "before_sha256": "efaf6160476817518ce6921c336c5b0d7232be7772a312185c503dee5bceb1bd",
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3KeyedParallelismPlan.java",
+        "actual_recipe_output": "/workspace/scratch/7c44d2972e9b/synexia/synexia-openrewrite-recipes/recipe-crates/m3-netbeans-collection-atoms-20261019/target/keyed-admission-receiver/m3/collections/src/main/java/jdk/m3/collections/M3KeyedParallelismPlan.java",
+        "before_sha256": "3c36bb031264386cfa666e7ed8400b6c71fceb4905ddfbb136708c94e3cf8087",
         "sha256": "e04578b316177e7c1f8a987e8e1ba2809adc662d0943dd3a718393ad1c2f3bdf",
         "execution": "Canonical current456 Recipe.run keyed-admission auxiliary; one proof test passed with replay/fixedpoint/drift/missing/duplicate guards"
       },
       {
-        "path": "m3/collections/src/test/java/com/m3/collections/M3KeyedParallelismAdmissionContract.java",
-        "actual_recipe_output": "/workspace/scratch/7c44d2972e9b/synexia/synexia-openrewrite-recipes/recipe-crates/m3-netbeans-collection-atoms-20261019/target/keyed-admission-receiver/m3/collections/src/test/java/com/m3/collections/M3KeyedParallelismAdmissionContract.java",
+        "path": "m3/collections/src/test/java/jdk/m3/collections/M3KeyedParallelismAdmissionContract.java",
+        "actual_recipe_output": "/workspace/scratch/7c44d2972e9b/synexia/synexia-openrewrite-recipes/recipe-crates/m3-netbeans-collection-atoms-20261019/target/keyed-admission-receiver/m3/collections/src/test/java/jdk/m3/collections/M3KeyedParallelismAdmissionContract.java",
         "before_sha256": null,
-        "sha256": "6e1568e4172fa18420f9eef7910d695f536055cb46f72af1343f0b3c19505e87",
+        "sha256": "56613ff3643a0530f311f58c43fa873252b6e7be582af69b24de2c09bcddc236",
         "execution": "Canonical current456 Recipe.run keyed-admission auxiliary; one proof test passed with replay/fixedpoint/drift/missing/duplicate guards"
       },
       {
-        "path": "m3/collections/src/test/java/com/m3/collections/M3KeyedParallelismAdmissionTest.java",
-        "actual_recipe_output": "/workspace/scratch/7c44d2972e9b/synexia/synexia-openrewrite-recipes/recipe-crates/m3-netbeans-collection-atoms-20261019/target/keyed-admission-receiver/m3/collections/src/test/java/com/m3/collections/M3KeyedParallelismAdmissionTest.java",
+        "path": "m3/collections/src/test/java/jdk/m3/collections/M3KeyedParallelismAdmissionTest.java",
+        "actual_recipe_output": "/workspace/scratch/7c44d2972e9b/synexia/synexia-openrewrite-recipes/recipe-crates/m3-netbeans-collection-atoms-20261019/target/keyed-admission-receiver/m3/collections/src/test/java/jdk/m3/collections/M3KeyedParallelismAdmissionTest.java",
         "before_sha256": null,
-        "sha256": "ae8db832599985506b2790bc96a595b6a6470abc09b377a5fb961679ed8419df",
+        "sha256": "e790ddb95349744e063dcd345a194421f5d477c6c7fac1a40df6aa8d0afccdb4",
         "execution": "Canonical current456 Recipe.run keyed-admission auxiliary; one proof test passed with replay/fixedpoint/drift/missing/duplicate guards"
       }
     ],
@@ -118,7 +118,7 @@
     "status": "SUPPORTED_BOUNDED_REPAIR",
     "source_manifest": "/workspace/scratch/7c44d2972e9b/collection-candidates/keyed-admission-correction/MANIFEST.json",
     "production_postimage_sha256": "e04578b316177e7c1f8a987e8e1ba2809adc662d0943dd3a718393ad1c2f3bdf",
-    "frozen_oracle_sha256": "6e1568e4172fa18420f9eef7910d695f536055cb46f72af1343f0b3c19505e87",
+    "frozen_oracle_sha256": "56613ff3643a0530f311f58c43fa873252b6e7be582af69b24de2c09bcddc236",
     "complete_source_restored_by_removing_only_drain_and_modification_notice": true,
     "api_receipts_byte_equal": true,
     "api_receipt_sha256": "bfe8be6093ab8d19099559e1a2926fcba08316c8499f48c97f7cf65abcfd30f4",

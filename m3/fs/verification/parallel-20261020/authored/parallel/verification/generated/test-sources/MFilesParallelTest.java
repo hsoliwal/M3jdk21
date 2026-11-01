@@ -1,5 +1,5 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
-package com.m3.fs;
+package jdk.m3.fs;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,16 +37,16 @@ import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import com.m3.fs.vfs.FileName;
-import com.m3.fs.vfs.FileObject;
-import com.m3.fs.vfs.FileSystem;
-import com.m3.fs.vfs.FileSystemException;
-import com.m3.fs.vfs.FileSystemOptions;
-import com.m3.fs.vfs.provider.AbstractFileName;
-import com.m3.fs.vfs.provider.local.DefaultLocalFileProvider;
-import com.m3.fs.vfs.provider.local.LocalFile;
-import com.m3.fs.vfs.provider.local.LocalFileName;
-import com.m3.fs.vfs.provider.local.LocalFileSystem;
+import jdk.m3.fs.vfs.FileName;
+import jdk.m3.fs.vfs.FileObject;
+import jdk.m3.fs.vfs.FileSystem;
+import jdk.m3.fs.vfs.FileSystemException;
+import jdk.m3.fs.vfs.FileSystemOptions;
+import jdk.m3.fs.vfs.provider.AbstractFileName;
+import jdk.m3.fs.vfs.provider.local.DefaultLocalFileProvider;
+import jdk.m3.fs.vfs.provider.local.LocalFile;
+import jdk.m3.fs.vfs.provider.local.LocalFileName;
+import jdk.m3.fs.vfs.provider.local.LocalFileSystem;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.io.TempDir;
@@ -635,7 +635,7 @@ class MFilesParallelTest {
         return MFiles.from("observed:" + path.toAbsolutePath()).withProvider("observed", factory);
     }
     private static Class<?> taskType() {
-        try { return Class.forName("com.m3.fs.MFiles$FileTask"); }
+        try { return Class.forName("jdk.m3.fs.MFiles$FileTask"); }
         catch (ClassNotFoundException missing) { throw new AssertionError("Missing bounded MFiles.FileTask API", missing); }
     }
     private static Object callback(Task task) {

@@ -7,35 +7,35 @@
       "name": "measurement-evidence.part-001.jsonl",
       "bytes": 5614883,
       "records": 21,
-      "sha256": "14f2b2260f5b7b07577387f2f3bdbffc3e5a7663bc30712536b11123ad2a7496",
+      "sha256": "826cc1bc79dee13773786e10529b25fa87fb781d091448dcb6add792dfeb1751",
       "path": "evidence/bundles/measurement-evidence.part-001.jsonl"
     },
     {
       "name": "measurement-evidence.part-002.jsonl",
       "bytes": 6135617,
       "records": 277,
-      "sha256": "34a3e643b8595f453227d1f7339d0a441a44fc130048c331dae7b968e3084239",
+      "sha256": "94d09cc5fe322331ad88895fe7d047a0d5f7f3530fb21d6a51533824a59a4b37",
       "path": "evidence/bundles/measurement-evidence.part-002.jsonl"
     },
     {
       "name": "measurement-evidence.part-003.jsonl",
       "bytes": 6288247,
       "records": 201,
-      "sha256": "cfd350e3f9f31193ca71d654f5c641bf13de0713bfea1bb36622449d7210a273",
+      "sha256": "3aff7533aa1ecb6591ae838cbfc338c832ded993d88b61926c9b9c99d6d91995",
       "path": "evidence/bundles/measurement-evidence.part-003.jsonl"
     },
     {
       "name": "measurement-evidence.part-004.jsonl",
       "bytes": 5624854,
       "records": 271,
-      "sha256": "d6fce994d8bd536106567c8fad694537f5afd4c5f29d7d7fc323ece5eca1551c",
+      "sha256": "d640c4ff4b8918f66fd7b32dbe9f388182a87d84c432bb7522f62b1674ef4b99",
       "path": "evidence/bundles/measurement-evidence.part-004.jsonl"
     },
     {
       "name": "measurement-evidence.part-005.jsonl",
       "bytes": 4043804,
       "records": 16,
-      "sha256": "e3198fa77f5f5b2cd0cb59977a071cd8e8ca311e36d7a26f5faddfad10906e10",
+      "sha256": "4eae507f79d20be83281dba6511621068138f06707898b6efa071c4b147dc8c4",
       "path": "evidence/bundles/measurement-evidence.part-005.jsonl"
     }
   ],
@@ -45,7 +45,7 @@
     "records": 786,
     "sha256": "4eb14cb5a8bb45f1d4f21a4e9b89ca7b7c7df7f77a9809fed715ba3c8b087900"
   },
-  "parts_manifest_sha256": "4eecd3fb45d0efdf4a9a87c3ceb9b126a7114b02bfa1142a84bbb0cfb9b8a256",
+  "parts_manifest_sha256": "16296aa7a0d197715a7b8e624267edcba39b4f745632a0f1347764f61cc221e4",
   "full_bundle_companions": [
     {
       "name": "source-history.jsonl",

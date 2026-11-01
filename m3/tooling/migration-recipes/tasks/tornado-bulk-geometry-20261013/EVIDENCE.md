@@ -3,10 +3,10 @@
 ## Failure and exact input
 
 Live target test preimage:
-`m3/ports/tornadovm-bulk/src/test/java/com/m3/tornado/Rv32iBulkExecutorAdapterTest.java`
+`m3/ports/tornadovm-bulk/src/test/java/jdk/m3/tornado/Rv32iBulkExecutorAdapterTest.java`
 
-- Git blob: `2e3e56b8865178fe3de323dadc5ae366646fce73`
-- SHA-256: `7184faf2b06a57f006a2a1e039aedd4dd82ea21d258a9369a88f3296ee8d33c0`
+- Git blob: `aadc6cf57fc69f719d9a83f53372201a5873711c`
+- SHA-256: `33377e6f2d07ca798e28df1ff8013ca0adcf1989271e566ae5946ec630dbb87e`
 - Invalid assertion: `tornado.supports(task(4, 64))`.
 - `BulkTask` requires `0 <= localWork <= workItems`; construction throws before `supports`.
 
@@ -16,7 +16,7 @@ Live target test preimage:
 - Explicit `4/64`, `4/5`, `0/0`, `4/-1` refusal.
 - Positive CPU and Tornado admission geometries for 1, 2, 3, 4, 8, 63, 64, 65 workers.
 - No production source, ABI, JNI library, scheduler priority or provider execution changed.
-- Postimage SHA-256: `f0323ce99ce0ad5cab8b94e04252c72970e669f2098c1d8045d7e13693c716ff`.
+- Postimage SHA-256: `923a71806dbb8944bac79e323bb07b2fdd58ccdb024948de8a335a14f4e50468`.
 
 ## Executed local Java 21 gate
 

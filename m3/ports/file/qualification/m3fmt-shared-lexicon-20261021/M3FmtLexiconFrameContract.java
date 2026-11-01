@@ -1,5 +1,5 @@
 // Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
-package com.m3.file;
+package jdk.m3.file;
 
 import java.io.IOException;
 import java.io.OutputStream;

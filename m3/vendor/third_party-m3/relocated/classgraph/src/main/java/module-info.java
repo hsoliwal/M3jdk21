@@ -5,22 +5,22 @@
 
 /**
  * Defines the {@code classgraph} library,
- * relocated into M3JDK21 by LIB_INTAKE_TO_JMOD.
+ * relocated into M3JDK 21 by LIB_INTAKE_TO_JMOD.
  */
 module jdk.m3.classgraph {
     requires java.logging;
     requires java.xml;
-    exports com.m3.lib.classgraph;
-    exports com.m3.lib.classgraph.nonapi.classloaderhandler;
-    exports com.m3.lib.classgraph.nonapi.classpath;
-    exports com.m3.lib.classgraph.nonapi.concurrency;
-    exports com.m3.lib.classgraph.nonapi.fastzipfilereader;
-    exports com.m3.lib.classgraph.nonapi.fileslice;
-    exports com.m3.lib.classgraph.nonapi.fileslice.reader;
-    exports com.m3.lib.classgraph.nonapi.json;
-    exports com.m3.lib.classgraph.nonapi.recycler;
-    exports com.m3.lib.classgraph.nonapi.reflection;
-    exports com.m3.lib.classgraph.nonapi.scanspec;
-    exports com.m3.lib.classgraph.nonapi.types;
-    exports com.m3.lib.classgraph.nonapi.utils;
+    exports jdk.m3.lib.classgraph;
+    exports jdk.m3.lib.classgraph.nonapi.classloaderhandler;
+    exports jdk.m3.lib.classgraph.nonapi.classpath;
+    exports jdk.m3.lib.classgraph.nonapi.concurrency;
+    exports jdk.m3.lib.classgraph.nonapi.fastzipfilereader;
+    exports jdk.m3.lib.classgraph.nonapi.fileslice;
+    exports jdk.m3.lib.classgraph.nonapi.fileslice.reader;
+    exports jdk.m3.lib.classgraph.nonapi.json;
+    exports jdk.m3.lib.classgraph.nonapi.recycler;
+    exports jdk.m3.lib.classgraph.nonapi.reflection;
+    exports jdk.m3.lib.classgraph.nonapi.scanspec;
+    exports jdk.m3.lib.classgraph.nonapi.types;
+    exports jdk.m3.lib.classgraph.nonapi.utils;
 }

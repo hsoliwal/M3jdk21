@@ -16,7 +16,7 @@ A fresh public clone must not require access to `hsoliwal/com.synexia` or a priv
 repository. Public mode verifies the checked-in Apache-2.0 Synexia receiver packet:
 
 ```text
-m3/synexia-import/synexia-seed-export.tsv
+m3/m3-import/m3-seed-export.tsv
         -> SynexiaImportManifest root verification
         -> SynexiaImporter.verifyTargetSnapshot
         -> exact SHA-256 check of every m3/vendor/synexia target

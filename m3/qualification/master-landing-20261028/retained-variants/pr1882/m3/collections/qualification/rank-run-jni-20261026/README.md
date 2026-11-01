@@ -9,9 +9,9 @@ Canonical recipe owner: [hsoliwal/com.synexia PR #13224](https://github.com/hsol
 | `M3LongRankBatchNative.java` | `5aa4d2c8cc8683a08ab20625c8763cac6c1fd9c6` | `3617962b12e314cc60670171c923b4bbca78da48` |
 | `M3LongRankIndex.java` | `716189db70586d221f63dc647d692951d77094cf` | `6a8cf91eb78b6e77fb53b73d55cea0a214a33dd7` |
 | `m3_long_rank_batch_jni.c` | `25a228e37629490a18fe395f4c51df4f76296701` | `fab1b17dc529b81a401dd1d3d77fcb8035dc33c7` |
-| `M3LongRunStatisticsContract.java` | ABSENT | `c2b46e696d6a55b03632651d4d43d4f05e398bb2` |
-| `M3LongRunStatisticsTest.java` | ABSENT | `7d1083709ae5a7107003752157c002295908b53a` |
-| `.github/workflows/m3-rank-run-jni-java21.yml` | ABSENT | `8208954fe7eb9addba01ba5dfcd570eb26bf9011` |
+| `M3LongRunStatisticsContract.java` | ABSENT | `fcca9bc86c908767057c3baa740aad5a2c762063` |
+| `M3LongRunStatisticsTest.java` | ABSENT | `a22c6601e25972699927c2f5fe65635f6c3e43a2` |
+| `.github/workflows/m3-rank-run-jni-java21.yml` | ABSENT | `c494cbb1001cc521ecd0c9a11f6ef58e91116fcc` |
 
 Synexia owns named `Jdk21LongRunStatisticsJava20261026` (4 Java targets) and `Jdk21LongRunStatisticsNative20261026` (1 original JNI C17 owner plus source-sealed workflow). Their manifests pin original+post UTF-8 SHA-256, prevent missing/stale owners and enforce second-pass fixed-point; original Java sources are parsed through OpenRewrite Java and native C/workflow through OpenRewrite Text.
 

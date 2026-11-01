@@ -12,7 +12,7 @@
     "/workspace/scratch/a20ebe6f78bb/continuation/after/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java",
     "/workspace/scratch/a20ebe6f78bb/continuation/after/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java",
     "/workspace/scratch/a20ebe6f78bb/continuation/after/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIngress.java",
-    "/workspace/scratch/a20ebe6f78bb/Synexia/synexia-openrewrite-recipes/verification/m3-parser-filter-refinement-20261019/target/emitted/m3/tooling/module-packs/parser/src/integration/java/jdk/m3/parser/test/M3JdtSemanticContract.java"
+    "/workspace/scratch/a20ebe6f78bb/Synexia/m3-openrewrite-recipes/verification/m3-parser-filter-refinement-20261019/target/emitted/m3/tooling/module-packs/parser/src/integration/java/jdk/m3/parser/test/M3JdtSemanticContract.java"
   ],
   "cwd": "/workspace/scratch/a20ebe6f78bb",
   "jdk": "/tmp/m3-cursor-tools/jdk-21.0.12.1+1"

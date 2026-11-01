@@ -15,12 +15,12 @@ real dependency JUnit oracle, each in a separate ordered commit.
 
 **Source seal**:
 - M3FiveLibraryIndexViews.java PRE:
-  605dbbf0193dbe9b298499d399f9c3607a95ce74b26884d8b3ac9c7aad50f193
+  6e176842ee811b7f2b8f1739c25cc181a291f3acccebe09d4d421472e41018d2
 - M3FiveLibraryIndexViews.java POST:
   fb8125ef79ffc4788b00571ab447a1ed08eca65a56668725db5b2d799a67e85b
 - M3FiveLibraryState32Test.java PRE: ABSENT
 - M3FiveLibraryState32Test.java POST:
-  26548a60299d8647807401c467d013da60e2f9d248cb82450dcc6d0fe70a3d15
+  b12edafbd3108baa476aa81b17c8084d2bf03f544d2f7440d282fcf2f206359f
 
 ## Shared actual storage
 

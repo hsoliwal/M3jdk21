@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.
 # SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
-# Pattern LIB_INTAKE_TO_JMOD v2: one new library (or app) into M3JDK21 as an optional JMOD, by existing owners only.
+# Pattern LIB_INTAKE_TO_JMOD v2: one new library (or app) into M3JDK 21 as an optional JMOD, by existing owners only.
 #   S0 VIEW       release-21 source view: src/main/java, then src/main/versions/<N> overlays for N <= 21 (the jmod_pack.py
 #                 release view, at source level); resources; the upstream module-info (src/main/java or
 #                 src/main/descriptor/<N>) is set aside, never relocated, and only its uses/provides are carried over
@@ -22,7 +22,7 @@
 #                 of the module loads in the image, 0 failures)
 #   S8 LAYER      relocated sources, resources, descriptor and notices into the M3 refactor layer; upstream untouched
 # INTAKE.tsv columns: lib source_dir mappings module version layer_dir mop_classes owner_atoms; mappings, module, version and
-# layer_dir may be "auto": common package root R -> com.m3.lib.<last segment of R, lower case>, module jdk.m3.<same>,
+# layer_dir may be "auto": common package root R -> jdk.m3.lib.<last segment of R, lower case>, module jdk.m3.<same>,
 # version from the source pom, layer m3/vendor/third_party-m3/relocated/<lib>.
 # Usage (repository root, JDK 21 at JAVA_HOME, m3-work-maven-plugin 0.1.1 installed, MSYS path conversion on):
 #   bash m3/tooling/lib-intake/lib_intake.sh <lib> <work dir> [<intake.tsv>]
@@ -66,7 +66,7 @@ stage S0_VIEW PASS "java=$(javafiles "$W/orig/java" | wc -l) packages=$(wc -l < 
 if [ "$MAPS" = auto ]; then
 	root=$(awk 'NR == 1 { l = $0 } { while (l != "" && $0 != l && index($0, l ".") != 1) { if (l !~ /\./) l = ""; else sub(/\.[^.]*$/, "", l) } } END { print l }' "$W/packages.txt")
 	[ "$(echo "$root" | awk -F. '{ print NF }')" -ge 2 ] || stage S0_AUTO FAIL "no common package root of 2+ segments ('$root'); give explicit mappings"
-	seg=$(echo "${root##*.}" | tr 'A-Z' 'a-z'); MAPS="$root=com.m3.lib.$seg"; [ "$MODULE" = auto ] && MODULE="jdk.m3.$seg"
+	seg=$(echo "${root##*.}" | tr 'A-Z' 'a-z'); MAPS="$root=jdk.m3.lib.$seg"; [ "$MODULE" = auto ] && MODULE="jdk.m3.$seg"
 fi
 [ "$VERSION" = auto ] && VERSION=$(grep -m1 -oE '<version>[^<]+' "$SRC/pom.xml" | sed 's/<version>//')
 [ "$LAYER" = auto ] && LAYER="m3/vendor/third_party-m3/relocated/$LIB"
@@ -92,7 +92,7 @@ awk -v maps="$MAPS" 'BEGIN { n = split(maps, m, ";"); for (i = 1; i <= n; i++) {
 	{ p = $0; best = 0; for (i = 1; i <= n; i++) if ((p == o[i] || index(p, o[i] ".") == 1) && length(o[i]) > length(o[best])) best = i
 	  if (best) printf "%s\t%s\tMOVE\n", p, t[best] substr(p, length(o[best]) + 1); else printf "%s\t-\tKEEP\n", p }' "$W/packages.txt" |
 	awk -F'\t' '{ print length($1) "\t" $0 }' | sort -t$'\t' -k1,1nr | cut -f2- >> "$RUN/RELOCATION_MAP.tsv"
-{ printf 'type: specs.openrewrite.org/v1beta/recipe\nname: com.synexia.m3.intake.Relocate\ndisplayName: LIB_INTAKE relocation of %s\n' "$LIB"
+{ printf 'type: specs.openrewrite.org/v1beta/recipe\nname: jdk.internal.m3.intake.Relocate\ndisplayName: LIB_INTAKE relocation of %s\n' "$LIB"
   printf 'description: Boundary-checked package relocation, one non-recursive ChangePackage per package, longest first.\nrecipeList:\n'
   awk -F'\t' 'NR > 1 && $3 == "MOVE" { printf "  - org.openrewrite.java.ChangePackage:\n      oldPackageName: %s\n      newPackageName: %s\n      recursive: false\n", $1, $2 }' "$RUN/RELOCATION_MAP.tsv"; } > "$W/proj/rewrite.yml"
 cat > "$W/proj/pom.xml" <<EOF
@@ -100,7 +100,7 @@ cat > "$W/proj/pom.xml" <<EOF
   <groupId>m3.intake</groupId><artifactId>$LIB</artifactId><version>$VERSION</version>
   <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
   <build><plugins><plugin><groupId>org.openrewrite.maven</groupId><artifactId>rewrite-maven-plugin</artifactId><version>5.23.1</version>
-    <configuration><activeRecipes><recipe>com.synexia.m3.intake.Relocate</recipe></activeRecipes><failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes></configuration>
+    <configuration><activeRecipes><recipe>jdk.internal.m3.intake.Relocate</recipe></activeRecipes><failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes></configuration>
   </plugin></plugins></build></project>
 EOF
 mvnw "$W/proj" rewrite:runNoFork > "$RUN/s1-rewrite.log" 2>&1; rc=$?
@@ -165,15 +165,15 @@ done < <(cd "$W/orig/resources" && find . -type f | sed 's#^\./##' | LC_ALL=C so
 [ "$differ" -eq 0 ] && stage S1b_BCP PASS "java_equal_after_name_map=$same resources_byte_equal=$rsame differing=0" || stage S1b_BCP FAIL "differing=$differ (s1b-bcp.log)"
 
 # S2 RESIDUE -------------------------------------------------------------------------------------------------------------
-mvnw "$W/proj/src" com.synexia.m3:m3-work-maven-plugin:0.1.1:relocation-scan "-Dm3.relocation.mappings=${ALLMAPS//;/,}" \
+mvnw "$W/proj/src" jdk.internal.m3:m3-work-maven-plugin:0.1.1:relocation-scan "-Dm3.relocation.mappings=${ALLMAPS//;/,}" \
 	"-Dm3.relocation.out=$(cygpath -m "$REPO/$RUN/relocation" 2>/dev/null || echo "$REPO/$RUN/relocation")" > "$RUN/s2-scan.log" 2>&1
 hits=$(($(wc -l < "$RUN/relocation/RELOCATION_SCAN.tsv") - 1))
 slash=$(printf '%s\n' "${ALLMAPS//;/$'\n'}" | cut -d= -f1 | tr '.' '/' | while read -r s; do grep -rlE "$s([^A-Za-z0-9_\$]|\$)" "$W/proj/src/main" 2>/dev/null; done | wc -l)
 [ "$hits" -eq 0 ] && [ "$slash" -eq 0 ] && stage S2_RESIDUE PASS "residue=0 (every kind) slash_form_files=0" || stage S2_RESIDUE FAIL "residue=$hits slash_form_files=$slash"
 
 # S3 ATOMIZE / PATTERNIZE ---------------------------------------------------------------------------------------------------
-(cd "$W" && "$BIN/java" -cp "$MOP" com.m3.mop.M3Mop atomize --root=proj/src/main/java --out=atoms > "$REPO/$RUN/s3-atomize.log" 2>&1 &&
-	"$BIN/java" -cp "$MOP" com.m3.mop.M3Mop plan --atomize=atoms --out=plan >> "$REPO/$RUN/s3-atomize.log" 2>&1); rc=$?
+(cd "$W" && "$BIN/java" -cp "$MOP" jdk.m3.mop.M3Mop atomize --root=proj/src/main/java --out=atoms > "$REPO/$RUN/s3-atomize.log" 2>&1 &&
+	"$BIN/java" -cp "$MOP" jdk.m3.mop.M3Mop plan --atomize=atoms --out=plan >> "$REPO/$RUN/s3-atomize.log" 2>&1); rc=$?
 tr -d '\r' < "$W/atoms/SUMMARY.txt" > "$RUN/ATOMS_SUMMARY.txt" 2>/dev/null
 awk -F'\t' 'NR > 1 { c[$5 "\t" $9]++ } END { print "state\tnext_action\tpatterns"; for (k in c) print k "\t" c[k] }' "$W/plan/PATTERN_PLAN.tsv" > "$RUN/PATTERN_PLAN_SUMMARY.tsv" 2>/dev/null
 [ "$rc" -eq 0 ] && stage S3_ATOMIZE PASS "$(grep -o 'atoms=[0-9]*.*registered=[0-9]*' "$RUN/ATOMS_SUMMARY.txt" | cut -d' ' -f1-4)" || stage S3_ATOMIZE FAIL "rc=$rc"

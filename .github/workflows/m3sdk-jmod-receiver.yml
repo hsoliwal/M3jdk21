@@ -26,7 +26,7 @@ on:
       - 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java'
       - 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java'
       - 'src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java'
-      - 'm3/vendor/synexia/nlp-search/**'
+      - 'm3/vendor/m3/nlp-search/**'
       - 'm3/vendor/third_party/opennlp-tools/**'
       - 'm3/vendor/third_party/lucene-core/**'
       - 'm3/vendor/third_party/lucene-analysis-common/**'

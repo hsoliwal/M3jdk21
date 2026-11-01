@@ -3,7 +3,7 @@
  * Modified 2026 by Hitesh Soliwal and contributors: preserve unsigned high-bit rows in the required/excluded boundary oracle.
  * SPDX-License-Identifier: Apache-2.0
  */
-package com.m3.collections;
+package jdk.m3.collections;
 
 import java.util.Arrays;
 import java.util.Random;

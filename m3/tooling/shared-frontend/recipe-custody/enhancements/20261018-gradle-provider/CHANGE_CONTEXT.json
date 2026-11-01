@@ -7,7 +7,7 @@
   "gradle_spi_commit": "419a77cf61af3924f60678510ed2440230047671",
   "gradle_spi_blob": "f2a08ee8074d6f6faec69543032c9176ad62ef11",
   "recipe_owner_commit": "140c263a90f9803b9c46103c63355a286e0515f0",
-  "recipe_owner": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe + com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
+  "recipe_owner": "jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe + jdk.internal.m3.rewrite.M3HashPinnedTextSnapshotRecipe",
   "preimage": "All proposed receiver paths were absent in the inventoried current module-packs subtree.",
   "contract": [
     "Use the exact published Gradle M3JavacASTProvider SPI.",

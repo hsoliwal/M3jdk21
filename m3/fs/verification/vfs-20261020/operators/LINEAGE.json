@@ -4,22 +4,22 @@
     {
       "original_path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/run_capture_runtime.py",
       "custody_path": "operators/run_capture_runtime.py.txt",
-      "sha256": "a081f40542e6084260cc6533e94032c4b53e354c1dd140c2e55514511dbaaddc"
+      "sha256": "c7e8aa66f58a626843c336b4a4b601440061110d9b4d39d20517b38b78748829"
     },
     {
       "original_path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/run_native_java_capture.py",
       "custody_path": "operators/run_native_java_capture.py.txt",
-      "sha256": "a6cddb0a885029840c011c0a93420529dceae92d77142c4212fabadb849f729d"
+      "sha256": "d759e82b3104fb35bad007b7724e6d8766e03a02549c78548ef790b7131d895e"
     },
     {
       "original_path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/run_generated_facts.py",
       "custody_path": "operators/run_generated_facts.py.txt",
-      "sha256": "2dc94ec56ab054b08b80db41dc9c6e4e2f485dd79aacdf28699c62c3f19d6664"
+      "sha256": "78814af1e72ec0e3d624237038a7736f53e6a2b50a975c2547c78fe1cb8b0d6a"
     },
     {
       "original_path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/authored/facade/verification/run_behavior.py",
       "custody_path": "operators/authored/facade/verification/run_behavior.py.txt",
-      "sha256": "01ed00b94fe3a27b3fdc5c4f1b51d6d5d27f605ad3b01beafad7f3685a1f41d5"
+      "sha256": "5ddd514a89a9a62ddbd4af0e59de28ae88266eee879ead4116dc324e515c37f5"
     },
     {
       "original_path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/authored/facade/verification/FacadeTestLauncher.java",
@@ -29,7 +29,7 @@
     {
       "original_path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/authored/streams/verification/run_stream_tests.py",
       "custody_path": "operators/authored/streams/verification/run_stream_tests.py.txt",
-      "sha256": "985bc3901c8e9eccae6bd6d2b0407e0f584604a156ad109161edd79c4888049e"
+      "sha256": "b920d7d14e54b0b066c81cce7473a609a065f8bfe2f743b13bb97f78a80ef131"
     }
   ]
 }

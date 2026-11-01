@@ -1,0 +1,105 @@
+{
+  "scope": "REAL_ECLIPSE_DEPENDENCY_FOCUSED_COMPONENT_NOT_FULL_OWNING_MODULE",
+  "copied_original_inputs_only": true,
+  "files": [
+    {
+      "source_repository": "hsoliwal/M3jdk21",
+      "revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+      "source_path": "m3/collections/src/main/java/jdk/m3/collections/M3ProgressMonitor.java",
+      "qualification_path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-evaluation/src/main/java/jdk/m3/collections/M3ProgressMonitor.java",
+      "bytes": 2259,
+      "sha256": "ff575e2e9e326e5b268398b268eda34ad8147ccc8a61faf6183a5d41205d18a7",
+      "git_blob": "ad65c56b291048337228f876442f94116eea7f7d"
+    },
+    {
+      "source_repository": "hsoliwal/M3jdk21",
+      "revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+      "source_path": "m3/collections/src/main/java/jdk/m3/collections/M3DefaultProgressMonitor.java",
+      "qualification_path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-evaluation/src/main/java/jdk/m3/collections/M3DefaultProgressMonitor.java",
+      "bytes": 3629,
+      "sha256": "87eac42a847f506bcb379064f4c8d7c79d46450d728a706571dede6aad497f8c",
+      "git_blob": "bd71a5b28d5d78f2fdd4540207c695df9b16cd93"
+    },
+    {
+      "source_repository": "hsoliwal/M3jdk21",
+      "revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+      "source_path": "m3/collections/src/main/java/jdk/m3/collections/M3ChildProgressMonitor.java",
+      "qualification_path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-evaluation/src/main/java/jdk/m3/collections/M3ChildProgressMonitor.java",
+      "bytes": 5738,
+      "sha256": "f3ad6ab46cb067b1caf13d23d2d2e2c2e79d1a79aa9f5421c7406090fcd9e1b9",
+      "git_blob": "a62a6ace1ec939a0eeba7b49e6369a9d081d544b"
+    },
+    {
+      "source_repository": "hsoliwal/M3jdk21",
+      "revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+      "source_path": "m3/collections/src/main/java/jdk/m3/collections/M3ProgressState.java",
+      "qualification_path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-evaluation/src/main/java/jdk/m3/collections/M3ProgressState.java",
+      "bytes": 1151,
+      "sha256": "cbe8c0bc1a473d3845613475e87aeaf4c5fc84fef8e0ceedde1a81993f7c298e",
+      "git_blob": "8e15d49507c1890385d57e090dfcc2a0f16f71f0"
+    },
+    {
+      "source_repository": "hsoliwal/M3jdk21",
+      "revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+      "source_path": "m3/collections/src/main/java/jdk/m3/collections/M3ShadowStreams.java",
+      "qualification_path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-evaluation/src/main/java/jdk/m3/collections/M3ShadowStreams.java",
+      "bytes": 8805,
+      "sha256": "be9f0f79f50a260133cde15c0e62f8ed3ba304a19d92c5e41e5a18627e7997fc",
+      "git_blob": "3deddc5adf23da646541f0a9539877c963bf2263"
+    },
+    {
+      "source_repository": "hsoliwal/M3jdk21",
+      "revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+      "source_path": "m3/eclipse/core-runtime/src/main/java/jdk/m3/eclipse/runtime/M3EclipseProgressMonitor.java",
+      "qualification_path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-evaluation/src/main/java/jdk/m3/eclipse/runtime/M3EclipseProgressMonitor.java",
+      "bytes": 3798,
+      "sha256": "526edc5c2a9c6640fa9e266b1f46ac747b92ee1662da2b95f9565c54f7966058",
+      "git_blob": "e0c09c73225415499bed03ae99f7790c662de691"
+    },
+    {
+      "source_repository": "hsoliwal/M3jdk21",
+      "revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+      "source_path": "m3/eclipse/core-runtime/src/test/java/jdk/m3/eclipse/runtime/M3EclipseProgressMonitorTest.java",
+      "qualification_path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-evaluation/src/test/java/jdk/m3/eclipse/runtime/M3EclipseProgressMonitorTest.java",
+      "bytes": 4042,
+      "sha256": "f4b9be7ac510346d18f01ca7cd622a43e70b82396929db1fb6e64407ca8a2571",
+      "git_blob": "453e39bb65fbe6ae5e323d159e24670d159c02ea"
+    },
+    {
+      "source_repository": "hsoliwal/M3jdk21",
+      "revision": "6b75e71559c09c9212ef051f2d3927202eaa5819",
+      "source_path": "m3/eclipse/core-runtime/src/main/java/jdk/m3/eclipse/runtime/M3EclipseJobs.java",
+      "qualification_path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-evaluation/src/main/java/jdk/m3/eclipse/runtime/M3EclipseJobs.java",
+      "bytes": 4931,
+      "sha256": "4ac4da1215a25ee80627782628e3656bdd005ac88c180a9cd0c38bb0779dfcef",
+      "git_blob": "ccac8d76b8876d9c0fc5e7867161d31930735479"
+    },
+    {
+      "source_repository": "hsoliwal/M3jdk21",
+      "revision": "6b75e71559c09c9212ef051f2d3927202eaa5819",
+      "source_path": "m3/eclipse/core-runtime/src/main/java/jdk/m3/eclipse/runtime/M3EclipseJobScheduler.java",
+      "qualification_path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-evaluation/src/main/java/jdk/m3/eclipse/runtime/M3EclipseJobScheduler.java",
+      "bytes": 4104,
+      "sha256": "2496bdc6c9f84c59afe0631ef429c8ab5558ff946a0d0b878fa48cb85fb5f60d",
+      "git_blob": "dc084cffa8c8b0bcaa1758216d25f5928daf8c23"
+    },
+    {
+      "source_repository": "hsoliwal/M3jdk21",
+      "revision": "6b75e71559c09c9212ef051f2d3927202eaa5819",
+      "source_path": "m3/eclipse/core-runtime/src/test/java/jdk/m3/eclipse/runtime/M3EclipseJobsTest.java",
+      "qualification_path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-evaluation/src/test/java/jdk/m3/eclipse/runtime/M3EclipseJobsTest.java",
+      "bytes": 5237,
+      "sha256": "124bed935425c23286e8dad54048a851b3cfb031b523b140e6bb3bec8e9d27b7",
+      "git_blob": "9b161467aa4bf5c41ee938c0e00b4ca418227749"
+    },
+    {
+      "source_repository": "hsoliwal/M3jdk21",
+      "revision": "6b75e71559c09c9212ef051f2d3927202eaa5819",
+      "source_path": "m3/eclipse/core-runtime/src/test/java/jdk/m3/eclipse/runtime/M3EclipseJobSchedulerTest.java",
+      "qualification_path": "/workspace/scratch/206049dfb270/jobs-work/eclipse-evaluation/src/test/java/jdk/m3/eclipse/runtime/M3EclipseJobSchedulerTest.java",
+      "bytes": 4196,
+      "sha256": "a007137e532ba8c75e826e684ab16d78791eb34f54da69af3d4d70a981b7366b",
+      "git_blob": "3d5b28669f8766351ca85574cbf89eb97cb22be9"
+    }
+  ]
+}

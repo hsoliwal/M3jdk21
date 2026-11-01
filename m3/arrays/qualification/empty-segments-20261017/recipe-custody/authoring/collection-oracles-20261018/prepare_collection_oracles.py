@@ -15,18 +15,18 @@ import shutil
 
 REVISION = "0efc1719ca5766aead09f4f7c49f5067975bd946"
 TESTS = {
-    "m3/collections/src/test/java/com/m3/collections/M3LongTreeSetTest.java":
+    "m3/collections/src/test/java/jdk/m3/collections/M3LongTreeSetTest.java":
         "57289895f6bf2307cf3890faa803ff8b81ec128a56e11f84df613fe65068c4cf",
-    "m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java":
+    "m3/collections/src/test/java/jdk/m3/collections/M3StoredRepresentativeContract.java":
         "9686f4d820c5872665d6273faa0de0b327b9689b12696af7827269cb8774e016",
 }
 OWNERS = {
-    "m3/collections/src/main/java/com/m3/collections/M3LongTreeSet.java":
-        "141b90d104cf9d8715e97b6a805314fd2a8fcc9fe10d3c81b1894cf744141d42",
-    "m3/collections/src/main/java/com/m3/collections/M3LongSortedViews.java":
-        "7a42630fbffd2c5875d8a7e4258540454879117a52bd6fe52c3cde4ce07b4d99",
-    "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java":
-        "4a109baf88457d625fa8fc259ee8e7908340f5436cfea77dc5ac554924045b8d",
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongTreeSet.java":
+        "557f860336582b3f38e4179a3d22c77f41cb17251334fc74fed993c0b1b9fb0c",
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongSortedViews.java":
+        "61ab2775b943a40d393a1f553b667a5463f2755a1c5697c60499e5c3cbaeee8e",
+    "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java":
+        "372e40bf4e12f0dd7a614388786ed7c9c7d92d848bdd63de099b9f7176657dba",
 }
 QUALIFICATION = "m3/collections/qualification/oracle-repair-20261018"
 
@@ -197,7 +197,7 @@ def main():
         "primary_contract_sources": [
             "src/java.base/share/classes/java/util/ArrayList.java: remove(Object) and iterator removal",
             "src/java.base/share/classes/java/util/TreeSet.java: add and subSet",
-            "m3/collections/src/main/java/com/m3/collections/M3LongTreeSet.java: documented half split and page capacity",
+            "m3/collections/src/main/java/jdk/m3/collections/M3LongTreeSet.java: documented half split and page capacity",
         ],
         "donor_evaluation": [
             {"candidate": "existing M3LongTreeSet / M3LongSortedViews / M3FilteredViews", "license": "Apache-2.0", "choice": "retain exact production bytes; no defect established by these failures"},

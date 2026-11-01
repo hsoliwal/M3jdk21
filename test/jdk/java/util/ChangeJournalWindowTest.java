@@ -4,7 +4,7 @@
  */
 /*
  * @test
- * @summary M3JDK21 bounded viewport journal batches, wraparound, stale cursors and stable replay
+ * @summary M3JDK 21 bounded viewport journal batches, wraparound, stale cursors and stable replay
  * @run main ChangeJournalWindowTest
  */
 import java.util.ArrayList;

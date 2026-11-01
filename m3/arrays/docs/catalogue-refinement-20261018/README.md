@@ -11,7 +11,7 @@ The target baseline is [M3JDK21 commit 2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49]
 | Target path | Selected SHA-256 |
 |---|---|
 | m3/arrays/src/main/native/tests/m3_arrays_checks.c | 5bbaf29b0b184fdd97f6765843910fde094f7ebe416e7276578290afef036977 |
-| m3/arrays/src/test/java/com/m3/arrays/M3ArrayNativeTest.java | a7138863de372351d655bd9be6d1d7bf7da9bf71c252d9187acf85e3c3bf3cef |
+| m3/arrays/src/test/java/jdk/m3/arrays/M3ArrayNativeTest.java | c4f2ea07c09eff344b7d90f502322cb35e7ec7ca878cf4ef15e9655d94597b46 |
 
 The retained comparator at m3/arrays/src/main/native/m3_arrays.c has SHA-256 0c7be7f8176ca235c40d88aad2cefab15e7ce7363d7fc648bafba4fdb535695d.
 

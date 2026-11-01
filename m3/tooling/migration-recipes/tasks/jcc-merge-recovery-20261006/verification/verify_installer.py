@@ -14,7 +14,7 @@ import subprocess
 import sys
 import traceback
 
-RESOURCE = "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text"
+RESOURCE = "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text"
 CRATES = ["jcc-merge-recovery-20261006-history-01", "jcc-merge-recovery-20261006-history-02",
           "jcc-merge-recovery-20261006-retention"]
 CATALOGUE = "m3/history/RETAINED_CAPABILITIES.tsv"

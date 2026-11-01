@@ -1,5 +1,5 @@
 {
-  "schema": "synexia.scoped-existing-executor-action.v1",
+  "schema": "m3.scoped-existing-executor-action.v1",
   "id": "m3.collections.validate-bounded-address-windows-20261021",
   "status": "SCOPED_WINDOWS_PROOF_PASS",
   "action_kind": "VALIDATE_EXISTING_UNCHANGED_JAVA_JNI",
@@ -9,20 +9,20 @@
     "source_ref": "087e9bca5bd38a3606ac2ce1ced73bfb38916564",
     "module": "m3/collections",
     "files": [
-      "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
-      "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
-      "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
-      "m3/collections/src/test/java/com/m3/collections/M3LongAddressBoundedSelfTest.java",
+      "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+      "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
+      "m3/collections/src/main/java/jdk/m3/collections/M3LongAddressKernel.java",
+      "m3/collections/src/test/java/jdk/m3/collections/M3LongAddressBoundedSelfTest.java",
       "m3/collections/src/main/native/collections/m3_long_address_kernel.c"
     ],
-    "owner": "com.m3.collections.M3LongAddressKernel",
+    "owner": "jdk.m3.collections.M3LongAddressKernel",
     "member": "gatherInto(long[],int[],int,int,long[],int,M3IndexMaskCompactor.Backend)"
   },
   "inputs": {
     "source_pins": "SOURCE_PINS.json",
     "static_tool_pins": "TOOL_PINS.json",
     "compiled_artifact_manifest": "COMPILE_OUTPUTS.json",
-    "invoker": "com.m3.collections.M3LongAddressBoundedSelfTest",
+    "invoker": "jdk.m3.collections.M3LongAddressBoundedSelfTest",
     "invoker_arguments": []
   },
   "typed_bindings": {
@@ -69,7 +69,7 @@
     "address_header": {
       "type": "generated-JNI-header",
       "access": "READ_ONLY",
-      "path": "${retained_root}/headers/com_m3_collections_M3LongAddressKernel.h",
+      "path": "${retained_root}/headers/jdk_m3_collections_M3LongAddressKernel.h",
       "sha256": "d05efb9e3c397b1fc8cba4404372c9052efc91a2eea54d2e48b46cde93252dbf"
     },
     "native_C": {
@@ -121,7 +121,7 @@
       ],
       "exit": 0,
       "required_exports": [
-        "Java_com_m3_collections_M3LongAddressKernel_gatherNative"
+        "Java_jdk_m3_collections_M3LongAddressKernel_gatherNative"
       ]
     },
     {
@@ -176,7 +176,7 @@
     "java_fingerprint": "-9036386136120340114",
     "native_enabled_checks": 21975732,
     "native_fingerprint": "-8730037866241443045",
-    "exact_symbol": "Java_com_m3_collections_M3LongAddressKernel_gatherNative"
+    "exact_symbol": "Java_jdk_m3_collections_M3LongAddressKernel_gatherNative"
   },
   "qualification": "QUALIFICATION.json",
   "source_edits": false,

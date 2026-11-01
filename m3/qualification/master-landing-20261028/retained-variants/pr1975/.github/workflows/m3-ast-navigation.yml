@@ -4,31 +4,31 @@ name: M3AST source navigation Java21
 on:
   push:
     paths:
-      - 'm3/ast/src/main/java/com/m3/ast/M3SyntaxTree.java'
-      - 'm3/ast/src/main/java/com/m3/ast/M3SyntaxNavigation.java'
-      - 'm3/ast/src/test/java/com/m3/ast/M3SyntaxNavigationContract.java'
-      - 'm3/ast/src/test/java/com/m3/ast/M3SyntaxNavigationTest.java'
-      - 'm3/ast/src/main/java/com/m3/ast/M3SyntaxOrigins.java'
-      - 'm3/ast/src/test/java/com/m3/ast/M3SyntaxOriginsContract.java'
-      - 'm3/ast/src/test/java/com/m3/ast/M3SyntaxOriginsTest.java'
-      - 'm3/ast/src/main/java/com/m3/ast/M3SyntaxOriginsSnapshot.java'
-      - 'm3/ast/src/test/java/com/m3/ast/M3SyntaxOriginsSnapshotContract.java'
-      - 'm3/ast/src/test/java/com/m3/ast/M3SyntaxOriginsSnapshotTest.java'
+      - 'm3/ast/src/main/java/jdk/m3/ast/M3SyntaxTree.java'
+      - 'm3/ast/src/main/java/jdk/m3/ast/M3SyntaxNavigation.java'
+      - 'm3/ast/src/test/java/jdk/m3/ast/M3SyntaxNavigationContract.java'
+      - 'm3/ast/src/test/java/jdk/m3/ast/M3SyntaxNavigationTest.java'
+      - 'm3/ast/src/main/java/jdk/m3/ast/M3SyntaxOrigins.java'
+      - 'm3/ast/src/test/java/jdk/m3/ast/M3SyntaxOriginsContract.java'
+      - 'm3/ast/src/test/java/jdk/m3/ast/M3SyntaxOriginsTest.java'
+      - 'm3/ast/src/main/java/jdk/m3/ast/M3SyntaxOriginsSnapshot.java'
+      - 'm3/ast/src/test/java/jdk/m3/ast/M3SyntaxOriginsSnapshotContract.java'
+      - 'm3/ast/src/test/java/jdk/m3/ast/M3SyntaxOriginsSnapshotTest.java'
       - 'm3/ast/docs/source-origin-snapshot.md'
       - 'm3/ast/pom.xml'
       - '.github/workflows/m3-ast-navigation.yml'
   pull_request:
     paths:
-      - 'm3/ast/src/main/java/com/m3/ast/M3SyntaxTree.java'
-      - 'm3/ast/src/main/java/com/m3/ast/M3SyntaxNavigation.java'
-      - 'm3/ast/src/test/java/com/m3/ast/M3SyntaxNavigationContract.java'
-      - 'm3/ast/src/test/java/com/m3/ast/M3SyntaxNavigationTest.java'
-      - 'm3/ast/src/main/java/com/m3/ast/M3SyntaxOrigins.java'
-      - 'm3/ast/src/test/java/com/m3/ast/M3SyntaxOriginsContract.java'
-      - 'm3/ast/src/test/java/com/m3/ast/M3SyntaxOriginsTest.java'
-      - 'm3/ast/src/main/java/com/m3/ast/M3SyntaxOriginsSnapshot.java'
-      - 'm3/ast/src/test/java/com/m3/ast/M3SyntaxOriginsSnapshotContract.java'
-      - 'm3/ast/src/test/java/com/m3/ast/M3SyntaxOriginsSnapshotTest.java'
+      - 'm3/ast/src/main/java/jdk/m3/ast/M3SyntaxTree.java'
+      - 'm3/ast/src/main/java/jdk/m3/ast/M3SyntaxNavigation.java'
+      - 'm3/ast/src/test/java/jdk/m3/ast/M3SyntaxNavigationContract.java'
+      - 'm3/ast/src/test/java/jdk/m3/ast/M3SyntaxNavigationTest.java'
+      - 'm3/ast/src/main/java/jdk/m3/ast/M3SyntaxOrigins.java'
+      - 'm3/ast/src/test/java/jdk/m3/ast/M3SyntaxOriginsContract.java'
+      - 'm3/ast/src/test/java/jdk/m3/ast/M3SyntaxOriginsTest.java'
+      - 'm3/ast/src/main/java/jdk/m3/ast/M3SyntaxOriginsSnapshot.java'
+      - 'm3/ast/src/test/java/jdk/m3/ast/M3SyntaxOriginsSnapshotContract.java'
+      - 'm3/ast/src/test/java/jdk/m3/ast/M3SyntaxOriginsSnapshotTest.java'
       - 'm3/ast/docs/source-origin-snapshot.md'
       - 'm3/ast/pom.xml'
       - '.github/workflows/m3-ast-navigation.yml'
@@ -54,36 +54,36 @@ jobs:
           classes="$RUNNER_TEMP/m3-ast-navigation-classes"
           mkdir -p "$classes" evidence/m3-ast-navigation
           javac --release 21 -Xlint:all -Werror -proc:none -d "$classes" \
-            m3/ast/src/main/java/com/m3/ast/M3SyntaxTree.java \
-            m3/ast/src/main/java/com/m3/ast/M3SyntaxNavigation.java \
-            m3/ast/src/main/java/com/m3/ast/M3SyntaxOrigins.java \
-            m3/ast/src/main/java/com/m3/ast/M3SyntaxOriginsSnapshot.java \
-            m3/ast/src/test/java/com/m3/ast/M3SyntaxNavigationContract.java \
-            m3/ast/src/test/java/com/m3/ast/M3SyntaxOriginsContract.java \
-            m3/ast/src/test/java/com/m3/ast/M3SyntaxOriginsSnapshotContract.java
-          java -cp "$classes" com.m3.ast.M3SyntaxNavigationContract \
+            m3/ast/src/main/java/jdk/m3/ast/M3SyntaxTree.java \
+            m3/ast/src/main/java/jdk/m3/ast/M3SyntaxNavigation.java \
+            m3/ast/src/main/java/jdk/m3/ast/M3SyntaxOrigins.java \
+            m3/ast/src/main/java/jdk/m3/ast/M3SyntaxOriginsSnapshot.java \
+            m3/ast/src/test/java/jdk/m3/ast/M3SyntaxNavigationContract.java \
+            m3/ast/src/test/java/jdk/m3/ast/M3SyntaxOriginsContract.java \
+            m3/ast/src/test/java/jdk/m3/ast/M3SyntaxOriginsSnapshotContract.java
+          java -cp "$classes" jdk.m3.ast.M3SyntaxNavigationContract \
             | tee evidence/m3-ast-navigation/normal.txt
           grep -Fx 'M3_SYNTAX_NAVIGATION_PASS checks=162452' evidence/m3-ast-navigation/normal.txt
-          java -Xint -cp "$classes" com.m3.ast.M3SyntaxNavigationContract \
+          java -Xint -cp "$classes" jdk.m3.ast.M3SyntaxNavigationContract \
             | tee evidence/m3-ast-navigation/interpreted.txt
           grep -Fx 'M3_SYNTAX_NAVIGATION_PASS checks=162452' evidence/m3-ast-navigation/interpreted.txt
-          java -cp "$classes" com.m3.ast.M3SyntaxOriginsContract \
+          java -cp "$classes" jdk.m3.ast.M3SyntaxOriginsContract \
             | tee evidence/m3-ast-navigation/origins.txt
           grep -Fx 'M3_SYNTAX_ORIGINS_PASS checks=44' evidence/m3-ast-navigation/origins.txt
-          java -cp "$classes" com.m3.ast.M3SyntaxOriginsSnapshotContract \
+          java -cp "$classes" jdk.m3.ast.M3SyntaxOriginsSnapshotContract \
             | tee evidence/m3-ast-navigation/snapshot.txt
           grep -Fx 'M3_SYNTAX_ORIGINS_SNAPSHOT_PASS checks=1426' evidence/m3-ast-navigation/snapshot.txt
-          java -Xint -cp "$classes" com.m3.ast.M3SyntaxOriginsSnapshotContract \
+          java -Xint -cp "$classes" jdk.m3.ast.M3SyntaxOriginsSnapshotContract \
             | tee evidence/m3-ast-navigation/snapshot-interpreted.txt
           grep -Fx 'M3_SYNTAX_ORIGINS_SNAPSHOT_PASS checks=1426' evidence/m3-ast-navigation/snapshot-interpreted.txt
           sha256sum \
-            m3/ast/src/main/java/com/m3/ast/M3SyntaxTree.java \
-            m3/ast/src/main/java/com/m3/ast/M3SyntaxNavigation.java \
-            m3/ast/src/main/java/com/m3/ast/M3SyntaxOrigins.java \
-            m3/ast/src/main/java/com/m3/ast/M3SyntaxOriginsSnapshot.java \
-            m3/ast/src/test/java/com/m3/ast/M3SyntaxNavigationContract.java \
-            m3/ast/src/test/java/com/m3/ast/M3SyntaxOriginsContract.java \
-            m3/ast/src/test/java/com/m3/ast/M3SyntaxOriginsSnapshotContract.java \
+            m3/ast/src/main/java/jdk/m3/ast/M3SyntaxTree.java \
+            m3/ast/src/main/java/jdk/m3/ast/M3SyntaxNavigation.java \
+            m3/ast/src/main/java/jdk/m3/ast/M3SyntaxOrigins.java \
+            m3/ast/src/main/java/jdk/m3/ast/M3SyntaxOriginsSnapshot.java \
+            m3/ast/src/test/java/jdk/m3/ast/M3SyntaxNavigationContract.java \
+            m3/ast/src/test/java/jdk/m3/ast/M3SyntaxOriginsContract.java \
+            m3/ast/src/test/java/jdk/m3/ast/M3SyntaxOriginsSnapshotContract.java \
             > evidence/m3-ast-navigation/sources.sha256
       - uses: actions/upload-artifact@v4
         if: always()

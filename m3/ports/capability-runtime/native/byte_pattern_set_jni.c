@@ -29,7 +29,7 @@ static jint find_sparse_edge(const jint *starts, const jbyte *symbols,
 }
 
 JNIEXPORT jlong JNICALL
-Java_com_m3_runtime_capability_BytePatternSet_scanSet0(
+Java_jdk_m3_runtime_capability_BytePatternSet_scanSet0(
         JNIEnv *env, jclass owner, jobject buffer, jint length,
         jintArray starts_array, jbyteArray symbols_array,
         jintArray targets_array, jintArray failure_array, jlongArray output_array) {

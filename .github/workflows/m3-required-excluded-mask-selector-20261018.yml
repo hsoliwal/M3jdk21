@@ -3,10 +3,10 @@ name: M3 required-excluded mask selector Java JNI
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3SignalDimensions.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3SignalDimensions.java'
       - 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c'
-      - 'm3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelector*.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3RequiredExcludedMaskSelector*.java'
       - 'm3/collections/qualification/required-excluded-mask-selector-20261018/**'
       - '.github/workflows/m3-required-excluded-mask-selector-20261018.yml'
   workflow_dispatch:

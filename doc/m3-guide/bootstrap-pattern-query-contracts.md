@@ -178,7 +178,7 @@ The source headers specify jtreg modes/modules where needed; use the repository 
 
 P02 now has a complete source-body/member reference for its one M3-prefixed adapter file and selected direct consumer paths. This closes neither every inherited regex class nor `M3TQ`'s entire internal API, public JDK behavioral qualification, inline package documentation, runtime acceptance or repository-wide coverage. The [coverage ledger](coverage.md) remains authoritative about those distinctions.
 
-The [porting invariant](../../m3/docs/m3jdk21-porting-invariant.md), [name mapping](../../m3/docs/name-mapping.json), [full-family receiver](../../m3/synexia-import/current-full-borrow/README.md) and per-file rights remain unchanged. The target owns bootstrap Java/HotSpot/JNI integration; the existing public provenance records do not create a second reusable recipe authority or a runtime dependency. Receiving stays **String → arrays → collections → AST/compiler → remaining families**. This documentation adds no source/build/workflow changes or phase advancement.
+The [porting invariant](../../m3/docs/m3jdk21-porting-invariant.md), [name mapping](../../m3/docs/name-mapping.json), [full-family receiver](../../m3/m3-import/current-full-borrow/README.md) and per-file rights remain unchanged. The target owns bootstrap Java/HotSpot/JNI integration; the existing public provenance records do not create a second reusable recipe authority or a runtime dependency. Receiving stays **String → arrays → collections → AST/compiler → remaining families**. This documentation adds no source/build/workflow changes or phase advancement.
 
 [query-plans]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/src/java.base/share/classes/java/util/regex/M3PatternQuery.java#L35-L139
 [query-admission]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/src/java.base/share/classes/java/util/regex/M3PatternQuery.java#L141-L225
@@ -210,4 +210,4 @@ The [porting invariant](../../m3/docs/m3jdk21-porting-invariant.md), [name mappi
 [test-reuse]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/test/jdk/java/util/regex/M3RegexReuseTest.java
 [test-workspace]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/test/jdk/java/util/regex/M3RegexWorkspaceContractTest.java
 [test-seams]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/test/jdk/java/util/regex/M3RegexAtomSeamTest.java
-[test-driver]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/ports/precompute/src/test/java/com/m3/precompute/M3PatternQueryDifferential.java
+[test-driver]: https://github.com/hsoliwal/M3jdk21/blob/1dce82bfb7f1058d74f7503c4cd54fa7d431c032/m3/ports/precompute/src/test/java/jdk/m3/precompute/M3PatternQueryDifferential.java

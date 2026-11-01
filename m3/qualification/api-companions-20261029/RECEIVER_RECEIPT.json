@@ -38,7 +38,7 @@
     },
     {
       "path": "m3/docs/m3jdk21-porting-invariant.md",
-      "before_sha256": "6cd1bd243f216a3210433525e3742c0fc1ab02cbf02bbc40225c40c5be80a01f",
+      "before_sha256": "95a5d111f0d9b2467bcc84828adc5b0efcfd1091e35a1b5c1bf1c484a2066b03",
       "after_sha256": "d47bc0978d8e6d1fcab15d4c7709749337fd80c9c577f1a40dcbe7bd4c4f1c91"
     },
     {
@@ -74,7 +74,7 @@
     {
       "path": "m3/tooling/name-contract/test_check.py",
       "before_sha256": "d1fe3ffc7e3a5e59226732722f58d7656a30cb5015d2532c1357e95ae2ae75d2",
-      "after_sha256": "e92d17d314803077459a9b487d45952e9058b87c2a3bbec77bf89b002090e4ad"
+      "after_sha256": "01be723e3b6eb82db691a1d718adf057bf6cc695e077bc6505bff18a6c5ffc98"
     }
   ],
   "gates": {

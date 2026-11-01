@@ -8,7 +8,7 @@ import zipfile
 
 HERE = Path(__file__).resolve().parent
 spec = json.loads((HERE / 'source-bindings.json').read_text(encoding='utf-8'))
-prefix = 'com/m3/collections/spring/M3LinkedCaseInsensitiveMap'
+prefix = 'jdk/m3/collections/spring/M3LinkedCaseInsensitiveMap'
 with zipfile.ZipFile(sys.argv[1]) as jar:
     owned = [name for name in jar.namelist() if name.endswith('.class')]
     if prefix + '.class' not in owned or any(not name.startswith(prefix) for name in owned):

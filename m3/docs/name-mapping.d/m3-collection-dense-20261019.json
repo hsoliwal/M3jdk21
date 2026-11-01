@@ -6,7 +6,7 @@
   "canonical_recipe": "com.synexia.m3.CollectionDense20261019",
   "canonical_recipe_repository": "hsoliwal/com.synexia",
   "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019",
-  "source_handoff": "m3/runtime-integration/collection-dense-20261019/SYNEXIA_HANDOFF.json",
+  "source_handoff": "m3/runtime-integration/collection-dense-20261019/M3_HANDOFF.json",
   "runtime_dependency": false,
   "new_public_api": false,
   "receiving_sequence_advanced": false,

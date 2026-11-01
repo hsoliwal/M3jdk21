@@ -1,0 +1,6 @@
+# Exact additive M3JDK21 targets. ABSENT or exact output only; no overwrite of drift.
+m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3LibraryCollections.java	ABSENT	4135be52f0cc847acc58e747a153c63f242c12c799f821e4d24f1de1bec8dd16	M3LibraryCollections.java.txt
+m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3LibraryCollectors.java	ABSENT	be19e93efdd49ce02cd4209aa274a3ea6779a591d4ce9b313bd5a616c22e0b78	M3LibraryCollectors.java.txt
+m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3SpringMultiValueMap.java	ABSENT	6e58eea3bcf3fb0af727236b05da83a344459b6896bcfaa0145440a590b2e0a9	M3SpringMultiValueMap.java.txt
+m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3LibraryClosureTest.java	ABSENT	5ece9a369bcf5a223cb163ed0857534600fcd53bcc881f239956be15a4200f40	M3LibraryClosureTest.java.txt
+m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3LibraryCollectionsTest.java	ABSENT	db377aa16cf2de5a8f49ef273f9b5fc7fb0f1a35ac247339f0556cea086d2d04	M3LibraryCollectionsTest.java.txt

@@ -7,7 +7,7 @@ This is a derived reading view. `events/<sha256>.json` retains immutable observa
 
 ## RCM01_FILTERED_DONOR_LIMIT
 
-**REJECTED** · [8a92d05b5d69](events/8a92d05b5d693816afb7eac69b31024f8bd61abc38cc3624d6cac09c7531cb74.json)
+**REJECTED** · [8a92d05b5d69](events/c8300e69e50371b0e0d538d73f682bf1527e6271cc46a2c85f41de95502a863b.json)
 
 M3FilteredListProviderInvalidationTest must pass for end, empty and nested provider cursors before a cursor mutation rewrite is selected.
 
@@ -23,7 +23,7 @@ Limits: No blanket fail-fast policy for CopyOnWriteArrayList or arbitrary snapsh
 
 ## RCM02_FILTERED_PROVIDER_FIX
 
-**VALIDATED** · [27a51ab0ba0c](events/27a51ab0ba0ce99429286bac8c679c540f2edca2ab09de504c39c4da7e2a3a15.json)
+**VALIDATED** · [27a51ab0ba0c](events/2da10dfd1694b84f7ebca657f4be5a9488420f7de2aa1e381bd5e9934bd176cd.json)
 
 Validate original iterator generation before each cursor mutation; accept the fallback only for UnsupportedOperationException from an otherwise writable provider.
 
@@ -39,7 +39,7 @@ Limits: Arbitrary custom provider effects outside retained fixtures. No asserted
 
 ## RCM03_READONLY_SORTED_ENDPOINTS
 
-**VALIDATED** · [5f75789dfe70](events/5f75789dfe7019246ed573d2ba012410540a0f41a16103e51f8b98c0b8ce951d.json)
+**VALIDATED** · [5f75789dfe70](events/c9e3f10a343fe683f20e9b27735c154b60b34fd5f9def7dbb41ca0b1cf1f08d2.json)
 
 M3FilteredEndpointRestorationContract must pass empty refusal and backed reversal checks; declared reflection changes must be recorded separately from callable API equality.
 
@@ -55,7 +55,7 @@ Limits: Mutable filtered siblings and donor families retain separate policies. A
 
 ## RCM04_STABLE_RUN_REVERSAL
 
-**VALIDATED** · [798594cd28aa](events/798594cd28aa73f1fd22b50457895a0b12ed183d99bb2873c891393a32a5af9e.json)
+**VALIDATED** · [798594cd28aa](events/299426c2da6740dadbdcd9bd6486db1beaaa7647327f4273d9686c381c193f97.json)
 
 Use linear run reversal only for a known opposite sorted direction; keep stable merge sorting for unknown encounter order.
 
@@ -71,7 +71,7 @@ Limits: Mutable/live provider views. No measured broad workload speedup or heap 
 
 ## RCM05_SHARED_JAVA_JNI_MASKS
 
-**VALIDATED** · [a07dbfed3c4a](events/a07dbfed3c4a0a89a384ada50b030898945f3be8ae507b3e04a651f285d9fa69.json)
+**VALIDATED** · [a07dbfed3c4a](events/a389896414d7773e83ebfc63e8ea5ddac47545ba8be1fd351dc8e64ea5a2181d.json)
 
 Retain count/emit state reads and drift checks when omitting payload reads; require all old/new Java/C ABI pairings and the work-count fixture.
 
@@ -87,7 +87,7 @@ Limits: JNI object references or new native ABI. Concurrent input mutation beyon
 
 ## RCM06_PROGRESS_NESTED_ROLLBACK_FAILURE
 
-**REJECTED** · [87a5a359ef13](events/87a5a359ef131f5e03c92d22c020d606e3d8e36a51a5e4d2e569ebf421f7015e.json)
+**REJECTED** · [87a5a359ef13](events/443c970eedabd7d3db53a7f30f184600273aded0c71f7e50d6958d71f984f0b8.json)
 
 fullyFailedNestedDeliveryRestoresOuterFractionForRetry must pass together with successful nested update preservation.
 
@@ -103,7 +103,7 @@ Limits: Rollback of arbitrary external owner side effects. Intermediate draft so
 
 ## RCM07_PROGRESS_REENTRANCY_FIX
 
-**VALIDATED** · [adb6b3b90099](events/adb6b3b90099c8cfae087d1b6c01ed165d913a2e2a864467486e4673a04fdf71.json)
+**VALIDATED** · [adb6b3b90099](events/07d954bd33736164b09de128d9f24e949f20f8bad3b18b7f5d5cd393dae9ce71.json)
 
 Run ordinary failure retry, successful nested work preservation and fully failed nested rollback fixtures as one progress contract gate.
 
@@ -119,7 +119,7 @@ Limits: Transactional rollback of arbitrary owner side effects. No new scheduler
 
 ## RCM08_OSGI_SERVICE_LIFETIME
 
-**VALIDATED** · [94204130d30f](events/94204130d30f027e62d74b5a93dcc62515e8262adf4bb86bcc89568221013176.json)
+**VALIDATED** · [94204130d30f](events/e9373f0629c0a2c0c818b441e560e121e60912df2e53d7aa123b23a6edff4d5c.json)
 
 Keep framework callbacks outside the activator monitor and retain context through UNREGISTERING; verify deferred stop owns the exact returned registration.
 
@@ -135,7 +135,7 @@ Limits: New registry, classloader or service store. Earlier Equinox 3.24.200 sta
 
 ## RCM09_LAUNCHER_ROOT_AND_RECEIPT
 
-**VALIDATED** · [11de8f4d6fea](events/11de8f4d6fea13593f0fbf6f6aef11c3f95ca1fdbfda52b18508a4d09241e25e.json)
+**VALIDATED** · [11de8f4d6fea](events/e47d363efdec1da286418fa40276c22404d543dc06f37d1c3df96564c94c58cb.json)
 
 Source-launcher receipts must validate all 88 provenance files, 80 production files and jar legal/source identity before the owning qualifier uses them.
 
@@ -151,7 +151,7 @@ Limits: No substitution of a downloaded launcher for the source-built dependency
 
 ## RCM10_CACHED_COMPILER_FALSE_GREEN
 
-**REJECTED** · [30d50af737f1](events/30d50af737f1d6283fae7b1c8f2ed60ae1df60552ac0c8975658857c5948a8a7.json)
+**REJECTED** · [30d50af737f1](events/2ddaa6173cd42869715a64f523aadd20cb9b6e78867dab5ced5a3e95793c6646.json)
 
 Run clean before owning source/dependency compilation; cached test success must never establish current source qualification.
 
@@ -167,7 +167,7 @@ Limits: This is a verifier counterexample; the deliberately broken progress sour
 
 ## RCM11_FRESH_BUILD_AND_EARLY_REFUSAL
 
-**VALIDATED** · [248b27ae9bd9](events/248b27ae9bd9bded6eeb07a26888272225a1f9a56d2484c46af6d3c386f3a2d8.json)
+**VALIDATED** · [248b27ae9bd9](events/25f9974c543b06351104fd1544e74d05895f72c677c20a6a8441751d416b9aad.json)
 
 Invalidate PROOF before any environment refusal and clean all owning/source dependency outputs before compilation.
 
@@ -183,7 +183,7 @@ Limits: End-only closure hashes cannot establish arbitrary concurrent-writer saf
 
 ## RCM12_SDK_BINARY_INPUT_REFUSAL
 
-**REJECTED** · [a2b6d13dc158](events/a2b6d13dc15855d1e86f5f23acc8321c7855b9e531daa6d47a09d76e3d1feb8c.json)
+**REJECTED** · [a2b6d13dc158](events/65743686dcdc2f8753ad3527ed62a66b653c1f5fe8804d947ed3b41c71a96a1b.json)
 
 Do not import or py_compile the contract source under its bound directory; execute with PYTHONDONTWRITEBYTECODE=1 and refuse extra input files.
 
@@ -199,7 +199,7 @@ Limits: Do not weaken the binding to ignore unexpected files just to get a pass.
 
 ## RCM13_FROZEN_SDK_INPUT_PASS
 
-**VALIDATED** · [1232adc1d8d0](events/1232adc1d8d02cdd92c7b54a2d97de0ec1bd4f6a2b09c8137b40568f0eeda26f.json)
+**VALIDATED** · [1232adc1d8d0](events/29eebae482f80c0d4c995359ad1b38a8d9e81ac7694dc75116f0efe1002d79f1.json)
 
 Before receiving, verify all five SDK tests and every bound source/output hash; reapply only an exact before or after target state.
 
@@ -215,7 +215,7 @@ Limits: Current evolving Synexia root engine is not substituted for the tested p
 
 ## RCM14_JDK_THRESHOLD_COST_REJECTION
 
-**REJECTED** · [41c549612c20](events/41c549612c20b6eec1410e95cb2912ae8d27f9fef362baf68bdb9cef4ea12284.json)
+**REJECTED** · [41c549612c20](events/9e060ce5f0abe95aa57ab0ea19909e66edd07e78874d8e0fae84cf1093f0db7b.json)
 
 A semantic pass cannot admit a runtime optimization whose retained cost gate is REJECT_COST_GATE.
 
@@ -231,7 +231,7 @@ Limits: No claimed speedup from approximately 0.7 percent noisy aggregate. Stock
 
 ## RCM15_JDK_ORACLE_ONLY
 
-**VALIDATED** · [b3fcb66cd50a](events/b3fcb66cd50a032149e1e19289ec3fcb824e7b179c526f9f07ef3853c88f23ea.json)
+**VALIDATED** · [b3fcb66cd50a](events/437f5067c323f679542020ef83ebff1b1effdf74bb547dc8c1a72bba83ff7b6e.json)
 
 Receive M3MaskThresholdContracts as a test-only addition; exclude the rejected runtime postimage from every target manifest.
 
@@ -247,7 +247,7 @@ Limits: No exhaustive proof for all arbitrary-length inputs. No full-image or jt
 
 ## RCM16_FULL_IMAGE_ENVIRONMENT_HOLD
 
-**RECORDED** · [ce3036af044c](events/ce3036af044cdf11ff3435fa8b263dd7f9a4411467b32edd5993e9446c156d0e.json)
+**RECORDED** · [ce3036af044c](events/46a24b79421e9073d54ea4d530f55916e7b76330fe354ccc1ae8a83fc1248b96.json)
 
 A missing image or configure prerequisite keeps installed-image acceptance blocked even when Java/JNI module witnesses pass.
 

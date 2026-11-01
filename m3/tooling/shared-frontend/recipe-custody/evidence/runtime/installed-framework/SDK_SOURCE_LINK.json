@@ -3,7 +3,7 @@
   "status": "PASS",
   "dataset": "m3jdk21-openrewrite-pack",
   "receipt_sha256": "077cfb35402caf3e9644d0b8e105bf9d59796f5c56483e72d25a9f1fa844559b",
-  "selected_image_receipt_sha256": "a215edc13ebd547a0a8905f0e9b97b050b59a898da17d21e6f7875a4dff28132",
+  "selected_image_receipt_sha256": "45dc1574882bbb51e7c4b770298883b50b126f8d95a4613c1bd3242824c7f397",
   "sdk_results_sha256": "c39df2ca690e7c177059dec0f66b2fcf03804c90279cfd4dcdf211e952a9109e",
   "framework_tests": 11,
   "failures": 0,

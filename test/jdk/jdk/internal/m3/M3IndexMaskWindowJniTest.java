@@ -2,7 +2,7 @@
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
  * @test
- * @summary M3JDK21 JDK-owned primitive row/state-mask JNI scanner retains Java scalar behavior
+ * @summary M3JDK 21 JDK-owned primitive row/state-mask JNI scanner retains Java scalar behavior
  * @modules java.base/jdk.internal.m3
  * @run main/othervm -Xint M3IndexMaskWindowJniTest
  * @run main/othervm -Xint M3IndexMaskWindowJniTest native

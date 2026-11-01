@@ -20,7 +20,7 @@ Emitted blob identities, equal to the canonical source templates:
 - M3MaskWindowCurrentProof.java: `636ceb1c9324c6cfd4fa9aa0077f8ffc2be8228d`
 
 KEEP M3LongIndexProjection `4191858c5aa6e0c1961376e2724fccef0a1d6bcb`
-and M3LongAddressKernel `9ac6c5a1e121affd28e6503d922927f6c91c3a66`.
+and M3LongAddressKernel `fe30e94f5e66e2f4d43365bddb58dfdbb4f25207`.
 Required/excluded APIs, all nine JNI exports, stable equal-value ordering,
 shared payload/index windows and the parent's live wrappers remain intact.
 

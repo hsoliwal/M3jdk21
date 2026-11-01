@@ -44,61 +44,61 @@
   "outputs" : [ {
     "target_path" : ".github/workflows/m3jdk21-name-contract.yml",
     "before_sha256" : "8851fea17f460c39da730b192feddf5523f2c4d6d03e9591174fc754ffbf09d8",
-    "after_sha256" : "c0c2bb43a1d045e79bf5cf46f324114e7a0279fe4f095dcc87db811ab0f213c7",
+    "after_sha256" : "e11548ca170ac44ac03de018857c2a8e8f4adb31b796a4b6f3999f619bdaef16",
     "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitiveNaming20261029",
     "kind" : "GENERATED_BUILD"
   }, {
-    "target_path" : "m3/collections/interop/src/test/java/com/m3/collections/interop/M3FrozenLongSetProviderTest.java",
+    "target_path" : "m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FrozenLongSetProviderTest.java",
     "before_sha256" : "ABSENT",
-    "after_sha256" : "80e0b77589a102a71ba81cbf7e4556a453601a388129f7525385300e1dca9a7a",
+    "after_sha256" : "d089236cb463d8b016c01b9c26216b918e7ec497442d6f01850c50216150291e",
     "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitive20261029",
     "kind" : "GENERATED_TEST"
   }, {
-    "target_path" : "m3/collections/src/main/java/com/m3/collections/M3FrozenIntList.java",
-    "before_sha256" : "d2087220e85b57f671375c8529fefa1bccc87030c079fd98bf34274a4ff287e4",
-    "after_sha256" : "e60570fa0e97b22afe3380de635224ce008a4ed24b363f0cd8b274a75bfbd0e8",
+    "target_path" : "m3/collections/src/main/java/jdk/m3/collections/M3FrozenIntList.java",
+    "before_sha256" : "80f4b91ad92966be3ba35beb30bc0cb1dfbcddb11f96198c87f22fed1bbe42ef",
+    "after_sha256" : "ba1416a5402d883649705a4245902a877c6e46c8a6a0ea2f1eb18574301115fc",
     "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitive20261029",
     "kind" : "GENERATED_SOURCE"
   }, {
-    "target_path" : "m3/collections/src/main/java/com/m3/collections/M3FrozenLongList.java",
-    "before_sha256" : "fd94bab1614606e96562d1f48e126c72cd0f121d84aed36fb9a5bcac352a747f",
-    "after_sha256" : "053252e3ff24af828430d6f7c6a56b3ad86eba275237375057bbaaa85b7b8173",
+    "target_path" : "m3/collections/src/main/java/jdk/m3/collections/M3FrozenLongList.java",
+    "before_sha256" : "d1374fbc9689c3423596808b23f8a0a38a6020611f8cf84d76e75944447b4958",
+    "after_sha256" : "6250e120844f2e69b645f8039d99002991ec925fdb9c0ee734bdaa1495304d67",
     "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitive20261029",
     "kind" : "GENERATED_SOURCE"
   }, {
-    "target_path" : "m3/collections/src/main/java/com/m3/collections/M3FrozenLongSet.java",
-    "before_sha256" : "4fc3c4898115c784d695bee275a1c9ae4e7d4ba7a5cd4b8968e8286747608715",
-    "after_sha256" : "4dba2e4d1b386bf1c50cf8c7b21f630a5fb48084e0752187dc182ffcc41c47a7",
+    "target_path" : "m3/collections/src/main/java/jdk/m3/collections/M3FrozenLongSet.java",
+    "before_sha256" : "1735d35652e9760029a81e390b592a5abdfb6e99cae20015197f93e65df5a41c",
+    "after_sha256" : "6876216725dee0a25bbf77f0b74ed01f3623464812a78ac6fcad176c8e39a22e",
     "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitive20261029",
     "kind" : "GENERATED_SOURCE"
   }, {
-    "target_path" : "m3/collections/src/test/java/com/m3/collections/M3FrozenLongSetTest.java",
+    "target_path" : "m3/collections/src/test/java/jdk/m3/collections/M3FrozenLongSetTest.java",
     "before_sha256" : "ABSENT",
-    "after_sha256" : "fbfc1efa44622a644d627276625e061db1c861e91ab32b86c2455ea14b1630fc",
+    "after_sha256" : "9ffaee78c4d2c9aff0c2ac51bc77de5cd6ffdaa3e57d11c4086cf1a6cf033261",
     "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitive20261029",
     "kind" : "GENERATED_TEST"
   }, {
     "target_path" : "m3/collections/src/test/java/com/m3/collections/M3FrozenPrimitiveContractTest.java",
     "before_sha256" : "ABSENT",
-    "after_sha256" : "22af5ec723a4c8e4eb8cecf115a296b351667e19ecf013bb36886fad96ad0c57",
+    "after_sha256" : "c0d64ef785cf64e9f9ea6e6007191517a2d4ccb6bc7ceab282ddd00ccc008f4f",
     "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitive20261029",
     "kind" : "GENERATED_TEST"
   }, {
     "target_path" : "m3/collections/src/test/java/com/m3/collections/M3FrozenPrimitiveOwnershipTest.java",
     "before_sha256" : "ABSENT",
-    "after_sha256" : "f8b7bccde94e0cf7e60e1b6aeb34d03edac90169890c7a498f52ca399936e83f",
+    "after_sha256" : "d3f6919ea4d030230aecc72dece037a2180c82b71943e4526ef550da1fde7d79",
     "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitive20261029",
     "kind" : "GENERATED_TEST"
   }, {
     "target_path" : "m3/docs/name-mapping.json",
     "before_sha256" : "145dec24eb11847b3915e6fb2e0e80fa4a773879833a3ac64e76101fab67500f",
-    "after_sha256" : "1b609236af2e75078133903c5d87521542f857fbe553c18063c28e43a7dc7ce6",
+    "after_sha256" : "aa89accd1229b2b359aece617e3d8e4dac4a78905b357362f229c81a4aefdca3",
     "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitiveNaming20261029",
     "kind" : "GENERATED_BUILD"
   }, {
     "target_path" : "m3/tooling/name-contract/name-plan.json",
     "before_sha256" : "0bfb1c234cd9e8e65702a0797124619fc365d7842b7be74591fabd142dfb78b9",
-    "after_sha256" : "99de12317004c16fdd40578485de328c3328c3179205def9d233adff4da48d84",
+    "after_sha256" : "26ad47d0f52f79216ffab291edb006c9f0979007761efaacb7eab382852e864d",
     "recipe_identity" : "com.synexia.m3jdk.FrozenPrimitiveNaming20261029",
     "kind" : "GENERATED_BUILD"
   } ]

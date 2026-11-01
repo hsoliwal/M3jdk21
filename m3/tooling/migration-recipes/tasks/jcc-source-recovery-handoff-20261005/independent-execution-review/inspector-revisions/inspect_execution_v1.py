@@ -3,7 +3,7 @@ from pathlib import Path
 from datetime import datetime
 import ast, hashlib, json, re, xml.etree.ElementTree as ET
 B=Path('/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04');R=B/'overlay';V=B/'verification-v3';O=B/'execution-review-v3';S=O/'inputs'
-P='m3/tooling/migration-recipes';C=R/P/'src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005';SOURCE='0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8';ROOT='0361e4a07b77a01df170523033fef01c4052ddc5';SEAL='0aa1f4a3e080c36d233066f0a6e1dc8e1047e6f0592dba60829b8cca3177df64'
+P='m3/tooling/migration-recipes';C=R/P/'src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005';SOURCE='0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8';ROOT='0361e4a07b77a01df170523033fef01c4052ddc5';SEAL='0aa1f4a3e080c36d233066f0a6e1dc8e1047e6f0592dba60829b8cca3177df64'
 def load(p):return json.loads(Path(p).read_text())
 def identity(p):
  p=Path(p);assert p.is_file() and not p.is_symlink(),str(p);d=p.read_bytes();return {'path':str(p),'bytes':len(d),'sha256':hashlib.sha256(d).hexdigest(),'git_blob_sha1':hashlib.sha1(f'blob {len(d)}\0'.encode()+d).hexdigest(),'mode':oct(p.stat().st_mode&0o777)}
@@ -23,10 +23,10 @@ def snapshot(p,name=None):
  return load(p) if p.suffix=='.json' else d
 receipt=snapshot(V/'receipt.json');assert identity(V/'receipt.json')['sha256']=='1f4ac9825d975520a04b7dc5ac1b282d96be32601c7abe2b0cfb676b0ff2df09';freeze=snapshot(V/'inputs.json');check(V/'inputs.json',receipt['inputs']);invocation=snapshot(B/'verification-invocation-v3/EXECUTION.json','INVOCATION_EXECUTION.json');snapshot(B/'verification-invocation-v3/STARTED.json','INVOCATION_STARTED.json')
 for k in ('runner','bound_input','resource_admission','stdout','stderr'):check(invocation[k]['path'],invocation[k])
-assert invocation['runner']['sha256']=='496e1877914e15f4342111c37020a2d58790038516b62872680427e585b21f50' and invocation['resource_admission']['sha256']=='df198e3ccda995d5d40fe9e17aca02507b3cb6b5077314c05b3c06b3eeb2cd28'
+assert invocation['runner']['sha256']=='c779f94023b3914bca1558a35d39ab11aaedd00a18cf5b74e2a30bf1205de6b6' and invocation['resource_admission']['sha256']=='7ece8d5be7df1a1080e2b8c6c86663dad44afe874404efe3a772484ad391c0bb'
 assert invocation['exit_code']==0 and invocation['stderr']['bytes']==0 and invocation['command'][1:]==['-B',str(B/'run_verification_v3.py')]
 snapshot(invocation['stdout']['path'],'invocation-stdout.log');snapshot(invocation['stderr']['path'],'invocation-stderr.log')
-packet=load(B/'bound-inputs-v3/BOUND_RESOURCES_REVIEW_PACKET.json');assert identity(B/'bound-inputs-v3/BOUND_RESOURCES_REVIEW_PACKET.json')['sha256']=='9024a1180d4f5856130d9e3a7dd1e8f18786ca8825c9569397d37003019aac9a'
+packet=load(B/'bound-inputs-v3/BOUND_RESOURCES_REVIEW_PACKET.json');assert identity(B/'bound-inputs-v3/BOUND_RESOURCES_REVIEW_PACKET.json')['sha256']=='225e5a587fb5845929390de32a0b70642d8c24e6345ee42733b2ce8b6a355012'
 plan=load(C/'plan.json');assert receipt['plan_sha256']==freeze['plan_sha256']==plan['plan_sha256']==SEAL
 assert receipt['source_publication_commit']==SOURCE and receipt['source_publication_root']==ROOT and receipt['destination_preimage_commit']=='0994ecd65e86600f417f4d8702838d8c2663af61'
 f=load(B/'FINAL_SOURCE_INPUTS_V3.json');assert receipt['source_publication_custody']==f['source_publication_custody']
@@ -76,8 +76,8 @@ snapshot(V/'empty-maven-settings.xml');assert (V/'empty-maven-settings.xml').rea
 mavenout=Path(maven['stdout']['path']).read_text();assert 'BUILD SUCCESS' in mavenout and 'Tests run: 12, Failures: 0, Errors: 0, Skipped: 0' in mavenout and mavenout.count('Compiling 1 source file with javac [debug release 21]')==2 and 'Copying 12 resources' in mavenout
 mavenerr=Path(maven['stderr']['path']).read_text();assert mavenerr=='SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".\nSLF4J: Defaulting to no-operation (NOP) logger implementation\nSLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.\n'
 check(receipt['java_xml']['path'],receipt['java_xml']);xmlbytes=snapshot(receipt['java_xml']['path']);suite=ET.fromstring(xmlbytes);assert {k:suite.attrib[k] for k in receipt['java_suite']}==receipt['java_suite'];assert {k:suite.attrib[k] for k in ('tests','failures','errors','skipped')}=={'tests':'12','failures':'0','errors':'0','skipped':'0'}
-assert xmlbytes==(pom.parent/'target/surefire-reports/TEST-com.m3.rewrite.backport.JccSourceRecoveryHandoffTest.xml').read_bytes()
-java=(R/P/'src/test/java/com/m3/rewrite/backport/JccSourceRecoveryHandoffTest.java').read_text();expected_methods=re.findall(r'@Test\s+void\s+(\w+)\(',java);cases=suite.findall('testcase');assert len(cases)==12 and {r.attrib['name'] for r in cases}==set(expected_methods)
+assert xmlbytes==(pom.parent/'target/surefire-reports/TEST-jdk.m3.rewrite.backport.JccSourceRecoveryHandoffTest.xml').read_bytes()
+java=(R/P/'src/test/java/jdk/m3/rewrite/backport/JccSourceRecoveryHandoffTest.java').read_text();expected_methods=re.findall(r'@Test\s+void\s+(\w+)\(',java);cases=suite.findall('testcase');assert len(cases)==12 and {r.attrib['name'] for r in cases}==set(expected_methods)
 assert not suite.findall('.//failure') and not suite.findall('.//error') and not suite.findall('.//skipped');assert all(r.attrib['classname']==suite.attrib['name'] for r in cases)
 properties={r.attrib['name']:r.attrib['value'] for r in suite.findall('./properties/property')};assert properties['java.version']=='21.0.2' and properties['java.home']==receipt['toolchain']['jdk'] and properties['file.encoding']=='UTF-8'
 pythonrun=receipt['runs'][2];testpath=R/'m3/migration/test/test_jcc_source_recovery_handoff_packet.py';assert pythonrun['command']==[python,'-B',str(testpath)] and pythonrun['stdout']['bytes']==0
@@ -87,7 +87,7 @@ for run,mode,code in [(receipt['runs'][8],'validate',0),(receipt['runs'][9],'com
  assert run['command']==[python,str(R/'m3/migration/migration.py'),mode,str(R),'--previous',str(C/'before00-name-mapping.json.txt')] and run['exit_code']==code
  assert Path(run['stdout']['path']).read_text()=='MIGRATION_MANIFEST_VALID completion=INCOMPLETE\n'
 assert receipt['runs'][8]['stderr']['bytes']==0
-reasons=Path(receipt['runs'][9]['stderr']['path']).read_text();assert 'full source tree inventory is incomplete' in reasons and 'synexia.jcc-recipe-laboratory: blocked' in reasons and 'synexia.jcc-java-jni-regression: blocked' in reasons
+reasons=Path(receipt['runs'][9]['stderr']['path']).read_text();assert 'full source tree inventory is incomplete' in reasons and 'm3.jcc-recipe-laboratory: blocked' in reasons and 'm3.jcc-java-jni-regression: blocked' in reasons
 stream=[json.loads(x) for x in Path(invocation['stdout']['path']).read_text().splitlines()];assert len(stream)==11
 for actual,run in zip(stream[:10],receipt['runs']):assert actual=={'id':run['id'],'exit_code':run['exit_code'],'expected':run['expected_exit_code']}
 assert stream[-1]=={'result':'PASS_WITH_COMPLETION_BLOCKED','java_tests':12,'python_tests':6,'refusal_checks':132,'receipt_sha256':identity(V/'receipt.json')['sha256']}

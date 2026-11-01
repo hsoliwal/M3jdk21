@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 set -euo pipefail
 crate=$(cd "$(dirname "$0")" && pwd)
-resources="$crate/../../src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-bitlane-runtime-count-skip-20261019"
+resources="$crate/../../src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3jdk21-bitlane-runtime-count-skip-20261019"
 generated="$crate/target/generated-receiver/src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java"
 echo "e87553ae33e4d05f07c3b57e081a88d076e871499fe98a0f69df8ddb9d0d2fb2  $generated" | sha256sum -c -
 echo "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8  $resources/M3BitLane28.before.java.txt" | sha256sum -c -

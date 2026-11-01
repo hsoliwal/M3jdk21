@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.RegexAutomatonCore
+name: jdk.internal.m3.RegexAutomatonCore
 displayName: M3JDK21 regex automaton core (R6 general DFA, Lucene util.automaton TARGET_OWNED_PORT)
 description: >-
   Adds the R6 general-DFA rung to jdk.internal.mindex: M3Automaton (packed int lanes), M3AutomatonOps
@@ -12,5 +12,5 @@ description: >-
   file, plus the M3NotYetReceived scaffold marker and two jtreg differentials against java.util.regex.Pattern.
   Pattern.compile is not wired; the stock engine remains the regex authority.
 recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: m3-regex-automaton-core

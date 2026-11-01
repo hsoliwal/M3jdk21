@@ -266,7 +266,7 @@ static int with_path(
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_fs_M3FsNative_nativeAbiVersion(
+Java_jdk_m3_fs_M3FsNative_nativeAbiVersion(
     JNIEnv *env, jclass type) {
   (void)env;
   (void)type;
@@ -274,7 +274,7 @@ Java_com_m3_fs_M3FsNative_nativeAbiVersion(
 }
 
 JNIEXPORT jlong JNICALL
-Java_com_m3_fs_M3FsNative_nativeOpen(
+Java_jdk_m3_fs_M3FsNative_nativeOpen(
     JNIEnv *env, jclass type, jstring database, jint flags) {
   (void)type;
   char *path = NULL;
@@ -292,7 +292,7 @@ Java_com_m3_fs_M3FsNative_nativeOpen(
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_fs_M3FsNative_nativeClose(
+Java_jdk_m3_fs_M3FsNative_nativeClose(
     JNIEnv *env, jclass type, jlong raw) {
   (void)type;
   if (raw <= 0) return;
@@ -340,7 +340,7 @@ static void unary_path_mutation(
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_fs_M3FsNative_nativeMkdir(
+Java_jdk_m3_fs_M3FsNative_nativeMkdir(
     JNIEnv *env, jclass type, jlong handle, jstring path, jint mode) {
   (void)type;
   if (mode < 0) {
@@ -351,7 +351,7 @@ Java_com_m3_fs_M3FsNative_nativeMkdir(
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_fs_M3FsNative_nativeCreate(
+Java_jdk_m3_fs_M3FsNative_nativeCreate(
     JNIEnv *env, jclass type, jlong handle, jstring path, jint mode) {
   (void)type;
   if (mode < 0) {
@@ -362,7 +362,7 @@ Java_com_m3_fs_M3FsNative_nativeCreate(
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_fs_M3FsNative_nativeTruncate(
+Java_jdk_m3_fs_M3FsNative_nativeTruncate(
     JNIEnv *env, jclass type, jlong handle, jstring path_value, jlong size) {
   (void)type;
   if (size < 0) {
@@ -379,14 +379,14 @@ Java_com_m3_fs_M3FsNative_nativeTruncate(
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_fs_M3FsNative_nativeUnlink(
+Java_jdk_m3_fs_M3FsNative_nativeUnlink(
     JNIEnv *env, jclass type, jlong handle, jstring path) {
   (void)type;
   unary_path_mutation(env, handle, path, 0U, 4);
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_fs_M3FsNative_nativeRmdir(
+Java_jdk_m3_fs_M3FsNative_nativeRmdir(
     JNIEnv *env, jclass type, jlong handle, jstring path) {
   (void)type;
   unary_path_mutation(env, handle, path, 0U, 5);
@@ -425,28 +425,28 @@ static void binary_path_operation(
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_fs_M3FsNative_nativeRename(
+Java_jdk_m3_fs_M3FsNative_nativeRename(
     JNIEnv *env, jclass type, jlong handle, jstring from, jstring to) {
   (void)type;
   binary_path_operation(env, handle, from, to, 1);
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_fs_M3FsNative_nativeLink(
+Java_jdk_m3_fs_M3FsNative_nativeLink(
     JNIEnv *env, jclass type, jlong handle, jstring existing, jstring new_path) {
   (void)type;
   binary_path_operation(env, handle, existing, new_path, 2);
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_fs_M3FsNative_nativeSymlink(
+Java_jdk_m3_fs_M3FsNative_nativeSymlink(
     JNIEnv *env, jclass type, jlong handle, jstring target, jstring link_path) {
   (void)type;
   binary_path_operation(env, handle, target, link_path, 3);
 }
 
 JNIEXPORT jlong JNICALL
-Java_com_m3_fs_M3FsNative_nativeWrite(
+Java_jdk_m3_fs_M3FsNative_nativeWrite(
     JNIEnv *env,
     jclass type,
     jlong handle,
@@ -497,7 +497,7 @@ Java_com_m3_fs_M3FsNative_nativeWrite(
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_fs_M3FsNative_nativeRead(
+Java_jdk_m3_fs_M3FsNative_nativeRead(
     JNIEnv *env,
     jclass type,
     jlong handle,
@@ -550,7 +550,7 @@ Java_com_m3_fs_M3FsNative_nativeRead(
 }
 
 JNIEXPORT jlong JNICALL
-Java_com_m3_fs_M3FsNative_nativeWriteDirect(
+Java_jdk_m3_fs_M3FsNative_nativeWriteDirect(
     JNIEnv *env,
     jclass type,
     jlong handle,
@@ -595,7 +595,7 @@ Java_com_m3_fs_M3FsNative_nativeWriteDirect(
 }
 
 JNIEXPORT jlong JNICALL
-Java_com_m3_fs_M3FsNative_nativeWriteDirectSegments(
+Java_jdk_m3_fs_M3FsNative_nativeWriteDirectSegments(
     JNIEnv *env,
     jclass type,
     jlong handle,
@@ -695,7 +695,7 @@ static int require_writable_buffer(JNIEnv *env, jobject buffer) {
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_fs_M3FsNative_nativeReadDirect(
+Java_jdk_m3_fs_M3FsNative_nativeReadDirect(
     JNIEnv *env,
     jclass type,
     jlong handle,
@@ -741,7 +741,7 @@ Java_com_m3_fs_M3FsNative_nativeReadDirect(
 }
 
 JNIEXPORT jlong JNICALL
-Java_com_m3_fs_M3FsNative_nativeReadDirectSegments(
+Java_jdk_m3_fs_M3FsNative_nativeReadDirectSegments(
     JNIEnv *env,
     jclass type,
     jlong handle,
@@ -834,7 +834,7 @@ static jlongArray make_stat(JNIEnv *env, const m3fs_stat *stat) {
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_com_m3_fs_M3FsNative_nativeStat(
+Java_jdk_m3_fs_M3FsNative_nativeStat(
     JNIEnv *env, jclass type, jlong handle, jstring path_value) {
   (void)type;
   m3_jni_lease lease;
@@ -920,7 +920,7 @@ static int list_collect(
 }
 
 JNIEXPORT jbyteArray JNICALL
-Java_com_m3_fs_M3FsNative_nativeList(
+Java_jdk_m3_fs_M3FsNative_nativeList(
     JNIEnv *env, jclass type, jlong handle, jstring path_value) {
   (void)type;
   m3_jni_lease lease;
@@ -947,7 +947,7 @@ Java_com_m3_fs_M3FsNative_nativeList(
 }
 
 JNIEXPORT jbyteArray JNICALL
-Java_com_m3_fs_M3FsNative_nativeReadlink(
+Java_jdk_m3_fs_M3FsNative_nativeReadlink(
     JNIEnv *env, jclass type, jlong handle, jstring path_value) {
   (void)type;
   m3_jni_lease lease;
@@ -973,7 +973,7 @@ Java_com_m3_fs_M3FsNative_nativeReadlink(
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_com_m3_fs_M3FsNative_nativeStats(
+Java_jdk_m3_fs_M3FsNative_nativeStats(
     JNIEnv *env, jclass type, jlong handle) {
   (void)type;
   m3_jni_lease lease;
@@ -998,7 +998,7 @@ Java_com_m3_fs_M3FsNative_nativeStats(
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_com_m3_fs_M3FsNative_nativeScrub(
+Java_jdk_m3_fs_M3FsNative_nativeScrub(
     JNIEnv *env, jclass type, jlong handle, jboolean backfill) {
   (void)type;
   m3_jni_lease lease;
@@ -1024,7 +1024,7 @@ Java_com_m3_fs_M3FsNative_nativeScrub(
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_fs_M3FsNative_nativeVerify(
+Java_jdk_m3_fs_M3FsNative_nativeVerify(
     JNIEnv *env, jclass type, jlong handle) {
   (void)type;
   m3_jni_lease lease;
@@ -1035,7 +1035,7 @@ Java_com_m3_fs_M3FsNative_nativeVerify(
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_fs_M3FsNative_nativeCheckpoint(
+Java_jdk_m3_fs_M3FsNative_nativeCheckpoint(
     JNIEnv *env, jclass type, jlong handle) {
   (void)type;
   m3_jni_lease lease;
@@ -1047,7 +1047,7 @@ Java_com_m3_fs_M3FsNative_nativeCheckpoint(
 
 
 JNIEXPORT jint JNICALL
-Java_com_m3_fs_M3FsNative_nativeCapabilities(
+Java_jdk_m3_fs_M3FsNative_nativeCapabilities(
     JNIEnv *env, jclass type) {
   (void)env;
   (void)type;
@@ -1055,7 +1055,7 @@ Java_com_m3_fs_M3FsNative_nativeCapabilities(
 }
 
 JNIEXPORT jlong JNICALL
-Java_com_m3_fs_M3FsNative_nativeCloneFile(
+Java_jdk_m3_fs_M3FsNative_nativeCloneFile(
     JNIEnv *env, jclass type, jlong handle, jstring from_value, jstring to_value) {
   (void)type;
   char *from = NULL, *to = NULL;
@@ -1080,7 +1080,7 @@ Java_com_m3_fs_M3FsNative_nativeCloneFile(
 }
 
 JNIEXPORT jbyteArray JNICALL
-Java_com_m3_fs_M3FsNative_nativeListPage(
+Java_jdk_m3_fs_M3FsNative_nativeListPage(
     JNIEnv *env, jclass type, jlong handle, jstring path_value,
     jstring after_value, jint limit) {
   (void)type;
@@ -1134,7 +1134,7 @@ static jlongArray semantic_long_array(JNIEnv *env, const jlong *values, jsize co
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_com_m3_fs_M3FsNative_nativeMIndexInfo(
+Java_jdk_m3_fs_M3FsNative_nativeMIndexInfo(
     JNIEnv *env, jclass type, jlong handle, jstring path_value) {
   (void)type;
   m3_jni_lease lease;
@@ -1158,7 +1158,7 @@ Java_com_m3_fs_M3FsNative_nativeMIndexInfo(
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_com_m3_fs_M3FsNative_nativeMIndexValueInfo(
+Java_jdk_m3_fs_M3FsNative_nativeMIndexValueInfo(
     JNIEnv *env, jclass type, jlong handle, jstring path_value, jint value) {
   (void)type;
   if (value < 0) {
@@ -1188,7 +1188,7 @@ Java_com_m3_fs_M3FsNative_nativeMIndexValueInfo(
 }
 
 JNIEXPORT jlong JNICALL
-Java_com_m3_fs_M3FsNative_nativeMIndexToken(
+Java_jdk_m3_fs_M3FsNative_nativeMIndexToken(
     JNIEnv *env, jclass type, jlong handle, jstring path_value,
     jint value, jint ordinal) {
   (void)type;
@@ -1214,7 +1214,7 @@ Java_com_m3_fs_M3FsNative_nativeMIndexToken(
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_fs_M3FsNative_nativeMIndexChar(
+Java_jdk_m3_fs_M3FsNative_nativeMIndexChar(
     JNIEnv *env, jclass type, jlong handle, jstring path_value,
     jint value, jint ordinal) {
   (void)type;
@@ -1240,7 +1240,7 @@ Java_com_m3_fs_M3FsNative_nativeMIndexChar(
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_fs_M3FsNative_nativeMIndexCompare(
+Java_jdk_m3_fs_M3FsNative_nativeMIndexCompare(
     JNIEnv *env, jclass type, jlong handle, jstring path_value,
     jint left, jint right) {
   (void)type;
@@ -1266,7 +1266,7 @@ Java_com_m3_fs_M3FsNative_nativeMIndexCompare(
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_fs_M3FsNative_nativeMIndexTokenIndexOf(
+Java_jdk_m3_fs_M3FsNative_nativeMIndexTokenIndexOf(
     JNIEnv *env, jclass type, jlong handle, jstring path_value,
     jint value, jlongArray needle_array, jint from_token) {
   (void)type;
@@ -1364,7 +1364,7 @@ static uint16_t *semantic_copy_chars(JNIEnv *env, jcharArray input, jsize expect
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_com_m3_fs_M3FsNative_nativeRegexMatchAll(
+Java_jdk_m3_fs_M3FsNative_nativeRegexMatchAll(
     JNIEnv *env, jclass type, jlong handle, jstring path_value, jint mode,
     jbyteArray op_array, jintArray out1_array, jintArray out2_array,
     jintArray class_array, jlongArray ascii_low_array, jlongArray ascii_high_array,
@@ -1572,7 +1572,7 @@ static int collect_range(
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_fs_M3FsNative_nativePunchHole(
+Java_jdk_m3_fs_M3FsNative_nativePunchHole(
     JNIEnv *env,
     jclass type,
     jlong handle,
@@ -1596,7 +1596,7 @@ Java_com_m3_fs_M3FsNative_nativePunchHole(
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_com_m3_fs_M3FsNative_nativeAllocatedRanges(
+Java_jdk_m3_fs_M3FsNative_nativeAllocatedRanges(
     JNIEnv *env,
     jclass type,
     jlong handle,
@@ -1645,13 +1645,13 @@ Java_com_m3_fs_M3FsNative_nativeAllocatedRanges(
 }
 
 JNIEXPORT jlong JNICALL
-Java_com_m3_fs_M3FsNative_nativeFeatureBits(JNIEnv *env, jclass type) {
+Java_jdk_m3_fs_M3FsNative_nativeFeatureBits(JNIEnv *env, jclass type) {
   (void)env; (void)type;
   return (jlong)m3fs_feature_bits();
 }
 
 JNIEXPORT void JNICALL
-Java_com_m3_fs_M3FsNative_nativeSetMetadata(
+Java_jdk_m3_fs_M3FsNative_nativeSetMetadata(
     JNIEnv *env, jclass type, jlong handle, jstring value, jint mode, jlong mtime,
     jboolean set_mode, jboolean set_time) {
   (void)type;
@@ -1672,7 +1672,7 @@ Java_com_m3_fs_M3FsNative_nativeSetMetadata(
 }
 
 JNIEXPORT jlong JNICALL
-Java_com_m3_fs_M3FsNative_nativeReplaceImage(
+Java_jdk_m3_fs_M3FsNative_nativeReplaceImage(
     JNIEnv *env, jclass type, jlong handle, jstring value, jobject data) {
   (void)type;
   if (data == NULL) {
@@ -1697,7 +1697,7 @@ Java_com_m3_fs_M3FsNative_nativeReplaceImage(
 }
 
 JNIEXPORT jlong JNICALL
-Java_com_m3_fs_M3FsNative_nativeWriteIfInode(
+Java_jdk_m3_fs_M3FsNative_nativeWriteIfInode(
     JNIEnv *env,
     jclass type,
     jlong handle,
@@ -1751,7 +1751,7 @@ Java_com_m3_fs_M3FsNative_nativeWriteIfInode(
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_fs_M3FsNative_nativeReadIfInode(
+Java_jdk_m3_fs_M3FsNative_nativeReadIfInode(
     JNIEnv *env,
     jclass type,
     jlong handle,
@@ -1807,7 +1807,7 @@ Java_com_m3_fs_M3FsNative_nativeReadIfInode(
 
 
 JNIEXPORT void JNICALL
-Java_com_m3_fs_M3FsNative_nativeRenameNoReplace(
+Java_jdk_m3_fs_M3FsNative_nativeRenameNoReplace(
     JNIEnv *env, jclass type, jlong handle, jstring from, jstring to) {
   (void)type;
   binary_path_operation(env, handle, from, to, 4);

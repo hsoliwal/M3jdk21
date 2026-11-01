@@ -6,15 +6,15 @@ on:
     branches:
       - m3/bitlane-indexed-navigation-receiver-20261017
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3BitLane28.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3BitLaneJumpProof.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3BitLane28.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3BitLaneJumpProof.java'
       - 'm3/collections/src/test/native/m3_bitlane_jump_jni.c'
       - 'm3/collections/qualification/bitlane-indexed-navigation-20261017/**'
       - '.github/workflows/m3-bitlane-indexed-navigation-20261017.yml'
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3BitLane28.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3BitLaneJumpProof.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3BitLane28.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3BitLaneJumpProof.java'
       - 'm3/collections/src/test/native/m3_bitlane_jump_jni.c'
       - 'm3/collections/qualification/bitlane-indexed-navigation-20261017/**'
       - '.github/workflows/m3-bitlane-indexed-navigation-20261017.yml'

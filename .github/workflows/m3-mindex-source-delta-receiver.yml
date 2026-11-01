@@ -3,8 +3,8 @@ name: M3JDK Synexia MIndex rename delta receiver
 on:
   pull_request:
     paths:
-      - 'm3/compatibility/mindex-rename-synexia-source-delta-20261016.tsv'
-      - 'm3/compatibility/check_mindex_rename_synexia_delta.py'
+      - 'm3/compatibility/mindex-rename-m3-source-delta-20261016.tsv'
+      - 'm3/compatibility/check_mindex_rename_m3_delta.py'
       - 'm3/docs/m3index-migration-receiver-delta-20261016.md'
       - '.github/workflows/m3-mindex-source-delta-receiver.yml'
   workflow_dispatch:
@@ -26,4 +26,4 @@ jobs:
       - name: Diff hygiene
         run: git diff --check HEAD^ HEAD
       - name: Verify exact source-only pinned MIndex migration delta
-        run: python3 m3/compatibility/check_mindex_rename_synexia_delta.py --self-test
+        run: python3 m3/compatibility/check_mindex_rename_m3_delta.py --self-test

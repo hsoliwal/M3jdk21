@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-// M3JDK21 migration source: hsoliwal/com.synexia@2ab439480ecb0643615e85b42def954dbf3b5627
+// M3JDK 21 migration source: hsoliwal/com.synexia@2ab439480ecb0643615e85b42def954dbf3b5627
 // aix-chrome-ai-studio/mechanical/browser/native-ai-session.mjs
 /** Shared lifecycle only. All language transformations execute in Chrome's native API. */
 export class NativeAiError extends Error {

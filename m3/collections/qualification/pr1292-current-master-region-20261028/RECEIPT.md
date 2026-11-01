@@ -4,10 +4,10 @@
 **Target source HEAD:** `74893b6381b597cc241d9fa10f00e0b44e6c2487` (after exact AST core receiver merge #2071
 and token regex receiver merge #2072). **Original chronological PR:**
 [#1292](https://github.com/hsoliwal/M3jdk21/pull/1292.patch), whose older
-historical JNI implementation is `a34a203dceb7425f25aa4cede7898f22829966e8`.
+historical JNI implementation is `effcaebbd353890eac9f8e1bbd611b586e4d4806`.
 
 **Current master JNI source:** `m3_index_mask_window.c` Git blob
-`bd300c90d54ede9b7f238efe8a18c918d2fcef9e`. It retains both original
+`baa23467163a0e9344fe3c1d78dcc87cb707fd56`. It retains both original
 JNI exports, but the state-pass gathers only the minimal enclosing admitted
 row region instead of the historical suffix. Its behavior must not be
 overwritten by #1292's old source.
@@ -28,7 +28,7 @@ No production Java or JNI source is modified.
 - `-fsanitize=undefined -fno-sanitize-recover=all` build and actual execution:
   **PASS**, same 390 assertions.
 - The unchanged, already-installed historical native fixture
-  `m3_mask_window_regions.c` (Git blob `52d4e5b20fade6ab7aa3f63d5d92a6b210e437bd`)
+  `m3_mask_window_regions.c` (Git blob `6eeb08136b1851f78254f9628ceba460ccfe1f4f`)
   also compiled and passed its existing four named cases against the exact
   current native source.
 - No recipe Java, donor source, runtime library or JNI symbol is introduced.

@@ -72,7 +72,7 @@ class InstallTest(unittest.TestCase):
         self.assertEqual(len(records), len({row['id'] for row in records}))
         self.assertFalse(after['migration']['coverage']['source_tree_complete'])
         self.assertFalse(after['migration']['coverage']['dependency_closure_complete'])
-        self.assertEqual(2, sum(row['status'] == 'implemented-unverified' for row in records if row['id'].startswith('synexia.counterpart.')))
+        self.assertEqual(2, sum(row['status'] == 'implemented-unverified' for row in records if row['id'].startswith('m3.counterpart.')))
 
 
 if __name__ == '__main__':

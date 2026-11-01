@@ -11,13 +11,13 @@ test_blob=$(git hash-object "$test")
   echo "Unexpected compactor source revision: $source_blob" >&2
   exit 1
 }
-[[ "$test_blob" == 066eb1b6a636b38c56bc007d1a83eeb6793ddf40 ]] || {
+[[ "$test_blob" == b2f654376f0793318affde9cd7358f971b0782ff ]] || {
   echo "Unexpected jtreg oracle revision: $test_blob" >&2
   exit 1
 }
 # Independent public JDK collection oracle; stock host semantics, not M3 dispatch.
 public_test=test/jdk/java/util/ArrayList/M3ArrayListVectorRemoveIfContract.java
-[[ "$(git hash-object "$public_test")" == c760bb2ba03f6ad2b587834abd9abbb602ac1ae9 ]] || {
+[[ "$(git hash-object "$public_test")" == ae1c114700899b641d6e340fbab537f39c7a7b65 ]] || {
   echo "Unexpected public contract oracle source" >&2
   exit 1
 }

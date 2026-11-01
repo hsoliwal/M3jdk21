@@ -50,8 +50,8 @@ class ZeroMaskSourceV2Tests(unittest.TestCase):
             v2.receipt_rows(p)
 
     def test_missing_jni_symbol_detectable(self):
-        a = b"JNIEXPORT jint JNICALL Java_com_m3_a(JNIEnv *e) {}"
-        b = b"JNIEXPORT jint JNICALL Java_com_m3_b(JNIEnv *e) {}"
+        a = b"JNIEXPORT jint JNICALL Java_jdk_m3_a(JNIEnv *e) {}"
+        b = b"JNIEXPORT jint JNICALL Java_jdk_m3_b(JNIEnv *e) {}"
         self.assertTrue(set(v2.JNI_SYMBOL.findall(a)) - set(v2.JNI_SYMBOL.findall(b)))
 
     def test_missing_java_test_entrypoint_detectable(self):

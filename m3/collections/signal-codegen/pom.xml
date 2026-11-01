@@ -47,7 +47,7 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>com.m3.collections.sortable.SortableProcessorSelfTest</mainClass>
+              <mainClass>jdk.m3.collections.sortable.SortableProcessorSelfTest</mainClass>
               <classpathScope>test</classpathScope>
             </configuration>
           </execution>

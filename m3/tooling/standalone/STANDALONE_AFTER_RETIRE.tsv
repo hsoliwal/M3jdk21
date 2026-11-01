@@ -8,7 +8,7 @@ D_REPO_REF	.github/workflows/m3-backport-contract-current-owner.yml	248	or bindi
 D_REPO_REF	.github/workflows/m3-collections.yml	3	# Canonical recipe: com.synexia.m3.M3PackedCollectionsReceivingMetadata in hsoliwal/com.synexia.
 D_REPO_REF	.github/workflows/m3-first-release-admission.yml	193	raise SystemExit('HOLD: execute and qualify source-bound recipes in hsoliwal/com.synexia; attach the exact command, source pins and raw artifact hashes.')
 D_REPO_REF	.github/workflows/m3-hf-intake-20261017.yml	64	--source-repository https://github.com/hsoliwal/com.synexia \
-D_REPO_REF	.github/workflows/m3-jdk21-second-pass-review-dag.yml	70	gh repo clone hsoliwal/com.synexia "$RUNNER_TEMP/com.synexia"
+D_REPO_REF	.github/workflows/m3jdk21-second-pass-review-dag.yml	70	gh repo clone hsoliwal/com.synexia "$RUNNER_TEMP/com.synexia"
 D_REPO_REF	.github/workflows/m3-jep484-classfile-path-map.yml	42	git -C "$SYNEXIA" remote add origin https://github.com/hsoliwal/com.synexia.git
 D_REPO_REF	.github/workflows/m3-jep484-custody-plan.yml	45	git -C "$SYNEXIA" remote add origin https://github.com/hsoliwal/com.synexia.git
 D_REPO_REF	.github/workflows/m3-jep485-stream-gatherers.yml	67	"canonical_repository": "hsoliwal/com.synexia",

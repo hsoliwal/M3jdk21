@@ -25,7 +25,7 @@ public final class GuavaEvictingQueuePublicSurfaceProof {
     }
     public static void main(String[] args) throws Exception {
         Class<?> provider=Class.forName("com.google.common.collect.EvictingQueue");
-        Class<?> owned=Class.forName("com.m3.collections.guava.M3EvictingQueue");
+        Class<?> owned=Class.forName("jdk.m3.collections.guava.M3EvictingQueue");
         TreeSet<String> left=surface(provider,provider.getName()),right=surface(owned,owned.getName());
         if(!left.equals(right)) {
             TreeSet<String> missing=new TreeSet<>(left);missing.removeAll(right);

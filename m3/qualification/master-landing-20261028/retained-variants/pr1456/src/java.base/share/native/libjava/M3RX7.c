@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2026, Hitesh Soliwal and contributors.
  * GPLv2 with the Classpath exception (OpenJDK java.base native destination).
- * M3JDK21 DFA token transition precompute and composition: primitive arrays only.
+ * M3JDK 21 DFA token transition precompute and composition: primitive arrays only.
  */
 #include <jni.h>
 #include <stdint.h>

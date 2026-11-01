@@ -4,9 +4,9 @@ name: M3 Mask Viewport Java JNI
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3MaskViewport*.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3MaskViewport*.java'
       - 'm3/collections/src/main/c/m3maskviewport.c'
-      - 'm3/collections/src/test/java/com/m3/collections/M3MaskViewportKernelContract.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3MaskViewportKernelContract.java'
       - 'm3/collections/viewport-proof/**'
       - '.github/workflows/m3-mask-viewport-jni.yml'
       - '.github/workflows/m3-viewport-family-composed.yml'

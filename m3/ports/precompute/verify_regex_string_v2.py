@@ -6,8 +6,8 @@ import hashlib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
-CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-regex-string-precompute-v2"
-POLICY = ROOT / "m3/docs/m3jdk-synexia-porting-policy.tsv"
+CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/m3-regex-string-precompute-v2"
+POLICY = ROOT / "m3/docs/m3jdk-m3-porting-policy.tsv"
 PROVENANCE = ROOT / "m3/ports/precompute/REGEX_STRING_V2_PROVENANCE.tsv"
 MAPPING = ROOT / "m3/ports/precompute/REGEX_STRING_V2_MAP.tsv"
 
@@ -92,8 +92,8 @@ def main() -> None:
 
     mapping = MAPPING.read_text(encoding="utf-8")
     for token in (
-        "com.m3.precompute.M3RegexStringTrialImage",
-        "com.m3.precompute.M3RegexStringSignals",
+        "jdk.m3.precompute.M3RegexStringTrialImage",
+        "jdk.m3.precompute.M3RegexStringSignals",
         "REUSED_TARGET_OWNER_NO_DIRECT_PORT",
     ):
         if token not in mapping:

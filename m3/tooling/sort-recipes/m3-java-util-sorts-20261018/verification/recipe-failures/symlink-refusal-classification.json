@@ -13,7 +13,7 @@
   "failed_surefire_xml_sha256": "690658463f5ac3d1fcea14892671001ef7dfed389bbc051faff71beab01ef562",
   "fix": "Check Files.isSymbolicLink before the non-directory-ancestor branch; keep the exact regression assertion and no-write checks.",
   "status": "CORRECTED_AND_REGRESSION_EXECUTED",
-  "corrected_receiver_sha256": "d0f7d62e58286821a26bfc468a57f6d009553afb101c319e2c631327c240d08c",
+  "corrected_receiver_sha256": "c8f27c9e9d66301ccb8bcfa14c6d37898e6ee299cfd058d9f8ea517f3a219685",
   "unchanged_single_regression_tests": 1,
   "single_regression_failures": 0,
   "required_full_rerun_tests": 20,

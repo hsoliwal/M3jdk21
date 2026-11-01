@@ -21,7 +21,7 @@ A separate hash-pinned Java snapshot corrected 465 active symbolic Javadoc refer
 - `CONSUMER_DIAGNOSTIC_TESTS.log`: testutils/unit-tests consumer reactor BUILD SUCCESS; AssertTest 98 tests, ListsTest/SetsTest/MapsTest 100 tests.
 - `FACTORY_RUNTIME_CORRECTED.log`, `FACTORY_IMMUTABLE_INVENTORY.tsv`: actual provider closure plus immutable absent-pair inventory.
 - `ORIGINAL_DIFFERENTIAL.log`: independent original differential, 97,402 checks.
-- `BASELINE_PROOF_CHECKSTYLE.xml`, `BASELINE_PROOF_LINT_COMPARISON.txt`: direct Checkstyle 10.18.2 over immutable original proof reproduced the same 88 findings as the pre-review relocated proof, by line/rule/message multiset. The original source hash is `23c9a956156b9f533785d6f4d5dc0de04709ecad371ef971db192356d0ea27a1`.
+- `BASELINE_PROOF_CHECKSTYLE.xml`, `BASELINE_PROOF_LINT_COMPARISON.txt`: direct Checkstyle 10.18.2 over immutable original proof reproduced the same 88 findings as the pre-review relocated proof, by line/rule/message multiset. The original source hash is `f3bf323a09350b02b667437ef4b723020230c2652d2bdc632448d11f6a356cda`.
 - `REVIEW_JAVADOC.log`, `REVIEW_SNAPSHOT.tsv`, `PROOF_GUARD_FORMAT.tsv`, `ACTIVE_PROOF_REFUSAL.log`: bounded review closure checks.
 
 Maven used JDK 21, a 256 MiB Maven heap, 512 MiB compiler heap and one 512 MiB test fork. Source/metadata admission used exact preimage hashes; source changes were serially promoted. The initial namespace-only integrity receipts describe that initial stage. Final bytes also include the separately authorized import ordering, generator help package, CI repair, symbolic Javadoc references and first-party refusal guard.

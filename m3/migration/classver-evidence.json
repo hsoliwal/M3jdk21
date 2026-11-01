@@ -59,8 +59,8 @@
     {
       "path": "m3/migration/intake-20261005/current-752-ci/a3-receiving-producer/candidate.patch",
       "mode": "100644",
-      "gitBlob": "b5839941b9bedb85f064ccdab18f0a684ae466f8",
-      "sha256": "52f34060ef1f8f8f01dbe3e0f73f1e9a85a9815817a47ab107e20ee6afd27d1d",
+      "gitBlob": "810a5654ab156ab988e89be2c9d831e166eb0f00",
+      "sha256": "c13eab93b3b22e29b639c6fce49ba837565e46de95ca13995ffb2fd30378519f",
       "bytes": 10488,
       "role": "patch-snapshot",
       "provenance": [
@@ -119,8 +119,8 @@
     {
       "path": "m3/migration/intake-20261005/current-752-ci/cia-producer-portable/candidate.patch",
       "mode": "100644",
-      "gitBlob": "b5839941b9bedb85f064ccdab18f0a684ae466f8",
-      "sha256": "52f34060ef1f8f8f01dbe3e0f73f1e9a85a9815817a47ab107e20ee6afd27d1d",
+      "gitBlob": "810a5654ab156ab988e89be2c9d831e166eb0f00",
+      "sha256": "c13eab93b3b22e29b639c6fce49ba837565e46de95ca13995ffb2fd30378519f",
       "bytes": 10488,
       "role": "patch-snapshot",
       "provenance": [
@@ -135,8 +135,8 @@
     {
       "path": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/candidate.patch",
       "mode": "100644",
-      "gitBlob": "39f2bc58e877462f330513f16f78bf22502673a6",
-      "sha256": "17e4f8398e08468645b2ec15d99c45a0c49e942d03115cc92e53e713ba9c00af",
+      "gitBlob": "2f00c1a33af0602a28a8a1a4d2b687403172fdd9",
+      "sha256": "22d43c48e277d7d41cae16c9441fe262f34e4cea062faa4b38aa3fbe7b1a6427",
       "bytes": 24160,
       "role": "patch-snapshot",
       "provenance": [
@@ -227,8 +227,8 @@
     {
       "path": "m3/migration/intake-20261005/current-752-ci/crate/before/11.txt",
       "mode": "100644",
-      "gitBlob": "1570299bc0a09012b2752143d7d2861521801104",
-      "sha256": "d684f2c95622c32683dbdce162d2f49101c7431bfbba1927a34182dcecadc77f",
+      "gitBlob": "1c660d64d7a86eb44e2cc96b544a782c34e47bf8",
+      "sha256": "213d3f3ee70e7eefb05192b8e73e2aa2dc652cec3fcf9c3b78a0d9893ddcc3f6",
       "bytes": 4462,
       "role": "before-image",
       "provenance": [
@@ -249,8 +249,8 @@
     {
       "path": "m3/migration/intake-20261005/current-752-ci/crate/before/15.txt",
       "mode": "100644",
-      "gitBlob": "1570299bc0a09012b2752143d7d2861521801104",
-      "sha256": "d684f2c95622c32683dbdce162d2f49101c7431bfbba1927a34182dcecadc77f",
+      "gitBlob": "1c660d64d7a86eb44e2cc96b544a782c34e47bf8",
+      "sha256": "213d3f3ee70e7eefb05192b8e73e2aa2dc652cec3fcf9c3b78a0d9893ddcc3f6",
       "bytes": 4462,
       "role": "before-image",
       "provenance": [
@@ -299,8 +299,8 @@
     {
       "path": "m3/migration/intake-20261005/current-752-ci/jcc-context-producer/candidate.patch",
       "mode": "100644",
-      "gitBlob": "39f2bc58e877462f330513f16f78bf22502673a6",
-      "sha256": "17e4f8398e08468645b2ec15d99c45a0c49e942d03115cc92e53e713ba9c00af",
+      "gitBlob": "2f00c1a33af0602a28a8a1a4d2b687403172fdd9",
+      "sha256": "22d43c48e277d7d41cae16c9441fe262f34e4cea062faa4b38aa3fbe7b1a6427",
       "bytes": 24160,
       "role": "patch-snapshot",
       "provenance": [
@@ -359,8 +359,8 @@
     {
       "path": "m3/migration/intake-20261005/current-752-ci/producer-portable/candidate.patch",
       "mode": "100644",
-      "gitBlob": "6613aaa40722230e5b1c1194e20b475b69bb19c3",
-      "sha256": "a9a56f1803d5d33e42efb63fa0f047a1b49027beb827ca427adc25f8b126440e",
+      "gitBlob": "b439cb96f58b7bd20b2836cf7802e2610d08f0f5",
+      "sha256": "36af8ddf39ba7a39638c002c5fc301395a04634a8da4c63eefd92057d8ade704",
       "bytes": 4475,
       "role": "patch-snapshot",
       "provenance": [
@@ -391,8 +391,8 @@
     {
       "path": "m3/migration/intake-20261005/current-752-ci/producer/candidate.patch",
       "mode": "100644",
-      "gitBlob": "6613aaa40722230e5b1c1194e20b475b69bb19c3",
-      "sha256": "a9a56f1803d5d33e42efb63fa0f047a1b49027beb827ca427adc25f8b126440e",
+      "gitBlob": "b439cb96f58b7bd20b2836cf7802e2610d08f0f5",
+      "sha256": "36af8ddf39ba7a39638c002c5fc301395a04634a8da4c63eefd92057d8ade704",
       "bytes": 4475,
       "role": "patch-snapshot",
       "provenance": [
@@ -499,8 +499,8 @@
     {
       "path": "m3/migration/intake-20261005/current-752-ci/receiver-authoring/proof-runner/runtime-v5.patch",
       "mode": "100644",
-      "gitBlob": "a9d74a163657a7fa57c0bbebabdf603499f8083f",
-      "sha256": "015e6d4861ba4a76b331d1620f5b20e25c90c186f76a0bfd5132b1a4e6fe8dc1",
+      "gitBlob": "c0446c83dcd58e98839c5c4a8df6d55487677bd4",
+      "sha256": "096675f1243561799a23dd42a2cd212e8f0e60f51a0850a3942b86c19e8fc441",
       "bytes": 12586,
       "role": "patch-snapshot",
       "provenance": [
@@ -515,8 +515,8 @@
     {
       "path": "m3/migration/intake-20261005/current-752-ci/source-admission-evidence/admission-evidence/ci-at-pr148-5c1ee94/foundation-command-excerpts.txt",
       "mode": "100644",
-      "gitBlob": "b963a4847e181099ce468c387e857153adc09ef9",
-      "sha256": "917ccef20aa289428426ba14ccf7e532e15bbbe0f3cd9ae3a8f3562384e0b41c",
+      "gitBlob": "8d26f689804d88e76f6ab7851c32b9d6379a7078",
+      "sha256": "7112e1758186604c9ca4836e98a49c57cc3828ca4165af08c819a001cdaa4858",
       "bytes": 4747,
       "role": "ci-excerpt",
       "provenance": [
@@ -543,8 +543,8 @@
     {
       "path": "m3/migration/intake-20261005/current-752-ci/source-admission-evidence/admission-evidence/ci-at-pr148-5c1ee94/java-test-compile-excerpt.txt",
       "mode": "100644",
-      "gitBlob": "e9c6ff5f5fc9588732e69ea055ef94d5e1d33e32",
-      "sha256": "0d1fca352c18ae7c7759ca0bcc24b3fc099b01bbfbb7bd4dfa257ce0d9a7c26f",
+      "gitBlob": "2cc4f5bb25e8d10d88a117d3cb210e3cb46d7de9",
+      "sha256": "632a925748eef8ee6b6ac67c2eb59c1cfc462ca48b9447df61e4e568012ee485",
       "bytes": 2654,
       "role": "ci-excerpt",
       "provenance": [
@@ -556,8 +556,8 @@
         },
         {
           "path": "m3/migration/intake-20261005/current-752-ci/source-admission-evidence/admission-evidence/ci-at-pr148-5c1ee94/job-111763397210.log",
-          "sha256": "28a1d7372652aa3d704aae587c8e3f0f1763ee9b077a4d6fb806d6c2404b7676",
-          "gitBlob": "ec8d701a0f2ac617068f91ba32de203bae3c4c96",
+          "sha256": "111710b57b0e5e1180225b9c0b555ba96531896319d19ac81257a6b202680aa1",
+          "gitBlob": "86121bce79139a4847dd97d70cf74fac2ec469df",
           "description": "Retained source log lines 138-156 exactly equal the corresponding timestamp/ANSI excerpt segment."
         }
       ]
@@ -565,8 +565,8 @@
     {
       "path": "m3/migration/intake-20261005/current-752-ci/source-admission-evidence/admission-evidence/ci-at-pr148-5c1ee94/job-111763396934.log",
       "mode": "100644",
-      "gitBlob": "8fa78f249c7642437d3720923755cb6a01d2d391",
-      "sha256": "5bf59102405b8a059dff536683a3344857f1e0a6d938a7288e1c43449f51291d",
+      "gitBlob": "0b456eba8a72a42e48536dbff923cb5841cb801b",
+      "sha256": "9160f1fa01d4d7df874ceede099ab0c3b63b2699effafd16955de04d50dc4bc6",
       "bytes": 78707,
       "role": "raw-log",
       "provenance": [
@@ -581,8 +581,8 @@
     {
       "path": "m3/migration/intake-20261005/current-752-ci/source-admission-evidence/admission-evidence/ci-at-pr148-5c1ee94/job-111763397210.log",
       "mode": "100644",
-      "gitBlob": "ec8d701a0f2ac617068f91ba32de203bae3c4c96",
-      "sha256": "28a1d7372652aa3d704aae587c8e3f0f1763ee9b077a4d6fb806d6c2404b7676",
+      "gitBlob": "86121bce79139a4847dd97d70cf74fac2ec469df",
+      "sha256": "111710b57b0e5e1180225b9c0b555ba96531896319d19ac81257a6b202680aa1",
       "bytes": 14446,
       "role": "raw-log",
       "provenance": [
@@ -613,8 +613,8 @@
     {
       "path": "m3/migration/intake-20261005/current-752-ci/source-delivery/coverage.tsv",
       "mode": "100644",
-      "gitBlob": "441b95468e6d775aa826ae5a86e43ce95c3eb6c2",
-      "sha256": "1659c7e0e47cf50dd30eaa15008ead3919695aea5f7c5dc1fce09055862e875a",
+      "gitBlob": "573db724660014686231e21d11d2baf7e4b33a4c",
+      "sha256": "75d751b4cf2a393801515590236b18dda263251848bbdd6ed21404018389f2b2",
       "bytes": 145710,
       "role": "coverage-snapshot",
       "provenance": [

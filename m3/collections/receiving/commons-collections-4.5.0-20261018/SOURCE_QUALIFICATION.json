@@ -5,7 +5,7 @@
   "originalRevisionNote": "Preserves the exact pinned 4.5.0 RC preparation revision; no silent retagging.",
   "namespace": {
     "source": "org.apache.commons.collections4",
-    "target": "com.m3.collections.apache"
+    "target": "jdk.m3.collections.apache"
   },
   "sourceFiles": 904,
   "mainJava": 359,

@@ -1,6 +1,6 @@
 category	upstream_public_type	m3_runtime	status	original_source_blob	contract
-GUAVA_BIMAP	com.google.common.collect.BiMap	com.m3.collections.interop.M3BiMap	EXACT_RECEIVER_CANDIDATE	6a705e1d9c33e7b0d6f0061e8154a0484ff8661d	inverse,forcePut,unique values,live views
-ECLIPSE_MAP_VIEW	org.eclipse.collections.api.map.MutableMap	com.m3.collections.interop.M3BiMaps.asEclipseMap	ADAPTER_INHERITED	0d7691d6a5abb3eac929b7334640171e7bac4ee0	MutableMap only, not MutableBiMap
-JDK_MAP	java.util.Map	com.m3.collections.M3LinkedHashMap	EXISTING_M3_OWNER	ade59880b8c9b2bee1b32ae67ca9d29b7382d998	Existing equality and map aliases
-SPRING_SINGLE_VALUE	org.springframework.util.MultiValueMap	M3BiMap passed to provider static bridge	DONOR_BRIDGE_TESTED	49ca9ae0149c9981bc53ed6f0619410eb1d24712	Not a native MultiValueMap implementation
+GUAVA_BIMAP	com.google.common.collect.BiMap	com.m3.collections.interop.M3BiMap	EXACT_RECEIVER_CANDIDATE	e650bc13e453a717b6f1ada0d17f87b4f14f22e8	inverse,forcePut,unique values,live views
+ECLIPSE_MAP_VIEW	org.eclipse.collections.api.map.MutableMap	com.m3.collections.interop.M3BiMaps.asEclipseMap	ADAPTER_INHERITED	8f6a941125dffe1edf43862fd6359adcb95db650	MutableMap only, not MutableBiMap
+JDK_MAP	java.util.Map	com.m3.collections.M3LinkedHashMap	EXISTING_M3_OWNER	e0957cfd8a7a5abfa1c0c5e7bade32997e5ed657	Existing equality and map aliases
+SPRING_SINGLE_VALUE	org.springframework.util.MultiValueMap	M3BiMap passed to provider static bridge	DONOR_BRIDGE_TESTED	5022dde092654f453d251d65197d6c3e0b6089d7	Not a native MultiValueMap implementation
 APACHE_BIDIMAP	org.apache.commons.collections4.BidiMap	-	PENDING_DIFFERENT_CONTRACT	-	Not conflated with Guava BiMap

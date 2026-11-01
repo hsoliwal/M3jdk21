@@ -2,7 +2,7 @@
  * SPDX-License-Identifier: GPL-2.0-only WITH Classpath-exception-2.0 */
 /*
  * @test
- * @summary M3JDK21 shallow object size, JVMTI GC-stable tags and observed reference edges
+ * @summary M3JDK 21 shallow object size, JVMTI GC-stable tags and observed reference edges
  * @modules java.base/jdk.internal.misc
  * @run main/othervm M3ObjectMemoryTest
  */

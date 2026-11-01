@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
-# Original M3JDK21 java.base source patch-tested under host JDK21.
-# This is not a built/installed full M3JDK21 runtime acceptance test.
+# Original M3JDK 21 java.base source patch-tested under host JDK21.
+# This is not a built/installed full M3JDK 21 runtime acceptance test.
 name: M3JDK21 indexed array atomic growth Java21
 on:
   pull_request:

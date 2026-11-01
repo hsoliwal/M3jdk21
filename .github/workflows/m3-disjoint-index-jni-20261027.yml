@@ -3,9 +3,9 @@ name: M3 indexed disjoint-set arrays JNI receiver
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3DisjointIndex.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3DisjointIndex.java'
       - 'm3/collections/src/main/native/collections/m3_disjoint_index.c'
-      - 'm3/collections/src/test/java/com/m3/collections/M3DisjointIndex*.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3DisjointIndex*.java'
       - 'm3/collections/qualification/disjoint-index-20261027.sha256'
       - '.github/workflows/m3-disjoint-index-jni-20261027.yml'
   workflow_dispatch:
@@ -32,8 +32,8 @@ jobs:
           mkdir -p "$RUNNER_TEMP/disjoint-classes" "$RUNNER_TEMP/disjoint-headers"
           javac --release 21 -proc:none -Xlint:all -Werror \
             -h "$RUNNER_TEMP/disjoint-headers" -d "$RUNNER_TEMP/disjoint-classes" \
-            m3/collections/src/main/java/com/m3/collections/M3DisjointIndex.java \
-            m3/collections/src/test/java/com/m3/collections/M3DisjointIndexSelfTest.java
+            m3/collections/src/main/java/jdk/m3/collections/M3DisjointIndex.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3DisjointIndexSelfTest.java
       - name: Compile strict C17 and execute actual checked JNI and Java reference oracles
         shell: bash
         run: |
@@ -43,7 +43,7 @@ jobs:
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
             m3/collections/src/main/native/collections/m3_disjoint_index.c \
             -o "$RUNNER_TEMP/libm3_disjoint_index.so"
-          nm -D "$RUNNER_TEMP/libm3_disjoint_index.so" | grep -q 'Java_com_m3_collections_M3DisjointIndex_connectedNative'
+          nm -D "$RUNNER_TEMP/libm3_disjoint_index.so" | grep -q 'Java_jdk_m3_collections_M3DisjointIndex_connectedNative'
           java -ea -Xcheck:jni -Djava.library.path="$RUNNER_TEMP" \
-            -cp "$RUNNER_TEMP/disjoint-classes" com.m3.collections.M3DisjointIndexSelfTest --native
-          java -ea -cp "$RUNNER_TEMP/disjoint-classes" com.m3.collections.M3DisjointIndexSelfTest
+            -cp "$RUNNER_TEMP/disjoint-classes" jdk.m3.collections.M3DisjointIndexSelfTest --native
+          java -ea -cp "$RUNNER_TEMP/disjoint-classes" jdk.m3.collections.M3DisjointIndexSelfTest

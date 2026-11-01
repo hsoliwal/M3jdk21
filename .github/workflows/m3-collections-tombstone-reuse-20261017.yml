@@ -3,9 +3,9 @@ name: M3 tombstone reuse Java21 receiver
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongHashSet.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3TombstoneReuse*.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongHashSet.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongLongHashMap.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3TombstoneReuse*.java'
       - 'm3/collections/verification/tombstone-reuse-20261017/**'
       - '.github/workflows/m3-collections-tombstone-reuse-20261017.yml'
   workflow_dispatch:

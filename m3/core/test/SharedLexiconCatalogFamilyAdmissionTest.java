@@ -1,5 +1,5 @@
-import com.m3.text.SharedLexiconCatalog;
-import com.m3.text.SharedLexiconFamilySidecarCatalog;
+import jdk.m3.text.SharedLexiconCatalog;
+import jdk.m3.text.SharedLexiconFamilySidecarCatalog;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.ByteBuffer;
@@ -35,7 +35,7 @@ public final class SharedLexiconCatalogFamilyAdmissionTest {
             Path partial = Files.createTempDirectory("m3lex-catalog-partial-");
             try {
                 writeCatalog(partial, true);
-                Files.delete(partial.resolve("synexia.translation.tsv"));
+                Files.delete(partial.resolve("m3.translation.tsv"));
                 expectIOException(() -> SharedLexiconCatalog.open(partial), "partial bundle rejected");
             } finally {
                 deleteTree(partial);
@@ -93,20 +93,20 @@ public final class SharedLexiconCatalogFamilyAdmissionTest {
     }
 
     private static void writeCatalog(Path root, boolean withFamily) throws Exception {
-        Path image = root.resolve("synexia.m3lex");
+        Path image = root.resolve("m3.m3lex");
         Files.writeString(root.resolve("words.txt"), "alpha\n", StandardCharsets.UTF_8);
         writeImageV2(image, List.of("alpha"));
         String imageDigest = sha256(Files.readAllBytes(image));
-        write(root, "synexia.shards.tsv",
+        write(root, "m3.shards.tsv",
                 "shard_id\tfile\tfirst_lexeme\tlast_lexeme\timage_records\tutf16_units\tsha256\n"
                         + "0\tsynexia.m3lex\talpha\talpha\t1\t5\t" + imageDigest + "\n");
-        write(root, "synexia.records.tsv",
+        write(root, "m3.records.tsv",
                 "source_id\tsource_path\tsource_kind\tlanguage_tag\trecord_id\tlexeme\tshard_id\timage_row\tmapping_id\tmapping_name\ttranslation_profile\tprecompute_profile\tprecompute_payload\n"
                         + "source-a\tpath\tdictionary\ten\trecord-a\talpha\t0\t0\t-\t-\t-\tfixture\t{}\n");
-        write(root, "synexia.precompute.tsv",
+        write(root, "m3.precompute.tsv",
                 "shard_id\timage_row\tutf16_units\tjava_hash\tcode_points\tunpaired_surrogates\tnon_bmp_code_points\tascii\tlatin1\tcontains_whitespace\tprecompute_profile\n"
                         + "0\t0\t5\t" + javaHash("alpha") + "\t5\t0\t0\tTrue\tTrue\tFalse\tfixture\n");
-        write(root, "synexia.precompute-index.tsv",
+        write(root, "m3.precompute-index.tsv",
                 "precompute_profile\tsource_records\timage_records\tsha256\n"
                         + "fixture\t1\t1\t" + sha256("fixture\t1\t1\n") + "\n");
         if (withFamily) {
@@ -116,8 +116,8 @@ public final class SharedLexiconCatalogFamilyAdmissionTest {
     }
 
     private static void writeRelated(Path root) throws Exception {
-        write(root, "synexia.related-sources.tsv", "source_id\nsource-a\n");
-        write(root, "synexia.related.tsv",
+        write(root, "m3.related-sources.tsv", "source_id\nsource-a\n");
+        write(root, "m3.related.tsv",
                 "source_id\trecord_id\tlexeme\trelated_lexeme\tshard_id\timage_row\n"
                         + "source-a\trecord-a\talpha\tomega\t0\t0\n"
                         + "source-a\trecord-a\talpha\tzeta\t0\t0\n");
@@ -143,17 +143,17 @@ public final class SharedLexiconCatalogFamilyAdmissionTest {
                 "source_language", "target_language", "lexicon_fingerprint", "source_fingerprint",
                 "translated_token_ids", "mapped_token_count")
                 + scope + "en\thi\tlex-a\tsrc-a\t7\t1\n";
-        write(root, "synexia.prefix-counts.tsv", prefix);
-        write(root, "synexia.spell.tsv", spell);
-        write(root, "synexia.token-frequency.tsv", frequency);
-        write(root, "synexia.token-hash.tsv", tokenHash);
-        write(root, "synexia.translation.tsv", translation);
+        write(root, "m3.prefix-counts.tsv", prefix);
+        write(root, "m3.spell.tsv", spell);
+        write(root, "m3.token-frequency.tsv", frequency);
+        write(root, "m3.token-hash.tsv", tokenHash);
+        write(root, "m3.translation.tsv", translation);
         String index = header("schema_version", "family", "file", "rows", "sha256")
-                + indexLine("prefix-counts", "synexia.prefix-counts.tsv", prefix)
-                + indexLine("spell-index", "synexia.spell.tsv", spell)
-                + indexLine("token-frequency", "synexia.token-frequency.tsv", frequency)
-                + indexLine("token-hash-precompute", "synexia.token-hash.tsv", tokenHash)
-                + indexLine("translation-projection", "synexia.translation.tsv", translation);
+                + indexLine("prefix-counts", "m3.prefix-counts.tsv", prefix)
+                + indexLine("spell-index", "m3.spell.tsv", spell)
+                + indexLine("token-frequency", "m3.token-frequency.tsv", frequency)
+                + indexLine("token-hash-precompute", "m3.token-hash.tsv", tokenHash)
+                + indexLine("translation-projection", "m3.translation.tsv", translation);
         write(root, SharedLexiconFamilySidecarCatalog.INDEX_FILE, index);
     }
 

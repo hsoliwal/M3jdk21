@@ -3,7 +3,7 @@
 
 # Hosted charcopy successor qualification
 
-This source-only lane adapts the already executed regex hosted workflow e114945b7c189f90fcc80eb3a978e4d17ccd6def and helper 8c89a9473890d738247bc8e39800b371b30c5b50, with the native root-Maven composition precedent d7d34cd7cccd92777b6dc46a9e421b95898aeb08 / b81d4f046c7352e1fa337408f5abcbb1e40627ad. The committed charcopy admission is 50cb3dc489c3f95a9781e50549d2e1866390f057. Existing first-party Apache notices remain intact. No new supervisor, recipe engine, dependency model or historical helper implementation is introduced.
+This source-only lane adapts the already executed regex hosted workflow e114945b7c189f90fcc80eb3a978e4d17ccd6def and helper 19638c98b28af580028a94cfa83840f997562e10, with the native root-Maven composition precedent d7d34cd7cccd92777b6dc46a9e421b95898aeb08 / 3c5ff69487f09c942fc9557e493d4692b0464e89. The committed charcopy admission is 50cb3dc489c3f95a9781e50549d2e1866390f057. Existing first-party Apache notices remain intact. No new supervisor, recipe engine, dependency model or historical helper implementation is introduced.
 
 ## Receiving layout and binding
 

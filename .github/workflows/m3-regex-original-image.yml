@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
-# Build original M3JDK21 OpenJDK image; this is not a complete release qualification.
+# Build original M3JDK 21 OpenJDK image; this is not a complete release qualification.
 name: M3JDK21 original regex source-built image
 on:
   pull_request:

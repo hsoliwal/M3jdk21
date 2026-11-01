@@ -7,7 +7,7 @@ import sys
 CRATE='m3jdk21-five-provider-key-groups-20261018'
 HERE=Path(__file__).resolve().parent
 ROOT=HERE.parents[4]
-PACK=HERE/'src/main/resources/com/synexia/rewrite/hash-pinned-java'/CRATE
+PACK=HERE/'src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java'/CRATE
 
 def main():
     items=[]

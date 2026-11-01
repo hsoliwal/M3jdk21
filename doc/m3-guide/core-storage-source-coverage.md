@@ -34,12 +34,12 @@ primary denominator; nested Encoding and record-generated members are not extra 
 
 | Primary source | Lines / UTF-8 bytes | Git blob SHA-1 | Raw SHA-256 |
 | --- | --- | --- | --- |
-| [JoinedM3StringPiece.java][JOINED] | 62 / 2634 | `cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597` | `694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb` |
-| [LocalM3Arena.java][ARENA] | 50 / 1975 | `d82710cd1a49b54d92afcd74cdd903cd009766ba` | `99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d` |
-| [LocalM3StringPiece.java][LOCAL] | 51 / 2115 | `6b745c9472144ad6de01de4d06a533974e558fb1` | `06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51` |
-| [M3StringPiece.java][PIECE] | 21 / 767 | `99cb72623fa6bc2d5426553e04aaf0e5bfa993cc` | `d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479` |
-| [SharedLexiconImage.java][IMAGE] | 228 / 11400 | `7d0dd69b3f92bc6e589eed4024d22686020b421c` | `50527e3afcc418dfc09f0a6f6608e05db70db5ad440dc3f6a67d8099ec2f9837` |
-| [StorageIdentity.java][IDENTITY] | 15 / 494 | `7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a` | `b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417` |
+| [JoinedM3StringPiece.java][JOINED] | 62 / 2634 | `5022e9811ce9391671c794446c7772569cfd369f` | `1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7` |
+| [LocalM3Arena.java][ARENA] | 50 / 1975 | `025ce8014cba8a36a9e496bb0a56faef57cf0968` | `e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4` |
+| [LocalM3StringPiece.java][LOCAL] | 51 / 2115 | `387ae5e0c656177f1df663fd5029d4b31ba2fa00` | `77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad` |
+| [M3StringPiece.java][PIECE] | 21 / 767 | `62506fb9b3cff0e6f24e856648528db58c45b92b` | `7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755` |
+| [SharedLexiconImage.java][IMAGE] | 228 / 11400 | `364eecefcb3822918c849606ddb177c0ceaa30d5` | `d4fcdb58e6a33d82fa18526bd4cd380869661e03f6a2beb721030b13e1789401` |
+| [StorageIdentity.java][IDENTITY] | 15 / 494 | `8cd2ae86bee8f04f0d69709eed12897ff5c6a71c` | `f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354` |
 
 ## Complete declared-member routing
 
@@ -84,8 +84,8 @@ does not imply inspection of generated classfiles or an ABI gate.
 ## Finite test attribution
 
 The complete [FoundationTest.java][TEST] is 198 lines / 17,914 bytes, Git blob
-`c722aa61a9bc7953d183e1fac20c0155a19dd2dd`, raw SHA-256
-`0f8c4e89a3d3228b51095faa29b14e35daba46726e6a3ae89dbd6b1e69652cd0`.
+`822bb5d6b77ebb166a5cefd8f8507a2b073f17d2`, raw SHA-256
+`9c3c1480807ccb15ed6ee81dafa91a6e2a9f4bcc8c749caf0ea09ad5bbe6485b`.
 The helper `expect` tests throwable type membership; it does not establish exact
 message text, all error-priority combinations or absence of partial effects.
 Reading its `FOUNDATION_PASS` print statement is not an observed pass.
@@ -109,10 +109,10 @@ that mapped-file deletion behaves identically on every OS.
 
 | Public source at the same pin | Exact Git blob SHA-1 | Read scope and use |
 | --- | --- | --- |
-| [m3/core/src/module-info.java][MODULE] | `d4cb6cd055f708d037748251d55876186cc7c5a0` | Complete 5-line descriptor; exports independent com.m3.text. |
-| [m3/build.sh][BUILD] | `5ac0b944e34bf5f226d77541adbcb28e35edcfe5` | Complete script read: required M3_JDK tool-directory variable (no version probe), --release 21 compilation/JAR/test construction, jit/int/nocompact/c2 invocations, separate demo-image publication flow. No execution in this pass. Its temp/chmod/mv sequence is a build caller's behavior, not SharedLexiconImage.create's guarantee. |
-| [SharedLexiconCatalog.java][CATALOG] | `aa8cf83bbc8349a2ed5a0a7dad818c2d7240f577` | Selected call bodies: find 247–265, prefix 272–288, textAt 291–299, validateShardSidecars 355–375, openImage 455–466, imageText 679–683. Uses findRecord/lowerBound/startsWith/recordText and image metadata; reuse complete catalog reference. |
-| [M3PrefixZ.java][PREFIXZ] | `65f259e23d818b9b35052feff37198f5ddf567b4` | Complete body read, selected consumer at 42–85: sealed piece, length and charAt; reuse existing algorithm reference rather than add a seventh primary owner. |
+| [m3/core/src/module-info.java][MODULE] | `bdd278210a498e2665620c02413b1e658c79370e` | Complete 5-line descriptor; exports independent com.m3.text. |
+| [m3/build.sh][BUILD] | `be764d854ce1d7686fd53da8953110a382ec1dec` | Complete script read: required M3_JDK tool-directory variable (no version probe), --release 21 compilation/JAR/test construction, jit/int/nocompact/c2 invocations, separate demo-image publication flow. No execution in this pass. Its temp/chmod/mv sequence is a build caller's behavior, not SharedLexiconImage.create's guarantee. |
+| [SharedLexiconCatalog.java][CATALOG] | `df137d5b2a52e9ad58f276132099b47692720ed2` | Selected call bodies: find 247–265, prefix 272–288, textAt 291–299, validateShardSidecars 355–375, openImage 455–466, imageText 679–683. Uses findRecord/lowerBound/startsWith/recordText and image metadata; reuse complete catalog reference. |
+| [M3PrefixZ.java][PREFIXZ] | `317108234d7692410517731b325f7d28de99354e` | Complete body read, selected consumer at 42–85: sealed piece, length and charAt; reuse existing algorithm reference rather than add a seventh primary owner. |
 | [java/lang/CharSequence.java][CHARSEQ] | `87bc4a5525a850a7323a784a1927e6221d706ed6` | Selected inherited declarations/default bodies and static compare distinction, not a new whole-Java-SE API claim. |
 
 The four generated/inherited categories tracked above are Java language/library
@@ -138,15 +138,15 @@ generated-member behavior suites, helper edge matrices, file mutation races,
 mapping reclamation, native/JNI/platform behavior, exact runtime/consumer fit and
 resource/performance proof remain unqualified by this pass.
 
-[JOINED]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/com/m3/text/JoinedM3StringPiece.java
-[ARENA]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/com/m3/text/LocalM3Arena.java
-[LOCAL]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/com/m3/text/LocalM3StringPiece.java
-[PIECE]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/com/m3/text/M3StringPiece.java
-[IMAGE]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/com/m3/text/SharedLexiconImage.java
-[IDENTITY]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/com/m3/text/StorageIdentity.java
+[JOINED]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java
+[ARENA]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/jdk/m3/text/LocalM3Arena.java
+[LOCAL]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/jdk/m3/text/LocalM3StringPiece.java
+[PIECE]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/jdk/m3/text/M3StringPiece.java
+[IMAGE]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/jdk/m3/text/SharedLexiconImage.java
+[IDENTITY]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/jdk/m3/text/StorageIdentity.java
 [TEST]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/test/FoundationTest.java
 [MODULE]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/module-info.java
 [BUILD]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/build.sh
-[CATALOG]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/com/m3/text/SharedLexiconCatalog.java
-[PREFIXZ]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java
+[CATALOG]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/core/src/jdk/m3/text/SharedLexiconCatalog.java
+[PREFIXZ]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/m3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java
 [CHARSEQ]: https://github.com/hsoliwal/M3jdk21/blob/510dfa27b0679ce33348140afc57b558b8853802/src/java.base/share/classes/java/lang/CharSequence.java

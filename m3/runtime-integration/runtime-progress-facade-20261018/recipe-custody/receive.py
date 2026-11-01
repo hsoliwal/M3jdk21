@@ -63,7 +63,7 @@ def qualification(crate, dataset, owner):
     metadata = json.loads(contained(data_root, "DATASET.json").read_text(encoding="utf-8"))
     build = crate / "target" / dataset
     candidate = build / "candidate"
-    report = contained(build, "surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml")
+    report = contained(build, "surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml")
     suite = ET.parse(report).getroot()
     if (int(suite.attrib.get("tests", "0")) != len(TESTS)
             or any(int(suite.attrib.get(key, "0")) for key in ("failures", "errors", "skipped"))
@@ -79,7 +79,7 @@ def qualification(crate, dataset, owner):
         if directory.exists():
             expected_paths.update("crate/" + p.relative_to(crate).as_posix()
                                   for p in directory.rglob("*") if p.is_file())
-    expected_paths.update("owner/src/main/java/com/synexia/rewrite/" + name for name in OWNERS)
+    expected_paths.update("owner/src/main/java/jdk/internal/m3/rewrite/" + name for name in OWNERS)
     if set(bound) != expected_paths:
         raise ValueError("incomplete or extra SDK source binding")
     for path, expected in bound.items():
@@ -90,7 +90,7 @@ def qualification(crate, dataset, owner):
         if digest(actual) != expected:
             raise ValueError("recipe changed after SDK qualification: " + path)
     effective_engines = rows(data_root / "ENGINE_EFFECTIVE.tsv", 3)
-    if {row[0] for row in effective_engines} != {"src/main/java/com/synexia/rewrite/" + name for name in OWNERS}:
+    if {row[0] for row in effective_engines} != {"src/main/java/jdk/internal/m3/rewrite/" + name for name in OWNERS}:
         raise ValueError("incomplete effective canonical engine set")
     for relative, blob, expected in effective_engines:
         data = contained(owner, relative).read_bytes()
@@ -99,7 +99,7 @@ def qualification(crate, dataset, owner):
             raise ValueError("canonical engine custody mismatch: " + relative)
     manifests = {}
     preimages = {}
-    resource_root = data_root / "resources/com/synexia/rewrite"
+    resource_root = data_root / "resources/jdk/internal/m3/rewrite"
     for kind in ("java", "text"):
         lane = resource_root / ("hash-pinned-" + kind) / metadata["crate_name"]
         manifest = lane / "manifest.tsv"

@@ -63,15 +63,15 @@
             <arg>-Xlint:all</arg>
           </compilerArgs>
           <includes>
-            <include>com/m3/rewrite/atom/M3PureIntAtomEligibility.java</include>
-            <include>com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java</include>
-            <include>com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java</include>
-            <include>com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java</include>
-            <include>com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java</include>
+            <include>jdk/m3/rewrite/atom/M3PureIntAtomEligibility.java</include>
+            <include>jdk/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java</include>
+            <include>jdk/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java</include>
+            <include>jdk/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java</include>
+            <include>jdk/m3/rewrite/atom/M3PureIntConvergenceRecipe.java</include>
           </includes>
           <testIncludes>
-            <testInclude>com/m3/rewrite/atom/MemJava.java</testInclude>
-            <testInclude>com/m3/rewrite/atom/JccReceivingFixtureTest.java</testInclude>
+            <testInclude>jdk/m3/rewrite/atom/MemJava.java</testInclude>
+            <testInclude>jdk/m3/rewrite/atom/JccReceivingFixtureTest.java</testInclude>
           </testIncludes>
         </configuration>
       </plugin>

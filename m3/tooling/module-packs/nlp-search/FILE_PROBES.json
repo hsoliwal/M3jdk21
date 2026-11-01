@@ -1,7 +1,7 @@
 {
   "schema": "M3_FILE_LINKED_IMAGE_PROBES_1",
   "module": "org.m3jdk.file",
-  "source_contract": "hsoliwal/com.synexia/synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/BUILD_CONTRACT.json",
+  "source_contract": "hsoliwal/com.synexia/m3-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/BUILD_CONTRACT.json",
   "family_sources": 50,
   "mapped_public_protected_declarations_and_record_components": 709,
   "module_java_sources": 80,
@@ -17,7 +17,7 @@
   "runs": [
     {
       "name": "file-java-M3FileAlgorithmTest",
-      "main": "com.m3.file.M3FileAlgorithmTest",
+      "main": "jdk.m3.file.M3FileAlgorithmTest",
       "java_args": [
         "-Dm3.file.native=false"
       ],
@@ -27,7 +27,7 @@
     },
     {
       "name": "file-java-M3FileByteFactsPrimitiveSnapshotProof",
-      "main": "com.m3.file.M3FileByteFactsPrimitiveSnapshotProof",
+      "main": "jdk.m3.file.M3FileByteFactsPrimitiveSnapshotProof",
       "java_args": [
         "-Dm3.file.native=false"
       ],
@@ -37,7 +37,7 @@
     },
     {
       "name": "file-java-M3FileDetachedTextViewsProof",
-      "main": "com.m3.file.M3FileDetachedTextViewsProof",
+      "main": "jdk.m3.file.M3FileDetachedTextViewsProof",
       "java_args": [
         "-Dm3.file.native=false"
       ],
@@ -47,7 +47,7 @@
     },
     {
       "name": "file-java-M3FileEventReaderRehydrateProof",
-      "main": "com.m3.file.M3FileEventReaderRehydrateProof",
+      "main": "jdk.m3.file.M3FileEventReaderRehydrateProof",
       "java_args": [
         "-Dm3.file.native=false"
       ],
@@ -57,7 +57,7 @@
     },
     {
       "name": "file-java-M3FileImageAtomicPublicationProof",
-      "main": "com.m3.file.M3FileImageAtomicPublicationProof",
+      "main": "jdk.m3.file.M3FileImageAtomicPublicationProof",
       "java_args": [
         "-Dm3.file.native=false"
       ],
@@ -67,7 +67,7 @@
     },
     {
       "name": "file-java-M3FileMappedProjectionSnapshotProof",
-      "main": "com.m3.file.M3FileMappedProjectionSnapshotProof",
+      "main": "jdk.m3.file.M3FileMappedProjectionSnapshotProof",
       "java_args": [
         "-Dm3.file.native=false"
       ],
@@ -77,7 +77,7 @@
     },
     {
       "name": "file-java-M3FileMappedSourceFactsProof",
-      "main": "com.m3.file.M3FileMappedSourceFactsProof",
+      "main": "jdk.m3.file.M3FileMappedSourceFactsProof",
       "java_args": [
         "-Dm3.file.native=false"
       ],
@@ -87,7 +87,7 @@
     },
     {
       "name": "file-java-M3FileRollingPrecomputeProof",
-      "main": "com.m3.file.M3FileRollingPrecomputeProof",
+      "main": "jdk.m3.file.M3FileRollingPrecomputeProof",
       "java_args": [
         "-Dm3.file.native=false"
       ],
@@ -97,7 +97,7 @@
     },
     {
       "name": "file-java-M3FileSnapshotCodecProof",
-      "main": "com.m3.file.M3FileSnapshotCodecProof",
+      "main": "jdk.m3.file.M3FileSnapshotCodecProof",
       "java_args": [
         "-Dm3.file.native=false"
       ],
@@ -107,7 +107,7 @@
     },
     {
       "name": "file-java-M3FileSourceFactsStoreSinglePublicationProof",
-      "main": "com.m3.file.M3FileSourceFactsStoreSinglePublicationProof",
+      "main": "jdk.m3.file.M3FileSourceFactsStoreSinglePublicationProof",
       "java_args": [
         "-Dm3.file.native=false"
       ],
@@ -117,7 +117,7 @@
     },
     {
       "name": "file-java-M3FileTest",
-      "main": "com.m3.file.M3FileTest",
+      "main": "jdk.m3.file.M3FileTest",
       "java_args": [
         "-Dm3.file.native=false"
       ],
@@ -127,7 +127,7 @@
     },
     {
       "name": "file-java-M3FileTokenRangeDigestProof",
-      "main": "com.m3.file.M3FileTokenRangeDigestProof",
+      "main": "jdk.m3.file.M3FileTokenRangeDigestProof",
       "java_args": [
         "-Dm3.file.native=false"
       ],
@@ -137,7 +137,7 @@
     },
     {
       "name": "file-java-M3FileUniverseSnapshotImageProof",
-      "main": "com.m3.file.M3FileUniverseSnapshotImageProof",
+      "main": "jdk.m3.file.M3FileUniverseSnapshotImageProof",
       "java_args": [
         "-Dm3.file.native=false"
       ],
@@ -147,7 +147,7 @@
     },
     {
       "name": "file-java-M3FilePortProbe",
-      "main": "com.m3.file.M3FilePortProbe",
+      "main": "jdk.m3.file.M3FilePortProbe",
       "java_args": [
         "-Dm3.file.native=false"
       ],
@@ -159,7 +159,7 @@
     },
     {
       "name": "file-java-M3FileJsonProbe",
-      "main": "com.m3.file.M3FileJsonProbe",
+      "main": "jdk.m3.file.M3FileJsonProbe",
       "java_args": [
         "-Dm3.file.native=false"
       ],
@@ -171,7 +171,7 @@
     },
     {
       "name": "file-java-M3FileCharsetProbe",
-      "main": "com.m3.file.M3FileCharsetProbe",
+      "main": "jdk.m3.file.M3FileCharsetProbe",
       "java_args": [
         "-Dm3.file.native=false"
       ],
@@ -181,7 +181,7 @@
     },
     {
       "name": "file-native-M3FileAlgorithmTest",
-      "main": "com.m3.file.M3FileAlgorithmTest",
+      "main": "jdk.m3.file.M3FileAlgorithmTest",
       "java_args": [
         "-Dm3.file.native=true",
         "-Xcheck:jni",
@@ -195,7 +195,7 @@
     },
     {
       "name": "file-native-M3FileByteFactsPrimitiveSnapshotProof",
-      "main": "com.m3.file.M3FileByteFactsPrimitiveSnapshotProof",
+      "main": "jdk.m3.file.M3FileByteFactsPrimitiveSnapshotProof",
       "java_args": [
         "-Dm3.file.native=true",
         "-Xcheck:jni",
@@ -209,7 +209,7 @@
     },
     {
       "name": "file-native-M3FileDetachedTextViewsProof",
-      "main": "com.m3.file.M3FileDetachedTextViewsProof",
+      "main": "jdk.m3.file.M3FileDetachedTextViewsProof",
       "java_args": [
         "-Dm3.file.native=true",
         "-Xcheck:jni",
@@ -223,7 +223,7 @@
     },
     {
       "name": "file-native-M3FileEventReaderRehydrateProof",
-      "main": "com.m3.file.M3FileEventReaderRehydrateProof",
+      "main": "jdk.m3.file.M3FileEventReaderRehydrateProof",
       "java_args": [
         "-Dm3.file.native=true",
         "-Xcheck:jni",
@@ -237,7 +237,7 @@
     },
     {
       "name": "file-native-M3FileImageAtomicPublicationProof",
-      "main": "com.m3.file.M3FileImageAtomicPublicationProof",
+      "main": "jdk.m3.file.M3FileImageAtomicPublicationProof",
       "java_args": [
         "-Dm3.file.native=true",
         "-Xcheck:jni",
@@ -251,7 +251,7 @@
     },
     {
       "name": "file-native-M3FileMappedProjectionSnapshotProof",
-      "main": "com.m3.file.M3FileMappedProjectionSnapshotProof",
+      "main": "jdk.m3.file.M3FileMappedProjectionSnapshotProof",
       "java_args": [
         "-Dm3.file.native=true",
         "-Xcheck:jni",
@@ -265,7 +265,7 @@
     },
     {
       "name": "file-native-M3FileMappedSourceFactsProof",
-      "main": "com.m3.file.M3FileMappedSourceFactsProof",
+      "main": "jdk.m3.file.M3FileMappedSourceFactsProof",
       "java_args": [
         "-Dm3.file.native=true",
         "-Xcheck:jni",
@@ -279,7 +279,7 @@
     },
     {
       "name": "file-native-M3FileRollingPrecomputeProof",
-      "main": "com.m3.file.M3FileRollingPrecomputeProof",
+      "main": "jdk.m3.file.M3FileRollingPrecomputeProof",
       "java_args": [
         "-Dm3.file.native=true",
         "-Xcheck:jni",
@@ -293,7 +293,7 @@
     },
     {
       "name": "file-native-M3FileSnapshotCodecProof",
-      "main": "com.m3.file.M3FileSnapshotCodecProof",
+      "main": "jdk.m3.file.M3FileSnapshotCodecProof",
       "java_args": [
         "-Dm3.file.native=true",
         "-Xcheck:jni",
@@ -307,7 +307,7 @@
     },
     {
       "name": "file-native-M3FileSourceFactsStoreSinglePublicationProof",
-      "main": "com.m3.file.M3FileSourceFactsStoreSinglePublicationProof",
+      "main": "jdk.m3.file.M3FileSourceFactsStoreSinglePublicationProof",
       "java_args": [
         "-Dm3.file.native=true",
         "-Xcheck:jni",
@@ -321,7 +321,7 @@
     },
     {
       "name": "file-native-M3FileTest",
-      "main": "com.m3.file.M3FileTest",
+      "main": "jdk.m3.file.M3FileTest",
       "java_args": [
         "-Dm3.file.native=true",
         "-Xcheck:jni",
@@ -335,7 +335,7 @@
     },
     {
       "name": "file-native-M3FileTokenRangeDigestProof",
-      "main": "com.m3.file.M3FileTokenRangeDigestProof",
+      "main": "jdk.m3.file.M3FileTokenRangeDigestProof",
       "java_args": [
         "-Dm3.file.native=true",
         "-Xcheck:jni",
@@ -349,7 +349,7 @@
     },
     {
       "name": "file-native-M3FileUniverseSnapshotImageProof",
-      "main": "com.m3.file.M3FileUniverseSnapshotImageProof",
+      "main": "jdk.m3.file.M3FileUniverseSnapshotImageProof",
       "java_args": [
         "-Dm3.file.native=true",
         "-Xcheck:jni",
@@ -363,7 +363,7 @@
     },
     {
       "name": "file-native-M3FilePortProbe",
-      "main": "com.m3.file.M3FilePortProbe",
+      "main": "jdk.m3.file.M3FilePortProbe",
       "java_args": [
         "-Dm3.file.native=true",
         "-Xcheck:jni",
@@ -379,7 +379,7 @@
     },
     {
       "name": "file-native-M3FileJsonProbe",
-      "main": "com.m3.file.M3FileJsonProbe",
+      "main": "jdk.m3.file.M3FileJsonProbe",
       "java_args": [
         "-Dm3.file.native=true",
         "-Xcheck:jni",
@@ -395,7 +395,7 @@
     },
     {
       "name": "file-native-M3FileCharsetProbe",
-      "main": "com.m3.file.M3FileCharsetProbe",
+      "main": "jdk.m3.file.M3FileCharsetProbe",
       "java_args": [
         "-Dm3.file.native=true",
         "-Xcheck:jni",

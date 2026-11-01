@@ -47,7 +47,7 @@ owns the Maven/OpenRewrite recipe
 `com.synexia.m3.M3Jdk21IndexedLiveCallbackEpoch20261022`.
 Exact preimage/postimage SHA-256 values are recorded in
 [`source-handoff.tsv`](source-handoff.tsv). The original M3 product file's
-Git blob is `d710423f42f656b6ab5008076b6f3831118b5b12`; new owner
+Git blob is `2cd8abd65612b35a96b2465a2e24abebf0ee825d`; new owner
 postimage is `fbaa5cd8b1603c1fbc75e2a6dc4e484bd4c43f0f`.
 The new contract is also an exact canonical Synexia template postimage.
 No executable transformation recipe was added to this public target.

@@ -20,7 +20,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 /**
- * The repository conforms to the M3JDK21 naming standard, and this executor agrees with the rename recipe on the
+ * The repository conforms to the M3JDK 21 naming standard, and this executor agrees with the rename recipe on the
  * fixtures of {@code test_jdk_naming.py} (the discriminators: kept spans, the JNI forms, the doubled prefix).
  */
 class JdkNamingConformanceTest {
@@ -51,14 +51,14 @@ class JdkNamingConformanceTest {
 
     @Test
     void packagesTypesConstantsAndNamesAreRenamed() {
-        assertEquals("package jdk.internal.m3.x;", rewritten("package com.synexia.m3.x;"));
-        assertEquals("import jdk.internal.m3.util.M3Helper;", rewritten("import com.synexia.util.SynexiaHelper;"));
-        assertEquals("public final class M3Foo {", rewritten("public final class SynexiaFoo {"));
-        assertEquals("getenv(\"M3_TOKEN\") \"m3-import\"", rewritten("getenv(\"SYNEXIA_TOKEN\") \"synexia-import\""));
+        assertEquals("package jdk.internal.m3.x;", rewritten("package jdk.internal.m3.x;"));
+        assertEquals("import jdk.internal.m3.util.M3Helper;", rewritten("import jdk.internal.m3.util.M3Helper;"));
+        assertEquals("public final class M3Foo {", rewritten("public final class M3Foo {"));
+        assertEquals("getenv(\"M3_TOKEN\") \"m3-import\"", rewritten("getenv(\"M3_TOKEN\") \"m3-import\""));
         assertEquals("package jdk.m3.collections; import jdk.m3.arrays.B;",
-                rewritten("package com.m3.collections; import com.m3.arrays.B;"));
+                rewritten("package jdk.m3.collections; import jdk.m3.arrays.B;"));
         assertEquals("M3-LLM-FIRST-2 m3/vendor/m3/lib canonicalM3Owner M3SourceCanon",
-                rewritten("SYNEXIA-LLM-FIRST-2 m3/vendor/synexia/lib canonicalSynexiaOwner M3SynexiaSourceCanon"));
+                rewritten("M3-LLM-FIRST-2 m3/vendor/m3/lib canonicalM3Owner M3SourceCanon"));
     }
 
     @Test
@@ -66,13 +66,13 @@ class JdkNamingConformanceTest {
         String copyright = "// Copyright 2026 Synexia contributors";
         assertEquals(copyright, rewritten(copyright));
         assertEquals("<dependency><groupId>com.synexia</groupId><artifactId>m3-x</artifactId></dependency>",
-                rewritten("<dependency><groupId>com.synexia</groupId><artifactId>synexia-x</artifactId></dependency>"));
+                rewritten("<dependency><groupId>com.synexia</groupId><artifactId>m3-x</artifactId></dependency>"));
         assertEquals("token: ${{ secrets.SYNEXIA_READ_TOKEN }} env: M3_MODE",
-                rewritten("token: ${{ secrets.SYNEXIA_READ_TOKEN }} env: SYNEXIA_MODE"));
+                rewritten("token: ${{ secrets.SYNEXIA_READ_TOKEN }} env: M3_MODE"));
         assertEquals("// see https://github.com/hsoliwal/com.synexia/blob/x/SynexiaFoo.java; use M3Bar",
-                rewritten("// see https://github.com/hsoliwal/com.synexia/blob/x/SynexiaFoo.java; use SynexiaBar"));
+                rewritten("// see https://github.com/hsoliwal/com.synexia/blob/x/SynexiaFoo.java; use M3Bar"));
         assertEquals("// the Synexia tool, see vendor/m3/lib and Synexia-NOTICE",
-                rewritten("// the Synexia tool, see vendor/synexia/lib and Synexia-NOTICE"));
+                rewritten("// the Synexia tool, see vendor/m3/lib and Synexia-NOTICE"));
         assertTrue(rules.keepsPath("m3/x/Synexia-NOTICE"));
         assertTrue(rules.keepsPath("M3-SYNEXIA-NOTICE.md"));
     }
@@ -80,29 +80,29 @@ class JdkNamingConformanceTest {
     @Test
     void jniSymbolsHeadersFlattenedPathsAndDoubledPrefixes() {
         assertEquals("Java_jdk_internal_m3_common_collections_SegmentedBits_rank",
-                rewritten("Java_com_synexia_common_collections_SegmentedBits_rank"));
+                rewritten("Java_jdk_internal_m3_common_collections_SegmentedBits_rank"));
         assertEquals("#include \"jdk_internal_m3_mindex_TextMetadata.h\"",
-                rewritten("#include \"com_synexia_mindex_TextMetadata.h\""));
-        assertEquals("Java_jdk_m3_fs_M3FsNative_open", rewritten("Java_com_m3_fs_M3FsNative_open"));
+                rewritten("#include \"jdk_internal_m3_mindex_TextMetadata.h\""));
+        assertEquals("Java_jdk_m3_fs_M3FsNative_open", rewritten("Java_jdk_m3_fs_M3FsNative_open"));
         assertEquals("src__main__java__jdk__internal__m3__search__Problem",
-                rewritten("src__main__java__com__synexia__m3__search__Problem"));
-        assertEquals("check_m3_family.py M3_MODE m3-x", rewritten("check_m3_m3_family.py M3_M3_MODE m3-m3-m3-x"));
+                rewritten("src__main__java__jdk__internal__m3__search__Problem"));
+        assertEquals("check_m3_family.py M3_MODE m3-x", rewritten("check_m3_family.py M3_MODE m3-x"));
         assertEquals("libsynexia_mindex_swap", rewritten("libsynexia_mindex_swap"));
     }
 
     @Test
     void dottedSegmentsRootPackageTypesPrefixLiteralsAndRecordKeys() {
         assertEquals("package jdk.m3.importer; import jdk.internal.m3.M3Planner; p.startsWith(\"com.synexia.\")",
-                rewritten("package com.m3.synexia.importer; import com.synexia.M3Planner; p.startsWith(\"com.synexia.\")"));
+                rewritten("package jdk.m3.importer; import jdk.internal.m3.M3Planner; p.startsWith(\"com.synexia.\")"));
         assertEquals("row[\"synexiaState\"] legal/synexia.md \"schema\": \"m3.recipe-source-custody/1\" https://synexia.com/x",
-                rewritten("row[\"synexiaState\"] legal/synexia.md \"schema\": \"synexia.recipe-source-custody/1\" https://synexia.com/x"));
+                rewritten("row[\"synexiaState\"] legal/synexia.md \"schema\": \"m3.recipe-source-custody/1\" https://synexia.com/x"));
         assertEquals("m3/m3-import/src/main/java/jdk/m3/importer/M3ImportPlan.java",
-                rules.renamedPath("m3/synexia-import/src/main/java/com/m3/synexia/importer/M3ImportPlan.java"));
+                rules.renamedPath("m3/m3-import/src/main/java/jdk/m3/importer/M3ImportPlan.java"));
         assertTrue(rules.keepsPath("src/java.base/share/legal/synexia.md"));
         assertEquals("package jdk.internal.m3.recipe; lab_jdk.internal.m3.rewrite.X recipe\\tjdk.internal.m3.rewrite.Y"
                 + "\\njdk.m3.z.W ${m3.version} m3-tq/synexia.md.txt.before Java_jdk_internal_m3_recipe_X_f",
-                rewritten("package org.synexia.m3.recipe; lab_com.synexia.rewrite.X recipe\\tcom.synexia.rewrite.Y"
-                        + "\\ncom.m3.z.W ${m3.synexia.version} m3-tq/synexia.md.txt.before Java_org_synexia_m3_recipe_X_f"));
+                rewritten("package jdk.internal.m3.recipe; lab_jdk.internal.m3.rewrite.X recipe\\tjdk.internal.m3.rewrite.Y"
+                        + "\\njdk.m3.z.W ${m3.version} m3-tq/synexia.md.txt.before Java_jdk_internal_m3_recipe_X_f"));
     }
 
     @Test
@@ -112,11 +112,11 @@ class JdkNamingConformanceTest {
                 rewritten("# built in M3jdk21; see hsoliwal/M3jdk21 and M3jdk21 #2216"));
         assertEquals(" * M3JDK is standalone; the M3JDK image", rewritten(" * M3jdk is standalone; the M3 JDK image"));
         assertEquals("throw new X(\"M3JDK21 libjava\")", rewritten("throw new X(\"M3JDK21 libjava\")"));
-        assertEquals("env: M3JDK21_REFUSE M3JDK", rewritten("env: M3_JDK21_REFUSE M3_JDK"));
-        assertEquals("run: tar xf m3jdk21.tar.gz m3jdk-proof.yml", rewritten("run: tar xf m3-jdk21.tar.gz m3-jdk-proof.yml"));
-        assertEquals("id: M3JDK-PORT-1", rewritten("id: M3-JDK-PORT-1"));
+        assertEquals("env: M3JDK21_REFUSE M3JDK", rewritten("env: M3JDK21_REFUSE M3JDK"));
+        assertEquals("run: tar xf m3jdk21.tar.gz m3jdk-proof.yml", rewritten("run: tar xf m3jdk21.tar.gz m3jdk-proof.yml"));
+        assertEquals("id: M3JDK-PORT-1", rewritten("id: M3JDK-PORT-1"));
         assertEquals("class M3Jdk21Handoff", rewritten("class M3Jdk21Handoff"));
-        assertEquals(".github/workflows/m3jdk21-backports.yml", rules.renamedPath(".github/workflows/m3-jdk21-backports.yml"));
+        assertEquals(".github/workflows/m3jdk21-backports.yml", rules.renamedPath(".github/workflows/m3jdk21-backports.yml"));
     }
 
     @Test
@@ -148,24 +148,24 @@ class JdkNamingConformanceTest {
     @Test
     void aCollidingLineageFileKeepsItsNameUnderItsRenamedDirectory() {
         NamingScan scan = new NamingScan(rules, root);
-        Set<String> tracked = Set.of("m3/vendor/m3/image/com.m3.x-jar.log.txt", "m3/vendor/m3/image/jdk.m3.x-jar.log.txt",
-                "m3/vendor/synexia/image/com.m3.y-jar.log.txt", "m3/x/com.m3.z-notes.txt");
+        Set<String> tracked = Set.of("m3/vendor/m3/image/jdk.m3.x-jar.log.txt", "m3/vendor/m3/image/jdk.m3.x-jar.log.txt",
+                "m3/vendor/m3/image/jdk.m3.y-jar.log.txt", "m3/x/jdk.m3.z-notes.txt");
         Map<String, Integer> claims = new HashMap<>();
         tracked.forEach(path -> claims.merge(rules.renamedPath(path), 1, Integer::sum));
-        assertTrue(scan.pathConformant("m3/vendor/m3/image/com.m3.x-jar.log.txt", tracked, claims), "kept name");
+        assertTrue(scan.pathConformant("m3/vendor/m3/image/jdk.m3.x-jar.log.txt", tracked, claims), "kept name");
         assertTrue(scan.pathConformant("m3/vendor/m3/image/jdk.m3.x-jar.log.txt", tracked, claims));
-        assertFalse(scan.pathConformant("m3/vendor/synexia/image/com.m3.y-jar.log.txt", tracked, claims), "directory");
-        assertFalse(scan.pathConformant("m3/x/com.m3.z-notes.txt", tracked, claims), "no collision: must be renamed");
-        assertTrue(NamingScan.isLineage("m3/x/com.m3.x-jar.log.txt"));
-        Set<String> evidence = Set.of("m3/t/evidence/synexia-preswitch/ROWS.txt", "m3/t/evidence/m3-preswitch/ROWS.txt");
+        assertFalse(scan.pathConformant("m3/vendor/m3/image/jdk.m3.y-jar.log.txt", tracked, claims), "directory");
+        assertFalse(scan.pathConformant("m3/x/jdk.m3.z-notes.txt", tracked, claims), "no collision: must be renamed");
+        assertTrue(NamingScan.isLineage("m3/x/jdk.m3.x-jar.log.txt"));
+        Set<String> evidence = Set.of("m3/t/evidence/m3-preswitch/ROWS.txt", "m3/t/evidence/m3-preswitch/ROWS.txt");
         Map<String, Integer> evidenceClaims = new HashMap<>();
         evidence.forEach(path -> evidenceClaims.merge(scan.targetPath(path), 1, Integer::sum));
-        assertTrue(scan.pathConformant("m3/t/evidence/synexia-preswitch/ROWS.txt", evidence, evidenceClaims),
+        assertTrue(scan.pathConformant("m3/t/evidence/m3-preswitch/ROWS.txt", evidence, evidenceClaims),
                 "kept in place: its name-kept target is taken too");
         assertEquals("m3/x/m3-openrewrite-recipes/licenses/Synexia-LICENSE",
-                scan.targetPath("m3/x/synexia-openrewrite-recipes/licenses/Synexia-LICENSE"));
+                scan.targetPath("m3/x/m3-openrewrite-recipes/licenses/Synexia-LICENSE"));
         assertEquals("python3 m3/compatibility/check-m3.py; dependency_on_synexia",
-                rewritten("python3 m3/compatibility/check-synexia.py; dependency_on_synexia"));
+                rewritten("python3 m3/compatibility/check-m3.py; dependency_on_synexia"));
         assertFalse(NamingScan.isLineage("m3/x/after-009.java.txt"));
     }
 
@@ -173,12 +173,12 @@ class JdkNamingConformanceTest {
     void aFixtureLineIsReportedWithItsRules() {
         List<NamingScan.Violation> found = new java.util.ArrayList<>();
         new NamingScan(rules, root).scanFile("m3/x/A.java",
-                "class A {}\nimport com.synexia.x.SynexiaB;\n".getBytes(java.nio.charset.StandardCharsets.UTF_8), found);
+                "class A {}\nimport jdk.internal.m3.x.M3B;\n".getBytes(java.nio.charset.StandardCharsets.UTF_8), found);
         assertEquals(1, found.size());
         assertEquals(2, found.get(0).line());
         assertEquals("PKG,TYPE", found.get(0).rules());
         Map<String, Integer> counts = new HashMap<>();
-        rules.rewrite("import com.synexia.x.SynexiaB;", counts);
+        rules.rewrite("import jdk.internal.m3.x.M3B;", counts);
         assertEquals(Map.of("PKG", 1, "TYPE", 1), counts);
     }
 }

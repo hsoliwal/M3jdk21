@@ -12,16 +12,16 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
-package com.synexia.collectionwitness;
+package jdk.internal.m3.collectionwitness;
 
-import com.m3.collections.eclipse.api.list.primitive.ImmutableBooleanList;
-import com.m3.collections.eclipse.api.list.primitive.ImmutableIntList;
-import com.m3.collections.eclipse.api.list.primitive.ImmutableLongList;
-import com.m3.collections.eclipse.api.list.primitive.ImmutableByteList;
-import com.m3.collections.eclipse.api.list.primitive.ImmutableShortList;
-import com.m3.collections.eclipse.api.list.primitive.ImmutableCharList;
-import com.m3.collections.eclipse.api.list.primitive.ImmutableFloatList;
-import com.m3.collections.eclipse.api.list.primitive.ImmutableDoubleList;
+import jdk.m3.collections.eclipse.api.list.primitive.ImmutableBooleanList;
+import jdk.m3.collections.eclipse.api.list.primitive.ImmutableIntList;
+import jdk.m3.collections.eclipse.api.list.primitive.ImmutableLongList;
+import jdk.m3.collections.eclipse.api.list.primitive.ImmutableByteList;
+import jdk.m3.collections.eclipse.api.list.primitive.ImmutableShortList;
+import jdk.m3.collections.eclipse.api.list.primitive.ImmutableCharList;
+import jdk.m3.collections.eclipse.api.list.primitive.ImmutableFloatList;
+import jdk.m3.collections.eclipse.api.list.primitive.ImmutableDoubleList;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
@@ -56,24 +56,24 @@ public class PrimitiveChunkBenchmark {
       b[i] = (long) i * Integer.MAX_VALUE;
       c[i] = (i & 3) == 0;
     }
-    ints = com.m3.collections.eclipse.impl.factory.primitive.IntLists.immutable.with(a);
-    longs = com.m3.collections.eclipse.impl.factory.primitive.LongLists.immutable.with(b);
-    booleans = com.m3.collections.eclipse.api.factory.primitive.BooleanLists.immutable.with(c);
+    ints = jdk.m3.collections.eclipse.impl.factory.primitive.IntLists.immutable.with(a);
+    longs = jdk.m3.collections.eclipse.impl.factory.primitive.LongLists.immutable.with(b);
+    booleans = jdk.m3.collections.eclipse.api.factory.primitive.BooleanLists.immutable.with(c);
     byte[] bytesInput = new byte[size];
     for (int i = 0; i < size; i++) bytesInput[i] = (byte) i;
-    this.bytes = com.m3.collections.eclipse.impl.factory.primitive.ByteLists.immutable.with(bytesInput);
+    this.bytes = jdk.m3.collections.eclipse.impl.factory.primitive.ByteLists.immutable.with(bytesInput);
     short[] shortsInput = new short[size];
     for (int i = 0; i < size; i++) shortsInput[i] = (short) i;
-    this.shorts = com.m3.collections.eclipse.impl.factory.primitive.ShortLists.immutable.with(shortsInput);
+    this.shorts = jdk.m3.collections.eclipse.impl.factory.primitive.ShortLists.immutable.with(shortsInput);
     char[] charsInput = new char[size];
     for (int i = 0; i < size; i++) charsInput[i] = (char) i;
-    this.chars = com.m3.collections.eclipse.impl.factory.primitive.CharLists.immutable.with(charsInput);
+    this.chars = jdk.m3.collections.eclipse.impl.factory.primitive.CharLists.immutable.with(charsInput);
     float[] floatsInput = new float[size];
     for (int i = 0; i < size; i++) floatsInput[i] = i * 1.25F;
-    this.floats = com.m3.collections.eclipse.impl.factory.primitive.FloatLists.immutable.with(floatsInput);
+    this.floats = jdk.m3.collections.eclipse.impl.factory.primitive.FloatLists.immutable.with(floatsInput);
     double[] doublesInput = new double[size];
     for (int i = 0; i < size; i++) doublesInput[i] = i * 1.25D;
-    this.doubles = com.m3.collections.eclipse.impl.factory.primitive.DoubleLists.immutable.with(doublesInput);
+    this.doubles = jdk.m3.collections.eclipse.impl.factory.primitive.DoubleLists.immutable.with(doublesInput);
 
   }
 

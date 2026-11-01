@@ -15,7 +15,7 @@ bash .m3/atomize-patternize/run.sh
 This dispatches to `public-verify.sh`, which:
 
 1. compiles the existing JDK-only `m3/synexia-import` verifier with Java 21 warnings-as-errors;
-2. parses and recomputes the root of `m3/synexia-import/synexia-seed-export.tsv`;
+2. parses and recomputes the root of `m3/m3-import/m3-seed-export.tsv`;
 3. verifies every checked-in `m3/vendor/synexia/**` file against its declared SHA-256;
 4. emits `.m3/target/atomize-patternize/public-receiver/receipt.tsv`.
 

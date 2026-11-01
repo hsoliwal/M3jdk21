@@ -22,7 +22,7 @@ commit `eb05acf7f357dc7a8a2043a97706410de6aafcdf`.
 Target: `m3/file/verify.py`.
 Before Git blob: `755ddf0edbf613e983a690e4379b75cbddcbe6b0`.
 Before SHA-256: `3053db98fbfde335bbcab84b1f941218c91185e8f1ec62dadf3be4ef3dec466a`.
-After SHA-256: `603867d300e35acd9b58fbef59be0d7235ffd067431c8317e78c72d40cc8b7d3`.
+After SHA-256: `1f3322a5d84d0b72fddfefddc50b387a7acda71a627e920e339b3882cd0e427e`.
 
 The existing verifier has 11 entries in the Java21 module-contract map
 but there are 13 existing executable main-class contract source files.
@@ -79,10 +79,10 @@ No compiler warnings are disabled.
 
 Exact source Git blobs:
 `ddb0aa6e88cad6ff3e6519557c092fc349008fdf` →
-`a5044ca5cdfca1f879de81cb5d6ee9b722d872ba`.
+`a9b42b0757a33b9d0c13405813cf0da753d796e8`.
 SHA-256:
 `8696f405e1ff93b891f9bd2ebbab1ec90ef75d8f0008b61b7a7dc4946b70361c` →
-`eea934797b1bcb54c55c6bea2366b3da0b51d2ae3775c44a4536706dd356b855`.
+`9477295ee9c411dc2e62af42b4361b0030e95e56adda0b0587202a8a476837f8`.
 
 Java21 synthetic exported-module compiler reproduction: PASS under
 `-Xlint:all,-module -Werror` with explicit public descriptor checked

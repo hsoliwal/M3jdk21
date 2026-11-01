@@ -5,7 +5,7 @@ on:
     paths:
       - 'm3/tooling/module-packs/parser/integration/src/test/java/jdk/m3/parser/test/M3ActualJavacCaptureContract.java'
       - 'm3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/**'
-      - 'm3/file/src/main/java/com/m3/file/**'
+      - 'm3/file/src/main/java/jdk/m3/file/**'
       - '.github/workflows/m3-actual-javac-capture-20261027.yml'
   workflow_dispatch:
 permissions:
@@ -30,7 +30,7 @@ jobs:
           set -euo pipefail
           classes="$RUNNER_TEMP/m3-actual-javac-capture"
           mkdir -p "$classes"
-          file=m3/file/src/main/java/com/m3/file
+          file=m3/file/src/main/java/jdk/m3/file
           parser=m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser
           old=m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test
           integration=m3/tooling/module-packs/parser/integration/src/test/java/jdk/m3/parser/test

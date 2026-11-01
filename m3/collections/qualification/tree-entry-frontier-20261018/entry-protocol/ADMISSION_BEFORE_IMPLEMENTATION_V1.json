@@ -1,6 +1,6 @@
 {
   "schema": "m3-entry-protocol-admission/v1",
-  "rule22_row_sha256": "cda86ce52ccf2dc8bf8ffed8e96da4e66cb7990bf6dcd20dab5102781d83fa0f",
+  "rule22_row_sha256": "06c52edfa62499ef6167a4bc3d6bc9a49652c54ee171adfb372aa7bcd0eb1073",
   "contract_sha256": "77c3cb68cc680dae1880580e705f48a11c74947a6f4b135cefa6ba125c769e7d",
   "production_scope": [
     "M3SlotMap",

@@ -10,14 +10,14 @@ static void illegal(JNIEnv *env, const char *message) {
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_runtime_capability_LfCount_abi0(JNIEnv *env, jclass owner) {
+Java_jdk_m3_runtime_capability_LfCount_abi0(JNIEnv *env, jclass owner) {
     (void) env;
     (void) owner;
     return 1;
 }
 
 JNIEXPORT jlong JNICALL
-Java_com_m3_runtime_capability_LfCount_countLf0(
+Java_jdk_m3_runtime_capability_LfCount_countLf0(
         JNIEnv *env, jclass owner, jobject buffer, jint start, jint length) {
     (void) owner;
     if (buffer == NULL || start < 0 || length < 0) {
@@ -49,7 +49,7 @@ Java_com_m3_runtime_capability_LfCount_countLf0(
  * This new symbol does not change the v1 abi0()/countLf0() contract.
  */
 JNIEXPORT jintArray JNICALL
-Java_com_m3_runtime_capability_LfCount_lineEnds0(
+Java_jdk_m3_runtime_capability_LfCount_lineEnds0(
         JNIEnv *env, jclass owner, jobject buffer,
         jint start, jint length, jint max_breaks) {
     (void)owner;
@@ -113,7 +113,7 @@ Java_com_m3_runtime_capability_LfCount_lineEnds0(
  * or pinning arrays. No changes to ABI v1, countLf0 or lineEnds0.
  */
 JNIEXPORT jintArray JNICALL
-Java_com_m3_runtime_capability_BytePatternSearch_findKmp0(
+Java_jdk_m3_runtime_capability_BytePatternSearch_findKmp0(
         JNIEnv *env, jclass owner, jobject buffer, jint start, jint length,
         jbyteArray needle_array, jint max_matches) {
     (void)owner;
@@ -210,7 +210,7 @@ Java_com_m3_runtime_capability_BytePatternSearch_findKmp0(
  * KMP scratch is local, JNI arrays are not pinned, and no JVM pointer is retained.
  */
 JNIEXPORT jint JNICALL
-Java_com_m3_runtime_capability_BytePatternSearch_firstKmp0(
+Java_jdk_m3_runtime_capability_BytePatternSearch_firstKmp0(
         JNIEnv *env, jclass owner, jobject buffer, jint start, jint length,
         jbyteArray needle_array, jint from_index) {
     (void)owner;

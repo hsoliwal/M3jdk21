@@ -7,7 +7,7 @@ description: >-
   documentation only from exact receiver preimages or already-converged postimages. The port is
   isolated under m3/ports/precompute; no java.lang.String promotion is implied.
 recipeList:
-  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
       crateName: m3-full-precompute-second-pass
-  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
       crateName: m3-full-precompute-second-pass

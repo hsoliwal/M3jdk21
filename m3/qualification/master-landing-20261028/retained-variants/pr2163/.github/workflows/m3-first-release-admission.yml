@@ -153,7 +153,7 @@ jobs:
             '82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6' \
             "$RUNNER_TEMP/jdk21.tar.gz" | sha256sum --check -
           tar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"
-          echo "M3_JDK=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
+          echo "M3JDK=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
           echo "JAVA_HOME=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
           echo "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
       - name: Build and test P0 immutable text foundation
@@ -171,7 +171,7 @@ jobs:
           if-no-files-found: error
       - name: Verify Synexia compatibility and shared mapping
         run: |
-          python3 m3/compatibility/check-synexia.py
+          python3 m3/compatibility/check-m3.py
           python3 m3/verify-shared-mapping.py
 
   precompute:
@@ -250,9 +250,9 @@ jobs:
       - name: Full-family and receiving-policy verification
         if: always()
         run: |
-          if test -f m3/compatibility/check_synexia_full_family.py; then
-            python3 m3/compatibility/check_synexia_full_family.py
-            python3 -m unittest -v m3/compatibility/test_synexia_full_family.py
+          if test -f m3/compatibility/check_m3_full_family.py; then
+            python3 m3/compatibility/check_m3_full_family.py
+            python3 -m unittest -v m3/compatibility/test_m3_full_family.py
           fi
 
   evidence:

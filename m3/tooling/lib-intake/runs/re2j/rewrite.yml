@@ -1,9 +1,9 @@
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.intake.Relocate
+name: jdk.internal.m3.intake.Relocate
 displayName: LIB_INTAKE relocation of re2j
 description: Boundary-checked package relocation, one non-recursive ChangePackage per package, longest first.
 recipeList:
   - org.openrewrite.java.ChangePackage:
       oldPackageName: com.google.re2j
-      newPackageName: com.m3.lib.re2j
+      newPackageName: jdk.m3.lib.re2j
       recursive: false

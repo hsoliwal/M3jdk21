@@ -18,7 +18,7 @@ import unittest
 
 
 RESOURCE_ROOT = Path(
-    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/"
+    "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
     "jdk21-hash-pinned-text"
 )
 CRATE = RESOURCE_ROOT / "jcc-source-final-handoff-20261005"
@@ -44,14 +44,14 @@ GUARDS = {
     "m3/docs/name-mapping.schema.json",
     "m3/migration/migration.py",
     "m3/migration/recipe.py",
-    "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/"
+    "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/"
     "M3Jdk21HashPinnedTextSnapshotRecipe.java",
     "m3/tooling/migration-recipes/pom.xml",
     "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
-    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/"
+    "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
     "jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
 }
-JCC_IDS = {"synexia.jcc-recipe-laboratory", "synexia.jcc-java-jni-regression"}
+JCC_IDS = {"m3.jcc-recipe-laboratory", "m3.jcc-java-jni-regression"}
 UNRELATED = "unrelated/preserve.bin"
 BINARY = b"JCC successor unrelated binary\x00\xff\n" + bytes(range(256))
 

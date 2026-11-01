@@ -3,7 +3,7 @@
   "source_master": "92962fbba10cbf13799253a307dc90f4de94b179",
   "canonical_repository": "hsoliwal/com.synexia",
   "canonical_commit": "207b74667af0a46df57d3e6b1ed17ed132f9157e",
-  "canonical_recipe": "com.synexia.m3.ViewportNativeMaskSpan20261028",
+  "canonical_recipe": "jdk.internal.m3.ViewportNativeMaskSpan20261028",
   "canonical_engine_git_blob": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
   "target": ".github/workflows/m3-index-mask-window-20261017.yml",
   "pre_git_blob": "aec979f493c3dcfe35ce3be5525f78e2223f431a",

@@ -1,5 +1,5 @@
 {
-  "schema": "synexia.coding-agent.selection-examples.v1",
+  "schema": "m3.coding-agent.selection-examples.v1",
   "role": "Agent selection records; not generic runtime request bodies.",
   "examples": [
     {
@@ -24,12 +24,12 @@
     {
       "intent": "Clean selected Java folder",
       "binding_ids": [
-        "synexia.mechanical.01-upper-case-literal-suffixes",
-        "synexia.mechanical.02-modifier-order",
-        "synexia.mechanical.03-negated-equality",
-        "synexia.mechanical.04-remove-unused-imports",
-        "synexia.mechanical.05-order-imports",
-        "synexia.mechanical.06-auto-format"
+        "m3.mechanical.01-upper-case-literal-suffixes",
+        "m3.mechanical.02-modifier-order",
+        "m3.mechanical.03-negated-equality",
+        "m3.mechanical.04-remove-unused-imports",
+        "m3.mechanical.05-order-imports",
+        "m3.mechanical.06-auto-format"
       ],
       "requested_scope": {
         "kind": "FOLDER",

@@ -60,10 +60,10 @@ static void reset(int density){
 }
 
 static jarray call(JNIEnv *env,int lane,int ro,int so,int n,int mask){
- if(lane==0)return Java_com_m3_collections_M3IndexMaskCompactor_selectNative(env,NULL,(jintArray)(void *)&ints,(jbyteArray)(void *)&states,mask);
- if(lane==1)return Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative(env,NULL,(jintArray)(void *)&ints,(jbyteArray)(void *)&states,ro,n,mask);
- if(lane==2)return Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(env,NULL,(jintArray)(void *)&ints,ro,(jbyteArray)(void *)&states,so,n,mask);
- return Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(env,NULL,(jlongArray)(void *)&longs,ro,(jbyteArray)(void *)&states,so,n,mask);
+ if(lane==0)return Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative(env,NULL,(jintArray)(void *)&ints,(jbyteArray)(void *)&states,mask);
+ if(lane==1)return Java_jdk_m3_collections_M3IndexMaskCompactor_selectRangeNative(env,NULL,(jintArray)(void *)&ints,(jbyteArray)(void *)&states,ro,n,mask);
+ if(lane==2)return Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(env,NULL,(jintArray)(void *)&ints,ro,(jbyteArray)(void *)&states,so,n,mask);
+ return Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(env,NULL,(jlongArray)(void *)&longs,ro,(jbyteArray)(void *)&states,so,n,mask);
 }
 static void scenario(JNIEnv *env,int refined,int lane,int n,int pattern){
  reset(0);

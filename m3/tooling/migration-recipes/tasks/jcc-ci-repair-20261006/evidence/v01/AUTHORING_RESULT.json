@@ -6,46 +6,46 @@
       "path": ".github/workflows/m3-foundation.yml",
       "before": {
         "resource": "before-00-m3-foundation.yml.txt",
-        "sha256": "2a81b9ebfa5d477977dba4632a0e7c89f2ebb89606eb46491197536335d63fee"
+        "sha256": "1a1ddd014a5cce76e75b1e4fce5c4cd0c746a3dbf5f18ef3a1bc9dad7d8fbdd1"
       },
       "after": {
         "resource": "after-00-m3-foundation.yml.txt",
-        "sha256": "76f3b96be528f33556fde14d811e3df9462f828353967237eed1a46ccc6ce91f"
+        "sha256": "9969a19a5727bb1684d6e8443c67681a0afd52f0427d9501f4b4d363e9709982"
       },
-      "before_git_blob": "6ad9af43935d1cc7b5e471c1e7d21f8eb1538bb9",
-      "after_git_blob": "68dec98e3e0bc855a1af319855f4031025ece9bf",
+      "before_git_blob": "d32b783a32df1449a4ec28364542ea66fb984983",
+      "after_git_blob": "57bdcc788f0ebbf82afe9b97728e93ab108f5395",
       "before_bytes": 2205,
       "after_bytes": 2411,
       "mode": "100644"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
+      "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
       "before": {
         "resource": "before-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
-        "sha256": "58d01008f3dc6e79d988e855d76ba90eb0a13d39a76e7eb4027d75442389ec94"
+        "sha256": "fa5476d63c50d830de841e53b58dd7346275ce812f16d2e200ad6a4f0d016ff8"
       },
       "after": {
         "resource": "after-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
-        "sha256": "f34470a701cf71b4b4abbe1fa9a5091392a930426ec84d700f13e53edd244629"
+        "sha256": "5b3bab6188d1f33360f6d5042dac7b0c0ae599ff36c621c6c7e3f0a4debd8933"
       },
-      "before_git_blob": "63344ac5b73c30def736f560bd9aa9348df3b97f",
-      "after_git_blob": "e349a7c727592731681759ba26df5fdeb775342e",
+      "before_git_blob": "0e8c591c44c0ae52d404ee8e26c848632ec2b501",
+      "after_git_blob": "c57e91ff52de1519803049f6950e81e2129f6c93",
       "before_bytes": 5379,
       "after_bytes": 5380,
       "mode": "100644"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
+      "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
       "before": {
         "resource": "before-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
-        "sha256": "69882638771a411cf0866f789a7b3ef7e7e7040cde38a1c40ef4a743d37168e2"
+        "sha256": "6d6f4257d18c5e5a016a6c876bffcc8f5c202a65b8f019f2cf3ec1f26bfc84e8"
       },
       "after": {
         "resource": "after-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
-        "sha256": "3f3ab065d9e87e9f6095629a56b052642ec9d0883a466430e90a4a4355edd05b"
+        "sha256": "83d970effb393f67462e5cb269118e6a390d82f74f70eb16905fd4ba948a4416"
       },
-      "before_git_blob": "c1865602253b72c9d5109a6b096146e847fd86aa",
-      "after_git_blob": "8e7d6c748c2d8a9b89eb2a24de929a535a310136",
+      "before_git_blob": "faa4edaff92e400b7964e4577f07cd4d169c1892",
+      "after_git_blob": "3a2f62fdf15efb66a35b9dcd9e1051b97710cd99",
       "before_bytes": 4974,
       "after_bytes": 4975,
       "mode": "100644"

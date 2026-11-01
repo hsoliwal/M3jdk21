@@ -46,7 +46,7 @@ and licensing review. Native SWT/GC/disposal and plugin activation remain unqual
 ## Source provenance and scope
 
 Synexia donor: `cognix-eclipse-mechanics-adapters/src/main/java/com/synexia/cognix/eclipse/mechanics/adapters/SynexiaEclipseProgressMonitor.java`, Apache-2.0.
-M3 owner: `m3/collections/src/main/java/com/m3/collections/M3ProgressMonitor.java`, Apache-2.0.
+M3 owner: `m3/collections/src/main/java/jdk/m3/collections/M3ProgressMonitor.java`, Apache-2.0.
 Eclipse public interface: `org.eclipse.core.runtime.IProgressMonitor` (upstream Eclipse license applies).
 This adapter is new first-party M3 Apache-2.0 expression; no third-party Eclipse
 implementation source is copied or relicensed. The Eclipse compile dependency is

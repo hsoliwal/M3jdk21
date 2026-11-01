@@ -4,9 +4,9 @@ name: M3JDK21 three source-sealed Java21 interop compiler fixes
 on:
   pull_request:
     paths:
-      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java'
-      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryKeyRangesTest.java'
-      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveProviderFlagSelectionTest.java'
+      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3ApacheCollectionsTest.java'
+      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryKeyRangesTest.java'
+      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveProviderFlagSelectionTest.java'
       - 'm3/collections/interop/qualification/current-census-superset-20261022/**'
       - '.github/workflows/m3-interop-three-compiler-atoms-20261022.yml'
   push:
@@ -45,7 +45,7 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import hashlib
-          base = Path('m3/collections/interop/src/test/java/com/m3/collections/interop')
+          base = Path('m3/collections/interop/src/test/java/jdk/m3/collections/interop')
           original = Path('baseline') / base
           replacements = {
               'M3ApacheCollectionsTest.java': (
@@ -60,7 +60,7 @@ jobs:
                   'M3LibraryCollections.springMultiValueMap()'),
           }
           expected = {
-              'M3ApacheCollectionsTest.java': '218516ad3d49f471a20c8b5dcfbdcb88ea8e278b0466dcaf900247ff7398c8d7',
+              'M3ApacheCollectionsTest.java': 'b98412cfcc7965c0de8398b5b743f920ac3b704f0374a03c4c4f5ae50700dff9',
               'M3FiveLibraryKeyRangesTest.java': 'ef93d9a53e0b9935c6e796b55ce2c47e4d94a732c7ac9f07b5a635eb436cc467',
               'M3FiveProviderFlagSelectionTest.java': '52289c1c82f43e18d1c661ffc26ee6d640129a9483838cda3199ee99e333cc31',
           }

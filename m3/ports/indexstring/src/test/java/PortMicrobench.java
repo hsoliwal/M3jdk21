@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
-import com.m3.text.compat.M3Text;
-import com.synexia.indexstring.FrozenChars;
+import jdk.m3.text.compat.M3Text;
+import jdk.internal.m3.indexstring.FrozenChars;
 import java.lang.management.ManagementFactory;
 import java.util.function.Supplier;
 

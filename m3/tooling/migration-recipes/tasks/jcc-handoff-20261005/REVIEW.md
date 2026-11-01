@@ -47,7 +47,7 @@ Independent review found that the first fixture epoch's `Map.of` iteration could
 
 ## Descriptor history is retained, not promoted
 
-The [comparison identities](descriptor-review/COMPARISONS.json) and [target diff](descriptor-review/target-correction.diff) show the inherited drift. The source is byte-identical at historical `7b5d45bea2fce0a042e4b85347c1eb4116846c55` and selected `0b8dc32b...`, with SHA256 `0e0ddfc53acaeb28137319fd20ee5005f9d7231949ebd3106193c287f13be9b8`. Its [source diff](descriptor-review/source-unchanged.diff) is intentionally empty.
+The [comparison identities](descriptor-review/COMPARISONS.json) and [target diff](descriptor-review/target-correction.diff) show the inherited drift. The source is byte-identical at historical `7b5d45bea2fce0a042e4b85347c1eb4116846c55` and selected `0b8dc32b...`, with SHA256 `3fb76c976a34e1808f42d35cc194ba490316fab8e9d4176c071180aefb362341`. Its [source diff](descriptor-review/source-unchanged.diff) is intentionally empty.
 
 The former target hash `df17c48e54de060060e4393e5c2f3e8e2f068bad38a69576a82709cc6d4cbdb9` is verified at `f74592e363466a59b391fbbe47500c7985c9a691`. The former sync target `3ec445df10a3e8fc74aa983181f0700ac7bfbcad` is its parent and lacks that target path. Both the original candidate reference and verified historical target remain in the existing lineage fields, and the complete previous record remains in the binding receipt.
 

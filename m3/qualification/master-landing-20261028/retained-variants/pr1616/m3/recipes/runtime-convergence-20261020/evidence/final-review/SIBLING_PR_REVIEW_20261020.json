@@ -87,27 +87,27 @@
     "1538": [
       {
         "path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
-        "git_blob_sha1": "f013c9cfa3396755d50499141e2f48b74bfc69d9",
+        "git_blob_sha1": "ea45ffc91d5d45be93323061c0de8f20168a0011",
         "status": "modified",
         "additions": 28,
         "deletions": 2
       },
       {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
-        "git_blob_sha1": "a9b2f396ae9e952a5cf54cd99e5689b6a23b9517",
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java",
+        "git_blob_sha1": "590cd9209eb0e0989175ad9113b93ca6720c85b0",
         "status": "modified",
         "additions": 22,
         "deletions": 0
       },
       {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
-        "git_blob_sha1": "4a09a43ee8e963155144f88fa0a44255c373088f",
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+        "git_blob_sha1": "214f064c7cab2d3df5f9d155fc490e83ac6beb9c",
         "status": "modified",
         "additions": 7,
         "deletions": 0
       },
       {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
         "git_blob_sha1": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb",
         "status": "modified",
         "additions": 20,
@@ -115,7 +115,7 @@
       },
       {
         "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
-        "git_blob_sha1": "023ef20614b3a329f48eab2853d3b3aee628aebe",
+        "git_blob_sha1": "81616a2c5712530fbd8f6dfe076c19fc54211d14",
         "status": "modified",
         "additions": 64,
         "deletions": 25
@@ -135,36 +135,36 @@
         "deletions": 0
       },
       {
-        "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredNullNavigationProbe.java",
-        "git_blob_sha1": "71395196b1d4244c7c435addd69d0d4b5c7df2bd",
+        "path": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredNullNavigationProbe.java",
+        "git_blob_sha1": "0dcf67ac0b2fccec299f520452bb4c667aa62600",
         "status": "added",
         "additions": 123,
         "deletions": 0
       },
       {
         "path": "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSpanTest.java",
-        "git_blob_sha1": "80b5ebc5ae90097746ab04e63f722b664623b693",
+        "git_blob_sha1": "93c1c8f935d5dfa6b23b2e73cb152080c29c9958",
         "status": "added",
         "additions": 140,
         "deletions": 0
       },
       {
-        "path": "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java",
+        "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowContract.java",
         "git_blob_sha1": "411b69ea33c059d4243afedd5a1bc53b6e7f7122",
         "status": "added",
         "additions": 416,
         "deletions": 0
       },
       {
-        "path": "m3/collections/src/test/java/com/m3/collections/M3ProjectionRefinementProbe.java",
-        "git_blob_sha1": "515fa0a01cb9e00cbc914714df6835f5eaa3ed5e",
+        "path": "m3/collections/src/test/java/jdk/m3/collections/M3ProjectionRefinementProbe.java",
+        "git_blob_sha1": "338fa16a24ebf7202bd3ecac970a030b4af06633",
         "status": "added",
         "additions": 148,
         "deletions": 0
       },
       {
         "path": "m3/collections/src/test/native/m3_compactor_spans.c",
-        "git_blob_sha1": "f5a32abc817a2e5ab0a6051e2f9975058e55884b",
+        "git_blob_sha1": "065bf1f035dfcc2c127c33f843d4e5cb3f82ebf5",
         "status": "added",
         "additions": 279,
         "deletions": 0
@@ -193,50 +193,50 @@
     ],
     "1598": [
       {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
-        "git_blob_sha1": "11fa30e7cc498b7d46759c72ebae17b0edb78290",
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java",
+        "git_blob_sha1": "57464de019a63d4ffa3dbd595b93bff879d332cf",
         "status": "modified",
         "additions": 6,
         "deletions": 0
       },
       {
         "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredCowBulkContract.java",
-        "git_blob_sha1": "54aaf155cdf9cfdf1ac8a782ace077f5ad951e1f",
+        "git_blob_sha1": "674ca855427acf9d3c7018d72950f825bc4afd0f",
         "status": "added",
         "additions": 256,
         "deletions": 0
       },
       {
         "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredCowBulkTest.java",
-        "git_blob_sha1": "e0a62b8970d4c599d1fe1a09d9ee95ff1e5f7621",
+        "git_blob_sha1": "974ce09ac80ba03569a2a953403a7a7a3cc5c940",
         "status": "added",
         "additions": 13,
         "deletions": 0
       },
       {
-        "path": "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java",
-        "git_blob_sha1": "40fd2c8bb1d4c5ef403b3580ce594b887d8833b3",
+        "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowTest.java",
+        "git_blob_sha1": "88d8719a3a3b085a991056654b11010d5413af35",
         "status": "added",
         "additions": 15,
         "deletions": 0
       },
       {
-        "path": "m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseBundleSnapshot.java",
-        "git_blob_sha1": "675af2de5d049895a55a1e8d586ece77422660e5",
+        "path": "m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseBundleSnapshot.java",
+        "git_blob_sha1": "cef4b1200f0e0eb838526cf889c056b33e720f38",
         "status": "modified",
         "additions": 47,
         "deletions": 0
       },
       {
         "path": "m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseBundleOrderContract.java",
-        "git_blob_sha1": "c30b9ca62e800b721f51751c348dfec2f52cbebf",
+        "git_blob_sha1": "cf125d90119424da2f6d31c909b3cc0350ac09ba",
         "status": "added",
         "additions": 227,
         "deletions": 0
       },
       {
         "path": "m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseBundleOrderTest.java",
-        "git_blob_sha1": "eb4dff2951e0e3868eadc4b5c4140e6b524b5559",
+        "git_blob_sha1": "35860eaf33c9a6f69928d8676b4226a920e1f33a",
         "status": "added",
         "additions": 30,
         "deletions": 0
@@ -244,36 +244,36 @@
     ],
     "1599": [
       {
-        "path": "m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java",
-        "git_blob_sha1": "ffe73b52d417a6e684ccced1c026432f3b4e5376",
+        "path": "m3/core/src/jdk/m3/text/SharedLexiconPrecomputeCatalog.java",
+        "git_blob_sha1": "c78c85b6d429fe382af26599790af6176c82af70",
         "status": "modified",
         "additions": 1,
         "deletions": 0
       },
       {
         "path": "m3/eclipse/connect/src/main/java/com/m3/eclipse/connect/M3ModuleConnector.java",
-        "git_blob_sha1": "9cc3a3a86f7e8fd6d7d6df97f6b0998ce91b88a8",
+        "git_blob_sha1": "27de8c54d0cccb84bfb2acb54ae2425832313b54",
         "status": "added",
         "additions": 172,
         "deletions": 0
       },
       {
         "path": "m3/eclipse/connect/src/test/java/com/m3/eclipse/connect/M3ModuleConnectorTest.java",
-        "git_blob_sha1": "d99645c7a779c230b2b2463bfaf33c11ee1b3ce0",
+        "git_blob_sha1": "a7743295a972c759baefbfc5386d28105c55de99",
         "status": "added",
         "additions": 212,
         "deletions": 0
       },
       {
         "path": "m3/eclipse/optional-jmod/build.py",
-        "git_blob_sha1": "d625e91febe828aaf73d69348ceac2fbb1b6b582",
+        "git_blob_sha1": "636b2450bbc6a1c70ab0b40d25bf872b6292b004",
         "status": "modified",
         "additions": 54,
         "deletions": 8
       },
       {
         "path": "m3/eclipse/optional-jmod/src/test/java/com/m3/eclipse/smoke/M3ModuleImageSelfTest.java",
-        "git_blob_sha1": "1bdf496146428b0d0b562b69b311d3ab12e28eab",
+        "git_blob_sha1": "61784093b17725e2a37c756238ba251eed7dc3d7",
         "status": "added",
         "additions": 68,
         "deletions": 0
@@ -287,112 +287,112 @@
       },
       {
         "path": "m3/file/src/main/java/com/m3/file/M3ModuleResources.java",
-        "git_blob_sha1": "e6ad1b3875fb2fb1b850826aaa7aa146e332cf31",
+        "git_blob_sha1": "f531701c4c1d4dacc7d42aeecc4ee9f5a00095c5",
         "status": "added",
         "additions": 431,
         "deletions": 0
       },
       {
         "path": "m3/file/src/main/java/module-info.java",
-        "git_blob_sha1": "bda6b3b309713eef68b5866f2401120b2e24e210",
+        "git_blob_sha1": "74f499c0eba6ca7deee0e33faf50c7f193c44a64",
         "status": "modified",
         "additions": 3,
         "deletions": 1
       },
       {
         "path": "m3/file/src/test/java/com/m3/file/M3ModuleResourcesSelfTest.java",
-        "git_blob_sha1": "efea68fdc242b718ce5880f004e1cc314105dcc3",
+        "git_blob_sha1": "d93f605de22743fbe4c5fc9ebc3d8767a40de0a5",
         "status": "added",
         "additions": 570,
         "deletions": 0
       },
       {
         "path": "m3/file/src/test/java/com/m3/file/M3ModuleResourcesTest.java",
-        "git_blob_sha1": "3faf6023ac3a52ece52af5aa984308b5e367c54e",
+        "git_blob_sha1": "71e963f1b45a59a68efcd96cc1d7e1c39775cb1c",
         "status": "added",
         "additions": 16,
         "deletions": 0
       },
       {
         "path": "m3/runtime-integration/module-consumers/pom.xml",
-        "git_blob_sha1": "d095638988bc4366e63c5f7134303d64c358a0eb",
+        "git_blob_sha1": "7fcf8326fc1b06d54158ec21ef577369669bf145",
         "status": "added",
         "additions": 66,
         "deletions": 0
       },
       {
         "path": "m3/runtime-integration/module-consumers/spring/src/main/java/com/m3/runtime/spring/M3ResourcePatternResolver.java",
-        "git_blob_sha1": "392df5bfe861be6b146e9921562abb34654138f5",
+        "git_blob_sha1": "b294d32216a68537f5f5edf7e460a5a2441ac3dc",
         "status": "added",
         "additions": 107,
         "deletions": 0
       },
       {
         "path": "m3/runtime-integration/module-consumers/spring/src/main/java/org/springframework/core/io/support/PathMatchingResourcePatternResolver.java",
-        "git_blob_sha1": "015b48e9eb10dc56f104be3400c1dd8a675c3c7c",
+        "git_blob_sha1": "7d31ab9a4f848032b2c49b1c6407ad1fc89ba710",
         "status": "added",
         "additions": 1265,
         "deletions": 0
       },
       {
         "path": "m3/runtime-integration/module-consumers/spring/src/test/java/com/m3/runtime/spring/EagerDefaultAdmissionTest.java",
-        "git_blob_sha1": "36d2fddf113a788bd9194cb17b30858246316278",
+        "git_blob_sha1": "d6000f4d42368672ff003f82f56115592871a5c9",
         "status": "added",
         "additions": 68,
         "deletions": 0
       },
       {
         "path": "m3/runtime-integration/module-consumers/spring/src/test/java/com/m3/runtime/spring/M3ResourcePatternResolverTest.java",
-        "git_blob_sha1": "f32ed534b3e4c849e92811a5daac21904114acda",
+        "git_blob_sha1": "5351055292b0a3f8a793a955d18f2bfb30937c9b",
         "status": "added",
         "additions": 122,
         "deletions": 0
       },
       {
         "path": "m3/runtime-integration/module-consumers/spring/src/test/java/com/m3/runtime/spring/OrdinarySpringMain.java",
-        "git_blob_sha1": "dae61094e9d4611108e66a3e9793eac8e850a65f",
+        "git_blob_sha1": "4a3d61f66815005b8d999044f931ba8b3f75bca8",
         "status": "added",
         "additions": 48,
         "deletions": 0
       },
       {
         "path": "m3/runtime-integration/module-consumers/spring/src/test/java/com/m3/runtime/spring/OrdinarySpringModuleScanTest.java",
-        "git_blob_sha1": "01dbc8f3fe9c2f311892c6fe1161ade2b058ff6a",
+        "git_blob_sha1": "67b85d9ef31c796797e4aec1662ed6367d06597b",
         "status": "added",
         "additions": 52,
         "deletions": 0
       },
       {
         "path": "m3/runtime-integration/module-consumers/spring/src/test/java/com/m3/runtime/spring/SpringResourceSetContractTest.java",
-        "git_blob_sha1": "17acdc324e3cd4d646ee35ae082b08e1debf02ee",
+        "git_blob_sha1": "418b198be3f7725473e293488fb1f954fbe901f3",
         "status": "added",
         "additions": 40,
         "deletions": 0
       },
       {
         "path": "m3/runtime-integration/module-consumers/spring/src/test/java/com/m3/runtime/spring/duplicate/DuplicateComponents.java",
-        "git_blob_sha1": "a8ae8d3440c5c18859a9d9d430e1876924b00f2d",
+        "git_blob_sha1": "1e43a67c10d51ba08e12d0180d21d9a2b1de6c43",
         "status": "added",
         "additions": 12,
         "deletions": 0
       },
       {
         "path": "m3/runtime-integration/module-consumers/spring/src/test/java/com/m3/runtime/spring/fixtures/ContractComponents.java",
-        "git_blob_sha1": "8d574ee84d4d7097000e464d19525dfcabd8b3ba",
+        "git_blob_sha1": "f82fae73768de7a4d035cc91b8d067fe51ec33c5",
         "status": "added",
         "additions": 62,
         "deletions": 0
       },
       {
         "path": "m3/runtime-integration/module-consumers/src/test/java/com/m3/runtime/test/M3ModuleLifecycleReviewTest.java",
-        "git_blob_sha1": "0d34d471dd6f3677046956c0d5d4f2f085df3385",
+        "git_blob_sha1": "0eb1f9635067f77d02a18c00ec2660351772226d",
         "status": "added",
         "additions": 103,
         "deletions": 0
       },
       {
         "path": "m3/runtime-integration/module-consumers/src/test/java/com/m3/runtime/test/ModuleFixture.java",
-        "git_blob_sha1": "2c10b1469591fca92ad40944ae3be7ee2aae41e8",
+        "git_blob_sha1": "a795a3bef51e8065d0a6f16009f626c5543b1826",
         "status": "added",
         "additions": 130,
         "deletions": 0
@@ -401,49 +401,49 @@
   },
   "shared_production_states": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
-      "sibling_blob": "a9b2f396ae9e952a5cf54cd99e5689b6a23b9517",
-      "ours_before": "10c4d16cc9cd62d36f22646988718422caa2311e",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java",
+      "sibling_blob": "590cd9209eb0e0989175ad9113b93ca6720c85b0",
+      "ours_before": "39dde593da4de3d7caaa4c12afc3deae7ce6a9f3",
       "ours_after": "2e51db70400b83dd5e6723e094ffc1faef570fec",
       "equal_before": false,
       "equal_after": false
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
-      "sibling_blob": "4a09a43ee8e963155144f88fa0a44255c373088f",
-      "ours_before": "1a31827cd6274b5ad8eb62f3a5ce0e5e0667478f",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+      "sibling_blob": "214f064c7cab2d3df5f9d155fc490e83ac6beb9c",
+      "ours_before": "549dc05101caed368eeb04d223ad1c08943054ee",
       "ours_after": "b9eb9c75d51844abda78517f9c1116a00c414f94",
       "equal_before": false,
       "equal_after": false
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
-      "sibling_blob": "d84e5ab508002adfc79198c6741a090bb1fda55e",
-      "ours_before": "d84e5ab508002adfc79198c6741a090bb1fda55e",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java",
+      "sibling_blob": "4f416b849012c273f5d2c8adcbcd850f4c9e0df3",
+      "ours_before": "4f416b849012c273f5d2c8adcbcd850f4c9e0df3",
       "ours_after": "63c44f618cd9e93f588cbee05d904b5ccc883e79",
       "equal_before": true,
       "equal_after": false
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
-      "sibling_blob": "b81b069fb4815f0c78b17119390d7b204f6179d1",
-      "ours_before": "b81b069fb4815f0c78b17119390d7b204f6179d1",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
+      "sibling_blob": "945375ce32080537da2b6544d59f537ee8271644",
+      "ours_before": "945375ce32080537da2b6544d59f537ee8271644",
       "ours_after": "daea60beeb202d9e996f9a018fe5974738a43523",
       "equal_before": true,
       "equal_after": false
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
       "sibling_blob": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb",
-      "ours_before": "317136e66200db1d8fc72d47ff9f8cf52b4566b5",
+      "ours_before": "09c10e2b4874f70ece8c1e4392a574db652945f7",
       "ours_after": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb",
       "equal_before": false,
       "equal_after": true
     },
     {
       "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
-      "sibling_blob": "023ef20614b3a329f48eab2853d3b3aee628aebe",
-      "ours_before": "15024c40ba9b92fd50fb7823ecfa9543aba22be1",
+      "sibling_blob": "81616a2c5712530fbd8f6dfe076c19fc54211d14",
+      "ours_before": "f6471f52b0c001def6319542f01729620b0600ee",
       "ours_after": "a94368898d0c5d9b0dbedb9dcd56d4d2e39a1414",
       "equal_before": false,
       "equal_after": false
@@ -452,31 +452,31 @@
   "parent_target_overlaps": [
     {
       "path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
-      "sibling_blob": "f013c9cfa3396755d50499141e2f48b74bfc69d9",
+      "sibling_blob": "ea45ffc91d5d45be93323061c0de8f20168a0011",
       "ours_after_blob": "66b17b251b439740e6188000ad3f05121a6e0ba7",
       "equal_after": false
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
-      "sibling_blob": "a9b2f396ae9e952a5cf54cd99e5689b6a23b9517",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java",
+      "sibling_blob": "590cd9209eb0e0989175ad9113b93ca6720c85b0",
       "ours_after_blob": "2e51db70400b83dd5e6723e094ffc1faef570fec",
       "equal_after": false
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
-      "sibling_blob": "4a09a43ee8e963155144f88fa0a44255c373088f",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+      "sibling_blob": "214f064c7cab2d3df5f9d155fc490e83ac6beb9c",
       "ours_after_blob": "b9eb9c75d51844abda78517f9c1116a00c414f94",
       "equal_after": false
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
       "sibling_blob": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb",
       "ours_after_blob": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb",
       "equal_after": true
     },
     {
       "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
-      "sibling_blob": "023ef20614b3a329f48eab2853d3b3aee628aebe",
+      "sibling_blob": "81616a2c5712530fbd8f6dfe076c19fc54211d14",
       "ours_after_blob": "a94368898d0c5d9b0dbedb9dcd56d4d2e39a1414",
       "equal_after": false
     },
@@ -493,7 +493,7 @@
       "equal_after": true
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowContract.java",
       "sibling_blob": "411b69ea33c059d4243afedd5a1bc53b6e7f7122",
       "ours_after_blob": "411b69ea33c059d4243afedd5a1bc53b6e7f7122",
       "equal_after": true
@@ -539,45 +539,45 @@
       {
         "path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
         "sibling_introduced_by_pr": 1538,
-        "sibling_git_blob_sha1": "f013c9cfa3396755d50499141e2f48b74bfc69d9",
+        "sibling_git_blob_sha1": "ea45ffc91d5d45be93323061c0de8f20168a0011",
         "our_after_git_blob_sha1": "66b17b251b439740e6188000ad3f05121a6e0ba7",
-        "our_before_sha256": "f6a76836d96bc6d41033ce94b0aa760fd5f68ebcb903396bb5f6eb1618d0931a",
+        "our_before_sha256": "bd94fd32ed00274f3f1581a401742e45a94af2054f99373acfc8224f33b06ab1",
         "our_after_sha256": "e3b10822b0f0456dc7c3f4d4f34a65c68fc2915bd9bd3eab1db2b4aa7ca65c45",
         "postimage_bytes_equal": false
       },
       {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java",
         "sibling_introduced_by_pr": 1538,
-        "sibling_git_blob_sha1": "a9b2f396ae9e952a5cf54cd99e5689b6a23b9517",
+        "sibling_git_blob_sha1": "590cd9209eb0e0989175ad9113b93ca6720c85b0",
         "our_after_git_blob_sha1": "2e51db70400b83dd5e6723e094ffc1faef570fec",
-        "our_before_sha256": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75",
+        "our_before_sha256": "bb0ff9a8008521576530b0cea64d00b4f22e6e4b8424b8e5df7f416a6a8b6051",
         "our_after_sha256": "da74a8a45e475034d40a630367eb8139b8e3c12cd69f1d4adbaa251f2b4660ba",
         "postimage_bytes_equal": false
       },
       {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
         "sibling_introduced_by_pr": 1538,
-        "sibling_git_blob_sha1": "4a09a43ee8e963155144f88fa0a44255c373088f",
+        "sibling_git_blob_sha1": "214f064c7cab2d3df5f9d155fc490e83ac6beb9c",
         "our_after_git_blob_sha1": "b9eb9c75d51844abda78517f9c1116a00c414f94",
-        "our_before_sha256": "8419315c3058bce6add897b7ffa7c6763bbb6b85418bb35e190ba8a4d2dd70c4",
+        "our_before_sha256": "5308017ea910acd0f81252e88fd8e57c2c1b49d8e6f2874bab0728c110526709",
         "our_after_sha256": "dce9da78508449041db8907ef7bc44e9fcee1117bbe91db880e35c26933f9470",
         "postimage_bytes_equal": false
       },
       {
-        "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+        "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
         "sibling_introduced_by_pr": 1538,
         "sibling_git_blob_sha1": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb",
         "our_after_git_blob_sha1": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb",
-        "our_before_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+        "our_before_sha256": "6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb",
         "our_after_sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
         "postimage_bytes_equal": true
       },
       {
         "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
         "sibling_introduced_by_pr": 1538,
-        "sibling_git_blob_sha1": "023ef20614b3a329f48eab2853d3b3aee628aebe",
+        "sibling_git_blob_sha1": "81616a2c5712530fbd8f6dfe076c19fc54211d14",
         "our_after_git_blob_sha1": "a94368898d0c5d9b0dbedb9dcd56d4d2e39a1414",
-        "our_before_sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
+        "our_before_sha256": "ed13463a6972bd014a861635987e8aa6214bf7516789c4f41d4ec3d69692fe73",
         "our_after_sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026",
         "postimage_bytes_equal": false
       },
@@ -600,7 +600,7 @@
         "postimage_bytes_equal": true
       },
       {
-        "path": "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java",
+        "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowContract.java",
         "sibling_introduced_by_pr": 1538,
         "sibling_git_blob_sha1": "411b69ea33c059d4243afedd5a1bc53b6e7f7122",
         "our_after_git_blob_sha1": "411b69ea33c059d4243afedd5a1bc53b6e7f7122",
@@ -609,9 +609,9 @@
         "postimage_bytes_equal": true
       },
       {
-        "path": "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java",
+        "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexOrderWindowTest.java",
         "sibling_introduced_by_pr": 1598,
-        "sibling_git_blob_sha1": "40fd2c8bb1d4c5ef403b3580ce594b887d8833b3",
+        "sibling_git_blob_sha1": "88d8719a3a3b085a991056654b11010d5413af35",
         "our_after_git_blob_sha1": "404ef3a934c21ffd9baf96112602203489ef6680",
         "our_before_sha256": "ABSENT",
         "our_after_sha256": "69af2677ee57c22da762b275c7b16d6718877159b340a949cc6b5a2d0c2158f8",
@@ -629,7 +629,7 @@
     ]
   },
   "our_manifest_sha256": {
-    "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-runtime-convergence-20261020/manifest.tsv": "758049f662f45a5fe488ac61db14f03dd93de4a9f69d2d6f2a09f98c46e621be",
-    "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-runtime-convergence-20261020/manifest.tsv": "64350829a7c71c257b9ab899252bcce78b7cc731753fa8703ba0082ce56e0668"
+    "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-runtime-convergence-20261020/manifest.tsv": "89605cde27a600a50f346295ce5ea6ccd4f62070af3760ba4219c13222740b05",
+    "src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-runtime-convergence-20261020/manifest.tsv": "35d4c1bd13173362814c71d02f622590bf1abf204951a60a20ef42bbb46ae771"
   }
 }

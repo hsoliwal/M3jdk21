@@ -9,4 +9,4 @@ Traceback (most recent call last):
                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/proof/recipe-m3jdk21/receiver-proof/isolated-kbz9hktn/result-tamper/crate/receive.py", line 137, in qualification
     raise ValueError("SDK result changed after qualification: " + path)
-ValueError: SDK result changed after qualification: m3/collections/src/test/java/com/m3/collections/M3ProgressAdaptersPercentageTest.java
+ValueError: SDK result changed after qualification: m3/collections/src/test/java/jdk/m3/collections/M3ProgressAdaptersPercentageTest.java

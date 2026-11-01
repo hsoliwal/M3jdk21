@@ -12,7 +12,7 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
-import com.m3.collections.eclipse.impl.list.fixed.ArrayAdapter;
+import jdk.m3.collections.eclipse.impl.list.fixed.ArrayAdapter;
 import java.io.*;
 import java.util.*;
 

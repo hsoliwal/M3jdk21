@@ -1,0 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+/** Independently built Apache-2.0 immutable M3 array/value substrate. */
+module jdk.m3.arrays {
+    exports jdk.m3.arrays;
+}

@@ -45,7 +45,7 @@ is a separate authority and compatibility decision; see the
 
 ## Requirement analysis and result construction
 
-[`M3RegexRequirement`](../../m3/ports/compiletime/src/main/java/com/m3/compiletime/M3RegexRequirement.java)
+[`M3RegexRequirement`](../../m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3RegexRequirement.java)
 is a static utility with a private constructor. Its public entry points are:
 
 | Member | Source-derived contract |
@@ -122,7 +122,7 @@ match positions, successive-find state, `hitEnd` or `requireEnd`.
 
 ## Reflective Pattern-tree dependency
 
-[`M3PatternNodes`](../../m3/ports/compiletime/src/main/java/com/m3/compiletime/M3PatternNodes.java)
+[`M3PatternNodes`](../../m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3PatternNodes.java)
 is package-private. It builds one static reflective view with VarHandles into
 private JDK classes; it is not a public portable Pattern-tree API. Build-time
 analysis needs `--add-opens java.base/java.util.regex=ALL-UNNAMED` before the
@@ -156,7 +156,7 @@ not constitute qualification of every future JDK node layout.
 
 ## Content identity and collision scope
 
-[`M3ContentKey`](../../m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ContentKey.java)
+[`M3ContentKey`](../../m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ContentKey.java)
 is a public record with components/accessors `h1`, `h2`, `length`, `flags`.
 Its canonical constructor accepts arbitrary values; record equality is equality
 of those four values, not a text comparison.
@@ -184,7 +184,7 @@ trailer are not authenticity or hostile-input trust credentials.
 
 ## Image writer and exact packed layout
 
-[`M3ConstantRegexImageWriter`](../../m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ConstantRegexImageWriter.java)
+[`M3ConstantRegexImageWriter`](../../m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ConstantRegexImageWriter.java)
 has a private constructor, public `Item(String pattern, int flags,
 Analysis analysis)` record and public static `write(List<Item>, int[]
 inputSetSha256)` and `sha256Ints(String manifest)` methods.
@@ -239,7 +239,7 @@ An unreadable producer class becomes `IllegalStateException` in the writer.
 
 ## Image admission, lookup and retained ownership
 
-[`M3ConstantRegexImage`](../../m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ConstantRegexImage.java)
+[`M3ConstantRegexImage`](../../m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ConstantRegexImage.java)
 exposes:
 
 | Public member | Contract |
@@ -293,7 +293,7 @@ guarantee follows from memory mapping.
 
 ## Gate calls, fallback and concurrency
 
-[`M3ConstantRegexGate`](../../m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ConstantRegexGate.java)
+[`M3ConstantRegexGate`](../../m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ConstantRegexGate.java)
 retains a Pattern, one selected mode, decoded arrays and a boolean scratch
 stack sized to the instruction count. The private constructor chooses PURE
 for `PURE_LITERAL`, GATED for `REQUIRED`, otherwise PASS. It takes arrays from
@@ -352,9 +352,9 @@ Pattern through `compile`; it does not eliminate that initial compile cost.
 
 | Evidence body | What its assertions/calls cover | What remains unproved here |
 | --- | --- | --- |
-| [M3RegexRequirementTest](../../m3/ports/compiletime/src/test/java/com/m3/compiletime/M3RegexRequirementTest.java), five tests | Slice literals, escapes, LITERAL/COMMENTS/CASE_INSENSITIVE, supplementary text, single-character cross-check, conservative AND/OR/optional/repeat/lookbehind rules, admission bit, invalid/CANON_EQ, and split-fastpath helper | Unopened-package initialization, graph/walk budget edges, changed JDK layouts, arbitrary record inputs and all flag/surrogate combinations |
-| [M3ConstantRegexImageTest](../../m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ConstantRegexImageTest.java), four tests | Repeat-write byte equality; key/flags lookup and decoded atoms/trigrams/input digest; four chosen byte offsets and a short buffer rejected; changed producer fingerprint rejected after trailer recomputation; bounded stock comparisons for find/matches/replaceAll/split, miss/null image and embedded compile flags | Exhaustive byte corruption, malicious well-checksummed lanes, hash collisions, buffer mutation, races, non-String/null/error edges, resource limits and all Matcher state |
-| [M3SiteRecorder](../../m3/ports/compiletime/src/main/java/com/m3/compiletime/M3SiteRecorder.java) and [M3InventoryState](../../m3/ports/compiletime/src/main/java/com/m3/compiletime/M3InventoryState.java) | Classifies each retained distinct regex key once, stores Analysis, site/API/unit counters; split fastpaths and unknown flags are separate accounting paths | Whole-application constant discovery or semantic rewriting; see [inventory reference](compiletime-inventory-reference.md) |
+| [M3RegexRequirementTest](../../m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3RegexRequirementTest.java), five tests | Slice literals, escapes, LITERAL/COMMENTS/CASE_INSENSITIVE, supplementary text, single-character cross-check, conservative AND/OR/optional/repeat/lookbehind rules, admission bit, invalid/CANON_EQ, and split-fastpath helper | Unopened-package initialization, graph/walk budget edges, changed JDK layouts, arbitrary record inputs and all flag/surrogate combinations |
+| [M3ConstantRegexImageTest](../../m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ConstantRegexImageTest.java), four tests | Repeat-write byte equality; key/flags lookup and decoded atoms/trigrams/input digest; four chosen byte offsets and a short buffer rejected; changed producer fingerprint rejected after trailer recomputation; bounded stock comparisons for find/matches/replaceAll/split, miss/null image and embedded compile flags | Exhaustive byte corruption, malicious well-checksummed lanes, hash collisions, buffer mutation, races, non-String/null/error edges, resource limits and all Matcher state |
+| [M3SiteRecorder](../../m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3SiteRecorder.java) and [M3InventoryState](../../m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3InventoryState.java) | Classifies each retained distinct regex key once, stores Analysis, site/API/unit counters; split fastpaths and unknown flags are separate accounting paths | Whole-application constant discovery or semantic rewriting; see [inventory reference](compiletime-inventory-reference.md) |
 | [Harvester](compiletime-harvest-reference.md#harvester-outputs-and-self-check) and [differential driver](compiletime-harvest-reference.md#differential-inputs-and-comparison-domains) | Writer/readback kind/atom-count self-check, finite sampled stock comparisons and separate oracle-corpus candidate checks | Universal soundness, deployment integration, current executed results or hostile-input qualification |
 
 All nine direct JUnit methods are **read, NOT_RUN**. The image test name
@@ -371,9 +371,9 @@ blob SHA-1 values, not runtime receipts.
 
 | Source owner | Git blob |
 | --- | --- |
-| [M3PatternNodes](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3PatternNodes.java) | `0b640e6355aef525203648919d0da63ed32bdbec` |
-| [M3RegexRequirement](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3RegexRequirement.java) | `bc7f55e9ea68d210263ae82bc8dab403ea63ef70` |
-| [M3ContentKey](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ContentKey.java) | `734e35504bacb787a1e47bc7e39fac7212b1e810` |
-| [M3ConstantRegexImageWriter](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ConstantRegexImageWriter.java) | `c19bd540361a8f4e3e2e7333103791bb6deb910c` |
-| [M3ConstantRegexImage](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ConstantRegexImage.java) | `0b4a62e543ab2b6ddfe794edd1ec4ee2a83db319` |
-| [M3ConstantRegexGate](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ConstantRegexGate.java) | `a8d3b1301d51c10aacab1fa4ce6bd9c2c17075ab` |
+| [M3PatternNodes](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3PatternNodes.java) | `0b8bc735b876629db73e1ddbbd0cd796bc34e777` |
+| [M3RegexRequirement](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3RegexRequirement.java) | `6dd3479f9ed3db72e3a498a5bdeea9b08715d50f` |
+| [M3ContentKey](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ContentKey.java) | `9d562196c1de0f57bb52f24f9c3aef788008b050` |
+| [M3ConstantRegexImageWriter](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ConstantRegexImageWriter.java) | `ff6a82e42ffb621ee1e49e5e2764b3fef75730c2` |
+| [M3ConstantRegexImage](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ConstantRegexImage.java) | `7523bc8e105c5365385c055feb85c0deb9504b2e` |
+| [M3ConstantRegexGate](https://github.com/hsoliwal/M3jdk21/blob/8758991645037126985d56f16a208fec8a1eef38/m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ConstantRegexGate.java) | `4c9c295041e47ea43d66c4d56daca527dcaadd49` |

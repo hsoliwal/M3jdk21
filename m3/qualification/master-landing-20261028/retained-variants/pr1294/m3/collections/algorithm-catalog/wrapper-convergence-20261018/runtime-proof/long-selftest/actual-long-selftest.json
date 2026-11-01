@@ -6,7 +6,7 @@
     "-Xmx128m",
     "-cp",
     "/workspace/scratch/8762dba320ce/qualification/wrappers/current-runtime/module/m3/collections/target/classes:/workspace/scratch/8762dba320ce/qualification/wrappers/current-runtime/module/m3/collections/target/test-classes",
-    "com.m3.collections.M3LongIndexPathMasksSelfTest"
+    "jdk.m3.collections.M3LongIndexPathMasksSelfTest"
   ],
   "started_utc": "2026-10-18T05:58:36.655976+00:00",
   "ended_utc": "2026-10-18T05:58:36.762326+00:00",
@@ -15,27 +15,27 @@
   "random_cases": 1500,
   "inputs": {
     "main_source": {
-      "path": "/workspace/scratch/8762dba320ce/qualification/wrappers/current-runtime/module/m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasks.java",
-      "sha256": "77a99d047931c70c7a45a067c081748bae499b7f3002bfc08f7b2f47a01adf84"
+      "path": "/workspace/scratch/8762dba320ce/qualification/wrappers/current-runtime/module/m3/collections/src/main/java/jdk/m3/collections/M3LongIndexPathMasks.java",
+      "sha256": "1e170fb2bea5b058218a64bcc2a8041e93c6b0ebb51858593e65ae87b018d7f8"
     },
     "shared_source": {
-      "path": "/workspace/scratch/8762dba320ce/qualification/wrappers/current-runtime/module/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
-      "sha256": "e91152a0bb34178995835266ff7c52ae22d87ec6324d171415aed28e293794d1"
+      "path": "/workspace/scratch/8762dba320ce/qualification/wrappers/current-runtime/module/m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java",
+      "sha256": "db88aef334eadb9a40f34a6ca4077ff96d6af29f75d30c090b55bc76b45e567f"
     },
     "test_source": {
-      "path": "/workspace/scratch/8762dba320ce/qualification/wrappers/current-runtime/module/m3/collections/src/test/java/com/m3/collections/M3LongIndexPathMasksSelfTest.java",
-      "sha256": "a7afd8a3162ce5def1b67bbc2b106d1f9d8a1c71c7780fd11a02a747eb1e151b"
+      "path": "/workspace/scratch/8762dba320ce/qualification/wrappers/current-runtime/module/m3/collections/src/test/java/jdk/m3/collections/M3LongIndexPathMasksSelfTest.java",
+      "sha256": "1ea9394ad582389b99e1f68b817a47e0479cc54c3860a62a652c24446faea655"
     },
     "main_class": {
-      "path": "/workspace/scratch/8762dba320ce/qualification/wrappers/current-runtime/module/m3/collections/target/classes/com/m3/collections/M3LongIndexPathMasks.class",
+      "path": "/workspace/scratch/8762dba320ce/qualification/wrappers/current-runtime/module/m3/collections/target/classes/jdk/m3/collections/M3LongIndexPathMasks.class",
       "sha256": "e38521378534e832df06a18d0d8a4d7c546c41a6e25038b2327963480fa677cf"
     },
     "shared_class": {
-      "path": "/workspace/scratch/8762dba320ce/qualification/wrappers/current-runtime/module/m3/collections/target/classes/com/m3/collections/M3IndexPathMasks.class",
+      "path": "/workspace/scratch/8762dba320ce/qualification/wrappers/current-runtime/module/m3/collections/target/classes/jdk/m3/collections/M3IndexPathMasks.class",
       "sha256": "4b15135fd76ef19a97a3f602e0901c18440c885e27d73b2ed18537a781a1d7de"
     },
     "test_class": {
-      "path": "/workspace/scratch/8762dba320ce/qualification/wrappers/current-runtime/module/m3/collections/target/test-classes/com/m3/collections/M3LongIndexPathMasksSelfTest.class",
+      "path": "/workspace/scratch/8762dba320ce/qualification/wrappers/current-runtime/module/m3/collections/target/test-classes/jdk/m3/collections/M3LongIndexPathMasksSelfTest.class",
       "sha256": "f42896bacf11e4af1c6992a03c07c3d7385544188bfeea0d049aea0e6cf5831a"
     },
     "java": {
@@ -44,7 +44,7 @@
     }
   },
   "input_recheck": "PASS",
-  "runtime_receipt_sha256": "bf9bbd87748c76d0b2da931bc1246114eea49118e5b2ecc3cd5d2bf19aedc568",
+  "runtime_receipt_sha256": "82e76d78b19dd5ab9e6987e6593c14be5dd3e714051ce1444a82b21fe154fd11",
   "stdout_stderr_sha256": "22ed0714ae1e45ad173a9b8b997a3098cc36908ff11619171ee1cb430915c623",
   "baseline_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49"
 }

@@ -1,4 +1,4 @@
-/* M3JDK21 adaptation: C/JNI/header identifiers only; Synexia remains the source owner. */
+/* M3JDK 21 adaptation: C/JNI/header identifiers only; Synexia remains the source owner. */
 /* SPDX-License-Identifier: Apache-2.0 */
 #ifndef M3JDK_INTERNAL_STATE_RELATION_H
 #define M3JDK_INTERNAL_STATE_RELATION_H

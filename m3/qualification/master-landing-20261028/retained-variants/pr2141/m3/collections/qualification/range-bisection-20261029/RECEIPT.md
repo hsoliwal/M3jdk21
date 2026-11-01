@@ -6,13 +6,13 @@ Target baseline `master` commit: `052ebcf7a26352c0285251eb671ee6c3640fd3ff`. Exa
 `327a56f12e09ae82ea0d0f10bdcf3a0628f1636f`; SHA-256:
 `8aa30b4b23c638b53f5fe9e6f895bb3205a51af1df0bf2afdefb38d4c21ab090`.
 Sealed postimage SHA-256:
-`b0773d86378844ca38e9a299f27918bae7df2494676aacda8baea25e96b576c9`.
+`713edd11f2ce9c57f0ee46ab8599c5a78985cb97a5fe32c35560531959dcd205`.
 New JUnit source SHA-256:
-`2426af84aa8fe86e20c246db9ed7880b48be12d038e18e92937a2b68e2674ba9`.
+`c288526e970e7e720792e044abda54174ec1f52d240c848b49515c8309dffd8f`.
 
 ## Changed owners
 
-- `m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java`: replace linear first/last range scans with existing signed-long
+- `m3/collections/src/main/java/jdk/m3/collections/M3LongRangeSet.java`: replace linear first/last range scans with existing signed-long
   `M3LaneSearch` lower/upper bounds, and compute union extrema from the
   boundary slots. Disjoint sorted nonadjacent intervals guarantee equivalence.
 - `m3/collections/src/test/java/com/m3/collections/M3LongRangeSetBisectionTest.java`: independent 20,000-operation boolean-lane oracle, signed extrema,

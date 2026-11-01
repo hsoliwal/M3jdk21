@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # Current M3 five-provider interop source admission — 34 owners
 
-M3JDK21 product receiver stacked on target #1210 at exact commit 25d0ceae8645d141b976b4722049d2cca70dc9b6; Synexia owns the reusable Maven/OpenRewrite source-sealed template recipe. The historical five-file recipe and original manifest (Git blob bdc0cab41cd4033421388fbd44f37203d765f57e) are IMMUTABLE and all four historical non-factory owners are unchanged.
+M3JDK21 product receiver stacked on target #1210 at exact commit 25d0ceae8645d141b976b4722049d2cca70dc9b6; Synexia owns the reusable Maven/OpenRewrite source-sealed template recipe. The historical five-file recipe and original manifest (Git blob caf83a853a4bd6d80120140ff59a3e527ee233fa) are IMMUTABLE and all four historical non-factory owners are unchanged.
 
 The original current-census script tracked just 13 Java source/test paths while the newer independently admitted JDK, Guava, Eclipse Collections, Apache Commons Collections and Spring SDK owner tree contains exactly 34: 18 production files and 16 tests. The 2026-10-17 run 39045561291 failed its exact-head source-census gate because 21 existing files were unadmitted. This successor documents and seals each current tracked path to BOTH its SHA-256 bytes and Git blob identity, extending the exact ALLOWED_PATHS set to 34. Keep the existing five historical predecessor rules, symlink/drift rejection, suspicious new file refusal, and synthetic unit tests, extending the cardinality fixture to 34.
 

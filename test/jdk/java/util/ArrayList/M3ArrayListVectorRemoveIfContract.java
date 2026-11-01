@@ -19,7 +19,7 @@
 
 /*
  * @test
- * @summary M3JDK21 ArrayList and Vector removeIf preserves large-mask callback and reference contracts
+ * @summary M3JDK 21 ArrayList and Vector removeIf preserves large-mask callback and reference contracts
  * @run main M3ArrayListVectorRemoveIfContract
  */
 import java.util.ArrayList;

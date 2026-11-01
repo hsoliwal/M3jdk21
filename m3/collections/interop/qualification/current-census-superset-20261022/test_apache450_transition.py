@@ -36,7 +36,7 @@ class Apache450TransitionTest(unittest.TestCase):
                 original.replace('M3ApacheBagContractTest.java',
                                  'M3ApacheBagRuntimeTest.java', 1),
                 original.replace('PENDING_REAL_DONOR_JUNIT', 'PASS', 1),
-                original.replace('ac35841fb84a28d86390843e5a3dadcb390f069a',
+                original.replace('4a88b2321a1295ce10b05ef897d6c2fa1e265a13',
                                  '9' * 40, 1),
             ):
                 target.write_text(tampered, encoding='utf-8')

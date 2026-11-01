@@ -1,0 +1,1269 @@
+{
+  "schema": "M3_INTEGRATED_RECOVERY_SDK_ATTEMPT/1",
+  "task": "m3-integrated-refinement-20261021",
+  "status": "PASS",
+  "scope": "source-replay-only",
+  "dependency_lane": "offline-cached-artifacts",
+  "full_source_vendored_reactor": "NOT_RUN",
+  "receiving_runtime_gates": "SEPARATE",
+  "started_at": "2026-10-21T01:17:41.193638+00:00",
+  "duration_seconds": "77.138",
+  "exit_code": 0,
+  "timed_out": false,
+  "command": [
+    "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+    "-B",
+    "-ntp",
+    "-f",
+    "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/pom.xml",
+    "-Dmaven.repo.local=/tmp/m3-build-m2",
+    "-Dparser.classpath=/workspace/scratch/206049dfb270/canonical-work/parser-owners-001/owner-00:/workspace/scratch/206049dfb270/canonical-work/parser-owners-001/owner-01:/workspace/scratch/206049dfb270/canonical-work/parser-owners-001/owner-02:/workspace/scratch/206049dfb270/canonical-work/parser-owners-001/owner-03:/tmp/m3-resource-m2/org/eclipse/platform/org.eclipse.core.runtime/3.35.0/org.eclipse.core.runtime-3.35.0.jar:/tmp/m3-resource-m2/org/eclipse/platform/org.eclipse.osgi/3.24.300/org.eclipse.osgi-3.24.300.jar:/tmp/m3-resource-m2/org/eclipse/platform/org.eclipse.equinox.common/3.21.0/org.eclipse.equinox.common-3.21.0.jar:/tmp/m3-resource-m2/org/eclipse/platform/org.eclipse.core.jobs/3.15.900/org.eclipse.core.jobs-3.15.900.jar:/tmp/m3-resource-m2/org/eclipse/platform/org.eclipse.equinox.preferences/3.12.100/org.eclipse.equinox.preferences-3.12.100.jar:/tmp/m3-resource-m2/org/osgi/org.osgi.service.prefs/1.1.2/org.osgi.service.prefs-1.1.2.jar:/tmp/m3-resource-m2/org/osgi/osgi.annotation/8.0.1/osgi.annotation-8.0.1.jar:/tmp/m3-resource-m2/org/eclipse/platform/org.eclipse.core.contenttype/3.9.900/org.eclipse.core.contenttype-3.9.900.jar:/tmp/m3-resource-m2/org/eclipse/platform/org.eclipse.equinox.app/1.7.600/org.eclipse.equinox.app-1.7.600.jar:/tmp/m3-resource-m2/org/eclipse/platform/org.eclipse.core.resources/3.24.0/org.eclipse.core.resources-3.24.0.jar:/tmp/m3-resource-m2/org/eclipse/platform/org.eclipse.core.expressions/3.9.600/org.eclipse.core.expressions-3.9.600.jar:/tmp/m3-resource-m2/org/eclipse/platform/org.eclipse.core.filesystem/1.11.400/org.eclipse.core.filesystem-1.11.400.jar:/tmp/m3-resource-m2/net/java/dev/jna/jna-platform/5.18.1/jna-platform-5.18.1.jar:/tmp/m3-resource-m2/net/java/dev/jna/jna/5.18.1/jna-5.18.1.jar:/tmp/m3-resource-m2/org/eclipse/platform/org.eclipse.equinox.registry/3.12.600/org.eclipse.equinox.registry-3.12.600.jar:/tmp/m3-resource-m2/org/osgi/org.osgi.framework/1.10.0/org.osgi.framework-1.10.0.jar:/tmp/m3-resource-m2/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/tmp/m3-resource-m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/tmp/m3-resource-m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/tmp/m3-resource-m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/tmp/m3-resource-m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/tmp/m3-resource-m2/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/tmp/m3-resource-m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/tmp/m3-resource-m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar",
+    "-o",
+    "test"
+  ],
+  "cwd": "/workspace/scratch/206049dfb270/synexia",
+  "java_release_sha256": "e5a4248b028f6ecd6d43fb1a57fff0f900ef62e026501e95875a60b0cf904338",
+  "source_inputs_unchanged": true,
+  "compiled_parser_dependencies_unchanged": true,
+  "suites": [
+    {
+      "name": "jdk.internal.m3.rewrite.M3IntegratedRefinementRecipeTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "74.573"
+    },
+    {
+      "name": "jdk.internal.m3.rewrite.memory.M3CorrectionMemoryConformanceTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.163"
+    }
+  ],
+  "counts": {
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "artifacts": [
+    {
+      "path": "PARSER_DEPENDENCIES.json",
+      "sha256": "14732221593669c2b98232f427f55a79a3c8a313762f9f50122d70a85a9b7cf1",
+      "bytes": 109941
+    },
+    {
+      "path": "PARSER_DEPENDENCIES_AFTER.json",
+      "sha256": "14732221593669c2b98232f427f55a79a3c8a313762f9f50122d70a85a9b7cf1",
+      "bytes": 109941
+    },
+    {
+      "path": "SOURCE_INPUTS.json",
+      "sha256": "a5c242a4caa109e6b4368292276b9e46450ec6d8022e11089319efd7c645027a",
+      "bytes": 35094
+    },
+    {
+      "path": "SOURCE_INPUTS_AFTER.json",
+      "sha256": "a5c242a4caa109e6b4368292276b9e46450ec6d8022e11089319efd7c645027a",
+      "bytes": 35094
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/SOURCE_SEALS.json",
+      "sha256": "b67bfeb515519ed2c24af57feec651a7860a22ce7cb74f7047a319b9a98f0095",
+      "bytes": 19164
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/apply_receiver.py",
+      "sha256": "199b76317afc66b4ff61f70a626ad01ba4e2d678bfd3def95ff336d249a2b78d",
+      "bytes": 7338
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/attribution/DependencyCustody.java",
+      "sha256": "85c247eae783f7a0f1c6db9529904f032a3f5429237998b2596cf78e7ee88fca",
+      "bytes": 723
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/attribution/expected-methods.txt",
+      "sha256": "c40af8f3259bb4fcf78a65d06d880bc7d2b65dc913f78c547fa4200ceefcc351",
+      "bytes": 403
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/phases.tsv",
+      "sha256": "c7691f409ac820efb41cd749ee14cfd3660954c0587200eed11c8c8d627dd63f",
+      "bytes": 2072
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/pom.xml",
+      "sha256": "556a8edbd5236692ef4b059b586c63d30a71cd8a5676d63ce020fa14a00d7561",
+      "bytes": 4045
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/.github/workflows/m3-collections.yml",
+      "sha256": "8d52122c6bd7bc4f52b0606704188a7040fc853c2dbefe6756b7b2a1792da504",
+      "bytes": 7464
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/.github/workflows/m3-eclipse-framework-forward-20261017.yml",
+      "sha256": "e055566033e090e9a2114d360e3aef29369813defbcdea385f47ba444ff6f1e0",
+      "bytes": 5067
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/.github/workflows/m3-object-progress-candidate.yml",
+      "sha256": "1b28049139575d9587ad48f72d5dfd5f2be89dd4027f3945daaa628c6bcb80eb",
+      "bytes": 1203
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/collections/qualification/full-java-jni-20261018/verify.py",
+      "sha256": "bd94fd32ed00274f3f1581a401742e45a94af2054f99373acfc8224f33b06ab1",
+      "bytes": 11623
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java",
+      "sha256": "5dce16ffebd5d3cfdd7fdf77f509eff6784ffb7453ae76270b3ba39289df6c4a",
+      "bytes": 4764
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+      "sha256": "5308017ea910acd0f81252e88fd8e57c2c1b49d8e6f2874bab0728c110526709",
+      "bytes": 31807
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java",
+      "sha256": "3d6d6bfb82e9030a91da386e38bdec6a9bf41c268ff15c83d7c122db983f2a28",
+      "bytes": 14233
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework/pom.xml",
+      "sha256": "15002d6c3b3ab9ca8d8ecb820a260d41ce7d9f1fd04f811fa9af396808ae4f2e",
+      "bytes": 2966
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseBundleSnapshot.java",
+      "sha256": "e5116e8dd992cda03ef61d22073378266ebf5ea618806e31ea78732adf2dde0f",
+      "bytes": 2710
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseExtensionSnapshot.java",
+      "sha256": "725f07a4f2be1dfb2b9334cff3dadf098c35e56f6e76a2cdbbd84cef83995c70",
+      "bytes": 2699
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseIndexedSnapshot.java",
+      "sha256": "8ce80830b0a7fd5c33cd6c03e961c7d9b56efaec2d0e9af8392d3c23a5dfc5d7",
+      "bytes": 3020
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseResourceDeltaSnapshot.java",
+      "sha256": "21a893d7f976e5bf2d42998335d99556edfffb266016cce15d5784ebc1c19274",
+      "bytes": 3602
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseRuntimeActivator.java",
+      "sha256": "960bf2ac8568de59c57e5dd0b6735d0f1abe821208edb74dcb97812cae8eed38",
+      "bytes": 2909
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseRuntimeServices.java",
+      "sha256": "5c9ef7d3ea9bb6de5df5b809418c5c938949fae5eef338843f385f0d72cc199e",
+      "bytes": 501
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseDeltaIdentitySetTest.java",
+      "sha256": "44192b4116f99413f62dc5bed280d065de8bab0efffdd5441af628d43ade51da",
+      "bytes": 4071
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseFrameworkSnapshotsTest.java",
+      "sha256": "2e5a91ddb11677caf49bf344f1d5ac733408803339aed8b9e7f631b48260100f",
+      "bytes": 7884
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseRuntimeActivatorTest.java",
+      "sha256": "37c8c48defbdda10d719c34eb17aa4ef9a43128ef15e372cb7ea69708133ec9f",
+      "bytes": 3128
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/tooling/module-packs/collections/build.py",
+      "sha256": "7df7f538bdb2f759406421eaae1d60b5ad0b497c6d0c2c44d1b39ee836ca42ad",
+      "bytes": 10293
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py",
+      "sha256": "7ecd6418dcd4097ca23b3382c4d87d18ed2a02bc8df2a503421c23793fcfd10b",
+      "bytes": 1838
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/src/java.base/share/classes/java/util/concurrent/ScheduledExecutorService.java",
+      "sha256": "3a914503908cd93c321c356f215eb3e022a064c1c124331d0dd2edb429bdd7a5",
+      "bytes": 9732
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/prepare_packet.py",
+      "sha256": "6a7f09ecff0cfeb9a515e817a23e22b82f87241371ac478c7d6c403c9f74583c",
+      "bytes": 6927
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/qualify.py",
+      "sha256": "82fad5f4cffc8f4ad39c7c9baca543cc18bad12fe6f5a3d0b799cdf7fd116a4a",
+      "bytes": 9709
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/M3IntegratedRefinementRecipeTest.java",
+      "sha256": "d477f820c8bf4712b36d4a1d9002b2fa82a62a88175c1f84cd7fd03e978eefe0",
+      "bytes": 31463
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/memory/M3CorrectionMemoryConformanceTest.java",
+      "sha256": "785b81a9df3449af64d6037960cd8e2a9bc82f2d6398e4d9e7636e6e693c12f3",
+      "bytes": 462
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/memory/M3RecoveryMemory.java",
+      "sha256": "88696555f28134225ecd731c5c81065dd53912361d46bfe3f79f60d877c62936",
+      "bytes": 17824
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/memory/M3RecoveryMemoryTest.java",
+      "sha256": "b27e96e73af86cb12cf453a0b4f27b49bdae24073aa9e435061b177d02969a78",
+      "bytes": 11573
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/sealed/SealHash.java",
+      "sha256": "316da9bf8b642f9d8ad9e055328aec0f70ddfe0f63c4649d5dc35d062fd7a11c",
+      "bytes": 1859
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/verify_sources.py",
+      "sha256": "603a47418a7dbd6bd38708bff31bce26b4b4a70e3bdc2d85a7d829395e24b445",
+      "bytes": 2324
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+      "bytes": 1052
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "92cc90c46a1ca672a016a89c0d65e6909e090264ba1aa76a85b7fa333470e38b",
+      "bytes": 31505
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "3b4f7649fc3ee38df62a6dc9b318e8845da6574f7e48b4cd7a948b58e266d46f",
+      "bytes": 19983
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
+      "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0",
+      "bytes": 8268
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-integrated-refinement-20261021.yml",
+      "sha256": "edb738beb0be2adf17bbcb1a68ff380b5783822380303767f5b5dbc9286b7092",
+      "bytes": 5680
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-009/manifest.tsv",
+      "sha256": "3b91e5605def4036f85b24462b425561ab65667927917db8473ae1c8a92d7280",
+      "bytes": 211
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-009/postimage.java.txt",
+      "sha256": "7ed233a90b497b9d3fb508430526dfa9aee5d4b82b8976de841fd33717cab77b",
+      "bytes": 1628
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-010/manifest.tsv",
+      "sha256": "8432e3de931e8561a11e6e9f63097574aa843872f9df1b6f07dbe004c9a58d35",
+      "bytes": 214
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-010/postimage.java.txt",
+      "sha256": "0a5b583a832e88b2f078d40f01dc4542831a0203f80b985dbedf89e3a3e17e85",
+      "bytes": 3144
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-012/manifest.tsv",
+      "sha256": "3db7b02f15baeb2f30aca951cd9b545c5465bd731ec410e035e23ba77b49bae5",
+      "bytes": 225
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-012/postimage.java.txt",
+      "sha256": "a9b51ed9c0859ef27d308ea89e1b41cf3283dfd54478a36b1d89d6ab66711b0c",
+      "bytes": 4997
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-013/manifest.tsv",
+      "sha256": "2a51616bd90c973d65aab82345e757651bb572f68ed9caccbb6440eb0c6f4c44",
+      "bytes": 218
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-013/postimage.java.txt",
+      "sha256": "dce9da78508449041db8907ef7bc44e9fcee1117bbe91db880e35c26933f9470",
+      "bytes": 32255
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-014/manifest.tsv",
+      "sha256": "e992a02684c00398c7ef6ca103f1bf4b0b7dc0d84c99c76b955aef22c1632619",
+      "bytes": 224
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-014/postimage.java.txt",
+      "sha256": "1b304f64d9c5225311112e45d0fbf792d958cfb5b0acd54034b310ac217183d5",
+      "bytes": 14587
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-015/manifest.tsv",
+      "sha256": "b84a096aabacd5f4f52d1f1c871d0d0a141d442aba7308e4ecc36c64da528dd4",
+      "bytes": 182
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-015/postimage.java.txt",
+      "sha256": "a1cf85feec6621af519dc03d86389945527f7c6544947a28ce49ac2328db8773",
+      "bytes": 6592
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-016/manifest.tsv",
+      "sha256": "e45cb6f8bbe0937d64cace174bb83ee0a7fdbe7222fc60a7fee10959a80ee45f",
+      "bytes": 178
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-016/postimage.java.txt",
+      "sha256": "294b4a465a3189f8115210b626a9a44dcb19e53f6e73ddf98395bdc13a11a488",
+      "bytes": 440
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-017/manifest.tsv",
+      "sha256": "304c76fb022c0763ae0021844de6250676fa2f9bebe8538ba62a48cf04ec2b6e",
+      "bytes": 171
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-017/postimage.java.txt",
+      "sha256": "998bc0564c810b309a3e50959eff492ba34005d136d6fa241cdddf18edba2556",
+      "bytes": 11611
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-018/manifest.tsv",
+      "sha256": "5d6d2ab811eea444a3b36e8f2af4f7589fe7780d7543fd88c94e1b1f2455b780",
+      "bytes": 167
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-018/postimage.java.txt",
+      "sha256": "875ae162364ad9ea588c5224543115177b0dc30d6b20cb44eb0fa20d17022647",
+      "bytes": 354
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-021/manifest.tsv",
+      "sha256": "cb960e3ecef7ec4d3c1319655293551de928c905ec29bb65d9c3baa03695c60b",
+      "bytes": 179
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-021/postimage.java.txt",
+      "sha256": "2496bdc6c9f84c59afe0631ef429c8ab5558ff946a0d0b878fa48cb85fb5f60d",
+      "bytes": 4104
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-022/manifest.tsv",
+      "sha256": "afcf194eef122ab46fa2610ff43c5e0fe7b3a30d8d217466b4e9da114c9a709e",
+      "bytes": 171
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-022/postimage.java.txt",
+      "sha256": "0e62436dad1fc1634b2cf9da8882f1e8a4579a0b466f1a40e8a274c33da7dfec",
+      "bytes": 5174
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-023/manifest.tsv",
+      "sha256": "59339ab88f8524986fab46db607b36c093b16840145caea6b97f2c919ea1caf7",
+      "bytes": 183
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-023/postimage.java.txt",
+      "sha256": "a007137e532ba8c75e826e684ab16d78791eb34f54da69af3d4d70a981b7366b",
+      "bytes": 4196
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-024/manifest.tsv",
+      "sha256": "7f3f442d32ad7545f39b0c38aa1cb4a99a7efefc239d9f0917b539c2e30cdf4a",
+      "bytes": 188
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-024/postimage.java.txt",
+      "sha256": "477ff26a926afec5e678f88814bf0b389198474ce166914259da51b8be6273ab",
+      "bytes": 6769
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-025/manifest.tsv",
+      "sha256": "58bf8274be479f402e19e6708af87ade477efa457b747e6daae814f67dc0a127",
+      "bytes": 175
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-025/postimage.java.txt",
+      "sha256": "124bed935425c23286e8dad54048a851b3cfb031b523b140e6bb3bec8e9d27b7",
+      "bytes": 5237
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-029/manifest.tsv",
+      "sha256": "657579e144dbab8ed601dd8fa187602d4fe44e679d90098d670c1c3f30b1b3d0",
+      "bytes": 238
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-029/postimage.java.txt",
+      "sha256": "e5116e8dd992cda03ef61d22073378266ebf5ea618806e31ea78732adf2dde0f",
+      "bytes": 2710
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-030/manifest.tsv",
+      "sha256": "6cf0bc2c6e5583efa9fa03202e7fc0061ada83a3f45d112ca0e04e828c39c476",
+      "bytes": 241
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-030/postimage.java.txt",
+      "sha256": "725f07a4f2be1dfb2b9334cff3dadf098c35e56f6e76a2cdbbd84cef83995c70",
+      "bytes": 2699
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-031/manifest.tsv",
+      "sha256": "82558aefa9978d0ac7999002a488526648bf4f55a776b00564c9c23a1022bd29",
+      "bytes": 239
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-031/postimage.java.txt",
+      "sha256": "8ce80830b0a7fd5c33cd6c03e961c7d9b56efaec2d0e9af8392d3c23a5dfc5d7",
+      "bytes": 3020
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-032/manifest.tsv",
+      "sha256": "dea22f04b41e76452f5a35e6f18444d770b949849dafac27aba6a45f3ece02b0",
+      "bytes": 245
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-032/postimage.java.txt",
+      "sha256": "503e90a18d3f645b3effcb5423c265cf1abca313112b455b90240dcabefd3cef",
+      "bytes": 12393
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-033/manifest.tsv",
+      "sha256": "9ccc7c58fd8d76b754dfbb1df0864d627871d2e1ee9ea6cd6081f19d78a8f266",
+      "bytes": 240
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-033/postimage.java.txt",
+      "sha256": "960bf2ac8568de59c57e5dd0b6735d0f1abe821208edb74dcb97812cae8eed38",
+      "bytes": 2909
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-034/manifest.tsv",
+      "sha256": "1540bd6cc337190d8f664056744350a5be7b3c1e26a33b70d0eff108bb78c563",
+      "bytes": 239
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-034/postimage.java.txt",
+      "sha256": "5c9ef7d3ea9bb6de5df5b809418c5c938949fae5eef338843f385f0d72cc199e",
+      "bytes": 501
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-035/manifest.tsv",
+      "sha256": "e16bcb8d703950a1f12b61a8bfefedd2f4ca94d55f4003b4c9a1bab220a87c89",
+      "bytes": 244
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-035/postimage.java.txt",
+      "sha256": "44192b4116f99413f62dc5bed280d065de8bab0efffdd5441af628d43ade51da",
+      "bytes": 4071
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-036/manifest.tsv",
+      "sha256": "551916f4601bb436cccc0da993a704cb1d938ab7872a38de24dd70a7f7875d28",
+      "bytes": 246
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-036/postimage.java.txt",
+      "sha256": "2e5a91ddb11677caf49bf344f1d5ac733408803339aed8b9e7f631b48260100f",
+      "bytes": 7884
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-037/manifest.tsv",
+      "sha256": "14d37aa39ab42ec685e8485c3a35ec4d0cb25e0281bc796bfaa320980fcfc9d8",
+      "bytes": 192
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-037/postimage.java.txt",
+      "sha256": "8759dbe391f8f20f8dab5051d08862d4ffaf30e2dd4e75b7471411ab30cf9289",
+      "bytes": 17594
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-038/manifest.tsv",
+      "sha256": "0bb2e3102ffedd9e194e1ddcfdac88cb869bce1455f2923e759cced3d1f3d4bb",
+      "bytes": 244
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-038/postimage.java.txt",
+      "sha256": "37c8c48defbdda10d719c34eb17aa4ef9a43128ef15e372cb7ea69708133ec9f",
+      "bytes": 3128
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-042/manifest.tsv",
+      "sha256": "3623cf02c96b6e01b944fafc8ab4153970350a6de4e80758f454a6dd6634e74c",
+      "bytes": 183
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-042/postimage.java.txt",
+      "sha256": "32881654d117127b11be68a2511a0d5860a3032f0e7ca1ada0332c7f648e0c90",
+      "bytes": 6118
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-047/manifest.tsv",
+      "sha256": "e17e0fbe35f2fe699e7531a7e69832d7a2c0f9a7f8408db9f91a028b2d4f99ef",
+      "bytes": 228
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-047/postimage.java.txt",
+      "sha256": "97ada5bb138bcf47b5ac8b168c36a5ff17936acf64e83c4e7f3a7151b279cd3d",
+      "bytes": 15916
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-048/manifest.tsv",
+      "sha256": "25a36eda3517bba93e484d5320a4be18ebbb9ec00c21f4208cd183bddf79ec88",
+      "bytes": 158
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-048/postimage.java.txt",
+      "sha256": "07e0d48234769058b425c01777bfadce3af4bb1633d1ba66e78605fd12d9c480",
+      "bytes": 24510
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-001/manifest.tsv",
+      "sha256": "725cab8c6b45b0a73b1062c4721fa456e960500fd4fd109c5ed2f72b5196ffac",
+      "bytes": 181
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-001/postimage.txt",
+      "sha256": "871d309a9e061205c1c6d3deff63568dfeac69155b89fc906ce32a482e8ea947",
+      "bytes": 7596
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-002/manifest.tsv",
+      "sha256": "b5780db8efd547820a31976849912197cc9b0adfec46e37c9e4fded1535a23df",
+      "bytes": 204
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-002/postimage.txt",
+      "sha256": "73727306149bdfb0836857638d0e0f3527cf967bf9c0982f67a27a5d22ef1918",
+      "bytes": 6244
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-003/manifest.tsv",
+      "sha256": "b9830b32ae246e49f9f84bf8ccc3b01f6c2983f191baf7134f74af8c06d23023",
+      "bytes": 195
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-003/postimage.txt",
+      "sha256": "56dda91dd9934451a5501035e3b4b666626ecd23550dfe33c094dc282045b91d",
+      "bytes": 5720
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-004/manifest.tsv",
+      "sha256": "4c0bce0438b2dc93e3d2d4c8634b2cf8c13fb92e488c69fae30baeb7588668bc",
+      "bytes": 151
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-004/postimage.txt",
+      "sha256": "ea4470322312aff688188a2c02f628851f3c858204f0cc7801b0c5c3abf98f79",
+      "bytes": 5440
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-005/manifest.tsv",
+      "sha256": "c83e2f2195b54393c02d48c05e33d80a7e6408d1f4ed7eff6cdde725d1257ed7",
+      "bytes": 148
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-005/postimage.txt",
+      "sha256": "2172590fb288c1d8a96aad4f544f96f59ea8f25b9d491869bb2353c4cd21b836",
+      "bytes": 4274
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-006/manifest.tsv",
+      "sha256": "90c3beb9bc97bac4ec59222b6ea8fdc7d9fbc158530fc74bee7756b969c9e599",
+      "bytes": 206
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-006/postimage.txt",
+      "sha256": "ff4856bf3d68c63a059b7700631543a453fc5d7552efdcfb80ac3b7e4bd4dae1",
+      "bytes": 11673
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-007/manifest.tsv",
+      "sha256": "f037c76dc7e2751649622e1fefe1c80d337741ac11880091182ab23fd281eeac",
+      "bytes": 153
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-007/postimage.txt",
+      "sha256": "f5f513a0f65e2847767e65766daa39b3b5b33b88ff8376faf1248df01f7e224d",
+      "bytes": 6734
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-008/manifest.tsv",
+      "sha256": "7ff0da67120e0e3df6ff4b246a4eccee1186e83ab689929431f0f81524ce5741",
+      "bytes": 164
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-008/postimage.txt",
+      "sha256": "9d798af724646d706d7260291622221756503ad46f8ba76e0fc8b30f02b62272",
+      "bytes": 157483
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-011/manifest.tsv",
+      "sha256": "054654026c1028e892f8fa65f997c7ec4a7a15a1cea18aac09ff6d13353ccc2f",
+      "bytes": 153
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-011/postimage.txt",
+      "sha256": "ccb96655df8458c0bda1c5d8b12c7b61d8dc00ea6b74b89469f7f32ad4726463",
+      "bytes": 10414
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-019/manifest.tsv",
+      "sha256": "8064cec338eacdae8a2bbe2bdc4e434a7a3a202b8a498b5e39cb2bec9f871574",
+      "bytes": 155
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-019/postimage.txt",
+      "sha256": "097aa0453736d6b3d13272a5d12e3562a25ec26cc56a5154cbc01195a0cb2ef2",
+      "bytes": 3498
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-020/manifest.tsv",
+      "sha256": "959ce1182224a6874fcba2ed59425ab83d3f58afd1a5ed8971ec445443148e14",
+      "bytes": 152
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-020/postimage.txt",
+      "sha256": "b7c7c07a300ed7e2d83aacdc48c9af30eaf89e1c4d61a2bd42d32ab316f3cadd",
+      "bytes": 6635
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-026/manifest.tsv",
+      "sha256": "d3be7ce15375379f68c0a973b1f87bfbf1921a5bd60ebb9eaa8ddfd6dabd5a6e",
+      "bytes": 173
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-026/postimage.txt",
+      "sha256": "15002d6c3b3ab9ca8d8ecb820a260d41ce7d9f1fd04f811fa9af396808ae4f2e",
+      "bytes": 2966
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-027/manifest.tsv",
+      "sha256": "56699bfe01b4b963f2211947b371f4201730e718f0521a3f850260e77972557d",
+      "bytes": 156
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-027/postimage.txt",
+      "sha256": "40977e98f0d556cfb2730da4b526ede005412aed774c10adcb29456f865a872b",
+      "bytes": 4527
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-028/manifest.tsv",
+      "sha256": "66649a6f1993308e412c2e347bcdecbe0a348a4eafef980a8289b2f961e1688c",
+      "bytes": 156
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-028/postimage.txt",
+      "sha256": "5ce3e500b7ab49f944c896833d9877e465bdd84fb46d9cafeb9f8bf7bc13ece0",
+      "bytes": 6942
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-039/manifest.tsv",
+      "sha256": "af41b5424f3b2a45b33e27cd987a76adc0ef68cd8c59a18a0a43b859c8851370",
+      "bytes": 151
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-039/postimage.txt",
+      "sha256": "470eb027d5842680262d15c56b17b9a78591e713fc0fc4ba9ac89a0aa50629f0",
+      "bytes": 3286
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-040/manifest.tsv",
+      "sha256": "d449cf3d904d5f5162d23599ca84686da12c1f09f478e907671a061501297293",
+      "bytes": 147
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-040/postimage.txt",
+      "sha256": "a0962ac611bbb03f5c2d5038acf1b1ed2b1871fe7a82fabb3264423c7a819431",
+      "bytes": 7214
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-041/manifest.tsv",
+      "sha256": "19fda2ef3e7e7dcb9f420c20ce40d0815ae10481ceeb775b3287a65d2370a0bc",
+      "bytes": 153
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-041/postimage.txt",
+      "sha256": "813d1c2d6e2641673fd741a1b1231c7b34b20c411439c1fea8f29e0d70c1471d",
+      "bytes": 4524
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-043/manifest.tsv",
+      "sha256": "9e0f11bb1e4a0f67a6ea537a1dab697fc9514995712590ce010299ca96011ee6",
+      "bytes": 147
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-043/postimage.txt",
+      "sha256": "635c8de8abb48adb1263518f837e4820a4dc5dad7c6c3b8aaefb4548e8094c0e",
+      "bytes": 12994
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-044/manifest.tsv",
+      "sha256": "0e9e453d825789ba3e71416ba9b906911adb21e5ce3a352c302888f5ac402331",
+      "bytes": 189
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-044/postimage.txt",
+      "sha256": "9d234928ec6c951c66bc22bfce8c2379e8d646a3e13d43cc69fa1b6a24db9464",
+      "bytes": 14308
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-045/manifest.tsv",
+      "sha256": "c451cd687f9bd6d3c3ae55c20b0781a68642a16c6588ac9e7de32252dd63456d",
+      "bytes": 147
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-045/postimage.txt",
+      "sha256": "90a8a865d0b44b6b241fa19eecf6bf4d46c2a21a2ab6aab5cb02ece144fa6c3b",
+      "bytes": 4722
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-046/manifest.tsv",
+      "sha256": "b2152eac47c50fa5210b3a093f2d4932de5a43c0663263ab5a51b6ae7bb357ec",
+      "bytes": 214
+    },
+    {
+      "path": "inputs/m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-046/postimage.txt",
+      "sha256": "19c8ac41b3f25e43a7053d6a8a24cb2256806200b0ab64f58e83ada246ccea76",
+      "bytes": 2113
+    },
+    {
+      "path": "maven.log",
+      "sha256": "1aa44bc2cb3e77e792f3109716214127123c4258fc9de4c5aa5676afed3f0d89",
+      "bytes": 2698
+    },
+    {
+      "path": "named-recipe.yml",
+      "sha256": "edb738beb0be2adf17bbcb1a68ff380b5783822380303767f5b5dbc9286b7092",
+      "bytes": 5680
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-001.tsv",
+      "sha256": "e8d2c2dcad6cd98ef96763b06e7be1a25fb1f50afa3e2392006604ba151164b1",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-002.tsv",
+      "sha256": "3cd9089dc37d798d63ea72fe29d1eace90a9ba3bc9c94af84b82fd6963b9235b",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-003.tsv",
+      "sha256": "44eaa088c072082ec9b200712bb15f0a52cad813bc3ba6591b8f4a8e64f3a109",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-004.tsv",
+      "sha256": "be4429dc785a8f7d17806b94c6aaaea188d638904230a5385bd11c6a29fc9c94",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-005.tsv",
+      "sha256": "2cc478ee0e5e09ff3f0c577631f648b2751dab080475db0ba7a1f6fe71048c3c",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-006.tsv",
+      "sha256": "11fc7ed9d8d24a6a7814e4ec25ab15e8df7e7d376fd981d4b1bbcbaa631ecc2a",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-007.tsv",
+      "sha256": "563af3eafcb3577b831bd6af2c9c2a081e63db0f20510e30baf62c860c78f290",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-008.tsv",
+      "sha256": "6132764e3a80037adb6fe4da30e860cf733056d91afbf5da88b7822cafb5abe5",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-009.tsv",
+      "sha256": "9506c45897cb211f8b9fb3c95139e33ac01f102debf096dd7d584d0d855b750f",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-010.tsv",
+      "sha256": "74059576eb2118b99ce02992b175b217a97b3f6e39ced9bfb6885fcdf68a7f08",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-011.tsv",
+      "sha256": "7b34a68ce6f28db7daa90266e8e9ba9e641bacae793f9f908aabd2b8c6191950",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-012.tsv",
+      "sha256": "622e56a646348ee594b337bd7f708aefec58f3860d72dea8bba6290c35e75e44",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-013.tsv",
+      "sha256": "fb73df6bfb6388ceef244c95bddefa4378ff59a2f578ecf605414fa6bc8d4eda",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-014.tsv",
+      "sha256": "e8741fc854b065185990ffaeb02630b98c30980be5698720e967ccbe2a1d477b",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-015.tsv",
+      "sha256": "3599885f530abf1938943d3420cd054bf84063ed87bd65de5db031e3edfb815a",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-016.tsv",
+      "sha256": "308d3135aca8d2d6a51bea9cf2a80d978777e118afd6c1d76c8327d3449563d0",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-017.tsv",
+      "sha256": "6a5a726f613f15e0d4dd97241a3d26e0d92a320e7bd84946607f378249865ac6",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-018.tsv",
+      "sha256": "b9bcdd04a03bc24ee7c816017e8bd493626610df7ec17317a5f6586e880021e0",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-019.tsv",
+      "sha256": "9339937d6a572d67627ab7b681031542993ab9e5fa0d0701e3bf345bd7c369ad",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-020.tsv",
+      "sha256": "59e8e5e24403817cbe3d0ce16151213598c0b0d7e986d90cce4bacff28f92fb1",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-021.tsv",
+      "sha256": "317e409d459831d815e2160c71301753a24e0b98b96a99c52447f3f927fe00db",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-022.tsv",
+      "sha256": "7073466cb56f5a7fc8419ea663721ac253ef1ee88835d8491dd236bc5e187fcf",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-023.tsv",
+      "sha256": "9b4f7b19079b0be528e633be46064018f4c4acad21e6cf872cd236a70278db59",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-024.tsv",
+      "sha256": "2ab107e22d7ff6d376909e89e4f156bfaff919829774e103188d496cba8654d4",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-025.tsv",
+      "sha256": "26c5d5d85ca9d064602f159df095247dacc521d7de72695010ba354bea6835ae",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-026.tsv",
+      "sha256": "3a6d1356ae259c55619534be37cacd506933d4b20881c6c9f8a20556a55079fc",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-027.tsv",
+      "sha256": "31493d3953a8cee99d9b28d1c800b3d43d821caf9579e0b410f77f84f38557c6",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-028.tsv",
+      "sha256": "7f7352df153af422252453070deb9ba85521c48cd20ec7198e8dbd0421523d03",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-029.tsv",
+      "sha256": "a7d88b8b966ee602167863c16b211d04ac6345e97c29ad694c9f20ba4363b3e3",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-030.tsv",
+      "sha256": "48d0010c1142a4d1af76f4a2baefcae70afc38e4b2df6e0ea7be3689c3c5d201",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-031.tsv",
+      "sha256": "5042f613fb21be778eee7318c763d519c8ae09c97105f7074782dd472e612101",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-032.tsv",
+      "sha256": "83d4cab9c62ef8517536b167d0ac687671b62cd342ea60afc96a278d769f8874",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-033.tsv",
+      "sha256": "502ebe148c299fb784c8e03fba97693154efc7b490c7a8c4a9e4fd6190fe29ff",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-034.tsv",
+      "sha256": "be2a711dba633c49dc9803cc0127ab8c2d9366ef90a36b5d07ab73e31558be65",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-035.tsv",
+      "sha256": "fde168b1adffd05a565d8c7f0c43599665cadc2682bfea84d4e1e150e981ff80",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-036.tsv",
+      "sha256": "acf62dc7ef658d6b756a48f3a85b76d14fabdf18548def1349007f42c4a547aa",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-037.tsv",
+      "sha256": "94e6102e9754bfb936964dd9ed54dfa63b2731c217fd3043ff20be2863dd5d0c",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-038.tsv",
+      "sha256": "72fd8bb7cb44afaf948b07298fe82584828bd0b7e17b9a802a3e2d6f1451e4e8",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-039.tsv",
+      "sha256": "3b2d2d96fb7d4c3fc38651edd6a9770491cb81da5d33e5e2af85d178d77c1914",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-040.tsv",
+      "sha256": "8eb8c2097256017d64b7a81cd7192c19207e9c2b7611d3cf47a35b5c2fbaf7f9",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-041.tsv",
+      "sha256": "8d2c32d88a9c2e5ace56825ad502705b87d52a20c9b7ccc871ed0399f0e8fcc3",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-042.tsv",
+      "sha256": "ed3a54ba641c173bdde9508d9e8979ebf5fe6f67a8e9f7592816648fd3eb7737",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-043.tsv",
+      "sha256": "4713c5619d3df4c38967172305a3d9ec1104533c5e36bae53ea9f0366b1115c1",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-044.tsv",
+      "sha256": "47d35d108915fd6d5150670ca23420b1df65f4d8d2761b1a253d033baae25574",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-045.tsv",
+      "sha256": "0ef00b8362cfc3d434103bec7257cd6749b37b4bfe741324481efae0d148ffba",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-046.tsv",
+      "sha256": "ab860303e1cd51c00e7129e77ec460efe34eae814b658d877532d58507c05340",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-047.tsv",
+      "sha256": "077c5887583a4e7ab6a139b0ae7abe17f0dfbb43cdae8e2dadbd84fc394bac40",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-048.tsv",
+      "sha256": "74cad6d43dd9965ed8458acc69600f17e29af9dd501b7cc004c3e9aa0131a9e3",
+      "bytes": 439
+    },
+    {
+      "path": "proof-status.tsv",
+      "sha256": "032831ab07a284006c052cafcbd91c9299ba99b0fdd7c7b2472d80efeb3912d1",
+      "bytes": 90
+    },
+    {
+      "path": "receiver/.github/workflows/m3-collections.yml",
+      "sha256": "871d309a9e061205c1c6d3deff63568dfeac69155b89fc906ce32a482e8ea947",
+      "bytes": 7596
+    },
+    {
+      "path": "receiver/.github/workflows/m3-eclipse-framework-forward-20261017.yml",
+      "sha256": "73727306149bdfb0836857638d0e0f3527cf967bf9c0982f67a27a5d22ef1918",
+      "bytes": 6244
+    },
+    {
+      "path": "receiver/.github/workflows/m3-object-progress-candidate.yml",
+      "sha256": "56dda91dd9934451a5501035e3b4b666626ecd23550dfe33c094dc282045b91d",
+      "bytes": 5720
+    },
+    {
+      "path": "receiver/m3/collections/algorithm-catalog/masked-sort-fusion-20261021.tsv",
+      "sha256": "ea4470322312aff688188a2c02f628851f3c858204f0cc7801b0c5c3abf98f79",
+      "bytes": 5440
+    },
+    {
+      "path": "receiver/m3/collections/algorithm-catalog/resource-change-20261021.tsv",
+      "sha256": "2172590fb288c1d8a96aad4f544f96f59ea8f25b9d491869bb2353c4cd21b836",
+      "bytes": 4274
+    },
+    {
+      "path": "receiver/m3/collections/qualification/full-java-jni-20261018/verify.py",
+      "sha256": "ff4856bf3d68c63a059b7700631543a453fc5d7552efdcfb80ac3b7e4bd4dae1",
+      "bytes": 11673
+    },
+    {
+      "path": "receiver/m3/collections/qualification/masked-sort-fusion-20261021/README.md",
+      "sha256": "f5f513a0f65e2847767e65766daa39b3b5b33b88ff8376faf1248df01f7e224d",
+      "bytes": 6734
+    },
+    {
+      "path": "receiver/m3/collections/qualification/masked-sort-fusion-20261021/SOURCE_IDENTITY.json",
+      "sha256": "9d798af724646d706d7260291622221756503ad46f8ba76e0fc8b30f02b62272",
+      "bytes": 157483
+    },
+    {
+      "path": "receiver/m3/collections/qualification/masked-sort-fusion-20261021/src/test/java/jdk/m3/collections/M3CollectionSurfaceProbe.java",
+      "sha256": "7ed233a90b497b9d3fb508430526dfa9aee5d4b82b8976de841fd33717cab77b",
+      "bytes": 1628
+    },
+    {
+      "path": "receiver/m3/collections/qualification/masked-sort-fusion-20261021/src/test/java/jdk/m3/collections/M3MaskedSortAllocationProbe.java",
+      "sha256": "0a5b583a832e88b2f078d40f01dc4542831a0203f80b985dbedf89e3a3e17e85",
+      "bytes": 3144
+    },
+    {
+      "path": "receiver/m3/collections/qualification/masked-sort-fusion-20261021/verify.py",
+      "sha256": "ccb96655df8458c0bda1c5d8b12c7b61d8dc00ea6b74b89469f7f32ad4726463",
+      "bytes": 10414
+    },
+    {
+      "path": "receiver/m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java",
+      "sha256": "a9b51ed9c0859ef27d308ea89e1b41cf3283dfd54478a36b1d89d6ab66711b0c",
+      "bytes": 4997
+    },
+    {
+      "path": "receiver/m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+      "sha256": "dce9da78508449041db8907ef7bc44e9fcee1117bbe91db880e35c26933f9470",
+      "bytes": 32255
+    },
+    {
+      "path": "receiver/m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java",
+      "sha256": "1b304f64d9c5225311112e45d0fbf792d958cfb5b0acd54034b310ac217183d5",
+      "bytes": 14587
+    },
+    {
+      "path": "receiver/m3/collections/src/test/java/jdk/m3/collections/M3FilteredEndpointRestorationContract.java",
+      "sha256": "a1cf85feec6621af519dc03d86389945527f7c6544947a28ce49ac2328db8773",
+      "bytes": 6592
+    },
+    {
+      "path": "receiver/m3/collections/src/test/java/jdk/m3/collections/M3FilteredEndpointRestorationTest.java",
+      "sha256": "294b4a465a3189f8115210b626a9a44dcb19e53f6e73ddf98395bdc13a11a488",
+      "bytes": 440
+    },
+    {
+      "path": "receiver/m3/collections/src/test/java/jdk/m3/collections/M3MaskedSortFusionContract.java",
+      "sha256": "998bc0564c810b309a3e50959eff492ba34005d136d6fa241cdddf18edba2556",
+      "bytes": 11611
+    },
+    {
+      "path": "receiver/m3/collections/src/test/java/jdk/m3/collections/M3MaskedSortFusionTest.java",
+      "sha256": "875ae162364ad9ea588c5224543115177b0dc30d6b20cb44eb0fa20d17022647",
+      "bytes": 354
+    },
+    {
+      "path": "receiver/m3/eclipse/core-runtime/algorithm-catalog/jobs-executor-20261021.tsv",
+      "sha256": "097aa0453736d6b3d13272a5d12e3562a25ec26cc56a5154cbc01195a0cb2ef2",
+      "bytes": 3498
+    },
+    {
+      "path": "receiver/m3/eclipse/core-runtime/qualification/M3_ECLIPSE_JOBS_20261021.md",
+      "sha256": "b7c7c07a300ed7e2d83aacdc48c9af30eaf89e1c4d61a2bd42d32ab316f3cadd",
+      "bytes": 6635
+    },
+    {
+      "path": "receiver/m3/eclipse/core-runtime/src/main/java/jdk/m3/eclipse/runtime/M3EclipseJobScheduler.java",
+      "sha256": "2496bdc6c9f84c59afe0631ef429c8ab5558ff946a0d0b878fa48cb85fb5f60d",
+      "bytes": 4104
+    },
+    {
+      "path": "receiver/m3/eclipse/core-runtime/src/main/java/jdk/m3/eclipse/runtime/M3EclipseJobs.java",
+      "sha256": "0e62436dad1fc1634b2cf9da8882f1e8a4579a0b466f1a40e8a274c33da7dfec",
+      "bytes": 5174
+    },
+    {
+      "path": "receiver/m3/eclipse/core-runtime/src/test/java/jdk/m3/eclipse/runtime/M3EclipseJobSchedulerTest.java",
+      "sha256": "a007137e532ba8c75e826e684ab16d78791eb34f54da69af3d4d70a981b7366b",
+      "bytes": 4196
+    },
+    {
+      "path": "receiver/m3/eclipse/core-runtime/src/test/java/jdk/m3/eclipse/runtime/M3EclipseJobsCompatibilityTest.java",
+      "sha256": "477ff26a926afec5e678f88814bf0b389198474ce166914259da51b8be6273ab",
+      "bytes": 6769
+    },
+    {
+      "path": "receiver/m3/eclipse/core-runtime/src/test/java/jdk/m3/eclipse/runtime/M3EclipseJobsTest.java",
+      "sha256": "124bed935425c23286e8dad54048a851b3cfb031b523b140e6bb3bec8e9d27b7",
+      "bytes": 5237
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/pom.xml",
+      "sha256": "15002d6c3b3ab9ca8d8ecb820a260d41ce7d9f1fd04f811fa9af396808ae4f2e",
+      "bytes": 2966
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/qualification/resource-change-20261021/README.md",
+      "sha256": "40977e98f0d556cfb2730da4b526ede005412aed774c10adcb29456f865a872b",
+      "bytes": 4527
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/qualification/resource-change-20261021/verify.py",
+      "sha256": "5ce3e500b7ab49f944c896833d9877e465bdd84fb46d9cafeb9f8bf7bc13ece0",
+      "bytes": 6942
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseBundleSnapshot.java",
+      "sha256": "e5116e8dd992cda03ef61d22073378266ebf5ea618806e31ea78732adf2dde0f",
+      "bytes": 2710
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseExtensionSnapshot.java",
+      "sha256": "725f07a4f2be1dfb2b9334cff3dadf098c35e56f6e76a2cdbbd84cef83995c70",
+      "bytes": 2699
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseIndexedSnapshot.java",
+      "sha256": "8ce80830b0a7fd5c33cd6c03e961c7d9b56efaec2d0e9af8392d3c23a5dfc5d7",
+      "bytes": 3020
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseResourceDeltaSnapshot.java",
+      "sha256": "503e90a18d3f645b3effcb5423c265cf1abca313112b455b90240dcabefd3cef",
+      "bytes": 12393
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseRuntimeActivator.java",
+      "sha256": "960bf2ac8568de59c57e5dd0b6735d0f1abe821208edb74dcb97812cae8eed38",
+      "bytes": 2909
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/src/main/java/jdk/m3/eclipse/framework/M3EclipseRuntimeServices.java",
+      "sha256": "5c9ef7d3ea9bb6de5df5b809418c5c938949fae5eef338843f385f0d72cc199e",
+      "bytes": 501
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseDeltaIdentitySetTest.java",
+      "sha256": "44192b4116f99413f62dc5bed280d065de8bab0efffdd5441af628d43ade51da",
+      "bytes": 4071
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseFrameworkSnapshotsTest.java",
+      "sha256": "2e5a91ddb11677caf49bf344f1d5ac733408803339aed8b9e7f631b48260100f",
+      "bytes": 7884
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseResourceChangeSnapshotTest.java",
+      "sha256": "8759dbe391f8f20f8dab5051d08862d4ffaf30e2dd4e75b7471411ab30cf9289",
+      "bytes": 17594
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/src/test/java/jdk/m3/eclipse/framework/M3EclipseRuntimeActivatorTest.java",
+      "sha256": "37c8c48defbdda10d719c34eb17aa4ef9a43128ef15e372cb7ea69708133ec9f",
+      "bytes": 3128
+    },
+    {
+      "path": "receiver/m3/runtime-integration/scheduled-progress-20261021/CATALOGUE.tsv",
+      "sha256": "470eb027d5842680262d15c56b17b9a78591e713fc0fc4ba9ac89a0aa50629f0",
+      "bytes": 3286
+    },
+    {
+      "path": "receiver/m3/runtime-integration/scheduled-progress-20261021/README.md",
+      "sha256": "a0962ac611bbb03f5c2d5038acf1b1ed2b1871fe7a82fabb3264423c7a819431",
+      "bytes": 7214
+    },
+    {
+      "path": "receiver/m3/runtime-integration/scheduled-progress-20261021/SOURCE_PIN.json",
+      "sha256": "813d1c2d6e2641673fd741a1b1231c7b34b20c411439c1fea8f29e0d70c1471d",
+      "bytes": 4524
+    },
+    {
+      "path": "receiver/m3/runtime-integration/scheduled-progress-20261021/src/test/java/LegacyScheduledClient.java",
+      "sha256": "32881654d117127b11be68a2511a0d5860a3032f0e7ca1ada0332c7f648e0c90",
+      "bytes": 6118
+    },
+    {
+      "path": "receiver/m3/runtime-integration/scheduled-progress-20261021/verify.py",
+      "sha256": "635c8de8abb48adb1263518f837e4820a4dc5dad7c6c3b8aaefb4548e8094c0e",
+      "bytes": 12994
+    },
+    {
+      "path": "receiver/m3/tooling/module-packs/collections/build.py",
+      "sha256": "9d234928ec6c951c66bc22bfce8c2379e8d646a3e13d43cc69fa1b6a24db9464",
+      "bytes": 14308
+    },
+    {
+      "path": "receiver/m3/tooling/module-packs/collections/tests/test_native_abi.py",
+      "sha256": "90a8a865d0b44b6b241fa19eecf6bf4d46c2a21a2ab6aab5cb02ece144fa6c3b",
+      "bytes": 4722
+    },
+    {
+      "path": "receiver/m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py",
+      "sha256": "19c8ac41b3f25e43a7053d6a8a24cb2256806200b0ab64f58e83ada246ccea76",
+      "bytes": 2113
+    },
+    {
+      "path": "receiver/src/java.base/share/classes/java/util/concurrent/ScheduledExecutorService.java",
+      "sha256": "97ada5bb138bcf47b5ac8b168c36a5ff17936acf64e83c4e7f3a7151b279cd3d",
+      "bytes": 15916
+    },
+    {
+      "path": "receiver/test/jdk/java/util/concurrent/ProgressJob/M3ScheduledProgress.java",
+      "sha256": "07e0d48234769058b425c01777bfadce3af4bb1633d1ba66e78605fd12d9c480",
+      "bytes": 24510
+    },
+    {
+      "path": "recipe-proof.tsv",
+      "sha256": "07adf97653024f7bfa811c961e3a4d67af5b2bb5c5f5fd338c93fc06b5931806",
+      "bytes": 6904
+    },
+    {
+      "path": "surefire-reports/TEST-jdk.internal.m3.rewrite.M3IntegratedRefinementRecipeTest.xml",
+      "sha256": "9bcdc514889f10726e8a99551918f8e1993e87437508c3ad2ddf44b467c8fb3b",
+      "bytes": 15159
+    },
+    {
+      "path": "surefire-reports/TEST-jdk.internal.m3.rewrite.memory.M3CorrectionMemoryConformanceTest.xml",
+      "sha256": "4bb74a704b41daca4d694acbf50c5c9dd5f6002dedc67abe842adf4c5393a6dd",
+      "bytes": 15113
+    },
+    {
+      "path": "surefire-reports/jdk.internal.m3.rewrite.M3IntegratedRefinementRecipeTest.txt",
+      "sha256": "688cc6f6f209633cb1216f3b6870340c1ca0ab66d3c55e7822d6894335f41e57",
+      "bytes": 354
+    },
+    {
+      "path": "surefire-reports/jdk.internal.m3.rewrite.memory.M3CorrectionMemoryConformanceTest.txt",
+      "sha256": "3ec5cb7fb9d2a33495e2eb2a1217b8644d43241631a7ef818fca0ecb1c754218",
+      "bytes": 370
+    }
+  ]
+}

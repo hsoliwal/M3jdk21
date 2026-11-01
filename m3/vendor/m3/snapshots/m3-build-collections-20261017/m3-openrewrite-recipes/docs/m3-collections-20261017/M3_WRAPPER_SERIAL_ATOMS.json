@@ -1,0 +1,42 @@
+{
+  "status": "CANDIDATE_PAYLOAD_NOT_TARGET_APPLICATION",
+  "baselineCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+  "engine": "jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe",
+  "steps": [
+    {
+      "ordinal": 1,
+      "crate": "filtered-wrapper-descending-cursor-20261017",
+      "recipe": "jdk.internal.m3.M3FilteredWrapperDescendingCursor20261017",
+      "displayName": "Remove private descending iterator view construction",
+      "target": "m3-common/src/main/java/jdk/internal/m3/common/collections/M3FilteredViews.java",
+      "beforeSha256": "e96f70593c52c21f43e3b46dfe60481b41fcc190302508cfbbd23df2fd044a5f",
+      "afterSha256": "fd382040d092d249374d729b843c61a5e0431f0c6b8ca757d626ebde5c2855b6",
+      "manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/filtered-wrapper-descending-cursor-20261017/manifest.tsv",
+      "template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/filtered-wrapper-descending-cursor-20261017/template-00.txt"
+    },
+    {
+      "ordinal": 2,
+      "crate": "filtered-wrapper-empty-map-20261017",
+      "recipe": "jdk.internal.m3.M3FilteredWrapperEmptyMap20261017",
+      "displayName": "Remove private entry export wrappers from emptiness checks",
+      "target": "m3-common/src/main/java/jdk/internal/m3/common/collections/M3FilteredViews.java",
+      "beforeSha256": "fd382040d092d249374d729b843c61a5e0431f0c6b8ca757d626ebde5c2855b6",
+      "afterSha256": "ba12bcdd6a5ec1129d4babc8aa7766382ad6a04dc79f210214b427842e9dcefc",
+      "manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/filtered-wrapper-empty-map-20261017/manifest.tsv",
+      "template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/filtered-wrapper-empty-map-20261017/template-00.txt"
+    }
+  ],
+  "contractTestsFrozenBeforeAuthoring": "evidence/frozen-test-inputs.json",
+  "historicalInstallers": "Unchanged; retain original preconditions and source receipts.",
+  "performanceClaim": "Removes private construction paths. No speedup or typical JVM allocation measurement is claimed.",
+  "delivery": {
+    "crate": "filtered-wrapper-private-construction-20261017",
+    "recipe": "jdk.internal.m3.M3FilteredWrapperPrivateConstruction20261017",
+    "target": "m3-common/src/main/java/jdk/internal/m3/common/collections/M3FilteredViews.java",
+    "beforeSha256": "e96f70593c52c21f43e3b46dfe60481b41fcc190302508cfbbd23df2fd044a5f",
+    "afterSha256": "ba12bcdd6a5ec1129d4babc8aa7766382ad6a04dc79f210214b427842e9dcefc",
+    "manifest": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/filtered-wrapper-private-construction-20261017/manifest.tsv",
+    "template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/filtered-wrapper-private-construction-20261017/template-00.txt"
+  },
+  "deliveryRationale": "Whole-file exact-hash forward steps are not a convergent composite: baseline->A refuses already-B. Qualify intermediate atoms serially, then deliver one exact baseline->B crate that accepts its final postimage unchanged. Retain intermediate resources as isolated qualification evidence; do not register them as a sequential named delivery recipe or widen their preconditions."
+}

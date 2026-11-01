@@ -17,7 +17,7 @@
   "source_content_changes": 0,
   "engine_changes": 0,
   "receiving_source_hand_edits": 0,
-  "normalizer_sha256": "85422aaf31a0a2f1a6af4c4fb52f56a26f9c6aa0a39bdbdbd2fe56c6c911e8c6",
+  "normalizer_sha256": "b6d9b24f29439c6f17fe6242c2d7ce17d8a343e46102cd3b3f4f52abde511277",
   "reproduction": [
     "Run the unchanged prepare.py with the exact arguments recorded by logs/21-seal-effective-selection.json.",
     "Run normalize_service_template.py, which copies the service template bytes to the admitted basename, retains the prepare-produced original as an unreferenced input, and changes only the selected manifest row fourth field.",

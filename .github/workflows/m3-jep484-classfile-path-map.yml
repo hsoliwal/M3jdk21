@@ -39,7 +39,7 @@ jobs:
           set -euo pipefail
           # Standalone (2026-10-31): the validator is absorbed byte-identically (canonical Git blob
           # below; receiver record in m3/compatibility/); no other repository is fetched
-          # (m3/tooling/standalone/SYNEXIA_REFS.tsv).
+          # (m3/tooling/standalone/M3_REFS.tsv).
           test "$(git hash-object m3/tooling/validators/WorkflowStructureCheck.java)" = \
             "f61be81f5a15bea78f1c5ae7d5555844c9cd2ea7"
           java m3/tooling/validators/WorkflowStructureCheck.java \
@@ -55,13 +55,13 @@ jobs:
         run: |
           set -euo pipefail
           git remote add m3-upstream https://github.com/openjdk/jdk.git
-          git fetch --no-tags --filter=blob:none m3-upstream             refs/tags/jdk-21+35:refs/tags/m3-jdk21             refs/tags/jdk-24+36:refs/tags/m3-jdk24
+          git fetch --no-tags --filter=blob:none m3-upstream             refs/tags/jdk-21+35:refs/tags/m3jdk21             refs/tags/jdk-24+36:refs/tags/m3jdk24
 
       - name: Materialize exact path/content map
         run: |
           set -euo pipefail
           out="$RUNNER_TEMP/jep484-map"
-          python3 m3/backports/recipes/jep-484-classfile-api/path_map.py             --repo . --jdk21-ref refs/tags/m3-jdk21 --jdk24-ref refs/tags/m3-jdk24             --out "$out"
+          python3 m3/backports/recipes/jep-484-classfile-api/path_map.py             --repo . --jdk21-ref refs/tags/m3jdk21 --jdk24-ref refs/tags/m3jdk24             --out "$out"
           python3 - "$out/summary.json" <<'PY'
           import json,sys
           d=json.load(open(sys.argv[1],encoding="utf-8"))

@@ -25,7 +25,7 @@
       "output": "literal with each known object-type name replaced; UNMAPPED if any referenced HumbleUI type is unknown",
       "owner": "tools/gen_rename.py",
       "before_sha256": "d32f9d1ba80096a7a92b5fa19563b044a336f01a917fa0d257bf3d29c9b59318",
-      "after_sha256": "2a798ab55643afadac423f39fa0782f1e8cc83cf31b9a48656eaba078407de31"
+      "after_sha256": "630acf1c482317daf40e25b39b2bd3276c73b78e1a5a25f944055fc1e5f2309a"
     }
   ],
   "source_join": {
@@ -160,7 +160,7 @@
       "Ljdk/m3/graphics/M3FontMgr$Nested;",
       "UNMAPPED"
     ],
-    "after_git_blob": "da0f0588dfeda41416264d370938b3d6b1583f0d",
+    "after_git_blob": "cca8ff5529f8c0384d81b6777392bc6ac9702ec0",
     "CC_STRING_RENAME_sha256": "64e59e019334e2a6ccc0015f0b66005afb63f81b3299e279d803e8b16c2e356e",
     "input_sha256": {
       "OWNER_MAP.tsv": "18d6868a3077d5984371832395c18667218c49525c40bef938551b6ce65631ec",

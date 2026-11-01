@@ -67,7 +67,7 @@ named-module negative/positive compiler fixture, including a regex operating on
 code-looking string data, returning `M3FMT_MODULE_SOURCEPATH_CONTRACT_PASS`.
 
 - Original script SHA-256: `b09f90df9c610e0c0df6e727f6e4e3792f53a77b833d95e7b8a4311a90280c19`.
-- Reviewed replacement SHA-256: `7b4214c5efc741baa9fb944a937565c51dced519fcc6c5b33048be7697b670ea`.
+- Reviewed replacement SHA-256: `be478536f9bcae6725fb39d088958d356f3c73862bff5f09223b44152078d7e8`.
 - Source custody, case ID, signature and applicability are in Synexia
   `synexia-openrewrite-recipes/recipe-crates/m3fmt-shared-lexicon-20261021/RECIPE_MEMORY_20261022.md`.
 

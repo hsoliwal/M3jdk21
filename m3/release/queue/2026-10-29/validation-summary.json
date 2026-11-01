@@ -76,8 +76,8 @@
       ],
       "status": "HOLD",
       "owner_paths": [
-        "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
-        "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java"
+        "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+        "m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java"
       ],
       "decision_needed": "Reconcile observed behavior and callback/trace contracts against canonical recipe history. Current failure messages do not by themselves establish the correct resolution."
     },
@@ -88,8 +88,8 @@
       ],
       "status": "HOLD",
       "owner_paths": [
-        "m3/collections/src/main/java/com/m3/collections/M3SlotMap.java",
-        "m3/collections/src/test/java/com/m3/collections/M3EntryFacadeCacheTest.java"
+        "m3/collections/src/main/java/jdk/m3/collections/M3SlotMap.java",
+        "m3/collections/src/test/java/jdk/m3/collections/M3EntryFacadeCacheTest.java"
       ],
       "decision_needed": "Two tests demand cached entry identity; the current owner and passing EntryFacadeCache tests require fresh caller-owned projections. Do not restore caching or weaken tests without contract adjudication."
     }
@@ -112,7 +112,7 @@
   ],
   "canonical_evidence": {
     "repository": "hsoliwal/com.synexia",
-    "path": "synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/evidence/arrays-collections/index.json",
+    "path": "m3-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/evidence/arrays-collections/index.json",
     "sha256": "a07092aa4493e86a4114a3de3868c77ce9529b9a188f9bf24c20b7979d7efc49",
     "role": "Logs, exact commands, failure traces and module input hashes belong to canonical task evidence; this product snapshot is data only."
   },

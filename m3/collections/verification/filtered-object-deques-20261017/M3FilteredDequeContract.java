@@ -1,5 +1,5 @@
 
-package com.m3.collections;
+package jdk.m3.collections;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

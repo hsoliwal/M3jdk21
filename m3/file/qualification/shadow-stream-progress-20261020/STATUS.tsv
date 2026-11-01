@@ -1,5 +1,5 @@
 item	status	evidence
-source_inventory	PASS	original M3File Git blob c182a3b1526f9fd0ca20c631d97df3048076defd
+source_inventory	PASS	original M3File Git blob fcce3a02835de29fa4ac9f83083511aad17ec049
 canonical_synexia_recipe	AUTHORED_NOT_EXECUTED	Synexia #12598, OpenRewrite JUnit with source-sealed exact postimages
 java21_strict_compile	PASS_LOCAL	javac --release 21 -proc:none -Xlint:all,-module -Werror
 normal_named_module_runtime	PASS_LOCAL	M3_SHADOW_STREAM_PASS checks=44

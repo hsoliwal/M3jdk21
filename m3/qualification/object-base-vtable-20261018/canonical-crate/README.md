@@ -14,7 +14,7 @@ This named, one-owner recipe updates the existing bootstrap count to six and exp
 - Existing engine: `com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe`.
 - Maven coordinate: `com.synexia.verification:m3-object-base-vtable-recipe-proof:1`.
 - Before SHA-256: `665bb788428c8d3837d052ac4f69a2756bb1823918726b41a7a7008eadfafd8d`.
-- Generated after SHA-256: `c465bc54b703617bad3ab70c25041c3182363afb95b82ea9640f20e29f032b0c`.
+- Generated after SHA-256: `d8f7045cbe28ddacae505adc1273535940efdcc1967b91bafb45113197471ee5`.
 
 The actual OpenRewrite SDK Results are the only candidate input to the native proof. Admission refuses missing, duplicate, drifted or late-changed inputs and corrupt resource payloads. Replaying the exact admitted output is a fixed point. The generated source was applied only after the six SDK groups passed.
 

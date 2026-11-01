@@ -127,9 +127,9 @@ class PackagingAdmissionTest(unittest.TestCase):
             path.parent.mkdir(parents=True, exist_ok=True)
             if not path.is_file():
                 path.write_text("fixture source\n", encoding="utf-8")
-        source = self.module / "src/main/java/com/m3/fs/M3FS.java"
+        source = self.module / "src/main/java/jdk/m3/fs/M3FS.java"
         source.parent.mkdir(parents=True, exist_ok=True)
-        source.write_text("package com.m3.fs; public class M3FS {}\n", encoding="utf-8")
+        source.write_text("package jdk.m3.fs; public class M3FS {}\n", encoding="utf-8")
         lock = self.root / "source.tsv"
         with lock.open("w", encoding="utf-8", newline="") as stream:
             writer = csv.writer(stream, delimiter="\t", lineterminator="\n")
@@ -151,7 +151,7 @@ class PackagingAdmissionTest(unittest.TestCase):
             verify_source_lock(self.module, lock)
 
     def test_source_only_remote_profile_and_real_url_fallback(self):
-        prefix = "src/main/java/com/m3/fs/vfs/"
+        prefix = "src/main/java/jdk/m3/fs/vfs/"
         for path in ("provider/ftp/FtpFileObject.java", "provider/http5/Http5FileObject.java",
                      "provider/sftp/SftpFileObject.java", "cache/LRUFilesCache.java",
                      "provider/URLFileName.java", "provider/URLFileNameParser.java"):

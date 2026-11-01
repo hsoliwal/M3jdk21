@@ -25,7 +25,7 @@ import jdk.internal.mindex.M3RegExpCompiler;
 import jdk.internal.mindex.M3RunTable;
 
 /**
- * Corpus generator and roots are reproduced from com.m3.precompute.M3RegexOracleCorpus (m3/ports/precompute, Synexia
+ * Corpus generator and roots are reproduced from jdk.m3.precompute.M3RegexOracleCorpus (m3/ports/precompute, Synexia
  * Regex10kMatrixMasteryCorpus lineage); the test refuses to run on root drift, so the corpus is byte-identical.
  * java.util.regex.Pattern of the running JDK is the authority; M3 results are candidates (UNSUPPORTED is counted, never
  * compared). Any disagreement on a decided candidate fails the test.

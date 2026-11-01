@@ -12,11 +12,11 @@ BASE = HERE.parent
 ROOT = HERE / 'overlay'
 OLD = BASE / 'candidate'
 PUB = BASE.parent / 'publication-current'
-CRATE = ROOT / 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005'
+CRATE = ROOT / 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005'
 SOURCE = 'd1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906'
 DEST = 'df06cdee5a8526f573b3ad89622824d0b49e2f25'
 OWNER = 'da958d00d24154c0db87beca0ec80a7df2b43b73'
-IDS = ('synexia.jcc-recipe-laboratory', 'synexia.jcc-java-jni-regression')
+IDS = ('m3.jcc-recipe-laboratory', 'm3.jcc-java-jni-regression')
 
 def load(p): return json.loads(p.read_text())
 def ident(p):
@@ -88,7 +88,7 @@ def main():
             for k,v in value.items(): nested(v,loc+'.'+k)
         elif isinstance(value,list):
             for i,v in enumerate(value): nested(v,f'{loc}[{i}]')
-    oldplan=load(OLD/'m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json')
+    oldplan=load(OLD/'m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json')
     assert plan['guards']==oldplan['guards'] and len(plan['guards'])==7
     for i,g in enumerate(plan['guards']): dest(g,f'plan.guards[{i}]')
     fields=load(HERE/'source-binding-review/SOURCE_FIELDS_AND_PROOFS.json')

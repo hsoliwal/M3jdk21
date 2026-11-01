@@ -31,7 +31,7 @@ def main():
     jdk = Path(os.environ['JAVA_HOME']).resolve()
     framework = root / 'm3/eclipse/framework'
     collections = root / 'm3/collections'
-    crate = root / 'm3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021'
+    crate = root / 'm3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021'
     commands = []
     receipt = {'status': 'RUNNING_OR_INCOMPLETE', 'commands': commands,
                'scope': 'Current framework owner; real Eclipse dependencies; strict-compiled collections; existing Linux JNI. No full image/workspace claim.'}
@@ -83,15 +83,15 @@ def main():
     objects, expected = [], set()
     for name, owner in source_pairs:
         source = collections / 'src/main/native/collections' / name
-        header = headers / ('com_m3_collections_' + owner + '.h')
-        expected.update(re.findall(r'\b(Java_com_m3_collections_\w+)\s*\(', header.read_text()))
+        header = headers / ('jdk_m3_collections_' + owner + '.h')
+        expected.update(re.findall(r'\b(Java_jdk_m3_collections_\w+)\s*\(', header.read_text()))
         obj = native / (name + '.o')
         run('native-' + owner, cc + ['-fPIC', '-include', header, '-c', source, '-o', obj])
         objects.append(obj)
     library = native / 'libm3_collections_mask.so'
     run('native-link', cc + ['-shared', *objects, '-o', library])
     exports = run('native-exports', ['nm', '-D', '--defined-only', library]).read_text()
-    actual = set(re.findall(r'\b(Java_com_m3_collections_\w+)\b', exports))
+    actual = set(re.findall(r'\b(Java_jdk_m3_collections_\w+)\b', exports))
     if not expected or actual != expected:
         raise AssertionError(('generated-header/export mismatch', sorted(expected), sorted(actual)))
     receipt['native_exports'] = sorted(actual)

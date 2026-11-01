@@ -2,7 +2,7 @@
   "schema": "M3_EXISTING_PUBLIC_RECIPE_HANDOFF_V1",
   "label": "feature-final-image-20261018",
   "canonical_repository": "hsoliwal/com.synexia",
-  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "canonical_crate": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
   "canonical_engine_baseline": "8f8200375d8d403b58e855ee5db02f2e8fac33a8",
   "canonical_successor_publication": "Recorded by the later pinned publication receipt; this staging record makes no publication claim.",
   "public_baseline": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
@@ -12,44 +12,44 @@
   "existing_host_controls": [
     {
       "path": "prepare.py",
-      "sha256": "9b0b3d93c787c9a56036cddb2b044aef30f6fa8a1fa20fa5a2edae46dfd1e62c"
+      "sha256": "7c2063fa5aa88d0872fff0157413a1d2fdca4f00d01c787f8650969e8b514014"
     },
     {
       "path": "receive.py",
-      "sha256": "db258f16e1841f6f5191c1c969c20314a8d143bfa6558b60f684bea440cc1712"
+      "sha256": "e81744965f37cb890e00f6c1c7e50f4dae44c68eedafdf46565a7e105bab5474"
     },
     {
       "path": "ENGINE_SOURCES.tsv",
       "sha256": "ae731c5780c73a98f6fc81079b5f863613fddea50d2a6c893c6dfd2aa2030b5c"
     },
     {
-      "path": "src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
-      "sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43"
+      "path": "src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java",
+      "sha256": "fa8a8e63fd445c0fbcd877315044c6e5c36f779db6e8a11797e03ab805e5903f"
     },
     {
       "path": "contract/test_prepare.py",
-      "sha256": "f504f1dcfafb24fd87f8f677643b45eecc74674881e16bf727b76c4e6a4d1856"
+      "sha256": "79c4335d02ca2179301d617d9ae447b778f2f12361e379ff04ad77c0237e7933"
     },
     {
       "path": "contract/verify_receiver.py",
-      "sha256": "a4d82df8b31e707afe7caa5e76524d191f285e2887dbfdfa95cfdc382ae01f7d"
+      "sha256": "a400589821da1c448b3c2354aef91c7a6fd596cf265b2baca097494135126d4c"
     }
   ],
   "existing_engine_sources": [
     {
-      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625"
     },
     {
-      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
       "sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef"
     },
     {
-      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
       "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4"
     },
     {
-      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java",
       "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
     }
   ],
@@ -64,7 +64,7 @@
       "evidence": {
         "SDK_INPUTS.tsv": {
           "path": "evidence/feature-final-image-20261018/m3jdk21-progress-job/SDK_INPUTS.tsv",
-          "sha256": "a38770ac8437868f920c93cff636a0e03255ba882a525b621c1b1b1251252dff"
+          "sha256": "5b0d277cdb87e6b8927df46bfbd027e855c0edee873577eebefef60deebd0773"
         },
         "SDK_RESULTS.tsv": {
           "path": "evidence/feature-final-image-20261018/m3jdk21-progress-job/SDK_RESULTS.tsv",
@@ -97,7 +97,7 @@
     },
     {
       "path": "authoring/feature-final-image-20261018/prepare_feature_evidence.py",
-      "sha256": "f86f780af997b9052a86ae9549bfca42e0ae2fbda3bb306da5b75bafd62fd66b",
+      "sha256": "cabe6d53bfe347abe9e72c08fd0f292369de4b1149c727c8472797b306865f2f",
       "bytes": 15440,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/feature-final-evidence/prepare_feature_evidence.py"
@@ -121,10 +121,10 @@
     },
     {
       "path": "datasets/m3jdk21-progress-job/DATASET.json",
-      "sha256": "168788442bd4dc682757589125c40c19b8ce199e47da89a524a4b32b4442c755",
+      "sha256": "6eccf9334359c58f4ec7acff34b6d6d3e6a1dfd360db9f426ff58b0fb64ad062",
       "bytes": 490,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/DATASET.json"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/DATASET.json"
       ]
     },
     {
@@ -132,7 +132,7 @@
       "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23",
       "bytes": 747,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/ENGINE_EFFECTIVE.tsv"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/ENGINE_EFFECTIVE.tsv"
       ]
     },
     {
@@ -140,111 +140,111 @@
       "sha256": "85beebafdf673a58b53caa372893b24d22109c204c22abb64586cfd14314365f",
       "bytes": 755,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/MODES.tsv"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/MODES.tsv"
       ]
     },
     {
       "path": "datasets/m3jdk21-progress-job/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-progress-job.yml",
-      "sha256": "c90e5e35d058f3909500b607840d63ffa021a88d59948e94a4049a8857819e70",
+      "sha256": "a55607deb893e9274bab8a268386e5c6978b2169fc54d1216931ef7440eec9a4",
       "bytes": 534,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-progress-job.yml"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-progress-job.yml"
       ]
     },
     {
-      "path": "datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0005-EclipseStatusIdentity.java.txt",
+      "path": "datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0005-EclipseStatusIdentity.java.txt",
       "sha256": "9c5636c1c12363d9d05767b80cd589f9c9cedb55b0b3b7e073c8c25a114509e9",
       "bytes": 5570,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0005-EclipseStatusIdentity.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0005-EclipseStatusIdentity.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0006-OldCallableClient.java.txt",
+      "path": "datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0006-OldCallableClient.java.txt",
       "sha256": "d1749ed57040370cdce420fb89288f22d27c5d9aeae548dcd0f91601392a6117",
       "bytes": 2692,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0006-OldCallableClient.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0006-OldCallableClient.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0009-ProgressJob.java.txt",
+      "path": "datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0009-ProgressJob.java.txt",
       "sha256": "d2734bcc607b1af8a593387040da53886530a310685a26965a5aa77609aaefc8",
       "bytes": 4169,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0009-ProgressJob.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0009-ProgressJob.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0010-M3ProgressJob.java.txt",
+      "path": "datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0010-M3ProgressJob.java.txt",
       "sha256": "c8a20e2143ab2a1ab4ca3437ca2bf79c1ab486596247e0aecd6c1cde3b0dd609",
       "bytes": 17041,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0010-M3ProgressJob.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0010-M3ProgressJob.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/manifest.tsv",
+      "path": "datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/manifest.tsv",
       "sha256": "068b1c68573d1246c24ee2ae181b5f2423850dd3be5fd5be944ad502c7b11dde",
       "bytes": 705,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/manifest.tsv"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/manifest.tsv"
       ]
     },
     {
-      "path": "datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0001-CATALOGUE.tsv.txt",
+      "path": "datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0001-CATALOGUE.tsv.txt",
       "sha256": "0e0883834b41cb006c542e42617ea2daa0583479649ddcf1fd80dd927907fb4b",
       "bytes": 2097,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0001-CATALOGUE.tsv.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0001-CATALOGUE.tsv.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0002-DONOR-REVIEW.json.txt",
+      "path": "datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0002-DONOR-REVIEW.json.txt",
       "sha256": "7b5d7587e72dd8e91be92b1eb2bc9007169fc312c5722272e43c531595f1bf25",
       "bytes": 16416,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0002-DONOR-REVIEW.json.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0002-DONOR-REVIEW.json.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0003-README.md.txt",
+      "path": "datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0003-README.md.txt",
       "sha256": "be418c3d50a789e218a0694c61db201b1ca0359317225141b30cb18d39937741",
       "bytes": 5554,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0003-README.md.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0003-README.md.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0004-RECEIVING-MAP.json.txt",
+      "path": "datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0004-RECEIVING-MAP.json.txt",
       "sha256": "b51206be2c267ee982008c5058cc63724834264016d4e4bc0e44f4fca02a197d",
       "bytes": 1643,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0004-RECEIVING-MAP.json.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0004-RECEIVING-MAP.json.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0007-ProgressJobRunnableConflict.java.txt.txt",
+      "path": "datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0007-ProgressJobRunnableConflict.java.txt.txt",
       "sha256": "d623a757c79f6d4fea48cef98b363fb3b15a0a572dc776442dea78335968e478",
       "bytes": 798,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0007-ProgressJobRunnableConflict.java.txt.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0007-ProgressJobRunnableConflict.java.txt.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0008-verify_progress_job.py.txt",
+      "path": "datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0008-verify_progress_job.py.txt",
       "sha256": "7778df10ecc62f960a406576053d29c182a5688c34650a79cf6f40848c4c0184",
       "bytes": 12200,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0008-verify_progress_job.py.txt"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/0008-verify_progress_job.py.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/manifest.tsv",
+      "path": "datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/manifest.tsv",
       "sha256": "ff9af99741425ca48a83a8d72a0eb6737a18fe6b0fefff68f345ca57f7d352cb",
       "bytes": 1017,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/manifest.tsv"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-job/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-job/manifest.tsv"
       ]
     },
     {
@@ -1177,10 +1177,10 @@
     },
     {
       "path": "evidence/feature-final-image-20261018/m3jdk21-progress-job/SDK_INPUTS.tsv",
-      "sha256": "a38770ac8437868f920c93cff636a0e03255ba882a525b621c1b1b1251252dff",
+      "sha256": "5b0d277cdb87e6b8927df46bfbd027e855c0edee873577eebefef60deebd0773",
       "bytes": 4652,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-progress-job/candidate/SDK_INPUTS.tsv"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-progress-job/candidate/SDK_INPUTS.tsv"
       ]
     },
     {
@@ -1188,7 +1188,7 @@
       "sha256": "fe6ac0cc66c1927acd577d773fbfb164a896dfd44e99f8332571516ab9794820",
       "bytes": 1485,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-progress-job/candidate/SDK_RESULTS.tsv"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-progress-job/candidate/SDK_RESULTS.tsv"
       ]
     },
     {
@@ -1196,7 +1196,7 @@
       "sha256": "40ac7652a683dee9e1ab734fe87e52b8ec5f0a66e1b6fe61afd8803432d678ad",
       "bytes": 14703,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-progress-job/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-progress-job/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
       ]
     },
     {
@@ -1209,7 +1209,7 @@
     },
     {
       "path": "evidence/feature-final-image-20261018/publication-upstream-scope-v1.json",
-      "sha256": "62a23f839c6e76ef4e5289a479518da9d88769b51fe6ea1d4495962b52cd52d5",
+      "sha256": "f32e05ddb050733eba4e26cc97da85b227e1dd3f9fdc61d5b62720cbd29586f4",
       "bytes": 10147,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/build-proof/feature-publication-upstream-scope-v1.json"
@@ -1225,7 +1225,7 @@
     },
     {
       "path": "evidence/feature-final-image-20261018/source-identity/feature-source-identity-before-restoration.json",
-      "sha256": "fe11954f6cad2520fd3ca7feb16bf8ae01630e39932326cd664c312c2cbd3fb4",
+      "sha256": "c070abbc7c644ac8e12f34e49be59f60b0a4c4a0cc35d21bb1e237f241235e56",
       "bytes": 7671,
       "source_paths": [
         "/workspace/scratch/2b4d1cb957a7/build-proof/feature-source-identity-before-restoration.json"
@@ -1236,7 +1236,7 @@
       "sha256": "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d",
       "bytes": 5855,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/pom.xml"
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/pom.xml"
       ]
     }
   ]

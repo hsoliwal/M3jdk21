@@ -243,7 +243,7 @@ java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.7043635Z env:
 java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.7043975Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
 java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.7044484Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
 java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.7044863Z ##[endgroup]
-java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.7461687Z generated output/source mirror SHA-256 drift: m3/collections/src/main/java/com/m3/collections/M3StateMaskHistogram.java
+java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.7461687Z generated output/source mirror SHA-256 drift: m3/collections/src/main/java/jdk/m3/collections/M3StateMaskHistogram.java
 java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.7526415Z ##[error]Process completed with exit code 1.
 java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.7640632Z Post job cleanup.
 java-jni-parity	UNKNOWN STEP	2026-10-24T19:46:08.9020374Z (node:2438) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.

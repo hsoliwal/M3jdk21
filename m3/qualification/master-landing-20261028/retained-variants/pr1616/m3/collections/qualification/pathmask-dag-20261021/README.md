@@ -25,13 +25,13 @@ merged, rebased or overwritten; its full test counts are not claimed as this run
 
 | Existing owner | Input Git blob | Generated SHA-256 |
 | --- | --- | --- |
-| M3IndexPathMasks.java | 1e77b2027aa008aa8aebfeaf4b00a5bb89e5b7bf | 6703eef75122fd9c18dba196249f2b4420030ee712f73f6929a9a32ba07a3b5a |
-| m3_index_path_masks.c | 086b49293257fd17cc7fbd1ebbb98460aa677e35 | 3b2aa04fa4d6b228482e661e26b0198145e4ec74d17afc1e563f9bf5391d4011 |
+| M3IndexPathMasks.java | 1e77b2027aa008aa8aebfeaf4b00a5bb89e5b7bf | 0c446d0a2b78f5df90e21dd63cf32a146f6287945ce533c2aa2f4a9aa4ebf457 |
+| m3_index_path_masks.c | 69aef883c09997bae30825d7ad8757bc2358bf69 | 0367c0683c10b8d403bd62a03e5a29f3a84a083d4f79b40e2110cbfbe301cc83 |
 
 The exact-source recipe produced these files into separate absent outputs.
 It refuses unknown targets, stale source and postimage drift; repeated output
 replay is a detached fixed point. Product test source is the same independent
-oracle as the canonical packet (Git blob `8b9ab6d2d5264d0e248da9afedf717c72121b7d2`).
+oracle as the canonical packet (Git blob `2ce4f9288fbededb55df9e91bc55c970c6c0c91e`).
 No renamed public symbols or new JNI ABI require a name-mapping entry.
 
 ## Runtime changes and retained contracts

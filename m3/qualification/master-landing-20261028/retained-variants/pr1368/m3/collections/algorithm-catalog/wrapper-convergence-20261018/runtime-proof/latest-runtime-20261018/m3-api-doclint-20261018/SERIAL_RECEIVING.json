@@ -1,7 +1,7 @@
 {
   "dataset": "m3-api-doclint-20261018",
   "input_head": "edd96c2a0fc2fb41486ca8ed1afa4712ac4b6723",
-  "qualified_crate": "/dev/shm/m3-doclint-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "qualified_crate": "/dev/shm/m3-doclint-f8287/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
   "check": {
     "dataset": "m3-api-doclint-20261018",
     "targets": 12,

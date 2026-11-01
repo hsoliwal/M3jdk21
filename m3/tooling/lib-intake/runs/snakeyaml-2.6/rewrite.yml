@@ -1,93 +1,93 @@
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.intake.Relocate
+name: jdk.internal.m3.intake.Relocate
 displayName: LIB_INTAKE relocation of snakeyaml-2.6
 description: Boundary-checked package relocation, one non-recursive ChangePackage per package, longest first.
 recipeList:
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.yaml.snakeyaml.external.com.google.gdata.util.common.base
-      newPackageName: com.m3.lib.snakeyaml.external.com.google.gdata.util.common.base
+      newPackageName: jdk.m3.lib.snakeyaml.external.com.google.gdata.util.common.base
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.yaml.snakeyaml.extensions.compactnotation
-      newPackageName: com.m3.lib.snakeyaml.extensions.compactnotation
+      newPackageName: jdk.m3.lib.snakeyaml.extensions.compactnotation
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.yaml.snakeyaml.introspector
-      newPackageName: com.m3.lib.snakeyaml.introspector
+      newPackageName: jdk.m3.lib.snakeyaml.introspector
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.yaml.snakeyaml.constructor
-      newPackageName: com.m3.lib.snakeyaml.constructor
+      newPackageName: jdk.m3.lib.snakeyaml.constructor
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.yaml.snakeyaml.representer
-      newPackageName: com.m3.lib.snakeyaml.representer
+      newPackageName: jdk.m3.lib.snakeyaml.representer
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.yaml.snakeyaml.serializer
-      newPackageName: com.m3.lib.snakeyaml.serializer
+      newPackageName: jdk.m3.lib.snakeyaml.serializer
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.yaml.snakeyaml.inspector
-      newPackageName: com.m3.lib.snakeyaml.inspector
+      newPackageName: jdk.m3.lib.snakeyaml.inspector
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.yaml.snakeyaml.comments
-      newPackageName: com.m3.lib.snakeyaml.comments
+      newPackageName: jdk.m3.lib.snakeyaml.comments
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.yaml.snakeyaml.composer
-      newPackageName: com.m3.lib.snakeyaml.composer
+      newPackageName: jdk.m3.lib.snakeyaml.composer
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.yaml.snakeyaml.internal
-      newPackageName: com.m3.lib.snakeyaml.internal
+      newPackageName: jdk.m3.lib.snakeyaml.internal
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.yaml.snakeyaml.resolver
-      newPackageName: com.m3.lib.snakeyaml.resolver
+      newPackageName: jdk.m3.lib.snakeyaml.resolver
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.yaml.snakeyaml.emitter
-      newPackageName: com.m3.lib.snakeyaml.emitter
+      newPackageName: jdk.m3.lib.snakeyaml.emitter
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.yaml.snakeyaml.scanner
-      newPackageName: com.m3.lib.snakeyaml.scanner
+      newPackageName: jdk.m3.lib.snakeyaml.scanner
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.yaml.snakeyaml.events
-      newPackageName: com.m3.lib.snakeyaml.events
+      newPackageName: jdk.m3.lib.snakeyaml.events
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.yaml.snakeyaml.parser
-      newPackageName: com.m3.lib.snakeyaml.parser
+      newPackageName: jdk.m3.lib.snakeyaml.parser
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.yaml.snakeyaml.reader
-      newPackageName: com.m3.lib.snakeyaml.reader
+      newPackageName: jdk.m3.lib.snakeyaml.reader
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.yaml.snakeyaml.tokens
-      newPackageName: com.m3.lib.snakeyaml.tokens
+      newPackageName: jdk.m3.lib.snakeyaml.tokens
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.yaml.snakeyaml.error
-      newPackageName: com.m3.lib.snakeyaml.error
+      newPackageName: jdk.m3.lib.snakeyaml.error
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.yaml.snakeyaml.nodes
-      newPackageName: com.m3.lib.snakeyaml.nodes
+      newPackageName: jdk.m3.lib.snakeyaml.nodes
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.yaml.snakeyaml.util
-      newPackageName: com.m3.lib.snakeyaml.util
+      newPackageName: jdk.m3.lib.snakeyaml.util
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.yaml.snakeyaml.env
-      newPackageName: com.m3.lib.snakeyaml.env
+      newPackageName: jdk.m3.lib.snakeyaml.env
       recursive: false
   - org.openrewrite.java.ChangePackage:
       oldPackageName: org.yaml.snakeyaml
-      newPackageName: com.m3.lib.snakeyaml
+      newPackageName: jdk.m3.lib.snakeyaml
       recursive: false

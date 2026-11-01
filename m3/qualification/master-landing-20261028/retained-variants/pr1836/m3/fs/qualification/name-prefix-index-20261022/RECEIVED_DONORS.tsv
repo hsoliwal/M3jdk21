@@ -1,4 +1,4 @@
 # path	before_git_blob	after_git_blob	canonical_recipe	role
-m3/fs/src/main/java/com/m3/fs/M3DirectoryTable.java	d5fd2188ec1feb751d0501051ec52f3cdd37692e	088584cc379c7ddb2c4b0ac86a7742b19b6a44bc	com.synexia.m3.M3FsNamePrefixIndex20261022	original_native_directory_array_owner
-m3/fs/src/test/java/com/m3/fs/M3DirectoryNameIndexContract.java	ABSENT	e14622f52ce0ad42ef10518965db43baa67ee281	com.synexia.m3.M3FsNamePrefixIndex20261022	java21_utf16_and_prefix_oracle
-m3/fs/src/test/java/com/m3/fs/M3DirectoryNameIndexTest.java	ABSENT	21b6bcf5468da8dd5e4adf434633c1105c7a573d	com.synexia.m3.M3FsNamePrefixIndex20261022	original_junit5_test_entry
+m3/fs/src/main/java/jdk/m3/fs/M3DirectoryTable.java	0d3ed65c16d52c2b49500b4aac13fa83a5646596	8a39d3505affd63c038518efbb39e1a618634c5f	com.synexia.m3.M3FsNamePrefixIndex20261022	original_native_directory_array_owner
+m3/fs/src/test/java/com/m3/fs/M3DirectoryNameIndexContract.java	ABSENT	774aca3b711793fdfba6d43237fbc4c9ff62bd1b	com.synexia.m3.M3FsNamePrefixIndex20261022	java21_utf16_and_prefix_oracle
+m3/fs/src/test/java/com/m3/fs/M3DirectoryNameIndexTest.java	ABSENT	04f03254ddf19f01740c1feb88597eb572632483	com.synexia.m3.M3FsNamePrefixIndex20261022	original_junit5_test_entry

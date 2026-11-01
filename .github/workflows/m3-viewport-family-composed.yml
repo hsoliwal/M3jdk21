@@ -5,11 +5,11 @@ on:
   pull_request:
     paths:
       - 'm3/collections/src/main/c/m3maskviewport.c'
-      - 'm3/collections/src/main/java/com/m3/collections/M3MaskViewport*.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3SparseExtents.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3FrameJavaContract.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3TreeCommitPlanIdentityTest.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3MaskViewport*.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3SparseExtents.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3FrameJavaContract.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3TreeCommitPlanIdentityTest.java'
       - 'm3/collections/viewport-proof/**'
       - '.github/workflows/m3-viewport-family-composed.yml'
   workflow_dispatch:
@@ -45,34 +45,34 @@ jobs:
           import json,subprocess
           from pathlib import Path
           expected={
-            'm3/collections/src/main/c/m3maskviewport.c':'e7db071a5e1768442ef016fc6516e9dc9e3f9396',
-            'm3/collections/src/main/java/com/m3/collections/M3MaskViewportNative.java':'9cdfab35cf719ccf26f61ee61e1ae10fa98eb9ad',
-            'm3/collections/src/main/java/com/m3/collections/M3MaskViewportKernel.java':'aefcdb933cbc2caa122a527180e20fda8e2a284d',
-            'm3/collections/src/main/java/com/m3/collections/M3SparseExtents.java':'ba6b2ebd0fac9f737deb28bce9385fff07164997',
-            'm3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java':'fd425edf2bb7446a0e4446b272a616015b200361',
-            'm3/collections/src/test/java/com/m3/collections/M3FrameJavaContract.java':'db58a90031370a5cf8dd9039dbce6306817dde46',
-            'm3/collections/src/test/java/com/m3/collections/M3TreeCommitPlanIdentityTest.java':'a6e7df64f1850ba54851be44056837d37640a096',
-            'm3/collections/viewport-proof/fixtures/M3FenwickInverseTest.txt':'dafa004fcbe3fe9e4183f830b2f1159e3c40591f',
+            'm3/collections/src/main/c/m3maskviewport.c':'306133d9f08952816af76faa1423ea04d6615fa3',
+            'm3/collections/src/main/java/jdk/m3/collections/M3MaskViewportNative.java':'4f73ddb9aae36dadb8003257d3a6988536a18066',
+            'm3/collections/src/main/java/jdk/m3/collections/M3MaskViewportKernel.java':'aefcdb933cbc2caa122a527180e20fda8e2a284d',
+            'm3/collections/src/main/java/jdk/m3/collections/M3SparseExtents.java':'ba6b2ebd0fac9f737deb28bce9385fff07164997',
+            'm3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java':'fd425edf2bb7446a0e4446b272a616015b200361',
+            'm3/collections/src/test/java/jdk/m3/collections/M3FrameJavaContract.java':'37520b6fbcb02f45e038e7f0192b73d2acc2e1ac',
+            'm3/collections/src/test/java/jdk/m3/collections/M3TreeCommitPlanIdentityTest.java':'5bcccc59d4e45ef057f4ec2751f264440646c9f7',
+            'm3/collections/viewport-proof/fixtures/M3FenwickInverseTest.txt':'9cd8ffcd6967091ea4382e532d67454971c5804f',
             '.github/workflows/m3-mask-viewport-page-20261021.yml':'341bdd40c944b1b743916d1b135aa2a39cd63a8e',
             '.github/workflows/m3-pinned-java-parser-supply.yml':'552996c3bc6e99501017a28a991af6c54671a454',
             '.github/workflows/m3-sparse-viewport-geometry.yml':'bc5a1a4e0e2d3ec2049caf2cf360c0a64c1ec30c',
             '.github/workflows/m3-tree-shift-20261021.yml':'cf168081206b5d98e97999d25b07a7f9c22e778b',
             '.github/workflows/m3-viewport-tree-parent.yml':'80c2e67e3bb06569e1531f92fe05f254613a475e',
             '.github/workflows/m3jdk21-tree-plan-commit-identity.yml':'eb5f1111a6f3b328bb2fa93f448039a95cafe6f3',
-            'm3/collections/qualification/tree-plan-commit-identity/EXECUTION.json':'f9901918d19152a64f1a07d7c0671d9c46bf13aa',
-            'm3/collections/qualification/tree-plan-commit-identity/RECEIVER_RECEIPT.json':'5ec57a4effca64b541114aa9375fc78d5c415bdb',
+            'm3/collections/qualification/tree-plan-commit-identity/EXECUTION.json':'78edaa7cb6f4f6ad0f77d0494ae2f3ca1c96a102',
+            'm3/collections/qualification/tree-plan-commit-identity/RECEIVER_RECEIPT.json':'2ba7e8c149a503850019a4435cd2637f47483ae1',
             'm3/collections/qualification/tree-plan-commit-identity/test_verify_receipt.py':'b5a5ad87fa2c2a5789fbc46295d4d40f835b2f78',
-            'm3/collections/qualification/tree-plan-commit-identity/verify_receipt.py':'e9c95bcc426c7267dc4f72bb7a2158c46c219196',
-            'm3/collections/qualification/viewport-fenwick/DOCUMENTATION.json':'f56c52907bc52b2188b2ebdaab015c70161faafe',
-            'm3/collections/qualification/viewport-fenwick/GEOMETRY_CI.json':'1938fb005d19fb85a1f68130dff6342fbe50e3cc',
-            'm3/collections/qualification/viewport-fenwick/RECEIVING.json':'7ffd1552c957bb613e7ca004857472c696a63778',
-            'm3/collections/qualification/viewport-frame/ALLSTATE.json':'d064de345f2e3438be5a724aa5185ee3d5535151',
-            'm3/collections/qualification/viewport-frame/FRAME_JAVA_FALLBACK_RECEIVING.json':'39a73ee0e33b23a8ea5e5f2e75963b8f5899fdaf',
-            'm3/collections/qualification/viewport-frame/FRAME_PARITY_EXECUTION.json':'3e8dbf4cb788f454c72d9bd2235bbae761254a6c',
-            'm3/collections/src/test/java/com/m3/collections/M3TreeCoverageTest.java':'ca5bc74d0ae6dcd42f3a319b4c33bef76a4d4d4a',
-            'm3/collections/src/test/java/com/m3/collections/M3TreeNativeLifecycleOracle.java':'1bf770fee2929533a7ac9478b7c44e8dd3841ad3',
-            'm3/collections/src/test/java/com/m3/collections/M3TreeResidencyTest.java':'64751e4e64732604d9ff7dc81e489999a5d233f2',
-            'm3/collections/viewport-proof/verify.py':'c6ef67def947b292c1504e68209e86469f6fb180',
+            'm3/collections/qualification/tree-plan-commit-identity/verify_receipt.py':'55bbe67a09c96980c58b12187e9625cb2143c389',
+            'm3/collections/qualification/viewport-fenwick/DOCUMENTATION.json':'75f175cf3b104d7e870dd464726ad8484dafe39f',
+            'm3/collections/qualification/viewport-fenwick/GEOMETRY_CI.json':'11d86595f9b63fc38e51342ddfbf0e3ffd731f5e',
+            'm3/collections/qualification/viewport-fenwick/RECEIVING.json':'3a4d655b23e6c360c6b5920f7ef9ea9052657646',
+            'm3/collections/qualification/viewport-frame/ALLSTATE.json':'d94e6d66b9f49a76f1671cb343e26d9e49eb9cee',
+            'm3/collections/qualification/viewport-frame/FRAME_JAVA_FALLBACK_RECEIVING.json':'35743678c8662b8c4fd847f6cafa97ad311cd30e',
+            'm3/collections/qualification/viewport-frame/FRAME_PARITY_EXECUTION.json':'15d684f3d5db704b5127b337b4a8368570072b6b',
+            'm3/collections/src/test/java/jdk/m3/collections/M3TreeCoverageTest.java':'4e946c6d354c23018b788b88cbd88a7f751f95e5',
+            'm3/collections/src/test/java/jdk/m3/collections/M3TreeNativeLifecycleOracle.java':'74a75d9cf98ad8f2d339ca1c5d3fd94a079d8105',
+            'm3/collections/src/test/java/jdk/m3/collections/M3TreeResidencyTest.java':'65d8a366032c362a24d92b67571fed01b6434cce',
+            'm3/collections/viewport-proof/verify.py':'ab13fc3abce872117bcacaa19eb98c28217f90d9',
           }
           for path,want in sorted(expected.items()):
               if not Path(path).is_file():raise SystemExit('missing owner: '+path)
@@ -102,7 +102,7 @@ jobs:
           names=['M3TreeCommitPlanIdentityTest','M3TreeWindowPlanTest','M3TreeCoverageTest','M3TreeResidencyTest']
           count=0
           for name in names:
-              p=root/('TEST-com.m3.collections.'+name+'.xml')
+              p=root/('TEST-jdk.m3.collections.'+name+'.xml')
               if not p.is_file():raise SystemExit('missing tree owner suite: '+name)
               r=ET.parse(p).getroot()
               n=int(r.get('tests','0'))
@@ -116,15 +116,15 @@ jobs:
         run: |
           set -euo pipefail
           B="$RUNNER_TEMP/m3-viewport-geometry"
-          mkdir -p "$B/src/main/java/com/m3/collections" "$B/src/test/java/com/m3/collections"
-          S=m3/collections/src/main/java/com/m3/collections
+          mkdir -p "$B/src/main/java/jdk/m3/collections" "$B/src/test/java/jdk/m3/collections"
+          S=m3/collections/src/main/java/jdk/m3/collections
           for name in M3HeapGrowth M3SparseExtents M3WindowPlan; do
-            cp "$S/$name.java" "$B/src/main/java/com/m3/collections/"
+            cp "$S/$name.java" "$B/src/main/java/jdk/m3/collections/"
           done
           cp m3/collections/viewport-proof/fixtures/M3ViewportGeometryTest.txt \
-            "$B/src/test/java/com/m3/collections/M3ViewportGeometryTest.java"
+            "$B/src/test/java/jdk/m3/collections/M3ViewportGeometryTest.java"
           cp m3/collections/viewport-proof/fixtures/M3FenwickInverseTest.txt \
-            "$B/src/test/java/com/m3/collections/M3FenwickInverseTest.java"
+            "$B/src/test/java/jdk/m3/collections/M3FenwickInverseTest.java"
           cat > "$B/pom.xml" <<'POM'
           <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -152,7 +152,7 @@ jobs:
           import sys,xml.etree.ElementTree as ET
           root=Path(sys.argv[1]); mode=sys.argv[2]
           for name,want in [('M3ViewportGeometryTest',10),('M3FenwickInverseTest',2)]:
-              p=root/('TEST-com.m3.collections.'+name+'.xml')
+              p=root/('TEST-jdk.m3.collections.'+name+'.xml')
               if not p.is_file():raise SystemExit('missing Fenwick JUnit report '+name)
               r=ET.parse(p).getroot()
               got=tuple(int(r.get(k,'-1')) for k in ('tests','failures','errors','skipped'))
@@ -173,9 +173,9 @@ jobs:
           if r.get('status')!='PASS' or r.get('command_count',0)<32:
               raise SystemExit('installed JNI did not complete its original contract')
           required={
-            'Java_com_m3_collections_M3MaskViewportNative_project',
-            'Java_com_m3_collections_M3MaskViewportNative_projectPage',
-            'Java_com_m3_collections_M3MaskViewportNative_projectFramePage'}
+            'Java_jdk_m3_collections_M3MaskViewportNative_project',
+            'Java_jdk_m3_collections_M3MaskViewportNative_projectPage',
+            'Java_jdk_m3_collections_M3MaskViewportNative_projectFramePage'}
           if set(r.get('exports',[]))!=required:
               raise SystemExit('JNI export contract changed')
           frame=r.get('observations',{}).get('jni-M3FrameRegionContract','')

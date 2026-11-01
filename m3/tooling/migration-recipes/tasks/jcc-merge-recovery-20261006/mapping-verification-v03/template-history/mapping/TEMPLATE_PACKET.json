@@ -20,7 +20,7 @@
     {
       "path": "JccMergeMappingRecoveryTest.java.in",
       "bytes": 49157,
-      "sha256": "3ac63041bb04d41ce17989957f6b5fb98c1125ca54da03b42b6080fbf7e51faf"
+      "sha256": "e9d391411f9f64485cecc91ffd121e78136c5b3a33b9ae3d2ef0839028502cd4"
     },
     {
       "path": "pom.xml",
@@ -30,22 +30,22 @@
     {
       "path": "m3-jcc-merge-mapping-recovery.yml",
       "bytes": 619,
-      "sha256": "5b15d5f15a8f1559c74a96b70ab5d68a408ab577f55b732c2f6b90c12b0c35dd"
+      "sha256": "f483325880525fe26d0d02bb0fb811268b89ed7a4b1b8680335b68754e6627f2"
     },
     {
       "path": "render_template.py",
       "bytes": 12670,
-      "sha256": "8de92641da0a3cdd6d741d6b526a459d6615527610b3c7565be718a27a4c44b0"
+      "sha256": "26d6ba880dc0f7ca297dc27c28d539c0c9c02edfaf4a5044ab57dcc3dd8927d6"
     },
     {
       "path": "README.md",
       "bytes": 6946,
-      "sha256": "264ecfc1876402eeaf28b0190306b71a3a7e3fc318b1b6e31f4f9ac5a96e9e5a"
+      "sha256": "9422a67bf2320d67b6502a420ce090183329be1d433e1b71d2cd7507484a7e4a"
     },
     {
       "path": "compile-check-v01/receipt.json",
       "bytes": 6316,
-      "sha256": "d63ff92d1b317188e032793e98721cba69c1c00b3bc5b5c267d63da32117fd97"
+      "sha256": "32acd40eb96f43cecd55f146a1dbeb115fbc314d4b07c995a649589481c47e9c"
     },
     {
       "path": "compile-check-v01/javac.stdout.log",
@@ -58,14 +58,14 @@
       "sha256": "075c1fd6238386ed6dec222ac8556bd62eb13f370db31e314399bbfb10d3ab21"
     },
     {
-      "path": "compile-check-v01/src/com/m3/rewrite/backport/JccMergeMappingRecoveryTest.java",
+      "path": "compile-check-v01/src/jdk/m3/rewrite/backport/JccMergeMappingRecoveryTest.java",
       "bytes": 49145,
-      "sha256": "a3ca105ed369e0eb0298440e47eab6e93afada986667d6605a24dfcb14eb3d7a"
+      "sha256": "0afb39ca79f9d54ae2452bd8fff0c22759747508f172a847bf3838b67ac9c2f4"
     },
     {
       "path": "compile-check-v02/receipt.json",
       "bytes": 6287,
-      "sha256": "7ef8ab96ead54287d9ebcb6af8137963295a977bcc248159ce35cdcc3592ea3e"
+      "sha256": "c0b9006d9169202059e8b566137daef9d1f9023c91da5e014f37d1ebd5a9a4f6"
     },
     {
       "path": "compile-check-v02/javac.stdout.log",

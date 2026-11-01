@@ -1,6 +1,6 @@
 /* Copyright (c) 2026, Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
-import com.m3.collections.M3IndexMaskCompactor;
-import com.m3.collections.M3IndexMaskWindow;
+import jdk.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.M3IndexMaskWindow;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;

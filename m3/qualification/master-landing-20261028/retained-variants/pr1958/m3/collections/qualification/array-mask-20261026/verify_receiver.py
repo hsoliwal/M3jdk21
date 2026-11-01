@@ -58,8 +58,8 @@ def verify() -> dict:
     if len(source) != 3 or len({row["path"] for row in source}) != 3:
         raise ValueError("receiving scope is not exactly three existing files")
     expected_paths = {
-        "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
-        "m3/collections/src/test/java/com/m3/collections/M3ArrayListShortWordMaskContract.java",
+        "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java",
+        "m3/collections/src/test/java/jdk/m3/collections/M3ArrayListShortWordMaskContract.java",
         "m3/arrays/pom.xml",
     }
     if {row["path"] for row in source} != expected_paths:
@@ -69,7 +69,7 @@ def verify() -> dict:
                     row["after_sha256"])
         if not row.get("before_blob") or not row.get("before_sha256"):
             raise ValueError("missing immutable source baseline seal")
-    list_source = safe_file("m3/collections/src/main/java/com/m3/collections/M3ArrayList.java").read_text(encoding="utf-8")
+    list_source = safe_file("m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java").read_text(encoding="utf-8")
     for required in ("public final class M3ArrayList<E>",
                      "final boolean inlineMask = oldSize <= 2 * Long.SIZE;",
                      "long removalLow = 0L;", "long removalHigh = 0L;",
@@ -77,7 +77,7 @@ def verify() -> dict:
                      "Arrays.fill(elements, write, oldSize, null);"):
         if required not in list_source:
             raise ValueError("array owner contract atom missing: " + required)
-    oracle = safe_file("m3/collections/src/test/java/com/m3/collections/M3ArrayListShortWordMaskContract.java").read_text(encoding="utf-8")
+    oracle = safe_file("m3/collections/src/test/java/jdk/m3/collections/M3ArrayListShortWordMaskContract.java").read_text(encoding="utf-8")
     for token in ("SPDX-License-Identifier: Apache-2.0 OR EPL-2.0",
                   "for (int n = 0; n <= 129; n++)", "seeded.nextInt(1025)"):
         if token not in oracle:

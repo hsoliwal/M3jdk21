@@ -11,7 +11,7 @@ static jint fail(JNIEnv *env, const char *message) {
     return -1;
 }
 
-JNIEXPORT jint JNICALL Java_com_m3_lexicon_M3LexiconWireNative_expand(
+JNIEXPORT jint JNICALL Java_jdk_m3_lexicon_M3LexiconWireNative_expand(
         JNIEnv *env, jclass type, jobject arena, jintArray offsets,
         jintArray lengths, jintArray cwids, jobject output) {
     (void) type;

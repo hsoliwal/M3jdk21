@@ -1,7 +1,7 @@
 family	module	upstream_api	current_owner_path	status	required_gate
 M3AST	jdk.compiler	com.sun.source.tree	-	MAPPED_PENDING	compiler AST ownership and rewrite parity
 M3Annotations	java.base	java.lang.annotation	-	MAPPED_PENDING	retention inheritance reflection semantics
-M3Arrays	java.base	java.lang.reflect.Array;java.util.Arrays	m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java	QUALIFIED_ISOLATED	array mutability covariance and JNI contract
+M3Arrays	java.base	java.lang.reflect.Array;java.util.Arrays	m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java	QUALIFIED_ISOLATED	array mutability covariance and JNI contract
 M3Atomics	java.base	java.util.concurrent.atomic	-	MAPPED_PENDING	linearization JMM ABA and progress
 M3Bits	java.base	java.util.BitSet	src/java.base/share/classes/jdk/internal/mindex/M3Bits.java	EXISTING_INTERNAL_KERNEL	bit rank select bounds and concurrency
 M3Buffers	java.base	java.nio.Buffer;java.nio.ByteBuffer	-	MAPPED_PENDING	positions limits direct memory and byte order
@@ -10,7 +10,7 @@ M3Channels	java.base	java.nio.channels	-	MAPPED_PENDING	partial I/O interrupts a
 M3Charsets	java.base	java.nio.charset	-	MAPPED_PENDING	malformed replacement incremental decoder parity
 M3ClassLoaders	java.base	java.lang.ClassLoader	-	MAPPED_PENDING	loader identity unloading and access
 M3Classes	java.base	java.lang.Class	-	MAPPED_PENDING	class mirror identity modules hidden classes
-M3Collections	java.base	java.util.Collection;java.util.Map	m3/collections/src/main/java/com/m3/collections/M3Collections.java	QUALIFIED_ISOLATED	views iteration equality serialization and JMM
+M3Collections	java.base	java.util.Collection;java.util.Map	m3/collections/src/main/java/jdk/m3/collections/M3Collections.java	QUALIFIED_ISOLATED	views iteration equality serialization and JMM
 M3Compiler	jdk.compiler	javax.tools;com.sun.tools.javac	-	MAPPED_PENDING	source-to-binary parity compiler plugin ABI
 M3Concurrent	java.base	java.util.concurrent	-	MAPPED_PENDING	happens-before and forward-progress contracts
 M3Configuration	java.base	java.util.Properties	-	MAPPED_PENDING	configuration parsing and system policy

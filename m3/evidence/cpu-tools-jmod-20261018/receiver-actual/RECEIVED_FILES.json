@@ -1,6 +1,6 @@
 {
   "m3/docs/name-mapping.d/m3-cpu-tools-jmod-20261018.json": {
-    "sha256": "8cea69ebc33dafd9c412c602b5038b883b8ada1a4ece3a08a879222c3665332e",
+    "sha256": "ffc8d74989ed7eac31b85218db352e4750c0e9236334ddcaa8de2b232ae6761c",
     "mode": "0o644",
     "mtime_ns": 1792317997658077430
   },
@@ -10,7 +10,7 @@
     "mtime_ns": 1792317997658559764
   },
   "m3/tooling/module-packs/cpu-tools/DONOR_CHANGES.tsv": {
-    "sha256": "e62ad5598bc234a3425d7872fb7e545c938761cdd5d761920bf84a7265f6d90f",
+    "sha256": "47159cf3499edd9b9643d39f1ecdfa9ccd8f8b111f096aa29d7c428bd53ae853",
     "mode": "0o644",
     "mtime_ns": 1792317997658918900
   },
@@ -20,7 +20,7 @@
     "mtime_ns": 1792317997659113664
   },
   "m3/tooling/module-packs/cpu-tools/DONOR_MODULES.tsv": {
-    "sha256": "2a0b7e395ed48e9eed14ef05f47a1c4bbd7c34f63cae572b57731d664e319979",
+    "sha256": "62f5a9ba0a60a3df5901a720823a8f3a8fac7ad4c467fa11e7aee0965e6854c3",
     "mode": "0o644",
     "mtime_ns": 1792317997659549724
   },
@@ -60,7 +60,7 @@
     "mtime_ns": 1792317997661492062
   },
   "m3/tooling/module-packs/cpu-tools/TASK_PACKET.json": {
-    "sha256": "c8969ce2c4313d61fe004512b61e49353176800377b4a919a6820ebde1a0b4b3",
+    "sha256": "83abb90abbd9682f82daf60e2289e78bfbe67d890845ab324616e538191e3e07",
     "mode": "0o644",
     "mtime_ns": 1792317997661763033
   },
@@ -75,17 +75,17 @@
     "mtime_ns": 1792317997662110779
   },
   "m3/tooling/module-packs/cpu-tools/fixtures/M3CpuToolsTest.java": {
-    "sha256": "54265effbe2e595f1b4fd69df6e4741124b48f9cbdc0d1de6c121d483bbb9c15",
+    "sha256": "59a1eb131c938a28555aff6347e00be06dba736829a82ca7d8d5d5bea97f53dd",
     "mode": "0o644",
     "mtime_ns": 1792317997662338479
   },
   "m3/tooling/module-packs/cpu-tools/fixtures/M3DonorToolsTest.java": {
-    "sha256": "c087fce928a4dc3afad0ff63466f1ee1d327aba5bc7a16154a07e718eddc6d3d",
+    "sha256": "2289ff0a823f53883827bcf3c5c1e998fc637b1c5426d78d97e0d475c543ba0a",
     "mode": "0o644",
     "mtime_ns": 1792317997662568780
   },
   "m3/tooling/module-packs/cpu-tools/fixtures/M3SourceToolsTest.java": {
-    "sha256": "48f4d4085e14007ba44d54ec0ac702e114f3fe16855b9a93b3662cc4647179bf",
+    "sha256": "af69362c97ad4142ddaaa838a9dec9377725f32bf243c0488c510d42a99e401c",
     "mode": "0o644",
     "mtime_ns": 1792317997662761249
   },
@@ -100,7 +100,7 @@
     "mtime_ns": 1792317997663257017
   },
   "m3/tooling/module-packs/cpu-tools/legal/NOTICE.txt": {
-    "sha256": "c604114272abd52e2c4d36c35258c75040e6672e1f9cd9f562aa868641e99508",
+    "sha256": "10a7216cbfc22f3ba250e402f1c7f0ecd78e42eb79e5d1c66fdfa48f12c73243",
     "mode": "0o644",
     "mtime_ns": 1792317997663486733
   },
@@ -109,183 +109,183 @@
     "mode": "0o644",
     "mtime_ns": 1792317997663675073
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.codec.varint/com/m3/tools/codec/varint/VarInts.java": {
-    "sha256": "ee0ed2656ce9b0489f59ae36952e65f96c3b8fff6cecbb687c879171325adfff",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.codec.varint/jdk/m3/tools/codec/varint/VarInts.java": {
+    "sha256": "727e6f87e0494ad4dd6864a619e323c2fee97ab50015da0b60aa93e65f107671",
     "mode": "0o644",
     "mtime_ns": 1792317997664136800
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.codec.varint/module-info.java": {
-    "sha256": "7cc1c89f9898c2117c47cdbfd85434cd44fb0873264345608a968f2c6058b465",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.codec.varint/module-info.java": {
+    "sha256": "4dfaa0010d9a791b0613860cbd77390896716624445ad7151a98a1648df25b86",
     "mode": "0o644",
     "mtime_ns": 1792317997664344029
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.constraint.interval/com/m3/tools/constraint/interval/Intervals.java": {
-    "sha256": "0865c13b4cda9cca1ce5e94f8088cc194de03b5b73074d8db4c5d8374eec0420",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.constraint.interval/jdk/m3/tools/constraint/interval/Intervals.java": {
+    "sha256": "364ea0481635019fe057e8cbb56120a1d01034cdff3b3c1307309b891d2f80bb",
     "mode": "0o644",
     "mtime_ns": 1792317997664989448
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.constraint.interval/module-info.java": {
-    "sha256": "991c51937e9bd9cb4425721fe55a39bbb9586dbff655b3ad1c5253c96c5a9ce4",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.constraint.interval/module-info.java": {
+    "sha256": "5bdf7cf5c4b5d57c7b5b9deb78a53c2193750a9710201e043140050709143cfe",
     "mode": "0o644",
     "mtime_ns": 1792317997665222242
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/CpuTools.java": {
-    "sha256": "ea6ccee666237e0dfe9fee9dd0937188bebe559d06ea453d481fd96ac3099b0c",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/CpuTools.java": {
+    "sha256": "43601c557fa07a04c86c9ff756854d822a111eff1ea17ddcf1c4458bbcb832e7",
     "mode": "0o644",
     "mtime_ns": 1792317997665696636
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/CpuToolsCli.java": {
-    "sha256": "14fda8a14704005a17bab6b1b43f9612b726513f12f6098670ca18156094f89f",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/CpuToolsCli.java": {
+    "sha256": "a100163e105a78c7a7ef30a6b7c083c768ba00fed4b675e3962788c9f3f8bd6a",
     "mode": "0o644",
     "mtime_ns": 1792317997665970320
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/com/m3/tools/cpu/M3AstTools.java": {
-    "sha256": "4c68e0a8d30e163c16ad0162a9a0c5c50b4d69c6245e462e8f3e30f113e7638b",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/jdk/m3/tools/cpu/M3AstTools.java": {
+    "sha256": "3e2b9a55dc75a9ff328826c6670bc12f3389619a3c6ce42e241644fc77f6de5d",
     "mode": "0o644",
     "mtime_ns": 1792317997666230648
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.cpu/module-info.java": {
-    "sha256": "0ce6330be1dc0e6b95f1b0601ce8abb39002dd065da753658f299b01c633bf45",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.cpu/module-info.java": {
+    "sha256": "045874cc3c4bccefbf7ed9bdc4d93dab456c1f81c3856c60391a92f8699c2de8",
     "mode": "0o644",
     "mtime_ns": 1792317997666501244
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.paths/com/m3/tools/graph/paths/ShortestPaths.java": {
-    "sha256": "9a4025994135b13a02454ca4a5cb772c663cad664d17406653d4334199b96a8d",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.paths/jdk/m3/tools/graph/paths/ShortestPaths.java": {
+    "sha256": "c88608bc4362856d9a263b4b97819fb80ab8d944727764130e3d9bcbe6144416",
     "mode": "0o644",
     "mtime_ns": 1792317997667431706
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.paths/module-info.java": {
-    "sha256": "2ff4d697a79235e3cadcf1bf83c949ffbdefee6500aedbe1037ff12ea5a8f06a",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.paths/module-info.java": {
+    "sha256": "89e811b835a7afad11a60970c42fc1ee3b9abc2e7522b951d2331142f7695635",
     "mode": "0o644",
     "mtime_ns": 1792317997667904596
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.topology/com/m3/tools/graph/topology/TopologicalOrder.java": {
-    "sha256": "12fb78f356d9560de3b882b12cbc2be8314666b2fb5c0db0d28463c79f984aa1",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.topology/jdk/m3/tools/graph/topology/TopologicalOrder.java": {
+    "sha256": "14e7378411cb1c78b9b5abfcea81ba8f039ccd89786cebbcc3f363ea567379f9",
     "mode": "0o644",
     "mtime_ns": 1792317997668435850
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.graph.topology/module-info.java": {
-    "sha256": "384fbc50501cda2ebea8cd30c2f76703aaf999ca9ca8278fdd70a797ba6d5343",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.graph.topology/module-info.java": {
+    "sha256": "00f0f71038d3ab67f4f260557e7fd086700c379a2edbe08a3a929682e087a0c1",
     "mode": "0o644",
     "mtime_ns": 1792317997668669214
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.plan.priority/com/m3/tools/plan/priority/StablePriorityQueue.java": {
-    "sha256": "b2298a33b91f201d9b1592d01a5b55e1542e06f1dc391ad3adc6c31d1209da60",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.plan.priority/jdk/m3/tools/plan/priority/StablePriorityQueue.java": {
+    "sha256": "abebf89af99ff624f1a03751831145dbfa1af29e958478f66eba003ac861e4cb",
     "mode": "0o644",
     "mtime_ns": 1792317997669522039
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.plan.priority/module-info.java": {
-    "sha256": "fa8b28dd4a029f8dd26b1bf798da8094399c4105a1ee6b11433230edeb48b586",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.plan.priority/module-info.java": {
+    "sha256": "0ef7bbc1d2fa26231240007fa41273e95768383782ec68c17b083289f836c0f9",
     "mode": "0o644",
     "mtime_ns": 1792317997670017624
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.stats.streaming/com/m3/tools/stats/streaming/RunningStatistics.java": {
-    "sha256": "ebe9c587b94f03f11ec6d18fd07b1d8e40390ef5e4b2d7a06bcf7fa11e5c15f6",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.stats.streaming/jdk/m3/tools/stats/streaming/RunningStatistics.java": {
+    "sha256": "f84f2ebb7d32f73db1aa0ebbfa8a088e13dfb815baf848fcd152708c70b261b7",
     "mode": "0o644",
     "mtime_ns": 1792317997670498409
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.stats.streaming/module-info.java": {
-    "sha256": "c25067af3117b758880b06e3d72acea094f81c2340b0952448b605b6d8cd53dd",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.stats.streaming/module-info.java": {
+    "sha256": "e3444eafb5e81a011ed1d93c56be512301ea4f36a1929bb26cb6fa8e4fb63f54",
     "mode": "0o644",
     "mtime_ns": 1792317997670833619
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.diff/com/m3/tools/text/diff/TextDelta.java": {
-    "sha256": "e3a32fabba420f21f761835f108e926ebd4ef80aa56ac8a15934640c15687ddb",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/jdk/m3/tools/text/diff/TextDelta.java": {
+    "sha256": "779448e86648711b20810aa8a82264cbc98073149447b00690c8f16b256e1811",
     "mode": "0o644",
     "mtime_ns": 1792317997671414644
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.diff/module-info.java": {
-    "sha256": "1e28721db2ebd26926bbe7793f0c04ec29d027c2532f446ad5827b12685f30f5",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.diff/module-info.java": {
+    "sha256": "26b71c5f02338b0195746c0895dcae0dd76ee9ba8d91a3dafd80cae47c1b16c5",
     "mode": "0o644",
     "mtime_ns": 1792317997672477699
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.frequency/com/m3/tools/text/frequency/TermFrequency.java": {
-    "sha256": "745e16d447c5129822e2864fd025e5dab2cb7683ad6b0e239e71aa4635fcb699",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.frequency/jdk/m3/tools/text/frequency/TermFrequency.java": {
+    "sha256": "968c74c80fbf119f90e5bb02e4c15cd271aba341e30e49f709dcc91c64272dff",
     "mode": "0o644",
     "mtime_ns": 1792317997673218331
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.frequency/module-info.java": {
-    "sha256": "006aa6a1c36a19ce09f076b822d82451b11832a19fd9256ba86c25b858e81d12",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.frequency/module-info.java": {
+    "sha256": "ea37386c16c7b284107dc98e43810df6dee8365810433512ed5dc164605f8732",
     "mode": "0o644",
     "mtime_ns": 1792317997673506956
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.index/com/m3/tools/text/index/InvertedIndex.java": {
-    "sha256": "fe5bb68d37c09d33d8baae2e76a223fbdd627018e30b8532735e66e201ed846c",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/jdk/m3/tools/text/index/InvertedIndex.java": {
+    "sha256": "a03e178d41c17342d48d0ce12eb555d737115fb2a15c19ef51d52775e7c902f6",
     "mode": "0o644",
     "mtime_ns": 1792317997674077608
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.index/module-info.java": {
-    "sha256": "bdcaabea868274897fcce3708a3552c39f711562286aee8e8f8393c98e2dad3b",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.index/module-info.java": {
+    "sha256": "aacacfc948ff4f9d56925e4fc9c38c0af52ba22da8a6ff70fc4f1e8dc16359e1",
     "mode": "0o644",
     "mtime_ns": 1792317997674794546
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.ngram/com/m3/tools/text/ngram/NGrams.java": {
-    "sha256": "0cde8da1762345362e5ed10efef9d27b6a7757f70d7ee5b8935b440660373442",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/jdk/m3/tools/text/ngram/NGrams.java": {
+    "sha256": "e96155f2e67803581f72436e1b783d2c6621809e273fc9d13629b67dd38215a1",
     "mode": "0o644",
     "mtime_ns": 1792317997675779262
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.ngram/module-info.java": {
-    "sha256": "924e5c6b8124e60a310aad43b17d8a57fbd6682f93fbf4fad22acbf9a9a78f88",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.ngram/module-info.java": {
+    "sha256": "035920afd021691bc712f31c898f65b599b652067c3f17e9c4568f2bd5892a62",
     "mode": "0o644",
     "mtime_ns": 1792317997676044313
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.normalize/com/m3/tools/text/normalize/UnicodeNormalizer.java": {
-    "sha256": "4420528a9e9cb9f12e968397fb0f1097d7a39f61ade878a17157a65ad7a5f8e6",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.normalize/jdk/m3/tools/text/normalize/UnicodeNormalizer.java": {
+    "sha256": "8412d7c628d2e4e32fb81f62f48697f229f14bcb3ee3b08628ef96b3e2514ee0",
     "mode": "0o644",
     "mtime_ns": 1792317997677168422
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.normalize/module-info.java": {
-    "sha256": "86fb82b2cbcebc173d70c3e3833dadf3caf302fb2cc9f618b84093faf1551507",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.normalize/module-info.java": {
+    "sha256": "6f46e1e08418d796a56a823fe170455302426a52d69df16ed2ded756dcc2ed15",
     "mode": "0o644",
     "mtime_ns": 1792317997677921474
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.regex/com/m3/tools/text/regex/RegexMatcher.java": {
-    "sha256": "7c01f9b2b62a7544de11f006658a1527c809b5275057cfdc3c34b2fb8aa579df",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.regex/jdk/m3/tools/text/regex/RegexMatcher.java": {
+    "sha256": "b82a71a5afd79f5f3d8b7afcd9c9ee8b67ef15ada6a112469032ded9c153447a",
     "mode": "0o644",
     "mtime_ns": 1792317997678685231
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.regex/module-info.java": {
-    "sha256": "3adbb0dca746d74dc8eb26d994d03e6b916fdcbe5b267a599b55ddd3dbb31ede",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.regex/module-info.java": {
+    "sha256": "0023883ea478a63d02ae09f029b61f32b4ef8314db250036f193656c306ca92f",
     "mode": "0o644",
     "mtime_ns": 1792317997678942016
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.search/com/m3/tools/text/search/ExactSearch.java": {
-    "sha256": "c13513bd53a52186f1e3d9c41e6c78292b50d8bf3504bfb365b6947c89338268",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/jdk/m3/tools/text/search/ExactSearch.java": {
+    "sha256": "e0f1df2028c4f8098d86595a45545f2d48540004fbbf01adea1cb833e4b78b32",
     "mode": "0o644",
     "mtime_ns": 1792317997679788333
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.search/module-info.java": {
-    "sha256": "37148129109194935e7f8eedc48e52fd484a5db2d4ee70bd4192ae29f756eafb",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.search/module-info.java": {
+    "sha256": "5f23b208d895f1cf05850e9f27edfbbe3a1a95cb82dcf6b240384aeab603d52f",
     "mode": "0o644",
     "mtime_ns": 1792317997680136631
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.similarity/com/m3/tools/text/similarity/EditDistance.java": {
-    "sha256": "5f78c6fc54ebc0e41c95ca557728ad3e169b9f1394e415d5386e7a8fa11137b2",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.similarity/jdk/m3/tools/text/similarity/EditDistance.java": {
+    "sha256": "46046967b3f3d3a573b025e28f4ec23e320e3e8b16a47ce12623fa5658153115",
     "mode": "0o644",
     "mtime_ns": 1792317997680918771
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.similarity/module-info.java": {
-    "sha256": "59b6476524c65bee5dde00ec8cd2bd02b0afd86cff97de70ea63b765c035b2f0",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.similarity/module-info.java": {
+    "sha256": "8ae0bf4fc45876171c948e459feb1bfdcf4b540dc2903563b5fab9c49d31084b",
     "mode": "0o644",
     "mtime_ns": 1792317997681290978
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.tokenize/com/m3/tools/text/tokenize/WordTokenizer.java": {
-    "sha256": "5b8f130337dc6ae2ad813e8d7ce89dc6bcff2371eb9ac3f067aa83ea9fa37911",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.tokenize/jdk/m3/tools/text/tokenize/WordTokenizer.java": {
+    "sha256": "76f9be27522fb96a8b812af74ff29661d8b57184d96922533024dd531dd43922",
     "mode": "0o644",
     "mtime_ns": 1792317997682825716
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.text.tokenize/module-info.java": {
-    "sha256": "dfe6e06d152907c6ab88de0a23c0bddc3bfd0ab4498095920d5a3f2bb3b8af77",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.text.tokenize/module-info.java": {
+    "sha256": "3ddebe14556ed8e4fd2e1aeed52bc2e7e099b988dbee9781c0cefba02b3b9253",
     "mode": "0o644",
     "mtime_ns": 1792317997683110857
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.verify.sha256/com/m3/tools/verify/sha256/Sha256.java": {
-    "sha256": "40092a5900bb591bc29ecc277242607c79ae4b2f813b7c5af35cc055e337b6af",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.verify.sha256/jdk/m3/tools/verify/sha256/Sha256.java": {
+    "sha256": "b5a78b494c67bb6bc5773f2eb957f81336ff4c6c1eeb88796a922f01d8188d59",
     "mode": "0o644",
     "mtime_ns": 1792317997684619429
   },
-  "m3/tooling/module-packs/cpu-tools/src/com.m3.tools.verify.sha256/module-info.java": {
-    "sha256": "bd2e133e589daf2f04c3b0ecad82abe153304e0202e9d6df103fd0171e7a6264",
+  "m3/tooling/module-packs/cpu-tools/src/jdk.m3.tools.verify.sha256/module-info.java": {
+    "sha256": "cdf42904dd792a820ea85c00edc9f989ebadef4017527986883b3e20f7cddf71",
     "mode": "0o644",
     "mtime_ns": 1792317997684915262
   },

@@ -9,4 +9,4 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/workspace/scratch/13309be96b09/collections-work/recipes/m3-collections-contract-refinement-20261017/target/m3jdk21-arrays/receiver-proof/isolated-7pchah10/symlink/crate/receive.py", line 50, in contained
     raise ValueError("symlink target or parent is not admitted: " + relative)
-ValueError: symlink target or parent is not admitted: m3/arrays/src/test/java/com/m3/arrays/M3ArrayEmptySegmentsTest.java
+ValueError: symlink target or parent is not admitted: m3/arrays/src/test/java/jdk/m3/arrays/M3ArrayEmptySegmentsTest.java

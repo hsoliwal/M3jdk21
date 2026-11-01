@@ -10,12 +10,12 @@ Source baseline: product PR #1882 previous head `e2e1ea70b3c804d5fe7f6c974384d25
 
 | Original product owner | Baseline Git blob / ABSENT | Exact received postimage Git blob |
 |---|---|---|
-| `M3LongRankBatchNative.java` | `8ba40d4b547f53bcf47ec0fb52eda6085a27efc9` | `e7f9a656ae90a7e90478a80cabbe8e19419f6d5d` |
-| `M3LongRankIndex.java` | `77c6f8b98e39d9e22513a9c1cf5108cf82a0e866` | `1d6930704b737f38aaaca1de37570efa3cdd4de5` |
-| `m3_long_rank_batch_jni.c` | `226e7dec4413166d9bda2a2d8e5dd73751184bb8` | `f03722dd7836b668247ea595d953769b4ffa7e60` |
-| `M3LongRankTripletSumContract.java` | ABSENT | `011265b99581d3bd86be09c3112fea335439756d` |
-| `M3LongRankTripletSumTest.java` | ABSENT | `6f835bcaef2caf20e633754af2bc5ed3b6da2229` |
-| `.github/workflows/m3-long-rank-triplet-jni-java21.yml` | ABSENT | `4b3f5739b06ee0ae94f1b33441674c8a4b360acf` |
+| `M3LongRankBatchNative.java` | `8ba40d4b547f53bcf47ec0fb52eda6085a27efc9` | `878518da1d55ea8c036a0055cfa6fd1299f9a5ca` |
+| `M3LongRankIndex.java` | `77c6f8b98e39d9e22513a9c1cf5108cf82a0e866` | `e884b52485f34a9d197cdd2d44606a74d09f40f5` |
+| `m3_long_rank_batch_jni.c` | `226e7dec4413166d9bda2a2d8e5dd73751184bb8` | `ab263bf672f9c045cd5ab9aea8dade21a5683fd1` |
+| `M3LongRankTripletSumContract.java` | ABSENT | `890cb04a6ebc3e0c694a99ae53c9fe3cc41f9bbf` |
+| `M3LongRankTripletSumTest.java` | ABSENT | `3586f830a42914fe5f44ef9bcf20016f3ce4b0f3` |
+| `.github/workflows/m3-long-rank-triplet-jni-java21.yml` | ABSENT | `3c6cfc2b26cf9eddbc0677ba7265c32293cc4e60` |
 
 ## Contract
 Public additive method `M3LongRankIndex.distinctTripletSumCount(long target)` uses the existing immutable signed-long sorted `values` owner. Returns the count of **distinct value triples**, not the number of physical `i<j<k` occurrence combinations, satisfying the uniqueness pattern of [LeetCode #15](https://leetcode.com/problems/3sum/). Existing M3 rank/index/JNI methods remain unchanged.

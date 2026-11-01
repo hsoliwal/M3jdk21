@@ -2,7 +2,7 @@
   "schema": "spring-value-equality-before-fix-v1",
   "fixtureSHA256": "20db98ef08686c4887baf32fb2ad7fa96fed2ef6aa28c957026629837a630cca",
   "fossSHA256": "818b5a685f14eae73b0aee986c1104428c11d8580fa01cfbc3e5bef838410563",
-  "frozenOwnerSourceSHA256": "f79257c02e899ca2e51b900d3272a7265b18c72f120a29bb95f9d52e908e8084",
+  "frozenOwnerSourceSHA256": "a0e658e3b22729b101cef0b64a91164846b1c5a934fcaf4220173f2608859ae7",
   "frozenOwnerClassPins": [
     {
       "path": "com\\m3\\collections\\spring\\M3LinkedCaseInsensitiveMap$EntryIterator.class",

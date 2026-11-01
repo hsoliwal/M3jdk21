@@ -221,10 +221,10 @@
         "recipe": {
           "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-source-recovery-handoff-20261005",
           "version": "0.1.0-SNAPSHOT",
-          "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-          "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+          "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+          "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
           "preconditions": [
-            "All four existing E3 preimages at 0994ecd65e86600f417f4d8702838d8c2663af61; canonical map SHA256 e4ae516fea9822a4bfe26669e9749e167f52bb30049d520339ee42f3779bc0b3.",
+            "All four existing E3 preimages at 0994ecd65e86600f417f4d8702838d8c2663af61; canonical map SHA256 61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8.",
             "Preserve the complete E3 crate, all seven dependency guards, all previous source/target objects, unchanged receiver evidence and Descriptor reconciliation.",
             "Actual recovery source publication 0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8 is bound. Current input be92 qualification and historical 0b/d1 evidence remain separately scoped; no capability or JDK promotion."
           ],
@@ -288,8 +288,8 @@
         "recipe": {
           "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-handoff-20261005",
           "version": "0.1.0-SNAPSHOT",
-          "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-          "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+          "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+          "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
           "preconditions": [
             "Exact canonical map preimage 67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb.",
             "Use the retained text transformer and sealed-install/1 replay owner for reviewed ledger bytes.",
@@ -502,10 +502,10 @@
         "recipe": {
           "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-source-recovery-handoff-20261005",
           "version": "0.1.0-SNAPSHOT",
-          "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-          "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+          "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+          "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
           "preconditions": [
-            "All four existing E3 preimages at 0994ecd65e86600f417f4d8702838d8c2663af61; canonical map SHA256 e4ae516fea9822a4bfe26669e9749e167f52bb30049d520339ee42f3779bc0b3.",
+            "All four existing E3 preimages at 0994ecd65e86600f417f4d8702838d8c2663af61; canonical map SHA256 61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8.",
             "Preserve the complete E3 crate, all seven dependency guards, all previous source/target objects, unchanged receiver evidence and Descriptor reconciliation.",
             "Actual recovery source publication 0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8 is bound. Current input be92 qualification and historical 0b/d1 evidence remain separately scoped; no capability or JDK promotion."
           ],
@@ -570,8 +570,8 @@
         "recipe": {
           "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-handoff-20261005",
           "version": "0.1.0-SNAPSHOT",
-          "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-          "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+          "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+          "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
           "preconditions": [
             "Exact canonical map preimage 67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb.",
             "Use the retained text transformer and sealed-install/1 replay owner for reviewed ledger bytes.",
@@ -597,8 +597,8 @@
       "ref": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
       "file": "files/current/m3/docs/name-mapping.json",
       "bytes": 235299,
-      "sha256": "9fce21acb83574c795ca674b263a324315be01e8c87ba149ae6ae3ac79d39c45",
-      "git_blob": "c31b8efff91c3b8f8829376d385944640f036c77",
+      "sha256": "62506a2532ed354bb6193aca6bb26894209cdd21abdd31c538ec25f8375ccf73",
+      "git_blob": "5cb4a65507219148a259a2b2e214e4d2773b011b",
       "tool_envelope": "calls/current_name-mapping.json.json"
     },
     {
@@ -664,29 +664,29 @@
       "equal_prior": true
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "prior_sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "prior_sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
       "current": {
-        "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
         "ref": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
-        "file": "files/current/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "file": "files/current/m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
         "bytes": 12032,
-        "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
-        "git_blob": "a2e8c916208b563517e51b738744a05357e633aa",
+        "sha256": "e7c17ac7123ca810f1104420e7f4ff8249adce3c59f8b1faca7f7d5e823ff795",
+        "git_blob": "3fdc75a71290e2fd1659bfbc7fa532828363275b",
         "tool_envelope": "calls/current_m3__tooling__migration-recipes__src__main__java__com__m3__rewrite__backport__M3Jdk21HashPinnedTextSnapshotRecipe.java.json"
       },
       "equal_prior": true
     },
     {
       "path": "m3/tooling/migration-recipes/pom.xml",
-      "prior_sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888",
+      "prior_sha256": "3eb73bbf38c0c591b8f714f6e9923eaa25a35b5ffc7f0512b8ec7fd3602b5531",
       "current": {
         "path": "m3/tooling/migration-recipes/pom.xml",
         "ref": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
         "file": "files/current/m3/tooling/migration-recipes/pom.xml",
         "bytes": 3383,
-        "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888",
-        "git_blob": "86f223907bbb053f4792e6bf771c3c0882e1751b",
+        "sha256": "3eb73bbf38c0c591b8f714f6e9923eaa25a35b5ffc7f0512b8ec7fd3602b5531",
+        "git_blob": "e41cf1ce137961fc4f9eef9092acedd06425d33e",
         "tool_envelope": "calls/current_migration-recipes-pom.xml.json"
       },
       "equal_prior": true
@@ -706,15 +706,15 @@
       "equal_prior": true
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
-      "prior_sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "prior_sha256": "8006b173253ea7502efe7f7a77738b65f9df9e2871d4d6c29ff4fb8fb058c8c6",
       "current": {
-        "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+        "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
         "ref": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
-        "file": "files/current/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+        "file": "files/current/m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
         "bytes": 396,
-        "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
-        "git_blob": "2a62a7a35e9e59cf403336c197f60d7e5915b064",
+        "sha256": "8006b173253ea7502efe7f7a77738b65f9df9e2871d4d6c29ff4fb8fb058c8c6",
+        "git_blob": "f54f1a1e1ac98d3206e65387a629860673fb5d8c",
         "tool_envelope": "calls/current_m3__tooling__migration-recipes__src__main__resources__com__m3__rewrite__backport__jdk21-hash-pinned__jdk22-descriptor__manifest.tsv.json"
       },
       "equal_prior": true

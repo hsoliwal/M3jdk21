@@ -4,8 +4,8 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
-MAIN="$ROOT/m3/collections/src/main/java/com/m3/collections"
-TEST="$ROOT/m3/collections/src/test/java/com/m3/collections"
+MAIN="$ROOT/m3/collections/src/main/java/jdk/m3/collections"
+TEST="$ROOT/m3/collections/src/test/java/jdk/m3/collections"
 NATIVE="$ROOT/m3/collections/src/main/native/collections"
 BUILD="$(mktemp -d)"
 trap 'rm -rf "$BUILD"' EXIT
@@ -18,7 +18,7 @@ javac --release 21 -Xlint:all -Werror -d "$BUILD/classes" \
   "$MAIN/M3SignalDimensions.java" \
   "$TEST/M3SignalMask32Contract.java"
 
-java -cp "$BUILD/classes" com.m3.collections.M3SignalMask32Contract
+java -cp "$BUILD/classes" jdk.m3.collections.M3SignalMask32Contract
 echo "JAVA_21_DIFFERENTIAL=PASS"
 
 if [[ "$(uname -s)" == "Linux" ]] && command -v cc >/dev/null; then
@@ -30,7 +30,7 @@ if [[ "$(uname -s)" == "Linux" ]] && command -v cc >/dev/null; then
     "$NATIVE/m3_signal_order_jni.c"
   java -Dm3.collections.signal.native=true \
     -Djava.library.path="$BUILD" -cp "$BUILD/classes" \
-    com.m3.collections.M3SignalMask32Contract --require-jni
+    jdk.m3.collections.M3SignalMask32Contract --require-jni
   echo "JAVA_C_JNI_PARITY=PASS"
 else
   echo "JAVA_C_JNI_PARITY=NOT_RUN_PLATFORM_OR_COMPILER_UNAVAILABLE"

@@ -28,7 +28,7 @@ M3 String · Regex and precompute · Lean collections · JNI/native boundaries �
 
 | Follow the engineering | Open the source or evidence |
 | --- | --- |
-| **M3 String** — canonical text, views and compositions; String/JNI integration target | [M3 String migration and lineage](m3/docs/m3string-synexia-lineage.md) · [String porting invariant](m3/docs/M3JDK21_PORTING_INVARIANT.md) |
+| **M3 String** — canonical text, views and compositions; String/JNI integration target | [M3 String migration and lineage](m3/docs/m3string-m3-lineage.md) · [String porting invariant](m3/docs/M3JDK21_PORTING_INVARIANT.md) |
 | **Regex and precompute** — planned reusable indexes, caches and bounded metadata | [Regex and text contracts](m3/docs/string-text-replacement-spec.md) · [Compatibility/benchmark spec](m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md) |
 | **Collections and arrays** — lean storage, indexed signals and mechanical improvement | [Collections workstream](m3/collections/) · [Array workstream](m3/arrays/) |
 | **Recipes and convergence** — reusable transformations, source mapping and acceptance gates | [Canonical Synexia recipes](https://github.com/hsoliwal/com.synexia/tree/develop/synexia-openrewrite-recipes) · [Receiving boundary](AGENTS.md#hard-boundary-postimages-only-never-recipes) |
@@ -92,8 +92,8 @@ System.out.println(joined.flatten()); // expected: BCDE
 
 The original is copied into owned immutable storage. The two ranges share that
 storage; the join records leaves; each `flatten()` explicitly allocates a normal
-String. Follow [LocalM3Arena](m3/core/src/com/m3/text/LocalM3Arena.java),
-[M3StringPiece](m3/core/src/com/m3/text/M3StringPiece.java), and the
+String. Follow [LocalM3Arena](m3/core/src/jdk/m3/text/LocalM3Arena.java),
+[M3StringPiece](m3/core/src/jdk/m3/text/M3StringPiece.java), and the
 [worked source tour](m3/docs/first-session-guide.md) to see where each cost occurs.
 The comments are source-derived expectations, not captured output from this documentation update.
 
@@ -105,7 +105,7 @@ The comments are source-derived expectations, not captured output from this docu
 | Do current names match the canonical map? | `python3 m3/tooling/name-contract/check.py` | This read-only queue check does not promote a candidate |
 | What blocks release qualification? | `python3 m3/release/verify_release_admission.py --queue-out m3/release/queue/runs/local/queue.tsv` | Visible pending/blocked evidence; `boundary_ready` is separate from `release_ready` |
 | How do I build the runtime? | [Native build guide](m3/docs/native-build.md) | Host prerequisites, boot JDK and matched-image output |
-| What has actually been admitted? | [Release contract](m3/release/release-contract.json) and [current String phase](m3/synexia-import/current-full-borrow/STRING_PHASE.md) | Exact scope and still-open gates |
+| What has actually been admitted? | [Release contract](m3/release/release-contract.json) and [current String phase](m3/m3-import/current-full-borrow/STRING_PHASE.md) | Exact scope and still-open gates |
 
 At the reviewed baseline, the release contract records the immutable text
 foundation as implemented with a repository test surface. It explicitly does
@@ -135,7 +135,7 @@ to select the shell, JDK variables, logs and matching test configuration.
 
 The receiving order remains **String → arrays → collections → AST/compiler → remaining families**.
 Documentation, copied fixtures and successful donor tests do not advance that order. Read the
-[current String phase packet](m3/synexia-import/current-full-borrow/STRING_PHASE.md) alongside
+[current String phase packet](m3/m3-import/current-full-borrow/STRING_PHASE.md) alongside
 its machine-readable gate records. Historical guides retain their original evidence scope;
 use the current source and exact-commit results to determine what is available.
 

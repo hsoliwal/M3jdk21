@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: Apache-2.0
-# Java21 host patch verification; NOT a modified M3JDK21 image qualification.
+# Java21 host patch verification; NOT a modified M3JDK 21 image qualification.
 set -euo pipefail
 root="$(cd "$(dirname "$0")/../../.." && pwd)"
 tmp="$(mktemp -d)"

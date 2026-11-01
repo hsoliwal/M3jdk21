@@ -26,8 +26,8 @@ JNI and HotSpot owners: unchanged; no second ranking or metric engine introduced
 
 Three original GitHub blob hashes match canonical Synexia recipe resources:
 `df7be1d4460d362c1c5c425ef2ec09b485639789`,
-`8de9b5b967e5cdf6580a78997b4dee4a73d402fa`,
-`eaa29e06a26553f6ef8fa3d4539ac9e10b9a3fa7`.
+`e8ee08f01ee6c472bdacc9e2efa8cda9ae11c526`,
+`9273c017afc3db043c1defb3a83b4b9e7d837728`.
 
 The original JDK workflow SHA-256 source-sealed succession:
 `bba2b2716b79377b795a427491e78cceb02853575da0ad86829b0b04ef3b2373`

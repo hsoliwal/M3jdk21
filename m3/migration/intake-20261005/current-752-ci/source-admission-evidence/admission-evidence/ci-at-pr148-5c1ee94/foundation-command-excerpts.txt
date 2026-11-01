@@ -3,7 +3,7 @@
 2026-10-05T12:33:31.9189420Z [36;1mcurl --fail --location --retry 3 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21%2B35/OpenJDK21U-jdk_x64_linux_hotspot_21_35.tar.gz' -o "$RUNNER_TEMP/jdk21.tar.gz"[0m
 2026-10-05T12:33:31.9190767Z [36;1mprintf '%s  %s\n' '82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6' "$RUNNER_TEMP/jdk21.tar.gz" | sha256sum --check -[0m
 2026-10-05T12:33:31.9191419Z [36;1mtar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"[0m
-2026-10-05T12:33:31.9191806Z [36;1mecho "M3_JDK=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"[0m
+2026-10-05T12:33:31.9191806Z [36;1mecho "M3JDK=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"[0m
 2026-10-05T12:33:31.9431968Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
 2026-10-05T12:33:31.9432344Z ##[endgroup]
 2026-10-05T12:33:31.9575465Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -21,11 +21,11 @@
 2026-10-05T12:33:37.9665052Z [36;1mmvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify[0m
 2026-10-05T12:33:37.9703294Z shell: /usr/bin/bash -e {0}
 2026-10-05T12:33:37.9703564Z env:
-2026-10-05T12:33:37.9703790Z   M3_JDK: /home/runner/work/_temp/jdk-21+35
+2026-10-05T12:33:37.9703790Z   M3JDK: /home/runner/work/_temp/jdk-21+35
 2026-10-05T12:33:37.9704068Z ##[endgroup]
 2026-10-05T12:33:41.9161576Z [INFO] Scanning for projects...
 2026-10-05T12:33:42.0111128Z [INFO] 
-2026-10-05T12:33:42.0121583Z [INFO] ------------------< com.m3.tooling:migration-recipes >------------------
+2026-10-05T12:33:42.0121583Z [INFO] ------------------< jdk.m3.tooling:migration-recipes >------------------
 2026-10-05T12:33:42.0122636Z [INFO] Building migration-recipes 0.1.0-SNAPSHOT
 2026-10-05T12:33:42.0131447Z [INFO]   from pom.xml
 2026-10-05T12:33:42.0132560Z [INFO] --------------------------------[ jar ]---------------------------------
