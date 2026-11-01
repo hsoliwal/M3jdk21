@@ -5,6 +5,7 @@
 package jdk.m3.tooling.atoms;
 
 import com.sun.source.tree.AssignmentTree;
+import com.sun.source.tree.BlockTree;
 import com.sun.source.tree.ClassTree;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.source.tree.CompoundAssignmentTree;
@@ -13,6 +14,7 @@ import com.sun.source.tree.EnhancedForLoopTree;
 import com.sun.source.tree.ExpressionTree;
 import com.sun.source.tree.ForLoopTree;
 import com.sun.source.tree.IdentifierTree;
+import com.sun.source.tree.LambdaExpressionTree;
 import com.sun.source.tree.MethodInvocationTree;
 import com.sun.source.tree.MethodTree;
 import com.sun.source.tree.StatementTree;
@@ -24,11 +26,18 @@ import com.sun.source.tree.WhileLoopTree;
 import com.sun.source.util.JavacTask;
 import com.sun.source.util.SourcePositions;
 import com.sun.source.util.TreeScanner;
+import com.sun.source.util.TreePathScanner;
 import com.sun.source.util.Trees;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.LinkOption;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HexFormat;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -41,10 +50,12 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.lang.model.element.Modifier;
+import javax.tools.Diagnostic;
 import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
+import jdk.m3.tooling.atoms.contract.M3AtomKind;
 
 /**
  * Atom census of any Java repository (pass 1 of atomize, JIT, patternize): every static method with a body is an
@@ -63,6 +74,9 @@ public final class M3AtomCensus {
     static final String CENSUS_HEADER = "repo\tpath\ttype\tmethod\tsignature\tstatements\tloops\tcalls\tpure"
             + "\twrites_arrays\tpattern";
     private static final int BATCH = 200;
+    /** Opt-in parse-once structural ledger, distinct from the legacy static-method census. */
+    static final String SEMANTIC_HEADER = "atom_id\trepo\tpath\tkind\towner\tname\tsignature"
+            + "\tstart_utf16\tend_utf16\tsource_sha256\tpattern_id\tpublic_contract_locked";
 
     /** One row of PATTERN_RULES.tsv: the pattern, a method-name expression and a body expression ({@code -}: any). */
     record Rule(String pattern, Pattern name, Pattern body) {
@@ -81,22 +95,74 @@ public final class M3AtomCensus {
         }
     }
 
+    /** A source-bounded semantic atom; NOT an admission or product proof. */
+    record SemanticAtom(String repo, String path, M3AtomKind kind, String owner, String name,
+            String signature, long start, long end, String sourceSha256, String pattern, int ordinal) {
+        String row() {
+            String stable = path + '\0' + owner + '\0' + kind + '\0' + name + '\0' + signature
+                    + '\0' + ordinal;
+            return String.join("\t", "A" + digest(stable), repo, path, kind.name(), owner, name,
+                    signature, Long.toString(start), Long.toString(end), sourceSha256, pattern, "true");
+        }
+    }
+
+    /** Exact source-slice digest, not Git's blob object identity. */
+    static String digest(String text) {
+        try {
+            return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256")
+                    .digest(text.getBytes(StandardCharsets.UTF_8)));
+        } catch (NoSuchAlgorithmException unavailable) {
+            throw new AssertionError("SHA-256 required by JDK", unavailable);
+        }
+    }
+
+    /** Deterministic, collision-refusing semantic candidate ledger. */
+    static List<String> semanticLines(List<SemanticAtom> atoms) {
+        List<SemanticAtom> sorted = atoms.stream().sorted(Comparator
+                .comparing(SemanticAtom::path)
+                .thenComparingLong(SemanticAtom::start)
+                .thenComparingLong(SemanticAtom::end)
+                .thenComparing(a -> a.kind().name())
+                .thenComparing(SemanticAtom::name)
+                .thenComparingInt(SemanticAtom::ordinal)).toList();
+        List<String> lines = new ArrayList<>();
+        lines.add(SEMANTIC_HEADER);
+        Set<String> ids = new HashSet<>();
+        for (SemanticAtom atom : sorted) {
+            String row = atom.row();
+            if (!ids.add(row.substring(0, row.indexOf('\t')))) {
+                throw new IllegalArgumentException("duplicate semantic atom identity: " + atom.path());
+            }
+            lines.add(row);
+        }
+        return lines;
+    }
+
     private M3AtomCensus() {
     }
 
     public static void main(String[] args) throws IOException {
-        if (args.length < 4) {
-            throw new IllegalArgumentException("usage: <repo> <PATTERN_RULES.tsv> <out-dir> <source-root>...");
+        boolean semantic = args.length > 0 && args[0].equals("--semantic");
+        int start = semantic ? 1 : 0;
+        if (args.length - start < 4) {
+            throw new IllegalArgumentException("usage: [--semantic] <repo> <PATTERN_RULES.tsv> <out-dir> <source-root>...");
         }
-        List<Rule> rules = rules(Path.of(args[1]));
+        String repo = args[start];
+        List<Rule> rules = rules(Path.of(args[start + 1]));
         List<Atom> atoms = new ArrayList<>();
-        for (int i = 3; i < args.length; i++) {
-            atoms.addAll(census(args[0], Path.of(args[i]), rules));
+        List<SemanticAtom> structural = semantic ? new ArrayList<>() : null;
+        for (int i = start + 3; i < args.length; i++) {
+            atoms.addAll(census(repo, Path.of(args[i]), rules, structural));
         }
-        Path out = Files.createDirectories(Path.of(args[2]));
-        Files.write(out.resolve("ATOM_CENSUS_" + args[0] + ".tsv"), census(atoms), StandardCharsets.UTF_8);
+        // All diagnostics, identities and inputs are validated before publishing any files.
+        List<String> semanticRows = semantic ? semanticLines(structural) : null;
+        Path out = Files.createDirectories(Path.of(args[start + 2]));
+        Files.write(out.resolve("ATOM_CENSUS_" + repo + ".tsv"), census(atoms), StandardCharsets.UTF_8);
         List<String> summary = summary(atoms);
-        Files.write(out.resolve("PATTERN_SUMMARY_" + args[0] + ".tsv"), summary, StandardCharsets.UTF_8);
+        Files.write(out.resolve("PATTERN_SUMMARY_" + repo + ".tsv"), summary, StandardCharsets.UTF_8);
+        if (semantic) {
+            Files.write(out.resolve("SEMANTIC_CENSUS_" + repo + ".tsv"), semanticRows, StandardCharsets.UTF_8);
+        }
         summary.forEach(System.out::println);
     }
 
@@ -114,23 +180,53 @@ public final class M3AtomCensus {
 
     /** The atom candidates of every .java file under ROOT, in path and source order. */
     static List<Atom> census(String repo, Path sourceRoot, List<Rule> rules) throws IOException {
+        return census(repo, sourceRoot, rules, null);
+    }
+
+    /** Single javac parse for both legacy metrics and opt-in semantic source atoms. */
+    static List<Atom> census(String repo, Path sourceRoot, List<Rule> rules,
+            List<SemanticAtom> semantic) throws IOException {
         Path root = sourceRoot.toAbsolutePath().normalize();
-        List<Path> files;
+        List<Path> files = new ArrayList<>();
         try (Stream<Path> walk = Files.walk(root)) {
-            files = walk.filter(p -> p.toString().endsWith(".java")).sorted().collect(Collectors.toList());
+            for (Path file : walk.toList()) {
+                if (Files.isSymbolicLink(file)
+                        && (file.toString().endsWith(".java") || Files.isDirectory(file))) {
+                    throw new IOException("symlinked Java input or source directory: " + file);
+                }
+                if (file.toString().endsWith(".java")) {
+                    if (!Files.isRegularFile(file, LinkOption.NOFOLLOW_LINKS)) {
+                        throw new IOException("nonregular Java input: " + file);
+                    }
+                    files.add(file);
+                }
+            }
         }
+        files.sort(Comparator.naturalOrder());
         JavaCompiler javac = ToolProvider.getSystemJavaCompiler();
         List<Atom> atoms = new ArrayList<>();
         try (StandardJavaFileManager fm = javac.getStandardFileManager(null, null, StandardCharsets.UTF_8)) {
             for (int from = 0; from < files.size(); from += BATCH) {
                 List<Path> batch = files.subList(from, Math.min(files.size(), from + BATCH));
                 Iterable<? extends JavaFileObject> units = fm.getJavaFileObjectsFromPaths(batch);
-                JavacTask task = (JavacTask) javac.getTask(null, fm, d -> { }, List.of("-proc:none"), null, units);
+                List<String> errors = new ArrayList<>();
+                JavacTask task = (JavacTask) javac.getTask(null, fm, diagnostic -> {
+                    if (diagnostic.getKind() == Diagnostic.Kind.ERROR) {
+                        errors.add(diagnostic.getCode() + ":" + diagnostic.getLineNumber());
+                    }
+                }, List.of("-proc:none"), null, units);
                 SourcePositions positions = Trees.instance(task).getSourcePositions();
+                int parsed = 0;
                 for (CompilationUnitTree unit : task.parse()) {
-                    String path = root.relativize(Path.of(unit.getSourceFile().toUri())).toString().replace('\\', '/');
+                    parsed++;
+                    String path = root.relativize(Path.of(unit.getSourceFile().toUri()))
+                            .toString().replace('\\', '/');
                     String text = unit.getSourceFile().getCharContent(true).toString();
-                    new UnitScanner(repo, path, unit, text, positions, rules, atoms).scan(unit, null);
+                    new UnitScanner(repo, path, unit, text, positions, rules, atoms, semantic).scan(unit, null);
+                }
+                if (!errors.isEmpty() || parsed != batch.size()) {
+                    throw new IOException("incomplete javac source parse: batch=" + from
+                            + " expected=" + batch.size() + " parsed=" + parsed + " errors=" + errors);
                 }
             }
         }
@@ -164,7 +260,7 @@ public final class M3AtomCensus {
     }
 
     /** Walks one compilation unit: the enclosing type names, and each static method with a body. */
-    private static final class UnitScanner extends TreeScanner<Void, Void> {
+    private static final class UnitScanner extends TreePathScanner<Void, Void> {
         private final String repo;
         private final String path;
         private final CompilationUnitTree unit;
@@ -173,9 +269,13 @@ public final class M3AtomCensus {
         private final List<Rule> rules;
         private final List<Atom> atoms;
         private final Deque<String> types = new ArrayDeque<>();
+        private final Deque<String> semanticTypes = new ArrayDeque<>();
+        private final List<SemanticAtom> semantic;
+        private final Map<String, Integer> occurrences = new HashMap<>();
+        private int anonymousIndex;
 
         UnitScanner(String repo, String path, CompilationUnitTree unit, String text, SourcePositions positions,
-                List<Rule> rules, List<Atom> atoms) {
+                List<Rule> rules, List<Atom> atoms, List<SemanticAtom> semantic) {
             this.repo = repo;
             this.path = path;
             this.unit = unit;
@@ -183,18 +283,98 @@ public final class M3AtomCensus {
             this.positions = positions;
             this.rules = rules;
             this.atoms = atoms;
+            this.semantic = semantic;
+            if (semantic != null) {
+                semantic.add(new SemanticAtom(repo, path, M3AtomKind.FILE_CONTAINER,
+                        "<file>", path, "FILE", 0, text.length(), digest(text), UNKNOWN, 0));
+            }
+        }
+
+        /** Bind the exact syntax-tree source slice, without re-parsing or fabricating gate evidence. */
+        private void add(M3AtomKind kind, String name, String signature, Tree tree) {
+            if (semantic == null) {
+                return;
+            }
+            long start = positions.getStartPosition(unit, tree);
+            long end = positions.getEndPosition(unit, tree);
+            if (start < 0 || end <= start || end > text.length()) {
+                throw new IllegalArgumentException("unbound semantic source span: " + path + ":" + name);
+            }
+            String owner = String.join(".", semanticTypes);
+            String label = name.replace('\t', ' ').replace('\n', ' ');
+            String spec = signature.replace('\t', ' ').replace('\n', ' ');
+            String key = owner + '\0' + kind.name() + '\0' + label + '\0' + spec;
+            int ordinal = occurrences.merge(key, 1, Integer::sum);
+            String source = text.substring((int) start, (int) end);
+            String pattern = kind == M3AtomKind.JAVA_METHOD
+                    ? rules.stream().filter(r -> r.matches(label, source))
+                            .map(Rule::pattern).findFirst().orElse(UNKNOWN)
+                    : UNKNOWN;
+            semantic.add(new SemanticAtom(repo, path, kind, owner.isEmpty() ? "<package>" : owner,
+                    label, spec, start, end, digest(source), pattern, ordinal));
         }
 
         @Override
         public Void visitClass(ClassTree tree, Void unused) {
-            types.addLast(tree.getSimpleName().toString());
+            String name = tree.getSimpleName().toString();
+            String semanticName = name.isEmpty() ? "<anonymous" + (++anonymousIndex) + ">" : name;
+            // Existing static-method census deliberately uses javac's original empty
+            // anonymous name. A separate semantic stack retains its opt-in identity.
+            types.addLast(name);
+            semanticTypes.addLast(semanticName);
+            add(M3AtomKind.DECLARATION_ONLY, semanticName, tree.getKind().name(), tree);
             super.visitClass(tree, unused);
+            semanticTypes.removeLast();
             types.removeLast();
             return null;
         }
 
         @Override
+        public Void visitVariable(VariableTree tree, Void unused) {
+            if (semantic != null && getCurrentPath().getParentPath() != null
+                    && getCurrentPath().getParentPath().getLeaf() instanceof ClassTree) {
+                add(M3AtomKind.DECLARATION_ONLY, tree.getName().toString(),
+                        String.valueOf(tree.getType()), tree);
+                if (tree.getInitializer() != null) {
+                    add(M3AtomKind.JAVA_FIELD_INITIALIZER, tree.getName().toString(),
+                            String.valueOf(tree.getType()), tree.getInitializer());
+                }
+            }
+            return super.visitVariable(tree, unused);
+        }
+
+        @Override
+        public Void visitBlock(BlockTree tree, Void unused) {
+            if (semantic != null && getCurrentPath().getParentPath() != null
+                    && getCurrentPath().getParentPath().getLeaf() instanceof ClassTree) {
+                add(tree.isStatic() ? M3AtomKind.JAVA_STATIC_INITIALIZER
+                        : M3AtomKind.JAVA_INSTANCE_INITIALIZER,
+                        tree.isStatic() ? "<clinit>" : "<instance-init>", "()", tree);
+            }
+            return super.visitBlock(tree, unused);
+        }
+
+        @Override
+        public Void visitLambdaExpression(LambdaExpressionTree tree, Void unused) {
+            String parameters = tree.getParameters().stream()
+                    .map(p -> p.getType() == null ? "var" : p.getType().toString())
+                    .collect(Collectors.joining(",", "(", ")"));
+            add(M3AtomKind.JAVA_LAMBDA, "<lambda>", parameters, tree);
+            return super.visitLambdaExpression(tree, unused);
+        }
+
+        @Override
         public Void visitMethod(MethodTree tree, Void unused) {
+            if (semantic != null) {
+                M3AtomKind kind = tree.getBody() == null
+                        ? (tree.getModifiers().getFlags().contains(Modifier.NATIVE)
+                                ? M3AtomKind.JAVA_NATIVE_DECLARATION : M3AtomKind.DECLARATION_ONLY)
+                        : (tree.getName().contentEquals("<init>")
+                                ? M3AtomKind.JAVA_CONSTRUCTOR : M3AtomKind.JAVA_METHOD);
+                String signature = tree.getParameters().stream().map(p -> String.valueOf(p.getType()))
+                        .collect(Collectors.joining(",", "(", ")")) + String.valueOf(tree.getReturnType());
+                add(kind, tree.getName().toString(), signature, tree);
+            }
             if (tree.getBody() != null && tree.getModifiers().getFlags().contains(Modifier.STATIC)) {
                 BodyScanner body = new BodyScanner(tree);
                 body.scan(tree.getBody(), null);
