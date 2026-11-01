@@ -211,13 +211,31 @@ Review fixes (after merging the moved base a5d6cc2a79; RECIPE_MEMORY.tsv rows 25
 - Literals: 0 HOIST holds for the production code. The leaf's test and gate code are not hoisted yet
   (LITERALS_TEST_SUMMARY.tsv; OPEN).
 
+Hex reconciliation (HEX_RECONCILE v1, after merging #2245; GATES.tsv rows `hex_reconcile_*`). #2245 routes every hex
+literal to the JDK (HEX_ROUTE v1), this leaf had corrected the M3 hex path instead (HEX_ROUNDING v1, SWAR_HEX_BORROW
+v1); one implementation stays. #2245's hex gates were run with `HEX_LITERALS_TO_FLOATING_DECIMAL = false` against
+this leaf's code:
+- the 1,309 affected literals: 0 differ (HEX_ROUNDING v1 fixes the double rounding and the missing sticky bit);
+- the hex differential (400,000 lines): 35,198 differ from stock, every one where stock gives +-Infinity;
+- the exponent clamp probe `0x.1p10240`: 2^1020 instead of Infinity; JUnit `M3NumberParseHexAtomsTest`: 8 of 10 fail.
+The exponent clamp is not fixed on the M3 hex path, so the route stays (constant true) and HEX_ROUNDING v1 is removed:
+the donor body and `TWO_POW_64` are back behind the constant as on #2245, `unsignedToDouble` / `unsignedToFloat` are
+gone, their anchors stay. `bytecode_method_delta.py`: only the two hex kernels (now `return NaN`) changed and the two
+helpers removed; the kernels are instruction-identical to #2245's. SWAR_HEX_BORROW v1 stays (a grammar fix, not a
+rounding variant). The price of the route (HEX_BENCH_RECONCILE.tsv): `toHexString` literals take 1.10x / 1.21x
+stock's time, the mixed hex corpus 1.69x / 1.60x, where the exact M3 path would take 0.20x / 0.78x and 0.77x / 1.21x.
+`M3NumberParseEveryAtomTest` checks the route contract on the kernels (196/196); JIT_SIZE.tsv and PATTERNS.tsv are
+regenerated (`tools/atom_patterns.py` tags the kernels and `valueOfHexLiteral` FIXED:HEX_ROUTE v1, the decimal
+template atoms FIXED:DEC_EXPONENT_CLAMP v1).
+
 Next:
 - Remove the last call boundary of the decimal path: the scanner hands its state (significand and packed index) to
   the caller instead of calling the value chain, so the loop holder stays below InlineSmallCode.
 - Per-atom perf rows for the atoms this leaf created (the composites have rows in PERF_JIT.tsv and PERF.tsv).
 - Bring exact hex literals back to M3 (`HEX_EXACT_M3`: an exact exponent from the parser, a sticky shift for
   significands >= 2^63, a sticky flag for dropped digits). The pre-image's 53.6 ns against stock's 285 ns on
-  `toHexString` literals is the upside.
+  `toHexString` literals is the upside. HEX_ROUNDING v1 (30352e4921, removed again by HEX_RECONCILE v1) has
+  the sticky shift and the truncation rule; the exact exponent is the missing part.
 - Point jackson-core's fast path at the JDK (`Double.parseDouble`) by recipe, then drop the three vendored
   FastDoubleParser copies.
 - A LATIN1 byte path straight over String's bytes. Only the JDK can do this; a library cannot.

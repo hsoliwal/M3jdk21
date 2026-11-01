@@ -69,32 +69,32 @@ FloatingDecimal	static {};	()V	217	OK	37	-	-	HOT_INLINE
 M3AbstractFloatValueParser	jdk.internal.math.M3AbstractFloatValueParser();	()V	5	OK	25	-	-	TRIVIAL_INLINE
 M3AbstractFloatValueParser	static int packedIndex(long);	(J)I	9	OK	57	3	jdk/internal/math/M3AbstractFloatValueParser.java@2575-2694	TRIVIAL_INLINE
 M3AbstractJavaFloatingPointBitsFromByteArray	jdk.internal.math.M3AbstractJavaFloatingPointBitsFromByteArray();	()V	5	OK	17	-	-	TRIVIAL_INLINE
-M3AbstractJavaFloatingPointBitsFromByteArray	private static int skipWhitespace(byte[], int, int);	([BII)I	25	OK	84	6	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@4149-4361	TRIVIAL_INLINE
-M3AbstractJavaFloatingPointBitsFromByteArray	private static long parseExponentNumber(byte[], int, int);	([BII)J	145	OK	105	23	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@5376-6373	HOT_INLINE
-M3AbstractJavaFloatingPointBitsFromByteArray	private static long parseLiteralTail(byte[], byte, int, int, boolean);	([BBIIZ)J	63	OK	145	15	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@7449-8154	HOT_INLINE
+M3AbstractJavaFloatingPointBitsFromByteArray	private static int skipWhitespace(byte[], int, int);	([BII)I	25	OK	92	6	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@4777-4989	TRIVIAL_INLINE
+M3AbstractJavaFloatingPointBitsFromByteArray	private static long parseExponentNumber(byte[], int, int);	([BII)J	145	OK	113	23	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@6004-7001	HOT_INLINE
+M3AbstractJavaFloatingPointBitsFromByteArray	private static long parseLiteralTail(byte[], byte, int, int, boolean);	([BBIIZ)J	63	OK	153	15	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@8077-8782	HOT_INLINE
 M3AbstractJavaFloatingPointBitsFromByteArray	abstract long nan();	()J	-	OK	-	-	-	ABSTRACT
 M3AbstractJavaFloatingPointBitsFromByteArray	abstract long negativeInfinity();	()J	-	OK	-	-	-	ABSTRACT
-M3AbstractJavaFloatingPointBitsFromByteArray	private long parseDecFloatLiteral(byte[], int, int, int, boolean, boolean);	([BIIIZZ)J	296	OK	205	66	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@9985-12999	HOT_INLINE
-M3AbstractJavaFloatingPointBitsFromByteArray	private long valueOfTruncatedDecFloatLiteral(byte[], int, int, boolean, int, int, int, int, int);	([BIIZIIIII)J	114	OK	288	23	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@14184-15533	HOT_INLINE
-M3AbstractJavaFloatingPointBitsFromByteArray	public long parseFloatingPointLiteral(byte[], int, int);	([BII)J	186	OK	329	39	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@16337-17770	HOT_INLINE
-M3AbstractJavaFloatingPointBitsFromByteArray	private long parseHexFloatingPointLiteral(byte[], int, int, int, boolean);	([BIIIZ)J	271	OK	398	71	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@18807-22139	HOT_INLINE
-M3AbstractJavaFloatingPointBitsFromByteArray	private long valueOfTruncatedHexLiteral(byte[], int, int, boolean, int, int, int, int, int);	([BIIZIIIII)J	111	OK	486	24	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@23347-24730	HOT_INLINE
-M3AbstractJavaFloatingPointBitsFromByteArray	private long parseNaNOrInfinity(byte[], int, int, boolean);	([BIIZ)J	116	OK	510	24	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@24737-25758	HOT_INLINE
+M3AbstractJavaFloatingPointBitsFromByteArray	private long parseDecFloatLiteral(byte[], int, int, int, boolean, boolean);	([BIIIZZ)J	311	OK	215	77	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@10835-14755	HOT_INLINE
+M3AbstractJavaFloatingPointBitsFromByteArray	private long valueOfTruncatedDecFloatLiteral(byte[], int, int, boolean, int, int, int, int, int);	([BIIZIIIII)J	126	OK	310	26	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@16031-17648	HOT_INLINE
+M3AbstractJavaFloatingPointBitsFromByteArray	public long parseFloatingPointLiteral(byte[], int, int);	([BII)J	186	OK	354	39	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@18452-19885	HOT_INLINE
+M3AbstractJavaFloatingPointBitsFromByteArray	private long parseHexFloatingPointLiteral(byte[], int, int, int, boolean);	([BIIIZ)J	271	OK	423	71	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@20922-24254	HOT_INLINE
+M3AbstractJavaFloatingPointBitsFromByteArray	private long valueOfTruncatedHexLiteral(byte[], int, int, boolean, int, int, int, int, int);	([BIIZIIIII)J	111	OK	511	24	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@25462-26845	HOT_INLINE
+M3AbstractJavaFloatingPointBitsFromByteArray	private long parseNaNOrInfinity(byte[], int, int, boolean);	([BIIZ)J	116	OK	535	24	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray.java@26852-27873	HOT_INLINE
 M3AbstractJavaFloatingPointBitsFromByteArray	abstract long positiveInfinity();	()J	-	OK	-	-	-	ABSTRACT
 M3AbstractJavaFloatingPointBitsFromByteArray	abstract long valueOfFloatLiteral(byte[], int, int, boolean, long, int, boolean, int);	([BIIZJIZI)J	-	OK	-	-	-	ABSTRACT
 M3AbstractJavaFloatingPointBitsFromByteArray	abstract long valueOfHexLiteral(byte[], int, int, boolean, long, int, boolean, int);	([BIIZJIZI)J	-	OK	-	-	-	ABSTRACT
 M3AbstractJavaFloatingPointBitsFromCharSequence	jdk.internal.math.M3AbstractJavaFloatingPointBitsFromCharSequence();	()V	5	OK	17	-	-	TRIVIAL_INLINE
-M3AbstractJavaFloatingPointBitsFromCharSequence	private static int skipWhitespace(java.lang.CharSequence, int, int);	(Ljava/lang/CharSequence;II)I	25	OK	100	6	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@4854-5065	TRIVIAL_INLINE
-M3AbstractJavaFloatingPointBitsFromCharSequence	private static long parseExponentNumber(java.lang.CharSequence, int, int);	(Ljava/lang/CharSequence;II)J	145	OK	121	23	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@6072-7073	HOT_INLINE
-M3AbstractJavaFloatingPointBitsFromCharSequence	private static long parseLiteralTail(java.lang.CharSequence, char, int, int, boolean);	(Ljava/lang/CharSequence;CIIZ)J	63	OK	161	15	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@8141-8852	HOT_INLINE
+M3AbstractJavaFloatingPointBitsFromCharSequence	private static int skipWhitespace(java.lang.CharSequence, int, int);	(Ljava/lang/CharSequence;II)I	25	OK	108	6	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@5482-5693	TRIVIAL_INLINE
+M3AbstractJavaFloatingPointBitsFromCharSequence	private static long parseExponentNumber(java.lang.CharSequence, int, int);	(Ljava/lang/CharSequence;II)J	145	OK	129	23	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@6700-7701	HOT_INLINE
+M3AbstractJavaFloatingPointBitsFromCharSequence	private static long parseLiteralTail(java.lang.CharSequence, char, int, int, boolean);	(Ljava/lang/CharSequence;CIIZ)J	63	OK	169	15	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@8769-9480	HOT_INLINE
 M3AbstractJavaFloatingPointBitsFromCharSequence	abstract long nan();	()J	-	OK	-	-	-	ABSTRACT
 M3AbstractJavaFloatingPointBitsFromCharSequence	abstract long negativeInfinity();	()J	-	OK	-	-	-	ABSTRACT
-M3AbstractJavaFloatingPointBitsFromCharSequence	private long parseDecFloatLiteral(java.lang.CharSequence, int, int, int, boolean, boolean);	(Ljava/lang/CharSequence;IIIZZ)J	261	OK	221	67	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@10708-13767	HOT_INLINE
-M3AbstractJavaFloatingPointBitsFromCharSequence	private long valueOfTruncatedDecFloatLiteral(java.lang.CharSequence, int, int, boolean, int, int, int, int, int);	(Ljava/lang/CharSequence;IIZIIIII)J	118	OK	305	23	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@14952-16310	HOT_INLINE
-M3AbstractJavaFloatingPointBitsFromCharSequence	public final long parseFloatingPointLiteral(java.lang.CharSequence, int, int);	(Ljava/lang/CharSequence;II)J	194	OK	345	39	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@17113-18580	HOT_INLINE
-M3AbstractJavaFloatingPointBitsFromCharSequence	private long parseHexFloatLiteral(java.lang.CharSequence, int, int, int, boolean);	(Ljava/lang/CharSequence;IIIZ)J	316	OK	414	69	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@19654-23028	HOT_INLINE
-M3AbstractJavaFloatingPointBitsFromCharSequence	private long valueOfTruncatedHexLiteral(java.lang.CharSequence, int, int, boolean, int, int, int, int, int);	(Ljava/lang/CharSequence;IIZIIIII)J	115	OK	500	24	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@24228-25620	HOT_INLINE
-M3AbstractJavaFloatingPointBitsFromCharSequence	private long parseNaNOrInfinity(java.lang.CharSequence, int, int, boolean);	(Ljava/lang/CharSequence;IIZ)J	228	OK	524	31	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@25627-27222	HOT_INLINE
+M3AbstractJavaFloatingPointBitsFromCharSequence	private long parseDecFloatLiteral(java.lang.CharSequence, int, int, int, boolean, boolean);	(Ljava/lang/CharSequence;IIIZZ)J	276	OK	231	78	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@11558-15523	HOT_INLINE
+M3AbstractJavaFloatingPointBitsFromCharSequence	private long valueOfTruncatedDecFloatLiteral(java.lang.CharSequence, int, int, boolean, int, int, int, int, int);	(Ljava/lang/CharSequence;IIZIIIII)J	130	OK	327	26	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@16799-18425	HOT_INLINE
+M3AbstractJavaFloatingPointBitsFromCharSequence	public final long parseFloatingPointLiteral(java.lang.CharSequence, int, int);	(Ljava/lang/CharSequence;II)J	194	OK	370	39	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@19228-20695	HOT_INLINE
+M3AbstractJavaFloatingPointBitsFromCharSequence	private long parseHexFloatLiteral(java.lang.CharSequence, int, int, int, boolean);	(Ljava/lang/CharSequence;IIIZ)J	316	OK	439	69	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@21769-25143	HOT_INLINE
+M3AbstractJavaFloatingPointBitsFromCharSequence	private long valueOfTruncatedHexLiteral(java.lang.CharSequence, int, int, boolean, int, int, int, int, int);	(Ljava/lang/CharSequence;IIZIIIII)J	115	OK	525	24	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@26343-27735	HOT_INLINE
+M3AbstractJavaFloatingPointBitsFromCharSequence	private long parseNaNOrInfinity(java.lang.CharSequence, int, int, boolean);	(Ljava/lang/CharSequence;IIZ)J	228	OK	549	31	jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence.java@27742-29337	HOT_INLINE
 M3AbstractJavaFloatingPointBitsFromCharSequence	abstract long positiveInfinity();	()J	-	OK	-	-	-	ABSTRACT
 M3AbstractJavaFloatingPointBitsFromCharSequence	abstract long valueOfFloatLiteral(java.lang.CharSequence, int, int, boolean, long, int, boolean, int);	(Ljava/lang/CharSequence;IIZJIZI)J	-	OK	-	-	-	ABSTRACT
 M3AbstractJavaFloatingPointBitsFromCharSequence	abstract long valueOfHexLiteral(java.lang.CharSequence, int, int, boolean, long, int, boolean, int);	(Ljava/lang/CharSequence;IIZJIZI)J	-	OK	-	-	-	ABSTRACT
@@ -107,16 +107,15 @@ M3AbstractNumberParser	protected static int lookupHex(char);	(C)I	17	OK	146	7	jd
 M3AbstractNumberParser	protected static int checkBounds(int, int, int, int);	(IIII)I	22	OK	160	6	jdk/internal/math/M3AbstractNumberParser.java@6067-6350	TRIVIAL_INLINE
 M3AbstractNumberParser	protected static int checkBounds(int, int, int);	(III)I	26	OK	176	6	jdk/internal/math/M3AbstractNumberParser.java@6865-7183	TRIVIAL_INLINE
 M3AbstractNumberParser	static {};	()V	111	OK	62	-	-	HOT_INLINE
-M3FastDoubleMath	private jdk.internal.math.M3FastDoubleMath();	()V	5	OK	775	3	jdk/internal/math/M3FastDoubleMath.java@39773-39808	TRIVIAL_INLINE
-M3FastDoubleMath	static double tryDecFloatToDoubleTruncated(boolean, long, int, boolean, int);	(ZJIZI)D	119	OK	795	32	jdk/internal/math/M3FastDoubleMath.java@40506-42129	HOT_INLINE
-M3FastDoubleMath	static double tryDecToDoubleWithFastAlgorithm(boolean, long, int);	(ZJI)D	35	OK	852	9	jdk/internal/math/M3FastDoubleMath.java@43425-43855	TRIVIAL_INLINE
-M3FastDoubleMath	private static boolean isClingerFastPath(long, int);	(JI)Z	28	OK	868	3	jdk/internal/math/M3FastDoubleMath.java@44308-44556	TRIVIAL_INLINE
-M3FastDoubleMath	private static double clingerFastPath(long, int);	(JI)D	25	OK	890	13	jdk/internal/math/M3FastDoubleMath.java@45080-45776	TRIVIAL_INLINE
-M3FastDoubleMath	private static double tryDecToDoubleWithEiselLemire(boolean, long, int);	(ZJI)D	212	OK	916	108	jdk/internal/math/M3FastDoubleMath.java@46561-51697	HOT_INLINE
-M3FastDoubleMath	static double tryHexFloatToDoubleTruncated(boolean, long, long, boolean, long);	(ZJJZJ)D	84	OK	1030	23	jdk/internal/math/M3FastDoubleMath.java@52418-53883	HOT_INLINE
-M3FastDoubleMath	static double fastScalb(double, long);	(DJ)D	14	OK	1063	3	jdk/internal/math/M3FastDoubleMath.java@54322-54507	TRIVIAL_INLINE
-M3FastDoubleMath	private static double unsignedToDouble(long);	(J)D	22	OK	1075	7	jdk/internal/math/M3FastDoubleMath.java@54937-55167	TRIVIAL_INLINE
-M3FastDoubleMath	static {};	()V	9997	OK	112	-	-	HUGE
+M3FastDoubleMath	private jdk.internal.math.M3FastDoubleMath();	()V	5	OK	783	3	jdk/internal/math/M3FastDoubleMath.java@40341-40376	TRIVIAL_INLINE
+M3FastDoubleMath	static double tryDecFloatToDoubleTruncated(boolean, long, int, boolean, int);	(ZJIZI)D	119	OK	803	32	jdk/internal/math/M3FastDoubleMath.java@41074-42697	HOT_INLINE
+M3FastDoubleMath	static double tryDecToDoubleWithFastAlgorithm(boolean, long, int);	(ZJI)D	35	OK	860	9	jdk/internal/math/M3FastDoubleMath.java@43993-44423	TRIVIAL_INLINE
+M3FastDoubleMath	private static boolean isClingerFastPath(long, int);	(JI)Z	28	OK	876	3	jdk/internal/math/M3FastDoubleMath.java@44876-45124	TRIVIAL_INLINE
+M3FastDoubleMath	private static double clingerFastPath(long, int);	(JI)D	25	OK	898	13	jdk/internal/math/M3FastDoubleMath.java@45648-46344	TRIVIAL_INLINE
+M3FastDoubleMath	private static double tryDecToDoubleWithEiselLemire(boolean, long, int);	(ZJI)D	212	OK	924	108	jdk/internal/math/M3FastDoubleMath.java@47129-52265	HOT_INLINE
+M3FastDoubleMath	static double tryHexFloatToDoubleTruncated(boolean, long, long, boolean, long);	(ZJJZJ)D	4	OK	1044	35	jdk/internal/math/M3FastDoubleMath.java@53088-55689	TRIVIAL_INLINE
+M3FastDoubleMath	static double fastScalb(double, long);	(DJ)D	14	OK	1084	3	jdk/internal/math/M3FastDoubleMath.java@56128-56313	TRIVIAL_INLINE
+M3FastDoubleMath	static {};	()V	9997	OK	120	-	-	HUGE
 M3FastDoubleSwar	jdk.internal.math.M3FastDoubleSwar();	()V	5	OK	31	-	-	TRIVIAL_INLINE
 M3FastDoubleSwar	protected static boolean isDigit(char);	(C)Z	16	OK	142	5	jdk/internal/math/M3FastDoubleSwar.java@7318-7544	TRIVIAL_INLINE
 M3FastDoubleSwar	protected static boolean isDigit(byte);	(B)Z	16	OK	155	6	jdk/internal/math/M3FastDoubleSwar.java@7676-7947	TRIVIAL_INLINE
@@ -156,16 +155,15 @@ M3FastDoubleSwar	public static void writeIntBE(byte[], int, int);	([BII)V	10	OK	
 M3FastDoubleSwar	public static void writeLongBE(byte[], int, long);	([BIJ)V	10	OK	635	3	jdk/internal/math/M3FastDoubleSwar.java@28418-28532	TRIVIAL_INLINE
 M3FastDoubleSwar	public static double fma(double, double, double);	(DDD)D	8	OK	639	3	jdk/internal/math/M3FastDoubleSwar.java@28538-28634	TRIVIAL_INLINE
 M3FastDoubleSwar	static {};	()V	45	OK	124	-	-	HOT_INLINE
-M3FastFloatMath	private jdk.internal.math.M3FastFloatMath();	()V	5	OK	67	3	jdk/internal/math/M3FastFloatMath.java@3055-3089	TRIVIAL_INLINE
-M3FastFloatMath	static float tryDecFloatToFloatTruncated(boolean, long, int, boolean, int);	(ZJIZI)F	112	OK	74	35	jdk/internal/math/M3FastFloatMath.java@3095-4753	HOT_INLINE
-M3FastFloatMath	static float tryHexFloatToFloatTruncated(boolean, long, int, boolean, int);	(ZJIZI)F	78	OK	123	22	jdk/internal/math/M3FastFloatMath.java@5474-6749	HOT_INLINE
-M3FastFloatMath	static float tryDecToFloatWithFastAlgorithm(boolean, long, int);	(ZJI)F	35	OK	171	9	jdk/internal/math/M3FastFloatMath.java@8047-8426	TRIVIAL_INLINE
-M3FastFloatMath	private static boolean isClingerFastPath(long, int);	(JI)Z	28	OK	187	3	jdk/internal/math/M3FastFloatMath.java@8879-9127	TRIVIAL_INLINE
-M3FastFloatMath	private static float clingerFastPath(long, int);	(JI)F	25	OK	209	13	jdk/internal/math/M3FastFloatMath.java@9657-10345	TRIVIAL_INLINE
-M3FastFloatMath	private static float tryDecToFloatWithEiselLemire(boolean, long, int);	(ZJI)F	211	OK	234	110	jdk/internal/math/M3FastFloatMath.java@11079-16263	HOT_INLINE
-M3FastFloatMath	static float fastScalb(float, int);	(FI)F	13	OK	346	3	jdk/internal/math/M3FastFloatMath.java@16699-16876	TRIVIAL_INLINE
-M3FastFloatMath	private static float unsignedToFloat(long);	(J)F	22	OK	358	7	jdk/internal/math/M3FastFloatMath.java@17303-17528	TRIVIAL_INLINE
-M3FastFloatMath	static {};	()V	67	OK	61	-	-	HOT_INLINE
+M3FastFloatMath	private jdk.internal.math.M3FastFloatMath();	()V	5	OK	75	3	jdk/internal/math/M3FastFloatMath.java@3622-3656	TRIVIAL_INLINE
+M3FastFloatMath	static float tryDecFloatToFloatTruncated(boolean, long, int, boolean, int);	(ZJIZI)F	112	OK	82	35	jdk/internal/math/M3FastFloatMath.java@3662-5320	HOT_INLINE
+M3FastFloatMath	static float tryHexFloatToFloatTruncated(boolean, long, int, boolean, int);	(ZJIZI)F	3	OK	137	34	jdk/internal/math/M3FastFloatMath.java@6143-8513	TRIVIAL_INLINE
+M3FastFloatMath	static float tryDecToFloatWithFastAlgorithm(boolean, long, int);	(ZJI)F	35	OK	192	9	jdk/internal/math/M3FastFloatMath.java@9811-10190	TRIVIAL_INLINE
+M3FastFloatMath	private static boolean isClingerFastPath(long, int);	(JI)Z	28	OK	208	3	jdk/internal/math/M3FastFloatMath.java@10643-10891	TRIVIAL_INLINE
+M3FastFloatMath	private static float clingerFastPath(long, int);	(JI)F	25	OK	230	13	jdk/internal/math/M3FastFloatMath.java@11421-12109	TRIVIAL_INLINE
+M3FastFloatMath	private static float tryDecToFloatWithEiselLemire(boolean, long, int);	(ZJI)F	211	OK	255	110	jdk/internal/math/M3FastFloatMath.java@12843-18027	HOT_INLINE
+M3FastFloatMath	static float fastScalb(float, int);	(FI)F	13	OK	367	3	jdk/internal/math/M3FastFloatMath.java@18463-18640	TRIVIAL_INLINE
+M3FastFloatMath	static {};	()V	67	OK	69	-	-	HOT_INLINE
 M3FastIntegerMath	private jdk.internal.math.M3FastIntegerMath();	()V	5	OK	63	3	jdk/internal/math/M3FastIntegerMath.java@2864-2900	TRIVIAL_INLINE
 M3FastIntegerMath	static java.math.BigInteger computePowerOfTen(java.util.NavigableMap<java.lang.Integer, java.math.BigInteger>, int);	(Ljava/util/NavigableMap;I)Ljava/math/BigInteger;	92	OK	75	15	jdk/internal/math/M3FastIntegerMath.java@3109-3752	HOT_INLINE
 M3FastIntegerMath	static java.math.BigInteger computeTenRaisedByNFloor16Recursive(java.util.NavigableMap<java.lang.Integer, java.math.BigInteger>, int);	(Ljava/util/NavigableMap;I)Ljava/math/BigInteger;	104	OK	94	16	jdk/internal/math/M3FastIntegerMath.java@3810-4541	HOT_INLINE

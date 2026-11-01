@@ -49,6 +49,8 @@ class M3FastDoubleMath {
     private static final int HALFWAY_TRAILING_MASK = 0x1ff;
     /** The two lowest mantissa bits (round-half-even check). */
     private static final int LOW_TWO_BITS_MASK = 3;
+    /** 2^64: corrects the signed conversion of an unsigned 64-bit significand. */
+    private static final double TWO_POW_64 = 0x1p64;
     //FLLDCIM: M3 - HEX_ROUTE v1: every hex literal takes the original FloatingDecimal path (PATTERN_ROUTES.tsv HEX_*)
     /**
      * True: {@link #tryHexFloatToDoubleTruncated} declines every hexadecimal literal, so the caller takes the original
@@ -1048,10 +1050,15 @@ class M3FastDoubleMath {
             // truncated significand as exact, losing the sticky tail (0x1.00000000000008000000000000001p0 rounded
             // down). Now: one rounding of the unsigned value, and a truncated significand decides only when
             // significand and significand + 1 round alike; else the JDK converter decides (NaN = slow path).
-            double d = unsignedToDouble(significand);
-            if (isSignificandTruncated && d != unsignedToDouble(significand + 1)) {
-                return Double.NaN;
-            }
+            //FLLDCIM: M3 - HEX_RECONCILE v1: HEX_ROUNDING v1 removed, one hex implementation: HEX_ROUTE v1
+            // declines every hex literal above; with the constant false the hex gates of PR #2245 still fail on
+            // the exponent clamp (0x.1p10240 gave 2^1020), so the donor body is back as on PR #2245
+            // (GATES.tsv rows hex_reconcile_*)
+            // Convert the significand into a double.
+            // The cast will round the significand if necessary.
+            // The significand is an unsigned long, however the cast treats it like a signed long.
+            // So, if the significand is negative, we have to add 1<<64 to the number.
+            double d = (double) significand + (significand < 0 ? TWO_POW_64 : 0);
 
             // Scale the significand by the power.
             // This only works if power is within the supported range, so that
@@ -1078,18 +1085,6 @@ class M3FastDoubleMath {
     }
 
     //FLLDCIM: M3 - HEX_ROUNDING v1: an unsigned 64-bit value to the nearest double, rounded once
-    /**
-     * Converts an unsigned 64-bit value to the nearest double (ties to even), with a single rounding: at or
-     * above 2^63 the value is halved with its lowest bit kept as a sticky bit, converted, and doubled (exact).
-     *
-     * @param unsigned an unsigned 64-bit value
-     * @return the nearest double
-     */
-    private static double unsignedToDouble(long unsigned) {
-        if (unsigned >= 0) {
-            return (double) unsigned;
-        }
-        double half = (double) (unsigned >>> 1 | unsigned & 1);
-        return half + half;
-    }
+    //FLLDCIM: M3 - HEX_RECONCILE v1: unsignedToDouble removed with HEX_ROUNDING v1, its only caller; the anchor above stays
+    // (CNPCDA: append-only)
 }

@@ -19,6 +19,8 @@ class M3FastFloatMath {
     //FLLDCIM: M3 - LITERAL_CONSTANTS v1: this class's magic literals, named by role (user rule: no magic numbers, no floating strings)
     /** IEEE 754 negative zero (float). */
     private static final float NEGATIVE_ZERO = -0.0f;
+    /** 2^64: corrects the signed conversion of an unsigned 64-bit significand. */
+    private static final float TWO_POW_64 = 0x1p64f;
     //FLLDCIM: M3 - HEX_ROUTE v1: every hex literal takes the original FloatingDecimal path (PATTERN_ROUTES.tsv HEX_*)
     /**
      * True: {@link #tryHexFloatToFloatTruncated} declines every hexadecimal literal, so the caller takes the original
@@ -139,10 +141,15 @@ class M3FastFloatMath {
             //FLLDCIM: M3 - HEX_ROUNDING v1: as in M3FastDoubleMath: one rounding of the unsigned significand (the
             // donor's (float) significand + 2^64 rounded twice), and a truncated significand decides only when
             // significand and significand + 1 round alike (0x1.000001000000000001p0 rounded down before)
-            float d = unsignedToFloat(significand);
-            if (isSignificandTruncated && d != unsignedToFloat(significand + 1)) {
-                return Float.NaN;
-            }
+            //FLLDCIM: M3 - HEX_RECONCILE v1: HEX_ROUNDING v1 removed, one hex implementation: HEX_ROUTE v1
+            // declines every hex literal above; with the constant false the hex gates of PR #2245 still fail on
+            // the exponent clamp (0x.1p10240 gave 2^1020), so the donor body is back as on PR #2245
+            // (GATES.tsv rows hex_reconcile_*)
+            // Convert the significand into a float.
+            // The cast will round the significand if necessary.
+            // The significand is an unsigned long, however the cast treats it like a signed number.
+            // So, if the significand is negative, we have to add 1<<64 to the number.
+            float d = (float) significand + (significand < 0 ? TWO_POW_64 : 0);
 
             // Scale the significand by the power.
             // This only works if power is within the supported range, so that
@@ -361,18 +368,6 @@ class M3FastFloatMath {
     }
 
     //FLLDCIM: M3 - HEX_ROUNDING v1: an unsigned 64-bit value to the nearest float, rounded once
-    /**
-     * Converts an unsigned 64-bit value to the nearest float (ties to even), with a single rounding: at or
-     * above 2^63 the value is halved with its lowest bit kept as a sticky bit, converted, and doubled (exact).
-     *
-     * @param unsigned an unsigned 64-bit value
-     * @return the nearest float
-     */
-    private static float unsignedToFloat(long unsigned) {
-        if (unsigned >= 0) {
-            return (float) unsigned;
-        }
-        float half = (float) (unsigned >>> 1 | unsigned & 1);
-        return half + half;
-    }
+    //FLLDCIM: M3 - HEX_RECONCILE v1: unsignedToFloat removed with HEX_ROUNDING v1, its only caller; the anchor above stays
+    // (CNPCDA: append-only)
 }

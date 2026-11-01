@@ -44,7 +44,12 @@ without a borrow between byte lanes (the donor took g and G for hex digits, so D
 returned a value where the JDK throws NumberFormatException); NUMBER-PARSE-PATTERN v1: packedIndex and its three
 constants, identical in both grammar templates, have one owner, M3AbstractFloatValueParser; CNPCDA v1: the four
 //FLLDCIM anchor comments removed with that move are back in the two template files, each with an anchor naming the
-new owner (gates: GATES.tsv and RECIPE_MEMORY.tsv in m3/tooling/jdk-superset/number-parse). Nothing else was changed.
+new owner; HEX_RECONCILE v1: with HEX_ROUTE v1 merged, the hex gates run with HEX_LITERALS_TO_FLOATING_DECIMAL =
+false against HEX_ROUNDING v1 and SWAR_HEX_BORROW v1 still failed on the exponent clamp (0x.1p10240 gave 2^1020
+instead of Infinity), so the route stays and HEX_ROUNDING v1 was removed again: the donor body and TWO_POW_64 are
+back behind the constant as in HEX_ROUTE v1, unsignedToDouble and unsignedToFloat are gone, their //FLLDCIM anchor
+comments stay (gates: GATES.tsv and RECIPE_MEMORY.tsv in m3/tooling/jdk-superset/number-parse).
+Nothing else was changed.
 
 ### LICENSE
 

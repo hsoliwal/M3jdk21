@@ -909,7 +909,7 @@ public class M3NumberParseEveryAtomTest {
             Method m = d ? method(t, "tryHexFloatToDoubleTruncated", boolean.class, long.class, long.class, boolean.class, long.class)
                          : method(t, "tryHexFloatToFloatTruncated", boolean.class, long.class, int.class, boolean.class, int.class);
             int maxPower = d ? Double.MAX_EXPONENT : Float.MAX_EXPONENT;
-            // HEX_ROUTE v1 (merged from PR #2245): the kernel declines every literal, in range or not, truncated or
+            // HEX_ROUTE v1, kept by HEX_RECONCILE v1: the kernel declines every literal, in range or not, truncated or
             // not, so valueOfHexLiteral takes FloatingDecimal.readJavaFormatString (M3NumberParseHexAtomsTest of PR
             // #2245 checks the same contract); the decision rests on the constant
             Field route = type(t).getDeclaredField("HEX_LITERALS_TO_FLOATING_DECIMAL");
@@ -922,17 +922,6 @@ public class M3NumberParseEveryAtomTest {
                 boolean neg = r.nextBoolean(), truncated = r.nextBoolean();
                 Object got = d ? call(m, null, neg, sig, (long) exp, truncated, (long) expT) : call(m, null, neg, sig, exp, truncated, expT);
                 assertTrue(Double.isNaN(((Number) got).doubleValue()), Long.toUnsignedString(sig) + "p" + (truncated ? expT : exp));
-            }
-        });
-        atom(t + (d ? ".unsignedToDouble(long)" : ".unsignedToFloat(long)"), () -> {
-            Method m = method(t, d ? "unsignedToDouble" : "unsignedToFloat", long.class);
-            SplittableRandom r = new SplittableRandom(SEED + 37);
-            long[] edge = {0, 1, -1, Long.MIN_VALUE, Long.MAX_VALUE, 0x8000_0000_0000_0BFFL, 0x8000_0000_0000_0401L,
-                    0x8000_0080_0000_0000L, 0x8000_0080_0000_0001L, 0x8000_007f_ffff_ffffL};
-            for (int n = 0; n < CASES * 2; n++) {
-                long x = n < edge.length ? edge[n] : n % 3 == 0 ? r.nextLong() | Long.MIN_VALUE : r.nextLong() >>> r.nextInt(64);
-                Object want = d ? (Object) unsigned(x).doubleValue() : (Object) unsigned(x).floatValue();
-                assertEquals(want, call(m, null, x), Long.toUnsignedString(x));
             }
         });
         atom(t + (d ? ".fastScalb(double,long)" : ".fastScalb(float,int)"), () -> {

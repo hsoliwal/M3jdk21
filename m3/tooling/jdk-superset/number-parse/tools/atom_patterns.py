@@ -12,7 +12,9 @@ script exits 1). residue is typed: NONE, or ';'-joined tokens
   PACKED_RESULT        several results in one long (no allocation); fields decoded by packedIndex / (int) / sign
   INSTANCE_ATOM        not static: the atom ends in the abstract valueOf* of its instance
   COLD_PATH            the slow path; large or rarely run by design
-  FIXED:<recipe>       behaviour corrected toward the JDK in this leaf
+  FIXED:<recipe>       behaviour corrected toward the JDK in this leaf or in a leaf merged into it (HEX_RECONCILE v1:
+                       the hex kernels and valueOfHexLiteral carry HEX_ROUTE v1, HEX_ROUNDING v1 is gone; the decimal
+                       template atoms carry DEC_EXPONENT_CLAMP v1)
   DONOR_QUIRK:<what>   donor behaviour kept and pinned by its test
   LATENT_DEFECT:<what> donor defect no caller reaches (FFT_LATENT v1 in RECIPE_MEMORY.tsv)
 owner is the atom that owns the behaviour: itself, or the single owner when JUnit proves atoms identical.
@@ -57,9 +59,10 @@ RESIDUE = (  # (regex, token)
     (r"\.(parseExponentNumber|parseLiteralTail|packedIndex)\(", "PACKED_RESULT"),
     (r"\.valueOfTruncated", "INSTANCE_ATOM"),
     (r"\.(jdkConverterValue|parseNaNOrInfinity)\(", "COLD_PATH"),
-    (r"\.(tryHexFloatTo(Double|Float)Truncated|unsignedTo(Double|Float))\(", "FIXED:HEX_ROUNDING v1"),
+    (r"\.(parseDecFloatLiteral|valueOfTruncatedDecFloatLiteral)\(", "FIXED:DEC_EXPONENT_CLAMP v1"),
+    (r"\.tryHexFloatTo(Double|Float)Truncated\(", "FIXED:HEX_ROUTE v1"),
     (r"M3FastDoubleSwar\.(tryToParseEightHexDigits|tryToParseEightHexDigitsUtf16|tryToParseEightHexDigitsUtf8)\(", "FIXED:SWAR_HEX_BORROW v1"),
-    (r"\.valueOfHexLiteral\(", "FIXED:HEX_ROUNDING v1"),
+    (r"\.valueOfHexLiteral\(", "FIXED:HEX_ROUTE v1"),
     (r"\.fillPowersOf10Floor16\(", "DONOR_QUIRK:key 0 holds 5"),
     (r"ComplexVector\.part\(", "DONOR_QUIRK:ignores the view offset"),
     (r"ComplexVector\.(applyWeights|applyInverseWeights|multiplyPointwise|squarePointwise)\(", "LATENT_DEFECT:overruns on a view"),
