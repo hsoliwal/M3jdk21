@@ -39,5 +39,21 @@ abstract class M3AbstractFloatValueParser extends M3AbstractNumberParser {
      */
     final static int MAX_EXPONENT_NUMBER = 1024;
 
+    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: the packed scan result of both grammar templates (parseExponentNumber,
+    // parseLiteralTail), one owner: the two template copies were identical (M3NumberParseEveryAtomTest)
+    /** Shift of the index field of a packed scan result (the exponent number is the low int). */
+    static final int PACKED_INDEX_SHIFT = Integer.SIZE;
+    /** Sign bit of a packed scan result: set when no digit follows an exponent indicator. */
+    static final long ILLEGAL_EXPONENT_BIT = Long.MIN_VALUE;
+    /** The exponent fields of a packed scan result: the sign bit and the exponent number (low int). */
+    static final long EXPONENT_FIELDS_MASK = ILLEGAL_EXPONENT_BIT | (1L << PACKED_INDEX_SHIFT) - 1;
 
+    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: decodes the index field of a packed scan result (one owner for both templates)
+    /**
+     * @param scanned a packed scan result of a grammar template (parseExponentNumber or parseLiteralTail)
+     * @return its index field (bits 32 to 62)
+     */
+    static int packedIndex(long scanned) {
+        return (int) (scanned >>> PACKED_INDEX_SHIFT) & Integer.MAX_VALUE;
+    }
 }

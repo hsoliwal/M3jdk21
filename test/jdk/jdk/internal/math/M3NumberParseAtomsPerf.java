@@ -28,6 +28,46 @@ import java.util.Random;
 import java.util.SplittableRandom;
 
 public class M3NumberParseAtomsPerf {
+    //FLLDCIM: M3 - LITERAL_CONSTANTS v1: this class's magic literals, named by role (user rule: no magic numbers, no floating strings)
+    /** Seed of the deterministic literal corpus. */
+    private static final long CORPUS_SEED = 20261031L;
+    /** Literals in the corpus. */
+    private static final int CORPUS_SIZE = 200_000;
+    /** One corpus literal in FLOAT_LITERAL_ONE_IN is a Float.toString literal, the others Double.toString. */
+    private static final int FLOAT_LITERAL_ONE_IN = 3;
+    /** Masks random bits to a positive finite float (no sign bit, exponent below 0xff). */
+    private static final int FINITE_FLOAT_BITS_MASK = 0x7f7fffff;
+    /** Masks random bits to a positive finite double (no sign bit, exponent below 0x7ff). */
+    private static final long FINITE_DOUBLE_BITS_MASK = 0x7fefffffffffffffL;
+    /** Calls per timing of the SWAR and multiply kernels. */
+    private static final int KERNEL_OPS = 5_000_000;
+    /** The first decimal digit (the SWAR input cycles from it; the reference checks from it). */
+    private static final char DIGIT_ZERO = '0';
+    /** Masks the loop index to eight values, so the first byte of the SWAR input cycles through eight digits. */
+    private static final int DIGIT_CYCLE_MASK = 7;
+    /** Bytes one isEightDigits call checks; the reference loop checks as many. */
+    private static final int SWAR_WORD_BYTES = 8;
+    /** The last decimal digit. */
+    private static final char DIGIT_NINE = '9';
+    /** The 64-bit golden-ratio constant (SplitMix64 gamma): i * GOLDEN_GAMMA spreads the loop index over all bits. */
+    private static final long GOLDEN_GAMMA = 0x9E3779B97F4A7C15L;
+    /** Calls per timing of the decimal fast-path kernels. */
+    private static final int FAST_MATH_OPS = 300_000;
+    /** A prime: the significand i * SIGNIFICAND_STRIDE walks the significands without a pattern. */
+    private static final int SIGNIFICAND_STRIDE = 7919;
+    /** The double kernel's decimal powers cycle through DOUBLE_POWER_SPAN values. */
+    private static final int DOUBLE_POWER_SPAN = 300;
+    /** The double kernel's decimal powers start at -DOUBLE_POWER_OFFSET. */
+    private static final int DOUBLE_POWER_OFFSET = 150;
+    /** The float kernel's decimal powers cycle through FLOAT_POWER_SPAN values. */
+    private static final int FLOAT_POWER_SPAN = 70;
+    /** The float kernel's decimal powers start at -FLOAT_POWER_OFFSET. */
+    private static final int FLOAT_POWER_OFFSET = 40;
+    /** Bit length of each operand of the FFT multiply timing. */
+    private static final int FFT_OPERAND_BITS = 400_000;
+    /** Seed of the second FFT operand (the first uses 1). */
+    private static final int SECOND_OPERAND_SEED = 2;
+
     private static final int WARMUP = 6;
     private static final int ROUNDS = 7;
     private static long sink;
@@ -107,10 +147,10 @@ public class M3NumberParseAtomsPerf {
 
     public static void main(String[] args) throws Throwable {
         List<String> list = new ArrayList<>();
-        SplittableRandom r = new SplittableRandom(20261031L);
-        while (list.size() < 200_000) {
-            list.add(r.nextInt(3) == 0 ? Float.toString(Float.intBitsToFloat(r.nextInt() & 0x7f7fffff))
-                                       : Double.toString(Double.longBitsToDouble(r.nextLong() & 0x7fefffffffffffffL)));
+        SplittableRandom r = new SplittableRandom(CORPUS_SEED);
+        while (list.size() < CORPUS_SIZE) {
+            list.add(r.nextInt(FLOAT_LITERAL_ONE_IN) == 0 ? Float.toString(Float.intBitsToFloat(r.nextInt() & FINITE_FLOAT_BITS_MASK))
+                                       : Double.toString(Double.longBitsToDouble(r.nextLong() & FINITE_DOUBLE_BITS_MASK)));
         }
         String[] v = list.toArray(String[]::new);
         byte[][] b = list.stream().map(s -> s.getBytes(StandardCharsets.ISO_8859_1)).toArray(byte[][]::new);
@@ -128,19 +168,19 @@ public class M3NumberParseAtomsPerf {
         row("Float.parseFloat (wiring)", wiredF, refF);
 
         byte[] d8 = "12345678".getBytes(StandardCharsets.ISO_8859_1);
-        int k = 5_000_000;
-        row("M3FastDoubleSwar.isEightDigits", time(() -> { long s = 0; for (int i = 0; i < k; i++) { d8[0] = (byte) ('0' + (i & 7)); s += (boolean) EIGHT.invokeExact(d8, 0) ? 1 : 0; } return s; }, k),
-            time(() -> { long s = 0; for (int i = 0; i < k; i++) { d8[0] = (byte) ('0' + (i & 7)); boolean ok = true; for (int j = 0; j < 8; j++) ok &= d8[j] >= '0' && d8[j] <= '9'; s += ok ? 1 : 0; } return s; }, k));
+        int k = KERNEL_OPS;
+        row("M3FastDoubleSwar.isEightDigits", time(() -> { long s = 0; for (int i = 0; i < k; i++) { d8[0] = (byte) (DIGIT_ZERO + (i & DIGIT_CYCLE_MASK)); s += (boolean) EIGHT.invokeExact(d8, 0) ? 1 : 0; } return s; }, k),
+            time(() -> { long s = 0; for (int i = 0; i < k; i++) { d8[0] = (byte) (DIGIT_ZERO + (i & DIGIT_CYCLE_MASK)); boolean ok = true; for (int j = 0; j < SWAR_WORD_BYTES; j++) ok &= d8[j] >= DIGIT_ZERO && d8[j] <= DIGIT_NINE; s += ok ? 1 : 0; } return s; }, k));
         row("M3FastDoubleSwar.readLongBE", time(() -> { long s = 0; for (int i = 0; i < k; i++) { d8[1] = (byte) i; s += (long) READ_BE.invokeExact(d8, 0); } return s; }, k),
             time(() -> { long s = 0; ByteBuffer bb = ByteBuffer.wrap(d8); for (int i = 0; i < k; i++) { d8[1] = (byte) i; s += bb.getLong(0); } return s; }, k));
-        row("M3FastIntegerMath.unsignedMultiplyHigh", time(() -> { long s = 0; for (int i = 0; i < k; i++) s += (long) UMH.invokeExact((long) i * 0x9E3779B97F4A7C15L, s | 1L); return s; }, k),
-            time(() -> { long s = 0; for (int i = 0; i < k; i++) s += Math.unsignedMultiplyHigh((long) i * 0x9E3779B97F4A7C15L, s | 1L); return s; }, k));
-        int q = 300_000;
-        row("M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm", time(() -> { long s = 0; for (int i = 1; i <= q; i++) s += Double.doubleToRawLongBits((double) FDM.invokeExact(false, (long) i * 7919, i % 300 - 150)); return s; }, q),
-            time(() -> { long s = 0; for (int i = 1; i <= q; i++) s += Double.doubleToRawLongBits(new BigDecimal(BigInteger.valueOf((long) i * 7919)).scaleByPowerOfTen(i % 300 - 150).doubleValue()); return s; }, q));
-        row("M3FastFloatMath.tryDecToFloatWithFastAlgorithm", time(() -> { long s = 0; for (int i = 1; i <= q; i++) s += Float.floatToRawIntBits((float) FFM.invokeExact(false, (long) i * 7919, i % 70 - 40)); return s; }, q),
-            time(() -> { long s = 0; for (int i = 1; i <= q; i++) s += Float.floatToRawIntBits(new BigDecimal(BigInteger.valueOf((long) i * 7919)).scaleByPowerOfTen(i % 70 - 40).floatValue()); return s; }, q));
-        BigInteger x = new BigInteger(400_000, new Random(1)), y = new BigInteger(400_000, new Random(2));
+        row("M3FastIntegerMath.unsignedMultiplyHigh", time(() -> { long s = 0; for (int i = 0; i < k; i++) s += (long) UMH.invokeExact((long) i * GOLDEN_GAMMA, s | 1L); return s; }, k),
+            time(() -> { long s = 0; for (int i = 0; i < k; i++) s += Math.unsignedMultiplyHigh((long) i * GOLDEN_GAMMA, s | 1L); return s; }, k));
+        int q = FAST_MATH_OPS;
+        row("M3FastDoubleMath.tryDecToDoubleWithFastAlgorithm", time(() -> { long s = 0; for (int i = 1; i <= q; i++) s += Double.doubleToRawLongBits((double) FDM.invokeExact(false, (long) i * SIGNIFICAND_STRIDE, i % DOUBLE_POWER_SPAN - DOUBLE_POWER_OFFSET)); return s; }, q),
+            time(() -> { long s = 0; for (int i = 1; i <= q; i++) s += Double.doubleToRawLongBits(new BigDecimal(BigInteger.valueOf((long) i * SIGNIFICAND_STRIDE)).scaleByPowerOfTen(i % DOUBLE_POWER_SPAN - DOUBLE_POWER_OFFSET).doubleValue()); return s; }, q));
+        row("M3FastFloatMath.tryDecToFloatWithFastAlgorithm", time(() -> { long s = 0; for (int i = 1; i <= q; i++) s += Float.floatToRawIntBits((float) FFM.invokeExact(false, (long) i * SIGNIFICAND_STRIDE, i % FLOAT_POWER_SPAN - FLOAT_POWER_OFFSET)); return s; }, q),
+            time(() -> { long s = 0; for (int i = 1; i <= q; i++) s += Float.floatToRawIntBits(new BigDecimal(BigInteger.valueOf((long) i * SIGNIFICAND_STRIDE)).scaleByPowerOfTen(i % FLOAT_POWER_SPAN - FLOAT_POWER_OFFSET).floatValue()); return s; }, q));
+        BigInteger x = new BigInteger(FFT_OPERAND_BITS, new Random(1)), y = new BigInteger(FFT_OPERAND_BITS, new Random(SECOND_OPERAND_SEED));
         row("M3FftMultiplier.multiply (400k-bit operands)", time(() -> ((BigInteger) MUL.invokeExact(x, y)).bitLength(), 1),
             time(() -> x.multiply(y).bitLength(), 1));
         System.out.println("sink " + sink);

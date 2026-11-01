@@ -15,6 +15,9 @@
   v1.1: apply and check take an optional first file argument --kinds=number,char that limits HOIST to those literal
   kinds (test and gate sources name their numbers and chars; their message strings stay inline). The TSVs this tool
   writes start with the Synexia SPDX header ('#' lines, which every reader of these ledgers skips).
+  v1.2: an annotation is '@' Name ('.' Name)* ['(' ... ')']. v1.1 took every identifier after the '@' as part of the
+  annotation name, so an annotated member without a modifier ('@Test void m() {', '@Override long f(...) {') lost its
+  name and type and was read as an initializer ('<init>'): its literals were keyed '<init>#k' across all such members.
 
 Lexing is token-exact (SFA): comments, strings, text blocks and chars are whole tokens; only literal tokens are replaced,
 everything else is copied byte for byte. A unary minus belongs to its literal (-1074 is one value).
@@ -125,10 +128,12 @@ def numeric_value(text):
 
 
 def skip_annotation(toks, j, end):
-    """j at '@': index after the annotation (name, dotted parts, optional argument list)."""
+    """j at '@': index after the annotation '@' Name ('.' Name)* ['(' ... ')'] (LITERAL_CONSTANTS v1.2)."""
     j += 1
-    while j < end and (toks[j].kind == "ident" or toks[j].text == "."):
+    if j < end and toks[j].kind == "ident":
         j += 1
+    while j + 1 < end and toks[j].text == "." and toks[j + 1].kind == "ident":
+        j += 2
     if j < end and toks[j].text == "(":
         depth = 0
         while j < end:

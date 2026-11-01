@@ -39,8 +39,7 @@ final class M3JavaFloatBitsFromByteArray extends M3AbstractJavaFloatingPointBits
                              long significand, int exponent, boolean isSignificandTruncated,
                              int exponentOfTruncatedSignificand) {
         float result = M3FastFloatMath.tryDecFloatToFloatTruncated(isNegative, significand, exponent, isSignificandTruncated, exponentOfTruncatedSignificand);
-        return Float.floatToRawIntBits(Float.isNaN(result) ? FloatingDecimal.readJavaFormatString(
-                new String(str, startIndex, endIndex - startIndex, StandardCharsets.ISO_8859_1)).floatValue() : result);
+        return Float.floatToRawIntBits(Float.isNaN(result) ? jdkConverterValue(str, startIndex, endIndex) : result);
     }
 
     @Override
@@ -48,7 +47,22 @@ final class M3JavaFloatBitsFromByteArray extends M3AbstractJavaFloatingPointBits
             byte[] str, int startIndex, int endIndex, boolean isNegative, long significand, int exponent,
             boolean isSignificandTruncated, int exponentOfTruncatedSignificand) {
         float d = M3FastFloatMath.tryHexFloatToFloatTruncated(isNegative, significand, exponent, isSignificandTruncated, exponentOfTruncatedSignificand);
-        return Float.floatToRawIntBits(Float.isNaN(d) ? FloatingDecimal.readJavaFormatString(new String(str, startIndex, endIndex - startIndex, StandardCharsets.ISO_8859_1)).floatValue() : d);
+        return Float.floatToRawIntBits(Float.isNaN(d) ? jdkConverterValue(str, startIndex, endIndex) : d);
+    }
+
+    //FLLDCIM: HPCPOP - JIT_ATOMIZE v1: the cold fallback of valueOfFloatLiteral and valueOfHexLiteral (one atom), so
+    // their compiled code stays small and inlinable
+    /**
+     * The slow path: the JDK's original converter decides when the fast algorithms cannot.
+     *
+     * @param str        the string that contains the float literal (and maybe more)
+     * @param startIndex the start index (inclusive) of the float literal inside the string
+     * @param endIndex   the end index (exclusive) of the float literal inside the string
+     * @return the float value of the literal
+     */
+    private static float jdkConverterValue(byte[] str, int startIndex, int endIndex) {
+        return FloatingDecimal.readJavaFormatString(
+                new String(str, startIndex, endIndex - startIndex, StandardCharsets.ISO_8859_1)).floatValue();
     }
 
 }

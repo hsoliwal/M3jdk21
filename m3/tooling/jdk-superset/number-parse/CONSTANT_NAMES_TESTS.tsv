@@ -56,3 +56,115 @@ M3HexParseDifferential	nearMiss	2	MAX_DIGITS_DIVISOR	MAX_DIGITS / MAX_DIGITS_DIV
 M3HexParseDifferential	nearMiss#1	3	MAX_EDITS	Up to this many random edits per near miss.
 M3HexParseDifferential	nearMiss#2	3	EDIT_KINDS	Edit kinds: insert, delete, replace.
 M3HexParseDifferential	donorClamp	'0'	DIGIT_ZERO	First decimal digit; ch - DIGIT_ZERO is the digit value.
+# LITERAL_CONSTANTS v1.2 (PR #2247): M3NumberParseJitPerf, M3NumberParseAtomsPerf, M3NumberParseAtomsTest and gate M3ParseDifferential (apply ... --kinds=number,char; ledger CONSTANTS_TESTS_JIT.tsv).
+M3NumberParseJitPerf	longLiteral	'1'	FIRST_LEADING_DIGIT	The smallest leading digit of a generated long literal (no leading zero).
+M3NumberParseJitPerf	longLiteral	9	LEADING_DIGIT_CHOICES	Number of leading digit choices, FIRST_LEADING_DIGIT to '9'.
+M3NumberParseJitPerf	longLiteral	'0'	DIGIT_ZERO	The first decimal digit; a later digit is DIGIT_ZERO plus 0 to 9.
+M3NumberParseJitPerf	longLiteral	10	DECIMAL_DIGIT_CHOICES	Number of decimal digits.
+M3NumberParseJitPerf	longLiteral	'.'	DECIMAL_POINT	The decimal point inserted after the first digit or later.
+M3NumberParseJitPerf	longLiteral	'e'	EXPONENT_INDICATOR	The exponent indicator of a long literal.
+M3NumberParseJitPerf	measure	2	MEDIAN_DIVISOR	ROUNDS / MEDIAN_DIVISOR is the index of the median of the sorted round timings.
+M3NumberParseJitPerf	row	3	LOAD_FIELD	Index of the CPU load sampled after the rounds in the result of measure.
+M3NumberParseAtomsPerf	main	20261031L	CORPUS_SEED	Seed of the deterministic literal corpus.
+M3NumberParseAtomsPerf	main	200_000	CORPUS_SIZE	Literals in the corpus.
+M3NumberParseAtomsPerf	main	3	FLOAT_LITERAL_ONE_IN	One corpus literal in FLOAT_LITERAL_ONE_IN is a Float.toString literal, the others Double.toString.
+M3NumberParseAtomsPerf	main	0x7f7fffff	FINITE_FLOAT_BITS_MASK	Masks random bits to a positive finite float (no sign bit, exponent below 0xff).
+M3NumberParseAtomsPerf	main	0x7fefffffffffffffL	FINITE_DOUBLE_BITS_MASK	Masks random bits to a positive finite double (no sign bit, exponent below 0x7ff).
+M3NumberParseAtomsPerf	main	5_000_000	KERNEL_OPS	Calls per timing of the SWAR and multiply kernels.
+M3NumberParseAtomsPerf	main	'0'	DIGIT_ZERO	The first decimal digit (the SWAR input cycles from it; the reference checks from it).
+M3NumberParseAtomsPerf	main	7	DIGIT_CYCLE_MASK	Masks the loop index to eight values, so the first byte of the SWAR input cycles through eight digits.
+M3NumberParseAtomsPerf	main	8	SWAR_WORD_BYTES	Bytes one isEightDigits call checks; the reference loop checks as many.
+M3NumberParseAtomsPerf	main	'9'	DIGIT_NINE	The last decimal digit.
+M3NumberParseAtomsPerf	main	0x9E3779B97F4A7C15L	GOLDEN_GAMMA	The 64-bit golden-ratio constant (SplitMix64 gamma): i * GOLDEN_GAMMA spreads the loop index over all bits.
+M3NumberParseAtomsPerf	main	300_000	FAST_MATH_OPS	Calls per timing of the decimal fast-path kernels.
+M3NumberParseAtomsPerf	main	7919	SIGNIFICAND_STRIDE	A prime: the significand i * SIGNIFICAND_STRIDE walks the significands without a pattern.
+M3NumberParseAtomsPerf	main	300	DOUBLE_POWER_SPAN	The double kernel's decimal powers cycle through DOUBLE_POWER_SPAN values.
+M3NumberParseAtomsPerf	main	150	DOUBLE_POWER_OFFSET	The double kernel's decimal powers start at -DOUBLE_POWER_OFFSET.
+M3NumberParseAtomsPerf	main	70	FLOAT_POWER_SPAN	The float kernel's decimal powers cycle through FLOAT_POWER_SPAN values.
+M3NumberParseAtomsPerf	main	40	FLOAT_POWER_OFFSET	The float kernel's decimal powers start at -FLOAT_POWER_OFFSET.
+M3NumberParseAtomsPerf	main	400_000	FFT_OPERAND_BITS	Bit length of each operand of the FFT multiply timing.
+M3NumberParseAtomsPerf	main	2	SECOND_OPERAND_SEED	Seed of the second FFT operand (the first uses 1).
+M3NumberParseAtomsTest	instanceAtom	50_000	MIN_COMPARED_LITERALS	An instance atom must have compared more than MIN_COMPARED_LITERALS corpus literals with the JDK.
+M3NumberParseAtomsTest	fastDoubleSwarEightDigitsAndReads	7	SWAR_SEED	Seed of the SWAR atoms test.
+M3NumberParseAtomsTest	fastDoubleSwarEightDigitsAndReads	50_000	SWAR_CASES	Generated 8-char groups.
+M3NumberParseAtomsTest	fastDoubleSwarEightDigitsAndReads	8	SWAR_GROUP_CHARS	Chars per group: one isEightDigits or readLongBE word.
+M3NumberParseAtomsTest	fastDoubleSwarEightDigitsAndReads	4	ALPHABET_ONE_IN	One char in ALPHABET_ONE_IN comes from the alphabet (digits, the neighbours of the digit range, a letter, space, point); the others are digits.
+M3NumberParseAtomsTest	fastDoubleSwarEightDigitsAndReads	'0'	DIGIT_ZERO	The first decimal digit.
+M3NumberParseAtomsTest	fastDoubleSwarEightDigitsAndReads	10	DECIMAL_DIGIT_CHOICES	Number of decimal digits.
+M3NumberParseAtomsTest	fastDoubleSwarEightDigitsAndReads	'9'	DIGIT_NINE	The last decimal digit.
+M3NumberParseAtomsTest	fastIntegerMathAgainstJdk	11	INTEGER_MATH_SEED	Seed of the integer kernel test.
+M3NumberParseAtomsTest	fastIntegerMathAgainstJdk	100_000	MULTIPLY_HIGH_CASES	Random operand pairs for unsignedMultiplyHigh.
+M3NumberParseAtomsTest	fastIntegerMathAgainstJdk	2000	MAX_ESTIMATED_DIGITS	estimateNumBits is checked for every digit count up to MAX_ESTIMATED_DIGITS.
+M3NumberParseAtomsTest	fastIntegerMathAgainstJdk	600	MAX_TEN_EXPONENT	computePowerOfTen is checked for every exponent up to MAX_TEN_EXPONENT.
+M3NumberParseAtomsTest	fastDoubleMathAgainstBigDecimal	13	DOUBLE_MATH_SEED	Seed of the double fast-path test.
+M3NumberParseAtomsTest	fastDoubleMathAgainstBigDecimal	100_000	DOUBLE_MATH_CASES	Random significand and power pairs for the double fast path.
+M3NumberParseAtomsTest	*	64	LONG_BITS	Bits of a long: a random significand is a random long shifted right by 1 to LONG_BITS - 1.
+M3NumberParseAtomsTest	fastDoubleMathAgainstBigDecimal	-325	DOUBLE_MIN_POWER	Smallest decimal power the double kernel's callers pass.
+M3NumberParseAtomsTest	fastDoubleMathAgainstBigDecimal	309	DOUBLE_POWER_BOUND	Exclusive bound of the decimal powers the double kernel's callers pass (largest 308).
+M3NumberParseAtomsTest	*	1e3	SCALB_VALUE_RANGE	fastScalb inputs are uniform in [0, SCALB_VALUE_RANGE).
+M3NumberParseAtomsTest	fastDoubleMathAgainstBigDecimal	-60	DOUBLE_SCALB_MIN	Smallest scale factor of the double fastScalb check.
+M3NumberParseAtomsTest	fastDoubleMathAgainstBigDecimal	60	DOUBLE_SCALB_BOUND	Exclusive bound of the scale factors of the double fastScalb check.
+M3NumberParseAtomsTest	fastDoubleMathAgainstBigDecimal	50_000	MIN_FAST_PATH_DECIDED	The fast path must decide (not decline) more than MIN_FAST_PATH_DECIDED of the cases.
+M3NumberParseAtomsTest	fastFloatMathAgainstBigDecimal	17	FLOAT_MATH_SEED	Seed of the float fast-path test.
+M3NumberParseAtomsTest	fastFloatMathAgainstBigDecimal	100_000	FLOAT_MATH_CASES	Random significand and power pairs for the float fast path.
+M3NumberParseAtomsTest	fastFloatMathAgainstBigDecimal	-45	FLOAT_MIN_POWER	Smallest decimal power the float kernel's callers pass.
+M3NumberParseAtomsTest	fastFloatMathAgainstBigDecimal	39	FLOAT_POWER_BOUND	Exclusive bound of the decimal powers the float kernel's callers pass (largest 38).
+M3NumberParseAtomsTest	fastFloatMathAgainstBigDecimal	-30	FLOAT_SCALB_MIN	Smallest scale factor of the float fastScalb check.
+M3NumberParseAtomsTest	fastFloatMathAgainstBigDecimal	30	FLOAT_SCALB_BOUND	Exclusive bound of the scale factors of the float fastScalb check.
+M3NumberParseAtomsTest	fastFloatMathAgainstBigDecimal	50_000	MIN_FAST_PATH_DECIDED	The fast path must decide (not decline) more than MIN_FAST_PATH_DECIDED of the cases.
+M3NumberParseAtomsTest	fftMultiplierAgainstBigInteger	19	FFT_SEED	Seed of the FFT multiplier test.
+M3NumberParseAtomsTest	fftMultiplierAgainstBigInteger	60	FFT_CASES	Random operand pairs for multiply and square.
+M3NumberParseAtomsTest	fftMultiplierAgainstBigInteger	64	FFT_MIN_OPERAND_BITS	Smallest operand bit length.
+M3NumberParseAtomsTest	fftMultiplierAgainstBigInteger	200_000	FFT_OPERAND_BITS_SPAN	Operand bit lengths are FFT_MIN_OPERAND_BITS plus 0 to FFT_OPERAND_BITS_SPAN - 1.
+M3NumberParseAtomsTest	corpus	20261031L	CORPUS_SEED	Seed of the deterministic corpus.
+M3NumberParseAtomsTest	corpus	5	CORPUS_SHAPES	Shapes of the corpus round robin: Double.toString, Float.toString, Double.toHexString, junk, digits with an exponent.
+M3NumberParseAtomsTest	corpus	2	SHAPE_HEX_STRING	Case of the round robin: Double.toHexString of random bits.
+M3NumberParseAtomsTest	corpus	3	SHAPE_JUNK	Case of the round robin: junk from the grammar's alphabet.
+M3NumberParseAtomsTest	corpus	12	MAX_JUNK_CHARS	Junk literals have 1 to MAX_JUNK_CHARS chars.
+M3NumberParseAtomsTest	corpus	700	EXPONENT_SPAN	Random decimal exponents are uniform over EXPONENT_SPAN values.
+M3NumberParseAtomsTest	corpus	350	EXPONENT_OFFSET	Random decimal exponents start at -EXPONENT_OFFSET.
+M3ParseDifferential	main	48	OUTPUT_CHARS_PER_LINE	Initial capacity of the output per corpus line.
+M3ParseDifferential	main	'\t'	FIELD_SEPARATOR	Separates the fields of an output line.
+M3ParseDifferential	main	'\n'	LINE_END	Ends an output line.
+M3ParseDifferential	main	2	BENCH_ROUNDS_ARGUMENT	Argument index of the bench rounds.
+M3ParseDifferential	hexDigits	16	HEX_RADIX	Hex digits to choose from.
+M3ParseDifferential	*	20261031L	CORPUS_SEED	Seed of every corpus of this gate.
+M3ParseDifferential	hexCorpus#1	8	WIDE_EXPONENT_ONE_IN	One hexdiff literal in WIDE_EXPONENT_ONE_IN gets a binary exponent from the wide range.
+M3ParseDifferential	hexCorpus	2400	WIDE_EXPONENT_SPAN	Wide binary exponents are uniform over WIDE_EXPONENT_SPAN values.
+M3ParseDifferential	hexCorpus	1200	WIDE_EXPONENT_OFFSET	Wide binary exponents start at -WIDE_EXPONENT_OFFSET.
+M3ParseDifferential	*	200	NARROW_EXPONENT_SPAN	Narrow binary exponents are uniform over NARROW_EXPONENT_SPAN values.
+M3ParseDifferential	*	100	NARROW_EXPONENT_OFFSET	Narrow binary exponents start at -NARROW_EXPONENT_OFFSET.
+M3ParseDifferential	hexCorpus#1	4	NEGATIVE_ONE_IN	One literal in NEGATIVE_ONE_IN is negative.
+M3ParseDifferential	hexCorpus#2	4	HEX_SHAPES	Shapes of the hexdiff round robin.
+M3ParseDifferential	hexCorpus	11	DOUBLE_ROUNDING_BIT	Bit of a 64-bit significand at which a double rounds (64 - 53).
+M3ParseDifferential	hexCorpus#1	40	FLOAT_ROUNDING_BIT	Bit of a 64-bit significand at which a float rounds (64 - 24).
+M3ParseDifferential	hexCorpus	3	HALFWAY_OFFSETS	The low bits sit at the halfway point minus 1, plus 0 or plus 1.
+M3ParseDifferential	hexCorpus	13	DOUBLE_FRACTION_HEX_DIGITS	Hex digits of a double's fraction (52 bits).
+M3ParseDifferential	hexCorpus	5	FLOAT_FRACTION_HEX_DIGITS	Random hex digits of a float's fraction (a '0' follows them).
+M3ParseDifferential	hexCorpus	12	MAX_TAIL_ZEROS	The tail after the halfway digit has 1 to MAX_TAIL_ZEROS - 1 zeros.
+M3ParseDifferential	hexCorpus	2	SHAPE_BOUNDARY_DIGITS	Case of the hexdiff round robin: random digits around the 16-digit boundary.
+M3ParseDifferential	hexCorpus	14	BOUNDARY_MIN_DIGITS	Fewest digits around the 16-digit boundary.
+M3ParseDifferential	hexCorpus	22	BOUNDARY_DIGITS_BOUND	Exclusive bound of the digits around the 16-digit boundary.
+M3ParseDifferential	hexCorpus#2	40	MAX_RANDOM_HEX_DIGITS	Random hex literals have 1 to MAX_RANDOM_HEX_DIGITS - 1 digits.
+M3ParseDifferential	hexCorpus#3	4	DOUBLE_SUFFIX_ONE_IN	One random hex literal in DOUBLE_SUFFIX_ONE_IN ends in d.
+M3ParseDifferential	swarCorpus	8	SWAR_GROUP_DIGITS	Hex digits of the SWAR group after the point.
+M3ParseDifferential	swarCorpus#1	4	CLEAN_GROUP_ONE_IN	One SWAR group in CLEAN_GROUP_ONE_IN keeps its hex digits; the others get one non-hex char.
+M3ParseDifferential	swarCorpus	2	G_LETTERS	The first G_LETTERS chars of the letter set are g and G, the letters next to the hex range.
+M3ParseDifferential	swarCorpus#2	4	NEGATIVE_ONE_IN	One literal in NEGATIVE_ONE_IN is negative.
+M3ParseDifferential	swarCorpus	3	MAX_INTEGER_HEX_DIGITS	Hex digits before the point: 0 to MAX_INTEGER_HEX_DIGITS - 1.
+M3ParseDifferential	swarCorpus	10	MAX_TRAILING_HEX_DIGITS	Hex digits after the SWAR group: 0 to MAX_TRAILING_HEX_DIGITS - 1.
+M3ParseDifferential	corpus	6	CORPUS_SHAPES	Shapes of the diff round robin.
+M3ParseDifferential	corpus	2	SHAPE_DIGITS	Case of the diff round robin: random decimal digits.
+M3ParseDifferential	corpus	25	MAX_DIGITS	Random digit strings have 1 to MAX_DIGITS digits.
+M3ParseDifferential	corpus	10	DECIMAL_RADIX	Decimal digits to choose from.
+M3ParseDifferential	corpus	'.'	DECIMAL_POINT	The decimal point inserted into a digit string.
+M3ParseDifferential	corpus#1	3	EXPONENT_ONE_IN	One digit string in EXPONENT_ONE_IN gets a decimal exponent.
+M3ParseDifferential	corpus	'e'	EXPONENT_INDICATOR	The exponent indicator of a digit string.
+M3ParseDifferential	corpus	700	DECIMAL_EXPONENT_SPAN	Random decimal exponents are uniform over DECIMAL_EXPONENT_SPAN values.
+M3ParseDifferential	corpus	350	DECIMAL_EXPONENT_OFFSET	Random decimal exponents start at -DECIMAL_EXPONENT_OFFSET.
+M3ParseDifferential	corpus#2	3	SHAPE_HEX_STRING	Case of the diff round robin: Double.toHexString of random bits.
+M3ParseDifferential	corpus#1	4	SHAPE_JUNK	Case of the diff round robin: junk from the grammar's alphabet.
+M3ParseDifferential	corpus	12	MAX_JUNK_CHARS	Junk literals have 1 to MAX_JUNK_CHARS chars.
+M3ParseDifferential	corpus#2	4	PADDED_FLOAT_ONE_IN	One literal of the last shape in PADDED_FLOAT_ONE_IN is a padded float literal, the others a shifted random long.
+M3ParseDifferential	corpus	1e6	PADDED_VALUE_RANGE	Padded float literals are uniform in [0, PADDED_VALUE_RANGE).
+M3ParseDifferential	corpus	64	LONG_BITS	A random long is shifted right by 0 to LONG_BITS - 1.
