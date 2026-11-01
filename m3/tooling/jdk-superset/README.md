@@ -228,6 +228,13 @@ stock's time, the mixed hex corpus 1.69x / 1.60x, where the exact M3 path would 
 regenerated (`tools/atom_patterns.py` tags the kernels and `valueOfHexLiteral` FIXED:HEX_ROUTE v1, the decimal
 template atoms FIXED:DEC_EXPONENT_CLAMP v1).
 
+Test literals (LITERAL_CONSTANTS v1.2, GATES.tsv rows `literal_constants_v1_2`, `test_literals_hoist`): the recipe now
+reads an annotation by its grammar, so the literals of `@Test` methods are keyed to their method (v1.1 keyed them all
+to `<init>`). `M3NumberParseJitPerf`, `M3NumberParseAtomsPerf`, `M3NumberParseAtomsTest` and `gate/M3ParseDifferential`
+name their numbers and chars: 135 literals, 109 constants, every method instruction-identical, the gates unchanged.
+Open: `M3NumberParseEveryAtomTest` (540 literals; its local tables become named tables first). The jtreg tests
+`TestFDBigInteger`, `ToString` and `TestFloatingDecimal` pass on the final patched java.base.
+
 Next:
 - Remove the last call boundary of the decimal path: the scanner hands its state (significand and packed index) to
   the caller instead of calling the value chain, so the loop holder stays below InlineSmallCode.

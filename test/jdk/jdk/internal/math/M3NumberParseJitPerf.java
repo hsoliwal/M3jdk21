@@ -29,6 +29,24 @@ import java.util.List;
 import java.util.SplittableRandom;
 
 public class M3NumberParseJitPerf {
+    //FLLDCIM: M3 - LITERAL_CONSTANTS v1: this class's magic literals, named by role (user rule: no magic numbers, no floating strings)
+    /** The smallest leading digit of a generated long literal (no leading zero). */
+    private static final char FIRST_LEADING_DIGIT = '1';
+    /** Number of leading digit choices, FIRST_LEADING_DIGIT to '9'. */
+    private static final int LEADING_DIGIT_CHOICES = 9;
+    /** The first decimal digit; a later digit is DIGIT_ZERO plus 0 to 9. */
+    private static final char DIGIT_ZERO = '0';
+    /** Number of decimal digits. */
+    private static final int DECIMAL_DIGIT_CHOICES = 10;
+    /** The decimal point inserted after the first digit or later. */
+    private static final char DECIMAL_POINT = '.';
+    /** The exponent indicator of a long literal. */
+    private static final char EXPONENT_INDICATOR = 'e';
+    /** ROUNDS / MEDIAN_DIVISOR is the index of the median of the sorted round timings. */
+    private static final int MEDIAN_DIVISOR = 2;
+    /** Index of the CPU load sampled after the rounds in the result of measure. */
+    private static final int LOAD_FIELD = 3;
+
     /** Seed of every input class (the leaf's fixed seed). */
     private static final long SEED = 20261031L;
     /** Inputs per class. */
@@ -107,12 +125,12 @@ public class M3NumberParseJitPerf {
     private static String longLiteral(SplittableRandom r, int exponentMin, int exponentSpan) {
         StringBuilder b = new StringBuilder();
         int digits = LONG_MIN_DIGITS + r.nextInt(LONG_EXTRA_DIGITS);
-        b.append((char) ('1' + r.nextInt(9)));
+        b.append((char) (FIRST_LEADING_DIGIT + r.nextInt(LEADING_DIGIT_CHOICES)));
         for (int i = 1; i < digits; i++) {
-            b.append((char) ('0' + r.nextInt(10)));
+            b.append((char) (DIGIT_ZERO + r.nextInt(DECIMAL_DIGIT_CHOICES)));
         }
-        b.insert(1 + r.nextInt(digits - 1), '.');
-        return b.append('e').append(exponentMin + r.nextInt(exponentSpan)).toString();
+        b.insert(1 + r.nextInt(digits - 1), DECIMAL_POINT);
+        return b.append(EXPONENT_INDICATOR).append(exponentMin + r.nextInt(exponentSpan)).toString();
     }
 
     interface Op {
@@ -170,7 +188,7 @@ public class M3NumberParseJitPerf {
         double load = OS.getCpuLoad();
         Arrays.sort(a);
         Arrays.sort(b);
-        return new double[] {a[ROUNDS / 2], b[ROUNDS / 2], load0, load};
+        return new double[] {a[ROUNDS / MEDIAN_DIVISOR], b[ROUNDS / MEDIAN_DIVISOR], load0, load};
     }
 
     public static void main(String[] args) throws Throwable {
@@ -185,6 +203,6 @@ public class M3NumberParseJitPerf {
     }
 
     private static void row(String atom, double[] m) {
-        System.out.printf("%s\t%.2f\t%.2f\t%.3f\t%.3f%n", atom, m[0], m[1], m[1] / m[0], m[3]);
+        System.out.printf("%s\t%.2f\t%.2f\t%.3f\t%.3f%n", atom, m[0], m[1], m[1] / m[0], m[LOAD_FIELD]);
     }
 }
