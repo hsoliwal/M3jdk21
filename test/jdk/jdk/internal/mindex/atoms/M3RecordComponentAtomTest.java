@@ -31,9 +31,9 @@ public class M3RecordComponentAtomTest {
     Stream<DynamicTest> atoms() {
         return Stream.of(
                 dynamicTest("M3RecordComponent.M3RecordComponent#1 SCENARIO", M3RecordComponentAtomTest::M3RecordComponent),
-                dynamicTest("M3RecordComponent.annotationCount#1 SCENARIO", M3RecordComponentAtomTest::annotationCount),
-                dynamicTest("M3RecordComponent.annotationTypeNameAt#1 SCENARIO", M3RecordComponentAtomTest::annotationTypeNameAt),
-                dynamicTest("M3RecordComponent.structuralHash64#1 SCENARIO", M3RecordComponentAtomTest::structuralHash64));
+                dynamicTest("M3RecordComponent.annotationCount#1 MEMBER_VIEW_DIFF", M3RecordComponentAtomTest::annotationCount),
+                dynamicTest("M3RecordComponent.annotationTypeNameAt#1 MEMBER_ANNOTATION_NAMES", M3RecordComponentAtomTest::annotationTypeNameAt),
+                dynamicTest("M3RecordComponent.structuralHash64#1 MEMBER_VIEW_DIFF", M3RecordComponentAtomTest::structuralHash64));
     }
 
     /** M3RecordComponent.M3RecordComponent#1 SCENARIO; oracle: kind-checked-constructor. */
@@ -46,12 +46,12 @@ public class M3RecordComponentAtomTest {
         M3AtomKit.expectMessage(IllegalArgumentException.class, "not a record component", () -> NEW.invoke(CI, other));
     }
 
-    /** M3RecordComponent.annotationCount#1 SCENARIO; oracle: getDeclaredAnnotations. */
+    /** M3RecordComponent.annotationCount#1 MEMBER_VIEW_DIFF; oracle: getDeclaredAnnotations. */
     static void annotationCount() throws Throwable {
         each((member, d) -> assertEquals(d.element().getDeclaredAnnotations().length, view(member).annotationCount(), d.toString()));
     }
 
-    /** M3RecordComponent.annotationTypeNameAt#1 SCENARIO; oracle: getDeclaredAnnotations(type-names). */
+    /** M3RecordComponent.annotationTypeNameAt#1 MEMBER_ANNOTATION_NAMES; oracle: getDeclaredAnnotations(type-names). */
     static void annotationTypeNameAt() throws Throwable {
         each((member, d) -> {
             TreeSet<String> got = new TreeSet<>();
@@ -60,7 +60,7 @@ public class M3RecordComponentAtomTest {
         });
     }
 
-    /** M3RecordComponent.structuralHash64#1 SCENARIO; oracle: delegates-to-M3CI. */
+    /** M3RecordComponent.structuralHash64#1 MEMBER_VIEW_DIFF; oracle: delegates-to-M3CI. */
     static void structuralHash64() throws Throwable {
         each((member, d) -> assertEquals(CI.memberStructuralHash64(member), view(member).structuralHash64()));
     }

@@ -31,21 +31,11 @@ each((member, d) -> {
 M3AtomKit.expectMessage(IllegalArgumentException.class, "not a record component", () -> NEW.invoke(CI, other));
 >>>
 
-@atom M3RecordComponent.annotationCount 1 SCENARIO getDeclaredAnnotations
-check <<<
-each((member, d) -> assertEquals(d.element().getDeclaredAnnotations().length, view(member).annotationCount(), d.toString()));
->>>
+@atom M3RecordComponent.annotationCount 1 MEMBER_VIEW_DIFF getDeclaredAnnotations
+expected = d.element().getDeclaredAnnotations().length
+label = , d.toString()
 
-@atom M3RecordComponent.annotationTypeNameAt 1 SCENARIO getDeclaredAnnotations(type-names)
-check <<<
-each((member, d) -> {
-    TreeSet<String> got = new TreeSet<>();
-    for (int k = 0; k < view(member).annotationCount(); k++) got.add(view(member).annotationTypeNameAt(k));
-    assertEquals(ReflectOracle.annotationNames(d.element()), got);
-});
->>>
+@atom M3RecordComponent.annotationTypeNameAt 1 MEMBER_ANNOTATION_NAMES getDeclaredAnnotations(type-names)
 
-@atom M3RecordComponent.structuralHash64 1 SCENARIO delegates-to-M3CI
-check <<<
-each((member, d) -> assertEquals(CI.memberStructuralHash64(member), view(member).structuralHash64()));
->>>
+@atom M3RecordComponent.structuralHash64 1 MEMBER_VIEW_DIFF delegates-to-M3CI
+expected = CI.memberStructuralHash64(member)

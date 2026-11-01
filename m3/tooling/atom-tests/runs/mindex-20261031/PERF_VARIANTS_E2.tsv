@@ -1,0 +1,16 @@
+label	run	atom	ns_per_op_median	ns_per_op_min	bytes_per_op	max_tier	compiler	host_cpu_pct_before	host_cpu_pct_after
+V0_prefix	1	FAILED: java.lang.IllegalStateException: invalid token capture geometry	-	-	-	-	-	31	74
+V1_clone	1	M3TokenEngine.alternative#2 PERF	26245.313	22185.156	216728.0	4	C2	66	52
+V2_saverestore	1	M3TokenEngine.alternative#2 PERF	35106.641	26981.250	212408.0	4	C2	74	85
+V0_prefix	2	FAILED: java.lang.IllegalStateException: invalid token capture geometry	-	-	-	-	-	68	66
+V1_clone	2	M3TokenEngine.alternative#2 PERF	33461.328	25691.406	216728.0	4	C2	63	94
+V2_saverestore	2	M3TokenEngine.alternative#2 PERF	31512.891	26800.000	212408.0	4	C2	96	94
+V0_prefix	3	FAILED: java.lang.IllegalStateException: invalid token capture geometry	-	-	-	-	-	46	83
+V1_clone	3	M3TokenEngine.alternative#2 PERF	25906.641	22961.719	216728.0	4	C2	84	83
+V2_saverestore	3	M3TokenEngine.alternative#2 PERF	29858.984	25167.188	212408.0	4	C2	91	90
+V0_prefix	4	FAILED: java.lang.IllegalStateException: invalid token capture geometry	-	-	-	-	-	79	93
+V1_clone	4	M3TokenEngine.alternative#2 PERF	33087.500	25825.000	216728.0	4	C2	90	91
+V2_saverestore	4	M3TokenEngine.alternative#2 PERF	26871.875	23917.969	212408.0	4	C2	87	82
+V0_prefix	5	FAILED: java.lang.IllegalStateException: invalid token capture geometry	-	-	-	-	-	85	90
+V1_clone	5	M3TokenEngine.alternative#2 PERF	28235.938	23401.953	216728.0	4	C2	84	80
+V2_saverestore	5	M3TokenEngine.alternative#2 PERF	29142.578	26652.344	212408.0	4	C2	91	91

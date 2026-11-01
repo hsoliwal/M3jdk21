@@ -32,12 +32,12 @@ public class M3FieldAtomTest {
     Stream<DynamicTest> atoms() {
         return Stream.of(
                 dynamicTest("M3Field.M3Field#1 SCENARIO", M3FieldAtomTest::M3Field),
-                dynamicTest("M3Field.getModifiers#1 SCENARIO", M3FieldAtomTest::getModifiers),
-                dynamicTest("M3Field.isSynthetic#1 SCENARIO", M3FieldAtomTest::isSynthetic),
-                dynamicTest("M3Field.isEnumConstant#1 SCENARIO", M3FieldAtomTest::isEnumConstant),
-                dynamicTest("M3Field.annotationCount#1 SCENARIO", M3FieldAtomTest::annotationCount),
-                dynamicTest("M3Field.annotationTypeNameAt#1 SCENARIO", M3FieldAtomTest::annotationTypeNameAt),
-                dynamicTest("M3Field.structuralHash64#1 SCENARIO", M3FieldAtomTest::structuralHash64));
+                dynamicTest("M3Field.getModifiers#1 MEMBER_VIEW_DIFF", M3FieldAtomTest::getModifiers),
+                dynamicTest("M3Field.isSynthetic#1 MEMBER_VIEW_DIFF", M3FieldAtomTest::isSynthetic),
+                dynamicTest("M3Field.isEnumConstant#1 MEMBER_VIEW_DIFF", M3FieldAtomTest::isEnumConstant),
+                dynamicTest("M3Field.annotationCount#1 MEMBER_VIEW_DIFF", M3FieldAtomTest::annotationCount),
+                dynamicTest("M3Field.annotationTypeNameAt#1 MEMBER_ANNOTATION_NAMES", M3FieldAtomTest::annotationTypeNameAt),
+                dynamicTest("M3Field.structuralHash64#1 MEMBER_VIEW_DIFF", M3FieldAtomTest::structuralHash64));
     }
 
     /** M3Field.M3Field#1 SCENARIO; oracle: kind-checked-constructor. */
@@ -47,27 +47,27 @@ public class M3FieldAtomTest {
         M3AtomKit.expectMessage(IllegalArgumentException.class, "not a field", () -> NEW.invoke(CI, other));
     }
 
-    /** M3Field.getModifiers#1 SCENARIO; oracle: Field.getModifiers. */
+    /** M3Field.getModifiers#1 MEMBER_VIEW_DIFF; oracle: Field.getModifiers. */
     static void getModifiers() throws Throwable {
         each((member, d) -> assertEquals(reflective(d).getModifiers(), view(member).getModifiers(), d.toString()));
     }
 
-    /** M3Field.isSynthetic#1 SCENARIO; oracle: Field.isSynthetic. */
+    /** M3Field.isSynthetic#1 MEMBER_VIEW_DIFF; oracle: Field.isSynthetic. */
     static void isSynthetic() throws Throwable {
         each((member, d) -> assertEquals(reflective(d).isSynthetic(), view(member).isSynthetic(), d.toString()));
     }
 
-    /** M3Field.isEnumConstant#1 SCENARIO; oracle: Field.isEnumConstant. */
+    /** M3Field.isEnumConstant#1 MEMBER_VIEW_DIFF; oracle: Field.isEnumConstant. */
     static void isEnumConstant() throws Throwable {
         each((member, d) -> assertEquals(reflective(d).isEnumConstant(), view(member).isEnumConstant(), d.toString()));
     }
 
-    /** M3Field.annotationCount#1 SCENARIO; oracle: getDeclaredAnnotations. */
+    /** M3Field.annotationCount#1 MEMBER_VIEW_DIFF; oracle: getDeclaredAnnotations. */
     static void annotationCount() throws Throwable {
         each((member, d) -> assertEquals(reflective(d).getDeclaredAnnotations().length, view(member).annotationCount(), d.toString()));
     }
 
-    /** M3Field.annotationTypeNameAt#1 SCENARIO; oracle: getDeclaredAnnotations(type-names). */
+    /** M3Field.annotationTypeNameAt#1 MEMBER_ANNOTATION_NAMES; oracle: getDeclaredAnnotations(type-names). */
     static void annotationTypeNameAt() throws Throwable {
         each((member, d) -> {
             TreeSet<String> got = new TreeSet<>();
@@ -76,7 +76,7 @@ public class M3FieldAtomTest {
         });
     }
 
-    /** M3Field.structuralHash64#1 SCENARIO; oracle: delegates-to-M3CI. */
+    /** M3Field.structuralHash64#1 MEMBER_VIEW_DIFF; oracle: delegates-to-M3CI. */
     static void structuralHash64() throws Throwable {
         each((member, d) -> assertEquals(CI.memberStructuralHash64(member), view(member).structuralHash64()));
     }

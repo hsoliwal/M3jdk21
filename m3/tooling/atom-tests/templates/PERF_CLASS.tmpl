@@ -18,7 +18,7 @@ import java.lang.invoke.MethodType;
 ${imports}
 
 public class ${cls} {
-    public static void main(String[] args) throws Throwable {
+${constants}    public static void main(String[] args) throws Throwable {
         M3AtomPerf.run(java.util.List.of(
 ${entries}), args);
     }

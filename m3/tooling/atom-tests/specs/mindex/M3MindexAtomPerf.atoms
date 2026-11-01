@@ -11,6 +11,9 @@
 #build AutomatonOracle DotStarOracle RelationOracle TokenRegexOracle ReflectOracle
 #runopts -XX:+UnlockDiagnosticVMOptions -XX:+PrintCompilation
 #import jdk.internal.mindex.M3CI jdk.internal.mindex.M3MemberKind jdk.internal.mindex.M3Automaton jdk.internal.mindex.M3AutomatonOps jdk.internal.mindex.M3RegexDpPlan jdk.internal.mindex.M3TokenMatcher java.util.BitSet java.util.SplittableRandom java.util.regex.Matcher
+#const int OFF_ALPHABET_LABELS = 2 // labels drawn past the alphabet, which reach no transition
+#const int LANE_LENGTH = 1 << 12 // length of the sorted lane searched by lowerBound
+#const int VALUE_SPREAD = 4 // values and probes are drawn from [0, VALUE_SPREAD * LANE_LENGTH): gaps and duplicates
 #helper <<<
     /** Calls per batch of the scalar atoms and of the composite atoms. */
     private static final int OPS = 4_096;
@@ -102,10 +105,15 @@
         return sum;
     }
 
+    /** Longest run of the d..f suffix of the perf DFA language. */
+    private static final int SUFFIX_MAX = 3;
+    /** Dead-transition rate of the token tables: a quarter of DEAD_RATE, so token runs stay alive. */
+    private static final double SPARSE_DEAD_RATE = DEAD_RATE / 4;
+
     private static M3Automaton dfa() {
         M3Automaton any = M3AutomatonOps.makeUnitRange('a', 'a' + LABELS - 1);
         M3Automaton nfa = M3AutomatonOps.concatenate(M3AutomatonOps.repeat(any), M3AutomatonOps.makeUnits("abc"),
-                M3AutomatonOps.repeat(M3AutomatonOps.makeUnitRange('d', 'f'), 1, 3));
+                M3AutomatonOps.repeat(M3AutomatonOps.makeUnitRange('d', 'f'), 1, SUFFIX_MAX));
         return M3AutomatonOps.minimize(nfa, M3AutomatonOps.DEFAULT_WORK_LIMIT);
     }
 >>>
@@ -144,12 +152,14 @@ call = (int) WORDS_FOR_BITS.invokeExact(in[i])
 setup <<<
 M3Automaton dfa = dfa();
 int[] states = ints("step.states", dfa.getNumStates());
-int[] labels = ints("step.labels", LABELS + 2);
+int[] labels = ints("step.labels", LABELS + OFF_ALPHABET_LABELS);
 for (int k = 0; k < OPS; k++) labels[k] += 'a' - 1;
 long reference = 0;
 for (int k = 0; k < OPS; k++) {
     int dest = -1;
-    for (int[] t : AutomatonOracle.transitions(dfa, states[k])) if (t[1] <= labels[k] && labels[k] <= t[2]) dest = t[0];
+    for (int[] t : AutomatonOracle.transitions(dfa, states[k])) {
+        if (t[AutomatonOracle.MIN] <= labels[k] && labels[k] <= t[AutomatonOracle.MAX]) dest = t[AutomatonOracle.DEST];
+    }
     reference += dest;
 }
 >>>
@@ -248,7 +258,7 @@ call = ((short[]) TRANSFER.invokeExact(left, right))[i % TRANSFER_STATES]
 @atom M3RX7Transitions.tokens 1 PERF RelationOracle.tokens
 setup <<<
 SplittableRandom random = M3AtomKit.random("tokens");
-short[] rows = RelationOracle.randomTable(random, TRANSFER_STATES, TOKENS, DEAD_RATE / 4);
+short[] rows = RelationOracle.randomTable(random, TRANSFER_STATES, TOKENS, SPARSE_DEAD_RATE);
 int[] ids = random.ints(TOKENS, 0, TOKENS).toArray();
 short[] run = RelationOracle.tokens(rows, TRANSFER_STATES, TOKENS, ids, 0, ids.length);
 long reference = 0;
@@ -262,6 +272,37 @@ call = ((short[]) TOKEN_RANGE.invokeExact(rows, TRANSFER_STATES, TOKENS, ids, 0,
 setup <<<
 String letters = TokenRegexOracle.letters(M3AtomKit.random("engine.tape"), TAPE);
 String pattern = "a b* (?<x> c)?";
+Object engine = NEW_ENGINE.invokeExact(TokenRegexOracle.bind(pattern, TokenRegexOracle.tape(letters, false)), false);
+Matcher m = TokenRegexOracle.javaMatcher(pattern, letters);
+long perScan = 0;
+while (m.find()) perScan += m.start() * (long) TAPE + m.end();
+long reference = perScan * COMPOSITE_OPS;
+>>>
+expected = reference
+ops = COMPOSITE_OPS
+call = scan(engine)
+
+// The alternation workloads of finding e (#2251): four right-nested alternatives under a greedy repetition, so
+// alternative() runs at every frontier state of every level; timed through the same scan. #1 has no group (the
+// pre-fix engine is correct on it, so the three forms of alternative() compare); #2 captures in its first branch.
+@atom M3TokenEngine.alternative 1 PERF java.util.regex.Matcher.find(alternation)
+setup <<<
+String letters = TokenRegexOracle.letters(M3AtomKit.random("engine.alternation"), TAPE);
+String pattern = "(a b | a | b | c)+";
+Object engine = NEW_ENGINE.invokeExact(TokenRegexOracle.bind(pattern, TokenRegexOracle.tape(letters, false)), false);
+Matcher m = TokenRegexOracle.javaMatcher(pattern, letters);
+long perScan = 0;
+while (m.find()) perScan += m.start() * (long) TAPE + m.end();
+long reference = perScan * COMPOSITE_OPS;
+>>>
+expected = reference
+ops = COMPOSITE_OPS
+call = scan(engine)
+
+@atom M3TokenEngine.alternative 2 PERF java.util.regex.Matcher.find(alternation-with-group)
+setup <<<
+String letters = TokenRegexOracle.letters(M3AtomKit.random("engine.alternation"), TAPE);
+String pattern = "((?<x> a) b | a | b | c)+";
 Object engine = NEW_ENGINE.invokeExact(TokenRegexOracle.bind(pattern, TokenRegexOracle.tape(letters, false)), false);
 Matcher m = TokenRegexOracle.javaMatcher(pattern, letters);
 long perScan = 0;
@@ -287,9 +328,8 @@ call = (int) FIND_TEXT.invokeExact(SNAPSHOT, (CharSequence) names[i]) >= 0 ? 1 :
 
 @atom M3CI.lowerBound 1 PERF linear-scan
 setup <<<
-final int laneLength = 1 << 12;
-int[] sorted = M3AtomKit.random("lowerBound.lane").ints(laneLength, 0, laneLength * 4).sorted().toArray();
-int[] probes = ints("lowerBound.probes", laneLength * 4);
+int[] sorted = M3AtomKit.random("lowerBound.lane").ints(LANE_LENGTH, 0, LANE_LENGTH * VALUE_SPREAD).sorted().toArray();
+int[] probes = ints("lowerBound.probes", LANE_LENGTH * VALUE_SPREAD);
 long reference = 0;
 for (int p : probes) {
     int at = 0;

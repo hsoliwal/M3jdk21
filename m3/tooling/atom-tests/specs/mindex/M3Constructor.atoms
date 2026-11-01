@@ -33,49 +33,28 @@ M3AtomKit.expectMessage(IllegalArgumentException.class, "not a constructor", () 
 M3AtomKit.expect(IndexOutOfBoundsException.class, () -> NEW.invoke(CI, CI.memberSize()));
 >>>
 
-@atom M3Constructor.name 1 SCENARIO Constructor.getName
-check <<<
-each((member, d) -> assertEquals(reflective(d).getName(), view(member).name()));
->>>
+@atom M3Constructor.name 1 MEMBER_VIEW_DIFF Constructor.getName
+expected = reflective(d).getName()
 
-@atom M3Constructor.descriptor 1 SCENARIO JVM-descriptor(params)V
-check <<<
-each((member, d) -> assertEquals(ReflectOracle.descriptor(reflective(d).getParameterTypes(), void.class), view(member).descriptor()));
->>>
+@atom M3Constructor.descriptor 1 MEMBER_VIEW_DIFF JVM-descriptor(params)V
+expected = ReflectOracle.descriptor(reflective(d).getParameterTypes(), void.class)
 
-@atom M3Constructor.getModifiers 1 SCENARIO Constructor.getModifiers
-check <<<
-each((member, d) -> assertEquals(reflective(d).getModifiers(), view(member).getModifiers()));
->>>
+@atom M3Constructor.getModifiers 1 MEMBER_VIEW_DIFF Constructor.getModifiers
+expected = reflective(d).getModifiers()
 
-@atom M3Constructor.isSynthetic 1 SCENARIO Constructor.isSynthetic
-check <<<
-each((member, d) -> assertEquals(reflective(d).isSynthetic(), view(member).isSynthetic()));
->>>
+@atom M3Constructor.isSynthetic 1 MEMBER_VIEW_DIFF Constructor.isSynthetic
+expected = reflective(d).isSynthetic()
 
-@atom M3Constructor.isVarArgs 1 SCENARIO Constructor.isVarArgs
-check <<<
-each((member, d) -> assertEquals(reflective(d).isVarArgs(), view(member).isVarArgs()));
->>>
+@atom M3Constructor.isVarArgs 1 MEMBER_VIEW_DIFF Constructor.isVarArgs
+expected = reflective(d).isVarArgs()
 
-@atom M3Constructor.annotationCount 1 SCENARIO getDeclaredAnnotations
-check <<<
-each((member, d) -> assertEquals(reflective(d).getDeclaredAnnotations().length, view(member).annotationCount()));
->>>
+@atom M3Constructor.annotationCount 1 MEMBER_VIEW_DIFF getDeclaredAnnotations
+expected = reflective(d).getDeclaredAnnotations().length
 
-@atom M3Constructor.annotationTypeNameAt 1 SCENARIO getDeclaredAnnotations(type-names)
-check <<<
-each((member, d) -> {
-    TreeSet<String> got = new TreeSet<>();
-    for (int k = 0; k < view(member).annotationCount(); k++) got.add(view(member).annotationTypeNameAt(k));
-    assertEquals(ReflectOracle.annotationNames(d.element()), got);
-});
->>>
+@atom M3Constructor.annotationTypeNameAt 1 MEMBER_ANNOTATION_NAMES getDeclaredAnnotations(type-names)
 
-@atom M3Constructor.exceptionCount 1 SCENARIO Constructor.getExceptionTypes
-check <<<
-each((member, d) -> assertEquals(reflective(d).getExceptionTypes().length, view(member).exceptionCount()));
->>>
+@atom M3Constructor.exceptionCount 1 MEMBER_VIEW_DIFF Constructor.getExceptionTypes
+expected = reflective(d).getExceptionTypes().length
 
 @atom M3Constructor.exceptionTypeDescriptorAt 1 SCENARIO Class.descriptorString(exceptions)
 check <<<
@@ -85,10 +64,8 @@ each((member, d) -> {
 });
 >>>
 
-@atom M3Constructor.structuralHash64 1 SCENARIO delegates-to-M3CI
-check <<<
-each((member, d) -> assertEquals(CI.memberStructuralHash64(member), view(member).structuralHash64()));
->>>
+@atom M3Constructor.structuralHash64 1 MEMBER_VIEW_DIFF delegates-to-M3CI
+expected = CI.memberStructuralHash64(member)
 
 @atom M3Constructor.toString 1 SCENARIO name+descriptor
 check <<<
