@@ -1,0 +1,4 @@
+donor_id	project_name	family	repository_url	revision	source_license	target_license	default_import_mode	upstream_repository	upstream_revision	availability	status
+bisheng-jdk-21	BiSheng JDK 21	OPENJDK_DOWNSTREAM	https://github.com/openeuler-mirror/bishengjdk-21	cd7d2e7cf826d33ea91ccd8cb1f6e81f4342fd36	GPL-2.0-only-with-classpath-exception	GPL-2.0-only-with-classpath-exception	PATCH	https://github.com/openjdk/jdk21u	ba94eace682733f66e623c089bcafcf4a1b8e39c	SOURCE_AVAILABLE	PINNED
+excelsior-jet	Excelsior JET	PROPRIETARY_RUNTIME	-	-	PROPRIETARY	GPL-2.0-only-with-classpath-exception	SPEC_REIMPLEMENT	-	-	DOCUMENTATION_ONLY	REFERENCE_ONLY
+excelsior-jet-api	Excelsior JET API	PUBLIC_INTEGRATION	https://github.com/excelsior-oss/excelsior-jet-api	06d5dda8f8e3294e5a3389baadf017f4278435eb	GPL-3.0-or-later	GPL-2.0-only-with-classpath-exception	SPEC_REIMPLEMENT	-	-	SOURCE_AVAILABLE	PINNED
