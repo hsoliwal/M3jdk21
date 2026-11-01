@@ -23,10 +23,11 @@ literal_constants.py); every changed file says so above its package line.
 - Package net.openhft.hashing -> jdk.internal.m3.hash and type T -> M3T (UnsafeAccess -> M3ByteArrayAccess,
   MathsJDK9 -> M3MathsJDK9); the JetBrains and JSR-305 annotations are removed.
 - No sun.misc.Unsafe: UnsafeAccess became the byte[] access over jdk.internal.util.ByteArrayLittleEndian
-  (little-endian, bounds-checked reads, index base 0). Direct and read-only ByteBuffers are read through
-  ByteBufferAccess. When off + len passes a direct buffer's limit, it is read through a view whose limit is its
-  capacity, so hashBytes(ByteBuffer, off, len) hashes the same ranges as the donor's address read (off + len up to
-  the capacity). Access.unsafe() and the LongHashFunction / LongTupleHashFunction methods that read raw memory
+  (little-endian, bounds-checked reads, index base 0; the kernels' short-name reads: see the JIT item below).
+  Direct and read-only ByteBuffers are read through ByteBufferAccess. When off + len passes a direct buffer's
+  limit, it is read through a view whose limit is its capacity, so hashBytes(ByteBuffer, off, len) hashes the
+  same ranges as the donor's address read (off + len up to the capacity). Access.unsafe() and the
+  LongHashFunction / LongTupleHashFunction methods that read raw memory
   (hashMemory, hashBoolean, hashBooleans, hashChars(char[]), hashShorts, hashInts, hashLongs) are not included.
 - hashChars(String) hashes the native-order chars through CharSequenceAccess (the donor's UnknownJvmStringHash path).
   The per-JVM String-internals classes (StringHash, ModernCompactStringHash, ModernHotSpotStringHash,
@@ -38,6 +39,16 @@ literal_constants.py); every changed file says so above its package line.
   table and annotation arguments) are private static final constants named by role, declared at the top of their
   class with a one-line Javadoc (LITERAL_CONSTANTS v1.1; m3/tooling/jdk-superset/hashing/CONSTANT_NAMES.tsv). Each
   keeps the literal's type and spelling, so javac folds it back and the compiled methods are unchanged.
+- For the JIT: XXH3's 64- and 128-bit functions are split along the input-length classes of the xxHash reference
+  into private methods of the same class (XXH3_len_0to16, 1to3, 4to8, 9to16, 17to128 and 129to240 for each width,
+  and one XXH3_hashLong with XXH3_mergeAccs for both, the 64-bit long-input hash being the low half of the 128-bit
+  one); the statements are moved, not changed, and every moved literal keeps its constant. The short-name reads
+  the kernels use (i64, u32, i32, u16, i16) of the byte[] access read through jdk.internal.misc.Unsafe without a
+  check of their own; its getters keep the bounds-checked ByteArrayLittleEndian reads, and the private byte[] entry
+  of LongHashFunction and LongTupleHashFunction, which every public byte[] and heap ByteBuffer method reaches after
+  its own range check, checks the range again with Objects.checkFromIndexSize. The ByteBuffer, CharSequence and
+  reverse accesses carry the short-name reads as their own methods (the Access defaults, verbatim). The hash
+  values do not change.
 
 Nothing else was changed. Comments and documentation are the donor's (plus one comment line on each direct-buffer
 branch and the constant blocks) and still name the donor API. The published
