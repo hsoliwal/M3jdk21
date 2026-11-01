@@ -37,6 +37,9 @@ Java_com_m3_arrays_M3ArrayNative_nativeCompareUtf16(
     return 0;
   }
 
+  /* Validation still precedes the zero-count fast return for direct native callers. */
+  if (count == 0) return 0;
+
   /* Validate ranges first; JNI reference identity is not pointer-handle equality. */
   if (left_start == right_start
       && (*env)->IsSameObject(env, left_array, right_array) == JNI_TRUE) {

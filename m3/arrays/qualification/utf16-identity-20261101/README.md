@@ -30,3 +30,11 @@ Run: [M3 Array Substrate #41282563855](https://github.com/hsoliwal/M3jdk21/actio
 - `receiving`: **FAIL**, due to `M3JDK21_NAME_RECEIVER_REFUSED: companion relation source hash drift: src/java.base/share/classes/java/util/Arrays.java (sha256)`. This PR did **not** modify that Java base file; treat this as a separate source-pin reconciliation task, not permission to update its hash or suppress its gate.
 
 **Overall workflow remains FAILED.** No merge/release claims, and skipped tests do not count as passing. The local isolated proof remains a separate narrower source of evidence; A/A-calibrated performance and whole-JDK acceptance are still pending.
+
+## Second serial Java/JNI pass: valid zero-length comparisons
+
+The separate canonical [Synexia PR #15080](https://github.com/hsoliwal/com.synexia/pull/15080) now owns an additive **stage 2**: `m3-utf16-zero-window-java-20261101` and `m3-utf16-zero-window-native-20261101`. Each manifest requires the exact stage-1 source hashes from this PR; the earlier stage-1 manifests are unchanged.
+
+This pass checks `count == 0` only **after** Java null/range validation and after JNI direct-window validation. It avoids JNI transitions for valid zero-length windows even when the arrays differ. It preserves all public descriptors, native symbols, allocation and GC ownership, and invalid-input exception behavior. The existing JUnit owner gains a distinct-array empty-window and invalid-bounds test.
+
+A local independent Java21 + C11 `-Xcheck:jni` probe executed 1,071,843 window comparisons without a mismatch. Actual M3JDK21 product CI, API/ABI and performance evaluation for this second stage remain PENDING; the previously recorded stage-1 Java/native successes do **not** apply automatically to the new stage. The unrelated `java.util.Arrays` source-seal receiver gate remains blocking.

@@ -31,6 +31,8 @@ public final class M3ArrayNative {
         Objects.requireNonNull(right, "right");
         Objects.checkFromIndexSize(leftStart, count, left.length);
         Objects.checkFromIndexSize(rightStart, count, right.length);
+        // Both array windows are valid, so an empty comparison has no payload reads.
+        if (count == 0) return 0;
         // After both range checks, identical slices need no heap-region reads or JNI call.
         if (left == right && leftStart == rightStart) return 0;
         if (loaded) return nativeCompareUtf16(left, leftStart, right, rightStart, count);

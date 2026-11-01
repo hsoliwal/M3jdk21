@@ -197,6 +197,30 @@ class M3ArrayNativeTest {
         }
     }
 
+    @Test
+    void distinctArraysEmptyWindowsStillCheckBothBoundsAndOptionalNative() throws ReflectiveOperationException {
+        char[] left = {'a', 'b', 'c'};
+        char[] right = {'x', 'y'};
+        for (int leftStart = 0; leftStart <= left.length; leftStart++) {
+            for (int rightStart = 0; rightStart <= right.length; rightStart++) {
+                assertEquals(0, M3ArrayNative.compareUtf16(left, leftStart, right, rightStart, 0));
+            }
+        }
+        assertThrows(IndexOutOfBoundsException.class,
+                () -> M3ArrayNative.compareUtf16(left, left.length + 1, right, 0, 0));
+        assertThrows(IndexOutOfBoundsException.class,
+                () -> M3ArrayNative.compareUtf16(left, 0, right, right.length + 1, 0));
+        if (!loadOptionalNative()) return;
+        Method compare = M3ArrayNative.class.getDeclaredMethod(
+                "nativeCompareUtf16", char[].class, int.class, char[].class, int.class, int.class);
+        compare.setAccessible(true);
+        for (int leftStart = 0; leftStart <= left.length; leftStart++) {
+            for (int rightStart = 0; rightStart <= right.length; rightStart++) {
+                assertEquals(0, compare.invoke(null, left, leftStart, right, rightStart, 0));
+            }
+        }
+    }
+
     private static boolean loadOptionalNative() {
         String path = System.getProperty("m3.arrays.native.path");
         if (path == null || path.isBlank()) {
