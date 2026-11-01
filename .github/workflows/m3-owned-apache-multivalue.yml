@@ -1,7 +1,7 @@
 name: Owned M3 Apache multivalue contracts
 on:
   pull_request:
-    paths: ['m3/collections/**', 'm3/arrays/src/main/java/**', '.github/workflows/m3-owned-apache-multivalue.yml']
+    paths: ['m3/collections/**', 'm3/arrays/src/main/java/**', 'm3/native/include/**', '.github/workflows/m3-owned-apache-multivalue.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -19,6 +19,7 @@ jobs:
           fetch-depth: 1
           sparse-checkout: |
             m3/arrays
+            m3/native/include
             m3/collections
             .github/workflows
       - uses: actions/setup-java@v4
