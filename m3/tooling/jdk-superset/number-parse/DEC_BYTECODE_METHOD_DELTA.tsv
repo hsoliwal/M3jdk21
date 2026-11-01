@@ -1,0 +1,32 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+class	kind	member	state	pre_lines	post_lines
+jdk/internal/math/FloatingDecimal$1	class	-	METHODS_EQUAL=3/3	-	-
+jdk/internal/math/FloatingDecimal$ASCIIToBinaryBuffer	class	-	METHODS_EQUAL=4/4	-	-
+jdk/internal/math/FloatingDecimal$ASCIIToBinaryConverter	class	-	METHODS_EQUAL=2/2	-	-
+jdk/internal/math/FloatingDecimal$BinaryToASCIIBuffer	class	-	METHODS_EQUAL=19/19	-	-
+jdk/internal/math/FloatingDecimal$BinaryToASCIIConverter	class	-	METHODS_EQUAL=8/8	-	-
+jdk/internal/math/FloatingDecimal$ExceptionalBinaryToASCIIBuffer	class	-	METHODS_EQUAL=10/10	-	-
+jdk/internal/math/FloatingDecimal$HexFloatPattern	class	-	METHODS_EQUAL=2/2	-	-
+jdk/internal/math/FloatingDecimal$PreparedASCIIToBinaryBuffer	class	-	METHODS_EQUAL=3/3	-	-
+jdk/internal/math/FloatingDecimal	class	-	METHODS_EQUAL=16/16	-	-
+jdk/internal/math/M3AbstractFloatValueParser	class	-	METHODS_EQUAL=1/1	-	-
+jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray	method	private long parseDecFloatLiteral(byte[], int, int, int, boolean, boolean);	CHANGED	266	274
+jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray	field	private static final int DECLINED_EXPONENT;	ADDED	-	-
+jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray	class	-	METHODS_EQUAL=10/11	-	-
+jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence	method	private long parseDecFloatLiteral(java.lang.CharSequence, int, int, int, boolean, boolean);	CHANGED	243	251
+jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence	field	private static final int DECLINED_EXPONENT;	ADDED	-	-
+jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence	class	-	METHODS_EQUAL=10/11	-	-
+jdk/internal/math/M3AbstractNumberParser	class	-	METHODS_EQUAL=9/9	-	-
+jdk/internal/math/M3FastDoubleMath	class	-	METHODS_EQUAL=6/6	-	-
+jdk/internal/math/M3FastDoubleSwar	class	-	METHODS_EQUAL=39/39	-	-
+jdk/internal/math/M3FastFloatMath	class	-	METHODS_EQUAL=6/6	-	-
+jdk/internal/math/M3FastIntegerMath	class	-	METHODS_EQUAL=10/10	-	-
+jdk/internal/math/M3FftMultiplier$ComplexVector	class	-	METHODS_EQUAL=27/27	-	-
+jdk/internal/math/M3FftMultiplier$MutableComplex	class	-	METHODS_EQUAL=19/19	-	-
+jdk/internal/math/M3FftMultiplier	class	-	METHODS_EQUAL=17/17	-	-
+jdk/internal/math/M3JavaDoubleBitsFromByteArray	class	-	METHODS_EQUAL=6/6	-	-
+jdk/internal/math/M3JavaDoubleBitsFromCharSequence	class	-	METHODS_EQUAL=6/6	-	-
+jdk/internal/math/M3JavaFloatBitsFromByteArray	class	-	METHODS_EQUAL=6/6	-	-
+jdk/internal/math/M3JavaFloatBitsFromCharSequence	class	-	METHODS_EQUAL=6/6	-	-
+#verdict	PASS	changed=jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray#parseDecFloatLiteral,jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence#parseDecFloatLiteral	allowed=jdk/internal/math/M3AbstractJavaFloatingPointBitsFromByteArray#parseDecFloatLiteral,jdk/internal/math/M3AbstractJavaFloatingPointBitsFromCharSequence#parseDecFloatLiteral	bad_fields=0

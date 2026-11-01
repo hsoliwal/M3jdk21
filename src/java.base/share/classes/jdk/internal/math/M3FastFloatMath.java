@@ -16,6 +16,40 @@ import static jdk.internal.math.M3FastIntegerMath.unsignedMultiplyHigh;
  * {@code FloatingPointLiteral}.
  */
 class M3FastFloatMath {
+    //FLLDCIM: M3 - LITERAL_CONSTANTS v1: this class's magic literals, named by role (user rule: no magic numbers, no floating strings)
+    /** IEEE 754 negative zero (float). */
+    private static final float NEGATIVE_ZERO = -0.0f;
+    /** 2^64: corrects the signed conversion of an unsigned 64-bit significand. */
+    private static final float TWO_POW_64 = 0x1p64f;
+    //FLLDCIM: M3 - HEX_ROUTE v1: every hex literal takes the original FloatingDecimal path (PATTERN_ROUTES.tsv HEX_*)
+    /**
+     * True: {@link #tryHexFloatToFloatTruncated} declines every hexadecimal literal, so the caller takes the original
+     * {@link FloatingDecimal} path, which rounds once (round and sticky bits) from an exact exponent.
+     */
+    private static final boolean HEX_LITERALS_TO_FLOATING_DECIMAL = true;
+    /** Smallest power of ten of the exact float fast path. */
+    private static final int FAST_PATH_MIN_POWER_OF_TEN = -10;
+    /** Largest power of ten of the exact float fast path (10^10 is exact in a float). */
+    private static final int FAST_PATH_MAX_POWER_OF_TEN = 10;
+    /** log2(5) * 2^16, rounded. */
+    private static final long LOG2_FIVE_SCALED = 152170L;
+    /** 1 * 2^16: adds the power itself to the log2(5^power) estimate. */
+    private static final long ONE_SCALED = 65536L;
+    /** Removes the 2^16 scale of LOG2_FIVE_SCALED and ONE_SCALED. */
+    private static final int LOG2_FIVE_SCALE_SHIFT = 16;
+    /** Bits of the 64-bit product word. */
+    private static final int WORD_BITS = 64;
+    /** Moves bit 63 of a long to bit 0. */
+    private static final int HIGH_BIT_SHIFT = 63;
+    /** 64 - FLOAT_SIGNIFICAND_WIDTH - 2: keeps 25 significant bits of the product. */
+    private static final int MANTISSA_ALIGN_SHIFT = 38;
+    /** The 38 bits shifted out: all ones or all zeros may be a halfway case. */
+    private static final long HALFWAY_TRAILING_MASK = 0x3_FFFFF_FFFFL;
+    /** The two lowest mantissa bits (round-half-even check). */
+    private static final int LOW_TWO_BITS_MASK = 3;
+    /** Position of the float sign bit. */
+    private static final int FLOAT_SIGN_SHIFT = 31;
+
     /**
      * Bias used in the exponent of a float.
      */
@@ -46,7 +80,7 @@ class M3FastFloatMath {
                                              boolean isSignificandTruncated,
                                              int exponentOfTruncatedSignificand) {
         if (significand == 0) {
-            return isNegative ? -0.0f : 0.0f;
+            return isNegative ? NEGATIVE_ZERO : 0.0f;
         }
 
         final float result;
@@ -90,17 +124,25 @@ class M3FastFloatMath {
      * @param exponentOfTruncatedSignificand the exponent number of the truncated significand
      * @return the double value,
      * or {@link Double#NaN} if the fast path failed.
+     * In java.base this fast path declines every literal ({@code HEX_LITERALS_TO_FLOATING_DECIMAL}).
      */
     static float tryHexFloatToFloatTruncated(boolean isNegative, long significand, int exponent,
                                              boolean isSignificandTruncated,
                                              int exponentOfTruncatedSignificand) {
+        //FLLDCIM: M3 - HEX_ROUTE v1: decline (NaN), so results stay exactly the JDK's (PR #2215 contract). The donor body
+        // below rounds an unsigned significand >= 2^63 twice (signed cast, then + 2^64), ignores the digits a truncated
+        // significand dropped (no sticky bit), and gets an exponent the parser clamped at MAX_EXPONENT_NUMBER before it
+        // subtracted the fraction digits; tools/hex_defect_model.py
+        if (HEX_LITERALS_TO_FLOATING_DECIMAL) {
+            return Float.NaN;
+        }
         int power = isSignificandTruncated ? exponentOfTruncatedSignificand : exponent;
         if (FLOAT_MIN_EXPONENT_POWER_OF_TWO <= power && power <= FLOAT_MAX_EXPONENT_POWER_OF_TWO) {
             // Convert the significand into a float.
             // The cast will round the significand if necessary.
             // The significand is an unsigned long, however the cast treats it like a signed number.
             // So, if the significand is negative, we have to add 1<<64 to the number.
-            float d = (float) significand + (significand < 0 ? 0x1p64f : 0);
+            float d = (float) significand + (significand < 0 ? TWO_POW_64 : 0);
 
             // Scale the significand by the power.
             // This only works if power is within the supported range, so that
@@ -137,7 +179,7 @@ class M3FastFloatMath {
     static float tryDecToFloatWithFastAlgorithm(boolean isNegative, long significand, int power) {
 
         // we start with a fast path
-        if (-10 <= power && power <= 10 && Long.compareUnsigned(significand, (1L << FLOAT_SIGNIFICAND_WIDTH) - 1L) <= 0) {
+        if (FAST_PATH_MIN_POWER_OF_TEN <= power && power <= FAST_PATH_MAX_POWER_OF_TEN && Long.compareUnsigned(significand, (1L << FLOAT_SIGNIFICAND_WIDTH) - 1L) <= 0) {
             // convert the integer into a float. This is lossless since
             // 0 <= i <= 2^24 - 1.
             float d = (float) significand;
@@ -196,7 +238,7 @@ class M3FastFloatMath {
         // The 1<<16 value is a power of two; we could use a
         // larger power of 2 if we wanted to.
         //
-        long exponent = (((152170L + 65536L) * power) >> 16) + FLOAT_EXPONENT_BIAS + 64;
+        long exponent = (((LOG2_FIVE_SCALED + ONE_SCALED) * power) >> LOG2_FIVE_SCALE_SHIFT) + FLOAT_EXPONENT_BIAS + WORD_BITS;
         // We want the most significant bit of digits to be 1. Shift if needed.
         int lz = Long.numberOfLeadingZeros(significand);
         long shiftedSignificand = significand << lz;
@@ -210,8 +252,8 @@ class M3FastFloatMath {
 
         // The final mantissa should be 24 bits with a leading 1.
         // We shift it so that it occupies 25 bits with a leading 1.
-        long upperbit = upper >>> 63;
-        long mantissa = upper >>> (upperbit + 38);
+        long upperbit = upper >>> HIGH_BIT_SHIFT;
+        long mantissa = upper >>> (upperbit + MANTISSA_ALIGN_SHIFT);
         lz += (int) (1 ^ upperbit);
         // Here we have mantissa < (1<<25).
         //assert mantissa < (1<<25);
@@ -221,8 +263,8 @@ class M3FastFloatMath {
         // which we guard against.
         // If we have lots of trailing zeros, we may fall right between two
         // floating-point values.
-        if (((upper & 0x3_FFFFF_FFFFL) == 0x3_FFFFF_FFFFL)
-                || ((upper & 0x3_FFFFF_FFFFL) == 0) && (mantissa & 3) == 1) {
+        if (((upper & HALFWAY_TRAILING_MASK) == HALFWAY_TRAILING_MASK)
+                || ((upper & HALFWAY_TRAILING_MASK) == 0) && (mantissa & LOW_TWO_BITS_MASK) == 1) {
             // if mantissa & 1 == 1 we might need to round up.
             //
             // Scenarios:
@@ -263,7 +305,7 @@ class M3FastFloatMath {
         }
 
         int bits = (int) (mantissa | real_exponent << (FLOAT_SIGNIFICAND_WIDTH - 1)
-                | (isNegative ? 1L << 31 : 0));
+                | (isNegative ? 1L << FLOAT_SIGN_SHIFT : 0));
         return Float.intBitsToFloat(bits);
     }
 

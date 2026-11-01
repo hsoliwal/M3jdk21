@@ -15,6 +15,67 @@ package jdk.internal.math;
  * See {@link JavaDoubleParser} for the grammar of {@code FloatingPointLiteral}.
  */
 abstract class M3AbstractJavaFloatingPointBitsFromByteArray extends M3AbstractFloatValueParser {
+    //FLLDCIM: M3 - LITERAL_CONSTANTS v1: this class's magic literals, named by role (user rule: no magic numbers, no floating strings)
+    /** Unsigned byte mask. */
+    private static final int BYTE_MASK = 0xff;
+    /** Chars at or below the space character are white space. */
+    private static final char MAX_WHITESPACE = ' ';
+    /** First decimal digit; ch - DIGIT_ZERO is the digit value. */
+    private static final char DIGIT_ZERO = '0';
+    /** Radix of decimal digits. */
+    private static final int DECIMAL_RADIX = 10;
+    /** Decimal point character. */
+    private static final char DECIMAL_POINT = '.';
+    /** Decimal digits parsed at once. */
+    private static final int DIGITS_PER_SWAR_GROUP = 4;
+    /** 10^4: scales the significand by four parsed digits. */
+    private static final long TEN_POW_4 = 10_000L;
+    /** Folds an ASCII letter to lower case. */
+    private static final int LOWER_CASE_BIT = 0x20;
+    /** Decimal exponent indicator (folded to lower case). */
+    private static final char EXPONENT_INDICATOR = 'e';
+    /** Minus sign. */
+    private static final char MINUS_SIGN = '-';
+    /** Plus sign. */
+    private static final char PLUS_SIGN = '+';
+    /** Maps the float type suffixes f, F, d and D to f. */
+    private static final int TYPE_SUFFIX_FOLD = 0x22;
+    /** A float type suffix after TYPE_SUFFIX_FOLD. */
+    private static final char TYPE_SUFFIX_FOLDED = 'f';
+    /** Decimal digit count that always fits an unsigned long. */
+    private static final int MAX_EXACT_DECIMAL_DIGITS = 19;
+    /** The I of Infinity; only NaN and Infinity start at or above it. */
+    private static final char INFINITY_CHAR_I = 'I';
+    /** Hex prefix letter (folded to lower case). */
+    private static final char HEX_INDICATOR = 'x';
+    /** Bits of one hex digit. */
+    private static final int BITS_PER_HEX_DIGIT = 4;
+    /** Binary exponent indicator of a hex literal (folded to lower case). */
+    private static final char BINARY_EXPONENT_INDICATOR = 'p';
+    /** Hex digit count that always fits a long. */
+    private static final int MAX_EXACT_HEX_DIGITS = 16;
+    /** The N of NaN. */
+    private static final char NAN_CHAR_N = 'N';
+    /** Index of the last char of NaN. */
+    private static final int NAN_LAST_INDEX = 2;
+    /** The a of NaN. */
+    private static final char NAN_CHAR_A = 'a';
+    /** Length of NaN. */
+    private static final int NAN_CHAR_COUNT = 3;
+    /** Index of the last char of Infinity. */
+    private static final int INFINITY_LAST_INDEX = 7;
+    /** The eight ASCII bytes of Infinity read as one little-endian long. */
+    private static final long INFINITY_UTF8_LE = 0x7974696e69666e49L;
+    /** Length of Infinity. */
+    private static final int INFINITY_CHAR_COUNT = 8;
+    //FLLDCIM: M3 - DEC_EXPONENT_CLAMP v1: a decimal literal whose exponent number reached the clamp takes the original FloatingDecimal path (PATTERN_ROUTES.tsv DEC_EXPONENT_CLAMP)
+    /**
+     * Both exponents that {@link #parseDecFloatLiteral} passes on for a literal whose exponent number reached
+     * {@code MAX_EXPONENT_NUMBER}. It lies outside the decimal range of every kernel (double [-325, 308], float
+     * [-45, 38]), so the kernel declines (NaN) and {@code valueOfFloatLiteral} calls
+     * {@link FloatingDecimal#readJavaFormatString}.
+     */
+    private static final int DECLINED_EXPONENT = Integer.MIN_VALUE;
 
     /**
      * Skips optional white space in the provided string
@@ -25,7 +86,7 @@ abstract class M3AbstractJavaFloatingPointBitsFromByteArray extends M3AbstractFl
      * @return index after the optional white space
      */
     private static int skipWhitespace(byte[] str, int index, int endIndex) {
-        while (index < endIndex && (str[index] & 0xff) <= ' ') {
+        while (index < endIndex && (str[index] & BYTE_MASK) <= MAX_WHITESPACE) {
             index++;
         }
         return index;
@@ -63,6 +124,8 @@ abstract class M3AbstractJavaFloatingPointBitsFromByteArray extends M3AbstractFl
      * @param hasLeadingZero true if we have consumed the optional leading zero
      * @return the bit pattern of the parsed value, if the input is legal;
      * otherwise, {@code -1L}.
+     * In java.base a literal whose exponent number reaches {@code MAX_EXPONENT_NUMBER} is passed on with
+     * {@link #DECLINED_EXPONENT}, so the original {@link FloatingDecimal} path decides it (DEC_EXPONENT_CLAMP v1).
      */
 
     private long parseDecFloatLiteral(byte[] str, int index, int startIndex, int endIndex, boolean isNegative, boolean hasLeadingZero) {
@@ -77,20 +140,20 @@ abstract class M3AbstractJavaFloatingPointBitsFromByteArray extends M3AbstractFl
         byte ch = 0;
         for (; index < endIndex; index++) {
             ch = str[index];
-            char digit = (char) (ch - '0');
-            if (digit < 10) {
+            char digit = (char) (ch - DIGIT_ZERO);
+            if (digit < DECIMAL_RADIX) {
                 // This might overflow, we deal with it later.
-                significand = 10 * significand + digit;
-            } else if (ch == '.') {
+                significand = DECIMAL_RADIX * significand + digit;
+            } else if (ch == DECIMAL_POINT) {
                 illegal |= virtualIndexOfPoint >= 0;
                 virtualIndexOfPoint = index;
-                for (; index < endIndex - 4; index += 4) {
+                for (; index < endIndex - DIGITS_PER_SWAR_GROUP; index += DIGITS_PER_SWAR_GROUP) {
                     int digits = M3FastDoubleSwar.tryToParseFourDigits(str, index + 1);
                     if (digits < 0) {
                         break;
                     }
                     // This might overflow, we deal with it later.
-                    significand = 10_000L * significand + digits;
+                    significand = TEN_POW_4 * significand + digits;
                 }
             } else {
                 break;
@@ -111,22 +174,22 @@ abstract class M3AbstractJavaFloatingPointBitsFromByteArray extends M3AbstractFl
         // Parse exponent number
         // ---------------------
         int expNumber = 0;
-        if ((ch | 0x20) == 'e') {// equals ignore case
+        if ((ch | LOWER_CASE_BIT) == EXPONENT_INDICATOR) {// equals ignore case
             ch = charAt(str, ++index, endIndex);
-            boolean isExponentNegative = ch == '-';
-            if (isExponentNegative || ch == '+') {
+            boolean isExponentNegative = ch == MINUS_SIGN;
+            if (isExponentNegative || ch == PLUS_SIGN) {
                 ch = charAt(str, ++index, endIndex);
             }
-            int digit = (char) (ch - '0');
-            illegal |= digit >= 10;
+            int digit = (char) (ch - DIGIT_ZERO);
+            illegal |= digit >= DECIMAL_RADIX;
             do {
                 // Guard against overflow
                 if (expNumber < M3AbstractFloatValueParser.MAX_EXPONENT_NUMBER) {
-                    expNumber = 10 * expNumber + digit;
+                    expNumber = DECIMAL_RADIX * expNumber + digit;
                 }
                 ch = charAt(str, ++index, endIndex);
-                digit = (char) (ch - '0');
-            } while (digit < 10);
+                digit = (char) (ch - DIGIT_ZERO);
+            } while (digit < DECIMAL_RADIX);
             if (isExponentNegative) {
                 expNumber = -expNumber;
             }
@@ -136,7 +199,7 @@ abstract class M3AbstractJavaFloatingPointBitsFromByteArray extends M3AbstractFl
         // Skip optional FloatTypeSuffix
         // long-circuit-or is faster than short-circuit-or
         // ------------------------
-        if ((ch | 0x22) == 'f') { // ~ "fFdD"
+        if ((ch | TYPE_SUFFIX_FOLD) == TYPE_SUFFIX_FOLDED) { // ~ "fFdD"
             index++;
         }
 
@@ -153,15 +216,15 @@ abstract class M3AbstractJavaFloatingPointBitsFromByteArray extends M3AbstractFl
         final boolean isSignificandTruncated;
         int skipCountInTruncatedDigits = 0;//counts +1 if we skipped over the decimal point
         int exponentOfTruncatedSignificand;
-        if (digitCount > 19) {
+        if (digitCount > MAX_EXACT_DECIMAL_DIGITS) {
             significand = 0;
             for (index = significandStartIndex; index < significandEndIndex; index++) {
                 ch = str[index];
-                if (ch == '.') {
+                if (ch == DECIMAL_POINT) {
                     skipCountInTruncatedDigits++;
                 } else {
                     if (Long.compareUnsigned(significand, M3AbstractFloatValueParser.MINIMAL_NINETEEN_DIGIT_INTEGER) < 0) {
-                        significand = 10 * (significand) + ch - '0';
+                        significand = DECIMAL_RADIX * (significand) + ch - DIGIT_ZERO;
                     } else {
                         break;
                     }
@@ -172,6 +235,15 @@ abstract class M3AbstractJavaFloatingPointBitsFromByteArray extends M3AbstractFl
         } else {
             isSignificandTruncated = false;
             exponentOfTruncatedSignificand = 0;
+        }
+        //FLLDCIM: M3 - DEC_EXPONENT_CLAMP v1: decline, so results stay exactly the JDK's (PR #2215 contract). The
+        // exponent loop stops accumulating digits once the exponent number reaches MAX_EXPONENT_NUMBER, and the digit
+        // counts (fraction digits; digits beyond the 19 the re-parse keeps) are added afterwards, so they can bring a
+        // clamped exponent back into range: "0." + 723 zeros + "1e10240" gave 1e300 and "1" + 1100 zeros + "e-10240"
+        // gave 1e76, where the JDK gives Infinity and 0.0
+        if (Math.abs(expNumber) >= M3AbstractFloatValueParser.MAX_EXPONENT_NUMBER) {
+            exponent = DECLINED_EXPONENT;
+            exponentOfTruncatedSignificand = DECLINED_EXPONENT;
         }
         return valueOfFloatLiteral(str, startIndex, endIndex, isNegative, significand, exponent, isSignificandTruncated,
                 exponentOfTruncatedSignificand);
@@ -209,8 +281,8 @@ abstract class M3AbstractJavaFloatingPointBitsFromByteArray extends M3AbstractFl
 
         // Parse optional sign
         // -------------------
-        final boolean isNegative = ch == '-';
-        if (isNegative || ch == '+') {
+        final boolean isNegative = ch == MINUS_SIGN;
+        if (isNegative || ch == PLUS_SIGN) {
             ch = charAt(str, ++index, endIndex);
             if (ch == 0) {
                 throw new NumberFormatException(SYNTAX_ERROR);
@@ -219,16 +291,16 @@ abstract class M3AbstractJavaFloatingPointBitsFromByteArray extends M3AbstractFl
 
         // Parse NaN or Infinity
         // ---------------------
-        if (ch >= 'I') {
+        if (ch >= INFINITY_CHAR_I) {
             return parseNaNOrInfinity(str, index, endIndex, isNegative);
         }
 
         // Parse optional leading zero
         // ---------------------------
-        final boolean hasLeadingZero = ch == '0';
+        final boolean hasLeadingZero = ch == DIGIT_ZERO;
         if (hasLeadingZero) {
             ch = charAt(str, ++index, endIndex);
-            if ((ch | 0x20) == 'x') {// equals ignore case
+            if ((ch | LOWER_CASE_BIT) == HEX_INDICATOR) {// equals ignore case
                 return parseHexFloatingPointLiteral(str, index + 1, offset, endIndex, isNegative);
             }
         }
@@ -276,7 +348,7 @@ abstract class M3AbstractJavaFloatingPointBitsFromByteArray extends M3AbstractFl
             // Table look up is faster than a sequence of if-else-branches.
             int hexValue = lookupHex(ch);
             if (hexValue >= 0) {
-                significand = (significand << 4) | hexValue;// This might overflow, we deal with it later.
+                significand = (significand << BITS_PER_HEX_DIGIT) | hexValue;// This might overflow, we deal with it later.
             } else if (hexValue == M3AbstractFloatValueParser.DECIMAL_POINT_CLASS) {
                 illegal |= virtualIndexOfPoint >= 0;
                 virtualIndexOfPoint = index;
@@ -301,29 +373,29 @@ abstract class M3AbstractJavaFloatingPointBitsFromByteArray extends M3AbstractFl
             virtualIndexOfPoint = significandEndIndex;
         } else {
             digitCount = significandEndIndex - significandStartIndex - 1;
-            exponent = Math.min(virtualIndexOfPoint - index + 1, M3AbstractFloatValueParser.MAX_EXPONENT_NUMBER) * 4;
+            exponent = Math.min(virtualIndexOfPoint - index + 1, M3AbstractFloatValueParser.MAX_EXPONENT_NUMBER) * BITS_PER_HEX_DIGIT;
         }
 
         // Parse exponent
         // --------------
         int expNumber = 0;
-        final boolean hasExponent = (ch | 0x20) == 'p';// equals ignore case;
+        final boolean hasExponent = (ch | LOWER_CASE_BIT) == BINARY_EXPONENT_INDICATOR;// equals ignore case;
         if (hasExponent) {
             ch = charAt(str, ++index, endIndex);
-            boolean isExponentNegative = ch == '-';
-            if (isExponentNegative || ch == '+') {
+            boolean isExponentNegative = ch == MINUS_SIGN;
+            if (isExponentNegative || ch == PLUS_SIGN) {
                 ch = charAt(str, ++index, endIndex);
             }
-            int digit = (char) (ch - '0');
-            illegal |= digit >= 10;
+            int digit = (char) (ch - DIGIT_ZERO);
+            illegal |= digit >= DECIMAL_RADIX;
             do {
                 // Guard against overflow
                 if (expNumber < M3AbstractFloatValueParser.MAX_EXPONENT_NUMBER) {
-                    expNumber = 10 * (expNumber) + digit;
+                    expNumber = DECIMAL_RADIX * (expNumber) + digit;
                 }
                 ch = charAt(str, ++index, endIndex);
-                digit = (char) (ch - '0');
-            } while (digit < 10);
+                digit = (char) (ch - DIGIT_ZERO);
+            } while (digit < DECIMAL_RADIX);
             if (isExponentNegative) {
                 expNumber = -expNumber;
             }
@@ -333,7 +405,7 @@ abstract class M3AbstractJavaFloatingPointBitsFromByteArray extends M3AbstractFl
         // Skip optional FloatTypeSuffix
         // long-circuit-or is faster than short-circuit-or
         // ------------------------
-        if ((ch | 0x22) == 'f') { // ~ "fFdD"
+        if ((ch | TYPE_SUFFIX_FOLD) == TYPE_SUFFIX_FOLDED) { // ~ "fFdD"
             index++;
         }
 
@@ -350,7 +422,7 @@ abstract class M3AbstractJavaFloatingPointBitsFromByteArray extends M3AbstractFl
         // -----------------------------------------------
         final boolean isSignificandTruncated;
         int skipCountInTruncatedDigits = 0;//counts +1 if we skipped over the decimal point
-        if (digitCount > 16) {
+        if (digitCount > MAX_EXACT_HEX_DIGITS) {
             significand = 0;
             for (index = significandStartIndex; index < significandEndIndex; index++) {
                 ch = str[index];
@@ -358,7 +430,7 @@ abstract class M3AbstractJavaFloatingPointBitsFromByteArray extends M3AbstractFl
                 int hexValue = lookupHex(ch);
                 if (hexValue >= 0) {
                     if (Long.compareUnsigned(significand, M3AbstractFloatValueParser.MINIMAL_NINETEEN_DIGIT_INTEGER) < 0) {
-                        significand = (significand << 4) | hexValue;
+                        significand = (significand << BITS_PER_HEX_DIGIT) | hexValue;
                     } else {
                         break;
                     }
@@ -372,27 +444,27 @@ abstract class M3AbstractJavaFloatingPointBitsFromByteArray extends M3AbstractFl
         }
 
         return valueOfHexLiteral(str, startIndex, endIndex, isNegative, significand, exponent, isSignificandTruncated,
-                (virtualIndexOfPoint - index + skipCountInTruncatedDigits) * 4 + expNumber);
+                (virtualIndexOfPoint - index + skipCountInTruncatedDigits) * BITS_PER_HEX_DIGIT + expNumber);
     }
 
 
     private long parseNaNOrInfinity(byte[] str, int index, int endIndex, boolean isNegative) {
-        if (str[index] == 'N') {
-            if (index + 2 < endIndex
+        if (str[index] == NAN_CHAR_N) {
+            if (index + NAN_LAST_INDEX < endIndex
                     // && str[index] == 'N'
-                    && str[index + 1] == 'a'
-                    && str[index + 2] == 'N') {
+                    && str[index + 1] == NAN_CHAR_A
+                    && str[index + NAN_LAST_INDEX] == NAN_CHAR_N) {
 
-                index = skipWhitespace(str, index + 3, endIndex);
+                index = skipWhitespace(str, index + NAN_CHAR_COUNT, endIndex);
                 if (index == endIndex) {
                     return nan();
                 }
             }
         } else {
-            if (index + 7 < endIndex
-                    && M3FastDoubleSwar.readLongLE(str, index) == 0x7974696e69666e49L//Infinity
+            if (index + INFINITY_LAST_INDEX < endIndex
+                    && M3FastDoubleSwar.readLongLE(str, index) == INFINITY_UTF8_LE//Infinity
             ) {
-                index = skipWhitespace(str, index + 8, endIndex);
+                index = skipWhitespace(str, index + INFINITY_CHAR_COUNT, endIndex);
                 if (index == endIndex) {
                     return isNegative ? negativeInfinity() : positiveInfinity();
                 }
