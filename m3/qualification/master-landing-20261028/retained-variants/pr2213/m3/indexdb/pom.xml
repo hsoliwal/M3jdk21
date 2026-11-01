@@ -30,10 +30,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.13.0</version>
         <configuration>
-          <compilerArgs>
-            <arg>-Xlint:all</arg>
-            <arg>-Werror</arg>
-          </compilerArgs>
+          <compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs>
         </configuration>
       </plugin>
       <plugin>
@@ -50,39 +47,17 @@
         <artifactId>jacoco-maven-plugin</artifactId>
         <version>${jacoco.version}</version>
         <executions>
+          <execution><goals><goal>prepare-agent</goal></goals></execution>
+          <execution><id>report</id><phase>verify</phase><goals><goal>report</goal></goals></execution>
           <execution>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>report</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>report</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>check</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
+            <id>check</id><phase>verify</phase><goals><goal>check</goal></goals>
             <configuration>
               <rules>
                 <rule>
                   <element>BUNDLE</element>
                   <limits>
-                    <limit>
-                      <counter>LINE</counter>
-                      <value>COVEREDRATIO</value>
-                      <minimum>0.99</minimum>
-                    </limit>
-                    <limit>
-                      <counter>BRANCH</counter>
-                      <value>COVEREDRATIO</value>
-                      <minimum>0.99</minimum>
-                    </limit>
+                    <limit><counter>LINE</counter><value>COVEREDRATIO</value><minimum>0.99</minimum></limit>
+                    <limit><counter>BRANCH</counter><value>COVEREDRATIO</value><minimum>0.99</minimum></limit>
                   </limits>
                 </rule>
               </rules>
@@ -112,15 +87,11 @@
               <execution>
                 <id>m3-synexia-atom-pattern-verify</id>
                 <phase>verify</phase>
-                <goals>
-                  <goal>dryRun</goal>
-                </goals>
+                <goals><goal>dryRun</goal></goals>
               </execution>
             </executions>
             <configuration>
-              <activeRecipes>
-                <recipe>com.synexia.m3.EveryModuleAtomPatternApplication</recipe>
-              </activeRecipes>
+              <activeRecipes><recipe>com.synexia.m3.EveryModuleAtomPatternApplication</recipe></activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -200,15 +171,11 @@
               <execution>
                 <id>m3-synexia-atom-pattern-mastery-verify</id>
                 <phase>verify</phase>
-                <goals>
-                  <goal>dryRun</goal>
-                </goals>
+                <goals><goal>dryRun</goal></goals>
               </execution>
             </executions>
             <configuration>
-              <activeRecipes>
-                <recipe>com.synexia.m3.EveryModuleAtomPatternMastery</recipe>
-              </activeRecipes>
+              <activeRecipes><recipe>com.synexia.m3.EveryModuleAtomPatternMastery</recipe></activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>

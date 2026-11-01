@@ -10,10 +10,7 @@
   <name>M3JDK :: RV32IM vCPU</name>
   <description>RV32IM virtual cores on the M3 parallel API: ISA oracle, assembler, ELF loader, slice kernel, sessions and verified receipts (ported from cpu-gpu-rv32im, Apache-2.0).</description>
   <licenses>
-    <license>
-      <name>Apache License, Version 2.0</name>
-      <url>https://www.apache.org/licenses/LICENSE-2.0</url>
-    </license>
+    <license><name>Apache License, Version 2.0</name><url>https://www.apache.org/licenses/LICENSE-2.0</url></license>
   </licenses>
   <properties>
     <maven.compiler.release>21</maven.compiler.release>
@@ -39,9 +36,7 @@
       <resource>
         <directory>${project.basedir}</directory>
         <targetPath>META-INF</targetPath>
-        <includes>
-          <include>PROVENANCE.md</include>
-        </includes>
+        <includes><include>PROVENANCE.md</include></includes>
       </resource>
     </resources>
     <plugins>
@@ -52,10 +47,7 @@
         <configuration>
           <release>21</release>
           <proc>none</proc>
-          <compilerArgs>
-            <arg>-Xlint:all,-module</arg>
-            <arg>-Werror</arg>
-          </compilerArgs>
+          <compilerArgs><arg>-Xlint:all,-module</arg><arg>-Werror</arg></compilerArgs>
         </configuration>
       </plugin>
       <plugin>
@@ -89,15 +81,11 @@
               <execution>
                 <id>m3-synexia-atom-pattern-verify</id>
                 <phase>verify</phase>
-                <goals>
-                  <goal>dryRun</goal>
-                </goals>
+                <goals><goal>dryRun</goal></goals>
               </execution>
             </executions>
             <configuration>
-              <activeRecipes>
-                <recipe>com.synexia.m3.EveryModuleAtomPatternApplication</recipe>
-              </activeRecipes>
+              <activeRecipes><recipe>com.synexia.m3.EveryModuleAtomPatternApplication</recipe></activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -177,15 +165,11 @@
               <execution>
                 <id>m3-synexia-atom-pattern-mastery-verify</id>
                 <phase>verify</phase>
-                <goals>
-                  <goal>dryRun</goal>
-                </goals>
+                <goals><goal>dryRun</goal></goals>
               </execution>
             </executions>
             <configuration>
-              <activeRecipes>
-                <recipe>com.synexia.m3.EveryModuleAtomPatternMastery</recipe>
-              </activeRecipes>
+              <activeRecipes><recipe>com.synexia.m3.EveryModuleAtomPatternMastery</recipe></activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>

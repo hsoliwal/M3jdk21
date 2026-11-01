@@ -12,39 +12,22 @@
     <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.13.0</version>
+  <build><plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId>
+      <version>3.13.0</version>
+      <configuration><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs></configuration>
+    </plugin>
+    <plugin>
+      <groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId>
+      <version>3.3.0</version>
+      <executions><execution><id>test-source-sealed-recipe</id><phase>verify</phase>
+        <goals><goal>java</goal></goals>
         <configuration>
-          <compilerArgs>
-            <arg>-Xlint:all</arg>
-            <arg>-Werror</arg>
-          </compilerArgs>
+          <mainClass>com.synexia.m3.M3LongBitmapFilteredSnapshotRecipe</mainClass>
+          <arguments><argument>--selftest</argument></arguments>
         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>3.3.0</version>
-        <executions>
-          <execution>
-            <id>test-source-sealed-recipe</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>java</goal>
-            </goals>
-            <configuration>
-              <mainClass>com.synexia.m3.M3LongBitmapFilteredSnapshotRecipe</mainClass>
-              <arguments>
-                <argument>--selftest</argument>
-              </arguments>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+      </execution></executions>
+    </plugin>
+  </plugins></build>
 </project>

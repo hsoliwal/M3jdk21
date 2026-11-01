@@ -14,38 +14,25 @@
     <m3.mode>verify</m3.mode>
   </properties>
   <profiles>
-    <profile>
-      <id>apply</id>
-      <properties>
-        <m3.mode>apply</m3.mode>
-      </properties>
-    </profile>
+    <profile><id>apply</id><properties><m3.mode>apply</m3.mode></properties></profile>
   </profiles>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>3.5.0</version>
-        <executions>
-          <execution>
-            <id>atom-logic-source-sealed-profile-qualification</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <configuration>
-              <executable>python3</executable>
-              <arguments>
-                <argument>${project.basedir}/recipe.py</argument>
-                <argument>${m3.mode}</argument>
-                <argument>--root</argument>
-                <argument>${m3.owner.root}</argument>
-              </arguments>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+  <build><plugins>
+    <plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>exec-maven-plugin</artifactId><version>3.5.0</version>
+      <executions><execution>
+        <id>atom-logic-source-sealed-profile-qualification</id>
+        <phase>verify</phase><goals><goal>exec</goal></goals>
+        <configuration>
+          <executable>python3</executable>
+          <arguments>
+            <argument>${project.basedir}/recipe.py</argument>
+            <argument>${m3.mode}</argument>
+            <argument>--root</argument>
+            <argument>${m3.owner.root}</argument>
+          </arguments>
+        </configuration>
+      </execution></executions>
+    </plugin>
+  </plugins></build>
 </project>

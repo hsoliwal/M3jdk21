@@ -21,9 +21,7 @@
           <execution>
             <id>patch-contracts</id>
             <phase>test</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
+            <goals><goal>exec</goal></goals>
             <configuration>
               <executable>python3</executable>
               <arguments>
@@ -36,9 +34,7 @@
           <execution>
             <id>readiness</id>
             <phase>verify</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
+            <goals><goal>exec</goal></goals>
             <configuration>
               <executable>python3</executable>
               <arguments>
@@ -67,9 +63,7 @@
               <execution>
                 <id>apply-reviewed-patch</id>
                 <phase>pre-integration-test</phase>
-                <goals>
-                  <goal>exec</goal>
-                </goals>
+                <goals><goal>exec</goal></goals>
                 <configuration>
                   <executable>python3</executable>
                   <arguments>
@@ -85,7 +79,7 @@
         </plugins>
       </build>
     </profile>
-    <profile>
+      <profile>
       <id>m3-synexia-atom-pattern</id>
       <build>
         <plugins>
@@ -104,15 +98,11 @@
               <execution>
                 <id>m3-synexia-atom-pattern-verify</id>
                 <phase>verify</phase>
-                <goals>
-                  <goal>dryRun</goal>
-                </goals>
+                <goals><goal>dryRun</goal></goals>
               </execution>
             </executions>
             <configuration>
-              <activeRecipes>
-                <recipe>com.synexia.m3.EveryModuleAtomPatternApplication</recipe>
-              </activeRecipes>
+              <activeRecipes><recipe>com.synexia.m3.EveryModuleAtomPatternApplication</recipe></activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -192,15 +182,11 @@
               <execution>
                 <id>m3-synexia-atom-pattern-mastery-verify</id>
                 <phase>verify</phase>
-                <goals>
-                  <goal>dryRun</goal>
-                </goals>
+                <goals><goal>dryRun</goal></goals>
               </execution>
             </executions>
             <configuration>
-              <activeRecipes>
-                <recipe>com.synexia.m3.EveryModuleAtomPatternMastery</recipe>
-              </activeRecipes>
+              <activeRecipes><recipe>com.synexia.m3.EveryModuleAtomPatternMastery</recipe></activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -261,5 +247,5 @@
         </plugins>
       </build>
     </profile>
-  </profiles>
+</profiles>
 </project>

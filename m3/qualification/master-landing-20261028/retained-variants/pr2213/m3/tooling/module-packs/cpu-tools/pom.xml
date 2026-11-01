@@ -27,9 +27,7 @@
           <execution>
             <id>cpu-build-path-and-timeout-contracts</id>
             <phase>test</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
+            <goals><goal>exec</goal></goals>
             <configuration>
               <executable>${m3.python}</executable>
               <arguments>
@@ -41,18 +39,14 @@
           <execution>
             <id>compile-package-link-and-run-cpu-tools</id>
             <phase>verify</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
+            <goals><goal>exec</goal></goals>
             <configuration>
               <executable>${m3.python}</executable>
               <arguments>
                 <argument>-B</argument>
                 <argument>${project.basedir}/build.py</argument>
-                <argument>--jdk-home</argument>
-                <argument>${m3.jdk}</argument>
-                <argument>--out</argument>
-                <argument>${m3.cpu.out}</argument>
+                <argument>--jdk-home</argument><argument>${m3.jdk}</argument>
+                <argument>--out</argument><argument>${m3.cpu.out}</argument>
               </arguments>
             </configuration>
           </execution>

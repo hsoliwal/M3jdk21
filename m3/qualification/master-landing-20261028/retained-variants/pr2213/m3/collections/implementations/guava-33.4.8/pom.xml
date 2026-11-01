@@ -280,9 +280,7 @@
           <executions>
             <execution>
               <id>attach-docs</id>
-              <goals>
-                <goal>jar</goal>
-              </goals>
+              <goals><goal>jar</goal></goals>
             </execution>
           </executions>
         </plugin>

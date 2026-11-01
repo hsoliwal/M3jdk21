@@ -1,471 +1,471 @@
-pom	variant	action
-m3/arrays/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/ast/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/backports/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/gc-interop/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-abstract-hashed-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-array-list-valued-linked-hash-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-array-stack/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-case-insensitive-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-circular-fifo/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-collection-bag/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-collection-sorted-bag/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-composite-collection/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-composite-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-composite-set/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-concurrent-reference-hash-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-cursorable-linked-list/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-defaulted-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-dual-linked-hash-bidi-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-dual-tree-bidi-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-fixed-size-list/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-fixed-size-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-fixed-size-sorted-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-flat3-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-growth-list/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-hash-bag/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-hash-multi-set/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-hashed-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-indexed-collection/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-lazy-list/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-lazy-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-lazy-sorted-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-linked-hash-set-valued-linked-hash-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-linked-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-list-ordered-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-list-ordered-set/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-lru-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-map-backed-set/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-multi-key-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-multi-value-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-node-caching-linked-list/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-ordered-properties/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-passive-expiring-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-patricia-trie/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-predicated-bag/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-predicated-collection/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-predicated-list/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-predicated-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-predicated-multi-set/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-predicated-navigable-set/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-predicated-queue/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-predicated-set/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-predicated-sorted-bag/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-predicated-sorted-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-predicated-sorted-set/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-reference-identity-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-reference-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-set-unique-list/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-singleton-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-sorted-properties/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-static-bucket-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-synchronized-bag/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-synchronized-collection/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-synchronized-multi-set/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-synchronized-queue/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-synchronized-sorted-bag/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-transformed-bag/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-transformed-collection/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-transformed-list/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-transformed-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-transformed-multi-valued-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-transformed-navigable-set/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-transformed-queue/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-transformed-set/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-transformed-sorted-bag/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-transformed-sorted-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-transformed-sorted-set/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-tree-bag/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-tree-bidi-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-tree-list/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-unmodifiable-bag/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-unmodifiable-bidi-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-unmodifiable-bounded-collection/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-unmodifiable-collection/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-unmodifiable-entry-set/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-unmodifiable-list/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-unmodifiable-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-unmodifiable-multi-valued-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-unmodifiable-navigable-set/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-unmodifiable-ordered-bidi-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-unmodifiable-ordered-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-unmodifiable-queue/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-unmodifiable-sorted-bag/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-unmodifiable-sorted-bidi-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-unmodifiable-sorted-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-unmodifiable-sorted-set/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/apache-unmodifiable-trie/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/commons-collections-4.5.0/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/evicting-queue/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-33.4.8/android/guava-bom/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-33.4.8/android/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-33.4.8/futures/failureaccess/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-33.4.8/futures/listenablefuture1/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-33.4.8/futures/listenablefuture9999/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-33.4.8/guava-bom/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-33.4.8/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-array-list-multimap/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-array-table/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-concurrent-hash-multiset/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-enum-bi-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-enum-hash-bi-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-enum-multiset/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-evicting-queue/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-hash-based-table/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-hash-multimap/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-hash-multiset/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-immutable-list-multimap/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-immutable-range-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-immutable-range-set/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-immutable-set-multimap/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-immutable-sorted-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-linked-hash-multimap/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-linked-hash-multiset/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-linked-list-multimap/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-minmax-priority-queue/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-tree-based-table/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-tree-multimap/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-tree-multiset/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/guava-tree-range-set/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/jdk-array-blocking-queue/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/jdk-attributes/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/jdk-concurrent-hash-map-key-set-view/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/jdk-concurrent-hash-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/jdk-concurrent-linked-deque/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/jdk-concurrent-linked-queue/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/jdk-concurrent-skip-list-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/jdk-concurrent-skip-list-set/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/jdk-copy-on-write-array-list/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/jdk-copy-on-write-array-set/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/jdk-delay-queue/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/jdk-enum-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/jdk-hashtable/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/jdk-linked-blocking-queue/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/jdk-priority-blocking-queue/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/jdk-properties/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/jdk-stack/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/jdk-synchronous-queue/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/spring-auto-populating-list/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/spring-case-insensitive-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/spring-concurrent-reference-hash-map/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/implementations/spring-multi-value-map-adapter/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/interop/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/interop/qualification/m3-direct-spring-multivaluemap-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/interop/qualification/m3-five-eclipse-multimaps-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/interop/qualification/m3-five-provider-counted-bags-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/interop/qualification/m3-guava-row-sorted-table-20261018/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/interop/qualification/spring-case-indexed-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/interop/qualification/spring-case-sdk-20261018/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/interop/recipe/five-library-index-views-20261017/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/interop/recipe/m3jdk21-five-provider-key-groups-20261018/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/interop/recipe/m3jdk21-five-provider-key-ranges-20261018/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/interop/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/pcollections/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/pcollections/reactor/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/bimap-mainline-20261017/recipe/native-test/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/bimap-mainline-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/deque-zero-mask-20261018/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/direct-generic-deque-heap-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/filtered-list-mutation-20261018/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/filtered-terminal-fusion-20261017/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/five-library-prepared-rows-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/five-provider-count-recovery-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/long-range-set-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-arrayification-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-commons-bag-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-counted-sdk-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-entry-facade-cache-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-filtered-navigation-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-five-fork-prepared-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-five-library-occurrences-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-five-provider-bimaps-master-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-five-provider-current-census-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-generic-object-list-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-guava-setmultimap-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-index-mask-window-20261017/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-int-array-index-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-long-bitmap-algebra-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-long-dag-doop-20261017/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-long-index-path-jni-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-long-index-path-masks-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-long-index-projection-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-long-path-input-budget-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-native-five-provider-core-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-sdk-families-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-sdk-provider-names-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/m3-state-mask-arrays-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/mask-window-sparse-20261017/tooling/synexia-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/object-state-batch-28/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/sdk-bulk-capture-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/sdk-five-owner-repair-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/receiving/guava-minmax-priority-queue/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/array-storage-commons-4.5.0-20261024/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/collection-file-review-batch80-20261017/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/counted-bag-iterator-remove-20261018/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/cpu-mask-runs-20261017/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/keyed-ordered-ring-20261019/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/order-statistics/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/owned-apache-bidimap-20261017/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/owned-apache-circular-fifo-20261018/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/owned-apache-dual-linked-hash-bidi-map-20261019/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/owned-apache-hash-bag-20261019/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/owned-apache-multivalue-20261018/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/owned-apache-multivalue-20261024/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/owned-guava-array-list-multimap-20261018/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/owned-guava-enum-bi-map-20261019/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/owned-guava-enum-hash-bi-map-20261019/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/owned-guava-enum-multiset-20261019/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/owned-guava-evicting-queue-20261018/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/owned-guava-hash-bimap-20261017/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/owned-guava-hash-multiset-20261018/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/owned-guava-linked-hash-multiset-20261019/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/owned-spring-case-insensitive-map-20261018/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/owned-spring-multi-value-map-adapter-20261019/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/owned-spring-multivalue-map-20261017/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/spring-single-value-view-widen-20261019/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipe/zero-mask-window-copy-20261017/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipes/native-index-range-20261017/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipes/sdk-family-names-20261017/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/recipes/sdk-guava-bimap-20261017/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/relocation/five-provider-20261018/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/signal-codegen/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/snapshot-recipe-20261017/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/verification/tombstone-reuse-20261017/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/collections/wrappers/composition-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/compiler/source-signals/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/eclipse/core-runtime/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/eclipse/core-runtime/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/eclipse/filesystem/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/eclipse/framework/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/eclipse/framework/recipe/flags-20261020/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/eclipse/framework/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/eclipse/optional-jmod/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/file/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/fs/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/history/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/indexdb/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/lexicon/hf-intake/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/lexicon/receiver/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/migration/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/migration/rx7-codec-cap-20261018/sdk/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/optane/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/ports/capability-runtime/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/ports/collections/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/ports/compiletime/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/ports/indexstring/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/ports/jfx-viewport/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/ports/parallel-bulk/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/ports/parallel/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/ports/precompute/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/ports/regex-cursor/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/ports/swing-viewport/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/ports/tornadovm-bulk/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/ports/vcpu/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/qualification/master-landing-20261028/retained-variants/pr1722/m3/lexicon/hf-intake/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/qualification/master-landing-20261028/retained-variants/pr1786/m3/lexicon/receiver/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/qualification/master-landing-20261028/retained-variants/pr1862/m3/compiler/source-signals/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/qualification/master-landing-20261028/retained-variants/pr1881/m3/arrays/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/qualification/master-landing-20261028/retained-variants/pr1934/m3/arrays/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/qualification/master-landing-20261028/retained-variants/pr1936/m3/collections/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/qualification/master-landing-20261028/retained-variants/pr1938/m3/arrays/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/qualification/master-landing-20261028/retained-variants/pr1945/m3/arrays/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/qualification/master-landing-20261028/retained-variants/pr1958/m3/arrays/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/qualification/master-landing-20261028/retained-variants/pr1975/m3/ast/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/qualification/master-landing-20261028/retained-variants/pr2051/m3/collections/interop/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/qualification/master-landing-20261028/retained-variants/pr2064/m3/collections/interop/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/qualification/master-landing-20261028/retained-variants/pr2108/m3/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/qualification/master-landing-20261028/retained-variants/pr2115/m3/arrays/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/qualification/master-landing-20261028/retained-variants/pr2115/m3/collections/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/runtime-integration/fix-root-ascii-case/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/runtime-integration/fix/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/runtime-integration/primitive-address-identity/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/runtime-integration/qualification/bitlane-count-skip-20261019/recipes/m3jdk21-bitlane-runtime-count-skip-20261019/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/runtime-integration/regex-precompute/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/synexia-import/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/atom-logic-receiver/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/backport-dag/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/cb/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/jmod-recipes/cpu-tools/model-quantize/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/jmod-recipes/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/jmod-recipes/quantize-recipe-20261017/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/lane28/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/migration-recipes/apache-reuse/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/migration-recipes/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/migration-recipes/tasks/a3-code-string-repair-20261006/verification/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/a3-behavior-verification/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/verification/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/verification/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/migration-recipes/tasks/jdk-focus/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/followup/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/pattern-hidden/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/migration-recipes/verification/jcc-handoff/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/migration-recipes/verification/jcc-receiving/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/migration-recipes/verification/jcc-source-recovery-handoff/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/migration-recipes/verification/jni/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/module-packs/build-support/gradle-provider/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/module-packs/build-support/native-api/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/module-packs/collections/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/module-packs/cpu-tools/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/module-packs/jackson/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/module-packs/parser/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/module-packs/parser/real-providers/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/module-packs/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/module-packs/verification/jdk-execution/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/mr/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/netbeans-gap-boundary-20261019/synexia-openrewrite-recipes/recipe-crates/netbeans-gap-boundary-20261019/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/recipe-agent-api/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/regex-relations-current-owner/sdk/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/region-foundation-repair/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/shared-frontend/eclipse-jdt/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/shared-frontend/openrewrite-runtime/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/shared-frontend/openrewrite-tool/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/shared-frontend/openrewrite/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/synexia-jdk-a3-recipes/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/tq-sync/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/tq-sync/source-reactor/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/tq/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/vendor-recipes/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/tooling/vi/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/HdrHistogram/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/JavaEWAH/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/LatencyUtils/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/agrona/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/annotations/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/antlr4-runtime-4.11.1/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/antlr4-runtime-4.13.2/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/apiguardian-api/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/asm-9.10.1/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/asm-9.6/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/asm-analysis/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/asm-tree/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/asm-util/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/assertj-core/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/byte-buddy/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/caffeine/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/cglib/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/checker-qual-3.37.0/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/checker-qual-3.55.1/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/classgraph/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/commonmark/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/commons-codec-1.17.1/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/commons-codec-1.22.1/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/commons-compress-1.26.0/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/commons-compress-1.27.1/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/commons-csv/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/commons-io-2.15.1/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/commons-io-2.18.0/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/commons-jexl3/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/commons-lang3-3.14.0/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/commons-lang3-3.17.0/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/commons-logging/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/commons-net/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/commons-pool2/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/commons-text/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/dec/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/eclipse-collections-api/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/eclipse-collections/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/error_prone_annotations/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/failureaccess/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/fastdoubleparser-0.9.0/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/fastdoubleparser-1.0.0/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/fastdoubleparser-1.0.90/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/fastfilter/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/gizmo/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/guava/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/j2objc-annotations/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jackson-annotations-2.15.3/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jackson-annotations-2.16.1/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jackson-annotations-2.19.2/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jackson-core-2.15.3/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jackson-core-2.16.1/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jackson-core-2.19.2/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jackson-databind-2.15.3/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jackson-databind-2.16.1/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jackson-databind-2.19.2/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jackson-dataformat-csv/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jackson-dataformat-smile/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jackson-dataformat-yaml/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jackson-datatype-jsr310-2.15.3/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jackson-datatype-jsr310-2.16.1/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jackson-module-parameter-names/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jandex/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/java-object-diff/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jna-5.14.0/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jna-5.18.1/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jna-platform/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jsoup-1.17.2/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jsoup-1.23.2/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jspecify-0.3.0/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jspecify-1.0.1/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/jsr305/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/junit-jupiter-5.10.2/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/junit-jupiter-5.11.4/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/junit-jupiter-api-5.10.2/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/junit-jupiter-api-5.11.4/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/junit-jupiter-engine-5.10.2/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/junit-jupiter-engine-5.11.4/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/junit-jupiter-params-5.10.2/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/junit-jupiter-params-5.11.4/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/junit-platform-commons-1.10.2/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/junit-platform-commons-1.11.4/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/junit-platform-engine-1.10.2/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/junit-platform-engine-1.11.4/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/junit-platform-launcher-1.10.2/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/junit-platform-launcher-1.11.4/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/lucene-analysis-common/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/lucene-core/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/lucene-queries/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/lucene-queryparser/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/lucene-sandbox/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/lz4-java/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/m3-tooling-shaded/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/micrometer-core/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/opennlp-tools/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/opentest4j/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/org.eclipse.jgit/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/org.osgi.core/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/pcollections/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/picocli/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/re2j/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/rewrite-core/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/rewrite-java-21/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/rewrite-java/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/rewrite-test/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/rewrite-xml/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/rewrite-yaml/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/slf4j-api-1.7.36/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/slf4j-api-2.0.12/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/slf4j-api-2.0.9/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/slf4j-simple/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/snakeyaml-2.1/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/snakeyaml-2.2/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/snakeyaml-2.6/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/snakeyaml-engine/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/snappy-java/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/sqlite-jdbc-3.45.1.0/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/sqlite-jdbc-3.51.1.1/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/tomlj-1.1.1/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/tomlj-1.3.0/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/univocity-parsers/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/xz/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/vendor/third_party/zero-allocation-hashing/pom.xml	1ea378ca6eb0d33f	RETIRED
-m3/viewport-core/pom.xml	1ea378ca6eb0d33f	RETIRED
+pom	variant	action	detail
+m3/arrays/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/ast/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob c4d841e7526e9501e96eb59785be7b8a041b7fd2; C14N-equal to the v1 edit
+m3/backports/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob e331433eeabe78a1018838bf4d63e44e629dc866; C14N-equal to the v1 edit
+m3/collections/gc-interop/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob b750fb6b02d82a962da850c51dd751e5c3dad851; C14N-equal to the v1 edit
+m3/collections/implementations/apache-abstract-hashed-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob e74d9e5d47d52205b10ea66c8bedf60ed71bab27; C14N-equal to the v1 edit
+m3/collections/implementations/apache-array-list-valued-linked-hash-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 7827b3156405afad942fea3329c49d6ab73cc30c; C14N-equal to the v1 edit
+m3/collections/implementations/apache-array-stack/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 812da737f38024334188ca8b61053ca8a19c7004; C14N-equal to the v1 edit
+m3/collections/implementations/apache-case-insensitive-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob dbe82b78ee02bb21289e08ca35fa2f59a9ee8ad4; C14N-equal to the v1 edit
+m3/collections/implementations/apache-circular-fifo/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 3164be62f8c147e90753d1dcd4bafb25c44ebb33; C14N-equal to the v1 edit
+m3/collections/implementations/apache-collection-bag/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 832f16fcc364a8dd5d6102bc515e0354500c3456; C14N-equal to the v1 edit
+m3/collections/implementations/apache-collection-sorted-bag/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob d9275925534328b59bcd33576841f27c6a78912f; C14N-equal to the v1 edit
+m3/collections/implementations/apache-composite-collection/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 4baec828dbe186b7000001e4c360d6a746551824; C14N-equal to the v1 edit
+m3/collections/implementations/apache-composite-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 7fe2161ccce1587db45e99f3daca6b08e5fcd5ec; C14N-equal to the v1 edit
+m3/collections/implementations/apache-composite-set/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 7329fba7b4d9fc537a988e6c85a241557e719f48; C14N-equal to the v1 edit
+m3/collections/implementations/apache-concurrent-reference-hash-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 9d94879e6286f9b0cd34bcc1d1fd99902d017541; C14N-equal to the v1 edit
+m3/collections/implementations/apache-cursorable-linked-list/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 631f67dbe5be5e750195d69ffb6ace3dfe243459; C14N-equal to the v1 edit
+m3/collections/implementations/apache-defaulted-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 26711de9d4ee6c1579cb0bf275940b1270ab5bb6; C14N-equal to the v1 edit
+m3/collections/implementations/apache-dual-linked-hash-bidi-map/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/collections/implementations/apache-dual-tree-bidi-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 61580ae07fd0f5c765d3f76ef56e58b1344edf9c; C14N-equal to the v1 edit
+m3/collections/implementations/apache-fixed-size-list/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 85f8741fcd296bb3987f1f94f8877c3919824d63; C14N-equal to the v1 edit
+m3/collections/implementations/apache-fixed-size-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 0c58985cd1164eb8fdf3b91d18e1129ff468d87a; C14N-equal to the v1 edit
+m3/collections/implementations/apache-fixed-size-sorted-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob d6ac1bb1e043a4f0cacf8a022b61229d8f0e0ae4; C14N-equal to the v1 edit
+m3/collections/implementations/apache-flat3-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 47735567461917ff6c0a2769b6b7876f4fe324dd; C14N-equal to the v1 edit
+m3/collections/implementations/apache-growth-list/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob f4137bc208b8be69adcb85a7b8698ef2b12cbdd7; C14N-equal to the v1 edit
+m3/collections/implementations/apache-hash-bag/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/collections/implementations/apache-hash-multi-set/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob ae10716c47dc11dba24d064517fca23ee0b28a4c; C14N-equal to the v1 edit
+m3/collections/implementations/apache-hashed-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 2025e72f41d47dbcd938efc35829fe62b811557e; C14N-equal to the v1 edit
+m3/collections/implementations/apache-indexed-collection/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob aa5eb8b7d116186a3fa9938d2ddb97f6a0980e90; C14N-equal to the v1 edit
+m3/collections/implementations/apache-lazy-list/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 26a03537e8ba1a4769fe043cb15e020446ce49e5; C14N-equal to the v1 edit
+m3/collections/implementations/apache-lazy-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 55f1f363997ab78d1e6c86c9b83b105648a59395; C14N-equal to the v1 edit
+m3/collections/implementations/apache-lazy-sorted-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 49c474f3d8c780af0a12d21c9dd06e1c1181e9d3; C14N-equal to the v1 edit
+m3/collections/implementations/apache-linked-hash-set-valued-linked-hash-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 523e91193c7c58cd694d516e001264d32e9c7eb8; C14N-equal to the v1 edit
+m3/collections/implementations/apache-linked-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob b0532ce6eb76faaef0bf57f9559e5d92305abe16; C14N-equal to the v1 edit
+m3/collections/implementations/apache-list-ordered-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 56cb2ab3da4454dd5c07a1aabce4e48c764d136f; C14N-equal to the v1 edit
+m3/collections/implementations/apache-list-ordered-set/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob a6a649d1dcf8cbd1b7de1d253b79ea03d27ea2b9; C14N-equal to the v1 edit
+m3/collections/implementations/apache-lru-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 7b6a236a708521aa2c7b914f721cc65dff45a997; C14N-equal to the v1 edit
+m3/collections/implementations/apache-map-backed-set/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 74149b4aeb4a3067dad6376ba419a1732cdc7ed1; C14N-equal to the v1 edit
+m3/collections/implementations/apache-multi-key-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob d8ad5f477e46637a4383b0f3179750a8a11f67c3; C14N-equal to the v1 edit
+m3/collections/implementations/apache-multi-value-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 46867ee400311ba91728b31f0a5533ad99df94a7; C14N-equal to the v1 edit
+m3/collections/implementations/apache-node-caching-linked-list/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 3b81d0b0d2f7ebecb84f87f3771eeeb59c8d183c; C14N-equal to the v1 edit
+m3/collections/implementations/apache-ordered-properties/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 8c521c28f9d311574bbb1a0fbdba1ad1c52bcecf; C14N-equal to the v1 edit
+m3/collections/implementations/apache-passive-expiring-map/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/collections/implementations/apache-patricia-trie/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob d965e0950ce403312cb9583837a6375d1ba1bee2; C14N-equal to the v1 edit
+m3/collections/implementations/apache-predicated-bag/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 349ecd3aa12e0c9087baaf6a33e0cc6127e8758c; C14N-equal to the v1 edit
+m3/collections/implementations/apache-predicated-collection/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 9f84f5c3c39f088edfb7e7aad9faa20c72ba2415; C14N-equal to the v1 edit
+m3/collections/implementations/apache-predicated-list/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 178c4cef67f0fc43bfd4150a84a7494d276d72d9; C14N-equal to the v1 edit
+m3/collections/implementations/apache-predicated-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 9b0af87ca72ca3f759225f3bbdcc5f8ab17ff5d8; C14N-equal to the v1 edit
+m3/collections/implementations/apache-predicated-multi-set/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 5333f7c5be460a3650b67129668d63714a4b6bb1; C14N-equal to the v1 edit
+m3/collections/implementations/apache-predicated-navigable-set/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 42dce9c5a6ce78e131a5355024bfacccfb009aca; C14N-equal to the v1 edit
+m3/collections/implementations/apache-predicated-queue/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 5d723b82586692f54f56d382b2c07484f4508f89; C14N-equal to the v1 edit
+m3/collections/implementations/apache-predicated-set/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 9cf73316558159fba1904ed00526dffb47f22b6c; C14N-equal to the v1 edit
+m3/collections/implementations/apache-predicated-sorted-bag/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob c886b91fe6aa9e53d058187cd5ecd51f08a0c0af; C14N-equal to the v1 edit
+m3/collections/implementations/apache-predicated-sorted-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob a0cd90d2c0c312df03e67c6633bfe3ae69dbba29; C14N-equal to the v1 edit
+m3/collections/implementations/apache-predicated-sorted-set/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 5f51e3b428d12da32a3780b8b5e76285ddaafaa2; C14N-equal to the v1 edit
+m3/collections/implementations/apache-reference-identity-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob abeb009204028b190400f9338c07b8144a833468; C14N-equal to the v1 edit
+m3/collections/implementations/apache-reference-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob d4771998bd69fe61c01bb24e73b50a04b38104f6; C14N-equal to the v1 edit
+m3/collections/implementations/apache-set-unique-list/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 755da4432b84ee11128115593e81f2620bfcb8ad; C14N-equal to the v1 edit
+m3/collections/implementations/apache-singleton-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob c83e0d8a48bb756f6cf032d0d37350445dfa1302; C14N-equal to the v1 edit
+m3/collections/implementations/apache-sorted-properties/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 772490597c7b37a70c07445dd28f9e3fb7de2708; C14N-equal to the v1 edit
+m3/collections/implementations/apache-static-bucket-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob c8a72e3e4c256a221a785fff088db4602270b9e6; C14N-equal to the v1 edit
+m3/collections/implementations/apache-synchronized-bag/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 698729b389c576f89907f4da4e2a389c1c07c679; C14N-equal to the v1 edit
+m3/collections/implementations/apache-synchronized-collection/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob e6f2146edfe542e68af6580df110a3aa44e62a3d; C14N-equal to the v1 edit
+m3/collections/implementations/apache-synchronized-multi-set/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob f2801724603dd375bbac17c4f399e40cf39f2471; C14N-equal to the v1 edit
+m3/collections/implementations/apache-synchronized-queue/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 1c9fadcd843e306c14e6e9d04312349f5d922064; C14N-equal to the v1 edit
+m3/collections/implementations/apache-synchronized-sorted-bag/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 04cb8d587573543a0d7ad08c86ed984ba59e69fc; C14N-equal to the v1 edit
+m3/collections/implementations/apache-transformed-bag/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 902b8fbd8f4bf0dc7a5243c7c59ccdcf1d2264e5; C14N-equal to the v1 edit
+m3/collections/implementations/apache-transformed-collection/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 5365389998e1747905b7f4f602ba1180347a55d9; C14N-equal to the v1 edit
+m3/collections/implementations/apache-transformed-list/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 7235ec752f06861064e0cb1366189c40046c425a; C14N-equal to the v1 edit
+m3/collections/implementations/apache-transformed-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 7e6c24fca835dcc41c9e74a427478cb37a3c4a62; C14N-equal to the v1 edit
+m3/collections/implementations/apache-transformed-multi-valued-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob e147c2c16864103d3e5027e793ee28ea9e5f8a78; C14N-equal to the v1 edit
+m3/collections/implementations/apache-transformed-navigable-set/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 9ada92d156d6ca788702f5d8bbe3ea60ec88cd9f; C14N-equal to the v1 edit
+m3/collections/implementations/apache-transformed-queue/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 989337ff1c6d43de95aa104bc20684ab5bc7f380; C14N-equal to the v1 edit
+m3/collections/implementations/apache-transformed-set/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 4f0a6e4e32666794747770e98011a895244a8d0c; C14N-equal to the v1 edit
+m3/collections/implementations/apache-transformed-sorted-bag/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob e5c409f214a8392e1cbcdcc78e9396791bb25fd9; C14N-equal to the v1 edit
+m3/collections/implementations/apache-transformed-sorted-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob dd48963edfc5fc3de2b425d1d9cec5cdd6768e06; C14N-equal to the v1 edit
+m3/collections/implementations/apache-transformed-sorted-set/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob af73314f22978631aef2a7ef4485d3f0da0d6a8f; C14N-equal to the v1 edit
+m3/collections/implementations/apache-tree-bag/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 58d742bfd6f729c1212a39a3857d8eb60cba519f; C14N-equal to the v1 edit
+m3/collections/implementations/apache-tree-bidi-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 14823a6d2429c7b6985da2ee0ed7d7c7f7491a25; C14N-equal to the v1 edit
+m3/collections/implementations/apache-tree-list/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 5a517ce7fbd7d0b535b4ec237a440db61a352aa7; C14N-equal to the v1 edit
+m3/collections/implementations/apache-unmodifiable-bag/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 56aab1c78d5cce590f8ed2227b8dab70ae993525; C14N-equal to the v1 edit
+m3/collections/implementations/apache-unmodifiable-bidi-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 195ebfa3211a9e83a3476729052a1dde2caa035f; C14N-equal to the v1 edit
+m3/collections/implementations/apache-unmodifiable-bounded-collection/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob c4182886894bae2f3f5d8fc67f86b14a3a709fde; C14N-equal to the v1 edit
+m3/collections/implementations/apache-unmodifiable-collection/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob ae2f82c1205da31bde115ff5e796a51c388fd62d; C14N-equal to the v1 edit
+m3/collections/implementations/apache-unmodifiable-entry-set/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 87d304c2c81988d6f6aca32c8c5008f3f72c3ed8; C14N-equal to the v1 edit
+m3/collections/implementations/apache-unmodifiable-list/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 085072ce294ee63f410cd03877da9fd9a029155a; C14N-equal to the v1 edit
+m3/collections/implementations/apache-unmodifiable-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob d16fcfb0ad427906d677cde2836e6af09a9a204b; C14N-equal to the v1 edit
+m3/collections/implementations/apache-unmodifiable-multi-valued-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 2e5e7363194ad22b66ddff7158494019aa3bac0e; C14N-equal to the v1 edit
+m3/collections/implementations/apache-unmodifiable-navigable-set/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 2585be9213ea576619f0fe2f910a2e44e8d2fb87; C14N-equal to the v1 edit
+m3/collections/implementations/apache-unmodifiable-ordered-bidi-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob b87656cc3e9ad93e49c35eb378dc7fe8dfbd4b9b; C14N-equal to the v1 edit
+m3/collections/implementations/apache-unmodifiable-ordered-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 49699a0c6e33a7fb8b847abed920827092468c46; C14N-equal to the v1 edit
+m3/collections/implementations/apache-unmodifiable-queue/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 200a9b61e729507cc5884aa90579f8d624eccb94; C14N-equal to the v1 edit
+m3/collections/implementations/apache-unmodifiable-sorted-bag/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 61ecd5d2438102e98d8824d592dd77172e6c21c9; C14N-equal to the v1 edit
+m3/collections/implementations/apache-unmodifiable-sorted-bidi-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob fbd82bd52813946c0a0f6edd178674987e1ab6b0; C14N-equal to the v1 edit
+m3/collections/implementations/apache-unmodifiable-sorted-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 488a5b2b012d55426974fc779eb7c9c2bbb04701; C14N-equal to the v1 edit
+m3/collections/implementations/apache-unmodifiable-sorted-set/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob cf74761b7c98f7cec6be53ea45e66b7199627943; C14N-equal to the v1 edit
+m3/collections/implementations/apache-unmodifiable-trie/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob b7ddb18f18ae243e326f67e316d0c3e37a1208ba; C14N-equal to the v1 edit
+m3/collections/implementations/commons-collections-4.5.0/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/collections/implementations/evicting-queue/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/collections/implementations/guava-33.4.8/android/guava-bom/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob d67ff862807405ba9737b6de2b0517f667d6479b; C14N-equal to the v1 edit
+m3/collections/implementations/guava-33.4.8/android/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob c2dc2048e1d091a115ff9915e963d20d887ccad3; C14N-equal to the v1 edit
+m3/collections/implementations/guava-33.4.8/futures/failureaccess/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 708eb2a263cc679c28a9b80a26027755e1884dcf; C14N-equal to the v1 edit
+m3/collections/implementations/guava-33.4.8/futures/listenablefuture1/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 07d17fa2d3283dc7882e7bf24e6bde7d80b28ad2; C14N-equal to the v1 edit
+m3/collections/implementations/guava-33.4.8/futures/listenablefuture9999/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 2ba4f7500c6378879c063d38dd7a415f3bd953f6; C14N-equal to the v1 edit
+m3/collections/implementations/guava-33.4.8/guava-bom/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 0d2728e65d94ac944629274c4b46ba8485c2efb4; C14N-equal to the v1 edit
+m3/collections/implementations/guava-33.4.8/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob a39114b6b367abbb167757f97150b56b7d2012d7; C14N-equal to the v1 edit
+m3/collections/implementations/guava-array-list-multimap/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/collections/implementations/guava-array-table/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 6480d376faebef31df0b55a41d1b540395841ebd; C14N-equal to the v1 edit
+m3/collections/implementations/guava-concurrent-hash-multiset/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 36585fdf5c843211c7cbea21f95caf3a8cba5f35; C14N-equal to the v1 edit
+m3/collections/implementations/guava-enum-bi-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 33c2e51ea8cd534df298bda70812442d040bbb1c; C14N-equal to the v1 edit
+m3/collections/implementations/guava-enum-hash-bi-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 6e8b577cc4ab523f5feed28434a116d778e74b51; C14N-equal to the v1 edit
+m3/collections/implementations/guava-enum-multiset/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 53a910f0ae536aa8a6783487a2dd174c25f4181c; C14N-equal to the v1 edit
+m3/collections/implementations/guava-evicting-queue/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 8e4de13ce76104a3c6062520f2c5ef94f8327aa7; C14N-equal to the v1 edit
+m3/collections/implementations/guava-hash-based-table/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 04d01b090083da7b2bd821aedc0795f50ade398b; C14N-equal to the v1 edit
+m3/collections/implementations/guava-hash-multimap/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 7330b41936f60f26cfa6b588a305f49eac812784; C14N-equal to the v1 edit
+m3/collections/implementations/guava-hash-multiset/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/collections/implementations/guava-immutable-list-multimap/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob ef924ce32770c75563151b24a7f1de50d851da5c; C14N-equal to the v1 edit
+m3/collections/implementations/guava-immutable-range-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 42f8d408310b819b47cd954d10e9475f1d055c1d; C14N-equal to the v1 edit
+m3/collections/implementations/guava-immutable-range-set/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 67f58b264053088efa3325cf75c30751d9b5d72d; C14N-equal to the v1 edit
+m3/collections/implementations/guava-immutable-set-multimap/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 613febf3b92efb79be697cb53487b5aaadf97548; C14N-equal to the v1 edit
+m3/collections/implementations/guava-immutable-sorted-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 77d48b456bc65d2f003dfe3d5d7c41bfea5c4ecd; C14N-equal to the v1 edit
+m3/collections/implementations/guava-linked-hash-multimap/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob b3efb808e7f31bcf0789ed26fe8b2e5c3c9b7ddb; C14N-equal to the v1 edit
+m3/collections/implementations/guava-linked-hash-multiset/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 02c5368bcd7a736d28ccd7d666bb16f2438040ea; C14N-equal to the v1 edit
+m3/collections/implementations/guava-linked-list-multimap/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 70c237847e5b6b432262faaafa89a51e77feafcb; C14N-equal to the v1 edit
+m3/collections/implementations/guava-minmax-priority-queue/pom.xml	1ea378ca6eb0d33f	KEPT	OWNER_PIN_WITH_PROFILE
+m3/collections/implementations/guava-tree-based-table/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 9ff2aaecdc75838e848ea6f03c55c0860b6e6785; C14N-equal to the v1 edit
+m3/collections/implementations/guava-tree-multimap/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 5856f4cc97b8f757e35e65daa5ea136a09cac662; C14N-equal to the v1 edit
+m3/collections/implementations/guava-tree-multiset/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 367bd0c326a7c5943857d260aeb8d81a1a8b4e89; C14N-equal to the v1 edit
+m3/collections/implementations/guava-tree-range-set/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob d9789c65ce8ba9825f56e38959e7b4c4c2459704; C14N-equal to the v1 edit
+m3/collections/implementations/jdk-array-blocking-queue/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 31870457a4fa2001289d7cc623179c527f0ef59a; C14N-equal to the v1 edit
+m3/collections/implementations/jdk-attributes/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 0872cab164e995203e44b92970fca5f24ad421cc; C14N-equal to the v1 edit
+m3/collections/implementations/jdk-concurrent-hash-map-key-set-view/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 863acd98722d0952dacb7de3d5a7ad27dc0d42c4; C14N-equal to the v1 edit
+m3/collections/implementations/jdk-concurrent-hash-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 45d3b8f845cc8ee1235e2265c9b8288b1545578a; C14N-equal to the v1 edit
+m3/collections/implementations/jdk-concurrent-linked-deque/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 275e36399e59eb247b7ba9c30ae1ffa346c16a70; C14N-equal to the v1 edit
+m3/collections/implementations/jdk-concurrent-linked-queue/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 934124a5060e2a0c1ecafa8221c57a4036389f7d; C14N-equal to the v1 edit
+m3/collections/implementations/jdk-concurrent-skip-list-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob bd2c084a64bbd50e2c4d06775e891547ed23a93b; C14N-equal to the v1 edit
+m3/collections/implementations/jdk-concurrent-skip-list-set/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 0a0b268e3d2d2ec13cbcb856f2a40649e5494c2e; C14N-equal to the v1 edit
+m3/collections/implementations/jdk-copy-on-write-array-list/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob df24e6aa5bc882433ded8095ea56b6050b24945e; C14N-equal to the v1 edit
+m3/collections/implementations/jdk-copy-on-write-array-set/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 1c7f1d711ea1e79cf31c63ff501b230f94e25603; C14N-equal to the v1 edit
+m3/collections/implementations/jdk-delay-queue/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob b094eb2a34f4330e0f7bf60b34d5119acd66be56; C14N-equal to the v1 edit
+m3/collections/implementations/jdk-enum-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 6afc7a447bdfa3654f99beb8126353c8ac714896; C14N-equal to the v1 edit
+m3/collections/implementations/jdk-hashtable/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 3bdd154cabc8fe61ffe052f2e5a6ef9c1e9ff472; C14N-equal to the v1 edit
+m3/collections/implementations/jdk-linked-blocking-queue/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob b546b6ef08553a32521f551f37330c70d8dfd434; C14N-equal to the v1 edit
+m3/collections/implementations/jdk-priority-blocking-queue/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 6c9da9f21d3dd3d8192164e776dd9e235cbc9f20; C14N-equal to the v1 edit
+m3/collections/implementations/jdk-properties/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob e9d19822c81f9d077e636f236eb5e60005623eb1; C14N-equal to the v1 edit
+m3/collections/implementations/jdk-stack/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 3b84bc147a1dbfae8c1893fb2b19610848fea677; C14N-equal to the v1 edit
+m3/collections/implementations/jdk-synchronous-queue/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 10409d9d62625e0c3cd6bd2f2560ba2370db50d3; C14N-equal to the v1 edit
+m3/collections/implementations/spring-auto-populating-list/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 6658164f5279fbbf0f3f62316c5488ee557d1958; C14N-equal to the v1 edit
+m3/collections/implementations/spring-case-insensitive-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob bc2ae1cf7add1c7136fde30ed2f87e2c7be856ef; C14N-equal to the v1 edit
+m3/collections/implementations/spring-concurrent-reference-hash-map/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob f0b8b8eef1321372e043806e46b8042fdbf1ffca; C14N-equal to the v1 edit
+m3/collections/implementations/spring-multi-value-map-adapter/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/collections/interop/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/collections/interop/qualification/m3-direct-spring-multivaluemap-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 59fb09e6bfe8460ec6a6e6ba5b00e0769a3ff6d3; C14N-equal to the v1 edit
+m3/collections/interop/qualification/m3-five-eclipse-multimaps-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob ea0a942283051ff3d9b4e56b3e5dbf953f348366; C14N-equal to the v1 edit
+m3/collections/interop/qualification/m3-five-provider-counted-bags-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob cb557aac03bc8a63ff1f724699fd1cdd662ee651; C14N-equal to the v1 edit
+m3/collections/interop/qualification/m3-guava-row-sorted-table-20261018/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob f567264650c616ecc42d9788efe5c577170e0c46; C14N-equal to the v1 edit
+m3/collections/interop/qualification/spring-case-indexed-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob abeaeca17a818613fb5ea65a2c812485b1b11fe2; C14N-equal to the v1 edit
+m3/collections/interop/qualification/spring-case-sdk-20261018/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob fa36b342cfdefcc731c0b35407e67b33c9412454; C14N-equal to the v1 edit
+m3/collections/interop/recipe/five-library-index-views-20261017/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 97adc4cd3285842722f0580d2965a99090f27d98; C14N-equal to the v1 edit
+m3/collections/interop/recipe/m3jdk21-five-provider-key-groups-20261018/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 819daafaa44ca107956b1aac3cc3158621192d4b; C14N-equal to the v1 edit
+m3/collections/interop/recipe/m3jdk21-five-provider-key-ranges-20261018/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 3d77f8935ead54ca312750a0b3d257f6b22203f2; C14N-equal to the v1 edit
+m3/collections/interop/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob c28efdbac74d607888cd3ea73144a3f6e24ef5ea; C14N-equal to the v1 edit
+m3/collections/pcollections/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob db21f9d38f42ff6a0440038a77a87764cc402300; C14N-equal to the v1 edit
+m3/collections/pcollections/reactor/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob a834ecef38d589cb64daf1cb8caba2507fd111b8; C14N-equal to the v1 edit
+m3/collections/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/collections/qualification/bimap-mainline-20261017/recipe/native-test/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 944592c29c36003afdfb1c8388929f2963f58e27; C14N-equal to the v1 edit
+m3/collections/qualification/bimap-mainline-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob c6d15881a6afab3cace02f7b3aa0f04d05e71c49; C14N-equal to the v1 edit
+m3/collections/qualification/deque-zero-mask-20261018/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 50c01723a3c1b26b294ae198cfb4857688928b80; C14N-equal to the v1 edit
+m3/collections/qualification/direct-generic-deque-heap-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 2c6a2deef67d2be6c2d25d14e0fd1a30d8d4f0fc; C14N-equal to the v1 edit
+m3/collections/qualification/filtered-list-mutation-20261018/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 380b881cc53d881cc1f1681946afc7105e704125; C14N-equal to the v1 edit
+m3/collections/qualification/filtered-terminal-fusion-20261017/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 43a7e9e8e19a9f1d439d0c2f13cd7471e5d678e8; C14N-equal to the v1 edit
+m3/collections/qualification/five-library-prepared-rows-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 6ab39ed2280d2660e1dd22a07841e7179079947c; C14N-equal to the v1 edit
+m3/collections/qualification/five-provider-count-recovery-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob cd82f96f6798c469d865cda4a6c7a4dfb05c194c; C14N-equal to the v1 edit
+m3/collections/qualification/long-range-set-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 593a715215818318386c31b032fd317e3baad5cd; C14N-equal to the v1 edit
+m3/collections/qualification/m3-arrayification-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob e568684f56ab3c24356567363d3875451aee6b70; C14N-equal to the v1 edit
+m3/collections/qualification/m3-commons-bag-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 504e6401b91a4bbcf39b66c3d8c774e4c0a817c8; C14N-equal to the v1 edit
+m3/collections/qualification/m3-counted-sdk-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 11d46ed5148ec8d6eb8c57709fb2491ba505b24a; C14N-equal to the v1 edit
+m3/collections/qualification/m3-entry-facade-cache-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob ad09a049618497c3900f52f1d848c9b8370f0f7a; C14N-equal to the v1 edit
+m3/collections/qualification/m3-filtered-navigation-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob dcef27169f58ba2acb4811dde97c3530c6e3dcc2; C14N-equal to the v1 edit
+m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 7d7cde2576dd312a1ce558c805bc8a73c3215c81; C14N-equal to the v1 edit
+m3/collections/qualification/m3-five-fork-prepared-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 309bdbb3476e302eb85a916c2a73fb77fcd6c864; C14N-equal to the v1 edit
+m3/collections/qualification/m3-five-library-occurrences-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 942da25f0756c81a916cda52cdcb9cbb01c9dc46; C14N-equal to the v1 edit
+m3/collections/qualification/m3-five-provider-bimaps-master-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob a6abf984347f2c90dd44f56d97d2472afab805b6; C14N-equal to the v1 edit
+m3/collections/qualification/m3-five-provider-current-census-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 17af30f39e5236e0e77e425f241213b41c8a1672; C14N-equal to the v1 edit
+m3/collections/qualification/m3-generic-object-list-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 542458e3eb072842716a718c796b4a22ca15cc17; C14N-equal to the v1 edit
+m3/collections/qualification/m3-guava-setmultimap-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 5db74d1d098b72d7dc5b72a3a3fce200728852e5; C14N-equal to the v1 edit
+m3/collections/qualification/m3-index-mask-window-20261017/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob a372f9665b9818085c2123f7086413927364d4fb; C14N-equal to the v1 edit
+m3/collections/qualification/m3-int-array-index-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob ec89547592da828e1a39764e209a52eef1c2e235; C14N-equal to the v1 edit
+m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 1d32fd51b3a01ba173c5f72ba6cff31a988717a3; C14N-equal to the v1 edit
+m3/collections/qualification/m3-long-bitmap-algebra-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 4f54f3cbb0ee01d97157197befa0e516008e18f1; C14N-equal to the v1 edit
+m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 5eb7dfd5ce52fe9df5c7ab990adbd98ddcaabb70; C14N-equal to the v1 edit
+m3/collections/qualification/m3-long-dag-doop-20261017/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 6236458169b69a344770e6eac4de84bc88710d01; C14N-equal to the v1 edit
+m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 625065ad8cd5b9bc64cb479e4da100bb86c273ba; C14N-equal to the v1 edit
+m3/collections/qualification/m3-long-index-path-jni-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 9ecfe45f66b7baebae579f1d207285973adcc6aa; C14N-equal to the v1 edit
+m3/collections/qualification/m3-long-index-path-masks-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob b59c1a873d778a4c2ac6201fae89814ee4785fee; C14N-equal to the v1 edit
+m3/collections/qualification/m3-long-index-projection-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 7a46dd0d5e96b005e37992a16129b525aff39a30; C14N-equal to the v1 edit
+m3/collections/qualification/m3-long-path-input-budget-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob d98f39c050665dc9916eec71dcf0a1833ea554a6; C14N-equal to the v1 edit
+m3/collections/qualification/m3-native-five-provider-core-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 53604ed36e9fb48a725e28359d8af97a9a8d524a; C14N-equal to the v1 edit
+m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 006fff05d4c4a6f82556ab0f33de80f2a1b72daa; C14N-equal to the v1 edit
+m3/collections/qualification/m3-sdk-families-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob b7ef5df9c809896dd7c6c75405a2a22b79337e42; C14N-equal to the v1 edit
+m3/collections/qualification/m3-sdk-provider-names-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 7ea9d61f4dc76f9e1484eb691ae95578a3d40d58; C14N-equal to the v1 edit
+m3/collections/qualification/m3-state-mask-arrays-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 42f3afec41b82525f41f357ee1ea8f2e92763c6a; C14N-equal to the v1 edit
+m3/collections/qualification/mask-window-sparse-20261017/tooling/synexia-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 3912b96c822f292c252f798cf3447644c6230afa; C14N-equal to the v1 edit
+m3/collections/qualification/object-state-batch-28/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 5739fe89a1bfdc89ffb95720c41bd02bc4af28d5; C14N-equal to the v1 edit
+m3/collections/qualification/sdk-bulk-capture-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob eee44ba1331bcb1d81a63ce638ae374965ff89aa; C14N-equal to the v1 edit
+m3/collections/qualification/sdk-five-owner-repair-20261018/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob b9473124ef54a369a2200901150d64ba8f616c81; C14N-equal to the v1 edit
+m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 3fb05ca601a33bc771687ad227dbb7775876996b; C14N-equal to the v1 edit
+m3/collections/receiving/guava-minmax-priority-queue/pom.xml	1ea378ca6eb0d33f	KEPT	OWNER_PIN_WITH_PROFILE
+m3/collections/recipe/array-storage-commons-4.5.0-20261024/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/collections/recipe/collection-file-review-batch80-20261017/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 5fa7ef50944e28ba09c649396813bccb561928aa; C14N-equal to the v1 edit
+m3/collections/recipe/counted-bag-iterator-remove-20261018/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 9cfb7affe240ce84d0bfa08376e442aa29fa638e; C14N-equal to the v1 edit
+m3/collections/recipe/cpu-mask-runs-20261017/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 05876562f2819493ab191f466a527df0a30ad5c1; C14N-equal to the v1 edit
+m3/collections/recipe/keyed-ordered-ring-20261019/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 2af0f333894b3d2f93d8759b1ba4e3c7f9cf4126; C14N-equal to the v1 edit
+m3/collections/recipe/order-statistics/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 626641b5644b6c279b2ff17aaffaa02ae7c7d971; C14N-equal to the v1 edit
+m3/collections/recipe/owned-apache-bidimap-20261017/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 25a84c29f3d63474b33cda9aea179060b4813100; C14N-equal to the v1 edit
+m3/collections/recipe/owned-apache-circular-fifo-20261018/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 32f3d93e279fb65ebb799a8d1948229c5d5827b2; C14N-equal to the v1 edit
+m3/collections/recipe/owned-apache-dual-linked-hash-bidi-map-20261019/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob d835dd72c790c70345fbb0634193727c7e405dc9; C14N-equal to the v1 edit
+m3/collections/recipe/owned-apache-hash-bag-20261019/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 60a265087709dd41c24ccf773caaf5f1a31fcf31; C14N-equal to the v1 edit
+m3/collections/recipe/owned-apache-multivalue-20261018/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 7fc5c6c5cd18090422ff5d863df869d869926e2b; C14N-equal to the v1 edit
+m3/collections/recipe/owned-apache-multivalue-20261024/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/collections/recipe/owned-guava-array-list-multimap-20261018/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 5da07ca11eff6c00125766f9cc10561ed7029168; C14N-equal to the v1 edit
+m3/collections/recipe/owned-guava-enum-bi-map-20261019/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 0963deb01b1e05ef1bea82e872967d9769758cc1; C14N-equal to the v1 edit
+m3/collections/recipe/owned-guava-enum-hash-bi-map-20261019/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 9227e366c0338aa84622600e1bda0cb0d53deebc; C14N-equal to the v1 edit
+m3/collections/recipe/owned-guava-enum-multiset-20261019/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 9830d0c955ad5e3f99ebe3b20ce00402a1ffb8b4; C14N-equal to the v1 edit
+m3/collections/recipe/owned-guava-evicting-queue-20261018/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob ed493fa2602848be699b020e782d0160b01f36c8; C14N-equal to the v1 edit
+m3/collections/recipe/owned-guava-hash-bimap-20261017/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob adc461e202160a8eccc958480155b339202452ba; C14N-equal to the v1 edit
+m3/collections/recipe/owned-guava-hash-multiset-20261018/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob de631945223b3e53230613d5a8231aaeedb47a85; C14N-equal to the v1 edit
+m3/collections/recipe/owned-guava-linked-hash-multiset-20261019/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 72d4d19b14ad1ce5103c2a4828c8f6685d0a428a; C14N-equal to the v1 edit
+m3/collections/recipe/owned-spring-case-insensitive-map-20261018/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 6dcac039e61fa1229aa6b8fe6a583562cedfbc9d; C14N-equal to the v1 edit
+m3/collections/recipe/owned-spring-multi-value-map-adapter-20261019/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 3cecf18c231ac7cd14130a09d7610fa566be4c0b; C14N-equal to the v1 edit
+m3/collections/recipe/owned-spring-multivalue-map-20261017/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob fd13fd9b9ab5869b75124e6336315c2c7f066443; C14N-equal to the v1 edit
+m3/collections/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 5d94fd04aacaf8c53444e6dcfd19837901fde37d; C14N-equal to the v1 edit
+m3/collections/recipe/spring-single-value-view-widen-20261019/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 846d63ed99cf7c3aae08545835ff3078280ec1b7; C14N-equal to the v1 edit
+m3/collections/recipe/zero-mask-window-copy-20261017/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 69e8d42b9af6e180df1430abc70eac4626a47a6b; C14N-equal to the v1 edit
+m3/collections/recipes/native-index-range-20261017/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob cdfba6d4b76034dd67543b22ed575c8298f9c721; C14N-equal to the v1 edit
+m3/collections/recipes/sdk-family-names-20261017/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 44e89028eaa2409fb982e0bc26592b5e36219a7c; C14N-equal to the v1 edit
+m3/collections/recipes/sdk-guava-bimap-20261017/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 5a5bc00444808834cb21743a9ae93c28e1575ded; C14N-equal to the v1 edit
+m3/collections/relocation/five-provider-20261018/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 9f060d76e0d4ec3abff225ade5fc9b7e2625c05c; C14N-equal to the v1 edit
+m3/collections/signal-codegen/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 5d80d19c341832aa27bbfe1c33be43df2cd27653; C14N-equal to the v1 edit
+m3/collections/snapshot-recipe-20261017/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 4fc4282d732e11f9a51e51ad584fd756facc0c4f; C14N-equal to the v1 edit
+m3/collections/verification/tombstone-reuse-20261017/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 99a357f442fc7fd11497845421fb8d2c19a8654a; C14N-equal to the v1 edit
+m3/collections/wrappers/composition-20261017/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 3fbe6b5163daff10e9df8b70221ae7aba5584dfd; C14N-equal to the v1 edit
+m3/compiler/source-signals/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/eclipse/core-runtime/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 040fee9a24f03fcb41f99c99b8f860fde8170f79; C14N-equal to the v1 edit
+m3/eclipse/core-runtime/recipe/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/eclipse/filesystem/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 94c1a906fbe3fc447497771ea36adb44da0d109e; C14N-equal to the v1 edit
+m3/eclipse/framework/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 967752400a2110d57eca887eb465c6e91b33917f; C14N-equal to the v1 edit
+m3/eclipse/framework/recipe/flags-20261020/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob cd5c35586293b4620f893bb39297103ab7e371c7; C14N-equal to the v1 edit
+m3/eclipse/framework/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 3fda7f95cbc71dc9df49dd1553fc05092a6af456; C14N-equal to the v1 edit
+m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 22cb94267070b781de371a1dc68223c4208463b3; C14N-equal to the v1 edit
+m3/eclipse/optional-jmod/recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 3ac31740f2d68515598c468cc21e1829a24aa46c; C14N-equal to the v1 edit
+m3/file/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/fs/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/history/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 3d194ddbbb34f95aaa1605a3d2e3f5b541624f87; C14N-equal to the v1 edit
+m3/indexdb/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 6882689df3bb347241e2a75418072a42a46913d5; C14N-equal to the v1 edit
+m3/lexicon/hf-intake/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 5015aa42a2c98c5e63fa20d1c0de6dc4c991d4b9; C14N-equal to the v1 edit
+m3/lexicon/receiver/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/migration/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 67b444eb0e3ddb18b23231f3462951f8fbcb78f6; C14N-equal to the v1 edit
+m3/migration/rx7-codec-cap-20261018/sdk/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 31b6215a00e5d90ea25d5d7352f9786cbdaef32f; C14N-equal to the v1 edit
+m3/optane/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 6587719132f509f342e4158af9002dd8c4868a30; C14N-equal to the v1 edit
+m3/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/ports/capability-runtime/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob cd43e665683a6a08db4af313a3fd21fd43dd7910; C14N-equal to the v1 edit
+m3/ports/collections/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 6b21183312160fe2c623576482a53ba3ed262d6d; C14N-equal to the v1 edit
+m3/ports/compiletime/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob d25b9b60e7ea6b72161a3d0313377f6fedcaefc6; C14N-equal to the v1 edit
+m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob f16d07cfded7ff99e99651b371587992faed91bb; C14N-equal to the v1 edit
+m3/ports/indexstring/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob d3fb14b11cf2cf76185c02ea1ffac82167356ba6; C14N-equal to the v1 edit
+m3/ports/jfx-viewport/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob f0ae6b64e2cfcc8d5180eafd0ef607abdda32e79; C14N-equal to the v1 edit
+m3/ports/parallel-bulk/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 30fd0cacedca97970b987cda3b2e83cd539552b0; C14N-equal to the v1 edit
+m3/ports/parallel/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 58114f01a411f1324bf54c5a4142458da615340d; C14N-equal to the v1 edit
+m3/ports/precompute/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 2f767718e011f16b94403b07e594fb7eb2d5776a; C14N-equal to the v1 edit
+m3/ports/regex-cursor/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 1eafa0bf5a84fcf84e7ceb0830359885c6cc015b; C14N-equal to the v1 edit
+m3/ports/swing-viewport/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob a3edde6c72138072aecbfa45cb92fba23de270a1; C14N-equal to the v1 edit
+m3/ports/tornadovm-bulk/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 5e003711d6929744b51650a9bb80adea3dc77629; C14N-equal to the v1 edit
+m3/ports/vcpu/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 3d372c466de973e7cee5aafe0ffac48dad3178d2; C14N-equal to the v1 edit
+m3/qualification/master-landing-20261028/retained-variants/pr1722/m3/lexicon/hf-intake/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/qualification/master-landing-20261028/retained-variants/pr1786/m3/lexicon/receiver/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/qualification/master-landing-20261028/retained-variants/pr1862/m3/compiler/source-signals/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/qualification/master-landing-20261028/retained-variants/pr1881/m3/arrays/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/qualification/master-landing-20261028/retained-variants/pr1934/m3/arrays/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/qualification/master-landing-20261028/retained-variants/pr1936/m3/collections/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/qualification/master-landing-20261028/retained-variants/pr1938/m3/arrays/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/qualification/master-landing-20261028/retained-variants/pr1945/m3/arrays/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/qualification/master-landing-20261028/retained-variants/pr1958/m3/arrays/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/qualification/master-landing-20261028/retained-variants/pr1975/m3/ast/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/qualification/master-landing-20261028/retained-variants/pr2051/m3/collections/interop/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/qualification/master-landing-20261028/retained-variants/pr2064/m3/collections/interop/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/qualification/master-landing-20261028/retained-variants/pr2108/m3/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/qualification/master-landing-20261028/retained-variants/pr2115/m3/arrays/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/qualification/master-landing-20261028/retained-variants/pr2115/m3/collections/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/runtime-integration/fix-root-ascii-case/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 29f3581ecc4909bdd3548d46741c3db2c7c636fb; C14N-equal to the v1 edit
+m3/runtime-integration/fix/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 5b18266d1fc0b2db346252bafdc2b14109d6ba02; C14N-equal to the v1 edit
+m3/runtime-integration/primitive-address-identity/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 3555b3180066eea8636c1e46ff16027623f1a9c4; C14N-equal to the v1 edit
+m3/runtime-integration/qualification/bitlane-count-skip-20261019/recipes/m3jdk21-bitlane-runtime-count-skip-20261019/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob d2fc46d40f188f7058472c7d56f092fafd395e59; C14N-equal to the v1 edit
+m3/runtime-integration/regex-precompute/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 39ad0390fff43dabe9d94f9630b8cf1bff8e0fcc; C14N-equal to the v1 edit
+m3/synexia-import/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 6b3fa2948f055227790041553700f6abdef79eb5; C14N-equal to the v1 edit
+m3/tooling/atom-logic-receiver/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 5ff9b337065fed9089821080b72c22b7b084e45c; C14N-equal to the v1 edit
+m3/tooling/backport-dag/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob d8ace485fa6ffafec8b831a1826d888348c1690a; C14N-equal to the v1 edit
+m3/tooling/cb/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob e47b7c85dbf16803a631624cad9baec7a550c367; C14N-equal to the v1 edit
+m3/tooling/jmod-recipes/cpu-tools/model-quantize/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 2be48a959254a7c4b87f8838e0bc67b30e0aa57b; C14N-equal to the v1 edit
+m3/tooling/jmod-recipes/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob bea579cf4ffe9ebfa6cbe8bfd445b4f96dce9543; C14N-equal to the v1 edit
+m3/tooling/jmod-recipes/quantize-recipe-20261017/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 8d39b73e7c5c73daf5a1a4d5c3fff3e5e1af1e10; C14N-equal to the v1 edit
+m3/tooling/lane28/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/tooling/migration-recipes/apache-reuse/pom.xml	1ea378ca6eb0d33f	KEPT	PUBLIC_NAMES_RECIPE_ROOT
+m3/tooling/migration-recipes/pom.xml	1ea378ca6eb0d33f	KEPT	PUBLIC_NAMES_RECIPE_ROOT
+m3/tooling/migration-recipes/tasks/a3-code-string-repair-20261006/verification/pom.xml	1ea378ca6eb0d33f	KEPT	PUBLIC_NAMES_RECIPE_ROOT
+m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/pom.xml	1ea378ca6eb0d33f	KEPT	PUBLIC_NAMES_RECIPE_ROOT
+m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/a3-behavior-verification/pom.xml	1ea378ca6eb0d33f	KEPT	PUBLIC_NAMES_RECIPE_ROOT
+m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/verification/pom.xml	1ea378ca6eb0d33f	KEPT	PUBLIC_NAMES_RECIPE_ROOT
+m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/pom.xml	1ea378ca6eb0d33f	KEPT	PUBLIC_NAMES_RECIPE_ROOT
+m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/pom.xml	1ea378ca6eb0d33f	KEPT	PUBLIC_NAMES_RECIPE_ROOT
+m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/verification/pom.xml	1ea378ca6eb0d33f	KEPT	PUBLIC_NAMES_RECIPE_ROOT
+m3/tooling/migration-recipes/tasks/jdk-focus/pom.xml	1ea378ca6eb0d33f	KEPT	PUBLIC_NAMES_RECIPE_ROOT
+m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/followup/pom.xml	1ea378ca6eb0d33f	KEPT	PUBLIC_NAMES_RECIPE_ROOT
+m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/pattern-hidden/pom.xml	1ea378ca6eb0d33f	KEPT	PUBLIC_NAMES_RECIPE_ROOT
+m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/pom.xml	1ea378ca6eb0d33f	KEPT	PUBLIC_NAMES_RECIPE_ROOT
+m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/pom.xml	1ea378ca6eb0d33f	KEPT	PUBLIC_NAMES_RECIPE_ROOT
+m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/pom.xml	1ea378ca6eb0d33f	KEPT	PUBLIC_NAMES_RECIPE_ROOT
+m3/tooling/migration-recipes/verification/jcc-handoff/pom.xml	1ea378ca6eb0d33f	KEPT	PUBLIC_NAMES_RECIPE_ROOT
+m3/tooling/migration-recipes/verification/jcc-receiving/pom.xml	1ea378ca6eb0d33f	KEPT	PUBLIC_NAMES_RECIPE_ROOT
+m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml	1ea378ca6eb0d33f	KEPT	PUBLIC_NAMES_RECIPE_ROOT
+m3/tooling/migration-recipes/verification/jcc-source-recovery-handoff/pom.xml	1ea378ca6eb0d33f	KEPT	PUBLIC_NAMES_RECIPE_ROOT
+m3/tooling/migration-recipes/verification/jni/pom.xml	1ea378ca6eb0d33f	KEPT	PUBLIC_NAMES_RECIPE_ROOT
+m3/tooling/module-packs/build-support/gradle-provider/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 8dd9f8738046df009fab1c82cd128b004cfca936; C14N-equal to the v1 edit
+m3/tooling/module-packs/build-support/native-api/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob eb4866335e58938d0d8bc8cc65c1965a58e6e5fd; C14N-equal to the v1 edit
+m3/tooling/module-packs/collections/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob d32220a5c0e23a87967f49495ff717be19b8d8fc; C14N-equal to the v1 edit
+m3/tooling/module-packs/cpu-tools/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 481d1bbf7248980a97b4dc6b33cf4b4c48b11dac; C14N-equal to the v1 edit
+m3/tooling/module-packs/jackson/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/tooling/module-packs/parser/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 00c43fabd3cdd478a53dbee921b54f63382702c0; C14N-equal to the v1 edit
+m3/tooling/module-packs/parser/real-providers/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob a57dae329510917e297c9dd2705dab901a430fb0; C14N-equal to the v1 edit
+m3/tooling/module-packs/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 8cefd3a60a93ec32f34aaf3c5bf1c90cfc6617ab; C14N-equal to the v1 edit
+m3/tooling/module-packs/verification/jdk-execution/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 1ae52726aef829994b98a35a37a582242814bfe6; C14N-equal to the v1 edit
+m3/tooling/mr/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 05e1b9c037f8f9973a05269ef81057f0527c4ea1; C14N-equal to the v1 edit
+m3/tooling/netbeans-gap-boundary-20261019/synexia-openrewrite-recipes/recipe-crates/netbeans-gap-boundary-20261019/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob fa2db28dea0d060e8a11782ed8aa8ceb2a1a3a2c; C14N-equal to the v1 edit
+m3/tooling/recipe-agent-api/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 8389ca878c7c19410a7cb6fd62cf44fe419cfe40; C14N-equal to the v1 edit
+m3/tooling/regex-relations-current-owner/sdk/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob d79867bcc09ad6329e12418e15907e54b8ab025f; C14N-equal to the v1 edit
+m3/tooling/region-foundation-repair/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 349e662edc750235426fde364876b98c13c80a4a; C14N-equal to the v1 edit
+m3/tooling/shared-frontend/eclipse-jdt/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 127d2ff000ee90283089c6d50f3c4cb1b89a7dd6; C14N-equal to the v1 edit
+m3/tooling/shared-frontend/openrewrite-runtime/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob b14f03cd56a47bb5872154aaabf23c2b5e03524a; C14N-equal to the v1 edit
+m3/tooling/shared-frontend/openrewrite-tool/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob fbd41dcbda8ad2eb55cb100af0a2a204874980c5; C14N-equal to the v1 edit
+m3/tooling/shared-frontend/openrewrite/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 3407e899d0fbecf4a132cd445c82f3423de2eede; C14N-equal to the v1 edit
+m3/tooling/synexia-jdk-a3-recipes/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 314063bdd07cf5619d28eb96c1f145809e262ece; C14N-equal to the v1 edit
+m3/tooling/tq-sync/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/tooling/tq-sync/source-reactor/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 67f9d07050c93e4268fd6d09b93b6c967a93050b; C14N-equal to the v1 edit
+m3/tooling/tq/pom.xml	1ea378ca6eb0d33f	RETIRED	changed or created after the installer; v1 edit
+m3/tooling/vendor-recipes/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 9d1e9231314b4afc72fafc518e83800566c78df9; C14N-equal to the v1 edit
+m3/tooling/vi/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 01e8886b95a788e03b43a86b7ab6904b2c770bc1; C14N-equal to the v1 edit
+m3/vendor/third_party/HdrHistogram/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 2fce90a048af9c53ec673f3945f9bcb6bcbb3648; C14N-equal to the v1 edit
+m3/vendor/third_party/JavaEWAH/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 087dcb4f76595cc391fa1bd9dd607edb1a4d06c1; C14N-equal to the v1 edit
+m3/vendor/third_party/LatencyUtils/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 7bef156cd848715d6c9b12d1e782216fbfcbe26b; C14N-equal to the v1 edit
+m3/vendor/third_party/agrona/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob b48f893175903dcd5ee7924336424b4971395b45; C14N-equal to the v1 edit
+m3/vendor/third_party/annotations/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 7a3f4dc101b20bfbb6a4d28b206705e3112f6175; C14N-equal to the v1 edit
+m3/vendor/third_party/antlr4-runtime-4.11.1/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 6cfc2be4e87863f90b8c4b6d45c6f322d6facbf1; C14N-equal to the v1 edit
+m3/vendor/third_party/antlr4-runtime-4.13.2/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob f0a84405c2ee539009b866f1e8800786a4a7cf2d; C14N-equal to the v1 edit
+m3/vendor/third_party/apiguardian-api/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob cbeafd81a00611494595a47726b6a807d65f1f11; C14N-equal to the v1 edit
+m3/vendor/third_party/asm-9.10.1/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 26acef3bdb0abeaf8a8d42aeeec19122a814ffa2; C14N-equal to the v1 edit
+m3/vendor/third_party/asm-9.6/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob dfd58246ec95e19657cb7670bae02fa676e14d69; C14N-equal to the v1 edit
+m3/vendor/third_party/asm-analysis/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob b2c06e3be425c191644d13499e269654a63b1d53; C14N-equal to the v1 edit
+m3/vendor/third_party/asm-tree/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob f87bf089141ad36cbe4ce15e5555e12ea4f2644f; C14N-equal to the v1 edit
+m3/vendor/third_party/asm-util/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob d096601be5e29c1ac45e661aad036a7cd0a0d1a4; C14N-equal to the v1 edit
+m3/vendor/third_party/assertj-core/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 3cf41988c9c34d574ba009039d29ca233bd7329f; C14N-equal to the v1 edit
+m3/vendor/third_party/byte-buddy/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 1d777d92942206b708258b2e55fac6affa550669; C14N-equal to the v1 edit
+m3/vendor/third_party/caffeine/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 45b495c5d720712151224464f734017bec06d7d6; C14N-equal to the v1 edit
+m3/vendor/third_party/cglib/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob c79246ee8a6a4f4401109b6fd5f46c76948a9167; C14N-equal to the v1 edit
+m3/vendor/third_party/checker-qual-3.37.0/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob f9a6d89463a89cfc16eb781aa9fac341231224a9; C14N-equal to the v1 edit
+m3/vendor/third_party/checker-qual-3.55.1/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob bcbefda4ba28b046f032f11a1bc9802c73caba52; C14N-equal to the v1 edit
+m3/vendor/third_party/classgraph/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 4d1509c1374d7fa5f51a537d36aa56c9c65fbb43; C14N-equal to the v1 edit
+m3/vendor/third_party/commonmark/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 64406a10d4a29ab1393581f8eb32a7a822938892; C14N-equal to the v1 edit
+m3/vendor/third_party/commons-codec-1.17.1/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 309a09d162197746a3be0e6370928df51ba7c83b; C14N-equal to the v1 edit
+m3/vendor/third_party/commons-codec-1.22.1/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 4ed066d341f210b3cd182c179f1e4ecf1121c1ea; C14N-equal to the v1 edit
+m3/vendor/third_party/commons-compress-1.26.0/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 7a2ea9cfe9436a4797ccfeb0bfb3d8e3fb933893; C14N-equal to the v1 edit
+m3/vendor/third_party/commons-compress-1.27.1/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 4b48bfb2535519ef94188d9e95f82aeb693d6f77; C14N-equal to the v1 edit
+m3/vendor/third_party/commons-csv/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 90ae5821db1d502331185b50c495b5e7741973c3; C14N-equal to the v1 edit
+m3/vendor/third_party/commons-io-2.15.1/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 6d7cf95034486fee9fddc9ff45a8d7abb91c4dcb; C14N-equal to the v1 edit
+m3/vendor/third_party/commons-io-2.18.0/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 41496da2c181568572cdd99b8d9c48a1623d4ede; C14N-equal to the v1 edit
+m3/vendor/third_party/commons-jexl3/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 5c0ade9cbe578033b767bf1eff7b3bfd5aa29363; C14N-equal to the v1 edit
+m3/vendor/third_party/commons-lang3-3.14.0/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 3c32c1149f6a4b6da9f4abea3263b51bbaed9afe; C14N-equal to the v1 edit
+m3/vendor/third_party/commons-lang3-3.17.0/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 62150c4435967f0184de652e5e698871c7101a94; C14N-equal to the v1 edit
+m3/vendor/third_party/commons-logging/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob b46e602a4774911d673ae1cee0d6f1715d757847; C14N-equal to the v1 edit
+m3/vendor/third_party/commons-net/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 398b8723fa68547bcb0d7d99e85fc45c9bdeb25e; C14N-equal to the v1 edit
+m3/vendor/third_party/commons-pool2/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob fc96963cd1a88bb82666851425b7b46e1bf27266; C14N-equal to the v1 edit
+m3/vendor/third_party/commons-text/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 34c0b83bf9e34f685921f3745c49cadfe458218b; C14N-equal to the v1 edit
+m3/vendor/third_party/dec/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob fcc142b4900487767eb80bae5d928960ab7bdb45; C14N-equal to the v1 edit
+m3/vendor/third_party/eclipse-collections-api/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 1ffd3e2aeb241a354ad3f14cd6a20d1ba1b5fb56; C14N-equal to the v1 edit
+m3/vendor/third_party/eclipse-collections/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob bf05eebb63f1e865bc86d32f7d55399c789d6dc3; C14N-equal to the v1 edit
+m3/vendor/third_party/error_prone_annotations/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 99aa663d298668a1ff2dc34a1f0fe6d50e4e06dc; C14N-equal to the v1 edit
+m3/vendor/third_party/failureaccess/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 86741122847f67c1f781b499d605fc58dd211fa2; C14N-equal to the v1 edit
+m3/vendor/third_party/fastdoubleparser-0.9.0/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob a1c9d147e197a8c4ffc7bf18791c0cecd402548e; C14N-equal to the v1 edit
+m3/vendor/third_party/fastdoubleparser-1.0.0/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 62d9664e6d03998bb49e1c812238c66419a90fa5; C14N-equal to the v1 edit
+m3/vendor/third_party/fastdoubleparser-1.0.90/pom.xml	1ea378ca6eb0d33f	KEPT	OWNER_PIN_WITH_PROFILE
+m3/vendor/third_party/fastfilter/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 3f428d35de65d09588010631a984ab9a9d026eb3; C14N-equal to the v1 edit
+m3/vendor/third_party/gizmo/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 44855b9b2ca17c45cf5084f97df899b000cd4fad; C14N-equal to the v1 edit
+m3/vendor/third_party/guava/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 0481cbd4399cddc38669bef2d18eaad04c46e029; C14N-equal to the v1 edit
+m3/vendor/third_party/j2objc-annotations/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 483bb49b6bde9212ec1081a85b6bd6526beaff0e; C14N-equal to the v1 edit
+m3/vendor/third_party/jackson-annotations-2.15.3/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob ce7ff22381787aecc1a9de552021555cd62b0688; C14N-equal to the v1 edit
+m3/vendor/third_party/jackson-annotations-2.16.1/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 9f8201a61ae714b9faa274d6cee04216e2362289; C14N-equal to the v1 edit
+m3/vendor/third_party/jackson-annotations-2.19.2/pom.xml	1ea378ca6eb0d33f	KEPT	OWNER_PIN_WITH_PROFILE
+m3/vendor/third_party/jackson-core-2.15.3/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 7386cc6ecfbbaf33b2734dadd3c9be557f9ce8b2; C14N-equal to the v1 edit
+m3/vendor/third_party/jackson-core-2.16.1/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 0b3260fdc77dee473cb3472aa66cfdc30d259027; C14N-equal to the v1 edit
+m3/vendor/third_party/jackson-core-2.19.2/pom.xml	1ea378ca6eb0d33f	KEPT	OWNER_PIN_WITH_PROFILE
+m3/vendor/third_party/jackson-databind-2.15.3/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 7bc07ad83d3957d9be71d544c8087b5070940a83; C14N-equal to the v1 edit
+m3/vendor/third_party/jackson-databind-2.16.1/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob e141dcd972fbed190c13bd5fa2d09cd180f656ff; C14N-equal to the v1 edit
+m3/vendor/third_party/jackson-databind-2.19.2/pom.xml	1ea378ca6eb0d33f	KEPT	OWNER_PIN_WITH_PROFILE
+m3/vendor/third_party/jackson-dataformat-csv/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob bbccf6da547af4529ab013f7b37bc6754b043980; C14N-equal to the v1 edit
+m3/vendor/third_party/jackson-dataformat-smile/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob beab852548791d385a145363d379e1d842ea1e6d; C14N-equal to the v1 edit
+m3/vendor/third_party/jackson-dataformat-yaml/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 5cffbeb465ce68a8e50a11c2cc4aed478df0054e; C14N-equal to the v1 edit
+m3/vendor/third_party/jackson-datatype-jsr310-2.15.3/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 75528fa93411ecd46d46a602d43bcf5081a7f083; C14N-equal to the v1 edit
+m3/vendor/third_party/jackson-datatype-jsr310-2.16.1/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob f10b6dbdd160bc4239756346d0793183f0b07c4a; C14N-equal to the v1 edit
+m3/vendor/third_party/jackson-module-parameter-names/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob a4b99cc79e1e4847614634293d64cf7d1a613517; C14N-equal to the v1 edit
+m3/vendor/third_party/jandex/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob dd4120b0eb4129d2ddeb82c4c2addec6eab4355b; C14N-equal to the v1 edit
+m3/vendor/third_party/java-object-diff/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 9360964212b0d723e7d95763f0dd084d133e30b1; C14N-equal to the v1 edit
+m3/vendor/third_party/jna-5.14.0/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 0293e224b9230e05996104e2ad93844060ff4607; C14N-equal to the v1 edit
+m3/vendor/third_party/jna-5.18.1/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 98a051fa6b7b00af6f4d8430474d4b244f208e33; C14N-equal to the v1 edit
+m3/vendor/third_party/jna-platform/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob d0ab610250f86fc73aca134dac27e27b522cc070; C14N-equal to the v1 edit
+m3/vendor/third_party/jsoup-1.17.2/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob c301306f1e2b246a7d1567122705578bdbbcfc93; C14N-equal to the v1 edit
+m3/vendor/third_party/jsoup-1.23.2/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 3003a46002fe18b85d8a782ec70dbbc03e7b5376; C14N-equal to the v1 edit
+m3/vendor/third_party/jspecify-0.3.0/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 77bb8430a807d3851ed294083e515ca97c8c03da; C14N-equal to the v1 edit
+m3/vendor/third_party/jspecify-1.0.1/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 6e77a1404d8904e06e641044116246b73b26f4bc; C14N-equal to the v1 edit
+m3/vendor/third_party/jsr305/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob ecab42bef945ed96b92bfd4af036858b278e8040; C14N-equal to the v1 edit
+m3/vendor/third_party/junit-jupiter-5.10.2/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob b3f0e178fb3dea43021adbf59cc036d7f0376463; C14N-equal to the v1 edit
+m3/vendor/third_party/junit-jupiter-5.11.4/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 30efabf4c8c4c8af7f3ae88f1f81339e34ae2ef1; C14N-equal to the v1 edit
+m3/vendor/third_party/junit-jupiter-api-5.10.2/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 58106c10f994253ddcb4213c91dccd8f8e53d522; C14N-equal to the v1 edit
+m3/vendor/third_party/junit-jupiter-api-5.11.4/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 0523468c5cdf0ad35ccb8f81761b42164765819f; C14N-equal to the v1 edit
+m3/vendor/third_party/junit-jupiter-engine-5.10.2/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob afff0d3e4b397ba47189687f10079d63543323fb; C14N-equal to the v1 edit
+m3/vendor/third_party/junit-jupiter-engine-5.11.4/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 1208c7e9df94c8922294874f5245936b00f7d92e; C14N-equal to the v1 edit
+m3/vendor/third_party/junit-jupiter-params-5.10.2/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob c078c4682188c6055c7456de83aae29f63a79480; C14N-equal to the v1 edit
+m3/vendor/third_party/junit-jupiter-params-5.11.4/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 111d41fdc8277b5364d0bdb867c71733b66abebc; C14N-equal to the v1 edit
+m3/vendor/third_party/junit-platform-commons-1.10.2/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 3b3b1266d0a5362308cbc0dfe90426bedc737574; C14N-equal to the v1 edit
+m3/vendor/third_party/junit-platform-commons-1.11.4/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 821c2ff369d6232e868faa109e0c70cdc665bebf; C14N-equal to the v1 edit
+m3/vendor/third_party/junit-platform-engine-1.10.2/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 64fb9850b8232236549096558df92fa95aa8e41b; C14N-equal to the v1 edit
+m3/vendor/third_party/junit-platform-engine-1.11.4/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 39f0d1442de6d134194ed2fc4c539c52f52d46c1; C14N-equal to the v1 edit
+m3/vendor/third_party/junit-platform-launcher-1.10.2/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob b473c4c8dd601e3d58a6847bcbc2e65dd8f55936; C14N-equal to the v1 edit
+m3/vendor/third_party/junit-platform-launcher-1.11.4/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 8b6b7dccd9ca0f400536c777a6565240f2a2d182; C14N-equal to the v1 edit
+m3/vendor/third_party/lucene-analysis-common/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 316fd9d8d9d01cfd747dd2174430f1cc56964bea; C14N-equal to the v1 edit
+m3/vendor/third_party/lucene-core/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob b2e020258dd8fec292e4a35f6fd065dbe9ea4610; C14N-equal to the v1 edit
+m3/vendor/third_party/lucene-queries/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob f4b5b541bdc54251eaee8a32f2eb526b0c05e811; C14N-equal to the v1 edit
+m3/vendor/third_party/lucene-queryparser/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob db561d61d062005d78e9cc15de380a2cc6dacf54; C14N-equal to the v1 edit
+m3/vendor/third_party/lucene-sandbox/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 718881c88ce4700982f5929d7a1eb571a4a0364f; C14N-equal to the v1 edit
+m3/vendor/third_party/lz4-java/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 6d457d54b8245488b3a67fe695b835553b7dec37; C14N-equal to the v1 edit
+m3/vendor/third_party/m3-tooling-shaded/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob c28392d6c779ba72feb361285f161c1accf4701d; C14N-equal to the v1 edit
+m3/vendor/third_party/micrometer-core/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 197b827a7cf119a809ce4c3e56e34e4fb462e62c; C14N-equal to the v1 edit
+m3/vendor/third_party/opennlp-tools/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob aa11c094bba5af9c68a3c40346efd52b8b4fdfb6; C14N-equal to the v1 edit
+m3/vendor/third_party/opentest4j/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob aa3b3f3b67ff08430c31ab535f31c47659bfd441; C14N-equal to the v1 edit
+m3/vendor/third_party/org.eclipse.jgit/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 952d98ca747d8a41fa1f8d975934db9dd60894a4; C14N-equal to the v1 edit
+m3/vendor/third_party/org.osgi.core/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 509216365166dc7052d01126db2972b6a8dcec75; C14N-equal to the v1 edit
+m3/vendor/third_party/pcollections/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 240689fdc0bd967829f9a6a25b7fc968be0c8da2; C14N-equal to the v1 edit
+m3/vendor/third_party/picocli/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob bdde6853d462eb2abb6ceae24d4cb3b555d901f0; C14N-equal to the v1 edit
+m3/vendor/third_party/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 287d47d2c44749f0d4d0cf903002137b11a50a4b; C14N-equal to the v1 edit
+m3/vendor/third_party/re2j/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 7e5d3e23e693e3c0a1ac708c43ea75c220276247; C14N-equal to the v1 edit
+m3/vendor/third_party/rewrite-core/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 9269efac900ad96af9a7148cad7c60324768cdf4; C14N-equal to the v1 edit
+m3/vendor/third_party/rewrite-java-21/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 6be8ba9fdb175354d598dca33ae08f2370067eae; C14N-equal to the v1 edit
+m3/vendor/third_party/rewrite-java/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 2339c206bd40272fd7766cacb01a482f900660cd; C14N-equal to the v1 edit
+m3/vendor/third_party/rewrite-test/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 6e693f1a4336d3f0b1c30bd7a7e4c9b1bfa8137e; C14N-equal to the v1 edit
+m3/vendor/third_party/rewrite-xml/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 07fd39acab996a04fd66b2349106b58f2f8806a2; C14N-equal to the v1 edit
+m3/vendor/third_party/rewrite-yaml/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 8351e53569abaea27bab59e1c9d3d37239c5282b; C14N-equal to the v1 edit
+m3/vendor/third_party/slf4j-api-1.7.36/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob c1aeb4649b61fac31b6dae0158cec696cd7b58fa; C14N-equal to the v1 edit
+m3/vendor/third_party/slf4j-api-2.0.12/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob dabbcd1c71594bf20eea75c6f8285835130f1b28; C14N-equal to the v1 edit
+m3/vendor/third_party/slf4j-api-2.0.9/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob ec1566753b23587db8a33ac9a68fc085d8eb22dc; C14N-equal to the v1 edit
+m3/vendor/third_party/slf4j-simple/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 98a31da15ae48310e7eb9ada9ec1b06bd6c418de; C14N-equal to the v1 edit
+m3/vendor/third_party/snakeyaml-2.1/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob eadc7847f47fc1805de45b8b2662823e24bb186c; C14N-equal to the v1 edit
+m3/vendor/third_party/snakeyaml-2.2/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 4be0bb962fa5c9c05a92c92292febf4590917561; C14N-equal to the v1 edit
+m3/vendor/third_party/snakeyaml-2.6/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 6d9b02b32276a92a4b2266bed482faf19f384e5e; C14N-equal to the v1 edit
+m3/vendor/third_party/snakeyaml-engine/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 4688a78a178d5a7285bf59d3d407173f69831b1a; C14N-equal to the v1 edit
+m3/vendor/third_party/snappy-java/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 7494608703173f2c4d164b95bfbddc22efeeb569; C14N-equal to the v1 edit
+m3/vendor/third_party/sqlite-jdbc-3.45.1.0/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob bdd99d40edefb9485467a733d3286c462bf33ed9; C14N-equal to the v1 edit
+m3/vendor/third_party/sqlite-jdbc-3.51.1.1/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 3460a05ff087e61d104cd9df98df138dd610029b; C14N-equal to the v1 edit
+m3/vendor/third_party/tomlj-1.1.1/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 21bae40cee24c8d5e70ebfae185a514497257859; C14N-equal to the v1 edit
+m3/vendor/third_party/tomlj-1.3.0/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 7880bd41f68898ca5f1ca253bff5437bdb685819; C14N-equal to the v1 edit
+m3/vendor/third_party/univocity-parsers/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 04ad19b0bc5892a8151a49092a9dfe2eeb0612ac; C14N-equal to the v1 edit
+m3/vendor/third_party/xz/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 8907b5b2685a4989a2d25b9a3c922bd1b237ce6d; C14N-equal to the v1 edit
+m3/vendor/third_party/zero-allocation-hashing/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob 888697ec55fab52c71a8040cfd03058cd8d33232; C14N-equal to the v1 edit
+m3/viewport-core/pom.xml	1ea378ca6eb0d33f	RESTORED	installer-parent blob eec2d10c81473252d6c97d141b393d0b24200c3d; C14N-equal to the v1 edit

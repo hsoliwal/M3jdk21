@@ -20,10 +20,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.13.0</version>
         <configuration>
-          <compilerArgs>
-            <arg>-Xlint:all</arg>
-            <arg>-Werror</arg>
-          </compilerArgs>
+          <compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs>
         </configuration>
       </plugin>
       <plugin>
@@ -34,9 +31,7 @@
           <execution>
             <id>verify-source-sealed-rank-recipe</id>
             <phase>verify</phase>
-            <goals>
-              <goal>java</goal>
-            </goals>
+            <goals><goal>java</goal></goals>
             <configuration>
               <mainClass>com.m3.recipe.M3RankIndexRecipe</mainClass>
               <arguments>
