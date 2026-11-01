@@ -55,7 +55,33 @@ one per jackson-core version).
    until then a porcelain commit there (`git add --sparse`, `git commit`) would revert the committed paths. The tool
    reports INDEX_STALE after each commit (`tools/index_free_commit_check.py` checks that), and the GATES.tsv row
    `index_sync` holds the reset: HOLD while H: is under the 350 MB floor.
-8. Hex literals (HEX_ROUTE v1, branch `m3/jdk-number-parse-hex-exact-20261031`; it must land with #2215). The
+8. Decimal exponent clamp (DEC_EXPONENT_CLAMP v1). The review of the stacked hex leaf (#2245) found 480 of
+   200,000 decimal literals that this branch parses differently from stock JDK 21.0.9, all with a clamped exponent
+   number. #2245 fixed it on its own branch (9f6d5f3f9f7); the same change is now here, so #2215 keeps its contract
+   (results exactly the JDK's) without the stacked leaf.
+   - Root cause: `parseDecFloatLiteral` stops accumulating the exponent number once it reaches `MAX_EXPONENT_NUMBER`
+     (1024), so 10240 parses as 1024, and adds the digit counts afterwards: `"0." + 723 zeros + "1e10240"` gave 1e300
+     instead of Infinity, `"1" + 1100 zeros + "e-10240"` about 1e76 instead of 0.0.
+   - Fix, in-file, in the two templates (CharSequence and byte[]): once the exponent number reaches the clamp, both
+     exponents become `DECLINED_EXPONENT` (`Integer.MIN_VALUE`), outside both decimal kernels' range, so the kernel
+     declines and `FloatingDecimal` decides. The text, the gate, the JUnit test and the tools are byte-identical to
+     #2245's, so the stack merges without a code conflict.
+   - Gates (`GATES.tsv`, rows `dec_clamp_*`, run on this branch's images):
+     - JUnit `M3NumberParseDecClampAtomsTest`, one test per atom: 10/10. The pre-image fails 8 of 10.
+     - Decimal differential (`gate/M3DecParseDifferential.java`): 400,000 literals, identical to stock; the pre-image
+       differs on 74,487 lines. The corpus has 274,526 literals with a zero run of 100 or more chars, 135,618 with an
+       integer part of 100 or more digits, and exponent numbers of 5 and 6 digits of both signs (146,239).
+     - The verifier's corpus (seed 0x5EED2245): 480 differences -> 0. `M3ParseDifferential` keeps sha256 233e0f59....
+     - `DEC_BYTECODE_METHOD_DELTA.tsv`: only the two `parseDecFloatLiteral` change, by one decline block.
+     - Perf A/B on a busy host: two ABBA runs at High priority; the first (32 rounds) failed on noise
+       (Double.parseDouble paired median 1.069 while the instance atoms of the changed template measured 0.956 to
+       1.040), the second (64 rounds) passed with 0.986 / 1.014, and the gate over all 96 pairs passes with 1.005 /
+       1.009.
+   - Patterns: `PATTERN_ROUTES.tsv` (NUMBER-PARSE-PATTERN v1.2 rows `HEX`, `DEC`, `DEC_EXPONENT_CLAMP`). Records bound
+     to this branch's images are named `*_PR2215`, so merging into #2245 keeps both sides.
+   - Still open on this branch: the hex path (21,851 of the verifier's 200,000 hex literals differ from stock). #2245
+     routes it (HEX_ROUTE v1).
+9. Hex literals (HEX_ROUTE v1, branch `m3/jdk-number-parse-hex-exact-20261031`; it must land with #2215). The
    jackson-fdp leaf (#2233) found 1,309 hex literals in its 250,000-literal corpus that #2215 rounds differently from
    stock JDK 21.0.9. Its own 600,000-literal differential held only `Double.toHexString` hex literals, at most 14 digits.
    - Atomize: `HEX_ATOMS.tsv` (`tools/hex_atoms.py`) binds the 20 atoms of the hex path to line ranges and hashes.
@@ -85,8 +111,8 @@ one per jackson-core version).
        take about 1.25x stock's time on `toHexString` literals and 1.3x to 1.45x on the mixed hex corpus (`PERF.tsv`),
        because the M3 scan runs before the kernel declines.
    - Patterns: `PATTERN_ROUTES.tsv` (NUMBER-PARSE-PATTERN v1.1 routes, each with its RESIDUE).
-   - Left open by this step: the decimal grammar has the same clamp (`DEC_EXPONENT_CLAMP`). Item 9 fixes it.
-9. Decimal exponent clamp (DEC_EXPONENT_CLAMP v1, same branch). The review of #2245 found 480 of 200,000 decimal
+   - Left open by this step: the decimal grammar has the same clamp (`DEC_EXPONENT_CLAMP`). Item 10 fixes it.
+10. Decimal exponent clamp (DEC_EXPONENT_CLAMP v1, same branch). The review of #2245 found 480 of 200,000 decimal
    literals that #2215 parses differently from stock JDK 21.0.9, all with a clamped exponent number.
    - Atomize: `DEC_ATOMS.tsv` (`tools/hex_atoms.py ... dec`) binds the 16 atoms of the decimal path.
    - Root cause: `parseDecFloatLiteral` stops accumulating the exponent number once it reaches `MAX_EXPONENT_NUMBER`
@@ -112,7 +138,7 @@ one per jackson-core version).
      - Perf A/B, 32 ABBA rounds, host about 90% busy: paired median 1.005 / 1.033, PASS.
    - Patterns: `PATTERN_ROUTES.tsv` v1.2 (rows `DEC`, `DEC_EXPONENT_CLAMP`). The custody record names HEX_ROUTE v1 and
      DEC_EXPONENT_CLAMP v1.
-10. Review fixes for #2245:
+11. Review fixes for #2245:
    - The base moved, so it is merged in (no force push).
    - The generated TSVs carry the SPDX header, written by their generators.
    - The test and gate sources name their numbers and chars: LITERAL_CONSTANTS v1.1 `--kinds=number,char`, 49
