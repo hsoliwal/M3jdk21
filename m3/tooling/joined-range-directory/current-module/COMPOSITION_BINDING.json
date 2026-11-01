@@ -1,0 +1,66 @@
+{
+  "schema": "M3_JOINED_CURRENT_MODULE_COMPOSITION_V1",
+  "sourceRepository": "hsoliwal/com.synexia",
+  "sourceBase": "318736236e27d935ae266d2f5e1bbd6449324497",
+  "targetRepository": "hsoliwal/M3JDK21",
+  "targetBase": "326cf94b1fc914ee4ea089b55415dd4db89f1332",
+  "targetPath": "m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+  "before": {
+    "bytes": 2634,
+    "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
+    "gitBlob": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597"
+  },
+  "after": {
+    "bytes": 3377,
+    "sha256": "d69ef5cc0e4bd5d95808978b4a0d73982322230a623d897074840b58fab1993e",
+    "gitBlob": "4f88f794266375ad8174fa56e952c30d32689877"
+  },
+  "orderedIsolatedSdkStages": [
+    {
+      "sdkPath": "synexia-openrewrite-recipes/tasks/joined-range-directory-20261020/sdk",
+      "sdkTree": "2086a6175e8b573fa340a3458eaa382f11b3378d",
+      "before": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
+      "after": "3edc23c22362b08af00f7332ddc445a0274a6dd4"
+    },
+    {
+      "sdkPath": "synexia-openrewrite-recipes/tasks/joined-fresh-owned-ranges-20261020/sdk",
+      "sdkTree": "0079fba204e2a2820e66c4a83268ca6bb51cd329",
+      "before": "3edc23c22362b08af00f7332ddc445a0274a6dd4",
+      "after": "4f88f794266375ad8174fa56e952c30d32689877"
+    }
+  ],
+  "bridgeBytesEqual": true,
+  "providerIsolationRequired": true,
+  "custodySha256": {
+    "m3/core/src/com/m3/text/M3StringPiece.java": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
+    "m3/core/src/com/m3/text/LocalM3StringPiece.java": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
+    "m3/core/src/com/m3/text/LocalM3Arena.java": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
+    "m3/core/src/com/m3/text/StorageIdentity.java": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
+  },
+  "compositionCpuControls": {
+    "accepted": 1,
+    "refused": 3
+  },
+  "sourceQualificationTask": "synexia-openrewrite-recipes/recipe-crates/m3-joined-current-qualification-20261102/full-module",
+  "runtimeResult": {
+    "path": "proof/RESULT.json",
+    "bytes": 18424,
+    "sha256": "0b0fb51f1bb8a1df06c99c4075b237829b0484ded07968ca85c6368c12ca2762",
+    "gitBlob": "9ebeeb7d8e9425d4cfa387089ea3c78aa4488667"
+  },
+  "freshModule": {
+    "sources": 27,
+    "classes": 83,
+    "unchangedClasses": 82,
+    "nonprivateApiUnchanged": true,
+    "programRuns": 89
+  },
+  "remaining": [
+    "native/Linux tests",
+    "java.base patch tests",
+    "retained heap/lifetime",
+    "cross-platform and whole-JDK qualification",
+    "legacy source-binding repair and CI admission"
+  ],
+  "authority": false
+}
