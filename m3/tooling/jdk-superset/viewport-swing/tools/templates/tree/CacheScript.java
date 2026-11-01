@@ -1,0 +1,1019 @@
+/*
+ * SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+ * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+ */
+// Template of gen_atom_tests.py / gen_atom_perf.py: the generated copy replaces this header.
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.awt.Rectangle;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.VarHandle;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Random;
+import java.util.Set;
+
+import javax.swing.event.TreeModelEvent;
+import javax.swing.event.TreeModelListener;
+import javax.swing.tree.AbstractLayoutCache;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.DefaultTreeSelectionModel;
+import javax.swing.tree.FixedHeightLayoutCache;
+import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
+import javax.swing.tree.TreeSelectionModel;
+import javax.swing.tree.VariableHeightLayoutCache;
+
+import sun.swing.tree.M3FixedHeightLayoutCache;
+import sun.swing.tree.M3VariableHeightLayoutCache;
+
+/**
+ * Patterns LIFECYCLE / MODEL_EVENT / INDEX_MAPPING / RANGE_WINDOW / ITERATION_ORDER / AGGREGATE_PREFIX: the M3 tree
+ * layout caches against the stock {@code FixedHeightLayoutCache} and {@code VariableHeightLayoutCache} they mirror,
+ * on one {@code DefaultTreeModel} whose events are forwarded to both (as {@code BasicTreeUI}'s handler does), each
+ * cache with its own {@code DefaultTreeSelectionModel}. Seeded scripts expand, collapse, insert, remove, change and
+ * restructure nodes, toggle the root, change row heights, invalidate sizes and select paths; every few steps the full
+ * answer set is compared (every row's path, row, bounds, expanded state, visible child count; fresh, handed-out and
+ * removed paths; enumerations to their end and past it; closest paths; preferred sizes; rows for paths; selection
+ * rows), the other steps compare a window of rows as a viewport does. Node heights depend on the depth only, so a
+ * {@code nodesChanged} never changes a height (upstream defect D1 of the stock variable cache cannot arise); user
+ * objects are unique (no equal siblings); node hashes collide on purpose. Exceptions are compared by class.
+ */
+final class CacheScript {
+
+    enum Kind { FIXED, VARIABLE }
+
+    enum Shape { NORMAL, WIDE, DEEP, LARGE, SMALL }
+
+    static final int STEPS = 100;
+    static final int FULL_EVERY = 10;
+    static final int WINDOW_ROWS = 24;
+    static final int MAX_DEPTH = 3;
+    static final int MAX_KIDS = 5;
+    static final int WIDE_MIN = 20;
+    static final int WIDE_RANGE = 30;
+    static final int DEEP_LEVELS = 9;
+    static final int LARGE_KIDS = 12;
+    static final int MAX_BATCH = 3;
+    static final int INDENT = 19;
+    static final int BASE_WIDTH = 20;
+    static final int WIDTH_RANGE = 61;
+    static final int WIDTH_MUL = 37;
+    static final int EXPANDED_EXTRA = 3;
+    static final int BASE_HEIGHT = 12;
+    static final int HEIGHT_RANGE = 5;
+    static final int HASH_BUCKETS = 7;
+    static final int[] FIXED_HEIGHTS = {16, 20, 17, 1};
+    static final int[] VARIABLE_HEIGHTS = {0, 0, 16, 20};
+    static final int PROBE_PATHS = 12;
+    static final int ENUM_STARTS = 5;
+    static final int BEYOND_Y = 10000;
+    static final int SELECT_MAX = 4;
+    static final int HANDED_MAX = 64;
+    static final int MAP_KEYS = 200;
+    static final int FENWICK_MAX = 70;
+    static final int MIX_SAMPLE = 1 << 16;
+    static final int SCAN_MAX = 40;
+    static final int TRIALS = 30;
+    static final int MAX_VALUE_DELTA = 9;
+
+    /** Op weights, in the order of {@link #step}: expand, collapse, insert, remove, change, structure, root,
+     *  row height, invalidate, stale size, set model, node dimensions, select, query. */
+    enum Mix {
+        EXPAND_COLLAPSE(6, 4, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 2),
+        EDITS(3, 1, 5, 5, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1),
+        CHANGES(3, 1, 1, 1, 6, 0, 1, 0, 1, 0, 0, 0, 1, 1),
+        STRUCTURE(3, 1, 1, 1, 1, 4, 1, 0, 0, 0, 2, 0, 1, 1),
+        QUERIES(4, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 6),
+        WINDOW(4, 2, 1, 1, 1, 0, 2, 2, 1, 0, 0, 0, 0, 4),
+        VISIBLE_FROM(5, 2, 2, 2, 1, 1, 2, 0, 0, 0, 0, 0, 0, 4),
+        SIZES(4, 2, 1, 1, 2, 0, 1, 2, 3, 2, 0, 2, 0, 2),
+        ROOT(4, 2, 1, 1, 1, 0, 5, 1, 0, 0, 0, 0, 2, 2),
+        /** Invalid sizes exist only after an invalidation, in loaded subtrees that are collapsed, with variable heights. */
+        INVALID(5, 4, 1, 1, 1, 0, 1, 0, 4, 1, 0, 1, 0, 2),
+        MIXED(2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2);
+
+        final int[] weights;
+
+        Mix(int... weights) {
+            this.weights = weights;
+        }
+    }
+
+    record Scenario(Mix mix, Shape shape) {
+    }
+
+    /** A tree node whose hash collides with others on purpose; equality stays identity. */
+    static final class HNode extends DefaultMutableTreeNode {
+        final int id;
+
+        HNode(int id) {
+            super(new Label(id));
+            this.id = id;
+        }
+
+        @Override
+        public int hashCode() {
+            return id % HASH_BUCKETS;
+        }
+    }
+
+    /** User object: a unique id and a size epoch (a renderer change). */
+    static final class Label {
+        final int id;
+        int epoch;
+
+        Label(int id) {
+            this.id = id;
+        }
+
+        @Override
+        public String toString() {
+            return "n" + id + "." + epoch;
+        }
+    }
+
+    /** Deterministic node sizes: x from the depth, width from the label, height from the depth only. */
+    static final class Dims extends AbstractLayoutCache.NodeDimensions {
+        @Override
+        public Rectangle getNodeDimensions(Object value, int row, int depth, boolean expanded, Rectangle r) {
+            Label l = (Label) ((DefaultMutableTreeNode) value).getUserObject();
+            int w = BASE_WIDTH + Math.floorMod(l.id * WIDTH_MUL + l.epoch, WIDTH_RANGE) + (expanded ? EXPANDED_EXTRA : 0);
+            int h = BASE_HEIGHT + depth % HEIGHT_RANGE;
+            Rectangle out = r == null ? new Rectangle() : r;
+            out.setBounds(depth * INDENT, 0, w, h);
+            return out;
+        }
+    }
+
+    static final class Side {
+        final AbstractLayoutCache cache;
+        final DefaultTreeSelectionModel sel = new DefaultTreeSelectionModel();
+
+        Side(AbstractLayoutCache cache) {
+            this.cache = cache;
+            sel.setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
+        }
+    }
+
+    /** An exception outcome, compared by class. */
+    record Thrown(Class<?> type) {
+    }
+
+    interface Query {
+        Object ask(AbstractLayoutCache c) throws Exception;
+    }
+
+    interface Op {
+        void run(Side s) throws Exception;
+    }
+
+    final Kind kind;
+    final Random rnd;
+    DefaultTreeModel model;
+    final Side stock;
+    final Side m3;
+    final List<TreePath> removed = new ArrayList<>();
+    final List<TreePath> handed = new ArrayList<>();
+    final TreeModelListener forward = new Forward();
+    int ids;
+    int rebuildsExpected;
+    int compares;
+    int step;
+
+    CacheScript(Kind kind, String atom, Shape shape) {
+        this.kind = kind;
+        rnd = AtomSupport.random(kind + "/" + atom);
+        model = new DefaultTreeModel(tree(shape));
+        stock = new Side(kind == Kind.FIXED ? new FixedHeightLayoutCache() : new VariableHeightLayoutCache());
+        m3 = new Side(kind == Kind.FIXED ? new M3FixedHeightLayoutCache() : new M3VariableHeightLayoutCache());
+        int[] heights = kind == Kind.FIXED ? FIXED_HEIGHTS : VARIABLE_HEIGHTS;
+        int rh = heights[rnd.nextInt(heights.length)];
+        boolean rv = rnd.nextBoolean();
+        for (Side s : sides()) {
+            s.cache.setNodeDimensions(new Dims());
+            s.cache.setRowHeight(rh);
+            s.cache.setRootVisible(rv);
+            s.cache.setSelectionModel(s.sel);
+            s.cache.setModel(model);
+        }
+        rebuildsExpected = 1;
+        model.addTreeModelListener(forward);
+    }
+
+    Side[] sides() {
+        return new Side[] {stock, m3};
+    }
+
+    // ---- trees -------------------------------------------------------------------------------------------------
+
+    HNode node() {
+        return new HNode(ids++);
+    }
+
+    HNode tree(Shape shape) {
+        HNode root = node();
+        switch (shape) {
+            case WIDE -> {
+                grow(root, 0, MAX_DEPTH - 1);
+                HNode wide = root.getChildCount() > 0 && rnd.nextBoolean() ? (HNode) root.getChildAt(0) : root;
+                for (int i = WIDE_MIN + rnd.nextInt(WIDE_RANGE); i > 0; i--) {
+                    HNode k = node();
+                    wide.add(k);
+                    if (rnd.nextInt(MAX_KIDS) == 0) {
+                        grow(k, MAX_DEPTH - 1, MAX_DEPTH);
+                    }
+                }
+            }
+            case DEEP -> {
+                HNode n = root;
+                for (int level = 0; level < DEEP_LEVELS; level++) {
+                    HNode next = node();
+                    n.add(next);
+                    if (rnd.nextBoolean()) {
+                        n.add(node());
+                    }
+                    n = next;
+                }
+                n.add(node());
+            }
+            case LARGE -> {
+                for (int i = 0; i < LARGE_KIDS; i++) {
+                    HNode k = node();
+                    root.add(k);
+                    grow(k, 1, MAX_DEPTH);
+                }
+            }
+            case SMALL -> {
+                if (rnd.nextBoolean()) {
+                    root.add(node());
+                }
+            }
+            default -> grow(root, 0, MAX_DEPTH);
+        }
+        return root;
+    }
+
+    void grow(HNode n, int depth, int maxDepth) {
+        if (depth >= maxDepth) {
+            return;
+        }
+        int kids = rnd.nextInt(depth == 0 ? MAX_KIDS + 2 : MAX_KIDS);
+        for (int i = 0; i < kids; i++) {
+            HNode k = node();
+            n.add(k);
+            grow(k, depth + 1, maxDepth);
+        }
+    }
+
+    List<HNode> nodes() {
+        List<HNode> out = new ArrayList<>();
+        Object root = model.getRoot();
+        if (root != null) {
+            for (Enumeration<TreeNode> e = ((HNode) root).preorderEnumeration(); e.hasMoreElements();) {
+                out.add((HNode) e.nextElement());
+            }
+        }
+        return out;
+    }
+
+    static TreePath pathOf(DefaultMutableTreeNode n) {
+        return new TreePath(n.getPath());
+    }
+
+    TreePath randomPath() {
+        List<HNode> all = nodes();
+        int pick = rnd.nextInt(4);
+        if (pick == 0 && !handed.isEmpty()) {
+            return handed.get(rnd.nextInt(handed.size()));
+        }
+        if (pick == 1 && !removed.isEmpty()) {
+            return removed.get(rnd.nextInt(removed.size()));
+        }
+        return all.isEmpty() ? null : pathOf(all.get(rnd.nextInt(all.size())));
+    }
+
+    // ---- both sides ------------------------------------------------------------------------------------------
+
+    final class Forward implements TreeModelListener {
+        @Override
+        public void treeNodesChanged(TreeModelEvent e) {
+            both("treeNodesChanged", s -> s.cache.treeNodesChanged(e));
+        }
+
+        @Override
+        public void treeNodesInserted(TreeModelEvent e) {
+            both("treeNodesInserted", s -> s.cache.treeNodesInserted(e));
+        }
+
+        @Override
+        public void treeNodesRemoved(TreeModelEvent e) {
+            both("treeNodesRemoved", s -> s.cache.treeNodesRemoved(e));
+        }
+
+        @Override
+        public void treeStructureChanged(TreeModelEvent e) {
+            both("treeStructureChanged", s -> s.cache.treeStructureChanged(e));
+        }
+    }
+
+    static Object outcome(Side s, Op op) {
+        try {
+            op.run(s);
+            return "ok";
+        } catch (Exception | Error e) {
+            return new Thrown(e.getClass());
+        }
+    }
+
+    /** Runs {@code op} on both sides; the outcomes must be the same and, in a script, normal. */
+    void both(String what, Op op) {
+        Object a = outcome(stock, op);
+        Object b = outcome(m3, op);
+        assertEquals(a, b, "step " + step + " " + what + ": outcome");
+        assertEquals("ok", a, "step " + step + " " + what + ": both threw");
+    }
+
+    static Object ask(AbstractLayoutCache c, Query q) {
+        try {
+            Object v = q.ask(c);
+            return v instanceof int[] a ? Arrays.toString(a) : v;
+        } catch (Exception | Error e) {
+            return new Thrown(e.getClass());
+        }
+    }
+
+    void same(String what, Query q) {
+        assertEquals(ask(stock.cache, q), ask(m3.cache, q), "step " + step + " " + what);
+    }
+
+    // ---- the comparison --------------------------------------------------------------------------------------------
+
+    /** Every query of one path, with the same path instance on both sides. */
+    void samePath(String what, TreePath p) {
+        same(what + " getRowForPath " + p, c -> c.getRowForPath(p));
+        same(what + " isExpanded " + p, c -> c.isExpanded(p));
+        same(what + " getExpandedState " + p, c -> c.getExpandedState(p));
+        same(what + " getVisibleChildCount " + p, c -> c.getVisibleChildCount(p));
+        same(what + " getBounds " + p, c -> c.getBounds(p, null));
+        same(what + " getBounds(placeIn) " + p, c -> {
+            Rectangle in = new Rectangle();
+            Rectangle out = c.getBounds(p, in);
+            return out == null ? "null" : (out == in ? "fills placeIn " : "new ") + out;
+        });
+    }
+
+    static List<Object> enumerate(Enumeration<TreePath> e, int limit) {
+        List<Object> out = new ArrayList<>();
+        if (e == null) {
+            out.add("null enumeration");
+            return out;
+        }
+        while (e.hasMoreElements() && out.size() < limit) {
+            out.add(e.nextElement());
+        }
+        if (!e.hasMoreElements()) {
+            try {
+                e.nextElement();
+                out.add("no exception past the end");
+            } catch (NoSuchElementException expected) {
+                out.add("NoSuchElementException");
+            } catch (RuntimeException other) {
+                out.add(other.getClass().getName());
+            }
+        }
+        return out;
+    }
+
+    void sameEnumeration(String what, TreePath p, int limit) {
+        same(what + " getVisiblePathsFrom " + p, c -> enumerate(c.getVisiblePathsFrom(p), limit));
+    }
+
+    void compare(boolean full) {
+        compares++;
+        int rows = stock.cache.getRowCount();
+        assertEquals(rows, m3.cache.getRowCount(), "step " + step + " rows");
+        int from = full || rows <= WINDOW_ROWS ? 0 : rnd.nextInt(rows - WINDOW_ROWS + 1);
+        int to = full ? rows : Math.min(rows, from + WINDOW_ROWS);
+        for (int r = from; r < to; r++) {
+            final int row = r;
+            TreePath pa = stock.cache.getPathForRow(r);
+            TreePath pb = m3.cache.getPathForRow(r);
+            assertEquals(pa, pb, "step " + step + " path of row " + r);
+            assertEquals(r, m3.cache.getRowForPath(pb), "step " + step + " row of the path of row " + r);
+            same("row of path of row " + row, c -> c.getRowForPath(c.getPathForRow(row)));
+            samePath("row " + r, pb);
+            if (handed.size() < HANDED_MAX) {
+                handed.add(pb);
+            }
+        }
+        same("getPathForRow(-1)", c -> c.getPathForRow(-1));
+        same("getPathForRow(rows)", c -> c.getPathForRow(rows));
+        for (int i = 0; i < (full ? PROBE_PATHS : PROBE_PATHS / 4); i++) {
+            TreePath p = randomPath();
+            if (p != null) {
+                samePath("probe", p);
+            }
+        }
+        samePath("null", null);
+        int limit = full ? Integer.MAX_VALUE : WINDOW_ROWS;
+        for (int i = 0; i < (full ? ENUM_STARTS : 1); i++) {
+            TreePath p = rows > 0 && rnd.nextBoolean() ? m3.cache.getPathForRow(rnd.nextInt(rows)) : randomPath();
+            sameEnumeration("enumeration", p, limit);
+        }
+        if (model.getRoot() != null) {
+            sameEnumeration("from the root", pathOf((HNode) model.getRoot()), limit);
+        }
+        int lastY = rows == 0 ? 0 : stock.cache.getBounds(stock.cache.getPathForRow(rows - 1), null) == null ? 0
+                : stock.cache.getBounds(stock.cache.getPathForRow(rows - 1), null).y;
+        for (int y : new int[] {-1, 0, 1, lastY / 2, lastY, lastY + 1, lastY + BEYOND_Y, Integer.MIN_VALUE / 2}) {
+            same("getPathClosestTo y " + y, c -> c.getPathClosestTo(0, y));
+        }
+        if (full) {
+            same("getPreferredHeight", AbstractLayoutCache::getPreferredHeight);
+            same("getPreferredWidth", c -> c.getPreferredWidth(null));
+            TreePath[] sample = new TreePath[ENUM_STARTS];
+            for (int i = 0; i < sample.length; i++) {
+                sample[i] = randomPath();
+            }
+            same("getRowsForPaths", c -> c.getRowsForPaths(sample));
+            same("getRowsForPaths(null)", c -> c.getRowsForPaths(null));
+        }
+        assertEquals(sortedRows(stock.sel), sortedRows(m3.sel), "step " + step + " selection rows");
+        assertEquals(stock.sel.getLeadSelectionRow(), m3.sel.getLeadSelectionRow(), "step " + step + " lead row");
+        assertEquals(paths(stock.sel), paths(m3.sel), "step " + step + " selection paths");
+    }
+
+    static String sortedRows(DefaultTreeSelectionModel sel) {
+        int[] rows = sel.getSelectionRows();
+        if (rows == null) {
+            return "null";
+        }
+        int[] copy = rows.clone();
+        Arrays.sort(copy);
+        return Arrays.toString(copy);
+    }
+
+    static Set<TreePath> paths(DefaultTreeSelectionModel sel) {
+        TreePath[] p = sel.getSelectionPaths();
+        return p == null ? Set.of() : new HashSet<>(Arrays.asList(p));
+    }
+
+    // ---- script --------------------------------------------------------------------------------------------------
+
+    void step(Mix mix) {
+        int total = Arrays.stream(mix.weights).sum();
+        int op = rnd.nextInt(total);
+        int k = 0;
+        while (op >= mix.weights[k]) {
+            op -= mix.weights[k++];
+        }
+        List<HNode> all = nodes();
+        if (all.isEmpty() && k < 6) {
+            setRoot();
+            return;
+        }
+        switch (k) {
+            case 0 -> expand(true);
+            case 1 -> expand(false);
+            case 2 -> insert(all);
+            case 3 -> remove(all);
+            case 4 -> change(all, true);
+            case 5 -> structure(all);
+            case 6 -> {
+                boolean v = !stock.cache.isRootVisible();
+                both("setRootVisible " + v, s -> s.cache.setRootVisible(v));
+            }
+            case 7 -> {
+                int[] heights = kind == Kind.FIXED ? FIXED_HEIGHTS : VARIABLE_HEIGHTS;
+                int h = heights[rnd.nextInt(heights.length)];
+                both("setRowHeight " + h, s -> s.cache.setRowHeight(h));
+            }
+            case 8 -> {
+                if (rnd.nextBoolean()) {
+                    both("invalidateSizes", s -> s.cache.invalidateSizes());
+                } else {
+                    TreePath p = randomPath();
+                    both("invalidatePathBounds " + p, s -> s.cache.invalidatePathBounds(p));
+                }
+                same("getPreferredWidth right after an invalidation", c -> c.getPreferredWidth(null));
+            }
+            case 9 -> {
+                if (!all.isEmpty()) {
+                    ((Label) all.get(rnd.nextInt(all.size())).getUserObject()).epoch++;
+                }
+            }
+            case 10 -> setModel();
+            case 11 -> both("setNodeDimensions", s -> s.cache.setNodeDimensions(new Dims()));
+            case 12 -> select();
+            default -> {
+            }
+        }
+    }
+
+    void expand(boolean expand) {
+        TreePath p = randomPath();
+        if (p != null) {
+            both("setExpandedState " + p + " " + expand, s -> s.cache.setExpandedState(p, expand));
+        }
+    }
+
+    void insert(List<HNode> all) {
+        HNode parent = all.get(rnd.nextInt(all.size()));
+        if (rnd.nextBoolean()) {
+            model.insertNodeInto(node(), parent, rnd.nextInt(parent.getChildCount() + 1));
+        } else {
+            List<HNode> added = new ArrayList<>();
+            for (int k = 1 + rnd.nextInt(MAX_BATCH); k > 0; k--) {
+                HNode n = node();
+                if (rnd.nextBoolean()) {
+                    grow(n, MAX_DEPTH - 1, MAX_DEPTH);
+                }
+                parent.insert(n, rnd.nextInt(parent.getChildCount() + 1));
+                added.add(n);
+            }
+            int[] idx = added.stream().mapToInt(parent::getIndex).sorted().toArray();
+            model.nodesWereInserted(parent, idx);
+        }
+    }
+
+    void remove(List<HNode> all) {
+        if (all.size() < 2) {
+            insert(all);
+            return;
+        }
+        HNode victim = all.get(1 + rnd.nextInt(all.size() - 1));
+        HNode parent = (HNode) victim.getParent();
+        if (rnd.nextBoolean()) {
+            removed.add(pathOf(victim));
+            model.removeNodeFromParent(victim);
+        } else {
+            List<Integer> chosen = new ArrayList<>();
+            for (int i = 0; i < parent.getChildCount(); i++) {
+                if (rnd.nextInt(MAX_BATCH) == 0 || parent.getChildAt(i) == victim) {
+                    chosen.add(i);
+                }
+            }
+            int[] idx = chosen.stream().mapToInt(Integer::intValue).toArray();
+            Object[] children = new Object[idx.length];
+            for (int i = 0; i < idx.length; i++) {
+                children[i] = parent.getChildAt(idx[i]);
+                removed.add(pathOf((HNode) children[i]));
+            }
+            for (int i = idx.length - 1; i >= 0; i--) {
+                parent.remove(idx[i]);
+            }
+            model.nodesWereRemoved(parent, idx, children);
+        }
+    }
+
+    void change(List<HNode> all, boolean event) {
+        HNode n = all.get(rnd.nextInt(all.size()));
+        if (rnd.nextBoolean()) {
+            ((Label) n.getUserObject()).epoch++;
+        } else {
+            n.setUserObject(new Label(ids++));
+        }
+        if (!event) {
+            return;
+        }
+        TreeNode parent = n.getParent();
+        if (parent == null || rnd.nextBoolean()) {
+            model.nodeChanged(n);
+        } else {
+            List<Integer> idx = new ArrayList<>();
+            for (int i = 0; i < parent.getChildCount(); i++) {
+                if (parent.getChildAt(i) == n || rnd.nextInt(MAX_BATCH) == 0) {
+                    idx.add(i);
+                }
+            }
+            model.nodesChanged(parent, idx.stream().mapToInt(Integer::intValue).toArray());
+        }
+    }
+
+    void structure(List<HNode> all) {
+        if (rnd.nextInt(MAX_KIDS * 2) == 0) {
+            setRoot();
+            return;
+        }
+        HNode n = all.get(rnd.nextInt(all.size()));
+        for (int i = 0; i < n.getChildCount(); i++) {
+            removed.add(pathOf((HNode) n.getChildAt(i)));
+        }
+        n.removeAllChildren();
+        grow(n, MAX_DEPTH - 1, MAX_DEPTH + (rnd.nextBoolean() ? 1 : 0));
+        if (n.isRoot()) {
+            rebuildsExpected++;
+            if (rnd.nextBoolean()) {
+                model.reload();
+                return;
+            }
+        }
+        model.nodeStructureChanged(n);
+    }
+
+    void setRoot() {
+        HNode root = rnd.nextInt(MAX_KIDS) == 0 ? null : tree(Shape.NORMAL);
+        Object old = model.getRoot();
+        model.setRoot(root);
+        if (root != null || old != null) {
+            rebuildsExpected++;
+        }
+    }
+
+    void setModel() {
+        if (rnd.nextBoolean()) {
+            model.removeTreeModelListener(forward);
+            model = new DefaultTreeModel(tree(Shape.NORMAL));
+            model.addTreeModelListener(forward);
+        }
+        DefaultTreeModel m = model;
+        both("setModel", s -> s.cache.setModel(m));
+        rebuildsExpected++;
+    }
+
+    void select() {
+        int rows = stock.cache.getRowCount();
+        List<TreePath> chosen = new ArrayList<>();
+        for (int k = rnd.nextInt(SELECT_MAX + 1); k > 0; k--) {
+            TreePath p = rows > 0 && rnd.nextInt(MAX_BATCH) != 0 ? stock.cache.getPathForRow(rnd.nextInt(rows)) : randomPath();
+            if (p != null) {
+                chosen.add(p);
+            }
+        }
+        TreePath[] paths = chosen.toArray(new TreePath[0]);
+        both("setSelectionPaths", s -> s.sel.setSelectionPaths(paths));
+    }
+
+    void run(Mix mix, int steps) {
+        compare(true);
+        for (step = 1; step <= steps; step++) {
+            step(mix);
+            compare(step % FULL_EVERY == 0);
+        }
+        compare(true);
+        if (m3.cache instanceof M3FixedHeightLayoutCache f) {
+            assertEquals(rebuildsExpected, f.rebuilds(), "full rebuilds: setModel and structure changes of the root");
+        } else {
+            assertEquals(rebuildsExpected, ((M3VariableHeightLayoutCache) m3.cache).rebuilds(), "full rebuilds");
+        }
+    }
+
+    // ---- single-atom scenarios -----------------------------------------------------------------------------------
+
+    /** A new cache: no model, no root, no rows; then a model, a model without a root, and the empty model. */
+    void initialState() {
+        AbstractLayoutCache freshStock = kind == Kind.FIXED ? new FixedHeightLayoutCache() : new VariableHeightLayoutCache();
+        AbstractLayoutCache freshM3 = kind == Kind.FIXED ? new M3FixedHeightLayoutCache() : new M3VariableHeightLayoutCache();
+        TreePath p = pathOf((HNode) model.getRoot());
+        Query[] queries = {AbstractLayoutCache::getRowCount, c -> c.getPathForRow(0), c -> c.getRowForPath(p),
+            c -> c.getBounds(p, null), c -> c.isExpanded(p), c -> c.getVisiblePathsFrom(p) == null,
+            c -> c.getPathClosestTo(0, 0), AbstractLayoutCache::getPreferredHeight, c -> c.getPreferredWidth(null),
+            AbstractLayoutCache::getRowHeight, AbstractLayoutCache::isRootVisible, c -> c.getVisibleChildCount(p)};
+        for (Query q : queries) {
+            assertEquals(ask(freshStock, q), ask(freshM3, q), "a new cache answers as the stock one");
+        }
+        assertEquals(ask(freshStock, c -> {
+            c.setExpandedState(p, true);
+            return "ok";
+        }), ask(freshM3, c -> {
+            c.setExpandedState(p, true);
+            return "ok";
+        }), "setExpandedState without a model");
+        for (DefaultTreeModel m : new DefaultTreeModel[] {null, new DefaultTreeModel(null), model}) {
+            for (AbstractLayoutCache c : new AbstractLayoutCache[] {freshStock, freshM3}) {
+                c.setNodeDimensions(new Dims());
+                c.setModel(m);
+            }
+            for (Query q : queries) {
+                assertEquals(ask(freshStock, q), ask(freshM3, q), "model " + m);
+            }
+        }
+        run(Mix.MIXED, STEPS / 2);
+    }
+
+    /**
+     * Collapse of a visible node whose subtree holds invalid sizes: a child X was loaded and collapsed again, every
+     * size was invalidated (only the visible rows are measured again), then X's parent collapses.
+     */
+    void invalidCollapse() {
+        both("variable row heights", s -> s.cache.setRowHeight(0));
+        HNode x = null;
+        for (HNode n : nodes()) {
+            if (n.getLevel() >= 2 && n.getChildCount() > 0) {
+                x = n;
+                break;
+            }
+        }
+        if (x == null) {
+            x = (HNode) ((HNode) model.getRoot()).getFirstLeaf();
+            model.insertNodeInto(node(), x, 0);
+        }
+        TreePath px = pathOf(x);
+        TreePath pp = px.getParentPath();
+        both("expand X", s -> s.cache.setExpandedState(px, true));
+        both("collapse X (stays loaded)", s -> s.cache.setExpandedState(px, false));
+        both("expand X's parent", s -> s.cache.setExpandedState(pp, true));
+        both("invalidateSizes", s -> s.cache.invalidateSizes());
+        compare(true);
+        both("collapse X's parent", s -> s.cache.setExpandedState(pp, false));
+        compare(true);
+        run(Mix.INVALID, STEPS);
+    }
+
+    void rowHeightContract() {
+        run(Mix.WINDOW, STEPS);
+        if (kind == Kind.FIXED) {
+            for (int bad : new int[] {0, -1}) {
+                assertThrows(IllegalArgumentException.class, () -> stock.cache.setRowHeight(bad));
+                assertThrows(IllegalArgumentException.class, () -> m3.cache.setRowHeight(bad), "the fixed cache needs rows > 0");
+            }
+            compare(true);
+        }
+    }
+
+    void setModelEdges() {
+        run(Mix.STRUCTURE, STEPS / 2);
+        both("setModel(null)", s -> s.cache.setModel(null));
+        rebuildsExpected++;
+        compare(true);
+        DefaultTreeModel empty = new DefaultTreeModel(null);
+        both("setModel(no root)", s -> s.cache.setModel(empty));
+        rebuildsExpected++;
+        compare(true);
+        DefaultTreeModel m = model;
+        both("setModel(back)", s -> s.cache.setModel(m));
+        rebuildsExpected++;
+        run(Mix.STRUCTURE, STEPS / 2);
+    }
+
+    /** Events naming child indices the model does not have: both caches fail with the same exception class. */
+    void badEventIndex() {
+        run(Mix.EXPAND_COLLAPSE, STEPS / 2);
+        HNode root = (HNode) model.getRoot();
+        both("expand the root", s -> s.cache.setExpandedState(pathOf(root), true));
+        int bad = root.getChildCount() + MAX_VALUE_DELTA;
+        TreeModelEvent e = new TreeModelEvent(model, pathOf(root), new int[] {bad}, new Object[] {node()});
+        for (String what : new String[] {"treeNodesChanged", "treeNodesRemoved"}) {
+            Op op = "treeNodesChanged".equals(what) ? s -> s.cache.treeNodesChanged(e) : s -> s.cache.treeNodesRemoved(e);
+            Object a = outcome(stock, op);
+            Object b = outcome(m3, op);
+            assertEquals(a, b, what + " with child index " + bad);
+            if (kind == Kind.VARIABLE) {
+                assertEquals(new Thrown(ArrayIndexOutOfBoundsException.class), b, "an index beyond the loaded children");
+            }
+            both("rebuild after " + what, s -> s.cache.setModel(model));
+            rebuildsExpected++;
+        }
+    }
+
+    /** A model that answers a null child: both caches fail with the same exception class. */
+    void nullChild() {
+        HNode root = node();
+        HNode parent = node();
+        root.add(parent);
+        parent.add(node());
+        DefaultTreeModel bad = new DefaultTreeModel(root) {
+            @Override
+            public Object getChild(Object p, int index) {
+                return p == parent ? null : super.getChild(p, index);
+            }
+        };
+        for (Side s : sides()) {
+            s.cache.setModel(bad);
+        }
+        Op op = s -> s.cache.setExpandedState(new TreePath(new Object[] {root, parent}), true);
+        Object a = outcome(stock, op);
+        Object b = outcome(m3, op);
+        assertEquals(a, b, "a null child");
+        assertEquals(new Thrown(NullPointerException.class), b, "Null child not allowed");
+    }
+
+    // ---- white-box checks of private atoms ------------------------------------------------------------------------
+
+    /** The open-addressing path map (linear probing, backward-shift deletion) against a HashMap. */
+    static void pathMapContract(Kind kind, String atom) {
+        Class<?> owner = kind == Kind.FIXED ? M3FixedHeightLayoutCache.class : M3VariableHeightLayoutCache.class;
+        AbstractLayoutCache cache = kind == Kind.FIXED ? new M3FixedHeightLayoutCache() : new M3VariableHeightLayoutCache();
+        MethodHandle slot = AtomSupport.virtual(owner, "mapSlot", int.class, TreePath.class);
+        MethodHandle get = AtomSupport.virtual(owner, "mapGet", int.class, TreePath.class);
+        MethodHandle put = AtomSupport.virtual(owner, "mapPut", void.class, TreePath.class, int.class);
+        MethodHandle remove = AtomSupport.virtual(owner, "mapRemove", void.class, TreePath.class, int.class);
+        VarHandle keys = AtomSupport.field(owner, "mapKeys", TreePath[].class);
+        VarHandle size = AtomSupport.field(owner, "mapSize", int.class);
+        Random rnd = AtomSupport.random(kind + "/" + atom);
+        Map<TreePath, Integer> oracle = new HashMap<>();
+        List<TreePath> present = new ArrayList<>();
+        HNode root = new HNode(0);
+        int nextId = 1;
+        for (int step = 0; step < MAP_KEYS * 2; step++) {
+            if (present.isEmpty() || rnd.nextInt(3) != 0) {
+                HNode n = new HNode(nextId);
+                root.add(n);
+                TreePath p = new TreePath(new Object[] {root, n});
+                AtomSupport.call(put, cache, p, nextId);
+                oracle.put(p, nextId++);
+                present.add(p);
+            } else {
+                TreePath p = present.remove(rnd.nextInt(present.size()));
+                AtomSupport.call(remove, cache, p, oracle.remove(p));
+            }
+            int length = ((TreePath[]) keys.get(cache)).length;
+            assertEquals(oracle.size(), (int) size.get(cache), "map size");
+            assertTrue((int) size.get(cache) * 2 <= length, "load factor at most one half");
+            assertEquals(Integer.bitCount(length), 1, "a power-of-two table");
+            for (TreePath p : present) {
+                TreePath copy = new TreePath(p.getPath());
+                int s = (int) AtomSupport.call(slot, cache, p);
+                assertEquals(s, (int) AtomSupport.call(slot, cache, copy), "equal paths share their home slot");
+                assertTrue(s >= 0 && s < length);
+                assertEquals(oracle.get(p), (Integer) AtomSupport.call(get, cache, copy), "mapGet by an equal path");
+            }
+            HNode absent = new HNode(-1 - step);
+            assertEquals(0, (int) AtomSupport.call(get, cache, new TreePath(new Object[] {root, absent})), "absent path");
+        }
+    }
+
+    /** {@code add}, {@code prefix}, {@code build}: the Fenwick trees against plain prefix sums. */
+    static void fenwickStatics(String atom) {
+        MethodHandle add = AtomSupport.statik(M3VariableHeightLayoutCache.class, "add", void.class, int[].class, int.class,
+                int.class, int.class);
+        MethodHandle prefix = AtomSupport.statik(M3VariableHeightLayoutCache.class, "prefix", int.class, int[].class, int.class);
+        MethodHandle build = AtomSupport.statik(M3VariableHeightLayoutCache.class, "build", void.class, int[].class, int.class);
+        Random rnd = AtomSupport.random(atom);
+        assertEquals(0, (int) AtomSupport.call(prefix, null, FENWICK_MAX), "no tree: no rows");
+        for (int trial = 0; trial < TRIALS; trial++) {
+            int n = rnd.nextInt(FENWICK_MAX);
+            int[] values = new int[n];
+            int[] t = new int[n + 1];
+            for (int i = 0; i < n; i++) {
+                values[i] = rnd.nextInt(MAX_VALUE_DELTA * MAX_VALUE_DELTA);
+                t[i + 1] = values[i];
+            }
+            AtomSupport.call(build, t, n);
+            for (int step = 0; step <= n; step++) {
+                int sum = 0;
+                for (int i = 0; i < n; i++) {
+                    if (i < step) {
+                        sum += values[i];
+                    }
+                }
+                assertEquals(sum, (int) AtomSupport.call(prefix, t, step), atom + ": prefix " + step + " of " + n);
+                if (n > 0) {
+                    int i = rnd.nextInt(n);
+                    int d = rnd.nextInt(2 * MAX_VALUE_DELTA + 1) - MAX_VALUE_DELTA;
+                    AtomSupport.call(add, t, n, i, d);
+                    values[i] += d;
+                }
+            }
+        }
+    }
+
+    /** {@code mix} is a bijection, {@code scan} finds the last equal entry, {@code buildLookup} files every entry once. */
+    static void hashStatics(String atom) {
+        MethodHandle mix = AtomSupport.statik(M3VariableHeightLayoutCache.class, "mix", int.class, int.class);
+        MethodHandle scan = AtomSupport.statik(M3VariableHeightLayoutCache.class, "scan", int.class, Object[].class, int.class,
+                Object.class);
+        MethodHandle lookup = AtomSupport.statik(M3VariableHeightLayoutCache.class, "buildLookup", int[].class, Object[].class,
+                int.class);
+        Random rnd = AtomSupport.random(atom);
+        Set<Integer> images = new HashSet<>();
+        for (int i = 0; i < MIX_SAMPLE; i++) {
+            int x = i * MIX_SAMPLE + rnd.nextInt(MIX_SAMPLE);
+            int h = (int) AtomSupport.call(mix, x);
+            assertEquals(h, (int) AtomSupport.call(mix, x), "deterministic");
+            images.add(h);
+        }
+        assertEquals(MIX_SAMPLE, images.size(), "mixing introduces no collisions");
+        for (int trial = 0; trial < TRIALS; trial++) {
+            int n = 1 + rnd.nextInt(SCAN_MAX);
+            Object[] v = new Object[n + MAX_BATCH];
+            for (int i = 0; i < v.length; i++) {
+                v[i] = Integer.valueOf(rnd.nextInt(n));
+            }
+            for (int probe = 0; probe < n; probe++) {
+                Object o = Integer.valueOf(rnd.nextInt(n + 1));
+                assertEquals(Arrays.asList(v).subList(0, n).lastIndexOf(o), (int) AtomSupport.call(scan, v, n, o),
+                        "the last of the first n entries equal to " + o);
+            }
+            int[] t = (int[]) AtomSupport.call(lookup, v, n);
+            assertEquals(Integer.highestOneBit(n) << 2, t.length, "four slots per highest bit: load below one half");
+            int mask = t.length - 1;
+            List<Integer> filed = new ArrayList<>();
+            for (int s = 0; s < t.length; s++) {
+                if (t[s] != 0) {
+                    filed.add(t[s] - 1);
+                    int home = (int) AtomSupport.call(mix, v[t[s] - 1].hashCode()) & mask;
+                    for (int j = home; j != s; j = (j + 1) & mask) {
+                        assertTrue(t[j] != 0, "entry " + (t[s] - 1) + " reachable from its home slot by probing");
+                    }
+                }
+            }
+            Collections.sort(filed);
+            List<Integer> all = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                all.add(i);
+            }
+            assertEquals(all, filed, "every entry filed exactly once");
+        }
+    }
+
+    static void checkChildStatic() {
+        MethodHandle h = AtomSupport.statik(M3VariableHeightLayoutCache.class, "checkChild", Object.class, Object.class);
+        Object child = new Object();
+        assertSame(child, AtomSupport.call(h, child), "a child is returned as is");
+        NullPointerException e = assertThrows(NullPointerException.class, () -> AtomSupport.call(h, (Object) null));
+        assertEquals("Null child not allowed", e.getMessage(), "the message of TreePath.pathByAddingChild(null)");
+    }
+
+    // ---- per-atom checks --------------------------------------------------------------------------------------------
+
+    static Scenario scenario(String name) {
+        return switch (name) {
+            case "Visible" -> new Scenario(Mix.VISIBLE_FROM, Shape.NORMAL);
+            case "hasMoreElements", "nextElement", "getVisiblePathsFrom" -> new Scenario(Mix.VISIBLE_FROM, Shape.LARGE);
+            case "findNextValidParent" -> new Scenario(Mix.VISIBLE_FROM, Shape.DEEP);
+            case "updateNextIndex" -> new Scenario(Mix.EXPAND_COLLAPSE, Shape.DEEP);
+            case "expanded", "is", "set", "setExpandedState", "ensurePathIsExpanded", "expand", "collapse", "isExpanded",
+                    "getExpandedState", "changeTot", "propagate", "visible", "bubble", "markDirty", "rebuildFenwick",
+                    "fenwick", "fenwickAdd", "fenwickPrefix" ->
+                    new Scenario(Mix.EXPAND_COLLAPSE, Shape.NORMAL);
+            case "makeVisible" -> new Scenario(Mix.EXPAND_COLLAPSE, Shape.DEEP);
+            case "subtreeMax", "maxNodeWidth", "getPreferredWidth", "getPreferredHeight" ->
+                    new Scenario(Mix.SIZES, Shape.NORMAL);
+            case "refreshVisible", "validateReverse" -> new Scenario(Mix.INVALID, Shape.LARGE);
+            case "treeNodesInserted", "treeNodesRemoved", "childInserted", "childRemoved", "insertSlot", "removeSlot",
+                    "newState", "unmap", "insertLane", "removeLane", "laneCountChanged", "reindex", "addState",
+                    "removeState", "dropLookup", "load", "slotForModelIndex", "lowerBound", "childNode", "stateAt",
+                    "lanes" -> new Scenario(Mix.EDITS, Shape.NORMAL);
+            case "newNode", "grow", "growNodes" -> new Scenario(Mix.EDITS, Shape.LARGE);
+            case "treeNodesChanged", "repath", "updateSize", "setSize", "validX", "validW", "prefHeight" ->
+                    new Scenario(Mix.CHANGES, Shape.NORMAL);
+            case "treeStructureChanged" -> new Scenario(Mix.STRUCTURE, Shape.NORMAL);
+            case "getRowForPath", "getPathForRow", "getBounds", "getVisibleChildCount", "rowOfNode", "rowOfChild",
+                    "boundsOfNode", "boundsOfChild", "boundsAt", "descend", "childValue", "startOffset", "resolve",
+                    "resolveParent", "walk", "rowOf", "locate", "find", "pathAt", "childIndex", "yOrigin", "getRowCount" ->
+                    new Scenario(Mix.QUERIES, Shape.NORMAL);
+            case "hashed", "childIndex0" -> new Scenario(Mix.QUERIES, Shape.WIDE);
+            case "getPathClosestTo", "rowContainingY" -> new Scenario(Mix.WINDOW, Shape.NORMAL);
+            case "invalidateSizes", "invalidatePathBounds", "deepInvalidate", "updateNodeSizes", "walkUpdate",
+                    "addInvalid", "setNodeDimensions" -> new Scenario(Mix.SIZES, Shape.NORMAL);
+            case "setRootVisible" -> new Scenario(Mix.ROOT, Shape.NORMAL);
+            default -> null;
+        };
+    }
+
+    static void check(Kind kind, String owner, String name) {
+        switch (name) {
+            case "M3FixedHeightLayoutCache", "M3VariableHeightLayoutCache" ->
+                    new CacheScript(kind, name, Shape.SMALL).initialState();
+            case "mapSlot", "mapGet", "mapPut", "mapRemove" -> {
+                pathMapContract(kind, name);
+                new CacheScript(kind, name, Shape.WIDE).run(Mix.MIXED, STEPS);
+            }
+            case "add", "prefix", "build" -> {
+                fenwickStatics(name);
+                new CacheScript(kind, name, Shape.LARGE).run(Mix.EXPAND_COLLAPSE, STEPS);
+            }
+            case "mix", "scan", "buildLookup" -> {
+                hashStatics(name);
+                new CacheScript(kind, name, Shape.WIDE).run(Mix.QUERIES, STEPS);
+            }
+            case "checkChild" -> {
+                checkChildStatic();
+                new CacheScript(kind, name, Shape.NORMAL).nullChild();
+            }
+            case "checkIndex" -> new CacheScript(kind, name, Shape.NORMAL).badEventIndex();
+            case "validateDescendants" -> new CacheScript(kind, name, Shape.LARGE).invalidCollapse();
+            case "rebuilds", "rebuild" -> new CacheScript(kind, name, Shape.NORMAL).run(Mix.STRUCTURE, STEPS);
+            case "setModel" -> new CacheScript(kind, name, Shape.NORMAL).setModelEdges();
+            case "setRowHeight" -> new CacheScript(kind, name, Shape.NORMAL).rowHeightContract();
+            default -> {
+                Scenario sc = scenario(name);
+                if (sc == null) {
+                    fail("no check for " + owner + "#" + name);
+                }
+                CacheScript script = new CacheScript(kind, owner + "#" + name, sc.shape());
+                if (sc.mix() == Mix.INVALID && kind == Kind.VARIABLE) {
+                    script.both("variable row heights", s -> s.cache.setRowHeight(0));
+                }
+                script.run(sc.mix(), STEPS);
+            }
+        }
+    }
+}
