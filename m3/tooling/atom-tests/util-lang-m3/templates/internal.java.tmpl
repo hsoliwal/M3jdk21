@@ -1,0 +1,193 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+//@@ IMPORTS
+import java.lang.reflect.Proxy;
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+//@@ CONSTANTS
+    private static final long SEED = 0x4D33_494E_544CL;
+    private static final int[] LENGTHS = {0, 1, 2, 3, 7, 64, 65, 500};
+    private static final int NARROW = 40;
+    private static final int OPS_PAST_PAGE = 70;
+//@@ HELPERS
+    /** Deterministic int vectors: narrow (dense path), wide (sparse path) and extreme values. */
+    static List<int[]> vectors() {
+        List<int[]> out = new ArrayList<>();
+        Random r = new Random(SEED);
+        for (int n : LENGTHS) {
+            out.add(IntStream.range(0, n).map(i -> r.nextInt(NARROW) - NARROW / 2).toArray());
+            out.add(IntStream.range(0, n).map(i -> r.nextInt()).toArray());
+        }
+        out.add(new int[] {0, Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE + 2, Integer.MAX_VALUE - 2});
+        out.add(new int[] {Integer.MIN_VALUE, Integer.MIN_VALUE + 1, Integer.MAX_VALUE, Integer.MAX_VALUE - 1});
+        out.add(new int[] {5, 5, 7, 9, 10});
+        return out;
+    }
+
+    /** Oracle: values occurring once with neither neighbour present, in input order (HashMap counts). */
+    static int[] lonelyOracle(int[] values, int offset, int length) {
+        Map<Long, Integer> counts = new HashMap<>();
+        for (int i = offset; i < offset + length; i++) {
+            counts.merge((long) values[i], 1, Integer::sum);
+        }
+        return IntStream.range(offset, offset + length).map(i -> values[i])
+                .filter(v -> counts.get((long) v) == 1 && !counts.containsKey(v - 1L) && !counts.containsKey(v + 1L))
+                .toArray();
+    }
+
+    /** A java.lang.reflect.Proxy implementing the private M3PipelinePlan.Sink, recording accepted values. */
+    static Object sink(List<Object> seen) throws ClassNotFoundException {
+        Class<?> type = Class.forName("jdk.internal.util.M3PipelinePlan" + "$" + "Sink");
+        return Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type}, (proxy, method, args) -> {
+            assertEquals("accept", method.getName());
+            seen.add(args[0]);
+            return null;
+        });
+    }
+//@@ PATTERN PRIVATE_THROWING_CONSTRUCTOR | uses= | oracle=AssertionError from the private constructor
+    /** ${atom}(): the only constructor is private and refuses instantiation with an AssertionError. */
+    @Test
+    void ${test}() throws Throwable {
+        Constructor<?>[] declared = OWNER.constructors();
+        assertEquals(1, declared.length);
+        assertTrue(Modifier.isPrivate(declared[0].getModifiers()));
+        assertEquals("${message}", assertThrows(AssertionError.class, () -> OWNER.constructor("${atom}", 0).invoke()).getMessage());
+    }
+//@@ PATTERN INT_LONELY | uses= | oracle=HashMap-count lonely-number oracle in input order
+    /** ${atom}(${lonely_doc}) returns the lonely numbers of the range in input order. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", ${arity});
+        for (int[] values : vectors()) {
+            if (values.length == 0) {
+                continue;
+            }
+            int offset = values.length > 2 ? 1 : 0;
+            int length = values.length - offset;
+            int min = IntStream.of(values).skip(offset).min().getAsInt();
+            long width = (long) IntStream.of(values).skip(offset).max().getAsInt() - min + 1;
+            if (${skip}) {
+                continue;
+            }
+            assertArrayEquals(lonelyOracle(values, offset, length), (int[]) atom.invoke(${lonely_args}),
+                    "${atom} " + java.util.Arrays.toString(values));
+        }
+    }
+//@@ PATTERN BIT_TEST | uses= | oracle=java.util.BitSet.valueOf(words).get(index)
+    /** ${atom}(words, index) tests one bit of a little-endian long[] bitmap, exactly as java.util.BitSet. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 2);
+        long[] words = new Random(SEED).longs(LENGTHS.length).toArray();
+        words[0] |= 1L | Long.MIN_VALUE;
+        BitSet oracle = BitSet.valueOf(words);
+        for (int index = 0; index < words.length * Long.SIZE; index++) {
+            assertEquals(oracle.get(index), (boolean) atom.invoke(words, index), "${atom}(" + index + ")");
+        }
+    }
+//@@ PATTERN INT_TABLE_CAPACITY | uses= | oracle=smallest power of two >= 2 * length; OOME past the cap
+    /** ${atom}(length) is the smallest power of two at least 2 * length (at least 2), up to MAX_HASH_CAPACITY. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 1);
+        int cap = (int) OWNER.constant("MAX_HASH_CAPACITY");
+        for (int length : new int[] {0, 1, 2, 3, 5, 64, 65, cap / 2}) {
+            long needed = Math.max(2L, 2L * length);
+            long expected = Long.highestOneBit(needed - 1) << 1;
+            assertEquals(expected == 1 ? 2 : expected, (long) (int) atom.invoke(length), "${atom}(" + length + ")");
+        }
+        assertThrows(OutOfMemoryError.class, () -> atom.invoke(cap / 2 + 1));
+    }
+//@@ PATTERN INT_HASH_SLOT | uses= | oracle=java.util.HashSet membership over an open-addressing table
+    /** ${atom}(...): linear-probing slots are stable per value and membership matches java.util.HashSet. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle find = OWNER.method("findSlot", 4);
+        MethodHandle contains = OWNER.method("contains", 4);
+        for (int[] values : vectors()) {
+            int capacity = (int) OWNER.method("tableCapacity", 1).invoke(values.length);
+            int[] keys = new int[capacity];
+            byte[] state = new byte[capacity];
+            Set<Integer> oracle = new HashSet<>();
+            for (int v : values) {
+                int slot = (int) find.invoke(keys, state, capacity - 1, v);
+                if (state[slot] == 0) {
+                    keys[slot] = v;
+                    state[slot] = 1;
+                } else {
+                    assertEquals(v, keys[slot], "an occupied slot holds the value");
+                }
+                assertEquals(slot, (int) find.invoke(keys, state, capacity - 1, v), "findSlot is stable");
+                oracle.add(v);
+            }
+            for (int probe : IntStream.concat(IntStream.of(values), IntStream.of(values).map(v -> v + 1)).toArray()) {
+                assertEquals(oracle.contains(probe), (boolean) contains.invoke(keys, state, capacity - 1, probe),
+                        "contains(" + probe + ")");
+            }
+        }
+    }
+//@@ PATTERN PIPE_CONSTRUCTOR | uses= | oracle=empty plan is the identity pipeline
+    /** ${atom}(source, pages, filterMask, size): an empty operation table yields the source unchanged. */
+    @Test
+    void ${test}() throws Throwable {
+        List<Integer> source = IntStream.range(0, NARROW).boxed().toList();
+        Object plan = OWNER.constructor("${atom}", 4).invoke(source, new Object[0][], new long[0], 0);
+        assertEquals(source, OWNER.method("toList", 0).invoke(plan));
+    }
+//@@ PATTERN PIPE_APPEND | uses= | oracle=java.util.stream filter/map pipeline; persistence across appends
+    /** ${atom}(operation, filter) returns a new plan (pages persistent) equal to the matching stream pipeline. */
+    @Test
+    void ${test}() throws Throwable {
+        MethodHandle atom = OWNER.method("${atom}", 2);
+        List<Integer> source = IntStream.range(0, NARROW).boxed().toList();
+        Object empty = OWNER.method("from", 1).invoke(source);
+        Predicate<Integer> odd = v -> (v & 1) == 1;
+        Function<Integer, Integer> inc = v -> v + 1;
+        Object filtered = atom.invoke(empty, odd, true);
+        Object mapped = atom.invoke(filtered, inc, false);
+        assertEquals(source, OWNER.method("toList", 0).invoke(empty), "${atom} leaves the original plan unchanged");
+        assertEquals(source.stream().filter(odd).toList(), OWNER.method("toList", 0).invoke(filtered));
+        assertEquals(source.stream().filter(odd).map(inc).toList(), OWNER.method("toList", 0).invoke(mapped));
+        Object deep = empty;
+        for (int i = 0; i < OPS_PAST_PAGE; i++) {
+            deep = atom.invoke(deep, inc, false);
+        }
+        assertEquals(source.stream().map(v -> v + OPS_PAST_PAGE).toList(), OWNER.method("toList", 0).invoke(deep),
+                "operations past one 64-lane page");
+    }
+//@@ PATTERN PIPE_TRAVERSE | uses= | oracle=java.util.stream order of surviving values
+    /** ${atom}(sink) pushes each surviving, mapped value to the sink once, in source order. */
+    @Test
+    void ${test}() throws Throwable {
+        List<Integer> source = IntStream.range(0, NARROW).boxed().toList();
+        Object plan = OWNER.method("from", 1).invoke(source);
+        plan = OWNER.method("filter", 1).invoke(plan, (Predicate<Integer>) v -> v % 3 != 0);
+        plan = OWNER.method("map", 1).invoke(plan, (Function<Integer, Integer>) v -> v * 2);
+        List<Object> seen = new ArrayList<>();
+        OWNER.method("${atom}", 1).invoke(plan, sink(seen));
+        assertEquals(source.stream().filter(v -> v % 3 != 0).map(v -> v * 2).collect(Collectors.toList()), seen);
+    }
+//@@ PATTERN PIPE_SINK_ACCEPT | uses= | oracle=one accept call per surviving value
+    /** ${atom}(value) is invoked once per surviving value; a filter that rejects everything never calls it. */
+    @Test
+    void ${test}() throws Throwable {
+        List<Integer> source = IntStream.range(0, NARROW).boxed().toList();
+        Object plan = OWNER.method("filter", 1).invoke(OWNER.method("from", 1).invoke(source),
+                (Predicate<Integer>) v -> false);
+        List<Object> seen = new ArrayList<>();
+        OWNER.method("traverse", 1).invoke(plan, sink(seen));
+        assertEquals(List.of(), seen, "no value survives, ${atom} is never called");
+        Object sinkInstance = sink(seen);
+        new Access("jdk.internal.util.M3PipelinePlan$$Sink").method("${atom}", 1).invoke(sinkInstance, "direct");
+        assertEquals(List.of("direct"), seen);
+    }

@@ -1,0 +1,37 @@
+test_class	owner	atom	pattern	params
+M3StringCodePointPrecomputeAtomsTest	java.lang.M3StringCodePointPrecompute	*	CLASS	{"summary": "Per-atom contracts of java.lang.M3StringCodePointPrecompute against java.lang.String code point APIs (generated, template strings)"}
+M3StringCodePointPrecomputeAtomsTest	java.lang.M3StringCodePointPrecompute	M3StringCodePointPrecompute	PRIVATE_UTILITY_CONSTRUCTOR	{}
+M3StringCodePointPrecomputeAtomsTest	java.lang.M3StringCodePointPrecompute	prepare	CP_PREPARE	{}
+M3StringCodePointPrecomputeAtomsTest	java.lang.M3StringCodePointPrecompute	maximumRetainedPrimitiveBytes	CP_MAX_RETAINED	{}
+M3StringCodePointPrecomputeAtomsTest	java.lang.M3StringCodePointPrecompute	slot	CP_SLOT	{}
+M3StringCodePointPrecomputeAtomsTest	java.lang.M3StringCodePointPrecompute	lowerBound	CP_LOWER_BOUND	{}
+M3StringCodePointPrecomputeAtomsTest	java.lang.M3StringCodePointPrecompute	Geometry	CP_GEOMETRY_CONSTRUCTOR	{}
+M3StringCodePointPrecomputeAtomsTest	java.lang.M3StringCodePointPrecompute	codePointCount	CP_CODE_POINT_COUNT	{}
+M3StringCodePointPrecomputeAtomsTest	java.lang.M3StringCodePointPrecompute	offsetByCodePoints	CP_OFFSET_BY_CODE_POINTS	{}
+M3StringCodePointPrecomputeAtomsTest	java.lang.M3StringCodePointPrecompute	pairedLowCount	CP_PAIRED_LOW_COUNT	{}
+M3StringCodePointPrecomputeAtomsTest	java.lang.M3StringCodePointPrecompute	retainedPrimitiveBytes	CP_RETAINED_BYTES	{}
+M3StringCodePointPrecomputeAtomsTest	java.lang.M3StringCodePointPrecompute	Entry	CP_ENTRY_CONSTRUCTOR	{}
+M3StringLeafCursorAtomsTest	java.lang.M3StringLeafCursor	*	CLASS	{"summary": "Per-atom contracts of java.lang.M3StringLeafCursor: leaf ranges reassemble the source text (generated, template strings)"}
+M3StringLeafCursorAtomsTest	java.lang.M3StringLeafCursor	M3StringLeafCursor	LEAF_CONSTRUCTOR	{"test": "constructorOne", "arity": "2", "leaf_args_doc": "source, coalesce", "leaf_expect_doc": "the source", "leaf_args": "source, coalesce", "leaf_expect": "left + right"}
+M3StringLeafCursorAtomsTest	java.lang.M3StringLeafCursor	M3StringLeafCursor	LEAF_CONSTRUCTOR	{"test": "constructorTwo", "arity": "3", "leaf_args_doc": "first, second, coalesce", "leaf_expect_doc": "first then second", "leaf_args": "source, m3(right), coalesce", "leaf_expect": "left + right + right"}
+M3StringLeafCursorAtomsTest	java.lang.M3StringLeafCursor	M3StringLeafCursor	LEAF_CONSTRUCTOR	{"test": "constructorOwnerRange", "arity": "4", "leaf_args_doc": "owner, start, count, coalesce", "leaf_expect_doc": "the owner range", "leaf_args": "OWNER_OF.invoke(source), 1, (left + right).length() - 2, coalesce", "leaf_expect": "(left + right).substring(1, (left + right).length() - 1)"}
+M3StringLeafCursorAtomsTest	java.lang.M3StringLeafCursor	next	LEAF_NEXT	{}
+M3StringLeafCursorAtomsTest	java.lang.M3StringLeafCursor	owner	LEAF_ACCESSOR	{}
+M3StringLeafCursorAtomsTest	java.lang.M3StringLeafCursor	start	LEAF_ACCESSOR	{}
+M3StringLeafCursorAtomsTest	java.lang.M3StringLeafCursor	length	LEAF_ACCESSOR	{}
+M3StringLeafCursorAtomsTest	java.lang.M3StringLeafCursor	push	LEAF_PUSH	{}
+M3StringLeafCursorAtomsTest	java.lang.M3StringLeafCursor	pullRaw	LEAF_PULL_RAW	{}
+M3StringBuilderLaneAtomsTest	java.lang.M3StringBuilderLane	*	CLASS	{"summary": "Per-atom contracts of java.lang.M3StringBuilderLane against java.lang.StringBuilder (generated, template strings)"}
+M3StringBuilderLaneAtomsTest	java.lang.M3StringBuilderLane	M3StringBuilderLane	LANE_CONSTRUCTOR	{}
+M3StringBuilderLaneAtomsTest	java.lang.M3StringBuilderLane	push	LANE_PUSH	{}
+M3StringBuilderLaneAtomsTest	java.lang.M3StringBuilderLane	grow	LANE_GROW	{}
+M3StringBuilderLaneAtomsTest	java.lang.M3StringBuilderLane	charAt	LANE_CHAR_AT	{}
+M3StringBuilderLaneAtomsTest	java.lang.M3StringBuilderLane	flatCharAt	LANE_FLAT_CHAR_AT	{}
+M3StringBuilderLaneAtomsTest	java.lang.M3StringBuilderLane	reserve	LANE_RESERVE	{}
+M3StringBuilderLaneAtomsTest	java.lang.M3StringBuilderLane	reserveLogical	LANE_RESERVE_LOGICAL	{}
+M3StringBuilderLaneAtomsTest	java.lang.M3StringBuilderLane	logicalCoder	LANE_LOGICAL_CODER	{}
+M3StringBuilderLaneAtomsTest	java.lang.M3StringBuilderLane	copyOut	LANE_COPY_OUT	{}
+M3StringBuilderLaneAtomsTest	java.lang.M3StringBuilderLane	copyFlat	LANE_COPY_FLAT	{}
+M3StringBuilderLaneAtomsTest	java.lang.M3StringBuilderLane	detached	LANE_DETACHED	{}
+M3StringBuilderLaneAtomsTest	java.lang.M3StringBuilderLane	compose	LANE_COMPOSE	{}
+M3StringBuilderLaneAtomsTest	java.lang.M3StringBuilderLane	pieceCount	LANE_PIECE_COUNT	{}

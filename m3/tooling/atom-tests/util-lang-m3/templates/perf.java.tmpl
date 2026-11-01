@@ -1,0 +1,103 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+//@@ IMPORTS
+import java.lang.invoke.MethodType;
+import java.lang.management.ManagementFactory;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ProgressMonitor;
+import java.util.function.IntBinaryOperator;
+import java.util.stream.IntStream;
+//@@ CONSTANTS
+    /** Interleaved measurement: WARMUP discarded rounds, then ROUNDS measured rounds of OPS calls each. */
+    private static final int WARMUP = Integer.getInteger("m3.perf.warmup", 30);
+    private static final int ROUNDS = Integer.getInteger("m3.perf.rounds", 15);
+    private static final int OPS = Integer.getInteger("m3.perf.ops", 2000);
+    private static final int SMALL = 24;
+    private static final int LARGE = 1000;
+    private static final long SEED = 0x4D33_5045_5246L;
+    private static final int E_ACUTE = 0xE9;
+    private static final int EMOJI = 0x1F600;
+    private static final String PERF_OUT = System.getProperty("m3.perf.out");
+    private static final Access CONTEXT = new Access("java.util.M3SortContext");
+//@@ HELPERS
+    /** A handle adapted to an exact type over public classes, for constant invokeExact call sites. */
+    static MethodHandle exact(MethodHandle h, MethodType erased) {
+        return h.asType(erased);
+    }
+
+    static Object context(int[] keys) {
+        try {
+            IntBinaryOperator byKey = (x, y) -> Integer.compare(keys[x], keys[y]);
+            return CONTEXT.constructor("M3SortContext", 2).invoke(byKey, (ProgressMonitor) null);
+        } catch (Throwable e) {
+            throw new AssertionError(e);
+        }
+    }
+
+    static int[] randomKeys(int n) {
+        Random r = new Random(SEED ^ n);
+        return IntStream.range(0, n).map(i -> r.nextInt(n)).toArray();
+    }
+
+    static Integer[] boxedLabels(int n) {
+        return IntStream.range(0, n).boxed().toArray(Integer[]::new);
+    }
+
+    static double median(long[] values) {
+        long[] sorted = values.clone();
+        Arrays.sort(sorted);
+        return sorted.length % 2 == 1 ? sorted[sorted.length / 2]
+                : (sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2.0;
+    }
+
+    /** One PERF row: median ns/op of the M3 atom and of its JDK baseline, with the host load. */
+    static void report(String owner, String atom, String baseline, long[] m3, long[] jdk) throws Exception {
+        double m3Ns = median(m3) / OPS;
+        double jdkNs = median(jdk) / OPS;
+        double cpu = ((com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean()).getCpuLoad();
+        String row = String.join("\t", owner, atom, String.format("%.2f", m3Ns), baseline, String.format("%.2f", jdkNs),
+                String.format("%.3f", m3Ns / jdkNs), String.format("%.3f", cpu),
+                Integer.toString(Runtime.getRuntime().availableProcessors()), WARMUP + "/" + ROUNDS + "/" + OPS);
+        System.out.println("PERF\t" + row);
+        if (PERF_OUT != null) {
+            Files.writeString(Path.of(PERF_OUT), row + System.lineSeparator(), StandardOpenOption.CREATE,
+                    StandardOpenOption.APPEND);
+        }
+        assertTrue(m3Ns > 0 && jdkNs > 0, "measured " + atom);
+    }
+//@@ PATTERN PERF_LOOP | uses= | oracle=same checksum as the JDK baseline; interleaved invokeExact timing
+    private static final MethodHandle ${handle} = exact(${resolve}, ${erased});
+
+    /** ${atom}: invokeExact timing interleaved with ${baseline}; both must produce the same checksum. */
+    @Test
+    void ${test}() throws Throwable {
+        ${setup}
+        long[] m3Nanos = new long[ROUNDS];
+        long[] jdkNanos = new long[ROUNDS];
+        long check = 0;
+        long jdkCheck = 0;
+        for (int round = -WARMUP; round < ROUNDS; round++) {
+            long t0 = System.nanoTime();
+            for (int op = 0; op < OPS; op++) {
+                ${m3_op}
+            }
+            long t1 = System.nanoTime();
+            for (int op = 0; op < OPS; op++) {
+                ${jdk_op}
+            }
+            long t2 = System.nanoTime();
+            if (round >= 0) {
+                m3Nanos[round] = t1 - t0;
+                jdkNanos[round] = t2 - t1;
+            }
+        }
+        assertEquals(jdkCheck, check, "${atom} and ${baseline} agree");
+        report(OWNER.type.getSimpleName(), "${atom}", "${baseline}", m3Nanos, jdkNanos);
+    }

@@ -1,0 +1,17 @@
+test_class	owner	atom	pattern	params
+M3IntAlgorithmsAtomsTest	jdk.internal.m3.M3IntAlgorithms	*	CLASS	{"summary": "Per-atom contracts of jdk.internal.m3.M3IntAlgorithms private atoms against HashMap/HashSet/BitSet oracles (generated, template internal)"}
+M3IntAlgorithmsAtomsTest	jdk.internal.m3.M3IntAlgorithms	M3IntAlgorithms	PRIVATE_THROWING_CONSTRUCTOR	{"message": "no instances"}
+M3IntAlgorithmsAtomsTest	jdk.internal.m3.M3IntAlgorithms	lonelyDense	INT_LONELY	{"arity": "5", "lonely_doc": "values, offset, length, minimum, width", "lonely_args": "values, offset, length, min, (int) width", "skip": "width > (int) OWNER.constant(\"MAX_DENSE_DOMAIN\")"}
+M3IntAlgorithmsAtomsTest	jdk.internal.m3.M3IntAlgorithms	lonelySparse	INT_LONELY	{"arity": "3", "lonely_doc": "values, offset, length", "lonely_args": "values, offset, length", "skip": "false"}
+M3IntAlgorithmsAtomsTest	jdk.internal.m3.M3IntAlgorithms	hasBit	BIT_TEST	{}
+M3IntAlgorithmsAtomsTest	jdk.internal.m3.M3IntAlgorithms	tableCapacity	INT_TABLE_CAPACITY	{}
+M3IntAlgorithmsAtomsTest	jdk.internal.m3.M3IntAlgorithms	findSlot	INT_HASH_SLOT	{"test": "findSlot"}
+M3IntAlgorithmsAtomsTest	jdk.internal.m3.M3IntAlgorithms	contains	INT_HASH_SLOT	{"test": "contains"}
+M3IOAtomsTest	jdk.internal.m3.io.M3IO	*	CLASS	{"modules": "java.base/jdk.internal.m3.io:open"}
+M3IOAtomsTest	jdk.internal.m3.io.M3IO	M3IO	PRIVATE_UTILITY_CONSTRUCTOR	{}
+M3IOAtomsTest	jdk.internal.m3.io.M3IO	active	BIT_TEST	{}
+M3PipelinePlanAtomsTest	jdk.internal.util.M3PipelinePlan	*	CLASS	{"summary": "Per-atom contracts of jdk.internal.util.M3PipelinePlan private atoms against java.util.stream (generated, template internal)"}
+M3PipelinePlanAtomsTest	jdk.internal.util.M3PipelinePlan	M3PipelinePlan	PIPE_CONSTRUCTOR	{}
+M3PipelinePlanAtomsTest	jdk.internal.util.M3PipelinePlan	append	PIPE_APPEND	{}
+M3PipelinePlanAtomsTest	jdk.internal.util.M3PipelinePlan	traverse	PIPE_TRAVERSE	{}
+M3PipelinePlanAtomsTest	jdk.internal.util.M3PipelinePlan	accept	PIPE_SINK_ACCEPT	{}
