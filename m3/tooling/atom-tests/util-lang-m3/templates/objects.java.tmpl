@@ -70,7 +70,7 @@ import java.util.concurrent.TimeUnit;
     }
 
     static Object planOf(String name, Class<?> type) throws Throwable {
-        return PLAN.constructor("AccessPlan", 4).invoke(LOOKUP, Node.class, name, type);
+        return PLAN.constructor("AccessPlan").invoke(LOOKUP, Node.class, name, type);
     }
 
     /** Runs {@code body} on an InnocuousThread, as the framework dispatch thread does. */
@@ -94,14 +94,14 @@ import java.util.concurrent.TimeUnit;
     /** ${atom}() reflects the startup property and agrees with M3Object.observationEnabled(). */
     @Test
     void ${test}() throws Throwable {
-        assertTrue((boolean) OWNER.method("${atom}", 0).invoke(), "${atom} under -Djdk.m3.objectEvents.enabled=true");
-        assertEquals(M3Object.observationEnabled(), (boolean) OWNER.method("${atom}", 0).invoke());
+        assertTrue((boolean) OWNER.method("${atom}").invoke(), "${atom} under -Djdk.m3.objectEvents.enabled=true");
+        assertEquals(M3Object.observationEnabled(), (boolean) OWNER.method("${atom}").invoke());
     }
 //@@ PATTERN OBJ_OF | uses= | oracle=identity-bound capability, same as M3Object.of
     /** ${atom}(source) returns one capability per source identity, the one M3Object.of returns. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 1);
+        MethodHandle atom = OWNER.method("${atom}");
         Node node = new Node();
         Object owner = atom.invoke(node);
         assertSame(owner, atom.invoke(node), "${atom} is identity-bound");
@@ -113,7 +113,7 @@ import java.util.concurrent.TimeUnit;
     /** ${atom}(source) finds a registered owner and returns null for an unknown source. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 1);
+        MethodHandle atom = OWNER.method("${atom}");
         Node unknown = new Node();
         Node known = new Node();
         M3Object owner = M3Object.of(known);
@@ -127,7 +127,7 @@ import java.util.concurrent.TimeUnit;
     /** ${atom}(source) registers new owners, reusing them, and grows the weak registry when full. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 1);
+        MethodHandle atom = OWNER.method("${atom}");
         List<Object> retained = new ArrayList<>();
         List<Node> sources = new ArrayList<>();
         locked(() -> {
@@ -146,7 +146,7 @@ import java.util.concurrent.TimeUnit;
     /** ${atom}(lookup, declaringType, name, type) shares one reachable plan per key. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 4);
+        MethodHandle atom = OWNER.method("${atom}");
         Object p = atom.invoke(LOOKUP, Node.class, "count", int.class);
         assertSame(p, atom.invoke(LOOKUP, Node.class, "count", int.class), "${atom} shares");
         assertNotSame(p, atom.invoke(LOOKUP, Node.class, "ratio", float.class), "another name");
@@ -158,7 +158,7 @@ import java.util.concurrent.TimeUnit;
     /** ${atom}(field, value) writes, type-checks, and publishes only real changes. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 2);
+        MethodHandle atom = OWNER.method("${atom}");
         Node node = new Node();
         M3Object.Field ref = field(node, "ref", Object.class);
         M3Object.Field count = field(node, "count", int.class);
@@ -181,7 +181,7 @@ import java.util.concurrent.TimeUnit;
     /** ${atom}(field, expected, value) succeeds only on the expected value and publishes the change. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 3);
+        MethodHandle atom = OWNER.method("${atom}");
         Node node = new Node();
         M3Object.Field count = field(node, "count", int.class);
         Recorder r = new Recorder();
@@ -202,12 +202,12 @@ import java.util.concurrent.TimeUnit;
         M3Object.Field count = field(node, "count", int.class);
         Recorder r = new Recorder();
         try (ObjectSubscription s = count.listen(ObjectEvent.VALUE, r)) {
-            locked(() -> OWNER.method("${atom}", 2).invoke(M3Object.of(node), plan(count)));
+            locked(() -> OWNER.method("${atom}").invoke(M3Object.of(node), plan(count)));
             ObjectEvent e = r.next();
             assertEquals(ObjectEvent.VALUE, e.mask());
             assertSame(node, e.source());
         }
-        locked(() -> OWNER.method("${atom}", 2).invoke(M3Object.of(new Node()), plan(count)));
+        locked(() -> OWNER.method("${atom}").invoke(M3Object.of(new Node()), plan(count)));
     }
 //@@ PATTERN OBJ_CONTENT_CHANGED | uses= | oracle=CONTENT event to owner listeners
     /** ${atom}(owner) delivers one CONTENT event to whole-owner listeners. */
@@ -216,7 +216,7 @@ import java.util.concurrent.TimeUnit;
         Node node = new Node();
         Recorder r = new Recorder();
         try (ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r)) {
-            OWNER.method("${atom}", 1).invoke(M3Object.of(node));
+            OWNER.method("${atom}").invoke(M3Object.of(node));
             ObjectEvent e = r.next();
             assertEquals(ObjectEvent.CONTENT, e.mask());
             assertEquals(null, e.field(), "a whole-owner event names no field");
@@ -226,11 +226,11 @@ import java.util.concurrent.TimeUnit;
     /** ${atom}(source) rejects null, never creates an owner, and notifies observed sources. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 1);
+        MethodHandle atom = OWNER.method("${atom}");
         assertEquals("source", assertThrows(NullPointerException.class, () -> atom.invoke((Object) null)).getMessage());
         Node stranger = new Node();
         atom.invoke(stranger);
-        locked(() -> assertEquals(null, OWNER.method("findLocked", 1).invoke(stranger), "${atom} creates no owner"));
+        locked(() -> assertEquals(null, OWNER.method("findLocked").invoke(stranger), "${atom} creates no owner"));
         Node node = new Node();
         Recorder r = new Recorder();
         try (ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r)) {
@@ -242,7 +242,7 @@ import java.util.concurrent.TimeUnit;
     /** ${atom}(source, declaringType, name, type, mask) validates the commit and notifies the field slot. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 5);
+        MethodHandle atom = OWNER.method("${atom}");
         Node node = new Node();
         assertThrows(NullPointerException.class, () -> atom.invoke(node, Node.class, null, Object.class, ObjectEvent.REFERENCE));
         String invalid = "invalid committed field notification";
@@ -263,7 +263,7 @@ import java.util.concurrent.TimeUnit;
     /** ${atom}(owner, field, mask, listener) validates, admits a subscription and delivers to it. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 4);
+        MethodHandle atom = OWNER.method("${atom}");
         Node node = new Node();
         M3Object owner = M3Object.of(node);
         Recorder r = new Recorder();
@@ -283,7 +283,7 @@ import java.util.concurrent.TimeUnit;
     /** ${atom}(subscription) detaches the subscriber exactly once; later changes are not delivered. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 1);
+        MethodHandle atom = OWNER.method("${atom}");
         Node node = new Node();
         Recorder r = new Recorder();
         ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r);
@@ -298,7 +298,7 @@ import java.util.concurrent.TimeUnit;
     /** ${atom}(owner) creates the owner's State once, with a fresh increasing id. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 1);
+        MethodHandle atom = OWNER.method("${atom}");
         M3Object first = M3Object.of(new Node());
         M3Object second = M3Object.of(new Node());
         locked(() -> {
@@ -322,7 +322,7 @@ import java.util.concurrent.TimeUnit;
         try (ObjectSubscription s = ref.listen(ObjectEvent.CONTENT, r)) {
             Object parentState = state(parent);
             Object childState = state(child);
-            int slot = (int) STATE.method("findField", 3).invoke(parentState, Node.class, "ref", Object.class);
+            int slot = (int) STATE.method("findField").invoke(parentState, Node.class, "ref", Object.class);
             assertSame(childState, ((Object[]) STATE.field("children").get(parentState))[slot], "a follow edge exists");
             assertEquals(1, (int) STATE.field("parentCount").get(childState));
             ${follow_body}
@@ -337,7 +337,7 @@ import java.util.concurrent.TimeUnit;
         try (ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r)) {
             Object st = state(node);
             long before = (long) STATE.field("sequence").get(st);
-            locked(() -> OWNER.method("${atom}", 3).invoke(st, -1, ObjectEvent.CONTENT));
+            locked(() -> OWNER.method("${atom}").invoke(st, -1, ObjectEvent.CONTENT));
             ObjectEvent e = r.next();
             assertEquals(ObjectEvent.CONTENT, e.mask());
             assertEquals(before + 1, e.sequence(), "${atom} advances the sequence");
@@ -354,7 +354,7 @@ import java.util.concurrent.TimeUnit;
         long originSequence = 1L << Short.SIZE;
         try (ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r)) {
             Object st = state(node);
-            MethodHandle atom = OWNER.method("${atom}", 5);
+            MethodHandle atom = OWNER.method("${atom}");
             locked(() -> atom.invoke(st, -1, ObjectEvent.VALUE, origin, originSequence));
             r.quiet();
             locked(() -> atom.invoke(st, -1, ObjectEvent.CONTENT | ObjectEvent.VALUE, origin, originSequence));
@@ -372,7 +372,7 @@ import java.util.concurrent.TimeUnit;
         Recorder r = new Recorder();
         try (ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r)) {
             Object st = state(node);
-            MethodHandle atom = OWNER.method("${atom}", 1);
+            MethodHandle atom = OWNER.method("${atom}");
             locked(() -> {
                 atom.invoke(st);
                 assertTrue((boolean) STATE.field("queued").get(st), "${atom} marks the owner queued");
@@ -396,10 +396,10 @@ import java.util.concurrent.TimeUnit;
         Recorder r = new Recorder();
         try (ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r)) {
             Object st = state(node);
-            MethodHandle atom = OWNER.method("${atom}", 1);
+            MethodHandle atom = OWNER.method("${atom}");
             int index = (int) new Access("java.lang.ObjectSubscription").field("index").get(s);
             locked(() -> {
-                OWNER.method("enqueueLocked", 1).invoke(st);
+                OWNER.method("enqueueLocked").invoke(st);
                 ((int[]) STATE.field("pending").get(st))[index] = ObjectEvent.CONTENT;
                 atom.invoke(st);
                 assertTrue((boolean) STATE.field("queued").get(st), "pending work keeps the owner queued");
@@ -415,7 +415,7 @@ import java.util.concurrent.TimeUnit;
     /** ${atom}() starts one daemon "M3Object-dispatch" thread and reuses it. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = OWNER.method("${atom}", 0);
+        MethodHandle atom = OWNER.method("${atom}");
         locked(() -> {
             atom.invoke();
             Thread worker = (Thread) OWNER.field("worker").get();
@@ -460,7 +460,7 @@ import java.util.concurrent.TimeUnit;
             });
             onInnocuousThread(() -> {
                 try {
-                    OWNER.method("${atom}", 1).invoke(st);
+                    OWNER.method("${atom}").invoke(st);
                 } catch (Throwable e) {
                     throw new AssertionError(e);
                 }
@@ -479,7 +479,7 @@ import java.util.concurrent.TimeUnit;
     @Test
     void ${test}() throws Throwable {
         M3Object owner = M3Object.of(new Node());
-        Object st = STATE.constructor("${atom}", 2).invoke(owner, (long) INITIAL_LANES);
+        Object st = STATE.constructor("${atom}").invoke(owner, (long) INITIAL_LANES);
         assertSame(owner, STATE.field("owner").get(st));
         assertEquals((long) INITIAL_LANES, (long) STATE.field("id").get(st));
         assertEquals(null, STATE.field("subscriptions").get(st), "lanes are allocated only for admitted work");
@@ -488,8 +488,8 @@ import java.util.concurrent.TimeUnit;
     /** ${atom}() is true exactly when the owner has subscribers or parents. */
     @Test
     void ${test}() throws Throwable {
-        Object st = STATE.constructor("State", 2).invoke(M3Object.of(new Node()), 1L);
-        MethodHandle atom = STATE.method("${atom}", 0);
+        Object st = STATE.constructor("State").invoke(M3Object.of(new Node()), 1L);
+        MethodHandle atom = STATE.method("${atom}");
         assertFalse((boolean) atom.invoke(st));
         STATE.field("subscriberCount").set(st, 1);
         assertTrue((boolean) atom.invoke(st));
@@ -501,8 +501,8 @@ import java.util.concurrent.TimeUnit;
     /** ${atom}() returns the first free slot, growing all subscriber lanes together (4, then doubling). */
     @Test
     void ${test}() throws Throwable {
-        Object st = STATE.constructor("State", 2).invoke(M3Object.of(new Node()), 1L);
-        MethodHandle atom = STATE.method("${atom}", 0);
+        Object st = STATE.constructor("State").invoke(M3Object.of(new Node()), 1L);
+        MethodHandle atom = STATE.method("${atom}");
         assertEquals(0, (int) atom.invoke(st));
         Object[] subscriptions = (Object[]) STATE.field("subscriptions").get(st);
         assertEquals(INITIAL_LANES, subscriptions.length);
@@ -521,10 +521,10 @@ import java.util.concurrent.TimeUnit;
     @Test
     void ${test}() throws Throwable {
         Node node = new Node();
-        Object st = STATE.constructor("State", 2).invoke(M3Object.of(node), 1L);
-        MethodHandle atom = STATE.method("${atom}", 3);
+        Object st = STATE.constructor("State").invoke(M3Object.of(node), 1L);
+        MethodHandle atom = STATE.method("${atom}");
         assertEquals(-1, (int) atom.invoke(st, Node.class, "ref", Object.class));
-        int slot = (int) STATE.method("fieldSlot", 1).invoke(st, field(node, "ref", Object.class));
+        int slot = (int) STATE.method("fieldSlot").invoke(st, field(node, "ref", Object.class));
         assertEquals(slot, (int) atom.invoke(st, Node.class, "ref", Object.class));
         assertEquals(-1, (int) atom.invoke(st, Node.class, "ref", String.class), "type is part of the key");
     }
@@ -533,8 +533,8 @@ import java.util.concurrent.TimeUnit;
     @Test
     void ${test}() throws Throwable {
         Node node = new Node();
-        Object st = STATE.constructor("State", 2).invoke(M3Object.of(node), 1L);
-        MethodHandle atom = STATE.method("${atom}", 1);
+        Object st = STATE.constructor("State").invoke(M3Object.of(node), 1L);
+        MethodHandle atom = STATE.method("${atom}");
         int ref = (int) atom.invoke(st, field(node, "ref", Object.class));
         assertEquals(ref, (int) atom.invoke(st, field(node, "ref", Object.class)), "equal key, same slot");
         int count = (int) atom.invoke(st, field(node, "count", int.class));
@@ -552,8 +552,8 @@ import java.util.concurrent.TimeUnit;
     /** ${atom}() allocates 4 parent lanes and doubles them when parentCount reaches capacity. */
     @Test
     void ${test}() throws Throwable {
-        Object st = STATE.constructor("State", 2).invoke(M3Object.of(new Node()), 1L);
-        MethodHandle atom = STATE.method("${atom}", 0);
+        Object st = STATE.constructor("State").invoke(M3Object.of(new Node()), 1L);
+        MethodHandle atom = STATE.method("${atom}");
         atom.invoke(st);
         assertEquals(INITIAL_LANES, ((Object[]) STATE.field("parents").get(st)).length);
         atom.invoke(st);
@@ -569,11 +569,11 @@ import java.util.concurrent.TimeUnit;
     @Test
     void ${test}() throws Throwable {
         Node node = new Node();
-        Object parent = STATE.constructor("State", 2).invoke(M3Object.of(node), 1L);
-        int slot = (int) STATE.method("fieldSlot", 1).invoke(parent, field(node, "ref", Object.class));
-        Object child = STATE.constructor("State", 2).invoke(M3Object.of(new Node()), 2L);
-        STATE.method("ensureParentCapacity", 0).invoke(child);
-        STATE.method("${atom}", 2).invoke(child, parent, slot);
+        Object parent = STATE.constructor("State").invoke(M3Object.of(node), 1L);
+        int slot = (int) STATE.method("fieldSlot").invoke(parent, field(node, "ref", Object.class));
+        Object child = STATE.constructor("State").invoke(M3Object.of(new Node()), 2L);
+        STATE.method("ensureParentCapacity").invoke(child);
+        STATE.method("${atom}").invoke(child, parent, slot);
         assertEquals(1, (int) STATE.field("parentCount").get(child));
         assertSame(parent, ((Object[]) STATE.field("parents").get(child))[0]);
         assertEquals(slot, ((int[]) STATE.field("parentSlots").get(child))[0]);
@@ -584,14 +584,14 @@ import java.util.concurrent.TimeUnit;
     /** ${atom}(index) resets every pending lane at that index and leaves the others. */
     @Test
     void ${test}() throws Throwable {
-        Object st = STATE.constructor("State", 2).invoke(M3Object.of(new Node()), 1L);
-        STATE.method("subscriberSlot", 0).invoke(st);
+        Object st = STATE.constructor("State").invoke(M3Object.of(new Node()), 1L);
+        STATE.method("subscriberSlot").invoke(st);
         for (String lane : new String[] {"firstSequences", "sequences", "pendingGenerations", "origins", "originSequences"}) {
             java.util.Arrays.fill((long[]) STATE.field(lane).get(st), 1L);
         }
         java.util.Arrays.fill((int[]) STATE.field("pending").get(st), ObjectEvent.ALL);
         java.util.Arrays.fill((boolean[]) STATE.field("coalesced").get(st), true);
-        STATE.method("${atom}", 1).invoke(st, 1);
+        STATE.method("${atom}").invoke(st, 1);
         assertEquals(0, ((int[]) STATE.field("pending").get(st))[1]);
         assertEquals(ObjectEvent.ALL, ((int[]) STATE.field("pending").get(st))[0], "other indexes untouched");
         assertFalse(((boolean[]) STATE.field("coalesced").get(st))[1]);
@@ -603,7 +603,7 @@ import java.util.concurrent.TimeUnit;
     /** ${atom}(lookup, declaringType, name, type) records the key and resolves nothing eagerly. */
     @Test
     void ${test}() throws Throwable {
-        Object p = PLAN.constructor("${atom}", 4).invoke(LOOKUP, Node.class, "count", int.class);
+        Object p = PLAN.constructor("${atom}").invoke(LOOKUP, Node.class, "count", int.class);
         assertSame(LOOKUP, PLAN.field("lookup").get(p));
         assertSame(Node.class, PLAN.field("declaringType").get(p));
         assertEquals("count", PLAN.field("name").get(p));
@@ -615,7 +615,7 @@ import java.util.concurrent.TimeUnit;
     @Test
     void ${test}() throws Throwable {
         Object p = planOf("count", int.class);
-        MethodHandle atom = PLAN.method("${atom}", 3);
+        MethodHandle atom = PLAN.method("${atom}");
         assertTrue((boolean) atom.invoke(p, Node.class, "count", int.class));
         assertFalse((boolean) atom.invoke(p, SubNode.class, "count", int.class), "subclass is a different key");
         assertFalse((boolean) atom.invoke(p, Node.class, "ratio", int.class));
@@ -626,7 +626,7 @@ import java.util.concurrent.TimeUnit;
     /** ${atom}() resolves and caches a VarHandle on the declaring class only. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = PLAN.method("${atom}", 0);
+        MethodHandle atom = PLAN.method("${atom}");
         Object p = planOf("count", int.class);
         VarHandle h = (VarHandle) atom.invoke(p);
         assertSame(h, atom.invoke(p), "${atom} caches");
@@ -636,14 +636,14 @@ import java.util.concurrent.TimeUnit;
         Object missing = planOf("missing", int.class);
         assertEquals("cannot resolve instance field " + Node.class.getName() + ".missing",
                 assertThrows(IllegalArgumentException.class, () -> atom.invoke(missing)).getMessage());
-        Object inherited = PLAN.constructor("AccessPlan", 4).invoke(LOOKUP, SubNode.class, "count", int.class);
+        Object inherited = PLAN.constructor("AccessPlan").invoke(LOOKUP, SubNode.class, "count", int.class);
         assertThrows(IllegalArgumentException.class, () -> atom.invoke(inherited), "inherited members do not resolve");
     }
 //@@ PATTERN PLAN_CHECK_VALUE | uses= | oracle=boxing rules and reference assignability
     /** ${atom}(value) rejects null primitives and values of the wrong (boxed) type. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = PLAN.method("${atom}", 1);
+        MethodHandle atom = PLAN.method("${atom}");
         Object count = planOf("count", int.class);
         atom.invoke(count, 1);
         assertEquals("primitive value", assertThrows(NullPointerException.class, () -> atom.invoke(count, null)).getMessage());
@@ -652,7 +652,7 @@ import java.util.concurrent.TimeUnit;
         Object ratio = planOf("ratio", float.class);
         atom.invoke(ratio, 1f);
         assertThrows(ClassCastException.class, () -> atom.invoke(ratio, 1d));
-        Object typed = PLAN.constructor("AccessPlan", 4).invoke(LOOKUP, Node.class, "ref", Node.class);
+        Object typed = PLAN.constructor("AccessPlan").invoke(LOOKUP, Node.class, "ref", Node.class);
         atom.invoke(typed, null);
         atom.invoke(typed, new SubNode());
         assertEquals("value is not " + Node.class.getName(),
@@ -662,7 +662,7 @@ import java.util.concurrent.TimeUnit;
     /** ${atom}(left, right) is identity for references and bit identity for primitives. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = PLAN.method("${atom}", 2);
+        MethodHandle atom = PLAN.method("${atom}");
         Object ref = planOf("ref", Object.class);
         String a = "same";
         assertTrue((boolean) atom.invoke(ref, a, a));
@@ -678,13 +678,13 @@ import java.util.concurrent.TimeUnit;
     /** ${atom}(value) distinguishes primitive values and is undefined (AssertionError) for references. */
     @Test
     void ${test}() throws Throwable {
-        MethodHandle atom = PLAN.method("${atom}", 1);
+        MethodHandle atom = PLAN.method("${atom}");
         Object count = planOf("count", int.class);
         assertEquals((long) atom.invoke(count, 1), (long) atom.invoke(count, 1));
         assertTrue((long) atom.invoke(count, 1) != (long) atom.invoke(count, 2));
         Object ratio = planOf("ratio", float.class);
         assertTrue((long) atom.invoke(ratio, 0f) != (long) atom.invoke(ratio, -0f));
-        Object flag = PLAN.constructor("AccessPlan", 4).invoke(LOOKUP, Node.class, "flag", boolean.class);
+        Object flag = PLAN.constructor("AccessPlan").invoke(LOOKUP, Node.class, "flag", boolean.class);
         assertTrue((long) atom.invoke(flag, true) != (long) atom.invoke(flag, false));
         assertEquals("unsupported primitive field",
                 assertThrows(AssertionError.class, () -> atom.invoke(planOf("ref", Object.class), "x")).getMessage());
@@ -694,7 +694,7 @@ import java.util.concurrent.TimeUnit;
     @Test
     void ${test}() throws Throwable {
         Node node = new Node();
-        M3Object owner = (M3Object) M3_OBJECT.constructor("${atom}", 1).invoke(node);
+        M3Object owner = (M3Object) M3_OBJECT.constructor("${atom}").invoke(node);
         assertSame(node, owner.source());
         assertEquals(null, M3_OBJECT.field("state").get(owner));
         assertNotSame(M3Object.of(node), owner, "only M3Object.of registers identity-bound capabilities");
@@ -705,7 +705,7 @@ import java.util.concurrent.TimeUnit;
     void ${test}() throws Throwable {
         Node node = new Node();
         Object plan = planOf("ref", Object.class);
-        M3Object.Field f = (M3Object.Field) FIELD.constructor("${atom}", 2).invoke(M3Object.of(node), plan);
+        M3Object.Field f = (M3Object.Field) FIELD.constructor("${atom}").invoke(M3Object.of(node), plan);
         assertSame(node, f.source());
         assertSame(plan, FIELD.field("plan").get(f));
         assertEquals("ref", f.name());

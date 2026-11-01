@@ -67,8 +67,8 @@ M3TimSortAtomsTest	java.util.M3TimSort	mergeForceCollapse	TIM_FORCE_COLLAPSE	{}
 M3TimSortAtomsTest	java.util.M3TimSort	mergeAt	TIM_MERGE_AT	{}
 M3TimSortAtomsTest	java.util.M3TimSort	gallopLeft	GALLOP	{"gallop_side": "left", "gallop_advance": "keys[a[base + expected]] < keys[key]"}
 M3TimSortAtomsTest	java.util.M3TimSort	gallopRight	GALLOP	{"gallop_side": "right", "gallop_advance": "keys[a[base + expected]] <= keys[key]"}
-M3TimSortAtomsTest	java.util.M3TimSort	mergeLo	TIM_MERGE_LO_HI	{"merge_side": "low", "merge_lengths": "{{1, 5}, {5, 5}, {8, 40}, {33, 70}}"}
-M3TimSortAtomsTest	java.util.M3TimSort	mergeHi	TIM_MERGE_LO_HI	{"merge_side": "high", "merge_lengths": "{{5, 1}, {5, 5}, {40, 8}, {70, 33}}"}
+M3TimSortAtomsTest	java.util.M3TimSort	mergeLo	TIM_MERGE_LO_HI	{"merge_side": "low", "merge_lengths": "MERGE_LO_LENGTHS"}
+M3TimSortAtomsTest	java.util.M3TimSort	mergeHi	TIM_MERGE_LO_HI	{"merge_side": "high", "merge_lengths": "MERGE_HI_LENGTHS"}
 M3TimSortAtomsTest	java.util.M3TimSort	ensureCapacity	TIM_ENSURE_CAPACITY	{}
 M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	M3DistributionSorts	PRIVATE_UTILITY_CONSTRUCTOR	{}
 M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	sort	DIST_DISPATCH	{}
@@ -82,8 +82,8 @@ M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	digit	DIST_DIGIT	{}
 M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	boundaries	DIST_BOUNDARIES	{}
 M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	histogram	DIST_HISTOGRAM	{}
 M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	lsd	DIST_KERNEL	{"algorithm": "LSD_RADIX", "narrow": "false"}
-M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	msd	DIST_KERNEL_RANGE_SHIFT	{"algorithm": "MSD_RADIX", "arity": "8", "scratch_arg": "scratch, ", "scratch_value": "new int[n], "}
-M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	americanFlag	DIST_KERNEL_RANGE_SHIFT	{"algorithm": "AMERICAN_FLAG", "arity": "7", "scratch_arg": "", "scratch_value": ""}
+M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	msd	DIST_KERNEL_RANGE_SHIFT	{"algorithm": "MSD_RADIX", "scratch_arg": "scratch, ", "scratch_value": "new int[n], "}
+M3DistributionSortsAtomsTest	java.util.M3DistributionSorts	americanFlag	DIST_KERNEL_RANGE_SHIFT	{"algorithm": "AMERICAN_FLAG", "scratch_arg": "", "scratch_value": ""}
 M3SortContextAtomsTest	java.util.M3SortContext	M3SortContext	CONTEXT_CONSTRUCTOR	{}
 M3SortContextAtomsTest	java.util.M3SortContext	compare	CONTEXT_COMPARE	{}
 M3SortContextAtomsTest	java.util.M3SortContext	step	CONTEXT_STEP	{}

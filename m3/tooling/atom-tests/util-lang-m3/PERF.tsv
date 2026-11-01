@@ -1,16 +1,16 @@
-owner	atom	m3_ns_per_op	jdk_baseline	jdk_ns_per_op	m3_over_jdk	jvm_cpu_load	cpus	warmup_rounds_ops	max_root_tier	osr
-M3StringCodePointPrecompute	codePointCount	41.45	String.codePointCount(int,int)	512.80	0.081	0.000	32	30/15/2000	4	no
-M3StringCodePointPrecompute	offsetByCodePoints	65.20	String.offsetByCodePoints(int,int)	133.90	0.487	0.000	32	30/15/2000	4	no
-M3StringBuilderLane	charAt	40.35	StringBuilder.charAt(int)	8.15	4.951	0.000	32	30/15/2000	4	no
-M3TimSort	sort	41977.85	Arrays.sort(Integer[],Comparator)	153208.60	0.274	0.489	32	30/15/2000	4	no
-M3TimSort	gallopLeft	59.25	Arrays.binarySearch(int[],int)	29.50	2.008	0.489	32	30/15/2000	4	no
-M3IndexedView	get	69.80	ArrayList.get(int)	9.15	7.628	0.489	32	30/15/2000	4	no
-M3ComparisonSorts	mergeSort	35339.20	Arrays.sort(Integer[],Comparator)	154311.00	0.229	0.348	32	30/15/2000	4	no
-M3ComparisonSorts	quick	16852.95	Arrays.sort(Integer[],Comparator)	158436.75	0.106	0.278	32	30/15/2000	4	no
-M3ComparisonSorts	heap	65904.15	Arrays.sort(Integer[],Comparator)	175988.95	0.374	0.310	32	30/15/2000	4	yes
-M3ComparisonSorts	binaryInsertion	242.40	Arrays.sort(Integer[],Comparator)	2246.10	0.108	0.310	32	30/15/2000	4	yes
-M3ComparisonSorts	insertion	118.95	Arrays.sort(Integer[],Comparator)	2164.55	0.055	0.310	32	30/15/2000	4	yes
-M3ComparisonSorts	lowerBound	55.50	Arrays.binarySearch(int[],int)	24.20	2.293	0.310	32	30/15/2000	4	yes
-M3ComparisonSorts	dualPivotQuick	25765.65	Arrays.sort(Integer[],Comparator)	173714.45	0.148	0.303	32	30/15/2000	4	yes
-M3DistributionSorts	counting	2985.00	Arrays.sort(Integer[],comparingLong)	132638.10	0.023	0.269	32	30/15/2000	4	yes
-M3DistributionSorts	lsd	14086.60	Arrays.sort(Integer[],comparingLong)	160311.50	0.088	0.258	32	30/15/2000	4	yes
+owner	atom	m3_ns_per_op	jdk_baseline	jdk_ns_per_op	m3_over_jdk	jvm_cpu_load	host_cpu_load	load_window_ms	cpus	warmup_rounds_ops	max_root_tier	osr
+M3StringBuilderLane	charAt	18.50	StringBuilder.charAt(int)	3.60	5.139	0.003	0.273	573	32	30/15/2000	4	no
+M3StringCodePointPrecompute	codePointCount	38.10	String.codePointCount(int,int)	468.85	0.081	0.006	0.510	576	32	30/15/2000	4	no
+M3StringCodePointPrecompute	offsetByCodePoints	35.05	String.offsetByCodePoints(int,int)	126.00	0.278	0.015	0.361	584	32	30/15/2000	4	no
+M3ComparisonSorts	mergeSort	30114.25	Arrays.sort(Integer[],Comparator)	118146.05	0.255	0.031	0.323	4538	32	30/15/2000	4	no
+M3ComparisonSorts	quick	16007.30	Arrays.sort(Integer[],Comparator)	154531.85	0.104	0.031	0.359	5199	32	30/15/2000	4	no
+M3ComparisonSorts	heap	32940.00	Arrays.sort(Integer[],Comparator)	164355.30	0.200	0.031	0.378	6035	32	30/15/2000	4	yes
+M3ComparisonSorts	binaryInsertion	168.75	Arrays.sort(Integer[],Comparator)	2093.05	0.081	0.015	0.422	568	32	30/15/2000	4	yes
+M3ComparisonSorts	insertion	125.00	Arrays.sort(Integer[],Comparator)	2201.60	0.057	0.015	0.416	561	32	30/15/2000	4	yes
+M3ComparisonSorts	lowerBound	42.00	Arrays.binarySearch(int[],int)	26.85	1.564	0.009	0.381	562	32	30/15/2000	4	no
+M3ComparisonSorts	dualPivotQuick	14763.05	Arrays.sort(Integer[],Comparator)	190005.15	0.078	0.031	0.394	6236	32	30/15/2000	4	no
+M3DistributionSorts	counting	4052.35	Arrays.sort(Integer[],comparingLong)	145472.95	0.028	0.031	0.537	4562	32	30/15/2000	4	yes
+M3DistributionSorts	lsd	15175.75	Arrays.sort(Integer[],comparingLong)	157719.10	0.096	0.032	0.277	5294	32	30/15/2000	4	yes
+M3TimSort	sort	28219.90	Arrays.sort(Integer[],Comparator)	137613.20	0.205	0.031	0.378	5057	32	30/15/2000	4	no
+M3TimSort	gallopLeft	48.80	Arrays.binarySearch(int[],int)	23.95	2.038	0.006	0.222	555	32	30/15/2000	4	no
+M3IndexedView	get	46.10	ArrayList.get(int)	4.30	10.721	0.006	0.293	574	32	30/15/2000	4	no

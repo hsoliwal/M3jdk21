@@ -47,12 +47,12 @@ class M3StringBuilderLaneAtomsTest {
     private static final Access M3_STRING = new Access("java.lang.M3String");
     private static final Access POOL = new Access("java.lang.M3StringPool");
     private static final Access JAVA_STRING = new Access("java.lang.String");
-    private static final MethodHandle INTERN_CHARS = POOL.method("internChars", 3);
-    private static final MethodHandle CONCAT = POOL.method("concat", 2);
-    private static final MethodHandle RANGE = M3_STRING.method("range", 3);
-    private static final MethodHandle OWNER_OF = M3_STRING.method("owner", 0);
-    private static final MethodHandle START_OF = M3_STRING.method("start", 0);
-    private static final MethodHandle COORDINATE_OF = M3_STRING.method("coordinate", 0);
+    private static final MethodHandle INTERN_CHARS = POOL.method("internChars");
+    private static final MethodHandle CONCAT = POOL.method("concat");
+    private static final MethodHandle RANGE = M3_STRING.method("range");
+    private static final MethodHandle OWNER_OF = M3_STRING.method("owner");
+    private static final MethodHandle START_OF = M3_STRING.method("start", "");
+    private static final MethodHandle COORDINATE_OF = M3_STRING.method("coordinate");
     private static final byte LATIN1 = (byte) JAVA_STRING.constant("LATIN1");
     private static final byte UTF16 = (byte) JAVA_STRING.constant("UTF16");
     private static final long SEED = 0x4D33_5354_5247L;
@@ -72,33 +72,39 @@ class M3StringBuilderLaneAtomsTest {
 
     static {
         try {
-            M3_STRING.method("activate", 1).invoke((String) null);
+            M3_STRING.method("activate").invoke((String) null);
         } catch (Throwable e) {
             throw new ExceptionInInitializerError(e);
         }
     }
+    /** ensureCapacity vectors: stock capacities and minimums below, at and past each doubling step. */
+    private static final int[] RESERVE_CAPACITIES = {0, 1, 16, 100};
+    private static final int[] RESERVE_MINIMUMS = {-1, 0, 1, 17, 34, 35, 201, 1000};
+    //FLLDCIM: TOP - flatten tested on stock JDK 21 and M3JDK; liftable HOLD with its reason (util-lang-m3 RECIPE_MEMORY R013)
+    /** The M3JDK-only AbstractStringBuilder field that flatten clears to detach the lane. */
+    private static final String LANE_FIELD = "m3Lane";
     /** M3StringBuilderLane(flatCapacity) starts empty with the stock builder's capacity. */
     @Test
     void M3StringBuilderLane() throws Throwable {
         Access lane = new Access("java.lang.M3StringBuilderLane");
-        Object l = lane.constructor("M3StringBuilderLane", 1).invoke(PIECE_UNITS);
+        Object l = lane.constructor("M3StringBuilderLane").invoke(PIECE_UNITS);
         assertEquals(PIECE_UNITS, (int) lane.field("virtualCapacity").get(l));
         assertEquals(0, (int) lane.field("units").get(l));
-        assertEquals(0, (int) lane.method("pieceCount", 0).invoke(l));
-        assertEquals(LATIN1, (byte) lane.method("logicalCoder", 1).invoke(l, LATIN1), "no UTF16 piece yet");
+        assertEquals(0, (int) lane.method("pieceCount").invoke(l));
+        assertEquals(LATIN1, (byte) lane.method("logicalCoder").invoke(l, LATIN1), "no UTF16 piece yet");
     }
     /** push(s, start, length, flatCount, flatCoder) records pieces in logical order; overflow is an OOME. */
     @Test
     void push() throws Throwable {
         for (boolean wide : new boolean[] {false, true}) {
             LaneScript script = new LaneScript(wide, wide);
-            assertEquals(script.pieces, (int) script.lane.method("pieceCount", 0).invoke(script.instance));
+            assertEquals(script.pieces, (int) script.lane.method("pieceCount").invoke(script.instance));
             assertEquals(script.logical.length() - script.flat.length(), (int) script.lane.field("units").get(script.instance));
-            MethodHandle charAt = script.lane.method("charAt", 3);
+            MethodHandle charAt = script.lane.method("charAt");
             for (int i = 0; i < script.logical.length(); i++) {
                 assertEquals(script.logical.charAt(i), (char) charAt.invoke(script.instance, script.flatBytes(), script.flatCoder, i));
             }
-            OutOfMemoryError e = assertThrows(OutOfMemoryError.class, () -> script.lane.method("push", 5)
+            OutOfMemoryError e = assertThrows(OutOfMemoryError.class, () -> script.lane.method("push")
                     .invoke(script.instance, "x".repeat(PIECE_UNITS), 0, PIECE_UNITS, Integer.MAX_VALUE - 1, LATIN1));
             assertEquals("Required length exceeds implementation limit", e.getMessage());
         }
@@ -107,9 +113,9 @@ class M3StringBuilderLaneAtomsTest {
     @Test
     void grow() throws Throwable {
         Access lane = new Access("java.lang.M3StringBuilderLane");
-        Object l = lane.constructor("M3StringBuilderLane", 1).invoke(PIECE_UNITS);
+        Object l = lane.constructor("M3StringBuilderLane").invoke(PIECE_UNITS);
         String[] before = ((String[]) lane.field("text").get(l)).clone();
-        lane.method("grow", 0).invoke(l);
+        lane.method("grow").invoke(l);
         String[] after = (String[]) lane.field("text").get(l);
         assertEquals(before.length * 2, after.length, "grow doubles text");
         assertEquals(before.length * 2, ((long[]) lane.field("span").get(l)).length);
@@ -117,7 +123,7 @@ class M3StringBuilderLaneAtomsTest {
         assertEquals(before.length * 2, ((int[]) lane.field("logicalEnd").get(l)).length);
         LaneScript script = new LaneScript(false, true);
         assertTrue(script.pieces > before.length, "the script itself grows past the initial lanes");
-        assertEquals(script.pieces, (int) script.lane.method("pieceCount", 0).invoke(script.instance));
+        assertEquals(script.pieces, (int) script.lane.method("pieceCount").invoke(script.instance));
     }
     /** charAt(flat, flatCoder, index) equals StringBuilder.charAt across flat chunks, pieces and empty pieces. */
     @Test
@@ -126,7 +132,7 @@ class M3StringBuilderLaneAtomsTest {
             for (boolean widePiece : new boolean[] {false, true}) {
                 LaneScript script = new LaneScript(wideFlat, widePiece);
                 byte[] flat = script.flatBytes();
-                MethodHandle atom = script.lane.method("charAt", 3);
+                MethodHandle atom = script.lane.method("charAt");
                 for (int i = 0; i < script.logical.length(); i++) {
                     assertEquals(script.logical.charAt(i), (char) atom.invoke(script.instance, flat, script.flatCoder, i),
                             "charAt(" + i + ") wideFlat=" + wideFlat + " widePiece=" + widePiece);
@@ -137,7 +143,7 @@ class M3StringBuilderLaneAtomsTest {
     /** flatCharAt(flat, coder, index) decodes one unsigned Latin-1 byte or one native-order UTF-16 unit. */
     @Test
     void flatCharAt() throws Throwable {
-        MethodHandle atom = new Access("java.lang.M3StringBuilderLane").method("flatCharAt", 3);
+        MethodHandle atom = new Access("java.lang.M3StringBuilderLane").method("flatCharAt");
         String s = "a" + (char) E_ACUTE + "z";
         String w = "a" + (char) CJK + PAIR;
         for (int i = 0; i < s.length(); i++) {
@@ -154,24 +160,22 @@ class M3StringBuilderLaneAtomsTest {
         int units = (int) script.lane.field("units").get(script.instance);
         int capacity = (int) script.lane.field("virtualCapacity").get(script.instance);
         int flatMinimum = capacity * 2;
-        script.lane.method("reserve", 2).invoke(script.instance, flatMinimum, LATIN1);
+        script.lane.method("reserve").invoke(script.instance, flatMinimum, LATIN1);
         StringBuilder oracle = new StringBuilder(capacity);
         oracle.ensureCapacity(flatMinimum + units);
         assertEquals(oracle.capacity(), (int) script.lane.field("virtualCapacity").get(script.instance));
         assertThrows(OutOfMemoryError.class,
-                () -> script.lane.method("reserve", 2).invoke(script.instance, Integer.MAX_VALUE, LATIN1));
+                () -> script.lane.method("reserve").invoke(script.instance, Integer.MAX_VALUE, LATIN1));
     }
     /** reserveLogical(minimum, coder) grows virtualCapacity exactly as StringBuilder.ensureCapacity would. */
     @Test
     void reserveLogical() throws Throwable {
         Access lane = new Access("java.lang.M3StringBuilderLane");
-        int[] capacities = {0, 1, 16, 100};
-        int[] minimums = {-1, 0, 1, 17, 34, 35, 201, 1000};
         for (byte coder : new byte[] {LATIN1, UTF16}) {
-            for (int capacity : capacities) {
-                for (int minimum : minimums) {
-                    Object l = lane.constructor("M3StringBuilderLane", 1).invoke(capacity);
-                    lane.method("reserveLogical", 2).invoke(l, minimum, coder);
+            for (int capacity : RESERVE_CAPACITIES) {
+                for (int minimum : RESERVE_MINIMUMS) {
+                    Object l = lane.constructor("M3StringBuilderLane").invoke(capacity);
+                    lane.method("reserveLogical").invoke(l, minimum, coder);
                     StringBuilder oracle = new StringBuilder(capacity);
                     if (coder == UTF16) {
                         if (capacity == 0) {
@@ -206,7 +210,7 @@ class M3StringBuilderLaneAtomsTest {
                 byte coder = script.logicalCoder();
                 String prefix = "<<";
                 byte[] dst = encode(prefix + "?".repeat(script.logical.length()), coder);
-                script.lane.method("copyOut", 6).invoke(script.instance, script.flatBytes(), script.flatCoder,
+                script.lane.method("copyOut").invoke(script.instance, script.flatBytes(), script.flatCoder,
                         script.flat.length(), dst, prefix.length(), coder);
                 assertEquals(prefix + script.logical, decode(dst, 0, prefix.length() + script.logical.length(), coder),
                         "copyOut wideFlat=" + wideFlat + " widePiece=" + widePiece);
@@ -216,7 +220,7 @@ class M3StringBuilderLaneAtomsTest {
     /** copyFlat(src, srcCoder, from, to, dst, out, dstCoder) copies or inflates [from, to) and returns the new end. */
     @Test
     void copyFlat() throws Throwable {
-        MethodHandle atom = new Access("java.lang.M3StringBuilderLane").method("copyFlat", 7);
+        MethodHandle atom = new Access("java.lang.M3StringBuilderLane").method("copyFlat");
         String latin = "flat-" + (char) E_ACUTE + "-chunk";
         byte[][] cases = {{LATIN1, LATIN1}, {UTF16, UTF16}, {LATIN1, UTF16}};
         for (byte[] coders : cases) {
@@ -236,20 +240,59 @@ class M3StringBuilderLaneAtomsTest {
         for (boolean widePiece : new boolean[] {false, true}) {
             LaneScript script = new LaneScript(false, widePiece);
             byte coder = script.logicalCoder();
-            byte[] copy = (byte[]) script.lane.method("detached", 4).invoke(script.instance, script.flatBytes(),
+            byte[] copy = (byte[]) script.lane.method("detached").invoke(script.instance, script.flatBytes(),
                     script.flatCoder, script.flat.length(), coder);
             assertEquals(script.logical.length() * (coder == LATIN1 ? 1 : 2), copy.length, "detached exact length");
             assertEquals(script.logical.toString(), decode(copy, 0, script.logical.length(), coder));
+        }
+    }
+    /**
+     * flatten(builder) materializes the logical content into a buffer of the virtual capacity in the logical coder,
+     * sets count to the flat count plus the piece units, then detaches the lane (m3Lane = null). Stock JDK 21 has
+     * no AbstractStringBuilder.m3Lane: the detach store throws NoSuchFieldError after the value, coder and count
+     * stores (JVMS 5.4.3: a resolution error is thrown where the field reference is used); an M3JDK build completes
+     * the store. Both runtimes check the materialized builder.
+     */
+    @Test
+    void flatten() throws Throwable {
+        Access builderType = new Access("java.lang.AbstractStringBuilder");
+        boolean declaresLane = Arrays.stream(builderType.type.getDeclaredFields())
+                .anyMatch(f -> f.getName().equals(LANE_FIELD));
+        MethodHandle atom = new Access("java.lang.M3StringBuilderLane").method("flatten");
+        for (boolean wideFlat : new boolean[] {false, true}) {
+            for (boolean widePiece : new boolean[] {false, true}) {
+                LaneScript script = new LaneScript(wideFlat, widePiece);
+                StringBuilder builder = new StringBuilder();
+                builderType.field("value").set(builder, script.flatBytes());
+                builderType.field("coder").set(builder, script.flatCoder);
+                builderType.field("count").set(builder, script.flat.length());
+                int capacity = (int) script.lane.field("virtualCapacity").get(script.instance);
+                byte coder = script.logicalCoder();
+                String where = "flatten wideFlat=" + wideFlat + " widePiece=" + widePiece;
+                if (declaresLane) {
+                    atom.invoke(script.instance, builder);
+                    assertEquals(null, builderType.field(LANE_FIELD).get(builder), where + " detaches the lane");
+                } else {
+                    NoSuchFieldError e = assertThrows(NoSuchFieldError.class, () -> atom.invoke(script.instance, builder));
+                    assertTrue(e.getMessage().contains(LANE_FIELD), where + ": " + e.getMessage());
+                }
+                assertEquals(coder, (byte) builderType.field("coder").get(builder), where + " logical coder");
+                assertEquals(capacity << coder, ((byte[]) builderType.field("value").get(builder)).length,
+                        where + " stock-shaped buffer of the virtual capacity");
+                assertEquals(script.logical.length(), (int) builderType.field("count").get(builder), where + " count");
+                assertEquals(capacity, builder.capacity(), where + " capacity");
+                assertEquals(script.logical.toString(), builder.toString(), where + " content");
+            }
         }
     }
     /** compose(flat, coder, count) admits a piece-free lane's flat chunk once (cached) and declines while admitting. */
     @Test
     void compose() throws Throwable {
         Access lane = new Access("java.lang.M3StringBuilderLane");
-        Object l = lane.constructor("M3StringBuilderLane", 1).invoke(PIECE_UNITS);
+        Object l = lane.constructor("M3StringBuilderLane").invoke(PIECE_UNITS);
         String flat = "compose-" + (char) E_ACUTE + "-flat";
         byte[] bytes = encode(flat, LATIN1);
-        MethodHandle atom = lane.method("compose", 3);
+        MethodHandle atom = lane.method("compose");
         ThreadLocal<Boolean> admitting = (ThreadLocal<Boolean>) M3_STRING.constant("ADMITTING");
         admitting.set(Boolean.TRUE);
         try {
@@ -267,7 +310,7 @@ class M3StringBuilderLaneAtomsTest {
     @Test
     void pieceCount() throws Throwable {
         LaneScript script = new LaneScript(true, false);
-        assertEquals(script.pieces, (int) script.lane.method("pieceCount", 0).invoke(script.instance));
+        assertEquals(script.pieces, (int) script.lane.method("pieceCount").invoke(script.instance));
     }
     /** A pool-interned M3String holding {@code s}. */
     static Object m3(String s) throws Throwable {
@@ -339,8 +382,8 @@ class M3StringBuilderLaneAtomsTest {
         return new String(bytes, fromChar * unit, chars * unit, coder == LATIN1 ? StandardCharsets.ISO_8859_1 : utf16Native());
     }
 
-    private static final MethodHandle TUPLE = new Access("java.lang.M3StringTuple").constructor("M3StringTuple", 4);
-    private static final MethodHandle WHOLE = M3_STRING.method("whole", 1);
+    private static final MethodHandle TUPLE = new Access("java.lang.M3StringTuple").constructor("M3StringTuple");
+    private static final MethodHandle WHOLE = M3_STRING.method("whole");
     private static long nextTupleId = SEED;
 
     /** A hand-built tuple over two existing M3Strings: no pool canonicalization or flattening. */
@@ -361,7 +404,7 @@ class M3StringBuilderLaneAtomsTest {
         int pieces;
 
         LaneScript(boolean wideFlat, boolean widePiece) throws Throwable {
-            instance = lane.constructor("M3StringBuilderLane", 1).invoke(PIECE_UNITS);
+            instance = lane.constructor("M3StringBuilderLane").invoke(PIECE_UNITS);
             flatCoder = wideFlat ? UTF16 : LATIN1;
             String latin = "latin-".repeat(PIECE_UNITS / QUARTER);
             String wide = (String.valueOf((char) CJK) + "x").repeat(PIECE_UNITS);
@@ -383,7 +426,7 @@ class M3StringBuilderLaneAtomsTest {
         }
 
         void piece(String s, int start, int length) throws Throwable {
-            lane.method("push", 5).invoke(instance, s, start, length, flat.length(), flatCoder);
+            lane.method("push").invoke(instance, s, start, length, flat.length(), flatCoder);
             logical.append(s, start, start + length);
             pieces++;
         }
@@ -393,7 +436,7 @@ class M3StringBuilderLaneAtomsTest {
         }
 
         byte logicalCoder() throws Throwable {
-            return (byte) lane.method("logicalCoder", 1).invoke(instance, flatCoder);
+            return (byte) lane.method("logicalCoder").invoke(instance, flatCoder);
         }
     }
 
@@ -411,16 +454,17 @@ class M3StringBuilderLaneAtomsTest {
             }
         }
 
-        /** The unique declared, non-synthetic method {@code atom} with {@code arity} parameters. */
-        MethodHandle method(String atom, int arity) {
+        //FLLDCIM: IOP - name lookup replaces the arity lookup; overloads name their signature (util-lang-m3 RECIPE_MEMORY R016)
+        /** The unique declared, non-synthetic method {@code atom}; an overloaded atom needs its signature. */
+        MethodHandle method(String atom) {
             Method found = null;
             for (Method m : type.getDeclaredMethods()) {
-                if (m.getName().equals(atom) && m.getParameterCount() == arity && !m.isSynthetic()) {
-                    assertEquals(null, found, "ambiguous atom " + atom + "/" + arity);
+                if (m.getName().equals(atom) && !m.isSynthetic()) {
+                    assertEquals(null, found, "overloaded atom " + atom + ": name its parameter signature");
                     found = m;
                 }
             }
-            assertTrue(found != null, "missing atom " + atom + "/" + arity);
+            assertTrue(found != null, "missing atom " + atom);
             try {
                 return lookup.unreflect(found);
             } catch (IllegalAccessException e) {
@@ -442,11 +486,24 @@ class M3StringBuilderLaneAtomsTest {
             throw new AssertionError("missing atom " + atom + "(" + signature + ")");
         }
 
-        /** The declared constructor with {@code arity} parameters; {@code atom} must be the simple type name. */
-        MethodHandle constructor(String atom, int arity) {
+        //FLLDCIM: IOP - single-constructor lookup without an arity literal (util-lang-m3 RECIPE_MEMORY R016)
+        /** The only declared constructor; {@code atom} must be the simple type name. */
+        MethodHandle constructor(String atom) {
+            assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
+            Constructor<?>[] declared = type.getDeclaredConstructors();
+            assertEquals(1, declared.length, "overloaded constructor " + atom + ": name its parameter signature");
+            try {
+                return lookup.unreflectConstructor(declared[0]);
+            } catch (IllegalAccessException e) {
+                throw new AssertionError(atom, e);
+            }
+        }
+
+        /** The declared constructor whose parameter types print as {@code signature}. */
+        MethodHandle constructor(String atom, String signature) {
             assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
             for (Constructor<?> c : type.getDeclaredConstructors()) {
-                if (c.getParameterCount() == arity && !c.isSynthetic()) {
+                if (!c.isSynthetic() && signature(c.getParameterTypes()).equals(signature)) {
                     try {
                         return lookup.unreflectConstructor(c);
                     } catch (IllegalAccessException e) {
@@ -454,7 +511,7 @@ class M3StringBuilderLaneAtomsTest {
                     }
                 }
             }
-            throw new AssertionError("missing constructor " + atom + "/" + arity);
+            throw new AssertionError("missing constructor " + atom + "(" + signature + ")");
         }
 
         /** The declared constructors, for the private non-instantiable utility pattern. */

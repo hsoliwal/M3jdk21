@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class M3TimSortAtomsTest {
     private static final Access OWNER = new Access("java.util.M3TimSort");
     private static final Access CONTEXT = new Access("java.util.M3SortContext");
-    private static final MethodHandle NEW_CONTEXT = CONTEXT.constructor("M3SortContext", 2);
+    private static final MethodHandle NEW_CONTEXT = CONTEXT.constructor("M3SortContext");
     private static final long SEED = 0x4D33_534F_5254L;
     /** Kernel lengths around the insertion cut-off (24), TimSort MIN_MERGE (32) and powers of two. */
     private static final int[] SIZES = {2, 3, 4, 5, 7, 8, 16, 23, 24, 25, 31, 32, 33, 63, 64, 65, 100, 128, 257, 1000};
@@ -70,18 +70,30 @@ class M3TimSortAtomsTest {
     private static final int DIGIT_MASK = (1 << DIGIT_BITS) - 1;
     private static final int RADIX = 1 << DIGIT_BITS;
     private static final int TOP_SHIFT = Long.SIZE - DIGIT_BITS;
+    /** listsort.txt run-stack bounds carried by the OpenJDK donor: {array length, run stack size} at each threshold. */
+    private static final int[][] STACK_BOUNDS = {{119, 5}, {120, 10}, {1541, 10}, {1542, 24}, {119150, 24}, {119151, 49}};
+    /** pushRun fixture: {base, length} of three adjacent runs. */
+    private static final int[][] PUSHED_RUNS = {{0, 10}, {10, 5}, {15, 3}};
+    /** mergeCollapse fixture: run lengths that break both run-stack invariants on the way. */
+    private static final int[] COLLAPSE_RUNS = {50, 40, 30, 20, 25, 5, 5, 60, 7, 3};
+    /** mergeForceCollapse fixture: pending run lengths in no particular order, ending with a single element. */
+    private static final int[] FORCE_RUNS = {9, 33, 2, 17, 64, 1};
+    /** mergeAt fixture: three pending run lengths (merge at 0 or at 1). */
+    private static final int[] MERGE_AT_RUNS = {40, 25, 15};
+    /** mergeLo / mergeHi fixtures: {len1, len2} pairs with the buffered side shorter or equal, and key streaks. */
+    private static final int[][] MERGE_LO_LENGTHS = {{1, 5}, {5, 5}, {8, 40}, {33, 70}};
+    private static final int[][] MERGE_HI_LENGTHS = {{5, 1}, {5, 5}, {40, 8}, {70, 33}};
+    private static final int[] MERGE_STREAKS = {1, 9};
     /** M3TimSort(a, c, work, workBase, workLen) sizes tmp storage and the run stack from a.length. */
     @Test
     void M3TimSort() throws Throwable {
-        MethodHandle ctor = OWNER.constructor("M3TimSort", 5);
+        MethodHandle ctor = OWNER.constructor("M3TimSort");
         int initial = (int) OWNER.constant("INITIAL_TMP_STORAGE_LENGTH");
-        // listsort.txt stack bounds carried by the OpenJDK donor: length thresholds and stack sizes.
-        int[][] stackBounds = {{119, 5}, {120, 10}, {1541, 10}, {1542, 24}, {119150, 24}, {119151, 49}};
         VarHandle tmp = OWNER.field("tmp");
         VarHandle tmpLen = OWNER.field("tmpLen");
         VarHandle tmpBase = OWNER.field("tmpBase");
         VarHandle runBase = OWNER.field("runBase");
-        for (int[] bound : stackBounds) {
+        for (int[] bound : STACK_BOUNDS) {
             int length = bound[0];
             int[] keys = new int[length];
             Object ts = ctor.invoke(identity(length), context(keys), (int[]) null, 0, 0);
@@ -100,7 +112,7 @@ class M3TimSortAtomsTest {
     /** sort(a, lo, hi, c, work, workBase, workLen) stably sorts [lo, hi), with or without a work lane. */
     @Test
     void sort() throws Throwable {
-        MethodHandle atom = OWNER.method("sort", 7);
+        MethodHandle atom = OWNER.method("sort");
         forEachVector(0, (keys, labels) -> {
             int n = labels.length;
             int lo = n / QUARTER;
@@ -120,7 +132,7 @@ class M3TimSortAtomsTest {
     /** binarySort(a, lo, hi, start, c) inserts [start, hi) into the sorted prefix [lo, start), stably. */
     @Test
     void binarySort() throws Throwable {
-        MethodHandle atom = OWNER.method("binarySort", 5);
+        MethodHandle atom = OWNER.method("binarySort");
         forEachVector(1, (keys, labels) -> {
             int n = labels.length;
             int lo = n / QUARTER;
@@ -134,7 +146,7 @@ class M3TimSortAtomsTest {
     /** countRunAndMakeAscending(a, lo, hi, c) measures the maximal run at lo (length), reversing a strictly descending run. */
     @Test
     void countRunAndMakeAscending() throws Throwable {
-        MethodHandle atom = OWNER.method("countRunAndMakeAscending", 4);
+        MethodHandle atom = OWNER.method("countRunAndMakeAscending");
         forEachVector(2, (keys, labels) -> {
             int n = labels.length;
             for (int lo : new int[] {0, (n - 2) / 2, n - 2}) {
@@ -158,7 +170,7 @@ class M3TimSortAtomsTest {
     /** reverseRange(a, lo, hi, c) matches java.util.Collections.reverse on the sub-list. */
     @Test
     void reverseRange() throws Throwable {
-        MethodHandle atom = OWNER.method("reverseRange", 4);
+        MethodHandle atom = OWNER.method("reverseRange");
         forEachVector(0, (keys, labels) -> {
             int n = labels.length;
             int[][] ranges = {{0, n}, {n / QUARTER, n - n / QUARTER}, {n / 2, n / 2}};
@@ -175,7 +187,7 @@ class M3TimSortAtomsTest {
     /** minRunLength(n): n below MIN_MERGE, else the top bits of n plus one when any lower bit is set (listsort.txt). */
     @Test
     void minRunLength() throws Throwable {
-        MethodHandle atom = OWNER.method("minRunLength", 1);
+        MethodHandle atom = OWNER.method("minRunLength");
         int minMerge = (int) OWNER.constant("MIN_MERGE");
         int keptBits = Integer.SIZE - Integer.numberOfLeadingZeros(minMerge) - 1;
         IntStream probes = IntStream.concat(IntStream.range(0, minMerge * minMerge),
@@ -196,8 +208,8 @@ class M3TimSortAtomsTest {
     @Test
     void pushRun() throws Throwable {
         Object ts = timSort(new int[SIZES[SIZES.length - 1]]);
-        MethodHandle atom = OWNER.method("pushRun", 2);
-        int[][] runs = {{0, 10}, {10, 5}, {15, 3}};
+        MethodHandle atom = OWNER.method("pushRun");
+        int[][] runs = PUSHED_RUNS;
         for (int i = 0; i < runs.length; i++) {
             atom.invoke(ts, runs[i][0], runs[i][1]);
             assertEquals(i + 1, (int) OWNER.field("stackSize").get(ts));
@@ -208,9 +220,9 @@ class M3TimSortAtomsTest {
     /** mergeCollapse() re-establishes runLen[i-2] > runLen[i-1] + runLen[i] and runLen[i-1] > runLen[i]. */
     @Test
     void mergeCollapse() throws Throwable {
-        MethodHandle push = OWNER.method("pushRun", 2);
-        MethodHandle atom = OWNER.method("mergeCollapse", 0);
-        int[] lengths = {50, 40, 30, 20, 25, 5, 5, 60, 7, 3};
+        MethodHandle push = OWNER.method("pushRun");
+        MethodHandle atom = OWNER.method("mergeCollapse");
+        int[] lengths = COLLAPSE_RUNS;
         int total = IntStream.of(lengths).sum();
         for (Shape shape : Shape.values()) {
             int[] keys = keys(total, shape);
@@ -242,9 +254,9 @@ class M3TimSortAtomsTest {
     /** mergeForceCollapse() merges every pending run; the whole range is then one stable run. */
     @Test
     void mergeForceCollapse() throws Throwable {
-        MethodHandle push = OWNER.method("pushRun", 2);
-        MethodHandle atom = OWNER.method("mergeForceCollapse", 0);
-        int[] lengths = {9, 33, 2, 17, 64, 1};
+        MethodHandle push = OWNER.method("pushRun");
+        MethodHandle atom = OWNER.method("mergeForceCollapse");
+        int[] lengths = FORCE_RUNS;
         int total = IntStream.of(lengths).sum();
         for (Shape shape : Shape.values()) {
             int[] keys = keys(total, shape);
@@ -263,9 +275,9 @@ class M3TimSortAtomsTest {
     /** mergeAt(i) merges runs i and i + 1 (i = stackSize - 2 or - 3) stably and pops one run. */
     @Test
     void mergeAt() throws Throwable {
-        MethodHandle push = OWNER.method("pushRun", 2);
-        MethodHandle atom = OWNER.method("mergeAt", 1);
-        int[] lengths = {40, 25, 15};
+        MethodHandle push = OWNER.method("pushRun");
+        MethodHandle atom = OWNER.method("mergeAt");
+        int[] lengths = MERGE_AT_RUNS;
         int total = IntStream.of(lengths).sum();
         for (Shape shape : Shape.values()) {
             for (int i : new int[] {0, 1}) {
@@ -289,7 +301,7 @@ class M3TimSortAtomsTest {
     /** gallopLeft(key, a, base, len, hint, c): offset k with the TimSort left gallop contract, for every hint. */
     @Test
     void gallopLeft() throws Throwable {
-        MethodHandle atom = OWNER.method("gallopLeft", 6);
+        MethodHandle atom = OWNER.method("gallopLeft");
         forEachVector(1, (keys, labels) -> {
             int n = labels.length;
             int base = n / QUARTER;
@@ -314,7 +326,7 @@ class M3TimSortAtomsTest {
     /** gallopRight(key, a, base, len, hint, c): offset k with the TimSort right gallop contract, for every hint. */
     @Test
     void gallopRight() throws Throwable {
-        MethodHandle atom = OWNER.method("gallopRight", 6);
+        MethodHandle atom = OWNER.method("gallopRight");
         forEachVector(1, (keys, labels) -> {
             int n = labels.length;
             int base = n / QUARTER;
@@ -339,10 +351,10 @@ class M3TimSortAtomsTest {
     /** mergeLo(base1, len1, base2, len2) stably merges trimmed adjacent runs (low side buffered). */
     @Test
     void mergeLo() throws Throwable {
-        MethodHandle atom = OWNER.method("mergeLo", 4);
-        int[][] shapes = {{1, 5}, {5, 5}, {8, 40}, {33, 70}};
+        MethodHandle atom = OWNER.method("mergeLo");
+        int[][] shapes = MERGE_LO_LENGTHS;
         for (int[] lens : shapes) {
-            for (int streak : new int[] {1, 9}) {
+            for (int streak : MERGE_STREAKS) {
                 int len1 = lens[0];
                 int len2 = lens[1];
                 int[] keys = new int[len1 + len2];
@@ -366,10 +378,10 @@ class M3TimSortAtomsTest {
     /** mergeHi(base1, len1, base2, len2) stably merges trimmed adjacent runs (high side buffered). */
     @Test
     void mergeHi() throws Throwable {
-        MethodHandle atom = OWNER.method("mergeHi", 4);
-        int[][] shapes = {{5, 1}, {5, 5}, {40, 8}, {70, 33}};
+        MethodHandle atom = OWNER.method("mergeHi");
+        int[][] shapes = MERGE_HI_LENGTHS;
         for (int[] lens : shapes) {
-            for (int streak : new int[] {1, 9}) {
+            for (int streak : MERGE_STREAKS) {
                 int len1 = lens[0];
                 int len2 = lens[1];
                 int[] keys = new int[len1 + len2];
@@ -393,7 +405,7 @@ class M3TimSortAtomsTest {
     /** ensureCapacity(min) returns tmp holding at least min slots, growing to a bounded power of two. */
     @Test
     void ensureCapacity() throws Throwable {
-        MethodHandle atom = OWNER.method("ensureCapacity", 1);
+        MethodHandle atom = OWNER.method("ensureCapacity");
         int length = SIZES[SIZES.length - 1];
         Object ts = timSort(new int[length]);
         int[] initial = (int[]) OWNER.field("tmp").get(ts);
@@ -588,7 +600,7 @@ class M3TimSortAtomsTest {
     }
 
     private static Object timSort(int[] keys, int[] a) throws Throwable {
-        return OWNER.constructor("M3TimSort", 5).invoke(a, context(keys), (int[]) null, 0, 0);
+        return OWNER.constructor("M3TimSort").invoke(a, context(keys), (int[]) null, 0, 0);
     }
 
     /** Labels sorted stably within each consecutive run of the given lengths. */
@@ -616,16 +628,17 @@ class M3TimSortAtomsTest {
             }
         }
 
-        /** The unique declared, non-synthetic method {@code atom} with {@code arity} parameters. */
-        MethodHandle method(String atom, int arity) {
+        //FLLDCIM: IOP - name lookup replaces the arity lookup; overloads name their signature (util-lang-m3 RECIPE_MEMORY R016)
+        /** The unique declared, non-synthetic method {@code atom}; an overloaded atom needs its signature. */
+        MethodHandle method(String atom) {
             Method found = null;
             for (Method m : type.getDeclaredMethods()) {
-                if (m.getName().equals(atom) && m.getParameterCount() == arity && !m.isSynthetic()) {
-                    assertEquals(null, found, "ambiguous atom " + atom + "/" + arity);
+                if (m.getName().equals(atom) && !m.isSynthetic()) {
+                    assertEquals(null, found, "overloaded atom " + atom + ": name its parameter signature");
                     found = m;
                 }
             }
-            assertTrue(found != null, "missing atom " + atom + "/" + arity);
+            assertTrue(found != null, "missing atom " + atom);
             try {
                 return lookup.unreflect(found);
             } catch (IllegalAccessException e) {
@@ -647,11 +660,24 @@ class M3TimSortAtomsTest {
             throw new AssertionError("missing atom " + atom + "(" + signature + ")");
         }
 
-        /** The declared constructor with {@code arity} parameters; {@code atom} must be the simple type name. */
-        MethodHandle constructor(String atom, int arity) {
+        //FLLDCIM: IOP - single-constructor lookup without an arity literal (util-lang-m3 RECIPE_MEMORY R016)
+        /** The only declared constructor; {@code atom} must be the simple type name. */
+        MethodHandle constructor(String atom) {
+            assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
+            Constructor<?>[] declared = type.getDeclaredConstructors();
+            assertEquals(1, declared.length, "overloaded constructor " + atom + ": name its parameter signature");
+            try {
+                return lookup.unreflectConstructor(declared[0]);
+            } catch (IllegalAccessException e) {
+                throw new AssertionError(atom, e);
+            }
+        }
+
+        /** The declared constructor whose parameter types print as {@code signature}. */
+        MethodHandle constructor(String atom, String signature) {
             assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
             for (Constructor<?> c : type.getDeclaredConstructors()) {
-                if (c.getParameterCount() == arity && !c.isSynthetic()) {
+                if (!c.isSynthetic() && signature(c.getParameterTypes()).equals(signature)) {
                     try {
                         return lookup.unreflectConstructor(c);
                     } catch (IllegalAccessException e) {
@@ -659,7 +685,7 @@ class M3TimSortAtomsTest {
                     }
                 }
             }
-            throw new AssertionError("missing constructor " + atom + "/" + arity);
+            throw new AssertionError("missing constructor " + atom + "(" + signature + ")");
         }
 
         /** The declared constructors, for the private non-instantiable utility pattern. */

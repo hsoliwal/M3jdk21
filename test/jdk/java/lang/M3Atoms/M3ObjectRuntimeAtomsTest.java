@@ -49,25 +49,39 @@ class M3ObjectRuntimeAtomsTest {
     private static final int MANY_OWNERS = 40;
     private static final int UNKNOWN_MASK_BIT = 8;
     private static final int INITIAL_LANES = 4;
-    /** M3ObjectRuntime(): the only constructor is private and creates no observable state. */
+    //FLLDCIM: TOP - utility-class contract replaces the assertSame tautology (util-lang-m3 RECIPE_MEMORY R014)
+    /**
+     * M3ObjectRuntime(): the utility-class contract. The class is final and extends Object; its only constructor is private
+     * and takes no arguments; no field and no method is an instance member, so an instance could hold no state and
+     * do nothing (the constructor only denies instantiation). The private constructor itself completes normally.
+     */
     @Test
     void M3ObjectRuntime() throws Throwable {
+        Class<?> type = OWNER.type;
+        assertTrue(Modifier.isFinal(type.getModifiers()), "M3ObjectRuntime is final");
+        assertSame(Object.class, type.getSuperclass(), "M3ObjectRuntime extends Object directly");
         Constructor<?>[] declared = OWNER.constructors();
         assertEquals(1, declared.length, "M3ObjectRuntime declares one constructor");
         assertTrue(Modifier.isPrivate(declared[0].getModifiers()), "M3ObjectRuntime constructor is private");
-        Object instance = OWNER.constructor("M3ObjectRuntime", 0).invoke();
-        assertSame(OWNER.type, instance.getClass());
+        assertEquals(0, declared[0].getParameterCount(), "M3ObjectRuntime constructor takes no arguments");
+        for (java.lang.reflect.Field f : type.getDeclaredFields()) {
+            assertTrue(Modifier.isStatic(f.getModifiers()), "M3ObjectRuntime declares instance field " + f.getName());
+        }
+        for (Method m : type.getDeclaredMethods()) {
+            assertTrue(Modifier.isStatic(m.getModifiers()), "M3ObjectRuntime declares instance method " + m.getName());
+        }
+        OWNER.constructor("M3ObjectRuntime").invoke();
     }
     /** enabled() reflects the startup property and agrees with M3Object.observationEnabled(). */
     @Test
     void enabled() throws Throwable {
-        assertTrue((boolean) OWNER.method("enabled", 0).invoke(), "enabled under -Djdk.m3.objectEvents.enabled=true");
-        assertEquals(M3Object.observationEnabled(), (boolean) OWNER.method("enabled", 0).invoke());
+        assertTrue((boolean) OWNER.method("enabled").invoke(), "enabled under -Djdk.m3.objectEvents.enabled=true");
+        assertEquals(M3Object.observationEnabled(), (boolean) OWNER.method("enabled").invoke());
     }
     /** of(source) returns one capability per source identity, the one M3Object.of returns. */
     @Test
     void of() throws Throwable {
-        MethodHandle atom = OWNER.method("of", 1);
+        MethodHandle atom = OWNER.method("of");
         Node node = new Node();
         Object owner = atom.invoke(node);
         assertSame(owner, atom.invoke(node), "of is identity-bound");
@@ -78,7 +92,7 @@ class M3ObjectRuntimeAtomsTest {
     /** findLocked(source) finds a registered owner and returns null for an unknown source. */
     @Test
     void findLocked() throws Throwable {
-        MethodHandle atom = OWNER.method("findLocked", 1);
+        MethodHandle atom = OWNER.method("findLocked");
         Node unknown = new Node();
         Node known = new Node();
         M3Object owner = M3Object.of(known);
@@ -91,7 +105,7 @@ class M3ObjectRuntimeAtomsTest {
     /** ofLocked(source) registers new owners, reusing them, and grows the weak registry when full. */
     @Test
     void ofLocked() throws Throwable {
-        MethodHandle atom = OWNER.method("ofLocked", 1);
+        MethodHandle atom = OWNER.method("ofLocked");
         List<Object> retained = new ArrayList<>();
         List<Node> sources = new ArrayList<>();
         locked(() -> {
@@ -109,7 +123,7 @@ class M3ObjectRuntimeAtomsTest {
     /** plan(lookup, declaringType, name, type) shares one reachable plan per key. */
     @Test
     void plan() throws Throwable {
-        MethodHandle atom = OWNER.method("plan", 4);
+        MethodHandle atom = OWNER.method("plan");
         Object p = atom.invoke(LOOKUP, Node.class, "count", int.class);
         assertSame(p, atom.invoke(LOOKUP, Node.class, "count", int.class), "plan shares");
         assertNotSame(p, atom.invoke(LOOKUP, Node.class, "ratio", float.class), "another name");
@@ -120,7 +134,7 @@ class M3ObjectRuntimeAtomsTest {
     /** set(field, value) writes, type-checks, and publishes only real changes. */
     @Test
     void set() throws Throwable {
-        MethodHandle atom = OWNER.method("set", 2);
+        MethodHandle atom = OWNER.method("set");
         Node node = new Node();
         M3Object.Field ref = field(node, "ref", Object.class);
         M3Object.Field count = field(node, "count", int.class);
@@ -142,7 +156,7 @@ class M3ObjectRuntimeAtomsTest {
     /** compareAndSet(field, expected, value) succeeds only on the expected value and publishes the change. */
     @Test
     void compareAndSet() throws Throwable {
-        MethodHandle atom = OWNER.method("compareAndSet", 3);
+        MethodHandle atom = OWNER.method("compareAndSet");
         Node node = new Node();
         M3Object.Field count = field(node, "count", int.class);
         Recorder r = new Recorder();
@@ -162,12 +176,12 @@ class M3ObjectRuntimeAtomsTest {
         M3Object.Field count = field(node, "count", int.class);
         Recorder r = new Recorder();
         try (ObjectSubscription s = count.listen(ObjectEvent.VALUE, r)) {
-            locked(() -> OWNER.method("fieldChangedLocked", 2).invoke(M3Object.of(node), plan(count)));
+            locked(() -> OWNER.method("fieldChangedLocked").invoke(M3Object.of(node), plan(count)));
             ObjectEvent e = r.next();
             assertEquals(ObjectEvent.VALUE, e.mask());
             assertSame(node, e.source());
         }
-        locked(() -> OWNER.method("fieldChangedLocked", 2).invoke(M3Object.of(new Node()), plan(count)));
+        locked(() -> OWNER.method("fieldChangedLocked").invoke(M3Object.of(new Node()), plan(count)));
     }
     /** contentChanged(owner) delivers one CONTENT event to whole-owner listeners. */
     @Test
@@ -175,7 +189,7 @@ class M3ObjectRuntimeAtomsTest {
         Node node = new Node();
         Recorder r = new Recorder();
         try (ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r)) {
-            OWNER.method("contentChanged", 1).invoke(M3Object.of(node));
+            OWNER.method("contentChanged").invoke(M3Object.of(node));
             ObjectEvent e = r.next();
             assertEquals(ObjectEvent.CONTENT, e.mask());
             assertEquals(null, e.field(), "a whole-owner event names no field");
@@ -184,11 +198,11 @@ class M3ObjectRuntimeAtomsTest {
     /** notifyContentChanged(source) rejects null, never creates an owner, and notifies observed sources. */
     @Test
     void notifyContentChanged() throws Throwable {
-        MethodHandle atom = OWNER.method("notifyContentChanged", 1);
+        MethodHandle atom = OWNER.method("notifyContentChanged");
         assertEquals("source", assertThrows(NullPointerException.class, () -> atom.invoke((Object) null)).getMessage());
         Node stranger = new Node();
         atom.invoke(stranger);
-        locked(() -> assertEquals(null, OWNER.method("findLocked", 1).invoke(stranger), "notifyContentChanged creates no owner"));
+        locked(() -> assertEquals(null, OWNER.method("findLocked").invoke(stranger), "notifyContentChanged creates no owner"));
         Node node = new Node();
         Recorder r = new Recorder();
         try (ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r)) {
@@ -199,7 +213,7 @@ class M3ObjectRuntimeAtomsTest {
     /** notifyFieldChanged(source, declaringType, name, type, mask) validates the commit and notifies the field slot. */
     @Test
     void notifyFieldChanged() throws Throwable {
-        MethodHandle atom = OWNER.method("notifyFieldChanged", 5);
+        MethodHandle atom = OWNER.method("notifyFieldChanged");
         Node node = new Node();
         assertThrows(NullPointerException.class, () -> atom.invoke(node, Node.class, null, Object.class, ObjectEvent.REFERENCE));
         String invalid = "invalid committed field notification";
@@ -219,7 +233,7 @@ class M3ObjectRuntimeAtomsTest {
     /** listen(owner, field, mask, listener) validates, admits a subscription and delivers to it. */
     @Test
     void listen() throws Throwable {
-        MethodHandle atom = OWNER.method("listen", 4);
+        MethodHandle atom = OWNER.method("listen");
         Node node = new Node();
         M3Object owner = M3Object.of(node);
         Recorder r = new Recorder();
@@ -238,7 +252,7 @@ class M3ObjectRuntimeAtomsTest {
     /** close(subscription) detaches the subscriber exactly once; later changes are not delivered. */
     @Test
     void close() throws Throwable {
-        MethodHandle atom = OWNER.method("close", 1);
+        MethodHandle atom = OWNER.method("close");
         Node node = new Node();
         Recorder r = new Recorder();
         ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r);
@@ -252,7 +266,7 @@ class M3ObjectRuntimeAtomsTest {
     /** stateLocked(owner) creates the owner's State once, with a fresh increasing id. */
     @Test
     void stateLocked() throws Throwable {
-        MethodHandle atom = OWNER.method("stateLocked", 1);
+        MethodHandle atom = OWNER.method("stateLocked");
         M3Object first = M3Object.of(new Node());
         M3Object second = M3Object.of(new Node());
         locked(() -> {
@@ -271,7 +285,7 @@ class M3ObjectRuntimeAtomsTest {
         try (ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r)) {
             Object st = state(node);
             long before = (long) STATE.field("sequence").get(st);
-            locked(() -> OWNER.method("publishLocked", 3).invoke(st, -1, ObjectEvent.CONTENT));
+            locked(() -> OWNER.method("publishLocked").invoke(st, -1, ObjectEvent.CONTENT));
             ObjectEvent e = r.next();
             assertEquals(ObjectEvent.CONTENT, e.mask());
             assertEquals(before + 1, e.sequence(), "publishLocked advances the sequence");
@@ -287,7 +301,7 @@ class M3ObjectRuntimeAtomsTest {
         long originSequence = 1L << Short.SIZE;
         try (ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r)) {
             Object st = state(node);
-            MethodHandle atom = OWNER.method("captureLocked", 5);
+            MethodHandle atom = OWNER.method("captureLocked");
             locked(() -> atom.invoke(st, -1, ObjectEvent.VALUE, origin, originSequence));
             r.quiet();
             locked(() -> atom.invoke(st, -1, ObjectEvent.CONTENT | ObjectEvent.VALUE, origin, originSequence));
@@ -304,7 +318,7 @@ class M3ObjectRuntimeAtomsTest {
         Recorder r = new Recorder();
         try (ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r)) {
             Object st = state(node);
-            MethodHandle atom = OWNER.method("enqueueLocked", 1);
+            MethodHandle atom = OWNER.method("enqueueLocked");
             locked(() -> {
                 atom.invoke(st);
                 assertTrue((boolean) STATE.field("queued").get(st), "enqueueLocked marks the owner queued");
@@ -327,10 +341,10 @@ class M3ObjectRuntimeAtomsTest {
         Recorder r = new Recorder();
         try (ObjectSubscription s = M3Object.of(node).listen(ObjectEvent.CONTENT, r)) {
             Object st = state(node);
-            MethodHandle atom = OWNER.method("removeIfCleanLocked", 1);
+            MethodHandle atom = OWNER.method("removeIfCleanLocked");
             int index = (int) new Access("java.lang.ObjectSubscription").field("index").get(s);
             locked(() -> {
-                OWNER.method("enqueueLocked", 1).invoke(st);
+                OWNER.method("enqueueLocked").invoke(st);
                 ((int[]) STATE.field("pending").get(st))[index] = ObjectEvent.CONTENT;
                 atom.invoke(st);
                 assertTrue((boolean) STATE.field("queued").get(st), "pending work keeps the owner queued");
@@ -345,7 +359,7 @@ class M3ObjectRuntimeAtomsTest {
     /** ensureWorkerLocked() starts one daemon "M3Object-dispatch" thread and reuses it. */
     @Test
     void ensureWorkerLocked() throws Throwable {
-        MethodHandle atom = OWNER.method("ensureWorkerLocked", 0);
+        MethodHandle atom = OWNER.method("ensureWorkerLocked");
         locked(() -> {
             atom.invoke();
             Thread worker = (Thread) OWNER.field("worker").get();
@@ -388,7 +402,7 @@ class M3ObjectRuntimeAtomsTest {
             });
             onInnocuousThread(() -> {
                 try {
-                    OWNER.method("drain", 1).invoke(st);
+                    OWNER.method("drain").invoke(st);
                 } catch (Throwable e) {
                     throw new AssertionError(e);
                 }
@@ -414,10 +428,10 @@ class M3ObjectRuntimeAtomsTest {
         try (ObjectSubscription s = ref.listen(ObjectEvent.CONTENT, r)) {
             Object parentState = state(parent);
             Object childState = state(child);
-            int slot = (int) STATE.method("findField", 3).invoke(parentState, Node.class, "ref", Object.class);
+            int slot = (int) STATE.method("findField").invoke(parentState, Node.class, "ref", Object.class);
             assertSame(childState, ((Object[]) STATE.field("children").get(parentState))[slot], "a follow edge exists");
             assertEquals(1, (int) STATE.field("parentCount").get(childState));
-            locked(() -> OWNER.method("detachLocked", 2).invoke(parentState, slot));
+            locked(() -> OWNER.method("detachLocked").invoke(parentState, slot));
             assertEquals(0, (int) STATE.field("parentCount").get(childState), "detachLocked unlinks the child");
             assertEquals(null, ((Object[]) STATE.field("children").get(parentState))[slot]);
         }
@@ -434,7 +448,7 @@ class M3ObjectRuntimeAtomsTest {
         try (ObjectSubscription s = ref.listen(ObjectEvent.CONTENT, r)) {
             Object parentState = state(parent);
             Object childState = state(child);
-            int slot = (int) STATE.method("findField", 3).invoke(parentState, Node.class, "ref", Object.class);
+            int slot = (int) STATE.method("findField").invoke(parentState, Node.class, "ref", Object.class);
             assertSame(childState, ((Object[]) STATE.field("children").get(parentState))[slot], "a follow edge exists");
             assertEquals(1, (int) STATE.field("parentCount").get(childState));
             parent.ref = other;
@@ -456,7 +470,7 @@ class M3ObjectRuntimeAtomsTest {
         try (ObjectSubscription s = ref.listen(ObjectEvent.CONTENT, r)) {
             Object parentState = state(parent);
             Object childState = state(child);
-            int slot = (int) STATE.method("findField", 3).invoke(parentState, Node.class, "ref", Object.class);
+            int slot = (int) STATE.method("findField").invoke(parentState, Node.class, "ref", Object.class);
             assertSame(childState, ((Object[]) STATE.field("children").get(parentState))[slot], "a follow edge exists");
             assertEquals(1, (int) STATE.field("parentCount").get(childState));
             locked(() -> OWNER.method("rebindLocked", "State,int,boolean,boolean").invoke(parentState, slot, false, false));
@@ -468,7 +482,7 @@ class M3ObjectRuntimeAtomsTest {
     @Test
     void state_State() throws Throwable {
         M3Object owner = M3Object.of(new Node());
-        Object st = STATE.constructor("State", 2).invoke(owner, (long) INITIAL_LANES);
+        Object st = STATE.constructor("State").invoke(owner, (long) INITIAL_LANES);
         assertSame(owner, STATE.field("owner").get(st));
         assertEquals((long) INITIAL_LANES, (long) STATE.field("id").get(st));
         assertEquals(null, STATE.field("subscriptions").get(st), "lanes are allocated only for admitted work");
@@ -476,8 +490,8 @@ class M3ObjectRuntimeAtomsTest {
     /** interested() is true exactly when the owner has subscribers or parents. */
     @Test
     void state_interested() throws Throwable {
-        Object st = STATE.constructor("State", 2).invoke(M3Object.of(new Node()), 1L);
-        MethodHandle atom = STATE.method("interested", 0);
+        Object st = STATE.constructor("State").invoke(M3Object.of(new Node()), 1L);
+        MethodHandle atom = STATE.method("interested");
         assertFalse((boolean) atom.invoke(st));
         STATE.field("subscriberCount").set(st, 1);
         assertTrue((boolean) atom.invoke(st));
@@ -488,8 +502,8 @@ class M3ObjectRuntimeAtomsTest {
     /** subscriberSlot() returns the first free slot, growing all subscriber lanes together (4, then doubling). */
     @Test
     void state_subscriberSlot() throws Throwable {
-        Object st = STATE.constructor("State", 2).invoke(M3Object.of(new Node()), 1L);
-        MethodHandle atom = STATE.method("subscriberSlot", 0);
+        Object st = STATE.constructor("State").invoke(M3Object.of(new Node()), 1L);
+        MethodHandle atom = STATE.method("subscriberSlot");
         assertEquals(0, (int) atom.invoke(st));
         Object[] subscriptions = (Object[]) STATE.field("subscriptions").get(st);
         assertEquals(INITIAL_LANES, subscriptions.length);
@@ -507,10 +521,10 @@ class M3ObjectRuntimeAtomsTest {
     @Test
     void state_findField() throws Throwable {
         Node node = new Node();
-        Object st = STATE.constructor("State", 2).invoke(M3Object.of(node), 1L);
-        MethodHandle atom = STATE.method("findField", 3);
+        Object st = STATE.constructor("State").invoke(M3Object.of(node), 1L);
+        MethodHandle atom = STATE.method("findField");
         assertEquals(-1, (int) atom.invoke(st, Node.class, "ref", Object.class));
-        int slot = (int) STATE.method("fieldSlot", 1).invoke(st, field(node, "ref", Object.class));
+        int slot = (int) STATE.method("fieldSlot").invoke(st, field(node, "ref", Object.class));
         assertEquals(slot, (int) atom.invoke(st, Node.class, "ref", Object.class));
         assertEquals(-1, (int) atom.invoke(st, Node.class, "ref", String.class), "type is part of the key");
     }
@@ -518,8 +532,8 @@ class M3ObjectRuntimeAtomsTest {
     @Test
     void state_fieldSlot() throws Throwable {
         Node node = new Node();
-        Object st = STATE.constructor("State", 2).invoke(M3Object.of(node), 1L);
-        MethodHandle atom = STATE.method("fieldSlot", 1);
+        Object st = STATE.constructor("State").invoke(M3Object.of(node), 1L);
+        MethodHandle atom = STATE.method("fieldSlot");
         int ref = (int) atom.invoke(st, field(node, "ref", Object.class));
         assertEquals(ref, (int) atom.invoke(st, field(node, "ref", Object.class)), "equal key, same slot");
         int count = (int) atom.invoke(st, field(node, "count", int.class));
@@ -536,8 +550,8 @@ class M3ObjectRuntimeAtomsTest {
     /** ensureParentCapacity() allocates 4 parent lanes and doubles them when parentCount reaches capacity. */
     @Test
     void state_ensureParentCapacity() throws Throwable {
-        Object st = STATE.constructor("State", 2).invoke(M3Object.of(new Node()), 1L);
-        MethodHandle atom = STATE.method("ensureParentCapacity", 0);
+        Object st = STATE.constructor("State").invoke(M3Object.of(new Node()), 1L);
+        MethodHandle atom = STATE.method("ensureParentCapacity");
         atom.invoke(st);
         assertEquals(INITIAL_LANES, ((Object[]) STATE.field("parents").get(st)).length);
         atom.invoke(st);
@@ -552,11 +566,11 @@ class M3ObjectRuntimeAtomsTest {
     @Test
     void state_addParent() throws Throwable {
         Node node = new Node();
-        Object parent = STATE.constructor("State", 2).invoke(M3Object.of(node), 1L);
-        int slot = (int) STATE.method("fieldSlot", 1).invoke(parent, field(node, "ref", Object.class));
-        Object child = STATE.constructor("State", 2).invoke(M3Object.of(new Node()), 2L);
-        STATE.method("ensureParentCapacity", 0).invoke(child);
-        STATE.method("addParent", 2).invoke(child, parent, slot);
+        Object parent = STATE.constructor("State").invoke(M3Object.of(node), 1L);
+        int slot = (int) STATE.method("fieldSlot").invoke(parent, field(node, "ref", Object.class));
+        Object child = STATE.constructor("State").invoke(M3Object.of(new Node()), 2L);
+        STATE.method("ensureParentCapacity").invoke(child);
+        STATE.method("addParent").invoke(child, parent, slot);
         assertEquals(1, (int) STATE.field("parentCount").get(child));
         assertSame(parent, ((Object[]) STATE.field("parents").get(child))[0]);
         assertEquals(slot, ((int[]) STATE.field("parentSlots").get(child))[0]);
@@ -566,14 +580,14 @@ class M3ObjectRuntimeAtomsTest {
     /** clearPending(index) resets every pending lane at that index and leaves the others. */
     @Test
     void state_clearPending() throws Throwable {
-        Object st = STATE.constructor("State", 2).invoke(M3Object.of(new Node()), 1L);
-        STATE.method("subscriberSlot", 0).invoke(st);
+        Object st = STATE.constructor("State").invoke(M3Object.of(new Node()), 1L);
+        STATE.method("subscriberSlot").invoke(st);
         for (String lane : new String[] {"firstSequences", "sequences", "pendingGenerations", "origins", "originSequences"}) {
             java.util.Arrays.fill((long[]) STATE.field(lane).get(st), 1L);
         }
         java.util.Arrays.fill((int[]) STATE.field("pending").get(st), ObjectEvent.ALL);
         java.util.Arrays.fill((boolean[]) STATE.field("coalesced").get(st), true);
-        STATE.method("clearPending", 1).invoke(st, 1);
+        STATE.method("clearPending").invoke(st, 1);
         assertEquals(0, ((int[]) STATE.field("pending").get(st))[1]);
         assertEquals(ObjectEvent.ALL, ((int[]) STATE.field("pending").get(st))[0], "other indexes untouched");
         assertFalse(((boolean[]) STATE.field("coalesced").get(st))[1]);
@@ -584,7 +598,7 @@ class M3ObjectRuntimeAtomsTest {
     /** AccessPlan(lookup, declaringType, name, type) records the key and resolves nothing eagerly. */
     @Test
     void plan_AccessPlan() throws Throwable {
-        Object p = PLAN.constructor("AccessPlan", 4).invoke(LOOKUP, Node.class, "count", int.class);
+        Object p = PLAN.constructor("AccessPlan").invoke(LOOKUP, Node.class, "count", int.class);
         assertSame(LOOKUP, PLAN.field("lookup").get(p));
         assertSame(Node.class, PLAN.field("declaringType").get(p));
         assertEquals("count", PLAN.field("name").get(p));
@@ -595,7 +609,7 @@ class M3ObjectRuntimeAtomsTest {
     @Test
     void plan_matches() throws Throwable {
         Object p = planOf("count", int.class);
-        MethodHandle atom = PLAN.method("matches", 3);
+        MethodHandle atom = PLAN.method("matches");
         assertTrue((boolean) atom.invoke(p, Node.class, "count", int.class));
         assertFalse((boolean) atom.invoke(p, SubNode.class, "count", int.class), "subclass is a different key");
         assertFalse((boolean) atom.invoke(p, Node.class, "ratio", int.class));
@@ -605,7 +619,7 @@ class M3ObjectRuntimeAtomsTest {
     /** resolve() resolves and caches a VarHandle on the declaring class only. */
     @Test
     void plan_resolve() throws Throwable {
-        MethodHandle atom = PLAN.method("resolve", 0);
+        MethodHandle atom = PLAN.method("resolve");
         Object p = planOf("count", int.class);
         VarHandle h = (VarHandle) atom.invoke(p);
         assertSame(h, atom.invoke(p), "resolve caches");
@@ -615,13 +629,13 @@ class M3ObjectRuntimeAtomsTest {
         Object missing = planOf("missing", int.class);
         assertEquals("cannot resolve instance field " + Node.class.getName() + ".missing",
                 assertThrows(IllegalArgumentException.class, () -> atom.invoke(missing)).getMessage());
-        Object inherited = PLAN.constructor("AccessPlan", 4).invoke(LOOKUP, SubNode.class, "count", int.class);
+        Object inherited = PLAN.constructor("AccessPlan").invoke(LOOKUP, SubNode.class, "count", int.class);
         assertThrows(IllegalArgumentException.class, () -> atom.invoke(inherited), "inherited members do not resolve");
     }
     /** checkValue(value) rejects null primitives and values of the wrong (boxed) type. */
     @Test
     void plan_checkValue() throws Throwable {
-        MethodHandle atom = PLAN.method("checkValue", 1);
+        MethodHandle atom = PLAN.method("checkValue");
         Object count = planOf("count", int.class);
         atom.invoke(count, 1);
         assertEquals("primitive value", assertThrows(NullPointerException.class, () -> atom.invoke(count, null)).getMessage());
@@ -630,7 +644,7 @@ class M3ObjectRuntimeAtomsTest {
         Object ratio = planOf("ratio", float.class);
         atom.invoke(ratio, 1f);
         assertThrows(ClassCastException.class, () -> atom.invoke(ratio, 1d));
-        Object typed = PLAN.constructor("AccessPlan", 4).invoke(LOOKUP, Node.class, "ref", Node.class);
+        Object typed = PLAN.constructor("AccessPlan").invoke(LOOKUP, Node.class, "ref", Node.class);
         atom.invoke(typed, null);
         atom.invoke(typed, new SubNode());
         assertEquals("value is not " + Node.class.getName(),
@@ -639,7 +653,7 @@ class M3ObjectRuntimeAtomsTest {
     /** same(left, right) is identity for references and bit identity for primitives. */
     @Test
     void plan_same() throws Throwable {
-        MethodHandle atom = PLAN.method("same", 2);
+        MethodHandle atom = PLAN.method("same");
         Object ref = planOf("ref", Object.class);
         String a = "same";
         assertTrue((boolean) atom.invoke(ref, a, a));
@@ -654,13 +668,13 @@ class M3ObjectRuntimeAtomsTest {
     /** bits(value) distinguishes primitive values and is undefined (AssertionError) for references. */
     @Test
     void plan_bits() throws Throwable {
-        MethodHandle atom = PLAN.method("bits", 1);
+        MethodHandle atom = PLAN.method("bits");
         Object count = planOf("count", int.class);
         assertEquals((long) atom.invoke(count, 1), (long) atom.invoke(count, 1));
         assertTrue((long) atom.invoke(count, 1) != (long) atom.invoke(count, 2));
         Object ratio = planOf("ratio", float.class);
         assertTrue((long) atom.invoke(ratio, 0f) != (long) atom.invoke(ratio, -0f));
-        Object flag = PLAN.constructor("AccessPlan", 4).invoke(LOOKUP, Node.class, "flag", boolean.class);
+        Object flag = PLAN.constructor("AccessPlan").invoke(LOOKUP, Node.class, "flag", boolean.class);
         assertTrue((long) atom.invoke(flag, true) != (long) atom.invoke(flag, false));
         assertEquals("unsupported primitive field",
                 assertThrows(AssertionError.class, () -> atom.invoke(planOf("ref", Object.class), "x")).getMessage());
@@ -669,7 +683,7 @@ class M3ObjectRuntimeAtomsTest {
     @Test
     void m3object_constructor() throws Throwable {
         Node node = new Node();
-        M3Object owner = (M3Object) M3_OBJECT.constructor("M3Object", 1).invoke(node);
+        M3Object owner = (M3Object) M3_OBJECT.constructor("M3Object").invoke(node);
         assertSame(node, owner.source());
         assertEquals(null, M3_OBJECT.field("state").get(owner));
         assertNotSame(M3Object.of(node), owner, "only M3Object.of registers identity-bound capabilities");
@@ -679,7 +693,7 @@ class M3ObjectRuntimeAtomsTest {
     void field_constructor() throws Throwable {
         Node node = new Node();
         Object plan = planOf("ref", Object.class);
-        M3Object.Field f = (M3Object.Field) FIELD.constructor("Field", 2).invoke(M3Object.of(node), plan);
+        M3Object.Field f = (M3Object.Field) FIELD.constructor("Field").invoke(M3Object.of(node), plan);
         assertSame(node, f.source());
         assertSame(plan, FIELD.field("plan").get(f));
         assertEquals("ref", f.name());
@@ -744,7 +758,7 @@ class M3ObjectRuntimeAtomsTest {
     }
 
     static Object planOf(String name, Class<?> type) throws Throwable {
-        return PLAN.constructor("AccessPlan", 4).invoke(LOOKUP, Node.class, name, type);
+        return PLAN.constructor("AccessPlan").invoke(LOOKUP, Node.class, name, type);
     }
 
     /** Runs {@code body} on an InnocuousThread, as the framework dispatch thread does. */
@@ -779,16 +793,17 @@ class M3ObjectRuntimeAtomsTest {
             }
         }
 
-        /** The unique declared, non-synthetic method {@code atom} with {@code arity} parameters. */
-        MethodHandle method(String atom, int arity) {
+        //FLLDCIM: IOP - name lookup replaces the arity lookup; overloads name their signature (util-lang-m3 RECIPE_MEMORY R016)
+        /** The unique declared, non-synthetic method {@code atom}; an overloaded atom needs its signature. */
+        MethodHandle method(String atom) {
             Method found = null;
             for (Method m : type.getDeclaredMethods()) {
-                if (m.getName().equals(atom) && m.getParameterCount() == arity && !m.isSynthetic()) {
-                    assertEquals(null, found, "ambiguous atom " + atom + "/" + arity);
+                if (m.getName().equals(atom) && !m.isSynthetic()) {
+                    assertEquals(null, found, "overloaded atom " + atom + ": name its parameter signature");
                     found = m;
                 }
             }
-            assertTrue(found != null, "missing atom " + atom + "/" + arity);
+            assertTrue(found != null, "missing atom " + atom);
             try {
                 return lookup.unreflect(found);
             } catch (IllegalAccessException e) {
@@ -810,11 +825,24 @@ class M3ObjectRuntimeAtomsTest {
             throw new AssertionError("missing atom " + atom + "(" + signature + ")");
         }
 
-        /** The declared constructor with {@code arity} parameters; {@code atom} must be the simple type name. */
-        MethodHandle constructor(String atom, int arity) {
+        //FLLDCIM: IOP - single-constructor lookup without an arity literal (util-lang-m3 RECIPE_MEMORY R016)
+        /** The only declared constructor; {@code atom} must be the simple type name. */
+        MethodHandle constructor(String atom) {
+            assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
+            Constructor<?>[] declared = type.getDeclaredConstructors();
+            assertEquals(1, declared.length, "overloaded constructor " + atom + ": name its parameter signature");
+            try {
+                return lookup.unreflectConstructor(declared[0]);
+            } catch (IllegalAccessException e) {
+                throw new AssertionError(atom, e);
+            }
+        }
+
+        /** The declared constructor whose parameter types print as {@code signature}. */
+        MethodHandle constructor(String atom, String signature) {
             assertEquals(type.getSimpleName(), atom, "constructor atoms carry the type name");
             for (Constructor<?> c : type.getDeclaredConstructors()) {
-                if (c.getParameterCount() == arity && !c.isSynthetic()) {
+                if (!c.isSynthetic() && signature(c.getParameterTypes()).equals(signature)) {
                     try {
                         return lookup.unreflectConstructor(c);
                     } catch (IllegalAccessException e) {
@@ -822,7 +850,7 @@ class M3ObjectRuntimeAtomsTest {
                     }
                 }
             }
-            throw new AssertionError("missing constructor " + atom + "/" + arity);
+            throw new AssertionError("missing constructor " + atom + "(" + signature + ")");
         }
 
         /** The declared constructors, for the private non-instantiable utility pattern. */
