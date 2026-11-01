@@ -1,0 +1,146 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+// Atoms of M3StateRelation.java (package-private numeric relation kernel).
+// Oracle: RelationOracle Boolean product over java.util.BitSet rows.
+#class M3StateRelationAtomTest
+#summary Per-atom contracts of jdk.internal.mindex.M3StateRelation against a java.util.BitSet Boolean product
+#build RelationOracle
+#import java.util.Arrays java.util.SplittableRandom
+#helper <<<
+    private static final Class<?> OWNER = M3AtomKit.type("M3StateRelation");
+    private static final MethodType COMPOSE = MethodType.methodType(void.class, long[].class, int.class,
+            long[].class, int.class, long[].class, int.class, int.class);
+    /** Largest relation dimension (one long row per state). */
+    private static final int MAX_STATES = Long.SIZE;
+    /** Smallest dimension of the dense composition lane. */
+    private static final int DENSE_STATES = 16;
+    /** Bit densities of the generated relations: sparse, medium, dense. */
+    private static final double[] DENSITIES = {0.05, 0.3, 0.7};
+    /** Padding words around every row block (offsets must be honoured exactly). */
+    private static final int PAD = 3;
+    /** Fill of the padding words; must survive every call. */
+    private static final long FILL = 0x5A5A5A5A5A5A5A5AL;
+
+    private static long[] padded(long[] rows) {
+        long[] out = new long[rows.length + 2 * PAD];
+        Arrays.fill(out, FILL);
+        System.arraycopy(rows, 0, out, PAD, rows.length);
+        return out;
+    }
+
+    private static long union(long[] rows, long active) {
+        long result = 0L;
+        for (int s = 0; s < rows.length; s++) {
+            if ((active & (1L << s)) != 0) {
+                result |= rows[s];
+            }
+        }
+        return result;
+    }
+
+    /** Runs a compose-shaped atom on padded copies and checks result, padding and inputs. */
+    private static void checkCompose(MethodHandle atom, String atomName, boolean denseOnly) throws Throwable {
+        SplittableRandom random = M3AtomKit.random(atomName);
+        for (int c = 0; c < M3AtomKit.CASES; c++) {
+            int states = denseOnly ? random.nextInt(DENSE_STATES, MAX_STATES + 1) : random.nextInt(1, MAX_STATES + 1);
+            double density = DENSITIES[c % DENSITIES.length];
+            long[] left = RelationOracle.randomRelation(random, states, density);
+            long[] right = RelationOracle.randomRelation(random, states, density);
+            if (c % 2 == 1 && states > 1) {
+                left[1] = left[0];
+            }
+            long[] l = padded(left);
+            long[] r = padded(right);
+            long[] out = padded(new long[states]);
+            atom.invokeExact(l, PAD, r, PAD, out, PAD, states);
+            long[] expected = RelationOracle.compose(left, right);
+            assertArrayEquals(expected, Arrays.copyOfRange(out, PAD, PAD + states), atomName + " states=" + states);
+            assertArrayEquals(padded(left), l, "left unchanged");
+            assertArrayEquals(padded(right), r, "right unchanged");
+            for (int i = 0; i < PAD; i++) {
+                assertEquals(FILL, out[i], "prefix padding");
+                assertEquals(FILL, out[out.length - 1 - i], "suffix padding");
+            }
+        }
+    }
+>>>
+
+@atom M3StateRelation.M3StateRelation 1 UTILITY_CTOR java.lang.reflect.Modifier
+type = M3StateRelation
+
+@atom M3StateRelation.compose 1 SCENARIO RelationOracle.compose
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OWNER, "compose", COMPOSE);
+>>>
+check <<<
+checkCompose(atom, "compose", false);
+checkCompose(atom, "compose.dense", true);
+long[] identity = RelationOracle.identity(MAX_STATES);
+long[] result = new long[MAX_STATES];
+atom.invokeExact(identity, 0, identity, 0, result, 0, MAX_STATES);
+assertArrayEquals(identity, result, "identity is neutral at 64 states");
+>>>
+
+@atom M3StateRelation.applyRows 1 SCENARIO java.util.BitSet-row-union
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OWNER, "applyRows",
+        MethodType.methodType(long.class, long[].class, int.class, long.class));
+SplittableRandom random = M3AtomKit.random("applyRows");
+>>>
+check <<<
+for (int c = 0; c < M3AtomKit.OPERATIONS; c++) {
+    long[] rows = RelationOracle.randomRelation(random, MAX_STATES, DENSITIES[c % DENSITIES.length]);
+    long active = random.nextLong();
+    long[] p = padded(rows);
+    assertEquals(union(rows, active), (long) atom.invokeExact(p, PAD, active), "active=" + Long.toHexString(active));
+}
+assertEquals(0L, (long) atom.invokeExact(new long[] {-1L}, 0, 0L), "empty frontier");
+>>>
+
+@atom M3StateRelation.composeDense 1 SCENARIO RelationOracle.compose
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OWNER, "composeDense", COMPOSE);
+>>>
+check <<<
+checkCompose(atom, "composeDense", false);
+>>>
+
+@atom M3StateRelation.applyRowsUntil 1 SCENARIO java.util.BitSet-row-union
+setup <<<
+MethodHandle atom = M3AtomKit.findStatic(OWNER, "applyRowsUntil",
+        MethodType.methodType(long.class, long[].class, int.class, long.class, long.class));
+SplittableRandom random = M3AtomKit.random("applyRowsUntil");
+>>>
+check <<<
+for (int c = 0; c < M3AtomKit.OPERATIONS; c++) {
+    long[] rows = RelationOracle.randomRelation(random, MAX_STATES, DENSITIES[c % DENSITIES.length]);
+    long ceiling = union(rows, -1L);
+    long active = random.nextLong();
+    long[] p = padded(rows);
+    assertEquals(union(rows, active), (long) atom.invokeExact(p, PAD, active, ceiling),
+            "ceiling-bounded union equals the full union");
+}
+long[] saturating = {-1L, 1L, 2L};
+assertEquals(-1L, (long) atom.invokeExact(saturating, 0, 0b111L, -1L), "stops at the ceiling");
+>>>
+
+@atom M3StateRelation.composeNative 1 NATIVE_LANE RelationOracle.compose
+type = M3StateRelation
+setup <<<
+SplittableRandom random = M3AtomKit.random("composeNative");
+long[] left = RelationOracle.randomRelation(random, MAX_STATES, DENSITIES[1]);
+long[] right = RelationOracle.randomRelation(random, MAX_STATES, DENSITIES[1]);
+MethodHandle atom = M3AtomKit.findStatic(owner, "composeNative",
+        MethodType.methodType(long[].class, long[].class, long[].class));
+>>>
+call = assertArrayEquals(RelationOracle.compose(left, right), (long[]) atom.invokeExact(left, right));
+
+@atom M3StateRelation.repeatNative 1 NATIVE_LANE RelationOracle.power
+type = M3StateRelation
+setup <<<
+long[] rows = RelationOracle.randomRelation(M3AtomKit.random("repeatNative"), DENSE_STATES, DENSITIES[0]);
+long count = DENSE_STATES;
+MethodHandle atom = M3AtomKit.findStatic(owner, "repeatNative",
+        MethodType.methodType(long[].class, long[].class, long.class));
+>>>
+call = assertArrayEquals(RelationOracle.power(rows, count), (long[]) atom.invokeExact(rows, count));

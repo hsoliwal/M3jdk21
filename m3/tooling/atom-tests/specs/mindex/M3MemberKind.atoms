@@ -1,0 +1,31 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+// CLASS_ONLY atoms of M3MemberKind.java (member-kind enum with stable codes) and M3Descriptor.java.
+#class M3MemberKindAtomTest
+#summary Per-atom contracts of jdk.internal.mindex.M3MemberKind: stable codes, total decoding, ordinal order
+#import jdk.internal.mindex.M3MemberKind java.util.EnumSet
+
+@atom M3MemberKind.M3MemberKind 1 SCENARIO enum-constant-codes
+check <<<
+assertEquals(4, M3MemberKind.values().length);
+int expected = 0;
+for (M3MemberKind kind : M3MemberKind.values()) assertEquals(expected++, kind.code(), "code follows declaration order");
+assertEquals(M3MemberKind.RECORD_COMPONENT, M3MemberKind.valueOf("RECORD_COMPONENT"));
+>>>
+
+@atom M3MemberKind.code 1 SCENARIO stable-wire-codes
+check <<<
+assertEquals(0, M3MemberKind.FIELD.code());
+assertEquals(1, M3MemberKind.METHOD.code());
+assertEquals(2, M3MemberKind.CONSTRUCTOR.code());
+assertEquals(3, M3MemberKind.RECORD_COMPONENT.code());
+assertEquals(EnumSet.allOf(M3MemberKind.class).size(), java.util.Arrays.stream(M3MemberKind.values()).mapToInt(M3MemberKind::code).distinct().count());
+>>>
+
+@atom M3MemberKind.fromCode 1 SCENARIO inverse-of-code
+check <<<
+for (M3MemberKind kind : M3MemberKind.values()) assertSame(kind, M3MemberKind.fromCode(kind.code()));
+for (int bad : new int[] {-1, 4, Integer.MAX_VALUE}) {
+    M3AtomKit.expectMessage(IllegalArgumentException.class, "unknown member kind: " + bad, () -> M3MemberKind.fromCode(bad));
+}
+>>>
