@@ -47,6 +47,11 @@ final class SizesScript {
     static final int KEY_RANGE = 7;
     static final int TRIALS = 30;
     static final int FAR_POSITION = 1000;
+    //FLLDCIM: MRL - named step and trial fractions (viewport-swing RECIPE_MEMORY 12)
+    /** Steps of the mixed run once the sizes went dense. */
+    static final int DENSE_STEPS = STEPS / 4;
+    /** Every this many view-order trials the sizes go dense first. */
+    static final int DENSE_TRIAL_EVERY = TRIALS / 3;
 
     enum Mix {
         SET(8, 1, 1, 0), INSERT(2, 7, 1, 0), REMOVE(2, 1, 7, 0), RESET(3, 2, 2, 2), MIXED(4, 3, 3, 1);
@@ -185,7 +190,7 @@ final class SizesScript {
         m3.setSize(M3SparseSizes.LIMIT, MAX_SIZE);
         assertEquals(-1, m3.count(), "one more custom size: dense");
         same("dense");
-        run(Mix.MIXED, STEPS / 4);
+        run(Mix.MIXED, DENSE_STEPS);
         reset();
         assertEquals(0, m3.count(), "setSizes returns to the sparse form");
     }
@@ -224,7 +229,7 @@ final class SizesScript {
     void inViewOrderContract() {
         for (int trial = 0; trial < TRIALS; trial++) {
             run(Mix.SET, MAX_RUN * MAX_RUN);
-            if (trial % (TRIALS / 3) == 0) {
+            if (trial % DENSE_TRIAL_EVERY == 0) {
                 denseIfSmall();
             }
             int n = length();

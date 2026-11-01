@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DynamicTest;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
 
@@ -172,7 +173,11 @@ public class M3FixedHeightLayoutCacheAtomsTest {
         );
     }
 
+    //FLLDCIM: TOP - generator consistency check, counted apart from the atom tests (viewport-swing RECIPE_MEMORY 13)
+    /** Generator consistency, not a test of an atom (reports count it apart from the 66 atom tests):
+     *  one dynamic test per census atom, and the census atom ids are distinct. */
     @Test
+    @Tag("generator-consistency")
     void oneTestPerAtom() {
         long tests = atoms().map(DynamicTest::getDisplayName).distinct().count();
         assertEquals(ATOMS.length, tests, "one dynamic test per census atom");

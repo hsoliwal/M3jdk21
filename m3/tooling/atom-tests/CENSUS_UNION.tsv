@@ -1,0 +1,41 @@
+scope	status	before	pr2249	pr2252	union	union_delta
+all M3JDK atoms	TESTED	920	1165	1199	1444	+524
+all M3JDK atoms	CLASS_ONLY	1265	1221	1245	1201	-64
+all M3JDK atoms	UNTESTED	662	461	403	202	-460
+all M3JDK atoms	perf PRESENT	647	689	752	794	+147
+java.lang	TESTED	236	317	236	317	+81
+java.lang	CLASS_ONLY	340	324	340	324	-16
+java.lang	UNTESTED	65	0	65	0	-65
+java.lang	perf PRESENT	260	296	260	296	+36
+java.util	TESTED	45	135	45	135	+90
+java.util	CLASS_ONLY	220	220	220	220	+0
+java.util	UNTESTED	90	0	90	0	-90
+java.util	perf PRESENT	264	279	264	279	+15
+jdk.internal.m3	TESTED	54	120	54	120	+66
+jdk.internal.m3	CLASS_ONLY	46	26	46	26	-20
+jdk.internal.m3	UNTESTED	46	0	46	0	-46
+jdk.internal.m3	perf PRESENT	28	15	28	15	-13
+jdk.internal.m3.io	TESTED	5	7	5	7	+2
+jdk.internal.m3.io	CLASS_ONLY	2	0	2	0	-2
+jdk.internal.m3.io	UNTESTED	0	0	0	0	+0
+jdk.internal.m3.io	perf PRESENT	0	0	0	0	+0
+jdk.internal.mindex	TESTED	464	466	464	466	+2
+jdk.internal.mindex	CLASS_ONLY	484	482	484	482	-2
+jdk.internal.mindex	UNTESTED	202	202	202	202	+0
+jdk.internal.mindex	perf PRESENT	53	57	53	57	+4
+jdk.internal.util	TESTED	20	24	20	24	+4
+jdk.internal.util	CLASS_ONLY	18	14	18	14	-4
+jdk.internal.util	UNTESTED	0	0	0	0	+0
+jdk.internal.util	perf PRESENT	0	0	0	0	+0
+sun.swing.list	TESTED	0	0	42	42	+42
+sun.swing.list	CLASS_ONLY	0	0	0	0	+0
+sun.swing.list	UNTESTED	42	42	0	0	-42
+sun.swing.list	perf PRESENT	0	0	25	25	+25
+sun.swing.table	TESTED	1	1	62	62	+61
+sun.swing.table	CLASS_ONLY	10	10	0	0	-10
+sun.swing.table	UNTESTED	51	51	0	0	-51
+sun.swing.table	perf PRESENT	0	0	29	29	+29
+sun.swing.tree	TESTED	1	1	177	177	+176
+sun.swing.tree	CLASS_ONLY	10	10	0	0	-10
+sun.swing.tree	UNTESTED	166	166	0	0	-166
+sun.swing.tree	perf PRESENT	1	1	52	52	+51

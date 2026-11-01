@@ -49,4 +49,18 @@ for pkg in $pkgs; do
     grep -E 'tests (successful|failed|found)|containers failed' "$out/junit_$tag.log" | sed "s/^/  $tag /"
   done
 done
+# The per-atom dynamic tests and the generator-consistency checks (oneTestPerAtom: one dynamic test per census atom,
+# distinct atom ids) are counted apart: only the first are tests of atoms.
+python - "$(win "$out/reports")" <<'PY'
+import glob, sys, xml.etree.ElementTree as ET
+GENERATOR_CHECK = "oneTestPerAtom()"
+counts = {"atom_tests": [0, 0], "generator_checks": [0, 0]}
+for path in sorted(glob.glob(sys.argv[1] + "/*/TEST-junit-jupiter.xml")):
+    for case in ET.parse(path).getroot().iter("testcase"):
+        key = "generator_checks" if case.get("name") == GENERATOR_CHECK else "atom_tests"
+        bad = any(child.tag in ("failure", "error", "skipped") for child in case)
+        counts[key][0] += 0 if bad else 1
+        counts[key][1] += 1
+print("SUMMARY " + " ".join(f"{k}={passed}/{total}" for k, (passed, total) in counts.items()))
+PY
 exit $status

@@ -91,9 +91,32 @@ final class CacheScript {
     static final int SCAN_MAX = 40;
     static final int TRIALS = 30;
     static final int MAX_VALUE_DELTA = 9;
+    //FLLDCIM: MRL - named draw bounds (viewport-swing RECIPE_MEMORY 12)
+    /** randomPath draws one of this many sources: a handed-out path, a removed path, or (the rest) a live node. */
+    static final int PATH_SOURCES = 4;
+    /** The partial check after a step probes this many random paths (a full check probes PROBE_PATHS). */
+    static final int PARTIAL_PROBE_PATHS = PROBE_PATHS / 4;
+    /** In the map script one step in this many removes a present key; the others put a new one. */
+    static final int REMOVE_ONE_IN = 3;
 
     /** Op weights, in the order of {@link #step}: expand, collapse, insert, remove, change, structure, root,
      *  row height, invalidate, stale size, set model, node dimensions, select, query. */
+    //FLLDCIM: MRL - ScriptOp enum replaces the step switch numbers (viewport-swing RECIPE_MEMORY 12, 14)
+    /** The script operations, in the order a {@link Mix} weighs them; the first ones need a node to act on. */
+    enum ScriptOp {
+        EXPAND(true), COLLAPSE(true), INSERT(true), REMOVE(true), CHANGE(true), STRUCTURE(true), ROOT_VISIBLE(false),
+        ROW_HEIGHT(false), INVALIDATE(false), STALE_SIZE(false), SET_MODEL(false), NODE_DIMENSIONS(false),
+        SELECT(false), QUERY(false);
+
+        final boolean needsNodes;
+
+        ScriptOp(boolean needsNodes) {
+            this.needsNodes = needsNodes;
+        }
+    }
+
+    static final ScriptOp[] SCRIPT_OPS = ScriptOp.values();
+
     enum Mix {
         EXPAND_COLLAPSE(6, 4, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 2),
         EDITS(3, 1, 5, 5, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1),
@@ -298,7 +321,7 @@ final class CacheScript {
 
     TreePath randomPath() {
         List<HNode> all = nodes();
-        int pick = rnd.nextInt(4);
+        int pick = rnd.nextInt(PATH_SOURCES);
         if (pick == 0 && !handed.isEmpty()) {
             return handed.get(rnd.nextInt(handed.size()));
         }
@@ -424,7 +447,7 @@ final class CacheScript {
         }
         same("getPathForRow(-1)", c -> c.getPathForRow(-1));
         same("getPathForRow(rows)", c -> c.getPathForRow(rows));
-        for (int i = 0; i < (full ? PROBE_PATHS : PROBE_PATHS / 4); i++) {
+        for (int i = 0; i < (full ? PROBE_PATHS : PARTIAL_PROBE_PATHS); i++) {
             TreePath p = randomPath();
             if (p != null) {
                 samePath("probe", p);
@@ -484,27 +507,28 @@ final class CacheScript {
             op -= mix.weights[k++];
         }
         List<HNode> all = nodes();
-        if (all.isEmpty() && k < 6) {
+        ScriptOp chosen = SCRIPT_OPS[k];
+        if (all.isEmpty() && chosen.needsNodes) {
             setRoot();
             return;
         }
-        switch (k) {
-            case 0 -> expand(true);
-            case 1 -> expand(false);
-            case 2 -> insert(all);
-            case 3 -> remove(all);
-            case 4 -> change(all, true);
-            case 5 -> structure(all);
-            case 6 -> {
+        switch (chosen) {
+            case EXPAND -> expand(true);
+            case COLLAPSE -> expand(false);
+            case INSERT -> insert(all);
+            case REMOVE -> remove(all);
+            case CHANGE -> change(all, true);
+            case STRUCTURE -> structure(all);
+            case ROOT_VISIBLE -> {
                 boolean v = !stock.cache.isRootVisible();
                 both("setRootVisible " + v, s -> s.cache.setRootVisible(v));
             }
-            case 7 -> {
+            case ROW_HEIGHT -> {
                 int[] heights = kind == Kind.FIXED ? FIXED_HEIGHTS : VARIABLE_HEIGHTS;
                 int h = heights[rnd.nextInt(heights.length)];
                 both("setRowHeight " + h, s -> s.cache.setRowHeight(h));
             }
-            case 8 -> {
+            case INVALIDATE -> {
                 if (rnd.nextBoolean()) {
                     both("invalidateSizes", s -> s.cache.invalidateSizes());
                 } else {
@@ -513,14 +537,14 @@ final class CacheScript {
                 }
                 same("getPreferredWidth right after an invalidation", c -> c.getPreferredWidth(null));
             }
-            case 9 -> {
+            case STALE_SIZE -> {
                 if (!all.isEmpty()) {
                     ((Label) all.get(rnd.nextInt(all.size())).getUserObject()).epoch++;
                 }
             }
-            case 10 -> setModel();
-            case 11 -> both("setNodeDimensions", s -> s.cache.setNodeDimensions(new Dims()));
-            case 12 -> select();
+            case SET_MODEL -> setModel();
+            case NODE_DIMENSIONS -> both("setNodeDimensions", s -> s.cache.setNodeDimensions(new Dims()));
+            case SELECT -> select();
             default -> {
             }
         }
@@ -822,7 +846,7 @@ final class CacheScript {
         HNode root = new HNode(0);
         int nextId = 1;
         for (int step = 0; step < MAP_KEYS * 2; step++) {
-            if (present.isEmpty() || rnd.nextInt(3) != 0) {
+            if (present.isEmpty() || rnd.nextInt(REMOVE_ONE_IN) != 0) {
                 HNode n = new HNode(nextId);
                 root.add(n);
                 TreePath p = new TreePath(new Object[] {root, n});
