@@ -55,3 +55,22 @@ if(BUILD_TESTING)
   add_test(NAME m3_packed_codec_checks COMMAND m3_packed_codec_checks)
   add_test(NAME m3_packed_codec_jni_fault_test COMMAND m3_packed_codec_jni_fault_test)
 endif()
+
+# All primitive allocation atoms reuse the actual array JNI owner above.
+if(BUILD_TESTING)
+  add_executable(m3_array_allocation_fault_test
+    tests/m3_array_allocation_fault_test.c m3_arrays.c m3_arrays_jni.c)
+  target_include_directories(m3_array_allocation_fault_test
+    PRIVATE ${JNI_INCLUDE_DIRS} ${CMAKE_CURRENT_SOURCE_DIR}/include)
+  add_library(m3_array_allocation_null_fixture SHARED tests/m3_array_allocation_null_fixture.c)
+  target_include_directories(m3_array_allocation_null_fixture PRIVATE ${JNI_INCLUDE_DIRS})
+  foreach(allocation_test IN ITEMS m3_array_allocation_fault_test m3_array_allocation_null_fixture)
+    target_compile_features(${allocation_test} PRIVATE c_std_11)
+    if(MSVC)
+      target_compile_options(${allocation_test} PRIVATE /W4 /WX /UNDEBUG)
+    else()
+      target_compile_options(${allocation_test} PRIVATE -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic -UNDEBUG)
+    endif()
+  endforeach()
+  add_test(NAME m3_array_allocation_fault_test COMMAND m3_array_allocation_fault_test)
+endif()
