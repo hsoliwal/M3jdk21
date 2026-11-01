@@ -56,8 +56,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          mvn -B -ntp -f m3/arrays/pom.xml -Pnative-linux -DskipTests install
           mvn -B -ntp -f m3/collections/pom.xml -DskipTests install
-          mvn -B -ntp -f m3/collections/interop/pom.xml -Dtest=M3FiveFamilyPreparedSelectionTest test
+          mvn -B -ntp -f m3/collections/interop/pom.xml -Dtest=M3FiveFamilyPreparedSelectionTest \
+            "-Dm3.arrays.native.path=$GITHUB_WORKSPACE/m3/arrays/target/native/libm3_arrays.so" test
       - name: Strict existing JNI C17 compile and checked provider oracle
         shell: bash
         run: |
@@ -70,4 +72,5 @@ jobs:
             -o "$RUNNER_TEMP/m3-five-fork-native/libm3_collections_mask.so"
           mvn -B -ntp -f m3/collections/interop/pom.xml \
             -Dtest=M3FiveFamilyPreparedSelectionTest \
+            "-Dm3.arrays.native.path=$GITHUB_WORKSPACE/m3/arrays/target/native/libm3_arrays.so" \
             -DargLine="-Xcheck:jni -Djava.library.path=$RUNNER_TEMP/m3-five-fork-native" test
