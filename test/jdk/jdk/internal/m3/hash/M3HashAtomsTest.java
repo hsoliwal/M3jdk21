@@ -8,11 +8,13 @@
  * @summary One JUnit test per atom of the zero-allocation-hashing absorption (jdk.internal.m3.hash.M3*). The algorithm
  *          atoms (xxHash, XXH3 64/128, wyhash, MurmurHash3 64/128, CityHash/FarmHash na/uo, MetroHash) are
  *          differential against the vendored library compiled unchanged (M3HashOracle) for every length 0..1100,
- *          random inputs, fixed and random seeds, through every kept input form: byte[] and slices, heap, read-only
- *          and direct ByteBuffers in both orders, Latin-1 and UTF-16 Strings, StringBuilder, CharSequence access in
- *          both orders, and the primitives. The facade atoms are checked against the vendored API minus the drop
- *          ledger and for identical exceptions; the access and kernel atoms against the vendored atom they replace
- *          or a JDK reference.
+ *          random inputs, fixed and random seeds, through every kept hashing overload of both facades: byte[] and
+ *          slices, heap, read-only and direct ByteBuffers in both orders (direct ones also with a limit below
+ *          off + len: the donor reads them up to the capacity), Latin-1 and UTF-16 Strings and slices,
+ *          StringBuilder and slices, CharSequence access in both orders, and the primitives; the tuple facade in
+ *          both result forms (a new long[] and a given result array). The facade atoms are checked against the
+ *          vendored API minus the drop ledger and for identical exceptions; the access and kernel atoms against the
+ *          vendored atom they replace or a JDK reference.
  * @modules java.base/jdk.internal.m3.hash:open
  *          java.base/sun.nio.ch
  *          jdk.compiler
@@ -64,6 +66,11 @@ public class M3HashAtomsTest {
     private static final long[] EDGE_VALUES = {0L, 1L, -1L, Long.MIN_VALUE, Long.MAX_VALUE};
     private static final int PRIMITIVE_SAMPLES = 256;
     private static final int ACCESS_WINDOW = 64;
+    /** A ByteBuffer limit inside the ACCESS_WINDOW capacity. */
+    private static final int LIMIT_IN_WINDOW = 24;
+    /** (off, len) ranges past LIMIT_IN_WINDOW and inside the ACCESS_WINDOW capacity. */
+    private static final int[][] PAST_LIMIT = {{0, ACCESS_WINDOW}, {1, LIMIT_IN_WINDOW},
+            {LIMIT_IN_WINDOW, ACCESS_WINDOW - LIMIT_IN_WINDOW}};
     private static final int CHAR_WINDOW = 48;
     private static final int MATH_SAMPLES = 100_000;
     private static final int UTF16_BOUND = Character.MAX_VALUE + 1;
@@ -114,6 +121,44 @@ public class M3HashAtomsTest {
     private static final MethodHandle T_BYTE = M3HashOracle.virtual(LTHF, "hashByte", long[].class, byte.class);
     private static final MethodHandle T_VOID = M3HashOracle.virtual(LTHF, "hashVoid", long[].class);
     private static final MethodHandle T_BITS = M3HashOracle.virtual(LTHF, "bitsLength", int.class);
+    // the long[] result forms ("_INTO") and the remaining input forms: every kept hashing overload of the tuple facade
+    private static final MethodHandle T_BYTES_SLICE_INTO =
+            M3HashOracle.virtual(LTHF, "hashBytes", void.class, byte[].class, int.class, int.class, long[].class);
+    private static final MethodHandle T_BUFFER = M3HashOracle.virtual(LTHF, "hashBytes", long[].class, ByteBuffer.class);
+    private static final MethodHandle T_BUFFER_INTO =
+            M3HashOracle.virtual(LTHF, "hashBytes", void.class, ByteBuffer.class, long[].class);
+    private static final MethodHandle T_BUFFER_SLICE_INTO =
+            M3HashOracle.virtual(LTHF, "hashBytes", void.class, ByteBuffer.class, int.class, int.class, long[].class);
+    private static final MethodHandle T_STRING_INTO =
+            M3HashOracle.virtual(LTHF, "hashChars", void.class, String.class, long[].class);
+    private static final MethodHandle T_STRING_SLICE =
+            M3HashOracle.virtual(LTHF, "hashChars", long[].class, String.class, int.class, int.class);
+    private static final MethodHandle T_STRING_SLICE_INTO =
+            M3HashOracle.virtual(LTHF, "hashChars", void.class, String.class, int.class, int.class, long[].class);
+    private static final MethodHandle T_CHARS_INTO =
+            M3HashOracle.virtual(LTHF, "hashChars", void.class, CharSequence.class, long[].class);
+    private static final MethodHandle T_CHARS_SLICE =
+            M3HashOracle.virtual(LTHF, "hashChars", long[].class, CharSequence.class, int.class, int.class);
+    private static final MethodHandle T_CHARS_SLICE_INTO =
+            M3HashOracle.virtual(LTHF, "hashChars", void.class, CharSequence.class, int.class, int.class, long[].class);
+    private static final MethodHandle T_ACCESS_INTO = M3HashOracle.virtual(LTHF, "hash", void.class, Object.class,
+            O_ACCESS_TYPE, long.class, long.class, long[].class);
+    private static final MethodHandle T_LONG_INTO =
+            M3HashOracle.virtual(LTHF, "hashLong", void.class, long.class, long[].class);
+    private static final MethodHandle T_INT_INTO = M3HashOracle.virtual(LTHF, "hashInt", void.class, int.class, long[].class);
+    private static final MethodHandle T_SHORT_INTO =
+            M3HashOracle.virtual(LTHF, "hashShort", void.class, short.class, long[].class);
+    private static final MethodHandle T_CHAR_INTO =
+            M3HashOracle.virtual(LTHF, "hashChar", void.class, char.class, long[].class);
+    private static final MethodHandle T_BYTE_INTO =
+            M3HashOracle.virtual(LTHF, "hashByte", void.class, byte.class, long[].class);
+    private static final MethodHandle T_VOID_INTO = M3HashOracle.virtual(LTHF, "hashVoid", void.class, long[].class);
+    private static final M3Access<CharSequence> CHARS_BE = M3Access.toCharSequence(ByteOrder.BIG_ENDIAN);
+    private static final M3Access<CharSequence> CHARS_LE = M3Access.toCharSequence(ByteOrder.LITTLE_ENDIAN);
+    private static final Object O_CHARS_BE =
+            M3HashOracle.call(ACCESS, "toCharSequence", new Class<?>[] {ByteOrder.class}, ByteOrder.BIG_ENDIAN);
+    private static final Object O_CHARS_LE =
+            M3HashOracle.call(ACCESS, "toCharSequence", new Class<?>[] {ByteOrder.class}, ByteOrder.LITTLE_ENDIAN);
 
     private static final MethodHandle A_LONG = M3HashOracle.virtual(ACCESS, "getLong", long.class, Object.class, long.class);
     private static final MethodHandle A_UINT =
@@ -212,6 +257,14 @@ public class M3HashAtomsTest {
             sameThrow(() -> O_BUILDER_SLICE.invoke(f.oracle(), sb, x[0], x[1]),
                     () -> f.m3().hashChars(sb, x[0], x[1]));
         }
+        // past the limit, inside the capacity: the donor reads a direct buffer by address (up to the capacity) and
+        // any other buffer through its limit
+        for (int[] x : PAST_LIMIT) {
+            for (ByteBuffer limited : limitedBuffers(b)) {
+                sameThrow(() -> O_BUFFER_SLICE.invoke(f.oracle(), limited, x[0], x[1]),
+                        () -> f.m3().hashBytes(limited, x[0], x[1]));
+            }
+        }
         sameThrow(() -> O_BYTES.invoke(f.oracle(), (byte[]) null), () -> f.m3().hashBytes((byte[]) null));
         sameThrow(() -> O_STRING.invoke(f.oracle(), (String) null), () -> f.m3().hashChars((String) null));
         ByteBuffer moved = ByteBuffer.wrap(b).position(1).limit(ACCESS_WINDOW - 1);
@@ -235,6 +288,14 @@ public class M3HashAtomsTest {
             eqArray((long[]) T_BYTES.invoke(f.oracle(), b), into, f.name(), ACCESS_WINDOW, "hashBytes(byte[], long[])");
             sameThrow(() -> T_BYTES_INTO.invoke(f.oracle(), b, new long[1]), () -> f.m3().hashBytes(b, new long[1]));
             sameThrow(() -> T_BYTES_INTO.invoke(f.oracle(), b, (long[]) null), () -> f.m3().hashBytes(b, (long[]) null));
+            for (int[] x : PAST_LIMIT) {
+                for (ByteBuffer limited : limitedBuffers(b)) {
+                    sameThrow(() -> T_BUFFER_SLICE.invoke(f.oracle(), limited, x[0], x[1]),
+                            () -> f.m3().hashBytes(limited, x[0], x[1]));
+                    sameThrow(() -> T_BUFFER_SLICE_INTO.invoke(f.oracle(), limited, x[0], x[1], new long[TUPLE_LONGS]),
+                            () -> f.m3().hashBytes(limited, x[0], x[1], new long[TUPLE_LONGS]));
+                }
+            }
         }
         report("longTupleHashFunction");
     }
@@ -469,6 +530,8 @@ public class M3HashAtomsTest {
             ByteBuffer positioned = ByteBuffer.wrap(padded).order(order).position(off).limit(off + len);
             ByteBuffer readOnly = ByteBuffer.wrap(padded).asReadOnlyBuffer().order(order);
             ByteBuffer d = direct.duplicate().order(order).put(0, padded);
+            ByteBuffer dLimited = d.duplicate().order(order).limit(off);
+            ByteBuffer dReadOnlyLimited = d.asReadOnlyBuffer().order(order).limit(off);
             String latin1 = new String(exact, StandardCharsets.ISO_8859_1);
             String utf16 = utf16(r, len);
             StringBuilder sb = new StringBuilder(utf16);
@@ -484,6 +547,8 @@ public class M3HashAtomsTest {
                 eq((long) O_BUFFER.invoke(o, positioned), m.hashBytes(positioned), n, len, "hashBytes(heap ByteBuffer " + order + ")");
                 eq((long) O_BUFFER_SLICE.invoke(o, readOnly, off, len), m.hashBytes(readOnly, off, len), n, len, "hashBytes(read-only ByteBuffer " + order + ", off, len)");
                 eq((long) O_BUFFER_SLICE.invoke(o, d, off, len), m.hashBytes(d, off, len), n, len, "hashBytes(direct ByteBuffer " + order + ", off, len)");
+                eq((long) O_BUFFER_SLICE.invoke(o, dLimited, off, len), m.hashBytes(dLimited, off, len), n, len, "hashBytes(direct ByteBuffer " + order + " limited to off, off, len)");
+                eq((long) O_BUFFER_SLICE.invoke(o, dReadOnlyLimited, off, len), m.hashBytes(dReadOnlyLimited, off, len), n, len, "hashBytes(read-only direct ByteBuffer " + order + " limited to off, off, len)");
                 eq((long) O_STRING.invoke(o, latin1), m.hashChars(latin1), n, len, "hashChars(Latin-1 String)");
                 eq((long) O_STRING.invoke(o, utf16), m.hashChars(utf16), n, len, "hashChars(UTF-16 String)");
                 eq((long) O_STRING_SLICE.invoke(o, utf16, cOff, cLen), m.hashChars(utf16, cOff, cLen), n, len, "hashChars(String, off, len)");
@@ -509,47 +574,82 @@ public class M3HashAtomsTest {
         report(fns.get(0).name() + " x " + fns.size() + " functions");
     }
 
+    /**
+     * Every kept hashing overload of the tuple facade: 15 input forms, each as the form that returns a new long[] and
+     * as the form that fills the given result array.
+     */
     private static void tupleDifferential(List<TupleFn> fns) throws Throwable {
         SplittableRandom r = new SplittableRandom(CORPUS_SEED);
         ByteBuffer direct = ByteBuffer.allocateDirect(MAX_LENGTH + SLICE_PAD);
-        M3Access<CharSequence> be = M3Access.toCharSequence(ByteOrder.BIG_ENDIAN);
-        Object oracleBe = M3HashOracle.call(ACCESS, "toCharSequence", new Class<?>[] {ByteOrder.class}, ByteOrder.BIG_ENDIAN);
         for (int len = 0; len <= MAX_LENGTH; len++) {
-            byte[] padded = bytes(r, len + SLICE_PAD);
-            int off = 1 + len % (SLICE_PAD - 1);
-            byte[] exact = Arrays.copyOfRange(padded, off, off + len);
-            ByteOrder order = ORDERS[len & 1];
-            ByteBuffer readOnly = ByteBuffer.wrap(padded).asReadOnlyBuffer().order(order);
-            ByteBuffer d = direct.duplicate().order(order).put(0, padded);
-            String latin1 = new String(exact, StandardCharsets.ISO_8859_1);
-            StringBuilder sb = new StringBuilder(utf16(r, len));
-            for (TupleFn f : fns) {
-                Object o = f.oracle();
-                M3LongTupleHashFunction m = f.m3();
-                String n = f.name();
-                eqArray((long[]) T_BYTES.invoke(o, exact), m.hashBytes(exact), n, len, "hashBytes(byte[])");
-                eqArray((long[]) T_BYTES_SLICE.invoke(o, padded, off, len), m.hashBytes(padded, off, len), n, len, "hashBytes(byte[], off, len)");
-                eqArray((long[]) T_BUFFER_SLICE.invoke(o, readOnly, off, len), m.hashBytes(readOnly, off, len), n, len, "hashBytes(read-only ByteBuffer, off, len)");
-                eqArray((long[]) T_BUFFER_SLICE.invoke(o, d, off, len), m.hashBytes(d, off, len), n, len, "hashBytes(direct ByteBuffer, off, len)");
-                eqArray((long[]) T_STRING.invoke(o, latin1), m.hashChars(latin1), n, len, "hashChars(Latin-1 String)");
-                eqArray((long[]) T_CHARS.invoke(o, (CharSequence) sb), m.hashChars(sb), n, len, "hashChars(StringBuilder)");
-                eqArray((long[]) T_ACCESS.invoke(o, (Object) sb, oracleBe, 0L, 2L * len), m.hash(sb, be, 0L, 2L * len), n, len, "hash(CharSequence, BIG_ENDIAN access)");
-            }
+            tupleLength(fns, r, direct, len);
         }
         for (TupleFn f : fns) {
             Object o = f.oracle();
             M3LongTupleHashFunction m = f.m3();
-            eqArray((long[]) T_VOID.invoke(o), m.hashVoid(), f.name(), 0, "hashVoid()");
+            String n = f.name();
+            eqArray((long[]) T_VOID.invoke(o), m.hashVoid(), n, 0, "hashVoid()");
+            eqInto(x -> T_VOID_INTO.invoke(o, x), m::hashVoid, n, 0, "hashVoid(long[])");
             for (int i = 0; i < PRIMITIVE_SAMPLES; i++) {
                 long v = i < EDGE_VALUES.length ? EDGE_VALUES[i] : r.nextLong();
-                eqArray((long[]) T_LONG.invoke(o, v), m.hashLong(v), f.name(), i, "hashLong");
-                eqArray((long[]) T_INT.invoke(o, (int) v), m.hashInt((int) v), f.name(), i, "hashInt");
-                eqArray((long[]) T_SHORT.invoke(o, (short) v), m.hashShort((short) v), f.name(), i, "hashShort");
-                eqArray((long[]) T_CHAR.invoke(o, (char) v), m.hashChar((char) v), f.name(), i, "hashChar");
-                eqArray((long[]) T_BYTE.invoke(o, (byte) v), m.hashByte((byte) v), f.name(), i, "hashByte");
+                eqArray((long[]) T_LONG.invoke(o, v), m.hashLong(v), n, i, "hashLong");
+                eqArray((long[]) T_INT.invoke(o, (int) v), m.hashInt((int) v), n, i, "hashInt");
+                eqArray((long[]) T_SHORT.invoke(o, (short) v), m.hashShort((short) v), n, i, "hashShort");
+                eqArray((long[]) T_CHAR.invoke(o, (char) v), m.hashChar((char) v), n, i, "hashChar");
+                eqArray((long[]) T_BYTE.invoke(o, (byte) v), m.hashByte((byte) v), n, i, "hashByte");
+                eqInto(x -> T_LONG_INTO.invoke(o, v, x), x -> m.hashLong(v, x), n, i, "hashLong(long, long[])");
+                eqInto(x -> T_INT_INTO.invoke(o, (int) v, x), x -> m.hashInt((int) v, x), n, i, "hashInt(int, long[])");
+                eqInto(x -> T_SHORT_INTO.invoke(o, (short) v, x), x -> m.hashShort((short) v, x), n, i, "hashShort(short, long[])");
+                eqInto(x -> T_CHAR_INTO.invoke(o, (char) v, x), x -> m.hashChar((char) v, x), n, i, "hashChar(char, long[])");
+                eqInto(x -> T_BYTE_INTO.invoke(o, (byte) v, x), x -> m.hashByte((byte) v, x), n, i, "hashByte(byte, long[])");
             }
         }
         report(fns.get(0).name() + " tuple x " + fns.size() + " functions");
+    }
+
+    /** The byte[], ByteBuffer, String, CharSequence and Access overloads of the tuple facade at one length. */
+    private static void tupleLength(List<TupleFn> fns, SplittableRandom r, ByteBuffer direct, int len) throws Throwable {
+        byte[] padded = bytes(r, len + SLICE_PAD);
+        int off = 1 + len % (SLICE_PAD - 1);
+        byte[] exact = Arrays.copyOfRange(padded, off, off + len);
+        ByteOrder order = ORDERS[len & 1];
+        ByteBuffer positioned = ByteBuffer.wrap(padded).order(order).position(off).limit(off + len);
+        ByteBuffer readOnly = ByteBuffer.wrap(padded).asReadOnlyBuffer().order(order);
+        ByteBuffer d = direct.duplicate().order(order).put(0, padded);
+        ByteBuffer dPositioned = d.duplicate().order(order).position(off).limit(off + len);
+        ByteBuffer dLimited = d.duplicate().order(order).limit(off);
+        ByteBuffer dReadOnlyLimited = d.asReadOnlyBuffer().order(order).limit(off);
+        String latin1 = new String(exact, StandardCharsets.ISO_8859_1);
+        String utf16 = utf16(r, len);
+        StringBuilder sb = new StringBuilder(utf16);
+        int cOff = len / 3;
+        int cLen = len - cOff;
+        long bytesOfChars = 2L * len;
+        for (TupleFn f : fns) {
+            Object o = f.oracle();
+            M3LongTupleHashFunction m = f.m3();
+            String n = f.name();
+            eqArray((long[]) T_BYTES.invoke(o, exact), m.hashBytes(exact), n, len, "hashBytes(byte[])");
+            eqInto(x -> T_BYTES_INTO.invoke(o, exact, x), x -> m.hashBytes(exact, x), n, len, "hashBytes(byte[], long[])");
+            eqArray((long[]) T_BYTES_SLICE.invoke(o, padded, off, len), m.hashBytes(padded, off, len), n, len, "hashBytes(byte[], off, len)");
+            eqInto(x -> T_BYTES_SLICE_INTO.invoke(o, padded, off, len, x), x -> m.hashBytes(padded, off, len, x), n, len, "hashBytes(byte[], off, len, long[])");
+            eqArray((long[]) T_BUFFER.invoke(o, positioned), m.hashBytes(positioned), n, len, "hashBytes(heap ByteBuffer " + order + ")");
+            eqInto(x -> T_BUFFER_INTO.invoke(o, dPositioned, x), x -> m.hashBytes(dPositioned, x), n, len, "hashBytes(direct ByteBuffer " + order + ", long[])");
+            eqArray((long[]) T_BUFFER_SLICE.invoke(o, readOnly, off, len), m.hashBytes(readOnly, off, len), n, len, "hashBytes(read-only ByteBuffer " + order + ", off, len)");
+            eqArray((long[]) T_BUFFER_SLICE.invoke(o, d, off, len), m.hashBytes(d, off, len), n, len, "hashBytes(direct ByteBuffer " + order + ", off, len)");
+            eqArray((long[]) T_BUFFER_SLICE.invoke(o, dLimited, off, len), m.hashBytes(dLimited, off, len), n, len, "hashBytes(direct ByteBuffer " + order + " limited to off, off, len)");
+            eqInto(x -> T_BUFFER_SLICE_INTO.invoke(o, dReadOnlyLimited, off, len, x), x -> m.hashBytes(dReadOnlyLimited, off, len, x), n, len, "hashBytes(read-only direct ByteBuffer " + order + " limited to off, off, len, long[])");
+            eqArray((long[]) T_STRING.invoke(o, latin1), m.hashChars(latin1), n, len, "hashChars(Latin-1 String)");
+            eqInto(x -> T_STRING_INTO.invoke(o, utf16, x), x -> m.hashChars(utf16, x), n, len, "hashChars(UTF-16 String, long[])");
+            eqArray((long[]) T_STRING_SLICE.invoke(o, utf16, cOff, cLen), m.hashChars(utf16, cOff, cLen), n, len, "hashChars(String, off, len)");
+            eqInto(x -> T_STRING_SLICE_INTO.invoke(o, utf16, cOff, cLen, x), x -> m.hashChars(utf16, cOff, cLen, x), n, len, "hashChars(String, off, len, long[])");
+            eqArray((long[]) T_CHARS.invoke(o, (CharSequence) sb), m.hashChars(sb), n, len, "hashChars(StringBuilder)");
+            eqInto(x -> T_CHARS_INTO.invoke(o, (CharSequence) sb, x), x -> m.hashChars(sb, x), n, len, "hashChars(StringBuilder, long[])");
+            eqArray((long[]) T_CHARS_SLICE.invoke(o, (CharSequence) sb, cOff, cLen), m.hashChars(sb, cOff, cLen), n, len, "hashChars(StringBuilder, off, len)");
+            eqInto(x -> T_CHARS_SLICE_INTO.invoke(o, (CharSequence) sb, cOff, cLen, x), x -> m.hashChars(sb, cOff, cLen, x), n, len, "hashChars(StringBuilder, off, len, long[])");
+            eqArray((long[]) T_ACCESS.invoke(o, (Object) sb, O_CHARS_BE, 0L, bytesOfChars), m.hash(sb, CHARS_BE, 0L, bytesOfChars), n, len, "hash(CharSequence, BIG_ENDIAN access)");
+            eqInto(x -> T_ACCESS_INTO.invoke(o, (Object) sb, O_CHARS_LE, 0L, bytesOfChars, x), x -> m.hash(sb, CHARS_LE, 0L, bytesOfChars, x), n, len, "hash(CharSequence, LITTLE_ENDIAN access, long[])");
+        }
     }
 
     // ---- helpers -------------------------------------------------------------------------------------------------
@@ -690,6 +790,26 @@ public class M3HashAtomsTest {
 
     interface Call {
         void run() throws Throwable;
+    }
+
+    /** A tuple hash that fills the given result array. */
+    interface Into {
+        void hash(long[] result) throws Throwable;
+    }
+
+    /** Both sides fill a fresh result array; the arrays must be equal. */
+    private static void eqInto(Into oracle, Into m3, String fn, int at, String form) throws Throwable {
+        long[] o = new long[TUPLE_LONGS];
+        long[] m = new long[TUPLE_LONGS];
+        oracle.hash(o);
+        m3.hash(m);
+        eqArray(o, m, fn, at, form);
+    }
+
+    /** Buffers of capacity b.length limited to LIMIT_IN_WINDOW: direct, read-only direct and read-only heap. */
+    private static List<ByteBuffer> limitedBuffers(byte[] b) {
+        ByteBuffer direct = ByteBuffer.allocateDirect(b.length).put(0, b).limit(LIMIT_IN_WINDOW);
+        return List.of(direct, direct.asReadOnlyBuffer(), ByteBuffer.wrap(b).asReadOnlyBuffer().limit(LIMIT_IN_WINDOW));
     }
 
     /** Both sides throw the same exception class, or both return normally. */

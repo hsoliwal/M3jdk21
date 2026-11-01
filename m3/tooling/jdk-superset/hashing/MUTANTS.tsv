@@ -5,3 +5,8 @@ CHECK_OFFS_NO_OVERFLOW	M3Util.java	KILLED	longHashFunction,util
 CHARSEQ_LE_BYTE_SHIFT	M3CharSequenceAccess.java	KILLED	charSequenceAccess,cityAndFarmHash,murmurHash3,wyHash,xxHash,xxh3
 STRING_AS_LATIN1_BYTES	M3LongHashFunction.java	KILLED	cityAndFarmHash,metroHash,murmurHash3,wyHash,xxHash,xxh3
 MATHS_SIGNED_HIGH	M3Maths.java	KILLED	maths,xxh3
+TUPLE_STRING_INTO_EMPTY	M3LongTupleHashFunction.java	KILLED	murmurHash3,xxh3
+TUPLE_STRING_SLICE_INTO_EMPTY	M3LongTupleHashFunction.java	KILLED	murmurHash3,xxh3
+TUPLE_STRING_SLICE_EMPTY	M3LongTupleHashFunction.java	KILLED	murmurHash3,xxh3
+DIRECT_BUFFER_LIMIT_BOUND	M3LongHashFunction.java	KILLED	cityAndFarmHash,longHashFunction,metroHash,murmurHash3,wyHash,xxHash,xxh3
+TUPLE_DIRECT_BUFFER_LIMIT_BOUND	M3LongTupleHashFunction.java	KILLED	longTupleHashFunction,murmurHash3,xxh3

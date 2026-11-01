@@ -17,14 +17,16 @@ contributors.
 
 ### Changes made by Synexia (2026-10-31)
 
-Made by the recipe in m3/tooling/jdk-superset/hashing (hash_jdk_form.py, then absorb_rename_generic.py); every changed
-file says so above its package line.
+Made by the recipe in m3/tooling/jdk-superset/hashing (hash_jdk_form.py, then absorb_rename_generic.py, then
+literal_constants.py); every changed file says so above its package line.
 
 - Package net.openhft.hashing -> jdk.internal.m3.hash and type T -> M3T (UnsafeAccess -> M3ByteArrayAccess,
   MathsJDK9 -> M3MathsJDK9); the JetBrains and JSR-305 annotations are removed.
 - No sun.misc.Unsafe: UnsafeAccess became the byte[] access over jdk.internal.util.ByteArrayLittleEndian
   (little-endian, bounds-checked reads, index base 0). Direct and read-only ByteBuffers are read through
-  ByteBufferAccess. Access.unsafe() and the LongHashFunction / LongTupleHashFunction methods that read raw memory
+  ByteBufferAccess. When off + len passes a direct buffer's limit, it is read through a view whose limit is its
+  capacity, so hashBytes(ByteBuffer, off, len) hashes the same ranges as the donor's address read (off + len up to
+  the capacity). Access.unsafe() and the LongHashFunction / LongTupleHashFunction methods that read raw memory
   (hashMemory, hashBoolean, hashBooleans, hashChars(char[]), hashShorts, hashInts, hashLongs) are not included.
 - hashChars(String) hashes the native-order chars through CharSequenceAccess (the donor's UnknownJvmStringHash path).
   The per-JVM String-internals classes (StringHash, ModernCompactStringHash, ModernHotSpotStringHash,
@@ -32,8 +34,13 @@ file says so above its package line.
   not included. The hash values do not change.
 - For javac -Xlint:all -Werror: @SuppressWarnings("fallthrough") on the MurmurHash3 tail switch, and a redundant
   (byte) cast in XXH3 is removed.
+- Magic literals (all except 0, 1, -1, the initializers of the donor's named constants, the XXH3 default secret
+  table and annotation arguments) are private static final constants named by role, declared at the top of their
+  class with a one-line Javadoc (LITERAL_CONSTANTS v1.1; m3/tooling/jdk-superset/hashing/CONSTANT_NAMES.tsv). Each
+  keeps the literal's type and spelling, so javac folds it back and the compiled methods are unchanged.
 
-Nothing else was changed. Comments and documentation are the donor's and still name the donor API. The published
+Nothing else was changed. Comments and documentation are the donor's (plus one comment line on each direct-buffer
+branch and the constant blocks) and still name the donor API. The published
 sources jar carries no NOTICE file.
 
 ### LICENSE
