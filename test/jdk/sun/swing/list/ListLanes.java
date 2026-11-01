@@ -39,6 +39,9 @@ final class ListLanes {
     static final int OVERFLOW_ROWS = 8;
     static final int MAX_TOP = 50;
     static final int BEYOND = 3;
+    //FLLDCIM: MRL - named probe count (viewport-swing RECIPE_MEMORY 12)
+    /** Probes per row: its first offset, its middle and its last offset. */
+    static final int PROBES_PER_ROW = 3;
     static final int MUTATION = 5;
 
     enum Family { EMPTY, SINGLE, PLAIN, ZEROS, NEGATIVE, OVERFLOW }
@@ -145,7 +148,7 @@ final class ListLanes {
 
     /** The offsets around every row boundary of a monotone lane, and beyond its total. */
     static long[] probes(int[] h) {
-        long[] p = new long[3 * h.length + BEYOND + 1];
+        long[] p = new long[PROBES_PER_ROW * h.length + BEYOND + 1];
         long y = 0;
         int k = 0;
         for (int x : h) {

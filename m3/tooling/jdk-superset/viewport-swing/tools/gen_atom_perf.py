@@ -7,10 +7,14 @@ access) it fills the perf templates templates/perf/<pkg>/M3<Pkg>AtomsPerf.java: 
 (private atoms through privateLookupIn, a private nested receiver adapted to its public interface), one loop method per
 atom calling it with invokeExact over precomputed index streams, and the bench table PerfSupport.measure runs (warm-up,
 interleaved rounds, machine load). JDK references (the stock caches, TableRowSorter, SizeSequence, the stock loops) are
-measured in the same rounds. Gate: every atom id in the spec exists in ATOMS.tsv. Writes PERF_SPEC.tsv."""
+measured in the same rounds. Gates: every atom id in the spec exists in ATOMS.tsv; no written file has a numeric literal
+outside a named constant (m3/tooling/atom-tests/literal_census.py --strict). Writes PERF_SPEC.tsv."""
 import csv
 import os
 import sys
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "atom-tests"))
+import literal_census  # noqa: E402  (m3/tooling/atom-tests/literal_census.py)
 
 HEADER = ("/*\n * SPDX-License-Identifier: Apache-2.0 OR EPL-2.0\n"
           " * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others\n */\n"
@@ -222,6 +226,16 @@ def generate(rows, pkg, template, cls):
             .replace("//@@TABLE@@", "\n".join(table)))
 
 
+def write_gated(path, text):
+    """Writes one generated file after the literal gate: no numeric literal outside a named constant."""
+    found = literal_census.scan(text, strict=True)
+    if found:
+        raise SystemExit(f"{path}: numeric literals outside named constants (literal_census.py --strict): "
+                         + ", ".join(f"line {line} {lit}" for line, lit, _, _ in found))
+    with open(path, "w", encoding="utf-8", newline="\n") as w:
+        w.write(text)
+
+
 def main():
     atoms_tsv, templates, test_root, spec_out = sys.argv[1:5]
     with open(atoms_tsv, encoding="utf-8") as f:
@@ -234,12 +248,10 @@ def main():
         with open(os.path.join(templates, "perf", pkg, cls + ".java"), encoding="utf-8") as f:
             template = strip_header(f.read())
         mine = [r for r in rows if r["pkg"] == pkg]
-        with open(os.path.join(test_root, pkg, cls + ".java"), "w", encoding="utf-8", newline="\n") as w:
-            w.write(generate(mine, pkg, template, cls))
+        write_gated(os.path.join(test_root, pkg, cls + ".java"), generate(mine, pkg, template, cls))
         with open(os.path.join(templates, "perf", "PerfSupport.java"), encoding="utf-8") as f:
             support = strip_header(f.read())
-        with open(os.path.join(test_root, pkg, "PerfSupport.java"), "w", encoding="utf-8", newline="\n") as w:
-            w.write(HEADER + support)
+        write_gated(os.path.join(test_root, pkg, "PerfSupport.java"), HEADER + support)
     with open(spec_out, "w", encoding="utf-8", newline="\n") as w:
         w.write("pkg\tatom\tlabel\troute\tops\tmethod_handle\n")
         for r in rows:

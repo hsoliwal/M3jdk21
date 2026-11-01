@@ -15,7 +15,7 @@ never the output.
 |---|---|---|
 | 1 ATOMIZE | `tools/atomize_viewport.py <census> <src> ATOMS.tsv` | `ATOMS.tsv`: atom, signature, visibility, pattern (VIEWPORT_ATOM_PATTERNS v1) |
 | 2 JUNIT | `tools/gen_atom_tests.py ATOMS.tsv tools/templates <test/jdk/sun/swing> ATOM_SPEC.tsv` | one `<File>AtomsTest` per source file, one dynamic test per atom; the pattern harnesses (`tools/templates/<pkg>`) copied beside them |
-| run | `tools/run_atom_tests.sh <worktree> <out>` | stock JDK 21 + `--patch-module java.desktop=<M3 classes>`, JUnit console, one JVM per `@run` flag set |
+| run | `tools/run_atom_tests.sh <worktree> <out>` | stock JDK 21 + `--patch-module java.desktop=<M3 classes>`, JUnit console, one JVM per `@run` flag set; `SUMMARY atom_tests=<pass>/<run> generator_checks=<pass>/<run>` counts the per-atom tests and the `oneTestPerAtom` generator checks apart |
 | REACH | `tools/run_reach.sh <worktree> <out> REACH.tsv` | JaCoCo per dynamic test: each atom's own method executed in its own test |
 | MUTATION | `tools/mutate.py <worktree> <out> MUTANTS.tsv MUTATION.tsv` | planted behaviour bugs, each must fail at least one dynamic test |
 | 3 JIT/perf | `tools/gen_atom_perf.py`, `tools/run_atom_perf.sh`, `tools/perf_report.py` | `M3{List,Table,Tree}AtomsPerf` (MethodHandle.invokeExact per hot atom, warm-up, interleaved rounds, machine load, `-XX:+PrintCompilation` tier); `PERF.tsv` |
@@ -25,8 +25,14 @@ Oracles are JDK types wherever an M3 type mirrors one: `javax.swing.SizeSequence
 `javax.swing.tree.FixedHeightLayoutCache` / `VariableHeightLayoutCache`, `java.util.Hashtable` with the stock `JTree`
 scans, the stock `BasicListUI` loops (through a `BasicListUI` subclass of the unnamed module), driven by
 `DefaultListModel`, `DefaultTableModel` and `DefaultTreeModel` events. Private atoms are also checked white-box through
-`MethodHandles.privateLookupIn` against their inline contracts. Seeds derive from the atom name; there are no magic
-numbers in the generators or the tests (named constants).
+`MethodHandles.privateLookupIn` against their inline contracts. Seeds derive from the atom name. Every number in the
+tests is a named constant or an enum constant: `gen_atom_tests.py` and `gen_atom_perf.py` refuse to write a file with a
+numeric literal outside one (`m3/tooling/atom-tests/literal_census.py --strict`; -1, 0, 1 and 2 are trivial).
+
+Each generated class has one dynamic test per atom and one `oneTestPerAtom` check (`@Tag("generator-consistency")`).
+The check tests the generator (one dynamic test per census atom, distinct atom ids), not an atom, so reports count the
+281 atom tests and the 10 generator checks apart. The census of this PR together with PR #2249 is
+`m3/tooling/atom-tests/CENSUS_UNION.tsv` (`census_union.py`).
 
 The tests are jtreg-compatible (`@test`, `@modules ...:open`, `@run junit/othervm`); the perf harnesses run under jtreg
 as one-round smoke tests (`-Dperf.rounds=1`). Gates and their results: `GATES.tsv`; corrections of the generators:
