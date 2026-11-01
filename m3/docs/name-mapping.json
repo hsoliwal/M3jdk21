@@ -10916,7 +10916,7 @@
 "commit": null,
 "module": "m3/core",
 "path": "m3/core/src/com/m3/text/SharedRelatedLexemeCatalog.java",
-"symbol": "com.m3.text.SharedRelatedLexemeCatalog.findBySource",
+"symbol": "com.m3.text.SharedRelatedLexemeCatalog",
 "signatures": [
 "java.util.List<Relation> findBySource(java.lang.String)"
 ],
@@ -11024,7 +11024,7 @@
 "supersedes": []
 },
 "source_state": "implemented",
-"observation": "One existing receiver atom, exact original name and mapping retained. Five SDK groups and bounded Java/API oracle passed. This record is an unverified product candidate, not whole-family admission; the existing family.word-facts record is unchanged."
+"observation": "One existing receiver atom, exact original name and mapping retained. Five SDK groups and bounded Java/API oracle passed. This record is an unverified product candidate, not whole-family admission; the existing family.word-facts record is unchanged. Canonical target census correction 2026-11-01: the current Java target.symbol names the class owner com.m3.text.SharedRelatedLexemeCatalog; the previous target symbol com.m3.text.SharedRelatedLexemeCatalog.findBySource remains recorded here and in the unchanged source artifacts, method signatures and previous_targets history. This changes metadata only; source bytes, status, receipts and receiving phases are unchanged."
 }
 ]
 },
