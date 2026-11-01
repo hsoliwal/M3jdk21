@@ -37,6 +37,12 @@ Java_com_m3_arrays_M3ArrayNative_nativeCompareUtf16(
     return 0;
   }
 
+  /* Validate ranges first; JNI reference identity is not pointer-handle equality. */
+  if (left_start == right_start
+      && (*env)->IsSameObject(env, left_array, right_array) == JNI_TRUE) {
+    return 0;
+  }
+
   jchar left[M3_ARRAY_CHUNK];
   jchar right[M3_ARRAY_CHUNK];
   jint compared = 0;
