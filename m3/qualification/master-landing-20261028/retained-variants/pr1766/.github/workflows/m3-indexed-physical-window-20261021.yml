@@ -2,9 +2,9 @@ name: M3JDK21 filtered sorted physical viewport page
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3IndexedPhysicalWindowContract.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3IndexedPhysicalWindowTest.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3IndexedPhysicalWindowContract.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3IndexedPhysicalWindowTest.java'
       - 'm3/collections/qualification/viewport-frame-20261021/**'
       - '.github/workflows/m3-indexed-physical-window-20261021.yml'
   workflow_dispatch:

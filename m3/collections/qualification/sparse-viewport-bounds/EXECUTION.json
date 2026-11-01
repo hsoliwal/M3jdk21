@@ -5,23 +5,23 @@
     "repo": "hsoliwal/com.synexia",
     "pr": 12855,
     "dataset": "sparse-viewport-bounds-20261028",
-    "recipe": "com.synexia.m3.SparseViewportBounds20261028",
+    "recipe": "jdk.internal.m3.SparseViewportBounds20261028",
     "source_commit": "99d5ca5217d8065da8c288fafbc122f51c0f32dd"
   },
   "source": {
-    "path": "m3/collections/src/main/java/com/m3/collections/M3SparseExtents.java",
-    "pre_git_blob": "d35282fb564a0a9231f31781e1a699f7e571f8de",
+    "path": "m3/collections/src/main/java/jdk/m3/collections/M3SparseExtents.java",
+    "pre_git_blob": "ea42717003948d450a606b827628964c58896a23",
     "post_git_blob": "9c7cc7e265e4aee0dca030957c8d0ac04abfccbb",
-    "pre_sha256": "98a83a0bef698e128baa0a788e122751e12584d0b8983f4df7443850123afeec",
+    "pre_sha256": "a6809ea60f26929010e03a6bd5b0f06766cdcc38cab0bea720d82bf1fa60747f",
     "post_sha256": "391e8b5d81ca5c19cc9e325c5e49f28356c713dbbf1fd5530c6f3d5bd91f6e04",
     "api_descriptors_sha256": "021477848d8d90710f5c70c0275ed3ee93c420db0e859f44051308749ee14706",
     "api_descriptors_unchanged": true
   },
   "test": {
-    "path": "m3/collections/src/test/java/com/m3/collections/M3SparseViewportValidationTest.java",
+    "path": "m3/collections/src/test/java/jdk/m3/collections/M3SparseViewportValidationTest.java",
     "before": "ABSENT",
-    "post_git_blob": "045c89bb5a8cf869e332c73dd557a2193aa93b7f",
-    "sha256": "c726177c9a2191de9d85053db402b6dee7f0ba53cf2d985516f8965c16b633ed"
+    "post_git_blob": "6120b2ce4fdb71e1594b4d725412bc045deb16e0",
+    "sha256": "463eb1a44eafec8cf96be164ce2ba6a732604cd994d723d98a4b2010302c0d26"
   },
   "java21_parser": {
     "artifact_id": 12790475505,
@@ -40,10 +40,10 @@
       "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
       "98138cb6734ad86e3f77b8722fa5ff459842e841",
       "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
-      "9174dd681f0d75b5086fc19904a71524a03972dc"
+      "d41d6dc93ec0e176f6d215d23e3b6a316a9e4a32"
     ],
-    "original_harness_git_blob": "e69993797978f800a4d1b01b55093dc8dde16514",
-    "original_receiver_git_blob": "d7f5cda465d8f473f4969d4db15d717af1391745",
+    "original_harness_git_blob": "bd3c4ead8f188aaf3055447cb729e583ed8d6a18",
+    "original_receiver_git_blob": "274515be1975a252783a464489505f232679455f",
     "junit": {
       "tests": 5,
       "failures": 0,

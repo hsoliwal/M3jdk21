@@ -25,7 +25,7 @@ The vendor modules explicitly skip upstream tests because published source jars 
 this bootstrap establishes compiled dependencies, not upstream JUnit behavioral verification. The
 collections module must run its own real tests afterward in the required stage order.
 
-`m3/synexia-import/pure-int-recipe-custody/install.sh` documents the larger source closure including
+`m3/m3-import/pure-int-recipe-custody/install.sh` documents the larger source closure including
 OpenRewrite. Do not use it for this minimal operation: it checks hardcoded HOME/.m2 artifact paths
 and also installs an unrelated custody module. Keep the user's HOME unchanged and invoke the vendor
 reactor directly with the approved cache path. Its `test_source_bootstrap.py` exercises fake-Maven

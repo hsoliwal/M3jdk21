@@ -16,7 +16,7 @@ import java.util.Random;
 import jdk.m3.parser.M3Utf8SourceMap;
 
 /**
- * Executable integration of the ORIGINAL com.m3.file filesystem provider with
+ * Executable integration of the ORIGINAL jdk.m3.file filesystem provider with
  * the ORIGINAL jdk.m3.parser.M3File immutable source owner. Compile as an
  * external classpath consumer: neither production module requires the other.
  */
@@ -61,7 +61,7 @@ public final class M3ProviderCaptureContract {
         Files.write(file, encoded);
 
         // This is the only provider read for the initial source generation.
-        com.m3.file.M3File provider = com.m3.file.M3File.of(file);
+        jdk.m3.file.M3File provider = jdk.m3.file.M3File.of(file);
         byte[] captured = provider.readAllBytes(encoded.length);
         check(Arrays.equals(captured, encoded), "provider captured original bytes");
         URI uri = file.toUri();
@@ -137,7 +137,7 @@ public final class M3ProviderCaptureContract {
         Path file = directory.resolve("malformed.raw");
         byte[] malformed = {(byte)0xc3, (byte)0x28};
         Files.write(file, malformed);
-        com.m3.file.M3File provider = com.m3.file.M3File.of(file);
+        jdk.m3.file.M3File provider = jdk.m3.file.M3File.of(file);
         byte[] captured = provider.readAllBytes(2);
         refuse(CharacterCodingException.class,
                 () -> jdk.m3.parser.M3File.fromCapturedBytes(
@@ -152,7 +152,7 @@ public final class M3ProviderCaptureContract {
         Path link = directory.resolve("source-link.java");
         try {
             Files.createSymbolicLink(link, file.getFileName());
-            refuse(IOException.class, () -> com.m3.file.M3File.of(link).readAllBytes(32),
+            refuse(IOException.class, () -> jdk.m3.file.M3File.of(link).readAllBytes(32),
                     "original provider must not follow symbolic links");
         } catch (UnsupportedOperationException | SecurityException unsupported) {
             System.out.println("M3_PROVIDER_SYMLINK_SKIPPED runtime does not support symlinks");

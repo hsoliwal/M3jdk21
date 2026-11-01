@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Hitesh Soliwal and contributors to the Synexia Project.
 # SPDX-License-Identifier: Apache-2.0
 #
-# M3JDK21 release build (pattern RELEASE_TAG_BUILD, 2026-10-30).
+# M3JDK 21 release build (pattern RELEASE_TAG_BUILD, 2026-10-30).
 #
 # One push of a tag named m3jdk-* builds the product bundles for linux-x64,
 # macos-x64, macos-aarch64 and windows-x64 through the existing OpenJDK build

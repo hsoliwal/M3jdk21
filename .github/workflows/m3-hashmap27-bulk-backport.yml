@@ -76,4 +76,4 @@ jobs:
           python3 m3/runtime-integration/hashmap27/compare_bench.py \
             "$RUNNER_TEMP/m3-hashmap/before.txt" "$RUNNER_TEMP/m3-hashmap/after.txt"
       # Important: Java21 --patch-module tests this exact Java class on a stock
-      # VM. It is not a source-built M3JDK21 image with matched JNI/HotSpot.
+      # VM. It is not a source-built M3JDK 21 image with matched JNI/HotSpot.

@@ -11,13 +11,13 @@ import subprocess
 PIN = "d47a4b4fdb8e3794ec56768b06aa9e23730c6b8e"
 PRIVATE = "81c4f19a5ce5a68da316ff6f2802f2041a684f31"
 JAVA_TARGETS = [
-    "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3EscapeFlow.java",
-    "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3GvasLiteralHarvester.java",
-    "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ItemReferenceScan.java",
-    "m3/ports/compiletime/src/test/java/com/m3/compiletime/M3EscapePreparedTest.java",
+    "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3EscapeFlow.java",
+    "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3GvasLiteralHarvester.java",
+    "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ItemReferenceScan.java",
+    "m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3EscapePreparedTest.java",
 ]
 TEXT_TARGET = "m3/docs/name-mapping.d/m3-program-escape-precompute.json"
-HISTORY = ("m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/"
+HISTORY = ("m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/"
            "jdk21-hash-pinned/m3-compiletime-regex-precompute/manifest.tsv")
 
 
@@ -30,7 +30,7 @@ def main():
     parser.add_argument("--target", required=True, type=Path)
     args = parser.parse_args()
     crate = Path(__file__).resolve().parent.parent
-    resources = crate / "src/main/resources/com/synexia/rewrite"
+    resources = crate / "src/main/resources/jdk/internal/m3/rewrite"
     java = resources / "hash-pinned-java" / crate.name
     text = resources / "hash-pinned-text" / crate.name
     head = subprocess.check_output(["git", "-C", str(args.target), "rev-parse", "HEAD"], text=True).strip()
@@ -70,7 +70,7 @@ def main():
         parents.append(path + "\t" + sha(data) + "\n")
     inventory = "".join(parents).encode()
     (crate / "contract/parent-inputs.tsv").write_bytes(inventory)
-    owners = crate.parent.parent / "src/main/java/com/synexia/rewrite"
+    owners = crate.parent.parent / "src/main/java/jdk/internal/m3/rewrite"
     seals = {
         "target_revision": PIN, "source_recipe_revision": PRIVATE,
         "manifest_hashes": {kind: sha((resources / ("hash-pinned-" + kind) / crate.name / "manifest.tsv").read_bytes())

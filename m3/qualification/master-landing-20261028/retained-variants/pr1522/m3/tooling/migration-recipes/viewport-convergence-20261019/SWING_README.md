@@ -10,7 +10,7 @@ Synexia is the canonical owner; the target retains this exact reproduction copy.
 
 The two Swing manifests are:
 `m3-swing-convergence-20261019` (7 guards, 3 changes; SHA256
-`11f3d4890741deaa42323a11069c8c2287613dbf1f57db450e80cd8404d3781f`)
+`8c1d7492734d8151271ce11fdd23b3b77bdc68308b95c560c2b0792fd421a46b`)
 and `m3-swing-ui-convergence-20261019` (12 guards, 12 changes; SHA256
 `8700ab0a685f1d8ac2890874d13a440461d1a496e92907759cc718a6dc7b6d16`).
 

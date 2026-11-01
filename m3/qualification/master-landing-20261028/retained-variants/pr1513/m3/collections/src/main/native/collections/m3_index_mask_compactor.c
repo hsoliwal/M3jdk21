@@ -87,7 +87,7 @@ static jintArray m3_select_range(JNIEnv *env, jintArray rows, jbyteArray states,
 }
 
 JNIEXPORT jintArray JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_selectNative(
+Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative(
         JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint required_mask) {
     (void)owner;
     if (rows == NULL || states == NULL || required_mask < 0 || required_mask > 255) {
@@ -114,13 +114,13 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectNative(
 
 /* Capability discovery keeps older binaries usable through their original native ABI. */
 JNIEXPORT jint JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative(JNIEnv *env, jclass owner) {
+Java_jdk_m3_collections_M3IndexMaskCompactor_rangeAbiNative(JNIEnv *env, jclass owner) {
     (void)env; (void)owner;
     return 1;
 }
 
 JNIEXPORT jintArray JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative(
+Java_jdk_m3_collections_M3IndexMaskCompactor_selectRangeNative(
         JNIEnv *env, jclass owner, jintArray rows, jbyteArray states,
         jint first, jint length, jint required_mask) {
     (void)owner;
@@ -200,13 +200,13 @@ static jint m3_count_window(JNIEnv *env, jbyteArray states,
 
 /* ABI probe for direct logical-position selection from the state lane. */
 JNIEXPORT jint JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative(JNIEnv *env, jclass owner) {
+Java_jdk_m3_collections_M3IndexMaskCompactor_positionsAbiNative(JNIEnv *env, jclass owner) {
     (void)env; (void)owner;
     return 1;
 }
 
 JNIEXPORT jintArray JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative(
+Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsNative(
         JNIEnv *env, jclass owner, jbyteArray states, jint mask) {
     (void)owner;
     if (states == NULL || mask < 0 || mask > 255) {
@@ -257,14 +257,14 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative(
  * Existing required-only symbols remain unchanged for binary compatibility.
  */
 JNIEXPORT jint JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative(
+Java_jdk_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative(
         JNIEnv *env, jclass owner) {
     (void)env; (void)owner;
     return 1;
 }
 
 JNIEXPORT jintArray JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative(
+Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative(
         JNIEnv *env, jclass owner, jbyteArray states, jint required, jint excluded) {
     (void)owner;
     if (states == NULL || required < 0 || required > 255
@@ -338,7 +338,7 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative(
 }
 
 JNIEXPORT jintArray JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
+Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(
         JNIEnv *env, jclass owner, jintArray rows, jint row_offset,
         jbyteArray states, jint state_offset, jint length, jint mask) {
     (void)owner;
@@ -393,7 +393,7 @@ Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
 }
 
 JNIEXPORT jlongArray JNICALL
-Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
+Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
         JNIEnv *env, jclass owner, jlongArray rows, jint row_offset,
         jbyteArray states, jint state_offset, jint length, jint mask) {
     (void)owner;

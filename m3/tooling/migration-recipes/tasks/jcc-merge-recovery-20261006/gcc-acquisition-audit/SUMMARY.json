@@ -34,7 +34,7 @@
     "capture": {
       "path": "receiving-merge-audit/calls/current_refresh_github_tree.json",
       "bytes": 30108,
-      "sha256": "e245ce94a52bf1cc38e43568ef122164e519deef0efb7c759c98bcfdaf30b813"
+      "sha256": "c0e15a3a59178248aca45aceb935c49e074416ebbb7b602f809d21e1964f7520"
     }
   },
   "historical_source_record": {

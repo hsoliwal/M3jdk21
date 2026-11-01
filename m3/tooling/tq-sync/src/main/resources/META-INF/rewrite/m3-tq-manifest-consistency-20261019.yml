@@ -6,5 +6,5 @@ displayName: Reconcile the exact TQ fixture manifest
 description: >-
   Repair only four reviewed fixture AFTER hashes through the existing hash-pinned text engine.
 recipeList:
-  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
       crateName: m3-tq-manifest-consistency-20261019

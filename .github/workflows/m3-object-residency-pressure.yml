@@ -4,23 +4,23 @@ name: M3 object residency pressure contract
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3ObjectResidency.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3Address28.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3IntLane28.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3BitLane28.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3SlotAllocator28.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3Residency.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3ObjectResidency.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3Address28.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3IntLane28.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3BitLane28.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3SlotAllocator28.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3Residency.java'
       - 'm3/tooling/object-residency/**'
       - '.github/workflows/m3-object-residency-pressure.yml'
   push:
     branches: [master]
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3ObjectResidency.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3Address28.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3IntLane28.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3BitLane28.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3SlotAllocator28.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3Residency.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3ObjectResidency.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3Address28.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3IntLane28.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3BitLane28.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3SlotAllocator28.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3Residency.java'
       - 'm3/tooling/object-residency/**'
       - '.github/workflows/m3-object-residency-pressure.yml'
   workflow_dispatch:
@@ -51,15 +51,15 @@ jobs:
           OUT="$RUNNER_TEMP/m3-residency-pressure"
           mkdir -p "$OUT"
           javac --release 21 -Xlint:all -Werror -d "$OUT" \
-            m3/collections/src/main/java/com/m3/collections/M3Address28.java \
-            m3/collections/src/main/java/com/m3/collections/M3IntLane28.java \
-            m3/collections/src/main/java/com/m3/collections/M3BitLane28.java \
-            m3/collections/src/main/java/com/m3/collections/M3SlotAllocator28.java \
-            m3/collections/src/main/java/com/m3/collections/M3ObjectResidency.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3Address28.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3IntLane28.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3BitLane28.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SlotAllocator28.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3ObjectResidency.java \
             m3/tooling/object-residency/M3ResidencyPressureProbe.java
       - name: Execute real small-Xmx LRU/recreation proof
         shell: bash
         run: |
           set -euo pipefail
           java -Xms8m -Xmx32m -cp "$RUNNER_TEMP/m3-residency-pressure" \
-            com.m3.collections.verification.M3ResidencyPressureProbe
+            jdk.m3.collections.verification.M3ResidencyPressureProbe

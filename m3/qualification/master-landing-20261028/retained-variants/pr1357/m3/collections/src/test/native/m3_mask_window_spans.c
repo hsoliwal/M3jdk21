@@ -31,11 +31,11 @@ static void JNICALL put(JNIEnv *env, jintArray a, jsize start, jsize n, const ji
     if (fault == 3) { pending = 1; return; }
     memcpy((jint *)((fixture_array *)a)->data + start, in, (size_t)n * sizeof(jint));
 }
-extern jlong Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative(
+extern jlong Java_jdk_m3_collections_M3IndexMaskWindow_scanBoundedNative(
         JNIEnv *, jclass, jintArray, jbyteArray, jint, jint, jint, jint, jintArray, jint, jint);
 static jlong run(JNIEnv *env, fixture_array *r, fixture_array *s, fixture_array *o, int cap) {
     row_reads = row_elements = state_reads = writes = pending = 0;
-    return Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative(env, NULL,
+    return Java_jdk_m3_collections_M3IndexMaskWindow_scanBoundedNative(env, NULL,
             (jintArray)r, (jbyteArray)s, 0, r->size, 128, 0, (jintArray)o, 2, cap);
 }
 int main(void) {

@@ -3,7 +3,7 @@
 #include <jni.h>
 
 #define NULL_ALLOCATION(type, plural) \
-JNIEXPORT type JNICALL Java_com_m3_arrays_M3ArrayNative_nativeAllocate##plural( \
+JNIEXPORT type JNICALL Java_jdk_m3_arrays_M3ArrayNative_nativeAllocate##plural( \
     JNIEnv *env, jclass owner, jint length) { \
     (void)env; (void)owner; (void)length; return NULL; \
 }

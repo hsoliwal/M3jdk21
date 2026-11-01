@@ -1,8 +1,8 @@
 /* Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
  * SPDX-License-Identifier: Apache-2.0
  */
-import com.m3.text.M3LexiconPrecompute;
-import com.m3.text.SharedLexiconPrecomputeCatalog;
+import jdk.m3.text.M3LexiconPrecompute;
+import jdk.m3.text.SharedLexiconPrecomputeCatalog;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;

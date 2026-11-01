@@ -9,7 +9,7 @@
     <rewrite.version>8.17.1</rewrite.version>
     <jacoco.version>0.8.15</jacoco.version>
     <junit.version>5.10.2</junit.version>
-    <m3.synexia.version>1.0.0-SNAPSHOT</m3.synexia.version>
+    <m3.version>1.0.0-SNAPSHOT</m3.version>
   </properties>
   <dependencies>
     <!-- OpenRewrite 8.17.1 publishes PlainText from rewrite-core transitively; there is no rewrite-text artifact. -->
@@ -18,7 +18,7 @@
     <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-test</artifactId><version>${rewrite.version}</version><scope>test</scope></dependency>
     <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>${junit.version}</version><scope>test</scope></dependency>
     <!-- Canonical reusable recipe implementation is supplied by the provenance-pinned Synexia custody module in this reactor. -->
-    <dependency><groupId>com.synexia</groupId><artifactId>synexia-openrewrite-recipes</artifactId><version>${m3.synexia.version}</version></dependency>
+    <dependency><groupId>com.synexia</groupId><artifactId>m3-openrewrite-recipes</artifactId><version>${m3.version}</version></dependency>
   </dependencies>
   <build><plugins>
     <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version></plugin>
@@ -44,7 +44,7 @@
           <goals><goal>check</goal></goals>
           <configuration>
             <includes>
-              <include>com/m3/rewrite/scope/*</include>
+              <include>jdk/m3/rewrite/scope/*</include>
             </includes>
             <rules>
               <rule>
@@ -77,7 +77,7 @@
       activate this profile and select a com.synexia.* recipe explicitly.
     -->
     <profile>
-      <id>m3-synexia-recipe-ownership-audit</id>
+      <id>m3-recipe-ownership-audit</id>
       <build>
         <plugins>
           <plugin>
@@ -87,15 +87,15 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
-                <version>${m3.synexia.version}</version>
+                <artifactId>m3-openrewrite-recipes</artifactId>
+                <version>${m3.version}</version>
               </dependency>
             </dependencies>
             <configuration>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <exportDatatables>true</exportDatatables>
               <activeRecipes combine.self="override">
-                <recipe>com.synexia.rewrite.M3Jdk21RecipeOwnershipAudit</recipe>
+                <recipe>jdk.internal.m3.rewrite.M3Jdk21RecipeOwnershipAudit</recipe>
               </activeRecipes>
             </configuration>
           </plugin>
@@ -104,7 +104,7 @@
     </profile>
 
     <profile>
-      <id>m3-synexia-canonical-recipes</id>
+      <id>m3-canonical-recipes</id>
       <build>
         <plugins>
           <plugin>
@@ -114,8 +114,8 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
-                <version>${m3.synexia.version}</version>
+                <artifactId>m3-openrewrite-recipes</artifactId>
+                <version>${m3.version}</version>
               </dependency>
             </dependencies>
             <configuration>
@@ -126,7 +126,7 @@
       </build>
     </profile>
       <profile>
-      <id>m3-synexia-atom-pattern</id>
+      <id>m3-atom-pattern</id>
       <build>
         <plugins>
           <plugin>
@@ -136,19 +136,19 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
               </dependency>
             </dependencies>
             <executions>
               <execution>
-                <id>m3-synexia-atom-pattern-verify</id>
+                <id>m3-atom-pattern-verify</id>
                 <phase>verify</phase>
                 <goals><goal>dryRun</goal></goals>
               </execution>
             </executions>
             <configuration>
-              <activeRecipes><recipe>com.synexia.m3.EveryModuleAtomPatternApplication</recipe></activeRecipes>
+              <activeRecipes><recipe>jdk.internal.m3.EveryModuleAtomPatternApplication</recipe></activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -210,7 +210,7 @@
       </build>
     </profile>
     <profile>
-      <id>m3-synexia-atom-pattern-mastery</id>
+      <id>m3-atom-pattern-mastery</id>
       <build>
         <plugins>
           <plugin>
@@ -220,19 +220,19 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
               </dependency>
             </dependencies>
             <executions>
               <execution>
-                <id>m3-synexia-atom-pattern-mastery-verify</id>
+                <id>m3-atom-pattern-mastery-verify</id>
                 <phase>verify</phase>
                 <goals><goal>dryRun</goal></goals>
               </execution>
             </executions>
             <configuration>
-              <activeRecipes><recipe>com.synexia.m3.EveryModuleAtomPatternMastery</recipe></activeRecipes>
+              <activeRecipes><recipe>jdk.internal.m3.EveryModuleAtomPatternMastery</recipe></activeRecipes>
               <exportDatatables>true</exportDatatables>
               <runPerSubmodule>false</runPerSubmodule>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>

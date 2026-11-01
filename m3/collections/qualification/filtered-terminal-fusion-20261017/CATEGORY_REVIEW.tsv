@@ -1,5 +1,5 @@
 category	candidate	origin	license	complexity_and_contract	decision	evidence
-FILTER_TERMINAL	Previous M3LongFilteredView.iterator()	M3JDK21 blob 51588ee54029a6b534c1d1a5268bcf2be33f5e72	Apache-2.0	O(n) plus an intermediate iterator per terminal	BASELINE	exact original byte pinned
+FILTER_TERMINAL	Previous M3LongFilteredView.iterator()	M3JDK21 blob 1c2bda15d11402d220fea586ac49e2db8ec6ff86	Apache-2.0	O(n) plus an intermediate iterator per terminal	BASELINE	exact original byte pinned
 FILTER_TERMINAL	Direct source M3LongIterator + predicate	M3 first-party source atom	Apache-2.0	O(n) and O(1) scratch; preserves callback ordering	SELECT	actual OpenRewrite4/4 JUnit and identical callback trace
 SORTED_VIEW	M3LongSortedViews.Filtered delegates selection	M3JDK21 current primitive set wrapper	Apache-2.0	Reuses single backing predicate/state owner; no second wrapper	REUSE	inherited terminal operations
 PREDICATE_DAG	M3LongPredicates.and	First-party Git blob 2367a2e5f7437ffe340d800a1a5c949cef54adc4	Apache-2.0	Balanced short-circuit DAG; custom virtual and overrides remain	RETAIN	unchanged donor exact hash

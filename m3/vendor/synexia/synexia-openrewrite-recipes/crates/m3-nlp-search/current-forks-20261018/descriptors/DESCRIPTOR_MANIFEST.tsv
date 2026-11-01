@@ -1,3 +1,0 @@
-module	artifacts	unit_jars	target	sha256	generated
-jdk.m3.compiletime	jdk.m3.compiletime	-	m3/tooling/module-packs/nlp-search/src/jdk.m3.compiletime/module-info.java	ffd45650073d4f48611512f2c49504b83654136f67478f206d050bd803f4fc72	jdk.m3.compiletime.java.txt
-jdk.m3.nlp.search	jdk.m3.nlp.search	-	m3/tooling/module-packs/nlp-search/src/jdk.m3.nlp.search/module-info.java	0434080e858f3901557af53554b482b6a02c6bb62a7e22f5f757feb34bd1392a	jdk.m3.nlp.search.java.txt

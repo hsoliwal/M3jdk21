@@ -10,7 +10,7 @@ here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 root="$(git -C "$here" rev-parse --show-toplevel)"
 base="$1"
 head="$2"
-report="${3:-${TMPDIR:-/tmp}/m3-jdk-standard-changed-findings.tsv}"
+report="${3:-${TMPDIR:-/tmp}/m3jdk-standard-changed-findings.tsv}"
 scheme="${4:-}"
 if [[ -n "$scheme" && "$scheme" != "--scheme=m3" ]]; then
   echo "unknown option: $scheme" >&2
@@ -25,4 +25,4 @@ args=(--root "$root" --base "$base" --head "$head" --report "$report")
 if [[ -n "$scheme" ]]; then
   args+=("$scheme")
 fi
-java -cp "$work/classes" com.m3.compiler.standard.M3ChangedNameGate "${args[@]}"
+java -cp "$work/classes" jdk.m3.compiler.standard.M3ChangedNameGate "${args[@]}"

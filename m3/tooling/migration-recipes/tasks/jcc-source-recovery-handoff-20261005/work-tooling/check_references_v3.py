@@ -31,19 +31,19 @@ DEST = '0994ecd65e86600f417f4d8702838d8c2663af61'
 DEST_ROOT = '7e8f39ac999174f8d5b6028d638a68d8c317b070'
 OWNER = 'da958d00d24154c0db87beca0ec80a7df2b43b73'
 REF = 'refs/heads/aix/jcc-source-merge-recovery-20261005'
-IDS = ('synexia.jcc-recipe-laboratory', 'synexia.jcc-java-jni-regression')
+IDS = ('m3.jcc-recipe-laboratory', 'm3.jcc-java-jni-regression')
 NAME = 'jcc-source-recovery-handoff-20261005'
 TASK = PurePosixPath('m3/tooling/migration-recipes/tasks') / NAME
-CRATE = ROOT / 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text' / NAME
+CRATE = ROOT / 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text' / NAME
 MAP = 'm3/docs/name-mapping.json'
 DOC = 'm3/docs/jcc-source-handoff.md'
 BIND = 'm3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json'
 COV = 'm3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv'
-FIELD_HASH = '7b5e197da5e2645efb87345e2abf92dcd8071993ff308c8fa0bca0511d00c52e'
-ROOT_HASH = '55610f52b7b1e01ee15999969cc385616ff2e43f734e589ff61c750c5ab3c845'
-CONTEXT_HASH = 'fbc460874aeb04a688ad0ed9b47ad8e3f3b37f88af09d0f32ecfeedc2827fbed'
-PUBLICATION_HASH = '95f325ce57dadab60031f41514d9a9c5fa3ef6eb29a41e3c9a8c81e2dee996b8'
-EXPECTATIONS_HASH = '548b98ef8531b369f4c378bfdebf681e514a5b46da15bcf32db9ab491a7ce8d5'
+FIELD_HASH = '65f10e830243ed927aabedee9d0734daa46eed3b37ae4212e28ab85131fe9e9d'
+ROOT_HASH = '30dadc5274823dba2443d663000051a48c0785eb92042ba8e684520bc2ce5942'
+CONTEXT_HASH = 'ab9828692a1ca02adfabf22ff679e47e1e62a9d755b97f4071c42d5225698bc5'
+PUBLICATION_HASH = '91c8df6ab07e3590fecf20de65e2e65943c4b70aebb9f5133901ae6362506c35'
+EXPECTATIONS_HASH = '6c9daf2e41937a90d8c884a7918be803315bad3f124cfd0f8c4ea77f34c1746e'
 
 
 def load(path):
@@ -438,7 +438,7 @@ def main():
             for index, child in enumerate(value):
                 nested_dest(child, f'{location}[{index}]')
 
-    old_plan = load(OLD / 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json')
+    old_plan = load(OLD / 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json')
     assert plan['guards'] == old_plan['guards'] and len(plan['guards']) == 7
     for index, guard in enumerate(plan['guards']):
         dest(guard, f'plan.guards[{index}]')
@@ -575,8 +575,8 @@ def check_custody_indexes(final, receipt_refs):
     package = HERE / 'custody-final-evidence'
     index_path = package / 'CUSTODY_EVIDENCE_INDEX.json'
     additional_path = package / 'ADDITIONAL_RECEIPTS.json'
-    check(index_path, {'sha256': '8e478debeac87c46d01d57cf1038b2195005f9f6af249b25d97f1074ef26b38b'})
-    check(additional_path, {'sha256': '30cc1c07b3aac8f1a6662c494c0cbbc76c22bc6a4fdbcbb04770236fd2384907'})
+    check(index_path, {'sha256': '7876e0828731f3e4687c67162156788e7bde001406d5d723dd9acd8433fb36ee'})
+    check(additional_path, {'sha256': '082d12dd79e70bb747441fc8b221ab5ddeea5fd8174629b068c137c4682e1b5a'})
     index, additional = load(index_path), load(additional_path)
     assert index['schema'] == 'm3-jcc-e04-publication-custody-evidence-carry/1'
     assert (index['source_commit'], index['source_root']) == (SOURCE, SOURCE_ROOT)

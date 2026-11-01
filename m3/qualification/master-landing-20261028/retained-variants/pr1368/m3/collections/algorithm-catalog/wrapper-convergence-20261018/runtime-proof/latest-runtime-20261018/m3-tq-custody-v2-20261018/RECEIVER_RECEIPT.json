@@ -22,7 +22,7 @@
     {
       "case": "late-drift-no-partial-write",
       "exit_code": 1,
-      "expected_refusal": "target source drift: m3/tooling/tq/src/test/java/com/m3/tq/TQTest.java"
+      "expected_refusal": "target source drift: m3/tooling/tq/src/test/java/jdk/m3/tq/TQTest.java"
     },
     {
       "case": "qualified-input-tamper",
@@ -32,7 +32,7 @@
     {
       "case": "sdk-result-tamper",
       "exit_code": 1,
-      "expected_refusal": "SDK result changed after qualification: m3/tooling/tq/src/test/java/com/m3/tq/TQTest.java"
+      "expected_refusal": "SDK result changed after qualification: m3/tooling/tq/src/test/java/jdk/m3/tq/TQTest.java"
     },
     {
       "case": "symlink-target",

@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0
+# Canonical reusable A3 atomize/patternize recipe sources mastered in hsoliwal/com.synexia.
+# Consumers must pin the Synexia commit and verify these Git blob identities before execution.
+class	path	gitBlobSha1
+com.synexia.rewrite.atom.M3AtomizePureIntReturnRecipe	src/main/java/com/synexia/rewrite/atom/M3AtomizePureIntReturnRecipe.java	63adecfa799fcd52a73df02f6020103f066f109c
+com.synexia.rewrite.atom.M3DocumentPureIntAtomRecipe	src/main/java/com/synexia/rewrite/atom/M3DocumentPureIntAtomRecipe.java	ed5c1afbaa791806f31c99d7eb9aa0700869690f
+com.synexia.rewrite.atom.M3FileAtomCandidateTable	src/main/java/com/synexia/rewrite/atom/M3FileAtomCandidateTable.java	27cc32e135dae61eae42b2fa7cfa27b3bd93b4aa
+com.synexia.rewrite.atom.M3InventoryPureIntAtomCandidates	src/main/java/com/synexia/rewrite/atom/M3InventoryPureIntAtomCandidates.java	b13c56d6a57cd110261eb4f5425afd4396fab2cc
+com.synexia.rewrite.atom.M3PatternizePureIntAtomRecipe	src/main/java/com/synexia/rewrite/atom/M3PatternizePureIntAtomRecipe.java	c408b37be59691131f41a9c2f4566e2dcb912929
+com.synexia.rewrite.atom.M3PureIntAtomEligibility	src/main/java/com/synexia/rewrite/atom/M3PureIntAtomEligibility.java	69fff237eb8b943c33a6ec154f9a1b6edba63481
+com.synexia.rewrite.atom.M3PureIntConvergenceRecipe	src/main/java/com/synexia/rewrite/atom/M3PureIntConvergenceRecipe.java	7dc6cea0a969a1bd094e324c47a1bb724b5ff1dc
+com.synexia.rewrite.M3RecipeMasteryPortableReceipt	src/main/java/com/synexia/rewrite/M3RecipeMasteryPortableReceipt.java	ec03c17a24d455a0c535e18069e85dd85f1a065a

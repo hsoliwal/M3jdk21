@@ -13,8 +13,8 @@ fail() {
   exit "${2:-4}"
 }
 
-if [[ -e "$inventory" && "${SYNEXIA_REBIND_INVENTORY:-0}" != 1 ]]; then
-  fail "M3_PLAN_INVENTORY_ALREADY_EXISTS set SYNEXIA_REBIND_INVENTORY=1 to replace"
+if [[ -e "$inventory" && "${M3_REBIND_INVENTORY:-0}" != 1 ]]; then
+  fail "M3_PLAN_INVENTORY_ALREADY_EXISTS set M3_REBIND_INVENTORY=1 to replace"
 fi
 [[ ! -L "$here" ]] || fail "M3_ROLLOUT_DIRECTORY_SYMLINK"
 mkdir -p "$target"

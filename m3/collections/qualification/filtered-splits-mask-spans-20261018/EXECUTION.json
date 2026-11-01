@@ -2,7 +2,7 @@
   "schema": 1,
   "target_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
   "canonical_engine_revision": "140c263a90f9803b9c46103c63355a286e0515f0",
-  "recipe": "com.synexia.m3.FilteredSplitsMaskSpans20261018",
+  "recipe": "jdk.internal.m3.FilteredSplitsMaskSpans20261018",
   "recipe_junit": {
     "executed": 3,
     "failures": 0,

@@ -67,7 +67,7 @@
       "evidence": [
         "m3/pom.xml"
       ],
-      "next_action": "Reconcile pure-int custody, migration-recipes, synexia-jdk-a3-recipes and recipe-agent-api module wiring into qualified Synexia execution, preserving product postimages and callers.",
+      "next_action": "Reconcile pure-int custody, migration-recipes, m3jdk-a3-recipes and recipe-agent-api module wiring into qualified Synexia execution, preserving product postimages and callers.",
       "detail": "No recipe directory/module is deleted. Preflight detects actual POM wiring before Maven legacy execution.",
       "observed_source": {
         "repository": "hsoliwal/M3jdk21",
@@ -265,7 +265,7 @@
       "area": "history",
       "evidence": [
         "https://github.com/hsoliwal/M3jdk21/pull/1927",
-        "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+        "m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java",
         "https://github.com/hsoliwal/M3jdk21/pull/2071",
         "https://github.com/hsoliwal/M3jdk21/pull/2072",
         "https://github.com/hsoliwal/M3jdk21/pull/2073"
@@ -315,8 +315,8 @@
       "area": "naming",
       "mapping_id": "m3.collections.evicting-queue.owner-naming",
       "kind": "INTERNAL_MOVE",
-      "before_type": "com.m3.collections.guava.M3EvictingQueue",
-      "after_type": "com.m3.collections.queue.M3EvictingQueue",
+      "before_type": "jdk.m3.collections.guava.M3EvictingQueue",
+      "after_type": "jdk.m3.collections.queue.M3EvictingQueue",
       "evidence": [
         "m3/docs/name-mapping.json",
         "m3/tooling/name-contract/name-plan.json"
@@ -335,8 +335,8 @@
       "area": "naming",
       "mapping_id": "m3.prefix-z",
       "kind": "INTERNAL_MOVE",
-      "before_type": "com.m3.algorithm.M3PrefixZ",
-      "after_type": "com.m3.algorithms.M3PrefixZ",
+      "before_type": "jdk.m3.algorithm.M3PrefixZ",
+      "after_type": "jdk.m3.algorithms.M3PrefixZ",
       "evidence": [
         "m3/docs/name-mapping.json",
         "m3/tooling/name-contract/name-plan.json"
@@ -350,10 +350,10 @@
       }
     },
     {
-      "id": "NAME:synexia.collections.SegmentedAddress28",
+      "id": "NAME:m3.collections.SegmentedAddress28",
       "status": "QUEUED",
       "area": "naming",
-      "mapping_id": "synexia.collections.SegmentedAddress28",
+      "mapping_id": "m3.collections.SegmentedAddress28",
       "kind": "FORMAT_ONLY",
       "before_type": "jdk.internal.mindex.M3Address28",
       "after_type": "jdk.internal.mindex.M3Address28",
@@ -370,10 +370,10 @@
       }
     },
     {
-      "id": "NAME:synexia.counterpart.MIndexClass",
+      "id": "NAME:m3.counterpart.MIndexClass",
       "status": "QUEUED",
       "area": "naming",
-      "mapping_id": "synexia.counterpart.MIndexClass",
+      "mapping_id": "m3.counterpart.MIndexClass",
       "kind": "JDK_BACKEND",
       "before_type": "jdk.internal.mindex.M3Class",
       "after_type": "java.lang.Class",

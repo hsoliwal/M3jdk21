@@ -1,5 +1,5 @@
---- before/m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseProgressMonitor.java
-+++ after/m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseProgressMonitor.java
+--- before/m3/eclipse/core-runtime/src/main/java/jdk/m3/eclipse/runtime/M3EclipseProgressMonitor.java
++++ after/m3/eclipse/core-runtime/src/main/java/jdk/m3/eclipse/runtime/M3EclipseProgressMonitor.java
 @@ -18,14 +18,23 @@
   * <p>{@code internalWorked(double)} preserves fractional credit across calls. Invalid,
   * negative and non-finite progress is ignored, like other Eclipse monitor adapters. Work

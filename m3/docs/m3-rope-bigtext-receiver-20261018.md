@@ -12,8 +12,8 @@ Status: **DRAFT**. This adds only an independently built M3 core index, NOT an i
 - Alternate rope reference: cessen/ropey. No Apple, Rust or Swift implementation code was copied. Apple donor sources bear Apache-2.0 WITH Swift-exception; this Java implementation is original first-party code.
 
 Target postimage SHA-256:
-- m3/core/src/com/m3/text/M3RopeTextIndex.java = ff2495c01b8df68a01167e29daa4ea4a6af25650e59c5cc705cc2fdc7cfa0141
-- m3/core/test/M3RopeTextIndexTest.java = 1374a5b14a32a58324f50f980731a94e5e938235fbfdf27c2e679f0ea1681c92
+- m3/core/src/jdk/m3/text/M3RopeTextIndex.java = d78d4f2f7d23c0a1927d86c8f059749cbb7d3a11e7d5152aae26135effb9f34a
+- m3/core/test/M3RopeTextIndexTest.java = 98d34219367796a53690d4f276523ee0f0f8d0b4a4127be2b806a3f177f1c74a
 
 ## Scope
 

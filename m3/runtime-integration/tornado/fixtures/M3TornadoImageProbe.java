@@ -2,7 +2,7 @@
  * Copyright 2026 Hitesh Soliwal and contributors.
  * SPDX-License-Identifier: Apache-2.0
  */
-package com.m3.tornado;
+package jdk.m3.tornado;
 
 import java.net.URL;
 import java.nio.ByteBuffer;

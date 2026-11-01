@@ -38,7 +38,7 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>com.m3.recipe.M3RankIndexRecipe</mainClass>
+              <mainClass>jdk.m3.recipe.M3RankIndexRecipe</mainClass>
               <arguments>
                 <argument>--check</argument>
                 <argument>${m3.repo.root}</argument>

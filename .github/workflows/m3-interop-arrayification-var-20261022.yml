@@ -4,7 +4,7 @@ name: M3JDK21 arrayified five-library Java21 var grammar and receipt
 on:
   pull_request:
     paths:
-      - 'm3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java'
+      - 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryArrayificationTest.java'
       - 'm3/collections/interop/qualification/arrayification-var-20261022/**'
       - '.github/workflows/m3-interop-arrayification-var-20261022.yml'
   push:
@@ -28,7 +28,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           sparse-checkout: |
-            m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java
+            m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryArrayificationTest.java
             m3/collections/interop/qualification/arrayification-var-20261022
           persist-credentials: false
       - uses: actions/checkout@v5
@@ -37,7 +37,7 @@ jobs:
           ref: a397cc81977a3d979a0484bd339246a05bec84d1
           path: baseline
           sparse-checkout: |
-            m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java
+            m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryArrayificationTest.java
           persist-credentials: false
       - uses: actions/setup-java@v5
         with:
@@ -50,7 +50,7 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import hashlib
-          target = Path('m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java')
+          target = Path('m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryArrayificationTest.java')
           old = Path('baseline') / target
           source = old.read_bytes()
           received = target.read_bytes()
@@ -62,12 +62,12 @@ jobs:
               raise SystemExit('product Java source deviates from canonical Synexia recipe')
           for data, expected in [
               (source, '43d670c2278b4db3cb39e8c6d63eff56827c7ef8359e7c85aa8f72b892bba51d'),
-              (received, '6d31a53eb94af7c3cfe08ce126ce1be1f8d7da1b09150bd72a12c602d3ab3565'),
+              (received, '61ae67aeedc4a4a42f81f1beefc23ed43aa0c2288b6301fd7bfc1eea023fdf87'),
           ]:
               if hashlib.sha256(data).hexdigest() != expected:
                   raise SystemExit('source pre/postimage SHA256 invalid')
           receipt = Path('m3/collections/interop/qualification/arrayification-var-20261022/source-handoff.tsv').read_text()
-          if 'com.synexia.m3.M3Jdk21InteropArrayificationVar20261022' not in receipt:
+          if 'jdk.internal.m3.M3Jdk21InteropArrayificationVar20261022' not in receipt:
               raise SystemExit('missing canonical Synexia source receipt')
           print('M3_FIVE_LIBRARY_VAR_SOURCE_RECEIVER_PASS')
           PY

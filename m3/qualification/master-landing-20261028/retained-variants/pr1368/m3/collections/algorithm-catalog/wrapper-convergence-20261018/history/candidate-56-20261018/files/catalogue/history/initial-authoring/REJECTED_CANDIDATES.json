@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "WRAPPER_FALLBACK_IAE_20261018",
   "status": "INITIAL_CANDIDATE_REJECTED_CORRECTION_PENDING",
-  "input": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+  "input": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
   "frozen_initial_sha256": "d5b841ff61d7269454fe136e7a1bf10ace25d9d6a3a516137e48a779c6c63201",
   "frozen_initial_git_blob_sha1": "bd5dcda2789022e89b121efccdda98d6c293a0f4",
   "reported_failure": "Catching every IllegalArgumentException around range construction retries comparator demand or swallows an opaque owner range-override exception. Those exceptions are not proof of an out-of-range endpoint.",
@@ -14,14 +14,14 @@
   ],
   "evidence_source": "Exact protected probe source and baseline/initial-candidate logs read from root qualification directory and preserved byte-for-byte",
   "probe_path": "counterexamples/M3ComparatorFailureProbe.java.txt",
-  "probe_sha256": "4cd4c00c565ea75f26b83ca237330063275c661df5017d06963aeb1a76bdfe55",
+  "probe_sha256": "07296e1077905d975421f1f65020388fbe4a83e545cf5c62fc70b94f5c1cc75b",
   "execution_receipt": null,
   "note": "These captured logs establish the recorded behavioral counterexample; the full command/toolchain execution receipt and corrected source proof remain root-owned and pending here.",
   "initial_recipe_report": "Root reports initial 26-target SDK 5 tests, 8 sealing and 9 receiver cases passed. Recipe integrity does not establish behavior; the later counterexample keeps corrected runtime admission pending.",
   "local_evidence": [
     {
       "path": "counterexamples/M3ComparatorFailureProbe.java.txt",
-      "sha256": "4cd4c00c565ea75f26b83ca237330063275c661df5017d06963aeb1a76bdfe55",
+      "sha256": "07296e1077905d975421f1f65020388fbe4a83e545cf5c62fc70b94f5c1cc75b",
       "bytes": 1989,
       "evidence_kind": "PROTECTED_PROBE_SOURCE_AS_TEXT"
     },

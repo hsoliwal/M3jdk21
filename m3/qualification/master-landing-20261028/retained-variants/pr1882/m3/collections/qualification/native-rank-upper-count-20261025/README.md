@@ -7,9 +7,9 @@ This change is in the actual existing `m3/collections/src/main/native/collection
 ## Provenance and exact generated source
 Canonical private convergence recipe: [Synexia PR #13224](https://github.com/hsoliwal/com.synexia/pull/13224), commit `e9ba8bc52b58d70a60de78500293abe376cf99c1`.
 - Existing native C before Git blob `1f84f2d0221d735f2209a6da1673479382e67776`; received postimage `ac7f123549b2b7e0a3788fe9176bb56dee8efe85`.
-- Original-package standalone Java21 native/fallback oracle `M3LongRankUpperCountSweepContract.java`: `41883b5b1bee07503ab506aa9bd9e9068727a882`.
-- Owning module JUnit wrapper `M3LongRankUpperCountSweepTest.java`: `7a24fb7c7a5ce623021d7d367c3186bb178c31e8`.
-- Focused **actual original C source** native/Java 21 workflow `.github/workflows/m3-rank-upper-count-jni-java21.yml`: `d6f72de18cf4a6cb143b1c9721e03e1a2d172839`.
+- Original-package standalone Java21 native/fallback oracle `M3LongRankUpperCountSweepContract.java`: `47edf48ca9610e28cb22b4bbfe5400a3cd0127a5`.
+- Owning module JUnit wrapper `M3LongRankUpperCountSweepTest.java`: `ab80634c701686f6beda7bc749840744e8a7ef8d`.
+- Focused **actual original C source** native/Java 21 workflow `.github/workflows/m3-rank-upper-count-jni-java21.yml`: `2a8c46884b14fb796fb6e6f96e65f80a39583edf`.
 - `CATALOGUE.tsv` and implementation/test transformation recipes remain **only** in Synexia. No Synexia runtime dependency enters M3JDK21.
 
 ## Problem-category adaptation (no copied challenge solutions)

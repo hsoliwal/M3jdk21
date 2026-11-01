@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 # Leaf-1 proof for the native wc kernel (libm3textio) and jdk.m3.text.Wc on a stock
-# JDK 21 plus gcc, without an M3 JDK image (build.py stays the image path).
+# JDK 21 plus gcc, without an M3JDK image (build.py stays the image path).
 # Prints one PASS/FAIL/NOT_RUN/HOLD line per gate with parsed counts (BLLSE) and
 # keeps every raw log under OUT. Exit status 1 when any gate FAILs.
 #
@@ -22,7 +22,7 @@ BASE_SHA=74e8870a54f7a0b343233e997129f283dbaf048b9debf1f568e6a5c07dcb6d8c
 COMMAND_SHA=52e9915fb0f3111bccb5da31bea557fcc795ef11f56ece8aac8e5027310b5639
 FLIP_FROM='UINT64_C(0x00000001F0003E00)'
 FLIP_TO='UINT64_C(0x0000000170003E00)'
-EXPECTED_SYMBOLS='Java_com_synexia_unix4jm3_io_FileTools_mkfifo0 Java_jdk_m3_io_FileTools_mkfifo0 Java_jdk_m3_text_WcNative_count0 Java_jdk_m3_text_WcNative_countLines0'
+EXPECTED_SYMBOLS='Java_jdk_internal_m3_unix4jm3_io_FileTools_mkfifo0 Java_jdk_m3_io_FileTools_mkfifo0 Java_jdk_m3_text_WcNative_count0 Java_jdk_m3_text_WcNative_countLines0'
 CFLAGS='-std=c11 -Wall -Wextra -Werror -Wconversion -shared'
 pass=0; fail=0; not_run=0; hold=0
 

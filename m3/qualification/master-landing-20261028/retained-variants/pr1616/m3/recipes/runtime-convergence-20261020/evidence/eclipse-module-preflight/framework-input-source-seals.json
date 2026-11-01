@@ -5,19 +5,19 @@
   },
   {
     "path": "src/main/java/com/m3/eclipse/framework/M3EclipseBundleSnapshot.java",
-    "sha256": "361cd096ce70bcea50080351f20c06cf989502eb62fe489b0a13faed93c63bea"
+    "sha256": "e5116e8dd992cda03ef61d22073378266ebf5ea618806e31ea78732adf2dde0f"
   },
   {
     "path": "src/main/java/com/m3/eclipse/framework/M3EclipseExtensionSnapshot.java",
-    "sha256": "4bfab762951ed0770dd95dfcb85db2fece0051d656e5bc2cf87ea95ef32d3963"
+    "sha256": "725f07a4f2be1dfb2b9334cff3dadf098c35e56f6e76a2cdbbd84cef83995c70"
   },
   {
     "path": "src/main/java/com/m3/eclipse/framework/M3EclipseIndexedSnapshot.java",
-    "sha256": "fd7527ce9d29e7fc15447421607e2cec5f4fc511248dd206874b7026b6757313"
+    "sha256": "8ce80830b0a7fd5c33cd6c03e961c7d9b56efaec2d0e9af8392d3c23a5dfc5d7"
   },
   {
     "path": "src/main/java/com/m3/eclipse/framework/M3EclipseResourceDeltaSnapshot.java",
-    "sha256": "94fc5f6ac7d87439758e8dc6544754e0a77ebbff52d36bbb8ae18a6447aa555c"
+    "sha256": "21a893d7f976e5bf2d42998335d99556edfffb266016cce15d5784ebc1c19274"
   },
   {
     "path": "src/main/java/com/m3/eclipse/framework/M3EclipseRuntimeActivator.java",
@@ -25,11 +25,11 @@
   },
   {
     "path": "src/main/java/com/m3/eclipse/framework/M3EclipseRuntimeServices.java",
-    "sha256": "f892959825f72a922ea377052f67a436221c0aa854738149b8c3fe0f0b76baea"
+    "sha256": "5c9ef7d3ea9bb6de5df5b809418c5c938949fae5eef338843f385f0d72cc199e"
   },
   {
     "path": "src/test/java/com/m3/eclipse/framework/M3EclipseDeltaIdentitySetTest.java",
-    "sha256": "2805f91b08f95e42f3fb9e0e6390de3174e5bf71fc761bc09210bb9ca9b6d781"
+    "sha256": "44192b4116f99413f62dc5bed280d065de8bab0efffdd5441af628d43ade51da"
   },
   {
     "path": "src/test/java/com/m3/eclipse/framework/M3EclipseEquinoxLifecycleTest.java",
@@ -37,7 +37,7 @@
   },
   {
     "path": "src/test/java/com/m3/eclipse/framework/M3EclipseFrameworkSnapshotsTest.java",
-    "sha256": "cafda481d205e514d3ceb2187f2219301379b7075113e7b6e72946b012384a51"
+    "sha256": "2e5a91ddb11677caf49bf344f1d5ac733408803339aed8b9e7f631b48260100f"
   },
   {
     "path": "src/test/java/com/m3/eclipse/framework/M3EclipseRuntimeActivatorTest.java",

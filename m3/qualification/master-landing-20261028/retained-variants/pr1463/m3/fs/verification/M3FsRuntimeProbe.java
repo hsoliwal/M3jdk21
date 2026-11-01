@@ -1,6 +1,6 @@
 // Copyright 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
-import com.m3.fs.M3FS;
+import jdk.m3.fs.M3FS;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.file.Files;
@@ -24,7 +24,7 @@ public final class M3FsRuntimeProbe {
     require(Path.of(System.getProperty("java.home")).toRealPath().equals(image), "probe is not using the linked image");
     require("jdk.m3fs".equals(M3FS.class.getModule().getName()), "M3FS is not in the owned module");
     String resource = String.valueOf(M3FS.class.getResource("M3FS.class"));
-    require("jrt:/jdk.m3fs/com/m3/fs/M3FS.class".equals(resource), "M3FS did not load from jrt: " + resource);
+    require("jrt:/jdk.m3fs/jdk/m3/fs/M3FS.class".equals(resource), "M3FS did not load from jrt: " + resource);
     require(System.getProperty("m3.fs.native.path") == null && System.getProperty("m3.fs.native.pathFile") == null,
         "probe may not use an explicit native library override");
     for (String argument : java.lang.management.ManagementFactory.getRuntimeMXBean().getInputArguments()) {

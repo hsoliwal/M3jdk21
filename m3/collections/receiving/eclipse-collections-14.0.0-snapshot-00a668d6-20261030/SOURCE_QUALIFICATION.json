@@ -11,14 +11,14 @@
     "sourceQualification": {
       "path": "m3/collections/receiving/eclipse-collections-14.0.0-snapshot-00a668d6-20261024/SOURCE_QUALIFICATION.json",
       "bytes": 7741,
-      "sha256": "4447552fd01313c13c498f1915688c644420e94ee51beaf8e1cc4516cac24966",
-      "gitBlob": "2c5acd2722296522c346b9af4c4f1e26a6bcedc7"
+      "sha256": "68480cc404a0fffd3ba6ef1e70eec1d7d1668446440b9360702c4a32d9b19c49",
+      "gitBlob": "75e6b8cd19ffc279abd481bd622274027d17cd18"
     },
     "bindings": {
       "path": "m3/collections/receiving/eclipse-collections-14.0.0-snapshot-00a668d6-20261024/FULL_SOURCE_BINDINGS.tsv",
       "bytes": 1515189,
-      "sha256": "0230490e25c43ed0865fbb607fdbd2dae7394b7f88fe43b5c45e49393cde4fe5",
-      "gitBlob": "94798d553f27307596f4ef0d9648b74d4a56b67c",
+      "sha256": "5d71c9c6342a085a132a59c28d979e01ec057ca0b6136f2c351283422abac7a6",
+      "gitBlob": "457ecb28b6256b5eec1e127c89d545985fcdbbcf",
       "pinnedSha256": "3041aefce4749455078c674d043892d01090a77733af5027c280b09d8cdf666b",
       "pinCheck": "The pinned value is reproduced when the pom.xml and m3/stream-interop/pom.xml rows carry the prep-tree after values (blob ccf693ca084b, SHA-256 f8aaffe1381d, 57682 bytes; blob 6f8071c80af2, SHA-256 e4a5142ccede, 1437 bytes). The file at the base carries the config successor A2 values for those two rows, so its SHA-256 differs from the pin. Recorded here; the predecessor is not edited."
     }
@@ -50,22 +50,22 @@
   },
   "successors": [
     {
-      "path": "eclipse-collections-testutils/src/main/java/com/m3/collections/eclipse/impl/test/Verify.java",
-      "reason": "assertSerializedForm and decodeObject map historical org.eclipse.collections golden streams to the relocated com.m3.collections.eclipse class metadata before comparing (HistoricalSerializationMetadata: class descriptors, field types, three array UIDs in seven exact streams, three exact lambda streams); payload bytes and non-historical streams are compared unchanged",
+      "path": "eclipse-collections-testutils/src/main/java/jdk/m3/collections/eclipse/impl/test/Verify.java",
+      "reason": "assertSerializedForm and decodeObject map historical org.eclipse.collections golden streams to the relocated jdk.m3.collections.eclipse class metadata before comparing (HistoricalSerializationMetadata: class descriptors, field types, three array UIDs in seven exact streams, three exact lambda streams); payload bytes and non-historical streams are compared unchanged",
       "before": {"bytes": 94534, "sha256": "2b2cb8e4d200648bd511e1c966971f4e3f794b4e1a23eab4e9fb1f4e08008c18", "gitBlob": "7bbbaf0ad3d1e14cbc112a03b3c4a5e2b10c6a3a"},
-      "after": {"bytes": 131293, "sha256": "871e1db8ea53621614d7d919643487a576376ba1a118a8984b1ad5fd9d6373ac", "gitBlob": "36e31d137ce794ba8786395cb33a4b9a6cc82266"}
+      "after": {"bytes": 131293, "sha256": "2dc650599a1235bc61da394caf0de5501967a609aa6fca41d464c3104e56c1fc", "gitBlob": "8810863741f1f11e3d632c398149f28898ff6fdc"}
     },
     {
-      "path": "eclipse-collections-testutils/src/test/java/com/m3/collections/eclipse/impl/test/VerifyTest.java",
+      "path": "eclipse-collections-testutils/src/test/java/jdk/m3/collections/eclipse/impl/test/VerifyTest.java",
       "reason": "Nine tests for the relocation: exact historical metadata, payload text kept, UID/payload/handle mutations still fail, metadata-payload aliases and unlisted array UIDs rejected, ordinary streams unchanged, non-canonical Base64 rejected, lambda payload before and after",
       "before": {"bytes": 53594, "sha256": "60cb08ea9c4869d7bf84e0ca1a6fcf582617243b98528997d3e9e72547b8707c", "gitBlob": "253a026dd40b525c4d05dd107ca6e1bac2318a0e"},
-      "after": {"bytes": 60579, "sha256": "69678f6c6ffd20d91d1e5a9a906f00a1ecb9e03c497a2ba2ce456b59a037f25c", "gitBlob": "8fda3aee10e99b6d2785f16c20efcfb53e7ef89d"}
+      "after": {"bytes": 60579, "sha256": "a30674c1165d66e7ed8bf15a73082542152d5cdf7ee97fc28665ea15f33b0d1d", "gitBlob": "7d832c3af5fca676682780cbb45c35e2b623bd7b"}
     },
     {
-      "path": "unit-tests/src/test/java/com/m3/collections/eclipse/impl/list/mutable/FastListTest.java",
-      "reason": "Serialized size of an empty FastList is 132 plus the class name length (182 with the upstream name, 185 with com.m3.collections.eclipse.impl.list.mutable.FastList), replacing the hard-coded 182",
+      "path": "unit-tests/src/test/java/jdk/m3/collections/eclipse/impl/list/mutable/FastListTest.java",
+      "reason": "Serialized size of an empty FastList is 132 plus the class name length (182 with the upstream name, 185 with jdk.m3.collections.eclipse.impl.list.mutable.FastList), replacing the hard-coded 182",
       "before": {"bytes": 45362, "sha256": "8b68106a6aeedbbfd39aa2583d72cd625cfd95fcc6a75acdb175f40a201215c9", "gitBlob": "f4cf51765fafa23a63330c8d159023926b858b64"},
-      "after": {"bytes": 45485, "sha256": "3f7846c273096e8046d861ec6a8189d56b4dd0e5abbbf8aeb6b20531dd0e5d71", "gitBlob": "6ce808e2bc1292fef2fd0ff612280f9172c83e94"}
+      "after": {"bytes": 45485, "sha256": "109ff98d5b1509b1724e6bb02dc15c8299f5384ab4acca7d6db80f9c60f5c5b4", "gitBlob": "c8955f14cca54136eb1e270a6c4085f1f20bb8a7"}
     },
     {
       "path": "tools/m3scale/M3ForkFilePass.java",
@@ -83,7 +83,7 @@
       "path": "m3/qualification/eclipse-release-20261029/EXECUTION.json",
       "reason": "Fork receipt for the three serialization files: its source_sha256 values equal the before SHA-256 above and its postimage_sha256 values equal the after SHA-256 above (3 of 3)",
       "before": null,
-      "after": {"bytes": 4300, "sha256": "864aa7615cc5dbf0c08a9f57d79f8371a272e4e301f24be71a9848e55bb783ae", "gitBlob": "1565531556a9e4edab76064ac7c455aae8e10041"}
+      "after": {"bytes": 4300, "sha256": "358d72ae987b609419ab267b99c2b5c805e0a508d9be05b568cb3c0d099f846b", "gitBlob": "2a54cd6092b7e13a4eb18c67ceb2039e178b7f9a"}
     }
   ],
   "notTaken": [
@@ -97,8 +97,8 @@
     "changedRows": 5,
     "addedRows": 1,
     "bytes": 1515373,
-    "sha256": "8de927ff403918db88c3e6e5026763dd20a94d32414f914c54477300f5c37e23",
-    "gitBlob": "63fc75bbc57927a3ee7b6c38c3477ae2b033369d"
+    "sha256": "6d9b867ec2e4d8cdb57bbc2b5be5818bbec45960000415d5ddb28107670cc972",
+    "gitBlob": "ca29fd14f2ef1dbf71e81f23408b1c2d36af212b"
   },
   "otherPins": [
     {"path": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6/m3/package-import-rename-20261018/FINAL_SOURCE_HASHES.tsv", "lines": [675, 682, 2932], "handling": "Fork file of the 20261018 rename, byte-equal with the fork head; kept. EXECUTION.json is the fork successor for these three rows"},
@@ -118,6 +118,6 @@
   "notRun": [
     "javac and the unit tests of the changed files (no JVM in this successor); the fork EXECUTION.json records the fork-side gates",
     "Full Maven, OSGi and JPMS builds and the full donor test suites",
-    "Verification of the controller blob 5f3cb6a13cb9 in hsoliwal/synexia-m3scale-apache2"
+    "Verification of the controller blob 5f3cb6a13cb9 in hsoliwal/m3-m3scale-apache2"
   ]
 }

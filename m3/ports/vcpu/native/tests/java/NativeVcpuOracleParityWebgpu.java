@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 
-import com.m3.vcpu.internal.NativeVcpu;
+import jdk.m3.vcpu.internal.NativeVcpu;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

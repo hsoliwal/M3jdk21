@@ -12,8 +12,8 @@ import sys
 ROOT = Path(__file__).resolve().parents[4]
 RECEIPT = "m3/collections/qualification/tree-commit-atomic-20261025/RECEIVER_RECEIPT.json"
 PARENT = "m3/collections/qualification/arraylist-dual-word-20261023/RECEIVER_RECEIPT.json"
-SOURCE = "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java"
-TEST = "m3/collections/src/test/java/com/m3/collections/M3TreeCommitAtomicityTest.java"
+SOURCE = "m3/collections/src/main/java/jdk/m3/collections/M3TreeWindowPlan.java"
+TEST = "m3/collections/src/test/java/jdk/m3/collections/M3TreeCommitAtomicityTest.java"
 CATALOGUE = "m3/collections/algorithm-catalog/tree-commit-atomic-20261025.tsv"
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 HEX64 = re.compile(r"^[0-9a-f]{64}$")

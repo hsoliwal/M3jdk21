@@ -23,12 +23,12 @@
     {
       "path": ".github/workflows/m3jdk21-name-contract.yml",
       "before_sha256": "8851fea17f460c39da730b192feddf5523f2c4d6d03e9591174fc754ffbf09d8",
-      "after_sha256": "434a85b8f651470711bd03948b9901bab53961440ee3ff1dd8b6797348d97c16"
+      "after_sha256": "eaf000bcc1cf9f3b2576ee22859b67d1bc2d55a30ceb7e1bfe92e7a7bc9ce3e1"
     },
     {
       "path": "m3/docs/name-mapping.json",
       "before_sha256": "145dec24eb11847b3915e6fb2e0e80fa4a773879833a3ac64e76101fab67500f",
-      "after_sha256": "32c22cc1b11aa305f90fafac4bc66ca5670776b8844a3389406b7fba065b651a"
+      "after_sha256": "67b449da2ca0b82fd299b3b1f8dca36b0a3778cc8684602d90f10cce8d903a1f"
     },
     {
       "path": "m3/docs/name-mapping.schema.json",
@@ -38,7 +38,7 @@
     {
       "path": "m3/tooling/name-contract/name-plan.json",
       "before_sha256": "0bfb1c234cd9e8e65702a0797124619fc365d7842b7be74591fabd142dfb78b9",
-      "after_sha256": "5d10e9bc22fee7f45783ae5a1a2f887d5a9acf93e6169055e9edc55c9887382b"
+      "after_sha256": "ce1f8408bea35ee769294f556994d0184958b560a713dac2e97bd9f21848b71e"
     },
     {
       "path": "m3/tooling/name-contract/test_audit.py",
@@ -48,7 +48,7 @@
     {
       "path": "m3/tooling/name-contract/test_schema.py",
       "before_sha256": "ABSENT",
-      "after_sha256": "8443b26ce2aee69db5cb2d3fb7ece8fdd8947870dd38a188ba073fd0fad4afb6"
+      "after_sha256": "2f4920a26b6230ed7a07ad72c4b8be42e87b5e435c6651b506fb8a53e26ead33"
     }
   ],
   "gates": {

@@ -2,7 +2,7 @@
  * Copyright 2026 Hitesh Soliwal and contributors.
  * SPDX-License-Identifier: Apache-2.0
  */
-package com.m3.collections.guava;
+package jdk.m3.collections.guava;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

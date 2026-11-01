@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors
-import com.m3.tools.cpu.M3Bm25Rows;
-import com.m3.tools.cpu.M3RangePatchMerge;
-import com.m3.tools.cpu.M3FrequencySketch;
+import jdk.m3.tools.cpu.M3Bm25Rows;
+import jdk.m3.tools.cpu.M3RangePatchMerge;
+import jdk.m3.tools.cpu.M3FrequencySketch;
 
 import java.util.ArrayList;
 import java.util.Arrays;

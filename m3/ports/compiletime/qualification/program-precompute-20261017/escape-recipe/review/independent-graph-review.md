@@ -11,18 +11,18 @@ The five files below were read from the actual SDK output at `target/candidate`,
 
 | Emitted target | SHA-256 |
 | --- | --- |
-| `m3/ports/compiletime/src/main/java/com/m3/compiletime/M3EscapeFlow.java` | `180488506ddfd0709530a7f164217d684389b4d5e77ce56b204bb0df4ad153de` |
-| `m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ItemReferenceScan.java` | `39881510663e11b27b59fc5f1ff8e1ff86e793a2f5d7ef36cef42023aebbccbf` |
-| `m3/ports/compiletime/src/main/java/com/m3/compiletime/M3GvasLiteralHarvester.java` | `31dd73ae6b8621eb326af013560fb1fca09650248fa67dba7daf526f7c385dd6` |
-| `m3/ports/compiletime/src/test/java/com/m3/compiletime/M3EscapePreparedTest.java` | `ea8bed1a238df1964d11b49e3a5742f44f27ff262c0fe1741bbaa0bcf5a23dcb` |
-| `m3/docs/name-mapping.d/m3-program-escape-precompute.json` | `469cfac93eae278aeb5914dc301a68efaf732baf3216b96009ca68308b8f0be0` |
+| `m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3EscapeFlow.java` | `f8e14d9ab9e4499457ab58ad0776a8e8124331f28ab48de23bb69bc2f83adaff` |
+| `m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ItemReferenceScan.java` | `39881510663e11b27b59fc5f1ff8e1ff86e793a2f5d7ef36cef42023aebbccbf` |
+| `m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3GvasLiteralHarvester.java` | `cbe859bcfd97ee2e7bec6122c96de66d25159d00770cc84c5f0227c64f96f814` |
+| `m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3EscapePreparedTest.java` | `f1a3e4fa22d4ac116e936cac4d51d459d3def5ae855bd484157ca9fe3006de46` |
+| `m3/docs/name-mapping.d/m3-program-escape-precompute.json` | `159a44eeb638aff38ba84add724dcb2a0d64e9be29411b1224ce81f499c90078` |
 
 The source-binding receipt hashes are:
 
 | Receipt | SHA-256 |
 | --- | --- |
-| `target/candidate/SDK_INPUTS.tsv` | `9720eb424b1872dfa0f22b93f1bbfbbfd00f1ff2458a3c1c58e056aaaea1b194` |
-| `target/candidate/SDK_RESULTS.tsv` | `ed2fde639cb9f4e13cc82cf75965e24c592e502b3c4e0c5882f9617d1e6f68fc` |
+| `target/candidate/SDK_INPUTS.tsv` | `03b3c05e03aed588d1afd101762a60c6d51aa1e1a8ed054a59f9663ddd42eb7a` |
+| `target/candidate/SDK_RESULTS.tsv` | `186b404d33b9f39998c92953fb7cafa29f8223ea334ca1b55e1eb1a16be0cade` |
 | `target/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml` | `a055e885d201d8c27d482f9b7d0bc6c73eff0cd8be508916a3182ab32d6b3f86` |
 
 The inspected final SDK report records five tests, zero failures, zero errors, and zero skips. This establishes the named recipe execution and source binding; it is not a runtime or performance result.
@@ -59,12 +59,12 @@ The preceding section remains the exact V2 review history. Subsequent qualificat
 
 The tiny caller delta was inspected independently. The existing outer loop skips methods with an empty obtaining list before invoking `method`. Within `method`, `frames == null || sites.size() == 1` leaves `prepared` null. The unchanged result selection still emits `ANALYSIS_FAILED` for absent analysis, otherwise executes the corrected forward classifier for the one site. Multiple-site methods prepare once, and a preparation-budget refusal uses the same fallback. Frame construction, site coordinates, BCI/record order and public API are unchanged. No correctness blocker was found in that selection.
 
-The final caller SHA-256 is `eadaa78df40c19062ac56119fb123e31faf2dcc8e9b302e29a415bc7798e35f0`; the updated provenance shard is `d293b891ed743279037f4cf4417bf8efaae9fab186dee4a3cc6bb69dc78a0e8f`. The graph owner, GVAS local-name repair and test source retain the hashes in the original table.
+The final caller SHA-256 is `4c504f5272d2d66b3e1de78e8db4dd4690aa4795b98eba91a828b15bbe409994`; the updated provenance shard is `d293b891ed743279037f4cf4417bf8efaae9fab186dee4a3cc6bb69dc78a0e8f`. The graph owner, GVAS local-name repair and test source retain the hashes in the original table.
 
 | Final V4 receipt | SHA-256 |
 | --- | --- |
-| `target/candidate/SDK_INPUTS.tsv` | `e3c442a0973fe61a69c1768682023d1f1970b27bf24c2f945a4a5ba8aba0c4e9` |
-| `target/candidate/SDK_RESULTS.tsv` | `69b360a1288ec8ecf5fdb9d67867e1b6f941e9e12f47cd538a1cf37343ab3c9d` |
+| `target/candidate/SDK_INPUTS.tsv` | `f42529caa44677e118295e233ba89022c5b32f8d4dbbdf312f6ad33bf2825055` |
+| `target/candidate/SDK_RESULTS.tsv` | `c70b1ad337f5bd4d38305f7529c1ceef7ec70e63bf6a7231e37568b58fb9ba68` |
 | `target/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml` | `065c2b1dcf7ad3400dcb5b07f9969b20d202efb7e446a1f9f0dd6b63baa2c6d9` |
 | `/tmp/m3-program-escape-qualified-v4/receipt.json` | `4daa23b7a980ad7d0d500bd053f8a8a0ba52f6498aeac5a83c9afc29a2e32ec6` |
 

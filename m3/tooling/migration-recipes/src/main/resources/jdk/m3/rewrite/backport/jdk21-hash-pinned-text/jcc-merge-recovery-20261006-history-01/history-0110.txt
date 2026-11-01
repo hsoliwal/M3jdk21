@@ -1,0 +1,27 @@
+{
+  "files": [
+    {
+      "bytes": 951,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/checker-static-review-v3/custody-output-subreview/FILE_SEALS.json",
+      "sha256": "1c9dfb88fccf794e722b34b49868f83bc6cdb01b957cc9019f262175b44024f7"
+    },
+    {
+      "bytes": 1457,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/checker-static-review-v3/custody-output-subreview/INPUT_SEALS.json",
+      "sha256": "48600a242a92aef6e5e0d68e306cbf6167f36f421504e5931577ccd989c6d027"
+    },
+    {
+      "bytes": 6397,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/checker-static-review-v3/custody-output-subreview/REVIEW.md",
+      "sha256": "f01e78a0ea47be42e08866b26c231d7c68e992f5158527d1a0ef63c473561b0d"
+    },
+    {
+      "bytes": 374,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/checker-static-review-v3/custody-output-subreview/WRITE_SURFACE.json",
+      "sha256": "72cd8ccf7e4ee74be62760c1359f94cb2e1601f56cb1aef9b2e4a3a0165e8613"
+    }
+  ],
+  "reviewer": "/root/final_gate_review/current_owner_delta",
+  "schema": "jcc-e4-reference-checker-companion-binding/1",
+  "scope": "Custody exceptions, omitted-envelope pointers, write surface and no owner execution."
+}

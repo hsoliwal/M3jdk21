@@ -63,10 +63,10 @@ traversal/match-selection contracts separate. String-first receiving phase uncha
 No default branch, root policy, existing PR, merge, rebase or force push is changed.
 
 Runtime blobs:
-M3FilteredViews cda44496ad9dec48a77e1f922fba3b23082c92df
-M3IndexPathMasks 3875db690a2519975c531b33519a4a1243c24f2d
-M3IndexedListSnapshot e69da823d4db909bbd99fb94cb6002d5bff5025f
-m3_index_mask_compactor.c 49e8bac26e4017a262f18f202298350239f1133b
+M3FilteredViews 955eb5334fdf20300c99165e7d86d2b0930f683f
+M3IndexPathMasks cf9e00991fb52dec96bfbe246acbca07a5ce5696
+M3IndexedListSnapshot 99eae8861c57876f7b69587458bd9e342c7c4750
+m3_index_mask_compactor.c f1031326f520ef7898d40d78afee9c0185ce0527
 
 Full original/template/proof sources, build/test logs, raw resource samples and
 reproduction scripts live in the canonical packet and delivery archive. Target

@@ -61,10 +61,10 @@ jobs:
           out="$RUNNER_TEMP/m3-shadow-file"
           mkdir -p "$out"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$out" \
-            m3/file/src/main/java/com/m3/file/M3File.java \
-            m3/file/src/main/java/com/m3/file/M3FileStreams.java \
-            m3/file/src/main/java/com/m3/file/M3StreamProgress.java \
-            m3/file/src/main/java/com/m3/file/M3ShadowStreams.java \
-            m3/file/src/test/java/com/m3/file/M3FileStreamsContract.java
-          java -cp "$out" com.m3.file.M3FileStreamsContract
-          java -Xint -cp "$out" com.m3.file.M3FileStreamsContract
+            m3/file/src/main/java/jdk/m3/file/M3File.java \
+            m3/file/src/main/java/jdk/m3/file/M3FileStreams.java \
+            m3/file/src/main/java/jdk/m3/file/M3StreamProgress.java \
+            m3/file/src/main/java/jdk/m3/file/M3ShadowStreams.java \
+            m3/file/src/test/java/jdk/m3/file/M3FileStreamsContract.java
+          java -cp "$out" jdk.m3.file.M3FileStreamsContract
+          java -Xint -cp "$out" jdk.m3.file.M3FileStreamsContract

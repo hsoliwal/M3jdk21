@@ -6,4 +6,4 @@ The byte mask/offset compaction algorithm preserves ordered rows and duplicates 
 
 Run `python3 m3/collections/verification/mask-all-select-20261017/verify.py` on a Java21/Linux/GCC host. The script binds an exact generated SHA-256 source, compiles source and two differential proofs with warnings-as-errors, checks class-file repeat identity, builds the *unchanged original JNI C17* method and runs 11,520 comparisons under `-Xcheck:jni`. This **does not** substitute for the Synexia Maven/OpenRewrite SDK, this module's Maven JUnit, full JDK/image, jtreg, GC, or performance qualifications.
 
-The original unmodified source is target `master@a918e588dd11d5ff7e0a6d4efaa89bb1679a9798`, Git blob `240bbfb62ca949bfbd8abb0061cccad6630f7888`; the C source Git blob is `f1a9488905807e6417dd267e125bfc44dbcc9297`. No new dependency, native ABI, or unverified API change is admitted.
+The original unmodified source is target `master@a918e588dd11d5ff7e0a6d4efaa89bb1679a9798`, Git blob `240bbfb62ca949bfbd8abb0061cccad6630f7888`; the C source Git blob is `22782ee02b06b4404b5c87fd15f10f4e8e9749ea`. No new dependency, native ABI, or unverified API change is admitted.

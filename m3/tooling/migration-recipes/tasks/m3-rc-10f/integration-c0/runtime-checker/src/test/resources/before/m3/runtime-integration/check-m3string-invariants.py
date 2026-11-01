@@ -37,7 +37,7 @@ archive_writer = read("src/hotspot/share/cds/archiveHeapWriter.cpp")
 dedup = read("src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp")
 stringtable = read("src/hotspot/share/classfile/stringTable.cpp")
 mapping = read("m3/docs/name-mapping.json")
-port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
+port_map = read("m3/docs/m3-string-precompute-port-map.tsv")
 completeness = read("m3/docs/string-precompute-completeness.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
 native_string = read("src/java.base/share/native/libjava/String.c")
@@ -955,7 +955,7 @@ if "ArrayList<M3StringAtom> values" in pool:
 
 # Mapping authority must preserve donor->target lineage and shadow names.
 required_mapping_fragments = [
-    '"source": "com.synexia.indexstring.MIndexString"',
+    '"source": "jdk.internal.m3.indexstring.MIndexString"',
     '"target": "java.lang.M3String"',
     '"target": "java.lang.M3StringOwner / java.lang.M3StringAtom / java.lang.M3StringTuple"',
     '"target": "java.lang.M3StringFacts plus owner-internal bounded range facts"',

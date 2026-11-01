@@ -93,9 +93,9 @@ M3String owner coordinates and M3AST token adapters remain required target work.
 ### Source custody
 
 - Source postimage SHA-256:
-  \`47be591a396c021465fe2bb72bd6893ca80dc1e0407d0f70785bfee2ecacc3e3\`.
+  \`b49503afaaabe0b8426cde9d24155f4f1f35c02fab1346bdfc40a0b703a0c868\`.
 - Test postimage SHA-256:
-  \`d611e922df0a6222c5b2964c9b662eef85b933cc96353e5d255e46ba1b1cb4a5\`.
+  \`6d08a7407c5c2a842621da61b76cd7748330589478bf91590b2604dc25ca70e4\`.
 - Both entries use \`ABSENT\` preimages and reject drift. Follow canonical
   Inline -> Atomize -> Patternize -> Comment transformations, then Maven/OpenRewrite
   proof, before any java.base/Pattern integration.

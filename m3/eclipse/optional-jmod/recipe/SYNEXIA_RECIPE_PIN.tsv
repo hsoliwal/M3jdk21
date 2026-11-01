@@ -1,2 +1,0 @@
-schema	canonical_repository	canonical_ref	canonical_recipe	canonical_sources	builder_git_blob	donor_file_blob	license	status
-M3_ECLIPSE_CORE_JMOD_PIN_V1	hsoliwal/com.synexia	recipe/eclipse-core-optional-jmod-20261018	com.synexia.rewrite.M3EclipseCoreOptionalJmod	8_java_targets	668627b930d7f46e3c941afd2ffc0bb8e674f590	1b4eb18b102f52be2d1e13589195b47e37f3b090	Apache-2.0	SOURCE_RECEIVED_CI_PENDING

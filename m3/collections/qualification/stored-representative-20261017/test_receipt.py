@@ -25,7 +25,7 @@ def main():
     spec.loader.exec_module(module)
 
     if sha256(NEW.read_bytes()).hexdigest() != (
-            "a62827ffafc18bd6d710d7898741d2114a0068b8ac9ee63aac02e55038e1f293"):
+            "4558799d12aa2ac5dd8789af591beb8789da632c93ad9020681062d10e664931"):
         raise AssertionError("M3_REP_RECEIPT_FAIL manifest sha")
 
     original = [row.split("\t") for row in OLD.read_text().splitlines() if row.strip()]

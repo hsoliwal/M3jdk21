@@ -11,27 +11,27 @@
   "release_ready": false,
   "outputs": [
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FrozenIntList.java",
-      "before_sha256": "d2087220e85b57f671375c8529fefa1bccc87030c079fd98bf34274a4ff287e4",
-      "after_sha256": "f0f1f7cbafce51682c31125585afc85f104ac6af82a428c6a711f98708cec7ec",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FrozenIntList.java",
+      "before_sha256": "80f4b91ad92966be3ba35beb30bc0cb1dfbcddb11f96198c87f22fed1bbe42ef",
+      "after_sha256": "1696bc2c8302d57cdc04f5e4c80f3cd67a924eebdafb2c93d4262a858a2ce267",
       "kind": "GENERATED_SOURCE"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FrozenLongList.java",
-      "before_sha256": "fd94bab1614606e96562d1f48e126c72cd0f121d84aed36fb9a5bcac352a747f",
-      "after_sha256": "eca004a0b3c657f80a00449fa9bc256e8bbe4011fc0fd52555be9874e5e44633",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FrozenLongList.java",
+      "before_sha256": "d1374fbc9689c3423596808b23f8a0a38a6020611f8cf84d76e75944447b4958",
+      "after_sha256": "833858f9c749b3d044eb495aa166246bc1b8f5965b35366f4a1ed1cfe8e7998c",
       "kind": "GENERATED_SOURCE"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FrozenLongSet.java",
-      "before_sha256": "4fc3c4898115c784d695bee275a1c9ae4e7d4ba7a5cd4b8968e8286747608715",
-      "after_sha256": "c2c1b55d7abcc11dcf7179357fceb7cc9f5bb285b3041f065847e19be7868e52",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FrozenLongSet.java",
+      "before_sha256": "1735d35652e9760029a81e390b592a5abdfb6e99cae20015197f93e65df5a41c",
+      "after_sha256": "956ba6e5a95ad1dbecaa603951a2cbb43987cc80066721b9365e602c02882ffb",
       "kind": "GENERATED_SOURCE"
     },
     {
       "path": "m3/collections/src/test/java/com/m3/collections/M3FrozenPrimitiveContractTest.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "b7b464ea6188accb35e982c00f0fe1258c64aae8c33f66ff3a68e447056ee2a4",
+      "after_sha256": "1124503729ab504ed6be7e9662962c5bbe41a698d6213d675b13be26d55b2fd6",
       "kind": "GENERATED_TEST"
     }
   ],

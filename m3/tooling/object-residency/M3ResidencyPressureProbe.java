@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
-package com.m3.collections.verification;
+package jdk.m3.collections.verification;
 
-import com.m3.collections.M3ObjectResidency;
+import jdk.m3.collections.M3ObjectResidency;
 
 /** Real small-Xmx LRU/recreation proof with canonical state retained in the parent. */
 public final class M3ResidencyPressureProbe {

@@ -32,14 +32,14 @@ FIXTURE_COLUMNS = (
 )
 
 SPEC = importlib.util.spec_from_file_location(
-    "synexia_export", ROOT / "m3/runtime-integration/export-synexia-lexicon.py")
+    "m3_export", ROOT / "m3/runtime-integration/export-m3-lexicon.py")
 EXPORT = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
 sys.modules[SPEC.name] = EXPORT
 SPEC.loader.exec_module(EXPORT)
 
 VERIFY_SPEC = importlib.util.spec_from_file_location(
-    "synexia_verify", ROOT / "m3/runtime-integration/verify-synexia-lexicon.py")
+    "m3_verify", ROOT / "m3/runtime-integration/verify-m3-lexicon.py")
 VERIFY = importlib.util.module_from_spec(VERIFY_SPEC)
 assert VERIFY_SPEC.loader is not None
 sys.modules[VERIFY_SPEC.name] = VERIFY
@@ -55,11 +55,11 @@ class M3NumberSpaceExportTest(unittest.TestCase):
         self.assertTrue(self.scratch_root.is_dir(), "explicit scratch directory is required")
         with tempfile.TemporaryDirectory(dir=self.scratch_root) as temporary:
             root = Path(temporary)
-            source_manifest = ROOT / "m3/lexicon/synexia-source-manifest.tsv"
+            source_manifest = ROOT / "m3/lexicon/m3-source-manifest.tsv"
             source_rows, _ = EXPORT.read_manifest(source_manifest)
             self.assertIn(SOURCE_ID, source_rows)
             source = source_rows[SOURCE_ID]
-            target_map_path = ROOT / "m3/lexicon/synexia-number-target-map.tsv"
+            target_map_path = ROOT / "m3/lexicon/m3-number-target-map.tsv"
             with target_map_path.open("r", encoding="utf-8", newline="") as stream:
                 target_rows = csv.DictReader(stream, delimiter="\t")
                 target_row = next(row for row in target_rows if row["source_id"] == SOURCE_ID)
@@ -117,7 +117,7 @@ class M3NumberSpaceExportTest(unittest.TestCase):
                         }
                         writer.writerow({
                             "source_id": SOURCE_ID,
-                            "source_path": source["synexia_path"],
+                            "source_path": source["m3_path"],
                             "source_kind": "number",
                             "language_tag": "und",
                             "record_id": owner_row["record_id"],
@@ -133,10 +133,10 @@ class M3NumberSpaceExportTest(unittest.TestCase):
                         count += 1
             self.assertEqual(EXPECTED_COUNT, count)
 
-            field_map = ROOT / "m3/lexicon/synexia-precompute-field-map.tsv"
+            field_map = ROOT / "m3/lexicon/m3-precompute-field-map.tsv"
             output_a = root / "export-a"
             output_b = root / "export-b"
-            exporter = ROOT / "m3/runtime-integration/export-synexia-lexicon.py"
+            exporter = ROOT / "m3/runtime-integration/export-m3-lexicon.py"
 
             def run_export(output: Path, records: Path = records_path) -> dict[str, object]:
                 completed = subprocess.run([
@@ -148,8 +148,8 @@ class M3NumberSpaceExportTest(unittest.TestCase):
                     "--source-commit", SOURCE_REVISION,
                     "--field-map", str(field_map),
                 ], cwd=ROOT, check=True, capture_output=True, text=True)
-                self.assertIn("SYNEXIA_M3JDK_LEXICON_EXPORT_PASS", completed.stdout)
-                return json.loads((output / "synexia.export.json").read_text(encoding="utf-8"))
+                self.assertIn("M3_M3JDK_LEXICON_EXPORT_PASS", completed.stdout)
+                return json.loads((output / "m3.export.json").read_text(encoding="utf-8"))
 
             first = run_export(output_a)
             second = run_export(output_b)
@@ -158,7 +158,7 @@ class M3NumberSpaceExportTest(unittest.TestCase):
             self.assertEqual(1, first["counts"]["source_families"])
             self.assertEqual(first["counts"], second["counts"])
 
-            mapping_path = output_a / "synexia.records.tsv"
+            mapping_path = output_a / "m3.records.tsv"
             with mapping_path.open("r", encoding="utf-8", newline="") as stream:
                 mapping_reader = csv.DictReader(stream, delimiter="\t")
                 mapping_rows = list(mapping_reader)
@@ -173,7 +173,7 @@ class M3NumberSpaceExportTest(unittest.TestCase):
                 record_id = str(value)
                 row = by_record_id[record_id]
                 self.assertEqual(SOURCE_ID, row["source_id"])
-                self.assertEqual(source["synexia_path"], row["source_path"])
+                self.assertEqual(source["m3_path"], row["source_path"])
                 self.assertEqual("number", row["source_kind"])
                 self.assertEqual("und", row["language_tag"])
                 self.assertEqual(record_id, row["record_id"])
@@ -193,12 +193,12 @@ class M3NumberSpaceExportTest(unittest.TestCase):
                     "source_revision": SOURCE_REVISION,
                 }, json.loads(row["precompute_payload"]))
 
-            verifier = ROOT / "m3/runtime-integration/verify-synexia-lexicon.py"
+            verifier = ROOT / "m3/runtime-integration/verify-m3-lexicon.py"
             for output in (output_a, output_b):
                 completed = subprocess.run(
                     [sys.executable, "-B", str(verifier), str(output)],
                     cwd=ROOT, check=True, capture_output=True, text=True)
-                self.assertIn("SYNEXIA_M3JDK_LEXICON_VERIFY_PASS", completed.stdout)
+                self.assertIn("M3_M3JDK_LEXICON_VERIFY_PASS", completed.stdout)
             verified = VERIFY.verify(output_a)
             expected_units = sum(
                 len(str(value).encode("utf-16-le", "surrogatepass")) // 2

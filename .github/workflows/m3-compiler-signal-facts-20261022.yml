@@ -3,8 +3,8 @@ name: M3JDK21 compiler fact validity columns Java21/JNI
 on:
   pull_request:
     paths:
-      - 'm3/collections/signal-codegen/src/main/java/com/m3/collections/sortable/**'
-      - 'm3/collections/signal-codegen/src/test/java/com/m3/collections/sortable/**'
+      - 'm3/collections/signal-codegen/src/main/java/jdk/m3/collections/sortable/**'
+      - 'm3/collections/signal-codegen/src/test/java/jdk/m3/collections/sortable/**'
       - 'm3/collections/signal-codegen/qualification/m3-compiler-signal-facts-20261022/**'
       - '.github/workflows/m3-compiler-signal-facts-20261022.yml'
   workflow_dispatch:
@@ -45,12 +45,12 @@ jobs:
           mkdir -p "$out/classes"
           javac --release 21 -proc:none -Xlint:all -Werror \
             -d "$out/classes" \
-            m3/collections/signal-codegen/src/main/java/com/m3/collections/sortable/M3CompilerFacts.java \
-            m3/collections/signal-codegen/src/main/java/com/m3/collections/sortable/StructuralSignals.java \
-            m3/collections/signal-codegen/src/test/java/com/m3/collections/sortable/M3CompilerFactsContract.java \
-            m3/collections/signal-codegen/src/test/java/com/m3/collections/sortable/StructuralSignalsExtremeWeightsContract.java
-          java -ea -cp "$out/classes" com.m3.collections.sortable.M3CompilerFactsContract
-          java -ea -cp "$out/classes" com.m3.collections.sortable.StructuralSignalsExtremeWeightsContract
+            m3/collections/signal-codegen/src/main/java/jdk/m3/collections/sortable/M3CompilerFacts.java \
+            m3/collections/signal-codegen/src/main/java/jdk/m3/collections/sortable/StructuralSignals.java \
+            m3/collections/signal-codegen/src/test/java/jdk/m3/collections/sortable/M3CompilerFactsContract.java \
+            m3/collections/signal-codegen/src/test/java/jdk/m3/collections/sortable/StructuralSignalsExtremeWeightsContract.java
+          java -ea -cp "$out/classes" jdk.m3.collections.sortable.M3CompilerFactsContract
+          java -ea -cp "$out/classes" jdk.m3.collections.sortable.StructuralSignalsExtremeWeightsContract
 
   existing-primitive-jni:
     runs-on: ubuntu-24.04
@@ -72,13 +72,13 @@ jobs:
             m3/collections/src/main/native/collections/m3_signal_order_jni.c \
             -o "$out/native/libm3signalorder.so"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$out/classes" \
-            m3/collections/src/main/java/com/m3/collections/M3SignalOrderNative.java \
-            m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java \
-            m3/collections/signal-codegen/src/main/java/com/m3/collections/sortable/M3CompilerFacts.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalOrderNative.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SignalOrder.java \
+            m3/collections/signal-codegen/src/main/java/jdk/m3/collections/sortable/M3CompilerFacts.java \
             m3/collections/signal-codegen/qualification/m3-compiler-signal-facts-20261022/M3CompilerFactsJniProof.java
           java -Xcheck:jni -Dm3.collections.signal.native=true \
             -Djava.library.path="$out/native" -cp "$out/classes" \
-            com.m3.collections.sortable.M3CompilerFactsJniProof
+            jdk.m3.collections.sortable.M3CompilerFactsJniProof
 
   original-maven:
     runs-on: ubuntu-24.04

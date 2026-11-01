@@ -113,13 +113,13 @@ static void JNICALL put_longs(JNIEnv *env, jlongArray array, jsize first, jsize 
     memcpy((jlong *)((fixture_array *)array)->data + first, in, (size_t)count * sizeof(jlong));
 }
 
-extern jintArray Java_com_m3_collections_M3IndexMaskCompactor_selectNative(
+extern jintArray Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative(
         JNIEnv *, jclass, jintArray, jbyteArray, jint);
-extern jintArray Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative(
+extern jintArray Java_jdk_m3_collections_M3IndexMaskCompactor_selectRangeNative(
         JNIEnv *, jclass, jintArray, jbyteArray, jint, jint, jint);
-extern jintArray Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
+extern jintArray Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(
         JNIEnv *, jclass, jintArray, jint, jbyteArray, jint, jint, jint);
-extern jlongArray Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
+extern jlongArray Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
         JNIEnv *, jclass, jlongArray, jint, jbyteArray, jint, jint, jint);
 
 static void configure(int selected_mode, jint count) {
@@ -146,13 +146,13 @@ static jobject invoke(JNIEnv *env, jint mask, int null_rows) {
     jintArray ints = null_rows ? NULL : (jintArray)&int_rows;
     jlongArray longs = null_rows ? NULL : (jlongArray)&long_rows;
     switch (mode) {
-        case 0: return (jobject)Java_com_m3_collections_M3IndexMaskCompactor_selectNative(
+        case 0: return (jobject)Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative(
                 env, NULL, ints, (jbyteArray)&states, mask);
-        case 1: return (jobject)Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative(
+        case 1: return (jobject)Java_jdk_m3_collections_M3IndexMaskCompactor_selectRangeNative(
                 env, NULL, ints, (jbyteArray)&states, row_first, extent, mask);
-        case 2: return (jobject)Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(
+        case 2: return (jobject)Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(
                 env, NULL, ints, row_first, (jbyteArray)&states, state_first, extent, mask);
-        default: return (jobject)Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
+        default: return (jobject)Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(
                 env, NULL, longs, row_first, (jbyteArray)&states, state_first, extent, mask);
     }
 }

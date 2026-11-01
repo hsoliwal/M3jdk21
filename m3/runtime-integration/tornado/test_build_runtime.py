@@ -143,7 +143,7 @@ class AdmissionGuards(unittest.TestCase):
 
     def test_boolean_claim_does_not_admit_stock_jdk(self):
         path = self.root / "receipt.json"
-        path.write_text(json.dumps({"schema": "m3-jdk-source-build/1", "status": "PASS", "source_built": True}))
+        path.write_text(json.dumps({"schema": "m3jdk-source-build/1", "status": "PASS", "source_built": True}))
         with self.assertRaises((build.Refusal, KeyError)):
             build.verify_m3_receipt(path, self.root)
 
@@ -155,7 +155,7 @@ class AdmissionGuards(unittest.TestCase):
             path.write_text(name)
         log = self.root / "build.log"
         log.write_text("source image build completed\n")
-        receipt = {"schema": "m3-jdk-source-build/1", "status": "PASS", "jdk_home": str(jdk),
+        receipt = {"schema": "m3jdk-source-build/1", "status": "PASS", "jdk_home": str(jdk),
                    "source": {"commit": "a" * 40, "tree_sha256": "b" * 64},
                    "build": {"argv": ["make", "images"], "cwd": str(self.root), "exit_code": 0,
                              "log": {"path": str(log), "sha256": build.sha(log)}},

@@ -10,7 +10,7 @@
     "-Pcontract",
     "verify"
   ],
-  "cwd": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "cwd": "/workspace/scratch/8762dba320ce/com.synexia/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
   "JAVA_HOME": "/tmp/m3-toolchain/jdk-21.0.12.1+1",
   "exit_code": 0,
   "seconds": 18.203,

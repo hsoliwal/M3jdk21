@@ -1,0 +1,4 @@
+RECIPE base=25f2dae29e4fe071624d4291ff872390ce5040af manifest=2f1544635f4f07d989c7f1be8f4b1bb13a88eead33864060461ea2271e1412c6 changes=0 applied=false promotionAuthority=false
+RECIPE_PROOF_PASS targets=6 firstWrites=6 secondWrites=0 refusalControls=4
+TEXT_METADATA_PASS native=false layouts=76416 checks=309986
+TEXT_METADATA_PASS native=true layouts=76416 checks=386819

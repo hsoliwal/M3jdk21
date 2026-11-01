@@ -42,7 +42,7 @@ submission/editorial or unreviewed external GitHub code was copied.
 
 - Before original java.base Git blob: 51ea3a72bb191afc250a58be964363bd5680467c.
 - Direct product postimage Git blob: f85e7359010bd25e0a909a145e283007cff25d7c.
-- New independent test Git blob: d720912f0f57bcde9fc07a05f31869a19f3452eb.
+- New independent test Git blob: 6f3113ad8624004dbe617aa52c96b7a04dfc5ce4.
 - Both exact postimages are first held as canonical Synexia recipe templates;
   the product branch readback returned the exact same Git blobs.
 - The product Java file retains its GPLv2+Classpath original header.

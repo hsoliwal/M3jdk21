@@ -5,7 +5,7 @@
 **Authority:** M3JDK21 is a single integrated SDK. This receiving atom is source inside M3JDK21; it is not an independent Synexia runtime dependency and does not rename or replace Eclipse public interfaces.
 
 ## Source/provenance
-- Target: `m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseJobs.java`, plus its contract test.
+- Target: `m3/eclipse/core-runtime/src/main/java/jdk/m3/eclipse/runtime/M3EclipseJobs.java`, plus its contract test.
 - Canonical recipe: `hsoliwal/com.synexia#12575`, `com.synexia.rewrite.M3EclipseJobs20261020`, existing `M3HashPinnedJavaSnapshotRecipe`.
 - Source custody: Java LST templates with `ABSENT` preimages and exact SHA-256 postimages in the canonical and receiver manifests; any drift is refused.
 - Existing owner: `com.m3.collections.M3ProgressMonitor` / `M3ChildProgressMonitor`; borrowed monitor: `M3EclipseProgressMonitor`.

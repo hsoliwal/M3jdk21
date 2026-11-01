@@ -20,26 +20,26 @@ PREFIXES = ("m3/tooling/jmod-recipes/", "m3/vendor/third_party-m3/")
 # This is a finite source-custody transition, never permission to refresh hashes.
 SUCCESSOR_COMMIT = "c49cca384837ebd9dc71b6141c71ab0bcb938d10"
 SUCCESSORS = {
-    "m3/tooling/jmod-recipes/src/main/java/com/m3/rewrite/jmod/M3ModuleDescriptorRecipe.java": (
+    "m3/tooling/jmod-recipes/src/main/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorRecipe.java": (
         "83b7ecc23b00c2fe026de54c8fa03ce9000612d3",
-        "302a06c5a79ecb6fd26c988dcf1fb9147e9198e1",
-        "synexia-openrewrite-recipes/src/main/java/com/m3/rewrite/jmod/M3ModuleDescriptorRecipe.java",
+        "9882f9773cc299ef80477fbf4de080ba763ab781",
+        "m3-openrewrite-recipes/src/main/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorRecipe.java",
     ),
     "m3/tooling/jmod-recipes/tools/jmod_pack.py": (
         "6824ea4419d769b71af846c5b6eee64f9a7454d1",
-        "86b62fddc148b372145e807438dd7cd018acca0f",
-        "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/m3jdk21-build/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-build/0001-jmod_pack.py.txt",
+        "1b20225a72caf20a7c02f9ef1ca2cb068294bff6",
+        "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/m3jdk21-build/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-m3jdk21-build/0001-jmod_pack.py.txt",
     ),
     # Exact source-qualified successors from integration packet A.
-    "m3/tooling/jmod-recipes/src/main/java/com/m3/rewrite/jmod/M3ModuleDescriptorApply.java": (
-        "0c35f76c65cb009bfda0a7594a79005b457767b4",
-        "f291bedcb4be3f890d9361fec4d7265e84518def",
-        "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0080-M3ModuleDescriptorApply.java.txt",
+    "m3/tooling/jmod-recipes/src/main/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorApply.java": (
+        "4cbc985224b08979d4834d59f3ac1fb71a76fcb8",
+        "4555e7423b3b1696518067141cf1540457764b9e",
+        "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0080-M3ModuleDescriptorApply.java.txt",
     ),
-    "m3/tooling/jmod-recipes/src/test/java/com/m3/rewrite/jmod/M3ModuleDescriptorRecipeTest.java": (
-        "a84e9add5ad5dcc30800c707e918a2593cc70cdb",
-        "6a2e25b6a7387538bad0d3786dcb24e38c513e61",
-        "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0081-M3ModuleDescriptorRecipeTest.java.txt",
+    "m3/tooling/jmod-recipes/src/test/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorRecipeTest.java": (
+        "4f0a50066835ec3db08969f71d932f45c2d5ba22",
+        "2e89346c5fab68ef33bc7d1132841036cca83089",
+        "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0081-M3ModuleDescriptorRecipeTest.java.txt",
     ),
 }
 
@@ -48,8 +48,8 @@ SUCCESSORS = {
 SUCCESSOR_COMMITS = {
     "m3/tooling/jmod-recipes/tools/jmod_pack.py": "c05613123249b74ac4243fe0b924b68494116931",
     # Exact source-qualified successors from integration packet A.
-    "m3/tooling/jmod-recipes/src/main/java/com/m3/rewrite/jmod/M3ModuleDescriptorApply.java": "c4ae7e361c9253aaced47e843549a06e505d924d",
-    "m3/tooling/jmod-recipes/src/test/java/com/m3/rewrite/jmod/M3ModuleDescriptorRecipeTest.java": "c4ae7e361c9253aaced47e843549a06e505d924d",
+    "m3/tooling/jmod-recipes/src/main/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorApply.java": "c4ae7e361c9253aaced47e843549a06e505d924d",
+    "m3/tooling/jmod-recipes/src/test/java/jdk/m3/rewrite/jmod/M3ModuleDescriptorRecipeTest.java": "c4ae7e361c9253aaced47e843549a06e505d924d",
 }
 PREVIOUS_SUCCESSORS = {
     "m3/tooling/jmod-recipes/tools/jmod_pack.py": "83b1483c6c5e6a39c519f82af603382914eed3e5",

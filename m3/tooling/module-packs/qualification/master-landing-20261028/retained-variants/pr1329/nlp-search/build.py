@@ -43,8 +43,8 @@ def main():
     if actual != source_lock:
         raise ValueError('M3 source/fixture input drift or incomplete coverage')
     out.mkdir(parents=True, exist_ok=False)
-    owner = root / 'm3/vendor/synexia/nlp-search'
-    spec = importlib.util.spec_from_file_location('synexia_source_build', owner / 'build.py')
+    owner = root / 'm3/vendor/m3/nlp-search'
+    spec = importlib.util.spec_from_file_location('m3_source_build', owner / 'build.py')
     build = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(build)
     view = out / 'donor'

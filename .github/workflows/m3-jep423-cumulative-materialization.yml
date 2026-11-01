@@ -105,9 +105,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=com.m3.tooling.dag.M3BackportPacketMain             -Dexec.args="$PWD/m3/backports/recipes/jep-423-region-pinning/packet.tsv $PWD/m3/backports/recipes/jep-423-region-pinning/atom-evidence.tsv"             exec:java
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=jdk.m3.tooling.dag.M3BackportPacketMain             -Dexec.args="$PWD/m3/backports/recipes/jep-423-region-pinning/packet.tsv $PWD/m3/backports/recipes/jep-423-region-pinning/atom-evidence.tsv"             exec:java
           mkdir -p "$RUNNER_TEMP/jep423/projections"
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain             -Dexec.args="$PWD/m3/backports/recipes/jep-423-region-pinning/packet.tsv $RUNNER_TEMP/jep423/projections $PWD/m3/backports/recipes/jep-423-region-pinning/atom-evidence.tsv"             exec:java
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=jdk.m3.tooling.dag.M3OrchestrationProjectionMain             -Dexec.args="$PWD/m3/backports/recipes/jep-423-region-pinning/packet.tsv $RUNNER_TEMP/jep423/projections $PWD/m3/backports/recipes/jep-423-region-pinning/atom-evidence.tsv"             exec:java
           test -s "$RUNNER_TEMP/jep423/projections/M3BackportRoutes.java"
           test -s "$RUNNER_TEMP/jep423/projections/m3_backport_dag.py"
           test -s "$RUNNER_TEMP/jep423/projections/m3_backport_rules.drl"
@@ -144,8 +144,8 @@ jobs:
           generated = Path(os.environ["RUNNER_TEMP"]) / "jep423" / "file-atoms"
           expected = set()
           for root in (
-              generated / "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned",
-              generated / "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text",
+              generated / "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned",
+              generated / "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text",
           ):
               if not root.exists():
                   continue

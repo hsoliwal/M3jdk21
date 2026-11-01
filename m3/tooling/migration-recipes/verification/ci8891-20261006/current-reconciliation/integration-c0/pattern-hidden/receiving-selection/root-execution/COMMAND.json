@@ -23,7 +23,7 @@
   "output": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed-preparation/receiving-selection-v1",
   "rootExecutionRequired": true,
   "rootReadbackMayBeRetainedInSeparateExternalEnvelope": true,
-  "schema": "synexia.ph0.receiving-selection-command/1",
+  "schema": "m3.ph0.receiving-selection-command/1",
   "script": {
     "bytes": 8299,
     "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed-preparation/receiving-selection-authoring-v1/emit_receiving_selection_v1.py",

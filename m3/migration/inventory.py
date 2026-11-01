@@ -81,7 +81,7 @@ def scan(repo: Path, commit: str) -> dict:
     return {'schema':'m3.git-file-accounting/1','commit':commit,
             'tree':git(repo,'rev-parse',commit+'^{tree}').decode().strip(),
             'tracked_entries':len(rows),'file_accounting_complete':True,'inventory_exhaustive':False,
-            'semantic_owner':'com.synexia.m3.inventory.M3InventoryMain',
+            'semantic_owner':'jdk.internal.m3.inventory.M3InventoryMain',
             'semantic_inventory_executed':False,'dependency_attribution_complete':False,
             'bounded_scan_gaps':sorted(errors),'candidate_paths':candidates,'entries':rows}
 

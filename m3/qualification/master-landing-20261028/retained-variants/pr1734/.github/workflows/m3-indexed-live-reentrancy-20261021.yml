@@ -3,8 +3,8 @@ name: M3JDK21 indexed live reentrancy contract
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewContract.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3IndexedLiveViewContract.java'
       - 'm3/collections/qualification/indexed-live-reentrancy-20261021/**'
       - 'm3/collections/qualification/indexed-live-views-20261021/verify_recipe.py'
       - 'm3/collections/qualification/indexed-live-views-20261021/SUCCESSOR_RECEIVERS.tsv'

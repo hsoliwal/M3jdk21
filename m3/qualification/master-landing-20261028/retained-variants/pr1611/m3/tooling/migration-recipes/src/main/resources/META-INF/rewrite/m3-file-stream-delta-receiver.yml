@@ -6,4 +6,4 @@ description: >-
   Applies the exact hash-pinned M3JDK21 product postimages for monitored input/output shadows,
   lazy provider-preserving traversal, metadata-first snapshots and compact downstream deltas.
 recipeList:
-  - com.m3.rewrite.file.M3FileStreamDeltaReceiverRecipe
+  - jdk.m3.rewrite.file.M3FileStreamDeltaReceiverRecipe

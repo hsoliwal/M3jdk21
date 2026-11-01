@@ -1,0 +1,10 @@
+{
+  "status": "EXACT_UNCHANGED_GIT_BASELINE_MATERIALIZED",
+  "base": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "files": 1167,
+  "materialized": 820,
+  "source_manifest_sha256": "195c810e60b3eff66b975ed66df238e5afd018163b67d24cf6b617eaf2640d8e",
+  "files_sha256": "767487e6e9611f1f7caa8954f4bbdc41458a43cf8d11b731c90d0f58c08cd60e",
+  "product_transformation": false,
+  "index_or_branch_changed": false
+}

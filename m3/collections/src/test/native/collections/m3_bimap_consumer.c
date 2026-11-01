@@ -3,7 +3,7 @@
  * Test-only JNI BiMap client. Java remains the collection owner. No retained references.
  */
 #include <jni.h>
-#include "com_m3_collections_interop_M3BiMapNativeTest.h"
+#include "jdk_m3_collections_interop_M3BiMapNativeTest.h"
 
 static void fail(JNIEnv *env, const char *name, const char *message) {
     jclass type = (*env)->FindClass(env, name);
@@ -11,7 +11,7 @@ static void fail(JNIEnv *env, const char *name, const char *message) {
     (void)(*env)->ThrowNew(env, type, message);
     (*env)->DeleteLocalRef(env, type);
 }
-JNIEXPORT jobject JNICALL Java_com_m3_collections_interop_M3BiMapNativeTest_call(
+JNIEXPORT jobject JNICALL Java_jdk_m3_collections_interop_M3BiMapNativeTest_call(
         JNIEnv *env, jclass unused, jobject map, jobject key, jobject value, jint operation) {
     (void)unused;
     if (map == NULL) { fail(env, "java/lang/NullPointerException", "map"); return NULL; }

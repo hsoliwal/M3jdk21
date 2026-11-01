@@ -868,8 +868,8 @@
     {
       "path": "src/java.base/share/classes/java/util/Strings.java",
       "warning_count": 72,
-      "git_blob": "d4f0687c2145b94de67d29012cea5edf1f47badd",
-      "sha256": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d"
+      "git_blob": "b7071f97d7b5b48d30335d344e60a1e2d35f8809",
+      "sha256": "7147989eba1d6def126049042d8fe4bc7780fbaa972ea932bed411961117b717"
     },
     {
       "path": "src/java.base/share/classes/java/util/concurrent/Callable.java",

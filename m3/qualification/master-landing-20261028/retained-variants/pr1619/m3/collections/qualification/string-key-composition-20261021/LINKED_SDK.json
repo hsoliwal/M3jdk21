@@ -35,9 +35,9 @@
     "GENERATED_HEADER_EQUIVALENCE.json": "082ccefc61a0a1c8cd385a53cd34b5e442fd4aa48ac41b3290dd369dc9db41a3",
     "STATIC_OWNERSHIP.json": "bac1cfb41eb8ec0045f6182c2ff3db3ff8e60d94d1264b6f24d1c192959cb43f",
     "LINKED_JUNIT.json": "ea881f4931cc1ccb278e6711eca8e68bd08f3cf22cfc515cd445bfe372559b6b",
-    "CLASS_ORIGINS.json": "1c7f096982b9e78c5e53270146ee9854bc0e91f7749e21044d8927df040dfd46",
+    "CLASS_ORIGINS.json": "e00cf3e33168ef73d47795199e9f1cabbbd873a3d6b71df792eebfcc475e65bc",
     "NATIVE_ORIGINS.json": "7eba5e5b0fa918851003f1d8f20c7d589f5c39b569f86cdf29a96bfc28b531ef",
-    "RUNS.json": "6efaa938873d2758464b5c6a1f892ddb20f97780d21c0e3b6a03eb17fcaa49f1"
+    "RUNS.json": "517a58639ed5c0c891cc7866014a8856762b6318a19e1ca1743796bfc2e18271"
   },
   "scope": "Fresh Linux installed-module packaging, full current collection JUnit+required JNI, and focused composed-string tree/view/native contracts. No historical pass relabeled; no production patch; no global provider/JIT/JCK/admission phase promotion."
 }

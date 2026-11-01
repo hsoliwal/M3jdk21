@@ -2,7 +2,7 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # M3JDK21: stable descending indexed views over physical state masks
 
-**Runtime owner:** `m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java`  
+**Runtime owner:** `m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java`  
 **Recipe:** `com.synexia.m3jdk21.StableDescendingIndex20261019`  
 **Preimage:** historical M3JDK21 PR #1501 head `3867520c06a89a57cecbc9160517677091a10e6d`  
 **Receiving status:** stacked **draft**, not installed `java.base` promotion.
@@ -55,7 +55,7 @@ src=m3/collections/src/main/java/com/m3/collections
 javac --release 21 -Xlint:all -Werror -d build/m3-stable-descending \
   "$src/M3IndexMaskCompactor.java" "$src/M3IndexPathMasks.java" \
   "$src/M3IndexedListSnapshot.java" \
-  m3/collections/src/test/java/com/m3/collections/M3StableDescendingSnapshotProof.java
+  m3/collections/src/test/java/jdk/m3/collections/M3StableDescendingSnapshotProof.java
 java -cp build/m3-stable-descending com.m3.collections.M3StableDescendingSnapshotProof
 ```
 

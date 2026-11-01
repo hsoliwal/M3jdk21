@@ -46,8 +46,8 @@ the original product `audit.py` and `test_audit.py` changes.
 
 | Exact original product owner | Before Git blob | Exact received postimage |
 |---|---|---|
-| `audit.py` | `99d7bc41f024ba24f388c683444a474d23a7b622` | `8a0debdbbc041add745b0ceb99bc6aaf3aacce47` |
-| `test_audit.py` | `b1fa399afc9d631360eb1fd7b9d620f7648f612c` | `50b0cc48deca377aac81930950d14e4217058110` |
+| `audit.py` | `99d7bc41f024ba24f388c683444a474d23a7b622` | `c93309d2b4f8d0a66c9e8ceccb9ef04f87979643` |
+| `test_audit.py` | `b1fa399afc9d631360eb1fd7b9d620f7648f612c` | `191aa2eaa176a257d27211344d4cc1fc584ef6ca` |
 
 The report still returns `INVENTORY_ONLY_NOT_QUALIFIED` and
 `promotion_allowed=false`. For `--expected-head`, it additionally

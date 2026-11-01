@@ -77,7 +77,7 @@ def verify(root: Path, dataset: str, require_terminal: bool = True) -> dict:
         raise ValueError('ordered OpenRewrite stage list differs from pass plan')
     aggregate: dict[str, tuple[str, str, str]] = {}
     for kind in ('java', 'text'):
-        path = resources / 'com/synexia/rewrite' / ('hash-pinned-' + kind) / crate
+        path = resources / 'jdk/internal/m3/rewrite' / ('hash-pinned-' + kind) / crate
         manifest = path / 'manifest.tsv'
         if not manifest.exists():
             continue
@@ -147,7 +147,7 @@ def verify(root: Path, dataset: str, require_terminal: bool = True) -> dict:
             raise ValueError('uncatalogued or unqualified donor category: ' + category)
         seen.add(stage)
         kind = aggregate[target][2]
-        stage_root = resources / 'com/synexia/rewrite' / ('hash-pinned-' + kind) / stage
+        stage_root = resources / 'jdk/internal/m3/rewrite' / ('hash-pinned-' + kind) / stage
         manifest = records(stage_root / 'manifest.tsv', 4)
         if len(manifest) != 1:
             raise ValueError('stage must own exactly one source file')

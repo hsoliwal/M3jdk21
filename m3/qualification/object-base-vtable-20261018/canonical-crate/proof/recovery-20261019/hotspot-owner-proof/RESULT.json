@@ -1,7 +1,7 @@
 {
   "target": "src/hotspot/share/classfile/classLoader.cpp",
   "before_sha256": "665bb788428c8d3837d052ac4f69a2756bb1823918726b41a7a7008eadfafd8d",
-  "after_sha256": "c465bc54b703617bad3ab70c25041c3182363afb95b82ea9640f20e29f032b0c",
+  "after_sha256": "d8f7045cbe28ddacae505adc1273535940efdcc1967b91bafb45113197471ee5",
   "production_output_origin": "actual named OpenRewrite SDK Results",
   "context_sources_sealed_unchanged": 10,
   "object_class_sha256": "1930c52443ec1d776a73893d0c7e39ee56721a6f7198565db63d913fa5ca3827",
@@ -43,6 +43,6 @@
   "vtable_guard_changed": false,
   "runtime_fixture_sha256": "309af1ec6642cf153407164dced08dc3b9a51fe5f380d44d32a0765bd36e07cb",
   "runtime_fixture_strict_compile": "PASS; --release21 --patch-module java.base -Xlint:all -Werror",
-  "runtime_fixture_classes": "/workspace/scratch/87fb3604f641/m3-implementation/collections-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3-object-base-vtable-20261018/target/runtime-classes",
+  "runtime_fixture_classes": "/workspace/scratch/87fb3604f641/m3-implementation/collections-lane/m3/m3-openrewrite-recipes/recipe-crates/m3-object-base-vtable-20261018/target/runtime-classes",
   "full_image_and_runtime_fixture": "PENDING parent rebuild after exact source admission"
 }

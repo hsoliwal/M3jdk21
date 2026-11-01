@@ -17,7 +17,7 @@ A local, single-run JNI microbenchmark found that eager metadata caching regress
 All product changes have source-pinned recipe images. Apply **in this order**, under their respective original source guards:
 1. `com.synexia.rewrite.M3NativeRecipePath20261020`: extends the existing OpenRewrite source-sealed engine by allowing native C/H/CC/CPP paths only with `lst:false` in established M3JDK21 JNI folders, and creates Java path-admission tests. It preserves the original Java LST-only mode.
 2. Rebuild the recipe engine from the exact new source using the existing source-pinned Maven control reactor.
-3. `com.synexia.rewrite.M3NativePathMaskStageCache20261020`: actual existing C owner, exact before SHA-256 `3f5a760e633762469fad5a9dcd531cb39c33d11752d79ad241e506800b26e7cb`, after SHA-256 `559f4cfe5a1fa1eb6f77d8c7cd805915b7bc09ae91abbc87914a9e1543b63058`; PlainText-only source custody, not AST proof for C.
+3. `com.synexia.rewrite.M3NativePathMaskStageCache20261020`: actual existing C owner, exact before SHA-256 `072e6c3d30b1fd54d8ce883ed18fde75aa6c1809a1dc0c9a2de7b7e5f571f824`, after SHA-256 `2459514fb4df9dcbd28269db7ce740c9229c28506cbf923f720817b61d0082eb`; PlainText-only source custody, not AST proof for C.
 4. `com.synexia.rewrite.M3NativePathMaskTest20261020`: Java LST fixture pin and parity suite creation.
 
 Each recipe refuses unknown source drift, preserves already-qualified targets as a fixed point, and touches its own semantic owner. The verifier checks source/template SHA-256 after the recipe. Do not hand-edit generated targets to correct an implementation: fix template and its hash, rerun, qualify and compare contracts.

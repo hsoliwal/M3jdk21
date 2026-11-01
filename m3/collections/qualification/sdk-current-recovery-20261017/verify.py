@@ -8,13 +8,13 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
 RECEIPT = HERE / "RECEIPT.tsv"
-RECEIPT_SHA256 = "b87d65b4588f8838b9d359c7e9267920db94b05aab9df878c18db92be4828af6"
+RECEIPT_SHA256 = "39709c1339a9d4e47a2c80ef21174d47f629b474afcc3a101cffc9db66aad99e"
 TARGETS = (
-    "m3/collections/src/main/java/com/m3/collections/M3CollectionSdk.java",
-    "m3/collections/src/main/java/com/m3/collections/M3IndexPartitions.java",
-    "m3/collections/src/main/java/com/m3/collections/M3LongBag.java",
-    "m3/collections/src/test/java/com/m3/collections/M3SdkRecoverySelfTest.java",
-    "m3/collections/src/test/java/com/m3/collections/M3SdkRecoveryTest.java",
+    "m3/collections/src/main/java/jdk/m3/collections/M3CollectionSdk.java",
+    "m3/collections/src/main/java/jdk/m3/collections/M3IndexPartitions.java",
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongBag.java",
+    "m3/collections/src/test/java/jdk/m3/collections/M3SdkRecoverySelfTest.java",
+    "m3/collections/src/test/java/jdk/m3/collections/M3SdkRecoveryTest.java",
 )
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -28,7 +28,7 @@ def verify(root=ROOT, receipt=RECEIPT):
     for path, cells in zip(TARGETS, rows):
         if len(cells) != 4 or cells[0] != path or cells[1] != (
                 "ABSENT" if path != TARGETS[0] else
-                "9a51f5edad8fd58ec9a7cc4dcd17cec23117de1eba486ba1b7a4c631acd8eff0"):
+                "eab54d460dffcbd3f83514c9abddce7aebdf335998a7b38278685051f6a988ea"):
             raise ValueError("unexpected target/preimage: " + path)
         after, template = cells[2:]
         if len(after) != 64 or any(c not in "0123456789abcdef" for c in after) \

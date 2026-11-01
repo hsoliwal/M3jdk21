@@ -5,14 +5,14 @@
 
 /**
  * Defines the {@code antlr4-runtime-4.13.2} library,
- * relocated into M3JDK21 by LIB_INTAKE_TO_JMOD.
+ * relocated into M3JDK 21 by LIB_INTAKE_TO_JMOD.
  */
 module jdk.m3.runtime {
-    exports com.m3.lib.runtime;
-    exports com.m3.lib.runtime.atn;
-    exports com.m3.lib.runtime.dfa;
-    exports com.m3.lib.runtime.misc;
-    exports com.m3.lib.runtime.tree;
-    exports com.m3.lib.runtime.tree.pattern;
-    exports com.m3.lib.runtime.tree.xpath;
+    exports jdk.m3.lib.runtime;
+    exports jdk.m3.lib.runtime.atn;
+    exports jdk.m3.lib.runtime.dfa;
+    exports jdk.m3.lib.runtime.misc;
+    exports jdk.m3.lib.runtime.tree;
+    exports jdk.m3.lib.runtime.tree.pattern;
+    exports jdk.m3.lib.runtime.tree.xpath;
 }

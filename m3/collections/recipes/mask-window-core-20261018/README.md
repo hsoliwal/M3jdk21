@@ -43,7 +43,7 @@ Shared javac frontend and selected build packs already exist in #1086; this incr
 
 The earlier baseline and verification section above is historical. Current seals are in
 `CURRENT_SOURCE_PINS.json`, and the forward-qualified correction is recorded in
-`memory/LESSONS.md` and event `1d82d949bef954c038da5e3f08726634940c65bee35569ac114e373fc100c84f`. The source-seal engine remains unchanged.
+`memory/LESSONS.md` and event `6c370040922eb26b5be64f1d2d43d93fdf7a6044d48915fbcef1246e9de57a41`. The source-seal engine remains unchanged.
 The new direct evidence preserves all nine current JNI exports; Maven resolution was
 attempted and blocked before build, as recorded under `reconciliation-20261021/evidence/`.
 
@@ -57,14 +57,14 @@ PR is created. Receiver PR #1280 mirrors this exact dataset in its existing cust
 path after the canonical source commit exists. This is a local prepared publication
 plan; no remote write has been performed by the qualification worker.
 
-Publication amendment event: `5ac55e2fa109d1c46914f09a18d1365848e5d1302607aee6b9814b9ad7e3e62c`.
+Publication amendment event: `ec3240ca0c51dada1851704898e11a0c51e619af8ab228cb3a25ed3e37d38c21`.
 
 ## Final checked source epoch:55b44776
 
 The final source comparison caught newly merged PR#1638's additive long required/excluded
 selector. The earlier1e5056b proof above remains historical; it is not the publication
-preimage. The current Java seal is `ec8b9d2683f5fdb99f6c3e9ad4c79dc60e8ad19cbc3fde2b09e9da2fe3a83f2b`, Git blob
-`6359eda54aceb2c3b73beab1cbb4718091a9041a`. C is unchanged. The same existing author was regenerated with this
+preimage. The current Java seal is `394211113f2e6c875521553700e9060a30906a9aaab4c755405402042832d12e`, Git blob
+`d246ed575d109627d5e3c8397aa9ab388ff190ed`. C is unchanged. The same existing author was regenerated with this
 new exact preimage and preserves the new method byte-for-byte.
 
 Fresh serial qualification again passed105 commands. The current supplement passed14
@@ -72,4 +72,4 @@ commands:133,140 existing Java contract checks,512 actual JNI cases,136,397 inde
 long-overload checks, and current/legacy/missing native capability cases on both before
 and generated sources. All22 retained method bodies and JNI headers match exactly.
 Current evidence is under `reconciliation-20261021/evidence/serial-v2` and `current-v2`.
-Event:`5e4a86e1a376e7855daf8a2d885765f1b284b930d6219ad5ce016871d82dd156`. Previous receipts and events remain immutable. No global phase advances.
+Event:`f5e733441b3801e0e5f0b1aa73a7ef450beb9ffefb3709efc93c3e1148beef85`. Previous receipts and events remain immutable. No global phase advances.

@@ -2,19 +2,19 @@
   {
     "path": "author.py",
     "before_sha256": "a2c22fa59013f884ddd12453215686689fa4d062dfb3dcd064e1c428014e55b1",
-    "after_sha256": "338859ce37f762908959d10273525b0b1308d7c0f93b7aa69ebecde474500bcf",
+    "after_sha256": "c5ce1654e27d6f87e964b27dd56c1074561ab2032b59df04cc3cd6833673a88a",
     "change": "COMMENT_ONLY_CANONICAL_COPYRIGHT_PAIR"
   },
   {
     "path": "verify.py",
     "before_sha256": "7565f7760461fc1fc892dec3f5176c3bc4ec5f3d793a04aed24be8e5ff89aa4c",
-    "after_sha256": "019aa79e428bb257ff81d4d105816233f4cbae6906e448c01112858e522a4002",
+    "after_sha256": "b958d989868b7279f29c07ea3693d84bf88e9664c3407cf663cacfd45fbce6fe",
     "change": "COMMENT_ONLY_CANONICAL_COPYRIGHT_PAIR"
   },
   {
     "path": "reconciliation-20261021/verify_current.py",
     "before_sha256": "2963e0295ab8a2081903dc516d3187cdc86eee11434560bfff5d330b47bcc49c",
-    "after_sha256": "2d4c8dd56d51ebd34ec18cbb277f9d251130d63ee8d671c5e4b063d54d6ea292",
+    "after_sha256": "5e27a353f89237fa0467ffaccf678a871bef160477ebdd966472b22075e8f26a",
     "change": "COMMENT_ONLY_CANONICAL_COPYRIGHT_PAIR"
   },
   {
@@ -32,13 +32,13 @@
   {
     "path": "README.md",
     "before_sha256": "8dbc3ab0f455c5e1e3dcf6eb5751ae22570a29523253bf165929ccb49ddcaca0",
-    "after_sha256": "03b07ee6892fca5d13be374578036c85af42adbe0368d4b6ba1e4afd504f94fa",
+    "after_sha256": "7a9d28f2713ff68904b49ddb3162ca0dc1bb4b810e749df01fb3d50475864f85",
     "change": "COMMENT_ONLY_CANONICAL_COPYRIGHT_PAIR"
   },
   {
     "path": "RECONCILIATION.md",
     "before_sha256": "6753622bd797e23b2e32a83145421711b18789a28135a1f44b26aaf23818cfaf",
-    "after_sha256": "012264c59cbabd66d09a08ef770fea80186e47c61ed4a6e10fcfc34dab3e148e",
+    "after_sha256": "3d5e7156cc4eaec84ba50d531fae171a12f9ebcffa07a4764054cd7862571d5b",
     "change": "COMMENT_ONLY_CANONICAL_COPYRIGHT_PAIR"
   },
   {
@@ -50,7 +50,7 @@
   {
     "path": "memory/LESSONS.md",
     "before_sha256": "6bbd1daf972d68cae0d034c72e49ef027b13fe33401a772328bd95df795f0d4e",
-    "after_sha256": "98ca39f082e65f3b9ca86d13a4d6d4b8c079f40bf264001f5b59c5fafc5f7f1a",
+    "after_sha256": "7275562a010eeca6163f84ecdaa52f6267c9e97b4461b8dd5db8bda4522edf0b",
     "change": "COMMENT_ONLY_CANONICAL_COPYRIGHT_PAIR"
   },
   {

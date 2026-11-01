@@ -16,7 +16,7 @@ Canonical Maven/OpenRewrite named source recipe:
 Java source templates, sorted SHA-256 manifest and current engine pins.
 Both product Java Git blobs must match canonical candidate templates exactly:
 - `M3ResourceLocks.java`: `210e3099f21bfbc5881aa3f53c03d8b04a439714`, SHA256 `99a90eca92fea1e45604e29c0f1c1295e9e4e3c05dc3bbb3b27c48890f007575`.
-- `M3ResourceLocksContract.java`: `b204f79fc5c0973c52cd8d755597f60536ad0a8d`, SHA256 `a20c5e004fd23a83f05e02bc895c62f11ec8db02d86f1c0dae5448a4b911d292`.
+- `M3ResourceLocksContract.java`: `3e95c540690bd656e3d53d9339879c25326bc0b7`, SHA256 `8b253a7ae19ebd58c56a2921717b71902ee77ca339985af40ed8cc663bb1dce7`.
 
 ## Semantics and limits
 `Scope.exact(Path)` excludes only a single lexical path.
@@ -47,8 +47,8 @@ Reproduction from the product checkout (Java21 only):
 ```sh
 mkdir -p /tmp/m3-resource-locks
 javac --release 21 -Xlint:all -Werror -d /tmp/m3-resource-locks \
-  m3/file/src/main/java/com/m3/file/M3ResourceLocks.java \
-  m3/file/src/test/java/com/m3/file/M3ResourceLocksContract.java
+  m3/file/src/main/java/jdk/m3/file/M3ResourceLocks.java \
+  m3/file/src/test/java/jdk/m3/file/M3ResourceLocksContract.java
 java -cp /tmp/m3-resource-locks com.m3.file.M3ResourceLocksContract
 ```
 

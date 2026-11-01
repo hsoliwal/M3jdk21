@@ -1,7 +1,7 @@
 {
   "status": "PASS",
   "class_origin": "received owning-module target/classes, prepended as sole production class directory",
-  "source_hash": "511800d4d79c7d8838ddb497f031e13827decd44c9c2790093f89ea01cdaa349",
+  "source_hash": "90b0ba9467d6cb6741de9a3e7b39f1a6016eef2401da3b3eadfab3cdb0e975c8",
   "existing_checked_jni_processes": 27,
   "received_identity_processes": 1,
   "runs": [

@@ -2,8 +2,8 @@
   "schema": "M3_ECLIPSE_JPMS_MODULE_RECEIVING_V1",
   "canonical_repository": "hsoliwal/com.synexia",
   "canonical_commit": "55d70dcc4d9350634050fbbb1449f0065606d2d1",
-  "dataset": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/vpt-eclipse-modpath-20261026",
-  "recipe": "com.synexia.m3.ViewportEclipseModule20261026",
+  "dataset": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/vpt-eclipse-modpath-20261026",
+  "recipe": "jdk.internal.m3.ViewportEclipseModule20261026",
   "original_product_head": "c9a1106c27e9413582a68e5d5786d9b3b42bb476",
   "original_git_blob": "56ad9d845f580d2982b2324b1a92748313eeaa0f",
   "sdk_result_git_blob": "75b8ad4dd44fdab11aa75f2fa053a012d8fd161c",
@@ -24,7 +24,7 @@
   "original_hosted_ci": {
     "run": "https://github.com/hsoliwal/M3jdk21/actions/runs/40177948413",
     "recipe_tests_pass": "4 plus 3",
-    "failure": "module not found: com.m3.arrays",
+    "failure": "module not found: jdk.m3.arrays",
     "failed_step": "Compile existing M3 collections and install exact jar"
   },
   "local_mock_jpms": {

@@ -32,7 +32,7 @@
        <goal>java</goal>
       </goals>
       <configuration>
-       <mainClass>com.synexia.m3.M3IntArrayIndexRecipe</mainClass>
+       <mainClass>jdk.internal.m3.M3IntArrayIndexRecipe</mainClass>
        <arguments>
         <argument>--selftest</argument>
        </arguments>

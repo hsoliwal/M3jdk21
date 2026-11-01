@@ -42,18 +42,18 @@ final class JccCiRepairTest {
     private static final List<Target> TARGETS = List.of(
             new Target(".github/workflows/m3-foundation.yml",
                     "before-00-m3-foundation.yml.txt", "after-00-m3-foundation.yml.txt",
-                    "2a81b9ebfa5d477977dba4632a0e7c89f2ebb89606eb46491197536335d63fee",
-                    "76f3b96be528f33556fde14d811e3df9462f828353967237eed1a46ccc6ce91f"),
-            new Target("m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
+                    "1a1ddd014a5cce76e75b1e4fce5c4cd0c746a3dbf5f18ef3a1bc9dad7d8fbdd1",
+                    "9969a19a5727bb1684d6e8443c67681a0afd52f0427d9501f4b4d363e9709982"),
+            new Target("m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
                     "before-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
                     "after-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
-                    "58d01008f3dc6e79d988e855d76ba90eb0a13d39a76e7eb4027d75442389ec94",
-                    "f34470a701cf71b4b4abbe1fa9a5091392a930426ec84d700f13e53edd244629"),
-            new Target("m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
+                    "fa5476d63c50d830de841e53b58dd7346275ce812f16d2e200ad6a4f0d016ff8",
+                    "5b3bab6188d1f33360f6d5042dac7b0c0ae599ff36c621c6c7e3f0a4debd8933"),
+            new Target("m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
                     "before-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
                     "after-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
-                    "69882638771a411cf0866f789a7b3ef7e7e7040cde38a1c40ef4a743d37168e2",
-                    "3f3ab065d9e87e9f6095629a56b052642ec9d0883a466430e90a4a4355edd05b"));
+                    "6d6f4257d18c5e5a016a6c876bffcc8f5c202a65b8f019f2cf3ec1f26bfc84e8",
+                    "83d970effb393f67462e5cb269118e6a390d82f74f70eb16905fd4ba948a4416"));
 
     @Test
     void retainedOwnerProducesExactlyThreeOutputsAndPreservesIdentityAtFixedPoint() throws IOException {

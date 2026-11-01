@@ -43,7 +43,7 @@ and full binary compatibility gates. Do not promote or merge this draft.
 
 | Original source path | Git blob after | SHA-256 after |
 |---|---|---|
-| `m3/collections/src/main/java/com/m3/collections/M3SignalBooleanQuery.java` | `af858f0618087b3284b1ba2e62ade59cac8f4e28` | `d6b26340655fe084397a9665c10aa0f56500e3dacb0231cb6cc57e90fa3d2207` |
-| `m3/collections/src/main/java/com/m3/collections/M3SignalExactIntegerDistance.java` | `dfee78788ef527a3f1f340e5b87a5680463c02f1` | `25d4b22a944930cb51739221febf790d3ae54f752245a21a54d5b45951bcd07a` |
-| `m3/collections/src/test/java/com/m3/collections/M3SignalNearestBooleanSelfTest.java` | `d22ab6157deb99c359a31495938c466dfd60872c` | `211696edd42c336153ec964bde0425ccd15e64706fa37f0ec206abe482fa02bd` |
-| `m3/collections/src/test/java/com/m3/collections/M3SignalNearestBooleanTest.java` | `243df18ca528466bebe683c92f5e7fa10196dddf` | `7bd478aff58e86ab628de29322463d8cd8238e59f9062ee4e158955e3e3e9dd2` |
+| `m3/collections/src/main/java/jdk/m3/collections/M3SignalBooleanQuery.java` | `06637398e3f1a8bafb7ba760f2286cadd90a4164` | `941f2e9cc5fc6560ce85d9e2b19553046c9bd47049b4ad9b6236fa9a0a23fa2b` |
+| `m3/collections/src/main/java/jdk/m3/collections/M3SignalExactIntegerDistance.java` | `3388f30324da5eb3b3529cbfc784a09bf6b6c416` | `68436395afde7e4761ef0771a216e2d50e82b99087fde9d01b6ab38f6b170ea1` |
+| `m3/collections/src/test/java/jdk/m3/collections/M3SignalNearestBooleanSelfTest.java` | `c5d4e2133ce13608417caccfb6cc0e9799b6242c` | `2f5d14d4083706e249cd2627d2f448c1d7fb4df8331c042e88b85ad5dcf437c8` |
+| `m3/collections/src/test/java/jdk/m3/collections/M3SignalNearestBooleanTest.java` | `6fbcdbb45dea28c4e235c4e1b061cd3eb4f39a12` | `6b724f6f566ae06022ec0f9e8f4162a4f82facbaabb2f37fe9ed4fa70c41c152` |

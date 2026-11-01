@@ -106,7 +106,7 @@
           "confidence": 0.99,
           "category": "bug",
           "code_location": {
-            "file_path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/M3LinkedCaseInsensitiveMap.java.txt",
+            "file_path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/M3LinkedCaseInsensitiveMap.java.txt",
             "line": 126
           }
         },
@@ -128,7 +128,7 @@
           "confidence": 0.98,
           "category": "regression",
           "code_location": {
-            "file_path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/M3LinkedCaseInsensitiveMap.java.txt",
+            "file_path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/owned-spring-case-insensitive-map/M3LinkedCaseInsensitiveMap.java.txt",
             "line": 352
           }
         }
@@ -148,7 +148,7 @@
       "schema": "root-spring-source-review-disposition-v3",
       "status": "TWO_RUNTIME_FINDINGS_REJECTED_BY_EXACT_DONOR_AND_FROZEN_EXECUTION_ONE_DOC_CLARIFICATION_PENDING",
       "review": "autoreview-v3-2-receiving-engine-host-resources-1.json",
-      "ownerSHA256": "450e3f70be37f0fa0fcee7edd4adc8a2eea4a05a40646fb3e5c531e4ee8447ca",
+      "ownerSHA256": "d90b72771ab454aa1dd03eb2c5784d7aaffd612736868a66fbe2682c8ab05f7c",
       "donor": {
         "repository": "spring-projects/spring-framework",
         "commit": "5024bb72279188f1d0dcfe19e8abdd4bdb9887c8",
@@ -268,7 +268,7 @@
     "documentation": {
       "path": "m3/collections/recipe/owned-spring-case-insensitive-map-20261018/README.md",
       "bytes": 3555,
-      "sha256": "9ec30aa77bd5296e16be1448007adcf3dcc654149e787d7479b627ddb1bceee4",
+      "sha256": "7a34860c6893dd0ebde14fb260d1c94801ddbc47b01b3b617396cb89a9dce041",
       "change": "Explicit lst:false PlainTextParser input and withSourcePath pipeline, absent-target omission and exact-postimage fresh reactivation; Java-LST representation refusal; runtime compilation/differential proofs separate"
     },
     "beforeEditSealSHA256": "f5c9e868745212030c921d0f05a4b236525d7f0afc22ed3e20f1b3418c5c77f2",

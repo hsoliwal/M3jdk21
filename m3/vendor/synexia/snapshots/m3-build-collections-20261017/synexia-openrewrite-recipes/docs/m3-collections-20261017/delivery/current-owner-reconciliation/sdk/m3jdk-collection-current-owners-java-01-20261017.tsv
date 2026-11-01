@@ -1,9 +1,0 @@
-evidenceKind	SDK_EXECUTION
-recipe	com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
-crate	m3jdk-collection-current-owners-java-01-20261017
-result	m3/ports/collections/src/main/java/com/m3/util/M3PrimitiveIndexView.java	ABSENT	4f69b71b3deb0fdd867aa90dde2fb4b762fdd9c246c8fe77689484184ca46789
-fixedPoint	PASSED
-driftRefusal	PASSED
-duplicateRefusal	PASSED
-missingRefusal	NOT_APPLICABLE_ALL_TARGETS_ABSENT
-scope	sealed-recipe-SDK-only; runtime-contracts-and-source-mirror-gates-separate

@@ -1,0 +1,1624 @@
+{
+  "schema": "M3_MAVEN4_AUTHORING_HANDOFF/1",
+  "status": "FROZEN_FOR_PUBLICATION_METADATA",
+  "shared_engines_changed": false,
+  "source_inputs_readback_verified": 36,
+  "crate": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021",
+  "descriptor": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-maven4-effective-20261021.yml",
+  "resource_prefixes": [
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-",
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-"
+  ],
+  "summary_sha256": "9d298086435bc4ee4c1b217e39d9824f3b1a5d8c5b4ac3f8d94d8c3086a26809",
+  "source_seals_sha256": "ea99837eeb463fbc09858de4249c77130b4ef8ddd0df3468386badab53c6fcc4",
+  "sdk_receipt_sha256": "b5f4998aa91aa97b9b2e87a2feff682130f6d093dc8c39073d774bb14da1b8ee",
+  "memory_final_sha256": "1b75ee53ddfafabe04ba9cb08c3705a04a1060f1cb0cf4e74fa8900a5f24dd08",
+  "files": [
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/QUALIFICATION_SUMMARY.json",
+      "sha256": "9d298086435bc4ee4c1b217e39d9824f3b1a5d8c5b4ac3f8d94d8c3086a26809",
+      "bytes": 4161
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/README.md",
+      "sha256": "605dfbf1cad51fd8264422941e0e0bedb4bf042c8b66ae94b02cbb5648997b32",
+      "bytes": 10113
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/SOURCE_SEALS.json",
+      "sha256": "ea99837eeb463fbc09858de4249c77130b4ef8ddd0df3468386badab53c6fcc4",
+      "bytes": 4316
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/apply_receiver.py",
+      "sha256": "912c2a99dc5cfbec64beffebe8d49d8bbb77f4564aed4c1d5b66bfca962509f7",
+      "bytes": 7420
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/attribution/DependencyCustody.java",
+      "sha256": "33ac6edbd9c0f7f7989d172040c60783bb3df8786178be22370340f10c7576b7",
+      "bytes": 1273
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/attribution/expected-methods.txt",
+      "sha256": "802de98865bc229f9ed97f92d812bd3dadaeda16d5a4fdbbe1cb161d413b1c49",
+      "bytes": 473
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/licenses/Maven-Fork-LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/licenses/Maven-Fork-NOTICE",
+      "sha256": "633cdd68388defe137dd4b6a02bc9656cefae3b33c64b371e31b104aad40adac",
+      "bytes": 167
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/licenses/Synexia-LICENSE",
+      "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+      "bytes": 11558
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/licenses/Synexia-NOTICE",
+      "sha256": "816e983c97925d4342c370520dfd072fc4dfe493f050bf244e34ecb5c75ccbb1",
+      "bytes": 17628
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/FINAL_RESULT-002.json",
+      "sha256": "1b75ee53ddfafabe04ba9cb08c3705a04a1060f1cb0cf4e74fa8900a5f24dd08",
+      "bytes": 1540
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/FINAL_RESULT.json",
+      "sha256": "657c5d51728970ca5bd2de0800dabef5749cb6dcf46ce4ceb53176dcc3d62168",
+      "bytes": 4385
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/INDEX-002.json",
+      "sha256": "901fc62510bb0b40a0169d3946fa86883798386187bffcdc882b0d8a313ddf1d",
+      "bytes": 561
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/INDEX.json",
+      "sha256": "ba0022653f265d72ef7d6a35b8e6940d77bf26e45d6720434ea00292dd753c62",
+      "bytes": 333
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/LESSONS-002.md",
+      "sha256": "edfa7ef3cf36e73e3cfacf710fdb4581296590d188c9c8f0a5e8d90d9954ccb1",
+      "bytes": 1624
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/LESSONS.md",
+      "sha256": "ad3aa39cb08158a7141c5b28b46195f98d75088e4d6adacbcde2cbef6c25fe2d",
+      "bytes": 798
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/PROFILE.md",
+      "sha256": "90a077b6bac1967f69c1513c066b8e196383ca11c7b80d3840dd8478c578949a",
+      "bytes": 1264
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/README.md",
+      "sha256": "7d9c288054841c9bfa8cdfe5d6c29930a4b9d1f48485e4bd573cefcd9cf73946",
+      "bytes": 491
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/draft-001.json",
+      "sha256": "4b79f69dc9c7f0e988544a42061261610870406031f332bc0f8340b2d02a9e34",
+      "bytes": 40174
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/draft-002.json",
+      "sha256": "7cddc0f75b55dff977c71ead789b21bc4890681a25bc615b305f901803748385",
+      "bytes": 29302
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/draft-003.json",
+      "sha256": "617c615d370afee7016028f521615f8ba44ebf1acd3e273212bc240be399f53d",
+      "bytes": 31584
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/events/12b0e7d8df2b80d9a2b2493f7b8e3f54254c35ccb27266463819e4c2ad7aa511.json",
+      "sha256": "12b0e7d8df2b80d9a2b2493f7b8e3f54254c35ccb27266463819e4c2ad7aa511",
+      "bytes": 29478
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/events/7e90af9173edceb152fde014b5b74cceb30c07a62c6af7293e0b2065b628bd2b.json",
+      "sha256": "7e90af9173edceb152fde014b5b74cceb30c07a62c6af7293e0b2065b628bd2b",
+      "bytes": 38968
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/observations/runtime-001/CORRECTION_OBSERVATIONS.json",
+      "sha256": "41a8e9ad675831f00f55495d064c37d98f4e8ecc619b9036ee9768e59a5f05e8",
+      "bytes": 1731
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/observations/runtime-001/HISTORICAL_SOURCE_UNKNOWN.json",
+      "sha256": "01af20b69509dd6e2e7d703a8580b47c5e8804e46735c735f8942a3399dc476d",
+      "bytes": 388
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/observations/runtime-001/MEMORY_DRAFT_REFUSAL.json",
+      "sha256": "bdd1d052ec9198df526ba8dc0bba35a17360714071750a35cb63dcd00a4d8953",
+      "bytes": 1575
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/observations/runtime-001/evidence/baseline-real-provider-001.log",
+      "sha256": "5bb026256538d647e8333679cbfae8705def9ea42f86503fbe85164ce476ce4f",
+      "bytes": 28749
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/observations/runtime-001/evidence/candidate-real-provider-002.log",
+      "sha256": "fb3bc78e12f5b4708fbe5d88fddeea62f304dad323ac1579119da6454cebf6b3",
+      "bytes": 10336
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/observations/runtime-001/qualified-candidate-001/source-offline.log",
+      "sha256": "943e3b82bbcceead6f7985b3bd3dd7f50536e4f5ac8bd283b53448c6ae91c280",
+      "bytes": 70139
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/observations/runtime-001/qualified-candidate-002/COMMANDS.json",
+      "sha256": "96a997717305ad373f9a941b4646eea36923a5454d6b765829dad92c9505b55d",
+      "bytes": 31777
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/observations/runtime-001/qualified-candidate-002/PROOF.json",
+      "sha256": "be3c83482551f9398bd37dfe019dadcf083a47664ae2082876bd683b35953407",
+      "bytes": 1647
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/observations/runtime-001/qualified-candidate-002/baseline-api.log",
+      "sha256": "810647f8c04537a26ee736b6825844ea7a78834d5e55bce83db279cab37c88d6",
+      "bytes": 1897
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/observations/runtime-001/qualified-candidate-002/baseline-compile.log",
+      "sha256": "9ea0536ec8d0b8b7b0e7dcfb20cf2912a045d48cb8163b8a8c0c006e449d3d81",
+      "bytes": 749
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/observations/runtime-001/qualified-candidate-002/baseline-provider.log",
+      "sha256": "4ff2b45db119e0ab3844481f5e377bb546518ab12cd358fc75472730c7edeff0",
+      "bytes": 9585
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/observations/runtime-001/qualified-candidate-002/candidate-api.log",
+      "sha256": "2a3591cc105e8d2ecd9aa14f328768cb731b33c42211634d42bcd1f62bbb0097",
+      "bytes": 2152
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/observations/runtime-001/qualified-candidate-002/candidate-compile.log",
+      "sha256": "2c61bd1f76547f1fd999b072cd8a385fddb374f31a0f590a1a140c1ba4ce073b",
+      "bytes": 774
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/observations/runtime-001/qualified-candidate-002/candidate-provider.log",
+      "sha256": "ad6c36489772a0a59ab92a31b02405991e9e53fbcd5bb994d6faea30da5b65da",
+      "bytes": 9597
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/observations/runtime-001/qualified-candidate-002/fixture-compile.log",
+      "sha256": "ea68fd0df5111bedf393c78b51ff448e5fa000510b20f47bd68163e313ebc849",
+      "bytes": 8602
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/observations/runtime-001/qualified-candidate-002/incumbent-offline.log",
+      "sha256": "d7194e34206956278ad690431ed88b951280c04149ad5c511f58a9247d089aff",
+      "bytes": 1363
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/observations/runtime-001/qualified-candidate-002/source-offline.log",
+      "sha256": "9038bfaf189e6633339cb2553696472bfef88b94c466b968f194cf29c0d67518",
+      "bytes": 65180
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/qualify_memory.py",
+      "sha256": "bb9c860296cc0b4450863cbd25a864a1b6a6b844164a0a4d5e8cf8ad77857cae",
+      "bytes": 14288
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/tooling/src/com/synexia/rewrite/memory/M3RecoveryMemory.java",
+      "sha256": "0a9b8bfbd7f2c5ed59f1be423b7cdaea818ad22d1feb015eb9b2b22c78b0192f",
+      "bytes": 17861
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/tooling/src/com/synexia/rewrite/memory/M3RecoveryMemoryTest.java",
+      "sha256": "b27e96e73af86cb12cf453a0b4f27b49bdae24073aa9e435061b177d02969a78",
+      "bytes": 11573
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/tooling/src/com/synexia/rewrite/sealed/SealHash.java",
+      "sha256": "316da9bf8b642f9d8ad9e055328aec0f70ddfe0f63c4649d5dc35d062fd7a11c",
+      "bytes": 1859
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/phases.tsv",
+      "sha256": "ffe6296cc10ad0e2a8ce31f512c4bcf57fca91ca9baf291b0987d5b8b23bf18a",
+      "bytes": 274
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/pom.xml",
+      "sha256": "6e90a398e126045ca7f8cbbc5865ccd028faa135fbc5b6d4b2814b57bbb0087c",
+      "bytes": 4028
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/.github/workflows/m3-ast-real-providers-20261019.yml",
+      "sha256": "29154a6605ad4bd1ecac65a980a0f70bb9f88d61805295ad698ec965c9ac6d57",
+      "bytes": 5413
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv",
+      "sha256": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+      "bytes": 995
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/m3/tooling/module-packs/parser/real-providers/README.md",
+      "sha256": "a8a65167b5b1c0d7cd6ae53cee772185d3eb3b457dd2e5ed5c49848b3be46da6",
+      "bytes": 4633
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java",
+      "sha256": "8fe4828ed449335d3ec4975b16f708ff26fa6739dad82523379cd2f7bfb6bef3",
+      "bytes": 17438
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/prepare_packet.py",
+      "sha256": "702d83b39400be766ae2728c722ea8252d46d46c5b3feca0f99a0dadb8c4326a",
+      "bytes": 7004
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/authoring-commands/author-scaffold-001.log",
+      "sha256": "b1e8c3a19f62151253a4dde94f5c0a2059616125127ffe65d675f44dbc4d1fbb",
+      "bytes": 208
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/authoring-commands/parser-snapshot-001.log",
+      "sha256": "cd05061ae5c555b1e04972df4935900db4ac25fc5e39ab704d52d4c1ce446572",
+      "bytes": 149
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/authoring-commands/prepare-001.log",
+      "sha256": "4ab0b1efef8e20b845b50311a573d442d408ca68790f03bbf7ca59a4de63f93c",
+      "bytes": 177
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/authoring-commands/qualify-receiver-002.log",
+      "sha256": "4185103d895d1d2a39b71830c907ede1849510120870d9c165a8d4a33bd7304f",
+      "bytes": 92
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/authoring-commands/qualify-sdk-001.log",
+      "sha256": "57c865c90845f84e62bb09c4d287c5e031cbfc6f49cc0caa454bb537496618a3",
+      "bytes": 303
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/authoring-commands/qualify-sdk-002.log",
+      "sha256": "32cb8d9eff0db381fa567cf19a4fd395b7055b24cc516ccb196078c730d15209",
+      "bytes": 304
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/authoring-commands/select-successor-002.log",
+      "sha256": "5203137e905111c187b8f49d66ad6d4bbe717bcdaf19ff2e34a259bd4e244e67",
+      "bytes": 1331
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/memory-conformance-001/INPUTS_AND_COMMANDS.json",
+      "sha256": "f8e76b0f0e81c96da7ab23c7349902c29125744ac1dd0dc828214e59bf88f774",
+      "bytes": 3209
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/memory-conformance-001/RESULT.json",
+      "sha256": "47ee4cb235fc9e4e2ede51c26e2e824fbe4479654e9b49df9a564d316a08b678",
+      "bytes": 2345
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/memory-conformance-001/check.log",
+      "sha256": "4c05d45f6edca00263b3cc6bc8f5be3f01402e7867294b88ce1dff02d9078af5",
+      "bytes": 112
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/memory-conformance-001/compile.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/memory-conformance-001/conformance.log",
+      "sha256": "df7bf5d67b2a379a3e12675814ef7685e60652dc10e78aed7f6ab77118fb3b17",
+      "bytes": 205
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/memory-conformance-001/publish-002.log",
+      "sha256": "23835d4a22fd7279a783e6116211285ead54968fad2129420e7c5175c1fc1c3d",
+      "bytes": 508
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/memory-conformance-001/publish-003.log",
+      "sha256": "ae8ab79e6b8ceb25e57f72bcfae7332d79dcc7555822915e63a70cf5f3e1e264",
+      "bytes": 232
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/memory-conformance-001/publish.log",
+      "sha256": "27080cf3f67c7059f6753cb11ee50173c396ca54d0f5b3457e7dec77865817b4",
+      "bytes": 232
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/memory-integrity-002/12b0e7d8df2b80d9a2b2493f7b8e3f54254c35ccb27266463819e4c2ad7aa511.log",
+      "sha256": "ce52a9f8ca0f2e7621adde4dfbd668a395a823f5a254d0474d86f62eb91365c4",
+      "bytes": 112
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/memory-integrity-002/7e90af9173edceb152fde014b5b74cceb30c07a62c6af7293e0b2065b628bd2b.log",
+      "sha256": "4c05d45f6edca00263b3cc6bc8f5be3f01402e7867294b88ce1dff02d9078af5",
+      "bytes": 112
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/memory-integrity-002/RESULT.json",
+      "sha256": "693cb99914e1450efbb06f8a3bd1d96d9593b325381ff63c029269aed4abaaf2",
+      "bytes": 2790
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/parser-custody-001/PARSER_CLASSPATH.txt",
+      "sha256": "2b9f41ad6c00d010f0a88366148c99fec7b83361184320f10a8b5e1ca86a2c1c",
+      "bytes": 10712
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/parser-custody-001/RESULT.json",
+      "sha256": "210af28316c581852453568f2890d6c2fc3bece0de32b0bc757fc43b0772212f",
+      "bytes": 42944
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-qualification-002/01-preflight.json",
+      "sha256": "351693d4a6448ab65e7ad78cff2527eee04a134709f91631176f9d3891f0c2bd",
+      "bytes": 2259
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-qualification-002/01-preflight.log",
+      "sha256": "96d6dabf9a1577625dbd7670da827a0ff58d8036fce20140ebdf9dbf1c668c93",
+      "bytes": 61
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-qualification-002/02-first-apply.json",
+      "sha256": "428fd89cde15254b0aaa1158b140a00f7f933211088c9f0bdd7f322584f53862",
+      "bytes": 2259
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-qualification-002/02-first-apply.log",
+      "sha256": "1cbe601b356eabae85ba1c4a362f96a916d0c7338cff62d8d51c198e95ae04db",
+      "bytes": 61
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-qualification-002/03-fixed-point.json",
+      "sha256": "7e2d4cc571fd16642d940bd07a2e4bdeec7c47c2b059bf4eb9ff63922c35439d",
+      "bytes": 2561
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-qualification-002/03-fixed-point.log",
+      "sha256": "54385b94ffb37b578f44629cdceaeb1fe593c25f8f2e6f786d2307e56bdb0419",
+      "bytes": 61
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-qualification-002/04-product-drift.json",
+      "sha256": "77951014b2e646c63242c8b3f93ad13a3d34ffeacc0fa3311556c2343a33d787",
+      "bytes": 126
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-qualification-002/04-product-drift.log",
+      "sha256": "a2af09b01e40768aa955ea2c959458dad080a31d2164928072364de6ed78587b",
+      "bytes": 611
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-qualification-002/05-symbolic-destination.json",
+      "sha256": "350a88d04ee4bbdf7dbe1d541f2cd05de04df3b6a4769ca49b2499208fe6fe2f",
+      "bytes": 184
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-qualification-002/05-symbolic-destination.log",
+      "sha256": "f23150bf6d6eb134f66736cae7f898d3f3aa3331f07587c7bdbb94638de2b28b",
+      "bytes": 956
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-qualification-002/06-emitted-drift.json",
+      "sha256": "2942751404f146b4117617e6706c217ee345b5c8f317aa3b306b86faa90a5748",
+      "bytes": 126
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-qualification-002/06-emitted-drift.log",
+      "sha256": "ba4f2db632009b6a9e7b6af62353a81af392260ee6e1f53f2e58fbda9153fda0",
+      "bytes": 610
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-qualification-002/07-owner-drift.json",
+      "sha256": "2bd989d319c9efd45406107075f891e7dfca2ab8c3b9cb8c8956b596ea6dceee",
+      "bytes": 95
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-qualification-002/07-owner-drift.log",
+      "sha256": "0238aa10992b626b2dbd276172cf6251325f247fc6c2450269c8c7c562a1d21a",
+      "bytes": 583
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-qualification-002/RESULT.json",
+      "sha256": "4f4200def8d06404642b2bf3ab2c2d5f954abc1d39955f2dc8049180ae1554c6",
+      "bytes": 14989
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-runtime-001/COMMANDS.json",
+      "sha256": "a0117e4776321fdb222153b5c06fd7918772e590f17af1ced487f24e65fb9bed",
+      "bytes": 31508
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-runtime-001/INPUTS.json",
+      "sha256": "8acd5435f2a5bb6a740041f4db469e96f242e82d48a01a681a477a1c53ef5724",
+      "bytes": 1769061
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-runtime-001/PROOF.json",
+      "sha256": "5d6ef5cfb4b94a0dde33489b3048252a5cfbd9e328ce468a8aef711aa7c9fc16",
+      "bytes": 1629
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-runtime-001/PROVIDER_ARTIFACTS.json",
+      "sha256": "08d73ec9ff2e4949d4da0c8a3673b3fb72294e79d7e375ef13a84e30a08789f7",
+      "bytes": 23451
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-runtime-001/QUALIFIER_RECEIVER_001.log",
+      "sha256": "c0e9e4e49d16a1bc71d992aea510604cc721ca4e624d23340e29e94048bb9ecb",
+      "bytes": 991
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-runtime-001/TEST-org.apache.maven.impl.model.DefaultModelBuilderTest.xml",
+      "sha256": "41300edb68dac77389152291c6a9f59e75e424971ee063bb00e1d86ac90bb790",
+      "bytes": 21686
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-runtime-001/baseline-api.log",
+      "sha256": "8d88c16267423295d6346d5d670a6d563d2d510efa47e0bf6c7c539796ebfcfe",
+      "bytes": 1896
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-runtime-001/baseline-compile.log",
+      "sha256": "33f37992d0e758910b7d3ed1220422382e0b1c7bbd5355e1e3b282cea2d7fd5f",
+      "bytes": 748
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-runtime-001/baseline-provider.log",
+      "sha256": "c754e2008f92584735c4ba789fd98af2b90a4a9c41258bb060f9708d599be6d8",
+      "bytes": 9580
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-runtime-001/candidate-api.log",
+      "sha256": "95acd3755c5c24cfc80fb839105fb93c44b2307f72ebe9e1b8d9627ebf61564a",
+      "bytes": 2151
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-runtime-001/candidate-compile.log",
+      "sha256": "bd478ebc605ae9daf9252f2f94b0b045a6e9f213f19d8ff13eac96ebfc29e272",
+      "bytes": 701
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-runtime-001/candidate-provider.log",
+      "sha256": "fa16108cc29af96781a92de82b39dd8ec0a9a0371270c53284af6234cc59d583",
+      "bytes": 9592
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-runtime-001/fixture-compile.log",
+      "sha256": "a1572fb3ce1244cd810f0e7314f9605b02441f47cf8bfbbc6f4a109a401166ba",
+      "bytes": 8582
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-runtime-001/incumbent-classpath.txt",
+      "sha256": "0e59234508b81d6197a8f057b2edeb234ad00d7a68584ace3a63cc2e8bea500d",
+      "bytes": 2612
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-runtime-001/incumbent-offline.log",
+      "sha256": "0aac677e713dbefc8f5a8543c2d08630c6e4e589428ab4bfbca2ee85c66322f6",
+      "bytes": 1343
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-runtime-001/provider-classpath.txt",
+      "sha256": "814e8e538fd9139f7b7614854141bdfe8295eff0e0b31763bc12196b308f52fd",
+      "bytes": 8121
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiver-runtime-001/source-offline.log",
+      "sha256": "c216b9f366b2fd72dbe67b6f81f1df7bd6cd06e4ff6f525e993309ac162393b5",
+      "bytes": 65180
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiving-application-001/RESULT.json",
+      "sha256": "38fd29cb70fa240e134f0c76c1b747df84c247e42eac6ae9b812fde9987be91b",
+      "bytes": 688
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiving-application-001/apply.json",
+      "sha256": "2dc8dc70a848ac077947b844082b7fbbda71442a972b357e94d6b34793c361a3",
+      "bytes": 2206
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiving-application-001/apply.log",
+      "sha256": "1cbe601b356eabae85ba1c4a362f96a916d0c7338cff62d8d51c198e95ae04db",
+      "bytes": 61
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiving-application-001/preflight.json",
+      "sha256": "272f5fb62c2398088eab373e3307e06b7061895d24eef9c0e4529063d3023e83",
+      "bytes": 2206
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiving-application-001/preflight.log",
+      "sha256": "96d6dabf9a1577625dbd7670da827a0ff58d8036fce20140ebdf9dbf1c668c93",
+      "bytes": 61
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiving-application-001/replay.json",
+      "sha256": "46e3935e15d4e8cc17d783b4d23ab24b1a61371013ea9854bdccc1992c8ef2c2",
+      "bytes": 2508
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiving-application-001/replay.log",
+      "sha256": "54385b94ffb37b578f44629cdceaeb1fe593c25f8f2e6f786d2307e56bdb0419",
+      "bytes": 61
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/receiving-application-001/source-seals.log",
+      "sha256": "e5310a03e4ab4732ff5fece7fd631ece205f644cce7c8cc08051508cc1dc6631",
+      "bytes": 254
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/CANONICAL_CSV_CORRECTION.json",
+      "sha256": "0d2db5d6e5f729e495c0391e12b4daee3e50932eb9b6447c73a8ae3836d48ec4",
+      "bytes": 52819
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/CORRECTION_OBSERVATIONS.json",
+      "sha256": "41a8e9ad675831f00f55495d064c37d98f4e8ecc619b9036ee9768e59a5f05e8",
+      "bytes": 1731
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/HANDOFF_PROVENANCE.json",
+      "sha256": "173f3f85547acd49a2984ac325077a81fa78336a08b7a2b457d5e53653a22db7",
+      "bytes": 2534
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/HANDOFF_SUCCESSOR_002.json",
+      "sha256": "9bbb4bbd2bad9c40a0eadd6837e510d114201744c3ac4d500db7ddc4f21fcbe9",
+      "bytes": 2174
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/INCUMBENT_PROVIDER_CLASSPATH.txt",
+      "sha256": "0e59234508b81d6197a8f057b2edeb234ad00d7a68584ace3a63cc2e8bea500d",
+      "bytes": 2612
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/INCUMBENT_PROVIDER_RESOLUTION.log",
+      "sha256": "43c9420931bca0421b51fef9b816b2ceceb6dc161b970115b3f66614f3a7cc55",
+      "bytes": 843
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/MODEL_BUILDER_TEST_RESULT.json",
+      "sha256": "72ec26527cc517a7c8eaaf96a012bf6946f0295439c38de448440142aad10077",
+      "bytes": 597
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/PROVIDER_ARTIFACTS.json",
+      "sha256": "f32f06a5b92d05c65f69e49b0b901e1b5a4fb570505108eb35bf5af1c1bc6c75",
+      "bytes": 24281
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/PROVIDER_CLASSPATH.txt",
+      "sha256": "814e8e538fd9139f7b7614854141bdfe8295eff0e0b31763bc12196b308f52fd",
+      "bytes": 8121
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/QUALIFIER_CANDIDATE_001.log",
+      "sha256": "63aab1f4dd4c044e2ef9f66c7f150ddf24111015bdd25e2c4ceefb5260fb8e62",
+      "bytes": 750
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/QUALIFIER_CANDIDATE_002.log",
+      "sha256": "0bd3ff7b6df39689f2c522065b7bbd12839f5dd25ac408a232899028a3af6f46",
+      "bytes": 289
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/REAL_PROVIDER_001.json",
+      "sha256": "bf26efc1f2e01b19e6bd605f59a28570fbb2bb7219e258acfd5aa58c333f074a",
+      "bytes": 136
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/REAL_PROVIDER_002.json",
+      "sha256": "2e6068156795944fd4f7ecdbb86dde050a75e9c1e881f1e63d32a1e988923155",
+      "bytes": 98
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/REAL_PROVIDER_003.json",
+      "sha256": "5dcfbbd691aed2125b148d941bd11f53c43c3d9884b93b9d1591d01195e84ee0",
+      "bytes": 270
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/REAL_PROVIDER_003_COMPARISON.json",
+      "sha256": "d185f8df5d844e57ce8bba7a0089f225870b28b711efd30ce8f3adf0ebba1ec5",
+      "bytes": 984
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/SOURCE_BUILD_001.log",
+      "sha256": "9be2ba67c828f730efea1912ee4c0851148d5c4fbdcab401f8d507066b152457",
+      "bytes": 135604
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/SOURCE_BUILD_001_INVOCATION.json",
+      "sha256": "886954c5272b7943a21251b99f2b554f085af758983c1a52489ae621d060da84",
+      "bytes": 632
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/SOURCE_BUILD_001_RESULT.json",
+      "sha256": "d7f815d3a73965c6d024480314d5f8c29d3d33dd5f5b0dbf7bac4ea726291a4b",
+      "bytes": 100
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/SOURCE_FETCH.log",
+      "sha256": "614fb92d0b2d1cf9e673457f49ff74047873fe1c4f2d08b004781dec6e44e9d1",
+      "bytes": 1311
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/SOURCE_RUNTIME_CLASSPATH.txt",
+      "sha256": "be41eef01a4a27549d82f6a6695b5a9ae413883937abb3a30cecccb886d61472",
+      "bytes": 5570
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/WORKFLOW_STRUCTURE.json",
+      "sha256": "fc3af7d87127fc5738fad051e02fd6bb019eab73849d5ee61fbe3b58d3285c30",
+      "bytes": 503
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/baseline-compile.log",
+      "sha256": "b45f7ce0179828ae30680d5b4db87a32c3d6958db863d40a036f7853698ef54f",
+      "bytes": 681
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/baseline-real-provider-001.log",
+      "sha256": "5bb026256538d647e8333679cbfae8705def9ea42f86503fbe85164ce476ce4f",
+      "bytes": 28749
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/baseline-real-provider-002.log",
+      "sha256": "a26a45de3073426d594eb27fb74380b9afb86b6807d11afde4b8061c4a112345",
+      "bytes": 9477
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/baseline-real-provider-003.log",
+      "sha256": "b99448d1fb3556da543b89c0a85403691b4d548921ebe83a3e9f51ae6eac896e",
+      "bytes": 9477
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/candidate-compile.log",
+      "sha256": "fe6716aeec8042ac4d4cf2f7216b5d8a01bde14c86043147c972e5a1130f72ea",
+      "bytes": 684
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/candidate-real-provider-002.log",
+      "sha256": "fb3bc78e12f5b4708fbe5d88fddeea62f304dad323ac1579119da6454cebf6b3",
+      "bytes": 10336
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/candidate-real-provider-003.log",
+      "sha256": "b17029d02b440a635dd78127ca9685a7196f1f923117dc394ba8b05330c2f9c3",
+      "bytes": 9489
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/probe-compile-002.log",
+      "sha256": "a9f1ae6888bd51cc26b18dac69fc8ffcfeac9d3925d0b069d01dfa6119c20d7b",
+      "bytes": 8544
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/probe-compile-003.log",
+      "sha256": "1398af31636852580d53b0a4aa896a59878297c4eb5a32a19430fc1af049912b",
+      "bytes": 8544
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/probe-compile.log",
+      "sha256": "6c6289307bec72a63c4aedf9769f9337758873e3dbdf900126f3672b90e12c02",
+      "bytes": 8540
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/source-build-001-reports/TEST-org.apache.maven.impl.model.DefaultModelBuilderTest.xml",
+      "sha256": "bca4cac85bd6a54b8af67f706f72fd9e038756080d3304691b651b5e9b978e07",
+      "bytes": 23381
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/source-build-001-reports/org.apache.maven.impl.model.DefaultModelBuilderTest-output.txt",
+      "sha256": "4c7d1d87992b24736d474d7a9b7bc2564599735422e055f1444e57f97635af81",
+      "bytes": 1532
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/evidence/source-build-001-reports/org.apache.maven.impl.model.DefaultModelBuilderTest.txt",
+      "sha256": "4907bc240414d7b4f3ee49f54f91cb5ac93bdef736d00dd4928b898fa1fd9043",
+      "bytes": 353
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/qualified-candidate-001/COMMANDS.json",
+      "sha256": "1ae2c21ae9e9ab6249790e92beac07c7dd56b5e0d3fdaaff07a44505c305ac8a",
+      "bytes": 646
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/qualified-candidate-001/INPUTS.json",
+      "sha256": "dc093e49d2945ce651562c4d08240ac1cf81b5da4e9bae6484a79661c4985406",
+      "bytes": 1769183
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/qualified-candidate-001/source-offline.log",
+      "sha256": "943e3b82bbcceead6f7985b3bd3dd7f50536e4f5ac8bd283b53448c6ae91c280",
+      "bytes": 70139
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/qualified-candidate-002/COMMANDS.json",
+      "sha256": "96a997717305ad373f9a941b4646eea36923a5454d6b765829dad92c9505b55d",
+      "bytes": 31777
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/qualified-candidate-002/INPUTS.json",
+      "sha256": "dc093e49d2945ce651562c4d08240ac1cf81b5da4e9bae6484a79661c4985406",
+      "bytes": 1769183
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/qualified-candidate-002/PROOF.json",
+      "sha256": "be3c83482551f9398bd37dfe019dadcf083a47664ae2082876bd683b35953407",
+      "bytes": 1647
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/qualified-candidate-002/PROVIDER_ARTIFACTS.json",
+      "sha256": "08d73ec9ff2e4949d4da0c8a3673b3fb72294e79d7e375ef13a84e30a08789f7",
+      "bytes": 23451
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/qualified-candidate-002/TEST-org.apache.maven.impl.model.DefaultModelBuilderTest.xml",
+      "sha256": "e89772557b677d851bf9d532e073fa6bc9126f406360856aeada75db6273eb67",
+      "bytes": 21690
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/qualified-candidate-002/baseline-api.log",
+      "sha256": "810647f8c04537a26ee736b6825844ea7a78834d5e55bce83db279cab37c88d6",
+      "bytes": 1897
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/qualified-candidate-002/baseline-compile.log",
+      "sha256": "9ea0536ec8d0b8b7b0e7dcfb20cf2912a045d48cb8163b8a8c0c006e449d3d81",
+      "bytes": 749
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/qualified-candidate-002/baseline-provider.log",
+      "sha256": "4ff2b45db119e0ab3844481f5e377bb546518ab12cd358fc75472730c7edeff0",
+      "bytes": 9585
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/qualified-candidate-002/candidate-api.log",
+      "sha256": "2a3591cc105e8d2ecd9aa14f328768cb731b33c42211634d42bcd1f62bbb0097",
+      "bytes": 2152
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/qualified-candidate-002/candidate-compile.log",
+      "sha256": "2c61bd1f76547f1fd999b072cd8a385fddb374f31a0f590a1a140c1ba4ce073b",
+      "bytes": 774
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/qualified-candidate-002/candidate-provider.log",
+      "sha256": "ad6c36489772a0a59ab92a31b02405991e9e53fbcd5bb994d6faea30da5b65da",
+      "bytes": 9597
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/qualified-candidate-002/fixture-compile.log",
+      "sha256": "ea68fd0df5111bedf393c78b51ff448e5fa000510b20f47bd68163e313ebc849",
+      "bytes": 8602
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/qualified-candidate-002/incumbent-classpath.txt",
+      "sha256": "0e59234508b81d6197a8f057b2edeb234ad00d7a68584ace3a63cc2e8bea500d",
+      "bytes": 2612
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/qualified-candidate-002/incumbent-offline.log",
+      "sha256": "d7194e34206956278ad690431ed88b951280c04149ad5c511f58a9247d089aff",
+      "bytes": 1363
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/qualified-candidate-002/provider-classpath.txt",
+      "sha256": "814e8e538fd9139f7b7614854141bdfe8295eff0e0b31763bc12196b308f52fd",
+      "bytes": 8121
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/runtime-authoring/qualified-candidate-002/source-offline.log",
+      "sha256": "9038bfaf189e6633339cb2553696472bfef88b94c466b968f194cf29c0d67518",
+      "bytes": 65180
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/PARSER_DEPENDENCIES.json",
+      "sha256": "ee8c2bc7b338d398b417703717d9262caef4f7ee9dfa31ac864758e20b49ac34",
+      "bytes": 25069
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/PARSER_DEPENDENCIES_AFTER.json",
+      "sha256": "ee8c2bc7b338d398b417703717d9262caef4f7ee9dfa31ac864758e20b49ac34",
+      "bytes": 25069
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/RESULT.json",
+      "sha256": "0626f2a962d01b73e4e11b44ee1e41a7e44beb933648904d70f509d74fba2a31",
+      "bytes": 22338
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/SOURCE_INPUTS.json",
+      "sha256": "ef29aa9dcdde2d14ea166aa22ff3608fd4f7b24ceb8194a651fa0202b3ded846",
+      "bytes": 8421
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/SOURCE_INPUTS_AFTER.json",
+      "sha256": "ef29aa9dcdde2d14ea166aa22ff3608fd4f7b24ceb8194a651fa0202b3ded846",
+      "bytes": 8421
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/SOURCE_SEALS.json",
+      "sha256": "a2952be6e6ce39e0a360b1753feac582d4a359f492436eaebf3ac4267173e66b",
+      "bytes": 3517
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/apply_receiver.py",
+      "sha256": "912c2a99dc5cfbec64beffebe8d49d8bbb77f4564aed4c1d5b66bfca962509f7",
+      "bytes": 7420
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/attribution/DependencyCustody.java",
+      "sha256": "33ac6edbd9c0f7f7989d172040c60783bb3df8786178be22370340f10c7576b7",
+      "bytes": 1273
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/attribution/expected-methods.txt",
+      "sha256": "802de98865bc229f9ed97f92d812bd3dadaeda16d5a4fdbbe1cb161d413b1c49",
+      "bytes": 473
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/phases.tsv",
+      "sha256": "6900f9db5b96253a6a9de6600ae433996aa26dbabd13dc3c1cc863decfd0348c",
+      "bytes": 312
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/pom.xml",
+      "sha256": "6e90a398e126045ca7f8cbbc5865ccd028faa135fbc5b6d4b2814b57bbb0087c",
+      "bytes": 4028
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/.github/workflows/m3-ast-real-providers-20261019.yml",
+      "sha256": "29154a6605ad4bd1ecac65a980a0f70bb9f88d61805295ad698ec965c9ac6d57",
+      "bytes": 5413
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv",
+      "sha256": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+      "bytes": 995
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/m3/tooling/module-packs/parser/real-providers/README.md",
+      "sha256": "a8a65167b5b1c0d7cd6ae53cee772185d3eb3b457dd2e5ed5c49848b3be46da6",
+      "bytes": 4633
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java",
+      "sha256": "8fe4828ed449335d3ec4975b16f708ff26fa6739dad82523379cd2f7bfb6bef3",
+      "bytes": 17438
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/prepare_packet.py",
+      "sha256": "702d83b39400be766ae2728c722ea8252d46d46c5b3feca0f99a0dadb8c4326a",
+      "bytes": 7004
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/qualify.py",
+      "sha256": "5959ac4bf5f420cec08ae709b9c513bf306715f3ca47c1dab2b2bb91399f0450",
+      "bytes": 9694
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/src/test/java/com/synexia/rewrite/M3Maven4EffectiveRecipeTest.java",
+      "sha256": "fc1fd89668aacbba4d7ca445c99c538ee699d08a39cf782c272358a14ff361fa",
+      "bytes": 31607
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/verify_sources.py",
+      "sha256": "14c78d38edf7884b9be1700639040c7d22b61fa53405204feef3ae5a6c687836",
+      "bytes": 2408
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+      "bytes": 1052
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "92cc90c46a1ca672a016a89c0d65e6909e090264ba1aa76a85b7fa333470e38b",
+      "bytes": 31505
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "3b4f7649fc3ee38df62a6dc9b318e8845da6574f7e48b4cd7a948b58e266d46f",
+      "bytes": 19983
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0",
+      "bytes": 8268
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-maven4-effective-20261021.yml",
+      "sha256": "e424370a4d3cb756828773e0e3f4351a1a5ce68c2d2933ef59f528713907281a",
+      "bytes": 1198
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-007/manifest.tsv",
+      "sha256": "0a5687725d0627798ebef5daa51948a97b8829226bcf3cecb79cb8d8b3938bf4",
+      "bytes": 201
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-007/postimage.java.txt",
+      "sha256": "0d0e529cb57618d7a790764f2fed1089c3c18865bf8169ae6f6859e8046e5191",
+      "bytes": 19825
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-008/manifest.tsv",
+      "sha256": "26298e8581ff2a0ed6cb376840fd1efad22109c16f566a2674618c80e00fcb69",
+      "bytes": 238
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-008/postimage.java.txt",
+      "sha256": "2814f6f292978b421cec2914cc48a96384cc3e926377b138559e287a005854c3",
+      "bytes": 19565
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-001/manifest.tsv",
+      "sha256": "5e9a9e11fcc86458f57729ceebc8370fb1e46bd70d44db78911565fbfabf19bd",
+      "bytes": 197
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-001/postimage.txt",
+      "sha256": "fa803e9cba2a7882f8f7f3fe90071734d6ec660aa162929ee873f20a0f7ebcb0",
+      "bytes": 7337
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-002/manifest.tsv",
+      "sha256": "1ef6ac604abbd183ce744f59e853ef4bd82e1c7cd2aed05b37404fea53eb6b46",
+      "bytes": 204
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-002/postimage.txt",
+      "sha256": "3a214a73da26b90972b9ca1c2088ee173dd8575dc2a82660f6c0ef3fa1945d7c",
+      "bytes": 1164
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-003/manifest.tsv",
+      "sha256": "4e0b3b38f2374c5c28b125e0fb99539b09fc834cc0708cb86a9af116269b19b7",
+      "bytes": 200
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-003/postimage.txt",
+      "sha256": "6fc9cb143dcc9b7f475b8b0a67bbc3dd06c9cc8911910af7ad4d10521e0b0fd5",
+      "bytes": 5445
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-004/manifest.tsv",
+      "sha256": "0ad64ff6bdcf4f4bc4631efc8b4a3861196cfd811c19fc55f0737e074bd3b7ce",
+      "bytes": 149
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-004/postimage.txt",
+      "sha256": "2ca516f609e270927621a1e17f808673bd70cf9620347fdc1a8e86e7b33a08cd",
+      "bytes": 6683
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-005/manifest.tsv",
+      "sha256": "8599caa731b0398dcef3929fab6d57eb363f922dfb4851eddbf6d44c7e5c8919",
+      "bytes": 147
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-005/postimage.txt",
+      "sha256": "4676935b501344ce535b3c49af87a2ba06ca413c0bd23bc20f3cf9fdbd95ad14",
+      "bytes": 907
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-006/manifest.tsv",
+      "sha256": "9b65488abb00a94e747be53bd9b62d0067134e9c789a5bc65ccf9a4f1c266af7",
+      "bytes": 149
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-006/postimage.txt",
+      "sha256": "9f1d5601bf227bacb431e94cfcce2efa9484fec9fdc64c656875276ca56c6cff",
+      "bytes": 13171
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/maven.log",
+      "sha256": "2baeea05a008e31f0e7504819b0df6e91014ddff948dbdd68ca90a61d03115a4",
+      "bytes": 4871
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/proof-status.tsv",
+      "sha256": "d5b0eeec50b2c52cbae2cd551b9845acb853fb4859095981e709334e3bb4544d",
+      "bytes": 36
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/surefire-reports/TEST-com.synexia.rewrite.M3Maven4EffectiveRecipeTest.xml",
+      "sha256": "deded114a9b58031d9dde762a52c439b36b75a1fd09fae1dd90ffa54694c4612",
+      "bytes": 24598
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/surefire-reports/com.synexia.rewrite.M3Maven4EffectiveRecipeTest.txt",
+      "sha256": "d19acb93103babf5ef153794f765b0886cbe603bcd9df9c34ea5d7dbbc6951de",
+      "bytes": 1656
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/PARSER_DEPENDENCIES.json",
+      "sha256": "ee8c2bc7b338d398b417703717d9262caef4f7ee9dfa31ac864758e20b49ac34",
+      "bytes": 25069
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/PARSER_DEPENDENCIES_AFTER.json",
+      "sha256": "ee8c2bc7b338d398b417703717d9262caef4f7ee9dfa31ac864758e20b49ac34",
+      "bytes": 25069
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/RESULT.json",
+      "sha256": "b5f4998aa91aa97b9b2e87a2feff682130f6d093dc8c39073d774bb14da1b8ee",
+      "bytes": 25676
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/SOURCE_INPUTS.json",
+      "sha256": "4f9f39658a100c5fb05634fb6a95967996713d773f31806ea5be3f5a5cda54e4",
+      "bytes": 8646
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/SOURCE_INPUTS_AFTER.json",
+      "sha256": "4f9f39658a100c5fb05634fb6a95967996713d773f31806ea5be3f5a5cda54e4",
+      "bytes": 8646
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/SOURCE_SEALS.json",
+      "sha256": "ea99837eeb463fbc09858de4249c77130b4ef8ddd0df3468386badab53c6fcc4",
+      "bytes": 4316
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/apply_receiver.py",
+      "sha256": "912c2a99dc5cfbec64beffebe8d49d8bbb77f4564aed4c1d5b66bfca962509f7",
+      "bytes": 7420
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/attribution/DependencyCustody.java",
+      "sha256": "33ac6edbd9c0f7f7989d172040c60783bb3df8786178be22370340f10c7576b7",
+      "bytes": 1273
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/attribution/expected-methods.txt",
+      "sha256": "802de98865bc229f9ed97f92d812bd3dadaeda16d5a4fdbbe1cb161d413b1c49",
+      "bytes": 473
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/phases.tsv",
+      "sha256": "ffe6296cc10ad0e2a8ce31f512c4bcf57fca91ca9baf291b0987d5b8b23bf18a",
+      "bytes": 274
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/pom.xml",
+      "sha256": "6e90a398e126045ca7f8cbbc5865ccd028faa135fbc5b6d4b2814b57bbb0087c",
+      "bytes": 4028
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/.github/workflows/m3-ast-real-providers-20261019.yml",
+      "sha256": "29154a6605ad4bd1ecac65a980a0f70bb9f88d61805295ad698ec965c9ac6d57",
+      "bytes": 5413
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv",
+      "sha256": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+      "bytes": 995
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/m3/tooling/module-packs/parser/real-providers/README.md",
+      "sha256": "a8a65167b5b1c0d7cd6ae53cee772185d3eb3b457dd2e5ed5c49848b3be46da6",
+      "bytes": 4633
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/preimages/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java",
+      "sha256": "8fe4828ed449335d3ec4975b16f708ff26fa6739dad82523379cd2f7bfb6bef3",
+      "bytes": 17438
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/prepare_packet.py",
+      "sha256": "702d83b39400be766ae2728c722ea8252d46d46c5b3feca0f99a0dadb8c4326a",
+      "bytes": 7004
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/qualify.py",
+      "sha256": "85a20df76beaf5582e5e33e5ec10ec68deadd7f349749f28a2f6dac82874c500",
+      "bytes": 9727
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/select_supported_successor.py",
+      "sha256": "d83227f2e4cc48ebd5dc1c7c34467550644ed6d406eedb9b9b16de4543c9e435",
+      "bytes": 8327
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/src/test/java/com/synexia/rewrite/M3Maven4EffectiveRecipeTest.java",
+      "sha256": "01d09f8818c6948e287475aa3204640bfece76794f320cc3fc8b366d17a85544",
+      "bytes": 32207
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/verify_sources.py",
+      "sha256": "14c78d38edf7884b9be1700639040c7d22b61fa53405204feef3ae5a6c687836",
+      "bytes": 2408
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+      "bytes": 1052
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "92cc90c46a1ca672a016a89c0d65e6909e090264ba1aa76a85b7fa333470e38b",
+      "bytes": 31505
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "3b4f7649fc3ee38df62a6dc9b318e8845da6574f7e48b4cd7a948b58e266d46f",
+      "bytes": 19983
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "sha256": "d2cd6bb4d800878b9f512bf436bf4e38cf73b37676235832e1f68840cfe895c0",
+      "bytes": 8268
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-maven4-effective-20261021.yml",
+      "sha256": "061dc4bc149780a8b2722f839b8bbf48b6e0b49c4505511ab09a84fb937be935",
+      "bytes": 1092
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-007/manifest.tsv",
+      "sha256": "0a5687725d0627798ebef5daa51948a97b8829226bcf3cecb79cb8d8b3938bf4",
+      "bytes": 201
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-007/postimage.java.txt",
+      "sha256": "0d0e529cb57618d7a790764f2fed1089c3c18865bf8169ae6f6859e8046e5191",
+      "bytes": 19825
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-008/manifest.tsv",
+      "sha256": "26298e8581ff2a0ed6cb376840fd1efad22109c16f566a2674618c80e00fcb69",
+      "bytes": 238
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-008/postimage.java.txt",
+      "sha256": "2814f6f292978b421cec2914cc48a96384cc3e926377b138559e287a005854c3",
+      "bytes": 19565
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-001/manifest.tsv",
+      "sha256": "5e9a9e11fcc86458f57729ceebc8370fb1e46bd70d44db78911565fbfabf19bd",
+      "bytes": 197
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-001/postimage.txt",
+      "sha256": "fa803e9cba2a7882f8f7f3fe90071734d6ec660aa162929ee873f20a0f7ebcb0",
+      "bytes": 7337
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-002/manifest.tsv",
+      "sha256": "1ef6ac604abbd183ce744f59e853ef4bd82e1c7cd2aed05b37404fea53eb6b46",
+      "bytes": 204
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-002/postimage.txt",
+      "sha256": "3a214a73da26b90972b9ca1c2088ee173dd8575dc2a82660f6c0ef3fa1945d7c",
+      "bytes": 1164
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-003/manifest.tsv",
+      "sha256": "4e0b3b38f2374c5c28b125e0fb99539b09fc834cc0708cb86a9af116269b19b7",
+      "bytes": 200
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-003/postimage.txt",
+      "sha256": "6fc9cb143dcc9b7f475b8b0a67bbc3dd06c9cc8911910af7ad4d10521e0b0fd5",
+      "bytes": 5445
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-004/manifest.tsv",
+      "sha256": "0ad64ff6bdcf4f4bc4631efc8b4a3861196cfd811c19fc55f0737e074bd3b7ce",
+      "bytes": 149
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-004/postimage.txt",
+      "sha256": "2ca516f609e270927621a1e17f808673bd70cf9620347fdc1a8e86e7b33a08cd",
+      "bytes": 6683
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-005/manifest.tsv",
+      "sha256": "8599caa731b0398dcef3929fab6d57eb363f922dfb4851eddbf6d44c7e5c8919",
+      "bytes": 147
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-005/postimage.txt",
+      "sha256": "4676935b501344ce535b3c49af87a2ba06ca413c0bd23bc20f3cf9fdbd95ad14",
+      "bytes": 907
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-006/manifest.tsv",
+      "sha256": "9b65488abb00a94e747be53bd9b62d0067134e9c789a5bc65ccf9a4f1c266af7",
+      "bytes": 149
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-006/postimage.txt",
+      "sha256": "9f1d5601bf227bacb431e94cfcce2efa9484fec9fdc64c656875276ca56c6cff",
+      "bytes": 13171
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/maven.log",
+      "sha256": "03bc85ec6c1b58a4fe2810ad40c2a2b1dbc1bd031defddbeccdb3afc1cb6388f",
+      "bytes": 2256
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/named-recipe.yml",
+      "sha256": "061dc4bc149780a8b2722f839b8bbf48b6e0b49c4505511ab09a84fb937be935",
+      "bytes": 1092
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/phase-receipts/m3-maven4-effective-20261021-001.tsv",
+      "sha256": "1c58646c626c73c5dfa060c0dcf2925b4e93de7289507ab090a0b5d7c2ad343c",
+      "bytes": 434
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/phase-receipts/m3-maven4-effective-20261021-003.tsv",
+      "sha256": "44f79c82b4e2de18030d5e1dc0aae37debe8411dd0cc5b856c4a5b6ec64aa59c",
+      "bytes": 434
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/phase-receipts/m3-maven4-effective-20261021-004.tsv",
+      "sha256": "e0d4fc5429d672a88cddd4bc55cff6ad99850c2fca12e0c0765ce52611c05e85",
+      "bytes": 434
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/phase-receipts/m3-maven4-effective-20261021-005.tsv",
+      "sha256": "7fbace05c9f4864d139e566595c0f6a811758e38839f05bd13e335f587035a22",
+      "bytes": 434
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/phase-receipts/m3-maven4-effective-20261021-006.tsv",
+      "sha256": "dbf4bcaf7d06a7eba9b1bdd2f7755b87341120ad6532e0f702e46d9ccf0ce565",
+      "bytes": 434
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/phase-receipts/m3-maven4-effective-20261021-007.tsv",
+      "sha256": "84f2b12b4735526b52e711a0d0a3ee4557b1a5ebc7145452cbf8a24c50a66557",
+      "bytes": 434
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/phase-receipts/m3-maven4-effective-20261021-008.tsv",
+      "sha256": "bfc40df45833c4584f8a287fbff6236d6b839e6202fa56d5beb4b470c8310614",
+      "bytes": 434
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/proof-status.tsv",
+      "sha256": "eb4a6142a256a125715b3a0d5239cd718c63d59f08d44b9116dd3fed639bd433",
+      "bytes": 90
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/receiver/.github/workflows/m3-ast-real-providers-20261019.yml",
+      "sha256": "fa803e9cba2a7882f8f7f3fe90071734d6ec660aa162929ee873f20a0f7ebcb0",
+      "bytes": 7337
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/receiver/m3/tooling/module-packs/parser/real-providers/README.md",
+      "sha256": "6fc9cb143dcc9b7f475b8b0a67bbc3dd06c9cc8911910af7ad4d10521e0b0fd5",
+      "bytes": 5445
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/receiver/m3/tooling/module-packs/parser/real-providers/maven4/README.md",
+      "sha256": "2ca516f609e270927621a1e17f808673bd70cf9620347fdc1a8e86e7b33a08cd",
+      "bytes": 6683
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/receiver/m3/tooling/module-packs/parser/real-providers/maven4/pom.xml",
+      "sha256": "4676935b501344ce535b3c49af87a2ba06ca413c0bd23bc20f3cf9fdbd95ad14",
+      "bytes": 907
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/receiver/m3/tooling/module-packs/parser/real-providers/maven4/verify.py",
+      "sha256": "9f1d5601bf227bacb431e94cfcce2efa9484fec9fdc64c656875276ca56c6cff",
+      "bytes": 13171
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/receiver/m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3Maven4ProviderContract.java",
+      "sha256": "0d0e529cb57618d7a790764f2fed1089c3c18865bf8169ae6f6859e8046e5191",
+      "bytes": 19825
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/receiver/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java",
+      "sha256": "2814f6f292978b421cec2914cc48a96384cc3e926377b138559e287a005854c3",
+      "bytes": 19565
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/recipe-proof.tsv",
+      "sha256": "0aeeb32e19bc106a67d526fc260cc9fb34e641e336b31cd5517d686701b43a39",
+      "bytes": 2200
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/surefire-reports/TEST-com.synexia.rewrite.M3Maven4EffectiveRecipeTest.xml",
+      "sha256": "83eabce837e4e654da7899d9b3ed840d73a947abf8e546985dc1a29f7c331441",
+      "bytes": 23132
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-002-offline/surefire-reports/com.synexia.rewrite.M3Maven4EffectiveRecipeTest.txt",
+      "sha256": "e1b42c05f8a9f3c53a998f1b14fe9cf8c88a50160dec48c467eb5af79d4fd4b6",
+      "bytes": 344
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/EVIDENCE_INTAKE.json",
+      "sha256": "e3028c88d3b7e04aa2eb7cadf37e224a66e59cd3bec89ccc87f42275ffc00d83",
+      "bytes": 25813
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/RECEIVER_EVIDENCE_INTAKE.json",
+      "sha256": "16b55dafdf625fbd4e0ac43ddb310b6602cb56627bc6c4b45a38b81538f565e4",
+      "bytes": 8045
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/RECIPE_LINEAGE.json",
+      "sha256": "eeae672bef46fd305b725d7cb49ac2cb630079bde1dc61e92d45a22eeb2b86af",
+      "bytes": 6782
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/SOURCE_AND_RIGHTS.json",
+      "sha256": "2330694cb081c7189f0c8bf6b9e8376adb0c2aeb508805a262d28a0aa2b13700",
+      "bytes": 8202
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/adaptations/M3Maven4EffectiveRecipeTest.java.diff",
+      "sha256": "0966b722f46d2c793b4ea9688d1a23bddc3c9a64373a3b6eb8c7971404a55f27",
+      "bytes": 3553
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/adaptations/apply_receiver.py.diff",
+      "sha256": "6a9e8962b76dfa5b7565429c98e65e0b91c6c07b606c5919e23b281909c303d8",
+      "bytes": 1091
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/adaptations/pom.xml.diff",
+      "sha256": "05560102b31c9d2959da04cfe4b78aba5caf6473f0df90745eaab268c461f5a1",
+      "bytes": 1299
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/adaptations/prepare_packet.py.diff",
+      "sha256": "3a7ce0533c596a1a100cee949691d7dfc2bd8488c10e654beb5be59bc63517fe",
+      "bytes": 2219
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/adaptations/qualify.py.diff",
+      "sha256": "69dd85dc0952902895459c08ecdfddf319f2435ca6b8d9d9ee06b9fa23d94d94",
+      "bytes": 2475
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/adaptations/verify_sources.py.diff",
+      "sha256": "af5d6f966cd05f8b3892f4f7827829eb5f06eb4bba15e519d73ec3e488a29bde",
+      "bytes": 927
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/donors/core-copier-qualification.py",
+      "sha256": "1c11d02ac383744c2952eca715b72272772226c0c07bd73565e7b01c4ff6e05d",
+      "bytes": 5181
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/donors/integrated-sdk-003/apply_receiver.py",
+      "sha256": "199b76317afc66b4ff61f70a626ad01ba4e2d678bfd3def95ff336d249a2b78d",
+      "bytes": 7338
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/donors/integrated-sdk-003/pom.xml",
+      "sha256": "556a8edbd5236692ef4b059b586c63d30a71cd8a5676d63ce020fa14a00d7561",
+      "bytes": 4045
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/donors/integrated-sdk-003/prepare_packet.py",
+      "sha256": "6a7f09ecff0cfeb9a515e817a23e22b82f87241371ac478c7d6c403c9f74583c",
+      "bytes": 6927
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/donors/integrated-sdk-003/qualify.py",
+      "sha256": "82fad5f4cffc8f4ad39c7c9baca543cc18bad12fe6f5a3d0b799cdf7fd116a4a",
+      "bytes": 9709
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/donors/integrated-sdk-003/src/test/java/com/synexia/rewrite/M3IntegratedRefinementRecipeTest.java",
+      "sha256": "d477f820c8bf4712b36d4a1d9002b2fa82a62a88175c1f84cd7fd03e978eefe0",
+      "bytes": 31463
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/donors/integrated-sdk-003/verify_sources.py",
+      "sha256": "603a47418a7dbd6bd38708bff31bce26b4b4a70e3bdc2d85a7d829395e24b445",
+      "bytes": 2324
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/qualification-tools/append_receiver_evidence.py",
+      "sha256": "9c7df630047b3bae983b4cfdabd2d70adbfb79e0e5abc474ad5426879f379877",
+      "bytes": 2826
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/qualification-tools/author_packet.py",
+      "sha256": "1a1597f629b798373d303f1122529790d6efd257b47ff1bb29b5a67932e3874d",
+      "bytes": 7816
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/qualification-tools/curate_evidence.py",
+      "sha256": "80d82a347e882a41ac614ca3d646dddeee8d8ee8d4a749211e0f3b9deb044097",
+      "bytes": 6282
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/qualification-tools/qualify_receiver.py",
+      "sha256": "3f49d45ac2b5ab4e15441a06181dd4d81859ffac45b2816d6facd69b28eb194f",
+      "bytes": 5665
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/qualification-tools/snapshot_parser_dependencies.py",
+      "sha256": "1635210e4b30a760548ac0f9fdce4ba2c574c6ceaa64cc6e5b505dbf2dcc5ec4",
+      "bytes": 4230
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/successor-002/HANDOFF-001.json",
+      "sha256": "3e66250f18894ed3704ccd68c9d6227d399ffa8eee787fd7c719ed94e70d7164",
+      "bytes": 3329
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/successor-002/HANDOFF-002.json",
+      "sha256": "359b2929cce0028a8f15297211159613b599d6db5e2a9767bc18e667f1bc93f6",
+      "bytes": 2903
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/successor-002/LINEAGE.json",
+      "sha256": "9b62af9b8c77ebfcf82f0a0d3216a5a4e0a55fdec2de0dce2be88ed9cb7e5a91",
+      "bytes": 1944
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/successor-002/M3Maven4EffectiveRecipeTest.java.diff",
+      "sha256": "6757fbda6273968a83219d633444f22f7bf370bbb2f3d9d530b980fee0cf1a73",
+      "bytes": 1975
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/successor-002/SELECTION.json",
+      "sha256": "fa9d1683c0c050dc3076fd5887b1d16013dda4fd6950d48616da7be098c8ebae",
+      "bytes": 1383
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/successor-002/predecessor-SOURCE_SEALS.json",
+      "sha256": "a2952be6e6ce39e0a360b1753feac582d4a359f492436eaebf3ac4267173e66b",
+      "bytes": 3517
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/successor-002/predecessor-m3-maven4-effective-20261021.yml",
+      "sha256": "e424370a4d3cb756828773e0e3f4351a1a5ce68c2d2933ef59f528713907281a",
+      "bytes": 1198
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/successor-002/predecessor-phases.tsv",
+      "sha256": "6900f9db5b96253a6a9de6600ae433996aa26dbabd13dc3c1cc863decfd0348c",
+      "bytes": 312
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/provenance/successor-002/qualify.py.diff",
+      "sha256": "90dd3b73cee474f49ecded3babb4557165d6bf1805575517629008ac21046b37",
+      "bytes": 643
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/qualify.py",
+      "sha256": "85a20df76beaf5582e5e33e5ec10ec68deadd7f349749f28a2f6dac82874c500",
+      "bytes": 9727
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/select_supported_successor.py",
+      "sha256": "d83227f2e4cc48ebd5dc1c7c34467550644ed6d406eedb9b9b16de4543c9e435",
+      "bytes": 8327
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/src/test/java/com/synexia/rewrite/M3Maven4EffectiveRecipeTest.java",
+      "sha256": "01d09f8818c6948e287475aa3204640bfece76794f320cc3fc8b366d17a85544",
+      "bytes": 32207
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/verify_sources.py",
+      "sha256": "14c78d38edf7884b9be1700639040c7d22b61fa53405204feef3ae5a6c687836",
+      "bytes": 2408
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-maven4-effective-20261021.yml",
+      "sha256": "061dc4bc149780a8b2722f839b8bbf48b6e0b49c4505511ab09a84fb937be935",
+      "bytes": 1092
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-007/manifest.tsv",
+      "sha256": "0a5687725d0627798ebef5daa51948a97b8829226bcf3cecb79cb8d8b3938bf4",
+      "bytes": 201
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-007/postimage.java.txt",
+      "sha256": "0d0e529cb57618d7a790764f2fed1089c3c18865bf8169ae6f6859e8046e5191",
+      "bytes": 19825
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-008/manifest.tsv",
+      "sha256": "26298e8581ff2a0ed6cb376840fd1efad22109c16f566a2674618c80e00fcb69",
+      "bytes": 238
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-maven4-effective-20261021-008/postimage.java.txt",
+      "sha256": "2814f6f292978b421cec2914cc48a96384cc3e926377b138559e287a005854c3",
+      "bytes": 19565
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-001/manifest.tsv",
+      "sha256": "5e9a9e11fcc86458f57729ceebc8370fb1e46bd70d44db78911565fbfabf19bd",
+      "bytes": 197
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-001/postimage.txt",
+      "sha256": "fa803e9cba2a7882f8f7f3fe90071734d6ec660aa162929ee873f20a0f7ebcb0",
+      "bytes": 7337
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-002/manifest.tsv",
+      "sha256": "1ef6ac604abbd183ce744f59e853ef4bd82e1c7cd2aed05b37404fea53eb6b46",
+      "bytes": 204
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-002/postimage.txt",
+      "sha256": "3a214a73da26b90972b9ca1c2088ee173dd8575dc2a82660f6c0ef3fa1945d7c",
+      "bytes": 1164
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-003/manifest.tsv",
+      "sha256": "4e0b3b38f2374c5c28b125e0fb99539b09fc834cc0708cb86a9af116269b19b7",
+      "bytes": 200
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-003/postimage.txt",
+      "sha256": "6fc9cb143dcc9b7f475b8b0a67bbc3dd06c9cc8911910af7ad4d10521e0b0fd5",
+      "bytes": 5445
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-004/manifest.tsv",
+      "sha256": "0ad64ff6bdcf4f4bc4631efc8b4a3861196cfd811c19fc55f0737e074bd3b7ce",
+      "bytes": 149
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-004/postimage.txt",
+      "sha256": "2ca516f609e270927621a1e17f808673bd70cf9620347fdc1a8e86e7b33a08cd",
+      "bytes": 6683
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-005/manifest.tsv",
+      "sha256": "8599caa731b0398dcef3929fab6d57eb363f922dfb4851eddbf6d44c7e5c8919",
+      "bytes": 147
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-005/postimage.txt",
+      "sha256": "4676935b501344ce535b3c49af87a2ba06ca413c0bd23bc20f3cf9fdbd95ad14",
+      "bytes": 907
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-006/manifest.tsv",
+      "sha256": "9b65488abb00a94e747be53bd9b62d0067134e9c789a5bc65ccf9a4f1c266af7",
+      "bytes": 149
+    },
+    {
+      "repository_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-maven4-effective-20261021-006/postimage.txt",
+      "sha256": "9f1d5601bf227bacb431e94cfcce2efa9484fec9fdc64c656875276ca56c6cff",
+      "bytes": 13171
+    }
+  ],
+  "publication_metadata_may_append_without_changing_listed_bytes": true
+}

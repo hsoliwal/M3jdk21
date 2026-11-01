@@ -34,7 +34,7 @@ static jint m3_root(JNIEnv *env, jintArray parents, jint size, jint index) {
     return -1;
 }
 
-JNIEXPORT jbooleanArray JNICALL Java_com_m3_collections_M3DisjointIndex_connectedNative(
+JNIEXPORT jbooleanArray JNICALL Java_jdk_m3_collections_M3DisjointIndex_connectedNative(
         JNIEnv *env, jclass owner, jintArray parents, jint logicalSize,
         jintArray left, jintArray right) {
     (void)owner;

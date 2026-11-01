@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-# This bounded tool builds patched Java21 class sources; it does NOT build the full M3JDK21 image.
+# This bounded tool builds patched Java21 class sources; it does NOT build the full M3JDK 21 image.
 set -euo pipefail
 
 root="$(cd "$(dirname "$0")/../../.." && pwd)"
@@ -24,7 +24,7 @@ if [[ "$(git -C "$root" hash-object "$src/jdk/internal/mindex/M3CollectionMaskCo
   exit 1
 fi
 if [[ "$(git -C "$root" hash-object "$test/jdk/internal/mindex/M3CollectionMaskCompactorPrefixTest.java")" \
-       != "d720912f0f57bcde9fc07a05f31869a19f3452eb" ]]; then
+       != "6f3113ad8624004dbe617aa52c96b7a04dfc5ce4" ]]; then
   echo "HOLD: original jtreg oracle source drift" >&2
   exit 1
 fi

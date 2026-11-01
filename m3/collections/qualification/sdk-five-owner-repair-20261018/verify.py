@@ -7,7 +7,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
-RES = HERE / "recipe/src/main/resources/com/synexia/rewrite/m3-five-sdk-owner-repair-20261018"
+RES = HERE / "recipe/src/main/resources/jdk/internal/m3/rewrite/m3-five-sdk-owner-repair-20261018"
 
 def checked(path: Path) -> bytes:
     if not path.is_file() or path.is_symlink():
@@ -47,16 +47,16 @@ def run() -> None:
     for name in ("m3ArrayList(", "indexedTable(", "indexedMultiValueMap(", "longRangeSet("):
         if sdk.count(name) != 1: raise ValueError("required M3 factory missing: " + name)
     owners = {
-        "M3ArrayList.java": "250905f67429fbedfb4d6f652ea6e90a516cb59c",
+        "M3ArrayList.java": "23977d3c314a52e82acadee97daa7d3d659c2601",
         "M3IndexedTable.java": "5dc062e138b273382b4f161fb4c9869d90558390",
-        "M3IndexedMultiValueMap.java": "9035b651c5aab1f5850009372e2432ef196efc79",
-        "M3LongRangeSet.java": "5dbc2ec9317c79d801bb4c312f2c0b7ffad6ffbd",
+        "M3IndexedMultiValueMap.java": "1eb0a1c600997e7fba6bf0156e197f83c16d5b09",
+        "M3LongRangeSet.java": "8f3ed8efe75e7eb4744b35537192cf1a8b169423",
         "M3IndexMaskCompactor.java": "5def05aad11dbe3ab7bebe27a3c11b5d241c9a7a"
     }
     for name,pin in owners.items():
-        if blob(checked(ROOT / "m3/collections/src/main/java/com/m3/collections" / name)) != pin:
+        if blob(checked(ROOT / "m3/collections/src/main/java/jdk/m3/collections" / name)) != pin:
             raise ValueError("existing array/mask owner was changed: " + name)
-    if blob(checked(ROOT / "m3/collections/src/main/native/collections/m3_index_mask_compactor.c")) != "a073e64cb12c59eb81247421cf3efe0628004142":
+    if blob(checked(ROOT / "m3/collections/src/main/native/collections/m3_index_mask_compactor.c")) != "8c2ff6e02369a2632bfdd3534d01259e9c86e21c":
         raise ValueError("native ABI source changed")
     print("PASS exact SDK source: 3 generated targets, 5 original M3 owners, unchanged JNI C")
 

@@ -12,8 +12,8 @@ AUDIT = HERE.parents[1]
 ROOT = AUDIT.parent
 COMMIT = "09075810b55229662329a158923287e8a7118f86"
 TREE = "bba8647ea80d1cb4101394b4c0fc5a97f0b8eb52"
-MAP_SHA = "9c96a0f6f7cc0f9b9d3e91fc3a42ef8e4eab212726fccd5e63e483f1acd7dfb1"
-MAP_GIT = "466f7c14d3fbe852bf9e2d1dc3e410e8b38a9ee2"
+MAP_SHA = "e76133a4d1bb472dfc88a41e8d8560d5ac0e08ba4d227b3b6c8fbd95915e6ebc"
+MAP_GIT = "44c966eca8e52d8c86925478d5b3ffbb45882e82"
 MAP = "m3/docs/name-mapping.json"
 
 
@@ -51,7 +51,7 @@ def main():
     assert len(current["migration"]["records"]) == 55 and current["migration"]["records"][:52] == old["migration"]["records"]
     assert len(current["mappings"]) == 34 and current["mappings"][:25] == old["mappings"]
     assert len(current["migration"]["gates"]) == 20 and current["migration"]["gates"] == old["migration"]["gates"]
-    assert [row["id"] for row in current["migration"]["records"][52:]] == ["synexia.regex.mr", "synexia.regex.rxm", "synexia.regex.rxa"]
+    assert [row["id"] for row in current["migration"]["records"][52:]] == ["m3.regex.mr", "m3.regex.rxm", "m3.regex.rxa"]
     added_keys = {"donor_artifact_policy", "porting_invariant", "family_name_mapping"}
     assert set(current) - set(old) == added_keys and set(old) <= set(current)
     for key in old:

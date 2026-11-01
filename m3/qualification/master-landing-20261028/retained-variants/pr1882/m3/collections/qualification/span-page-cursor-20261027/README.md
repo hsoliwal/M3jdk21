@@ -9,10 +9,10 @@ recipes are NOT imported into the product.
 ## Exact source postimages
 | Product owner | Before Git blob | Received Git blob |
 | --- | --- | --- |
-| `m3/collections/src/main/native/collections/m3_span_index_jni.c` | `3dccc1694fb8dd7c3148bc7f59b1cc4391d37077` | `ebfc70cb030aa62a0197caf6dcb4990a37820e45` |
-| `m3/collections/src/test/java/com/m3/collections/M3SpanIndexSelfTest.java` | `2def1962e7db62293ef4c21d6b5206b7563b3b8f` | `521a80c189cb12722d2836d7d413a2e398ff72c5` |
+| `m3/collections/src/main/native/collections/m3_span_index_jni.c` | `3dccc1694fb8dd7c3148bc7f59b1cc4391d37077` | `915aef08738b72c605187cf8100c5cd92a21740d` |
+| `m3/collections/src/test/java/jdk/m3/collections/M3SpanIndexSelfTest.java` | `44cc8f8fc4fa14cec8a149c0b7f4fc36547cf890` | `da14a54e519d3d8c41db586d8a489d14b5454b0e` |
 | `m3/collections/src/test/native/m3_span_page_cursor_contract.c` | ABSENT | `3025ce6129fbba4e4b97291cb82cd61e9a655c64` |
-| `.github/workflows/m3-span-page-cursor-java21.yml` | ABSENT | `b6134167fc544498947996631c868b8592ed64e4` |
+| `.github/workflows/m3-span-page-cursor-java21.yml` | ABSENT | `0ed49be15679d63ec7461248b30438e03f8602e2` |
 
 The Synexia canonical `M3HashPinnedTextSnapshotRecipe` C/CI crate and
 `M3HashPinnedJavaSnapshotRecipe` test crate pin UTF-8 SHA-256 preimages

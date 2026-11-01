@@ -1,6 +1,6 @@
 {
   "status": "FAIL_INHERITED_OBSERVATIONS",
-  "target": "com.m3.collections.M3TreeMap via EmptyRootLookupOracle",
+  "target": "jdk.m3.collections.M3TreeMap via EmptyRootLookupOracle",
   "contractSha256": "4bbfaa6c501bb112ed6ff06a61706ce1e7745a5f9b9b4a2c7d6c8004bd8f135b",
   "sourceBlind": true,
   "sourceInspected": false,

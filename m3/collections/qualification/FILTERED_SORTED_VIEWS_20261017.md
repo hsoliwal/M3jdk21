@@ -13,7 +13,7 @@ replaced and no String-phase advancement.
   `com.synexia.m3.Jdk21FilteredSortedViews` delegated to
   `M3HashPinnedJavaSnapshotRecipe` and `M3HashPinnedTextSnapshotRecipe`.
 - Java postimage manifest SHA-256:
-  `828e24b44e4d0b98c6819bb9dd983d71084ae0661e1d81fe90bd0dd286c50ede`.
+  `e6e70eb2d1ec267edb8bf6647881d157453350702f32f36828c13e82c178454b`.
 - Metadata/CI text-recipe manifest SHA-256:
   `4bcb1eb0b9d032ffb9ba60c09817440b7c56d7f4ead4e851190f1754828e787f`.
 

@@ -1,0 +1,238 @@
+{
+  "schema": 1,
+  "executable": "C:/ProgramData/chocolatey/lib/maven/apache-maven-3.9.14/bin/mvn.CMD",
+  "argv": [
+    "-o",
+    "-B",
+    "-f",
+    "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\pom.xml",
+    "-Dtest=SynexiaCanonicalFamilyPolicyTest,SynexiaImportPlanTest,SynexiaImporterTest",
+    "-DargLine=-Xms16m -Xmx256m -XX:MaxMetaspaceSize=192m -XX:ActiveProcessorCount=2 -Djava.io.tmpdir=K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-temp",
+    "test"
+  ],
+  "pid": 31860,
+  "terminal": true,
+  "exitCode": 0,
+  "logSha256": "890dd987a23bc3608ac889853657e02b75d61df5dc9083e80a17933dd2337aaa",
+  "sourceBefore": [
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaCanonicalFamilyPolicy.java",
+      "sha256": "c1762968dfe62a18706f2b6092f0a02341fafcc904fa6bec96643ef8cc480e5d"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportCli.java",
+      "sha256": "5faebe932a52d45ba0ac5b1db134f4f90b2890f2b38691c4db657b62a7c19d3b"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImporter.java",
+      "sha256": "3f2993ed0da9dca3efaa1317386556b165cb61db0c8d8469dde1931bfc3a2127"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportManifest.java",
+      "sha256": "65a27310e7401fc8f6f3032ed492b8d864aecab7b2713fd7e51d96d8f7470ea0"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlan.java",
+      "sha256": "cb8822f92db1c65c695d724013c47225d37b75ed766b2c9d197c562004b4add6"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlanCli.java",
+      "sha256": "f2de5997c6ce5c3a0b79bcb0fff8c18cdb0d6d33159fecd5d4aa3b3430301af0"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\test\\java\\com\\m3\\synexia\\importer\\SynexiaCanonicalFamilyPolicyTest.java",
+      "sha256": "b7e396f4bd546c54a69886c9688cf1de828ffaccc174075bf4db2ac5635b8817"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\test\\java\\com\\m3\\synexia\\importer\\SynexiaImporterTest.java",
+      "sha256": "8f9b21d5efc7f7407d8f0dafe24c67d7c5f337310ce2ec5b47d54a4fb130071b"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\test\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlanTest.java",
+      "sha256": "a85d673f3a98b22a3a1514f905503037391c4b7686533869c792dcf8faa73e1a"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\test\\java\\com\\m3\\synexia\\importer\\SynexiaSeedSnapshotTest.java",
+      "sha256": "92a37e6eb123b0c2018e055db41f2e85ebf07a008d5c72fe4a2b3c23c8275f1d"
+    }
+  ],
+  "sourceAfter": [
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaCanonicalFamilyPolicy.java",
+      "sha256": "c1762968dfe62a18706f2b6092f0a02341fafcc904fa6bec96643ef8cc480e5d"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportCli.java",
+      "sha256": "5faebe932a52d45ba0ac5b1db134f4f90b2890f2b38691c4db657b62a7c19d3b"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImporter.java",
+      "sha256": "3f2993ed0da9dca3efaa1317386556b165cb61db0c8d8469dde1931bfc3a2127"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportManifest.java",
+      "sha256": "65a27310e7401fc8f6f3032ed492b8d864aecab7b2713fd7e51d96d8f7470ea0"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlan.java",
+      "sha256": "cb8822f92db1c65c695d724013c47225d37b75ed766b2c9d197c562004b4add6"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlanCli.java",
+      "sha256": "f2de5997c6ce5c3a0b79bcb0fff8c18cdb0d6d33159fecd5d4aa3b3430301af0"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\test\\java\\com\\m3\\synexia\\importer\\SynexiaCanonicalFamilyPolicyTest.java",
+      "sha256": "b7e396f4bd546c54a69886c9688cf1de828ffaccc174075bf4db2ac5635b8817"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\test\\java\\com\\m3\\synexia\\importer\\SynexiaImporterTest.java",
+      "sha256": "8f9b21d5efc7f7407d8f0dafe24c67d7c5f337310ce2ec5b47d54a4fb130071b"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\test\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlanTest.java",
+      "sha256": "a85d673f3a98b22a3a1514f905503037391c4b7686533869c792dcf8faa73e1a"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\test\\java\\com\\m3\\synexia\\importer\\SynexiaSeedSnapshotTest.java",
+      "sha256": "92a37e6eb123b0c2018e055db41f2e85ebf07a008d5c72fe4a2b3c23c8275f1d"
+    }
+  ],
+  "sourceBytesUnchangedDuringExecution": true,
+  "reports": [
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\target\\surefire-reports\\TEST-com.m3.synexia.importer.SynexiaCanonicalFamilyPolicyTest.xml",
+      "sha256": "573b12b74bba5dfe889322628b946922532f1c2ea14f8d06dec3ab174b2825f3",
+      "class": "com.m3.synexia.importer.SynexiaCanonicalFamilyPolicyTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "testcases": [
+        {
+          "name": "importPlanUsesExplicitM3IndexFamilyLanes",
+          "result": "passed"
+        },
+        {
+          "name": "m3IndexAndIndexStringCategoriesMustMatchCanonicalFamilies",
+          "result": "passed"
+        },
+        {
+          "name": "checkedInReceiverTableMatchesJavaClassifier",
+          "result": "passed"
+        },
+        {
+          "name": "vendorTargetMustBeExactSourceMirror",
+          "result": "passed"
+        },
+        {
+          "name": "everyCanonicalFamilyClassifiesItsPrefixAndChild",
+          "result": "passed"
+        },
+        {
+          "name": "unclassifiedAndUnsafeSourcePathsFailClosedWhenRequired",
+          "result": "passed"
+        },
+        {
+          "name": "manifestEntryEnforcesMirrorAndCategoryFamilyWithoutWeakeningApacheGate",
+          "result": "passed"
+        }
+      ]
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\target\\surefire-reports\\TEST-com.m3.synexia.importer.SynexiaImporterTest.xml",
+      "sha256": "4229065470918eb89cfcae3da952cb383855563161fc1c667439aed2a04794a0",
+      "class": "com.m3.synexia.importer.SynexiaImporterTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "testcases": [
+        {
+          "name": "cliRejectsUnknownActionAndBadArity",
+          "result": "passed"
+        },
+        {
+          "name": "sourceDriftAndTargetDriftFailClosed",
+          "result": "passed"
+        },
+        {
+          "name": "missingSourceAndUnsafeRootsFailClosed",
+          "result": "passed"
+        },
+        {
+          "name": "exactSourceMaterializesAndSecondPassIsIdempotent",
+          "result": "passed"
+        },
+        {
+          "name": "duplicateTargetAndRootMismatchFailClosed",
+          "result": "passed"
+        },
+        {
+          "name": "manifestRoundTripAndValidationAreDeterministic",
+          "result": "passed"
+        },
+        {
+          "name": "producerAndReceiverShareKnownDeliveryRootVector",
+          "result": "passed"
+        }
+      ]
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\target\\surefire-reports\\TEST-com.m3.synexia.importer.SynexiaImportPlanTest.xml",
+      "sha256": "1b27bffabd3b5167dccb9ae2db1f5e1066351c657adae09ab1e6a5273bd542d7",
+      "class": "com.m3.synexia.importer.SynexiaImportPlanTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "testcases": [
+        {
+          "name": "sourceOnlyVerifierAllowsReplacementButRefusesSourceDrift",
+          "result": "passed"
+        },
+        {
+          "name": "absentVendorTreeProducesOnlyManifestRows",
+          "result": "passed"
+        },
+        {
+          "name": "writePlanIsCreateOrVerifyAndRefusesOutsideBuildAndDrift",
+          "result": "passed"
+        },
+        {
+          "name": "laneClassificationCoversEveryRegisteredDeliveryCategory",
+          "result": "passed"
+        },
+        {
+          "name": "plansFullDeltaAndStagesOnlyChangedCandidates",
+          "result": "passed"
+        },
+        {
+          "name": "cliPlansStagesAndRejectsBadInvocation",
+          "result": "passed"
+        },
+        {
+          "name": "rowAndPlanValidationFailClosed",
+          "result": "passed"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "tests": 21,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "testSelectionUnchangedFromOriginalCommand": true,
+  "assertionChanges": false,
+  "fixtureCorrections": [
+    "JUNIT_FIXTURE_CORRECTION.json",
+    "JUNIT_INPUT_FIXTURE_CORRECTIONS.json"
+  ],
+  "strictStandaloneImporterClassSealsUnchanged": true,
+  "fullRepositorySeedSnapshotTest": "NOT_RUN_fixture_not_supplied",
+  "jacocoVerifyGate": "NOT_RUN",
+  "jvmLaneReleased": true,
+  "status": "PASS_ALL_THREE_ORIGINAL_UNIT_CLASSES_WITH_MINIMAL_INPUT_FIXTURE_CORRECTIONS"
+}

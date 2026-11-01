@@ -6,8 +6,8 @@
 This SDK wraps existing Synexia source-sealed OpenRewrite owners. The following
 files are imported verbatim and keep their original SPDX notices:
 
-- M3GpuToolJoinRecipe.java, Git blob 1c1b1b568d369f688f6953161636bf36b484bf5a.
-- M3GpuToolJoinManifest.java, Git blob 38df5f97bbeec8a8a8cfc77091d56bda925c07f2.
+- M3GpuToolJoinRecipe.java, Git blob 2ec479b8609459a28fdfd8a7a7d63cc44e919f00.
+- M3GpuToolJoinManifest.java, Git blob 78d5fb68f13872164973a8918cc7886c5f548bca.
 - pom.xml, Git blob d79867bcc09ad6329e12418e15907e54b8ab025f.
 
 They are Apache-2.0 Synexia files, reused from the previously qualified guard SDKs
@@ -24,7 +24,7 @@ M3DotStarRelations.java, M3StateRelation.c, m3_state_relation.h and the existing
 M3RelationPortProof.java. No kernel, proof or runtime interface is rewritten.
 
 The historical C audit fixture, Git blob
-5b30f71d8ed878b3199225b9512b75a090ff896c, also retains its complete original
+e6a10286f64052cb948de1dbcc43aaaa1d33db1e, also retains its complete original
 notices. It is a non-target refusal fixture. Prior execution of that historical
 translation unit does not qualify the different current C owner.
 
@@ -32,6 +32,6 @@ The counter/XML verifier mechanics are adapted from the existing lexical SDK
 verifier f16bcaa268a03e9d397329e4977ee6946796fcef and test
 215959642d18a069886e493c7ac7623793e5b453. The named KEEP scheduling and refusal
 mechanics are also derived from M3TextMetadataCurrentOwnerRecipeTest
-977527278e3761cb31365dd75b8f5883c177463a. These Synexia files are Apache-2.0.
+9aec198964431df2268a1443581e5e2d2182dea5. These Synexia files are Apache-2.0.
 
 License text: https://www.apache.org/licenses/LICENSE-2.0

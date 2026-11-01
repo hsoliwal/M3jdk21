@@ -20,10 +20,10 @@
   },
   "preserved_bodies": 22,
   "generated_headers": {
-    "com_m3_collections_M3IndexMaskCompactor.h": "2c9ee704fe1128ca05a7ff38b6844ad178fd79c03fef0aa24fe9605778f46c81",
-    "com_m3_collections_M3LongAddressKernel.h": "dffaa88fa278c69424c6879ddbe2b6d741e37dd48e123e97ebb86043b6b59df7"
+    "com_m3_collections_M3IndexMaskCompactor.h": "38535383a4ca0c950046a168f5fc6e7160f9fd12434dfac8317d5d2f54c54df2",
+    "com_m3_collections_M3LongAddressKernel.h": "688b0b0ff74d311c1f805e64bfc408bac33e21fd42512daae4d12355406c8279"
   },
-  "proof_result_sha256": "ad46e7e2d712e01aed71f00c4ce6cebaf7f83d35b2b226d61df9ae09d1a0f7b2",
+  "proof_result_sha256": "ebef8852ee016c9941c0a0880cfada0e78d01a7a62c58e19c03059ce509ba8f4",
   "commands": 14,
   "full_module_jdk": "NOT_RUN",
   "phase_advanced": false

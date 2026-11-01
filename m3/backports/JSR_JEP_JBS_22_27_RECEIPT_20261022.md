@@ -32,7 +32,7 @@ Each JSR defines a newer complete Java SE platform; **none is wholesale merged**
 | Superseded JEP lineage (all types) | 20 | Reconcile with final successor, do not import duplicates |
 | **Total** | **85** | **0 JEPs promoted by this audit** |
 
-Authority: [released JEP inventory](RELEASE_JEP_AUTHORITY.tsv) (Git blob `745a26772b8050c28dd93d05c724bfa9c2ad5e18`), [85-row JEP catalogue](JEP_CATALOGUE.tsv) (blob `a0ef9aa95da17a19c3df8ab8aded355fad4f4598`), [JEP residue queue](JEP_RESIDUE_QUEUE.tsv) (blob `82ef31430a0b1f3f85892ce4b00f3d2e06eb96f5`), and existing [all-JEP proof matrix](ALL_JEP_MATRIX.md). The matrix explicitly marks every row `NOT_AUTHORIZED_BY_MATRIX`.
+Authority: [released JEP inventory](RELEASE_JEP_AUTHORITY.tsv) (Git blob `745a26772b8050c28dd93d05c724bfa9c2ad5e18`), [85-row JEP catalogue](JEP_CATALOGUE.tsv) (blob `a0ef9aa95da17a19c3df8ab8aded355fad4f4598`), [JEP residue queue](JEP_RESIDUE_QUEUE.tsv) (blob `4ad714669e211dea09c00fb451834c1a0c449705`), and existing [all-JEP proof matrix](ALL_JEP_MATRIX.md). The matrix explicitly marks every row `NOT_AUTHORIZED_BY_MATRIX`.
 
 The current priority queue starts with JEP **423** (G1 region pinning), **458** (multi-file launcher), **474** (generational ZGC default, opt-in), **484** (Class-File API extension) and **485** (Stream Gatherers extension). These are *candidate review order*, not claims of Java 21 acceptance or successful native tests. Keep the String → arrays → collections → AST/compiler receiving sequence and product gates intact.
 

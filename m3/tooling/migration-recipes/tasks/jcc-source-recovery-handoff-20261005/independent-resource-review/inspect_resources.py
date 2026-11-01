@@ -3,7 +3,7 @@ from pathlib import Path
 import ast, collections, copy, csv, hashlib, io, json, re
 B=Path('/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04');R=B/'overlay';O=B/'derivation-static-review/resources-v3';S=O/'inputs'
 SOURCE='0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8';ROOT='0361e4a07b77a01df170523033fef01c4052ddc5';DEST='0994ecd65e86600f417f4d8702838d8c2663af61';DTREE='7e8f39ac999174f8d5b6028d638a68d8c317b070'
-LAB='synexia.jcc-recipe-laboratory';JNI='synexia.jcc-java-jni-regression';IDS={LAB,JNI};PREFIX='m3/tooling/migration-recipes';TASK=PREFIX+'/tasks/jcc-source-recovery-handoff-20261005/source-recovery/';CRATE=R/PREFIX/'src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005'
+LAB='m3.jcc-recipe-laboratory';JNI='m3.jcc-java-jni-regression';IDS={LAB,JNI};PREFIX='m3/tooling/migration-recipes';TASK=PREFIX+'/tasks/jcc-source-recovery-handoff-20261005/source-recovery/';CRATE=R/PREFIX/'src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005'
 MAP='m3/docs/name-mapping.json';DOC='m3/docs/jcc-source-handoff.md';BIND='m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json';COV='m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv'
 def load(p):return json.loads(Path(p).read_text())
 def identity(p):
@@ -20,7 +20,7 @@ def snapshot(p,name=None):
  else:q.write_bytes(d)
  snapshots.append({'source':str(p),'snapshot':str(q.relative_to(O)),**identity(p)})
  return load(p) if p.suffix=='.json' else d
-packet=snapshot(B/'bound-inputs-v3/BOUND_RESOURCES_REVIEW_PACKET.json');assert identity(B/'bound-inputs-v3/BOUND_RESOURCES_REVIEW_PACKET.json')['sha256']=='9024a1180d4f5856130d9e3a7dd1e8f18786ca8825c9569397d37003019aac9a'
+packet=snapshot(B/'bound-inputs-v3/BOUND_RESOURCES_REVIEW_PACKET.json');assert identity(B/'bound-inputs-v3/BOUND_RESOURCES_REVIEW_PACKET.json')['sha256']=='225e5a587fb5845929390de32a0b70642d8c24e6345ee42733b2ce8b6a355012'
 f=snapshot(B/'FINAL_SOURCE_INPUTS_V3.json');assert identity(B/'FINAL_SOURCE_INPUTS_V3.json')['sha256']=='df6713ad19ce80daad0383fbd5c3716412e2dca133e1db7e0150b88e141313b5';author=snapshot(B/'AUTHORING_RESULT_V3.json');plan=snapshot(packet['plan']['local_path']);snapshot(packet['manifest']['local_path']);check(packet['plan']['local_path'],packet['plan']);check(packet['manifest']['local_path'],packet['manifest']);check(packet['authoring']['local_path'],packet['authoring']);check(packet['bound_input']['local_path'],packet['bound_input'])
 assert packet['receiving_execution'] is False and packet['operational_outputs_unchanged'] is True and packet['source_export_admitted'] is False
 assert author['state']=='BOUND_RESOURCES_PENDING_EXECUTION' and author['recipe_execution']=='NOT_EXECUTED' and author['source_export_admitted'] is False
@@ -63,7 +63,7 @@ for old,new in zip(oldrows,newrows):
  assert new['observation']==f['record_observations'][rid] and new['reason']==f['record_reasons'][rid]
  for k,v in new['materialization'].items():assert v==f['record_materialization'][rid].get(k,old['materialization'].get(k))
  assert {k:v for k,v in new['recipe'].items() if k not in ('id','preconditions')}=={k:v for k,v in old['recipe'].items() if k not in ('id','preconditions')}
- assert new['recipe']['id']=='com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-source-recovery-handoff-20261005'
+ assert new['recipe']['id']=='jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-source-recovery-handoff-20261005'
  assert DEST in new['recipe']['preconditions'][0] and outputs[MAP]['before']['sha256'] in new['recipe']['preconditions'][0] and SOURCE in new['recipe']['preconditions'][2]
 assert unchanged==44 and oldsource_count==17 and history_count==21 and current_count==19
 oldbind=load(outputs[BIND]['before']['local_path']);binding=load(outputs[BIND]['after']['local_path'])
@@ -97,7 +97,7 @@ java=Path(packet['entrypoint_test_and_proof_owners'][0]['local_path']).read_text
 for a,z in [('UNBOUND_RECOVERY_SOURCE_COMMIT',SOURCE),('UNBOUND_RECOVERY_SOURCE_ROOT_TREE',ROOT),('UNBOUND_RECOVERY_SOURCE_REF',f['source_ref']),('EXPECTED_RECOVERY_SOURCE_COUNT = -1','EXPECTED_RECOVERY_SOURCE_COUNT = 19')]:assert prepared.count(a)==1;prepared=prepared.replace(a,z)
 assert java==prepared and len(re.findall(r'^    @Test$',java,re.M))==12
 python_path=R/'m3/migration/test/test_jcc_source_recovery_handoff_packet.py';assert python_path.read_bytes()==(B/'derivation-static-review/inputs/test_jcc_source_recovery_handoff_packet.py').read_bytes();py_ast=ast.parse(python_path.read_text());methods=[n.name for cls in py_ast.body if isinstance(cls,ast.ClassDef) for n in cls.body if isinstance(n,ast.FunctionDef) and n.name.startswith('test_')];assert len(methods)==6
-assert identity(B/'run_verification_v3.py')['sha256']=='496e1877914e15f4342111c37020a2d58790038516b62872680427e585b21f50'
+assert identity(B/'run_verification_v3.py')['sha256']=='c779f94023b3914bca1558a35d39ab11aaedd00a18cf5b74e2a30bf1205de6b6'
 execution=snapshot(B/'authoring-invocation-v3/EXECUTION.json','AUTHORING_EXECUTION.json')
 assert execution['exit_code']==0
 for k in ('input','script','stdout','stderr'):check(execution[k]['local_path'],execution[k])

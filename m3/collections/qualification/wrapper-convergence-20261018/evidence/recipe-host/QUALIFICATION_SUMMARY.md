@@ -17,7 +17,7 @@ The immutable recipes remain pinned to Synexia `98368e107f4a205d852ef958cd48c1ee
 
 Each SDK lane demonstrates exact replay, zero-change fixed point, equal results and patches after input reversal, missing/drift/duplicate refusal, post-scan refusal, unchanged unrelated source and guarded output retention. Java lanes additionally refuse a target represented as plain text. Raw command/stdout/stderr/exit receipts and emitted SDK metadata are identified in `QUALIFICATION_SUMMARY.json`.
 
-The read-only iterator product output has SHA-256 `032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75`. Its 341 frozen inputs include the parent contract and oracle files, exact receiver preimage, and 301 actual baseline parser-classpath files (295 compiled classes). None changed during its gates. The output remains under the host candidate directory for parent inspection and serial receiving.
+The read-only iterator product output has SHA-256 `bb0ff9a8008521576530b0cea64d00b4f22e6e4b8424b8e5df7f416a6a8b6051`. Its 341 frozen inputs include the parent contract and oracle files, exact receiver preimage, and 301 actual baseline parser-classpath files (295 compiled classes). None changed during its gates. The output remains under the host candidate directory for parent inspection and serial receiving.
 
 This evidence proves recipe execution. Receiving Java behavior/API/allocation checks and C/JNI compilation/runtime/ABI checks remain separate parent tasks. The C-text fixture alone makes no C compilation or runtime claim. Existing historical host-ready documents remain unmodified; they record the earlier pre-execution state.
 

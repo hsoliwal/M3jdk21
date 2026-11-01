@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package com.synexia.mindex.classindex;
+package jdk.internal.m3.mindex.classindex;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;

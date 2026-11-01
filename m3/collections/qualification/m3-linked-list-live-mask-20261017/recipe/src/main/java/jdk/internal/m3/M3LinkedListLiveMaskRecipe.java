@@ -1,0 +1,129 @@
+/*******************************************************************************
+ * Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Apache License, Version 2.0, or (at your option) the Eclipse
+ * Public License 2.0, which are available at
+ * https://www.apache.org/licenses/LICENSE-2.0 and
+ * https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+ *
+ * Contributors:
+ *     Hitesh Soliwal (Synexia) - initial API and implementation
+ *******************************************************************************/
+package jdk.internal.m3;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HexFormat;
+import java.util.stream.Stream;
+
+/** Exact-preimage Maven source recipe: one existing FILE and one new differential oracle. */
+public final class M3LinkedListLiveMaskRecipe {
+    public static final String TARGET = "m3/collections/src/main/java/jdk/m3/collections/M3LinkedList.java";
+    public static final String ORACLE =
+            "m3/collections/src/test/java/jdk/m3/collections/M3LinkedListLiveMaskContract.java";
+    public static final String BEFORE = "d8f29642e80322b10e5f756014b0e7bdcd964aa0808d506fe18f3a7fbcb2451e";
+    public static final String AFTER = "55d9c9e273f302d0e3291bd853d3b198b44a73baeef819089432ff197ae7a3b6";
+    public static final String TEST = "1eda772b805e75c6c60a97a104bd44b6d0455027cc5c856357f88e9ed52bd2d6";
+    private M3LinkedListLiveMaskRecipe() { }
+    private static byte[] template(String name, String expected) throws IOException {
+        try (InputStream in = M3LinkedListLiveMaskRecipe.class.getResourceAsStream(name)) {
+            if (in == null) throw new IllegalStateException("missing sealed template: " + name);
+            byte[] bytes = in.readAllBytes();
+            if (!hash(bytes).equals(expected)) throw new IllegalStateException("template drift: " + name);
+            return bytes;
+        }
+    }
+    private static String hash(byte[] bytes) {
+        try { return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes)); }
+        catch (NoSuchAlgorithmException ex) { throw new IllegalStateException(ex); }
+    }
+    private static void check(Path root) throws IOException {
+        Path runtime = root.resolve(TARGET), test = root.resolve(ORACLE);
+        if (Files.isSymbolicLink(runtime) || Files.isSymbolicLink(test)) {
+            throw new IllegalStateException("symlink receiver refused");
+        }
+        if (!Arrays.equals(Files.readAllBytes(runtime), template("M3LinkedList.java.after.txt", AFTER))
+                || !Arrays.equals(Files.readAllBytes(test), template("M3LinkedListLiveMaskContract.java.txt", TEST))) {
+            throw new IllegalStateException("unqualified receiver postimage");
+        }
+    }
+    private static void apply(Path root) throws IOException {
+        Path runtime = root.resolve(TARGET), test = root.resolve(ORACLE);
+        if (!runtime.normalize().startsWith(root) || !test.normalize().startsWith(root)
+                || Files.isSymbolicLink(runtime) || Files.isSymbolicLink(test)) {
+            throw new IllegalStateException("unqualified output path");
+        }
+        byte[] before = template("M3LinkedList.java.before.txt", BEFORE);
+        byte[] after = template("M3LinkedList.java.after.txt", AFTER);
+        byte[] expectedTest = template("M3LinkedListLiveMaskContract.java.txt", TEST);
+        byte[] actual = Files.readAllBytes(runtime);
+        if (!Arrays.equals(actual, before) && !Arrays.equals(actual, after)) {
+            throw new IllegalStateException("unknown M3LinkedList preimage");
+        }
+        if (Files.exists(test)) {
+            if (!Arrays.equals(Files.readAllBytes(test), expectedTest)) {
+                throw new IllegalStateException("oracle occupied with unapproved contents");
+            }
+        }
+        if (Arrays.equals(actual, after) && Files.exists(test)) return;
+        if (Arrays.equals(actual, before)) {
+            Path tmp = Files.createTempFile(runtime.getParent(), "m3-list-mask-", ".tmp");
+            try {
+                Files.write(tmp, after);
+                if (!Arrays.equals(Files.readAllBytes(runtime), before)) {
+                    throw new IllegalStateException("source modified during recipe");
+                }
+                Files.move(tmp, runtime, StandardCopyOption.ATOMIC_MOVE,
+                        StandardCopyOption.REPLACE_EXISTING);
+            } finally { Files.deleteIfExists(tmp); }
+        }
+        if (!Files.exists(test)) Files.write(test, expectedTest);
+        check(root);
+    }
+    private static void selftest() throws IOException {
+        Path root = Files.createTempDirectory("m3-list-mask-").toAbsolutePath().normalize();
+        try {
+            Path runtime = root.resolve(TARGET), test = root.resolve(ORACLE);
+            Files.createDirectories(runtime.getParent());
+            Files.createDirectories(test.getParent());
+            Files.write(runtime, template("M3LinkedList.java.before.txt", BEFORE));
+            apply(root);
+            check(root);
+            apply(root); // fixed point
+            check(root);
+            Files.writeString(runtime, "tamper");
+            boolean blocked = false;
+            try { apply(root); } catch (IllegalStateException expected) { blocked = true; }
+            if (!blocked) throw new AssertionError("source drift not refused");
+            Files.write(runtime, template("M3LinkedList.java.before.txt", BEFORE));
+            Files.writeString(test, "occupied");
+            blocked = false;
+            try { apply(root); } catch (IllegalStateException expected) { blocked = true; }
+            if (!blocked) throw new AssertionError("occupied oracle not refused");
+            System.out.println("M3_LINKED_LIST_MASK_RECIPE_PASS fixed_point=1 refusals=2");
+        } finally {
+            try (Stream<Path> all = Files.walk(root)) {
+                for (Path path : all.sorted(Comparator.reverseOrder()).toList()) Files.deleteIfExists(path);
+            }
+        }
+    }
+    public static void main(String[] args) throws Exception {
+        if (args.length == 1 && args[0].equals("--selftest")) { selftest(); return; }
+        if (args.length != 2 || (!args[0].equals("--apply") && !args[0].equals("--check"))) {
+            throw new IllegalArgumentException("usage: --selftest | --apply|--check REPO_ROOT");
+        }
+        Path root = Path.of(args[1]).toAbsolutePath().normalize();
+        if (args[0].equals("--apply")) apply(root); else check(root);
+        System.out.println("M3_LINKED_LIST_MASK_RECIPE_PASS mode=" + args[0]);
+    }
+}

@@ -1,0 +1,308 @@
+{
+  "schema": "M3_PASSIVE_EXECUTION_RECEIPT_V1",
+  "spdx_file_copyright_text": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "spdx_license_identifier": "Apache-2.0",
+  "kind": "passive_product_output_traceability",
+  "status": "HOLD",
+  "release_ready": false,
+  "provides_release_gate_evidence": false,
+  "purpose": "Trace the nineteen executed product postimages to their exact canonical task and actual tests. This is not a release admission receipt, benchmark claim, or execution authority.",
+  "canonical_task": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "2705bb8fc0a36f6392f2c17f47d6e41121b137bd",
+    "path": "synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029",
+    "task_id": "m3jdk21-release-20261029",
+    "canonical_family": "m3jdk21-owner-naming",
+    "recipe_id": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
+    "recipe_source_commit": "2318fd6154abe62a99ee5d918740c2e9c82a471f",
+    "recipe_source_git_blob": "e4aba5ca91b640b2666da5cb2bc2c9ecdf94061f",
+    "official_composition": {
+      "recipe": "org.openrewrite.text.CreateTextFile",
+      "version": "8.17.1",
+      "source_commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "guarded_outputs": 3
+    },
+    "source_manifest": {
+      "path": "synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-release-20261029/manifest.tsv",
+      "sha256": "47672a3fb65cf96cfc8d98058480104ebfd60c4fc61a5f9187f2015076ce615f",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/2705bb8fc0a36f6392f2c17f47d6e41121b137bd/synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-release-20261029/manifest.tsv"
+    },
+    "guarded_manifest": {
+      "path": "synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-release-20261029/guarded-files.tsv",
+      "sha256": "80deb05a93b4862e064ebb601fa8d22e6c037cbfa73b953279ea4f21ef730d57",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/2705bb8fc0a36f6392f2c17f47d6e41121b137bd/synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-release-20261029/guarded-files.tsv"
+    },
+    "target_input": {
+      "path": "synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/target-input.json",
+      "sha256": "98336e1d743d87b7345bb434ec9583da0787ffbbc41d7698350860d7170a8dff",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/2705bb8fc0a36f6392f2c17f47d6e41121b137bd/synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/target-input.json"
+    }
+  },
+  "target_source": {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "42c189661c690ce690217d69b7c6b5cdfcf7017a",
+    "tree": "560e955154b302b5cbbcd36440cc0a5127f5831b",
+    "source_pr": "https://github.com/hsoliwal/M3jdk21/pull/2102"
+  },
+  "covered_output_count": 19,
+  "covered_outputs": [
+    {
+      "path": ".github/workflows/m3-first-release-admission.yml",
+      "before_sha256": "00587a22204497ed4795162b6e9688a78cdd5067994a86ba29624df874dae3f4",
+      "after_sha256": "8e91d15837be4ec00be6abacdb23dcc2065016789292fa3745dffbd84e03e753",
+      "recipe": "canonical-text-snapshot"
+    },
+    {
+      "path": "README.md",
+      "before_sha256": "62baca9f793d8d98d89193d25f1a2f3c1d4393a9273be6db6b38641f30a7b460",
+      "after_sha256": "5af573f7666220e7e3488f7082266725cef3023724438544ef4d93d6568003f1",
+      "recipe": "canonical-text-snapshot"
+    },
+    {
+      "path": "m3/README.md",
+      "before_sha256": "271188558783d68c90eeea47cc61df941e3069dca2fdf1a9cdc17f602d7e5248",
+      "after_sha256": "7e7232815c1dd72a22015bbd18cd1ed713fb96dc9892598c7088f3c09c3bfece",
+      "recipe": "canonical-text-snapshot"
+    },
+    {
+      "path": "m3/THIRD_PARTY_NOTICES.md",
+      "before_sha256": "4e005cd4e2183b942012231aba1f796c04618293b7f004c606d1bb760bb6db48",
+      "after_sha256": "b6d9187f2d452d4fd0ac34e905bba9ae77e87a549164722bc8a57de6fd00ea45",
+      "recipe": "canonical-text-snapshot"
+    },
+    {
+      "path": "m3/arrays/.gitignore",
+      "before_sha256": "ABSENT",
+      "after_sha256": "306fd52e74fca6746e12acc750f232de15e71da917756a1270d74c91f5eb7368",
+      "recipe": "guarded-official-CreateTextFile"
+    },
+    {
+      "path": "m3/docs/m3jdk21-naming-admission-workflow.md",
+      "before_sha256": "ee13e0f45461a714828723454cf28e0f604e72a7cc1f1494f924706010dd6269",
+      "after_sha256": "7628bbb05f32ceac04af11e8a548923f849828ade35d90bdbf482ee990535955",
+      "recipe": "canonical-text-snapshot"
+    },
+    {
+      "path": "m3/docs/m3jdk21-porting-invariant.md",
+      "before_sha256": "95a5d111f0d9b2467bcc84828adc5b0efcfd1091e35a1b5c1bf1c484a2066b03",
+      "after_sha256": "e3bd365135450e90a88082b78ecd12a4a1c2d8c0632487c654186566836a1c76",
+      "recipe": "canonical-text-snapshot"
+    },
+    {
+      "path": "m3/docs/m3-intake-policy.tsv",
+      "before_sha256": "519c6e3152fac4d5d06b77c859f8f5a6a6b7e54a1e3dbb5fdd999c4e100a69c7",
+      "after_sha256": "7f4a36570ab48a80dd23f9b2831b1e8e6b9832f0dd6918539f19e1abea9ab761",
+      "recipe": "canonical-text-snapshot"
+    },
+    {
+      "path": "m3/ports/precompute/.gitignore",
+      "before_sha256": "ABSENT",
+      "after_sha256": "306fd52e74fca6746e12acc750f232de15e71da917756a1270d74c91f5eb7368",
+      "recipe": "guarded-official-CreateTextFile"
+    },
+    {
+      "path": "m3/release/README.md",
+      "before_sha256": "91829a5b8d40fb433aaae1b1162da6f50da70db9174839eef6d59401a2c5213e",
+      "after_sha256": "c60f2e26c6b5f5938b71e9d08669f301da90333459b73bb0304cf43e11f7ebd4",
+      "recipe": "canonical-text-snapshot"
+    },
+    {
+      "path": "m3/release/queue/.gitignore",
+      "before_sha256": "ABSENT",
+      "after_sha256": "dbfaef22e39c0352a78e8850f3f457ffff760816877859a29c6881ce32cfbd50",
+      "recipe": "guarded-official-CreateTextFile"
+    },
+    {
+      "path": "m3/release/queue/2026-10-29/collections-failures.tsv",
+      "before_sha256": "ABSENT",
+      "after_sha256": "d1bfce1424c44474cb31f7f9bd3c2bbbd0a8db30e4ee2e2b52ecbb4e89b175a3",
+      "recipe": "canonical-text-snapshot"
+    },
+    {
+      "path": "m3/release/queue/2026-10-29/validation-summary.json",
+      "before_sha256": "ABSENT",
+      "after_sha256": "f58a81af366a66eea2cb56128cac38d297f6d6eb7ff641e0dea12e1131a03b9e",
+      "recipe": "canonical-text-snapshot"
+    },
+    {
+      "path": "m3/release/queue/README.md",
+      "before_sha256": "ABSENT",
+      "after_sha256": "08ffb612893690fd8e7593ef54602a3f3e2966efb119491b1ad86986937d9831",
+      "recipe": "canonical-text-snapshot"
+    },
+    {
+      "path": "m3/release/release-contract.json",
+      "before_sha256": "467c0948c8e53588474551bbc1ef57e91c008f09908afdd0b2ccd2084b348358",
+      "after_sha256": "12b5f583300a93b9043e67f63d9dcab816e628e433ff0648979e39b14d93b5ea",
+      "recipe": "canonical-text-snapshot"
+    },
+    {
+      "path": "m3/release/test_release_admission.py",
+      "before_sha256": "94ec205a3ee4541d46f997af76e28004a56dbad51f0c2039c51230c5ce3fb413",
+      "after_sha256": "d934c03b6d13e0dea42098f45b8091b72fd039eaeacbb04038191ee5aeaa2afb",
+      "recipe": "canonical-text-snapshot"
+    },
+    {
+      "path": "m3/release/verify_release_admission.py",
+      "before_sha256": "e64d059cb9751d13fc53ba23bac8461da8c8827383ed13dadbc09b29c03e29be",
+      "after_sha256": "579ce6a96ffea7494bcabf71ba3c3e2e7d7c4d5609e21c70e89731b3c10d4c0d",
+      "recipe": "canonical-text-snapshot"
+    },
+    {
+      "path": "m3/runtime-integration/test_m3_intake_custody.py",
+      "before_sha256": "ABSENT",
+      "after_sha256": "9ca7796238c1d47223c85f8cd1fd485687c14725486f6a8ee67b8c87fc116982",
+      "recipe": "canonical-text-snapshot"
+    },
+    {
+      "path": "m3/runtime-integration/verify-m3-intake.py",
+      "before_sha256": "6f16a12a564589cb6055699f70a41e7de99716d55900efc70ed4601dafe9e3c5",
+      "after_sha256": "6d42599003415d84d3690872a40b65cad7c4506a13869a33eb4d3f5b8eab871a",
+      "recipe": "canonical-text-snapshot"
+    }
+  ],
+  "execution": {
+    "actual_openrewrite_sdk": true,
+    "sdk_tests": 18,
+    "release_recipe_tests": 14,
+    "repository_provenance_tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "product_outputs": 19,
+    "provenance_outputs": 6,
+    "exact_postimage_hashes_verified": true,
+    "complete_fixed_point": true,
+    "command": [
+      "mvn",
+      "-o",
+      "-B",
+      "-ntp",
+      "-s",
+      "toolchain/maven-settings.xml",
+      "-f",
+      "synexia/synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/pom.xml",
+      "verify"
+    ],
+    "java": "Eclipse Temurin 21.0.13+9",
+    "maven": "3.9.9",
+    "log": {
+      "path": "synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/evidence/provenance-sdk-verify.log",
+      "sha256": "04c9f91d85678b0ea52caa60d3fe7c93eec9363e331ec85617a9efe4f209173f",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/2705bb8fc0a36f6392f2c17f47d6e41121b137bd/synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/evidence/provenance-sdk-verify.log"
+    },
+    "qualification": {
+      "path": "synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/evidence/recipe-qualification.json",
+      "sha256": "1249a1b1ec4a1265ecdef8bc81f18d761ce454e81b7e9a46ad96a66b18f1b532",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/2705bb8fc0a36f6392f2c17f47d6e41121b137bd/synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/evidence/recipe-qualification.json"
+    },
+    "output_manifest": {
+      "path": "synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/evidence/release-execution.tsv",
+      "sha256": "7ba8cb261e678e43e07ece4482bef0857a1362d6b3b41e4330c08c308ca72813",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/2705bb8fc0a36f6392f2c17f47d6e41121b137bd/synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/evidence/release-execution.tsv"
+    },
+    "working_directory": "/workspace/scratch/cbb10df86a8f"
+  },
+  "product_policy_validation": {
+    "tests": 64,
+    "release_policy_tests": 33,
+    "intake_custody_tests": 6,
+    "naming_tests": 25,
+    "failures": 0,
+    "errors": 0,
+    "status": "PASS",
+    "tested_scope": "19 transferred real SDK postimages; unchanged product Java/native sources; working tree not committed for this unit regression pass",
+    "target_base_commit": "42c189661c690ce690217d69b7c6b5cdfcf7017a",
+    "report": {
+      "path": "synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/evidence/product-final-policy-tests.json",
+      "sha256": "516099915a68e291ce00ae85f175d22d193c6b3aa1bc70c5f8dd7e1dac9a642c",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/2705bb8fc0a36f6392f2c17f47d6e41121b137bd/synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/evidence/product-final-policy-tests.json"
+    },
+    "log": {
+      "path": "synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/evidence/product-final-policy-tests.log",
+      "sha256": "57eb542674c310cb612b6f68e61efb81df1fbd264eecf127b95897f1f2772bf6",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/2705bb8fc0a36f6392f2c17f47d6e41121b137bd/synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/evidence/product-final-policy-tests.log"
+    },
+    "limitation": "No full JDK, JNI platform or performance qualification is implied by policy unit tests."
+  },
+  "bounded_java_jni_validation": {
+    "source_commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+    "source_scope": "Original bounded module runs retain their earlier exact source pins; not a clean-tree current-candidate release proof.",
+    "foundation": {
+      "status": "PASS",
+      "vm_modes": [
+        "jit",
+        "int",
+        "nocompact",
+        "c2"
+      ]
+    },
+    "precompute_java": {
+      "tests": 74,
+      "skipped_native_cases": 2,
+      "status": "PASS_JAVA_ONLY"
+    },
+    "precompute_native": {
+      "tests": 74,
+      "skipped": 0,
+      "ctests_passed": 2,
+      "status": "PASS"
+    },
+    "arrays_native": {
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "ctests_passed": 1,
+      "native_required": true,
+      "jni_check": true,
+      "status": "PASS"
+    },
+    "collections_initial": {
+      "tests": 691,
+      "failures": 7,
+      "errors": 48,
+      "skipped": 2,
+      "status": "FAIL",
+      "error_scope": "Missing array JNI loading configuration"
+    },
+    "collections_focused_jni_rerun": {
+      "selected_classes": 24,
+      "tests": 101,
+      "failures": 8,
+      "errors": 0,
+      "skipped": 0,
+      "status": "FAIL",
+      "limitation": "Only previously failing classes rerun; not a replacement full suite."
+    },
+    "product_report": {
+      "path": "synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/evidence/product-validation.json",
+      "sha256": "cc4964c1f97cc9f8e1fdcb190c2b9fc6d759e7cf6e6457d3938a254ee56fba66",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/2705bb8fc0a36f6392f2c17f47d6e41121b137bd/synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/evidence/product-validation.json"
+    },
+    "arrays_collections_report": {
+      "path": "synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/evidence/arrays-collections/validation-evidence.json",
+      "sha256": "9db5cdfd974631bee7dfb06498f59f17fd926cb87c8e8cdd645d4978e7b7cd43",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/2705bb8fc0a36f6392f2c17f47d6e41121b137bd/synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/evidence/arrays-collections/validation-evidence.json"
+    },
+    "raw_artifact_index": {
+      "path": "synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/evidence/arrays-collections/index.json",
+      "sha256": "a07092aa4493e86a4114a3de3868c77ce9529b9a188f9bf24c20b7979d7efc49",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/2705bb8fc0a36f6392f2c17f47d6e41121b137bd/synexia-openrewrite-recipes/crates/m3jdk21-owner-naming/release-20261029/evidence/arrays-collections/index.json"
+    },
+    "failure_catalogue": "collections-failures.tsv"
+  },
+  "self_provenance": {
+    "path": "m3/release/queue/2026-10-29/m3-execution-receipt.json",
+    "covered_by_this_receipt": false,
+    "explanation": "This receipt covers the nineteen other outputs only. Its own creation and transfer are proved by the later canonical task execution and receiving pull request; no recursive self-hash or future commit identity is asserted."
+  },
+  "remaining_release_holds": [
+    "Eight focused collections assertions require contract/history reconciliation.",
+    "Full source-built M3JDK21 image and applicable jtreg have not been qualified.",
+    "Cross-platform JNI/native and installed-image gates remain open.",
+    "Historical target-local recipe source remains custody migration debt.",
+    "Performance superiority and complete historical code recovery are not established."
+  ],
+  "authority": "No release/tag, merge, transformation, or mutation is authorized by this passive data file."
+}

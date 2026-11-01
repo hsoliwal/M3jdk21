@@ -4,7 +4,7 @@
   "poms": {
     ".m3/openrewrite-recipes/pom.xml": {
       "gav": [
-        "com.synexia.m3.bootstrap",
+        "jdk.internal.m3.bootstrap",
         "m3-recipe-first-bootstrap",
         "1.0.0-SNAPSHOT"
       ],
@@ -32,7 +32,7 @@
     },
     "m3/arrays/qualification/empty-segments-20261017/recipe-custody/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-collections-contract-refinement-recipe-proof",
         "1"
       ],
@@ -59,7 +59,7 @@
     },
     "m3/ast/recipe-custody/hierarchy-encoding-20261018/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-collections-contract-refinement-recipe-proof",
         "1"
       ],
@@ -100,7 +100,7 @@
     },
     "m3/collections/implementations/apache-abstract-hashed-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-abstract-hashed-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -114,7 +114,7 @@
     },
     "m3/collections/implementations/apache-array-list-valued-linked-hash-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-array-list-valued-linked-hash-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -128,7 +128,7 @@
     },
     "m3/collections/implementations/apache-array-stack/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-array-stack",
         "0.1.0-SNAPSHOT"
       ],
@@ -142,7 +142,7 @@
     },
     "m3/collections/implementations/apache-case-insensitive-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-case-insensitive-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -156,7 +156,7 @@
     },
     "m3/collections/implementations/apache-circular-fifo/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-owned-apache-circular-fifo",
         "0.1.0-SNAPSHOT"
       ],
@@ -170,7 +170,7 @@
     },
     "m3/collections/implementations/apache-collection-bag/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-collection-bag",
         "0.1.0-SNAPSHOT"
       ],
@@ -184,7 +184,7 @@
     },
     "m3/collections/implementations/apache-collection-sorted-bag/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-collection-sorted-bag",
         "0.1.0-SNAPSHOT"
       ],
@@ -198,7 +198,7 @@
     },
     "m3/collections/implementations/apache-composite-collection/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-composite-collection",
         "0.1.0-SNAPSHOT"
       ],
@@ -212,7 +212,7 @@
     },
     "m3/collections/implementations/apache-composite-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-composite-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -226,7 +226,7 @@
     },
     "m3/collections/implementations/apache-composite-set/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-composite-set",
         "0.1.0-SNAPSHOT"
       ],
@@ -240,7 +240,7 @@
     },
     "m3/collections/implementations/apache-concurrent-reference-hash-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-concurrent-reference-hash-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -254,7 +254,7 @@
     },
     "m3/collections/implementations/apache-cursorable-linked-list/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-cursorable-linked-list",
         "0.1.0-SNAPSHOT"
       ],
@@ -268,7 +268,7 @@
     },
     "m3/collections/implementations/apache-defaulted-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-defaulted-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -282,7 +282,7 @@
     },
     "m3/collections/implementations/apache-dual-linked-hash-bidi-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-owned-apache-dual-linked-hash-bidi-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -296,7 +296,7 @@
     },
     "m3/collections/implementations/apache-dual-tree-bidi-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-dual-tree-bidi-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -310,7 +310,7 @@
     },
     "m3/collections/implementations/apache-fixed-size-list/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-fixed-size-list",
         "0.1.0-SNAPSHOT"
       ],
@@ -324,7 +324,7 @@
     },
     "m3/collections/implementations/apache-fixed-size-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-fixed-size-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -338,7 +338,7 @@
     },
     "m3/collections/implementations/apache-fixed-size-sorted-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-fixed-size-sorted-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -352,7 +352,7 @@
     },
     "m3/collections/implementations/apache-flat3-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-flat3-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -366,7 +366,7 @@
     },
     "m3/collections/implementations/apache-growth-list/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-growth-list",
         "0.1.0-SNAPSHOT"
       ],
@@ -380,7 +380,7 @@
     },
     "m3/collections/implementations/apache-hash-bag/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-owned-apache-hash-bag",
         "0.1.0-SNAPSHOT"
       ],
@@ -394,7 +394,7 @@
     },
     "m3/collections/implementations/apache-hash-multi-set/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-hash-multi-set",
         "0.1.0-SNAPSHOT"
       ],
@@ -408,7 +408,7 @@
     },
     "m3/collections/implementations/apache-hashed-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-hashed-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -422,7 +422,7 @@
     },
     "m3/collections/implementations/apache-indexed-collection/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-indexed-collection",
         "0.1.0-SNAPSHOT"
       ],
@@ -436,7 +436,7 @@
     },
     "m3/collections/implementations/apache-lazy-list/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-lazy-list",
         "0.1.0-SNAPSHOT"
       ],
@@ -450,7 +450,7 @@
     },
     "m3/collections/implementations/apache-lazy-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-lazy-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -464,7 +464,7 @@
     },
     "m3/collections/implementations/apache-lazy-sorted-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-lazy-sorted-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -478,7 +478,7 @@
     },
     "m3/collections/implementations/apache-linked-hash-set-valued-linked-hash-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-linked-hash-set-valued-linked-hash-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -492,7 +492,7 @@
     },
     "m3/collections/implementations/apache-linked-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-linked-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -506,7 +506,7 @@
     },
     "m3/collections/implementations/apache-list-ordered-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-list-ordered-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -520,7 +520,7 @@
     },
     "m3/collections/implementations/apache-list-ordered-set/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-list-ordered-set",
         "0.1.0-SNAPSHOT"
       ],
@@ -534,7 +534,7 @@
     },
     "m3/collections/implementations/apache-lru-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-lru-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -548,7 +548,7 @@
     },
     "m3/collections/implementations/apache-map-backed-set/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-map-backed-set",
         "0.1.0-SNAPSHOT"
       ],
@@ -562,7 +562,7 @@
     },
     "m3/collections/implementations/apache-multi-key-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-multi-key-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -576,7 +576,7 @@
     },
     "m3/collections/implementations/apache-multi-value-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-multi-value-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -590,7 +590,7 @@
     },
     "m3/collections/implementations/apache-node-caching-linked-list/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-node-caching-linked-list",
         "0.1.0-SNAPSHOT"
       ],
@@ -604,7 +604,7 @@
     },
     "m3/collections/implementations/apache-ordered-properties/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-ordered-properties",
         "0.1.0-SNAPSHOT"
       ],
@@ -618,7 +618,7 @@
     },
     "m3/collections/implementations/apache-passive-expiring-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-passive-expiring-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -632,7 +632,7 @@
     },
     "m3/collections/implementations/apache-patricia-trie/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-patricia-trie",
         "0.1.0-SNAPSHOT"
       ],
@@ -646,7 +646,7 @@
     },
     "m3/collections/implementations/apache-predicated-bag/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-predicated-bag",
         "0.1.0-SNAPSHOT"
       ],
@@ -660,7 +660,7 @@
     },
     "m3/collections/implementations/apache-predicated-collection/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-predicated-collection",
         "0.1.0-SNAPSHOT"
       ],
@@ -674,7 +674,7 @@
     },
     "m3/collections/implementations/apache-predicated-list/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-predicated-list",
         "0.1.0-SNAPSHOT"
       ],
@@ -688,7 +688,7 @@
     },
     "m3/collections/implementations/apache-predicated-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-predicated-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -702,7 +702,7 @@
     },
     "m3/collections/implementations/apache-predicated-multi-set/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-predicated-multi-set",
         "0.1.0-SNAPSHOT"
       ],
@@ -716,7 +716,7 @@
     },
     "m3/collections/implementations/apache-predicated-navigable-set/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-predicated-navigable-set",
         "0.1.0-SNAPSHOT"
       ],
@@ -730,7 +730,7 @@
     },
     "m3/collections/implementations/apache-predicated-queue/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-predicated-queue",
         "0.1.0-SNAPSHOT"
       ],
@@ -744,7 +744,7 @@
     },
     "m3/collections/implementations/apache-predicated-set/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-predicated-set",
         "0.1.0-SNAPSHOT"
       ],
@@ -758,7 +758,7 @@
     },
     "m3/collections/implementations/apache-predicated-sorted-bag/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-predicated-sorted-bag",
         "0.1.0-SNAPSHOT"
       ],
@@ -772,7 +772,7 @@
     },
     "m3/collections/implementations/apache-predicated-sorted-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-predicated-sorted-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -786,7 +786,7 @@
     },
     "m3/collections/implementations/apache-predicated-sorted-set/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-predicated-sorted-set",
         "0.1.0-SNAPSHOT"
       ],
@@ -800,7 +800,7 @@
     },
     "m3/collections/implementations/apache-reference-identity-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-reference-identity-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -814,7 +814,7 @@
     },
     "m3/collections/implementations/apache-reference-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-reference-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -828,7 +828,7 @@
     },
     "m3/collections/implementations/apache-set-unique-list/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-set-unique-list",
         "0.1.0-SNAPSHOT"
       ],
@@ -842,7 +842,7 @@
     },
     "m3/collections/implementations/apache-singleton-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-singleton-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -856,7 +856,7 @@
     },
     "m3/collections/implementations/apache-sorted-properties/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-sorted-properties",
         "0.1.0-SNAPSHOT"
       ],
@@ -870,7 +870,7 @@
     },
     "m3/collections/implementations/apache-static-bucket-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-static-bucket-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -884,7 +884,7 @@
     },
     "m3/collections/implementations/apache-synchronized-bag/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-synchronized-bag",
         "0.1.0-SNAPSHOT"
       ],
@@ -898,7 +898,7 @@
     },
     "m3/collections/implementations/apache-synchronized-collection/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-synchronized-collection",
         "0.1.0-SNAPSHOT"
       ],
@@ -912,7 +912,7 @@
     },
     "m3/collections/implementations/apache-synchronized-multi-set/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-synchronized-multi-set",
         "0.1.0-SNAPSHOT"
       ],
@@ -926,7 +926,7 @@
     },
     "m3/collections/implementations/apache-synchronized-queue/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-synchronized-queue",
         "0.1.0-SNAPSHOT"
       ],
@@ -940,7 +940,7 @@
     },
     "m3/collections/implementations/apache-synchronized-sorted-bag/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-synchronized-sorted-bag",
         "0.1.0-SNAPSHOT"
       ],
@@ -954,7 +954,7 @@
     },
     "m3/collections/implementations/apache-transformed-bag/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-transformed-bag",
         "0.1.0-SNAPSHOT"
       ],
@@ -968,7 +968,7 @@
     },
     "m3/collections/implementations/apache-transformed-collection/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-transformed-collection",
         "0.1.0-SNAPSHOT"
       ],
@@ -982,7 +982,7 @@
     },
     "m3/collections/implementations/apache-transformed-list/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-transformed-list",
         "0.1.0-SNAPSHOT"
       ],
@@ -996,7 +996,7 @@
     },
     "m3/collections/implementations/apache-transformed-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-transformed-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -1010,7 +1010,7 @@
     },
     "m3/collections/implementations/apache-transformed-multi-valued-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-transformed-multi-valued-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -1024,7 +1024,7 @@
     },
     "m3/collections/implementations/apache-transformed-navigable-set/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-transformed-navigable-set",
         "0.1.0-SNAPSHOT"
       ],
@@ -1038,7 +1038,7 @@
     },
     "m3/collections/implementations/apache-transformed-queue/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-transformed-queue",
         "0.1.0-SNAPSHOT"
       ],
@@ -1052,7 +1052,7 @@
     },
     "m3/collections/implementations/apache-transformed-set/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-transformed-set",
         "0.1.0-SNAPSHOT"
       ],
@@ -1066,7 +1066,7 @@
     },
     "m3/collections/implementations/apache-transformed-sorted-bag/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-transformed-sorted-bag",
         "0.1.0-SNAPSHOT"
       ],
@@ -1080,7 +1080,7 @@
     },
     "m3/collections/implementations/apache-transformed-sorted-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-transformed-sorted-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -1094,7 +1094,7 @@
     },
     "m3/collections/implementations/apache-transformed-sorted-set/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-transformed-sorted-set",
         "0.1.0-SNAPSHOT"
       ],
@@ -1108,7 +1108,7 @@
     },
     "m3/collections/implementations/apache-tree-bag/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-tree-bag",
         "0.1.0-SNAPSHOT"
       ],
@@ -1122,7 +1122,7 @@
     },
     "m3/collections/implementations/apache-tree-bidi-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-tree-bidi-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -1136,7 +1136,7 @@
     },
     "m3/collections/implementations/apache-tree-list/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-tree-list",
         "0.1.0-SNAPSHOT"
       ],
@@ -1150,7 +1150,7 @@
     },
     "m3/collections/implementations/apache-unmodifiable-bag/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-unmodifiable-bag",
         "0.1.0-SNAPSHOT"
       ],
@@ -1164,7 +1164,7 @@
     },
     "m3/collections/implementations/apache-unmodifiable-bidi-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-unmodifiable-bidi-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -1178,7 +1178,7 @@
     },
     "m3/collections/implementations/apache-unmodifiable-bounded-collection/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-unmodifiable-bounded-collection",
         "0.1.0-SNAPSHOT"
       ],
@@ -1192,7 +1192,7 @@
     },
     "m3/collections/implementations/apache-unmodifiable-collection/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-unmodifiable-collection",
         "0.1.0-SNAPSHOT"
       ],
@@ -1206,7 +1206,7 @@
     },
     "m3/collections/implementations/apache-unmodifiable-entry-set/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-unmodifiable-entry-set",
         "0.1.0-SNAPSHOT"
       ],
@@ -1220,7 +1220,7 @@
     },
     "m3/collections/implementations/apache-unmodifiable-list/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-unmodifiable-list",
         "0.1.0-SNAPSHOT"
       ],
@@ -1234,7 +1234,7 @@
     },
     "m3/collections/implementations/apache-unmodifiable-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-unmodifiable-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -1248,7 +1248,7 @@
     },
     "m3/collections/implementations/apache-unmodifiable-multi-valued-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-unmodifiable-multi-valued-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -1262,7 +1262,7 @@
     },
     "m3/collections/implementations/apache-unmodifiable-navigable-set/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-unmodifiable-navigable-set",
         "0.1.0-SNAPSHOT"
       ],
@@ -1276,7 +1276,7 @@
     },
     "m3/collections/implementations/apache-unmodifiable-ordered-bidi-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-unmodifiable-ordered-bidi-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -1290,7 +1290,7 @@
     },
     "m3/collections/implementations/apache-unmodifiable-ordered-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-unmodifiable-ordered-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -1304,7 +1304,7 @@
     },
     "m3/collections/implementations/apache-unmodifiable-queue/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-unmodifiable-queue",
         "0.1.0-SNAPSHOT"
       ],
@@ -1318,7 +1318,7 @@
     },
     "m3/collections/implementations/apache-unmodifiable-sorted-bag/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-unmodifiable-sorted-bag",
         "0.1.0-SNAPSHOT"
       ],
@@ -1332,7 +1332,7 @@
     },
     "m3/collections/implementations/apache-unmodifiable-sorted-bidi-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-unmodifiable-sorted-bidi-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -1346,7 +1346,7 @@
     },
     "m3/collections/implementations/apache-unmodifiable-sorted-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-unmodifiable-sorted-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -1360,7 +1360,7 @@
     },
     "m3/collections/implementations/apache-unmodifiable-sorted-set/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-unmodifiable-sorted-set",
         "0.1.0-SNAPSHOT"
       ],
@@ -1374,7 +1374,7 @@
     },
     "m3/collections/implementations/apache-unmodifiable-trie/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-apache-unmodifiable-trie",
         "0.1.0-SNAPSHOT"
       ],
@@ -1433,8 +1433,8 @@
       ],
       "parent": "m3/collections/implementations/guava-33.4.8/android/pom.xml",
       "reason": "LOCAL_PARENT",
-      "git_blob": "3b9456b2f51d7b4d7da8b8b5f5216eb9eebd4493",
-      "before_sha256": "6f2628cd2a7ceb2ba1359c2a728aad463bcf87a7443d668519e7b55d9e057294",
+      "git_blob": "dac241c3189b2b04ae8de460babc1e8bea2cfe0a",
+      "before_sha256": "b30d382324e379ae4190fc8ae3a9366455d894cc441900c629f1620dbc4b025c",
       "parent_gav": [
         "com.google.guava",
         "guava-parent",
@@ -1473,8 +1473,8 @@
       ],
       "parent": "m3/collections/implementations/guava-33.4.8/android/pom.xml",
       "reason": "LOCAL_PARENT",
-      "git_blob": "045bdcf9a7a466656bc23bb12ee8cfd04dae375c",
-      "before_sha256": "d6c4c2e2ae7ccd81b24b0780b2c7b07c11974bb97d03f29fc900533e68ba4ec7",
+      "git_blob": "92ef143d0ac97199c30ab443e8828ea18132e886",
+      "before_sha256": "9678e40e448f1f06bd41f0cbb071b8087bf8403d30c2d40b9d273b4d92de9e78",
       "parent_gav": [
         "com.google.guava",
         "guava-parent",
@@ -1586,8 +1586,8 @@
       ],
       "parent": "m3/collections/implementations/guava-33.4.8/pom.xml",
       "reason": "LOCAL_PARENT",
-      "git_blob": "8eb8cfa8a8c11a557125e9a42ca7bd95fcadf111",
-      "before_sha256": "522a2980bd4a21d0d5c37470db034519cda3b8bf724b6189dfd653b4a9ad5556",
+      "git_blob": "0d00c37013fa8867277f67ac25ccc54805eb75c5",
+      "before_sha256": "07ac4ea6fa1f04c98592b22310388ef4cac11f3b38297ab2aba38ea9db745de7",
       "parent_gav": [
         "com.google.guava",
         "guava-parent",
@@ -1606,8 +1606,8 @@
       ],
       "parent": "m3/collections/implementations/guava-33.4.8/pom.xml",
       "reason": "LOCAL_PARENT",
-      "git_blob": "36ded32fc9404a2703e36393b535b7842b768db4",
-      "before_sha256": "0052783e1066ccbf69055b0c59b72ae69a9f8a34e78c2f268b9f7d2a1c128d0d",
+      "git_blob": "2ac631e730d626d3f34aed1f8c0086d18037fc22",
+      "before_sha256": "01b58dcf83199bd734353cc9dd144b0abf9d45c13b546224470f1b093a79ccd0",
       "parent_gav": [
         "com.google.guava",
         "guava-parent",
@@ -1646,8 +1646,8 @@
       ],
       "parent": "m3/collections/implementations/guava-33.4.8/pom.xml",
       "reason": "LOCAL_PARENT",
-      "git_blob": "1935a5c9421ca4c49a00c13d6edec090ab9f58f5",
-      "before_sha256": "67deb5bd163cd2a37ed3c856be0461551bf649fde689072e47f2dd9c6fb10f35",
+      "git_blob": "131cb57cf8fd944d6bf42770719638f811509f63",
+      "before_sha256": "3043dc29637b0c3fcf92c4d6368e2908fe17ddd61c2bd2e98a4cd172d85019cf",
       "parent_gav": [
         "com.google.guava",
         "guava-parent",
@@ -1674,7 +1674,7 @@
     },
     "m3/collections/implementations/guava-array-list-multimap/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-owned-guava-array-list-multimap",
         "0.1.0-SNAPSHOT"
       ],
@@ -1688,7 +1688,7 @@
     },
     "m3/collections/implementations/guava-array-table/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-guava-array-table",
         "0.1.0-SNAPSHOT"
       ],
@@ -1702,7 +1702,7 @@
     },
     "m3/collections/implementations/guava-concurrent-hash-multiset/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-guava-concurrent-hash-multiset",
         "0.1.0-SNAPSHOT"
       ],
@@ -1716,7 +1716,7 @@
     },
     "m3/collections/implementations/guava-enum-bi-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-owned-guava-enum-bi-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -1730,7 +1730,7 @@
     },
     "m3/collections/implementations/guava-enum-hash-bi-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-owned-guava-enum-hash-bi-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -1744,7 +1744,7 @@
     },
     "m3/collections/implementations/guava-enum-multiset/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-owned-guava-enum-multiset",
         "0.1.0-SNAPSHOT"
       ],
@@ -1758,7 +1758,7 @@
     },
     "m3/collections/implementations/guava-evicting-queue/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-owned-guava-evicting-queue",
         "0.1.0-SNAPSHOT"
       ],
@@ -1772,7 +1772,7 @@
     },
     "m3/collections/implementations/guava-hash-based-table/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-guava-hash-based-table",
         "0.1.0-SNAPSHOT"
       ],
@@ -1786,7 +1786,7 @@
     },
     "m3/collections/implementations/guava-hash-multimap/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-guava-hash-multimap",
         "0.1.0-SNAPSHOT"
       ],
@@ -1800,7 +1800,7 @@
     },
     "m3/collections/implementations/guava-hash-multiset/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-owned-guava-hash-multiset",
         "0.1.0-SNAPSHOT"
       ],
@@ -1814,7 +1814,7 @@
     },
     "m3/collections/implementations/guava-immutable-list-multimap/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-guava-immutable-list-multimap",
         "0.1.0-SNAPSHOT"
       ],
@@ -1828,7 +1828,7 @@
     },
     "m3/collections/implementations/guava-immutable-range-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-guava-immutable-range-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -1842,7 +1842,7 @@
     },
     "m3/collections/implementations/guava-immutable-range-set/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-guava-immutable-range-set",
         "0.1.0-SNAPSHOT"
       ],
@@ -1856,7 +1856,7 @@
     },
     "m3/collections/implementations/guava-immutable-set-multimap/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-guava-immutable-set-multimap",
         "0.1.0-SNAPSHOT"
       ],
@@ -1870,7 +1870,7 @@
     },
     "m3/collections/implementations/guava-immutable-sorted-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-guava-immutable-sorted-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -1884,7 +1884,7 @@
     },
     "m3/collections/implementations/guava-linked-hash-multimap/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-guava-linked-hash-multimap",
         "0.1.0-SNAPSHOT"
       ],
@@ -1898,7 +1898,7 @@
     },
     "m3/collections/implementations/guava-linked-hash-multiset/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-owned-guava-linked-hash-multiset",
         "0.1.0-SNAPSHOT"
       ],
@@ -1912,7 +1912,7 @@
     },
     "m3/collections/implementations/guava-linked-list-multimap/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-guava-linked-list-multimap",
         "0.1.0-SNAPSHOT"
       ],
@@ -1926,7 +1926,7 @@
     },
     "m3/collections/implementations/guava-minmax-priority-queue/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-owned-guava-minmax-priority-queue",
         "0.1.0-SNAPSHOT"
       ],
@@ -1940,7 +1940,7 @@
     },
     "m3/collections/implementations/guava-tree-based-table/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-guava-tree-based-table",
         "0.1.0-SNAPSHOT"
       ],
@@ -1954,7 +1954,7 @@
     },
     "m3/collections/implementations/guava-tree-multimap/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-guava-tree-multimap",
         "0.1.0-SNAPSHOT"
       ],
@@ -1968,7 +1968,7 @@
     },
     "m3/collections/implementations/guava-tree-multiset/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-guava-tree-multiset",
         "0.1.0-SNAPSHOT"
       ],
@@ -1982,7 +1982,7 @@
     },
     "m3/collections/implementations/guava-tree-range-set/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-guava-tree-range-set",
         "0.1.0-SNAPSHOT"
       ],
@@ -1996,7 +1996,7 @@
     },
     "m3/collections/implementations/jdk-array-blocking-queue/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-jdk-array-blocking-queue",
         "0.1.0-SNAPSHOT"
       ],
@@ -2010,7 +2010,7 @@
     },
     "m3/collections/implementations/jdk-attributes/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-jdk-attributes",
         "0.1.0-SNAPSHOT"
       ],
@@ -2024,7 +2024,7 @@
     },
     "m3/collections/implementations/jdk-concurrent-hash-map-key-set-view/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-jdk-concurrent-hash-map-key-set-view",
         "0.1.0-SNAPSHOT"
       ],
@@ -2038,7 +2038,7 @@
     },
     "m3/collections/implementations/jdk-concurrent-hash-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-jdk-concurrent-hash-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -2052,7 +2052,7 @@
     },
     "m3/collections/implementations/jdk-concurrent-linked-deque/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-jdk-concurrent-linked-deque",
         "0.1.0-SNAPSHOT"
       ],
@@ -2066,7 +2066,7 @@
     },
     "m3/collections/implementations/jdk-concurrent-linked-queue/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-jdk-concurrent-linked-queue",
         "0.1.0-SNAPSHOT"
       ],
@@ -2080,7 +2080,7 @@
     },
     "m3/collections/implementations/jdk-concurrent-skip-list-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-jdk-concurrent-skip-list-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -2094,7 +2094,7 @@
     },
     "m3/collections/implementations/jdk-concurrent-skip-list-set/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-jdk-concurrent-skip-list-set",
         "0.1.0-SNAPSHOT"
       ],
@@ -2108,7 +2108,7 @@
     },
     "m3/collections/implementations/jdk-copy-on-write-array-list/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-jdk-copy-on-write-array-list",
         "0.1.0-SNAPSHOT"
       ],
@@ -2122,7 +2122,7 @@
     },
     "m3/collections/implementations/jdk-copy-on-write-array-set/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-jdk-copy-on-write-array-set",
         "0.1.0-SNAPSHOT"
       ],
@@ -2136,7 +2136,7 @@
     },
     "m3/collections/implementations/jdk-delay-queue/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-jdk-delay-queue",
         "0.1.0-SNAPSHOT"
       ],
@@ -2150,7 +2150,7 @@
     },
     "m3/collections/implementations/jdk-enum-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-jdk-enum-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -2164,7 +2164,7 @@
     },
     "m3/collections/implementations/jdk-hashtable/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-jdk-hashtable",
         "0.1.0-SNAPSHOT"
       ],
@@ -2178,7 +2178,7 @@
     },
     "m3/collections/implementations/jdk-linked-blocking-queue/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-jdk-linked-blocking-queue",
         "0.1.0-SNAPSHOT"
       ],
@@ -2192,7 +2192,7 @@
     },
     "m3/collections/implementations/jdk-priority-blocking-queue/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-jdk-priority-blocking-queue",
         "0.1.0-SNAPSHOT"
       ],
@@ -2206,7 +2206,7 @@
     },
     "m3/collections/implementations/jdk-properties/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-jdk-properties",
         "0.1.0-SNAPSHOT"
       ],
@@ -2220,7 +2220,7 @@
     },
     "m3/collections/implementations/jdk-stack/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-jdk-stack",
         "0.1.0-SNAPSHOT"
       ],
@@ -2234,7 +2234,7 @@
     },
     "m3/collections/implementations/jdk-synchronous-queue/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-jdk-synchronous-queue",
         "0.1.0-SNAPSHOT"
       ],
@@ -2248,7 +2248,7 @@
     },
     "m3/collections/implementations/spring-auto-populating-list/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-spring-auto-populating-list",
         "0.1.0-SNAPSHOT"
       ],
@@ -2262,7 +2262,7 @@
     },
     "m3/collections/implementations/spring-case-insensitive-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-owned-spring-case-insensitive-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -2276,7 +2276,7 @@
     },
     "m3/collections/implementations/spring-concurrent-reference-hash-map/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-scaffold-spring-concurrent-reference-hash-map",
         "0.1.0-SNAPSHOT"
       ],
@@ -2290,7 +2290,7 @@
     },
     "m3/collections/implementations/spring-multi-value-map-adapter/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-owned-spring-multi-value-map-adapter",
         "0.1.0-SNAPSHOT"
       ],
@@ -2318,7 +2318,7 @@
     },
     "m3/collections/interop/qualification/m3-direct-spring-multivaluemap-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-spring-direct-provider-recipe",
         "1.0.0"
       ],
@@ -2394,8 +2394,8 @@
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "876e23d5a4e8f0c08e469793142b80d2d8e73fb7",
-      "before_sha256": "a94e3df721ccfc8157b55e3055074d613e35df810cc4e5ec1a4f7c0d85481903",
+      "git_blob": "4f410bf9e102b11cc84ed206e06eaf6a31c86e64",
+      "before_sha256": "fb612174826cc231766878f137e81f33ba98e890461d161a42c76e89e67b39f3",
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
@@ -2415,20 +2415,20 @@
     },
     "m3/collections/interop/recipe/five-library-index-views-20261017/canonical/recipes/m3jdk21-five-library-index-views-20261017/pom.xml": {
       "gav": [
-        "com.synexia.proof",
+        "jdk.internal.m3.proof",
         "m3-five-library-index-view-qualification",
         "1.0.0"
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "f1fe388659875db8e4d1554b49335bed07a72149",
-      "before_sha256": "1d3ee74898b3b16926b797e9393a12470dd3e27bd9a1d06d6d57d7582e8dcde3",
+      "git_blob": "cb15c81b830e5bb1540bd348e4945a01fdda4904",
+      "before_sha256": "9ab1abb3c8c66fab05c48feb2349f8d08749b6b8524af1c13e615c353b956c80",
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
     "m3/collections/interop/recipe/five-library-index-views-20261017/pom.xml": {
       "gav": [
-        "com.synexia.proof",
+        "jdk.internal.m3.proof",
         "m3-five-library-receiver-recipe-proof",
         "1.0.0"
       ],
@@ -2442,7 +2442,7 @@
     },
     "m3/collections/interop/recipe/m3jdk21-five-provider-key-groups-20261018/pom.xml": {
       "gav": [
-        "com.synexia.proof",
+        "jdk.internal.m3.proof",
         "m3jdk21-five-provider-key-groups",
         "1.0.0"
       ],
@@ -2456,7 +2456,7 @@
     },
     "m3/collections/interop/recipe/m3jdk21-five-provider-key-ranges-20261018/pom.xml": {
       "gav": [
-        "com.synexia.proof",
+        "jdk.internal.m3.proof",
         "m3jdk21-five-provider-key-ranges",
         "1.0.0"
       ],
@@ -2518,8 +2518,8 @@
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "2e9dd0126296be03531c2d7fcb008cb4b1186a91",
-      "before_sha256": "7308f1db65883601ab9645b4d824178773d1a815fe9b644f2ae59f5513867573",
+      "git_blob": "81aafda7012b3e51fd2aaac802fa51f45ce5b5fd",
+      "before_sha256": "49a4e3e13a643c2ec157520d996d2f23529eb2be04159ed19650ec3a92e83f0d",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/collections/pom.xml"
@@ -2540,7 +2540,7 @@
     },
     "m3/collections/qualification/bimap-mainline-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-bimap-mainline-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2554,7 +2554,7 @@
     },
     "m3/collections/qualification/deque-zero-mask-20261018/pom.xml": {
       "gav": [
-        "com.m3.collections",
+        "jdk.m3.collections",
         "m3-deque-zero-mask-recipe",
         "1.0-SNAPSHOT"
       ],
@@ -2582,7 +2582,7 @@
     },
     "m3/collections/qualification/filtered-list-mutation-20261018/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-filtered-list-mutation-receiver-proof",
         "1.0-SNAPSHOT"
       ],
@@ -2610,7 +2610,7 @@
     },
     "m3/collections/qualification/five-library-prepared-rows-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-five-library-prepared-rows-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2624,7 +2624,7 @@
     },
     "m3/collections/qualification/five-provider-count-recovery-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "five-provider-count-recovery-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2652,7 +2652,7 @@
     },
     "m3/collections/qualification/m3-arrayification-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-arrayification-20261018-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2666,7 +2666,7 @@
     },
     "m3/collections/qualification/m3-commons-bag-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-commons-bag-recipe-20261018",
         "1.0.0-SNAPSHOT"
       ],
@@ -2680,7 +2680,7 @@
     },
     "m3/collections/qualification/m3-counted-sdk-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-counted-sdk-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2694,7 +2694,7 @@
     },
     "m3/collections/qualification/m3-entry-facade-cache-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-entry-facade-cache-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2708,7 +2708,7 @@
     },
     "m3/collections/qualification/m3-filtered-navigation-20261018/evidence/recipe/sdk-results/m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml": {
       "gav": [
-        "com.m3.qualification",
+        "jdk.m3.qualification",
         "filtered-navigation-runtime-20261018",
         "1.0-SNAPSHOT"
       ],
@@ -2721,7 +2721,7 @@
     },
     "m3/collections/qualification/m3-filtered-navigation-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-collections-contract-refinement-recipe-proof",
         "1"
       ],
@@ -2735,7 +2735,7 @@
     },
     "m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml": {
       "gav": [
-        "com.m3.qualification",
+        "jdk.m3.qualification",
         "filtered-navigation-runtime-20261018",
         "1.0-SNAPSHOT"
       ],
@@ -2749,7 +2749,7 @@
     },
     "m3/collections/qualification/m3-five-fork-prepared-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-five-fork-prepared-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2763,7 +2763,7 @@
     },
     "m3/collections/qualification/m3-five-library-occurrences-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-five-library-occurrence-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2777,7 +2777,7 @@
     },
     "m3/collections/qualification/m3-five-provider-bimaps-master-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-five-provider-bidi-master-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2791,7 +2791,7 @@
     },
     "m3/collections/qualification/m3-five-provider-current-census-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-five-provider-current-census-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2805,7 +2805,7 @@
     },
     "m3/collections/qualification/m3-generic-object-list-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-generic-object-list-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2819,7 +2819,7 @@
     },
     "m3/collections/qualification/m3-guava-setmultimap-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-guava-setmultimap-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2833,7 +2833,7 @@
     },
     "m3/collections/qualification/m3-index-mask-window-20261017/pom.xml": {
       "gav": [
-        "com.m3.verification",
+        "jdk.m3.verification",
         "m3-index-mask-window-recipe-proof",
         "1.0.0"
       ],
@@ -2847,7 +2847,7 @@
     },
     "m3/collections/qualification/m3-int-array-index-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-int-array-index-source-recipe",
         "1.0.0"
       ],
@@ -2861,7 +2861,7 @@
     },
     "m3/collections/qualification/m3-linked-list-live-mask-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-linked-list-live-mask-recipe",
         "1.0.0"
       ],
@@ -2875,7 +2875,7 @@
     },
     "m3/collections/qualification/m3-long-bitmap-algebra-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-long-bitmap-algebra-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2889,7 +2889,7 @@
     },
     "m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-long-bitmap-filter-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2903,7 +2903,7 @@
     },
     "m3/collections/qualification/m3-long-dag-doop-20261017/pom.xml": {
       "gav": [
-        "com.m3.verification",
+        "jdk.m3.verification",
         "m3-long-doop-dag-recipe",
         "1.0.0"
       ],
@@ -2917,7 +2917,7 @@
     },
     "m3/collections/qualification/m3-long-direct-address-kernel-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-long-direct-address-kernel-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2931,7 +2931,7 @@
     },
     "m3/collections/qualification/m3-long-index-path-jni-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-long-index-path-jni-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2945,7 +2945,7 @@
     },
     "m3/collections/qualification/m3-long-index-path-masks-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-long-index-path-mask-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2959,7 +2959,7 @@
     },
     "m3/collections/qualification/m3-long-index-projection-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-long-index-projection-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2973,7 +2973,7 @@
     },
     "m3/collections/qualification/m3-long-path-input-budget-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-long-path-input-budget-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -2987,7 +2987,7 @@
     },
     "m3/collections/qualification/m3-native-five-provider-core-20261018/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-five-provider-native-core-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -3007,14 +3007,14 @@
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "b2dc1d921d90911ef7583b2837c592d9d240314d",
-      "before_sha256": "110671aaece9b0f65ee41352d96d22df5996808d0ad07270301cee6399955881",
+      "git_blob": "d4e9ae71dcf3b0388180f45fd7a736376f6d18ba",
+      "before_sha256": "3f4c96a30e1ae8d836be910ada3e71989db596a3de59030604d8d44d1e85f5d2",
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
     "m3/collections/qualification/m3-sdk-families-20261017/recipe-v3/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-sdk-sorted-contract-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -3028,7 +3028,7 @@
     },
     "m3/collections/qualification/m3-sdk-families-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-collection-sdk-names-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -3042,7 +3042,7 @@
     },
     "m3/collections/qualification/m3-sdk-provider-names-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-sdk-provider-names-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -3056,7 +3056,7 @@
     },
     "m3/collections/qualification/m3-state-mask-arrays-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "m3-state-mask-arrays-recipe",
         "1.0.0-SNAPSHOT"
       ],
@@ -3068,9 +3068,9 @@
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/collections/qualification/m3-state-mask-arrays-20261017/recipe/pom.xml"
     },
-    "m3/collections/qualification/mask-window-sparse-20261017/tooling/synexia-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017/pom.xml": {
+    "m3/collections/qualification/mask-window-sparse-20261017/tooling/m3-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "mask-window-sparse-proof",
         "1.0-SNAPSHOT"
       ],
@@ -3080,7 +3080,7 @@
       "before_sha256": "e0309d1cc2abb5eefe001bb11f2e16f58c008097fc36ead8f20de691f424acad",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/collections/qualification/mask-window-sparse-20261017/tooling/synexia-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017/pom.xml"
+      "install_root": "m3/collections/qualification/mask-window-sparse-20261017/tooling/m3-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017/pom.xml"
     },
     "m3/collections/qualification/object-state-batch-28/pom.xml": {
       "gav": [
@@ -3098,7 +3098,7 @@
     },
     "m3/collections/qualification/sdk-bulk-capture-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "sdk-bulk-capture-recipe-receiver",
         "1.0.0"
       ],
@@ -3126,7 +3126,7 @@
     },
     "m3/collections/qualification/sdk-mask-bounded-current-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "sdk-mask-bounded-current-recipe",
         "1.0.0"
       ],
@@ -3140,40 +3140,40 @@
     },
     "m3/collections/qualification/stable-order-restoration-20261020/recipe-custody/catalogue/recipe-host/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-wrapper-convergence-recipe-proof",
         "1"
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "815794336e3769d90a7f6fee080dae343fde5dca",
-      "before_sha256": "1c5154e9b138e96de4e48cb140e761194e860d6e3ff5ba062770d10652faeeea",
+      "git_blob": "ddd9bdf7915dee69a314539f1982af3a6e1e5074",
+      "before_sha256": "0a1c81dcc36ef6a77c6ba812797cde06fa8d7ffdafa73f13b6ef846b3ab2a572",
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
     "m3/collections/qualification/stable-order-restoration-20261020/recipe-custody/recipe-host/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-wrapper-convergence-recipe-proof",
         "1"
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "815794336e3769d90a7f6fee080dae343fde5dca",
-      "before_sha256": "1c5154e9b138e96de4e48cb140e761194e860d6e3ff5ba062770d10652faeeea",
+      "git_blob": "ddd9bdf7915dee69a314539f1982af3a6e1e5074",
+      "before_sha256": "0a1c81dcc36ef6a77c6ba812797cde06fa8d7ffdafa73f13b6ef846b3ab2a572",
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
     "m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-wrapper-convergence-recipe-proof",
         "1"
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "815794336e3769d90a7f6fee080dae343fde5dca",
-      "before_sha256": "1c5154e9b138e96de4e48cb140e761194e860d6e3ff5ba062770d10652faeeea",
+      "git_blob": "ddd9bdf7915dee69a314539f1982af3a6e1e5074",
+      "before_sha256": "0a1c81dcc36ef6a77c6ba812797cde06fa8d7ffdafa73f13b6ef846b3ab2a572",
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
@@ -3221,7 +3221,7 @@
     },
     "m3/collections/recipe/cpu-mask-runs-20261017/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-cpu-mask-runs-recipe",
         "1"
       ],
@@ -3487,7 +3487,7 @@
     },
     "m3/collections/recipe/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-collection-lane-recipe-proof",
         "1"
       ],
@@ -3507,8 +3507,8 @@
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "1c8c682460c03541925dc79376d5d92ee28103bc",
-      "before_sha256": "a2b05b17d35fe094bdf9b97041ce5e2992e92451f363b0c7cb6309c76839e4b8",
+      "git_blob": "2ee10775aa9593702076e715aac0881496d34364",
+      "before_sha256": "109abd682eefdedfc29c40683d9d5a18d511a11bef1931fdb4478a31e90570ba",
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_RECIPE_PROOF"
     },
@@ -3542,7 +3542,7 @@
     },
     "m3/collections/recipes/native-index-range-20261017/pom.xml": {
       "gav": [
-        "com.synexia.m3.recipes",
+        "jdk.internal.m3.recipes",
         "native-index-range-20261017",
         "1.0.0-SNAPSHOT"
       ],
@@ -3569,7 +3569,7 @@
     },
     "m3/collections/recipes/sdk-family-names-20261017/pom.xml": {
       "gav": [
-        "com.synexia.m3.recipes",
+        "jdk.internal.m3.recipes",
         "sdk-family-names-20261017",
         "1.0.0-SNAPSHOT"
       ],
@@ -3581,7 +3581,7 @@
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/collections/recipes/sdk-family-names-20261017/pom.xml"
     },
-    "m3/collections/recipes/sdk-family-names-20261017/src/main/resources/com/synexia/rewrite/sdk-family-names-20261017/templates/m3/collections/interop/pom.xml": {
+    "m3/collections/recipes/sdk-family-names-20261017/src/main/resources/jdk/internal/m3/rewrite/sdk-family-names-20261017/templates/m3/collections/interop/pom.xml": {
       "gav": [
         "com.m3",
         "m3-collections-interop",
@@ -3596,7 +3596,7 @@
     },
     "m3/collections/recipes/sdk-guava-bimap-20261017/pom.xml": {
       "gav": [
-        "com.synexia.m3.recipes",
+        "jdk.internal.m3.recipes",
         "sdk-guava-bimap-20261017",
         "1.0.0-SNAPSHOT"
       ],
@@ -3610,7 +3610,7 @@
     },
     "m3/collections/relocation/five-provider-20261018/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "five-provider-package-relocation-recipes",
         "1.0.0-SNAPSHOT"
       ],
@@ -3638,7 +3638,7 @@
     },
     "m3/collections/snapshot-recipe-20261017/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-long-sorted-snapshot-recipe-proof",
         "1.0-SNAPSHOT"
       ],
@@ -3652,7 +3652,7 @@
     },
     "m3/collections/verification/tombstone-reuse-20261017/pom.xml": {
       "gav": [
-        "com.m3.verification",
+        "jdk.m3.verification",
         "tombstone-reuse-receiver",
         "20261017"
       ],
@@ -3666,7 +3666,7 @@
     },
     "m3/collections/wrappers/composition-20261017/recipe/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "wrapper-composition-20261017",
         "1"
       ],
@@ -3728,8 +3728,8 @@
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "94c1a906fbe3fc447497771ea36adb44da0d109e",
-      "before_sha256": "6d4a89f8bdbb32ba87bb3d1e803de350b9e14474a369cafe100e5aba6ce0c271",
+      "git_blob": "984a0d073d52f4774537fc756d40617eda734e3e",
+      "before_sha256": "60390e1d94038fe9c2a2b03ff0fe791b8dc3b6164f9b1b464163f1ca926cb0b9",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/eclipse/filesystem/pom.xml"
@@ -3742,8 +3742,8 @@
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "967752400a2110d57eca887eb465c6e91b33917f",
-      "before_sha256": "6dea6636a98ea1e2a12e3c7ab542a3bd16e19a015a08e8a2239f9bf87e034f91",
+      "git_blob": "469b027dc713284e28083c1893348b4ec717cafe",
+      "before_sha256": "15002d6c3b3ab9ca8d8ecb820a260d41ce7d9f1fd04f811fa9af396808ae4f2e",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/eclipse/framework/pom.xml"
@@ -3778,7 +3778,7 @@
     },
     "m3/eclipse/jdt/receiving/array-nodelist-20261019/compiler/pom.xml": {
       "gav": [
-        "com.synexia.receiving",
+        "jdk.internal.m3.receiving",
         "jdt-exact-compiler-source",
         "20261019"
       ],
@@ -3787,7 +3787,7 @@
       "git_blob": "4e96ea49cb9d3659ab6efc1936b1491313d0fc11",
       "before_sha256": "07e7a6b26afd0da99d1c41dc41e933dd608654b73f5566c1ba48fdaa1e5a5d27",
       "parent_gav": [
-        "com.synexia.receiving",
+        "jdk.internal.m3.receiving",
         "jdt-array-nodelist-source",
         "20261019"
       ],
@@ -3798,7 +3798,7 @@
     },
     "m3/eclipse/jdt/receiving/array-nodelist-20261019/core/pom.xml": {
       "gav": [
-        "com.synexia.receiving",
+        "jdk.internal.m3.receiving",
         "jdt-exact-core-source",
         "20261019"
       ],
@@ -3807,7 +3807,7 @@
       "git_blob": "0105308e5011bbb7c07614acc55246d6a2ba9b81",
       "before_sha256": "23c9d2027f18f58c7e53df5f6563ec3a9f2d97cd0ee54729f51ea38f6b2313f3",
       "parent_gav": [
-        "com.synexia.receiving",
+        "jdk.internal.m3.receiving",
         "jdt-array-nodelist-source",
         "20261019"
       ],
@@ -3818,7 +3818,7 @@
     },
     "m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml": {
       "gav": [
-        "com.synexia.receiving",
+        "jdk.internal.m3.receiving",
         "jdt-array-nodelist-source",
         "20261019"
       ],
@@ -3830,16 +3830,16 @@
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/eclipse/jdt/receiving/array-nodelist-20261019/pom.xml"
     },
-    "m3/eclipse/jdt/receiving/array-nodelist-20261019/recipe-custody/synexia-openrewrite-recipes/verification/parser-collections-sdk-20261019/pom.xml": {
+    "m3/eclipse/jdt/receiving/array-nodelist-20261019/recipe-custody/m3-openrewrite-recipes/verification/parser-collections-sdk-20261019/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "parser-collections-sdk",
         "1.0-SNAPSHOT"
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "4e894e091ac2418aa849ae26f1650d419b9ea4d0",
-      "before_sha256": "c5e4998cc807f5eb3c89a6016b4bccb21d6f5b4609c5b3a3b7b882d8b4e6e6b3",
+      "git_blob": "d34b6c2242067b0a7d848bc40b6cbffe08b834cd",
+      "before_sha256": "56137a012f70ee765aa10741138dbc3f9d6ff5b7c9294016475080626b7ed8ee",
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
@@ -4103,7 +4103,7 @@
     },
     "m3/ports/collections/pom.xml": {
       "gav": [
-        "com.m3.compat",
+        "jdk.m3.compat",
         "m3-collection-port-wave1",
         "0.1.0-SNAPSHOT"
       ],
@@ -4131,7 +4131,7 @@
     },
     "m3/ports/compiletime/qualification/program-precompute-20261017/escape-recipe/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-program-escape-precompute-recipe-proof",
         "1"
       ],
@@ -4145,7 +4145,7 @@
     },
     "m3/ports/indexstring/pom.xml": {
       "gav": [
-        "com.m3.compat",
+        "jdk.m3.compat",
         "indexstring-retained-view",
         "0.1.0-SNAPSHOT"
       ],
@@ -4179,8 +4179,8 @@
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "30fd0cacedca97970b987cda3b2e83cd539552b0",
-      "before_sha256": "ca10d3e230c56de85d5739d3e759d560eb86bdcfdb8017d6e5371c2d973c3cf3",
+      "git_blob": "aa8432368a29cd953bd558591baa5b8eeb9f660d",
+      "before_sha256": "bc1a399e51fd2211233eff9b5f028e74c157cba0288236321f13b1badaf69cd5",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/ports/parallel-bulk/pom.xml"
@@ -4271,7 +4271,7 @@
     },
     "m3/runtime-integration/fix-root-ascii-case/pom.xml": {
       "gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "root-ascii-case-fix",
         "0.1.0-SNAPSHOT"
       ],
@@ -4285,7 +4285,7 @@
     },
     "m3/runtime-integration/fix/pom.xml": {
       "gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "jni-fix",
         "0.1.0-SNAPSHOT"
       ],
@@ -4299,7 +4299,7 @@
     },
     "m3/runtime-integration/primitive-address-identity/pom.xml": {
       "gav": [
-        "com.m3.proof",
+        "jdk.m3.proof",
         "primitive-address-identity-receiver",
         "1.0-SNAPSHOT"
       ],
@@ -4313,7 +4313,7 @@
     },
     "m3/runtime-integration/qualification/bitlane-count-skip-20261019/recipes/m3jdk21-bitlane-runtime-count-skip-20261019/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3jdk21-bitlane-runtime-count-skip-proof",
         "1.0-SNAPSHOT"
       ],
@@ -4327,7 +4327,7 @@
     },
     "m3/runtime-integration/regex-precompute/pom.xml": {
       "gav": [
-        "com.m3.proof",
+        "jdk.m3.proof",
         "regex-precompute-receiver",
         "1.0-SNAPSHOT"
       ],
@@ -4341,7 +4341,7 @@
     },
     "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-facade-custody-1-v1/retained/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-collections-contract-refinement-recipe-proof",
         "1"
       ],
@@ -4354,7 +4354,7 @@
     },
     "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/evidence/recipe-runtime-facade-v1/retained/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-collections-contract-refinement-recipe-proof",
         "1"
       ],
@@ -4367,7 +4367,7 @@
     },
     "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/parser-source/rewrite-java-21/pom.xml": {
       "gav": [
-        "com.synexia.sourcebuilt.openrewrite",
+        "jdk.internal.m3.sourcebuilt.openrewrite",
         "rewrite-java-21",
         "8.17.1-m3-javadoc-1"
       ],
@@ -4380,14 +4380,14 @@
     },
     "m3/runtime-integration/runtime-progress-facade-20261018/recipe-custody/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-runtime-progress-facade-recipe-proof",
         "1"
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "a35ffba25012dd4cf4b2539d8b3c15bc2bec41b6",
-      "before_sha256": "824ced27a427e35901d413eb8c8beac0ee657d991a03079a5d1cc59e29f76092",
+      "git_blob": "94733e154cdd2cfa33f4d29f9f1b1a07176a540b",
+      "before_sha256": "2658882451ec25f1ff3ebaea743a8934aa1221db023777537636439dafa6b1e1",
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
@@ -4404,10 +4404,10 @@
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
-    "m3/synexia-import/intakes/regex-precompute-v7-20261007/evidence/junit-module/pom.xml": {
+    "m3/m3-import/intakes/regex-precompute-v7-20261007/evidence/junit-module/pom.xml": {
       "gav": [
         "com.m3",
-        "m3-synexia-import",
+        "m3-import",
         "0.1.0-SNAPSHOT"
       ],
       "parent": null,
@@ -4417,10 +4417,10 @@
       "disposition": "EXCLUDE",
       "classification": "RETAINED_EVIDENCE"
     },
-    "m3/synexia-import/pom.xml": {
+    "m3/m3-import/pom.xml": {
       "gav": [
         "com.m3",
-        "m3-synexia-import",
+        "m3-import",
         "0.1.0-SNAPSHOT"
       ],
       "parent": null,
@@ -4429,18 +4429,18 @@
       "before_sha256": "d85d3d4ed6c2ed2b2c637d64805c5f9462e2157ba66019be15075ca1bafbddb0",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/synexia-import/pom.xml"
+      "install_root": "m3/m3-import/pom.xml"
     },
-    "m3/synexia-import/pure-int-recipe-custody/pom.xml": {
+    "m3/m3-import/pure-int-recipe-custody/pom.xml": {
       "gav": [
         "com.synexia",
-        "synexia-openrewrite-recipes",
+        "m3-openrewrite-recipes",
         "1.0.0-SNAPSHOT"
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "4fae0efa452e143b8e9c8ac90ce957ee509fa9b1",
-      "before_sha256": "4dd70f65e3040ba1e7555f7821d88fa176318a2c95c7a2458d034949b0c6e279",
+      "git_blob": "1064b6bc13f6caaf80f56b09bbd070a275b17552",
+      "before_sha256": "f2a9915c1f8c4afd0ef8916a69960897bd0f44f8d47907ba2e469f5fb26765d9",
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
@@ -4452,8 +4452,8 @@
       ],
       "parent": "m3/pom.xml",
       "reason": "LOCAL_PARENT",
-      "git_blob": "83801108e70818df914dbf76db4c7499761bcf01",
-      "before_sha256": "5234a17c2844fa9ad8da70cdb09a8870d7a9b3896cae55facea23713314c92de",
+      "git_blob": "c983649d5150a89d5d0d7eb09d348a07c6388550",
+      "before_sha256": "1fd8cbc4025d985defb18ad7c2118d0cb5d98385a25df80a018ffdcf4c0a8ea4",
       "parent_gav": [
         "com.m3",
         "m3jdk21-control-reactor",
@@ -4472,14 +4472,14 @@
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "693156006961717eccfc649585e724d67682b3df",
-      "before_sha256": "15f0d5a0e942749392480372ff4b414949becb11370d1dbe25dbdda7dfb50209",
+      "git_blob": "e01cddcbac3751bfa79368c3727343754c7e3b21",
+      "before_sha256": "37b503fb5aee9a1f3a02d0efaa8b224f31c9c2aaa5d8e0079143bc9bd8fb73fb",
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
     "m3/tooling/atom-logic-receiver/pom.xml": {
       "gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "atom-logic-receiver-profile",
         "1.0.0-SNAPSHOT"
       ],
@@ -4519,7 +4519,7 @@
     },
     "m3/tooling/backport-dag/pom.xml": {
       "gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "backport-dag",
         "0.1.0-SNAPSHOT"
       ],
@@ -4560,7 +4560,7 @@
     },
     "m3/tooling/charcopy-current-successor/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "charcopy-current-successor-proof",
         "1.0.0"
       ],
@@ -4625,7 +4625,7 @@
     },
     "m3/tooling/jmod-recipes/cpu-tools/model-quantize/pom.xml": {
       "gav": [
-        "com.m3.tools",
+        "jdk.m3.tools",
         "model-quantize",
         "1.0-SNAPSHOT"
       ],
@@ -4653,7 +4653,7 @@
     },
     "m3/tooling/jmod-recipes/quantize-recipe-20261017/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-cpu-int8-receiver-recipe",
         "1.0-SNAPSHOT"
       ],
@@ -4707,7 +4707,7 @@
     },
     "m3/tooling/migration-recipes/apache-reuse/pom.xml": {
       "gav": [
-        "com.synexia.build",
+        "jdk.internal.m3.build",
         "apache-public-reuse-proof",
         "1.0-SNAPSHOT"
       ],
@@ -4721,7 +4721,7 @@
     },
     "m3/tooling/migration-recipes/pom.xml": {
       "gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "migration-recipes",
         "0.1.0-SNAPSHOT"
       ],
@@ -4733,7 +4733,7 @@
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/tooling/migration-recipes/pom.xml"
     },
-    "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt-workflow/before/pom.xml": {
+    "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt-workflow/before/pom.xml": {
       "gav": [
         "com.m3",
         "a3",
@@ -4741,20 +4741,20 @@
       ],
       "parent": null,
       "reason": "EXTERNAL_PARENT",
-      "git_blob": "049b485bd0e08ceda4996a9f2985037578ab4fa4",
-      "before_sha256": "27308b049acc122f62f9cb9a9a679a94640952c423b04495c0ef5b9a2c824ec1",
+      "git_blob": "0a1bafd87469b61f5d89721d71425f25f6da4c2d",
+      "before_sha256": "55f17db9b3221e44846723ab7a968a64dec744add4a9b298b6608d12622a5b8b",
       "parent_gav": [
         "com.m3",
         "m3jdk21-control-reactor",
         "0.1.0-SNAPSHOT"
       ],
-      "parent_candidate": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/pom.xml",
+      "parent_candidate": "m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/pom.xml",
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
     "m3/tooling/migration-recipes/tasks/a3-code-string-repair-20261006/verification/pom.xml": {
       "gav": [
-        "com.m3.verification",
+        "jdk.m3.verification",
         "a3-code-string-repair",
         "20261006"
       ],
@@ -4768,7 +4768,7 @@
     },
     "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/pom.xml": {
       "gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "atom-spectrum-proof",
         "0.1.0-SNAPSHOT"
       ],
@@ -4782,7 +4782,7 @@
     },
     "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/a3-behavior-verification/pom.xml": {
       "gav": [
-        "com.m3.verification",
+        "jdk.m3.verification",
         "jcc-ci-a3-behavior",
         "20261006"
       ],
@@ -4796,7 +4796,7 @@
     },
     "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/verification/pom.xml": {
       "gav": [
-        "com.m3.verification",
+        "jdk.m3.verification",
         "jcc-ci-repair",
         "20261006"
       ],
@@ -4810,20 +4810,20 @@
     },
     "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/epoch-review-v01/input-epoch/guards/m3/tooling/migration-recipes/pom.xml": {
       "gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "migration-recipes",
         "0.1.0-SNAPSHOT"
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "f4da664dbcfd0d2d365e6a312fb4361dbac0c03c",
-      "before_sha256": "12d2b223fd12570bfc0fb1fa71d2192c96fe2c4f5efb95bccfdd4c42f1724b43",
+      "git_blob": "5606708a9efe70a5885e439a610997489f6add60",
+      "before_sha256": "54ece7e45f750d961c4f16ed85a6fd890a40e2838d00e81b8be8813e7d2ab6de",
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
     "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/pom.xml": {
       "gav": [
-        "com.m3.verification",
+        "jdk.m3.verification",
         "jcc-merge-mapping-recovery-v03",
         "20261006"
       ],
@@ -4837,20 +4837,20 @@
     },
     "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/receiving-input/guards/m3/tooling/migration-recipes/pom.xml": {
       "gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "migration-recipes",
         "0.1.0-SNAPSHOT"
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "f4da664dbcfd0d2d365e6a312fb4361dbac0c03c",
-      "before_sha256": "12d2b223fd12570bfc0fb1fa71d2192c96fe2c4f5efb95bccfdd4c42f1724b43",
+      "git_blob": "5606708a9efe70a5885e439a610997489f6add60",
+      "before_sha256": "54ece7e45f750d961c4f16ed85a6fd890a40e2838d00e81b8be8813e7d2ab6de",
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
     "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/template-history/mapping-v02/pom.xml": {
       "gav": [
-        "com.m3.verification",
+        "jdk.m3.verification",
         "jcc-merge-mapping-recovery-v02",
         "20261006"
       ],
@@ -4863,7 +4863,7 @@
     },
     "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/template-history/mapping-v03/pom.xml": {
       "gav": [
-        "com.m3.verification",
+        "jdk.m3.verification",
         "jcc-merge-mapping-recovery-v03",
         "20261006"
       ],
@@ -4876,7 +4876,7 @@
     },
     "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/template-history/mapping-v03/previous-input-epoch-01/pom.xml": {
       "gav": [
-        "com.m3.verification",
+        "jdk.m3.verification",
         "jcc-merge-mapping-recovery-v03",
         "20261006"
       ],
@@ -4889,7 +4889,7 @@
     },
     "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/template-history/mapping/pom.xml": {
       "gav": [
-        "com.m3.verification",
+        "jdk.m3.verification",
         "jcc-merge-mapping-recovery",
         "20261006"
       ],
@@ -4902,7 +4902,7 @@
     },
     "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/pom.xml": {
       "gav": [
-        "com.m3.verification",
+        "jdk.m3.verification",
         "jcc-merge-mapping-recovery-v04",
         "20261006"
       ],
@@ -4916,20 +4916,20 @@
     },
     "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/receiving-input/guards/m3/tooling/migration-recipes/pom.xml": {
       "gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "migration-recipes",
         "0.1.0-SNAPSHOT"
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "f4da664dbcfd0d2d365e6a312fb4361dbac0c03c",
-      "before_sha256": "12d2b223fd12570bfc0fb1fa71d2192c96fe2c4f5efb95bccfdd4c42f1724b43",
+      "git_blob": "5606708a9efe70a5885e439a610997489f6add60",
+      "before_sha256": "54ece7e45f750d961c4f16ed85a6fd890a40e2838d00e81b8be8813e7d2ab6de",
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
     "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/template-history/mapping-v04/pom.xml": {
       "gav": [
-        "com.m3.verification",
+        "jdk.m3.verification",
         "jcc-merge-mapping-recovery-v04",
         "20261006"
       ],
@@ -4942,7 +4942,7 @@
     },
     "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/verification/pom.xml": {
       "gav": [
-        "com.m3.verification",
+        "jdk.m3.verification",
         "jcc-merge-recovery",
         "20261006"
       ],
@@ -4956,7 +4956,7 @@
     },
     "m3/tooling/migration-recipes/tasks/jdk-focus/pom.xml": {
       "gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "focus-proof",
         "0.1.0-SNAPSHOT"
       ],
@@ -4970,7 +4970,7 @@
     },
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/followup/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-current-followup-c0",
         "1.0.0"
       ],
@@ -4984,7 +4984,7 @@
     },
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/pattern-hidden/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-current-pattern-hidden-c0",
         "1.0.0"
       ],
@@ -4998,7 +4998,7 @@
     },
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-current-integration-c0",
         "1.0.0"
       ],
@@ -5012,7 +5012,7 @@
     },
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/runtime-checker/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-current-runtime-checker-c0",
         "1.0.0"
       ],
@@ -5032,8 +5032,8 @@
       ],
       "parent": null,
       "reason": "EXTERNAL_PARENT",
-      "git_blob": "049b485bd0e08ceda4996a9f2985037578ab4fa4",
-      "before_sha256": "27308b049acc122f62f9cb9a9a679a94640952c423b04495c0ef5b9a2c824ec1",
+      "git_blob": "0a1bafd87469b61f5d89721d71425f25f6da4c2d",
+      "before_sha256": "55f17db9b3221e44846723ab7a968a64dec744add4a9b298b6608d12622a5b8b",
       "parent_gav": [
         "com.m3",
         "m3jdk21-control-reactor",
@@ -5045,33 +5045,33 @@
     },
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/m3/tooling/backport-dag/pom.xml": {
       "gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "backport-dag",
         "0.1.0-SNAPSHOT"
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "ddb1b30d519f4b20124c69890914759717574eb1",
-      "before_sha256": "9490dd9263e9793c6601bba2429860283865ff2c72092e1b55fff95136c01737",
+      "git_blob": "f70a848c54a1971b37df77fe73896ed74b1e893c",
+      "before_sha256": "b1b2d0c39e9700fa2292e2447ece20c0502e972d97e3ebe6ab6a7a0c1e408c0f",
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/src/test/resources/before/m3/tooling/migration-recipes/pom.xml": {
       "gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "migration-recipes",
         "0.1.0-SNAPSHOT"
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "86f223907bbb053f4792e6bf771c3c0882e1751b",
-      "before_sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888",
+      "git_blob": "e41cf1ce137961fc4f9eef9092acedd06425d33e",
+      "before_sha256": "3eb73bbf38c0c591b8f714f6e9923eaa25a35b5ffc7f0512b8ec7fd3602b5531",
       "disposition": "EXCLUDE",
       "classification": "REPLAY_FIXTURE"
     },
     "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-current-string-c0",
         "1.0.0"
       ],
@@ -5085,7 +5085,7 @@
     },
     "m3/tooling/migration-recipes/verification/jcc-handoff/pom.xml": {
       "gav": [
-        "com.m3.verification",
+        "jdk.m3.verification",
         "jcc-handoff",
         "0.1.0-SNAPSHOT"
       ],
@@ -5099,7 +5099,7 @@
     },
     "m3/tooling/migration-recipes/verification/jcc-receiving/pom.xml": {
       "gav": [
-        "com.m3.verification",
+        "jdk.m3.verification",
         "jcc-receiving-fixture",
         "0.1.0-SNAPSHOT"
       ],
@@ -5113,7 +5113,7 @@
     },
     "m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml": {
       "gav": [
-        "com.m3.verification",
+        "jdk.m3.verification",
         "jcc-source-final-handoff",
         "0.1.0-SNAPSHOT"
       ],
@@ -5127,7 +5127,7 @@
     },
     "m3/tooling/migration-recipes/verification/jcc-source-recovery-handoff/pom.xml": {
       "gav": [
-        "com.m3.verification",
+        "jdk.m3.verification",
         "jcc-source-recovery-handoff",
         "0.1.0-SNAPSHOT"
       ],
@@ -5141,7 +5141,7 @@
     },
     "m3/tooling/migration-recipes/verification/jni/pom.xml": {
       "gav": [
-        "com.m3.verification",
+        "jdk.m3.verification",
         "jni-packet",
         "0.1.0-SNAPSHOT"
       ],
@@ -5272,21 +5272,21 @@
     },
     "m3/tooling/module-packs/collections/pom.xml": {
       "gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "m3-collections-pack",
         "0.1.0-SNAPSHOT"
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "d32220a5c0e23a87967f49495ff717be19b8d8fc",
-      "before_sha256": "4862d5fd5d3ac389c0dc7605d526876424e6a1b598a293738059b57d8d6f562d",
+      "git_blob": "e9e380a814b9202ba77b5fa9199f39bf96fe9c74",
+      "before_sha256": "d7c9f2d737f776009dd8ed10a72b5c7d0a253600a84337937ec3c4e2952d051a",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/tooling/module-packs/collections/pom.xml"
     },
     "m3/tooling/module-packs/cpu-tools/pom.xml": {
       "gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "m3-cpu-tools-pack",
         "0.1.0-SNAPSHOT"
       ],
@@ -5300,7 +5300,7 @@
     },
     "m3/tooling/module-packs/jackson/pom.xml": {
       "gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "jackson-jmod-pack",
         "2.19.2-m3-1"
       ],
@@ -5314,16 +5314,16 @@
     },
     "m3/tooling/module-packs/kernel/pom.xml": {
       "gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "module-pack-kernel",
         "0.1.0-SNAPSHOT"
       ],
       "parent": "m3/tooling/module-packs/pom.xml",
       "reason": "LOCAL_PARENT",
-      "git_blob": "7501bc933f60ff4297b87f67ad97f1042a6bb262",
-      "before_sha256": "01f921e72feb7ff066b5e0c4577cf1282fbdc5b3200b121b655e1934c7708cca",
+      "git_blob": "780b3f793ef69415e0cfce8b57db8fed3a27b68c",
+      "before_sha256": "2ba891be0bd56483e3ca3a5b3511dd45f717c4f1d960902fce9f9b5dd03d2772",
       "parent_gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "module-packs",
         "0.1.0-SNAPSHOT"
       ],
@@ -5334,7 +5334,7 @@
     },
     "m3/tooling/module-packs/nlp-search/recipe-custody/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-nlp-search-integration-receiver-proof",
         "1"
       ],
@@ -5347,7 +5347,7 @@
     },
     "m3/tooling/module-packs/parser/pom.xml": {
       "gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "m3-parser-jmod-pack",
         "0.1.0-SNAPSHOT"
       ],
@@ -5359,22 +5359,22 @@
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/tooling/module-packs/parser/pom.xml"
     },
-    "m3/tooling/module-packs/parser/qualification/owner-current-20261019/recipe-custody/synexia-openrewrite-recipes/verification/parser-collections-sdk-20261019/pom.xml": {
+    "m3/tooling/module-packs/parser/qualification/owner-current-20261019/recipe-custody/m3-openrewrite-recipes/verification/parser-collections-sdk-20261019/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "parser-collections-sdk",
         "1.0-SNAPSHOT"
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "4e894e091ac2418aa849ae26f1650d419b9ea4d0",
-      "before_sha256": "c5e4998cc807f5eb3c89a6016b4bccb21d6f5b4609c5b3a3b7b882d8b4e6e6b3",
+      "git_blob": "d34b6c2242067b0a7d848bc40b6cbffe08b834cd",
+      "before_sha256": "56137a012f70ee765aa10741138dbc3f9d6ff5b7c9294016475080626b7ed8ee",
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
     "m3/tooling/module-packs/parser/real-providers/pom.xml": {
       "gav": [
-        "com.m3.validation",
+        "jdk.m3.validation",
         "m3-ast-real-providers",
         "1.0.0-SNAPSHOT"
       ],
@@ -5420,7 +5420,7 @@
     },
     "m3/tooling/module-packs/pom.xml": {
       "gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "module-packs",
         "0.1.0-SNAPSHOT"
       ],
@@ -5434,16 +5434,16 @@
     },
     "m3/tooling/module-packs/recipes/pom.xml": {
       "gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "module-pack-recipes",
         "0.1.0-SNAPSHOT"
       ],
       "parent": "m3/tooling/module-packs/pom.xml",
       "reason": "LOCAL_PARENT",
-      "git_blob": "99b39470d091ee28bfe5228aee7479bd65f78e0a",
-      "before_sha256": "f0ce327c66455c36fc93027d40aba0aa39a4b2ccae886943a7f376ee657204c2",
+      "git_blob": "87d34dd5f3074de8b04c722c330ee39780c032f0",
+      "before_sha256": "ed1014c7664596db31981ce1e8bd90c9eade6577e44a233dc6d1c17ea7725736",
       "parent_gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "module-packs",
         "0.1.0-SNAPSHOT"
       ],
@@ -5454,7 +5454,7 @@
     },
     "m3/tooling/module-packs/verification/jdk-execution/pom.xml": {
       "gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "jdk-execution-verification",
         "0.1.0-SNAPSHOT"
       ],
@@ -5480,9 +5480,9 @@
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/tooling/mr/pom.xml"
     },
-    "m3/tooling/netbeans-gap-boundary-20261019/synexia-openrewrite-recipes/recipe-crates/netbeans-gap-boundary-20261019/pom.xml": {
+    "m3/tooling/netbeans-gap-boundary-20261019/m3-openrewrite-recipes/recipe-crates/netbeans-gap-boundary-20261019/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "netbeans-gap-boundary-proof",
         "1.0-SNAPSHOT"
       ],
@@ -5492,11 +5492,11 @@
       "before_sha256": "675e68a6c0bbc00ecc6fcd4aada1d25d21dc9e5a64471fa480d5cd44e08b956a",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/netbeans-gap-boundary-20261019/synexia-openrewrite-recipes/recipe-crates/netbeans-gap-boundary-20261019/pom.xml"
+      "install_root": "m3/tooling/netbeans-gap-boundary-20261019/m3-openrewrite-recipes/recipe-crates/netbeans-gap-boundary-20261019/pom.xml"
     },
     "m3/tooling/recipe-agent-api/pom.xml": {
       "gav": [
-        "com.m3.tooling",
+        "jdk.m3.tooling",
         "recipe-agent-api",
         "0.1.0-SNAPSHOT"
       ],
@@ -5550,7 +5550,7 @@
     },
     "m3/tooling/region-foundation-repair/pom.xml": {
       "gav": [
-        "com.synexia.rewrite",
+        "jdk.internal.m3.rewrite",
         "m3jdk-region-foundation-repair",
         "1.0.0-SNAPSHOT"
       ],
@@ -5620,27 +5620,27 @@
     },
     "m3/tooling/shared-frontend/recipe-custody/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-ast-build-reverse-recipe-proof",
         "1"
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "c48a81360d37dd43c45a5bbc75587a57735f9bbb",
-      "before_sha256": "6adda13f93278f08bb707f7900b3982d49458ecdd9d78b40e6ad69b2c7f8cac2",
+      "git_blob": "ce73556301275a2080cc023ab4f5ae646d24343c",
+      "before_sha256": "2003aa8caf2f184586cd802133f4d347e4b2a9454ab469b4698b1dbd22739257",
       "disposition": "EXCLUDE",
       "classification": "CUSTODY"
     },
     "m3/tooling/sort-recipes/m3-java-util-sorts-20261018/pom.xml": {
       "gav": [
-        "com.synexia.recipes",
+        "jdk.internal.m3.recipes",
         "m3-java-util-sorts-20261018",
         "1.0.0"
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "133fd68ec44fdf4b9013b9ad4d37f493f6848196",
-      "before_sha256": "06c9816f7eba65546039559e4ccb3f6bcd93a955cfef202a4bd4fb30a39a6adc",
+      "git_blob": "7b83c937fa8c66335eed5d40144952480c21583d",
+      "before_sha256": "9c9c6ed58c0bec989a559986260847356282de04a5aa12610a30e7ca2acd7af9",
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_RECIPE_PROOF"
     },
@@ -5670,10 +5670,10 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_RECIPE_PROOF"
     },
-    "m3/tooling/synexia-jdk-a3-recipes/pom.xml": {
+    "m3/tooling/m3jdk-a3-recipes/pom.xml": {
       "gav": [
         "com.synexia",
-        "synexia-jdk-a3-recipes",
+        "m3jdk-a3-recipes",
         "1.0.0-SNAPSHOT"
       ],
       "parent": null,
@@ -5682,11 +5682,11 @@
       "before_sha256": "adb92d8db5802590986586d0de67f0e75888d40fdaf3df080de10b59165982e1",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_BUILD",
-      "install_root": "m3/tooling/synexia-jdk-a3-recipes/pom.xml"
+      "install_root": "m3/tooling/m3jdk-a3-recipes/pom.xml"
     },
-    "m3/tooling/text-metadata-current-owner/source/synexia-openrewrite-recipes/tasks/composite-summary-20261012/pom.xml": {
+    "m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes/tasks/composite-summary-20261012/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "composite-summary-proof",
         "1.0.0"
       ],
@@ -5697,7 +5697,7 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_QUALIFICATION"
     },
-    "m3/tooling/text-metadata-current-owner/source/synexia-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/pom.xml": {
+    "m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/guard-sdk/pom.xml": {
       "gav": [
         "com.synexia",
         "m3-string-matched-build-workflow-sdk-1c1b-38df",
@@ -5710,9 +5710,9 @@
       "disposition": "EXCLUDE",
       "classification": "SOURCE_SEALED_QUALIFICATION"
     },
-    "m3/tooling/text-metadata-current-owner/source/synexia-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/pom.xml": {
+    "m3/tooling/text-metadata-current-owner/source/m3-openrewrite-recipes/tasks/native-text-metadata-current-owner-20261019/pom.xml": {
       "gav": [
-        "com.synexia.m3",
+        "jdk.internal.m3",
         "text-metadata-current-owner-proof",
         "1.0.0"
       ],
@@ -5739,7 +5739,7 @@
     },
     "m3/tooling/tq-sync/source-reactor/pom.xml": {
       "gav": [
-        "com.synexia.m3.recipe",
+        "jdk.internal.m3.recipe",
         "source-qualified-tq-reactor",
         "1.0.0-SNAPSHOT"
       ],
@@ -5793,31 +5793,31 @@
       "classification": "ACTIVE_BUILD",
       "install_root": "m3/tooling/vi/pom.xml"
     },
-    "m3/vendor/synexia/snapshots/m3-build-collections-20261017/synexia-openrewrite-recipes/verification/m3-build-shared-ast-20261017/pom.xml": {
+    "m3/vendor/m3/snapshots/m3-build-collections-20261017/m3-openrewrite-recipes/verification/m3-build-shared-ast-20261017/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-build-shared-ast-recipe-proof",
         "1.0.0-SNAPSHOT"
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "47be771fcf7bc5553e077347a9b261e8fdbf6e10",
-      "before_sha256": "c16ef223d677f886efe60492d5ce72e14d6e1fb14115637b8fa3bb638b542a7c",
+      "git_blob": "1f777733a6a332f9c879cf334ae93aa1fa287b3b",
+      "before_sha256": "d448b782d2bcd5ca952216662b616bcfa7b769093b64318c0b47f588be743af1",
       "disposition": "EXCLUDE",
-      "classification": "SYNEXIA_CUSTODY"
+      "classification": "M3_CUSTODY"
     },
-    "m3/vendor/synexia/synexia-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/pom.xml": {
+    "m3/vendor/m3/m3-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/pom.xml": {
       "gav": [
-        "com.synexia.verification",
+        "jdk.internal.m3.verification",
         "m3-nlp-search-current-forks-proof",
         "1"
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "03f7b2c4345609fd93eda917d2d77b2959126b10",
-      "before_sha256": "a0db36dba008ed574230acca30b565c886391b9b3b68fd2d802f68442b90750f",
+      "git_blob": "11e0005e964b139f65cc3f4d35a7b46937fb6548",
+      "before_sha256": "525fedd3b4736278153a3f114864cde38a4e901ec596b9a0e4f0742b74b7f5b2",
       "disposition": "EXCLUDE",
-      "classification": "SYNEXIA_CUSTODY"
+      "classification": "M3_CUSTODY"
     },
     "m3/vendor/third_party/HdrHistogram/pom.xml": {
       "gav": [
@@ -5963,8 +5963,8 @@
       ],
       "parent": null,
       "reason": "NO_PARENT",
-      "git_blob": "cbeafd81a00611494595a47726b6a807d65f1f11",
-      "before_sha256": "54521e57cf458017c20682a31ad1a4dc1fa08b2847f8fa79091566dc748404d6",
+      "git_blob": "4568888fc2c6464a88d4564f74d7067eba60e468",
+      "before_sha256": "e97b7e58eaba1546fd8ab0b2922a7b014b19ef3739cb8efde040c82a74fc8066",
       "disposition": "CANDIDATE",
       "classification": "ACTIVE_VENDOR_WRAPPER",
       "install_root": "m3/vendor/third_party/apiguardian-api/pom.xml"
@@ -7864,7 +7864,7 @@
     },
     "m3/vendor/third_party/m3-tooling-shaded/pom.xml": {
       "gav": [
-        "com.m3.vendor",
+        "jdk.m3.vendor",
         "m3-tooling-third-party",
         "8.17.1-m3-shaded-1"
       ],
@@ -7894,7 +7894,7 @@
       "gav": [
         "org.apache.opennlp",
         "opennlp-tools",
-        "2.4.0-synexia-source-1"
+        "2.4.0-m3-source-1"
       ],
       "parent": null,
       "reason": "NO_PARENT",
@@ -8014,7 +8014,7 @@
     },
     "m3/vendor/third_party/pom.xml": {
       "gav": [
-        "com.m3.vendor",
+        "jdk.m3.vendor",
         "third-party-sources",
         "1.0.0-SNAPSHOT"
       ],
@@ -9037,7 +9037,7 @@
     },
     "make/m3/recipes/pom.xml": {
       "gav": [
-        "org.synexia.m3",
+        "jdk.internal.m3",
         "m3-source-inventory-recipe",
         "0.1.0-SNAPSHOT"
       ],

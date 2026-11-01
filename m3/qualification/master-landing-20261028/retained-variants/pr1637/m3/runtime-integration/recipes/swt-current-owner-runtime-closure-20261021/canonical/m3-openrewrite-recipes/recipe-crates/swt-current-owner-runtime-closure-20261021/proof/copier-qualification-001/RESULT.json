@@ -1,0 +1,142 @@
+{
+  "schema": "SWT_CURRENT_OWNER_COPIER_QUALIFICATION/1",
+  "status": "PASS",
+  "scope": "isolated exact product-source fixtures; no target repository writes",
+  "sdk_receipt_sha256": "d35f94052eb5c38a88997ec4157a4a6a0ede7fe16a5b95a6ef70b2c0bd3a917f",
+  "script_sha256": "695f43758c7ae4f2f302158c8bf4808b5e0de94cdfa7e75ca4bfc4a370a31590",
+  "source_seals_sha256": "49261c5ff0b2de1636d26fb01c6d64f3dc3dc9a3a31583aea776169e6bb66d4e",
+  "target_paths": 1,
+  "first_writes": 1,
+  "replay_writes": 0,
+  "refusals": 4,
+  "steps": [
+    {
+      "name": "01-preflight",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/canonical/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/receiving"
+      ],
+      "exit_code": 0,
+      "log_sha256": "79f612b4453a59fdef83008a4e862e6a2ca903b357649ae28be432f09ae95477",
+      "receipt_sha256": "b0fe23b6c8a07b6419a06207a8374ca36071f6d05e9015ce1fa32e405c3d9547",
+      "before": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "ff8b2c1db5fffa1a9013fc863a1f5dac337b2cb633c07d513339b57fcce40b80"
+      },
+      "after": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "ff8b2c1db5fffa1a9013fc863a1f5dac337b2cb633c07d513339b57fcce40b80"
+      }
+    },
+    {
+      "name": "02-first-apply",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/canonical/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/receiving",
+        "--apply"
+      ],
+      "exit_code": 0,
+      "log_sha256": "41364394aee6f6a2ba1bd479557c58e24731c73b03c0d584d39ea10be7ad7807",
+      "receipt_sha256": "7f09d45cbb082f301a9768ab79932b731b68793c456decea01cd4e32e213fb4b",
+      "before": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "ff8b2c1db5fffa1a9013fc863a1f5dac337b2cb633c07d513339b57fcce40b80"
+      },
+      "after": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "4b864a178251e0f853cc8d2fe8027962bf831f950d9b83a9d095496ae60be158"
+      }
+    },
+    {
+      "name": "03-fixed-point",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/canonical/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/receiving",
+        "--apply"
+      ],
+      "exit_code": 0,
+      "log_sha256": "e71d6838344f10f48f8754b0213837514322b4ea7e4dba62baf33bd529c4e729",
+      "receipt_sha256": "e4c942ca226db63377c929029f0b16627d4372797a2e959d9d55a863a984757f",
+      "before": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "4b864a178251e0f853cc8d2fe8027962bf831f950d9b83a9d095496ae60be158"
+      },
+      "after": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "4b864a178251e0f853cc8d2fe8027962bf831f950d9b83a9d095496ae60be158"
+      }
+    },
+    {
+      "name": "04-product-drift",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/canonical/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/receiving-drift",
+        "--apply"
+      ],
+      "exit_code": 1,
+      "log_sha256": "65dc1f067cca22532d0ee33266813ee43496808f297b52490c0476c8cfaa4fe0",
+      "receipt_sha256": "aa1e94274493dd7319d55c789d978ecdaca766b77db26913e2f8f1decefee43e",
+      "before": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "6dc2f8fb8523511b36f5ed99afd2e53cfc19a0322b6b1ee759f62403560aa79d"
+      },
+      "after": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "6dc2f8fb8523511b36f5ed99afd2e53cfc19a0322b6b1ee759f62403560aa79d"
+      }
+    },
+    {
+      "name": "05-symbolic-destination",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/canonical/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/receiving-symbolic",
+        "--apply"
+      ],
+      "exit_code": 1,
+      "log_sha256": "e7ced098fc0ddab96821af24f61698a331b6fab23501014d438c4c17503a988b",
+      "receipt_sha256": "fddba93d93494af70c864757938899b67db527606e09220cc668b8d69c43cfc9",
+      "before": {},
+      "after": {}
+    },
+    {
+      "name": "06-emitted-drift",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/canonical/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/receiving-emitted-drift",
+        "--apply"
+      ],
+      "exit_code": 1,
+      "log_sha256": "1e18e10e844ac131163caa314b6b5521b6484cf46a455d915754b2163bbde8b3",
+      "receipt_sha256": "c4f88c2e332fa75dc4695574ce4e0a4b4e4f42970007908a5e6f62f000891760",
+      "before": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "ff8b2c1db5fffa1a9013fc863a1f5dac337b2cb633c07d513339b57fcce40b80"
+      },
+      "after": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "ff8b2c1db5fffa1a9013fc863a1f5dac337b2cb633c07d513339b57fcce40b80"
+      }
+    },
+    {
+      "name": "07-owner-drift",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/canonical/m3-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/receiving-owner-drift",
+        "--apply"
+      ],
+      "exit_code": 1,
+      "log_sha256": "7ddf49b370a147e4d665fff8a18bb77a52972e155f8d78fbb3cfc6dcb3d3d26c",
+      "receipt_sha256": "2bd989d319c9efd45406107075f891e7dfca2ab8c3b9cb8c8956b596ea6dceee",
+      "before": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "ff8b2c1db5fffa1a9013fc863a1f5dac337b2cb633c07d513339b57fcce40b80"
+      },
+      "after": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "ff8b2c1db5fffa1a9013fc863a1f5dac337b2cb633c07d513339b57fcce40b80"
+      }
+    }
+  ]
+}

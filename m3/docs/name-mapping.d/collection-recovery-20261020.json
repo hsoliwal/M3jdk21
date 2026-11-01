@@ -11,7 +11,7 @@
   "owners": [
     {
       "target": "com.m3.collections.M3LongIndexProjection",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
       "operation": "Stable equal-run reversal on known opposite ordering",
       "source": "63bc1db1c6ef1c701aa5e25629288c0c4139a64d"
     },

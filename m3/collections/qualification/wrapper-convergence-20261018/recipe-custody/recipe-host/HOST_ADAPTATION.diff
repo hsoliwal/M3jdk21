@@ -127,9 +127,9 @@ index dcef271..8157943 100644
 -</profile>
 -  </profiles>
  </project>
-diff --git a/workspace/scratch/7846804a0074/M3jdk21/m3/arrays/qualification/empty-segments-20261017/recipe-custody/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java b/workspace/scratch/7846804a0074/synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java
+diff --git a/workspace/scratch/7846804a0074/M3jdk21/m3/arrays/qualification/empty-segments-20261017/recipe-custody/src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java b/workspace/scratch/7846804a0074/synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java
 index e699937..e882144 100644
---- a/workspace/scratch/7846804a0074/M3jdk21/m3/arrays/qualification/empty-segments-20261017/recipe-custody/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java
+--- a/workspace/scratch/7846804a0074/M3jdk21/m3/arrays/qualification/empty-segments-20261017/recipe-custody/src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java
 +++ b/workspace/scratch/7846804a0074/synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java
 @@ -1,25 +1,35 @@
  // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project

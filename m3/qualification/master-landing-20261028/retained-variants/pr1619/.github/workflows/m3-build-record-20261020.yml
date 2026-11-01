@@ -4,8 +4,8 @@ name: M3JDK21 native M3FS build record proof
 on:
   pull_request:
     paths:
-      - 'm3/fs/src/main/java/com/m3/fs/M3BuildState*.java'
-      - 'm3/fs/src/test/java/com/m3/fs/M3BuildState*.java'
+      - 'm3/fs/src/main/java/jdk/m3/fs/M3BuildState*.java'
+      - 'm3/fs/src/test/java/jdk/m3/fs/M3BuildState*.java'
       - 'm3/fs/qualification/build-state-20261020/**'
       - '.github/workflows/m3-build-record-20261020.yml'
   workflow_dispatch:

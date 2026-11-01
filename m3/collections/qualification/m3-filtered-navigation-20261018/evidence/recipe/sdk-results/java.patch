@@ -1,7 +1,7 @@
-diff --git a/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java b/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
+diff --git a/m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java b/m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java
 index 6ec7a88..daf4c3f 100644
---- a/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
-+++ b/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
+--- a/m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java
++++ b/m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java
 @@ -7,6 +7,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
  import java.util.AbstractCollection;
  import java.util.AbstractMap;
@@ -211,10 +211,10 @@ index 6ec7a88..daf4c3f 100644
      }
  }
 +
-diff --git a/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java b/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java
+diff --git a/m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java b/m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java
 index ef0fac5..1e77b20 100644
---- a/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java
-+++ b/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java
+--- a/m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java
++++ b/m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java
 @@ -1,6 +1,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
  /*
   * Copyright 2026 Hitesh Soliwal and contributors
@@ -244,11 +244,11 @@ index ef0fac5..1e77b20 100644
              throw new IllegalArgumentException("source/output metadata alias");
          }
          for (int[] plane : statePlanes) {
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationContract.java b/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationContract.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3FilteredNavigationReconciliationContract.java b/m3/collections/src/test/java/jdk/m3/collections/M3FilteredNavigationReconciliationContract.java
 new file mode 100644
 index 0000000..dcc512d
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationContract.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3FilteredNavigationReconciliationContract.java
 @@ -0,0 +1,390 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +/*
 + * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
@@ -640,11 +640,11 @@ index 0000000..dcc512d
 +        if (scopeFirst == null) scopeFirst = message;
 +    }
 +}
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationTest.java b/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationTest.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3FilteredNavigationReconciliationTest.java b/m3/collections/src/test/java/jdk/m3/collections/M3FilteredNavigationReconciliationTest.java
 new file mode 100644
 index 0000000..6197b82
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationTest.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3FilteredNavigationReconciliationTest.java
 @@ -0,0 +1,21 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +/*
 + * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
@@ -667,11 +667,11 @@ index 0000000..6197b82
 +                ? new String[] {"--native"} : new String[0]);
 +    }
 +}
-diff --git a/m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksAliasContract.java b/m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksAliasContract.java
+diff --git a/m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksAliasContract.java b/m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksAliasContract.java
 new file mode 100644
 index 0000000..932f0ca
 --- /dev/null
-+++ b/m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksAliasContract.java
++++ b/m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksAliasContract.java
 @@ -0,0 +1,230 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
 +/*
 + * Copyright 2026 Hitesh Soliwal and contributors

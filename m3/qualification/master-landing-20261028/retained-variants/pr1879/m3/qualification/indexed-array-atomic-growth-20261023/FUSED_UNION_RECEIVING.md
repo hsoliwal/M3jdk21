@@ -16,9 +16,9 @@ source-changing recipe and test fixtures are in private Synexia
 
 | Target | Before SHA-256 | Reviewed after SHA-256 |
 | --- | --- | --- |
-| `src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java` | `90f9c573c48319d1811fd5a663d6690b075c45ab257c8a80256f9beccdf6b791` | `0c79f59b111bc1669a626c4a45598b7205319522b0c00c56ef009a8b9ea660e5` |
+| `src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java` | `90f9c573c48319d1811fd5a663d6690b075c45ab257c8a80256f9beccdf6b791` | `5617cf2586a2c0b4f8ae9f710e86e4f39f4b880a9fb1fe3deadc04a3f6c58fa9` |
 | `test/jdk/jdk/internal/m3/M3FusedMaskedFilteredSortedViewTest.java` | ABSENT | `1c599c9f7a8dd98dd1c6b067c7703105923914fa9a86082899a133993ed1bf97` |
-| `.github/workflows/m3-indexed-array-atomic-growth-20261023.yml` | `a7a34d1f18a6a93252d8024139e0795f303df71d05b2b2c1a2189daf377fa5d0` | `119063f62e62cc966dc8aae6de83b50e6d15d694e7b8140b809b2127a355f36e` |
+| `.github/workflows/m3-indexed-array-atomic-growth-20261023.yml` | `a7a34d1f18a6a93252d8024139e0795f303df71d05b2b2c1a2189daf377fa5d0` | `874cbc846274bf91d202722626899fd6f5ff4df985afa27f8ac09f1e1d128cb8` |
 
 The original Java owner retains all seven `Object[]/int[]` array planes,
 generation-qualified handles, lease/state masks, logical/physical offsets,

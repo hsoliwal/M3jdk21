@@ -225,7 +225,7 @@ bounded candidate behind compiler/JUnit gates. The donor-side
 `M3HistoricalCodeLossRecipe`, `M3HunkResolver`, `ExactFileHunkReplay` and
 `m3-pr-stack-preservation` gates are lineage only: none of them is in this tree,
 so absorb the logic as such a tool before relying on it (standalone rule,
-2026-10-31; `m3/tooling/standalone/SYNEXIA_REFS.md`). The public queue is
+2026-10-31; `m3/tooling/standalone/M3_REFS.md`). The public queue is
 a review input, **not** a competing source transformation implementation.
 GitHub's merge action handles mergeable history, but even a clean merge
 needs content no-loss review. Conflicts require an explicit reviewed patch

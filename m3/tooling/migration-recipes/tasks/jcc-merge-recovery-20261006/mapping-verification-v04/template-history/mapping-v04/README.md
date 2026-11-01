@@ -12,10 +12,10 @@ The template retains 11 explicit unresolved actual-source/output pins. Invoke `r
 
 Repository destinations use V04 exclusively:
 
-- Test: `m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccMergeMappingRecoveryV04Test.java`
+- Test: `m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccMergeMappingRecoveryV04Test.java`
 - POM: `m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/pom.xml`
 - YAML: `m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-merge-mapping-recovery-v04.yml`
-- Summary: `m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jcc-merge-recovery-20261006-mapping-v04/publication-input-summary.json`
+- Summary: `m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/backport/jcc-merge-recovery-20261006-mapping-v04/publication-input-summary.json`
 
 The recipe is `com.m3.rewrite.backport.JccMergeMappingRecoveryV04`; its crate is `jcc-merge-recovery-20261006-mapping-v04`. Repository task documents are `source-publication-input-v04.json` and `mapping-input-epoch-v04.json`. The binder's local filenames remain `source-publication-input.json` and `mapping-input-epoch.json`.
 

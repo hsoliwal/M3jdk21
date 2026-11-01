@@ -48,7 +48,7 @@
           <include>THIRD_PARTY_NOTICES.md</include>
           <include>name-mapping.json</include>
           <include>provenance.json</include>
-          <include>synexia-donation.json</include>
+          <include>m3-donation.json</include>
         </includes>
       </resource>
     </resources>

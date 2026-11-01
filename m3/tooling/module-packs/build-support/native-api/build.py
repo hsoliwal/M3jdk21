@@ -254,7 +254,7 @@ def build(args, run):
     fixture_classes = run.out / "fixture-classes"
     fixture_classes.mkdir()
     run.command([java_home / "bin/javac", "--release", "21", "-Xlint:all", "-Werror",
-                 "--module-path", m3_file, "--add-modules", "com.m3.file", "-cp",
+                 "--module-path", m3_file, "--add-modules", "jdk.m3.file", "-cp",
                  str(api_jar) + os.pathsep + classpath, "-d", fixture_classes, ROOT / FIXTURE], "compile-fixture")
 
     modules = run.out / "modules"
@@ -264,7 +264,7 @@ def build(args, run):
     copy_checked(ROOT / "legal/LICENSE-APACHE-2.0.txt", file_legal / "LICENSE", inputs["legal/LICENSE-APACHE-2.0.txt"])
     (file_legal / "NOTICE").write_text("com.m3.file\nCopyright 2026 Hitesh Soliwal and contributors.\n"
                                      "Apache-2.0. Original qualified module; no source changes in this pack.\n", encoding="utf-8")
-    file_jmod = modules / "com.m3.file.jmod"
+    file_jmod = modules / "jdk.m3.file.jmod"
     run.command([java_home / "bin/jmod", "create", "--class-path", m3_file,
                  "--legal-notices", file_legal, file_jmod], "package-existing-file-module")
     fixture_hashes = files_below(fixture_classes)
@@ -294,8 +294,8 @@ def build(args, run):
         "name": PACK_NAME, "version": "1.1.0-m3-workset",
         "source": "https://github.com/mojohaus/maven-native/tree/59b9d76471f42265141e1edd3594f9dca156099a; SOURCE_BUILD.json",
         "license": "MIT AND Apache-2.0; original dependency notices; JNI headers GPL-2.0-with-Classpath-exception",
-        "roots": ["com.m3.file", "jdk.compiler", "java.base", "java.desktop", "java.management", "java.naming", "java.sql"],
-        "modules": [{"module": "com.m3.file", "file": str(file_jmod.relative_to(run.out)), "sha256": digest(file_jmod)}],
+        "roots": ["jdk.m3.file", "jdk.compiler", "java.base", "java.desktop", "java.management", "java.naming", "java.sql"],
+        "modules": [{"module": "jdk.m3.file", "file": str(file_jmod.relative_to(run.out)), "sha256": digest(file_jmod)}],
         "assets": assets,
     }]}
     write_json(run.out / "native-api-lock.json", lock)
@@ -349,7 +349,7 @@ def verify(args, run):
     for name, executable in tools.items():
         run.command([executable, "--version"], "native-" + name.replace("+", "p") + "-version")
     classpath = os.pathsep.join([str(fixture_classes)] + [str(native_lib / name) for name in sorted(expected_jars)])
-    output = run.command([image / "bin/java", "--add-modules", "com.m3.file", "-cp", classpath,
+    output = run.command([image / "bin/java", "--add-modules", "jdk.m3.file", "-cp", classpath,
                           "NativeApiContract", run.out / "work", native_lib / "include", tools["gcc"],
                           tools["g++"], tools["ar"], image], "installed-native-contract")
     passes = [line for line in output.splitlines() if line.startswith("NativeApiContract: PASS;")]

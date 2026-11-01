@@ -5,7 +5,7 @@ from pathlib import Path
 import argparse,hashlib,json,os,stat
 HERE=Path(__file__).resolve().parent;I=HERE.parent;C=I.parents[1]
 OWNER=C/'m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py'
-OWNER_SHA='89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574'
+OWNER_SHA='93a1c116c197854b0167c172581cd768d0f9098067bf0f1296607ca6ba855556'
 def sha(b):return hashlib.sha256(b).hexdigest()
 def blob(b):return hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()
 def load(p):return json.loads(p.read_bytes())
@@ -21,7 +21,7 @@ args=parser.parse_args();P=args.proof.resolve()
 assert not args.receiving_inputs or args.receiving_result,'receiving inputs require an actual terminal result'
 assert sha((P/'RESULT.json').read_bytes())=='7f381ac0f810aab4dcc7d46d8ced7eb327452852f83468b31a2763af56db6213','exact accepted Fc0 producer result required'
 assert sha((P/'generated-candidate/OUTPUT.json').read_bytes())=='3405781f7b0364d20069cff62f68ab95a5333b61f26b927b53158e45a0aeeb2e','exact accepted Fc0 output required'
-result=load(P/'RESULT.json');assert result['schema']=='synexia.fc0.proof-result/1' and result['status']=='PASS_FOCUSED_PRODUCER' and result['failure'] is None
+result=load(P/'RESULT.json');assert result['schema']=='m3.fc0.proof-result/1' and result['status']=='PASS_FOCUSED_PRODUCER' and result['failure'] is None
 assert result['runtime']['output']==pin(P/'generated-candidate/OUTPUT.json')
 owner_bytes=OWNER.read_bytes();assert sha(owner_bytes)==OWNER_SHA
 ns={'__name__':'_unchanged_package_owner','__file__':str(OWNER)};exec(compile(owner_bytes,str(OWNER),'exec'),ns)
@@ -121,7 +121,7 @@ if args.receiving_result:
  receiving_files=[pin(terminal)]
  if args.receiving_inputs:
   selection=args.receiving_inputs.resolve();assert selection.is_relative_to(C)
-  value=load(selection);assert set(value)=={'schema','terminal','files'} and value['schema']=='synexia.fc0.receiving-selection/1'
+  value=load(selection);assert set(value)=={'schema','terminal','files'} and value['schema']=='m3.fc0.receiving-selection/1'
   assert value['terminal']==pin(terminal) and isinstance(value['files'],list)
   paths=[row['path'] for row in value['files']];assert paths==sorted(set(paths)) and str(terminal) in paths
   for row in value['files']:
@@ -140,10 +140,10 @@ for r in load(P/'inputs.json'):
  else:
   reasons=[e['reason'] for e in excluded if e['inputPath']==r['path'] and e['sha256']==r['sha256'] and e['bytes']==r['bytes']];assert reasons,r['path'];entry.update(disposition='EXCLUDED_IDENTITY_ONLY',reasons=sorted(set(reasons)))
  closure.append(entry)
-record={'schema':'synexia.fc0.package-source-closure/1','producer':{'result':pin(P/'RESULT.json'),'output':pin(P/'generated-candidate/OUTPUT.json')},'bodyMappings':sorted(mappings,key=lambda r:r['logicalPath']),'excludedIdentities':excluded,'sealedInputDispositions':closure,'compiledArtifactBodiesIncluded':False,'toolchainBodiesIncluded':False,'hermetic':False,'historicalMissingProofsRecreated':False,'consumerQualified':False,'archiveOwner':pin(OWNER),'parentPublication':parent,'receivingOutcome':receiving_outcome}
+record={'schema':'m3.fc0.package-source-closure/1','producer':{'result':pin(P/'RESULT.json'),'output':pin(P/'generated-candidate/OUTPUT.json')},'bodyMappings':sorted(mappings,key=lambda r:r['logicalPath']),'excludedIdentities':excluded,'sealedInputDispositions':closure,'compiledArtifactBodiesIncluded':False,'toolchainBodiesIncluded':False,'hermetic':False,'historicalMissingProofsRecreated':False,'consumerQualified':False,'archiveOwner':pin(OWNER),'parentPublication':parent,'receivingOutcome':receiving_outcome}
 write(S/'SOURCE-CLOSURE.json',record)
 # Empty LANES is deliberate: actual terminal evidence is explicitly selected and independently hash-closed above.
-plan={'schema':'synexia.evidence.package-plan/1','status':'FINAL_REVIEWED_SELECTION','sourceCommit':result['sourceCommit'],'targetCommit':result['targetCommit'],'packageOwnerSHA256':OWNER_SHA,'resultSHA256':sha((P/'RESULT.json').read_bytes()),'laneSelection':{'required':[],'additional':[],'allowNotExecuted':[],'includeAllExisting':False},'includePaths':sorted([*selected,'SOURCE-CLOSURE.json']),'selectionMode':'EXPLICIT_FINISHED_BODIES_WITH_SOURCE_CLOSURE_AUDIT','noAutomaticLaneQualification':True}
+plan={'schema':'m3.evidence.package-plan/1','status':'FINAL_REVIEWED_SELECTION','sourceCommit':result['sourceCommit'],'targetCommit':result['targetCommit'],'packageOwnerSHA256':OWNER_SHA,'resultSHA256':sha((P/'RESULT.json').read_bytes()),'laneSelection':{'required':[],'additional':[],'allowNotExecuted':[],'includeAllExisting':False},'includePaths':sorted([*selected,'SOURCE-CLOSURE.json']),'selectionMode':'EXPLICIT_FINISHED_BODIES_WITH_SOURCE_CLOSURE_AUDIT','noAutomaticLaneQualification':True}
 write(HERE/'package-plan.json',plan)
 write(HERE/'SOURCE-CLOSURE.json',record)
 print(json.dumps({'plan':pin(HERE/'package-plan.json'),'closure':pin(HERE/'SOURCE-CLOSURE.json'),'bodyCount':len(selected)+1,'projectFiles':43,'actualResult':pin(P/'RESULT.json')}))

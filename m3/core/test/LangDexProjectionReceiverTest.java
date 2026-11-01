@@ -1,8 +1,8 @@
 /* Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
  * SPDX-License-Identifier: Apache-2.0
  */
-import com.m3.text.SharedLexiconCatalog;
-import com.m3.text.SynexiaPrecomputePayload;
+import jdk.m3.text.SharedLexiconCatalog;
+import jdk.m3.text.M3PrecomputePayload;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -118,13 +118,13 @@ public final class LangDexProjectionReceiverTest {
 
     private static void verifyManifestAndFieldMap() throws Exception {
         List<String> manifest = Files.readAllLines(
-                Path.of("lexicon", "synexia-source-manifest.tsv"), StandardCharsets.UTF_8);
+                Path.of("lexicon", "m3-source-manifest.tsv"), StandardCharsets.UTF_8);
         List<String> rows = manifest.stream()
                 .filter(line -> line.startsWith(SOURCE_ID + "\t")).toList();
         check(rows.size() == 1);
         String[] row = rows.get(0).split("\t", -1);
         check(row.length == 9);
-        check(row[2].equals("synexia-unicodex/docs/langdex/UPSTREAM_SCHEMA.tsv"));
+        check(row[2].equals("m3-unicodex/docs/langdex/UPSTREAM_SCHEMA.tsv"));
         check(row[3].equals("lexeme_id"));
         check(row[4].equals("glottocode,lemma,source"));
         check(row[5].equals("M3StringFacts + LangDexCoordinate"));
@@ -133,7 +133,7 @@ public final class LangDexProjectionReceiverTest {
         check(List.of(row[8].split(",")).equals(REQUIRED_FIELDS));
 
         List<String> fieldMap = Files.readAllLines(
-                Path.of("lexicon", "synexia-precompute-field-map.tsv"), StandardCharsets.UTF_8);
+                Path.of("lexicon", "m3-precompute-field-map.tsv"), StandardCharsets.UTF_8);
         Map<String, String> actualTypes = new java.util.TreeMap<>();
         Map<String, String> ownerTargets = new java.util.TreeMap<>();
         int mappedRows = 0;
@@ -142,7 +142,7 @@ public final class LangDexProjectionReceiverTest {
             if (!line.startsWith("LangDex")) continue;
             String[] columns = line.split("\t", -1);
             check(columns.length == 7);
-            check(columns[4].equals("synexia.records.tsv:precompute_payload"));
+            check(columns[4].equals("m3.records.tsv:precompute_payload"));
             check(columns[5].equals("MAPPED"));
             check(!columns[3].equals("image_row"));
             String prior = actualTypes.putIfAbsent(columns[3], columns[2]);
@@ -180,24 +180,24 @@ public final class LangDexProjectionReceiverTest {
     private static void writeExport(Path directory) throws Exception {
         Path image = directory.resolve("langdex.m3lex");
         writeImage(image);
-        Files.writeString(directory.resolve("synexia.shards.tsv"),
+        Files.writeString(directory.resolve("m3.shards.tsv"),
                 "shard_id\tfile\tfirst_lexeme\tlast_lexeme\timage_records\tutf16_units\tsha256\n"
                         + "0\tlangdex.m3lex\t" + LEXEME + "\t" + LEXEME + "\t1\t"
                         + LEXEME.length() + "\t" + sha256(image) + "\n",
                 StandardCharsets.UTF_8);
-        Files.writeString(directory.resolve("synexia.records.tsv"),
+        Files.writeString(directory.resolve("m3.records.tsv"),
                 "source_id\tsource_path\tsource_kind\tlanguage_tag\trecord_id\tlexeme\tshard_id\timage_row\t"
                         + "mapping_id\tmapping_name\ttranslation_profile\tprecompute_profile\tprecompute_payload\n"
                         + SOURCE_ID + "\tsynexia-unicodex/docs/langdex/UPSTREAM_SCHEMA.tsv\tlangdex\ten\t"
                         + RECORD_ID + "\t" + LEXEME + "\t0\t0\tlangdex:" + RECORD_ID
                         + "\tLangDex test fixture\t-\tlangdex\t" + PAYLOAD + "\n",
                 StandardCharsets.UTF_8);
-        Files.writeString(directory.resolve("synexia.precompute.tsv"),
+        Files.writeString(directory.resolve("m3.precompute.tsv"),
                 "shard_id\timage_row\tutf16_units\tjava_hash\tcode_points\tunpaired_surrogates\t"
                         + "non_bmp_code_points\tascii\tlatin1\tcontains_whitespace\tprecompute_profile\n"
                         + "0\t0\t5\t112903447\t5\t0\t0\tTrue\tTrue\tFalse\tlangdex\n",
                 StandardCharsets.UTF_8);
-        Files.writeString(directory.resolve("synexia.precompute-index.tsv"),
+        Files.writeString(directory.resolve("m3.precompute-index.tsv"),
                 "precompute_profile\tsource_records\timage_records\tsha256\n"
                         + "langdex\t1\t1\t" + profileHash("langdex", 1, 1) + "\n",
                 StandardCharsets.UTF_8);
@@ -215,7 +215,7 @@ public final class LangDexProjectionReceiverTest {
                         catalog.findMapping(SOURCE_ID, RECORD_ID).orElseThrow();
                 check(mapping.sourceId().equals(SOURCE_ID));
                 check(mapping.recordId().equals(RECORD_ID));
-                check(mapping.sourcePath().equals("synexia-unicodex/docs/langdex/UPSTREAM_SCHEMA.tsv"));
+                check(mapping.sourcePath().equals("m3-unicodex/docs/langdex/UPSTREAM_SCHEMA.tsv"));
                 check(mapping.lexeme().equals(LEXEME));
                 check(mapping.mappingId().equals("langdex:" + RECORD_ID));
                 check(mapping.precomputeProfile().equals("langdex"));
@@ -223,7 +223,7 @@ public final class LangDexProjectionReceiverTest {
                 check(catalog.findMapping(SOURCE_ID, "0").isEmpty());
                 check(catalog.textAt(mapping.coordinate()).equals(LEXEME));
 
-                SynexiaPrecomputePayload payload =
+                M3PrecomputePayload payload =
                         catalog.findPrecomputePayload(SOURCE_ID, RECORD_ID).orElseThrow();
                 check(payload.fieldNames().equals(new TreeSet<>(EXPECTED_FIELDS)));
                 check(payload.canonicalJson().equals(PAYLOAD));
@@ -239,7 +239,7 @@ public final class LangDexProjectionReceiverTest {
                 check(payload.requireInt("langdex_lexical_profile_feature_bits") == 4660);
                 check(payload.requireLong("langdex_lexical_profile_lexical_class_mask") == 12L);
                 check(payload.requireLong("langdex_semantic_class_mask") == 2305843009213693953L);
-                SynexiaPrecomputePayload legacy = SynexiaPrecomputePayload.parse(LEGACY_PAYLOAD);
+                M3PrecomputePayload legacy = M3PrecomputePayload.parse(LEGACY_PAYLOAD);
                 check(legacy.fieldNames().equals(new TreeSet<>(REQUIRED_FIELDS)));
                 check(legacy.field("langdex_lexical_profile_feature_bits").isEmpty());
                 check(payload.requireInt("langdex_subject_id") == 17);
@@ -261,9 +261,9 @@ public final class LangDexProjectionReceiverTest {
                     "{\"langdex_concept_id\":701,\"langdex_confidence_permille\":1000,",
                     "{\"langdex_confidence_permille\":1000,\"langdex_concept_id\":701,");
             String nonCanonical = Files.readString(
-                    directory.resolve("synexia.records.tsv"), StandardCharsets.UTF_8)
+                    directory.resolve("m3.records.tsv"), StandardCharsets.UTF_8)
                     .replace(PAYLOAD, nonCanonicalPayload);
-            Files.writeString(directory.resolve("synexia.records.tsv"), nonCanonical, StandardCharsets.UTF_8);
+            Files.writeString(directory.resolve("m3.records.tsv"), nonCanonical, StandardCharsets.UTF_8);
             try {
                 SharedLexiconCatalog.openLazy(directory);
                 throw new AssertionError("non-canonical LangDex payload was accepted");

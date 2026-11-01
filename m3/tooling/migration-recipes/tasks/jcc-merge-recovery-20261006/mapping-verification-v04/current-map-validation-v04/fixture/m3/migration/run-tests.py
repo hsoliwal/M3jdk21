@@ -37,10 +37,10 @@ def main():
             raise SystemExit('Pinned target dependency drift: ' + path)
     out.mkdir(parents=True)
     sources = sorted(list(pins['files']) + [
-        'm3/algorithms/src/com/m3/algorithm/M3PrefixZ.java',
+        'm3/algorithms/src/jdk/m3/algorithm/M3PrefixZ.java',
         'm3/algorithms/test/PrefixZContractTest.java',
         'm3/algorithms/test/ViewInteropContractTest.java',
-        'm3/migration/src/com/m3/migration/ExactFileRecipe.java',
+        'm3/migration/src/jdk/m3/migration/ExactFileRecipe.java',
         'm3/migration/test/RecipeContractTest.java'])
     java_inputs = {p: sha(ROOT / p) for p in sources}
     python_paths = ['m3/migration/migration.py', 'm3/migration/test/test_migration.py',

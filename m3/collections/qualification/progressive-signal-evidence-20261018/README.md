@@ -76,11 +76,11 @@ Java oracle, JNI parity, native lifetime and CPU/heap proof.
 ```sh
 d="$(mktemp -d)"
 javac --release 21 -proc:none -Xlint:all -Werror -d "$d" \
-  m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java \
-  m3/collections/src/main/java/com/m3/collections/M3SignalOrderNative.java \
-  m3/collections/src/main/java/com/m3/collections/M3ProgressiveSignalEvidence.java \
-  m3/collections/src/test/java/com/m3/collections/M3SignalOrderContract.java \
-  m3/collections/src/test/java/com/m3/collections/M3ProgressiveSignalEvidenceContract.java
+  m3/collections/src/main/java/jdk/m3/collections/M3SignalOrder.java \
+  m3/collections/src/main/java/jdk/m3/collections/M3SignalOrderNative.java \
+  m3/collections/src/main/java/jdk/m3/collections/M3ProgressiveSignalEvidence.java \
+  m3/collections/src/test/java/jdk/m3/collections/M3SignalOrderContract.java \
+  m3/collections/src/test/java/jdk/m3/collections/M3ProgressiveSignalEvidenceContract.java
 java -cp "$d" com.m3.collections.M3SignalOrderContract
 java -cp "$d" com.m3.collections.M3ProgressiveSignalEvidenceContract
 rm -rf "$d"

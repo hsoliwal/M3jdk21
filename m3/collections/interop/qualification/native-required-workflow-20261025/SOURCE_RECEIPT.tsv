@@ -13,7 +13,7 @@ canonical_source_recipe	com.synexia.rewrite.M3InteropNativeRequiredWorkflow20261
 canonical_repository	hsoliwal/com.synexia
 native_source	m3/arrays/src/main/native/CMakeLists.txt
 native_source_git_blob	70d064ec1e41b6089105a471e831dc20c1e0ebe5
-java_owner	m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java
+java_owner	m3/arrays/src/main/java/jdk/m3/arrays/M3ArrayNative.java
 java_owner_git_blob	3572d82c20495cd4f03a15a9de4ba580ad3d509a
 existing_java_array_pom	m3/arrays/pom.xml
 native_library_property	m3.arrays.native.path

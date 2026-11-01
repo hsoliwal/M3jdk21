@@ -13,11 +13,11 @@ The previous `-Dm3.collections.rank.native=true` opt-in policy and small-batch t
 ## Exact original product output
 | Original product path | Result Git blob |
 |---|---|
-| `m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java` | `bcf60297cd2a3b04668b10b4a0baae6e80d23bbb` |
-| `m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java` | `b6cf17d87db4d0d5890e33febda5332ca6c7ee7a` |
+| `m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java` | `bcf60297cd2a3b04668b10b4a0baae6e80d23bbb` |
+| `m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java` | `b6cf17d87db4d0d5890e33febda5332ca6c7ee7a` |
 | `m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c` | `5248b615f66f72b1e390d1aaa7b4797d66691c5b` |
-| `m3/collections/src/test/java/com/m3/collections/M3LongRankEqualRangesContract.java` | `7ca8f2fff2b1d662b53064596a1b29715fe60052` |
-| `m3/collections/src/test/java/com/m3/collections/M3LongRankEqualRangesTest.java` | `13512e6278aec62f4ca9f5f1839e72e809df758f` |
+| `m3/collections/src/test/java/com/m3/collections/M3LongRankEqualRangesContract.java` | `a3b1b472a85b7c8f9ca1233556aa777bf5bfed58` |
+| `m3/collections/src/test/java/com/m3/collections/M3LongRankEqualRangesTest.java` | `e3f80e5b82f9d6651cd323698be2746a95880938` |
 | `.github/workflows/m3-jni-rank-equal-ranges-java21.yml` | `088625718ddc6cb8354f31ac8bd57cf086fb280c` |
 
 ## Proof and HOLD conditions

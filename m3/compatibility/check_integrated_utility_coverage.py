@@ -158,7 +158,7 @@ def owner_disposition(module: str, meta: dict) -> str:
 
 def verify_module_index(repository: Path, overlay: Path | None, fragment: dict, core_apis: dict) -> dict:
     index_path = fragment["module_wide_index"]
-    require(index_path == "m3/docs/name-mapping.d/m3-jdk-module-owners-20261018.json", "module index authority drift")
+    require(index_path == "m3/docs/name-mapping.d/m3jdk-module-owners-20261018.json", "module index authority drift")
     index = json.loads(load_candidate(repository, overlay, index_path))
     require(index["schema"] == 1 and index["mapping_authority"] == MAPPING
             and index["core_family_fragment"] == FRAGMENT, "module index naming-map authority drift")

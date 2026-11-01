@@ -13,9 +13,9 @@ extensions such as `com.m3.collections.M3FixedSizeLongListView`.
 ## Source and donor custody
 
 - Target base: `hsoliwal/M3jdk21@8c8dd70e659b99c23a2d0e7daeb2adadf95429c2`.
-- Original unimplemented source Git blob: `73b3bd3f70a07a2206a2f4b775aac13b208e8706`; SHA-256 `3a31b1d63ed4f18d705ee21ae79dcf4efe9ad1e130c34bc1e033c3698d3e0ed4`.
-- Candidate Java source Git blob: `02a164b1842d51a1de28730b9ec2c0c95fe9f942`; SHA-256 `975331c09056dfad6b7916a8b39ca0db13dceaf230d5506cec52a85669e0523b`.
-- New target JUnit source Git blob: `69c244de7667a9486dbf0d0eb664fef97f52af45`; SHA-256 `d892d44f2015b0a5d079d4dd018a4a62e591db2912fb0ae6d10aae8cfb895ccf`.
+- Original unimplemented source Git blob: `7233983f45bec901c0a54fabf7146e4864634e9a`; SHA-256 `2cc0f8997637362321105759afe3a987e320b14a81840217f73aa87652cc98bb`.
+- Candidate Java source Git blob: `a27404f795613cdc3e1826b8a192b79bb614f5bb`; SHA-256 `2a09249453eb4e7f27d55ba348765b4d928569e8a0286062aadf732793967fd5`.
+- New target JUnit source Git blob: `6b2ecded549c80ef34602f69840efa5521ee3ac5`; SHA-256 `e06e84af3cf85774e680cae4c826f1aa33c7bb869d642807f39bbe0905587631`.
 - Both public Java files were read back as exact Git blob matches to private Synexia templates.
 - Canonical private recipe source: `hsoliwal/com.synexia@d6256abccca04ab7f92802a66e5ca1abcbf65a16`,
   named `com.synexia.m3.M3FixedSizeLongView20261029` using the existing

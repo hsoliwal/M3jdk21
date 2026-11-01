@@ -38,8 +38,8 @@ allocation. No universal speedup. #1260/#1328 and the earlier widget source stac
 remain separate pending reconciliation. String-first receiving phase unchanged.
 
 Qualified product blobs:
-M3IndexedListSnapshot.java e69da823d4db909bbd99fb94cb6002d5bff5025f
-m3_index_mask_compactor.c 09e0dc2a4e0bde839ddf2b8fd0cc2d658ee59489
+M3IndexedListSnapshot.java 99eae8861c57876f7b69587458bd9e342c7c4750
+m3_index_mask_compactor.c 633186c99ff955153a680d31ce699c2b4dcfb463
 SHA256 pre/postimages are in SOURCE_SEALS.json. Reapply only canonical recipe
 output to the exact admitted inputs; no target hand-repair, merge, rebase,
 force push or default-branch write.

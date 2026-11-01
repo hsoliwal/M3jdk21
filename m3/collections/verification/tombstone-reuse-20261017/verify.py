@@ -14,15 +14,15 @@ import sys
 import tempfile
 
 FILES = [
-    'm3/collections/src/main/java/com/m3/collections/M3LongHashSet.java',
-    'm3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java',
-    'm3/collections/src/main/java/com/m3/collections/M3LongCollection.java',
-    'm3/collections/src/main/java/com/m3/collections/M3LongIterator.java',
-    'm3/collections/src/main/java/com/m3/collections/M3LongLongConsumer.java',
+    'm3/collections/src/main/java/jdk/m3/collections/M3LongHashSet.java',
+    'm3/collections/src/main/java/jdk/m3/collections/M3LongLongHashMap.java',
+    'm3/collections/src/main/java/jdk/m3/collections/M3LongCollection.java',
+    'm3/collections/src/main/java/jdk/m3/collections/M3LongIterator.java',
+    'm3/collections/src/main/java/jdk/m3/collections/M3LongLongConsumer.java',
 ]
 ROOT = Path(__file__).resolve().parents[4]
 CONFIG = Path(__file__).with_name('receiver.json')
-TEST = ROOT / 'm3/collections/src/test/java/com/m3/collections/M3TombstoneReuseSelfTest.java'
+TEST = ROOT / 'm3/collections/src/test/java/jdk/m3/collections/M3TombstoneReuseSelfTest.java'
 TARGETS = FILES[:2]
 
 
@@ -49,7 +49,7 @@ def compare(source_dir, label, root, out, receipts, test):
              '-d',str(destination),*inputs],root,receipts)
     for owner in ['M3LongHashSet','M3LongLongHashMap']:
         args=['javap','-public','-s','-classpath',str(destination),
-              'com.m3.collections.'+owner]
+              'jdk.m3.collections.'+owner]
         public = command(args,root,receipts).stdout
         (out/f'api-{label}-{owner}.txt').write_text(public)
     return destination
@@ -95,10 +95,10 @@ def main():
             file.parent.mkdir(parents=True,exist_ok=True)
             file.write_bytes(source)
         old=compare(baseline,'old',root,out,receipts,TEST)
-        command(['java','-Xmx64m','-cp',str(old),'com.m3.collections.M3TombstoneReuseSelfTest'],
+        command(['java','-Xmx64m','-cp',str(old),'jdk.m3.collections.M3TombstoneReuseSelfTest'],
                 root,receipts,expected=1,contains='allocated array despite reachable deleted slot')
         new=compare(root,'new',root,out,receipts,TEST)
-        command(['java','-Xmx64m','-cp',str(new),'com.m3.collections.M3TombstoneReuseSelfTest'],
+        command(['java','-Xmx64m','-cp',str(new),'jdk.m3.collections.M3TombstoneReuseSelfTest'],
                 root,receipts,contains='PASS M3TombstoneReuseSelfTest')
         again=compare(root,'repeat',root,out,receipts,TEST)
         for owner in ['M3LongHashSet','M3LongLongHashMap']:
@@ -108,7 +108,7 @@ def main():
         if cls(new)!=cls(again):
             raise AssertionError('repeat compilation differs')
         summary={'status':'PASS_SELECTED_SOURCE_JAVA21','base_commit':cfg['base_commit'],
-                 'synexia_recipe_commit':cfg['synexia_recipe_commit'],
+                 'm3_recipe_commit':cfg['m3_recipe_commit'],
                  'compiled_class_files':len(cls(new)), 'command_count':len(receipts),
                  'api_descriptors':'IDENTICAL','repeat_classes':'IDENTICAL',
                  'jtreg':'NOT_RUN','full_maven_reactor':'NOT_RUN','native_jni':'UNCHANGED_NOT_RUN',

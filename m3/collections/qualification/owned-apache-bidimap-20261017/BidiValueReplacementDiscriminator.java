@@ -14,7 +14,7 @@
  *******************************************************************************/
 import java.util.Iterator;
 import java.util.function.Supplier;
-import com.m3.collections.apache.M3BidiMap;
+import jdk.m3.collections.apache.M3BidiMap;
 import org.apache.commons.collections4.BidiMap;
 import org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap;
 

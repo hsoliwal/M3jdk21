@@ -2,7 +2,7 @@
 Date: 2026-10-19; SPDX-License-Identifier: Apache-2.0.
 Source owner: M3JDK21 M3LinkedList, existing Object[] values / int[] before-after / long[] liveMask and free-list.
 Canonical Synexia source-sealed recipe: https://github.com/hsoliwal/com.synexia/pull/12424
-Original M3LinkedList master blob: 744d1c488b8342c98e49d2cfd3465c0f558b199d
+Original M3LinkedList master blob: 832c838caf7a37d6f9a10b37505c3e65ed9f6292
 
 One behavioral atom replaces delegated JDK IteratorSpliterator's temporary element-batch splitting.
 LinkedIndexSplit reads physical links directly, partitions by midpoint walks, bounds CPU shard count <=128, no per-element node/Entry/Object[] copy.

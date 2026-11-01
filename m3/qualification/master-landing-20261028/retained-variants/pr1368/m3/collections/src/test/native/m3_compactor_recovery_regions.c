@@ -110,18 +110,18 @@ static void reset(void) {
 static jarray call(int owner, Array *rows, Array *marks, int ro, int so, int count, int mask) {
     JNIEnv env = &table;
     if (owner == 0)
-        return Java_com_m3_collections_M3IndexMaskCompactor_selectNative(&env, NULL,
+        return Java_jdk_m3_collections_M3IndexMaskCompactor_selectNative(&env, NULL,
                 (jintArray)(void *)rows, (jbyteArray)(void *)marks, mask);
     if (owner == 1)
-        return Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative(&env, NULL,
+        return Java_jdk_m3_collections_M3IndexMaskCompactor_selectRangeNative(&env, NULL,
                 (jintArray)(void *)rows, (jbyteArray)(void *)marks, ro, count, mask);
     if (owner == 2)
-        return Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative(&env, NULL,
+        return Java_jdk_m3_collections_M3IndexMaskCompactor_selectWindowNative(&env, NULL,
                 (jintArray)(void *)rows, ro, (jbyteArray)(void *)marks, so, count, mask);
     if (owner == 3)
-        return Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(&env, NULL,
+        return Java_jdk_m3_collections_M3IndexMaskCompactor_selectLongWindowNative(&env, NULL,
                 (jlongArray)(void *)rows, ro, (jbyteArray)(void *)marks, so, count, mask);
-    return Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative(&env, NULL,
+    return Java_jdk_m3_collections_M3IndexMaskCompactor_selectPositionsNative(&env, NULL,
             (jbyteArray)(void *)marks, mask);
 }
 

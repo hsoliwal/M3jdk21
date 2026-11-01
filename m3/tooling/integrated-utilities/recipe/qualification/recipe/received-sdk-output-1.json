@@ -1,8 +1,8 @@
 {
   "scope": "SERIAL_RECEIVE_OF_ACTUAL_OPENREWRITE_RESULTS",
   "baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-  "manifest_sha256": "a7ea777197248e5430680dd599004ca815b881890bf7a746cb156ad79950301d",
-  "sdk_receipt_sha256": "cb0b1c569a13a30f04ee3ad10b0e5694cc9d01960b24b1080869cc4a3b484dd8",
+  "manifest_sha256": "22dfc6c19ac95fd88eba0ac9d12845fad84a10f9c01445237264b229c00f2495",
+  "sdk_receipt_sha256": "8650ca2f0c8542084d2e7b7cfe9b9053354e2de2c68e4eb02b23521269011630",
   "unchanged_source_paths": 450,
   "materialized_unchanged_tracked_paths": 376,
   "received_count": 33,
@@ -12,7 +12,7 @@
     {
       "path": "m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
       "before": "ABSENT",
-      "after": "f123ae356ffdd5df1523205dc5f1f48e6daf461b8a6f908a9870e348e80f5e7f",
+      "after": "5bf447216af55a51b73c275182af891c1ded5c2b427fa6856139731078d2ef8c",
       "source": "actual SDK Result bytes"
     },
     {
@@ -40,21 +40,21 @@
       "source": "actual SDK Result bytes"
     },
     {
-      "path": "m3/docs/name-mapping.d/m3-jdk-module-owners-20261018.json",
+      "path": "m3/docs/name-mapping.d/m3jdk-module-owners-20261018.json",
       "before": "ABSENT",
       "after": "7ec04178398539f8f27459d0d754a294af275f5469fcfa51db6ce58d872d47b1",
       "source": "actual SDK Result bytes"
     },
     {
       "path": "m3/docs/name-mapping.json",
-      "before": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
+      "before": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46",
       "after": "2bb378d4e2af9c0bf62482182acdf53f1919abe16e6146195d38d9bcfc6ab9d7",
       "source": "actual SDK Result bytes"
     },
     {
       "path": "m3/runtime-integration/integrated-collections/FOSS_REUSE_DECISION.json",
       "before": "ABSENT",
-      "after": "9659689fab63ae642eb4b789814f6402108c9d24a9f1b48bf924207992fd6db1",
+      "after": "3ee2e50f838470732304b728ee7c37a224611dc42fd56148faf687f3c14b1cad",
       "source": "actual SDK Result bytes"
     },
     {
@@ -72,13 +72,13 @@
     {
       "path": "m3/runtime-integration/integrated-collections/candidate-receiver.json",
       "before": "ABSENT",
-      "after": "0d334e13765b476d851f7b8585f9157dda4e4d3150eb460eec5eb13dcd0d0025",
+      "after": "afa5b6c927910d003263726dd83898abb99e80011f408915b1cb1931d867c7c8",
       "source": "actual SDK Result bytes"
     },
     {
       "path": "m3/runtime-integration/integrated-collections/counterexamples.json",
       "before": "ABSENT",
-      "after": "b481d09450f49bf14dbc40d5bec89c9d6924a5e1893e614f7216e8ef5959c077",
+      "after": "e24f21e0fa610db3038f420bcc05b9f39cb38278548efadf058d3efa3d58aa27",
       "source": "actual SDK Result bytes"
     },
     {
@@ -102,13 +102,13 @@
     {
       "path": "m3/runtime-integration/integrated-utilities/behavioral-atoms.json",
       "before": "ABSENT",
-      "after": "a3015f30c325ed9e40e73f5416d48616e5411e32db64b0e813796fe5273ae0d8",
+      "after": "399e736490260446a9562e4b479fb2c61532305125c1b7f2e2debe0044d1d2a3",
       "source": "actual SDK Result bytes"
     },
     {
       "path": "m3/runtime-integration/integrated-utilities/contract-catalogue.json",
       "before": "ABSENT",
-      "after": "d36b88fc08ce728285c59f1826211be0a9154df2dbf8aedcd8a9a5875150d4b8",
+      "after": "ad5b209d0320dd10c5eade3481636b80ef70ac1c706bd63aa46f05c92089720c",
       "source": "actual SDK Result bytes"
     },
     {
@@ -149,8 +149,8 @@
     },
     {
       "path": "src/java.base/share/classes/java/util/Strings.java",
-      "before": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d",
-      "after": "b62532d9b0c77bc5edc07ea87daf58706e68ce4084ec228919d5cf0c28847270",
+      "before": "7147989eba1d6def126049042d8fe4bc7780fbaa972ea932bed411961117b717",
+      "after": "34286346addedd6bcdc0058df970d159f714e73ce589a8eff86068a51c72a93b",
       "source": "actual SDK Result bytes"
     },
     {
@@ -186,7 +186,7 @@
     {
       "path": "test/jdk/java/util/Collections/M3CollectionMasksTest.java",
       "before": "ABSENT",
-      "after": "09283aa9f8e6f184f9f2e50f2967be6fc47654b591d3de0908751d84d622ce17",
+      "after": "73433d7592b44c9e7d8268a860532cfc72a13f342698efb3fafea4262ede33f3",
       "source": "actual SDK Result bytes"
     },
     {

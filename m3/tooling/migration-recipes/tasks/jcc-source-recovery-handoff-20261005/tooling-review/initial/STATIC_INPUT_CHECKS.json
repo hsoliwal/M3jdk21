@@ -8,8 +8,8 @@
   "current_parent_membership": 109,
   "designated_owners": 19,
   "designated_distribution": {
-    "synexia.jcc-recipe-laboratory": 13,
-    "synexia.jcc-java-jni-regression": 6
+    "m3.jcc-recipe-laboratory": 13,
+    "m3.jcc-java-jni-regression": 6
   },
   "E3_prior_objects_match_context_exactly": 17,
   "E3_preexisting_history_count": 4,
@@ -26,12 +26,12 @@
   "destination_gates": 20,
   "selected_status_and_tests": [
     {
-      "id": "synexia.jcc-recipe-laboratory",
+      "id": "m3.jcc-recipe-laboratory",
       "status": "blocked",
       "tests": []
     },
     {
-      "id": "synexia.jcc-java-jni-regression",
+      "id": "m3.jcc-java-jni-regression",
       "status": "blocked",
       "tests": []
     }
@@ -41,8 +41,8 @@
       "resource": "before00-name-mapping.json.txt",
       "path": "m3/docs/name-mapping.json",
       "bytes": 236215,
-      "sha256": "e4ae516fea9822a4bfe26669e9749e167f52bb30049d520339ee42f3779bc0b3",
-      "git_blob_sha1": "d10174dd61016069b9d5b73b7fd581a025855bcc",
+      "sha256": "61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8",
+      "git_blob_sha1": "3a1e902a8284773f0f182d6bd43bf4e27b4e63c0",
       "exact_E3_manifest_match": true,
       "operational_preimage_equal": true
     },
@@ -59,8 +59,8 @@
       "resource": "before02-source-destination-bindings.json.txt",
       "path": "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
       "bytes": 92103,
-      "sha256": "049c7c1987c05a15f4152fcb8f261a65245d72a25688d5a530a4afa5405cd3ef",
-      "git_blob_sha1": "b6283a33b9348f4ac6da3adaf5a35edb34a5a0c1",
+      "sha256": "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1",
+      "git_blob_sha1": "5ecf415c7af4176898328d58b9df2972e18277c4",
       "exact_E3_manifest_match": true,
       "operational_preimage_equal": true
     },
@@ -98,15 +98,15 @@
       "name": "PARENT_BUILD_CONTEXT.json",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/PARENT_BUILD_CONTEXT.json",
       "bytes": 112397,
-      "sha256": "4f8fbf09070e4d45e42c7ac29c94401d70058fea04d98e44b3526a24c77912fc",
-      "git_blob_sha1": "665dac597b1b33414e152c9224c840e7e01127d5"
+      "sha256": "c2ba69331b7d22a467e72369ebf06cebe16e9b09f5b9c3f2900247d540773bfc",
+      "git_blob_sha1": "8d43fa29a81040d3572525b3c864841a7a35643b"
     },
     {
       "name": "CURRENT_PROJECTION.json",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/CURRENT_PROJECTION.json",
       "bytes": 596276,
-      "sha256": "18c5fea0f72fe21aa78df1aa6c319eb4276fc15aa481952539c221ce651e6f49",
-      "git_blob_sha1": "d20138ab763408bbbd793c1ff27778d866b29009"
+      "sha256": "8626cc0e739dac6cc3b2e77496d16e7c75025f7de99f30e1b93f42796e6c4799",
+      "git_blob_sha1": "3c187aada912a867711f1f3adcf32fe99e99f26e"
     },
     {
       "name": "CURRENT_CONTEXT_MANIFEST.json",
@@ -119,22 +119,22 @@
       "name": "BUILD_ROLE_MAP.json",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/BUILD_ROLE_MAP.json",
       "bytes": 63816,
-      "sha256": "cabf31b005b28c18053c107936134356986f55770368cb982800900380ee8689",
-      "git_blob_sha1": "eed55a4d5b77d6bfe61746576409ae68d46f8a84"
+      "sha256": "13a191d4ef3e137518df6ebd1eebc9c8858370b7ffeb9af1db7d37fd0d90e3d7",
+      "git_blob_sha1": "2bb90dc2511c26ea6181e949b68c1d7013c9b157"
     },
     {
       "name": "INVENTORY_REVIEW.json",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/INVENTORY_REVIEW.json",
       "bytes": 14727,
-      "sha256": "41178470be98b342b83f58c43afa4a603d72c115584956c4fdbc96ce6a45d039",
-      "git_blob_sha1": "e3e43e60d7ed5247cadab7e58c5515e6e7e07136"
+      "sha256": "cae9bd963f45edd0c766f0f0a4cd6801d3239d888ef2175aea2cf965ca5f8ea6",
+      "git_blob_sha1": "b8c254769db1c67a930d4946c491619a56ea8052"
     },
     {
       "name": "AMENDMENT.json",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/AMENDMENT.json",
       "bytes": 1177,
-      "sha256": "e20b0de4dfa51c79e6e16d035c6c55a5d368a9641b175239cb6f41f916bd74a6",
-      "git_blob_sha1": "5009d7d338eaaca207129c277acc8513351939cc"
+      "sha256": "921e421259c9bd68bd70c2412f75cffc187c2a61c725053506c4470c129e7fa3",
+      "git_blob_sha1": "fa4cdc735f58059920dc217be6b00819a859eeba"
     },
     {
       "name": "INVENTORY_REVIEW.md",
@@ -147,15 +147,15 @@
       "name": "INVENTORY_FILE_SEALS.json",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/INVENTORY_FILE_SEALS.json",
       "bytes": 183376,
-      "sha256": "02b0e8700b6d46a1c84730f8810ca510824af1da46655c5d59660b5902bb4b0c",
-      "git_blob_sha1": "3c068f6e10cc156cee9769a94997f5b7fbb3c4d9"
+      "sha256": "066f885acc4b2fd877a668c746b9efcfe844b9968982269b10371dad9d6853d9",
+      "git_blob_sha1": "d3abd93bdb9fd469679539885ee9b672c713695d"
     },
     {
       "name": "RECOVERY_SOURCE_INCLUDES.txt",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/RECOVERY_SOURCE_INCLUDES.txt",
       "bytes": 39132,
-      "sha256": "739ef583031ef3b940cbd141386ca91501fb7d505ce3ed78e2c55d2a98c70407",
-      "git_blob_sha1": "d64110d838a6a2632f8483c88ba0b2b94901e70d"
+      "sha256": "dfb5dd0243103456154d96398cfa1591265455fd3ae0e512afa0b72361477988",
+      "git_blob_sha1": "e91d85faf0dce29a4bc7e13b4bffb9dd250387ac"
     }
   ]
 }

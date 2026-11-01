@@ -2,7 +2,7 @@
 // Copyright 2026 Hitesh Soliwal and contributors.
 // Source: hsoliwal/com.synexia
 // Commit: 50f48cbbe11f17fb8dc209bac3812f8940a1e267
-// Path: synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileTokenStore.java
+// Path: m3-indexstring/src/main/java/jdk/internal/m3/indexstring/file/MIndexFileTokenStore.java
 // Git blob: 24af695903f1c62d353ce7843ac45267086a6801
 // Adaptation: package/class mapping only; the adaptive storage logic is unchanged.
 // These primitive arrays hold occurrence IDs, never text payloads.

@@ -3,18 +3,18 @@
   "recipe": "m3-jni-array-storage-20261021/primitive-family-20261031",
   "canonical_repository": "hsoliwal/com.synexia",
   "canonical_source_commit": "bf63a5550acd26e76bd92572521c1d0a8cce1c2b",
-  "canonical_artifact_root": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/primitive-family-20261031",
+  "canonical_artifact_root": "m3-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/primitive-family-20261031",
   "source_base": "a20ef608c1bd7ce1016686d549ccee1fc87f4f92",
   "receiving_parent": "52fb81c483c74448a12eecb63aa9465e42cdb82c",
   "receiving_repin": "Entire src tree and module POM unchanged from source base",
   "files": [
     {
-      "path": "m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java",
-      "sha256": "237daac1ac1582cc459a7c43c7e79ff1892f1c8caac0d5f29df912f613445ce1"
+      "path": "m3/arrays/src/main/java/jdk/m3/arrays/M3ArrayNative.java",
+      "sha256": "4df9510f9453734fe6c9524358c9a5645cc68f5d13a965162f9927530abb1315"
     },
     {
       "path": "m3/arrays/src/main/native/m3_arrays_jni.c",
-      "sha256": "da1f56009e24a6956e168c9bf4d549117279a8ea3a52c51d7118bd24463bebd8"
+      "sha256": "a69bb4d43e50c0cb49185681828cd9900072feb2f9037492971e220bdcd639bf"
     },
     {
       "path": "m3/arrays/src/main/native/CMakeLists.txt",
@@ -22,15 +22,15 @@
     },
     {
       "path": "m3/arrays/src/main/native/tests/m3_array_allocation_fault_test.c",
-      "sha256": "423b3ce308f813662016124ec3c03045a3c32426c3df3fc01d44190fbfb6b53b"
+      "sha256": "be4d36c97f59eea8ca8e184dfecfed4e62111179ca74a8218d373d3df93d7a88"
     },
     {
       "path": "m3/arrays/src/main/native/tests/m3_array_allocation_null_fixture.c",
-      "sha256": "745490b8557a32f4f4a01e7a207fa03427d0e423b2b5d15942d900ab0e3a9a6b"
+      "sha256": "74d5c1e70eaa9424c553ce3119b22bac8f38a77663d01ca6900bb88946af9d16"
     },
     {
-      "path": "m3/arrays/src/test/java/com/m3/arrays/M3ArrayAllocationAtomsTest.java",
-      "sha256": "08974280e4439060a6d41107680d968aaacb54e2b4ddb0329562422d79430d33"
+      "path": "m3/arrays/src/test/java/jdk/m3/arrays/M3ArrayAllocationAtomsTest.java",
+      "sha256": "4f1bd3761fd371bb0a8718c1266f9a762a36b626d098a5f13fd89b22236ee0d2"
     }
   ],
   "source_passes": [
@@ -75,9 +75,9 @@
       "recipe": "m3-jni-primitive-allocation-20261031-double",
       "type": "double",
       "java_before": "91a8ed90df48bba375c5272b58a8d63b9260dc3820492aada4802c1ed895b7b5",
-      "java_after": "237daac1ac1582cc459a7c43c7e79ff1892f1c8caac0d5f29df912f613445ce1",
+      "java_after": "4df9510f9453734fe6c9524358c9a5645cc68f5d13a965162f9927530abb1315",
       "native_before": "c99161cfbb6eaaa4d6cd5e6dcf898cf4fab8f06b170ecaedb5cd3c16a8a25a15",
-      "native_after": "da1f56009e24a6956e168c9bf4d549117279a8ea3a52c51d7118bd24463bebd8"
+      "native_after": "a69bb4d43e50c0cb49185681828cd9900072feb2f9037492971e220bdcd639bf"
     }
   ],
   "qualification": {

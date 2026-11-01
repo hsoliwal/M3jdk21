@@ -114,10 +114,10 @@ def main():
             suite_args += [("M3IndexPathRankSelfTest", []), ("M3LongIndexPathMasksSelfTest", []),
                            ("M3BudgetedMaskWindowContract", ["--missing"])]
         for ordinal, (name, arguments) in enumerate(suite_args):
-            run(mode + "-" + str(ordinal) + "-" + name, launcher + ["com.m3.collections." + name] + arguments)
+            run(mode + "-" + str(ordinal) + "-" + name, launcher + ["jdk.m3.collections." + name] + arguments)
         if mode == "java":
             run("small-stack-wrapper-depth", launcher[:1] + ["-Xss256k"] + launcher[1:]
-                + ["com.m3.collections.M3FilteredNavigationReconciliationContract", "depth"])
+                + ["jdk.m3.collections.M3FilteredNavigationReconciliationContract", "depth"])
     if seals() != before:
         raise SystemExit("An input changed during runtime qualification.")
     result = {"scope": "focused_runtime_closure; independent owning-module and whole-JDK gates remain",

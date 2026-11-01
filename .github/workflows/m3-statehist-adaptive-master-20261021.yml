@@ -5,8 +5,8 @@ on:
     branches: [m3/statehist-adaptive-maskcount-master-20261021]
   pull_request:
     paths:
-      - m3/collections/src/main/java/com/m3/collections/M3StateMaskHistogram.java
-      - m3/collections/src/test/java/com/m3/collections/M3StateMaskAdaptiveCountContract.java
+      - m3/collections/src/main/java/jdk/m3/collections/M3StateMaskHistogram.java
+      - m3/collections/src/test/java/jdk/m3/collections/M3StateMaskAdaptiveCountContract.java
   workflow_dispatch:
 permissions:
   contents: read
@@ -28,15 +28,15 @@ jobs:
         run: |
           mkdir -p build/statehist
           javac --release 21 -Xlint:all -Werror -proc:none -d build/statehist \
-            m3/collections/src/main/java/com/m3/collections/M3StateMaskHistogram.java \
-            m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java \
-            m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java \
-            m3/collections/src/test/java/com/m3/collections/M3StateMaskAdaptiveCountContract.java
+            m3/collections/src/main/java/jdk/m3/collections/M3StateMaskHistogram.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3StateMaskAdaptiveCountContract.java
       - name: Real array offset bit mask and native availability oracle
         run: |
           java -ea -Xcheck:jni -cp build/statehist \
-            com.m3.collections.M3StateMaskAdaptiveCountContract
+            jdk.m3.collections.M3StateMaskAdaptiveCountContract
       - name: Interpreter oracle
         run: |
           java -Xint -ea -cp build/statehist \
-            com.m3.collections.M3StateMaskAdaptiveCountContract
+            jdk.m3.collections.M3StateMaskAdaptiveCountContract

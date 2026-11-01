@@ -1,5 +1,5 @@
---- a/m3/collections/src/main/java/com/m3/collections/M3SparseExtents.java
-+++ b/m3/collections/src/main/java/com/m3/collections/M3SparseExtents.java
+--- a/m3/collections/src/main/java/jdk/m3/collections/M3SparseExtents.java
++++ b/m3/collections/src/main/java/jdk/m3/collections/M3SparseExtents.java
 @@ -23,8 +23,8 @@
   * <p>Unmeasured rows are implicit: logical count and estimate allocate no row-sized
   * backing. Sorted primitive row IDs and measured extents carry only measured rows;
@@ -43,8 +43,8 @@
  		long inGap = first + (offset - start) / estimate;
  		int limit = low == measured ? count - 1 : rowIds [low];
  		return (int) Math.min (inGap, limit);
---- a/m3/collections/src/main/java/com/m3/collections/M3MaskViewportKernel.java
-+++ b/m3/collections/src/main/java/com/m3/collections/M3MaskViewportKernel.java
+--- a/m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportKernel.java
++++ b/m3/collections/src/main/java/jdk/m3/collections/M3MaskViewportKernel.java
 @@ -82,8 +82,9 @@
       *
       * <p>The entire input window is preflighted before any output mutation,

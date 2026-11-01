@@ -14,11 +14,11 @@ canonical recipe/convergence workspace, not a runtime layer.
 
 ## Exact generated source
 
-- Existing native compactor: `3aaa27ad34fded18f92e85f2e6377cf439b2bef9`.
+- Existing native compactor: `0ae9da857c53da08742636809a151f7573062890`.
 - Actual java.base SortedSet: exact #1538 donor `ad3ee89d40de8c0ca344863bb6fc4469cec97a09`.
-- Added common header: exact #1547 donor `a1bd5aab67eaed2db6fdc3851d85312f24bfc63d`.
+- Added common header: exact #1547 donor `5a3d6adde420d5c9d33279376384cd4a74825a02`.
 - New Java split proof: `7a163ef09089b0c2b30e9e6ec1360794263f5e5c`.
-- New native span proof: `dd352556d486a2094acc8d2eed255f4826b335e1`.
+- New native span proof: `d1284c4ea7f95c12866d03bae2d06c76c636b600`.
 
 The unchanged SealReplay and M3GpuToolJoinManifest emitted these five files
 from pinned preimages. Four existing Java/proof inputs remain KEEP. The
@@ -28,10 +28,10 @@ attributed OpenRewrite SDK execution.
 
 ## Preservation
 
-Parent M3FilteredLists `a9b2f396ae9e952a5cf54cd99e5689b6a23b9517`,
-M3FilteredViews `4a09a43ee8e963155144f88fa0a44255c373088f`,
+Parent M3FilteredLists `590cd9209eb0e0989175ad9113b93ca6720c85b0`,
+M3FilteredViews `214f064c7cab2d3df5f9d155fc490e83ac6beb9c`,
 M3LongIndexProjection `4191858c5aa6e0c1961376e2724fccef0a1d6bcb`,
-M3LongAddressKernel `9ac6c5a1e121affd28e6503d922927f6c91c3a66`,
+M3LongAddressKernel `fe30e94f5e66e2f4d43365bddb58dfdbb4f25207`,
 and Java mask owner `daea60beeb202d9e996f9a018fe5974738a43523` remain unchanged.
 No new canonical payload owner, per-row Entry/Node, public method or native
 export. Dynamic primitive offsets and masks drive native compaction. The

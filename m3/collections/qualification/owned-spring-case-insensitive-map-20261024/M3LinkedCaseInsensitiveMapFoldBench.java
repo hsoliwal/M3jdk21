@@ -12,9 +12,9 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
-package com.m3.collections.spring.bench;
+package jdk.m3.collections.spring.bench;
 
-import com.m3.collections.spring.M3LinkedCaseInsensitiveMap;
+import jdk.m3.collections.spring.M3LinkedCaseInsensitiveMap;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;

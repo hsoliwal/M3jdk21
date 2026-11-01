@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # M3JDK21 collection file census and first non-overlapping algorithm tranche
 
-- Pinned preimage M3LongArena28 Git blob: `b265551ff952606326e25c0361bc6f35c72adedf` (master).
+- Pinned preimage M3LongArena28 Git blob: `6dc6137c55c290dd8c618f1588c84d98b1d853e6` (master).
 - Census: 298 top-level production Java files, including package-info.
 - No Java API, constructor, class, package, native symbol, naming contract or third-party dependency changed.
 - Selected existing owner: `M3LongArena28.appendAll`.

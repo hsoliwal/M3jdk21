@@ -76,12 +76,12 @@
         "m3/collections/qualification/m3-native-bag-rank-index-20261018/recipe-mirror/descriptor.yml",
         "m3/collections/qualification/m3-native-bag-rank-index-20261018/recipe-mirror/manifest.tsv",
         "m3/collections/qualification/m3-native-bag-rank-index-20261018/verify.py",
-        "m3/collections/src/main/java/com/m3/collections/M3BagRankIndex.java",
-        "m3/collections/src/test/java/com/m3/collections/M3BagRankIndexSelfTest.java",
-        "m3/collections/src/test/java/com/m3/collections/M3BagRankIndexTest.java",
+        "m3/collections/src/main/java/jdk/m3/collections/M3BagRankIndex.java",
+        "m3/collections/src/test/java/jdk/m3/collections/M3BagRankIndexSelfTest.java",
+        "m3/collections/src/test/java/jdk/m3/collections/M3BagRankIndexTest.java",
         "m3/compatibility/canonical-wave2-receiver-20261018.tsv",
         "m3/compatibility/canonical-wave2-source-custody-20261018.tsv",
-        "m3/docs/synexia-public-fork-wave2-20261018.md"
+        "m3/docs/m3-public-fork-wave2-20261018.md"
       ],
       "relevant_prefixes": [
         "m3/tooling/module-packs/",

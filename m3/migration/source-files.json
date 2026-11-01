@@ -3,11 +3,11 @@
   "commit": "75fb1abaecb56969bea2914520bbe819f130632b",
   "scope": "six-file frozen/joined dependency closure; not complete source inventory",
   "files": [
-    {"path":"synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java","git_blob":"b624dc8dbb23eac6b3147ea888ac69df60f971e1","sha256":"cb50139594817d5cb2477c4d67148d4aed2174299f05cff9a3b24416139bc6b4","bytes":4037},
-    {"path":"synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java","git_blob":"a8f016a1764aea6e970bc60e38f345804e82a84e","sha256":"0c03ca0ed8b42212fa92e4d5f9325ba864f8d11928cd6a0b030b861f668f0657","bytes":3868},
-    {"path":"synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedBytes.java","git_blob":"9db0c6363480ccb0f38bba7b2218e151dd75ee68","sha256":"206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b","bytes":3259},
-    {"path":"synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedChars.java","git_blob":"d9ec1832d1b9381cf0243dfd132e089797f0a2d8","sha256":"712c1c795ff1e0d6dea099eaec8fa6e64803adfc12bad6f31970b722c659d396","bytes":5188},
-    {"path":"synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStorageIntern.java","git_blob":"95a576da9e60fb830a443034d6403e84740233e8","sha256":"f42c548a4fd47d3dac43283082125232e04d5f13f28b63521832493394176337","bytes":10303},
-    {"path":"synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStreams.java","git_blob":"6f350a84b954b2f80929252254a007652fc1d0d0","sha256":"a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80","bytes":5955}
+    {"path":"m3-indexstring/src/main/java/jdk/internal/m3/indexstring/FrozenBytes.java","git_blob":"f393350db66e0f75540a532b127df629641ad7ac","sha256":"db46ea5bd16183568d71552375f9ee61c29966902a14f5b15b70d8dd825fb17d","bytes":4037},
+    {"path":"m3-indexstring/src/main/java/jdk/internal/m3/indexstring/FrozenChars.java","git_blob":"e7cecf3e32eca949dcf6616455caab6c62fd909d","sha256":"88a85b35a7c5c6d84b23fa734254c11e4492ecf87ed0c93b6f730ddbec7d15ba","bytes":3868},
+    {"path":"m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexJoinedBytes.java","git_blob":"e0d1dc60bfbd4e74d1cc7379e300baec4a702182","sha256":"f43d38734a73f79855216bad2a7bdd8881a0ae42965ec4fb6efe125cffbefb30","bytes":3259},
+    {"path":"m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexJoinedChars.java","git_blob":"124d9ad7a5f5758ac1c9e99560f8bd873463c4b2","sha256":"26c76fa5990c9bb9e42651c392b7462bafd843e4ff906df961814ef1681bde9a","bytes":5188},
+    {"path":"m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexJoinedStorageIntern.java","git_blob":"ae92ba1d0284acee526714e679bd3f7c5922e2ad","sha256":"f3b9336099b2e9d362ec75f24fbcdb544ee51443148bb136c16c8d38a8b6200a","bytes":10303},
+    {"path":"m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexJoinedStreams.java","git_blob":"b156bfe08da189b9c06fcbd3da809454f4705a8a","sha256":"867b4f2e58d36f9e6ec351e17b0d3c6ac6f2c4490525354d1073ec011bd7d79f","bytes":5955}
   ]
 }

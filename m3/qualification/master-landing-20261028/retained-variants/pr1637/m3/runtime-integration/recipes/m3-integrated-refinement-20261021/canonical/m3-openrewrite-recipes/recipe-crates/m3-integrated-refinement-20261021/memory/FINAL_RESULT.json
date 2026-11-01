@@ -1,0 +1,67 @@
+{
+  "schema": "M3_INTEGRATED_CORRECTION_MEMORY_FINAL/1",
+  "status": "PASS",
+  "profile": "m3-integrated-refinement-20261021/1.0",
+  "events": [
+    "12db3d3bea4b8a5b958ed799934c0bbe33ea8b416a47f45d803495f1e4b11acf",
+    "c876494cd3b2b01d905bb5a623ad97981e9ff113ebc0740978b0a4206491de2d",
+    "f23628de2938b1bb2a2e66ef689a40ab54a4cadca2af9d0c7158a5707f51fbbc",
+    "101b737403729e6eac9106693b5ed4e7e5c38f74499bf45221f8bd67712c6ef9",
+    "c4be4af96ddd29d4e3d401831a277a76a6057f52696b5e579625eef0bf899eaf"
+  ],
+  "event_count": 5,
+  "conformance_checks": 129,
+  "actual_event_integrity_checks": 5,
+  "unique_event_artifacts_verified": 55,
+  "admission": "PENDING",
+  "profile_receipt": {
+    "path": "memory/PROFILE.md",
+    "sha256": "49807fc9611675b89429da43d59af52bf92568aa3bcffd7e97555d3f3cfeea1a"
+  },
+  "retrieval": {
+    "path": "memory/LESSONS.md",
+    "sha256": "f98a16890a6047f231762a4bcdd728952eabc975112a42e76c3669768dfe8d1c"
+  },
+  "index": {
+    "path": "memory/INDEX.json",
+    "sha256": "8ee044ed87add3de699ec640b014bebfe3a6dabf956b16a831948a532a86af6e"
+  },
+  "source": [
+    {
+      "path": "src/test/java/com/synexia/rewrite/memory/M3RecoveryMemory.java",
+      "sha256": "88696555f28134225ecd731c5c81065dd53912361d46bfe3f79f60d877c62936"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/memory/M3RecoveryMemoryTest.java",
+      "sha256": "b27e96e73af86cb12cf453a0b4f27b49bdae24073aa9e435061b177d02969a78"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/memory/M3CorrectionMemoryConformanceTest.java",
+      "sha256": "785b81a9df3449af64d6037960cd8e2a9bc82f2d6398e4d9e7636e6e693c12f3"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/sealed/SealHash.java",
+      "sha256": "316da9bf8b642f9d8ad9e055328aec0f70ddfe0f63c4649d5dc35d062fd7a11c"
+    }
+  ],
+  "verification": [
+    {
+      "path": "proof/memory-conformance-001/RESULT.json",
+      "sha256": "0632eb9e2f87b5360e123ef4f3d67347c5a0235bf8b506bf8ee77cba6aa465b4"
+    },
+    {
+      "path": "proof/sdk-001/RESULT.json",
+      "sha256": "cc52eb45e978880fc4c7d3ad980e3a0a5076d4f86cf2014863424d06a898fec8"
+    },
+    {
+      "path": "proof/sdk-002-offline/RESULT.json",
+      "sha256": "a1abf22e70da8c9ea163546910a24b0d6bd65fa08da6fc51329773f421d1287d"
+    },
+    {
+      "path": "proof/memory-integrity-001/RESULT.json",
+      "sha256": "a63844479bb56435101881b36de70917e634fb335044d558e01cd212d37752ac"
+    }
+  ],
+  "historical_unknowns": "Each event states unknown predecessor versions/commands explicitly. No lost October20 event or receipt is recreated.",
+  "publication": "Separate current-base provenance and actual remote state, not established by this receipt."
+}

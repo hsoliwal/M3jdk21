@@ -73,9 +73,9 @@ The reusable FILE-local atomization/patternization recipe authority remains Syne
 M3JDK21's `m3/tooling/a3` receiver pins:
 
 - Synexia commit `a062661e91e769a00c2d027e1f04a7a0c8f9dc28`
-- export manifest Git blob `8a3e3d6e802e95dbcc7b0bf83a347887b02d6717`
-- convergence source Git blob `b11aff3ace8e77684cfa8cc13fbbb445a05c8a09`
-- portable mastery verifier Git blob `cd54b351f444a497c759a009681cc97d3e79c5ba`
+- export manifest Git blob `b691460aebcd458f5d5fb0d508b4a4a05ef8d6c5`
+- convergence source Git blob `7dc6cea0a969a1bd094e324c47a1bb724b5ff1dc`
+- portable mastery verifier Git blob `ec03c17a24d455a0c535e18069e85dd85f1a065a`
 
 Those three blob identities were re-read from the pinned Synexia commit on 2026-10-07 and match the
 receiver contract exactly.

@@ -41,4 +41,4 @@ jobs:
         run: python3 m3/runtime-integration/affix-strings-20261017/verify_receiver.py
       - name: Execute exact source-extracted Java21 affix/regex and Strings contract oracles
         run: python3 m3/runtime-integration/affix-strings-20261017/run_java21_proof.py
-      # This is not a full source-built M3JDK21 java.base, jtreg or JNI qualification.
+      # This is not a full source-built M3JDK 21 java.base, jtreg or JNI qualification.

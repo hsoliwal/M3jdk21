@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: com.m3.rewrite.backport.Descriptor
+name: jdk.m3.rewrite.backport.Descriptor
 displayName: M3 VM-owned descriptors
 description: >-
   Reuses Class.descriptorString for hidden and nominal reflection types and adds
@@ -12,5 +12,5 @@ tags:
   - reflection
   - fail-closed
 recipeList:
-  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+  - jdk.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
       crateName: jdk22-descriptor

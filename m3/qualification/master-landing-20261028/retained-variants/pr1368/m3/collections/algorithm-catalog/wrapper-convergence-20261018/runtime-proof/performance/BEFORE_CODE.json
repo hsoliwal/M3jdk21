@@ -7,8 +7,8 @@
   "decision": "REUSE_EXISTING_PROOF_UNCHANGED",
   "foss_evaluation": {
     "selected_owner": "M3OrderWindowProof allocation mode",
-    "canonical_resource": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-wrappers-r2-20261018/0023-M3OrderWindowProof.java.txt",
-    "source_sha256": "633ad8b6e70b211efc1917daea6277b38632359f9442120396fbeb187e663cf0",
+    "canonical_resource": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-wrappers-r2-20261018/0023-M3OrderWindowProof.java.txt",
+    "source_sha256": "c8776759a8ce22f6ec9039d630997d12262ee53f285beb0097ffb48b1f2a30cb",
     "license": "Apache-2.0; existing source header retained",
     "new_benchmark_engine": false,
     "new_product_source": false,
@@ -32,13 +32,13 @@
     "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
     "source_root": "audit/collections-latest-baseline",
     "all_main_classes": "audit/collections-latest-baseline-build/m3/collections/target/classes",
-    "projection_source_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545"
+    "projection_source_sha256": "6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb"
   },
   "receiver": {
     "base_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
     "source_root": "audit/collections-latest-receiver",
     "changes": "qualified m3jdk21-wrappers-r2-20261018 outputs; root receives final qualified long-bridge before complete module build",
-    "projection_source_sha256": "17137b236421ad3ad4f079acc0ba98a10ad4d419b717abd1f9192f42b18260a8"
+    "projection_source_sha256": "91f898f92123c431afb72887cdb8de8a1a64d2c9ce8bb247eed960a200dfe72e"
   },
   "predeclared_measurement": {
     "mode": "allocation",

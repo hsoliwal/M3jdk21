@@ -8,7 +8,7 @@ The product remains **one M3JDK21 SDK**, not an overlay. Canonical Synexia reusa
 
 | Field | Recorded value |
 | --- | --- |
-| Owner | `m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java` |
+| Owner | `m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java` |
 | Before Git blob | `34fca25ba45467567213ed7a170bf4b27d6427e3` |
 | Before SHA-256 | `eb3feb81c6534e617727cc2993ae01dea5675a40a18414b872dc7212edbf7f88` |
 | Generated after Git blob | `4a44d2202a9ccbdaa5bdab39086074b3f4dbf49f` |

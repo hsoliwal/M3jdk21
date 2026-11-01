@@ -8,7 +8,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[4]
 CRATE = "m3-guava-row-sorted-table-20261018"
 CANONICAL_SHA = "137abc1c56eed1d1eb3e705e69ada5bcd442efed"
-RESOURCE = HERE / "src/main/resources/com/synexia/rewrite/hash-pinned-java" / CRATE
+RESOURCE = HERE / "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java" / CRATE
 
 
 def verify():

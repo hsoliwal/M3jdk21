@@ -3,7 +3,7 @@
 ## Failure observed
 
 The fail-closed STRING closure verifier requires
-`m3/compatibility/synexia-string-representation-consumers-receipt.json`,
+`m3/compatibility/m3-string-representation-consumers-receipt.json`,
 but that path is absent from the current M3JDK21 tree and no canonical receipt
 was found in the current Synexia recipe repository search.
 

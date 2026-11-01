@@ -5,13 +5,13 @@
       "bytes": 2647,
       "owner": "repository",
       "path": ".github/workflows/m3-parser-jmod-20261018.yml",
-      "sha256": "a7a4e6eb4bde9cd9e111d9cb22e91912f044612db085f76724a691fd441fce16"
+      "sha256": "474db0521b39a236883b8c6bc8abb397200eca59b2b714cbd530bae0ca26c6b2"
     },
     {
       "bytes": 16157,
       "owner": "repository",
-      "path": "m3/compatibility/check_synexia_full_borrow_receiver.py",
-      "sha256": "59551056327579d89b4ef4c54b253763ddb24d0a91697d642cc4fd8e51a22dbf"
+      "path": "m3/compatibility/check_m3_full_borrow_receiver.py",
+      "sha256": "444514e43ba0805375cd1894c372ad3493aea7291604103b700c37e741b0ff68"
     },
     {
       "bytes": 1827,
@@ -22,38 +22,38 @@
     {
       "bytes": 228,
       "owner": "repository",
-      "path": "m3/synexia-import/current-full-borrow/historical-evidence.tsv",
-      "sha256": "4057f1681c9e0c16ef879d9b9ea432f46d8be504b31f8bc152d9a16704ec56f0"
+      "path": "m3/m3-import/current-full-borrow/historical-evidence.tsv",
+      "sha256": "708eaa5df7ab47b3d88ec0f8dec1aef1d2ac6c7bd425a916720618da2946f952"
     },
     {
       "bytes": 1328,
       "owner": "repository",
-      "path": "m3/synexia-import/current-full-borrow/pin.tsv",
-      "sha256": "d84e185891f08d76da765e43d1e138e33fbef99f50de9cc83a99c5284ab46ab5"
+      "path": "m3/m3-import/current-full-borrow/pin.tsv",
+      "sha256": "8cdf72c68a0075ad8b3bb0968369619d1c4c34bc675d785d19aec39717f495b4"
     },
     {
       "bytes": 1070,
       "owner": "repository",
-      "path": "m3/synexia-import/current-full-borrow/promotion-phases.tsv",
+      "path": "m3/m3-import/current-full-borrow/promotion-phases.tsv",
       "sha256": "e4730068f321d551913a4cf7d40832f43b315c3973312c73b744ca5081758eb5"
     },
     {
       "bytes": 3721,
       "owner": "repository",
-      "path": "m3/synexia-import/current-full-borrow/receiver-status.tsv",
-      "sha256": "7c1326d024e111e953c139e30be1cfe3026bab0458d648963efb0247684a0715"
+      "path": "m3/m3-import/current-full-borrow/receiver-status.tsv",
+      "sha256": "390785bf33ebe9e9b3d7a60f5a2e597fb110f72ab68b7d3e45bead245f33a5e1"
     },
     {
       "bytes": 3735,
       "owner": "repository",
-      "path": "m3/synexia-import/current-full-borrow/synexia-dag.tsv",
+      "path": "m3/m3-import/current-full-borrow/m3-dag.tsv",
       "sha256": "b888ee614bf2a07ece1844b789eaec396e06bb42f29ff5e1183e2fc9ae4c2b33"
     },
     {
       "bytes": 10360,
       "owner": "repository",
-      "path": "m3/synexia-import/current-full-borrow/synexia-estate.tsv",
-      "sha256": "90c2b8a5f1046e397d2b049b0155858877788e714dd3e1c7540b008069b42c13"
+      "path": "m3/m3-import/current-full-borrow/m3-estate.tsv",
+      "sha256": "9a676ffa0b3953801e882900c405693ff7f4af6e2103428b8f399e932e192ec9"
     },
     {
       "bytes": 6733,
@@ -65,7 +65,7 @@
       "bytes": 8640,
       "owner": "repository",
       "path": "m3/tooling/jmod-recipes/tools/jmod_pack.py",
-      "sha256": "a2c1f69f6aaea0de7d5047c14f6f7530fe3231dca97fffdc4defee506daeb454"
+      "sha256": "250d98a2789ed8d5018a5b911a14c0a6729e435a9da1513d37a2dac7429ec3d6"
     },
     {
       "bytes": 6879,
@@ -95,7 +95,7 @@
       "bytes": 774,
       "owner": "repository",
       "path": "m3/tooling/module-packs/parser/legal/NOTICE.txt",
-      "sha256": "efee89da103f64fe964de04398892a00a4c266223e2daa705b2095bcaa01a323"
+      "sha256": "024793bda7ef6df8630edf6fe9bdade36592317df3f489455e30ad66db528cd2"
     },
     {
       "bytes": 3097,

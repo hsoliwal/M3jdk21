@@ -20,7 +20,7 @@ OMITTED_PROVIDERS = frozenset({"ftp", "ftps", "http", "https", "http4", "http4s"
                               "http5", "http5s", "sftp"})
 OMITTED_FILES = frozenset({"cache/LRUFilesCache.java", "provider/URLFileName.java",
                           "provider/URLFileNameParser.java"})
-VFS_PREFIX = "src/main/java/com/m3/fs/vfs/"
+VFS_PREFIX = "src/main/java/jdk/m3/fs/vfs/"
 VFS_LEGAL_SHA256 = {
     "LICENSE.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
     "NOTICE.txt": "c3b9e52e1b1a64d99b76e0f529d38d70c7ed01b97d01fd68e4c2fe4b6bf7bbbb",
@@ -73,7 +73,7 @@ def source_inventory(module_root):
         selected.update(path for path in (root / directory).rglob("*") if path.is_file())
     for name in ("qualify_vfs.py", "vfs_pack_support.py", "vfs-dependencies.lock.json"):
         selected.add(root / "tools" / name)
-    selected.add(root / "src/test/java/com/m3/fs/verification/M3VfsImageProbe.java")
+    selected.add(root / "src/test/java/jdk/m3/fs/verification/M3VfsImageProbe.java")
     return sorted(path.relative_to(root).as_posix() for path in selected)
 
 

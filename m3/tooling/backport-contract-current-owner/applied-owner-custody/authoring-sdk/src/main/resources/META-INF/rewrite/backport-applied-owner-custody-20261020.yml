@@ -2,15 +2,15 @@
 # SPDX-License-Identifier: Apache-2.0
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.BackportAppliedOwnerCustody
+name: jdk.internal.m3.BackportAppliedOwnerCustody
 displayName: Prepare applied-owner source custody
 description: Exact proof-host/runtime input refinement; actual applied-head qualification remains separate.
 recipeList:
-  - com.synexia.rewrite.M3BackportAppliedOwnerCustodyRecipe
+  - jdk.internal.m3.rewrite.M3BackportAppliedOwnerCustodyRecipe
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.BackportAppliedOwnerCustodyInverse
+name: jdk.internal.m3.BackportAppliedOwnerCustodyInverse
 displayName: Recover exact prior proof-host inputs
 description: Exact proof-input rollback data only; no product source is edited by the job.
 recipeList:
-  - com.synexia.rewrite.M3BackportAppliedOwnerCustodyInverseRecipe
+  - jdk.internal.m3.rewrite.M3BackportAppliedOwnerCustodyInverseRecipe

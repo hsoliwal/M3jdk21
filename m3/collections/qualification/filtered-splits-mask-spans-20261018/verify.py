@@ -36,10 +36,10 @@ def main():
     cc = [os.environ.get('CC', 'cc'), '-std=c17', '-Wall', '-Wextra', '-Werror',
           '-fsanitize=undefined', '-fno-sanitize-recover=undefined',
           '-I' + str(JAVA / 'include'), '-I' + str(JAVA / 'include/linux'),
-          '-include', OUT / 'headers/com_m3_collections_M3IndexMaskWindow.h']
+          '-include', OUT / 'headers/jdk_m3_collections_M3IndexMaskWindow.h']
     kernel = MODULE / 'src/main/native/collections/m3_index_mask_window.c'
     run(cc + ['-shared', '-fPIC', '-O2', '-include',
-              OUT / 'headers/com_m3_collections_M3IndexMaskCompactor.h', kernel,
+              OUT / 'headers/jdk_m3_collections_M3IndexMaskCompactor.h', kernel,
               MODULE / 'src/main/native/collections/m3_index_mask_compactor.c',
               '-o', OUT / 'native/libm3_collections_mask.so'])
     run(cc + [kernel, MODULE / 'src/test/native/m3_mask_window_spans.c',
@@ -56,14 +56,14 @@ def main():
                  'M3MutableFilteredViewsTest', 'M3FilteredNavigableSetTest',
                  'M3FilteredNavigableSetRangeTest', 'M3StoredRepresentativeTest',
                  'M3BoundedFilteredNavigationTest']:
-        junit += ['--select-class', 'com.m3.collections.' + name]
+        junit += ['--select-class', 'jdk.m3.collections.' + name]
     run(junit)
     for name, native_arg in [('M3MaskWindowSparseContract', 'native'),
                              ('M3BudgetedMaskWindowContract', '--native')]:
         run([JAVA / 'bin/java', '-Xcheck:jni', '-Djava.library.path=' + str(OUT / 'native'),
-             '-cp', cp, 'com.m3.collections.' + name, native_arg])
+             '-cp', cp, 'jdk.m3.collections.' + name, native_arg])
     run([JAVA / 'bin/java', '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp,
-         'com.m3.collections.M3BudgetedMaskWindowContract', '--missing'])
+         'jdk.m3.collections.M3BudgetedMaskWindowContract', '--missing'])
     proof = {'status': 'PASS_SELECTED_TARGET_GATES', 'java_sources_compiled': len(sources),
              'test_sources_compiled': len(tests), 'native': 'actual -Xcheck:jni plus fatal UBSan',
              'scope': 'Independent m3/collections; no JDK or receiving-phase promotion',

@@ -13,8 +13,8 @@
   "bound_input_count": 36,
   "generated_target_count": 13,
   "surefire_xml_sha256": "dcf1622297f6bfe5f3ff22f9e3b34e04516e0953150de135990978bdbf242d59",
-  "sdk_inputs_sha256": "11cfa8de7849aa90036a87572e6cbb6a07f110b07914c4baf9024f94f654855a",
-  "sdk_results_sha256": "9923deb1d157564d7327b39a8290641208aecc1ee14efe9b25e6ab211cd3ae81",
+  "sdk_inputs_sha256": "365ab99690076444b85b92ad0b3cd79f25f81dfecd4bae3564a70622d9097233",
+  "sdk_results_sha256": "84f9bc9f8e171001a535ed6dba15fdf0203fd16d2dc30f684739e4413817ab5b",
   "receiver_check": {
     "command": [
       "python",
@@ -90,7 +90,7 @@
     },
     {
       "path": "crate/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-interop-contracts-20261020/manifest.tsv",
-      "sha256": "233c1c18bee755e36823d3cee2709f86e6b6d8edf1030ed4801c90fdddae1015"
+      "sha256": "307796907e4f91b79239f2f9a738922fac1b98df382722c794704d669f82c1ed"
     },
     {
       "path": "crate/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-interop-contracts-20261020/pre/002-M3ApacheBagContractTest.java.txt",

@@ -4,18 +4,18 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
 cd "$ROOT"
-SOURCE="m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java"
-COW="m3/collections/src/test/java/com/m3/collections/M3FilteredCowOwnerContract.java"
-JUNIT="m3/collections/src/test/java/com/m3/collections/M3FilteredCowOwnerTest.java"
-ISEMPTY="m3/collections/src/test/java/com/m3/collections/M3FilteredIsEmptyContract.java"
+SOURCE="m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java"
+COW="m3/collections/src/test/java/jdk/m3/collections/M3FilteredCowOwnerContract.java"
+JUNIT="m3/collections/src/test/java/jdk/m3/collections/M3FilteredCowOwnerTest.java"
+ISEMPTY="m3/collections/src/test/java/jdk/m3/collections/M3FilteredIsEmptyContract.java"
 BASELINE_BLOB="a99cd0355879a2f941079e8401de00b51cd0093e"
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
 mkdir -p "$WORK/baseline-src" "$WORK/baseline-classes" "$WORK/candidate-classes"
 
 echo "7975e471f1b1b92d2a4bdbecdc3a79049dea4a3c93342da71f8e8d403cd0ca18  $SOURCE" | sha256sum -c -
-echo "7de9f44e2a6b5dd753297d7f9792f3cb28095234c8b0c7a495c0a5372b02b074  $COW" | sha256sum -c -
-echo "15a856bea0a668e4d719b310972e7a0eb31f9bcd5c802d0bc68689835ae67d3e  $JUNIT" | sha256sum -c -
+echo "4426c3d8a6b628167e817d83b461cc6e00a569b62b8388f03c7c9ed0de9a771f  $COW" | sha256sum -c -
+echo "eba5dadea1e758806b41edf3a3a9942539a33f42d729b4862a58efe6c8b5225f  $JUNIT" | sha256sum -c -
 test -s "$ISEMPTY"
 
 git cat-file blob "$BASELINE_BLOB" > "$WORK/baseline-src/M3CollectionViews.java"
@@ -30,10 +30,10 @@ javac --release 21 -proc:none -Xlint:all -Werror \
 
 # Check every M3CollectionViews class, including private nested wrapper concrete
 # types. Only public/protected method declarations must remain unchanged.
-for BYTECODE in "$WORK/baseline-classes"/com/m3/collections/M3CollectionViews*.class; do
+for BYTECODE in "$WORK/baseline-classes"/jdk/m3/collections/M3CollectionViews*.class; do
   TYPE="$(basename "$BYTECODE" .class)"
-  javap -public -s -classpath "$WORK/baseline-classes" "com.m3.collections.$TYPE" > "$WORK/baseline-$TYPE.api"
-  javap -public -s -classpath "$WORK/candidate-classes" "com.m3.collections.$TYPE" > "$WORK/candidate-$TYPE.api"
+  javap -public -s -classpath "$WORK/baseline-classes" "jdk.m3.collections.$TYPE" > "$WORK/baseline-$TYPE.api"
+  javap -public -s -classpath "$WORK/candidate-classes" "jdk.m3.collections.$TYPE" > "$WORK/candidate-$TYPE.api"
   diff -u "$WORK/baseline-$TYPE.api" "$WORK/candidate-$TYPE.api"
 done
 
@@ -42,7 +42,7 @@ for MODE in mixed interpreted; do
   if [[ "$MODE" == interpreted ]]; then OPTIONS=(-Xint); fi
   for KIND in baseline candidate; do
     java "${OPTIONS[@]}" -Xcheck:jni -cp "$WORK/$KIND-classes" \
-      com.m3.collections.M3FilteredIsEmptyContract | tee "$WORK/$KIND-$MODE-isempty.txt"
+      jdk.m3.collections.M3FilteredIsEmptyContract | tee "$WORK/$KIND-$MODE-isempty.txt"
   done
   diff -u "$WORK/baseline-$MODE-isempty.txt" "$WORK/candidate-$MODE-isempty.txt"
 
@@ -50,7 +50,7 @@ for MODE in mixed interpreted; do
   # intentionally changes that observation. Run the qualified donor oracle
   # only on the candidate, without pretending old behavior was equivalent.
   java "${OPTIONS[@]}" -Xcheck:jni -cp "$WORK/candidate-classes" \
-    com.m3.collections.M3FilteredCowOwnerContract | tee "$WORK/candidate-$MODE-cow.txt"
+    jdk.m3.collections.M3FilteredCowOwnerContract | tee "$WORK/candidate-$MODE-cow.txt"
 done
 echo "PASS M3JDK21 original-owner COW contract; existing isEmpty behavior and public API preserved."
 echo "HOLD: owner-supported exact COW mutation intentionally changes an earlier exception to successful bulk removal."

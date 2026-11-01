@@ -36,7 +36,7 @@ from pathlib import Path
 # Synexia MIndexRegexTrigramQuery", "No Synexia runtime dependency", a GPL modification notice) and renaming it would
 # make those statements false; identifiers never keep it. Copyright and SPDX lines are kept whole; dependencies are
 # kept as spans and the rest of their line is renamed (renaming a dependency would hide it from the standalone check;
-# a whole kept line once left <groupId>com.synexia</groupId><artifactId>synexia-x</artifactId> pointing at a renamed
+# a whole kept line once left <groupId>com.synexia</groupId><artifactId>m3-x</artifactId> pointing at a renamed
 # module).
 RULES_FILE = Path(__file__).with_name("NAMING_RULES.tsv")
 # every path move of the tree-mode apply, so the old path of any file stays mapped to its new one (reseal.py maps
@@ -135,12 +135,12 @@ def keeps_name(path: str) -> str:
 def target_path(path: str) -> str:
     """The renamed path; a legal or attribution file (KEEP_PATH) keeps its name and follows its renamed directory, so
     licenses/Synexia-LICENSE stays next to the files of its crate (KEEP_PATH once kept the whole path and split
-    synexia-openrewrite-recipes/ from its renamed siblings: LEGAL_FOLLOWS_DIRECTORY)."""
+    m3-openrewrite-recipes/ from its renamed siblings: LEGAL_FOLLOWS_DIRECTORY)."""
     return keeps_name(path) if KEEP_PATH.search(path) else renamed_path(path)
 
 
 def plan_moves(paths: list[str], only: tuple[str, ...]) -> dict:
-    """Every path move. Two paths whose renamed paths coincide (a delivery image holding both com.m3.x-jar.log.txt
+    """Every path move. Two paths whose renamed paths coincide (a delivery image holding both jdk.m3.x-jar.log.txt
     and jdk.m3.x-jar.log.txt) collide; a colliding lineage file follows its directory and keeps its name
     (KEEP_LINEAGE_NAME), or stays where it is when that name is taken too (KEEP_LINEAGE_PATH); anything else
     refuses. NamingScan.pathConformant mirrors this rule."""

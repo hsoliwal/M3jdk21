@@ -53,7 +53,7 @@ class PrepareContract(unittest.TestCase):
         self.assertEqual((2, 1, 1), (metadata["targets"], metadata["java_targets"], metadata["text_targets"]))
         self.assertEqual(before, (self.baseline / "src/A.java").read_bytes())
         self.assertFalse((self.baseline / "tools/build.py").exists())
-        resource = self.crate / "datasets/fixture/resources/com/synexia/rewrite"
+        resource = self.crate / "datasets/fixture/resources/jdk/internal/m3/rewrite"
         java = resource / "hash-pinned-java/m3-collections-contract-refinement-20261017-fixture"
         self.assertEqual(after, (java / "0001-A.java.txt").read_bytes())
         self.assertEqual(before, (java / "pre/0001-A.java.txt").read_bytes())

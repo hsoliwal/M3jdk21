@@ -1,0 +1,61 @@
+{
+  "schema": "M3_CURRENT_OWNER_MEMORY_PROFILE_INPUTS/1",
+  "profile": "m3-nlp-current-receiver-lock-20261021/1.0",
+  "sources": [
+    {
+      "source_path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/memory/M3RecoveryMemory.java",
+      "source_sha256": "88696555f28134225ecd731c5c81065dd53912361d46bfe3f79f60d877c62936",
+      "source_revision": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
+      "path": "memory/tooling/src/jdk/internal/m3/rewrite/memory/M3RecoveryMemory.java",
+      "sha256": "c4efac01a6e86502501dde8a934255128bff6f40d03e5237a1d9b43e81edd06b",
+      "modification": "Only profile identity and dated comment"
+    },
+    {
+      "source_path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/memory/M3RecoveryMemoryTest.java",
+      "source_sha256": "b27e96e73af86cb12cf453a0b4f27b49bdae24073aa9e435061b177d02969a78",
+      "source_revision": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
+      "path": "memory/tooling/src/jdk/internal/m3/rewrite/memory/M3RecoveryMemoryTest.java",
+      "sha256": "b27e96e73af86cb12cf453a0b4f27b49bdae24073aa9e435061b177d02969a78",
+      "modification": "Exact unchanged source"
+    },
+    {
+      "source_path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/sealed/SealHash.java",
+      "source_sha256": "316da9bf8b642f9d8ad9e055328aec0f70ddfe0f63c4649d5dc35d062fd7a11c",
+      "source_revision": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
+      "path": "memory/tooling/src/jdk/internal/m3/rewrite/sealed/SealHash.java",
+      "sha256": "316da9bf8b642f9d8ad9e055328aec0f70ddfe0f63c4649d5dc35d062fd7a11c",
+      "modification": "Exact unchanged source"
+    }
+  ],
+  "commands": [
+    [
+      "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/javac",
+      "--release",
+      "21",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+      "-d",
+      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/tooling/target/classes",
+      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/tooling/src/jdk/internal/m3/rewrite/memory/M3RecoveryMemory.java",
+      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/tooling/src/jdk/internal/m3/rewrite/memory/M3RecoveryMemoryTest.java",
+      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/tooling/src/jdk/internal/m3/rewrite/sealed/SealHash.java"
+    ],
+    [
+      "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-Xmx512m",
+      "-XX:ActiveProcessorCount=2",
+      "-XX:-UsePerfData",
+      "-cp",
+      "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/tooling/target/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+      "jdk.internal.m3.rewrite.memory.M3RecoveryMemoryTest"
+    ]
+  ],
+  "cwd": "/workspace/scratch/206049dfb270",
+  "java_release_sha256": "e5a4248b028f6ecd6d43fb1a57fff0f900ef62e026501e95875a60b0cf904338",
+  "jackson_sha256": "f5f8ef90609e64fec82eb908e497dc7d81b2eb983fe509b870292a193cde4dfb",
+  "source_receipt_before_execution": true,
+  "recipe_source_or_templates_modified": false
+}

@@ -12,9 +12,9 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
-package com.m3.collections.examples;
+package jdk.m3.collections.examples;
 
-import com.m3.collections.M3TreePathTrie;
+import jdk.m3.collections.M3TreePathTrie;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
@@ -49,7 +49,7 @@ import java.util.Set;
  * Measured: the restore walk over every element of the tree, the heap the
  * expansion state retains, and the objects allocated during the walk.</p>
  *
- * <pre>java com.m3.collections.examples.M3TreePathRestoreBench out.tsv [elements]</pre>
+ * <pre>java jdk.m3.collections.examples.M3TreePathRestoreBench out.tsv [elements]</pre>
  */
 public final class M3TreePathRestoreBench {
 	private static final System.Logger LOG = System.getLogger (M3TreePathRestoreBench.class.getName ());

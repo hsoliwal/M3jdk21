@@ -5,8 +5,8 @@
 
 /**
  * Defines the {@code fastdoubleparser-1.0.90} library,
- * relocated into M3JDK21 by LIB_INTAKE_TO_JMOD.
+ * relocated into M3JDK 21 by LIB_INTAKE_TO_JMOD.
  */
 module jdk.m3.fastdoubleparser {
-    exports com.m3.lib.fastdoubleparser;
+    exports jdk.m3.lib.fastdoubleparser;
 }

@@ -9,7 +9,7 @@ p.add_argument("--jdk", required=True, type=Path)
 p.add_argument("--candidate", required=True, type=Path)
 args = p.parse_args()
 crate = Path(__file__).resolve().parent.parent
-resources = crate / "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-java-base-doclint-20261018"
+resources = crate / "src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-java-base-doclint-20261018"
 work = crate / "target/doclint-proof"
 work.mkdir(parents=True, exist_ok=True)
 expected = {"Runnable.java": 2, "Strings.java": 72, "Callable.java": 3, "Executor.java": 3,

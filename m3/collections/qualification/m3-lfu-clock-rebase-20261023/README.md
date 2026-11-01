@@ -4,7 +4,7 @@
 
 The existing M3LFUCache retains its five JNI-created array lanes. This increment accepts the first occupied victim at saturated comparator sentinels and preserves timestamp order/ties when a zero-minimum lane reaches Long.MAX_VALUE. Dense ranks use scalar negative markers in the existing long[] lane, with no scratch array or structural Entry/Node allocation. Only victim() and nextStamp() differ from the qualified constructor postimage.
 
-The received source is byte-for-byte the canonical recipe output: 6,455 bytes, SHA256 8e404bcd1e6a0efc94e8f1828feaf4d2d3da1375f07b8a64d238390e09d36f27. All five required JNI allocator expressions, other source bytes and API declarations remain unchanged. Existing constructor qualification remains in its original packet.
+The received source is byte-for-byte the canonical recipe output: 6,455 bytes, SHA256 8a151b7a3b2c8c280c357f19864d89b12cc414e1af148524d05d1b8a6bc84dda. All five required JNI allocator expressions, other source bytes and API declarations remain unchanged. Existing constructor qualification remains in its original packet.
 
 Validation: five canonical recipe SDK cases; strict Java 21 compilation; six expected old-source REDs; five boundary modes with 91 assertions; six fresh ordinary/miss/native/fault regression modes with 98,778 assertions. Total: 98,869 positive runtime assertions. The ordinary 98,602-assertion trace is unchanged, and accepted JNI runs have no diagnostics. All eight field and eleven method metadata signatures/access flags compare equal within the recorded class-file scope. Code, annotations, Exceptions and other reflective attributes were excluded.
 

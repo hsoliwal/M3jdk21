@@ -130,7 +130,7 @@ def main() -> int:
         [
             ("key", "value"),
             ("status", "PASS"),
-            ("recipe", "com.m3.rewrite.M3Java21ConvergenceRecipe"),
+            ("recipe", "jdk.m3.rewrite.M3Java21ConvergenceRecipe"),
             ("scope", EXPECTED_SCOPE),
             ("contract", EXPECTED_CONTRACT),
             ("recipes_admitted", str(len(EXPECTED_RECIPE_IDS))),
@@ -154,7 +154,7 @@ def main() -> int:
             ("github_run_id", os.environ.get("GITHUB_RUN_ID", "")),
             ("github_run_attempt", os.environ.get("GITHUB_RUN_ATTEMPT", "")),
             ("java_home", os.environ.get("JAVA_HOME", "")),
-            ("recipe_entrypoint", "com.m3.rewrite.M3Java21ConvergenceRecipe"),
+            ("recipe_entrypoint", "jdk.m3.rewrite.M3Java21ConvergenceRecipe"),
             ("verify_command", "mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify"),
         ],
     )

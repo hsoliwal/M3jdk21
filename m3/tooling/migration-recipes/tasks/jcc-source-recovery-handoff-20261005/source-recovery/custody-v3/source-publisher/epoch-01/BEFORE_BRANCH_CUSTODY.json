@@ -8,7 +8,7 @@
   "payload_bytes": 98141352,
   "payload_files": 2796,
   "preflight_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/PREFLIGHT.json",
-  "preflight_sha256": "13e56b17314e89370fb8ce3f8417b405b89b34db8a1868d968589550975db84f",
+  "preflight_sha256": "4a8e0c7647a9a6549ffc797de28d01a7806aa7757fedb2096bf35ecb0bba62c7",
   "raw_fixture_custody": {
     "assumption": "Authentic GitHub object identifiers and ordinary Git content addressing bind the exact uploaded bytes; the two malformed UTF-8 remote byte arrays and their SHA-256 values were not recovered.",
     "blob_identity_custody": [
@@ -17,7 +17,7 @@
         "creation_response_git_sha": "59b4ec83f687499a54f15695b9b246599f9579d7",
         "failed_final_read": {
           "git_blob": "59b4ec83f687499a54f15695b9b246599f9579d7",
-          "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+          "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
           "raw_body_readback": false,
           "read_attempt": "FAILED_UTF8_REENCODING",
           "remote_sha256_observed": false,
@@ -26,7 +26,7 @@
         },
         "failed_probe_read": {
           "git_blob": "59b4ec83f687499a54f15695b9b246599f9579d7",
-          "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+          "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
           "raw_body_readback": false,
           "read_attempt": "FAILED_UTF8_REENCODING",
           "remote_sha256_observed": false,
@@ -36,7 +36,7 @@
         "final_tree_size": 4,
         "git_blob": "59b4ec83f687499a54f15695b9b246599f9579d7",
         "method": "BASE64_CREATE_AND_REMOTE_GIT_TREE_IDENTITY",
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
         "raw_body_readback": false,
         "remote_sha256_observed": false,
         "sha256_local_uploaded_bytes": "823a8864668594f33fd21b51f42c08643d90be2f0d903653175047f5d0298e6c",
@@ -47,7 +47,7 @@
         "creation_response_git_sha": "24cdc62e634934527d551324c2449bcf951b5589",
         "failed_final_read": {
           "git_blob": "24cdc62e634934527d551324c2449bcf951b5589",
-          "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+          "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
           "raw_body_readback": false,
           "read_attempt": "FAILED_UTF8_REENCODING",
           "remote_sha256_observed": false,
@@ -56,7 +56,7 @@
         },
         "failed_probe_read": {
           "git_blob": "24cdc62e634934527d551324c2449bcf951b5589",
-          "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+          "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
           "raw_body_readback": false,
           "read_attempt": "FAILED_UTF8_REENCODING",
           "remote_sha256_observed": false,
@@ -66,7 +66,7 @@
         "final_tree_size": 22,
         "git_blob": "24cdc62e634934527d551324c2449bcf951b5589",
         "method": "BASE64_CREATE_AND_REMOTE_GIT_TREE_IDENTITY",
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
         "raw_body_readback": false,
         "remote_sha256_observed": false,
         "sha256_local_uploaded_bytes": "7eb80c376a9681170665f5c0d8b86214e9b44aa6f1d08690a83b26aeba536f3c",
@@ -100,5 +100,5 @@
   "schema": "jcc-source-recovery-before-branch-custody/1",
   "status": "FINAL_COMMIT_CUSTODY_VERIFIED_BEFORE_BRANCH",
   "tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
-  "verification_script_sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa"
+  "verification_script_sha256": "904a2105f04a12454a2d97c13a5bef6764e18ae28a2fe680e06ca0e6e14a6e93"
 }

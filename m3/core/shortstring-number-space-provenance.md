@@ -15,7 +15,7 @@ The constructor previously called `Integer.toString` for every value during sizi
 while emitting: 20,002 calls over the fixed domain. It now computes each length and offset once
 and writes the digits without materializing those temporary strings. The existing backing,
 cached views, source identities, parser, and public API retain their contracts. The current
-Synexia numeric source mapping remains `m3/lexicon/synexia-number-target-map.tsv`; the shortstring
+Synexia numeric source mapping remains `m3/lexicon/m3-number-target-map.tsv`; the shortstring
 mapping fragment records algorithm provenance and does not replace the numeric data source.
 
 Canonical authoring and proof: `hsoliwal/com.synexia`,

@@ -41,7 +41,7 @@
     },
     {
       "path": "collections/INPUTS.json",
-      "sha256": "9560c54e6820eeb3ec9328aa51c32b84c592af26335f8e059a3fa8dd15b395d5",
+      "sha256": "4094950f4efb45b526b441cf618a4e29b91dc7c2660004af241811e8c4bfab07",
       "bytes": 75848,
       "kind": "original-source-input-seals",
       "original_receipt": "owning-collections-native/INPUTS.json",
@@ -65,7 +65,7 @@
     },
     {
       "path": "collections/RESULTS.json",
-      "sha256": "758fbaa193100cbd75760566cd420e0e781958ffcc2c7c2a9c5ee8eba72ddfd0",
+      "sha256": "4d3d2fa6190573e9343faa6488ec3927d0d172f5d8ab5b08b5f5d31f523098dd",
       "bytes": 5385,
       "kind": "original-owning-gate-receipt",
       "original_receipt": "owning-collections-native/RESULTS.json",
@@ -81,7 +81,7 @@
     },
     {
       "path": "source-bootstrap/RESULTS.json",
-      "sha256": "c74b046f0a7f2a88d32155fbc25605cdc21b0971003b2830082ae5a98e38c65b",
+      "sha256": "38c8a1cf58a6020c344819b89d5eb2a9db49e88813e41c96a22b63321d6bac23",
       "bytes": 20715,
       "kind": "original-source-build-receipt",
       "original_receipt": "source-junit-build-trusted/RESULTS.json",
@@ -169,7 +169,7 @@
     },
     {
       "path": "source-intake.json",
-      "sha256": "3732529d1fb20606b35e43f4f6ab661688d75798f3c986a18a5374651ecae522",
+      "sha256": "f8838b97e3786ee6d2af9759cb230d8bf1cda5df46a0a8546db68d4c0b0b9e56",
       "bytes": 586492,
       "kind": "original-source-intake-receipt",
       "original_receipt": "junit-source-intake-receipt.json",

@@ -10,10 +10,10 @@ Base master for this branch: `7f7accdd54e298d1febbdb70083e4272f25e9a83`. Every e
 | Product Java/C/CI result | Exact Git blob |
 | --- | --- |
 | `M3LongRankBatchNative.java` | `d100fe7c269ec40ed8cdcac1d9f7985422f0ca54` |
-| `M3LongRankIndex.java` | `acb4ab5ee856de814ec5dab5c134b9bf27b15f37` |
+| `M3LongRankIndex.java` | `67fb3c3e6bfe8665630cad5ee75fd11014b2f818` |
 | `m3_long_rank_batch_jni.c` | `52b2d518351ceabd87499c840d06d23d79e72439` |
 | `M3LongRankBoundsContract.java` | `bcd12bca84aa58879536be2e3dd92e332af17b41` |
-| `M3LongRankBoundsTest.java` | `d52d3fc06ad65ab9861233c5142a139e3298caad` |
+| `M3LongRankBoundsTest.java` | `bc599f991ec8e313475c32fffd511fdf85aae76c` |
 | `.github/workflows/m3-long-rank-bounds-jni-java21.yml` | `09323ef84608473be09cddf5f387b557bb052279` |
 
 Original M3LongRankIndex.java dual-license header (Apache-2.0 OR EPL-2.0) is retained. Native and helper owners remain Apache-2.0. Original donor code from LeetCode/HackerRank/GFG was not copied; only algorithm categories/specifications were evaluated. Synexia's catalogue records LeetCode #34 (duplicate lower/upper range), #35 (insertion position), #704 (membership), GFG lower/upper bound and rejected HackerRank Pairs donor.
@@ -71,9 +71,9 @@ mode confirms original `nativeAvailable()` is true with fused false.
 Existing deterministic assertion count stays 56,973 per product mode.
 
 Exact received Git blobs: `M3LongRankBatchNative.java`
-`dd39cdbc0cbea5b44b0755837844aa068c3902f4`;
+`ee3f3a60fd95b159791c3c927b570f36323e8058`;
 `M3LongRankBoundsContract.java`
-`6f009b204147d86a560599cce959f84822e53287`;
+`8c38bf88eab4de2b70385fb1225c1fbde1109921`;
 `m3_long_rank_batch_jni.c`
 `3596c0a98e615ae4ce1d4902d769ba7cef42af4f`;
 workflow `926efcbad9bc923a2bb378ff00324653f9212add`.

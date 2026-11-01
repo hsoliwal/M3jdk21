@@ -4,11 +4,11 @@
       "blob": "6bba09bc43c7f140c7ef49a5ffa756661c252937",
       "bytes": 17456,
       "mode": "100644",
-      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/author_source_pin.py",
+      "path": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/author_source_pin.py",
       "sha256": "f37fd23cc7e6a3fd88f61104ceb1bdaaefec9561dba186050a6a1c756c511264"
     },
-    "common_crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
-    "common_owner": "synexia-openrewrite-recipes",
+    "common_crate": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+    "common_owner": "m3-openrewrite-recipes",
     "core_commit": "dfe51be2e1e973f44a8a4827fac51b551593b3cc",
     "core_publication_files": 959,
     "core_publication_manifest_sha256": "b21d6a4f80068823845e0f202c7964822a856fdb06d1872bc3d59bf9c5e6581d",
@@ -21,9 +21,9 @@
     "receiver_implementation": {
       "bytes": 9947,
       "published_paths": [],
-      "sha256": "db258f16e1841f6f5191c1c969c20314a8d143bfa6558b60f684bea440cc1712"
+      "sha256": "e81744965f37cb890e00f6c1c7e50f4dae44c68eedafdf46565a7e105bab5474"
     },
-    "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+    "recipe_name": "jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017",
     "repository": "hsoliwal/com.synexia"
   },
   "datasets": [
@@ -33,20 +33,20 @@
       "effective_engines": {
         "bytes": 747,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0119-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0176-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0184-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0192-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/ENGINE_EFFECTIVE.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0119-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0176-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0184-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0192-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/ENGINE_EFFECTIVE.tsv"
         ],
         "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23"
       },
@@ -54,48 +54,48 @@
       "metadata": {
         "bytes": 507,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/CANDIDATE_DATASET.json",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/candidate-56-20261018/files/catalogue/CANDIDATE_DATASET.json",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/DATASET.json",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0003-CANDIDATE_DATASET.json.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0064-CANDIDATE_DATASET.json.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0191-DATASET.json.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/DATASET.json"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/CANDIDATE_DATASET.json",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/candidate-56-20261018/files/catalogue/CANDIDATE_DATASET.json",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/DATASET.json",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0003-CANDIDATE_DATASET.json.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0064-CANDIDATE_DATASET.json.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0191-DATASET.json.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/DATASET.json"
         ],
-        "sha256": "b5038403f5e9fe60b244327e149846af1af1cc002a30cba5f44be72356e53be7"
+        "sha256": "bca6f479710c62c12d060a7ab5d3a216552eaaaa3f97b4ea543da581f5fd4bbf"
       },
       "modes": {
         "bytes": 2366,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/MODES.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/MODES.tsv"
         ],
         "sha256": "24913ed4a09924773754dd8f941cf12f98fee8999250c8a29b1be39aef48323e"
       },
       "sdk_inputs": {
         "bytes": 11448,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/SDK_INPUTS.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0193-SDK_INPUTS.tsv.txt"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/SDK_INPUTS.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0193-SDK_INPUTS.tsv.txt"
         ],
-        "sha256": "e256cbb767211ce5d41417dd3fa9a90682dbec07afcd4b5607c4bb7538bdc13e"
+        "sha256": "eb20b2b1b532ca455f2010e6c5d1f6ed52d961e4893211957a7c8904a757976d"
       },
       "sdk_results": {
         "bytes": 4650,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/SDK_RESULTS.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0196-SDK_RESULTS.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/R2_SDK_RESULTS.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/SDK_RESULTS.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0196-SDK_RESULTS.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/R2_SDK_RESULTS.tsv"
         ],
-        "sha256": "9d3dfa387f6f2d3240223e26cfd1108aa78dcca9f4f3abc17cd446fb4f751ad8"
+        "sha256": "209532c6926d81097deb6ba09a1aa0641afee7aa999ca06f470f41a7079b37fa"
       },
       "sealed_baseline_ref": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
       "successful_sdk_xml": {
         "bytes": 14447,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/SDK_TEST_REPORT.xml",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0197-SDK_TEST_REPORT.xml.txt"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/SDK_TEST_REPORT.xml",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0197-SDK_TEST_REPORT.xml.txt"
         ],
-        "sha256": "7f09f0e3c28a542ea55cbcfa9f3105ea5554966aca4ee34c81c4b1457a48a8ad"
+        "sha256": "ba942043e8242964ef1c3200128c1aab9288708f0686dd7b8579a901fed94797"
       },
       "targets": 28,
       "text_targets": 1
@@ -106,20 +106,20 @@
       "effective_engines": {
         "bytes": 747,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0119-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0176-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0184-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0192-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/ENGINE_EFFECTIVE.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0119-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0176-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0184-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0192-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/ENGINE_EFFECTIVE.tsv"
         ],
         "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23"
       },
@@ -127,53 +127,53 @@
       "metadata": {
         "bytes": 505,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/DATASET.json",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/DATASET.json",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0175-DATASET.json.txt"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/DATASET.json",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/DATASET.json",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0175-DATASET.json.txt"
         ],
-        "sha256": "94d49b12e2ba8460832f7c62fffc4e1d228c4695a35217a619723b8888b1e9d5"
+        "sha256": "a87f7b734e9a38d2dec7146d6265b4ec0e8d72c695f35aba24750da45dc84d17"
       },
       "modes": {
         "bytes": 79,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/MODES.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/MODES.tsv"
         ],
         "sha256": "6246b5fba2e26bae90b2911cfe792cf43b08fb827fb57472c3a3276d4c645a16"
       },
       "sdk_inputs": {
         "bytes": 2587,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/long-bridge/proof/SDK_INPUTS.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/SDK_INPUTS.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0013-SDK_INPUTS.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0177-SDK_INPUTS.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/SDK_INPUTS.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/long-bridge/proof/SDK_INPUTS.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/SDK_INPUTS.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0013-SDK_INPUTS.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0177-SDK_INPUTS.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/SDK_INPUTS.tsv"
         ],
-        "sha256": "243710c8bc02df0e20d2035867b7c7ad28a6361b50076d8457a841110835a185"
+        "sha256": "711e02a24091858ec7037df51b94160cd842395169747d2c56510a16677fa511"
       },
       "sdk_results": {
         "bytes": 264,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/long-bridge/proof/SDK_RESULTS.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/SDK_RESULTS.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0015-SDK_RESULTS.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0180-SDK_RESULTS.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/LONG_BRIDGE_SDK_RESULTS.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/SDK_RESULTS.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/long-bridge/proof/SDK_RESULTS.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/SDK_RESULTS.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0015-SDK_RESULTS.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0180-SDK_RESULTS.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/LONG_BRIDGE_SDK_RESULTS.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/SDK_RESULTS.tsv"
         ],
-        "sha256": "f1add8381883e63970281efc5ea3d6684310e011e9ad418ae2d11de1592754f9"
+        "sha256": "e148f6c1632fa67a075ccd2ade96796ddcf0eb52e67597b654b71b4fe14b153a"
       },
       "sealed_baseline_ref": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "successful_sdk_xml": {
         "bytes": 14438,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/long-bridge/proof/SDK_TEST_REPORT.xml",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/SDK_TEST_REPORT.xml",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0016-SDK_TEST_REPORT.xml.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0181-SDK_TEST_REPORT.xml.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/SDK_TEST_REPORT.xml"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/long-bridge/proof/SDK_TEST_REPORT.xml",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/SDK_TEST_REPORT.xml",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0016-SDK_TEST_REPORT.xml.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0181-SDK_TEST_REPORT.xml.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-long-pathmask-bridge-20261018/proof/SDK_TEST_REPORT.xml"
         ],
-        "sha256": "dc908f2b40609672873ae8a2a756400aa3e08a4c3be13969c749d77f5fdf4e0b"
+        "sha256": "dea48731c19fcef9d7f13ceace6317053d2ff9c48f03d8e24261aff16fe6f825"
       },
       "targets": 1,
       "text_targets": 0
@@ -184,20 +184,20 @@
       "effective_engines": {
         "bytes": 747,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0119-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0176-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0184-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0192-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/ENGINE_EFFECTIVE.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0119-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0176-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0184-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0192-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/ENGINE_EFFECTIVE.tsv"
         ],
         "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23"
       },
@@ -205,44 +205,44 @@
       "metadata": {
         "bytes": 511,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/DATASET.json",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0183-DATASET.json.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/DATASET.json"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/DATASET.json",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0183-DATASET.json.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/DATASET.json"
         ],
-        "sha256": "d31c835762d935eec94d9e3b1fa7a923a7ed460d817b0d8802af0fbfc4bd09eb"
+        "sha256": "18272174e7659b6b069a257c648bf5ec6a218a29cb6529ca9f971f1eab26ccb6"
       },
       "modes": {
         "bytes": 227,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/MODES.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/MODES.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/MODES.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/MODES.tsv"
         ],
         "sha256": "83951eeb55c1f4e4cdede745b00e4b94a5a4bca67edc15668b205b605e5072d1"
       },
       "sdk_inputs": {
         "bytes": 2849,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/SDK_INPUTS.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0185-SDK_INPUTS.tsv.txt"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/SDK_INPUTS.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0185-SDK_INPUTS.tsv.txt"
         ],
-        "sha256": "fbf3a62b84e9e6947d2fe79f0c945857d2a5afae91e847e4e1b2eab624f433c8"
+        "sha256": "4a1ec1638879f84e415607f7a8784da2b7334138183225d9d21e516ba3568e21"
       },
       "sdk_results": {
         "bytes": 488,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/SDK_RESULTS.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0188-SDK_RESULTS.tsv.txt"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/SDK_RESULTS.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0188-SDK_RESULTS.tsv.txt"
         ],
-        "sha256": "f36aea78c259571800d34b80ba80efe0262bbbc7ae656b8093b9656d7d3c3d3b"
+        "sha256": "24d691e1b32f317616777130f09dee5c2304bd5eff28a7a85ba1e885e28d6186"
       },
       "sealed_baseline_ref": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
       "successful_sdk_xml": {
         "bytes": 14793,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/SDK_TEST_REPORT.xml",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0189-SDK_TEST_REPORT.xml.txt"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/SDK_TEST_REPORT.xml",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0189-SDK_TEST_REPORT.xml.txt"
         ],
-        "sha256": "e40def8ea2bd93b0f9c11e94933e148b0bf7cb43e4a7eb0c9e1f6b460d829994"
+        "sha256": "56dc92bc668478f4137ee7ee0eecfe54239e018101b04f3efbc9a0eb7fd59849"
       },
       "targets": 3,
       "text_targets": 3
@@ -253,20 +253,20 @@
       "effective_engines": {
         "bytes": 747,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0119-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0176-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0184-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0192-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/ENGINE_EFFECTIVE.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0119-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0176-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0184-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0192-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/ENGINE_EFFECTIVE.tsv"
         ],
         "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23"
       },
@@ -274,28 +274,28 @@
       "metadata": {
         "bytes": 513,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/DATASET.json"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/DATASET.json"
         ],
         "sha256": "3a1824b0c7660e9df373732dcd1ce007de29aa26e9942541ae5f31ea9635998d"
       },
       "modes": {
         "bytes": 18432,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/MODES.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/MODES.tsv"
         ],
         "sha256": "f8b27ae07eceffbf5997f194b515a3df3ee61345c8829c4eaa4bea5b5742edc2"
       },
       "sdk_inputs": {
         "bytes": 40406,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-catalog2-20261018/SDK_INPUTS.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-catalog2-20261018/SDK_INPUTS.tsv"
         ],
         "sha256": "bff49cf755b980399d46f14dbdb176a17450133c0dc1c7f9531fb569bac0b310"
       },
       "sdk_results": {
         "bytes": 28006,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-catalog2-20261018/SDK_RESULTS.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-catalog2-20261018/SDK_RESULTS.tsv"
         ],
         "sha256": "338781863cb8b1c254b0904e9602cee5761c8893aef967b426182bf0dde855d1"
       },
@@ -303,7 +303,7 @@
       "successful_sdk_xml": {
         "bytes": 14601,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-catalog2-20261018/SDK_SUCCESS.xml"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-catalog2-20261018/SDK_SUCCESS.xml"
         ],
         "sha256": "25bf33dabd56609334122447765efb541d65e7568c6d883a6b81dcb422d9be59"
       },
@@ -316,20 +316,20 @@
       "effective_engines": {
         "bytes": 747,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0119-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0176-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0184-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0192-ENGINE_EFFECTIVE.tsv.txt",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/ENGINE_EFFECTIVE.tsv",
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/ENGINE_EFFECTIVE.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/long-bridge/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/proof2/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/sdk/r2/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-long-bridge-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog2-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog2-20261018/0119-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0176-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0184-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0192-ENGINE_EFFECTIVE.tsv.txt",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/ENGINE_EFFECTIVE.tsv",
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrappers-r2-20261018/ENGINE_EFFECTIVE.tsv"
         ],
         "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23"
       },
@@ -337,28 +337,28 @@
       "metadata": {
         "bytes": 513,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/DATASET.json"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/DATASET.json"
         ],
         "sha256": "01945592861fe4d88c6505bea48a45eadc7b2b95b77240078a325fc070c177bb"
       },
       "modes": {
         "bytes": 25047,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/MODES.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/MODES.tsv"
         ],
         "sha256": "9a24836ee504985a3f767d5579cb250889c29b320a247915fea51f9d905f4886"
       },
       "sdk_inputs": {
         "bytes": 56378,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-evidence-20261018/SDK_INPUTS.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-evidence-20261018/SDK_INPUTS.tsv"
         ],
         "sha256": "a878bdc5e7b83e48cd59dbc0c346d95875fcbead9e516bf1f41352bac6cd8f1c"
       },
       "sdk_results": {
         "bytes": 38306,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-evidence-20261018/SDK_RESULTS.tsv"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-evidence-20261018/SDK_RESULTS.tsv"
         ],
         "sha256": "bf1dfccce09ada5ddfec20471f59794f0f1f9e666a6f263679aa613a50a9b297"
       },
@@ -366,7 +366,7 @@
       "successful_sdk_xml": {
         "bytes": 14598,
         "published_paths": [
-          "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-evidence-20261018/SDK_SUCCESS.xml"
+          "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-wrapper-verification-20261018/publication/qualification/m3jdk21-wrap-evidence-20261018/SDK_SUCCESS.xml"
         ],
         "sha256": "6734c0777b0faa21ce61a656379dc142970376f5ae15556877d3a0726b046c2f"
       },
@@ -394,120 +394,120 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "b5038403f5e9fe60b244327e149846af1af1cc002a30cba5f44be72356e53be7",
+      "after_sha256": "bca6f479710c62c12d060a7ab5d3a216552eaaaa3f97b4ea543da581f5fd4bbf",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/CANDIDATE_DATASET.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "b5038403f5e9fe60b244327e149846af1af1cc002a30cba5f44be72356e53be7",
+      "receiver_sha256": "bca6f479710c62c12d060a7ab5d3a216552eaaaa3f97b4ea543da581f5fd4bbf",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "516b390c2136d004bee0b172856c462c27fee3bcdacf96fc804c5be598baf2b2",
+      "after_sha256": "7623b58b5e51e110211a349f4896aed68fad8912c4ab1d5f24af2d9932a18561",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/CANDIDATE_STATUS.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "516b390c2136d004bee0b172856c462c27fee3bcdacf96fc804c5be598baf2b2",
+      "receiver_sha256": "7623b58b5e51e110211a349f4896aed68fad8912c4ab1d5f24af2d9932a18561",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "62ff3fb047d3f9b1bc8a1157a8c283fd96acf008ba9e13b48b8aabeb38708576",
+      "after_sha256": "eb75ea738dbfa5611243d625d0c35bca0eb30115dc7c3ed32df6ec7fa8b578bd",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/COVERAGE.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "62ff3fb047d3f9b1bc8a1157a8c283fd96acf008ba9e13b48b8aabeb38708576",
+      "receiver_sha256": "eb75ea738dbfa5611243d625d0c35bca0eb30115dc7c3ed32df6ec7fa8b578bd",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "75f38e36dfdc8a8f985024be299d2d846b4f748dc79604ef1dd0d765a899aa5a",
+      "after_sha256": "0819d030d45acf7d84eb95e92753227c16f7d910ec9a24a48286efdb3f682de6",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/DELIVERY_PARTITIONS.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "75f38e36dfdc8a8f985024be299d2d846b4f748dc79604ef1dd0d765a899aa5a",
+      "receiver_sha256": "0819d030d45acf7d84eb95e92753227c16f7d910ec9a24a48286efdb3f682de6",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "e5e9280ee4f756735363ebbe8e263a90ab5a55fed4591027928979e78a9c3bbb",
+      "after_sha256": "caa375f67a204f323165dd154fb56be02c97bf344bab332b630dad7f22928279",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/DELIVERY_PATHS.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "e5e9280ee4f756735363ebbe8e263a90ab5a55fed4591027928979e78a9c3bbb",
+      "receiver_sha256": "caa375f67a204f323165dd154fb56be02c97bf344bab332b630dad7f22928279",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "42b6748ac049c18aef9376f0e679e85de9de849dfadf63883e8d3f383a288e2c",
+      "after_sha256": "33c4c8e930b1f4728a863bf6123719e7ef06ab7d69a37eea01c41c87ec7d2b5d",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/DELIVERY_PATHS.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "42b6748ac049c18aef9376f0e679e85de9de849dfadf63883e8d3f383a288e2c",
+      "receiver_sha256": "33c4c8e930b1f4728a863bf6123719e7ef06ab7d69a37eea01c41c87ec7d2b5d",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "9fbf204626151ee52a882de19879502918f0dbd985930c674c7cf3df2f12db60",
+      "after_sha256": "dc60e1d8ca0ec61824b57762d2fec113eee29b88f1c249c7bf4d9588c2193d83",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/DONOR_EVALUATION.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "9fbf204626151ee52a882de19879502918f0dbd985930c674c7cf3df2f12db60",
+      "receiver_sha256": "dc60e1d8ca0ec61824b57762d2fec113eee29b88f1c249c7bf4d9588c2193d83",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "2cf093739d03398e9e9cf759f192f1e4a87f0d1f5307f2d8cd2112c9f0fde668",
+      "after_sha256": "1237feca7404083f5b6f28ae75ca42f42a293a01d70ef7e39a55114156f63c9c",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/DONOR_EVALUATION.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "2cf093739d03398e9e9cf759f192f1e4a87f0d1f5307f2d8cd2112c9f0fde668",
+      "receiver_sha256": "1237feca7404083f5b6f28ae75ca42f42a293a01d70ef7e39a55114156f63c9c",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "39809db42266a7fe8f466137ea36cb1c2c851648ec89bdc685ad9f27494e5213",
+      "after_sha256": "5a6032b02009be8d32377cacd64ea9b293e20b2e57703518ea9021f00f1043e6",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/FILE_REVIEW.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "39809db42266a7fe8f466137ea36cb1c2c851648ec89bdc685ad9f27494e5213",
+      "receiver_sha256": "5a6032b02009be8d32377cacd64ea9b293e20b2e57703518ea9021f00f1043e6",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "9745087d4ac73028910466c254bd9c5fae04c4b450a218739918b65e91bb6864",
+      "after_sha256": "e50ff6d246f9cc4fe4516662f8dc15982a0f27a7a8e991b8540cf7258c88da54",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/FINAL_FILE_REVIEW.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "9745087d4ac73028910466c254bd9c5fae04c4b450a218739918b65e91bb6864",
+      "receiver_sha256": "e50ff6d246f9cc4fe4516662f8dc15982a0f27a7a8e991b8540cf7258c88da54",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "f1dd64a810e74f139db5c7d021bb1f5d82623501dff95f47ae6a0042fb62f602",
+      "after_sha256": "bee1b41ff0a751afe9b90518ca7c5fef6418f3e2f89438eecfe15c934e82d3a1",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/FINAL_RECEIVING_FILE_REVIEW.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "f1dd64a810e74f139db5c7d021bb1f5d82623501dff95f47ae6a0042fb62f602",
+      "receiver_sha256": "bee1b41ff0a751afe9b90518ca7c5fef6418f3e2f89438eecfe15c934e82d3a1",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "3bcf08ededda5484713d8a48089d20353a605085fb3da308e4774b12f0163c2e",
+      "after_sha256": "bec8e642a784073f6574ed34b634b11a418367a32e0f8122247b4bedc34ac189",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/FINAL_RECEIVING_STATUS.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "3bcf08ededda5484713d8a48089d20353a605085fb3da308e4774b12f0163c2e",
+      "receiver_sha256": "bec8e642a784073f6574ed34b634b11a418367a32e0f8122247b4bedc34ac189",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "4dcac6aa3ff06b9e385ae76696dd28c9b3cd67fbe02b84c94f7ec3e6848da578",
+      "after_sha256": "f6ee9a3059617dd871777d704b45e312a3fb23d5e4aca30596d6d5edd588464b",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/FROZEN_INPUT_INVENTORY.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "4dcac6aa3ff06b9e385ae76696dd28c9b3cd67fbe02b84c94f7ec3e6848da578",
+      "receiver_sha256": "f6ee9a3059617dd871777d704b45e312a3fb23d5e4aca30596d6d5edd588464b",
       "recipe_mode": "0644"
     },
     {
@@ -520,12 +520,12 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "561d3df9d0fbcf5da0d5e1be85f3ce7e85683d399bcb7f677746317d479eeba9",
+      "after_sha256": "3a873288fc64abd88bde694b13c8550adad746bf41cc5cf8387a203c1e749905",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/LATEST_AST_SCOPE.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "561d3df9d0fbcf5da0d5e1be85f3ce7e85683d399bcb7f677746317d479eeba9",
+      "receiver_sha256": "3a873288fc64abd88bde694b13c8550adad746bf41cc5cf8387a203c1e749905",
       "recipe_mode": "0644"
     },
     {
@@ -547,12 +547,12 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "398d34a1bb0e0f3fb7c5565ecdca20cb5885d819e12e05878daf53810c71abc7",
+      "after_sha256": "b084ee71103a118ae6f72bf47fcd14f9e02a062c16cee922e1ac1e0ac55534c2",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/PACKAGING_CORRECTION.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "398d34a1bb0e0f3fb7c5565ecdca20cb5885d819e12e05878daf53810c71abc7",
+      "receiver_sha256": "b084ee71103a118ae6f72bf47fcd14f9e02a062c16cee922e1ac1e0ac55534c2",
       "recipe_mode": "0644"
     },
     {
@@ -574,21 +574,21 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "1f902808d5b34db904bdf2368719b32dd4a862e045f58e12b3dad094813245ff",
+      "after_sha256": "3def51d38b248e1f1740372ff6c193abfe5d27aae764f89b7f01f1e5cf7477b9",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/REJECTED_CANDIDATES.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "1f902808d5b34db904bdf2368719b32dd4a862e045f58e12b3dad094813245ff",
+      "receiver_sha256": "3def51d38b248e1f1740372ff6c193abfe5d27aae764f89b7f01f1e5cf7477b9",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "9a5e08d84ce75ba7eca61ab65629d59d7fe1f3b48816d3ce92ea14dc1d93103e",
+      "after_sha256": "5b9fe6347e16bc5dc81f1624e92de0580cee1bd7483e7341fb6791f693abbebb",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/SOURCE_PROVENANCE.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "9a5e08d84ce75ba7eca61ab65629d59d7fe1f3b48816d3ce92ea14dc1d93103e",
+      "receiver_sha256": "5b9fe6347e16bc5dc81f1624e92de0580cee1bd7483e7341fb6791f693abbebb",
       "recipe_mode": "0644"
     },
     {
@@ -601,12 +601,12 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "30baab47ad3269c6655bbc3d553cb839a6f095635389b02157559f1d02c54c19",
+      "after_sha256": "e325ed8dd3f51c87d17e539080316560e7339d6474e84252080050de80027d07",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/GATES.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "30baab47ad3269c6655bbc3d553cb839a6f095635389b02157559f1d02c54c19",
+      "receiver_sha256": "e325ed8dd3f51c87d17e539080316560e7339d6474e84252080050de80027d07",
       "recipe_mode": "0644"
     },
     {
@@ -790,21 +790,21 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "db5d718f4e771d0b828bc8a3d81043949586554e40824cbffe07e1f9c8718906",
+      "after_sha256": "32065a95d9833acc13939864bfa51595ec7000cf7953cc25ad979c647d0349de",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/NATIVE_REUSE.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "db5d718f4e771d0b828bc8a3d81043949586554e40824cbffe07e1f9c8718906",
+      "receiver_sha256": "32065a95d9833acc13939864bfa51595ec7000cf7953cc25ad979c647d0349de",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "bac74f9e7b829ab41fb6e1d5ccc8b1e35643a38fa182e78aa999b5d6b1a10c0b",
+      "after_sha256": "396c4e10e7b0d840791f35c073aa85670c3168d695e925970e30d6b5e9560089",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/SOURCE_INPUTS.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "bac74f9e7b829ab41fb6e1d5ccc8b1e35643a38fa182e78aa999b5d6b1a10c0b",
+      "receiver_sha256": "396c4e10e7b0d840791f35c073aa85670c3168d695e925970e30d6b5e9560089",
       "recipe_mode": "0644"
     },
     {
@@ -844,21 +844,21 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "2a858d11fb52ef21ff9621a481217ce544ecface74af29517035268b6b37d0a1",
+      "after_sha256": "2cbb631ba00d84968fbda726c9956ffda9bdb3cc2f1d5630f96be68384536956",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/probes/FilterGapWitness.java.txt",
       "receiver_mode": "0644",
-      "receiver_sha256": "2a858d11fb52ef21ff9621a481217ce544ecface74af29517035268b6b37d0a1",
+      "receiver_sha256": "2cbb631ba00d84968fbda726c9956ffda9bdb3cc2f1d5630f96be68384536956",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "4cd4c00c565ea75f26b83ca237330063275c661df5017d06963aeb1a76bdfe55",
+      "after_sha256": "07296e1077905d975421f1f65020388fbe4a83e545cf5c62fc70b94f5c1cc75b",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/probes/M3ComparatorFailureProbe.java.txt",
       "receiver_mode": "0644",
-      "receiver_sha256": "4cd4c00c565ea75f26b83ca237330063275c661df5017d06963aeb1a76bdfe55",
+      "receiver_sha256": "07296e1077905d975421f1f65020388fbe4a83e545cf5c62fc70b94f5c1cc75b",
       "recipe_mode": "0644"
     },
     {
@@ -871,12 +871,12 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "4cd4c00c565ea75f26b83ca237330063275c661df5017d06963aeb1a76bdfe55",
+      "after_sha256": "07296e1077905d975421f1f65020388fbe4a83e545cf5c62fc70b94f5c1cc75b",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/counterexamples/M3ComparatorFailureProbe.java.txt",
       "receiver_mode": "0644",
-      "receiver_sha256": "4cd4c00c565ea75f26b83ca237330063275c661df5017d06963aeb1a76bdfe55",
+      "receiver_sha256": "07296e1077905d975421f1f65020388fbe4a83e545cf5c62fc70b94f5c1cc75b",
       "recipe_mode": "0644"
     },
     {
@@ -898,12 +898,12 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "3762881c33ed3d0b67399cee60eb614ff8ff1378e40274da8207f4224b10bf15",
+      "after_sha256": "013c25afb55911cf62c8712fa1b540d195e00b9c5170f68ab90958069cb48cf4",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/INVENTORY.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "3762881c33ed3d0b67399cee60eb614ff8ff1378e40274da8207f4224b10bf15",
+      "receiver_sha256": "013c25afb55911cf62c8712fa1b540d195e00b9c5170f68ab90958069cb48cf4",
       "recipe_mode": "0644"
     },
     {
@@ -943,75 +943,75 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "b5038403f5e9fe60b244327e149846af1af1cc002a30cba5f44be72356e53be7",
+      "after_sha256": "bca6f479710c62c12d060a7ab5d3a216552eaaaa3f97b4ea543da581f5fd4bbf",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/CANDIDATE_DATASET.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "b5038403f5e9fe60b244327e149846af1af1cc002a30cba5f44be72356e53be7",
+      "receiver_sha256": "bca6f479710c62c12d060a7ab5d3a216552eaaaa3f97b4ea543da581f5fd4bbf",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "996d0ad1314d5ca723292385e8dfd534d0dff21daf55a74d1c23a4481d9786f0",
+      "after_sha256": "9aafb88956656ac91d7c893ebd5e8b507ffd1d5ec27f6c971655aa5f408dc745",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/CANDIDATE_STATUS.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "996d0ad1314d5ca723292385e8dfd534d0dff21daf55a74d1c23a4481d9786f0",
+      "receiver_sha256": "9aafb88956656ac91d7c893ebd5e8b507ffd1d5ec27f6c971655aa5f408dc745",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "0c626bfe453103f1bf5d9d39c1c2b34538ff3d6f167e5d4707c2c09e520f297f",
+      "after_sha256": "aaa96a1ec17f45981a56a20234f28f2b83a57f73626904603acaca18fac94935",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/COVERAGE.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "0c626bfe453103f1bf5d9d39c1c2b34538ff3d6f167e5d4707c2c09e520f297f",
+      "receiver_sha256": "aaa96a1ec17f45981a56a20234f28f2b83a57f73626904603acaca18fac94935",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "f6de8e6d10bf0b48dcc1c96b69ca65bb6457a5655e9b9debcdcb0eb492e82496",
+      "after_sha256": "5da56ceb50a69bec9fbcbfbb93f5b351bfb2d57cf2be4ab474bc1eee3dd80d44",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/DONOR_EVALUATION.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "f6de8e6d10bf0b48dcc1c96b69ca65bb6457a5655e9b9debcdcb0eb492e82496",
+      "receiver_sha256": "5da56ceb50a69bec9fbcbfbb93f5b351bfb2d57cf2be4ab474bc1eee3dd80d44",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "ac76fd437cdff7c273cfcfe831ed45f0fb4ab8e08cfcdd7b532bd0cc489e44a9",
+      "after_sha256": "955d00843b4061ffff2b2ef1715ed0e6b3bb4314f77d443cdfac8c1b09446fe9",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/DONOR_EVALUATION.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "ac76fd437cdff7c273cfcfe831ed45f0fb4ab8e08cfcdd7b532bd0cc489e44a9",
+      "receiver_sha256": "955d00843b4061ffff2b2ef1715ed0e6b3bb4314f77d443cdfac8c1b09446fe9",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "39809db42266a7fe8f466137ea36cb1c2c851648ec89bdc685ad9f27494e5213",
+      "after_sha256": "5a6032b02009be8d32377cacd64ea9b293e20b2e57703518ea9021f00f1043e6",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/FILE_REVIEW.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "39809db42266a7fe8f466137ea36cb1c2c851648ec89bdc685ad9f27494e5213",
+      "receiver_sha256": "5a6032b02009be8d32377cacd64ea9b293e20b2e57703518ea9021f00f1043e6",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "9745087d4ac73028910466c254bd9c5fae04c4b450a218739918b65e91bb6864",
+      "after_sha256": "e50ff6d246f9cc4fe4516662f8dc15982a0f27a7a8e991b8540cf7258c88da54",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/FINAL_FILE_REVIEW.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "9745087d4ac73028910466c254bd9c5fae04c4b450a218739918b65e91bb6864",
+      "receiver_sha256": "e50ff6d246f9cc4fe4516662f8dc15982a0f27a7a8e991b8540cf7258c88da54",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "4dcac6aa3ff06b9e385ae76696dd28c9b3cd67fbe02b84c94f7ec3e6848da578",
+      "after_sha256": "f6ee9a3059617dd871777d704b45e312a3fb23d5e4aca30596d6d5edd588464b",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/FROZEN_INPUT_INVENTORY.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "4dcac6aa3ff06b9e385ae76696dd28c9b3cd67fbe02b84c94f7ec3e6848da578",
+      "receiver_sha256": "f6ee9a3059617dd871777d704b45e312a3fb23d5e4aca30596d6d5edd588464b",
       "recipe_mode": "0644"
     },
     {
@@ -1042,21 +1042,21 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "5ce5a9566400aa9e7e5d1348344048670316ef16a4759d5b68d63bfd01569a41",
+      "after_sha256": "fd323ec5ca7c9b1e27590022d1ceaad1768ca7e6df650511c178c953c2202497",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/REJECTED_CANDIDATES.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "5ce5a9566400aa9e7e5d1348344048670316ef16a4759d5b68d63bfd01569a41",
+      "receiver_sha256": "fd323ec5ca7c9b1e27590022d1ceaad1768ca7e6df650511c178c953c2202497",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "cafb8c4dd55f207a93b3a71083af7baf0101b5c3105951dd3de03a4c37ee795d",
+      "after_sha256": "bc036f93ba9496abd8115fccce90be5f1efa86558fa866d5ea8d4a759e62b8ef",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/SOURCE_PROVENANCE.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "cafb8c4dd55f207a93b3a71083af7baf0101b5c3105951dd3de03a4c37ee795d",
+      "receiver_sha256": "bc036f93ba9496abd8115fccce90be5f1efa86558fa866d5ea8d4a759e62b8ef",
       "recipe_mode": "0644"
     },
     {
@@ -1069,12 +1069,12 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "30baab47ad3269c6655bbc3d553cb839a6f095635389b02157559f1d02c54c19",
+      "after_sha256": "e325ed8dd3f51c87d17e539080316560e7339d6474e84252080050de80027d07",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/GATES.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "30baab47ad3269c6655bbc3d553cb839a6f095635389b02157559f1d02c54c19",
+      "receiver_sha256": "e325ed8dd3f51c87d17e539080316560e7339d6474e84252080050de80027d07",
       "recipe_mode": "0644"
     },
     {
@@ -1258,21 +1258,21 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "db5d718f4e771d0b828bc8a3d81043949586554e40824cbffe07e1f9c8718906",
+      "after_sha256": "32065a95d9833acc13939864bfa51595ec7000cf7953cc25ad979c647d0349de",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/NATIVE_REUSE.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "db5d718f4e771d0b828bc8a3d81043949586554e40824cbffe07e1f9c8718906",
+      "receiver_sha256": "32065a95d9833acc13939864bfa51595ec7000cf7953cc25ad979c647d0349de",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "bac74f9e7b829ab41fb6e1d5ccc8b1e35643a38fa182e78aa999b5d6b1a10c0b",
+      "after_sha256": "396c4e10e7b0d840791f35c073aa85670c3168d695e925970e30d6b5e9560089",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/SOURCE_INPUTS.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "bac74f9e7b829ab41fb6e1d5ccc8b1e35643a38fa182e78aa999b5d6b1a10c0b",
+      "receiver_sha256": "396c4e10e7b0d840791f35c073aa85670c3168d695e925970e30d6b5e9560089",
       "recipe_mode": "0644"
     },
     {
@@ -1312,21 +1312,21 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "2a858d11fb52ef21ff9621a481217ce544ecface74af29517035268b6b37d0a1",
+      "after_sha256": "2cbb631ba00d84968fbda726c9956ffda9bdb3cc2f1d5630f96be68384536956",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/probes/FilterGapWitness.java.txt",
       "receiver_mode": "0644",
-      "receiver_sha256": "2a858d11fb52ef21ff9621a481217ce544ecface74af29517035268b6b37d0a1",
+      "receiver_sha256": "2cbb631ba00d84968fbda726c9956ffda9bdb3cc2f1d5630f96be68384536956",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "4cd4c00c565ea75f26b83ca237330063275c661df5017d06963aeb1a76bdfe55",
+      "after_sha256": "07296e1077905d975421f1f65020388fbe4a83e545cf5c62fc70b94f5c1cc75b",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/probes/M3ComparatorFailureProbe.java.txt",
       "receiver_mode": "0644",
-      "receiver_sha256": "4cd4c00c565ea75f26b83ca237330063275c661df5017d06963aeb1a76bdfe55",
+      "receiver_sha256": "07296e1077905d975421f1f65020388fbe4a83e545cf5c62fc70b94f5c1cc75b",
       "recipe_mode": "0644"
     },
     {
@@ -1339,12 +1339,12 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "4cd4c00c565ea75f26b83ca237330063275c661df5017d06963aeb1a76bdfe55",
+      "after_sha256": "07296e1077905d975421f1f65020388fbe4a83e545cf5c62fc70b94f5c1cc75b",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/counterexamples/M3ComparatorFailureProbe.java.txt",
       "receiver_mode": "0644",
-      "receiver_sha256": "4cd4c00c565ea75f26b83ca237330063275c661df5017d06963aeb1a76bdfe55",
+      "receiver_sha256": "07296e1077905d975421f1f65020388fbe4a83e545cf5c62fc70b94f5c1cc75b",
       "recipe_mode": "0644"
     },
     {
@@ -1366,30 +1366,30 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "3a2abf0bb1cebb6e8277eb774cdfff77d7f5443a34efa7b6887fc55bd180ab99",
+      "after_sha256": "491396f116f2dfcce97a41a6f48f4f7a903dcc4106050bd6f7b92451cdd30ea8",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/history/initial-authoring/COVERAGE.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "3a2abf0bb1cebb6e8277eb774cdfff77d7f5443a34efa7b6887fc55bd180ab99",
+      "receiver_sha256": "491396f116f2dfcce97a41a6f48f4f7a903dcc4106050bd6f7b92451cdd30ea8",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "d0d63f1d58b284c6a4e86d907a0d593e08c162dde7e89f225c236b52d624229b",
+      "after_sha256": "4e84055b5e7884f6e3b3fbba805137d313f94a9fb78a0556d3b792f5ed2e7a35",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/history/initial-authoring/DONOR_EVALUATION.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "d0d63f1d58b284c6a4e86d907a0d593e08c162dde7e89f225c236b52d624229b",
+      "receiver_sha256": "4e84055b5e7884f6e3b3fbba805137d313f94a9fb78a0556d3b792f5ed2e7a35",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "2a22b896bc1c9726876ace54b11d4914649c796c662ed9f892a3e2fa1ca9ff7e",
+      "after_sha256": "1ac02fad241ca778cf37143f5612907aae67d4233a70ba7e021e7316e877b651",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/history/initial-authoring/DONOR_EVALUATION.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "2a22b896bc1c9726876ace54b11d4914649c796c662ed9f892a3e2fa1ca9ff7e",
+      "receiver_sha256": "1ac02fad241ca778cf37143f5612907aae67d4233a70ba7e021e7316e877b651",
       "recipe_mode": "0644"
     },
     {
@@ -1402,39 +1402,39 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "7dac256605647f74b6f398e3e6b618fdf145914c6e4bf31d23fee23f7a96bf14",
+      "after_sha256": "3a451ace2155f1e80c36bad9b6171afe4f997a257b55ca419bd9dd7a4e425619",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/history/initial-authoring/REJECTED_CANDIDATES.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "7dac256605647f74b6f398e3e6b618fdf145914c6e4bf31d23fee23f7a96bf14",
+      "receiver_sha256": "3a451ace2155f1e80c36bad9b6171afe4f997a257b55ca419bd9dd7a4e425619",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "e37f58fe01540ca3be89b00cafb324af38f6a0f5c6e13fb7b6d55192f9ded599",
+      "after_sha256": "9326e9873926a802889331c18c97755551ef14ff506f18dc34a0218b83c6c997",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/history/initial-authoring/SOURCE_PROVENANCE.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "e37f58fe01540ca3be89b00cafb324af38f6a0f5c6e13fb7b6d55192f9ded599",
+      "receiver_sha256": "9326e9873926a802889331c18c97755551ef14ff506f18dc34a0218b83c6c997",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "667d1f0d7db87012b8a2d6b994dd86325bd45b493305050b2211b8cc0ed29448",
+      "after_sha256": "ed0f907d22ecfef9aef3ab4176dc9b0b0cd13451d1099d119952a3d8fc564e34",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/catalogue-delivery-v1/ACCEPTANCE_FREEZE.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "667d1f0d7db87012b8a2d6b994dd86325bd45b493305050b2211b8cc0ed29448",
+      "receiver_sha256": "ed0f907d22ecfef9aef3ab4176dc9b0b0cd13451d1099d119952a3d8fc564e34",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "2de631902ebb47ac2eec1afc1a0a58ebf206dd02ef2889e44856838684796212",
+      "after_sha256": "947c993fb05b930bb8a8a4c00cd1891508e05f245701a8ba51ae790361dc0971",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/catalogue-delivery-v1/DATASET.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "2de631902ebb47ac2eec1afc1a0a58ebf206dd02ef2889e44856838684796212",
+      "receiver_sha256": "947c993fb05b930bb8a8a4c00cd1891508e05f245701a8ba51ae790361dc0971",
       "recipe_mode": "0644"
     },
     {
@@ -1456,12 +1456,12 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "9db18d4a54629dfd97e5c46322c02472dcb99ef83898da843485aac0d89df723",
+      "after_sha256": "8bfe7c80bb695dbc544c888d4b978b4f818df82f4abd5b8db5f1077c5784ce73",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/catalogue-delivery-v1/SDK_FAILURE.xml",
       "receiver_mode": "0644",
-      "receiver_sha256": "9db18d4a54629dfd97e5c46322c02472dcb99ef83898da843485aac0d89df723",
+      "receiver_sha256": "8bfe7c80bb695dbc544c888d4b978b4f818df82f4abd5b8db5f1077c5784ce73",
       "recipe_mode": "0644"
     },
     {
@@ -1474,30 +1474,30 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "45e2340c971c625851f489efa61570f4e192467fb746760ff73febe8a613c782",
+      "after_sha256": "d371d06b98f89c9a2cd702e8eb7b713510ffadfa0dc4572d6916addc382efc59",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/catalogue-delivery-v1/SEAL_RECEIPT.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "45e2340c971c625851f489efa61570f4e192467fb746760ff73febe8a613c782",
+      "receiver_sha256": "d371d06b98f89c9a2cd702e8eb7b713510ffadfa0dc4572d6916addc382efc59",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "adba154970aa25763896490462a2af198f752af65e5c65d05b75044f842aa1bf",
+      "after_sha256": "3d27663cfd040e234f4bcf3812f3893449dd9aeae703a2f1dfdc33bee8c57167",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/catalogue-delivery-v1/V1_PAYLOAD_MAPPING.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "adba154970aa25763896490462a2af198f752af65e5c65d05b75044f842aa1bf",
+      "receiver_sha256": "3d27663cfd040e234f4bcf3812f3893449dd9aeae703a2f1dfdc33bee8c57167",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "575fa6a49a303e7ebbf0c7800776641286cb67c70b2bc86e52db09c540131017",
+      "after_sha256": "d5de62766e2e918d83cf38c5b52b05317d96729f2a2eb5bf4f34fc68c32ed3de",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/catalogue-delivery-v1/manifest.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "575fa6a49a303e7ebbf0c7800776641286cb67c70b2bc86e52db09c540131017",
+      "receiver_sha256": "d5de62766e2e918d83cf38c5b52b05317d96729f2a2eb5bf4f34fc68c32ed3de",
       "recipe_mode": "0644"
     },
     {
@@ -1510,30 +1510,30 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "eb42d1c83682643672247502a29c3e94b060321a69d060a4ce411a1ea3e72cb6",
+      "after_sha256": "1d17cbb4280c3cf6b114fd3d2a942ff1dd67cf58c85c5acf01c6f0edb44194f2",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/catalogue-delivery-v1/payloads/catalogue/CANDIDATE_STATUS.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "eb42d1c83682643672247502a29c3e94b060321a69d060a4ce411a1ea3e72cb6",
+      "receiver_sha256": "1d17cbb4280c3cf6b114fd3d2a942ff1dd67cf58c85c5acf01c6f0edb44194f2",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "fd730dd035367c078b2ae35f39ba4d6273afab91bfe0623e1e1962ed1be4d23c",
+      "after_sha256": "c92a09aeeb7968a1cdc7abc7271f7978aca80c215e0be6eb23020045f8e6fb55",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/catalogue-delivery-v1/payloads/catalogue/COVERAGE.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "fd730dd035367c078b2ae35f39ba4d6273afab91bfe0623e1e1962ed1be4d23c",
+      "receiver_sha256": "c92a09aeeb7968a1cdc7abc7271f7978aca80c215e0be6eb23020045f8e6fb55",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "9f1bed14431ac454955811a58a443ee74a3e659e3cd1757eae2706a09f032c72",
+      "after_sha256": "37488064a47483307e62569d163de9db0fb78a21134564058fd63d74877fe074",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/catalogue-delivery-v1/payloads/catalogue/FINAL_RECEIVING_STATUS.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "9f1bed14431ac454955811a58a443ee74a3e659e3cd1757eae2706a09f032c72",
+      "receiver_sha256": "37488064a47483307e62569d163de9db0fb78a21134564058fd63d74877fe074",
       "recipe_mode": "0644"
     },
     {
@@ -1546,39 +1546,39 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "663a3c5ccd8e698a8b0ad0bfb28dd8e006eca034aba0404e42535e92f23ce6f2",
+      "after_sha256": "45899f46e0d1b3c142259d54911545e733714f9d0540f08b74615b8f9f20e60b",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/catalogue-delivery-v1/payloads/catalogue/REJECTED_CANDIDATES.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "663a3c5ccd8e698a8b0ad0bfb28dd8e006eca034aba0404e42535e92f23ce6f2",
+      "receiver_sha256": "45899f46e0d1b3c142259d54911545e733714f9d0540f08b74615b8f9f20e60b",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "34a28f27d23e795bb8d9039c25d7c91ef1c1b2495c62c6e3c67437a371f1a0e6",
+      "after_sha256": "66369773976613f9a9fa0ee40c8717ef7607ec748da35ee254f928a3ab0a4aa8",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/catalogue-delivery-v1/payloads/catalogue/SOURCE_PROVENANCE.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "34a28f27d23e795bb8d9039c25d7c91ef1c1b2495c62c6e3c67437a371f1a0e6",
+      "receiver_sha256": "66369773976613f9a9fa0ee40c8717ef7607ec748da35ee254f928a3ab0a4aa8",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "7e899db4797f6ea777a63faf28451daedec10937254dacee88d91e3ce6b720b1",
+      "after_sha256": "c42c1e9362e1531bca519362e7fb77464d90cd1b939f4df586e58bfa16e99354",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/catalogue-delivery-v1/payloads/catalogue/runtime-proof/EVIDENCE_INDEX.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "7e899db4797f6ea777a63faf28451daedec10937254dacee88d91e3ce6b720b1",
+      "receiver_sha256": "c42c1e9362e1531bca519362e7fb77464d90cd1b939f4df586e58bfa16e99354",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "cd7c23bf589cf2e55dca6a481436b81fd0e0df3cbf56680133f9e8fb31957288",
+      "after_sha256": "81a8a7fffe92399c294352ac14875a9f02e8c41bfda378bbbbf0e4b930176508",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/catalogue-delivery-v1/payloads/catalogue/runtime-proof/EVIDENCE_INDEX.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "cd7c23bf589cf2e55dca6a481436b81fd0e0df3cbf56680133f9e8fb31957288",
+      "receiver_sha256": "81a8a7fffe92399c294352ac14875a9f02e8c41bfda378bbbbf0e4b930176508",
       "recipe_mode": "0644"
     },
     {
@@ -1591,39 +1591,39 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "a9e03d0c1b71cad87b7c26c2f6e348850b96ed6349b3d02e8df515852f07fd37",
+      "after_sha256": "12d2329c15e7db972ab30af8d57df21a576c1980f1a6455113dace66c5878f47",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/catalogue-delivery-v1/payloads/catalogue/runtime-proof/SDK_ACCEPTANCE.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "a9e03d0c1b71cad87b7c26c2f6e348850b96ed6349b3d02e8df515852f07fd37",
+      "receiver_sha256": "12d2329c15e7db972ab30af8d57df21a576c1980f1a6455113dace66c5878f47",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "3a2abf0bb1cebb6e8277eb774cdfff77d7f5443a34efa7b6887fc55bd180ab99",
+      "after_sha256": "491396f116f2dfcce97a41a6f48f4f7a903dcc4106050bd6f7b92451cdd30ea8",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/initial-authoring/COVERAGE.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "3a2abf0bb1cebb6e8277eb774cdfff77d7f5443a34efa7b6887fc55bd180ab99",
+      "receiver_sha256": "491396f116f2dfcce97a41a6f48f4f7a903dcc4106050bd6f7b92451cdd30ea8",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "d0d63f1d58b284c6a4e86d907a0d593e08c162dde7e89f225c236b52d624229b",
+      "after_sha256": "4e84055b5e7884f6e3b3fbba805137d313f94a9fb78a0556d3b792f5ed2e7a35",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/initial-authoring/DONOR_EVALUATION.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "d0d63f1d58b284c6a4e86d907a0d593e08c162dde7e89f225c236b52d624229b",
+      "receiver_sha256": "4e84055b5e7884f6e3b3fbba805137d313f94a9fb78a0556d3b792f5ed2e7a35",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "2a22b896bc1c9726876ace54b11d4914649c796c662ed9f892a3e2fa1ca9ff7e",
+      "after_sha256": "1ac02fad241ca778cf37143f5612907aae67d4233a70ba7e021e7316e877b651",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/initial-authoring/DONOR_EVALUATION.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "2a22b896bc1c9726876ace54b11d4914649c796c662ed9f892a3e2fa1ca9ff7e",
+      "receiver_sha256": "1ac02fad241ca778cf37143f5612907aae67d4233a70ba7e021e7316e877b651",
       "recipe_mode": "0644"
     },
     {
@@ -1636,39 +1636,39 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "7dac256605647f74b6f398e3e6b618fdf145914c6e4bf31d23fee23f7a96bf14",
+      "after_sha256": "3a451ace2155f1e80c36bad9b6171afe4f997a257b55ca419bd9dd7a4e425619",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/initial-authoring/REJECTED_CANDIDATES.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "7dac256605647f74b6f398e3e6b618fdf145914c6e4bf31d23fee23f7a96bf14",
+      "receiver_sha256": "3a451ace2155f1e80c36bad9b6171afe4f997a257b55ca419bd9dd7a4e425619",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "e37f58fe01540ca3be89b00cafb324af38f6a0f5c6e13fb7b6d55192f9ded599",
+      "after_sha256": "9326e9873926a802889331c18c97755551ef14ff506f18dc34a0218b83c6c997",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-catalog2-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/initial-authoring/SOURCE_PROVENANCE.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "e37f58fe01540ca3be89b00cafb324af38f6a0f5c6e13fb7b6d55192f9ded599",
+      "receiver_sha256": "9326e9873926a802889331c18c97755551ef14ff506f18dc34a0218b83c6c997",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "a7591159245199cf7b24bff3f2e6d620b8fa2d469e06131a1d83d5692d6aa8ac",
+      "after_sha256": "a39ec39be6422b704a6f4e4b900b0d031e375589b8ddfeb04901d6e6a6d33e49",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/EVIDENCE_INDEX.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "a7591159245199cf7b24bff3f2e6d620b8fa2d469e06131a1d83d5692d6aa8ac",
+      "receiver_sha256": "a39ec39be6422b704a6f4e4b900b0d031e375589b8ddfeb04901d6e6a6d33e49",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "e377fd672bc240e587c8b271f3c78789ed3e2b4cd64f1bccc792652fe28657f4",
+      "after_sha256": "efbe7811d23c736a45a54e251b1246a178bbc9a237428fde7c69edae49b16e9b",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/EVIDENCE_INDEX.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "e377fd672bc240e587c8b271f3c78789ed3e2b4cd64f1bccc792652fe28657f4",
+      "receiver_sha256": "efbe7811d23c736a45a54e251b1246a178bbc9a237428fde7c69edae49b16e9b",
       "recipe_mode": "0644"
     },
     {
@@ -1681,120 +1681,120 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "4b47b37a307d7d2dd3a9358fd7d568a9743a72c8e6810e3a4d22dc1c0e6c681a",
+      "after_sha256": "416dda34dbe3cd083f2e0028f5e45c02fa4153b94481ca90a42976d90a74abb5",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/SDK_ACCEPTANCE.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "4b47b37a307d7d2dd3a9358fd7d568a9743a72c8e6810e3a4d22dc1c0e6c681a",
+      "receiver_sha256": "416dda34dbe3cd083f2e0028f5e45c02fa4153b94481ca90a42976d90a74abb5",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "720db0fb379d84279abf54ad14acf067ea17bdf8eaca1bec71e9b1198bc26c60",
+      "after_sha256": "04c778e24be594365f27d5ad59cdb04d3a9e09aa8b25527a0366fd4e1c025489",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/historical/HISTORICAL_DONATION_PREFLIGHT.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "720db0fb379d84279abf54ad14acf067ea17bdf8eaca1bec71e9b1198bc26c60",
+      "receiver_sha256": "04c778e24be594365f27d5ad59cdb04d3a9e09aa8b25527a0366fd4e1c025489",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "42a550a6146f89fe6287923b156d6d70e31f504f9c275373a01f0b4e489cb02a",
+      "after_sha256": "55cc99c4eef290a929f351d8da24ae313d730c23d2462be63312bb1ee6970e31",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/CATALOGUE.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "42a550a6146f89fe6287923b156d6d70e31f504f9c275373a01f0b4e489cb02a",
+      "receiver_sha256": "55cc99c4eef290a929f351d8da24ae313d730c23d2462be63312bb1ee6970e31",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "50e512347c0eafc2d3417f3ea3edecc06009d8cbfb9685afd5a8875972171903",
+      "after_sha256": "05a85e6f8708dd771e954dea625f36a1d24888eeb71d17e70de63d88c4d5afc0",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/FINAL_METADATA.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "50e512347c0eafc2d3417f3ea3edecc06009d8cbfb9685afd5a8875972171903",
+      "receiver_sha256": "05a85e6f8708dd771e954dea625f36a1d24888eeb71d17e70de63d88c4d5afc0",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "0a66b8228a201bb8d0d5f0414c0156e8dcfff1534aac8bda28819dd78369da97",
+      "after_sha256": "dc5c1bfe2b2f9b5ee4796cab8fd53da0374320da18e702d44a8a11b4eb8caa02",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/README.md",
       "receiver_mode": "0644",
-      "receiver_sha256": "0a66b8228a201bb8d0d5f0414c0156e8dcfff1534aac8bda28819dd78369da97",
+      "receiver_sha256": "dc5c1bfe2b2f9b5ee4796cab8fd53da0374320da18e702d44a8a11b4eb8caa02",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "42a67a6f491166bd2397c87ace14287b72834843392cb069f37912c9d7b3987d",
+      "after_sha256": "0e45a35e265d98b4978df5752ba20c197c17bb06862a0288c8e5e4b186e36b14",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/SOURCE_BINDINGS.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "42a67a6f491166bd2397c87ace14287b72834843392cb069f37912c9d7b3987d",
+      "receiver_sha256": "0e45a35e265d98b4978df5752ba20c197c17bb06862a0288c8e5e4b186e36b14",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "94613591105dbbd3ed0d804f70b834df9a0cf081b44827376fef7a1bd09ca83d",
+      "after_sha256": "5014e04e8dad8a9233cfa0864a31a4e94083c250d69c63b8b424f7be3f2083ed",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/GATES.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "94613591105dbbd3ed0d804f70b834df9a0cf081b44827376fef7a1bd09ca83d",
+      "receiver_sha256": "5014e04e8dad8a9233cfa0864a31a4e94083c250d69c63b8b424f7be3f2083ed",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "d98f01bcd3a6404450440c076fd84f44a679a51ea5d2a529df4cb8c284a066da",
+      "after_sha256": "b6d9dd3fb84931dede53134f8956f2025f2c882f7e5f606204a0578530cafd41",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/SDK_BINDINGS.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "d98f01bcd3a6404450440c076fd84f44a679a51ea5d2a529df4cb8c284a066da",
+      "receiver_sha256": "b6d9dd3fb84931dede53134f8956f2025f2c882f7e5f606204a0578530cafd41",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "06e787513825a02fed28f8f3b3a010d56ff69dad3c3031373c9a951f21fb282c",
+      "after_sha256": "aa72f2bcf647b0bd463d73b22a1b50239fbc034983ab2dc8a5cab582a6b13367",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/SDK_EXECUTION.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "06e787513825a02fed28f8f3b3a010d56ff69dad3c3031373c9a951f21fb282c",
+      "receiver_sha256": "aa72f2bcf647b0bd463d73b22a1b50239fbc034983ab2dc8a5cab582a6b13367",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "243710c8bc02df0e20d2035867b7c7ad28a6361b50076d8457a841110835a185",
+      "after_sha256": "711e02a24091858ec7037df51b94160cd842395169747d2c56510a16677fa511",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/SDK_INPUTS.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "243710c8bc02df0e20d2035867b7c7ad28a6361b50076d8457a841110835a185",
+      "receiver_sha256": "711e02a24091858ec7037df51b94160cd842395169747d2c56510a16677fa511",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "9490590f42d2e8b3fa4954bdca307bfda90376633ba93b1abaffc5ec83f16504",
+      "after_sha256": "b221f4383fb2764a2122c5369215cd1c0870571d7d46adbb823136eaa37ec3c9",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/SDK_RECEIVER_RECEIPT.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "9490590f42d2e8b3fa4954bdca307bfda90376633ba93b1abaffc5ec83f16504",
+      "receiver_sha256": "b221f4383fb2764a2122c5369215cd1c0870571d7d46adbb823136eaa37ec3c9",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "f1add8381883e63970281efc5ea3d6684310e011e9ad418ae2d11de1592754f9",
+      "after_sha256": "e148f6c1632fa67a075ccd2ade96796ddcf0eb52e67597b654b71b4fe14b153a",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/SDK_RESULTS.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "f1add8381883e63970281efc5ea3d6684310e011e9ad418ae2d11de1592754f9",
+      "receiver_sha256": "e148f6c1632fa67a075ccd2ade96796ddcf0eb52e67597b654b71b4fe14b153a",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "dc908f2b40609672873ae8a2a756400aa3e08a4c3be13969c749d77f5fdf4e0b",
+      "after_sha256": "dea48731c19fcef9d7f13ceace6317053d2ff9c48f03d8e24261aff16fe6f825",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/SDK_TEST_REPORT.xml",
       "receiver_mode": "0644",
-      "receiver_sha256": "dc908f2b40609672873ae8a2a756400aa3e08a4c3be13969c749d77f5fdf4e0b",
+      "receiver_sha256": "dea48731c19fcef9d7f13ceace6317053d2ff9c48f03d8e24261aff16fe6f825",
       "recipe_mode": "0644"
     },
     {
@@ -1879,12 +1879,12 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "d655bdf6b73a4c9d29cefd55e7b0cca095db5c4e5ad94f1a8a7928feaf9fd649",
+      "after_sha256": "27e402ac890dad2f1071247a6b6f4fc2a7290e71466dbffb540e50d4024bb830",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-selftest/actual-long-selftest.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "d655bdf6b73a4c9d29cefd55e7b0cca095db5c4e5ad94f1a8a7928feaf9fd649",
+      "receiver_sha256": "27e402ac890dad2f1071247a6b6f4fc2a7290e71466dbffb540e50d4024bb830",
       "recipe_mode": "0644"
     },
     {
@@ -1897,39 +1897,39 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "da28c2b276c7c69a7e26d9a42043feabadfdcad4514c3922a7391b4d442c8aa9",
+      "after_sha256": "73a1cea3426f4ec053cee44ca55b9f994ccfcd4e682988d946e9cf1647c295a4",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/performance/BEFORE_CODE.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "da28c2b276c7c69a7e26d9a42043feabadfdcad4514c3922a7391b4d442c8aa9",
+      "receiver_sha256": "73a1cea3426f4ec053cee44ca55b9f994ccfcd4e682988d946e9cf1647c295a4",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "89a18126630cd5b1a961a5580babcde8b1be5984cc39e96a5b797c7049ea455c",
+      "after_sha256": "7ab9c78df73bf396af3f3f76e91981949b15264038b4aad6858c31a999f7b6f1",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/performance/COMMANDS.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "89a18126630cd5b1a961a5580babcde8b1be5984cc39e96a5b797c7049ea455c",
+      "receiver_sha256": "7ab9c78df73bf396af3f3f76e91981949b15264038b4aad6858c31a999f7b6f1",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "4fe7367564dc4b4c5d58c4d4457935f56c4ca6cf87a60af70fc1f233c01c3a34",
+      "after_sha256": "a5c3b1b6bb057707865f99d2e696e3b740dbdf5556b34925307167e1135829f6",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/performance/ENVIRONMENT.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "4fe7367564dc4b4c5d58c4d4457935f56c4ca6cf87a60af70fc1f233c01c3a34",
+      "receiver_sha256": "a5c3b1b6bb057707865f99d2e696e3b740dbdf5556b34925307167e1135829f6",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "2326b81e31719f97ee355c4bbe40682cd42dd35e512c87e1caf901a4701c422a",
+      "after_sha256": "7a4fbe57b6c59bd1c786b565485e7c5dd2579a80dca180d13927eeee153600a5",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/performance/PROOF_CUSTODY.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "2326b81e31719f97ee355c4bbe40682cd42dd35e512c87e1caf901a4701c422a",
+      "receiver_sha256": "7a4fbe57b6c59bd1c786b565485e7c5dd2579a80dca180d13927eeee153600a5",
       "recipe_mode": "0644"
     },
     {
@@ -1951,30 +1951,30 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "9ba0a0ea4c7d26b902cf78f7466292d52f6596e69130d808916f73603ac31967",
+      "after_sha256": "c21635a67011a935d1227aacc0930b78d9b5f8c7c7e78573f4e9b50d7adc8418",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/performance/baseline/MAIN_CLASSES.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "9ba0a0ea4c7d26b902cf78f7466292d52f6596e69130d808916f73603ac31967",
+      "receiver_sha256": "c21635a67011a935d1227aacc0930b78d9b5f8c7c7e78573f4e9b50d7adc8418",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "39adc626d250a66c623a7e9b13953f802ec3d83158e6188d5c5f001514f118ad",
+      "after_sha256": "530f6fe155cee3f02ec57537d2489475764554efabd7e5be7328777c49c51305",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/performance/baseline/MAIN_SOURCES.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "39adc626d250a66c623a7e9b13953f802ec3d83158e6188d5c5f001514f118ad",
+      "receiver_sha256": "530f6fe155cee3f02ec57537d2489475764554efabd7e5be7328777c49c51305",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "949fd7af6c75f18a811104246e623a3d2b2efde631fc4d568578e14ed229963b",
+      "after_sha256": "1edf835d0e43b780723038dcd7a0e32865f1f2496e241fb170b2c32a1fe68bd1",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/performance/baseline/PROOF_CLASSES.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "949fd7af6c75f18a811104246e623a3d2b2efde631fc4d568578e14ed229963b",
+      "receiver_sha256": "1edf835d0e43b780723038dcd7a0e32865f1f2496e241fb170b2c32a1fe68bd1",
       "recipe_mode": "0644"
     },
     {
@@ -2005,39 +2005,39 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "d4489a5f4d63e80b64410d2045320ae6f831069c27a8d6ca2c2be0ca95d03497",
+      "after_sha256": "53174bed43707ab2328d30dab6b8fdea04fe75f5686d49ec9afea20971274e12",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/performance/canonical/ALLOCATION_PUBLISH.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "d4489a5f4d63e80b64410d2045320ae6f831069c27a8d6ca2c2be0ca95d03497",
+      "receiver_sha256": "53174bed43707ab2328d30dab6b8fdea04fe75f5686d49ec9afea20971274e12",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "be07f8453bee1d00b04dd88e273a18d8cf9fe63b23be7bb4fa91363fceaa2846",
+      "after_sha256": "9b465588b51e250f440b81ec1cf63e18f2e45beb5966790e77866f5e53683084",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/performance/canonical/BINDINGS.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "be07f8453bee1d00b04dd88e273a18d8cf9fe63b23be7bb4fa91363fceaa2846",
+      "receiver_sha256": "9b465588b51e250f440b81ec1cf63e18f2e45beb5966790e77866f5e53683084",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "2768b5cb3ec33c269cd02fee84d2e6a57c7688680c2db22e6f3ed0caaef9bbe5",
+      "after_sha256": "895a3fb576b69f18c818db72937782393aa86d5bbb2d3e2e25ab99b88fbf35fc",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/performance/canonical/EVIDENCE_SHA256.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "2768b5cb3ec33c269cd02fee84d2e6a57c7688680c2db22e6f3ed0caaef9bbe5",
+      "receiver_sha256": "895a3fb576b69f18c818db72937782393aa86d5bbb2d3e2e25ab99b88fbf35fc",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "d64209fc39e6cc2aaaff7e927e9051e7e21880fe558b42eaabb3fd4947ec7e04",
+      "after_sha256": "5e45439fc3f7f587a0764f1b73c4b263ac77ac7db73a24ab59812c2d725b2da8",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/performance/canonical/README.md",
       "receiver_mode": "0644",
-      "receiver_sha256": "d64209fc39e6cc2aaaff7e927e9051e7e21880fe558b42eaabb3fd4947ec7e04",
+      "receiver_sha256": "5e45439fc3f7f587a0764f1b73c4b263ac77ac7db73a24ab59812c2d725b2da8",
       "recipe_mode": "0644"
     },
     {
@@ -2077,30 +2077,30 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "8b7f0821f4ec5ef7d10772bb916e749dd816bca699dd4a300d2dedb0db2f9c7f",
+      "after_sha256": "dd35b907f75fbfafdf318ae81f62ebd183273100737c399b21e41df8efcecdef",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/performance/receiver/MAIN_CLASSES.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "8b7f0821f4ec5ef7d10772bb916e749dd816bca699dd4a300d2dedb0db2f9c7f",
+      "receiver_sha256": "dd35b907f75fbfafdf318ae81f62ebd183273100737c399b21e41df8efcecdef",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "d38a5befd51bfd6e429b277465abeb73c151aad8c83764e514f32e9edf948a40",
+      "after_sha256": "baeb4e54c2fed60ab3d8a02406f2d1b8ac830b2f762075ad960231ff2e922a3e",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/performance/receiver/MAIN_SOURCES.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "d38a5befd51bfd6e429b277465abeb73c151aad8c83764e514f32e9edf948a40",
+      "receiver_sha256": "baeb4e54c2fed60ab3d8a02406f2d1b8ac830b2f762075ad960231ff2e922a3e",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "949fd7af6c75f18a811104246e623a3d2b2efde631fc4d568578e14ed229963b",
+      "after_sha256": "1edf835d0e43b780723038dcd7a0e32865f1f2496e241fb170b2c32a1fe68bd1",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/performance/receiver/PROOF_CLASSES.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "949fd7af6c75f18a811104246e623a3d2b2efde631fc4d568578e14ed229963b",
+      "receiver_sha256": "1edf835d0e43b780723038dcd7a0e32865f1f2496e241fb170b2c32a1fe68bd1",
       "recipe_mode": "0644"
     },
     {
@@ -2230,48 +2230,48 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "9cdceb9de33d6e283b36e7b1c3b29f584cd54da40e5e57eadc9615bec1093fc3",
+      "after_sha256": "b8476f48581e8a2fe396919aa0eaf1c8a42fc43ac315f8720e47b63cfe592945",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/proof2/QUALIFICATION.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "9cdceb9de33d6e283b36e7b1c3b29f584cd54da40e5e57eadc9615bec1093fc3",
+      "receiver_sha256": "b8476f48581e8a2fe396919aa0eaf1c8a42fc43ac315f8720e47b63cfe592945",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "d5fb608e6864686395a3f62641db4696954293098c39bcdcdcf59f87cc81e6f2",
+      "after_sha256": "835f5142b78e41e2bdadf657c1bfbe79fc47d82c5ac7ada6eda7cf7d20b97df1",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/proof2/SDK_EXECUTION.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "d5fb608e6864686395a3f62641db4696954293098c39bcdcdcf59f87cc81e6f2",
+      "receiver_sha256": "835f5142b78e41e2bdadf657c1bfbe79fc47d82c5ac7ada6eda7cf7d20b97df1",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "0dd6358b3cd57b9c3766b333f32bc296939d45b3eb8f60ed273e22150ad164a9",
+      "after_sha256": "1c5cfe188d216c0c2ea811f5976999eb24d864c94ca1c736c909ab5555122301",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/proof2/SEAL.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "0dd6358b3cd57b9c3766b333f32bc296939d45b3eb8f60ed273e22150ad164a9",
+      "receiver_sha256": "1c5cfe188d216c0c2ea811f5976999eb24d864c94ca1c736c909ab5555122301",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "de86a7c4a90fcebb0ad340fd12652e8746fd55f538c25b10f1b6f413d62c37fc",
+      "after_sha256": "26f021ea3413e96a32299746bf07e61414182c5efe7633ba715f7f37be47f954",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/proof2/helpers/EXECUTION.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "de86a7c4a90fcebb0ad340fd12652e8746fd55f538c25b10f1b6f413d62c37fc",
+      "receiver_sha256": "26f021ea3413e96a32299746bf07e61414182c5efe7633ba715f7f37be47f954",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "88fbcbac792f56cab2f58b9b4ffbedc8a95b929ceda57234c843f41583fd54ac",
+      "after_sha256": "780b5d3baced6f7ee9fb6d15721d0bdaf42fc47c19d2230e28c782841aae2e5c",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/proof2/helpers/HELPER_RECEIPT.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "88fbcbac792f56cab2f58b9b4ffbedc8a95b929ceda57234c843f41583fd54ac",
+      "receiver_sha256": "780b5d3baced6f7ee9fb6d15721d0bdaf42fc47c19d2230e28c782841aae2e5c",
       "recipe_mode": "0644"
     },
     {
@@ -2293,12 +2293,12 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "f7a8108ddeb3e1dda96cf61319cfbfc8ead1aba96653bf3863a2a200bc794b42",
+      "after_sha256": "08565bfcb747708abccd76e27f38b8e0d2fbab9ec32c9d73f5c176f11d096bdb",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/proof2/helpers/verify_runner_helpers.py",
       "receiver_mode": "0644",
-      "receiver_sha256": "f7a8108ddeb3e1dda96cf61319cfbfc8ead1aba96653bf3863a2a200bc794b42",
+      "receiver_sha256": "08565bfcb747708abccd76e27f38b8e0d2fbab9ec32c9d73f5c176f11d096bdb",
       "recipe_mode": "0644"
     },
     {
@@ -3040,12 +3040,12 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "f96c743cf930a1303b5881ed443190fd002d2638922ca273da6408a9b80f4bbe",
+      "after_sha256": "5aea0bd9e58fbdf992c0f531c3f99b79283e1486b587740a3eb96c958577ee85",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/API_COMPARISON.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "f96c743cf930a1303b5881ed443190fd002d2638922ca273da6408a9b80f4bbe",
+      "receiver_sha256": "5aea0bd9e58fbdf992c0f531c3f99b79283e1486b587740a3eb96c958577ee85",
       "recipe_mode": "0644"
     },
     {
@@ -3058,39 +3058,39 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "23648186cf818bdd389f3b9b950b48dfc8f4240fde5825f413eb83edc5350fc9",
+      "after_sha256": "41ec9f7b0fd2a4e2a7732b77b810fd5ceec2b9fff1fb0bba0021c0ac77a29d09",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/JNI_ABI.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "23648186cf818bdd389f3b9b950b48dfc8f4240fde5825f413eb83edc5350fc9",
+      "receiver_sha256": "41ec9f7b0fd2a4e2a7732b77b810fd5ceec2b9fff1fb0bba0021c0ac77a29d09",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "38ebfc01f45f617bcda0e41a7a866650a3fd0b4f11636e9b734c0b2d89e89b20",
+      "after_sha256": "6a651189faaead92f38d20fc241eac0432224d28c9f3b9c338bf80755c98d7a9",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/MAVEN_TESTS.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "38ebfc01f45f617bcda0e41a7a866650a3fd0b4f11636e9b734c0b2d89e89b20",
+      "receiver_sha256": "6a651189faaead92f38d20fc241eac0432224d28c9f3b9c338bf80755c98d7a9",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "14920e1e998482a609ff7b0f52ccf0df127328cf457eec678a3e9ae00119c568",
+      "after_sha256": "9ab303bff3f3b5fe5461a1a95a77db0dc2b01849a59f132a00c7daecd098dc23",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/PREIMAGE_INPUTS.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "14920e1e998482a609ff7b0f52ccf0df127328cf457eec678a3e9ae00119c568",
+      "receiver_sha256": "9ab303bff3f3b5fe5461a1a95a77db0dc2b01849a59f132a00c7daecd098dc23",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "bf9bbd87748c76d0b2da931bc1246114eea49118e5b2ecc3cd5d2bf19aedc568",
+      "after_sha256": "82e76d78b19dd5ab9e6987e6593c14be5dd3e714051ce1444a82b21fe154fd11",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/RECEIPT.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "bf9bbd87748c76d0b2da931bc1246114eea49118e5b2ecc3cd5d2bf19aedc568",
+      "receiver_sha256": "82e76d78b19dd5ab9e6987e6593c14be5dd3e714051ce1444a82b21fe154fd11",
       "recipe_mode": "0644"
     },
     {
@@ -3103,12 +3103,12 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "90ec8c484c8ca68f1381133a0979ef88f4975dd4c46ced480db7a87d21b0a98e",
+      "after_sha256": "e6973ba853554d97f35823512c189bd190181db1d2d10309d5b0b1a09b4fb4ad",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/SOURCE_MANIFEST.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "90ec8c484c8ca68f1381133a0979ef88f4975dd4c46ced480db7a87d21b0a98e",
+      "receiver_sha256": "e6973ba853554d97f35823512c189bd190181db1d2d10309d5b0b1a09b4fb4ad",
       "recipe_mode": "0644"
     },
     {
@@ -3121,93 +3121,93 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "37ef75efe8340615f7564d599e89e8a94d320070edcad24b985a1bda15d6743d",
+      "after_sha256": "d2f7d41096e7da41d9022babe1a40d65c1030aaa483aece3d4548828888a0998",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-javac.args.txt",
       "receiver_mode": "0644",
-      "receiver_sha256": "37ef75efe8340615f7564d599e89e8a94d320070edcad24b985a1bda15d6743d",
+      "receiver_sha256": "d2f7d41096e7da41d9022babe1a40d65c1030aaa483aece3d4548828888a0998",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "1f67a3bca5682e3d4b392bb04d6f27479a16fdaccb935463a9dbf026f13faf8c",
+      "after_sha256": "60284925265d8ec7300dcb1a97436db82ca29b18e902f8fb5835f0a9b933537e",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
-      "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskCompactor.h.txt",
+      "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/jdk_m3_collections_M3IndexMaskCompactor.h.txt",
       "receiver_mode": "0644",
-      "receiver_sha256": "1f67a3bca5682e3d4b392bb04d6f27479a16fdaccb935463a9dbf026f13faf8c",
+      "receiver_sha256": "60284925265d8ec7300dcb1a97436db82ca29b18e902f8fb5835f0a9b933537e",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "26d6f1302b888bbebde68d4d911f7b74d91c1fe5f90871928af0220829dc9866",
+      "after_sha256": "8a98ee9e6da71b86ffe84223fc0c09ab2e206f1f4ae1e49320e234206d172c11",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
-      "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskWindow.h.txt",
+      "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/jdk_m3_collections_M3IndexMaskWindow.h.txt",
       "receiver_mode": "0644",
-      "receiver_sha256": "26d6f1302b888bbebde68d4d911f7b74d91c1fe5f90871928af0220829dc9866",
+      "receiver_sha256": "8a98ee9e6da71b86ffe84223fc0c09ab2e206f1f4ae1e49320e234206d172c11",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "d73bb0e2e17c41ce6cd653732a8c7bc0dce71f2464c3dd536bbf544655936e95",
+      "after_sha256": "4b36eef5e6a9cfa2b6dd1d896e92941d1a42e6c7054c396e009bf7e9ad3cb6ed",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
-      "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexPathMasks.h.txt",
+      "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/jdk_m3_collections_M3IndexPathMasks.h.txt",
       "receiver_mode": "0644",
-      "receiver_sha256": "d73bb0e2e17c41ce6cd653732a8c7bc0dce71f2464c3dd536bbf544655936e95",
+      "receiver_sha256": "4b36eef5e6a9cfa2b6dd1d896e92941d1a42e6c7054c396e009bf7e9ad3cb6ed",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "5808a55155311299dc157ab0aacb8ea659422a42a4146b081f6806a07e15b221",
+      "after_sha256": "cc55a8da077085c6713515104eaaf5111a41e08ae29228d32c91f33e7a4a342a",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-public-api.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "5808a55155311299dc157ab0aacb8ea659422a42a4146b081f6806a07e15b221",
+      "receiver_sha256": "cc55a8da077085c6713515104eaaf5111a41e08ae29228d32c91f33e7a4a342a",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "29dc7e541be91530e49f7efcb2b49cf0b9577a10c1d50846a6baa45108930852",
+      "after_sha256": "2f88bf6644213422909d23e3d760971239e962e112b2a70561843b3a8cb3b293",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-javac.args.txt",
       "receiver_mode": "0644",
-      "receiver_sha256": "29dc7e541be91530e49f7efcb2b49cf0b9577a10c1d50846a6baa45108930852",
+      "receiver_sha256": "2f88bf6644213422909d23e3d760971239e962e112b2a70561843b3a8cb3b293",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "1f67a3bca5682e3d4b392bb04d6f27479a16fdaccb935463a9dbf026f13faf8c",
+      "after_sha256": "60284925265d8ec7300dcb1a97436db82ca29b18e902f8fb5835f0a9b933537e",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
-      "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskCompactor.h.txt",
+      "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/jdk_m3_collections_M3IndexMaskCompactor.h.txt",
       "receiver_mode": "0644",
-      "receiver_sha256": "1f67a3bca5682e3d4b392bb04d6f27479a16fdaccb935463a9dbf026f13faf8c",
+      "receiver_sha256": "60284925265d8ec7300dcb1a97436db82ca29b18e902f8fb5835f0a9b933537e",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "26d6f1302b888bbebde68d4d911f7b74d91c1fe5f90871928af0220829dc9866",
+      "after_sha256": "8a98ee9e6da71b86ffe84223fc0c09ab2e206f1f4ae1e49320e234206d172c11",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
-      "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskWindow.h.txt",
+      "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/jdk_m3_collections_M3IndexMaskWindow.h.txt",
       "receiver_mode": "0644",
-      "receiver_sha256": "26d6f1302b888bbebde68d4d911f7b74d91c1fe5f90871928af0220829dc9866",
+      "receiver_sha256": "8a98ee9e6da71b86ffe84223fc0c09ab2e206f1f4ae1e49320e234206d172c11",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "5781e35d4a9a16a037e1e80a8e45f7ee53283822691ed863a7476e5defa9fe50",
+      "after_sha256": "477a947e172dfec5a858a6ac67a34a83673d8af8c4453c506f343d338475a440",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
-      "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexPathMasks.h.txt",
+      "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/jdk_m3_collections_M3IndexPathMasks.h.txt",
       "receiver_mode": "0644",
-      "receiver_sha256": "5781e35d4a9a16a037e1e80a8e45f7ee53283822691ed863a7476e5defa9fe50",
+      "receiver_sha256": "477a947e172dfec5a858a6ac67a34a83673d8af8c4453c506f343d338475a440",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "f218c17cd5e17e66a351e24e5624cd0ae2b616d2dc5c556d0756b6f193d21859",
+      "after_sha256": "47fa11b69ff8637c5b5d9880e6af3a2f65c6525001fe3a8976fb53b4cd913103",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-public-api.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "f218c17cd5e17e66a351e24e5624cd0ae2b616d2dc5c556d0756b6f193d21859",
+      "receiver_sha256": "47fa11b69ff8637c5b5d9880e6af3a2f65c6525001fe3a8976fb53b4cd913103",
       "recipe_mode": "0644"
     },
     {
@@ -3220,12 +3220,12 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "94d49b12e2ba8460832f7c62fffc4e1d228c4695a35217a619723b8888b1e9d5",
+      "after_sha256": "a87f7b734e9a38d2dec7146d6265b4ec0e8d72c695f35aba24750da45dc84d17",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/sdk/long-bridge/DATASET.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "94d49b12e2ba8460832f7c62fffc4e1d228c4695a35217a619723b8888b1e9d5",
+      "receiver_sha256": "a87f7b734e9a38d2dec7146d6265b4ec0e8d72c695f35aba24750da45dc84d17",
       "recipe_mode": "0644"
     },
     {
@@ -3238,12 +3238,12 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "243710c8bc02df0e20d2035867b7c7ad28a6361b50076d8457a841110835a185",
+      "after_sha256": "711e02a24091858ec7037df51b94160cd842395169747d2c56510a16677fa511",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/sdk/long-bridge/SDK_INPUTS.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "243710c8bc02df0e20d2035867b7c7ad28a6361b50076d8457a841110835a185",
+      "receiver_sha256": "711e02a24091858ec7037df51b94160cd842395169747d2c56510a16677fa511",
       "recipe_mode": "0644"
     },
     {
@@ -3256,30 +3256,30 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "9490590f42d2e8b3fa4954bdca307bfda90376633ba93b1abaffc5ec83f16504",
+      "after_sha256": "b221f4383fb2764a2122c5369215cd1c0870571d7d46adbb823136eaa37ec3c9",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/sdk/long-bridge/SDK_RECEIVER_RECEIPT.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "9490590f42d2e8b3fa4954bdca307bfda90376633ba93b1abaffc5ec83f16504",
+      "receiver_sha256": "b221f4383fb2764a2122c5369215cd1c0870571d7d46adbb823136eaa37ec3c9",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "f1add8381883e63970281efc5ea3d6684310e011e9ad418ae2d11de1592754f9",
+      "after_sha256": "e148f6c1632fa67a075ccd2ade96796ddcf0eb52e67597b654b71b4fe14b153a",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/sdk/long-bridge/SDK_RESULTS.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "f1add8381883e63970281efc5ea3d6684310e011e9ad418ae2d11de1592754f9",
+      "receiver_sha256": "e148f6c1632fa67a075ccd2ade96796ddcf0eb52e67597b654b71b4fe14b153a",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "dc908f2b40609672873ae8a2a756400aa3e08a4c3be13969c749d77f5fdf4e0b",
+      "after_sha256": "dea48731c19fcef9d7f13ceace6317053d2ff9c48f03d8e24261aff16fe6f825",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/sdk/long-bridge/SDK_TEST_REPORT.xml",
       "receiver_mode": "0644",
-      "receiver_sha256": "dc908f2b40609672873ae8a2a756400aa3e08a4c3be13969c749d77f5fdf4e0b",
+      "receiver_sha256": "dea48731c19fcef9d7f13ceace6317053d2ff9c48f03d8e24261aff16fe6f825",
       "recipe_mode": "0644"
     },
     {
@@ -3292,12 +3292,12 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "d31c835762d935eec94d9e3b1fa7a923a7ed460d817b0d8802af0fbfc4bd09eb",
+      "after_sha256": "18272174e7659b6b069a257c648bf5ec6a218a29cb6529ca9f971f1eab26ccb6",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/sdk/proof2/DATASET.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "d31c835762d935eec94d9e3b1fa7a923a7ed460d817b0d8802af0fbfc4bd09eb",
+      "receiver_sha256": "18272174e7659b6b069a257c648bf5ec6a218a29cb6529ca9f971f1eab26ccb6",
       "recipe_mode": "0644"
     },
     {
@@ -3310,12 +3310,12 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "fbf3a62b84e9e6947d2fe79f0c945857d2a5afae91e847e4e1b2eab624f433c8",
+      "after_sha256": "4a1ec1638879f84e415607f7a8784da2b7334138183225d9d21e516ba3568e21",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/sdk/proof2/SDK_INPUTS.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "fbf3a62b84e9e6947d2fe79f0c945857d2a5afae91e847e4e1b2eab624f433c8",
+      "receiver_sha256": "4a1ec1638879f84e415607f7a8784da2b7334138183225d9d21e516ba3568e21",
       "recipe_mode": "0644"
     },
     {
@@ -3328,30 +3328,30 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "4de6dfea72a69f6316010d14ea8baf6bbb4cf0c2e56f99cc9ab15b463273165b",
+      "after_sha256": "2d5e97dc793c3f815fe60dbcae736176d3643611c9d09be51ddabd54553beed5",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/sdk/proof2/SDK_RECEIVER_RECEIPT.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "4de6dfea72a69f6316010d14ea8baf6bbb4cf0c2e56f99cc9ab15b463273165b",
+      "receiver_sha256": "2d5e97dc793c3f815fe60dbcae736176d3643611c9d09be51ddabd54553beed5",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "f36aea78c259571800d34b80ba80efe0262bbbc7ae656b8093b9656d7d3c3d3b",
+      "after_sha256": "24d691e1b32f317616777130f09dee5c2304bd5eff28a7a85ba1e885e28d6186",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/sdk/proof2/SDK_RESULTS.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "f36aea78c259571800d34b80ba80efe0262bbbc7ae656b8093b9656d7d3c3d3b",
+      "receiver_sha256": "24d691e1b32f317616777130f09dee5c2304bd5eff28a7a85ba1e885e28d6186",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "e40def8ea2bd93b0f9c11e94933e148b0bf7cb43e4a7eb0c9e1f6b460d829994",
+      "after_sha256": "56dc92bc668478f4137ee7ee0eecfe54239e018101b04f3efbc9a0eb7fd59849",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/sdk/proof2/SDK_TEST_REPORT.xml",
       "receiver_mode": "0644",
-      "receiver_sha256": "e40def8ea2bd93b0f9c11e94933e148b0bf7cb43e4a7eb0c9e1f6b460d829994",
+      "receiver_sha256": "56dc92bc668478f4137ee7ee0eecfe54239e018101b04f3efbc9a0eb7fd59849",
       "recipe_mode": "0644"
     },
     {
@@ -3364,12 +3364,12 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "b5038403f5e9fe60b244327e149846af1af1cc002a30cba5f44be72356e53be7",
+      "after_sha256": "bca6f479710c62c12d060a7ab5d3a216552eaaaa3f97b4ea543da581f5fd4bbf",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/sdk/r2/DATASET.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "b5038403f5e9fe60b244327e149846af1af1cc002a30cba5f44be72356e53be7",
+      "receiver_sha256": "bca6f479710c62c12d060a7ab5d3a216552eaaaa3f97b4ea543da581f5fd4bbf",
       "recipe_mode": "0644"
     },
     {
@@ -3382,12 +3382,12 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "e256cbb767211ce5d41417dd3fa9a90682dbec07afcd4b5607c4bb7538bdc13e",
+      "after_sha256": "eb20b2b1b532ca455f2010e6c5d1f6ed52d961e4893211957a7c8904a757976d",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/sdk/r2/SDK_INPUTS.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "e256cbb767211ce5d41417dd3fa9a90682dbec07afcd4b5607c4bb7538bdc13e",
+      "receiver_sha256": "eb20b2b1b532ca455f2010e6c5d1f6ed52d961e4893211957a7c8904a757976d",
       "recipe_mode": "0644"
     },
     {
@@ -3400,318 +3400,318 @@
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "b5dee55017db08c28646d6091a836b9531e2687893155043f75cc8bd6cdd1017",
+      "after_sha256": "1de42e6d8c2f1e6b61380125b6f26dfd3a2b41876e073e5ee3dd654baa314827",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/sdk/r2/SDK_RECEIVER_RECEIPT.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "b5dee55017db08c28646d6091a836b9531e2687893155043f75cc8bd6cdd1017",
+      "receiver_sha256": "1de42e6d8c2f1e6b61380125b6f26dfd3a2b41876e073e5ee3dd654baa314827",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "9d3dfa387f6f2d3240223e26cfd1108aa78dcca9f4f3abc17cd446fb4f751ad8",
+      "after_sha256": "209532c6926d81097deb6ba09a1aa0641afee7aa999ca06f470f41a7079b37fa",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/sdk/r2/SDK_RESULTS.tsv",
       "receiver_mode": "0644",
-      "receiver_sha256": "9d3dfa387f6f2d3240223e26cfd1108aa78dcca9f4f3abc17cd446fb4f751ad8",
+      "receiver_sha256": "209532c6926d81097deb6ba09a1aa0641afee7aa999ca06f470f41a7079b37fa",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "7f09f0e3c28a542ea55cbcfa9f3105ea5554966aca4ee34c81c4b1457a48a8ad",
+      "after_sha256": "ba942043e8242964ef1c3200128c1aab9288708f0686dd7b8579a901fed94797",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrap-evidence-20261018",
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/sdk/r2/SDK_TEST_REPORT.xml",
       "receiver_mode": "0644",
-      "receiver_sha256": "7f09f0e3c28a542ea55cbcfa9f3105ea5554966aca4ee34c81c4b1457a48a8ad",
+      "receiver_sha256": "ba942043e8242964ef1c3200128c1aab9288708f0686dd7b8579a901fed94797",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "3302f213fd0b47ca43331da86236c7a8df3e8855ffd4712c123e986693e5ba27",
-      "before_sha256": "d70bcdd969aa688ed0a498ce3503684fee2b0ecc9eb11348160e7befa1a7cfe0",
+      "after_sha256": "e75e96b892bc587b5c34ceb071fce64c044202edf2bf25a560591d11f4086e30",
+      "before_sha256": "2c7720d134f5dab8c5bf13da28c719ef1cd462e5fd5f8bdc673c4bedaa6a64e0",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "3302f213fd0b47ca43331da86236c7a8df3e8855ffd4712c123e986693e5ba27",
+      "receiver_sha256": "e75e96b892bc587b5c34ceb071fce64c044202edf2bf25a560591d11f4086e30",
       "recipe_mode": "0644"
     },
     {
       "after_sha256": "e61f94f0262878726b5c7255ebc3aa655a7808c4d1544a8bd0ee3fd1bc49f1a7",
-      "before_sha256": "1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369",
+      "before_sha256": "e8a722cec3cdad01ce127936936f7c9928f094658e075aa9d1d89077e6eb7199",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
       "receiver_mode": "0644",
       "receiver_sha256": "e61f94f0262878726b5c7255ebc3aa655a7808c4d1544a8bd0ee3fd1bc49f1a7",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "e91152a0bb34178995835266ff7c52ae22d87ec6324d171415aed28e293794d1",
-      "before_sha256": "4d1c782345de46c31e24b4822f58c431903c7b951b6a15641c88e055271f971e",
+      "after_sha256": "db88aef334eadb9a40f34a6ca4077ff96d6af29f75d30c090b55bc76b45e567f",
+      "before_sha256": "d0515af261429f4f2c959c87a4c0588093612746c4f95e4927570880778ca8ef",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "e91152a0bb34178995835266ff7c52ae22d87ec6324d171415aed28e293794d1",
+      "receiver_sha256": "db88aef334eadb9a40f34a6ca4077ff96d6af29f75d30c090b55bc76b45e567f",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "77a99d047931c70c7a45a067c081748bae499b7f3002bfc08f7b2f47a01adf84",
-      "before_sha256": "c7692b6d8d6f6ea6b586580b351747165e4a9a7d9bb7b37979dd737d4ea258e9",
+      "after_sha256": "1e170fb2bea5b058218a64bcc2a8041e93c6b0ebb51858593e65ae87b018d7f8",
+      "before_sha256": "85d7512d50d223571fa91fe88df821b30740d47f1c7e4abb3ce9ff3d0d16d11e",
       "dataset": "m3jdk21-long-bridge-20261018",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasks.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexPathMasks.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "77a99d047931c70c7a45a067c081748bae499b7f3002bfc08f7b2f47a01adf84",
+      "receiver_sha256": "1e170fb2bea5b058218a64bcc2a8041e93c6b0ebb51858593e65ae87b018d7f8",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "17137b236421ad3ad4f079acc0ba98a10ad4d419b717abd1f9192f42b18260a8",
-      "before_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+      "after_sha256": "91f898f92123c431afb72887cdb8de8a1a64d2c9ce8bb247eed960a200dfe72e",
+      "before_sha256": "6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "17137b236421ad3ad4f079acc0ba98a10ad4d419b717abd1f9192f42b18260a8",
+      "receiver_sha256": "91f898f92123c431afb72887cdb8de8a1a64d2c9ce8bb247eed960a200dfe72e",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "51188863415920856a0f5e69ea8a54735e8502d7c0bcf8ca42fcf3a84bf1c6ec",
-      "before_sha256": "66442108ee67cb8395f9e4cb7d26990583a33d2e2775347da15acb5cb3d5b62d",
+      "after_sha256": "499aea6a9750a121e60ddcf5ae62643e1e97c6e145b37b5fda28d4c2be2ec7ed",
+      "before_sha256": "c8b48f217ddb27905496de23bebc06ab7bb2daee8583bb6ff092b6520c31d9dc",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "51188863415920856a0f5e69ea8a54735e8502d7c0bcf8ca42fcf3a84bf1c6ec",
+      "receiver_sha256": "499aea6a9750a121e60ddcf5ae62643e1e97c6e145b37b5fda28d4c2be2ec7ed",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "1480656507ad1c0cb425904e9e73b94c207a64f8eac961461d383265fcfce121",
-      "before_sha256": "3f5a760e633762469fad5a9dcd531cb39c33d11752d79ad241e506800b26e7cb",
+      "after_sha256": "94eeb43362caf9c5d32a9cdded50c2bcfe663b9717262eaa5e06da17c7333dae",
+      "before_sha256": "072e6c3d30b1fd54d8ce883ed18fde75aa6c1809a1dc0c9a2de7b7e5f571f824",
       "dataset": "m3jdk21-wrappers-r2-20261018",
       "path": "m3/collections/src/main/native/collections/m3_index_path_masks.c",
       "receiver_mode": "0644",
-      "receiver_sha256": "1480656507ad1c0cb425904e9e73b94c207a64f8eac961461d383265fcfce121",
+      "receiver_sha256": "94eeb43362caf9c5d32a9cdded50c2bcfe663b9717262eaa5e06da17c7333dae",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "aa60ff7da36d3e70cd51ee5eed5350ee23d7c6ddac54f63e3a166a817e14b3d0",
+      "after_sha256": "54be8fcc293c610c24fac7778974d35a9dabf5d3b4bdda969ec71a3c84b9f975",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionSelfTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3DeepReadOnlyCollectionSelfTest.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "aa60ff7da36d3e70cd51ee5eed5350ee23d7c6ddac54f63e3a166a817e14b3d0",
+      "receiver_sha256": "54be8fcc293c610c24fac7778974d35a9dabf5d3b4bdda969ec71a3c84b9f975",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "46fb2cdf27829984581db5a6cdd6d2fb243cbf183742afafa5b2003d0ff5dce6",
+      "after_sha256": "521ac431a5f6f57816c95b5885bee88863d3eb01b603cceaff35954f22b1819b",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3DeepReadOnlyCollectionTest.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "46fb2cdf27829984581db5a6cdd6d2fb243cbf183742afafa5b2003d0ff5dce6",
+      "receiver_sha256": "521ac431a5f6f57816c95b5885bee88863d3eb01b603cceaff35954f22b1819b",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "374742c695f4ebdc742519dd93c79496729b3ce94ffb2c761cc2c8a9781e26ee",
+      "after_sha256": "8e291da38b63c4e50ab7babd58ddd53df5f288116e679b16eca16c38551d1b74",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationBoundarySelfTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredNavigationBoundarySelfTest.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "374742c695f4ebdc742519dd93c79496729b3ce94ffb2c761cc2c8a9781e26ee",
+      "receiver_sha256": "8e291da38b63c4e50ab7babd58ddd53df5f288116e679b16eca16c38551d1b74",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "84a9a87ab9101da250f504f8f0ae9d99baa6106dcb090dd3c3a90f776c4b82f9",
+      "after_sha256": "cd8b30c3c2d8b5f850f348d9772a7d0f07e14d3eb2b344b5797cabcd39d88093",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationBoundaryTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredNavigationBoundaryTest.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "84a9a87ab9101da250f504f8f0ae9d99baa6106dcb090dd3c3a90f776c4b82f9",
+      "receiver_sha256": "cd8b30c3c2d8b5f850f348d9772a7d0f07e14d3eb2b344b5797cabcd39d88093",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "27ee8c3942e18a6fada7e4fad1cd66f163aa6eccb01d8f99cfe6c3e3bd5ecf3a",
+      "after_sha256": "71ba7d585ea952cbf699f1fc8a2168721f36998654c723644dbe8f057073d5b6",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathImpossibleStageSelfTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexPathImpossibleStageSelfTest.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "27ee8c3942e18a6fada7e4fad1cd66f163aa6eccb01d8f99cfe6c3e3bd5ecf3a",
+      "receiver_sha256": "71ba7d585ea952cbf699f1fc8a2168721f36998654c723644dbe8f057073d5b6",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "61f686be147e9b940dee3c3b385f6fea0c20deb3c81c03972aae3d10dea572b1",
+      "after_sha256": "5dec626efcc5623057b729dc16a02c3efdd9fa46274ae9d064289c373dc10e71",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathImpossibleStageTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexPathImpossibleStageTest.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "61f686be147e9b940dee3c3b385f6fea0c20deb3c81c03972aae3d10dea572b1",
+      "receiver_sha256": "5dec626efcc5623057b729dc16a02c3efdd9fa46274ae9d064289c373dc10e71",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "0b4cc8de0c702db168f4ff0ea236950000c3453aad8d49da45d010964c4417e7",
+      "after_sha256": "c0fb7c024a4fabc10da7bdd341b889a2a2fa370291e06550eb1f07f9bb46ced0",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathMaskAliasSelfTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMaskAliasSelfTest.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "0b4cc8de0c702db168f4ff0ea236950000c3453aad8d49da45d010964c4417e7",
+      "receiver_sha256": "c0fb7c024a4fabc10da7bdd341b889a2a2fa370291e06550eb1f07f9bb46ced0",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "36bc8afd1da83e2b4b60d928016e42c20eba0fa376dc9a2a59eb1acc9e0f5dec",
+      "after_sha256": "11347a14d915a08b9f32710ad226aceb081fb8d811338021883230bd0371a922",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksLongSelfTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksLongSelfTest.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "36bc8afd1da83e2b4b60d928016e42c20eba0fa376dc9a2a59eb1acc9e0f5dec",
+      "receiver_sha256": "11347a14d915a08b9f32710ad226aceb081fb8d811338021883230bd0371a922",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "53e4f8b8efd81cbaaf7b6cd49efe67ac627607910e5bfced41a2a71d24f7f63b",
+      "after_sha256": "7472e550658d6be53aeedd40f65c8809361a97404ba18825b64c9beddfef71b7",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksLongTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexPathMasksLongTest.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "53e4f8b8efd81cbaaf7b6cd49efe67ac627607910e5bfced41a2a71d24f7f63b",
+      "receiver_sha256": "7472e550658d6be53aeedd40f65c8809361a97404ba18825b64c9beddfef71b7",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "3e53be1799c78795cb5bc45ba0b3857116464566eda05b65a7a6d0649e97d303",
+      "after_sha256": "77abbd7936fcdcc034539a689e3e807dd16b4832b733d65ff7274ff0438c9e81",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathZeroStagesSelfTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexPathZeroStagesSelfTest.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "3e53be1799c78795cb5bc45ba0b3857116464566eda05b65a7a6d0649e97d303",
+      "receiver_sha256": "77abbd7936fcdcc034539a689e3e807dd16b4832b733d65ff7274ff0438c9e81",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "9bcfb70ef5a5553031f44bca89ac372799ee3330c7d9adf134117f165189ea6b",
+      "after_sha256": "6d3ea57a319af388ff53d050c62d35417cdbe0265f427c65aa50029ced196389",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathZeroStagesTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexPathZeroStagesTest.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "9bcfb70ef5a5553031f44bca89ac372799ee3330c7d9adf134117f165189ea6b",
+      "receiver_sha256": "6d3ea57a319af388ff53d050c62d35417cdbe0265f427c65aa50029ced196389",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "250cfb09472d8b71b1b936987b7944c37fc6252c3a2789a615220f55f7c0c243",
+      "after_sha256": "b52c1c1a2a189e596623a55ddf980b5bb0826c6dd359d3ce2c136e85f4db5e40",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathZeroWindowSelfTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexPathZeroWindowSelfTest.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "250cfb09472d8b71b1b936987b7944c37fc6252c3a2789a615220f55f7c0c243",
+      "receiver_sha256": "b52c1c1a2a189e596623a55ddf980b5bb0826c6dd359d3ce2c136e85f4db5e40",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "b2f06d23a69e2928ca8465010a99089f38852f6ecda3a8bd954178da7d856db8",
+      "after_sha256": "e89fb71518dba9cf91e9004def83d8e9bf8e729265b801ddb20259a50b8ba42c",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathZeroWindowTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3IndexPathZeroWindowTest.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "b2f06d23a69e2928ca8465010a99089f38852f6ecda3a8bd954178da7d856db8",
+      "receiver_sha256": "e89fb71518dba9cf91e9004def83d8e9bf8e729265b801ddb20259a50b8ba42c",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "239c6662ba7f91c786df60a9faa19633844b20408c972f88f381a7a241a49847",
+      "after_sha256": "654df81f1aa87224b7fba2947bc054066d468e96003f6f7d1fd673fd1f7bb63b",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3LongIndexProjectionPathMasksTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3LongIndexProjectionPathMasksTest.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "239c6662ba7f91c786df60a9faa19633844b20408c972f88f381a7a241a49847",
+      "receiver_sha256": "654df81f1aa87224b7fba2947bc054066d468e96003f6f7d1fd673fd1f7bb63b",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "f37ed8a30cba5e2622abe335a38d834b8c8adb582d088f32b57c616ddf46445c",
+      "after_sha256": "08effdefaf3c1ee9071dde2ca39c05f3d82562b6a5e8c1e16ef3446b39c1d79d",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3NavigationFailureContract.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3NavigationFailureContract.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "f37ed8a30cba5e2622abe335a38d834b8c8adb582d088f32b57c616ddf46445c",
+      "receiver_sha256": "08effdefaf3c1ee9071dde2ca39c05f3d82562b6a5e8c1e16ef3446b39c1d79d",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "5481954464d7f93635112014243a0563677d1528455949f0cc89171f82857fa6",
+      "after_sha256": "dff16fb34ee2c5f068332ef230187c6bafa929eefaa4b01296ed813a9abc6477",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3NavigationFailureTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3NavigationFailureTest.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "5481954464d7f93635112014243a0563677d1528455949f0cc89171f82857fa6",
+      "receiver_sha256": "dff16fb34ee2c5f068332ef230187c6bafa929eefaa4b01296ed813a9abc6477",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "633ad8b6e70b211efc1917daea6277b38632359f9442120396fbeb187e663cf0",
+      "after_sha256": "c8776759a8ce22f6ec9039d630997d12262ee53f285beb0097ffb48b1f2a30cb",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3OrderWindowProof.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3OrderWindowProof.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "633ad8b6e70b211efc1917daea6277b38632359f9442120396fbeb187e663cf0",
+      "receiver_sha256": "c8776759a8ce22f6ec9039d630997d12262ee53f285beb0097ffb48b1f2a30cb",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "6b91d025a4e9701659f906f3fc649ba947cf734769764b13db7682e5d75d6030",
+      "after_sha256": "80579d2005fc395c8ea59caa9a8e79f5d1e265613d1228fc18e87880161aba5f",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3OrderWindowTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3OrderWindowTest.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "6b91d025a4e9701659f906f3fc649ba947cf734769764b13db7682e5d75d6030",
+      "receiver_sha256": "80579d2005fc395c8ea59caa9a8e79f5d1e265613d1228fc18e87880161aba5f",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "3c2836df74ef09f844f845dbb7f0cd0d179787254d994fa98168d93f3c1e30d4",
+      "after_sha256": "3f2fdea8ccf3ad154c76c6fae10a6eed71a8e1a873a6c33738260dbd1b9171af",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3ReadOnlyViewBoundarySelfTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3ReadOnlyViewBoundarySelfTest.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "3c2836df74ef09f844f845dbb7f0cd0d179787254d994fa98168d93f3c1e30d4",
+      "receiver_sha256": "3f2fdea8ccf3ad154c76c6fae10a6eed71a8e1a873a6c33738260dbd1b9171af",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "5dace1d4f7e86a98af7b817be6594063c63083a1b7f6f37ad47f192d74eae632",
+      "after_sha256": "1449af036f33745a8e31e4bdd20686dba5d0b7e830238f56fa2e9e80b6ddeaf8",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3ReadOnlyViewBoundaryTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3ReadOnlyViewBoundaryTest.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "5dace1d4f7e86a98af7b817be6594063c63083a1b7f6f37ad47f192d74eae632",
+      "receiver_sha256": "1449af036f33745a8e31e4bdd20686dba5d0b7e830238f56fa2e9e80b6ddeaf8",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "74486558694c8c4c8687231959f11deb0fdee8b12f0f7a6583c7b9c5c88f4eec",
+      "after_sha256": "68a15d8130b29097ee9b460515fea5f349c713d669395e336eb2089186b575b8",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceSelfTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceSelfTest.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "74486558694c8c4c8687231959f11deb0fdee8b12f0f7a6583c7b9c5c88f4eec",
+      "receiver_sha256": "68a15d8130b29097ee9b460515fea5f349c713d669395e336eb2089186b575b8",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "5ddaf76d0fe4573e705dbda9748d605c6eef434f6fe66f7334e617ab81631050",
+      "after_sha256": "31c7643fd43b0cff5f8d29aae86dffcfd12f1b942835b67ebad001493d9ea53c",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrappers-r2-20261018",
-      "path": "m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3WrapperConvergenceTest.java",
       "receiver_mode": "0644",
-      "receiver_sha256": "5ddaf76d0fe4573e705dbda9748d605c6eef434f6fe66f7334e617ab81631050",
+      "receiver_sha256": "31c7643fd43b0cff5f8d29aae86dffcfd12f1b942835b67ebad001493d9ea53c",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "d39d34f3da572db2902308095048cb1430b9fa0b3c94c82248c25edc69f2621a",
+      "after_sha256": "2daa7f9b2f7db092d739a2b3efb701eed77c0b02afe4867ddce3d5a576b99660",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrapper-proof2-20261018",
       "path": "m3/collections/verification/wrapper-convergence-20261018/README.md",
       "receiver_mode": "0644",
-      "receiver_sha256": "d39d34f3da572db2902308095048cb1430b9fa0b3c94c82248c25edc69f2621a",
+      "receiver_sha256": "2daa7f9b2f7db092d739a2b3efb701eed77c0b02afe4867ddce3d5a576b99660",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "90ec8c484c8ca68f1381133a0979ef88f4975dd4c46ced480db7a87d21b0a98e",
+      "after_sha256": "e6973ba853554d97f35823512c189bd190181db1d2d10309d5b0b1a09b4fb4ad",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrapper-proof2-20261018",
       "path": "m3/collections/verification/wrapper-convergence-20261018/SOURCE_MANIFEST.json",
       "receiver_mode": "0644",
-      "receiver_sha256": "90ec8c484c8ca68f1381133a0979ef88f4975dd4c46ced480db7a87d21b0a98e",
+      "receiver_sha256": "e6973ba853554d97f35823512c189bd190181db1d2d10309d5b0b1a09b4fb4ad",
       "recipe_mode": "0644"
     },
     {
-      "after_sha256": "5af1979df6d91ae252d66a66375903c8c58b3f8b1028fa9dcf6e38ca59869391",
+      "after_sha256": "830e6811789eeb072b6a013f040771a5bc51a95d60d3666bec4e60477a96968a",
       "before_sha256": "ABSENT",
       "dataset": "m3jdk21-wrapper-proof2-20261018",
       "path": "m3/collections/verification/wrapper-convergence-20261018/verify.py",
       "receiver_mode": "0644",
-      "receiver_sha256": "5af1979df6d91ae252d66a66375903c8c58b3f8b1028fa9dcf6e38ca59869391",
+      "receiver_sha256": "830e6811789eeb072b6a013f040771a5bc51a95d60d3666bec4e60477a96968a",
       "recipe_mode": "0644"
     }
   ],
@@ -3721,10 +3721,10 @@
       "bytes": 44598,
       "path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/historical/HISTORICAL_DONATION_PREFLIGHT.json",
       "published_paths": [
-        "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/historical/HISTORICAL_DONATION_PREFLIGHT.json",
-        "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0005-HISTORICAL_DONATION_PREFLIGHT.json.txt"
+        "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/historical/HISTORICAL_DONATION_PREFLIGHT.json",
+        "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0005-HISTORICAL_DONATION_PREFLIGHT.json.txt"
       ],
-      "sha256": "720db0fb379d84279abf54ad14acf067ea17bdf8eaca1bec71e9b1198bc26c60"
+      "sha256": "04c778e24be594365f27d5ad59cdb04d3a9e09aa8b25527a0366fd4e1c025489"
     },
     "reports": {
       "baseline": {
@@ -3767,24 +3767,24 @@
     "files": 337,
     "path": "m3/collections/verification/wrapper-convergence-20261018/SOURCE_MANIFEST.json",
     "published_paths": [
-      "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/received/SOURCE_MANIFEST.json",
-      "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0162-SOURCE_MANIFEST.json.txt",
-      "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrapper-proof2-20261018/0002-SOURCE_MANIFEST.json.txt",
-      "synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/candidates/m3/collections/verification/wrapper-convergence-20261018/SOURCE_MANIFEST.json"
+      "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/received/SOURCE_MANIFEST.json",
+      "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0162-SOURCE_MANIFEST.json.txt",
+      "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrapper-proof2-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrapper-proof2-20261018/0002-SOURCE_MANIFEST.json.txt",
+      "m3-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/candidates/m3/collections/verification/wrapper-convergence-20261018/SOURCE_MANIFEST.json"
     ],
-    "sha256": "90ec8c484c8ca68f1381133a0979ef88f4975dd4c46ced480db7a87d21b0a98e"
+    "sha256": "e6973ba853554d97f35823512c189bd190181db1d2d10309d5b0b1a09b4fb4ad"
   },
   "runtime_receipt": {
     "bytes": 381707,
     "historical_donation_guard": "NOT_RUN_IN_THIS_SCOPED_RUNNER",
     "published_paths": [
-      "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/received/RECEIPT.json",
-      "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0160-RECEIPT.json.txt",
-      "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/RECEIVER_RUNTIME_RECEIPT.json"
+      "m3-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018/catalogue/runtime-proof/received/RECEIPT.json",
+      "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-evidence-20261018/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-evidence-20261018/0160-RECEIPT.json.txt",
+      "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/tasks/m3-order-window-allocation-20261018/evidence/RECEIVER_RUNTIME_RECEIPT.json"
     ],
     "scope": "sealed collections module and named Java/JNI proofs",
-    "sha256": "bf9bbd87748c76d0b2da931bc1246114eea49118e5b2ecc3cd5d2bf19aedc568",
-    "source_manifest_sha256": "90ec8c484c8ca68f1381133a0979ef88f4975dd4c46ced480db7a87d21b0a98e",
+    "sha256": "82e76d78b19dd5ab9e6987e6593c14be5dd3e714051ce1444a82b21fe154fd11",
+    "source_manifest_sha256": "e6973ba853554d97f35823512c189bd190181db1d2d10309d5b0b1a09b4fb4ad",
     "status": "PASS_SCOPED"
   },
   "schema": "m3-wrapper-source-pin/v1"

@@ -1,12 +1,12 @@
 {
   "status": "PASS_REQUIRED_PARTITIONS_AND_SURFACE",
   "version": "v2",
-  "ownerSHA256": "450e3f70be37f0fa0fcee7edd4adc8a2eea4a05a40646fb3e5c531e4ee8447ca",
+  "ownerSHA256": "d90b72771ab454aa1dd03eb2c5784d7aaffd612736868a66fbe2682c8ab05f7c",
   "ownerBytes": 31224,
   "strictJDKOnlyCompile": true,
   "hookBinding": {
     "templateSHA256": "ca6371a1e2816a63fbdbb8d76db72791ccac02532ce056cabb4bab39d610e63e",
-    "boundSHA256": "abbdbac75cb7b7b890d816675c09b75511083b5453f9706e51d621e4a937f7bd",
+    "boundSHA256": "007734ce31458a6bdd4b2f155809d9d3f33714e108206eaba94051d0207de0ab",
     "qualifiedSubstitutions": 1,
     "simpleSubstitutions": 4,
     "class": "SpringCaseInsensitiveMapHookCases"

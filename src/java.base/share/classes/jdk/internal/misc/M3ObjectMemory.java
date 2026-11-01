@@ -5,7 +5,7 @@ package jdk.internal.misc;
 import java.util.Objects;
 
 /**
- * M3JDK21 internal, on-demand VM object diagnostic facilities.
+ * M3JDK 21 internal, on-demand VM object diagnostic facilities.
  * Shallow bytes come from JVMTI GetObjectSize; identity tags are stable through GC
  * relocation; reference edges are an expensive reachable-graph snapshot, not a
  * continuously maintained heap reference count. No raw moving oop is exported.

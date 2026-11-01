@@ -2,11 +2,11 @@
  * Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project.
  * SPDX-License-Identifier: Apache-2.0
  */
-package com.m3.tools.nlp.tests;
+package jdk.m3.tools.nlp.tests;
 
-import com.m3.text.LocalM3Arena;
-import com.m3.text.LocalM3StringPiece;
-import com.m3.text.M3StringPiece;
+import jdk.m3.text.LocalM3Arena;
+import jdk.m3.text.LocalM3StringPiece;
+import jdk.m3.text.M3StringPiece;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

@@ -4,8 +4,8 @@
 # Source and donor notices
 
 The source-sealed OpenRewrite engine M3GpuToolJoinRecipe.java, Git blob
-1c1b1b568d369f688f6953161636bf36b484bf5a, its manifest kernel
-M3GpuToolJoinManifest.java, Git blob 38df5f97bbeec8a8a8cfc77091d56bda925c07f2,
+2ec479b8609459a28fdfd8a7a7d63cc44e919f00, its manifest kernel
+M3GpuToolJoinManifest.java, Git blob 78d5fb68f13872164973a8918cc7886c5f548bca,
 and Maven POM d79867bcc09ad6329e12418e15907e54b8ab025f are imported verbatim.
 They remain Apache-2.0 Synexia files with all original notices, coordinates and
 plugin versions intact. The admitted donor SDK is

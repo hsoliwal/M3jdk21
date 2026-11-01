@@ -9,7 +9,7 @@ public final class RecipeTestLauncher {
     public static void main(String[] args) {
         var summary = new SummaryGeneratingListener();
         var request = LauncherDiscoveryRequestBuilder.request()
-            .selectors(DiscoverySelectors.selectClass("com.synexia.rewrite.M3CountedBagIteratorRemoveRecipeTest")).build();
+            .selectors(DiscoverySelectors.selectClass("jdk.internal.m3.rewrite.M3CountedBagIteratorRemoveRecipeTest")).build();
         LauncherFactory.create().execute(request, summary);
         var writer = new PrintWriter(System.out, true);
         summary.getSummary().printTo(writer);

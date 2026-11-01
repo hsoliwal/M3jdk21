@@ -42,7 +42,7 @@
       <resource>
         <directory>${project.basedir}/../../src/main/resources</directory>
         <includes>
-          <include>com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/**</include>
+          <include>jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/**</include>
           <include>META-INF/rewrite/m3-jcc-source-handoff.yml</include>
         </includes>
       </resource>
@@ -59,10 +59,10 @@
             <arg>-Xlint:all</arg>
           </compilerArgs>
           <includes>
-            <include>com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</include>
+            <include>jdk/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</include>
           </includes>
           <testIncludes>
-            <testInclude>com/m3/rewrite/backport/JccHandoffTest.java</testInclude>
+            <testInclude>jdk/m3/rewrite/backport/JccHandoffTest.java</testInclude>
           </testIncludes>
         </configuration>
       </plugin>

@@ -1,0 +1,3 @@
+# path	before_sha256	after_sha256	template
+# parse-context-sha256	e8885638bbc430882948585d20a6fcc3ead7b7a9565520df4f4c01b90d482a81
+m3/tooling/module-packs/collections/src/test/java/jdk/m3/collections/M3CollectionsPackTest.java	ABSENT	b626807d8229e5e35b4c8e1bef7ad3113731653c6619945cbe8284e7b227fbf9	template-00.txt

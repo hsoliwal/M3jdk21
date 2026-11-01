@@ -136,18 +136,18 @@ def main():
         report["dependency_hashes"] = {str(p): sha(p) for p in jars}
         report["receiver_pom_sha256"] = sha(R / "pom.xml")
         report["java_release"] = (J / "release").read_text()
-        sources = [R / "src/test/java/com/m3/fs" / (name + ".java") for name in [*TESTS, *FIXTURES]]
+        sources = [R / "src/test/java/jdk/m3/fs" / (name + ".java") for name in [*TESTS, *FIXTURES]]
         launcher = B / "authored/facade/verification/FacadeTestLauncher.java"
         sources.append(launcher)
         source_hashes = {str(p): sha(p) for p in sources}
         write_json(O / "test-source-hashes.json", source_hashes)
         expected = []
         for name, count in TESTS.items():
-            source = R / "src/test/java/com/m3/fs" / (name + ".java")
+            source = R / "src/test/java/jdk/m3/fs" / (name + ".java")
             methods = re.findall(r"@Test\s+(?:public\s+)?void\s+(\w+)\s*\(", source.read_text())
             if len(methods) != count:
                 raise RuntimeError("Declared test count drift: " + name)
-            expected.append({"class": "com.m3.fs." + name, "tests": count, "methods": methods,
+            expected.append({"class": "jdk.m3.fs." + name, "tests": count, "methods": methods,
                              "source": str(source), "source_sha256": sha(source)})
         write_json(O / "expected-tests.json", expected)
         report["expected_tests"] = expected
@@ -190,14 +190,14 @@ def main():
         failed = []
         for name, count in TESTS.items():
             result = run(name, [J / "bin/java", *report["flags"], "-cp", runtime_cp,
-                                "FacadeTestLauncher", "com.m3.fs." + name])
+                                "FacadeTestLauncher", "jdk.m3.fs." + name])
             counts = summary(result.stdout)
             jni_diagnostics = bool(re.search(r"WARNING in native method|FATAL ERROR in native method", result.stdout))
             passed = (result.returncode == 0 and counts == {
                 "found": count, "skipped": 0, "started": count, "aborted": 0,
                 "successful": count, "failed": 0,
             } and not jni_diagnostics)
-            report["results"].append({"class": "com.m3.fs." + name, "status": "PASS" if passed else "FAIL",
+            report["results"].append({"class": "jdk.m3.fs." + name, "status": "PASS" if passed else "FAIL",
                                        "expected_tests": count, "junit": counts,
                                        "jni_diagnostics": jni_diagnostics})
             report["junit_tests"] += counts["successful"]

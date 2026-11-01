@@ -9,10 +9,10 @@
   "public_api_unchanged": true,
   "candidate_files": [
     {
-      "path": "m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java",
+      "path": "m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java",
       "bytes": 17309,
-      "sha256": "8d6afc24c677adb7ba612071d34453c8a7d8b9e1a81ac27fb06bc3f62c673edd",
-      "git_blob_sha1": "bce79ff1c8f1bbb7dcb5a76c7e355b12f408c996"
+      "sha256": "87b3f76e04880c80a5bbf31e2cfe66fc7567d9b96ec5139cdf31536442ba58c7",
+      "git_blob_sha1": "8558298aebd074adbc36e2d9ff5e21e9c68ba2a8"
     },
     {
       "path": "m3/arrays/src/main/native/tests/m3_arrays_checks.c",
@@ -21,16 +21,16 @@
       "git_blob_sha1": "6bd29fe6815d07167ff7a3c7b941a9b27dc18589"
     },
     {
-      "path": "m3/arrays/src/test/java/com/m3/arrays/M3ArrayEmptySegmentsSelfTest.java",
+      "path": "m3/arrays/src/test/java/jdk/m3/arrays/M3ArrayEmptySegmentsSelfTest.java",
       "bytes": 16423,
-      "sha256": "632ee4cfa058f1f80536d4387e41b9d0fff41f64307d1c21f4cf2cbed94d20b1",
-      "git_blob_sha1": "2a80d1d57545c8dd09d3a4303d08419ad2e3a0bb"
+      "sha256": "6bdc1d3d563013c32291f68d368051816e245399ee7346e06b2fbe3bdbec865a",
+      "git_blob_sha1": "59207e4c948f079eeea8d7b1716110fde25a14cf"
     },
     {
-      "path": "m3/arrays/src/test/java/com/m3/arrays/M3ArrayEmptySegmentsTest.java",
+      "path": "m3/arrays/src/test/java/jdk/m3/arrays/M3ArrayEmptySegmentsTest.java",
       "bytes": 526,
-      "sha256": "2cf43719b99622cb8cca399179e0a1004b06e7ab49542aafe434cf8bcca3597d",
-      "git_blob_sha1": "bce5bf6ae8a0fdd65dc6279a4ac48cedfa0bcdbf"
+      "sha256": "134c5f4a053b882432d11e9d0eeb47d5c639cbf8f7663b0d9e86abd9d5ac52d2",
+      "git_blob_sha1": "9910b51630466fc4f7080a821e1cf972490c7f0e"
     }
   ],
   "baseline_findings": [

@@ -19,7 +19,7 @@
 
 /*
  * @test
- * @summary M3JDK21 ArrayList and Vector mask compaction retains object identity across GC
+ * @summary M3JDK 21 ArrayList and Vector mask compaction retains object identity across GC
  * @run main/othervm -XX:+UseG1GC -Xmx128m M3ArrayListVectorGcMutationContract
  * @run main/othervm -XX:+UseSerialGC -Xmx128m M3ArrayListVectorGcMutationContract
  */

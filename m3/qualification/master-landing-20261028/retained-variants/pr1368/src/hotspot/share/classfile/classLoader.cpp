@@ -1492,7 +1492,7 @@ jlong ClassLoader::class_link_time_ms() {
 
 int ClassLoader::compute_Object_vtable() {
   // Required before Object is loaded, when bootstrap array klasses are created.
-  // M3JDK21 adds the overridable toAdapter(Class) method to the five legacy
+  // M3JDK 21 adds the overridable toAdapter(Class) method to the five legacy
   // Object slots. klassVtable verifies this reservation against parsed methods.
   const int M3_Object_vtable_size = 6;
   return M3_Object_vtable_size * vtableEntry::size();

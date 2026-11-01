@@ -2,10 +2,10 @@
   "schema": "M3CLASS_OPTIONAL_ELISION_PASSIVE_RECEIPT_V1",
   "canonical_recipe_repository": "https://github.com/hsoliwal/com.synexia",
   "canonical_recipe": {
-    "name": "com.synexia.m3.M3ClassOptionalElision20261030",
-    "metadata_name": "com.synexia.m3.M3ClassOptionalMetadata20261030",
+    "name": "jdk.internal.m3.M3ClassOptionalElision20261030",
+    "metadata_name": "jdk.internal.m3.M3ClassOptionalMetadata20261030",
     "engine_revision": "9c953e5d954a5ec038f6c894e6449a2108d8d0ca",
-    "task_path": "synexia-openrewrite-recipes/recipe-crates/m3-doop-reuse-20261030",
+    "task_path": "m3-openrewrite-recipes/recipe-crates/m3-doop-reuse-20261030",
     "descriptor_git_blob": "b2abdf0a3b9a44008ca71dbbaf196b2b29e294a2",
     "java_manifest_sha256": "21a698ad84fd4edfe97f2e98a9ab3efe6a13770c196158f8819225d6171818d9"
   },
@@ -27,7 +27,7 @@
     }
   ],
   "naming": {
-    "stable_id": "synexia.counterpart.MIndexClass",
+    "stable_id": "m3.counterpart.MIndexClass",
     "status": "implemented-unverified",
     "promotion": false,
     "mapping_sha256": "dbbf8c9a9bcea01ea071e513877c01a6ab8925160ad0a58426b9d2a36dedf02e",

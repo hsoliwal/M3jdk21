@@ -48,11 +48,11 @@ jobs:
             fi
             echo "M3_INDEXED_ORIGINAL_OWNER_OK $path"
           done <<'SOURCE'
-          e6059aeb9b2e7f332fb0baea2684395c268a5414 src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java
+          135f13b0c4478659aa3395bdeaa740b4438f649d src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java
           1dec3dbe282a53f20c3c70458d949ac3f7df53b5 src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java
           c5812eb14bb62f3e97ef8f5af6dce09ab97fe991 test/jdk/jdk/internal/m3/M3IndexedArrayTest.java
           6fde07fb59b9871458aaf2af34ef2fae9be17a6d test/jdk/jdk/internal/m3/M3IndexedViewEpochTest.java
-          254743ec34301e46ca09071bb62ee4ab97955c66 test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java
+          af1f4f0c76c0f2d9bd6aebbc3337dbaa1db2bc98 test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java
           18c5a8e29de56b00b22ce1fe7dd9aae56e2a03ec test/jdk/jdk/internal/m3/M3IndexedViewLifecycleTest.java
           SOURCE
       - name: Compile M3JDK21 java.base product sources and contract probes

@@ -22,13 +22,13 @@ public final class M3BiMapQualificationLauncher {
     if (arguments.length != 2) throw new IllegalArgumentException("output-directory and native-jar required");
     Path output = Path.of(arguments[0]).toRealPath();
     Path jar = Path.of(arguments[1]).toRealPath();
-    location("com.m3.collections.interop.M3BiMap", output);
-    location("com.m3.collections.interop.M3BiMaps", output);
+    location("jdk.m3.collections.interop.M3BiMap", output);
+    location("jdk.m3.collections.interop.M3BiMaps", output);
     location("com.google.common.collect.HashBiMap", jar);
     location("com.google.common.collect.ArrayListMultimap", jar);
-    location("com.m3.collections.M3LinkedHashMap", jar);
-    location("com.m3.collections.M3ArrayList", jar);
-    CollectionTestLauncher.main(new String[] {"com.m3.collections.interop.M3BiMapTest", "22"});
+    location("jdk.m3.collections.M3LinkedHashMap", jar);
+    location("jdk.m3.collections.M3ArrayList", jar);
+    CollectionTestLauncher.main(new String[] {"jdk.m3.collections.interop.M3BiMapTest", "22"});
     System.out.println("BIMAP_EXISTING_OWNER_QUALIFIED original_interface=Guava33.4.8 native_artifact_verified=true");
   }
 

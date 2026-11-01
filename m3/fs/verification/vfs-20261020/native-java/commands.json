@@ -12,26 +12,26 @@
       "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/org/xerial/sqlite-jdbc/3.45.1.0/sqlite-jdbc-3.45.1.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/com/google/re2j/re2j/1.8/re2j-1.8.jar",
       "-d",
       "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-java-capture/test-classes",
-      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FSNativeTest.java",
-      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FSScrubTest.java",
-      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsCheckedInodeIoTest.java",
-      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsFeatureTest.java",
-      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsHotPathTest.java",
-      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsImageBindingTest.java",
-      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsIndexedTest.java",
-      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsNativeSemanticTest.java",
-      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsRegexFallbackTest.java",
-      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsSnapshotViewTest.java",
-      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsSparseFeatureTest.java",
-      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3MappedStorageTest.java",
-      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3NativeContentPositionTest.java",
-      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsHotPathSelfTest.java",
-      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsIndexedSelfTest.java",
-      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsReadSnapshotSelfTest.java",
-      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsSnapshotViewSelfTest.java",
-      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3MappedStorageChecks.java",
-      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3NativeContentPositionChecks.java",
-      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3TestRegexImages.java",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FSNativeTest.java",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FSScrubTest.java",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsCheckedInodeIoTest.java",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsFeatureTest.java",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsHotPathTest.java",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsImageBindingTest.java",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsIndexedTest.java",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsNativeSemanticTest.java",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsRegexFallbackTest.java",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsSnapshotViewTest.java",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsSparseFeatureTest.java",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3MappedStorageTest.java",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3NativeContentPositionTest.java",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsHotPathSelfTest.java",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsIndexedSelfTest.java",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsReadSnapshotSelfTest.java",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3FsSnapshotViewSelfTest.java",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3MappedStorageChecks.java",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3NativeContentPositionChecks.java",
+      "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/jdk/m3/fs/M3TestRegexImages.java",
       "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/authored/facade/verification/FacadeTestLauncher.java"
     ],
     "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020",
@@ -51,7 +51,7 @@
       "-cp",
       "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-java-capture/test-classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/org/xerial/sqlite-jdbc/3.45.1.0/sqlite-jdbc-3.45.1.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/com/google/re2j/re2j/1.8/re2j-1.8.jar",
       "FacadeTestLauncher",
-      "com.m3.fs.M3FSNativeTest"
+      "jdk.m3.fs.M3FSNativeTest"
     ],
     "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020",
     "elapsed_seconds": 0.413,
@@ -70,7 +70,7 @@
       "-cp",
       "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-java-capture/test-classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/org/xerial/sqlite-jdbc/3.45.1.0/sqlite-jdbc-3.45.1.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/com/google/re2j/re2j/1.8/re2j-1.8.jar",
       "FacadeTestLauncher",
-      "com.m3.fs.M3FSScrubTest"
+      "jdk.m3.fs.M3FSScrubTest"
     ],
     "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020",
     "elapsed_seconds": 0.565,
@@ -89,7 +89,7 @@
       "-cp",
       "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-java-capture/test-classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/org/xerial/sqlite-jdbc/3.45.1.0/sqlite-jdbc-3.45.1.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/com/google/re2j/re2j/1.8/re2j-1.8.jar",
       "FacadeTestLauncher",
-      "com.m3.fs.M3FsCheckedInodeIoTest"
+      "jdk.m3.fs.M3FsCheckedInodeIoTest"
     ],
     "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020",
     "elapsed_seconds": 1.137,
@@ -108,7 +108,7 @@
       "-cp",
       "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-java-capture/test-classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/org/xerial/sqlite-jdbc/3.45.1.0/sqlite-jdbc-3.45.1.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/com/google/re2j/re2j/1.8/re2j-1.8.jar",
       "FacadeTestLauncher",
-      "com.m3.fs.M3FsFeatureTest"
+      "jdk.m3.fs.M3FsFeatureTest"
     ],
     "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020",
     "elapsed_seconds": 0.385,
@@ -127,7 +127,7 @@
       "-cp",
       "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-java-capture/test-classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/org/xerial/sqlite-jdbc/3.45.1.0/sqlite-jdbc-3.45.1.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/com/google/re2j/re2j/1.8/re2j-1.8.jar",
       "FacadeTestLauncher",
-      "com.m3.fs.M3FsHotPathTest"
+      "jdk.m3.fs.M3FsHotPathTest"
     ],
     "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020",
     "elapsed_seconds": 0.799,
@@ -146,7 +146,7 @@
       "-cp",
       "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-java-capture/test-classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/org/xerial/sqlite-jdbc/3.45.1.0/sqlite-jdbc-3.45.1.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/com/google/re2j/re2j/1.8/re2j-1.8.jar",
       "FacadeTestLauncher",
-      "com.m3.fs.M3FsImageBindingTest"
+      "jdk.m3.fs.M3FsImageBindingTest"
     ],
     "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020",
     "elapsed_seconds": 0.461,
@@ -165,7 +165,7 @@
       "-cp",
       "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-java-capture/test-classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/org/xerial/sqlite-jdbc/3.45.1.0/sqlite-jdbc-3.45.1.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/com/google/re2j/re2j/1.8/re2j-1.8.jar",
       "FacadeTestLauncher",
-      "com.m3.fs.M3FsIndexedTest"
+      "jdk.m3.fs.M3FsIndexedTest"
     ],
     "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020",
     "elapsed_seconds": 1.837,
@@ -184,7 +184,7 @@
       "-cp",
       "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-java-capture/test-classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/org/xerial/sqlite-jdbc/3.45.1.0/sqlite-jdbc-3.45.1.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/com/google/re2j/re2j/1.8/re2j-1.8.jar",
       "FacadeTestLauncher",
-      "com.m3.fs.M3FsNativeSemanticTest"
+      "jdk.m3.fs.M3FsNativeSemanticTest"
     ],
     "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020",
     "elapsed_seconds": 0.421,
@@ -203,7 +203,7 @@
       "-cp",
       "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-java-capture/test-classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/org/xerial/sqlite-jdbc/3.45.1.0/sqlite-jdbc-3.45.1.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/com/google/re2j/re2j/1.8/re2j-1.8.jar",
       "FacadeTestLauncher",
-      "com.m3.fs.M3FsRegexFallbackTest"
+      "jdk.m3.fs.M3FsRegexFallbackTest"
     ],
     "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020",
     "elapsed_seconds": 0.586,
@@ -222,7 +222,7 @@
       "-cp",
       "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-java-capture/test-classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/org/xerial/sqlite-jdbc/3.45.1.0/sqlite-jdbc-3.45.1.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/com/google/re2j/re2j/1.8/re2j-1.8.jar",
       "FacadeTestLauncher",
-      "com.m3.fs.M3FsSnapshotViewTest"
+      "jdk.m3.fs.M3FsSnapshotViewTest"
     ],
     "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020",
     "elapsed_seconds": 0.762,
@@ -241,7 +241,7 @@
       "-cp",
       "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-java-capture/test-classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/org/xerial/sqlite-jdbc/3.45.1.0/sqlite-jdbc-3.45.1.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/com/google/re2j/re2j/1.8/re2j-1.8.jar",
       "FacadeTestLauncher",
-      "com.m3.fs.M3FsSparseFeatureTest"
+      "jdk.m3.fs.M3FsSparseFeatureTest"
     ],
     "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020",
     "elapsed_seconds": 0.432,
@@ -260,7 +260,7 @@
       "-cp",
       "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-java-capture/test-classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/org/xerial/sqlite-jdbc/3.45.1.0/sqlite-jdbc-3.45.1.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/com/google/re2j/re2j/1.8/re2j-1.8.jar",
       "FacadeTestLauncher",
-      "com.m3.fs.M3MappedStorageTest"
+      "jdk.m3.fs.M3MappedStorageTest"
     ],
     "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020",
     "elapsed_seconds": 0.731,
@@ -279,7 +279,7 @@
       "-cp",
       "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-java-capture/test-classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/org/xerial/sqlite-jdbc/3.45.1.0/sqlite-jdbc-3.45.1.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/com/google/re2j/re2j/1.8/re2j-1.8.jar",
       "FacadeTestLauncher",
-      "com.m3.fs.M3NativeContentPositionTest"
+      "jdk.m3.fs.M3NativeContentPositionTest"
     ],
     "cwd": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020",
     "elapsed_seconds": 0.455,

@@ -4,7 +4,7 @@
 <plugin>
   <extension point="org.eclipse.core.filesystem.filesystems">
     <filesystem scheme="m3fs">
-      <run class="com.m3.eclipse.filesystem.M3EclipseFileSystem"/>
+      <run class="jdk.m3.eclipse.filesystem.M3EclipseFileSystem"/>
     </filesystem>
   </extension>
 </plugin>

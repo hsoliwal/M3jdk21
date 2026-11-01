@@ -20,7 +20,7 @@ static jlong cluster_score_q20(jint first, jint last, jint significant) {
 }
 
 JNIEXPORT jint JNICALL
-Java_com_m3_lexicon_M3LanguageNative_scoreLuhnClusters0(
+Java_jdk_m3_lexicon_M3LanguageNative_scoreLuhnClusters0(
         JNIEnv *env,
         jclass ignored,
         jintArray word_ids,

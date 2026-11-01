@@ -8,13 +8,13 @@ on:
       - 'm3/object-slot-index-snapshot-20261017'
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3ObjectSlotStore28.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3ObjectSlotIndex*.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3ObjectIndexSnapshot.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3ObjectSlotStore28.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3ObjectSlotIndex*.java'
       - 'm3/collections/qualification/m3-object-slot-index-snapshot-20261017/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-object-slot-index-snapshot-20261017/**'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-object-slot-index-snapshot-20261017.yml'
-      - 'm3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3ObjectSlotIndexSnapshot20261017RecipeTest.java'
       - '.github/workflows/m3-object-slot-index-snapshot-20261017.yml'
   workflow_dispatch:
 
@@ -70,7 +70,7 @@ jobs:
           java -Xcheck:jni -Dm3.collections.signal.native=true \
             -Djava.library.path="$out/native" \
             -cp "m3/collections/target/classes:m3/collections/target/test-classes" \
-            com.m3.collections.M3ObjectSlotIndexSelfTest
+            jdk.m3.collections.M3ObjectSlotIndexSelfTest
 
       - name: Preserve non-promotion boundary
         shell: bash

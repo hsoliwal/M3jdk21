@@ -6,10 +6,10 @@
   "source_baseline": "140c263a90f9803b9c46103c63355a286e0515f0",
   "target_repository": "hsoliwal/M3jdk21",
   "target_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-  "recipe_owner": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017",
+  "recipe_owner": "m3-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017",
   "recipe_classes": [
-    "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
-    "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe"
+    "jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "jdk.internal.m3.rewrite.M3HashPinnedTextSnapshotRecipe"
   ],
   "scope": [
     {

@@ -57,12 +57,12 @@ def main():
         '-Wall', '-Wextra', '-Werror', '-Wconversion', '-Wsign-conversion',
         '-fsanitize=undefined', '-fno-sanitize-recover=undefined', '-fstack-usage',
         '-I' + str(home / 'include'), '-I' + str(home / 'include/linux'),
-        '-include', out / 'headers/com_m3_collections_M3IndexMaskCompactor.h', native,
+        '-include', out / 'headers/jdk_m3_collections_M3IndexMaskCompactor.h', native,
         '-o', out / 'native/libm3_collections_mask.so')
     for mode, expected in [('java', 260388), ('native', 260407), ('unavailable', 260390)]:
         library = out / ('absent' if mode == 'unavailable' else 'native')
         text = run(mode, tools['java'], '-Xcheck:jni', '-Djava.library.path=' + str(library),
-                   '-cp', out / 'classes', 'com.m3.collections.M3FrequencyMaskChecks', mode)
+                   '-cp', out / 'classes', 'jdk.m3.collections.M3FrequencyMaskChecks', mode)
         expected_text = ('PASS checks=' + str(expected)
                          + ' tape=587f92aa87c2c49e474b3b7c364cf3e1df5d9ec551e095558ea68a6d312ddd31')
         if text.strip() != expected_text:

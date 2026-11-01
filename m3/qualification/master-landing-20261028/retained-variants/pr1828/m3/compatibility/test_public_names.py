@@ -99,16 +99,16 @@ class PublicNamesTest(unittest.TestCase):
             self.assertEqual(GATE.main(["--base", "HEAD", "--head", head, "--repo", str(root)]), 2)
 
 
-    def test_new_synexia_recipe_crate_refused(self):
-        self.assertTrue(self.issue("synexia-openrewrite-recipes/crates/catalogue/pom.xml"))
+    def test_new_m3_recipe_crate_refused(self):
+        self.assertTrue(self.issue("m3-openrewrite-recipes/crates/catalogue/pom.xml"))
 
     def test_historical_product_recipe_source_mutation_refused(self):
         self.assertTrue(self.issue(
-            "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/OldRecipe.java", status="M"))
+            "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/OldRecipe.java", status="M"))
 
     def test_new_openrewrite_java_recipe_refused(self):
         self.assertTrue(self.issue(
-            "m3/collections/src/main/java/com/m3/rewrite/OptimizeRecipe.java",
+            "m3/collections/src/main/java/jdk/m3/rewrite/OptimizeRecipe.java",
             "class OptimizeRecipe {}"))
 
     def test_new_openrewrite_yaml_descriptor_refused(self):
@@ -130,7 +130,7 @@ class PublicNamesTest(unittest.TestCase):
     def test_new_donor_imports_in_jdk_owner_refused(self):
         path = "src/java.base/share/classes/java/util/CollectionViews.java"
         self.assertTrue(self.issue(
-            path, "package java.util;\nimport com.synexia.indexstring.MIndexString;\n"
+            path, "package java.util;\nimport jdk.internal.m3.indexstring.MIndexString;\n"
                   "class CollectionViews {}"))
         self.assertTrue(self.issue(
             path, "package java.util;\nimport org.eclipse.collections.api.list.MutableList;\n"
@@ -146,7 +146,7 @@ class PublicNamesTest(unittest.TestCase):
 
     def test_lexical_guard_ignores_comments_and_text_blocks(self):
         path = "src/java.base/share/classes/java/util/CollectionViews.java"
-        program = ('package java.util;\n// import com.synexia.X;\n'
+        program = ('package java.util;\n// import jdk.internal.m3.X;\n'
                    '/* org.eclipse.collections.Y */\n'
                    'class CollectionViews { String s = """\n'
                    'com.google.common.collect.ImmutableList\n"""; }\n')
@@ -154,7 +154,7 @@ class PublicNamesTest(unittest.TestCase):
 
     def test_old_only_reference_grandfathered_and_new_reference_rejected(self):
         path = "src/java.base/share/classes/java/util/CollectionViews.java"
-        old = "package java.util;\nimport com.m3.text.M3String;\nclass CollectionViews {}\n"
+        old = "package java.util;\nimport jdk.m3.text.M3String;\nclass CollectionViews {}\n"
         self.assertFalse(GATE.problems(GATE.Change("M", path), old, old))
         self.assertTrue(GATE.problems(
             GATE.Change("M", path), old + "\nimport org.springframework.context.X;", old))
@@ -164,8 +164,8 @@ class PublicNamesTest(unittest.TestCase):
             "src/java.xml/share/classes/com/sun/org/apache/xalan/internal/X.java",
             "package com.sun.org.apache.xalan.internal; class X {}"))
         self.assertFalse(self.issue(
-            "m3/core/src/com/m3/text/M3String.java",
-            "package com.m3.text; class M3String {}"))
+            "m3/core/src/jdk/m3/text/M3String.java",
+            "package jdk.m3.text; class M3String {}"))
 
     def test_real_git_modified_jdk_source_rejects_donor_name(self):
         with tempfile.TemporaryDirectory() as directory:

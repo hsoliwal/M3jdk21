@@ -25,7 +25,7 @@ The installation uses the retained `M3Jdk21HashPinnedTextSnapshotRecipe` and the
 
 ## Root coverage obligations
 
-The current source root tree has 343 entries: 255 trees, 87 blobs and one gitlink. Its unchanged root POM blob `98889a040aad5cc3c82f782bb4b173d118207988` declares 201 distinct module paths: 200 project declarations and one profile declaration. Of these, 190 are direct root paths and 11 are nested paths in eight root trees. Four nested containers are also direct modules; four are additional containers. The union is 194 root trees referenced by declarations.
+The current source root tree has 343 entries: 255 trees, 87 blobs and one gitlink. Its unchanged root POM blob `a65f71452613662769dda64100c6d64dd90ae5da` declares 201 distinct module paths: 200 project declarations and one profile declaration. Of these, 190 are direct root paths and 11 are nested paths in eight root trees. Four nested containers are also direct modules; four are additional containers. The union is 194 root trees referenced by declarations.
 
 Each root entry receives its own derived coverage-obligation row linked to `family.entire-source-closure`. A directory name does not make it a Maven module, semantic owner or completed mapping. This root accounting does not establish the descendant file denominator, generated-producer closure, native-consumer closure or whole-repository semantic dependency coverage. The 503 exact source/resource bindings from the current source preflight are a separate scoped acquisition.
 

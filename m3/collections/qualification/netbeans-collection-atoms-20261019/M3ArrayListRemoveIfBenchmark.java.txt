@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  * Bounded local resource fixture; not a universal throughput claim.
  */
-package com.m3.collections;
+package jdk.m3.collections;
 
 import com.sun.management.ThreadMXBean;
 import java.lang.management.GarbageCollectorMXBean;

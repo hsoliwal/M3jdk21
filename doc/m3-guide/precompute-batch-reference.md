@@ -524,24 +524,24 @@ pin. Existing base references are reused; the eight-owner count does not mean
 eight complete packages. The documentation changes no source, test, native ABI,
 build profile, receiving manifest, sealed foundation guide or policy authority.
 
-[code-signals]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/com/m3/precompute/M3CodeTextSignals.java
-[lexical-api]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/com/m3/precompute/M3CodeTextSignalBatch.java
-[lexical-java]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/com/m3/precompute/M3CodeTextSignalBatchJava.java
-[lexical-native]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/com/m3/precompute/M3CodeTextSignalBatchNative.java
-[pair]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/com/m3/precompute/M3SimilarityPrecompute.java
-[similarity-api]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/com/m3/precompute/M3SimilarityBatch.java
-[similarity-java]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/com/m3/precompute/M3SimilarityBatchJava.java
-[similarity-native]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/com/m3/precompute/M3SimilarityBatchNative.java
-[progress]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/com/m3/precompute/M3Progress.java
-[text-signals]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/com/m3/precompute/M3TextSignals.java
-[histogram]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/com/m3/precompute/M3Histogram.java
-[shape]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexShape.java
+[code-signals]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CodeTextSignals.java
+[lexical-api]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CodeTextSignalBatch.java
+[lexical-java]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CodeTextSignalBatchJava.java
+[lexical-native]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CodeTextSignalBatchNative.java
+[pair]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SimilarityPrecompute.java
+[similarity-api]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SimilarityBatch.java
+[similarity-java]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SimilarityBatchJava.java
+[similarity-native]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SimilarityBatchNative.java
+[progress]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/jdk/m3/precompute/M3Progress.java
+[text-signals]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/jdk/m3/precompute/M3TextSignals.java
+[histogram]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/jdk/m3/precompute/M3Histogram.java
+[shape]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexShape.java
 [jni]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/native/src/m3_precompute_signals_jni.c
 [header]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/native/include/m3_precompute_signals.h
 [c]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/native/src/m3_precompute_signals.c
-[code-tests]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/test/java/com/m3/precompute/M3CodeTextSignalsTest.java
-[similarity-tests]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/test/java/com/m3/precompute/M3SimilarityBatchTest.java
-[native-tests]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/test/java/com/m3/precompute/M3NativeParityTest.java
+[code-tests]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/test/java/jdk/m3/precompute/M3CodeTextSignalsTest.java
+[similarity-tests]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/test/java/jdk/m3/precompute/M3SimilarityBatchTest.java
+[native-tests]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/test/java/jdk/m3/precompute/M3NativeParityTest.java
 [c-tests]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/src/main/native/tests/m3_precompute_signals_checks.c
 [readme]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/README.md
 [pom]: https://github.com/hsoliwal/M3jdk21/blob/c038343521587d96c9fa190715ce2f4b9f8c490a/m3/ports/precompute/pom.xml

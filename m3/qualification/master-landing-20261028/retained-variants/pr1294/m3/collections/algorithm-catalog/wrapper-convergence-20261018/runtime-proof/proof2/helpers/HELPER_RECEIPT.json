@@ -2,8 +2,8 @@
   "schema": "M3_WRAPPER_RUNNER_HELPER_REPLAY_V1",
   "status": "PASS",
   "runner": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-wrapper-proof2-20261018/candidate/m3/collections/verification/wrapper-convergence-20261018/verify.py",
-  "runner_sha256": "5af1979df6d91ae252d66a66375903c8c58b3f8b1028fa9dcf6e38ca59869391",
-  "helper_sha256": "f7a8108ddeb3e1dda96cf61319cfbfc8ead1aba96653bf3863a2a200bc794b42",
+  "runner_sha256": "830e6811789eeb072b6a013f040771a5bc51a95d60d3666bec4e60477a96968a",
+  "helper_sha256": "08565bfcb747708abccd76e27f38b8e0d2fbab9ec32c9d73f5c176f11d096bdb",
   "tests": 22,
   "failures": 0,
   "errors": 0,
@@ -32,7 +32,7 @@
     "__main__.Helpers.test_21_api_new_abstract_obligation_is_reported",
     "__main__.Helpers.test_22_actual_generated_int_long_jni_header"
   ],
-  "jni_header_sha256": "d73bb0e2e17c41ce6cd653732a8c7bc0dce71f2464c3dd536bbf544655936e95",
+  "jni_header_sha256": "4b36eef5e6a9cfa2b6dd1d896e92941d1a42e6c7054c396e009bf7e9ad3cb6ed",
   "scope": "Synthetic helper replay captured after proof2 qualification; not a reproduction claim for prior inline checks",
   "product_runtime_tests": "Separate root-owned current-runtime/RECEIPT.json",
   "product_sources_written": false

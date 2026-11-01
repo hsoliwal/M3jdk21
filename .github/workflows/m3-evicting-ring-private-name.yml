@@ -35,12 +35,12 @@ jobs:
           python3 - <<'PY'
           from hashlib import sha256
           from pathlib import Path
-          path = Path('m3/collections/implementations/guava-evicting-queue/src/main/java/com/m3/collections/guava/M3EvictingQueue.java')
+          path = Path('m3/collections/implementations/guava-evicting-queue/src/main/java/jdk/m3/collections/guava/M3EvictingQueue.java')
           source = path.read_bytes()
-          assert sha256(source).hexdigest() == '3fb021a20b4c356283f2b8444647333a4399e9b00528a2bf519787e602dd1166'
+          assert sha256(source).hexdigest() == '91c5044456cf3841d857dd5069ef7e5d61055ea154880ad5fed3984e15f686b7'
           assert source.count(b'copyRingInto(') == 4
           assert b'copyInto(' not in source
-          assert b'package com.m3.collections.guava;' in source
+          assert b'package jdk.m3.collections.guava;' in source
           assert b'public final class M3EvictingQueue<E>' in source
           print('exact postimage and four private callsites verified')
           PY
@@ -48,5 +48,5 @@ jobs:
         run: mvn -B -ntp -f m3/collections/implementations/guava-evicting-queue/pom.xml test
       - name: Enforce Java 21 public, serialized and behavior baseline
         run: |
-          java -cp m3/collections/implementations/guava-evicting-queue/target/classes:m3/collections/implementations/guava-evicting-queue/target/test-classes com.m3.collections.guava.M3EvictingQueueContractProbe
-          javap -p -classpath m3/collections/implementations/guava-evicting-queue/target/classes com.m3.collections.guava.M3EvictingQueue | python3 -c 'import sys; data=sys.stdin.read(); assert "private void copyRingInto(java.lang.Object[], int)" in data; assert "copyInto(" not in data'
+          java -cp m3/collections/implementations/guava-evicting-queue/target/classes:m3/collections/implementations/guava-evicting-queue/target/test-classes jdk.m3.collections.guava.M3EvictingQueueContractProbe
+          javap -p -classpath m3/collections/implementations/guava-evicting-queue/target/classes jdk.m3.collections.guava.M3EvictingQueue | python3 -c 'import sys; data=sys.stdin.read(); assert "private void copyRingInto(java.lang.Object[], int)" in data; assert "copyInto(" not in data'

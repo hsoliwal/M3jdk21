@@ -1,15 +1,15 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
 package proof;
 
-import com.m3.fs.M3FsProgress;
-import com.m3.fs.MFile;
-import com.m3.fs.MFileCapture;
-import com.m3.fs.MFileContent;
-import com.m3.fs.MFileObservation;
-import com.m3.fs.MFileShadow;
-import com.m3.fs.MFileStreams;
-import com.m3.fs.MFiles;
-import com.m3.fs.vfs.provider.local.DefaultLocalFileProvider;
+import jdk.m3.fs.M3FsProgress;
+import jdk.m3.fs.MFile;
+import jdk.m3.fs.MFileCapture;
+import jdk.m3.fs.MFileContent;
+import jdk.m3.fs.MFileObservation;
+import jdk.m3.fs.MFileShadow;
+import jdk.m3.fs.MFileStreams;
+import jdk.m3.fs.MFiles;
+import jdk.m3.fs.vfs.provider.local.DefaultLocalFileProvider;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.source.util.JavacTask;
 import com.sun.source.util.Trees;

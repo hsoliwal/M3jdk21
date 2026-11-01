@@ -13,14 +13,14 @@
     "frozen_inputs": {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/FROZEN_INPUTS.json",
       "bytes": 9164,
-      "sha256": "1a567f6004a2817284ce738397cca6140ed52b331412e6d218dafaef64391f7b",
-      "git_blob": "ea005a61b2b9665db2d814f80a84345fbd6a2236"
+      "sha256": "86c4ec4b8e0bb641092f4dc9c2a00d54fd8cf1c6670ee42989ae4af93ca254c0",
+      "git_blob": "f2bfabd4d5fee7c0c02d599be2c3b602eb47e952"
     },
     "prepared_inputs": {
       "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/02-maven-inputs.json",
       "bytes": 12667,
-      "sha256": "5101c49d98ef8cba46f436cde4db686093ab6b05280a1aee39984fb307fade9c",
-      "git_blob": "01deef895f41b6fb701fb5d891f507437411a330"
+      "sha256": "45cf2012d69709622a582a610f215420a4b8dec01c4a8594e131703ea1899032",
+      "git_blob": "e64228ab30248e81f5db7ac3b229b911597a6c68"
     }
   },
   "toolchain_receipt": {

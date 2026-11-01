@@ -1,7 +1,7 @@
 {
   "schema": "spring-caller-entry-getter-v1-reproduction",
   "result": "REPRODUCED_OBSERVABLE_DIFFERENCES",
-  "ownerSHA256": "f79257c02e899ca2e51b900d3272a7265b18c72f120a29bb95f9d52e908e8084",
+  "ownerSHA256": "a0e658e3b22729b101cef0b64a91164846b1c5a934fcaf4220173f2608859ae7",
   "fixtureSHA256": "c98c0a55be337139d03ffc457d326e36776f8e5c2a63dc4c91cd9ed87e7a7779",
   "cases": 9,
   "differentCases": 9,
@@ -113,14 +113,14 @@
         "-cp",
         "S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\entry-getter-review\\classes-v1",
         "SpringEntryGetterProtocol",
-        "com.m3.collections.spring.M3LinkedCaseInsensitiveMap"
+        "jdk.m3.collections.spring.M3LinkedCaseInsensitiveMap"
       ],
       "returncode": 0,
       "stdoutSHA256": "fda38a455d5d1839cca88b254bcaf34febc614e95e788aa94aad2d4d99ebdfbc",
       "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     }
   ],
-  "beforeFixSealSHA256": "dda24aadcc3a2663c1c48b25f0de77b14d292490c7a5abcae93f61dbd9d37f24",
+  "beforeFixSealSHA256": "e5754abe0d7c621c5ce3364779138fee355239c90bb8b0142df3d97c79a191a4",
   "storageAfter": {
     "root": "S:\\codex-work\\m3-collections-next-20261018",
     "free_bytes": 26182070272,

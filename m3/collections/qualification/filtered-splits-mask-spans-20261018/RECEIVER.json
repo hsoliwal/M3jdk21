@@ -3,89 +3,89 @@
   "source": "hsoliwal/com.synexia",
   "recipe_commit": "54312c6134bb7bb33587b16e1f6510aded7d7e29",
   "recipe_pr": 12311,
-  "recipe": "com.synexia.m3.FilteredSplitsMaskSpans20261018",
+  "recipe": "jdk.internal.m3.FilteredSplitsMaskSpans20261018",
   "target_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
   "targets": [
-    "com.m3.collections.M3FilteredViews",
-    "com.m3.collections.M3MutableFilteredViews",
-    "com.m3.collections.M3FilteredNavigableSet",
-    "com.m3.collections.M3SlotSpliterators",
-    "com.m3.collections.M3IndexMaskWindow"
+    "jdk.m3.collections.M3FilteredViews",
+    "jdk.m3.collections.M3MutableFilteredViews",
+    "jdk.m3.collections.M3FilteredNavigableSet",
+    "jdk.m3.collections.M3SlotSpliterators",
+    "jdk.m3.collections.M3IndexMaskWindow"
   ],
   "public_names": "unchanged; no new public collection or native method",
   "implementation": "Existing comparator adapter with lazy owner lookup; stable byte-mask scan using bounded relative ordinals and JNI row spans",
   "canonical_ownership": "Synexia recipe and reusable templates; M3JDK21 product/runtime and receiving proof",
   "license": "Apache-2.0 first-party owners; no donor code relicensed",
   "status": "DRAFT_PENDING_HOSTED_HEAD_AND_OWNING_MAVEN_GATES",
-  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-filtered-splits-mask-spans-20261018",
+  "canonical_crate": "m3-openrewrite-recipes/recipe-crates/m3-filtered-splits-mask-spans-20261018",
   "source_hashes": [
     {
-      "target_path": "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
-      "before_sha256": "d70bcdd969aa688ed0a498ce3503684fee2b0ecc9eb11348160e7befa1a7cfe0",
-      "after_sha256": "d13c5c5db3e07e5c66f8857f2c74e07d2ba60babb7d2529bd397e61894881fd0",
-      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-splits-mask-spans-20261018/m3__collections__src__main__java__com__m3__collections__M3FilteredNavigableSet.java.txt"
+      "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredNavigableSet.java",
+      "before_sha256": "2c7720d134f5dab8c5bf13da28c719ef1cd462e5fd5f8bdc673c4bedaa6a64e0",
+      "after_sha256": "5dce16ffebd5d3cfdd7fdf77f509eff6784ffb7453ae76270b3ba39289df6c4a",
+      "canonical_template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-filtered-splits-mask-spans-20261018/m3__collections__src__main__java__jdk__m3__collections__M3FilteredNavigableSet.java.txt"
     },
     {
-      "target_path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
-      "before_sha256": "1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369",
+      "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+      "before_sha256": "e8a722cec3cdad01ce127936936f7c9928f094658e075aa9d1d89077e6eb7199",
       "after_sha256": "1d1150e37fa02a713e2383df2c599dc9a2075aaa3f5215a56be1d3892a283099",
-      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-splits-mask-spans-20261018/m3__collections__src__main__java__com__m3__collections__M3FilteredViews.java.txt"
+      "canonical_template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-filtered-splits-mask-spans-20261018/m3__collections__src__main__java__jdk__m3__collections__M3FilteredViews.java.txt"
     },
     {
-      "target_path": "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
-      "before_sha256": "66442108ee67cb8395f9e4cb7d26990583a33d2e2775347da15acb5cb3d5b62d",
-      "after_sha256": "3c65c0d918b6cb39d4c27f98699fa97067d2aa3a7fb76ea48b2fd6092a9d0178",
-      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-splits-mask-spans-20261018/m3__collections__src__main__java__com__m3__collections__M3MutableFilteredViews.java.txt"
+      "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java",
+      "before_sha256": "c8b48f217ddb27905496de23bebc06ab7bb2daee8583bb6ff092b6520c31d9dc",
+      "after_sha256": "19cbdee1b2e604ad5e491f9089d2ff869852cedee8ffd086e78bc887043678eb",
+      "canonical_template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-filtered-splits-mask-spans-20261018/m3__collections__src__main__java__jdk__m3__collections__M3MutableFilteredViews.java.txt"
     },
     {
-      "target_path": "m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java",
-      "before_sha256": "4ee2b86ea682c64da881d36eb5b4aadc4ba6640389f2adbfdc8dff4d44cf4070",
-      "after_sha256": "9257ce0c9c95e3afef20624631ba048aa3d60ef53a1189cd2bbabc07da2bba2f",
-      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-splits-mask-spans-20261018/m3__collections__src__main__java__com__m3__collections__M3SlotSpliterators.java.txt"
+      "target_path": "m3/collections/src/main/java/jdk/m3/collections/M3SlotSpliterators.java",
+      "before_sha256": "fe7db5946cb21eecac31dc478899c4864bba09b7b302357868af296ea2e0f554",
+      "after_sha256": "f42b36dcf5555941f97dbf732ccd210a8e2152862622e626d445576a2c93e326",
+      "canonical_template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-filtered-splits-mask-spans-20261018/m3__collections__src__main__java__jdk__m3__collections__M3SlotSpliterators.java.txt"
     },
     {
-      "target_path": "m3/collections/src/test/java/com/m3/collections/M3FilteredSplitContract.java",
+      "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredSplitContract.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "f00e6da4a79cd667d7af057765154812e292a59aa9656a0f6bb02d032880c3c8",
-      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-splits-mask-spans-20261018/m3__collections__src__test__java__com__m3__collections__M3FilteredSplitContract.java.txt"
+      "after_sha256": "1de713aac50440ec5028dae520168bc5e69cc473e255cbb0fef3820d31fba59e",
+      "canonical_template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-filtered-splits-mask-spans-20261018/m3__collections__src__test__java__jdk__m3__collections__M3FilteredSplitContract.java.txt"
     },
     {
-      "target_path": "m3/collections/src/test/java/com/m3/collections/M3FilteredSplitsMaskSpansTest.java",
+      "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3FilteredSplitsMaskSpansTest.java",
       "before_sha256": "ABSENT",
       "after_sha256": "a0a750d78d9d05669f8bb4194f7780e6189005afb0e62f5927a6bccd22716b48",
-      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-splits-mask-spans-20261018/m3__collections__src__test__java__com__m3__collections__M3FilteredSplitsMaskSpansTest.java.txt"
+      "canonical_template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-filtered-splits-mask-spans-20261018/m3__collections__src__test__java__jdk__m3__collections__M3FilteredSplitsMaskSpansTest.java.txt"
     },
     {
-      "target_path": "m3/collections/src/test/java/com/m3/collections/M3MaskSpansContract.java",
+      "target_path": "m3/collections/src/test/java/jdk/m3/collections/M3MaskSpansContract.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "ac936c50eeab26372d5406ab8ee3ede86f65173f8bc6d965adb151cf2ac5afeb",
-      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-splits-mask-spans-20261018/m3__collections__src__test__java__com__m3__collections__M3MaskSpansContract.java.txt"
+      "after_sha256": "5d28399dcbd5621a0dc824e518f7580a8593105d739f215f91f8e050c0ffc446",
+      "canonical_template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-filtered-splits-mask-spans-20261018/m3__collections__src__test__java__jdk__m3__collections__M3MaskSpansContract.java.txt"
     },
     {
       "target_path": ".github/workflows/m3-collections.yml",
       "before_sha256": "c5ee0eaa49e26c97c48db19e40d97c11c99d761c267cf1ea76023efd37def642",
       "after_sha256": "559240531a32d95b9fd76a7b0533a58e1be86d5ff4bb0e12e6db821cde28f1d0",
-      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-filtered-splits-mask-spans-20261018/.github__workflows__m3-collections.yml.txt"
+      "canonical_template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-filtered-splits-mask-spans-20261018/.github__workflows__m3-collections.yml.txt"
     },
     {
       "target_path": "m3/collections/qualification/filtered-splits-mask-spans-20261018/verify.py",
       "before_sha256": "ABSENT",
-      "after_sha256": "3ff8a0529d93decb10edf3f658f57b31d1386ea655da3d92f709a629c9d7ddd8",
-      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-filtered-splits-mask-spans-20261018/m3__collections__qualification__filtered-splits-mask-spans-20261018__verify.py.txt"
+      "after_sha256": "d7ed1f2181a3a381a92bbe6d1145b369c6540eebabb65b9cb1b9b696ddfad05d",
+      "canonical_template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-filtered-splits-mask-spans-20261018/m3__collections__qualification__filtered-splits-mask-spans-20261018__verify.py.txt"
     },
     {
       "target_path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
-      "before_sha256": "a5cefed03d9db9429048a218945a8af71b5b7acc862e089f6cc8a451a172e212",
-      "after_sha256": "8107ba8ba5f9d7519563eba9d20e76932dd077b2359f056b05ccd0a2d7d62e18",
-      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-filtered-splits-mask-spans-20261018/m3__collections__src__main__native__collections__m3_index_mask_window.c.txt"
+      "before_sha256": "e57a418a183326d17cd117bcb81c2ddd49202b8195778f38a06b970c1058f16d",
+      "after_sha256": "9ed1244ef90a72845d580b8919c670760434a81cf6dfc48f3aecbc8483726c02",
+      "canonical_template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-filtered-splits-mask-spans-20261018/m3__collections__src__main__native__collections__m3_index_mask_window.c.txt"
     },
     {
       "target_path": "m3/collections/src/test/native/m3_mask_window_spans.c",
       "before_sha256": "ABSENT",
-      "after_sha256": "219d1cf76e3a02a08ec649f3da16e36e720b08f15124fa6a2b4504587468edb4",
-      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-filtered-splits-mask-spans-20261018/m3__collections__src__test__native__m3_mask_window_spans.c.txt"
+      "after_sha256": "f54d8b3cf3160791605dc5b7fc1eb8868e371d5f711b1df280af80a99f08af66",
+      "canonical_template": "m3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-filtered-splits-mask-spans-20261018/m3__collections__src__test__native__m3_mask_window_spans.c.txt"
     }
   ],
-  "catalogue_sha256": "eb8de41ec7e8c0d392607d79895a421861e6ae953a21ce672ec206c0bbfdec9a",
+  "catalogue_sha256": "c6b6585a44288588e49a807b7b43ba8a5fde0fb18e1ab3426a080505a9ab093c",
   "local_proof_sha256": "5fdad24b6d6127cb07bf3ad956559b581ba9b362b3b1b7e362a3f0cd915f4e9e"
 }

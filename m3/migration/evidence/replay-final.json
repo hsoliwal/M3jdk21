@@ -5,11 +5,11 @@
   "tool_code_commit": "35c2787e2222e9ce894f6255ca9a9c1c44c5a6c0",
   "source_input_sha256": "d2ccefe7aceb9797913fd1ec9daf5aba976bf4e86aefdbd9decc86d348d2cb56",
   "inputs": {
-    "m3/migration/src/com/m3/migration/ExactFileRecipe.java": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90",
+    "m3/migration/src/jdk/m3/migration/ExactFileRecipe.java": "d094fc40909639119828b78f5f1635c51263e6aa177a159ac05de7ee8b8871ee",
     "m3/migration/recipes/prefix-z-v1.tsv": "54251ed210b9ed280919968a6ea13f0b6ed6e590fbf92090d13b4495f05f4217",
-    "m3/migration/recipes/postimages/M3PrefixZ.java.txt": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
+    "m3/migration/recipes/postimages/M3PrefixZ.java.txt": "5f936a3c6e69ca487eff6a0665ada01546750d9d87ce85ee50a337a4236233d0",
     "m3/migration/migration.py": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
-    "m3/docs/name-mapping.json": "4520738b949198601dc7c2ecf2bef7612bf11b024473bda06ffd75dbfa6253a7",
+    "m3/docs/name-mapping.json": "f64c2fb755da01097665c6c2cc9b82c8c651e9f208eb7570de7ec6e47fbbeb4f",
     "m3/docs/name-mapping.schema.json": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
     "m3/recipes/manifest.json": "a676ba7f32e406c12cbe120665a914130ed79e11fe8e43d005cb40b90d6f29f2"
   },
@@ -17,7 +17,7 @@
     {
       "command": [
         "java",
-        "/mnt/data/m3-work/candidate/m3/migration/src/com/m3/migration/ExactFileRecipe.java",
+        "/mnt/data/m3-work/candidate/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java",
         "check",
         "/mnt/data/m3-work/source-input",
         "/mnt/data/m3-work/final-replay-target",
@@ -30,7 +30,7 @@
     {
       "command": [
         "java",
-        "/mnt/data/m3-work/candidate/m3/migration/src/com/m3/migration/ExactFileRecipe.java",
+        "/mnt/data/m3-work/candidate/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java",
         "apply",
         "/mnt/data/m3-work/source-input",
         "/mnt/data/m3-work/final-replay-target",
@@ -43,7 +43,7 @@
     {
       "command": [
         "java",
-        "/mnt/data/m3-work/candidate/m3/migration/src/com/m3/migration/ExactFileRecipe.java",
+        "/mnt/data/m3-work/candidate/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java",
         "apply",
         "/mnt/data/m3-work/source-input",
         "/mnt/data/m3-work/final-replay-target",
@@ -56,7 +56,7 @@
     {
       "command": [
         "java",
-        "/mnt/data/m3-work/candidate/m3/migration/src/com/m3/migration/ExactFileRecipe.java",
+        "/mnt/data/m3-work/candidate/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java",
         "rollback",
         "/mnt/data/m3-work/final-replay-target",
         "/mnt/data/m3-work/candidate/m3/migration/recipes/prefix-z-v1.tsv"
@@ -68,7 +68,7 @@
     {
       "command": [
         "java",
-        "/mnt/data/m3-work/candidate/m3/migration/src/com/m3/migration/ExactFileRecipe.java",
+        "/mnt/data/m3-work/candidate/m3/migration/src/jdk/m3/migration/ExactFileRecipe.java",
         "apply",
         "/mnt/data/m3-work/source-input",
         "/mnt/data/m3-work/final-replay-target",
@@ -88,7 +88,7 @@
         "--extension",
         "m3/docs/name-mapping.json",
         "--expected-sha256",
-        "a28301f443314e6ece0e918d7d3af655fe127578380f15c9860a0db2702a5601",
+        "991bfb86a4b57e4874aab7dfac4790a9b4d2c1c04453313a0527e5a8a21e73b1",
         "--output",
         "/mnt/data/m3-work/naming-replay-final.json"
       ],

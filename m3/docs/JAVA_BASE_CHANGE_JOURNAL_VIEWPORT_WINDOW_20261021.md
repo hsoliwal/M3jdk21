@@ -53,7 +53,7 @@ deterministic differential iterations across six journal capacities and checks
 wrap, replay, rejected limits, stale cursors and callback mutation.
 
 Exact candidate Git blob: `256830b7df09df1b7c6c3fa64bf34113044e8159`.
-Exact added test blob: `f82dc70c1fa856ba60f59ba084d7e7eb9b484101`.
+Exact added test blob: `fa5e3f18ca186107f9a4ea025585743f8c3bb623`.
 
 Synexia's reusable source-sealed OpenRewrite recipe and category catalogue:
 `com.synexia.rewrite.M3Jdk21ChangeJournalWindow20261021` on

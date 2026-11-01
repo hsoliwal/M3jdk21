@@ -4,9 +4,9 @@ name: M3 Full-Width Signal Masks Java21 JNI
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3SignalOrder.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3SignalDimensions.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3SignalMask32*.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3SignalOrder.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3SignalDimensions.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3SignalMask32*.java'
       - 'm3/collections/qualification/signal-mask32-20261018/**'
       - '.github/workflows/m3-signal-mask32-20261018.yml'
   workflow_dispatch:

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package com.synexia.indexstring;
+package jdk.internal.m3.indexstring;
 
 import java.io.Reader;
 import java.nio.ByteBuffer;

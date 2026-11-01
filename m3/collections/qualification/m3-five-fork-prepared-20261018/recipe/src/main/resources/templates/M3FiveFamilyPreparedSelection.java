@@ -3,10 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  * Generated from the canonical Synexia source-sealed Maven recipe.
  */
-package com.m3.collections.interop;
+package jdk.m3.collections.interop;
 
 import com.google.common.collect.ListMultimap;
-import com.m3.collections.M3IndexMaskCompactor;
+import jdk.m3.collections.M3IndexMaskCompactor;
 import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Comparator;

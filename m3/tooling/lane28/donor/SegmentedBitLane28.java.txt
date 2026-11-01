@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package com.synexia.common.collections;
+package jdk.internal.m3.common.collections;
 
 /**
  * Lazy occupancy/flag lane. Each touched 4,096-slot logical block owns exactly 64 long words.

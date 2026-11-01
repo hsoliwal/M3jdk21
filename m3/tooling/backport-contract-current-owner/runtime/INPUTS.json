@@ -122,8 +122,8 @@
   ],
   "donor": {
     "repository": "hsoliwal/com.synexia",
-    "path": "synexia-openrewrite-recipes/tasks/state-relation-current-c11-20261019/runtime/qualify.py",
-    "gitBlob": "edf9f20eaf672f661d1f469a2d036f0c28da7805",
+    "path": "m3-openrewrite-recipes/tasks/state-relation-current-c11-20261019/runtime/qualify.py",
+    "gitBlob": "b3fb888d4ea4d7a6b13bc13fef0fdcdba0bcb0f2",
     "license": "Apache-2.0",
     "decision": "ADAPT_EXACT_CUSTODY_COMMAND_LIFETIME_AND_RECEIPT_PATTERN_ONLY"
   },

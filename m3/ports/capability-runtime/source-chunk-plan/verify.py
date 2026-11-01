@@ -58,7 +58,7 @@ def main():
     java = shutil.which('java')
     if not java:
         raise RuntimeError('Java21 required')
-    main_class = 'com.m3.runtime.capability/com.m3.runtime.capability.SourceChunkPlanChecks'
+    main_class = 'jdk.m3.runtime.capability/jdk.m3.runtime.capability.SourceChunkPlanChecks'
     command = [java, '-Xmx128m', '-Xcheck:jni', '--module-path', proof / 'classes',
                '--module', main_class]
     pure = invoke(command, out, 'chunk-java-oracle')
@@ -78,15 +78,15 @@ def main():
             raise AssertionError('native chunk-plan differential evidence missing')
     linked = proof / 'developer-image'
     exe = '.exe' if os.name == 'nt' else ''
-    smoke = root / 'src/test/java/com/m3/runtime/proof/SourceChunkPlanImageSmoke.java'
+    smoke = root / 'src/test/java/jdk/m3/runtime/proof/SourceChunkPlanImageSmoke.java'
     dest = out / 'linked-image-smoke-classes'
     dest.mkdir()
     invoke([linked / 'bin' / ('javac' + exe), '--add-modules',
-            'com.m3.runtime.capability', '-Xlint:all', '-Werror',
+            'jdk.m3.runtime.capability', '-Xlint:all', '-Werror',
             '-d', dest, smoke], out, 'linked-image-javac')
     linked_output = invoke([linked / 'bin' / ('java' + exe), '--add-modules',
-                            'com.m3.runtime.capability', '-cp', dest,
-                            'com.m3.runtime.proof.SourceChunkPlanImageSmoke'],
+                            'jdk.m3.runtime.capability', '-cp', dest,
+                            'jdk.m3.runtime.proof.SourceChunkPlanImageSmoke'],
                            out, 'linked-image-chunk-smoke')
     if linked_output != 'M3_SOURCE_CHUNK_PLAN_IMAGE_PASS':
         raise AssertionError('new chunk plan not exercised in linked image')

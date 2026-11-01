@@ -124,7 +124,7 @@ static void span_error(JNIEnv *env, const char *klass, const char *message) {
 }
 
 /* Existing ABI preserved: returns a detached output array. */
-JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3SpanIndex_batchNative(
+JNIEXPORT jintArray JNICALL Java_jdk_m3_collections_M3SpanIndex_batchNative(
         JNIEnv *env, jclass unused, jintArray sorted_starts, jlongArray prefix_max,
         jintArray targets) {
     (void) unused;
@@ -140,7 +140,7 @@ JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3SpanIndex_batchNative(
 }
 
 /* Additive ABI: caller-owned output window, no result allocation or pointer lifetime. */
-JNIEXPORT void JNICALL Java_com_m3_collections_M3SpanIndex_batchIntoNative(
+JNIEXPORT void JNICALL Java_jdk_m3_collections_M3SpanIndex_batchIntoNative(
         JNIEnv *env, jclass unused, jintArray sorted_starts, jlongArray prefix_max,
         jintArray targets, jint query_from, jint length,
         jintArray output, jint output_from) {

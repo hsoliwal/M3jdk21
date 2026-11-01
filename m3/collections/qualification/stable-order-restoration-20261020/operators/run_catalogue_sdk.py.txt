@@ -13,12 +13,12 @@ C2 = Path(__file__).resolve().parent
 B = C2.parent / 'm3fs-vfs-20261020'
 CANON = B / 'canonical'
 RECEIVER = B / 'receiver'
-TASK = CANON / 'synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020'
+TASK = CANON / 'm3-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020'
 HOST = TASK / 'catalogue/recipe-host'
 ORIGINAL = TASK / 'recipe-host'
 OUT = C2 / 'verification/catalogue-sdk'
 JDK = B / 'toolchain/jdk21'
-OWNER = CANON / 'synexia-openrewrite-recipes'
+OWNER = CANON / 'm3-openrewrite-recipes'
 CATALOGUE = 'm3/collections/algorithm-catalog/stable-order-restoration-20261020'
 NAMES = (('catalogue-candidates', 'CANDIDATES.tsv'), ('catalogue-readme', 'README.md'),
          ('catalogue-discovery', 'DISCOVERY.json'), ('catalogue-pins', 'SOURCE_PINS.json'))
@@ -42,7 +42,7 @@ for relative in ('sdk/RESULTS.json', 'generated/RESULTS.json', 'native-final/RES
 assert not OUT.exists(), 'Keep previous qualifications immutable; use a fresh output identity.'
 OUT.mkdir(parents=True)
 lineage = {}
-for rel in ('pom.xml', 'src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java', 'ENGINE_SOURCES.tsv'):
+for rel in ('pom.xml', 'src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java', 'ENGINE_SOURCES.tsv'):
     destination = HOST / rel
     destination.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(ORIGINAL / rel, destination)
@@ -54,7 +54,7 @@ write(HOST / 'README.md', '''<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal an
 
 This task reuses the existing serial Maven/OpenRewrite proof host without changing
 its test or engine implementations. Select one catalogue pass with -Dm3.pass and
-set -Drecipe.owner.root to the enclosing synexia-openrewrite-recipes module.
+set -Drecipe.owner.root to the enclosing m3-openrewrite-recipes module.
 The nested location makes that explicit owner override mandatory. Each pass
 contains one ABSENT text target, a sealed template and the existing named recipe.
 The parent CONTRACT.md admits only the four appended knowledge files.
@@ -67,7 +67,7 @@ the catalogue itself does not establish runtime correctness or performance.
 ''')
 json_file(HOST / 'HARNESS_LINEAGE.json', {'schema': 'M3_CATALOGUE_HOST_REUSE_V1',
           'copied_exact': lineage, 'implementation_changes': [],
-          'owner_root': str(OWNER), 'existing_recipe': 'com.synexia.m3.WrapperConvergence20261018'})
+          'owner_root': str(OWNER), 'existing_recipe': 'jdk.internal.m3.WrapperConvergence20261018'})
 write(HOST.parent / 'CONTRACT.md', '''<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors -->
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # Additive stable-order catalogue record
@@ -105,7 +105,7 @@ for selected, name in NAMES:
     assert not (RECEIVER / relative).exists()
     packet = HOST / 'passes' / selected
     crate = 'm3-wrapper-' + selected
-    resource = packet / 'resources/com/synexia/rewrite/hash-pinned-text' / crate
+    resource = packet / 'resources/jdk/internal/m3/rewrite/hash-pinned-text' / crate
     template = name + '.txt'
     write(resource / template, source.read_text())
     write(resource / 'manifest.tsv', '# path\tbefore-sha256\tafter-sha256\ttemplate\n'
@@ -114,10 +114,10 @@ for selected, name in NAMES:
           '# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors\n'
           '# SPDX-License-Identifier: Apache-2.0\n'
           'type: specs.openrewrite.org/v1beta/recipe\n'
-          'name: com.synexia.m3.WrapperConvergence20261018\n'
+          'name: jdk.internal.m3.WrapperConvergence20261018\n'
           'displayName: Append one validated M3 catalogue record\n'
           'description: Admit one exact new catalogue file through the existing canonical text owner.\n'
-          'recipeList:\n  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:\n'
+          'recipeList:\n  - jdk.internal.m3.rewrite.M3HashPinnedTextSnapshotRecipe:\n'
           '      crateName: ' + crate + '\n')
     write(packet / 'PASS.md', '# Pass ' + selected + '\n\nCopyright 2026 Hitesh Soliwal and contributors. '
           'SPDX-License-Identifier: Apache-2.0.\n\nAppend only `' + relative + '` from ABSENT to SHA-256 `' + sha(source)

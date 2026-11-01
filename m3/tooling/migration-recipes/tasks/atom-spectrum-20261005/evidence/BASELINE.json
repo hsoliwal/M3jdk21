@@ -42,7 +42,7 @@
     ]
   },
   "preserved_snapshot_helper": {
-    "path": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+    "path": "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
     "git_blob": "717c3e01f8f0407ce96439e3ecc96190b10c1eed",
     "sha256": "9cf77c6e68a534e84b88230ca517fa6c5a76fb3e101ea3a1f68aa5222c3ec4d9"
   },

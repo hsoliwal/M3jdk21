@@ -4,11 +4,11 @@
 This is the current-master test successor to the existing
 `pr1292-current-master-region-20261028/RECEIPT.md` (#2073). The
 native Java/JNI production source `m3_index_mask_window.c` is unchanged:
-Git blob `bd300c90d54ede9b7f238efe8a18c918d2fcef9e`.
+Git blob `baa23467163a0e9344fe3c1d78dcc87cb707fd56`.
 The already-admitted original instrumented C test
 `m3_mask_window_current_master_contract.c` has preimage
 `6711b9edeeba1ed1a4de3cfdc118ac939b92bd5d` and new postimage
-`30faabd9efe6ba846fbb8d5b559371edff1e7eb1`.
+`5c3f52eb07d78e700832e55646e37b71fee0f4dc`.
 
 **Recipe source:** Synexia [#13803](https://github.com/hsoliwal/com.synexia/pull/13803)
 retains the pre/post SHA-256 manifest for the existing original OpenRewrite
@@ -28,7 +28,7 @@ No recipe source is copied into public M3JDK21.
 - Repeated with `-fsanitize=undefined -fno-sanitize-recover=all`:
   **same 1,712,636 passing assertions**; zero sanitizer reports.
 - Exact source script generated the postimage SHA-256
-  `66b4725e6f03426440074e3a0d2b97c0150bdd23ffd1881a20b470a56c90a6d1`.
+  `722fbd4c46d905266c7828e13c0ca39350e8baab91d54823ac9767bd11e160d3`.
 - The unchanged CI owner has its only source-identity pin advanced to this
   test successor and reruns both actual C17 configurations. A queued CI job
   is not a pass and full HotSpot `-Xcheck:jni` remains outside this proof.

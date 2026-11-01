@@ -35,8 +35,8 @@ Target original Java mask source:
 → `91c7a99d394fe76a47af0c1eaaa35ffd6d070ee6e2497a63668db8301dd86329` (SHA-256).
 
 Target original libjava C source:
-`153ec9727301febd6fff24a55877ec549850ebac997366fe25bb04e9b9bee81b`
-→ `4a9c0ab3e8d7a0aac0027e8fb4789f768ee5a48b2db18b7a54e2fd543c5c7f91` (SHA-256).
+`dd0f8229d0009ed6b82858c980f2cb4deeb9ade5f4d49d489f4d9cb9c4728e31`
+→ `a284d0cc09ca01e2c41b67024ac9fd911e69165abd1bf01246f40499e810f8da` (SHA-256).
 
 Three exact original #1878 JNI test sources are additive (ABSENT-before).
 The integrated verifier is additive, and the existing #1879 atomic-growth
@@ -45,7 +45,7 @@ workflow is extended without removing its checks.
 ## Explicit no-overwrite invariant
 
 Do **not** replace existing `M3IndexedArray` Git blob
-`e6059aeb9b2e7f332fb0baea2684395c268a5414`: it contains
+`135f13b0c4478659aa3395bdeaa740b4438f649d`: it contains
 seven-array failure-atomic growth, fused mask+predicate selectors and
 original sorted index state.
 

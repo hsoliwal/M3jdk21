@@ -6,4 +6,4 @@ description: >-
   Applies exact hash-pinned M3JDK21 postimages for one-pass source hashing, parser/index fact
   observers, sorted fixed-width receipts and downstream fact deltas.
 recipeList:
-  - com.m3.rewrite.file.M3FileLayeredFactsReceiverRecipe
+  - jdk.m3.rewrite.file.M3FileLayeredFactsReceiverRecipe

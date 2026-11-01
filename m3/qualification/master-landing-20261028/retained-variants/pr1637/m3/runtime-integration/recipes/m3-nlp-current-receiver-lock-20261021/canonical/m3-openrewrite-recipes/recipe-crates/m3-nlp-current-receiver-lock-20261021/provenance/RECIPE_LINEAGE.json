@@ -1,0 +1,86 @@
+{
+  "schema": "M3_NLP_CURRENT_RECEIVER_LOCK_RECIPE_LINEAGE/1",
+  "task": "m3-nlp-current-receiver-lock-20261021",
+  "status": "FOUNDATION_ONLY_NOT_QUALIFIED",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_revision": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
+  "source_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12648",
+  "canonical_engine_revision": "e02e7cb0f2e8e46db4c5b476d59aa26658fa4d07",
+  "shared_engine_changes": false,
+  "inherited_runtime_or_memory_results": false,
+  "adaptations": [
+    {
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/pom.xml",
+      "source_revision": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
+      "source_git_blob": "58cf3f5ab4222978b96b8bff507b6be80e4f57a0",
+      "source_sha256": "556a8edbd5236692ef4b059b586c63d30a71cd8a5676d63ce020fa14a00d7561",
+      "snapshot": "provenance/donors/published-core/pom.xml",
+      "target_path": "pom.xml",
+      "after_sha256": "21f617d90e89fbb9c9d82802238822cebbab52963a6027fe301a5e186b9750ef",
+      "diff": "provenance/adaptations/pom.xml.diff",
+      "disposition": "ADAPTED_UPSTREAM",
+      "license": "Apache-2.0"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/prepare_packet.py",
+      "source_revision": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
+      "source_git_blob": "12df302085598f292ff01a38a55f4d0f1fd386b1",
+      "source_sha256": "6a7f09ecff0cfeb9a515e817a23e22b82f87241371ac478c7d6c403c9f74583c",
+      "snapshot": "provenance/donors/published-core/prepare_packet.py",
+      "target_path": "prepare_packet.py",
+      "after_sha256": "fabda7308bbc4fbd65fd4ec8f46465e6c321e091b478dfde2afd50cbf45e3e77",
+      "diff": "provenance/adaptations/prepare_packet.py.diff",
+      "disposition": "ADAPTED_UPSTREAM",
+      "license": "Apache-2.0"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/qualify.py",
+      "source_revision": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
+      "source_git_blob": "f57b81ea9bd9e7ab63f62840c5c7e132448241f4",
+      "source_sha256": "82fad5f4cffc8f4ad39c7c9baca543cc18bad12fe6f5a3d0b799cdf7fd116a4a",
+      "snapshot": "provenance/donors/published-core/qualify.py",
+      "target_path": "qualify.py",
+      "after_sha256": "c0fd4b4b5dd4015f0c27f34df0e3d818935d30a8c46a741c987773a4f0d6da98",
+      "diff": "provenance/adaptations/qualify.py.diff",
+      "disposition": "ADAPTED_UPSTREAM",
+      "license": "Apache-2.0"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/apply_receiver.py",
+      "source_revision": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
+      "source_git_blob": "ce270af4846d573c8a1254b7561c7f55ab41a8ca",
+      "source_sha256": "199b76317afc66b4ff61f70a626ad01ba4e2d678bfd3def95ff336d249a2b78d",
+      "snapshot": "provenance/donors/published-core/apply_receiver.py",
+      "target_path": "apply_receiver.py",
+      "after_sha256": "2b43a48b0af414e97c0bde1031c5e891cff1de9ccc4f4c38038b3de3f1032509",
+      "diff": "provenance/adaptations/apply_receiver.py.diff",
+      "disposition": "ADAPTED_UPSTREAM",
+      "license": "Apache-2.0"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/verify_sources.py",
+      "source_revision": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
+      "source_git_blob": "401703fe2fc8056673be0e5c6cae051fe825735c",
+      "source_sha256": "603a47418a7dbd6bd38708bff31bce26b4b4a70e3bdc2d85a7d829395e24b445",
+      "snapshot": "provenance/donors/published-core/verify_sources.py",
+      "target_path": "verify_sources.py",
+      "after_sha256": "cb673aba8063bb90b403472317c69eebe285fd6ca9b80d01fda34baff4beca09",
+      "diff": "provenance/adaptations/verify_sources.py.diff",
+      "disposition": "ADAPTED_UPSTREAM",
+      "license": "Apache-2.0"
+    },
+    {
+      "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/com/synexia/rewrite/M3IntegratedRefinementRecipeTest.java",
+      "source_revision": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
+      "source_git_blob": "1e2bf642bfc868f07d41f05bb0f73bdf308273ab",
+      "source_sha256": "d477f820c8bf4712b36d4a1d9002b2fa82a62a88175c1f84cd7fd03e978eefe0",
+      "snapshot": "provenance/donors/published-core/src/test/java/com/synexia/rewrite/M3IntegratedRefinementRecipeTest.java",
+      "target_path": "src/test/java/com/synexia/rewrite/M3NlpCurrentReceiverLockRecipeTest.java",
+      "after_sha256": "3854e95a120d831d71136b9673707ef3893494829c3042fc054cabb58e1357f2",
+      "diff": "provenance/adaptations/M3NlpCurrentReceiverLockRecipeTest.java.diff",
+      "disposition": "ADAPTED_UPSTREAM",
+      "license": "Apache-2.0"
+    }
+  ],
+  "scope": "Task IDs, suite inventory and declared actual-owner attribution change; generic scheduler/refusal/fixed-point/replay/copy guards remain unchanged. Reviewed one-file candidate and owning runtime proof are separate prerequisites."
+}

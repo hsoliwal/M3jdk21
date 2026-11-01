@@ -15,12 +15,12 @@ ledger entry does not authorize copying or promotion.
 ## Minimal correction
 
 Add exactly the missing mapping ID and target path to
-`m3/docs/synexia-direct-copy-review.tsv`, preserving `REVIEW_REQUIRED` and
+`m3/docs/m3-direct-copy-review.tsv`, preserving `REVIEW_REQUIRED` and
 both resolution alternatives: rightsholder-authorized compatible relicensing
 or target-owned reimplementation without incompatible-license commingling.
 
 ## Verification
 
-Run `m3/runtime-integration/verify-synexia-intake.py` and the intake-policy
+Run `m3/runtime-integration/verify-m3-intake.py` and the intake-policy
 workflow. Expected ledger cardinality is 23, matching the copied-code
 inventory exactly.

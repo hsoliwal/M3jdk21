@@ -8,7 +8,7 @@
   "host_sources": [
     {
       "path": "pom.xml",
-      "git_blob": "be7c8e672367ed3be485168ae3637e57b78ba1cd"
+      "git_blob": "44350ec054390a574d824ba2b7567fc1ed28b75c"
     },
     {
       "path": "receive.py",
@@ -20,7 +20,7 @@
     },
     {
       "path": "src/main/resources/META-INF/rewrite/m3-deep-filter-list-20261017.yml",
-      "git_blob": "9b8911eb63500fbc121092cc858e294a0c8c5c93"
+      "git_blob": "8897434429d17e4d25894444193e28397c3fa7b7"
     },
     {
       "path": "NOTICE.md",

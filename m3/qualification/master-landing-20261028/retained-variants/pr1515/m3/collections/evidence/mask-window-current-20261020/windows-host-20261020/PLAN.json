@@ -6,7 +6,7 @@
   "commit": "fd493c1d9dac8cdf462351c35d588fe9299b7e34",
   "root": "K:/codex-work/m3jdk21-recipe-pass-20261020/index-mask-jni-v1",
   "source_inventory": "SOURCE_INVENTORY.json",
-  "source_inventory_sha256": "c3db42a093aecc31e4bbbc12e87d6e4d7eb9edefd08ff26bb145bd6de2654b57",
+  "source_inventory_sha256": "0dad2da068477fc0332ad4f8a9dc46bc5e7ff164ccda946e57025811af4307fb",
   "scope": {
     "kind": "EXACT_FIVE_FILE_VALIDATION_ACTION",
     "source_transformation": false,

@@ -4,10 +4,10 @@
   "receiving_repository": "hsoliwal/M3jdk21",
   "receiving_base_commit": "cda404e4a4539d8f4e5cf1a92f20859a522a56b7",
   "original_workflow": {
-    "path": ".github/workflows/m3-synexia-intake-policy.yml",
+    "path": ".github/workflows/m3-intake-policy.yml",
     "git_blob": "5be2e74f3d68a95c981d703e4b8d337cc5c1a15d"
   },
-  "received_workflow_git_blob": "6440a2b6a51c17983ee082cccfed4dc99dd9446f",
+  "received_workflow_git_blob": "0fa901995fcd6f89f494bb8ab83601cce7a2700d",
   "source_owner": {
     "repository": "hsoliwal/com.synexia",
     "pull_request": 14220,

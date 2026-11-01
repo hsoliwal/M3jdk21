@@ -1,5 +1,5 @@
 {
-  "schema": "synexia.coding-agent.recipe-dag-shapes.v1",
+  "schema": "m3.coding-agent.recipe-dag-shapes.v1",
   "compositions": [
     {
       "id": "serial-file-refinement",
