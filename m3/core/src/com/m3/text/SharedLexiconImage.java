@@ -127,8 +127,15 @@ public final class SharedLexiconImage {
     /** Binary lookup using the image's UTF-16 ordering and Java String ordering. */
     int findRecord(String value) {
         Objects.requireNonNull(value);
-        int row = lowerBound(value);
-        return row < offsets.length && compareRecordTo(row, value) == 0 ? row : -1;
+        int low = 0, high = offsets.length;
+        while (low < high) {
+            int middle = (low + high) >>> 1;
+            int comparison = compareRecordTo(middle, value);
+            if (comparison < 0) low = middle + 1;
+            else if (comparison > 0) high = middle;
+            else return middle; // Opening validated that record values are unique.
+        }
+        return -1;
     }
 
     /** First record whose UTF-16 value is not less than {@code value}. */
