@@ -5,10 +5,12 @@
 # Gate PERF_AB v1: runs M3NumberParseAtomsPerf (test/jdk/jdk/internal/math) once per variant per round, variants
 # interleaved inside each round (ABBA order) so host-load drift and run-order bias hit every variant alike.
 # Appends one row per measured atom: round variant atom ns_per_op_atom ns_per_op_reference speedup (failed runs: atom = RUN_FAILED).
+# The TSV starts with the Synexia SPDX header ('#' lines; perf_gate.py skips them).
 set -u
 java_bin=$1 test_classes=$2 out=$3 rounds=$4
 shift 4
-printf 'round\tvariant\tatom\tns_per_op_atom\tns_per_op_reference\tspeedup\n' > "$out"
+printf '# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0\n# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others\n' > "$out"
+printf 'round\tvariant\tatom\tns_per_op_atom\tns_per_op_reference\tspeedup\n' >> "$out"
 for ((r = 1; r <= rounds; r++)); do
   order=("$@")
   if ((r % 2 == 0)); then  # ABBA: even rounds run the variants in reverse order

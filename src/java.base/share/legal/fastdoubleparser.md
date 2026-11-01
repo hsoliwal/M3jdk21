@@ -17,7 +17,14 @@ from the parsers, which square only powers of ten); LITERAL_CONSTANTS v1 (no mag
 the 13 source files became 205 private static final constants named by role, each with the literal's own type and
 spelling and a one-line Javadoc giving the role, under one //FLLDCIM anchor comment in each of the 10 classes that
 declare them (nested classes included); javac folds the constants back, so the method bytecode is unchanged
-(m3/tooling/jdk-superset/number-parse/CONSTANTS.tsv, BYTECODE_IDENTITY.tsv); JIT_ATOMIZE v1: the parse-path
+(m3/tooling/jdk-superset/number-parse/CONSTANTS.tsv, BYTECODE_IDENTITY.tsv); DEC_EXPONENT_CLAMP v1: when the
+exponent number reaches MAX_EXPONENT_NUMBER, parseDecFloatLiteral of both Java-grammar templates passes
+DECLINED_EXPONENT (private static final int, Integer.MIN_VALUE) as both exponents to valueOfFloatLiteral (in the
+JIT_ATOMIZE v1 split below, valueOfTruncatedDecFloatLiteral passes a declined exponent on as the truncated
+exponent), so the decimal kernels decline and the literal takes the FloatingDecimal path (the donor stops
+accumulating the exponent number at the clamp and adds the digit counts afterwards, so "0." + 723 zeros +
+"1e10240" gave 1e300 instead of Infinity and "1" + 1100 zeros + "e-10240" about 1e76 instead of 0.0;
+DEC_ATOMS_PR2215.tsv, DEC_BYTECODE_METHOD_DELTA.tsv); JIT_ATOMIZE v1: the parse-path
 methods above the HotSpot inlining limit FreqInlineSize (325 bytes) were split, in the same 8 files, into private
 methods with the same behaviour (parseExponentNumber and parseLiteralTail in both grammar templates, returning one
 packed long, with packedIndex; valueOfTruncatedDecFloatLiteral and valueOfTruncatedHexLiteral; isClingerFastPath,
