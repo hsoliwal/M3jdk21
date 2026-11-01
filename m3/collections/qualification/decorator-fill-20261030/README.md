@@ -192,13 +192,14 @@ class files unchanged).
 
 ## Generator atoms
 
-The generator is four atom files under one CLI contract
+The generator is five atom files under one CLI contract
 (`M3DecoratorFill <sources> <scaffold> <fqn> <out> <atoms>` and `--rule-check <sources> <out>`). Each can be
 replaced alone while that contract holds:
 
 | Atom | Lines | Contract |
 |---|---|---|
-| `M3DecoratorFill.java` | 2,237 | CLI; atomize, resolve, classify and emit one scaffold |
+| `M3DecoratorFill.java` | 2,173 | CLI; atomize, resolve, classify and emit one scaffold |
+| `M3DecoratorPatterns.java` | 106 | the regular expressions the classifier matches and the WRAP table (data only) |
 | `M3DecoratorTemplates.java` | 365 | helper text blocks H2, H3 and H4 (data only) |
 | `M3DecoratorJdkStandard.java` | 1,054 | the JDK_STANDARD pass: parameter names, imports, Javadoc, layout |
 | `M3DecoratorRuleCheck.java` | 174 | the R4/R5/R6 classifier checks behind `--rule-check` |
@@ -207,7 +208,29 @@ The split was mechanical: line ranges moved byte for byte, with nested classes d
 the class names, a record accessor in place of a field read, and package-private access on the core members the
 atoms call. Proof: all 37 owned classes are byte-identical to the run before the split; the verdict is PASS;
 negative controls 16/16 (generator mutants compile with the unchanged atoms); and the four files pass
-`-Xdoclint:all/protected` and M3JdkStandard. `run.sh` compiles the four atoms and pins them in PROVENANCE.tsv.
+`-Xdoclint:all/protected` and M3JdkStandard. `run.sh` compiles the atoms and pins them in PROVENANCE.tsv.
+
+Pass 2 moved the 11 regular expressions and the WRAP table into `M3DecoratorPatterns`, byte for byte.
+References were requalified by a lexer that skips string literals, text blocks, character literals and comments,
+because the same names occur inside strings (the category `"WRAP"`, the header text). Only identifier tokens in
+code changed, on 15 lines. Proof: verdict PASS; the 3,262 JUnit tests pass, including the 37 byte-identical
+replays; no owned class changed.
+
+## Pipeline order: atomize, JIT, patternize
+
+`run.sh` runs the stages in this order:
+
+1. **Atomize.** The fill stage makes each scaffold method one atom, one row in `METHOD_ATOMS.tsv`.
+2. **JIT.** The `jit` stage (`M3DecoratorJitTest`, 1,561 tests) needs `JUNIT_CONSOLE`. A child JVM runs the warmed
+   harness over all 49 targets with `-XX:+PrintCompilation` (`M3DecoratorDifferential --jit`). Each public method of
+   each owned class passes when the JIT compiled it and its bytecode fits HotSpot's hot-method inlining limit
+   (`FreqInlineSize`, 325 bytes). The bytecode size comes from the class file, through a small JVMS reader in the test.
+   PrintCompilation names a method by name and size, so overloads are told apart by size. The tier reached is
+   recorded, not asserted: HotSpot drops to tier 2 while the C2 queue is long.
+   - `JIT_SNAPSHOT_20261031.tsv`: all 1,561 atoms compiled, 630 by C2.
+   - The largest atom is 61 bytes, and 1,524 atoms fit `MaxInlineSize` (35 bytes), so they are inlined even when cold.
+3. **Patternize.** The patternizer passes follow: differential, probes, negative controls, and the JUnit atom,
+   generator and perf tests.
 
 ## JUnit and perf tests per atom
 

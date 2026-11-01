@@ -15,6 +15,7 @@
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -144,6 +145,14 @@ public final class M3DecoratorDifferential {
     private static final int STEPS = 4_000;
     /** Warm-up calls per side and method atom before {@link #perf} measures (C2 compiles). */
     private static final int WARMUP = Integer.getInteger("m3.perf.warmup", 20_000);
+    /** {@code --jit} mode: CLI flag, TARGETS.tsv layout and the measured calls and rounds. */
+    static final String JIT_MODE = "--jit";
+    private static final String TAB = "\t";
+    private static final String TARGETS_HEADER = "m3_class";
+    private static final String DEFAULT_POLICY = "-";
+    private static final int POLICY_COLUMN = 5;
+    private static final int JIT_CALLS = 100;
+    private static final int JIT_ROUNDS = 1;
     private static final Object ABSENT = "absent-key";
     private static final Map<String, Supplier<Object>> BACKINGS = Map.ofEntries(
             Map.entry("list", ArrayList::new), Map.entry("deque", LinkedList::new),
@@ -203,6 +212,10 @@ public final class M3DecoratorDifferential {
      *         be written
      */
     public static void main(String[] args) throws Exception {
+        if (args[0].equals(JIT_MODE)) {
+            jit(Path.of(args[1]));
+            return;
+        }
         Result run = run(args[0], args[1], args[2], args[3],
                 args.length > 5 ? args[5] : "-");
         Files.write(Path.of(args[4]),
@@ -326,6 +339,22 @@ public final class M3DecoratorDifferential {
         long start = System.nanoTime();
         Arrays.stream(calls).forEach(c -> call(m, target, c));
         return System.nanoTime() - start;
+    }
+
+    /**
+     * {@code --jit <TARGETS.tsv>}: the warmed {@link #perf} over every target, for a JVM started
+     * with {@code -XX:+PrintCompilation}; the JIT test reads which owned methods the JIT compiled.
+     */
+    private static void jit(Path targets) throws IOException, ReflectiveOperationException {
+        for (String line : Files.readAllLines(targets, StandardCharsets.UTF_8)) {
+            String[] t = line.split(TAB, -1);
+            if (line.isBlank() || t[0].equals(TARGETS_HEADER)) {
+                continue;
+            }
+            String policy = t.length > POLICY_COLUMN && !t[POLICY_COLUMN].isBlank()
+                    ? t[POLICY_COLUMN].strip() : DEFAULT_POLICY;
+            perf(t[0], t[1], t[2], t[3], policy, JIT_CALLS, JIT_ROUNDS);
+        }
     }
 
     /** The atom key of a method, as the step loop names it in mismatch rows. */
