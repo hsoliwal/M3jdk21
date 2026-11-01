@@ -302,7 +302,7 @@ public class M3Font extends M3Managed {
     }
 
     /**
-     * @return {@link Typeface} if set, or null
+     * @return {@link M3Typeface} if set, or null
      */
     public M3Typeface getTypeface() {
         try {
@@ -585,7 +585,7 @@ public class M3Font extends M3Managed {
 
     /**
      * Returns FontMetrics associated with Typeface. Results are scaled by text size but does not take into account
-     * dimensions required by text scale, text skew, fake bold, style stroke, and {@link PathEffect}.
+     * dimensions required by text scale, text skew, fake bold, style stroke, and {@link M3PathEffect}.
      */
     public M3FontMetrics getMetrics() {
         try {

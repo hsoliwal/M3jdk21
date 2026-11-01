@@ -2,7 +2,7 @@ package jdk.m3.graphics;
 
 
 /**
- * Reflected description of a uniform variable in the {@link RuntimeEffect}'s SkSL
+ * Reflected description of a uniform variable in the {@link M3RuntimeEffect}'s SkSL
  */
 public class M3RuntimeEffectUniformInfo {
     public final String _name;

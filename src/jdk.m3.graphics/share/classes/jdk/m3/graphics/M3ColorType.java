@@ -369,7 +369,7 @@ public enum M3ColorType {
      * <p>Returns a valid ColorAlphaType for colorType. If there is more than one valid canonical
      * ColorAlphaType, set to alphaType, if valid.</p>
      *
-     * <p>Returns null only if alphaType is {@link ColorAlphaType#UNKNOWN}, color type is not
+     * <p>Returns null only if alphaType is {@link M3ColorAlphaType#UNKNOWN}, color type is not
      * {@link #UNKNOWN}, and ColorType is not always opaque.</p>
      *
      * @return  ColorAlphaType if can be associated with colorType

@@ -1,15 +1,30 @@
 # SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
 # Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
-"""absorb_rename.py <src_in> <TYPE_RENAME.tsv> <src_out> <report_dir> : leaf 1 of the Skija absorption, after
-delombok + DELOMBOK_CLEAN. Deterministic, string- and comment-safe (SFA: edits happen only in code regions; offsets come
-from a masked copy of the same length):
+"""absorb_rename.py <src_in> <TYPE_RENAME.tsv> <src_out> <report_dir> [<CC_STRING_RENAME.tsv>] : leaf 1 of the Skija
+absorption, after MR_SELECT + delombok + DELOMBOK_CLEAN. Deterministic, string- and comment-safe (SFA: edits happen
+only in code regions; offsets come from a masked copy of the same length), except the exact literals of the string
+ledger:
 
-  STRIP_JB v1  remove the JetBrains documentation annotations (@ApiStatus.*, @NotNull, @Nullable, @Contract(...), also
-               fully qualified) with their argument lists, and their imports
-  RENAME v1    package prefixes io.github.humbleui.skija.impl -> jdk.m3.graphics.impl, io.github.humbleui.skija ->
-               jdk.m3.graphics, io.github.humbleui.types -> jdk.m3.graphics; every type token of the map T -> M3T when it
-               is unqualified or qualified by one of the new packages; files move to <pkg dirs>/M3T.java
-Strings are reported, never edited (report_dir/STRING_MENTIONS.tsv). Counts per rule go to report_dir/RENAME_COUNTS.tsv."""
+  STRIP_JB v1      remove the JetBrains documentation annotations (@ApiStatus.*, @NotNull, @Nullable, @Contract(...),
+                   also fully qualified) with their argument lists, and their imports
+  RENAME v1        package prefixes io.github.humbleui.skija.impl -> jdk.m3.graphics.impl, io.github.humbleui.skija ->
+                   jdk.m3.graphics, io.github.humbleui.types -> jdk.m3.graphics; every type token of the map T -> M3T
+                   when it is unqualified or qualified by one of the new packages; files move to <pkg dirs>/M3T.java
+  JAVADOC_REF v1   the same package and type-token rule (and the same javac scope) inside the reference of a Javadoc
+                   tag: {@link REF label}, {@linkplain REF label}, {@value REF}, @see REF, @throws REF, @exception REF;
+                   REF is what javadoc parses as the reference (up to blank space outside parentheses), so the class,
+                   the parameter types and a constructor name follow the rename and the label text is kept. A quoted or
+                   HTML @see is not a reference. A donor package left in a reference stops the run
+  STRING_RENAME v1 the Java rows of the string ledger (rows of CC_STRING_RENAME.tsv whose file is a .java source;
+                   gen_rename.py makes them from skija_patterns.py's JAVA_CLASSREFS.tsv): in the file of the row, every
+                   string literal equal to the old text becomes the new text. A row that is UNMAPPED, matches no
+                   literal, or names a file that is not among the sources stops the run
+  STRING_SCAN v1   every string literal left that names a donor type goes to report_dir/STRING_MENTIONS.tsv by kind:
+                   RENAMED (by STRING_RENAME), PACKAGE (a humbleui package name without a type: the native loader's
+                   module name, replaced in leaf 2), DISPLAY (a donor simple name inside text, such as messages and
+                   toString: kept as the donor prints it). A class-file resource "T.class" of a donor type or a donor
+                   binary name still in a literal is a missed run-time lookup and stops the run
+Counts per rule go to report_dir/RENAME_COUNTS.tsv."""
 import os
 import re
 import sys
@@ -21,6 +36,20 @@ PKGS = (("io.github.humbleui.skija.impl", "jdk.m3.graphics.impl"), ("io.github.h
 JB_ANN = re.compile(r'@(?:org\.jetbrains\.annotations\.)?(?:ApiStatus\.\w+|NotNull|Nullable|Contract)\b')
 JB_IMPORT = re.compile(r'^import (?:static )?org\.jetbrains\.annotations\.[\w.*]+;[ \t]*\r?\n', re.M)
 IDENT = re.compile(r'[A-Za-z_$][\w$]*')
+CLASS_FILE_LITERAL = re.compile(r'^"([A-Za-z_$][\w$]*)\.class"$')
+BINARY_NAME = re.compile(r'io[./]github[./]humbleui(?:[./][a-z_$][\w$]*)*[./][A-Z][\w$]*')
+SOURCE_SET = re.compile(r'^shared/java\d*/')
+UNMAPPED = "UNMAPPED"
+TEXT_BLOCK = '"""'
+DOC_OPEN, DOC_CLOSE, EMPTY_BLOCK = "/**", "*/", "/**/"
+DOC_INLINE_REF = re.compile(r'\{@(?:link|linkplain|value)(?=[ \t])')
+DOC_BLOCK_REF = re.compile(r'@(?:see|throws|exception)(?=[ \t])')
+DOC_LINE_LEAD = re.compile(r'[ \t]*(?:/\*\*|\*)?[ \t]*')
+REF_SPACE, REF_NO_START = " \t\r\n", '"<*}\r\n'
+REF_OPEN, REF_CLOSE, INLINE_END = "(<", ")>", "}"
+OLD_PACKAGE = re.compile(r'\bio\.github\.humbleui\b')
+DOC_COUNTS = (("pkg", "javadoc_pkg"), ("type_token", "javadoc_type_token"),
+              ("type_token_shadowed", "javadoc_type_token_shadowed"))
 
 
 def masked(s):
@@ -103,8 +132,122 @@ def rename(s, simple, counts, vis=None):
     return "".join(out)
 
 
+# FLLDCIM: MRL - JAVADOC_REF v1 leaf: reference end as javadoc parses it
+def ref_end(doc, j, inline):
+    """End of the reference that starts at doc[j], as javadoc parses it: blank space outside parentheses (and
+    generics), or the closing brace of an inline tag."""
+    k, depth = j, 0
+    while k < len(doc):
+        c = doc[k]
+        if c in REF_OPEN:
+            depth += 1
+        elif c in REF_CLOSE:
+            depth -= 1
+        elif depth <= 0 and (c in REF_SPACE or (inline and c == INLINE_END)):
+            break
+        k += 1
+    return k
+
+
+# FLLDCIM: MRL - JAVADOC_REF v1 leaf: tag reference positions of one doc comment
+def doc_refs(doc):
+    """(start, end) of the reference of every tag in a doc comment: inline tags anywhere, block tags first on a line."""
+    tags = [(t.end(), True) for t in DOC_INLINE_REF.finditer(doc)]
+    tags += [(t.end(), False) for t in DOC_BLOCK_REF.finditer(doc)
+             if DOC_LINE_LEAD.fullmatch(doc, doc.rfind("\n", 0, t.start()) + 1, t.start())]
+    spans = []
+    for end, inline in sorted(tags):
+        j = end
+        while j < len(doc) and doc[j] in " \t":
+            j += 1
+        if j < len(doc) and doc[j] not in REF_NO_START:
+            spans.append((j, ref_end(doc, j, inline)))
+    return spans
+
+
+# FLLDCIM: MRL - JAVADOC_REF v1: RENAME v1 inside Javadoc references (#2243 verifier e)
+def rename_doc_refs(s, simple, counts, vis):
+    """JAVADOC_REF v1: RENAME v1 (with the file's javac scope) applied to the reference of every Javadoc tag."""
+    out, i = [], 0
+    for c in MASK.finditer(s):
+        text = c.group(0)
+        if not text.startswith(DOC_OPEN) or text == EMPTY_BLOCK:
+            continue
+        body = text[:-len(DOC_CLOSE)]
+        for a, b in doc_refs(body):
+            local = Counter()
+            new = rename(body[a:b], simple, local, vis)
+            if OLD_PACKAGE.search(new):
+                raise SystemExit(f"donor package left in a Javadoc reference: {new}")
+            for key, doc_key in DOC_COUNTS:
+                counts[doc_key] += local[key]
+            out.append(s[i:c.start() + a] + new)
+            i = c.start() + b
+    out.append(s[i:])
+    return "".join(out)
+
+
+def string_ledger(path):
+    """{package-relative source path: [(row line, old, new)]} of the Java rows of a CC_STRING_RENAME ledger."""
+    rows = {}
+    if not path:
+        return rows
+    with open(path, encoding="utf-8") as f:
+        next(f)
+        for line in f:
+            file, row_line, old, new = line.rstrip("\n").split("\t")
+            if not file.endswith(".java"):
+                continue
+            if new == UNMAPPED:
+                raise SystemExit(f"string ledger row {file}:{row_line} {old!r} is {UNMAPPED}")
+            rows.setdefault(SOURCE_SET.sub("", file), []).append((row_line, old, new))
+    return rows
+
+
+def string_literals(s):
+    """(start, end) of every string literal in code; comments, char literals and text blocks are skipped."""
+    return [(m.start(), m.end()) for m in MASK.finditer(s)
+            if m.group(0).startswith('"') and not m.group(0).startswith(TEXT_BLOCK)]
+
+
+def rename_strings(s, rows, counts, where):
+    for row_line, old, new in rows:
+        out, i, n = [], 0, 0
+        for a, b in string_literals(s):
+            if s[a:b] == '"' + old + '"':
+                out.append(s[i:a] + '"' + new + '"')
+                i = b
+                n += 1
+        out.append(s[i:])
+        if not n:
+            raise SystemExit(f"string ledger row {where}:{row_line} {old!r} matches no literal")
+        s = "".join(out)
+        counts["string_rename"] += n
+    return s
+
+
+def scan_strings(s, simple, renamed, m3_type, counts, mentions):
+    for a, b in string_literals(s):
+        lit, line = s[a:b], str(s.count("\n", 0, a) + 1)
+        cf = CLASS_FILE_LITERAL.match(lit)
+        if (cf and cf.group(1) in simple) or BINARY_NAME.search(lit):
+            raise SystemExit(f"missed run-time class lookup in {m3_type}:{line}: {lit}")
+        if lit in renamed:
+            kind = "RENAMED"
+        elif "humbleui" in lit:
+            kind = "PACKAGE"
+        elif any(t.group(0) in simple for t in IDENT.finditer(lit[1:-1])):
+            kind = "DISPLAY"
+        else:
+            continue
+        if kind != "RENAMED":
+            counts["string_" + kind.lower()] += 1
+        mentions.append((m3_type, line, kind, lit))
+
+
 def main():
     src, ren, dst, rep = sys.argv[1:5]
+    ledger = string_ledger(sys.argv[5] if len(sys.argv) > 5 else None)
     fq = {}
     with open(ren, encoding="utf-8") as f:
         next(f)
@@ -117,23 +260,27 @@ def main():
     by_pkg = {}
     for a in fq:
         by_pkg.setdefault(a.rsplit(".", 1)[0], set()).add(a.rsplit(".", 1)[1])
-    counts, strings = Counter(), []
+    counts, mentions, used = Counter(), [], set()
     os.makedirs(rep, exist_ok=True)
-    for dirpath, _, files in os.walk(src):
+    for dirpath, dirs, files in os.walk(src):
+        dirs.sort()
         for f in sorted(files):
             if not f.endswith(".java"):
                 continue
             p = os.path.join(dirpath, f)
+            rel = os.path.relpath(p, src).replace(os.sep, "/")
             s = open(p, encoding="utf-8", newline="").read()
             pm = re.search(r"^package ([\w.]+);", s, re.M)
             old_fqn = pm.group(1) + "." + f[:-5]
             if old_fqn not in fq:
                 raise SystemExit(f"{old_fqn} is not in the rename map")
             vis = visible(s, by_pkg, fq)
-            s = rename(strip_jb(s, counts), simple, counts, vis)
-            for hit in re.finditer(r'"(?:\\.|[^"\\\n])*"', s):
-                if "humbleui" in hit.group(0):
-                    strings.append((fq[old_fqn], str(s.count("\n", 0, hit.start()) + 1), hit.group(0)))
+            s = rename_doc_refs(rename(strip_jb(s, counts), simple, counts, vis), simple, counts, vis)
+            rows = ledger.get(rel, [])
+            if rows:
+                used.add(rel)
+                s = rename_strings(s, rows, counts, rel)
+            scan_strings(s, simple, {'"' + new + '"' for _, _, new in rows}, fq[old_fqn], counts, mentions)
             if re.search(r"\b(?:org\.jetbrains|io\.github\.humbleui)\b", masked(s)):
                 raise SystemExit(f"old name left in code of {old_fqn}")
             new = fq[old_fqn]
@@ -141,11 +288,14 @@ def main():
             os.makedirs(os.path.dirname(out), exist_ok=True)
             open(out, "w", encoding="utf-8", newline="").write(s)
             counts["files"] += 1
+    if set(ledger) - used:
+        raise SystemExit("string ledger rows name files that are not sources: " + ", ".join(sorted(set(ledger) - used)))
     with open(os.path.join(rep, "RENAME_COUNTS.tsv"), "w", encoding="utf-8", newline="\n") as w:
         w.write("rule\tcount\n" + "".join(f"{k}\t{v}\n" for k, v in sorted(counts.items())))
     with open(os.path.join(rep, "STRING_MENTIONS.tsv"), "w", encoding="utf-8", newline="\n") as w:
-        w.write("m3_type\tline\tstring\n" + "".join("\t".join(r) + "\n" for r in strings))
-    print(" ".join(f"{k}={v}" for k, v in sorted(counts.items())), f"strings={len(strings)}")
+        w.write("m3_type\tline\tkind\tstring\n" + "".join("\t".join(r) + "\n" for r in mentions))
+    print(" ".join(f"{k}={v}" for k, v in sorted(counts.items())), f"mentions={len(mentions)}")
 
 
-main()
+if __name__ == "__main__":
+    main()

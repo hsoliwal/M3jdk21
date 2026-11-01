@@ -2,8 +2,8 @@ package jdk.m3.graphics;
 
 
 /**
- * @see io.github.humbleui.skija.FilterMipmap
- * @see io.github.humbleui.skija.CubicResampler
+ * @see jdk.m3.graphics.M3FilterMipmap
+ * @see jdk.m3.graphics.M3CubicResampler
  */
 public interface M3SamplingMode {
     public static final M3SamplingMode DEFAULT = new M3FilterMipmap(M3FilterMode.NEAREST, M3MipmapMode.NONE);

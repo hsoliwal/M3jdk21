@@ -58,7 +58,7 @@ public class M3ColorSpace extends M3Managed {
      *
      * <p>Only RGB color spaces are supported.</p>
      *
-     * <p>{@link ColorSpace} only supports RGB color spaces and therefore this
+     * <p>{@link M3ColorSpace} only supports RGB color spaces and therefore this
      * function does not take a {@code matrix_coefficients} parameter - the caller is
      * expected to verify that {@code matrix_coefficients} is 0.</p>
      *

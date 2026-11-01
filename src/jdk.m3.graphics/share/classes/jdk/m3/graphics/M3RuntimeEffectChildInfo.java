@@ -2,7 +2,7 @@ package jdk.m3.graphics;
 
 
 /**
- * Reflected description of a uniform child (shader or colorFilter) in the {@link RuntimeEffect}'s SkSL
+ * Reflected description of a uniform child (shader or colorFilter) in the {@link M3RuntimeEffect}'s SkSL
  */
 public class M3RuntimeEffectChildInfo {
     public final String _name;
