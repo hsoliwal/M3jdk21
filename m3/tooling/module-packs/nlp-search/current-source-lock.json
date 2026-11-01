@@ -23,7 +23,7 @@
         "m3/core/src/com/m3/text/M3WordRowsNative.java": "5ef1e0f4ca2fc345ee009589f1bb96d216892556d60e3f19b882d46b544aea36",
         "m3/core/src/com/m3/text/SharedLexiconCatalog.java": "8dbd1bd1a100efeb4b3a31a29fcdb083fa01d8037801e746c455f2b9a030b6e7",
         "m3/core/src/com/m3/text/SharedLexiconFamilySidecarCatalog.java": "0482b42cb8029cadbf929c76e46bccb80367668ec119aceac702f5d5c3686a6d",
-        "m3/core/src/com/m3/text/SharedLexiconImage.java": "8489ae86ba67ec076444feae83c516d69b9cbe3c03cfae60e5b68e7a51d524fd",
+        "m3/core/src/com/m3/text/SharedLexiconImage.java": "03090e9217868a6ed82b7728b6dbc3917f93712e95002799c5561f2d81c06289",
         "m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java": "8e6156376ea9548971b78bb876dc3968195266f04c17c5b061d7f5e4b52f367d",
         "m3/core/src/com/m3/text/SharedRelatedLexemeCatalog.java": "38102366fa86ca63f3d00c78cd34effae7bc34ce0071544164ca74df97025b9e",
         "m3/core/src/com/m3/text/StorageIdentity.java": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
