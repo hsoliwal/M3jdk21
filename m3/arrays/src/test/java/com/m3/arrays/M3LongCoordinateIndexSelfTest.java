@@ -5,7 +5,6 @@ package com.m3.arrays;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.TreeMap;
-import java.util.Map;
 
 /** Execute with javac/java directly; JUnit calls the same oracle. */
 public final class M3LongCoordinateIndexSelfTest {
@@ -37,10 +36,10 @@ public final class M3LongCoordinateIndexSelfTest {
             long[] keys = new long[reference.size()];
             long[] values = new long[keys.length];
             int index = 0;
-            for (Map.Entry<Long,Long> item : reference.entrySet()) {
-                // Oracle-only TreeMap; the tested production implementation is entry-free.
-                keys[index] = item.getKey();
-                values[index++] = item.getValue();
+            for (long coordinate : reference.keySet()) {
+                // Match DOOP key/value traversal even in the reference oracle.
+                keys[index] = coordinate;
+                values[index++] = reference.get(coordinate);
             }
             M3LongCoordinateIndex actual = new M3LongCoordinateIndex(keys, values);
             assertThat(actual.size() == keys.length, "size");
