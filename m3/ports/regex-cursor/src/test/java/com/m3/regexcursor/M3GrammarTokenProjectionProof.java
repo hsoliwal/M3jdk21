@@ -103,6 +103,19 @@ final class M3GrammarTokenProjectionProof {
         eq(104, actual[5], "whole >> operator");
         eq(106, actual[6], "non-sealed contextual candidate");
         eq(0, actual[9], "identifier suffix not admitted");
+        // A sparse zero must never be passed into the token-regex ID alphabet: <0> is legal there.
+        // Existing sparse classification remains unchanged; complete projection is explicitly gated.
+        refuse(() -> M3GrammarTokenProjection.projectComplete(grammar, fixed.source,
+                fixed.starts, fixed.ends, fixed.modes));
+        Batch complete = batch(new String[] {"for", "record", ">>", "😀", "₹"},
+                new byte[] {1, 1, 1, 1, 1});
+        require(Arrays.equals(new int[] {101, 102, 104, 108, 107},
+                M3GrammarTokenProjection.projectComplete(grammar, complete.source,
+                        complete.starts, complete.ends, complete.modes)), "complete known lexemes");
+        refuse(() -> M3GrammarTokenProjection.projectComplete(grammar, "for",
+                new int[] {0}, new int[] {3}, new byte[] {0}));
+        require(M3GrammarTokenProjection.projectComplete(grammar, "", new int[0], new int[0],
+                new byte[0]).length == 0, "empty complete token lane");
         require(Arrays.equals(originalStarts, fixed.starts) && Arrays.equals(originalEnds, fixed.ends)
                 && Arrays.equals(originalModes, fixed.modes), "input primitive lanes unchanged");
         require(M3GrammarTokenProjection.project(grammar, "", new int[0], new int[0], new byte[0]).length == 0,
@@ -147,6 +160,18 @@ final class M3GrammarTokenProjectionProof {
             int[] got = M3GrammarTokenProjection.project(grammar, b.source, b.starts, b.ends, b.modes);
             int[] oracle = independentProjection(b, definitions);
             require(Arrays.equals(got, oracle), "seeded batch=" + round);
+            boolean completeKnown = true;
+            for (int id : oracle) {
+                if (id == 0) { completeKnown = false; break; }
+            }
+            if (completeKnown) {
+                require(Arrays.equals(oracle, M3GrammarTokenProjection.projectComplete(
+                        grammar, b.source, b.starts, b.ends, b.modes)),
+                        "complete seeded batch=" + round);
+            } else {
+                refuse(() -> M3GrammarTokenProjection.projectComplete(
+                        grammar, b.source, b.starts, b.ends, b.modes));
+            }
             checks += count;
         }
         // This is not asynchronous delivery: all worker proofs complete before method returns.
