@@ -52,6 +52,32 @@ public final class M3LongLongHashMap {
             values[existing] = value;
             return false;
         }
+        insertAbsent(key, value);
+        return true;
+    }
+
+    /**
+     * Adds {@code delta} to the mapping, treating an absent key as zero, and returns the new
+     * value. Addition uses ordinary Java {@code long} wraparound. A zero delta inserts an
+     * absent key; updating a present key preserves capacity and iterator validity.
+     *
+     * <p>The existing primitive occupancy lanes own every key, including zero. Present keys
+     * reuse one lookup; absent keys share the same insertion, tombstone and growth rules as
+     * {@link #put(long, long)}.</p>
+     */
+    public long addTo(long key, long delta) {
+        int existing = findIndex(key);
+        if (existing >= 0) {
+            long next = values[existing] + delta;
+            values[existing] = next;
+            return next;
+        }
+        insertAbsent(key, delta);
+        return delta;
+    }
+
+    /** Inserts a key already proved absent, preserving the owner's physical-slot policy. */
+    private void insertAbsent(long key, long value) {
         if (needsGrowth(occupied + 1, keys.length)) {
             // The lookup above proved this key absent. A tombstone reached
             // before the first EMPTY slot is a legal insertion coordinate.
@@ -65,7 +91,7 @@ public final class M3LongLongHashMap {
                     states[probe] = USED;
                     size++;
                     modCount++;
-                    return true;
+                    return;
                 }
                 probe = (probe + 1) & mask;
             }
@@ -89,7 +115,7 @@ public final class M3LongLongHashMap {
                 states[target] = USED;
                 size++;
                 modCount++;
-                return true;
+                return;
             }
             if (state == DELETED && firstDeleted < 0) {
                 firstDeleted = index;
