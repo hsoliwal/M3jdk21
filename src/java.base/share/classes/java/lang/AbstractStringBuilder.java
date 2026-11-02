@@ -391,7 +391,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
         byte[] value = this.value;
         // Ensure count is less than or equal to capacity (racy reads and writes can produce inconsistent values)
         int count = Math.min(this.count, value.length >> coder);
-        M3StringBuilderLane lane = m3Lane; //FLLDCIM: MERGE-21U — 8351000 snapshot first, then the R5-BUILDER lane
+        M3StringBuilderLane lane = m3Lane; //FLLDCIM: MERGE-21U - 8351000 snapshot first, then the R5-BUILDER lane
         if (lane != null) {
             checkIndex(index, count + lane.units);
             return lane.charAt(value, coder, index);
@@ -470,7 +470,7 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
      */
     public int codePointBefore(int index) {
         byte[] value = this.value;
-        M3StringBuilderLane lane = m3Lane; //FLLDCIM: MERGE-21U — 8351000 snapshot first, then the R5-BUILDER lane
+        M3StringBuilderLane lane = m3Lane; //FLLDCIM: MERGE-21U - 8351000 snapshot first, then the R5-BUILDER lane
         if (lane != null) {
             int i = index - 1;
             checkIndex(i, count + lane.units);

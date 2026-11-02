@@ -17,10 +17,16 @@ public final class InvertedIndex {
     private final String[] vocabulary;
     private final int[] starts;
     private final int[] postings;
+    private final int[] frequencies;
+    private final int[] documentLengths;
+    private final int totalTokens;
     private final Set<String> terms;
 
-    private InvertedIndex(String[] vocabulary, int[] starts, int[] postings) {
+    private InvertedIndex(String[] vocabulary, int[] starts, int[] postings, int[] frequencies,
+                          int[] documentLengths, int totalTokens) {
         this.vocabulary = vocabulary; this.starts = starts; this.postings = postings;
+        this.frequencies = frequencies; this.documentLengths = documentLengths;
+        this.totalTokens = totalTokens;
         this.terms = Collections.unmodifiableSet(new AbstractSet<>() {
             @Override public int size() { return vocabulary.length; }
             @Override public boolean contains(Object value) {
@@ -42,43 +48,98 @@ public final class InvertedIndex {
 
     /** Keeps distinct document IDs per term, in ascending document order; no input container is retained. */
     public static InvertedIndex build(List<? extends List<String>> documents) {
+        return build(documents, () -> { });
+    }
+
+    /** The same postings with parallel primitive term-frequency and document-length lanes. */
+    public static InvertedIndex build(List<? extends List<String>> documents, Runnable checkpoint) {
         Objects.requireNonNull(documents);
+        Objects.requireNonNull(checkpoint, "checkpoint");
+        checkpoint.run();
         int total = 0;
-        for (List<String> document : documents) total = Math.addExact(total, Objects.requireNonNull(document).size());
+        int[] documentLengths = new int[documents.size()];
+        for (int id = 0; id < documents.size(); id++) {
+            if ((id & 1023) == 0) checkpoint.run();
+            documentLengths[id] = Objects.requireNonNull(documents.get(id), "document").size();
+            total = Math.addExact(total, documentLengths[id]);
+        }
         String[] tokens = new String[total]; int[] documentIds = new int[total];
         int at = 0;
         for (int id = 0; id < documents.size(); id++) {
             for (String term : documents.get(id)) {
+                if ((at & 4095) == 0) checkpoint.run();
                 tokens[at] = Objects.requireNonNull(term); documentIds[at++] = id;
             }
         }
+        checkpoint.run();
         String[] sorted = tokens.clone(); Arrays.sort(sorted);
         int unique = 0;
         for (String term : sorted) {
+            if ((unique & 4095) == 0) checkpoint.run();
             if (unique == 0 || !term.equals(sorted[unique - 1])) sorted[unique++] = term;
         }
         String[] vocabulary = Arrays.copyOf(sorted, unique);
         int[] starts = new int[Math.addExact(unique, 1)], lastDocument = new int[unique];
         Arrays.fill(lastDocument, -1);
         for (int i = 0; i < total; i++) {
+            if ((i & 4095) == 0) checkpoint.run();
             int term = Arrays.binarySearch(vocabulary, tokens[i]);
             if (lastDocument[term] != documentIds[i]) { starts[term + 1]++; lastDocument[term] = documentIds[i]; }
         }
         for (int i = 1; i <= unique; i++) starts[i] = Math.addExact(starts[i], starts[i - 1]);
         int[] cursor = starts.clone(), postings = new int[starts[unique]];
+        int[] frequencies = new int[postings.length];
         Arrays.fill(lastDocument, -1);
         for (int i = 0; i < total; i++) {
+            if ((i & 4095) == 0) checkpoint.run();
             int term = Arrays.binarySearch(vocabulary, tokens[i]);
             if (lastDocument[term] != documentIds[i]) {
-                postings[cursor[term]++] = documentIds[i]; lastDocument[term] = documentIds[i];
+                int slot = cursor[term]++;
+                postings[slot] = documentIds[i]; frequencies[slot] = 1;
+                lastDocument[term] = documentIds[i];
+            } else {
+                int slot = cursor[term] - 1;
+                frequencies[slot] = Math.addExact(frequencies[slot], 1);
             }
         }
-        return new InvertedIndex(vocabulary, starts, postings);
+        checkpoint.run();
+        return new InvertedIndex(vocabulary, starts, postings, frequencies, documentLengths, total);
     }
 
     public int[] documents(String term) {
         int at = Arrays.binarySearch(vocabulary, Objects.requireNonNull(term));
         return at < 0 ? new int[0] : Arrays.copyOfRange(postings, starts[at], starts[at + 1]);
+    }
+
+    /** Exact token occurrences parallel to {@link #documents(String)}. */
+    public int[] termFrequencies(String term) {
+        int at = Arrays.binarySearch(vocabulary, Objects.requireNonNull(term));
+        return at < 0 ? new int[0] : Arrays.copyOfRange(frequencies, starts[at], starts[at + 1]);
+    }
+
+    public int documentCount() { return documentLengths.length; }
+    public int totalTokenCount() { return totalTokens; }
+    public int documentLength(int documentId) {
+        Objects.checkIndex(documentId, documentLengths.length);
+        return documentLengths[documentId];
+    }
+    public int documentFrequency(String term) {
+        int at = Arrays.binarySearch(vocabulary, Objects.requireNonNull(term));
+        return at < 0 ? 0 : starts[at + 1] - starts[at];
+    }
+
+    @FunctionalInterface public interface PostingConsumer {
+        void accept(int documentId, int termFrequency);
+    }
+
+    /** Allocation-free primitive-lane traversal; does not expose the parent arrays. */
+    public void forEachPosting(String term, PostingConsumer consumer) {
+        Objects.requireNonNull(consumer, "consumer");
+        int at = Arrays.binarySearch(vocabulary, Objects.requireNonNull(term));
+        if (at < 0) return;
+        for (int slot = starts[at]; slot < starts[at + 1]; slot++) {
+            consumer.accept(postings[slot], frequencies[slot]);
+        }
     }
 
     /** Immutable lexicographically ordered view; elements remain the original String values. */

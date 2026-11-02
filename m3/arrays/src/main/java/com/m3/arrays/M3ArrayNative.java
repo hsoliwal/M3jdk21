@@ -238,4 +238,54 @@ public final class M3ArrayNative {
     private static native long[] nativeDecodeUnsigned64(byte[] bytes);
     private static native byte[] nativeEncodeZigZag64(long[] values);
     private static native long[] nativeDecodeZigZag64(byte[] bytes);
+
+    /** Creates detached, zero-initialized boolean backing storage through the loaded JNI owner. */
+    public static boolean[] allocateBooleansRequired(int length) {
+        requireAllocationLengthAndLibrary(length);
+        boolean[] result = nativeAllocateBooleans(length);
+        if (result == null) throw new OutOfMemoryError("native boolean[] allocation failed");
+        return result;
+    }
+
+    private static native boolean[] nativeAllocateBooleans(int length);
+
+    /** Creates detached, zero-initialized char backing storage through the loaded JNI owner. */
+    public static char[] allocateCharsRequired(int length) {
+        requireAllocationLengthAndLibrary(length);
+        char[] result = nativeAllocateChars(length);
+        if (result == null) throw new OutOfMemoryError("native char[] allocation failed");
+        return result;
+    }
+
+    private static native char[] nativeAllocateChars(int length);
+
+    /** Creates detached, zero-initialized short backing storage through the loaded JNI owner. */
+    public static short[] allocateShortsRequired(int length) {
+        requireAllocationLengthAndLibrary(length);
+        short[] result = nativeAllocateShorts(length);
+        if (result == null) throw new OutOfMemoryError("native short[] allocation failed");
+        return result;
+    }
+
+    private static native short[] nativeAllocateShorts(int length);
+
+    /** Creates detached, zero-initialized float backing storage through the loaded JNI owner. */
+    public static float[] allocateFloatsRequired(int length) {
+        requireAllocationLengthAndLibrary(length);
+        float[] result = nativeAllocateFloats(length);
+        if (result == null) throw new OutOfMemoryError("native float[] allocation failed");
+        return result;
+    }
+
+    private static native float[] nativeAllocateFloats(int length);
+
+    /** Creates detached, zero-initialized double backing storage through the loaded JNI owner. */
+    public static double[] allocateDoublesRequired(int length) {
+        requireAllocationLengthAndLibrary(length);
+        double[] result = nativeAllocateDoubles(length);
+        if (result == null) throw new OutOfMemoryError("native double[] allocation failed");
+        return result;
+    }
+
+    private static native double[] nativeAllocateDoubles(int length);
 }

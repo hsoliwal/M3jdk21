@@ -96,7 +96,26 @@ def main():
     with zipfile.ZipFile(array_jar) as archive:
         if 'module-info.class' not in archive.namelist():
             raise RuntimeError('com.m3.arrays module descriptor is missing')
-    dependency_proof['com.m3.arrays'] = {'jar_sha256': sha(array_jar)}
+    # Allocation atoms require the existing arrays JNI owner in both collection
+    # algorithm modes. Keep it outside the collection-library search directory
+    # so the missing-collection-JNI controls continue to exercise their contract.
+    array_native_build = OUT / 'array-native'
+    run(['cmake', '-S', ROOT / 'm3/arrays/src/main/native', '-B', array_native_build,
+         '-DCMAKE_BUILD_TYPE=Release', '-DBUILD_TESTING=ON', '-DJAVA_HOME=' + str(JAVA)])
+    run(['cmake', '--build', array_native_build, '--config', 'Release', '--parallel', '2'])
+    run(['ctest', '--test-dir', array_native_build, '--output-on-failure', '-C', 'Release'])
+    array_native = array_native_build / 'libm3_arrays.so'
+    if not array_native.is_file():
+        raise RuntimeError('Source-built arrays JNI allocation library is absent')
+    array_native_option = '-Dm3.arrays.native.path=' + str(array_native)
+    # This existing suite includes fresh-VM missing-library and silent-null
+    # controls; providing the library must not weaken allocation failure rules.
+    maven(ROOT / 'm3/arrays/pom.xml', '-Dm3.arrays.native.required=true',
+          '-DargLine=-Xcheck:jni ' + array_native_option,
+          '-Dtest=M3ArrayAllocationAtomsTest', '-DfailIfNoTests=true', 'test')
+    dependency_proof['com.m3.arrays'] = {
+        'jar_sha256': sha(array_jar), 'native_sha256': sha(array_native),
+        'allocation_contract': 'M3ArrayAllocationAtomsTest'}
     sources = sorted((MODULE / 'src/main/java').rglob('*.java'))
     tests = sorted((MODULE / 'src/test/java').rglob('*.java'))
     (OUT / 'main.args').write_text('\n'.join(map(str, sources)) + '\n')
@@ -139,7 +158,7 @@ def main():
     run(cc + [native / 'm3_long_address_kernel.c', MODULE / 'src/test/native/m3_gather_spans.c',
               '-o', gather_fixture])
     run([gather_fixture])
-    common = ['-Xmx768m', '-XX:ActiveProcessorCount=2', '-Xcheck:jni',
+    common = ['-Xmx768m', '-XX:ActiveProcessorCount=2', '-Xcheck:jni', array_native_option,
               '-Dm3.collections.rank.native=true', '-Dm3.collections.signal.native=true']
     results = {}
     for mode, required in [('java', 'false'), ('native', 'true')]:
@@ -164,7 +183,8 @@ def main():
         text=True).strip()
     if runtime_modules != 'com.m3.arrays,java.base':
         raise RuntimeError('Unexpected JPMS dependency closure: ' + runtime_modules)
-    cp = str(MODULE / 'target/classes') + os.pathsep + str(MODULE / 'target/test-classes')
+    cp = os.pathsep.join(map(str, (MODULE / 'target/classes',
+                                   MODULE / 'target/test-classes', array_jar)))
     java = [JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'native'), '-cp', cp]
     contracts = [('M3MaskWindowSparseContract', ['native']),
                  ('M3BudgetedMaskWindowContract', ['--native']),
@@ -187,7 +207,7 @@ def main():
                  ('M3BitLaneJumpProof', [str(OUT / 'native/libm3_bitlane_jump_test.so')]),
                  ('M3DisjointIndexSelfTest', ['--native'])]
     for name, args in contracts: run(java + ['com.m3.collections.' + name, *args])
-    # Exercise the same existing selftest's explicit pure-Java fallback without loading JNI.
+    # Exercise collection-kernel fallback while retaining required arrays allocation JNI.
     run([JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp,
          'com.m3.collections.M3DisjointIndexSelfTest'])
     run([JAVA / 'bin/java', *common, '-Djava.library.path=' + str(OUT / 'missing'), '-cp', cp,
