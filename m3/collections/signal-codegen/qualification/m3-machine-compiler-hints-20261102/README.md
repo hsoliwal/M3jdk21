@@ -1,3 +1,4 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
 # M3JDK21 machine-oriented pattern-review hints (v1)
 
 This is a native product receiver inside the existing M3JDK21 Java 21 compiler-signal module. It does not add a wrapper around the JDK, a second source parser, or another compiler/runtime. The existing `SortableProcessor` still manufactures the exact `M3CompilerFacts` source-time coordinates. The additive `M3MachineHintRules` reads those fixed primitive lanes and returns only tri-state candidate review masks.
