@@ -1,0 +1,4 @@
+date	stage	input	result	status
+2026-11-02	inventory	M3JDK21 #2303 + Synexia #15301	C preimage Git exact; three new paths ABSENT	PASS
+2026-11-02	donor_review	LC56/57 HR Gridland GfG RoaringBitmap	Category-only; original Synexia private JNI source chosen	PASS
+2026-11-02	recipe_custody	Synexia original Maven/OpenRewrite source crate	No duplicate engine or rewrite of canonical recipe	PASS
