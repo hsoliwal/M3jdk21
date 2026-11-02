@@ -29,7 +29,7 @@ jobs:
         run: |
           set -euo pipefail
           mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
-          ARRAYS_JAR="$HOME/.m2/repository/jdk/m3/m3-arrays/0.1.0-SNAPSHOT/m3-arrays-0.1.0-SNAPSHOT.jar"
+          ARRAYS_JAR="$HOME/.m2/repository/com/m3/m3-arrays/0.1.0-SNAPSHOT/m3-arrays-0.1.0-SNAPSHOT.jar"
           test -s "$ARRAYS_JAR"
           jar --describe-module --file "$ARRAYS_JAR" | grep -q '^jdk.m3.arrays'
       - name: Java owner tests
