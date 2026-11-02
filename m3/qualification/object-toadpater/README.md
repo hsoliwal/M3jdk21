@@ -2,6 +2,10 @@
 <!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
 <!-- SPDX-License-Identifier: GPL-2.0-only -->
 
+## Cache and installed JNI follow-up, 2026-11-02
+
+[CACHE_QUALIFICATION.md](CACHE_QUALIFICATION.md) and [CACHE_QUALIFICATION.json](CACHE_QUALIFICATION.json) record the later indexed weak-owner and bounded-plan implementation, actual installed-libjava qualification, loader-lifetime and churn regressions, and the repeated nonfinal alias compatibility matrix. The exact requested `toAdpater` API and seven-slot Object vtable are retained. Measurement limits and memory tradeoffs are stated alongside the results.
+
 ## Forward qualification, 2026-11-02
 
 The source-pinned follow-up preserves this nonfinal candidate and its historical

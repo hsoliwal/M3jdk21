@@ -1,5 +1,6 @@
 #
 # Copyright (c) 2015, 2024, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2026, Hitesh Soliwal and Contributors to the Synexia Project.
 # DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
 #
 # This code is free software; you can redistribute it and/or modify it
@@ -61,6 +62,8 @@ ifeq ($(call isTargetOs, windows), true)
 
   WIN_LIB_JAVA := $(SUPPORT_OUTPUTDIR)/native/java.base/libjava/java.lib
   BUILD_JDK_JTREG_LIBRARIES_LIBS_libstringPlatformChars := $(WIN_LIB_JAVA)
+  BUILD_JDK_JTREG_LIBRARIES_LIBS_libM3ObjectNativeTest := $(WIN_LIB_JAVA)
+  BUILD_JDK_JTREG_LIBRARIES_LIBS_libM3ObjectCacheNativeStressTest := $(WIN_LIB_JAVA)
   WIN_LIB_JLI := $(SUPPORT_OUTPUTDIR)/native/java.base/libjli/jli.lib
   BUILD_JDK_JTREG_EXECUTABLES_LIBS_exeJliLaunchTest := $(WIN_LIB_JLI)
   BUILD_JDK_JTREG_EXECUTABLES_LIBS_exeCallerAccessTest := jvm.lib
@@ -72,6 +75,8 @@ ifeq ($(call isTargetOs, windows), true)
   BUILD_JDK_JTREG_LIBRARIES_LIBS_libGetXSpace := $(WIN_LIB_JAVA)
 else
   BUILD_JDK_JTREG_LIBRARIES_LIBS_libstringPlatformChars := -ljava
+  BUILD_JDK_JTREG_LIBRARIES_LIBS_libM3ObjectNativeTest := -ljava
+  BUILD_JDK_JTREG_LIBRARIES_LIBS_libM3ObjectCacheNativeStressTest := -ljava
   BUILD_JDK_JTREG_LIBRARIES_LIBS_libDirectIO := -ljava
   BUILD_JDK_JTREG_LIBRARIES_LIBS_libNewDirectByteBuffer := -ljava
   BUILD_JDK_JTREG_LIBRARIES_LIBS_libGetXSpace := -ljava
