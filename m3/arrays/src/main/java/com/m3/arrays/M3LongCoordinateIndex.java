@@ -156,6 +156,50 @@ public final class M3LongCoordinateIndex {
         return nativeBound(keys, key, true);
     }
 
+    /**
+     * Bulk lower-bound lookup over a caller-owned query lane. The returned
+     * ordinals are detached and preserve every query occurrence and order.
+     * O(q log n) comparisons, O(q) output; no per-query Entry or boxing.
+     */
+    public int[] lowerBounds(long[] queries) {
+        return boundsJava(queries, false);
+    }
+
+    /** Bulk upper-bound lookup, retaining duplicate queries in encounter order. */
+    public int[] upperBounds(long[] queries) {
+        return boundsJava(queries, true);
+    }
+
+    private int[] boundsJava(long[] queries, boolean upper) {
+        Objects.requireNonNull(queries, "queries");
+        int[] result = new int[queries.length];
+        for (int i = 0; i < result.length; i++) result[i] = bound(queries[i], upper);
+        return result;
+    }
+
+    /**
+     * Bounded, required-native batch of lower-bound queries. JNI never pins
+     * or retains the immutable key lane or caller's query array, and it makes
+     * one native entry for the batch rather than one entry per coordinate.
+     * The Java result has the exact original query length; no native fallback.
+     */
+    public int[] lowerBoundsRequiredNative(long[] queries) {
+        Objects.requireNonNull(queries, "queries");
+        requireNative();
+        int[] result = nativeBounds(keys, queries, false);
+        if (result == null) throw new OutOfMemoryError("native lower-bound results unavailable");
+        return result;
+    }
+
+    /** Required-native upper-bound batch; query duplicates are preserved. */
+    public int[] upperBoundsRequiredNative(long[] queries) {
+        Objects.requireNonNull(queries, "queries");
+        requireNative();
+        int[] result = nativeBounds(keys, queries, true);
+        if (result == null) throw new OutOfMemoryError("native upper-bound results unavailable");
+        return result;
+    }
+
     private static void requireNative() {
         if (!M3ArrayNative.isLoaded()) {
             String path = System.getProperty("m3.arrays.native.path");
@@ -167,6 +211,8 @@ public final class M3LongCoordinateIndex {
     }
 
     private static native int nativeBound(long[] values, long key, boolean upper);
+
+    private static native int[] nativeBounds(long[] values, long[] queries, boolean upper);
 
     private static void checkedRange(long from, long to) {
         if (from > to) {
