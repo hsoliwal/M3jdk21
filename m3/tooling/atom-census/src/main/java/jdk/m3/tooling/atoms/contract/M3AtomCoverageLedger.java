@@ -204,6 +204,11 @@ public final class M3AtomCoverageLedger {
                 continue;
             }
             Map<M3CoverageGate, M3EvidenceRecord> perAtom = evidence.getOrDefault(atom.atomId(), Map.of());
+            // Any executed FAIL refuses admission, including a non-required/optional gate.
+            // admissionFindings() already reports such failures; the count must agree.
+            if (perAtom.values().stream().anyMatch(record -> record.status() == M3GateStatus.FAIL)) {
+                continue;
+            }
             boolean complete = true;
             java.util.EnumSet<M3CoverageGate> requiredGates = M3CoverageGate.requiredFor(atom.kind());
             if (!atom.publicContractLocked()) {
