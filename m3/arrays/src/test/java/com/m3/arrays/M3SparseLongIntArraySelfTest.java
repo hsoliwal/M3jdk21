@@ -82,7 +82,8 @@ public final class M3SparseLongIntArraySelfTest {
 
         // The required JNI backend is an independent zero-copy-ownership audit.
         // It deliberately fails rather than silently using Java when absent.
-        if (System.getProperty("m3.arrays.native.path") != null) {
+        String nativePath = System.getProperty("m3.arrays.native.path");
+        if (M3ArrayNative.isLoaded() || (nativePath != null && !nativePath.isBlank())) {
             require(actual.verifyNonZeroCountRequiredNative() == oracle.size(),
                     "native occupancy disagreement");
             checks++;
