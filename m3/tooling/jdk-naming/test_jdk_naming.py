@@ -90,6 +90,26 @@ class JdkNamingTest(unittest.TestCase):
         self.assertIn("https://github.com/hsoliwal/com.synexia/blob/x/SynexiaFoo.java", note)
         self.assertIn("use M3Bar", note)
 
+    def test_second_pass_folders_uppercase_words_and_com_m3(self):
+        self.put("m3/vendor/synexia/lib/Tool.java", "// the Synexia tool, see vendor/synexia/lib and Synexia-NOTICE\n")
+        self.put("m3/inv/SYNEXIA-LLM-FIRST-2.json", '{"id": "SYNEXIA-LLM-FIRST-2"}\n')
+        self.put("Synexia-NOTICE", "notice\n")
+        self.put("M3-SYNEXIA-NOTICE.md", "notice\n")
+        self.put("m3/collections/src/com/m3/collections/A.java", "package com.m3.collections;\nimport com.m3.arrays.B;\n")
+        self.put("m3/collections/pom.xml", "<project><groupId>com.m3.tooling</groupId></project>\n")
+        jn.apply(self.root, jn.plan(self.root))
+        tool = (self.root / "m3/vendor/m3/lib/Tool.java").read_text(encoding="utf-8")
+        self.assertIn("// the M3 tool, see vendor/m3/lib and Synexia-NOTICE", tool)
+        self.assertIn('"M3-LLM-FIRST-2"', (self.root / "m3/inv/M3-LLM-FIRST-2.json").read_text(encoding="utf-8"))
+        self.assertTrue((self.root / "Synexia-NOTICE").is_file())
+        self.assertTrue((self.root / "M3-SYNEXIA-NOTICE.md").is_file())
+        moved = (self.root / "m3/collections/src/jdk/m3/collections/A.java").read_text(encoding="utf-8")
+        self.assertIn("package jdk.m3.collections;", moved)
+        self.assertIn("import jdk.m3.arrays.B;", moved)
+        self.assertIn("<groupId>com.m3.tooling</groupId>", (self.root / "m3/collections/pom.xml").read_text(encoding="utf-8"))
+        again = jn.plan(self.root)
+        self.assertEqual((again["moves"], again["rewrites"]), ([], []))
+
     def test_a_code_line_naming_a_license_is_still_renamed(self):
         self.put("m3/x/Rules.java", "import com.synexia.m3.x.LicenseRule;\n")
         jn.apply(self.root, jn.plan(self.root))
