@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HexFormat;
 import java.util.List;
@@ -275,8 +276,12 @@ public final class SharedLexiconCatalog {
             ensureOpen();
             if (value == null || value.isEmpty()) throw new IllegalArgumentException("prefix required");
             if (limit < 1 || limit > 100_000) throw new IllegalArgumentException("limit must be 1..100000");
+            int firstShard = Collections.binarySearch(lastLexemes, value);
+            if (firstShard < 0) firstShard = -firstShard - 1;
             ArrayList<Coordinate> result = new ArrayList<>(Math.min(limit, 16));
-            for (int shard = 0; shard < shards.size() && result.size() < limit; shard++) {
+            for (int shard = firstShard; shard < shards.size() && result.size() < limit; shard++) {
+                String first = firstLexemes.get(shard);
+                if (first.compareTo(value) > 0 && !first.startsWith(value)) break;
                 SharedLexiconImage image = imageAt(shard);
                 for (int row = image.lowerBound(value);
                      row < image.size() && result.size() < limit && image.startsWith(row, value); row++) {
