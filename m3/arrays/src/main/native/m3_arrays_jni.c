@@ -190,3 +190,58 @@ Java_com_m3_arrays_M3ArrayNative_nativeAllocateLongs(
   if (result == NULL) m3_backing_failed(env);
   return result;
 }
+
+/* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
+JNIEXPORT jbooleanArray JNICALL
+Java_com_m3_arrays_M3ArrayNative_nativeAllocateBooleans(
+    JNIEnv *env, jclass owner, jint length) {
+  (void)owner;
+  if (!m3_backing_length(env, length)) return NULL;
+  jbooleanArray result = (*env)->NewBooleanArray(env, length);
+  if (result == NULL) m3_backing_failed(env);
+  return result;
+}
+
+/* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
+JNIEXPORT jcharArray JNICALL
+Java_com_m3_arrays_M3ArrayNative_nativeAllocateChars(
+    JNIEnv *env, jclass owner, jint length) {
+  (void)owner;
+  if (!m3_backing_length(env, length)) return NULL;
+  jcharArray result = (*env)->NewCharArray(env, length);
+  if (result == NULL) m3_backing_failed(env);
+  return result;
+}
+
+/* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
+JNIEXPORT jshortArray JNICALL
+Java_com_m3_arrays_M3ArrayNative_nativeAllocateShorts(
+    JNIEnv *env, jclass owner, jint length) {
+  (void)owner;
+  if (!m3_backing_length(env, length)) return NULL;
+  jshortArray result = (*env)->NewShortArray(env, length);
+  if (result == NULL) m3_backing_failed(env);
+  return result;
+}
+
+/* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
+JNIEXPORT jfloatArray JNICALL
+Java_com_m3_arrays_M3ArrayNative_nativeAllocateFloats(
+    JNIEnv *env, jclass owner, jint length) {
+  (void)owner;
+  if (!m3_backing_length(env, length)) return NULL;
+  jfloatArray result = (*env)->NewFloatArray(env, length);
+  if (result == NULL) m3_backing_failed(env);
+  return result;
+}
+
+/* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
+JNIEXPORT jdoubleArray JNICALL
+Java_com_m3_arrays_M3ArrayNative_nativeAllocateDoubles(
+    JNIEnv *env, jclass owner, jint length) {
+  (void)owner;
+  if (!m3_backing_length(env, length)) return NULL;
+  jdoubleArray result = (*env)->NewDoubleArray(env, length);
+  if (result == NULL) m3_backing_failed(env);
+  return result;
+}

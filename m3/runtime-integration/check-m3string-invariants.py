@@ -26,6 +26,7 @@ frozen_index = read("src/java.base/share/classes/java/lang/M3FrozenLexiconIndex.
 owner = read("src/java.base/share/classes/java/lang/M3StringOwner.java")
 atom = read("src/java.base/share/classes/java/lang/M3StringAtom.java")
 tuple_ = read("src/java.base/share/classes/java/lang/M3StringTuple.java")
+leaf_cursor = read("src/java.base/share/classes/java/lang/M3StringLeafCursor.java")
 facts = read("src/java.base/share/classes/java/lang/M3StringFacts.java")
 search_precompute = read("src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java")
 precompute_bridge = read("src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java")
@@ -369,12 +370,34 @@ for fragment in [
     "Long routeKey = tupleRouteKey(left, right, javaHash, totalLength, coder);",
     "private static char joinedCharAt(M3String left, M3String right, int index)",
     "private static boolean sameLeafSequence(",
-    "private static final class LeafCursor",
-    "rawAtom == atom && start + length == rawStart",
-    "candidate.atom() != requested.atom()",
+    "new M3StringLeafCursor(existing, null, true)",
+    "new M3StringLeafCursor(left, right, true)",
+    "candidateNext != requestedNext",
+    "if (!candidateNext) return true;",
+    "!sameLeaf(candidate.owner(), requested.owner())",
+    "candidate.start() != requested.start()",
+    "candidate.length() != requested.length()",
+    "return left == right || M3StringImmediate.sameText(left, right);",
 ]:
     if fragment not in pool:
         fail(f"M3 balanced structural-canonical pool invariant missing: {fragment}")
+# The shared cursor owns normalization. Require exact contiguous owner ranges,
+# checked geometry and released popped references in that existing owner.
+for fragment in [
+    "final class M3StringLeafCursor",
+    "if (!coalesceAdjacent)",
+    "rawOwner == owner && start + length == rawStart",
+    "length = Math.addExact(length, rawLength);",
+    "Objects.checkFromIndexSize(offset, count, owner.length);",
+    "Math.multiplyExact(pendingOwners.length, 2)",
+    "if (!(current instanceof M3StringTuple tuple))",
+    "Math.addExact(tuple.right.start(), rightStart)",
+    "Math.addExact(tuple.left.start(), leftStart)",
+    "pendingOwners[top] = null;",
+]:
+    if fragment not in leaf_cursor:
+        fail(f"M3 shared leaf cursor invariant missing: {fragment}")
+
 for forbidden in [
     "geometryEquals(left, right)",
     "tupleHash64(M3String left, M3String right)",
@@ -422,11 +445,24 @@ for fragment in [
         fail(f"M3StringAtom bulk address projection missing: {fragment}")
 for fragment in [
     "void getBytes(",
-    "left.owner().getBytes(",
-    "right.owner().getBytes(",
+    "Objects.checkFromToIndex(start, end, length);",
+    "M3StringPool.copyCharsFromPath(this, start, end, destination, destinationStart);",
+    "M3StringPool.copyBytesFromPath(",
+    "this, start, end, destination, destinationStart, destinationCoder);",
 ]:
     if fragment not in tuple_:
         fail(f"M3StringTuple bulk range projection missing: {fragment}")
+
+# Tuple projections use the same iterative owner/range walk, with scalar bulk
+# copies and checked destination advancement; no recursive tuple charAt loop.
+for fragment in [
+    "new M3StringLeafCursor(root, from, end - from, true)",
+    "path.owner().getChars(path.start(), Math.addExact(path.start(), count),",
+    "path.owner().getBytes(path.start(), Math.addExact(path.start(), count),",
+    "target = Math.addExact(target, count);",
+]:
+    if fragment not in pool:
+        fail(f"M3 tuple cursor bulk projection missing: {fragment}")
 
 # Position masks are a separate bounded weak-owner lane. They store one conservative signal per
 # 64 UTF-16 units and may skip blocks only on a negative signal.

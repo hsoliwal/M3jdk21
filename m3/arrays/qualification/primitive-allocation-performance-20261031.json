@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_source_commit": "531ea85ccd75b5b9857d17652ae083a39d40e4fc",
+  "canonical_artifact_root": "synexia-openrewrite-recipes/recipe-crates/m3-jni-array-storage-20261021/qualification/primitive-family-20261031",
+  "recipe": "m3-jni-primitive-allocation-20261031-performance",
+  "files": [
+    {
+      "path": "m3/arrays/src/test/java/com/m3/arrays/M3ArrayAllocationCoverageTest.java",
+      "sha256": "cbd8117a6803867cddd31c6650dd42d570dd014e38c0365847fb37fb18812712"
+    },
+    {
+      "path": "m3/arrays/src/test/java/com/m3/arrays/M3ArrayAllocationPerformanceTest.java",
+      "sha256": "f6bd32f127dbdf9cefaaa18c6ec394900352ed28a935144bbad7600ae777a33d"
+    }
+  ],
+  "execution": {
+    "junit": 57,
+    "performance_tests": 9,
+    "timing_rows": 27,
+    "ctest": 4,
+    "failures": 0,
+    "skips": 0,
+    "command": "mvn -f m3/arrays/pom.xml -Pnative-linux -Dm3.arrays.native.required=true -Dm3.arrays.perf=true -DargLine=-Xcheck:jni verify"
+  },
+  "limits": [
+    "Finite performance witness, not JMH or production speedup",
+    "Other repository atoms and platform/image gates pending"
+  ]
+}
