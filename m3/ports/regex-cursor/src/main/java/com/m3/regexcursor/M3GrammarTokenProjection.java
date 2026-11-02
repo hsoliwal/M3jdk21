@@ -10,8 +10,10 @@ import java.util.Objects;
  * <p>This is not a lexer. The authoritative parser supplies disjoint, ordered, half-open UTF-16
  * token spans and a code-token admission lane. The projector neither reparses source nor creates
  * substring objects: it only uses {@link M3StaticGrammarLexicon#exact(CharSequence, int, int)}.
- * Skipped and unknown entries remain zero in the primitive output lane. The existing
- * {@link M3TokenCursor} can consume that lane without changing its token coordinate semantics.
+ * Skipped and unknown entries remain zero in the primitive output lane, which is NOT
+ * a complete {@link M3TokenCursor} input: token regex patterns can match literal {@code <0>}.
+ * Use {@link #projectComplete(M3StaticGrammarLexicon, CharSequence, int[], int[], byte[])}
+ * for a token cursor, or retain {@link #project} for intentional sparse classification.
  * Contextual keywords are only candidates; semantic classification belongs to the parser.</p>
  *
  * <p>No source, input lane, projection result or JNI/native pointer is cached or retained.
@@ -22,6 +24,26 @@ final class M3GrammarTokenProjection {
     static final byte FIXED_CANDIDATE = 1;
 
     private M3GrammarTokenProjection() { }
+
+    /**
+     * Fail-closed admission of only fully known tokens into the token regex alphabet.
+     * Preserves the existing {@link #project} geometry, source and admission contract.
+     * Unlike sparse projection, rejects skipped or unknown zero-ID tokens before
+     * returning the lane: zero is a legal token-regex symbol, not a safe hole marker.
+     * Does not retain, re-lex, flatten or mutate any caller-owned inputs.
+     *
+     * @throws IllegalArgumentException on any unknown/skipped token
+     */
+    static int[] projectComplete(M3StaticGrammarLexicon grammar, CharSequence source,
+            int[] starts, int[] ends, byte[] admission) {
+        int[] ids = project(grammar, source, starts, ends, admission);
+        for (int i = 0; i < ids.length; i++) {
+            if (ids[i] == 0) {
+                throw new IllegalArgumentException("incomplete grammar token at index " + i);
+            }
+        }
+        return ids;
+    }
 
     /**
      * Project exact lexeme IDs into one new primitive lane, preserving token index alignment.
