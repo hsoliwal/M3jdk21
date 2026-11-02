@@ -20,7 +20,7 @@ crate stacked on #15428, #15415 and #15400.
 * LeetCode #208 (Trie), #14 (Longest Common Prefix), #28 (Substring Search),
   HackerRank Contacts and No Prefix Set, and GeeksforGeeks Trie/Pattern
   Searching are **algorithm categories / test shapes only**. No source or
-  editorial from challenge websites is copied. Java 21 JLS `3 is the lexical
+  editorial from challenge websites is copied. Java 21 JLS §3 is the lexical
   specification authority.
 
 ## Local execution evidence (OpenJDK 21.0.12.1, x86_64 Linux)
