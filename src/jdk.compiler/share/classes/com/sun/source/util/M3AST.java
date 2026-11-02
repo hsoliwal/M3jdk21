@@ -14,6 +14,7 @@ package com.sun.source.util;
  * Modified 2026-10-21 by Synexia (Hitesh Soliwal and contributors): added
  * immutable, explicitly partial build facts from the original M3AST event.
  * Modified 2026-10-22: added detached, typed method facts and source-site relations.
+ * Modified 2026-11-02: added source-sealed attributed relationship observations.
  */
 
 import com.sun.source.tree.CompilationUnitTree;
@@ -114,6 +115,24 @@ public interface M3AST extends AutoCloseable {
      */
     static MethodFacts methodFacts(Unit unit) throws Exception {
         return M3ASTPC.methodFacts(Objects.requireNonNull(unit, "unit"));
+    }
+
+    /**
+     * Project positive, attributed relationships from this live ANALYZED event.
+     * The event-owned cache shares a detached result, without parsing, attribution
+     * or source rereads. These observations do not prove a design pattern,
+     * behavioral equivalence, a complete graph or transformation applicability.
+     * Bounds are 131,072 symbols, 1,048,576 relations and 8,388,608 identity
+     * characters per event; exhaustion refuses the projection, never truncates.
+     *
+     * @param unit the original live compiler event
+     * @return immutable facts for its analyzed top-level declaration
+     * @throws IllegalStateException if the event is not live and ANALYZED or a budget is exceeded
+     * @throws IllegalArgumentException if the unit is not owned by this compiler
+     * @throws Exception if the projection cannot be captured
+     */
+    static RelationshipFacts relationshipFacts(Unit unit) throws Exception {
+        return M3ASTPC.relationshipFacts(Objects.requireNonNull(unit, "unit"));
     }
 
     /** Register a consumer once, by object identity, before the first event. */
@@ -582,6 +601,107 @@ public interface M3AST extends AutoCloseable {
         private static void relation(int relation) {
             if (relation < 0 || relation >= RELATION_COUNT) throw new IllegalArgumentException("method relation ID");
         }
+    }
+
+    /**
+     * An attributed binary symbol. TYPE identities are JVM binary names and
+     * own themselves. METHOD and FIELD identities use the same erased JVM
+     * descriptors as MethodFacts and name their declaring TYPE as owner.
+     * Referenced classpath symbols can occur without their declaring source.
+     */
+    record RelationshipSymbol(String kind, String identity, String owner) {
+        public RelationshipSymbol {
+            Objects.requireNonNull(kind, "kind");
+            Objects.requireNonNull(identity, "identity");
+            Objects.requireNonNull(owner, "owner");
+            if (!(kind.equals("TYPE") || kind.equals("METHOD") || kind.equals("FIELD"))
+                    || identity.isEmpty() || owner.isEmpty()
+                    || kind.equals("TYPE") && !identity.equals(owner))
+                throw new IllegalArgumentException("invalid relationship symbol");
+        }
+    }
+
+    /**
+     * A positive attributed relation witnessed by a half-open UTF-16 source
+     * range in RelationshipFacts.sourceUri. DECLARES_METHOD/FIELD mean symbol
+     * ownership: referenced members may be witnessed at a use site. INVOKES
+     * records static resolution, not dynamic dispatch, runtime execution or
+     * purity. Deferred lambda and member-reference bodies are not direct calls.
+     */
+    record Relationship(String relation, String from, String to, int start, int end) {
+        public Relationship {
+            Objects.requireNonNull(relation, "relation");
+            Objects.requireNonNull(from, "from");
+            Objects.requireNonNull(to, "to");
+            boolean known = switch (relation) {
+                case "DECLARES_METHOD", "DECLARES_FIELD", "FIELD_TYPE", "EXTENDS",
+                        "IMPLEMENTS", "ABSTRACT_ROLE", "ABSTRACT_METHOD", "INVOKES",
+                        "OVERRIDES" -> true;
+                default -> false;
+            };
+            if (!known || from.isEmpty() || to.isEmpty() || start < 0 || end <= start)
+                throw new IllegalArgumentException("invalid relationship observation");
+        }
+    }
+
+    /**
+     * Detached, bounded positive facts for an original analyzed declaration.
+     * FIELD_TYPE records only a resolved class type after erasure; arrays and
+     * primitive fields are not direct role references. EXTENDS and IMPLEMENTS
+     * are direct source-declared supertypes. ABSTRACT_ROLE uses actual interface
+     * or abstract-class flags; no lexical or domain inference is performed.
+     *
+     * <p>Sources use the original parser's exact big-endian UTF-16 seal.
+     * A source seal does not bind classpaths, annotation processors, toolchains
+     * or rule catalogues. A transport's caller-supplied relationContext is an
+     * opaque semantic-context seal; absent context is explicitly UNKNOWN.
+     * Consumers must bind all those inputs before authorizing persistent reuse
+     * or a recipe, and must independently establish applicability and behavior.
+     * Unresolved observations and unavailable source ranges are explicit
+     * residues, never evidence that a relation is absent.
+     */
+    record RelationshipFacts(URI sourceUri, int sourceLength, String sourceUtf16Sha256,
+                             String analyzedBinaryName, RelationshipSymbol[] symbols,
+                             Relationship[] relations, String[] unresolvedReasons) {
+        public static final String SCHEMA = "M3AST_RELATIONS_V1";
+
+        public RelationshipFacts {
+            Objects.requireNonNull(sourceUri, "sourceUri");
+            Objects.requireNonNull(sourceUtf16Sha256, "sourceUtf16Sha256");
+            Objects.requireNonNull(analyzedBinaryName, "analyzedBinaryName");
+            if (sourceLength < 0 || analyzedBinaryName.isEmpty()
+                    || sourceUtf16Sha256.length() != 64)
+                throw new IllegalArgumentException("invalid relationship source seal");
+            for (int i = 0; i < sourceUtf16Sha256.length(); i++) {
+                char c = sourceUtf16Sha256.charAt(i);
+                if (!(c >= '0' && c <= '9') && !(c >= 'a' && c <= 'f'))
+                    throw new IllegalArgumentException("invalid relationship source digest");
+            }
+            symbols = Objects.requireNonNull(symbols, "symbols").clone();
+            relations = Objects.requireNonNull(relations, "relations").clone();
+            unresolvedReasons = Objects.requireNonNull(unresolvedReasons, "unresolvedReasons").clone();
+            if (symbols.length > 131_072 || relations.length > 1_048_576
+                    || unresolvedReasons.length > 2)
+                throw new IllegalArgumentException("relationship snapshot budget");
+            for (RelationshipSymbol symbol : symbols) Objects.requireNonNull(symbol, "symbol");
+            for (Relationship relation : relations) {
+                Objects.requireNonNull(relation, "relation");
+                if (relation.end() > sourceLength)
+                    throw new IllegalArgumentException("relationship range exceeds original source");
+            }
+            String previous = null;
+            for (String reason : unresolvedReasons) {
+                if (!(reason.equals("UNRESOLVED_SYMBOL") || reason.equals("UNAVAILABLE_SOURCE_RANGE"))
+                        || previous != null && previous.compareTo(reason) >= 0)
+                    throw new IllegalArgumentException("invalid relationship residue");
+                previous = reason;
+            }
+        }
+
+        @Override public RelationshipSymbol[] symbols() { return symbols.clone(); }
+        @Override public Relationship[] relations() { return relations.clone(); }
+        @Override public String[] unresolvedReasons() { return unresolvedReasons.clone(); }
+        public boolean completeGraph() { return false; }
     }
 
     /** A scoped reference to the actual compiler tree, with lazy projections. */
