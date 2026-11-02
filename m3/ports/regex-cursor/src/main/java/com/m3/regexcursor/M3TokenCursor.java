@@ -43,8 +43,19 @@ public final class M3TokenCursor implements M3ChunkCursor, M3CursorFacts {
 
     /** Cursor over discontiguous lanes in order (empty lanes are skipped). */
     public static M3TokenCursor lanes(int[][] lanes) {
-        int[][] kept = Arrays.stream(lanes).map(Objects::requireNonNull).filter(l -> l.length > 0)
-                .toArray(int[][]::new);
+        if (lanes == null) {
+            // Preserve the original JDK null diagnostic; no stream on valid inputs.
+            Arrays.stream(lanes);
+        }
+        int nonempty = 0;
+        for (int[] lane : lanes) {
+            if (Objects.requireNonNull(lane).length > 0) nonempty++;
+        }
+        int[][] kept = new int[nonempty][];
+        int next = 0;
+        for (int[] lane : lanes) {
+            if (lane.length > 0) kept[next++] = lane;
+        }
         return new M3TokenCursor(kept);
     }
 
