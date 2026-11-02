@@ -167,6 +167,38 @@ public final class M3SparseLongIntArray {
         for (int i = 0; i < count; i++) set(to + i, source[sourceOffset + i]);
     }
 
+    /**
+     * Required-native invariant audit: the C/JNI backend independently counts
+     * every nonzero primitive payload and checks per-block and global metadata.
+     * Array contents are copied through bounded JNI regions; no Java heap
+     * address, global reference or native borrow survives the call. This audit
+     * is deliberately not an acceleration claim and has no Java fallback.
+     */
+    public long verifyNonZeroCountRequiredNative() {
+        if (!M3ArrayNative.isLoaded()) {
+            String library = System.getProperty("m3.arrays.native.path");
+            if (library == null || library.isBlank()) {
+                throw new UnsatisfiedLinkError("M3 array JNI library is not loaded");
+            }
+            M3ArrayNative.load(java.nio.file.Path.of(library));
+        }
+        long result = 0L;
+        for (int slot = 0; slot < states.length; slot++) {
+            if (states[slot] != OCCUPIED) continue;
+            int found = nativeCountNonZero(payloads[slot]);
+            if (found != occupancies[slot]) {
+                throw new ConcurrentModificationException("native block count disagrees with parent state");
+            }
+            result += found;
+        }
+        if (result != nonZeroCount) {
+            throw new ConcurrentModificationException("native total disagrees with parent state");
+        }
+        return result;
+    }
+
+    private static native int nativeCountNonZero(int[] block);
+
     /** Detached deep snapshot of the active primitive blocks and table metadata. */
     public M3SparseLongIntArray snapshot() {
         M3SparseLongIntArray copy = new M3SparseLongIntArray(length);
