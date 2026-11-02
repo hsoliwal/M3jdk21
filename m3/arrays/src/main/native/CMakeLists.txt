@@ -96,3 +96,25 @@ if(BUILD_TESTING)
   endif()
   add_test(NAME m3_int_lane_search_checks COMMAND m3_int_lane_search_checks)
 endif()
+
+# Sparse long-index integer primitive lane: required JNI occupancy audit.
+# No GetPrimitiveArrayCritical or retained Java array pointers are used.
+target_sources(m3_arrays PRIVATE
+  m3_sparse_nonzero.c
+  m3_sparse_nonzero_jni.c)
+
+if(BUILD_TESTING)
+  add_executable(m3_sparse_nonzero_checks
+    tests/m3_sparse_nonzero_checks.c
+    m3_sparse_nonzero.c)
+  target_include_directories(m3_sparse_nonzero_checks
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+  target_compile_features(m3_sparse_nonzero_checks PRIVATE c_std_11)
+  if(MSVC)
+    target_compile_options(m3_sparse_nonzero_checks PRIVATE /W4 /WX)
+  else()
+    target_compile_options(m3_sparse_nonzero_checks
+      PRIVATE -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic)
+  endif()
+  add_test(NAME m3_sparse_nonzero_checks COMMAND m3_sparse_nonzero_checks)
+endif()
