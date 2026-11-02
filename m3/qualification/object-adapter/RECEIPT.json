@@ -6,10 +6,10 @@
   "recipe_repository": "https://github.com/hsoliwal/com.synexia",
   "recipe_path": "synexia-openrewrite-recipes/recipe-crates/m3-object-adapter-contract-20261102",
   "recipe_pr": "https://github.com/hsoliwal/com.synexia/pull/14941",
-  "recipe_commit": "e874042c81ed580d1c976e25276193e64babd6e7",
-  "recipe_commit_note": "Published authoring commit; all22 source/metadata files read back byte-for-byte, shared engine bytes also matched the qualified versions.",
+  "recipe_commit": "99f4d878925dc887e07cb142e75bb767fa4c5c33",
+  "recipe_commit_note": "Published authoring commit integrated with live develop6f54420; fresh SDK qualification preserved exact generated Java/C bytes. All22 authoring files read back exactly.",
   "sdk_result_receipt_sha256": "04d6d23e59a779fd6b1c48c028db817d9a1459832678386ef9b6e18b9ca133bb",
-  "execution_receipt_sha256": "31cc17c37b5f4f764169fe91609d5983ba59e498ca14d8597314935cf1e40ea2",
+  "execution_receipt_sha256": "5205e58effaf7c5714b098ad613f24c325b2d82210ddeb5c337a83a89454ae99",
   "outputs": [
     {
       "path": "test/jdk/java/lang/Object/ObjectAdapterNativeTest.java",
@@ -260,7 +260,8 @@
     "failures": 0,
     "errors": 0,
     "skipped": 0,
-    "postimage_target_root": true
+    "postimage_target_root": true,
+    "engine_source_revision": "6f54420f3d716f6ec3ba480fb45514833a73128a"
   },
   "source_identity": "SOURCE_IMAGE_IDENTITY.json",
   "repository_naming_gate": {
@@ -285,5 +286,11 @@
     "performance benchmark"
   ],
   "runtime_source_changes": 0,
-  "scope_note": "Existing image; pertinent source/blob readback and image hashes, not a new reproducible full-source build"
+  "scope_note": "Existing image; pertinent source/blob readback and image hashes, not a new reproducible full-source build",
+  "public_name_path_correction": {
+    "initial_run": "https://github.com/hsoliwal/M3jdk21/actions/runs/41398824081",
+    "initial_failure": "Four new dated compatibility receipt paths violate stable public naming.",
+    "resolved_path": "m3/qualification/object-adapter",
+    "test_source_changes": 0
+  }
 }
