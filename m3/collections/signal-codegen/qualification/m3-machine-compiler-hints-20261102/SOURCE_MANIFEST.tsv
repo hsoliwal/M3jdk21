@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 # type	path	before_sha256	after_sha256	after_git_blob
 JAVA_MAIN	m3/collections/signal-codegen/src/main/java/com/m3/collections/sortable/M3MachineHintRules.java	ABSENT	0125a6de7d0605d72303a2ffbe3fd170c2b80fc32bcc4eeabb88da3ca830a685	fa79a4c4f3952108f62fc4191269c977ba489faa
 JAVA_TEST	m3/collections/signal-codegen/src/test/java/com/m3/collections/sortable/M3MachineHintRulesContract.java	ABSENT	697991c41f6094428e15c210fd2309d875d913b31db352a48d8fab7f0564ea1e	1a950f52ed35b1a4d384afd69c11984a5af60a46
