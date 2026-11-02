@@ -118,3 +118,25 @@ if(BUILD_TESTING)
   endif()
   add_test(NAME m3_sparse_nonzero_checks COMMAND m3_sparse_nonzero_checks)
 endif()
+
+# Long-coordinate binary search: reuse the existing bounded M3 arrays JNI owner.
+# No permanent JNI array borrows; signed-long native oracle is independent.
+target_sources(m3_arrays PRIVATE
+  m3_long_coordinate_search.c
+  m3_long_coordinate_search_jni.c)
+
+if(BUILD_TESTING)
+  add_executable(m3_long_coordinate_search_checks
+    tests/m3_long_coordinate_search_checks.c
+    m3_long_coordinate_search.c)
+  target_include_directories(m3_long_coordinate_search_checks
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+  target_compile_features(m3_long_coordinate_search_checks PRIVATE c_std_11)
+  if(MSVC)
+    target_compile_options(m3_long_coordinate_search_checks PRIVATE /W4 /WX)
+  else()
+    target_compile_options(m3_long_coordinate_search_checks
+      PRIVATE -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic)
+  endif()
+  add_test(NAME m3_long_coordinate_search_checks COMMAND m3_long_coordinate_search_checks)
+endif()
