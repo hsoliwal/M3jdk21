@@ -126,9 +126,9 @@ public final class M3SparseLongIntArray {
                 if (usedBlocks == 0) {
                     Arrays.fill(states, (byte) 0);
                     tombstones = 0;
-                } else if (tombstones > states.length / 4) {
-                    rehash(states.length);
                 }
+                // Never allocate when clearing a value. Tombstone compaction
+                // is deferred to a future insertion after capacity preflight.
             }
         }
         revision++;
