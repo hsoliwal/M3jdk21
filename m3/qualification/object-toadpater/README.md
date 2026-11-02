@@ -18,3 +18,15 @@ Inventory exact Git source blobs and hashes; apply the documented source diff; r
 The existing Synexia `M3AlgorithmRecipeFirstFullReviewRecipe` is the catalogue owner. LeetCode706 (hash-table design), HackerRank Java `instanceof`/reflection, and GeeksforGeeks adapter-pattern references inform test classification only. Their editorial/submission code must not be copied. Existing M3JDK21 `Object` and `M3Object` semantics are authoritative; Oracle's JNI specification determines native calling behavior.
 
 Related open PRs `hsoliwal/com.synexia#14941` and `hsoliwal/M3jdk21#2317` qualify the original `toAdapter` boundary. Do not merge or rewrite those commits implicitly. This is an independent proposal and not a claim to have completed all repository-wide optimizations.
+
+## Pre-existing subclass binary regression (successor qualification)
+
+The Java 21 class file `LegacyPreAliasSubclass` is compiled once against unmodified OpenJDK 21, which **does not** declare `Object.toAdpater`. It already declares the public erased method `toAdpater(Ljava/lang/Class;)Ljava/lang/Object;`. Embed the exact historical class bytes in a new jtreg test and load them through an independent class loader; invoke the new base-typed alias to require JVM virtual dispatch to the old subclass method. Source is first-party, retained in the qualification package.
+
+- Stock-JDK-produced classfile major version: 65.
+- Frozen class-file SHA-256: `4eff8d88c8154820bee15152e0f2cb4791b305cc67b5675b34276310aa568e36`.
+- Baseline fixture is **not** recompiled under the modified M3JDK.
+- Independent Java 21 model: a previously compiled subclass invokes correctly when a base alias is introduced as non-final. Replacing only the model base with a final alias causes the expected `IncompatibleClassChangeError`.
+- This model does **not** establish actual M3JDK jtreg or HotSpot image success.
+
+The historical `m3/compatibility/check_object_adapter_progress_receiver_20261017.py` source seal remains unchanged and intentionally refuses the evolved `Object.java` SHA-256. GitHub Actions for the initial alias PR reported this refusal; it is not converted into a green result. A separate successor acceptance receipt must pin the new source identity without weakening that historical check.
