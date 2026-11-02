@@ -40,13 +40,21 @@ jobs:
         run: |
           set -euxo pipefail
           mvn -B -ntp -f m3/collections/qualification/long-range-set-20261017/recipe/pom.xml test
+      - name: Build actual Java21 m3-arrays dependency before strict module compilation
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mvn -B -ntp -f m3/arrays/pom.xml -Dmaven.test.skip=true install
+          test -s m3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar
+          jar --describe-module --file m3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar | grep '^com.m3.arrays'
       - name: Strict current M3 Java and module owner JUnit
         shell: bash
         run: |
           set -euxo pipefail
           mkdir -p proof/classes proof/native
           find m3/collections/src/main/java -name '*.java' -print0 | sort -z | \
-            xargs -0 javac --release 21 -proc:none -Xlint:all,-module -Werror -d proof/classes
+            xargs -0 javac --release 21 -proc:none -Xlint:all,-module -Werror \
+              --module-path m3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar -d proof/classes
           javac --release 21 -proc:none -Xlint:all -Werror -cp proof/classes -d proof/classes \
             m3/collections/src/test/java/com/m3/collections/M3LongRangeSetSelfTest.java \
             m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksSelfTest.java

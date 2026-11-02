@@ -55,5 +55,14 @@ jobs:
             -o "$RUNNER_TEMP/libm3_collections_pathmask.so"
           java -ea -Xmx64m -Xcheck:jni -Djava.library.path="$RUNNER_TEMP" \
             -cp "$RUNNER_TEMP/range-classes" com.m3.collections.M3LongRangeSetSelfTest
+      - name: Build required Java21 m3-arrays module before dependent tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/arrays/pom.xml -Dmaven.test.skip=true install
+          test -s m3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar
       - name: Actual M3 collections Maven/JUnit
-        run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3LongRangeSetTest,M3LongRangeSetAtomTest "-DargLine=-Xcheck:jni -Djava.library.path=$RUNNER_TEMP" test
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3LongRangeSetTest,M3LongRangeSetAtomTest "-DargLine=-Xcheck:jni -Djava.library.path=$RUNNER_TEMP" test
