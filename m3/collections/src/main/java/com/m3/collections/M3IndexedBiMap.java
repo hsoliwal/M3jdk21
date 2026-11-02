@@ -7,11 +7,13 @@ package com.m3.collections;
 
 import java.util.AbstractMap;
 import java.util.AbstractSet;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.BiConsumer;
 
 /**
  * M3-owned equality-keyed, one-to-one relation using two existing indexed
@@ -49,6 +51,23 @@ public final class M3IndexedBiMap<K, V> extends AbstractMap<K, V> {
     @Override public boolean containsKey(Object key) { return forward.containsKey(key); }
     @Override public boolean containsValue(Object value) { return reverse.containsKey(value); }
     @Override public V get(Object key) { return forward.get(key); }
+
+    /** Traverse indexed keys and values without constructing public entry facades. */
+    @Override public void forEach(BiConsumer<? super K, ? super V> action) {
+        Objects.requireNonNull(action);
+        Iterator<K> keys = forward.keySet().iterator();
+        while (keys.hasNext()) {
+            K key = keys.next();
+            V value;
+            try {
+                value = forward.get(key);
+            } catch (IllegalStateException problem) {
+                // Map.forEach wraps an invalid entry read, but never a callback failure.
+                throw new ConcurrentModificationException(problem);
+            }
+            action.accept(key, value);
+        }
+    }
 
     @Override public V put(K key, V value) {
         boolean present = forward.containsKey(key);
