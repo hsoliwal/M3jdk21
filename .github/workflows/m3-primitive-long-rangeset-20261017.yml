@@ -36,6 +36,7 @@ jobs:
           javac --release 21 -proc:none -Xlint:all -Werror -d /tmp/m3-rangeset-classes \
             m3/collections/src/main/java/com/m3/collections/M3LongLongConsumer.java \
             m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java \
+            m3/collections/src/main/java/com/m3/collections/M3LaneSearch.java \
             m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java \
             m3/collections/src/test/java/com/m3/collections/M3LongRangeSetSelfTest.java
           java -ea -Xmx64m -cp /tmp/m3-rangeset-classes com.m3.collections.M3LongRangeSetSelfTest
