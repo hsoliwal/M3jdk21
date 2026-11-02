@@ -2,3 +2,6 @@ date	stage	input	result	status
 2026-11-02	inventory	M3JDK21 #2303 + Synexia #15301	C preimage Git exact; three new paths ABSENT	PASS
 2026-11-02	donor_review	LC56/57 HR Gridland GfG RoaringBitmap	Category-only; original Synexia private JNI source chosen	PASS
 2026-11-02	recipe_custody	Synexia original Maven/OpenRewrite source crate	No duplicate engine or rewrite of canonical recipe	PASS
+2026-11-02	C17_ATOM	Wave21 original full C preimage	Wave22 exact private m3_interval_batch afterimage 8e8a36d707bff57ec5a08e2b239e7af49cc3a7e0	PASS
+2026-11-02	ORACLE	Two original Java/C oracles and complete category ledger	3/3 Git blob source equality; Wave21 eleven columns unchanged	PASS
+2026-11-02	CI_COMPAT	Original Wave21 source checkout gate	Require historical Wave21 preimage from frozen commit AND exact Wave22 successor live blob, not blanket bypass	PLANNED_HOLD
