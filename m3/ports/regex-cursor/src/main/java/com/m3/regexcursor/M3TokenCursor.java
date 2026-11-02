@@ -37,13 +37,25 @@ public final class M3TokenCursor implements M3ChunkCursor, M3CursorFacts {
 
     /** Cursor over one token lane. */
     public static M3TokenCursor of(int[] tokens) {
-        return lanes(new int[][] {Objects.requireNonNull(tokens, "tokens")});
+        int[] checked = Objects.requireNonNull(tokens, "tokens");
+        return new M3TokenCursor(checked.length == 0 ? new int[0][] : new int[][] {checked});
     }
 
     /** Cursor over discontiguous lanes in order (empty lanes are skipped). */
     public static M3TokenCursor lanes(int[][] lanes) {
-        int[][] kept = Arrays.stream(lanes).map(Objects::requireNonNull).filter(l -> l.length > 0)
-                .toArray(int[][]::new);
+        if (lanes == null) {
+            // Preserve the original JDK null diagnostic; no stream on valid inputs.
+            Arrays.stream(lanes);
+        }
+        int nonempty = 0;
+        for (int[] lane : lanes) {
+            if (Objects.requireNonNull(lane).length > 0) nonempty++;
+        }
+        int[][] kept = new int[nonempty][];
+        int next = 0;
+        for (int[] lane : lanes) {
+            if (lane.length > 0) kept[next++] = lane;
+        }
         return new M3TokenCursor(kept);
     }
 
@@ -85,7 +97,31 @@ public final class M3TokenCursor implements M3ChunkCursor, M3CursorFacts {
     public void seek(int position) {
         Objects.checkIndex(position, total + 1);
         if (lanes.length == 0) return;
-        int found = Arrays.binarySearch(starts, 0, lanes.length, position);
+        // The current lane is a locality hint, never a source of correctness.
+        // After proving the search direction, the remaining binary search can
+        // exclude the known current/neighbor prefixes or suffixes.
+        int current = lane;
+        int from = 0;
+        int to = lanes.length;
+        if (position >= starts[current]) {
+            if (position < starts[current + 1]
+                    || current == lanes.length - 1 && position == total) return;
+            int next = current + 1;
+            if (next < lanes.length && (position < starts[next + 1]
+                    || next == lanes.length - 1 && position == total)) {
+                lane = next;
+                return;
+            }
+            from = next + 1;
+        } else {
+            int previous = current - 1;
+            if (previous >= 0 && position >= starts[previous]) {
+                lane = previous;
+                return;
+            }
+            to = previous;
+        }
+        int found = Arrays.binarySearch(starts, from, to, position);
         lane = found >= 0 ? found : -found - 2;
     }
 
