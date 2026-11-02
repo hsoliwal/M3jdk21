@@ -59,10 +59,41 @@ while IFS=$'\t' read -r kind path before after blob || [[ -n "${kind:-}" ]]; do
             ;;
         *) fail "unknown successor kind/path $kind:$path";;
     esac
-    assert_source "$path" "$after" "$blob"
+    # Retain exact historical processor/test blobs; a separately reviewed,
+    # source-sealed successor owns their current product images.
+    if [[ "$kind" == PROCESSOR || "$kind" == PROCESSOR_TEST ]]; then
+        [[ "$(git -C "$root" cat-file blob "$blob" | sha256sum | cut -d' ' -f1)" == "$after" ]] ||
+            fail "historical successor blob lost $path"
+    else
+        assert_source "$path" "$after" "$blob"
+    fi
     prev="$path"
     successor_count=$((successor_count+1))
 done < "$successor"
 [[ "$successor_count" -eq 5 ]] || fail "expected five successor items"
-echo "M3_MACHINE_COMPILER_SUCCESSION_PASS historical=5 successor=5"
+record_manifest="$root/m3/collections/signal-codegen/qualification/m3-record-component-accessor-20261102/SOURCE_MANIFEST.tsv"
+[[ -f "$record_manifest" ]] || fail "record successor manifest missing"
+prev='' record_count=0
+while IFS=$'\t' read -r kind path before after blob || [[ -n "${kind:-}" ]]; do
+    [[ -z "${kind:-}" || "${kind:0:1}" == '#' ]] && continue
+    [[ "$path" > "$prev" ]] || fail "record successor order"
+    case "$kind:$path" in
+        PROCESSOR:"$processor")
+            [[ "$before" == 55a742f32ce86f6425267ecfbcf6c35b2c447841b07d2094fd391c21b67af025 &&
+               "$after" == 62b3dba8c30ca2440f6bb6fa355bc06ad27dd52470b1beffe8b049b02defa506 &&
+               "$blob" == e2a8b3f007e06370eb5a8608f48a73f6d6e8b926 ]] ||
+                fail "record processor receipt changed" ;;
+        PROCESSOR_TEST:"$processor_test")
+            [[ "$before" == dfec3ce0db75774065345ccd65c1abf9a24a89e97c9a1894639599c19370f743 &&
+               "$after" == 535d1e26df2d06796be02fb56acb0e640f5eaeb949acb6dbf0b4858a89d58097 &&
+               "$blob" == ff4af3b79edc4626cb68de5c2b0b7e3aec2e6b12 ]] ||
+                fail "record test receipt changed" ;;
+        *) fail "unexpected record successor $kind:$path" ;;
+    esac
+    assert_source "$path" "$after" "$blob"
+    prev="$path"
+    record_count=$((record_count+1))
+done < "$record_manifest"
+[[ "$record_count" -eq 2 ]] || fail "record successor must contain exactly two sources"
+echo "M3_MACHINE_COMPILER_SUCCESSION_PASS historical=5 successor=5 record=2"
 echo "NOTE: This source seal is not an executed compiler/JNI/JIT semantic proof."

@@ -186,6 +186,35 @@ public final class SortableProcessorSelfTest {
             check(sourceFacts.count(M3CompilerFacts.METHOD_INVOCATIONS) == 1,
                     "explicit source super() must remain a source-call fact");
         }
+        // Record-component private backing fields are not public signal candidates;
+        // their compiler-model accessor is the source-visible numeric member.
+        try (Compiled record = compile("demo.SignalRecord",
+                "package demo; import com.m3.collections.sortable.Sortable;"
+                + "@Sortable(signal=\"weight\") public record SignalRecord(double weight) {}", true)) {
+            check(record.ok, "numeric record component must compile: " + record.messages);
+            Class<?> valueType = record.loader.loadClass("demo.SignalRecord");
+            Class<?> projection = record.loader.loadClass("demo.SignalRecordM3Sortable");
+            Object value = valueType.getConstructor(double.class).newInstance(7.5);
+            check(((Double) projection.getMethod("absoluteSignal", valueType)
+                    .invoke(null, value)) == 7.5,
+                    "record component uses its public weight() accessor");
+            check(record.generated.contains("return value.weight();"),
+                    "generated source invokes the record accessor, not its private field");
+            Object values = java.lang.reflect.Array.newInstance(valueType, 1);
+            java.lang.reflect.Array.set(values, 0, value);
+            check(Arrays.equals((double[]) projection.getMethod("absoluteSignals", values.getClass())
+                    .invoke(null, values), new double[]{7.5}),
+                    "record array precompute preserves source contract");
+        }
+        expectFail("demo.TextRecord",
+                "package demo; import com.m3.collections.sortable.Sortable;"
+                + "@Sortable(signal=\"weight\") public record TextRecord(String weight) {}",
+                "primitive numeric value");
+        expectFail("demo.ShadowClass",
+                "package demo; import com.m3.collections.sortable.Sortable;"
+                + "@Sortable(signal=\"weight\") public class ShadowClass {"
+                + "private double weight; public double weight(){return weight;}}",
+                "accessible instance member");
         String prefix = "package demo; import com.m3.collections.sortable.Sortable;";
         expectFail("demo.Missing", prefix + "@Sortable(signal=\"missing\") public class Missing {}",
                 "requires exactly one accessible numeric member");

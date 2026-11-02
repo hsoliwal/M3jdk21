@@ -40,6 +40,7 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
+import javax.lang.model.element.RecordComponentElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.ArrayType;
@@ -296,6 +297,26 @@ public final class SortableProcessor extends AbstractProcessor {
     private String accessor(TypeElement type) {
         String declared = type.getAnnotation(Sortable.class).signal().trim();
         if (declared.isEmpty()) return "";
+        // A record component has a private compiler-generated backing field and
+        // a public accessor with the same name. Resolve the component through
+        // its language-model accessor, never through member iteration order.
+        if (type.getKind() == ElementKind.RECORD) {
+            for (RecordComponentElement component : type.getRecordComponents()) {
+                if (!component.getSimpleName().contentEquals(declared)) continue;
+                ExecutableElement reader = component.getAccessor();
+                if (reader == null || reader.getModifiers().contains(Modifier.PRIVATE)
+                        || reader.getModifiers().contains(Modifier.STATIC)
+                        || !reader.getParameters().isEmpty()) {
+                    error(component, "@Sortable signal must be an accessible instance member");
+                    return null;
+                }
+                if (!isNumeric(reader.getReturnType())) {
+                    error(component, "@Sortable signal must return a primitive numeric value");
+                    return null;
+                }
+                return declared + "()";
+            }
+        }
         int hits = 0;
         String access = "";
         for (Element member : type.getEnclosedElements()) {
