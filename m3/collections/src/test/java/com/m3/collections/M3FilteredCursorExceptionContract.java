@@ -114,9 +114,13 @@ public final class M3FilteredCursorExceptionContract {
             Trace trace = new Trace();
             TreeSet<Integer> tree = new TreeSet<>(List.of(0, 1, 2, 3, 4, 5, 6));
             NavigableSet<Integer> source = proxy(NavigableSet.class, tree, trace, "owner");
-            NavigableSet<Integer> view = M3MutableFilteredViews.filter(source, value -> true);
+            // The restored near-element dispatch may accept its first candidate.
+            // Reject it to exercise the set cursor factory and its exact failure.
+            NavigableSet<Integer> view = M3MutableFilteredViews.filter(source, value -> false);
             trace.failAt = operation < 2 ? "range.descendingIterator" : "range.iterator";
             expectIdentity(trace, () -> navigate(view, 3, op));
+            require(trace.events.stream().anyMatch(event -> event.startsWith(trace.failAt)),
+                    "set factory witness reaches its armed range cursor");
 
             Trace mapComparator = new Trace();
             TreeMap<Integer, Integer> comparatorMap = new TreeMap<>(mapComparator.comparator());
@@ -146,9 +150,12 @@ public final class M3FilteredCursorExceptionContract {
             TreeSet<Integer> comparatorSet = new TreeSet<>(setComparator.comparator());
             comparatorSet.addAll(List.of(0, 1, 2, 3, 4, 5, 6));
             NavigableSet<Integer> wrappedSet = proxy(NavigableSet.class, comparatorSet, setComparator, "owner");
-            NavigableSet<Integer> filteredSet = M3MutableFilteredViews.filter(wrappedSet, value -> true);
+            NavigableSet<Integer> filteredSet = M3MutableFilteredViews.filter(wrappedSet, value -> false);
             setComparator.events.clear(); setComparator.armComparator = true;
             expectIdentity(setComparator, () -> navigate(filteredSet, 3, op));
+            require(setComparator.events.stream().anyMatch(event -> event.startsWith("range.iterator")
+                    || event.startsWith("range.descendingIterator")),
+                    "late set comparator witness reaches its armed range cursor");
         }
     }
     private static void readOnlyEndpoints() {

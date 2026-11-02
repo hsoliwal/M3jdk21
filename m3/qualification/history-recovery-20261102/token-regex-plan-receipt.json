@@ -1,0 +1,138 @@
+{
+  "schema": "M3_PASSIVE_HISTORY_RECOVERY_RECEIPT_V1",
+  "spdx_license": "Apache-2.0",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_input_revision": "f44c953a3d91d0cd1d7462b771c3e86b9f33c983",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_revision": "1f86d37361f14858e280161635e026a77d7a8045",
+  "canonical_recipe": "com.synexia.m3jdk.JacksonJmod20261018",
+  "canonical_dataset": "synexia-openrewrite-recipes/recipes/m3-jackson-jmod-20261018/datasets/token-regex-plan-20261102",
+  "classification": "Archived historical capability not materialized at active product paths",
+  "historical_implementation": "3c263451173e92c9fc0361f1661c03e5f6ef55ce",
+  "retention_merge": "652ab749421a1945e236c5300af8754d39440a9a",
+  "outputs": [
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java",
+      "before": "f079f7c359896cc4ccc6834aa94bb851d6de0f81",
+      "sha": "71bed16af09edf75eecd1c63d50f4cbd710fd146",
+      "sha256": "461cb1946c15bff9f32a4b26a7fbf86722a0d3188c41af061cb31c5108d549ac",
+      "bytes": 21818
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3TokenRegexPlan.java",
+      "before": null,
+      "sha": "9f5e4fdb261317fad76ac77dc4bfb7c2302a4f3a",
+      "sha256": "793e75ade8c70beaf8edf5b145e375056e76236be68613c9a4d1a01148af6103",
+      "bytes": 9779
+    },
+    {
+      "path": "test/jdk/jdk/internal/mindex/M3TokenRegexPlanContract.java",
+      "before": null,
+      "sha": "994c690f51849067c13857041071222e3cfbf533",
+      "sha256": "727380f9e871c1cad71ffefa3898bb444244ecff93c4bca4b9d183f51c820b30",
+      "bytes": 10835
+    },
+    {
+      "path": "test/jdk/jdk/internal/mindex/M3TokenCompilerLexicalContract.java",
+      "before": null,
+      "sha": "6b1ff2237798f2b8c85c8202dc5ec6b95b40fe3c",
+      "sha256": "3477dee9bb0acea3dd322ee8e6f8656b5ec1242fe37c95a186717771c34c52be",
+      "bytes": 3703
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "before": "2cdc842793ad92cfc3da7183f0ddbdba582398f8",
+      "sha": "1c80a11095bec62eb83c336e31b51754de4b9e4a",
+      "sha256": "5edf3e2118c0b6fdf0bfbf5ce3f92add8559687f9b4fbc90be62cefc1677f34a",
+      "bytes": 587963
+    },
+    {
+      "path": "m3/tooling/name-contract/name-plan.json",
+      "before": "97014da6e79fcdcc6a9b618cbcd13d972449cbb4",
+      "sha": "0128d78bda45b60001b3430cc753a44a22fd4c89",
+      "sha256": "04e2a39bf39e378b85e380a55768ff1f1a445d97935965eda290e9ffb2f85b5d",
+      "bytes": 2319
+    }
+  ],
+  "actual_recipe_execution": {
+    "sdk": "OpenRewrite 8.17.1 on Java 21",
+    "sdk_tests": 5,
+    "sealer_tests": 8,
+    "receiver_contract_cases": 9,
+    "all_sdk_input_seals_independently_verified": 26,
+    "receive_check_changes": 6,
+    "receive_apply_changes": 6,
+    "second_apply_changes": 0
+  },
+  "actual_runtime": {
+    "java_checks": 176709,
+    "native_checks": 176710,
+    "native_interpreter_checks": 176710,
+    "character_checks_per_baseline_and_candidate": 12001,
+    "character_outputs_identical": true,
+    "real_javac_lexical_contract": "PASS; 3 target identifiers; Unicode escape, comments and literals",
+    "native_owner": "actual current M3RegexDpPlan.c; original registration/counting host harness; no stub",
+    "native_flags": [
+      "C17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=undefined",
+      "-Xcheck:jni",
+      "-Xint"
+    ],
+    "native_harness_sha256": "6345328069f0d179012910e3521abb840c516b625497ea1ddf000dfdb769cd8a",
+    "find_miss_probe": "PASS; 8000 tokens x3 repetitions; resource observations only",
+    "resource_runs": 3,
+    "resource_per_run": "10000 matches; 256 tokens; 63 predicates; 152 allocated bytes; 5120 input primitive payload bytes",
+    "unique_case_total_claimed": false
+  },
+  "preservation": {
+    "baseline_commit": "f44c953a3d91d0cd1d7462b771c3e86b9f33c983",
+    "baseline_files": 2561,
+    "received_files": 2564,
+    "modified": [
+      "m3/docs/name-mapping.json",
+      "m3/tooling/name-contract/name-plan.json",
+      "src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java"
+    ],
+    "added": [
+      "src/java.base/share/classes/jdk/internal/mindex/M3TokenRegexPlan.java",
+      "test/jdk/jdk/internal/mindex/M3TokenCompilerLexicalContract.java",
+      "test/jdk/jdk/internal/mindex/M3TokenRegexPlanContract.java"
+    ],
+    "deleted": [],
+    "mode_changes": [],
+    "untouched_baseline_files": 2558,
+    "sdk_staging_receiver_outputs_byte_identical": true,
+    "all_existing_regex_bytes_preserved": true,
+    "original_regex_insertion_lines": 37,
+    "all_existing_mapping_bytes_and_records_preserved": true,
+    "queued_operations_unchanged": 4,
+    "public_method_descriptors_unchanged": true,
+    "jni_headers_unchanged": true,
+    "native_product_source_unchanged": "src/java.base/share/native/libjava/M3RegexDpPlan.c",
+    "real_current_state_relation_dependency": "src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java",
+    "canonical_owner_files_unchanged": 18
+  },
+  "qualification_limits": [
+    "Stock Java 21 patch-module component proof, not an installed full M3JDK21 image.",
+    "Full source-built JDK/JMOD/jtreg, GC/CDS, cross-platform native and controlled performance gates remain NOT_RUN.",
+    "The lexical fixture uses the actual stock javac scanner; it does not qualify semantic AST binding or renaming.",
+    "The original mapping remains ADDITIVE_INTERNAL_TYPED_TOKEN_CANDIDATE; no receiving phase or QUEUED operation advances.",
+    "Original JNI harness reports expected platform-native re-registration warnings; no JNI check error occurred.",
+    "Resource probes are observations, not comparative performance or retained-heap claims."
+  ],
+  "naming": {
+    "strict_audit_exit": 0,
+    "rows": 67,
+    "distinct_paths": 63,
+    "attention": 0,
+    "full_check_exit": 2,
+    "full_check_exact_error": "M3JDK21_NAME_RECEIVER_REFUSED: companion relation source hash drift: src/java.base/share/classes/java/util/Arrays.java (sha256)",
+    "arrays_pin_changed": false
+  },
+  "default_branch_promotion": false,
+  "recipe_sources_exported": false
+}

@@ -80,6 +80,43 @@ public final class M3RegexDpPlan {
         return new M3RegexDpPlan(literals, dot, star, tokens);
     }
 
+    /** Package-owned token facade: the same bounded predicate/state algebra, no text parser. */
+    static M3RegexDpPlan forTokenPredicates(int predicates, long repeated) {
+        if (predicates < 0 || predicates > 63) {
+            throw new IllegalArgumentException("token predicate count must be in [0, 63]");
+        }
+        long atoms = predicates == 63 ? Long.MAX_VALUE : (1L << predicates) - 1;
+        if ((repeated & ~atoms) != 0) throw new IllegalArgumentException("foreign repetition bits");
+        return new M3RegexDpPlan(new long[62], 0L, repeated << 1, predicates);
+    }
+
+    /** One matching-predicate word consumes one whole token, irrespective of its spelling. */
+    long advanceTokenMask(long frontier, long matched) {
+        checkBits(frontier);
+        if ((matched & ~(universe & ~1L)) != 0) {
+            throw new IllegalArgumentException("foreign token predicate bits");
+        }
+        return advanceMatched(frontier, matched);
+    }
+
+    /** Evaluate each token predicate once; native composition receives derived rows only. */
+    Effect summarizeTokenMasks(int count, java.util.function.IntToLongFunction maskAt,
+            Runnable checkpoint) {
+        Objects.requireNonNull(maskAt, "maskAt");
+        if (count < 0) throw new IllegalArgumentException("negative token count");
+        long[] rows = identityRows();
+        for (int i = 0; i < count; i++) {
+            if ((i & 255) == 0) check(checkpoint);
+            long matched = maskAt.applyAsLong(i);
+            if ((matched & ~(universe & ~1L)) != 0) {
+                throw new IllegalArgumentException("foreign token predicate bits");
+            }
+            advanceRows(rows, matched);
+        }
+        check(checkpoint);
+        return new Effect(rows, count);
+    }
+
     public int stateCount() { return states; }
     public long initialState() { return initial; }
     public boolean accepts(long frontier) { checkBits(frontier); return (frontier & accepting) != 0; }
