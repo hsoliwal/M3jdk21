@@ -42,19 +42,22 @@ public final class M3StaticGrammarLexicon {
     private final int[] edgeTarget;
     private final int[] terminalId;
     private final int[] contextualIds;
+    // Optional 512-byte root accelerator; absent for small or non-ASCII grammars.
+    private final int[] asciiRootTarget;
     private final String language;
     private final String revision;
     private final String grammarSha256;
     private final int literalCount;
 
     private M3StaticGrammarLexicon(int[] edgeStart, char[] edgeUnit, int[] edgeTarget,
-            int[] terminalId, int[] contextualIds, String language, String revision,
-            String grammarSha256, int literalCount) {
+            int[] terminalId, int[] contextualIds, int[] asciiRootTarget,
+            String language, String revision, String grammarSha256, int literalCount) {
         this.edgeStart = edgeStart;
         this.edgeUnit = edgeUnit;
         this.edgeTarget = edgeTarget;
         this.terminalId = terminalId;
         this.contextualIds = contextualIds;
+        this.asciiRootTarget = asciiRootTarget;
         this.language = language;
         this.revision = revision;
         this.grammarSha256 = grammarSha256;
@@ -124,8 +127,24 @@ public final class M3StaticGrammarLexicon {
         }
         starts[nodes.size()] = cursor;
         if (cursor != edgeCount) throw new IllegalStateException("inconsistent grammar trie");
+        // Root edges are already sorted UTF-16 units. A direct-address ASCII root is
+        // beneficial only above the bounded eight-edge crossover; other grammars retain
+        // the original binary search with no additional retained 512-byte allocation.
+        int asciiEdges = 0;
+        for (int i = starts[0]; i < starts[1]; i++) {
+            if (units[i] < 128) asciiEdges++;
+        }
+        int[] asciiRoot = null;
+        if (asciiEdges >= 8) {
+            asciiRoot = new int[128];
+            Arrays.fill(asciiRoot, -1);
+            for (int i = starts[0]; i < starts[1]; i++) {
+                if (units[i] < 128) asciiRoot[units[i]] = targets[i];
+            }
+        }
         return new M3StaticGrammarLexicon(starts, units, targets, terminals,
-                contextualIds, language, revision, digest(language, revision, rows), rows.size());
+                contextualIds, asciiRoot, language, revision,
+                digest(language, revision, rows), rows.size());
     }
 
     /**
@@ -180,6 +199,9 @@ public final class M3StaticGrammarLexicon {
     public int stateCount() { return terminalId.length; }
 
     private int transition(int state, char codeUnit) {
+        if (state == 0 && asciiRootTarget != null && codeUnit < 128) {
+            return asciiRootTarget[codeUnit];
+        }
         int at = Arrays.binarySearch(edgeUnit, edgeStart[state], edgeStart[state + 1], codeUnit);
         return at < 0 ? -1 : edgeTarget[at];
     }
