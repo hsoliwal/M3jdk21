@@ -53,8 +53,8 @@ def qualified_source_packet():
                        for key in previous if key not in ("bytes", "sha256"))):
             raise ValueError("Guava historical successor preimage mismatch: " + path)
         if path == WORKFLOW:
-            if (following["bytes"] != 2311
-                    or following["sha256"] != "ed17db300c020733c0edc6b20aa0180a9314bb183a7cf0b7307989fc3e8d277b"):
+            if (following["bytes"] != 2385
+                    or following["sha256"] != "f324172b0f8cae62b1f9ee40333b755afc191fd28198ce1e236afd21118a479c"):
                 raise ValueError("Guava workflow successor image differs")
         elif path == OWN_VERIFIER:
             owner = BASE / "verify.py"
