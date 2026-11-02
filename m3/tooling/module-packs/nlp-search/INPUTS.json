@@ -97,6 +97,7 @@
     "m3/tooling/jmod-recipes/src/test/java/com/m3/rewrite/jmod/M3ModuleDescriptorRecipeTest.java": "11bee86696d328ec7ade96c84d60fdc64617cedfd8e5bdc326906f287e05b34f",
     "m3/tooling/jmod-recipes/tools/jmod_image.py": "407622e9a4db86f1b9abae2e451638713b151f14256190c0e28fe7d0739eb7cf",
     "m3/tooling/jmod-recipes/tools/jmod_pack.py": "9ebc4a17e46fa0c3d6d995bf1a22e72b722d17efb1d87889ac8a7a47f89d2bd0",
+    "m3/tooling/module-packs/nlp-search/BASE_SOURCES.json": "fcf35f2b8b0fb9c123310c9bd7aa97e44698e95f9e65a3b5dc95cffbb5c9d2af",
     "m3/tooling/module-packs/nlp-search/COMPILER_SOURCES.json": "ff2164a2c8643afe1f4d1c9d4ff3276c3dcd330874997b8ba297a49a77dbb99f",
     "m3/tooling/module-packs/nlp-search/COMPLETE_SOURCE_INVENTORY.json": "f077962ce7abe6aec7bf34e14736c1266429b18a911b147db32b73e8c904051e",
     "m3/tooling/module-packs/nlp-search/FILE_API_PARITY.json": "8295009993e55feeb7f1b8173018e5a21b1815fc409dabec04e042d30e3ca711",
@@ -113,7 +114,7 @@
     "m3/tooling/module-packs/nlp-search/README.md": "ec74427f06197dd7f2c75a11ae45f2b65a29358e2d92e88208dc364761ff63cb",
     "m3/tooling/module-packs/nlp-search/SOURCE_REF.json": "b073b80228ccc5d1d0c59a58f608468215936322d3a7937ce638c43ad4a78d3b",
     "m3/tooling/module-packs/nlp-search/build.py": "d5df1e77c3e076b558be53fdcf9d5f227102c11dde695949974849980f58a15a",
-    "m3/tooling/module-packs/nlp-search/compiler_source_proof.py": "a52331c73f625eb4f1c1cffd1ccbe13979826b045b3638096786dd7d07d19250",
+    "m3/tooling/module-packs/nlp-search/compiler_source_proof.py": "72ee5a53058c88964cbf311bfc345352a6ba359029a27849743ae9678d5b26f8",
     "m3/tooling/module-packs/nlp-search/fixtures/file/src/test/java/com/m3/file/M3FileAlgorithmTest.java": "46adc42cc548c0029295275ef478107d9a928cfc7f727389e312451a817c953a",
     "m3/tooling/module-packs/nlp-search/fixtures/file/src/test/java/com/m3/file/M3FileByteFactsPrimitiveSnapshotProof.java": "bcaa39d1423b3cf2c3323bb9b70f2137bb9e25b7c6a9f236edffd4b19c2a1808",
     "m3/tooling/module-packs/nlp-search/fixtures/file/src/test/java/com/m3/file/M3FileCharsetProbe.java": "71405c535d4e9c3acc589308acec0c8ff19b4d480c516f3b396d888181873bb6",
@@ -156,7 +157,9 @@
     "m3/vendor/third_party-m3/nlp-search/third_party/opennlp-tools/src/main/java/opennlp/tools/tokenize/SubwordPiece.java": "ade91a596849ab24c7e07b8e604c0d572f5e4439794a823a24b56559a9dde089",
     "m3/vendor/third_party-m3/nlp-search/third_party/opennlp-tools/src/main/java/opennlp/tools/tokenize/SubwordTokenizer.java": "c50cf2a12a86bb593d400fc1b712be98fa69fca17242f8cfdae2b1433f5b47c8",
     "m3/vendor/third_party-m3/nlp-search/third_party/opennlp-tools/src/main/java/opennlp/tools/tokenize/WordpieceChecks.java": "5863d81247faa1f77cb7e2c920ade78f37aa60cfc4a6ee03a77a0bd815b01572",
-    "m3/vendor/third_party-m3/nlp-search/third_party/opennlp-tools/src/main/java/opennlp/tools/tokenize/WordpieceEncoder.java": "a4bde6e011c346eed7a175de7071efe3d4999d450a182eb20503a092419555da"
+    "m3/vendor/third_party-m3/nlp-search/third_party/opennlp-tools/src/main/java/opennlp/tools/tokenize/WordpieceEncoder.java": "a4bde6e011c346eed7a175de7071efe3d4999d450a182eb20503a092419555da",
+    "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java": "0a8dc18017584efbdcfaf1467e50efdad0b1ce649c30a80e9504752c28efd26e",
+    "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java": "2f3bb91b55fa9715aed6e774501b83474b7fdb9451e601f29499c123bbc4959a"
   },
   "java_source_sets": {
     "m3/ports/file/src/main/java": [

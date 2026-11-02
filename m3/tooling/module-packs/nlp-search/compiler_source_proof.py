@@ -28,6 +28,10 @@ def copy_symbols(source_jdk, image):
 def build(repository, jdk, out, run):
     owner = Path(__file__).resolve().parent
     lock = json.loads((owner / "COMPILER_SOURCES.json").read_text())
+    base_lock = json.loads((owner / "BASE_SOURCES.json").read_text())
+    for name, expected in base_lock.items():
+        if digest(repository / name) != expected:
+            raise ValueError("Base source proof input drift: " + name)
     out.mkdir()
     source = out / "src"
     source.mkdir()
@@ -60,6 +64,18 @@ def build(repository, jdk, out, run):
     # against the new compiler; do not disable resolution or module validation.
     base = out / "java-base"
     run("base-extract", [jdk / "bin/jmod", "extract", "--dir", base, jdk / "jmods/java.base.jmod"])
+    base_source = out / "base-src"
+    base_paths = []
+    for name in base_lock:
+        target = base_source / name.removeprefix("src/java.base/share/classes/")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(repository / name, target)
+        base_paths.append(target)
+    base_classes = out / "base-classes"
+    run("base-source-compile", [jdk / "bin/javac", "-proc:none", "-Xlint:all", "-Werror",
+        "--patch-module", "java.base=" + os.pathsep.join(map(str, (base_source, base / "classes"))),
+        "-d", base_classes, *base_paths])
+    shutil.copytree(base_classes, base / "classes", dirs_exist_ok=True)
     helper = owner / "fixtures/src/test/java/RemoveRecordedModuleHashes.java"
     export = "java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED"
     run("hash-tool-compile", [jdk / "bin/javac", "-Xlint:all", "-Werror", "--add-exports", export,
@@ -81,8 +97,12 @@ def build(repository, jdk, out, run):
     symbols = copy_symbols(jdk, image)
     (image / "jmods").symlink_to(jmods, target_is_directory=True)
     run("compiler-image-module-validation", [image / "bin/java", "--validate-modules"])
+    run("base-progress-api", [image / "bin/javap", "-public",
+        *[name.removeprefix("src/java.base/share/classes/").removesuffix(".java").replace("/", ".")
+          for name in base_lock]])
     receipt = {
         "schema": "M3_COMPILER_SOURCE_PROOF_1", "source_sha256": lock,
+        "java_base_source_sha256": base_lock,
         "input_jdk_release_sha256": digest(jdk / "release"),
         "input_java_base_jmod_sha256": digest(jdk / "jmods/java.base.jmod"),
         "input_jdk_compiler_jmod_sha256": digest(jdk / "jmods/jdk.compiler.jmod"),
