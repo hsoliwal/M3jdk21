@@ -10,7 +10,36 @@ SUCCESSOR_PACKET = BASE.parent / "guava-minmax-source-custody" / "source-binding
 WORKFLOW = ".github/workflows/m3-owned-guava-minmax-priority-queue.yml"
 OWN_VERIFIER = "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/verify.py"
 ORIGINAL_RUNNER = "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/run.py"
-RUNNER_POST_SHA256 = "c5248db4ceb67e2f84a77ca0b8d1a610dc5bd6f3be9eacd5a2001713b0560b6e"
+RUNNER_POST_SHA256 = "fce6ce2c24cb3242ebade331ed689627381a7030bb9d097fa4928acec703a3e1"
+
+# Exact first-party compile closure found in original javac 21 diagnostics.
+# These four helper files were absent from the frozen 130-source set. Preserve
+# that set and require exact byte identities rather than a wildcard sourcepath.
+CORE_HELPERS = (
+    ("m3/collections/src/main/java/com/m3/collections/M3IndexSort.java", 4586, "0942fe34d6f5685099c03888729efcfa476195f8c11776ca9e83b2af09bcce9a"),
+    ("m3/collections/src/main/java/com/m3/collections/M3LaneSearch.java", 2995, "3aa83290ab10ded0b26d10051958a7895f4621033d6dc4bc23b1346c85f30158"),
+    ("m3/collections/src/main/java/com/m3/collections/M3PriorityQueueGrowth.java", 1315, "fe49db641cb17f8df89636fc63beadcddcf3fa27676749b0e9b683e5d143a22b"),
+    ("m3/collections/src/main/java/com/m3/collections/M3ShadowStreams.java", 9377, "1ea37802b37d5b07ff989b9c15188ff228cdbf7f00076db004907b27e82a0506"),
+)
+
+def required_core_helpers(root, selected):
+    if len(selected) != 130 or len(set(selected)) != len(selected):
+        raise ValueError("Guava historical core130 source selection drift")
+    paths = [path for path, _, _ in CORE_HELPERS]
+    if len(paths) != len(set(paths)) or paths != sorted(paths):
+        raise ValueError("Guava helper selection must be unique and ordered")
+    if set(paths).intersection(selected):
+        raise ValueError("Guava helper is already part of historical core130")
+    admitted = []
+    for relative, expected_bytes, expected_sha in CORE_HELPERS:
+        path = root / relative
+        if not path.is_file() or path.is_symlink():
+            raise ValueError("Guava helper source missing or symlink: " + relative)
+        if path.stat().st_size != expected_bytes or sha(path) != expected_sha:
+            raise ValueError("Guava helper source custody drift: " + relative)
+        admitted.append(path)
+    return tuple(admitted)
+
 CHANGES = {
     WORKFLOW: (2220, "9543ed2e6b8430e6a80888064750beda48e486b005bf125488cc95b513d3d4b9"),
     OWN_VERIFIER: (4276, "a8fd04cc98bf3f21e5f68958eae8f82e0b5fcedbc7c6d88f92ea778828bb980b"),
@@ -64,9 +93,9 @@ def qualified_source_packet():
         elif path == ORIGINAL_RUNNER:
             owner = BASE / "run.py"
             if (not owner.is_file() or owner.is_symlink()
-                    or following["bytes"] != 19026
+                    or following["bytes"] != 19347
                     or following["sha256"] != RUNNER_POST_SHA256
-                    or owner.stat().st_size != 19026
+                    or owner.stat().st_size != 19347
                     or sha(owner) != RUNNER_POST_SHA256):
                 raise ValueError("Guava original runner successor image differs")
         else:
@@ -105,6 +134,7 @@ def verify(root,guava=None,context_root=None):
             raise AssertionError('unexpected source role: '+relative)
         assert len(data)==row['bytes'] and hashlib.sha256(data).hexdigest()==row['sha256'],relative
     assert len(spec['coreJavaPaths'])==130
+    required_core_helpers(root,spec['coreJavaPaths'])
     owner=root/spec['ownerPath'];payload=root/spec['recipePayloadPath'];assert owner.read_bytes()==payload.read_bytes(),'receiving postimage drift'
     if guava is not None:assert sha(guava)==spec['provider']['sha256'] and guava.stat().st_size==spec['provider']['bytes']
     return spec

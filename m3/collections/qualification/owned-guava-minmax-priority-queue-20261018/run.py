@@ -194,7 +194,12 @@ def main():
             raise ValueError('original com.m3.arrays module source missing')
         arrays_module=out/'arrays-module-classes';arrays_module.mkdir()
         run('strict-original-arrays-module',[javac,*common,'-d',arrays_module,*arrays_files])
-        run('strict-selected-core130',[javac,*common,'--module-path',arrays_module,'-cp',cp,'-d',core,*[root/path for path in bindings['coreJavaPaths']]])
+        # Add only the four exact SHA-pinned original helpers required by the
+        # selected core130; do not expand the historical packet or use a
+        # wildcard Java sourcepath that could import unreviewed code.
+        helpers=verify.required_core_helpers(root,bindings['coreJavaPaths'])
+        run('strict-selected-core130',[javac,*common,'--module-path',arrays_module,
+             '-cp',cp,'-d',core,*[root/path for path in bindings['coreJavaPaths']],*helpers])
         fixtureNames=['GuavaMinMaxProtocolProof','GuavaMinMaxOrderingHookProof','GuavaMinMaxPublicSurfaceProof','GuavaMinMaxResourceProfileProof']
         sources=[root/bindings['ownerPath']]+[qual/(name+'.java') for name in fixtureNames]+[qual/'GuavaMinMaxGenericCompileProof.java',qual/'GuavaMinMaxMaskProjectionProof.java']
         mirror=out/'generic-mirror';mirror.mkdir();original=(qual/'GuavaMinMaxGenericCompileProof.java').read_text(encoding='utf-8');nominal=original.replace('MinMaxPriorityQueue','M3MinMaxPriorityQueue').replace('com.google.common.collect.M3MinMaxPriorityQueue','com.m3.collections.guava.M3MinMaxPriorityQueue');(mirror/'GuavaMinMaxGenericCompileProof.java').write_text(nominal,encoding='utf-8',newline='\n')

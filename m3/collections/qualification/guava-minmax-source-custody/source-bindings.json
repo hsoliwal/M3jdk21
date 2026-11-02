@@ -1212,14 +1212,14 @@
     },
     {
       "path": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/verify.py",
-      "bytes": 8413,
-      "sha256": "307b7f0e41a804d79ed98ad6f61d99b1981ca4753c9671de55e80a35e5b7775e",
+      "bytes": 10295,
+      "sha256": "6409275c4544f25ba7295a0eb5045e5e8a136e78ca5228ecdc608d7ffda317c4",
       "role": "NEW_PACKET_SOURCE"
     },
     {
       "path": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/run.py",
-      "bytes": 19026,
-      "sha256": "c5248db4ceb67e2f84a77ca0b8d1a610dc5bd6f3be9eacd5a2001713b0560b6e",
+      "bytes": 19347,
+      "sha256": "fce6ce2c24cb3242ebade331ed689627381a7030bb9d097fa4928acec703a3e1",
       "role": "NEW_PACKET_SOURCE"
     },
     {
