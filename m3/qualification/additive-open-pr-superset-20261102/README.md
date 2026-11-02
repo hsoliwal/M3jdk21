@@ -32,3 +32,18 @@ LeetCode categories, HackerRank problem shapes and GeeksforGeeks problem familie
 ## Required verification
 
 Execute patch → lint → compile → JUnit/jtreg → JNI/C or C++ native ABI check → runtime/benchmark in that order, with immutable source hashes, change ledgers, compiler/test logs and no skipped suites. The GitHub-only source-tree integration does not substitute for these tests. **HOLD** means no release or merge into `master` until evidence exists, even when GitHub's mergeable flag is true.
+
+## Wave 2 — three more disjoint current-master donor PRs (documentation-first)
+
+The first four donors above were actually merged, and verified under the four-head ledger. A second serial wave adds three more PRs whose **source change sets are disjoint both from the first 41-path superset and from one another**. A fresh GitHub compare against the same immutable `master@ce005d25b29fb6246e013bffb462afd5ed070362` returned:
+
+| Open source PR | Frozen head | Added | Modified | Removed/renamed | Runtime gate |
+|---|---|---:|---:|---:|---|
+| [#2308](https://github.com/hsoliwal/M3jdk21/pull/2308) `M3MachineHintRules`/compiler facts | `25ae6e7e7f209f67d807ef20d53ef9499d322d62` | 10 | 4 | 0 | Existing isolated Java21 oracle; full JVM/JNI still HOLD |
+| [#2315](https://github.com/hsoliwal/M3jdk21/pull/2315) attributed M3AST compiler facts | `4a3b9841f57c17cd34e683644b2beafd32ada938` | 3 | 2 | 0 | Source-built compiler component checks in original PR; full JDK/JCK HOLD |
+| [#2310](https://github.com/hsoliwal/M3jdk21/pull/2310) lost `M3LongLongHashMap.addTo` restoration | `15cae75c229d0fd3440131aea263bfd4bf05da53` | 2 | 1 | 0 | Exact canonical postimage, current Maven/JUnit NOT RUN |
+
+Total new donor delta **22 paths (15 added, 7 modified), 0 collisions, 0 removals**. All three are exact descendants of the same current `master`; no need to replace earlier branch history. The public Java/JNI behavior of source-time compiler facts and `M3LongLongHashMap.addTo` remains locked and must pass original compile/jtreg/JUnit. `M3AST.relationshipFacts` is opt-in and must preserve legacy behavior when absent.
+
+For each head, create/merge a transport PR into **this integration branch only**, with a Git merge commit preserving the original donor SHA as second parent, then check exact `(filename,status)` sets from `master→donor` versus `receiver-before→merge`. On drift, conflict or any unexpected file removal, stop. The current master, public `Object.toAdapter` spelling and earlier four PR merges must remain unchanged. Historical earlier #2255 and the incompatible #2320 alias remain separate holds. **No release** is claimed.
+
