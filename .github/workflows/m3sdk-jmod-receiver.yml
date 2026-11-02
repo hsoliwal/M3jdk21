@@ -63,7 +63,7 @@ jobs:
         run: python3 m3/tooling/jmod-recipes/tools/verify_sdk_receiver.py --repo .
       - name: 3 - SDK receiver and preflight refusal tests
         run: >-
-          python3 -m unittest discover
+          JAVA_HOME21="$JAVA_HOME" python3 -m unittest discover
           -s m3/tooling/jmod-recipes/tools
           -p 'test_*.py' -v
       - name: 4 - Java 21 vendor smoke source compiles without donor classpath
