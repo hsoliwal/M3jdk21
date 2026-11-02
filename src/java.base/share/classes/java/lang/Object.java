@@ -74,6 +74,23 @@ public class Object {
         return clazz == M3Object.class ? clazz.cast(M3Object.of(this)) : null;
     }
 
+    /**
+     * Returns an adapter using the existing {@link #toAdapter(Class)} capability.
+     * The public name {@code toAdpater} is intentionally spelled as requested.
+     *
+     * <p>This additional entry delegates virtually to {@code toAdapter}, so
+     * subclasses that override that method keep their established semantics.
+     * This method is also overridable and adds no per-object state.
+     *
+     * @param clazz the requested adapter type
+     * @param <T> the requested result type
+     * @return the existing typed adapter result, or {@code null} if unsupported
+     * @throws NullPointerException if clazz is {@code null}
+     */
+    public <T> T toAdpater(Class<T> clazz) {
+        return toAdapter(clazz);
+    }
+
 
     /**
      * Returns the runtime class of this {@code Object}. The returned
