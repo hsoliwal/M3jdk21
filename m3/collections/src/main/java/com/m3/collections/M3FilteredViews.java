@@ -503,13 +503,49 @@ public final class M3FilteredViews {
             this.predicate = Objects.requireNonNull(predicate, "predicate");
         }
         @Override public Comparator<? super K> comparator() { return sorted.comparator(); }
+        /**
+         * Walk only M3TreeMap's authoritative slot lanes. The order of checks,
+         * next-slot advancement and key lookup matches its public entry iterator:
+         * the public LiveEntry.getValue performs a fresh key lookup and invokes
+         * user comparators. Omitting that lookup changes observable callbacks.
+         *
+         * For arbitrary SortedMap providers retain the original entry iterator.
+         * This is a private traversal optimization, not a public Map.Entry change.
+         */
+        private int countTreeSlots(M3TreeMap<K, V> owner, boolean stopAtFirst) {
+            int slot = owner.firstSlot();
+            int expected = owner.revision();
+            int count = 0;
+            while (slot >= 0) {
+                owner.check(expected);
+                K key = owner.keyAt(slot);
+                owner.check(expected);
+                int following = owner.nextSlot(slot);
+                owner.cacheEntryFacades();
+                int resolved = owner.entrySlot(key, -1, -1);
+                V value = resolved < 0 ? null : owner.valueAt(resolved);
+                if (predicate.test(key, value)) {
+                    count++;
+                    if (stopAtFirst) return count;
+                }
+                slot = following;
+            }
+            owner.check(expected);
+            return count;
+        }
         @Override public int size() {
+            if (sorted instanceof M3TreeMap<K, V> owner) {
+                return countTreeSlots(owner, false);
+            }
             int count = 0;
             for (Entry<K, V> entry : sorted.entrySet())
                 if (predicate.test(entry.getKey(), entry.getValue())) count++;
             return count;
         }
         @Override public boolean isEmpty() {
+            if (sorted instanceof M3TreeMap<K, V> owner) {
+                return countTreeSlots(owner, true) == 0;
+            }
             return !filtered(sorted.entrySet().iterator(),
                     item -> predicate.test(item.getKey(), item.getValue())).hasNext();
         }
