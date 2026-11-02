@@ -36,19 +36,22 @@ jobs:
         run: |
           set -euo pipefail
           mvn -B -ntp -f m3/ports/regex-cursor/pom.xml -Djunit.artifact.version=5.10.2 clean verify
-      - name: Require executed seek JUnit tests and no skips
+      - name: Require executed seek and complete-admission JUnit tests, no skips
         shell: bash
         run: |
           python3 - <<'PYTEST'
           from pathlib import Path
           import xml.etree.ElementTree as ET
-          f=Path('m3/ports/regex-cursor/target/surefire-reports/TEST-com.m3.regexcursor.M3TokenCursorSeekLocalityTest.xml')
-          if not f.is_file(): raise SystemExit('MISSING actual JUnit Surefire XML: '+str(f))
-          root=ET.parse(f).getroot()
-          fields={k:int(root.attrib.get(k,'0')) for k in ('tests','errors','failures','skipped')}
-          if fields['tests'] < 3 or any(fields[k] for k in ('errors','failures','skipped')):
-              raise SystemExit('JUnit seek contract not accepted: '+str(fields))
-          print('M3_SEEK_REAL_JUNIT_PASS',fields)
+          base=Path('m3/ports/regex-cursor/target/surefire-reports')
+          expected=(('M3TokenCursorSeekLocalityTest',3), ('M3CompleteTokenProjectionTest',2))
+          for klass,minimum in expected:
+              f=base/('TEST-com.m3.regexcursor.'+klass+'.xml')
+              if not f.is_file(): raise SystemExit('MISSING real JUnit Surefire XML: '+str(f))
+              root=ET.parse(f).getroot()
+              fields={k:int(root.attrib.get(k,'0')) for k in ('tests','errors','failures','skipped')}
+              if fields['tests'] < minimum or any(fields[k] for k in ('errors','failures','skipped')):
+                  raise SystemExit('JUnit contract not accepted: '+klass+' '+str(fields))
+              print('M3_REAL_JUNIT_PASS',klass,fields)
           PYTEST
       - name: Attach Maven and JaCoCo receipts
         if: always()
