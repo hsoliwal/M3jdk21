@@ -88,6 +88,16 @@ public final class SortableProcessorSelfTest {
             changedFacts[M3CompilerFacts.FIELDS] = 123456;
             check(compiler.count(M3CompilerFacts.FIELDS) == 2,
                     "generated primitive fact image is immutable");
+            M3MachineHintRules compilerHints = (M3MachineHintRules)
+                    projection.getMethod("machinePatternHints").invoke(null);
+            check(compilerHints.state(M3MachineHintRules.FIELD_METHOD_RELATION)
+                    == M3MachineHintRules.State.CANDIDATE, "javac-generated field/method hint");
+            check(compilerHints.state(M3MachineHintRules.INTERFACE_INVOCATION)
+                    == M3MachineHintRules.State.NOT_OBSERVED, "no invented interface pattern");
+            check(!compilerHints.nativeLoweringAuthority(), "compile-time hints are review-only");
+            check(a.generated.contains("MACHINE_HINT_CANDIDATES")
+                    && a.generated.contains("machinePatternHints()"),
+                    "source companion embeds compile-time literal masks");
             M3CompilerFacts compilerAgain = (M3CompilerFacts)
                     projection.getMethod("compilerFacts").invoke(null);
             check(compilerAgain.count(M3CompilerFacts.FIELDS) == 2,
@@ -143,6 +153,14 @@ public final class SortableProcessorSelfTest {
             check(facts.count(M3CompilerFacts.METHOD_INVOCATIONS) == 0
                     && facts.count(M3CompilerFacts.DISTINCT_RESOLVED_CALLEE_TOKENS) == 0,
                     "new type-local invocation counts exclude nested class method bodies");
+            M3MachineHintRules sourceHints = (M3MachineHintRules)
+                    companion.getMethod("machinePatternHints").invoke(null);
+            check(sourceHints.state(M3MachineHintRules.ITERATIVE_INVOCATION)
+                    == M3MachineHintRules.State.NOT_OBSERVED,
+                    "implicit super call cannot fabricate iterative invocation hint");
+            check(sourceHints.state(M3MachineHintRules.LOOP_BRANCH_REVIEW)
+                    == M3MachineHintRules.State.CANDIDATE,
+                    "real loop and branch produce a candidate-only source hint");
             check(facts.count(M3CompilerFacts.LOOPS) == 1,
                     "one real loop, text/comments ignored");
             check(facts.count(M3CompilerFacts.IF_BRANCHES) == 1,
@@ -156,6 +174,17 @@ public final class SortableProcessorSelfTest {
                     "exception paths from AST");
             check(facts.count(M3CompilerFacts.RETURN_STATEMENTS) == 1,
                     "nested return statements not stolen by enclosing class");
+        }
+        // An explicitly written constructor super() remains a real invocation site.
+        try (Compiled explicit = compile("demo.ExplicitCtor",
+                "package demo; import com.m3.collections.sortable.Sortable;"
+                + "@Sortable public class ExplicitCtor { public ExplicitCtor() { super(); } }",
+                true)) {
+            Class<?> companion = explicit.loader.loadClass("demo.ExplicitCtorM3Sortable");
+            M3CompilerFacts sourceFacts = (M3CompilerFacts)
+                    companion.getMethod("compilerFacts").invoke(null);
+            check(sourceFacts.count(M3CompilerFacts.METHOD_INVOCATIONS) == 1,
+                    "explicit source super() must remain a source-call fact");
         }
         String prefix = "package demo; import com.m3.collections.sortable.Sortable;";
         expectFail("demo.Missing", prefix + "@Sortable(signal=\"missing\") public class Missing {}",
@@ -202,7 +231,12 @@ public final class SortableProcessorSelfTest {
         boolean ok;
         try (StandardJavaFileManager files = javac.getStandardFileManager(
                 diagnostics, null, StandardCharsets.UTF_8)) {
-            String cp = System.getProperty("java.class.path");
+            // Maven exec: processor lives in its own project classloader, not
+            // necessarily in java.class.path. Admit its exact class CodeSource.
+            var origin = SortableProcessor.class.getProtectionDomain().getCodeSource();
+            if (origin == null) throw new IllegalStateException("processor CodeSource unavailable");
+            String cp = Path.of(origin.getLocation().toURI())
+                    + java.io.File.pathSeparator + System.getProperty("java.class.path");
             List<String> flags = List.of("--release", "21", "-Xlint:all", "-Werror",
                     "-classpath", cp, "-processorpath", cp,
                     "-processor", SortableProcessor.class.getName(),
