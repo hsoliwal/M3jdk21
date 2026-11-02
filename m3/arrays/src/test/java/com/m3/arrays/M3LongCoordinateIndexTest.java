@@ -106,6 +106,79 @@ final class M3LongCoordinateIndexTest {
     }
 
     @Test
+    void javaBatchBoundsPreserveOrderExtremesAndQueryIdentity() {
+        M3LongCoordinateIndex index = new M3LongCoordinateIndex(
+                new long[] {Long.MIN_VALUE, -4, 0, 100, Long.MAX_VALUE},
+                new long[] {1, 2, 3, 4, 5});
+        long[] queries = {Long.MIN_VALUE, -4, -4, -3, 0, 100,
+                Long.MAX_VALUE, Long.MAX_VALUE, 99};
+        long[] saved = queries.clone();
+        assertArrayEquals(new int[] {0, 1, 1, 2, 2, 3, 4, 4, 3},
+                index.lowerBounds(queries));
+        assertArrayEquals(new int[] {1, 2, 2, 2, 3, 4, 5, 5, 3},
+                index.upperBounds(queries));
+        assertArrayEquals(saved, queries);
+        assertArrayEquals(new int[0], index.lowerBounds(new long[0]));
+        assertArrayEquals(new int[0], index.upperBounds(new long[0]));
+        assertThrows(NullPointerException.class, () -> index.lowerBounds(null));
+        assertThrows(NullPointerException.class, () -> index.upperBounds(null));
+    }
+
+    @Test
+    void requiredNativeBatchMatchesJavaAndRefusesSilentFallback() {
+        M3LongCoordinateIndex index = new M3LongCoordinateIndex(
+                new long[] {Long.MIN_VALUE, -3, 0, Long.MAX_VALUE},
+                new long[] {1, 2, 3, 4});
+        long[] queries = {Long.MIN_VALUE, -3, 1, Long.MAX_VALUE};
+        assertThrows(NullPointerException.class,
+                () -> index.lowerBoundsRequiredNative(null));
+        assertThrows(NullPointerException.class,
+                () -> index.upperBoundsRequiredNative(null));
+        String path = System.getProperty("m3.arrays.native.path");
+        if (!M3ArrayNative.isLoaded() && (path == null || path.isBlank())) {
+            assertThrows(UnsatisfiedLinkError.class,
+                    () -> index.lowerBoundsRequiredNative(queries));
+            assertThrows(UnsatisfiedLinkError.class,
+                    () -> index.upperBoundsRequiredNative(new long[0]));
+        } else {
+            assertArrayEquals(index.lowerBounds(queries), index.lowerBoundsRequiredNative(queries));
+            assertArrayEquals(index.upperBounds(queries), index.upperBoundsRequiredNative(queries));
+            assertArrayEquals(new int[0], index.lowerBoundsRequiredNative(new long[0]));
+            assertArrayEquals(new int[0], index.upperBoundsRequiredNative(new long[0]));
+        }
+    }
+
+    @Test
+    void largeQueryBatchCrossesBothNativeBoundaries() {
+        int size = 4097;
+        long[] keys = new long[size];
+        long[] values = new long[size];
+        for (int i = 0; i < size; i++) keys[i] = (long) i * 3 - 6012;
+        M3LongCoordinateIndex index = new M3LongCoordinateIndex(keys, values);
+        long[] queries = new long[8193];
+        for (int i = 0; i < queries.length; i++) {
+            queries[i] = switch (i % 7) {
+                case 0 -> Long.MIN_VALUE;
+                case 1 -> Long.MAX_VALUE;
+                case 2 -> keys[0];
+                case 3 -> keys[size - 1];
+                default -> (long) i - 4000;
+            };
+        }
+        int[] lower = index.lowerBounds(queries);
+        int[] upper = index.upperBounds(queries);
+        for (int i = 0; i < queries.length; i++) {
+            assertEquals(index.lowerBound(queries[i]), lower[i]);
+            assertEquals(index.upperBound(queries[i]), upper[i]);
+        }
+        String path = System.getProperty("m3.arrays.native.path");
+        if (M3ArrayNative.isLoaded() || (path != null && !path.isBlank())) {
+            assertArrayEquals(lower, index.lowerBoundsRequiredNative(queries));
+            assertArrayEquals(upper, index.upperBoundsRequiredNative(queries));
+        }
+    }
+
+    @Test
     void seededJavaAndJniDifferentialOracle() {
         M3LongCoordinateIndexSelfTest.run();
     }
