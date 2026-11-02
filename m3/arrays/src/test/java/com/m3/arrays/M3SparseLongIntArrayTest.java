@@ -100,6 +100,23 @@ final class M3SparseLongIntArrayTest {
     }
 
     @Test
+    void nativeOccupancyAuditIsRequiredAndNeverAnImplicitFallback() {
+        M3SparseLongIntArray values = new M3SparseLongIntArray(8192);
+        values.set(0, 13);
+        values.set(4096, -7);
+        String path = System.getProperty("m3.arrays.native.path");
+        if (path == null || path.isBlank()) {
+            if (!M3ArrayNative.isLoaded()) {
+                assertThrows(UnsatisfiedLinkError.class, values::verifyNonZeroCountRequiredNative);
+            }
+        } else {
+            assertEquals(2, values.verifyNonZeroCountRequiredNative());
+            values.set(0, 0);
+            assertEquals(1, values.verifyNonZeroCountRequiredNative());
+        }
+    }
+
+    @Test
     void deterministicReferenceMapMatchesSparseLanesAcrossLongBoundaries() {
         M3SparseLongIntArraySelfTest.run();
     }
