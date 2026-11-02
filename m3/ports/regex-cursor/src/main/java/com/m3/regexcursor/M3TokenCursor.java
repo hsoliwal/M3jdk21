@@ -37,7 +37,8 @@ public final class M3TokenCursor implements M3ChunkCursor, M3CursorFacts {
 
     /** Cursor over one token lane. */
     public static M3TokenCursor of(int[] tokens) {
-        return lanes(new int[][] {Objects.requireNonNull(tokens, "tokens")});
+        int[] checked = Objects.requireNonNull(tokens, "tokens");
+        return new M3TokenCursor(checked.length == 0 ? new int[0][] : new int[][] {checked});
     }
 
     /** Cursor over discontiguous lanes in order (empty lanes are skipped). */
