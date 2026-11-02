@@ -17,8 +17,9 @@ public final class M3LongCoordinateIndexSelfTest {
     public static void run() {
         Random random = new Random(0x4d334c434f4f5244L);
         int cases = 0;
+        String nativeLibrary = System.getProperty("m3.arrays.native.path");
         boolean nativeOn = M3ArrayNative.isLoaded()
-                || System.getProperty("m3.arrays.native.path") != null;
+                || (nativeLibrary != null && !nativeLibrary.isBlank());
         for (int iteration = 0; iteration < 1700; iteration++) {
             TreeMap<Long,Long> reference = new TreeMap<>();
             int n = random.nextInt(175);
