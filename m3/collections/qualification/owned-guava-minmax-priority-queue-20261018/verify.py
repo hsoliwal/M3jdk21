@@ -17,7 +17,7 @@ RUNNER_POST_SHA256 = "fce6ce2c24cb3242ebade331ed689627381a7030bb9d097fa4928acec7
 # that set and require exact byte identities rather than a wildcard sourcepath.
 CORE_HELPERS = (
     ("m3/collections/src/main/java/com/m3/collections/M3IndexSort.java", 4586, "0942fe34d6f5685099c03888729efcfa476195f8c11776ca9e83b2af09bcce9a"),
-    ("m3/collections/src/main/java/com/m3/collections/M3LaneSearch.java", 2995, "3aa83290ab10ded0b26d10051958a7895f4621033d6dc4bc23b1346c85f30158"),
+    ("m3/collections/src/main/java/com/m3/collections/M3LaneSearch.java", 2997, "3aa83290ab10ded0b26d10051958a7895f4621033d6dc4bc23b1346c85f30158"),
     ("m3/collections/src/main/java/com/m3/collections/M3PriorityQueueGrowth.java", 1315, "fe49db641cb17f8df89636fc63beadcddcf3fa27676749b0e9b683e5d143a22b"),
     ("m3/collections/src/main/java/com/m3/collections/M3ShadowStreams.java", 9377, "1ea37802b37d5b07ff989b9c15188ff228cdbf7f00076db004907b27e82a0506"),
 )
