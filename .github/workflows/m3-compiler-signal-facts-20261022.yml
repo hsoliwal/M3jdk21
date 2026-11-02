@@ -6,7 +6,7 @@ on:
       - 'm3/collections/signal-codegen/src/main/java/com/m3/collections/sortable/**'
       - 'm3/collections/signal-codegen/src/test/java/com/m3/collections/sortable/**'
       - 'm3/collections/signal-codegen/qualification/m3-compiler-signal-facts-20261022/**'
-      - 'm3/collections/signal-codegen/qualification/m3-machine-compiler-hints-20261102/**'
+      - 'm3/collections/signal-codegen/qualification/compiler-machine-hints/**'
       - '.github/workflows/m3-compiler-signal-facts-20261022.yml'
   workflow_dispatch:
 permissions:
@@ -32,7 +32,7 @@ jobs:
         run: |
           set -euo pipefail
           git diff --check origin/master...HEAD
-          bash m3/collections/signal-codegen/qualification/m3-machine-compiler-hints-20261102/verify.sh
+          bash m3/collections/signal-codegen/qualification/compiler-machine-hints/verify.sh
       - name: Original javac annotation processor and 24980-assertion primitive contract
         shell: bash
         run: |
