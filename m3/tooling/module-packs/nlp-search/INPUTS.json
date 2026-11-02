@@ -97,7 +97,7 @@
     "m3/tooling/jmod-recipes/src/test/java/com/m3/rewrite/jmod/M3ModuleDescriptorRecipeTest.java": "11bee86696d328ec7ade96c84d60fdc64617cedfd8e5bdc326906f287e05b34f",
     "m3/tooling/jmod-recipes/tools/jmod_image.py": "407622e9a4db86f1b9abae2e451638713b151f14256190c0e28fe7d0739eb7cf",
     "m3/tooling/jmod-recipes/tools/jmod_pack.py": "9ebc4a17e46fa0c3d6d995bf1a22e72b722d17efb1d87889ac8a7a47f89d2bd0",
-    "m3/tooling/module-packs/nlp-search/COMPILER_SOURCES.json": "d9ac52fc679a266035f1a84c7f15f9db067d2cfeb2808506b25dec301d609749",
+    "m3/tooling/module-packs/nlp-search/COMPILER_SOURCES.json": "ff2164a2c8643afe1f4d1c9d4ff3276c3dcd330874997b8ba297a49a77dbb99f",
     "m3/tooling/module-packs/nlp-search/COMPLETE_SOURCE_INVENTORY.json": "f077962ce7abe6aec7bf34e14736c1266429b18a911b147db32b73e8c904051e",
     "m3/tooling/module-packs/nlp-search/FILE_API_PARITY.json": "8295009993e55feeb7f1b8173018e5a21b1815fc409dabec04e042d30e3ca711",
     "m3/tooling/module-packs/nlp-search/FILE_PORT_MAP.json": "e3eb2199e6e6a045043534bbc9471feb1837c78c7edd0e62bd0675e64d07865d",
