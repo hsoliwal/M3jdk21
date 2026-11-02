@@ -33,3 +33,7 @@ Build the **existing** `m3/arrays/src/main/native/CMakeLists.txt` C11 JNI librar
 6. Hosted exact-head outcomes and release admission separately.
 
 The earlier historical V5 job passed source custody and two 1798-check SDK modes but then failed with `UnsatisfiedLinkError` from the *missing* arrays JNI library. Do not call this receiver green merely because source hashes match. Keep **DRAFT/HOLD** until real terminal CI. Independent Guava MinMaxPriorityQueue source custody, full JVM/jtreg/JCK and broad hsoliwal/* all remain separate.
+
+## Public-name-safe filename refinement
+
+The same strict M3JDK21 naming policy also rejects newly introduced `_V5` file **basenames**. Newly created product files must use stable, undated AND unversioned filenames: `SOURCE_BINDING_SUCCESSOR.json`, `probe_source_binding_successor.py`, and `verify_source_binding_successor.py`. The JSON *schema* remains V5, and its **3397 raw bytes / original Git blob do not change**. The verifier's `RECEIPT_NAME` and probe's explicitly joined successor paths change only to locate these files. Historical V4/V5 provenance identifiers and original historic scripts retain their proper original names. This correction does not waive, downgrade or amend `check_public_names.py`.
