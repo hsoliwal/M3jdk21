@@ -174,6 +174,29 @@ class M3ArrayNativeTest {
         assertEquals("null UTF-16 segment", nullSegment.getCause().getMessage());
     }
 
+    @Test
+    void sameArraySameWindowIdentityPreservesJavaAndJniBounds() throws ReflectiveOperationException {
+        char[] units = {'\u0000', 'A', '\uffff', '\ud800', '\udfff', 'z'};
+        for (int from = 0; from <= units.length; from++) {
+            for (int count = 0; count <= units.length - from; count++) {
+                assertEquals(0, M3ArrayNative.compareUtf16(units, from, units, from, count));
+            }
+        }
+        assertEquals(scalarCompare(units, 0, units, 1, 5),
+                M3ArrayNative.compareUtf16(units, 0, units, 1, 5));
+        assertThrows(IndexOutOfBoundsException.class,
+                () -> M3ArrayNative.compareUtf16(units, 2, units, 2, Integer.MAX_VALUE));
+        if (!loadOptionalNative()) return;
+        Method compare = M3ArrayNative.class.getDeclaredMethod(
+                "nativeCompareUtf16", char[].class, int.class, char[].class, int.class, int.class);
+        compare.setAccessible(true);
+        for (int from = 0; from <= units.length; from++) {
+            for (int count = 0; count <= units.length - from; count++) {
+                assertEquals(0, compare.invoke(null, units, from, units, from, count));
+            }
+        }
+    }
+
     private static boolean loadOptionalNative() {
         String path = System.getProperty("m3.arrays.native.path");
         if (path == null || path.isBlank()) {

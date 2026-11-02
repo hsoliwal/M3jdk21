@@ -43,6 +43,8 @@ public final class M3AtomCoverageVerifierSelfTest {
         try {
             validLedgerValidatesAndAdmits(directory);
             pendingLedgerValidatesButAdmissionRefuses(directory);
+            optionalFailedGateIsPending(directory);
+            optionalUnexecutedGateDoesNotBlock(directory);
             unknownPatternValidatesButAdmissionRefuses(directory);
             atomRowsMustBeSorted(directory);
             evidenceMustReferenceAnAtom(directory);
@@ -75,6 +77,35 @@ public final class M3AtomCoverageVerifierSelfTest {
         check(validate.contains("pending=1") && validate.contains("NOT_RUN"), "pending is explicit");
         expect(IllegalStateException.class,
                 () -> verify(M3AtomCoverageVerifier.Mode.ADMIT, fixture), "pending admission refusal");
+    }
+
+
+    /** Optional FAIL is a recorded failure; it must not inflate the admitted count. */
+    private void optionalFailedGateIsPending(Path directory) throws Exception {
+        List<String> rows = new ArrayList<>(evidenceRows(false, false));
+        rows.add(String.join("\t", "ATOM-A", M3CoverageGate.CONTRACT_CHANGE_AUTHORIZED.name(),
+                M3GateStatus.FAIL.name(), "evidence/ATOM-A/optional-failure.txt", HASH_A,
+                "explicit failed optional gate"));
+        rows.subList(1, rows.size()).sort(Comparator.naturalOrder());
+        Fixture fixture = writeFixture(directory.resolve("optional-failed"), atomRows(false, false), rows);
+        String validate = verify(M3AtomCoverageVerifier.Mode.VALIDATE, fixture);
+        check(validate.contains("admitted=1\tpending=1"), "optional FAIL reduces admitted count");
+        check(validate.contains("FINDING\tATOM-A\tRECORDED_FAIL\tCONTRACT_CHANGE_AUTHORIZED"),
+                "optional FAIL is reported");
+        expect(IllegalStateException.class,
+                () -> verify(M3AtomCoverageVerifier.Mode.ADMIT, fixture), "optional FAIL refuses admission");
+    }
+
+    /** An optional NOT_RUN alone must not pretend that a required proof is missing. */
+    private void optionalUnexecutedGateDoesNotBlock(Path directory) throws Exception {
+        List<String> rows = new ArrayList<>(evidenceRows(false, false));
+        rows.add(String.join("\t", "ATOM-A", M3CoverageGate.CONTRACT_CHANGE_AUTHORIZED.name(),
+                M3GateStatus.NOT_RUN.name(), "-", "-", "optional gate not executed"));
+        rows.subList(1, rows.size()).sort(Comparator.naturalOrder());
+        Fixture fixture = writeFixture(directory.resolve("optional-not-run"), atomRows(false, false), rows);
+        String admit = verify(M3AtomCoverageVerifier.Mode.ADMIT, fixture);
+        check(admit.contains("admitted=2\tpending=0") && !admit.contains("FINDING"),
+                "optional NOT_RUN preserves complete required proof");
     }
 
     private void unknownPatternValidatesButAdmissionRefuses(Path directory) throws Exception {
