@@ -1,0 +1,82 @@
+{
+  "source_commit": "ce005d25b29fb6246e013bffb462afd5ed070362",
+  "source_readback": [
+    {
+      "path": "src/hotspot/share/classfile/classLoader.cpp",
+      "git_blob": "de2fce5aece1dc5802604821f731e33cee4f1245",
+      "sha256": "815ac2e9b88094bdcb0937df18cd154a1117e4de032f0e6ac02f0cf1251388b9"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3Object.java",
+      "git_blob": "7ca247583a87d43ebf8a0c38dc300bbd0faf981a",
+      "sha256": "410cd15637e91d49804e20578cda6a0f46c8be1df11ad044a60e2e8d66ebbb05"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3ObjectRuntime.java",
+      "git_blob": "1237d1d0ff6d8ffa199ab86de67e62d8771c758b",
+      "sha256": "80e087cb893296edea8efedfa176caf0c850549d499f31932c009bc6f6fef7cc"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Object.java",
+      "git_blob": "a9899e1c2970f6d5e9172ffb12f5b7399d052b68",
+      "sha256": "014671527cd647d90f8cab6d6dbd0ca127d918c5a8f38d1ec50be6140eb63735"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/ObjectChangeListener.java",
+      "git_blob": "d2215450e5863058d9b613df96fb88bdcc7fa0cf",
+      "sha256": "12b65925260b13ab5345a1261e3dff65173b25c3ed90836b53e027ce607a274a"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/ObjectEvent.java",
+      "git_blob": "a79853aadd74f711539dc750500beaf8fab7fac4",
+      "sha256": "e0d9942aef2001f7eec50ca2c5b5b72d5ff698e737c0d051a556502f059998c4"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/ObjectSubscription.java",
+      "git_blob": "850bbcf6f2a5cc9c968017fce9c298eba22af454",
+      "sha256": "4e41eec1c6ecbdc03da1d299f5ba74ad73c86e38458efd69bd20887157be6c62"
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3Object.c",
+      "git_blob": "e7671d51a92a2e01771a2e972a5c4a7b57854b04",
+      "sha256": "842a4cf3a6d2f1e639392c23a1f674a7bff2119801b562da0f6d6072775a9df7"
+    },
+    {
+      "path": "src/java.base/share/native/libjava/m3_object.h",
+      "git_blob": "6cf7a9b280f1904f37b2d7ed4bbd595cfe9c7612",
+      "sha256": "f6adcb78901d39a7f7b4ca48270bf60158b7b288c9c709016f71706487076625"
+    },
+    {
+      "path": "test/jdk/java/lang/M3Object/M3ObjectTest.java",
+      "git_blob": "1c41090a79e3ec34c75c093f0f46c72e69823a67",
+      "sha256": "18a4f3e7e37c2153582bead9b0505c9302bb7ea5a860692042939b8c73a61d8c"
+    },
+    {
+      "path": "test/jdk/java/lang/Object/M3ObjectNativeTest.java",
+      "git_blob": "2ba6222a61bb5c8b0dc243106aa68acb53d4dddb",
+      "sha256": "a0df6d1efddb27ba970adb648f44afeb153df29322202bfa7855c97664d7c4b1"
+    },
+    {
+      "path": "test/jdk/java/lang/Object/ObjectAdapterDispatchTest.java",
+      "git_blob": "3d7ca22116f34588bbb03698f78935f35deeb190",
+      "sha256": "4281111c13555f50e589f6a6dcd5c6cdbaab3b9f16dacf9662d642cdc2f83c5d"
+    },
+    {
+      "path": "test/jdk/java/lang/Object/libM3ObjectNativeTest.c",
+      "git_blob": "e6405d6fc027b0a9d1a8a4a0dfca898faf362029",
+      "sha256": "d9d114128096ebefcaa905b0a08a89606c74a7450bb97c7c7a67adbd689643df"
+    }
+  ],
+  "tested_image": "/tmp/m3-source-build/images/jdk",
+  "image_release": "IMPLEMENTOR=\"N/A\"\nJAVA_RUNTIME_VERSION=\"21.0.14-internal-adhoc.root.m3jdk\"\nJAVA_VERSION=\"21.0.14\"\nJAVA_VERSION_DATE=\"2027-01-19\"\nLIBC=\"gnu\"\nMODULES=\"java.base java.compiler java.datatransfer java.xml java.prefs java.desktop java.instrument java.logging java.management java.security.sasl java.naming java.rmi java.management.rmi java.net.http java.scripting java.security.jgss java.transaction.xa java.sql java.sql.rowset java.xml.crypto java.se java.smartcardio jdk.accessibility jdk.internal.jvmstat jdk.attach jdk.charsets jdk.internal.opt jdk.zipfs jdk.compiler jdk.crypto.ec jdk.crypto.cryptoki jdk.dynalink jdk.internal.ed jdk.editpad jdk.hotspot.agent jdk.httpserver jdk.incubator.vector jdk.internal.le jdk.internal.vm.ci jdk.internal.vm.compiler jdk.internal.vm.compiler.management jdk.jartool jdk.javadoc jdk.jcmd jdk.management jdk.management.agent jdk.jconsole jdk.jdeps jdk.jdwp.agent jdk.jdi jdk.jfr jdk.jlink jdk.jpackage jdk.jshell jdk.jsobject jdk.jstatd jdk.localedata jdk.management.jfr jdk.naming.dns jdk.naming.rmi jdk.net jdk.nio.mapmode jdk.random jdk.sctp jdk.security.auth jdk.security.jgss jdk.unsupported jdk.unsupported.desktop jdk.xml.dom\"\nOS_ARCH=\"x86_64\"\nOS_NAME=\"Linux\"\nSOURCE=\".:git:ce005d25b29f+\"\n",
+  "image_artifact_sha256": {
+    "release": "3dce4a82b4a972e45a8199ba7c15090d4713d5e5ca0e1457bcebed04c364af7c",
+    "bin/java": "5c1ff86937a80f22ce5584d61991fc1ab573ddfc389e66b6bb3a07e039809322",
+    "bin/javac": "70006018bcbd897b7fba555e2f6988a12b029c690dfa1a09483b74d139c38d08",
+    "lib/libjava.so": "9f12274a71ac3858740b2e0fef8ac8d23f9fd20bb9c287779c402efa8c3b7fcd",
+    "lib/server/libjvm.so": "d76456ee32e750caaa0dd57bdc0b9a5d4e87116bebc3d86969ce30e84d0be1d3",
+    "lib/modules": "86e03a9bf7e03c4f4177abb820b3bf3f947bf1b901ded0d35d457f3fdf2a8c1b",
+    "jmods/java.base.jmod": "f0d84dc5a1f9d9fa4360e8d279175d80033a0d8bb0baa28e08d9202e1db54a1b"
+  },
+  "qualification_scope": "Existing image; pertinent source/blob readback and image hashes, not a new reproducible full-source build"
+}
