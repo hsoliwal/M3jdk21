@@ -54,10 +54,11 @@ public final class SharedLexiconCatalog {
     private final List<String> files;
     private final List<String> firstLexemes;
     private final List<String> lastLexemes;
-    private final Map<Coordinate, List<SourceMapping>> mappings;
+    private final List<SourceMapping>[] mappingRows;
+    private final int[] rowOffsets;
     private final Map<SourceIdentity, SourceMapping> mappingsByIdentity;
     private final Map<SourceIdentity, SynexiaPrecomputePayload> payloads = new ConcurrentHashMap<>();
-    private final Map<Coordinate, PrecomputeFacts> precompute;
+    private final PrecomputeFacts[] precomputeRows;
     private final List<PrecomputeProfile> precomputeProfiles;
     private final Optional<SharedLexiconFamilySidecarCatalog> familyPrecompute;
     private final Optional<SharedRelatedLexemeCatalog> relatedLexemes;
@@ -77,14 +78,13 @@ public final class SharedLexiconCatalog {
         this.files = List.copyOf(files);
         this.firstLexemes = List.copyOf(firstLexemes);
         this.lastLexemes = List.copyOf(lastLexemes);
-        Map<Coordinate, List<SourceMapping>> mappingCopy = new HashMap<>();
-        mappings.forEach((coordinate, values) -> mappingCopy.put(coordinate, List.copyOf(values)));
-        this.mappings = Map.copyOf(mappingCopy);
+        this.rowOffsets = rowOffsets(shards);
+        this.mappingRows = mappingRows(rowOffsets, mappings);
+        this.precomputeRows = precomputeRows(rowOffsets, precompute);
         Map<SourceIdentity, SourceMapping> identityCopy = new HashMap<>();
-        this.mappings.values().forEach(values -> values.forEach(mapping ->
-                identityCopy.put(new SourceIdentity(mapping.sourceId(), mapping.recordId()), mapping)));
+        for (List<SourceMapping> values : mappingRows) for (SourceMapping mapping : values)
+            identityCopy.put(new SourceIdentity(mapping.sourceId(), mapping.recordId()), mapping);
         this.mappingsByIdentity = Map.copyOf(identityCopy);
-        this.precompute = Map.copyOf(precompute);
         this.precomputeProfiles = List.copyOf(precomputeProfiles);
         this.familyPrecompute = Objects.requireNonNull(familyPrecompute);
         this.relatedLexemes = Objects.requireNonNull(relatedLexemes);
@@ -168,7 +168,7 @@ public final class SharedLexiconCatalog {
             ensureOpen();
             requireCoordinate(coordinate);
             imageAt(coordinate.shardId());
-            return mappings.get(coordinate);
+            return mappingRows[rowIndex(coordinate)];
         } finally { lifecycle.readLock().unlock(); }
     }
     /** Returns the preserved mapping for one exact Synexia source identity. */
@@ -195,7 +195,7 @@ public final class SharedLexiconCatalog {
             ensureOpen();
             requireCoordinate(coordinate);
             imageAt(coordinate.shardId());
-            return precompute.get(coordinate);
+            return precomputeRows[rowIndex(coordinate)];
         } finally { lifecycle.readLock().unlock(); }
     }
     public List<PrecomputeProfile> precomputeProfiles() {
@@ -358,24 +358,24 @@ public final class SharedLexiconCatalog {
     }
 
     private void validateShardSidecars(int shardId, SharedLexiconImage image) throws IOException {
-        for (Map.Entry<Coordinate, List<SourceMapping>> entry : mappings.entrySet()) {
-            Coordinate coordinate = entry.getKey();
-            if (coordinate.shardId() != shardId) continue;
-            String text = image.recordText(coordinate.imageRow());
-            for (SourceMapping mapping : entry.getValue()) {
+        int first = rowOffsets == null ? 0 : rowOffsets[shardId];
+        for (int row = 0; row < image.size(); row++) {
+            String text = image.recordText(row);
+            for (SourceMapping mapping : mappingRows[first + row]) {
                 if (!mapping.lexeme().equals(text))
                     throw new IOException("mapping lexeme does not match image coordinate");
             }
         }
-        for (Map.Entry<Coordinate, PrecomputeFacts> entry : precompute.entrySet()) {
-            Coordinate coordinate = entry.getKey();
-            if (coordinate.shardId() != shardId) continue;
-            String text = image.recordText(coordinate.imageRow());
-            PrecomputeFacts facts = entry.getValue();
+        // Preserve complete mapping validation before any precompute text checks.
+        for (int row = 0; row < image.size(); row++) {
+            String text = image.recordText(row);
+            PrecomputeFacts facts = precomputeRows[first + row];
             if (facts.utf16Units() != text.length()
                     || facts.javaHash() != Integer.toUnsignedLong(javaHash(text)))
                 throw new IOException("precompute text facts do not match image");
         }
+
+
     }
 
     /**
@@ -785,5 +785,40 @@ public final class SharedLexiconCatalog {
     private static IOException malformed(int lineNumber, String detail) {
         return new IOException("invalid synexia.shards.tsv line " + (lineNumber + 1) + ": " + detail);
     }
+    /** Precomputes offsets within the fully admitted finite coordinate domain. */
+    private static int[] rowOffsets(List<ShardSlot> shards) {
+        if (shards.size() == 1) return null;
+        int[] offsets = new int[shards.size()];
+        int first = 0;
+        for (int shard = 0; shard < offsets.length; shard++) {
+            offsets[shard] = first;
+            first = Math.addExact(first, shards.get(shard).expectedRecords);
+        }
+        return offsets;
+    }
+
+    /** Retains only immutable row-list values, without a Coordinate hash table. */
+    @SuppressWarnings("unchecked")
+    private static List<SourceMapping>[] mappingRows(
+            int[] offsets, Map<Coordinate, List<SourceMapping>> admitted) {
+        List<SourceMapping>[] rows = (List<SourceMapping>[]) new List<?>[admitted.size()];
+        admitted.forEach((coordinate, values) -> rows[(offsets == null ? 0
+                : offsets[coordinate.shardId()]) + coordinate.imageRow()] = List.copyOf(values));
+        return rows;
+    }
+
+    /** Retains the existing facts object at its validated flat physical position. */
+    private static PrecomputeFacts[] precomputeRows(
+            int[] offsets, Map<Coordinate, PrecomputeFacts> admitted) {
+        PrecomputeFacts[] rows = new PrecomputeFacts[admitted.size()];
+        admitted.forEach((coordinate, facts) -> rows[(offsets == null ? 0
+                : offsets[coordinate.shardId()]) + coordinate.imageRow()] = facts);
+        return rows;
+    }
+
+    private int rowIndex(Coordinate coordinate) {
+        return (rowOffsets == null ? 0 : rowOffsets[coordinate.shardId()]) + coordinate.imageRow();
+    }
+
 }
 
