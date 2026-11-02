@@ -1,0 +1,36 @@
+{
+  "schema": "M3_SYNEXIA_SEMANTIC_CENSUS_SUCCESSOR/2",
+  "canonical_recipe_repository": "hsoliwal/com.synexia",
+  "canonical_recipe_pr": 15123,
+  "recipe_v1_commit": "a89731c137d4a9bd59e1d644a80d6e4658ed89e6",
+  "recipe_v2_commit": "9869e3a77bd4cc6f224552ab2461bdc192022df5",
+  "receiver_repository": "hsoliwal/M3jdk21",
+  "receiver_previous_head": "465d479d09f1a03d9778282cc03ad8cb89ec41c0",
+  "source_change": {
+    "path": "m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/M3AtomCensus.java",
+    "pre_blob": "9681090cd86d50ca0d10517915d54d09e5b0e1ad",
+    "post_blob": "c622479241ebb5566681aeb2971fb466ac0ba476",
+    "pre_sha256": "a48b60b0bda2a72ccda3856b83c1f1849028322291466be5f89fe910e25b6242",
+    "post_sha256": "1f1019d4ba95fe80b2533526eeb3d2f564ce475f20bf816274e85b44898a7baa"
+  },
+  "test_change": {
+    "path": "m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3AtomCensusSemanticSelfTest.java",
+    "pre_blob": "d61402509fe19992b8613aecc1c1f2ef11e6b39c",
+    "post_blob": "65b6e32f6e45f9d95dced02f9513efbe4c76874f",
+    "pre_sha256": "3d84bcbce23166d5809d28a2104045483dffa2793c6076cb3a79a0368e8f20ea",
+    "post_sha256": "846cd879d3fa5a4644d3c6aa33c48f034d239166ad548a10f652396935a54c03"
+  },
+  "external_api_changed": false,
+  "jni_abi_changed": false,
+  "source_ast_parses_per_generation": 1,
+  "verification": {
+    "java21_compile": "PASS",
+    "semantic_checks": "PASS_154",
+    "original_anonymous_legacy_byte_equivalence": "PASS",
+    "maven_openrewrite_sdk": "NOT_RUN",
+    "junit_surefire": "NOT_RUN",
+    "m3jdk21_source_built_jtreg": "NOT_RUN",
+    "native_c1_c2_jni": "NOT_RUN"
+  },
+  "merge_state": "DRAFT_HOLD"
+}
