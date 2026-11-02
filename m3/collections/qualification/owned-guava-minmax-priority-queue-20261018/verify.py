@@ -9,9 +9,12 @@ HISTORIC_PACKET_SHA256 = "da37bfacf6b8bfa91e5ded6bb74947c54c8d54a8c70f6b15cc58c1
 SUCCESSOR_PACKET = BASE.parent / "guava-minmax-source-custody" / "source-bindings.json"
 WORKFLOW = ".github/workflows/m3-owned-guava-minmax-priority-queue.yml"
 OWN_VERIFIER = "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/verify.py"
+ORIGINAL_RUNNER = "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/run.py"
+RUNNER_POST_SHA256 = "c5248db4ceb67e2f84a77ca0b8d1a610dc5bd6f3be9eacd5a2001713b0560b6e"
 CHANGES = {
     WORKFLOW: (2220, "9543ed2e6b8430e6a80888064750beda48e486b005bf125488cc95b513d3d4b9"),
     OWN_VERIFIER: (4276, "a8fd04cc98bf3f21e5f68958eae8f82e0b5fcedbc7c6d88f92ea778828bb980b"),
+    ORIGINAL_RUNNER: (18203, "815464a4b2b759a3b7d5e47ca82d6ed6d09fa5eddacb0e24fcf5ee6646796679"),
 }
 
 def qualified_source_packet():
@@ -53,11 +56,21 @@ def qualified_source_packet():
             if (following["bytes"] != 2311
                     or following["sha256"] != "ed17db300c020733c0edc6b20aa0180a9314bb183a7cf0b7307989fc3e8d277b"):
                 raise ValueError("Guava workflow successor image differs")
-        else:
+        elif path == OWN_VERIFIER:
             owner = BASE / "verify.py"
             if (following["bytes"] != owner.stat().st_size
                     or following["sha256"] != sha(owner)):
                 raise ValueError("Guava original verifier successor image differs")
+        elif path == ORIGINAL_RUNNER:
+            owner = BASE / "run.py"
+            if (not owner.is_file() or owner.is_symlink()
+                    or following["bytes"] != 19026
+                    or following["sha256"] != RUNNER_POST_SHA256
+                    or owner.stat().st_size != 19026
+                    or sha(owner) != RUNNER_POST_SHA256):
+                raise ValueError("Guava original runner successor image differs")
+        else:
+            raise ValueError("unknown Guava source successor: " + path)
         changed.add(path)
     if changed != set(CHANGES):
         raise ValueError("Guava successor coverage incomplete")
