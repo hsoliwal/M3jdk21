@@ -114,9 +114,13 @@ public final class M3FilteredCursorExceptionContract {
             Trace trace = new Trace();
             TreeSet<Integer> tree = new TreeSet<>(List.of(0, 1, 2, 3, 4, 5, 6));
             NavigableSet<Integer> source = proxy(NavigableSet.class, tree, trace, "owner");
-            NavigableSet<Integer> view = M3MutableFilteredViews.filter(source, value -> true);
+            // Reject the nearest representative so the set witness, like the map
+            // witness above, reaches the range cursor whose failure is under test.
+            NavigableSet<Integer> view = M3MutableFilteredViews.filter(source, value -> false);
             trace.failAt = operation < 2 ? "range.descendingIterator" : "range.iterator";
             expectIdentity(trace, () -> navigate(view, 3, op));
+            require(trace.events.stream().anyMatch(event -> event.startsWith(trace.failAt)),
+                    "set factory witness reaches its armed range cursor");
 
             Trace mapComparator = new Trace();
             TreeMap<Integer, Integer> comparatorMap = new TreeMap<>(mapComparator.comparator());
@@ -146,9 +150,56 @@ public final class M3FilteredCursorExceptionContract {
             TreeSet<Integer> comparatorSet = new TreeSet<>(setComparator.comparator());
             comparatorSet.addAll(List.of(0, 1, 2, 3, 4, 5, 6));
             NavigableSet<Integer> wrappedSet = proxy(NavigableSet.class, comparatorSet, setComparator, "owner");
-            NavigableSet<Integer> filteredSet = M3MutableFilteredViews.filter(wrappedSet, value -> true);
+            NavigableSet<Integer> filteredSet = M3MutableFilteredViews.filter(wrappedSet, value -> false);
             setComparator.events.clear(); setComparator.armComparator = true;
             expectIdentity(setComparator, () -> navigate(filteredSet, 3, op));
+            require(setComparator.events.stream().anyMatch(event -> event.startsWith(
+                    op < 2 ? "range.descendingIterator" : "range.iterator")),
+                    "late set comparator witness reaches its armed range cursor");
+
+            Trace firstSetComparator = new Trace();
+            TreeSet<Integer> firstSetOwner = new TreeSet<>(firstSetComparator.comparator());
+            firstSetOwner.addAll(List.of(0, 1, 2, 3, 4, 5, 6));
+            NavigableSet<Integer> firstSetSource = proxy(NavigableSet.class, firstSetOwner, firstSetComparator, "owner");
+            NavigableSet<Integer> firstSetView = M3MutableFilteredViews.filter(firstSetSource, value -> {
+                throw new AssertionError("set visibility callback after comparator failure");
+            });
+            firstSetComparator.events.clear(); firstSetComparator.armed = true;
+            expectIdentity(firstSetComparator, () -> navigate(firstSetView, 3, op));
+            require(firstSetComparator.events.stream().noneMatch(event -> event.startsWith("range.")),
+                    "first set navigation failure terminates before range construction");
+        }
+    }
+    @SuppressWarnings("unchecked")
+    private static void setNearLookupBoundaries() {
+        String[] methods = {"lower", "floor", "ceiling", "higher"};
+        int[] expected = {2, 3, 3, 4};
+        for (int operation = 0; operation < methods.length; operation++) {
+            final int op = operation;
+            Trace trace = new Trace();
+            NavigableSet<Integer> source = proxy(NavigableSet.class,
+                    new TreeSet<>(List.of(0, 1, 2, 3, 4, 5, 6)), trace, "owner");
+            NavigableSet<Integer> view = M3MutableFilteredViews.filter(source, value -> {
+                trace.events.add("visible[" + value + "]");
+                return true;
+            });
+            trace.failAt = operation < 2 ? "owner.headSet" : "owner.tailSet";
+            require(Integer.valueOf(expected[operation]).equals(navigate(view, 3, operation)),
+                    "visible first set representative returned");
+            require(trace.events.equals(List.of("owner." + methods[operation] + "[3]",
+                    "visible[" + expected[operation] + "]")),
+                    "visible first set navigation never constructs a range or cursor: " + trace.events);
+
+            Trace lookup = new Trace();
+            NavigableSet<Integer> failedSource = proxy(NavigableSet.class,
+                    new TreeSet<>(List.of(0, 1, 2, 3, 4, 5, 6)), lookup, "owner");
+            NavigableSet<Integer> failedView = M3MutableFilteredViews.filter(failedSource, value -> {
+                throw new AssertionError("set visibility callback after owner lookup failure");
+            });
+            lookup.failAt = "owner." + methods[operation];
+            expectIdentity(lookup, () -> navigate(failedView, 3, op));
+            require(lookup.events.equals(List.of(lookup.failAt + "[3]")),
+                    "owner set lookup failure terminates without fallback: " + lookup.events);
         }
     }
     private static void readOnlyEndpoints() {
@@ -233,6 +284,7 @@ public final class M3FilteredCursorExceptionContract {
     }
     public static int run() {
         checks = 0;
+        setNearLookupBoundaries();
         cursorFailures();
         readOnlyEndpoints();
         successfulTrace();
