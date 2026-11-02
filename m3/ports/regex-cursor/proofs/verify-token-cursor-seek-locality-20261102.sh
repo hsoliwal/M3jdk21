@@ -25,6 +25,12 @@ javac --release 21 -encoding UTF-8 -Xlint:all -Werror -d "$OUT/classes" \
   "$TEST/M3StaticGrammarLexiconNativeProof.java" \
   "$TEST/M3GrammarTokenProjectionNativeProof.java" \
   > "$OUT/logs/01-javac21.log" 2>&1
+# Stage 2: strict C17 JNI compile before any Java proof or native runtime.
+JAVA_HOME="${JAVA_HOME:-$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")}" 
+gcc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Wpedantic -Werror \
+  -I "$JAVA_HOME/include" -I "$JAVA_HOME/include/linux" \
+  "$ROOT/src/test/native/M3StaticGrammarLexiconJni.c" \
+  -o "$OUT/libm3grammar.so" > "$OUT/logs/08-gcc-c17.log" 2>&1
 java -ea -Xmx768m -cp "$OUT/classes" com.m3.regexcursor.M3TokenCursorSeekLocalityProof > "$OUT/logs/02-seek-oracle.log" 2>&1
 java -ea -Xmx768m -cp "$OUT/classes" com.m3.regexcursor.M3TokenCursorSeekLocalityBench > "$OUT/logs/02-seek-bench.log" 2>&1
 java -ea -Xmx768m -cp "$OUT/classes" com.m3.regexcursor.M3TokenCursorMultiLaneProof > "$OUT/logs/02-multilane-proof.log" 2>&1
@@ -33,12 +39,6 @@ java -ea -Xmx768m -cp "$OUT/classes" com.m3.regexcursor.M3GrammarCompleteCursorP
 java -ea -Xmx768m -cp "$OUT/classes" com.m3.regexcursor.M3GrammarTokenProjectionProof > "$OUT/logs/05-projection.log" 2>&1
 java -ea -Xmx768m -cp "$OUT/classes" com.m3.regexcursor.M3CompleteTokenProjectionProof > "$OUT/logs/06-complete-admission.log" 2>&1
 java -ea -Xmx768m -cp "$OUT/classes" com.m3.regexcursor.M3StaticGrammarLexiconProof > "$OUT/logs/07-lexicon.log" 2>&1
-# Unchanged native C17 oracle. Compile after Java; runtime only after compile.
-JAVA_HOME="${JAVA_HOME:-$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")}" 
-gcc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Wpedantic -Werror \
-  -I "$JAVA_HOME/include" -I "$JAVA_HOME/include/linux" \
-  "$ROOT/src/test/native/M3StaticGrammarLexiconJni.c" \
-  -o "$OUT/libm3grammar.so" > "$OUT/logs/08-gcc-c17.log" 2>&1
 java -ea -Xcheck:jni -Xmx768m -cp "$OUT/classes" \
   com.m3.regexcursor.M3GrammarTokenProjectionNativeProof "$OUT/libm3grammar.so" > "$OUT/logs/09-jni-checked.log" 2>&1
 java -ea -Xint -Xcheck:jni -Xmx768m -cp "$OUT/classes" \
