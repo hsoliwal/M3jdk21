@@ -6,10 +6,20 @@ import com.m3.tools.codec.varint.VarInts;
 import com.m3.tools.graph.paths.ShortestPaths;
 import com.m3.tools.graph.topology.TopologicalOrder;
 import com.m3.tools.stats.streaming.RunningStatistics;
+import com.m3.tools.text.diff.BoundedDiff;
+import com.m3.tools.text.diff.LineDiff;
+import com.m3.tools.text.diff.LineThreeWayMerge;
+import com.m3.tools.text.diff.ThreeWayMerge;
 import com.m3.tools.text.frequency.TermFrequency;
+import com.m3.tools.text.index.Bm25Ranker;
+import com.m3.tools.text.ngram.NGramIndex;
 import com.m3.tools.text.ngram.NGrams;
 import com.m3.tools.text.normalize.UnicodeNormalizer;
+import com.m3.tools.text.regex.RegexMatcher;
+import com.m3.tools.text.search.AffixIndex;
 import com.m3.tools.text.search.ExactSearch;
+import com.m3.tools.text.search.MultiLiteralSearch;
+import com.m3.tools.text.similarity.TextSignatures;
 import com.m3.tools.text.tokenize.WordTokenizer;
 import com.m3.tools.verify.sha256.Sha256;
 import java.io.IOException;
@@ -377,6 +387,1000 @@ public final class CpuTools {
         Search actual = literal(source, needle, maxHits, monitor);
         return actual.complete == expected.complete && actual.sha256.equals(expected.sha256)
                 && Arrays.equals(actual.positions, expected.positions);
+    }
+
+    /** A compact multi-literal result backed by the existing separate text-search module. */
+    public static final class MultiSearch {
+        private final MultiLiteralSearch.Result result;
+        private final String sha256;
+
+        private MultiSearch(MultiLiteralSearch.Result result, String sha256) {
+            this.result = result;
+            this.sha256 = sha256;
+        }
+        public int size() { return result.size(); }
+        public boolean complete() { return result.complete(); }
+        public MultiLiteralSearch.Hit hit(int index) { return result.hit(index); }
+        public List<MultiLiteralSearch.Hit> hits() { return result.hits(); }
+        public String sha256() { return sha256; }
+    }
+
+    public static MultiSearch multiLiteral(M3File source, List<String> literals, int maxHits) {
+        return multiLiteral(source, literals, maxHits, null);
+    }
+
+    /**
+     * One immutable M3File snapshot, one prepared UTF-16 multi-needle search.
+     * The receipt includes raw-byte and UTF-16 identities, source location,
+     * literal order, cap, completeness, and every emitted coordinate.
+     */
+    public static MultiSearch multiLiteral(M3File source, List<String> literals, int maxHits,
+                                           ProgressMonitor monitor) {
+        Objects.requireNonNull(source, "source");
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        MultiLiteralSearch.Prepared search = MultiLiteralSearch.prepare(literals, progress::checkCancelled);
+        MultiLiteralSearch.Result found = search.find(source.text(), maxHits, progress::checkCancelled);
+        Canonical hash = new Canonical("m3-cpu-multi-literal-result-v1").text(Implementation.ROOT)
+                .text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())
+                .number(source.length()).number(source.byteLength())
+                .text(search.sha256()).number(maxHits).number(found.complete() ? 1 : 0)
+                .number(found.size());
+        for (int i = 0; i < found.size(); i++) {
+            if ((i & 4095) == 0) progress.checkCancelled();
+            var hit = found.hit(i);
+            hash.number(hit.patternId()).number(hit.start()).number(hit.end());
+        }
+        progress.worked(1);
+        progress.checkCancelled();
+        return new MultiSearch(found, hash.finish());
+    }
+
+    /** Independent exact re-execution; an identity receipt alone is not semantic proof. */
+    public static boolean verifyMultiLiteral(M3File source, List<String> literals, int maxHits,
+                                             MultiSearch expected, ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        MultiSearch actual = multiLiteral(source, literals, maxHits, monitor);
+        return actual.complete() == expected.complete() && actual.sha256().equals(expected.sha256())
+                && actual.hits().equals(expected.hits());
+    }
+
+    /** Exact ordered-corpus search; stores only primitive hit lanes and a source receipt. */
+    public static final class CorpusSearch {
+        private final MultiLiteralSearch.CorpusResult result;
+        private final String sha256;
+
+        private CorpusSearch(MultiLiteralSearch.CorpusResult result, String sha256) {
+            this.result = result;
+            this.sha256 = sha256;
+        }
+
+        public int size() { return result.size(); }
+        public boolean complete() { return result.complete(); }
+        public int scannedFiles() { return result.scannedDocuments(); }
+        public MultiLiteralSearch.CorpusHit hit(int ordinal) { return result.hit(ordinal); }
+        public List<MultiLiteralSearch.CorpusHit> hits() { return result.hits(); }
+        public String sha256() { return sha256; }
+    }
+
+    public static CorpusSearch corpusLiteral(List<M3File> sources, List<String> literals, int maxHits) {
+        return corpusLiteral(sources, literals, maxHits, null);
+    }
+
+    /**
+     * Prepare the incumbent Aho-Corasick automaton once for all immutable
+     * M3File snapshots; each snapshot retains its own original UTF-16 offsets.
+     * The receipt seals <em>every</em> ordered file even when the global cap
+     * stops scanning early. No file reopen or concatenated source is required.
+     */
+    public static CorpusSearch corpusLiteral(List<M3File> sources, List<String> literals,
+                                             int maxHits, ProgressMonitor monitor) {
+        Objects.requireNonNull(sources, "sources");
+        if (sources.size() > MultiLiteralSearch.MAX_CORPUS_DOCUMENTS) {
+            throw new IllegalArgumentException("corpus file count budget");
+        }
+        List<M3File> snapshot = List.copyOf(sources);
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        Canonical hash = new Canonical("m3-cpu-corpus-literal-v1").text(Implementation.ROOT)
+                .number(snapshot.size());
+        List<String> texts = new ArrayList<>(snapshot.size());
+        long units = 0;
+        for (int id = 0; id < snapshot.size(); id++) {
+            progress.checkCancelled();
+            M3File file = snapshot.get(id);
+            units += file.length();
+            if (file.length() > MultiLiteralSearch.MAX_TEXT_UNITS
+                    || units > MultiLiteralSearch.MAX_CORPUS_UTF16) {
+                throw new IllegalArgumentException("corpus UTF-16 source budget");
+            }
+            hash.number(id).text(file.uri().toASCIIString()).text(file.rawSha256())
+                    .text(file.utf16Sha256()).number(file.byteLength()).number(file.length());
+            texts.add(file.text());
+        }
+        MultiLiteralSearch.Prepared plan = MultiLiteralSearch.prepare(literals, progress::checkCancelled);
+        MultiLiteralSearch.CorpusResult result = plan.findCorpus(texts, maxHits, progress::checkCancelled);
+        hash.text(plan.sha256()).number(maxHits).number(result.size())
+                .number(result.scannedDocuments()).number(result.complete() ? 1 : 0);
+        for (int i = 0; i < result.size(); i++) {
+            if ((i & 4095) == 0) progress.checkCancelled();
+            MultiLiteralSearch.CorpusHit hit = result.hit(i);
+            hash.number(hit.documentId()).number(hit.patternId()).number(hit.start()).number(hit.end());
+        }
+        progress.worked(1);
+        progress.checkCancelled();
+        return new CorpusSearch(result, hash.finish());
+    }
+
+    /** Re-execute the one-plan corpus search and verify exact identities and positions. */
+    public static boolean verifyCorpusLiteral(List<M3File> sources, List<String> literals, int maxHits,
+                                              CorpusSearch expected, ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        CorpusSearch actual = corpusLiteral(sources, literals, maxHits, monitor);
+        if (!actual.sha256().equals(expected.sha256()) || actual.complete() != expected.complete()
+                || actual.scannedFiles() != expected.scannedFiles() || actual.size() != expected.size()) return false;
+        for (int i = 0; i < actual.size(); i++) {
+            if (!actual.hit(i).equals(expected.hit(i))) return false;
+        }
+        return true;
+    }
+
+    /** One authoritative compiled M3Regex/JDK Pattern shared across independent M3File snapshots. */
+    public static final class RegexCorpusSearch {
+        private final RegexMatcher.CorpusResult result;
+        private final String sha256;
+
+        private RegexCorpusSearch(RegexMatcher.CorpusResult result, String sha256) {
+            this.result = result;
+            this.sha256 = sha256;
+        }
+
+        public int size() { return result.size(); }
+        public boolean complete() { return result.complete(); }
+        public int scannedFiles() { return result.scannedDocuments(); }
+        public RegexMatcher.CorpusHit hit(int ordinal) { return result.hit(ordinal); }
+        public List<RegexMatcher.CorpusHit> hits() { return result.hits(); }
+        public String sha256() { return sha256; }
+    }
+
+    public static RegexCorpusSearch regexCorpus(List<M3File> sources, String expression, int maxHits) {
+        return regexCorpus(sources, expression, maxHits, null);
+    }
+
+    /**
+     * The incumbent regex compiler owns the compiled graph and match semantics;
+     * this API seals the ordered immutable M3File inputs and original UTF-16
+     * ranges. No cross-file anchor/region behavior is invented by concatenation.
+     * Limits on hits and input geometry do not bound arbitrary regex CPU time.
+     */
+    public static RegexCorpusSearch regexCorpus(List<M3File> sources, String expression,
+                                                int maxHits, ProgressMonitor monitor) {
+        Objects.requireNonNull(sources, "sources");
+        Objects.requireNonNull(expression, "expression");
+        if (maxHits < 0 || maxHits > RegexMatcher.Prepared.MAX_MATCHES) {
+            throw new IllegalArgumentException("regex match budget");
+        }
+        if (expression.length() > RegexMatcher.Prepared.MAX_REGEX_UTF16) {
+            throw new IllegalArgumentException("regex expression UTF-16 budget");
+        }
+        if (sources.size() > RegexMatcher.Prepared.MAX_DOCUMENTS) {
+            throw new IllegalArgumentException("regex corpus file count budget");
+        }
+        List<M3File> snapshot = List.copyOf(sources);
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        Canonical hash = new Canonical("m3-cpu-regex-corpus-result-v1").text(Implementation.ROOT)
+                .number(snapshot.size());
+        List<String> texts = new ArrayList<>(snapshot.size());
+        long units = 0;
+        for (int id = 0; id < snapshot.size(); id++) {
+            progress.checkCancelled();
+            M3File file = snapshot.get(id);
+            units += file.length();
+            if (file.length() > RegexMatcher.Prepared.MAX_DOCUMENT_UTF16
+                    || units > RegexMatcher.Prepared.MAX_CORPUS_UTF16) {
+                throw new IllegalArgumentException("regex corpus source UTF-16 budget");
+            }
+            hash.number(id).text(file.uri().toASCIIString()).text(file.rawSha256())
+                    .text(file.utf16Sha256()).number(file.byteLength()).number(file.length());
+            texts.add(file.text());
+        }
+        // Canonical code-unit framing also seals patterns containing isolated surrogates.
+        hash.number(expression.length());
+        for (int i = 0; i < expression.length(); i++) {
+            if ((i & 4095) == 0) progress.checkCancelled();
+            hash.number(expression.charAt(i));
+        }
+        RegexMatcher.Prepared prepared = RegexMatcher.prepare(expression);
+        RegexMatcher.CorpusResult result = prepared.findCorpus(texts, maxHits, progress::checkCancelled);
+        hash.number(maxHits).number(result.size()).number(result.scannedDocuments())
+                .number(result.complete() ? 1 : 0);
+        for (int i = 0; i < result.size(); i++) {
+            if ((i & 4095) == 0) progress.checkCancelled();
+            RegexMatcher.CorpusHit hit = result.hit(i);
+            hash.number(hit.documentId()).number(hit.start()).number(hit.end());
+        }
+        progress.worked(1);
+        progress.checkCancelled();
+        return new RegexCorpusSearch(result, hash.finish());
+    }
+
+    /** Recompile and independently re-execute; the receipt is not treated as a proof by itself. */
+    public static boolean verifyRegexCorpus(List<M3File> sources, String expression, int maxHits,
+                                            RegexCorpusSearch expected, ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        RegexCorpusSearch actual = regexCorpus(sources, expression, maxHits, monitor);
+        if (!actual.sha256().equals(expected.sha256()) || actual.complete() != expected.complete()
+                || actual.scannedFiles() != expected.scannedFiles() || actual.size() != expected.size()) return false;
+        for (int i = 0; i < actual.size(); i++) {
+            if (!actual.hit(i).equals(expected.hit(i))) return false;
+        }
+        return true;
+    }
+
+    /** One bounded immutable lexicon from the existing JDK word-break owner. */
+    public static final int MAX_AFFIX_SOURCE_UTF16 = 262_144;
+
+    public static final class FileAffixIndex {
+        private final AffixIndex index;
+        private final String sha256;
+
+        private FileAffixIndex(AffixIndex index, String sha256) {
+            this.index = index;
+            this.sha256 = sha256;
+        }
+
+        public int tokenCount() { return index.inputCount(); }
+        public int distinctCount() { return index.distinctCount(); }
+        public String wordAt(int ordinal) { return index.wordAt(ordinal); }
+        public boolean contains(String word) { return index.contains(word); }
+        public int countPrefix(String prefix) { return index.countPrefix(prefix); }
+        public int countSuffix(String suffix) { return index.countSuffix(suffix); }
+        public AffixIndex.Result prefix(String prefix, int maxHits) { return index.prefix(prefix, maxHits); }
+        public AffixIndex.Result suffix(String suffix, int maxHits) { return index.suffix(suffix, maxHits); }
+        public AffixIndex.Result prefix(String prefix, int maxHits, ProgressMonitor monitor) {
+            return index.prefix(prefix, maxHits, effective(monitor)::checkCancelled);
+        }
+        public AffixIndex.Result suffix(String suffix, int maxHits, ProgressMonitor monitor) {
+            return index.suffix(suffix, maxHits, effective(monitor)::checkCancelled);
+        }
+        public String lexiconSha256() { return index.sha256(); }
+        public String sha256() { return sha256; }
+    }
+
+    public static FileAffixIndex affixIndex(M3File source) {
+        return affixIndex(source, null);
+    }
+
+    /**
+     * One authoritative M3File snapshot; no file reopen or separate token pool.
+     * Lexicon identity includes canonical UTF-16 words; the result receipt
+     * additionally commits to the source URI, raw bytes and UTF-16 contents.
+     */
+    public static FileAffixIndex affixIndex(M3File source, ProgressMonitor monitor) {
+        Objects.requireNonNull(source, "source");
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        if (source.length() > MAX_AFFIX_SOURCE_UTF16) {
+            throw new IllegalArgumentException("affix source UTF-16 budget");
+        }
+        AffixIndex index = AffixIndex.prepare(
+                WordTokenizer.words(source.text(), progress::checkCancelled), progress::checkCancelled);
+        Canonical hash = new Canonical("m3-cpu-file-affix-index-v1").text(Implementation.ROOT)
+                .text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())
+                .number(source.byteLength()).number(source.length())
+                .text(index.sha256()).number(index.inputCount()).number(index.distinctCount());
+        progress.worked(1);
+        progress.checkCancelled();
+        return new FileAffixIndex(index, hash.finish());
+    }
+
+    /** Re-execution checks both the source receipt and all canonical dictionary IDs. */
+    public static boolean verifyAffixIndex(M3File source, FileAffixIndex expected,
+                                           ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        ProgressMonitor progress = effective(monitor);
+        FileAffixIndex actual = affixIndex(source, progress);
+        if (!actual.sha256.equals(expected.sha256)
+                || actual.tokenCount() != expected.tokenCount()
+                || actual.distinctCount() != expected.distinctCount()) return false;
+        for (int i = 0; i < actual.distinctCount(); i++) {
+            if ((i & 4095) == 0) progress.checkCancelled();
+            if (!actual.wordAt(i).equals(expected.wordAt(i))) return false;
+        }
+        progress.checkCancelled();
+        return true;
+    }
+
+    /** The existing M3File snapshots own both sides; the patch owns no file descriptor. */
+    public static final class FileDiff {
+        private final BoundedDiff.Patch patch;
+        private final String sha256;
+
+        private FileDiff(BoundedDiff.Patch patch, String sha256) {
+            this.patch = patch;
+            this.sha256 = sha256;
+        }
+
+        public BoundedDiff.Patch patch() { return patch; }
+        public boolean complete() { return patch.complete(); }
+        public int distance() { return patch.distance(); }
+        public String sha256() { return sha256; }
+        public String apply(M3File original) { return patch.apply(Objects.requireNonNull(original).text()); }
+    }
+
+    public static FileDiff diff(M3File source, M3File target, int maxEdits) {
+        return diff(source, target, maxEdits, null);
+    }
+
+    /**
+     * Bounded exact UTF-16 edit script with a receipt for two ordered, immutable
+     * M3File snapshots. A distance-budget miss remains explicitly incomplete.
+     */
+    public static FileDiff diff(M3File source, M3File target, int maxEdits, ProgressMonitor monitor) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(target, "target");
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        BoundedDiff.Patch patch = BoundedDiff.diff(
+                source.text(), target.text(), maxEdits, progress::checkCancelled);
+        Canonical hash = new Canonical("m3-cpu-file-bounded-diff-v1").text(Implementation.ROOT)
+                .text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())
+                .number(source.byteLength()).number(source.length())
+                .text(target.uri().toASCIIString()).text(target.rawSha256()).text(target.utf16Sha256())
+                .number(target.byteLength()).number(target.length())
+                .number(maxEdits).number(patch.complete() ? 1 : 0).number(patch.distance())
+                .text(patch.sourceSha256()).text(patch.targetSha256()).number(patch.changes().size());
+        for (BoundedDiff.Change change : patch.changes()) {
+            progress.checkCancelled();
+            hash.number(change.start()).number(change.end()).number(change.inserted().length());
+            for (int index = 0; index < change.inserted().length(); index++) {
+                if ((index & 8191) == 0) progress.checkCancelled();
+                hash.number(change.inserted().charAt(index));
+            }
+        }
+        progress.worked(1);
+        progress.checkCancelled();
+        return new FileDiff(patch, hash.finish());
+    }
+
+    /** Replay recomputes the whole edit script and both source-bound identities. */
+    public static boolean verifyDiff(M3File source, M3File target, int maxEdits,
+                                     FileDiff expected, ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        FileDiff actual = diff(source, target, maxEdits, monitor);
+        return actual.sha256().equals(expected.sha256())
+                && actual.complete() == expected.complete()
+                && actual.distance() == expected.distance()
+                && actual.patch().changes().equals(expected.patch().changes());
+    }
+
+    /** Exact line-oriented patch; retains no source file handle or line text dictionary. */
+    public static final class FileLineDiff {
+        private final LineDiff.Patch patch;
+        private final String sourceUri;
+        private final String sourceRawSha256;
+        private final String sourceUtf16Sha256;
+        private final String sha256;
+
+        private FileLineDiff(LineDiff.Patch patch, M3File source, String sha256) {
+            this.patch = patch;
+            this.sourceUri = source.uri().toASCIIString();
+            this.sourceRawSha256 = source.rawSha256();
+            this.sourceUtf16Sha256 = source.utf16Sha256();
+            this.sha256 = sha256;
+        }
+
+        public LineDiff.Patch patch() { return patch; }
+        public boolean complete() { return patch.complete(); }
+        public int distance() { return patch.distance(); }
+        public String sha256() { return sha256; }
+
+        /** Validate file URI and both admitted identities before UTF-16 materialization. */
+        public String apply(M3File original) {
+            Objects.requireNonNull(original, "original");
+            if (!sourceUri.equals(original.uri().toASCIIString())
+                    || !sourceRawSha256.equals(original.rawSha256())
+                    || !sourceUtf16Sha256.equals(original.utf16Sha256())) {
+                throw new IllegalArgumentException("line patch source identity mismatch");
+            }
+            return patch.apply(original.text());
+        }
+    }
+
+    public static FileLineDiff lineDiff(M3File source, M3File target, int maxEdits) {
+        return lineDiff(source, target, maxEdits, null);
+    }
+
+    /**
+     * A source-sealed line edit script with exact line terminators. The bounded
+     * shortest-edit engine is reused on indexed line IDs, not input characters.
+     * The returned result is never a partial patch on an edit-budget miss.
+     */
+    public static FileLineDiff lineDiff(M3File source, M3File target, int maxEdits,
+                                        ProgressMonitor monitor) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(target, "target");
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        LineDiff.Patch patch = LineDiff.diff(source.text(), target.text(),
+                maxEdits, progress::checkCancelled);
+        Canonical hash = new Canonical("m3-cpu-file-line-diff-v1").text(Implementation.ROOT);
+        for (M3File file : List.of(source, target)) {
+            progress.checkCancelled();
+            hash.text(file.uri().toASCIIString()).text(file.rawSha256()).text(file.utf16Sha256())
+                    .number(file.byteLength()).number(file.length());
+        }
+        hash.number(maxEdits).number(patch.complete() ? 1 : 0).number(patch.distance())
+                .number(patch.sourceLines()).number(patch.targetLines())
+                .text(patch.sourceSha256()).text(patch.targetSha256())
+                .number(patch.changes().size());
+        for (LineDiff.LineChange change : patch.changes()) {
+            progress.checkCancelled();
+            hash.number(change.startLine()).number(change.endLine())
+                    .number(change.startUtf16()).number(change.endUtf16())
+                    .number(change.insertedLines()).number(change.inserted().length());
+            for (int index = 0; index < change.inserted().length(); index++) {
+                if ((index & 8191) == 0) progress.checkCancelled();
+                hash.number(change.inserted().charAt(index));
+            }
+        }
+        progress.worked(1);
+        progress.checkCancelled();
+        return new FileLineDiff(patch, source, hash.finish());
+    }
+
+    /** Re-execution proves both admitted file identities and all line coordinates. */
+    public static boolean verifyLineDiff(M3File source, M3File target, int maxEdits,
+                                         FileLineDiff expected, ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        FileLineDiff actual = lineDiff(source, target, maxEdits, monitor);
+        return actual.sha256().equals(expected.sha256())
+                && actual.complete() == expected.complete()
+                && actual.distance() == expected.distance()
+                && actual.patch().changes().equals(expected.patch().changes());
+    }
+
+    /** Exact base/left/right source-bound result; owns no file handles or new String pool. */
+    public static final class FileMerge {
+        private final ThreeWayMerge.Result result;
+        private final String sourceUri;
+        private final String sourceRawSha256;
+        private final String sourceUtf16Sha256;
+        private final String sha256;
+
+        private FileMerge(ThreeWayMerge.Result result, M3File source, String sha256) {
+            this.result = result;
+            this.sourceUri = source.uri().toASCIIString();
+            this.sourceRawSha256 = source.rawSha256();
+            this.sourceUtf16Sha256 = source.utf16Sha256();
+            this.sha256 = sha256;
+        }
+
+        public ThreeWayMerge.Result result() { return result; }
+        public ThreeWayMerge.Status status() { return result.status(); }
+        public boolean mergeable() { return result.mergeable(); }
+        public int conflictCount() { return result.conflictCount(); }
+        public String sha256() { return sha256; }
+
+        /** Rejects stale and location-substituted source snapshots before materialization. */
+        public String apply(M3File original) {
+            Objects.requireNonNull(original, "original");
+            if (!sourceUri.equals(original.uri().toASCIIString())
+                    || !sourceRawSha256.equals(original.rawSha256())
+                    || !sourceUtf16Sha256.equals(original.utf16Sha256())) {
+                throw new IllegalArgumentException("three-way merge base identity mismatch");
+            }
+            return result.merged();
+        }
+    }
+
+    public static FileMerge merge(M3File base, M3File left, M3File right, int maxEdits) {
+        return merge(base, left, right, maxEdits, null);
+    }
+
+    /**
+     * Conservative three-way combination of the two independently bounded
+     * source-relative edit scripts. Conflicts never produce a partial file.
+     */
+    public static FileMerge merge(M3File base, M3File left, M3File right,
+                                  int maxEdits, ProgressMonitor monitor) {
+        Objects.requireNonNull(base, "base");
+        Objects.requireNonNull(left, "left");
+        Objects.requireNonNull(right, "right");
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        ThreeWayMerge.Result merged = ThreeWayMerge.merge(
+                base.text(), left.text(), right.text(), maxEdits, progress::checkCancelled);
+        Canonical hash = new Canonical("m3-cpu-file-three-way-merge-v1").text(Implementation.ROOT);
+        for (M3File source : List.of(base, left, right)) {
+            progress.checkCancelled();
+            hash.text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())
+                    .number(source.byteLength()).number(source.length());
+        }
+        hash.number(maxEdits).text(merged.status().name())
+                .number(merged.leftPatch().distance()).number(merged.rightPatch().distance())
+                .text(merged.leftPatch().sourceSha256()).text(merged.leftPatch().targetSha256())
+                .text(merged.rightPatch().sourceSha256()).text(merged.rightPatch().targetSha256());
+        hashMergeChanges(hash, merged.leftPatch().changes(), progress);
+        hashMergeChanges(hash, merged.rightPatch().changes(), progress);
+        hash.number(merged.conflictCount()).number(merged.conflictsComplete() ? 1 : 0);
+        for (ThreeWayMerge.Conflict conflict : merged.conflicts()) {
+            hashMergeChanges(hash, List.of(conflict.left(), conflict.right()), progress);
+        }
+        hashMergeChanges(hash, merged.mergedChanges(), progress);
+        if (merged.mergeable()) {
+            String output = merged.merged();
+            hash.number(output.length());
+            for (int index = 0; index < output.length(); index++) {
+                if ((index & 8191) == 0) progress.checkCancelled();
+                hash.number(output.charAt(index));
+            }
+        }
+        progress.worked(1);
+        progress.checkCancelled();
+        return new FileMerge(merged, base, hash.finish());
+    }
+
+    /** Independently recomputes all three file identities, scripts and witnesses. */
+    public static boolean verifyMerge(M3File base, M3File left, M3File right, int maxEdits,
+                                      FileMerge expected, ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        FileMerge actual = merge(base, left, right, maxEdits, monitor);
+        return actual.sha256().equals(expected.sha256())
+                && actual.status() == expected.status()
+                && actual.result().mergedChanges().equals(expected.result().mergedChanges())
+                && actual.result().conflicts().equals(expected.result().conflicts());
+    }
+
+    private static void hashMergeChanges(Canonical hash, List<BoundedDiff.Change> changes,
+                                         ProgressMonitor progress) {
+        hash.number(changes.size());
+        for (BoundedDiff.Change change : changes) {
+            progress.checkCancelled();
+            hash.number(change.start()).number(change.end()).number(change.inserted().length());
+            for (int unit = 0; unit < change.inserted().length(); unit++) {
+                if ((unit & 8191) == 0) progress.checkCancelled();
+                hash.number(change.inserted().charAt(unit));
+            }
+        }
+    }
+
+    /** Exact three-snapshot line merge with independently source-sealed line edit scripts. */
+    public static final class FileLineMerge {
+        private final LineThreeWayMerge.Result result;
+        private final String sourceUri;
+        private final String sourceRawSha256;
+        private final String sourceUtf16Sha256;
+        private final String sha256;
+
+        private FileLineMerge(LineThreeWayMerge.Result result, M3File source, String sha256) {
+            this.result = result;
+            this.sourceUri = source.uri().toASCIIString();
+            this.sourceRawSha256 = source.rawSha256();
+            this.sourceUtf16Sha256 = source.utf16Sha256();
+            this.sha256 = sha256;
+        }
+
+        public LineThreeWayMerge.Result result() { return result; }
+        public ThreeWayMerge.Status status() { return result.status(); }
+        public boolean mergeable() { return result.mergeable(); }
+        public int conflictCount() { return result.conflictCount(); }
+        public String sha256() { return sha256; }
+
+        /** Refuse a relocated or changed base before returning any merged text. */
+        public String apply(M3File original) {
+            Objects.requireNonNull(original, "original");
+            if (!sourceUri.equals(original.uri().toASCIIString())
+                    || !sourceRawSha256.equals(original.rawSha256())
+                    || !sourceUtf16Sha256.equals(original.utf16Sha256())) {
+                throw new IllegalArgumentException("line three-way base identity mismatch");
+            }
+            return result.merged();
+        }
+    }
+
+    public static FileLineMerge lineMerge(M3File base, M3File left, M3File right, int maxEdits) {
+        return lineMerge(base, left, right, maxEdits, null);
+    }
+
+    /**
+     * Independent line-level shortest scripts share the admitted base String.
+     * No file is reopened, no second text owner is retained, and ambiguous edits
+     * produce conflict witnesses rather than a partially applied result.
+     */
+    public static FileLineMerge lineMerge(M3File base, M3File left, M3File right,
+                                          int maxEdits, ProgressMonitor monitor) {
+        Objects.requireNonNull(base, "base");
+        Objects.requireNonNull(left, "left");
+        Objects.requireNonNull(right, "right");
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        LineThreeWayMerge.Result merged = LineThreeWayMerge.merge(
+                base.text(), left.text(), right.text(), maxEdits, progress::checkCancelled);
+        Canonical hash = new Canonical("m3-cpu-file-line-three-way-merge-v1").text(Implementation.ROOT);
+        for (M3File source : List.of(base, left, right)) {
+            progress.checkCancelled();
+            hash.text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())
+                    .number(source.byteLength()).number(source.length());
+        }
+        hash.number(maxEdits).text(merged.status().name());
+        for (LineDiff.Patch patch : List.of(merged.leftPatch(), merged.rightPatch())) {
+            progress.checkCancelled();
+            hash.number(patch.sourceLength()).number(patch.targetLength())
+                    .number(patch.sourceLines()).number(patch.targetLines()).number(patch.distance())
+                    .text(patch.sourceSha256()).text(patch.targetSha256());
+            hashLineMergeChanges(hash, patch.changes(), progress);
+        }
+        hash.number(merged.conflictCount()).number(merged.conflictsComplete() ? 1 : 0);
+        for (LineThreeWayMerge.Conflict conflict : merged.conflicts()) {
+            hashLineMergeChanges(hash, List.of(conflict.left(), conflict.right()), progress);
+        }
+        hashLineMergeChanges(hash, merged.mergedChanges(), progress);
+        if (merged.mergeable()) {
+            String output = merged.merged();
+            hash.number(output.length());
+            for (int index = 0; index < output.length(); index++) {
+                if ((index & 8191) == 0) progress.checkCancelled();
+                hash.number(output.charAt(index));
+            }
+        }
+        progress.worked(1);
+        progress.checkCancelled();
+        return new FileLineMerge(merged, base, hash.finish());
+    }
+
+    /** Replay and compare the ordered three-file identity and every line hunk. */
+    public static boolean verifyLineMerge(M3File base, M3File left, M3File right, int maxEdits,
+                                          FileLineMerge expected, ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        FileLineMerge actual = lineMerge(base, left, right, maxEdits, monitor);
+        return actual.sha256().equals(expected.sha256())
+                && actual.status() == expected.status()
+                && actual.result().mergedChanges().equals(expected.result().mergedChanges())
+                && actual.result().conflicts().equals(expected.result().conflicts());
+    }
+
+    private static void hashLineMergeChanges(Canonical hash, List<LineDiff.LineChange> changes,
+                                             ProgressMonitor progress) {
+        hash.number(changes.size());
+        for (LineDiff.LineChange change : changes) {
+            progress.checkCancelled();
+            hash.number(change.startLine()).number(change.endLine())
+                    .number(change.startUtf16()).number(change.endUtf16())
+                    .number(change.insertedLines()).number(change.inserted().length());
+            for (int unit = 0; unit < change.inserted().length(); unit++) {
+                if ((unit & 8191) == 0) progress.checkCancelled();
+                hash.number(change.inserted().charAt(unit));
+            }
+        }
+    }
+
+    /** Indexed UTF-16 characters, in source-offset order, rather than tokenized words. */
+    public static final int MAX_GRAM_SOURCE_UTF16 = 262_144;
+
+    public static final class GramIndex {
+        private final NGramIndex index;
+        private final String sha256;
+
+        private GramIndex(NGramIndex index, String sha256) {
+            this.index = index;
+            this.sha256 = sha256;
+        }
+        public int gramSize() { return index.gramSize(); }
+        public int windowCount() { return index.windowCount(); }
+        public int distinctCount() { return index.distinctCount(); }
+        public int frequency(String gram) { return index.frequency(gram); }
+        public int[] positions(String gram) { return index.positions(gram); }
+        public Map<String, Integer> counts() { return index.counts(); }
+        public String sha256() { return sha256; }
+    }
+
+    public static GramIndex gramIndex(M3File source, int gramSize) {
+        return gramIndex(source, gramSize, null);
+    }
+
+    /**
+     * Exact source-bound positional n-grams. The receipt commits to the M3File
+     * location, raw bytes, UTF-16 identity, gram size and every output offset.
+     * Rolling hashes are only candidate filters; source identity is not inferred.
+     */
+    public static GramIndex gramIndex(M3File source, int gramSize, ProgressMonitor monitor) {
+        Objects.requireNonNull(source, "source");
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        if (source.length() > MAX_GRAM_SOURCE_UTF16) {
+            throw new IllegalArgumentException("gram index source UTF-16 budget");
+        }
+        NGramIndex index = NGrams.prepare(source.text(), gramSize, progress::checkCancelled);
+        Canonical hash = new Canonical("m3-cpu-file-gram-index-v1").text(Implementation.ROOT)
+                .text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())
+                .number(source.byteLength()).number(source.length()).number(gramSize)
+                .number(index.windowCount()).number(index.distinctCount());
+        for (int ordinal = 0; ordinal < index.distinctCount(); ordinal++) {
+            progress.checkCancelled();
+            String gram = index.gramAt(ordinal);
+            hash.number(gram.length());
+            for (int unit = 0; unit < gram.length(); unit++) hash.number(gram.charAt(unit));
+            hash.number(index.frequencyAt(ordinal));
+            index.forEachPosition(ordinal, offset -> {
+                progress.checkCancelled();
+                hash.number(offset);
+            });
+        }
+        progress.worked(1);
+        progress.checkCancelled();
+        return new GramIndex(index, hash.finish());
+    }
+
+    /** Fresh computation checks the full positional result and exact file-bound receipt. */
+    public static boolean verifyGramIndex(M3File source, int gramSize, GramIndex expected,
+                                          ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        GramIndex actual = gramIndex(source, gramSize, monitor);
+        if (!actual.sha256().equals(expected.sha256()) || actual.windowCount() != expected.windowCount()
+                || actual.distinctCount() != expected.distinctCount()) return false;
+        for (String gram : expected.counts().keySet()) {
+            if (actual.frequency(gram) != expected.frequency(gram)
+                    || !Arrays.equals(actual.positions(gram), expected.positions(gram))) return false;
+        }
+        return true;
+    }
+
+    /** Signature inputs use the existing word breaker; this tighter cap bounds eager tokenization. */
+    public static final int MAX_SIGNATURE_SOURCE_UTF16 = 262_144;
+
+    public record SignatureResult(TextSignatures.Signature signature, String sha256) {
+        public SignatureResult { Objects.requireNonNull(signature); Objects.requireNonNull(sha256); }
+    }
+
+    public static SignatureResult signature(M3File source, int lanes) {
+        return signature(source, lanes, null);
+    }
+
+    /**
+     * Computes candidate-only SimHash/MinHash signals. It cannot prove two
+     * sources equal; exact M3File identities remain authoritative.
+     */
+    public static SignatureResult signature(M3File source, int lanes, ProgressMonitor monitor) {
+        Objects.requireNonNull(source, "source");
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        if (source.length() > MAX_SIGNATURE_SOURCE_UTF16) {
+            throw new IllegalArgumentException("signature source UTF-16 budget");
+        }
+        TextSignatures.Signature value = TextSignatures.compute(
+                WordTokenizer.words(source.text(), progress::checkCancelled), lanes,
+                progress::checkCancelled);
+        progress.checkCancelled();
+        Canonical hash = new Canonical("m3-cpu-text-signature-result-v1").text(Implementation.ROOT)
+                .text(source.uri().toASCIIString()).text(source.rawSha256()).text(source.utf16Sha256())
+                .number(source.length()).number(lanes).number(value.tokenCount())
+                .number(value.distinctCount()).number(value.simHash64());
+        for (long candidate : value.minHash64()) hash.number(candidate);
+        progress.worked(1);
+        progress.checkCancelled();
+        return new SignatureResult(value, hash.finish());
+    }
+
+    /** Replays the signature and compares its exact primitive lanes and file-bound receipt. */
+    public static boolean verifySignature(M3File source, int lanes, SignatureResult expected,
+                                          ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        SignatureResult actual = signature(source, lanes, monitor);
+        return actual.sha256().equals(expected.sha256())
+                && actual.signature().simHash64() == expected.signature().simHash64()
+                && Arrays.equals(actual.signature().minHash64(), expected.signature().minHash64());
+    }
+
+    /** Source-bound ranking over the incumbent UTF-16 tokenizer and primitive inverted index. */
+    public static final class Ranking {
+        private final Bm25Ranker.Result ranked;
+        private final String sha256;
+
+        private Ranking(Bm25Ranker.Result ranked, String sha256) {
+            this.ranked = ranked;
+            this.sha256 = sha256;
+        }
+        public int size() { return ranked.size(); }
+        public int totalMatches() { return ranked.totalMatches(); }
+        public boolean complete() { return ranked.complete(); }
+        public Bm25Ranker.Hit hit(int ordinal) { return ranked.hit(ordinal); }
+        public List<Bm25Ranker.Hit> hits() { return ranked.hits(); }
+        public String sha256() { return sha256; }
+    }
+
+    public static final int MAX_RANK_SOURCE_UTF16 = 4 * 1024 * 1024;
+
+    public static Ranking rank(List<M3File> sources, List<String> query, int maxResults) {
+        return rank(sources, query, maxResults, null);
+    }
+
+    /**
+     * Admission binds every ordered M3File URI/raw-byte/UTF-16 identity, the
+     * exact query tokens, prepared corpus SHA, result cap and scored ordinals.
+     * BM25 scores are approximate relevance signals, never source equality.
+     */
+    public static Ranking rank(List<M3File> sources, List<String> query, int maxResults,
+                               ProgressMonitor monitor) {
+        Objects.requireNonNull(sources, "sources");
+        Objects.requireNonNull(query, "query");
+        if (sources.size() > Bm25Ranker.MAX_DOCUMENTS) {
+            throw new IllegalArgumentException("rank source-count budget");
+        }
+        List<M3File> snapshot = List.copyOf(sources);
+        List<String> exactQuery = List.copyOf(query);
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        Canonical hash = new Canonical("m3-cpu-bm25-ranked-sources-v1").text(Implementation.ROOT)
+                .number(snapshot.size());
+        List<List<String>> documents = new ArrayList<>(snapshot.size());
+        int sourceUnits = 0;
+        for (int id = 0; id < snapshot.size(); id++) {
+            progress.checkCancelled();
+            M3File source = snapshot.get(id);
+            sourceUnits = Math.addExact(sourceUnits, source.length());
+            if (sourceUnits > MAX_RANK_SOURCE_UTF16) {
+                throw new IllegalArgumentException("rank combined UTF-16 source budget");
+            }
+            hash.number(id).text(source.uri().toASCIIString()).text(source.rawSha256())
+                    .text(source.utf16Sha256()).number(source.byteLength()).number(source.length());
+            documents.add(WordTokenizer.words(source.text(), progress::checkCancelled));
+        }
+        Bm25Ranker.Prepared corpus = Bm25Ranker.prepare(
+                documents, Bm25Ranker.Parameters.defaults(), progress::checkCancelled);
+        Bm25Ranker.Result ranked = corpus.rank(exactQuery, maxResults, progress::checkCancelled);
+        hash.text(corpus.sha256()).number(maxResults).number(ranked.totalMatches())
+                .number(ranked.complete() ? 1 : 0).number(exactQuery.size());
+        for (String token : exactQuery) {
+            progress.checkCancelled();
+            hash.number(token.length());
+            for (int i = 0; i < token.length(); i++) {
+                if ((i & 4095) == 0) progress.checkCancelled();
+                hash.number(token.charAt(i));
+            }
+        }
+        hash.number(ranked.size());
+        for (int id = 0; id < ranked.size(); id++) {
+            progress.checkCancelled();
+            Bm25Ranker.Hit hit = ranked.hit(id);
+            hash.number(hit.documentId()).number(Double.doubleToLongBits(hit.score()));
+        }
+        progress.worked(1);
+        progress.checkCancelled();
+        return new Ranking(ranked, hash.finish());
+    }
+
+    /** Deterministic re-execution checks the source-bound receipt and exact output lanes. */
+    public static boolean verifyRank(List<M3File> sources, List<String> query, int maxResults,
+                                     Ranking expected, ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        Ranking actual = rank(sources, query, maxResults, monitor);
+        return actual.sha256().equals(expected.sha256())
+                && actual.totalMatches() == expected.totalMatches()
+                && actual.hits().equals(expected.hits());
+    }
+
+    /**
+     * Read-only, parent-owned BM25 posting plan bound to one ordered source corpus.
+     * It deliberately retains neither the input M3File objects nor their decoded
+     * String/text token lists after preparation: only the incumbent BM25 index
+     * and a canonical immutable source identity survive between queries.
+     */
+    public static final class PreparedRanking {
+        private final Bm25Ranker.Prepared corpus;
+        private final String sourceSha256;
+
+        private PreparedRanking(Bm25Ranker.Prepared corpus, String sourceSha256) {
+            this.corpus = corpus;
+            this.sourceSha256 = sourceSha256;
+        }
+
+        public int documentCount() { return corpus.documentCount(); }
+        public double averageDocumentLength() { return corpus.averageDocumentLength(); }
+        public String corpusSha256() { return corpus.sha256(); }
+        public String sourceSha256() { return sourceSha256; }
+
+        public Ranking rank(List<String> query, int maxResults) {
+            return rank(query, maxResults, null);
+        }
+
+        /**
+         * One query uses the original prepared primitive postings and BM25 scoring
+         * without repeated file decoding, tokenization, or corpus preparation.
+         * Queries are independently copied; the borrowed monitor is never ended.
+         */
+        public Ranking rank(List<String> query, int maxResults, ProgressMonitor monitor) {
+            List<String> immutableQuery = List.copyOf(Objects.requireNonNull(query, "query"));
+            ProgressMonitor progress = effective(monitor);
+            progress.checkCancelled();
+            Bm25Ranker.Result ranked = corpus.rank(immutableQuery, maxResults, progress::checkCancelled);
+            Canonical hash = new Canonical("m3-cpu-bm25-prepared-query-v1").text(Implementation.ROOT)
+                    .text(sourceSha256).text(corpus.sha256()).number(maxResults)
+                    .number(ranked.totalMatches()).number(ranked.complete() ? 1 : 0)
+                    .number(immutableQuery.size());
+            for (String token : immutableQuery) {
+                progress.checkCancelled();
+                hash.number(token.length());
+                for (int i = 0; i < token.length(); i++) {
+                    if ((i & 4095) == 0) progress.checkCancelled();
+                    hash.number(token.charAt(i));
+                }
+            }
+            hash.number(ranked.size());
+            for (int id = 0; id < ranked.size(); id++) {
+                progress.checkCancelled();
+                Bm25Ranker.Hit hit = ranked.hit(id);
+                hash.number(hit.documentId()).number(Double.doubleToLongBits(hit.score()));
+            }
+            progress.worked(1);
+            progress.checkCancelled();
+            return new Ranking(ranked, hash.finish());
+        }
+
+        /** Same prepared graph replay; full source re-admission is a separate entry point. */
+        public boolean verify(List<String> query, int maxResults, Ranking expected,
+                              ProgressMonitor monitor) {
+            Objects.requireNonNull(expected, "expected");
+            Ranking actual = rank(query, maxResults, monitor);
+            return actual.sha256().equals(expected.sha256())
+                    && actual.totalMatches() == expected.totalMatches()
+                    && actual.complete() == expected.complete()
+                    && actual.hits().equals(expected.hits());
+        }
+    }
+
+    public static PreparedRanking prepareRanking(List<M3File> sources) {
+        return prepareRanking(sources, null);
+    }
+
+    /**
+     * One deterministic admission pass over immutable M3File source snapshots.
+     * Subsequent calls to PreparedRanking.rank perform only query-time work.
+     * The previous CpuTools.rank direct API and v1 receipts are left unchanged.
+     */
+    public static PreparedRanking prepareRanking(List<M3File> sources, ProgressMonitor monitor) {
+        Objects.requireNonNull(sources, "sources");
+        if (sources.size() > Bm25Ranker.MAX_DOCUMENTS) {
+            throw new IllegalArgumentException("prepared rank source-count budget");
+        }
+        List<M3File> snapshot = List.copyOf(sources);
+        ProgressMonitor progress = effective(monitor);
+        progress.checkCancelled();
+        Canonical hash = new Canonical("m3-cpu-bm25-prepared-files-v1").text(Implementation.ROOT)
+                .number(snapshot.size());
+        List<List<String>> documents = new ArrayList<>(snapshot.size());
+        int units = 0;
+        for (int id = 0; id < snapshot.size(); id++) {
+            progress.checkCancelled();
+            M3File source = snapshot.get(id);
+            units = Math.addExact(units, source.length());
+            if (units > MAX_RANK_SOURCE_UTF16) {
+                throw new IllegalArgumentException("prepared rank UTF-16 source budget");
+            }
+            hash.number(id).text(source.uri().toASCIIString()).text(source.rawSha256())
+                    .text(source.utf16Sha256()).number(source.byteLength()).number(source.length());
+            documents.add(WordTokenizer.words(source.text(), progress::checkCancelled));
+        }
+        Bm25Ranker.Prepared prepared = Bm25Ranker.prepare(
+                documents, Bm25Ranker.Parameters.defaults(), progress::checkCancelled);
+        hash.text(prepared.sha256()).number(prepared.documentCount())
+                .number(Double.doubleToLongBits(prepared.parameters().k1()))
+                .number(Double.doubleToLongBits(prepared.parameters().b()));
+        progress.worked(1);
+        progress.checkCancelled();
+        return new PreparedRanking(prepared, hash.finish());
+    }
+
+    /**
+     * Independent re-execution admits fresh source identities and rebuilds the
+     * prepared index before recomputing one query. A saved SHA alone is not proof.
+     */
+    public static boolean verifyPreparedRank(List<M3File> sources, List<String> query, int maxResults,
+                                             Ranking expected, ProgressMonitor monitor) {
+        Objects.requireNonNull(expected, "expected");
+        PreparedRanking prepared = prepareRanking(sources, monitor);
+        return prepared.verify(query, maxResults, expected, monitor);
     }
 
     /**

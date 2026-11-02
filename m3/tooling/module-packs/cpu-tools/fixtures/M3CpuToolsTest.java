@@ -168,6 +168,105 @@ public final class M3CpuToolsTest {
         Files.copy(path, copied);
         check(!CpuTools.sourceReceipt(source, result).equals(CpuTools.sourceReceipt(M3File.load(copied), result)),
                 "source receipt binds file location as well as bytes");
+        Path editTarget = work.resolve("diff-target.txt");
+        Files.writeString(editTarget, "abXaba\ud83d\ude42\r\n", StandardCharsets.UTF_8);
+        M3File target = M3File.load(editTarget);
+        var diff = CpuTools.diff(source, target, 1);
+        check(diff.complete() && diff.distance() == 1
+                && diff.patch().changes().size() == 1, "bounded minimal UTF-16 file edit");
+        check(diff.apply(source).equals(target.text())
+                && CpuTools.verifyDiff(source, target, 1, diff, null), "source-bound minimal patch and replay");
+        var indexed = CpuTools.lineDiff(source, target, 2);
+        check(indexed.complete() && indexed.distance() == 2
+                && indexed.patch().sourceLines() == 1 && indexed.patch().targetLines() == 1,
+                "line indexed edit replaces one full source line");
+        check(indexed.apply(source).equals(target.text())
+                && CpuTools.verifyLineDiff(source, target, 2, indexed, null),
+                "line indexed replay reconstructs exact source text");
+        check(!CpuTools.verifyLineDiff(source, target, 3, indexed, null)
+                && !CpuTools.verifyLineDiff(M3File.load(copied), target, 2, indexed, null),
+                "line receipt seals edit budget and URI");
+        var missedLine = CpuTools.lineDiff(source, target, 1);
+        check(!missedLine.complete() && missedLine.patch().changes().isEmpty(),
+                "line edit distance cannot claim a partial patch");
+        expect(IllegalStateException.class, () -> missedLine.apply(source));
+        check(!CpuTools.verifyDiff(source, target, 2, diff, null), "edit budget included in receipt");
+        check(!CpuTools.verifyDiff(M3File.load(copied), target, 1, diff, null),
+                "original file URI included in receipt");
+        var missed = CpuTools.diff(source, target, 0);
+        check(!missed.complete() && missed.distance() == -1 && missed.patch().changes().isEmpty(),
+                "insufficient edit budget is explicitly incomplete");
+        expect(IllegalStateException.class, () -> missed.apply(source));
+        var diffMonitor = new CountMonitor();
+        check(CpuTools.diff(source, target, 1, diffMonitor).sha256().equals(diff.sha256())
+                && diffMonitor.work == 1 && diffMonitor.finished == 0,
+                "borrowed diff monitor and stable receipt");
+        diffMonitor.cancelled = true;
+        expect(CancellationException.class, () -> CpuTools.diff(source, target, 1, diffMonitor));
+        var indexedMonitor = new CountMonitor();
+        check(CpuTools.lineDiff(source, target, 2, indexedMonitor).sha256().equals(indexed.sha256())
+                && indexedMonitor.work == 1 && indexedMonitor.finished == 0,
+                "line indexed progress is borrowed and deterministic");
+        indexedMonitor.cancelled = true;
+        expect(CancellationException.class, () -> CpuTools.lineDiff(source, target, 2, indexedMonitor));
+        Path mergeOtherPath = work.resolve("merge-independent.txt");
+        Files.writeString(mergeOtherPath, "#ababa\ud83d\ude42\r\n", StandardCharsets.UTF_8);
+        M3File mergeOther = M3File.load(mergeOtherPath);
+        var combined = CpuTools.merge(source, target, mergeOther, 1);
+        check(combined.mergeable() && combined.conflictCount() == 0
+                && combined.apply(source).equals("#abXaba\ud83d\ude42\r\n"),
+                "two nonoverlapping file edits preserve their superset");
+        check(CpuTools.verifyMerge(source, target, mergeOther, 1, combined, null),
+                "three-way M3File receipt replays exact scripts");
+        check(!CpuTools.verifyMerge(source, mergeOther, target, 1, combined, null)
+                && !CpuTools.verifyMerge(M3File.load(copied), target, mergeOther, 1, combined, null),
+                "left/right ordering and original base location are source-bound");
+        Path mergeConflictPath = work.resolve("merge-conflict.txt");
+        Files.writeString(mergeConflictPath, "abYaba\ud83d\ude42\r\n", StandardCharsets.UTF_8);
+        var conflict = CpuTools.merge(source, target, M3File.load(mergeConflictPath), 1);
+        check(!conflict.mergeable() && conflict.conflictCount() != 0,
+                "identical-position divergent inserts require review");
+        expect(IllegalStateException.class, () -> conflict.apply(source));
+        check(!CpuTools.merge(source, target, mergeOther, 0).result().complete(),
+                "budget exhaustion cannot silently choose a side");
+        var mergeMonitor = new CountMonitor();
+        check(CpuTools.merge(source, target, mergeOther, 1, mergeMonitor).sha256().equals(combined.sha256())
+                && mergeMonitor.work == 1 && mergeMonitor.finished == 0,
+                "three-way progress is borrowed and deterministic");
+        mergeMonitor.cancelled = true;
+        expect(CancellationException.class, () -> CpuTools.merge(source, target, mergeOther, 1, mergeMonitor));
+        Path lineBasePath = work.resolve("line-base.txt");
+        Path lineLeftPath = work.resolve("line-left.txt");
+        Path lineRightPath = work.resolve("line-right.txt");
+        Path lineConflictPath = work.resolve("line-conflict.txt");
+        Files.writeString(lineBasePath, "first\r\nsecond\n", StandardCharsets.UTF_8);
+        Files.writeString(lineLeftPath, "FIRST\r\nsecond\n", StandardCharsets.UTF_8);
+        Files.writeString(lineRightPath, "first\r\nSECOND\n", StandardCharsets.UTF_8);
+        Files.writeString(lineConflictPath, "OTHER\r\nsecond\n", StandardCharsets.UTF_8);
+        M3File lineBase = M3File.load(lineBasePath), lineLeft = M3File.load(lineLeftPath),
+                lineRight = M3File.load(lineRightPath);
+        var lineMerged = CpuTools.lineMerge(lineBase, lineLeft, lineRight, 2);
+        check(lineMerged.mergeable() && lineMerged.result().mergedChanges().size() == 2
+                && lineMerged.apply(lineBase).equals("FIRST\r\nSECOND\n"),
+                "line-granular independent edits preserve CRLF and LF");
+        check(CpuTools.verifyLineMerge(lineBase, lineLeft, lineRight, 2, lineMerged, null)
+                && !CpuTools.verifyLineMerge(lineBase, lineRight, lineLeft, 2, lineMerged, null)
+                && !CpuTools.verifyLineMerge(M3File.load(copied), lineLeft, lineRight, 2, lineMerged, null),
+                "ordered source identity and line budget seal three-way line receipt");
+        var lineConflict = CpuTools.lineMerge(lineBase, lineLeft, M3File.load(lineConflictPath), 2);
+        check(!lineConflict.mergeable() && lineConflict.conflictCount() == 1,
+                "same-base-line replacements conflict explicitly");
+        expect(IllegalStateException.class, () -> lineConflict.apply(lineBase));
+        check(!CpuTools.lineMerge(lineBase, lineLeft, lineRight, 1).result().complete(),
+                "insufficient line budget never returns guessed merge");
+        var lineMergeMonitor = new CountMonitor();
+        check(CpuTools.lineMerge(lineBase, lineLeft, lineRight, 2, lineMergeMonitor).sha256()
+                .equals(lineMerged.sha256()) && lineMergeMonitor.work == 1
+                && lineMergeMonitor.finished == 0,
+                "line merge uses a borrowed monitor without completing it");
+        lineMergeMonitor.cancelled = true;
+        expect(CancellationException.class,
+                () -> CpuTools.lineMerge(lineBase, lineLeft, lineRight, 2, lineMergeMonitor));
         Files.writeString(path, "changed on disk");
         check(session.execute(List.of("text.identity"), source).equals(result), "execution uses admitted snapshot without reopen");
         var changed = M3File.load(path);
@@ -187,11 +286,191 @@ public final class M3CpuToolsTest {
         check(CpuTools.verifyLiteral(source, "aba", 1, hits, null), "search re-execution receipt");
         check(!CpuTools.verifyLiteral(source, "aba", 2, hits, null), "cap is receipt-bound");
         check(!CpuTools.verifyLiteral(changed, "aba", 1, hits, null), "source is receipt-bound");
+        List<String> patterns = List.of("aba", "ba", "\ud83d\ude42");
+        var many = CpuTools.multiLiteral(source, patterns, 3);
+        check(many.size() == 3 && !many.complete(), "multi-literal capped prefix");
+        check(many.hits().get(0).equals(new com.m3.tools.text.search.MultiLiteralSearch.Hit(0, 0, 3))
+                && many.hits().get(1).equals(new com.m3.tools.text.search.MultiLiteralSearch.Hit(1, 1, 3)),
+                "multi-literal suffix and UTF-16 coordinates");
+        check(CpuTools.verifyMultiLiteral(source, patterns, 3, many, null), "multi-literal replay");
+        check(!CpuTools.verifyMultiLiteral(source, patterns, 4, many, null), "multi-literal cap binding");
+        check(!CpuTools.verifyMultiLiteral(changed, patterns, 3, many, null), "multi-literal file binding");
+        List<M3File> searchableFiles = List.of(source, target, changed);
+        List<String> corpusPatterns = List.of("aba", "ba", "\ud83d\ude42");
+        var corpus = CpuTools.corpusLiteral(searchableFiles, corpusPatterns, 100);
+        check(corpus.complete() && corpus.scannedFiles() == 3 && corpus.size() > 5,
+                "one prepared automaton scans all M3File text owners without joining sources");
+        check(corpus.hit(0).equals(new com.m3.tools.text.search.MultiLiteralSearch.CorpusHit(0, 0, 0, 3))
+                && corpus.hit(1).equals(new com.m3.tools.text.search.MultiLiteralSearch.CorpusHit(0, 1, 1, 3)),
+                "global file order and local UTF-16 coordinates preserve overlapping literal order");
+        check(CpuTools.verifyCorpusLiteral(searchableFiles, corpusPatterns, 100, corpus, null)
+                && corpus.sha256().matches("[0-9a-f]{64}"),
+                "all ordered file hashes, query identity and result coordinates reexecute");
+        check(!CpuTools.verifyCorpusLiteral(List.of(target, source, changed), corpusPatterns, 100, corpus, null)
+                && !CpuTools.verifyCorpusLiteral(List.of(M3File.load(copied), target, changed),
+                corpusPatterns, 100, corpus, null)
+                && !CpuTools.verifyCorpusLiteral(searchableFiles, List.of("ba", "aba"), 100, corpus, null),
+                "file ordinals, same-byte alternate URI, query order are receipt-bound");
+        var cappedCorpus = CpuTools.corpusLiteral(searchableFiles, corpusPatterns, 2);
+        check(!cappedCorpus.complete() && cappedCorpus.scannedFiles() == 1
+                && cappedCorpus.hits().equals(corpus.hits().subList(0, 2)),
+                "one-extra-hit truncation preserves exact global search prefix");
+        var emptyCorpus = CpuTools.corpusLiteral(List.of(), corpusPatterns, 0);
+        check(emptyCorpus.complete() && emptyCorpus.scannedFiles() == 0 && emptyCorpus.size() == 0,
+                "empty corpus has no false incomplete result");
+        var corpusMonitor = new CountMonitor();
+        check(CpuTools.corpusLiteral(searchableFiles, corpusPatterns, 100, corpusMonitor).sha256()
+                .equals(corpus.sha256()) && corpusMonitor.work == 1 && corpusMonitor.finished == 0,
+                "corpus result deterministic with borrowed progress monitor");
+        corpusMonitor.cancelled = true;
+        expect(CancellationException.class,
+                () -> CpuTools.corpusLiteral(searchableFiles, corpusPatterns, 100, corpusMonitor));
+        var regexCorpus = CpuTools.regexCorpus(searchableFiles, "(?=ba)", 100);
+        check(regexCorpus.complete() && regexCorpus.scannedFiles() == 3 && regexCorpus.size() == 3,
+                "one compiled M3Regex/JDK Pattern is reused with independent file-local matcher regions");
+        check(regexCorpus.hit(0).equals(new com.m3.tools.text.regex.RegexMatcher.CorpusHit(0, 1, 1))
+                && regexCorpus.hit(1).equals(new com.m3.tools.text.regex.RegexMatcher.CorpusHit(0, 3, 3))
+                && regexCorpus.hit(2).equals(new com.m3.tools.text.regex.RegexMatcher.CorpusHit(1, 4, 4)),
+                "zero-width overlapping regex observations preserve source-local UTF-16 coordinates");
+        check(regexCorpus.sha256().matches("[0-9a-f]{64}")
+                && CpuTools.verifyRegexCorpus(searchableFiles, "(?=ba)", 100, regexCorpus, null),
+                "compiled regex result is exactly source- and regex-bound");
+        check(!CpuTools.verifyRegexCorpus(searchableFiles, "ba", 100, regexCorpus, null)
+                && !CpuTools.verifyRegexCorpus(List.of(target, source, changed),
+                "(?=ba)", 100, regexCorpus, null)
+                && !CpuTools.verifyRegexCorpus(List.of(M3File.load(copied), target, changed),
+                "(?=ba)", 100, regexCorpus, null),
+                "regex syntax, file ordinals and source URI are part of receipt identity");
+        var regexPrefix = CpuTools.regexCorpus(searchableFiles, "(?=ba)", 2);
+        check(!regexPrefix.complete() && regexPrefix.scannedFiles() == 2
+                && regexPrefix.hits().equals(regexCorpus.hits().subList(0, 2)),
+                "one-more-regex-hit completeness crosses file boundary without joining source text");
+        check(CpuTools.regexCorpus(List.of(), "^", 0).complete()
+                && CpuTools.regexCorpus(searchableFiles, "missing", 0).complete(),
+                "empty or no-match regex corpus reports truthful zero-cap completeness");
+        var regexProgress = new CountMonitor();
+        check(CpuTools.regexCorpus(searchableFiles, "(?=ba)", 100, regexProgress).sha256()
+                .equals(regexCorpus.sha256()) && regexProgress.work == 1 && regexProgress.finished == 0,
+                "prepared regex corpus borrows progress without completion and yields stable SHA");
+        regexProgress.cancelled = true;
+        expect(CancellationException.class,
+                () -> CpuTools.regexCorpus(searchableFiles, "(?=ba)", 100, regexProgress));
+        expect(IllegalArgumentException.class,
+                () -> CpuTools.regexCorpus(searchableFiles, "a", -1));
+        expect(java.util.regex.PatternSyntaxException.class,
+                () -> CpuTools.regexCorpus(searchableFiles, "[", 1));
+        var cachedRank = CpuTools.prepareRanking(searchableFiles);
+        check(cachedRank.documentCount() == 3 && cachedRank.corpusSha256().matches("[0-9a-f]{64}")
+                && cachedRank.sourceSha256().matches("[0-9a-f]{64}"),
+                "BM25 source admission and posting construction occur once for multiple queries");
+        for (List<String> query : List.of(List.of("ababa"), List.of("changed"),
+                List.of("ababa", "changed"), List.<String>of())) {
+            for (int limit : new int[]{0, 1, 2, 3}) {
+                var ranked = cachedRank.rank(query, limit);
+                var oneShot = CpuTools.rank(searchableFiles, query, limit);
+                check(ranked.totalMatches() == oneShot.totalMatches()
+                        && ranked.complete() == oneShot.complete()
+                        && ranked.hits().equals(oneShot.hits()),
+                        "cached source postings exactly match original independent one-shot BM25 computation");
+                check(cachedRank.verify(query, limit, ranked, null)
+                        && CpuTools.verifyPreparedRank(searchableFiles, query, limit, ranked, null),
+                        "both query-only and full source re-admission verify score/ordinal receipts");
+            }
+        }
+        var rankReceipt = cachedRank.rank(List.of("ababa"), 2);
+        check(!cachedRank.verify(List.of("changed"), 2, rankReceipt, null)
+                && !CpuTools.verifyPreparedRank(List.of(target, source, changed),
+                List.of("ababa"), 2, rankReceipt, null)
+                && !CpuTools.verifyPreparedRank(List.of(M3File.load(copied), target, changed),
+                List.of("ababa"), 2, rankReceipt, null),
+                "prepared rank source/URI order and query data are identity-bound");
+        var cachedMonitor = new CountMonitor();
+        var monitoredPlan = CpuTools.prepareRanking(searchableFiles, cachedMonitor);
+        check(monitoredPlan.sourceSha256().equals(cachedRank.sourceSha256())
+                && cachedMonitor.work == 1 && cachedMonitor.finished == 0,
+                "source-only preparation borrows progress and creates a canonical source digest");
+        check(monitoredPlan.rank(List.of("ababa"), 2, cachedMonitor).hits().equals(rankReceipt.hits())
+                && cachedMonitor.work == 2 && cachedMonitor.finished == 0,
+                "query execution reuses prepared index and borrows independent progress");
+        cachedMonitor.cancelled = true;
+        expect(CancellationException.class,
+                () -> monitoredPlan.rank(List.of("ababa"), 2, cachedMonitor));
+        expect(CancellationException.class,
+                () -> CpuTools.prepareRanking(searchableFiles, cachedMonitor));
+        var grams = CpuTools.gramIndex(source, 2);
+        check(grams.sha256().matches("[0-9a-f]{64}") && grams.gramSize() == 2
+                && grams.windowCount() == source.length() - 1, "source-bound indexed gram receipt");
+        check(Arrays.equals(grams.positions("ab"), new int[]{0, 2})
+                && Arrays.equals(grams.positions("ba"), new int[]{1, 3})
+                && Arrays.equals(grams.positions("\ud83d\ude42"), new int[]{5})
+                && grams.frequency("ab") == 2, "physical UTF-16 gram coordinates");
+        check(grams.counts().equals(com.m3.tools.text.ngram.NGrams.count(source.text(), 2)),
+                "gram source oracle parity");
+        int[] mutableGrams = grams.positions("ab");
+        mutableGrams[0] = 999;
+        check(grams.positions("ab")[0] == 0, "gram primitive positions detached");
+        check(CpuTools.verifyGramIndex(source, 2, grams, null), "exact gram replay");
+        check(!CpuTools.verifyGramIndex(source, 3, grams, null), "gram size receipt binding");
+        check(!CpuTools.verifyGramIndex(changed, 2, grams, null), "gram file byte binding");
+        check(!CpuTools.verifyGramIndex(M3File.load(copied), 2, grams, null),
+                "gram file URI binding for identical bytes");
+        expect(IllegalArgumentException.class, () -> CpuTools.gramIndex(source, 0));
+        expect(IllegalArgumentException.class, () -> CpuTools.gramIndex(source, 65));
+        expect(NullPointerException.class, () -> CpuTools.gramIndex(null, 2));
+        var lexicon = CpuTools.affixIndex(source);
+        check(lexicon.sha256().matches("[0-9a-f]{64}")
+                && lexicon.lexiconSha256().matches("[0-9a-f]{64}"), "file-bound lexicon identity");
+        check(lexicon.tokenCount() == 1 && lexicon.distinctCount() == 1
+                && lexicon.wordAt(0).equals("ababa") && lexicon.contains("ababa"),
+                "reuse JDK word breaking without a second payload owner");
+        check(lexicon.countPrefix("aba") == 1 && lexicon.countSuffix("ba") == 1,
+                "file lexicon prefix/suffix queries");
+        check(lexicon.prefix("a", 0).totalMatches() == 1 && !lexicon.prefix("a", 0).complete(),
+                "file lexicon capped query");
+        check(CpuTools.verifyAffixIndex(source, lexicon, null), "exact lexicon replay");
+        check(!CpuTools.verifyAffixIndex(changed, lexicon, null), "lexicon file byte binding");
+        check(!CpuTools.verifyAffixIndex(M3File.load(copied), lexicon, null),
+                "lexicon file URI binding for identical bytes");
+        expect(NullPointerException.class, () -> CpuTools.affixIndex(null));
+        var signal = CpuTools.signature(source, 16);
+        check(signal.sha256().matches("[0-9a-f]{64}"), "signature receipt format");
+        check(CpuTools.verifySignature(source, 16, signal, null), "signature exact-lane replay");
+        check(!CpuTools.verifySignature(changed, 16, signal, null), "signature source binding");
+        check(!CpuTools.verifySignature(source, 15, signal, null), "signature lane binding");
+        long[] mutableSignature = signal.signature().minHash64();
+        mutableSignature[0] ^= 1L;
+        check(!Arrays.equals(signal.signature().minHash64(), mutableSignature),
+                "signature primitive lanes are detached");
+        List<M3File> rankedSources = List.of(source, changed);
+        var ranking = CpuTools.rank(rankedSources, List.of("ababa"), 1);
+        check(ranking.size() == 1 && ranking.totalMatches() == 1 && ranking.complete()
+                && ranking.hit(0).documentId() == 0 && ranking.hit(0).score() > 0.0d,
+                "source-bound BM25 score and document ordinal");
+        check(ranking.sha256().matches("[0-9a-f]{64}"), "BM25 source receipt format");
+        check(CpuTools.verifyRank(rankedSources, List.of("ababa"), 1, ranking, null),
+                "BM25 exact rank and receipt replay");
+        check(!CpuTools.verifyRank(List.of(changed, source), List.of("ababa"), 1, ranking, null),
+                "BM25 receipt binds corpus order");
+        check(!CpuTools.verifyRank(List.of(M3File.load(copied), changed), List.of("ababa"), 1, ranking, null),
+                "BM25 receipt binds source URI even for byte-identical documents");
+        check(!CpuTools.verifyRank(rankedSources, List.of("ababa", "ababa"), 1, ranking, null),
+                "BM25 receipt binds exact query multiplicity despite set-like scoring");
+        var cappedRanking = CpuTools.rank(rankedSources, List.of("ababa"), 0);
+        check(cappedRanking.size() == 0 && cappedRanking.totalMatches() == 1 && !cappedRanking.complete(),
+                "BM25 zero-cap completeness proof");
+        expect(IllegalArgumentException.class, () -> CpuTools.rank(rankedSources, List.of("ababa"), -1));
+        expect(NullPointerException.class, () -> CpuTools.rank(Arrays.asList(source, null), List.of("a"), 1));
+        expect(IllegalArgumentException.class, () -> CpuTools.multiLiteral(source, List.of(""), 2));
         expect(IllegalArgumentException.class, () -> CpuTools.literal(source, "", -1));
         expect(IllegalArgumentException.class, () -> CpuTools.literal(source, "", 1_000_001));
         CountMonitor cancelled = new CountMonitor();
         cancelled.cancelled = true;
         expect(CancellationException.class, () -> CpuTools.literal(source, "aba", 2, cancelled));
+        expect(CancellationException.class, () -> CpuTools.multiLiteral(source, patterns, 2, cancelled));
+        expect(CancellationException.class, () -> CpuTools.signature(source, 16, cancelled));
+        expect(CancellationException.class, () -> CpuTools.gramIndex(source, 2, cancelled));
+        expect(CancellationException.class, () -> CpuTools.affixIndex(source, cancelled));
+        expect(CancellationException.class, () -> CpuTools.rank(rankedSources, List.of("ababa"), 1, cancelled));
         cancelled.cancelled = false;
         cancelled.cancelAfterWork = true;
         expect(CancellationException.class, () -> CpuTools.literal(source, "aba", 2, cancelled));
@@ -246,6 +525,19 @@ public final class M3CpuToolsTest {
         check(run.equals(invoke("--run", "text.sort,text.uniq", text.toString())), "CLI source receipt repeat");
         var find = invoke("--find", "b", text.toString(), "1");
         check(find.code == 0 && find.output.equals("0\n") && find.error.contains("complete=false"), "CLI explicit search truncation");
+        Path patterns = work.resolve("needles.txt");
+        Files.writeString(patterns, "a\nb\n");
+        var findAny = invoke("--find-any", patterns.toString(), text.toString(), "2");
+        check(findAny.code == 0 && findAny.output.equals("1\t0\t1\n0\t2\t3\n")
+                && findAny.error.contains("complete=false") && findAny.error.contains("coordinates=UTF-16"),
+                "CLI multi-literal source/needle receipts");
+        check(findAny.equals(invoke("--find-any", patterns.toString(), text.toString(), "2")),
+                "CLI repeated multi-literal identity");
+        var signature = invoke("--signature", text.toString(), "16");
+        check(signature.code == 0 && signature.output.contains("simhash64\t")
+                && signature.output.lines().filter(line -> line.startsWith("minhash64\t")).count() == 16
+                && signature.error.contains("approximate=true"), "CLI signature evidence");
+        check(signature.equals(invoke("--signature", text.toString(), "16")), "CLI repeated signature");
         var invalid = invoke("--run", "missing", work.resolve("absent.txt").toString());
         check(invalid.code == 1 && invalid.error.contains("unknown binding"), "binding refusal precedes file read");
         Files.writeString(text, "1\n0\t1\n");
