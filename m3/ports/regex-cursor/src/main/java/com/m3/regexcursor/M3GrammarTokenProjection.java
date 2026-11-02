@@ -57,7 +57,7 @@ final class M3GrammarTokenProjection {
      */
     static M3TokenCursor projectCompleteCursor(M3StaticGrammarLexicon grammar,
             CharSequence source, int[] starts, int[] ends, byte[] admission) {
-        return M3TokenCursor.of(projectComplete(grammar, source, starts, ends, admission));
+        return M3TokenCursor.ownedProjection(projectComplete(grammar, source, starts, ends, admission));
     }
 
     /**
