@@ -24,13 +24,13 @@ jobs:
         run: |
           set -euo pipefail
           for module in apache-hashed-map apache-linked-map apache-lru-map; do
-            ./mvnw -B -ntp -f "m3/collections/implementations/$module/pom.xml" -DskipTests package
+            mvn -B -ntp -f "m3/collections/implementations/$module/pom.xml" -DskipTests package
           done
       - name: Run Java 21 / interpreter contract and storage-lane probes
         shell: bash
         run: |
           set -euo pipefail
-          ./mvnw -B -ntp -f m3/collections/implementations/apache-hashed-map/pom.xml \
+          mvn -B -ntp -f m3/collections/implementations/apache-hashed-map/pom.xml \
             dependency:build-classpath "-Dmdep.outputFile=$RUNNER_TEMP/m3-apache-provider.cp"
           CP="$(cat "$RUNNER_TEMP/m3-apache-provider.cp")"
           for module in apache-hashed-map apache-linked-map apache-lru-map; do
