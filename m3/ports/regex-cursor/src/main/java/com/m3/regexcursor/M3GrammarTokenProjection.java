@@ -46,6 +46,21 @@ final class M3GrammarTokenProjection {
     }
 
     /**
+     * Bind one complete lexical generation directly to the existing token-regex cursor.
+     * The newly projected primitive lane is handed to the cursor once and never exposed
+     * to the caller. This preserves the cursor's precomputed presence facts: unlike a
+     * caller-supplied {@code int[]}, no external alias can subsequently mutate its IDs.
+     * The underlying text and incoming span/admission arrays are not retained or copied.
+     *
+     * <p>Admission is fail-closed through {@link #projectComplete}: zero cannot become
+     * a phantom {@code <0>} token-regex match. An empty generation remains valid.</p>
+     */
+    static M3TokenCursor projectCompleteCursor(M3StaticGrammarLexicon grammar,
+            CharSequence source, int[] starts, int[] ends, byte[] admission) {
+        return M3TokenCursor.of(projectComplete(grammar, source, starts, ends, admission));
+    }
+
+    /**
      * Project exact lexeme IDs into one new primitive lane, preserving token index alignment.
      * Zero denotes no admitted exact lexeme; it is not a canonical lexeme dictionary ID.
      *
