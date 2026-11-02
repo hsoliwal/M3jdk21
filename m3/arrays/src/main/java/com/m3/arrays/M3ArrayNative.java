@@ -34,11 +34,11 @@ public final class M3ArrayNative {
         // After both range checks, identical slices need no heap-region reads or JNI call.
         if (left == right && leftStart == rightStart) return 0;
         if (loaded) return nativeCompareUtf16(left, leftStart, right, rightStart, count);
-        for (int index = 0; index < count; index++) {
-            int difference = left[leftStart + index] - right[rightStart + index];
-            if (difference != 0) return difference;
-        }
-        return 0;
+        // Category LC14: first differing UTF-16 code unit, retaining the exact signed delta.
+        // Do not return Arrays.compare: that would change the historical delta magnitude.
+        int mismatch = java.util.Arrays.mismatch(
+                left, leftStart, leftStart + count, right, rightStart, rightStart + count);
+        return mismatch < 0 ? 0 : left[leftStart + mismatch] - right[rightStart + mismatch];
     }
 
     public static char[] concatenateUtf16(char[]... segments) {
