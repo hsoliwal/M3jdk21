@@ -78,13 +78,16 @@ public final class M3LongRangeSet {
         // Ends are sorted; lowerBound (not upperBound) retains touching-range merges.
         int first = size == 0 || ends[0] >= fromInclusive
                 ? 0 : M3LaneSearch.lowerBound(ends, 1, size, fromInclusive);
-        int last = first;
+        // The intervals are sorted, disjoint and nonadjacent. Absorbing
+        // a range beginning at/before toExclusive cannot bridge a later
+        // gap: the next start is strictly greater than the absorbed end.
+        // Therefore the last touching range is an upper-bound lookup.
+        int last = M3LaneSearch.upperBound(starts, first, size, toExclusive);
         long start = fromInclusive;
         long end = toExclusive;
-        while (last < size && starts[last] <= end) {
-            start = Math.min(start, starts[last]);
-            end = Math.max(end, ends[last]);
-            last++;
+        if (last > first) {
+            start = Math.min(start, starts[first]);
+            end = Math.max(end, ends[last - 1]);
         }
         int removed = last - first;
         if (removed == 1 && start == starts[first] && end == ends[first]) return;
