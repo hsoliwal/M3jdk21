@@ -1,0 +1,10 @@
+stage	status	evidence
+01-INVENTORY	PASS	7/7 receiving targets ABSENT; exact canonical branch heads pinned
+02-MANIFEST_GIT	PASS	7/7 canonical Maven SHA256 + Git blob identities; independent byte-level hash previously checked
+03-CATEGORY	PASS	91 original Wave20 category rows and first eight columns preserved exactly
+04-JAVA_RECEIVE	PENDING	Two Java classes source exact
+05-C17_RECEIVE	PENDING	One private native C kernel source exact
+06-ORACLES	PENDING	2 Java, one C17 oracle, catalogue source exact
+07-ORIGINAL_JAVA21_C17_JNI	HOLD	Strict javac/gcc and real HotSpot original differential not yet executed here
+08-MAVEN_OPENREWRITE	HOLD	Original Synexia SDK Recipe.run/fixed-point/refusals not executed here
+09-M3JDK21_JMOD_JTREG	HOLD	Original sidecar JNI symbol not bundled into JMOD
