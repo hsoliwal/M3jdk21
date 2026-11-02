@@ -7,6 +7,7 @@ on:
     paths:
       - 'm3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java'
       - 'm3/collections/src/test/java/com/m3/collections/M3LongRangeSet*'
+      - 'm3/collections/qualification/range-atom/successor/**'
       - 'm3/collections/qualification/m3-long-range-arrays-20261017/**'
       - '.github/workflows/m3-long-range-array-state-20261017.yml'
 permissions:
@@ -27,13 +28,11 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Verify canonical immutable recipe-generated Java
+      - name: Replay historical immutable receipt and verify current source successor
         shell: bash
         run: |
           set -euo pipefail
-          echo 'f865b006888f1d4554b51cf69e7f4d6bac67458982f957f9151af0b4f09eaec8  m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java' | sha256sum -c -
-          echo '3b4ba4e2542ebbc607710f183f231d7c1bbe3e94ef4aa4fe6de49f0f9242ac29  m3/collections/src/test/java/com/m3/collections/M3LongRangeSetSelfTest.java' | sha256sum -c -
-          echo '1768a8be759b46ae24678ce089cdf328ef6c83f335bd3f5582cda813819261a5  m3/collections/src/test/java/com/m3/collections/M3LongRangeSetTest.java' | sha256sum -c -
+          python3 -S m3/collections/qualification/range-atom/successor/verify.py
       - name: Compile actual Java21 M3 array and mask owners
         shell: bash
         run: |
@@ -56,4 +55,4 @@ jobs:
           java -ea -Xmx64m -Xcheck:jni -Djava.library.path="$RUNNER_TEMP" \
             -cp "$RUNNER_TEMP/range-classes" com.m3.collections.M3LongRangeSetSelfTest
       - name: Actual M3 collections Maven/JUnit
-        run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3LongRangeSetTest test
+        run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3LongRangeSetTest,M3LongRangeSetAtomTest "-DargLine=-Xcheck:jni -Djava.library.path=$RUNNER_TEMP" test
