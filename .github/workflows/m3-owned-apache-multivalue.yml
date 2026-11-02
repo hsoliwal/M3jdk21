@@ -35,8 +35,8 @@ jobs:
           python -I -S -B -c 'import os,shutil; assert shutil.disk_usage(os.environ["TMPDIR"]).free >= 8*1024**3+512*1024**2'
           M3_PROVIDER="$M3_TASK_OUT/commons-collections4-4.5.0.jar"
           curl --fail --location --silent --show-error --output "$M3_PROVIDER" https://repo.maven.apache.org/maven2/org/apache/commons/commons-collections4/4.5.0/commons-collections4-4.5.0.jar
-          python -I -S -B m3/collections/qualification/owned-apache-multivalue-20261024/verify_source_binding_successor_v4.py --jar "$M3_PROVIDER" --args "$M3_TASK_OUT/owned.args"
-          python -I -S -B m3/collections/qualification/owned-apache-multivalue-20261024/probe_source_binding_successor_v4.py --jar "$M3_PROVIDER" --work "$M3_TASK_OUT/guard-probe"
+          python -I -S -B m3/collections/qualification/owned-apache-multivalue-20261024/verify_source_binding_successor_v5.py --jar "$M3_PROVIDER" --args "$M3_TASK_OUT/owned.args"
+          python -I -S -B m3/collections/qualification/owned-apache-multivalue-20261024/probe_source_binding_successor_v5.py --jar "$M3_PROVIDER" --work "$M3_TASK_OUT/guard-probe"
           find m3/arrays/src/main/java -name '*.java' | sort > "$M3_TASK_OUT/arrays.args"
           javac -J-Djava.io.tmpdir="$M3_TASK_OUT/tmp" --release 21 -g -encoding UTF-8 -proc:none -Xlint:all,-module -Werror -d "$M3_TASK_OUT/arrays" @"$M3_TASK_OUT/arrays.args"
           find m3/collections/src/main/java -name '*.java' | sort > "$M3_TASK_OUT/core.args"
@@ -75,6 +75,6 @@ jobs:
           export TMPDIR="$M3_TASK_OUT/tmp" TEMP="$M3_TASK_OUT/tmp" TMP="$M3_TASK_OUT/tmp"
           export MAVEN_OPTS="-Xmx512m -XX:-UsePerfData -Djava.io.tmpdir=$M3_TASK_OUT/tmp"
           python -I -S -B -c 'import os,shutil; assert shutil.disk_usage(os.environ["TMPDIR"]).free >= 8*1024**3+512*1024**2'
-          python -I -S -B m3/collections/qualification/owned-apache-multivalue-20261024/verify_source_binding_successor_v4.py
+          python -I -S -B m3/collections/qualification/owned-apache-multivalue-20261024/verify_source_binding_successor_v5.py
           mvn -B -ntp -f m3/collections/recipe/sdk-binding-successor-v3-20261018/pom.xml -Dmaven.repo.local="$M3_TASK_OUT/m2" -Dm3.recipe.output="$M3_TASK_OUT/target" test
           mvn -B -ntp -f m3/collections/recipe/owned-apache-multivalue-20261024/pom.xml -Dmaven.repo.local="$M3_TASK_OUT/m2" -Dm3.recipe.output="$M3_TASK_OUT/target-v2-to-v3" test
