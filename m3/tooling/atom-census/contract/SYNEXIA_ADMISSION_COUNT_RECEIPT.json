@@ -1,0 +1,39 @@
+{
+  "schema": "M3_SYNEXIA_RECIPE_RECEIVER/1",
+  "synexia_repository": "hsoliwal/com.synexia",
+  "synexia_pr": 15082,
+  "synexia_recipe_commit": "b5826d62cbef6ef3b476d80655a8480aa1822436",
+  "m3_repository": "hsoliwal/M3jdk21",
+  "receiver_parent": "3a25863c13773d7c332963c58ddd6142e6f52dbb",
+  "external_contracts": "UNCHANGED",
+  "jdk_runtime_sources_modified": 0,
+  "jni_native_sources_modified": 0,
+  "targets": [
+    {
+      "path": "m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/contract/M3AtomCoverageLedger.java",
+      "pre_sha256": "2b1afdf7b73a35a58cdde068644d7bf05524196b9cb54ae703739d248ff94895",
+      "post_sha256": "7d2b37c22725a0061d53d5a2d02e7e715f200382b21bd9f0bebf1e601b5802bd"
+    },
+    {
+      "path": "m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/contract/M3AtomCoverageVerifierSelfTest.java",
+      "pre_sha256": "308bec30137a898bb0e525d35669b5230377b83d5bdeb6d9c961cc2f1e8d55f1",
+      "post_sha256": "79f02e7adb6e0199a1cee58a771468e5af6753805b3bc84c23263881e6441b83"
+    },
+    {
+      "path": "m3/tooling/atom-census/contract/ADMISSION_COUNT_INVARIANT.md",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "d621748ef62fb096f0c29573114fcc2a3557afa55ab1313fd6b4fd1414138754"
+    }
+  ],
+  "verification": {
+    "source_preimage_sha256": "PASS",
+    "recipe_postimage_sha256": "PASS",
+    "maven_openrewrite": "NOT_RUN",
+    "java21_lint_compile": "NOT_RUN",
+    "junit": "NOT_RUN",
+    "product_ci": "NOT_RUN",
+    "jni_abi": "NOT_RUN",
+    "installed_image": "NOT_RUN"
+  },
+  "merge_state": "DRAFT_HOLD"
+}

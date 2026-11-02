@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+gate	state	evidence
+challenge_shape	PASS	LC34_35_704_binary_search
+isolated_java_21	PASS	80640_differential_checks
+canonical_source_recipe	PENDING	maven_openrewrite_fixedpoint
+target_product_java_21	PENDING	M3_collection_contracts_workflow
+target_product_junit	PENDING	actual_M3LaneSearchCategoryProofTest
+public_api	UNCHANGED	production_blob_unmodified
+performance	PENDING	A_A_calibrated_bench
+merge	HOLD	no_auto_promotion

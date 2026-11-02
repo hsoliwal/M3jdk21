@@ -1,0 +1,12 @@
+stage	status	evidence
+inventory	PASS	module and workflow paths were absent at base commit 3a25863c13773d7c332963c58ddd6142e6f52dbb
+shell_syntax	PASS	bash -n m3/tooling/donor-catalogue/verify.sh
+java_compile	PASS	javac --release 21 -Xlint:all -Werror
+javadoc	PASS	javadoc -Werror -Xdoclint:all
+self_test	PASS	36 dependency-free checks including local Git add modify delete and rename delta fixture
+catalogue_validate	PASS	3 donors 9 sources 10 capabilities semantic SHA-256 25c751369a0a3a9037e797c0e5948d319dc6849ed5f039fd6f560062f3369e4a
+plan_fixed_point	PASS	two independent plan generations were byte-identical
+workflow_yaml	PASS	parsed as YAML locally
+actual_bisheng_delta	NOT_RUN	requires a local combined Git object database containing both exact donor and upstream commits
+github_ci	NOT_RUN	workflow has not executed on the new remote commit
+jdk_product_build	NOT_RUN	this additive tooling leaf changes no product source
