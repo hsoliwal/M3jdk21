@@ -106,8 +106,9 @@ public final class M3LongRangeSet {
         valid(fromInclusive, toExclusive);
         if (fromInclusive == toExclusive || size == 0) return;
         int first = firstEndingAfter(fromInclusive);
-        int last = first;
-        while (last < size && starts[last] < toExclusive) last++;
+        // Prefix starts are sorted. This locates the first interval starting at/after
+        // the exclusive removal bound without scanning every covered range.
+        int last = M3LaneSearch.lowerBound(starts, first, size, toExclusive);
         if (first == last) return;
         long oldStart = starts[first];
         long oldEnd = ends[last - 1];
@@ -157,11 +158,16 @@ public final class M3LongRangeSet {
 
     /** Exact count, including intervals wider than Long.MAX_VALUE. */
     public BigInteger cardinality() {
-        BigInteger count = BigInteger.ZERO;
+        // Intervals are disjoint subsets of the signed long coordinate space.
+        // Hence the total fits in an unsigned 64-bit word (at most 2^64 - 1).
+        // Unsigned modular addition is exact here even when a single interval
+        // crosses the signed boundary; construct BigInteger only at the exit.
+        long unsignedTotal = 0L;
         for (int i = 0; i < size; i++) {
-            count = count.add(BigInteger.valueOf(ends[i]).subtract(BigInteger.valueOf(starts[i])));
+            unsignedTotal += ends[i] - starts[i];
         }
-        return count;
+        return unsignedTotal >= 0 ? BigInteger.valueOf(unsignedTotal)
+                : BigInteger.valueOf(unsignedTotal & Long.MAX_VALUE).setBit(Long.SIZE - 1);
     }
 
     /** Defensive snapshot of the packed start coordinate lane. */
@@ -199,6 +205,35 @@ public final class M3LongRangeSet {
         Objects.requireNonNull(states, "states");
         Objects.requireNonNull(backend, "backend");
         if (states.length != size) throw new IllegalArgumentException("unaligned range states");
+        if (backend == M3IndexPathMasks.Backend.JAVA) {
+            // Direct parallel-lane compaction: the encounter path is the identity
+            // sequence, so creating row IDs and selector arrays is unnecessary.
+            // The JNI_REQUIRED path below deliberately preserves the existing
+            // validated native selector and its unavailable-library refusal.
+            int kept = 0;
+            for (int state : states) {
+                if ((state & requiredMask) == requiredMask
+                        && (state & forbiddenMask) == 0) kept++;
+            }
+            M3LongRangeSet result = new M3LongRangeSet(kept);
+            int output = 0;
+            for (int i = 0; i < size; i++) {
+                int state = states[i];
+                if ((state & requiredMask) == requiredMask
+                        && (state & forbiddenMask) == 0) {
+                    if (output == kept) {
+                        throw new ConcurrentModificationException("mask stages changed during selection");
+                    }
+                    result.starts[output] = starts[i];
+                    result.ends[output++] = ends[i];
+                }
+            }
+            if (output != kept) {
+                throw new ConcurrentModificationException("mask stages changed during selection");
+            }
+            result.size = output;
+            return result;
+        }
         int[] rows = new int[size];
         for (int i = 0; i < size; i++) rows[i] = i;
         int[] selected = M3IndexPathMasks.select(rows, rows, new int[][] {states},
