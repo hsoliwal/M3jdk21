@@ -13,6 +13,7 @@ import java.util.Map;
 import jdk.m3.collections.apache.M3HashedMap;
 import jdk.m3.collections.apache.M3LinkedMap;
 import jdk.m3.collections.apache.M3LRUMap;
+import jdk.m3.collections.id.M3LongObjectLinkedHashMap;
 
 /** Independently executable Java 21 receiver smoke; full donor/JNI/JMH gates remain separate. */
 public final class M3ArrayMapReceiverSmoke {
@@ -93,10 +94,51 @@ public final class M3ArrayMapReceiverSmoke {
         roundTrip(candidate);
     }
 
+    private static void primitiveIds() throws Exception {
+        M3LongObjectLinkedHashMap<String> candidate = new M3LongObjectLinkedHashMap<>();
+        Map<Long, String> oracle = new java.util.LinkedHashMap<>();
+        for (long id = -128; id < 320; id++) {
+            String value = id % 13 == 0 ? null : "v" + id;
+            check(java.util.Objects.equals(candidate.put(id, value), oracle.put(id, value)),
+                    "primitive id insertion " + id);
+        }
+        for (long id = -127; id < 320; id += 3) {
+            check(java.util.Objects.equals(candidate.remove(id), oracle.remove(id)),
+                    "primitive id removal " + id);
+        }
+        for (long id = 320; id < 450; id++) {
+            String value = "next" + id;
+            check(java.util.Objects.equals(candidate.put(id, value), oracle.put(id, value)),
+                    "primitive id reuse " + id);
+        }
+        check(candidate.size() == oracle.size(), "primitive id map size");
+        int i = 0;
+        for (Map.Entry<Long, String> e : oracle.entrySet()) {
+            check(candidate.idAt(i) == e.getKey().longValue(), "primitive id rank " + i);
+            check(java.util.Objects.equals(candidate.valueAt(i), e.getValue()), "primitive value at " + i);
+            check(candidate.indexOf(e.getKey().longValue()) == i, "primitive indexOf " + i);
+            check(candidate.containsKey(e.getKey().longValue()), "primitive membership " + i);
+            i++;
+        }
+        check(candidate.firstId() == oracle.keySet().iterator().next().longValue(), "primitive first id");
+        long last = 0L;
+        for (Long id : oracle.keySet()) {
+            last = id.longValue();
+        }
+        check(candidate.lastId() == last, "primitive last id");
+        check(candidate.ids().length == oracle.size(), "primitive ids span");
+        Class<?> owner = M3LongObjectLinkedHashMap.class;
+        check(owner.getDeclaredField("ids").getType() == long[].class, "primitive ids must be long[]");
+        check(owner.getDeclaredField("values").getType() == Object[].class, "primitive values must be Object[]");
+        check(owner.getDeclaredField("index").getType() == int[].class, "primitive index must be int[]");
+        check(owner.getDeclaredField("liveMask").getType() == long[].class, "primitive liveness must be long[]");
+    }
+
     public static void main(String[] args) throws Exception {
         storage(M3HashedMap.class, true);
         storage(M3LinkedMap.class, false);
         storage(M3LRUMap.class, true);
+        primitiveIds();
         randomAccess(new M3HashedMap<>());
         randomAccess(new M3LinkedMap<>());
 

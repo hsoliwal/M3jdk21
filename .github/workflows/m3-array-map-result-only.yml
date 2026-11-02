@@ -23,7 +23,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for module in apache-hashed-map apache-linked-map apache-lru-map; do
+          for module in apache-hashed-map apache-linked-map apache-lru-map m3-long-object-linked-hash-map; do
             mvn -B -ntp -f "m3/collections/implementations/$module/pom.xml" -DskipTests package
           done
       - name: Run Java 21 / interpreter contract and storage-lane probes
@@ -33,7 +33,7 @@ jobs:
           mvn -B -ntp -f m3/collections/implementations/apache-hashed-map/pom.xml \
             dependency:build-classpath "-Dmdep.outputFile=$RUNNER_TEMP/m3-apache-provider.cp"
           CP="$(cat "$RUNNER_TEMP/m3-apache-provider.cp")"
-          for module in apache-hashed-map apache-linked-map apache-lru-map; do
+          for module in apache-hashed-map apache-linked-map apache-lru-map m3-long-object-linked-hash-map; do
             CP="$CP:$GITHUB_WORKSPACE/m3/collections/implementations/$module/target/classes"
           done
           mkdir -p "$RUNNER_TEMP/m3-receiver"
@@ -49,3 +49,4 @@ jobs:
           test "$(git hash-object apache-hashed-map/src/main/java/jdk/m3/collections/apache/M3HashedMap.java)" = 0440ac943b5eb31d443d8be9943fc14597890277
           test "$(git hash-object apache-linked-map/src/main/java/jdk/m3/collections/apache/M3LinkedMap.java)" = ebf03006129b74b813e406613594c196de10f477
           test "$(git hash-object apache-lru-map/src/main/java/jdk/m3/collections/apache/M3LRUMap.java)" = 703641cfe70f58ba93dc4a9ef5129048c3b59bcd
+          test "$(git hash-object m3-long-object-linked-hash-map/src/main/java/jdk/m3/collections/id/M3LongObjectLinkedHashMap.java)" = bc8b45e9337fc1fadd139827d1197b357dbee3a3
