@@ -80,7 +80,8 @@ def main():
     # --release 21 selects standard ct.sym APIs, excluding the new SDK modules.
     command(output / "image-javac.log", image / "bin/javac", "-source", "21", "-target", "21",
             "-Xlint:all", "-Werror", "--add-modules", "jdk.m3.text,jdk.m3.io,jdk.m3.structured",
-            "-d", smoke_classes, smoke, smoke.with_name("M3NativeTextDifferential.java").resolve(strict=True))
+            "-d", smoke_classes, smoke, smoke.with_name("M3NativeTextDifferential.java").resolve(strict=True),
+            smoke.with_name("M3TextKernelRegression.java").resolve(strict=True))
     command(output / "image-runtime.log", image / "bin/java", "-Xcheck:jni", "--add-modules",
             "jdk.m3.text,jdk.m3.io", "-cp", smoke_classes, "M3TextSmoke", output / "image-files")
     if "M3_TEXT_IMAGE_PASS tools=24" not in (output / "image-runtime.log").read_text():
@@ -89,6 +90,14 @@ def main():
             "--add-modules", "jdk.m3.text", "-cp", smoke_classes, "M3NativeTextDifferential")
     if "M3_NATIVE_TEXT_PARITY_PASS runs=450" not in (output / "image-native-parity.log").read_text():
         raise ValueError("missing native text parity proof")
+    for mode in ("native", "java"):
+        log = output / ("image-text-kernels-" + mode + ".log")
+        command(log, image / "bin/java", "-Xcheck:jni", "--add-modules", "jdk.m3.text",
+                "--add-opens", "jdk.m3.text/jdk.m3.text=ALL-UNNAMED",
+                "-Dm3.text.native.disable=" + str(mode == "java").lower(),
+                "-cp", smoke_classes, "M3TextKernelRegression", mode)
+        if "M3_TEXT_KERNEL_REGRESSION_PASS mode=" + mode not in log.read_text():
+            raise ValueError("missing " + mode + " text kernel proof")
     print("M3_TEXT_PACK_PASS modules=3 tools=24")
 
 

@@ -1,0 +1,631 @@
+{
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0; preserves per-file target and upstream rights",
+  "schema": "M3JDK21_PASSIVE_RECEIVER_RECEIPT_V1",
+  "scope": "EXISTING_OWNER_COMPONENT_MAINTENANCE",
+  "review_status": "DRAFT_COMPONENT_QUALIFICATION; HOLD_REQUIRED_BROADER_GATES",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base": "ce005d25b29fb6246e013bffb462afd5ed070362",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_commit": "22393ddd1b080ed283a7e6e1f1dedb90b3a7a7fa",
+  "source_base": "6f54420f3d716f6ec3ba480fb45514833a73128a",
+  "recipe_id": "com.synexia.m3.JdkDonorRefinement20261102",
+  "recipe_path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-jdk-donor-refinement-20261102.yml",
+  "bootstrap_recipe_id": "com.synexia.m3.JdkDonorAdmission20261102",
+  "component_source_seals_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/qualification/generated/COMPONENT_SOURCE_SEALS.json",
+  "component_source_seals_sha256": "ce012bdd0686ec36b81cee18015894ef289e9f4f67b5a5d382121656555876fd",
+  "component_qualification_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/QUALIFICATION.json",
+  "component_qualification_sha256": "16dca6535f9a3870ed11a41d0ddd26c9afe8a1016bfffe9877da0648ac250c0c",
+  "evidence_note": "All component source, recipe, execution, full input maps and gate logs are pinned to source_commit. This passive receipt is emitted by the later metadata-only recipe execution. It does not assert its own hash or grant runtime promotion.",
+  "outputs": [
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "before_sha256": "0b6398e423e1a436aba20169f8bc62d4aa1a9be85ff9f9e09faa0c434743fa6b",
+      "after_sha256": "4558fd475acecc7d76e4631d49ed41a88dc97f91d5b1a09fcbc3e2b48796bec2",
+      "source_kind": "JAVA",
+      "before_git_blob": "9060424b921bac10dc382ba277a3aa840ea59529",
+      "after_git_blob": "ca33aaaff268d55a7f05e03ec18ea5b8b0b8d251"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java",
+      "before_sha256": "5ae3d26cf58d0fff37bff398e73ee4f3b3e44212b56c046c3690fc8f58538f0f",
+      "after_sha256": "46ae96d12c9d8f5909827e3721db06e14eff33198b043819918cd1d6498ad2e4",
+      "source_kind": "JAVA",
+      "before_git_blob": "7b04a77cc113a81b4a09d6004666cada79c8c088",
+      "after_git_blob": "4b706dace0a8beee381b1bc45a8d2f2806bdfa41"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "path": "m3/file/src/main/java/com/m3/file/M3BuildImpactPlan.java",
+      "before_sha256": "8aa8842dfb64c4fd86a22fb53dcaf445e680c2f1f3bfca440359e8d0f3336bfd",
+      "after_sha256": "31a21b61515c434f5404dd01b0a2e38c892ebedfc0886dae4e81a706addf9e04",
+      "source_kind": "JAVA",
+      "before_git_blob": "0a22c488537312cb6f971172e59f866bf05502c5",
+      "after_git_blob": "1cce821d1dbcabefa7e2d7a643641347b15591d2"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "path": "m3/file/src/main/java/com/m3/file/M3ReactorImpactPlan.java",
+      "before_sha256": "ebb3c7f8d56d578f311a176b06df4aec5af1572f2235b9903e817a32d0e7a328",
+      "after_sha256": "5c13122fc0cfd75a29592d0fbae3be668fef8e92e5aede23986c724701660259",
+      "source_kind": "JAVA",
+      "before_git_blob": "424dd4455fb4c2aa29e9461837215159b79960c4",
+      "after_git_blob": "e955addc632b56283c28e1536b7a1d7e3843a382"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "path": "m3/file/src/test/java/com/m3/file/M3ReactorImpactPlanContract.java",
+      "before_sha256": "7a16c118fc4bca14d7bd1994b166fd99f83e333d3176bfed89e0b72661075a51",
+      "after_sha256": "3fc87dcd2986d737ecb0ea9918723a2f6da2e340bd5b882073afd66ac06c168a",
+      "source_kind": "JAVA",
+      "before_git_blob": "3b9099884bd5a8f65ef928435a81e76866ee03bd",
+      "after_git_blob": "dc82562fb09fa5802a43b826061724c9c99da042"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "path": "m3/ports/regex-cursor/src/main/java/com/m3/regexcursor/M3CharSequenceCursor.java",
+      "before_sha256": "40bb8356e8822505e1bc879021d25ab6fe371fac305d43a85bc7516ac5a0dc76",
+      "after_sha256": "8f0f674349b1ac0a353f758054deee5185f7086020bf3121535d65dc0705c36c",
+      "source_kind": "JAVA",
+      "before_git_blob": "f5eca15cb6628d28e8f4538b0e09a7fd0b3e7197",
+      "after_git_blob": "ec61ae4011d018d93fa5370bb83806cb87e2c7c7"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "path": "m3/ports/regex-cursor/src/test/java/com/m3/regexcursor/M3ChunkCursorTest.java",
+      "before_sha256": "2a7d36ce95e5385706d6b45682e60fc3ef94cc2aab8065cd09161db64ce565db",
+      "after_sha256": "8b9fbb85d6579d7f5c940cbc27142aa350ac68a84d82fe7e9907c08bb1202f2d",
+      "source_kind": "JAVA",
+      "before_git_blob": "093c7fca7659b7be62256c138c7913e8a81f7b1a",
+      "after_git_blob": "9031cbf56cd7def481c78bb2d7d229bc277f9f57"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "path": "m3/tooling/module-packs/text-tools/build.py",
+      "before_sha256": "ec542aee7f33696fc020a5f90a790e37d074fb372fca9aff2eb93afd90e21af7",
+      "after_sha256": "c7f1b1a0d21770c30c3dc33c594f3bf9f55b737c6762fdda92b30ef3f97dcf76",
+      "source_kind": "TEXT_NATIVE",
+      "before_git_blob": "6fa0e959d2273c7ac3fd0e28c0e4cbc670e0976e",
+      "after_git_blob": "18d136bd6ec9a981f7fd88b8cd5b29898d07b566"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "path": "m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3TextKernelRegression.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "64e0bf9f28674c20e5e17ecdc21ed041eb74bcdffdf0f237c2f7fec8f2627964",
+      "source_kind": "JAVA",
+      "before_git_blob": null,
+      "after_git_blob": "ab4e34b4fc3b9163c9afaa33d2f5012b4a1edace"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "path": "m3/tooling/module-packs/text-tools/native/m3textops.c",
+      "before_sha256": "88c7507b116f8a4116c34119caafe26666ce9094b116f19eb01527832cd5e46e",
+      "after_sha256": "a89b55724384f0bf8f691a0e018eba5090224baecd25575481fbe581910c8f0a",
+      "source_kind": "TEXT_NATIVE",
+      "before_git_blob": "6548c527fe0885f9398bd9e042e25553f3f6d64e",
+      "after_git_blob": "416200afbf97e95dfa38f3cf35e03b1739fa5066"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeUtf16Literal.java",
+      "before_sha256": "d2981f376d64aba4cb65d90f733065882d374ae15933fc47c484d0daa295a5c3",
+      "after_sha256": "0ed9ea45a8cf6613db2836e3bfbdec30f6f26fe26dcb2d5bd4731c56a83a8beb",
+      "source_kind": "JAVA",
+      "before_git_blob": "6d1b91d4f28c1840f6497c4ae890c029da0fa82d",
+      "after_git_blob": "99e5e8f6955316c8a3b163c38e5e1d43587cb21d"
+    }
+  ],
+  "runs": [
+    {
+      "id": "actual-sdk-components",
+      "status": "PASS",
+      "exit_code": 0,
+      "command": [
+        "mvn",
+        "-B",
+        "-ntp",
+        "-f",
+        "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/pom.xml",
+        "test"
+      ],
+      "stdout_sha256": "147443bae57383e8c2e12a389d6f0dfa683e1dea4eddb590fb3fd130cce4b0c5",
+      "stdout_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/qualification/generated/recipe-final-components.log",
+      "evidence_repository": "hsoliwal/com.synexia",
+      "evidence_commit": "22393ddd1b080ed283a7e6e1f1dedb90b3a7a7fa",
+      "inputs": {
+        "component_source_seals": "ce012bdd0686ec36b81cee18015894ef289e9f4f67b5a5d382121656555876fd",
+        "component_qualification": "16dca6535f9a3870ed11a41d0ddd26c9afe8a1016bfffe9877da0648ac250c0c"
+      }
+    },
+    {
+      "id": "regex-maven-coverage",
+      "status": "PASS",
+      "exit_code": 0,
+      "command": [
+        "mvn",
+        "-B",
+        "-ntp",
+        "-Djunit.artifact.version=5.10.2",
+        "-f",
+        "m3/ports/regex-cursor/pom.xml",
+        "test"
+      ],
+      "stdout_sha256": "155b07490a4c1ba882171fc6e3bd13194e873bf381f342d7a5b90de06637c461",
+      "stdout_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/qualification/generated/regex-generated.log",
+      "evidence_repository": "hsoliwal/com.synexia",
+      "evidence_commit": "22393ddd1b080ed283a7e6e1f1dedb90b3a7a7fa",
+      "inputs": {
+        "component_source_seals": "ce012bdd0686ec36b81cee18015894ef289e9f4f67b5a5d382121656555876fd",
+        "component_qualification": "16dca6535f9a3870ed11a41d0ddd26c9afe8a1016bfffe9877da0648ac250c0c"
+      }
+    },
+    {
+      "id": "file-host-linked-module",
+      "status": "PASS",
+      "exit_code": 0,
+      "command": [
+        "python3",
+        "m3/file/verify.py",
+        "--java-home",
+        "<Temurin-21.0.13+9>",
+        "--output",
+        "<fresh-proof-directory>"
+      ],
+      "stdout_sha256": "3c971bf52d727ce51aa0fbc267403da528dbacda0afbaa394df40edaa1ae0f87",
+      "stdout_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/qualification/generated/file-candidate.log",
+      "evidence_repository": "hsoliwal/com.synexia",
+      "evidence_commit": "22393ddd1b080ed283a7e6e1f1dedb90b3a7a7fa",
+      "inputs": {
+        "component_source_seals": "ce012bdd0686ec36b81cee18015894ef289e9f4f67b5a5d382121656555876fd",
+        "component_qualification": "16dca6535f9a3870ed11a41d0ddd26c9afe8a1016bfffe9877da0648ac250c0c"
+      }
+    },
+    {
+      "id": "name-receiver-preflight",
+      "status": "BASELINE_FAILED",
+      "exit_code": 2,
+      "command": [
+        "python3",
+        "m3/tooling/name-contract/check.py"
+      ],
+      "stdout_sha256": "87f9f7bc4d5902f30db1dfe7723e599fd797e3f801076e0dd8ca7290aeb22285",
+      "stdout_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/qualification/generated/name-preflight.log",
+      "evidence_repository": "hsoliwal/com.synexia",
+      "evidence_commit": "22393ddd1b080ed283a7e6e1f1dedb90b3a7a7fa",
+      "inputs": {
+        "component_source_seals": "ce012bdd0686ec36b81cee18015894ef289e9f4f67b5a5d382121656555876fd",
+        "component_qualification": "16dca6535f9a3870ed11a41d0ddd26c9afe8a1016bfffe9877da0648ac250c0c"
+      }
+    },
+    {
+      "id": "full-borrow-receiver",
+      "status": "PASS",
+      "exit_code": 0,
+      "command": [
+        "python3",
+        "m3/compatibility/check_synexia_full_borrow_receiver.py"
+      ],
+      "stdout_sha256": "69354cd1ab04227bdf9f5a5a912361e57b90b1d8315146d447827e2636a259e5",
+      "stdout_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/qualification/generated/full-borrow-preflight.log",
+      "evidence_repository": "hsoliwal/com.synexia",
+      "evidence_commit": "22393ddd1b080ed283a7e6e1f1dedb90b3a7a7fa",
+      "inputs": {
+        "component_source_seals": "ce012bdd0686ec36b81cee18015894ef289e9f4f67b5a5d382121656555876fd",
+        "component_qualification": "16dca6535f9a3870ed11a41d0ddd26c9afe8a1016bfffe9877da0648ac250c0c"
+      }
+    },
+    {
+      "id": "module-javac",
+      "status": "PASS",
+      "exit_code": 0,
+      "command": [
+        "/tmp/m3-adapter-tools/jdk-21.0.13+9/bin/javac",
+        "-source",
+        "21",
+        "-target",
+        "21",
+        "-Xlint:all,-module",
+        "-Werror",
+        "--module-source-path",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src",
+        "-h",
+        "/workspace/scratch/54317e573586/evidence/text-generated/headers",
+        "-d",
+        "/workspace/scratch/54317e573586/evidence/text-generated/modules",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Atom.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Binding.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Canonical.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Capability.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/CommandCatalog.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/CoreDemo.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/CsvTools.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/ExecutionResult.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/FrameCollector.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Ids.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Limits.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/M3UnixRuntime.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeLineOps.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeUtf16Literal.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Node.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Plan.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/PlanValidator.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Receipt.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Registry.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/StepReceipt.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/TextFrame.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/TextLine.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/TextTools.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Utf8Segments.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/src/jdk.m3.text/module-info.java"
+      ],
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/qualification/generated/text/module-javac.log",
+      "evidence_repository": "hsoliwal/com.synexia",
+      "evidence_commit": "22393ddd1b080ed283a7e6e1f1dedb90b3a7a7fa",
+      "inputs": {
+        "component_source_seals": "ce012bdd0686ec36b81cee18015894ef289e9f4f67b5a5d382121656555876fd",
+        "component_qualification": "16dca6535f9a3870ed11a41d0ddd26c9afe8a1016bfffe9877da0648ac250c0c"
+      }
+    },
+    {
+      "id": "m3textio-c17",
+      "status": "PASS",
+      "exit_code": 0,
+      "command": [
+        "gcc",
+        "-std=c17",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fPIC",
+        "-shared",
+        "-I/tmp/m3-adapter-tools/jdk-21.0.13+9/include",
+        "-I/tmp/m3-adapter-tools/jdk-21.0.13+9/include/linux",
+        "-include",
+        "/workspace/scratch/54317e573586/evidence/text-generated/headers/jdk.m3.text/jdk_m3_text_NativeUtf16Literal.h",
+        "-o",
+        "/workspace/scratch/54317e573586/evidence/text-generated/native/libm3textio.so",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/native/m3textio.c"
+      ],
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/qualification/generated/text/m3textio-c17.log",
+      "evidence_repository": "hsoliwal/com.synexia",
+      "evidence_commit": "22393ddd1b080ed283a7e6e1f1dedb90b3a7a7fa",
+      "inputs": {
+        "component_source_seals": "ce012bdd0686ec36b81cee18015894ef289e9f4f67b5a5d382121656555876fd",
+        "component_qualification": "16dca6535f9a3870ed11a41d0ddd26c9afe8a1016bfffe9877da0648ac250c0c"
+      }
+    },
+    {
+      "id": "m3textops-c17",
+      "status": "PASS",
+      "exit_code": 0,
+      "command": [
+        "gcc",
+        "-std=c17",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fPIC",
+        "-shared",
+        "-I/tmp/m3-adapter-tools/jdk-21.0.13+9/include",
+        "-I/tmp/m3-adapter-tools/jdk-21.0.13+9/include/linux",
+        "-include",
+        "/workspace/scratch/54317e573586/evidence/text-generated/headers/jdk.m3.text/jdk_m3_text_NativeLineOps.h",
+        "-o",
+        "/workspace/scratch/54317e573586/evidence/text-generated/native/libm3textops.so",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/native/m3textops.c"
+      ],
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/qualification/generated/text/m3textops-c17.log",
+      "evidence_repository": "hsoliwal/com.synexia",
+      "evidence_commit": "22393ddd1b080ed283a7e6e1f1dedb90b3a7a7fa",
+      "inputs": {
+        "component_source_seals": "ce012bdd0686ec36b81cee18015894ef289e9f4f67b5a5d382121656555876fd",
+        "component_qualification": "16dca6535f9a3870ed11a41d0ddd26c9afe8a1016bfffe9877da0648ac250c0c"
+      }
+    },
+    {
+      "id": "fixtures-javac",
+      "status": "PASS",
+      "exit_code": 0,
+      "command": [
+        "/tmp/m3-adapter-tools/jdk-21.0.13+9/bin/javac",
+        "-source",
+        "21",
+        "-target",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "--module-path",
+        "/workspace/scratch/54317e573586/evidence/text-generated/modules",
+        "--add-modules",
+        "jdk.m3.text",
+        "-d",
+        "/workspace/scratch/54317e573586/evidence/text-generated/fixtures",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3NativeTextDifferential.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3TextKernelRegression.java"
+      ],
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/qualification/generated/text/fixtures-javac.log",
+      "evidence_repository": "hsoliwal/com.synexia",
+      "evidence_commit": "22393ddd1b080ed283a7e6e1f1dedb90b3a7a7fa",
+      "inputs": {
+        "component_source_seals": "ce012bdd0686ec36b81cee18015894ef289e9f4f67b5a5d382121656555876fd",
+        "component_qualification": "16dca6535f9a3870ed11a41d0ddd26c9afe8a1016bfffe9877da0648ac250c0c"
+      }
+    },
+    {
+      "id": "public-differential",
+      "status": "PASS",
+      "exit_code": 0,
+      "command": [
+        "/tmp/m3-adapter-tools/jdk-21.0.13+9/bin/java",
+        "-Xcheck:jni",
+        "--module-path",
+        "/workspace/scratch/54317e573586/evidence/text-generated/modules",
+        "--add-modules",
+        "jdk.m3.text",
+        "--add-opens",
+        "jdk.m3.text/jdk.m3.text=ALL-UNNAMED",
+        "-Djava.library.path=/workspace/scratch/54317e573586/evidence/text-generated/native",
+        "-cp",
+        "/workspace/scratch/54317e573586/evidence/text-generated/fixtures",
+        "M3NativeTextDifferential"
+      ],
+      "stdout_sha256": "ad2058c011cd436bd13c15ea11da2520d0126eeaa30680bb3666378a24be1ba9",
+      "stdout_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/qualification/generated/text/public-differential.log",
+      "evidence_repository": "hsoliwal/com.synexia",
+      "evidence_commit": "22393ddd1b080ed283a7e6e1f1dedb90b3a7a7fa",
+      "inputs": {
+        "component_source_seals": "ce012bdd0686ec36b81cee18015894ef289e9f4f67b5a5d382121656555876fd",
+        "component_qualification": "16dca6535f9a3870ed11a41d0ddd26c9afe8a1016bfffe9877da0648ac250c0c"
+      }
+    },
+    {
+      "id": "kernel-native",
+      "status": "PASS",
+      "exit_code": 0,
+      "command": [
+        "/tmp/m3-adapter-tools/jdk-21.0.13+9/bin/java",
+        "-Xcheck:jni",
+        "--module-path",
+        "/workspace/scratch/54317e573586/evidence/text-generated/modules",
+        "--add-modules",
+        "jdk.m3.text",
+        "--add-opens",
+        "jdk.m3.text/jdk.m3.text=ALL-UNNAMED",
+        "-Djava.library.path=/workspace/scratch/54317e573586/evidence/text-generated/native",
+        "-cp",
+        "/workspace/scratch/54317e573586/evidence/text-generated/fixtures",
+        "-Dm3.text.native.disable=false",
+        "M3TextKernelRegression",
+        "native"
+      ],
+      "stdout_sha256": "0ac350862135ea428e509d2bfa1a6ff32c8bc5e997725c98c9fa4e97e3b3f735",
+      "stdout_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/qualification/generated/text/kernel-native.log",
+      "evidence_repository": "hsoliwal/com.synexia",
+      "evidence_commit": "22393ddd1b080ed283a7e6e1f1dedb90b3a7a7fa",
+      "inputs": {
+        "component_source_seals": "ce012bdd0686ec36b81cee18015894ef289e9f4f67b5a5d382121656555876fd",
+        "component_qualification": "16dca6535f9a3870ed11a41d0ddd26c9afe8a1016bfffe9877da0648ac250c0c"
+      }
+    },
+    {
+      "id": "kernel-java",
+      "status": "PASS",
+      "exit_code": 0,
+      "command": [
+        "/tmp/m3-adapter-tools/jdk-21.0.13+9/bin/java",
+        "-Xcheck:jni",
+        "--module-path",
+        "/workspace/scratch/54317e573586/evidence/text-generated/modules",
+        "--add-modules",
+        "jdk.m3.text",
+        "--add-opens",
+        "jdk.m3.text/jdk.m3.text=ALL-UNNAMED",
+        "-Djava.library.path=/workspace/scratch/54317e573586/evidence/text-generated/native",
+        "-cp",
+        "/workspace/scratch/54317e573586/evidence/text-generated/fixtures",
+        "-Dm3.text.native.disable=true",
+        "M3TextKernelRegression",
+        "java"
+      ],
+      "stdout_sha256": "d7b292bc3e17132e98bea8d475f5ec5156d6764ec6563b31bf7a0205c29112de",
+      "stdout_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/qualification/generated/text/kernel-java.log",
+      "evidence_repository": "hsoliwal/com.synexia",
+      "evidence_commit": "22393ddd1b080ed283a7e6e1f1dedb90b3a7a7fa",
+      "inputs": {
+        "component_source_seals": "ce012bdd0686ec36b81cee18015894ef289e9f4f67b5a5d382121656555876fd",
+        "component_qualification": "16dca6535f9a3870ed11a41d0ddd26c9afe8a1016bfffe9877da0648ac250c0c"
+      }
+    },
+    {
+      "id": "m3textio-symbols",
+      "status": "PASS",
+      "exit_code": 0,
+      "command": [
+        "nm",
+        "-D",
+        "--defined-only",
+        "/workspace/scratch/54317e573586/evidence/text-generated/native/libm3textio.so"
+      ],
+      "stdout_sha256": "89bd30619d6cd201d55835491493e4026e5240f6af21b9c330269ac709038a26",
+      "stdout_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/qualification/generated/text/m3textio-symbols.log",
+      "evidence_repository": "hsoliwal/com.synexia",
+      "evidence_commit": "22393ddd1b080ed283a7e6e1f1dedb90b3a7a7fa",
+      "inputs": {
+        "component_source_seals": "ce012bdd0686ec36b81cee18015894ef289e9f4f67b5a5d382121656555876fd",
+        "component_qualification": "16dca6535f9a3870ed11a41d0ddd26c9afe8a1016bfffe9877da0648ac250c0c"
+      }
+    },
+    {
+      "id": "m3textops-symbols",
+      "status": "PASS",
+      "exit_code": 0,
+      "command": [
+        "nm",
+        "-D",
+        "--defined-only",
+        "/workspace/scratch/54317e573586/evidence/text-generated/native/libm3textops.so"
+      ],
+      "stdout_sha256": "cbe70bb0c51274597ff99ae862731d9d88a8d1e26067c6789d559b8f068d1cd3",
+      "stdout_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/qualification/generated/text/m3textops-symbols.log",
+      "evidence_repository": "hsoliwal/com.synexia",
+      "evidence_commit": "22393ddd1b080ed283a7e6e1f1dedb90b3a7a7fa",
+      "inputs": {
+        "component_source_seals": "ce012bdd0686ec36b81cee18015894ef289e9f4f67b5a5d382121656555876fd",
+        "component_qualification": "16dca6535f9a3870ed11a41d0ddd26c9afe8a1016bfffe9877da0648ac250c0c"
+      }
+    },
+    {
+      "id": "compile",
+      "status": "PASS",
+      "exit_code": 0,
+      "command": [
+        "/tmp/m3-adapter-tools/jdk-21.0.13+9/bin/javac",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "-h",
+        "/workspace/scratch/54317e573586/evidence/mask-generated/headers",
+        "-d",
+        "/workspace/scratch/54317e573586/evidence/mask-generated/classes",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongCollection.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongList.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongDeque.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongQueue.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongIterator.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongSequence.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongStack.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongListSpliterator.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+        "/workspace/scratch/54317e573586/m3jdk21/m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java"
+      ],
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/qualification/bitmask/generated/compile.log",
+      "evidence_repository": "hsoliwal/com.synexia",
+      "evidence_commit": "22393ddd1b080ed283a7e6e1f1dedb90b3a7a7fa",
+      "inputs": {
+        "component_source_seals": "ce012bdd0686ec36b81cee18015894ef289e9f4f67b5a5d382121656555876fd",
+        "component_qualification": "16dca6535f9a3870ed11a41d0ddd26c9afe8a1016bfffe9877da0648ac250c0c"
+      }
+    },
+    {
+      "id": "contract",
+      "status": "PASS",
+      "exit_code": 0,
+      "command": [
+        "/tmp/m3-adapter-tools/jdk-21.0.13+9/bin/java",
+        "-cp",
+        "/workspace/scratch/54317e573586/evidence/mask-generated/classes",
+        "com.m3.collections.M3IndexMaskCompactorSelfTest"
+      ],
+      "stdout_sha256": "418e389555e64519ed0256f11475652d5ce922a05eb7615b5aa417dea1ed1a1c",
+      "stdout_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/qualification/bitmask/generated/contract.log",
+      "evidence_repository": "hsoliwal/com.synexia",
+      "evidence_commit": "22393ddd1b080ed283a7e6e1f1dedb90b3a7a7fa",
+      "inputs": {
+        "component_source_seals": "ce012bdd0686ec36b81cee18015894ef289e9f4f67b5a5d382121656555876fd",
+        "component_qualification": "16dca6535f9a3870ed11a41d0ddd26c9afe8a1016bfffe9877da0648ac250c0c"
+      }
+    },
+    {
+      "id": "abi",
+      "status": "PASS",
+      "exit_code": 0,
+      "command": [
+        "/tmp/m3-adapter-tools/jdk-21.0.13+9/bin/javap",
+        "-p",
+        "-s",
+        "-cp",
+        "/workspace/scratch/54317e573586/evidence/mask-generated/classes",
+        "com.m3.collections.M3IndexMaskCompactor"
+      ],
+      "stdout_sha256": "20e39fb065e73921857005ddd4550fb70fad1081e67d3a54411103cb4752933d",
+      "stdout_path": "synexia-openrewrite-recipes/recipes/m3-jdk-donor-refinement-20261102/qualification/bitmask/generated/abi.log",
+      "evidence_repository": "hsoliwal/com.synexia",
+      "evidence_commit": "22393ddd1b080ed283a7e6e1f1dedb90b3a7a7fa",
+      "inputs": {
+        "component_source_seals": "ce012bdd0686ec36b81cee18015894ef289e9f4f67b5a5d382121656555876fd",
+        "component_qualification": "16dca6535f9a3870ed11a41d0ddd26c9afe8a1016bfffe9877da0648ac250c0c"
+      }
+    }
+  ],
+  "active_phase": "STRING",
+  "runtime_acceptance": false,
+  "family_completion": false,
+  "repository_completion": false,
+  "naming_disposition": {
+    "canonical_map": "m3/docs/name-mapping.json",
+    "canonical_map_sha256": "406cefb62b79fc677972e9d76a77342c3999b41ef6594f9faf5bd06795235dc3",
+    "status": "EXCLUDED_FROM_NEW_BACKEND_ADMISSION; DEFERRED_FAMILY_PROMOTION",
+    "reason": "Maintenance of six existing production owners without public class/package/method renaming or a new JDK backend. No exact owner entry exists in the current 71-record map. The existing naming policy remains authoritative; this receipt is not a parallel mapping registry or a waiver.",
+    "inherited_gate": {
+      "status": "BASELINE_FAILED",
+      "exit_code": 2,
+      "capability_id": "m3.arrays.api-companion",
+      "recorded_arrays_sha256": "e81e711d52fee23756fd0bf8e48c27ff0fe971419f4bb1c25ec1aa5ebc203a88",
+      "baseline_arrays_sha256": "0ba39f0b1a0be0c1e8040f778253ea41b5342f34b39786be64988f8b31d12c73",
+      "scope": "Reproduced on unchanged target baseline; this change does not modify Arrays, its map entry or the checker."
+    }
+  },
+  "resource_observations": {
+    "java_string_fallback": {
+      "prepared_searches": 10000,
+      "input_utf16_units": 8192,
+      "flags": [
+        "-XX:-DoEscapeAnalysis",
+        "-Xbatch",
+        "-Dm3.text.native.disable=true"
+      ],
+      "allocated_bytes_before": 164000000,
+      "allocated_bytes_after": 0,
+      "generic_stringbuilder_bytes_before_and_after": 164000000,
+      "scope": "Scoped per-thread allocation witness; no global zero-allocation or throughput claim."
+    },
+    "native_equal_prefix": {
+      "fallback_utf16_units_copied_before": 18,
+      "fallback_utf16_units_copied_after": 2,
+      "prefix_construction_units_both": 16,
+      "scope": "Counted comparison witness; actual JNI correctness is independently exercised."
+    },
+    "java_mask_zero_match": {
+      "paths": 6,
+      "effect": "Remove second row scan for stable zero-match inputs; keep the detached empty allocation and O(n) complexity."
+    }
+  },
+  "rights": {
+    "source_copying": "No Harmony, ECJ, challenge statement, editorial, submission or test body is copied. Donor categories and algorithm contracts are recorded privately.",
+    "preserved_target_licenses": [
+      "Apache-2.0",
+      "Apache-2.0 OR EPL-2.0"
+    ],
+    "public_names_and_native_exports": "Unchanged"
+  },
+  "required_before_promotion": [
+    "Resolve inherited Arrays naming-map source hash mismatch without weakening checker.",
+    "Run complete private reactor and required hosted CI.",
+    "Run source-built M3JDK installed-image/jtreg and relevant platform/VM/GC gates.",
+    "Validate mask native runtime separately; Java-only correction does not claim it."
+  ],
+  "not_implemented_in_this_patch": [
+    "New compiler flow lattice or full semantic dependency producers",
+    "Harmony JIT inliner integration",
+    "OpenJ9 shared-cache or OMR VM integration",
+    "Graal partial escape-analysis integration",
+    "Whole Java class-library replacement"
+  ],
+  "not_run": [
+    "Complete private Maven reactor and required hosted CI",
+    "Source-built full M3JDK installed image and jtreg",
+    "All supported platform, VM-tier, GC/CDS and JCK gates",
+    "Mask JNI runtime"
+  ]
+}
