@@ -1553,9 +1553,9 @@ jlong ClassLoader::class_link_time_ms() {
 }
 
 int ClassLoader::compute_Object_vtable() {
-  // Object declares five legacy virtual methods and M3's non-final toAdapter.
+  // Five legacy virtual methods plus M3's non-final toAdapter and toAdpater.
   // This count must match java.lang.Object before array klasses are created.
-  const int Object_vtable_size = 6;
+  const int Object_vtable_size = 7;
   return Object_vtable_size * vtableEntry::size();
 }
 
