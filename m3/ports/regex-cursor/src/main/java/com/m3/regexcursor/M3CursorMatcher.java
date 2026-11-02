@@ -140,6 +140,13 @@ public final class M3CursorMatcher {
 
     private boolean gateRejects(int from) {
         if (regex.required == null) return false;
+        // Public token-cursor factories borrow mutable int[] lanes. A cached
+        // required-literal probe (or negative presence fact) becomes stale if
+        // their caller changes IDs between searches. Never cache source gates
+        // on borrowed lanes; the matcher reads their current symbols instead.
+        if (cursor instanceof M3TokenCursor tokenCursor && !tokenCursor.stableFactsForMatcher()) {
+            return false;
+        }
         if (cursor instanceof M3CursorFacts facts
                 && (facts.unitPresenceMask() & regex.requiredMask) != regex.requiredMask) {
             return true;
