@@ -24,21 +24,23 @@ static jbyte m3_interval_single(const jint *pairs, jsize count, jint value) {
 /* Preserve query order; monotone cursor only for a proven nondecreasing batch. */
 static void m3_interval_batch(const jint *pairs, jsize intervals,
                               const jint *queries, jsize length, jbyte *output) {
-    int ordered = length >= 64 && (jlong)length * 2 >= intervals;
-    if (ordered) {
-        for (jsize q = 1; q < length; q++) {
-            if (M3_CHECK(queries[q] < queries[q - 1])) { ordered = 0; break; }
-        }
-    }
-    if (!ordered) {
+    if (length < 64 || (jlong)length * 2 < intervals) {
         for (jsize q = 0; q < length; q++) {
             output[q] = m3_interval_single(pairs, intervals, queries[q]);
         }
         return;
     }
+    /* The current prefix is proven nondecreasing as it is consumed. No pre-scan. */
     jsize cursor = 0;
     for (jsize q = 0; q < length; q++) {
         const jint value = queries[q];
+        if (q != 0 && M3_CHECK(value < queries[q - 1])) {
+            /* Prefix output is complete. The suffix has no ordering guarantee. */
+            for (jsize tail = q; tail < length; tail++) {
+                output[tail] = m3_interval_single(pairs, intervals, queries[tail]);
+            }
+            return;
+        }
         while (cursor < intervals && M3_CHECK(pairs[2 * cursor + 1] <= value)) cursor++;
         output[q] = (jbyte)(cursor < intervals && M3_CHECK(pairs[2 * cursor] <= value)
                 && M3_CHECK(value < pairs[2 * cursor + 1]));
