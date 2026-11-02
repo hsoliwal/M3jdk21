@@ -27,10 +27,12 @@ def main():
         v2='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V2.json'
         v3='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V3.json'
         v4='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V4.json'
+        v5='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V5.json'
         allowed={v1:'a468d927182781321b67c0a9f75f670ccf2d2215983cb7d38e1c59f0666ce432',
                  v2:'a7a41800bfd69e40eb59cc89cb74bb795a59971c5f5f4157edd78e326e7adb1d',
                  v3:'0e47dec693c1db21dff237352ec6b4c3dec40286944ef9de85934239db3580f9',
-                 v4:'b0d72c9e4606e06998ca3514999aa8655990f865ede325c5b7eb22f7d434170b'}
+                 v4:'b0d72c9e4606e06998ca3514999aa8655990f865ede325c5b7eb22f7d434170b',
+                 v5:'4e00d68a96907e23b10670c32ca76bdae5b9bc7f1b6d27cdf323f17b6a1fd178'}
         matches=[name for name in allowed if a.declared_transition.resolve()==(a.receiver/name).resolve()]
         assert len(matches)==1
         name=matches[0];declared=a.receiver/name
@@ -51,12 +53,15 @@ def main():
             expected_paths={
                 'm3/core/src/com/m3/text/JoinedM3StringPiece.java',
                 'm3/core/test/java/lang/M3CodeTextSignalBatchTest.java'}
-            if name in (v3,v4):expected_paths.update({
+            if name in (v3,v4,v5):expected_paths.update({
                 'm3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java',
                 'm3/core/test/M3LexiconPrecomputeTest.java'})
-            if name==v4:expected_paths.update({
+            if name in (v4,v5):expected_paths.update({
                 'm3/core/src/com/m3/text/SharedRelatedLexemeCatalog.java',
                 'm3/core/test/SharedLexiconCatalogFamilyAdmissionTest.java'})
+            if name==v5:expected_paths.update({
+                'm3/core/src/com/m3/text/SharedLexiconCatalog.java',
+                'm3/core/test/FoundationTest.java'})
             assert len(rows)==len(expected_paths) and {r['path'] for r in rows}==expected_paths
         assert all(indexed[p]['sha256']==digest for p,digest in document['custodySha256'].items())
         transition={r['path']:r for r in rows};assert len(transition)==len(rows)
