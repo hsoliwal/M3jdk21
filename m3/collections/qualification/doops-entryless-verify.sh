@@ -46,10 +46,16 @@ SRC=m3/collections/src/main/java
 ARRAYS=m3/arrays/src/main/java
 TEST=m3/collections/src/test/java/com/m3/collections
 
-# Compile the REAL M3 owners reached by the product-side independent oracles.
-# The sourcepath resolves first-party dependencies without introducing a facade.
+# Compile the real first-party packages in a bounded unnamed-module test
+# universe. The reactor's module-info.java requires com.m3.arrays and would
+# otherwise be implicitly compiled without a module path. Symlinks expose
+# ONLY package sources; no module descriptor or repository source is modified.
+mkdir -p "$OUT/sources/com/m3"
+ln -s "$PWD/$SRC/com/m3/collections" "$OUT/sources/com/m3/collections"
+ln -s "$PWD/$ARRAYS/com/m3/arrays" "$OUT/sources/com/m3/arrays"
+
 javac --release 21 -proc:none -Xlint:all,-module -Werror \
-  -sourcepath "$SRC:$ARRAYS" -d "$OUT/classes" \
+  -sourcepath "$OUT/sources" -d "$OUT/classes" \
   "$TEST/M3FilteredTreeSlotScanProof.java" \
   "$TEST/M3EntrylessSortedBulkProof.java" \
   "$TEST/M3IndexMaskPositionPageProof.java" \
