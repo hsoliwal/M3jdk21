@@ -33,6 +33,37 @@
       "post_git_blob_sha1": "ed5c008a5755d145d95e4bf2642b19c0aa62d8a7",
       "local_git_hash_object": "MATCH",
       "readback": "EXACT"
+    },
+    {
+      "path": "test/jdk/java/lang/Object/ObjectToAdpaterLegacyBinaryTest.java",
+      "pre": "ABSENT",
+      "post_git_blob_sha1": "1e08202532222e77a3ce6e69048b266871b7375e",
+      "local_git_hash_object": "MATCH",
+      "readback": "EXACT"
+    },
+    {
+      "path": "m3/qualification/object-toadpater/verify_candidate.py",
+      "pre": "ABSENT",
+      "post_git_blob_sha1": "c3d2f5339194335052276dc5e2e66b1142211e40",
+      "readback": "EXACT"
+    },
+    {
+      "path": "m3/qualification/object-toadpater/LegacyPreAliasSubclass.java.txt",
+      "pre": "ABSENT",
+      "post_git_blob_sha1": "8829d98401370c3350093fbf288a26d5336b6e17",
+      "readback": "EXACT"
+    },
+    {
+      "path": "m3/qualification/object-toadpater/LegacyImageFixtureOracle.java",
+      "pre": "ABSENT",
+      "post_git_blob_sha1": "55b0cfed807d5a24c6ade3afa559ea74b8cde3c1",
+      "readback": "EXACT"
+    },
+    {
+      "path": ".github/workflows/m3-object-toadpater-successor.yml",
+      "pre": "ABSENT",
+      "post_git_blob_sha1": "a14dedf7212394db557f7901098a120aa4da242d",
+      "readback": "EXACT"
     }
   ],
   "event_log": [
@@ -86,6 +117,42 @@
       "step": 10,
       "event": "hosted PR workflows observed queued, not yet terminal",
       "status": "QUEUED"
+    },
+    {
+      "step": 11,
+      "event": "historical Object.java source-seal refusal reproduced by actual GitHub Actions run #41403125458; old verifier unmodified",
+      "status": "FAIL_CUSTODY_EXPECTED",
+      "evidence": "expected 829fb37093cf3e8d11b3c1e3d42f898f0c86f3b697e7a66cefe09934be3bb259; actual cd90afde58029445f3aa172c53300d35c180bbafe432b8b37df01e0a6998532f"
+    },
+    {
+      "step": 12,
+      "event": "Java21 historical subclass binary produced on stock JDK and SHA256 pinned",
+      "status": "PASS",
+      "sha256": "4eff8d88c8154820bee15152e0f2cb4791b305cc67b5675b34276310aa568e36"
+    },
+    {
+      "step": 13,
+      "event": "independent old compiled subclass model: added non-final base virtual alias",
+      "status": "PASS",
+      "result": "PASS old-binary-override"
+    },
+    {
+      "step": 14,
+      "event": "independent negative model: added final base virtual alias",
+      "status": "PASS_EXPECTED_FAILURE",
+      "exception": "IncompatibleClassChangeError"
+    },
+    {
+      "step": 15,
+      "event": "stock-JDK historical class oracle, normal and -Xint; Java21/C17 lint compile",
+      "status": "PASS",
+      "assertions": "historical SHA and reflective method dispatch; NOT target M3JDK runtime"
+    },
+    {
+      "step": 16,
+      "event": "reviewed successor source checker, host classfile/oracle, JNI C syntax and workflow published as independent candidate-only gate",
+      "status": "PUBLISHED_UNRUN_HOSTED",
+      "workflow": "M3 Object toAdpater source and historical binary qualification"
     }
   ],
   "executed_model_gates": {
@@ -95,17 +162,30 @@
     "c_shared_compile": "PASS - cc -std=c17 -Wall -Wextra -Werror -Wpedantic -shared -fPIC",
     "default_jni": "PASS - java -Xcheck:jni, 24 assertions",
     "interpreter_jni": "PASS - java -Xcheck:jni -Xint, 24 assertions",
-    "local_git_blob_match": "PASS - target Java and C test candidates"
+    "local_git_blob_match": "PASS - target Java and C test candidates",
+    "binary_compat_old_nonfinal": "PASS - independently compiled old subclass dispatches after adding non-final base alias",
+    "binary_compat_old_final": "PASS_EXPECTED_FAILURE - IncompatibleClassChangeError when adding final base alias",
+    "legacy_image_sha256": "4eff8d88c8154820bee15152e0f2cb4791b305cc67b5675b34276310aa568e36",
+    "host_stock_jdk_oracle": "PASS normal and -Xint, strict javac -Xlint:all -Werror; historical bytes",
+    "host_jni_syntax": "PASS C17 -Wall -Wextra -Werror -Wpedantic with stock JNI headers; NO M3JDK runtime",
+    "successor_source_verifier": "PYTHON_SYNTAX_PASS + fail-closed negative fixture; repository-level positive test not executed locally"
   },
   "held_gates": [
     "actual M3JDK java.base compilation",
     "actual M3JDK HotSpot 7-slot build and native library",
     "jtreg direct Java/JNI main default, interpreted, C2",
-    "CDS, array klass, classloading, older subclass binary compatibility",
+    "CDS, array klass, classloading, and old subclass binary compatibility on an actual M3JDK built image",
     "full installed-image JNI -Xcheck:jni",
     "Synexia canonical Maven/OpenRewrite SDK and fixed-point replay",
     "macOS, Windows, JCK and release admission"
   ],
   "donor_decision": "Reuse existing Synexia M3AlgorithmRecipeFirstFullReviewRecipe and existing rights catalogue; references only to LC/HR/GFG, no third-party challenge code copied.",
-  "github_pr": "https://github.com/hsoliwal/M3jdk21/pull/2320"
+  "github_pr": "https://github.com/hsoliwal/M3jdk21/pull/2320",
+  "hosted_ci": {
+    "candidate_branch": "m3/object-toadpater-compat-20261102",
+    "successor_workflow": "M3 Object toAdpater source and historical binary qualification",
+    "status_at_recording": "QUEUED",
+    "historical_workflow_failed": "M3 Object adapter/progress candidate proof, SHA256 drift of Object.java (historical sealed baseline)",
+    "full_product_build": "NOT_RUN"
+  }
 }
