@@ -2,6 +2,21 @@
 <!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
 <!-- SPDX-License-Identifier: GPL-2.0-only -->
 
+## Forward qualification, 2026-11-02
+
+The source-pinned follow-up preserves this nonfinal candidate and its historical
+binary fixture. [QUALIFICATION.md](QUALIFICATION.md) and
+[QUALIFICATION.json](QUALIFICATION.json) record the later actual recipe, source
+build and runtime evidence, source identities and remaining gates. The original
+[RECEIPT.json](RECEIPT.json) remains the historical source/model-only record for
+commit `008a84b7e5592888f78e67318a1c08863a517109`.
+
+The expanded existing native fixture exercises both overridable method names,
+abstract-interface dispatch, both-method override chains, null-accepting overrides,
+exception identity, generic result boundaries and class-loader identity. Object's alias
+Javadoc makes null rejection depend on the selected canonical implementation.
+The workflow below remains a source/host-fixture lane; it does not build M3JDK.
+
 This is a separate, additive API candidate; it does not rename or remove the already implemented `public <T> T toAdapter(Class<T> clazz)`. The requested exact public name is `toAdpater`, and both signatures erase to `(Ljava/lang/Class;)Ljava/lang/Object;`.
 
 ## Semantic contract
@@ -17,7 +32,7 @@ Inventory exact Git source blobs and hashes; apply the documented source diff; r
 ## Donor decisions
 The existing Synexia `M3AlgorithmRecipeFirstFullReviewRecipe` is the catalogue owner. LeetCode706 (hash-table design), HackerRank Java `instanceof`/reflection, and GeeksforGeeks adapter-pattern references inform test classification only. Their editorial/submission code must not be copied. Existing M3JDK21 `Object` and `M3Object` semantics are authoritative; Oracle's JNI specification determines native calling behavior.
 
-Related open PRs `hsoliwal/com.synexia#14941` and `hsoliwal/M3jdk21#2317` qualify the original `toAdapter` boundary. Do not merge or rewrite those commits implicitly. This is an independent proposal and not a claim to have completed all repository-wide optimizations.
+The historical Synexia PR `hsoliwal/com.synexia#14941` (closed without merge) and M3JDK PR `hsoliwal/M3jdk21#2317` qualify the original `toAdapter` boundary. Do not merge or rewrite those commits implicitly. This is an independent proposal and not a claim to have completed all repository-wide optimizations.
 
 ## Pre-existing subclass binary regression (successor qualification)
 

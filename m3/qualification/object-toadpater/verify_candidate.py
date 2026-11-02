@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-2.0-only
-"""Strict read-only source identity and minimum structural gates for a single draft alias."""
+"""Strict read-only source identity gates for the reviewed nonfinal alias successor."""
 
 from pathlib import Path
 import re
@@ -10,13 +10,13 @@ import sys
 # Git raw blob identities; a new candidate requires a new reviewed, source-pinned successor.
 EXPECTED = {
     "src/java.base/share/classes/java/lang/Object.java":
-        "89076d679429154c620b589f122b34969f09c261",
+        "3233945b0266cda4db5a964628d5f8b755485380",
     "src/hotspot/share/classfile/classLoader.cpp":
         "81224eef99c64c02d583830ee4b3b2872779e0dd",
     "test/jdk/java/lang/Object/ObjectToAdpaterNativeTest.java":
-        "be9520d8907a29a0d689b175a041757891c85e19",
+        "769da7f368285964e56118ed5010433135aa8682",
     "test/jdk/java/lang/Object/libObjectToAdpaterNativeTest.c":
-        "ed5c008a5755d145d95e4bf2642b19c0aa62d8a7",
+        "b58178d1260a0634dc2fae312b91de621ef82062",
     "test/jdk/java/lang/Object/ObjectToAdpaterLegacyBinaryTest.java":
         "1e08202532222e77a3ce6e69048b266871b7375e",
 }
@@ -56,7 +56,7 @@ def verify(root: Path) -> None:
     if re.search(r"const int Object_vtable_size\s*=\s*6\s*;", loader):
         raise RuntimeError("STRUCTURE_DRIFT obsolete six-slot vtable")
     print(f"PASS candidate-only source identity: files={len(texts)} mode=read-only")
-    print("NOT_RUN product HotSpot/java.base compilation, jtreg, JNI runtime, full CI")
+    print("SOURCE_ONLY invocation: build/runtime outcomes are recorded separately in QUALIFICATION.json")
 
 
 if __name__ == "__main__":

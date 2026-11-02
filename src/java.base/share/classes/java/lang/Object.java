@@ -2,6 +2,8 @@
  * Copyright (c) 1994, 2022, Oracle and/or its affiliates. All rights reserved.
  * Modified 2026-10-18 by Hitesh Soliwal and Contributors to the Synexia Project:
  * add the exact lazy M3Object toAdapter capability.
+ * Modified 2026-11-02 by Hitesh Soliwal and Contributors to the Synexia Project:
+ * document the overridable toAdpater alias and its virtual delegation contract.
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
@@ -75,17 +77,19 @@ public class Object {
     }
 
     /**
-     * Returns an adapter using the existing {@link #toAdapter(Class)} capability.
-     * The public name {@code toAdpater} is intentionally spelled as requested.
+     * Adapts this object by delegating to {@link #toAdapter(Class)}.
      *
      * <p>This additional entry delegates virtually to {@code toAdapter}, so
      * subclasses that override that method keep their established semantics.
-     * This method is also overridable and adds no per-object state.
+     * The selected implementation determines the result and exceptions; this
+     * method performs no additional argument validation. This method is also
+     * overridable and adds no per-object state.
      *
      * @param clazz the requested adapter type
      * @param <T> the requested result type
-     * @return the existing typed adapter result, or {@code null} if unsupported
-     * @throws NullPointerException if clazz is {@code null}
+     * @return the selected adapter result, which may be {@code null}
+     * @throws NullPointerException if the selected implementation rejects a null
+     *         {@code clazz}; the implementation in {@code Object} rejects null
      */
     public <T> T toAdpater(Class<T> clazz) {
         return toAdapter(clazz);
