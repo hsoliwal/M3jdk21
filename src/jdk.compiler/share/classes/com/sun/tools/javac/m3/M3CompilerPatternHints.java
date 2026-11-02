@@ -48,22 +48,6 @@ public final class M3CompilerPatternHints implements M3AST.Consumer {
         "LOOP_BRANCH_REVIEW"
     };
     // Derived only from the canonical MethodFacts column IDs; no per-method allocation.
-    private static final long[] REQUIRED_MASKS = {
-        (1L << M3AST.MethodFacts.FIELD_READ_COUNT)
-                | (1L << M3AST.MethodFacts.FIELD_WRITE_COUNT)
-                | (1L << M3AST.MethodFacts.INVOCATION_COUNT),
-        1L << M3AST.MethodFacts.INVOCATION_COUNT,
-        (1L << M3AST.MethodFacts.LOOP_COUNT)
-                | (1L << M3AST.MethodFacts.INVOCATION_COUNT),
-        (1L << M3AST.MethodFacts.NEW_CLASS_COUNT)
-                | (1L << M3AST.MethodFacts.NEW_ARRAY_COUNT),
-        (1L << M3AST.MethodFacts.IF_COUNT) | (1L << M3AST.MethodFacts.SWITCH_COUNT)
-                | (1L << M3AST.MethodFacts.CONDITIONAL_COUNT),
-        1L << M3AST.MethodFacts.SYNCHRONIZED_COUNT,
-        (1L << M3AST.MethodFacts.LOOP_COUNT) | (1L << M3AST.MethodFacts.IF_COUNT)
-                | (1L << M3AST.MethodFacts.SWITCH_COUNT)
-                | (1L << M3AST.MethodFacts.CONDITIONAL_COUNT)
-    };
     private final Mode mode;
     private final Path receipt;
     private final ArrayList<String> rows = new ArrayList<>();
@@ -157,43 +141,55 @@ public final class M3CompilerPatternHints implements M3AST.Consumer {
         }
     }
 
-    /** 0=UNKNOWN, 1=NOT_OBSERVED, 2=CANDIDATE; absent projection columns are never zero. */
+    /**
+     * Three-valued source evidence: 0=UNKNOWN, 1=NOT_OBSERVED, 2=CANDIDATE.
+     * A known positive operand proves an OR without inventing the missing
+     * sibling; a known negative operand disproves an AND even if the other
+     * operand is unknown. This is a candidate calculus, not GoF intent proof.
+     */
     static int state(M3AST.MethodFacts facts, int row, int hint, boolean interfaces) {
-        long required = REQUIRED_MASKS[Objects.checkIndex(hint, NAMES.length)];
-        while (required != 0L) {
-            int column = Long.numberOfTrailingZeros(required);
-            if (!facts.hasValue(row, column)) return 0;
-            required &= required - 1;
-        }
-        if (hint <= 2 && facts.hasValue(row, M3AST.MethodFacts.UNRESOLVED)
-                && facts.intValue(row, M3AST.MethodFacts.UNRESOLVED) != 0) return 0;
-        boolean branch = hint == 4 || hint == 6 ? branching(facts, row) : false;
-        boolean candidate = switch (hint) {
-            case 0 -> (facts.intValue(row, M3AST.MethodFacts.FIELD_READ_COUNT)
-                    + (long) facts.intValue(row, M3AST.MethodFacts.FIELD_WRITE_COUNT)) > 0
-                    && positive(facts, row, M3AST.MethodFacts.INVOCATION_COUNT);
-            case 1 -> interfaces && positive(facts, row, M3AST.MethodFacts.INVOCATION_COUNT);
-            case 2 -> positive(facts, row, M3AST.MethodFacts.LOOP_COUNT)
-                    && positive(facts, row, M3AST.MethodFacts.INVOCATION_COUNT);
-            case 3 -> positive(facts, row, M3AST.MethodFacts.NEW_CLASS_COUNT)
-                    || positive(facts, row, M3AST.MethodFacts.NEW_ARRAY_COUNT);
-            case 4 -> branch;
-            case 5 -> positive(facts, row, M3AST.MethodFacts.SYNCHRONIZED_COUNT)
-                    || (facts.longValue(row, M3AST.MethodFacts.DECLARATION_FLAGS)
-                    & M3AST.MethodFacts.FLAG_SYNCHRONIZED) != 0;
-            case 6 -> positive(facts, row, M3AST.MethodFacts.LOOP_COUNT) && branch;
+        Objects.checkIndex(hint, NAMES.length);
+        // Relationship hints need resolution. Missing/unresolved attribution
+        // cannot be converted into a negative structural assertion.
+        if (hint <= 2 && (!facts.hasValue(row, M3AST.MethodFacts.UNRESOLVED)
+                || facts.intValue(row, M3AST.MethodFacts.UNRESOLVED) != 0)) return 0;
+        int invocation = knownPositive(facts, row, M3AST.MethodFacts.INVOCATION_COUNT);
+        return switch (hint) {
+            case 0 -> all(any(knownPositive(facts, row, M3AST.MethodFacts.FIELD_READ_COUNT),
+                    knownPositive(facts, row, M3AST.MethodFacts.FIELD_WRITE_COUNT)), invocation);
+            case 1 -> all(interfaces ? 2 : 1, invocation);
+            case 2 -> all(knownPositive(facts, row, M3AST.MethodFacts.LOOP_COUNT), invocation);
+            case 3 -> any(knownPositive(facts, row, M3AST.MethodFacts.NEW_CLASS_COUNT),
+                    knownPositive(facts, row, M3AST.MethodFacts.NEW_ARRAY_COUNT));
+            case 4 -> branches(facts, row);
+            case 5 -> any(knownPositive(facts, row, M3AST.MethodFacts.SYNCHRONIZED_COUNT),
+                    synchronizedMethod(facts, row));
+            case 6 -> all(knownPositive(facts, row, M3AST.MethodFacts.LOOP_COUNT), branches(facts, row));
             default -> throw new AssertionError("unknown M3 hint");
         };
-        return candidate ? 2 : 1;
     }
 
-    private static boolean branching(M3AST.MethodFacts facts, int row) {
-        return positive(facts, row, M3AST.MethodFacts.IF_COUNT)
-                || positive(facts, row, M3AST.MethodFacts.SWITCH_COUNT)
-                || positive(facts, row, M3AST.MethodFacts.CONDITIONAL_COUNT);
+    private static int knownPositive(M3AST.MethodFacts facts, int row, int column) {
+        if (!facts.hasValue(row, column)) return 0;
+        return facts.intValue(row, column) > 0 ? 2 : 1;
     }
-    private static boolean positive(M3AST.MethodFacts facts, int row, int column) {
-        return facts.intValue(row, column) > 0;
+    private static int synchronizedMethod(M3AST.MethodFacts facts, int row) {
+        if (!facts.hasValue(row, M3AST.MethodFacts.DECLARATION_FLAGS)) return 0;
+        return (facts.longValue(row, M3AST.MethodFacts.DECLARATION_FLAGS)
+                & M3AST.MethodFacts.FLAG_SYNCHRONIZED) != 0L ? 2 : 1;
+    }
+    private static int branches(M3AST.MethodFacts facts, int row) {
+        return any(any(knownPositive(facts, row, M3AST.MethodFacts.IF_COUNT),
+                knownPositive(facts, row, M3AST.MethodFacts.SWITCH_COUNT)),
+                knownPositive(facts, row, M3AST.MethodFacts.CONDITIONAL_COUNT));
+    }
+    /** Kleene three-valued OR; 2 dominates, then unknown, then known absent. */
+    private static int any(int first, int second) {
+        return first == 2 || second == 2 ? 2 : first == 0 || second == 0 ? 0 : 1;
+    }
+    /** Kleene three-valued AND; known absent dominates, then unknown. */
+    private static int all(int first, int second) {
+        return first == 1 || second == 1 ? 1 : first == 0 || second == 0 ? 0 : 2;
     }
     private static int value(M3AST.MethodFacts facts, int row, int column) {
         return facts.hasValue(row, column) ? facts.intValue(row, column) : -1;
