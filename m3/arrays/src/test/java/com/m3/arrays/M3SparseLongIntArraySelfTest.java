@@ -80,6 +80,13 @@ public final class M3SparseLongIntArraySelfTest {
             }
         }
 
+        // The required JNI backend is an independent zero-copy-ownership audit.
+        // It deliberately fails rather than silently using Java when absent.
+        if (System.getProperty("m3.arrays.native.path") != null) {
+            require(actual.verifyNonZeroCountRequiredNative() == oracle.size(),
+                    "native occupancy disagreement");
+            checks++;
+        }
         Map<Long, Integer> visited = new HashMap<>();
         actual.forEachNonZero((index, value) -> {
             Integer previous = visited.put(index, value);
