@@ -38,7 +38,12 @@ Java_com_m3_arrays_M3LongCoordinateIndex_nativeBound(
   jsize count = high - low;
   (*env)->GetLongArrayRegion(env, input, low, count, window);
   if ((*env)->ExceptionCheck(env)) return 0;
-  size_t ordinal = m3_long_coordinate_bound((const int64_t *)window,
+  /* jlong and int64_t need not have the same effective C type on every ABI.
+   * Copy signed values, never type-pun a JNI region through an incompatible pointer.
+   */
+  int64_t signed_values[M3_LONG_BOUND_REGION];
+  for (jsize i = 0; i < count; i++) signed_values[i] = (int64_t)window[i];
+  size_t ordinal = m3_long_coordinate_bound(signed_values,
       (size_t)count, (int64_t)key, upper != JNI_FALSE);
   return low + (jint)ordinal;
 }
