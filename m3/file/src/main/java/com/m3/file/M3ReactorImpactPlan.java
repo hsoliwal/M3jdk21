@@ -42,6 +42,9 @@ public final class M3ReactorImpactPlan {
      * File ownership mapping covers ALL original M3File physical slots, with -1
      * reserved for non-compilation build inputs or unresolved ownership.
      * A changed/impacted source/class whose owner is unknown forces a full plan.
+     * The file impact must belong to the exact immutable snapshot instance
+     * supplied here, including for conservative and no-op plans. Equal slot
+     * dimensions or delta masks do not establish observation identity.
      */
     public static M3ReactorImpactPlan compute(M3FileDeltaLedger.Snapshot snapshot,
             M3BuildImpactPlan fileImpact, int[] fileProject, int projects,
@@ -49,6 +52,7 @@ public final class M3ReactorImpactPlan {
         Objects.requireNonNull(snapshot, "snapshot");
         Objects.requireNonNull(fileImpact, "fileImpact");
         Objects.requireNonNull(fileProject, "fileProject");
+        fileImpact.requireSnapshot(snapshot);
         if (projects < 0 || projects > 1_000_000 || fileProject.length != snapshot.slots()) {
             throw new IllegalArgumentException("incomplete M3 physical file/project coordinates");
         }

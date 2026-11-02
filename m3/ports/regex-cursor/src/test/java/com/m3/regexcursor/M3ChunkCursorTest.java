@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Objects;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
 
@@ -81,6 +82,44 @@ class M3ChunkCursorTest {
         assertEquals(1, cursor.chunkLength());
         assertTrue(cursor.advance());
         assertEquals('b', cursor.unit(0));
+    }
+
+    @Test
+    void maximumLengthCursorKeepsInclusiveEndWithoutOverflow() {
+        CharSequence text = new CharSequence() {
+            @Override public int length() { return Integer.MAX_VALUE; }
+            @Override public char charAt(int index) {
+                Objects.checkIndex(index, length());
+                return index == length() - 1 ? 'z' : 'a';
+            }
+            @Override public CharSequence subSequence(int from, int to) {
+                throw new AssertionError("cursor must not materialize its source");
+            }
+        };
+        M3CharSequenceCursor whole = M3CharSequenceCursor.whole(text);
+        assertEquals(Integer.MAX_VALUE, whole.chunkLength());
+        whole.seek(Integer.MAX_VALUE);
+        assertEquals(0, whole.offset());
+        assertEquals('z', whole.unitAt(Integer.MAX_VALUE - 1));
+        assertThrows(IndexOutOfBoundsException.class, () -> whole.seek(-1));
+
+        M3CharSequenceCursor chunked = M3CharSequenceCursor.chunked(text,
+                new int[] {Integer.MAX_VALUE - 2, Integer.MAX_VALUE - 1});
+        chunked.seek(Integer.MAX_VALUE - 2);
+        assertEquals(Integer.MAX_VALUE - 2, chunked.offset());
+        assertEquals(1, chunked.chunkLength());
+        chunked.seek(Integer.MAX_VALUE);
+        assertEquals(Integer.MAX_VALUE - 1, chunked.offset());
+        assertEquals(1, chunked.chunkLength());
+        assertFalse(chunked.advance());
+        assertEquals('z', chunked.unit(0));
+        assertThrows(IndexOutOfBoundsException.class, () -> chunked.seek(-1));
+
+        M3CursorLiteralSearch search = M3CursorLiteralSearch.of("aaz");
+        assertEquals(Integer.MAX_VALUE - 3,
+                search.find(chunked, Integer.MAX_VALUE - 3, Integer.MAX_VALUE));
+        assertEquals(Integer.MAX_VALUE - 3,
+                search.findLast(chunked, Integer.MAX_VALUE - 3, Integer.MAX_VALUE));
     }
 
     @Test
