@@ -51,12 +51,20 @@ jobs:
               if source.is_symlink() or not source.is_file(): raise RuntimeError('missing/nonregular original source')
               data=source.read_bytes()
               data.decode('utf-8',errors='strict')
-              if hashlib.sha256(data).hexdigest()!=digest:
+              current_digest,current_blob=digest,blob
+              if path == 'm3/tooling/module-packs/cpu-tools/native/m3_interval_set.c':
+                  history='853d3f26ac640b5d32d65ee0819f3330585eb256:'+path
+                  past=subprocess.run(['git','show',history],check=True,capture_output=True).stdout
+                  if hashlib.sha256(past).hexdigest()!=digest or git('rev-parse',history)!=blob:
+                      raise RuntimeError('historical Wave21 native preimage drift')
+                  current_digest='8e256da0d370c3ea3a29af132ed5bb8e0b399e88b7d77aa6260d214f0542228f'
+                  current_blob='8e8a36d707bff57ec5a08e2b239e7af49cc3a7e0'
+              if hashlib.sha256(data).hexdigest()!=current_digest:
                   raise RuntimeError('source SHA256 drift: '+path)
-              if git('hash-object','--',path)!=blob:
-                  raise RuntimeError('original donor Git blob drift: '+path)
+              if git('hash-object','--',path)!=current_blob:
+                  raise RuntimeError('donor or reviewed successor Git blob drift: '+path)
               state=git('ls-files','--stage','--',path).split()
-              if len(state)!=4 or state[0]!='100644' or state[1]!=blob or state[2]!='0':
+              if len(state)!=4 or state[0]!='100644' or state[1]!=current_blob or state[2]!='0':
                   raise RuntimeError('source mode/index drift: '+path)
           if len(originals)!=7: raise RuntimeError('partial Wave21 source inventory')
           protected={
@@ -72,7 +80,10 @@ jobs:
           new=(root/'WAVE21_COVERAGE.tsv').read_text(encoding='utf-8').splitlines()
           if len(old)!=92 or len(new)!=92 or any(a.split('\t')!=b.split('\t')[:8] for a,b in zip(old,new)):
               raise RuntimeError('91-category inherited columns changed')
-          print('M3JDK21_WAVE21_EXACT_SOURCE_PASS|blobs=7|categories=91|protected_owners=4')
+          wave22=(root/'WAVE22_COVERAGE.tsv').read_text(encoding='utf-8').splitlines()
+          if len(wave22)!=92 or any(a.split('\t')!=b.split('\t')[:11] for a,b in zip(new,wave22)):
+              raise RuntimeError('Wave22 historical 91-category columns drift')
+          print('M3JDK21_WAVE21_EXACT_SOURCE_PASS|blobs=7|categories=91|protected_owners=4|successor=source-pinned')
           PY
   original-java-c-jni:
     needs: original-source-custody
