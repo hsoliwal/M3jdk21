@@ -243,18 +243,51 @@ public final class M3LongLongHashMap {
         return result;
     }
 
+    /**
+     * A deletion triggering tombstone compaction stages all replacement lanes before changing
+     * the live owner. Allocation or rehash failure leaves values, indices and iterator epoch
+     * untouched; the successful table is identical to deleting first and rehashing afterwards.
+     */
     private void deleteAt(int index) {
+        int nextSize = size - 1;
+        if (nextSize > 0 && keys.length > MIN_CAPACITY
+                && (long) occupied > (long) nextSize * 2) {
+            compactWithout(index, nextSize);
+            return;
+        }
         states[index] = DELETED;
         keys[index] = 0L;
         values[index] = 0L;
-        size--;
+        size = nextSize;
         modCount++;
-        if (size == 0) {
+        if (nextSize == 0) {
             Arrays.fill(states, EMPTY);
             occupied = 0;
-        } else if ((long) occupied > (long) size * 2 && keys.length > MIN_CAPACITY) {
-            rehash(keys.length);
         }
+    }
+
+    /** Commit all three primitive lanes and the cardinality only after full validation. */
+    private void compactWithout(int removedIndex, int expectedSize) {
+        int capacity = keys.length;
+        long[] nextKeys = new long[capacity];
+        long[] nextValues = new long[capacity];
+        byte[] nextStates = new byte[capacity];
+        int copied = 0;
+        for (int i = 0; i < states.length; i++) {
+            if (i != removedIndex && states[i] == USED) {
+                insertRehashed(keys[i], values[i], nextKeys, nextValues, nextStates);
+                copied++;
+            }
+        }
+        if (copied != expectedSize) {
+            throw new IllegalStateException("rehash lost map entries");
+        }
+        keys = nextKeys;
+        values = nextValues;
+        states = nextStates;
+        size = expectedSize;
+        occupied = copied;
+        modCount++;
     }
 
     private int findIndex(long key) {

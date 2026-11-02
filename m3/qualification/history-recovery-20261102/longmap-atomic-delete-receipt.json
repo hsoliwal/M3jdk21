@@ -1,0 +1,118 @@
+{
+  "schema": "M3_LONGMAP_ATOMIC_DELETE_HISTORY_RECEIPT_V1",
+  "data_only": true,
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "331167602f452aedb8586ade02920cd8791b522e",
+  "canonical_recipe_id": "com.synexia.m3.LongMapAtomicDelete20261031",
+  "canonical_dataset": "synexia-openrewrite-recipes/recipe-crates/m3-longmap-atomic-delete-20261031/datasets/current-owner-recovery-20261102",
+  "historical_private_source": "36d51831d2c81221d2af8a7851afb605a56a29ab",
+  "historical_public_introduction": "da067edea4aa050261c1baed918f1291ec0a9ac9",
+  "history_classification": "Undelivered historical capability with a reproducible current synchronous compaction-failure defect",
+  "product_preimage_commit": "1a901efe54f51a151e8fbbc89e872b591c894f28",
+  "product_preimage_tree": "0a240f57241e72448ddfe81915a2324d26298bb6",
+  "executed_outputs": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
+      "before_blob": "37e5575193fb010b03e786ad1f717fecce111fec",
+      "after_blob": "23d8c3f6e294beb5cb9b5b015470e31b69a17125",
+      "after_sha256": "da9e7f0d706ccdbd31c6efed4267ba00b36843f238a7a747f2c043177a1aa43d"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3AtomicDeleteFailureOracle.java",
+      "before_blob": null,
+      "after_blob": "0c3284a2250a134f5262d428ed4c558f05bfd55c",
+      "after_sha256": "e651ca75e7d4ca9bdf26cc2ca31249ca582dc0758be7803ef447856be4a5d9f3"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongLongAtomicCompactionTest.java",
+      "before_blob": null,
+      "after_blob": "2fd8b71e228f141bbbea51ed2d0cb65d9ad23bcc",
+      "after_sha256": "c1721306e7251bb94c652c9e84880f2071b9977750ebbbce302c03e24c331e9d"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongLongSharedTrace.java",
+      "before_blob": null,
+      "after_blob": "ca2f942bf527373aab9a6da27e063c9cf9e84dfa",
+      "after_sha256": "2bd90280b26085e1341b77027b45e8b0d66681faeb583b8304f6ada3a82fa41b"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongMapCompactionSuccessOracle.java",
+      "before_blob": null,
+      "after_blob": "19a2f6ede74c4e5d428de54a69df2c67697b9925",
+      "after_sha256": "3d9773120b7530f574297abf32c1b21c8231a03c2031fc1e2a900170061f9383"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongMapRealOomeTest.java",
+      "before_blob": null,
+      "after_blob": "f56da277227abe883cd0171cf51ee6de0ea332ee",
+      "after_sha256": "254fefa111991a5c0999942397e5f98c8f84062c4830c8e0ed559b865f1d50fc"
+    }
+  ],
+  "verified_scope": {
+    "private_owner_atom": "deleteAt / compactWithout",
+    "public_abi": "byte-identical javap -public -s descriptors",
+    "fields_and_jni_changes": 0,
+    "current_addTo_and_staged_growth_preserved": true,
+    "original_test_sources_preserved": 5,
+    "source_pipeline": {
+      "original_and_current_engine_recipe_tests": "4/4 each",
+      "actual_results": 6,
+      "fresh_repeat_results": 6,
+      "fixed_point_changes": 0
+    },
+    "original_behavior": {
+      "modes": [
+        "JIT",
+        "-Xint"
+      ],
+      "junit_tests_per_mode": 3,
+      "checks_per_mode": 219007,
+      "actual_compactions_per_mode": 12
+    },
+    "real_oome": {
+      "processes": 4,
+      "heap": "16MiB",
+      "overloads": [
+        "remove(long)",
+        "remove(long,long)"
+      ],
+      "assertions_per_process": 3007
+    },
+    "current_collections_module": {
+      "tests": 775,
+      "passed": 773,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2,
+      "unchanged_assumptions": [
+        "M3FilteredSplitsMaskSpansTest.allNativeBackendsAreRequiredByTheFullLane",
+        "M3FilteredSplitsMaskSpansTest.maskSpanCheckedJniOracle"
+      ]
+    },
+    "independent_review": "No Critical or Important source finding; exact artifact/runtime/SDK/source-preservation checks recorded in canonical dataset qualification/current-head"
+  },
+  "preservation": {
+    "unchanged_existing_tree_entries": 142546,
+    "production_paths_modified": 1,
+    "original_test_paths_added": 5,
+    "data_only_receipt_paths_added": 1,
+    "deleted_paths": 0,
+    "concurrent_traversal_paths_preserved": 5
+  },
+  "naming": {
+    "existing_mapping_id": "synexia.collections.long-long-add-to",
+    "mapping_and_plan_blobs": [
+      "1c80a11095bec62eb83c336e31b51754de4b9e4a",
+      "0128d78bda45b60001b3430cc753a44a22fd4c89"
+    ],
+    "existing_candidate_pins_and_queued_operations_preserved": true,
+    "unchanged_before_after_refusal": "Arrays.java companion source SHA drift"
+  },
+  "pending_qualification": [
+    "Installed M3JDK21 source-built image, jtreg and HotSpot",
+    "Broader collector/CDS/JNI/platform qualification",
+    "Representative comparative CPU/retained-heap/native-memory measurements",
+    "Full String->arrays->collections phase admission remains unchanged"
+  ],
+  "created_at_utc": "2026-11-02T06:17:13.457615+00:00"
+}
