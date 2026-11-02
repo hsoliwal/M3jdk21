@@ -30,3 +30,11 @@ The Java 21 class file `LegacyPreAliasSubclass` is compiled once against unmodif
 - This model does **not** establish actual M3JDK jtreg or HotSpot image success.
 
 The historical `m3/compatibility/check_object_adapter_progress_receiver_20261017.py` source seal remains unchanged and intentionally refuses the evolved `Object.java` SHA-256. GitHub Actions for the initial alias PR reported this refusal; it is not converted into a green result. A separate successor acceptance receipt must pin the new source identity without weakening that historical check.
+
+## Strict scoped verifier and host-JDK fixture lane
+
+`verify_candidate.py` is an **additive source-identity** gate for exactly five candidate product/test paths, pinned to their reviewed Git blobs. It checks the public alias signature and the seven-slot HotSpot source constant without replacing, modifying, disabling, or widening historical admission guards. The verifier emits `SOURCE_DRIFT` on any unreviewed blob, rejects missing or duplicate declarations, and is idempotent on the same checkout.
+
+The first-party `LegacyPreAliasSubclass.java.txt` is deliberately **not** compiled as part of the M3JDK source tree: a separate host OpenJDK 21 compiler constructs its historical classfile and checks SHA-256 against the frozen embedded bytecode. `LegacyImageFixtureOracle.java` loads the class and tests the old generic method on a stock JDK. The host lane also syntax-checks the new C17 JNI fixture against the stock JDK JNI headers.
+
+All of these checks are **source/fixture** checks, not jtreg execution on an M3JDK image. The new GitHub Actions workflow is strictly scoped to this candidate and may remain queued or fail independently. Historical source-drift failures remain visible.
