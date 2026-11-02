@@ -50,6 +50,26 @@ public final class M3LongCoordinateIndexSelfTest {
             assertThat(Arrays.equals(actual.keysToArray(), reference.keySet().stream()
                     .mapToLong(Long::longValue).toArray()), "detached keys");
             cases++;
+            long[] batch = {Long.MIN_VALUE, Long.MAX_VALUE, 0L, -1L, 1L,
+                    (long) Integer.MAX_VALUE, (1L << 50),
+                    random.nextInt(6000) - 3000, random.nextInt(6000) - 3000,
+                    Long.MIN_VALUE, Long.MAX_VALUE};
+            int[] lowerBatch = actual.lowerBounds(batch);
+            int[] upperBatch = actual.upperBounds(batch);
+            for (int k = 0; k < batch.length; k++) {
+                assertThat(lowerBatch[k] == reference.headMap(batch[k], false).size(),
+                        "Java batch lower index");
+                assertThat(upperBatch[k] == reference.headMap(batch[k], true).size(),
+                        "Java batch upper index");
+                cases += 2;
+            }
+            if (nativeOn) {
+                int[] lowerNative = actual.lowerBoundsRequiredNative(batch);
+                int[] upperNative = actual.upperBoundsRequiredNative(batch);
+                assertThat(Arrays.equals(lowerBatch, lowerNative), "native batch lower");
+                assertThat(Arrays.equals(upperBatch, upperNative), "native batch upper");
+                cases += 2;
+            }
             for (int trial = 0; trial < 45; trial++) {
                 long key = switch (trial % 9) {
                     case 0 -> Long.MIN_VALUE;
