@@ -1,0 +1,51 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 result-only array map receiver
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/implementations/apache-*-map/src/main/java/jdk/m3/collections/apache/M3*Map.java'
+      - 'm3/collections/qualification/array-map-receiver-20261102/**'
+      - '.github/workflows/m3-array-map-result-only.yml'
+  workflow_dispatch:
+jobs:
+  java21-array-map-receiver:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Compile each exact generated class in its member module
+        shell: bash
+        run: |
+          set -euo pipefail
+          for module in apache-hashed-map apache-linked-map apache-lru-map; do
+            ./mvnw -B -ntp -f "m3/collections/implementations/$module/pom.xml" -DskipTests package
+          done
+      - name: Run Java 21 / interpreter contract and storage-lane probes
+        shell: bash
+        run: |
+          set -euo pipefail
+          ./mvnw -B -ntp -f m3/collections/implementations/apache-hashed-map/pom.xml \
+            dependency:build-classpath "-Dmdep.outputFile=$RUNNER_TEMP/m3-apache-provider.cp"
+          CP="$(cat "$RUNNER_TEMP/m3-apache-provider.cp")"
+          for module in apache-hashed-map apache-linked-map apache-lru-map; do
+            CP="$CP:$GITHUB_WORKSPACE/m3/collections/implementations/$module/target/classes"
+          done
+          mkdir -p "$RUNNER_TEMP/m3-receiver"
+          javac --release 21 -Xlint:all -Werror -cp "$CP" -d "$RUNNER_TEMP/m3-receiver" \
+            m3/collections/qualification/array-map-receiver-20261102/M3ArrayMapReceiverSmoke.java
+          java -ea -cp "$CP:$RUNNER_TEMP/m3-receiver" jdk.m3.collections.receiver.M3ArrayMapReceiverSmoke
+          java -Xint -ea -cp "$CP:$RUNNER_TEMP/m3-receiver" jdk.m3.collections.receiver.M3ArrayMapReceiverSmoke
+      - name: Verify source blobs match qualified generated output
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd m3/collections/implementations
+          test "$(git hash-object apache-hashed-map/src/main/java/jdk/m3/collections/apache/M3HashedMap.java)" = 0440ac943b5eb31d443d8be9943fc14597890277
+          test "$(git hash-object apache-linked-map/src/main/java/jdk/m3/collections/apache/M3LinkedMap.java)" = ebf03006129b74b813e406613594c196de10f477
+          test "$(git hash-object apache-lru-map/src/main/java/jdk/m3/collections/apache/M3LRUMap.java)" = 703641cfe70f58ba93dc4a9ef5129048c3b59bcd
