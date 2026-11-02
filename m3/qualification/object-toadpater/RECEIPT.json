@@ -1,0 +1,111 @@
+{
+  "schema": "M3_OBJECT_TOADPATER_CANDIDATE_RECEIPT_V1",
+  "date": "2026-11-02",
+  "implementation": "draft candidate; not product-qualified",
+  "branch": "m3/object-toadpater-compat-20261102",
+  "existing_contract": "public <T> T toAdapter(Class<T> clazz)",
+  "new_contract": "public <T> T toAdpater(Class<T> clazz)",
+  "source_inventory": [
+    {
+      "path": "src/java.base/share/classes/java/lang/Object.java",
+      "pre_git_blob_sha1": "a9899e1c2970f6d5e9172ffb12f5b7399d052b68",
+      "post_git_blob_sha1": "89076d679429154c620b589f122b34969f09c261",
+      "git_commit": "fe1887763c4293a1ddc8a8abda55438b48f18e85",
+      "readback": "EXACT"
+    },
+    {
+      "path": "src/hotspot/share/classfile/classLoader.cpp",
+      "pre_git_blob_sha1": "de2fce5aece1dc5802604821f731e33cee4f1245",
+      "post_git_blob_sha1": "81224eef99c64c02d583830ee4b3b2872779e0dd",
+      "git_commit": "99de32d34b3cef600e0293db36b2c8fdf3d76268",
+      "readback": "EXACT"
+    },
+    {
+      "path": "test/jdk/java/lang/Object/ObjectToAdpaterNativeTest.java",
+      "pre": "ABSENT",
+      "post_git_blob_sha1": "be9520d8907a29a0d689b175a041757891c85e19",
+      "local_git_hash_object": "MATCH",
+      "readback": "EXACT"
+    },
+    {
+      "path": "test/jdk/java/lang/Object/libObjectToAdpaterNativeTest.c",
+      "pre": "ABSENT",
+      "post_git_blob_sha1": "ed5c008a5755d145d95e4bf2642b19c0aa62d8a7",
+      "local_git_hash_object": "MATCH",
+      "readback": "EXACT"
+    }
+  ],
+  "event_log": [
+    {
+      "step": 1,
+      "event": "repository + related PR inventory",
+      "status": "PASS"
+    },
+    {
+      "step": 2,
+      "event": "create independent branch and docs first",
+      "status": "PASS",
+      "commit": "4aed24961295de2070ddc522d66215eba183c305"
+    },
+    {
+      "step": 3,
+      "event": "initial source seal used historic Object blob 2bfef310 and refused current a9899e1c",
+      "status": "REFUSED"
+    },
+    {
+      "step": 4,
+      "event": "re-inventory actual branch Object source and confirm exact anchor",
+      "status": "PASS"
+    },
+    {
+      "step": 5,
+      "event": "apply scoped Object + classLoader mutations and read back each",
+      "status": "PASS"
+    },
+    {
+      "step": 6,
+      "event": "add target Java and native C jtreg fixtures, verify exact local Git blob",
+      "status": "PASS"
+    },
+    {
+      "step": 7,
+      "event": "Java 21/C17 independent JNI model first attempt named a class Override, shadowing annotation",
+      "status": "FAIL"
+    },
+    {
+      "step": 8,
+      "event": "repair model-only alias name, strict compile and JNI execution",
+      "status": "PASS"
+    },
+    {
+      "step": 9,
+      "event": "create draft PR #2320, read back complete diff",
+      "status": "PASS"
+    },
+    {
+      "step": 10,
+      "event": "hosted PR workflows observed queued, not yet terminal",
+      "status": "QUEUED"
+    }
+  ],
+  "executed_model_gates": {
+    "engine": "host Java 21 OpenJDK, host C17 compiler; custom ModelObject, not M3JDK21 source",
+    "java_lint_compile": "PASS - javac --release 21 -proc:none -Xlint:all -Werror",
+    "c_syntax": "PASS - cc -std=c17 -Wall -Wextra -Werror -Wpedantic -fsyntax-only",
+    "c_shared_compile": "PASS - cc -std=c17 -Wall -Wextra -Werror -Wpedantic -shared -fPIC",
+    "default_jni": "PASS - java -Xcheck:jni, 24 assertions",
+    "interpreter_jni": "PASS - java -Xcheck:jni -Xint, 24 assertions",
+    "local_git_blob_match": "PASS - target Java and C test candidates"
+  },
+  "held_gates": [
+    "actual M3JDK java.base compilation",
+    "actual M3JDK HotSpot 7-slot build and native library",
+    "jtreg direct Java/JNI main default, interpreted, C2",
+    "CDS, array klass, classloading, older subclass binary compatibility",
+    "full installed-image JNI -Xcheck:jni",
+    "Synexia canonical Maven/OpenRewrite SDK and fixed-point replay",
+    "macOS, Windows, JCK and release admission"
+  ],
+  "donor_decision": "Reuse existing Synexia M3AlgorithmRecipeFirstFullReviewRecipe and existing rights catalogue; references only to LC/HR/GFG, no third-party challenge code copied.",
+  "github_pr": "https://github.com/hsoliwal/M3jdk21/pull/2320"
+}
