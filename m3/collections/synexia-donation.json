@@ -1128,7 +1128,7 @@
     "linux_acceptance": "PENDING_LINUX",
     "phase_advance": false
   },
-  "source_set_successor_current": "superset_source_successor_20261030",
+  "source_set_successor_current": "master_source_successor_20261031",
   "tools4j_unix_refinement_20261019": {
     "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V1",
     "receiver_baseline": "677437be295b23f7ccf7409be287008944d0e8b0",
@@ -1161,6 +1161,27 @@
     "naming_disposition": "EXISTING_OWNER_REFINEMENT_NO_RENAME; BASELINE_INVENTORY_RECONCILIATION",
     "historical_hash_rule": "Original donor and target hash records retain their recorded receiving revisions. Current listed source hashes are the final_received_sha256 column of this exact successor; historical files and receipts are not rewritten.",
     "review_scope": "Inventory reconciliation is not algorithm review of all503 Java files. Source refinements and their individual canonical recipes/gates remain separately recorded in the target handoff.",
+    "phase_advance": false
+  },
+  "master_source_successor_20261031": {
+    "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V1",
+    "successor_receipt": "qualification/master-source-successor-20261031.tsv",
+    "successor_receipt_sha256": "8935d3d210d05da02b37049c6fad01fde7f299541f07a93d3f65d9a478c054b3",
+    "receipt_columns": [
+      "path",
+      "inherited_sha256",
+      "final_received_sha256"
+    ],
+    "inherited_composed_manifest_sha256": "4950b0c157284d73ffe3410d8356aa8a22c81c0e2dbcc865a5784e8fd610ab2c",
+    "inherited_rows": 772,
+    "successor_rows": 10,
+    "refined_rows": 8,
+    "added_rows": 2,
+    "resulting_rows": 774,
+    "exact_java_source_membership": 767,
+    "predecessor_successor": "superset_source_successor_20261030",
+    "origin": "master 52fb81c483c: sources changed or added by merged PRs after the superset seal (ed491925e0a, 4e26547c922, ef0beec8bfb, 7dd0ecba3db, 104f2f46ced)",
+    "recipe": "H:/m3-scratch/jn/patch_master_successor.py (replays the sealed chain, records each drift)",
     "phase_advance": false
   },
   "superset_source_successor_20261030": {
