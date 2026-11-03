@@ -1,0 +1,32 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: GPL-2.0-only
+name: M3 Object/progress current-source census (diagnostic only)
+on:
+  pull_request:
+    paths:
+      - 'm3/compatibility/m3-object-progress-current-census-20261103.tsv'
+      - 'm3/compatibility/check_object_progress_current_census_20261103.py'
+      - 'm3/compatibility/test_object_progress_current_census_20261103.py'
+      - 'm3/qualification/object-adapter-selfcast/PROGRESS_CENSUS_CONTRACT.md'
+      - '.github/workflows/m3-object-progress-current-census-20261103.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  current-source-observation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Python compile and source lint
+        run: |
+          python3 -B -m py_compile m3/compatibility/check_object_progress_current_census_20261103.py
+          python3 -B -m py_compile m3/compatibility/test_object_progress_current_census_20261103.py
+      - name: Negative and source-custody unit tests
+        run: python3 -B -m unittest discover -s m3/compatibility -p 'test_object_progress_current_census_20261103.py' -v
+      - name: Verify read-only 14-file current census
+        run: python3 -B m3/compatibility/check_object_progress_current_census_20261103.py
+      - name: Refuse release inference
+        run: echo 'OBSERVED_ONLY is NOT historical manifest acceptance, rebuilt M3JDK21, JNI or runtime qualification.'
