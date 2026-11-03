@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.FiveProviderBidiMaps20261017
+displayName: Five-provider M3 SDK bidirectional adapters
+description: Source-sealed supplier of Guava BiMap and Apache BidiMap over existing M3 map owners.
+recipeList:
+  - com.synexia.rewrite.M3FiveProviderBidiMapsRecipe
