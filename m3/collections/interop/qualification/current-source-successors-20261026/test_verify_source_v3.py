@@ -55,6 +55,32 @@ class FiveTestSuccessorGate(unittest.TestCase):
         self.assertEqual(v3.EXPECTED[0][4], "d163cdc9ebbf7c023df16c423cc094f01987e4bd")
         self.assertNotEqual(v3.EXPECTED[0][1], v3.EXPECTED[0][3])
 
+    def file_sets(self):
+        old = {v3.JAVA_BASE + "Kept.java": ("100644", "a" * 40)}
+        now = dict(old)
+        now.update({p: ("100644", b) for p, b in v3.ADMITTED_ADDITIONS.items()})
+        return old, now
+
+    def test_exactly_admitted_additions_pass(self):
+        v3.check_file_set(*self.file_sets())
+
+    def test_unadmitted_addition_and_deletion_refused(self):
+        old, now = self.file_sets()
+        now[v3.JAVA_BASE + "Unreviewed.java"] = ("100644", "b" * 40)
+        with self.assertRaisesRegex(ValueError, "addition/deletion"):
+            v3.check_file_set(old, now)
+        old, now = self.file_sets()
+        del now[v3.JAVA_BASE + "Kept.java"]
+        with self.assertRaisesRegex(ValueError, "addition/deletion"):
+            v3.check_file_set(old, now)
+
+    def test_admitted_addition_with_another_blob_refused(self):
+        old, now = self.file_sets()
+        path = sorted(v3.ADMITTED_ADDITIONS)[0]
+        now[path] = ("100644", "c" * 40)
+        with self.assertRaisesRegex(ValueError, "blob or mode drift"):
+            v3.check_file_set(old, now)
+
 
 if __name__ == "__main__":
     unittest.main()
