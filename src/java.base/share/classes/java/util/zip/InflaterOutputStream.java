@@ -58,6 +58,9 @@ public class InflaterOutputStream extends FilterOutputStream {
     /** true iff {@link #close()} has been called. */
     private boolean closed = false;
 
+    /** True if finish() closed this stream's internally owned inflater. */
+    private boolean defaultInflaterClosed;
+
     /**
      * Checks to make sure that this stream has not been closed.
      */
@@ -187,6 +190,7 @@ public class InflaterOutputStream extends FilterOutputStream {
         flush();
         if (usesDefaultInflater) {
             inf.end();
+            defaultInflaterClosed = true;
         }
     }
 
@@ -222,6 +226,9 @@ public class InflaterOutputStream extends FilterOutputStream {
     public void write(byte[] b, int off, int len) throws IOException {
         // Sanity checks
         ensureOpen();
+        if (usesDefaultInflater && defaultInflaterClosed) {
+            throw new IOException("Inflater closed");
+        }
         if (b == null) {
             throw new NullPointerException("Null buffer for read");
         }
