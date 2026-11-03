@@ -173,8 +173,59 @@ public final class M3LongCoordinateIndex {
     private int[] boundsJava(long[] queries, boolean upper) {
         Objects.requireNonNull(queries, "queries");
         int[] result = new int[queries.length];
-        for (int i = 0; i < result.length; i++) result[i] = bound(queries[i], upper);
+        int hint = 0;
+        int localStreak = 0;
+        long previous = 0L;
+        for (int i = 0; i < queries.length; i++) {
+            long query = queries[i];
+            // Descending or unproven batches use the original scalar bound.
+            // Enable the nearby window only after two measured small ordinal
+            // advances: sawtooth/random streams retain logarithmic search.
+            if (i == 0 || query < previous) {
+                hint = bound(query, upper);
+                localStreak = 0;
+            } else if (query != previous) {
+                int oldHint = hint;
+                hint = localStreak == 2
+                        ? boundFromHint(query, upper, hint) : bound(query, upper);
+                localStreak = hint - oldHint <= LOCAL_WINDOW
+                        ? Math.min(2, localStreak + 1) : 0;
+            }
+            result[i] = hint;
+            previous = query;
+        }
         return result;
+    }
+
+    /**
+     * Bounded local window for nondecreasing queries. An ordinary binary
+     * search takes over for a distant jump, avoiding the extra logarithmic
+     * probe chain that galloping imposes on random and sawtooth workloads.
+     * A nearby hit costs O(log LOCAL_WINDOW), a far hit O(log n).
+     */
+    private static final int LOCAL_WINDOW = 8;
+
+    private int boundFromHint(long query, boolean upper, int from) {
+        int length = keys.length;
+        if (from == length) return length;
+        int end = from + Math.min(LOCAL_WINDOW, length - from);
+        if (precedes(keys[end - 1], query, upper)) {
+            return boundBetween(query, upper, end, length);
+        }
+        return boundBetween(query, upper, from, end);
+    }
+
+    private int boundBetween(long query, boolean upper, int low, int high) {
+        while (low < high) {
+            int middle = low + ((high - low) >>> 1);
+            if (precedes(keys[middle], query, upper)) low = middle + 1;
+            else high = middle;
+        }
+        return low;
+    }
+
+    private static boolean precedes(long coordinate, long query, boolean upper) {
+        return upper ? coordinate <= query : coordinate < query;
     }
 
     /**
