@@ -42,7 +42,22 @@ jobs:
           from pathlib import Path
           root = Path("m3/tooling/module-packs/cpu-tools")
           text = (root/"build.py").read_text()
-          assert text.count('FIXTURES = ("M3DonorToolsTest", "M3SourceToolsTest", "M3CpuToolsTest", "M3FileCpuFactsTest")') == 1
+          import ast
+          assignments = [
+              node for node in ast.parse(text, filename=str(root/"build.py")).body
+              if isinstance(node, ast.Assign)
+              and len(node.targets) == 1
+              and isinstance(node.targets[0], ast.Name)
+              and node.targets[0].id == "FIXTURES"
+          ]
+          assert len(assignments) == 1, "FIXTURES must have one literal declaration"
+          fixtures = ast.literal_eval(assignments[0].value)
+          required = ("M3DonorToolsTest", "M3SourceToolsTest",
+                      "M3CpuToolsTest", "M3FileCpuFactsTest")
+          assert isinstance(fixtures, tuple), "FIXTURES must be a tuple"
+          assert fixtures[:len(required)] == required, "original linked fixtures changed"
+          assert len(fixtures) == len(set(fixtures)), "duplicate linked fixture"
+          assert all(isinstance(name, str) and name.isidentifier() for name in fixtures)
           assert 'for test in FIXTURES:' in text
           assert 'image-fixtures-javac' in text
           assert 'for test in ("M3SourceToolsTest", "M3CpuToolsTest", "M3FileCpuFactsTest"):' in text
