@@ -71,6 +71,14 @@ public final class M3SingleValueMapView<K, V> implements Map<K, V>, Serializable
         this.targetMap = targetMap;
     }
 
+    /**
+     * Retains the original M3MultiValueMap constructor descriptor for precompiled clients.
+     * The generalized Map constructor remains the single validation/ownership path.
+     */
+    public M3SingleValueMapView(final M3MultiValueMap<K, V> targetMap) {
+        this((Map<K, List<V>>) targetMap);
+    }
+
     @Override
     public int size() {
         return targetMap.size();
