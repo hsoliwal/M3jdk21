@@ -64,12 +64,13 @@ public class Object {
      *         exact type, otherwise null
      * @throws NullPointerException if clazz is null
      */
+    @SuppressWarnings("unchecked")
     public <T> T toAdapter(Class<T> clazz) {
         if (clazz == null) {
             throw new NullPointerException("clazz");
         }
         if (clazz.isInstance(this)) {
-            return clazz.cast(this);
+            return (T) this;
         }
         return clazz == M3Object.class ? clazz.cast(M3Object.of(this)) : null;
     }
