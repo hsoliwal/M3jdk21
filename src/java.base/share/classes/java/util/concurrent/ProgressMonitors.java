@@ -129,6 +129,63 @@ public final class ProgressMonitors {
     }
 
     /**
+     * Captures the current borrowed monitor for later execution by a Runnable.
+     * This does not submit work, own a queue, or complete the borrowed monitor.
+     *
+     * @param task the task
+     * @return a task that restores its worker thread's previous progress scope
+     * @throws NullPointerException if task is null
+     */
+    public static Runnable wrap(Runnable task) {
+        Objects.requireNonNull(task, "task");
+        return wrap(task, current());
+    }
+
+    /**
+     * Binds an explicit borrowed monitor only while the Runnable executes.
+     *
+     * @param task the task
+     * @param monitor the borrowed monitor
+     * @return a task with scoped progress and ordinary Runnable failure semantics
+     * @throws NullPointerException if task or monitor is null
+     */
+    public static Runnable wrap(Runnable task, ProgressMonitor monitor) {
+        Objects.requireNonNull(task, "task");
+        Objects.requireNonNull(monitor, "monitor");
+        return () -> run(task, monitor);
+    }
+
+    /**
+     * Captures the current borrowed monitor for a later Callable execution.
+     * This preserves checked exceptions, return values and executor semantics.
+     *
+     * @param <T> the result type
+     * @param task the task
+     * @return a task with the captured progress scope
+     * @throws NullPointerException if task is null
+     */
+    public static <T> Callable<T> wrap(Callable<T> task) {
+        Objects.requireNonNull(task, "task");
+        return wrap(task, current());
+    }
+
+    /**
+     * Binds an explicit borrowed monitor only while the Callable executes.
+     * The caller's ExecutorService owns Future completion and cancellation.
+     *
+     * @param <T> the result type
+     * @param task the task
+     * @param monitor the borrowed monitor
+     * @return a task with scoped progress
+     * @throws NullPointerException if task or monitor is null
+     */
+    public static <T> Callable<T> wrap(Callable<T> task, ProgressMonitor monitor) {
+        Objects.requireNonNull(task, "task");
+        Objects.requireNonNull(monitor, "monitor");
+        return () -> call(task, monitor);
+    }
+
+    /**
      * Creates a child whose completed work is scaled to a bounded parent budget.
      * Completing the child credits the remaining budget without completing its
      * parent. A child observes parent cancellation, while cancelling the child
