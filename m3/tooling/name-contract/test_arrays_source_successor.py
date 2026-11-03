@@ -6,7 +6,7 @@ from pathlib import Path
 import unittest
 
 ROOT = Path(__file__).resolve().parent
-FILE = ROOT / "receipts/arrays-jdk8309665-20261102/verify.py"
+FILE = ROOT / "receipts/arrays-source-successor/verify.py"
 SPEC = importlib.util.spec_from_file_location("m3_arrays_8309665", FILE)
 VERIFY = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
