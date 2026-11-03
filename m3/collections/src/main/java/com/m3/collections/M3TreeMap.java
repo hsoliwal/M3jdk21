@@ -181,7 +181,17 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
                 && Objects.equals(sorted.comparator(), tree.comparator)) {
             int count = source.size();
             if (count > 0) {
-                tree.loadSorted(count, source.entrySet().iterator(), expected);
+                if (source instanceof M3TreeMap<?, ?> nativeSource) {
+                    // This owner already stores primitive AVL slots and key/value lanes.
+                    // Avoid materializing caller-visible Entry facades during bulk transfer.
+                    @SuppressWarnings("unchecked")
+                    M3TreeMap<? extends K, ? extends V> sameOwner =
+                            (M3TreeMap<? extends K, ? extends V>) nativeSource;
+                    tree.loadSortedSlots(count, new SortedSlotCursor<>(sameOwner), expected);
+                } else {
+                    // Third-party SortedMap may expose observable entry wrappers.
+                    tree.loadSorted(count, source.entrySet().iterator(), expected);
+                }
                 return true;
             }
         }
@@ -363,6 +373,35 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
     /** Throws AssertionError if ownership, ordering, heights or AVL balance is damaged. */
     public void verifyInvariants() { tree.verify(); }
 
+    /**
+     * One private cursor per bulk transfer, not an Entry object for each mapping.
+     * Its separate lookup is intentional: M3SlotMap.LiveEntry.getValue() locates
+     * the stored key through M3TreeMap.findSlot, invoking the user comparator.
+     * A direct valueAt(physicalSlot) shortcut would silently skip callbacks.
+     */
+    private static final class SortedSlotCursor<K, V> {
+        private final M3TreeMap<? extends K, ? extends V> source;
+        private final int expected;
+        private int current;
+        SortedSlotCursor(M3TreeMap<? extends K, ? extends V> source) {
+            this.source = source;
+            this.current = source.firstSlot();
+            this.expected = source.revision();
+        }
+        K nextKey() {
+            source.check(expected);
+            if (current < 0) { throw new NoSuchElementException(); }
+            K key = source.keyAt(current);
+            current = source.nextSlot(current);
+            source.cacheEntryFacades();
+            return key;
+        }
+        V valueFor(Object key) {
+            int resolved = source.findSlot(key);
+            return resolved < 0 ? null : source.valueAt(resolved);
+        }
+    }
+
     private static final class Tree<K, V> {
         private Object[] keys = M3SlotArrays.EMPTY_OBJECTS;
         private Object[] values = M3SlotArrays.EMPTY_OBJECTS;
@@ -486,6 +525,45 @@ public final class M3TreeMap<K, V> extends M3OrderedSlotMap<K, V> implements Nav
             update(slot);
             return slot;
         }
+        /**
+         * Specialize the existing failure-atomic in-order bulk constructor for
+         * another M3TreeMap. A single cursor walks its primitive slot links;
+         * user comparator callbacks remain present at the value lookup boundary.
+         * The original arbitrary-Map Entry iterator remains unchanged.
+         */
+        void loadSortedSlots(int count, SortedSlotCursor<K, V> source,
+                int expected) {
+            if (count > Integer.MAX_VALUE - 8) {
+                throw new OutOfMemoryError("collection capacity exhausted");
+            }
+            int capacity = 0;
+            while (capacity < count) { capacity = M3SlotArrays.grow(capacity); }
+            Tree<K, V> built = new Tree<>(comparator, false, null);
+            built.keys = new Object[capacity]; built.values = new Object[capacity];
+            built.left = new int[capacity]; built.right = new int[capacity];
+            built.parent = new int[capacity]; built.height = new byte[capacity];
+            built.root = built.readSortedSlots(source, 0, count, -1);
+            if (modifications != expected) { throw new java.util.ConcurrentModificationException(); }
+            keys = built.keys; values = built.values;
+            left = built.left; right = built.right; parent = built.parent; height = built.height;
+            root = built.root; free = -1; used = count; size = count; modifications++;
+        }
+
+        private int readSortedSlots(SortedSlotCursor<K, V> source,
+                int first, int count, int owner) {
+            if (count == 0) { return -1; }
+            int rightCount = count / 2, leftCount = count - rightCount - 1;
+            int slot = first + leftCount;
+            parent[slot] = owner;
+            left[slot] = readSortedSlots(source, first, leftCount, slot);
+            K key = source.nextKey();
+            keys[slot] = key;
+            values[slot] = source.valueFor(key);
+            right[slot] = readSortedSlots(source, slot + 1, rightCount, slot);
+            update(slot);
+            return slot;
+        }
+
         void insert(int p, int direction, K key, V value) { insert(p, direction, key, value, true); }
         void insert(int p, int direction, K key, V value, boolean loaded) {
             writable();
