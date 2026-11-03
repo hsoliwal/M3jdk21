@@ -45,6 +45,10 @@ final class M3TokenEngine {
     private final int visibleCount;
     private final int stride;
     private final int[] scratch;
+    //FLLDCIM: HPCPOP - alternative() saves and restores the incoming captures here instead of cloning them (#2251 e)
+    /** Incoming captures of the active alternatives, one stride per nesting level; grows once, then reused. */
+    private int[] alternativeSaves = new int[0];
+    private int alternativeDepth;
 
     private StateSet pending;
     private int pendingIndex;
@@ -153,6 +157,7 @@ final class M3TokenEngine {
 
     private StateSet evaluateRoot(int start) {
         Arrays.fill(scratch, -1);
+        alternativeDepth = 0;
         work = 0L;
         long cells = Math.multiplyExact(
                 (long) pattern.nodeCount() + 1L,
@@ -201,9 +206,27 @@ final class M3TokenEngine {
 
     private StateSet alternative(int node, int position, int[] registers) {
         StateSet out = states();
+        // Callers may pass the shared scratch lane; the first branch rewrites it while evaluating
+        // its groups, so the incoming captures are saved first and restored for the second branch.
+        // Every node reads its registers before it writes the scratch lane, so the restored lane
+        // is equivalent to a private copy and no copy is allocated per evaluation.
+        int saved = saveCaptures(registers);
         out.addAll(eval(pattern.nodeX(node), position, registers));
+        System.arraycopy(alternativeSaves, saved, registers, 0, stride);
         out.addAll(eval(pattern.nodeY(node), position, registers));
+        alternativeDepth--;
         return out;
+    }
+
+    /** Pushes the incoming captures of one alternative on the save lane; returns their offset. */
+    private int saveCaptures(int[] registers) {
+        int at = alternativeDepth * stride;
+        if (at + stride > alternativeSaves.length) {
+            alternativeSaves = Arrays.copyOf(alternativeSaves, Math.max(at + stride, alternativeSaves.length << 1));
+        }
+        System.arraycopy(registers, 0, alternativeSaves, at, stride);
+        alternativeDepth++;
+        return at;
     }
 
     private StateSet sequence(int node, int position, int[] registers) {

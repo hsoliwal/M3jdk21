@@ -1,0 +1,74 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+// CLASS_ONLY atoms of M3Constructor.java (constructor view; mirrors java.lang.reflect.Constructor).
+#class M3ConstructorAtomTest
+#summary Per-atom contracts of jdk.internal.mindex.M3Constructor against java.lang.reflect.Constructor
+#build ReflectOracle
+#import jdk.internal.mindex.M3CI jdk.internal.mindex.M3Constructor jdk.internal.mindex.M3MemberKind java.lang.reflect.Constructor java.util.TreeSet
+#helper <<<
+    private static final M3CI CI = ReflectOracle.snapshot();
+    private static final MethodHandle NEW = M3AtomKit.findConstructor(M3Constructor.class, "M3Constructor",
+            MethodType.methodType(void.class, M3CI.class, int.class));
+
+    private static M3Constructor view(int member) throws Throwable {
+        return (M3Constructor) NEW.invoke(CI, member);
+    }
+
+    private static void each(ReflectOracle.MemberCheck check) throws Throwable {
+        assertTrue(ReflectOracle.forEachMember(CI, M3MemberKind.CONSTRUCTOR, check) > 0);
+    }
+
+    private static Constructor<?> reflective(ReflectOracle.Declared d) {
+        return (Constructor<?>) d.element();
+    }
+>>>
+
+@atom M3Constructor.M3Constructor 1 SCENARIO kind-checked-constructor
+setup <<<
+int other = ReflectOracle.firstMember(CI, M3MemberKind.METHOD);
+>>>
+check <<<
+each((member, d) -> assertEquals(member, view(member).row()));
+M3AtomKit.expectMessage(IllegalArgumentException.class, "not a constructor", () -> NEW.invoke(CI, other));
+M3AtomKit.expect(IndexOutOfBoundsException.class, () -> NEW.invoke(CI, CI.memberSize()));
+>>>
+
+@atom M3Constructor.name 1 MEMBER_VIEW_DIFF Constructor.getName
+expected = reflective(d).getName()
+
+@atom M3Constructor.descriptor 1 MEMBER_VIEW_DIFF JVM-descriptor(params)V
+expected = ReflectOracle.descriptor(reflective(d).getParameterTypes(), void.class)
+
+@atom M3Constructor.getModifiers 1 MEMBER_VIEW_DIFF Constructor.getModifiers
+expected = reflective(d).getModifiers()
+
+@atom M3Constructor.isSynthetic 1 MEMBER_VIEW_DIFF Constructor.isSynthetic
+expected = reflective(d).isSynthetic()
+
+@atom M3Constructor.isVarArgs 1 MEMBER_VIEW_DIFF Constructor.isVarArgs
+expected = reflective(d).isVarArgs()
+
+@atom M3Constructor.annotationCount 1 MEMBER_VIEW_DIFF getDeclaredAnnotations
+expected = reflective(d).getDeclaredAnnotations().length
+
+@atom M3Constructor.annotationTypeNameAt 1 MEMBER_ANNOTATION_NAMES getDeclaredAnnotations(type-names)
+
+@atom M3Constructor.exceptionCount 1 MEMBER_VIEW_DIFF Constructor.getExceptionTypes
+expected = reflective(d).getExceptionTypes().length
+
+@atom M3Constructor.exceptionTypeDescriptorAt 1 SCENARIO Class.descriptorString(exceptions)
+check <<<
+each((member, d) -> {
+    Class<?>[] expected = reflective(d).getExceptionTypes();
+    for (int k = 0; k < expected.length; k++) assertEquals(expected[k].descriptorString(), view(member).exceptionTypeDescriptorAt(k));
+});
+>>>
+
+@atom M3Constructor.structuralHash64 1 MEMBER_VIEW_DIFF delegates-to-M3CI
+expected = CI.memberStructuralHash64(member)
+
+@atom M3Constructor.toString 1 SCENARIO name+descriptor
+check <<<
+each((member, d) -> assertEquals(reflective(d).getName() + ReflectOracle.descriptor(reflective(d).getParameterTypes(), void.class),
+        view(member).toString()));
+>>>
