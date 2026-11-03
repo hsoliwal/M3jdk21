@@ -119,7 +119,8 @@ class ReceiverAdmissionTest(unittest.TestCase):
                    (6, DRIVER._RECEIVER_TRANSITION_V6_PATH, DRIVER._RECEIVER_TRANSITION_V6_SHA256),
                    (7, DRIVER._RECEIVER_TRANSITION_V7_PATH, DRIVER._RECEIVER_TRANSITION_V7_SHA256),
                    (8, DRIVER._RECEIVER_TRANSITION_V8_PATH, DRIVER._RECEIVER_TRANSITION_V8_SHA256),
-                   (9, DRIVER._RECEIVER_TRANSITION_V9_PATH, DRIVER._RECEIVER_TRANSITION_V9_SHA256))
+                   (9, DRIVER._RECEIVER_TRANSITION_V9_PATH, DRIVER._RECEIVER_TRANSITION_V9_SHA256),
+                   (10, DRIVER._RECEIVER_TRANSITION_V10_PATH, DRIVER._RECEIVER_TRANSITION_V10_SHA256))
         for version, relative, seal in choices:
             declaration = (cls.input_root / relative).read_bytes()
             if cls._identity(declaration)["sha256"] != seal:
@@ -129,7 +130,7 @@ class ReceiverAdmissionTest(unittest.TestCase):
             changes = {r["path"]: r for r in document["files"] if r["path"] in successors}
             if set(changes) != successors or len(document["files"]) != (9 if version >= 8 else 8):
                 raise ValueError("complete four-source declaration required")
-            catalog = (fixtures / ("receiver-v%d" % (7 if version >= 8 else version))
+            catalog = (fixtures / ("receiver-v%d" % (7 if 8 <= version <= 9 else version))
                        / "SharedLexiconCatalog.java.txt").read_bytes()
             if cls._identity(catalog) != changes[cls.catalog_name]["after"]:
                 raise ValueError("unsealed catalog fixture: V%d" % version)
@@ -149,6 +150,7 @@ class ReceiverAdmissionTest(unittest.TestCase):
                     or cls._identity(payload) != payload_row["after"]):
                 raise ValueError("unsealed payload fixture: V%d" % version)
             cls.payloads[version] = payload
+        cls.payloads[10] = cls.payloads[9]  # V10 changes the catalog only.
         cls.payload_after = cls.payloads[max(8, cls.version)]
 
         cls.original = {}
@@ -676,6 +678,81 @@ class ReceiverV9AdmissionTest(ReceiverV8AdmissionTest):
                 path.write_bytes(self.transitions[selected]["raw"])
         finally:
             for version in (8, 9):
+                (self.root / self.transitions[version]["path"]).write_bytes(self.transitions[version]["raw"])
+
+
+class ReceiverV10AdmissionTest(ReceiverV9AdmissionTest):
+    """Catalog-only successor retaining the exact V9 payload and all old seals."""
+    version = 10
+
+    def test_v8_retains_prior_rows_custody_and_complete_payload_identity(self):
+        import json
+        before = json.loads(self.transitions[9]["raw"])
+        after = json.loads(self.transitions[10]["raw"])
+        self.assertEqual(9, len(after["files"]))
+        self.assertEqual(self.transitions[9]["seal"], after["predecessorDeclarationSha256"])
+        self.assertEqual(before["custodySha256"], after["custodySha256"])
+        self.assertEqual(before["frozenProfileSha256"], after["frozenProfileSha256"])
+        for index, row in enumerate(after["files"]):
+            if index == 6:
+                self.assertEqual(self.catalog_name, row["path"])
+                self.assertEqual(before["files"][index]["before"], row["before"])
+                self.assertEqual(self._identity(self.catalogs[9]), before["files"][index]["after"])
+                self.assertEqual(self._identity(self.catalogs[10]), row["after"])
+                self.assertNotEqual(before["files"][index]["after"], row["after"])
+            else:
+                self.assertEqual(before["files"][index], row)
+        self.assertEqual(self.payloads[9], self.payload_after)
+
+    def test_payload_version_confusion_is_refused_with_matching_catalogs(self):
+        # V9 and V10 intentionally share payload9; catalog selection discriminates.
+        import re
+        payload = self.root / self.payload_name
+        catalog = self.root / self.catalog_name
+        try:
+            for selected in range(5, 11):
+                catalog.write_bytes(self.catalogs[selected])
+                expected = self.payloads[selected] if selected >= 8 else self.payload_before
+                payload.write_bytes(expected)
+                declaration = self.root / self.transitions[selected]["path"]
+                self.assertEqual(145, len(DRIVER._receiver_admission(self.root, declaration)["files"]))
+                wrong = [self.payload_before, self.payloads[8], self.payloads[9]]
+                for raw in wrong:
+                    if raw == expected:
+                        continue
+                    payload.write_bytes(raw)
+                    with self.assertRaisesRegex(ValueError, "receiver source drift: " + re.escape(self.payload_name)):
+                        DRIVER._receiver_admission(self.root, declaration)
+                    payload.write_bytes(expected)
+        finally:
+            catalog.write_bytes(self.current[self.catalog_name])
+            payload.write_bytes(self.current[self.payload_name])
+
+    def test_v9_v10_catalogs_cannot_cross_with_identical_payload(self):
+        import re
+        catalog = self.root / self.catalog_name
+        try:
+            self.assertEqual(self.payloads[9], self.payloads[10])
+            for selected, wrong in ((9, 10), (10, 9)):
+                declaration = self.root / self.transitions[selected]["path"]
+                catalog.write_bytes(self.catalogs[selected])
+                self.assertEqual(145, len(DRIVER._receiver_admission(self.root, declaration)["files"]))
+                catalog.write_bytes(self.catalogs[wrong])
+                with self.assertRaisesRegex(ValueError, "receiver source drift: " + re.escape(self.catalog_name)):
+                    DRIVER._receiver_admission(self.root, declaration)
+        finally:
+            catalog.write_bytes(self.current[self.catalog_name])
+
+    def test_v9_v10_documents_cannot_exchange_named_paths(self):
+        try:
+            for selected, wrong in ((9, 10), (10, 9)):
+                path = self.root / self.transitions[selected]["path"]
+                path.write_bytes(self.transitions[wrong]["raw"])
+                with self.assertRaisesRegex(ValueError, "receiver transition or original lock seal differs"):
+                    DRIVER._receiver_admission(self.root, path)
+                path.write_bytes(self.transitions[selected]["raw"])
+        finally:
+            for version in (9, 10):
                 (self.root / self.transitions[version]["path"]).write_bytes(self.transitions[version]["raw"])
 
 if __name__ == "__main__":

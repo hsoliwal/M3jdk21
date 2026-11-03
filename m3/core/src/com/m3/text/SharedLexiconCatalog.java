@@ -348,9 +348,9 @@ public final class SharedLexiconCatalog {
             ensureOpen();
             Objects.requireNonNull(sourceId);
             Objects.requireNonNull(recordId);
-            SourceIdentity identity = new SourceIdentity(sourceId, recordId);
             SourceMapping mapping = identityMapping(sourceId, recordId);
             if (mapping == null) return Optional.empty();
+            SourceIdentity identity = new SourceIdentity(sourceId, recordId);
             imageAt(mapping.coordinate().shardId());
             return Optional.of(payloads.computeIfAbsent(identity,
                     ignored -> SynexiaPrecomputePayload.parse(mapping.precomputePayload())));
