@@ -1,0 +1,72 @@
+fqn	kind	target	retention	elements
+lombok.AccessLevel	ENUM	-	-	-
+lombok.AllArgsConstructor	ANNOTATION	TYPE	SOURCE	staticName:java.lang.String="";onConstructor:lombok.AllArgsConstructor.AnyAnnotation[]=[];access:lombok.AccessLevel=PUBLIC
+lombok.AllArgsConstructor.AnyAnnotation	ANNOTATION		SOURCE	-
+lombok.Builder	ANNOTATION	TYPE,METHOD,CONSTRUCTOR	SOURCE	builderMethodName:java.lang.String="builder";buildMethodName:java.lang.String="build";builderClassName:java.lang.String="";toBuilder:boolean=false;access:lombok.AccessLevel=PUBLIC;setterPrefix:java.lang.String=""
+lombok.Builder.Default	ANNOTATION	FIELD	SOURCE	-
+lombok.Builder.ObtainVia	ANNOTATION	FIELD,PARAMETER	SOURCE	field:java.lang.String="";method:java.lang.String="";isStatic:boolean=false
+lombok.CheckReturnValue	ANNOTATION	METHOD	CLASS	-
+lombok.Cleanup	ANNOTATION	LOCAL_VARIABLE	SOURCE	value:java.lang.String="close"
+lombok.ConfigurationKeys	CLASS	-	-	-
+lombok.CustomLog	ANNOTATION	TYPE	SOURCE	access:lombok.AccessLevel=PRIVATE;topic:java.lang.String=""
+lombok.Data	ANNOTATION	TYPE	SOURCE	staticConstructor:java.lang.String=""
+lombok.Delegate	ANNOTATION	FIELD,METHOD	SOURCE	-
+lombok.EqualsAndHashCode	ANNOTATION	TYPE	SOURCE	exclude:java.lang.String[]=[];of:java.lang.String[]=[];callSuper:boolean=false;doNotUseGetters:boolean=false;cacheStrategy:lombok.EqualsAndHashCode.CacheStrategy=NEVER;onParam:lombok.EqualsAndHashCode.AnyAnnotation[]=[];onlyExplicitlyIncluded:boolean=false
+lombok.EqualsAndHashCode.AnyAnnotation	ANNOTATION		SOURCE	-
+lombok.EqualsAndHashCode.CacheStrategy	ENUM	-	-	-
+lombok.EqualsAndHashCode.Exclude	ANNOTATION	FIELD	SOURCE	-
+lombok.EqualsAndHashCode.Include	ANNOTATION	FIELD,METHOD	SOURCE	replaces:java.lang.String="";rank:int=0
+lombok.Generated	ANNOTATION	CONSTRUCTOR,METHOD,FIELD,TYPE	CLASS	-
+lombok.Getter	ANNOTATION	FIELD,TYPE	SOURCE	value:lombok.AccessLevel=PUBLIC;onMethod:lombok.Getter.AnyAnnotation[]=[];lazy:boolean=false
+lombok.Getter.AnyAnnotation	ANNOTATION		SOURCE	-
+lombok.Locked	ANNOTATION	METHOD	SOURCE	value:java.lang.String=""
+lombok.Locked.Read	ANNOTATION	METHOD	SOURCE	value:java.lang.String=""
+lombok.Locked.Write	ANNOTATION	METHOD	SOURCE	value:java.lang.String=""
+lombok.Lombok	CLASS	-	-	-
+lombok.NoArgsConstructor	ANNOTATION	TYPE	SOURCE	staticName:java.lang.String="";onConstructor:lombok.NoArgsConstructor.AnyAnnotation[]=[];access:lombok.AccessLevel=PUBLIC;force:boolean=false
+lombok.NoArgsConstructor.AnyAnnotation	ANNOTATION		SOURCE	-
+lombok.NonNull	ANNOTATION	FIELD,METHOD,PARAMETER,LOCAL_VARIABLE,TYPE_USE	CLASS	-
+lombok.RequiredArgsConstructor	ANNOTATION	TYPE	SOURCE	staticName:java.lang.String="";onConstructor:lombok.RequiredArgsConstructor.AnyAnnotation[]=[];access:lombok.AccessLevel=PUBLIC
+lombok.RequiredArgsConstructor.AnyAnnotation	ANNOTATION		SOURCE	-
+lombok.Setter	ANNOTATION	FIELD,TYPE	SOURCE	value:lombok.AccessLevel=PUBLIC;onMethod:lombok.Setter.AnyAnnotation[]=[];onParam:lombok.Setter.AnyAnnotation[]=[]
+lombok.Setter.AnyAnnotation	ANNOTATION		SOURCE	-
+lombok.Singular	ANNOTATION	FIELD,PARAMETER	SOURCE	value:java.lang.String="";ignoreNullCollections:boolean=false
+lombok.SneakyThrows	ANNOTATION	METHOD,CONSTRUCTOR	SOURCE	-
+lombok.SuperBuilder	ANNOTATION	TYPE	SOURCE	builderMethodName:java.lang.String="builder";buildMethodName:java.lang.String="build";toBuilder:boolean=false;setterPrefix:java.lang.String=""
+lombok.Synchronized	ANNOTATION	METHOD	SOURCE	value:java.lang.String=""
+lombok.ToString	ANNOTATION	TYPE	SOURCE	includeFieldNames:boolean=true;exclude:java.lang.String[]=[];of:java.lang.String[]=[];callSuper:boolean=false;doNotUseGetters:boolean=false;onlyExplicitlyIncluded:boolean=false
+lombok.ToString.Exclude	ANNOTATION	FIELD	SOURCE	-
+lombok.ToString.Include	ANNOTATION	FIELD,METHOD	SOURCE	rank:int=0;name:java.lang.String=""
+lombok.Value	ANNOTATION	TYPE	SOURCE	staticConstructor:java.lang.String=""
+lombok.With	ANNOTATION	FIELD,TYPE	SOURCE	value:lombok.AccessLevel=PUBLIC;onMethod:lombok.With.AnyAnnotation[]=[];onParam:lombok.With.AnyAnnotation[]=[]
+lombok.With.AnyAnnotation	ANNOTATION		SOURCE	-
+lombok.experimental.Accessors	ANNOTATION	TYPE,FIELD	SOURCE	fluent:boolean=false;chain:boolean=false;makeFinal:boolean=false;prefix:java.lang.String[]=[]
+lombok.experimental.Delegate	ANNOTATION	FIELD,METHOD	SOURCE	-
+lombok.experimental.ExtensionMethod	ANNOTATION	TYPE	SOURCE	suppressBaseMethods:boolean=true
+lombok.experimental.FieldDefaults	ANNOTATION	TYPE	SOURCE	level:lombok.AccessLevel=NONE;makeFinal:boolean=false
+lombok.experimental.FieldNameConstants	ANNOTATION	TYPE	SOURCE	level:lombok.AccessLevel=PUBLIC;asEnum:boolean=false;innerTypeName:java.lang.String="";onlyExplicitlyIncluded:boolean=false
+lombok.experimental.FieldNameConstants.Exclude	ANNOTATION	FIELD	SOURCE	-
+lombok.experimental.FieldNameConstants.Include	ANNOTATION	FIELD	SOURCE	-
+lombok.experimental.Helper	ANNOTATION	TYPE	SOURCE	-
+lombok.experimental.NonFinal	ANNOTATION	FIELD,PARAMETER,LOCAL_VARIABLE,ANNOTATION_TYPE,TYPE,METHOD	SOURCE	-
+lombok.experimental.PackagePrivate	ANNOTATION	TYPE,FIELD,CONSTRUCTOR,METHOD,ANNOTATION_TYPE	SOURCE	-
+lombok.experimental.StandardException	ANNOTATION	TYPE	SOURCE	access:lombok.AccessLevel=PUBLIC
+lombok.experimental.SuperBuilder	ANNOTATION	TYPE	SOURCE	builderMethodName:java.lang.String="builder";buildMethodName:java.lang.String="build";toBuilder:boolean=false;setterPrefix:java.lang.String=""
+lombok.experimental.Tolerate	ANNOTATION	METHOD,CONSTRUCTOR	SOURCE	-
+lombok.experimental.UtilityClass	ANNOTATION	TYPE	SOURCE	-
+lombok.experimental.WithBy	ANNOTATION	FIELD,TYPE	SOURCE	value:lombok.AccessLevel=PUBLIC;onMethod:lombok.experimental.WithBy.AnyAnnotation[]=[]
+lombok.experimental.WithBy.AnyAnnotation	ANNOTATION		SOURCE	-
+lombok.experimental.Wither	ANNOTATION	FIELD,TYPE	SOURCE	value:lombok.AccessLevel=PUBLIC;onMethod:lombok.experimental.Wither.AnyAnnotation[]=[];onParam:lombok.experimental.Wither.AnyAnnotation[]=[]
+lombok.experimental.Wither.AnyAnnotation	ANNOTATION		SOURCE	-
+lombok.experimental.var	ANNOTATION	-	-	-
+lombok.extern.apachecommons.CommonsLog	ANNOTATION	TYPE	SOURCE	access:lombok.AccessLevel=PRIVATE;topic:java.lang.String=""
+lombok.extern.flogger.Flogger	ANNOTATION	TYPE	SOURCE	access:lombok.AccessLevel=PRIVATE
+lombok.extern.jackson.Jacksonized	ANNOTATION	TYPE,METHOD,CONSTRUCTOR	SOURCE	-
+lombok.extern.java.Log	ANNOTATION	TYPE	SOURCE	access:lombok.AccessLevel=PRIVATE;topic:java.lang.String=""
+lombok.extern.jbosslog.JBossLog	ANNOTATION	TYPE	SOURCE	access:lombok.AccessLevel=PRIVATE;topic:java.lang.String=""
+lombok.extern.log4j.Log4j	ANNOTATION	TYPE	SOURCE	access:lombok.AccessLevel=PRIVATE;topic:java.lang.String=""
+lombok.extern.log4j.Log4j2	ANNOTATION	TYPE	SOURCE	access:lombok.AccessLevel=PRIVATE;topic:java.lang.String=""
+lombok.extern.slf4j.Slf4j	ANNOTATION	TYPE	SOURCE	access:lombok.AccessLevel=PRIVATE;topic:java.lang.String=""
+lombok.extern.slf4j.XSlf4j	ANNOTATION	TYPE	SOURCE	access:lombok.AccessLevel=PRIVATE;topic:java.lang.String=""
+lombok.val	ANNOTATION	-	-	-
+lombok.var	ANNOTATION	-	-	-
