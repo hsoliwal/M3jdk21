@@ -3846,7 +3846,7 @@ public final class Arrays {
             return original.clone();
         }
         int newLength = to - from;
-        if (newLength < 0) {
+        if (to < from) {
             throw new IllegalArgumentException(from + " > " + to);
         }
         byte[] copy = new byte[newLength];
@@ -3886,7 +3886,7 @@ public final class Arrays {
             return original.clone();
         }
         int newLength = to - from;
-        if (newLength < 0) {
+        if (to < from) {
             throw new IllegalArgumentException(from + " > " + to);
         }
         short[] copy = new short[newLength];
@@ -3926,7 +3926,7 @@ public final class Arrays {
             return original.clone();
         }
         int newLength = to - from;
-        if (newLength < 0) {
+        if (to < from) {
             throw new IllegalArgumentException(from + " > " + to);
         }
         int[] copy = new int[newLength];
@@ -3966,7 +3966,7 @@ public final class Arrays {
             return original.clone();
         }
         int newLength = to - from;
-        if (newLength < 0) {
+        if (to < from) {
             throw new IllegalArgumentException(from + " > " + to);
         }
         long[] copy = new long[newLength];
@@ -4006,7 +4006,7 @@ public final class Arrays {
             return original.clone();
         }
         int newLength = to - from;
-        if (newLength < 0) {
+        if (to < from) {
             throw new IllegalArgumentException(from + " > " + to);
         }
         char[] copy = new char[newLength];
@@ -4046,7 +4046,7 @@ public final class Arrays {
             return original.clone();
         }
         int newLength = to - from;
-        if (newLength < 0) {
+        if (to < from) {
             throw new IllegalArgumentException(from + " > " + to);
         }
         float[] copy = new float[newLength];
@@ -4086,7 +4086,7 @@ public final class Arrays {
             return original.clone();
         }
         int newLength = to - from;
-        if (newLength < 0) {
+        if (to < from) {
             throw new IllegalArgumentException(from + " > " + to);
         }
         double[] copy = new double[newLength];
@@ -4126,7 +4126,7 @@ public final class Arrays {
             return original.clone();
         }
         int newLength = to - from;
-        if (newLength < 0) {
+        if (to < from) {
             throw new IllegalArgumentException(from + " > " + to);
         }
         boolean[] copy = new boolean[newLength];
