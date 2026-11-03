@@ -45,6 +45,8 @@ _RECEIVER_TRANSITION_PATH = "m3/tooling/joined-range-directory/current-baseline/
 _RECEIVER_TRANSITION_SHA256 = "4e00d68a96907e23b10670c32ca76bdae5b9bc7f1b6d27cdf323f17b6a1fd178"
 _RECEIVER_TRANSITION_V6_PATH = "m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V6.json"
 _RECEIVER_TRANSITION_V6_SHA256 = "25c475dc211870634a0a156ddd02ce3db78a492997019ecdf01c599db9b296b4"
+_RECEIVER_TRANSITION_V7_PATH = "m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V7.json"
+_RECEIVER_TRANSITION_V7_SHA256 = "e3f7f6c569d701f2c663c1ca34dcf2d8d5330ecbe8e2e8ddf61764975f636b5e"
 _RECEIVER_SUCCESSORS = frozenset(
     "m3/core/src/com/m3/text/" + name for name in (
         "JoinedM3StringPiece.java", "SharedLexiconCatalog.java",
@@ -93,7 +95,8 @@ def _receiver_admission(root, transition=None):
     if transition is not None:
         path = transition if transition.is_absolute() else root / transition
         choices = {_RECEIVER_TRANSITION_PATH: _RECEIVER_TRANSITION_SHA256,
-                   _RECEIVER_TRANSITION_V6_PATH: _RECEIVER_TRANSITION_V6_SHA256}
+                   _RECEIVER_TRANSITION_V6_PATH: _RECEIVER_TRANSITION_V6_SHA256,
+                   _RECEIVER_TRANSITION_V7_PATH: _RECEIVER_TRANSITION_V7_SHA256}
         matches = [name for name in choices if path.resolve() == (root / name).resolve()]
         if (len(matches) != 1
                 or any(p.is_symlink() or p.is_junction() for p in (path, *path.parents))):
@@ -172,9 +175,11 @@ def _receiver_revision(root):
 
 def _receiver_report(admission, revision, checkpoints, staged):
     return dict(schema="M3_NLP_VERIFIED_RECEIVER_INPUTS_V1",
-                cohort=(("declared-v6-four-lexicon-successors"
-                         if admission["transition"] and admission["transition"]["path"] == _RECEIVER_TRANSITION_V6_PATH
-                         else "declared-v5-four-lexicon-successors") if staged else "original-strict-lock"),
+                cohort=(("declared-v7-four-lexicon-successors"
+                         if admission["transition"] and admission["transition"]["path"] == _RECEIVER_TRANSITION_V7_PATH
+                         else ("declared-v6-four-lexicon-successors"
+                               if admission["transition"] and admission["transition"]["path"] == _RECEIVER_TRANSITION_V6_PATH
+                               else "declared-v5-four-lexicon-successors")) if staged else "original-strict-lock"),
                 basis=admission["lockIdentity"], observed_revision=revision,
                 declared_transition=admission["transition"], transitions=admission["changes"],
                 effective_manifest=admission["files"],
@@ -380,7 +385,7 @@ def main():
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--receiver", type=Path, default=ROOT)
     parser.add_argument("--receiver-transition", type=Path,
-                        help="Explicit sealed V5 or V6 four-source cohort; omitted keeps strict original admission")
+                        help="Explicit sealed V5, V6 or V7 four-source cohort; omitted keeps strict original admission")
     parser.add_argument("--opennlp-source", type=Path, required=True)
     parser.add_argument("--lucene-source", type=Path, required=True)
     parser.add_argument("--recipe-runner", type=Path, required=True)

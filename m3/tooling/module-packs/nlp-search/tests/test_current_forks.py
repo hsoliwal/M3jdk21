@@ -115,7 +115,8 @@ class ReceiverAdmissionTest(unittest.TestCase):
         cls.transitions, cls.catalogs = {}, {}
         fixtures = Path(__file__).resolve().parent
         choices = ((5, DRIVER._RECEIVER_TRANSITION_PATH, DRIVER._RECEIVER_TRANSITION_SHA256),
-                   (6, DRIVER._RECEIVER_TRANSITION_V6_PATH, DRIVER._RECEIVER_TRANSITION_V6_SHA256))
+                   (6, DRIVER._RECEIVER_TRANSITION_V6_PATH, DRIVER._RECEIVER_TRANSITION_V6_SHA256),
+                   (7, DRIVER._RECEIVER_TRANSITION_V7_PATH, DRIVER._RECEIVER_TRANSITION_V7_SHA256))
         for version, relative, seal in choices:
             declaration = (cls.input_root / relative).read_bytes()
             if cls._identity(declaration)["sha256"] != seal:
@@ -150,7 +151,7 @@ class ReceiverAdmissionTest(unittest.TestCase):
                 if name == cls.catalog_name:
                     known = [v["changes"][name]["after"] for v in cls.transitions.values()]
                     if identity not in known:
-                        raise ValueError("test input is not a sealed V5/V6 catalog: " + name)
+                        raise ValueError("test input is not a sealed V5/V6/V7 catalog: " + name)
                     current = cls.catalogs[cls.version]
                 else:
                     expected = cls.changes[name]["after"]["sha256"] if name in cls.changes else digest
@@ -465,6 +466,55 @@ class ReceiverV6AdmissionTest(ReceiverAdmissionTest):
         finally:
             path.write_bytes(self.current[self.catalog_name])
 
+
+
+class ReceiverV7AdmissionTest(ReceiverAdmissionTest):
+    """Inherited physical145-input contracts with the independently sealed V7 catalog."""
+    version = 7
+
+    def test_v7_cross_version_catalogs_and_declarations_are_refused(self):
+        import re
+        path = self.root / self.catalog_name
+        try:
+            for selected, other in ((5, 7), (6, 7), (7, 5), (7, 6)):
+                declaration = self.root / self.transitions[selected]["path"]
+                with self.subTest(declaration=selected, catalog=other):
+                    path.write_bytes(self.catalogs[other])
+                    with self.assertRaisesRegex(ValueError,
+                            "receiver source drift: " + re.escape(self.catalog_name)):
+                        DRIVER._receiver_admission(self.root, declaration)
+                path.write_bytes(self.catalogs[selected])
+                admitted = DRIVER._receiver_admission(self.root, declaration)
+                self.assertEqual(145, len(admitted["files"]))
+                self.assertEqual(4, len(admitted["changes"]))
+        finally:
+            path.write_bytes(self.current[self.catalog_name])
+
+    def test_unsealed_identity_array_without_singleton_guard_is_refused(self):
+        import re
+        branch = """        // A singleton has no competing slot: compare before hashing caller text.
+        if (index.length == 2) {
+            SourceMapping only = index[0] != null ? index[0] : index[1];
+            return sourceId.equals(only.sourceId()) && recordId.equals(only.recordId())
+                    ? only : null;
+        }
+"""
+        current = self.catalogs[7]
+        self.assertEqual(1, current.count(branch.encode()))
+        rejected = current.replace(branch.encode(), b"", 1)
+        self.assertEqual("8d41fa9595ace9ff6874b5b3cbe66172f502ea04",
+                         self._identity(rejected)["gitBlob"])
+        path = self.root / self.catalog_name
+        try:
+            path.write_bytes(rejected)
+            for selected in (5, 6, 7):
+                with self.subTest(declaration=selected):
+                    with self.assertRaisesRegex(ValueError,
+                            "receiver source drift: " + re.escape(self.catalog_name)):
+                        DRIVER._receiver_admission(self.root,
+                            self.root / self.transitions[selected]["path"])
+        finally:
+            path.write_bytes(self.current[self.catalog_name])
 
 if __name__ == "__main__":
     unittest.main()
