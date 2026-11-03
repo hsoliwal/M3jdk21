@@ -4,6 +4,7 @@
 # Modified 2026 by Hitesh Soliwal and contributors: qualify concurrent EnumSet in a new exact inventory; preserve all acceptance guards and historical receipts.
 # Modified 2026 by Hitesh Soliwal and contributors: restore exact collection receiving provenance and verification while retaining current owners and String phase authority.
 # Modified 2026 by Hitesh Soliwal and contributors: restore the Tools4j predecessor selector and seal the superset source set as an exact additive successor after the Tools4j refinement; historical receipts stay unchanged.
+# Modified 2026 by Hitesh Soliwal and contributors: seal the master source set (2026-10-31) as a transition-receipt successor after the superset seal, through one shared transition atom.
 """Verify the installed M3 collection donation with target-native Java/JNI checks.
 
 This host verifies product source. The canonical transformation and SDK replay remain
@@ -236,54 +237,88 @@ _SUPERSET_RESULT_ROWS = 772
 _SUPERSET_RESULT_JAVA = 765
 
 
-def include_superset_source_successor(previous_rows, receipt=_SUPERSET_RECEIPT):
-    """Admit only the sealed (path, inherited, after) transitions over the Tools4j result.
+def admit_source_transitions(previous_rows, label, receipt, receipt_sha256, predecessor_sha256,
+        transitions, result_rows, result_java):
+    """Admit only the sealed (path, inherited, after) transitions of RECEIPT over the exact predecessor rows.
 
-    The predecessor is the exact Tools4j result. ABSENT admits a new Java source under
-    the receiving roots; otherwise the inherited digest must match before the final
-    digest replaces it. Historical receipts remain unchanged.
+    ABSENT admits a new Java source under the receiving roots; otherwise the inherited digest must
+    match before the final digest replaces it. Historical receipts remain unchanged.
     """
     prior = list(previous_rows)
     predecessor = ''.join(path + '\t' + expected + '\n' for path, expected in prior)
-    if hashlib.sha256(predecessor.encode('utf-8')).hexdigest() != _SUPERSET_PREDECESSOR_SHA256:
-        raise SystemExit('Superset predecessor receipt chain drift')
-    if receipt.is_symlink() or not receipt.is_file() or digest(receipt) != _SUPERSET_RECEIPT_SHA256:
-        raise SystemExit('Superset successor receipt missing, aliased or drifted')
+    if hashlib.sha256(predecessor.encode('utf-8')).hexdigest() != predecessor_sha256:
+        raise SystemExit(label + ' predecessor receipt chain drift')
+    if receipt.is_symlink() or not receipt.is_file() or digest(receipt) != receipt_sha256:
+        raise SystemExit(label + ' successor receipt missing, aliased or drifted')
     entries = [line.split('\t') for line in receipt.read_text(encoding='utf-8').splitlines()]
-    if len(entries) != _SUPERSET_TRANSITIONS:
-        raise SystemExit('Superset successor must declare exactly ' + str(_SUPERSET_TRANSITIONS) + ' source transitions')
+    if len(entries) != transitions:
+        raise SystemExit(label + ' successor must declare exactly ' + str(transitions) + ' source transitions')
     current = dict(prior)
     extra = []
     seen = set()
     for cells in entries:
         if len(cells) != 3:
-            raise SystemExit('Superset malformed source transition')
+            raise SystemExit(label + ' malformed source transition')
         path, inherited, after = cells
         relative = Path(path)
         java_source = path.endswith('.java') and path.startswith((
             'm3/collections/src/main/java/', 'm3/collections/src/test/java/'))
         if (relative.is_absolute() or '..' in relative.parts or chr(92) in path or path in seen
                 or not (java_source or path in current)):
-            raise SystemExit('Superset duplicate or out-of-scope source: ' + path)
+            raise SystemExit(label + ' duplicate or out-of-scope source: ' + path)
         seen.add(path)
         hashes = (after,) if inherited == 'ABSENT' else (inherited, after)
         if any(len(value) != 64 or any(c not in '0123456789abcdef' for c in value) for value in hashes):
-            raise SystemExit('Superset invalid source hash: ' + path)
+            raise SystemExit(label + ' invalid source hash: ' + path)
         if inherited == after:
-            raise SystemExit('Superset unchanged source is not a transition: ' + path)
+            raise SystemExit(label + ' unchanged source is not a transition: ' + path)
         if inherited == 'ABSENT':
             if path in current:
-                raise SystemExit('Superset occupied source admission: ' + path)
+                raise SystemExit(label + ' occupied source admission: ' + path)
             extra.append((path, after))
         else:
             if current.get(path) != inherited:
-                raise SystemExit('Superset inherited source preimage drift: ' + path)
+                raise SystemExit(label + ' inherited source preimage drift: ' + path)
             current[path] = after
     result = [(path, current[path]) for path, _ in prior] + extra
     source_java = {path for path, _ in result if path.endswith('.java') and '/src/' in path}
-    if len(result) != _SUPERSET_RESULT_ROWS or len(source_java) != _SUPERSET_RESULT_JAVA:
-        raise SystemExit('Superset exact current source membership drift')
+    if len(result) != result_rows or len(source_java) != result_java:
+        raise SystemExit(label + ' exact current source membership drift')
     return result
+
+
+def include_superset_source_successor(previous_rows, receipt=_SUPERSET_RECEIPT):
+    """Admit only the sealed (path, inherited, after) transitions over the Tools4j result."""
+    return admit_source_transitions(previous_rows, 'Superset', receipt, _SUPERSET_RECEIPT_SHA256,
+                                    _SUPERSET_PREDECESSOR_SHA256, _SUPERSET_TRANSITIONS,
+                                    _SUPERSET_RESULT_ROWS, _SUPERSET_RESULT_JAVA)
+
+
+# Exact successor sealing the master source set after the superset successor: sources that merged PRs changed
+# or added after superset-source-successor-20261030 (installed-collections job 124012481118 on bb66a8c16642).
+_MASTER_RECEIPT = HERE / 'qualification/master-source-successor-20261031.tsv'
+_MASTER_RECEIPT_SHA256 = '8935d3d210d05da02b37049c6fad01fde7f299541f07a93d3f65d9a478c054b3'
+_MASTER_PREDECESSOR_SHA256 = '4950b0c157284d73ffe3410d8356aa8a22c81c0e2dbcc865a5784e8fd610ab2c'
+_MASTER_TRANSITIONS = 10
+_MASTER_RESULT_ROWS = 774
+_MASTER_RESULT_JAVA = 767
+
+
+def include_master_source_successor(previous_rows, receipt=_MASTER_RECEIPT):
+    """Admit only the sealed (path, inherited, after) transitions over the superset result."""
+    return admit_source_transitions(previous_rows, 'Master 20261031', receipt, _MASTER_RECEIPT_SHA256,
+                                    _MASTER_PREDECESSOR_SHA256, _MASTER_TRANSITIONS,
+                                    _MASTER_RESULT_ROWS, _MASTER_RESULT_JAVA)
+
+
+# The transition-receipt successors by their synexia-donation.json record: (receipt, receipt SHA-256,
+# predecessor SHA-256, transitions, resulting rows, exact Java source membership).
+SOURCE_TRANSITION_SEALS = {
+    'superset_source_successor_20261030': (_SUPERSET_RECEIPT, _SUPERSET_RECEIPT_SHA256, _SUPERSET_PREDECESSOR_SHA256,
+                                           _SUPERSET_TRANSITIONS, _SUPERSET_RESULT_ROWS, _SUPERSET_RESULT_JAVA),
+    'master_source_successor_20261031': (_MASTER_RECEIPT, _MASTER_RECEIPT_SHA256, _MASTER_PREDECESSOR_SHA256,
+                                         _MASTER_TRANSITIONS, _MASTER_RESULT_ROWS, _MASTER_RESULT_JAVA),
+}
 
 
 def main():
@@ -332,6 +367,7 @@ def main():
     rows = include_object_state_offset_successor(rows)
     rows = include_tools4j_refinement_successor(rows)
     rows = include_superset_source_successor(rows)
+    rows = include_master_source_successor(rows)
     if len({row[0] for row in rows}) != len(rows):
         raise SystemExit('Duplicate installed source path')
     for path, expected in rows:
