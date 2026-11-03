@@ -140,3 +140,24 @@ if(BUILD_TESTING)
   endif()
   add_test(NAME m3_long_coordinate_search_checks COMMAND m3_long_coordinate_search_checks)
 endif()
+
+# Sorted primitive multiset algebra: one checked JNI owner, no borrowed Java pointers.
+target_sources(m3_arrays PRIVATE
+  m3_multiset_step.c
+  m3_multiset_jni.c)
+
+if(BUILD_TESTING)
+  add_executable(m3_multiset_step_checks
+    tests/m3_multiset_step_checks.c
+    m3_multiset_step.c)
+  target_include_directories(m3_multiset_step_checks
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+  target_compile_features(m3_multiset_step_checks PRIVATE c_std_11)
+  if(MSVC)
+    target_compile_options(m3_multiset_step_checks PRIVATE /W4 /WX)
+  else()
+    target_compile_options(m3_multiset_step_checks
+      PRIVATE -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic)
+  endif()
+  add_test(NAME m3_multiset_step_checks COMMAND m3_multiset_step_checks)
+endif()
