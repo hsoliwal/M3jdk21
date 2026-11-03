@@ -43,50 +43,49 @@ public final class M3LongHashSet implements M3LongCollection {
     }
 
     public boolean add(long key) {
-        if (findIndex(key) >= 0) {
-            return false;
-        }
-        if (needsGrowth(occupied + 1, keys.length)) {
-            // Reusing a tombstone on this key's probe path does not increase
-            // occupied or need a larger array. No extra scan on ordinary adds.
-            int mask = keys.length - 1;
-            int probe = mix(key) & mask;
-            while (states[probe] != EMPTY) {
-                if (states[probe] == DELETED) {
-                    keys[probe] = key;
-                    states[probe] = USED;
-                    size++;
-                    modCount++;
-                    return true;
-                }
-                probe = (probe + 1) & mask;
-            }
-            if (keys.length >= (1 << 30)) {
-                throw new IllegalStateException("maximum hash-table capacity reached");
-            }
-            rehash(keys.length << 1);
-        }
+        // One probe discovers both an existing key and the first tombstone.
+        // Primitive comparisons have no callbacks or externally visible order.
         int mask = keys.length - 1;
-        int index = mix(key) & mask;
+        int mixed = mix(key);
+        int index = mixed & mask;
         int firstDeleted = -1;
         for (;;) {
             byte state = states[index];
             if (state == EMPTY) {
-                int target = firstDeleted >= 0 ? firstDeleted : index;
-                keys[target] = key;
-                if (states[target] == EMPTY) {
-                    occupied++;
-                }
-                states[target] = USED;
-                size++;
-                modCount++;
-                return true;
+                break;
+            }
+            if (state == USED && keys[index] == key) {
+                return false;
             }
             if (state == DELETED && firstDeleted < 0) {
                 firstDeleted = index;
             }
             index = (index + 1) & mask;
         }
+        if (firstDeleted >= 0) {
+            // Reuse the first tombstone, even when occupied crosses the
+            // growth threshold; this does not increase occupied.
+            index = firstDeleted;
+        } else if (needsGrowth(occupied + 1, keys.length)) {
+            if (keys.length >= (1 << 30)) {
+                throw new IllegalStateException("maximum hash-table capacity reached");
+            }
+            // Existing staged rehash publishes both lanes atomically.
+            rehash(keys.length << 1);
+            mask = keys.length - 1;
+            index = mixed & mask;
+            while (states[index] != EMPTY) {
+                index = (index + 1) & mask;
+            }
+        }
+        keys[index] = key;
+        if (states[index] == EMPTY) {
+            occupied++;
+        }
+        states[index] = USED;
+        size++;
+        modCount++;
+        return true;
     }
 
     public boolean remove(long key) {
