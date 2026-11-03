@@ -80,10 +80,9 @@ public final class VInt {
         long length = 0L;
         for (long value : values) {
             long bits = zigZag ? (value << 1) ^ (value >> 63) : value;
-            do {
-                length++;
-                bits >>>= 7;
-            } while (bits != 0L);
+            // Preserve the one-byte fast path; otherwise count seven-bit groups from bit length.
+            length += (bits & ~0x7fL) == 0L ? 1
+                    : (Long.SIZE - Long.numberOfLeadingZeros(bits) + 6) / 7;
         }
         // At most ten bytes per input element: this long count cannot overflow.
         if (length > Integer.MAX_VALUE) {

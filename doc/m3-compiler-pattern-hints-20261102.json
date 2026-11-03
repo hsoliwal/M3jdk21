@@ -1,0 +1,80 @@
+{
+  "authority": {
+    "pattern_semantic_certification": false,
+    "producer_authentication": "CALLER_REQUIRED",
+    "promotion": false,
+    "source_mutation": false
+  },
+  "canonical_recipe": {
+    "commit": "e7e8a70cad7d5227eddee18881cd21e179509fa5",
+    "dataset": "m3jdk21",
+    "errors": 0,
+    "failures": 0,
+    "final_receiving_changes": 0,
+    "fixed_point_and_refusal_cases": "PASS",
+    "path": "synexia-openrewrite-recipes/recipe-crates/m3-compiler-pattern-hints-20261102",
+    "recipe": "com.synexia.m3.CompilerPatternHints20261102",
+    "repository": "hsoliwal/com.synexia",
+    "sdk": "OpenRewrite 8.17.1",
+    "sdk_tests": 5,
+    "skipped": 0
+  },
+  "copyright": "Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "executed_outputs": [
+    {
+      "after_sha256": "680b301888f8142a50decc1727887c17a6c3e7e51bc709a4fb3d2dac1d588461",
+      "before_sha256": "55cc884f0ef7f3b99dd0f5540f255611f1797121ada20c468a27053b250c157f",
+      "path": "src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java"
+    },
+    {
+      "after_sha256": "5fcb80344b16a6adf733310a756845a78204fd616faf308f40c5c073ec67175a",
+      "before_sha256": "40d8eb3f53464fcebe09a633c796969135095fe4233242ea9162341619630b57",
+      "path": "src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java"
+    },
+    {
+      "after_sha256": "503437c7ca4fdf43a5ddb2c74e084362f212e732c1a2e92261326d9d948c81af",
+      "before_sha256": "ABSENT",
+      "path": "test/langtools/tools/javac/m3/M3ASTRelationshipFactsTest.java"
+    },
+    {
+      "after_sha256": "32c00d1567da9d84342524b730ab65ccffc0924164b9381557a7715c687656e7",
+      "before_sha256": "ABSENT",
+      "path": "test/langtools/tools/javac/m3/M3ASTRelationshipTransportTest.java"
+    }
+  ],
+  "product_repository": "hsoliwal/M3jdk21",
+  "qualification": {
+    "actual_cli_plugin_export": "PASS",
+    "actual_cli_wire_sha256": "94808a6e7bd76b46656c06f611887ab072badaf87b03f663cbdf0c7a7224c27e",
+    "actual_make_built_compiler_class_files": 1639,
+    "byte_identical_java_jni_outputs": 7,
+    "direct_compiler_test_programs": 13,
+    "native_checks": "-Xcheck:jni; existing JNI intersection library with UBSan",
+    "official_build_exit": 0,
+    "official_build_target": "make LOG=info jdk.compiler-java",
+    "private_compiler_build_proof_sha256": "ec96efae89fd6f28fd7b7dbf19b70b9e9027182fcecab79b5224c102b49d90cb",
+    "private_goal_proof_sha256": "3211ae0e1bbbb141ced3bb44fc081c049116f62340777577dff5678feed721b3",
+    "private_java_jni_maven_tests": 50,
+    "projection_checks": 61,
+    "toolchain": "Temurin OpenJDK21.0.13+9; Maven3.9.11",
+    "transport_checks": 117,
+    "verified_build_input_files": 25523,
+    "verified_build_input_manifest_sha256": "5a47bc929718fa27751ed45cad780ad0f450c335fa07f0f0bd06659e3fe0f9bd"
+  },
+  "receipt_license": "Apache-2.0",
+  "receiving_baseline": "ce005d25b29fb6246e013bffb462afd5ed070362",
+  "related_public_prs": [
+    2308,
+    2309
+  ],
+  "remaining_gates": [
+    "Fresh complete installed M3JDK SDK image",
+    "Full jtreg/JCK orchestration",
+    "Cross-platform behavior and comparative performance",
+    "Private full Java25 plugin/reactor and inherited canonical provenance blockers"
+  ],
+  "runtime_scope": "Actual make-built compiler component executed on existing source-built M3JDK runtime; no new whole-runtime claim",
+  "schema": "M3_COMPILER_RELATIONSHIP_DELIVERY_V1",
+  "source_licenses": "Existing compiler GPL-2.0-only WITH Classpath-exception-2.0 and target-test GPL-2.0-only notices retained",
+  "transport_scope": "One source module per compiler invocation; multi-source-module export explicitly refused until module-qualified wire identities exist"
+}

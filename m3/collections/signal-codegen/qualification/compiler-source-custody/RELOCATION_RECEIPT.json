@@ -1,0 +1,69 @@
+{
+  "schema": "M3JDK21-COMPILER-QUALIFICATION-RELOCATION/1",
+  "baseline_pr_head": "087b4769022aea0564eb3bfdaaf2ee67b2c3ecbf",
+  "reviewed_checkpoint": "5abd351343edb81ddcf8e170191d2a1232b9d6d4",
+  "base": "ce005d25b29fb6246e013bffb462afd5ed070362",
+  "policy": "m3/compatibility/check_public_names.py",
+  "source_paths": [
+    {
+      "old": "m3-machine-compiler-hints-20261102/COMPILER_INTEGRATION_PLAN.md",
+      "destination": "compiler-machine-hints/COMPILER_INTEGRATION_PLAN.md",
+      "old_git_blob": "263b22fac7e2432b436e0d613075420c99ff245f",
+      "new_git_blob": "263b22fac7e2432b436e0d613075420c99ff245f"
+    },
+    {
+      "old": "m3-machine-compiler-hints-20261102/README.md",
+      "destination": "compiler-machine-hints/README.md",
+      "old_git_blob": "65a6a18b1bf515c6ba237168581c6bfb01021aaf",
+      "new_git_blob": "65a6a18b1bf515c6ba237168581c6bfb01021aaf"
+    },
+    {
+      "old": "m3-machine-compiler-hints-20261102/SOURCE_MANIFEST.tsv",
+      "destination": "compiler-machine-hints/SOURCE_MANIFEST.tsv",
+      "old_git_blob": "597829b6e4ed5619597c2d1ddb350645642acb83",
+      "new_git_blob": "597829b6e4ed5619597c2d1ddb350645642acb83"
+    },
+    {
+      "old": "m3-machine-compiler-hints-20261102/verify.sh",
+      "destination": "compiler-machine-hints/verify.sh",
+      "old_git_blob": "68653cb0f5ad2c07779c604b0d28571190c0e9d7",
+      "new_git_blob": "c66f3b816140bed84791b55863c4142356b2d0c6",
+      "only_changes": [
+        "m3-machine-compiler-hints-20261102 => compiler-machine-hints",
+        "m3-record-component-accessor-20261102 => record-component-accessor"
+      ]
+    },
+    {
+      "old": "m3-record-component-accessor-20261102/README.md",
+      "destination": "record-component-accessor/README.md",
+      "old_git_blob": "3fa06296aef679f93cb1631422238777cce4254a",
+      "new_git_blob": "3fa06296aef679f93cb1631422238777cce4254a"
+    },
+    {
+      "old": "m3-record-component-accessor-20261102/SOURCE_MANIFEST.tsv",
+      "destination": "record-component-accessor/SOURCE_MANIFEST.tsv",
+      "old_git_blob": "61748abde5285a7bd30b35143003709108cc3fc0",
+      "new_git_blob": "61748abde5285a7bd30b35143003709108cc3fc0"
+    }
+  ],
+  "qualifier_root": "m3/collections/signal-codegen/qualification/",
+  "preflight": "all six destination paths absent; old six blobs pinned",
+  "receiving": "all six destination files read back; five exact Git blobs; sixth exact two-ref substitution",
+  "old_paths_on_review_branch": "removed only after source receive/readback, retain Git ancestry",
+  "workflow": {
+    "path": ".github/workflows/m3-compiler-signal-facts-20261022.yml",
+    "old_git_blob": "bc1aa7d6a6dc93f2fdbd65af4fbe41642091795c",
+    "new_git_blob": "5fdbf34f190c6ce23b8192af2c7b8e39c59e57f8",
+    "only_changes": "two successor qualifier path references"
+  },
+  "path_predicate": {
+    "original_rejections": 6,
+    "new_rejections": 0,
+    "verification": "executed the original DATE and VERSION regular expressions against the exact changed path set, not the full original Git-backed test runner"
+  },
+  "hosted_ci": "QUEUED_AT_CHECK; no success implied",
+  "source_code_changed": false,
+  "public_api_changed": false,
+  "jni_abi_changed": false,
+  "default_branch_changed": false
+}

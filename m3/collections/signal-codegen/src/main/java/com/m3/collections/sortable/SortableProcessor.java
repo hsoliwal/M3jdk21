@@ -40,6 +40,7 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
+import javax.lang.model.element.RecordComponentElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.ArrayType;
@@ -142,7 +143,12 @@ public final class SortableProcessor extends AbstractProcessor {
                     }
                     @Override public Void visitMethodInvocation(
                             MethodInvocationTree tree, Void unused) {
-                        if (classDepth == 1) facts[M3CompilerFacts.METHOD_INVOCATIONS]++;
+                        // javac synthesizes implicit super() calls in Trees. Those have
+                        // no real source end coordinate and must not become source facts.
+                        boolean sourceCall = trees.getSourcePositions()
+                                .getEndPosition(path.getCompilationUnit(), tree) >= 0;
+                        if (classDepth == 1 && sourceCall)
+                            facts[M3CompilerFacts.METHOD_INVOCATIONS]++;
                         Element target = trees.getElement(getCurrentPath());
                         if (target instanceof ExecutableElement method) {
                             Element owner = method.getEnclosingElement();
@@ -156,7 +162,7 @@ public final class SortableProcessor extends AbstractProcessor {
                             // Preserve all original structural tokens (including nested
                             // types). The new type-local fact excludes nested declarations.
                             add(lanes[5], token);
-                            if (classDepth == 1) add(localCallTokens, token);
+                            if (classDepth == 1 && sourceCall) add(localCallTokens, token);
                         }
                         return super.visitMethodInvocation(tree, unused);
                     }
@@ -238,6 +244,8 @@ public final class SortableProcessor extends AbstractProcessor {
             // Only model-level coordinates are known without Trees.
         }
 
+        // Precompute candidate-only hint masks once in javac; no runtime source scan.
+        long[] machineHints = M3MachineHintRules.fromFacts(facts, new long[]{validFacts}).masks();
         String fqGenerated = (pkg.isEmpty() ? "" : pkg + ".") + name + "M3Sortable";
         try (Writer writer = processingEnv.getFiler().createSourceFile(fqGenerated, type).openWriter()) {
             if (!pkg.isEmpty()) writer.write("package " + pkg + ";\n\n");
@@ -260,6 +268,13 @@ public final class SortableProcessor extends AbstractProcessor {
             writer.write("};\n");
             writer.write("    private static final long[] FACT_KNOWN = new long[] {0x"
                     + Long.toHexString(validFacts) + "L};\n");
+            writer.write("    private static final long MACHINE_HINT_KNOWN = 0x"
+                    + Long.toHexString(machineHints[0]) + "L;\n");
+            writer.write("    private static final long MACHINE_HINT_CANDIDATES = 0x"
+                    + Long.toHexString(machineHints[1]) + "L;\n");
+            writer.write("    public static com.m3.collections.sortable.M3MachineHintRules machinePatternHints() {\n");
+            writer.write("        return new com.m3.collections.sortable.M3MachineHintRules("
+                    + "MACHINE_HINT_KNOWN, MACHINE_HINT_CANDIDATES);\n    }\n");
             writer.write("    public static com.m3.collections.sortable.M3CompilerFacts compilerFacts() {\n");
             writer.write("        return new com.m3.collections.sortable.M3CompilerFacts("
                     + "FACT_COUNTS, FACT_KNOWN);\n    }\n");
@@ -282,6 +297,26 @@ public final class SortableProcessor extends AbstractProcessor {
     private String accessor(TypeElement type) {
         String declared = type.getAnnotation(Sortable.class).signal().trim();
         if (declared.isEmpty()) return "";
+        // A record component has a private compiler-generated backing field and
+        // a public accessor with the same name. Resolve the component through
+        // its language-model accessor, never through member iteration order.
+        if (type.getKind() == ElementKind.RECORD) {
+            for (RecordComponentElement component : type.getRecordComponents()) {
+                if (!component.getSimpleName().contentEquals(declared)) continue;
+                ExecutableElement reader = component.getAccessor();
+                if (reader == null || reader.getModifiers().contains(Modifier.PRIVATE)
+                        || reader.getModifiers().contains(Modifier.STATIC)
+                        || !reader.getParameters().isEmpty()) {
+                    error(component, "@Sortable signal must be an accessible instance member");
+                    return null;
+                }
+                if (!isNumeric(reader.getReturnType())) {
+                    error(component, "@Sortable signal must return a primitive numeric value");
+                    return null;
+                }
+                return declared + "()";
+            }
+        }
         int hits = 0;
         String access = "";
         for (Element member : type.getEnclosedElements()) {
