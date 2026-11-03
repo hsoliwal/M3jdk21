@@ -6,14 +6,14 @@
 ## Scope
 
 Stacked on [M3JDK21 #2394](https://github.com/hsoliwal/M3jdk21/pull/2394),
-head \`372f1b25848bcad8e08897f7f470e63ea610b853\`.
+head `372f1b25848bcad8e08897f7f470e63ea610b853`.
 No existing Java, JNI, historical manifest, historical verifier, JVM runtime,
 HotSpot, or public API bytes are modified by this source-census branch.
 
-The existing historic verification job on #2394 failed on \`Object.java\`
-SHA-256 \`bd21f3da2ff9f8365576946cfe2d5b5557acaace76de2146277e9d1baa436bd4\`
-versus historical \`829fb37093cf3e8d11b3c1e3d42f898f0c86f3b697e7a66cefe09934be3bb259\`.
-Separate TQ jobs failed for a distinct \`M3TQ.java\` hash and a fixture-manifest
+The existing historic verification job on #2394 failed on `Object.java`
+SHA-256 `bd21f3da2ff9f8365576946cfe2d5b5557acaace76de2146277e9d1baa436bd4`
+versus historical `829fb37093cf3e8d11b3c1e3d42f898f0c86f3b697e7a66cefe09934be3bb259`.
+Separate TQ jobs failed for a distinct `M3TQ.java` hash and a fixture-manifest
 assertion. They have not been patched or asserted to be caused by the adapter.
 
 ## Actual live-branch inventory
@@ -24,37 +24,37 @@ fetched by the GitHub connector. The source contents were hashed as UTF-8
 using SHA-256, including a known-vector-tested implementation. Results:
 
 - **6 exact historical SHA-256 matches**.
-- **8 current-source divergences**: \`Object.java\`, \`Runnable.java\`,
-  \`ExecutorService.java\`, \`ProgressMonitor.java\`, \`ProgressMonitors.java\`,
-  \`Consumer.java\`, \`Function.java\`, and \`Supplier.java\`.
+- **8 current-source divergences**: `Object.java`, `Runnable.java`,
+  `ExecutorService.java`, `ProgressMonitor.java`, `ProgressMonitors.java`,
+  `Consumer.java`, `Function.java`, and `Supplier.java`.
 - Four-column, 14-row deterministic TSV:
-  \`m3/compatibility/m3-object-progress-current-census-20261103.tsv\`.
+  `m3/compatibility/m3-object-progress-current-census-20261103.tsv`.
 - Exact census SHA-256:
-  \`f333de2f423f079f3f28b49e4c531548aa29511af30227dd84c10efa7b7a48cf\`.
+  `f333de2f423f079f3f28b49e4c531548aa29511af30227dd84c10efa7b7a48cf`.
 - Historical manifest SHA-256 identities were verified and left untouched.
   The Git blob SHA-1 values are separate metadata, not SHA-256 substitutes.
 
 **The eight differences are NOT declared equivalent.** The new verifier
-accepts only this observed source image, marks it \`OBSERVED_ONLY\` and
+accepts only this observed source image, marks it `OBSERVED_ONLY` and
 still requires the original fail-closed historical gate for acceptance.
 
 ## Executed local stages
 
-- Python 3.13.5 \`py_compile\` of the new verifier and eight-test unit suite:
+- Python 3.13.5 `py_compile` of the new verifier and eight-test unit suite:
   **PASS**.
 - Strict ledger lint: 14 sorted unique paths, exactly 8 divergent and 6
   identical historical digests: **PASS**.
-- \`python3 -B -m unittest discover -s m3/compatibility
-  -p 'test_object_progress_current_census_20261103.py' -v\`:
+- `python3 -B -m unittest discover -s m3/compatibility
+  -p 'test_object_progress_current_census_20261103.py' -v`:
   **8 tests, 7 PASS, 1 SKIP** (full receiver checkout not mounted).
 - The 7 locally executed tests covered exact cryptographic seal, source-row
   ordering, duplicate/missing row refusal, unsafe path refusal, mutation
   refusal, synthetic expected vs current source agreement and historical
   hash mismatch refusal.
 - Source and test Git blobs compared against locally tested files:
-  \`8193a6ce541874d56a38f8b6cb4f573083da2491\` (verifier),
-  \`fd59470185971a869679f5dead3f6a4bc647b739\` (tests),
-  \`fa2b92012e952a1bc92de80112856d4c13daa936\` (ledger).
+  `8193a6ce541874d56a38f8b6cb4f573083da2491` (verifier),
+  `fd59470185971a869679f5dead3f6a4bc647b739` (tests),
+  `fa2b92012e952a1bc92de80112856d4c13daa936` (ledger).
 - Focused hosted workflow was authored separately and must report its own
   actual conclusion; authored YAML is not a passing CI execution.
 
@@ -64,7 +64,7 @@ still requires the original fail-closed historical gate for acceptance.
 (hosted CI pending), historic progress source-gate acceptance, full Maven
 /OpenRewrite source-chain reconciliation for all eight changed files, actual
 rebuilt M3JDK21 Java/JNI, jtreg, JCK, GC/HotSpot/ABI, other platforms,
-performance benchmarks and repository-wide \`hsoliwal/*\` validation.
+performance benchmarks and repository-wide `hsoliwal/*` validation.
 
 A current observed-image digest is a report about bytes, **not a source
 transformation receipt or semantic/ABI compatibility proof**. Do not merge
