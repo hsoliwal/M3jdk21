@@ -1,6 +1,10 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 package com.m3.swing.viewport;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -31,7 +35,8 @@ public class M3PackedListModel<E> extends AbstractListModel<E> implements M3Pack
 	private static final long serialVersionUID = 1L;
 	private static final int NONE = -1;
 
-	private Object [] items = new Object [0];
+	//FLLDCIM: MRL — transient; writeObject/readObject keep the element array in the serial data
+	private transient Object [] items = new Object [0];
 	private int size;
 	private int batchDepth, pendingType = NONE, pending0, pending1;
 
@@ -314,5 +319,19 @@ public class M3PackedListModel<E> extends AbstractListModel<E> implements M3Pack
 		if (type == ListDataEvent.INTERVAL_ADDED) fireIntervalAdded (this, index0, index1);
 		else if (type == ListDataEvent.INTERVAL_REMOVED) fireIntervalRemoved (this, index0, index1);
 		else fireContentsChanged (this, index0, index1);
+	}
+
+	// ---- Serialization: the element array as before; elements must be serializable ---------------
+
+	@Serial
+	private void writeObject (ObjectOutputStream out) throws IOException {
+		out.defaultWriteObject ();
+		out.writeObject (items);
+	}
+
+	@Serial
+	private void readObject (ObjectInputStream in) throws IOException, ClassNotFoundException {
+		in.defaultReadObject ();
+		items = (Object []) in.readObject ();
 	}
 }
