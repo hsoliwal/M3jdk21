@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+# Independent pass 2 consumes the exact pass-1 postimages; pass 1 records remain untouched.
+language	path	stage1_post_sha256	stage2_post_sha256	java_jni_acceptance
+JAVA	m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java	e1db0068f8f0cfb163a8422ff2674ef3d5991945d49e718c1655171f3e4feb50	832db38361198b66f6005289eca41d5580107c2f9cd91df9f9ee1e40680365fe	PENDING_TARGET_CI
+JAVA	m3/arrays/src/test/java/com/m3/arrays/M3ArrayNativeTest.java	c7639c51113b640db232a2ce7b0cba2dac081d3a808c6539d34f7434b8a15f10	26d13911379cfd4b1c570f9935f7d1b44b0aefab0c550ee3b3888ab9ea1912f7	PENDING_TARGET_CI
+JNI_C	m3/arrays/src/main/native/m3_arrays_jni.c	a0f975c24a148da8d28757f996929d5a2a15a5c557fb3e5e82e3ab9fa6380895	09857bf085779e99244929de6471385a7867e89d18060bff842101e313f7e7e8	PENDING_TARGET_CI
