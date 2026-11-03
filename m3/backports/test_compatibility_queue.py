@@ -4,6 +4,7 @@
 
 from __future__ import annotations
 
+import csv
 import importlib.util
 import io
 import sys
@@ -26,6 +27,39 @@ def load_module():
 class CompatibilityQueueTest(unittest.TestCase):
     def setUp(self) -> None:
         self.q = load_module()
+
+    def test_wide_openjdk_inventory_roundtrip_and_scoped_csv_limit(self) -> None:
+        row = self.row(
+            release=27, commit="a" * 40, subject="wide path inventory",
+            domain="tools", paths="src/jdk.jcmd/" + "x" * 192000,
+        )
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "inventory.tsv"
+            with path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(
+                    handle, fieldnames=list(row), delimiter="\t",
+                    lineterminator="\n",
+                )
+                writer.writeheader()
+                writer.writerow(row)
+            previous_limit = csv.field_size_limit()
+            actual = self.q.read_inventory(path)
+            self.assertEqual(previous_limit, csv.field_size_limit())
+            self.assertEqual(row["paths"], actual[0]["paths"])
+            queue = self.q.queue(actual)
+            self.assertEqual(self.q.PENDING, queue[0].compatibility_state)
+
+    def test_inventory_field_limit_is_bounded_even_on_parse_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "inventory.tsv"
+            path.write_text(
+                "release\tcommit\n22\t" + "x" * (self.q.MAX_INVENTORY_FIELD_SIZE + 1) + "\n",
+                encoding="utf-8",
+            )
+            previous_limit = csv.field_size_limit()
+            with self.assertRaises(csv.Error):
+                self.q.read_inventory(path)
+            self.assertEqual(previous_limit, csv.field_size_limit())
 
     def row(
         self,
