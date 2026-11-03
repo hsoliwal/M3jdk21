@@ -1,0 +1,56 @@
+{
+  "schema": "M3_WORDROWS_TARGET_ACCEPTANCE_V1",
+  "sourceRepository": "hsoliwal/com.synexia",
+  "sourcePriorRevision": "231628fd77990c67c09235ec26b47aa63e2106ad",
+  "recipeIds": [
+    "com.synexia.m3.WordRowsFixtureLifetime20261101",
+    "com.synexia.m3.WordRowsNativeCounter20261101"
+  ],
+  "recipeDescriptorBlobs": [
+    "49c60035a30ac8a7e425ee7c7a7a2cb06ee99ddd",
+    "582de6787d79e10055d312f3dd5be0ab866baed9"
+  ],
+  "postimages": [
+    {
+      "path": "m3/core/test/M3WordRowsContractTest.java",
+      "sha256": "ae2fe64b1a273317e1416bc8e22d86bbb2284080d3afedfea2fb78032b6ea403"
+    },
+    {
+      "path": "m3/lexicon/native/m3_wordrows_jni.c",
+      "sha256": "2148369f81d21149ff82d06a81f3e334b2212c46e038e7030113d40f51b28aaa"
+    }
+  ],
+  "privateEvidence": [
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-wordrows-fixture-lifetime-20261101/qualification/final/RECEIPT.json",
+      "sha256": "369de8b443ff682f303c705335b4a139cff6e4c05ec56567c7eacdd1bc5ccf8a"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-wordrows-native-counter-20261101/qualification/first-native-pass/RECEIPT.json",
+      "sha256": "82766e881c4ba36ed3a6de7d3642f3324b06c24bffe6c043330f38a1ddc7b79c"
+    }
+  ],
+  "observations": {
+    "fixtureSdkJUnitGroups": 5,
+    "fixtureCandidateModes": 5,
+    "fixtureControlChecks": 17,
+    "failedWorkerCleanup": "PASS",
+    "nativeSdkJUnitGroups": 5,
+    "nativeRawBeforeAfterParity": "PASS",
+    "nativeRuntimeModes": 7,
+    "oldOverflowTraps": 6,
+    "newBoundarySizes": 18,
+    "newTailWidths": 128
+  },
+  "platform": "Windows x86_64 Oracle JDK21.0.9 GCC15.2",
+  "qualificationScope": "Test fixture lifetime and one native loop counter; immutable source storage and JNI ABI preserved.",
+  "notClaimed": [
+    "full repository/JDK/JCK build",
+    "huge Java array JNI execution",
+    "all-platform parity",
+    "per-atom speedup or retained-memory measurement",
+    "complete lexicon migration"
+  ],
+  "capabilityPromotion": false,
+  "mergeAuthority": false
+}

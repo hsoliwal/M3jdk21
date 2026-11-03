@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2005, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026, Hitesh Soliwal and contributors. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -302,6 +303,50 @@ public class CopyMethods {
         return x;
     }
 
+    // An overflowing subtraction must not replace the original range-order test.
+    // Positive requested lengths in these witnesses are at most one element.
+    static int rangeOverflowCasesRun;
+
+    static void checkRangeOverflow(Method method, Object source, int from, int to,
+                                   Class<? extends Throwable> expected) {
+        try {
+            method.invoke(null, source, from, to);
+            throw new RuntimeException("missing copyOfRange overflow refusal");
+        } catch (InvocationTargetException invocation) {
+            Throwable actual = invocation.getCause();
+            if (actual.getClass() != expected) {
+                throw new RuntimeException("copyOfRange overflow exception mismatch: "
+                        + method.getParameterTypes()[0].getComponentType().getName()
+                        + " from=" + from + " to=" + to
+                        + " expected=" + expected.getName()
+                        + " actual=" + actual.getClass().getName(), actual);
+            }
+            rangeOverflowCasesRun++;
+        } catch (IllegalAccessException failure) {
+            throw new RuntimeException(failure);
+        }
+    }
+
+    static void rangeOverflowTests() {
+        rangeOverflowCasesRun = 0;
+        for (Class<?> component : allTypes) {
+            if (!component.isPrimitive()) continue;
+            Method method = cloneRangers.get(component);
+            Object source = Array.newInstance(component, 4);
+            for (Object input : new Object[] {source, null}) {
+                checkRangeOverflow(method, input, Integer.MAX_VALUE, Integer.MIN_VALUE,
+                        IllegalArgumentException.class);
+                checkRangeOverflow(method, input, Integer.MIN_VALUE, Integer.MAX_VALUE,
+                        NegativeArraySizeException.class);
+                checkRangeOverflow(method, input, Integer.MIN_VALUE, 0,
+                        NegativeArraySizeException.class);
+                checkRangeOverflow(method, input, -1, Integer.MAX_VALUE,
+                        NegativeArraySizeException.class);
+            }
+        }
+        check(rangeOverflowCasesRun == 64);
+    }
+
     public static void main(String[] av) {
         boolean verbose = (av.length != 0);
         muzzle = (verbose? 0: 1);
@@ -309,6 +354,7 @@ public class CopyMethods {
             System.out.println("test values: "+Arrays.toString(Arrays.copyOf(testValues, 5))+"...");
 
         simpleTests();
+        rangeOverflowTests();
 
         muzzle = 0;  // turn on print statements (affects failures only)
 
