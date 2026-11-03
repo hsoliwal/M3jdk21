@@ -50,6 +50,12 @@ EXPECTED = (
      "42530ed135329f1160693b9d998bbb86f9be8b1cca29ccb2af07d9eaa25d1fba",
      "530bbe2f3def29336a71c0d9030c8d541055641e", MERGE_RECIPE, STATUS),
 )
+# Interop sources added after the predecessor, admitted by exact git blob: the two provider tests master received
+# through superset #2166 (2026-10-30). Any other addition, any deletion, or another blob for these paths still fails.
+ADMITTED_ADDITIONS = {
+    JAVA_BASE + "M3Flat3MapProviderTest.java": "802c3479c69e22d92ede9bab4213af16e128eafc",
+    JAVA_BASE + "M3FrozenLongSetProviderTest.java": "95a0cadb931759e68fe893f1451c92583ff3b426",
+}
 HEX40 = re.compile(r"[0-9a-f]{40}\Z")
 HEX64 = re.compile(r"[0-9a-f]{64}\Z")
 
@@ -96,6 +102,16 @@ def tracked(root: Path):
     return found
 
 
+def check_file_set(old_files, now_files):
+    """The current interop source set is the predecessor's plus exactly ADMITTED_ADDITIONS (path, mode, blob)."""
+    added = now_files.keys() - old_files.keys()
+    if old_files.keys() - now_files.keys() or added - ADMITTED_ADDITIONS.keys():
+        raise ValueError("unadmitted interop source addition/deletion")
+    for path in added:
+        if now_files[path] != ("100644", ADMITTED_ADDITIONS[path]):
+            raise ValueError("admitted addition blob or mode drift: " + path)
+
+
 def checked_bytes(root: Path, relative: str):
     path = root / relative
     if (path.is_symlink() or not path.is_file()
@@ -115,12 +131,14 @@ def prove_current(product: Path, before: Path, manifest: Path):
         raise ValueError("wrong exact predecessor commit")
     rows = receipt_rows(manifest)
     old_files, now_files = tracked(before), tracked(product)
-    if old_files.keys() != now_files.keys():
-        raise ValueError("unadmitted interop source addition/deletion")
+    check_file_set(old_files, now_files)
+    for path in sorted(now_files.keys() - old_files.keys()):
+        if git_blob(checked_bytes(product, path)) != ADMITTED_ADDITIONS[path]:
+            raise ValueError("admitted addition worktree drift: " + path)
     required = {row[0] for row in rows}
     if not required.issubset(now_files):
         raise ValueError("one or more reviewed tests untracked")
-    for path in sorted(now_files):
+    for path in sorted(old_files):
         prev = checked_bytes(before, path)
         now = checked_bytes(product, path)
         old_mode, old_blob = old_files[path]
