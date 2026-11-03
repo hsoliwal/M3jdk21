@@ -1,0 +1,8 @@
+## SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+## Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+## optional label
+## Every class row of the snapshot: ${expected}, the java.lang.Class oracle, equals the lane accessor CI.${atom}(row).
+## label: optional trailing assertion-message argument, written with its leading comma (", d.toString()").
+${setup}
+for (int row = 0; row < CI.size(); row++) assertEquals(${expected}, CI.${atom}(row)${label});
+${extra}

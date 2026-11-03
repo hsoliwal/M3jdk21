@@ -1,0 +1,31 @@
+donor	feature	first_sentence
+commons-csv	feature:DuplicateHeaderMode.ALLOW_ALL	Allows all duplicate headers.
+commons-csv	feature:DuplicateHeaderMode.ALLOW_EMPTY	Allows duplicate headers only if they're empty, blank, or null strings.
+commons-csv	feature:DuplicateHeaderMode.DISALLOW	Disallows duplicate headers entirely.
+commons-csv	feature:QuoteMode.ALL	Quotes all fields.
+commons-csv	feature:QuoteMode.ALL_NON_NULL	Quotes all non-null fields.
+commons-csv	feature:QuoteMode.MINIMAL	Quotes fields that contain special characters such as a field delimiter, quote character, or any of the characters in the line separator string.
+commons-csv	feature:QuoteMode.NONE	Never quotes fields.
+commons-csv	feature:QuoteMode.NON_NUMERIC	Quotes all non-numeric fields.
+jackson-dataformat-csv	feature:CsvGenerator.Feature.ALWAYS_QUOTE_EMPTY_STRINGS	Feature that determines whether values written as empty Strings (from java.lang.String valued POJO properties) should be forced to be quoted.
+jackson-dataformat-csv	feature:CsvGenerator.Feature.ALWAYS_QUOTE_NUMBERS	Feature that determines whether values written as Nymbers (from java.lang.Number valued POJO properties) should be forced to be quoted, regardless of whether they actually need this.
+jackson-dataformat-csv	feature:CsvGenerator.Feature.ALWAYS_QUOTE_STRINGS	Feature that determines whether values written as Strings (from java.lang.String valued POJO properties) should be forced to be quoted, regardless of whether they actually need this.
+jackson-dataformat-csv	feature:CsvGenerator.Feature.ESCAPE_CONTROL_CHARS_WITH_ESCAPE_CHAR	Feature that determines whether control characters (non-printable) are escaped using the configured escape character.
+jackson-dataformat-csv	feature:CsvGenerator.Feature.ESCAPE_QUOTE_CHAR_WITH_ESCAPE_CHAR	Feature that determines whether quote characters within quoted String values are escaped using configured escape character, instead of being "doubled up" (that is: a quote character is written twice in a row).
+jackson-dataformat-csv	feature:CsvGenerator.Feature.OMIT_MISSING_TAIL_COLUMNS	Feature that determines whether columns without matching value may be omitted, when they are the last values of the row.
+jackson-dataformat-csv	feature:CsvGenerator.Feature.STRICT_CHECK_FOR_QUOTING	Feature that determines how much work is done before determining that a column value requires quoting: when set as true, full check is made to only use quoting when it is strictly necessary; but when false, a faster but
+jackson-dataformat-csv	feature:CsvParser.Feature.ALLOW_COMMENTS	Feature that allows accepting "hash comments" by default, similar to CsvSchema#withAllowComments(boolean).
+jackson-dataformat-csv	feature:CsvParser.Feature.ALLOW_TRAILING_COMMA	Feature that allows there to be a trailing single extraneous data column that is empty.
+jackson-dataformat-csv	feature:CsvParser.Feature.EMPTY_STRING_AS_NULL	Feature that enables coercing an empty String to `null` Feature is disabled by default
+jackson-dataformat-csv	feature:CsvParser.Feature.FAIL_ON_MISSING_COLUMNS	Feature that allows failing (with a CsvReadException) in cases where number of column values encountered is less than number of columns declared in the active schema ("missing columns").
+jackson-dataformat-csv	feature:CsvParser.Feature.FAIL_ON_MISSING_HEADER_COLUMNS	Feature that allows failing (with a CsvReadException) in cases where number of header columns encountered is less than number of columns declared in the active schema (if there is one).
+jackson-dataformat-csv	feature:CsvParser.Feature.IGNORE_TRAILING_UNMAPPABLE	Feature that allows ignoring of unmappable "extra" columns; that is, values for columns that appear after columns for which types are defined.
+jackson-dataformat-csv	feature:CsvParser.Feature.INSERT_NULLS_FOR_MISSING_COLUMNS	Feature that allows "inserting" virtual key / `null` value pairs in case a row contains fewer columns than declared by configured schema.
+jackson-dataformat-csv	feature:CsvParser.Feature.SKIP_EMPTY_LINES	Feature that allows skipping input lines that are completely empty or blank (composed only of whitespace), instead of being decoded as lines of just a single column with an empty/blank String value (or, of being decoded
+jackson-dataformat-csv	feature:CsvParser.Feature.TRIM_SPACES	Feature determines whether spaces around separator characters (commas) are to be automatically trimmed before being reported or not.
+jackson-dataformat-csv	feature:CsvParser.Feature.WRAP_AS_ARRAY	Feature that determines how stream of records (usually CSV lines, but sometimes multiple lines when linefeeds are included in quoted values) is exposed: either as a sequence of Objects (false), or as an Array of Objects
+univocity-parsers	feature:UnescapedQuoteHandling.BACK_TO_DELIMITER	If unescaped quotes are found in the input, consider the value as an unquoted value.
+univocity-parsers	feature:UnescapedQuoteHandling.RAISE_ERROR	If unescaped quotes are found in the input, a TextParsingException will be thrown.
+univocity-parsers	feature:UnescapedQuoteHandling.SKIP_VALUE	If unescaped quotes are found in the input, the content parsed for the given value will be skipped (until the next delimiter is found) and the value set in CommonSettings#getNullValue() will be produced instead.
+univocity-parsers	feature:UnescapedQuoteHandling.STOP_AT_CLOSING_QUOTE	If unescaped quotes are found in the input, accumulate the quote character and proceed parsing the value as a quoted value, until a closing quote is found.
+univocity-parsers	feature:UnescapedQuoteHandling.STOP_AT_DELIMITER	If unescaped quotes are found in the input, consider the value as an unquoted value.

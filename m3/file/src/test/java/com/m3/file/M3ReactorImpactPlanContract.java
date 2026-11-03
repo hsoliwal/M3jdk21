@@ -114,6 +114,7 @@ public final class M3ReactorImpactPlanContract {
             reject(IllegalArgumentException.class, () -> M3ReactorImpactPlan.compute(
                     steady, impacted, projectForFile, 4, true,
                     reactorOffsets, reactorTargets));
+            snapshotIdentityContract(root.resolve("snapshot-identity"));
             System.out.println("M3_REACTOR_IMPACT_PASS checks=" + checks);
         } finally {
             try (var stream = Files.walk(root)) {
@@ -123,5 +124,100 @@ public final class M3ReactorImpactPlanContract {
                 });
             }
         }
+    }
+
+    private static void snapshotIdentityContract(Path root) throws Exception {
+        Files.createDirectories(root);
+        List<Path> names = List.of(Path.of("A.java"), Path.of("B.java"));
+        for (Path name : names) Files.writeString(root.resolve(name), name.toString());
+        var first = M3FileDeltaLedger.scan(root, null, names);
+        var steady = M3FileDeltaLedger.scan(root, first, names);
+        int a = steady.physicalSlot(Path.of("A.java"));
+        int b = steady.physicalSlot(Path.of("B.java"));
+        int[] owners = new int[steady.slots()];
+        owners[a] = 0;
+        owners[b] = 1;
+        int[] reactorOffsets = {0, 1, 1}, reactorTargets = {1};
+        int[] noFileEdges = new int[steady.slots() + 1];
+        byte[] unsafe = new byte[steady.slots()];
+
+        Files.writeString(root.resolve("A.java"), "first changed source");
+        var changed = M3FileDeltaLedger.scan(root, steady, names);
+        var repeated = M3FileDeltaLedger.scan(root, steady, names);
+        check(changed != repeated, "repeated observation is a distinct snapshot");
+        check(changed.slots() == repeated.slots(), "repeated observation retains slot dimensions");
+        for (int slot = 0; slot < changed.slots(); slot++) {
+            check(changed.stateAt(slot) == repeated.stateAt(slot),
+                    "repeated observation retains every delta state bit");
+            check(Arrays.equals(changed.digestAt(slot), repeated.digestAt(slot)),
+                    "repeated observation retains exact content hashes");
+        }
+        var impacted = M3BuildImpactPlan.compute(changed, true,
+                noFileEdges, new int[0], unsafe);
+        var conservative = M3BuildImpactPlan.compute(changed, false, null, null, null);
+
+        Files.writeString(root.resolve("A.java"), "later changed source");
+        var later = M3FileDeltaLedger.scan(root, steady, names);
+        check(changed.slots() == later.slots(), "different source retains slot dimensions");
+        for (int slot = 0; slot < changed.slots(); slot++) {
+            check(changed.stateAt(slot) == later.stateAt(slot),
+                    "different source retains every delta state bit");
+        }
+        check(!Arrays.equals(changed.digestAt(a), later.digestAt(a)),
+                "different source has a different content hash");
+        for (boolean verified : new boolean[] {true, false}) {
+            int[] offsets = verified ? reactorOffsets : null;
+            int[] targets = verified ? reactorTargets : null;
+            for (M3BuildImpactPlan plan : new M3BuildImpactPlan[] {impacted, conservative}) {
+                var retained = M3ReactorImpactPlan.compute(changed, plan,
+                        owners, 2, verified, offsets, targets);
+                same(new int[] {0, 1}, retained, "original immutable snapshot remains usable");
+                check(retained.requiresConservativeReactor()
+                        == (!verified || plan.requiresConservativeBuild()),
+                        "snapshot binding preserves conservative selection");
+                reject(IllegalArgumentException.class, () -> M3ReactorImpactPlan.compute(
+                        repeated, plan, owners, 2, verified, offsets, targets));
+                reject(IllegalArgumentException.class, () -> M3ReactorImpactPlan.compute(
+                        later, plan, owners, 2, verified, offsets, targets));
+            }
+        }
+
+        var clean = M3FileDeltaLedger.scan(root, later, names);
+        var cleanRepeated = M3FileDeltaLedger.scan(root, clean, names);
+        check(clean != cleanRepeated, "no-op observations have distinct identity");
+        for (int slot = 0; slot < clean.slots(); slot++) {
+            check(!clean.changedAt(slot) && !cleanRepeated.changedAt(slot),
+                    "both no-op observations have no direct delta");
+            check(clean.stateAt(slot) == cleanRepeated.stateAt(slot)
+                    && Arrays.equals(clean.digestAt(slot), cleanRepeated.digestAt(slot)),
+                    "no-op observations retain state and content");
+        }
+        var cleanFiles = M3BuildImpactPlan.compute(clean, true,
+                noFileEdges, new int[0], unsafe);
+        for (boolean verified : new boolean[] {true, false}) {
+            int[] offsets = verified ? reactorOffsets : null;
+            int[] targets = verified ? reactorTargets : null;
+            var noOp = M3ReactorImpactPlan.compute(clean, cleanFiles,
+                    owners, 2, verified, offsets, targets);
+            check(noOp.size() == 0 && !noOp.requiresConservativeReactor(),
+                    "exact no-op observation remains empty for either graph mode");
+            reject(IllegalArgumentException.class, () -> M3ReactorImpactPlan.compute(
+                    cleanRepeated, cleanFiles, owners, 2, verified, offsets, targets));
+        }
+
+        Files.delete(root.resolve("A.java"));
+        var removed = M3FileDeltaLedger.scan(root, clean, names);
+        check(removed.physicalSlot(Path.of("A.java")) == a && !removed.liveAt(a)
+                && (removed.stateAt(a) & M3FileDeltaLedger.REMOVED) != 0,
+                "deleted source retains its physical owner slot");
+        var removedFiles = M3BuildImpactPlan.compute(removed, true,
+                noFileEdges, new int[0], unsafe);
+        var removal = M3ReactorImpactPlan.compute(removed, removedFiles,
+                owners, 2, true, reactorOffsets, reactorTargets);
+        same(new int[] {0, 1}, removal, "source deletion reaches downstream projects");
+        check(removal.reasonAt(0) == M3ReactorImpactPlan.FILE_IMPACT
+                && removal.reasonAt(1) == M3ReactorImpactPlan.DEPENDENT_PROJECT,
+                "deletion preserves direct and dependent project reasons");
+        check(!removal.requiresConservativeReactor(), "verified deletion remains incremental");
     }
 }

@@ -7,6 +7,9 @@ on:
       - 'm3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java'
       - 'm3/collections/recipe/zero-mask-window-copy-20261017/**'
       - 'm3/collections/qualification/zero-mask-window-copy-20261017/**'
+      - 'm3/collections/qualification/zero-mask-window-successor-20261031/**'
+      - 'm3/collections/src/test/java/com/m3/collections/M3ZeroMaskSuccessorTest.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3ZeroMaskSuccessorIT.java'
       - '.github/workflows/m3-zero-mask-window-copy.yml'
 permissions:
   contents: read
@@ -22,6 +25,15 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      # Replay original Oct 17 source verifier on its real immutable product commit.
+      - uses: actions/checkout@v4
+        with:
+          repository: hsoliwal/M3jdk21
+          ref: 31cdce1db97fd1567b360ee843916f9b6cfa3ff3
+          path: old-zero-mask-20261017
+          sparse-checkout: |
+            m3/collections
+          persist-credentials: false
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -29,15 +41,33 @@ jobs:
       - name: Refuse recipe/output drift and prove named recipe
         run: |
           set -euxo pipefail
-          python3 -I -S -B m3/collections/qualification/zero-mask-window-copy-20261017/verify.py
+          python3 -I -S -B m3/collections/qualification/zero-mask-window-successor-20261031/verify_source_v2.py --product . --original-checkout old-zero-mask-20261017
           mvn -B -ntp -f m3/collections/recipe/zero-mask-window-copy-20261017/pom.xml test
       - name: Strict Java and Java-only contract
         run: |
           set -euxo pipefail
-          mkdir -p proof/core proof/native proof/empty
-          find m3/collections/src/main/java -name '*.java' -print0 | sort -z | xargs -0 javac --release 21 -proc:none -Xlint:all,-module -Werror -d proof/core
-          javac --release 21 -proc:none -cp proof/core -d proof/core m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java
-          java -Xmx512m -Djava.library.path="$PWD/proof/empty" -cp proof/core com.m3.collections.M3IndexMaskCompactorSelfTest
+          mkdir -p proof/arrays proof/core proof/native proof/empty
+          # Source-build the exact named module required by module com.m3.collections.
+          # Preserve Java21 strict -Werror and both original JPMS descriptors.
+          find m3/arrays/src/main/java -name '*.java' | sort > proof/array-sources.txt
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            -d proof/arrays @proof/array-sources.txt
+          jar --create --file proof/m3-arrays.jar -C proof/arrays .
+          jar --describe-module --file proof/m3-arrays.jar | tee proof/arrays-module.txt
+          grep -q '^com.m3.arrays ' proof/arrays-module.txt
+          find m3/collections/src/main/java -name '*.java' | sort > proof/core-sources.txt
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            --module-path proof/m3-arrays.jar -d proof/core @proof/core-sources.txt
+          # Compile the original Java differential as a patched test class of
+          # com.m3.collections; do not erase module-info.java or use a fake stub.
+          javac --release 21 -proc:none -Xlint:all,-module -Werror \
+            --module-path "proof/core:proof/m3-arrays.jar" \
+            --patch-module com.m3.collections=m3/collections/src/test/java \
+            -d proof/core \
+            m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java
+          java -Xmx512m -Djava.library.path="$PWD/proof/empty" \
+            --module-path "proof/core:proof/m3-arrays.jar" \
+            --module com.m3.collections/com.m3.collections.M3IndexMaskCompactorSelfTest
       - name: Count state reads and reject original implementation
         run: |
           set -euxo pipefail
@@ -52,9 +82,42 @@ jobs:
         run: |
           set -euxo pipefail
           gcc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared -fsanitize=undefined -fno-sanitize-recover=all -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" m3/collections/src/main/native/collections/m3_index_mask_compactor.c -o proof/native/libm3_collections_mask.so
-          UBSAN_OPTIONS=halt_on_error=1 java -Xmx512m -Xcheck:jni -Djava.library.path="$PWD/proof/native" -cp proof/core com.m3.collections.M3IndexMaskCompactorSelfTest --native
-          python3 -I -S -B m3/collections/qualification/zero-mask-window-copy-20261017/verify.py
+          UBSAN_OPTIONS=halt_on_error=1 java -Xmx512m -Xcheck:jni \
+            -Djava.library.path="$PWD/proof/native" \
+            --module-path "proof/core:proof/m3-arrays.jar" \
+            --module com.m3.collections/com.m3.collections.M3IndexMaskCompactorSelfTest --native
+          python3 -I -S -B m3/collections/qualification/zero-mask-window-successor-20261031/verify_source_v2.py --product . --original-checkout old-zero-mask-20261017
           git diff --exit-code
+      - name: Execute independently named Java and required-JNI JUnit atoms
+        run: |
+          set -euxo pipefail
+          mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
+          UBSAN_OPTIONS=halt_on_error=1 mvn -B -ntp -f m3/collections/pom.xml \
+            "-DargLine=-Xcheck:jni -Djava.library.path=$PWD/proof/native" \
+            -Dtest=M3ZeroMaskSuccessorTest,M3ZeroMaskSuccessorIT \
+            -Dsurefire.failIfNoSpecifiedTests=true test
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          root=Path("m3/collections/target/surefire-reports")
+          expected={
+              "com.m3.collections.M3ZeroMaskSuccessorTest#intWindowsJavaAreDetachedAndByteStateIndependent",
+              "com.m3.collections.M3ZeroMaskSuccessorTest#longWindowsJavaPreserveSignedExtremesAndDuplicates",
+              "com.m3.collections.M3ZeroMaskSuccessorIT#intZeroMaskRealJniWindows",
+              "com.m3.collections.M3ZeroMaskSuccessorIT#longZeroMaskRealJniWindows",
+          }
+          actual=set()
+          for file in root.glob("TEST-com.m3.collections.M3ZeroMaskSuccessor*.xml"):
+              doc=ET.parse(file).getroot()
+              if doc.tag!="testsuite" or any(int(doc.get(k,"-1"))!=0 for k in ("errors","failures","skipped")):
+                  raise ValueError("unqualified zero-mask JUnit suite")
+              for case in doc.findall("testcase"):
+                  ident=case.get("classname","")+"#"+case.get("name","")
+                  if ident in actual: raise ValueError("duplicate JUnit atom")
+                  actual.add(ident)
+          if actual!=expected: raise ValueError("missing/extra JNI JUnit atoms: "+repr(actual^expected))
+          print("M3_ZERO_MASK_JUNIT_JAVA_JNI_PASS",len(actual))
+          PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:

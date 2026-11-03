@@ -78,6 +78,17 @@ static int64_t decode64_value(uint64_t value, int zigzag) {
             : -1 - (int64_t)(UINT64_MAX - value);
 }
 
+/* Minimal base-128 width: skip groups in powers of two without signed shifts.
+ * The common one-byte case remains one comparison. No padding or compiler intrinsic. */
+static size_t encoded64_size(uint64_t value) {
+    if (value < UINT64_C(128)) return 1;
+    size_t bytes = 1;
+    if (value >= (UINT64_C(1) << 56)) { bytes += 8; value >>= 56; }
+    if (value >= (UINT64_C(1) << 28)) { bytes += 4; value >>= 28; }
+    if (value >= (UINT64_C(1) << 14)) { bytes += 2; value >>= 14; }
+    return bytes + (value >= UINT64_C(128) ? 1u : 0u);
+}
+
 static int encode64(const int64_t *src, size_t n, uint8_t *dst, size_t cap,
                     int zigzag, size_t *written) {
     if (!written) return M3_CODEC_ARGUMENT;
@@ -86,8 +97,7 @@ static int encode64(const int64_t *src, size_t n, uint8_t *dst, size_t cap,
     if (n > M3_PACKED_CODEC_MAX) return M3_CODEC_BOUND;
     size_t needed = 0;
     for (size_t i = 0; i < n; ++i) {
-        uint64_t value = encode64_value(src[i], zigzag);
-        do { ++needed; value >>= 7; } while (value);
+        needed += encoded64_size(encode64_value(src[i], zigzag));
     }
     if (needed > cap || needed > M3_PACKED_CODEC_MAX) return M3_CODEC_BOUND;
     size_t at = 0;

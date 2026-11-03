@@ -1,0 +1,25 @@
+// SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+// Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+// Atom of M3NotYetReceived.java. Oracle: java.lang.Throwable(String, Throwable, boolean, boolean) contract.
+#class M3NotYetReceivedAtomTest
+#summary Per-atom contract of jdk.internal.mindex.M3NotYetReceived: message only, no suppression, no stack trace
+#import jdk.internal.mindex.M3NotYetReceived
+
+@atom M3NotYetReceived.M3NotYetReceived 1 SCENARIO java.lang.Throwable(String,Throwable,false,false)
+setup <<<
+String site = "M3RunTable.wordRowImage R6_DESIGN section 4";
+M3NotYetReceived marker = new M3NotYetReceived(site);
+marker.addSuppressed(new IllegalStateException("ignored"));
+marker.setStackTrace(new StackTraceElement[] {new StackTraceElement("C", "m", "C.java", 1)});
+>>>
+check <<<
+assertEquals(site, marker.getMessage());
+assertNull(marker.getCause());
+assertEquals(0, marker.getSuppressed().length, "suppression disabled");
+assertEquals(0, marker.getStackTrace().length, "stack trace not writable");
+assertTrue(marker instanceof RuntimeException);
+assertFalse(UnsupportedOperationException.class.isInstance(marker), "never UnsupportedOperationException");
+assertNull(new M3NotYetReceived(null).getMessage());
+M3NotYetReceived thrown = assertThrows(M3NotYetReceived.class, () -> { throw new M3NotYetReceived(site); });
+assertEquals(site, thrown.getMessage());
+>>>

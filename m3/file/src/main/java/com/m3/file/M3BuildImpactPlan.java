@@ -137,6 +137,17 @@ public final class M3BuildImpactPlan {
         return Byte.toUnsignedInt(reasons[Objects.checkIndex(physicalSlot, reasons.length)]);
     }
 
+    /** Require the original immutable observation before projecting this plan. */
+    void requireSnapshot(M3FileDeltaLedger.Snapshot snapshot) {
+        Objects.requireNonNull(snapshot, "snapshot");
+        if (snapshot.slots() != reasons.length) {
+            throw new IllegalArgumentException("file plan/snapshot slot dimensions differ");
+        }
+        if (snapshot != sourceSnapshot) {
+            throw new IllegalArgumentException("file plan belongs to different snapshot instance");
+        }
+    }
+
     /**
      * Select work without introducing another graph or persisted state store.
      * The caller must supply the exact immutable snapshot instance used by
@@ -168,12 +179,7 @@ public final class M3BuildImpactPlan {
                     && (affectedPercentThreshold < 0.0 || affectedPercentThreshold > 100.0))) {
             throw new IllegalArgumentException("invalid M3 affected-source thresholds");
         }
-        if (snapshot.slots() != reasons.length) {
-            throw new IllegalArgumentException("file plan/snapshot slot dimensions differ");
-        }
-        if (snapshot != sourceSnapshot) {
-            throw new IllegalArgumentException("file plan belongs to different snapshot instance");
-        }
+        requireSnapshot(snapshot);
         int liveFiles = 0, liveSources = 0, created = 0, modified = 0, removed = 0;
         boolean buildInputChange = false;
         for (int slot = 0; slot < reasons.length; slot++) {

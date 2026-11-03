@@ -31,6 +31,8 @@ jobs:
           git diff --check
           grep -Fq '<version>5.10.2</version>' m3/collections/pom.xml
           ! grep -Fq '5.10.2-m3-source-1' m3/collections/pom.xml
+      - name: Build m3/arrays, which the collection module requires
+        run: mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
       - name: Execute original owning M3 collections signal tests
         run: >
           mvn -B -ntp -f m3/collections/pom.xml

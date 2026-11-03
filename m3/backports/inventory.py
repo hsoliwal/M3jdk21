@@ -28,10 +28,28 @@ INTERVALS: tuple[tuple[int, str, str], ...] = (
 )
 
 JBS_RE = re.compile(r"\bJDK-\d{7}\b")
+BARE_JBS_PREFIX_RE = re.compile(r"^\s*(\d{7}(?:\s*[,/]\s*\d{7})*)\s*:")
+BACKOUT_JBS_RE = re.compile(r"^\s*\d{7}\s*:\s*\[BACKOUT\]\s*(\d{7})\s*:")
 COMPAT_SIGNAL_RE = re.compile(
     r"\b(remove|removal|deprecat|restrict|disable|obsolete|drop support)\w*\b",
     re.IGNORECASE,
 )
+
+
+def _subject_jbs_ids(subject: str) -> tuple[str, ...]:
+    """Normalize anchored OpenJDK numeric titles without mining prose for IDs.
+
+    Subject tokens remain unverified JBS candidates; this is not a JBS API lookup.
+    Preserve explicit JDK-1234567 tokens anywhere in the title.
+    """
+    prefix = BARE_JBS_PREFIX_RE.match(subject)
+    bare = (
+        ("JDK-" + token for token in re.findall(r"\d{7}", prefix.group(1)))
+        if prefix else ()
+    )
+    backout = BACKOUT_JBS_RE.match(subject)
+    secondary = ("JDK-" + backout.group(1),) if backout else ()
+    return tuple(dict.fromkeys((*bare, *secondary, *JBS_RE.findall(subject))))
 
 JAVAC_ROOT = "src/jdk.compiler/"
 GRAMMAR_PREFIXES = (
@@ -211,7 +229,7 @@ def inventory(repo: Path, releases: Iterable[int]) -> list[Change]:
         for commit in commits:
             subject = _subject_for_commit(repo, commit)
             paths = _paths_for_commit(repo, commit)
-            jbs_ids = tuple(dict.fromkeys(JBS_RE.findall(subject)))
+            jbs_ids = _subject_jbs_ids(subject)
             (
                 disposition,
                 javac_touch,

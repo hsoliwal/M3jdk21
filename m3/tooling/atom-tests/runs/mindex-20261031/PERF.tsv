@@ -1,0 +1,18 @@
+atom	method	max_tier	compiler	osr	made_not_entrant	ns_per_op_median	ns_per_op_min	ns_per_op_p90	ops_per_batch	rounds	warmup_batches	system_cpu_pct	process_cpu_pct	cpus	checksum	bytes_per_op	host_cpu_pct_before	host_cpu_pct_after
+M3Bits.wordIndex#1 PERF	jdk.internal.mindex.M3Bits::wordIndex	3	C1	no	no	0.806	0.635	0.879	4096	25	400	20.6	2.8	32	67885665271	0.0	21	6
+M3Bits.bitMask#1 PERF	jdk.internal.mindex.M3Bits::bitMask	3	C1	no	no	0.415	0.391	0.464	4096	25	400	20.6	2.8	32	6418407151342586488	0.0	21	6
+M3Bits.wordsForBits#1 PERF	jdk.internal.mindex.M3Bits::wordsForBits	3	C1	no	no	0.391	0.342	0.439	4096	25	400	20.6	2.8	32	69904585491	0.0	21	6
+M3Automaton.step#1 PERF	jdk.internal.mindex.M3Automaton::step	4	C2	no	yes	11.279	9.888	12.402	4096	25	400	20.6	2.8	32	3465	0.0	21	6
+M3AutomatonOps.mix#1 PERF	jdk.internal.mindex.M3AutomatonOps::mix	4	C2	no	yes	1.074	0.879	1.123	4096	25	400	20.6	2.8	32	24939517798	0.0	21	6
+M3RegexDpPlan.advance#1 PERF	jdk.internal.mindex.M3RegexDpPlan::advance	4	C2	no	yes	10.742	9.131	11.572	4096	25	400	20.6	2.8	32	1704945254	0.0	21	6
+M3RegexDpPlan.Effect.apply#1 PERF	jdk.internal.mindex.M3RegexDpPlan$Effect::apply	4	C2	no	yes	10.938	9.644	12.183	4096	25	400	20.6	2.8	32	2144711208	0.0	21	6
+M3StateRelation.compose#1 PERF	jdk.internal.mindex.M3StateRelation::compose	3	C1	no	no	724.609	610.156	773.828	256	25	400	20.6	2.8	32	1706243603435122744	0.0	21	6
+M3StateRelation.applyRows#1 PERF	jdk.internal.mindex.M3StateRelation::applyRows	4	C2	no	yes	20.264	16.528	22.534	4096	25	400	20.6	2.8	32	4651260015053306684	0.0	21	6
+M3RX7Transitions.compose#1 PERF	jdk.internal.mindex.M3RX7Transitions::compose	4	C2	no	yes	232.031	191.797	250.391	256	25	400	20.6	2.8	32	26018	528.0	21	6
+M3RX7Transitions.tokens#1 PERF	jdk.internal.mindex.M3RX7Transitions::tokens	4	C2	no	yes	9636.719	7963.281	10343.750	256	25	400	20.6	2.8	32	2407	528.0	21	6
+M3TokenEngine.find#1 PERF	jdk.internal.mindex.M3TokenEngine::find	3	C1	no	no	10949.609	9325.000	11956.250	256	25	400	20.6	2.8	32	5546752	97912.0	21	6
+M3TokenEngine.alternative#1 PERF	jdk.internal.mindex.M3TokenEngine::alternative	4	C2	no	yes	16748.828	15014.453	20614.063	256	25	400	20.6	2.8	32	3840	138240.0	21	6
+M3TokenEngine.alternative#2 PERF	jdk.internal.mindex.M3TokenEngine::alternative	4	C2	no	yes	24670.703	21593.750	41069.922	256	25	400	20.6	2.8	32	3840	209528.0	21	6
+M3CI.findText#1 PERF	jdk.internal.mindex.M3CI::findText	4	C2	no	yes	208.447	169.604	274.634	4096	25	400	20.6	2.8	32	4096	0.0	21	6
+M3CI.lowerBound#1 PERF	jdk.internal.mindex.M3CI::lowerBound	4	C2	no	yes	53.711	43.750	59.668	4096	25	400	20.6	2.8	32	8369596	0.0	21	6
+M3CI.memberRow#1 PERF	jdk.internal.mindex.M3CI::memberRow	4	C2	no	yes	399.316	328.149	473.755	4096	25	400	20.6	2.8	32	4096	26.9	21	6
