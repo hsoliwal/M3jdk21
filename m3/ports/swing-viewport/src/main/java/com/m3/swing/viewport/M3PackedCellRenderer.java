@@ -24,7 +24,8 @@ import javax.swing.table.TableCellRenderer;
  * points accept an ordinary value as a fallback for models that are not packed.</p>
  */
 //FLLDCIM: L6 — paint never materializes; HPCPOP — hot path, no allocation
-public class M3PackedCellRenderer extends JComponent implements TableCellRenderer, ListCellRenderer<Object> {
+//FLLDCIM: MRL — final: the constructor's setOpaque cannot reach a subclass override (this-escape)
+public final class M3PackedCellRenderer extends JComponent implements TableCellRenderer, ListCellRenderer<Object> {
 	private static final long serialVersionUID = 1L;
 	private static final int INSET = 2;
 

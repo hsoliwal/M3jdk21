@@ -7,6 +7,7 @@ import java.io.PrintStream;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HexFormat;
 import java.util.List;
 import java.util.Objects;
 import jdk.m3.io.M3File;
@@ -64,6 +65,40 @@ public final class CpuToolsCli {
                     diagnostics.println("receipt\tliteral=" + result.sha256()
                             + "\thits=" + result.size() + "\tcomplete=" + result.complete()
                             + "\tcoordinates=UTF-16");
+                }
+                case "--find-any" -> {
+                    if (args.length < 3 || args.length > 4) return usage(diagnostics, 2);
+                    int maxHits = args.length == 4 ? Integer.parseInt(args[3]) : 1000;
+                    if (maxHits < 0 || maxHits > 1_000_000) throw new IllegalArgumentException("match budget");
+                    M3File patterns = M3File.load(Path.of(args[1]));
+                    List<String> literals = TextFrame.fromString(patterns.text()).lines().stream()
+                            .map(jdk.m3.text.TextLine::content).toList();
+                    M3File source = M3File.load(Path.of(args[2]));
+                    var found = CpuTools.multiLiteral(source, literals, maxHits);
+                    for (var hit : found.hits()) {
+                        output.println(hit.patternId() + "\t" + hit.start() + "\t" + hit.end());
+                    }
+                    diagnostics.println("receipt\tmultiLiteral=" + found.sha256()
+                            + "\tpatternsRawSha256=" + patterns.rawSha256()
+                            + "\tsourceRawSha256=" + source.rawSha256()
+                            + "\thits=" + found.size() + "\tcomplete=" + found.complete()
+                            + "\tcoordinates=UTF-16");
+                }
+                case "--signature" -> {
+                    if (args.length < 2 || args.length > 3) return usage(diagnostics, 2);
+                    int lanes = args.length == 3 ? Integer.parseInt(args[2]) : 32;
+                    M3File source = M3File.load(Path.of(args[1]));
+                    var result = CpuTools.signature(source, lanes);
+                    var value = result.signature();
+                    output.println("simhash64\t" + HexFormat.of().toHexDigits(value.simHash64()));
+                    output.println("tokens\t" + value.tokenCount() + "\tdistinct\t" + value.distinctCount());
+                    long[] minima = value.minHash64();
+                    for (int i = 0; i < value.lanes(); i++) {
+                        output.println("minhash64\t" + i + "\t" + HexFormat.of().toHexDigits(minima[i]));
+                    }
+                    diagnostics.println("receipt\tsignature=" + result.sha256()
+                            + "\tsourceRawSha256=" + source.rawSha256()
+                            + "\tlanes=" + lanes + "\tapproximate=true");
                 }
                 case "--ast" -> {
                     if (args.length < 2 || args.length - 1 > M3AstTools.MAX_FILES) return usage(diagnostics, 2);
@@ -143,6 +178,8 @@ public final class CpuToolsCli {
         output.println("  --list                            List exact registry operations and contracts");
         output.println("  --run OP[,OP...] FILE              Execute a text DAG over one UTF-8 M3File snapshot");
         output.println("  --find NEEDLE FILE [MAX_HITS]       Exact UTF-16 offsets; explicit completeness receipt");
+        output.println("  --find-any NEEDLES FILE [MAX_HITS]  Line-delimited literals, overlapping UTF-16 hits");
+        output.println("  --signature FILE [LANES]           Deterministic candidate-only SimHash/MinHash");
         output.println("  --ast FILE.java [FILE.java...]     Detached syntax facts from the existing M3AST frontend");
         output.println("  --self-test                       Deterministic composition and replay smoke test");
         output.println("  --help                            Show this help");

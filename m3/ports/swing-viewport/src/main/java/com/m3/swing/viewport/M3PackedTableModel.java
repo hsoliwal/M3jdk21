@@ -1,6 +1,10 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 package com.m3.swing.viewport;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,8 +36,9 @@ public class M3PackedTableModel extends AbstractTableModel implements M3PackedCe
 	private static final int NONE = Integer.MIN_VALUE;
 
 	private final int flags;
-	private M3PackedColumn [] columns = new M3PackedColumn [0];
-	private Object [] identifiers = new Object [0];
+	//FLLDCIM: MRL — transient; writeObject/readObject keep both arrays in the serial data
+	private transient M3PackedColumn [] columns = new M3PackedColumn [0];
+	private transient Object [] identifiers = new Object [0];
 	private int columnCount, rowCount;
 	private int batchDepth, pendingType = NONE, pendingFirst, pendingLast, pendingColumn;
 
@@ -297,5 +302,22 @@ public class M3PackedTableModel extends AbstractTableModel implements M3PackedCe
 		int type = pendingType;
 		pendingType = NONE;
 		fireTableChanged (new TableModelEvent (this, pendingFirst, pendingLast, pendingColumn, type));
+	}
+
+	// ---- Serialization: both arrays as before. M3PackedColumn is not Serializable, so a table that
+	// holds a column still throws NotSerializableException, exactly as default serialization did. ----
+
+	@Serial
+	private void writeObject (ObjectOutputStream out) throws IOException {
+		out.defaultWriteObject ();
+		out.writeObject (columns);
+		out.writeObject (identifiers);
+	}
+
+	@Serial
+	private void readObject (ObjectInputStream in) throws IOException, ClassNotFoundException {
+		in.defaultReadObject ();
+		columns = (M3PackedColumn []) in.readObject ();
+		identifiers = (Object []) in.readObject ();
 	}
 }

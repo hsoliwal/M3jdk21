@@ -70,11 +70,11 @@ pack has no runtime dependency on `com.synexia`.
 | `com.m3.tools.text.normalize` | JDK Unicode normalization |
 | `com.m3.tools.text.tokenize` | JDK word-break tokenization |
 | `com.m3.tools.text.regex` | Direct JDK regex match API with a match-count cap |
-| `com.m3.tools.text.search` | Exact overlapping UTF-16 literal positions |
+| `com.m3.tools.text.search` | Exact overlapping UTF-16 literal positions and one-plan ordered-corpus search |
 | `com.m3.tools.text.ngram` | Overlapping UTF-16 n-gram counts |
 | `com.m3.tools.text.frequency` | Exact term counts |
 | `com.m3.tools.text.similarity` | Bounded UTF-16 Levenshtein distance |
-| `com.m3.tools.text.diff` | Common-prefix/suffix replacement span |
+| `com.m3.tools.text.diff` | Common-prefix/suffix delta, bounded UTF-16 scripts, conservative character/line three-way merges and lossless indexed-line diff |
 | `com.m3.tools.text.index` | Exact immutable term/document postings in primitive lanes |
 | `com.m3.tools.graph.topology` | Deterministic integer topological order |
 | `com.m3.tools.graph.paths` | Nonnegative weighted shortest-path distances |
@@ -213,16 +213,117 @@ loop and emission boundaries; a long library call may complete before the
 next check. Direct donor APIs retain their individual limits, and are not
 automatically governed by a `CpuTools.Session`.
 
-The direct regex API uses the JDK regex engine; its match-count cap does not
-make arbitrary regex execution time-bounded. The graph distance sentinel
+The existing `MultiLiteralSearch.Prepared` uses one primitive-lane compiled
+Aho-Corasick automaton for exact overlapping UTF-16 literal matching. Its new
+`findCorpus` scans up to 4,096 ordered `String` owners (64 Mi UTF-16 units
+combined, 16 Mi units per owner) without concatenating them; search state
+resets at each source boundary so cross-file phantom matches cannot appear.
+An exact global cap of 1,000,000 hits retains the file/end-offset/longer-first/
+duplicate-pattern-ID prefix and checks one additional hit before reporting
+`complete=false`. A zero cap can still be complete when no source contains a
+hit. Source and pattern limits are validated before scanning, even if an
+earlier file would exhaust the result cap. Results retain four primitive
+int-array hit lanes, not a second input text collection; immutable API hit
+records are projected on demand. `CpuTools.corpusLiteral` shares that prepared
+plan over immutable `M3File` snapshots and seals **every ordered** URI,
+raw-byte SHA-256, UTF-16 SHA-256, source length, the plan identity, global cap,
+scanned-file count and exact emitted coordinates. `verifyCorpusLiteral`
+recomputes. These APIs do not interpret regex syntax, which remains owned by
+`Pattern`/M3Regex, and do not claim universal full-text indexing or query
+engine performance.
+
+The `RegexMatcher.Prepared` direct API compiles one expression through the
+authoritative JDK `Pattern`/M3Regex engine, then creates a fresh `Matcher` for
+each ordered immutable `String` source. `findCorpus` keeps per-file UTF-16
+offsets, including zero-width matches, in **three primitive hit lanes** and
+uses a global one-extra-match probe for honest capped completeness. The
+`CpuTools.regexCorpus`/`verifyRegexCorpus` entry points seal every ordered
+`M3File` URI, raw-byte and UTF-16 digest, byte/character geometry, exact
+expression code units, match cap, completeness, scanned file count and
+coordinates. Limits are 4,096 files, 64 Mi UTF-16 units combined, 16 Mi per
+file, 4,096 regex UTF-16 units and 1,000,000 reported hits. The existing
+`RegexMatcher.find` contract remains unchanged and continues returning the
+full matched group. No source concatenation, new regex compiler, JNI symbol,
+copied regex group payload or filesystem reopening is introduced. These
+caps limit input storage and result count, **not** worst-case regex CPU
+time or stack consumption: a pathological `Matcher.find` invocation is not
+preemptible by the cooperative progress monitor. Untrusted regexes require
+external time/resource isolation; no ReDoS-safety claim is made.
+
+For repeated retrieval against unchanged source files,
+`CpuTools.prepareRanking(List<M3File>[, ProgressMonitor])` performs **one**
+bounded source-admission/tokenization pass and retains the incumbent immutable
+`Bm25Ranker.Prepared` primitive posting index. Each
+`PreparedRanking.rank(query, maxResults[, monitor])` changes only query-time
+work; it does not reopen any M3File, re-tokenize source files or rebuild the
+BM25 index. Result scores, total match counts, ranking/tie order and cap
+completeness equal the existing `CpuTools.rank` one-shot implementation for
+the same ordered corpus/query. The prepared source SHA seals **all ordered**
+file URI, raw/UTF-16 digests and byte/character lengths, the exact prepared
+BM25 corpus SHA and default BM25 parameters. Each query gets a distinct
+canonical source- and query-bound receipt over exact UTF-16 query units and
+scored output lanes. `PreparedRanking.verify` replays one query against its
+immutable plan; `CpuTools.verifyPreparedRank` additionally rebuilds the plan
+from newly supplied source snapshots to test full source admission. The prior
+`CpuTools.rank` API and its v1 receipt remain unchanged. The same 4 Mi
+combined source UTF-16 bound, 10,000 document cap, 1,000,000 token cap,
+1,024 query terms and 10,000 result cap apply. The source-bound prepared
+index is read-only and owns no retained file handles or duplicate source text.
+Scores are approximate BM25 relevance signals, **not** identity or semantic
+proofs. Preparation cost must be included when comparing one-shot latency.
+The optional `fixtures/M3PreparedRankBenchmark.java` measures separately
+prepared-index admission, repeated query time and the original full one-shot
+path, including a one-query control and parity checks. One synthetic JVM
+measurement is not a production latency or allocation guarantee.
+
+The graph distance sentinel
 `Long.MAX_VALUE` covers unreachable, exact-maximum and overflowing distances, and must
 not be interpreted as a proved unreachable state. Floating-point moments
 retain normal double rounding/overflow behavior; finite input samples can
 produce nonfinite moments. UTF-16 n-gram fields escape
 record delimiters and surrogate code units; n-gram width is not code-point
 width. Varints cover nonnegative signed-long values, not all unsigned 64-bit
-bit patterns. The direct text delta is one replacement span, not a full
-semantic diff or general three-way merge.
+bit patterns. The original direct `TextDelta` is one common-prefix/suffix
+replacement span; it is not a general semantic diff. `BoundedDiff` separately
+computes an exact shortest insertion/deletion script over at most 262,144
+UTF-16 units per side and at most 512 edits (replacement counts as two),
+including unmatched surrogate halves. `ThreeWayMerge` composes two such
+complete scripts against one base, admitting independent or identical edits;
+overlapping edits, divergent co-located inserts and insertion exactly at a
+replacement boundary are conservative conflicts. It cannot resolve semantic
+conflicts and never returns a partial merge. Conflict witnesses are capped at
+1,024 while the full conflict count and truncation state remain available.
+
+The complementary `LineDiff` indexes whole lines as primitive 16-bit IDs and
+reuses the same shortest-edit engine on those IDs. Each token includes its
+exact CR, LF, CRLF or absent ending; the index neither normalizes line endings
+nor retains a second set of line-text substrings. Its per-side limit is 16 Mi
+UTF-16 units and 100,000 lines, with at most 65,536 **distinct lines across
+both sources** and 512 insert/delete line operations. Over-budget distance is
+incomplete with no usable patch; excessive source, line or unique-line
+geometry is explicitly refused. This is not GNU `diff`/`diff3` output
+compatibility or an unbounded large-file algorithm.
+
+`LineThreeWayMerge` reuses two `LineDiff` scripts with a **shared base** to
+compose independent full-line edits against original source line/UTF-16
+coordinates. It incorporates identical changes only once and treats
+intersecting replacements, divergent same-position insertions and insertions
+at replacement boundaries as conflicts. A source exceeding either line
+diff's explicit geometry limit is refused, and a distance over either side's
+512-line budget yields `INCOMPLETE`; neither case exposes partial merged text.
+The two source/side dictionaries are per diff, not a persistent global pool.
+Conflict witnesses are capped at 1,024 and their full count is exposed.
+It does not infer renames, semantic AST merges or automatic conflict resolution.
+
+The existing `CpuTools.diff`, `merge`, `lineDiff` and new `lineMerge` Java entry points bind
+their results to ordered immutable `M3File` URI, raw-byte and UTF-16 digests,
+and algorithm/parameter/output facts in deterministic receipts. `verifyDiff`,
+`verifyMerge`, `verifyLineDiff` and `verifyLineMerge` recompute; both
+`FileLineDiff.apply` and `FileLineMerge.apply` refuse a substituted base/source
+URI even when the text happens to be identical. These
+algorithms use the canonical `String`/M3String text owner and do not alter
+`String`, `Pattern`/M3Regex, JNI/HotSpot symbols or the existing DAG command
+bindings. Their installed M3JDK21 image qualification is still pending.
 
 Receipts bind identities, parameters, source coordinates, implementation
 resources and outputs as appropriate to their API. `sourceReceipt` also checks
