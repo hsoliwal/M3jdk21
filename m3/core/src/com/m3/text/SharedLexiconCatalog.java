@@ -56,7 +56,7 @@ public final class SharedLexiconCatalog {
     private final List<String> lastLexemes;
     private final List<SourceMapping>[] mappingRows;
     private final int[] rowOffsets;
-    private final Map<SourceIdentity, SourceMapping> mappingsByIdentity;
+    private final SourceMapping[] mappingsByIdentity;
     private final Map<SourceIdentity, SynexiaPrecomputePayload> payloads = new ConcurrentHashMap<>();
     private final PrecomputeFacts[] precomputeRows;
     private final List<PrecomputeProfile> precomputeProfiles;
@@ -81,10 +81,10 @@ public final class SharedLexiconCatalog {
         this.rowOffsets = rowOffsets(shards);
         this.mappingRows = mappingRows(rowOffsets, mappings);
         this.precomputeRows = precomputeRows(rowOffsets, precompute);
-        Map<SourceIdentity, SourceMapping> identityCopy = new HashMap<>();
-        for (List<SourceMapping> values : mappingRows) for (SourceMapping mapping : values)
-            identityCopy.put(new SourceIdentity(mapping.sourceId(), mapping.recordId()), mapping);
-        this.mappingsByIdentity = Map.copyOf(identityCopy);
+        this.mappingsByIdentity = identityIndex(mappingRows);
+
+
+
         this.precomputeProfiles = List.copyOf(precomputeProfiles);
         this.familyPrecompute = Objects.requireNonNull(familyPrecompute);
         this.relatedLexemes = Objects.requireNonNull(relatedLexemes);
@@ -178,7 +178,7 @@ public final class SharedLexiconCatalog {
             ensureOpen();
             Objects.requireNonNull(sourceId);
             Objects.requireNonNull(recordId);
-            SourceMapping mapping = mappingsByIdentity.get(new SourceIdentity(sourceId, recordId));
+            SourceMapping mapping = identityMapping(sourceId, recordId);
             if (mapping == null) return Optional.empty();
             imageAt(mapping.coordinate().shardId());
             return Optional.of(mapping);
@@ -349,7 +349,7 @@ public final class SharedLexiconCatalog {
             Objects.requireNonNull(sourceId);
             Objects.requireNonNull(recordId);
             SourceIdentity identity = new SourceIdentity(sourceId, recordId);
-            SourceMapping mapping = mappingsByIdentity.get(identity);
+            SourceMapping mapping = identityMapping(sourceId, recordId);
             if (mapping == null) return Optional.empty();
             imageAt(mapping.coordinate().shardId());
             return Optional.of(payloads.computeIfAbsent(identity,
@@ -390,7 +390,7 @@ public final class SharedLexiconCatalog {
             ensureOpen();
             Objects.requireNonNull(sourceId);
             Objects.requireNonNull(recordId);
-            SourceMapping mapping = mappingsByIdentity.get(new SourceIdentity(sourceId, recordId));
+            SourceMapping mapping = identityMapping(sourceId, recordId);
             if (mapping == null || !"dictlang.si-units".equals(mapping.sourceId())) return Optional.empty();
             imageAt(mapping.coordinate().shardId());
             SynexiaPrecomputePayload payload = payloads.computeIfAbsent(
@@ -818,6 +818,55 @@ public final class SharedLexiconCatalog {
 
     private int rowIndex(Coordinate coordinate) {
         return (rowOffsets == null ? 0 : rowOffsets[coordinate.shardId()]) + coordinate.imageRow();
+    }
+
+    /** Retains admitted mapping objects directly, without per-identity key wrappers. */
+    private static SourceMapping[] identityIndex(List<SourceMapping>[] rows) {
+        int count = 0;
+        for (List<SourceMapping> values : rows) count = Math.addExact(count, values.size());
+        SourceMapping[] index = new SourceMapping[Math.multiplyExact(count, 2)];
+        for (List<SourceMapping> values : rows) for (SourceMapping mapping : values) {
+            int slot = identitySlot(mapping.sourceId(), mapping.recordId(), index.length);
+            while (index[slot] != null
+                    && !(Objects.equals(mapping.sourceId(), index[slot].sourceId())
+                    && Objects.equals(mapping.recordId(), index[slot].recordId()))) {
+                if (++slot == index.length) slot = 0;
+            }
+            index[slot] = mapping;
+        }
+        return index;
+    }
+
+    private SourceMapping identityMapping(String sourceId, String recordId) {
+        SourceMapping[] index = mappingsByIdentity;
+        if (index.length == 0) return null;
+        // A singleton has no competing slot: compare before hashing caller text.
+        if (index.length == 2) {
+            SourceMapping only = index[0] != null ? index[0] : index[1];
+            return sourceId.equals(only.sourceId()) && recordId.equals(only.recordId())
+                    ? only : null;
+        }
+        int slot = identitySlot(sourceId, recordId, index.length);
+        SourceMapping mapping;
+        while ((mapping = index[slot]) != null) {
+            if (sourceId.equals(mapping.sourceId()) && recordId.equals(mapping.recordId()))
+                return mapping;
+            if (++slot == index.length) slot = 0;
+        }
+        return null;
+    }
+
+    /**
+     * Mixing adapted from fastutil HashCommon.mix(int), Apache-2.0.
+     * Copyright (C) 2002-2026 Sebastiano Vigna.
+     * Donor: vigna/fastutil@e70f36a137c349efa50f346818d16917a9f91986,
+     * src/it/unimi/dsi/fastutil/HashCommon.java (mix/INT_PHI).
+     * Modulo retains the incumbent half-full domain without power-of-two padding.
+     */
+    private static int identitySlot(String sourceId, String recordId, int length) {
+        int hash = 31 * Objects.hashCode(sourceId) + Objects.hashCode(recordId);
+        int mixed = hash * 0x9E3779B9;
+        return Math.floorMod(mixed ^ (mixed >>> 16), length);
     }
 
 }
