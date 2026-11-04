@@ -23,19 +23,57 @@ def main():
     assert ident(a.original.read_bytes())['gitBlob']==current['historicalBaseline']['manifestGit']
     transition=None;receiver_transitions=[]
     if a.declared_transition is not None:
-        declared=a.receiver/'m3/tooling/joined-range-directory/current-module/COMPOSITION_BINDING.json'
-        assert a.declared_transition.resolve()==declared.resolve()
+        v1='m3/tooling/joined-range-directory/current-module/COMPOSITION_BINDING.json'
+        v2='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V2.json'
+        v3='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V3.json'
+        v4='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V4.json'
+        v5='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V5.json'
+        v6='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V6.json'
+        v7='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V7.json'
+        v8='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V8.json'
+        allowed={v1:'a468d927182781321b67c0a9f75f670ccf2d2215983cb7d38e1c59f0666ce432',
+                 v2:'a7a41800bfd69e40eb59cc89cb74bb795a59971c5f5f4157edd78e326e7adb1d',
+                 v3:'0e47dec693c1db21dff237352ec6b4c3dec40286944ef9de85934239db3580f9',
+                 v4:'b0d72c9e4606e06998ca3514999aa8655990f865ede325c5b7eb22f7d434170b',
+                 v5:'4e00d68a96907e23b10670c32ca76bdae5b9bc7f1b6d27cdf323f17b6a1fd178',
+                 v6:'25c475dc211870634a0a156ddd02ce3db78a492997019ecdf01c599db9b296b4',
+                 v7:'e3f7f6c569d701f2c663c1ca34dcf2d8d5330ecbe8e2e8ddf61764975f636b5e',
+                 v8:'5abff0ff5462a74439ceb13610913417ca5a1b2c4c8ddf0ba9d26a2428f1237d'}
+        matches=[name for name in allowed if a.declared_transition.resolve()==(a.receiver/name).resolve()]
+        assert len(matches)==1
+        name=matches[0];declared=a.receiver/name
         assert all(not p.is_symlink() and not p.is_junction() for p in [declared,*declared.parents])
-        raw=declared.read_bytes()
-        assert ident(raw)['sha256']=='a468d927182781321b67c0a9f75f670ccf2d2215983cb7d38e1c59f0666ce432'
-        transition=json.loads(raw)
-        assert transition['schema']=='M3_JOINED_CURRENT_MODULE_COMPOSITION_V1'
-        assert transition['targetPath']=='m3/core/src/com/m3/text/JoinedM3StringPiece.java'
-        assert transition['before']['gitBlob']=='cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597'
-        assert transition['after']['gitBlob']=='4f88f794266375ad8174fa56e952c30d32689877'
-        indexed={r['path']:r for r in current['files']}
-        assert len(indexed)==59
-        assert all(indexed[p]['sha256']==digest for p,digest in transition['custodySha256'].items())
+        raw=declared.read_bytes();assert ident(raw)['sha256']==allowed[name]
+        document=json.loads(raw)
+        indexed={r['path']:r for r in current['files']};assert len(indexed)==59
+        if name==v1:
+            assert document['schema']=='M3_JOINED_CURRENT_MODULE_COMPOSITION_V1'
+            assert document['targetPath']=='m3/core/src/com/m3/text/JoinedM3StringPiece.java'
+            assert document['before']['gitBlob']=='cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597'
+            assert document['after']['gitBlob']=='4f88f794266375ad8174fa56e952c30d32689877'
+            rows=[dict(path=document['targetPath'],before=document['before'],after=document['after'])]
+        else:
+            assert document['schema']=='M3_FROZEN_RECEIVER_TRANSITIONS_V2'
+            assert ident(a.profile.read_bytes())['sha256']==document['frozenProfileSha256']
+            rows=document['files']
+            expected_paths={
+                'm3/core/src/com/m3/text/JoinedM3StringPiece.java',
+                'm3/core/test/java/lang/M3CodeTextSignalBatchTest.java'}
+            if name in (v3,v4,v5,v6,v7,v8):expected_paths.update({
+                'm3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java',
+                'm3/core/test/M3LexiconPrecomputeTest.java'})
+            if name in (v4,v5,v6,v7,v8):expected_paths.update({
+                'm3/core/src/com/m3/text/SharedRelatedLexemeCatalog.java',
+                'm3/core/test/SharedLexiconCatalogFamilyAdmissionTest.java'})
+            if name in (v5,v6,v7,v8):expected_paths.update({
+                'm3/core/src/com/m3/text/SharedLexiconCatalog.java',
+                'm3/core/test/FoundationTest.java'})
+            if name==v8:expected_paths.add('m3/core/src/com/m3/text/SynexiaPrecomputePayload.java')
+            assert len(rows)==len(expected_paths) and {r['path'] for r in rows}==expected_paths
+        assert all(indexed[p]['sha256']==digest for p,digest in document['custodySha256'].items())
+        transition={r['path']:r for r in rows};assert len(transition)==len(rows)
+        assert all(r['before']=={k:indexed[p][k] for k in ('bytes','gitBlob','sha256')}
+                   and r['after']!=r['before'] for p,r in transition.items())
     assert not a.root.exists() and shutil.disk_usage(a.root.parent).free-256*1024**2>8*1024**3
     a.root.mkdir();inputs=a.root/'inputs'
     def write(root,name,raw):
@@ -61,8 +99,9 @@ def main():
         observed=ident(raw);expected={key:row[key] for key in ('bytes','gitBlob','sha256')}
         if observed!=expected:
             assert transition is not None
-            assert row['path']==transition['targetPath'] and expected==transition['before']
-            assert observed==transition['after']
+            assert row['path'] in transition
+            known=transition[row['path']]
+            assert expected==known['before'] and observed==known['after']
             raw=blob(current['repository'],row)
             receiver_transitions.append(dict(path=row['path'],observed=observed,frozen=ident(raw),recovery='verified-git-blob'))
         assert ident(raw)==expected

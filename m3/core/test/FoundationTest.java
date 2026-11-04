@@ -55,13 +55,16 @@ public final class FoundationTest {
     static void chainIndex(){M3StringPiece.join().charAt(0);}
     static int javaHash(String value){int hash=0;for(int i=0;i<value.length();i++)hash=31*hash+value.charAt(i);return hash;}
     static void writeV2(Path path,List<String> words)throws Exception{
+        Files.write(path,prefixImageBytes(words),StandardOpenOption.CREATE_NEW);
+    }
+    static byte[] prefixImageBytes(List<String> words) throws Exception {
         long units=0;for(String word:words)units=Math.addExact(units,word.length());
         int payload=64+12*words.size();ByteBuffer bytes=ByteBuffer.allocate(Math.toIntExact(payload+2*units)).order(ByteOrder.BIG_ENDIAN);
         bytes.putLong(0,0x4d334c4558303031L).putInt(8,2).putInt(12,words.size()).putLong(16,payload).putLong(24,units);
         int offset=0;for(int row=0;row<words.size();row++){String word=words.get(row);int entry=64+12*row;
             bytes.putInt(entry,offset).putInt(entry+4,word.length()).putInt(entry+8,javaHash(word));
             for(int at=0;at<word.length();at++){char unit=word.charAt(at);int destination=payload+2*(offset+at);bytes.put(destination,(byte)unit).put(destination+1,(byte)(unit>>>8));}offset+=word.length();}
-        java.security.MessageDigest digest=java.security.MessageDigest.getInstance("SHA-256");digest.update(bytes.array(),0,32);digest.update(bytes.array(),64,bytes.capacity()-64);System.arraycopy(digest.digest(),0,bytes.array(),32,32);Files.write(path,bytes.array(),StandardOpenOption.CREATE_NEW);
+        java.security.MessageDigest digest=java.security.MessageDigest.getInstance("SHA-256");digest.update(bytes.array(),0,32);digest.update(bytes.array(),64,bytes.capacity()-64);System.arraycopy(digest.digest(),0,bytes.array(),32,32);return bytes.array();
     }
     static void images(Path directory) throws Exception {
         Path image=directory.resolve("unicode.m3lex");List<String> words=List.of("", "a", "\u0100", "\ud800", "\ud83d\ude00", "\udc00");
@@ -151,10 +154,16 @@ public final class FoundationTest {
         byte[] damaged=Files.readAllBytes(lazyTwo);damaged[0]^=1;Files.write(lazyTwo,damaged);
         SharedLexiconCatalog retry=SharedLexiconCatalog.openLazy(lazyDirectory);
         check(retry.find("a").equals(Optional.of(new SharedLexiconCatalog.Coordinate(0,0))));
+        check(retry.prefix("a",1).equals(List.of(new SharedLexiconCatalog.Coordinate(0,0))));
+        check(retry.prefix("a",2).equals(List.of(new SharedLexiconCatalog.Coordinate(0,0))));
+        check(retry.prefix("b",2).isEmpty());
+        expect(java.io.UncheckedIOException.class,()->retry.prefix("\ud801",1));
         expect(java.io.UncheckedIOException.class,()->retry.find("\ud801"));
         Files.move(repaired,lazyTwo,StandardCopyOption.REPLACE_EXISTING);
         check(retry.find("\ud801").equals(Optional.of(new SharedLexiconCatalog.Coordinate(1,0))));
+        check(retry.prefix("\ud801",1).equals(List.of(new SharedLexiconCatalog.Coordinate(1,0))));
         retry.close();expect(IllegalStateException.class,()->retry.find("a"));
+        expect(IllegalStateException.class,()->retry.prefix("a",1));
         expect(IllegalStateException.class,()->retry.precomputeAt(new SharedLexiconCatalog.Coordinate(0,0)));
         lazy.close();expect(IllegalStateException.class,()->lazy.textAt(new SharedLexiconCatalog.Coordinate(0,0)));
         try(var paths=Files.list(lazyDirectory)){for(Path path:paths.toList())Files.delete(path);}Files.delete(lazyDirectory);
@@ -194,5 +203,117 @@ public final class FoundationTest {
         check(hundreds.size()==3);check(catalog.textAt(hundreds.get(0)).equals("100"));
         check(catalog.textAt(hundreds.get(1)).equals("1000"));check(catalog.textAt(hundreds.get(2)).equals("10000"));
     }
-    public static void main(String[] args)throws Exception{pieces();Path dir=Files.createTempDirectory("m3-foundation-");try{images(dir);catalog(dir);if(args.length==1)exportedCatalog(Path.of(args[0]));}finally{try(var paths=Files.list(dir)){for(Path path:paths.toList())Files.delete(path);}Files.delete(dir);}System.out.println("FOUNDATION_PASS checks="+checks);}
+    static String prefixEscaped(String value) {
+        StringBuilder encoded=new StringBuilder();
+        for(int i=0;i<value.length();i++){
+            encoded.append("\\u");
+            String hex=Integer.toHexString(value.charAt(i));
+            encoded.append("0".repeat(4-hex.length())).append(hex);
+        }
+        return encoded.toString();
+    }
+    static void writePrefixFixture(Path root,List<List<String>> shards,boolean onlyLast) throws Exception {
+        StringBuilder manifest=new StringBuilder("shard_id\tfile\tfirst_lexeme\tlast_lexeme\timage_records\tutf16_units\tsha256\n");
+        StringBuilder mappings=new StringBuilder("source_id\tsource_path\tsource_kind\tlanguage_tag\trecord_id\tlexeme\tshard_id\timage_row\tmapping_id\tmapping_name\ttranslation_profile\tprecompute_profile\tprecompute_payload\n");
+        StringBuilder facts=new StringBuilder("shard_id\timage_row\tutf16_units\tjava_hash\tcode_points\tunpaired_surrogates\tnon_bmp_code_points\tascii\tlatin1\tcontains_whitespace\tprecompute_profile\n");
+        long records=0;
+        for(int shard=0;shard<shards.size();shard++){
+            List<String> words=shards.get(shard);String file="part-"+shard+".m3lex";
+            boolean physical=!onlyLast||shard==shards.size()-1;
+            if(physical)writeV2(root.resolve(file),words);
+            long units=words.stream().mapToLong(String::length).sum();
+            manifest.append(shard).append('\t').append(file).append('\t')
+                    .append(prefixEscaped(words.getFirst())).append('\t').append(prefixEscaped(words.getLast()))
+                    .append('\t').append(words.size()).append('\t').append(units).append('\t')
+                    .append(physical?sha256(root.resolve(file)):java.util.HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(prefixImageBytes(words)))).append('\n');
+            for(int row=0;row<words.size();row++){
+                String word=words.get(row),id=shard+"-"+row;
+                mappings.append("prefix-fixture\tfixture\tfixture\tund\t").append(id).append('\t')
+                        .append(prefixEscaped(word)).append('\t').append(shard).append('\t').append(row)
+                        .append("\tmap-").append(id).append("\tROW_").append(id).append("\t-\tprefix-proof\t{}\n");
+                int nonBmp=(int)word.codePoints().filter(cp->cp>0xffff).count();
+                int surrogateUnits=(int)word.chars().filter(c->Character.isSurrogate((char)c)).count();
+                facts.append(shard).append('\t').append(row).append('\t').append(word.length()).append('\t')
+                        .append(Integer.toUnsignedString(javaHash(word))).append('\t')
+                        .append(word.codePointCount(0,word.length())).append('\t')
+                        .append(surrogateUnits-2*nonBmp).append('\t').append(nonBmp).append('\t')
+                        .append(word.chars().allMatch(c->c<128)?"True":"False").append('\t')
+                        .append(word.chars().allMatch(c->c<256)?"True":"False").append('\t')
+                        .append(word.codePoints().anyMatch(Character::isWhitespace)?"True":"False")
+                        .append("\tprefix-proof\n");
+                records++;
+            }
+        }
+        Files.writeString(root.resolve("synexia.shards.tsv"),manifest,java.nio.charset.StandardCharsets.UTF_8);
+        Files.writeString(root.resolve("synexia.records.tsv"),mappings,java.nio.charset.StandardCharsets.UTF_8);
+        Files.writeString(root.resolve("synexia.precompute.tsv"),facts,java.nio.charset.StandardCharsets.UTF_8);
+        Files.writeString(root.resolve("synexia.precompute-index.tsv"),
+                "precompute_profile\tsource_records\timage_records\tsha256\n"
+                        +"prefix-proof\t"+records+"\t"+records+"\t"+profileHash("prefix-proof",records,records)+"\n",
+                java.nio.charset.StandardCharsets.UTF_8);
+    }
+    static List<SharedLexiconCatalog.Coordinate> prefixOracle(List<List<String>> shards,String query,int limit) {
+        List<SharedLexiconCatalog.Coordinate> result=new ArrayList<>();
+        for(int s=0;s<shards.size();s++)for(int r=0;r<shards.get(s).size()&&result.size()<limit;r++)
+            if(shards.get(s).get(r).startsWith(query))result.add(new SharedLexiconCatalog.Coordinate(s,r));
+        return List.copyOf(result);
+    }
+    static void deletePrefixFixture(Path root) throws IOException {
+        try(var files=Files.list(root)){for(Path path:files.toList())Files.delete(path);}Files.delete(root);
+    }
+    static void assertPrefixFixture(List<List<String>> shards,List<String> queries) throws Exception {
+        Path root=Files.createTempDirectory("m3-prefix-matrix-");
+        try{
+            writePrefixFixture(root,shards,false);
+            for(boolean lazy:List.of(false,true)){
+                SharedLexiconCatalog catalog=lazy?SharedLexiconCatalog.openLazy(root):SharedLexiconCatalog.open(root);
+                try{
+                    for(String query:queries)for(int limit:new int[]{1,2,3,5,6,100000})
+                        check(catalog.prefix(query,limit).equals(prefixOracle(shards,query,limit)));
+                    expect(IllegalArgumentException.class,()->catalog.prefix(null,1));
+                    expect(IllegalArgumentException.class,()->catalog.prefix("",1));
+                    for(int limit:new int[]{-1,0,100001})
+                        expect(IllegalArgumentException.class,()->catalog.prefix(queries.getFirst(),limit));
+                    expect(UnsupportedOperationException.class,()->catalog.prefix(queries.getFirst(),1)
+                            .add(new SharedLexiconCatalog.Coordinate(0,0)));
+                }finally{catalog.close();}
+            }
+        }finally{deletePrefixFixture(root);}
+    }
+    static void prefixRouting() throws Exception {
+        int before=checks;
+        assertPrefixFixture(List.of(List.of("a","ab"),List.of("aba","abb"),List.of("abc","abz"),List.of("b","ba")),
+                List.of("ab","aba","abx","ac","0","z","b","ba","a"));
+        String high=String.valueOf((char)0xd800),low=String.valueOf((char)0xdc00);
+        String ff=String.valueOf((char)0xffff),nul=String.valueOf((char)0);
+        assertPrefixFixture(List.of(List.of(high,high+"a"),List.of(high+low,high+ff),List.of(low),
+                        List.of(ff,ff+nul),List.of(ff+ff,ff+ff+"x")),
+                List.of(high,high+low,low,String.valueOf((char)0xd801),ff,ff+nul,ff+ff,ff+ff+ff));
+        assertPrefixFixture(List.of(List.of("ab","ac"),List.of("b")),List.of("a","ab"));
+        for(int count:new int[]{16,256,1024}){
+            List<List<String>> shards=new ArrayList<>();
+            for(int s=0;s<count;s++){
+                String key="k"+String.format(java.util.Locale.ROOT,"%04d",s);shards.add(List.of(key,key+"x"));
+            }
+            Path root=Files.createTempDirectory("m3-prefix-many-");
+            try{
+                // Missing nonselected images make any accidental first touch observable.
+                writePrefixFixture(root,shards,true);
+                check(!Files.exists(root.resolve("part-0.m3lex")));
+                SharedLexiconCatalog catalog=SharedLexiconCatalog.openLazy(root);
+                try{
+                    check(catalog.recordCount()==2L*count);
+                    String last=shards.getLast().getFirst();
+                    check(catalog.prefix(last,1).equals(List.of(new SharedLexiconCatalog.Coordinate(count-1,0))));
+                    check(catalog.prefix("z",1).isEmpty());
+                    check(catalog.prefix("0",1).isEmpty());
+                    expect(java.io.UncheckedIOException.class,()->catalog.prefix("k0000",1));
+                }finally{catalog.close();}
+            }finally{deletePrefixFixture(root);}
+        }
+        if(checks-before!=282)throw new AssertionError("prefix coverage count");
+        System.out.println("M3_PREFIX_SHARD_MATRIX_PASS checks="+(checks-before)
+                +" healthyFixtures=3 prefixCases=228 manyShardFixtures=3");
+    }
+    public static void main(String[] args)throws Exception{pieces();Path dir=Files.createTempDirectory("m3-foundation-");try{images(dir);catalog(dir);prefixRouting();if(args.length==1)exportedCatalog(Path.of(args[0]));}finally{try(var paths=Files.list(dir)){for(Path path:paths.toList())Files.delete(path);}Files.delete(dir);}System.out.println("FOUNDATION_PASS checks="+checks);}
 }
