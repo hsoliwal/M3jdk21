@@ -237,6 +237,7 @@ public final class SharedLexiconCatalog {
         try {
             if (closed) return;
             closed = true;
+            payloads.clear();
             relatedLexemes.ifPresent(SharedRelatedLexemeCatalog::close);
             for (ShardSlot shard : shards) {
                 synchronized (shard) { shard.image = null; }
