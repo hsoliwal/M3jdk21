@@ -53,7 +53,7 @@ jobs:
           python3 "$Q/bootstrap.py" --qualifier "$Q/qualify.py" \
             --profile "$Q/CURRENT_BUILD_INPUTS.json" --original "$Q/contract/ORIGINAL_BUILD_INPUTS.json" \
             --receiver "$GITHUB_WORKSPACE" --root "$PROOF" \
-            --declared-transition m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V11.json
+            --declared-transition m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V12.json
       - name: Execute source controls and both complete original module builds
         shell: bash
         run: |
