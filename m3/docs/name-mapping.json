@@ -10847,6 +10847,677 @@
         },
         "source_state": "implemented",
         "observation": "Additive stable capability identity. Existing mappings, queue operations and all global receiving authority remain unchanged; implemented-unverified is not acceptance or phase promotion."
+      },
+      {
+        "id": "m3.text.csv-tools",
+        "kind": "adapter",
+        "status": "implemented-unverified",
+        "reason": "Existing optional SDK owner refined through the canonical Synexia recipe. Bounded source/JUnit/API/JNI receipts are separate evidence; full M3JDK21 receiving and installed-image gates remain HOLD and no global phase advances.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "com.synexia.m3.text.csv",
+            "path": "synexia-m3-jmods/modules/com.synexia.m3.text.csv/src/main/java/com/synexia/m3/text/csv/CsvTools.java",
+            "symbol": "com.synexia.m3.text.csv.CsvTools",
+            "signatures": [
+              "com.synexia.m3.text.csv.CsvTools"
+            ],
+            "sha256": "d9419d98f535213ef65d747ad7889b0ddc7e9be566057281ae2ded411f85954f",
+            "git_blob_sha1": "325dd173797e2a84a76fdb824ac28094c3effb22",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.text",
+            "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/CsvTools.java",
+            "symbol": "jdk.m3.text.CsvTools",
+            "signatures": [
+              "jdk.m3.text.CsvTools"
+            ],
+            "sha256": "7292f2743415b1b8f369fd7afba668e4af39e33d4d9bcbb93fd051dfdae008c1",
+            "git_blob_sha1": "5bb2561477bb8a5892a992635655f1eafcd18046",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "jdk.m3.text.CsvTools",
+        "identity": {
+          "namespace": "Existing optional SDK owner and caller-owned input; no Java SE replacement or global identity registry.",
+          "generation": "Per-invocation metadata and existing source lifetime; no shared or mapped generation introduced."
+        },
+        "contract": {
+          "differences": [
+            "Private quote-escape metadata is shared per parse; String scanning uses a bounded 256-unit structural cursor and may reuse the optional target JNI kernel.",
+            "Canonical historical CSV owner from 61ccac505ed634e44e2b0272a4443b2c3080da9b is restored by an ABSENT-before recipe at source baseline eb954e93287a3d0740679204bfae9873ac5bea8a; its receiving package remains jdk.m3.text."
+          ],
+          "compatibility_obligations": [
+            "Preserve public/protected CsvTools, Limits, Cell, Row and Table APIs, CSV/TSV grammar, Unicode units, original refusal order/messages and budgets.",
+            "Keep caller-owned immutable CharSequence payloads and generic charAt demand; parsing never flattens generic input. Preserve projection/regex view identities and explicit output framing.",
+            "Escaped cells may retain the full shared escape lane; public Cell/Row/Table objects remain. A fixed cursor buffer and finite tests do not establish universal allocation or speed improvement."
+          ],
+          "public_surface": [
+            "Existing CsvTools.parse, select, whereMatches, serialize and main declarations and nested public types are unchanged; no Java SE companion declaration is added."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Existing public/protected Java surface retained.",
+          "bootstrap": "Existing optional jdk.m3.text and jdk.m3.structured modules; no Synexia runtime dependency or new boot-layer admission."
+        },
+        "dependencies": [
+          {
+            "id": "m3.text.native-line-ops",
+            "resolution": "resolved",
+            "reason": "Existing optional target-owned native helper; absent library, legacy missing symbol and denied loading retain the Java cursor."
+          }
+        ],
+        "materialization": {
+          "admission": "Exact source preimages, source hashes, original budgets and caller contracts remain authoritative.",
+          "joins": "No cross-invocation ownership or identity joins introduced.",
+          "outputs": "Existing immutable Table/Row lists and source-range Cell views; ordinary serialized String output remains explicit.",
+          "cached_facts": "Private per-invocation facts remain bound to the exact immutable source."
+        },
+        "recipe": {
+          "id": "com.synexia.m3.StructuredTextPackedReceiver20261104",
+          "version": "m3-structured-text-packed-20261104",
+          "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-structured-text-packed-receiver-20261104.yml",
+          "sha256": "928f2a533f337da342ef9c011204b2597b377fb3361dd999bb2c0328f7e322cf",
+          "preconditions": [
+            "Canonical recipe reference only: hsoliwal/com.synexia, source baseline eb954e93287a3d0740679204bfae9873ac5bea8a; execute com.synexia.m3.StructuredTextPackedPrivate20261104 for canonical owners before receiving com.synexia.m3.StructuredTextPackedReceiver20261104 outputs.",
+            "Receiving preimages are pinned to hsoliwal/M3jdk21 172e39d5e69a8f7775c25ad1ce2bfaf2bf5d1246; exact product hashes below must match the canonical Java/text manifests under m3-structured-text-packed-receiver-20261104.",
+            "Canonical Java manifests: synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-structured-text-packed-private-20261104/manifest.tsv and synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-structured-text-packed-receiver-20261104/manifest.tsv; receiver sidecars/metadata: synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-structured-text-packed-receiver-20261104/manifest.tsv.",
+            "Require actual Maven/OpenRewrite execution, exact output, fixed point, drift refusal and receiving product qualification. Manifest references alone grant no execution or promotion authority.",
+            "Candidate commit fields intentionally remain null; exact candidate bytes are identified by SHA-256 and Git blob. m3/tooling/module-packs/text-tools/refinement-proofs/structured-text-packed-20261104/SOURCE_REF.json binds the published canonical source revision externally without a mapping/private-commit cycle."
+          ],
+          "rollback": "Use a separately reviewed source-sealed restoration from the exact received postimage; retain these stable identities, prior records and unrelated source changes."
+        },
+        "tests": [
+          {
+            "id": "bounded-source-java21-junit-api-jni",
+            "receipt": "hsoliwal/com.synexia:synexia-openrewrite-recipes/crates/m3-structured-text-packed-20261104/proof/product-csv/receipt.json"
+          },
+          {
+            "id": "executed-recipe-and-receiving-gates",
+            "receipt": "m3/tooling/module-packs/text-tools/refinement-proofs/structured-text-packed-20261104/RECEIPT.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0 first-party Synexia/M3 sources; retain existing SPDX notices and module LICENSE/NOTICE.",
+          "publication": "Canonical recipe/resources remain in hsoliwal/com.synexia. LeetCode, HackerRank and GeeksforGeeks supply category/reference evidence only; no challenge statement, editorial or submission body is copied.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": null,
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Package remains jdk.m3.text; add the existing NativeLineOps capability call only to the target String cursor. Canonical Java cursor remains the semantic fallback."
+          ],
+          "pending": [
+            "Full receiving, source-built installed M3JDK21 image, cross-platform/native/runtime and global qualification gates remain HOLD; bounded stock-Java/JNI tests do not close them.",
+            "Existing STRING/array/collection sequencing, Java SE names, old migration records, queued operations and global gate states are preserved.",
+            "Pre-existing naming HOLD remains: current java.util.Arrays differs from the older companion source pin, and the unchanged mapping has pre-existing schema violations. This record does not repair or bypass either gate.",
+            "Published source revision and actual gate dispositions must be read from m3/tooling/module-packs/text-tools/refinement-proofs/structured-text-packed-20261104/SOURCE_REF.json and m3/tooling/module-packs/text-tools/refinement-proofs/structured-text-packed-20261104/RECEIPT.json."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "61ccac505ed634e44e2b0272a4443b2c3080da9b",
+              "module": "com.synexia.m3.text.csv",
+              "path": "synexia-m3-jmods/modules/com.synexia.m3.text.csv/src/main/java/com/synexia/m3/text/csv/CsvTools.java",
+              "symbol": "com.synexia.m3.text.csv.CsvTools",
+              "signatures": [
+                "com.synexia.m3.text.csv.CsvTools"
+              ],
+              "sha256": "72c88dc6880829f6530d6d6e8f4ce15cb32c532d49b59e35b109f4b655b895de",
+              "git_blob_sha1": "8cf93b8fd495e1aa80b1eb3988f64728ffa1581a",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "172e39d5e69a8f7775c25ad1ce2bfaf2bf5d1246",
+              "module": "jdk.m3.text",
+              "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/CsvTools.java",
+              "symbol": "jdk.m3.text.CsvTools",
+              "signatures": [
+                "jdk.m3.text.CsvTools"
+              ],
+              "sha256": "f07c5ef868f075ccae4b0732b20ecbb20634afbd73bd68a39e69a2ebf50d7a1b",
+              "git_blob_sha1": "dd2c3635c87cad4fcad50c7295011ddbacb7b722",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "Stable per-owner traceability for an existing implementation. Exact candidate hashes include the canonical SPDX/package/import normalization. implemented-unverified records the open full-product gates and is not Java SE, runtime or phase promotion."
+      },
+      {
+        "id": "m3.text.native-line-ops",
+        "kind": "specialization",
+        "status": "implemented-unverified",
+        "reason": "Existing optional SDK owner refined through the canonical Synexia recipe. Bounded source/JUnit/API/JNI receipts are separate evidence; full M3JDK21 receiving and installed-image gates remain HOLD and no global phase advances.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-structured-text-packed-receiver-20261104/003-NativeLineOps.java.tmpl",
+            "symbol": "jdk.m3.text.NativeLineOps",
+            "signatures": [
+              "jdk.m3.text.NativeLineOps"
+            ],
+            "sha256": "a009e587a12c52222418afb11cf34826c4d2d1347da56a7dae9f4522aad28147",
+            "git_blob_sha1": "98ad3e43944e45e8e8a9502a6b214a197b363455",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-structured-text-packed-receiver-20261104/000-m3textops.c.tmpl",
+            "symbol": "Java_jdk_m3_text_NativeLineOps_structural0",
+            "signatures": [
+              "Java_jdk_m3_text_NativeLineOps_structural0"
+            ],
+            "sha256": "7c7303ccf197ce058c7128fe0825c2619f27f6c8b28746f9a130e78ee5aed65d",
+            "git_blob_sha1": "bc3d99a45a759760f7fcb2c07fef50f9fd5169f0",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.text",
+            "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeLineOps.java",
+            "symbol": "jdk.m3.text.NativeLineOps",
+            "signatures": [
+              "jdk.m3.text.NativeLineOps"
+            ],
+            "sha256": "a009e587a12c52222418afb11cf34826c4d2d1347da56a7dae9f4522aad28147",
+            "git_blob_sha1": "98ad3e43944e45e8e8a9502a6b214a197b363455",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "m3textops",
+            "path": "m3/tooling/module-packs/text-tools/native/m3textops.c",
+            "symbol": "Java_jdk_m3_text_NativeLineOps_structural0",
+            "signatures": [
+              "Java_jdk_m3_text_NativeLineOps_structural0"
+            ],
+            "sha256": "7c7303ccf197ce058c7128fe0825c2619f27f6c8b28746f9a130e78ee5aed65d",
+            "git_blob_sha1": "bc3d99a45a759760f7fcb2c07fef50f9fd5169f0",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "jdk.m3.text.NativeLineOps",
+        "identity": {
+          "namespace": "Existing optional SDK owner and caller-owned input; no Java SE replacement or global identity registry.",
+          "generation": "Per-invocation metadata and existing source lifetime; no shared or mapped generation introduced."
+        },
+        "contract": {
+          "differences": [
+            "Add one private structural0 JNI method/export that scans at most 256 UTF-16 units into a caller-owned primitive offsets array; retain existing sort0/uniq0 exports.",
+            "Deliberate compatibility correction: SecurityException at optional library loading now selects Java fallback instead of poisoning helper class initialization. Missing optional library or legacy structural symbol also selects fallback.",
+            "After successful capability discovery, ordinary JNI failures propagate; no broad native-call error swallowing is introduced."
+          ],
+          "compatibility_obligations": [
+            "Preserve null/range/capacity validation, full UTF-16 values including NUL and surrogate units, bounded stack storage and JNI exception checks.",
+            "Retain no Java pointer or native allocation across the call; preserve existing stable sort and adjacent-unique behavior."
+          ],
+          "public_surface": [
+            "NativeLineOps remains package-private with no public/protected Java API. Existing public Java APIs and existing JNI export signatures are retained."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Additive private JNI: Java_jdk_m3_text_NativeLineOps_structural0(JNIEnv*, jclass, jstring, jint, jint, jchar, jintArray) returns jint; original sort0/uniq0 exports unchanged.",
+          "bootstrap": "Existing optional jdk.m3.text and jdk.m3.structured modules; no Synexia runtime dependency or new boot-layer admission."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Exact source preimages, source hashes, original budgets and caller contracts remain authoritative.",
+          "joins": "No cross-invocation ownership or identity joins introduced.",
+          "outputs": "Only absolute structural offsets in the supplied int[] prefix; Java retains source strings, grammar, budgets and output ownership.",
+          "cached_facts": "One class-loader-local optional symbol capability result; no source payload, Java pointer or native allocation retained."
+        },
+        "recipe": {
+          "id": "com.synexia.m3.StructuredTextPackedReceiver20261104",
+          "version": "m3-structured-text-packed-20261104",
+          "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-structured-text-packed-receiver-20261104.yml",
+          "sha256": "928f2a533f337da342ef9c011204b2597b377fb3361dd999bb2c0328f7e322cf",
+          "preconditions": [
+            "Canonical recipe reference only: hsoliwal/com.synexia, source baseline eb954e93287a3d0740679204bfae9873ac5bea8a; execute com.synexia.m3.StructuredTextPackedPrivate20261104 for canonical owners before receiving com.synexia.m3.StructuredTextPackedReceiver20261104 outputs.",
+            "Receiving preimages are pinned to hsoliwal/M3jdk21 172e39d5e69a8f7775c25ad1ce2bfaf2bf5d1246; exact product hashes below must match the canonical Java/text manifests under m3-structured-text-packed-receiver-20261104.",
+            "Canonical Java manifests: synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-structured-text-packed-private-20261104/manifest.tsv and synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-structured-text-packed-receiver-20261104/manifest.tsv; receiver sidecars/metadata: synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-structured-text-packed-receiver-20261104/manifest.tsv.",
+            "Require actual Maven/OpenRewrite execution, exact output, fixed point, drift refusal and receiving product qualification. Manifest references alone grant no execution or promotion authority.",
+            "Candidate commit fields intentionally remain null; exact candidate bytes are identified by SHA-256 and Git blob. m3/tooling/module-packs/text-tools/refinement-proofs/structured-text-packed-20261104/SOURCE_REF.json binds the published canonical source revision externally without a mapping/private-commit cycle."
+          ],
+          "rollback": "Use a separately reviewed source-sealed restoration from the exact received postimage; retain these stable identities, prior records and unrelated source changes."
+        },
+        "tests": [
+          {
+            "id": "bounded-source-java21-junit-api-jni",
+            "receipt": "hsoliwal/com.synexia:synexia-openrewrite-recipes/crates/m3-structured-text-packed-20261104/proof/product-csv/receipt.json"
+          },
+          {
+            "id": "executed-recipe-and-receiving-gates",
+            "receipt": "m3/tooling/module-packs/text-tools/refinement-proofs/structured-text-packed-20261104/RECEIPT.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0 first-party Synexia/M3 sources; retain existing SPDX notices and module LICENSE/NOTICE.",
+          "publication": "Canonical recipe/resources remain in hsoliwal/com.synexia. LeetCode, HackerRank and GeeksforGeeks supply category/reference evidence only; no challenge statement, editorial or submission body is copied.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": null,
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Refine the incumbent target NativeLineOps/m3textops owner; canonical Synexia owns the sealed templates and recipe, without adding a parallel runtime helper."
+          ],
+          "pending": [
+            "Full receiving, source-built installed M3JDK21 image, cross-platform/native/runtime and global qualification gates remain HOLD; bounded stock-Java/JNI tests do not close them.",
+            "Existing STRING/array/collection sequencing, Java SE names, old migration records, queued operations and global gate states are preserved.",
+            "Pre-existing naming HOLD remains: current java.util.Arrays differs from the older companion source pin, and the unchanged mapping has pre-existing schema violations. This record does not repair or bypass either gate.",
+            "Published source revision and actual gate dispositions must be read from m3/tooling/module-packs/text-tools/refinement-proofs/structured-text-packed-20261104/SOURCE_REF.json and m3/tooling/module-packs/text-tools/refinement-proofs/structured-text-packed-20261104/RECEIPT.json."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "172e39d5e69a8f7775c25ad1ce2bfaf2bf5d1246",
+              "module": "jdk.m3.text",
+              "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeLineOps.java",
+              "symbol": "jdk.m3.text.NativeLineOps",
+              "signatures": [
+                "jdk.m3.text.NativeLineOps"
+              ],
+              "sha256": "42850be2dade74bbc9847a926636917de3c7d652a0b4bdb09b81b3003bbee120",
+              "git_blob_sha1": "a445dce8a386c2388f2eed09047f8ed2cc57a1b3",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "172e39d5e69a8f7775c25ad1ce2bfaf2bf5d1246",
+              "module": "m3textops",
+              "path": "m3/tooling/module-packs/text-tools/native/m3textops.c",
+              "symbol": "Java_jdk_m3_text_NativeLineOps_sort0; Java_jdk_m3_text_NativeLineOps_uniq0",
+              "signatures": [
+                "Java_jdk_m3_text_NativeLineOps_sort0; Java_jdk_m3_text_NativeLineOps_uniq0"
+              ],
+              "sha256": "88c7507b116f8a4116c34119caafe26666ce9094b116f19eb01527832cd5e46e",
+              "git_blob_sha1": "6548c527fe0885f9398bd9e042e25553f3f6d64e",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "172e39d5e69a8f7775c25ad1ce2bfaf2bf5d1246",
+              "module": "jdk.m3.text",
+              "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/NativeLineOps.java",
+              "symbol": "jdk.m3.text.NativeLineOps",
+              "signatures": [
+                "jdk.m3.text.NativeLineOps"
+              ],
+              "sha256": "42850be2dade74bbc9847a926636917de3c7d652a0b4bdb09b81b3003bbee120",
+              "git_blob_sha1": "a445dce8a386c2388f2eed09047f8ed2cc57a1b3",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "172e39d5e69a8f7775c25ad1ce2bfaf2bf5d1246",
+              "module": "m3textops",
+              "path": "m3/tooling/module-packs/text-tools/native/m3textops.c",
+              "symbol": "Java_jdk_m3_text_NativeLineOps_sort0; Java_jdk_m3_text_NativeLineOps_uniq0",
+              "signatures": [
+                "Java_jdk_m3_text_NativeLineOps_sort0; Java_jdk_m3_text_NativeLineOps_uniq0"
+              ],
+              "sha256": "88c7507b116f8a4116c34119caafe26666ce9094b116f19eb01527832cd5e46e",
+              "git_blob_sha1": "6548c527fe0885f9398bd9e042e25553f3f6d64e",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "Stable per-owner traceability for an existing implementation. Exact candidate hashes include the canonical SPDX/package/import normalization. implemented-unverified records the open full-product gates and is not Java SE, runtime or phase promotion."
+      },
+      {
+        "id": "m3.structured.json-lines-tools",
+        "kind": "adapter",
+        "status": "implemented-unverified",
+        "reason": "Existing optional SDK owner refined through the canonical Synexia recipe. Bounded source/JUnit/API/JNI receipts are separate evidence; full M3JDK21 receiving and installed-image gates remain HOLD and no global phase advances.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-unix4j-m3",
+            "path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/JsonLinesTools.java",
+            "symbol": "com.synexia.unix4jm3.JsonLinesTools",
+            "signatures": [
+              "com.synexia.unix4jm3.JsonLinesTools"
+            ],
+            "sha256": "870bbf8fdf8f335785c5210733742bf83292de1aa8eebd42b0c8c604fe83b88d",
+            "git_blob_sha1": "064ca6749e6eeb9e8876aa358c946ee836b77df1",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.structured",
+            "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.structured/jdk/m3/structured/JsonLinesTools.java",
+            "symbol": "jdk.m3.structured.JsonLinesTools",
+            "signatures": [
+              "jdk.m3.structured.JsonLinesTools"
+            ],
+            "sha256": "b2d8d4caf65216293214d06cc6a9703da6bd2abee526278c3056b968ded29507",
+            "git_blob_sha1": "18d8d70b89c5e664a043fc1c42863113351d9bfc",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "jdk.m3.structured.JsonLinesTools",
+        "identity": {
+          "namespace": "Existing optional SDK owner and caller-owned input; no Java SE replacement or global identity registry.",
+          "generation": "Per-invocation metadata and existing source lifetime; no shared or mapped generation introduced."
+        },
+        "contract": {
+          "differences": [
+            "Replace private per-value Node/Map/List storage with primitive value lanes, lazily allocated member lanes, a hash-ordered AVL member index and packed direct-array-child ranges."
+          ],
+          "compatibility_obligations": [
+            "Preserve strict JSON Lines grammar, RFC6901 token semantics, raw selected-value spelling, original node/depth/output budgets, null/error order/messages and duplicate-key rejection timing.",
+            "Decoded UTF-16 comparison determines key equality even when hashes collide; escaped/raw supplementary characters and zero-hash prefix names remain distinct when required.",
+            "Warm allocation observations are workload-specific; tiny-object cold first-call allocation can increase and no throughput or universal allocation claim follows."
+          ],
+          "public_surface": [
+            "Existing public static TextFrame select(TextFrame, String, Limits) and class identity remain unchanged."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Existing public/protected Java surface retained.",
+          "bootstrap": "Existing optional jdk.m3.text and jdk.m3.structured modules; no Synexia runtime dependency or new boot-layer admission."
+        },
+        "dependencies": [
+          {
+            "id": "jdk.m3.text",
+            "resolution": "resolved",
+            "reason": "Reuse existing TextFrame/TextLine/Limits and exact pinned read-only parser contexts; no new payload owner."
+          }
+        ],
+        "materialization": {
+          "admission": "Exact source preimages, source hashes, original budgets and caller contracts remain authoritative.",
+          "joins": "No cross-invocation ownership or identity joins introduced.",
+          "outputs": "Existing detached TextFrame containing exact selected input value text plus LF; immutable input remains authoritative.",
+          "cached_facts": "Private per-invocation facts remain bound to the exact immutable source."
+        },
+        "recipe": {
+          "id": "com.synexia.m3.StructuredTextPackedReceiver20261104",
+          "version": "m3-structured-text-packed-20261104",
+          "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-structured-text-packed-receiver-20261104.yml",
+          "sha256": "928f2a533f337da342ef9c011204b2597b377fb3361dd999bb2c0328f7e322cf",
+          "preconditions": [
+            "Canonical recipe reference only: hsoliwal/com.synexia, source baseline eb954e93287a3d0740679204bfae9873ac5bea8a; execute com.synexia.m3.StructuredTextPackedPrivate20261104 for canonical owners before receiving com.synexia.m3.StructuredTextPackedReceiver20261104 outputs.",
+            "Receiving preimages are pinned to hsoliwal/M3jdk21 172e39d5e69a8f7775c25ad1ce2bfaf2bf5d1246; exact product hashes below must match the canonical Java/text manifests under m3-structured-text-packed-receiver-20261104.",
+            "Canonical Java manifests: synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-structured-text-packed-private-20261104/manifest.tsv and synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-structured-text-packed-receiver-20261104/manifest.tsv; receiver sidecars/metadata: synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-structured-text-packed-receiver-20261104/manifest.tsv.",
+            "Require actual Maven/OpenRewrite execution, exact output, fixed point, drift refusal and receiving product qualification. Manifest references alone grant no execution or promotion authority.",
+            "Candidate commit fields intentionally remain null; exact candidate bytes are identified by SHA-256 and Git blob. m3/tooling/module-packs/text-tools/refinement-proofs/structured-text-packed-20261104/SOURCE_REF.json binds the published canonical source revision externally without a mapping/private-commit cycle."
+          ],
+          "rollback": "Use a separately reviewed source-sealed restoration from the exact received postimage; retain these stable identities, prior records and unrelated source changes."
+        },
+        "tests": [
+          {
+            "id": "bounded-source-java21-junit-api",
+            "receipt": "hsoliwal/com.synexia:synexia-openrewrite-recipes/crates/m3-structured-text-packed-20261104/proof/product-structured/receipt.json"
+          },
+          {
+            "id": "executed-recipe-and-receiving-gates",
+            "receipt": "m3/tooling/module-packs/text-tools/refinement-proofs/structured-text-packed-20261104/RECEIPT.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0 first-party Synexia/M3 sources; retain existing SPDX notices and module LICENSE/NOTICE.",
+          "publication": "Canonical recipe/resources remain in hsoliwal/com.synexia. LeetCode, HackerRank and GeeksforGeeks supply category/reference evidence only; no challenge statement, editorial or submission body is copied.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": null,
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Retain jdk.m3.structured package and existing jdk.m3.text imports; canonical source stays com.synexia.unix4jm3."
+          ],
+          "pending": [
+            "Full receiving, source-built installed M3JDK21 image, cross-platform/native/runtime and global qualification gates remain HOLD; bounded stock-Java/JNI tests do not close them.",
+            "Existing STRING/array/collection sequencing, Java SE names, old migration records, queued operations and global gate states are preserved.",
+            "Pre-existing naming HOLD remains: current java.util.Arrays differs from the older companion source pin, and the unchanged mapping has pre-existing schema violations. This record does not repair or bypass either gate.",
+            "Published source revision and actual gate dispositions must be read from m3/tooling/module-packs/text-tools/refinement-proofs/structured-text-packed-20261104/SOURCE_REF.json and m3/tooling/module-packs/text-tools/refinement-proofs/structured-text-packed-20261104/RECEIPT.json."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "eb954e93287a3d0740679204bfae9873ac5bea8a",
+              "module": "synexia-unix4j-m3",
+              "path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/JsonLinesTools.java",
+              "symbol": "com.synexia.unix4jm3.JsonLinesTools",
+              "signatures": [
+                "com.synexia.unix4jm3.JsonLinesTools"
+              ],
+              "sha256": "8b3448a6617ae7792f78b89f8df42952af4e3225037094a0c14fefa865a8ec56",
+              "git_blob_sha1": "8c7dd0ac34a0dd035855b9ef9f1a5bce4c992318",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "172e39d5e69a8f7775c25ad1ce2bfaf2bf5d1246",
+              "module": "jdk.m3.structured",
+              "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.structured/jdk/m3/structured/JsonLinesTools.java",
+              "symbol": "jdk.m3.structured.JsonLinesTools",
+              "signatures": [
+                "jdk.m3.structured.JsonLinesTools"
+              ],
+              "sha256": "7bffd3d88dcba9e74f4e74f6f10720fbca607f5dc0e7c23251e6598c8bb4b445",
+              "git_blob_sha1": "3f8bee80e30cdd1d84485e90b543c83292aa2253",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "Stable per-owner traceability for an existing implementation. Exact candidate hashes include the canonical SPDX/package/import normalization. implemented-unverified records the open full-product gates and is not Java SE, runtime or phase promotion."
+      },
+      {
+        "id": "m3.structured.structured-text-tools",
+        "kind": "adapter",
+        "status": "implemented-unverified",
+        "reason": "Existing optional SDK owner refined through the canonical Synexia recipe. Bounded source/JUnit/API/JNI receipts are separate evidence; full M3JDK21 receiving and installed-image gates remain HOLD and no global phase advances.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": null,
+            "module": "synexia-unix4j-m3",
+            "path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/StructuredTextTools.java",
+            "symbol": "com.synexia.unix4jm3.StructuredTextTools",
+            "signatures": [
+              "com.synexia.unix4jm3.StructuredTextTools"
+            ],
+            "sha256": "27e7507005e54053a30c94b2add3d6045c863c6fb9a57d67d3adfb9a924fb0ba",
+            "git_blob_sha1": "798d181b39271f1d8c04346620bfd7ee7b83e9b0",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "jdk.m3.structured",
+            "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.structured/jdk/m3/structured/StructuredTextTools.java",
+            "symbol": "jdk.m3.structured.StructuredTextTools",
+            "signatures": [
+              "jdk.m3.structured.StructuredTextTools"
+            ],
+            "sha256": "ee93e99b682afff657f959da0510ef918f66e422f5436774d1e2e452c17723b1",
+            "git_blob_sha1": "50f9e782f980de0d211488c6cf852c1afcf83d0a",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "jdk.m3.structured.StructuredTextTools",
+        "identity": {
+          "namespace": "Existing optional SDK owner and caller-owned input; no Java SE replacement or global identity registry.",
+          "generation": "Per-invocation metadata and existing source lifetime; no shared or mapped generation introduced."
+        },
+        "contract": {
+          "differences": [
+            "Replace per-assignment dotenv key regex matching with a private direct UTF-16-unit predicate for the identical ASCII grammar [A-Za-z_][A-Za-z0-9_]*."
+          ],
+          "compatibility_obligations": [
+            "Preserve delimited/selectDelimited/ini/dotenv APIs and behavior, key validity, quoting, insertion order, duplicate refusals, budgets and original null/exception order/messages.",
+            "Keep original TextFrame and result-list/map ownership; no new environment interpolation or broader INI/CSV syntax is introduced."
+          ],
+          "public_surface": [
+            "Existing public delimited, selectDelimited, ini and dotenv declarations are unchanged."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Existing public/protected Java surface retained.",
+          "bootstrap": "Existing optional jdk.m3.text and jdk.m3.structured modules; no Synexia runtime dependency or new boot-layer admission."
+        },
+        "dependencies": [
+          {
+            "id": "jdk.m3.text",
+            "resolution": "resolved",
+            "reason": "Existing TextFrame/TextLine/Limits owner and module dependency are retained."
+          }
+        ],
+        "materialization": {
+          "admission": "Exact source preimages, source hashes, original budgets and caller contracts remain authoritative.",
+          "joins": "No cross-invocation ownership or identity joins introduced.",
+          "outputs": "Existing public output representations and their ownership contracts are retained.",
+          "cached_facts": "Private per-invocation facts remain bound to the exact immutable source."
+        },
+        "recipe": {
+          "id": "com.synexia.m3.StructuredTextPackedReceiver20261104",
+          "version": "m3-structured-text-packed-20261104",
+          "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-structured-text-packed-receiver-20261104.yml",
+          "sha256": "928f2a533f337da342ef9c011204b2597b377fb3361dd999bb2c0328f7e322cf",
+          "preconditions": [
+            "Canonical recipe reference only: hsoliwal/com.synexia, source baseline eb954e93287a3d0740679204bfae9873ac5bea8a; execute com.synexia.m3.StructuredTextPackedPrivate20261104 for canonical owners before receiving com.synexia.m3.StructuredTextPackedReceiver20261104 outputs.",
+            "Receiving preimages are pinned to hsoliwal/M3jdk21 172e39d5e69a8f7775c25ad1ce2bfaf2bf5d1246; exact product hashes below must match the canonical Java/text manifests under m3-structured-text-packed-receiver-20261104.",
+            "Canonical Java manifests: synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-structured-text-packed-private-20261104/manifest.tsv and synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-structured-text-packed-receiver-20261104/manifest.tsv; receiver sidecars/metadata: synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-structured-text-packed-receiver-20261104/manifest.tsv.",
+            "Require actual Maven/OpenRewrite execution, exact output, fixed point, drift refusal and receiving product qualification. Manifest references alone grant no execution or promotion authority.",
+            "Candidate commit fields intentionally remain null; exact candidate bytes are identified by SHA-256 and Git blob. m3/tooling/module-packs/text-tools/refinement-proofs/structured-text-packed-20261104/SOURCE_REF.json binds the published canonical source revision externally without a mapping/private-commit cycle."
+          ],
+          "rollback": "Use a separately reviewed source-sealed restoration from the exact received postimage; retain these stable identities, prior records and unrelated source changes."
+        },
+        "tests": [
+          {
+            "id": "bounded-source-java21-junit-api",
+            "receipt": "hsoliwal/com.synexia:synexia-openrewrite-recipes/crates/m3-structured-text-packed-20261104/proof/product-structured/receipt.json"
+          },
+          {
+            "id": "executed-recipe-and-receiving-gates",
+            "receipt": "m3/tooling/module-packs/text-tools/refinement-proofs/structured-text-packed-20261104/RECEIPT.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0 first-party Synexia/M3 sources; retain existing SPDX notices and module LICENSE/NOTICE.",
+          "publication": "Canonical recipe/resources remain in hsoliwal/com.synexia. LeetCode, HackerRank and GeeksforGeeks supply category/reference evidence only; no challenge statement, editorial or submission body is copied.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": null,
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Retain jdk.m3.structured package and existing jdk.m3.text imports; canonical source stays com.synexia.unix4jm3."
+          ],
+          "pending": [
+            "Full receiving, source-built installed M3JDK21 image, cross-platform/native/runtime and global qualification gates remain HOLD; bounded stock-Java/JNI tests do not close them.",
+            "Existing STRING/array/collection sequencing, Java SE names, old migration records, queued operations and global gate states are preserved.",
+            "Pre-existing naming HOLD remains: current java.util.Arrays differs from the older companion source pin, and the unchanged mapping has pre-existing schema violations. This record does not repair or bypass either gate.",
+            "Published source revision and actual gate dispositions must be read from m3/tooling/module-packs/text-tools/refinement-proofs/structured-text-packed-20261104/SOURCE_REF.json and m3/tooling/module-packs/text-tools/refinement-proofs/structured-text-packed-20261104/RECEIPT.json."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "eb954e93287a3d0740679204bfae9873ac5bea8a",
+              "module": "synexia-unix4j-m3",
+              "path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/StructuredTextTools.java",
+              "symbol": "com.synexia.unix4jm3.StructuredTextTools",
+              "signatures": [
+                "com.synexia.unix4jm3.StructuredTextTools"
+              ],
+              "sha256": "6f6bb32c6e10993fca7af41391e4deb58a57973fa2e3bae6de4189262e858394",
+              "git_blob_sha1": "cacbefeb2ec01453addcb676fc9d42b48a2d147f",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "172e39d5e69a8f7775c25ad1ce2bfaf2bf5d1246",
+              "module": "jdk.m3.structured",
+              "path": "m3/tooling/module-packs/text-tools/src/jdk.m3.structured/jdk/m3/structured/StructuredTextTools.java",
+              "symbol": "jdk.m3.structured.StructuredTextTools",
+              "signatures": [
+                "jdk.m3.structured.StructuredTextTools"
+              ],
+              "sha256": "f613c0dae0c0fb98c8c4db4167d6258a91305994e319b6adaa16693674b24df6",
+              "git_blob_sha1": "b4cdbedd1a2dcbfd1c526a1a0a6469cab9fa9e52",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "Stable per-owner traceability for an existing implementation. Exact candidate hashes include the canonical SPDX/package/import normalization. implemented-unverified records the open full-product gates and is not Java SE, runtime or phase promotion."
       }
     ]
   },

@@ -220,3 +220,43 @@ JNIEXPORT void JNICALL Java_jdk_m3_text_NativeLineOps_uniq0
     (*env)->SetLongArrayRegion(env, result, 0, (jsize)words, bits);
     free(bits);
 }
+
+/* Bounded lexical scan for the existing CsvTools state machine. The result is
+ * structural metadata only: Java owns grammar, budgets, payloads and framing.
+ * Full UTF-16 values (including NUL and surrogate units) stay unchanged. */
+JNIEXPORT jint JNICALL Java_jdk_m3_text_NativeLineOps_structural0
+  (JNIEnv *env, jclass owner, jstring input, jint from, jint units,
+   jchar delimiter, jintArray positions) {
+    (void)owner;
+    if (input == NULL || positions == NULL) {
+        m3_throw(env, "java/lang/NullPointerException", "structural scan arguments");
+        return 0;
+    }
+    jsize length = (*env)->GetStringLength(env, input);
+    if ((*env)->ExceptionCheck(env)) return 0;
+    jsize capacity = (*env)->GetArrayLength(env, positions);
+    if ((*env)->ExceptionCheck(env)) return 0;
+    if (from < 0 || from > length || units < 0 || units > REGION_UNITS
+            || units > length - from || capacity < units) {
+        m3_throw(env, "java/lang/IllegalArgumentException", "structural scan bounds");
+        return 0;
+    }
+    if (units == 0) return 0;
+    jchar region[REGION_UNITS];
+    jint offsets[REGION_UNITS];
+    (*env)->GetStringRegion(env, input, from, units, region);
+    if ((*env)->ExceptionCheck(env)) return 0;
+    jint count = 0;
+    for (jint i = 0; i < units; i++) {
+        jchar unit = region[i];
+        if (unit == delimiter || unit == (jchar)'"'
+                || unit == (jchar)'\r' || unit == (jchar)'\n') {
+            offsets[count++] = from + i;
+        }
+    }
+    if (count != 0) {
+        (*env)->SetIntArrayRegion(env, positions, 0, count, offsets);
+        if ((*env)->ExceptionCheck(env)) return 0;
+    }
+    return count;
+}

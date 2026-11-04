@@ -1,0 +1,14 @@
+{
+  "schema": "m3.structured-text.canonical-source/1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "320c00f31b39366d682a0089b17c84d5b59ed19b",
+  "canonical_pull_request": "https://github.com/hsoliwal/com.synexia/pull/16128",
+  "canonical_recipe": "com.synexia.m3.StructuredTextPackedReceiver20261104",
+  "recipe_descriptor": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-structured-text-packed-receiver-20261104.yml",
+  "canonical_task_receipt": "synexia-openrewrite-recipes/crates/m3-structured-text-packed-20261104/RECEIPT.json",
+  "canonical_task_receipt_sha256": "db565aecf1e89ee8d9769d9a0d7c6f24e7df307a33a963ca62c87f81690b6476",
+  "target_preimage_commit": "172e39d5e69a8f7775c25ad1ce2bfaf2bf5d1246",
+  "production_and_test_files": "Exact bytes emitted by actual canonical SDK execution; manifest source drift and fixed point proved",
+  "private_custody": "Recipe implementations,templates,baselines,Maven fixtures and executable qualification drivers remain in Synexia",
+  "receiving_sequence_advanced": false
+}
