@@ -43,10 +43,17 @@ def write_json(path, value):
 _RECEIVER_LOCK_SHA256 = "68ac22eb0dd7e609297517b75c6670242afe51e723c456eb251eb1e7017053cf"
 _RECEIVER_TRANSITION_PATH = "m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V5.json"
 _RECEIVER_TRANSITION_SHA256 = "4e00d68a96907e23b10670c32ca76bdae5b9bc7f1b6d27cdf323f17b6a1fd178"
+_RECEIVER_TRANSITION_V6_PATH = "m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V6.json"
+_RECEIVER_TRANSITION_V6_SHA256 = "25c475dc211870634a0a156ddd02ce3db78a492997019ecdf01c599db9b296b4"
+_RECEIVER_TRANSITION_V7_PATH = "m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V7.json"
+_RECEIVER_TRANSITION_V7_SHA256 = "e3f7f6c569d701f2c663c1ca34dcf2d8d5330ecbe8e2e8ddf61764975f636b5e"
+_RECEIVER_TRANSITION_V8_PATH = "m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V8.json"
+_RECEIVER_TRANSITION_V8_SHA256 = "5abff0ff5462a74439ceb13610913417ca5a1b2c4c8ddf0ba9d26a2428f1237d"
 _RECEIVER_SUCCESSORS = frozenset(
     "m3/core/src/com/m3/text/" + name for name in (
         "JoinedM3StringPiece.java", "SharedLexiconCatalog.java",
         "SharedLexiconPrecomputeCatalog.java", "SharedRelatedLexemeCatalog.java"))
+_RECEIVER_V8_SUCCESSORS = _RECEIVER_SUCCESSORS | {"m3/core/src/com/m3/text/SynexiaPrecomputePayload.java"}
 
 
 def _receiver_identity(raw):
@@ -90,20 +97,28 @@ def _receiver_admission(root, transition=None):
     selected, declaration = [], None
     if transition is not None:
         path = transition if transition.is_absolute() else root / transition
-        expected = root / _RECEIVER_TRANSITION_PATH
-        if (path.resolve() != expected.resolve()
+        choices = {_RECEIVER_TRANSITION_PATH: _RECEIVER_TRANSITION_SHA256,
+                   _RECEIVER_TRANSITION_V6_PATH: _RECEIVER_TRANSITION_V6_SHA256,
+                   _RECEIVER_TRANSITION_V7_PATH: _RECEIVER_TRANSITION_V7_SHA256,
+                   _RECEIVER_TRANSITION_V8_PATH: _RECEIVER_TRANSITION_V8_SHA256}
+        matches = [name for name in choices if path.resolve() == (root / name).resolve()]
+        if (len(matches) != 1
                 or any(p.is_symlink() or p.is_junction() for p in (path, *path.parents))):
             raise ValueError("unknown or redirected receiver transition")
+        selected_path = matches[0]
         data = path.read_bytes()
         if (hashlib.sha256(raw).hexdigest() != _RECEIVER_LOCK_SHA256
-                or hashlib.sha256(data).hexdigest() != _RECEIVER_TRANSITION_SHA256):
+                or hashlib.sha256(data).hexdigest() != choices[selected_path]):
             raise ValueError("receiver transition or original lock seal differs")
         document = json.loads(data)
         if document["schema"] != "M3_FROZEN_RECEIVER_TRANSITIONS_V2":
             raise ValueError("receiver transition schema differs")
+        successors = (_RECEIVER_V8_SUCCESSORS if selected_path == _RECEIVER_TRANSITION_V8_PATH
+                      else _RECEIVER_SUCCESSORS)
         rows = {row["path"]: row for row in document["files"]
-                if row["path"] in _RECEIVER_SUCCESSORS}
-        if set(rows) != _RECEIVER_SUCCESSORS or len(document["files"]) != 8:
+                if row["path"] in successors}
+        expected_rows = 9 if selected_path == _RECEIVER_TRANSITION_V8_PATH else 8
+        if set(rows) != successors or len(document["files"]) != expected_rows:
             raise ValueError("complete receiver source transition cohort required")
         source = lock["modules"]["com.m3.text"]["files"]
         for relative in sorted(rows):
@@ -115,7 +130,7 @@ def _receiver_admission(root, transition=None):
         for relative, digest in document["custodySha256"].items():
             if source.get(relative) != digest:
                 raise ValueError("receiver transition custody differs: " + relative)
-        declaration = dict(path=_RECEIVER_TRANSITION_PATH, **_receiver_identity(data))
+        declaration = dict(path=selected_path, **_receiver_identity(data))
     files, bodies = _receiver_inputs(root, effective)
     observed = {row["path"]: {key: row[key] for key in ("bytes", "sha256", "gitBlob")}
                 for row in files}
@@ -166,8 +181,14 @@ def _receiver_revision(root):
 
 
 def _receiver_report(admission, revision, checkpoints, staged):
-    return dict(schema="M3_NLP_VERIFIED_RECEIVER_INPUTS_V1",
-                cohort="declared-v5-four-lexicon-successors" if staged else "original-strict-lock",
+    cohort = "original-strict-lock"
+    if staged:
+        selected = admission["transition"]["path"]
+        cohort = ("declared-v8-five-lexicon-successors" if selected == _RECEIVER_TRANSITION_V8_PATH
+                  else "declared-v7-four-lexicon-successors" if selected == _RECEIVER_TRANSITION_V7_PATH
+                  else "declared-v6-four-lexicon-successors" if selected == _RECEIVER_TRANSITION_V6_PATH
+                  else "declared-v5-four-lexicon-successors")
+    return dict(schema="M3_NLP_VERIFIED_RECEIVER_INPUTS_V1", cohort=cohort,
                 basis=admission["lockIdentity"], observed_revision=revision,
                 declared_transition=admission["transition"], transitions=admission["changes"],
                 effective_manifest=admission["files"],
@@ -373,7 +394,7 @@ def main():
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--receiver", type=Path, default=ROOT)
     parser.add_argument("--receiver-transition", type=Path,
-                        help="Explicit sealed V5 four-source cohort; omitted keeps strict original admission")
+                        help="Explicit sealed V5/V6/V7 four-source or V8 five-source cohort; omitted keeps strict original admission")
     parser.add_argument("--opennlp-source", type=Path, required=True)
     parser.add_argument("--lucene-source", type=Path, required=True)
     parser.add_argument("--recipe-runner", type=Path, required=True)

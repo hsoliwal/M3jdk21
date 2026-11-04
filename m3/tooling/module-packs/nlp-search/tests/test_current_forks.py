@@ -89,54 +89,117 @@ class ModuleCollectionTest(unittest.TestCase):
 
 class ReceiverAdmissionTest(unittest.TestCase):
     """Real locked bytes and owned fixtures; image orchestration is separately mocked."""
-    checks = {"content": 0, "missing": 0, "mixtures": 0, "coverage": 0}
+    version = 5
+    catalog_name = "m3/core/src/com/m3/text/SharedLexiconCatalog.java"
+    payload_name = "m3/core/src/com/m3/text/SynexiaPrecomputePayload.java"
+
+    @staticmethod
+    def _identity(raw):
+        import hashlib
+        return {"bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest(),
+                "gitBlob": hashlib.sha1(b"blob " + str(len(raw)).encode("ascii")
+                                        + b"\0" + raw).hexdigest()}
 
     @classmethod
     def setUpClass(cls):
-        import os
         import json
-        import hashlib
+        # Each concrete version owns its mutable fixture state and counters.
+        cls.checks = {"content": 0, "missing": 0, "mixtures": 0, "coverage": 0}
         cls.temp_parent = Path(os.environ["M3_NLP_TEST_TEMP"]).resolve()
         if not cls.temp_parent.is_dir():
             raise ValueError("explicit existing M3_NLP_TEST_TEMP required")
         cls.input_root = Path(os.environ.get("M3_NLP_RECEIVER_INPUT_ROOT", str(DRIVER.ROOT))).resolve()
         cls.lock_raw = (DRIVER.HERE / "current-source-lock.json").read_bytes()
+        if cls._identity(cls.lock_raw)["sha256"] != DRIVER._RECEIVER_LOCK_SHA256:
+            raise ValueError("unsealed original test lock")
         cls.lock = json.loads(cls.lock_raw)
-        cls.temporary = tempfile.TemporaryDirectory(dir=cls.temp_parent)
-        cls.root = Path(cls.temporary.name).resolve()
-        if not cls.root.is_relative_to(cls.temp_parent):
-            raise ValueError("fixture escaped explicit temporary parent")
-        cls.current = {}
-        cls.decl_relative = DRIVER._RECEIVER_TRANSITION_PATH
-        cls.decl_raw = (cls.input_root / cls.decl_relative).read_bytes()
-        cls.document = json.loads(cls.decl_raw)
-        cls.changes = {r["path"]: r for r in cls.document["files"]
-                       if r["path"] in DRIVER._RECEIVER_SUCCESSORS}
-        for entry in cls.lock["modules"].values():
-            for name, digest in entry["files"].items():
-                raw = (cls.input_root / name).read_bytes()
-                expected = cls.changes[name]["after"]["sha256"] if name in cls.changes else digest
-                if hashlib.sha256(raw).hexdigest() != expected:
-                    raise ValueError("test input is not the sealed current cohort: " + name)
-                cls.current[name] = raw
-                path = cls.root / name
-                path.parent.mkdir(parents=True, exist_ok=True)
-                path.write_bytes(raw)
-        cls.decl = cls.root / cls.decl_relative
-        cls.decl.parent.mkdir(parents=True, exist_ok=True)
-        cls.decl.write_bytes(cls.decl_raw)
+        cls.transitions, cls.catalogs = {}, {}
+        fixtures = Path(__file__).resolve().parent
+        choices = ((5, DRIVER._RECEIVER_TRANSITION_PATH, DRIVER._RECEIVER_TRANSITION_SHA256),
+                   (6, DRIVER._RECEIVER_TRANSITION_V6_PATH, DRIVER._RECEIVER_TRANSITION_V6_SHA256),
+                   (7, DRIVER._RECEIVER_TRANSITION_V7_PATH, DRIVER._RECEIVER_TRANSITION_V7_SHA256),
+                   (8, DRIVER._RECEIVER_TRANSITION_V8_PATH, DRIVER._RECEIVER_TRANSITION_V8_SHA256))
+        for version, relative, seal in choices:
+            declaration = (cls.input_root / relative).read_bytes()
+            if cls._identity(declaration)["sha256"] != seal:
+                raise ValueError("unsealed test declaration: " + relative)
+            document = json.loads(declaration)
+            successors = DRIVER._RECEIVER_V8_SUCCESSORS if version == 8 else DRIVER._RECEIVER_SUCCESSORS
+            changes = {r["path"]: r for r in document["files"] if r["path"] in successors}
+            if set(changes) != successors or len(document["files"]) != (9 if version == 8 else 8):
+                raise ValueError("complete four-source declaration required")
+            catalog = (fixtures / ("receiver-v%d" % (7 if version == 8 else version))
+                       / "SharedLexiconCatalog.java.txt").read_bytes()
+            if cls._identity(catalog) != changes[cls.catalog_name]["after"]:
+                raise ValueError("unsealed catalog fixture: V%d" % version)
+            cls.transitions[version] = dict(path=relative, seal=seal, raw=declaration, changes=changes)
+            cls.catalogs[version] = catalog
+        selected = cls.transitions[cls.version]
+        cls.decl_relative, cls.decl_raw = selected["path"], selected["raw"]
+        cls.changes = selected["changes"]
+        cls.cohort = ("declared-v8-five-lexicon-successors" if cls.version == 8
+                      else "declared-v%d-four-lexicon-successors" % cls.version)
+        payload_row = cls.transitions[8]["changes"][cls.payload_name]
+        cls.payload_before = (fixtures / "receiver-original" / "SynexiaPrecomputePayload.java.txt").read_bytes()
+        cls.payload_after = (fixtures / "receiver-v8" / "SynexiaPrecomputePayload.java.txt").read_bytes()
+        if (cls._identity(cls.payload_before) != payload_row["before"]
+                or cls._identity(cls.payload_after) != payload_row["after"]):
+            raise ValueError("unsealed payload fixtures")
+
         cls.original = {}
         for name in sorted(cls.changes):
-            raw = (Path(__file__).resolve().parent / "receiver-original"
-                   / (Path(name).name + ".txt")).read_bytes()
-            if hashlib.sha256(raw).hexdigest() != cls.changes[name]["before"]["sha256"]:
+            original = (fixtures / "receiver-original" / (Path(name).name + ".txt")).read_bytes()
+            if cls._identity(original) != cls.changes[name]["before"]:
                 raise ValueError("unsealed original fixture: " + name)
-            cls.original[name] = raw
-        if len(cls.current) != 145 or len(cls.original) != 4:
+            cls.original[name] = original
+        cls.current = {}
+        # Check every physical input before selecting the historical/current test catalog.
+        # Substitution is confined to the owned ephemeral fixture, never the input root.
+        for module, entry in cls.lock["modules"].items():
+            for name, digest in entry["files"].items():
+                physical = (cls.input_root / name).read_bytes()
+                identity = cls._identity(physical)
+                if name == cls.catalog_name:
+                    known = [v["changes"][name]["after"] for v in cls.transitions.values()]
+                    if identity not in known:
+                        raise ValueError("test input is not a sealed V5/V6/V7 catalog: " + name)
+                    current = cls.catalogs[cls.version]
+                elif name == cls.payload_name:
+                    if identity not in [payload_row["before"], payload_row["after"]]:
+                        raise ValueError("test input is not a sealed original/V8 payload")
+                    current = cls.payload_after if cls.version == 8 else cls.payload_before
+                else:
+                    expected = cls.changes[name]["after"]["sha256"] if name in cls.changes else digest
+                    if (identity["sha256"] != expected or
+                            (name in cls.changes and identity != cls.changes[name]["after"])):
+                        raise ValueError("test input is not the sealed current cohort: " + name)
+                    current = physical
+                cls.current[name] = current
+            if entry.get("source_roots"):
+                actual = {p.relative_to(cls.input_root).as_posix() for source in entry["source_roots"]
+                          for p in (cls.input_root / source).rglob("*.java")}
+                expected = {p for p in entry["files"] if p.endswith(".java")}
+                if actual != expected:
+                    raise ValueError("test input source coverage drift: " + module)
+        if len(cls.current) != 145 or len(cls.original) != (5 if cls.version == 8 else 4):
             raise ValueError("complete145-file/four-source cohort required")
+        cls.temporary = tempfile.TemporaryDirectory(dir=cls.temp_parent)
+        cls.root = Path(cls.temporary.name).resolve()
+        cls.addClassCleanup(cls.cleanup_fixture)
+        if not cls.root.is_relative_to(cls.temp_parent):
+            raise ValueError("fixture escaped explicit temporary parent")
+        for name, current in cls.current.items():
+            path = cls.root / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(current)
+        for transition in cls.transitions.values():
+            path = cls.root / transition["path"]
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(transition["raw"])
+        cls.decl = cls.root / cls.decl_relative
 
     @classmethod
-    def tearDownClass(cls):
+    def cleanup_fixture(cls):
         if not cls.root.is_relative_to(cls.temp_parent):
             raise ValueError("fixture cleanup escaped temporary parent")
         cls.temporary.cleanup()
@@ -156,10 +219,17 @@ class ReceiverAdmissionTest(unittest.TestCase):
         for name, raw in self.original.items():
             (self.root / name).write_bytes(raw)
         self.assertEqual(self.lock, DRIVER.verify_receiver(self.root))
+        strict = DRIVER._receiver_admission(self.root)
+        report = DRIVER._receiver_report(strict, None, [], None)
+        self.assertEqual("original-strict-lock", report["cohort"])
+        self.assertEqual("original-physical-inputs", report["compilation_inputs"])
+        self.assertIsNone(report["declared_transition"])
         for name in self.original:
             (self.root / name).write_bytes(self.current[name])
         with self.assertRaisesRegex(ValueError, "receiver source drift: .*JoinedM3StringPiece"):
             DRIVER.verify_receiver(self.root)
+        with self.assertRaisesRegex(ValueError, "receiver source drift: .*JoinedM3StringPiece"):
+            DRIVER._receiver_admission(self.root)
 
     def test_current_cohort_reports_actual_manifest_without_mutating_lock(self):
         import hashlib
@@ -169,7 +239,7 @@ class ReceiverAdmissionTest(unittest.TestCase):
         self.assertEqual(self.lock_raw, (DRIVER.HERE / "current-source-lock.json").read_bytes())
         self.assertEqual(145, len(admission["files"]))
         self.assertEqual(145, len(admission["bodies"]))
-        self.assertEqual(4, len(admission["changes"]))
+        self.assertEqual(len(self.changes), len(admission["changes"]))
         for row in admission["files"]:
             raw = self.current[row["path"]]
             self.assertEqual(hashlib.sha256(raw).hexdigest(), row["sha256"])
@@ -178,7 +248,14 @@ class ReceiverAdmissionTest(unittest.TestCase):
             self.assertEqual(len(raw), row["bytes"])
         report = DRIVER._receiver_report(admission, "a" * 40, [], Path("snapshot"))
         self.assertEqual("a" * 40, report["observed_revision"])
-        self.assertEqual("declared-v5-four-lexicon-successors", report["cohort"])
+        self.assertEqual(self.cohort, report["cohort"])
+        self.assertEqual(dict(path=self.decl_relative, **self._identity(self.decl_raw)),
+                         report["declared_transition"])
+        self.assertEqual(self.transitions[self.version]["seal"],
+                         report["declared_transition"]["sha256"])
+        relative = DRIVER._receiver_admission(self.root, Path(self.decl_relative))
+        self.assertEqual(admission["files"], relative["files"])
+        self.assertEqual(admission["transition"], relative["transition"])
         self.assertEqual("verified-owned-snapshot", report["compilation_inputs"])
         self.assertEqual(admission["files"], report["effective_manifest"])
         expected = hashlib.sha256(json.dumps(admission["files"], sort_keys=True,
@@ -187,13 +264,13 @@ class ReceiverAdmissionTest(unittest.TestCase):
 
     def test_unqualified_mixed_cohorts_are_refused(self):
         names = sorted(self.original)
-        for mask in range(16):
+        for mask in range(1 << len(names)):
             with self.subTest(mask=mask):
                 for index, name in enumerate(names):
                     (self.root / name).write_bytes(self.current[name] if mask & (1 << index)
                                                    else self.original[name])
-                if mask == 15:
-                    self.assertEqual(4, len(self.declared()["changes"]))
+                if mask == (1 << len(names)) - 1:
+                    self.assertEqual(len(names), len(self.declared()["changes"]))
                 else:
                     with self.assertRaises(ValueError):
                         self.declared()
@@ -271,7 +348,7 @@ class ReceiverAdmissionTest(unittest.TestCase):
             for name, raw in self.current.items():
                 self.assertEqual(raw, (staged / name).read_bytes())
             DRIVER._revalidate_receiver(self.root, admission, staged)
-            name = next(iter(self.current))
+            name = self.payload_name if self.version == 8 else next(iter(self.current))
             path = self.root / name
             path.write_bytes(self.current[name] + b"drift")
             with self.assertRaises(ValueError):
@@ -282,6 +359,13 @@ class ReceiverAdmissionTest(unittest.TestCase):
             with self.assertRaises(ValueError):
                 DRIVER._revalidate_receiver(self.root, admission, staged)
             path.write_bytes(self.current[name])
+            DRIVER._revalidate_receiver(self.root, admission, staged)
+            self.decl.write_bytes(self.decl_raw + b"\n")
+            try:
+                with self.assertRaises(ValueError):
+                    DRIVER._revalidate_receiver(self.root, admission, staged)
+            finally:
+                self.decl.write_bytes(self.decl_raw)
             DRIVER._revalidate_receiver(self.root, admission, staged)
         with tempfile.TemporaryDirectory(dir=self.temp_parent) as temporary:
             admission["bodies"][name] += b"bad snapshot"
@@ -316,7 +400,7 @@ class ReceiverAdmissionTest(unittest.TestCase):
                     self.assertEqual(self.current[name], (root / name).read_bytes())
                     self.assertEqual(hashlib.sha256(self.current[name]).hexdigest(), entry["files"][name])
                 # The compiler source remains frozen even through transient receiver mutation.
-                name = next(iter(entry["files"]))
+                name = self.payload_name if self.version == 8 and self.payload_name in entry["files"] else next(iter(entry["files"]))
                 original = self.root / name
                 original.write_bytes(self.current[name] + b"temporary receiver mutation")
                 try:
@@ -332,9 +416,16 @@ class ReceiverAdmissionTest(unittest.TestCase):
             observed = report["receiver_input_admission"]
             self.assertEqual(self.lock["receiver"], report["receiver"])
             self.assertEqual("a" * 40, observed["observed_revision"])
+            self.assertEqual(self.cohort, observed["cohort"])
+            self.assertEqual(dict(path=self.decl_relative, **self._identity(self.decl_raw)),
+                             observed["declared_transition"])
+            self.assertEqual({"scope": "MOCKED_IMAGE_NOT_QUALIFIED"}, report["tests"])
             self.assertEqual(145, len(observed["effective_manifest"]))
-            self.assertEqual(4, len(observed["transitions"]))
+            self.assertEqual(len(self.changes), len(observed["transitions"]))
             self.assertEqual(7, len(observed["revalidation"]))
+            self.assertEqual([phase + ":" + module for module in compiled
+                              for phase in ("before", "after")] + ["before-report"],
+                             [r["phase"] for r in observed["revalidation"]])
             self.assertEqual(["before:" + m for m in compiled],
                              [r["phase"] for r in observed["revalidation"] if r["phase"].startswith("before:")])
             self.assertEqual("verified-owned-snapshot", observed["compilation_inputs"])
@@ -362,6 +453,151 @@ class ReceiverAdmissionTest(unittest.TestCase):
         self.assertEqual(2, refused.exception.code)
         build.assert_not_called()
 
+
+class ReceiverV6AdmissionTest(ReceiverAdmissionTest):
+    """Run all nine receiver contracts with the independently sealed V6 catalog."""
+    version = 6
+
+    def test_cross_version_catalogs_with_correct_sealed_declarations_are_refused(self):
+        import re
+        path = self.root / self.catalog_name
+        try:
+            for version in (5, 6):
+                declaration = self.root / self.transitions[version]["path"]
+                with self.subTest(declaration=version, catalog=11 - version):
+                    path.write_bytes(self.catalogs[11 - version])
+                    with self.assertRaisesRegex(ValueError,
+                            "receiver source drift: " + re.escape(self.catalog_name)):
+                        DRIVER._receiver_admission(self.root, declaration)
+                # The same declaration still admits its exact entire cohort.
+                path.write_bytes(self.catalogs[version])
+                admitted = DRIVER._receiver_admission(self.root, declaration)
+                self.assertEqual(145, len(admitted["files"]))
+                self.assertEqual(4, len(admitted["changes"]))
+                self.assertEqual(self._identity(self.catalogs[version]),
+                                 {k: next(r for r in admitted["files"]
+                                          if r["path"] == self.catalog_name)[k]
+                                  for k in ("bytes", "sha256", "gitBlob")})
+        finally:
+            path.write_bytes(self.current[self.catalog_name])
+
+
+
+class ReceiverV7AdmissionTest(ReceiverAdmissionTest):
+    """Inherited physical145-input contracts with the independently sealed V7 catalog."""
+    version = 7
+
+    def test_v7_cross_version_catalogs_and_declarations_are_refused(self):
+        import re
+        path = self.root / self.catalog_name
+        try:
+            for selected, other in ((5, 7), (6, 7), (7, 5), (7, 6)):
+                declaration = self.root / self.transitions[selected]["path"]
+                with self.subTest(declaration=selected, catalog=other):
+                    path.write_bytes(self.catalogs[other])
+                    with self.assertRaisesRegex(ValueError,
+                            "receiver source drift: " + re.escape(self.catalog_name)):
+                        DRIVER._receiver_admission(self.root, declaration)
+                path.write_bytes(self.catalogs[selected])
+                admitted = DRIVER._receiver_admission(self.root, declaration)
+                self.assertEqual(145, len(admitted["files"]))
+                self.assertEqual(4, len(admitted["changes"]))
+        finally:
+            path.write_bytes(self.current[self.catalog_name])
+
+    def test_unsealed_identity_array_without_singleton_guard_is_refused(self):
+        import re
+        branch = """        // A singleton has no competing slot: compare before hashing caller text.
+        if (index.length == 2) {
+            SourceMapping only = index[0] != null ? index[0] : index[1];
+            return sourceId.equals(only.sourceId()) && recordId.equals(only.recordId())
+                    ? only : null;
+        }
+"""
+        current = self.catalogs[7]
+        self.assertEqual(1, current.count(branch.encode()))
+        rejected = current.replace(branch.encode(), b"", 1)
+        self.assertEqual("8d41fa9595ace9ff6874b5b3cbe66172f502ea04",
+                         self._identity(rejected)["gitBlob"])
+        path = self.root / self.catalog_name
+        try:
+            path.write_bytes(rejected)
+            for selected in (5, 6, 7):
+                with self.subTest(declaration=selected):
+                    with self.assertRaisesRegex(ValueError,
+                            "receiver source drift: " + re.escape(self.catalog_name)):
+                        DRIVER._receiver_admission(self.root,
+                            self.root / self.transitions[selected]["path"])
+        finally:
+            path.write_bytes(self.current[self.catalog_name])
+
+
+class ReceiverV8AdmissionTest(ReceiverAdmissionTest):
+    """Five-source V8 with original-lock and historical four-source compatibility."""
+    version = 8
+
+    def test_payload_version_confusion_is_refused_with_matching_catalogs(self):
+        import re
+        payload = self.root / self.payload_name
+        catalog = self.root / self.catalog_name
+        try:
+            for version in (5, 6, 7):
+                catalog.write_bytes(self.catalogs[version])
+                payload.write_bytes(self.payload_before)
+                decl = self.root / self.transitions[version]["path"]
+                admitted = DRIVER._receiver_admission(self.root, decl)
+                self.assertEqual(145, len(admitted["files"]))
+                self.assertEqual(4, len(admitted["changes"]))
+                payload.write_bytes(self.payload_after)
+                with self.subTest(legacy=version):
+                    with self.assertRaisesRegex(ValueError, "receiver source drift: " + re.escape(self.payload_name)):
+                        DRIVER._receiver_admission(self.root, decl)
+            catalog.write_bytes(self.catalogs[8])
+            payload.write_bytes(self.payload_before)
+            with self.assertRaisesRegex(ValueError, "receiver source drift: " + re.escape(self.payload_name)):
+                self.declared()
+            payload.write_bytes(self.payload_after)
+            self.assertEqual(5, len(self.declared()["changes"]))
+        finally:
+            catalog.write_bytes(self.current[self.catalog_name])
+            payload.write_bytes(self.current[self.payload_name])
+
+    def test_v8_retains_prior_rows_custody_and_complete_payload_identity(self):
+        import json
+        before = json.loads(self.transitions[7]["raw"])
+        after = json.loads(self.transitions[8]["raw"])
+        self.assertEqual(before["files"], after["files"][:8])
+        self.assertEqual(before["custodySha256"], after["custodySha256"])
+        self.assertEqual(before["frozenProfileSha256"], after["frozenProfileSha256"])
+        self.assertEqual(self.transitions[7]["seal"], after["predecessorDeclarationSha256"])
+        row = after["files"][8]
+        self.assertEqual(self.payload_name, row["path"])
+        self.assertEqual(self._identity(self.payload_before), row["before"])
+        self.assertEqual(self._identity(self.payload_after), row["after"])
+
+    def test_unguarded_catalog_is_refused_with_each_matching_payload_version(self):
+        import re
+        current = self.catalogs[7]
+        branch = b"        // A singleton has no competing slot: compare before hashing caller text.\n        if (index.length == 2) {\n            SourceMapping only = index[0] != null ? index[0] : index[1];\n            return sourceId.equals(only.sourceId()) && recordId.equals(only.recordId())\n                    ? only : null;\n        }\n"
+        self.assertEqual(1, current.count(branch))
+        rejected = current.replace(branch, b"", 1)
+        self.assertEqual("8d41fa9595ace9ff6874b5b3cbe66172f502ea04",
+                         self._identity(rejected)["gitBlob"])
+        catalog = self.root / self.catalog_name
+        payload = self.root / self.payload_name
+        try:
+            for version in (5, 6, 7, 8):
+                payload.write_bytes(self.payload_after if version == 8 else self.payload_before)
+                catalog.write_bytes(self.catalogs[version])
+                decl = self.root / self.transitions[version]["path"]
+                self.assertEqual(145, len(DRIVER._receiver_admission(self.root, decl)["files"]))
+                catalog.write_bytes(rejected)
+                with self.subTest(declaration=version):
+                    with self.assertRaisesRegex(ValueError, "receiver source drift: " + re.escape(self.catalog_name)):
+                        DRIVER._receiver_admission(self.root, decl)
+        finally:
+            catalog.write_bytes(self.current[self.catalog_name])
+            payload.write_bytes(self.current[self.payload_name])
 
 if __name__ == "__main__":
     unittest.main()
