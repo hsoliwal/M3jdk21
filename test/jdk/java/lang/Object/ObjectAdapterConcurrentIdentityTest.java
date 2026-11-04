@@ -215,6 +215,12 @@ public final class ObjectAdapterConcurrentIdentityTest {
             check(adaptNative(source, Runnable.class, mode) == null,
                     "native mode unsupported request " + mode);
             try {
+                adaptNative(null, Object.class, mode);
+                throw new AssertionError("native mode accepted null receiver " + mode);
+            } catch (NullPointerException expected) {
+                // NULL jobject must never reach an instance method JNI call.
+            }
+            try {
                 adaptNative(source, null, mode);
                 throw new AssertionError("native mode accepted null class " + mode);
             } catch (NullPointerException expected) {
