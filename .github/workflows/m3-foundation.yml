@@ -65,6 +65,34 @@ jobs:
           echo "M3_JDK=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
           printf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
           printf '%s\n' "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
+      - name: Exercise WordRows Java and JNI in four VM modes
+        shell: bash
+        env:
+          TEMP: ${{ runner.temp }}
+          TMP: ${{ runner.temp }}
+          TMPDIR: ${{ runner.temp }}
+          _JAVA_OPTIONS: ''
+          JDK_JAVA_OPTIONS: ''
+          JAVA_TOOL_OPTIONS: -Djava.io.tmpdir=${{ runner.temp }} -XX:-UsePerfData
+        run: |
+          set -euo pipefail
+          printf 'M3_WORDROWS_SOURCE_COMMIT=%s\n' "$(git rev-parse HEAD)"
+          git ls-tree HEAD -- \
+            m3/core/src/com/m3/text/M3WordRows.java \
+            m3/core/src/com/m3/text/M3WordRowsNative.java \
+            m3/core/test/M3WordRowsContractTest.java \
+            m3/lexicon/native/m3_wordrows_jni.c \
+            m3/lexicon/run-wordrows-proof.sh
+          log="$RUNNER_TEMP/m3-wordrows-contract.log"
+          sha256sum \
+            m3/core/src/com/m3/text/M3WordRows.java \
+            m3/core/src/com/m3/text/M3WordRowsNative.java \
+            m3/core/test/M3WordRowsContractTest.java \
+            m3/lexicon/native/m3_wordrows_jni.c \
+            m3/lexicon/run-wordrows-proof.sh
+          bash m3/lexicon/run-wordrows-proof.sh | tee "$log"
+          test "$(grep -c '^M3_WORDROWS_PASS checks=96 JNI=true imageFormat=3 scope=word-id-arithmetic-no-string-replacement$' "$log")" -eq 4
+          test "$(grep -c '^M3_WORDROWS_FIXTURE_CLEANUP_PASS files=7 childExited=true$' "$log")" -eq 4
       - name: Verify layered source-bound recipes
         run: |
           python3 m3/runtime-integration/char-array-copy/recipe/apply.py --check
