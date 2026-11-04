@@ -32,7 +32,7 @@ Java_com_m3_text_M3WordRowsNative_bulkFlags0(JNIEnv *env, jclass klass,
         fail(env, "java/lang/IllegalArgumentException", "word-row JNI lengths differ");
         return;
     }
-    for (jsize offset = 0; offset < size; offset += 128) {
+    for (jsize offset = 0; offset < size;) {
         jsize take = size - offset < 128 ? size - offset : 128;
         jint input[128];
         jint result[128];
@@ -51,5 +51,6 @@ Java_com_m3_text_M3WordRowsNative_bulkFlags0(JNIEnv *env, jclass klass,
         }
         (*env)->SetIntArrayRegion(env, output, offset, take, result);
         if ((*env)->ExceptionCheck(env)) return;
+        offset += take;
     }
 }
