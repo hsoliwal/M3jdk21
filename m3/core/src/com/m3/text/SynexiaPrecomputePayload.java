@@ -115,7 +115,7 @@ public final class SynexiaPrecomputePayload {
     public String requireString(String name) { return require(name, Kind.STRING).stringValue(); }
 
     public int[] requireIntArray(String name) {
-        long[] values = require(name, Kind.INTEGER_ARRAY).integerArrayValue();
+        long[] values = require(name, Kind.INTEGER_ARRAY).integerArrayValue;
         int[] result = new int[values.length];
         for (int at = 0; at < values.length; at++) {
             if (values[at] < Integer.MIN_VALUE || values[at] > Integer.MAX_VALUE)
