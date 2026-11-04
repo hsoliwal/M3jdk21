@@ -56,10 +56,11 @@ public final class ObjectAdapterConcurrentIdentityTest {
         }
     }
 
-    private static native Object adaptNative(Object receiver, Class<?> requested);
+    private static native Object adaptNative(Object receiver, Class<?> requested, int mode);
 
     public static void main(String[] args) throws Exception {
         System.loadLibrary("ObjectAdapterConcurrentIdentityTest");
+        nativeInvocationForms();
         coldCreationRace();
 
         Object[] sources = new Object[EQUAL_RECEIVERS + 3];
@@ -98,16 +99,16 @@ public final class ObjectAdapterConcurrentIdentityTest {
                             M3Object owner = retained[slot];
                             if (source.toAdapter(M3Object.class) != owner
                                     || M3Object.of(source) != owner
-                                    || adaptNative(source, M3Object.class) != owner) {
+                                    || adaptNative(source, M3Object.class, workerIndex % 3) != owner) {
                                 throw new AssertionError("capability split at slot " + slot);
                             }
                             if (owner.source() != source
                                     || source.toAdapter(Object.class) != source
-                                    || adaptNative(source, Object.class) != source) {
+                                    || adaptNative(source, Object.class, workerIndex % 3) != source) {
                                 throw new AssertionError("receiver identity at slot " + slot);
                             }
                             if (source.toAdapter(Runnable.class) != null
-                                    || adaptNative(source, Runnable.class) != null) {
+                                    || adaptNative(source, Runnable.class, workerIndex % 3) != null) {
                                 throw new AssertionError("unsupported request at slot " + slot);
                             }
                             verified++;
@@ -167,7 +168,7 @@ public final class ObjectAdapterConcurrentIdentityTest {
                         Object source = sources[slot];
                         M3Object owner = (workerIndex & 1) == 0
                                 ? source.toAdapter(M3Object.class)
-                                : M3Object.class.cast(adaptNative(source, M3Object.class));
+                                : M3Object.class.cast(adaptNative(source, M3Object.class, (workerIndex / 2) % 3));
                         received[workerIndex][slot] = owner;
                         phase.await(30, TimeUnit.SECONDS);
                     }
@@ -199,6 +200,32 @@ public final class ObjectAdapterConcurrentIdentityTest {
                 check(received[0][slot - 1] != canonical,
                         "distinct cold sources share capability at " + slot);
             }
+        }
+    }
+
+    /** Validate all three virtual JNI forms and their Java exception contracts. */
+    private static void nativeInvocationForms() {
+        Object source = new Object();
+        M3Object retained = source.toAdapter(M3Object.class);
+        for (int mode = 0; mode < 3; mode++) {
+            check(adaptNative(source, Object.class, mode) == source,
+                    "native mode identity " + mode);
+            check(adaptNative(source, M3Object.class, mode) == retained,
+                    "native mode capability identity " + mode);
+            check(adaptNative(source, Runnable.class, mode) == null,
+                    "native mode unsupported request " + mode);
+            try {
+                adaptNative(source, null, mode);
+                throw new AssertionError("native mode accepted null class " + mode);
+            } catch (NullPointerException expected) {
+                // The original Java exception is retained across the JNI call.
+            }
+        }
+        try {
+            adaptNative(source, Object.class, 3);
+            throw new AssertionError("native fixture accepted unknown mode");
+        } catch (IllegalArgumentException expected) {
+            // The native fixture must fail closed on an unknown selector.
         }
     }
 
