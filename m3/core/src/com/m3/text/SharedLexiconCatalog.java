@@ -236,6 +236,7 @@ public final class SharedLexiconCatalog {
         try {
             if (closed) return;
             closed = true;
+            payloads.clear();
             relatedLexemes.ifPresent(SharedRelatedLexemeCatalog::close);
             for (ShardSlot shard : shards) {
                 synchronized (shard) { shard.image = null; }
@@ -347,6 +348,8 @@ public final class SharedLexiconCatalog {
             SourceMapping mapping = mappingsByIdentity.get(identity);
             if (mapping == null) return Optional.empty();
             imageAt(mapping.coordinate().shardId());
+            SynexiaPrecomputePayload cached = payloads.get(identity);
+            if (cached != null) return Optional.of(cached);
             return Optional.of(payloads.computeIfAbsent(identity,
                     ignored -> SynexiaPrecomputePayload.parse(mapping.precomputePayload())));
         } finally { lifecycle.readLock().unlock(); }
