@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HexFormat;
 import java.util.List;
@@ -53,10 +54,11 @@ public final class SharedLexiconCatalog {
     private final List<String> files;
     private final List<String> firstLexemes;
     private final List<String> lastLexemes;
-    private final Map<Coordinate, List<SourceMapping>> mappings;
-    private final Map<SourceIdentity, SourceMapping> mappingsByIdentity;
+    private final List<SourceMapping>[] mappingRows;
+    private final int[] rowOffsets;
+    private final SourceMapping[] mappingsByIdentity;
     private final Map<SourceIdentity, SynexiaPrecomputePayload> payloads = new ConcurrentHashMap<>();
-    private final Map<Coordinate, PrecomputeFacts> precompute;
+    private final PrecomputeFacts[] precomputeRows;
     private final List<PrecomputeProfile> precomputeProfiles;
     private final Optional<SharedLexiconFamilySidecarCatalog> familyPrecompute;
     private final Optional<SharedRelatedLexemeCatalog> relatedLexemes;
@@ -76,14 +78,13 @@ public final class SharedLexiconCatalog {
         this.files = List.copyOf(files);
         this.firstLexemes = List.copyOf(firstLexemes);
         this.lastLexemes = List.copyOf(lastLexemes);
-        Map<Coordinate, List<SourceMapping>> mappingCopy = new HashMap<>();
-        mappings.forEach((coordinate, values) -> mappingCopy.put(coordinate, List.copyOf(values)));
-        this.mappings = Map.copyOf(mappingCopy);
-        Map<SourceIdentity, SourceMapping> identityCopy = new HashMap<>();
-        this.mappings.values().forEach(values -> values.forEach(mapping ->
-                identityCopy.put(new SourceIdentity(mapping.sourceId(), mapping.recordId()), mapping)));
-        this.mappingsByIdentity = Map.copyOf(identityCopy);
-        this.precompute = Map.copyOf(precompute);
+        this.rowOffsets = rowOffsets(shards);
+        this.mappingRows = mappingRows(rowOffsets, mappings);
+        this.precomputeRows = precomputeRows(rowOffsets, precompute);
+        this.mappingsByIdentity = identityIndex(mappingRows);
+
+
+
         this.precomputeProfiles = List.copyOf(precomputeProfiles);
         this.familyPrecompute = Objects.requireNonNull(familyPrecompute);
         this.relatedLexemes = Objects.requireNonNull(relatedLexemes);
@@ -167,7 +168,7 @@ public final class SharedLexiconCatalog {
             ensureOpen();
             requireCoordinate(coordinate);
             imageAt(coordinate.shardId());
-            return mappings.get(coordinate);
+            return mappingRows[rowIndex(coordinate)];
         } finally { lifecycle.readLock().unlock(); }
     }
     /** Returns the preserved mapping for one exact Synexia source identity. */
@@ -177,7 +178,7 @@ public final class SharedLexiconCatalog {
             ensureOpen();
             Objects.requireNonNull(sourceId);
             Objects.requireNonNull(recordId);
-            SourceMapping mapping = mappingsByIdentity.get(new SourceIdentity(sourceId, recordId));
+            SourceMapping mapping = identityMapping(sourceId, recordId);
             if (mapping == null) return Optional.empty();
             imageAt(mapping.coordinate().shardId());
             return Optional.of(mapping);
@@ -194,7 +195,7 @@ public final class SharedLexiconCatalog {
             ensureOpen();
             requireCoordinate(coordinate);
             imageAt(coordinate.shardId());
-            return precompute.get(coordinate);
+            return precomputeRows[rowIndex(coordinate)];
         } finally { lifecycle.readLock().unlock(); }
     }
     public List<PrecomputeProfile> precomputeProfiles() {
@@ -275,8 +276,12 @@ public final class SharedLexiconCatalog {
             ensureOpen();
             if (value == null || value.isEmpty()) throw new IllegalArgumentException("prefix required");
             if (limit < 1 || limit > 100_000) throw new IllegalArgumentException("limit must be 1..100000");
+            int firstShard = Collections.binarySearch(lastLexemes, value);
+            if (firstShard < 0) firstShard = -firstShard - 1;
             ArrayList<Coordinate> result = new ArrayList<>(Math.min(limit, 16));
-            for (int shard = 0; shard < shards.size() && result.size() < limit; shard++) {
+            for (int shard = firstShard; shard < shards.size() && result.size() < limit; shard++) {
+                String first = firstLexemes.get(shard);
+                if (first.compareTo(value) > 0 && !first.startsWith(value)) break;
                 SharedLexiconImage image = imageAt(shard);
                 for (int row = image.lowerBound(value);
                      row < image.size() && result.size() < limit && image.startsWith(row, value); row++) {
@@ -344,7 +349,7 @@ public final class SharedLexiconCatalog {
             Objects.requireNonNull(sourceId);
             Objects.requireNonNull(recordId);
             SourceIdentity identity = new SourceIdentity(sourceId, recordId);
-            SourceMapping mapping = mappingsByIdentity.get(identity);
+            SourceMapping mapping = identityMapping(sourceId, recordId);
             if (mapping == null) return Optional.empty();
             imageAt(mapping.coordinate().shardId());
             return Optional.of(payloads.computeIfAbsent(identity,
@@ -353,24 +358,24 @@ public final class SharedLexiconCatalog {
     }
 
     private void validateShardSidecars(int shardId, SharedLexiconImage image) throws IOException {
-        for (Map.Entry<Coordinate, List<SourceMapping>> entry : mappings.entrySet()) {
-            Coordinate coordinate = entry.getKey();
-            if (coordinate.shardId() != shardId) continue;
-            String text = image.recordText(coordinate.imageRow());
-            for (SourceMapping mapping : entry.getValue()) {
+        int first = rowOffsets == null ? 0 : rowOffsets[shardId];
+        for (int row = 0; row < image.size(); row++) {
+            String text = image.recordText(row);
+            for (SourceMapping mapping : mappingRows[first + row]) {
                 if (!mapping.lexeme().equals(text))
                     throw new IOException("mapping lexeme does not match image coordinate");
             }
         }
-        for (Map.Entry<Coordinate, PrecomputeFacts> entry : precompute.entrySet()) {
-            Coordinate coordinate = entry.getKey();
-            if (coordinate.shardId() != shardId) continue;
-            String text = image.recordText(coordinate.imageRow());
-            PrecomputeFacts facts = entry.getValue();
+        // Preserve complete mapping validation before any precompute text checks.
+        for (int row = 0; row < image.size(); row++) {
+            String text = image.recordText(row);
+            PrecomputeFacts facts = precomputeRows[first + row];
             if (facts.utf16Units() != text.length()
                     || facts.javaHash() != Integer.toUnsignedLong(javaHash(text)))
                 throw new IOException("precompute text facts do not match image");
         }
+
+
     }
 
     /**
@@ -385,7 +390,7 @@ public final class SharedLexiconCatalog {
             ensureOpen();
             Objects.requireNonNull(sourceId);
             Objects.requireNonNull(recordId);
-            SourceMapping mapping = mappingsByIdentity.get(new SourceIdentity(sourceId, recordId));
+            SourceMapping mapping = identityMapping(sourceId, recordId);
             if (mapping == null || !"dictlang.si-units".equals(mapping.sourceId())) return Optional.empty();
             imageAt(mapping.coordinate().shardId());
             SynexiaPrecomputePayload payload = payloads.computeIfAbsent(
@@ -780,5 +785,89 @@ public final class SharedLexiconCatalog {
     private static IOException malformed(int lineNumber, String detail) {
         return new IOException("invalid synexia.shards.tsv line " + (lineNumber + 1) + ": " + detail);
     }
+    /** Precomputes offsets within the fully admitted finite coordinate domain. */
+    private static int[] rowOffsets(List<ShardSlot> shards) {
+        if (shards.size() == 1) return null;
+        int[] offsets = new int[shards.size()];
+        int first = 0;
+        for (int shard = 0; shard < offsets.length; shard++) {
+            offsets[shard] = first;
+            first = Math.addExact(first, shards.get(shard).expectedRecords);
+        }
+        return offsets;
+    }
+
+    /** Retains only immutable row-list values, without a Coordinate hash table. */
+    @SuppressWarnings("unchecked")
+    private static List<SourceMapping>[] mappingRows(
+            int[] offsets, Map<Coordinate, List<SourceMapping>> admitted) {
+        List<SourceMapping>[] rows = (List<SourceMapping>[]) new List<?>[admitted.size()];
+        admitted.forEach((coordinate, values) -> rows[(offsets == null ? 0
+                : offsets[coordinate.shardId()]) + coordinate.imageRow()] = List.copyOf(values));
+        return rows;
+    }
+
+    /** Retains the existing facts object at its validated flat physical position. */
+    private static PrecomputeFacts[] precomputeRows(
+            int[] offsets, Map<Coordinate, PrecomputeFacts> admitted) {
+        PrecomputeFacts[] rows = new PrecomputeFacts[admitted.size()];
+        admitted.forEach((coordinate, facts) -> rows[(offsets == null ? 0
+                : offsets[coordinate.shardId()]) + coordinate.imageRow()] = facts);
+        return rows;
+    }
+
+    private int rowIndex(Coordinate coordinate) {
+        return (rowOffsets == null ? 0 : rowOffsets[coordinate.shardId()]) + coordinate.imageRow();
+    }
+
+    /** Retains admitted mapping objects directly, without per-identity key wrappers. */
+    private static SourceMapping[] identityIndex(List<SourceMapping>[] rows) {
+        int count = 0;
+        for (List<SourceMapping> values : rows) count = Math.addExact(count, values.size());
+        SourceMapping[] index = new SourceMapping[Math.multiplyExact(count, 2)];
+        for (List<SourceMapping> values : rows) for (SourceMapping mapping : values) {
+            int slot = identitySlot(mapping.sourceId(), mapping.recordId(), index.length);
+            while (index[slot] != null
+                    && !(Objects.equals(mapping.sourceId(), index[slot].sourceId())
+                    && Objects.equals(mapping.recordId(), index[slot].recordId()))) {
+                if (++slot == index.length) slot = 0;
+            }
+            index[slot] = mapping;
+        }
+        return index;
+    }
+
+    private SourceMapping identityMapping(String sourceId, String recordId) {
+        SourceMapping[] index = mappingsByIdentity;
+        if (index.length == 0) return null;
+        // A singleton has no competing slot: compare before hashing caller text.
+        if (index.length == 2) {
+            SourceMapping only = index[0] != null ? index[0] : index[1];
+            return sourceId.equals(only.sourceId()) && recordId.equals(only.recordId())
+                    ? only : null;
+        }
+        int slot = identitySlot(sourceId, recordId, index.length);
+        SourceMapping mapping;
+        while ((mapping = index[slot]) != null) {
+            if (sourceId.equals(mapping.sourceId()) && recordId.equals(mapping.recordId()))
+                return mapping;
+            if (++slot == index.length) slot = 0;
+        }
+        return null;
+    }
+
+    /**
+     * Mixing adapted from fastutil HashCommon.mix(int), Apache-2.0.
+     * Copyright (C) 2002-2026 Sebastiano Vigna.
+     * Donor: vigna/fastutil@e70f36a137c349efa50f346818d16917a9f91986,
+     * src/it/unimi/dsi/fastutil/HashCommon.java (mix/INT_PHI).
+     * Modulo retains the incumbent half-full domain without power-of-two padding.
+     */
+    private static int identitySlot(String sourceId, String recordId, int length) {
+        int hash = 31 * Objects.hashCode(sourceId) + Objects.hashCode(recordId);
+        int mixed = hash * 0x9E3779B9;
+        return Math.floorMod(mixed ^ (mixed >>> 16), length);
+    }
+
 }
 
