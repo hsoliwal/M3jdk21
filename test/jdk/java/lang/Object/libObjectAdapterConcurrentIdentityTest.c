@@ -15,14 +15,30 @@
  */
 
 #include <jni.h>
+#include <stdarg.h>
 
-/* One JNI virtual call; method and temporary class reference are thread-local. */
+enum { CALL_OBJECT = 0, CALL_OBJECT_A = 1, CALL_OBJECT_V = 2 };
+
+static jobject call_adapter_v(JNIEnv *env, jobject receiver, jmethodID method, ...)
+{
+    va_list arguments;
+    jobject result;
+
+    va_start(arguments, method);
+    result = (*env)->CallObjectMethodV(env, receiver, method, arguments);
+    va_end(arguments);
+    return result;
+}
+
+/* Each JNI thread resolves the original virtual method with local refs only. */
 JNIEXPORT jobject JNICALL
 Java_ObjectAdapterConcurrentIdentityTest_adaptNative(JNIEnv *env, jclass test_class,
-                                                     jobject receiver, jclass requested)
+                                                     jobject receiver, jclass requested,
+                                                     jint mode)
 {
     jclass object_class;
     jmethodID method;
+    jvalue arguments[1];
 
     (void)test_class;
     object_class = (*env)->FindClass(env, "java/lang/Object");
@@ -35,6 +51,21 @@ Java_ObjectAdapterConcurrentIdentityTest_adaptNative(JNIEnv *env, jclass test_cl
     if (method == NULL) {
         return NULL;
     }
-    /* JNI virtual dispatch and any pending exception belong to the VM. */
-    return (*env)->CallObjectMethod(env, receiver, method, requested);
+    switch (mode) {
+        case CALL_OBJECT:
+            return (*env)->CallObjectMethod(env, receiver, method, requested);
+        case CALL_OBJECT_A:
+            arguments[0].l = requested;
+            return (*env)->CallObjectMethodA(env, receiver, method, arguments);
+        case CALL_OBJECT_V:
+            return call_adapter_v(env, receiver, method, requested);
+        default: {
+            jclass invalid = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
+            if (invalid != NULL) {
+                (*env)->ThrowNew(env, invalid, "unknown concurrent adapter JNI mode");
+                (*env)->DeleteLocalRef(env, invalid);
+            }
+            return NULL;
+        }
+    }
 }
