@@ -76,7 +76,7 @@ def main():
     measured = set()
     if os.path.exists(perf_tsv):
         with open(perf_tsv, encoding="utf-8") as f:
-            measured = {r["atom"] for r in csv.DictReader([l for l in f if not l.startswith("#")], delimiter="\t")}
+            measured = {r["atom"] for r in csv.DictReader([l for l in f if not l.startswith("#")], delimiter="\t") if r.get("note") != "FOLDED"}
     texts = {}
     for pkg in ("list", "table", "tree"):
         for name in os.listdir(os.path.join(templates, pkg)):
