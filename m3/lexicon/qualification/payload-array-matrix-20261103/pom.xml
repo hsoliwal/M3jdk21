@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"><modelVersion>4.0.0</modelVersion>
+<groupId>com.m3.lexicon.qualification</groupId><artifactId>payload-array-matrix-20261103</artifactId><version>1</version>
+<properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<m3.receiver.root>${project.basedir}/../../../..</m3.receiver.root><m3.matrix.build.root>${project.basedir}/target</m3.matrix.build.root>
+<m3.baseline.jar></m3.baseline.jar><m3.candidate.jar></m3.candidate.jar></properties>
+<dependencies><dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency></dependencies>
+<build><directory>${m3.matrix.build.root}</directory><plugins>
+<plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version></plugin>
+<plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
+<configuration><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs></configuration></plugin>
+<plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>
+<configuration><failIfNoTests>true</failIfNoTests><forkCount>1</forkCount><argLine>-Xmx384m -XX:-UsePerfData -Djava.io.tmpdir="${project.build.directory}/temp" -Duser.home="${project.build.directory}/home"</argLine>
+<systemPropertyVariables><m3.receiver.root>${m3.receiver.root}</m3.receiver.root><m3.measurement.root>${project.build.directory}/measurement</m3.measurement.root>
+<m3.baseline.jar>${m3.baseline.jar}</m3.baseline.jar><m3.candidate.jar>${m3.candidate.jar}</m3.candidate.jar></systemPropertyVariables>
+</configuration></plugin></plugins></build></project>
