@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
+// Modified 2026-10-30: preserve semantic oracles and test direct navigation-entry getters.
 package com.m3.collections;
 
 import java.lang.reflect.InvocationTargetException;
@@ -97,6 +98,10 @@ public final class M3FirstVisibleAtomContract {
                                 };
                             }
                         };
+                    }
+                    if (result instanceof Map.Entry<?, ?> entry) {
+                        // Direct near-entry access participates in the exception/Error spectrum.
+                        return tracedEntry((Map.Entry<Integer, String>) entry, trace, next);
                     }
                     return result;
                 });

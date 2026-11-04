@@ -1,0 +1,110 @@
+{
+  "schema": "M3_RESULT_ONLY_RECEIVER_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "26f1d4da6b58f7ed01bfb5e309867fecd9be5732",
+  "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/14510",
+  "recipe": "com.synexia.m3.FilteredOracleRepair20261030",
+  "crate": "synexia-openrewrite-recipes/recipe-crates/m3-filtered-oracle-repair-20261029",
+  "dataset": "current",
+  "qualification": "synexia-openrewrite-recipes/recipe-crates/m3-filtered-oracle-repair-20261029/evidence/current-20261030/QUALIFICATION.json",
+  "target_base": "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136",
+  "targets": [
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionContract.java",
+      "before_sha256": "0db4144a8d7f1076717db164ea8b57da20ea7238b3b782a7910171d6c26e1b78",
+      "after_sha256": "9fc253c933d8cf4269f981fddb359afa9b1fa62bb996407e87dc7ce43654eb12",
+      "before_git_blob": "a23f5bdc5bf8d4200e01903cf068921375f6e23a",
+      "after_git_blob": "b0a27684d9548bf3cc61051bcefe5f99e59eeba6"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FirstVisibleAtomContract.java",
+      "before_sha256": "df540487022dd1081aad618406eefe1c0e7fd51bcb482ee1c4a50b3f13f0fb4f",
+      "after_sha256": "87eb2fc0104335ce84a56fdac0b54ff4820b821de99ea71bbd953a3abad38656",
+      "before_git_blob": "ca0a522f153f13c0889f4e09729961f5b2d7d93b",
+      "after_git_blob": "f5b9f7a1a9d213ef8846fc0b8fab064d685cad7b"
+    }
+  ],
+  "sdk": {
+    "current": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "offline": true
+    },
+    "historical_dataset": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "offline": true
+    },
+    "result_count": 2,
+    "receiver_check_before": 2,
+    "receiver_apply": 2,
+    "receiver_fixed_point": 0,
+    "input_binding": "sdk/current/SDK_INPUTS.tsv"
+  },
+  "compiled": {
+    "main_java": 326,
+    "collection_test_java": 466,
+    "warnings_as_errors": true,
+    "source_inventory_entries": 819,
+    "source_inventory_sha256": "8b9001fc118889a5fc6234e242514683c83fb53cc9db60df99d7e2654daf347b"
+  },
+  "junit": {
+    "baseline_focus": {
+      "tests": 11,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "current_family": {
+      "tests": 33,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "array_native": {
+      "tests": 34,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "vm": "Temurin 21.0.8+9, Linux x86_64, -Xcheck:jni"
+    }
+  },
+  "first_visible": {
+    "normal": 64,
+    "before_fault_probes": 952,
+    "after_fault_probes": 1060,
+    "new_fault_probes": 108,
+    "transcript_sha256": "b7eb24b2f8232833a7687d1035887a7808aa520d510d32f1abc2fc04732bde22",
+    "digest_role": "DIAGNOSTIC_ONLY; independent result, identity, predicate-prefix and throwable checks remain authoritative"
+  },
+  "controls": [
+    {
+      "name": "swallow-direct-getter",
+      "baseline_test_exit": 0,
+      "enhanced_test_exit": 1,
+      "result": "new coverage rejects formerly invisible defect"
+    },
+    {
+      "name": "swallow-set-range",
+      "enhanced_test_exit": 1,
+      "result": "reachable factory-failure assertion rejects swallowed failure"
+    }
+  ],
+  "production_source_changed": false,
+  "native_source_changed": false,
+  "admission": "SCOPED_TEST_CORRECTION; DRAFT; NO_PRODUCT_PHASE_ADVANCE",
+  "remaining": {
+    "full_source_built_M3JDK21": "NOT_RUN",
+    "jtreg": "NOT_RUN",
+    "full_reactor": "NOT_RUN",
+    "cross_platform": "NOT_RUN",
+    "performance": "NOT_MEASURED",
+    "collections_other_native_libraries": "NOT_RUN; family output explicitly includes actualJNI=false for path-mask check",
+    "name_contract": "BASELINE_REFUSAL: companion relation source hash drift at src/java.base/share/classes/java/util/Arrays.java; not modified here",
+    "all_dependencies_source_built_offline": "NOT_ESTABLISHED; pinned host toolchain and binary Maven/JUnit artifacts provisioned; actual SDK replays executed offline"
+  }
+}
