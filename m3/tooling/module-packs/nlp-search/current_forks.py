@@ -41,17 +41,17 @@ def write_json(path, value):
 
 
 _RECEIVER_LOCK_SHA256 = "68ac22eb0dd7e609297517b75c6670242afe51e723c456eb251eb1e7017053cf"
-_RECEIVER_TRANSITION_PATH = "m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V5.json"
+_RECEIVER_TRANSITION_PATH = "m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V5.json"
 _RECEIVER_TRANSITION_SHA256 = "4e00d68a96907e23b10670c32ca76bdae5b9bc7f1b6d27cdf323f17b6a1fd178"
-_RECEIVER_TRANSITION_V6_PATH = "m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V6.json"
+_RECEIVER_TRANSITION_V6_PATH = "m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V6.json"
 _RECEIVER_TRANSITION_V6_SHA256 = "25c475dc211870634a0a156ddd02ce3db78a492997019ecdf01c599db9b296b4"
-_RECEIVER_TRANSITION_V7_PATH = "m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V7.json"
+_RECEIVER_TRANSITION_V7_PATH = "m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V7.json"
 _RECEIVER_TRANSITION_V7_SHA256 = "e3f7f6c569d701f2c663c1ca34dcf2d8d5330ecbe8e2e8ddf61764975f636b5e"
-_RECEIVER_TRANSITION_V8_PATH = "m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V8.json"
+_RECEIVER_TRANSITION_V8_PATH = "m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V8.json"
 _RECEIVER_TRANSITION_V8_SHA256 = "5abff0ff5462a74439ceb13610913417ca5a1b2c4c8ddf0ba9d26a2428f1237d"
-_RECEIVER_TRANSITION_V9_PATH = "m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V9.json"
+_RECEIVER_TRANSITION_V9_PATH = "m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V9.json"
 _RECEIVER_TRANSITION_V9_SHA256 = "8b9033adaea873f6253558db142e6823762913da1899b714f019eaf6816e99d3"
-_RECEIVER_TRANSITION_V10_PATH = "m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V10.json"
+_RECEIVER_TRANSITION_V10_PATH = "m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V10.json"
 _RECEIVER_TRANSITION_V10_SHA256 = "178b7c3a0e120b0d5ea00eaf5b1724227e5261f73fe3677e4686b1d2d2b2ac6a"
 _RECEIVER_SUCCESSORS = frozenset(
     "m3/core/src/com/m3/text/" + name for name in (

@@ -130,7 +130,7 @@ class ReceiverAdmissionTest(unittest.TestCase):
             changes = {r["path"]: r for r in document["files"] if r["path"] in successors}
             if set(changes) != successors or len(document["files"]) != (9 if version >= 8 else 8):
                 raise ValueError("complete four-source declaration required")
-            catalog = (fixtures / ("receiver-v%d" % (7 if 8 <= version <= 9 else version))
+            catalog = (fixtures / "receiver-history" / changes[cls.catalog_name]["after"]["gitBlob"]
                        / "SharedLexiconCatalog.java.txt").read_bytes()
             if cls._identity(catalog) != changes[cls.catalog_name]["after"]:
                 raise ValueError("unsealed catalog fixture: V%d" % version)
@@ -145,7 +145,8 @@ class ReceiverAdmissionTest(unittest.TestCase):
         cls.payloads = {}
         for version in (8, 9):
             payload_row = cls.transitions[version]["changes"][cls.payload_name]
-            payload = (fixtures / ("receiver-v%d" % version) / "SynexiaPrecomputePayload.java.txt").read_bytes()
+            payload = (fixtures / "receiver-history" / payload_row["after"]["gitBlob"]
+                       / "SynexiaPrecomputePayload.java.txt").read_bytes()
             if (cls._identity(cls.payload_before) != payload_row["before"]
                     or cls._identity(payload) != payload_row["after"]):
                 raise ValueError("unsealed payload fixture: V%d" % version)

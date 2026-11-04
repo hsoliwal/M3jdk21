@@ -24,15 +24,15 @@ def main():
     transition=None;receiver_transitions=[]
     if a.declared_transition is not None:
         v1='m3/tooling/joined-range-directory/current-module/COMPOSITION_BINDING.json'
-        v2='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V2.json'
-        v3='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V3.json'
-        v4='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V4.json'
-        v5='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V5.json'
-        v6='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V6.json'
-        v7='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V7.json'
-        v8='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V8.json'
-        v9='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V9.json'
-        v10='m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V10.json'
+        v2='m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V2.json'
+        v3='m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V3.json'
+        v4='m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V4.json'
+        v5='m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V5.json'
+        v6='m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V6.json'
+        v7='m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V7.json'
+        v8='m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V8.json'
+        v9='m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V9.json'
+        v10='m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V10.json'
         allowed={v1:'a468d927182781321b67c0a9f75f670ccf2d2215983cb7d38e1c59f0666ce432',
                  v2:'a7a41800bfd69e40eb59cc89cb74bb795a59971c5f5f4157edd78e326e7adb1d',
                  v3:'0e47dec693c1db21dff237352ec6b4c3dec40286944ef9de85934239db3580f9',
