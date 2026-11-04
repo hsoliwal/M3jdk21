@@ -33,6 +33,7 @@ def main():
         v8='m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V8.json'
         v9='m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V9.json'
         v10='m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V10.json'
+        v11='m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V11.json'
         allowed={v1:'a468d927182781321b67c0a9f75f670ccf2d2215983cb7d38e1c59f0666ce432',
                  v2:'a7a41800bfd69e40eb59cc89cb74bb795a59971c5f5f4157edd78e326e7adb1d',
                  v3:'0e47dec693c1db21dff237352ec6b4c3dec40286944ef9de85934239db3580f9',
@@ -42,7 +43,8 @@ def main():
                  v7:'e3f7f6c569d701f2c663c1ca34dcf2d8d5330ecbe8e2e8ddf61764975f636b5e',
                  v8:'5abff0ff5462a74439ceb13610913417ca5a1b2c4c8ddf0ba9d26a2428f1237d',
                  v9:'8b9033adaea873f6253558db142e6823762913da1899b714f019eaf6816e99d3',
-                 v10:'178b7c3a0e120b0d5ea00eaf5b1724227e5261f73fe3677e4686b1d2d2b2ac6a'}
+                 v10:'178b7c3a0e120b0d5ea00eaf5b1724227e5261f73fe3677e4686b1d2d2b2ac6a',
+                 v11:'d937901cb78b253a969f25d74f98cb715cc4064241115e0bbf1704aeb1e88f20'}
         matches=[name for name in allowed if a.declared_transition.resolve()==(a.receiver/name).resolve()]
         assert len(matches)==1
         name=matches[0];declared=a.receiver/name
@@ -63,16 +65,16 @@ def main():
             expected_paths={
                 'm3/core/src/com/m3/text/JoinedM3StringPiece.java',
                 'm3/core/test/java/lang/M3CodeTextSignalBatchTest.java'}
-            if name in (v3,v4,v5,v6,v7,v8,v9,v10):expected_paths.update({
+            if name in (v3,v4,v5,v6,v7,v8,v9,v10,v11):expected_paths.update({
                 'm3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java',
                 'm3/core/test/M3LexiconPrecomputeTest.java'})
-            if name in (v4,v5,v6,v7,v8,v9,v10):expected_paths.update({
+            if name in (v4,v5,v6,v7,v8,v9,v10,v11):expected_paths.update({
                 'm3/core/src/com/m3/text/SharedRelatedLexemeCatalog.java',
                 'm3/core/test/SharedLexiconCatalogFamilyAdmissionTest.java'})
-            if name in (v5,v6,v7,v8,v9,v10):expected_paths.update({
+            if name in (v5,v6,v7,v8,v9,v10,v11):expected_paths.update({
                 'm3/core/src/com/m3/text/SharedLexiconCatalog.java',
                 'm3/core/test/FoundationTest.java'})
-            if name in (v8,v9,v10):expected_paths.add('m3/core/src/com/m3/text/SynexiaPrecomputePayload.java')
+            if name in (v8,v9,v10,v11):expected_paths.add('m3/core/src/com/m3/text/SynexiaPrecomputePayload.java')
             assert len(rows)==len(expected_paths) and {r['path'] for r in rows}==expected_paths
         assert all(indexed[p]['sha256']==digest for p,digest in document['custodySha256'].items())
         transition={r['path']:r for r in rows};assert len(transition)==len(rows)
