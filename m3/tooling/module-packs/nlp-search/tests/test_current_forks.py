@@ -122,7 +122,8 @@ class ReceiverAdmissionTest(unittest.TestCase):
                    (9, DRIVER._RECEIVER_TRANSITION_V9_PATH, DRIVER._RECEIVER_TRANSITION_V9_SHA256),
                    (10, DRIVER._RECEIVER_TRANSITION_V10_PATH, DRIVER._RECEIVER_TRANSITION_V10_SHA256),
                    (11, DRIVER._RECEIVER_TRANSITION_V11_PATH, DRIVER._RECEIVER_TRANSITION_V11_SHA256),
-                   (12, DRIVER._RECEIVER_TRANSITION_V12_PATH, DRIVER._RECEIVER_TRANSITION_V12_SHA256))
+                   (12, DRIVER._RECEIVER_TRANSITION_V12_PATH, DRIVER._RECEIVER_TRANSITION_V12_SHA256),
+                   (13, DRIVER._RECEIVER_TRANSITION_V13_PATH, DRIVER._RECEIVER_TRANSITION_V13_SHA256))
         for version, relative, seal in choices:
             declaration = (cls.input_root / relative).read_bytes()
             if cls._identity(declaration)["sha256"] != seal:
@@ -155,6 +156,7 @@ class ReceiverAdmissionTest(unittest.TestCase):
             cls.payloads[version] = payload
         cls.payloads[10] = cls.payloads[9]  # V10 changes the catalog only.
         cls.payloads[12] = cls.payloads[11]  # V12 changes the catalog only.
+        cls.payloads[13] = cls.payloads[12]  # V13 changes the catalog only.
         cls.payload_after = cls.payloads[max(8, cls.version)]
 
         cls.original = {}
@@ -888,6 +890,72 @@ class ReceiverV12AdmissionTest(ReceiverAdmissionTest):
                 path.write_bytes(self.transitions[selected]["raw"])
         finally:
             for version in (11, 12):
+                (self.root / self.transitions[version]["path"]).write_bytes(
+                    self.transitions[version]["raw"])
+
+
+class ReceiverV13AdmissionTest(ReceiverAdmissionTest):
+    """Catalog warm-lookup successor; V12 and V13 share the exact payload."""
+
+    version = 13
+
+    def test_v13_retains_v12_basis_custody_and_payload(self):
+        import json
+        before = json.loads(self.transitions[12]["raw"])
+        after = json.loads(self.transitions[13]["raw"])
+        self.assertEqual(self.transitions[12]["seal"], after["predecessorDeclarationSha256"])
+        self.assertEqual(before["custodySha256"], after["custodySha256"])
+        self.assertEqual(before["frozenProfileSha256"], after["frozenProfileSha256"])
+        self.assertEqual(9, len(after["files"]))
+        changed = []
+        for old, new in zip(before["files"], after["files"], strict=True):
+            self.assertEqual(old["path"], new["path"])
+            self.assertEqual(old["before"], new["before"])
+            if old != new:
+                changed.append(new["path"])
+                self.assertEqual(self._identity(self.catalogs[12]), old["after"])
+                self.assertEqual(self._identity(self.catalogs[13]), new["after"])
+        self.assertEqual([self.catalog_name], changed)
+        self.assertNotEqual(self.catalogs[12], self.catalogs[13])
+        self.assertEqual(self.payloads[12], self.payloads[13])
+        self.assertEqual(self._identity(self.payload_before),
+                         self.changes[self.payload_name]["before"])
+
+    def test_all_named_profiles_discriminate_every_catalog(self):
+        import re
+        catalog = self.root / self.catalog_name
+        payload = self.root / self.payload_name
+        try:
+            for selected in range(5, 14):
+                payload.write_bytes(self.payloads[selected] if selected >= 8 else self.payload_before)
+                expected = self.catalogs[selected]
+                declaration = self.root / self.transitions[selected]["path"]
+                for version, raw in self.catalogs.items():
+                    catalog.write_bytes(raw)
+                    with self.subTest(profile=selected, catalog=version):
+                        if raw == expected:
+                            result = DRIVER._receiver_admission(self.root, declaration)
+                            self.assertEqual(145, len(result["files"]))
+                            self.assertEqual(5 if selected >= 8 else 4, len(result["changes"]))
+                        else:
+                            with self.assertRaisesRegex(ValueError,
+                                    "receiver source drift: " + re.escape(self.catalog_name)):
+                                DRIVER._receiver_admission(self.root, declaration)
+        finally:
+            catalog.write_bytes(self.current[self.catalog_name])
+            payload.write_bytes(self.current[self.payload_name])
+
+    def test_v12_v13_documents_cannot_exchange_names_with_shared_payload(self):
+        try:
+            for selected, wrong in ((12, 13), (13, 12)):
+                path = self.root / self.transitions[selected]["path"]
+                path.write_bytes(self.transitions[wrong]["raw"])
+                with self.assertRaisesRegex(ValueError,
+                                             "receiver transition or original lock seal differs"):
+                    DRIVER._receiver_admission(self.root, path)
+                path.write_bytes(self.transitions[selected]["raw"])
+        finally:
+            for version in (12, 13):
                 (self.root / self.transitions[version]["path"]).write_bytes(
                     self.transitions[version]["raw"])
 
