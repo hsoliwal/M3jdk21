@@ -24,6 +24,76 @@ import java.util.regex.Pattern;
 public final class CsvTools {
     private CsvTools() { }
 
+    private static final int SCAN_UNITS = 256;
+    private static final EscapeIndex NO_ESCAPES = new EscapeIndex(0);
+
+    /** One append-only primitive lane while parsing; frozen before any table escapes. */
+    private static final class EscapeIndex {
+        private int[] positions = new int[0];
+        private int size;
+        private final int maximum;
+
+        private EscapeIndex(int maximum) { this.maximum = maximum; }
+
+        private void add(int decodedPosition) {
+            if (size == positions.length) {
+                int capacity = (int) Math.min(maximum,
+                        Math.max(4L, (long) positions.length * 2L));
+                positions = Arrays.copyOf(positions, capacity);
+            }
+            positions[size++] = decodedPosition;
+        }
+
+        private void freeze() {
+            if (positions.length != size) positions = Arrays.copyOf(positions, size);
+        }
+    }
+
+    /** Bounded structural metadata; no retained copy of the String payload. */
+    private static final class StructuralCursor {
+        private final String input;
+        private final char delimiter;
+        private final int[] positions = new int[SCAN_UNITS];
+        private int count;
+        private int next;
+        private int scanned;
+
+        private StructuralCursor(String input, char delimiter) {
+            this.input = input;
+            this.delimiter = delimiter;
+        }
+
+        private int next(int from, boolean quoteOnly) {
+            while (true) {
+                while (next < count && positions[next] < from) next++;
+                while (next < count) {
+                    int position = positions[next];
+                    if (!quoteOnly || input.charAt(position) == '"') return position;
+                    next++;
+                }
+                if (scanned == input.length()) return scanned;
+                int start = Math.max(from, scanned);
+                int units = Math.min(SCAN_UNITS, input.length() - start);
+                count = fill(input, start, units, delimiter, positions);
+                scanned = start + units;
+                next = 0;
+            }
+        }
+
+        private static int fill(String input, int from, int units,
+                                char delimiter, int[] positions) {
+            if (NativeLineOps.structuralAvailable())
+                return NativeLineOps.structuralOffsets(input, from, units, delimiter, positions);
+            int count = 0;
+            for (int i = 0; i < units; i++) {
+                char unit = input.charAt(from + i);
+                if (unit == delimiter || unit == '"' || unit == '\r' || unit == '\n')
+                    positions[count++] = from + i;
+            }
+            return count;
+        }
+    }
+
     /** Hard admission budgets; not a JVM heap or CPU timeout guarantee. */
     public record Limits(int maxInputUnits, int maxRows, int maxColumns, int maxFieldUnits) {
         public Limits {
@@ -38,29 +108,34 @@ public final class CsvTools {
         private final CharSequence source;
         private final int start;
         private final int end;
-        private final int[] escapes; // decoded positions of collapsed quote pairs
+        private final EscapeIndex escapes; // shared decoded quote-pair positions
+        private final int escapeStart;
+        private final int escapeCount;
 
-        private Cell(CharSequence source, int start, int end, int[] escapes) {
+        private Cell(CharSequence source, int start, int end, EscapeIndex escapes,
+                     int escapeStart, int escapeCount) {
             this.source = Objects.requireNonNull(source, "source");
             Objects.checkFromToIndex(start, end, source.length());
             this.start = start;
             this.end = end;
             this.escapes = escapes;
+            this.escapeStart = escapeStart;
+            this.escapeCount = escapeCount;
         }
-        @Override public int length() { return end - start - escapes.length; }
+        @Override public int length() { return end - start - escapeCount; }
         @Override public char charAt(int index) {
             Objects.checkIndex(index, length());
-            int low = 0, high = escapes.length;
+            int low = escapeStart, high = escapeStart + escapeCount;
             while (low < high) {
                 int middle = (low + high) >>> 1;
-                if (escapes[middle] < index) low = middle + 1;
+                if (escapes.positions[middle] < index) low = middle + 1;
                 else high = middle;
             }
-            return source.charAt(start + index + low);
+            return source.charAt(start + index + low - escapeStart);
         }
         @Override public CharSequence subSequence(int from, int to) {
             Objects.checkFromToIndex(from, to, length());
-            return new Cell(this, from, to, new int[0]);
+            return new Cell(this, from, to, NO_ESCAPES, 0, 0);
         }
         @Override public String toString() {
             StringBuilder result = new StringBuilder(length());
@@ -89,6 +164,9 @@ public final class CsvTools {
         int length = input.length();
         if (length > limits.maxInputUnits()) throw new IllegalArgumentException("input budget");
         List<Row> rows = new ArrayList<>();
+        EscapeIndex escapes = new EscapeIndex(length >>> 1);
+        StructuralCursor cursor = input instanceof String text
+                ? new StructuralCursor(text, delimiter) : null;
         int at = 0;
         while (at < length) {
             List<Cell> cells = new ArrayList<>();
@@ -98,31 +176,39 @@ public final class CsvTools {
                 Cell cell;
                 if (at < length && input.charAt(at) == '"') {
                     int rawStart = ++at;
-                    int[] offsets = new int[4];
+                    int escapeStart = escapes.size;
                     int used = 0;
                     boolean closed = false;
                     while (at < length) {
+                        if (cursor != null) at = cursor.next(at, true);
+                        if (at == length) break;
                         if (input.charAt(at) != '"') { at++; continue; }
                         if (at + 1 < length && input.charAt(at + 1) == '"') {
-                            if (used == offsets.length) offsets = Arrays.copyOf(offsets, offsets.length * 2);
-                            offsets[used] = at - rawStart - used;
+                            escapes.add(at - rawStart - used);
                             used++;
                             at += 2;
                         } else { closed = true; break; }
                     }
                     if (!closed) throw new IllegalArgumentException("unterminated quoted field");
                     int rawEnd = at++;
-                    cell = new Cell(input, rawStart, rawEnd, Arrays.copyOf(offsets, used));
+                    cell = new Cell(input, rawStart, rawEnd,
+                            used == 0 ? NO_ESCAPES : escapes, escapeStart, used);
                     if (at < length && input.charAt(at) != delimiter
                             && input.charAt(at) != '\r' && input.charAt(at) != '\n')
                         throw new IllegalArgumentException("characters after closing quote");
                 } else {
-                    while (at < length && input.charAt(at) != delimiter
-                            && input.charAt(at) != '\r' && input.charAt(at) != '\n') {
-                        if (input.charAt(at) == '"') throw new IllegalArgumentException("unquoted quote");
-                        at++;
+                    if (cursor != null) {
+                        at = cursor.next(at, false);
+                        if (at < length && input.charAt(at) == '"')
+                            throw new IllegalArgumentException("unquoted quote");
+                    } else {
+                        while (at < length && input.charAt(at) != delimiter
+                                && input.charAt(at) != '\r' && input.charAt(at) != '\n') {
+                            if (input.charAt(at) == '"') throw new IllegalArgumentException("unquoted quote");
+                            at++;
+                        }
                     }
-                    cell = new Cell(input, start, at, new int[0]);
+                    cell = new Cell(input, start, at, NO_ESCAPES, 0, 0);
                 }
                 if (cell.length() > limits.maxFieldUnits()) throw new IllegalArgumentException("field budget");
                 cells.add(cell);
@@ -136,6 +222,7 @@ public final class CsvTools {
                 break;
             }
         }
+        escapes.freeze();
         return new Table(rows);
     }
 

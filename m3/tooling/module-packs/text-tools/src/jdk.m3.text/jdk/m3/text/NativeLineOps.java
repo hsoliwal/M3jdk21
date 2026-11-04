@@ -34,6 +34,30 @@ final class NativeLineOps {
         return mask;
     }
 
+    /** Older installed libraries retain sort/uniq support without this optional symbol. */
+    static boolean structuralAvailable() { return StructuralCapability.AVAILABLE; }
+
+    private static final class StructuralCapability {
+        private static final boolean AVAILABLE = probe();
+
+        private static boolean probe() {
+            if (!LOADED) return false;
+            try {
+                if (structural0("", 0, 0, ',', new int[0]) != 0)
+                    throw new LinkageError("invalid native structural scan capability");
+                return true;
+            } catch (UnsatisfiedLinkError missingOptionalSymbol) {
+                return false;
+            }
+        }
+    }
+
+    /** Fill one caller-owned window; errors after the capability probe propagate. */
+    static int structuralOffsets(String input, int from, int units,
+                                 char delimiter, int[] positions) {
+        return structural0(input, from, units, delimiter, positions);
+    }
+
     private static String[] contents(List<TextLine> lines) {
         String[] strings = new String[lines.size()];
         for (int i = 0; i < strings.length; i++) strings[i] = lines.get(i).content();
@@ -47,11 +71,13 @@ final class NativeLineOps {
             if (Files.isRegularFile(installed)) System.load(installed.toAbsolutePath().toString());
             else System.loadLibrary("m3textops");
             return true;
-        } catch (UnsatisfiedLinkError missingOptionalLibrary) {
+        } catch (UnsatisfiedLinkError | SecurityException unavailableOptionalLibrary) {
             return false;
         }
     }
 
+    private static native int structural0(String input, int from, int units,
+                                          char delimiter, int[] positions);
     private static native void sort0(String[] contents, int[] order, boolean reverse);
     private static native void uniq0(String[] contents, long[] keepBits);
 }

@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0
  */
 package jdk.m3.structured;
@@ -154,7 +154,7 @@ public final class StructuredTextTools {
             int split = entry.indexOf('=');
             if (split < 1) throw new IllegalArgumentException("invalid .env assignment");
             String key = entry.substring(0, split).strip();
-            if (!key.matches("[A-Za-z_][A-Za-z0-9_]*")) throw new IllegalArgumentException("invalid .env key");
+            if (!isEnvironmentKey(key)) throw new IllegalArgumentException("invalid .env key");
             String raw = entry.substring(split + 1).strip();
             String value;
             if (raw.startsWith("\"") || raw.startsWith("'")) {
@@ -175,6 +175,17 @@ public final class StructuredTextTools {
             if (values.size() > limits.maxNodes()) throw new IllegalArgumentException(".env key budget");
         }
         return java.util.Collections.unmodifiableMap(values);
+    }
+
+    /** Exact ASCII name grammar; avoids compiling the same regex for every assignment. */
+    private static boolean isEnvironmentKey(String key) {
+        if (key.isEmpty()) return false;
+        for (int i = 0; i < key.length(); i++) {
+            char c = key.charAt(i);
+            boolean letter = c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z';
+            if (!letter && c != '_' && !(i > 0 && c >= '0' && c <= '9')) return false;
+        }
+        return true;
     }
 
     private static void checkSeparator(char separator) {
