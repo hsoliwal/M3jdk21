@@ -140,7 +140,8 @@ public final class M3LexiconPrecompute {
                 if (count < 0) throw new IllegalArgumentException("negative frequency");
                 if (counts.put(id, count) != null) throw new IllegalArgumentException("duplicate frequency key");
             });
-            this.deleteToTokenIds = immutableArrays(deletes);
+            // Arrays are owned; snapshot the callback-captured map before publication.
+            this.deleteToTokenIds = Collections.unmodifiableNavigableMap(new TreeMap<>(deletes));
             this.frequencies = Collections.unmodifiableNavigableMap(counts);
         }
 
