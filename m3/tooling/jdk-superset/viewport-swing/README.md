@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: Apache-2.0 OR EPL-2.0 -->
 <!-- Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others -->
-# viewport-swing: one JUnit test and one perf measurement per atom of the Swing viewport
+# viewport-swing: per-atom JUnit and scoped performance evidence
 
 Scope: the 281 method and constructor atoms of `sun.swing.list`, `sun.swing.table` and `sun.swing.tree` in
 `java.desktop` (`M3ListMeasure`, `M3ListRows`, `M3PrefixRowOffsets`, `M3RowOffsets`, `M3RowPieces`, `M3SorterLanes`,
@@ -37,3 +37,9 @@ The check tests the generator (one dynamic test per census atom, distinct atom i
 The tests are jtreg-compatible (`@test`, `@modules ...:open`, `@run junit/othervm`); the perf harnesses run under jtreg
 as one-round smoke tests (`-Dperf.rounds=1`). Gates and their results: `GATES.tsv`; corrections of the generators:
 `RECIPE_MEMORY.tsv`; run logs, perf logs and the filtered `-XX:+PrintCompilation` lines: `evidence/`.
+
+## Performance catalogue correction
+
+The retained PERF.tsv has 80 rows: 59 atom rows and 21 references/composites. Eight atom rows explicitly say FOLDED and provide no measurement, leaving 51 nonfolded measured atoms out of 281. TEST_PATTERNS.tsv now marks those eight rows as unmeasured; its other273 rows and all route/oracle/test columns are unchanged. The atom catalogue has14 distinct patterns. Name-based perf PRESENT counts remain separate and unchanged.
+
+GATES.tsv retains its historical rows and appends this CPU-only correction. The existing generator was exercised against frozen public input bytes through an in-memory file adapter; the failing regression was observed before the correction and nine regression checks pass afterward. Benchmarks, Java/JUnit, make and jtreg were not rerun. Canonical hash-pinned recipe and receipts: synexia-openrewrite-recipes/recipe-crates/m3-cpullm-history169-perf-metadata-20261104 in hsoliwal/com.synexia.
