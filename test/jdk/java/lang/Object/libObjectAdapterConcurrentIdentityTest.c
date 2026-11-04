@@ -41,6 +41,14 @@ Java_ObjectAdapterConcurrentIdentityTest_adaptNative(JNIEnv *env, jclass test_cl
     jvalue arguments[1];
 
     (void)test_class;
+    if (receiver == NULL) {
+        jclass null_type = (*env)->FindClass(env, "java/lang/NullPointerException");
+        if (null_type != NULL) {
+            (*env)->ThrowNew(env, null_type, "receiver");
+            (*env)->DeleteLocalRef(env, null_type);
+        }
+        return NULL;
+    }
     object_class = (*env)->FindClass(env, "java/lang/Object");
     if (object_class == NULL) {
         return NULL;
