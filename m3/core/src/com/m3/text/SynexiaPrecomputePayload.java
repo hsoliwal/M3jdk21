@@ -158,7 +158,7 @@ public final class SynexiaPrecomputePayload {
             case STRING -> appendString(out, field.stringValue());
             case INTEGER_ARRAY -> {
                 out.append('[');
-                long[] values = field.integerArrayValue();
+                long[] values = field.integerArrayValue;
                 for (int at = 0; at < values.length; at++) {
                     if (at != 0) out.append(',');
                     out.append(values[at]);
@@ -313,7 +313,7 @@ public final class SynexiaPrecomputePayload {
                 case LONG -> field.kind() == Kind.INTEGER;
                 case STRING -> field.kind() == Kind.STRING;
                 case STRING_OR_LONG -> field.kind() == Kind.STRING || field.kind() == Kind.INTEGER;
-                case INT_ARRAY -> field.kind() == Kind.INTEGER_ARRAY && allInt(field.integerArrayValue());
+                case INT_ARRAY -> field.kind() == Kind.INTEGER_ARRAY && allInt(field.integerArrayValue);
                 case LONG_ARRAY -> field.kind() == Kind.INTEGER_ARRAY;
             };
             if (!valid) throw error("payload type mismatch for " + name);

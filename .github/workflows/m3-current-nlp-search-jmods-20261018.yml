@@ -5,6 +5,8 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-current-nlp-search-jmods-20261018.yml'
+      - '.github/workflows/m3-joined-range-directory.yml'
+      - 'm3/tooling/joined-range-directory/REFERENCE_REPLAY.json'
       - 'm3/core/src/**'
       - 'm3/ports/compiletime/src/main/java/com/m3/compiletime/ast/**'
       - 'm3/vendor/synexia/synexia-mindex/**'
@@ -16,6 +18,7 @@ on:
       - 'm3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V6.json'
       - 'm3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V7.json'
       - 'm3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V8.json'
+      - 'm3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V9.json'
 
 permissions:
   contents: read
@@ -92,7 +95,7 @@ jobs:
         run: |
           python3 m3/tooling/module-packs/nlp-search/current_forks.py \
             --jdk-home "$JAVA_HOME" \
-            --receiver-transition m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V8.json \
+            --receiver-transition m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V9.json \
             --lucene-source donors/lucene \
             --opennlp-source donors/opennlp \
             --recipe-runner m3/vendor/synexia/synexia-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/run_recipe.py \
