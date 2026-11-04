@@ -92,24 +92,31 @@ public final class SharedLexiconImage {
     }
 
     private int javaHash(int index) {
-        ByteBuffer record = recordBytes(index);
+        Objects.checkIndex(index, offsets.length);
+        int begin = payloadOffset + offsets[index] * 2;
         int hash = 0;
-        for (int at = 0; at < record.remaining(); at += 2) {
-            int unit = (record.get(at) & 0xff) | ((record.get(at + 1) & 0xff) << 8);
+        for (int at = 0; at < lengths[index]; at++) {
+            int offset = begin + at * 2;
+            int unit = (mapping.get(offset) & 0xff) | ((mapping.get(offset + 1) & 0xff) << 8);
             hash = 31 * hash + unit;
         }
         return hash;
     }
 
     private int compareRecords(int leftIndex, int rightIndex) {
-        ByteBuffer left = recordBytes(leftIndex), right = recordBytes(rightIndex);
-        int units = Math.min(left.remaining(), right.remaining()) / 2;
+        Objects.checkIndex(leftIndex, offsets.length);
+        Objects.checkIndex(rightIndex, offsets.length);
+        int leftBegin = payloadOffset + offsets[leftIndex] * 2;
+        int rightBegin = payloadOffset + offsets[rightIndex] * 2;
+        int units = Math.min(lengths[leftIndex], lengths[rightIndex]);
         for (int at = 0; at < units; at++) {
-            int leftUnit = (left.get(at * 2) & 0xff) | ((left.get(at * 2 + 1) & 0xff) << 8);
-            int rightUnit = (right.get(at * 2) & 0xff) | ((right.get(at * 2 + 1) & 0xff) << 8);
+            int leftUnit = (mapping.get(leftBegin + at * 2) & 0xff)
+                    | ((mapping.get(leftBegin + at * 2 + 1) & 0xff) << 8);
+            int rightUnit = (mapping.get(rightBegin + at * 2) & 0xff)
+                    | ((mapping.get(rightBegin + at * 2 + 1) & 0xff) << 8);
             if (leftUnit != rightUnit) return Integer.compare(leftUnit, rightUnit);
         }
-        return Integer.compare(left.remaining(), right.remaining());
+        return Integer.compare(lengths[leftIndex], lengths[rightIndex]);
     }
 
     /** Exact UTF-16 text for a record; unpaired surrogates are preserved. */
