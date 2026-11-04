@@ -1,4 +1,5 @@
 /*
+ * Modifications Copyright (c) 2026 Hitesh Soliwal and contributors.
  * Copyright (c) 2008, 2022, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
@@ -461,7 +462,44 @@ Java_sun_nio_fs_WindowsNativeDispatcher_MoveFileEx0(JNIEnv* env, jclass this,
     LPCWSTR lpExistingFileName = jlong_to_ptr(existingAddress);
     LPCWSTR lpNewFileName = jlong_to_ptr(newAddress);
     if (MoveFileExW(lpExistingFileName, lpNewFileName, (DWORD)flags) == 0) {
-        throwWindowsException(env, GetLastError());
+        DWORD error = GetLastError();
+        // Atomic replacement may encounter a live read-only file mapping.
+        // Preserve its handles/views; FileRenameInfoEx changes only the name.
+        // Other flag combinations and original failure codes remain unchanged.
+        if (error == ERROR_ACCESS_DENIED && flags == MOVEFILE_REPLACE_EXISTING) {
+            typedef struct {
+                DWORD flags;
+                HANDLE rootDirectory;
+                DWORD fileNameLength;
+                WCHAR fileName[1];
+            } RenameInfo;
+            size_t length = (size_t)lstrlenW(lpNewFileName);
+            if (length <= (MAXDWORD - sizeof(RenameInfo)) / sizeof(WCHAR) - 1) {
+                size_t bytes = sizeof(RenameInfo) + length * sizeof(WCHAR);
+                RenameInfo* info = calloc(1, bytes);
+                if (info != NULL) {
+                    HANDLE file;
+                    info->flags = 0x00000001 | 0x00000002; // replace + POSIX semantics
+                    info->fileNameLength = (DWORD)(length * sizeof(WCHAR));
+                    // Win32's path conversion also requires the terminating NUL.
+                    memcpy(info->fileName, lpNewFileName, (length + 1) * sizeof(WCHAR));
+                    file = CreateFileW(lpExistingFileName, DELETE,
+                        FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+                        NULL, OPEN_EXISTING, FILE_FLAG_OPEN_REPARSE_POINT, NULL);
+                    if (file != INVALID_HANDLE_VALUE) {
+                        // Value22 is FileRenameInfoEx, including with older SDK headers.
+                        BOOL renamed = SetFileInformationByHandle(file,
+                            (FILE_INFO_BY_HANDLE_CLASS)22, info, (DWORD)bytes);
+                        CloseHandle(file);
+                        free(info);
+                        if (renamed) return;
+                    } else {
+                        free(info);
+                    }
+                }
+            }
+        }
+        throwWindowsException(env, error);
     }
 }
 
