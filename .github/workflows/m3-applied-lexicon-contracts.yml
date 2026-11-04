@@ -1,0 +1,120 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Synexia contributors
+# SPDX-License-Identifier: GPL-2.0-only WITH Classpath-exception-2.0
+# Retains code-text host run commands from m3-code-text-host-receiver.yml.
+name: M3 applied lexicon native and java.base contracts
+on:
+  pull_request:
+    paths:
+      - 'm3/core/**'
+      - 'm3/lexicon/native/**'
+      - 'm3/ports/compiletime/**'
+      - 'm3/verify-fixed-address-jni.py'
+      - 'm3/verify-gvas-literal-precompute.py'
+      - 'src/java.base/share/classes/java/lang/M3CodeText*.java'
+      - 'm3/tooling/joined-range-directory/current-module/**'
+      - '.github/workflows/m3-applied-lexicon-contracts.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: m3-applied-lexicon-contracts-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  missing-contracts:
+    strategy:
+      fail-fast: false
+      matrix:
+        contract: [fixed-address, literal, code-text]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      M3_CONTRACT: ${{ matrix.contract }}
+      M3_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+      EVIDENCE: ${{ github.workspace }}/m3-applied-proof-${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.contract }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /m3/core/
+            /m3/lexicon/native/
+            /m3/ports/compiletime/
+            /m3/verify-fixed-address-jni.py
+            /m3/verify-gvas-literal-precompute.py
+            /m3/tooling/joined-range-directory/current-module/COMPOSITION_BINDING.json
+            /m3/lexicon/synexia-code-text-precompute-field-map.tsv
+            /m3/lexicon/synexia-code-text-target-receiver-receipt-10124.tsv
+            /src/java.base/share/classes/java/lang/M3CodeTextFacts.java
+            /src/java.base/share/classes/java/lang/M3CodeTextSignalBatch.java
+      - name: Verify source identity, capacity and existing Java21 toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e "$EVIDENCE"
+          test "$(df -B1 --output=avail "$GITHUB_WORKSPACE" | tail -1)" -ge 8858370048
+          test "$(du -s -B1 "$GITHUB_WORKSPACE" | cut -f1)" -le 268435456
+          mkdir -p "$EVIDENCE/tmp" "$EVIDENCE/home" "$EVIDENCE/cache"
+          jdk="${JAVA_HOME_21_X64:?A pre-provisioned Java21 toolchain is required}"
+          test -x "$jdk/bin/javac"
+          "$jdk/bin/javac" -J-XX:-UsePerfData -J-Djava.io.tmpdir="$EVIDENCE/tmp" -J-Duser.home="$EVIDENCE/home" -version | grep -E '^javac 21([. ]|$)'
+          printf 'JAVA_HOME=%s\n' "$jdk" >> "$GITHUB_ENV"
+          printf '%s/bin\n' "$jdk" >> "$GITHUB_PATH"
+          printf 'TMPDIR=%s/tmp\nTEMP=%s/tmp\nTMP=%s/tmp\nHOME=%s/home\nXDG_CACHE_HOME=%s/cache\n' "$EVIDENCE" "$EVIDENCE" "$EVIDENCE" "$EVIDENCE" "$EVIDENCE" >> "$GITHUB_ENV"
+          printf 'JAVA_TOOL_OPTIONS=-XX:-UsePerfData -Djava.io.tmpdir=%s/tmp -Duser.home=%s/home\n' "$EVIDENCE" "$EVIDENCE" >> "$GITHUB_ENV"
+          python3 -I -S -B - <<'PY'
+          import hashlib,json,os,pathlib,platform,subprocess
+          root=pathlib.Path(os.environ['GITHUB_WORKSPACE'])
+          head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip()
+          assert head==os.environ['M3_HEAD']
+          raw=(root/'m3/tooling/joined-range-directory/current-module/COMPOSITION_BINDING.json').read_bytes()
+          assert hashlib.sha256(raw).hexdigest()=='a468d927182781321b67c0a9f75f670ccf2d2215983cb7d38e1c59f0666ce432'
+          binding=json.loads(raw)
+          assert hashlib.sha256((root/binding['targetPath']).read_bytes()).hexdigest()==binding['after']['sha256']
+          for path,digest in binding['custodySha256'].items():
+              assert hashlib.sha256((root/path).read_bytes()).hexdigest()==digest
+          record=dict(head=head,contract=os.environ['M3_CONTRACT'],system=platform.system(),machine=platform.machine(),compositionSha256=hashlib.sha256(raw).hexdigest(),nativeOrHostSubset=True,wholeJdk=False)
+          (pathlib.Path(os.environ['EVIDENCE'])/'source.json').write_text(json.dumps(record,indent=2)+'\n')
+          PY
+      - name: Execute unchanged contract owners
+        shell: bash
+        run: |
+          set -euo pipefail
+          case "$M3_CONTRACT" in
+            fixed-address)
+              M3_JDK="$JAVA_HOME" python3 -I -S -B m3/verify-fixed-address-jni.py 2>&1 | tee "$EVIDENCE/contract.log"
+              ;;
+            literal)
+              M3_JDK="$JAVA_HOME" python3 -I -S -B m3/verify-gvas-literal-precompute.py 2>&1 | tee "$EVIDENCE/contract.log"
+              ;;
+            code-text)
+              test ! -e m3/build/m3-code-text-host
+              mkdir -p m3/build/m3-code-text-host
+              javac --release 21 --patch-module java.base=src/java.base -d m3/build/m3-code-text-host \
+                src/java.base/share/classes/java/lang/M3CodeTextFacts.java \
+                src/java.base/share/classes/java/lang/M3CodeTextSignalBatch.java \
+                m3/core/test/java/lang/M3CodeTextFactsReceiverTest.java \
+                m3/core/test/java/lang/M3CodeTextSignalBatchTest.java
+              for mode in jit int nocompact c2; do
+                flags=()
+                case "$mode" in int) flags=(-Xint);; nocompact) flags=(-XX:-CompactStrings);; c2) flags=(-Xbatch -XX:-TieredCompilation);; esac
+                java "${flags[@]}" --patch-module java.base=m3/build/m3-code-text-host -ea java.lang.M3CodeTextFactsReceiverTest
+                java "${flags[@]}" --patch-module java.base=m3/build/m3-code-text-host -ea java.lang.M3CodeTextSignalBatchTest
+              done | tee "$EVIDENCE/contract.log"
+              test "$(wc -l < m3/lexicon/synexia-code-text-precompute-field-map.tsv)" -eq 12
+              grep -F 'M3JDK_CODE_TEXT_PRECOMPUTE_TARGET_RECEIVER_V1' m3/lexicon/synexia-code-text-target-receiver-receipt-10124.tsv
+              ;;
+            *) exit 74 ;;
+          esac
+          test "$(du -s -B1 "$GITHUB_WORKSPACE" | cut -f1)" -le 536870912
+          test "$(df -B1 --output=avail "$GITHUB_WORKSPACE" | tail -1)" -ge 8589934592
+      - name: Retain exact source and contract logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-applied-${{ matrix.contract }}
+          path: |
+            ${{ env.EVIDENCE }}/*.json
+            ${{ env.EVIDENCE }}/*.log
+          if-no-files-found: warn
