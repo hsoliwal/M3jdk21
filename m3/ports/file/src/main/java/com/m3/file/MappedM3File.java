@@ -28,6 +28,27 @@ import java.util.OptionalLong;
  * spellings remain owned by the supplied frozen resolver and are materialized only on request.</p>
  */
 public final class MappedM3File implements AutoCloseable {
+  // Public reflection keeps Java21 preview types out of source/class signatures.
+  // Resolution is once per class, never per token or mapped-byte access.
+  private static final java.lang.reflect.Method SHARED_ARENA;
+  private static final java.lang.reflect.Method SCOPED_MAP;
+  private static final java.lang.reflect.Method SEGMENT_BUFFER;
+  private static final java.lang.ref.Cleaner MAPPING_CLEANER;
+
+  static {
+    try {
+      Class<?> arenaType = Class.forName("java.lang.foreign.Arena");
+      Class<?> segmentType = Class.forName("java.lang.foreign.MemorySegment");
+      SHARED_ARENA = arenaType.getMethod("ofShared");
+      SCOPED_MAP = FileChannel.class.getMethod(
+          "map", FileChannel.MapMode.class, long.class, long.class, arenaType);
+      SEGMENT_BUFFER = segmentType.getMethod("asByteBuffer");
+      MAPPING_CLEANER = java.lang.ref.Cleaner.create();
+    } catch (ReflectiveOperationException unavailable) {
+      throw new ExceptionInInitializerError(unavailable);
+    }
+  }
+
   private final FileChannel channel;
   private final MappedByteBuffer buffer;
   private final M3FileResolver resolver;
@@ -70,13 +91,27 @@ public final class MappedM3File implements AutoCloseable {
     Path source = Objects.requireNonNull(path, "path").toAbsolutePath().normalize();
     M3FileResolver checkedResolver = Objects.requireNonNull(resolver, "resolver");
     FileChannel channel = FileChannel.open(source, StandardOpenOption.READ);
+    AutoCloseable arena = null;
     try {
       long size = channel.size();
       if (size < M3FileImage.HEADER_BYTES || size > Integer.MAX_VALUE) {
         throw new IOException("invalid M3File image length");
       }
-      MappedByteBuffer buffer =
-          channel.map(FileChannel.MapMode.READ_ONLY, 0, size);
+      Object segment;
+      MappedByteBuffer buffer;
+      try {
+        arena = (AutoCloseable) SHARED_ARENA.invoke(null);
+        segment = SCOPED_MAP.invoke(channel, FileChannel.MapMode.READ_ONLY, 0L, size, arena);
+        buffer = (MappedByteBuffer) SEGMENT_BUFFER.invoke(segment);
+      } catch (java.lang.reflect.InvocationTargetException invocation) {
+        Throwable cause = invocation.getCause();
+        if (cause instanceof IOException io) throw io;
+        if (cause instanceof RuntimeException runtime) throw runtime;
+        if (cause instanceof Error error) throw error;
+        throw new IOException("cannot map M3File image", cause);
+      } catch (ReflectiveOperationException inaccessible) {
+        throw new IOException("cannot access public scoped M3File mapping", inaccessible);
+      }
       buffer.order(ByteOrder.BIG_ENDIAN);
       if (buffer.getLong(0) != M3FileImage.MAGIC) {
         throw new IOException("invalid M3File image magic");
@@ -139,7 +174,7 @@ public final class MappedM3File implements AutoCloseable {
         throw new IOException("M3File content fingerprint mismatch");
       }
 
-      return new MappedM3File(
+      MappedM3File mapped = new MappedM3File(
           channel,
           buffer,
           checkedResolver,
@@ -151,8 +186,31 @@ public final class MappedM3File implements AutoCloseable {
           languageCount,
           resolverTokenCount,
           fingerprint);
-    } catch (RuntimeException | IOException failure) {
-      channel.close();
+      // Refer to the segment, not a read-only buffer wrapper: derived buffer
+      // views retain the segment proxy even when they bypass that wrapper.
+      // Cleanup retains only the arena; retaining segment/buffer here leaks it.
+      AutoCloseable ownedArena = arena;
+      MAPPING_CLEANER.register(segment, () -> {
+        try {
+          ownedArena.close();
+        } catch (Exception cleanup) {
+          throw new IllegalStateException("cannot release mapped M3File image", cleanup);
+        }
+      });
+      return mapped;
+    } catch (RuntimeException | IOException | Error failure) {
+      if (arena != null) {
+        try {
+          arena.close();
+        } catch (Exception cleanup) {
+          if (cleanup != failure) failure.addSuppressed(cleanup);
+        }
+      }
+      try {
+        channel.close();
+      } catch (IOException cleanup) {
+        if (cleanup != failure) failure.addSuppressed(cleanup);
+      }
       throw failure;
     }
   }

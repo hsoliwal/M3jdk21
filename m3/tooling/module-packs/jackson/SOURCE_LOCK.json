@@ -45,7 +45,7 @@
   "packaging_owners": [
     {
       "path": "m3/tooling/jmod-recipes/tools/jmod_pack.py",
-      "sha256": "8acdc46eaa0cac0861384d6caf252d1a2f763c80d09b68932177e1dac598bfaf"
+      "sha256": "9ebc4a17e46fa0c3d6d995bf1a22e72b722d17efb1d87889ac8a7a47f89d2bd0"
     },
     {
       "path": "m3/tooling/jmod-recipes/tools/jmod_image.py",

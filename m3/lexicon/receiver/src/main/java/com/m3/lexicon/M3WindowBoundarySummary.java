@@ -33,17 +33,28 @@ public final class M3WindowBoundarySummary {
             throw new IllegalArgumentException("window summary needs a BOUNDARY_BEFORE kind");
         }
         int n = atom.length();
-        int[] types = new int[n];
-        for (int index = 0; index < n; index++) {
-            types[index] = Character.getType(atom.charAt(index));
-        }
+        int edgeLength = Math.min(2, n);
+        int[] head = new int[edgeLength];
+        int[] tail = new int[edgeLength];
+        int tailStart = Math.max(0, n - 2);
         long[] bits = M3BitLanes.lanes(n);
-        for (int j = 1; j <= n - 2; j++) {
-            if (boundary(kind, types[j - 1], types[j], types[j + 1])) {
-                M3BitLanes.set(bits, j);
+        int before = NONE;
+        int at = NONE;
+        for (int index = 0; index < n; index++) {
+            int after = Character.getType(atom.charAt(index));
+            if (index < edgeLength) {
+                head[index] = after;
             }
+            if (index >= tailStart) {
+                tail[index - tailStart] = after;
+            }
+            if (index >= 2 && boundary(kind, before, at, after)) {
+                M3BitLanes.set(bits, index - 1);
+            }
+            before = at;
+            at = after;
         }
-        return new M3WindowBoundarySummary(kind, n, edge(types, 0), edge(types, Math.max(0, n - 2)), bits);
+        return new M3WindowBoundarySummary(kind, n, head, tail, bits);
     }
 
     /** Monoid product: {@code L ++ R}. */
@@ -106,9 +117,4 @@ public final class M3WindowBoundarySummary {
         return new int[] {tail[tail.length - 1], right.tail[0]};
     }
 
-    private static int[] edge(int[] types, int from) {
-        int[] edge = new int[Math.min(2, types.length - from)];
-        System.arraycopy(types, from, edge, 0, edge.length);
-        return edge;
-    }
 }

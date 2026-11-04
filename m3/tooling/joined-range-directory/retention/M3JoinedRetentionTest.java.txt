@@ -1,0 +1,159 @@
+/* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
+import static org.junit.jupiter.api.Assertions.*;
+import com.m3.text.LocalM3Arena;
+import com.m3.text.LocalM3StringPiece;
+import com.m3.text.M3StringPiece;
+import java.lang.ref.Reference;
+import java.lang.ref.ReferenceQueue;
+import java.lang.ref.WeakReference;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+import jdk.test.lib.util.ForceGC;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+
+/** Component reachability witnesses, not a total-heap-size estimate or a GC guarantee. */
+final class M3JoinedRetentionTest {
+    private static volatile M3StringPiece sourceRoot;
+    private static volatile LocalM3StringPiece localRoot;
+    private record Fixture(M3StringPiece view, LocalM3Arena arena,
+                           List<WeakReference<byte[]>> discarded,
+                           WeakReference<byte[]> selected, ReferenceQueue<byte[]> queue) { }
+    @AfterEach void releaseRoots() { sourceRoot = null; localRoot = null; }
+
+    private static byte[] backing(LocalM3StringPiece leaf) throws ReflectiveOperationException {
+        Field field = LocalM3StringPiece.class.getDeclaredField("backing");
+        field.setAccessible(true);
+        return (byte[]) field.get(leaf);
+    }
+    private static Fixture fixture(int count, boolean empty, boolean retainSource) throws Exception {
+        LocalM3Arena arena = new LocalM3Arena();
+        M3StringPiece[] leaves = new M3StringPiece[count];
+        List<WeakReference<byte[]>> discarded = new ArrayList<>();
+        ReferenceQueue<byte[]> queue = new ReferenceQueue<>();
+        WeakReference<byte[]> selected = null;
+        for (int i = 0; i < count; i++) {
+            byte[] payload = new byte[256];
+            payload[255] = (byte)'z';
+            LocalM3StringPiece leaf = arena.copyLatin1(payload);
+            leaves[i] = leaf;
+            if (empty || i != count - 1) discarded.add(new WeakReference<>(backing(leaf), queue));
+            else selected = new WeakReference<>(backing(leaf));
+        }
+        M3StringPiece full = M3StringPiece.join(leaves);
+        M3StringPiece view = empty ? full.subSequence(128, 128)
+                : full.subSequence(full.length() - 1, full.length());
+        if (retainSource) sourceRoot = full;
+        return new Fixture(view, arena, List.copyOf(discarded), selected, queue);
+    }
+    private static boolean cleared(List<WeakReference<byte[]>> references) {
+        return references.stream().allMatch(ref -> ref.refersTo(null));
+    }
+    private static void collected(Fixture f) {
+        int[] enqueued = {0};
+        boolean observed = ForceGC.waitFor(() -> {
+            while (f.queue.poll() != null) enqueued[0]++;
+            return cleared(f.discarded) && enqueued[0] == f.discarded.size();
+        }, 3000);
+        assertTrue(observed, "all discarded owned byte arrays must clear and enqueue");
+        assertEquals(f.discarded.size(), enqueued[0]);
+        Reference.reachabilityFence(f.view);
+        Reference.reachabilityFence(f.arena);
+    }
+    private static void selectedLive(Fixture f) throws Exception {
+        assertEquals(1, f.view.length());
+        assertEquals('z', f.view.charAt(0));
+        assertEquals("z", f.view.flatten());
+        assertFalse(f.selected.refersTo(null), "the selected whole-leaf backing remains live");
+        Field field = f.view.getClass().getDeclaredField("leaves");
+        field.setAccessible(true);
+        LocalM3StringPiece[] leaves = (LocalM3StringPiece[]) field.get(f.view);
+        assertEquals(1, leaves.length);
+        byte[] actual = backing(leaves[0]);
+        assertEquals(256, actual.length);
+        assertTrue(f.selected.refersTo(actual), "returned view must own the exact selected backing");
+
+        Reference.reachabilityFence(f.view);
+    }
+    @Test void discardedLeafBackingsCollectWhileTailViewAndArenaLive() throws Exception {
+        for (int count : new int[]{32, 1024, 8192}) {
+            Fixture f = fixture(count, false, false);
+            selectedLive(f);
+            collected(f);
+            selectedLive(f);
+            System.out.println("M3_JOINED_GC_DROPPED count=" + count + " cleared=" + (count - 1)
+                    + " selectedBackingBytes=256 viewUnits=1");
+            Reference.reachabilityFence(f);
+        }
+    }
+    private static WeakReference<Object> unrooted(ReferenceQueue<Object> queue) {
+        return new WeakReference<>(new Object(), queue);
+    }
+    private static void positiveGc(String label) {
+        ReferenceQueue<Object> queue = new ReferenceQueue<>();
+        WeakReference<Object> witness = unrooted(queue);
+        boolean[] notified = {false};
+        assertTrue(ForceGC.waitFor(() -> {
+            if (queue.poll() == witness) notified[0] = true;
+            return witness.refersTo(null) && notified[0];
+        }, 3000), "GC must complete for an unrooted object while protected roots remain live");
+        System.out.println("M3_JOINED_GC_POSITIVE_CONTROL scenario=" + label);
+        Reference.reachabilityFence(witness);
+    }
+    @Test void liveSourceNegativeControlPreventsCollectionUntilSourceReleased() throws Exception {
+        Fixture f = fixture(64, false, true);
+        positiveGc("source");
+        assertNotNull(sourceRoot);
+        assertFalse(ForceGC.waitFor(() -> cleared(f.discarded), 200),
+                "a live source must prevent the discarded-leaf witness from succeeding");
+        assertTrue(f.discarded.stream().noneMatch(ref -> ref.refersTo(null)));
+        Reference.reachabilityFence(sourceRoot);
+        sourceRoot = null;
+        collected(f);
+        selectedLive(f);
+        System.out.println("M3_JOINED_GC_NEGATIVE_CONTROL rooted=63 released=63");
+        Reference.reachabilityFence(f);
+    }
+    private static WeakReference<byte[]> rootedLocal(ReferenceQueue<byte[]> queue) throws Exception {
+        byte[] payload = new byte[1024 * 1024];
+        payload[7] = (byte)'q';
+        LocalM3StringPiece full = new LocalM3Arena().copyLatin1(payload);
+        localRoot = full.subSequence(7, 8);
+        return new WeakReference<>(backing(full), queue);
+    }
+    private static void verifyLocalAlive(WeakReference<byte[]> reference) throws Exception {
+        assertEquals(1, localRoot.length());
+        assertEquals('q', localRoot.charAt(0));
+        assertEquals(1024 * 1024, localRoot.retainedBackingBytes());
+        assertFalse(reference.refersTo(null));
+        assertTrue(reference.refersTo(backing(localRoot)), "local view must retain the exact original backing");
+        Reference.reachabilityFence(localRoot);
+    }
+    @Test void withinLeafBackingLivesUntilTheTinyViewIsReleased() throws Exception {
+        ReferenceQueue<byte[]> queue = new ReferenceQueue<>();
+        WeakReference<byte[]> reference = rootedLocal(queue);
+        positiveGc("local");
+        assertNotNull(localRoot);
+        assertFalse(ForceGC.waitFor(() -> reference.refersTo(null), 200));
+        verifyLocalAlive(reference);
+        localRoot = null;
+        int[] queued = {0};
+        assertTrue(ForceGC.waitFor(() -> {
+            while (queue.poll() != null) queued[0]++;
+            return reference.refersTo(null) && queued[0] == 1;
+        }, 3000));
+        System.out.println("M3_JOINED_GC_LOCAL backingBytes=1048576 viewUnits=1 releaseCleared=true");
+    }
+    @Test void emptyJoinedViewRetainsNoLeafBacking() throws Exception {
+        for (int count : new int[]{2, 1024}) {
+            Fixture f = fixture(count, true, false);
+            assertEquals(0, f.view.length());
+            assertEquals("", f.view.flatten());
+            collected(f);
+            assertEquals("", f.view.flatten());
+            System.out.println("M3_JOINED_GC_EMPTY count=" + count + " cleared=" + count);
+            Reference.reachabilityFence(f);
+        }
+    }
+}
