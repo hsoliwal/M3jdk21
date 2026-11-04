@@ -11,6 +11,13 @@ final class JoinedM3StringPiece implements M3StringPiece {
     private final int[] ends;
     private final int length;
 
+    /** Takes only freshly created normalized range arrays; caller-owned inputs use the snapshot constructor. */
+    private JoinedM3StringPiece(LocalM3StringPiece[] ownedLeaves, int[] ownedEnds, int ownedLength) {
+        this.leaves = ownedLeaves;
+        this.ends = ownedEnds;
+        this.length = ownedLength;
+    }
+
     JoinedM3StringPiece(M3StringPiece[] input) {
         Objects.requireNonNull(input);
         // Snapshot references: callers can mutate their directory after joining.
@@ -40,23 +47,31 @@ final class JoinedM3StringPiece implements M3StringPiece {
     @Override public int length() { return length; }
     @Override public char charAt(int index) {
         Objects.checkIndex(index, length);
+        int leaf = leafIndex(index);
+        return leaves[leaf].charAt(index - (leaf == 0 ? 0 : ends[leaf - 1]));
+    }
+    @Override public M3StringPiece subSequence(int start, int end) {
+        Objects.checkFromToIndex(start, end, length);
+        if (start == end) return new JoinedM3StringPiece(new LocalM3StringPiece[0], new int[0], 0);
+        int first = leafIndex(start), last = leafIndex(end - 1);
+        LocalM3StringPiece[] ranges = new LocalM3StringPiece[last - first + 1];
+        int[] rangeEnds = new int[ranges.length];
+        for (int i = first; i <= last; i++) {
+            int origin = i == 0 ? 0 : ends[i - 1];
+            int a = Math.max(start, origin), b = Math.min(end, ends[i]);
+            ranges[i - first] = leaves[i].subSequence(a - origin, b - origin);
+            rangeEnds[i - first] = b - start;
+        }
+        return new JoinedM3StringPiece(ranges, rangeEnds, end - start);
+    }
+    /** First nonempty leaf whose cumulative end is greater than a valid code-unit index. */
+    private int leafIndex(int index) {
         int lo = 0, hi = ends.length;
         while (lo < hi) {
             int middle = (lo + hi) >>> 1;
             if (ends[middle] <= index) lo = middle + 1; else hi = middle;
         }
-        return leaves[lo].charAt(index - (lo == 0 ? 0 : ends[lo - 1]));
-    }
-    @Override public M3StringPiece subSequence(int start, int end) {
-        Objects.checkFromToIndex(start, end, length);
-        LocalM3StringPiece[] ranges = new LocalM3StringPiece[leaves.length];
-        int count = 0;
-        for (int i = 0; i < leaves.length; i++) {
-            int origin = i == 0 ? 0 : ends[i - 1];
-            int a = Math.max(start, origin), b = Math.min(end, ends[i]);
-            if (a < b) ranges[count++] = leaves[i].subSequence(a - origin, b - origin);
-        }
-        return new JoinedM3StringPiece(java.util.Arrays.copyOf(ranges, count));
+        return lo;
     }
     @Override public String toString() { return flatten(); }
 }

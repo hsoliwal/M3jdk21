@@ -1,0 +1,380 @@
+{
+  "schema": "M3_JOINED_RANGE_ORIGINAL_BUILD_INPUTS_V1",
+  "repository": "hsoliwal/M3jdk21",
+  "commit": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
+  "files": [
+    {
+      "path": "m3/build.sh",
+      "gitBlob": "5ac0b944e34bf5f226d77541adbcb28e35edcfe5",
+      "bytes": 5412,
+      "sha256": "9119dec83045301a2166d0a1de3b1008dfd431eaf3b5317daa14dc7e41325807"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+      "gitBlob": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
+      "bytes": 2634,
+      "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/LexiconTool.java",
+      "gitBlob": "32ee9e317d9c2a464958b0cfe256b457edb2f295",
+      "bytes": 1093,
+      "sha256": "8f86470619da33cf79ce3f8c6b99e7b6a4815f1c0053c7a07985a6ea4010563a"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/LocalM3Arena.java",
+      "gitBlob": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
+      "bytes": 1975,
+      "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/LocalM3StringPiece.java",
+      "gitBlob": "6b745c9472144ad6de01de4d06a533974e558fb1",
+      "bytes": 2115,
+      "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/M3BigString.java",
+      "gitBlob": "9f66122b2dba2e4e0bc417208f18d0f8a2f95dec",
+      "bytes": 33365,
+      "sha256": "e09815cea88c44e4da89ca8979ba247cddeee6c97b496d1aa2309a48916a90de"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/M3CorpusProjectionDigest.java",
+      "gitBlob": "e47844e6ff6c5751a9b3ddaa0c04cd1b2aca9c97",
+      "bytes": 1320,
+      "sha256": "cf08f71d77d7598c774225d83a38d33e610e3cbceb6c360240f0d08884d5cc8e"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/M3CorpusSourceReceipt.java",
+      "gitBlob": "8cf8e944de19fae9266196b8807c7341694bea0a",
+      "bytes": 1849,
+      "sha256": "d1eed20264582c05671b5833ece9cc975c27d11182c32e7bd3d7c929f8aab9b4"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/M3FixedAddressMapping.java",
+      "gitBlob": "5e02839678dd2d8608e2fef4a6df5aba07401490",
+      "bytes": 6571,
+      "sha256": "704acbd7c0899f6cb4ca47658e0ce0387d8b498ce6ca6d801f02461d2f3a0025"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/M3GvasLiteralImage.java",
+      "gitBlob": "c27d6603b32d9c7f277ed097b70ee8eac174b08b",
+      "bytes": 11215,
+      "sha256": "2c1a8b9cc9870fc5fdf8e6f8ca46af907c503346aaf6d783b74a6498fd3601cd"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/M3InstanceIndexPrecompute.java",
+      "gitBlob": "e6fd8e4fa71c93d62874886135c7bb703141894b",
+      "bytes": 9693,
+      "sha256": "43af63196141d180c1d256b8420c243d99804ee480b430f31d677e57a87a041c"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/M3LanguageCorpusManifest.java",
+      "gitBlob": "6ac38d5ac2b3eb45a4766a77e310b8409107ee03",
+      "bytes": 13840,
+      "sha256": "866fdae0189d1a84bd251fc7686f85d6953088d054fd77561210892ef6ce4c16"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/M3LanguageGrammarSupport.java",
+      "gitBlob": "135a6a0c080603da0f4c095519b7d47315e2b281",
+      "bytes": 1245,
+      "sha256": "32e55e0ddc412cbbdb4c3fe22b659fe9660bed914215c92662ccaf00b189b1c7"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/M3LexiconPrecompute.java",
+      "gitBlob": "edec2ae3a82bde34159abd9a4d1c670ad59f031f",
+      "bytes": 23035,
+      "sha256": "662253bc7936943e97d911b7c15f96032e72fdbd1a9222ba47eba9506a66f490"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/M3NumberSpace.java",
+      "gitBlob": "ccd577c1b1ec62709882d3ef54db8c5d8a19557b",
+      "bytes": 4563,
+      "sha256": "99bc5c5be96dfb4e0db2f5dbc837c568333ffc6853922cee6ba6566130513443"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/M3RopeTextIndex.java",
+      "gitBlob": "b8e29cf9431d00aa3ee5d1c658ec8c7fa8177e03",
+      "bytes": 9740,
+      "sha256": "ff2495c01b8df68a01167e29daa4ea4a6af25650e59c5cc705cc2fdc7cfa0141"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/M3StringPiece.java",
+      "gitBlob": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+      "bytes": 767,
+      "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/M3WordRows.java",
+      "gitBlob": "5215e2771f5ede8cb35dd78275bd85a7cda4a057",
+      "bytes": 17149,
+      "sha256": "df02e863f8f7fffd3f33337ebf62afe701deb66496a0fb621c136d4771ebf631"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/M3WordRowsNative.java",
+      "gitBlob": "75da0de5a7e76e44a310ff6bd153eba39beb1a21",
+      "bytes": 1721,
+      "sha256": "5ef1e0f4ca2fc345ee009589f1bb96d216892556d60e3f19b882d46b544aea36"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/SharedLexiconCatalog.java",
+      "gitBlob": "aa8cf83bbc8349a2ed5a0a7dad818c2d7240f577",
+      "bytes": 40020,
+      "sha256": "8dbd1bd1a100efeb4b3a31a29fcdb083fa01d8037801e746c455f2b9a030b6e7"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/SharedLexiconFamilySidecarCatalog.java",
+      "gitBlob": "e991a6ba84d7074e9bd260cce331d5092e7ad9f5",
+      "bytes": 28182,
+      "sha256": "0482b42cb8029cadbf929c76e46bccb80367668ec119aceac702f5d5c3686a6d"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/SharedLexiconImage.java",
+      "gitBlob": "7d0dd69b3f92bc6e589eed4024d22686020b421c",
+      "bytes": 11400,
+      "sha256": "50527e3afcc418dfc09f0a6f6608e05db70db5ad440dc3f6a67d8099ec2f9837"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java",
+      "gitBlob": "b952a245b2724140904bb666669c2880ce32cd64",
+      "bytes": 11009,
+      "sha256": "8e6156376ea9548971b78bb876dc3968195266f04c17c5b061d7f5e4b52f367d"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/SharedRelatedLexemeCatalog.java",
+      "gitBlob": "182042dfc5115a683449622dcdc6055e916f4e4c",
+      "bytes": 13436,
+      "sha256": "76fbadbc182633ac22c449924335b7636c530cd2a8dc13fb0dc2d56a29afb42c"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/StorageIdentity.java",
+      "gitBlob": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
+      "bytes": 494,
+      "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/SynexiaLangDexSourceEnvelope.java",
+      "gitBlob": "7f9ac5ebfc452aadb869103471e6818339746083",
+      "bytes": 9495,
+      "sha256": "90b81d145a795dae62e57afe850ad7d38704fe4fcfad69614ff4cd598eb0a084"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/SynexiaPrecomputePayload.java",
+      "gitBlob": "682e7f2abd59efd2adf30fb039616c61a16aa029",
+      "bytes": 17908,
+      "sha256": "60eea8ba2ee14fc11e4225d2e53a2facd690c55dc17b47424f36d94c623e0b1d"
+    },
+    {
+      "path": "m3/core/src/module-info.java",
+      "gitBlob": "d4cb6cd055f708d037748251d55876186cc7c5a0",
+      "bytes": 227,
+      "sha256": "2b6c29db60f536419e3755cdf1a83d21388a2e2bd602838d8cebe516f940964c"
+    },
+    {
+      "path": "m3/core/test/com/m3/text/M3BigStringSelfTest.java",
+      "gitBlob": "8819a1632add4eb4dc52a8961168c4b6b7af23d2",
+      "bytes": 8955,
+      "sha256": "5f47db4885a99b1ec7dc95957276d0130f2eab7cba16614907995c722fa6f9a6"
+    },
+    {
+      "path": "m3/core/test/com/m3/text/M3FixedAddressMappingContractTest.java",
+      "gitBlob": "af7feffbde4bf70346cc1ceea88095428d0595ee",
+      "bytes": 3729,
+      "sha256": "1cd03c94cd79c614fe92feb234491b8f2effa8a79ff90145354bb6a4a2b40e26"
+    },
+    {
+      "path": "m3/core/test/com/m3/text/M3GvasLiteralImageContractTest.java",
+      "gitBlob": "d4af3a34e45b58fb6849b1d8ec85d31fdda7b287",
+      "bytes": 7802,
+      "sha256": "9bb67410bda500c43eb58f65c648351fc1ac477328abe84da2537bab823f114d"
+    },
+    {
+      "path": "m3/core/test/FoundationTest.java",
+      "gitBlob": "c722aa61a9bc7953d183e1fac20c0155a19dd2dd",
+      "bytes": 17914,
+      "sha256": "0f8c4e89a3d3228b51095faa29b14e35daba46726e6a3ae89dbd6b1e69652cd0"
+    },
+    {
+      "path": "m3/core/test/java/lang/M3CodeTextFactsReceiverTest.java",
+      "gitBlob": "b5065f8740db735ff1347a7393e6fc2b1bae983c",
+      "bytes": 2614,
+      "sha256": "79ee70e0d0195d9b42adb3defbc6e57239dbb90e0716ebacfaaf0e09401f3f2c"
+    },
+    {
+      "path": "m3/core/test/java/lang/M3CodeTextSignalBatchTest.java",
+      "gitBlob": "5e14e058a744092654cf96bdd99af2e270c381a8",
+      "bytes": 1981,
+      "sha256": "057d559fc6c3010defc51279dc90598c8bdc01bebfa59cabf7e66972a8ff2c43"
+    },
+    {
+      "path": "m3/core/test/LangDexProjectionReceiverTest.java",
+      "gitBlob": "00cb70ca8b2aa93c903b972269ec810f47b34f18",
+      "bytes": 16049,
+      "sha256": "bbaf2dab964572006ce7e22d6d43c61719fbdae78c686141408133ee95e3111d"
+    },
+    {
+      "path": "m3/core/test/LangDexSourceEnvelopeTest.java",
+      "gitBlob": "e23a36f4fb86d93f98ff4e1571bd3f227413563b",
+      "bytes": 6182,
+      "sha256": "afe3ac134cb089c4faeb2d360cbb0fd91c01d00927165869069d903211d46851"
+    },
+    {
+      "path": "m3/core/test/M3DictionaryFrequencyContractTest.java",
+      "gitBlob": "4bbbf21ec4e2ae5587cef0f6b5cd2ae684f7dd61",
+      "bytes": 8973,
+      "sha256": "1e3f2824ffd1bbcc48e453d60d0f989d8858e6fb6be70b958c868bc33ab806c3"
+    },
+    {
+      "path": "m3/core/test/M3InstanceIndexPrecomputeTest.java",
+      "gitBlob": "738e1025367b4aa7ad647691bfd17dfc8d3be5c7",
+      "bytes": 4551,
+      "sha256": "93869ded5c605007ce93d6b80ecc5a26d8efe9affc0be1ed6e01dfed7897ad5d"
+    },
+    {
+      "path": "m3/core/test/M3LanguageCorpusManifestTest.java",
+      "gitBlob": "3c0642143b38066b1958cd4f3cc720774a172197",
+      "bytes": 5958,
+      "sha256": "8bc4ad05d8afb3aee4d54d9dda5a4f413d3ea5678e174b6faf1df8fc6f60d614"
+    },
+    {
+      "path": "m3/core/test/M3LanguageGrammarSupportTest.java",
+      "gitBlob": "316b8822120b42850dde74921a4b34ba2bb0d6cd",
+      "bytes": 2337,
+      "sha256": "be95f39b1c516e0523ec0c9499032f1b01157085be8d979f79cf8cb4fdbed947"
+    },
+    {
+      "path": "m3/core/test/M3LexiconPrecomputeTest.java",
+      "gitBlob": "5b44feced8c7d38d2dc25c3b5dbd27d2d2a0ca6d",
+      "bytes": 12189,
+      "sha256": "fdc8f742adc96d93a6ab3e332c293d7dfdea97b458d9e8442694c8e11e511e7a"
+    },
+    {
+      "path": "m3/core/test/M3NumberSpaceContractTest.java",
+      "gitBlob": "72fc41be172bfe9bb88c28485e1952e6f6325a43",
+      "bytes": 6618,
+      "sha256": "9d247cf996fdbb1bfa33d03355ded5321fcd23c570d66670851d585da3104d23"
+    },
+    {
+      "path": "m3/core/test/M3NumberSpaceExportFixture.java",
+      "gitBlob": "3390bdce6286788395cf92c2a141afc25ac74c39",
+      "bytes": 2885,
+      "sha256": "7e1e0ee02d4eeef31cfa1a518d056e5988c52a93463af0ed21e41af7ef72fa4e"
+    },
+    {
+      "path": "m3/core/test/M3NumberSpaceTest.java",
+      "gitBlob": "11ebbe9c9e96508fb4a5520268d49fe5117c2cf3",
+      "bytes": 2694,
+      "sha256": "60d9cb7b9812701e0dd62d8e181b938d723ea132a4e1aeb213be3127a04ed9ee"
+    },
+    {
+      "path": "m3/core/test/M3RopeTextIndexTest.java",
+      "gitBlob": "cef8b5f91b7dc666627ddf5a5eb1c8a4611ebf73",
+      "bytes": 8903,
+      "sha256": "1374a5b14a32a58324f50f980731a94e5e938235fbfdf27c2e679f0ea1681c92"
+    },
+    {
+      "path": "m3/core/test/M3TranslationReceiverMapTest.java",
+      "gitBlob": "9060cb06283dd7536e12362e6add1ff2a422b945",
+      "bytes": 5861,
+      "sha256": "a6ba57109f9cd1f71026fffc852ac6e0e9ea11ab95f92e07827830b69bd3e6f9"
+    },
+    {
+      "path": "m3/core/test/M3WordRowsContractTest.java",
+      "gitBlob": "175b24d411295a9fc3fcc71055ba70c968633b41",
+      "bytes": 9685,
+      "sha256": "22961688ea662e9598d9f6b5925b60aa0f48df027f3b468a462438035fc618ae"
+    },
+    {
+      "path": "m3/core/test/SharedLexiconCatalogFamilyAdmissionTest.java",
+      "gitBlob": "c85d432a188d9439aedb1ec716b5de47b48fccab",
+      "bytes": 13304,
+      "sha256": "e87494f65fcb7e39ebbefc391c05224e80b91dd8f59b87ba07ba3073f0fdc794"
+    },
+    {
+      "path": "m3/core/test/SharedLexiconFamilyContractTest.java",
+      "gitBlob": "82036c03ad2831f0ff8d04540e266ec1763a3a5e",
+      "bytes": 4567,
+      "sha256": "e074b56c40b4eaecbfd91952b2c3164ccb5cbbd1a07ae339a292a963ef1d171b"
+    },
+    {
+      "path": "m3/core/test/SharedLexiconFamilySidecarCatalogTest.java",
+      "gitBlob": "1ba6dfb939c9a2247d53cc67e2b5e694afa16ce1",
+      "bytes": 9585,
+      "sha256": "ce3821bca228852b476a3f7913bdab5c887d0135a24a896329e211f047d5e348"
+    },
+    {
+      "path": "m3/core/test/SynexiaPrecomputePayloadTest.java",
+      "gitBlob": "f53d7e1b74ae2ec59ac39f3fa6f7dde3949efaef",
+      "bytes": 3055,
+      "sha256": "fd4c12a1c38958ebe7b2e0c6d754dbd5e074f6f8c1369910ead0f0f02bcc4c16"
+    },
+    {
+      "path": "m3/core/test/SynexiaPrecomputeReceiverTest.java",
+      "gitBlob": "2138707d9c23519151e2803e170958d0ba9f308d",
+      "bytes": 5313,
+      "sha256": "2681df9cd986c089a9e5ce4f9c530cf6f9b96d5c07dc5e75388018a3846b0b12"
+    },
+    {
+      "path": "m3/core/test/SynexiaSiUnitDecoderTest.java",
+      "gitBlob": "5ca5f5d2e8833ff7c9f6f11349a289b630d9f45e",
+      "bytes": 6313,
+      "sha256": "ff088458f6993dd43b181fab4e07e55501a95a9a6f56cf13fb5290490e4886d5"
+    },
+    {
+      "path": "m3/lexicon/english-demo.txt",
+      "gitBlob": "5ae4ecb8b2f890b9c3c9d365acff894d5a92fbc5",
+      "bytes": 78,
+      "sha256": "675fc9570dafa8e1cec54d6aa894a3780a292fc203302ad6c251ef08f9aab9c1"
+    },
+    {
+      "path": "m3/lexicon/synexia-number-target-map.tsv",
+      "gitBlob": "e2ac289eb63e963a6afdecba6272ad5bde237ffc",
+      "bytes": 500,
+      "sha256": "3175dcfbbd865a49c4fa321a4c23fb177076b6de8cb50a2a6a0bec83132e8346"
+    },
+    {
+      "path": "m3/lexicon/synexia-precompute-field-map.tsv",
+      "gitBlob": "005869c8bd785825dd53f13972b4b2fdd25b3f66",
+      "bytes": 13715,
+      "sha256": "95c1e09b23af8deb680b2fe218499b7d6ab741a29895621bb73de58112833d23"
+    },
+    {
+      "path": "m3/lexicon/synexia-source-manifest.tsv",
+      "gitBlob": "d359a91a5d7eed0cefde831cff265e11f74e39d9",
+      "bytes": 6159,
+      "sha256": "d0bb4561580083a953b3b3a63fe5c061ce041c8ee68cffedd4042688ba52a0c8"
+    },
+    {
+      "path": "m3/lexicon/synexia-word-source-revisions.tsv",
+      "gitBlob": "901dc57bb281931b10920401760bb81d2f41b448",
+      "bytes": 245,
+      "sha256": "2f45a0ed93f2e8710801547158d35e6f0f9feaafa796b673bdd2feb4887cb81c"
+    }
+  ],
+  "originalBuildGit": "5ac0b944e34bf5f226d77541adbcb28e35edcfe5",
+  "modes": [
+    "jit",
+    "int",
+    "nocompact",
+    "c2"
+  ],
+  "testMainClasses": [
+    "FoundationTest",
+    "M3LexiconPrecomputeTest",
+    "M3DictionaryFrequencyContractTest",
+    "M3TranslationReceiverMapTest",
+    "SynexiaPrecomputePayloadTest",
+    "SynexiaPrecomputeReceiverTest",
+    "LangDexProjectionReceiverTest",
+    "LangDexSourceEnvelopeTest",
+    "SharedLexiconFamilySidecarCatalogTest",
+    "SharedLexiconCatalogFamilyAdmissionTest",
+    "SharedLexiconFamilyContractTest",
+    "SynexiaSiUnitDecoderTest",
+    "M3NumberSpaceTest",
+    "M3NumberSpaceContractTest",
+    "M3LanguageGrammarSupportTest",
+    "M3InstanceIndexPrecomputeTest"
+  ]
+}
