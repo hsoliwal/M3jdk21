@@ -56,27 +56,98 @@ PREVIOUS_SUCCESSORS = {
 }
 
 
+# Current M3JDK21-owned source evolutions, layered over the immutable PR #788
+# ledger and the earlier Synexia source-qualified successors. These are exact
+# source identities; neither recipe-boot policy nor image/runtime is admitted.
+CURRENT_SOURCE_SUCCESSORS = {
+    "m3/tooling/jmod-recipes/pom.xml": (
+        "bea579cf4ffe9ebfa6cbe8bfd445b4f96dce9543",
+        "5e330226ed95bebe3870fe2bd6d0913e69f0753a",
+        "49791e92b1c063a2cb65875831976cc9c599e8e0",
+        "PENDING_RECIPE_BOOT_POLICY_AND_MAVEN",
+    ),
+    "m3/tooling/jmod-recipes/tools/descriptor_gen.py": (
+        "fb25328725a1ccd6398083c43e8d851eacbb0b74",
+        "43e21664d531443095106e7605c8e4d6eaa039c4",
+        "87e01c7d4045c6e321aef3c76522c781b0667806",
+        "PENDING_DESCRIPTOR_RELEASE_BEHAVIOR",
+    ),
+    "m3/tooling/jmod-recipes/tools/jmod_pack.py": (
+        "86b62fddc148b372145e807438dd7cd018acca0f",
+        "9291be214460a60513f67177ae70438f378d6f8e",
+        "6ac06f20bcbdce518581b5c17c9e8b85c3752d96",
+        "PENDING_ZIP_JMOD_RUNTIME_AND_PLATFORM",
+    ),
+}
+
+
+# The current packager additionally retains target-owned archive/release evolution
+# 4ecd7758577a1802335c5b4c7c6a292e9490f3c5 at 87e01c7d4045c6e321aef3c76522c781b0667806.
+# Its opt-in default-resolution successor 9291be214460a60513f67177ae70438f378d6f8e
+# is the exact canonical packed-integers output at e2bb24902ccd971cc6a7611658557c732e6ef178.
+# Source custody preserves this intermediate lineage; policy/platform/runtime
+# promotion remains pending and the receipt's acceptance flags remain false.
+
+# Original PR #788 custody: immutable 52-file source ledger, not merely a
+# replaceable table of individually matching Git blobs. These are the original
+# target Git-object and SHA-256 identities at M3JDK21 master 0ab28ea86ccb.
+ORIGINAL_LEDGER_RELATIVE = "m3/tooling/jmod-recipes/RECEIVED_SDK_JMOD_BLOBS.tsv"
+ORIGINAL_LEDGER_GIT_BLOB = "00c19297059a851e185bfaefe2368ec8b793b94d"
+ORIGINAL_LEDGER_SHA256 = "ddb6c8b6709ddd844e8235ac679511429e0af1925c205e323a500230036d9f4f"
+
+
+def read_original_ledger(root, ledger, expected_count):
+    """Require the exact canonical ledger before checking any 52 product sources.
+
+    Smaller explicit denominators are the existing unit-test-only seam: no
+    smaller result can claim original PR #788 source ledger authority.
+    """
+    candidate = Path(ledger).absolute()
+    if expected_count != 52:
+        return candidate.read_bytes()
+    canonical = root / ORIGINAL_LEDGER_RELATIVE
+    if candidate != canonical:
+        raise ValueError("SDK_RECEIVER_LEDGER_PATH_DRIFT")
+    current = root
+    for name in ORIGINAL_LEDGER_RELATIVE.split("/"):
+        current = current / name
+        if current.is_symlink():
+            raise ValueError("SDK_RECEIVER_LEDGER_UNSAFE_PATH")
+    if not current.is_file():
+        raise ValueError("SDK_RECEIVER_LEDGER_MISSING")
+    content = current.read_bytes()
+    if (git_blob_sha1(content) != ORIGINAL_LEDGER_GIT_BLOB
+            or hashlib.sha256(content).hexdigest() != ORIGINAL_LEDGER_SHA256):
+        raise ValueError("SDK_RECEIVER_LEDGER_IDENTITY_DRIFT")
+    return content
+
+
 def rows_from_text(text, expected_count=52):
     lines = text.splitlines()
     if not lines or lines[0] != HEADER:
         raise ValueError("SDK_RECEIVER_INVALID_HEADER")
-    seen, rows = set(), []
+    seen, aliases, rows = set(), set(), []
     for line in lines[1:]:
         cells = line.split("\t")
         if len(cells) != 4:
             raise ValueError("SDK_RECEIVER_INVALID_ROW")
         name, blob, pr, commit = cells
-        parts = PurePosixPath(name).parts
+        # Inspect the raw path: PurePosixPath.parts silently normalizes // and /./.
+        # Source custody must bind one literal Git path to one filesystem owner.
+        parts = name.split("/")
         if (not name.startswith(PREFIXES)
                 or name.startswith("/")
                 or "\\" in name
                 or any(part in ("", ".", "..") for part in parts)
+                or any(ord(char) < 32 or ord(char) == 127 for char in name)
                 or not re.fullmatch(r"[0-9a-f]{40}", blob)
                 or pr != "788" or commit != SOURCE_COMMIT):
             raise ValueError("SDK_RECEIVER_INVALID_IDENTITY")
-        if name in seen:
+        # Distinct case spellings are aliases on common Windows/macOS filesystems.
+        if name in seen or name.casefold() in aliases:
             raise ValueError("SDK_RECEIVER_DUPLICATE_PATH")
         seen.add(name)
+        aliases.add(name.casefold())
         rows.append((name, blob))
     if len(rows) != expected_count:
         raise ValueError("SDK_RECEIVER_DENOMINATOR_MISMATCH")
@@ -90,9 +161,11 @@ def git_blob_sha1(data):
 
 def verify(repo, ledger, expected_count=52):
     root = Path(repo).resolve(strict=True)
-    rows = rows_from_text(Path(ledger).read_text(encoding="utf-8"), expected_count)
+    payload = read_original_ledger(root, ledger, expected_count)
+    rows = rows_from_text(payload.decode("utf-8"), expected_count)
     proof = hashlib.sha256()
     successors = []
+    current_source_successors = []
     for name, expected in rows:
         if name in SUCCESSORS:
             predecessor, successor, canonical_path = SUCCESSORS[name]
@@ -105,8 +178,26 @@ def verify(repo, ledger, expected_count=52):
                 "canonical_commit": SUCCESSOR_COMMITS.get(name, SUCCESSOR_COMMIT), "canonical_path": canonical_path,
                 "previous_successor_git_blob": PREVIOUS_SUCCESSORS.get(name),
             })
-        source = root.joinpath(*PurePosixPath(name).parts)
-        if (source.is_symlink() or not source.is_file()
+        if name in CURRENT_SOURCE_SUCCESSORS:
+            previous, current, source_commit, gate = CURRENT_SOURCE_SUCCESSORS[name]
+            if expected != previous:
+                raise ValueError("SDK_RECEIVER_CURRENT_LINEAGE_DRIFT:" + name)
+            expected = current
+            current_source_successors.append({
+                "path": name, "previous_git_blob": previous,
+                "git_blob": current, "source_repository": "hsoliwal/M3jdk21",
+                "source_commit": source_commit, "source_path": name,
+                "policy_and_runtime_gate": gate,
+                "jdk_runtime_verified": False, "product_accepted": False,
+            })
+        # Reject every symlink component even when it resolves *inside* root.
+        # The former leaf-only guard silently accepted a symlinked parent.
+        source = root
+        for component in PurePosixPath(name).parts:
+            source = source / component
+            if source.is_symlink():
+                raise ValueError("SDK_RECEIVER_MISSING_OR_UNSAFE_SOURCE:" + name)
+        if (not source.is_file()
                 or not source.resolve(strict=True).is_relative_to(root)):
             raise ValueError("SDK_RECEIVER_MISSING_OR_UNSAFE_SOURCE:" + name)
         actual = git_blob_sha1(source.read_bytes())
@@ -122,7 +213,13 @@ def verify(repo, ledger, expected_count=52):
         "files": len(rows),
         "source_pr": 788,
         "source_commit": SOURCE_COMMIT,
+        "ledger_authority": ("IMMUTABLE_PR_788" if expected_count == 52
+                             else "TEST_ONLY_NONPRODUCTION_DENOMINATOR"),
+        "source_ledger_git_blob": (ORIGINAL_LEDGER_GIT_BLOB if expected_count == 52
+                                   else git_blob_sha1(payload)),
+        "source_ledger_sha256": hashlib.sha256(payload).hexdigest(),
         "qualified_source_successors": successors,
+        "current_source_successors": current_source_successors,
         "content_root_sha256": proof.hexdigest(),
         "jdk_runtime_verified": False,
         "java21_spec_compatible": "NOT_DETERMINED_BY_SOURCE_CUSTODY",

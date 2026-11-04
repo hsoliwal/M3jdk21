@@ -110,6 +110,86 @@ public final class M3LexiconPrecomputeTest {
                         new int[]{21, 0, 29});
         SharedLexiconPrecomputeCatalog.Coordinate coordinate =
                 new SharedLexiconPrecomputeCatalog.Coordinate(2, 7);
+
+        // A rejected identity must leave its exact key reusable by a matching payload.
+        for (SharedLexiconPrecomputeCatalog.SpellScope wrong : List.of(
+                new SharedLexiconPrecomputeCatalog.SpellScope("lex-2", "en", 2, 7, "spell-1"),
+                new SharedLexiconPrecomputeCatalog.SpellScope("lex-1", "hi", 2, 7, "spell-1"),
+                new SharedLexiconPrecomputeCatalog.SpellScope("lex-1", "en", 1, 7, "spell-1"),
+                new SharedLexiconPrecomputeCatalog.SpellScope("lex-1", "en", 2, 6, "spell-1"),
+                new SharedLexiconPrecomputeCatalog.SpellScope("lex-1", "en", 2, 7, "spell-2"))) {
+            SharedLexiconPrecomputeCatalog.Builder rejected = SharedLexiconPrecomputeCatalog.builder();
+            expect(IllegalArgumentException.class, () -> rejected.spell(wrong, spell));
+            M3LexiconPrecompute.SpellIndex matching = new M3LexiconPrecompute.SpellIndex(
+                    wrong.lexiconFingerprint(), wrong.language(), wrong.maxEditDistance(),
+                    wrong.prefixLength(), wrong.sourceFingerprint(),
+                    spell.deleteToTokenIds(), spell.frequencies());
+            check(rejected.spell(wrong, matching).build().spellAt(wrong).orElseThrow() == matching);
+        }
+        for (SharedLexiconPrecomputeCatalog.TokenRange wrong : List.of(
+                new SharedLexiconPrecomputeCatalog.TokenRange(coordinate, "value-2", "tok-v1", 0, 3),
+                new SharedLexiconPrecomputeCatalog.TokenRange(coordinate, "value-1", "tok-v1", 1, 3),
+                new SharedLexiconPrecomputeCatalog.TokenRange(coordinate, "value-1", "tok-v1", 0, 4))) {
+            SharedLexiconPrecomputeCatalog.Builder rejected = SharedLexiconPrecomputeCatalog.builder();
+            expect(IllegalArgumentException.class, () -> rejected.tokenHashes(wrong, hashes));
+            int count = wrong.endExclusive() - wrong.startInclusive();
+            M3LexiconPrecompute.TokenHashPrecompute matching = new M3LexiconPrecompute.TokenHashPrecompute(
+                    wrong.valueFingerprint(), wrong.startInclusive(), wrong.endExclusive(),
+                    new byte[count][32], new M3LexiconPrecompute.RangeFingerprint(7L, 13L, count), digest(4));
+            check(rejected.tokenHashes(wrong, matching).build().tokenHashesAt(wrong).orElseThrow() == matching);
+        }
+        for (SharedLexiconPrecomputeCatalog.ValueToken wrong : List.of(
+                new SharedLexiconPrecomputeCatalog.ValueToken(coordinate, "value-2", 7),
+                new SharedLexiconPrecomputeCatalog.ValueToken(coordinate, "value-1", 8))) {
+            SharedLexiconPrecomputeCatalog.Builder rejected = SharedLexiconPrecomputeCatalog.builder();
+            expect(IllegalArgumentException.class, () -> rejected.prefixCounts(wrong, prefixes));
+            M3LexiconPrecompute.PrefixCounts matching = new M3LexiconPrecompute.PrefixCounts(
+                    wrong.valueFingerprint(), wrong.tokenId(), prefixes.prefixCounts());
+            check(rejected.prefixCounts(wrong, matching).build().prefixCountsAt(wrong).orElseThrow() == matching);
+        }
+        SharedLexiconPrecomputeCatalog.ValueScope wrongFrequency =
+                new SharedLexiconPrecomputeCatalog.ValueScope(coordinate, "value-2");
+        SharedLexiconPrecomputeCatalog.Builder rejectedFrequency = SharedLexiconPrecomputeCatalog.builder();
+        expect(IllegalArgumentException.class, () -> rejectedFrequency.tokenFrequency(wrongFrequency, frequency));
+        M3LexiconPrecompute.TokenFrequency matchingFrequency =
+                new M3LexiconPrecompute.TokenFrequency("value-2", frequency.frequencies());
+        check(rejectedFrequency.tokenFrequency(wrongFrequency, matchingFrequency).build()
+                .tokenFrequencyAt(wrongFrequency).orElseThrow() == matchingFrequency);
+
+        SharedLexiconPrecomputeCatalog.SpellScope validSpell =
+                new SharedLexiconPrecomputeCatalog.SpellScope("lex-1", "en", 2, 7, "spell-1");
+        SharedLexiconPrecomputeCatalog.TokenRange validHashes =
+                new SharedLexiconPrecomputeCatalog.TokenRange(coordinate, "value-1", "tok-v1", 0, 3);
+        SharedLexiconPrecomputeCatalog.ValueToken validPrefix =
+                new SharedLexiconPrecomputeCatalog.ValueToken(coordinate, "value-1", 7);
+        SharedLexiconPrecomputeCatalog.ValueScope validFrequency =
+                new SharedLexiconPrecomputeCatalog.ValueScope(coordinate, "value-1");
+        SharedLexiconPrecomputeCatalog.Builder unchanged = SharedLexiconPrecomputeCatalog.builder();
+        expect(NullPointerException.class, () -> unchanged.spell(null, spell));
+        expect(NullPointerException.class, () -> unchanged.spell(validSpell, null));
+        expect(NullPointerException.class, () -> unchanged.tokenHashes(null, hashes));
+        expect(NullPointerException.class, () -> unchanged.tokenHashes(validHashes, null));
+        expect(NullPointerException.class, () -> unchanged.prefixCounts(null, prefixes));
+        expect(NullPointerException.class, () -> unchanged.prefixCounts(validPrefix, null));
+        expect(NullPointerException.class, () -> unchanged.tokenFrequency(null, frequency));
+        expect(NullPointerException.class, () -> unchanged.tokenFrequency(validFrequency, null));
+        unchanged.spell(validSpell, spell).tokenHashes(validHashes, hashes)
+                .prefixCounts(validPrefix, prefixes).tokenFrequency(validFrequency, frequency);
+        SharedLexiconPrecomputeCatalog snapshot = unchanged.build();
+        expect(IllegalArgumentException.class, () -> unchanged.spell(validSpell, spell));
+        expect(IllegalArgumentException.class, () -> unchanged.tokenHashes(validHashes, hashes));
+        expect(IllegalArgumentException.class, () -> unchanged.prefixCounts(validPrefix, prefixes));
+        expect(IllegalArgumentException.class, () -> unchanged.tokenFrequency(validFrequency, frequency));
+        check(snapshot.spellAt(validSpell).orElseThrow() == spell);
+        check(snapshot.tokenHashesAt(validHashes).orElseThrow() == hashes);
+        check(snapshot.prefixCountsAt(validPrefix).orElseThrow() == prefixes);
+        check(snapshot.tokenFrequencyAt(validFrequency).orElseThrow() == frequency);
+        // Tokenizer/coordinate context is outside this payload; preserve those valid aliases.
+        SharedLexiconPrecomputeCatalog.TokenRange aliasHashes =
+                new SharedLexiconPrecomputeCatalog.TokenRange(
+                        new SharedLexiconPrecomputeCatalog.Coordinate(8, 9), "value-1", "tok-v2", 0, 3);
+        check(unchanged.tokenHashes(aliasHashes, hashes).build().tokenHashesAt(aliasHashes).orElseThrow() == hashes);
+
         SharedLexiconPrecomputeCatalog.Builder catalogBuilder = SharedLexiconPrecomputeCatalog.builder()
                 .translation(source, translation)
                 .translation(reverseSource, reverseTranslation)

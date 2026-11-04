@@ -16,9 +16,19 @@ import sys
 
 MODULES = {"com.fasterxml.jackson.annotation", "com.fasterxml.jackson.core",
            "com.fasterxml.jackson.databind", "jdk.m3.jackson"}
-CONTRACTS = {"JacksonContract": "JACKSON_CONTRACT_PASS",
-             "M3FileContract": "M3_FILE_CONTRACT_PASS",
-             "JacksonStreamingContract": "JACKSON_STREAMING_PASS"}
+CONTRACTS = {
+    "JacksonContract": "JACKSON_CONTRACT_PASS",
+    "M3FileContract": "M3_FILE_CONTRACT_PASS",
+    "JacksonStreamingContract": "JACKSON_STREAMING_PASS",
+    "M3SourceFactsContract": "M3SourceFactsContract: PASS",
+    "M3ASTCoreReceiptContract": "M3 AST CORE PASS",
+    "M3ASTPatternCoreReceiptContract": "M3 AST PATTERN PASS",
+    "tests.M3JacksonContract": "M3_JACKSON_CONTRACT_PASS",
+    "tests.M3ASTBindingContract": "M3_AST_BINDING_PASS",
+    "tests.M3ASTTokenPatternContract": "M3_AST_TOKEN_REGEX_PASS",
+    "tests.M3TokenRegexContract": "M3_TOKEN_REGEX_CONTRACT_PASS",
+    "tests.M3JacksonCoexistenceContract": "M3_JACKSON_COEXISTENCE_PASS"
+}
 UPSTREAM = {"jackson-annotations": "com.fasterxml.jackson.annotation",
             "jackson-core": "com.fasterxml.jackson.core",
             "jackson-databind": "com.fasterxml.jackson.databind"}
@@ -332,16 +342,22 @@ def main():
     for lane, key in (("host", "host_contracts"), ("linked", "linked_contracts")):
         contracts = result.get(key, {})
         require(set(contracts) == {"jdk.m3.jackson." + name for name in CONTRACTS},
-                "All three executed runtime contracts are required")
+                "All eleven executed runtime contracts are required")
         for name, marker in CONTRACTS.items():
             contract = contracts["jdk.m3.jackson." + name]
-            pattern = r"^" + marker + r" checks=([1-9][0-9]*)(?:[^\S\n].*)?$"
-            logged = one_marker(content(base / "logs" / (lane + "-" + name + ".log")).decode(),
+            basename = name.rsplit(".", 1)[-1]
+            if name == "tests.M3JacksonContract":
+                pattern = r"^" + marker + r" cases=[1-9][0-9]* checks=([1-9][0-9]*)$"
+            elif name == "M3SourceFactsContract":
+                pattern = r"^" + marker + r" \(([1-9][0-9]*) assertions\)$"
+            else:
+                pattern = r"^" + marker + r" checks=([1-9][0-9]*)(?:[^\S\n].*)?$"
+            logged = one_marker(content(base / "logs" / (lane + "-" + basename + ".log")).decode(),
                                 pattern, lane + "/" + name)
             recorded = one_marker(contract.get("stdout", ""), pattern, "receipt/" + name)
             require(contract.get("status") == "PASS" and logged == recorded == contract.get("checks"),
                     "Runtime contract receipt differs from executed output")
-            require(load(base / "logs" / (lane + "-" + name + ".result.json")).get("exit_code") == 0,
+            require(load(base / "logs" / (lane + "-" + basename + ".result.json")).get("exit_code") == 0,
                     "Runtime contract process failed")
             counts[lane + "/" + name] = logged
     for name in CONTRACTS:
