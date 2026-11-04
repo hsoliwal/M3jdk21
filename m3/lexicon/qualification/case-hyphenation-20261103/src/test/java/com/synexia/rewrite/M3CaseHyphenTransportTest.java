@@ -69,7 +69,7 @@ final class M3CaseHyphenTransportTest {
     @BeforeAll static void setup() throws Exception {
         assertTrue(List.of("none", "omit-context").contains(MUTANT));
         Path jar = Path.of(System.getProperty("m3.transport.jar")).toRealPath();
-        assertEquals("20d6441d9bb045c53cd62d578fe5df361b3c31d8f1ee5c85fdd5c2f84fbe3009",
+        assertEquals("05dc5decb19db771f5becb051b1775daa5a82398ec77a1aca28625b25cca54a3",
                 sha(Files.readAllBytes(jar)));
         List<Path> sources = List.of(
             input("m3.foundation.source", "67d58c2da43c0b37764d4b3c3a3bdcab127d60fd"),
