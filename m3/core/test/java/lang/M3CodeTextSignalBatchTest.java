@@ -22,7 +22,7 @@ public final class M3CodeTextSignalBatchTest {
         check((rows[1] & M3CodeTextFacts.HAS_BACKSLASH) != 0);
         check(((rows[1] >>> 16) & 0xff) == 1);
         check(((rows[1] >>> 24) & 0xff) == 1);
-        check(((rows[1] >>> 40) & 0xff) == 1);
+        check(((rows[1] >>> 40) & 0xff) == 2);
         expectIllegalArgument(() -> M3CodeTextSignalBatch.analyze(
                 units, new int[] {0}, new int[] {8}, M3CodeTextSignalBatch.Limits.DEFAULT));
         expectIllegalArgument(() -> M3CodeTextSignalBatch.analyze(
