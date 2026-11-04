@@ -76,6 +76,8 @@ public final class SynexiaPrecomputePayload {
 
     private enum Expected { BOOLEAN, DOUBLE, INT, LONG, STRING, STRING_OR_LONG, INT_ARRAY, LONG_ARRAY }
 
+    private static final java.util.regex.Pattern FIELD_NAME_PATTERN =
+            java.util.regex.Pattern.compile("[a-z][a-z0-9_]*");
     private static final Map<String, Expected> FIELD_TYPES = fieldTypes();
     private final Map<String, Field> fields;
 
@@ -232,7 +234,7 @@ public final class SynexiaPrecomputePayload {
             while (true) {
                 skipWhitespace();
                 String name = string();
-                if (!name.matches("[a-z][a-z0-9_]*")) throw error("invalid payload field name");
+                if (!FIELD_NAME_PATTERN.matcher(name).matches()) throw error("invalid payload field name");
                 if (result.containsKey(name)) throw error("duplicate payload field");
                 skipWhitespace(); expect(':');
                 result.put(name, value(name));
