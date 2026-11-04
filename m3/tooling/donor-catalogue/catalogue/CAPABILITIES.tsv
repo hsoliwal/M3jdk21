@@ -1,0 +1,11 @@
+capability_id	donor_id	category	evidence_source_id	import_mode	target_area	status	contract_ref
+bisheng-jit-profile-cache	bisheng-jdk-21	JIT_PROFILE_PERSISTENCE	bisheng-jit-profile-cache-header	PATCH	hotspot/compiler/profile-cache	CANDIDATE	M3JDK-JDK21-BEHAVIOR-LOCK
+bisheng-openjdk-vendor-delta	bisheng-jdk-21	OPENJDK_VENDOR_DELTA	openjdk-21.0.13+9-tag	PATCH	repository-wide	CANDIDATE	M3JDK-DONOR-DELTA-1
+excelsior-aot-native-image	excelsior-jet	AOT_NATIVE_IMAGE	excelsior-api-readme	SPEC_REIMPLEMENT	m3/compiler/aot	CANDIDATE	M3JDK-EXCELSIOR-AOT-SPEC-1
+excelsior-cross-target-profile-image	excelsior-jet	CROSS_TARGET_PROFILING	excelsior-api-exec-profiles	SPEC_REIMPLEMENT	m3/compiler/profile-guided	CANDIDATE	M3JDK-EXCELSIOR-PROFILE-SPEC-1
+excelsior-incremental-pdb	excelsior-jet	INCREMENTAL_NATIVE_STATE	excelsior-api-pdb-config	SPEC_REIMPLEMENT	m3/compiler/incremental-state	CANDIDATE	M3JDK-EXCELSIOR-PDB-SPEC-1
+excelsior-native-packaging	excelsior-jet	NATIVE_PACKAGING	excelsior-api-readme	SPEC_REIMPLEMENT	m3/packaging/native-image	CANDIDATE	M3JDK-EXCELSIOR-PACKAGING-SPEC-1
+excelsior-profile-guided-optimization	excelsior-jet	PROFILE_GUIDED_OPTIMIZATION	excelsior-api-exec-profiles	SPEC_REIMPLEMENT	m3/compiler/profile-guided	CANDIDATE	M3JDK-EXCELSIOR-PROFILE-SPEC-1
+excelsior-reflective-access-profile	excelsior-jet	REFLECTIVE_ACCESS_PROFILE	excelsior-api-exec-profiles	SPEC_REIMPLEMENT	m3/compiler/reachability	CANDIDATE	M3JDK-EXCELSIOR-REACHABILITY-SPEC-1
+excelsior-runtime-component-discovery	excelsior-jet	RUNTIME_COMPONENT_DISCOVERY	excelsior-api-readme	SPEC_REIMPLEMENT	m3/runtime/image-reduction	CANDIDATE	M3JDK-EXCELSIOR-REACHABILITY-SPEC-1
+excelsior-startup-profile	excelsior-jet	STARTUP_PROFILE	excelsior-api-exec-profiles	SPEC_REIMPLEMENT	m3/compiler/startup	CANDIDATE	M3JDK-EXCELSIOR-PROFILE-SPEC-1
