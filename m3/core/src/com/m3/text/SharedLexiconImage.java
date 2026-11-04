@@ -1,4 +1,6 @@
 /* Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
+ * Word-comparison portions copyright (C) 2009 The Guava Authors.
+ * Adapted from Guava UnsignedBytes; Apache-2.0, see m3/LICENSE.
  * SPDX-License-Identifier: Apache-2.0
  */
 package com.m3.text;
@@ -158,16 +160,35 @@ public final class SharedLexiconImage {
     }
 
     private int compareRecordTo(int index, String value) {
-        ByteBuffer record = recordBytes(index);
-        int units = Math.min(record.remaining() / 2, value.length());
-        for (int at = 0; at < units; at++) {
-            int offset = at * 2;
-            int recordUnit = (record.get(offset) & 0xff)
-                    | ((record.get(offset + 1) & 0xff) << 8);
+        Objects.checkIndex(index, offsets.length);
+        int begin = payloadOffset + offsets[index] * 2;
+        int recordUnits = lengths[index];
+        int units = Math.min(recordUnits, value.length());
+        int stride = Long.BYTES / Character.BYTES;
+        int strideLimit = units & -stride;
+        int at = 0;
+        // Guava's first-differing-byte pattern, adapted to unsigned UTF-16 lanes.
+        for (; at < strideLimit; at += stride) {
+            int offset = begin + at * Character.BYTES;
+            long word = Long.reverseBytes(mapping.getLong(offset));
+            long query = value.charAt(at)
+                    | ((long) value.charAt(at + 1) << Character.SIZE)
+                    | ((long) value.charAt(at + 2) << (2 * Character.SIZE))
+                    | ((long) value.charAt(at + 3) << (3 * Character.SIZE));
+            long difference = word ^ query;
+            if (difference != 0) {
+                int shift = Long.numberOfTrailingZeros(difference) & -Character.SIZE;
+                return Integer.compare((int) (word >>> shift) & Character.MAX_VALUE,
+                        (int) (query >>> shift) & Character.MAX_VALUE);
+            }
+        }
+        for (; at < units; at++) {
+            int offset = begin + at * Character.BYTES;
+            int recordUnit = Short.toUnsignedInt(Short.reverseBytes(mapping.getShort(offset)));
             char valueUnit = value.charAt(at);
             if (recordUnit != valueUnit) return Integer.compare(recordUnit, valueUnit);
         }
-        return Integer.compare(record.remaining() / 2, value.length());
+        return Integer.compare(recordUnits, value.length());
     }
     /** Copies and checks a record before it can become immutable local backing. */
     public LocalM3StringPiece copyRecord(int index, LocalM3Arena arena) throws IOException {
