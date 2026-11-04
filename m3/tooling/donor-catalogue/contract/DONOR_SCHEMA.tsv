@@ -1,0 +1,30 @@
+file	position	column	type	constraint
+CAPABILITIES.tsv	1	capability_id	id	unique and strictly sorted
+CAPABILITIES.tsv	2	donor_id	foreign-key	must reference DONORS.tsv
+CAPABILITIES.tsv	3	category	enum	closed CapabilityCategory value
+CAPABILITIES.tsv	4	evidence_source_id	foreign-key	must reference SOURCES.tsv
+CAPABILITIES.tsv	5	import_mode	enum	closed ImportMode value and compatible with donor licence policy
+CAPABILITIES.tsv	6	target_area	path	normalized M3 target owner path
+CAPABILITIES.tsv	7	status	enum	CANDIDATE SPECIFIED or REJECTED
+CAPABILITIES.tsv	8	contract_ref	string	nonblank contract identity
+DONORS.tsv	1	donor_id	id	unique and strictly sorted
+DONORS.tsv	2	project_name	string	nonblank display name
+DONORS.tsv	3	family	enum	closed DonorFamily value
+DONORS.tsv	4	repository_url	url-or-dash	https URL or dash for unavailable proprietary source
+DONORS.tsv	5	revision	git-id-or-dash	immutable 40 or 64 hexadecimal commit or dash
+DONORS.tsv	6	source_license	spdx-or-policy	nonblank declared source licence policy
+DONORS.tsv	7	target_license	spdx-or-policy	nonblank target licence policy
+DONORS.tsv	8	default_import_mode	enum	closed ImportMode value
+DONORS.tsv	9	upstream_repository	url-or-dash	https URL or dash
+DONORS.tsv	10	upstream_revision	git-id-or-dash	immutable upstream commit or dash
+DONORS.tsv	11	availability	enum	SOURCE_AVAILABLE or DOCUMENTATION_ONLY
+DONORS.tsv	12	status	enum	PINNED REFERENCE_ONLY or REJECTED
+SOURCES.tsv	1	source_id	id	unique and strictly sorted
+SOURCES.tsv	2	donor_id	foreign-key	must reference DONORS.tsv
+SOURCES.tsv	3	source_kind	enum	FILE REF or PUBLIC_PROXY
+SOURCES.tsv	4	repository_url	url	https immutable-source repository
+SOURCES.tsv	5	revision	git-id	immutable 40 or 64 hexadecimal commit
+SOURCES.tsv	6	path_or_ref	string	repository path or exact ref name
+SOURCES.tsv	7	git_object_sha	git-id	immutable Git blob tag or commit object identity
+SOURCES.tsv	8	declared_license	spdx-or-policy	nonblank source-specific licence policy
+SOURCES.tsv	9	role	enum	closed SourceRole value

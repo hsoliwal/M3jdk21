@@ -1,0 +1,11 @@
+schema	M3_ADDITIVE_SOURCE_UNION_V1
+receiver_before_sha	e2f10f42ebf36edd3fdfde4deee5f796e0a38a6d
+source_pr	2262
+source_head_sha	8455e7ff97b4679d5523e3242dc02980d96510b8
+status	SOURCE_COPIED_CI_HOLD
+path	git_blob_sha	mode
+m3/collections/qualification/lane-search-category-20261101/GATES.tsv	238e7d075910036caa2b5287015771f61444d65d	100644
+m3/collections/qualification/lane-search-category-20261101/README.md	a50c210cbfb3af31d8adb84ef05ef1c4ce47da95	100644
+m3/collections/qualification/lane-search-category-20261101/SOURCE_PINS.tsv	1f957f6d58b8a25b3b3cc7ccb78c6d131a1f8437	100644
+m3/collections/src/test/java/com/m3/collections/M3LaneSearchCategoryProof.java	9cae582db9beddec3338a7a8de8a9c45815ba7e7	100644
+m3/collections/src/test/java/com/m3/collections/M3LaneSearchCategoryProofTest.java	909c3c1c1765c104088bc20f7920fcc45bc0cce6	100644

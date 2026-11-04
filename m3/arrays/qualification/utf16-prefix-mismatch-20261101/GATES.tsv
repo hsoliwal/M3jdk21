@@ -1,0 +1,17 @@
+gate	status	evidence
+SOURCE_PREIMAGE_JAVA	PASS_GITHUB_BLOB	8ab73b0197d1fd8f584f0f245d4c394a4fd88d67 matches exact receiver
+SOURCE_PREIMAGE_C17	PASS_GITHUB_BLOB	1d0262671605803d9bc57e7b71bf7df804881e91 matches exact receiver
+TEST_TARGET_ABSENCE	PASS_GITHUB_404	M3ArrayPrefixMismatchTest.java not present at receiver
+POSTIMAGE_JAVA	PASS_EXACT_RECIPE_BLOB	c416d94c9e9e823cfa90ddef26dcc4e64e6b3709
+POSTIMAGE_C17	PASS_EXACT_RECIPE_BLOB	561e0c88d5b2956844e50aea004dc1ee13f399df
+POSTIMAGE_JUNIT	PASS_EXACT_RECIPE_BLOB	4b7d0bd606bc5ae374aeff79682fcb054baa12a7
+JAVA21_ISOLATED_SCALAR_DIFF	PASS_LOCAL_ONLY	231500 independent synthetic cases
+C17_ISOLATED_SCALAR_DIFF	PASS_LOCAL_ONLY	1024500 independent synthetic cases
+CANONICAL_MAVEN_RECIPE_RUN	NOT_RUN	Hosted Synexia Maven/OpenRewrite SDK required
+CANONICAL_SECOND_APPLY_FIXED_POINT	NOT_RUN	Hosted Synexia Maven/JUnit required
+PRODUCT_JAVA21_JUNIT	NOT_RUN	Existing m3-array-substrate workflow must run
+PRODUCT_NATIVE_C17_JNI	NOT_RUN	Existing -Pnative-linux -Xcheck:jni workflow must run
+JDK_IMAGE_C1_C2_JTREG	NOT_RUN	Source-built JDK qualification
+ABI_GC_CROSS_PLATFORM	NOT_RUN	JNI toolchain and GC matrix
+BENCHMARK_PERF_REGRESSION	NOT_RUN	Equal full-chunk and early-mismatch measured throughput
+FLEET_ALL_FORKS	NOT_APPLICABLE	Review each owner individually; no blanket application
