@@ -1,0 +1,17 @@
+{"id":"01","date":"2026-11-03","stage":"inventory","status":"PASS","evidence":"master Object.java hash and five historical progress manifests reviewed; 14 actual receiving files read"}
+{"id":"02","date":"2026-11-03","stage":"closed_set_census","status":"PASS_OBSERVED_ONLY","evidence":"14 source SHA-256 computed; 6 historical matches; 8 divergences"}
+{"id":"03","date":"2026-11-03","stage":"documentation","status":"PASS","evidence":"PROGRESS_CENSUS_CONTRACT.md created before code; release authority stays historical"}
+{"id":"04","date":"2026-11-03","stage":"source_seal","status":"PASS","evidence":"TSV SHA-256 f333de2f423f079f3f28b49e4c531548aa29511af30227dd84c10efa7b7a48cf; 14 sorted rows"}
+{"id":"05","date":"2026-11-03","stage":"lint_compile","status":"PASS","evidence":"Python 3.13.5 py_compile, strict TSV structural checks"}
+{"id":"06","date":"2026-11-03","stage":"unit","status":"PASS_LIMITED","evidence":"8 tests, 7 passed, 1 skipped because complete M3JDK21 tree unavailable locally"}
+{"id":"07","date":"2026-11-03","stage":"remote_readback","status":"PASS","evidence":"Verifier, unit test, census Git blob hashes equal locally tested bytes"}
+{"id":"08","date":"2026-11-03","stage":"historical_progress","status":"FAIL_RETAINED","evidence":"Historic progress source seal does not match eight current owners; not rewritten or bypassed"}
+{"id":"09","date":"2026-11-03","stage":"ci_and_runtime","status":"NOT_RUN","evidence":"Hosted CI pending; full matched JDK/JNI/jtreg and historical lineage transitions not executed"}
+{"id":"10","date":"2026-11-04","stage":"source_lineage_inventory","status":"PASS_REMOTE_PROVENANCE","evidence":"Canonical October17 Git blob 2bfef3101224112c40957c954592a100dc59a3fc, October18 a9899e1c2970f6d5e9172ffb12f5b7399d052b68, November2/current c703c72bea6e792a378bb6d3babc96f22dbf6cb4; exact source manifests chained"}
+{"id":"11","date":"2026-11-04","stage":"source_lineage_contract","status":"DOCUMENTED_BEFORE_CODE","evidence":"OBJECT_SOURCE_LINEAGE_CONTRACT_20261104.md committed as source-custody-only; original JDK signature and progress historical checker locked"}
+{"id":"12","date":"2026-11-04","stage":"full_source_reverse","status":"PASS_CONNECTOR_EXECUTION","evidence":"JSON ledger Git blob 949c7db8f195cab7fed92d402b99fba6bd6d58f0; both complete reverse reconstructions byte-identical to independently fetched source; forward roundtrip exact"}
+{"id":"13","date":"2026-11-04","stage":"local_python_compile","status":"PASS","evidence":"Python3.13.5 py_compile of checker b64087dea35bf5e66717abc9b336ad804755e828 and test 38169704acf9ef05b8d24a81fefe195e675ab99c"}
+{"id":"14","date":"2026-11-04","stage":"test_red_green","status":"FAIL_THEN_PASS","evidence":"initial negative fixture changed length rather than only hash and assertion failed at earlier guard; corrected equal-length mutation, 9/10 PASS 1 full-checkout SKIP"}
+{"id":"15","date":"2026-11-04","stage":"negative_source_mutation","status":"PASS_EXPECTED_REFUSAL","evidence":"Current Object.java annotated span and ledger current_fragment corruptions rejected by exact source-anchor check"}
+{"id":"16","date":"2026-11-04","stage":"ci_reuse","status":"SUBMITTED_NOT_COMPLETED","evidence":"existing source census GitHub Actions workflow extended; native progress checker and its five historic manifests unchanged"}
+{"id":"17","date":"2026-11-04","stage":"release_admission","status":"HOLD","evidence":"One source lineage 3/3 does not prove Java/JNI compatibility, original progress acceptance, or seven other current source mismatches"}

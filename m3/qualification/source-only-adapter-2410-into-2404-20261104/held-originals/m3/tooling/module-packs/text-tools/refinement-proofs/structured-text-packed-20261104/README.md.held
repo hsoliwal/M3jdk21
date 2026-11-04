@@ -1,0 +1,25 @@
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+# Executed structured-text refinement, 2026-11-04
+
+Canonical source: [Synexia PR #16128](https://github.com/hsoliwal/com.synexia/pull/16128), commit `320c00f31b39366d682a0089b17c84d5b59ed19b`. `SOURCE_REF.json` binds the private recipe and receipt; `RECEIPT.json` records exact receiving output hashes and measured qualification.
+
+## Product behavior
+
+- JSON Lines pointer extraction uses primitive spans and member/child indexes while preserving original raw lexemes, decoded-key identity, grammar, budgets and error priority.
+- Environment names use direct ASCII classification with the same accepted characters and errors.
+- The existing CsvTools range API shares escape coordinates and uses a bounded String structural cursor. Cell/Row identity and generic CharSequence observations remain unchanged.
+- The existing native text library gains one 256-unit UTF-16 scanner. Old sort/uniq exports remain. Missing libraries, older libraries lacking the new symbol and denied optional native loading use Java fallbacks. Native failures after successful capability discovery propagate.
+- Four stable naming records preserve prior lineage. No standard Java API or receiving phase changes.
+
+## Executed qualification
+
+Actual recipe outputs passed strict Java21 compilation, protected differential tests in normal/interpreted modes, real JUnit, checked JNI with compiled C17 current/legacy libraries, public API/JNI export parity, and exact output-admission checks. The complete two-module text/structured source closure was built into JMODs and a stock Java21 linked image; all five existing structured CLI operations passed smoke tests. The existing module-name advisory is recorded separately from product lint.
+
+The receiving tests are in `m3/tooling/module-packs/text-tools/src/test/java`. Their only external test dependency is JUnit5; dependency-free contract mains are also present. They are product tests emitted by the canonical recipe. The private task's README contains complete reproducible commands and baseline pins.
+
+## Scope and resource tradeoffs
+
+This qualifies the stated Linux source/JNI/optional-module scope. Complete rebuilt M3 HotSpot, jdk.m3.io, jtreg/reactor and cross-platform gates remain separate. Existing global naming/provenance failures are retained. JSON's fresh-JVM tiny-object allocation is higher in the recorded observation; retaining one escaped CSV Cell retains the shared parent escape lane. No universal memory reduction or JNI throughput gain is asserted.
+
+The tool directory and challenge sites supplied category and adversarial-test ideas. This change does not implement every listed tool or import external submissions/source. The separate existing catalogue-search refinement is [Synexia PR #16106](https://github.com/hsoliwal/com.synexia/pull/16106).
