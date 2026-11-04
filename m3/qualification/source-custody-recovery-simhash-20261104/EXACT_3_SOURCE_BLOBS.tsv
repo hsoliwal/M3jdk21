@@ -1,0 +1,4 @@
+path	donor_git_blob_sha1	merged_git_blob_sha1	identity
+m3/indexdb/qualification/chunk-simhash-20261104/RECEIPT.md	f2b153f98d0f625249c7413ea75ec01a7a21ad5c	f2b153f98d0f625249c7413ea75ec01a7a21ad5c	EXACT
+m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbChunkSimHash.java	2719c9d67be999ade54e163d79fef48fa9ab7be9	2719c9d67be999ade54e163d79fef48fa9ab7be9	EXACT
+m3/indexdb/src/test/java/com/m3/indexdb/M3IndexDbChunkSimHashTest.java	0b4dcfcbb5989c7e9a606678f9bac3213bc6d98a	0b4dcfcbb5989c7e9a606678f9bac3213bc6d98a	EXACT
