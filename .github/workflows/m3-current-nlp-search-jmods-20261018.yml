@@ -15,6 +15,7 @@ on:
       - 'm3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V5.json'
       - 'm3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V6.json'
       - 'm3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V7.json'
+      - 'm3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V8.json'
 
 permissions:
   contents: read
@@ -91,7 +92,7 @@ jobs:
         run: |
           python3 m3/tooling/module-packs/nlp-search/current_forks.py \
             --jdk-home "$JAVA_HOME" \
-            --receiver-transition m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V7.json \
+            --receiver-transition m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V8.json \
             --lucene-source donors/lucene \
             --opennlp-source donors/opennlp \
             --recipe-runner m3/vendor/synexia/synexia-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/run_recipe.py \
