@@ -1,4 +1,5 @@
 import com.m3.text.SharedLexiconCatalog;
+import com.m3.text.SharedRelatedLexemeCatalog;
 import com.m3.text.SharedLexiconFamilySidecarCatalog;
 
 import java.nio.charset.StandardCharsets;
@@ -44,6 +45,7 @@ public final class SharedLexiconCatalogFamilyAdmissionTest {
             SharedLexiconCatalog closed = SharedLexiconCatalog.open(complete);
             closed.close();
             expectIllegalState(closed::familyPrecompute, "close fences family getter");
+            assertStandaloneRelatedIdentities(complete);
             System.out.println("M3JDK_CATALOG_FAMILY_ADMISSION_PASS checks=" + checks
                     + " families=5 relations=2");
         } finally {
@@ -112,6 +114,42 @@ public final class SharedLexiconCatalogFamilyAdmissionTest {
         if (withFamily) {
             writeFamily(root);
             writeRelated(root);
+        }
+    }
+
+    private static void assertStandaloneRelatedIdentities(Path root) throws Exception {
+        Path mappings = root.resolve("synexia.records.tsv");
+        String original = Files.readString(mappings, StandardCharsets.UTF_8);
+        try {
+            // The standalone projection validates identity, lexeme and coordinates only.
+            // Opaque IDs must not be trimmed, normalized or restricted to ASCII.
+            for (String extra : List.of(
+                    "source-b\tpath\tdictionary\ten\trecord-b\tbeta\t0\t0\t-\t-\t-\tfixture\t{}\n",
+                    " \tpath\tdictionary\ten\t \tbeta\t0\t0\t-\t-\t-\tfixture\t{}\n",
+                    "source-\u0939\tpath\tdictionary\ten\trecord-\u00e9\tbeta\t0\t0\t-\t-\t-\tfixture\t{}\n",
+                    "source-b\t\t\t\trecord-b\tbeta\t0\t0\t\t\t\t\t\n")) {
+                write(root, "synexia.records.tsv", original + extra);
+                try (SharedRelatedLexemeCatalog catalog = SharedRelatedLexemeCatalog.open(root)) {
+                    var values = catalog.findAll("source-a", "record-a");
+                    check(values.size() == 2
+                                    && values.get(0).relatedLexeme().equals("omega")
+                                    && values.get(1).relatedLexeme().equals("zeta"),
+                            "valid unused mapping preserves ordered relations");
+                    check(catalog.find("source-a", "record-a").isEmpty(),
+                            "multiple related targets retain singular ambiguity");
+                }
+            }
+            for (String extra : List.of(
+                    "source-b\tpath\tdictionary\ten\t\tbeta\t0\t0\t-\t-\t-\tfixture\t{}\n",
+                    "\tpath\tdictionary\ten\trecord-b\tbeta\t0\t0\t-\t-\t-\tfixture\t{}\n",
+                    "source-b\tpath\tdictionary\ten\t\"\"\tbeta\t0\t0\t-\t-\t-\tfixture\t{}\n",
+                    "\"\"\tpath\tdictionary\ten\trecord-b\tbeta\t0\t0\t-\t-\t-\tfixture\t{}\n")) {
+                write(root, "synexia.records.tsv", original + extra);
+                expectIOException(() -> SharedRelatedLexemeCatalog.open(root),
+                        "empty mapping source or record identity rejected before publication");
+            }
+        } finally {
+            Files.writeString(mappings, original, StandardCharsets.UTF_8);
         }
     }
 
