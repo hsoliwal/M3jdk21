@@ -1,0 +1,15 @@
+{
+  "targets": [
+    {
+      "kind": "text",
+      "delivery": "target",
+      "path": "m3/tooling/joined-range-directory/current-baseline/CURRENT_BUILD_INPUTS.json",
+      "resource": "CURRENT_BUILD_INPUTS.json",
+      "beforeGit": null,
+      "beforeSha256": "ABSENT",
+      "afterGit": "d276d861559dca58bf418d4ceb7a92476729d91b",
+      "afterSha256": "bf2b5a10a14aeb2f6166d002dd603a519d8916db0e3413032304e16ff3cce4c5"
+    }
+  ],
+  "authority": false
+}
