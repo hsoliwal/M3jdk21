@@ -20,6 +20,7 @@ on:
       - 'm3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V8.json'
       - 'm3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V9.json'
       - 'm3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V10.json'
+      - 'm3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V11.json'
 
 permissions:
   contents: read
@@ -97,7 +98,7 @@ jobs:
         run: |
           python3 m3/tooling/module-packs/nlp-search/current_forks.py \
             --jdk-home "$JAVA_HOME" \
-            --receiver-transition m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V10.json \
+            --receiver-transition m3/qualification/lexicon/receiver-transitions/RECEIVER_TRANSITIONS_V11.json \
             --lucene-source donors/lucene \
             --opennlp-source donors/opennlp \
             --recipe-runner m3/vendor/synexia/synexia-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/run_recipe.py \
