@@ -51,6 +51,8 @@ _RECEIVER_TRANSITION_V8_PATH = "m3/tooling/joined-range-directory/current-baseli
 _RECEIVER_TRANSITION_V8_SHA256 = "5abff0ff5462a74439ceb13610913417ca5a1b2c4c8ddf0ba9d26a2428f1237d"
 _RECEIVER_TRANSITION_V9_PATH = "m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V9.json"
 _RECEIVER_TRANSITION_V9_SHA256 = "8b9033adaea873f6253558db142e6823762913da1899b714f019eaf6816e99d3"
+_RECEIVER_TRANSITION_V10_PATH = "m3/tooling/joined-range-directory/current-baseline/RECEIVER_TRANSITIONS_V10.json"
+_RECEIVER_TRANSITION_V10_SHA256 = "178b7c3a0e120b0d5ea00eaf5b1724227e5261f73fe3677e4686b1d2d2b2ac6a"
 _RECEIVER_SUCCESSORS = frozenset(
     "m3/core/src/com/m3/text/" + name for name in (
         "JoinedM3StringPiece.java", "SharedLexiconCatalog.java",
@@ -103,7 +105,8 @@ def _receiver_admission(root, transition=None):
                    _RECEIVER_TRANSITION_V6_PATH: _RECEIVER_TRANSITION_V6_SHA256,
                    _RECEIVER_TRANSITION_V7_PATH: _RECEIVER_TRANSITION_V7_SHA256,
                    _RECEIVER_TRANSITION_V8_PATH: _RECEIVER_TRANSITION_V8_SHA256,
-                   _RECEIVER_TRANSITION_V9_PATH: _RECEIVER_TRANSITION_V9_SHA256}
+                   _RECEIVER_TRANSITION_V9_PATH: _RECEIVER_TRANSITION_V9_SHA256,
+                   _RECEIVER_TRANSITION_V10_PATH: _RECEIVER_TRANSITION_V10_SHA256}
         matches = [name for name in choices if path.resolve() == (root / name).resolve()]
         if (len(matches) != 1
                 or any(p.is_symlink() or p.is_junction() for p in (path, *path.parents))):
@@ -116,11 +119,11 @@ def _receiver_admission(root, transition=None):
         document = json.loads(data)
         if document["schema"] != "M3_FROZEN_RECEIVER_TRANSITIONS_V2":
             raise ValueError("receiver transition schema differs")
-        successors = (_RECEIVER_V8_SUCCESSORS if selected_path in (_RECEIVER_TRANSITION_V8_PATH, _RECEIVER_TRANSITION_V9_PATH)
+        successors = (_RECEIVER_V8_SUCCESSORS if selected_path in (_RECEIVER_TRANSITION_V8_PATH, _RECEIVER_TRANSITION_V9_PATH, _RECEIVER_TRANSITION_V10_PATH)
                       else _RECEIVER_SUCCESSORS)
         rows = {row["path"]: row for row in document["files"]
                 if row["path"] in successors}
-        expected_rows = 9 if selected_path in (_RECEIVER_TRANSITION_V8_PATH, _RECEIVER_TRANSITION_V9_PATH) else 8
+        expected_rows = 9 if selected_path in (_RECEIVER_TRANSITION_V8_PATH, _RECEIVER_TRANSITION_V9_PATH, _RECEIVER_TRANSITION_V10_PATH) else 8
         if set(rows) != successors or len(document["files"]) != expected_rows:
             raise ValueError("complete receiver source transition cohort required")
         source = lock["modules"]["com.m3.text"]["files"]
@@ -187,7 +190,8 @@ def _receiver_report(admission, revision, checkpoints, staged):
     cohort = "original-strict-lock"
     if staged:
         selected = admission["transition"]["path"]
-        cohort = ("declared-v9-five-lexicon-successors" if selected == _RECEIVER_TRANSITION_V9_PATH
+        cohort = ("declared-v10-five-lexicon-successors" if selected == _RECEIVER_TRANSITION_V10_PATH
+                  else "declared-v9-five-lexicon-successors" if selected == _RECEIVER_TRANSITION_V9_PATH
                   else "declared-v8-five-lexicon-successors" if selected == _RECEIVER_TRANSITION_V8_PATH
                   else "declared-v7-four-lexicon-successors" if selected == _RECEIVER_TRANSITION_V7_PATH
                   else "declared-v6-four-lexicon-successors" if selected == _RECEIVER_TRANSITION_V6_PATH
@@ -398,7 +402,7 @@ def main():
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--receiver", type=Path, default=ROOT)
     parser.add_argument("--receiver-transition", type=Path,
-                        help="Explicit sealed V5/V6/V7 four-source or V8/V9 five-source cohort; omitted keeps strict original admission")
+                        help="Explicit sealed V5/V6/V7 four-source or V8/V9/V10 five-source cohort; omitted keeps strict original admission")
     parser.add_argument("--opennlp-source", type=Path, required=True)
     parser.add_argument("--lucene-source", type=Path, required=True)
     parser.add_argument("--recipe-runner", type=Path, required=True)
