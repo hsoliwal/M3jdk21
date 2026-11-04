@@ -104,14 +104,35 @@ public final class SharedLexiconImage {
     }
 
     private int compareRecords(int leftIndex, int rightIndex) {
-        ByteBuffer left = recordBytes(leftIndex), right = recordBytes(rightIndex);
-        int units = Math.min(left.remaining(), right.remaining()) / 2;
-        for (int at = 0; at < units; at++) {
-            int leftUnit = (left.get(at * 2) & 0xff) | ((left.get(at * 2 + 1) & 0xff) << 8);
-            int rightUnit = (right.get(at * 2) & 0xff) | ((right.get(at * 2 + 1) & 0xff) << 8);
+        Objects.checkIndex(leftIndex, offsets.length);
+        Objects.checkIndex(rightIndex, offsets.length);
+        int leftBegin = payloadOffset + offsets[leftIndex] * Character.BYTES;
+        int rightBegin = payloadOffset + offsets[rightIndex] * Character.BYTES;
+        int leftUnits = lengths[leftIndex], rightUnits = lengths[rightIndex];
+        int units = Math.min(leftUnits, rightUnits);
+        int stride = Long.BYTES / Character.BYTES;
+        int strideLimit = units & -stride;
+        int at = 0;
+        for (; at < strideLimit; at += stride) {
+            int leftOffset = leftBegin + at * Character.BYTES;
+            int rightOffset = rightBegin + at * Character.BYTES;
+            long leftWord = Long.reverseBytes(mapping.getLong(leftOffset));
+            long rightWord = Long.reverseBytes(mapping.getLong(rightOffset));
+            long difference = leftWord ^ rightWord;
+            if (difference != 0) {
+                int shift = Long.numberOfTrailingZeros(difference) & -Character.SIZE;
+                return Integer.compare((int) (leftWord >>> shift) & Character.MAX_VALUE,
+                        (int) (rightWord >>> shift) & Character.MAX_VALUE);
+            }
+        }
+        for (; at < units; at++) {
+            int leftOffset = leftBegin + at * Character.BYTES;
+            int rightOffset = rightBegin + at * Character.BYTES;
+            int leftUnit = Short.toUnsignedInt(Short.reverseBytes(mapping.getShort(leftOffset)));
+            int rightUnit = Short.toUnsignedInt(Short.reverseBytes(mapping.getShort(rightOffset)));
             if (leftUnit != rightUnit) return Integer.compare(leftUnit, rightUnit);
         }
-        return Integer.compare(left.remaining(), right.remaining());
+        return Integer.compare(leftUnits, rightUnits);
     }
 
     /** Exact UTF-16 text for a record; unpaired surrogates are preserved. */
