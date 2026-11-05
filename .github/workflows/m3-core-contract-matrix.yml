@@ -19,18 +19,18 @@ jobs:
     if: github.repository == 'hsoliwal/M3jdk21' && github.event.pull_request.head.repo.full_name == 'hsoliwal/M3jdk21'
     runs-on: ubuntu-24.04
     timeout-minutes: 15
-    env:
-      M3_PROOF_ROOT: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}
-      M3_SOURCE_ROOT: ${{ github.workspace }}/m3-core-contract-source
-      TMPDIR: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
-      TEMP: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
-      TMP: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
-      XDG_CACHE_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/cache
-      XDG_CONFIG_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/config
-      XDG_DATA_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/data
     steps:
       - name: Reserve storage and select provisioned JDK 21
         id: preflight
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-core-contract-source
+          TMPDIR: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/data
         shell: bash
         run: |
           set -euo pipefail
@@ -51,6 +51,15 @@ jobs:
           with open(os.environ["GITHUB_OUTPUT"],"a",encoding="utf-8") as stream:stream.write("java="+str(java)+"\n")
           PY
       - name: Narrow exact-head checkout
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-core-contract-source
+          TMPDIR: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/data
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           path: m3-core-contract-source
@@ -75,16 +84,24 @@ jobs:
       - name: Execute unchanged original build
         id: qualify
         env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-core-contract-source
+          TMPDIR: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/data
           M3_JDK: ${{ steps.preflight.outputs.java }}
         shell: bash
         run: |
           set -euo pipefail
           python3 -I -S -B "$M3_SOURCE_ROOT/m3/tooling/core-contract-matrix/qualify.py" --source "$M3_SOURCE_ROOT" --out "$M3_PROOF_ROOT" --jdk "$M3_JDK"
       - name: Preserve actual build evidence
-        if: always() && steps.qualify.outcome != 'skipped'
+        if: always() && (steps.qualify.outcome == 'success' || steps.qualify.outcome == 'failure')
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: m3-current-core-contract-${{ github.run_id }}-${{ github.run_attempt }}
           if-no-files-found: error
           retention-days: 7
-          path: ${{ env.M3_PROOF_ROOT }}/contract/
+          path: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/contract/
