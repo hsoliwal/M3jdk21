@@ -91,8 +91,8 @@ final class NativeUtf16Literal {
     }
 
     private static boolean loadNative() {
-        if (Boolean.getBoolean("m3.text.native.disable")) return false;
         try {
+            if (Boolean.getBoolean("m3.text.native.disable")) return false;
             Path bundled = Path.of(System.getProperty("java.home"), "lib",
                     System.mapLibraryName("m3textio"));
             if (Files.isRegularFile(bundled)) System.load(bundled.toAbsolutePath().toString());

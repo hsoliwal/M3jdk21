@@ -94,12 +94,12 @@ public final class M3ReactorImpactPlan {
             return new M3ReactorImpactPlan(reasons, topology, true);
         }
         int[] queue = new int[projects];
-        byte[] queued = new byte[projects];
         int write = 0;
+        // FILE_IMPACT seeds are already queued. Other projects enter only when
+        // DEPENDENT_PROJECT is first set, so the reason mask owns membership too.
         for (int i = 0; i < projects; i++) {
             if ((reasons[i] & FILE_IMPACT) != 0) {
                 queue[write++] = i;
-                queued[i] = 1;
             }
         }
         for (int read = 0; read < write; read++) {
@@ -108,9 +108,8 @@ public final class M3ReactorImpactPlan {
                 int next = dependentTargets[edge];
                 if ((reasons[next] & DEPENDENT_PROJECT) == 0) {
                     reasons[next] |= (byte) DEPENDENT_PROJECT;
-                    if (queued[next] == 0) {
+                    if ((reasons[next] & FILE_IMPACT) == 0) {
                         queue[write++] = next;
-                        queued[next] = 1;
                     }
                 }
             }

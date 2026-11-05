@@ -65,7 +65,7 @@ public final class M3StringCursor implements M3ChunkCursor, M3CursorFacts {
 
     @Override
     public void seek(int position) {
-        Objects.checkIndex(position, total + 1);
+        Objects.checkIndex((long) position, (long) total + 1L);
         if (total == 0) {
             chunkBegin = 0;
             chunkEnd = 0;

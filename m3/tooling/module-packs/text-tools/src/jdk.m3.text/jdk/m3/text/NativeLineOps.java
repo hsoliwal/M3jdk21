@@ -47,7 +47,7 @@ final class NativeLineOps {
             if (Files.isRegularFile(installed)) System.load(installed.toAbsolutePath().toString());
             else System.loadLibrary("m3textops");
             return true;
-        } catch (UnsatisfiedLinkError missingOptionalLibrary) {
+        } catch (UnsatisfiedLinkError | SecurityException unavailableOptionalLibrary) {
             return false;
         }
     }
