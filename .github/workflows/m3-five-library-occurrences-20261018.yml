@@ -7,6 +7,7 @@ on:
       - m3/collections/src/main/java/com/m3/collections/M3IndexedMultiValueMap.java
       - m3/collections/src/test/java/com/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java
       - m3/collections/src/test/java/com/m3/collections/M3IndexedMultiValueOccurrenceTest.java
+      - m3/collections/src/test/java/com/m3/collections/M3IndexedOccurrenceArrayNativeTest.java
       - m3/collections/qualification/m3-five-library-occurrences-20261018/**
       - .github/workflows/m3-five-library-occurrences-20261018.yml
   workflow_dispatch:
@@ -32,11 +33,57 @@ jobs:
           set -eu
           # The collections module requires the first-party arrays module.
           # Compile/install the actual owner before running the unchanged JUnit.
-          mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
+          # Reuse the genuine m3-arrays native-linux owner, including its CTest
+          # verification. Maven dependency installation alone does not load JNI.
+          mvn -B -ntp -f m3/arrays/pom.xml -Pnative-linux -DskipTests install
           ARRAYS="$PWD/m3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar"
+          ARRAY_NATIVE="$PWD/m3/arrays/target/native/libm3_arrays.so"
           test -s "$ARRAYS"
+          test -s "$ARRAY_NATIVE"
           jar --describe-module --file "$ARRAYS" | grep -F 'com.m3.arrays'
-          mvn -B -ntp -f m3/collections/pom.xml test -Dtest=M3IndexedMultiValueOccurrenceTest -Dsurefire.failIfNoSpecifiedTests=true
+          # This existing occurrence test allocates required-native Object[].
+          # Supply the exact native provider to its forked Surefire JVM.
+          mvn -B -ntp -f m3/collections/pom.xml test \
+            -Dtest=M3IndexedMultiValueOccurrenceTest,M3IndexedOccurrenceArrayNativeTest \
+            -Dsurefire.failIfNoSpecifiedTests=true \
+            "-Dm3.arrays.native.path=$ARRAY_NATIVE" \
+            "-DargLine=-Xcheck:jni -Dm3.arrays.native.path=$ARRAY_NATIVE"
+          # Actual Jupiter XML, not @Test source presence, proves five atoms.
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          root = Path("m3/collections/target/surefire-reports")
+          expected = {
+              "com.m3.collections.M3IndexedMultiValueOccurrenceTest#differential",
+              "com.m3.collections.M3IndexedOccurrenceArrayNativeTest#objectAllocationIsNativeAndDetached",
+              "com.m3.collections.M3IndexedOccurrenceArrayNativeTest#byteAllocationIsNativeAndZeroInitialized",
+              "com.m3.collections.M3IndexedOccurrenceArrayNativeTest#intAllocationIsNativeAndZeroInitialized",
+              "com.m3.collections.M3IndexedOccurrenceArrayNativeTest#longAllocationIsNativeAndZeroInitialized",
+          }
+          observed = set()
+          for cls in ("M3IndexedMultiValueOccurrenceTest", "M3IndexedOccurrenceArrayNativeTest"):
+              name = "com.m3.collections." + cls
+              report = root / ("TEST-" + name + ".xml")
+              if report.is_symlink() or not report.is_file():
+                  raise ValueError("missing or aliased executed Surefire report: " + name)
+              suite = ET.parse(report).getroot()
+              cases = suite.findall("testcase")
+              if suite.tag != "testsuite" or len(cases) != int(suite.get("tests", "-1")):
+                  raise ValueError("invalid Surefire test count: " + name)
+              if any(int(suite.get(field, "-1")) != 0 for field in ("errors", "failures", "skipped")):
+                  raise ValueError("failed or skipped required native test: " + name)
+              for case in cases:
+                  if any(child.tag in ("error", "failure", "skipped", "flakyFailure", "flakyError",
+                                      "rerunFailure", "rerunError") for child in case):
+                      raise ValueError("hidden failure or rerun for " + name)
+                  identity = case.get("classname", "") + "#" + case.get("name", "")
+                  if identity in observed:
+                      raise ValueError("duplicated executed JUnit atom")
+                  observed.add(identity)
+          if observed != expected:
+              raise ValueError("missing/extra executed JUnit methods: " + repr(expected ^ observed))
+          print("M3_INDEXED_ARRAY_REQUIRED_JNI_SUREFIRE_PASS methods=5 suites=2")
+          PY
       - name: Exact real Java21 M3 owner and native-index C17 differential
         run: |
           set -eu
@@ -45,7 +92,9 @@ jobs:
           mkdir -p "$CLS" "$NATIVE"
           # Reuse the installed real JPMS dependency; preserve module-info.
           ARRAYS="$PWD/m3/arrays/target/m3-arrays-0.1.0-SNAPSHOT.jar"
+          ARRAY_NATIVE="$PWD/m3/arrays/target/native/libm3_arrays.so"
           test -s "$ARRAYS"
+          test -s "$ARRAY_NATIVE"
           find m3/collections/src/main/java -name '*.java' -print | sort > "$RUNNER_TEMP/m3-multivalue-main-sources.txt"
           javac --release 21 -proc:none -Xlint:all,-module -Werror \
             --module-path "$ARRAYS" -d "$CLS" @"$RUNNER_TEMP/m3-multivalue-main-sources.txt"
@@ -55,13 +104,16 @@ jobs:
             --patch-module com.m3.collections=m3/collections/src/test/java \
             -d "$CLS" \
             m3/collections/src/test/java/com/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java
-          java --module-path "$CLS:$ARRAYS" \
+          java -Xcheck:jni "-Dm3.arrays.native.path=$ARRAY_NATIVE" \
+            --module-path "$CLS:$ARRAYS" \
             --module com.m3.collections/com.m3.collections.M3IndexedMultiValueOccurrenceSelfTest
           cc -std=c17 -fPIC -shared -O1 -g -Wall -Wextra -Werror \
             -fsanitize=undefined -fno-sanitize-recover=all \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
             m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
             -o "$NATIVE/libm3_collections_mask.so"
-          java -Xcheck:jni -Djava.library.path="$NATIVE" \
+          UBSAN_OPTIONS=halt_on_error=1 java -Xcheck:jni \
+            "-Dm3.arrays.native.path=$ARRAY_NATIVE" \
+            -Djava.library.path="$NATIVE" \
             --module-path "$CLS:$ARRAYS" \
             --module com.m3.collections/com.m3.collections.M3IndexedMultiValueOccurrenceSelfTest
