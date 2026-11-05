@@ -60,3 +60,6 @@ Its base-only control compiles and management control is rejected; the historica
 projection still lacks source closure. The existing MIndexString to java.lang.M3String
 mapping is preserved. This passive snapshot leaves every runtime receiving gate open;
 recipes and raw proof stay in Synexia.
+
+The receipt also records a historical source-built image candidate and a70-file source comparison.
+Its live endpoint, binary fingerprints and complete actual build-input identity remain unverified.
