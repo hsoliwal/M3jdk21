@@ -33,24 +33,29 @@ Java_com_m3_text_M3WordRowsNative_bulkFlags0(JNIEnv *env, jclass klass,
         return;
     }
     for (jsize offset = 0; offset < size;) {
-        jsize take = size - offset < 128 ? size - offset : 128;
-        jint input[128];
-        jint result[128];
-        (*env)->GetIntArrayRegion(env, ids, offset, take, input);
+        jsize fetched = size - offset < 512 ? size - offset : 512;
+        jint input[512];
+        (*env)->GetIntArrayRegion(env, ids, offset, fetched, input);
         if ((*env)->ExceptionCheck(env)) return;
-        for (jsize i = 0; i < take; i++) {
-            if (input[i] < 0 || input[i] >= count) {
-                fail(env, "java/lang/IndexOutOfBoundsException", "invalid word-row local ID");
-                return;
+        /* Preserve the original 128-result commit boundary on every failure. */
+        for (jsize block = 0; block < fetched; block += 128) {
+            jsize take = fetched - block < 128 ? fetched - block : 128;
+            jint result[128];
+            for (jsize i = 0; i < take; i++) {
+                jint local = input[block + i];
+                if (local < 0 || local >= count) {
+                    fail(env, "java/lang/IndexOutOfBoundsException", "invalid word-row local ID");
+                    return;
+                }
+                uint64_t address = (uint64_t) (uint32_t) rows_base + (uint64_t) (uint32_t) local * 128;
+                const unsigned char *p = data + (size_t) address;
+                uint32_t bits = ((uint32_t) p[0] << 24) | ((uint32_t) p[1] << 16)
+                        | ((uint32_t) p[2] << 8) | (uint32_t) p[3];
+                result[i] = (jint) bits;
             }
-            uint64_t address = (uint64_t) (uint32_t) rows_base + (uint64_t) (uint32_t) input[i] * 128;
-            const unsigned char *p = data + (size_t) address;
-            uint32_t bits = ((uint32_t) p[0] << 24) | ((uint32_t) p[1] << 16)
-                    | ((uint32_t) p[2] << 8) | (uint32_t) p[3];
-            result[i] = (jint) bits;
+            (*env)->SetIntArrayRegion(env, output, offset + block, take, result);
+            if ((*env)->ExceptionCheck(env)) return;
         }
-        (*env)->SetIntArrayRegion(env, output, offset, take, result);
-        if ((*env)->ExceptionCheck(env)) return;
-        offset += take;
+        offset += fetched;
     }
 }
