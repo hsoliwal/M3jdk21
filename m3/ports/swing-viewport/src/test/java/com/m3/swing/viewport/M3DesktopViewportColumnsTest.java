@@ -123,7 +123,7 @@ final class M3DesktopViewportColumnsTest {
         });
     }
 
-    @Test void invisibleEmptyAndBlankViewportsProduceNoRequests() throws Exception {
+    @Test void invisibleZeroWidthAndBlankViewportsProduceNoRequests() throws Exception {
         SwingUtilities.invokeAndWait(() -> {
             Scene scene = scene(40, 60);
             scene.table().showing = false;
@@ -132,7 +132,8 @@ final class M3DesktopViewportColumnsTest {
             scene.viewport().setSize(0, 60);
             assertArrayEquals(new int[4], columns(scene.table(), 10));
             scene.viewport().setSize(100, 0);
-            assertArrayEquals(new int[4], columns(scene.table(), 10));
+            // Horizontal header geometry survives a zero-height body clip.
+            assertArrayEquals(new int[]{0, 2, 0, 2}, columns(scene.table(), 10));
             scene.viewport().setSize(100, 60);
             scene.viewport().setViewPosition(new Point(100, 0));
             assertArrayEquals(new int[4], columns(scene.table(), 10));
