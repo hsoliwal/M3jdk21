@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: Apache-2.0
+check	refutation	commons	input	expected	actual	result
+R4_TRANSFORMING_HOOK	R4	map.TransformedMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	CHECKED_ENTRY_SET	CHECKED_ENTRY_SET	PASS
+R4_UNEMITTED_HOOK	R4	map.TransformedMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet() with checkSetValue not emitted	MANUAL	MANUAL	PASS
+R4_VALIDATING_HOOK	R4	map.PredicatedMap	java.util.Set<java.util.Map.Entry<K, V>> entrySet()	CHECKED_ENTRY_SET	CHECKED_ENTRY_SET	PASS
+R5_SELF_LOCK	R5	collection.SynchronizedCollection	collection.SynchronizedCollection constructor arity 1	MANUAL	MANUAL	PASS
+R5_LOCK_PARAMETER	R5	collection.SynchronizedCollection	collection.SynchronizedCollection constructor arity 2	LANES_CONSTRUCTOR	LANES_CONSTRUCTOR	PASS
+R6_SUPER_NOT_DELEGATE	R6	list.PredicatedList	validate(object); return super.add(object);	MANUAL	MANUAL	PASS
+R6_SUPER_DELEGATE	R6	map.PredicatedMap	void putAll(java.util.Map<? extends K, ? extends V> arg0)	GUARD_DELEGATE/each-entry	GUARD_DELEGATE/each-entry	PASS
+R6_SHADOWED_ALIAS	R6	map.PredicatedMap	return map.containsKey(map);	MANUAL	MANUAL	PASS
+R6_FIELD_ALIAS	R6	map.PredicatedMap	V put(K arg0, V arg1)	GUARD_DELEGATE/entry	GUARD_DELEGATE/entry	PASS
+R6_LANES_SWAPPED	R6	map.PredicatedSortedMap	final SortedMap<K, V> map = getSortedMap().headMap(toKey); return new PredicatedSortedMap<>(map, valuePredicate, keyPredicate);	MANUAL	MANUAL	PASS
+R6_LANES_IN_ORDER	R6	map.PredicatedSortedMap	java.util.SortedMap<K, V> headMap(K arg0)	LANE_VIEW/self	LANE_VIEW/self	PASS
+R6_SIBLING_NOT_SUPER	R6	set.PredicatedSortedSet	final SortedSet<E> head = decorated().headSet(toElement); return new PredicatedNavigableSet<>(head, predicate);	MANUAL	MANUAL	PASS
+R6_SIBLING_SUPER	R6	set.PredicatedNavigableSet	java.util.SortedSet<E> headSet(E arg0)	LANE_VIEW/sibling	LANE_VIEW/sibling	PASS
