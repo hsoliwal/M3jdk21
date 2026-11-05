@@ -100,6 +100,11 @@
       "state": "PASS",
       "checks": 29,
       "method": "SHA256RecipeSealsSmoke --synthetic; -Xint; isolated temp only"
+    },
+    {
+      "gate": "M3JDK21_native_JNI_test_C17_source_compile_20261105",
+      "state": "PASS",
+      "method": "gcc -std=c17 -Wall -Wextra -Werror -pedantic -fPIC -c exact libSHA256ObjectAdapterTest.c; no native method execution"
     }
   ],
   "required_product_gates": [
@@ -131,10 +136,15 @@
       "gate": "Synexia_independent_full_manifest_source_seal_CI",
       "state": "NOT_RUN",
       "reason": "CI job queued; separate from genuine Maven/OpenRewrite Recipe.run"
+    },
+    {
+      "gate": "M3JDK21_receiver_isolated_source_and_C17_CI",
+      "state": "NOT_RUN",
+      "reason": "New target GitHub Actions workflow added; awaiting actual reported conclusion"
     }
   ],
   "donor_custody": "OpenJDK SHA-256 selected; GitHub/LeetCode/HackerRank/GeeksForGeeks donors compared in Synexia catalogue without copying challenge code.",
-  "note": "No target runtime Java/C files changed in this receipt-only commit. Synexia verification tip includes exact four-template hashes and synthetic refusal oracle. SHA source postimages are fixed at original canonical recipe commit. All product JVM/JNI/HotSpot/jtreg/Maven gates remain DRAFT/HOLD. Legacy 17458-row challenge corpus #14729 closed without merge; no claim of installed category search.",
+  "note": "Receipts and CI workflows are data-only/test gate additions; original java.lang.Object and java.security.SHA256Adapter sources remain unchanged from the canonical source-sealed postimages. No product runtime, HotSpot, full jtreg, full Maven/OpenRewrite or cross-platform claims.",
   "canonical_recipe_verification_commit": "b714940c9a1db972a2743d2d69f19ce4cdb2904f",
   "canonical_recipe_ci_workflow": ".github/workflows/m3-sha256-object-adapter-jni-proof-20261105.yml",
   "canonical_recipe_ci_status_at_receipt": "QUEUED: no isolated-java21-jni result observed for current Synexia branch",
@@ -145,5 +155,8 @@
     "scope": "Synthetic sandbox first-apply/fixed-point/occupied-stale/missing-preimage/parent-symlink refusal; source-template manifest read-only. Not Maven Recipe.run or a JDK product source mutation.",
     "executed": "Java21 strict compiler, 29 checks JIT and 29 checks -Xint, both PASS",
     "full_manifest_ci": "PENDING"
-  }
+  },
+  "receiver_isolated_ci_workflow": ".github/workflows/m3-sha256-object-adapter-receiver-20261105.yml",
+  "receiver_isolated_ci_workflow_commit": "662f977de7a94639d8c14ba2d97d0a4356ab75c6",
+  "receiver_isolated_ci_status": "NOT_RUN_OR_NOT_REPORTED: workflow added; GitHub CI success not observed"
 }
