@@ -88,6 +88,18 @@
       "state": "PASS",
       "checks": 4,
       "method": "Independent SHA256 calculation on Synexia commit 3ab1d95b... source templates, before CI commit"
+    },
+    {
+      "gate": "Java21_source_seal_synthetic_JIT_20261105",
+      "state": "PASS",
+      "checks": 29,
+      "method": "SHA256RecipeSealsSmoke --synthetic; source blob exact, isolated temp only"
+    },
+    {
+      "gate": "Java21_source_seal_synthetic_Xint_20261105",
+      "state": "PASS",
+      "checks": 29,
+      "method": "SHA256RecipeSealsSmoke --synthetic; -Xint; isolated temp only"
     }
   ],
   "required_product_gates": [
@@ -114,11 +126,24 @@
     {
       "gate": "Windows_macOS_and_JMH_JFR_memory",
       "state": "NOT_RUN"
+    },
+    {
+      "gate": "Synexia_independent_full_manifest_source_seal_CI",
+      "state": "NOT_RUN",
+      "reason": "CI job queued; separate from genuine Maven/OpenRewrite Recipe.run"
     }
   ],
   "donor_custody": "OpenJDK SHA-256 selected; GitHub/LeetCode/HackerRank/GeeksForGeeks donors compared in Synexia catalogue without copying challenge code.",
-  "note": "PASS claims are isolated stock-JDK21 factory/JNI-source tests, not M3JDK21 runtime acceptance. The product Java/C source postimages remain exactly pinned to canonical_recipe_commit; verification-only Synexia additions live at canonical_recipe_verification_commit. The 17,458-row donor-corpus PR #14729 was closed without merge and is not a delivered develop capability.",
-  "canonical_recipe_verification_commit": "5246632a8883d622d2b2826a957f4b5c8d2a55c2",
+  "note": "No target runtime Java/C files changed in this receipt-only commit. Synexia verification tip includes exact four-template hashes and synthetic refusal oracle. SHA source postimages are fixed at original canonical recipe commit. All product JVM/JNI/HotSpot/jtreg/Maven gates remain DRAFT/HOLD. Legacy 17458-row challenge corpus #14729 closed without merge; no claim of installed category search.",
+  "canonical_recipe_verification_commit": "b714940c9a1db972a2743d2d69f19ce4cdb2904f",
   "canonical_recipe_ci_workflow": ".github/workflows/m3-sha256-object-adapter-jni-proof-20261105.yml",
-  "canonical_recipe_ci_status_at_receipt": "QUEUED; no CI conclusion observed"
+  "canonical_recipe_ci_status_at_receipt": "QUEUED: no isolated-java21-jni result observed for current Synexia branch",
+  "canonical_source_seal_oracle": {
+    "path": "synexia-openrewrite-recipes/crates/m3-sha256-object-adapter-20261105/proof/SHA256RecipeSealsSmoke.java",
+    "commit": "24f0586b61fde1cb2a8501e8567017f8da90874f",
+    "git_blob_sha1": "c6c1352620b3e507dd7f890303aa124e530f0e73",
+    "scope": "Synthetic sandbox first-apply/fixed-point/occupied-stale/missing-preimage/parent-symlink refusal; source-template manifest read-only. Not Maven Recipe.run or a JDK product source mutation.",
+    "executed": "Java21 strict compiler, 29 checks JIT and 29 checks -Xint, both PASS",
+    "full_manifest_ci": "PENDING"
+  }
 }
