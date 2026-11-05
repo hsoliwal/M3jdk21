@@ -26,6 +26,7 @@ final class M3LFUCache<K, V> {
     private final byte[] states;
     private int size;
     private long clock;
+    private int lastIdentitySlot = -1;
 
     M3LFUCache(int capacity) {
         if (capacity < 0) {
@@ -56,6 +57,7 @@ final class M3LFUCache<K, V> {
         if (states[target] == 0) {
             size++;
         }
+        lastIdentitySlot = -1;
         keys[target] = key;
         values[target] = created;
         frequencies[target] = 1;
@@ -80,6 +82,7 @@ final class M3LFUCache<K, V> {
         Arrays.fill(states, (byte) 0);
         size = 0;
         clock = 0L;
+        lastIdentitySlot = -1;
     }
 
     int size() {
@@ -91,8 +94,13 @@ final class M3LFUCache<K, V> {
     }
 
     private int findIdentity(Object key) {
+        int hinted = lastIdentitySlot;
+        if (hinted >= 0 && keys[hinted] == key && (states[hinted] & OCCUPIED) != 0) {
+            return hinted;
+        }
         for (int i = 0; i < states.length; i++) {
             if ((states[i] & OCCUPIED) != 0 && keys[i] == key) {
+                lastIdentitySlot = i;
                 return i;
             }
         }
@@ -182,6 +190,7 @@ final class M3LFUCache<K, V> {
     }
 
     private void clearSlot(int slot) {
+        lastIdentitySlot = -1;
         keys[slot] = null;
         values[slot] = null;
         frequencies[slot] = 0;
