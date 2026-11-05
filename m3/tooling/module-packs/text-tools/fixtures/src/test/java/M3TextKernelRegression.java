@@ -162,6 +162,52 @@ public final class M3TextKernelRegression {
         fails(NullPointerException.class, () -> call(sort, null, new String[] {null}, new int[1], false));
         fails(IllegalArgumentException.class, () -> call(sort, null, new String[1], new int[0], false));
         fails(IllegalArgumentException.class, () -> call(uniq, null, new String[] {"a"}, new long[0]));
+        nativeAdjacentEquality(sort, uniq);
+    }
+
+    private static void nativeAdjacentEquality(Method sort, Method uniq) {
+        // Equality can reject different lengths; lexical order still needs the first differing unit.
+        // Keep same-object equality distinct from equal-content, separately allocated Strings.
+        for (int length : new int[] {0, 1, 7, 8, 9, 255, 256, 257, 8191, 8192, 8193, 65536}) {
+            char[] units = new char[length];
+            String alphabet = "a\u0000\ud800\udc00\u00ff\u0100\uffff";
+            for (int i = 0; i < length; i++) units[i] = alphabet.charAt(i % alphabet.length());
+            String prefix = new String(units);
+            String equal = new String(units);
+            if (prefix == equal) throw new AssertionError("separate String identity required");
+            String shorter = prefix.substring(0, Math.max(0, length - 1));
+            String different = length == 0 ? "\u0000"
+                    : prefix.substring(0, length - 1) + (char) (prefix.charAt(length - 1) ^ 1);
+            String[] lines = {prefix, prefix, equal, prefix + "\u0000", prefix, equal,
+                    different, shorter, prefix + "z", prefix + "aa", prefix, equal};
+            String[] snapshot = lines.clone();
+            long expected = 0;
+            for (int i = 0; i < lines.length; i++)
+                if (i == 0 || !lines[i].equals(lines[i - 1])) expected |= 1L << i;
+            long[] actual = {0};
+            call(uniq, null, lines, actual);
+            same(expected, actual[0]);
+            for (boolean reverse : new boolean[] {false, true}) {
+                Integer[] expectedOrder = new Integer[lines.length];
+                for (int i = 0; i < lines.length; i++) expectedOrder[i] = i;
+                Arrays.sort(expectedOrder, (a, b) -> reverse
+                        ? lines[b].compareTo(lines[a]) : lines[a].compareTo(lines[b]));
+                int[] actualOrder = new int[lines.length];
+                call(sort, null, lines, actualOrder, reverse);
+                for (int i = 0; i < lines.length; i++) same(expectedOrder[i], actualOrder[i]);
+            }
+            for (int i = 0; i < lines.length; i++)
+                if (snapshot[i] != lines[i]) throw new AssertionError("input String identity changed");
+            lineCases++;
+        }
+        for (String[] invalid : new String[][] {{null}, {"a", null}, {null, "a"}, {"a", "aa", null}}) {
+            long sentinel = 0x59619d3187dfe029L;
+            long[] output = {sentinel};
+            fails(NullPointerException.class, () -> call(uniq, null, invalid, output));
+            same(sentinel, output[0]); // Native error paths publish no partial keep mask.
+        }
+        fails(NullPointerException.class, () -> call(uniq, null, (Object) null, new long[0]));
+        fails(NullPointerException.class, () -> call(uniq, null, new String[] {"a"}, (Object) null));
     }
 
     private static void nativeFeeds() {

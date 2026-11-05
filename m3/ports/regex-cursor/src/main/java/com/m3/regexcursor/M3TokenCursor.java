@@ -113,7 +113,7 @@ public final class M3TokenCursor implements M3ChunkCursor, M3CursorFacts {
 
     @Override
     public void seek(int position) {
-        Objects.checkIndex(position, total + 1);
+        Objects.checkIndex((long) position, (long) total + 1L);
         if (lanes.length == 0) return;
         // The current lane is a locality hint, never a source of correctness.
         // After proving the search direction, the remaining binary search can

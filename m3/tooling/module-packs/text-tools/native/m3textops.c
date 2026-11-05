@@ -15,12 +15,22 @@ static void m3_throw(JNIEnv *env, const char *name, const char *message) {
 }
 
 /* Java String.compareTo order: unsigned UTF-16 code units, not locale or UTF-8 order.
+ * Equality-only callers need zero/nonzero, so identity or unequal lengths can
+ * decide their result without reading regions. Lexical callers must compare units.
  * Only bounded regions are copied; JNI never acquires a flattened full String. */
 static int m3_compare_from(JNIEnv *env, jstring left, jstring right,
-                           jsize from, int *out) {
+                           jsize from, int equality_only, int *out) {
+    if (equality_only && (*env)->IsSameObject(env, left, right)) {
+        *out = 0;
+        return 1;
+    }
     jsize a = (*env)->GetStringLength(env, left);
     jsize b = (*env)->GetStringLength(env, right);
     if ((*env)->ExceptionCheck(env)) return 0;
+    if (equality_only && a != b) {
+        *out = 1;
+        return 1;
+    }
     jchar la[REGION_UNITS], rb[REGION_UNITS];
     jsize minimum = a < b ? a : b;
     for (jsize at = from; at < minimum;) {
@@ -56,7 +66,7 @@ static int m3_compare_slots(JNIEnv *env, jobjectArray strings,
         (*env)->DeleteLocalRef(env, b);
         return 0;
     }
-    int ok = m3_compare_from(env, a, b, from, out);
+    int ok = m3_compare_from(env, a, b, from, 0, out);
     (*env)->DeleteLocalRef(env, a);
     (*env)->DeleteLocalRef(env, b);
     return ok;
@@ -210,7 +220,7 @@ JNIEXPORT void JNICALL Java_jdk_m3_text_NativeLineOps_uniq0
             (*env)->DeleteLocalRef(env, previous); free(bits); return;
         }
         int cmp;
-        int ok = m3_compare_from(env, previous, current, 0, &cmp);
+        int ok = m3_compare_from(env, previous, current, 0, 1, &cmp);
         (*env)->DeleteLocalRef(env, previous);
         if (!ok) { (*env)->DeleteLocalRef(env, current); free(bits); return; }
         if (cmp != 0) {
