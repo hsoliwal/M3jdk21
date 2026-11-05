@@ -1,0 +1,64 @@
+{
+  "schema": "M3_EXECUTED_WORKFLOW_RECEIVER_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_component_commit": "22af177caf8e8f51ed34d5cb4fec004d1012c95b",
+  "canonical_recipe": "com.synexia.m3.JdkDonorIntegration20261105",
+  "receipt_recipe": "com.synexia.m3.JdkDonorIntegrationReceipt20261105",
+  "canonical_packet": "https://github.com/hsoliwal/com.synexia/tree/22af177caf8e8f51ed34d5cb4fec004d1012c95b/synexia-openrewrite-recipes/recipes/m3-jdk-donor-acceptance-20261105/integration",
+  "receiving_parent": "f2bdb858dcb59ca975210f7509eea2515108eaf5",
+  "files": [
+    {
+      "path": ".github/workflows/m3-file-shadow-stream-20261020.yml",
+      "before_sha256": "68365c276abb9ae18916bc207be446ef982225d5603232918b15eaa79b459c83",
+      "after_sha256": "d7eff21e50751c73fab510b5f00756f2cc586caa6edd0dea4e1fee099f518639",
+      "repository": "hsoliwal/M3jdk21"
+    }
+  ],
+  "sdk": {
+    "tests": 6,
+    "passed": 6,
+    "fixed_point": true,
+    "required_source_refusals": true,
+    "partial_replay_and_worker_permutations": true
+  },
+  "actual_emitted_workflow": {
+    "checks": 186,
+    "passed": 186,
+    "real_file_module_receipt_accepted": true,
+    "candidate_corruptions_refused": 183,
+    "original_oracle_characterizations": 2,
+    "strict_java21_step_unchanged": true,
+    "outside_inline_parser_bytes_unchanged": true,
+    "new_workflow_added": false
+  },
+  "contract_roles": {
+    "source_count": 19,
+    "shared_host_and_image": 17,
+    "host_javac_only": 1,
+    "separate_maven_junit": 1,
+    "host_outcomes": 18,
+    "image_outcomes": 17
+  },
+  "private_integration": {
+    "merge_parents": [
+      "b37eae2a2d06f19768ddfb1c8ac1e4f3b2511adf",
+      "fa226cf0c6510ce6e4a5cb134820d8f4885503e5"
+    ],
+    "nonconflicting_develop_blobs_preserved": 10,
+    "ancestor_provenance_members_preserved": 288,
+    "current_provenance_members": 290,
+    "canonical_member_budget_unchanged": 256,
+    "changed_and_retained_remote_files_verified": 52
+  },
+  "remaining_holds": [
+    "Canonical provenance member bound: 290 > 256",
+    "Existing naming owner review",
+    "Inherited unchanged ProgressMonitors source-lock mismatch in separate NLP/JMOD receiver; no replacement seal qualified",
+    "Full source-built M3JDK installed-image/jtreg, VM/GC/CDS, complete reactor and platforms",
+    "Hosted CI on the final receiving head remains separate from the local executed proof"
+  ],
+  "runtime_completion": false,
+  "family_completion": false,
+  "repository_completion": false,
+  "phase": "STRING"
+}
