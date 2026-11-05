@@ -28,6 +28,9 @@ def admit(rows, observed):
         if identity(observed[name]) != {k: row[k] for k in ("bytes", "sha256", "gitBlob")}:
             raise ValueError("source identity drift: "+name)
     return True
+def pass_markers(text, marker):
+    pattern = re.compile(re.escape(marker)+r" checks=[1-9][0-9]*(?:[ \t].*)?")
+    return [line for line in text.splitlines() if pattern.fullmatch(line)]
 def main():
     ap = argparse.ArgumentParser()
     for key in ("source", "out", "jdk"): ap.add_argument("--"+key, type=Path, required=True)
@@ -117,7 +120,7 @@ source "$M3_BOUNDED_COHORT/m3/build.sh"
         for name in sorted(expected):
             text = regular(source/"m3/build/logs"/name).decode("utf-8")
             program = next(n for n, prefix in selected if any(name == prefix+"-"+mode+".log" for mode in manifest["modes"]))
-            hits = re.findall(r"^"+re.escape(manifest["markers"][program])+r" checks=[1-9][0-9]*(?:\\s|$).*$", text, re.M)
+            hits = pass_markers(text, manifest["markers"][program])
             assert len(hits) == 1, "one original pass marker required: "+name
             counts[name] = hits[0]
         classes = {p.relative_to(source/"m3/build/classes").as_posix(): identity(regular(p))
