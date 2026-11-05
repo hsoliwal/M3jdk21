@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.PrimitiveMapEmptyValueScan20261105
+displayName: One-owner empty M3 long map value-search fast path
+description: Source hash-pinned one-method candidate with external Java21 behavior/ABI gates.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-empty-value-scan-20261105
