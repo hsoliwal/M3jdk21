@@ -6,6 +6,12 @@ on:
       - 'm3/ports/swing-viewport/src/main/java/com/m3/swing/viewport/M3ViewportIndexWindow.java'
       - 'm3/ports/swing-viewport/src/main/java/com/m3/swing/viewport/M3DesktopViewportAdapters.java'
       - 'm3/ports/swing-viewport/src/test/java/com/m3/swing/viewport/M3DesktopViewportProof.java'
+      - 'm3/ports/swing-viewport/src/**'
+      - 'm3/ports/swing-viewport/pom.xml'
+      - 'm3/vendor/third_party/junit-*/**'
+      - 'm3/vendor/third_party/opentest4j/**'
+      - 'm3/vendor/third_party/apiguardian-api/**'
+      - 'm3/vendor/third_party/pom.xml'
       - 'm3/ports/swing-viewport/optional-swingx/**'
       - 'm3/ports/jfx-viewport/**'
       - '.github/workflows/m3-desktop-viewport-indexed-proofs.yml'
@@ -49,10 +55,20 @@ jobs:
           java -ea -Djava.awt.headless=true -cp "$OUT" \
             com.m3.swing.viewport.M3DesktopViewportProof | tee "$RUNNER_TEMP/m3-desktop.log"
           grep -Eq '^M3_DESKTOP_VIEWPORT_PROOF_PASS=[2-9][0-9]+' "$RUNNER_TEMP/m3-desktop.log"
+      - name: Build and verify existing source-built JUnit 5.10.2 closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml \
+            -pl junit-jupiter-5.10.2 -am -DskipTests install
+          JUNIT_JAR="m3/vendor/third_party/junit-jupiter-5.10.2/target/junit-jupiter-5.10.2-m3-source-1.jar"
+          test -s "$JUNIT_JAR"
+          python3 m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py "$JUNIT_JAR"
       - name: Verify the existing Swing port still builds
         shell: bash
         run: |
-          mvn -B -ntp -f m3/ports/swing-viewport/pom.xml -DskipTests package
+          set -euo pipefail
+          mvn -B -ntp -f m3/ports/swing-viewport/pom.xml test
       - name: Compile the optional external JavaFX 21 adapter
         shell: bash
         run: |
@@ -73,6 +89,13 @@ jobs:
           java -Djava.awt.headless=true -cp "$OUT:$JAR" \
             com.m3.swing.viewport.M3SwingXLinkageProof | tee "$RUNNER_TEMP/m3-swingx.log"
           grep -F 'M3_SWINGX_SUBTYPE_PROOF_PASS=4' "$RUNNER_TEMP/m3-swingx.log"
+          javac --release 21 -Xlint:all -Werror -cp "$OUT:$JAR" -d "$OUT" \
+            m3/ports/swing-viewport/src/test/java/com/m3/swing/viewport/M3SwingXHeaderProof.java
+          command -v xvfb-run
+          xvfb-run -a -s '-screen 0 1280x1024x24' \
+            java -Djava.awt.headless=false -cp "$OUT:$JAR" \
+            com.m3.swing.viewport.M3SwingXHeaderProof | tee "$RUNNER_TEMP/m3-swingx-header.log"
+          grep -Fx 'M3_SWINGX_HEADER_RUNTIME_PASS checks=206' "$RUNNER_TEMP/m3-swingx-header.log"
       - name: Publish exact-head logs without overstating native UI qualification
         if: always()
         uses: actions/upload-artifact@v4
@@ -82,3 +105,4 @@ jobs:
           path: |
             ${{ runner.temp }}/m3-desktop.log
             ${{ runner.temp }}/m3-swingx.log
+            ${{ runner.temp }}/m3-swingx-header.log
