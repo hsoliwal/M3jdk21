@@ -42,8 +42,10 @@
         <directory>${repo.root}/m3/tooling/migration-recipes/src/main/resources</directory>
         <includes>
           <include>com/synexia/rewrite/hash-pinned-java/m3-collection-lanes/**</include>
+          <include>com/synexia/rewrite/hash-pinned-java/m3-empty-value-scan-20261105/**</include>
           <include>com/synexia/rewrite/segmented-lane-native/**</include>
           <include>META-INF/rewrite/m3-collection-lanes.yml</include>
+          <include>META-INF/rewrite/m3-empty-value-scan-20261105.yml</include>
         </includes>
       </resource>
     </resources>
