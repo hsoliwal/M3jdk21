@@ -58,6 +58,36 @@
       "gate": "native_SHA256_provider_benchmark",
       "state": "DEFER",
       "reason": "Use existing JDK SHA-256 and HotSpot intrinsics; no separate production JNI provider."
+    },
+    {
+      "gate": "standalone_SHA256Adapter_JIT_20261105_verified",
+      "state": "PASS",
+      "checks": 424,
+      "method": "OpenJDK 21.0.12.1 --patch-module java.base, javac -Xlint:all -Werror, direct execution in current task"
+    },
+    {
+      "gate": "standalone_SHA256Adapter_Xint_20261105_verified",
+      "state": "PASS",
+      "checks": 424,
+      "method": "OpenJDK 21.0.12.1 -Xint direct execution in current task"
+    },
+    {
+      "gate": "JNI_static_factory_digest_JIT_Xcheck_jni_20261105_verified",
+      "state": "PASS",
+      "checks": 3841,
+      "method": "GCC C17 shared library, -Xcheck:jni, Java SHA256Adapter.of(Object)+digest(); NOT M3JDK Object.toAdapter"
+    },
+    {
+      "gate": "JNI_static_factory_digest_Xint_Xcheck_jni_20261105_verified",
+      "state": "PASS",
+      "checks": 3841,
+      "method": "GCC C17 shared library, -Xint -Xcheck:jni; NOT M3JDK Object.toAdapter"
+    },
+    {
+      "gate": "four_synexia_template_sha256_seals_20261105",
+      "state": "PASS",
+      "checks": 4,
+      "method": "Independent SHA256 calculation on Synexia commit 3ab1d95b... source templates, before CI commit"
     }
   ],
   "required_product_gates": [
@@ -87,5 +117,8 @@
     }
   ],
   "donor_custody": "OpenJDK SHA-256 selected; GitHub/LeetCode/HackerRank/GeeksForGeeks donors compared in Synexia catalogue without copying challenge code.",
-  "note": "Data-only receipt, not an executable task, recipe mirror, source template or promotion authority."
+  "note": "PASS claims are isolated stock-JDK21 factory/JNI-source tests, not M3JDK21 runtime acceptance. The product Java/C source postimages remain exactly pinned to canonical_recipe_commit; verification-only Synexia additions live at canonical_recipe_verification_commit. The 17,458-row donor-corpus PR #14729 was closed without merge and is not a delivered develop capability.",
+  "canonical_recipe_verification_commit": "5246632a8883d622d2b2826a957f4b5c8d2a55c2",
+  "canonical_recipe_ci_workflow": ".github/workflows/m3-sha256-object-adapter-jni-proof-20261105.yml",
+  "canonical_recipe_ci_status_at_receipt": "QUEUED; no CI conclusion observed"
 }
