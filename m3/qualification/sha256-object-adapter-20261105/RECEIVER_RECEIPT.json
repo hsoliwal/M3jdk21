@@ -1,0 +1,91 @@
+{
+  "schema": "M3_SHA256_OBJECT_RECEIVER_V1",
+  "date": "2026-11-05",
+  "qualification": "DRAFT_HOLD",
+  "canonical_recipe_repository": "hsoliwal/com.synexia",
+  "canonical_recipe_commit": "208e7d340642958801e7e0778b057e4a1cf05f09",
+  "canonical_recipe_pr": "https://github.com/hsoliwal/com.synexia/pull/16651",
+  "canonical_recipe": "com.synexia.m3.SHA256ObjectAdapter20261105",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_baseline": "b0fbe13b7feb437b39cdd1069ff49415f4d50bc0",
+  "generated_targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/Object.java",
+      "preimage_sha256": "014671527cd647d90f8cab6d6dbd0ca127d918c5a8f38d1ec50be6140eb63735",
+      "postimage_sha256": "4bf59c9e8e997f9600f42d4bffe7543aace822c849a73c377d322f2add4cdbd5",
+      "git_blob_sha1": "7140f4be730894209d84e73ca5d78be0ee33018a"
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/SHA256Adapter.java",
+      "preimage_sha256": "ABSENT",
+      "postimage_sha256": "85863e265fb41ddd48b49a90c07f19ff7626fd9adc8f78f329311673fccda6d2",
+      "git_blob_sha1": "361d50b0897e5f9e3df66257dc2fcbd018272386"
+    },
+    {
+      "path": "test/jdk/java/lang/Object/SHA256ObjectAdapterTest.java",
+      "preimage_sha256": "ABSENT",
+      "postimage_sha256": "7d7d3726d0d8caca1eb46897e1a2c1a136bd3ef8dbccaacc5b9bc265b2aa9108",
+      "git_blob_sha1": "d188de82ddc00523aa2a46494bca4a4b5fc62c09"
+    },
+    {
+      "path": "test/jdk/java/lang/Object/libSHA256ObjectAdapterTest.c",
+      "preimage_sha256": "ABSENT",
+      "postimage_sha256": "faaf42f8a91011e8417255638428ee29bf4c0e89a9692a5578fe7260831a22f9",
+      "git_blob_sha1": "6e2dbb8da4bc8f4fc9f08fe18ac975fd88aac04d"
+    }
+  ],
+  "source_blob_proof": "Source-adapter, Java jtreg, C17 jtreg Git blob SHA1 match the isolated locally compiled source; product receiver bytes must match Synexia templates.",
+  "local_evidence": [
+    {
+      "gate": "OpenJDK21_java_security_SHA256Adapter_patch_module_compile",
+      "state": "PASS"
+    },
+    {
+      "gate": "standalone_SHA256Adapter_JIT",
+      "state": "PASS",
+      "checks": 424
+    },
+    {
+      "gate": "standalone_SHA256Adapter_Xint",
+      "state": "PASS",
+      "checks": 424
+    },
+    {
+      "gate": "C17_JNI_jtreg_source_strict_gcc_compile",
+      "state": "PASS"
+    },
+    {
+      "gate": "native_SHA256_provider_benchmark",
+      "state": "DEFER",
+      "reason": "Use existing JDK SHA-256 and HotSpot intrinsics; no separate production JNI provider."
+    }
+  ],
+  "required_product_gates": [
+    {
+      "gate": "Synexia_OpenRewrite_Recipe.run_fixed_point_refusal",
+      "state": "NOT_RUN"
+    },
+    {
+      "gate": "M3JDK21_make_images_full_java_base_compile",
+      "state": "NOT_RUN"
+    },
+    {
+      "gate": "M3JDK21_jtreg_SHA256ObjectAdapterTest_JIT_Xint_Xcheck_jni",
+      "state": "NOT_RUN"
+    },
+    {
+      "gate": "M3JDK21_existing_ObjectAdapterDispatchTest_and_ObjectAdapterNativeTest",
+      "state": "NOT_RUN"
+    },
+    {
+      "gate": "M3JDK21_javap_public_abi_bootstrap_JNI_provider",
+      "state": "NOT_RUN"
+    },
+    {
+      "gate": "Windows_macOS_and_JMH_JFR_memory",
+      "state": "NOT_RUN"
+    }
+  ],
+  "donor_custody": "OpenJDK SHA-256 selected; GitHub/LeetCode/HackerRank/GeeksForGeeks donors compared in Synexia catalogue without copying challenge code.",
+  "note": "Data-only receipt, not an executable task, recipe mirror, source template or promotion authority."
+}

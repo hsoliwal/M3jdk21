@@ -10847,6 +10847,177 @@
         },
         "source_state": "implemented",
         "observation": "Additive stable capability identity. Existing mappings, queue operations and all global receiving authority remain unchanged; implemented-unverified is not acceptance or phase promotion."
+      },
+      {
+        "id": "m3.object-sha256-adapter",
+        "kind": "adapter",
+        "status": "implemented-unverified",
+        "reason": "Exact-source candidate extends existing M3JDK21 Object.toAdapter with a SHA-256 content capability while keeping the published Object contract and JDK SHA implementation. Product validation is held.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "208e7d340642958801e7e0778b057e4a1cf05f09",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-sha256-object-adapter-20261105/02-SHA256Adapter.java.txt",
+            "symbol": "java.security.SHA256Adapter",
+            "signatures": [],
+            "sha256": "85863e265fb41ddd48b49a90c07f19ff7626fd9adc8f78f329311673fccda6d2",
+            "git_blob_sha1": "361d50b0897e5f9e3df66257dc2fcbd018272386",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/pull/16651/head"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "208e7d340642958801e7e0778b057e4a1cf05f09",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-sha256-object-adapter-native-20261105/01-libSHA256ObjectAdapterTest.c.txt",
+            "symbol": "com.synexia.m3.SHA256ObjectAdapter20261105",
+            "signatures": [],
+            "sha256": "faaf42f8a91011e8417255638428ee29bf4c0e89a9692a5578fe7260831a22f9",
+            "git_blob_sha1": "6e2dbb8da4bc8f4fc9f08fe18ac975fd88aac04d",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/pull/16651/head"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/lang/Object.java",
+            "symbol": "java.lang.Object.toAdapter(Class<T>)",
+            "signatures": [],
+            "sha256": "4bf59c9e8e997f9600f42d4bffe7543aace822c849a73c377d322f2add4cdbd5",
+            "git_blob_sha1": "7140f4be730894209d84e73ca5d78be0ee33018a",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/codex/m3-sha256-object-adapter-20261105"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/security/SHA256Adapter.java",
+            "symbol": "java.security.SHA256Adapter",
+            "signatures": [],
+            "sha256": "85863e265fb41ddd48b49a90c07f19ff7626fd9adc8f78f329311673fccda6d2",
+            "git_blob_sha1": "361d50b0897e5f9e3df66257dc2fcbd018272386",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/codex/m3-sha256-object-adapter-20261105"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "java.base",
+            "path": "test/jdk/java/lang/Object/SHA256ObjectAdapterTest.java",
+            "symbol": "SHA256ObjectAdapterTest",
+            "signatures": [],
+            "sha256": "7d7d3726d0d8caca1eb46897e1a2c1a136bd3ef8dbccaacc5b9bc265b2aa9108",
+            "git_blob_sha1": "d188de82ddc00523aa2a46494bca4a4b5fc62c09",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/codex/m3-sha256-object-adapter-20261105"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "java.base",
+            "path": "test/jdk/java/lang/Object/libSHA256ObjectAdapterTest.c",
+            "symbol": "Java_SHA256ObjectAdapterTest_digestFromNative",
+            "signatures": [],
+            "sha256": "faaf42f8a91011e8417255638428ee29bf4c0e89a9692a5578fe7260831a22f9",
+            "git_blob_sha1": "6e2dbb8da4bc8f4fc9f08fe18ac975fd88aac04d",
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/codex/m3-sha256-object-adapter-20261105"
+          }
+        ],
+        "owner": "java.lang.Object#toAdapter(Class<T>) and java.security.SHA256Adapter in java.base; JDK MessageDigest retains cryptographic ownership",
+        "identity": {
+          "namespace": "No new object identity, digest ID, global registry, native pointer or second payload owner.",
+          "generation": "String bytes immutable; byte[] and selected ByteBuffer bytes recomputed per digest, with external synchronization for concurrent writes."
+        },
+        "contract": {
+          "differences": [
+            "New exact SHA256Adapter.class dispatch for String, byte[] and ByteBuffer; no semantic conversion of arbitrary objects."
+          ],
+          "compatibility_obligations": [
+            "Keep public <T> T Object.toAdapter(Class<T>) erased ABI unchanged, class-identity and subclass override semantics unchanged.",
+            "Keep M3Object identity and null-target NPE, null on unsupported target.",
+            "No hidden Object fields, I/O, implicit serialization or native crypto duplication.",
+            "Buffer position/limit/mark are not mutated; receiver range fixed at adaptation, live mutable contents rehashed."
+          ],
+          "public_surface": [
+            "<T> T Object.toAdapter(Class<T>)",
+            "java.security.SHA256Adapter.digest(): byte[]",
+            "java.security.SHA256Adapter.hexDigest(): String",
+            "java.security.SHA256Adapter.matches(byte[]): boolean",
+            "java.security.SHA256Adapter.of(Object): SHA256Adapter"
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Existing Object invokevirtual descriptor (Ljava/lang/Class;)Ljava/lang/Object; retained; new interface is additive.",
+          "bootstrap": "java.base; Java provider/intrinsics; native C17 code is jtreg interoperability test only."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Exact runtime class-token dispatch after assignability and M3Object checks.",
+          "joins": "String -> UTF-8 bytes; byte[] -> whole contents; ByteBuffer -> selected position/limit slice.",
+          "outputs": "Fresh 32-byte SHA-256 digest; optional 64-character lowercase hex boundary.",
+          "cached_facts": "None; mutable sources rehashed, no stale digest cache."
+        },
+        "recipe": {
+          "id": "com.synexia.m3.SHA256ObjectAdapter20261105",
+          "version": "1",
+          "path": "hsoliwal/com.synexia:synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-sha256-object-adapter-20261105.yml",
+          "sha256": null,
+          "preconditions": [
+            "M3JDK21 master exact Object.java preimage SHA-256 and ABSENT remaining 3 target paths.",
+            "Synexia canonical Java+Text template and manifest postimage digests exactly match."
+          ],
+          "rollback": "Draft branch only; revert entire receiving commit. No protected base mutation."
+        },
+        "tests": [
+          {
+            "id": "sha256-adapter-Java21-isolated-JIT-Xint",
+            "receipt": "m3/qualification/sha256-object-adapter-20261105/RECEIVER_RECEIPT.json"
+          },
+          {
+            "id": "sha256-object-adapter-jtreg-JNI-pending",
+            "receipt": "m3/qualification/sha256-object-adapter-20261105/RECEIVER_RECEIPT.json"
+          }
+        ],
+        "provenance": {
+          "license": "New java.base interface and modified OpenJDK Object retain GPLv2 with Classpath exception; jtreg Java/C use GPLv2; Synexia recipe Apache-2.0.",
+          "publication": "Only first-party implementation, no LeetCode/HackerRank/GeeksForGeeks/OpenSSL source copied.",
+          "copied_code": false
+        },
+        "sync": {
+          "source_revision": "208e7d340642958801e7e0778b057e4a1cf05f09",
+          "target_revision": "b0fbe13b7feb437b39cdd1069ff49415f4d50bc0",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Exact dispatch only; native code is test-only."
+          ],
+          "pending": [
+            "Synexia Maven/OpenRewrite Recipe.run/fixed-point/drift refusal",
+            "M3JDK21 full source-built images, javap and jtreg JIT/-Xint/-Xcheck:jni",
+            "Windows/macOS native and SHA provider gates",
+            "Benchmarked CPU/heap/native memory and full reactor"
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "proposed",
+        "observation": "Standalone OpenJDK21 adapter ran 424 checks per mode; C17 JNI test code compiled with strict flags, but product Object.java and full M3JDK21 jtreg have not been executed."
       }
     ]
   },
