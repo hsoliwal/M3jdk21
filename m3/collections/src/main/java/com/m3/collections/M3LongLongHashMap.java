@@ -108,6 +108,8 @@ public final class M3LongLongHashMap {
     }
 
     public boolean containsValue(long value) {
+        // An empty map cannot contain a value; skip the backing-capacity scan.
+        if (size == 0) return false;
         for (int i = 0; i < states.length; i++) {
             if (states[i] == USED && values[i] == value) {
                 return true;
