@@ -41,6 +41,10 @@ import org.openrewrite.text.PlainText;
 final class TQFixtureManifestConsistencyTest {
     private static final String FORWARD = "m3-tq-manifest-consistency-20261019";
     private static final String INVERSE = FORWARD + "-inverse";
+    private static final String CURRENT_FORWARD = "m3-tq-manifest-consistency-20261105";
+    private static final String CURRENT_INVERSE = CURRENT_FORWARD + "-inverse";
+    private static final String CURRENT_AFTER_SHA =
+            "a6026e8f14c8aa4f3394876dda6d32c3ae1d6f7a4d927d13050e41e784886afc";
     private static final String RESOURCE_BASE =
             "/com/m3/rewrite/backport/jdk21-hash-pinned-text/";
     private static final String OWNER_ROOT = RESOURCE_BASE + "m3-tq-sync/";
@@ -54,6 +58,14 @@ final class TQFixtureManifestConsistencyTest {
             "11-plan.json.txt", "50d583d5ff9f0975e8d1970eaaf9613c9694ccc0e9664f9c2f92f5e901ba0a39",
             "12-manifest.tsv.txt", "d4748d025cf93a35fb50695d7ca85728a1b9a8b319beed4f55a4d4ca64070595",
             "16-workflow.yml.txt.txt", "67573f9e38b1ccd595e8c4be07b68f38a4cbe3d44eb81484d6f18d5e476ac60a");
+
+    private static final Map<String, String> REVIEWED_CURRENT = Map.of(
+            "01-m3-tq.yml.txt", "783e59db8ae27787a5cc40310f534e90ae24d60ebdc71c5feb3f30f35a85972b",
+            "09-inputs.tsv.txt", "6f602866bae4dc215675311740a6f3d9b7795c866674e3f1f813c37ad07c075a",
+            "11-plan.json.txt", "3f416942febd9d1d96a6d9da6bdd7a2462cb905a153b722216d2239ce0cef81c",
+            "12-manifest.tsv.txt", "456ce63b32cbeecefb417f082b4faf734d1652e7dc1a6c60e46bc86bde09d608",
+            "16-workflow.yml.txt.txt", "783e59db8ae27787a5cc40310f534e90ae24d60ebdc71c5feb3f30f35a85972b",
+            "20-TQTest.java.txt", "7ce7e90af7f0011c133ef71f2b75b01f17b02a102d3b2b70bd01856092467c8c");
 
     private record Applied(Map<String, String> files, List<Result> changes) {}
 
@@ -124,16 +136,28 @@ final class TQFixtureManifestConsistencyTest {
         assertEquals(before, restored.files().get(TARGET));
         assertEquals(unrelated, restored.files().get("unrelated.txt"));
 
-        assertEquals(after, resource(OWNER_ROOT + "manifest.tsv"),
-                "the current fixture manifest must be the real recipe postimage");
-        assertEquals(after, Files.readString(CRATE.resolve(
+        Applied currentApplied = apply(namedCurrent(false), sources(applied.files()));
+        assertEquals(1, currentApplied.changes().size());
+        String current = currentApplied.files().get(TARGET);
+        assertEquals(CURRENT_AFTER_SHA, sha(current.getBytes(StandardCharsets.UTF_8)));
+        assertEquals(current, resource(OWNER_ROOT + "manifest.tsv"),
+                "the current fixture must be the reviewed current recipe postimage");
+        assertEquals(current, Files.readString(CRATE.resolve(
                 "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/"
                         + "m3-tq-sync/manifest.tsv"), StandardCharsets.UTF_8));
+        assertEquals(unrelated, currentApplied.files().get("unrelated.txt"));
+        assertTrue(apply(namedCurrent(false), sources(currentApplied.files())).changes().isEmpty());
+        Applied historical = apply(namedCurrent(true), sources(currentApplied.files()));
+        assertEquals(applied.files(), historical.files());
+        assertEquals(restored.files(), apply(named(true), sources(historical.files())).files());
 
         List<String[]> oldRows = rows(before);
         List<String[]> newRows = rows(after);
         assertEquals(24, oldRows.size());
         assertEquals(24, newRows.size());
+        List<String[]> currentRows = rows(current);
+        assertEquals(24, currentRows.size());
+        Set<String> currentChanged = new HashSet<>();
         Set<String> changed = new HashSet<>();
         for (int index = 0; index < 24; index++) {
             String[] oldRow = oldRows.get(index);
@@ -147,19 +171,76 @@ final class TQFixtureManifestConsistencyTest {
                 assertEquals(REVIEWED_AFTER.get(newRow[3]), newRow[2]);
                 assertTrue(changed.add(newRow[3]));
             }
-            assertEquals(newRow[2], sha(resourceBytes(OWNER_ROOT + newRow[3])),
-                    "the existing resource body must supply every AFTER hash");
+            String[] currentRow = currentRows.get(index);
+            assertEquals(4, currentRow.length);
+            for (int column : new int[] {0, 1, 3}) {
+                assertEquals(newRow[column], currentRow[column],
+                        "current target order, BEFORE hashes and resource names must survive");
+            }
+            assertEquals(REVIEWED_CURRENT.getOrDefault(newRow[3], newRow[2]), currentRow[2]);
+            if (!newRow[2].equals(currentRow[2])) assertTrue(currentChanged.add(newRow[3]));
+            assertEquals(currentRow[2], sha(resourceBytes(OWNER_ROOT + currentRow[3])),
+                    "the existing current resource body must supply every AFTER hash");
         }
         assertEquals(REVIEWED_AFTER.keySet(), changed);
+        assertEquals(REVIEWED_CURRENT.keySet(), currentChanged);
+    }
+
+    @Test
+    void namedCurrentForwardInverseReplayAndRefusal() throws Exception {
+        String before = resource(RESOURCE_BASE + CURRENT_FORWARD + "/tq-manifest.tsv.before.txt");
+        String after = resource(RESOURCE_BASE + CURRENT_FORWARD + "/tq-manifest.tsv.txt");
+        assertEquals(AFTER_SHA, sha(before.getBytes(StandardCharsets.UTF_8)));
+        assertEquals(CURRENT_AFTER_SHA, sha(after.getBytes(StandardCharsets.UTF_8)));
+        assertEquals(after, resource(RESOURCE_BASE + CURRENT_INVERSE + "/tq-manifest.tsv.before.txt"));
+        assertEquals(before, resource(RESOURCE_BASE + CURRENT_INVERSE + "/tq-manifest.tsv.txt"));
+        Applied advanced = apply(namedCurrent(false), List.of(text(TARGET, before)));
+        assertEquals(1, advanced.changes().size());
+        assertEquals(after, advanced.files().get(TARGET));
+        assertTrue(apply(namedCurrent(false), sources(advanced.files())).changes().isEmpty());
+        Applied restored = apply(namedCurrent(true), sources(advanced.files()));
+        assertEquals(1, restored.changes().size());
+        assertEquals(before, restored.files().get(TARGET));
+        assertTrue(apply(namedCurrent(true), sources(restored.files())).changes().isEmpty());
+        for (boolean inverse : new boolean[] {false, true}) {
+            Recipe recipe = namedCurrent(inverse);
+            String input = inverse ? after : before;
+            assertThrows(RuntimeException.class,
+                    () -> run(recipe, List.of(text(TARGET, input + "\\n# unknown drift\\n"))));
+            assertThrows(RuntimeException.class, () -> run(recipe, List.of()));
+            assertThrows(RuntimeException.class,
+                    () -> run(recipe, List.of(text(TARGET, input), text(TARGET, input))));
+        }
+        SourceFile emitted = advanced.changes().get(0).getAfter();
+        Path output = CRATE.resolve("target/generated-current-recipe").resolve(emitted.getSourcePath());
+        Files.createDirectories(output.getParent());
+        Files.writeString(output, emitted.printAll(), StandardCharsets.UTF_8);
+        assertArrayEquals(after.getBytes(StandardCharsets.UTF_8), Files.readAllBytes(output));
+    }
+
+    private static Recipe namedCurrent(boolean inverse) throws IOException {
+        return named(inverse, true);
     }
 
     private static Recipe named(boolean inverse) throws IOException {
-        String crate = inverse ? INVERSE : FORWARD;
+        return named(inverse, false);
+    }
+
+    private static Recipe named(boolean inverse, boolean current) throws IOException {
+        String crate = current
+                ? (inverse ? CURRENT_INVERSE : CURRENT_FORWARD)
+                : (inverse ? INVERSE : FORWARD);
         String descriptorPath = "/META-INF/rewrite/" + crate + ".yml";
-        String name = inverse ? "com.m3.TQFixtureManifestConsistencyInverse20261019"
-                : "com.m3.TQFixtureManifestConsistency20261019";
-        String expected = inverse ? "1d2ec38b81eab59b803dbd5ea4176a6b5f60497b2686c5acc065294a18a110cd"
-                : "cd87ac962328cf5dd1bb02745a83ee6272db28e505de6adbeeb1655d57b4c4d3";
+        String name = current
+                ? (inverse ? "com.m3.TQFixtureManifestConsistencyInverse20261105"
+                        : "com.m3.TQFixtureManifestConsistency20261105")
+                : (inverse ? "com.m3.TQFixtureManifestConsistencyInverse20261019"
+                        : "com.m3.TQFixtureManifestConsistency20261019");
+        String expected = current
+                ? (inverse ? "d8baa2ec32e304649a54182841778d0bfe84df47a898c1d5ca25b82735b3cab2"
+                        : "7486a244dc4574ede3ac1969572608aa1d8a57ae9213563ec9455bdc995bd0fc")
+                : (inverse ? "1d2ec38b81eab59b803dbd5ea4176a6b5f60497b2686c5acc065294a18a110cd"
+                        : "cd87ac962328cf5dd1bb02745a83ee6272db28e505de6adbeeb1655d57b4c4d3");
         byte[] descriptor = resourceBytes(descriptorPath);
         assertEquals(expected, sha(descriptor), "the explicit descriptor must be exact");
         Environment environment = Environment.builder()

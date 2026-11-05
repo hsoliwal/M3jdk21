@@ -1,0 +1,10 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.TQFixtureManifestConsistencyInverse20261105
+displayName: Restore the reviewed historical TQ fixture epoch
+description: >-
+  Restore the exact October 19 postimage without changing the frozen historical recipe.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-tq-manifest-consistency-20261105-inverse

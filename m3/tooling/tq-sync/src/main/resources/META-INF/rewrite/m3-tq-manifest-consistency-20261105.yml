@@ -1,0 +1,10 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.TQFixtureManifestConsistency20261105
+displayName: Advance the TQ fixture to the reviewed current epoch
+description: >-
+  Change only six reviewed AFTER hashes while preserving all target paths, preimages and resource names.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-tq-manifest-consistency-20261105
