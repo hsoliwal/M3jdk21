@@ -12,7 +12,7 @@
     "base_branch": "master",
     "base_commit": "b0fbe13b7feb437b39cdd1069ff49415f4d50bc0",
     "base_tree": "3c3dbecc13a502b15c3510edf84ac3401fe5f01b",
-    "source_path": "m3/docs/qualification/v7-bootstrap-closure-20261105/RECEIVER_RECEIPT.json",
+    "source_path": "m3/qualification/string/bootstrap-source-closure.json",
     "product_jdk_classes_modified": 0,
     "public_JDK_API_changed": false,
     "modules_or_export_directives_modified": false

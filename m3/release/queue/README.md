@@ -54,7 +54,7 @@ active. No gate is waived while recipe custody is reconciled.
 
 ## v7 bootstrap source-closure queue
 
-The [pending String receipt](../../docs/qualification/v7-bootstrap-closure-20261105/RECEIVER_RECEIPT.json)
+The [pending String receipt](../../qualification/string/bootstrap-source-closure.json)
 binds the calibrated four-group compiler audit and seven first-hop donor dependencies.
 Its base-only control compiles and management control is rejected; the historical
 projection still lacks source closure. The existing MIndexString to java.lang.M3String
