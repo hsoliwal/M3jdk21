@@ -1,0 +1,107 @@
+# Copyright 2026 Hitesh Soliwal, Synexia. SPDX-License-Identifier: Apache-2.0
+# Reuses the original build and the existing bounded hosted qualification lane.
+name: M3 current core contract matrix
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-core-contract-matrix.yml'
+      - 'm3/tooling/core-contract-matrix/**'
+      - 'm3/core/**'
+      - 'm3/build.sh'
+      - 'm3/lexicon/**'
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  original-core:
+    if: github.repository == 'hsoliwal/M3jdk21' && github.event.pull_request.head.repo.full_name == 'hsoliwal/M3jdk21'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Reserve storage and select provisioned JDK 21
+        id: preflight
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-core-contract-source
+          TMPDIR: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/data
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -I -S -B - <<'PY'
+          import os,pathlib,re,shutil
+          reserve,cap=8*1024**3,512*1024**2
+          for key in ("RUNNER_TEMP","GITHUB_WORKSPACE"):
+              base=pathlib.Path(os.environ[key])
+              if not base.is_dir() or any(p.is_symlink() for p in [base,*base.parents]):raise SystemExit("HOLD_STORAGE redirected runner storage")
+              if shutil.disk_usage(base).free<reserve+cap:raise SystemExit("HOLD_STORAGE 8GiB after512MiB")
+          root=pathlib.Path(os.environ["M3_PROOF_ROOT"]);source=pathlib.Path(os.environ["M3_SOURCE_ROOT"])
+          if root.exists() or source.exists():raise SystemExit("fresh owned paths required")
+          cache=pathlib.Path(os.environ["RUNNER_TOOL_CACHE"])/"Java_Temurin-Hotspot_jdk"
+          javas=[v/"x64" for v in cache.glob("21.*") if re.fullmatch(r"21\.\d+\.\d+-\d+(?:\.\d+)*",v.name) and (v/"x64.complete").is_file() and all(os.access(v/"x64/bin"/n,os.X_OK) for n in ("java","javac","jar"))]
+          if not javas:raise SystemExit("HOLD_TOOLCHAIN provisioned JDK21 required; no download fallback")
+          java=sorted(javas)[-1].resolve()
+          for name in ("tmp","home","cache","config","data"):(root/name).mkdir(parents=True,exist_ok=False)
+          with open(os.environ["GITHUB_OUTPUT"],"a",encoding="utf-8") as stream:stream.write("java="+str(java)+"\n")
+          PY
+      - name: Narrow exact-head checkout
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-core-contract-source
+          TMPDIR: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/data
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          path: m3-core-contract-source
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 1
+          fetch-tags: false
+          lfs: false
+          submodules: false
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.gitattributes
+            /.github/workflows/m3-core-contract-matrix.yml
+            /m3/tooling/core-contract-matrix/
+            /m3/core/
+            /m3/build.sh
+            /m3/lexicon/english-demo.txt
+            /m3/lexicon/synexia-number-target-map.tsv
+            /m3/lexicon/synexia-precompute-field-map.tsv
+            /m3/lexicon/synexia-source-manifest.tsv
+            /m3/lexicon/synexia-word-source-revisions.tsv
+      - name: Execute unchanged original build
+        id: qualify
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}
+          M3_SOURCE_ROOT: ${{ github.workspace }}/m3-core-contract-source
+          TMPDIR: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TEMP: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          TMP: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/tmp
+          XDG_CACHE_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/config
+          XDG_DATA_HOME: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/data
+          M3_JDK: ${{ steps.preflight.outputs.java }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -I -S -B "$M3_SOURCE_ROOT/m3/tooling/core-contract-matrix/qualify.py" --source "$M3_SOURCE_ROOT" --out "$M3_PROOF_ROOT" --jdk "$M3_JDK"
+      - name: Preserve actual build evidence
+        if: always() && (steps.qualify.outcome == 'success' || steps.qualify.outcome == 'failure')
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-current-core-contract-${{ github.run_id }}-${{ github.run_attempt }}
+          if-no-files-found: error
+          retention-days: 7
+          path: ${{ runner.temp }}/m3-core-contract-${{ github.run_id }}-${{ github.run_attempt }}/contract/
