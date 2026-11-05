@@ -1,0 +1,3 @@
+M3_CONTAINS_VALUE_ATOM_PASS checks=8000 empty_scan_baseline_ns=7562998640 empty_scan_candidate_ns=22888 sink=0
+M3_CONTAINS_VALUE_ATOM_PASS checks=8000 empty_scan_baseline_ns=150705274 empty_scan_candidate_ns=16399 sink=0
+ISOLATED_METHOD_ONLY|JAVAC_21_LINT=PASS|MAVEN=NOT_RUN|FULL_CLASS=NOT_RUN|JNI=NOT_TOUCHED
