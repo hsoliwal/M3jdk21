@@ -51,3 +51,12 @@ Historical target-local recipe executors remain preserved migration debt and
 are not invoked by this release workflow. Foundation, precompute Java/JNI and
 full-family product checks still run; naming and retained-source queues remain
 active. No gate is waived while recipe custody is reconciled.
+
+## v7 bootstrap source-closure queue
+
+The [pending String receipt](../../docs/qualification/v7-bootstrap-closure-20261105/RECEIVER_RECEIPT.json)
+binds the calibrated four-group compiler audit and seven first-hop donor dependencies.
+Its base-only control compiles and management control is rejected; the historical
+projection still lacks source closure. The existing MIndexString to java.lang.M3String
+mapping is preserved. This passive snapshot leaves every runtime receiving gate open;
+recipes and raw proof stay in Synexia.

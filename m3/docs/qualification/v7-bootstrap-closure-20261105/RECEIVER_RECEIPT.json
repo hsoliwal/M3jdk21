@@ -1,0 +1,217 @@
+{
+  "schema": "M3JDK21_V7_BOOTSTRAP_PENDING_RECEIPT_V1",
+  "date": "2026-11-05",
+  "spdx_file_copyright_text": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "spdx_license_identifier": "Apache-2.0",
+  "kind": "passive_pending_string_qualification_snapshot",
+  "status": "PENDING",
+  "release_ready": false,
+  "runtime_accepted": false,
+  "product": {
+    "repository": "hsoliwal/M3jdk21",
+    "base_branch": "master",
+    "base_commit": "b0fbe13b7feb437b39cdd1069ff49415f4d50bc0",
+    "base_tree": "3c3dbecc13a502b15c3510edf84ac3401fe5f01b",
+    "source_path": "m3/docs/qualification/v7-bootstrap-closure-20261105/RECEIVER_RECEIPT.json",
+    "product_jdk_classes_modified": 0,
+    "public_JDK_API_changed": false,
+    "modules_or_export_directives_modified": false
+  },
+  "audit": {
+    "status": "PASS_CALIBRATED_AUDIT",
+    "repository": "hsoliwal/com.synexia",
+    "commit": "9466e0a1b0aa58c429f855f11c3e9c102b8e2cb8",
+    "pull_request": 16650,
+    "qualification_git_blob": "4766db5a7fdaf800fffddbe3b84111963c15916b",
+    "raw_log": {
+      "gitBlob": "a4f2983ae680f6aeaef0541d7632a2625d002c5c",
+      "sha256": "5ce13223a266fdea7325e921d70dfefd7622b20462dc1073d15bed6c4f14136a",
+      "bytes": 41849
+    },
+    "source_bindings_git_blob": "c6bd76d8f8176b413c88aa832f22df6d86480e7a",
+    "runtime": {
+      "version": "21.0.9+7-LTS-338",
+      "vm": "Java HotSpot(TM) 64-Bit Server VM",
+      "os": "Windows 11",
+      "arch": "amd64"
+    },
+    "attempts": {
+      "base-control": {
+        "compiled": true,
+        "emittedClasses": 1,
+        "diagnosticCount": 0
+      },
+      "management-control": {
+        "compiled": false,
+        "emittedClasses": 0,
+        "diagnosticCount": 1
+      },
+      "historical-projection": {
+        "compiled": false,
+        "emittedClasses": 0,
+        "diagnosticCount": 19
+      },
+      "current-owner": {
+        "compiled": false,
+        "emittedClasses": 0,
+        "diagnosticCount": 124
+      }
+    },
+    "compiler_boundary": "JavaCompiler --release21 --limit-modules java.base with explicit empty classpath/sourcepath; in-memory inputs/output",
+    "scope": "Calibrated diagnostic audit, not named java.base/source-built M3JDK or runtime qualification.",
+    "missing_dependencies_are_repository_bugs": false
+  },
+  "dependencies": [
+    {
+      "symbol": "IndexCharacterFlags",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexCharacterFlags.java",
+      "source_git_blob": "3219d69fef5747c12f496b0fd5e5dbf652a101e8",
+      "source_sha256": "710636738b28164448c72444c1b8362692101811ecf930d9245c67a190371ea6",
+      "status": "PENDING_OWNER_AND_TRANSITIVE_CLOSURE",
+      "target_owner": "UNBOUND_REQUIRES_EXISTING_OWNER_REVIEW"
+    },
+    {
+      "symbol": "IndexCharacterFlagsResolver",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexCharacterFlagsResolver.java",
+      "source_git_blob": "04141cd643496211bdcd416805c271ab4f65e411",
+      "source_sha256": "a92f044d62e5313a9382640fa636154145485174f9a9b874a5eacc434c17e8cd",
+      "status": "PENDING_OWNER_AND_TRANSITIVE_CLOSURE",
+      "target_owner": "UNBOUND_REQUIRES_EXISTING_OWNER_REVIEW"
+    },
+    {
+      "symbol": "IndexLexiconWordView",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexLexiconWordView.java",
+      "source_git_blob": "e981885ba2268552b7d3aa3d21e2334ea9f26e68",
+      "source_sha256": "47d2f1d402360c378477439dc58c38f341773aacf9f744283ffd5e193fd2bbcd",
+      "status": "PENDING_OWNER_AND_TRANSITIVE_CLOSURE",
+      "target_owner": "UNBOUND_REQUIRES_EXISTING_OWNER_REVIEW"
+    },
+    {
+      "symbol": "IndexTextMetrics",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexTextMetrics.java",
+      "source_git_blob": "58beddc813b3ed4716233d23f0e1909bda4e21b9",
+      "source_sha256": "c10b054236a779550fa339d763117fbac4b3051aef1b54aaeeada62db079689d",
+      "status": "PENDING_OWNER_AND_TRANSITIVE_CLOSURE",
+      "target_owner": "UNBOUND_REQUIRES_EXISTING_OWNER_REVIEW"
+    },
+    {
+      "symbol": "IndexUtf16SearchImage",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexUtf16SearchImage.java",
+      "source_git_blob": "1a6c8a8cafd9297bc6cec3730b81edc5b7f9cb47",
+      "source_sha256": "16eaa92f8b105b276f96ca4b0450dbd1e758ed9bb5a03001194e54132d5d4d39",
+      "status": "PENDING_OWNER_AND_TRANSITIVE_CLOSURE",
+      "target_owner": "UNBOUND_REQUIRES_EXISTING_OWNER_REVIEW"
+    },
+    {
+      "symbol": "MIndexString",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexString.java",
+      "source_git_blob": "bf64463be2ceedcb1f13bd295975dbe795cc0e6d",
+      "source_sha256": "a273782ae56ca7735dee5f44d430c5c3dbde6a64d1c87e8fc8e72b3ab89f69f2",
+      "status": "PENDING_OWNER_AND_TRANSITIVE_CLOSURE",
+      "existing_target_owner": {
+        "type": "java.lang.M3String",
+        "path": "src/java.base/share/classes/java/lang/M3String.java",
+        "gitBlob": "8ddd767e9198f5716ebde4aada80b91591125d9d",
+        "sha256": "70a914e1559c60464585845358487f803bae813ba3bc845385e703e8a887885b",
+        "bytes": 69145
+      },
+      "equivalence": "NOT_PROVEN_BY_THIS_AUDIT"
+    },
+    {
+      "symbol": "MIndexStringBitOps",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStringBitOps.java",
+      "source_git_blob": "aa904f5d10370ab4213b8ab39a1d359f9142d440",
+      "source_sha256": "c63349817965e8aab0dd3360c8c13c778f7578310b2ce7d307829e426736d03c",
+      "status": "PENDING_OWNER_AND_TRANSITIVE_CLOSURE",
+      "target_owner": "UNBOUND_REQUIRES_EXISTING_OWNER_REVIEW"
+    }
+  ],
+  "mapping": {
+    "authority_path": "m3/docs/name-mapping.json",
+    "authority_git_blob": "d3d78c4ebf02572a85ef889a36dc13684dc086e9",
+    "authority_sha256": "a246cdb364037e56e5218f03e6bec520adc1dd902d02982be7d798ef67969ed4",
+    "disposition": "PRESERVED_UNCHANGED",
+    "migration_record_count": 71,
+    "review": "EXACT_PIN_REFERENCE_ONLY_NOT_NEW_WHOLE_SOURCE_REVIEW",
+    "existing_string_mapping": {
+      "source": "com.synexia.indexstring.MIndexString",
+      "target": "java.lang.M3String",
+      "status": "implemented-unverified runtime candidate",
+      "source_role": "Synexia donor/reference implementation",
+      "target_rule": "M3JDK naming is independent; preserve owner+coordinate semantics, internal precompute, and JNI shadow-only materialization"
+    },
+    "new_migration_ids": [],
+    "identity_contract": "Preserve donor IDs, mappings, canonical owner/range identity and existing ambiguity refusal rules."
+  },
+  "receiving_phase": "STRING",
+  "acceptance_receipts": [],
+  "pending_gates": [
+    {
+      "id": "canonical_owner_and_utf16_contract",
+      "status": "NOT_QUALIFIED_FOR_THIS_CLOSURE",
+      "scope": "This receipt does not satisfy the receiving gate."
+    },
+    {
+      "id": "regex_v7_codec_and_bootstrap_closure",
+      "status": "HOLD_MISSING_SOURCE_CLOSURE",
+      "scope": "This receipt does not satisfy the receiving gate."
+    },
+    {
+      "id": "java_jni_parity_and_lifetimes",
+      "status": "NOT_QUALIFIED_FOR_THIS_CLOSURE",
+      "scope": "This receipt does not satisfy the receiving gate."
+    },
+    {
+      "id": "jdk_build_jtreg_interpreter_c1_c2_gc_cds",
+      "status": "NOT_QUALIFIED_FOR_THIS_CLOSURE",
+      "scope": "This receipt does not satisfy the receiving gate."
+    },
+    {
+      "id": "cold_warm_cpu_heap_native_memory",
+      "status": "NOT_QUALIFIED_FOR_THIS_CLOSURE",
+      "scope": "This receipt does not satisfy the receiving gate."
+    }
+  ],
+  "bootstrap_source_closure": "HOLD_MISSING_SOURCE_CLOSURE",
+  "matched_source_built_sdk": "NOT_RUN",
+  "sdk_absence_proven": false,
+  "recipe_code_shipped_to_product": 0,
+  "runtime_sources_modified": 0,
+  "naming_or_identity_changed": false,
+  "canonical_recipe": {
+    "repository": "hsoliwal/com.synexia",
+    "source_commit": "9466e0a1b0aa58c429f855f11c3e9c102b8e2cb8",
+    "class_name": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
+    "source_git_blob": "b3bca459cad0675d8582d90d37a6271644d98158",
+    "crate_path": "synexia-openrewrite-recipes/recipe-crates/m3-v7-pending-receipt-20261105",
+    "rule": "Recipe and mastery tooling remain in Synexia; only qualified data postimages are received."
+  },
+  "admission": "DIAGNOSTIC_EVIDENCE_ONLY",
+  "next_actions": [
+    "Review existing target ownership for all seven donor dependencies, including non-prefix types.",
+    "Preserve the existing MIndexString -> java.lang.M3String legacy mapping; this inventory does not create target names.",
+    "Qualify the minimal source-complete runtime closure and cold compiler/effect separation.",
+    "Run required named-module, matched source-built SDK/JNI/JIT/GC/CDS and resource gates before runtime admission."
+  ],
+  "limitations": [
+    "No target runtime source, module, map, public API or receiving phase is changed.",
+    "Historical18031-check host proof is not source-complete bootstrap proof; current missing dependencies are omitted audit inputs.",
+    "The seven first-hop files are an inventory, not attributed transitive or effect closure.",
+    "Scoped local SDK checks and a first-page Actions query do not prove global image absence.",
+    "No performance, allocation, platform or language-data admission is established by this receipt."
+  ]
+}
