@@ -71,10 +71,13 @@ public final class M3LinkedClearContract {
         boolean staleSub = false;
         try { sub.size(); } catch (ConcurrentModificationException expected) { staleSub = true; }
         check(staleSub, "sublist observes parent structural change");
-        // The existing iterator spliterator checks hasNext before next; an emptied
-        // owner reports exhaustion here. Fail-fast is not guaranteed for this path.
-        check(!bound.tryAdvance(v -> { throw new AssertionError("stale payload"); }),
-                "bound spliterator cannot expose a cleared payload");
+        //FLLDCIM: MRL - stale-contracts-20261106 L1: 4650910eff1 made the linked spliterator fail fast (LinkedIndexSplit binds modCount); fail-fast form of 2aeaffe6424/3538a25a194, dropped by retain merges 11848337f18 (#1479) and 6d0e9f5461e (#1522)
+        // The current index-backed split binds its structural version above.
+        // A nonempty clear invalidates that version even when no slots remain.
+        boolean staleSplit = false;
+        try { bound.tryAdvance(v -> { throw new AssertionError("stale payload"); }); }
+        catch (ConcurrentModificationException expected) { staleSplit = true; }
+        check(staleSplit, "bound index split must be invalidated by nonempty clear");
         check(late.estimateSize() == 0 && !late.tryAdvance(v -> { }), "late binding sees empty list");
         var emptyIterator = list.listIterator();
         list.clear(); reverse.clear();
