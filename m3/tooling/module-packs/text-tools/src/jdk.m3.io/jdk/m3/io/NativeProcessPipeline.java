@@ -18,7 +18,7 @@ import java.util.concurrent.TimeoutException;
 
 /** Exact argv OS pipelines; OS pipes handle inter-stage flow, hot arrays spill automatically. */
 public final class NativeProcessPipeline {
-  private NativeProcessPipeline() { }
+  public NativeProcessPipeline() { }
   private static final int MAX_STAGES = 32;
   private static final Duration MAX_DURATION = Duration.ofDays(1);
 

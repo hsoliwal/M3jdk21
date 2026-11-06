@@ -59,7 +59,7 @@ def relocate(text: str) -> str:
     text = re.sub(r"\bcom_m3_unix4jm3_(?:(io|os|nativecore)_)?([A-Z][A-Za-z0-9]*)\.h\b",
                   lambda m: pkg_of(m.group(2), m.group(1)).replace(".", "_") + "_" + m.group(2) + ".h", text)
     text = text.replace("public final class NativeProcessPipeline {\n",
-                        "public final class NativeProcessPipeline {\n  private NativeProcessPipeline() { }\n")
+                        "public final class NativeProcessPipeline {\n  public NativeProcessPipeline() { }\n")
 
     def jni(m):
         sub, cls = m.group(1), m.group(2)
