@@ -1,0 +1,9 @@
+    //FLLDCIM: HPCPOP - XXH64_KERNEL_ATOMS v1: the lane seeds are the owner's (M3XxHash.lane1..lane4), no second kernel
+    public void reset() {
+        v1 = M3XxHash.lane1(seed);
+        v2 = M3XxHash.lane2(seed);
+        v3 = M3XxHash.lane3(seed);
+        v4 = M3XxHash.lane4(seed);
+        totalLen = 0;
+        bufferSize = 0;
+    }

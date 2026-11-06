@@ -17,6 +17,8 @@
 /*
  * Changed by Synexia (2026-10-31): zero-allocation-hashing 0.16 (Apache License 2.0) absorbed into java.base
  * as jdk.internal.m3.hash; the changes are listed in src/java.base/share/legal/zero-allocation-hashing.md.
+ * Changed by Synexia (2026-11-06): the stripe round, lane merge and tail of xxHash64 are package-private atoms
+ * that M3XxHash64Streaming composes too (recipe m3/qualification/hash-xxhash64-streaming-20261106).
  */
 package jdk.internal.m3.hash;
 
@@ -28,16 +30,20 @@ import static java.nio.ByteOrder.LITTLE_ENDIAN;
  */
 class M3XxHash {
     //FLLDCIM: M3 - LITERAL_CONSTANTS v1.1: this class's magic literals, named by role (user rule: no magic numbers, no floating strings)
+    //FLLDCIM: HPCPOP - XXH64_KERNEL_ATOMS v1: package-private for M3XxHash64Streaming (one xxHash64 kernel in java.base; recipe m3/qualification/hash-xxhash64-streaming-20261106)
     /** Bytes of one stripe: four 64-bit lanes. */
-    private static final int STRIPE_BYTES = 32;
+    static final int STRIPE_BYTES = 32;
     /** Rotation of the round function. */
     private static final int ROUND_ROTATION = 31;
+    //FLLDCIM: HPCPOP - XXH64_KERNEL_ATOMS v1: package-private for M3XxHash64Streaming (one xxHash64 kernel in java.base; recipe m3/qualification/hash-xxhash64-streaming-20261106)
     /** Offset of the second lane in a stripe. */
-    private static final int LANE_2_OFFSET = 8;
+    static final int LANE_2_OFFSET = 8;
+    //FLLDCIM: HPCPOP - XXH64_KERNEL_ATOMS v1: package-private for M3XxHash64Streaming (one xxHash64 kernel in java.base; recipe m3/qualification/hash-xxhash64-streaming-20261106)
     /** Offset of the third lane in a stripe. */
-    private static final int LANE_3_OFFSET = 16;
+    static final int LANE_3_OFFSET = 16;
+    //FLLDCIM: HPCPOP - XXH64_KERNEL_ATOMS v1: package-private for M3XxHash64Streaming (one xxHash64 kernel in java.base; recipe m3/qualification/hash-xxhash64-streaming-20261106)
     /** Offset of the fourth lane in a stripe. */
-    private static final int LANE_4_OFFSET = 24;
+    static final int LANE_4_OFFSET = 24;
     /** Rotation of the second lane when the lanes merge. */
     private static final int MERGE_ROTATION_2 = 7;
     /** Rotation of the third lane when the lanes merge. */
@@ -68,96 +74,107 @@ class M3XxHash {
     private static final long P4 = -8796714831421723037L;
     private static final long P5 = 2870177450012600261L;
 
+    //FLLDCIM: HPCPOP - XXH64_KERNEL_ATOMS v1: the one-shot composes the stripe round, the lane merge and the tail atoms below; M3XxHash64Streaming composes the same atoms over its scratch stripe, so java.base carries one xxHash64 kernel (recipe m3/qualification/hash-xxhash64-streaming-20261106)
     static <T> long xxHash64(long seed, T input, M3Access<T> access, long off, long length) {
         long hash;
         long remaining = length;
 
         if (remaining >= STRIPE_BYTES) {
-            long v1 = seed + P1 + P2;
-            long v2 = seed + P2;
-            long v3 = seed;
-            long v4 = seed - P1;
+            long v1 = lane1(seed);
+            long v2 = lane2(seed);
+            long v3 = lane3(seed);
+            long v4 = lane4(seed);
 
             do {
-                v1 += access.i64(input, off) * P2;
-                v1 = Long.rotateLeft(v1, ROUND_ROTATION);
-                v1 *= P1;
-
-                v2 += access.i64(input, off + LANE_2_OFFSET) * P2;
-                v2 = Long.rotateLeft(v2, ROUND_ROTATION);
-                v2 *= P1;
-
-                v3 += access.i64(input, off + LANE_3_OFFSET) * P2;
-                v3 = Long.rotateLeft(v3, ROUND_ROTATION);
-                v3 *= P1;
-
-                v4 += access.i64(input, off + LANE_4_OFFSET) * P2;
-                v4 = Long.rotateLeft(v4, ROUND_ROTATION);
-                v4 *= P1;
-
+                v1 = round(v1, access.i64(input, off));
+                v2 = round(v2, access.i64(input, off + LANE_2_OFFSET));
+                v3 = round(v3, access.i64(input, off + LANE_3_OFFSET));
+                v4 = round(v4, access.i64(input, off + LANE_4_OFFSET));
                 off += STRIPE_BYTES;
                 remaining -= STRIPE_BYTES;
             } while (remaining >= STRIPE_BYTES);
 
-            hash = Long.rotateLeft(v1, 1)
-                + Long.rotateLeft(v2, MERGE_ROTATION_2)
-                + Long.rotateLeft(v3, MERGE_ROTATION_3)
-                + Long.rotateLeft(v4, MERGE_ROTATION_4);
-
-            v1 *= P2;
-            v1 = Long.rotateLeft(v1, ROUND_ROTATION);
-            v1 *= P1;
-            hash ^= v1;
-            hash = hash * P1 + P4;
-
-            v2 *= P2;
-            v2 = Long.rotateLeft(v2, ROUND_ROTATION);
-            v2 *= P1;
-            hash ^= v2;
-            hash = hash * P1 + P4;
-
-            v3 *= P2;
-            v3 = Long.rotateLeft(v3, ROUND_ROTATION);
-            v3 *= P1;
-            hash ^= v3;
-            hash = hash * P1 + P4;
-
-            v4 *= P2;
-            v4 = Long.rotateLeft(v4, ROUND_ROTATION);
-            v4 *= P1;
-            hash ^= v4;
-            hash = hash * P1 + P4;
+            hash = mergeLanes(v1, v2, v3, v4);
         } else {
-            hash = seed + P5;
+            hash = shortStart(seed);
         }
 
         hash += length;
+        return tail(hash, input, access, off, remaining);
+    }
 
+    //FLLDCIM: HPCPOP - XXH64_KERNEL_ATOMS v1: the four lane seeds of a stripe state (xxHash XXH64_reset)
+    static long lane1(long seed) {
+        return seed + P1 + P2;
+    }
+
+    static long lane2(long seed) {
+        return seed + P2;
+    }
+
+    static long lane3(long seed) {
+        return seed;
+    }
+
+    static long lane4(long seed) {
+        return seed - P1;
+    }
+
+    //FLLDCIM: HPCPOP - XXH64_KERNEL_ATOMS v1: the start value of an input shorter than one stripe
+    static long shortStart(long seed) {
+        return seed + P5;
+    }
+
+    //FLLDCIM: HPCPOP - XXH64_KERNEL_ATOMS v1: the stripe round (xxHash XXH64_round)
+    static long round(long acc, long input) {
+        acc += input * P2;
+        acc = Long.rotateLeft(acc, ROUND_ROTATION);
+        acc *= P1;
+        return acc;
+    }
+
+    //FLLDCIM: HPCPOP - XXH64_KERNEL_ATOMS v1: one lane folded into the merged hash (xxHash XXH64_mergeRound)
+    static long mergeRound(long hash, long lane) {
+        hash ^= round(0L, lane);
+        return hash * P1 + P4;
+    }
+
+    //FLLDCIM: HPCPOP - XXH64_KERNEL_ATOMS v1: the four lanes merged after the last full stripe (xxHash XXH64_mergeAccs)
+    static long mergeLanes(long v1, long v2, long v3, long v4) {
+        long hash = Long.rotateLeft(v1, 1)
+            + Long.rotateLeft(v2, MERGE_ROTATION_2)
+            + Long.rotateLeft(v3, MERGE_ROTATION_3)
+            + Long.rotateLeft(v4, MERGE_ROTATION_4);
+        hash = mergeRound(hash, v1);
+        hash = mergeRound(hash, v2);
+        hash = mergeRound(hash, v3);
+        return mergeRound(hash, v4);
+    }
+
+    //FLLDCIM: HPCPOP - XXH64_KERNEL_ATOMS v1: the tail once the length is folded in: 8-byte words, one 4-byte int, the bytes, the avalanche (xxHash XXH64_finalize)
+    static <T> long tail(long hash, T input, M3Access<T> access, long off, long remaining) {
         while (remaining >= WORD_BYTES) {
-            long k1 = access.i64(input, off);
-            k1 *= P2;
-            k1 = Long.rotateLeft(k1, ROUND_ROTATION);
-            k1 *= P1;
-            hash ^= k1;
+            hash ^= round(0L, access.i64(input, off));
             hash = Long.rotateLeft(hash, WORD_ROTATION) * P1 + P4;
             off += WORD_BYTES;
             remaining -= WORD_BYTES;
         }
-
         if (remaining >= INT_BYTES) {
             hash ^= access.u32(input, off) * P1;
             hash = Long.rotateLeft(hash, INT_ROTATION) * P2 + P3;
             off += INT_BYTES;
             remaining -= INT_BYTES;
         }
+        return tailBytes(hash, input, access, off, remaining);
+    }
 
+    private static <T> long tailBytes(long hash, T input, M3Access<T> access, long off, long remaining) {
         while (remaining != 0) {
             hash ^= access.u8(input, off) * P5;
             hash = Long.rotateLeft(hash, BYTE_ROTATION) * P1;
             --remaining;
             ++off;
         }
-
         return finalize(hash);
     }
 
