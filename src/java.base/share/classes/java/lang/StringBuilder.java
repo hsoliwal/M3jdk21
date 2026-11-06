@@ -471,6 +471,9 @@ public final class StringBuilder
     @Override
     @IntrinsicCandidate
     public String toString() {
+        if (length() == 0) {
+            return "";
+        }
         //FLLDCIM: R5-BUILDER \u2014 composite builder: the String owns the composed M3 tuple, no flatten
         String composed = m3ComposedString();
         if (composed != null) {
