@@ -500,6 +500,7 @@ public final class SharedLexiconCatalog {
         List<String> lines = readSidecar(directory.resolve("synexia.records.tsv"), MAPPING_HEADER);
         Map<Coordinate, List<SourceMapping>> result = new HashMap<>();
         java.util.Set<List<String>> identities = new java.util.HashSet<>();
+        String lastValidatedPayload = null;
         for (int lineNumber = 1; lineNumber < lines.size(); lineNumber++) {
             String[] fields = splitSidecar(lines.get(lineNumber), MAPPING_HEADER.length, lineNumber);
             requireFields(fields, lineNumber);
@@ -508,9 +509,12 @@ public final class SharedLexiconCatalog {
             Coordinate coordinate = coordinate(fields[6], fields[7], shards, lineNumber);
             String lexeme = decodeSidecarText(fields[5], lineNumber);
             try {
-                SynexiaPrecomputePayload payload = SynexiaPrecomputePayload.parse(fields[12]);
-                if (!payload.canonicalJson().equals(fields[12]))
-                    throw malformed(lineNumber, "precompute_payload is not canonical JSON");
+                if (!fields[12].equals(lastValidatedPayload)) {
+                    SynexiaPrecomputePayload payload = SynexiaPrecomputePayload.parse(fields[12]);
+                    if (!payload.canonicalJson().equals(fields[12]))
+                        throw malformed(lineNumber, "precompute_payload is not canonical JSON");
+                    lastValidatedPayload = fields[12];
+                }
             } catch (IllegalArgumentException failure) {
                 throw malformed(lineNumber, "invalid precompute_payload: " + failure.getMessage());
             }
