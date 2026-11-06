@@ -29,6 +29,7 @@ package com.sun.tools.javac.m3;
  * Modified 2026-10-21 by Synexia (Hitesh Soliwal and contributors): added
  * shared partial build facts and bounded receipt transport in this javac owner.
  * Modified 2026-10-22: added the memoized typed method-facts projection.
+ * Modified 2026-11-02: added attributed relationships and success-only transport.
  */
 
 import com.sun.source.tree.CompilationUnitTree;
@@ -80,6 +81,8 @@ import java.util.HexFormat;
 import java.util.HashMap;
 import javax.tools.JavaFileObject;
 import java.util.Objects;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.UUID;
 import javax.lang.model.element.TypeElement;
 
@@ -92,6 +95,8 @@ public final class M3ASTPC implements Plugin {
             new M3AST.Projection<>("javac-build-facts-v1", M3ASTPC::captureBuildFacts);
     private static final M3AST.Projection<M3AST.MethodFacts> METHOD_FACTS =
             new M3AST.Projection<>("javac-method-facts-v1", M3ASTPC::captureMethodFacts);
+    private static final M3AST.Projection<M3AST.RelationshipFacts> RELATIONSHIP_FACTS =
+            new M3AST.Projection<>("javac-relationship-facts-v1", M3ASTPC::captureRelationshipFacts);
 
     public M3ASTPC() { }
 
@@ -106,6 +111,8 @@ public final class M3ASTPC implements Plugin {
         UUID factsId = null;
         M3CompilerPatternHints.Mode hintsMode = null;
         Path hintFile = null;
+        Path relations = null;
+        String relationContext = null;
         boolean fold = false;
         for (String arg : args) {
             if (arg.equals("lossless") && !retainSyntax) retainSyntax = true;
@@ -116,6 +123,22 @@ public final class M3ASTPC implements Plugin {
                 image = Path.of(arg.substring("image=".length()));
             else if (arg.startsWith("slots=") && slots == null)
                 slots = Path.of(arg.substring("slots=".length()));
+            else if (arg.startsWith("relationOut=") && relations == null) {
+                String path = arg.substring("relationOut=".length());
+                if (path.isEmpty()) throw new IllegalArgumentException("empty M3AST relationOut");
+                relations = Path.of(path).toAbsolutePath().normalize();
+                if (relations.getFileName() == null)
+                    throw new IllegalArgumentException("M3AST relationOut requires a file");
+            }
+            else if (arg.startsWith("relationContext=") && relationContext == null) {
+                relationContext = arg.substring("relationContext=".length());
+                if (!relationContext.equals("UNKNOWN")) {
+                    if (relationContext.length() != 64
+                            || !HexFormat.of().formatHex(HexFormat.of().parseHex(relationContext))
+                                    .equals(relationContext))
+                        throw new IllegalArgumentException("M3AST relationContext requires lowercase SHA-256 or UNKNOWN");
+                }
+            }
             else if (arg.startsWith("facts64=") && facts == null)
                 facts = factsPath(arg.substring("facts64=".length()));
             else if (arg.startsWith("hints=") && hintsMode == null)
@@ -146,8 +169,22 @@ public final class M3ASTPC implements Plugin {
         if (hintFile != null && (sameOutput(hintFile, trace) || sameOutput(hintFile, image)
                 || sameOutput(hintFile, slots) || sameOutput(hintFile, facts)))
             throw new IllegalArgumentException("M3AST hintfile collides with another output");
-        Session session = (Session) open(task, retainSyntax);
+        if (relations == null && relationContext != null)
+            throw new IllegalArgumentException("M3AST relationContext requires relationOut");
+        if (relations != null && (sameOutput(relations, trace) || sameOutput(relations, image)
+                || sameOutput(relations, slots) || sameOutput(relations, facts)))
+            throw new IllegalArgumentException("M3AST relationship output must differ from all other outputs");
+        Session session = (Session) open(task, retainSyntax || relations != null);
         try {
+            if (relations != null) {
+                if (session.relationshipReceipt != null)
+                    throw new IllegalArgumentException("M3AST relationship output already selected for this task");
+                RelationshipReceipt receipt = new RelationshipReceipt(relations,
+                        relationContext == null ? "UNKNOWN" : relationContext,
+                        Arguments.instance(session.context).getFileObjects(), trace, image, slots, facts);
+                session.addConsumer(receipt);
+                session.relationshipReceipt = receipt;
+            }
             // Reuse javac's actual processor/plugin loader, including module paths.
             var loader = JavacProcessingEnvironment.instance(session.context)
                     .getServiceLoader(M3AST.Consumer.class);
@@ -662,6 +699,212 @@ public final class M3ASTPC implements Plugin {
         }
     }
 
+    /** Shared positive relationship projection from the original attributed tree. */
+    public static M3AST.RelationshipFacts relationshipFacts(M3AST.Unit unit) throws Exception {
+        if (!(unit instanceof LiveUnit live))
+            throw new IllegalArgumentException("foreign M3AST unit implementation");
+        live.check();
+        if (live.phase != M3AST.Phase.ANALYZED)
+            throw new IllegalStateException("M3AST relationships require an ANALYZED event");
+        return unit.project(RELATIONSHIP_FACTS);
+    }
+
+    private static M3AST.RelationshipFacts captureRelationshipFacts(M3AST.Unit unit) throws IOException {
+        LiveUnit live = (LiveUnit) unit;
+        live.check();
+        JCTree.JCClassDecl declaration = analyzedDeclaration(live);
+        if (declaration == null || !(live.tree instanceof JCTree.JCCompilationUnit compilation))
+            throw new IOException("M3AST relationships require an analyzed top-level declaration");
+        URI uri = compilation.sourcefile.toUri();
+        Seal seal = live.session.seals.get(uri);
+        if (seal == null) throw new IOException("M3AST parsed-source seal unavailable: " + uri);
+        RelationshipCollector collector = new RelationshipCollector(compilation, seal.length(),
+                Types.instance(live.session.context), Names.instance(live.session.context));
+        collector.scan(declaration);
+        return collector.finish(uri, seal.digest(), declaration.sym.flatName().toString());
+    }
+
+    /**
+     * Temporary, bounded observations over already-attributed javac symbols.
+     * Identity spelling reuses the existing method-fact owner's descriptor code.
+     * Only detached strings and source ranges survive this event.
+     */
+    private static final class RelationshipCollector extends TreeScanner {
+        private final JCTree.JCCompilationUnit compilation;
+        private final int sourceLength;
+        private final Types types;
+        private final MethodCollector identities;
+        private final TreeMap<String, M3AST.RelationshipSymbol> symbols = new TreeMap<>();
+        private final TreeSet<M3AST.Relationship> relations = new TreeSet<>(Comparator
+                .comparing(M3AST.Relationship::relation).thenComparing(M3AST.Relationship::from)
+                .thenComparing(M3AST.Relationship::to).thenComparingInt(M3AST.Relationship::start)
+                .thenComparingInt(M3AST.Relationship::end));
+        private final TreeSet<String> residue = new TreeSet<>();
+        private String currentMethod;
+        private int overrideVisits;
+
+        RelationshipCollector(JCTree.JCCompilationUnit compilation, int sourceLength,
+                              Types types, Names names) {
+            this.compilation = compilation;
+            this.sourceLength = sourceLength;
+            this.types = types;
+            identities = new MethodCollector(compilation, sourceLength, types, names);
+        }
+
+        @Override public void scan(JCTree tree) {
+            if (tree != null && tree.type != null && tree.type.isErroneous())
+                residue.add("UNRESOLVED_SYMBOL");
+            super.scan(tree);
+        }
+
+        private boolean sourceSite(JCTree tree) {
+            int start = TreeInfo.getStartPos(tree);
+            int end = TreeInfo.getEndPos(tree, compilation.endPositions);
+            return start >= 0 && end > start && end <= sourceLength;
+        }
+
+        private void relation(String relation, String from, String to, JCTree witness) {
+            if (from == null || to == null) { residue.add("UNRESOLVED_SYMBOL"); return; }
+            if (!sourceSite(witness)) { residue.add("UNAVAILABLE_SOURCE_RANGE"); return; }
+            M3AST.Relationship fact = new M3AST.Relationship(relation, from, to,
+                    TreeInfo.getStartPos(witness), TreeInfo.getEndPos(witness, compilation.endPositions));
+            if (relations.add(fact) && relations.size() > 1_048_576)
+                throw new IllegalStateException("M3AST relationship budget exceeded");
+        }
+
+        private void symbol(String kind, String identity, String owner) {
+            M3AST.RelationshipSymbol value = new M3AST.RelationshipSymbol(kind, identity, owner);
+            M3AST.RelationshipSymbol previous = symbols.putIfAbsent(identity, value);
+            if (previous != null && !previous.equals(value))
+                throw new IllegalStateException("conflicting M3AST relationship symbol");
+            if (symbols.size() > 131_072)
+                throw new IllegalStateException("M3AST relationship symbol budget exceeded");
+        }
+
+        private String type(ClassSymbol value, JCTree witness) {
+            if (value == null || !(value.type instanceof Type.ClassType)
+                    || !value.type.hasTag(TypeTag.CLASS) || value.owner == null
+                    || value.owner.kind == Kinds.Kind.NIL || value.flatName().isEmpty()) {
+                residue.add("UNRESOLVED_SYMBOL");
+                return null;
+            }
+            String identity = identities.identity(value.flatName().toString());
+            symbol("TYPE", identity, identity);
+            if ((value.flags_field & (Flags.INTERFACE | Flags.ABSTRACT)) != 0)
+                relation("ABSTRACT_ROLE", identity, identity, witness);
+            return identity;
+        }
+
+        private String referenceType(Type value, JCTree witness) {
+            if (value == null || value.isErroneous()) {
+                residue.add("UNRESOLVED_SYMBOL");
+                return null;
+            }
+            Type erased = types.erasure(value);
+            // An array of roles does not assert a direct role reference.
+            return erased.hasTag(TypeTag.CLASS) && erased.tsym instanceof ClassSymbol owner
+                    ? type(owner, witness) : null;
+        }
+
+        private String method(Symbol value, JCTree witness) {
+            String identity = identities.methodIdentity(value);
+            if (identity == null || !(value.owner instanceof ClassSymbol owner)) {
+                residue.add("UNRESOLVED_SYMBOL");
+                return null;
+            }
+            String declaring = type(owner, witness);
+            if (declaring == null) return null;
+            symbol("METHOD", identity, declaring);
+            relation("DECLARES_METHOD", declaring, identity, witness);
+            if ((value.flags_field & Flags.ABSTRACT) != 0)
+                relation("ABSTRACT_METHOD", identity, identity, witness);
+            return identity;
+        }
+
+        @Override public void visitClassDef(JCTree.JCClassDecl tree) {
+            String previous = currentMethod;
+            currentMethod = null;
+            try {
+                String identity = type(tree.sym, tree);
+                if (tree.extending != null)
+                    relation("EXTENDS", identity, referenceType(tree.extending.type, tree.extending), tree.extending);
+                for (JCTree.JCExpression implemented : tree.implementing)
+                    relation(tree.sym != null && (tree.sym.flags_field & Flags.INTERFACE) != 0
+                                    ? "EXTENDS" : "IMPLEMENTS",
+                            identity, referenceType(implemented.type, implemented), implemented);
+                super.visitClassDef(tree);
+            } finally { currentMethod = previous; }
+        }
+
+        @Override public void visitVarDef(JCTree.JCVariableDecl tree) {
+            if (tree.sym != null && tree.sym.owner instanceof ClassSymbol owner
+                    && tree.pos >= 0 && (tree.sym.flags_field & (Flags.SYNTHETIC | Flags.GENERATED_MEMBER)) == 0) {
+                String declaring = type(owner, tree);
+                String identity = declaring == null ? null : identities.fieldIdentity(tree.sym, declaring);
+                if (identity == null) residue.add("UNRESOLVED_SYMBOL");
+                else {
+                    symbol("FIELD", identity, declaring);
+                    relation("DECLARES_FIELD", declaring, identity, tree);
+                    String target = referenceType(tree.sym.type, tree);
+                    if (target != null) relation("FIELD_TYPE", identity, target, tree);
+                }
+            }
+            super.visitVarDef(tree);
+        }
+
+        @Override public void visitMethodDef(JCTree.JCMethodDecl tree) {
+            String previous = currentMethod;
+            currentMethod = null;
+            try {
+                long flags = tree.mods.flags | (tree.sym == null ? 0 : tree.sym.flags_field);
+                if (tree.pos >= 0 && (flags
+                        & (Flags.SYNTHETIC | Flags.GENERATEDCONSTR | Flags.GENERATED_MEMBER)) == 0) {
+                    currentMethod = method(tree.sym, tree);
+                    if (currentMethod != null && tree.sym.owner instanceof ClassSymbol owner
+                            && !tree.sym.isConstructor() && (flags & (Flags.STATIC | Flags.PRIVATE)) == 0) {
+                        for (Type parent : types.closure(owner.type)) {
+                            if (parent.tsym == owner || !(parent.tsym instanceof ClassSymbol inherited)) continue;
+                            for (Symbol candidate : inherited.members().getSymbolsByName(tree.sym.name)) {
+                                if (++overrideVisits > 1_048_576)
+                                    throw new IllegalStateException("M3AST override observation budget exceeded");
+                                if (candidate instanceof Symbol.MethodSymbol overridden
+                                        && tree.sym.overrides(overridden, owner, types, true))
+                                    relation("OVERRIDES", currentMethod, method(overridden, tree), tree);
+                            }
+                        }
+                    }
+                }
+                super.visitMethodDef(tree);
+            } finally { currentMethod = previous; }
+        }
+
+        @Override public void visitApply(JCTree.JCMethodInvocation tree) {
+            // Generated implicit super() does not have a parser source range.
+            if (currentMethod != null && sourceSite(tree))
+                relation("INVOKES", currentMethod, method(TreeInfo.symbol(tree.meth), tree), tree);
+            super.visitApply(tree);
+        }
+
+        @Override public void visitNewClass(JCTree.JCNewClass tree) {
+            if (currentMethod != null && sourceSite(tree))
+                relation("INVOKES", currentMethod, method(tree.constructor, tree), tree);
+            super.visitNewClass(tree);
+        }
+
+        @Override public void visitLambda(JCTree.JCLambda tree) {
+            String previous = currentMethod;
+            currentMethod = null;
+            try { super.visitLambda(tree); }
+            finally { currentMethod = previous; }
+        }
+
+        private M3AST.RelationshipFacts finish(URI uri, String digest, String analyzed) {
+            return new M3AST.RelationshipFacts(uri, sourceLength, digest, analyzed,
+                    symbols.values().toArray(M3AST.RelationshipSymbol[]::new),
+                    relations.toArray(M3AST.Relationship[]::new), residue.toArray(String[]::new));
+        }
+    }
+
     /** Read already-attributed symbols directly: no lazy Trees attribution or second frontend. */
     private static final class BuildCollector extends TreeScanner {
         private final BuildNames declared = new BuildNames();
@@ -876,6 +1119,7 @@ public final class M3ASTPC implements Plugin {
         private M3AST.Source activeSource;
         private String methodFactsContextId;
         private FactsReceipt factsReceipt;
+        private RelationshipReceipt relationshipReceipt;
         private int errors;
         private boolean started, completed, closed, failed, syntaxRetained;
 
@@ -981,6 +1225,14 @@ public final class M3ASTPC implements Plugin {
                     }
                 }
                 // All M3 consumers must finish before a current invocation can publish facts.
+                if (relationshipReceipt != null) {
+                    try { relationshipReceipt.publish(summary()); }
+                    catch (Throwable failure) {
+                        failed = true;
+                        if (first == null) first = failure;
+                        else if (failure != first) first.addSuppressed(failure);
+                    }
+                }
                 if (factsReceipt != null) {
                     try { factsReceipt.publish(summary()); }
                     catch (Throwable failure) {
@@ -989,7 +1241,18 @@ public final class M3ASTPC implements Plugin {
                         else if (failure != first) first.addSuppressed(failure);
                     }
                 }
+                // Keep legacy facts last, and roll back only this invocation's
+                // new relationship export if a later owned publisher failed.
+                if (failed && relationshipReceipt != null) {
+                    try { relationshipReceipt.discardPublished(); }
+                    catch (Throwable failure) {
+                        if (first == null) first = failure;
+                        else if (failure != first) first.addSuppressed(failure);
+                    }
+                }
             } finally {
+                if (relationshipReceipt != null) relationshipReceipt.clear();
+                relationshipReceipt = null;
                 if (factsReceipt != null) factsReceipt.clear();
                 factsReceipt = null;
                 consumers.clear();
@@ -1159,6 +1422,190 @@ public final class M3ASTPC implements Plugin {
             projections = null;
             projectionStates = null;
             projectionCount = 0;
+        }
+    }
+
+    /**
+     * Invocation-owned relation transport. This is a source-observation wire,
+     * not a pattern catalogue, recipe engine or cross-build cache. The caller
+     * owns semantic-context construction and exclusive output-path ownership.
+     * A recognized prior export is invalidated before this invocation starts.
+     * Unrelated files and source/output aliases are refused intact. Callers
+     * still require compiler success and independently validate source/context
+     * seals; a payload digest is integrity evidence, not compiler authentication.
+     * Binary identities are scoped to one source module. Until a module-qualified
+     * wire schema is available, mixing source modules refuses the whole export;
+     * ordinary compilation without relationOut retains its existing behavior.
+     */
+    private static final class RelationshipReceipt implements M3AST.Consumer {
+        private static final long MAX_BYTES = 67_108_864;
+        private final Path output;
+        private final String context;
+        private final TreeSet<String> sources = new TreeSet<>();
+        private final TreeSet<String> symbols = new TreeSet<>();
+        private final TreeSet<String> relations = new TreeSet<>();
+        private final TreeSet<String> unresolved = new TreeSet<>();
+        private final TreeMap<String, M3AST.RelationshipSymbol> identities = new TreeMap<>();
+        private final TreeMap<URI, String> sourceSeals = new TreeMap<>();
+        private long bytes;
+        private int rows;
+        private boolean published;
+        private String sourceModule;
+
+        RelationshipReceipt(Path output, String context, Iterable<? extends JavaFileObject> inputs,
+                            Path... otherOutputs) throws IOException {
+            this.output = checkedOutput(output);
+            this.context = context;
+            bytes = M3AST.RelationshipFacts.SCHEMA.length() + context.length() + 73L;
+            for (JavaFileObject input : inputs) checkSource(input.toUri());
+            for (Path other : otherOutputs) {
+                if (other == null) continue;
+                // An absent leaf can still alias through a symlinked parent.
+                checkedOutput(other);
+                if (sameOutput(this.output, other)
+                        || Files.exists(this.output) && Files.exists(other)
+                        && Files.isSameFile(this.output, other))
+                    throw new IOException("M3AST relationship output aliases another output: " + other);
+            }
+            invalidateOwnedExport();
+        }
+
+        private void invalidateOwnedExport() throws IOException {
+            if (!Files.exists(output)) return;
+            byte[] previous;
+            try (var input = Files.newInputStream(output, java.nio.file.LinkOption.NOFOLLOW_LINKS)) {
+                previous = input.readNBytes((int) MAX_BYTES + 1);
+            }
+            byte[] header = (M3AST.RelationshipFacts.SCHEMA + "\nC\t").getBytes(StandardCharsets.US_ASCII);
+            int trailer = previous.length - 69; // END, tab, 64 lowercase hex digits, LF.
+            if (previous.length > MAX_BYTES || trailer < header.length
+                    || !Arrays.equals(previous, 0, header.length, header, 0, header.length))
+                throw new IOException("refusing unrelated existing M3AST relationship output: " + output);
+            MessageDigest digest;
+            try { digest = MessageDigest.getInstance("SHA-256"); }
+            catch (NoSuchAlgorithmException impossible) { throw new InternalError(impossible); }
+            digest.update(previous, 0, trailer);
+            String expected = "END\t" + HexFormat.of().formatHex(digest.digest()) + "\n";
+            if (!new String(previous, trailer, 69, StandardCharsets.US_ASCII).equals(expected))
+                throw new IOException("refusing unsealed existing M3AST relationship output: " + output);
+            Files.delete(output);
+        }
+
+        private static Path checkedOutput(Path path) throws IOException {
+            Path target = path.toAbsolutePath().normalize();
+            for (Path at = target; at != null; at = at.getParent()) {
+                if (Files.isSymbolicLink(at))
+                    throw new IOException("refusing M3AST relationship output symlink: " + at);
+                if (Files.exists(at) && (at.equals(target)
+                        ? !Files.isRegularFile(at) : !Files.isDirectory(at)))
+                    throw new IOException("invalid M3AST relationship output: " + at);
+            }
+            return target;
+        }
+
+        @Override public void parsed(M3AST.Unit unit) throws IOException {
+            checkSource(unit.tree().getSourceFile().toUri());
+        }
+
+        private void checkSource(URI uri) throws IOException {
+            if ("file".equalsIgnoreCase(uri.getScheme())) {
+                Path source = Path.of(uri).toAbsolutePath().normalize();
+                if (output.equals(source) || Files.exists(output) && Files.exists(source)
+                        && Files.isSameFile(output, source))
+                    throw new IOException("M3AST relationship output aliases source: " + source);
+            }
+        }
+
+        private void row(TreeSet<String> group, String line) throws IOException {
+            if (!group.add(line)) return;
+            if (++rows > 1_048_576 || line.length() + 1L > MAX_BYTES - bytes)
+                throw new IOException("M3AST relationship transport budget exceeded");
+            bytes += line.length() + 1L;
+        }
+
+        @Override public void analyzed(M3AST.Unit unit) throws Exception {
+            JCTree.JCClassDecl declaration = analyzedDeclaration((LiveUnit) unit);
+            if (declaration == null) return;
+            Symbol.PackageSymbol location = declaration.sym.packge();
+            if (location == null || location.modle == null)
+                throw new IOException("M3AST relationships require a known source module");
+            String module = location.modle.name.toString();
+            if (sourceModule == null) sourceModule = module;
+            else if (!sourceModule.equals(module))
+                throw new IOException("M3AST relationships require one source module; compile modules separately");
+            M3AST.RelationshipFacts facts = M3AST.relationshipFacts(unit);
+            String uri = FactsReceipt.encoded(facts.sourceUri().toASCIIString());
+            String source = "S\t" + uri + "\t" + facts.sourceUtf16Sha256() + "\t" + facts.sourceLength();
+            String previous = sourceSeals.putIfAbsent(facts.sourceUri(), source);
+            if (previous != null && !previous.equals(source))
+                throw new IOException("M3AST relationship source generation changed");
+            if (sourceSeals.size() > 65_536)
+                throw new IOException("M3AST relationship source budget exceeded");
+            row(sources, source);
+            for (M3AST.RelationshipSymbol symbol : facts.symbols()) {
+                M3AST.RelationshipSymbol prior = identities.putIfAbsent(symbol.identity(), symbol);
+                if (prior != null && !prior.equals(symbol))
+                    throw new IOException("M3AST relationship symbol conflicts across source units");
+                row(symbols, "Y\t" + symbol.kind() + "\t" + FactsReceipt.encoded(symbol.identity())
+                        + "\t" + FactsReceipt.encoded(symbol.owner()));
+            }
+            for (M3AST.Relationship relation : facts.relations())
+                row(relations, "F\t" + relation.relation() + "\t" + FactsReceipt.encoded(relation.from())
+                        + "\t" + FactsReceipt.encoded(relation.to()) + "\t" + uri
+                        + "\t" + relation.start() + "\t" + relation.end());
+            for (String reason : facts.unresolvedReasons())
+                row(unresolved, "U\t" + uri + "\t" + FactsReceipt.encoded(reason));
+        }
+
+        void publish(M3AST.Summary summary) throws IOException {
+            if (!summary.completed() || !summary.closed() || summary.compilerErrors() != 0
+                    || summary.consumerFailed() || sources.isEmpty()) return;
+            checkedOutput(output);
+            for (URI uri : sourceSeals.keySet()) checkSource(uri);
+            Path parent = output.getParent();
+            Files.createDirectories(parent);
+            Path temporary = Files.createTempFile(parent, ".m3ast-relations-", ".tmp");
+            try {
+                MessageDigest digest;
+                try { digest = MessageDigest.getInstance("SHA-256"); }
+                catch (NoSuchAlgorithmException impossible) { throw new InternalError(impossible); }
+                try (var writer = Files.newOutputStream(temporary)) {
+                    write(writer, digest, M3AST.RelationshipFacts.SCHEMA);
+                    write(writer, digest, "C\t" + context);
+                    for (String row : sources) write(writer, digest, row);
+                    for (String row : symbols) write(writer, digest, row);
+                    for (String row : relations) write(writer, digest, row);
+                    for (String row : unresolved) write(writer, digest, row);
+                    writer.write(("END\t" + HexFormat.of().formatHex(digest.digest()) + "\n")
+                            .getBytes(StandardCharsets.UTF_8));
+                }
+                Files.move(temporary, output, StandardCopyOption.ATOMIC_MOVE,
+                        StandardCopyOption.REPLACE_EXISTING);
+                published = true;
+            } finally { Files.deleteIfExists(temporary); }
+        }
+
+        void discardPublished() throws IOException {
+            if (published) {
+                Files.deleteIfExists(output);
+                published = false;
+            }
+        }
+
+        private static void write(java.io.OutputStream output, MessageDigest digest, String row) throws IOException {
+            byte[] bytes = (row + "\n").getBytes(StandardCharsets.UTF_8);
+            output.write(bytes);
+            digest.update(bytes);
+        }
+
+        void clear() {
+            sources.clear();
+            symbols.clear();
+            relations.clear();
+            unresolved.clear();
+            identities.clear();
+            sourceSeals.clear();
+            sourceModule = null;
         }
     }
 
