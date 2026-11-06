@@ -1,0 +1,661 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Copyright (c) 2026 Synexia, Hitesh Soliwal (hsoliwal@gmail.com) and others
+# LITERAL_CONSTANTS v1.1 names ledger of the zero-allocation-hashing absorption (input of
+# tools/literal_constants.py apply, run by tools/run_absorb.sh): one row per (class, member[#k], literal).
+# class: the innermost named class, or File.Inner for a nested class (one nested class name, such as
+# AsLongHashFunction, exists in several files).
+# member: 'm#k' = k-th occurrence of the literal in member m (source order, overloads together) | 'm' | '*'.
+# One name per role; the same value in two roles gets two names. Positional literals of the kernels
+# (secret and input offsets, lanes, tail lengths, byte positions) are named by their role and position.
+class	member	literal	name	role
+M3Access	*	0xFF	UNSIGNED_BYTE_MASK	The low 8 bits: a byte read as unsigned.
+M3Access	*	0xFFFFFFFFL	UNSIGNED_INT_MASK	The low 32 bits: an int read as unsigned.
+M3Access	*	16	SHORT_BITS	Bits of a short: shift of the second short of an int.
+M3Access	*	2L	SHORT_BYTES	Bytes of a short: offset of the second short of an int.
+M3Access	*	32	INT_BITS	Bits of an int: shift of the second int of a long.
+M3Access	*	4L	INT_BYTES	Bytes of an int: offset of the second int of a long.
+M3Access	*	8	BYTE_BITS	Bits of a byte: shift of the second byte of a short.
+M3Access.ReverseAccess	*	16	SHORT_BITS	Bits of a short: a reversed short lies in the high half of the int.
+M3Access.ReverseAccess	*	32	INT_BITS	Bits of an int: a reversed unsigned int lies in the high half of the long.
+M3CharSequenceAccess	*	16	CHAR_1_SHIFT	Bit position of the second char of a read at an even offset.
+M3CharSequenceAccess	*	24	ODD_CHAR_2_SHIFT	Bit position of the third char of a read at an odd offset.
+M3CharSequenceAccess	*	32	CHAR_2_SHIFT	Bit position of the third char of a read at an even offset.
+M3CharSequenceAccess	*	40	ODD_CHAR_3_SHIFT	Bit position of the fourth char of a read at an odd offset.
+M3CharSequenceAccess	*	48	CHAR_3_SHIFT	Bit position of the fourth char of a read at an even offset.
+M3CharSequenceAccess	*	56	ODD_CHAR_4_SHIFT	Bit position of the fifth char (its low byte) of a read at an odd offset.
+M3CharSequenceAccess	*	8	BYTE_BITS	Bits of a byte: a read at an odd offset starts at the high byte of a char, which moves down by a byte; the next char moves up by one.
+M3CharSequenceAccess.BigEndianCharSequenceAccess	*	2	CHAR_1_INDEX	Index of the char that holds the next bytes of a big-endian read.
+M3CharSequenceAccess.BigEndianCharSequenceAccess	*	3	CHAR_0_INDEX	Index of the char that holds the lowest bytes of a big-endian read.
+M3CharSequenceAccess.BigEndianCharSequenceAccess	getUnsignedByte	3	BYTE_BITS_LOG2	log2 of the bits of a byte: (offset & 1) << 3 is the bit position of the addressed byte in its char.
+M3CharSequenceAccess.LittleEndianCharSequenceAccess	*	2	CHAR_2_INDEX	Index of the third char of a little-endian read.
+M3CharSequenceAccess.LittleEndianCharSequenceAccess	*	3	CHAR_3_INDEX	Index of the fourth char of a little-endian read.
+M3CharSequenceAccess.LittleEndianCharSequenceAccess	getUnsignedByte	3	BYTE_BITS_LOG2	log2 of the bits of a byte: (offset & 1) << 3 is the bit position of the addressed byte in its char.
+M3CharSequenceAccess.LittleEndianCharSequenceAccess	*	4	CHAR_4_INDEX	Index of the fifth char of a little-endian read at an odd offset.
+M3CityAndFarmHash_1_1	*	0x82	MUL_BIT_MASK	mul = k2 + (u & 0x82): two bits of u.
+M3CityAndFarmHash_1_1	*	0xff	MUL_BYTE_MASK	The low byte of z in the multiplier of the last block: mul = k1 + ((z & 0xff) << 1).
+M3CityAndFarmHash_1_1	*	113	SEED_ADDEND	Addend of the seed mix: seed * k + 113.
+M3CityAndFarmHash_1_1	*	16	WORDS_2_BYTES	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1	*	16L	WORDS_2_BYTES_L	Bytes of 2 64-bit words.
+M3CityAndFarmHash_1_1	*	18	LEN17_ROTATION_3	Rotation of b + k2 in the HashLen17to32 mix (17..32 and 33..64 bytes).
+M3CityAndFarmHash_1_1	*	2	LAST_BYTE_SHIFT	z = length + (last byte << 2).
+M3CityAndFarmHash_1_1	*	20	UO_ROTATION_V0_LAST	Rotation of v0 before the last block of FarmHash uo.
+M3CityAndFarmHash_1_1	*	21	WEAK_ROTATION_1	First rotation of WeakHashLen32WithSeeds.
+M3CityAndFarmHash_1_1	*	24	WORDS_3_BYTES	Bytes of 3 64-bit words.
+M3CityAndFarmHash_1_1	*	24L	WORDS_3_BYTES_L	Bytes of 3 64-bit words.
+M3CityAndFarmHash_1_1	*	25	LEN8_ROTATION_2	Second rotation of the 8..16-byte path.
+M3CityAndFarmHash_1_1	*	26	UO_ROTATION_X	Rotation of x in FarmHash uo's block loop.
+M3CityAndFarmHash_1_1	*	28	UO_ROTATION_V1_LAST	Rotation of v1 before the last block of FarmHash uo.
+M3CityAndFarmHash_1_1	*	29	UO_ROTATION_Y	Rotation of y in FarmHash uo's block loop.
+M3CityAndFarmHash_1_1	*	3	FIRST_INT_SHIFT	length + (first four bytes << 3).
+M3CityAndFarmHash_1_1	*	30	LEN17_ROTATION_2	Rotation of c in the HashLen17to32 mix (17..32 and 33..64 bytes).
+M3CityAndFarmHash_1_1	uoHash64WithSeeds	30	UO_ROTATION_V1	Rotation of v1 in FarmHash uo's block loop.
+M3CityAndFarmHash_1_1	uoHash64WithSeeds#2	30	UO_H_ROTATION_INNER	Rotation of the inner uoH of the result.
+M3CityAndFarmHash_1_1	*	31	UO_H_ROTATION_OUTER	Rotation of the outer uoH of the result.
+M3CityAndFarmHash_1_1	*	32	WORDS_4_BYTES	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1	uoHash64WithSeeds#2	32	UO_ROTATION_Z	Rotation of z in FarmHash uo's block loop.
+M3CityAndFarmHash_1_1	*	32L	WORDS_4_BYTES_L	Bytes of 4 64-bit words.
+M3CityAndFarmHash_1_1	*	33	LOOP_ROTATION_Z	Rotation of z in the 64-byte loop.
+M3CityAndFarmHash_1_1	uoHash64WithSeeds	33	UO_ROTATION_V0	Rotation of v0 in FarmHash uo's block loop.
+M3CityAndFarmHash_1_1	uoHash64WithSeeds#2	33	LOOP_ROTATION_Z	Rotation of z in the 64-byte loop.
+M3CityAndFarmHash_1_1	*	34	UO_ROTATION_W1	Rotation of w1 in FarmHash uo's block loop.
+M3CityAndFarmHash_1_1	*	37	LOOP_ROTATION_X	Rotation of x in the 64-byte loop.
+M3CityAndFarmHash_1_1	hash8To16Bytes	37	LEN8_ROTATION_1	First rotation of the 8..16-byte path.
+M3CityAndFarmHash_1_1	*	40	WORDS_5_BYTES	Bytes of 5 64-bit words.
+M3CityAndFarmHash_1_1	*	40L	WORDS_5_BYTES_L	Bytes of 5 64-bit words.
+M3CityAndFarmHash_1_1	*	42	LOOP_ROTATION_Y	Rotation of y in the 64-byte loop.
+M3CityAndFarmHash_1_1	cityHashLen33To64	42	LEN33_ROTATION	Rotation of e + f in CityHash's 33..64-byte path.
+M3CityAndFarmHash_1_1	*	43	LEN17_ROTATION_1	Rotation of a + b in the HashLen17to32 mix (17..32 and 33..64 bytes).
+M3CityAndFarmHash_1_1	*	44	WEAK_ROTATION_2	Second rotation of WeakHashLen32WithSeeds.
+M3CityAndFarmHash_1_1	*	47	SHIFT_MIX_SHIFT	Shift of shiftMix.
+M3CityAndFarmHash_1_1	*	48	WORDS_6_BYTES	Bytes of 6 64-bit words.
+M3CityAndFarmHash_1_1	*	48L	WORDS_6_BYTES_L	Bytes of 6 64-bit words.
+M3CityAndFarmHash_1_1	*	4L	INT_BYTES_L	Bytes of an int: the 4..7-byte path and its last int.
+M3CityAndFarmHash_1_1	*	56	WORDS_7_BYTES	Bytes of 7 64-bit words.
+M3CityAndFarmHash_1_1	*	56L	WORDS_7_BYTES_L	Bytes of 7 64-bit words.
+M3CityAndFarmHash_1_1	*	6	BLOCK_SHIFT	log2 of the 64-byte block.
+M3CityAndFarmHash_1_1	*	63	BLOCK_MASK	64-byte block size minus one: masks an index to its block and backs up from a block's last byte to its first.
+M3CityAndFarmHash_1_1	*	63L	BLOCK_MASK_L	64-byte block size minus one: rounds a length down to whole blocks.
+M3CityAndFarmHash_1_1	*	64	WORDS_8_BYTES	Bytes of 8 64-bit words.
+M3CityAndFarmHash_1_1	*	64L	WORDS_8_BYTES_L	Bytes of 8 64-bit words.
+M3CityAndFarmHash_1_1	*	8	WORD_BYTES	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1	hash1To3Bytes	8	BYTE_BITS	Bits of a byte: the middle or last byte moves up by one.
+M3CityAndFarmHash_1_1	*	81	FARM_SEED	Default seed of FarmHash na and uo.
+M3CityAndFarmHash_1_1	*	8L	WORD_BYTES_L	Bytes of a 64-bit word.
+M3CityAndFarmHash_1_1	*	9	ROUND_MULTIPLIER	Multiplier 9 of the FarmHash rounds.
+M3CityAndFarmHash_1_1	*	9L	LEN33_MULTIPLIER	Multiplier of CityHash's 33..64-byte path.
+M3CityAndFarmHash_1_1.AsLongHashFunction	*	2	CHAR_LENGTH	Byte length of a hashed char.
+M3CityAndFarmHash_1_1.AsLongHashFunction	*	4L	INT_LENGTH	Byte length of a hashed int.
+M3CityAndFarmHash_1_1.AsLongHashFunction	*	8L	LONG_LENGTH	Byte length of a hashed long.
+M3CityAndFarmHash_1_1.Uo	*	64	WORDS_8_BYTES	Bytes of 8 64-bit words.
+M3CityAndFarmHash_1_1.Uo	*	81	FARM_SEED	Default seed of FarmHash na and uo.
+M3CityAndFarmHash_1_1.UoWithOneSeed	*	64	WORDS_8_BYTES	Bytes of 8 64-bit words.
+M3DualHashFunction	*	"The input result array has not enough space!"	RESULT_TOO_SHORT	Message: the result array is shorter than newResultArray().
+M3LongHashFunction	*	2L	CHAR_BYTES	Bytes of a char: char offsets and lengths in bytes.
+M3LongTupleHashFunction	*	2L	CHAR_BYTES	Bytes of a char: char offsets and lengths in bytes.
+M3LongTupleHashFunction	*	63	LONG_ROUND_UP	Rounds a bit length up to whole longs.
+M3LongTupleHashFunction	*	64	LONG_BITS	Bits of a long.
+M3Maths	*	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3Maths	*	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3Maths.M3MathsJDK9	*	63	SIGN_SHIFT	x >> 63 is all ones for a negative x: the correction from the signed to the unsigned high product.
+M3MetroHash	*	16	PAIR_BYTES	Bytes of the 16-byte block: two 64-bit words.
+M3MetroHash	metroHash64#1	16	LANE_3_OFFSET	Offset of the third 64-bit word of a stripe.
+M3MetroHash	*	2	SHORT_BYTES	Bytes of a short: the step of the 2-byte tail.
+M3MetroHash	*	21	PAIR_MIX_ROTATION	Rotation of the cross mix of the 16-byte block.
+M3MetroHash	*	24	LANE_4_OFFSET	Offset of the fourth 64-bit word of a stripe.
+M3MetroHash	*	26	INT_ROTATION	Rotation after a 32-bit tail int.
+M3MetroHash	*	28	FINAL_ROTATION_1	First rotation of the finalizer.
+M3MetroHash	*	29	LANE_ROTATION	Rotation of each lane of the 32-byte stripe.
+M3MetroHash	finalize	29	FINAL_ROTATION_2	Second rotation of the finalizer.
+M3MetroHash	metroHash64#5	29	PAIR_ROTATION	Rotation of each lane of the 16-byte block.
+M3MetroHash	metroHash64#6	29	PAIR_ROTATION	Rotation of each lane of the 16-byte block.
+M3MetroHash	*	32	STRIPE_BYTES	Bytes of one stripe: four 64-bit lanes.
+M3MetroHash	*	37	MERGE_ROTATION	Rotation when the four lanes merge.
+M3MetroHash	metroHash64#5	37	BYTE_ROTATION	Rotation after a tail byte.
+M3MetroHash	*	4	INT_BYTES	Bytes of an int: the step of the 4-byte tail.
+M3MetroHash	*	48	SHORT_ROTATION	Rotation after a 16-bit tail short.
+M3MetroHash	*	55	WORD_ROTATION	Rotation after a 64-bit tail word.
+M3MetroHash	*	8	WORD_BYTES	Bytes of a 64-bit word: the step of the 8-byte tail.
+M3MetroHash	metroHash64#1	8	LANE_2_OFFSET	Offset of the second 64-bit word of a stripe or block.
+M3MetroHash	metroHash64#2	8	LANE_2_OFFSET	Offset of the second 64-bit word of a stripe or block.
+M3MetroHash.AsLongHashFunction	*	26	INT_ROTATION	Rotation after a 32-bit tail int.
+M3MetroHash.AsLongHashFunction	*	37	BYTE_ROTATION	Rotation after a tail byte.
+M3MetroHash.AsLongHashFunction	*	48	SHORT_ROTATION	Rotation after a 16-bit tail short.
+M3MetroHash.AsLongHashFunction	*	55	WORD_ROTATION	Rotation after a 64-bit tail word.
+M3MurmurHash_3	*	"Should never get here."	UNREACHABLE	Message: the tail switch covers every remainder.
+M3MurmurHash_3	*	0x38495ab5L	H2_ADDEND	Addend of h2 after each block.
+M3MurmurHash_3	*	0x52dce729L	H1_ADDEND	Addend of h1 after each block.
+M3MurmurHash_3	*	0xc4ceb9fe1a85ec53L	FMIX_MULTIPLIER_2	Second multiplier of the fmix64 finalizer.
+M3MurmurHash_3	*	0xff51afd7ed558ccdL	FMIX_MULTIPLIER_1	First multiplier of the fmix64 finalizer.
+M3MurmurHash_3	*	10	TAIL_10	A tail of 10 bytes.
+M3MurmurHash_3	*	10L	TAIL_BYTE_10	Offset of byte 10 of the tail.
+M3MurmurHash_3	*	11	TAIL_11	A tail of 11 bytes.
+M3MurmurHash_3	*	11L	TAIL_BYTE_11	Offset of byte 11 of the tail.
+M3MurmurHash_3	*	12	TAIL_12	A tail of 12 bytes.
+M3MurmurHash_3	*	12L	TAIL_BYTE_12	Offset of byte 12 of the tail.
+M3MurmurHash_3	*	13	TAIL_13	A tail of 13 bytes.
+M3MurmurHash_3	*	13L	TAIL_BYTE_13	Offset of byte 13 of the tail.
+M3MurmurHash_3	*	14	TAIL_14	A tail of 14 bytes.
+M3MurmurHash_3	*	14L	TAIL_BYTE_14	Offset of byte 14 of the tail.
+M3MurmurHash_3	*	15	TAIL_15	A tail of 15 bytes.
+M3MurmurHash_3	*	16	BYTE_2_SHIFT	Bit position of the third byte of a little-endian word.
+M3MurmurHash_3	*	16L	BLOCK_BYTES	Bytes of one 128-bit block.
+M3MurmurHash_3	*	2	TAIL_2	A tail of 2 bytes.
+M3MurmurHash_3	*	24	BYTE_3_SHIFT	Bit position of the fourth byte of a little-endian word.
+M3MurmurHash_3	*	27	H1_ROTATION	Rotation of h1 after each block.
+M3MurmurHash_3	*	2L	TAIL_BYTE_2	Offset of byte 2 of the tail.
+M3MurmurHash_3	*	3	TAIL_3	A tail of 3 bytes.
+M3MurmurHash_3	*	31	H2_ROTATION	Rotation of h2 after each block.
+M3MurmurHash_3	mixK1	31	K1_ROTATION	Rotation of k1.
+M3MurmurHash_3	*	32	BYTE_4_SHIFT	Bit position of the fifth byte of a little-endian word.
+M3MurmurHash_3	*	33	FMIX_SHIFT	Shift of the fmix64 finalizer.
+M3MurmurHash_3	mixK2	33	K2_ROTATION	Rotation of k2.
+M3MurmurHash_3	*	4	TAIL_4	A tail of 4 bytes.
+M3MurmurHash_3	*	40	BYTE_5_SHIFT	Bit position of the sixth byte of a little-endian word.
+M3MurmurHash_3	*	48	BYTE_6_SHIFT	Bit position of the seventh byte of a little-endian word.
+M3MurmurHash_3	*	4L	TAIL_BYTE_4	Offset of byte 4 of the tail.
+M3MurmurHash_3	*	5	TAIL_5	A tail of 5 bytes.
+M3MurmurHash_3	*	5L	MIX_MULTIPLIER	h = h * 5 + c after each block.
+M3MurmurHash_3	hash#3	5L	TAIL_BYTE_5	Offset of byte 5 of the tail.
+M3MurmurHash_3	*	6	TAIL_6	A tail of 6 bytes.
+M3MurmurHash_3	*	6L	TAIL_BYTE_6	Offset of byte 6 of the tail.
+M3MurmurHash_3	*	7	TAIL_7	A tail of 7 bytes.
+M3MurmurHash_3	*	8	BYTE_1_SHIFT	Bit position of the second byte of a little-endian word.
+M3MurmurHash_3	hash#2	8	TAIL_8	A tail of 8 bytes.
+M3MurmurHash_3	*	8L	HALF_BLOCK_OFFSET	Offset of the second 64-bit half of a block.
+M3MurmurHash_3	hash#2	8L	TAIL_BYTE_8	Offset of byte 8 of the tail.
+M3MurmurHash_3	*	9	TAIL_9	A tail of 9 bytes.
+M3MurmurHash_3	*	9L	TAIL_BYTE_9	Offset of byte 9 of the tail.
+M3MurmurHash_3.AsLongTupleHashFunction	*	128	RESULT_BITS	Bits of the 128-bit result.
+M3MurmurHash_3.AsLongTupleHashFunction	*	2	RESULT_LONGS	Longs of the 128-bit result.
+M3MurmurHash_3.AsLongTupleHashFunction	*	2L	SHORT_LENGTH	Byte length of a hashed short or char.
+M3MurmurHash_3.AsLongTupleHashFunction	*	4L	INT_LENGTH	Byte length of a hashed int.
+M3MurmurHash_3.AsLongTupleHashFunction	*	8L	LONG_LENGTH	Byte length of a hashed long.
+M3Primitives	*	0xFF	UNSIGNED_BYTE_MASK	The low 8 bits: a byte as an unsigned value.
+M3Primitives	*	0xFFFF	UNSIGNED_SHORT_MASK	The low 16 bits: a short as an unsigned value.
+M3Primitives	*	0xFFFFFFFFL	UNSIGNED_INT_MASK	The low 32 bits: an int as an unsigned value.
+M3WyHash	*	104	WORDS_13_BYTES	Bytes of 13 64-bit words.
+M3WyHash	*	112	WORDS_14_BYTES	Bytes of 14 64-bit words.
+M3WyHash	*	120	WORDS_15_BYTES	Bytes of 15 64-bit words.
+M3WyHash	*	128	WORDS_16_BYTES	Bytes of 16 64-bit words.
+M3WyHash	*	136	WORDS_17_BYTES	Bytes of 17 64-bit words.
+M3WyHash	*	144	WORDS_18_BYTES	Bytes of 18 64-bit words.
+M3WyHash	*	152	WORDS_19_BYTES	Bytes of 19 64-bit words.
+M3WyHash	*	16	WORDS_2_BYTES	Bytes of 2 64-bit words.
+M3WyHash	_wyr3	16	BYTE_2_SHIFT	Bit position of the first byte in the 3-byte read.
+M3WyHash	*	160	WORDS_20_BYTES	Bytes of 20 64-bit words.
+M3WyHash	*	168	WORDS_21_BYTES	Bytes of 21 64-bit words.
+M3WyHash	*	176	WORDS_22_BYTES	Bytes of 22 64-bit words.
+M3WyHash	*	184	WORDS_23_BYTES	Bytes of 23 64-bit words.
+M3WyHash	*	192	WORDS_24_BYTES	Bytes of 24 64-bit words.
+M3WyHash	*	200	WORDS_25_BYTES	Bytes of 25 64-bit words.
+M3WyHash	*	208	WORDS_26_BYTES	Bytes of 26 64-bit words.
+M3WyHash	*	216	WORDS_27_BYTES	Bytes of 27 64-bit words.
+M3WyHash	*	224	WORDS_28_BYTES	Bytes of 28 64-bit words.
+M3WyHash	*	232	WORDS_29_BYTES	Bytes of 29 64-bit words.
+M3WyHash	*	24	WORDS_3_BYTES	Bytes of 3 64-bit words.
+M3WyHash	*	240	WORDS_30_BYTES	Bytes of 30 64-bit words.
+M3WyHash	*	248	WORDS_31_BYTES	Bytes of 31 64-bit words.
+M3WyHash	*	256	BLOCK_BYTES	Bytes of one round of the long loop: 32 64-bit words.
+M3WyHash	*	32	WORDS_4_BYTES	Bytes of 4 64-bit words.
+M3WyHash	u64Rorate32	32	HALF_SHIFT	Distance between the two 32-bit halves of a long.
+M3WyHash	*	4	INT_BYTES	Bytes of an int: inputs shorter than this take the 3-byte read.
+M3WyHash	u64Rorate32	4	INT_BYTES	Bytes of an int: offset of the second half.
+M3WyHash	*	40	WORDS_5_BYTES	Bytes of 5 64-bit words.
+M3WyHash	*	48	WORDS_6_BYTES	Bytes of 6 64-bit words.
+M3WyHash	*	56	WORDS_7_BYTES	Bytes of 7 64-bit words.
+M3WyHash	*	64	WORDS_8_BYTES	Bytes of 8 64-bit words.
+M3WyHash	*	72	WORDS_9_BYTES	Bytes of 9 64-bit words.
+M3WyHash	*	8	WORD_BYTES	Bytes of a 64-bit word.
+M3WyHash	_wyr3	8	BYTE_1_SHIFT	Bit position of the middle byte in the 3-byte read.
+M3WyHash	*	80	WORDS_10_BYTES	Bytes of 10 64-bit words.
+M3WyHash	*	88	WORDS_11_BYTES	Bytes of 11 64-bit words.
+M3WyHash	*	96	WORDS_12_BYTES	Bytes of 12 64-bit words.
+M3WyHash.AsLongHashFunction	*	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3WyHash.AsLongHashFunction	*	0xFFL	BYTE_MASK	The low byte.
+M3WyHash.AsLongHashFunction	*	16	BYTE_2_SHIFT	Bit position of the third byte.
+M3WyHash.AsLongHashFunction	*	2	SHORT_LENGTH	Byte length of a hashed short or char.
+M3WyHash.AsLongHashFunction	*	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3WyHash.AsLongHashFunction	*	4	INT_LENGTH	Byte length of a hashed int.
+M3WyHash.AsLongHashFunction	*	8	BYTE_1_SHIFT	Bit position of the second byte.
+M3WyHash.AsLongHashFunction	hashLong	8	LONG_LENGTH	Byte length of a hashed long.
+M3XXH3	*	0x165667919E3779F9L	PRIME_MX1	Multiplier of the XXH3 avalanche (PRIME_MX1).
+M3XXH3	*	0x9FB21C651E98DF25L	PRIME_MX2	Multiplier of rrmxmx (PRIME_MX2).
+M3XXH3	*	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	*	11	SECRET_MERGEACCS_START	Secret offset of the accumulator merge.
+M3XXH3	*	112	SECRET_112	Offset 112 of the default secret.
+M3XXH3	*	12	SECRET_12	Offset 12 of the default secret.
+M3XXH3	*	128	LEN_17TO128_MAX	Longest input of the 17..128-byte path.
+M3XXH3	*	13	COMBINED_ROTATION	rotl32(swap32(combinedl), 13) gives combinedh.
+M3XXH3	*	136	SECRET_SIZE_MIN	Smallest secret size.
+M3XXH3	*	16	MIX_BYTES	Bytes of one 16-byte mix.
+M3XXH3	*	17	MIDSIZE_LAST_OFFSET	Distance of the last secret of the 129..240-byte path from SECRET_SIZE_MIN.
+M3XXH3	*	192	SECRET_SIZE	Bytes of the default secret.
+M3XXH3	*	2	LANE_2	Accumulator lane 2.
+M3XXH3	*	24	SECRET_24	Offset 24 of the default secret.
+M3XXH3	XXH3_rrmxmx	24	RRMXMX_ROTATION_2	Second rotation of rrmxmx.
+M3XXH3	*	240	MIDSIZE_MAX	Longest input of the 129..240-byte path.
+M3XXH3	*	28	RRMXMX_SHIFT_2	Second shift of rrmxmx.
+M3XXH3	*	29	XXH64_AVALANCHE_SHIFT_2	Shift of the XXH64 avalanche.
+M3XXH3	*	3	LANE_3	Accumulator lane 3.
+M3XXH3	*	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_avalanche	32	AVALANCHE_FOLD_SHIFT	The XXH3 avalanche ends with h ^ (h >>> 32).
+M3XXH3	XXH64_avalanche	32	XXH64_AVALANCHE_SHIFT_3	Shift of the XXH64 avalanche.
+M3XXH3	*	33	XXH64_AVALANCHE_SHIFT_1	Shift of the XXH64 avalanche.
+M3XXH3	*	35	RRMXMX_SHIFT_1	First shift of rrmxmx.
+M3XXH3	*	37	AVALANCHE_SHIFT	Shift of the XXH3 avalanche.
+M3XXH3	*	4	LANE_4	Accumulator lane 4.
+M3XXH3	*	40	SECRET_40	Offset 40 of the default secret.
+M3XXH3	*	47	SCRAMBLE_SHIFT	Shift of the accumulator scramble.
+M3XXH3	*	48	SECRET_48	Offset 48 of the default secret.
+M3XXH3	*	49	RRMXMX_ROTATION_1	First rotation of rrmxmx.
+M3XXH3	*	5	LANE_5	Accumulator lane 5.
+M3XXH3	*	54	LENGTH_MIX_SHIFT	(length - 1) << 54 in the 9..16-byte 128-bit path.
+M3XXH3	*	56	SECRET_56	Offset 56 of the default secret.
+M3XXH3	*	6	LANE_6	Accumulator lane 6.
+M3XXH3	*	64	STRIPE_LEN	Bytes of one stripe: eight accumulator lanes.
+M3XXH3	*	7	LANE_7	Accumulator lane 7.
+M3XXH3	*	72	SECRET_72	Offset 72 of the default secret.
+M3XXH3	*	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH128_mix32B_once	8	WORD_1_OFFSET	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3	XXH3_initCustomSecret	8	WORD_1_OFFSET	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3	XXH3_mix16B	8	WORD_1_OFFSET	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3	XXH3_mix2Accs	8	WORD_1_OFFSET	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3	*	80	SECRET_80	Offset 80 of the default secret.
+M3XXH3	*	88	SECRET_88	Offset 88 of the default secret.
+M3XXH3	*	96	SECRET_96	Offset 96 of the default secret.
+M3XXH3.AsLongHashFunction	*	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3.AsLongHashFunction	*	16	SECRET_16	Offset 16 of the default secret.
+M3XXH3.AsLongHashFunction	hashByte	16	BYTE_2_SHIFT	Bit position of the third byte of a little-endian word.
+M3XXH3.AsLongHashFunction	hashShort	16	BYTE_2_SHIFT	Bit position of the third byte of a little-endian word.
+M3XXH3.AsLongHashFunction	*	2	SHORT_LENGTH	Byte length of a hashed short or char.
+M3XXH3.AsLongHashFunction	*	24	BYTE_3_SHIFT	Bit position of the fourth byte of a little-endian word.
+M3XXH3.AsLongHashFunction	*	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3.AsLongHashFunction	*	4	SECRET_4	Offset 4 of the default secret.
+M3XXH3.AsLongHashFunction	hashInt	4	INT_LENGTH	Byte length of a hashed int.
+M3XXH3.AsLongHashFunction	*	56	SECRET_56	Offset 56 of the default secret.
+M3XXH3.AsLongHashFunction	*	64	SECRET_64	Offset 64 of the default secret.
+M3XXH3.AsLongHashFunction	*	8	BYTE_1_SHIFT	Bit position of the second byte of a little-endian word.
+M3XXH3.AsLongHashFunction	hashInt	8	SECRET_8	Offset 8 of the default secret.
+M3XXH3.AsLongHashFunction	hashLong	8	SECRET_8	Offset 8 of the default secret.
+M3XXH3.AsLongHashFunction	hashLong#2	8	LONG_LENGTH	Byte length of a hashed long.
+M3XXH3.AsLongTupleHashFunction	*	0x9FB21C651E98DF25L	PRIME_MX2	Multiplier of rrmxmx (PRIME_MX2).
+M3XXH3.AsLongTupleHashFunction	*	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3.AsLongTupleHashFunction	*	12	SECRET_12	Offset 12 of the default secret.
+M3XXH3.AsLongTupleHashFunction	*	128	RESULT_BITS	Bits of the 128-bit result.
+M3XXH3.AsLongTupleHashFunction	*	13	COMBINED_ROTATION	rotl32(swap32(combinedl), 13) gives combinedh.
+M3XXH3.AsLongTupleHashFunction	*	16	SECRET_16	Offset 16 of the default secret.
+M3XXH3.AsLongTupleHashFunction	dualHashByte	16	BYTE_2_SHIFT	Bit position of the third byte of a little-endian word.
+M3XXH3.AsLongTupleHashFunction	dualHashShort	16	BYTE_2_SHIFT	Bit position of the third byte of a little-endian word.
+M3XXH3.AsLongTupleHashFunction	*	2	LENGTH_MULT_SHIFT	PRIME64_1 + (length << 2) in the 4..8-byte 128-bit path.
+M3XXH3.AsLongTupleHashFunction	dualHashShort	2	SHORT_LENGTH	Byte length of a hashed short or char.
+M3XXH3.AsLongTupleHashFunction	newResultArray	2	RESULT_LONGS	Longs of the 128-bit result.
+M3XXH3.AsLongTupleHashFunction	*	24	SECRET_24	Offset 24 of the default secret.
+M3XXH3.AsLongTupleHashFunction	dualHashByte	24	BYTE_3_SHIFT	Bit position of the fourth byte of a little-endian word.
+M3XXH3.AsLongTupleHashFunction	dualHashShort	24	BYTE_3_SHIFT	Bit position of the fourth byte of a little-endian word.
+M3XXH3.AsLongTupleHashFunction	*	28	RRMXMX_SHIFT_2	Second shift of rrmxmx.
+M3XXH3.AsLongTupleHashFunction	*	3	HIGH_FOLD_SHIFT	m128_lo ^= m128_hi >>> 3.
+M3XXH3.AsLongTupleHashFunction	*	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3.AsLongTupleHashFunction	*	35	RRMXMX_SHIFT_1	First shift of rrmxmx.
+M3XXH3.AsLongTupleHashFunction	*	4	SECRET_4	Offset 4 of the default secret.
+M3XXH3.AsLongTupleHashFunction	dualHashInt	4	INT_LENGTH	Byte length of a hashed int.
+M3XXH3.AsLongTupleHashFunction	*	64	SECRET_64	Offset 64 of the default secret.
+M3XXH3.AsLongTupleHashFunction	*	72	SECRET_72	Offset 72 of the default secret.
+M3XXH3.AsLongTupleHashFunction	*	8	BYTE_1_SHIFT	Bit position of the second byte of a little-endian word.
+M3XXH3.AsLongTupleHashFunction	dualHashByte#2	8	SECRET_8	Offset 8 of the default secret.
+M3XXH3.AsLongTupleHashFunction	dualHashLong	8	LONG_LENGTH	Byte length of a hashed long.
+M3XXH3.AsLongTupleHashFunction	dualHashShort#3	8	SECRET_8	Offset 8 of the default secret.
+M3XXH3.AsLongTupleHashFunction	*	80	SECRET_80	Offset 80 of the default secret.
+M3XXH3.AsLongTupleHashFunction	*	88	SECRET_88	Offset 88 of the default secret.
+M3XxHash	*	11	BYTE_ROTATION	Rotation after a tail byte.
+M3XxHash	*	12	MERGE_ROTATION_3	Rotation of the third lane when the lanes merge.
+M3XxHash	*	16	LANE_3_OFFSET	Offset of the third lane in a stripe.
+M3XxHash	*	18	MERGE_ROTATION_4	Rotation of the fourth lane when the lanes merge.
+M3XxHash	*	23	INT_ROTATION	Rotation after a 32-bit tail int.
+M3XxHash	*	24	LANE_4_OFFSET	Offset of the fourth lane in a stripe.
+M3XxHash	*	27	WORD_ROTATION	Rotation after a 64-bit tail word.
+M3XxHash	*	29	AVALANCHE_SHIFT_2	Second shift of the avalanche.
+M3XxHash	*	31	ROUND_ROTATION	Rotation of the round function.
+M3XxHash	*	32	STRIPE_BYTES	Bytes of one stripe: four 64-bit lanes.
+M3XxHash	finalize	32	AVALANCHE_SHIFT_3	Third shift of the avalanche.
+M3XxHash	*	33	AVALANCHE_SHIFT_1	First shift of the avalanche.
+M3XxHash	*	4	INT_BYTES	Bytes of an int: the step of the 4-byte tail.
+M3XxHash	*	7	MERGE_ROTATION_2	Rotation of the second lane when the lanes merge.
+M3XxHash	*	8	WORD_BYTES	Bytes of a 64-bit word: the step of the 8-byte tail.
+M3XxHash	xxHash64#1	8	LANE_2_OFFSET	Offset of the second lane in a stripe.
+M3XxHash.AsLongHashFunction	*	11	BYTE_ROTATION	Rotation after a tail byte.
+M3XxHash.AsLongHashFunction	*	2	SHORT_LENGTH	Byte length of a hashed short or char.
+M3XxHash.AsLongHashFunction	*	23	INT_ROTATION	Rotation after a 32-bit tail int.
+M3XxHash.AsLongHashFunction	*	27	WORD_ROTATION	Rotation after a 64-bit tail word.
+M3XxHash.AsLongHashFunction	*	31	ROUND_ROTATION	Rotation of the round function.
+M3XxHash.AsLongHashFunction	*	4	INT_LENGTH	Byte length of a hashed int.
+M3XxHash.AsLongHashFunction	*	8	LONG_LENGTH	Byte length of a hashed long.
+M3XxHash.AsLongHashFunction	hashShort	8	BYTE_BITS	Bits of a byte: the second byte of a short.
+# XXH3_SPLIT v1 members (tools/ledger_remap.py): every literal moved out of XXH3_64bits_internal and
+# XXH3_128bits_internal keeps its pre-split name and role, matched by statement
+M3XXH3	XXH3_128bits_internal#1	128	LEN_17TO128_MAX	Longest input of the 17..128-byte path.
+M3XXH3	XXH3_128bits_internal#1	16	SHORT_INPUT_MAX	Longest input of the 0..16-byte path.
+M3XXH3	XXH3_128bits_internal#1	240	MIDSIZE_MAX	Longest input of the 129..240-byte path.
+M3XXH3	XXH3_64bits_internal#1	128	LEN_17TO128_MAX	Longest input of the 17..128-byte path.
+M3XXH3	XXH3_64bits_internal#1	16	SHORT_INPUT_MAX	Longest input of the 0..16-byte path.
+M3XXH3	XXH3_64bits_internal#1	240	MIDSIZE_MAX	Longest input of the 129..240-byte path.
+M3XXH3	XXH3_hashLong#1	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#1	11	SECRET_MERGEACCS_START	Secret offset of the accumulator merge.
+M3XXH3	XXH3_hashLong#1	192	SECRET_SIZE	Bytes of the default secret.
+M3XXH3	XXH3_hashLong#1	2	LANE_2	Accumulator lane 2.
+M3XXH3	XXH3_hashLong#1	3	LANE_3	Accumulator lane 3.
+M3XXH3	XXH3_hashLong#1	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#1	4	LANE_4	Accumulator lane 4.
+M3XXH3	XXH3_hashLong#1	47	SCRAMBLE_SHIFT	Shift of the accumulator scramble.
+M3XXH3	XXH3_hashLong#1	5	LANE_5	Accumulator lane 5.
+M3XXH3	XXH3_hashLong#1	6	LANE_6	Accumulator lane 6.
+M3XXH3	XXH3_hashLong#1	64	STRIPE_LEN	Bytes of one stripe: eight accumulator lanes.
+M3XXH3	XXH3_hashLong#1	7	LANE_7	Accumulator lane 7.
+M3XXH3	XXH3_hashLong#1	8	SECRET_CONSUME_RATE	Secret bytes consumed per stripe.
+M3XXH3	XXH3_hashLong#2	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#2	11	SECRET_MERGEACCS_START	Secret offset of the accumulator merge.
+M3XXH3	XXH3_hashLong#2	192	SECRET_SIZE	Bytes of the default secret.
+M3XXH3	XXH3_hashLong#2	2	LANE_2	Accumulator lane 2.
+M3XXH3	XXH3_hashLong#2	3	LANE_3	Accumulator lane 3.
+M3XXH3	XXH3_hashLong#2	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#2	4	LANE_4	Accumulator lane 4.
+M3XXH3	XXH3_hashLong#2	47	SCRAMBLE_SHIFT	Shift of the accumulator scramble.
+M3XXH3	XXH3_hashLong#2	5	LANE_5	Accumulator lane 5.
+M3XXH3	XXH3_hashLong#2	6	LANE_6	Accumulator lane 6.
+M3XXH3	XXH3_hashLong#2	64	STRIPE_LEN	Bytes of one stripe: eight accumulator lanes.
+M3XXH3	XXH3_hashLong#2	7	LANE_7	Accumulator lane 7.
+M3XXH3	XXH3_hashLong#2	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#3	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#3	192	SECRET_SIZE	Bytes of the default secret.
+M3XXH3	XXH3_hashLong#3	2	LANE_2	Accumulator lane 2.
+M3XXH3	XXH3_hashLong#3	3	LANE_3	Accumulator lane 3.
+M3XXH3	XXH3_hashLong#3	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#3	4	LANE_4	Accumulator lane 4.
+M3XXH3	XXH3_hashLong#3	47	SCRAMBLE_SHIFT	Shift of the accumulator scramble.
+M3XXH3	XXH3_hashLong#3	5	LANE_5	Accumulator lane 5.
+M3XXH3	XXH3_hashLong#3	6	LANE_6	Accumulator lane 6.
+M3XXH3	XXH3_hashLong#3	64	STRIPE_LEN	Bytes of one stripe: eight accumulator lanes.
+M3XXH3	XXH3_hashLong#3	7	LANE_7	Accumulator lane 7.
+M3XXH3	XXH3_hashLong#3	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#4	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#4	2	LANE_2	Accumulator lane 2.
+M3XXH3	XXH3_hashLong#4	3	LANE_3	Accumulator lane 3.
+M3XXH3	XXH3_hashLong#4	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#4	4	LANE_4	Accumulator lane 4.
+M3XXH3	XXH3_hashLong#4	47	SCRAMBLE_SHIFT	Shift of the accumulator scramble.
+M3XXH3	XXH3_hashLong#4	5	LANE_5	Accumulator lane 5.
+M3XXH3	XXH3_hashLong#4	6	LANE_6	Accumulator lane 6.
+M3XXH3	XXH3_hashLong#4	64	STRIPE_LEN	Bytes of one stripe: eight accumulator lanes.
+M3XXH3	XXH3_hashLong#4	7	LANE_7	Accumulator lane 7.
+M3XXH3	XXH3_hashLong#4	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#5	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#5	2	LANE_2	Accumulator lane 2.
+M3XXH3	XXH3_hashLong#5	3	LANE_3	Accumulator lane 3.
+M3XXH3	XXH3_hashLong#5	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#5	4	LANE_4	Accumulator lane 4.
+M3XXH3	XXH3_hashLong#5	47	SCRAMBLE_SHIFT	Shift of the accumulator scramble.
+M3XXH3	XXH3_hashLong#5	5	LANE_5	Accumulator lane 5.
+M3XXH3	XXH3_hashLong#5	6	LANE_6	Accumulator lane 6.
+M3XXH3	XXH3_hashLong#5	64	STRIPE_LEN	Bytes of one stripe: eight accumulator lanes.
+M3XXH3	XXH3_hashLong#5	7	LANE_7	Accumulator lane 7.
+M3XXH3	XXH3_hashLong#5	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#6	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#6	2	LANE_2	Accumulator lane 2.
+M3XXH3	XXH3_hashLong#6	3	LANE_3	Accumulator lane 3.
+M3XXH3	XXH3_hashLong#6	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#6	4	LANE_4	Accumulator lane 4.
+M3XXH3	XXH3_hashLong#6	47	SCRAMBLE_SHIFT	Shift of the accumulator scramble.
+M3XXH3	XXH3_hashLong#6	5	LANE_5	Accumulator lane 5.
+M3XXH3	XXH3_hashLong#6	6	LANE_6	Accumulator lane 6.
+M3XXH3	XXH3_hashLong#6	64	STRIPE_LEN	Bytes of one stripe: eight accumulator lanes.
+M3XXH3	XXH3_hashLong#6	7	SECRET_LASTACC_START	Distance of the last stripe's secret from the end of the stripes' secret.
+M3XXH3	XXH3_hashLong#6	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#7	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#7	2	LANE_2	Accumulator lane 2.
+M3XXH3	XXH3_hashLong#7	3	LANE_3	Accumulator lane 3.
+M3XXH3	XXH3_hashLong#7	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#7	4	LANE_4	Accumulator lane 4.
+M3XXH3	XXH3_hashLong#7	47	SCRAMBLE_SHIFT	Shift of the accumulator scramble.
+M3XXH3	XXH3_hashLong#7	5	LANE_5	Accumulator lane 5.
+M3XXH3	XXH3_hashLong#7	6	LANE_6	Accumulator lane 6.
+M3XXH3	XXH3_hashLong#7	64	STRIPE_LEN	Bytes of one stripe: eight accumulator lanes.
+M3XXH3	XXH3_hashLong#7	7	LANE_7	Accumulator lane 7.
+M3XXH3	XXH3_hashLong#7	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#8	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#8	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#8	47	SCRAMBLE_SHIFT	Shift of the accumulator scramble.
+M3XXH3	XXH3_hashLong#8	7	LANE_7	Accumulator lane 7.
+M3XXH3	XXH3_hashLong#8	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#9	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#9	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#9	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#10	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#10	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#10	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#11	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#11	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#11	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#12	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#12	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#12	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#13	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#13	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#13	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#14	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#14	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#14	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#15	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#15	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#15	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#16	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#16	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#16	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#17	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#17	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#17	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#18	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#18	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#18	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#19	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#19	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#19	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#20	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#20	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#20	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#21	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#21	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#21	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#22	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#22	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#22	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#23	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#23	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#23	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#24	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_hashLong#24	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_hashLong#24	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#25	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#26	8	SECRET_CONSUME_RATE	Secret bytes consumed per stripe.
+M3XXH3	XXH3_hashLong#27	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#28	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#29	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#30	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#31	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#32	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#33	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#34	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#35	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#36	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#37	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#38	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#39	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#40	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#41	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#42	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#43	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#44	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#45	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#46	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#47	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#48	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#49	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#50	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#51	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#52	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#53	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#54	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#55	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#56	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#57	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_hashLong#58	8	LANE_BYTES	Bytes of one accumulator lane.
+M3XXH3	XXH3_len_0to16_128b#1	4	LEN_4TO8_MIN	Shortest input of the 4..8-byte path.
+M3XXH3	XXH3_len_0to16_128b#1	64	SECRET_64	Offset 64 of the default secret.
+M3XXH3	XXH3_len_0to16_128b#1	72	SECRET_72	Offset 72 of the default secret.
+M3XXH3	XXH3_len_0to16_128b#1	8	LEN_4TO8_MAX	Longest input of the 4..8-byte path.
+M3XXH3	XXH3_len_0to16_128b#1	80	SECRET_80	Offset 80 of the default secret.
+M3XXH3	XXH3_len_0to16_128b#1	88	SECRET_88	Offset 88 of the default secret.
+M3XXH3	XXH3_len_0to16_64b#1	4	LEN_4TO8_MIN	Shortest input of the 4..8-byte path.
+M3XXH3	XXH3_len_0to16_64b#1	56	SECRET_56	Offset 56 of the default secret.
+M3XXH3	XXH3_len_0to16_64b#1	64	SECRET_64	Offset 64 of the default secret.
+M3XXH3	XXH3_len_0to16_64b#1	8	LEN_4TO8_MAX	Longest input of the 4..8-byte path.
+M3XXH3	XXH3_len_129to240_128b#1	136	SECRET_SIZE_MIN	Smallest secret size.
+M3XXH3	XXH3_len_129to240_128b#1	16	WORD_2_OFFSET	Offset of the third 64-bit word of a 32-byte mix.
+M3XXH3	XXH3_len_129to240_128b#1	17	MIDSIZE_LAST_OFFSET	Distance of the last secret of the 129..240-byte path from SECRET_SIZE_MIN.
+M3XXH3	XXH3_len_129to240_128b#1	24	WORD_3_OFFSET	Offset of the fourth 64-bit word of a 32-byte mix.
+M3XXH3	XXH3_len_129to240_128b#1	3	MIDSIZE_START_OFFSET	Secret offset of the rounds after the first ones (129..240 bytes).
+M3XXH3	XXH3_len_129to240_128b#1	32	MIX32_BYTES	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3	XXH3_len_129to240_128b#1	4	MIDSIZE_FIRST_ROUNDS_128	Rounds of the 129..240-byte 128-bit path before the secret restarts at MIDSIZE_START_OFFSET.
+M3XXH3	XXH3_len_129to240_128b#1	8	WORD_1_OFFSET	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3	XXH3_len_129to240_128b#2	136	SECRET_SIZE_MIN	Smallest secret size.
+M3XXH3	XXH3_len_129to240_128b#2	16	MIX_BYTES	Bytes of one 16-byte mix.
+M3XXH3	XXH3_len_129to240_128b#2	17	MIDSIZE_LAST_OFFSET	Distance of the last secret of the 129..240-byte path from SECRET_SIZE_MIN.
+M3XXH3	XXH3_len_129to240_128b#2	24	WORD_3_OFFSET	Offset of the fourth 64-bit word of a 32-byte mix.
+M3XXH3	XXH3_len_129to240_128b#2	3	MIDSIZE_START_OFFSET	Secret offset of the rounds after the first ones (129..240 bytes).
+M3XXH3	XXH3_len_129to240_128b#2	32	MIX32_BYTES	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3	XXH3_len_129to240_128b#2	4	MIDSIZE_FIRST_ROUNDS_128	Rounds of the 129..240-byte 128-bit path before the secret restarts at MIDSIZE_START_OFFSET.
+M3XXH3	XXH3_len_129to240_128b#2	8	WORD_1_OFFSET	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3	XXH3_len_129to240_128b#3	16	WORD_2_OFFSET	Offset of the third 64-bit word of a 32-byte mix.
+M3XXH3	XXH3_len_129to240_128b#3	32	MIX32_BYTES	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3	XXH3_len_129to240_128b#3	4	MIDSIZE_FIRST_ROUNDS_128	Rounds of the 129..240-byte 128-bit path before the secret restarts at MIDSIZE_START_OFFSET.
+M3XXH3	XXH3_len_129to240_128b#3	8	WORD_1_OFFSET	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3	XXH3_len_129to240_128b#4	16	MIX_BYTES	Bytes of one 16-byte mix.
+M3XXH3	XXH3_len_129to240_128b#4	32	MIX32_BYTES	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3	XXH3_len_129to240_128b#4	8	WORD_1_OFFSET	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3	XXH3_len_129to240_128b#5	16	LAST_16	Distance of the last 16 input bytes from the end.
+M3XXH3	XXH3_len_129to240_128b#5	32	MIX32_BYTES	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3	XXH3_len_129to240_128b#6	16	LAST_16	Distance of the last 16 input bytes from the end.
+M3XXH3	XXH3_len_129to240_128b#6	32	MIX32_BYTES	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3	XXH3_len_129to240_128b#7	16	MIX_BYTES	Bytes of one 16-byte mix.
+M3XXH3	XXH3_len_129to240_128b#7	32	MIX32_BYTES	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3	XXH3_len_129to240_128b#8	32	MIX32_BYTES	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3	XXH3_len_129to240_128b#9	32	MIX32_BYTES	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3	XXH3_len_129to240_128b#10	32	MIX32_BYTES	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3	XXH3_len_129to240_128b#11	32	MIX32_BYTES	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3	XXH3_len_129to240_128b#12	32	MIX32_BYTES	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3	XXH3_len_129to240_128b#13	32	MIX32_BYTES	Bytes of one 32-byte mix of the 128-bit hash.
+M3XXH3	XXH3_len_129to240_128b#14	32	LAST_32	Distance of the last 32 input bytes from the end.
+M3XXH3	XXH3_len_129to240_128b#15	32	LAST_32	Distance of the last 32 input bytes from the end.
+M3XXH3	XXH3_len_129to240_64b#1	136	SECRET_SIZE_MIN	Smallest secret size.
+M3XXH3	XXH3_len_129to240_64b#1	16	MIX_BYTES	Bytes of one 16-byte mix.
+M3XXH3	XXH3_len_129to240_64b#1	17	MIDSIZE_LAST_OFFSET	Distance of the last secret of the 129..240-byte path from SECRET_SIZE_MIN.
+M3XXH3	XXH3_len_129to240_64b#1	3	MIDSIZE_START_OFFSET	Secret offset of the rounds after the first ones (129..240 bytes).
+M3XXH3	XXH3_len_129to240_64b#1	8	MIDSIZE_FIRST_ROUNDS	Rounds of the 129..240-byte path before the secret restarts at MIDSIZE_START_OFFSET.
+M3XXH3	XXH3_len_129to240_64b#2	16	MIX_BYTES	Bytes of one 16-byte mix.
+M3XXH3	XXH3_len_129to240_64b#2	8	MIDSIZE_FIRST_ROUNDS	Rounds of the 129..240-byte path before the secret restarts at MIDSIZE_START_OFFSET.
+M3XXH3	XXH3_len_129to240_64b#3	16	MIX_BYTES	Bytes of one 16-byte mix.
+M3XXH3	XXH3_len_129to240_64b#4	16	MIX_BYTES	Bytes of one 16-byte mix.
+M3XXH3	XXH3_len_129to240_64b#5	16	MIX_BYTES	Bytes of one 16-byte mix.
+M3XXH3	XXH3_len_129to240_64b#6	16	LAST_16	Distance of the last 16 input bytes from the end.
+M3XXH3	XXH3_len_17to128_128b#1	16	MIX_BYTES	Bytes of one 16-byte mix.
+M3XXH3	XXH3_len_17to128_128b#1	32	LEN_17TO128_PAIR_2	Longer inputs of the 17..128-byte path add a second pair of mixes.
+M3XXH3	XXH3_len_17to128_128b#1	48	INPUT_48	Input offset 48.
+M3XXH3	XXH3_len_17to128_128b#1	64	LEN_17TO128_PAIR_3	Longer inputs of the 17..128-byte path add a third pair of mixes.
+M3XXH3	XXH3_len_17to128_128b#1	8	WORD_1_OFFSET	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3	XXH3_len_17to128_128b#1	96	LEN_17TO128_PAIR_4	Longer inputs of the 17..128-byte path add a fourth pair of mixes.
+M3XXH3	XXH3_len_17to128_128b#2	16	MIX_BYTES	Bytes of one 16-byte mix.
+M3XXH3	XXH3_len_17to128_128b#2	32	INPUT_32	Input offset 32.
+M3XXH3	XXH3_len_17to128_128b#2	48	INPUT_48	Input offset 48.
+M3XXH3	XXH3_len_17to128_128b#2	64	LAST_64	Distance of the last 64 input bytes from the end.
+M3XXH3	XXH3_len_17to128_128b#2	8	WORD_1_OFFSET	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3	XXH3_len_17to128_128b#2	96	SECRET_96	Offset 96 of the default secret.
+M3XXH3	XXH3_len_17to128_128b#3	16	INPUT_16	Input offset 16.
+M3XXH3	XXH3_len_17to128_128b#3	32	INPUT_32	Input offset 32.
+M3XXH3	XXH3_len_17to128_128b#3	48	LAST_48	Distance of the last 48 input bytes from the end.
+M3XXH3	XXH3_len_17to128_128b#3	64	LAST_64	Distance of the last 64 input bytes from the end.
+M3XXH3	XXH3_len_17to128_128b#3	8	WORD_1_OFFSET	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3	XXH3_len_17to128_128b#3	96	SECRET_96	Offset 96 of the default secret.
+M3XXH3	XXH3_len_17to128_128b#4	16	INPUT_16	Input offset 16.
+M3XXH3	XXH3_len_17to128_128b#4	32	LAST_32	Distance of the last 32 input bytes from the end.
+M3XXH3	XXH3_len_17to128_128b#4	48	LAST_48	Distance of the last 48 input bytes from the end.
+M3XXH3	XXH3_len_17to128_128b#4	64	SECRET_64	Offset 64 of the default secret.
+M3XXH3	XXH3_len_17to128_128b#4	8	WORD_1_OFFSET	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3	XXH3_len_17to128_128b#5	16	MIX_BYTES	Bytes of one 16-byte mix.
+M3XXH3	XXH3_len_17to128_128b#5	32	LAST_32	Distance of the last 32 input bytes from the end.
+M3XXH3	XXH3_len_17to128_128b#5	64	SECRET_64	Offset 64 of the default secret.
+M3XXH3	XXH3_len_17to128_128b#5	8	WORD_1_OFFSET	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3	XXH3_len_17to128_128b#6	16	LAST_16	Distance of the last 16 input bytes from the end.
+M3XXH3	XXH3_len_17to128_128b#6	32	SECRET_32	Offset 32 of the default secret.
+M3XXH3	XXH3_len_17to128_128b#6	8	WORD_1_OFFSET	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3	XXH3_len_17to128_128b#7	16	LAST_16	Distance of the last 16 input bytes from the end.
+M3XXH3	XXH3_len_17to128_128b#7	32	SECRET_32	Offset 32 of the default secret.
+M3XXH3	XXH3_len_17to128_128b#7	8	WORD_1_OFFSET	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3	XXH3_len_17to128_128b#8	16	MIX_BYTES	Bytes of one 16-byte mix.
+M3XXH3	XXH3_len_17to128_128b#8	8	WORD_1_OFFSET	Offset of the second 64-bit word of a 16-byte pair.
+M3XXH3	XXH3_len_17to128_64b#1	112	SECRET_112	Offset 112 of the default secret.
+M3XXH3	XXH3_len_17to128_64b#1	16	INPUT_16	Input offset 16.
+M3XXH3	XXH3_len_17to128_64b#1	32	LEN_17TO128_PAIR_2	Longer inputs of the 17..128-byte path add a second pair of mixes.
+M3XXH3	XXH3_len_17to128_64b#1	48	INPUT_48	Input offset 48.
+M3XXH3	XXH3_len_17to128_64b#1	64	LEN_17TO128_PAIR_3	Longer inputs of the 17..128-byte path add a third pair of mixes.
+M3XXH3	XXH3_len_17to128_64b#1	80	SECRET_80	Offset 80 of the default secret.
+M3XXH3	XXH3_len_17to128_64b#1	96	LEN_17TO128_PAIR_4	Longer inputs of the 17..128-byte path add a fourth pair of mixes.
+M3XXH3	XXH3_len_17to128_64b#2	16	LAST_16	Distance of the last 16 input bytes from the end.
+M3XXH3	XXH3_len_17to128_64b#2	32	INPUT_32	Input offset 32.
+M3XXH3	XXH3_len_17to128_64b#2	48	LAST_48	Distance of the last 48 input bytes from the end.
+M3XXH3	XXH3_len_17to128_64b#2	64	LAST_64	Distance of the last 64 input bytes from the end.
+M3XXH3	XXH3_len_17to128_64b#2	96	SECRET_96	Offset 96 of the default secret.
+M3XXH3	XXH3_len_17to128_64b#3	16	SECRET_16	Offset 16 of the default secret.
+M3XXH3	XXH3_len_17to128_64b#3	32	SECRET_32	Offset 32 of the default secret.
+M3XXH3	XXH3_len_17to128_64b#3	48	SECRET_48	Offset 48 of the default secret.
+M3XXH3	XXH3_len_17to128_64b#3	64	SECRET_64	Offset 64 of the default secret.
+M3XXH3	XXH3_len_17to128_64b#4	32	LAST_32	Distance of the last 32 input bytes from the end.
+M3XXH3	XXH3_len_1to3_128b#1	12	SECRET_12	Offset 12 of the default secret.
+M3XXH3	XXH3_len_1to3_128b#1	13	COMBINED_ROTATION	rotl32(swap32(combinedl), 13) gives combinedh.
+M3XXH3	XXH3_len_1to3_128b#1	16	BYTE_2_SHIFT	Bit position of the third byte of a little-endian word.
+M3XXH3	XXH3_len_1to3_128b#1	24	BYTE_3_SHIFT	Bit position of the fourth byte of a little-endian word.
+M3XXH3	XXH3_len_1to3_128b#1	4	SECRET_4	Offset 4 of the default secret.
+M3XXH3	XXH3_len_1to3_128b#1	8	BYTE_1_SHIFT	Bit position of the second byte of a little-endian word.
+M3XXH3	XXH3_len_1to3_128b#2	8	SECRET_8	Offset 8 of the default secret.
+M3XXH3	XXH3_len_1to3_64b#1	16	BYTE_2_SHIFT	Bit position of the third byte of a little-endian word.
+M3XXH3	XXH3_len_1to3_64b#1	24	BYTE_3_SHIFT	Bit position of the fourth byte of a little-endian word.
+M3XXH3	XXH3_len_1to3_64b#1	4	SECRET_4	Offset 4 of the default secret.
+M3XXH3	XXH3_len_1to3_64b#1	8	BYTE_1_SHIFT	Bit position of the second byte of a little-endian word.
+M3XXH3	XXH3_len_4to8_128b#1	0x9FB21C651E98DF25L	PRIME_MX2	Multiplier of rrmxmx (PRIME_MX2).
+M3XXH3	XXH3_len_4to8_128b#1	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_len_4to8_128b#1	16	SECRET_16	Offset 16 of the default secret.
+M3XXH3	XXH3_len_4to8_128b#1	2	LENGTH_MULT_SHIFT	PRIME64_1 + (length << 2) in the 4..8-byte 128-bit path.
+M3XXH3	XXH3_len_4to8_128b#1	24	SECRET_24	Offset 24 of the default secret.
+M3XXH3	XXH3_len_4to8_128b#1	28	RRMXMX_SHIFT_2	Second shift of rrmxmx.
+M3XXH3	XXH3_len_4to8_128b#1	3	HIGH_FOLD_SHIFT	m128_lo ^= m128_hi >>> 3.
+M3XXH3	XXH3_len_4to8_128b#1	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_len_4to8_128b#1	35	RRMXMX_SHIFT_1	First shift of rrmxmx.
+M3XXH3	XXH3_len_4to8_128b#1	4	LAST_4	Distance of the last 4 input bytes from the end.
+M3XXH3	XXH3_len_4to8_64b#1	0xFFFFFFFFL	LOW_32_MASK	The low 32-bit half of a long.
+M3XXH3	XXH3_len_4to8_64b#1	16	SECRET_16	Offset 16 of the default secret.
+M3XXH3	XXH3_len_4to8_64b#1	32	HALF_SHIFT	Distance between the low and the high 32-bit half of a long.
+M3XXH3	XXH3_len_4to8_64b#1	4	LAST_4	Distance of the last 4 input bytes from the end.
+M3XXH3	XXH3_len_4to8_64b#1	8	SECRET_8	Offset 8 of the default secret.
+M3XXH3	XXH3_len_9to16_128b#1	32	SECRET_32	Offset 32 of the default secret.
+M3XXH3	XXH3_len_9to16_128b#1	40	SECRET_40	Offset 40 of the default secret.
+M3XXH3	XXH3_len_9to16_128b#1	48	SECRET_48	Offset 48 of the default secret.
+M3XXH3	XXH3_len_9to16_128b#1	54	LENGTH_MIX_SHIFT	(length - 1) << 54 in the 9..16-byte 128-bit path.
+M3XXH3	XXH3_len_9to16_128b#1	56	SECRET_56	Offset 56 of the default secret.
+M3XXH3	XXH3_len_9to16_128b#1	8	LAST_8	Distance of the last 8 input bytes from the end.
+M3XXH3	XXH3_len_9to16_64b#1	24	SECRET_24	Offset 24 of the default secret.
+M3XXH3	XXH3_len_9to16_64b#1	32	SECRET_32	Offset 32 of the default secret.
+M3XXH3	XXH3_len_9to16_64b#1	40	SECRET_40	Offset 40 of the default secret.
+M3XXH3	XXH3_len_9to16_64b#1	48	SECRET_48	Offset 48 of the default secret.
+M3XXH3	XXH3_len_9to16_64b#1	8	LAST_8	Distance of the last 8 input bytes from the end.
+M3XXH3	XXH3_mergeAccs#1	16	MIX_BYTES	Bytes of one 16-byte mix.
+M3XXH3	XXH3_mergeAccs#1	2	ACC_PAIR_2	Accumulator pair 2 of the merge.
+M3XXH3	XXH3_mergeAccs#1	3	ACC_PAIR_3	Accumulator pair 3 of the merge.
+M3XXH3	XXH3_mergeAccs#2	16	MIX_BYTES	Bytes of one 16-byte mix.
+M3XXH3	XXH3_mergeAccs#3	16	MIX_BYTES	Bytes of one 16-byte mix.
