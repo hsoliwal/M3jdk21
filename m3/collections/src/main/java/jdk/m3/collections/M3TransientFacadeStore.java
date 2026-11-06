@@ -356,7 +356,10 @@ public final class M3TransientFacadeStore<T> implements AutoCloseable {
     @Override
     public synchronized void close() {
         if (closed) return;
-        for (int i = size - 1; i >= 0; i--) removeSlot(i, true);
+        // Disposer callbacks may remove or close reentrantly: re-read size after each one.
+        while (size > 0) removeSlot(size - 1, true);
+        // A nested close() from a Disposer already finished this close.
+        if (closed) return;
         releaseReusable(0);
         closed = true;
     }
@@ -456,10 +459,34 @@ public final class M3TransientFacadeStore<T> implements AutoCloseable {
         return slot;
     }
 
+    //FLLDCIM: MRL - reentrant Disposer in remove/close disposed a facade twice, then AIOOBE(-1); detach first
     private void removeSlot(int slot, boolean dispose) {
         long logicalId = ids[slot];
         T facade = value(slot);
-        if (dispose) dispose(logicalId, facade);
+        short flag = flags[slot];
+        long access = accessEpochs[slot];
+        // Detach before invoking user code, so a reentrant close()/remove() never sees this slot.
+        detachSlot(slot);
+        if (!dispose) return;
+        try {
+            dispose(logicalId, facade);
+        } catch (RuntimeException | Error failure) {
+            try { restoreSlot(logicalId, facade, flag, access); }
+            catch (RuntimeException | Error cleanup) { failure.addSuppressed(cleanup); }
+            throw failure;
+        }
+    }
+
+    /** A failed Disposer keeps the facade resident with its identity, flags and recency. */
+    private void restoreSlot(long logicalId, T facade, short flag, long access) {
+        // Never re-admit after the close boundary or over a facade the callback re-admitted.
+        if (closed || find(logicalId) >= 0) return;
+        int slot = insert(logicalId, facade);
+        flags[slot] = flag;
+        accessEpochs[slot] = access;
+    }
+
+    private void detachSlot(int slot) {
         int moved = size - slot - 1;
         if (moved > 0) {
             System.arraycopy(ids, slot + 1, ids, slot, moved);

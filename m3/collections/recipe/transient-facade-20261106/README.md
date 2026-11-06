@@ -114,6 +114,17 @@ and then throw `ArrayIndexOutOfBoundsException` (index -1): `close()` iterates s
 removed. 2ab200c1755 guarded factory/rebind/scrub, not the disposer. The relocation keeps donor behaviour
 byte-identical (reentrant-close family digest); the fix belongs to a follow-up in the owner (open item).
 
+Closed by one hunk applied to the owner and the donor (M3JDK branch `m3/collections-facade-reentrant-dispose-20261106a`,
+com.synexia branch `m3/primitives-facade-reentrant-dispose-20261106`, donor blob `0b707f7754fe`): `removeSlot` detaches the
+slot before the Disposer runs and restores it (identity, flags, recency) only when the Disposer throws while the owner
+is still open, so the failed-disposer contract is unchanged; `close()` re-reads `size` after every callback and returns
+when a nested close finished. `M3FacadeDisposerReentryTest` (6 tests) pins it. Against donor rev `fd9a233680b`,
+`relocate.py --check` now reports the store row CHANGED (exactly that hunk) until the recipe is re-pinned to a develop
+commit that carries the donor fix; relocating from the fixed donor commit reproduces every target byte except the RELOCATE
+anchor lines. Residual, not fixed here: in `releaseOptionalResidency` a Disposer that closes the owner still disposes the
+in-flight victim twice and hands `(0, null)` to the Disposer for the remaining victims (no exception); reachable only
+with unpinned residents (RETAIN_UNEXPOSED).
+
 ## Files
 
 * `DECISION.tsv` owner decisions; `RELOCATION_MAP.tsv` rows; `PROVENANCE.tsv` per-row donor blob/sha256/URL pins and
