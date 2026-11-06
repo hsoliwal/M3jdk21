@@ -1,0 +1,6 @@
+op	path	target_or_counts
+REWRITE	m3/search/src/main/java/jdk/m3/search/M3ZSimilarity.java	PKG_PATH_M3=1
+REWRITE	m3/search/src/test/java/jdk/m3/search/M3ZSimilarityNativeTest.java	PKG_PATH_M3=1
+REWRITE	m3/search/src/test/java/jdk/m3/search/M3ZSimilarityPeriodTwoNativeTest.java	PKG_PATH_M3=1
+REWRITE	m3/search/src/test/java/jdk/m3/search/M3ZSimilarityTest.java	PKG_PATH_M3=1
+REWRITE	m3/search/src/test/java/jdk/m3/search/M3ZSimilarityUniformNativeTest.java	PKG_PATH_M3=1
