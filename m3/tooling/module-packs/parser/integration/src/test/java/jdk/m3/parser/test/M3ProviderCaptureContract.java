@@ -61,7 +61,7 @@ public final class M3ProviderCaptureContract {
         Files.write(file, encoded);
 
         // This is the only provider read for the initial source generation.
-        jdk.m3.file.M3File provider = jdk.m3.file.M3File.of(file);
+        jdk.m3.file.M3NioFile provider = jdk.m3.file.M3NioFile.of(file);
         byte[] captured = provider.readAllBytes(encoded.length);
         check(Arrays.equals(captured, encoded), "provider captured original bytes");
         URI uri = file.toUri();
@@ -137,7 +137,7 @@ public final class M3ProviderCaptureContract {
         Path file = directory.resolve("malformed.raw");
         byte[] malformed = {(byte)0xc3, (byte)0x28};
         Files.write(file, malformed);
-        jdk.m3.file.M3File provider = jdk.m3.file.M3File.of(file);
+        jdk.m3.file.M3NioFile provider = jdk.m3.file.M3NioFile.of(file);
         byte[] captured = provider.readAllBytes(2);
         refuse(CharacterCodingException.class,
                 () -> jdk.m3.parser.M3File.fromCapturedBytes(
@@ -152,7 +152,7 @@ public final class M3ProviderCaptureContract {
         Path link = directory.resolve("source-link.java");
         try {
             Files.createSymbolicLink(link, file.getFileName());
-            refuse(IOException.class, () -> jdk.m3.file.M3File.of(link).readAllBytes(32),
+            refuse(IOException.class, () -> jdk.m3.file.M3NioFile.of(link).readAllBytes(32),
                     "original provider must not follow symbolic links");
         } catch (UnsupportedOperationException | SecurityException unsupported) {
             System.out.println("M3_PROVIDER_SYMLINK_SKIPPED runtime does not support symlinks");

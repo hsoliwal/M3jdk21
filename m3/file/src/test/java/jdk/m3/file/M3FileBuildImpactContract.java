@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-/** Java21 standalone ABI/graph projection oracle over actual M3File generations. */
+/** Java21 standalone ABI/graph projection oracle over actual M3NioFile generations. */
 public final class M3FileBuildImpactContract {
     private static int checks;
 

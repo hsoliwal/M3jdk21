@@ -31,9 +31,9 @@ class M3MopStreamTraversalRecipeTest {
     assertEquals(3, generated.size());
     assertEquals(
         List.of(
-            "m3/ports/file/src/main/java/jdk/m3/file/M3FileDelta.java",
-            "m3/ports/file/src/main/java/jdk/m3/file/M3FileStreamTasks.java",
-            "m3/ports/file/src/main/java/jdk/m3/file/M3FileUniverseTraversal.java"),
+            "m3/file/src/main/java/jdk/m3/file/M3FileDelta.java",
+            "m3/file/src/main/java/jdk/m3/file/M3FileStreamTasks.java",
+            "m3/file/src/main/java/jdk/m3/file/M3FileUniverseTraversal.java"),
         generated.stream().map(file -> file.getSourcePath().toString().replace('\\', '/')).toList());
 
     var second =

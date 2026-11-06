@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * M3JDK21-native project/reactor impact closure over original M3File physical slots.
+ * M3JDK21-native project/reactor impact closure over original M3NioFile physical slots.
  * Maven 4, Gradle and JDT own their reactor metadata; this Java 21 primitive
  * kernel only uses complete, generation-matched project mappings and dependencies.
  * It never parses another POM or forms an independent cache, object graph or JNI
@@ -39,7 +39,7 @@ public final class M3ReactorImpactPlan {
      * dependent project. Verified=true requires complete Maven/Gradle reactor,
      * plugin and generated-output edges; a cyclic graph is rejected. Verified=false
      * must supply no graph and selects every project when anything changed.
-     * File ownership mapping covers ALL original M3File physical slots, with -1
+     * File ownership mapping covers ALL original M3NioFile physical slots, with -1
      * reserved for non-compilation build inputs or unresolved ownership.
      * A changed/impacted source/class whose owner is unknown forces a full plan.
      * The file impact must belong to the exact immutable snapshot instance

@@ -115,10 +115,10 @@ public final class M3FileStreamsContract {
     private static void provider() throws Exception {
         Path file=Files.createTempFile("m3shadow", ".json");
         Files.writeString(file,"{\"k\":1}");
-        try(var io=M3FileStreams.input(M3File.of(file), 16,M3FileStreams.SubProgressMonitor.NONE,M3FileStreams.SubProgressMonitor.NONE)) {
+        try(var io=M3FileStreams.input(M3NioFile.of(file), 16,M3FileStreams.SubProgressMonitor.NONE,M3FileStreams.SubProgressMonitor.NONE)) {
             byte[] a=io.primary().readAllBytes();
             byte[] b=io.shadow().readAllBytes();
-            check(Arrays.equals(a,b),"M3File original NIO provider, one original input");
+            check(Arrays.equals(a,b),"M3NioFile original NIO provider, one original input");
         }
     }
     private static void randomized() throws Exception {

@@ -7,7 +7,7 @@
 module jdk.m3fs {
     requires java.xml;
     requires java.logging;
-    requires jdk.m3.file;
+    requires org.m3jdk.file;
     requires org.apache.commons.io;
     requires org.apache.commons.lang3;
     // Original Apache Commons Logging 1.2 Log ABI is exported from this module's

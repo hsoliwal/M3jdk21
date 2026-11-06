@@ -131,7 +131,7 @@ public final class M3ShadowStreamsContract {
         check(onlyCommitted.get() == 0 && ahead.size() == 2,
                 "partial primary output acknowledged but no false confirmed progress");
 
-        // A real M3File would open its existing provider-owned channel; a shadow
+        // A real M3NioFile would open its existing provider-owned channel; a shadow
         // cursor is a byte-offset view, not a second Path/FS or new parser.
         byte[] utf8 = "{\"α\":123,\"items\":[1,2,3]}".getBytes(StandardCharsets.UTF_8);
         try (var input = M3ShadowStreams.input(new ByteArrayInputStream(utf8),
@@ -144,14 +144,14 @@ public final class M3ShadowStreamsContract {
         Path real = Files.createTempFile("m3-shadow-input-", ".json");
         try {
             Files.write(real, utf8);
-            var m3file = M3File.of(real);
+            var m3file = M3NioFile.of(real);
             check(m3file.path() == real, "original provider-owned Path retained");
             AtomicLong physical = new AtomicLong();
             try (var stream = m3file.openShadowInputStream(utf8.length, physical::addAndGet);
                  InputStream layerA = stream.shadow(M3StreamProgress.none());
                  InputStream layerB = stream.shadow(M3StreamProgress.none())) {
-                equal(layerA.readAllBytes(), utf8, "real M3File first parser domain");
-                equal(layerB.readAllBytes(), utf8, "real M3File second parser domain");
+                equal(layerA.readAllBytes(), utf8, "real M3NioFile first parser domain");
+                equal(layerB.readAllBytes(), utf8, "real M3NioFile second parser domain");
             }
             check(physical.get() == utf8.length, "real provider source read once");
             try (InputStream monitored = m3file.openInputStream(M3StreamProgress.none())) {
@@ -161,8 +161,8 @@ public final class M3ShadowStreamsContract {
             try {
                 Files.createSymbolicLink(link, real);
                 try {
-                    rejects(IOException.class, () -> M3File.of(link).openShadowInputStream(
-                            utf8.length, M3StreamProgress.none()), "M3File refuses symlink");
+                    rejects(IOException.class, () -> M3NioFile.of(link).openShadowInputStream(
+                            utf8.length, M3StreamProgress.none()), "M3NioFile refuses symlink");
                 } finally { Files.deleteIfExists(link); }
             } catch (UnsupportedOperationException | java.nio.file.FileSystemException ignored) {
                 // Symlink tests are host-permission gated; original NIO contract remains authoritative.

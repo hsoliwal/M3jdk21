@@ -48,8 +48,8 @@ public final class M3FileStreams {
         }
     }
 
-    /** Open the original M3File provider only once. Caller closes the result. */
-    public static ShadowInput input(M3File file, int windowBytes,
+    /** Open the original M3NioFile provider only once. Caller closes the result. */
+    public static ShadowInput input(M3NioFile file, int windowBytes,
             SubProgressMonitor primary, SubProgressMonitor observer) throws IOException {
         Objects.requireNonNull(file, "file");
         Objects.requireNonNull(primary, "primary progress");

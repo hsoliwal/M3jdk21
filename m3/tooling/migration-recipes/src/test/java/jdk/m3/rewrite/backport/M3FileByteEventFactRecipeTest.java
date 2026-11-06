@@ -27,9 +27,9 @@ class M3FileByteEventFactRecipeTest {
   void preservesDefensivePayloadAndRemovesProgressCloneThenReachesFixedPoint() {
     List<SourceFile> before =
         List.of(
-            java("m3/ports/file/src/main/java/jdk/m3/file/M3FileStreamEvents.java",
+            java("m3/file/src/main/java/jdk/m3/file/M3FileStreamEvents.java",
                 resource("M3FileStreamEvents.before.java.txt")),
-            java("m3/ports/file/src/main/java/jdk/m3/file/M3FileStreamTasks.java",
+            java("m3/file/src/main/java/jdk/m3/file/M3FileStreamTasks.java",
                 resource("M3FileStreamTasks.before.java.txt")));
 
     M3FileByteEventFactRecipe recipe = new M3FileByteEventFactRecipe();
@@ -64,15 +64,15 @@ class M3FileByteEventFactRecipeTest {
   @Test
   void retainsPinnedPostimageBesideARequiredPreimage() {
     List<SourceFile> input = List.of(
-        java("m3/ports/file/src/main/java/jdk/m3/file/M3FileStreamEvents.java",
+        java("m3/file/src/main/java/jdk/m3/file/M3FileStreamEvents.java",
             resource("M3FileStreamEvents.after.java.txt")),
-        java("m3/ports/file/src/main/java/jdk/m3/file/M3FileStreamTasks.java",
+        java("m3/file/src/main/java/jdk/m3/file/M3FileStreamTasks.java",
             resource("M3FileStreamTasks.before.java.txt")));
     var run = new M3FileByteEventFactRecipe()
         .run(new InMemoryLargeSourceSet(input), context(), 1);
     var changes = run.getChangeset().getAllResults();
     assertEquals(1, changes.size());
-    assertEquals("m3/ports/file/src/main/java/jdk/m3/file/M3FileStreamTasks.java",
+    assertEquals("m3/file/src/main/java/jdk/m3/file/M3FileStreamTasks.java",
         changes.getFirst().getAfter().getSourcePath().toString());
     assertEquals(resource("M3FileStreamTasks.after.java.txt"),
         changes.getFirst().getAfter().printAll());
@@ -81,9 +81,9 @@ class M3FileByteEventFactRecipeTest {
   @Test
   void refusesTamperedPostimage() {
     List<SourceFile> input = List.of(
-        java("m3/ports/file/src/main/java/jdk/m3/file/M3FileStreamEvents.java",
+        java("m3/file/src/main/java/jdk/m3/file/M3FileStreamEvents.java",
             resource("M3FileStreamEvents.after.java.txt") + "// unreviewed change\n"),
-        java("m3/ports/file/src/main/java/jdk/m3/file/M3FileStreamTasks.java",
+        java("m3/file/src/main/java/jdk/m3/file/M3FileStreamTasks.java",
             resource("M3FileStreamTasks.after.java.txt")));
     assertThrows(RuntimeException.class, () -> new M3FileByteEventFactRecipe()
         .run(new InMemoryLargeSourceSet(input), context(), 1));

@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Arrays;
 
-/** Standalone source-coordinate and admitted M3File observation contract. */
+/** Standalone source-coordinate and admitted M3NioFile observation contract. */
 public final class M3FileSourceContract {
     public M3FileSourceContract() { }
     private static int checks;
@@ -43,12 +43,12 @@ public final class M3FileSourceContract {
         var file = Files.createTempFile("m3-source-", ".java");
         try {
             Files.write(file, source);
-            var capture = M3FileSource.capture(M3File.of(file), source.length);
+            var capture = M3FileSource.capture(M3NioFile.of(file), source.length);
             check(capture.source().sha256().equals(image.sha256())
                     && capture.observation().fingerprint().size() == source.length,
-                    "single M3File observation");
+                    "single M3NioFile observation");
             try {
-                M3FileSource.capture(M3File.of(file), source.length - 1);
+                M3FileSource.capture(M3NioFile.of(file), source.length - 1);
                 throw new AssertionError("accepted oversized source");
             } catch (java.io.IOException expected) { checks++; }
         } finally { Files.deleteIfExists(file); }

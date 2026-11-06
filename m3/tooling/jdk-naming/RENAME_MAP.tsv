@@ -31,3 +31,5 @@ m3/lexicon/receiver/src/test/java/com/m3/lexicon/M3CaseLiangParityProof.java	m3/
 m3/tooling/module-packs/nlp-search/tests/receiver-history/83f625d94819c8d17b08ef98e5d56d6099958796/SynexiaPrecomputePayload.java.txt	m3/tooling/module-packs/nlp-search/tests/receiver-history/83f625d94819c8d17b08ef98e5d56d6099958796/M3PrecomputePayload.java.txt
 m3/tooling/module-packs/nlp-search/tests/receiver-history/c6325cf501f93d02eec66091f1145ad24b98f7f2/SynexiaPrecomputePayload.java.txt	m3/tooling/module-packs/nlp-search/tests/receiver-history/c6325cf501f93d02eec66091f1145ad24b98f7f2/M3PrecomputePayload.java.txt
 m3/tooling/module-packs/nlp-search/tests/receiver-history/f54b32cc7d032f5d9aac3be1d1147dac932c55e9/SynexiaPrecomputePayload.java.txt	m3/tooling/module-packs/nlp-search/tests/receiver-history/f54b32cc7d032f5d9aac3be1d1147dac932c55e9/M3PrecomputePayload.java.txt
+m3/file/src/main/java/jdk/m3/file/M3File.java	m3/file/src/main/java/jdk/m3/file/M3NioFile.java
+m3/file/src/main/java/jdk/m3/file/M3FileDelta.java	m3/file/src/main/java/jdk/m3/file/M3NioFileDelta.java
