@@ -25,9 +25,9 @@ import java.util.Objects;
  * partially changed by argument rejection. Concurrent writes require caller locking.
  * These operations are not advertised as cryptographic constant-time primitives.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/Unsigned128.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/Unsigned128.java}
  * blob {@code 164d397e3e0fd3ed5fc0d93817a2e0f0e48c2980} at com.synexia develop {@code ded4a4acdffe5a27e1f2cedb02126762816b9850} by
- * RELOCATE_SYNEXIA_OWNER v2 (identifiers only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v2 (identifiers only; bytecode equal to the source modulo names).
  */
 public final class M3Unsigned128 {
     private M3Unsigned128() { }

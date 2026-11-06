@@ -64,3 +64,27 @@ Gates (Windows, JDK 21.0.9, MinGW-w64 gcc):
 Run the native tests: build `src/main/native` with CMake, then
 `mvn -f m3/search/pom.xml -Pm3-search-native -Dm3.search.native.dir=<build dir> test` (on Windows also
 `-Dm3.search.native.prefix= -Dm3.search.native.suffix=.dll`).
+
+## Leaf 4: top-K selection, rank fusion and pair-sum search (2026-11-06)
+
+M3_SEARCH_RELOCATE v3 (`qualification/relocation-20261106-fastsearch/`) receives the pure-JDK search kernels of com.synexia
+`synexia-fastsearch`. The other classes of that module are an application layer (Lucene, Jackson, HTTP, WARC) and stay
+in com.synexia. `closure_ffs.py` and `seed_closure.py` record the selection.
+
+| M3 owner | Donor | Shape |
+|---|---|---|
+| `M3TopKSelector`, `M3JavaTopKSelector`, `M3TopKInputs` | knowledge.index TopKSelector, JavaTopKSelector, TopKInputs | bounded top-K selection with progress and cancellation |
+| `M3ReciprocalRankFusion`, `M3HybridSearchOptions` | ReciprocalRankFusion, HybridSearchOptions | weighted reciprocal rank fusion of ranked lists |
+| `M3PreparationCache`, `M3QueryPreparationStats` | PreparationCache, QueryPreparationStats | bounded query-preparation cache |
+| `M3PairSumSearch`, `M3PairSumJni` + `pair_sum_search.c` (m3pairsum) | problem PairSumSearch, PairSumJni | two-sum over sorted and unsorted lanes (LC 1 and LC 167), Java and C17 JNI |
+
+The donor monitor `com.synexia.common.progress.ProgressMonitor` maps to `jdk.m3.collections.M3ProgressMonitor`. The kernels call beginTask, subTask, worked, done and checkCanceled, which have the same meaning on both.
+
+Gates (Windows, JDK 21.0.9, MinGW-w64):
+- javac `-Xlint:all,-module -Werror`: the whole m3/search module, main and tests, 0 diagnostics.
+- gcc `-Werror` on `pair_sum_search.c`: 0 diagnostics.
+- JUnit default build: 69 found, 63 passed, 0 failed, 6 skipped. The skipped ones are pair-sum JNI tests that need the library.
+- JUnit leaf-4 classes with `-Dm3.pair.jni.library`: 14/14 passed.
+- `HybridSearchKernelChecks`: 25,000 randomized top-K cases, 10,000 budget comparisons and 3,000 weighted-fusion oracles, PASS.
+- `PairSumParityDriver`: Java/C17 parity over 15,000 sorted singles, 24,576 batch queries and 8,000 unsorted singles, PASS.
+- Differential: the com.synexia originals (the stub monitor is in `diff/stub`) print byte-identical output for both checks, with sha256 `2e771122b347…` (hybrid) and `85c6bd1dd98a…` (parity).

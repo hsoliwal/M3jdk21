@@ -20,9 +20,9 @@ package jdk.m3.collections;
  * {@code [0, size())} throw {@link IndexOutOfBoundsException}; a negative size throws
  * {@link IllegalArgumentException}.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/IntDisjointSet.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/IntDisjointSet.java}
  * blob {@code 93786bf4e4c4b4e308c32a6d1d12b2e95f04f871} at com.synexia develop {@code ded4a4acdffe5a27e1f2cedb02126762816b9850}
- * by RELOCATE_SYNEXIA_OWNER v1 (pattern DSU_UNION_BY_SIZE_PATH_HALVING v1, Synexia recipe dataset
+ * by RELOCATE_M3_OWNER v1 (pattern DSU_UNION_BY_SIZE_PATH_HALVING v1, Synexia recipe dataset
  * {@code m3-project-delta-20261021/datasets/dsu-path-halving-20261030}).
  */
 public final class M3IntDisjointSet {

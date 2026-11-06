@@ -31,3 +31,22 @@ Gates (Windows, JDK 21.0.9, MinGW-w64 gcc; java.base patched with this repositor
 - M3TextSmoke: every text-tool assertion passes up to its FIFO section, which is Linux-only.
 
 Not run: build.py's jmod/jlink image (Linux with an M3 image), the FIFO part of M3TextSmoke, and the donor's 32 unit tests (next leaf).
+
+## Donor harnesses (2026-11-06, follow-up)
+
+`relocate_tests.py` receives the donor's `src/test` with the main-source map; each harness joins the package of the classes it exercises. The relocated sources and test natives are in `fixtures/src/test/{java,c,native}`.
+
+Test-scope adaptations (also in `TESTS_RELOCATED.tsv`):
+- CoreSelfTest drops 4 suite calls that cross into `jdk.m3.structured` or into the held executor; each of those harnesses runs as its own entry.
+- Not received: NativeLineBatchOrderSelfTest (it uses the donor-only `ProgressState` API) and M3TextToolSelfTest (its owner is HOLD).
+
+Correction to the first receive: `NativeProcessPipeline` gets an explicit **public** constructor. The private one added for `-Xlint:all -Werror` changed the API, and the donor's harness instantiates the class.
+
+`gate4.sh` (Windows, JDK 21.0.9, MinGW gcc):
+- javac: 0 errors.
+- gcc `-Werror`: main natives plus the m3unixaho/m3unixtext wrong-ABI test libraries, 0 diagnostics.
+- C self-test `m3_utf8_kmp_selftest`: rc=0.
+- Harnesses (`HARNESS_RESULTS.tsv`): **31/31 pass**, each in the environment it asserts:
+  - 24 runs with natives (both DelimitedIndexContract modes included);
+  - 4 with no library on `java.library.path` (the Missing/NoNative contracts and NativeUtf16LiteralSelfTest in Java mode);
+  - 3 with the wrong-ABI libraries in place of m3unixaho/m3unixtext.

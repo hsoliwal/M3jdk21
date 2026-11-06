@@ -1,0 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: jdk.internal.m3.rewrite.M3FileChangeMapLowerBound20261106
+displayName: Replace serial ChangeMap coordinate scans with first-boundary binary search
+description: >-
+  Re-seal of the donor recipe M3FileChangeMapLowerBound20261029 (hsoliwal/com.synexia 4a2e6452a7a,
+  crate m3-file-changemap-lower-bound-20261029) onto the renamed jdk.m3.file owner. One file:
+  ChangeMap.oldToNew and newToOld go from an O(E) ordered scan to an O(log E) first-equality lower
+  bound through one private helper; public API, affinity and exception behavior are unchanged.
+recipeList:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-file-changemap-lower-bound-20261106

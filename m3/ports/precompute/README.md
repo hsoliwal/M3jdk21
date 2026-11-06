@@ -26,6 +26,11 @@ This port owns the broader second-pass fabric:
 - `M3RegexShape`: fail-closed literal/prefix/suffix/exact regex recognition;
 - `M3EditDistancePlan`: exact bounded Levenshtein with single-word Myers for short
   patterns plus reusable DP/banded workspaces;
+- `M3LcsPlan`: exact bounded LCS length over UTF-16 code units (63-unit bit-vector recurrence,
+  same Myers family; donor com.synexia crate `m3-utf16-lcs-bitvector-20261105`, recipe
+  `recipe/utf16-atoms-20261106`);
+- `M3Utf16Glob`: whole-input `?`/`*` match over UTF-16 code units, O(1) auxiliary space (not a
+  `PathMatcher` glob; donor crate `m3-utf16-wildcard-glob-20261105`, same recipe);
 - `M3CodeTextSignals`: code-looking and regex-looking signal image for fixture
   generation and candidate routing;
 - `M3SimilarityPrecompute`: pairwise safe/approximate signal packet;

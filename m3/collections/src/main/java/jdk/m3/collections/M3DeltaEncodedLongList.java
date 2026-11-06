@@ -23,9 +23,9 @@ import java.util.function.LongConsumer;
  * <p>Large positive deltas spanning the signed range are supported through
  * two's-complement modular subtraction and unsigned varint encoding.
  *
- * <p>Lineage: absorbed from Synexia {@code synexia-primitives/src/main/java/com/synexia/primitives/DeltaEncodedLongList.java}
+ * <p>Lineage: absorbed from Synexia {@code m3-primitives/src/main/java/jdk/internal/m3/primitives/DeltaEncodedLongList.java}
  * blob {@code 131170707df4af00ab0b8caf7ed9b5dd424e9b06} at com.synexia develop {@code ded4a4acdffe5a27e1f2cedb02126762816b9850} by
- * RELOCATE_SYNEXIA_OWNER v2 (identifiers only; bytecode equal to the source modulo names).
+ * RELOCATE_M3_OWNER v2 (identifiers only; bytecode equal to the source modulo names).
  */
 public final class M3DeltaEncodedLongList {
     private byte[] data;

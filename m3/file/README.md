@@ -53,6 +53,19 @@ Run `mvn -B -f m3/file/pom.xml verify` with Java 21 and Python 3.
 Alternatively, `python3 m3/file/verify.py --java-home /path/to/jdk21 --output /path/to/proof`
 also compiles the original module itself.
 
+## ChangeMap lower bound (recipe replay 2026-11-06)
+
+`M3FileEditBatch.ChangeMap.oldToNew/newToOld` answer in O(log E) through one private
+first-equality lower bound instead of an O(E) ordered scan; public API, affinity and
+exception behaviour are unchanged. The change is a replay of the com.synexia recipe
+`M3FileChangeMapLowerBound20261029` (hsoliwal/com.synexia 4a2e6452a7a) re-sealed onto the
+renamed owner in [recipe/changemap-lower-bound-20261106](recipe/changemap-lower-bound-20261106/README.md):
+`reseal.py` derives the templates, `apply.py` replays the hash-pinned snapshot, the OpenRewrite
+replay test proves the canonical recipe emits the same postimage, and
+`src/test/java/jdk/m3/file/M3FileChangeMapBinarySearchProof.java` (also run by `verify.py` on the
+host and the linked image) is the ported donor oracle: 50,001 maps, 9,341,740 checks, with a
+digest that `differential.py` compares across the receiver, the donor postimage and the preimage.
+
 Canonical recipe: `com.synexia.m3jdk.CollectionsContractRefinement20261017`,
 dataset `file-content-delta-20261020`, in Synexia's existing
 `synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017`.
