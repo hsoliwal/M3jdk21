@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2026 Hitesh Soliwal and contributors -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3</groupId>
+  <artifactId>m3-compression</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>M3JDK :: Compression</name>
+  <description>jdk.m3.compression (module org.m3jdk.compression): opt-in raw-format encoders M3Lz4RawBlockEncoder
+    (LZ4 block format, no frame) and M3SnappyRawEncoder (Snappy raw format, no framing), their reusable bounded
+    M3CompressionByteSink, the four-byte match-candidate index M3LzMatchCandidateIndex and the format-neutral
+    M3LzByteKernels. Pure Java 21, java.base only; no third-party library. Relocated by recipe
+    (recipe/compression-20261106/relocate.py with RELOCATION_MAP.tsv and PROVENANCE.tsv) from the first-party donor
+    hsoliwal/com.synexia develop 6fdee5330b8a (2026-11-06); the donor oracles and the format oracle (spec-following
+    reference decoders, 100,000 seeded inputs) run in the test phase.</description>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.artifact.version>5.11.4</junit.artifact.version>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.artifact.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>21</release>
+          <proc>none</proc>
+          <compilerArgs>
+            <arg>-Xlint:all</arg>
+            <arg>-Werror</arg>
+          </compilerArgs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>default-testCompile</id>
+            <configuration>
+              <compilerArgs combine.children="append">
+                <!-- the test-scope allocation probe reads com.sun.management.ThreadMXBean (JDK module jdk.management);
+                     the product descriptor does not require it -->
+                <arg>--add-modules</arg>
+                <arg>jdk.management</arg>
+                <arg>--add-reads</arg>
+                <arg>org.m3jdk.compression=jdk.management</arg>
+              </compilerArgs>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.4</version>
+        <configuration>
+          <!-- the oracles are JUnit 5 classes in the module's package; classpath run, the descriptor is for consumers -->
+          <useModulePath>false</useModulePath>
+          <trimStackTrace>false</trimStackTrace>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.2</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>
