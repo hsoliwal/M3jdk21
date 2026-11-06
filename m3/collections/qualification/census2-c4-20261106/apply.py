@@ -67,7 +67,7 @@ RULES = (
      ]),
     ("P2-073", NATIVE + "m3_long_rank_batch_jni.c", "a4276617061bd509807843de68772b0379dd9c38", C_CRATES,
      'pair:pre=32753502cfa1,post=294447e6fe84 lc315:pre=3a56a28ae6b4,post=442630c291ce kth:pre=d8953eb3be51,post=d52ddd76ccc2',
-     "MAPPED: the three C text crates' appended kernels at the end of the existing m3rankbatch source; declared: JNI prefix Java_com_m3_collections_ -> Java_jdk_m3_collections_, the donor's mid-file SPDX line dropped, <limits.h> and <stdint.h> added from the crates' preimage include set (the kernels use INT_MAX, INT64_MAX, SIZE_MAX and uint64_t; master's own topKFrequent0 already needs SIZE_MAX)", [
+     "MAPPED: the three C text crates' appended kernels at the end of the existing m3rankbatch source; declared: the donor JNI prefix -> Java_jdk_m3_collections_ (tools/DONOR.tsv), the donor's mid-file SPDX line dropped, <limits.h> and <stdint.h> added from the crates' preimage include set (the kernels use INT_MAX, INT64_MAX, SIZE_MAX and uint64_t; master's own topKFrequent0 already needs SIZE_MAX)", [
          ('#include <jni.h>\n#include <stddef.h>\n#include <stdlib.h>\n',
           "#include <jni.h>\n#include <stddef.h>\n//FLLDCIM: MRL - census P2-073, crates m3jdk21-lc719-pair-distance-jni-20261026 m3jdk21-lc315-count-smaller-native-20261026 m3jdk21-lc719-kth-pair-distance-jni-20261026: the crates' preimage include set (limits.h, stdint.h: INT_MAX, INT64_MAX, SIZE_MAX, uint64_t)\n#include <limits.h>\n#include <stdint.h>\n#include <stdlib.h>\n"),
          ('    free(keys);\n    free(frequencies);\n    if ((*env)->ExceptionCheck(env)) return NULL;\n    return output;\n}\n',

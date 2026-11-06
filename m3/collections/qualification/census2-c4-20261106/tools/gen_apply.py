@@ -6,9 +6,10 @@
 Reads the six hash-pinned donor pre/post pairs (three Java crates, three C text crates) at the census pass-2 pin,
 normalises each added block to whole declarations (hunks.py) and writes the RULES table of apply.py with the blocks as
 literal payloads, so apply.py replays without donor access. Declared transformations, each recorded in the rule note:
-the JNI symbol prefix Java_com_m3_collections_ -> Java_jdk_m3_collections_ (the JDK-naming package rename,
-fe35ea98841) and the drop of the donor's mid-file "/* SPDX-License-Identifier: Apache-2.0 */" line in the C block
-(the target keeps its own header). Every other byte of every block is the donor's.
+the donor JNI symbol prefix -> its JDK-naming rename (DONOR.tsv jni_from -> jni_to, fe35ea98841) and the drop of
+the donor's mid-file "/* SPDX-License-Identifier: Apache-2.0 */" line in the C block (the target keeps its own
+header). Every other byte of every block is the donor's. Donor path prefixes and the JNI prefix pair live in
+DONOR.tsv next to this script (TSV is outside the JDK-naming scope, which would rename them inside a .py file).
 usage: python -I gen_apply.py DONOR_GIT TEMPLATE_APPLY_PY OUT_APPLY_PY"""
 import sys
 from pathlib import Path
@@ -18,8 +19,9 @@ import hunks  # noqa: E402
 
 GIT, TEMPLATE, OUT = sys.argv[1:4]
 REV = "d5ad5090d87ef8477a56317e60ac0d29c65029f7"
-H = "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/"
-T = "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/"
+DONOR = dict(line.split("\t")[:2] for line in (Path(__file__).resolve().parent / "DONOR.tsv")
+             .read_text(encoding="utf-8").splitlines()[1:] if line.strip())
+H, T, JNI_FROM, JNI_TO = DONOR["java_prefix"], DONOR["text_prefix"], DONOR["jni_from"], DONOR["jni_to"]
 PAIR, LC315, KTH = ("m3jdk21-lc719-pair-distance-java-20261026", "m3jdk21-lc315-count-smaller-20261026",
                     "m3jdk21-lc719-kth-pair-distance-20261026")
 CPAIR, C315, CKTH = ("m3jdk21-lc719-pair-distance-jni-20261026", "m3jdk21-lc315-count-smaller-native-20261026",
@@ -44,7 +46,7 @@ def text(lines):
 
 
 def jni(lines):
-    return [l.replace("Java_com_m3_collections_", "Java_jdk_m3_collections_") for l in lines if l != SPDX_LINE]
+    return [l.replace(JNI_FROM, JNI_TO) for l in lines if l != SPDX_LINE]
 
 
 pair, l315, kth = java(PAIR, "M3LongRankBatchNative"), java(LC315, "M3LongRankBatchNative"), java(KTH, "M3LongRankBatchNative")
@@ -113,7 +115,7 @@ rules = "".join([
     rule("P2-073", "NATIVE", "m3_long_rank_batch_jni.c", "a4276617061bd509807843de68772b0379dd9c38", "C_CRATES",
          donors(("pair", cpair[0]), ("lc315", c315[0]), ("kth", ckth[0])),
          "MAPPED: the three C text crates' appended kernels at the end of the existing m3rankbatch source; declared:"
-         " JNI prefix Java_com_m3_collections_ -> Java_jdk_m3_collections_, the donor's mid-file SPDX line dropped,"
+         " the donor JNI prefix -> " + JNI_TO + " (tools/DONOR.tsv), the donor's mid-file SPDX line dropped,"
          " <limits.h> and <stdint.h> added from the crates' preimage include set (the kernels use INT_MAX, INT64_MAX,"
          " SIZE_MAX and uint64_t; master's own topKFrequent0 already needs SIZE_MAX)",
          c_edits),
