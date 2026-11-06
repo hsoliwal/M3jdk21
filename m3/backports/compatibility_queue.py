@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Iterable, Mapping, Sequence
 
 PENDING = "PENDING_COMPATIBILITY_PROOF"
+MAX_INVENTORY_FIELD_SIZE = 4 * 1024 * 1024
 
 
 @dataclass(frozen=True)
@@ -226,8 +227,13 @@ def queue(rows: Iterable[Mapping[str, str]]) -> list[QueueItem]:
 
 
 def read_inventory(path: Path) -> list[dict[str, str]]:
-    with path.open("r", encoding="utf-8", newline="") as handle:
-        rows = list(csv.DictReader(handle, delimiter="\t"))
+    previous_limit = csv.field_size_limit()
+    try:
+        csv.field_size_limit(MAX_INVENTORY_FIELD_SIZE)
+        with path.open("r", encoding="utf-8", newline="") as handle:
+            rows = list(csv.DictReader(handle, delimiter="\t"))
+    finally:
+        csv.field_size_limit(previous_limit)
     required = {
         "release",
         "commit",
