@@ -3,7 +3,7 @@
 // Materialized from hsoliwal/com.synexia@8513abf8eb0d911873c9127a138007a42dd4ab60
 // Source: m3-primitives/src/test/java/jdk/internal/m3/util/M3PrimitiveCollectionFacadesTest.java
 // Source-Git-blob: 4f0705ba4f58a7bbb8e2947c119b2483b5273c06
-package jdk.m3.util;
+package jdk.m3.collections;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;

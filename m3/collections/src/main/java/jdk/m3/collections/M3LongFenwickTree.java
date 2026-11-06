@@ -3,7 +3,7 @@
 // Materialized from hsoliwal/com.synexia@8513abf8eb0d911873c9127a138007a42dd4ab60
 // Source: m3-algo/src/main/java/jdk/internal/m3/algorithms/collections/PackedLongFenwickTree.java
 // Source-Git-blob: b6c820c05dca67fc53a92a4be84f0b0a2c28b411
-package jdk.m3.ds;
+package jdk.m3.collections;
 
 import java.util.Arrays;
 import java.util.Objects;

@@ -1,7 +1,7 @@
 /* SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
  * SPDX-License-Identifier: Apache-2.0
  */
-package jdk.m3.util;
+package jdk.m3.collections;
 
 import java.util.Arrays;
 import java.util.ConcurrentModificationException;

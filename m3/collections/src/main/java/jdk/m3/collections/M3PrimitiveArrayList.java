@@ -3,7 +3,7 @@
 // Materialized from hsoliwal/com.synexia@8513abf8eb0d911873c9127a138007a42dd4ab60
 // Source: m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitiveArrayList.java
 // Source-Git-blob: 2b2f7d73fbcdc1d8ea6b65c0520ca526d7306f4d
-package jdk.m3.util;
+package jdk.m3.collections;
 
 import java.util.Objects;
 import java.util.function.LongConsumer;

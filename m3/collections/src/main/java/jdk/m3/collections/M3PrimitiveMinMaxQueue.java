@@ -3,7 +3,7 @@
 // Materialized from hsoliwal/com.synexia@8513abf8eb0d911873c9127a138007a42dd4ab60
 // Source: m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitiveDoubleEndedPriorityQueue.java
 // Source-Git-blob: d1507aac2d65b16f84559caa6d3a02c908bbf1ef
-package jdk.m3.util;
+package jdk.m3.collections;
 
 import java.util.Objects;
 

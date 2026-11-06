@@ -4,14 +4,13 @@
  */
 package jdk.m3.collections;
 
-import jdk.m3.util.M3PrimitiveIndexViewFilterContract;
 import org.junit.jupiter.api.Test;
 
 /** Maven delegates to the same independent mains used in the linked-image proof. */
 final class M3CollectionsPackTest {
     @Test
     void packedDecisionBoundariesAndComposition() {
-        jdk.m3.util.M3PrimitiveSelectionWordContract.main(new String[0]);
+        jdk.m3.collections.M3PrimitiveSelectionWordContract.main(new String[0]);
     }
 
     @Test

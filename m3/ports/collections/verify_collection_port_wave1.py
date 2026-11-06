@@ -20,19 +20,19 @@ LINEAGE = REPO / "m3" / "tooling" / "standalone" / "LINEAGE_SOURCES.tsv"
 LINEAGE_KEY = "synexia"
 
 EXPECTED = {
-    "m3/ports/collections/src/main/java/jdk/m3/util/M3DenseHash.java":
+    "m3/collections/src/main/java/jdk/m3/collections/M3DenseHash.java":
         "0474a80b032eb1e1fae085c886e7b7fe71200bf8",
-    "m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveKind.java":
+    "m3/collections/src/main/java/jdk/m3/collections/M3PrimitiveKind.java":
         "4bc7c258073072e0310d1a50c3885ed55c50816b",
-    "m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveArrayList.java":
+    "m3/collections/src/main/java/jdk/m3/collections/M3PrimitiveArrayList.java":
         "2b2f7d73fbcdc1d8ea6b65c0520ca526d7306f4d",
-    "m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveArrayDeque.java":
+    "m3/collections/src/main/java/jdk/m3/collections/M3PrimitiveArrayDeque.java":
         "7b2bfc81d5fe8fe69b6c5258d66f521d89ae1dec",
-    "m3/ports/collections/src/main/java/jdk/m3/util/M3IntArrayDeque.java":
+    "m3/collections/src/main/java/jdk/m3/collections/M3IntArrayDeque.java":
         "e5a3dcf87e19d38a2fcf07148320919c958d483a",
-    "m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveMinMaxQueue.java":
+    "m3/collections/src/main/java/jdk/m3/collections/M3PrimitiveMinMaxQueue.java":
         "d1507aac2d65b16f84559caa6d3a02c908bbf1ef",
-    "m3/ports/collections/src/main/java/jdk/m3/ds/M3LongFenwickTree.java":
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongFenwickTree.java":
         "b6c820c05dca67fc53a92a4be84f0b0a2c28b411",
 }
 
@@ -91,7 +91,7 @@ def verify_main_sources(rows: dict[str, dict[str, str]]) -> None:
             fail(f"source blob header mismatch: {relative}")
         if "import com.synexia" in text or "package com.synexia" in text:
             fail(f"Synexia runtime package leaked into port: {relative}")
-        expected_package = "package jdk.m3.ds;" if "/jdk/m3/ds/" in relative else "package jdk.m3.util;"
+        expected_package = "package jdk.m3.collections;"  # one home since 2026-11-06 (CONSOLIDATE_PORT_OWNERS v1)
         if expected_package not in text:
             fail(f"target package mismatch: {relative}")
 

@@ -3,7 +3,7 @@
 // Materialized from hsoliwal/com.synexia@8513abf8eb0d911873c9127a138007a42dd4ab60
 // Source: m3-primitives/src/main/java/jdk/internal/m3/primitives/PrimitiveKind.java
 // Source-Git-blob: 4bc7c258073072e0310d1a50c3885ed55c50816b
-package jdk.m3.util;
+package jdk.m3.collections;
 
 import java.util.Arrays;
 
