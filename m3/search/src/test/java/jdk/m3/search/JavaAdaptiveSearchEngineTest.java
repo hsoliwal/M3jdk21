@@ -1,12 +1,21 @@
 // SPDX-License-Identifier: Apache-2.0
-// Relocated from com.synexia m3-fast-search/src/test/java/jdk/internal/m3/search/JavaAdaptiveSearchEngineTest.java (blob 9ae0a1fa1944) by M3_SEARCH_RELOCATE v1.
+// Relocated from com.synexia m3-fast-search/src/test/java/jdk/internal/m3/search/JavaAdaptiveSearchEngineTest.java (blob 7062f4eb29cd) by M3_SEARCH_RELOCATE v1.
 package jdk.m3.search;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import jdk.m3.collections.M3DefaultProgressMonitor;
+import jdk.m3.collections.M3ProgressMonitor;
+import jdk.m3.collections.M3ProgressState;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
 class JavaAdaptiveSearchEngineTest {
@@ -79,6 +88,94 @@ class JavaAdaptiveSearchEngineTest {
         assertEquals(2, compiled.indexOf(bytes("xxneedle-value"), 0));
         assertNotEquals("", strategy);
         compiled.close();
+    }
+
+    @Test
+    void reverseBmhNearMatchPollsWithinOneLongDirectBufferSearch() {
+        byte[] text = new byte[8192];
+        byte[] needle = new byte[2048];
+        Arrays.fill(text, (byte) 'a');
+        Arrays.fill(needle, (byte) 'a');
+        needle[needle.length - 1] = (byte) 'b';
+        ByteBuffer direct = ByteBuffer.allocateDirect(text.length);
+        direct.put(text).flip();
+        direct.mark();
+        AtomicInteger polls = new AtomicInteger();
+        M3ProgressMonitor stopOnSixth = new M3ProgressMonitor() {
+            @Override public void beginTask(String name, long total) {}
+            @Override public void done() {}
+            @Override public void worked(long work) {}
+            @Override public void setProgress(long worked, long total) {}
+            @Override public void setTaskName(String name) {}
+            @Override public void subTask(String name) {}
+            @Override public boolean isCanceled() { return polls.incrementAndGet() >= 6; }
+            @Override public void setCanceled(boolean value) {}
+            @Override public M3ProgressState state() { return new M3DefaultProgressMonitor().state(); }
+        };
+        try (M3CompiledSearch compiled = new M3BoyerMooreHorspoolSearch(needle)) {
+            // The old default polls only at reverse-search boundaries.
+            assertThrows(CancellationException.class,
+                    () -> compiled.lastIndexOf(direct, Integer.MAX_VALUE, stopOnSixth));
+            assertEquals(6, polls.get(), "reverse search must poll inside BMH work");
+            assertEquals(0, direct.position());
+            assertEquals(text.length, direct.limit());
+            direct.reset();
+            assertEquals(0, direct.position(), "input mark must survive cancellation");
+            assertEquals(-1, compiled.lastIndexOf(direct, Integer.MAX_VALUE),
+                    "borrowed compiled pattern must remain usable");
+        }
+    }
+
+    @Test
+    void monitoredReverseBmhMatchesOriginalOffsetsAndNeverMovesByteBufferCursor() {
+        Random random = new Random(0xB0A1156L);
+        for (int sample = 0; sample < 1200; sample++) {
+            byte[] text = new byte[random.nextInt(172)];
+            byte[] needle = new byte[1 + random.nextInt(53)];
+            random.nextBytes(text);
+            random.nextBytes(needle);
+            if (sample % 3 == 0) {
+                Arrays.fill(text, (byte) 17);
+                Arrays.fill(needle, (byte) 17);
+            } else if (sample % 3 == 1) {
+                for (int i = 0; i < text.length; i++) text[i] = (byte) (i % 3);
+                for (int i = 0; i < needle.length; i++) needle[i] = (byte) (i % 3);
+            }
+            int from = sample % 7 == 0 ? Integer.MAX_VALUE
+                    : sample % 7 == 1 ? -1
+                    : random.nextInt(text.length + 38) - 19;
+            int expected = -1;
+            for (int start = Math.min(from, text.length - needle.length);
+                    start >= 0; start--) {
+                int matched = 0;
+                while (matched < needle.length && text[start + matched] == needle[matched]) {
+                    matched++;
+                }
+                if (matched == needle.length) {
+                    expected = start;
+                    break;
+                }
+            }
+            try (M3CompiledSearch compiled = new M3BoyerMooreHorspoolSearch(needle)) {
+                for (boolean direct : new boolean[]{false, true}) {
+                    ByteBuffer buffer = direct ? ByteBuffer.allocateDirect(text.length + 8)
+                            : ByteBuffer.allocate(text.length + 8);
+                    buffer.position(3).put(text).limit(3 + text.length).position(3);
+                    for (boolean readOnly : new boolean[]{false, true}) {
+                        ByteBuffer view = readOnly ? buffer.asReadOnlyBuffer() : buffer.duplicate();
+                        int pos = view.position(), limit = view.limit();
+                        view.mark();
+                        assertEquals(expected, compiled.lastIndexOf(view, from));
+                        assertEquals(expected, compiled.lastIndexOf(
+                                view, from, new M3DefaultProgressMonitor()));
+                        assertEquals(pos, view.position());
+                        assertEquals(limit, view.limit());
+                        view.reset();
+                        assertEquals(pos, view.position());
+                    }
+                }
+            }
+        }
     }
 
     private static byte[] bytes(String value) {
