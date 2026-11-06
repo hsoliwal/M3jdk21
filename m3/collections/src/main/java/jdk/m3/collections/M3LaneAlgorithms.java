@@ -97,6 +97,16 @@ public final class M3LaneAlgorithms {
         reverseBits(words, from + shift, to);
     }
 
+    //FLLDCIM: MRL - census P2-075, crate m3jdk21-lane-rotation-compact-20261029 (donor blob 70239054a9d3): one wrap-safe cycle step for both rotations
+    /**
+     * Shared wrap-safe index step for the int and long cycle-leader rotations.
+     * Requires 0 <= index < length and 0 < shift < length.
+     */
+    static int nextCyclicIndex(int index, int shift, int length) {
+        int boundary = length - shift;
+        return index >= boundary ? index - boundary : index + shift;
+    }
+
     /**
      * Same result as {@link #rotate(long[], int, int, int)} by the juggling (cycle-leader) method:
      * {@code gcd(n, shift)} cycles, each element written exactly once; LeetCode 189 alternative.
@@ -113,10 +123,7 @@ public final class M3LaneAlgorithms {
             long carried = lane[from + start];
             int index = start;
             do {
-                index += shift;
-                if (index >= n) {
-                    index -= n;
-                }
+                index = nextCyclicIndex(index, shift, n);
                 long displaced = lane[from + index];
                 lane[from + index] = carried;
                 carried = displaced;
@@ -137,10 +144,7 @@ public final class M3LaneAlgorithms {
             int carried = lane[from + start];
             int index = start;
             do {
-                index += shift;
-                if (index >= n) {
-                    index -= n;
-                }
+                index = nextCyclicIndex(index, shift, n);
                 int displaced = lane[from + index];
                 lane[from + index] = carried;
                 carried = displaced;
@@ -218,7 +222,9 @@ public final class M3LaneAlgorithms {
         int write = from;
         for (int read = from; read < to; read++) {
             if (bit(keep, read)) {
-                lane[write++] = lane[read];
+                //FLLDCIM: MRL - census P2-075, crate m3jdk21-lane-rotation-compact-20261029 (donor blob 70239054a9d3): stable compaction skips self-writes
+                if (write != read) lane[write] = lane[read];
+                write++;
             }
         }
         fill(keep, from, write, true);
@@ -233,7 +239,9 @@ public final class M3LaneAlgorithms {
         int write = from;
         for (int read = from; read < to; read++) {
             if (bit(keep, read)) {
-                lane[write++] = lane[read];
+                //FLLDCIM: MRL - census P2-075, crate m3jdk21-lane-rotation-compact-20261029 (donor blob 70239054a9d3): stable compaction skips self-writes
+                if (write != read) lane[write] = lane[read];
+                write++;
             }
         }
         fill(keep, from, write, true);
