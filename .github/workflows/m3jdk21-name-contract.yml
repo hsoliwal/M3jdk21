@@ -38,6 +38,8 @@ jobs:
             m3/arrays/src/main/java/**
             m3/arrays/src/main/native/**
             m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java
+            m3/arrays/src/main/**
+            m3/core/src/com/m3/text/SharedRelatedLexemeCatalog.java
             m3/arrays/src/main/java/module-info.java
             src/java.base/share/classes/java/util/Arrays.java
             src/java.base/share/classes/module-info.java

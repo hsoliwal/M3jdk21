@@ -186,5 +186,26 @@ class WorkflowCoverageTest(unittest.TestCase):
         self.assertEqual(uncovered, [], "mapped source owners are absent from the checkout scope")
 
 
+class CanonicalRelatedOwnerTest(unittest.TestCase):
+    def test_related_target_class_owner_retains_method_contract(self):
+        records = json.loads((AUDIT.ROOT / AUDIT.MAP).read_text(encoding="utf-8"))["migration"]["records"]
+        record = next(row for row in records if row["id"] == "synexia.lexicons.related-source-range")
+        target = record["targets"][0]
+        self.assertEqual(target["symbol"], "com.m3.text.SharedRelatedLexemeCatalog")
+        self.assertEqual(target["path"], "m3/core/src/com/m3/text/SharedRelatedLexemeCatalog.java")
+        signature = "java.util.List<Relation> findBySource(java.lang.String)"
+        self.assertIn(signature, target["signatures"])
+        self.assertEqual(record["sources"][0]["symbol"],
+                         "com.m3.text.SharedRelatedLexemeCatalog.findBySource")
+        self.assertIn(signature, record["sources"][0]["signatures"])
+        self.assertTrue(any(previous["symbol"] == "com.m3.text.SharedRelatedLexemeCatalog.findBySource"
+                            and signature in previous["signatures"]
+                            for previous in record["lineage"]["previous_targets"]))
+        rows = [row for row in AUDIT.snapshot(AUDIT.ROOT)
+                if row["mapping_id"] == record["id"] and row["target_path"] == target["path"]]
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["result"], "PRESENT_NAME_MATCH")
+
+
 if __name__ == "__main__":
     unittest.main()

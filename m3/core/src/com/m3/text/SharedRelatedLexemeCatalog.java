@@ -217,6 +217,8 @@ public final class SharedRelatedLexemeCatalog implements AutoCloseable {
         for (int lineNumber = 1; lineNumber < lines.size(); lineNumber++) {
             List<String> cells = parseTsvLine(lines.get(lineNumber), lineNumber);
             if (cells.size() != 13) throw malformed(lineNumber, "mapping field count");
+            if (cells.get(0).isEmpty() || cells.get(4).isEmpty())
+                throw malformed(lineNumber, "empty mapping identity");
             SharedLexiconCatalog.SourceIdentity identity =
                     new SharedLexiconCatalog.SourceIdentity(cells.get(0), cells.get(4));
             Mapping mapping = new Mapping(decodeSidecarText(cells.get(5), lineNumber),
