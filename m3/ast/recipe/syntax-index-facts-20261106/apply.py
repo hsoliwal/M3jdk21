@@ -62,6 +62,7 @@ PLAN_NAME = "EDITS.tsv"
 PLAN_COLUMNS = ("file", "kind", "crate", "before_blob", "before_sha256", "after_sha256", "donor_blobs", "names",
                 "match", "hunks", "rule")
 SCATTER = "m3ast-facts-stable-scatter-20261030"
+POSTINGS = "m3ast-kind-postings-20261030"
 
 
 class Refused(Exception):
@@ -85,6 +86,25 @@ RULES = (
     ("WRAPPER", SCATTER, TEST_DIR + "M3SyntaxIndexStableScatterTest.java", "-",
      "JUnit entry point of the relocated proof (module style: Contract.main from one @Test)",
      ("M3SyntaxIndexStableScatterContract", "stableScatterEqualsSortedFacts", False)),
+    # --- crate 2: m3ast-kind-postings-20261030 (manifest: preimage 58f5bffd... = crate 1 postimage, postimage
+    # 7bfd83ec...); its preimage blob here is the owner blob crate 1 produces --------------------------------------
+    ("EDIT", POSTINGS, OWNER, "7be2a8a488c1dfc1b476f6eb942417ad478a6a34",
+     "crate pre->post re-applied: one private volatile KindPostings reference; nodesOfKind keeps the null check first,"
+     " then builds the lazy immutable CSR lanes once (double-checked, synchronized) and answers by binary search over"
+     " the sorted kind keys with a fresh copy of the source-ordered node range; private static final class"
+     " KindPostings (keys, begins, counts, nodes); no public API change",
+     (("    public int[] nodesOfKind(String grammarKind) {",
+       "lazy CSR kind postings answer every query after the first by binary search; same source-ordered result"),
+      ("    private static final class KindPostings {",
+       "immutable kind lanes (sorted keys, begins, counts, source-ordered nodes) built once per index"))),
+    ("FILE", POSTINGS, TEST_DIR + "M3SyntaxIndexKindPostingsContract.java", "-",
+     "crate proof relocated: the original linear full scan vs the lazy postings over 9,002 maps (collision strings"
+     " Aa/BB, empty and missing kinds, repeated calls, caller-mutated results, null queries, a 40,000-node corpus,"
+     " eight concurrent cold readers)",
+     ("M3AstKindPostingsProof", "M3SyntaxIndexKindPostingsContract")),
+    ("WRAPPER", POSTINGS, TEST_DIR + "M3SyntaxIndexKindPostingsTest.java", "-",
+     "JUnit entry point of the relocated proof (module style: Contract.main from one @Test)",
+     ("M3SyntaxIndexKindPostingsContract", "kindPostingsEqualLinearScan", True)),
 )
 
 

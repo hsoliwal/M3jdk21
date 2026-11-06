@@ -12,6 +12,11 @@ is in [PROVENANCE.tsv](PROVENANCE.tsv).
 | Crate | Verdict | Owner change | Proof (relocated) |
 |---|---|---|---|
 | `m3ast-facts-stable-scatter-20261030` | APPLIED (was UNAPPLIED, census 2 hunks / 16 lines) | `java.util.Comparator` import dropped; `FactBuilder.freeze` no longer sorts `Fact` objects by `(node, insertion)`: it counts per node, prefixes `begins[]`, scatters in append order (append order is `insertion` order) with `begins[]` as the cursor and restores the row starts; same five sidecar columns, O(F+N) instead of O(F log F + N); behaviour-preserving | `M3SyntaxIndexStableScatterContract` (+ `M3SyntaxIndexStableScatterTest`): the literal comparator-sort oracle vs the scatter over 20,004 maps; crate figure reproduced: `PASS M3_AST_FACT_STABLE_SCATTER maps=20004 fact_rows_large=300000 assertions=20405713` |
+| `m3ast-kind-postings-20261030` (preimage = the postimage above) | APPLIED (was UNAPPLIED, census 4 hunks / 83 lines against master, 2 hunks against crate 1) | one `private volatile KindPostings kindPostings`; `nodesOfKind` keeps the null check first, then builds the lazy immutable CSR lanes once (double-checked, `synchronized (this)`) and answers by `Arrays.binarySearch` over the sorted kind keys with a fresh `copyOfRange` of the source-ordered node range; `private static final class KindPostings` (keys, begins, counts, nodes); first query O(N + K log K + H), later queries O(log K + H) instead of O(N + H) each; no public API change, same results | `M3SyntaxIndexKindPostingsContract` (+ `M3SyntaxIndexKindPostingsTest`): the original linear scan vs the postings over 9,002 maps, collision strings, caller-mutated results, null queries, a 40,000-node corpus, eight concurrent cold readers; crate figure reproduced: `PASS M3_AST_KIND_POSTINGS maps=9002 assertions=13622340 concurrency_threads=8 source_nodes_large=40000` |
+
+No NEC row: both crates map onto the owner exactly. Not ported (recorded in the crates' `NEXT_ATOMS.tsv`, outside this
+leaf): primitive `Fact` lanes in `FactBuilder.add`, an earliest-key lookup for `Facts.first`, a parser kind ordinal
+in `M3SyntaxTree` (another file), batched JNI postings (no measured benefit).
 
 ## Recipe
 
@@ -42,7 +47,11 @@ bytes are read by blob sha after `PROVENANCE.tsv` is checked against the donor t
   checked against a brute-force scan of `tree.kind(i)`, repeated, and checked for caller-owned arrays), a seeded
   `FactBuilder` workload whose insertion order differs from node order (115,414 facts on 51,803 nodes, duplicate
   keys; every row per node and `first()`), refusals, eight cold concurrent readers. Every differing dump line is
-  classified by record type; the differing class files are checked with `javap -c -p`.
+  classified by record type; the differing class files are checked with `javap -c -p`. Both crates are
+  behaviour-preserving, so the dumps must be identical: master vs crate 1, crate 1 vs crate 2 and master vs both
+  give the same sha256 `ee85584793df...` (55,293 lines) with 0 brute-force mismatches. Mutants prove the dump has
+  teeth: a reversed scatter changes 36,188 `F` lines; postings without the key sort, or answering with the shared
+  node lane, change 2,426 and 2,788 `KIND` lines (4,986 and 5,688 brute-force mismatches).
 
 ## Gates
 

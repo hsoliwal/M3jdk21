@@ -38,6 +38,8 @@ timeout 600 "$J/java" "$EXPORT" -Xmx1g -jar "$CONSOLE" execute --disable-banner 
 grep -E 'tests (found|successful|failed)' "$OUT/junit.log"
 grep -q ' 0 tests failed' "$OUT/junit.log" || { echo "MODULE TESTS FAILED (see $OUT/junit.log)"; exit 1; }
 grep -Fx 'PASS M3_AST_FACT_STABLE_SCATTER maps=20004 fact_rows_large=300000 assertions=20405713' "$OUT/junit.log"
+grep -Fx 'PASS M3_AST_KIND_POSTINGS maps=9002 assertions=13622340 concurrency_threads=8 source_nodes_large=40000' \
+    "$OUT/junit.log"
 # one differential per EDIT row: its pinned preimage (the master owner, then each image a crate produced) vs the tree
 awk -F'\t' '$2 == "EDIT" {print $4}' "$RECIPE_DIR/EDITS.tsv" | while read -r blob; do
     bash "$RECIPE_DIR/oracle/differential.sh" "$blob" "$OUT/differential-$blob" | grep -v '^SIDE\|^TOTAL'
