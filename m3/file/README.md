@@ -91,6 +91,16 @@ phase; `verify.py` runs the bounded probe `M3ChunkDeltaWorkspaceProbe` on the ho
 image; `differential.sh` proves donor postimage, develop preimage and relocated owner byte-identical
 over 118,432 pairs (2,983,157 operations).
 
+## Character flags combine (recipe alignment 2026-11-06)
+
+`M3CharacterFlags.combine(left, right)` (package-private, with `ALL_OF`/`ANY_OF`) composes the exact flags of two
+adjacent UTF-16 ranges without a rescan: `ASCII`/`LATIN1`/`BLANK`/`EMPTY` hold if both ranges have them, presence bits
+if either does, bits outside `ALL` are refused. The class was the donor `IndexCharacterFlags` at its pre-combine blob;
+[recipe/character-flags-20261106](recipe/character-flags-20261106/README.md) relocates the donor owner with `combine`
+onto it (the #2523 recipe, one `TYPE` row), so it and `jdk.internal.m3.indexstring.M3IndexCharacterFlags` are one body.
+Public API unchanged; `differential.sh` proves both classes byte-identical over the exhaustive 1,024 x 1,024 `combine`
+table and the #2523 inputs.
+
 Canonical recipe: `com.synexia.m3jdk.CollectionsContractRefinement20261017`,
 dataset `file-content-delta-20261020`, in Synexia's existing
 `synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017`.

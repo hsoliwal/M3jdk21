@@ -11,9 +11,10 @@
 # (b) M3IndexCharacterFlagsDump (test scope) replays the smoke inputs, the exhaustive 1,024 x 1,024 combine table,
 #     labels over the 1,024 valid values, 1,000,000 seeded random pairs and 100,000 seeded random texts through both
 #     classes; the dumps must be byte-identical.
-# (c) of-only dumps (of/labels sections) of donor, relocated and, when present in the checkout, the pre-combine sibling
-#     jdk.m3.file.M3CharacterFlags must be byte-identical: the sibling is the same lineage minus combine. Its source is
-#     found from SIBLING_CLASS through git ls-files, so a module move (m3/ports/file -> m3/file, #2580) needs no edit.
+# (c) of-only dumps (of/labels sections) of donor, relocated and, when present in the checkout, the sibling
+#     jdk.m3.file.M3CharacterFlags must be byte-identical: the sibling is the same lineage (pre-combine until
+#     m3/file/recipe/character-flags-20261106 aligned it; that recipe's differential.sh compares the full dumps). Its source
+#     is found from SIBLING_CLASS through git ls-files, so a module move (m3/ports/file -> m3/file, #2580) needs no edit.
 # Prints DIFFERENTIAL PASS|FAIL with the sha256 digests of every side. The donor package and type names come from
 # RELOCATION_MAP.tsv next to this script, so no file in the naming scope names a donor package literally.
 # usage: differential.sh <donor-git-dir> <donor-rev> <scratch-dir>   (JAVA_HOME = JDK 21, PYTHON optional; run after mvn package)
