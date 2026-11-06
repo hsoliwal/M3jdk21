@@ -37,6 +37,7 @@
       <modules>
         <module>arrays</module>
         <module>collections</module>
+        <module>search</module>
         <module>viewport-core</module>
       </modules>
     </profile>
