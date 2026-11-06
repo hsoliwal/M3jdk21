@@ -1,6 +1,7 @@
 // Copyright 2026 Hitesh Soliwal and contributors
 // Adapted from hsoliwal/com.synexia@50f48cbbe11f17fb8dc209bac3812f8940a1e267: MIndexTokenStream.java
 // SPDX-License-Identifier: Apache-2.0
+// Modified 2026: reuse a lazy private token-class universe for validation and ordinal reads.
 package jdk.m3.parser.grammar;
 
 import java.util.Objects;
@@ -11,6 +12,11 @@ public final class M3TokenStream {
   private final int[] starts;
   private final int[] ends;
   private final byte[] classes;
+
+  // Initialize at the original enum-demand points; never expose or mutate this table.
+  private static final class TokenClassUniverse {
+    private static final M3TokenClass[] VALUES = M3TokenClass.values();
+  }
 
   M3TokenStream(String source, int[] starts, int[] ends, byte[] classes) {
     this.source = Objects.requireNonNull(source, "source");
@@ -24,12 +30,22 @@ public final class M3TokenStream {
     for (int token = 0; token < starts.length; token++) {
       Objects.checkFromToIndex(starts[token], ends[token], source.length());
       if (starts[token] < previousEnd || starts[token] == ends[token]
-          || Byte.toUnsignedInt(classes[token]) >= M3TokenClass.values().length) {
+          || Byte.toUnsignedInt(classes[token]) >= TokenClassUniverse.VALUES.length) {
         throw new IllegalArgumentException("invalid token coordinate or class");
       }
       previousEnd = ends[token];
     }
   }
+
+  /** Share only validated immutable payload; the returned envelope remains invocation-local. */
+  private M3TokenStream(M3TokenStream original) {
+    source = original.source;
+    starts = original.starts;
+    ends = original.ends;
+    classes = original.classes;
+  }
+
+  M3TokenStream copyView() { return new M3TokenStream(this); }
 
   public String source() { return source; }
   public int size() { return starts.length; }
@@ -37,7 +53,7 @@ public final class M3TokenStream {
   public int end(int tokenIndex) { return ends[Objects.checkIndex(tokenIndex, ends.length)]; }
   public int length(int tokenIndex) { return end(tokenIndex) - start(tokenIndex); }
   public M3TokenClass tokenClass(int tokenIndex) {
-    return M3TokenClass.values()[Byte.toUnsignedInt(classes[Objects.checkIndex(tokenIndex, classes.length)])];
+    return TokenClassUniverse.VALUES[Byte.toUnsignedInt(classes[Objects.checkIndex(tokenIndex, classes.length)])];
   }
 
   public char charAt(int tokenIndex, int charIndex) {
