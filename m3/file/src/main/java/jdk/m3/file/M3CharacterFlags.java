@@ -1,5 +1,4 @@
 // Copyright 2026 Hitesh Soliwal and contributors
-// Full file-family receiver; source and target mapping in FILE_PORT_MAP.json.
 // SPDX-License-Identifier: Apache-2.0
 package jdk.m3.file;
 
@@ -7,6 +6,7 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 /** Named primitive properties, shared per admitted spelling rather than per occurrence. */
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/ac5feec00a6d6206194b3ba954c6f738aae07126/synexia-indexstring/src/main/java/com/synexia/indexstring/IndexCharacterFlags.java blob f6abb8a6c023; recipe m3/file/recipe/character-flags-20261106/relocate.py v1
 public final class M3CharacterFlags {
   public static final int ASCII = 1;
   public static final int LATIN1 = 1 << 1;
@@ -21,6 +21,8 @@ public final class M3CharacterFlags {
   public static final int REGEX_PRESENCE =
       HAS_ASCII_UPPER | HAS_ASCII_LOWER | HAS_ASCII_DIGIT | HAS_ASCII_WORD | HAS_ASCII_SPACE;
   public static final int ALL = (1 << 10) - 1;
+  private static final int ALL_OF = ASCII | LATIN1 | BLANK | EMPTY;
+  private static final int ANY_OF = ALL & ~ALL_OF;
 
   private M3CharacterFlags() {}
 
@@ -48,6 +50,20 @@ public final class M3CharacterFlags {
     if (Character.isSurrogate(value)) flags |= HAS_SURROGATE;
     if (!Character.isWhitespace(value)) flags &= ~BLANK;
     return flags;
+  }
+
+  /**
+   * Combines exact flags for adjacent immutable UTF-16 ranges without rescanning characters.
+   *
+   * <p>ASCII/LATIN1/BLANK/EMPTY hold only if both ranges have them; character
+   * presence flags hold if either range has them. A matching flag remains a
+   * necessary-condition search hint, never proof of text equality.</p>
+   */
+  static int combine(int left, int right) {
+    if ((left & ~ALL) != 0 || (right & ~ALL) != 0) {
+      throw new IllegalArgumentException("unknown character flags");
+    }
+    return (left & right & ALL_OF) | ((left | right) & ANY_OF);
   }
 
   /** Intended for debugger detail formatters; never needed on the query hot path. */
