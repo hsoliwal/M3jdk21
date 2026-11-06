@@ -31,3 +31,36 @@ Progress and cancellation use `jdk.m3.collections.M3ProgressMonitor` (the donor'
 - Differential: the same seeded stream (200 seeds × 500 cases: indexOf/lastIndexOf over 6 offsets plus the four window kernels) ran on the com.synexia originals and on `jdk.m3.search`, giving 1,600,000 rows each. The digests are identical: `4bcb44bd72588a4a8dc5f5d9adf6f795906ce3ae5c1d40423ddf671e31db2981`.
 
 Not run: the Maven reactor build on CI, and the native kernels (leaf 2).
+
+## Leaf 2: the native engine (2026-11-06)
+
+Received by M3_SEARCH_RELOCATE v2 (`qualification/relocation-20261106-native/`). v2 adds JNI symbol and class-name
+rewriting for C, plus the native-loader mapping onto `jdk.m3.file.M3JniLibraryLoader` / `M3NativeLibrarySpec`
+(m3/ports/file, #2492). The library's logical name `synexia_m3` becomes `m3search`.
+
+| M3 owner | Donor |
+|---|---|
+| `M3JniSearchEngine` | JniSearchEngine (pattern handles, bulk count/positions, monitored bulk ABI) |
+| `M3SearchEngines` | SearchEngines (JNI first, Java adaptive fallback) |
+| `M3ByteOccurrences` | ByteOccurrences (single-byte memchr/count/reverse lanes) |
+| `M3BatchOffsetSearch`, `M3BatchReverseSearch` | same names (batch first/last occurrence, byte[] and direct ByteBuffer) |
+| `src/main/native/*.c` | jni_search.c (the m3search library) and the sidecars for minimum cover window, minimum subsequence window, fixed-word concatenation, batch subsequence and bitap |
+
+Donor corrections made at the source before receiving:
+- com.synexia #16742 removed a byte-identical duplicate of the batch JNI block from `jni_search.c`. Superset merge 73095e9b890d had introduced it, and with it the file did not compile.
+- One test literal was corrected by recipe rule: `indexOfMany((byte[]) null, …)`, because the bare `null` was ambiguous between overloads.
+
+Not received:
+- `jni_z_similarity.c` and the Java `M3ZSimilarity` (the Z similarity shape, LC 2223, is owned by `jdk.m3.algorithm.M3PrefixZ`).
+- `JniSearchEngineNativeTest` and the 11 donor tests that import `com.synexia.job.ProgressSnapshot` (no M3 equivalent API).
+- `BitapChunkedRegionProof`, which calls methods its donor class does not have.
+
+Gates (Windows, JDK 21.0.9, MinGW-w64 gcc):
+- javac `-Xlint:all,-module -Werror`: main and tests 0 diagnostics.
+- gcc `-shared -O3 -std=c11 -Wall -Wextra -Werror`: 6 libraries, 0 diagnostics.
+- JUnit with every native library loaded: 97 found, 97 passed, 0 skipped.
+- JUnit Java-only (the default build, which excludes `*Native*Test`): 55 found, 55 passed.
+
+Run the native tests: build `src/main/native` with CMake, then
+`mvn -f m3/search/pom.xml -Pm3-search-native -Dm3.search.native.dir=<build dir> test` (on Windows also
+`-Dm3.search.native.prefix= -Dm3.search.native.suffix=.dll`).
