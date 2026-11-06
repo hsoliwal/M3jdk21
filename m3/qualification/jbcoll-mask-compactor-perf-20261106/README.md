@@ -1,7 +1,8 @@
 # jbcoll-mask-compactor-perf-20261106: `M3CollectionMaskCompactor` dispatch regression (java.base)
 
 java.base lane leaf (owner com-synexia-45), follow-up of census leaf L003 (`../jbcoll-mask-compactor-20261106/`, PR #2578).
-- Master base: `dbce93c3abf02256f2ecf656720c339b909713b6`.
+- Master base: written on `dbce93c3abf02256f2ecf656720c339b909713b6`, rebased onto
+  `c46cfa6639aa63bfa01b2f8e9ef00266c13759c2` (owner, ArrayList, Vector and the tests unchanged in between).
 - Owner: `src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java`, blob `9f8b4c965b52` ->
   sha256 `ad30c982c60b` (recipe `apply.py`, `EDITS.tsv`).
 
@@ -108,14 +109,21 @@ Net ns/op, master -> fixed (fixed/master), required classes:
 
 ## Gates (`GATES.tsv`, `verify.sh`)
 
-`verify.sh <scratch>` prints one GATE line per gate. The gates are:
-- recipe (fixed point + drift refusal + pr1908 provenance)
-- java.base patch compile (0 warnings)
-- the L003 differential with the leaf patched in, plus 8 variants and the mutant
-- owner tests and ArrayList directory tests as plain mains (no jtreg on the host)
-- the timing rules
-- JDK naming fixed point
-- scope (the owner + this dir)
+`verify.sh <scratch>` prints one GATE line per gate. Run on the rebased leaf: **VERIFY PASS**.
+
+| gate | result |
+|---|---|
+| recipe | `changed=0 plan=UNCHANGED`; one appended byte -> `REFUSED drifted preimage`, exit 2; pr1908 method equals its blob slice |
+| patch_compile | `-Xlint:all -Werror -Xlint:-this-escape -XDstringConcat=inline`, ArrayList + Vector + compactor: base and leaf rc=0, 0 warnings, 13 classes |
+| differential | L003 driver, seed 0x4d334a424d534b31, 1,000,000 cases (889,339,623 elements, 14,868 refusals): leaf (patched java.base), fixed, master, postimage, statonly, threshold, threshold_prefix, threshold_words1024, fixed_prefix all **0 mismatches**, sha256 `c5f342c12d3d...` = L003's; L003 mutant **306,431** mismatches |
+| tests_owner | `test/jdk/java/util/ArrayList/M3*` as plain mains: leaf 9/9 (G1 + Serial runs), base 9/9 |
+| tests_arraylist | `test/jdk/java/util/ArrayList/*`: leaf 14 pass, 2 skip (ArrayManagement testng, Bug8146568 main/manual), base the same |
+| timing | fresh 3 x P + 3 x E runs: RULE FIX PASS (affected gmean E 0.212 / P 0.122, 0 regressions; fragmented 4096 0.670 / 0.473 x postimage); verdicts as above |
+| naming | `jdk_naming.py` apply, then plan: moves=0 rewrites=0 refusals=0 |
+| scope | 11 paths, 0 outside the owner + this dir (base = merge-base) |
+| jtreg | NOT_RUN: no jtreg on the host |
+
+Callers of the compactor in java.base (`git grep`): `ArrayList.removeIf` and `Vector.removeIf` only.
 
 ## Files
 
