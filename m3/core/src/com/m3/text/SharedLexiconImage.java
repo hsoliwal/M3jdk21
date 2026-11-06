@@ -88,7 +88,7 @@ public final class SharedLexiconImage {
     private ByteBuffer recordBytes(int index) {
         Objects.checkIndex(index, offsets.length);
         int begin = payloadOffset + offsets[index] * 2;
-        return mapping.asReadOnlyBuffer().slice(begin, lengths[index] * 2);
+        return mapping.slice(begin, lengths[index] * 2);
     }
 
     private int javaHash(int index) {
