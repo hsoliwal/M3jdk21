@@ -5,7 +5,9 @@ links to the hsoliwal/com.synexia repository and lineage files are untouched; a 
 plan after apply is empty (fixed point)."""
 from __future__ import annotations
 
+import contextlib
 import importlib.util
+import io
 import re
 import subprocess
 import tempfile
@@ -289,6 +291,40 @@ class JdkNamingTest(unittest.TestCase):
         self.put("m3/b/SynexiaB.java", "class SynexiaB {}\n")
         result = jn.plan(self.root, ("m3/a/",))
         self.assertEqual([m[0] for m in result["moves"]], ["m3/a/SynexiaA.java"])
+
+    def test_a_scoped_apply_keeps_the_rename_map_rows_outside_its_scope(self):
+        """apply --tree --only merges RENAME_MAP.tsv (SCOPED_APPLY_PRESERVES_MAP): the rows of the files it selects
+        take this run's targets, every other row stays byte for byte in its place, and a second identical run
+        changes nothing. The scoped apply once wrote its scoped plan alone: #2556 dropped all 32 rows."""
+        for name in ("SynexiaA", "SynexiaC", "Plain"):
+            self.put(f"m3/a/{name}.java", f"class {name} {{}}\n")
+        self.put("m3/b/SynexiaB.java", "class SynexiaB {}\n")
+        rows = [b"path_before\tpath_after",
+                b"m3/b/com/synexia/X.java\tm3/b/jdk/internal/m3/X.java",  # outside: an earlier move
+                b"m3/a/SynexiaA.java\tm3/a/StaleA.java",  # selected and moved: retargeted in place
+                b"m3/b/SynexiaB.java\tm3/b/M3B.java\r",  # outside (its file is not moved by this run), CRLF
+                b"m3/a/Plain.java\tm3/a/M3Plain.java",  # selected, the run keeps the path: the row goes
+                b"m3/a/gone/SynexiaG.java\tm3/a/gone/M3G.java",  # under the prefix, no such file: an earlier move
+                b"m3/c/synexia-tool/run.sh\tm3/c/m3-tool/run.sh"]  # outside
+        (self.root / jn.RENAME_MAP).parent.mkdir(parents=True, exist_ok=True)
+        (self.root / jn.RENAME_MAP).write_bytes(b"\n".join(rows) + b"\n")
+        subprocess.run(["git", "-C", str(self.root), "add", jn.RENAME_MAP], check=True)
+        base = self.commit()
+        for key, value in (("user.name", "t"), ("user.email", "t@example.com")):
+            subprocess.run(["git", "-C", str(self.root), "config", key, value], check=True)
+        scoped = ["apply", "--root", str(self.root), "--only", "m3/a/", "--tree"]
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(jn.main(scoped + [base, "--ref", "refs/heads/scoped"]), 0)
+            self.assertEqual(jn.main(scoped + ["refs/heads/scoped", "--ref", "refs/heads/again"]), 0)
+        first = self.show("refs/heads/scoped", jn.RENAME_MAP)
+        self.assertEqual(first, b"\n".join(rows[:2] + [b"m3/a/SynexiaA.java\tm3/a/M3A.java", rows[3]] + rows[5:]
+                                           + [b"m3/a/SynexiaC.java\tm3/a/M3C.java", b""]))
+        outside = [row for row in first.split(b"\n") if row.startswith((b"m3/b/", b"m3/c/"))]
+        self.assertEqual(outside, [rows[1], rows[3], rows[6]])
+        self.assertEqual(self.show("refs/heads/again", jn.RENAME_MAP), first)
+        trees = [subprocess.run(["git", "-C", str(self.root), "rev-parse", ref + "^{tree}"], check=True,
+                                capture_output=True).stdout for ref in ("refs/heads/scoped", "refs/heads/again")]
+        self.assertEqual(trees[0], trees[1])
 
     def test_a_service_descriptor_is_text_and_its_provider_names_follow_the_package(self):
         """META-INF/services/<service> has no suffix: pass 1 renamed the file (the service name) and skipped the

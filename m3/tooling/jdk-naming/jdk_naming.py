@@ -17,6 +17,8 @@ pass 1 renamed such files but not the provider names inside them: SERVICE_DESCRI
 --tree REV reads the files as blobs of REV instead of the checkout, and apply writes one commit to --ref through git
 fast-import, so a sparse or partial checkout renames the whole tree. Bytes are kept as they are (CRLF too; pass 1
 read text mode and dropped CRLF in 4 files). A second plan after apply finds nothing (fixed point).
+A scoped tree apply (--only) merges RENAME_MAP.tsv: it replaces the rows of the files it selects and keeps every
+other row byte for byte where it is (it once wrote its scoped plan alone: SCOPED_APPLY_PRESERVES_MAP).
 CLI: python -I jdk_naming.py plan|apply [--root DIR] [--tree REV --ref REF [--message TEXT]] [--tsv OUT] [--only P]...
 """
 from __future__ import annotations
@@ -44,6 +46,7 @@ RULES_FILE = Path(__file__).with_name("NAMING_RULES.tsv")
 # every path move of the tree-mode apply, so the old path of any file stays mapped to its new one (reseal.py maps
 # the digests the same way in RENAME_RESEAL.tsv)
 RENAME_MAP = "m3/tooling/jdk-naming/RENAME_MAP.tsv"
+MAP_HEADER = b"path_before\tpath_after"
 
 
 def load_rules(path: Path = RULES_FILE) -> tuple:
@@ -152,13 +155,19 @@ def target_path(path: str) -> str:
     return keeps_name(path) if KEEP_PATH.search(path) else renamed_path(path)
 
 
+def selects(path: str, only: tuple[str, ...]) -> bool:
+    """The path predicate of a run: plan_moves chooses these paths of the tree, and a scoped apply replaces the
+    RENAME_MAP.tsv rows of these paths only (merged_map)."""
+    return not is_self(path) and (not only or path.startswith(only))
+
+
 def plan_moves(paths: list[str], only: tuple[str, ...]) -> dict:
     """Every path move. Two paths whose renamed paths coincide (a delivery image holding both com.m3.x-jar.log.txt
     and jdk.m3.x-jar.log.txt) collide; a colliding lineage file follows its directory and keeps its name
     (KEEP_LINEAGE_NAME), or stays where it is when that name is taken too (KEEP_LINEAGE_PATH); anything else
     refuses. NamingScan.pathConformant mirrors this rule."""
     existing = set(paths)
-    chosen = [p for p in paths if not (is_self(p) or only and not p.startswith(only))]
+    chosen = [p for p in paths if selects(p, only)]
     full = {p: target_path(p) for p in chosen}
     claims: dict = {}
     for new in full.values():
@@ -265,6 +274,29 @@ def quoted(path: str) -> bytes:
     return encoded('"' + path.replace("\\", "\\\\").replace('"', '\\"').replace("\n", "\\n") + '"')
 
 
+def merged_map(old: bytes | None, moves: list, paths: set, only: tuple[str, ...]) -> bytes:
+    """RENAME_MAP.tsv after an apply over a tree holding `paths`. A whole-tree apply (or one without an old map)
+    writes its own moves. A scoped apply (--only) owns the rows of the files it selects (selects() and in the tree):
+    such a row takes this run's target in place, or goes when the run leaves its path where it is; every other row
+    stays byte for byte in its place (outside the scope, or a move of an earlier run whose old path is gone), and
+    the run's new moves follow. The scoped apply once wrote the scoped plan alone and dropped every row outside the
+    scope (32 of 32 on #2556: SCOPED_APPLY_PRESERVES_MAP); a second identical run returns the old bytes."""
+    fresh = {a: encoded(f"{a}\t{b}") for a, b in moves}
+    if not old or not only:
+        return MAP_HEADER + b"\n" + b"".join(row + b"\n" for row in fresh.values())
+    rows = old.split(b"\n")
+    rows = rows[:-1] if rows[-1] == b"" else rows
+    merged = rows[:1]
+    for row in rows[1:]:
+        before = decoded(row.split(b"\t", 1)[0])
+        if before in fresh:
+            merged.append(fresh.pop(before))
+        elif not (before in paths and selects(before, only)):
+            merged.append(row)
+    merged += fresh.values()
+    return old if merged == rows else b"".join(row + b"\n" for row in merged)
+
+
 def apply_tree(root: Path, rev: str, ref: str, message: str, only: tuple[str, ...] = ()) -> str:
     """Write the renamed tree of REV as one commit on REF (parent REV) through git fast-import; return its id."""
     root = Path(root)
@@ -273,6 +305,9 @@ def apply_tree(root: Path, rev: str, ref: str, message: str, only: tuple[str, ..
     if result["refusals"]:
         raise SystemExit("REFUSED: " + "; ".join(f"{k} {a} -> {b}" for k, a, b in result["refusals"][:5]))
     parent = git(root, "rev-parse", rev + "^{commit}")
+    old_map = [sha for path, _mode, sha in entries if path == RENAME_MAP]
+    mapping = merged_map(b"".join(blobs(root, old_map)) if old_map and only else None, result["moves"],
+                         {path for path, _mode, _sha in entries}, only)
     proc = subprocess.Popen(["git", "-C", str(root), "fast-import", "--quiet", "--done"], stdin=subprocess.PIPE)
     out, marks = proc.stdin, {}
     for path, _counts, data in tree_rewrites(root, entries, only):
@@ -287,7 +322,6 @@ def apply_tree(root: Path, rev: str, ref: str, message: str, only: tuple[str, ..
         if path in marks or path in moved:
             source = ":%d" % marks[path] if path in marks else sha
             out.write(("M %s %s " % (mode, source)).encode() + quoted(moved.get(path, path)) + b"\n")
-    mapping = encoded("path_before\tpath_after\n" + "".join(f"{a}\t{b}\n" for a, b in result["moves"]))
     out.write(b"M 100644 inline " + quoted(RENAME_MAP) + b"\ndata %d\n" % len(mapping) + mapping + b"\n")
     out.write(b"done\n")
     out.close()
