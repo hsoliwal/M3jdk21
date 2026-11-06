@@ -80,14 +80,14 @@ same blobs `afa706282c5f` / `1f0dcde31649`: one lineage. Full rows with notes ar
 
 | Gate | Result (2026-11-06, GATES.tsv) |
 |---|---|
-| 1 `mvn package`, `-Xlint:all -Werror` | BUILD SUCCESS, 0 warnings (master 0); 16 tests (master 15) |
+| 1 `mvn package`, `-Xlint:all -Werror` | BUILD SUCCESS, 0 warnings (master 0); 29 tests (master 28) on master 3a429ee33a7e |
 | 2 donor oracle figure | `checks=6671` donor and relocated, JIT and -Xint |
 | 3 differential | 576,643 networks, donor = relocated sha256 `6ecf3330707dc9bdb13f73bb8b3e4f231f87ec6966e1f0b3bd355804c9645467` |
 | 3b -Xint | 478,644 lines (2,000 random), donor -Xint = relocated -Xint = relocated JIT, sha256 `87265cb74e21...` |
 | 4 cross-solver | 575,620 compared, 575,620 agree, 0 differ; oracle solved 719 of the 1,023 refused networks |
 | 5 `javap -p` / `-p -c` | 3 of 3 classes identical modulo names |
 | 6 families differential | PASS, `f85280ac94b2fc25bf7f10ac17193bf7b788dc1aea731a6a2b4c3da04fc392f9` |
-| 7 master class files | 36 of 36 byte-identical |
+| 7 master class files | 51 of 51 byte-identical |
 | 8 naming | 0/0/0, fixed point |
 
 Hard-limit notes for a later pass, recorded not fixed: `solve` is 110 lines with 12 loops (MethodLength 15, loops
