@@ -81,4 +81,7 @@ Gate results: GATES.tsv. Logs on the executing host: S:/m3-scratch/eb-conv/colla
 * Pre-existing on master, untouched here: `jdk.m3.collections.guava.M3EvictingQueueContractProbe` fails with
   "observable or serialized queue contract drift: d6f1b707..." (the guava-evicting-queue module is byte-identical
   to master).
+* Master 9763168700 (and the push base c7f779bc370, not re-run) does not compile m3/collections under its `-Werror` (M3PrimitiveRoaringIntSet
+  missing explicit constructor, #2561); the module gates were run on 0b7482c3263 and, with `-Werror` stripped in
+  scratch only, on 9763168700 (GATES.tsv push_base_*).
 * No CPU speed claim: the donor's own timings are mixed (README); JMH not run.
