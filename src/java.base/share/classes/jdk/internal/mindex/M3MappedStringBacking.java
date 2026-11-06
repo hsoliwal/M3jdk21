@@ -799,11 +799,23 @@ public final class M3MappedStringBacking implements M3StringBacking {
         }
 
         int getInt(long offset) {
-            return slice(offset, Integer.BYTES).order(ByteOrder.BIG_ENDIAN).getInt();
+            int page = checkedScalarPage(offset, Integer.BYTES);
+            return pages[page].getInt((int) (offset % MAP_PAGE_BYTES));
         }
 
         long getLong(long offset) {
-            return slice(offset, Long.BYTES).order(ByteOrder.BIG_ENDIAN).getLong();
+            int page = checkedScalarPage(offset, Long.BYTES);
+            return pages[page].getLong((int) (offset % MAP_PAGE_BYTES));
+        }
+
+        private int checkedScalarPage(long offset, int bytes) {
+            check(offset, bytes);
+            int first = (int) (offset / MAP_PAGE_BYTES);
+            int last = (int) ((offset + bytes - 1L) / MAP_PAGE_BYTES);
+            if (first != last) {
+                throw corrupt("record crossed a mapping page boundary");
+            }
+            return first;
         }
 
         ByteBuffer slice(long offset, int bytes) {
