@@ -26,6 +26,7 @@
     <module>collections</module>
     <module>ports/file</module>
     <module>compiler/lifetime-slots</module>
+    <module>compiler/nullness-facts</module>
     <module>ports/collections</module>
     <module>native</module>
     <module>nlp</module>

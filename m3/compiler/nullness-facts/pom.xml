@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2026 Hitesh Soliwal and contributors -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3</groupId>
+  <artifactId>m3-compiler-nullness-facts</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>M3JDK :: Compiler Nullness Facts</name>
+  <description>jdk.m3.compiler.nullness (module org.m3jdk.compiler.nullness): the opt-in javac plugin
+    -Xplugin:M3NullnessFacts (M3JavaNullnessCompilerPlugin) that reports conservative, parameter-local nullness
+    candidate facts from javac's attributed trees to stderr, the two-bit packed nullness lattice (M3JavaNullnessFlow)
+    and the fail-closed bridge from the Tree API to that lattice (M3JavaNullnessJavacBridge). Read-only: no tree or
+    bytecode mutation. Java 21, requires jdk.compiler only. Relocated by recipe (recipe/relocate.py,
+    RELOCATION_MAP.tsv, PROVENANCE.tsv) from the donor hsoliwal/com.synexia lineage commit 982689e16763; the three
+    donor proofs and the donor plugin fixture run in the test phase.</description>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.artifact.version>5.11.4</junit.artifact.version>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.artifact.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <!-- Do not publish the javac Plugin service descriptor before its provider class is compiled: javac loads every
+         Plugin provider it can see (also without -Xplugin), and a descriptor naming an uncompiled class fails the
+         compilation of that very class. As m3/compiler/jdk-standard. -->
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <excludes>
+          <exclude>META-INF/services/com.sun.source.util.Plugin</exclude>
+        </excludes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.3.1</version>
+        <executions>
+          <execution>
+            <id>register-compiled-javac-plugin</id>
+            <phase>process-classes</phase>
+            <goals><goal>copy-resources</goal></goals>
+            <configuration>
+              <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/main/resources</directory>
+                  <includes>
+                    <include>META-INF/services/com.sun.source.util.Plugin</include>
+                  </includes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>21</release>
+          <proc>none</proc>
+          <compilerArgs>
+            <!-- missing-explicit-ctor is excluded: the donor plugin class (kept byte for byte) declares no
+                 constructor, and in a named module with an exported package javac -Xlint:all reports that; the
+                 service loader needs the implicit public constructor anyway. Every other lint is an error. -->
+            <arg>-Xlint:all,-missing-explicit-ctor</arg>
+            <arg>-Werror</arg>
+          </compilerArgs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>default-testCompile</id>
+            <configuration>
+              <!-- the proofs and the plugin self-test compile and run on the classpath (jdk.compiler is in the
+                   default root set there); the module descriptor is for consumers -->
+              <useModulePath>false</useModulePath>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.4</version>
+        <configuration>
+          <useModulePath>false</useModulePath>
+          <trimStackTrace>false</trimStackTrace>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.2</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>
