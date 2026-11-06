@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
-// Relocated from com.synexia m3-fast-search/src/main/java/jdk/internal/m3/search/BitapExactSearch.java (blob 259714ac4349) by M3_SEARCH_RELOCATE v1.
+// Relocated from com.synexia m3-fast-search/src/main/java/jdk/internal/m3/search/BitapExactSearch.java (blob 86c9d2609574) by M3_SEARCH_RELOCATE v2.
 package jdk.m3.search;
 
 import java.nio.ByteBuffer;
@@ -61,6 +61,24 @@ final class M3BitapExactSearch implements M3CompiledSearch {
         return last;
     }
 
+    /**
+     * Count all overlapping occurrences from a zero-clamped byte offset.
+     * Reuse this compiled Shift-And mask table: no repeated indexOf, per-hit callback,
+     * hit positions or mutable retained state. This candidate does not change dispatch.
+     */
+    int countOverlapping(byte[] haystack, int fromIndex) {
+        Objects.requireNonNull(haystack, "haystack");
+        int start = Math.max(0, fromIndex);
+        if (start > haystack.length - pattern.length) return 0;
+        long state = 0L;
+        int count = 0;
+        for (int i = start; i < haystack.length; i++) {
+            state = ((state << 1) | 1L) & masks[Byte.toUnsignedInt(haystack[i])];
+            if ((state & acceptingBit) != 0L) count++;
+        }
+        return count;
+    }
+
     @Override
     public int indexOf(ByteBuffer haystack, int fromIndex) {
         Objects.requireNonNull(haystack, "haystack");
@@ -93,6 +111,22 @@ final class M3BitapExactSearch implements M3CompiledSearch {
         return last;
     }
 
+    /** Logical remaining-slice count; absolute reads leave position and limit unchanged. */
+    int countOverlapping(ByteBuffer haystack, int fromIndex) {
+        Objects.requireNonNull(haystack, "haystack");
+        int base = haystack.position();
+        int length = haystack.remaining();
+        int start = Math.max(0, fromIndex);
+        if (start > length - pattern.length) return 0;
+        long state = 0L;
+        int count = 0;
+        for (int i = start; i < length; i++) {
+            state = ((state << 1) | 1L) & masks[Byte.toUnsignedInt(haystack.get(base + i))];
+            if ((state & acceptingBit) != 0L) count++;
+        }
+        return count;
+    }
+
     @Override
     public int needleLength() { return pattern.length; }
 
@@ -105,4 +139,6 @@ final class M3BitapExactSearch implements M3CompiledSearch {
      */
     static native int indexOfNative(byte[] needle, byte[] haystack, int fromIndex);
     static native int lastIndexOfNative(byte[] needle, byte[] haystack, int fromIndex);
+    /** Explicit optional probe: never replaces the existing JNI occurrence provider. */
+    static native int countOverlappingNative(byte[] needle, byte[] haystack, int fromIndex);
 }

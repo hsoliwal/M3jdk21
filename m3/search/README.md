@@ -88,3 +88,17 @@ Gates (Windows, JDK 21.0.9, MinGW-w64):
 - `HybridSearchKernelChecks`: 25,000 randomized top-K cases, 10,000 budget comparisons and 3,000 weighted-fusion oracles, PASS.
 - `PairSumParityDriver`: Java/C17 parity over 15,000 sorted singles, 24,576 batch queries and 8,000 unsorted singles, PASS.
 - Differential: the com.synexia originals (the stub monitor is in `diff/stub`) print byte-identical output for both checks, with sha256 `2e771122b347…` (hybrid) and `85c6bd1dd98a…` (parity).
+
+## Bitap update (2026-11-06)
+
+Landing #16732 had regressed com.synexia develop's `BitapExactSearch` and its JNI kernel to an older copy. The newer copy survived only as a retained variant, and com.synexia #16744 and #16745 restored it. Leaf 1 received the older copy, so this update re-applies M3_SEARCH_RELOCATE v2 to the restored donor (`LEDGER_v2b_bitap.tsv`). The M3 side had no edits beyond relocation, so the new relocation is the merged result.
+- `M3BitapExactSearch` gains the chunked-region and overlap-count API: `countOverlapping` and `*Native` region entries. `jni_bitap_exact.c` follows it.
+- `BitapChunkedRegionProof` was held out of leaf 1 because it called methods the old donor lacked. It is now received.
+
+Gates (Windows, JDK 21.0.9, MinGW-w64):
+- javac `-Werror`, module main and tests: 0 diagnostics.
+- gcc `-Werror`: 0 diagnostics.
+- JUnit default build: 70 found, 64 passed, 0 failed.
+- `BitapChunkedRegionProof` against the m3bitap library: `M3_BITAP_CHUNK_REGION_PASS checks=8118`.
+- `BitapExactNativeParityMain`: `BITAP_JAVA_JNI_PARITY PASS assertions=910008`.
+- Both proofs give output byte-identical to the com.synexia originals.
