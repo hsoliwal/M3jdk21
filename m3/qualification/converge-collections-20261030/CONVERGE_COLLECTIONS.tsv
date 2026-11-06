@@ -823,7 +823,11 @@ synexia-m3scale-apache2:m3-index-string/src/main/java/com/synexia/m3scale/indexs
 synexia-m3scale-apache2:m3-index-string/src/main/java/com/synexia/m3scale/indexstring/lucene/MIndexTermFrequency.java	MIndexTermFrequency	-	GAP
 synexia-m3scale-apache2:m3-index-string/src/main/java/com/synexia/m3scale/indexstring/lucene/MIndexTokenSet.java	MIndexTokenSet	-	GAP
 synexia-m3scale-apache2:m3-interned-language/src/main/java/com/synexia/m3scale/intern/MappedConceptIndex.java	MappedConceptIndex	-	GAP
-synexia-m3scale-apache2:m3-interned-language/src/main/java/com/synexia/m3scale/intern/OverflowInterner.java	OverflowInterner	-	GAP
+synexia-m3scale-apache2:m3-interned-language/src/main/java/com/synexia/m3scale/intern/OverflowInterner.java	OverflowInterner	m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3OverflowInterner.java	PRESENT_IN_M3JDK
+synexia-m3scale-apache2:m3-interned-language/src/main/java/com/synexia/m3scale/intern/TokenId.java	TokenId	m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3TokenId.java	PRESENT_IN_M3JDK
+synexia-m3scale-apache2:m3-interned-language/src/main/java/com/synexia/m3scale/intern/PackedText.java	PackedText	m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3PackedText.java	PRESENT_IN_M3JDK
+synexia-m3scale-apache2:m3-interned-language/src/main/java/com/synexia/m3scale/intern/TokenRope.java	TokenRope	m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3TokenRope.java	PRESENT_IN_M3JDK
+synexia-m3scale-apache2:m3-interned-language/src/main/java/com/synexia/m3scale/intern/SharedSymbols.java	SharedSymbols	m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3SharedSymbols.java	PRESENT_IN_M3JDK
 synexia-m3scale-apache2:m3-maven-plugin/src/main/java/com/synexia/m3scale/maven/convergence/LuceneConvergenceIndex.java	LuceneConvergenceIndex	-	GAP
 synexia-m3scale-apache2:m3-object-projection/src/main/java/com/synexia/m3scale/projection/ProjectionSignalIndex.java	ProjectionSignalIndex	-	GAP
 synexia-m3scale-apache2:m3-object-signal/src/main/java/com/synexia/m3scale/signal/SignalTable.java	SignalTable	-	GAP

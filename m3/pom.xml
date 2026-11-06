@@ -30,6 +30,7 @@
     <module>native</module>
     <module>nlp</module>
     <module>algorithms</module>
+    <module>lexicon/receiver</module>
   </modules>
 
   <profiles>
