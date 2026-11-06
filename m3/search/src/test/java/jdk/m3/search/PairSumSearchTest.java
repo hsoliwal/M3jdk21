@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
-// Relocated from com.synexia synexia-fastsearch/com/synexia/fastsearch/problem/PairSumSearchTest.java (blob 0f9ffc69c85d) by M3_SEARCH_RELOCATE v3.
+// Relocated from com.synexia m3-fastsearch/jdk/internal/m3/fastsearch/problem/PairSumSearchTest.java (blob 0f9ffc69c85d) by M3_SEARCH_RELOCATE v3.
 package jdk.m3.search;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;

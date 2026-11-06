@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 */
-// Relocated from com.synexia synexia-fastsearch/com/synexia/fastsearch/knowledge/index/TopKSelector.java (blob 05579759973c) by M3_SEARCH_RELOCATE v3.
+// Relocated from com.synexia m3-fastsearch/jdk/internal/m3/fastsearch/knowledge/index/TopKSelector.java (blob 05579759973c) by M3_SEARCH_RELOCATE v3.
 package jdk.m3.search;
 
 import jdk.m3.collections.M3ProgressMonitor;

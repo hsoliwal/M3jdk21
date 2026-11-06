@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
-// Relocated from com.synexia synexia-fastsearch/recipe-crates/problem-pair-sum-jni-20261103/com/synexia/fastsearch/problem/PairSumParityDriver.java (blob c148f06b684a) by M3_SEARCH_RELOCATE v3.
+// Relocated from com.synexia m3-fastsearch/recipe-crates/problem-pair-sum-jni-20261103/jdk/internal/m3/fastsearch/problem/PairSumParityDriver.java (blob c148f06b684a) by M3_SEARCH_RELOCATE v3.
 package jdk.m3.search;
 
 import java.nio.file.Path;

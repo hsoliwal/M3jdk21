@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 */
-// Relocated from com.synexia synexia-fastsearch/com/synexia/fastsearch/knowledge/index/ReciprocalRankFusion.java (blob ae744cd46b0c) by M3_SEARCH_RELOCATE v3.
+// Relocated from com.synexia m3-fastsearch/jdk/internal/m3/fastsearch/knowledge/index/ReciprocalRankFusion.java (blob ae744cd46b0c) by M3_SEARCH_RELOCATE v3.
 package jdk.m3.search;
 
 import java.util.ArrayList;

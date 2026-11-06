@@ -13,5 +13,5 @@ for f in sorted(root.rglob("*.java")):
         continue
     imps = re.findall(r"^import (?:static )?([\w.]+?)(?:\.\*)?;", s, re.M)
     bad = [i for i in imps if not allowed.match(i) and i.rsplit(".", 1)[-1] not in leaf
-           and not (i.startswith("com.synexia.fastsearch.") and i.rsplit(".", 1)[-1] in leaf)]
+           and not (i.startswith("jdk.internal.m3.fastsearch.") and i.rsplit(".", 1)[-1] in leaf)]
     print(f"{'OUT' if bad else 'IN'}\t{f.relative_to(root).as_posix()}\t{','.join(bad[:3])}")

@@ -1,20 +1,20 @@
 """M3_SEARCH_RELOCATE v3 (text lane): leaf 4, top-K selection, reciprocal rank fusion and pair-sum search from
-com.synexia synexia-fastsearch into m3/search (jdk.m3.search).
+com.synexia m3-fastsearch into m3/search (jdk.m3.search).
 
 usage: python -I relocate_search_v3.py <donor-main-root> <donor-test-root> <native-dir> <out-root> <spec.tsv>
 spec.tsv rows: kind<TAB>donor-relative-path (kind = main | test | native).
 Rules:
-  packages com.synexia.fastsearch.knowledge.index / com.synexia.fastsearch.problem -> jdk.m3.search
-  com.synexia.common.progress.ProgressMonitor -> jdk.m3.collections.M3ProgressMonitor (same methods used:
+  packages jdk.internal.m3.fastsearch.knowledge.index / jdk.internal.m3.fastsearch.problem -> jdk.m3.search
+  jdk.internal.m3.common.progress.ProgressMonitor -> jdk.m3.collections.M3ProgressMonitor (same methods used:
     beginTask, subTask, worked, done, checkCanceled)
-  every leaf type <T> -> M3<T> (file renamed); JNI Java_com_synexia_fastsearch_problem_<T>_ -> Java_jdk_m3_search_M3<T>_
+  every leaf type <T> -> M3<T> (file renamed); JNI Java_jdk_internal_m3_fastsearch_problem_<T>_ -> Java_jdk_m3_search_M3<T>_
 A provenance line with the donor git blob follows the SPDX header. Prints one ledger row per file."""
 import hashlib
 import re
 import sys
 from pathlib import Path
 
-PKGS = ("com.synexia.fastsearch.knowledge.index", "com.synexia.fastsearch.problem")
+PKGS = ("jdk.internal.m3.fastsearch.knowledge.index", "jdk.internal.m3.fastsearch.problem")
 
 
 def blob_id(data: bytes) -> str:
@@ -31,11 +31,11 @@ def main() -> int:
         s = raw.decode("utf-8")
         if kind == "native":
             for a, b in types.items():
-                s = s.replace(f"Java_com_synexia_fastsearch_problem_{a}_", f"Java_jdk_m3_search_{b}_")
-                s = s.replace(f"Java_com_synexia_fastsearch_knowledge_index_{a}_", f"Java_jdk_m3_search_{b}_")
+                s = s.replace(f"Java_jdk_internal_m3_fastsearch_problem_{a}_", f"Java_jdk_m3_search_{b}_")
+                s = s.replace(f"Java_jdk_internal_m3_fastsearch_knowledge_index_{a}_", f"Java_jdk_m3_search_{b}_")
             dst = out / f"m3/search/src/main/native/{src.name}"
         else:
-            s = s.replace("com.synexia.common.progress.ProgressMonitor", "jdk.m3.collections.M3ProgressMonitor")
+            s = s.replace("jdk.internal.m3.common.progress.ProgressMonitor", "jdk.m3.collections.M3ProgressMonitor")
             s = re.sub(r"(?<![\w$.])ProgressMonitor(?![\w$])", "M3ProgressMonitor", s)
             for p in PKGS:
                 s = re.sub(rf"(?<![\w$]){re.escape(p)}(?![\w$])", "jdk.m3.search", s)
@@ -46,7 +46,7 @@ def main() -> int:
             dst = out / f"m3/search/src/{'main' if kind == 'main' else 'test'}/java/jdk/m3/search/{name}"
         lines = s.split("\n")
         at = next((i + 1 for i in range(len(lines) - 1, -1, -1) if lines[i].lstrip("/* ").startswith("SPDX-")), 0)
-        lines.insert(at, f"// Relocated from com.synexia synexia-fastsearch/{rel} (blob {blob_id(raw)[:12]}) by M3_SEARCH_RELOCATE v3.")
+        lines.insert(at, f"// Relocated from com.synexia m3-fastsearch/{rel} (blob {blob_id(raw)[:12]}) by M3_SEARCH_RELOCATE v3.")
         s = "\n".join(lines)
         dst.parent.mkdir(parents=True, exist_ok=True)
         dst.write_bytes(s.encode("utf-8"))

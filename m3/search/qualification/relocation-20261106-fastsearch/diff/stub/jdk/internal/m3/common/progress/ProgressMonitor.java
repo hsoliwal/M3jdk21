@@ -1,4 +1,4 @@
-package com.synexia.common.progress;
+package jdk.internal.m3.common.progress;
 
 /** Differential-build stub (tool only): the slice of the donor monitor the top-K kernels call. */
 public interface ProgressMonitor {

@@ -1,4 +1,4 @@
-"""seed_closure.py <seed simple names...> : transitive closure of synexia-fastsearch main classes reachable from the
+"""seed_closure.py <seed simple names...> : transitive closure of m3-fastsearch main classes reachable from the
 seeds (imports + same-package simple-name references). Prints each member with its donor path and its non-java
 imports, so the leaf takes exactly what the seeds need."""
 import re

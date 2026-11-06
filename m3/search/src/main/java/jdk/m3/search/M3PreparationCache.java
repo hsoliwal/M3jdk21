@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: Apache-2.0 */
-// Relocated from com.synexia synexia-fastsearch/com/synexia/fastsearch/knowledge/index/PreparationCache.java (blob 1634b9e6b47f) by M3_SEARCH_RELOCATE v3.
+// Relocated from com.synexia m3-fastsearch/jdk/internal/m3/fastsearch/knowledge/index/PreparationCache.java (blob 1634b9e6b47f) by M3_SEARCH_RELOCATE v3.
 package jdk.m3.search;
 
 import java.io.IOException;

@@ -1,6 +1,6 @@
 /* SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project */
 /* SPDX-License-Identifier: Apache-2.0 */
-// Relocated from com.synexia synexia-fastsearch/pair_sum_search.c (blob 83409f7dd632) by M3_SEARCH_RELOCATE v3.
+// Relocated from com.synexia m3-fastsearch/pair_sum_search.c (blob 83409f7dd632) by M3_SEARCH_RELOCATE v3.
 #include <jni.h>
 #include <stdint.h>
 #include <stdlib.h>

@@ -1,4 +1,4 @@
-"""closure_ffs.py : LEAF_CLOSURE over synexia-fastsearch main sources (ffs/). A class joins when every import is java.*
+"""closure_ffs.py : LEAF_CLOSURE over m3-fastsearch main sources (ffs/). A class joins when every import is java.*
 or another joined class of the module, it has no lombok annotation and no reference to a non-joined module class.
 Prints JOIN rows (size, package, class) and the reason for the first blocker of each excluded class."""
 import re
@@ -19,7 +19,7 @@ while changed:
         s = files[fq[name]]
         pkg = name.rsplit(".", 1)[0]
         imps = re.findall(r"^import (?:static )?([\w.]+?)(?:\.\*)?;", s, re.M)
-        bad = [i for i in imps if not i.startswith("java.") and i != "com.synexia.common.progress.ProgressMonitor" and not any(i == k or i.startswith(k + ".") for k in keep)]
+        bad = [i for i in imps if not i.startswith("java.") and i != "jdk.internal.m3.common.progress.ProgressMonitor" and not any(i == k or i.startswith(k + ".") for k in keep)]
         if "@Slf4j" in s or "lombok" in s:
             bad.append("lombok")
         body = re.sub(r"//[^\n]*|/\*.*?\*/|\"(?:\\.|[^\"\\])*\"", "", s, flags=re.S)
