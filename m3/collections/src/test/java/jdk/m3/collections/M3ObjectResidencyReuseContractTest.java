@@ -613,6 +613,112 @@ final class M3ObjectResidencyReuseContractTest {
         }
     }
 
+    @Test
+    void factoryErrorRestoresAbsentStateAndOriginalThrowableBeforeRetry() {
+        for (Error marker : new Error[] {new AssertionError("factory assertion"),
+                new LinkageError("factory linkage"), new OutOfMemoryError("synthetic factory marker")}) {
+            AtomicInteger calls = new AtomicInteger();
+            var arena = new M3ObjectResidency<StringBuilder>(2, MODE, 16, 0, slot -> {
+                if (calls.getAndIncrement() == 0) throw marker;
+                return new StringBuilder("projection");
+            }, null, null);
+            arena.writeParentBits(0, 17L);
+            assertSame(marker, assertThrows(Error.class, () -> arena.use(0, 8, StringBuilder::length)));
+            assertEquals(M3ObjectResidency.State.ABSENT, arena.state(0));
+            assertEquals(0L, arena.residentBytes());
+            assertNull(arena.lastDecision());
+            assertEquals(17L, arena.readParentBits(0));
+            int identity = arena.use(0, 8, System::identityHashCode);
+            assertEquals(2, calls.get());
+            assertTrue(arena.reuseUnborrowedProjection(0, 1, 8, (value, slot) -> {
+                value.setLength(0);
+                value.append("projection");
+            }));
+            assertEquals(identity, arena.use(1, 8, System::identityHashCode).intValue());
+            assertEquals(2, calls.get());
+            assertEquals(17L, arena.readParentBits(0));
+        }
+    }
+
+    @Test
+    void readErrorRestoresSwappedStateAndRetainsSecondaryBytesForRetry() {
+        assertRestoreErrorRetainsBytes("read");
+    }
+
+    @Test
+    void decodeErrorRestoresSwappedStateAndRetainsSecondaryBytesForRetry() {
+        assertRestoreErrorRetainsBytes("decode");
+    }
+
+    @Test
+    void deleteErrorBeforeMutationRestoresSwappedStateAndAllowsRetry() {
+        assertRestoreErrorRetainsBytes("delete");
+    }
+
+    @Test
+    void encodeAndWriteErrorsRetainResidentIdentityAndOriginalThrowable() throws Exception {
+        for (boolean duringWrite : new boolean[] {false, true}) {
+            SwapFixture fixture = new SwapFixture(2, 8, 0, false);
+            fixture.use(0);
+            String original = fixture.arena.use(0, 8, value -> value);
+            AssertionError marker = new AssertionError("swap error marker");
+            fixture.hook(duringWrite, slot -> { throw marker; });
+            M3ObjectResidency.Decision decision = fixture.arena.lastDecision();
+            assertSame(marker, assertThrows(AssertionError.class, () -> fixture.use(1)));
+            assertEquals(M3ObjectResidency.State.RESIDENT, fixture.arena.state(0));
+            assertEquals(M3ObjectResidency.State.ABSENT, fixture.arena.state(1));
+            assertEquals(8L, fixture.arena.residentBytes());
+            assertSame(decision, fixture.arena.lastDecision());
+            assertSame(original, fixture.arena.use(0, 8, value -> value));
+            assertEquals(0, fixture.creates[1]);
+            fixture.onEncode = null;
+            fixture.onWrite = null;
+            fixture.use(1);
+            assertEquals(M3ObjectResidency.State.SWAPPED, fixture.arena.state(0));
+            fixture.use(0);
+            assertEquals(original, fixture.arena.use(0, 8, value -> value));
+            assertEquals(1, fixture.creates[0]);
+            fixture.assertBits();
+        }
+    }
+
+    @Test
+    void swapWriteErrorAfterStoreMutationStillRetainsResidentValue() {
+        String original = new String("owned");
+        byte[][] secondary = new byte[2][];
+        AtomicInteger writes = new AtomicInteger();
+        AssertionError marker = new AssertionError("write completed then failed");
+        var codec = new M3ObjectResidency.Codec<String>() {
+            @Override public byte[] encode(String value) {
+                return value.getBytes(java.nio.charset.StandardCharsets.UTF_8);
+            }
+            @Override public String decode(int slot, byte[] bytes) {
+                return new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
+            }
+        };
+        var store = new M3ObjectResidency.SpillStore() {
+            @Override public void write(int slot, byte[] bytes) {
+                secondary[slot] = bytes.clone();
+                if (writes.getAndIncrement() == 0) throw marker;
+            }
+            @Override public byte[] read(int slot) { return secondary[slot].clone(); }
+            @Override public void delete(int slot) { secondary[slot] = null; }
+        };
+        var arena = new M3ObjectResidency<String>(2, M3ObjectResidency.LAZY_CREATE
+                | M3ObjectResidency.LRU | M3ObjectResidency.SWAP_SECONDARY,
+                8, 0, slot -> slot == 0 ? original : "other", codec, store);
+        arena.use(0, 8, String::length);
+        assertSame(marker, assertThrows(AssertionError.class, () -> arena.use(1, 8, String::length)));
+        assertEquals(M3ObjectResidency.State.RESIDENT, arena.state(0));
+        assertSame(original, arena.use(0, 8, value -> value));
+        assertEquals(8L, arena.residentBytes());
+        assertNotNull(secondary[0]);
+        arena.use(1, 8, String::length);
+        assertEquals(2, writes.get());
+        assertEquals(M3ObjectResidency.State.SWAPPED, arena.state(0));
+        assertEquals(original, arena.use(0, 8, value -> value));
+    }
+
     private static void assertRestoreErrorRetainsBytes(String phase) {
         LifecycleFixture fixture = new LifecycleFixture(phase);
         fixture.arena.use(0, 8, String::length);
@@ -810,6 +916,33 @@ final class M3ObjectResidencyReuseContractTest {
             assertEquals(8L, fixture.arena.residentBytes());
             assertFalse(fixture.events.contains("delete 0"));
             if (phase.equals("decode")) assertNotNull(fixture.secondary[0]);
+            fixture.assertBits();
+        }
+    }
+
+    @Test
+    void factoryFailureAfterNestedAdmissionKeepsTheOriginalThrowable() {
+        for (Throwable marker : new Throwable[] {new java.io.IOException("factory checked"),
+                new IllegalArgumentException("factory runtime"), new AssertionError("factory error")}) {
+            PublicationFixture fixture = new PublicationFixture("factory", 8, 0);
+            fixture.factoryFailure = marker;
+            fixture.armed = true;
+            if (marker instanceof java.io.IOException) {
+                var failure = assertThrows(M3ObjectResidency.ResidencyException.class,
+                        () -> fixture.arena.use(0, 8, String::length));
+                assertSame(marker, failure.getCause());
+            } else if (marker instanceof Error) {
+                assertSame(marker, assertThrows(Error.class,
+                        () -> fixture.arena.use(0, 8, String::length)));
+            } else {
+                assertSame(marker, assertThrows(RuntimeException.class,
+                        () -> fixture.arena.use(0, 8, String::length)));
+            }
+            assertEquals(java.util.List.of("create 0", "create 2"), fixture.events);
+            assertEquals(M3ObjectResidency.State.ABSENT, fixture.arena.state(0));
+            assertEquals(M3ObjectResidency.State.RESIDENT, fixture.arena.state(2));
+            assertEquals(8L, fixture.arena.residentBytes());
+            assertSame(fixture.nestedDecision, fixture.arena.lastDecision());
             fixture.assertBits();
         }
     }

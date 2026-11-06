@@ -389,6 +389,7 @@ public final class M3ObjectResidency<T> {
     }
 
     //FLLDCIM: MRL - census L066, crate m3-doop-reuse-20261030 (m3-doop-publication-budget-20261030, donor blob 8966285b99e2): re-check the admitted budget after the callbacks; delete the spill copy after it
+    //FLLDCIM: MRL - residency donor semantics P2 group A, crate m3-doop-reuse-20261030 (m3-doop-callback-error-20261030, donor blob 45caaf707b47): an Error from a callback restores the prior state
     private void ensureResident(int slot, long estimatedBytes) {
         State before = stateAt(slot);
         if (before == State.RESIDENT) {
@@ -404,21 +405,27 @@ public final class M3ObjectResidency<T> {
         long target = admit(estimatedBytes, slot);
         try {
             T value;
-            if (before == State.SWAPPED) {
-                setState(slot, State.RESTORING);
-                byte[] bytes = spill.read(slot);
-                value = codec.decode(slot, bytes);
-                Objects.requireNonNull(value, "decoded projection");
-            } else {
-                if (factory == null) throw new IllegalStateException("no factory for absent slot");
-                setState(slot, State.CREATING);
-                value = Objects.requireNonNull(factory.create(slot), "created projection");
+            try {
+                if (before == State.SWAPPED) {
+                    setState(slot, State.RESTORING);
+                    byte[] bytes = spill.read(slot);
+                    value = codec.decode(slot, bytes);
+                    Objects.requireNonNull(value, "decoded projection");
+                } else {
+                    if (factory == null) throw new IllegalStateException("no factory for absent slot");
+                    setState(slot, State.CREATING);
+                    value = Objects.requireNonNull(factory.create(slot), "created projection");
+                }
+                // Factory/read/decode callbacks may consume the originally admitted capacity.
+                if ((flags & OBSERVE_ONLY) == 0 && wouldExceed(estimatedBytes, target)) {
+                    throw new BudgetExceededException(estimatedBytes, residentBytes, target);
+                }
+                if (before == State.SWAPPED) spill.delete(slot);
+            } catch (Error failure) {
+                // Callbacks have not published a resident value or changed its accounting.
+                setState(slot, before);
+                throw failure;
             }
-            // Factory/read/decode callbacks may consume the originally admitted capacity.
-            if ((flags & OBSERVE_ONLY) == 0 && wouldExceed(estimatedBytes, target)) {
-                throw new BudgetExceededException(estimatedBytes, residentBytes, target);
-            }
-            if (before == State.SWAPPED) spill.delete(slot);
             resident[slot] = value;
             weights[slot] = estimatedBytes;
             if (residentBytes > Long.MAX_VALUE - estimatedBytes) lruScanRequired = true;
@@ -554,6 +561,7 @@ public final class M3ObjectResidency<T> {
         return victim;
     }
 
+    //FLLDCIM: MRL - residency donor semantics P2 group A, crate m3-doop-reuse-20261030 (m3-doop-callback-error-20261030, donor blob 45caaf707b47): an Error from encode/write retains the resident
     private void evict(int slot) {
         State before = stateAt(slot);
         if (before != State.RESIDENT || active[slot] != 0 || borrowers[slot] != 0) return;
@@ -562,8 +570,14 @@ public final class M3ObjectResidency<T> {
             setState(slot, State.SWAPPING);
             try {
                 @SuppressWarnings("unchecked") T typed = (T) value;
-                byte[] snapshot = Objects.requireNonNull(codec.encode(typed), "encoded snapshot");
-                spill.write(slot, snapshot);
+                try {
+                    byte[] snapshot = Objects.requireNonNull(codec.encode(typed), "encoded snapshot");
+                    spill.write(slot, snapshot);
+                } catch (Error failure) {
+                    // Encode/write failed before detachment: retain the original resident.
+                    setState(slot, before);
+                    throw failure;
+                }
                 resident[slot] = null;
                 unlinkLru(slot);
                 residentBytes -= weights[slot];
