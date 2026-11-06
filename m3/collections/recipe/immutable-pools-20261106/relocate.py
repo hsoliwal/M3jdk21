@@ -39,6 +39,8 @@ New in v2: REWRITE and INSERT_AFTER rows, SUBSET_PACKAGE rows and --donor-subset
 DROP_METHOD declaration pattern that cannot match a call statement.
 
 usage: python -I relocate.py --donor-git DIR --donor-rev REV [--module DIR] [--check] [--donor-subset DIR]
+A SUPERSEDED row is a FILE row a later recipe owns (named in its note): listed, written verbatim into the donor
+subset, never relocated.
 """
 from __future__ import annotations
 
@@ -68,7 +70,7 @@ ANCHOR_PREFIX = b"//FLLDCIM: RELOCATE"
 JDK_PREFIXES = ("java.", "javax.", "jdk.")
 LINES = re.compile(rb"[^\n]*\n|[^\n]+$")
 ROW_KINDS = ("REPO", "FILE", "PACKAGE", "SUBSET_PACKAGE", "TYPE", "EXTERNAL", "DROP_METHOD", "DROP_LINE", "REWRITE",
-             "INSERT_AFTER", "SKIP", "NEC")
+             "INSERT_AFTER", "SKIP", "NEC", "SUPERSEDED")
 
 
 class Refused(Exception):
@@ -79,11 +81,11 @@ def read_map(recipe_dir: Path) -> dict:
     rows = [line.split("\t") for line in (recipe_dir / MAP_NAME).read_text(encoding="utf-8").splitlines()
             if line.strip() and not line.startswith("#") and not line.startswith("kind\t")]
     mapping: dict = {kind: {} for kind in ROW_KINDS}
-    mapping.update({"FILE": [], "SKIP": [], "NEC": []})
+    mapping.update({"FILE": [], "SKIP": [], "NEC": [], "SUPERSEDED": []})
     for kind, donor, target, *_note in rows:
         if kind not in ROW_KINDS:
             raise Refused("unknown row kind %s in %s" % (kind, MAP_NAME))
-        if kind in ("FILE", "SKIP", "NEC"):
+        if kind in ("FILE", "SKIP", "NEC", "SUPERSEDED"):
             mapping[kind].append((donor, target))
         elif kind == "DROP_METHOD":
             owner, _dot, method = donor.rpartition(".")
@@ -319,7 +321,7 @@ def write_if_changed(path: Path, data: bytes, check: bool) -> bool:
 def run_subset(mapping: dict, donor: Path, rev: str, out: Path) -> int:
     """Donor-side inputs of the differential: main files verbatim, oracle subsets with the declared rows only."""
     commit = git(donor, "rev-parse", rev + "^{commit}").decode().strip()
-    for donor_path, target in mapping["FILE"]:
+    for donor_path, target in mapping["FILE"] + mapping["SUPERSEDED"]:
         blob = git(donor, "rev-parse", rev + ":" + donor_path).decode().strip()
         data = git(donor, "cat-file", "blob", blob)
         subset, counts = relocate(data, donor_path, blob, commit, mapping, True)
@@ -329,7 +331,7 @@ def run_subset(mapping: dict, donor: Path, rev: str, out: Path) -> int:
         state = write_if_changed(out / donor_path, subset, False)
         print("SUBSET %s SUBSET_VERBATIM=%s rewrites=%d drops=%d %s" % ("CHANGED" if state else "UNCHANGED",
               str(verbatim).upper(), counts["rewritten_lines"], counts["dropped_lines"], donor_path))
-    print("DONOR_SUBSET donor_commit=%s files=%d dir=%s" % (commit, len(mapping["FILE"]), out))
+    print("DONOR_SUBSET donor_commit=%s files=%d dir=%s" % (commit, len(mapping["FILE"]) + len(mapping["SUPERSEDED"]), out))
     return 0
 
 

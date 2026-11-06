@@ -1,7 +1,9 @@
 # m3/ports/file build
 
 Module `org.m3jdk.file` (packages `jdk.m3.file`, `jdk.m3.file.json`), Maven coordinates
-`com.m3:m3-ports-file:0.1.0-SNAPSHOT`, Java 21, no dependency outside `java.base`.
+`com.m3:m3-ports-file:0.1.0-SNAPSHOT`, Java 21; `com.m3:m3-collections` (the progress-monitor owner
+`jdk.m3.collections.M3ProgressMonitor`, which `jdk.m3.file.M3ProgressMonitor` extends since
+`m3/qualification/progress-monitor-unify-20261106`) is the only dependency outside `java.base`.
 
 | Step | Command |
 |---|---|

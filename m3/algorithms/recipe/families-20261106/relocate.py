@@ -19,6 +19,7 @@ Idempotent: writes a file only when its bytes differ; a second run reports chang
 exits 1 when a run would change a file. Refuses (exit 2) an unmapped package, an import that is neither a JDK
 package, nor a mapped donor package, nor a declared EXTERNAL package, a DROP row matching no line or more than one
 declaration, or a file without a top-level type. The donor repository and its paths live only in RELOCATION_MAP.tsv.
+A SUPERSEDED row is a FILE row a later recipe owns (named in its note): listed, never written.
 
 usage: python -I relocate.py --donor-git DIR --donor-rev REV [--module DIR] [--check]
 """
@@ -59,11 +60,11 @@ def read_map(recipe_dir: Path) -> dict:
     rows = [line.split("\t") for line in (recipe_dir / MAP_NAME).read_text(encoding="utf-8").splitlines()
             if line.strip() and not line.startswith("#") and not line.startswith("kind\t")]
     mapping: dict = {"REPO": {}, "FILE": [], "PACKAGE": {}, "TYPE": {}, "EXTERNAL": {}, "DROP_METHOD": {},
-                     "DROP_LINE": {}, "DROP_DUMP": {}, "SKIP": [], "NEC": []}
+                     "DROP_LINE": {}, "DROP_DUMP": {}, "SKIP": [], "NEC": [], "SUPERSEDED": []}
     for kind, donor, target, *_note in rows:
         if kind == "FILE":
             mapping["FILE"].append((donor, target))
-        elif kind in ("SKIP", "NEC"):
+        elif kind in ("SKIP", "NEC", "SUPERSEDED"):
             mapping[kind].append((donor, target))
         elif kind == "DROP_METHOD":
             owner, _dot, method = donor.rpartition(".")

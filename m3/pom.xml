@@ -22,6 +22,8 @@
     <module>tooling/recipe-agent-api</module>
     <module>backports</module>
     <module>tooling/module-packs</module>
+    <module>arrays</module>
+    <module>collections</module>
     <module>ports/file</module>
     <module>compiler/lifetime-slots</module>
     <module>ports/collections</module>
@@ -40,8 +42,6 @@
     <profile>
       <id>m3-extended</id>
       <modules>
-        <module>arrays</module>
-        <module>collections</module>
         <module>search</module>
         <module>viewport-core</module>
       </modules>

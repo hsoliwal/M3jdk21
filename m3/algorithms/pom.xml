@@ -13,7 +13,9 @@
     M3IntervalGreedyAlgorithms, M3DynamicProgrammingAlgorithms, M3StringAlgorithms, M3StackAlgorithms,
     M3HeapAlgorithms, M3ListAlgorithms, M3TreeAlgorithms, M3MatrixAlgorithms, M3BacktrackingAlgorithms and
     M3BitAlgorithms, the M3AlgorithmShapeCatalog that names them, and the M3ProgressMonitor cancellation contract
-    every loop observes. Pure Java 21, no dependency outside java.base. Relocated by recipe
+    every loop observes (an adapter over the owner jdk.m3.collections.M3ProgressMonitor since
+    m3/qualification/progress-monitor-unify-20261106). Pure Java 21; com.m3:m3-collections is the only dependency
+    outside java.base. Relocated by recipe
     (recipe/families-20261106/relocate.py with RELOCATION_MAP.tsv and PROVENANCE.tsv) from the m3scale donor at
     develop 3385d79a2968 (2026-11-06); the four donor oracles run in the test phase. The pre-existing M3PrefixZ under
     src/jdk/m3/algorithm (a java.base M3StringPiece input) is outside this Maven build.</description>
@@ -23,6 +25,11 @@
     <junit.artifact.version>5.11.4</junit.artifact.version>
   </properties>
   <dependencies>
+    <dependency>
+      <groupId>com.m3</groupId>
+      <artifactId>m3-collections</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+    </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>

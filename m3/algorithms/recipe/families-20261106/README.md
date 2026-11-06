@@ -3,7 +3,7 @@
 # m3/algorithms: canonical algorithm families (leaf families-20261106)
 
 Module `org.m3jdk.algorithms` (package `jdk.m3.algorithm`), Maven coordinates `com.m3:m3-algorithms:0.1.0-SNAPSHOT`,
-Java 21, no dependency outside `java.base`. First leaf of the m3scale convergence plan
+Java 21; `com.m3:m3-collections` (owner of the progress contract) is the only dependency outside `java.base`. First leaf of the m3scale convergence plan
 (`C:/m3-superset/conv/plans/m3scale.tsv`, rank 1 `m3-algorithms-families`, decision ABSORB).
 
 ## What it is
@@ -25,7 +25,7 @@ names them:
 | `M3BacktrackingAlgorithms` | subsets, permutations, combinationSumUnique, nQueens, generateParentheses |
 | `M3BitAlgorithms` | hammingWeight, reverseBits, singleNumberTriples, missingNumber (`singleNumber` dropped: `java.base` `jdk.internal.m3.M3IntAlgorithms.singleNumberOfPairs` owns it) |
 | `M3AlgorithmShapeCatalog` | 51 `Shape` rows over 18 `Family` values (the GRAPH, UNION_FIND and TRIE rows name leaf-2 types by string) |
-| `M3ProgressMonitor` | the donor contract: `int UNKNOWN`, `beginTask(String,int)`, `worked(int)`, `checkCanceled()`, every method default, `none()` |
+| `M3ProgressMonitor` | the donor contract: `int UNKNOWN`, `beginTask(String,int)`, `worked(int)`, `checkCanceled()`, every method default, `none()`. Since 2026-11-06 an adapter over `jdk.m3.collections.M3ProgressMonitor` (`m3/qualification/progress-monitor-unify-20261106`, int units widen to long); its map row is `SUPERSEDED` |
 
 The pre-existing `M3PrefixZ` (`src/jdk/m3/algorithm`, a `java.base` `M3StringPiece` input, qualified by its own
 workflow) is untouched and outside this Maven build.
@@ -37,7 +37,7 @@ workflow) is untouched and outside this Maven build.
 | donor | `hsoliwal/synexia-m3scale-apache2` develop `3385d79a2968c770aedf1d3398b2a62f05ebc092` (2026-11-06); freshest leaves fd5f4479 twoSum, c11cf8f0 longestConsecutive, 6f2f987f + cddc48a0 jump range (2026-11-05) |
 | donor files | `m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/*` (12 of 16 classes), `src/main/java/com/synexia/m3scale/progress/M3ProgressMonitor.java`, 4 of 8 tests; blob shas in `PROVENANCE.tsv` |
 | recipe | `relocate.py` v1 (`RELOCATE_ALGORITHM_FAMILIES`): `python -I recipe/families-20261106/relocate.py --donor-git <clone> --donor-rev <rev> [--check]` |
-| map | `RELOCATION_MAP.tsv`: 1 `REPO`, 18 `FILE`, 2 `PACKAGE` (`com.synexia.m3scale.{algorithm,progress} -> jdk.m3.algorithm`), 18 `TYPE` (M3 prefix, `M3ProgressMonitor` identity), 1 `EXTERNAL`, 2 `DROP_METHOD`, 2 `DROP_LINE`, 1 `DROP_DUMP`, 8 `SKIP`, 2 `NEC` |
+| map | `RELOCATION_MAP.tsv`: 1 `REPO`, 17 `FILE`, 1 `SUPERSEDED` (the progress monitor, since 2026-11-06), 2 `PACKAGE` (`com.synexia.m3scale.{algorithm,progress} -> jdk.m3.algorithm`), 18 `TYPE` (M3 prefix, `M3ProgressMonitor` identity), 1 `EXTERNAL`, 2 `DROP_METHOD`, 2 `DROP_LINE`, 1 `DROP_DUMP`, 8 `SKIP`, 2 `NEC` |
 | provenance | `PROVENANCE.tsv`: donor commit, blob, sha256, URL, target sha256, counts of renamed / mapped / dropped lines, `body_match` per file |
 | naming | `python -I m3/tooling/jdk-naming/jdk_naming.py apply --root . --only m3/algorithms/`: 0 moves, 0 rewrites, 0 refusals |
 
@@ -45,7 +45,7 @@ The recipe rewrites only the license header (M3JDK style), the `package` line, m
 type names (whole words, on every line, the catalog's entry-point strings included because they name these types),
 applies the declared `DROP` rows, and inserts one `//FLLDCIM: RELOCATE` anchor (donor blob and commit; the repository
 and path are in `PROVENANCE.tsv`, since no naming keep-span covers this repository) before each top-level type.
-`body_match=TRUE` for all 18 files: read back from disk, every target line is the donor line at its position, that
+`body_match=TRUE` for all 17 files: read back from disk, every target line is the donor line at its position, that
 line with the declared renames, the mapped package or import line, or an explained insertion, and every missing
 donor line is a declared drop. Idempotent (`--check` after the run and after `jdk_naming.py`: `changed=0`); refuses
 an unmapped package or import instead of guessing the closure.
