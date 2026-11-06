@@ -24,6 +24,7 @@
     <module>tooling/module-packs</module>
     <module>ports/file</module>
     <module>compiler/lifetime-slots</module>
+    <module>ports/collections</module>
     <module>native</module>
     <module>nlp</module>
     <module>algorithms</module>

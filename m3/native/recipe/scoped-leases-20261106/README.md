@@ -54,7 +54,7 @@ belongs to the donor's next revision).
 |---|---|
 | dependency owner | `mvn -q -B -ntp -f m3/ports/collections/pom.xml -Dmaven.test.skip=true install` (its vendored JUnit family is installed by the `m3-collection-port-wave1` workflow) |
 | compile, test, jar | `JAVA_HOME=<JDK 21> mvn -B -ntp -f m3/native/pom.xml package` (`-Xlint:all,-requires-automatic,-missing-explicit-ctor -Werror`, `proc none`; surefire runs the donor's JUnit wrappers and contracts plus `M3ScopedLeaseJavaParityTest` on the classpath; native-only cases are skipped by assumption without the library) |
-| from the control reactor | `mvn -f m3/pom.xml -pl native package` (`native` is a default module of `m3/pom.xml`; the reactor does not hold `ports/collections`, install it first) |
+| from the control reactor | `mvn -f m3/pom.xml -pl ports/collections,native -am package` (`ports/collections` and `native` are default modules of `m3/pom.xml`, listed in that order; the reactor orders them by dependency) |
 | self-tests directly | `java -cp target/classes;target/test-classes;<m3-collection-port-wave1 jar> jdk.m3.jni.M3ScopedLeaseTableSelfTest` (also `M3ScopedLeaseWindowSelfTest`, `M3LeaseScopesSelfTest`, `M3JniArrayBatchSelfTest`; `:` instead of `;` outside Windows) |
 | differential | `bash m3/native/recipe/scoped-leases-20261106/differential.sh <donor clone> <donor rev> <scratch dir> [operations]` after `package` |
 | native matrix (Linux) | `bash m3/native/recipe/scoped-leases-20261106/native-matrix.sh jdk.m3.jni jdk.m3.jni.requireNative m3/native/src/main/native/m3_scoped_leases.c <scratch> <the six owners> m3/ports/collections/src/main/java/jdk/m3/util/M3RuntimeHeap.java <the four self-tests, the two oracles, the probe>` |
@@ -83,7 +83,8 @@ at class initialization, `java.library.path` names its directory.
 | 3 differential donor vs relocated | identical dumps: 1,025 concat cases + deterministic scan + 7 window caps over 65,536 slots + 100,000 seeded random operations; sha256 `6b7753577f67effc2e6b3c5e024c12ca51df0ea31586bc60a2014d838e19b611` on both sides (7,344,659 bytes, 102,164 lines) |
 | 4 native matrix (WSL Ubuntu 24.04, gcc 13.3.0, Temurin 21.0.13) | both families `NATIVE_MATRIX PASS`: `-std=c17 -O2 -Wall -Wextra -Wpedantic -Werror`, 3 symbols, `-Xcheck:jni` default/`-Xint`/C1 identical; relocated digests equal the donor crates' recorded figures (fallback `5b7859c1...`, native `0b0878d3...`, `M3_NATIVE_CONCAT_PARITY_PASS cases=1025 native=true` `29673af8...`); preflight `checks=4050`, code carrier `permutations=6` |
 | 4b relocated CMake subproject | configure + build on cmake 3.28.3: `libm3_scoped_leases.so` with the 3 symbols |
-| 5 scope | only `m3/native/**` and one `m3/pom.xml` module line |
+| 5 scope | only `m3/native/**` and two `m3/pom.xml` module lines (`ports/collections`, `native`) |
+| 6 reactor | `mvn -f m3/pom.xml -pl ports/collections,native -am -DskipTests package`: `m3-collection-port-wave1 SUCCESS`, `M3JDK :: Native JNI Leases SUCCESS`, BUILD SUCCESS |
 | recipe fixed point, naming fixed point, module description | `changed=0`; `moves=0 rewrites=0 refusals=0`; `org.m3jdk.jni exports jdk.m3.jni` |
 
 Lessons of the run are in `RECIPE_MEMORY.tsv`.
