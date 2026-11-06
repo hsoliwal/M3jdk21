@@ -3,8 +3,68 @@ import argparse,hashlib,json,struct,zipfile,re,subprocess
 from pathlib import Path, PurePosixPath
 BASE=Path(__file__).resolve().parent
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
+
+# Frozen packet V1 is immutable historical custody, not the current source hash.
+HISTORIC_PACKET_SHA256 = "da37bfacf6b8bfa91e5ded6bb74947c54c8d54a8c70f6b15cc58c1eb94208bea"
+SUCCESSOR_PACKET = BASE.parent / "guava-minmax-source-custody" / "source-bindings.json"
+WORKFLOW = ".github/workflows/m3-owned-guava-minmax-priority-queue.yml"
+OWN_VERIFIER = "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/verify.py"
+CHANGES = {
+    WORKFLOW: (2220, "9543ed2e6b8430e6a80888064750beda48e486b005bf125488cc95b513d3d4b9"),
+    OWN_VERIFIER: (4276, "a8fd04cc98bf3f21e5f68958eae8f82e0b5fcedbc7c6d88f92ea778828bb980b"),
+}
+
+def qualified_source_packet():
+    """Admit exactly two source successors without changing the old 165-row packet."""
+    historical = BASE / "source-bindings.json"
+    if (not historical.is_file() or historical.is_symlink()
+            or sha(historical) != HISTORIC_PACKET_SHA256):
+        raise ValueError("historic Guava source packet identity drift")
+    if not SUCCESSOR_PACKET.is_file() or SUCCESSOR_PACKET.is_symlink():
+        raise ValueError("missing stable Guava source successor")
+    original = json.loads(historical.read_bytes())
+    candidate = json.loads(SUCCESSOR_PACKET.read_bytes())
+    if (set(original) != set(candidate)
+            or any(original[key] != candidate[key] for key in original if key != "sources")):
+        raise ValueError("Guava packet metadata or schema changed")
+    before, after = original["sources"], candidate["sources"]
+    if (len(before) != 165 or len(after) != 165
+            or sum(row["role"] == "CURRENT_CORE_CONTEXT" for row in before) != 131
+            or sum(row["role"] == "NEW_PACKET_SOURCE" for row in before) != 34):
+        raise ValueError("original Guava source census changed")
+    changed = set()
+    for previous, following in zip(before, after):
+        path = previous["path"]
+        if path != following.get("path") or previous["role"] != following.get("role"):
+            raise ValueError("Guava source path/order/role changed")
+        if path not in CHANGES:
+            if previous != following:
+                raise ValueError("unreviewed Guava source drift: " + path)
+            continue
+        expected_size, expected_hash = CHANGES[path]
+        if (previous["role"] != "NEW_PACKET_SOURCE"
+                or previous["bytes"] != expected_size
+                or previous["sha256"] != expected_hash
+                or set(previous) != set(following)
+                or any(previous[key] != following[key]
+                       for key in previous if key not in ("bytes", "sha256"))):
+            raise ValueError("Guava historical successor preimage mismatch: " + path)
+        if path == WORKFLOW:
+            if (following["bytes"] != 2311
+                    or following["sha256"] != "ed17db300c020733c0edc6b20aa0180a9314bb183a7cf0b7307989fc3e8d277b"):
+                raise ValueError("Guava workflow successor image differs")
+        else:
+            owner = BASE / "verify.py"
+            if (following["bytes"] != owner.stat().st_size
+                    or following["sha256"] != sha(owner)):
+                raise ValueError("Guava original verifier successor image differs")
+        changed.add(path)
+    if changed != set(CHANGES):
+        raise ValueError("Guava successor coverage incomplete")
+    return candidate
+
 def verify(root,guava=None,context_root=None):
-    spec=json.loads((BASE/'source-bindings.json').read_text(encoding='utf-8'))
+    spec=qualified_source_packet()
     # The original 131 core-context pins belong to the immutable source
     # tree at the recorded base commit. Live owners may evolve under further
     # separately qualified recipes; the packet artifacts remain hash-frozen.
