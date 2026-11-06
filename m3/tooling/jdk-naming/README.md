@@ -14,7 +14,7 @@ User decisions (2026-10-31): M3JDK21 is standalone and self-sufficient, every M3
 | `jdk_naming.py` | rename recipe: `plan` and `apply`, on the checkout or on a tree (`--tree REV --ref REF`) |
 | `reseal.py` | carries sha256, blob and path pins in manifests and receipts to the renamed files |
 | `conformance/` | Maven module; `JdkNamingConformanceTest` reads the same table and fails on any leftover |
-| `RENAME_MAP.tsv` | every path move of the rename (`path_before`, `path_after`), written by the tree-mode apply |
+| `RENAME_MAP.tsv` | every path move of the rename (`path_before`, `path_after`), written by the tree-mode apply; a scoped apply (`--only`) replaces only the rows of the files it selects and keeps every other row byte for byte |
 | `RENAME_RESEAL.tsv` | every carried pin (`kind before after`) and every `AMBIGUOUS` value left alone |
 | `test_jdk_naming.py`, `test_reseal.py` | real-Git fixtures; section 5 of the standard is itself a fixture |
 
