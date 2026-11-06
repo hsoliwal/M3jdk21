@@ -25,6 +25,7 @@
     <module>ports/file</module>
     <module>compiler/lifetime-slots</module>
     <module>nlp</module>
+    <module>algorithms</module>
   </modules>
 
   <profiles>
