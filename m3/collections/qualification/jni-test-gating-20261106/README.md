@@ -2,7 +2,10 @@
 # m3/collections JNI test gating (2026-11-06)
 
 Request from the lane owner (com-synexia-45): the default `mvn -f m3/collections/pom.xml test` on a host without the
-m3_arrays native library is red (master 927e79becaf: 1,633 tests, 5 failures, 49 errors, 2 skipped, 22 failing classes).
+m3_arrays native library is red (master 0b7482c3263: 1682 tests, 5 failures, 49 errors, 2 skipped,
+298 classes, 22 failing classes; the same 22 classes with identical per-class counts at 927e79becaf (1,633 tests,
+the first enumeration, #2530), f5a7f80b2c0, cf0429ac1d4 and e65f0f664fa; on 97631687006 and the push base 9b7269e00fd
+m3/collections does not compile under its -Werror (#2561), see GATES.tsv push_base_*).
 Since #2524 `collections` is a default module of `m3/pom.xml`, so this reddens the default reactor verify as well.
 
 ## Pattern copied from m3/search/pom.xml
@@ -43,12 +46,17 @@ the lane owner may revert to an exclusion if the test is meant to stay as it was
 
 ## Gates
 
-See GATES.tsv. Logs on the executing host: S:/m3-scratch/eb-conv/collatoms/ (a_default_verify.log,
-b_profile_verify.log, c_reactor_package.log, c_reactor_pl_collections.log, d_class_diff.txt).
+See GATES.tsv (re-run on master 0b7482c3263 and, -Werror stripped in scratch, on 97631687006;
+supersedes #2530, whose base was 27 commits behind). Logs on the executing host: S:/m3-scratch/eb-conv/collatoms/
+(m-<master>-test.log, a5-<master>-default_verify.log, a5-<master>-profile_verify.log, a5-<master>-class_diff.txt,
+w-<master>-*.log, wsl_profile_verify_n.log).
 
 ## Open items
 
-* run the profile with a built m3_arrays library (hosted Linux or WSL) and record the result (b_profile_native);
+* masters 97631687006 to 9b7269e00fd do not compile m3/collections under -Werror (M3PrimitiveRoaringIntSet, #2561);
+  owner: absorb lane;
 * the full reactor `-DskipTests package` fails on this Windows host in m3-fs (`No CMAKE_C_COMPILER`), before
   collections; `-pl collections -am` is green;
-* JDK_NAMING_RENAME follow-up: slash-form descriptor literals (`Lcom/m3/...;`) in tests are not covered by the recipe.
+* JDK_NAMING_RENAME follow-up: slash-form descriptor literals (`Lcom/m3/...;`) in tests are not covered by the recipe;
+* master 0b7482c3263 is not a JDK-naming fixed point (14 rewrites under m3/collections, Javadoc lineage lines of
+  absorbed M3Primitive* owners); outside this change, left to the absorb lane.
