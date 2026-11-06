@@ -31,6 +31,11 @@ This port owns the broader second-pass fabric:
   `recipe/utf16-atoms-20261106`);
 - `M3Utf16Glob`: whole-input `?`/`*` match over UTF-16 code units, O(1) auxiliary space (not a
   `PathMatcher` glob; donor crate `m3-utf16-wildcard-glob-20261105`, same recipe);
+- `M3SparseUtf16Stitched` with `M3SparseUtf16LiteralPlan` and `M3LiteralBatchCandidate`: earliest UTF-16 first index of
+  1..24 exact literals (1..63 units) over a region of up to 16,523,264 units, stitched from bounded 4,096-unit windows of
+  an immutable sparse Aho-Corasick plan (62-unit overlap, batches of 64 windows, certified first-hit frontier); explicit
+  JNI lanes fail closed without a library (donor crates `m3-utf16-stitch-20261022`, `m3-literal-batch-precompute-20261022`,
+  `m3-sparse-java-first-completion-20261026`; recipe `recipe/utf16-stitch-20261106`);
 - `M3CodeTextSignals`: code-looking and regex-looking signal image for fixture
   generation and candidate routing;
 - `M3SimilarityPrecompute`: pairwise safe/approximate signal packet;
