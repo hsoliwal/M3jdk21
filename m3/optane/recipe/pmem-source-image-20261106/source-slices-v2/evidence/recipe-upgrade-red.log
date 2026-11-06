@@ -1,0 +1,2 @@
+Exception in thread "main" java.io.IOException: unreviewed generated source drift src/main/java/com/synexia/m3/pmem/PmemSourceSlices.java
+	at com.synexia.m3.recipe.PmemSourceSlicesRecipe.main(PmemSourceSlicesRecipe.java:57)

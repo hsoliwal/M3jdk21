@@ -1,0 +1,1 @@
+PASS PMEMSDK JNI source traversal: files=20000 bytes=1000000000 reusableBufferBytes=50000 elapsedMillis=746 modelCalls=0

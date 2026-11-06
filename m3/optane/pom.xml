@@ -27,11 +27,13 @@
     <m3.optane.library.path>${project.build.directory}/native</m3.optane.library.path>
     <!-- the native lanes of the donor oracles: the 19 POSIX atoms, the KMP prefix test and the three FILE-oracle
          methods that also open a POSIX region; excluded (surefire test filter, the only parameter that takes method
-         patterns) unless the profile m3-optane-native supplies the library -->
-    <m3.optane.test.filter>!M3PmemAtomCorrectnessJUnitTest, !M3PmemNativeKmpPrefix32JUnitTest, !M3PmemFileBackendJUnitTest#randomizedSearchTransferAndNativeDifferential+overlappingMemmoveAliasesAndFileToFile+pathReplacementDoesNotBypassAliasRefusal</m3.optane.test.filter>
+         patterns) unless the profile m3-optane-native supplies the library; the source-slices oracles
+         (recipe/pmem-source-image-20261106) map POSIX regions only -->
+    <m3.optane.test.filter>!M3PmemAtomCorrectnessJUnitTest, !M3PmemNativeKmpPrefix32JUnitTest, !M3PmemSourceSlicesJUnitTest, !M3PmemSourceSlicesLifecycleJUnitTest, !M3PmemFileBackendJUnitTest#randomizedSearchTransferAndNativeDifferential+overlappingMemmoveAliasesAndFileToFile+pathReplacementDoesNotBypassAliasRefusal</m3.optane.test.filter>
     <!-- the oracles write sparse files above 2 GiB (NTFS fills the gap): temporary files go next to the build output,
-         never to the system temporary directory -->
-    <m3.optane.surefire.argLine>-Djava.io.tmpdir=${project.build.directory} -Djava.library.path=${m3.optane.library.path}</m3.optane.surefire.argLine>
+         never to the system temporary directory; implicit exceptions keep their messages (no fast throw), so the
+         replay digests of the dump drivers are reproducible -->
+    <m3.optane.surefire.argLine>-XX:-OmitStackTraceInFastThrow -Djava.io.tmpdir=${project.build.directory} -Djava.library.path=${m3.optane.library.path}</m3.optane.surefire.argLine>
   </properties>
   <dependencies>
     <dependency>
@@ -92,7 +94,7 @@
       <id>m3-optane-native</id>
       <properties>
         <m3.optane.test.filter>*Test</m3.optane.test.filter>
-        <m3.optane.surefire.argLine>-Xcheck:jni -Djava.io.tmpdir=${project.build.directory} -Djava.library.path=${m3.optane.library.path}</m3.optane.surefire.argLine>
+        <m3.optane.surefire.argLine>-Xcheck:jni -XX:-OmitStackTraceInFastThrow -Dpmem.streaming.native=true -Dpmem.source.reuse.native=true -Djava.io.tmpdir=${project.build.directory} -Djava.library.path=${m3.optane.library.path}</m3.optane.surefire.argLine>
       </properties>
     </profile>
     <profile>
