@@ -3,7 +3,6 @@ package jdk.m3.graphics.shaper;
 import java.util.*;
 import jdk.m3.graphics.*;
 import jdk.m3.graphics.impl.*;
-import jdk.m3.graphics.*;
 
 /**
  * Shapes text using HarfBuzz and places the shaped text into a

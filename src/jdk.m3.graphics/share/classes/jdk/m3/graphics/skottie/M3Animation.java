@@ -3,7 +3,6 @@ package jdk.m3.graphics.skottie;
 import jdk.m3.graphics.*;
 import jdk.m3.graphics.impl.*;
 import jdk.m3.graphics.sksg.M3InvalidationController;
-import jdk.m3.graphics.*;
 
 public class M3Animation extends M3Managed {
     static { M3Library.staticLoad(); }

@@ -2,7 +2,6 @@ package jdk.m3.graphics.sksg;
 
 import jdk.m3.graphics.*;
 import jdk.m3.graphics.impl.*;
-import jdk.m3.graphics.*;
 
 /**
  * <p>Receiver for invalidation events.</p>

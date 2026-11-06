@@ -1,7 +1,6 @@
 package jdk.m3.graphics.paragraph;
 
 import jdk.m3.graphics.*;
-import jdk.m3.graphics.*;
 
 public class M3Shadow {
     public final int _color;
