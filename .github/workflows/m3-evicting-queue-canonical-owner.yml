@@ -39,7 +39,7 @@ jobs:
           old = Path('m3/collections/implementations/guava-evicting-queue/src/main/java/jdk/m3/collections/guava/M3EvictingQueue.java').read_bytes()
           new = Path('m3/collections/implementations/evicting-queue/src/main/java/jdk/m3/collections/queue/M3EvictingQueue.java').read_bytes()
           assert hashlib.sha256(old).hexdigest() == '91c5044456cf3841d857dd5069ef7e5d61055ea154880ad5fed3984e15f686b7'
-          assert hashlib.sha256(new).hexdigest() == '55f35c295abb90edd459ecfbe36b6a03f08c9ee212716d5921ac0d55c88c0aa6'
+          assert hashlib.sha256(new).hexdigest() == 'd98b9bcfbf55bcf541fe5a03ee18daeeb4254496bc985bc6d809fc674674f220'
           normalized = new.replace(
               b'package jdk.m3.collections.queue;',
               b'package jdk.m3.collections.guava;')
@@ -64,8 +64,15 @@ jobs:
           assert old.count(old_growth_fallback) == 1 and new.count(new_growth_fallback) == 1
           normalized = normalized.replace(new_growth_target, old_growth_target)
           normalized = normalized.replace(new_growth_fallback, old_growth_fallback)
+          old_growth_jump = b'        long jump = oldLength < 64 ? (long) oldLength + 2 : oldLength / 2L;'
+          new_growth_jump = (b'        //FLLDCIM: MRL - geometric growth, jump = oldLength for oldLength >= 64 '
+              b'(com.synexia crate m3jdk21-evicting-queue-geometric-growth-20261024); '
+              b'recipe qualification/collections-atoms-20261106/apply.py v1\n'
+              b'        long jump = oldLength < 64 ? (long) oldLength + 2 : (long) oldLength;')
+          assert old.count(old_growth_jump) == 1 and new.count(new_growth_jump) == 1
+          normalized = normalized.replace(new_growth_jump, old_growth_jump)
           assert normalized == old
-          print('Sealed canonical implementation differs only by admitted capacity, direct-self and bounded-growth atoms')
+          print('Sealed canonical implementation differs only by admitted capacity, direct-self, bounded-growth and geometric-growth atoms')
           PY
       - name: Build both standalone M3JDK21 Java 21 queue modules
         run: |
@@ -77,6 +84,7 @@ jobs:
           NEW=m3/collections/implementations/evicting-queue/target
           java -cp "$OLD/classes:$OLD/test-classes" jdk.m3.collections.guava.M3EvictingQueueContractProbe
           java -Xmx64m -cp "$OLD/classes:$NEW/classes:$NEW/test-classes" jdk.m3.collections.queue.M3EvictingQueueCanonicalContractProbe
+          java -ea -Xmx256m -cp "$NEW/classes:$NEW/test-classes" jdk.m3.collections.queue.M3EvictingQueueGeometricGrowthProbe
           javap -p -classpath "$NEW/classes" jdk.m3.collections.queue.M3EvictingQueue | python3 -c 'import sys; data=sys.stdin.read(); assert "public final class jdk.m3.collections.queue.M3EvictingQueue" in data and "private void copyRingInto(java.lang.Object[], int)" in data'
       - name: Enforce vendor-neutral canonical Maven binary and retained license manifests
         run: |
