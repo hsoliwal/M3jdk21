@@ -11,3 +11,5 @@ find src/test/java -name '*.java' -print | LC_ALL=C sort > "$work/test.sources"
 javac --release 21 -proc:none -Xlint:all -Werror -cp "$work/classes" \
     -d "$work/classes" @"$work/test.sources"
 java -ea -cp "$work/classes" com.m3.collections.sortable.SortableProcessorSelfTest
+java -ea -cp "$work/classes" com.m3.collections.sortable.M3MachineHintRulesContract
+java -ea -cp "$work/classes" com.m3.collections.sortable.M3CompilerHintEmitterSelfTest

@@ -104,6 +104,8 @@ public final class M3ASTPC implements Plugin {
         Path slots = null;
         Path facts = null;
         UUID factsId = null;
+        M3CompilerPatternHints.Mode hintsMode = null;
+        Path hintFile = null;
         boolean fold = false;
         for (String arg : args) {
             if (arg.equals("lossless") && !retainSyntax) retainSyntax = true;
@@ -116,6 +118,11 @@ public final class M3ASTPC implements Plugin {
                 slots = Path.of(arg.substring("slots=".length()));
             else if (arg.startsWith("facts64=") && facts == null)
                 facts = factsPath(arg.substring("facts64=".length()));
+            else if (arg.startsWith("hints=") && hintsMode == null)
+                hintsMode = M3CompilerPatternHints.Mode.parse(arg.substring("hints=".length()));
+            else if (arg.startsWith("hintfile=") && hintFile == null
+                    && arg.length() > "hintfile=".length())
+                hintFile = Path.of(arg.substring("hintfile=".length())).toAbsolutePath().normalize();
             else if (arg.startsWith("factsid=") && factsId == null) {
                 String text = arg.substring("factsid=".length());
                 factsId = UUID.fromString(text);
@@ -133,6 +140,12 @@ public final class M3ASTPC implements Plugin {
         if (facts != null && (sameOutput(facts, trace) || sameOutput(facts, image)
                 || sameOutput(facts, slots)))
             throw new IllegalArgumentException("M3AST facts output must differ from trace, image and slots");
+        if (hintsMode == null && hintFile != null
+                || hintsMode != null && hintsMode.receipts() != (hintFile != null))
+            throw new IllegalArgumentException("M3AST hintfile requires hints=receipts or hints=both");
+        if (hintFile != null && (sameOutput(hintFile, trace) || sameOutput(hintFile, image)
+                || sameOutput(hintFile, slots) || sameOutput(hintFile, facts)))
+            throw new IllegalArgumentException("M3AST hintfile collides with another output");
         Session session = (Session) open(task, retainSyntax);
         try {
             // Reuse javac's actual processor/plugin loader, including module paths.
@@ -149,6 +162,10 @@ public final class M3ASTPC implements Plugin {
                 session.addConsumer(receipt);
                 session.factsReceipt = receipt;
             }
+            // The original javac ANALYZE event and memoized M3AST.MethodFacts supply
+            // compiler-wide MOP hints. No @Sortable annotation or second parser needed.
+            if (hintsMode != null)
+                session.addConsumer(new M3CompilerPatternHints(hintsMode, hintFile));
         } catch (IOException failure) {
             session.abort(failure);
             throw new UncheckedIOException(failure);
