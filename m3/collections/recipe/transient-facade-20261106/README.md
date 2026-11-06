@@ -121,9 +121,18 @@ is still open, so the failed-disposer contract is unchanged; `close()` re-reads 
 when a nested close finished. `M3FacadeDisposerReentryTest` (6 tests) pins it. Against donor rev `fd9a233680b`,
 `relocate.py --check` now reports the store row CHANGED (exactly that hunk) until the recipe is re-pinned to a develop
 commit that carries the donor fix; relocating from the fixed donor commit reproduces every target byte except the RELOCATE
-anchor lines. Residual, not fixed here: in `releaseOptionalResidency` a Disposer that closes the owner still disposes the
-in-flight victim twice and hands `(0, null)` to the Disposer for the remaining victims (no exception); reachable only
-with unpinned residents (RETAIN_UNEXPOSED).
+anchor lines.
+
+The trim path had the same defect: in `releaseOptionalResidency` a Disposer that closed the owner disposed the
+in-flight victim twice and handed `(0, null)` to the Disposer for the remaining victims; a reentrant remove, expose or
+lease shifted the planned slots (wrong victim, pinned facade disposed, leased after disposal). Closed by a second
+identical hunk (M3JDK branch `m3/collections-facade-release-residency-20261106a`, com.synexia branch
+`m3/primitives-facade-release-residency-20261106`): `detachVictims` snapshots the planned victims into the private
+`Backing` record and removes them in the single compacting pass before the first callback; on a failed disposal
+`returnVictims` restores the failed and the not-yet-offered victims (`restoreSlot`), or disposes a never-offered victim
+once when it cannot return (closed owner, id re-admitted). `M3FacadeDisposerReentryTest` gains 5 trim tests;
+`M3TransientFacadeDump` gains a ninth family, reentrant-trim (Disposer reentry kinds close, remove, expose, lease, nested
+trim and fault over RETAIN_UNEXPOSED owners); the eight earlier family digests are unchanged.
 
 ## Files
 

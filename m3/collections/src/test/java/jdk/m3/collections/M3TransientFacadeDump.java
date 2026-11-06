@@ -16,7 +16,7 @@ import java.util.function.Supplier;
  *
  * <p>Seeded facade lifecycles over the public and package-private API of M3TransientFacadeStore,
  * M3InternalLeaseRecycler and M3ResidentTrimPlanner: create/expose/internal lease/return/trim/remove/close,
- * reentrant close from every callback, post-close calls, injected heap pressure, top-k victim plans and
+ * reentrant close from every callback, Disposer reentry during trim, post-close calls, injected heap pressure, top-k victim plans and
  * fault-injected backing growth. Every observable outcome (values, identities, callback order, exceptions with
  * their suppressed chains, stats) is digested per scenario family. differential.sh compiles this same source in
  * the donor package; both outputs must be byte-identical. No threads, timing or real heap sampling.</p>
@@ -68,7 +68,7 @@ public final class M3TransientFacadeDump {
         int ops = args.length > 0 ? Integer.parseInt(args[0]) : 100_000;
         long seed = args.length > 1 ? Long.parseLong(args[1]) : 20261106L;
         String[] families = {"lifecycle-recreate", "lifecycle-retain", "recycle", "reentrant-close",
-            "pressure", "topk", "recycler", "growth"};
+            "pressure", "topk", "recycler", "growth", "reentrant-trim"};
         for (int f = 0; f < families.length; f++) {
             long familySeed = seed + GOLDEN * (f + 1);
             Log log = new Log();
@@ -92,6 +92,7 @@ public final class M3TransientFacadeDump {
             case "topk" -> topk(log, r, ops);
             case "recycler" -> recycler(log, r, ops);
             case "growth" -> growth(log, r, ops);
+            case "reentrant-trim" -> reentrantTrim(log, r, ops);
             default -> throw new IllegalArgumentException(family);
         }
     }
@@ -430,5 +431,65 @@ public final class M3TransientFacadeDump {
         }
         call(log, "close", () -> { store.close(); return "ok"; });
         postClose(log, store);
+    }
+
+    /**
+     * Disposer reentry while releaseOptionalResidency disposes unpinned residents (RETAIN_UNEXPOSED). The countdown-th
+     * disposal inside a trim closes the owner (0), removes (1), exposes (2) or leases (3) the target id, trims again (4)
+     * or throws (5). Each "dispose" line is a successful disposal; a faulting disposal logs none.
+     */
+    private static void reentrantTrim(Log log, SplittableRandom r, int ops) {
+        int mode = M3TransientFacadeStore.RETAIN_UNEXPOSED | M3TransientFacadeStore.PIN_EXPOSED
+                | M3TransientFacadeStore.PRESSURE_TRIMMABLE;
+        int done = 0;
+        while (done < ops) {
+            int where = r.nextInt(6);
+            int[] countdown = {1 + r.nextInt(4)};
+            long target = r.nextInt(8);
+            boolean[] trimming = {false};
+            int[] serial = {0};
+            Box<M3TransientFacadeStore<Facade>> box = new Box<>();
+            M3TransientFacadeStore.Disposer<Facade> disposer = (id, facade) -> {
+                if (trimming[0] && --countdown[0] == 0) {
+                    log.add("reentry " + where + " in dispose " + id + " " + facade);
+                    M3TransientFacadeStore<Facade> owner = box.value;
+                    switch (where) {
+                        case 0 -> call(log, "reentry.close", () -> { owner.close(); return "ok"; });
+                        case 1 -> call(log, "reentry.remove", () -> owner.remove(target));
+                        case 2 -> call(log, "reentry.expose", () -> owner.expose(target));
+                        case 3 -> call(log, "reentry.internal", () -> {
+                            owner.withInternal(target, f -> log.add("use " + f));
+                            return "ok";
+                        });
+                        case 4 -> call(log, "reentry.trim", () -> owner.releaseOptionalResidency(1));
+                        default -> throw new IllegalStateException("dispose fault " + id);
+                    }
+                }
+                log.add("dispose " + id + " " + facade);
+            };
+            box.value = new M3TransientFacadeStore<>(factory(log, serial), disposer, mode);
+            log.add("trim-owner where=" + where + " countdown=" + countdown[0] + " target=" + target);
+            for (int step = 0; step < 16 && done < ops; step++, done++) {
+                long id = r.nextInt(8);
+                M3TransientFacadeStore<Facade> store = box.value;
+                switch (r.nextInt(6)) {
+                    case 0, 1 -> call(log, "internal", () -> {
+                        store.withInternal(id, facade -> log.add("use " + facade));
+                        return "ok";
+                    });
+                    case 2 -> call(log, "expose", () -> store.expose(id));
+                    case 3 -> call(log, "remove", () -> store.remove(id));
+                    default -> {
+                        int target2 = r.nextInt(3);
+                        call(log, "trim", () -> {
+                            trimming[0] = true;
+                            try { return store.releaseOptionalResidency(target2); }
+                            finally { trimming[0] = false; }
+                        });
+                    }
+                }
+            }
+            closeAndProbe(log, box.value);
+        }
     }
 }

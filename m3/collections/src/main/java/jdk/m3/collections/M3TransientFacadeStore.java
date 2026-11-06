@@ -269,21 +269,21 @@ public final class M3TransientFacadeStore<T> implements AutoCloseable {
         // O(size * evictions) repeated shifts during a memory-pressure event.
         int[] victims = M3ResidentTrimPlanner.oldestSlots(flags, accessEpochs, size, excess);
         if (victims.length == 0) return 0;
-        boolean[] removed = new boolean[size];
+        //FLLDCIM: MRL - reentrant Disposer during trim disposed the in-flight victim twice, then (0, null); detach first
+        Backing detached = detachVictims(victims);
         int released = 0;
         try {
-            for (int slot : victims) {
-                dispose(ids[slot], value(slot));
-                removed[slot] = true;
-                released++;
+            for (; released < victims.length; released++) {
+                @SuppressWarnings("unchecked") T facade = (T) detached.facades()[released];
+                dispose(detached.ids()[released], facade);
             }
-        } finally {
+        } catch (RuntimeException | Error failure) {
             // If a disposer throws, only *successfully* disposed entries leave
             // the store. The remaining IDs and exposed references stay intact.
-            if (released != 0) {
-                compactRetained(removed);
-                trims = Math.addExact(trims, released);
-            }
+            returnVictims(detached, released, failure);
+            throw failure;
+        } finally {
+            if (released != 0) trims = Math.addExact(trims, released);
         }
         return released;
     }
@@ -478,12 +478,50 @@ public final class M3TransientFacadeStore<T> implements AutoCloseable {
     }
 
     /** A failed Disposer keeps the facade resident with its identity, flags and recency. */
-    private void restoreSlot(long logicalId, T facade, short flag, long access) {
+    private boolean restoreSlot(long logicalId, T facade, short flag, long access) {
         // Never re-admit after the close boundary or over a facade the callback re-admitted.
-        if (closed || find(logicalId) >= 0) return;
+        if (closed || find(logicalId) >= 0) return false;
         int slot = insert(logicalId, facade);
         flags[slot] = flag;
         accessEpochs[slot] = access;
+        return true;
+    }
+
+    /** Detach every trim victim in one compacting pass before the first Disposer callback. */
+    private Backing detachVictims(int[] victims) {
+        int count = victims.length;
+        Backing detached = new Backing(new long[count], new Object[count], new short[count], new long[count]);
+        boolean[] removed = new boolean[size];
+        for (int i = 0; i < count; i++) {
+            int slot = victims[i];
+            detached.ids()[i] = ids[slot];
+            detached.facades()[i] = facades[slot];
+            detached.flags()[i] = flags[slot];
+            detached.accessEpochs()[i] = accessEpochs[slot];
+            removed[slot] = true;
+        }
+        compactRetained(removed);
+        return detached;
+    }
+
+    /**
+     * After a failed trim disposal, the failed victim and the victims not yet offered become
+     * resident again. A victim never offered that cannot return (closed owner, id re-admitted
+     * by the callback) is disposed once instead.
+     */
+    private void returnVictims(Backing detached, int failed, Throwable failure) {
+        for (int i = failed; i < detached.ids().length; i++) {
+            long logicalId = detached.ids()[i];
+            @SuppressWarnings("unchecked") T facade = (T) detached.facades()[i];
+            try {
+                if (!restoreSlot(logicalId, facade, detached.flags()[i], detached.accessEpochs()[i])
+                        && i > failed) {
+                    dispose(logicalId, facade);
+                }
+            } catch (RuntimeException | Error cleanup) {
+                failure.addSuppressed(cleanup);
+            }
+        }
     }
 
     private void detachSlot(int slot) {
