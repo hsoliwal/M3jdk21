@@ -1,0 +1,4 @@
+<!-- Copyright 2026 Hitesh Soliwal and contributors -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/synexia-openrewrite-recipes/recipe-crates/m3-pmem-streaming-seal-20261105/RECIPE_MEMORY.md blob 23bfe4fe23ad; recipe m3/optane/recipe/pmem-source-image-20261106/relocate.py v3 -->
+The original Gram review campaign rehashes all source bytes after searching but needlessly allocates each full file's readSealed result. Preserve the revalidation; remove only the unnecessary allocation with the original image's reusable 16 KiB streaming read and original SHA-256. Keep snapshot immutability/lease and zero-length/closed semantics. Existing first-party donor #15204 already demonstrated the correctness and value of caller-owned read buffers. Always generate from an exact PRE/POST Maven recipe, not an independent patch or native fork.

@@ -1,0 +1,12 @@
+Apache Maven 3.9.11 (3e54c93a704957b63ee3494413a2b544fd3d825b)
+Maven home: /tmp/m3-toolchain/apache-maven-3.9.11
+Java version: 21.0.13, vendor: Eclipse Adoptium, runtime: /tmp/m3-toolchain/jdk-21.0.13+9
+Default locale: en, platform encoding: UTF-8
+OS name: "linux", version: "6.18.57", arch: "amd64", family: "unix"
+openjdk version "21.0.13" 2026-10-20 LTS
+OpenJDK Runtime Environment Temurin-21.0.13+9 (build 21.0.13+9-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.13+9 (build 21.0.13+9-LTS, mixed mode, sharing)
+cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
