@@ -408,9 +408,30 @@ public final class M3FilteredLists {
             @Override public int nextIndex() { live(); return logical; }
             @Override public int previousIndex() { live(); return logical - 1; }
 
+            //FLLDCIM: MRL - census P2-043, crate m3jdk21-engine-pin-admission-20261021 (dataset m3jdk21-filtered-list-mutation-20261018, donor blob 25e243eabdbf): fail-fast probe before backing writes
+            /** Validate the original cursor without changing its physical position.
+             * Keep writes on the backing List: a writable list may expose an
+             * unmodifiable/snapshot iterator. next() also checks an exhausted
+             * fail-fast cursor; hasNext() alone need not detect invalidation.
+             */
+            private void checkForComodification() {
+                try {
+                    try {
+                        iterator.next();
+                    } catch (NoSuchElementException exhausted) {
+                        return;
+                    }
+                    iterator.previous();
+                } catch (RuntimeException | Error failure) {
+                    state |= FAILED;
+                    throw failure;
+                }
+            }
+
             @Override public void remove() {
                 live();
                 if (lastPhysical < 0) throw new IllegalStateException("remove without delivered element");
+                checkForComodification();
                 int target = lastPhysical;
                 int position = iterator.nextIndex();
                 removePhysical(target);
@@ -426,6 +447,7 @@ public final class M3FilteredLists {
                 live();
                 if (lastPhysical < 0) throw new IllegalStateException("set without delivered element");
                 requireAccepted(value);
+                checkForComodification();
                 setPhysical(lastPhysical, value);
                 discardProbes();
             }
@@ -433,6 +455,7 @@ public final class M3FilteredLists {
             @Override public void add(E value) {
                 live();
                 requireAccepted(value);
+                checkForComodification();
                 int position = iterator.nextIndex();
                 backing.add(position, value);
                 iterator = backing.listIterator(position + 1);
