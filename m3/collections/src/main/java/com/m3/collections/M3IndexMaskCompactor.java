@@ -111,6 +111,79 @@ public final class M3IndexMaskCompactor {
     }
 
     /**
+     * One-pass, entryless paging across an owner's byte-state lane.
+     * Writes ascending absolute physical positions into the caller's reused output
+     * buffer. The high 32 bits of the result contain the next absolute position;
+     * the low 32 bits contain the number of positions written. Resume with
+     * {@code first = (int)(result >>> 32)} and a remaining bounded window.
+     * Input states must remain stable for the call. No backing arrays or entries
+     * are allocated, published, cached or retained by this method.
+     *
+     * <p>A nonempty window requires at least one available output slot to ensure
+     * progress. All Java arguments are validated before writing any output.
+     * NATIVE_REQUIRED refuses older JNI binaries instead of silently falling back.
+     */
+    public static long selectPositionsPage(byte[] states, int first, int length,
+            int requiredMask, int excludedMask, int[] output, int outputOffset,
+            int capacity, Backend backend) {
+        Objects.requireNonNull(states, "states");
+        Objects.requireNonNull(output, "output");
+        Objects.requireNonNull(backend, "backend");
+        Objects.checkFromIndexSize(first, length, states.length);
+        Objects.checkFromIndexSize(outputOffset, capacity, output.length);
+        requireMask(requiredMask);
+        requireMask(excludedMask);
+        if (length != 0 && capacity == 0) {
+            throw new IllegalArgumentException("nonempty page requires output capacity");
+        }
+        if (backend == Backend.NATIVE_REQUIRED) {
+            if (!NativeLibrary.AVAILABLE || !NativePositionPage.AVAILABLE) {
+                throw new UnsatisfiedLinkError("m3_index_mask position-page JNI ABI unavailable");
+            }
+            return selectPositionsPageNative(states, first, length,
+                    requiredMask, excludedMask, output, outputOffset, capacity);
+        }
+        return selectPositionsPageJava(states, first, length,
+                requiredMask, excludedMask, output, outputOffset, capacity);
+    }
+
+    /** Java oracle for exact native parity, with no per-entry or per-page result allocation. */
+    static long selectPositionsPageJava(byte[] states, int first, int length,
+            int requiredMask, int excludedMask, int[] output, int outputOffset,
+            int capacity) {
+        int end = first + length;
+        if ((requiredMask & excludedMask) != 0) return (long) end << 32;
+        int written = 0;
+        for (int position = first; position < end; position++) {
+            if (matches(states[position], requiredMask, excludedMask)) {
+                output[outputOffset + written++] = position;
+                if (written == capacity) {
+                    return ((long) (position + 1) << 32) | (written & 0xffff_ffffL);
+                }
+            }
+        }
+        return ((long) end << 32) | (written & 0xffff_ffffL);
+    }
+
+    /** Optional additive native ABI; legacy m3_collections_mask binaries still load. */
+    private static final class NativePositionPage {
+        private static final boolean AVAILABLE = probe();
+        private static boolean probe() {
+            try {
+                return positionsPageAbiNative() == 1;
+            } catch (UnsatisfiedLinkError legacy) {
+                return false;
+            }
+        }
+    }
+
+    private static native int positionsPageAbiNative();
+
+    private static native long selectPositionsPageNative(byte[] states, int first,
+            int length, int requiredMask, int excludedMask, int[] output,
+            int outputOffset, int capacity);
+
+    /**
      * Internal native selection over an owner's stable half-open index window.
      * States describe logical positions, not physical row IDs. This never retains inputs.
      * Old binaries keep using their original native selector and defensive window copy;
