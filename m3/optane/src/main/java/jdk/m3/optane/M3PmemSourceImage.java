@@ -36,7 +36,7 @@ import java.util.Objects;
  * immutable while open. This class provides no global M3File ownership or
  * portable power-failure transaction guarantee.
  */
-//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/5ecfe052562cdd1a7a6570068654c7f813fd0f47/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemSourceImage.java blob bd2c6c1ee83e; recipe m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
+//FLLDCIM: RELOCATE - donor https://github.com/hsoliwal/com.synexia/blob/9b4728b743ab12cf0c6eaedeb899af22dad1f983/m3-pmem-sdk/src/main/java/com/synexia/m3/pmem/PmemSourceImage.java blob 743e5bb54bc6; recipe m3/optane/recipe/pmem-source-image-20261106/relocate.py v3
 public final class M3PmemSourceImage implements AutoCloseable {
     private static final long MAGIC = 0x4d33535243494d47L; // M3SRCIMG
     private static final int VERSION = 1;
@@ -60,6 +60,7 @@ public final class M3PmemSourceImage implements AutoCloseable {
     private final M3PmemRegion region;
     private final M3PmemSourceSlices slices;
     private final String[] paths;
+    private final int[] pathSlots;
     private final long[] offsets;
     private final long corpusBytes;
     private final int ioBufferBytes;
@@ -73,6 +74,7 @@ public final class M3PmemSourceImage implements AutoCloseable {
         this.slices = new M3PmemSourceSlices(region, offsets, lengths, digests,
                 Math.max(1, limits.maxFileBytes()));
         this.paths = paths;
+        this.pathSlots = M3PmemSourcePathIndex.build(paths);
         this.offsets = offsets;
         this.corpusBytes = corpusBytes;
         this.ioBufferBytes = limits.ioBufferBytes();
@@ -296,7 +298,7 @@ public final class M3PmemSourceImage implements AutoCloseable {
     }
     public synchronized int fileIndexOf(String relativePath) {
         requireOpen(); Objects.requireNonNull(relativePath, "relativePath");
-        int index = Arrays.binarySearch(paths, relativePath); return index < 0 ? -1 : index;
+        return M3PmemSourcePathIndex.find(paths, pathSlots, relativePath);
     }
     /** Search exactly one file extent; result is file-relative, including empty matches. */
     public synchronized long indexOf(int fileIndex, byte[] pattern) {
