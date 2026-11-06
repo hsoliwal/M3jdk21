@@ -2,6 +2,7 @@
 # Copyright 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
 # Modified 2026-10-21: Execute existing and new module contracts on host and linked images.
+# Modified 2026-11-05: Isolate mutable contract fixtures from the source/evidence tree.
 """Compile the existing file module, run its independent contract, and check a linked image."""
 
 import argparse
@@ -107,8 +108,14 @@ def main():
     def tool(name):
         return toolchain / 'bin' / (name + suffix)
 
+    temporary_tests = None
     write_receipt()
     try:
+        temporary_base = Path(tempfile.gettempdir()).resolve()
+        receipt['runtime_temporary_base'] = str(temporary_base)
+        if (temporary_base == root or root in temporary_base.parents
+                or temporary_base == output or output in temporary_base.parents):
+            raise RuntimeError('runtime temporary directory must be outside source and output trees')
         write_commands()
         inputs = hashes(input_paths(), root)
         receipt['inputs'] = inputs
@@ -225,8 +232,18 @@ def main():
                 '-d', module_tests, *module_contract_sources])
         module_test_hashes = class_hashes(module_tests)
         receipt['module_contract_class_files'] = module_test_hashes
-        temporary_tests = output / 'runtime-temporary'
-        temporary_tests.mkdir(exist_ok=True)
+        # Delta fixtures intentionally edit/delete files while child javac runs.
+        # Use isolated system temporary storage, outside source/evidence trees
+        # that external workspace tools may observe or restore independently.
+        temporary_tests = Path(tempfile.mkdtemp(prefix='m3-file-contract-',
+                                               dir=temporary_base)).resolve()
+        receipt['runtime_temporary'] = {
+            'path': str(temporary_tests),
+            'policy': 'ISOLATED_SYSTEM_TEMP',
+            'outside_source_and_output_trees': True,
+            'state': 'ACTIVE',
+        }
+        write_receipt()
 
         def module_contracts(java, lane, module_path, *, host_has_javac=False):
             outputs = {}
@@ -274,12 +291,27 @@ def main():
             raise RuntimeError('compiled contract class bytes changed during qualification')
         if hashlib.sha256(module_jar.read_bytes()).hexdigest() != admitted_jar:
             raise RuntimeError('packaged module bytes changed during qualification')
+        shutil.rmtree(temporary_tests)
+        receipt['runtime_temporary']['state'] = 'REMOVED_AFTER_PASS'
         receipt.update(state='PASSED', linked_image_result=linked.strip(),
                        inputs_and_classes_unchanged=True,
                        finished_utc=datetime.now(timezone.utc).isoformat())
         write_receipt()
         print('M3_FILE_DELTA_MODULE_PASS')
     except BaseException as failure:
+        if temporary_tests is not None:
+            receipt['runtime_temporary']['state'] = 'RETAINED_AFTER_FAILURE'
+            retained = output / ('runtime-failure-' + receipt['run_id'])
+            try:
+                shutil.copytree(temporary_tests, retained, symlinks=True)
+                receipt['runtime_temporary']['failure_copy'] = str(retained)
+            except Exception as preservation_failure:
+                # Preserve the original gate failure and the live fixture path
+                # even when copying its diagnostic artifacts also fails.
+                receipt['runtime_temporary']['preservation_error'] = {
+                    'type': type(preservation_failure).__name__,
+                    'message': str(preservation_failure),
+                }
         receipt.update(state='FAILED', error={'type': type(failure).__name__, 'message': str(failure)},
                        finished_utc=datetime.now(timezone.utc).isoformat())
         write_receipt()

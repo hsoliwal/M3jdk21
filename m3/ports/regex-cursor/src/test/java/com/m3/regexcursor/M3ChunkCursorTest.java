@@ -123,6 +123,46 @@ class M3ChunkCursorTest {
     }
 
     @Test
+    void maximumLengthRopeCursorKeepsSharedUtf16Coordinates() {
+        M3RopeString power = M3RopeString.atom("\u0000\ud800");
+        for (int i = 0; i < 29; i++) power = power.concat(power);
+        M3RopeString text = power.concat(power.slice(0, power.length() - 1));
+        assertEquals(Integer.MAX_VALUE, text.length());
+        assertEquals(30, text.height());
+        M3CursorProbe.reset();
+        M3StringCursor cursor = new M3StringCursor(text);
+        for (int at : new int[] {0, 1, (1 << 30) - 1, 1 << 30,
+                Integer.MAX_VALUE - 2, Integer.MAX_VALUE - 1}) {
+            cursor.seek(at);
+            assertEquals((at & 1) == 0 ? 0 : 0xd800, cursor.unitAt(at));
+            assertTrue(cursor.offset() <= at);
+            assertTrue(at < cursor.offset() + cursor.chunkLength());
+        }
+        cursor.seek(Integer.MAX_VALUE);
+        assertEquals(Integer.MAX_VALUE - 1, cursor.offset());
+        assertEquals(1, cursor.chunkLength());
+        assertFalse(cursor.advance());
+        assertEquals(0, cursor.unit(0));
+        assertTrue(cursor.backtrack());
+        assertEquals(Integer.MAX_VALUE - 3, cursor.offset());
+        assertThrows(IndexOutOfBoundsException.class, () -> cursor.seek(-1));
+        assertThrows(IndexOutOfBoundsException.class, () -> cursor.seek(Integer.MIN_VALUE));
+
+        int start = Integer.MAX_VALUE - 3;
+        M3CursorLiteralSearch search = M3CursorLiteralSearch.of("\u0000\ud800\u0000");
+        assertEquals(start, search.find(cursor, start, Integer.MAX_VALUE));
+        assertEquals(start, search.findLast(cursor, start, Integer.MAX_VALUE));
+        M3StringCursor slice = new M3StringCursor(text.slice(start, Integer.MAX_VALUE));
+        assertEquals(0, search.find(slice, 0, 3));
+        assertEquals(0, search.findLast(slice, 0, 3));
+        CharSequence view = new M3CursorCharSequence(cursor).subSequence(start, Integer.MAX_VALUE);
+        assertEquals(3, view.length());
+        assertEquals('\ud800', view.charAt(1));
+        assertEquals('\u0000', view.charAt(2));
+        assertEquals(0, M3CursorProbe.materializedUnits());
+    }
+
+    @Test
     void ropeModelKeepsCoordinatesAndFacts() {
         M3RopeString latin = M3RopeString.atom("abc");
         M3RopeString wide = M3RopeString.atom("Āxy");

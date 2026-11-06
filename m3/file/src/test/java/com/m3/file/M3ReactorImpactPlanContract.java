@@ -5,8 +5,10 @@ package com.m3.file;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HexFormat;
 import java.util.List;
 
 /** Real-file Java21 deterministic reactor oracle; no extra libraries. */
@@ -115,6 +117,7 @@ public final class M3ReactorImpactPlanContract {
                     steady, impacted, projectForFile, 4, true,
                     reactorOffsets, reactorTargets));
             snapshotIdentityContract(root.resolve("snapshot-identity"));
+            graphPropagationContract(root.resolve("graph-propagation"));
             System.out.println("M3_REACTOR_IMPACT_PASS checks=" + checks);
         } finally {
             try (var stream = Files.walk(root)) {
@@ -219,5 +222,174 @@ public final class M3ReactorImpactPlanContract {
                 && removal.reasonAt(1) == M3ReactorImpactPlan.DEPENDENT_PROJECT,
                 "deletion preserves direct and dependent project reasons");
         check(!removal.requiresConservativeReactor(), "verified deletion remains incremental");
+    }
+
+    private static void graphPropagationContract(Path root) throws Exception {
+        Files.createDirectories(root);
+        List<Path> names = List.of(Path.of("A.java"), Path.of("B.java"),
+                Path.of("C.java"), Path.of("D.java"));
+        for (Path name : names) Files.writeString(root.resolve(name), "baseline");
+        var first = M3FileDeltaLedger.scan(root, null, names);
+        var steady = M3FileDeltaLedger.scan(root, first, names);
+        int[] fileSlots = names.stream().mapToInt(steady::physicalSlot).toArray();
+        int[] noFileEdges = new int[steady.slots() + 1];
+        byte[] unsafe = new byte[steady.slots()];
+        var snapshots = new M3FileDeltaLedger.Snapshot[16];
+        var plans = new M3BuildImpactPlan[16];
+        for (int seed = 0; seed < snapshots.length; seed++) {
+            for (int file = 0; file < names.size(); file++) {
+                Files.writeString(root.resolve(names.get(file)),
+                        (seed & (1 << file)) == 0 ? "baseline" : "changed");
+            }
+            snapshots[seed] = M3FileDeltaLedger.scan(root, steady, names);
+            plans[seed] = M3BuildImpactPlan.compute(snapshots[seed], true,
+                    noFileEdges, new int[0], unsafe);
+        }
+
+        MessageDigest observations = MessageDigest.getInstance("SHA-256");
+        int cases = 0;
+        for (int edgeMask = 0; edgeMask < 64; edgeMask++) {
+            boolean[][] graph = new boolean[4][4];
+            for (int from = 0, edge = 0; from < 4; from++) {
+                for (int to = from + 1; to < 4; to++, edge++) {
+                    graph[from][to] = (edgeMask & (1 << edge)) != 0;
+                }
+            }
+            // Independent all-pairs closure oracle; production uses neither a matrix nor this recurrence.
+            boolean[][] reaches = new boolean[4][];
+            for (int from = 0; from < 4; from++) reaches[from] = graph[from].clone();
+            for (int via = 0; via < 4; via++) {
+                for (int from = 0; from < 4; from++) {
+                    for (int to = 0; to < 4; to++) {
+                        reaches[from][to] |= reaches[from][via] && reaches[via][to];
+                    }
+                }
+            }
+            for (int a = 0; a < 4; a++) for (int b = 0; b < 4; b++) {
+                if (a == b) continue;
+                for (int c = 0; c < 4; c++) {
+                    if (c == a || c == b) continue;
+                    int[] project = {a, b, c, 6 - a - b - c};
+                    int[] owners = new int[steady.slots()];
+                    for (int file = 0; file < 4; file++) owners[fileSlots[file]] = project[file];
+                    // A second encoding reverses adjacency order and repeats each edge.
+                    for (int encoding = 0; encoding < 2; encoding++) {
+                        int[] offsets = new int[5];
+                        int[] targets = new int[Integer.bitCount(edgeMask) * (encoding + 1)];
+                        for (int physical = 0, at = 0; physical < 4; physical++) {
+                            offsets[physical] = at;
+                            for (int from = 0; from < 4; from++) {
+                                if (project[from] != physical) continue;
+                                for (int step = 0; step < 4; step++) {
+                                    int to = encoding == 0 ? step : 3 - step;
+                                    if (graph[from][to]) {
+                                        targets[at++] = project[to];
+                                        if (encoding == 1) targets[at++] = project[to];
+                                    }
+                                }
+                            }
+                            offsets[physical + 1] = at;
+                        }
+                        int[] ownerCopy = owners.clone(), offsetCopy = offsets.clone();
+                        int[] targetCopy = targets.clone();
+                        for (int seed = 0; seed < snapshots.length; seed++) {
+                            var plan = M3ReactorImpactPlan.compute(snapshots[seed], plans[seed],
+                                    owners, 4, true, offsets, targets);
+                            int[] expected = new int[4];
+                            for (int from = 0; from < 4; from++) {
+                                if ((seed & (1 << from)) == 0) continue;
+                                expected[project[from]] |= M3ReactorImpactPlan.FILE_IMPACT;
+                                for (int to = 0; to < 4; to++) {
+                                    if (reaches[from][to]) {
+                                        expected[project[to]] |= M3ReactorImpactPlan.DEPENDENT_PROJECT;
+                                    }
+                                }
+                            }
+                            int expectedSize = 0;
+                            for (int physical = 0; physical < 4; physical++) {
+                                check(plan.reasonAt(physical) == expected[physical],
+                                        "DAG reason masks match independent reachability");
+                                if (expected[physical] != 0) expectedSize++;
+                                observe(observations, plan.reasonAt(physical));
+                            }
+                            int[] selected = plan.impactedProjects();
+                            check(selected.length == expectedSize && plan.size() == expectedSize,
+                                    "DAG selection is exactly the reached project set");
+                            int[] position = {-1, -1, -1, -1};
+                            observe(observations, selected.length);
+                            for (int at = 0; at < selected.length; at++) {
+                                int physical = selected[at];
+                                check(physical >= 0 && physical < 4 && position[physical] == -1
+                                                && expected[physical] != 0,
+                                        "DAG selection has valid unique affected projects");
+                                position[physical] = at;
+                                observe(observations, physical);
+                            }
+                            for (int from = 0; from < 4; from++) {
+                                for (int to = 0; to < 4; to++) {
+                                    if (reaches[from][to] && expected[project[from]] != 0) {
+                                        check(position[project[from]] < position[project[to]],
+                                                "selected dependencies precede their consumers");
+                                    }
+                                }
+                            }
+                            check(!plan.requiresConservativeReactor(), "complete DAG stays verified");
+                            check(Arrays.equals(owners, ownerCopy) && Arrays.equals(offsets, offsetCopy)
+                                            && Arrays.equals(targets, targetCopy),
+                                    "reactor retains caller-owned primitive input lanes unchanged");
+                            cases++;
+                        }
+                    }
+                }
+            }
+        }
+        check(cases == 49_152, "bounded complete four-rank DAG/seed/label/edge-encoding corpus");
+        String signature = HexFormat.of().formatHex(observations.digest());
+        // Frozen on receiver 7c23ff3612ef08dc265bd3bab5461e4dcf3ee47c before topology reuse.
+        check(signature.equals("ce417921d7289b429e670d8cf81bcf0ba56481eee4536bb777acddcef586f4cd"),
+                "exact baseline reason masks and deterministic project order are preserved");
+        System.out.println("M3_REACTOR_DAG_PERMUTATIONS_PASS cases=" + cases
+                + " sha256=" + signature);
+
+        int[] owners = new int[steady.slots()];
+        for (int file = 0; file < 4; file++) owners[fileSlots[file]] = file;
+        int[] cycleOffsets = {0, 1, 2, 2, 2}, cycleTargets = {1, 0};
+        reject(IllegalArgumentException.class, () -> M3ReactorImpactPlan.compute(
+                snapshots[0], plans[0], owners, 4, true, cycleOffsets, cycleTargets));
+        var conservative = M3BuildImpactPlan.compute(snapshots[1], false, null, null, null);
+        reject(IllegalArgumentException.class, () -> M3ReactorImpactPlan.compute(
+                snapshots[1], conservative, owners, 4, true, cycleOffsets, cycleTargets));
+        reject(IllegalArgumentException.class, () -> M3ReactorImpactPlan.compute(
+                snapshots[0], plans[0], owners, 4, true,
+                new int[] {0, 1, 1, 1, 1}, new int[] {0}));
+        reject(IllegalArgumentException.class, () -> M3ReactorImpactPlan.compute(
+                snapshots[0], plans[0], owners, 4, true,
+                new int[] {0, 1, 1, 1, 1}, new int[] {4}));
+
+        int projects = 16_384;
+        int[] chainOffsets = new int[projects + 1], chainTargets = new int[projects - 1];
+        for (int physical = 1; physical < projects; physical++) {
+            chainOffsets[physical + 1] = physical;
+            chainTargets[physical - 1] = physical - 1;
+        }
+        Arrays.fill(owners, 0);
+        owners[fileSlots[0]] = projects - 1;
+        var chain = M3ReactorImpactPlan.compute(snapshots[1], plans[1], owners,
+                projects, true, chainOffsets, chainTargets);
+        int[] selected = chain.impactedProjects();
+        check(selected.length == projects, "deep chain propagates without recursive traversal");
+        for (int at = 0; at < projects; at++) {
+            check(selected[at] == projects - 1 - at, "topology is independent of physical slot order");
+            check(chain.reasonAt(selected[at]) == (at == 0 ? M3ReactorImpactPlan.FILE_IMPACT
+                            : M3ReactorImpactPlan.DEPENDENT_PROJECT),
+                    "deep chain retains exact direct/dependent reasons");
+        }
+    }
+
+    private static void observe(MessageDigest digest, int value) {
+        digest.update((byte) (value >>> 24));
+        digest.update((byte) (value >>> 16));
+        digest.update((byte) (value >>> 8));
+        digest.update((byte) value);
     }
 }

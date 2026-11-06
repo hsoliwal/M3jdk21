@@ -175,7 +175,10 @@ class M3TokenPatternTest {
         assertTrue(hit.find());
         assertEquals(1, hit.start());
         assertEquals(4, hit.end());
-        M3CursorMatcher gated = literal.matcher(M3TokenCursor.of(new int[] {1, 2, 3}));
+        M3CursorMatcher borrowed = literal.matcher(M3TokenCursor.of(new int[] {1, 2, 3}));
+        assertFalse(borrowed.find());
+        assertEquals(M3CursorMatcher.ENGINE_LITERAL, borrowed.engine());
+        M3CursorMatcher gated = literal.matcher(M3TokenCursor.ownedProjection(new int[] {1, 2, 3}));
         assertFalse(gated.find());
         assertEquals(M3CursorMatcher.ENGINE_GATE, gated.engine());
         M3TokenPattern tiny = M3TokenPattern.compile("(?:<1>|<2>)* <1> <1-2>{6}", Map.of(), 3);

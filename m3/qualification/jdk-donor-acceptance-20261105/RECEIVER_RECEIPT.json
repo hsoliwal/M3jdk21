@@ -1,0 +1,199 @@
+{
+  "schema": "M3_EXECUTED_DONOR_ACCEPTANCE_RECEIVER_V1",
+  "date": "2026-11-05",
+  "status": "COMPONENT_OUTPUTS_QUALIFIED_GLOBAL_GATES_OPEN",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_component_commit": "0fa0c9c9a44af87a15eee53cd7bf2e295bd8b8ff",
+  "canonical_recipe": "com.synexia.m3.JdkDonorAcceptance20261105",
+  "receipt_recipe": "com.synexia.m3.JdkDonorAcceptanceReceipt20261105",
+  "canonical_evidence": "https://github.com/hsoliwal/com.synexia/tree/0fa0c9c9a44af87a15eee53cd7bf2e295bd8b8ff/synexia-openrewrite-recipes/recipes/m3-jdk-donor-acceptance-20261105",
+  "receiving_repository": "hsoliwal/M3jdk21",
+  "receiving_parent": "8d4ce462ad0765609553c8656f9c9a6edb7261f9",
+  "previous_receipt": "m3/qualification/jdk-donor-continuation-20261105/RECEIVER_RECEIPT.json",
+  "product_files": [
+    {
+      "path": "m3/file/src/test/java/com/m3/file/M3FileDeltaLedgerContract.java",
+      "before_sha256": "edf8a7cd1de5318ffb7a9519a3f3a76c18446ee9cea7d66c24f2bfae07d3c59e",
+      "sha256": "649097a1275fff1e9f13732890202fd876599357beaf13c7062c1e1998f21171",
+      "git_blob": "d31d4d86f1f6eff002c465a1d4ed9ff7af6099c9",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/file/verify.py",
+      "before_sha256": "1a659953d00e359cce941311e12ce4fc2854413c7b32db024083ffb7f125c23a",
+      "sha256": "f8c54610db58fed193ec0860369ee48b0124a8dda651e0b53d3c1bba116872b3",
+      "git_blob": "7fce8e4757392ee2f351944b9558e10e4c86dcba",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/ports/regex-cursor/src/main/java/com/m3/regexcursor/M3CursorMatcher.java",
+      "before_sha256": "2b213048889946aa2b04c1a49d27e2a7a66dbaa08f5ea2e8502b054c06dab2cd",
+      "sha256": "fde9682dfb10ad6fa1e99bd65a60a8a23ba69868ad5e902d581e8337ba778deb",
+      "git_blob": "5091e90b717c4eb6a020db80424307b8474be6fe",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/ports/regex-cursor/src/main/java/com/m3/regexcursor/M3TokenCursor.java",
+      "before_sha256": "a909a96252c19b5965b96b7fe15d7b9c570d3183fc5e0e6539f6cfb3a56749a8",
+      "sha256": "97c266afff7e8a1ede6bf73e1a03e544bc3fc38774c352a101504c3bfd4de7ee",
+      "git_blob": "062b8f491112263c4d45a156dffd9ddfdadd1d98",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/ports/regex-cursor/src/test/java/com/m3/regexcursor/M3CursorBoundaryTest.java",
+      "before_sha256": "ABSENT",
+      "sha256": "f6fee1edc4142d48d1e75d5f77cc3c3b468debe538d60b915463806b20070f40",
+      "git_blob": "1facf64cd5217fc749ba08ddf5ab2642f1f22d11",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/ports/regex-cursor/src/test/java/com/m3/regexcursor/M3TokenPatternTest.java",
+      "before_sha256": "ca2849ed27b6e7e899183ba88d84789093916faf59df1be4f65f2cb719f2b8e4",
+      "sha256": "2c8aad7aec158f6b7fdc6d236e81771211542f7f6d9f8f8b4aa616eba1a65db1",
+      "git_blob": "c928a40264248b3f82b3cab65387269b6535eb9e",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/module-packs/text-tools/fixtures/src/test/java/M3TextKernelRegression.java",
+      "before_sha256": "64e0bf9f28674c20e5e17ecdc21ed041eb74bcdffdf0f237c2f7fec8f2627964",
+      "sha256": "40834243374555c0cc41c3a8e12dc1d501aa8013508dcaea99c3ae8566530bac",
+      "git_blob": "a4c2ab735541b8fc78dab1db177334572ca68df7",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/module-packs/text-tools/native/m3textops.c",
+      "before_sha256": "a89b55724384f0bf8f691a0e018eba5090224baecd25575481fbe581910c8f0a",
+      "sha256": "87216910b9a1730ca7121efb07c1cd6bf0c69e4c370a12a08285e97404be9759",
+      "git_blob": "e7e505fe21b56bb127382f82238af70ccfee3fde",
+      "mode": "100644"
+    }
+  ],
+  "verification": {
+    "canonical_sdk": {
+      "tests": 6,
+      "passed": 6,
+      "exact_outputs": true,
+      "fixed_point": true,
+      "missing_drift_duplicate_occupied_path_refusal": true,
+      "partially_applied_inputs": true,
+      "independent_worker_widths": [
+        1,
+        4
+      ]
+    },
+    "previous_recipe_owner": {
+      "tests": 8,
+      "passed": 8
+    },
+    "regex": {
+      "maven_verify": "PASS",
+      "tests": 54,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "covered_lines": 1472,
+      "total_lines": 1479,
+      "required_line_ratio": 0.99,
+      "line_gate": "PASS",
+      "boundary_borrowed_tests_64_mib": 7,
+      "public_protected_api": "UNCHANGED"
+    },
+    "native": {
+      "commands": 26,
+      "strict_c17": "PASS",
+      "ubsan": "PASS",
+      "checked_jni": "PASS",
+      "public_differential_runs_per_variant": 450,
+      "literal_cases_per_variant": 8164,
+      "line_cases_per_variant": 272,
+      "java_fallback_literal_cases": 8164,
+      "permission_denial_modes": 3,
+      "exports_unchanged": 8,
+      "jni_headers_unchanged": 2,
+      "production_class_files_unchanged": 32
+    },
+    "file": {
+      "offline_maven_verify": "PASS",
+      "junit_tests": 1,
+      "host_contracts": 18,
+      "linked_module_image_contracts": 17,
+      "ledger_checks_per_lane": 70,
+      "permutation_checks_per_lane": 409,
+      "production_java_files_unchanged": 17,
+      "unsafe_temp_base_refusals": 4,
+      "injected_failure_retained_files": 19
+    },
+    "component_remote_verification": {
+      "files": 759,
+      "status": "PASS_EXACT_GIT_BLOBS_AND_MODES",
+      "tree": "309b6b566388d6a579f5c32ed33287f955de4ddc",
+      "truncated": false
+    }
+  },
+  "bounded_native_work": {
+    "common_prefix_utf16_units": 1048576,
+    "unequal_lengths_region_calls_before_after": [
+      8192,
+      0
+    ],
+    "same_object_region_calls_before_after": [
+      8192,
+      0
+    ],
+    "distinct_equal_length_region_calls_before_after": [
+      8192,
+      8192
+    ],
+    "lexical_sort_region_calls_before_after": [
+      8194,
+      8194
+    ],
+    "tradeoff": "One identity query per adjacent equality pair; no general throughput claim."
+  },
+  "failure_custody": "Earlier baseline failures and diagnostic attempts remain immutable in the private evidence. Emitted sources pass the bounded receiving suites; original failures are not erased or relabeled.",
+  "donor_review": {
+    "total_rows": 58,
+    "new_rows": 13,
+    "prepared_catalogue_descriptors": 52,
+    "prepared_catalogue_categories": 18,
+    "challenge_sources": [
+      "LeetCode",
+      "HackerRank",
+      "GeeksforGeeks"
+    ],
+    "new_implementation_body_copies": 0,
+    "private_only": true
+  },
+  "remaining_gates": [
+    {
+      "gate": "canonical provenance loader",
+      "status": "HOLD_INHERITED",
+      "reason": "289 index members exceed the unchanged maximum of 256; metadata refresh does not change the member count or checker budget."
+    },
+    {
+      "gate": "public naming receiver",
+      "status": "HOLD_INHERITED",
+      "reason": "Existing receiver requires explicit owner/module review; no blanket mapping or rename is introduced."
+    },
+    {
+      "gate": "full-borrow receiver",
+      "status": "SOURCE_PIN_ONLY",
+      "families": 32,
+      "active_phase": "STRING",
+      "completion": false
+    },
+    {
+      "gate": "installed source-built M3JDK21, jtreg, VM/GC/CDS, complete private reactor and supported platforms",
+      "status": "NOT_QUALIFIED_BY_THIS_COMPONENT_PACKET"
+    },
+    {
+      "gate": "hosted CI on publication heads",
+      "status": "TO_BE_RECORDED_IN_PR_AFTER_PUBLICATION"
+    }
+  ],
+  "file_linked_image_scope": "Stock Temurin module image, not an installed source-built M3JDK.",
+  "runtime_completion": false,
+  "family_completion": false,
+  "repository_completion": false,
+  "public_payload_policy": "Product/test/build outputs and this passive receipt only; private recipes, source closures, donor ledgers and proof runners are not exported."
+}

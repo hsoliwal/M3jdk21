@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 // SPDX-License-Identifier: Apache-2.0
 // Modified 2026-10-21 by the Synexia m3-project-delta recipe: timestamp and image-migration contracts.
+// Modified 2026-11-05: A restored tombstone is CREATED even when bytes and timestamp are identical.
 package com.m3.file;
 
 import java.io.ByteArrayOutputStream;
@@ -185,6 +186,24 @@ public final class M3FileDeltaLedgerContract {
                     List.of(Path.of("src/A.java"), Path.of("pom.xml")));
             ok(missingAgain.changedSlots(M3FileDeltaLedger.Kind.CLASS).length == 0,
                     "unmodified tombstone not repeatedly emitted");
+            // A deleted file may be restored by an external workspace owner. Its
+            // old hash and timestamp cannot make that recreation a no-op: output
+            // cleanup has already consumed the tombstone generation.
+            Files.write(binary, new byte[] {1, 2, 3, 5});
+            Files.setLastModifiedTime(binary, savedTombstone.lastModifiedAt(binarySlot));
+            for (boolean timestampPolicy : new boolean[] {false, true}) {
+                var restoredBytes = M3FileDeltaLedger.scan(root, savedTombstone, tracked, timestampPolicy);
+                ok(restoredBytes.stateAt(binarySlot) == (M3FileDeltaLedger.LIVE | M3FileDeltaLedger.CREATED),
+                        "identical bytes and timestamp still recreate a tombstone");
+                ok(slot(restoredBytes, "out/A.class") == binarySlot
+                        && java.util.Arrays.equals(restoredBytes.digestAt(binarySlot), savedTombstone.digestAt(binarySlot))
+                        && restoredBytes.lastModifiedAt(binarySlot).equals(savedTombstone.lastModifiedAt(binarySlot)),
+                        "recreation preserves physical identity and original content facts");
+                M3FileDeltaLedger.save(snapshot, restoredBytes);
+                var restoredBaseline = M3FileDeltaLedger.load(snapshot, root);
+                ok(!M3FileDeltaLedger.scan(root, restoredBaseline, tracked, timestampPolicy).changedAt(binarySlot),
+                        "successful recreation reaches no-op only after its own generation is committed");
+            }
             Files.write(binary, new byte[] {4, 3, 2, 1});
             Files.setLastModifiedTime(binary,
                     FileTime.from(missing.lastModifiedAt(binarySlot).toInstant().plusSeconds(3)));

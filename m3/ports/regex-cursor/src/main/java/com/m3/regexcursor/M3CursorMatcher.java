@@ -48,8 +48,19 @@ public final class M3CursorMatcher {
 
     /** Next match, with the stock empty-match advance rule. */
     public boolean find() {
-        int next = last == first ? last + 1 : last;
-        if (next > total) return miss(ENGINE_NONE);
+        int next = last;
+        if (last == first) {
+            if (last == total) {
+                // Keep the terminal empty-match position across repeated misses.
+                // Incrementing it would overflow at MAX_VALUE, while clearing
+                // first would let a later find() match that endpoint again.
+                operations[ENGINE_NONE]++;
+                matched = false;
+                engine = ENGINE_NONE;
+                return false;
+            }
+            next++;
+        }
         return search(next);
     }
 
