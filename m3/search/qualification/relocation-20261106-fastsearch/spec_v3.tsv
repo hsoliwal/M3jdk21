@@ -1,0 +1,15 @@
+main	com/synexia/fastsearch/knowledge/index/TopKSelector.java
+main	com/synexia/fastsearch/knowledge/index/JavaTopKSelector.java
+main	com/synexia/fastsearch/knowledge/index/TopKInputs.java
+main	com/synexia/fastsearch/knowledge/index/ReciprocalRankFusion.java
+main	com/synexia/fastsearch/knowledge/index/HybridSearchOptions.java
+main	com/synexia/fastsearch/knowledge/index/PreparationCache.java
+main	com/synexia/fastsearch/knowledge/index/QueryPreparationStats.java
+main	com/synexia/fastsearch/problem/PairSumSearch.java
+main	com/synexia/fastsearch/problem/PairSumJni.java
+test	com/synexia/fastsearch/knowledge/index/HybridSearchKernelChecks.java
+test	com/synexia/fastsearch/knowledge/index/HybridSearchKernelTest.java
+test	com/synexia/fastsearch/problem/PairSumJniTest.java
+test	com/synexia/fastsearch/problem/PairSumSearchTest.java
+test	recipe-crates/problem-pair-sum-jni-20261103/com/synexia/fastsearch/problem/PairSumParityDriver.java
+native	pair_sum_search.c
