@@ -522,7 +522,9 @@ synexia-m3scale-apache2:camel-runtime/src/main/java/com/synexia/m3scale/camel/st
 synexia-m3scale-apache2:camel-runtime/src/main/java/com/synexia/m3scale/camel/structured/EdiMIndexFormatProvider.java	EdiMIndexFormatProvider	-	GAP
 synexia-m3scale-apache2:camel-runtime/src/main/java/com/synexia/m3scale/camel/tool/EdiMessageIndexTool.java	EdiMessageIndexTool	-	GAP
 synexia-m3scale-apache2:integrations/inventory/lucene/src/main/java/com/synexia/m3scale/catalog/index/lucene/InventoryIndexMain.java	InventoryIndexMain	-	GAP
-synexia-m3scale-apache2:m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/StringTrie.java	StringTrie	-	GAP
+synexia-m3scale-apache2:m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/StringTrie.java	StringTrie	m3/algorithms/src/main/java/jdk/m3/algorithm/M3StringTrie.java	PRESENT_IN_M3JDK
+synexia-m3scale-apache2:m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/GraphAlgorithms.java	GraphAlgorithms	m3/algorithms/src/main/java/jdk/m3/algorithm/M3GraphAlgorithms.java	PRESENT_IN_M3JDK
+synexia-m3scale-apache2:m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/IntUnionFind.java	IntUnionFind	m3/collections/src/main/java/jdk/m3/collections/M3IntDisjointSet.java	PRESENT_IN_M3JDK
 synexia-m3scale-apache2:m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/AlgorithmShapeCatalog.java	AlgorithmShapeCatalog	m3/algorithms/src/main/java/jdk/m3/algorithm/M3AlgorithmShapeCatalog.java	PRESENT_IN_M3JDK
 synexia-m3scale-apache2:m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/AlgorithmSupport.java	AlgorithmSupport	m3/algorithms/src/main/java/jdk/m3/algorithm/M3AlgorithmSupport.java	PRESENT_IN_M3JDK
 synexia-m3scale-apache2:m3-algorithms/src/main/java/com/synexia/m3scale/algorithm/ArrayAlgorithms.java	ArrayAlgorithms	m3/algorithms/src/main/java/jdk/m3/algorithm/M3ArrayAlgorithms.java	PRESENT_IN_M3JDK

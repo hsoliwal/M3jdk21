@@ -12,7 +12,8 @@
   <description>jdk.m3.algorithm (module org.m3jdk.algorithms): the canonical algorithm families M3ArrayAlgorithms,
     M3IntervalGreedyAlgorithms, M3DynamicProgrammingAlgorithms, M3StringAlgorithms, M3StackAlgorithms,
     M3HeapAlgorithms, M3ListAlgorithms, M3TreeAlgorithms, M3MatrixAlgorithms, M3BacktrackingAlgorithms and
-    M3BitAlgorithms, the M3AlgorithmShapeCatalog that names them, and the M3ProgressMonitor cancellation contract
+    M3BitAlgorithms, the graph and trie families M3GraphAlgorithms and M3StringTrie (recipe/graph-trie-20261106),
+    the M3AlgorithmShapeCatalog that names them, and the M3ProgressMonitor cancellation contract
     every loop observes (an adapter over the owner jdk.m3.collections.M3ProgressMonitor since
     m3/qualification/progress-monitor-unify-20261106). Pure Java 21; com.m3:m3-collections is the only dependency
     outside java.base. Relocated by recipe
