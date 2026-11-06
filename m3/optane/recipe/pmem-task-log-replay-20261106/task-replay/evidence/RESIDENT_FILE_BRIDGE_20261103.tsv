@@ -1,0 +1,10 @@
+record	date	run	image_sha256	reviewed_sequence_sha256	java	arch	cpu	max_heap_bytes	cgroup_max_bytes	files	source_bytes	fake_model_calls	fake_persist_fences	replayed	create_ms	load_ms	pass_ms	replay_ms	rss_after_load_kib	rss_after_replay_kib	status
+M3_PMEM_CHROME_RESIDENT_FILE_V1	2026-11-03	1	8bc238a6fdb107b0507571546a26f1586a19104648062d84117e03d6ee99612a	6e78b3eb73f51caee1be44a5c7d99a47970fb1620528f0f72e886de793b5d25f	17.0.20	x86_64	AMD EPYC 9V74	5368709120	8589934592	20000	1024000000	20000	40000	20000	4225	4485	5996	104	3834336	3872736	PASS
+M3_PMEM_CHROME_RESIDENT_FILE_V1	2026-11-03	2	8bc238a6fdb107b0507571546a26f1586a19104648062d84117e03d6ee99612a	6e78b3eb73f51caee1be44a5c7d99a47970fb1620528f0f72e886de793b5d25f	17.0.20	x86_64	AMD EPYC 9V74	5368709120	8589934592	20000	1024000000	20000	40000	20000	4207	4380	6258	102	3844360	3870692	PASS
+M3_PMEM_CHROME_RESIDENT_FILE_V1	2026-11-03	3-frozen-roots	8bc238a6fdb107b0507571546a26f1586a19104648062d84117e03d6ee99612a	6e78b3eb73f51caee1be44a5c7d99a47970fb1620528f0f72e886de793b5d25f	17.0.20	x86_64	AMD EPYC 9V74	5368709120	8589934592	20000	1024000000	20000	40000	20000	4113	4465	6036	131	3806824	3840204	PASS
+
+# Command: M3_JAVA_RELEASE=17 bash synexia-openrewrite-recipes/recipe-crates/m3-pmem-task-replay-20261102/scripts/test-resident-file-bridge.sh
+# Each run strictly compiles actual PMEM/ChromeML Java 17 source and reuses the original 20k 1-byte atom baseline before the resident workload.
+# Qualifier SHA-256: e4a0303cdc51ae026bc22d121c55e9995c3018fd46f5cc6dff3b3bafc2afa4c4
+# Script SHA-256: e0e2ff99d9c4c364ff3c8de4ca5a870d6c8d3f1f5526a2ef3faea0a8c7a924b1
+# Synthetic valid Java source, complete file-level fake inference, byte-array fake PMEM; no real model, native persistence, Java21 SDK or product delivery.
