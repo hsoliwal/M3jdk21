@@ -277,7 +277,8 @@ public final class M3WrapperConvergenceContract {
         Comparator<Integer> order = (left, right) -> {
             if (armed[0]) {
                 tape.add(left + ":" + right);
-                if (left == 5 && right == 2) throw marker;
+                //FLLDCIM: MRL - stale-contracts-20261106 W1: 79a8df95080 (M3FilteredViews) and ef0beec8bfb (M3MutableFilteredViews) acquire bounded floor through the owner's near-entry primitive, which never calls compare(5, 2); fail on the first armed call
+                if (tape.size() == 1) throw marker;
             }
             return Integer.compare(left, right);
         };
@@ -291,11 +292,11 @@ public final class M3WrapperConvergenceContract {
         armed[0] = true;
         same(marker, failure(IllegalArgumentException.class, () -> readOnlyMap.floorEntry(5),
                 "read-only map comparator failure"), "read-only map same failure");
-        equal(List.of("5:2"), tape, "map comparator callback tape stops at original failure");
+        equal(1, tape.size(), "map comparator callback tape stops at original failure");
         tape.clear();
         same(marker, failure(IllegalArgumentException.class, () -> mutableSet.floor(5),
                 "mutable set comparator failure"), "mutable set same failure");
-        equal(List.of("5:2"), tape, "set comparator callback tape stops at original failure");
+        equal(1, tape.size(), "set comparator callback tape stops at original failure");
     }
 
     /** Pending baseline counterexample until an exception-safe bounded atom is admitted. */
